@@ -1,16 +1,16 @@
-# Running Minio server on Docker. -- DRAFT
-## This document assumes.
+# How to run Minio in Docker -- DRAFT
+## This document assumes-
 * You have Docker installed and running, if not follow [install instructions](https://docs.docker.com/engine/installation/ubuntulinux/)
 * You have minio client aka mc installed, if not follow [install instructions](https://github.com/minio/mc/blob/master/README.md)
 
 ## Steps
-### Adding a local alias for docker
+### Add a local alias for docker (optional)
 I am adding an [``alias``](http://tldp.org/LDP/abs/html/aliases.html) to my local ``bashrc`` file to avoid typing ``sudo`` along with running docker command.
 
 ```
 alias docker="sudo /usr/bin/docker"
 ```
-### Fetching Minio image from repository & running Minio on docker.
+### Fetching Minio image from repository & running Minio in docker.
 
 ```
 $ docker run -p 9000:9000 minio/minio:latest
@@ -21,12 +21,12 @@ Starting minio server:
 Listening on http://127.0.0.1:9000
 Listening on http://172.17.0.3:9000
 ```
-### Adding Minio configuration to mc
+### Add Minio configuration to mc
 ```
 $ mc config host add localhost http://localhost:9000 IQP18YBF51DG8HSZEE7B AlDzw6dj9zfne8JhPwGapt0Idlfg/QLhMq58Z0ax
 
 ```
-### Playing with Minio server
+### Play with Minio server
 ```
 $ mc mb localhost/newbucket
 Bucket created successfully ‘localhost/newbucket’.
@@ -64,8 +64,8 @@ Listening on http://127.0.0.1:9000
 Listening on http://172.17.0.4:9000
 
 ```
-#### Testing the Persist feature
-Remember we created few buckets in our previous Minio server. Let us see if they still exists.
+#### Test the Persist feature
+We created a few buckets in our previous Minio server. Let us see if they still exists.
 
 ```
 $ mc ls localhost
@@ -75,4 +75,4 @@ $ mc ls localhost
 They are very much intact, it clearly means we were able to store the Minio docker image.
 
 ### suggestions
-We would love to hear back from you, feel free to reach out to us [![Gitter](http://minio.io/img/gitter.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![Twitter](http://minio.io/img/twitter.svg)](https://twitter.com/intent/user?screen_name=minio)
+We would love to hear back from you, feel free to reach out to us at [![Gitter](http://minio.io/img/gitter.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![Twitter](http://minio.io/img/twitter.svg)](https://twitter.com/intent/user?screen_name=minio)
