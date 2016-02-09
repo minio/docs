@@ -1,4 +1,4 @@
-# Backing up your MongoDB database on Minio. -- DRAFT
+# How to back up MongoDB database on Minio. 
 
 ## This document assumes.
 * You have minio client library installed, if not follow mc [install instructions](https://github.com/minio/mc/blob/master/README.md)
