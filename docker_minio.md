@@ -1,4 +1,4 @@
-# How to run Minio in Docker -- DRAFT
+# How to run Minio in Docker 
 ## This document assumes-
 * You have Docker installed and running, if not follow [install instructions](https://docs.docker.com/engine/installation/ubuntulinux/)
 * You have minio client aka mc installed, if not follow [install instructions](https://github.com/minio/mc/blob/master/README.md)
