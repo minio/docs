@@ -1,6 +1,5 @@
-#How to back up your mysql database on Minio. 
-
-## This document assumes.
+# How to back up your mysql database on Minio
+## Prerequisites
 * You have minio client library installed, if not follow mc [install instructions](https://github.com/minio/mc/blob/master/README.md)
 * You have a Minio server configured and running, if not follow Minio [install instructions](https://github.com/minio/minio/blob/master/README.md)
 * You have a directory which stores all the database backup, this will get backed up on Minio server.
@@ -43,6 +42,3 @@ $ crontab -e
 00 15 * * * /home/miniouser/scripts/Miniomysqlbkp.sh
 
 ```
-
-### suggestions
-We would love to hear back from you, feel free to reach out to us [![Gitter](http://minio.io/img/gitter.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![Twitter](http://minio.io/img/twitter.svg)](https://twitter.com/intent/user?screen_name=minio)
