@@ -9,3 +9,7 @@ This project is a collection of all Minio related posts and community docs in ma
 - [Backing up your mysql database on Minio](./mysql_minio.md)
 - [Backing up your pgsql database on Minio](./pgsql_minio.md)
 - [How to run Minio as restic storage](./restic_minio.md)
+- [Aggregating Apache logs with fluentd and Minio server](./aggregating-Apache-logs-with-fluentd-and-Minio-server.md)
+- [Generate Let’s Encrypt certificate using Concert for Minio](./generate-Lets-Encypt-certificate-using-Concert-for-Minio.md)
+- [Setup Caddy proxy server with Minio](./setup-Caddy-proxy-with-Minio-Server.md)
+- [Setup Nginx proxy server with Minio](./setup-Nginx-proxy-with-Minio-Server.md)

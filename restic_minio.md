@@ -1,6 +1,6 @@
-# Running restic on Minio. -- DRAFT
+# Running restic on Minio
 
-## This document assumes-
+## Prerequisites
 * You have restic installed and running, if not follow [install instructions](https://restic.github.io/manual/)
 * You have Minio server installed and running, if not follow [install instructions](https://github.com/minio/minio/blob/master/README.md)
 
@@ -31,6 +31,3 @@ snapshot 85a9731a saved
 ```
 
 You can read more on restic [here](https://restic.github.io) and documents about Minio server is available [here](https://github.com/minio/minio).
-
-### suggestions
-We would love to hear back from you, feel free to reach out to us [![Gitter](http://minio.io/img/gitter.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![Twitter](http://minio.io/img/twitter.svg)](https://twitter.com/intent/user?screen_name=minio)

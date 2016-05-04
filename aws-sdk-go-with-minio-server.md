@@ -1,9 +1,9 @@
-# How to use AWS SDK for the Go programming language with Minio Server? [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to use AWS SDK for the Go programming language with Minio Server?
 
 aws-sdk-go is the official AWS SDK for the Go programming language. This document covers
 how to use aws-sdk-go with Minio server.
 
-## This document assumes following.
+## Prerequisites
 
 * Minio server is installed and running, if not [follow this](https://github.com/minio/minio/blob/master/README.md).
 * In this example ``minio`` is running locally on port 9000.

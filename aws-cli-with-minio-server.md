@@ -1,7 +1,6 @@
-# How to use AWS S3 CLI with Minio Server? [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to use AWS S3 CLI with Minio Server?
 
-## This document assumes following.
-
+## Prerequisites
 * Minio server is installed and running, if not [follow this](https://github.com/minio/minio/blob/master/README.md).
 * AWS S3 client installed, if not [follow this](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 * In this example ``minio`` is running locally on port 9000.
