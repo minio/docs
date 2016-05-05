@@ -34,12 +34,20 @@ total 12
 
 The generated keys via Concert needs to be placed inside users home directory ``${HOME}/.minio/certs``
 ```
-$ cp my-certs/private.key /home/supernova/.minio/certs/
-$ cp my-certs/public.crt /home/supernova/.minio/certs/
+$ sudo cp my-certs/private.key /home/supernova/.minio/certs/
+$ sudo cp my-certs/public.crt /home/supernova/.minio/certs/
 ```
+Change the ownership of certificates.
+```
+$ sudo chown supernova:supernova /home/supernova/.minio/certs/private.key
+$ sudo chown supernova:supernova /home/supernova/.minio/certs/public.crt
+```
+
 After this all we need to do is to start Minio server, now you have HTTPS.
 ```
 $ minio server export/
 ```
 An example server with HTTPS is running at
 ``https://churchofminio.com:9000``
+
+![Screenshot](./assets/letsencrypt-concert-minio.png)
