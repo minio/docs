@@ -50,4 +50,4 @@ $ minio server export/
 An example server with HTTPS is running at
 ``https://churchofminio.com:9000``
 
-![Screenshot](./assets/Letsencrypt-concert-minio.png)
+![Screenshot](./assets/letsencrypt-concert-minio.png)
