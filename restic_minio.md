@@ -1,7 +1,7 @@
 # Running restic on Minio
 
 ## Prerequisites
-* You have restic installed and running, if not follow [install instructions](https://restic.github.io/manual/)
+* You have restic installed and running, if not follow [install instructions](https://restic.readthedocs.io/en/latest/)
 * You have Minio server installed and running, if not follow [install instructions](https://github.com/minio/minio/blob/master/README.md)
 
 ## Steps
