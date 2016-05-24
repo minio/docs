@@ -2,6 +2,7 @@
 
 This project is a collection of all Minio related posts and community docs in markdown.
 
+- [How to run Deis Workflow with the Minio Server](./use_minio_with_deis.md)
 - [How to use AWS S3 CLI with Minio Server?](./aws-cli-with-minio-server.md)
 - [How to use AWS SDK for the Go programming language with Minio Server?](./aws-sdk-go-with-minio-server.md)
 - [Running Minio in Docker](./docker_minio.md)
