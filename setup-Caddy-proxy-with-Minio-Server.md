@@ -6,14 +6,14 @@ In this recipe you will learn how to set up Caddy proxy with Minio Server.
 
 ## Install `caddy`.
 Please download [Caddy Server](https://caddyserver.com/download) and create a caddy configuration file as below, change the ip addresses according to your local minio and DNS configuration.
+
 ```
-your.public.com {
-    proxy / localhost:9000 {
-        proxy_header Host {host}
-        proxy_header X-Real-IP {remote}
-        proxy_header X-Forwarded-Proto {scheme}
-    }
+your.public.com 
+
+proxy / localhost:9000 {
+    transparent
 }
+
 ```
 ## Start `minio` server.
 ```
