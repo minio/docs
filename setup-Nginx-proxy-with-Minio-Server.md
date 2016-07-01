@@ -1,13 +1,17 @@
-# Setup Nginx proxy server with Minio
+# Setup Nginx proxy with Minio Server
 
 Nginx is an open source Web server and a reverse proxy server.  
 
-In this recipe you will learn how to set up Nginx proxy with Minio Server.
+In this recipe we will learn how to set up Nginx proxy with Minio Server. 
 
-## Install ``Nginx``
-You can follow the [official Niginx page](http://nginx.org/en/download.html) for downloading and installing Nginx server.
+## 1. Prerequisites
+Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
-All you have to do is to add  below content as a file ``/etc/nginx/sites-enabled``  and also remove the existing ``default`` file in same directory.
+## 2. Installation
+Install Nginx from [here](http://nginx.org/en/download.html).  
+
+## 3. Configuration
+Add  below content as a file ``/etc/nginx/sites-enabled``  and also remove the existing ``default`` file in same directory.
 ```
 server {
  listen 80;
@@ -20,17 +24,18 @@ server {
  }
 }
 ```
-Note:
-* example.com is example hostname, replace it with yours.
-* My Minio server is running ``http://localhost:9000`` so you can change this according to yours.
+Note: 
+* Replace example.com with your own hostname.
+* Replace ``http://localhost:9000``  with your own server name.
 
-## Start Minio server
+## 4. Recipe Steps
+Step 1:  Start Minio server. 
 
 ```
 $ minio server /mydatadir
 ```
 
-## Restart Nginx server
+Step 2:  Restart Nginx server.
 ```
 $ sudo service nginx restart
 ```

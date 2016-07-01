@@ -1,45 +1,38 @@
-# Backing up your pgsql database on Minio
-## Prerequisites
-* You have minio client library installed, if not follow mc [install instructions](https://github.com/minio/mc/blob/master/README.md)
-* You have a Minio server configured and running, if not follow Minio [install instructions](https://github.com/minio/minio/blob/master/README.md)
-* You have a directory which stores all the database backup, this will get backed up on Minio server.
-* My current working directory is ``/home/miniouser`` & scripts are part of the ``bash PATH``
-* My scripts are executable
-* ``which mc`` on terminal will give you path for ``mc``
+# Store PostgreSQL Backups in Minio Server
 
-## Steps
-### Create a bucket:
+In this recipe you will learn how to store PostgreSQL backups in Minio Server.
+
+## 1. Prerequisites
+* Install mc from [here](https://docs.minio.io/docs/minio-client-quick-start-guide).
+* Install Minio Server from [here](https://docs.minio.io/docs/minio ).
+* Know where the PostgreSQL backups reside in the local filesystem.
+ 
+## 2. Recipe Steps
+In this recipe, we will use https://play.minio.io:9000 which is aliased to play. Feel free to use play server for testing and development. Access credentials shown in this example are open to public. 
+Replace with your own access credentials when running this example in your environment.
+
+Step 1 : Create a bucket:
 ```
-$ mc mb local/pgsqlbkp
-Bucket created successfully ‘local/pgsqlbkp’.
+$ mc mb play/pgsqlbkp
+Bucket created successfully ‘play/pgsqlbkp’.
 ```
-### Mirror local backup to Minio server:
+Step 2 :  Mirror local backup to Minio server:
 
 ```
-$ mc mirror pgsqlbkp/ local/pgsqlbkp
+$ mc mirror pgsqlbkp/ play/pgsqlbkp
 
 ```
-### Automating it all:
+## 3. Automate
+The above recipe can be automated easily. Change the bash script below to your own directories and PATHS as needed. Set up a cron to run this task as needed.
 
-**mirror script**
-```
+```bash
 #!/bin/bash
 #FileName: Miniopgsqlbkp.sh & has executable permissions.
 
 LocalBackupPath="/home/miniouser/pgsqlbkp"
-MinioBucket="local/pgsqlbkp"
+MinioBucket="play/pgsqlbkp"
 MCPATH="/home/miniouser/go/bin/mc"
 
-$MCPATH --quiet mirror $LocalBackupPath $MinioBucket
-
-```
-**Setting it on crontab**
-
-Open ``crontab`` & add the script in the end of the file. This script will take your pgsql directory backup everyday at 15:00.
-
-```
-$ crontab -e
-
-00 15 * * * /home/miniouser/scripts/Miniopgsqlbkp.sh
+$MCPATH - -quiet mirror $LocalBackupPath $MinioBucket
 
 ```

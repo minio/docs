@@ -1,24 +1,28 @@
-# Running restic on Minio
+# restic with Minio Server
 
-## Prerequisites
-* You have restic installed and running, if not follow [install instructions](https://restic.readthedocs.io/en/latest/)
-* You have Minio server installed and running, if not follow [install instructions](https://github.com/minio/minio/blob/master/README.md)
+`restic` is a fast, efficient and secure backup tool. It is an open source project available under ``BSD 2-Clause License``.
 
-## Steps
+In this recipe we will learn how to use `restic` to backup data into Minio Server.
 
-### Authenticating restic to use Minio server
+## 1. Prerequisites
+Install Minio Server from [here](http://docs.minio.io/docs/minio).
+
+## 2. Installation
+Install restic from [https://restic.github.io](https://restic.github.io).
+
+## 3. Configuration
+Set Minio credentials in the environment variables as shown below.
 ```
-$ export AWS_ACCESS_KEY_ID=IQP18YBF51DG8HSZEE7B
-$ export AWS_SECRET_ACCESS_KEY=AlDzw6dj9zfne8JhPwGapt0Idlfg/QLhMq58Z0ax
+$ export AWS_ACCESS_KEY_ID=<YOUR-ACCESS-KEY-ID>
+$ export AWS_SECRET_ACCESS_KEY= <YOUR-SECRET-ACCESS-KEY>
 ```
->TIP: Replace these keys with your Minio credentials .
 
-### restic operations on Minio
+## 4. Commands
+Start `restic` and point it to the bucket where the backup data will reside.
 ```
 $ ./restic -r s3:http://localhost:9000/resticbucket init
 ```
->TIP: Replace the endpoint with your Minio configuration.
-
+Copy backups from the local machine to the bucket on minio server.  
 ```
 $  ./restic -r s3:http://localhost:9000/resticbucket backup /home/minio/workdir/Docs/
 enter password for repository:
@@ -27,7 +31,4 @@ scanned 2 directories, 6 files in 0:00
 [0:00] 100.00%  0B/s  8.045 KiB / 8.045 KiB  6 / 8 items  0 errors  ETA 0:00
 duration: 0:00, 0.06MiB/s
 snapshot 85a9731a saved
-
 ```
-
-You can read more on restic [here](https://restic.github.io) and documents about Minio server is available [here](https://github.com/minio/minio).

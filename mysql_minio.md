@@ -1,44 +1,39 @@
-# How to back up your mysql database on Minio
-## Prerequisites
-* You have minio client library installed, if not follow mc [install instructions](https://github.com/minio/mc/blob/master/README.md)
-* You have a Minio server configured and running, if not follow Minio [install instructions](https://github.com/minio/minio/blob/master/README.md)
-* You have a directory which stores all the database backup, this will get backed up on Minio server.
-* My scripts are executable
-* ``which mc`` on terminal will give you path for ``mc``
+# Store MySQL Backups in Minio Server
 
-## Steps
-### Create a bucket:
+In this recipe we will learn how to store MySQL backups in Minio Server.
+
+ 
+## 1. Prerequisites
+* Install mc from [here](https://docs.minio.io/docs/minio-client-quick-start-guide).
+* Install Minio Server from [here](https://docs.minio.io/docs/minio ).
+* Know where the MySQL backups reside in the local filesystem.
+
+## 2. Recipe Steps
+Access credentials shown in this example belong to https://play.minio.io:9000.
+These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
+
+Step 1 : Create a bucket.
 ```
-$ mc mb local/mysqlbkp
-Bucket created successfully ‘local/mysqlbkp’.
+$ mc mb play/mysqlbkp
+Bucket created successfully ‘play/mysqlbkp’.
 ```
-### Mirror local backup to Minio server:
+
+Step 2 : Mirror mysqlbkup directory where the backup files reside to Minio server. 
 
 ```
-$ mc mirror mysqlbkp/ local/mysqlbkp
-
+$ mc mirror mysqlbkp/ play/mysqlbkp
 ```
-### Automating it all:
 
-**mirror script**
-```
+## 3. Automate
+The above recipe can be automated easily. Change the bash script below to your own directories and PATHS as needed. Set up a cron to run this task as needed.
+
+```sh
 #!/bin/bash
-#FileName: Miniomysqlbkp.sh & has executable permissions.
+# Filename: minio-mysql-bkp.sh & has executable permissions.
 
-LocalBackupPath="/home/miniouser/mysqlbkp"
-MinioBucket="local/mysqlbkp"
-MCPATH="/home/miniouser/go/bin/mc"
+LOCAL_BACKUP_PATH="/home/miniouser/mysqlbkp"
+MINIO_BUCKET="play/mysqlbkp"
+MC_PATH="/home/miniouser/go/bin/mc"
 
-$MCPATH --quiet mirror $LocalBackupPath $MinioBucket
-
-```
-**Setting it on crontab**
-
-Open ``crontab`` & add the script in the end of the file. This script will take your mysql directory backup everyday at 15:00.
-
-```
-$ crontab -e
-
-00 15 * * * /home/miniouser/scripts/Miniomysqlbkp.sh
-
+$MC_PATH - -quiet mirror $LOCAL_BACKUP_PATH $MINIO_BUCKET
 ```
