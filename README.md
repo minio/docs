@@ -6,7 +6,8 @@ This is home for recipes of related projects and tools to use with Minio.
 
 1. Fork this repo and create a new topic branch.
 2. Make your addition. See one of the recipe files for a sample.
-3. Send a pull request -- please include a short description of your new or updated recipe.
+3. Send a PR - Please include a short descritpion of your new or updated recipe.
+
 
  Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-minio) to get your project or use-case listed under Minio.
 
