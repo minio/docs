@@ -1,6 +1,17 @@
-# HowTo
+#Minio Cookbook
 
-This project is a collection of all Minio related posts and community docs in markdown.
+This is home for recipes of related projects and tools to use with Minio. 
+
+### How to Contribute a Recipe
+
+1. Fork this repo and create a new topic branch.
+2. Make your addition. See one of the recipe files for a sample.
+3. Send a pull request -- please include a short description of your new or updated recipe.
+4. Look for typos, formatting errors, missing links, and other little things. No potential improvement is 'too small' -- fork for anything.
+
+ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-minio) to get your project or use-case listed under Minio.
+
+### List of Recipes
 
 - [How to run Deis Workflow with the Minio Server](./use_minio_with_deis.md)
 - [How to use AWS S3 CLI with Minio Server?](./aws-cli-with-minio-server.md)
