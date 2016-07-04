@@ -1,20 +1,22 @@
-# How to use AWS SDK for the Go programming language with Minio Server?
+# AWS Go SDK for Minio Server
 
-aws-sdk-go is the official AWS SDK for the Go programming language. This document covers
-how to use aws-sdk-go with Minio server.
+`aws-sdk-go` is the official AWS SDK for the Go programming language. In this recipe we will learn how to use `aws-sdk-go` with Minio server.
 
-## Prerequisites
 
-* Minio server is installed and running, if not [follow this](https://github.com/minio/minio/blob/master/README.md).
-* In this example ``minio`` is running locally on port 9000.
-
-### Install AWS SDK S3 service
-
+## 1. Prerequisites
+Install Minio Server from [here](http://docs.minio.io/docs/minio).
+ 
+## 2. Installation
+Install `aws-sdk-go` by   : 
 ```sh
-$ go get github.com/aws/aws-sdk-go/service/s3
+$ go get github.com/aws/aws-sdk-go/...
 ```
 
-### List all buckets on Minio
+## 3. Example
+Access credentials shown in this example belong to https://play.minio.io:9000.
+These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
+
+List all buckets on minio server using aws-sdk-go.
 
 ```go
 package main
@@ -30,19 +32,24 @@ import (
 
 func main() {
 	newSession := session.New()
+
+  // Configure to use Minio Server
 	s3Config := &aws.Config{
-		Credentials: credentials.NewStaticCredentials("<YOUR-ACCESS-KEY-ID>", "<YOUR-SECRET-ACCESS-KEY", ""),
-		Endpoint:         aws.String("http://localhost:9000"),
+		Credentials:      credentials.NewStaticCredentials("Q3AM3UQ867SPQQA43P2F", "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG", ""),
+		Endpoint:         aws.String("https://play.minio.io:9000"),
 		Region:           aws.String("us-east-1"),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 	}
+  
 	// Create an S3 service object in the default region.
 	s3Client := s3.New(newSession, s3Config)
 
 	cparams := &s3.CreateBucketInput{
 		Bucket: aws.String("newbucket"), // Required
 	}
+    
+  // Create a new bucket using the CreateBucket call.
 	_, err := s3Client.CreateBucket(cparams)
 	if err != nil {
 		// Message from an error.
@@ -51,7 +58,8 @@ func main() {
 	}
 
 	var lparams *s3.ListBucketsInput
-	// Call the ListBuckets() Operation
+	
+  // Call the ListBuckets() Operation
 	resp, err := s3Client.ListBuckets(lparams)
 	if err != nil {
 		// Message from an error.
@@ -63,8 +71,7 @@ func main() {
 	fmt.Println(resp)
 }
 ```
-
-Populate your AccessKeyId and SecretAccessKey credentials and run the program as shown below.
+## 3. Run the Program
 
 ```sh
 $ go run aws-sdk-minio.go

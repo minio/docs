@@ -1,56 +1,74 @@
-# How to use AWS S3 CLI with Minio Server?
+# AWS CLI with Minio Server
 
-## Prerequisites
-* Minio server is installed and running, if not [follow this](https://github.com/minio/minio/blob/master/README.md).
-* AWS S3 client installed, if not [follow this](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
-* In this example ``minio`` is running locally on port 9000.
+AWS CLI is a unified tool to manage AWS services. It is frequently the tool used to transfer data in and out of AWS S3. It works with any S3 compatible cloud storage service. 
 
-## Testing AWS CLI operations
-### Create a Bucket
+In this recipe we will learn how to configure and use AWS CLI to manage data with Minio Server.
+
+## 1. Prerequisites
+Install Minio Server from [here](http://docs.minio.io/docs/minio).
+
+## 2. Installation 
+ Install AWS CLI from https://aws.amazon.com/cli/
+
+## 3. Configuration
+To configure AWS CLI, type `aws configure` and specify the Minio key information.
+
+Access credentials shown in this example belong to https://play.minio.io:9000.
+These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
+
 ```
-$ aws --endpoint-url http://localhost:9000 s3 mb s3://mybucket
+$ aws configure
+AWS Access Key ID [None]: Q3AM3UQ867SPQQA43P2F
+AWS Secret Access Key [None]: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
+Default region name [None]: us-east-1
+Default output format [None]: ENTER
+```
+
+Additionally enable AWS Signature Version '4' for Minio server.
+
+```
+$ aws configure set default.s3.signature_version s3v4
+```
+
+## 4. Commands
+ 
+### To list your buckets
+```
+$ aws --endpoint-url https://play.minio.io:9000 s3 ls
+2016-03-27 02:06:30 deebucket
+2016-03-28 21:53:49 guestbucket
+2016-03-29 13:34:34 mbtest
+2016-03-26 22:01:36 mybucket
+2016-03-26 15:37:02 testbucket
+```
+
+### To list contents inside bucket
+```
+$ aws --endpoint-url https://play.minio.io:9000 s3 ls s3://mybucket
+2016-03-30 00:26:53      69297 argparse-1.2.1.tar.gz
+2016-03-30 00:35:37      67250 simplejson-3.3.0.tar.gz
+```
+
+### To make a bucket
+```
+$ aws --endpoint-url https://play.minio.io:9000 s3 mb s3://mybucket
 make_bucket: s3://mybucket/
 ```
-### Copy local file to a remote bucket.
+
+### To add an object to a bucket
 ```
-$ aws --endpoint-url http://localhost:9000 s3 cp share/hello.txt s3://mybucket/hello.txt
-upload: share/hello.txt to s3://mybucket/hello.txt
-```
-### List all contents of a bucket.
-```
-$ aws --endpoint-url http://localhost:9000 s3 ls s3://mybucket
-2016-01-11 21:23:36         14 hello.txt
-```
-### Sync local directory contents to a remote bucket.
-```
-$ aws --endpoint-url http://localhost:9000 s3 sync . s3://mybucket
-upload: sharegain/door.jpg to s3://mybucket/sharegain/door.jpg
-upload: sharegain/filter-coffee.jpg to s3://mybucket/sharegain/filter-coffee.jpg
-```
-### Move local content to a remote bucket.
-```
-$ aws --endpoint-url http://localhost:9000 s3 mv test.txt s3://mybucket/test2.txt
-move: ./test.txt to s3://mybucket/test2.txt
-```
-### Remove object or objects from a bucket.
-#### Remove a single object.
-```
-$ aws --endpoint-url http://localhost:9000 s3 rm s3://mybucket/test.xyz
-delete: s3://mybucket/test.xyz
-```
-#### Remove all objects in a bucket recursively.
-```
-$ aws --endpoint-url http://localhost:9000 s3 rm s3://mybucket --recursive
-delete: s3://mybucket/door.jpg
-delete: s3://mybucket/fu/hey.txt              
-delete: s3://mybucket/sharegain/door.jpg           
-delete: s3://mybucket/sharegain/filter-coffee.jpg
-delete: s3://mybucket/hello.txt                  
-delete: s3://mybucket/test2.txt  
+$ aws --endpoint-url https://play.minio.io:9000 s3 cp simplejson-3.3.0.tar.gz s3://mybucket
+upload: ./simplejson-3.3.0.tar.gz to s3://mybucket/simplejson-3.3.0.tar.gz
 ```
 
-### Remove a bucket.
+### To delete an object from a bucket
 ```
-$ aws --endpoint-url http://localhost:9000 s3 rb s3://mybucket
+$ aws --endpoint-url https://play.minio.io:9000 s3 rm s3://mybucket/argparse-1.2.1.tar.gz
+delete: s3://mybucket/argparse-1.2.1.tar.gz
+```
+
+### To remove a bucket
+```
+$ aws --endpoint-url https://play.minio.io:9000 s3 rb s3://mybucket
 remove_bucket: s3://mybucket/
 ```

@@ -1,45 +1,40 @@
-# How to back up MongoDB database on Minio
-## Prerequisites
-* You have minio client library installed, if not follow mc [install instructions](https://github.com/minio/mc/blob/master/README.md)
-* You have a Minio server configured and running, if not follow Minio [install instructions](https://github.com/minio/minio/blob/master/README.md)
-* You have a directory which stores all the database backup, this will get backed up on Minio server.
-* My current working directory is ``/home/miniouser`` & scripts are part of the ``bash PATH``
-* My scripts are executable
-* ``which mc`` on terminal will give you path for ``mc``
+# Store MongoDB Backups in Minio Server
 
-## Steps
-### Create a bucket:
+In this recipe we will learn how to store MongoDB backups in Minio Server.
+
+
+## 1. Prerequisites
+* Install mc from [here](https://docs.minio.io/docs/minio-client-quick-start-guide).
+* Install Minio Server from [here](https://docs.minio.io/docs/minio ).
+* Know where the MongoDB backups reside in the local filesystem.
+ 
+
+## 2. Recipe Steps
+In this recipe, we will use https://play.minio.io:9000 which is aliased to play. Feel free to use play server for testing and development. Access credentials shown in this example are open to public. 
+Replace with your own access credentials when running this example in your environment.
+
+### Step 1: Create a bucket.
 ```
-$ mc mb local/mongobkp
-Bucket created successfully ‘local/mongobkp’.
+$ mc mb play/mongobkp
+Bucket created successfully ‘play/mongobkp’.
 ```
-### Mirror local backup to Minio server:
+### Step 2: Mirror local backup to Minio server.
 
 ```
-$ mc mirror mongobkp/ local/mongobkp
+$ mc mirror mongobkp/ play/mongobkp
 
 ```
-### Automating it all:
+## 3. Automate
+The above recipe can be automated easily. Change the bash script below to your own directories and PATHS as needed. Set up a cron to run this task as needed.
 
-**mirror script**
-```
+```bash
 #!/bin/bash
 #FileName: Minimongobkp.sh & has executable permissions.
 
 LocalBackupPath="/home/miniouser/mongobkp"
-MinioBucket="local/mongobkp"
+MinioBucket="play/mongobkp"
 MCPATH="/home/miniouser/go/bin/mc"
 
-$MCPATH --quiet mirror $LocalBackupPath $MinioBucket
-
-```
-**Setting it on crontab**
-
-Open ``crontab`` & add the script in the end of the file. This script will take your mongoDB directory backup everyday at 15:00.
-
-```
-$ crontab -e
-
-00 15 * * * /home/miniouser/scripts/Miniomongobkp.sh
+$MCPATH - -quiet mirror $LocalBackupPath $MinioBucket
 
 ```
