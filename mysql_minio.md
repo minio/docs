@@ -12,13 +12,13 @@ In this recipe we will learn how to store MySQL backups in Minio Server.
 Access credentials shown in this example belong to https://play.minio.io:9000.
 These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
 
-Step 1 : Create a bucket.
+### Step 1: Create a bucket.
 ```
 $ mc mb play/mysqlbkp
 Bucket created successfully ‘play/mysqlbkp’.
 ```
 
-Step 2 : Mirror mysqlbkup directory where the backup files reside to Minio server. 
+### Step 2: Mirror mysqlbkup directory where the backup files reside to Minio server. 
 
 ```
 $ mc mirror mysqlbkp/ play/mysqlbkp

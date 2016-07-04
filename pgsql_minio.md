@@ -11,12 +11,12 @@ In this recipe you will learn how to store PostgreSQL backups in Minio Server.
 In this recipe, we will use https://play.minio.io:9000 which is aliased to play. Feel free to use play server for testing and development. Access credentials shown in this example are open to public. 
 Replace with your own access credentials when running this example in your environment.
 
-Step 1 : Create a bucket:
+### Step 1: Create a bucket:
 ```
 $ mc mb play/pgsqlbkp
 Bucket created successfully ‘play/pgsqlbkp’.
 ```
-Step 2 :  Mirror local backup to Minio server:
+### Step 2: Mirror local backup to Minio server:
 
 ```
 $ mc mirror pgsqlbkp/ play/pgsqlbkp

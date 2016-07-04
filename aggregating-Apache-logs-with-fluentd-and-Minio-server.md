@@ -1,4 +1,4 @@
-# Aggregate Apache logs with fluentd and Minio Server
+# Store Apache Logs into Minio
 
 In this recipe, we will learn how to use Minio as log aggregator for fluentd using `fluent-plugin-s3` plugin.
 
@@ -12,7 +12,7 @@ In this recipe, we will learn how to use Minio as log aggregator for fluentd usi
 
 
 ## 3. Recipe Steps
-Step 1 : Create a bucket.
+### Step 1: Create a bucket.
 
 This is the bucket where fluentd will aggregate semi-structured apache logs in real-time.
 
@@ -20,7 +20,7 @@ This is the bucket where fluentd will aggregate semi-structured apache logs in r
 $ mc mb myminio/fluentd
 Bucket created successfully ‘myminio/fluentd’.
 ```
-Step 2 :  Modify the fluentd configuration to use Minio as backend.
+### Step 2: Modify the fluentd configuration to use Minio as backend.
 Replace with your own values for `aws_key_id`, `aws_sec_key`, `s3_bucket`,  `s3_endpoint`.
 
 Replace `/etc/td-agent/td-agent.conf` with:
@@ -48,12 +48,12 @@ Replace `/etc/td-agent/td-agent.conf` with:
    buffer_chunk_limit 256m
 </match>
 ```
-Step 3 : Restart `fluentd` server.  
+### Step 3: Restart `fluentd` server.  
 ```
 sudo /etc/init.d/td-agent restart
 
 ```
-Step 4 : Check the fluentd logfile to confirm if everything is running.
+### Step 4: Check the fluentd logfile to confirm if everything is running.
 ```
 $ tail -f /var/log/td-agent/td-agent.log
     path logs/
@@ -67,14 +67,14 @@ $ tail -f /var/log/td-agent/td-agent.log
 </ROOT>
 2016-05-03 18:44:44 +0530 [info]: following tail of /var/log/apache2/access.log
 ```
-Step 5 : Test the configuration.
+### Step 5: Test the configuration.
 
 Ping the Apache server. This example uses the ab (Apache Bench) program.
 
 ```
 $ ab -n 100 -c 10 http://localhost/
 ```
-Step 6: Verify Aggregated Logs.
+### Step 6: Verify Aggregated Logs.
 Minio server's fluent bucket should show the aggregated logs.
 ```
 $ mc ls myminio/fluentd/logs/

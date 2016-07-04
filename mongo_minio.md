@@ -13,12 +13,12 @@ In this recipe we will learn how to store MongoDB backups in Minio Server.
 In this recipe, we will use https://play.minio.io:9000 which is aliased to play. Feel free to use play server for testing and development. Access credentials shown in this example are open to public. 
 Replace with your own access credentials when running this example in your environment.
 
-Step 1 :  Create a bucket.
+### Step 1: Create a bucket.
 ```
 $ mc mb play/mongobkp
 Bucket created successfully ‘play/mongobkp’.
 ```
-Step 2 :  Mirror local backup to Minio server.
+### Step 2: Mirror local backup to Minio server.
 
 ```
 $ mc mirror mongobkp/ play/mongobkp

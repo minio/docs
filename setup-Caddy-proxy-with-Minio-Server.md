@@ -23,13 +23,13 @@ proxy / localhost:9000 {
 ```
 
 ## 4. Recipe Steps
-Step 1 : Start `minio` server.
+### Step 1: Start `minio` server.
 
 ```bash
 $ ./minio --address localhost:9000 server <your_export_dir>
 ```
 
-Step 2 : Start `caddy` server.
+### Step 2: Start `caddy` server.
 ```bash
 $ ./caddy
 Activating privacy features... done.

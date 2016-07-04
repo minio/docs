@@ -1,6 +1,6 @@
 # AWS Go SDK for Minio Server
 
-`aws-sdk-go` is the official AWS SDK for the Go programming language. In this recipe we learn how to use `aws-sdk-go` with Minio server.
+`aws-sdk-go` is the official AWS SDK for the Go programming language. In this recipe we will learn how to use `aws-sdk-go` with Minio server.
 
 
 ## 1. Prerequisites

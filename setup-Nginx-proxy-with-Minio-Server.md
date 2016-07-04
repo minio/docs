@@ -29,13 +29,13 @@ Note:
 * Replace ``http://localhost:9000``  with your own server name.
 
 ## 4. Recipe Steps
-Step 1:  Start Minio server. 
+### Step 1: Start Minio server. 
 
 ```
 $ minio server /mydatadir
 ```
 
-Step 2:  Restart Nginx server.
+### Step 2: Restart Nginx server.
 ```
 $ sudo service nginx restart
 ```
