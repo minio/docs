@@ -25,3 +25,4 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [Generate Let's Encypt certificate using Concert for Minio](./generate-Lets-Encypt-certificate-using-Concert-for-Minio.md)
 - [Setup Caddy proxy with Minio](./setup-Caddy-proxy-with-Minio-Server.md)
 - [Setup Nginx proxy with Minio](./setup-Nginx-proxy-with-Minio-Server.md)
+- [rclone with Minio](./rclone_minio.md)
