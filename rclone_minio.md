@@ -1,4 +1,4 @@
-# rclone with Minio Server
+# rclone with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 `rclone` is an open source command line program to sync files and
 directories to and from cloud storage systems.  It aims to be "rsync
@@ -7,15 +7,19 @@ for cloud storage".
 This recipe describes how to use rclone with Minio Server.
 
 ## 1. Prerequisites
+
 First install Minio Server from [minio.io](https://minio.io/).
 
 ## 2. Installation
+
 Next install rclone from [rclone.org](http://rclone.org).
 
 ## 3. Configuration
+
 When it configures itself Minio will print something like this
 
-```
+```sh
+
 AccessKey: WLGDGYAQYIGI833EV05A  SecretKey: BYvgJM101sHngl2uzjXS/OBF/aMxAN06JrJ3qJlF Region: us-east-1
 
 Minio Object Storage:
@@ -25,6 +29,7 @@ Minio Object Storage:
 Minio Browser:
      http://127.0.0.1:9000
      http://10.0.0.3:9000
+
 ```
 
 You now need to configure those details into rclone.
@@ -34,7 +39,8 @@ else) of type `S3` and enter the details above something like this:
 
 (Note that it is important to put the region in as stated above.)
 
-```
+```sh
+
 env_auth> 1
 access_key_id> WLGDGYAQYIGI833EV05A
 secret_access_key> BYvgJM101sHngl2uzjXS/OBF/aMxAN06JrJ3qJlF   
@@ -42,11 +48,13 @@ region> us-east-1
 endpoint> http://10.0.0.3:9000
 location_constraint> 
 server_side_encryption>
+
 ```
 
 Which makes the config file look like this
 
-```
+```sh
+
 [minio]
 env_auth = false
 access_key_id = WLGDGYAQYIGI833EV05A
@@ -55,6 +63,7 @@ region = us-east-1
 endpoint = http://10.0.0.3:9000
 location_constraint = 
 server_side_encryption = 
+
 ```
 
 ## 4. Commands
