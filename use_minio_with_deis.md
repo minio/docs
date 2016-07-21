@@ -1,4 +1,4 @@
-# Running Deis Workflow with Minio
+# Running Deis Workflow with Minio [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [Deis Workflow](https://deis.com/) is an open source [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service) that makes it easy to deploy and manage applications on your own servers. Workflow builds upon [Kubernetes](http://kubernetes.io/) and [Docker](https://www.docker.com/) to provide a lightweight PaaS with a [Heroku](https://www.heroku.com/)-inspired workflow.
 

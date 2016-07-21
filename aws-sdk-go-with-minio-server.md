@@ -1,24 +1,33 @@
-# AWS Go SDK for Minio Server
+# AWS Go SDK for Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 `aws-sdk-go` is the official AWS SDK for the Go programming language. In this recipe we will learn how to use `aws-sdk-go` with Minio server.
 
 
 ## 1. Prerequisites
+
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
  
 ## 2. Installation
-Install `aws-sdk-go` by   : 
+
+Install `aws-sdk-go` by: 
+
 ```sh
+
+
 $ go get github.com/aws/aws-sdk-go/...
+
+
 ```
 
 ## 3. Example
+
 Access credentials shown in this example belong to https://play.minio.io:9000.
 These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
 
 List all buckets on minio server using aws-sdk-go.
 
 ```go
+
 package main
 
 import (
@@ -70,10 +79,13 @@ func main() {
 	// Pretty-print the response data.
 	fmt.Println(resp)
 }
+
 ```
+
 ## 3. Run the Program
 
 ```sh
+
 $ go run aws-sdk-minio.go
 {
   Buckets: [{
@@ -85,4 +97,5 @@ $ go run aws-sdk-minio.go
     ID: "minio"
   }
 }
+
 ```
