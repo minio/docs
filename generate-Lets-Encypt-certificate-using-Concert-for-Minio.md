@@ -86,4 +86,4 @@ $ ./minio server export/
 
 ### Step 7: Visit https://churchofminio.com:9000 in the browser.
 
-![Screenshot](./assets/letsencrypt-concert-minio.png)
+![Screenshot](https://github.com/minio/cookbook/blob/master/docs/screenshots/letsencrypt-concert-minio.jpg)
