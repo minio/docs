@@ -3,7 +3,7 @@
 ## Prerequisites
 
 * You have Docker installed and running, if not follow [install instructions](https://docs.docker.com/engine/installation/ubuntulinux/)
-* You have minio client aka mc installed, if not follow [install instructions](https://docs.minio.io/docs/minio-client-quick-start-guide)
+* You have minio client aka mc installed, if not follow [install instructions](https://docs.minio.io/docs/minio-client-quickstart-guide)
 
 ## Steps
 
