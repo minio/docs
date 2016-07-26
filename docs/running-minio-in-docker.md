@@ -23,11 +23,24 @@ alias docker="sudo /usr/bin/docker"
 
 $ docker run -p 9000:9000 minio/minio:latest
 
-AccessKey: IQP18YBF51DG8HSZEE7B  SecretKey: AlDzw6dj9zfne8JhPwGapt0Idlfg/QLhMq58Z0ax
+Endpoint:  http://10.0.0.10:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
+AccessKey: USWUXHGYZQYFYFFIT3RE
+SecretKey: MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03
+Region:    us-east-1
 
-Starting minio server:
-Listening on http://127.0.0.1:9000
-Listening on http://172.17.0.3:9000
+Browser Access:
+  http://10.0.0.10:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
+
+Command-line Access: https://docs.minio.io/docs/minio-client-quickstart-guide
+  $ mc config host add myminio http://10.0.0.10:9000 USWUXHGYZQYFYFFIT3RE MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03
+
+Object API (Amazon S3 compatible):
+  Go:         https://docs.minio.io/docs/golang-client-quickstart-guide
+  Java:       https://docs.minio.io/docs/java-client-quickstart-guide
+  Python:     https://docs.minio.io/docs/python-client-quickstart-guide
+  JavaScript: https://docs.minio.io/docs/javascript-client-quickstart-guide
+
+
 
 ```
 
@@ -35,7 +48,7 @@ Listening on http://172.17.0.3:9000
 
 ```sh
 
-$ mc config host add localhost http://localhost:9000 IQP18YBF51DG8HSZEE7B AlDzw6dj9zfne8JhPwGapt0Idlfg/QLhMq58Z0ax
+$ mc config host add localhost http://localhost:9000 USWUXHGYZQYFYFFIT3RE MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03
 
 ```
 
@@ -45,6 +58,7 @@ $ mc config host add localhost http://localhost:9000 IQP18YBF51DG8HSZEE7B AlDzw6
 
 $ mc mb localhost/newbucket
 Bucket created successfully ‘localhost/newbucket’.
+
 $ mc mb localhost/mybucket
 Bucket created successfully ‘localhost/mybucket’.
 
@@ -81,14 +95,25 @@ $ docker stop 51e3a48d209a
 
 $ docker create -v /export --name minio-export minio/my-minio /bin/true
 4e466c4572b96cc16a619f6e13155657745aa653b1857929100f1a8208a58da8
+
 $ docker run -p 9000:9000 --volumes-from minio-export --name minio1 minio/my-minio
 
-AccessKey: IQP18YBF51DG8HSZEE7B  SecretKey: AlDzw6dj9zfne8JhPwGapt0Idlfg/QLhMq58Z0ax
+Endpoint:  http://10.0.0.10:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
+AccessKey: USWUXHGYZQYFYFFIT3RE
+SecretKey: MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03
+Region:    us-east-1
 
+Browser Access:
+  http://10.0.0.10:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
 
-Starting minio server:
-Listening on http://127.0.0.1:9000
-Listening on http://172.17.0.4:9000
+Command-line Access: https://docs.minio.io/docs/minio-client-quickstart-guide
+  $ mc config host add myminio http://10.0.0.10:9000 USWUXHGYZQYFYFFIT3RE MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03
+
+Object API (Amazon S3 compatible):
+  Go:         https://docs.minio.io/docs/golang-client-quickstart-guide
+  Java:       https://docs.minio.io/docs/java-client-quickstart-guide
+  Python:     https://docs.minio.io/docs/python-client-quickstart-guide
+  JavaScript: https://docs.minio.io/docs/javascript-client-quickstart-guide
 
 ```
 

@@ -1,8 +1,8 @@
 # S3cmd with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-`s3cmd` is a CLI client for managing data in AWS S3, Google Cloud Storage or any cloud storage service provider that uses the s3 protocol.  `s3cmd` is open source and is distributed under the GPLv2 license.
+`S3cmd` is a CLI client for managing data in AWS S3, Google Cloud Storage or any cloud storage service provider that uses the s3 protocol.  `S3cmd` is open source and is distributed under the GPLv2 license.
 
-In this recipe we will learn how to configure and use s3cmd to manage data with Minio Server.
+In this recipe we will learn how to configure and use S3cmd to manage data with Minio Server.
 
 ## 1. Prerequisites
 
@@ -10,11 +10,11 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 ## 2. Installation
 
-Install `s3cmd` from http://s3tools.org/s3cmd.
+Install `S3cmd` from http://s3tools.org/s3cmd.
 
 ## 3. Configuration
 
-We will run `s3cmd` on https://play.minio.io:9000.
+We will run `S3cmd` on https://play.minio.io:9000.
 
 Access credentials shown in this example belong to https://play.minio.io:9000.
 These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
@@ -123,4 +123,4 @@ Bucket 's3://mybucket/' removed
 ```
 
 NOTE:
-The complete usage guide for `s3cmd` is available [here](http://s3tools.org/usage).
+The complete usage guide for `S3cmd` is available [here](http://s3tools.org/usage).
