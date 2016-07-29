@@ -45,7 +45,6 @@ Note:
 * Replace example.com with your own hostname.
 * Replace ``http://localhost:9000``  with your own server name.
 
-Step 1: Configure the proxy.
 
 ### Step 2: Start Minio server. 
 
