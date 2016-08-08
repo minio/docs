@@ -1,6 +1,6 @@
 # Minio Cookbook [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This is home for recipes of related projects and tools to use with Minio. 
+This is home for recipes of related projects and tools to use with Minio.
 
 ### How to Contribute a Recipe
 
@@ -16,6 +16,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [AWS CLI with Minio](./docs/aws-cli-with-minio.md)
 - [AWS Go SDK for Minio](./docs/aws-go-sdk-for-minio.md)
 - [Running Minio in Docker](./docs/running-minio-in-docker.md)
+- [Running Minio in FreeNAS](./docs/running-minio-in-freenas.md)
 - [Store MongoDB Backups in Minio](./docs/store-mongodb-backups-in-minio.md)
 - [Store MySQL Backups in Minio](./docs/store-mysql-backups-in-minio.md)
 - [Store PostgreSQL Backups in Minio](./docs/store-postgresql-backups-in-minio.md)
