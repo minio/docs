@@ -33,7 +33,7 @@ $ ./restic -r s3:http://localhost:9000/resticbucket init
 
 ```
 
-Copy backups from the local machine to the bucket on minio server.  
+Copy backups from the local machine to the bucket on Minio server.  
 
 ```sh
 

@@ -4,19 +4,19 @@ In this document you will learn how to carry out basic operations on Minio using
 
 ## Prerequisites
 
-* Cyberduck is installed and running. If not please download Cyberduck from [here](https://cyberduck.io/). Since Minio is Amazon S3 API compaitble you will need to download [Generic S3 Profiles](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTP). We are downloading ``HTTP`` profile for this setup.
+* Cyberduck is installed and running. If not please download Cyberduck from [here](https://cyberduck.io/). Since Minio is Amazon S3 API compatible you will need to download [Generic S3 Profiles](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTP). We are downloading ``HTTP`` profile for this setup.
 
 * Minio Server is running on localhost on port 9000 in ``HTTP``, follow [Minio quickstart guide](https://docs.minio.io/docs/minio-quickstart-guide) for installing Minio. 
 
 _NOTE:_ You can also run Minio in ``HTTPS``, follow this [guide](https://docs.minio.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio) along with Cyberduck HTTPS [Generic S3 Profiles](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS) 
 
-### 1. Add Minio authentication in cyberduck
+### 1. Add Minio authentication in Cyberduck
 
 Click open connection, select ``HTTP``
 
 ![I_IMAGE](https://github.com/minio/cookbook/blob/master/docs/screenshots/cyberduck/defaultdashboard.jpg?raw=true)
 
-### 2. Replace the existing ``AWS S3`` details with your local ``Minio`` credntials to:
+### 2. Replace the existing ``AWS S3`` details with your local ``Minio`` credentials to:
 
 ![MINIO_DASH](https://github.com/minio/cookbook/blob/master/docs/screenshots/cyberduck/connecttominio.jpg?raw=true)
 

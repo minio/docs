@@ -57,7 +57,7 @@ total 12
 The generated keys via Concert needs to be placed inside users home directory at ``${HOME}/.minio/certs``
 
 ```sh
-$ mkdir /home/supernova/.minio/certs/
+
 $ cp my-certs/private.key /home/supernova/.minio/certs/
 $ cp my-certs/public.crt /home/supernova/.minio/certs/
 

@@ -2,7 +2,7 @@
 
 Apache HTTP is an open source web server and a reverse proxy server.  
 
-In this recipe we will learn how to set up Apache HTTP with mod_proxy module for connecting to Minio Server. We are goint to set up a new VirtualHost for example.com
+In this recipe we will learn how to set up Apache HTTP with mod_proxy module for connecting to Minio Server. We are going to set up a new VirtualHost for example.com
 
 ## 1. Prerequisites
 
