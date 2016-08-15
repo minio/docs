@@ -40,7 +40,7 @@ export PATH=${HOME}/bin/go/bin:${GOPATH}/bin:$PATH
 
 ```
 
-##### Source the new enviornment
+##### Source the new environment
 
 ```sh
 
@@ -103,7 +103,7 @@ export PATH=${GOPATH}/bin:$PATH
 
 ```
 
-##### Source the new enviornment
+##### Source the new environment
 
 ```sh
 
