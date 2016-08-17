@@ -16,7 +16,7 @@ Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws
 
 Please replace ``endpoint``,``credentials``, ``Bucket`` with your local setup in this ``example.php`` file.
 
-List all buckets on Minio server using aws-sdk-php.
+Example below shows putObject and getObject operations on Minio server using aws-sdk-php.
 
 
 ```php
@@ -58,7 +58,7 @@ echo $retrive['Body'];
 ```
 
 
-## 3. Run the Program
+## 4. Run the Program
 
 ```sh
 $ php example.php
