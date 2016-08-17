@@ -21,7 +21,9 @@ Create a caddy configuration file as below, change the ip addresses according to
 your.public.com 
 
 proxy / localhost:9000 {
-    transparent
+    proxy_header X-Forwarded-Proto {scheme}
+    proxy_header X-Forwarded-Host {host}
+    proxy_header Host {host}
 }
 
 ```
