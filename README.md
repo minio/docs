@@ -31,3 +31,4 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [Download from Browser with PreSignedGet](./docs/presigned-get-download-from-browser.md)
 - [Upload via Browser with PreSignedPut](./docs/presigned-put-upload-via-browser.md)
 - [How to use Cyberduck with Minio](./docs/how-to-use-cyberduck-with-minio.md)
+- [How to use AWS SDK for PHP with Minio Server](./docs/aws-sdk-for-php-with-minio.md)
