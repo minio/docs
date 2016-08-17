@@ -34,8 +34,9 @@ import (
 )
 
 func main() {
-	bucket := "newbucket"
-	key := "testobject"
+	bucket := aws.String("newbucket")
+	key := aws.String("testobject")
+	
 	// Configure to use Minio Server
 	s3Config := &aws.Config{
 		Credentials:      credentials.NewStaticCredentials("H5K8172RVM311Q2XFEHX", "5bRnl3DGhNM+fRBMxOii11k8iT78cNSIfoqnJfwC", ""),
@@ -49,7 +50,7 @@ func main() {
 	s3Client := s3.New(newSession)
 
 	cparams := &s3.CreateBucketInput{
-		Bucket: &bucket, // Required
+		Bucket: bucket, // Required
 	}
 
 	// Create a new bucket using the CreateBucket call.
@@ -63,14 +64,14 @@ func main() {
 	// Upload a new object "testobject" with the string "Hello World!" to our "newbucket".
 	_, err = s3Client.PutObject(&s3.PutObjectInput{
 		Body:   strings.NewReader("Hello from Minio!!"),
-		Bucket: &bucket,
-		Key:    &key,
+		Bucket: bucket,
+		Key:    key,
 	})
 	if err != nil {
-		fmt.Printf("Failed to upload data to %s/%s, %s\n", bucket, key, err.Error())
+		fmt.Printf("Failed to upload data to %s/%s, %s\n", *bucket, *key, err.Error())
 		return
 	}
-	fmt.Printf("Successfully created bucket %s and uploaded data with key %s\n", bucket, key)
+	fmt.Printf("Successfully created bucket %s and uploaded data with key %s\n", *bucket, *key)
 
 	// Retrieve our "testobject" from our "newbucket" and store it locally in "testobject_local".
 	file, err := os.Create("testobject_local")
@@ -83,8 +84,8 @@ func main() {
 	downloader := s3manager.NewDownloader(newSession)
 	numBytes, err := downloader.Download(file,
 	&s3.GetObjectInput{
-		Bucket: aws.String(bucket),
-		Key:    aws.String(key),
+		Bucket: bucket,
+		Key:    key,
 	})
 	if err != nil {
 		fmt.Println("Failed to download file", err)
