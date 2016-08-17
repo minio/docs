@@ -14,7 +14,6 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 
 - [Running Deis Workflow with Minio](./docs/running-deis-workflow-with-minio.md)
 - [AWS CLI with Minio](./docs/aws-cli-with-minio.md)
-- [AWS Go SDK for Minio](./docs/aws-go-sdk-for-minio.md)
 - [Running Minio in Docker](./docs/running-minio-in-docker.md)
 - [Running Minio in FreeNAS](./docs/running-minio-in-freenas.md)
 - [Store MongoDB Backups in Minio](./docs/store-mongodb-backups-in-minio.md)
@@ -32,3 +31,4 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [Upload via Browser with PreSignedPut](./docs/presigned-put-upload-via-browser.md)
 - [How to use Cyberduck with Minio](./docs/how-to-use-cyberduck-with-minio.md)
 - [How to use AWS SDK for PHP with Minio Server](./docs/aws-sdk-for-php-with-minio.md)
+- [How to use AWS SDK for Go with Minio Server](./docs/aws-sdk-for-go-with-minio.md)
