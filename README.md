@@ -32,3 +32,5 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [How to use Cyberduck with Minio](./docs/how-to-use-cyberduck-with-minio.md)
 - [How to use AWS SDK for PHP with Minio Server](./docs/aws-sdk-for-php-with-minio.md)
 - [How to use AWS SDK for Go with Minio Server](./docs/aws-sdk-for-go-with-minio.md)
+- [How to use AWS SDK for Python with Minio Server](./docs/aws-sdk-for-python-with-minio.md)
+- [How to use AWS SDK for Ruby with Minio Server](./docs/aws-sdk-for-ruby-with-minio.md)

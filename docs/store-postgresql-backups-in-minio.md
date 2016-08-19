@@ -6,43 +6,26 @@ In this recipe you will learn how to store PostgreSQL backups in Minio Server.
 
 * Install mc from [here](https://docs.minio.io/docs/minio-client-quickstart-guide).
 * Install Minio Server from [here](https://docs.minio.io/docs/minio ).
-* Know where the PostgreSQL backups reside in the local filesystem.
+* PostgreSQL official [doc](https://www.postgresql.org/docs/).
  
-## 2. Recipe Steps
+## 2. Configuration Steps
 
-In this recipe, we will use https://play.minio.io:9000 which is aliased to play. Feel free to use play server for testing and development. Access credentials shown in this example are open to public. 
-Replace with your own access credentials when running this example in your environment.
+Minio server is running using alias ``m1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guid) for details. PostgreSQL  backups are stored in ``pgsqlbkp`` directory.
 
-### Step 1: Create a bucket:
+### Create a bucket.
 
 ```sh
-
-$ mc mb play/pgsqlbkp
-Bucket created successfully ‘play/pgsqlbkp’.
+$ mc mb m1/pgsqlbkp
+Bucket created successfully ‘m1/pgsqlbkp’.
 
 ```
 
-### Step 2: Mirror local backup to Minio server:
+### Continuously mirror local backup to Minio server.
+
+Continuously mirror ``pgsqlbkp`` folder recursively to Minio. Read more on ``mc mirror`` [here](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 
 
 ```sh
-
-$ mc mirror pgsqlbkp/ play/pgsqlbkp
-
+$ mc mirror --force --remove --watch  pgsqlbkp/ m1/pgsqlbkp
 ```
 
-## 3. Automate
 
-The above recipe can be automated easily. Change the bash script below to your own directories and PATHS as needed. Set up a cron to run this task as needed.
-
-```sh
-
-#!/bin/bash
-#FileName: Miniopgsqlbkp.sh & has executable permissions.
-
-LocalBackupPath="/home/miniouser/pgsqlbkp"
-MinioBucket="play/pgsqlbkp"
-MCPATH="/home/miniouser/go/bin/mc"
-
-$MCPATH - -quiet mirror $LocalBackupPath $MinioBucket
-
-```

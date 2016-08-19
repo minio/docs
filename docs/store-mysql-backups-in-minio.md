@@ -7,43 +7,25 @@ In this recipe we will learn how to store MySQL backups in Minio Server.
 
 * Install mc from [here](https://docs.minio.io/docs/minio-client-quickstart-guide).
 * Install Minio Server from [here](https://docs.minio.io/docs/minio ).
-* Know where the MySQL backups reside in the local filesystem.
+* MySQL official [doc](https://dev.mysql.com/doc/)
 
-## 2. Recipe Steps
+## 2. Configuration Steps
 
-Access credentials shown in this example belong to https://play.minio.io:9000.
-These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
+Minio server is running using alias ``m1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guid) for details. MySQL  backups are stored in ``mongobkp`` directory.
 
-### Step 1: Create a bucket.
 
-```sh
-
-$ mc mb play/mysqlbkp
-Bucket created successfully ‘play/mysqlbkp’.
-
-```
-
-### Step 2: Mirror mysqlbkup directory where the backup files reside to Minio server. 
+### Create a bucket.
 
 ```sh
-
-$ mc mirror mysqlbkp/ play/mysqlbkp
-
+$ mc mb m1/mysqlbkp
+Bucket created successfully ‘m1/mysqlbkp’.
 ```
 
-## 3. Automate
+### Continuously mirror local backup to Minio server.
 
-The above recipe can be automated easily. Change the bash script below to your own directories and PATHS as needed. Set up a cron to run this task as needed.
+Continuously mirror ``mysqlbkp`` folder recursively to Minio. Read more on ``mc mirror`` [here](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 
 
 ```sh
-
-#!/bin/bash
-# Filename: minio-mysql-bkp.sh & has executable permissions.
-
-LOCAL_BACKUP_PATH="/home/miniouser/mysqlbkp"
-MINIO_BUCKET="play/mysqlbkp"
-MC_PATH="/home/miniouser/go/bin/mc"
-
-$MC_PATH - -quiet mirror $LOCAL_BACKUP_PATH $MINIO_BUCKET
-
+$ mc mirror --force --remove --watch mysqlbkp/ m1/mysqlbkp
 ```
+
