@@ -7,45 +7,24 @@ In this recipe we will learn how to store MongoDB backups in Minio Server.
 
 * Install mc from [here](https://docs.minio.io/docs/minio-client-quickstart-guide).
 * Install Minio Server from [here](https://docs.minio.io/docs/minio ).
-* Know where the MongoDB backups reside in the local filesystem.
+* MongoDB official [doc](https://docs.mongodb.com/). 
  
 
-## 2. Recipe Steps
+## 2. Configuration Steps
 
-In this recipe, we will use https://play.minio.io:9000 which is aliased to play. Feel free to use play server for testing and development. Access credentials shown in this example are open to public. 
-Replace with your own access credentials when running this example in your environment.
+Minio server is running using alias ``m1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guid) for details. MongoDB backups are stored in ``mongobkp`` directory.
 
-### Step 1: Create a bucket.
-
-```sh
-
-$ mc mb play/mongobkp
-Bucket created successfully ‘play/mongobkp’.
-
-```
-
-### Step 2: Mirror local backup to Minio server.
+### Create a bucket.
 
 ```sh
-
-$ mc mirror mongobkp/ play/mongobkp
-
-
+$ mc mb m1/mongobkp
+Bucket created successfully ‘m1/mongobkp’.
 ```
 
-## 3. Automate
+### Continuously mirror local backup to Minio server.
 
-The above recipe can be automated easily. Change the bash script below to your own directories and PATHS as needed. Set up a cron to run this task as needed.
-
+Continuously mirror ``mongobkp`` folder recursively to Minio. Read more on ``mc mirror`` [here](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 
 ```sh
-
-#!/bin/bash
-#FileName: Minimongobkp.sh & has executable permissions.
-
-LocalBackupPath="/home/miniouser/mongobkp"
-MinioBucket="play/mongobkp"
-MCPATH="/home/miniouser/go/bin/mc"
-
-$MCPATH - -quiet mirror $LocalBackupPath $MinioBucket
-
+$ mc mirror --force --remove --watch  mongobkp/ m1/mongobkp
 ```
+

@@ -2,7 +2,6 @@
 
 `aws-sdk-go` is the official AWS SDK for the Go programming language. In this recipe we will learn how to use `aws-sdk-go` with Minio server.
 
-
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
@@ -10,7 +9,6 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 ## 2. Installation
 
 Install ``aws-sdk-go`` from AWS SDK for Go official docs [here](https://aws.amazon.com/sdk-for-go/)
-
 
 ## 3. Example
 
@@ -39,7 +37,7 @@ func main() {
 	
 	// Configure to use Minio Server
 	s3Config := &aws.Config{
-		Credentials:      credentials.NewStaticCredentials("H5K8172RVM311Q2XFEHX", "5bRnl3DGhNM+fRBMxOii11k8iT78cNSIfoqnJfwC", ""),
+		Credentials:      credentials.NewStaticCredentials("YOUR-ACCESSKEYID", "YOUR-SECRETACCESSKEY", ""),
 		Endpoint:         aws.String("http://localhost:9000"),
 		Region:           aws.String("us-east-1"),
 		DisableSSL:       aws.Bool(true),
