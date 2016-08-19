@@ -2,7 +2,6 @@
 
 `aws-sdk-php` is the official AWS SDK for the PHP programming language. In this recipe we will learn how to use `aws-sdk-php` with Minio server.
 
-
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
@@ -11,13 +10,11 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 Install `aws-sdk-python` from AWS SDK for Python official docs [here](https://aws.amazon.com/sdk-for-python/) 
 
-
 ## 3. Example
 
-Please replace ``endpoint_url``,``credentials``, ``Bucket`` and ``Object`` with your local setup in this ``example.py`` file.
+Please replace ``endpoint_url``,``aws_access_key_id``, ``aws_secret_access_key``, ``Bucket`` and ``Object`` with your local setup in this ``example.py`` file.
 
 Example below shows upload and download object operations on Minio server using aws-sdk-python.
-
 
 ```python
 
@@ -45,7 +42,6 @@ s3.Bucket('songs').download_file('piano.mp3', '/tmp/classical.mp3')
 print "Downloaded 'piano.mp3' as  'classical.mp3'. "
 
 ```
-
 
 ## 4. Run the Program
 

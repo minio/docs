@@ -2,7 +2,6 @@
 
 `aws-sdk-php` is the official AWS SDK for the PHP programming language. In this recipe we will learn how to use `aws-sdk-php` with Minio server.
 
-
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
@@ -11,13 +10,11 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html) 
 
-
 ## 3. Example
 
-Please replace ``endpoint``,``credentials``, ``Bucket`` with your local setup in this ``example.php`` file.
+Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setup in this ``example.php`` file.
 
 Example below shows putObject and getObject operations on Minio server using aws-sdk-php.
-
 
 ```php
 
@@ -56,7 +53,6 @@ $retrive = $s3->getObject([
 echo $retrive['Body'];
 
 ```
-
 
 ## 4. Run the Program
 
