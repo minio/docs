@@ -23,8 +23,8 @@ Example below shows put_object() and get_object() operations on Minio server usi
 require 'aws-sdk'
 Aws.config.update(
         endpoint: 'http://localhost:9000',
-        access_key_id: 'H5K8172RVM311Q2XFEHX',
-        secret_access_key: '5bRnl3DGhNM+fRBMxOii11k8iT78cNSIfoqnJfwC',
+        access_key_id: 'YOUR-ACCESSKEYID',
+        secret_access_key: 'YOUR-SECRETACCESSKEY',
         force_path_style: true,
         region: 'us-east-1'
 )

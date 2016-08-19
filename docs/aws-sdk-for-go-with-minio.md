@@ -39,7 +39,7 @@ func main() {
 	
 	// Configure to use Minio Server
 	s3Config := &aws.Config{
-		Credentials:      credentials.NewStaticCredentials("H5K8172RVM311Q2XFEHX", "5bRnl3DGhNM+fRBMxOii11k8iT78cNSIfoqnJfwC", ""),
+		Credentials:      credentials.NewStaticCredentials("YOUR-ACCESSKEYID", "YOUR-SECRETACCESSKEY", ""),
 		Endpoint:         aws.String("http://localhost:9000"),
 		Region:           aws.String("us-east-1"),
 		DisableSSL:       aws.Bool(true),

@@ -32,8 +32,8 @@ $s3 = new Aws\S3\S3Client([
         'region'  => 'us-east-1',
         'endpoint' => 'http://localhost:9000',
         'credentials' => [
-                'key'    => 'H5K8172RVM311Q2XFEHX',
-                'secret' => '5bRnl3DGhNM+fRBMxOii11k8iT78cNSIfoqnJfwC',
+                'key'    => 'YOUR-ACCESSKEYID',
+                'secret' => 'YOUR-SECRETACCESSKEY',
             ],
 ]);
 

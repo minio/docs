@@ -28,8 +28,8 @@ from botocore.client import Config
 
 s3 = boto3.resource('s3',
                     endpoint_url='http://localhost:9000',
-                    aws_access_key_id='H5K8172RVM311Q2XFEHX',
-                    aws_secret_access_key='5bRnl3DGhNM+fRBMxOii11k8iT78cNSIfoqnJfwC',
+                    aws_access_key_id='YOUR-ACCESSKEYID',
+                    aws_secret_access_key='YOUR-SECRETACCESSKEY',
                     config=Config(signature_version='s3v4'),
                     region_name='us-east-1')
 
