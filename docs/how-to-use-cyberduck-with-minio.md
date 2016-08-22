@@ -2,14 +2,15 @@
 
 In this document you will learn how to carry out basic operations on Minio using Cyberduck. Cyberduck is an open source client for FTP and SFTP, WebDAV, OpenStack Swift, and Amazon S3, available for Mac OS X and Windows (as of version 4.0) licensed under the GPL. 
 
-## Prerequisites
+##1. Prerequisites
 
 * Cyberduck is installed and running. If not please download Cyberduck from [here](https://cyberduck.io/). Since Minio is Amazon S3 API compatible you will need to download [Generic S3 Profiles](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTP). We are downloading ``HTTP`` profile for this setup.
 
 * Minio Server is running on localhost on port 9000 in ``HTTP``, follow [Minio quickstart guide](https://docs.minio.io/docs/minio-quickstart-guide) for installing Minio. 
 
-_NOTE:_ You can also run Minio in ``HTTPS``, follow this [guide](https://docs.minio.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio) along with Cyberduck HTTPS [Generic S3 Profiles](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS) 
+  _NOTE:_ You can also run Minio in ``HTTPS``, follow this [guide](https://docs.minio.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio) along with Cyberduck HTTPS [Generic S3 Profiles](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS) 
 
+##2. Configuration Steps
 ### 1. Add Minio authentication in Cyberduck
 
 Click open connection, select ``HTTP``
@@ -52,7 +53,7 @@ Once the connection is established you can explore operations listed below.
 
 ![D_BUCKET](https://github.com/minio/cookbook/blob/master/docs/screenshots/cyberduck/deletebucket.jpg?raw=true)
 
-### 3. Explore Further
+##3. Explore Further
 
 * [Minio Client complete guide](https://docs.minio.io/docs/minio-client-complete-guide)
 * [Cyberduck project homepage](https://cyberduck.io)
