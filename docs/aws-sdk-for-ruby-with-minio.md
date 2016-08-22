@@ -8,7 +8,7 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
  
 ## 2. Installation
 
-Install `aws-sdk` for Ruby from  official docs [here](https://aws.amazon.com/sdk-for-ruby/) 
+Install `aws-sdk` for Ruby from the official AWS Ruby SDK docs [here](https://aws.amazon.com/sdk-for-ruby/) 
 
 ## 3. Example
 
