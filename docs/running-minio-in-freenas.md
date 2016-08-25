@@ -1,11 +1,13 @@
 # How to run Minio in FreeNAS [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Prerequisites
+In this recipe we will learn how to run Minio with FreeNAS. 
+
+## 1. Prerequisites
 
 * You have FreeNAS installed and running, if not follow [install instructions](http://doc.freenas.org/9.10/freenas_install.html)
 * You have a FreeNAS Jail path set, if not follow [jails configuration](http://doc.freenas.org/9.10/freenas_jails.html?highlight=jails#jails-configuration)
 
-## Steps
+## 2. Installation Steps
 
 ### Create a new Jail
 Browse to `Jails -> Add Jail` in the FreeNAS UI, click `Advanced` and enter the following settings:
@@ -124,4 +126,4 @@ Browse to `Jails -> View Jails` in the FreeNAS UI, select `Minio` and press the 
 Browse to `http(s)://<ip_address>:<port>` and confirm Minio loads.
 
 
-#### TODO: Convert this to a Plugin for ease of management
+
