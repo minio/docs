@@ -24,6 +24,7 @@ Bucket created successfully ‘m1/mongobkp’.
 ### Continuously mirror local backup to Minio server.
 
 Continuously mirror ``mongobkp`` folder recursively to Minio. Read more on ``mc mirror`` [here](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 
+
 ```sh
 $ mc mirror --force --remove --watch  mongobkp/ m1/mongobkp
 ```
