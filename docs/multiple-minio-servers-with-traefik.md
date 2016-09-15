@@ -45,10 +45,13 @@ EOF
 ```
 
 Beside the configuration we should also touch the `acme.json` file, this file
-is the storage for the generated certificates.
+is the storage for the generated certificates. This file will also store the
+private keys, so you should set proper permissions to make sure not everybody
+can read the configuration.
 
 ```sh
 touch acme.json
+chmod 640 acme.json
 ```
 
 With those steps we are prepared to launch a Træfɪk container which proxies the
