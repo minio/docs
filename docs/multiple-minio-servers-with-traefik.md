@@ -45,10 +45,13 @@ EOF
 ```
 
 Beside the configuration we should also touch the `acme.json` file, this file
-is the storage for the generated certificates.
+is the storage for the generated certificates. This file will also store the
+private keys, so you should set proper permissions to make sure not everybody
+can read the configuration.
 
 ```sh
 touch acme.json
+chmod 640 acme.json
 ```
 
 With those steps we are prepared to launch a Træfɪk container which proxies the
@@ -125,9 +128,9 @@ After=docker.service
 [Service]
 Restart=always
 
-ExecStop=/bin/sh -c '/usr/bin/docker ps | /usr/bin/grep %p 1> /dev/null && /usr/bin/docker stop %p-%i || true'
-ExecStartPre=/bin/sh -c '/usr/bin/docker ps | /usr/bin/grep %p 1> /dev/null && /usr/bin/docker kill %p-%i || true'
-ExecStartPre=/bin/sh -c '/usr/bin/docker ps -a | /usr/bin/grep %p 1> /dev/null && /usr/bin/docker rm %p-%i || true'
+ExecStop=/bin/sh -c '/usr/bin/docker ps | /usr/bin/grep %p-%i 1> /dev/null && /usr/bin/docker stop %p-%i || true'
+ExecStartPre=/bin/sh -c '/usr/bin/docker ps | /usr/bin/grep %p-%i 1> /dev/null && /usr/bin/docker kill %p-%i || true'
+ExecStartPre=/bin/sh -c '/usr/bin/docker ps -a | /usr/bin/grep %p-%i 1> /dev/null && /usr/bin/docker rm %p-%i || true'
 ExecStartPre=/usr/bin/docker pull minio/minio:latest
 
 ExecStart=/usr/bin/docker run --rm \
