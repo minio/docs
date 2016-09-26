@@ -4,8 +4,8 @@ In this recipe we will learn how to run Minio with FreeNAS.
 
 ## 1. Prerequisites
 
-* You have FreeNAS installed and running, if not follow [install instructions](http://doc.freenas.org/9.10/freenas_install.html)
-* You have a FreeNAS Jail path set, if not follow [jails configuration](http://doc.freenas.org/9.10/freenas_jails.html?highlight=jails#jails-configuration)
+* You have FreeNAS installed and running, if not follow [install instructions](http://doc.freenas.org/9.10/install.html)
+* You have a FreeNAS Jail path set, if not follow [jails configuration](http://doc.freenas.org/9.10/jails.html#jails-configuration)
 
 ## 2. Installation Steps
 
