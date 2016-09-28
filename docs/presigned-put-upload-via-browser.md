@@ -9,7 +9,7 @@ is an annotated example of this using [minio-js](https://github.com/minio/minio-
 ```js
 const Minio = require('minio')
 
-var client = new Minio({
+var client = new Minio.Client({
     endPoint: 'play.minio.io',
     port: 9000,
     secure: true,
