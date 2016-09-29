@@ -16,20 +16,20 @@ _NOTE:_ You can also run Minio in ``HTTPS``, follow this [guide](https://docs.mi
 
 Once CloudBerry Drive installed you can fine out its icon with configuration settings in your tray (right bottom corner, near clock). Fill up the fields accordingly (service point - your server IP with 8000 / 9000 port depends your signature version, access and secret keys can be obtain from running server console). You can activate SSL, but your server should be configured accordingly. Multipart upload allows to split files into multiple chunks and upload them in multiple threads. It is enabled by default.
 
-  ![CloudBerry Drive for S3 compatible](./screenshots/cloudberrylab/cloudberry-drive-storage-minio-configuration.jpg)
+  ![CloudBerry Drive for S3 compatible](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudberrylab/cloudberry-drive-storage-minio-configuration.jpg?raw=true)
 
 ### Add drive
 
 Now, when you have storage account set you can start making drives and map them to your Windows computer (even more you can set it as network share and making available across your corporate network). Pickup your settings accordingly and hit ok to enable drive.
 
-  ![CloudBerry Drive options for mapped drive](./screenshots/cloudberrylab/cloudberry-drive-mapped-drive-settings.jpg)
+  ![CloudBerry Drive options for mapped drive] (https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudberrylab/cloudberry-drive-mapped-drive-settings.jpg?raw=true)
 
 
 ### Check your mapped drive and start manage your files
 
 View your drive and start manage files.
 
-  ![CloudBerry Drive for Minio, view content](./screenshots/cloudberrylab/cloudberry-drive-mapped-disk-show-content.jpg)
+  ![CloudBerry Drive for Minio, view content](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudberrylab/cloudberry-drive-mapped-disk-show-content.jpg?raw=true)
 
 ## 3. Explore Further
 
