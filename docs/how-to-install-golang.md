@@ -6,10 +6,10 @@
 
 This installation document assumes Ubuntu 16.04+ on x86-64 platform.
 
-##### Install Git, GCC
+##### Install Git
 
 ```sh
-$ sudo apt-get install git build-essential
+$ sudo apt-get install git 
 ```
 
 ##### Install Go 1.7+
@@ -18,9 +18,7 @@ Download Go 1.7+ from [https://golang.org/dl/](https://golang.org/dl/).
 
 ```sh
 $ wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
-$ mkdir -p ${HOME}/bin/
-$ mkdir -p ${HOME}/go/
-$ tar -C ${HOME}/bin/ -xzf go1.7.1.linux-amd64.tar.gz
+$ tar -C ${HOME} -xzf go1.7.1.linux-amd64.tar.gz
 ```
 
 ##### Setup GOROOT and GOPATH
@@ -29,9 +27,9 @@ Add the following exports to your ``~/.bashrc``. Environment variable GOROOT spe
 and GOPATH specifies the location of your project workspace.
 
 ```sh
-export GOROOT=${HOME}/bin/go
-export GOPATH=${HOME}/go
-export PATH=${HOME}/bin/go/bin:${GOPATH}/bin:$PATH
+export GOROOT=${HOME}/go
+export GOPATH=${HOME}/work
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```
 ##### Source the new environment
 
@@ -54,14 +52,12 @@ This installation document assumes OS X El Capitan 10.11+ on x86-64 platform.
 
 ##### Install brew
 
-```sh
-$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
+Install brew from [brew.sh](http://brew.sh/)
 
-##### Install Git, Python
+##### Install Git
 
 ```sh
-$ brew install git python
+$ brew install git 
 ```
 
 ##### Install Go 1.7+
@@ -79,7 +75,7 @@ Add the following exports to your ``~/.bash_profile``. Environment variable GORO
 and GOPATH specifies the location of your project workspace.
 
 ```sh
-export GOPATH=${HOME}/go
+export GOPATH=${HOME}/work
 export GOVERSION=$(brew list go | head -n 1 | cut -d '/' -f 6)
 export GOROOT=$(brew --prefix)/Cellar/go/${GOVERSION}/libexec
 export PATH=${GOPATH}/bin:$PATH
