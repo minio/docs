@@ -34,7 +34,7 @@ s3 = boto3.resource('s3',
 
 
 # upload a file from local file system '/home/john/piano.mp3' to bucket 'songs' with 'piano.mp3' as the object name.
-s3.Bucket('songs').upload_file('piano.mp3', '/home/john/piano.mp3')
+s3.Bucket('songs').upload_file('/home/john/piano.mp3','piano.mp3')
 
 # download the object 'piano.mp3' from the bucket 'songs' and save it to local FS as /tmp/classical.mp3
 s3.Bucket('songs').download_file('piano.mp3', '/tmp/classical.mp3')
