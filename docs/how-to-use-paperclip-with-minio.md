@@ -1,18 +1,18 @@
 # How to use Paperclip with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Paperclip is intended as an easy file attachment library for ActiveRecord. In this recipe we will learn how to configure  Minio as Object Storage backend for Paperclip.
-
-Minio can be used to upload contents like images, music and docs with Paperclip as an object storage backend.
+[Paperclip](https://github.com/thoughtbot/paperclip) is intended as an easy file attachment library for ActiveRecord. In this recipe you will learn how to configure  Minio as an object storage backend.
 
 ## 1. Prerequisites
 
-Public Minio server for developers to use as a sandbox is at https://play.minio.io:9000. In this setup bucket ``mytestbucket``, access_key_id ``Q3AM3UQ867SPQQA43P2F``, secret_access_key ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG`` and ``play.minio.io:9000`` as  s3_host_name are used.
+Minio Server is installed and running. Please follow [Minio Quickstart](https://docs.minio.io/docs/minio-quickstart-guide) guide to install.
+
+This recipe uses https://play.minio.io:9000. Play is a hosted Minio server for testing and development purpose only. Play uses access_key_id ``Q3AM3UQ867SPQQA43P2F``, secret_access_key ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``. 
 
 ## 2. Installation 
  
 Install Paperclip from [here](https://github.com/thoughtbot/paperclip)
 
-## 3. Paperclip Configuration
+## 3. Paperclip Storage Configuration
 
 ```ruby
 config.paperclip_defaults = {
@@ -34,4 +34,6 @@ config.paperclip_defaults = {
     path: "/:class/:id.:style.:extension"
   }
 ```
+## 4. Explore Further
+* [Minio Paperclip Application](https://github.com/sadysnaat/minio-paperclip) 
 
