@@ -6,7 +6,7 @@
 
 Minio Server is installed and running. Please follow [Minio Quickstart](https://docs.minio.io/docs/minio-quickstart-guide) guide to install.
 
-This recipe uses https://play.minio.io:9000. Play is a hosted Minio server for testing and development purpose only. Play uses access_key_id ``Q3AM3UQ867SPQQA43P2F``, secret_access_key ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``. 
+This recipe uses https://play.minio.io:9000. Play(demo Version) is a hosted Minio server for testing and development purpose only. Play uses access_key_id ``Q3AM3UQ867SPQQA43P2F``, secret_access_key ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``. 
 
 ## 2. Installation 
  
@@ -35,5 +35,5 @@ config.paperclip_defaults = {
   }
 ```
 ## 4. Explore Further
-* [Minio Paperclip Application](https://github.com/sadysnaat/minio-paperclip) 
+ [Minio Paperclip Application](https://github.com/sadysnaat/minio-paperclip) 
 
