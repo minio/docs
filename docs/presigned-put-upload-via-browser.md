@@ -18,25 +18,22 @@ var client = new Minio.Client({
 })
 ```
 
-Here, we create a new Minio client, which is necessary in order to presign
-an upload URL.
-
-Those are real Minio server credentials — try them out!
+Initialize a Minio client object which is necessary in order to generate
+a presign upload URL.
 
 ```js
 // express is a small HTTP server wrapper, but this works with any HTTP server
 const server = require('express')()
-// uuid.v4() generates a unique identifier for each upload
-const uuid = require('node-uuid')
 
 server.get('/presignedUrl', (req, res) => {
-
-    client.presignedPutObject('uploads', uuid.v4(), (err, url) => {
+    client.presignedPutObject('uploads', req.query.name, (err, url) => {
         if (err) throw err
-
         res.end(url)
     })
+})
 
+server.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
 })
 
 server.listen(8080)
@@ -44,17 +41,13 @@ server.listen(8080)
 
 Here are the docs for [`presignedPutObject`](https://docs.minio.io/docs/javascript-client-api-reference#presignedPutObject).
 
-When a user visits the server, it will respond with a URL that can be used to
-upload a file to S3. Then, using AJAX requests, you can upload a file
-straight from the browser.
-
 ### Client code
 
 This application uses [jQuery](http://jquery.com/).
 
-On the browser, we want to allow the user to select a file for upload, then,
-after retrieving an upload URL from the Node.js server, the user can upload it
-straight to S3.
+On the browser user selects a file to upload, internally this function
+retrieves a URL from the Node.js server. Using `XMLHttpRequest()` this
+using this URL we upload directly to `play.minio.io:9000`.
 
 ```html
 <input type="file" id="selector" multiple>
@@ -62,43 +55,38 @@ straight to S3.
 
 <div id="status">No uploads</div>
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 
-function upload() {
-    let files = $('#selector')[0].files
-    files.forEach(file => {
-        // Retrieve a URL from our server.
-        retrieveNewURL(url => {
-            // Upload the file to the server.
-            uploadFile(file, url)
-        })
-    })
-}
+ function upload() {
+   [$('#selector')[0].files].forEach(fileObj => {
+     var file = fileObj[0]
+     // Retrieve a URL from our server.
+     retrieveNewURL(file, url => {
+       // Upload the file to the server.
+       uploadFile(file, url)
+     })
+   })
+ }
 
-// Request to our Node.js server for an upload URL.
-function retrieveNewURL(cb) {
-    $.get('http://YOUR_SERVER:8080/presignUrl', (url) => {
-        cb(url)
-    })
-}
+ // Request to our Node.js server for an upload URL.
+ function retrieveNewURL(file, cb) {
+   $.get(`/presignedUrl?name=${file.name}`, (url) => {
+     cb(url)
+   })
+ }
 
-// Use AJAX to upload the file to S3.
-function uploadFile(file, url) {
-    let data = new FormData()
-    data.append(file.name, file)
-
-    $.ajax({
-        url: url,
-        method: 'PUT',
-        success: () => {
-            $('#status').text(`Uploaded ${file.name}.`)
-        },
-        processData: false,
-        contentType: false,
-        data
-    })
-}
+ // Use XMLHttpRequest to upload the file to S3.
+ function uploadFile(file, url) {
+     var xhr = new XMLHttpRequest ()
+     xhr.open('PUT', url, true)
+     xhr.send(file)
+     xhr.onload = () => {
+       if (xhr.status == 200) {
+         $('#status').text(`Uploaded ${file.name}.`)
+       }
+     }
+ }
 
 </script>
 ```
