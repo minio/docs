@@ -1,6 +1,6 @@
 # How to use Paperclip with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[Paperclip](https://github.com/thoughtbot/paperclip) is intended as an easy file attachment library for ActiveRecord. In this recipe you will learn how to configure  Minio as an object storage backend.
+[Paperclip](https://github.com/thoughtbot/paperclip) is intended as an easy file attachment library for ActiveRecord. In this recipe you will learn how to configure  Minio as an object storage backend for Paperclip.
 
 ## 1. Prerequisites
 
