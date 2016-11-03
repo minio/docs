@@ -10,6 +10,10 @@ This is home for recipes of related projects and tools to use with Minio.
 
 Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-minio) to get your project or use-case listed under Minio.
 
+### Run markdown linter
+1. npm install
+2. npm run lint
+
 ### List of Recipes
 
 - [Running Deis Workflow with Minio](./docs/running-deis-workflow-with-minio.md)
