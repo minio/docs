@@ -35,8 +35,6 @@ Create a file under the Apache configuration directory, e.g., ``/etc/httpd/conf.
 
     ProxyPass / http://localhost:9000/
     ProxyPassReverse / http://localhost:9000/
-
-    RemoteIPHeader X-Forwarded-For
 </VirtualHost>
 ```
 
