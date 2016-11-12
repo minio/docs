@@ -12,13 +12,41 @@ In this recipe we will learn how to store MongoDB backups in Minio Server.
 
 ## 2. Configuration Steps
 
-Minio server is running using alias ``m1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guid) for details. MongoDB backups are stored in ``mongobkp`` directory.
+Minio server is running using alias ``minio1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guid) for details. MongoDB backups are stored in ``mongobkp`` directory.
 
 ### Create a bucket.
 
 ```sh
-$ mc mb m1/mongobkp
-Bucket created successfully ‘m1/mongobkp’.
+$ mc mb minio1/mongobkp
+Bucket created successfully ‘minio1/mongobkp’.
+```
+
+### Streaming Mongodump Archive to Minio server.
+
+Examples included w/ SSH tunneling & progress.
+
+```sh
+# On a trusted/private network stream db 'blog-data' :
+$ mongodump -h mongo-server1 -p 27017 -d blog-data --archive | mc pipe minio1/mongobkp/backups/mongo-blog-data-`date +%Y-%m-%d`.archive
+```
+
+```sh
+# Securely stream **entire** mongodb server using `--archive` option. encrypted backup.
+# We'll add `ssh s3ish@minio-server.example.com ` to the command from above.
+
+$ mongodump -h mongo-server1 -p 27017 --archive | ssh s3ish@minio-server.example.com mc pipe minio1/mongobkp/full-db-`date +%Y-%m-%d`.archive
+
+
+```
+
+#### Show Progress & Speed Info
+
+We'll add a pipe to the utility `pv`. (Install with either `brew install pv` or `apt-get install -y pv`)
+
+```sh
+mongodump -h mongo-server1 -p 27017 --archive | pv -brat | ssh s3ish@minio-server.example.com mc pipe minio1/mongobkp/full-db-`date +%Y-%m-%d`.archive
+
+
 ```
 
 ### Continuously mirror local backup to Minio server.
@@ -26,6 +54,6 @@ Bucket created successfully ‘m1/mongobkp’.
 Continuously mirror ``mongobkp`` folder recursively to Minio. Read more on ``mc mirror`` [here](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 
 
 ```sh
-$ mc mirror --force --remove --watch  mongobkp/ m1/mongobkp
+$ mc mirror --force --remove --watch  mongobkp/ minio1/mongobkp
 ```
 
