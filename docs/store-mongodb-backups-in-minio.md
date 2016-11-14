@@ -2,13 +2,11 @@
 
 In this recipe we will learn how to store MongoDB backups in Minio Server.
 
-
 ## 1. Prerequisites
 
 * Install mc from [here](https://docs.minio.io/docs/minio-client-quickstart-guide).
 * Install Minio Server from [here](https://docs.minio.io/docs/minio ).
-* MongoDB official [doc](https://docs.mongodb.com/). 
- 
+* MongoDB official [doc](https://docs.mongodb.com/).
 
 ## 2. Configuration Steps
 
@@ -23,20 +21,18 @@ Bucket created successfully ‘minio1/mongobkp’.
 
 ### Streaming Mongodump Archive to Minio server.
 
-Examples included w/ SSH tunneling & progress.
+Examples included w/ SSH tunneling & progress bar.
+
+On a trusted/private network stream db 'blog-data' :
 
 ```sh
-# On a trusted/private network stream db 'blog-data' :
 $ mongodump -h mongo-server1 -p 27017 -d blog-data --archive | mc pipe minio1/mongobkp/backups/mongo-blog-data-`date +%Y-%m-%d`.archive
 ```
 
+Securely stream **entire** mongodb server using `--archive` option. encrypted backup. We'll add `ssh user@minio-server.example.com ` to the command from above.
+
 ```sh
-# Securely stream **entire** mongodb server using `--archive` option. encrypted backup.
-# We'll add `ssh s3ish@minio-server.example.com ` to the command from above.
-
-$ mongodump -h mongo-server1 -p 27017 --archive | ssh s3ish@minio-server.example.com mc pipe minio1/mongobkp/full-db-`date +%Y-%m-%d`.archive
-
-
+$ mongodump -h mongo-server1 -p 27017 --archive | ssh user@minio-server.example.com mc pipe minio1/mongobkp/full-db-`date +%Y-%m-%d`.archive
 ```
 
 #### Show Progress & Speed Info
@@ -44,9 +40,7 @@ $ mongodump -h mongo-server1 -p 27017 --archive | ssh s3ish@minio-server.example
 We'll add a pipe to the utility `pv`. (Install with either `brew install pv` or `apt-get install -y pv`)
 
 ```sh
-mongodump -h mongo-server1 -p 27017 --archive | pv -brat | ssh s3ish@minio-server.example.com mc pipe minio1/mongobkp/full-db-`date +%Y-%m-%d`.archive
-
-
+$ mongodump -h mongo-server1 -p 27017 --archive | pv -brat | ssh user@minio-server.example.com mc pipe minio1/mongobkp/full-db-`date +%Y-%m-%d`.archive
 ```
 
 ### Continuously mirror local backup to Minio server.
