@@ -76,7 +76,7 @@ multi-tenant solution. That way you are able to launch multiple Minio instances
 with different credentials that get routed automatically by Træfɪk.
 
 We will launch the Minio instances with volume mounts from the host system. If
-you prefer data containers please take a look at the [Minio Docker cookbook](running-minio-in-docker.md).
+you prefer data containers please take a look at the [Minio Docker quickstart guide](https://docs.minio.io/docs/minio-docker-quickstart-guide).
 
 ```sh
 for i in $(seq 1 5); do
