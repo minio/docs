@@ -10,7 +10,7 @@ In this recipe you will learn how to store PostgreSQL backups in Minio Server.
  
 ## 2. Configuration Steps
 
-Minio server is running using alias ``m1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guid) for details. PostgreSQL  backups are stored in ``pgsqlbkp`` directory.
+Minio server is running using alias ``m1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guide) for details. PostgreSQL  backups are stored in ``pgsqlbkp`` directory.
 
 ### Create a bucket.
 
