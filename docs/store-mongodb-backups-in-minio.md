@@ -10,7 +10,7 @@ In this recipe we will learn how to store MongoDB backups in Minio Server.
 
 ## 2. Configuration Steps
 
-Minio server is running using alias ``minio1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guid) for details. MongoDB backups are stored in ``mongobkp`` directory.
+Minio server is running using alias ``minio1``. Follow Minio client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guide) for details. MongoDB backups are stored in ``mongobkp`` directory.
 
 ### Create a bucket.
 
