@@ -18,7 +18,7 @@ Please replace ``host``, ``endpoint``, ``access_key_id``, ``secret_access_key``,
 Example below shows put_object() and get_object() operations on Minio server using `fog-aws Ruby`.
 
 ```ruby
-require 'fog-aws'
+require 'fog/aws'
 
 connection = Fog::Storage.new({
     provider:              'AWS',                        # required
