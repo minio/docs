@@ -18,7 +18,7 @@ Encrypt and to configure the Docker backend. Incoming traffic via HTTP gets
 automatically redirected to HTTPS and the certificates are getting created on
 demand by the integrated Let's Encrypt support.
 
-```sh
+```
 cat << EOF > traefik.toml
 defaultEntryPoints = ["http", "https"]
 
@@ -49,7 +49,7 @@ is the storage for the generated certificates. This file will also store the
 private keys, so you should set proper permissions to make sure not everybody
 can read the configuration.
 
-```sh
+```
 touch acme.json
 chmod 640 acme.json
 ```
@@ -57,7 +57,7 @@ chmod 640 acme.json
 With those steps we are prepared to launch a Træfɪk container which proxies the
 incoming traffic.
 
-```sh
+```
 docker run -d \
   --restart always \
   --name traefik \
@@ -78,7 +78,7 @@ with different credentials that get routed automatically by Træfɪk.
 We will launch the Minio instances with volume mounts from the host system. If
 you prefer data containers please take a look at the [Minio Docker quickstart guide](https://docs.minio.io/docs/minio-docker-quickstart-guide).
 
-```sh
+```
 for i in $(seq 1 5); do
 	mkdir -p $(pwd)/minio${i}/{export,config}
 
@@ -96,7 +96,7 @@ done
 To test the launched instances you can take curl, that way you can verify that
 the instances are really launched correctly.
 
-```sh
+```
 curl -H Host:minio-1.example.com http://127.0.0.1
 ```
 
@@ -118,7 +118,7 @@ start new instances with `systemctl start minio@server1`,
 `systemctl start minio@server2`, `systemctl start minio@server3` and the
 instances will be available at `server1.example.com` and so on.
 
-```sh
+```
 [Unit]
 Description=Minio: %i
 

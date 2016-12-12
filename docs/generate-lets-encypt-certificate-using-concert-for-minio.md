@@ -21,7 +21,7 @@ In this recipe, we will generate a Let's Encypt certificate using Concert. This 
 
 ### Step 1: Install concert as shown below.
 
-```sh
+```
 
 $ go get -u github.com/minio/concert
 
@@ -31,7 +31,7 @@ $ go get -u github.com/minio/concert
 ### Step 2: Generate Let's Encrypt cert.
 
 
-```sh
+```
 
 $ sudo concert gen --dir my-certs admin@churchofminio.com churchofminio.com
 2016/04/04 07:10:01 Generated certificates for churchofminio.com under my-certs will expire in 89 days.
@@ -42,7 +42,7 @@ $ sudo concert gen --dir my-certs admin@churchofminio.com churchofminio.com
 
 List certs saved in `my-certs` directory.
 
-```sh
+```
 
 $ ls -l my-certs/
 total 12
@@ -56,7 +56,7 @@ total 12
 
 The generated keys via Concert needs to be placed inside users home directory at ``${HOME}/.minio/certs``
 
-```sh
+```
 
 $ cp my-certs/private.key /home/supernova/.minio/certs/
 $ cp my-certs/public.crt /home/supernova/.minio/certs/
@@ -65,7 +65,7 @@ $ cp my-certs/public.crt /home/supernova/.minio/certs/
 
 ### Step 5: Change ownership of certificates.
 
-```sh
+```
 
 $ sudo chown supernova:supernova /home/supernova/.minio/certs/private.key
 $ sudo chown supernova:supernova /home/supernova/.minio/certs/public.crt
@@ -76,7 +76,7 @@ $ sudo chown supernova:supernova /home/supernova/.minio/certs/public.crt
 
 Start Minio Server as shown below.
 
-```sh
+```
 
 $ ./minio server export/
 

@@ -56,7 +56,7 @@ print "Downloaded 'testobject' as  #{download_testobject}."
 
 ## 4. Run the Program
 
-```sh
+```
 $ ruby example.rb
 Downloaded 'testobject' as  Hello from Minio!!.
 ```

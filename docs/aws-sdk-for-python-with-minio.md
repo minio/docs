@@ -45,7 +45,7 @@ print "Downloaded 'piano.mp3' as  'classical.mp3'. "
 
 ## 4. Run the Program
 
-```sh
+```
 $ python example.py
 Downloaded 'piano.mp3' as  'classical.mp3'.
 ```

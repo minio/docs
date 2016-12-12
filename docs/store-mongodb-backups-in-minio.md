@@ -14,7 +14,7 @@ Minio server is running using alias ``minio1``. Follow Minio client complete gui
 
 ### Create a bucket.
 
-```sh
+```
 $ mc mb minio1/mongobkp
 Bucket created successfully ‘minio1/mongobkp’.
 ```
@@ -25,13 +25,13 @@ Examples included w/ SSH tunneling & progress bar.
 
 On a trusted/private network stream db 'blog-data' :
 
-```sh
+```
 $ mongodump -h mongo-server1 -p 27017 -d blog-data --archive | mc pipe minio1/mongobkp/backups/mongo-blog-data-`date +%Y-%m-%d`.archive
 ```
 
 Securely stream **entire** mongodb server using `--archive` option. encrypted backup. We'll add `ssh user@minio-server.example.com ` to the command from above.
 
-```sh
+```
 $ mongodump -h mongo-server1 -p 27017 --archive | ssh user@minio-server.example.com mc pipe minio1/mongobkp/full-db-`date +%Y-%m-%d`.archive
 ```
 
@@ -39,7 +39,7 @@ $ mongodump -h mongo-server1 -p 27017 --archive | ssh user@minio-server.example.
 
 We'll add a pipe to the utility `pv`. (Install with either `brew install pv` or `apt-get install -y pv`)
 
-```sh
+```
 $ mongodump -h mongo-server1 -p 27017 --archive | pv -brat | ssh user@minio-server.example.com mc pipe minio1/mongobkp/full-db-`date +%Y-%m-%d`.archive
 ```
 
@@ -47,7 +47,7 @@ $ mongodump -h mongo-server1 -p 27017 --archive | pv -brat | ssh user@minio-serv
 
 Continuously mirror ``mongobkp`` folder recursively to Minio. Read more on ``mc mirror`` [here](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 
 
-```sh
+```
 $ mc mirror --force --remove --watch  mongobkp/ minio1/mongobkp
 ```
 

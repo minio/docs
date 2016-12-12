@@ -19,7 +19,7 @@ To configure AWS CLI, type `aws configure` and specify the Minio key information
 Access credentials shown in this example belong to https://play.minio.io:9000.
 These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
 
-```sh
+```
 
 $ aws configure
 AWS Access Key ID [None]: Q3AM3UQ867SPQQA43P2F
@@ -31,7 +31,7 @@ Default output format [None]: ENTER
 
 Additionally enable AWS Signature Version '4' for Minio server.
 
-```sh
+```
 
 $ aws configure set default.s3.signature_version s3v4
 
@@ -41,7 +41,7 @@ $ aws configure set default.s3.signature_version s3v4
  
 ### To list your buckets
 
-```sh
+```
 
 $ aws --endpoint-url https://play.minio.io:9000 s3 ls
 2016-03-27 02:06:30 deebucket
@@ -54,7 +54,7 @@ $ aws --endpoint-url https://play.minio.io:9000 s3 ls
 
 ### To list contents inside bucket
 
-```sh
+```
 
 $ aws --endpoint-url https://play.minio.io:9000 s3 ls s3://mybucket
 2016-03-30 00:26:53      69297 argparse-1.2.1.tar.gz
@@ -64,7 +64,7 @@ $ aws --endpoint-url https://play.minio.io:9000 s3 ls s3://mybucket
 
 ### To make a bucket
 
-```sh
+```
 
 $ aws --endpoint-url https://play.minio.io:9000 s3 mb s3://mybucket
 make_bucket: s3://mybucket/
@@ -73,7 +73,7 @@ make_bucket: s3://mybucket/
 
 ### To add an object to a bucket
 
-```sh
+```
 
 $ aws --endpoint-url https://play.minio.io:9000 s3 cp simplejson-3.3.0.tar.gz s3://mybucket
 upload: ./simplejson-3.3.0.tar.gz to s3://mybucket/simplejson-3.3.0.tar.gz
@@ -82,7 +82,7 @@ upload: ./simplejson-3.3.0.tar.gz to s3://mybucket/simplejson-3.3.0.tar.gz
 
 ### To delete an object from a bucket
 
-```sh
+```
 
 $ aws --endpoint-url https://play.minio.io:9000 s3 rm s3://mybucket/argparse-1.2.1.tar.gz
 delete: s3://mybucket/argparse-1.2.1.tar.gz
@@ -91,7 +91,7 @@ delete: s3://mybucket/argparse-1.2.1.tar.gz
 
 ### To remove a bucket
 
-```sh
+```
 
 $ aws --endpoint-url https://play.minio.io:9000 s3 rb s3://mybucket
 remove_bucket: s3://mybucket/

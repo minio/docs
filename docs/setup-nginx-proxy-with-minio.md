@@ -16,7 +16,7 @@ Install Nginx from [here](http://nginx.org/en/download.html).
 
 Add  below content as a file ``/etc/nginx/sites-enabled``  and also remove the existing ``default`` file in same directory.
 
-```sh
+```
 
 server {
  listen 80;
@@ -38,7 +38,7 @@ Note:
 
 ### Step 1: Start Minio server. 
 
-```sh
+```
 
 $ minio server /mydatadir
 
@@ -46,7 +46,7 @@ $ minio server /mydatadir
 
 ### Step 2: Restart Nginx server.
 
-```sh
+```
 
 $ sudo service nginx restart
 

@@ -53,7 +53,7 @@ send();
 
 ## 4. Run the Program
 
-```sh
+```
 $ node example.js
 Successfully uploaded data to testbucket/testobject
 ```

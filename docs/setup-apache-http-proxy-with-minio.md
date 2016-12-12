@@ -19,7 +19,7 @@ You can also use your OS repositories (e.g. yum, apt-get).
 
 Create a file under the Apache configuration directory, e.g., ``/etc/httpd/conf.d/minio-vhost.conf``
 
-```sh
+```
 <VirtualHost *:80>
     ServerName example.com
     ErrorLog /var/log/httpd/example.com-error.log
@@ -46,12 +46,12 @@ Note:
 
 ### Step 2: Start Minio server. 
 
-```sh
+```
 $ minio server /mydatadir
 ```
 
 ### Step 3: Restart Apache HTTP server.
 
-```sh
+```
 $ sudo service httpd restart
 ```
