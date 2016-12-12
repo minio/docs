@@ -16,7 +16,7 @@ Install Caddy Server from [here](https://caddyserver.com/download).
 
 Create a caddy configuration file as below, change the ip addresses according to your local minio and DNS configuration.
 
-```sh
+```
 
 your.public.com 
 
@@ -33,7 +33,7 @@ proxy / localhost:9000 {
 ### Step 1: Start `minio` server.
 
 
-```sh
+```
 
 $ ./minio --address localhost:9000 server <your_export_dir>
 
@@ -41,7 +41,7 @@ $ ./minio --address localhost:9000 server <your_export_dir>
 
 ### Step 2: Start `caddy` server.
 
-```sh
+```
 
 $ ./caddy
 Activating privacy features... done.

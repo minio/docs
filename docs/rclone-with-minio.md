@@ -18,7 +18,7 @@ Next install Rclone from [rclone.org](http://rclone.org).
 
 When it configures itself Minio will print something like this
 
-```sh
+```
 
 Endpoint:  http://10.0.0.3:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
 AccessKey: USWUXHGYZQYFYFFIT3RE
@@ -47,7 +47,7 @@ else) of type `S3` and enter the details above something like this:
 
 (Note that it is important to put the region in as stated above.)
 
-```sh
+```
 
 env_auth> 1
 access_key_id> USWUXHGYZQYFYFFIT3RE
@@ -61,7 +61,7 @@ server_side_encryption>
 
 Which makes the config file look like this
 
-```sh
+```
 
 [minio]
 env_auth = false

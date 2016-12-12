@@ -21,7 +21,7 @@ These credentials are open to public. Feel free to use this service for testing 
 
 Edit the following fields in your s3cmd configuration file `~/.s3cfg`
 
-```sh
+```
 
 # Setup endpoint
 host_base = play.minio.io:9000
@@ -42,7 +42,7 @@ signature_v2 = False
 
 ### To make a bucket
 
-```sh
+```
 
 $ s3cmd mb s3://mybucket
 Bucket 's3://mybucket/' created
@@ -51,7 +51,7 @@ Bucket 's3://mybucket/' created
 
 ### To copy an object to bucket
 
-```sh
+```
 
 $ s3cmd put newfile s3://testbucket
 upload: 'newfile' -> 's3://testbucket/newfile'  
@@ -60,7 +60,7 @@ upload: 'newfile' -> 's3://testbucket/newfile'
 
 ### To copy an object to local system
 
-```sh
+```
 
 $ s3cmd get s3://testbucket/newfile
 download: 's3://testbucket/newfile' -> './newfile'
@@ -69,7 +69,7 @@ download: 's3://testbucket/newfile' -> './newfile'
 
 ### To sync local file/directory to a bucket
 
-```sh
+```
 
 $ s3cmd sync newdemo s3://testbucket
 upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
@@ -78,7 +78,7 @@ upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
 
 ### To sync bucket or object with local filesystem
 
-```sh
+```
 
 $ s3cmd sync  s3://testbucket otherlocalbucket
 download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
@@ -87,7 +87,7 @@ download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
 
 ### To list buckets
 
-```sh
+```
 
 $ s3cmd ls s3://
 2015-12-09 16:12  s3://testbbucket
@@ -96,7 +96,7 @@ $ s3cmd ls s3://
 
 ### To list contents inside bucket
 
-```sh
+```
 
 $ s3cmd ls s3://testbucket/
                                       DIR   s3://testbucket/test/
@@ -106,7 +106,7 @@ $ s3cmd ls s3://testbucket/
 
 ### To delete an object from bucket
 
-```sh
+```
 
 $ s3cmd del s3://testbucket/newfile
 delete: 's3://testbucket/newfile'
@@ -115,7 +115,7 @@ delete: 's3://testbucket/newfile'
 
 ### To delete a bucket
 
-```sh
+```
 
 $ s3cmd rb s3://mybucket
 Bucket 's3://mybucket/' removed

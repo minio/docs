@@ -95,7 +95,7 @@ func main() {
 
 ## 4. Run the Program
 
-```sh
+```
 $ go run example.go
 Successfully created bucket newbucket and uploaded data with key testobject
 Downloaded file testobject_local 18 bytes

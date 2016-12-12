@@ -16,7 +16,7 @@ Install restic from [https://restic.github.io](https://restic.github.io).
 
 Set Minio credentials in the environment variables as shown below.
 
-```sh
+```
 
 $ export AWS_ACCESS_KEY_ID=<YOUR-ACCESS-KEY-ID>
 $ export AWS_SECRET_ACCESS_KEY= <YOUR-SECRET-ACCESS-KEY>
@@ -27,7 +27,7 @@ $ export AWS_SECRET_ACCESS_KEY= <YOUR-SECRET-ACCESS-KEY>
 
 Start `restic` and point it to the bucket where the backup data will reside.
 
-```sh
+```
 
 $ ./restic -r s3:http://localhost:9000/resticbucket init
 
@@ -35,7 +35,7 @@ $ ./restic -r s3:http://localhost:9000/resticbucket init
 
 Copy backups from the local machine to the bucket on Minio server.  
 
-```sh
+```
 
 $  ./restic -r s3:http://localhost:9000/resticbucket backup /home/minio/workdir/Docs/
 enter password for repository:
