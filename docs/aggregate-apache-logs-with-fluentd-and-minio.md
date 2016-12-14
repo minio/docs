@@ -21,7 +21,7 @@ This is the bucket where fluentd will aggregate semi-structured apache logs in r
 
 ```sh
 
-$ mc mb myminio/fluentd
+mc mb myminio/fluentd
 Bucket created successfully ‘myminio/fluentd’.
 
 ```
@@ -72,7 +72,7 @@ sudo /etc/init.d/td-agent restart
 
 ```sh
 
-$ tail -f /var/log/td-agent/td-agent.log
+tail -f /var/log/td-agent/td-agent.log
     path logs/
     force_path_style true
     buffer_path /var/log/td-agent/s3
@@ -93,7 +93,7 @@ Ping the Apache server. This example uses the ab (Apache Bench) program.
 
 ```sh
 
-$ ab -n 100 -c 10 http://localhost/
+ab -n 100 -c 10 http://localhost/
 
 ```
 
@@ -103,7 +103,7 @@ Minio server's fluent bucket should show the aggregated logs.
 
 ```sh
 
-$ mc ls myminio/fluentd/logs/
+mc ls myminio/fluentd/logs/
 [2016-05-03 18:47:13 IST]   570B 201605031306_0.gz
 [2016-05-03 18:58:14 IST]   501B 201605031317_0.gz
 

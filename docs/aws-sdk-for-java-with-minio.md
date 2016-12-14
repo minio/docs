@@ -112,7 +112,7 @@ public class S3Sample {
 ## 4. Run the Program
 
 ```sh
-$ ant
+ant
 Buildfile: /home/ubuntu/aws-java-sdk-1.11.43/samples/AmazonS3/build.xml
 
 run:

@@ -54,7 +54,7 @@ send();
 ## 4. Run the Program
 
 ```sh
-$ node example.js
+node example.js
 Successfully uploaded data to testbucket/testobject
 ```
 ## 5. Explore Further

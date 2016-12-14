@@ -17,7 +17,7 @@ Minio server is running using alias ``m1``. Follow Minio client complete guide [
 ### Create a bucket.
 
 ```sh
-$ mc mb m1/mysqlbkp
+mc mb m1/mysqlbkp
 Bucket created successfully ‘m1/mysqlbkp’.
 ```
 
@@ -26,6 +26,6 @@ Bucket created successfully ‘m1/mysqlbkp’.
 Continuously mirror ``mysqlbkp`` folder recursively to Minio. Read more on ``mc mirror`` [here](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 
 
 ```sh
-$ mc mirror --force --remove --watch mysqlbkp/ m1/mysqlbkp
+mc mirror --force --remove --watch mysqlbkp/ m1/mysqlbkp
 ```
 

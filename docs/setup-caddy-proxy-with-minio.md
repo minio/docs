@@ -35,7 +35,7 @@ proxy / localhost:9000 {
 
 ```sh
 
-$ ./minio --address localhost:9000 server <your_export_dir>
+./minio --address localhost:9000 server <your_export_dir>
 
 ```
 
@@ -43,7 +43,7 @@ $ ./minio --address localhost:9000 server <your_export_dir>
 
 ```sh
 
-$ ./caddy
+./caddy
 Activating privacy features... done.
 your.public.com:443
 your.public.com:80
