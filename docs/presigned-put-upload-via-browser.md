@@ -19,7 +19,7 @@ var client = new Minio.Client({
 ```
 
 Initialize a Minio client object which is necessary in order to generate
-a presign upload URL.
+a presigned upload URL.
 
 ```js
 // express is a small HTTP server wrapper, but this works with any HTTP server

@@ -57,7 +57,7 @@ echo $retrive['Body'];
 ## 4. Run the Program
 
 ```sh
-$ php example.php
+php example.php
 Hello from Minio!!
 
 ```

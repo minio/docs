@@ -57,10 +57,9 @@ print "Downloaded 'testobject' as  #{download_testobject}."
 ## 4. Run the Program
 
 ```sh
-$ ruby example.rb
+ruby example.rb
 Downloaded 'testobject' as  Hello from Minio!!.
 ```
 ## 5. Explore Further
 
 * [RoR Resume Uploader App](https://docs.minio.io/docs/ror-resume-uploader-app)
- 

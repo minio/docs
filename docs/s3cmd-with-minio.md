@@ -44,7 +44,7 @@ signature_v2 = False
 
 ```sh
 
-$ s3cmd mb s3://mybucket
+s3cmd mb s3://mybucket
 Bucket 's3://mybucket/' created
 
 ```
@@ -53,7 +53,7 @@ Bucket 's3://mybucket/' created
 
 ```sh
 
-$ s3cmd put newfile s3://testbucket
+s3cmd put newfile s3://testbucket
 upload: 'newfile' -> 's3://testbucket/newfile'  
 
 ```
@@ -62,7 +62,7 @@ upload: 'newfile' -> 's3://testbucket/newfile'
 
 ```sh
 
-$ s3cmd get s3://testbucket/newfile
+s3cmd get s3://testbucket/newfile
 download: 's3://testbucket/newfile' -> './newfile'
 
 ```
@@ -71,7 +71,7 @@ download: 's3://testbucket/newfile' -> './newfile'
 
 ```sh
 
-$ s3cmd sync newdemo s3://testbucket
+s3cmd sync newdemo s3://testbucket
 upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
 
 ```
@@ -80,7 +80,7 @@ upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
 
 ```sh
 
-$ s3cmd sync  s3://testbucket otherlocalbucket
+s3cmd sync  s3://testbucket otherlocalbucket
 download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
 
 ```
@@ -89,7 +89,7 @@ download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
 
 ```sh
 
-$ s3cmd ls s3://
+s3cmd ls s3://
 2015-12-09 16:12  s3://testbbucket
 
 ```
@@ -98,7 +98,7 @@ $ s3cmd ls s3://
 
 ```sh
 
-$ s3cmd ls s3://testbucket/
+s3cmd ls s3://testbucket/
                                       DIR   s3://testbucket/test/
 2015-12-09 16:05    138504   s3://testbucket/newfile
 
@@ -108,7 +108,7 @@ $ s3cmd ls s3://testbucket/
 
 ```sh
 
-$ s3cmd del s3://testbucket/newfile
+s3cmd del s3://testbucket/newfile
 delete: 's3://testbucket/newfile'
 
 ```
@@ -117,7 +117,7 @@ delete: 's3://testbucket/newfile'
 
 ```sh
 
-$ s3cmd rb s3://mybucket
+s3cmd rb s3://mybucket
 Bucket 's3://mybucket/' removed
 
 ```

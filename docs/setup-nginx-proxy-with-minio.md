@@ -40,7 +40,7 @@ Note:
 
 ```sh
 
-$ minio server /mydatadir
+minio server /mydatadir
 
 ```
 
@@ -48,6 +48,6 @@ $ minio server /mydatadir
 
 ```sh
 
-$ sudo service nginx restart
+sudo service nginx restart
 
 ```

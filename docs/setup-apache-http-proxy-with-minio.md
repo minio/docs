@@ -47,11 +47,11 @@ Note:
 ### Step 2: Start Minio server. 
 
 ```sh
-$ minio server /mydatadir
+minio server /mydatadir
 ```
 
 ### Step 3: Restart Apache HTTP server.
 
 ```sh
-$ sudo service httpd restart
+sudo service httpd restart
 ```
