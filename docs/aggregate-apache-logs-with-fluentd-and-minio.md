@@ -1,4 +1,4 @@
-# Aggregate Apache Logs with fluentd plugin to Minio [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Aggregate Apache Logs with fluentd plugin for Minio [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 In this recipe, we will learn how to use Minio as log aggregator for fluentd using `fluent-plugin-s3` plugin.
 
