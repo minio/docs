@@ -1,4 +1,4 @@
-# Setup Nginx proxy with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Setup Nginx proxy with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 Nginx is an open source Web server and a reverse proxy server.  
 

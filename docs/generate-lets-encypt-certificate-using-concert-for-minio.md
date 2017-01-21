@@ -1,4 +1,4 @@
-# Generate Let's Encrypt certificate using Concert for Minio [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Generate Let's Encrypt certificate using Concert for Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 [Let’s Encrypt ](https://letsencrypt.org/) is a new free, automated, and open source, Certificate Authority.
 

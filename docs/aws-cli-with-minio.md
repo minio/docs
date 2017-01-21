@@ -1,4 +1,4 @@
-# AWS CLI with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# AWS CLI with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 AWS CLI is a unified tool to manage AWS services. It is frequently the tool used to transfer data in and out of AWS S3. It works with any S3 compatible cloud storage service. 
 

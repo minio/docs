@@ -1,4 +1,4 @@
-# How to use AWS SDK for Python with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to use AWS SDK for Python with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `aws-sdk-python` is the official AWS SDK for the Python programming language. In this recipe we will learn how to use `aws-sdk-python` with Minio server.
 

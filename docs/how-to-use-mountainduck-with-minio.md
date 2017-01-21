@@ -1,4 +1,4 @@
-# How to use Mountain Duck with Minio [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to use Mountain Duck with Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 In this recipe you will learn how to carry out basic operations on Minio using Mountain Duck. Mountain Duck lets you mount server and cloud storage as a local disk in the Finder.app on Mac and the File Explorer on Windows. It is released under the GPL license v2.0. 
 
