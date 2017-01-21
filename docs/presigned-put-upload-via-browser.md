@@ -1,4 +1,4 @@
-# Upload files from browser using pre-signed URLs [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Upload files from browser using pre-signed URLs [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 Using presigned URLs, you can allow a browser to upload a file
 directly to S3 without exposing your S3 credentials to the user. The following

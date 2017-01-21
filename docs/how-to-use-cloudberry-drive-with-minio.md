@@ -1,4 +1,4 @@
-# How to use CloudBerry Drive with Minio [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cloudberry-lab/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to use CloudBerry Drive with Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 In this short article you will learn how to mount your Minio object storage as disk in Windows Operating system. This is useful to share files between people.
 

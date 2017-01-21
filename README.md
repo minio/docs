@@ -1,4 +1,4 @@
-# Minio Cookbook [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Minio Cookbook [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 This is home for recipes of related projects and tools to use with Minio.
 

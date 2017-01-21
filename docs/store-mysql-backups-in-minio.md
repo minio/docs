@@ -1,4 +1,4 @@
-# Store MySQL Backups in Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Store MySQL Backups in Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 In this recipe we will learn how to store MySQL backups in Minio Server.
 

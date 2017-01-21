@@ -1,4 +1,4 @@
-# S3cmd with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# S3cmd with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `S3cmd` is a CLI client for managing data in AWS S3, Google Cloud Storage or any cloud storage service provider that uses the s3 protocol.  `S3cmd` is open source and is distributed under the GPLv2 license.
 

@@ -1,4 +1,4 @@
-# restic with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# restic with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `restic` is a fast, efficient and secure backup tool. It is an open source project available under ``BSD 2-Clause License``.
 

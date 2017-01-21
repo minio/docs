@@ -1,4 +1,4 @@
-# How to use Cyberduck with Minio [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to use Cyberduck with Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 In this document you will learn how to carry out basic operations on Minio using Cyberduck. Cyberduck is an open source client for FTP and SFTP, WebDAV, OpenStack Swift, and Amazon S3, available for Mac OS X and Windows. It is released  under the GPL license v2.0.  
 
