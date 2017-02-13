@@ -1,0 +1,29 @@
+{
+  "name": "cookbook",
+  "version": "1.0.0",
+  "description": "Minio Cookbook",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minio/cookbook.git"
+  },
+  "author": "Minio, Inc.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/minio/cookbook/issues"
+  },
+  "homepage": "https://github.com/minio/cookbook",
+  "scripts": {
+    "lint": "remark ."
+  },
+  "remarkConfig": {
+    "presets": ["lint-recommended"]
+  },
+  "dependencies": {
+    "remark-cli": "^2.1.0",
+    "remark-lint": "^5.2.0",
+    "remark-preset-lint-recommended": "^1.0.0"
+  }
+}
