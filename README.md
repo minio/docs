@@ -37,4 +37,5 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [How to use AWS SDK for Python with Minio Server](./docs/aws-sdk-for-python-with-minio.md)
 - [How to use AWS SDK for Ruby with Minio Server](./docs/aws-sdk-for-ruby-with-minio.md)
 - [How to use AWS SDK for Javascript with Minio Server](./docs/aws-sdk-for-javascript-with-minio.md)
+- [How to use AWS SDK for DotNet with Minio Server](./docs/aws-sdk-for-dotnet-with-minio.md)
 - [How to use CloudBerry Drive with Minio](./docs/how-to-use-cloudberry-drive-with-minio.md)
