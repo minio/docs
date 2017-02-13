@@ -5,21 +5,23 @@
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
+
 Install Visual Studio 2015 or Visual Studio 2017. Find installation of Visual Studio 2015 Community edition [here](https://www.visualstudio.com/downloads/).
  
 ## 2. Installation
 
 `aws-sdk-dotnet` installation is available as [Nuget package](https://www.nuget.org/packages/AWSSDK.S3/). This package contains only libraries that are necessary for work with AWS S3. 
 Installation of the Nuget package is performed using "Manage Nuget Packages..." UI or by using Nuget Manager Console by typing ``Install-Package AWSSDK.S3``. The installation will automatically download the library for the .NET platform which is compatible with your project. The package exists for .NET Frameworks 3.5 and 4.5 and also for .NET Core 1.1.
-The older (version 2) package is also [available](https://www.nuget.org/packages/AWSSDK/), but it delivers _all_ libraries and not only S3 specific modules.
+
+The older (version 2) package is also [available](https://www.nuget.org/packages/AWSSDK/), but it is not recommended for use since it downloads _all_ AWS SDK libraries and not only the S3 module.
 
 ## 3. Example
 
-The example is intended to run under VisualStudio development environment. Create a simple console project and replace ``Program.cs`` with code below and update ``ServiceURL``,``accessKey``,``secretKey``,``bucketName`` and ``keyName`` with your local setup. 
+The example code should be copied instead of the generated code in the ``Program.cs`` file. Create a console project in Visual Studio IDE and replace the generated ``Program.cs`` with the code below. Update ``ServiceURL``,``accessKey`` and ``secretKey`` with information that matching your Minio server setup. 
 
-Example below shows getting a list of buckets and objects from Minio server using aws-sdk-dotnet.
+The example prints all buckets in the Minio server and lists all objects of the first bucket using `aws-sdk-dotnet`.
 
-```dotnet
+```csharp
 using Amazon.S3;
 using System;
 
@@ -56,7 +58,6 @@ class Program
         }
     }
 }
-
 ```
 The above example is using asynchronous API synchronously for the matter of example. The ``AmazonS3Config`` setting ``ForcePathStyle = true`` is essential in order to work correctly with Minio server.
 
