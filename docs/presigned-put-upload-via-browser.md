@@ -1,4 +1,4 @@
-# Upload files from browser using pre-signed URLs [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Upload files from browser using pre-signed URLs [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 Using presigned URLs, you can allow a browser to upload a file
 directly to S3 without exposing your S3 credentials to the user. The following
@@ -19,7 +19,7 @@ var client = new Minio.Client({
 ```
 
 Initialize a Minio client object which is necessary in order to generate
-a presign upload URL.
+a presigned upload URL.
 
 ```js
 // express is a small HTTP server wrapper, but this works with any HTTP server

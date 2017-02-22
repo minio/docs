@@ -1,4 +1,4 @@
-# restic with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# restic with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `restic` is a fast, efficient and secure backup tool. It is an open source project available under ``BSD 2-Clause License``.
 
@@ -18,8 +18,8 @@ Set Minio credentials in the environment variables as shown below.
 
 ```sh
 
-$ export AWS_ACCESS_KEY_ID=<YOUR-ACCESS-KEY-ID>
-$ export AWS_SECRET_ACCESS_KEY= <YOUR-SECRET-ACCESS-KEY>
+export AWS_ACCESS_KEY_ID=<YOUR-ACCESS-KEY-ID>
+export AWS_SECRET_ACCESS_KEY= <YOUR-SECRET-ACCESS-KEY>
 
 ```
 
@@ -29,7 +29,7 @@ Start `restic` and point it to the bucket where the backup data will reside.
 
 ```sh
 
-$ ./restic -r s3:http://localhost:9000/resticbucket init
+./restic -r s3:http://localhost:9000/resticbucket init
 
 ```
 
@@ -37,7 +37,7 @@ Copy backups from the local machine to the bucket on Minio server.
 
 ```sh
 
-$  ./restic -r s3:http://localhost:9000/resticbucket backup /home/minio/workdir/Docs/
+./restic -r s3:http://localhost:9000/resticbucket backup /home/minio/workdir/Docs/
 enter password for repository:
 scan [/home/minio/workdir/Docs]
 scanned 2 directories, 6 files in 0:00

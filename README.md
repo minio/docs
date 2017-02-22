@@ -1,4 +1,4 @@
-# Minio Cookbook [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Minio Cookbook [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 This is home for recipes of related projects and tools to use with Minio.
 
@@ -32,10 +32,11 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [Upload via Browser with PreSignedPut](./docs/presigned-put-upload-via-browser.md)
 - [How to use Cyberduck with Minio](./docs/how-to-use-cyberduck-with-minio.md)
 - [Use Minio as Eucalyptus object storage backend](./docs/minio-as-eucalyptus-object-storage.md)
-- [How to use Mountain Duck with Minio ](./docs/how-to-use-mountainduck-with-minio.md)
+- [How to use Mountain Duck with Minio](./docs/how-to-use-mountainduck-with-minio.md)
 - [How to use AWS SDK for PHP with Minio Server](./docs/aws-sdk-for-php-with-minio.md)
 - [How to use AWS SDK for Go with Minio Server](./docs/aws-sdk-for-go-with-minio.md)
 - [How to use AWS SDK for Python with Minio Server](./docs/aws-sdk-for-python-with-minio.md)
 - [How to use AWS SDK for Ruby with Minio Server](./docs/aws-sdk-for-ruby-with-minio.md)
 - [How to use AWS SDK for Javascript with Minio Server](./docs/aws-sdk-for-javascript-with-minio.md)
+- [How to use AWS SDK for DotNet with Minio Server](./docs/aws-sdk-for-dotnet-with-minio.md)
 - [How to use CloudBerry Drive with Minio](./docs/how-to-use-cloudberry-drive-with-minio.md)

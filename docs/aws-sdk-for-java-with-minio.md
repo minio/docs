@@ -1,4 +1,4 @@
-# How to use AWS SDK for Java with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to use AWS SDK for Java with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `aws-sdk-java` is the official AWS SDK for the Java programming language. In this recipe we will learn how to use `aws-sdk-java` with Minio server.
 
@@ -112,7 +112,7 @@ public class S3Sample {
 ## 4. Run the Program
 
 ```sh
-$ ant
+ant
 Buildfile: /home/ubuntu/aws-java-sdk-1.11.43/samples/AmazonS3/build.xml
 
 run:

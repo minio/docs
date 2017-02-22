@@ -1,4 +1,4 @@
-# How to install Golang? [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to install Golang? [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 ## Ubuntu (Xenial) 16.04
 
@@ -8,7 +8,7 @@ This installation document assumes Ubuntu 16.04+ on x86-64 platform.
 
 ##### Install Git
 
-```sh
+```
 $ sudo apt-get install git 
 ```
 
@@ -16,9 +16,9 @@ $ sudo apt-get install git
 
 Download Go 1.7+ from [https://golang.org/dl/](https://golang.org/dl/).
 
-```sh
-$ wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
-$ tar -C ${HOME} -xzf go1.7.1.linux-amd64.tar.gz
+```
+$ wget https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz
+$ tar -C ${HOME} -xzf go1.7.4.linux-amd64.tar.gz
 ```
 
 ##### Setup GOROOT and GOPATH
@@ -26,20 +26,20 @@ $ tar -C ${HOME} -xzf go1.7.1.linux-amd64.tar.gz
 Add the following exports to your ``~/.bashrc``. Environment variable GOROOT specifies the location of your golang binaries
 and GOPATH specifies the location of your project workspace.
 
-```sh
+```
 export GOROOT=${HOME}/go
 export GOPATH=${HOME}/work
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```
 ##### Source the new environment
 
-```sh
+```
 $ source ~/.bashrc
 ```
 
 ##### Testing it all
 
-```sh
+```
 $ go env
 $ go version
 ```
@@ -56,7 +56,7 @@ Install brew from [brew.sh](http://brew.sh/)
 
 ##### Install Git
 
-```sh
+```
 $ brew install git 
 ```
 
@@ -64,7 +64,7 @@ $ brew install git
 
 Install golang binaries using `brew`
 
-```sh
+```
 $ brew install go
 $ mkdir -p $HOME/go
 ```
@@ -74,7 +74,7 @@ $ mkdir -p $HOME/go
 Add the following exports to your ``~/.bash_profile``. Environment variable GOROOT specifies the location of your golang binaries
 and GOPATH specifies the location of your project workspace.
 
-```sh
+```
 export GOPATH=${HOME}/work
 export GOVERSION=$(brew list go | head -n 1 | cut -d '/' -f 6)
 export GOROOT=$(brew --prefix)/Cellar/go/${GOVERSION}/libexec
@@ -83,13 +83,13 @@ export PATH=${GOPATH}/bin:$PATH
 
 ##### Source the new environment
 
-```sh
+```
 $ source ~/.bash_profile
 ```
 
 ##### Testing it all
 
-```sh
+```
 $ go env
 $ go version
 ```

@@ -1,4 +1,4 @@
-# Rclone with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Rclone with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `Rclone` is an open source command line program to sync files and
 directories to and from cloud storage systems.  It aims to be "rsync

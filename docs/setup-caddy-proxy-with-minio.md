@@ -1,4 +1,4 @@
-# Setup Caddy proxy with Minio Server  [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Setup Caddy proxy with Minio Server  [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 Caddy is a web server like Apache, nginx, or lighttpd. The purpose of Caddy is to streamline  web development, deployment, and hosting workflows so that anyone can host their own web sites without requiring special technical knowledge.
 
@@ -35,7 +35,7 @@ proxy / localhost:9000 {
 
 ```sh
 
-$ ./minio --address localhost:9000 server <your_export_dir>
+./minio --address localhost:9000 server <your_export_dir>
 
 ```
 
@@ -43,7 +43,7 @@ $ ./minio --address localhost:9000 server <your_export_dir>
 
 ```sh
 
-$ ./caddy
+./caddy
 Activating privacy features... done.
 your.public.com:443
 your.public.com:80

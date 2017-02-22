@@ -1,4 +1,4 @@
-# How to use AWS SDK for Ruby with Minio Server [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# How to use AWS SDK for Ruby with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `aws-sdk` is the official AWS SDK for the Ruby programming language. In this recipe we will learn how to use `aws-sdk` for Ruby with Minio server.
 
@@ -53,7 +53,7 @@ print "Downloaded 'testobject' as  'download_testobject'. "
 ## 4. Run the Program
 
 ```sh
-$ ruby example.rb
+ruby example.rb
 Downloaded 'testobject' as  'download_testobject'.
 ```
 ## 5. Explore Further
