@@ -1,10 +1,10 @@
 # Generate Let's Encrypt certificate using Concert for Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-[Let’s Encrypt ](https://letsencrypt.org/) is a new free, automated, and open source, Certificate Authority.
+[Let’s Encrypt](https://letsencrypt.org/) is a new free, automated, and open source, Certificate Authority.
 
-[Concert ](https://docs.minio.io/docs/concert) is a console based certificate generation tool for  Let’s Encrypt. It is open source & one of the related project from Minio.
+[Concert](https://docs.minio.io/docs/concert) is a console based certificate generation tool for Let’s Encrypt. It is open source & one of the related project from Minio.
 
-In this recipe, we will generate a Let's Encypt certificate using Concert. This certificate will then be  deployed for use in the Minio server.
+In this recipe, we will generate a Let's Encypt certificate using Concert. This certificate will then be deployed for use in the Minio server.
 
 ## 1. Prerequisites
 
@@ -82,6 +82,6 @@ $ ./minio server export/
 
 ```
 
-### Step 7: Visit https://churchofminio.com:9000 in the browser.
+### Step 7: Visit <https://churchofminio.com:9000> in the browser.
 
 ![Letsencrypt](https://github.com/minio/cookbook/blob/master/docs/screenshots/letsencrypt-concert-minio.jpg?raw=true)

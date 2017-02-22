@@ -1,6 +1,6 @@
 # How to use Cyberduck with Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-In this document you will learn how to carry out basic operations on Minio using Cyberduck. Cyberduck is an open source client for FTP and SFTP, WebDAV, OpenStack Swift, and Amazon S3, available for Mac OS X and Windows. It is released  under the GPL license v2.0.  
+In this document you will learn how to carry out basic operations on Minio using Cyberduck. Cyberduck is an open source client for FTP and SFTP, WebDAV, OpenStack Swift, and Amazon S3, available for MacOS and Windows. It is released under the GPL license v2.0.  
 
 ## 1. Prerequisites
 
@@ -12,7 +12,7 @@ _NOTE:_ You can also run Minio in ``HTTPS``, follow this [guide](https://docs.mi
 
 ## 2. Steps
 
-###  Add Minio authentication in Cyberduck
+### Add Minio authentication in Cyberduck
 
 Click open connection, select ``HTTP``
 
