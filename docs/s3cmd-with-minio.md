@@ -10,14 +10,13 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 ## 2. Installation
 
-Install `S3cmd` from http://s3tools.org/s3cmd.
+Install `S3cmd` from <http://s3tools.org/s3cmd>.
 
 ## 3. Configuration
 
-We will run `S3cmd` on https://play.minio.io:9000.
+We will run `S3cmd` on <https://play.minio.io:9000>.
 
-Access credentials shown in this example belong to https://play.minio.io:9000.
-These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
+Access credentials shown in this example belong to <https://play.minio.io:9000>. These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
 
 Edit the following fields in your s3cmd configuration file `~/.s3cfg`
 

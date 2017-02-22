@@ -10,13 +10,13 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 ## 2. Installation 
  
-Install AWS CLI from https://aws.amazon.com/cli/
+Install AWS CLI from <https://aws.amazon.com/cli/>
 
 ## 3. Configuration
 
 To configure AWS CLI, type `aws configure` and specify the Minio key information.
 
-Access credentials shown in this example belong to https://play.minio.io:9000.
+Access credentials shown in this example belong to <https://play.minio.io:9000>.
 These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
 
 ```sh
