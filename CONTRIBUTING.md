@@ -2,7 +2,7 @@
 
 Minio cookbook is the collection of detailed guides to set up Minio with other tools/platforms. Minio team adds new receipies to the cookbook, however, if you have a working setup that uses Minio with other tools, we welcome you to add your receipe. 
 
-Before creating a PR, please check that no similar receipe is already available. Also, please add the below setions in your guide before adding a Cookbook PR. 
+Before creating a PR, please check that no similar receipe is already available. Also, please add the below setions in your guide before adding a cookbook PR. 
 
 ## Introduction
 
