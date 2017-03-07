@@ -51,3 +51,7 @@ minio server /mydatadir
 sudo service nginx restart
 
 ```
+
+## Explore Further 
+
+Refer [this blog post](https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/) for various Minio and Nginx configuration options. 
