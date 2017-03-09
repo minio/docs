@@ -29,24 +29,22 @@ Symmetric Encryption uses single key for both encryption and decryption. Followi
     EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
       mySymmetricKey);
 
+    // Add Minio server accessKey and secretKey  
     AWSCredentials credentials = new BasicAWSCredentials(
-      "USWUXHGYZQYFYFFIT3RE",
-      "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");
+      "USWUXHGYZQYFYFFIT3RE", "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");
+
+    // Create encryption client with Minio server as endpoint  
     AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
       credentials, new StaticEncryptionMaterialsProvider(
       encryptionMaterials));
     Region usEast1 = Region.getRegion(Regions.US_EAST_1);
     encryptionClient.setRegion(usEast1);
     encryptionClient.setEndpoint("http://localhost:9000");
-
-    final S3ClientOptions clientOptions = S3ClientOptions.builder()
-      .setPathStyleAccess(true).build();
-    encryptionClient.setS3ClientOptions(clientOptions);
 ```
 
 ### 3. Operations on Minio using AWS S3 encryption client
 
-Use the encryption client created in previous steps for perform operations on Minio server.
+Use the encryption client created in previous steps to perform operations on Minio server.
 
 ```java
     // Create the bucket
@@ -84,9 +82,10 @@ Asymmetric Encryption uses public key and private key for encryption and decrypt
 ### 1. Generate RSA key
 
 ```java
-   KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance(algorithm);
-   keyGenerator.initialize(1024, srand);
-   keyGenerator.generateKeyPair();
+    // Generate RSA key pair
+    KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance(algorithm);
+    keyGenerator.initialize(1024, srand);
+    keyGenerator.generateKeyPair();
 ```
 
 ### 2. Create AWS S3 encryption client using generated key.
@@ -94,8 +93,12 @@ Asymmetric Encryption uses public key and private key for encryption and decrypt
 ```java
     EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
       loadedKeyPair);
+
+    // Add Minio server accessKey and secretKey
     AWSCredentials credentials = new BasicAWSCredentials("USWUXHGYZQYFYFFIT3RE",
-      "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");	    
+      "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");	   
+
+    // Create encryption client with Minio server as endpoint   
     AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
       credentials, new StaticEncryptionMaterialsProvider(encryptionMaterials));
     Region usEast1 = Region.getRegion(Regions.US_EAST_1);
@@ -105,11 +108,12 @@ Asymmetric Encryption uses public key and private key for encryption and decrypt
 
 ### 3. Operations on Minio using AWS S3 encryption client
 
-Use the encryption client created in previous steps for perform operations on Minio server.
+Use the encryption client created in previous steps to perform operations on Minio server.
 
 ```java
     // Create the bucket
     encryptionClient.createBucket(bucketName);
+
     // Upload the object.
     byte[] plaintext = "Hello World, S3 Client-side Encryption Using Asymmetric Master Key!"
       .getBytes();
@@ -123,6 +127,7 @@ Use the encryption client created in previous steps for perform operations on Mi
 Once the object is downloaded, check if the decrypted object is same as the plaintext object uploaded to the server.
 
 ```java
+    // Download the object
     S3Object downloadedObject = encryptionClient.getObject(bucketName,
       objectKey);
     byte[] decrypted = IOUtils.toByteArray(downloadedObject
