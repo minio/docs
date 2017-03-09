@@ -75,14 +75,14 @@ public class S3ClientSideEncryptionAsymmetricMasterKey {
 		// 2. Construct an instance of AmazonS3EncryptionClient.
 		EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
 				loadedKeyPair);
-	    AWSCredentials credentials = new BasicAWSCredentials("USWUXHGYZQYFYFFIT3RE",
-                "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");
+	    AWSCredentials credentials = new BasicAWSCredentials("Q3AM3UQ867SPQQA43P2F",
+                "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG");
 		AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
 				credentials,
 				new StaticEncryptionMaterialsProvider(encryptionMaterials));
 		Region usEast1 = Region.getRegion(Regions.US_EAST_1);
 		encryptionClient.setRegion(usEast1);
-		encryptionClient.setEndpoint("http://localhost:9000");
+		encryptionClient.setEndpoint("https://play.minio.io:9000");
 
 		final S3ClientOptions clientOptions = S3ClientOptions.builder().setPathStyleAccess(true).build();
 	    encryptionClient.setS3ClientOptions(clientOptions);
