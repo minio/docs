@@ -140,4 +140,4 @@ Once the object is downloaded, check if the decrypted object is same as the plai
 
 Complete working code for Asymmetric AES encryption can be found [here](./sample-code/aws-sdk-java-encryption-code/asymmetric-RSA/)
 
-_*Note*_ It should be noted when Minio generates a presignedURL it would be generated for an encrypted object. Now when downloading this object through other methods like curl you would get an encrypted object because curl has no awareness of encryption details.
+*Note*: When Minio generates a presignedURL it would be generated for an encrypted object. So, downloading this object through other methods like curl you would get an encrypted object. This is because curl has no awareness of encryption details.
