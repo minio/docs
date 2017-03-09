@@ -1,8 +1,8 @@
-# How to use AWS SDK for Java for encryption with Minio Server[![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Java for encryption with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `aws-sdk` for Java is the official AWS SDK for Java. In this recipe we will learn how to use `aws-sdk` for Java for encryption on Minio server using both Symmetric and Asymmetric approach.
 
-Encryption allows additional security layer for sensitive user data (such as images, audio clips, etc.) stored on Minio server.
+Encryption allows additional security layer for sensitive user data (images, audio clips, etc.) stored on Minio server.
 
 ## Prerequisites
 
@@ -27,21 +27,21 @@ Symmetric Encryption uses single key for both encryption and decryption. Followi
 
 ```java
     EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
-				mySymmetricKey);
+      mySymmetricKey);
 
-		AWSCredentials credentials = new BasicAWSCredentials(
-				"USWUXHGYZQYFYFFIT3RE",
-				"MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");
-		AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
-				credentials, new StaticEncryptionMaterialsProvider(
-						encryptionMaterials));
-		Region usEast1 = Region.getRegion(Regions.US_EAST_1);
-		encryptionClient.setRegion(usEast1);
-		encryptionClient.setEndpoint("http://localhost:9000");
+    AWSCredentials credentials = new BasicAWSCredentials(
+      "USWUXHGYZQYFYFFIT3RE",
+      "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");
+    AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
+      credentials, new StaticEncryptionMaterialsProvider(
+      encryptionMaterials));
+    Region usEast1 = Region.getRegion(Regions.US_EAST_1);
+    encryptionClient.setRegion(usEast1);
+    encryptionClient.setEndpoint("http://localhost:9000");
 
-		final S3ClientOptions clientOptions = S3ClientOptions.builder()
-				.setPathStyleAccess(true).build();
-		encryptionClient.setS3ClientOptions(clientOptions);
+    final S3ClientOptions clientOptions = S3ClientOptions.builder()
+      .setPathStyleAccess(true).build();
+    encryptionClient.setS3ClientOptions(clientOptions);
 ```
 
 ### 3. Operations on Minio using AWS S3 encryption client
@@ -50,14 +50,14 @@ Use the encryption client created in previous steps for perform operations on Mi
 
 ```java
     // Create the bucket
-		encryptionClient.createBucket(bucketName);
+    encryptionClient.createBucket(bucketName);
 
-		// Upload object using the encryption client.
-		byte[] plaintext = "Hello World, S3 Client-side Encryption Using Asymmetric Master Key!"
-				.getBytes();
-		System.out.println("plaintext's length: " + plaintext.length);
-		encryptionClient.putObject(new PutObjectRequest(bucketName, objectKey,
-				new ByteArrayInputStream(plaintext), new ObjectMetadata()));
+    // Upload object using the encryption client.
+    byte[] plaintext = "Hello World, S3 Client-side Encryption Using Asymmetric Master Key!"
+      .getBytes();
+    System.out.println("plaintext's length: " + plaintext.length);
+    encryptionClient.putObject(new PutObjectRequest(bucketName, objectKey,
+    new ByteArrayInputStream(plaintext), new ObjectMetadata()));
 ```
 
 ### 4. Test
@@ -93,15 +93,14 @@ Asymmetric Encryption uses public key and private key for encryption and decrypt
 
 ```java
     EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
-				loadedKeyPair);
-	    AWSCredentials credentials = new BasicAWSCredentials("USWUXHGYZQYFYFFIT3RE",
-                "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");	    
-		AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
-				credentials,
-				new StaticEncryptionMaterialsProvider(encryptionMaterials));
-		Region usEast1 = Region.getRegion(Regions.US_EAST_1);
-		encryptionClient.setRegion(usEast1);
-		encryptionClient.setEndpoint("http://localhost:9000");
+      loadedKeyPair);
+    AWSCredentials credentials = new BasicAWSCredentials("USWUXHGYZQYFYFFIT3RE",
+      "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");	    
+    AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
+      credentials, new StaticEncryptionMaterialsProvider(encryptionMaterials));
+    Region usEast1 = Region.getRegion(Regions.US_EAST_1);
+    encryptionClient.setRegion(usEast1);
+    encryptionClient.setEndpoint("http://localhost:9000");
 ```
 
 ### 3. Operations on Minio using AWS S3 encryption client
@@ -110,13 +109,13 @@ Use the encryption client created in previous steps for perform operations on Mi
 
 ```java
     // Create the bucket
-		encryptionClient.createBucket(bucketName);
+    encryptionClient.createBucket(bucketName);
     // Upload the object.
-		byte[] plaintext = "Hello World, S3 Client-side Encryption Using Asymmetric Master Key!"
-				.getBytes();
-		System.out.println("plaintext's length: " + plaintext.length);
-		encryptionClient.putObject(new PutObjectRequest(bucketName, objectKey,
-				new ByteArrayInputStream(plaintext), new ObjectMetadata()));
+    byte[] plaintext = "Hello World, S3 Client-side Encryption Using Asymmetric Master Key!"
+      .getBytes();
+    System.out.println("plaintext's length: " + plaintext.length);
+    encryptionClient.putObject(new PutObjectRequest(bucketName, objectKey,
+    new ByteArrayInputStream(plaintext), new ObjectMetadata()));
 ```
 
 ### 4. Test
@@ -125,13 +124,13 @@ Once the object is downloaded, check if the decrypted object is same as the plai
 
 ```java
     S3Object downloadedObject = encryptionClient.getObject(bucketName,
-				objectKey);
-		byte[] decrypted = IOUtils.toByteArray(downloadedObject
-				.getObjectContent());
-		Assert.assertTrue(Arrays.equals(plaintext, decrypted));
-    
+      objectKey);
+    byte[] decrypted = IOUtils.toByteArray(downloadedObject
+      .getObjectContent());
+    Assert.assertTrue(Arrays.equals(plaintext, decrypted));
+
     // Verify same data.
-		System.out.println("decrypted length: " + decrypted.length);
+    System.out.println("decrypted length: " + decrypted.length);
 ```
 
 Complete working code for Asymmetric AES encryption can be found [here](./sample-code/aws-sdk-java-encryption-code/asymmetric-RSA/)
