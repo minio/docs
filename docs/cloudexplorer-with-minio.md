@@ -23,7 +23,7 @@ In this recipe you will learn how to carry out basic operations on Minio using C
 ### Add your Minio account to Cloud Explorer and click save.
 
 
-![ACCOUNT](http://i.imgur.com/JjutY2p.png)
+![ACCOUNT](../screenshots/cloudexplorer/cloudexplorer-1.png)
 
 ### Click on the Minio account and then the "Load" button to connect. In the future, clicking on a saved S3 account will automatically load the account and show the buckets.
 
@@ -47,4 +47,4 @@ In this recipe you will learn how to carry out basic operations on Minio using C
 
 - [Minio Client complete guide](https://docs.minio.io/docs/minio-client-complete-guide)
 - [Cloud Explorer homepage](https://github.com/rusher81572/cloudExplorer)
-- [Linux-toys.com](h    ttps://www.linux-toys.com/?page_id=211)
+- [Linux-toys.com](https://www.linux-toys.com/?page_id=211)
