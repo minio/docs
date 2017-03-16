@@ -47,4 +47,4 @@ In this recipe you will learn how to carry out basic operations on Minio using C
 
 - [Minio Client complete guide](https://docs.minio.io/docs/minio-client-complete-guide)
 - [Cloud Explorer homepage](https://github.com/rusher81572/cloudExplorer)
-- [Linux-toys.com](https://www.linux-toys.com/?page_id=211)
+- [Linux-toys.com](h    ttps://www.linux-toys.com/?page_id=211)
