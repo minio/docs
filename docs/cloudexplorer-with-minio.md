@@ -23,24 +23,24 @@ In this recipe you will learn how to carry out basic operations on Minio using C
 ### Add your Minio account to Cloud Explorer and click save.
 
 
-![ACCOUNT](../screenshots/cloudexplorer/cloudexplorer-1.png)
+![ACCOUNT](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudexplorer/cloudexplorer-1.png?raw=true)
 
 ### Click on the Minio account and then the "Load" button to connect. In the future, clicking on a saved S3 account will automatically load the account and show the buckets.
 
-![ACCOUNT](http://i.imgur.com/LO7cHmt.png)
+![ACCOUNT](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudexplorer/cloudexplorer-2.png?raw=true)
 
 
 #### Create a bucket
 
-![B_LISTING](http://i.imgur.com/YAgmmFv.png)
+![B_LISTING](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudexplorer/cloudexplorer-3.png?raw=true)
 
 #### Upload a file to a bucket
 
-![D_BUCKET](http://i.imgur.com/tNprwrD.png)
+![D_BUCKET](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudexplorer/cloudexplorer-4.png?raw=true)
 
 #### Click on the Magifing glass and then click "Refresh Bucket" to view the uploaded file
 
-![D_BUCKET](http://i.imgur.com/xNTSbQ2.png)
+![D_BUCKET](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudexplorer/cloudexplorer-6.png?raw=true)
 
 
 ## 3\. Explore Further
