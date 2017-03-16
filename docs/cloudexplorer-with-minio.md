@@ -6,20 +6,9 @@ In this recipe you will learn how to carry out basic operations on Minio using C
 
 * Search
 * Performance testing
-* Music player
-* Transition buckets to Amazon Glacier  
-* Amazon RRS and Infrequently Accessed storage tiers
 * Migrate buckets between S3 accounts
-* Compress files prior to upload
-* Take screen shots to S3
 * Simple text editor
-* IRC client
-* Share buckets with users
-* Access shared buckets
-* View images
 * Sync folders
-* Graph CSV files and save them to a bucket
-* Record audio messages and save them to a bucket
 * Create snapshots of buckets
 
 ## 1\. Prerequisites
