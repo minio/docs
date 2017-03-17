@@ -5,10 +5,10 @@
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
- 
+
 ## 2. Installation
 
-Install `aws-sdk` for Ruby from the official AWS Ruby SDK docs [here](https://aws.amazon.com/sdk-for-ruby/) 
+Install `aws-sdk` for Ruby from the official AWS Ruby SDK docs [here](https://aws.amazon.com/sdk-for-ruby/)
 
 ## 3. Example
 
@@ -47,7 +47,6 @@ rubys3_client.get_object(
 )
 
 print "Downloaded 'testobject' as  'download_testobject'. "
-
 ```
 
 ## 4. Run the Program
@@ -56,6 +55,7 @@ print "Downloaded 'testobject' as  'download_testobject'. "
 ruby example.rb
 Downloaded 'testobject' as  'download_testobject'.
 ```
+
 ## 5. Explore Further
 
 * [RoR Resume Uploader App](https://docs.minio.io/docs/ror-resume-uploader-app)

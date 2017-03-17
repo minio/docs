@@ -19,7 +19,6 @@ Next install Rclone from [rclone.org](http://rclone.org).
 When it configures itself Minio will print something like this
 
 ```sh
-
 Endpoint:  http://10.0.0.3:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
 AccessKey: USWUXHGYZQYFYFFIT3RE
 SecretKey: MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03
@@ -36,8 +35,6 @@ Object API (Amazon S3 compatible):
   Java:       https://docs.minio.io/docs/java-client-quickstart-guide
   Python:     https://docs.minio.io/docs/python-client-quickstart-guide
   JavaScript: https://docs.minio.io/docs/javascript-client-quickstart-guide
-
-
 ```
 
 You now need to configure those details into rclone.
@@ -48,30 +45,26 @@ else) of type `S3` and enter the details above something like this:
 (Note that it is important to put the region in as stated above.)
 
 ```sh
-
 env_auth> 1
 access_key_id> USWUXHGYZQYFYFFIT3RE
 secret_access_key> MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03  
 region> us-east-1
 endpoint> http://10.0.0.3:9000
-location_constraint> 
+location_constraint>
 server_side_encryption>
-
 ```
 
 Which makes the config file look like this
 
 ```sh
-
 [minio]
 env_auth = false
 access_key_id = USWUXHGYZQYFYFFIT3RE
 secret_access_key = MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03F
 region = us-east-1
 endpoint = http://10.0.0.3:9000
-location_constraint = 
-server_side_encryption = 
-
+location_constraint =
+server_side_encryption =
 ```
 
 ## 4. Commands
