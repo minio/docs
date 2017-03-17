@@ -31,6 +31,7 @@ Note:
 
 * Replace example.com with your own hostname.
 * Replace ``http://localhost:9000``  with your own server name.
+* Add ``client_max_body_size 1000m;`` in the ``http`` context in order to be able to upload large files — simply adjust the value accordingly. The default value is `1m` which is far too low for most scenarios.
 
 ## 4. Recipe Steps
 
