@@ -6,10 +6,10 @@
 
 Minio Server is installed and running. Please follow [Minio Quickstart](https://docs.minio.io/docs/minio-quickstart-guide) guide to install.
 
-This recipe uses <https://play.minio.io:9000>. Play(demo Version) is a hosted Minio server for testing and development purpose only. Play uses access_key_id ``Q3AM3UQ867SPQQA43P2F``, secret_access_key ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``. 
+This recipe uses <https://play.minio.io:9000>. Play(demo Version) is a hosted Minio server for testing and development purpose only. Play uses access_key_id ``Q3AM3UQ867SPQQA43P2F``, secret_access_key ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``.
 
-## 2. Installation 
- 
+## 2. Installation
+
 Install Paperclip from [here](https://github.com/thoughtbot/paperclip)
 
 ## 3. Paperclip Storage Configuration
@@ -21,19 +21,19 @@ config.paperclip_defaults = {
     s3_permissions: 'public',
     s3_region: 'us-east-1',     
     s3_credentials: {
-      bucket: 'mytestbucket', 
+      bucket: 'mytestbucket',
       access_key_id: 'Q3AM3UQ867SPQQA43P2F',
-      secret_access_key: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG', 
+      secret_access_key: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG',
     },
     s3_host_name: 'play.minio.io:9000',
     s3_options: {
-      endpoint: "https://play.minio.io:9000", 
-      force_path_style: true 
+      endpoint: "https://play.minio.io:9000",
+      force_path_style: true
     },
     url: ':s3_path_url',
     path: "/:class/:id.:style.:extension"
   }
 ```
-## 4. Explore Further
- [Minio Paperclip Application](https://github.com/sadysnaat/minio-paperclip) 
 
+## 4. Explore Further
+ [Minio Paperclip Application](https://github.com/sadysnaat/minio-paperclip)

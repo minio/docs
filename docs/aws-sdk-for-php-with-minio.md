@@ -5,10 +5,10 @@
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
- 
+
 ## 2. Installation
 
-Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html) 
+Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html)
 
 ## 3. Example
 
@@ -17,7 +17,6 @@ Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setu
 Example below shows putObject and getObject operations on Minio server using aws-sdk-php.
 
 ```php
-
 <?php
 
 // Include the SDK using the Composer autoloader
@@ -51,7 +50,6 @@ $retrive = $s3->getObject([
 
 // Print the body of the result by indexing into the result object.
 echo $retrive['Body'];
-
 ```
 
 ## 4. Run the Program
@@ -59,5 +57,4 @@ echo $retrive['Body'];
 ```sh
 php example.php
 Hello from Minio!!
-
 ```
