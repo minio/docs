@@ -5,10 +5,10 @@
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
- 
+
 ## 2. Installation
 
-Install `aws-sdk-python` from AWS SDK for Python official docs [here](https://aws.amazon.com/sdk-for-python/) 
+Install `aws-sdk-python` from AWS SDK for Python official docs [here](https://aws.amazon.com/sdk-for-python/)
 
 ## 3. Example
 
@@ -17,7 +17,6 @@ Please replace ``endpoint_url``,``aws_access_key_id``, ``aws_secret_access_key``
 Example below shows upload and download object operations on Minio server using aws-sdk-python.
 
 ```python
-
 #!/usr/bin/env/python
 import boto3
 from botocore.client import Config
@@ -40,7 +39,6 @@ s3.Bucket('songs').upload_file('/home/john/piano.mp3','piano.mp3')
 s3.Bucket('songs').download_file('piano.mp3', '/tmp/classical.mp3')
 
 print "Downloaded 'piano.mp3' as  'classical.mp3'. "
-
 ```
 
 ## 4. Run the Program

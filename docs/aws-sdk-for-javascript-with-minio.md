@@ -1,14 +1,14 @@
 # How to use AWS SDK for Javascript with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-In this recipe we will learn how to use `aws-sdk` for Javascript with Minio server. `aws-sdk` is the official AWS SDK for the Javascript programming language. 
+In this recipe we will learn how to use `aws-sdk` for Javascript with Minio server. `aws-sdk` is the official AWS SDK for the Javascript programming language.
 
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
- 
+
 ## 2. Installation
 
-Install `aws-sdk` for Javascript from the official AWS Javascript SDK docs [here](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/) 
+Install `aws-sdk` for Javascript from the official AWS Javascript SDK docs [here](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/)
 
 ## 3. Example
 
@@ -48,7 +48,6 @@ s3.getObject(params).
 on('httpData', function(chunk) { file.write(chunk); }).
 on('httpDone', function() { file.end(); }).
 send();
-
 ```
 
 ## 4. Run the Program

@@ -5,7 +5,7 @@ This is home for recipes of related projects and tools to use with Minio.
 ### How to Contribute a Recipe
 
 1. Fork this repo and create a new topic branch.
-2. Make your addition. See one of the recipe files for a sample.
+2. Make your addition. See the [contribution guidelines](./CONTRIBUTING.md) for details on formatting your recipe.
 3. Send a PR - Please include a short descriptions of your new or updated recipe.
 
 Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-minio) to get your project or use-case listed under Minio.
@@ -14,6 +14,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 
 - [Running Deis Workflow with Minio](./docs/running-deis-workflow-with-minio.md)
 - [AWS CLI with Minio](./docs/aws-cli-with-minio.md)
+- [Running Minio in Cloudron](./docs/running-minio-in-cloudron.md)
 - [Running Minio in Docker](./docs/running-minio-in-docker.md)
 - [Running Minio in FreeNAS](./docs/running-minio-in-freenas.md)
 - [Store MongoDB Backups in Minio](./docs/store-mongodb-backups-in-minio.md)
@@ -32,6 +33,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [Upload via Browser with PreSignedPut](./docs/presigned-put-upload-via-browser.md)
 - [How to use Cyberduck with Minio](./docs/how-to-use-cyberduck-with-minio.md)
 - [Use Minio as Eucalyptus object storage backend](./docs/minio-as-eucalyptus-object-storage.md)
+- [How to use Cloud Explorer with Minio](./docs/cloudexplorer-with-minio.md)
 - [How to use Mountain Duck with Minio](./docs/how-to-use-mountainduck-with-minio.md)
 - [How to use AWS SDK for PHP with Minio Server](./docs/aws-sdk-for-php-with-minio.md)
 - [How to use AWS SDK for Go with Minio Server](./docs/aws-sdk-for-go-with-minio.md)
@@ -40,3 +42,4 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [How to use AWS SDK for Javascript with Minio Server](./docs/aws-sdk-for-javascript-with-minio.md)
 - [How to use AWS SDK for DotNet with Minio Server](./docs/aws-sdk-for-dotnet-with-minio.md)
 - [How to use CloudBerry Drive with Minio](./docs/how-to-use-cloudberry-drive-with-minio.md)
+- [How to use AWS SDK for Java for encryption with Minio Server](./docs/how-to-use-aws-sdk-java-encryption.md)

@@ -5,14 +5,14 @@
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
- 
+
 ## 2. Installation
 
 Install `aws-sdk-java` from AWS SDK for Java official docs [here](https://aws.amazon.com/sdk-for-java/), for this document we are using the aws-sdk-java [ZIP](https://sdk-for-java.amazonwebservices.com/latest/aws-java-sdk.zip)
 
 ## 3. Example
 
-Replace ``aws-java-sdk-1.11.43/samples/AmazonS3/S3Sample.java`` with code below and update ``Endpoint``,``BasicAWSCredentials``, ``bucketName``, ``uploadFileName`` and ``keyName`` with your local setup. 
+Replace ``aws-java-sdk-1.11.43/samples/AmazonS3/S3Sample.java`` with code below and update ``Endpoint``,``BasicAWSCredentials``, ``bucketName``, ``uploadFileName`` and ``keyName`` with your local setup.
 
 Example below shows upload and download object operations on Minio server using aws-sdk-java.
 
@@ -106,7 +106,6 @@ public class S3Sample {
     System.out.println();       
     }
 }
-
 ```
 
 ## 4. Run the Program
@@ -117,7 +116,7 @@ Buildfile: /home/ubuntu/aws-java-sdk-1.11.43/samples/AmazonS3/build.xml
 
 run:
      [java] Uploading a new object to S3 from a file
-     [java] 
+     [java]
      [java] Printing bytes retrieved:
      [java]     127.0.0.1       localhost
      [java]     127.0.1.1       minio
@@ -126,11 +125,10 @@ run:
      [java]     ::1     localhost ip6-localhost ip6-loopback
      [java]     ff02::1 ip6-allnodes
      [java]     ff02::2 ip6-allrouters
-     [java] 
+     [java]
 
 BUILD SUCCESSFUL
 Total time: 3 seconds
-
 ```
 ## 5. Explore Further
 
