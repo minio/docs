@@ -1,8 +1,8 @@
 # Minio as Eucalyptus ObjectStorage backend
 
-[Minio|https://www.minio.io/], the new cloud storage written in Go that let's you store any data as objects also has another great feature, it's AWS S3 compatible and that makes Minio really useful with Eucalyptus.
+[Minio](https://www.minio.io/), the new cloud storage written in Go that let's you store any data as objects also has another great feature, it's AWS S3 compatible and that makes Minio really useful with Eucalyptus.
 
-[Eucalyptus|http://www.eucalyptus.com] supports multiple ObjectStorage backends, Riak CS (Cloud Storage), Ceph RGW and Eucalyptus already comes with S3 compatible Walrus. Eucalyptus ObjectStorage service acts as a gateway for the backends. Eucalyptus still handles all the AWS compatible Identity and Access Management stuffs. As Minio is compatible with AWS S3, we can actually use it with Eucalyptus as well. However, even though it is possible to use any object storage backend that is compatible with AWS S3, they are not supported unless specified otherwise on the Eucalyptus website/documentation.
+[Eucalyptus](http://www.eucalyptus.com) supports multiple ObjectStorage backends, Riak CS (Cloud Storage), Ceph RGW and Eucalyptus already comes with S3 compatible Walrus. Eucalyptus ObjectStorage service acts as a gateway for the backends. Eucalyptus still handles all the AWS compatible Identity and Access Management stuffs. As Minio is compatible with AWS S3, we can actually use it with Eucalyptus as well. However, even though it is possible to use any object storage backend that is compatible with AWS S3, they are not supported unless specified otherwise on the Eucalyptus website/documentation.
 
 The first step would be to start a Minio server.
 
@@ -50,7 +50,7 @@ is not a valid value.  Legal values are: walrus,ceph-rgw,riakcs
 
 So, now we have to add another provider client for Minio. Technically, we can probably use riakcs, if you have deployed Eucalyptus with packages, but I am not gonna do that in this case, since I already have source build cloud.
 
-This post assumes that you know how to build Eucalyptus from source and doesn't go into much detail. The purpose of this post is to show how to add a third-party object storage like Minio with Eucalyptus. But again, feel free to use package installation and use riakcs as provider client, use the Minio's endpoint and user credentials as described below.
+This post assumes that you know how to build Eucalyptus from source and doesn't go into much detail. Please follow the [link](https://github.com/eucalyptus/eucalyptus/blob/master/INSTALL) to find the detail about Eucalyptus source installation. The purpose of this post is to show how to add a third-party object storage like Minio with Eucalyptus. But again, feel free to use package installation and use riakcs as provider client, use the Minio's endpoint and user credentials as described below.
 
 To add minio as a provider client, first we need to create a file called MinioProviderClient.java,
 
@@ -109,12 +109,7 @@ Within a few seconds we should see the object storage is enabled. We can run the
 # euserv-describe-services --filter service-type=objectstorage
 ```
 
-Now we can use Minio as an object storage backend. However, while working, I found an issue where any PUT object request that was made through Eucalyptus ends up with a failure. After debugging with Swathi Gangisetty it looks like the AWS Java SDK Eucalyptus using doesn't like the fact that Minio is returning Etag instead of ETag as it is mentioned in the AWS Documentation. To test, we removed Eucalyptus out of the picture and tried to upload an object directly with AWS Java SDK 1.7.1, which also failed in the same way. However, the same upload request works with AWS Java SDK 1.10.x.
-So, to use Minio successfully as an Eucalyptus ObjectStorage backend, we either need a fix in Minio where it returns the correct ETag or when Eucalyptus starts using a newer AWS Java SDK in a future release.
+Now we should be able to use Minio as an object storage backend.
 
-Here are the requests for the fix in Minio: https://github.com/minio/minio/issues/3284
-and for the AWS Java SDK update in Eucalyptus: https://eucalyptus.atlassian.net/browse/EUCA-12955
-
-Update:
-Looks like this was a bug in AWS Java SDK 1.7.1 and fixed in a later release,
-https://github.com/aws/aws-sdk-java/pull/590
+Here are the requests for the fix in Minio: <https://github.com/minio/minio/issues/3284>
+and for the AWS Java SDK update in Eucalyptus: <https://eucalyptus.atlassian.net/browse/EUCA-12955>
