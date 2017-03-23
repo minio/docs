@@ -21,6 +21,7 @@ server {
  listen 80;
  server_name example.com;
  location / {
+   proxy_buffering off;
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9000;
  }
