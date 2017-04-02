@@ -58,3 +58,20 @@ echo $retrive['Body'];
 php example.php
 Hello from Minio!!
 ```
+
+## 5.  Create a pre-signed URL
+
+```php
+<?php
+// Get a command object from the client
+$command = $s3->getCommand('GetObject', [
+            'Bucket' => 'testbucket',
+            'Key'    => 'testkey'
+        ]);
+
+// Create a pre-signed URL for a request with duration of 10 miniutes
+$presignedRequest = $s3->createPresignedRequest($command, '+10 minutes');
+
+// Get the actual presigned-url
+$presignedUrl =  (string)  $presignedRequest->getUri();
+```
