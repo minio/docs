@@ -59,7 +59,7 @@ php example.php
 Hello from Minio!!
 ```
 
-## 5.  Create a pre-signed URL
+## 5. Create a pre-signed URL
 
 ```php
 <?php
@@ -74,4 +74,61 @@ $presignedRequest = $s3->createPresignedRequest($command, '+10 minutes');
 
 // Get the actual presigned-url
 $presignedUrl =  (string)  $presignedRequest->getUri();
+```
+
+## 6. Bucket Policy
+
+```php
+<?php
+$bucket = 'testbucket';
+// This policy sets the bucket to read only
+$policyReadOnly = '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "*"
+        ]
+      },
+      "Resource": [
+        "arn:aws:s3:::%s"
+      ],
+      "Sid": ""
+    },
+    {
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "*"
+        ]
+      },
+      "Resource": [
+        "arn:aws:s3:::%s/*"
+      ],
+      "Sid": ""
+    }
+  ]
+}
+';
+// If you want to put it on a specific folder you just change 'arn:aws:s3:::%s/*' to 'arn:aws:s3:::%s/folder/*'
+
+// Create a bucket
+$result = $s3->createBucket([
+    'Bucket' => $bucket,
+]);
+
+// Configure the policy
+$s3->putBucketPolicy([
+    'Bucket' => $bucket,
+    'Policy' => sprintf($policyReadOnly, $bucket, $bucket),
+]);
 ```
