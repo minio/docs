@@ -76,7 +76,7 @@ $presignedRequest = $s3->createPresignedRequest($command, '+10 minutes');
 $presignedUrl =  (string)  $presignedRequest->getUri();
 ```
 
-## 6. Bucket Policy
+## 6. Set a Bucket Policy
 
 ```php
 <?php
