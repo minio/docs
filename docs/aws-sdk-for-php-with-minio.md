@@ -80,11 +80,8 @@ $presignedUrl =  (string)  $presignedRequest->getUri();
 
 ```php
 <?php
+# To get a plain URL, you'll need to make your object/bucket accessible with public permission. Also, note that this line of code will not provide you a url with 'X-Amz-Algorithm=[...]&X-Amz-Credential=[...]&X-Amz-Date=[...]&X-Amz-Expires=[...]&X-Amz-SignedHeaders=[...]&X-Amz-Signature=[...]
 $plainUrl = $s3->getObjectUrl('testbucket', 'testkey');
-/** 
- * Disclaimer: in order to make this work you'll need to make your object/bucket accesible with public permission
- * This line of code will not provide you a url with 'X-Amz-Algorithm=[...]&X-Amz-Credential=[...]&X-Amz-Date=[...]&X-Amz-Expires=[...]&X-Amz-SignedHeaders=[...]&X-Amz-Signature=[...]'
- */
 ```
 
 ## 7. Set a Bucket Policy
