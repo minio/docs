@@ -11,9 +11,9 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 Install `s3fs-fuse` from <https://github.com/s3fs-fuse/s3fs-fuse>.
 
-## 3. Configuration
+Create a bucket on the Minio Server to use with this cookbook.
 
-Create a bucket on the Minio Server.
+## 3. Configuration
 
 Before you run s3fs, you will need to save your S3 credentials in a file that will be used later in this tutorial. In the command below replace access_key and secret_key with your actual Minio credentials. 
 
