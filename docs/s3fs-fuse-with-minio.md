@@ -1,4 +1,4 @@
-# S3cmd with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# s3fs-fuse with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `s3fs allows Linux and Mac OS X to mount an S3 bucket via FUSE
 
