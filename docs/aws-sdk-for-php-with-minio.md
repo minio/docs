@@ -5,10 +5,10 @@
 ## 1. Prerequisites
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
- 
+
 ## 2. Installation
 
-Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html) 
+Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html)
 
 ## 3. Example
 
@@ -17,7 +17,6 @@ Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setu
 Example below shows putObject and getObject operations on Minio server using aws-sdk-php.
 
 ```php
-
 <?php
 
 // Include the SDK using the Composer autoloader
@@ -51,7 +50,6 @@ $retrive = $s3->getObject([
 
 // Print the body of the result by indexing into the result object.
 echo $retrive['Body'];
-
 ```
 
 ## 4. Run the Program
@@ -59,5 +57,86 @@ echo $retrive['Body'];
 ```sh
 php example.php
 Hello from Minio!!
+```
 
+## 5. Create a pre-signed URL
+
+```php
+<?php
+// Get a command object from the client
+$command = $s3->getCommand('GetObject', [
+            'Bucket' => 'testbucket',
+            'Key'    => 'testkey'
+        ]);
+
+// Create a pre-signed URL for a request with duration of 10 miniutes
+$presignedRequest = $s3->createPresignedRequest($command, '+10 minutes');
+
+// Get the actual presigned-url
+$presignedUrl =  (string)  $presignedRequest->getUri();
+```
+
+## 6. Get a plain URL 
+
+```php
+<?php
+# To get a plain URL, you'll need to make your object/bucket accessible with public permission. Also, note that this line of code will not provide you a url with 'X-Amz-Algorithm=[...]&X-Amz-Credential=[...]&X-Amz-Date=[...]&X-Amz-Expires=[...]&X-Amz-SignedHeaders=[...]&X-Amz-Signature=[...]
+$plainUrl = $s3->getObjectUrl('testbucket', 'testkey');
+```
+
+## 7. Set a Bucket Policy
+
+```php
+<?php
+$bucket = 'testbucket';
+// This policy sets the bucket to read only
+$policyReadOnly = '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "*"
+        ]
+      },
+      "Resource": [
+        "arn:aws:s3:::%s"
+      ],
+      "Sid": ""
+    },
+    {
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "*"
+        ]
+      },
+      "Resource": [
+        "arn:aws:s3:::%s/*"
+      ],
+      "Sid": ""
+    }
+  ]
+}
+';
+// If you want to put it on a specific folder you just change 'arn:aws:s3:::%s/*' to 'arn:aws:s3:::%s/folder/*'
+
+// Create a bucket
+$result = $s3->createBucket([
+    'Bucket' => $bucket,
+]);
+
+// Configure the policy
+$s3->putBucketPolicy([
+    'Bucket' => $bucket,
+    'Policy' => sprintf($policyReadOnly, $bucket, $bucket),
+]);
 ```
