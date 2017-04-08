@@ -11,7 +11,7 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 Install `s3fs-fuse` from <https://github.com/s3fs-fuse/s3fs-fuse>.
 
-Create a bucket on the Minio Server to use with this cookbook.
+Create a bucket on the Minio Server to use with this cookbook. <https://docs.minio.io/docs/minio-client-quickstart-guide>.
 
 ## 3. Configuration
 
