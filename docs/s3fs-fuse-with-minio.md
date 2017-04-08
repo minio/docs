@@ -15,7 +15,7 @@ Create a bucket on the Minio Server to use with this cookbook.
 
 ## 3. Configuration
 
-Before you run s3fs, you will need to save your S3 credentials in a file that will be used later in this tutorial. In the command below replace access_key and secret_key with your actual Minio credentials. 
+Before you run s3fs, you will need to save your S3 credentials in a file that will be used later in this tutorial. In the command below, replace access_key and secret_key with your actual Minio credentials. 
 
 ```
 echo "access_key:secret_key" > /etc/s3cred
