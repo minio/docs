@@ -27,11 +27,31 @@ Now create a directory to mount the bucket.
 mkdir /s3
 ```
 
-
 Run `s3fs` to mount the bucket from the Minio server using the S3 credentials from the previous command.
 
 ```
 s3fs <bucket> <mount-point> -o passwd_file=/etc/s3cred,use_path_request_style,url=http://minio-server:8000
 
+```
+
+Check to see that the bucket is mounted with the mount command:
+
+```
+mount | grep s3fs
+
+s3fs on <mount-point> type fuse.s3fs (rw,nosuid,nodev,relatime,user_id=0,group_id=0)
+```
+
+Copy a file to the mounted bucket:
+
+```
+cp /etc/resolv.conf <mount-point>
+```
+
+Verify that the file exists with the Minio command-line utility mc:
+
+```
+# mc ls <minio-server>/<bucket>
+[2017-04-07 21:49:39 PDT]    49B resolv.conf
 ```
 
