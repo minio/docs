@@ -21,7 +21,7 @@ Before you run s3fs, you will need to save your S3 credentials in a file that wi
 echo "access_key:secret_key" > /etc/s3cred
 ```
 
-Now create a directory to mount the bucket.
+Now create a directory to mount the bucket. I will use /s3 for this cookbook to keep it simple.
 
 ```
 mkdir /s3
@@ -30,7 +30,7 @@ mkdir /s3
 Run `s3fs` to mount the bucket from the Minio server using the S3 credentials from the previous command.
 
 ```
-s3fs <bucket> <mount-point> -o passwd_file=/etc/s3cred,use_path_request_style,url=http://minio-server:8000
+s3fs <bucket> /s3 -o passwd_file=/etc/s3cred,use_path_request_style,url=http://minio-server:8000
 
 ```
 
@@ -42,13 +42,13 @@ Check to see that the bucket is mounted with the mount command:
 ```
 mount | grep s3fs
 
-s3fs on <mount-point> type fuse.s3fs (rw,nosuid,nodev,relatime,user_id=0,group_id=0)
+s3fs on /s3 type fuse.s3fs (rw,nosuid,nodev,relatime,user_id=0,group_id=0)
 ```
 
 Copy a file to the mounted bucket:
 
 ```
-cp /etc/resolv.conf <mount-point>
+cp /etc/resolv.conf /s3
 ```
 
 Verify that the file exists with the Minio command-line utility mc:
