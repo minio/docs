@@ -10,11 +10,9 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html)
 
-## 3. Example
+## 3. Use GetObject and PutObject
 
-Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setup in this ``example.php`` file.
-
-Example below shows putObject and getObject operations on Minio server using aws-sdk-php.
+Example below shows putObject and getObject operations on Minio server using aws-sdk-php. Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setup in this ``example.php`` file.
 
 ```php
 <?php
@@ -52,14 +50,14 @@ $retrive = $s3->getObject([
 echo $retrive['Body'];
 ```
 
-## 4. Run the Program
+After the file is updated, run the program
 
 ```sh
 php example.php
 Hello from Minio!!
 ```
 
-## 5. Create a pre-signed URL
+## 4. Create a pre-signed URL
 
 ```php
 <?php
@@ -76,15 +74,16 @@ $presignedRequest = $s3->createPresignedRequest($command, '+10 minutes');
 $presignedUrl =  (string)  $presignedRequest->getUri();
 ```
 
-## 6. Get a plain URL 
+## 5. Get a plain URL 
+
+To get a plain URL, you'll need to make your object/bucket accessible with public permission. Also, note that you'll not get the URL with `X-Amz-Algorithm=[...]&X-Amz-Credential=[...]&X-Amz-Date=[...]&X-Amz-Expires=[...]&X-Amz-SignedHeaders=[...]&X-Amz-Signature=[...]`
 
 ```php
 <?php
-# To get a plain URL, you'll need to make your object/bucket accessible with public permission. Also, note that this line of code will not provide you a url with 'X-Amz-Algorithm=[...]&X-Amz-Credential=[...]&X-Amz-Date=[...]&X-Amz-Expires=[...]&X-Amz-SignedHeaders=[...]&X-Amz-Signature=[...]
 $plainUrl = $s3->getObjectUrl('testbucket', 'testkey');
 ```
 
-## 7. Set a Bucket Policy
+## 6. Set a Bucket Policy
 
 ```php
 <?php
