@@ -34,6 +34,9 @@ s3fs <bucket> <mount-point> -o passwd_file=/etc/s3cred,use_path_request_style,ur
 
 ```
 
+use_path_request_style is required for s3fs to work with Minio. If you do not use it, you will not be able to see or copy files in the mounted directory. 
+
+
 Check to see that the bucket is mounted with the mount command:
 
 ```
@@ -55,3 +58,4 @@ Verify that the file exists with the Minio command-line utility mc:
 [2017-04-07 21:49:39 PDT]    49B resolv.conf
 ```
 
+Now you are all set to enjoy using Minio with s3fs!
