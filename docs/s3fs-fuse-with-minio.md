@@ -30,7 +30,7 @@ mkdir /s3
 Run `s3fs` to mount the bucket from the Minio server using the Minio credentials from the previous command.
 
 ```
-s3fs <bucket> /s3 -o passwd_file=/etc/s3cred,use_path_request_style,url=http://minio-server:8000
+s3fs <bucket> /s3 -o passwd_file=/etc/s3cred,use_path_request_style,url=http://minio-server:9000
 
 ```
 
