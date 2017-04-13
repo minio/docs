@@ -40,6 +40,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [How to use AWS SDK for Ruby with Minio Server](./docs/aws-sdk-for-ruby-with-minio.md)
 - [How to use AWS SDK for Javascript with Minio Server](./docs/aws-sdk-for-javascript-with-minio.md)
 - [How to use AWS SDK for DotNet with Minio Server](./docs/aws-sdk-for-dotnet-with-minio.md)
+- [How to use AWS SDK for Swift with Minio Server](./docs/aws-sdk-for-swift-3-with-minio.md)
 - [How to use CloudBerry Drive with Minio](./docs/how-to-use-cloudberry-drive-with-minio.md)
 - [How to use AWS SDK for Java for encryption with Minio Server](./docs/how-to-use-aws-sdk-java-encryption.md)
 - [How to use s3fs-fuse with Minio](./docs/s3fs-fuse-with-minio.md)
