@@ -1,4 +1,4 @@
-# How to use AWS SDK for iOS with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for iOS(swift-3) with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 In this recipe we will learn how to use `AWSS3` for iOS with Minio server. `AWSS3` is the official AWS S3 SDK for the swift/objective-c programming language.
 
