@@ -4,7 +4,7 @@ In this recipe we will learn how to use `AWSS3` for iOS with Minio server. `AWSS
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio).
+Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
@@ -14,9 +14,9 @@ we only need 'AWSS3'
 
 ## 3. Example
 
-please replace `accessKey`, `secretKey`, and `url`, change the region base on what you need, service must set to `.S3`
+Please replace `accessKey`, `secretKey`, and `url`, change the region base on what you need, service must set to `.S3`
 
-(awss3 will auto remove port number if you type `xxxx:9000` in `url`, currently it only support full url without port, so please make sure you have a domain map to port 9000, you may need refer to this [Setup Nginx proxy with Minio Server](./docs/setup-nginx-proxy-with-minio.md))
+(`AWSS3` will auto remove port number if you type `xxxx:9000` in `url`, currently it only support full url without port, so please make sure you have a domain map to port 9000, you may need refer to this [Setup Nginx proxy with Minio Server](https://docs.minio.io/docs/setup-nginx-proxy-with-minio))
 
 ``` swift
 let accessKey = "XXXXXXX"
@@ -51,8 +51,11 @@ transferManager.upload(uploadRequest).continueWith { (task: AWSTask<AnyObject>) 
 }
 ```
 
-## [Full example project here](https://github.com/atom2ueki/minio-ios-example)
+[Full example project here](https://github.com/atom2ueki/minio-ios-example)
 
 ## 4. Run the Program
 
+
 Run the xcode project on your phone or simulator
+
+
