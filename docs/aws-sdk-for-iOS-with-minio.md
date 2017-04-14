@@ -55,7 +55,9 @@ transferManager.upload(uploadRequest).continueWith { (task: AWSTask<AnyObject>) 
 
 ## 4. Run the Program
 
+for example if you running that eample project
+1. Run the xcode project on your phone or simulator
+2. Click upload button on screen
+<img src="http://i.imgur.com/TpECb8f.png" alt="screenshot" height="250">
 
-Run the xcode project on your phone or simulator
-
-
+3. Check on `Minio Browser`, inside images bucket, there should be an image there called test.jpg, means you susccessful upload the image
