@@ -61,6 +61,5 @@ for example if you running that eample project
 1. Run the xcode project on your phone or simulator
 2. Click upload button on screen
 <img src="/docs/screenshots/iOS-test-app.png" alt="screenshot" height="250">
-3. Set bucket policy prefix as `prefix` (becasue as you see the example code, remote name set as prefix_test.jpg) from `Minio Browser` or `Minio mc` to `images` bucket
-4. Check on `Minio Browser`, inside images bucket, there should be an image there called prefix_test.jpg, means you susccessful upload the image
-5. Get remote url from iOS console or with this format 'host'/`bucket`/`filename with extension`, open in browser, you will see the image without any access deny
+
+3. Check on `Minio Browser`, inside images bucket, there should be an image there called prefix_test.jpg, means you susccessful upload the image
