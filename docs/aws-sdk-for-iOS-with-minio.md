@@ -6,6 +6,8 @@ In this recipe we will learn how to use `AWSS3` for iOS with Minio server. `AWSS
 
 Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
 
+To get latest `AWSS3` SDK v2.5.5 working with minio/minio:edge, you have to modify file `AWSSignature.m` from `AWSS3` SDK, remove line `[urlRequest setValue:@"Chunked" forHTTPHeaderField:@"Transfer-Encoding"];`, keep track on [aws-sdk-ios #638](https://github.com/aws/aws-sdk-ios/pull/638)
+
 ## 2. Installation
 
 Setup `AWSS3` for iOS from the official AWS iOS SDK docs [here](http://docs.aws.amazon.com/mobile/sdkforios/developerguide/setup-aws-sdk-for-ios.html)
@@ -28,7 +30,7 @@ let configuration = AWSServiceConfiguration(region: .USEast1, endpoint: AWSEndpo
 AWSServiceManager.default().defaultServiceConfiguration = configuration
 
 let S3BucketName = "images"
-let remoteName = "test.jpg"
+let remoteName = "prefix_test.jpg"
 let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(remoteName)
 let image = UIImage(named: "test")
 let data = UIImageJPEGRepresentation(image!, 0.9)
@@ -60,4 +62,4 @@ for example if you running that eample project
 2. Click upload button on screen
 <img src="/docs/screenshots/iOS-test-app.png" alt="screenshot" height="250">
 
-3. Check on `Minio Browser`, inside images bucket, there should be an image there called test.jpg, means you susccessful upload the image
+3. Check on `Minio Browser`, inside images bucket, there should be an image there called prefix_test.jpg, means you susccessful upload the image
