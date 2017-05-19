@@ -27,6 +27,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [Setup Nginx proxy with Minio](./docs/setup-nginx-proxy-with-minio.md)
 - [Setup Apache HTTP proxy with Minio](./docs/setup-apache-http-proxy-with-minio.md)
 - [How to run multiple Minio servers with Træfɪk](./docs/multiple-minio-servers-with-traefik.md)
+- [How to run loadbalanced distributed Minio in Docker swarm with Træfɪk](./docs/distributed-minio-with-traefik-as-loadbalancer-in-swarm.md)
 - [Rclone with Minio](./docs/rclone-with-minio.md)
 - [Download from Browser with PreSignedGet](./docs/presigned-get-download-from-browser.md)
 - [Upload via Browser with PreSignedPut](./docs/presigned-put-upload-via-browser.md)
