@@ -6,7 +6,7 @@ In this recipe we will learn how to configure and use AWS CLI to manage data wit
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio).
+Install Minio Server from [here](https://docs.minio.io).
 
 ## 2. Installation
 
