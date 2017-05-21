@@ -35,7 +35,7 @@ docker network create --attachable --driver overlay minio_distributed
 ### 2.3 Prepare Docker Compose file
 
 ```yml
-version: '3'
+version: '3.1'
 
 services:
   minio1:
