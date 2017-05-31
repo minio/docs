@@ -8,7 +8,8 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 ## 2. Installation
 
-Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html)
+Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html). Note that you'll need to set `use_path_style_endpoint` to `true` to use Minio with AWS SDK for PHP. Read more 
+in the docs [here](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html). 
 
 ## 3. Use GetObject and PutObject
 
