@@ -8,12 +8,11 @@ Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
 ## 2. Installation
 
-Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html). Note that you'll need to set `use_path_style_endpoint` to `true` to use Minio with AWS SDK for PHP. Read more 
-in the docs [here](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html). 
+Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html). 
 
 ## 3. Use GetObject and PutObject
 
-Example below shows putObject and getObject operations on Minio server using aws-sdk-php. Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setup in this ``example.php`` file.
+Example below shows putObject and getObject operations on Minio server using aws-sdk-php. Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setup in this ``example.php`` file. Note that we set `use_path_style_endpoint` to `true` to use Minio with AWS SDK for PHP. Read more in the AWS SDK for PHP docs [here](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html#___construct). 
 
 ```php
 <?php
@@ -26,6 +25,7 @@ $s3 = new Aws\S3\S3Client([
         'version' => 'latest',
         'region'  => 'us-east-1',
         'endpoint' => 'http://localhost:9000',
+        'use_path_style_endpoint' => 'true',
         'credentials' => [
                 'key'    => 'YOUR-ACCESSKEYID',
                 'secret' => 'YOUR-SECRETACCESSKEY',
