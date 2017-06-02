@@ -54,7 +54,7 @@ Note:
 * Other buckets can be accessed by adding more location definitions similar to the one defined above.
 
 ### Non Root Configuration With Rewrite
-The following location configuration allows for access to any bucket however only through unsigned urls and therefore publically accessiable buckets.
+The following location configuration allows for access to any bucket however only through unsigned urls and therefore publically accessible buckets.
 
 ```sh
  location ~^/files {
