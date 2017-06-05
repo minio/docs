@@ -30,6 +30,7 @@ $s3 = new Aws\S3\S3Client([
                 'key'    => 'YOUR-ACCESSKEYID',
                 'secret' => 'YOUR-SECRETACCESSKEY',
             ],
+        'use_path_style_endpoint' => true,
 ]);
 
 
