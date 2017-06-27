@@ -35,7 +35,7 @@ $ sudo concert gen --dir my-certs admin@churchofminio.com churchofminio.com
 
 ### Step 3: Verify Certificates.
 
-List certs saved in `my-certs` directory.
+List certs saved in `my-certs` directory. 
 
 ```sh
 $ ls -l my-certs/
@@ -55,6 +55,8 @@ $ cp my-certs/public.crt /home/supernova/.minio/certs/
 ```
 
 ### Step 5: Change ownership of certificates.
+
+Let's Encrypt generates the certificate as `root`, but you can change the ownership to user/group that is supposed to run Minio server. 
 
 ```sh
 $ sudo chown supernova:supernova /home/supernova/.minio/certs/private.key
