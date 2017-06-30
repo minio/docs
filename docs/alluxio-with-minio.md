@@ -50,7 +50,7 @@ bin/alluxio-start.sh local -f
 
 ## 3. Using Alluxio with Minio
 
-Files which already in the Minio bucket will be available thorugh Alluxio. One way to view them is the [Alluxio UI](http://localhost:19999/browse). Applications can access and write data in Minio through the Alluxio namespace.
+Files which already reside in the Minio bucket will be available thorugh Alluxio. One way to view them is the [Alluxio UI](http://localhost:19999/browse). Applications can access and write data in Minio through the Alluxio namespace.
 
 You can run Alluxio's built in I/O tests to see this in action.
 
