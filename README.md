@@ -12,6 +12,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 
 ### List of Recipes
 
+- [Alluxio with Minio](./docs/alluxio-with-minio.md)
 - [Running Deis Workflow with Minio](./docs/running-deis-workflow-with-minio.md)
 - [AWS CLI with Minio](./docs/aws-cli-with-minio.md)
 - [Running Minio in Cloudron](./docs/running-minio-in-cloudron.md)
