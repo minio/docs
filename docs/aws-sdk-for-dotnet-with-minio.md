@@ -6,8 +6,10 @@
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
+When running Minio server locally, the `MINIO_REGION` enviroment variable must be set.
+
 Install Visual Studio 2015,  Visual Studio 2017 or Visual Studio Code. Find installation of the Visual Studio editions [here](https://www.visualstudio.com/downloads/).
- 
+
 ## 2. Installation
 
 `aws-sdk-dotnet` installation is available as [Nuget package](https://www.nuget.org/packages/AWSSDK.S3/). This package contains only libraries that are necessary for work with AWS S3. 
@@ -41,7 +43,7 @@ class Program
     {
         var config = new AmazonS3Config
         {
-            RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL
+            RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL and it should match the `MINIO_REGION` enviroment variable.
             ServiceURL = "http://localhost:9000", // replace http://localhost:9000 with URL of your minio server
             ForcePathStyle = true // MUST be true to work correctly with Minio server
         })
