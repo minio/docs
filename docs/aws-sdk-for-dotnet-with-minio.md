@@ -6,8 +6,10 @@
 
 Install Minio Server from [here](http://docs.minio.io/docs/minio).
 
-Install Visual Studio 2015 or Visual Studio 2017. Find installation of Visual Studio 2015 Community edition [here](https://www.visualstudio.com/downloads/).
- 
+When running Minio server locally, the `MINIO_REGION` enviroment variable must be set.
+
+Install Visual Studio 2015,  Visual Studio 2017 or Visual Studio Code. Find installation of the Visual Studio editions [here](https://www.visualstudio.com/downloads/).
+
 ## 2. Installation
 
 `aws-sdk-dotnet` installation is available as [Nuget package](https://www.nuget.org/packages/AWSSDK.S3/). This package contains only libraries that are necessary for work with AWS S3. 
@@ -24,42 +26,52 @@ The example prints all buckets in the Minio server and lists all objects of the 
 ```csharp
 using Amazon.S3;
 using System;
+using System.Threading.Tasks;
+using Amazon;
 
 class Program
 {
     private const string accessKey = "PLACE YOUR ACCESS KEY HERE";
     private const string secretKey = "PLACE YOUR SECRET KEY HERE"; // do not store secret key hardcoded in your production source code!
-    
+
     static void Main(string[] args)
     {
-        var amazonS3Client = new AmazonS3Client(accessKey, secretKey, new AmazonS3Config { ServiceURL = "http://localhost:9000", ForcePathStyle = true }); // replace http://localhost:9000 with URL of your minio server
+        Task.Run(MainAsync).GetAwaiter().GetResult();
+    }
+
+    private static async Task MainAsync()
+    {
+        var config = new AmazonS3Config
+        {
+            RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL and it should match the `MINIO_REGION` enviroment variable.
+            ServiceURL = "http://localhost:9000", // replace http://localhost:9000 with URL of your minio server
+            ForcePathStyle = true // MUST be true to work correctly with Minio server
+        })
+        var amazonS3Client = new AmazonS3Client(accessKey, secretKey, config); 
 
         // uncomment the following line if you like to troubleshoot communication with S3 storage and implement private void OnAmazonS3Exception(object sender, Amazon.Runtime.ExceptionEventArgs e)
         // amazonS3Client.ExceptionEvent += OnAmazonS3Exception;
 
-        var task = amazonS3Client.ListBucketAsync();
-        task.Wait();
+        var listBucketResponse = await amazonS3Client.ListBucketsAsync();
 
-        foreach(var bucket in task.Result.Buckets)
+        foreach (var bucket in listBucketResponse.Buckets)
         {
-            Console.Out.WriteLine("bucket '" + bucket.BucketName + "' created at " + bucket.CreationTime);
+            Console.Out.WriteLine("bucket '" + bucket.BucketName + "' created at " + bucket.CreationDate);
         }
-        if (task.Result.Buckets.Count > 0)
+        if (listBucketResponse.Buckets.Count > 0)
         {
-            var bucketName = task.Result.Buckets[0].BucketName;
+            var bucketName = listBucketResponse.Buckets[0].BucketName;
 
-            var task2 = amazonS3Client.ListObjectsAsync(bucketName);
-            task2.Wait();
+            var listObjectsResponse = await amazonS3Client.ListObjectsAsync(bucketName);
 
-            foreach(var obj in task2.Result.S3Objects)
+            foreach (var obj in listObjectsResponse.S3Objects)
             {
-                Console.Out.WriteLine("key = '" + obj.Key+ "' | size = " + obj.Size + " | tags = '" + obj.ETag + "' | modified = " + obj.LastModified);
+                Console.Out.WriteLine("key = '" + obj.Key + "' | size = " + obj.Size + " | tags = '" + obj.ETag + "' | modified = " + obj.LastModified);
             }
         }
     }
 }
 ```
-The above example is using asynchronous API synchronously for the matter of example. The ``AmazonS3Config`` setting ``ForcePathStyle = true`` is essential in order to work correctly with Minio server.
 
 ## 5. Explore Further
 
