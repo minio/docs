@@ -12,13 +12,13 @@ This installation document assumes Ubuntu 16.04+ on x86-64 platform.
 $ sudo apt-get install git 
 ```
 
-##### Install Go 1.7+
+##### Install Go 1.8+
 
-Download Go 1.7+ from [https://golang.org/dl/](https://golang.org/dl/).
+Download Go 1.8+ from [https://golang.org/dl/](https://golang.org/dl/).
 
 ```
-$ wget https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz
-$ tar -C ${HOME} -xzf go1.7.4.linux-amd64.tar.gz
+$ wget https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
+$ tar -C ${HOME} -xzf go1.8.3.linux-amd64.tar.gz
 ```
 
 ##### Setup GOROOT and GOPATH
@@ -60,7 +60,7 @@ Install brew from [brew.sh](http://brew.sh/)
 $ brew install git 
 ```
 
-##### Install Go 1.7+
+##### Install Go 1.8+
 
 Install golang binaries using `brew`
 
@@ -93,4 +93,3 @@ $ source ~/.bash_profile
 $ go env
 $ go version
 ```
-
