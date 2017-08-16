@@ -19,8 +19,7 @@
     "lint": "remark -q ."
   },
   "dependencies": {
-    "remark-cli": "^2.1.0",
-    "remark-lint": "^5.2.0",
-    "remark-preset-lint-recommended": "^1.0.0"
+    "remark-cli": "^4.0.0",
+    "remark-lint": "^6.0.0"
   }
 }
