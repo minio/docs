@@ -1,6 +1,6 @@
 {
     "presets": [
-        "lint-recommended"
+        "remark-preset-lint-recommended"
     ],
     "plugins": {
         "lint": {
