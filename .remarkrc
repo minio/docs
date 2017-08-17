@@ -1,10 +1,6 @@
 {
-    "presets": [
-        "remark-preset-lint-recommended"
-    ],
-    "plugins": {
-        "lint": {
-            "list-item-indent": "space"
-        }
-    }
+    "plugins": [
+        "remark-preset-lint-recommended",
+        ["remark-lint-list-item-indent", "space"]
+    ]
 }
