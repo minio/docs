@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "remark-cli": "^4.0.0",
-    "remark-lint": "^6.0.0"
+    "remark-lint": "^6.0.0",
+    "remark-preset-lint-recommended": "^3.0.0"
   }
 }
