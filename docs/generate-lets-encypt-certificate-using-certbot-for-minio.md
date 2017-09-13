@@ -57,7 +57,7 @@ $ sudo ./minio server --address ":443" /mnt/data
 
 If you are using dockerized version of Minio then you would need to
 ```sh
-$ sudo docker run -p 443:443 -v /home/user/.minio:/root/.minio/ -v /home/user/data:/data server --address ":443" /data
+$ sudo docker run -p 443:443 -v /home/user/.minio:/root/.minio/ -v /home/user/data:/data minio/minio server --address ":443" /data
 ```
 
 ### Step 7: Visit <https://myminio.com> in the browser.
