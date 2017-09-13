@@ -23,7 +23,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [restic with Minio](./docs/restic-with-minio.md)
 - [S3cmd with Minio](./docs/s3cmd-with-minio.md)
 - [Aggregate Apache logs with fluentd and Minio](./docs/aggregate-apache-logs-with-fluentd-and-minio.md)
-- [Generate Let's Encypt certificate using Concert for Minio](./docs/generate-lets-encypt-certificate-using-concert-for-minio.md)
+- [Generate Let's Encrypt certificate using Certbot for Minio](./docs/generate-lets-encypt-certificate-using-certbot-for-minio.md)
 - [Setup Caddy proxy with Minio](./docs/setup-caddy-proxy-with-minio.md)
 - [Setup Nginx proxy with Minio](./docs/setup-nginx-proxy-with-minio.md)
 - [Setup Apache HTTP proxy with Minio](./docs/setup-apache-http-proxy-with-minio.md)
