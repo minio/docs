@@ -1,10 +1,10 @@
 # How to use Minio Server as [Laravel](https://laravel.com) Custom File Storage 
 
-`Laravel` has a customable file storage system with ability to create custom drivers for it. In this recipe we will implement a custom file system driver to use Minio server for managing files.
+`Laravel` has a customizable file storage system with ability to create custom drivers for it. In this recipe we will implement a custom file system driver to use Minio server for managing files.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio).
+Install Minio Server from [here](https://www.minio.io/downloads.html).
 
 ## 2. Install Required Dependency for Laravel
 
@@ -89,7 +89,7 @@ Add config for minio in `disks` section of `config/filesystems.php` file :
 
   ]
 ```  
-Note : `region` is not required & can be sets to anything.
+Note : `region` is not required & can be set to anything.
 
 ## 4. Use Storage with Minio in Laravel
 Now you can use `disk` method on storage facade to use minio driver :  
