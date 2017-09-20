@@ -100,3 +100,6 @@ Or you can set default cloud driver to `minio` in `filesystems.php` config file 
 ```php
 'cloud' => env('FILESYSTEM_CLOUD', 'minio'),
 ```
+
+##  Sample Project
+If you want, you could explore [laravel-minio-sample](https://github.com/m2sh/laravel-minio-sample) project and the  [unit tests](https://github.com/m2sh/laravel-minio-sample/blob/master/tests/Unit/MinioStorageTest.php) for understanding how to use Minio Server with Laravel
