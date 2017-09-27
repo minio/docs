@@ -8,10 +8,10 @@ Install Minio Server from [here](https://www.minio.io/downloads.html).
 
 ## 2. Install Required Dependency for Laravel
 
-Install `league/flysystem` package for [`aws-s3`](https://github.com/thephpleague/flysystem-aws-s3-v3) :
-
+Install `league/flysystem` package for [`aws-s3`](https://github.com/coraxster/flysystem-aws-s3-v3-minio)  :
+fork based on https://github.com/thephpleague/flysystem-aws-s3-v3
 ```
-composer require league/flysystem-aws-s3-v3
+composer require coraxster/flysystem-aws-s3-v3-minio
 ```
 
 
@@ -51,7 +51,10 @@ class MinioStorageServiceProvider extends ServiceProvider
               'use_path_style_endpoint' => true,
               'endpoint'    => $config["endpoint"],
           ]);
-          return new Filesystem(new AwsS3Adapter($client, $config["bucket"]));
+          $options = [
+              'override_visibility_on_copy' => true
+          ];
+          return new Filesystem(new AwsS3Adapter($client, $config["bucket"], '', $options));
       });
     }
 
