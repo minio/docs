@@ -39,7 +39,7 @@ lrwxrwxrwx 1 root root  40 Aug  2 09:58 privkey.pem -> ../../archive/myminio.com
 ### Step 4: Set up SSL on Minio Server with the certificates.
 The certificate and key generated via Certbot needs to be placed inside user's home directory.
 ```sh
-$ cp /etc/letsencrypt/live/myminio.com/fullychain.pem /home/user/.minio/certs/public.crt
+$ cp /etc/letsencrypt/live/myminio.com/fullchain.pem /home/user/.minio/certs/public.crt
 $ cp /etc/letsencrypt/live/myminio.com/privkey.pem /home/user/.minio/certs/private.key
 ```
 
