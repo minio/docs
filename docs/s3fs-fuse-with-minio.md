@@ -5,7 +5,7 @@ s3fs allows Linux and Mac OS X to mount an S3 bucket via FUSE. Please note that 
 In this recipe we will learn how to configure and use s3fs to mount a bucket from the Minio Server and copy data to it. 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio).
+Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 

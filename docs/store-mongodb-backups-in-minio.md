@@ -5,7 +5,7 @@ In this recipe we will learn how to store MongoDB backups in Minio Server.
 ## 1. Prerequisites
 
 * Install mc from [here](https://docs.minio.io/docs/minio-client-quickstart-guide).
-* Install Minio Server from [here](https://docs.minio.io/docs/minio ).
+* Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
 * MongoDB official [doc](https://docs.mongodb.com/).
 
 ## 2. Configuration Steps
