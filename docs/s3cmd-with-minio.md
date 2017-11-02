@@ -6,7 +6,7 @@ In this recipe we will learn how to configure and use S3cmd to manage data with 
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio).
+Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 

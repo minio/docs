@@ -4,7 +4,7 @@ In this recipe, we will learn how to use Minio as log aggregator for fluentd usi
 
 ## 1. Prerequisites
 
-* Install Minio Server from [here](http://docs.minio.io/docs/minio).
+* Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
 * Install `mc` from [here](http://docs.minio.io/docs/minio-client-quickstart-guide)
 
 ## 2. Installation

@@ -5,7 +5,7 @@ In this recipe we will learn how to use `fog-aws` for Ruby with Minio server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio).
+Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 

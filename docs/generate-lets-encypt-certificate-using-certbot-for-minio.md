@@ -6,7 +6,7 @@
 In this recipe, we will generate a Let's Encypt certificate using Certbot. This certificate will then be deployed for use in the Minio server.
 
 ## 1. Prerequisites
-- Install Minio Server from [here](https://docs.minio.io/docs/minio).
+- Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
 - Install Certbot from [here](https://certbot.eff.org/)
 
 ## 2. Dependencies

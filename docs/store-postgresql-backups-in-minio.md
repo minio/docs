@@ -5,7 +5,7 @@ In this recipe you will learn how to store PostgreSQL backups in Minio Server.
 ## 1. Prerequisites
 
 * Install mc from [here](https://docs.minio.io/docs/minio-client-quickstart-guide).
-* Install Minio Server from [here](https://docs.minio.io/docs/minio ).
+* Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
 * PostgreSQL official [doc](https://www.postgresql.org/docs/).
 
 ## 2. Configuration Steps

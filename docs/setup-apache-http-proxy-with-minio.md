@@ -6,7 +6,7 @@ In this recipe we will learn how to set up Apache HTTP with mod_proxy module for
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio). Remember the address and port.
+Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide). Remember the address and port.
 
 ## 2. Installation
 

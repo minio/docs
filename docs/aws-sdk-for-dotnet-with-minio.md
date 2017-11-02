@@ -4,7 +4,7 @@
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio).
+Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
 
 When running Minio server locally, the `MINIO_REGION` enviroment variable must be set.
 
