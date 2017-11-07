@@ -1,4 +1,4 @@
-# 使用Minio来部署Alluxio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 使用Alluxioj结合Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 本文中，我们将学习如何将Minio设置为[Alluxio](http://alluxio.org)的持久存储层。 [这里](http://www.alluxio.org/docs/master/en/Configuring-Alluxio-with-Minio.html)是Minio与Alluxio如何结合的文档。
 
