@@ -60,6 +60,7 @@ transferManager.upload(uploadRequest).continueWith { (task: AWSTask<AnyObject>) 
 例如，如果您运行该示例项目
 1. 在手机或模拟器上运行xcode项目
 2. 点击屏幕上的上传按钮
-<img src="/docs/screenshots/iOS-test-app.png" alt="screenshot" height="250">
+
+<img src="../screenshots/iOS-test-app.png" alt="screenshot" height="250">
 
 3. 通过`Minio Browser`访问, 在images这个存储桶里,应该有一个叫prefix_test.jpg的文件，这就代表你成功了。 
