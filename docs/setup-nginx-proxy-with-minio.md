@@ -14,7 +14,7 @@ Install Nginx from [here](http://nginx.org/en/download.html).
 
 ## 3. Configuration
 
-### Standard Root Configuration
+### Proxy all requests
 Add  below content as a file ``/etc/nginx/sites-enabled``  and also remove the existing ``default`` file in same directory.
 
 ```sh
@@ -34,42 +34,23 @@ Note:
 * Replace ``http://localhost:9000``  with your own server name.
 * Add ``client_max_body_size 1000m;`` in the ``http`` context in order to be able to upload large files — simply adjust the value accordingly. The default value is `1m` which is far too low for most scenarios.
 
-### Non Root Configuration
-When a non root configuration is needed adjust the location definition as follows:
+### Proxy requests based on the bucket
+If you want to serve web-application and Minio from the same nginx port then you can proxy the Minio requests based on the bucket name
 
 ```sh
- location ~^/files {
+ # Proxy requests to the bucket "photos" to Minio server running on port 9000
+ location /photos/ {
    proxy_buffering off;
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9000;
  }
-```
-
-Note:
-
-* Replace `http://localhost:9000` with your own server name.
-* Replace `files` with the desired path. This cannot be `~^/minio` since `minio` is a reserved word in minio. 
-* The path used (in this case `files`) will, by convension, be the name of the bucket used by minio.
-* Other buckets can be accessed by adding more location definitions similar to the one defined above.
-
-### Non Root Configuration With Rewrite
-The following location configuration allows for access to any bucket however only through unsigned urls and therefore publically accessible buckets.
-
-```sh
- location ~^/files {
+ # Proxy any other request to the application server running on port 9001
+ location / {
    proxy_buffering off;
    proxy_set_header Host $http_host;
-   rewrite ^/files/(.*)$ /$1 break;
-   proxy_pass http://localhost:9000;
+   proxy_pass http://localhost:9001;
  }
 ```
-
-Note:
-
-* Replace `http://localhost:9000` with your own server name.
-* Replace `files` with the desired path.
-* The buckets used must be publicly available, typically for both reading and writing.
-* The url used must be unsigned since nginx will change the url and invalidate the signature in the process.
 
 ## 4. Recipe Steps
 
