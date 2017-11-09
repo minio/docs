@@ -1,4 +1,4 @@
-# 如何使用Minio Server做为[Laravel](https://laravel.com) 自定义文件存储 
+# 如何使用Minio Server做为[Laravel](https://laravel.com)自定义文件存储 
 
 `Laravel`有一个可定制的文件存储系统，能够为它创建自定义的磁盘。在本文中，我们将实现一个自定义文件系统磁盘来使用Minio服务器来管理文件。
 
