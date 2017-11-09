@@ -47,3 +47,4 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [How to use AWS SDK for Java for encryption with Minio Server](./docs/how-to-use-aws-sdk-java-encryption.md)
 - [How to use s3fs-fuse with Minio](./docs/s3fs-fuse-with-minio.md)
 - [How to use Minio Server as Laravel Custom File Storage](./docs/how-to-use-minio-as-laravel-file-storage.md)
+- [How to use Minio server-side-encryption (SSE-C)](/docs/how-to-use-minio-server-side-encryption.md)
