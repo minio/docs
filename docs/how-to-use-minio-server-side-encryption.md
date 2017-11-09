@@ -18,8 +18,7 @@ A client **must** specify three HTTP headers for SSE-C requests:
  - Minio server uses a tamper-proof encryption scheme to encrypt objects and
    does **not save** the encryption key. This means that you are responsible to manage encryption keys. If you loose the encryption key of an object you will loose that object.
  - The minio server expects that the SSE-C encryption key is of *high entropy*.
-   The encryption key is **not** a password. If you want to use a password make
-   sure that you derive a high-entropy key using a password-based-key-derivation-function (PBKDF) like Argon2, scrypt or PBKDF2.
+   The encryption key is **not** a password. If you want to use a password make sure that you derive a high-entropy key using a password-based-key-derivation-function (PBKDF) like Argon2, scrypt or PBKDF2.
 
  ## 1. Prerequisites
 
@@ -41,25 +40,49 @@ any certificate.
 
 1. Create a bucket named `my-bucket`:  
 `aws --no-verify-ssl --endpoint-url https://localhost:9000 s3api create-bucket --bucket my-bucket`
-2. Upload an object using SSE-C. The object name is `my-encrypted-object` and the
-   its content is the file `~/my-secret-diary.txt`.
+2. Upload an object using SSE-C. The object name is `my-secret-diary` and the
+   its content is the file `~/my-diary.txt`.
     ```
-    aws --no-verify-ssl --endpoint-url https://localhost:9000 s3api put-object --bucket my-bucket --key my-encrypted-object.txt --sse-customer-algorithm AES256 --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ= --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg== --body ~/my-secret-diary.txt
+    aws s3api put-object\
+    --no-verify-ssl\
+    --endpoint-url https://localhost:9000\
+    --bucket my-bucket --key my-secret-diary\
+    --sse-customer-algorithm AES256\
+    --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ=\
+    --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg==\
+    --body ~/my-diary.txt
     ```
     You should use your own encryption key.
 
 ### 2.2 Show object information
   You **must** specify the correct SSE-C key of an encrypted object to show its metadata:
   ```
-  aws --no-verify-ssl --endpoint-url https://localhost:9000 s3api head-object --bucket my-bucket --key my-encrypted-object.txt --sse-customer-algorithm AES256 --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ= --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg==
+  aws s3api head-object\
+  --no-verify-ssl\
+  --endpoint-url https://localhost:9000\
+  --bucket my-bucket\
+  --key my-secret-diary\
+  --sse-customer-algorithm AES256\
+  --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ=\
+  --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg==
   ```
 
 ### 2.3 Download an object
 
-1. Now delete your local copy of `my-secret-diary.txt`:  
-   `rm ~/my-secret-diary.txt` 
+1. Now delete your local copy of `my-diary.txt`:  
+   `rm ~/my-diary.txt` 
    
 2. You can restore the diary by downloading it from the server:
    ```
-   aws --no-verify-ssl --endpoint-url https://localhost:9000 s3api get-object --bucket test --key my-encrypted-object.txt --sse-customer-algorithm AES256 --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ= --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg== ~/my-secret-diary.txt
+   aws s3api get-object\
+   --no-verify-ssl\
+   --endpoint-url https://localhost:9000\
+   --bucket my-bucket\
+   --key my-secret-diary\
+   --sse-customer-algorithm AES256\
+   --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ=\
+   --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg==\
+   ~/my-diary.txt
    ```
+
+   
