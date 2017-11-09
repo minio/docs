@@ -1,5 +1,5 @@
-# How to use Minio's server-side-encryption [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
-
+# How to use Minio's server-side-encryption with aws-cli [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+ 
 Minio supports S3 server-side-encryption with customer provided keys (SSE-C).
 A client **must** specify three HTTP headers for SSE-C requests:
  - The algorithm identifier: `X-Amz-Server-Side-Encryption-Customer-Algorithm`  
@@ -43,13 +43,13 @@ any certificate.
 2. Upload an object using SSE-C. The object name is `my-secret-diary` and the
    its content is the file `~/my-diary.txt`.
     ```
-    aws s3api put-object\
-    --no-verify-ssl\
-    --endpoint-url https://localhost:9000\
-    --bucket my-bucket --key my-secret-diary\
-    --sse-customer-algorithm AES256\
-    --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ=\
-    --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg==\
+    aws s3api put-object \
+    --no-verify-ssl \
+    --endpoint-url https://localhost:9000 \
+    --bucket my-bucket --key my-secret-diary \
+    --sse-customer-algorithm AES256 \
+    --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ= \
+    --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg== \
     --body ~/my-diary.txt
     ```
     You should use your own encryption key.
@@ -57,13 +57,13 @@ any certificate.
 ### 2.2 Show object information
   You **must** specify the correct SSE-C key of an encrypted object to show its metadata:
   ```
-  aws s3api head-object\
-  --no-verify-ssl\
-  --endpoint-url https://localhost:9000\
-  --bucket my-bucket\
-  --key my-secret-diary\
-  --sse-customer-algorithm AES256\
-  --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ=\
+  aws s3api head-object \
+  --no-verify-ssl \
+  --endpoint-url https://localhost:9000 \
+  --bucket my-bucket \
+  --key my-secret-diary \
+  --sse-customer-algorithm AES256 \
+  --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ= \
   --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg==
   ```
 
@@ -74,14 +74,14 @@ any certificate.
    
 2. You can restore the diary by downloading it from the server:
    ```
-   aws s3api get-object\
-   --no-verify-ssl\
-   --endpoint-url https://localhost:9000\
-   --bucket my-bucket\
-   --key my-secret-diary\
-   --sse-customer-algorithm AES256\
-   --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ=\
-   --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg==\
+   aws s3api get-object \
+   --no-verify-ssl \
+   --endpoint-url https://localhost:9000 \
+   --bucket my-bucket \
+   --key my-secret-diary \
+   --sse-customer-algorithm AES256 \
+   --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ= \
+   --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg== \
    ~/my-diary.txt
    ```
 
