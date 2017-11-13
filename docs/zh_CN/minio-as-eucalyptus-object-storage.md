@@ -52,7 +52,7 @@ is not a valid value.  Legal values are: walrus,ceph-rgw,riakcs
 
 所以，现在我们必须为Minio添加另一个提供者客户端。从技术上讲，我们可以使用riakcs，如果你已经使用packages部署了Eucalyptus，但是在这种情况下我不会这样做，因为我已经有了source build cloud。
 
-本文假定你已经知道如何通过源码来build Eucalyptus,不会花篇幅来介绍细节。请到 [这里](https://github.com/eucalyptus/eucalyptus/blob/master/INSTALL) 来参考如何通过源码安装Eucalyptus。本文的目的是介绍如何添加第三方对象存储（比如Minio）到Eucalyptus。不过再重申一下，如果你想用package installation，以及用riakcs做为提供者客户端，使用Minio的endpoint和用户凭据，我们绝不拦着。
+本文假定你已经知道如何通过源码来build Eucalyptus,不会花篇幅来介绍细节。请到[这里](https://github.com/eucalyptus/eucalyptus/blob/master/INSTALL)来参考如何通过源码安装Eucalyptus。本文的目的是介绍如何添加第三方对象存储（比如Minio）到Eucalyptus。不过再重申一下，如果你想用package installation，以及用riakcs做为提供者客户端，使用Minio的endpoint和用户凭据，我们绝不拦着。
 
 为了添加minio做为提供者客户端，首先我们需要创建一个叫MinioProviderClient.java的文件，
 
@@ -72,7 +72,7 @@ public class MinioProviderClient extends S3ProviderClient {
 
 构建并安装所有的eucalyptus源码或者只是构建相应的jar。
 
-停止eucalyptus-cloud服务并将eucalyptus-object-storage-4.4.0.jar复制到面向用户的服务正在运行的/usr/ share/eucalyptus目录中。重新启动eucalyptus-cloud服务。
+停止eucalyptus-cloud服务并将eucalyptus-object-storage-4.4.0.jar复制到面向用户的服务正在运行的/usr/share/eucalyptus目录中。重新启动eucalyptus-cloud服务。
 
 如果一切顺利，启用服务时，我们现在可以再次检查受支持的对象存储提供程序。
 

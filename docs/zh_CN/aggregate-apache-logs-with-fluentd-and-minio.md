@@ -1,15 +1,15 @@
 # 使用fluentd插件聚合Apache日志[![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-在本文中，我们将学习如何使用如何使用`fluent-plugin-s3`插件结合Minio做为日志聚合器。
+在本文中，我们将学习如何使用`fluent-plugin-s3`插件结合Minio做为日志聚合器。
 
-## 1. 前提提条
+## 1. 前提提件
 
 * 从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载Minio Server。
 * 从[这里](http://docs.minio.io/docs/minio-client-quickstart-guide)下载`mc`。
 
 ## 2. 安装
 
-* 安装并运行[Apache](https://httpd.apache.org) server。
+* 安装并运行[Apache server](https://httpd.apache.org) 。
 * 安装[fluentd](http://docs.fluentd.org/articles/install-by-deb) 和 [fluent-plugin-s3](http://docs.fluentd.org/articles/apache-to-s3#amazon-s3-output)。
 
 

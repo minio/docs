@@ -1,6 +1,6 @@
 # 使用s3fs-fuse操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-s3fs允许Linux和Mac OS X通过FUSE安装S3存储桶。请注意，您将无法使用s3fs创建目录，因为Minio不支持创建文件夹。
+s3fs允许Linux和Mac OS X通过FUSE安装S3存储桶。请注意，你将无法使用s3fs创建目录，因为Minio不支持创建文件夹。
 
 在本文中，我们将学习如何配置和使用s3fs从Minio服务器挂载一个存储桶并将数据复制到它。 
 

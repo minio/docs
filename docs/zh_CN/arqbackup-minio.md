@@ -1,6 +1,6 @@
 # Arq Backup结合Minio进行备份 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io) 
 
-Arq Backup软件可用于Mac和Windows。Arq以加密格式存储多个版本的文件。备份可以存储在各种云端后端，包括Minio。本文档将引导您通过Minio进行Arq Backup配置。  
+Arq Backup软件可用于Mac和Windows。Arq以加密格式存储多个版本的文件。备份可以存储在各种云存储后端，包括Minio。本文档将引导你通过Minio进行Arq Backup配置。  
 
 ## 1. 前提条件
 

@@ -1,4 +1,4 @@
-# 如何使用Træfɪk运行多个Minio服务 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用Træfɪk代理多个Minio服务 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 [Træfɪk](https://traefik.io/)是一个用Go语言写的先进（和流行技术结合的比较好）的反向代理。它支持多种配置方式，本文将介绍如何通过Docker设置多个Minio实例，并用Træfɪk可实现通过不同的子域名进行访问。 
 
@@ -38,7 +38,7 @@ watch = true
 EOF
 ```
 
-除了上面的配置之外，我们还需要touch一下`acme.json`，这个文件存了生成的证书，同时也存着private keys,所以你需要设置好权限，别让所有人都能访问这个文件。
+除了上面的配置之外，我们还需要touch一下`acme.json`，这个文件存了生成的证书，同时也存着私钥,所以你需要设置好权限，别让所有人都能访问这个文件。
 
 
 ```sh

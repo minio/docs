@@ -1,4 +1,4 @@
-# 使用Alluxioj结合Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 使用Alluxio结合Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 本文中，我们将学习如何将Minio设置为[Alluxio](http://alluxio.org)的持久存储层。 [这里](http://www.alluxio.org/docs/master/en/Configuring-Alluxio-with-Minio.html)是Minio与Alluxio如何结合的文档。
 
@@ -26,7 +26,7 @@ cd alluxio-<VERSION>-<DISTRIBUTION>
 cp conf/alluxio-site.properties.template conf/alluxio-site.properties
 ```
 
-为您的部署适当地修改Alluxio配置文件。下面示例在本地运行Alluxio和Minio的示例配置。
+为你的部署适当地修改Alluxio配置文件。下面示例是在本地运行Alluxio和Minio的示例配置。
 
 假设Minio Server正在<MINIO_HOST:PORT>处运行。
 假设你希望挂载到Alluxio的Minio存储桶是<MINIO_BUCKET>。

@@ -20,16 +20,13 @@
 require 'fog/aws'
 
 connection = Fog::Storage.new({
-    provider:              'AWS',                        # required
+    provider:              'AWS',                        # 必须
     aws_access_key_id:     'YOUR-ACCESSKEYID',
     aws_secret_access_key: 'YOUR-SECRETACCESSKEY',
-    region:                'us-east-1',                  # optional, defaults to 'us-east-1',
-                                                         # Please mention other regions if you have changed
-                                                         # minio configuration
-    host:                  'localhost',              # Provide your host name here, otherwise fog-aws defaults to
-                                                         # s3.amazonaws.com
-    endpoint:              'http://localhost:9000', # Required, otherwise defauls to nil
-    path_style:         	true,                        # Required
+    region:                'us-east-1',                  # 可选，默认为 'us-east-1'
+    host:                  'localhost',              # 配置你的host,不然fog-asw默认为s3.amazonaws.com
+    endpoint:              'http://localhost:9000', # 必须，不然默认为nil
+    path_style:         	true,                        # 必须
 })
 
 

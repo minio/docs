@@ -2,7 +2,7 @@
 
 本文我们将学习如何使用`aws-sdk` for Javascript操作Minio Server。`aws-sdk` for Javascript是Javascript语言版本的官方AWS SDK。
 
-## 1. 前提提条
+## 1. 前提条件
 
 从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
 

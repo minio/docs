@@ -1,6 +1,6 @@
 # 使用pre-signed URLs通过浏览器进行下载 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-通过presigned URLs,你可以让浏览器直接开载一个私有的文件，而不需要暴露你的S3认证信息给该用户。以下是一个如何在一个Node.js程序中使用的示例，用的是[minio-js](https://github.com/minio/minio-js)。
+通过presigned URLs,你可以让浏览器直接下载一个私有的文件，而不需要暴露你的S3认证信息给该用户。以下是一个如何在一个Node.js程序中使用的示例，用的是[minio-js](https://github.com/minio/minio-js)。
 
 这个程序开箱即用，只要把代码复制粘贴就可以用了，这个操作咱们应该不陌生，都懂得。
 

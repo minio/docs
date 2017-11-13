@@ -6,8 +6,8 @@
 
 ## 1. 前提条件
 
-* Cloudron已经安装并运行, 如果没有，请参考 [安装说明](https://cloudron.io/get.html#selfhost).
-* 如果你没有Cloudron,你可以在 [demo实例](https://my-demo.cloudron.me)练习。用户名和密码都是`cloudron`.
+* Cloudron已经安装并运行, 如果没有，请参考 [安装说明](https://cloudron.io/get.html#selfhost)。
+* 如果你没有Cloudron,你可以在 [demo实例](https://my-demo.cloudron.me)练习。用户名和密码都是`cloudron`。
 
 ## 2. 安装步骤
 
@@ -15,24 +15,24 @@
 
 到Cloudron App Store页面，搜索'Minio'。
 
-  ![Minio in Cloudron App Store](../screenshots/cloudron/appstore.png?raw=true "Search for Minio on Cloudron App Store")
+  ![Minio in Cloudron App Store](../screenshots/cloudron/appstore.png)
 
 
 ### 安装Minio
 
 安装对话框允许您输入要安装Minio的任何子域。这里我们选择子域`s3`。
 
-  ![Install Cloudron](../screenshots/cloudron/install.png?raw=true "Install Minio on any subdomain")
+  ![Install Cloudron](../screenshots/cloudron/install.png)
 
 ### 访问Minio
 
 单击安装的应用程序列表中的Minio应用程序图标访问Minio 。
 
-  ![Minio is installed on Cloudron](../screenshots/cloudron/installed.png?raw=true "Minio is installed and running")
+  ![Minio is installed on Cloudron](../screenshots/cloudron/installed.png)
 
 ### 结合Let's Encrypt运行Minio
 
 注意Minio已经设置好了Let's Encrypt的证书，你可以用Access Key `admin`和Secret Key `secretkey`来访问Minio。
 
-  ![Minio运行于Cloudron](../screenshots/cloudron/running.png?raw=true "Minio is live with Lets Encrypt")
+  ![Minio运行于Cloudron](../screenshots/cloudron/running.png)
 

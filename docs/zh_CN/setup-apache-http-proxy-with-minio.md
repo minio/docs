@@ -1,4 +1,4 @@
-# 给Minio Server设置Apache HTTP proxy [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 为Minio Server设置Apache HTTP proxy [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 Apache HTTP是一个开源Web服务器和一个反向代理服务器。  
 
@@ -50,7 +50,7 @@ Apache HTTP是一个开源Web服务器和一个反向代理服务器。
 minio server /mydatadir
 ```
 
-### 第三步: 重启Apache HTTP server.
+### 第三步: 重启Apache HTTP server。
 
 ```sh
 sudo service httpd restart

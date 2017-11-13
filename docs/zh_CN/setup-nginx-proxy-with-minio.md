@@ -1,4 +1,4 @@
-# 给Minio Server设置Nginx代理 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 为Minio Server设置Nginx代理 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 Nginx是一个开源的Web服务器和反向代理服务器。  
 

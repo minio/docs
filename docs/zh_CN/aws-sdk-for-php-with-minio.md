@@ -12,7 +12,7 @@
 
 ## 3. 使用GetObject和PutObject
 
-下面示例描述的是如何使用aws-sdk-php对Minio server进行putObject和getObject操作。请将``example.php``文件中的``endpoint``,``key``, ``secret``, ``Bucket``修改为你的本地配置。注意，我们将`use_path_style_endpoint`设置为`true`以使用AWS SDK for PHP来操作Minio。了解更多[AWS SDK for PHP](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html#___construct)。
+下面示例描述的是如何使用aws-sdk-php对Minio server进行putObject和getObject操作。请将``example.php``文件中的``endpoint``,``key``, ``secret``, ``Bucket``修改为你的本地配置。注意，我们将`use_path_style_endpoint`设置为`true`以使用AWS SDK for PHP来操作Minio。了解更多，请参考[AWS SDK for PHP](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html#___construct)。
 
 
 ```php

@@ -17,7 +17,7 @@
  使用[Java KeyGenrator](https://docs.oracle.com/javase/7/docs/api/javax/crypto/KeyGenerator.html)类生成一个256位的AES key。
 
 ```java
-    //Generate symmetric 256 bit AES key.
+    // 生成256位AES key.
     KeyGenerator symKeyGenerator = KeyGenerator.getInstance("AES");
     symKeyGenerator.init(256);
     SecretKey symKey = symKeyGenerator.generateKey();
@@ -29,11 +29,11 @@
     EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
       mySymmetricKey);
 
-    // Add Minio server accessKey and secretKey  
+    // 添加 Minio server accessKey和secretKey  
     AWSCredentials credentials = new BasicAWSCredentials(
       "USWUXHGYZQYFYFFIT3RE", "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");
 
-    // Create encryption client with Minio server as endpoint  
+    // 创建以Minio server做为endpoint的加密client。
     AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
       credentials, new StaticEncryptionMaterialsProvider(
       encryptionMaterials));
@@ -47,10 +47,10 @@
 使用前面步骤创建的加密客户端操作Minio server。
 
 ```java
-    // Create the bucket
+    // 创建存储桶
     encryptionClient.createBucket(bucketName);
 
-    // Upload object using the encryption client.
+    // 使用加密client上传文件
     byte[] plaintext = "Hello World, S3 Client-side Encryption Using Asymmetric Master Key!"
       .getBytes();
     System.out.println("plaintext's length: " + plaintext.length);
@@ -63,13 +63,13 @@
 文件下载之后，验证解密后的文件是否和之前上传到Minio server的原文件是否相同。
 
 ```java
-    // Download the object
+    // 下载文件
     S3Object downloadedObject = encryptionClient.getObject(bucketName,
     objectKey);
     byte[] decrypted = IOUtils.toByteArray(downloadedObject
     .getObjectContent());
 
-    // Verify same data.
+    // 验证数据是否一致
     Assert.assertTrue(Arrays.equals(plaintext, decrypted));
 ```
 
@@ -82,7 +82,7 @@
 ### 1. 生成RSA key
 
 ```java
-    // Generate RSA key pair
+    // 生成RSA key pair
     KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance(algorithm);
     keyGenerator.initialize(1024, srand);
     keyGenerator.generateKeyPair();
@@ -94,11 +94,11 @@
     EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
       loadedKeyPair);
 
-    // Add Minio server accessKey and secretKey
+    // 添加 Minio server accessKey和secretKey
     AWSCredentials credentials = new BasicAWSCredentials("USWUXHGYZQYFYFFIT3RE",
       "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");	   
 
-    // Create encryption client with Minio server as endpoint   
+    // 创建以Minio server做为endpoint的加密client。
     AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
       credentials, new StaticEncryptionMaterialsProvider(encryptionMaterials));
     Region usEast1 = Region.getRegion(Regions.US_EAST_1);
@@ -111,10 +111,10 @@
 使用前面步骤创建的加密客户端操作Minio server。
 
 ```java
-    // Create the bucket
+    // 创建存储桶
     encryptionClient.createBucket(bucketName);
 
-    // Upload the object.
+    // 上传文件
     byte[] plaintext = "Hello World, S3 Client-side Encryption Using Asymmetric Master Key!"
       .getBytes();
     System.out.println("plaintext's length: " + plaintext.length);
@@ -127,14 +127,14 @@
 文件下载之后，验证解密后的文件是否和之前上传到Minio server的原文件是否相同。
 
 ```java
-    // Download the object
+    // 下载文件
     S3Object downloadedObject = encryptionClient.getObject(bucketName,
       objectKey);
     byte[] decrypted = IOUtils.toByteArray(downloadedObject
       .getObjectContent());
     Assert.assertTrue(Arrays.equals(plaintext, decrypted));
 
-    // Verify same data.
+    // 验证数据是否一致
     System.out.println("decrypted length: " + decrypted.length);
 ```
 

@@ -11,7 +11,7 @@
 参考[Deploy Minio on Docker Swarm](https://docs.minio.io/docs/deploy-minio-on-docker-swarm) 文档, 我们可以使用一个Docker Compose file来部署Minio。
 
 * 剥离每个Minio的端口，将Træfɪk做为前置负载均衡
-* * 添加Træfɪk标签(注意一下`Host:...`标签，它配置了Træfɪk监听Swarm内部及外部访问的前端规则)到每个Minio服务。
+* 添加Træfɪk标签(注意一下`Host:...`标签，它配置了Træfɪk监听Swarm内部及外部访问的前端规则)到每个Minio服务。
 * 添加 `minioproxy` Træfɪk service。
 * 额外收获: 由于咱们用了Docker swarm,我们还可以使用secrets而不是环境变量（这样更安全）。
 

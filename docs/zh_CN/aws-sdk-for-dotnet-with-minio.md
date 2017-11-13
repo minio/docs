@@ -1,4 +1,4 @@
-# 如何使用AWS .NET SDK操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for .NET操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `aws-sdk-dotnet`是.NET Framework的官方AWS开发工具包。在本文中，我们将学习如何使用`aws-sdk-dotnet`操作Minio Server。
 
@@ -31,7 +31,7 @@ using Amazon;
 class Program
 {
     private const string accessKey = "PLACE YOUR ACCESS KEY HERE";
-    private const string secretKey = "PLACE YOUR SECRET KEY HERE"; // do not store secret key hardcoded in your production source code!
+    private const string secretKey = "PLACE YOUR SECRET KEY HERE"; // 不要把你的秘钥硬编码到你的代码中。
 
     static void Main(string[] args)
     {
@@ -42,13 +42,13 @@ class Program
     {
         var config = new AmazonS3Config
         {
-            RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL and it should match the `MINIO_REGION` enviroment variable.
-            ServiceURL = "http://localhost:9000", // replace http://localhost:9000 with URL of your minio server
-            ForcePathStyle = true // MUST be true to work correctly with Minio server
+            RegionEndpoint = RegionEndpoint.USEast1, // 必须在设置ServiceURL前进行设置，并且需要和`MINIO_REGION`环境变量一致。
+            ServiceURL = "http://localhost:9000", // 替换成你自己的minio服务的URL
+            ForcePathStyle = true // 必须设为true
         })
         var amazonS3Client = new AmazonS3Client(accessKey, secretKey, config); 
 
-        // uncomment the following line if you like to troubleshoot communication with S3 storage and implement private void OnAmazonS3Exception(object sender, Amazon.Runtime.ExceptionEventArgs e)
+        // 如果你想调试与S3存储的通信的话，可以把下一行代码取消注释，并且实现 private void OnAmazonS3Exception(object sender, Amazon.Runtime.ExceptionEventArgs e)
         // amazonS3Client.ExceptionEvent += OnAmazonS3Exception;
 
         var listBucketResponse = await amazonS3Client.ListBucketsAsync();

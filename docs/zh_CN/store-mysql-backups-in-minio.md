@@ -22,7 +22,7 @@ Bucket created successfully ‘m1/mysqlbkp’.
 
 ### 持续地将本地备份文件mirror到Minio server。
 
-持续地将``mysqlbkp``文件夹中所有数据mirror到Minio。更多``mc mirror``信息，请参考 [这里](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 。
+持续地将``mysqlbkp``文件夹中所有数据mirror到Minio。更多``mc mirror``信息，请参考[这里](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 。
 
 ```sh
 mc mirror --force --remove --watch mysqlbkp/ m1/mysqlbkp

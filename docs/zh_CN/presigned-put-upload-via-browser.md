@@ -42,7 +42,7 @@ server.listen(8080)
 
 程序使用了[jQuery](http://jquery.com/).
 
-用户通过浏览器选择了一个文件进行上传，然后在方法内部从Node.js服务端获得了一个URL。然后通过`XMLHttpRequest()`往这个URL发请求，直接把文件上传到`play.minio.io:9000`
+用户通过浏览器选择了一个文件进行上传，然后在方法内部从Node.js服务端获得了一个URL。然后通过`XMLHttpRequest()`往这个URL发请求，直接把文件上传到`play.minio.io:9000`。
 
 ```html
 <input type="file" id="selector" multiple>
@@ -56,22 +56,22 @@ server.listen(8080)
  function upload() {
    [$('#selector')[0].files].forEach(fileObj => {
      var file = fileObj[0]
-     // Retrieve a URL from our server.
+     // 从服务器获取一个URL
      retrieveNewURL(file, url => {
-       // Upload the file to the server.
+       // 上传文件到服务器
        uploadFile(file, url)
      })
    })
  }
 
- // Request to our Node.js server for an upload URL.
+ // 发请求到Node.js server获取上传URL。
  function retrieveNewURL(file, cb) {
    $.get(`/presignedUrl?name=${file.name}`, (url) => {
      cb(url)
    })
  }
 
- // Use XMLHttpRequest to upload the file to S3.
+ // 使用XMLHttpRequest来上传文件到S3。
  function uploadFile(file, url) {
      var xhr = new XMLHttpRequest ()
      xhr.open('PUT', url, true)

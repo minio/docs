@@ -1,6 +1,6 @@
 # 如何使用Cloud Explorer操作Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-在本文中，我们将学习如何使用Cloud Explorer对Minio进行基本操作.Cloud Explorer是一个开源的S3客户端，它适用于Windows，Linux和Mac。它为每个支持的操作系统提供图形和命令行界面。如果你有功能建议或发现错误，请提issue。
+在本文中，我们将学习如何使用Cloud Explorer对Minio进行基本操作。Cloud Explorer是一个开源的S3客户端，它适用于Windows，Linux和Mac。它为每个支持的操作系统提供图形和命令行界面。如果你有功能建议或发现错误，请提issue。
 
 ## 特性
 

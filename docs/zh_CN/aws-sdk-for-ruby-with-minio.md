@@ -6,7 +6,7 @@
 
 从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
 
-## 2. Installation
+## 2. 安装
 
 从[AWS SDK for Ruby官方文档](https://aws.amazon.com/sdk-for-ruby/)下载将安装`aws-sdk` for Ruby。
 

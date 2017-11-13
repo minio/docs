@@ -6,19 +6,19 @@
 
 从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
 
-如果想要最新版的`AWSS3` SDK v2.5.5能正常操作minio/minio:edge，你需要修改`AWSS3` SDK中的`AWSSignature.m`文件，删除这一行，`[urlRequest setValue:@"Chunked" forHTTPHeaderField:@"Transfer-Encoding"];`，请关注[aws-sdk-ios #638](https://github.com/aws/aws-sdk-ios/pull/638)
+如果想要最新版的`AWSS3` SDK v2.5.5能正常操作minio/minio:edge，你需要修改`AWSS3` SDK中的`AWSSignature.m`文件，删除这一行，`[urlRequest setValue:@"Chunked" forHTTPHeaderField:@"Transfer-Encoding"];`，请关注[aws-sdk-ios #638](https://github.com/aws/aws-sdk-ios/pull/638)。
 
 ## 2. 安装
 
 从[AWS IOS SDK官方文档](http://docs.aws.amazon.com/mobile/sdkforios/developerguide/setup-aws-sdk-for-ios.html)中下载将安装`AWSS3` for iOS。
 
-我们只需要'AWSS3'
+我们只需要'AWSS3'。
 
 ## 3. 示例
 
 修改`accessKey`, `secretKey` 和 `url`，根据你的需求修改region,service必须设置成`.S3`。
 
-（如果你在`url`中键入`xxxx：9000`，`AWSS3`会自动删除端口号，目前它只支持全部没有端口的URL，所以请确保你有一个到9000的域映射，你可能需要参考[如何给Minio Server设置Nginx代理](https://docs.minio.io/docs/setup-nginx-proxy-with-minio))
+（如果你在`url`中键入`xxxx:9000`，`AWSS3`会自动删除端口号，目前它只支持没有端口的URL，所以请确保你有一个到9000的域映射，你可能需要参考[如何给Minio Server设置Nginx代理](https://docs.minio.io/docs/setup-nginx-proxy-with-minio))
 
 ``` swift
 let accessKey = "XXXXXXX"

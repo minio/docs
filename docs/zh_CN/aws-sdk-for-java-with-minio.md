@@ -99,10 +99,10 @@ public class S3Sample {
 		try {
 			System.out.println("Uploading a new object to S3 from a file\n");
 			File file = new File(uploadFileName);
-			// Upload file
+			// 上传文件
 			s3Client.putObject(new PutObjectRequest(bucketName, keyName, file));
 
-			// Download file
+			// 下载文件
 			GetObjectRequest rangeObjectRequest = new GetObjectRequest(bucketName, keyName);
 			S3Object objectPortion = s3Client.getObject(rangeObjectRequest);
 			System.out.println("Printing bytes retrieved:");
@@ -126,7 +126,7 @@ public class S3Sample {
 	}
 
 	private static void displayTextInputStream(InputStream input) throws IOException {
-		// Read one text line at a time and display.
+		// 按行读取并打印。
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 		while (true) {
 			String line = reader.readLine();

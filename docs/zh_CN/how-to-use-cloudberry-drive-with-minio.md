@@ -2,7 +2,7 @@
 
 本文我们将学习如何将Minio挂载成一个windows操作系统的磁盘。这对多个用户共享文件很有用。
 
-## 1. 前提提条
+## 1. 前提条件
 
 * [CloudBerry Drive](http://www.cloudberrylab.com/drive/)安装并运行。
 
@@ -14,7 +14,7 @@ _注意:_ 你也可以用``HTTPS``方式来运行Minio, 参考[这里](https://d
 
 ### 在CloudBerry Drive加密Minio为存储账户
 
-一旦安装了CloudBerry，你可以使用托盘中的配置设置（右下角，靠近clock按钮）来更改其图标。填写相应的字段（服务点 - 您的服务器IP与8000/9000端口取决于您的签名版本，access key和secret key可以从运行服务器控制台获得）。你可以激活SSL，但是你的服务器应该进行相应的配置。分段上传允许将文件拆分成多个块，并将其上传到多个线程中。它是默认启用的。
+一旦安装了CloudBerry，你可以使用托盘中的配置设置（右下角，靠近clock按钮）来更改其图标。填写相应的字段（service point - 你的服务器IP与8000/9000端口取决于你的签名版本，access key和secret key可以从运行服务器控制台获得）。你可以激活SSL，但是你的服务器应该进行相应的配置。分段上传允许将文件拆分成多个块，并将其上传到多个线程中。它是默认启用的。
 
   ![CloudBerry Drive for S3 compatible](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudberrylab/cloudberry-drive-storage-minio-configuration.jpg?raw=true)
 
@@ -27,7 +27,7 @@ _注意:_ 你也可以用``HTTPS``方式来运行Minio, 参考[这里](https://d
 
 ### 检查你的映射磁盘，并开始管理你的文件
 
-查看您的磁盘并开始管理文件。
+查看你的磁盘并开始管理文件。
 
   ![CloudBerry Drive for Minio, view content](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudberrylab/cloudberry-drive-mapped-disk-show-content.jpg?raw=true)
 

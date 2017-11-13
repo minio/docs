@@ -5,12 +5,12 @@
 ## 1. 前提条件
 
 * FreeNAS已经安装并运行,如果没有，请参考[安装说明](http://doc.freenas.org/9.10/install.html)
-* 你有一个FreeNAS Jail path set,如果没有，请参考[jails configuration](http://doc.freenas.org/9.10/jails.html#jails-configuration)
+* 你有一个FreeNAS Jail path set，如果没有，请参考[jails configuration](http://doc.freenas.org/9.10/jails.html#jails-configuration)
 
 ## 2. 安装步骤
 
 ### 创建一个新的Jail
-在FreeNAS UI中找到`Jails -> Add Jail`, 点击 `Advanced`，然后输入如下信息:
+在FreeNAS UI中找到`Jails -> Add Jail`，点击 `Advanced`，然后输入如下信息:
 
 ```
 Name:         Minio
@@ -120,7 +120,7 @@ nano /<jail_root>/Minio/etc/minio/certs/private.key
 ```
 
 ### 启动Minio Jail
-在FreeNAS UI中找到找到`Jails -> View Jails` , 选择 `Minio`，然后点击`Start`按钮 (从左边开始第三个):
+在FreeNAS UI中找到找到`Jails -> View Jails` ，选择 `Minio`，然后点击`Start`按钮 (从左边开始第三个):
 
 ### 测试Minio
 找到`http(s)://<ip_address>:<port>`并确认Minio加载。
