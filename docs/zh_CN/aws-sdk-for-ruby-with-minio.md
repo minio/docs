@@ -1,6 +1,6 @@
 # 如何使用AWS SDK for Ruby操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`aws-sdk` for Ruby是Ruby语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk` for Ruby来操作Minio server。
+`aws-sdk` for Ruby是Ruby语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk` for Ruby来操作Minio Server。
 
 ## 1. 前提条件
 
@@ -14,7 +14,7 @@
 
 修改``example.rb``文件中的``endpoint``,``access_key_id``, ``secret_access_key``，``Bucket``以及``Object``配置成你的本地配置。
 
-下面示例描述的是如何使用`aws-sdk` for Ruby从Minio server上执行put_object()和get_object()。
+下面示例描述的是如何使用`aws-sdk` for Ruby从Minio Server上执行put_object()和get_object()。
 
 ```ruby
 require 'aws-sdk'

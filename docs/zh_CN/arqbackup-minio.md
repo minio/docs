@@ -9,7 +9,7 @@ Arq Backup软件可用于Mac和Windows。Arq以加密格式存储多个版本的
 
 ## 2. 步骤
 
-点击Arq backup图标，从下拉框中选择你的备份目标``Other S3-Comptible service``，然后提供Minio server的配置信息。
+点击Arq backup图标，从下拉框中选择你的备份目标``Other S3-Comptible service``，然后提供Minio Server的配置信息。
 
 ![D_BUCKET](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/arqbackup.png?raw=true)
 

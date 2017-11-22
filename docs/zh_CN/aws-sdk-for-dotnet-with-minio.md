@@ -1,6 +1,6 @@
 # 如何使用AWS SDK for .NET操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`aws-sdk-dotnet`是.NET Framework的官方AWS开发工具包。在本文中，我们将学习如何使用`aws-sdk-dotnet`操作Minio Server。
+`aws-sdk-dotnet`是.NET Framework的官方AWS开发工具包。在本文中，我们将学习如何使用`aws-sdk-dotnet`来操作Minio Server。
 
 ## 1. 前提条件
 
@@ -20,7 +20,7 @@
 
 下面示例的代码应该直接复制，而不是用自动生成的``Program.cs``文件里的代码。在Visual Studio IDE中创建一个控制台项目，并用下面的代码替换生成的``Program.cs``。更新``ServiceURL``,``accessKey`` 和 ``secretKey``成你的Minio Server的配置。
 
-下面的示例采用`aws-sdk-dotnet`打映出Minio Server里所有的存储桶，并且列举出第一个存储桶里的所有对象。
+下面的示例采用`aws-sdk-dotnet`以列举的方式打印出Minio Server里所有的存储桶和第一个存储桶里的所有对象。
 
 ```csharp
 using Amazon.S3;
@@ -43,7 +43,7 @@ class Program
         var config = new AmazonS3Config
         {
             RegionEndpoint = RegionEndpoint.USEast1, // 必须在设置ServiceURL前进行设置，并且需要和`MINIO_REGION`环境变量一致。
-            ServiceURL = "http://localhost:9000", // 替换成你自己的minio服务的URL
+            ServiceURL = "http://localhost:9000", // 替换成你自己的Minio Server的URL
             ForcePathStyle = true // 必须设为true
         })
         var amazonS3Client = new AmazonS3Client(accessKey, secretKey, config); 

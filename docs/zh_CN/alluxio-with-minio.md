@@ -1,4 +1,4 @@
-# 使用Alluxio结合Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 部署Alluxio结合Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 本文中，我们将学习如何将Minio设置为[Alluxio](http://alluxio.org)的持久存储层。 [这里](http://www.alluxio.org/docs/master/en/Configuring-Alluxio-with-Minio.html)是Minio与Alluxio如何结合的文档。
 
@@ -26,7 +26,7 @@ cd alluxio-<VERSION>-<DISTRIBUTION>
 cp conf/alluxio-site.properties.template conf/alluxio-site.properties
 ```
 
-为你的部署适当地修改Alluxio配置文件。下面示例是在本地运行Alluxio和Minio的示例配置。
+下面示例是在本地运行Alluxio和Minio的示例配置。你需要根据你的部署适当地修改Alluxio配置文件。
 
 假设Minio Server正在<MINIO_HOST:PORT>处运行。
 假设你希望挂载到Alluxio的Minio存储桶是<MINIO_BUCKET>。
@@ -50,7 +50,7 @@ bin/alluxio-start.sh local -f
 
 ## 3. 结合Minio使用Alluxio
 
-已经在Minio存储桶中的文件可以通过Alluxio获取到，你可以通过[Alluxio UI](http://localhost:19999/browse)来查看这些文件。应用程序可以通过Alluxio namespace来读写这些数据。
+现在，你可以通过Alluxio获取到已经存在于Minio存储桶中的文件，并且可以通过[Alluxio UI](http://localhost:19999/browse)来查看这些文件。应用程序可以通过Alluxio namespace来读写这些数据。
 
 你可以运行Alluxio内置的I/O测试来实际操作。
 

@@ -6,7 +6,7 @@
 
 Minio Server已经安装并运行。参考[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
 
-本文使用<https://play.minio.io:9000>。Play(demo Version)做为托管Minio server,仅用于进行测试和开发。
+本文使用<https://play.minio.io:9000>。Play(demo Version)做为托管Minio Server,仅用于进行测试和开发。
 Play使用access_key_id ``Q3AM3UQ867SPQQA43P2F``, secret_access_key ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``。
 
 ## 2. 安装

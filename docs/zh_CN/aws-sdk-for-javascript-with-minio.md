@@ -23,11 +23,11 @@ var s3  = new AWS.S3({
           accessKeyId: 'YOUR-ACCESSKEYID' ,
           secretAccessKey: 'YOUR-SECRETACCESSKEY' ,
           endpoint: 'http://127.0.0.1:9000' ,
-          s3ForcePathStyle: true, // needed with minio?
+          s3ForcePathStyle: true,
           signatureVersion: 'v4'
 });
 
-// putObject operation.
+// putObject操作
 
 var params = {Bucket: 'testbucket', Key: 'testobject', Body: 'Hello from Minio!!'};
 
@@ -38,7 +38,7 @@ s3.putObject(params, function(err, data) {
        console.log("Successfully uploaded data to testbucket/testobject");
 });
 
-// getObject operation.
+// getObject操作
 
 var params = {Bucket: 'testbucket', Key: 'testobject'};
 
@@ -58,4 +58,4 @@ Successfully uploaded data to testbucket/testobject
 ```
 ## 5. 了解更多
 
-* [Javascript购物App](https://docs.minio.io/docs/javascript-shopping-app)
+* [Javascript Shopping App](https://docs.minio.io/docs/javascript-shopping-app)

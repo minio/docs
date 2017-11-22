@@ -23,7 +23,7 @@ var client = new Minio.Client({
 示例中给出的是Minio测试服务的真实认证信息，玩玩呗，来都来了!
 
 ```js
-// express is a small HTTP server wrapper, but this works with any HTTP server
+// express是一个小巧的Http server封装，不过这对任何HTTP server都管用。
 const server = require('express')()
 
 server.get('/presignedUrl', (req, res) => {

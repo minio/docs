@@ -1,6 +1,6 @@
 # 如何使用AWS SDK for Python操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`aws-sdk-python`是Python语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk-python`来操作Minio server。
+`aws-sdk-python`是Python语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk-python`来操作Minio Server。
 
 ## 1. 前提条件
 

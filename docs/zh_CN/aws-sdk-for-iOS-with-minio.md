@@ -16,7 +16,7 @@
 
 ## 3. 示例
 
-修改`accessKey`, `secretKey` 和 `url`，根据你的需求修改region,service必须设置成`.S3`。
+修改`accessKey`, `secretKey` 和 `url`，根据你的需求修改region， service必须设置成`.S3`。
 
 （如果你在`url`中键入`xxxx:9000`，`AWSS3`会自动删除端口号，目前它只支持没有端口的URL，所以请确保你有一个到9000的域映射，你可能需要参考[如何给Minio Server设置Nginx代理](https://docs.minio.io/docs/setup-nginx-proxy-with-minio))
 

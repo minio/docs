@@ -47,7 +47,7 @@ server {
 
 注意:
 
-* 用你自己的服务名替换`http：// localhost：9000`。
+* 用你自己的服务名替换`http://localhost:9000`。
 * 用所需的路径替换`files`。这不能是`~^/minio`，因为`minio`是minio中的保留字。
 * 所使用的路径（在本例中为`files`）按照惯例，应设置为minio所使用的存储桶的名称。
 * 可以通过添加更多类似于上面定义的location定义来访问其他存储桶。
@@ -73,7 +73,7 @@ server {
 
 ## 4. 步骤
 
-### 第一步: 启动Minio server。
+### 第一步: 启动Minio Server。
 
 ```sh
 minio server /mydatadir

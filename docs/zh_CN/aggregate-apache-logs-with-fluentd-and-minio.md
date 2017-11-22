@@ -18,7 +18,7 @@
 ### 第一步：创建存储桶。
 
 
-这就是fluentd能够实时聚合半结构化apache日志的存储桶。
+fluentd将会实时聚合半结构化apache日志到这个存储桶。
 
 ```sh
 mc mb myminio/fluentd
@@ -61,7 +61,7 @@ Bucket created successfully ‘myminio/fluentd’.
 sudo /etc/init.d/td-agent restart
 ```
 
-### 第四步: 检查fluentd logfile以确认是否一切正在运行。
+### 第四步: 检查fluentd的日志以确认是否一切正在运行。
 
 ```sh
 tail -f /var/log/td-agent/td-agent.log
@@ -88,7 +88,7 @@ ab -n 100 -c 10 http://localhost/
 
 ### 第六步: 验证聚合的日志。
 
-Minio server的fluent存储桶应该显示聚合后的日志。
+Minio Server的fluent存储桶应该显示聚合后的日志。
 
 ```sh
 mc ls myminio/fluentd/logs/

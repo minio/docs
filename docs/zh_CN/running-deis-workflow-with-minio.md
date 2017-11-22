@@ -8,9 +8,9 @@
 - [Dockerfile部署](https://docs-v2.readthedocs.io/en/latest/applications/using-dockerfiles/)
 - [Docker Image部署](https://docs-v2.readthedocs.io/en/latest/applications/using-docker-images/)
 
-所有这三种部署方法，以及Workflow内部广泛使用Minio：
+所有这三种部署方法，以及Workflow内部广泛使用了Minio：
 
-- Buildpack部署使用Minio存储代码和[slugs](https://devcenter.heroku.com/articles/slug-compiler)
-- Dockerfile部署使用Minio存储Dockerfiles和关联的artifacts
-- Docker Image部署使用Minio作为运行Workflow的内部Docker registry的后备存储
+- Buildpack部署使用了Minio存储代码和[slugs](https://devcenter.heroku.com/articles/slug-compiler)
+- Dockerfile部署使用了Minio存储Dockerfiles和关联的artifacts
+- Docker Image部署使用了Minio作为运行Workflow的内部Docker registry的后备存储
 - Workflow的内部数据库存储用户登录信息，SSH密钥等。它将所有数据备份到Minio

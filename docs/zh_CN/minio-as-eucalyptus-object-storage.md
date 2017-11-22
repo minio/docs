@@ -6,7 +6,7 @@
 
 第一步是启动Minio服务器。
 
-部署基本的Minio服务非常简单。在本示例中，我使用了运行Ubuntu 16.04.1 LTS（Xenial Xerus）的Eucalyptus实例（虚拟机）。
+部署基本的Minio Server非常简单。在本示例中，我使用了运行Ubuntu 16.04.1 LTS（Xenial Xerus）的Eucalyptus实例（虚拟机）。
 
 
 ```
@@ -15,7 +15,7 @@ $ chmod +x minio
 $ ./minio server ~/MinioBackend
 ```
 
-我们应该看到如下的贼拉有用的输出信息，
+我们应该看到如下非常有用的输出信息，
 
 ```
 Endpoint:  http://172.31.21.31:9000  http://127.0.0.1:9000
@@ -39,7 +39,7 @@ Object API (Amazon S3 compatible):
 
 Minio还附带了一个有用的Web UI，一旦我们运行Minio，就可以访问它。
 
-下一步将看看我们如何在Eucalyptus中添加一个新的提供者客户端。这听起来绝对容易，相信我，都是搞IT的，我不会骗你:)
+下一步将看看我们如何在Eucalyptus中添加一个新的提供者客户端。这听起来绝对容易，相信我，都是搞IT的，我不会骗你们的:)
 
 如果我们尝试重置ObjectStorage的值，它应该向我们显示可用的受支持的对象存储S3提供者客户端，或者这些值也可以在运行面向用户的服务的cloud-output.log中找到，
 

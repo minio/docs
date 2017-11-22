@@ -36,7 +36,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 $ source ~/.bashrc
 ```
 
-##### 验证
+##### 测试
 
 ```
 $ go env
@@ -85,7 +85,7 @@ export PATH=${GOPATH}/bin:$PATH
 $ source ~/.bash_profile
 ```
 
-##### 验证
+##### 测试
 
 ```
 $ go env

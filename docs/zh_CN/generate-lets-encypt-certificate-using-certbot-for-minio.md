@@ -1,5 +1,5 @@
 # 使用Certbot生成Let's Encrypt证书 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
-[Let’s Encrypt](https://letsencrypt.org/) 是一个新的免费的，自动的，开源的认证中心。
+[Let's Encrypt](https://letsencrypt.org/) 是一个新的免费的，自动的，开源的认证中心。
 
 [Certbot](https://certbot.eff.org/)是Let's Encrypt的基于控制台的证书生成工具。
 
@@ -10,9 +10,9 @@
 - 从[这里](https://certbot.eff.org/)下载并安装Certbot。
 
 ## 2. 依赖
-- 执行`certbot`时，需要打开443端口并可访问。
+- 执行`certbot`时，需要打开443端口并确保可以访问。
 - Certbot需要有root权限，因为只有root才允许绑定1024以下的端口。
-- 本文我们将使用``myminio.com`这个域名，请在设置时改成你自己的域名。
+- 本文我们将使用`myminio.com`这个域名，请在设置时改成你自己的域名。
 
 ## 3. 步骤
 

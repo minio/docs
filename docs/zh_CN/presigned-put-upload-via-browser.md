@@ -19,7 +19,7 @@ var client = new Minio.Client({
 初始化Minio client对象，用于生成presigned upload URL。
 
 ```js
-// express is a small HTTP server wrapper, but this works with any HTTP server
+// express是一个小巧的Http server封装，不过这对任何HTTP server都管用。
 const server = require('express')()
 
 server.get('/presignedUrl', (req, res) => {

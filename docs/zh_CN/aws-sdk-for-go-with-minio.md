@@ -35,7 +35,7 @@ func main() {
 	bucket := aws.String("newbucket")
 	key := aws.String("testobject")
 	
-	//  配置成使用Minio server。
+	//  配置成使用Minio Server。
 	s3Config := &aws.Config{
 		Credentials:      credentials.NewStaticCredentials("YOUR-ACCESSKEYID", "YOUR-SECRETACCESSKEY", ""),
 		Endpoint:         aws.String("http://localhost:9000"),

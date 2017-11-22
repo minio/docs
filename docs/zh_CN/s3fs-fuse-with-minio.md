@@ -37,7 +37,7 @@ s3fs <bucket> /s3 -o passwd_file=/etc/s3cred,use_path_request_style,url=http://m
 
 s3fs与Minio一起使用时需要`use_path_request_style`。如果您不使用它，则无法在挂载的目录中查看或复制文件。
 
-检查桶是否使用mount命令挂载成功：
+检查存储桶是否使用mount命令挂载成功：
 
 ```
 mount | grep s3fs

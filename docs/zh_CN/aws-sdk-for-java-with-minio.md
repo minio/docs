@@ -53,9 +53,9 @@
 
 ## 3. 示例
 
-使用下面的代码替换``aws-java-sdk-1.11.213/samples/AmazonS3/S3Sample.java``，并且修改``Endpoint``,``BasicAWSCredentials``, ``bucketName``, ``uploadFileName``和``keyName``成你的本地配置。
+使用下面的代码替换``aws-java-sdk-1.11.213/samples/AmazonS3/S3Sample.java``，并且修改``Endpoint``，``BasicAWSCredentials``，``bucketName``，``uploadFileName``和``keyName``成你的本地配置。
 
-下面的示例描述的是如何使用asw-sdk-java来对Minio server进行上传和下载操作。
+下面的示例描述的是如何使用asw-sdk-java来对Minio Server进行上传和下载操作。
 
 ```java
 import java.io.BufferedReader;
@@ -153,7 +153,7 @@ run:
      [java]     127.0.0.1       localhost
      [java]     127.0.1.1       minio
      [java]     
-     [java]     # The following lines are desirable for IPv6 capable hosts
+     [java]     # 对于支持IPv6的主机，会有以下几行输出。
      [java]     ::1     localhost ip6-localhost ip6-loopback
      [java]     ff02::1 ip6-allnodes
      [java]     ff02::2 ip6-allrouters

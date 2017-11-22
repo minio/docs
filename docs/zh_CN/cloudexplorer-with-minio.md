@@ -2,7 +2,7 @@
 
 在本文中，我们将学习如何使用Cloud Explorer对Minio进行基本操作。Cloud Explorer是一个开源的S3客户端，它适用于Windows，Linux和Mac。它为每个支持的操作系统提供图形和命令行界面。如果你有功能建议或发现错误，请提issue。
 
-## 特性
+## 功能
 
 * 搜索
 * 性能测试
@@ -24,7 +24,7 @@
 
 ![ACCOUNT](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudexplorer/cloudexplorer-1.png)
 
-- 点击Minio帐户，然后点击"Load"按钮进行连接。以后再点击已保存的S3账户将自动加载账户并显示存储桶。
+- 点击Minio帐户，然后点击"Load"按钮进行连接。以后再点击已保存的S3账户将自动加载账户并显示该账户下的存储桶。
 
 ![ACCOUNT](https://raw.githubusercontent.com/minio/cookbook/master/docs/screenshots/cloudexplorer/cloudexplorer-2.png)
 

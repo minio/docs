@@ -45,7 +45,7 @@ aws --endpoint-url https://play.minio.io:9000 s3 ls
 2016-03-26 15:37:02 testbucket
 ```
 
-### 显示存储桶里的内容
+### 列举存储桶里的内容
 
 ```sh
 aws --endpoint-url https://play.minio.io:9000 s3 ls s3://mybucket

@@ -1,6 +1,6 @@
 # 如何使用fog aws for Ruby操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`fog-aws`是一个'fog' gem的模块，支持亚马逊Web Services <http://aws.amazon.com/>。本文我们将学习如何使用`fog-aws` for Ruby操作Minio server。
+`fog-aws`是一个'fog' gem的模块，支持亚马逊Web Services <http://aws.amazon.com/>。本文我们将学习如何使用`fog-aws` for Ruby操作Minio Server。
 
 ## 1. 前提条件
 

@@ -29,7 +29,7 @@ export AWS_SECRET_ACCESS_KEY= <YOUR-SECRET-ACCESS-KEY>
 ./restic -r s3:http://localhost:9000/resticbucket init
 ```
 
-从本机拷贝需要备份的数据到Minio server的存储桶中。
+从本机拷贝需要备份的数据到Minio Server的存储桶中。
 
 ```sh
 ./restic -r s3:http://localhost:9000/resticbucket backup /home/minio/workdir/Docs/

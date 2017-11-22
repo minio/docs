@@ -21,17 +21,17 @@
 编辑你的s3cmd配置文件`~/.s3cfg`中的以下字段
 
 ```sh
-# Setup endpoint
+# 设置endpoint
 host_base = play.minio.io:9000
 host_bucket = play.minio.io:9000
 bucket_location = us-east-1
 use_https = True
 
-# Setup access keys
+# 设置access key和secret key
 access_key =  Q3AM3UQ867SPQQA43P2F
 secret_key = zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
 
-# Enable S3 v4 signature APIs
+# 启用S3 v4版本签名API
 signature_v2 = False
 ```
 
@@ -51,14 +51,14 @@ s3cmd put newfile s3://testbucket
 upload: 'newfile' -> 's3://testbucket/newfile'  
 ```
 
-### 拷贝一个文件到本地文系统
+### 拷贝一个文件到本地文件系统
 
 ```sh
 s3cmd get s3://testbucket/newfile
 download: 's3://testbucket/newfile' -> './newfile'
 ```
 
-### 同步同地文件/文件夹到存储桶
+### 同步本地文件/文件夹到存储桶
 
 ```sh
 s3cmd sync newdemo s3://testbucket

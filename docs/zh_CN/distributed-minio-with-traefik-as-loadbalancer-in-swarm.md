@@ -1,18 +1,18 @@
-# 如何使用Træfɪk loadbalancer和Docker swarm运行分布式Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用Træfik loadbalancer和Docker swarm运行分布式Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 [Træfɪk](https://traefik.io/)是一个用Go语言写的先进（和流行技术结合的比较好）的反向代理。它支持多种配置方式，本文将阐述如何用Docker swarm来设置分布式Minio,并且可以在swarm中用通用名称（而不是`minio1`, `minio2`, ...）来进行访问，而且可以通过Træfɪk对外暴露一个（loadbalanced）端口。
 
 ## 1. 前提条件
 
-有一个正在运行的Docker swarm, 可参考[Docker Swarm mode overview](https://docs.docker.com/engine/swarm/).
+有一个正在运行的Docker swarm, 可参考[Docker Swarm mode overview](https://docs.docker.com/engine/swarm/)。
 
 ## 2. 步骤
 
-参考[Deploy Minio on Docker Swarm](https://docs.minio.io/docs/deploy-minio-on-docker-swarm) 文档, 我们可以使用一个Docker Compose file来部署Minio。
+参考[Deploy Minio on Docker Swarm](https://docs.minio.io/docs/deploy-minio-on-docker-swarm)官方文档，我们可以使用一个Docker Compose file来部署Minio。
 
 * 剥离每个Minio的端口，将Træfɪk做为前置负载均衡
-* 添加Træfɪk标签(注意一下`Host:...`标签，它配置了Træfɪk监听Swarm内部及外部访问的前端规则)到每个Minio服务。
-* 添加 `minioproxy` Træfɪk service。
+* 添加Træfɪk标签(注意一下`Host:...`标签，它配置了Træfɪk监听Swarm内部及外部访问的前端规则)到每个Minio Server。
+* 添加 `minioproxy` Træfik service。
 * 额外收获: 由于咱们用了Docker swarm,我们还可以使用secrets而不是环境变量（这样更安全）。
 
 ### 2.1 添加Docker swarm secrets

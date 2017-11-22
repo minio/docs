@@ -58,7 +58,7 @@ class MinioStorageServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the application services.
+     * 注册应用服务
      *
      * @return void
      */
@@ -79,7 +79,7 @@ App\Providers\MinioStorageServiceProvider::class
 
 ```php
   'disks' => [
-    // other disks
+    // 其它磁盘
 
     'minio' => [
         'driver' => 'minio',
@@ -107,4 +107,4 @@ Storage::disk('minio')->put('avatars/1', $fileContents);
 ```
 
 ##  示例工程
-只要你想，你可以自己研究[laravel-minio-sample](https://github.com/m2sh/laravel-minio-sample)项目和[unit tests](https://github.com/m2sh/laravel-minio-sample/blob/master/tests/Unit/MinioStorageTest.php)，来加深对Laravel结合Minio Server使用的理解。
+如果你想的话，你可以自己研究[laravel-minio-sample](https://github.com/m2sh/laravel-minio-sample)项目和[unit tests](https://github.com/m2sh/laravel-minio-sample/blob/master/tests/Unit/MinioStorageTest.php)，来加深对Laravel结合Minio Server使用的理解。
