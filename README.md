@@ -17,6 +17,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [AWS CLI with Minio](./docs/aws-cli-with-minio.md)
 - [Running Minio in Cloudron](./docs/running-minio-in-cloudron.md)
 - [Running Minio in FreeNAS](./docs/running-minio-in-freenas.md)
+- [Running Minio Prometheus Exporter](./docs/running-minio-prometheus-exporter.md)
 - [Store MongoDB Backups in Minio](./docs/store-mongodb-backups-in-minio.md)
 - [Store MySQL Backups in Minio](./docs/store-mysql-backups-in-minio.md)
 - [Store PostgreSQL Backups in Minio](./docs/store-postgresql-backups-in-minio.md)
