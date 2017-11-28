@@ -10,7 +10,7 @@ This recipe explains how to run a Minio Prometheus exporter.
 
 ## 2. Running the exporter
 
-Once the Minio server starter there are two ways to run the exporter, via building the binaries or using the docker image.
+Once the Minio server starts there are two ways to run the exporter, via building the binaries or using the docker image.
 
 ### Run the exporter using the binaries
 ```bash
@@ -55,3 +55,11 @@ docker run \
        -e "MINIO_ACCESS_SECRET=password" \
        joepll/minio-exporter
 ```
+
+### Prometheus resources
+
+You can find more information about Prometheus on the [official website](https://prometheus.io) and on [github](https://github.com/prometheus).  
+Here below some useful links.
+
+* [Getting started with Prometheus server](https://prometheus.io/docs/prometheus/latest/getting_started/)
+* [Prometheus exporters](https://prometheus.io/docs/instrumenting/exporters/)
