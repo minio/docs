@@ -6,7 +6,7 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
 
 - Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 - Download Apache Spark version `spark-2.1.2-bin-without-hadoop` from [here](https://www.apache.org/dist/spark/spark-2.1.2/spark-2.1.2-bin-without-hadoop.tgz).
-- Download Apache Hadoop version `hadoop-2.8.2` from [here](https://www.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2-src.tar.gz).
+- Download Apache Hadoop version `hadoop-2.8.2` from [here](https://www.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz).
 - Download other dependencies
     - [`Hadoop 2.8.2`](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws/2.8.2)
     - [`HttpClient 4.5.3`](https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient/4.5.3)
@@ -21,7 +21,18 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
 - Extract the `spark-2.1.2-bin-without-hadoop` tar ball in the directory where you're planning to install Spark.
 - Extract the `hadoop-2.8.2` tar ball in a separate directory. Copy the path to this directory.
 - Create a directory called `bin` inside the directory where `spark-2.1.2-bin-without-hadoop` was unzipped. Then move all the dependency jar files (downloaded in previous step) in this directory.
-- Open the file `$HADOOP_HOME/etc/hadoop/core-site.xml` for editing. Update the relevant fields as shown below. Note that in this example Minio server is running at `http://127.0.0.1:9000` with access key `minio` and secret key `minio123`.
+
+## 3. Start Spark-Shell
+
+Navigate to the directory where you extracted `spark-2.1.2-bin-without-hadoop`, and set the following environment variables:
+
+```sh
+export HADOOP_HOME=/path/to/hadoop-2.8.2
+export PATH=$PATH:$HADOOP_HOME/bin
+export SPARK_DIST_CLASSPATH=$(hadoop classpath)
+```
+
+Then, open the file `$HADOOP_HOME/etc/hadoop/core-site.xml` for editing. In this example Minio server is running at `http://127.0.0.1:9000` with access key `minio` and secret key `minio123`. Make sure to update relevant sections with valid Minio server endpoint and credentials.
 
 
 ```xml
@@ -65,16 +76,6 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
   </property>
 </configuration>
 
-```
-
-## 3. Start Spark-Shell
-
-Navigate to the directory where you extracted `spark-2.1.2-bin-without-hadoop` via terminal, and set the following environment variables
-
-```sh
-export HADOOP_HOME=/path/to/hadoop-2.8.2
-export PATH=$PATH:$HADOOP_HOME/bin
-export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 ```
 
 Then start Spark-Shell by
