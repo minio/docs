@@ -43,7 +43,6 @@
 - [如何使用AWS SDK for Javascript操作Minio Server](./docs/zh_CN/aws-sdk-for-javascript-with-minio.md)
 - [如何使用AWS .NET SDK操作Minio Server](./docs/zh_CN/aws-sdk-for-dotnet-with-minio.md)
 - [如何使用AWS SDK for iOS(swift-3)操作Minio Server](./docs/zh_CN/aws-sdk-for-iOS-with-minio.md)
-- [如何使用CloudBerry Drive结合Minio](./docs/zh_CN/how-to-use-cloudberry-drive-with-minio.md)
 - [如何使用AWS SDK for Java给Minio Server进行加密](./docs/zh_CN/how-to-use-aws-sdk-java-encryption.md)
 - [使用s3fs-fuse操作Minio Server](./docs/zh_CN/s3fs-fuse-with-minio.md)
 - [如何使用Minio Server做为Laravel自定义文件存储 ](./docs/zh_CN/how-to-use-minio-as-laravel-file-storage.md)
