@@ -84,7 +84,7 @@ public class S3Sample {
 	private static String uploadFileName = "/etc/hosts";
 
 	public static void main(String[] args) throws IOException {
-		AWSCredentials credentials = new BasicAWSCredentials("YOUR-ACCESSKEYID", "OUR-SECREYTACCESSKEY");
+		AWSCredentials credentials = new BasicAWSCredentials("YOUR-ACCESSKEYID", "YOUR-SECRETACCESSKEY");
 		ClientConfiguration clientConfiguration = new ClientConfiguration();
 		clientConfiguration.setSignerOverride("AWSS3V4SignerType");
 
