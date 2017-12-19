@@ -4,7 +4,7 @@ In this short article you will learn how to mount your Minio object storage as d
 
 ## 1. Prerequisites
 
-* [CloudBerry Drive](http://www.cloudberrylab.com/drive/) is installed and running.
+* [CloudBerry Drive](https://www.cloudberrylab.com/drive) is installed and running.
 
 * Minio Server is running on localhost on port 9000 in ``HTTP``, follow [Minio quickstart guide](https://docs.minio.io/docs/minio-quickstart-guide) to install Minio.
 
