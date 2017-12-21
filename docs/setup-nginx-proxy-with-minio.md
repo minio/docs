@@ -34,6 +34,7 @@ Note:
 * Replace ``http://localhost:9000``  with your own server name.
 * Add ``client_max_body_size 1000m;`` in the ``http`` context in order to be able to upload large files — simply adjust the value accordingly. The default value is `1m` which is far too low for most scenarios.
 * Nginx buffers responses by default. To disable Nginx from buffering Minio response to temp file, set `proxy_buffering off;`. This will improve time-to-first-byte for client requests.
+* Minio doesn't set any browser caching instructions. Adding `expires 7d;` to your Nginx config will improve page loading speed for most users.
 
 ### Proxy requests based on the bucket
 If you want to serve web-application and Minio from the same nginx port then you can proxy the Minio requests based on the bucket name
