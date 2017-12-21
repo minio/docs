@@ -54,7 +54,10 @@ class MinioStorageServiceProvider extends ServiceProvider
           $options = [
               'override_visibility_on_copy' => true
           ];
-          return new Filesystem(new AwsS3Adapter($client, $config["bucket"], '', $options));
+          // When path prefix is set to '', you will see different behaviour on:
+          // Storage::disk('minio')->get('/file.txt') and Storage::disk('minio')->get('file.txt');
+          $pathPrefix = '/';
+          return new Filesystem(new AwsS3Adapter($client, $config["bucket"], $pathPrefix, $options));
       });
     }
 
