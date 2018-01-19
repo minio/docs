@@ -2,10 +2,9 @@
 
 Nginx is an open source Web server and a reverse proxy server.
 
-This cookbook will explain how you
-can setup multiple Minio instances and Nginx via Docker compose, which you can access through Nginx.
+This cookbook will explain how you can setup multiple Minio instances and Nginx via Docker compose, which you can access through Nginx.
 
-This tutorial will be helpful in case when you need to test that your Minio production setup will work.
+This tutorial will be helpful in case when you need to test that your Minio production setup will work with nginx, and you want install nginx in docker container instead of local installation.
 
 ## 1. Prerequisites
 
