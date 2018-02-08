@@ -14,9 +14,9 @@
 * **Windows (64-bit):** <https://dl.minio.io/server/minio/release/windows-amd64/>
 * **macOS (64-bit):** <https://dl.minio.io/server/minio/release/darwin-amd64/>
 
-2. 假设你设使用的版本是`minio.RELEASE.2017-11-22T19-55-46Z`，下载下载文件到你的工作目录：
+2. 假设你设使用的版本是`minio.RELEASE.2017-11-22T19-55-46Z`，下载文件到你的工作目录：
 
-* `minio.RELEASE.2017-11-22T19-55-46Z`: 你使选择的操作系统对应的二进制文件。
+* `minio.RELEASE.2017-11-22T19-55-46Z`: 你选择的操作系统对应的二进制文件。
 * `minio.RELEASE.2017-11-22T19-55-46Z.asc`: 针对该二进制文件的PGP签名。
 * `minio.RELEASE.2017-11-22T19-55-46Z.sha256sum`: 该二进制文件的SHA256校验和。
 * `minio.RELEASE.2017-11-22T19-55-46Z.shasum`: 该二进制文件的SHA1校验和。

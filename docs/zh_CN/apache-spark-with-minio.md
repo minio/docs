@@ -133,7 +133,7 @@ val distData = sc.parallelize(data)
 distData.saveAsTextFile("s3a://spark-test/test-write")
 ```
 
-你应该呆以看见在`spark-test`存储桶下创建一了一个名为`test-write`的对象，数据是写入到该文件中。
+你应该可以看见在`spark-test`存储桶下创建一了一个名为`test-write`的对象，数据是写入到该文件中。
 
 ### Minio server使用HTTPS
 
