@@ -13,15 +13,12 @@ You have Docker installed and running, if not follow [install instructions](http
 ## 2. Steps
 
 ### Fetch Minio configuration for Docker Compose
-
 To deploy distributed Minio on Docker Compose, please download [docker-compose.yaml](https://github.com/minio/minio/blob/master/docs/orchestration/docker-compose/docker-compose.yaml?raw=true) to your current working directory. Note that Docker Compose pulls the Minio Docker image, so there is no need to explicitly download Minio binary.
 
 ### Add nginx service's settings into Docker Compose configuration
-
 You will need to add configuration, that it can proxy incoming requests on multiple minio services.
 
 Add nginx service's configuration in `docker-compose.yml`.
-
 ```
 nginx:
   build: ./conf/nginx/
@@ -40,15 +37,14 @@ Note: we will store other nginx settings in separated folder `conf/nginx`. Also 
 Beside the configuration we should create nginx conf boilerplate, inside your current working dir run:
 
 Create folders
-
 ```
 $ mkdir -p conf/nginx/sites-available
 ```
 
 Modify nginx build setup:
-
 ```
-$ echo "FROM nginx:alpine
+$ echo > conf/nginx/Dockerfile << EOF
+FROM nginx:alpine
 RUN \\
   rm -f \\
     /etc/nginx/sites-available/minio_conf \\
@@ -59,15 +55,17 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN \\
   mkdir -p /etc/nginx/sites-enabled && \\
   ln -s /etc/nginx/sites-available/minio_conf /etc/nginx/sites-enabled/minio_conf
-" > conf/nginx/Dockerfile
+EOF
 ```
 
-Modify nginx server config
-##### NOTE: here is defualt nginx config, with 2 differences:
-Nginx will load `sites-enabled/minio_conf` our custom config instead default `conf.d/*.conf`
+##### Modify nginx server config
+> NOTE: here is default nginx config, with 2 differences:
+
+Nginx will load `sites-enabled/minio.conf` our custom config instead default `conf.d/*.conf`
 
 ```
-$ echo "user  nginx;
+$ echo > conf/nginx/nginx.conf << EOF
+user  nginx;
 worker_processes  auto;
 
 error_log  /var/log/nginx/error.log warn;
@@ -89,21 +87,17 @@ http {
     access_log  /var/log/nginx/access.log  main;
 
     sendfile        on;
-    #tcp_nopush     on;
-
     keepalive_timeout  65;
 
-    #gzip  on;
-    #include /etc/nginx/conf.d/*.conf;
-    include /etc/nginx/sites-enabled/minio_conf;
+    include /etc/nginx/sites-enabled/minio.conf;
 }
-" > conf/nginx/nginx.conf
+EOF
 ```
 
 Say nginx to send request on one of your docker's minio service:
-
 ```
-$ echo "upstream minio_servers {
+$ echo > conf/nginx/sites-available/minio.conf << EOF
+upstream minio_servers {
   server minio1:9000;
   server minio2:9000;
   server minio3:9000;
@@ -119,9 +113,10 @@ server {
     proxy_set_header X-NginX-Proxy true;
     proxy_ssl_session_reuse off;
     proxy_redirect off;
+    health_check uri=/minio/health/ready;
   }
 }
-" >  conf/nginx/sites-available/minio_conf
+EOF
 ```
 
 `up` all minio instances and nginx:
@@ -131,7 +126,6 @@ $ docker-compose up
 ```
 
 Now you can reach all the launched Minio instances:
-
 ```
 $ curl http://localhost:8081
 ```

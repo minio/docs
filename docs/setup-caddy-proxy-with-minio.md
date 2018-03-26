@@ -23,6 +23,7 @@ proxy / localhost:9000 {
     header_upstream X-Forwarded-Proto {scheme}
     header_upstream X-Forwarded-Host {host}
     header_upstream Host {host}
+    health_check /minio/health/ready
 }
 ```
 

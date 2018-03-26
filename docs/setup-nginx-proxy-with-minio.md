@@ -24,6 +24,7 @@ server {
  location / {
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9000;
+   health_check uri=/minio/health/ready;
  }
 }
 ```
