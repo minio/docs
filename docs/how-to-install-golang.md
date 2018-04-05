@@ -12,24 +12,21 @@ This installation document assumes Ubuntu 16.04+ on x86-64 platform.
 $ sudo apt-get install git 
 ```
 
-##### Install Go 1.9+
+##### Install Go 1.10+
 
-Download Go 1.9+ from [https://golang.org/dl/](https://golang.org/dl/).
-
-```
-$ wget https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz
-$ tar -C ${HOME} -xzf go1.9.1.linux-amd64.tar.gz
-```
-
-##### Setup GOROOT and GOPATH
-
-Add the following exports to your ``~/.bashrc``. Environment variable GOROOT specifies the location of your golang binaries
-and GOPATH specifies the location of your project workspace.
+Download Go 1.10+ from [https://golang.org/dl/](https://golang.org/dl/).
 
 ```
-export GOROOT=${HOME}/go
-export GOPATH=${HOME}/work
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+$ wget https://storage.googleapis.com/golang/go1.10.linux-amd64.tar.gz
+$ sudo tar -C /usr/local -xzf go1.10.linux-amd64.tar.gz
+```
+
+##### Setup PATH
+
+Add the PATH to your ``~/.bashrc``.
+
+```
+export PATH=$PATH:/usr/local/go/bin:${HOME}/go/bin
 ```
 ##### Source the new environment
 
@@ -60,25 +57,20 @@ Install brew from [brew.sh](http://brew.sh/)
 $ brew install git 
 ```
 
-##### Install Go 1.9+
+##### Install Go 1.10+
 
 Install golang binaries using `brew`
 
 ```
 $ brew install go
-$ mkdir -p $HOME/go
 ```
 
-##### Setup GOROOT and GOPATH
+##### Setup PATH
 
-Add the following exports to your ``~/.bash_profile``. Environment variable GOROOT specifies the location of your golang binaries
-and GOPATH specifies the location of your project workspace.
+Add the PATH to your ``~/.bash_profile``. 
 
 ```
-export GOPATH=${HOME}/work
-export GOVERSION=$(brew list go | head -n 1 | cut -d '/' -f 6)
-export GOROOT=$(brew --prefix)/Cellar/go/${GOVERSION}/libexec
-export PATH=${GOPATH}/bin:$PATH
+export PATH=${HOME}/go/bin:$PATH
 ```
 
 ##### Source the new environment
