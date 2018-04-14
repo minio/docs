@@ -9,7 +9,8 @@ Pick any one of the two different ways to create a Service Principal.
  - Ensure that user can register applications, ONLY an admin user can register applications.
  - Create an `Azure Active Directory application` [(Learn more)](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal?view=azure-cli-latest).
  - Retrieve `application ID` and `authentication key`
- - Assign the newly created application to a role in order to access Azure resources.
+ - Assign the newly created application to a "Contributor" role in order to access Azure resources.
+
  
 
  ## Using Azure CLI :
