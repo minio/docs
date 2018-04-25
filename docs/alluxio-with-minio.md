@@ -1,4 +1,4 @@
-# Deploying Alluxio with Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Deploy Alluxio with Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 In this recipe we will learn how to setup Minio as a persistent storage layer for [Alluxio](http://alluxio.org). The Alluxio documentation for using Alluxio with Minio can be found [here](http://www.alluxio.org/docs/master/en/Configuring-Alluxio-with-Minio.html).
 
