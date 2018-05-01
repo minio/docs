@@ -16,7 +16,7 @@ A client **must** specify three HTTP headers for SSE-C requests:
  - A SSE-C request contains the encryption key. If a SSE-C request is ever made over a non-TLS connection the SSE-C encryption key **must** be treated as compromised.
  - According to the S3 specification the returned content-md5 of an SSE-C PUT operation does not match the MD5-sum of the uploaded object.
  - Minio server uses a tamper-proof encryption scheme to encrypt objects and
-   does **not save** the encryption key. This means that you are responsible to manage encryption keys. If you loose the encryption key of an object you will loose that object.
+   does **not save** the encryption key. This means that you are responsible to manage encryption keys. If you lose the encryption key of an object you will lose that object.
  - The minio server expects that the SSE-C encryption key is of *high entropy*.
    The encryption key is **not** a password. If you want to use a password make sure that you derive a high-entropy key using a password-based-key-derivation-function (PBKDF) like Argon2, scrypt or PBKDF2.
 
