@@ -37,6 +37,7 @@ Note: You can also refer to [Awesome Minio](https://github.com/minio/awesome-min
 - [How to use Cyberduck with Minio](./docs/how-to-use-cyberduck-with-minio.md)
 - [Use Minio as Eucalyptus object storage backend](./docs/minio-as-eucalyptus-object-storage.md)
 - [How to use Apache Spark with Minio](./docs/apache-spark-with-minio.md)
+- [How to monitor Minio server with Prometheus](./docs/how-to-monitor-minio-with-prometheus.md)
 - [How to use Cloud Explorer with Minio](./docs/cloudexplorer-with-minio.md)
 - [How to use Mountain Duck with Minio](./docs/how-to-use-mountainduck-with-minio.md)
 - [How to use AWS SDK for PHP with Minio Server](./docs/aws-sdk-for-php-with-minio.md)
