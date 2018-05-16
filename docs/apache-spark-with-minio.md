@@ -5,7 +5,7 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
 ## 1. Prerequisites
 
 - Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
-- Download Apache Spark version `spark-2.1.2-bin-without-hadoop` from [here](https://www.apache.org/dist/spark/spark-2.1.2/spark-2.1.2-bin-without-hadoop.tgz).
+- Download Apache Spark version `spark-2.3.0-bin-without-hadoop` from [here](https://www.apache.org/dyn/closer.lua/spark/spark-2.3.0/spark-2.3.0-bin-without-hadoop.tgz).
 - Download Apache Hadoop version `hadoop-2.8.2` from [here](https://www.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz).
 - Download other dependencies
     - [`Hadoop 2.8.2`](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws/2.8.2)
@@ -18,13 +18,13 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
 
 ## 2. Installation
 
-- Extract the `spark-2.1.2-bin-without-hadoop` tar ball in the directory where you're planning to install Spark.
+- Extract the `spark-2.3.0-bin-without-hadoop` tar ball in the directory where you're planning to install Spark.
 - Extract the `hadoop-2.8.2` tar ball in a separate directory. Copy the path to this directory.
-- Create a directory called `bin` inside the directory where `spark-2.1.2-bin-without-hadoop` was unzipped. Then move all the dependency jar files (downloaded in previous step) in this directory.
+- Create a directory called `bin` inside the directory where `spark-2.3.0-bin-without-hadoop` was unzipped. Then move all the dependency jar files (downloaded in previous step) in this directory.
 
 ## 3. Start Spark-Shell
 
-Navigate to the directory where you extracted `spark-2.1.2-bin-without-hadoop`, and set the following environment variables:
+Navigate to the directory where you extracted `spark-2.3.0-bin-without-hadoop`, and set the following environment variables:
 
 ```sh
 export HADOOP_HOME=/path/to/hadoop-2.8.2
@@ -91,10 +91,10 @@ Welcome to
       ____              __
      / __/__  ___ _____/ /__
     _\ \/ _ \/ _ `/ __/  '_/
-   /___/ .__/\_,_/_/ /_/\_\   version 2.1.2
+   /___/ .__/\_,_/_/ /_/\_\   version 2.3.0
       /_/
          
-Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_151)
+Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_162)
 Type in expressions to have them evaluated.
 Type :help for more information.
 
