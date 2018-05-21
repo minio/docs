@@ -101,7 +101,33 @@ Type :help for more information.
 scala> 
 ```
 
-## 4. Test if Spark-Shell can communicate with Minio server
+## 4. (Optional) Start Spark-History server
+
+[Spark History Server](https://spark.apache.org/docs/latest/monitoring.html) provides web UI for completed and running Spark applications. Once Spark jobs are configured to log events, the history server displays both completed and incomplete Spark jobs. If an application makes multiple attempts after failures, the failed attempts will be displayed, as well as any ongoing incomplete attempt or the final successful attempt.
+
+Minio can be used as the storage back-end for Spark history back-end using the `s3a` file system. As we already have `$HADOOP_HOME/etc/hadoop/core-site.xml` file configured with `s3a` file system details. We need to now set up the `conf/spark-defaults.conf` file so history server uses `s3a` to store the files.
+
+By default the `conf` directory has a `spark-defaults.conf.template` file, make a copy of the template file and rename it to `spark-defaults.conf`. Then add the below content to the file
+
+```sh
+spark.jars.packages                 net.java.dev.jets3t:jets3t:0.9.4,com.google.guava:guava:14.0.1,com.amazonaws:aws-java-sdk:1.11.234,org.apache.hadoop:hadoop-aws:2.8.2
+spark.eventLog.enabled              true
+spark.eventLog.dir                  s3a://spark/
+spark.history.fs.logDirectory       s3a://spark/
+spark.hadoop.fs.s3a.impl            org.apache.hadoop.fs.s3a.S3AFileSystem
+```
+
+Next step is to add jar files specified under the `spark.jars.packages` section to the `jars` directory. Once the files are added, create a new bucket called `spark` in the Minio instance specified in the `$HADOOP_HOME/etc/hadoop/core-site.xml` file. This is because we specified the log directory as `s3a://spark/`. 
+
+Finally start Spark history server using
+
+```sh
+./sbin/start-history-server.sh 
+``` 
+
+If everything works fine you should be able to see the console on `http://localhost:18080/`.
+
+## 5. Test if Spark-Shell can communicate with Minio server
 
 ### Read
 
@@ -122,6 +148,8 @@ b1.collect().foreach(println)
 ```
 
 You should be able to see the text file you uploaded to Minio server.
+
+If you configured Spark history server as described in step 4, you can see the event logs on the console here `http://localhost:18080/`.
 
 ### Write
 
