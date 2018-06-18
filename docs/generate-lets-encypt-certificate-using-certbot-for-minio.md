@@ -50,9 +50,17 @@ $ sudo chown user:user /home/user/.minio/certs/public.crt
 ```
 
 ### Step 6: Start Minio Server using HTTPS.
-Start Minio Server on port "443".
+
+If you are not going to run Minio with `root` privileges, you will need to give Minio the capability of listening on ports less than 1024 using the following command:
+
 ```sh
-$ sudo ./minio server --address ":443" /mnt/data
+sudo setcap 'cap_net_bind_service=+ep' ./minio
+```
+
+Now, you can start Minio Server on port "443".
+
+```sh
+$ ./minio server --address ":443" /mnt/data
 ```
 
 If you are using dockerized version of Minio then you would need to
