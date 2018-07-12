@@ -61,6 +61,10 @@ Here `prometheus.yml` is the name of configuration file. You can now see Minio m
 
 Minio server exposes the following metrics on `/minio/prometheus/metrics` endpoint. All of these can be accessed via Prometheus dashboard.
 
+- standard go runtime metrics prefixed by `go_` 
+-  level metrics prefixed with `process_`
+- prometheus scrap metrics prefixed with `promhttp_`
+
 - `minio_disk_storage_used_bytes` : Total byte count of disk storage used by current Minio server instance
 - `minio_http_requests_duration_seconds_bucket` : Cumulative counters for all the request types (HEAD/GET/PUT/POST/DELETE) in different time brackets
 - `minio_http_requests_duration_seconds_count` : Count of current number of observations i.e. total HTTP requests (HEAD/GET/PUT/POST/DELETE)
