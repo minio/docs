@@ -64,7 +64,7 @@ docker run -d \
   --publish 80:80 \
   --publish 443:443 \
   --volume $(pwd)/traefik.toml:/etc/traefik/traefik.toml \
-  --volume $(pwd)/acme.json:/etc/traefik/adme.json \
+  --volume $(pwd)/acme.json:/etc/traefik/acme.json \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   traefik
 ```
