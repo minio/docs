@@ -62,7 +62,7 @@ Here `prometheus.yml` is the name of configuration file. You can now see Minio m
 Minio server exposes the following metrics on `/minio/prometheus/metrics` endpoint. All of these can be accessed via Prometheus dashboard.
 
 - standard go runtime metrics prefixed by `go_` 
--  level metrics prefixed with `process_`
+- process level metrics prefixed with `process_`
 - prometheus scrap metrics prefixed with `promhttp_`
 
 - `minio_disk_storage_used_bytes` : Total byte count of disk storage used by current Minio server instance
