@@ -21,7 +21,7 @@
 
 ### 步骤2: 生成Let's Encrypt证书
 ```sh
-# certbot certonly --standalone --preferred-challenges tls-sni -d myminio.com --staple-ocsp -m test@yourdomain.io --agree-tos
+# certbot certonly --standalone -d myminio.com --staple-ocsp -m test@yourdomain.io --agree-tos
 ```
 
 ### 步骤3: 验证证书

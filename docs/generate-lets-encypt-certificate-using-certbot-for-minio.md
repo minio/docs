@@ -21,7 +21,7 @@ Install Certbot by following the documentation at https://certbot.eff.org/
 
 ### Step 2: Generate Let's Encrypt cert
 ```sh
-# certbot certonly --standalone --preferred-challenges tls-sni -d myminio.com --staple-ocsp -m test@yourdomain.io --agree-tos
+# certbot certonly --standalone -d myminio.com --staple-ocsp -m test@yourdomain.io --agree-tos
 ```
 
 ### Step 3: Verify Certificates
