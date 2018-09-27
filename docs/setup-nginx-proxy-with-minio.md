@@ -33,7 +33,7 @@ Note:
 
 * Replace example.com with your own hostname.
 * Replace ``http://localhost:9000``  with your own server name.
-* Add ``client_max_body_size 1000m;`` in the ``http`` context in order to be able to upload large files — simply adjust the value accordingly. The default value is `1m` which is far too low for most scenarios.
+* Add ``client_max_body_size 1000m;`` in the ``http`` context in order to be able to upload large files — simply adjust the value accordingly. The default value is `1m` which is far too low for most scenarios. To disable checking of client request body size, set ``client_max_body_size`` to `0`.
 * Nginx buffers responses by default. To disable Nginx from buffering Minio response to temp file, set `proxy_buffering off;`. This will improve time-to-first-byte for client requests.
 
 ### Proxy requests based on the bucket
