@@ -46,7 +46,7 @@ class Program
             RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL and it should match the `MINIO_REGION` enviroment variable.
             ServiceURL = "http://localhost:9000", // replace http://localhost:9000 with URL of your minio server
             ForcePathStyle = true // MUST be true to work correctly with Minio server
-        })
+        };
         var amazonS3Client = new AmazonS3Client(accessKey, secretKey, config); 
 
         // uncomment the following line if you like to troubleshoot communication with S3 storage and implement private void OnAmazonS3Exception(object sender, Amazon.Runtime.ExceptionEventArgs e)
