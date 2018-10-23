@@ -15,12 +15,19 @@ Install Nginx from [here](http://nginx.org/en/download.html).
 ## 3. Configuration
 
 ### Proxy all requests
-Add  below content as a file ``/etc/nginx/sites-enabled``  and also remove the existing ``default`` file in same directory.
+Add the following content as a file ``/etc/nginx/sites-enabled``, e.g. ``/etc/nginx/sites-enables/minio``  and also remove the existing ``default`` file in same directory.
 
 ```sh
 server {
  listen 80;
  server_name example.com;
+ # To allow special characters in headers
+ ignore_invalid_headers off;
+ # Allow any size file to be uploaded.  
+ #Set to a value such as 1000m; to restrict file size to a specific value
+ client_max_body_size 0;
+ # To disable buffering
+ proxy_buffering off;
  location / {
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9000;
@@ -35,6 +42,7 @@ Note:
 * Replace ``http://localhost:9000``  with your own server name.
 * Add ``client_max_body_size 1000m;`` in the ``http`` context in order to be able to upload large files — simply adjust the value accordingly. The default value is `1m` which is far too low for most scenarios. To disable checking of client request body size, set ``client_max_body_size`` to `0`.
 * Nginx buffers responses by default. To disable Nginx from buffering Minio response to temp file, set `proxy_buffering off;`. This will improve time-to-first-byte for client requests.
+* Nginx disallows special characters by default.  Set ``ignore_invalid_headers off;`` to allow headers with special characters.
 
 ### Proxy requests based on the bucket
 If you want to serve web-application and Minio from the same nginx port then you can proxy the Minio requests based on the bucket name
