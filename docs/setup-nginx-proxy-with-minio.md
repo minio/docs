@@ -24,7 +24,7 @@ server {
  # To allow special characters in headers
  ignore_invalid_headers off;
  # Allow any size file to be uploaded.  
- #Set to a value such as 1000m; to restrict file size to a specific value
+ # Set to a value such as 1000m; to restrict file size to a specific value
  client_max_body_size 0;
  # To disable buffering
  proxy_buffering off;
