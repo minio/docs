@@ -31,7 +31,7 @@ aws --no-verify-ssl --endpoint-url https://localhost:9000 s3api create-bucket --
 
 ## Upload an Object using SSE-C
 
-The following example shows how to upload an object named `my-secret-diary` where the content is the file: `~/my-diary.txt`:
+The following example shows how to upload an object named `my-secret-diary` where the content is the file `~/my-diary.txt`. Note that you should use your own encryption key.
 
 ```sh
 aws s3api put-object \
@@ -41,7 +41,7 @@ aws s3api put-object \
   --sse-customer-algorithm AES256 \
   --sse-customer-key MzJieXRlc2xvbmdzZWNyZXRrZXltdXN0cHJvdmlkZWQ= \
   --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg== \
-  --body ~/my-diary.txt You should use your own encryption key.
+  --body ~/my-diary.txt 
 ```
 
 In this example, a local Minio server is running on https://localhost:9000 with a self-signed certificate. TLS certificate verification is skipped using: `--no-verify-ssl`. If a Minio server uses a CA-signed certificate, then `--no-verify-ssl` should not be included, otherwise aws-cli would accept any certificate.
