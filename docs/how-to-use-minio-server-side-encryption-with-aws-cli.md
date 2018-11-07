@@ -1,6 +1,6 @@
 # How to use Minio's Server-side Encryption with the AWS CLI
 
-Minio supports S3 server-side-encryption with customer provided keys (SSE-C). This following sections describe this use of this encryption with the AWS Command Line Interface (`awscli`):
+Minio supports S3 server-side-encryption with customer provided keys (SSE-C). The following sections describe the use of server-side encryption with the AWS Command Line Interface (`awscli`):
 * [Prerequisites](#prerequisites)
 * [Use SSE-C with aws-cli](#use-sse-c-with-aws-cli)
 * [Security Notice](#security-notice)
@@ -8,9 +8,9 @@ Minio supports S3 server-side-encryption with customer provided keys (SSE-C). Th
 # <a name="prerequisites"></a>Prerequisites
 
 A client must specify three HTTP headers for SSE-C requests:
-* `X-Amz-Server-Side-Encryption-Customer-Algorithm`: The algorithm identifier: must be set to `AES256`.
-* `X-Amz-Server-Side-Encryption-Customer-Key`: The secret encryption key: must be a 256-bit Base64-encoded string.
-* `X-Amz-Server-Side-Encryption-Customer-Key-MD5`: The encryption key MD5 checksum: must be set to the MD5-sum of the encryption key. Note: The MD5 checksum is the MD5 sum of the raw binary key, not of the base64-encoded key.
+* `X-Amz-Server-Side-Encryption-Customer-Algorithm`: The algorithm identifier. It must be set to `AES256`.
+* `X-Amz-Server-Side-Encryption-Customer-Key`: The secret encryption key. It must be a 256-bit Base64-encoded string.
+* `X-Amz-Server-Side-Encryption-Customer-Key-MD5`: The encryption key MD5 checksum. It must be set to the MD5-sum of the encryption key. Note: The MD5 checksum is the MD5 sum of the raw binary key, not of the base64-encoded key.
 
 Install the Minio Server with TLS as described [here](https://docs.minio.io/docs/how-to-secure-access-to-minio-server-with-tls).
 
@@ -86,7 +86,7 @@ Copyaws s3api get-object \
 
 # <a name="security-notice"></a> Security-Related Notes
 
-* The Minio server will reject any SSE-C request made over an insecure (non-TLS) connection as per the S3 specification the. This means that SSE-C requires TLS / HTTPS, and an SSE-C request contains the encryption key. 
+* The Minio server will reject any SSE-C request made over an insecure (non-TLS) connection per the S3 specification. This means that SSE-C requires TLS / HTTPS, and an SSE-C request contains the encryption key. 
 * If an SSE-C request is made over a non-TLS connection, the SSE-C encryption key must be treated as compromised.
 * Per the S3 specification, the `content-md5` returned by an SSE-C PUT operation does not match the MD5 sum of the uploaded object. 
 * The Minio server uses a tamper-proof encryption scheme to encrypt objects and does not save the encryption key, which means you are responsible for managing encryption keys. If you lose the encryption key for an object, you will lose that object.
