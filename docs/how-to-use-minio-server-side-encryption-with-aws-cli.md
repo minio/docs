@@ -3,7 +3,7 @@
 Minio supports S3 server-side-encryption with customer provided keys (SSE-C). The following sections describe the use of server-side encryption with the AWS Command Line Interface (`aws-cli`):
 * [Prerequisites](#prerequisites)
 * [Use SSE-C with aws-cli](#use-sse-c-with-aws-cli)
-* [Security Notice](#security-notice)
+* [Security-Related Notes](#security-notice)
 
 ## <a name="prerequisites"></a>1. Prerequisites
 
