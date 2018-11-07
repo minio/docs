@@ -5,7 +5,7 @@ Minio supports S3 server-side-encryption with customer provided keys (SSE-C). Th
 * [Use SSE-C with aws-cli](#use-sse-c-with-aws-cli)
 * [Security Notice](#security-notice)
 
-# <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>1. Prerequisites
 
 A client must specify three HTTP headers for SSE-C requests:
 * `X-Amz-Server-Side-Encryption-Customer-Algorithm`: The algorithm identifier. It must be set to `AES256`.
@@ -16,20 +16,20 @@ Install the Minio Server with TLS as described [here](https://docs.minio.io/docs
 
 **Note**: Tools like `aws-cli` or `mc` will display an error if a self-signed TLS certificate is used when trying to upload objects to the server. See [Let's Encrypt](https://letsencrypt.org/) to get a CA-signed TLS certificate. Self-signed certificates should only be used for development, testing or internal usage.
 
-# <a name="use-sse-c-with-aws-cli"></a>Use SSE-C with aws-cli
+## <a name="use-sse-c-with-aws-cli"></a>2. Use SSE-C with aws-cli
 
 This section describes how to use server-side encryption with customer-provided encryption (SSE-C) keys via the aws-cli.
 
-## Install the aws-cli 
+### Install the aws-cli 
 You can install the AWS Command Line Interface using the procedure described [here](https://docs.minio.io/docs/aws-cli-with-minio).
 
-## Create a bucket named `my-bucket`
+### Create a bucket named `my-bucket`
 
 ```sh
 aws --no-verify-ssl --endpoint-url https://localhost:9000 s3api create-bucket --bucket my-bucket
 ```
 
-## Upload an Object using SSE-C
+### Upload an Object using SSE-C
 
 The following example shows how to upload an object named `my-secret-diary` where the content is the file `~/my-diary.txt`. Note that you should use your own encryption key.
 
@@ -47,7 +47,7 @@ aws s3api put-object \
 In this example, a local Minio server is running on https://localhost:9000 with a self-signed certificate. TLS certificate verification is skipped using: `--no-verify-ssl`. If a Minio server uses a CA-signed certificate, then `--no-verify-ssl` should not be included, otherwise aws-cli would accept any certificate.
 
 
-## Display Object Information
+### Display Object Information
 Specify the correct SSE-C key of an encrypted object to display its metadata:
 
 ```sh
@@ -61,7 +61,7 @@ Copy  aws s3api head-object \
   --sse-customer-key-md5 7PpPLAK26ONlVUGOWlusfg==
 ```
 
-## Download an Object
+### Download an Object
 The following examples show how a local copy of a file can be removed and then restored by downloading it from the server:
 
 Delete your local copy of `my-diary.txt`:
@@ -84,7 +84,7 @@ aws s3api get-object \
 ~/my-diary.txt
 ```
 
-# <a name="security-notice"></a> Security-Related Notes
+## <a name="security-notice"></a>3. Security-Related Notes
 
 * The Minio server will reject any SSE-C request made over an insecure (non-TLS) connection per the S3 specification. This means that SSE-C requires TLS / HTTPS, and an SSE-C request contains the encryption key. 
 * If an SSE-C request is made over a non-TLS connection, the SSE-C encryption key must be treated as compromised.
