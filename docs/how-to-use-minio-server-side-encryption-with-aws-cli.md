@@ -51,7 +51,7 @@ In this example, a local Minio server is running on https://localhost:9000 with 
 Specify the correct SSE-C key of an encrypted object to display its metadata:
 
 ```sh
-Copy  aws s3api head-object \
+aws s3api head-object \
   --no-verify-ssl \
   --endpoint-url https://localhost:9000 \
   --bucket my-bucket \
