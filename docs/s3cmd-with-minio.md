@@ -1,85 +1,110 @@
 # S3cmd with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`S3cmd` is a CLI client for managing data in AWS S3, Google Cloud Storage or any cloud storage service provider that uses the s3 protocol.  `S3cmd` is open source and is distributed under the GPLv2 license.
+`S3cmd` is an open source CLI client for managing data in AWS S3, Google Cloud Storage, or any cloud storage service provider that uses the **s3** protocol. `S3cmd` is distributed under the [GPLv2 License](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
 
-In this recipe we will learn how to configure and use S3cmd to manage data with Minio Server.
+This guide describes how to configure `S3cmd` and use it to manage data on Minio Server. These are the steps you will follow:
 
-## 1. Prerequisites
+[1. Install Minio Server](#installminioserver)<br/>
+[2. Install `S3cmd`](#installs3cmd)<br/>
+[3. Configure `S3cmd`](#configures3cmd)<br/>
+[4. Run `S3cmd` Commands](#runs3cmdcommands)
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+## <a name="installminioserver"></a>1. Install Minio Server
 
-## 2. Installation
+Install Minio Server using the instructions in the [Minio Quickstart Guide](http://docs.minio.io/docs/minio-quickstart-guide).
 
-Install `S3cmd` from <http://s3tools.org/s3cmd>.
+## <a name="installs3cmd"></a>2. Install `S3cmd`
 
-## 3. Configuration
+Install `S3cmd` using these instructions: <http://s3tools.org/s3cmd>.
 
-We will run `S3cmd` on <https://play.minio.io:9000>.
+## <a name="configures3cmd"></a>3. Configure `S3cmd`
 
-Access credentials shown in this example belong to <https://play.minio.io:9000>. These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
-
-Edit the following fields in your s3cmd configuration file `~/.s3cfg`
+### 3.1 Generate a Configuration file
+`S3cmd` uses a configuration file called **.s3cfg** to access cloud storage. Use the following command to generate the initial version of **.s3cfg**:
 
 ```sh
-# Setup endpoint
+ `./S3cmd --configure`
+```
+
+**Note:** accept the defaults when prompted.
+
+### 3.2 Edit the Configuration File
+Modify the configuration file to enable `S3cmd` to manage buckets on https://play.minio.io:9000:
+
+#### 3.2.1. Navigate to **/users/<your user name>** and open **.s3cfg** in a text editor.
+#### 3.2.2. Edit the following fields in **.s3cfg** to configure the endpoint:
+
+```sh
+bucket_location = us-east-1
 host_base = play.minio.io:9000
 host_bucket = play.minio.io:9000
-bucket_location = us-east-1
 use_https = True
+```
 
-# Setup access keys
+#### 3.3.3. Edit the following fields in **.s3cfg** to set the access keys:
+
+```sh
 access_key =  Q3AM3UQ867SPQQA43P2F
 secret_key = zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
+```
 
-# Enable S3 v4 signature APIs
+#### 3.3.4. Edit the following fields in **.s3cfg** to enable S3 v4 signature APIs:
+
+```sh
 signature_v2 = False
 ```
 
-## 4. Commands
+#### 3.3.5. Save **.s3cfg**.
 
-### To make a bucket
+**Note:** The variables set in this example are for public testing and development on <https://play.minio.io:9000>. Modify these variables as appropriate when developing for your own Minio Server.
+
+
+## <a name="runs3cmdcommands"></a>4. Run `S3cmd` Commands
+Navigate to the installation directory for **S3cmd** and invoke the following commands to create and manage a bucket:
+
+### Make a Bucket
 
 ```sh
 s3cmd mb s3://mybucket
 Bucket 's3://mybucket/' created
 ```
 
-### To copy an object to bucket
+### Copy an Object to the Bucket
 
 ```sh
 s3cmd put newfile s3://testbucket
 upload: 'newfile' -> 's3://testbucket/newfile'  
 ```
 
-### To copy an object to local system
+### Copy an Object to the Local File System
 
 ```sh
 s3cmd get s3://testbucket/newfile
 download: 's3://testbucket/newfile' -> './newfile'
 ```
 
-### To sync local file/directory to a bucket
+### Sync a Local File/Directory to a Bucket
 
 ```sh
 s3cmd sync newdemo s3://testbucket
 upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
 ```
 
-### To sync bucket or object with local filesystem
+### Sync a Bucket with the Local File System
 
 ```sh
 s3cmd sync  s3://testbucket otherlocalbucket
 download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
 ```
 
-### To list buckets
+### List all Buckets
 
 ```sh
 s3cmd ls s3://
 2015-12-09 16:12  s3://testbbucket
 ```
 
-### To list contents inside bucket
+### List the Contents of a Bucket
 
 ```sh
 s3cmd ls s3://testbucket/
@@ -87,19 +112,18 @@ s3cmd ls s3://testbucket/
 2015-12-09 16:05    138504   s3://testbucket/newfile
 ```
 
-### To delete an object from bucket
+### Delete an Object from a Bucket
 
 ```sh
 s3cmd del s3://testbucket/newfile
 delete: 's3://testbucket/newfile'
 ```
 
-### To delete a bucket
+### Delete a Bucket
 
 ```sh
 s3cmd rb s3://mybucket
 Bucket 's3://mybucket/' removed
 ```
 
-NOTE:
-The complete usage guide for `S3cmd` is available [here](http://s3tools.org/usage).
+**Note:** The complete usage guide for `S3cmd` is available [here](http://s3tools.org/usage).
