@@ -1,20 +1,26 @@
-# Setup Caddy proxy with Minio Server  [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Set Up a Caddy Proxy with Minio Server  [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-Caddy is a web server like Apache, nginx, or lighttpd. The purpose of Caddy is to streamline  web development, deployment, and hosting workflows so that anyone can host their own web sites without requiring special technical knowledge.
+Caddy is a web server, similar to Apache, NGINX, or lighttpd, that streamlines development, deployment, and hosting of websites.
 
-In this recipe we will learn how to set up Caddy proxy with Minio Server.
+This quickstart guide describes how to set up a Caddy proxy for Minio Server. These are the steps you will follow:
 
-## 1. Prerequisites
+[1. Install Minio Server](#installminio)<br/>
+[2. Install Caddy](#installcaddy)<br/>
+[3. Configure Caddy](#configurecaddy)<br/>
+[4. Start Minio Server](#startminio)<br/>
+[5. Start the Caddy Server](#startcaddy)
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+## <a name="installminio"></a>1. Install Minio Server
 
-## 2. Installation
+Install Minio Server using the instructions in the [Minio Quickstart Guide](http://docs.minio.io/docs/minio-quickstart-guide).
 
-Install Caddy Server from [here](https://caddyserver.com/download).
+## <a name="installcaddy"></a>2. Install Caddy
 
-## 3. Configuration
+Install the Caddy web server using these instructions: [https://caddyserver.com/download](https://caddyserver.com/download).
 
-Create a caddy configuration file as below, change the ip addresses according to your local minio and DNS configuration.
+## <a name="configurecaddy"></a>3. Configure Caddy
+### 3.1 Create a Caddy Configuration File:
+Open a text editor and create a configuration file with the following content:
 
 ```sh
 your.public.com
@@ -27,20 +33,28 @@ proxy / localhost:9000 {
 }
 ```
 
-## 4. Recipe Steps
+### 3.2 Change the IP Addresses
+Change the DNS entry and IP address/port in the configuration file according to your Minio and DNS configuration, and save the file. The example above defaults to `your.public.com` and `localhost:9000`, respectively.
 
-### Step 1: Start `minio` server.
-
+## <a name="startminio"></a>4. Start Minio Server
+Start Minio Server and replace `<your_export_dir>` with the name of the directory where data is stored:
 
 ```sh
 ./minio --address localhost:9000 server <your_export_dir>
 ```
 
-### Step 2: Start `caddy` server.
+## <a name="startcaddy"></a>5. Start the Caddy Server
+Start the Caddy web server and replace `<your_configuration_file>` with the name of the configuration file created above:
 
 ```sh
-./caddy
+./caddy -conf ./path/to/<your_configuration_file>
+```
+
+You should see a response similar to this one:
+
+```sh
 Activating privacy features... done.
 your.public.com:443
 your.public.com:80
 ```
+
