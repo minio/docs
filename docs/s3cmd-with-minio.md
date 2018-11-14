@@ -4,10 +4,10 @@
 
 This guide describes how to configure `S3cmd` and use it to manage data on Minio Server. These are the steps you will follow:
 
-[1. Install Minio Server](#installminioserver) 
-[2. Install `S3cmd`](#installs3cmd) 
-[3. Configure `S3cmd`](#configures3cmd) 
-[4. Examples of Typical `S3cmd` Commands](#runs3cmdcommands)
+1. [Install Minio Server](#installminioserver) 
+2. [Install `S3cmd`](#installs3cmd) 
+3. [Configure `S3cmd`](#configures3cmd) 
+4. [Examples of Typical `S3cmd` Commands](#runs3cmdcommands)
 
 
 ## <a name="installminioserver"></a>1. Install Minio Server
