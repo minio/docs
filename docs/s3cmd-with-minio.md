@@ -4,10 +4,11 @@
 
 This guide describes how to configure `S3cmd` and use it to manage data on Minio Server. These are the steps you will follow:
 
-[1. Install Minio Server](#installminioserver)  
-[2. Install `S3cmd`](#installs3cmd)  
-[3. Configure `S3cmd`](#configures3cmd)  
-[4. Run `S3cmd` Commands](#runs3cmdcommands)
+[1. Install Minio Server](#installminioserver)
+[2. Install `S3cmd`](#installs3cmd)
+[3. Configure `S3cmd`](#configures3cmd)
+[4. Examples of Typical `S3cmd` Commands](#runs3cmdcommands)
+
 
 ## <a name="installminioserver"></a>1. Install Minio Server
 
@@ -19,14 +20,14 @@ Install `S3cmd` using these instructions: <http://s3tools.org/s3cmd>.
 
 ## <a name="configures3cmd"></a>3. Configure `S3cmd`
 
-### 3.1 Generate a Configuration File
+### 3.1 Generate a Configuration file
 `S3cmd` uses a configuration file called **.s3cfg** to access cloud storage. Use the following command to generate the initial version of **.s3cfg**:
 
 ```sh
  `./S3cmd --configure`
 ```
 
-**Note:** accept the defaults when prompted.
+**Note:** Accept the defaults when prompted.
 
 ### 3.2 Edit the Configuration File
 Modify the configuration file to enable `S3cmd` to manage buckets on https://play.minio.io:9000:
@@ -59,13 +60,18 @@ signature_v2 = False
 **Note:** The variables set in this example are for public testing and development on <https://play.minio.io:9000>. Modify these variables as appropriate when developing for your own Minio Server.
 
 
-## <a name="runs3cmdcommands"></a>4. Run `S3cmd` Commands
+## <a name="runs3cmdcommands"></a>4. Examples of Typical `S3cmd` Commands
 Navigate to the installation directory for **S3cmd** and invoke the following commands to create and manage a bucket:
 
-### Make a Bucket
+### Create a Bucket
 
 ```sh
 s3cmd mb s3://mybucket
+```
+
+You should see a response similar to this one:
+
+```sh
 Bucket 's3://mybucket/' created
 ```
 
@@ -73,6 +79,11 @@ Bucket 's3://mybucket/' created
 
 ```sh
 s3cmd put newfile s3://testbucket
+```
+
+You should see a response similar to this one:
+
+```sh
 upload: 'newfile' -> 's3://testbucket/newfile'  
 ```
 
@@ -80,6 +91,11 @@ upload: 'newfile' -> 's3://testbucket/newfile'
 
 ```sh
 s3cmd get s3://testbucket/newfile
+```
+
+You should see a response similar to this one:
+
+```sh
 download: 's3://testbucket/newfile' -> './newfile'
 ```
 
@@ -87,6 +103,11 @@ download: 's3://testbucket/newfile' -> './newfile'
 
 ```sh
 s3cmd sync newdemo s3://testbucket
+```
+
+You should see a response similar to this one:
+
+```sh
 upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
 ```
 
@@ -94,6 +115,11 @@ upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
 
 ```sh
 s3cmd sync  s3://testbucket otherlocalbucket
+```
+
+You should see a response similar to this one:
+
+```sh
 download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
 ```
 
@@ -101,6 +127,11 @@ download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
 
 ```sh
 s3cmd ls s3://
+```
+
+You should see a response similar to this one:
+
+```sh
 2015-12-09 16:12  s3://testbbucket
 ```
 
@@ -108,14 +139,25 @@ s3cmd ls s3://
 
 ```sh
 s3cmd ls s3://testbucket/
+```
+
+You should see a response similar to this one:
+
+```sh
                                       DIR   s3://testbucket/test/
 2015-12-09 16:05    138504   s3://testbucket/newfile
 ```
+
 
 ### Delete an Object from a Bucket
 
 ```sh
 s3cmd del s3://testbucket/newfile
+```
+
+You should see a response similar to this one:
+
+```sh
 delete: 's3://testbucket/newfile'
 ```
 
@@ -123,6 +165,11 @@ delete: 's3://testbucket/newfile'
 
 ```sh
 s3cmd rb s3://mybucket
+```
+
+You should see a response similar to this one:
+
+```sh
 Bucket 's3://mybucket/' removed
 ```
 
