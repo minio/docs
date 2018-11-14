@@ -4,11 +4,11 @@ Caddy is a web server, similar to Apache, NGINX, or lighttpd, that streamlines d
 
 This quickstart guide describes how to set up a Caddy proxy for Minio Server. These are the steps you will follow:
 
-[1. Install Minio Server](#installminio)<br/>
-[2. Install Caddy](#installcaddy)<br/>
-[3. Configure Caddy](#configurecaddy)<br/>
-[4. Start Minio Server](#startminio)<br/>
-[5. Start the Caddy Server](#startcaddy)
+1. [Install Minio Server](#installminio) 
+2. [Install Caddy](#installcaddy) 
+3. [Configure Caddy](#configurecaddy) 
+4. [Start Minio Server](#startminio) 
+5. [Start the Caddy Server](#startcaddy)
 
 ## <a name="installminio"></a>1. Install Minio Server
 
