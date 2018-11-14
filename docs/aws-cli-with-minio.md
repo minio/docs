@@ -4,10 +4,10 @@
 
 This guide describes how to configure and use AWS CLI to manage buckets with Minio Server. These are the steps you will follow:
 
-[1. Install Minio Server](#installminioserver)  
-[2. Install `AWS CLI`](#installawscli)  
-[3. Configure `AWS CLI`](#configureawscli)  
-[4. Examples of Typical `AWS CLI` Commands](#runawsclicommands)  
+1. [Install Minio Server](#installminioserver) 
+2. [Install `AWS CLI`](#installawscli) 
+3. [Configure `AWS CLI`](#configureawscli) 
+4. [Examples of Typical `AWS CLI` Commands](#runawsclicommands)  
 
 ## <a name="installminioserver"></a>1. Install Minio Server
 
