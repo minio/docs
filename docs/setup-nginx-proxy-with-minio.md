@@ -1,26 +1,26 @@
-# Set Up an NGINX Proxy with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Set Up an nginx Proxy with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`NGINX` is an open source web and reverse proxy server.  
+nginx is an open source web and reverse proxy server.  
 
-This guide describes how to set up an NGINX proxy with Minio Server. These are the steps you will follow:
+This guide describes how to set up an nginx proxy with Minio Server. These are the steps:
 
 1. [Install Minio Server](#installserver) 
-2. [Install `NGINX`](#installnginx) 
+2. [Install nginx](#installnginx) 
 3. [Configure the Endpoint](#configureendpoint) 
-4. [Run `NGINX`](#runnginx)
+4. [Run nginx](#runnginx)
 
 
 ## <a name="installserver"></a>1. Install Minio Server
 
 Install Minio Server using the instructions in the [Minio Quickstart Guide](http://docs.minio.io/docs/minio-quickstart-guide).
 
-## <a name="installnginx"></a>2. Install `NGINX`
+## <a name="installnginx"></a>2. Install nginx
 
-Install NGINX using these instructions: [http://nginx.org/en/download.html](http://nginx.org/en/download.html).  
+Install nginx using these instructions: [http://nginx.org/en/download.html](http://nginx.org/en/download.html).  
 
 ## <a name="configureendpoint"></a>3. Configure the Endpoint
 
-### 3.1 Configure NGINX to Proxy all Requests
+### 3.1 Configure nginx to Proxy all Requests
 
 #### 3.1.1 Navigate to **/etc/nginx/sites-enabled**.
 #### 3.1.2 Remove the existing configuration file named **Default** from that directory.
@@ -46,16 +46,16 @@ server {
 ```
 
 #### 3.1.4 Modify the host settings in the configuration file:
-* `example.com`: Specifies the host name. Replace this with the name of your own host.
-* `http://localhost:9000`: Specifies the server name. Replace this with the name of your own server.
+* `example.com`: Specifies the host name. Replace this with the name of the development host.
+* `http://localhost:9000`: Specifies the server name. Replace this with the name of the development server.
 
 #### 3.1.5 (Optional) Review additional settings in the configuration file:
 * `client_max_body_size`: Specifies the maximum size of the client request body. Set this value to `1000m` in the `http` context to enable large file uploads. This overrides the default value of `1m` which is too low for most scenarios. Set this value to `0` to disable checking the size of the client request body.
 * `proxy_buffering`: Enables or disables buffering responses to a temporary file. Set this value to `off` to disable buffering and improve time-to-first-byte for client requests. This setting is enabled by default.
-* `ignore_invalid_headers`: Allows or disallows special characters. Set this value to `off` to allow headers with special characters. This setting disallows special characters by default.
+* `ignore_invalid_headers`: Allows or disallows special characters. Set this value to `off` to allow headers with special characters. nginx disallows special characters by default.
 
 ### 3.2 Proxy Requests Based on the Bucket
-To serve both a web application and Minio Server from the same NGINX port, add the following content to the configuration file to proxy the Minio requests based on the bucket name:
+To serve both a web application and Minio Server from the same nginx port, add the following content to the configuration file to proxy the Minio requests based on the bucket name:
 
 ```sh
  # Proxy requests to the "photos" bucket on the Minio server running on port 9000
@@ -72,20 +72,20 @@ To serve both a web application and Minio Server from the same NGINX port, add t
  }
 ```
 
-## <a name="runnginx"></a>4. Run `NGINX`
+## <a name="runnginx"></a>4. Run nginx
 
 ### Start Minio Server
 
 ```sh
-minio server /mydatadir
+minio server /data
 ```
 
-### Restart the NGINX Server
+### Restart the nginx Server
 
 ```sh
-sudo service nginx restart
+systemctl restart nginx.service
 ```
 
 ## <a name="explorerfurther"></a>Explore Further
 
-See [Enterprise-Grade Cloud Storage with NGINX Plus and Minio](https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/) for additional information about Minio and NGINX configuration options.
+See [Enterprise-Grade Cloud Storage with NGINX Plus and Minio](https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/) for additional information about Minio and nginx configuration options.
