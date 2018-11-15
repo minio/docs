@@ -2,12 +2,12 @@
 
 `AWS CLI` is a tool to manage AWS services and transfer data to and from AWS S3. It works with any S3-compatible cloud storage service.
 
-This guide describes how to configure and use AWS CLI to manage buckets with Minio Server. These are the steps you will follow:
+This guide describes how to configure and use AWS CLI to manage buckets with Minio Server.
 
 1. [Install Minio Server](#installminioserver) 
 2. [Install `AWS CLI`](#installawscli) 
 3. [Configure `AWS CLI`](#configureawscli) 
-4. [Examples of Typical `AWS CLI` Commands](#runawsclicommands)  
+4. [Examples of Typical `AWS CLI` Commands](#runawsclicommands)
 
 ## <a name="installminioserver"></a>1. Install Minio Server
 
@@ -45,7 +45,7 @@ aws configure set default.s3.signature_version s3v4
 aws --endpoint-url https://play.minio.io:9000 s3 ls
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 2016-03-27 02:06:30 deebucket
@@ -61,7 +61,7 @@ You should see a response similar to this one:
 aws --endpoint-url https://play.minio.io:9000 s3 ls s3://mybucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 2016-03-30 00:26:53      69297 argparse-1.2.1.tar.gz
@@ -75,7 +75,7 @@ You should see a response similar to this one:
 aws --endpoint-url https://play.minio.io:9000 s3 mb s3://mybucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 make_bucket: s3://mybucket/
@@ -87,7 +87,7 @@ make_bucket: s3://mybucket/
 aws --endpoint-url https://play.minio.io:9000 s3 cp simplejson-3.3.0.tar.gz s3://mybucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 upload: ./simplejson-3.3.0.tar.gz to s3://mybucket/simplejson-3.3.0.tar.gz
@@ -99,7 +99,7 @@ upload: ./simplejson-3.3.0.tar.gz to s3://mybucket/simplejson-3.3.0.tar.gz
 aws --endpoint-url https://play.minio.io:9000 s3 rm s3://mybucket/argparse-1.2.1.tar.gz
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 delete: s3://mybucket/argparse-1.2.1.tar.gz
@@ -111,7 +111,7 @@ delete: s3://mybucket/argparse-1.2.1.tar.gz
 aws --endpoint-url https://play.minio.io:9000 s3 rb s3://mybucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 ```sh
 remove_bucket: s3://mybucket/
 ```
