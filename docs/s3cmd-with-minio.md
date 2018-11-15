@@ -24,7 +24,7 @@ Install `S3cmd` using these instructions: <https://s3tools.org/s3cmd>.
 `S3cmd` uses a configuration file called **.s3cfg** to access cloud storage. Use the following command to generate the initial version of **.s3cfg**:
 
 ```sh
- ./S3cmd --configure
+./S3cmd --configure
 ```
 
 **Note:** Accept the defaults when prompted.
