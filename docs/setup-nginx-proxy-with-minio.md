@@ -2,7 +2,7 @@
 
 nginx is an open source web and reverse proxy server.  
 
-This guide describes how to set up an nginx proxy with Minio Server. These are the steps:
+This guide describes how to set up an nginx proxy with Minio Server.
 
 1. [Install Minio Server](#installserver) 
 2. [Install nginx](#installnginx) 
