@@ -2,7 +2,7 @@
 
 `S3cmd` is an open source CLI client for managing data in AWS S3, Google Cloud Storage, or any cloud storage service provider that uses the **s3** protocol. `S3cmd` is distributed under the [GPLv2 License](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
 
-This guide describes how to configure `S3cmd` and use it to manage data on Minio Server. These are the steps you will follow:
+This guide describes how to configure `S3cmd` and use it to manage data on Minio Server. 
 
 1. [Install Minio Server](#installminioserver) 
 2. [Install `S3cmd`](#installs3cmd) 
@@ -16,7 +16,7 @@ Install Minio Server using the instructions in the [Minio Quickstart Guide](http
 
 ## <a name="installs3cmd"></a>2. Install `S3cmd`
 
-Install `S3cmd` using these instructions: <http://s3tools.org/s3cmd>.
+Install `S3cmd` using these instructions: <https://s3tools.org/s3cmd>.
 
 ## <a name="configures3cmd"></a>3. Configure `S3cmd`
 
@@ -32,7 +32,7 @@ Install `S3cmd` using these instructions: <http://s3tools.org/s3cmd>.
 ### 3.2 Edit the Configuration File
 Modify the configuration file to enable `S3cmd` to manage buckets on https://play.minio.io:9000:
 
-#### 3.2.1. Navigate to **/users/<your user name>** and open **.s3cfg** in a text editor.
+#### 3.2.1. Navigate to **/users/<user name>** and open **.s3cfg** in a text editor.
 #### 3.2.2. Edit the following fields in **.s3cfg** to configure the endpoint:
 
 ```sh
@@ -57,22 +57,21 @@ signature_v2 = False
 
 #### 3.3.5. Save **.s3cfg**.
 
-**Note:** The variables set in this example are for public testing and development on <https://play.minio.io:9000>. Modify these variables as appropriate when developing for your own Minio Server.
-
+**Note:** The variables set in this example are for public testing and development on <https://play.minio.io:9000>. Modify these variables as appropriate for a development server.
 
 ## <a name="runs3cmdcommands"></a>4. Examples of Typical `S3cmd` Commands
-Navigate to the installation directory for **S3cmd** and invoke the following commands to create and manage a bucket:
+Invoke the following commands to create and manage a bucket:
 
 ### Create a Bucket
 
 ```sh
-s3cmd mb s3://mybucket
+s3cmd mb s3://testbucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
-Bucket 's3://mybucket/' created
+Bucket 's3://testbucket/' created
 ```
 
 ### Copy an Object to the Bucket
@@ -81,7 +80,7 @@ Bucket 's3://mybucket/' created
 s3cmd put newfile s3://testbucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 upload: 'newfile' -> 's3://testbucket/newfile'  
@@ -93,7 +92,7 @@ upload: 'newfile' -> 's3://testbucket/newfile'
 s3cmd get s3://testbucket/newfile
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 download: 's3://testbucket/newfile' -> './newfile'
@@ -105,7 +104,7 @@ download: 's3://testbucket/newfile' -> './newfile'
 s3cmd sync newdemo s3://testbucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
@@ -117,7 +116,7 @@ upload: 'newdemo/newdemofile.txt' -> 's3://testbucket/newdemo/newdemofile.txt'
 s3cmd sync  s3://testbucket otherlocalbucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
@@ -129,7 +128,7 @@ download: 's3://testbucket/cat.jpg' -> 'otherlocalbucket/cat.jpg'
 s3cmd ls s3://
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 2015-12-09 16:12  s3://testbbucket
@@ -141,7 +140,7 @@ You should see a response similar to this one:
 s3cmd ls s3://testbucket/
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
                                       DIR   s3://testbucket/test/
@@ -155,7 +154,7 @@ You should see a response similar to this one:
 s3cmd del s3://testbucket/newfile
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
 delete: 's3://testbucket/newfile'
@@ -164,13 +163,13 @@ delete: 's3://testbucket/newfile'
 ### Delete a Bucket
 
 ```sh
-s3cmd rb s3://mybucket
+s3cmd rb s3://testbucket
 ```
 
-You should see a response similar to this one:
+A response similar to this one should be displayed:
 
 ```sh
-Bucket 's3://mybucket/' removed
+Bucket 's3://testbucket/' removed
 ```
 
 **Note:** The complete usage guide for `S3cmd` is available [here](http://s3tools.org/usage).
