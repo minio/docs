@@ -143,7 +143,7 @@ s3cmd ls s3://testbucket/
 A response similar to this one should be displayed:
 
 ```sh
-                                      DIR   s3://testbucket/test/
+DIR   s3://testbucket/test/
 2015-12-09 16:05    138504   s3://testbucket/newfile
 ```
 
