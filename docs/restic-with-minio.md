@@ -45,7 +45,7 @@ restic backup ~/.Data
 
 A response similar to this one should be displayed:
 
-```sh
+```
 repository 6a963c49 opened successfully, password is correct
 created new cache in /Users/<user name>/Library/Caches/restic
 
@@ -65,7 +65,7 @@ mc ls minio/restic
 ```
 A response similar to this one should be displayed:
 
-```sh
+```
 [2018-11-15 09:25:28 PST]   155B config
 [2018-11-15 09:26:46 PST]     0B data/
 [2018-11-15 09:26:46 PST]     0B index/
