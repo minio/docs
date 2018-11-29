@@ -4,20 +4,20 @@
 
 This guide describes how to configure and use AWS CLI to manage buckets with Minio Server.
 
-1. [Install Minio Server](#installminioserver) 
-2. [Install `AWS CLI`](#installawscli) 
-3. [Configure `AWS CLI`](#configureawscli) 
-4. [Examples of Typical `AWS CLI` Commands](#runawsclicommands)
+- [Install Minio Server](#install-minio-server) 
+- [Install `AWS CLI`](#install-aws-cli) 
+- [Configure `AWS CLI`](#configure-aws-cli) 
+- [Examples of Typical `AWS CLI` Commands](#examples-of-typical-aws-cli-commands)
 
-## <a name="installminioserver"></a>1. Install Minio Server
+## <a name="install-minio-server"></a>1. Install Minio Server
 
 Install Minio Server using the instructions in the [Minio Quickstart Guide](https://docs.minio.io).
 
-## <a name="installawscli"></a>2. Install `AWS CLI`
+## <a name="install-aws-cli"></a>2. Install `AWS CLI`
 
 Install `AWS CLI` using these instructions: <https://aws.amazon.com/cli/>.
 
-## <a name="configureawscli"></a>3. Configure `AWS CLI`
+## <a name="configure-aws-cli"></a>3. Configure `AWS CLI`
 
 ### 3.1 Configure the Endpoint
 #### 3.1.1 Run `aws configure` to start the configuration process.
@@ -38,7 +38,7 @@ Default output format [None]: ENTER
 aws configure set default.s3.signature_version s3v4
 ```
 
-## <a name="runawsclicommands"></a>4. Examples of Typical `AWS CLI` Commands
+## <a name="examples-of-typical-aws-cli-commands"></a>4. Examples of Typical `AWS CLI` Commands
 ### List all Buckets
 
 ```sh
