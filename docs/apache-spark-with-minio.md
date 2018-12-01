@@ -6,7 +6,7 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
 
 - Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 - Download Apache Spark version `spark-2.3.0-bin-without-hadoop` from [here](https://www.apache.org/dyn/closer.lua/spark/spark-2.3.0/spark-2.3.0-bin-without-hadoop.tgz).
-- Download Apache Hadoop version `hadoop-2.8.2` from [here](https://www.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz).
+- Download Apache Hadoop version `hadoop-2.8.2` from [here](https://archive.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz).
 - Download other dependencies
     - [`Hadoop 2.8.2`](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws/2.8.2)
     - [`HttpClient 4.5.3`](https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient/4.5.3)
