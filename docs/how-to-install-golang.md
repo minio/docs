@@ -12,13 +12,13 @@ This installation document assumes Ubuntu 16.04+ on x86-64 platform.
 $ sudo apt-get install git 
 ```
 
-##### Install Go 1.10+
+##### Install Go 1.11+
 
 Download Go 1.10+ from [https://golang.org/dl/](https://golang.org/dl/).
 
 ```
-$ wget https://storage.googleapis.com/golang/go1.10.linux-amd64.tar.gz
-$ sudo tar -C /usr/local -xzf go1.10.linux-amd64.tar.gz
+$ wget https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz
+$ sudo tar -C /usr/local -xzf go1.11.1.linux-amd64.tar.gz
 ```
 
 ##### Setup PATH
