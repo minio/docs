@@ -11,10 +11,10 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
     - [`Hadoop 2.8.2`](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws/2.8.2)
     - [`HttpClient 4.5.3`](https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient/4.5.3)
     - [`Joda Time 2.9.9`](https://mvnrepository.com/artifact/joda-time/joda-time/2.9.9)
-    - [`AWS SDK For Java Core 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-core/1.11.234)
-    - [`AWS SDK For Java 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk/1.11.234)
-    - [`AWS Java SDK For AWS KMS 1.11.234`](http://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kms/1.11.234)
-    - [`AWS Java SDK For Amazon S3 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3/1.11.234)
+    - [`AWS SDK For Java Core 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-core/1.11.524)
+    - [`AWS SDK For Java 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk/1.11.524)
+    - [`AWS Java SDK For AWS KMS 1.11.524`](http://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kms/1.11.524)
+    - [`AWS Java SDK For Amazon S3 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3/1.11.524)
 
 ## 2. Installation
 
@@ -27,8 +27,11 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
 Navigate to the directory where you extracted `spark-2.3.0-bin-without-hadoop`, and set the following environment variables:
 
 ```sh
+export SPARK_HOME=/path/to/spark-2.3.0-bin-without-hadoop
+export PATH=$PATH:$SPARK_HOME/bin
 export HADOOP_HOME=/path/to/hadoop-2.8.2
 export PATH=$PATH:$HADOOP_HOME/bin
+export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
 export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 ```
 
@@ -81,7 +84,7 @@ Then, open the file `$HADOOP_HOME/etc/hadoop/core-site.xml` for editing. In this
 Then start Spark-Shell by
 
 ```sh
-./bin/spark-shell --master local[4] --jars "../bin/hadoop-aws-2.8.2.jar,../bin/httpclient-4.5.3.jar,../bin/aws-java-sdk-core-1.11.234.jar,../bin/aws-java-sdk-kms-1.11.234.jar,../bin/aws-java-sdk-1.11.234.jar,../bin/aws-java-sdk-s3-1.11.234.jar,../bin/joda-time-2.9.9.jar"
+./bin/spark-shell --master local[4] --jars "../bin/hadoop-aws-2.8.2.jar,../bin/httpclient-4.5.3.jar,../bin/aws-java-sdk-core-1.11.524.jar,../bin/aws-java-sdk-kms-1.11.524.jar,../bin/aws-java-sdk-1.11.524.jar,../bin/aws-java-sdk-s3-1.11.524.jar,../bin/joda-time-2.9.9.jar"
 ```
 
 You should see the prompt
