@@ -56,3 +56,7 @@ send();
 node example.js
 Successfully uploaded data to testbucket/testobject
 ```
+
+## 5. Explore Further
+
+* [Javascript Shopping App](https://github.com/minio/minio-js-store-app)
