@@ -1,12 +1,12 @@
-# How to use AWS SDK for .NET with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for .NET with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`aws-sdk-dotnet` is the official AWS SDK for the .NET Framework. In this recipe we will learn how to use `aws-sdk-dotnet` with Minio server.
+`aws-sdk-dotnet` is the official AWS SDK for the .NET Framework. In this recipe we will learn how to use `aws-sdk-dotnet` with MinIO server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
 
-When running Minio server locally, the `MINIO_REGION` enviroment variable must be set.
+When running MinIO server locally, the `MINIO_REGION` enviroment variable must be set.
 
 Install Visual Studio 2015,  Visual Studio 2017 or Visual Studio Code. Find installation of the Visual Studio editions [here](https://www.visualstudio.com/downloads/).
 
@@ -19,9 +19,9 @@ The older (version 2) package is also [available](https://www.nuget.org/packages
 
 ## 3. Example
 
-The example code should be copied instead of the generated code in the ``Program.cs`` file. Create a console project in Visual Studio IDE and replace the generated ``Program.cs`` with the code below. Update ``ServiceURL``,``accessKey`` and ``secretKey`` with information that matching your Minio server setup. 
+The example code should be copied instead of the generated code in the ``Program.cs`` file. Create a console project in Visual Studio IDE and replace the generated ``Program.cs`` with the code below. Update ``ServiceURL``,``accessKey`` and ``secretKey`` with information that matching your MinIO server setup.
 
-The example prints all buckets in the Minio server and lists all objects of the first bucket using `aws-sdk-dotnet`.
+The example prints all buckets in the MinIO server and lists all objects of the first bucket using `aws-sdk-dotnet`.
 
 ```csharp
 using Amazon.S3;
@@ -44,8 +44,8 @@ class Program
         var config = new AmazonS3Config
         {
             RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL and it should match the `MINIO_REGION` enviroment variable.
-            ServiceURL = "http://localhost:9000", // replace http://localhost:9000 with URL of your minio server
-            ForcePathStyle = true // MUST be true to work correctly with Minio server
+            ServiceURL = "http://localhost:9000", // replace http://localhost:9000 with URL of your MinIO server
+            ForcePathStyle = true // MUST be true to work correctly with MinIO server
         };
         var amazonS3Client = new AmazonS3Client(accessKey, secretKey, config); 
 

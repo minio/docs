@@ -1,18 +1,18 @@
-# How to use AWS SDK for PHP with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for PHP with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`aws-sdk-php` is the official AWS SDK for the PHP programming language. In this recipe we will learn how to use `aws-sdk-php` with Minio server.
+`aws-sdk-php` is the official AWS SDK for the PHP programming language. In this recipe we will learn how to use `aws-sdk-php` with MinIO server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
-Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html). 
+Install `aws-sdk-php` from AWS SDK for PHP official docs [here](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html).
 
 ## 3. Use GetObject and PutObject
 
-Example below shows putObject and getObject operations on Minio server using aws-sdk-php. Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setup in this ``example.php`` file. Note that we set `use_path_style_endpoint` to `true` to use Minio with AWS SDK for PHP. Read more in the AWS SDK for PHP docs [here](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html#___construct). 
+Example below shows putObject and getObject operations on MinIO server using aws-sdk-php. Please replace ``endpoint``,``key``, ``secret``, ``Bucket`` with your local setup in this ``example.php`` file. Note that we set `use_path_style_endpoint` to `true` to use MinIO with AWS SDK for PHP. Read more in the AWS SDK for PHP docs [here](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html#___construct).
 
 ```php
 <?php
@@ -37,7 +37,7 @@ $s3 = new Aws\S3\S3Client([
 $insert = $s3->putObject([
      'Bucket' => 'testbucket',
      'Key'    => 'testkey',
-     'Body'   => 'Hello from Minio!!'
+     'Body'   => 'Hello from MinIO!!'
 ]);
 
 // Download the contents of the object.
@@ -55,7 +55,7 @@ After the file is updated, run the program
 
 ```sh
 php example.php
-Hello from Minio!!
+Hello from MinIO!!
 ```
 
 ## 4. Create a pre-signed URL

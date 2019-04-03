@@ -1,12 +1,12 @@
-# Setup Nginx proxy with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Setup Nginx proxy with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 Nginx is an open source Web server and a reverse proxy server.  
 
-In this recipe we will learn how to set up Nginx proxy with Minio Server.
+In this recipe we will learn how to set up Nginx proxy with MinIO Server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
@@ -41,14 +41,14 @@ Note:
 * Replace example.com with your own hostname.
 * Replace ``http://localhost:9000``  with your own server name.
 * Add ``client_max_body_size 1000m;`` in the ``http`` context in order to be able to upload large files — simply adjust the value accordingly. The default value is `1m` which is far too low for most scenarios. To disable checking of client request body size, set ``client_max_body_size`` to `0`.
-* Nginx buffers responses by default. To disable Nginx from buffering Minio response to temp file, set `proxy_buffering off;`. This will improve time-to-first-byte for client requests.
+* Nginx buffers responses by default. To disable Nginx from buffering MinIO response to temp file, set `proxy_buffering off;`. This will improve time-to-first-byte for client requests.
 * Nginx disallows special characters by default.  Set ``ignore_invalid_headers off;`` to allow headers with special characters.
 
 ### Proxy requests based on the bucket
-If you want to serve web-application and Minio from the same nginx port then you can proxy the Minio requests based on the bucket name
+If you want to serve web-application and MinIO from the same nginx port then you can proxy the MinIO requests based on the bucket name
 
 ```sh
- # Proxy requests to the bucket "photos" to Minio server running on port 9000
+ # Proxy requests to the bucket "photos" to MinIO server running on port 9000
  location /photos/ {
    proxy_buffering off;
    proxy_set_header Host $http_host;
@@ -64,7 +64,7 @@ If you want to serve web-application and Minio from the same nginx port then you
 
 ## 4. Recipe Steps
 
-### Step 1: Start Minio server.
+### Step 1: Start MinIO server.
 
 ```sh
 minio server /mydatadir
@@ -78,4 +78,4 @@ sudo service nginx restart
 
 ## Explore Further
 
-Refer [this blog post](https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/) for various Minio and Nginx configuration options.
+Refer [this blog post](https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/) for various MinIO and Nginx configuration options.

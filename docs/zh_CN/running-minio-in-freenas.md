@@ -1,6 +1,6 @@
-# 如何在FreeNAS中运行Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何在FreeNAS中运行MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-在本文中，我们将学习如何使用FreeNAS运行Minio。 
+在本文中，我们将学习如何使用FreeNAS运行MinIO。 
 
 ## 1. 前提条件
 
@@ -13,7 +13,7 @@
 在FreeNAS UI中找到`Jails -> Add Jail`，点击 `Advanced`，然后输入如下信息:
 
 ```
-Name:         Minio
+Name:         MinIO
 Template:     --- (unset, defaults to FreeBSD)
 VImage:       Unticked
 ```
@@ -24,28 +24,28 @@ VImage:       Unticked
 找到`Jails -> View Jails -> Storage`，点击`Add Storage`，然后输入如下信息：
 
 ```
-Jail:             Minio
+Jail:             MinIO
 Source:           </path/to/your/dataset>
 Destination:      </path/to/your/dataset/inside/jail> (usually the same as 'Source' dataset for ease of use)
 Read Only:        Unticked
 Create Directory: Ticked
 ```
 
-### 下载Minio
-下载Minio到jail:
+### 下载MinIO
+下载MinIO到jail:
 
 ```
-curl -Lo/<jail_root>/Minio/usr/local/bin/minio https://dl.minio.io/server/minio/release/freebsd-amd64/minio
-chmod +x /<jail_root>/Minio/usr/local/bin/minio
+curl -Lo/<jail_root>/MinIO/usr/local/bin/minio https://dl.minio.io/server/minio/release/freebsd-amd64/minio
+chmod +x /<jail_root>/MinIO/usr/local/bin/minio
 ```
 
-### 创建Minio服务
-创建一个Minio服务的文件:
+### 创建MinIO服务
+创建一个MinIO服务的文件:
 
 ```
-touch /<jail_root>/Minio/usr/local/etc/rc.d/minio
-chmod +x /<jail_root>/Minio/usr/local/etc/rc.d/minio
-nano /<jail_root>/Minio/usr/local/etc/rc.d/minio
+touch /<jail_root>/MinIO/usr/local/etc/rc.d/minio
+chmod +x /<jail_root>/MinIO/usr/local/etc/rc.d/minio
+nano /<jail_root>/MinIO/usr/local/etc/rc.d/minio
 ```
 
 添加下面的内容:
@@ -90,11 +90,11 @@ command_args="-c -f -p ${pidfile} /usr/local/bin/${name} -C \"${minio_config}\" 
 run_rc_command "$1"
 ```
 
-### 配置Minio启动
-编辑`/<jail_root>/Minio/etc/rc.conf`:
+### 配置MinIO启动
+编辑`/<jail_root>/MinIO/etc/rc.conf`:
 
 ```
-nano /<jail_root>/Minio/etc/rc.conf
+nano /<jail_root>/MinIO/etc/rc.conf
 ```
 
 添加如下内容:
@@ -106,24 +106,24 @@ minio_disks="</path/to/your/dataset/inside/jail>"
 minio_address="<listen address / port>" (Defaults to :443)
 ```
 
-### 创建Minio配置目录
+### 创建MinIO配置目录
 
 ```
-mkdir -p /<jail_root>/Minio/etc/minio/certs
+mkdir -p /<jail_root>/MinIO/etc/minio/certs
 ```
 
-### 创建Minio Private key和Public Key (可选,如果需要HTTPS并且`minio_address`设置成443端口)
+### 创建MinIO Private key和Public Key (可选,如果需要HTTPS并且`minio_address`设置成443端口)
 
 ```
-nano /<jail_root>/Minio/etc/minio/certs/public.crt
-nano /<jail_root>/Minio/etc/minio/certs/private.key
+nano /<jail_root>/MinIO/etc/minio/certs/public.crt
+nano /<jail_root>/MinIO/etc/minio/certs/private.key
 ```
 
-### 启动Minio Jail
-在FreeNAS UI中找到找到`Jails -> View Jails` ，选择 `Minio`，然后点击`Start`按钮 (从左边开始第三个):
+### 启动MinIO Jail
+在FreeNAS UI中找到找到`Jails -> View Jails` ，选择 `MinIO`，然后点击`Start`按钮 (从左边开始第三个):
 
-### 测试Minio
-找到`http(s)://<ip_address>:<port>`并确认Minio加载。
+### 测试MinIO
+找到`http(s)://<ip_address>:<port>`并确认MinIO加载。
 
 
 

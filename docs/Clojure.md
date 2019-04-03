@@ -1,4 +1,4 @@
-# How to use Minio SDK for java with Clojure
+# How to use MinIO SDK for java with Clojure
 
 In this receipe we will learn how to use `minio-java` with Clojure.
 

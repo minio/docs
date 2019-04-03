@@ -1,12 +1,12 @@
-# restic with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# restic with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `restic` is a fast, efficient and secure backup tool. It is an open source project available under ``BSD 2-Clause License``.
 
-In this recipe we will learn how to use `restic` to backup data into Minio Server.
+In this recipe we will learn how to use `restic` to backup data into MinIO Server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
@@ -14,7 +14,7 @@ Install restic from [https://restic.github.io](https://restic.github.io).
 
 ## 3. Configuration
 
-Set Minio credentials in the environment variables as shown below.
+Set MinIO credentials in the environment variables as shown below.
 
 ```sh
 export AWS_ACCESS_KEY_ID=<YOUR-ACCESS-KEY-ID>
@@ -29,7 +29,7 @@ Start `restic` and point it to the bucket where the backup data will reside.
 ./restic -r s3:http://localhost:9000/resticbucket init
 ```
 
-Copy backups from the local machine to the bucket on Minio server.  
+Copy backups from the local machine to the bucket on MinIO server.  
 
 ```sh
 ./restic -r s3:http://localhost:9000/resticbucket backup /home/minio/workdir/Docs/

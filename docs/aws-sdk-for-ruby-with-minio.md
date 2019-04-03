@@ -1,10 +1,10 @@
-# How to use AWS SDK for Ruby with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Ruby with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`aws-sdk` is the official AWS SDK for the Ruby programming language. In this recipe we will learn how to use `aws-sdk` for Ruby with Minio server.
+`aws-sdk` is the official AWS SDK for the Ruby programming language. In this recipe we will learn how to use `aws-sdk` for Ruby with MinIO server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
@@ -14,7 +14,7 @@ Install `aws-sdk` for Ruby from the official AWS Ruby SDK docs [here](https://aw
 
 Please replace ``endpoint``,``access_key_id``, ``secret_access_key``, ``Bucket`` and ``Object`` with your local setup in this ``example.rb`` file.
 
-Example below shows put_object() and get_object() operations on Minio server using `aws-sdk Ruby`.
+Example below shows put_object() and get_object() operations on MinIO server using `aws-sdk Ruby`.
 
 ```ruby
 require 'aws-sdk'
@@ -33,7 +33,7 @@ rubys3_client = Aws::S3::Client.new
 
 rubys3_client.put_object(
         key: 'testobject',
-        body: 'Hello from Minio!!',
+        body: 'Hello from MinIO!!',
         bucket: 'testbucket',
         content_type: 'text/plain'
 )

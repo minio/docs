@@ -11,9 +11,9 @@ file and run it.
 ### Server code
 
 ```js
-const Minio = require('minio')
+const MinIO = require('minio')
 
-var client = new Minio.Client({
+var client = new MinIO.Client({
     endPoint: 'play.minio.io',
     port: 9000,
     secure: true,
@@ -22,11 +22,11 @@ var client = new Minio.Client({
 })
 ```
 
-In order to sign the request, we need to create the Minio client and pass it
+In order to sign the request, we need to create the MinIO client and pass it
 our credentials. With the client, you can download and upload files,
 among [much more](https://github.com/minio/minio-js/blob/master/docs/API.md).
 
-These are real credentials to an example Minio server — try it out!
+These are real credentials to an example MinIO server — try it out!
 
 ```js
 // express is a small HTTP server wrapper, but this works with any HTTP server

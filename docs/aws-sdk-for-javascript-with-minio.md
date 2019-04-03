@@ -1,10 +1,10 @@
-# How to use AWS SDK for Javascript with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Javascript with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-In this recipe we will learn how to use `aws-sdk` for Javascript with Minio server. `aws-sdk` is the official AWS SDK for the Javascript programming language.
+In this recipe we will learn how to use `aws-sdk` for Javascript with MinIO server. `aws-sdk` is the official AWS SDK for the Javascript programming language.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
@@ -14,7 +14,7 @@ Install `aws-sdk` for Javascript from the official AWS Javascript SDK docs [here
 
 Replace ``endpoint``,``accessKeyId``, ``secretAccessKey``, ``Bucket`` and ``Object`` with your local setup in this ``example.js`` file.
 
-The example below shows putObject and getObject operations on Minio server using `aws-sdk `.
+The example below shows putObject and getObject operations on MinIO server using `aws-sdk `.
 
 ```javascript
 var AWS = require('aws-sdk');
@@ -29,7 +29,7 @@ var s3  = new AWS.S3({
 
 // putObject operation.
 
-var params = {Bucket: 'testbucket', Key: 'testobject', Body: 'Hello from Minio!!'};
+var params = {Bucket: 'testbucket', Key: 'testobject', Body: 'Hello from MinIO!!'};
 
 s3.putObject(params, function(err, data) {
       if (err)
