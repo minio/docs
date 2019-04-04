@@ -73,6 +73,8 @@ Minio server exposes the following metrics on `/minio/prometheus/metrics` endpoi
 - `minio_network_sent_bytes_total` : Total number of bytes sent by current Minio server instance
 - `minio_offline_disks` : Total number of offline disks for current Minio server instance
 - `minio_total_disks` : Total number of disks for current Minio server instance
+- `minio_disk_storage_available_bytes` : Current storage space available to MinIO server in bytes
+- `minio_disk_storage_total_bytes` : Total storage space available to MinIO server in bytes
 - `process_start_time_seconds` : Start time of Minio server since unix epoch in seconds
 
 If you're running Minio gateway, disk/storage information is not exposed. Only following metrics are available
