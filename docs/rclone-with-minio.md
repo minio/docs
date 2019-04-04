@@ -1,14 +1,14 @@
-# Rclone with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Rclone with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 `Rclone` is an open source command line program to sync files and
 directories to and from cloud storage systems.  It aims to be "rsync
 for cloud storage".
 
-This recipe describes how to use rclone with Minio Server.
+This recipe describes how to use rclone with MinIO Server.
 
 ## 1. Prerequisites
 
-First install Minio Server from [minio.io](https://minio.io/).
+First install MinIO Server from [minio.io](https://minio.io/).
 
 ## 2. Installation
 
@@ -16,7 +16,7 @@ Next install Rclone from [rclone.org](http://rclone.org).
 
 ## 3. Configuration
 
-When it configures itself Minio will print something like this
+When it configures itself MinIO will print something like this
 
 ```sh
 Endpoint:  http://10.0.0.3:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
@@ -69,7 +69,7 @@ server_side_encryption =
 
 ## 4. Commands
 
-Minio doesn't support all the features of S3 yet.  In particular it
+MinIO doesn't support all the features of S3 yet.  In particular it
 doesn't support MD5 checksums (ETags) or metadata.  This means Rclone
 can't check MD5SUMs or store the modified date.  However you can work
 around this with the `--size-only` flag of Rclone.

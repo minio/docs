@@ -1,10 +1,10 @@
-# 如何使用AWS SDK for Java操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for Java操作MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-`aws-sdk-java`是Java语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk-java`操作Minio Server。
+`aws-sdk-java`是Java语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk-java`操作MinIO Server。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
+从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 
 ## 2. 设置依赖
 
@@ -55,7 +55,7 @@
 
 使用下面的代码替换``aws-java-sdk-1.11.213/samples/AmazonS3/S3Sample.java``，并且修改``Endpoint``，``BasicAWSCredentials``，``bucketName``，``uploadFileName``和``keyName``成你的本地配置。
 
-下面的示例描述的是如何使用asw-sdk-java来对Minio Server进行上传和下载操作。
+下面的示例描述的是如何使用asw-sdk-java来对MinIO Server进行上传和下载操作。
 
 ```java
 import java.io.BufferedReader;
@@ -164,4 +164,4 @@ Total time: 3 seconds
 ```
 ## 5. 了解更多
 
-* [Minio Java Library for Amazon S3](https://docs.minio.io/docs/java-client-quickstart-guide)
+* [MinIO Java Library for Amazon S3](https://docs.minio.io/docs/java-client-quickstart-guide)

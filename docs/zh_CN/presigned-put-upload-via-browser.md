@@ -5,9 +5,9 @@
 ### 服务端代码
 
 ```js
-const Minio = require('minio')
+const MinIO = require('minio')
 
-var client = new Minio.Client({
+var client = new MinIO.Client({
     endPoint: 'play.minio.io',
     port: 9000,
     secure: true,
@@ -16,7 +16,7 @@ var client = new Minio.Client({
 })
 ```
 
-初始化Minio client对象，用于生成presigned upload URL。
+初始化MinIO client对象，用于生成presigned upload URL。
 
 ```js
 // express是一个小巧的Http server封装，不过这对任何HTTP server都管用。

@@ -7,9 +7,9 @@
 ### 服务端代码
 
 ```js
-const Minio = require('minio')
+const MinIO = require('minio')
 
-var client = new Minio.Client({
+var client = new MinIO.Client({
     endPoint: 'play.minio.io',
     port: 9000,
     secure: true,
@@ -18,9 +18,9 @@ var client = new Minio.Client({
 })
 ```
 
-为了发这个请求，我们需要创建一个Minio client,并且输入咱们的认证信息。通过这个clinet,你可以上传下载文件，如果觉得这还不够，请看[API](https://github.com/minio/minio-js/blob/master/docs/API.md)。
+为了发这个请求，我们需要创建一个MinIO client,并且输入咱们的认证信息。通过这个clinet,你可以上传下载文件，如果觉得这还不够，请看[API](https://github.com/minio/minio-js/blob/master/docs/API.md)。
 
-示例中给出的是Minio测试服务的真实认证信息，玩玩呗，来都来了!
+示例中给出的是MinIO测试服务的真实认证信息，玩玩呗，来都来了!
 
 ```js
 // express是一个小巧的Http server封装，不过这对任何HTTP server都管用。

@@ -1,24 +1,24 @@
-# How to use Mountain Duck with Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use Mountain Duck with MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-In this recipe you will learn how to carry out basic operations on Minio using Mountain Duck. Mountain Duck lets you mount server and cloud storage as a local disk in the Finder.app on Mac and the File Explorer on Windows. It is released under the GPL license v2.0. 
+In this recipe you will learn how to carry out basic operations on MinIO using Mountain Duck. Mountain Duck lets you mount server and cloud storage as a local disk in the Finder.app on Mac and the File Explorer on Windows. It is released under the GPL license v2.0. 
 
 ## 1. Prerequisites
 
-* [Mountain Duck](https://mountainduck.io/) is installed and running. Since Minio is Amazon S3 compatible, download a generic ``HTTP`` S3 profile from [here](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTP).
+* [Mountain Duck](https://mountainduck.io/) is installed and running. Since MinIO is Amazon S3 compatible, download a generic ``HTTP`` S3 profile from [here](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTP).
 
-* Minio Server is running on localhost on port 9000 in ``HTTP``, follow [Minio quickstart guide](https://docs.minio.io/docs/minio-quickstart-guide) to install Minio. 
+* MinIO Server is running on localhost on port 9000 in ``HTTP``, follow [MinIO quickstart guide](https://docs.minio.io/docs/minio-quickstart-guide) to install MinIO. 
 
-_NOTE:_ You can also run Minio in ``HTTPS``, follow this [guide](https://docs.minio.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio) along with Mountain Duck generic ``HTTPS`` S3 profile from [here](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS). 
+_NOTE:_ You can also run MinIO in ``HTTPS``, follow this [guide](https://docs.minio.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio) along with Mountain Duck generic ``HTTPS`` S3 profile from [here](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS). 
 
 ## 2. Steps
 
-### Add Minio authentication in Mountain Duck
+### Add MinIO authentication in Mountain Duck
 
 Click on Mountain Duck icon and open the application via navigation menu. Click open connection, select ``S3(HTTP)``
 
 ![I_IMAGE](https://github.com/minio/cookbook/blob/master/docs/screenshots/mountainduck/defaultdashboard.jpg?raw=true)
 
-### Replace the existing AWS S3 details with your local Minio credentials 
+### Replace the existing AWS S3 details with your local MinIO credentials 
 
 ![MINIO_DASH](https://github.com/minio/cookbook/blob/master/docs/screenshots/mountainduck/connecttominio.jpg?raw=true)
 
@@ -43,6 +43,6 @@ You will be asked to connect via insecure connection since we are using HTTP ins
 
 ## 3. Explore Further
 
-* [Minio Client complete guide](https://docs.minio.io/docs/minio-client-complete-guide)
+* [MinIO Client complete guide](https://docs.minio.io/docs/minio-client-complete-guide)
 * [Mountain Duck project homepage](https://mountainduck.io)
 

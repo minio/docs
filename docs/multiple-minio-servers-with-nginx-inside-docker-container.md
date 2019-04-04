@@ -1,10 +1,10 @@
-# How to run multiple Minio servers with Nginx inside docker container [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run multiple MinIO servers with Nginx inside docker container [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 Nginx is an open source Web server and a reverse proxy server.
 
-This cookbook will explain how you can setup multiple Minio instances and Nginx via Docker compose, which you can access through Nginx.
+This cookbook will explain how you can setup multiple MinIO instances and Nginx via Docker compose, which you can access through Nginx.
 
-This tutorial will be helpful in case when you need to test that your Minio production setup will work with nginx, and you want install nginx in docker container instead of local installation.
+This tutorial will be helpful in case when you need to test that your MinIO production setup will work with nginx, and you want install nginx in docker container instead of local installation.
 
 ## 1. Prerequisites
 
@@ -12,8 +12,8 @@ You have Docker installed and running, if not follow [install instructions](http
 
 ## 2. Steps
 
-### Fetch Minio configuration for Docker Compose
-To deploy distributed Minio on Docker Compose, please download [docker-compose.yaml](https://github.com/minio/minio/blob/master/docs/orchestration/docker-compose/docker-compose.yaml?raw=true) to your current working directory. Note that Docker Compose pulls the Minio Docker image, so there is no need to explicitly download Minio binary.
+### Fetch MinIO configuration for Docker Compose
+To deploy distributed MinIO on Docker Compose, please download [docker-compose.yaml](https://github.com/minio/minio/blob/master/docs/orchestration/docker-compose/docker-compose.yaml?raw=true) to your current working directory. Note that Docker Compose pulls the MinIO Docker image, so there is no need to explicitly download MinIO binary.
 
 ### Add nginx service's settings into Docker Compose configuration
 You will need to add configuration, that it can proxy incoming requests on multiple minio services.
@@ -125,7 +125,7 @@ EOF
 $ docker-compose up
 ```
 
-Now you can reach all the launched Minio instances:
+Now you can reach all the launched MinIO instances:
 ```
 $ curl http://localhost:8081
 ```
