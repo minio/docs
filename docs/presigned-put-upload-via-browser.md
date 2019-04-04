@@ -15,7 +15,7 @@ The server consists of an [Express](https://expressjs.com) Node.js server that e
 // a `Minio.Client` object and pass in the values for your server.
 // The example below uses values for play.minio.io:9000
 
-const MinIO = require('minio')
+const Minio = require('minio')
 
 var client = new MinIO.Client({
     endPoint: 'play.minio.io',
