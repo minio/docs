@@ -4,7 +4,7 @@
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](https://www.min.io/downloads.html).
+Install MinIO Server from [here](https://www.min.io/download).
 
 ## 2. Install Required Dependency for Laravel
 
