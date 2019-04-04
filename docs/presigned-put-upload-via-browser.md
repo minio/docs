@@ -17,7 +17,7 @@ The server consists of an [Express](https://expressjs.com) Node.js server that e
 
 const Minio = require('minio')
 
-var client = new MinIO.Client({
+var client = new Minio.Client({
     endPoint: 'play.minio.io',
     port: 9000,
     secure: true,
