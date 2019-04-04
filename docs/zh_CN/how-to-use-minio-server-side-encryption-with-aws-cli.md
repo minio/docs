@@ -1,4 +1,4 @@
-# 如何使用aws-cli调用MinIO服务端加密 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用aws-cli调用MinIO服务端加密 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
  
 
 MinIO支持采用客户端提供的秘钥（SSE-C）进行S3服务端加密。
@@ -19,13 +19,13 @@ MinIO支持采用客户端提供的秘钥（SSE-C）进行S3服务端加密。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/how-to-secure-access-to-minio-server-with-tls)下载MinIO Server,并安装成带有**TLS**的服务。
+从[这里](https://docs.min.io/docs/how-to-secure-access-to-minio-server-with-tls)下载MinIO Server,并安装成带有**TLS**的服务。
 
 注意一下，如果你使用的是自己签名的TLS证书，那么当你往MinIO Server上传文件时，像aws-cli或者是mc这些工具就会报错。如果你想获得一个CA结构签名的TLS证书，请参考`Let's Encrypt`。自己签名的证书应该仅做为内部开发和测试。
 
 ## 2. 使用SSE-C和aws-cli
 
-从[这里](https://docs.minio.io/docs/aws-cli-with-minio)下载并安装aws-cli。
+从[这里](https://docs.min.io/docs/aws-cli-with-minio)下载并安装aws-cli。
 
 假设你在本地运行了一个MinIO Server,地址是`https://localhost:9000`，并且使用的是自己签名的证书。为了绕过TLS证书的验证，你需要指定`--no-verify-ssl`。如果你的MinIO Server使用的是一个CA认证的证书，那你**永远永远永远**不要指定`--no-verify-ssl，否则aws-cli会接受任何证书。
 

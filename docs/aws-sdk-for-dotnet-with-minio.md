@@ -1,10 +1,10 @@
-# How to use AWS SDK for .NET with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for .NET with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `aws-sdk-dotnet` is the official AWS SDK for the .NET Framework. In this recipe we will learn how to use `aws-sdk-dotnet` with MinIO server.
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 When running MinIO server locally, the `MINIO_REGION` enviroment variable must be set.
 

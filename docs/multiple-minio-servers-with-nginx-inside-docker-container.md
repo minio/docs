@@ -1,4 +1,4 @@
-# How to run multiple MinIO servers with Nginx inside docker container [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run multiple MinIO servers with Nginx inside docker container [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Nginx is an open source Web server and a reverse proxy server.
 

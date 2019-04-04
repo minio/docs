@@ -1,10 +1,10 @@
-# How to use AWS SDK for Java with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Java with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `aws-sdk-java` is the official AWS SDK for the Java programming language. In this recipe we will learn how to use `aws-sdk-java` with MinIO server.
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Setup dependencies
 
@@ -164,4 +164,4 @@ Total time: 3 seconds
 ```
 ## 5. Explore Further
 
-* [MinIO Java Library for Amazon S3](https://docs.minio.io/docs/java-client-quickstart-guide)
+* [MinIO Java Library for Amazon S3](https://docs.min.io/docs/java-client-quickstart-guide)

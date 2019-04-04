@@ -1,4 +1,4 @@
-# How to run multiple MinIO servers with Træfɪk [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run multiple MinIO servers with Træfɪk [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 [Træfɪk](https://traefik.io/) is a modern reverse proxy also written in Go. It
 supports multiple ways to get configured, this cookbook will explain how you
@@ -76,7 +76,7 @@ multi-tenant solution. That way you are able to launch multiple MinIO instances
 with different credentials that get routed automatically by Træfɪk.
 
 We will launch the MinIO instances with volume mounts from the host system. If
-you prefer data containers please take a look at the [MinIO Docker quickstart guide](https://docs.minio.io/docs/minio-docker-quickstart-guide).
+you prefer data containers please take a look at the [MinIO Docker quickstart guide](https://docs.min.io/docs/minio-docker-quickstart-guide).
 
 ```sh
 for i in $(seq 1 5); do

@@ -1,4 +1,4 @@
-# 使用Certbot生成Let's Encrypt证书 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 使用Certbot生成Let's Encrypt证书 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 [Let's Encrypt](https://letsencrypt.org/) 是一个新的免费的，自动的，开源的认证中心。
 
 [Certbot](https://certbot.eff.org/)是Let's Encrypt的基于控制台的证书生成工具。
@@ -6,7 +6,7 @@
 本文我们将使用Certbot生成Let's Encrypt证书。该证书将被部署在MinIO服务器中使用。
 
 ## 1. 前提条件
-- 从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
+- 从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 - 从[这里](https://certbot.eff.org/)下载并安装Certbot。
 
 ## 2. 依赖

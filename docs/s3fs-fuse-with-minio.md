@@ -1,17 +1,17 @@
-# s3fs-fuse with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# s3fs-fuse with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 s3fs allows Linux and Mac OS X to mount an S3 bucket via FUSE. Please note that you will not be able to create directories with s3fs because MinIO does not support creating folders.
 
 In this recipe we will learn how to configure and use s3fs to mount a bucket from the MinIO Server and copy data to it. 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
 Install `s3fs-fuse` from <https://github.com/s3fs-fuse/s3fs-fuse>.
 
-Create a bucket on the MinIO Server to use with this cookbook. <https://docs.minio.io/docs/minio-client-quickstart-guide>.
+Create a bucket on the MinIO Server to use with this cookbook. <https://docs.min.io/docs/minio-client-quickstart-guide>.
 
 ## 3. Configuration
 

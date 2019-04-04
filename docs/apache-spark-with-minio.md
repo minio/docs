@@ -1,10 +1,10 @@
-# Apache Spark with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Apache Spark with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Apache Spark is a fast and general engine for large-scale data processing. In this recipe we'll see how to launch jobs on Apache Spark-Shell that reads/writes data to a MinIO server.
 
 ## 1. Prerequisites
 
-- Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+- Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 - Download Apache Spark version `spark-2.3.0-bin-without-hadoop` from [here](https://www.apache.org/dyn/closer.lua/spark/spark-2.3.0/spark-2.3.0-bin-without-hadoop.tgz).
 - Download Apache Hadoop version `hadoop-2.8.2` from [here](https://archive.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz).
 - Download other dependencies

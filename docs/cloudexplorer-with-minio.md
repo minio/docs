@@ -1,4 +1,4 @@
-# How to use Cloud Explorer with MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use Cloud Explorer with MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 In this recipe you will learn how to carry out basic operations on MinIO using Cloud Explorer.Cloud Explorer is a open-source S3 client. It works on Windows, Linux, and Mac. It has a graphical and command line interface for each supported operating system. If you have a feature suggestion or find a bug, please open an issue.
 
@@ -15,7 +15,7 @@ In this recipe you will learn how to carry out basic operations on MinIO using C
 
 - [Cloud Explorer](https://github.com/rusher81572/cloudExplorer) is installed and running.
 
-- MinIO Server is running on localhost on port 9000 in `HTTP`, follow [MinIO quickstart guide](https://docs.minio.io/docs/minio-quickstart-guide) to install MinIO.
+- MinIO Server is running on localhost on port 9000 in `HTTP`, follow [MinIO quickstart guide](https://docs.min.io/docs/minio-quickstart-guide) to install MinIO.
 
 
 ## Steps
@@ -43,6 +43,6 @@ In this recipe you will learn how to carry out basic operations on MinIO using C
 
 ## Explore Further
 
-- [MinIO Client complete guide](https://docs.minio.io/docs/minio-client-complete-guide)
+- [MinIO Client complete guide](https://docs.min.io/docs/minio-client-complete-guide)
 - [Cloud Explorer homepage](https://github.com/rusher81572/cloudExplorer)
 - [Linux-toys.com](https://www.linux-toys.com/?page_id=211)

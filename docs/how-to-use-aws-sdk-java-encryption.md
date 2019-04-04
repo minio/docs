@@ -1,4 +1,4 @@
-# How to use AWS SDK for Java for encryption with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Java for encryption with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `aws-sdk` for Java is the official AWS SDK for Java. In this recipe we will learn how to use `aws-sdk` for Java for encryption on MinIO server using both Symmetric and Asymmetric approach.
 

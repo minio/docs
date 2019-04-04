@@ -1,4 +1,4 @@
-# Setup Apache HTTP proxy with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Setup Apache HTTP proxy with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Apache HTTP is an open source web server and a reverse proxy server.  
 
@@ -6,7 +6,7 @@ In this recipe we will learn how to set up Apache HTTP with mod_proxy module for
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide). Remember the address and port.
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide). Remember the address and port.
 
 ## 2. Installation
 

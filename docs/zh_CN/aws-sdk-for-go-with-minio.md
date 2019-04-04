@@ -1,10 +1,10 @@
-# 如何使用AWS SDK for Go操作MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for Go操作MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `aws-sdk-go`是GO语言版本的官方AWS SDK。本文将学习如何使用`aws-sdk-go`来操作MinIO Server。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
  
 ## 2. 安装
 

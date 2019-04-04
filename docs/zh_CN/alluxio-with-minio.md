@@ -1,4 +1,4 @@
-# 部署Alluxio结合MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 部署Alluxio结合MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 本文中，我们将学习如何将MinIO设置为[Alluxio](http://alluxio.org)的持久存储层。 [这里](http://www.alluxio.org/docs/master/en/Configuring-Alluxio-with-MinIO.html)是MinIO与Alluxio如何结合的文档。
 
@@ -6,12 +6,12 @@ Alluxio为应用程序提供了内存级速度的虚拟分布式存储。通过�
 
 ## 1. 前提条件
 
-* 从[这里](https://www.minio.io/)安装MinIO Server。
+* 从[这里](https://www.min.io/)安装MinIO Server。
 * 从[这里](http://www.alluxio.org/download)安装Alluxio。
 
 ## 2. 安装
 
-本节介绍如何设置Alluxio结合已经运行的MinIO。从[MinIO快速入门](https://docs.minio.io/docs/minio-quickstart-guide)了解如何设置MinIO。
+本节介绍如何设置Alluxio结合已经运行的MinIO。从[MinIO快速入门](https://docs.min.io/docs/minio-quickstart-guide)了解如何设置MinIO。
 
 解压下载好的相应的发行版本的Alluxio二进制文件。如果MinIO是Alluxio的唯一存储器，则发行版本无关紧要。
 

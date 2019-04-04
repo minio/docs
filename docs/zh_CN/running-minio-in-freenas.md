@@ -1,4 +1,4 @@
-# 如何在FreeNAS中运行MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何在FreeNAS中运行MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 在本文中，我们将学习如何使用FreeNAS运行MinIO。 
 
@@ -35,7 +35,7 @@ Create Directory: Ticked
 下载MinIO到jail:
 
 ```
-curl -Lo/<jail_root>/MinIO/usr/local/bin/minio https://dl.minio.io/server/minio/release/freebsd-amd64/minio
+curl -Lo/<jail_root>/MinIO/usr/local/bin/minio https://dl.min.io/server/minio/release/freebsd-amd64/minio
 chmod +x /<jail_root>/MinIO/usr/local/bin/minio
 ```
 

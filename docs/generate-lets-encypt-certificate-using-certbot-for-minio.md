@@ -1,4 +1,4 @@
-# Generate Let's Encrypt certificate using Certbot for MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Generate Let's Encrypt certificate using Certbot for MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 [Let’s Encrypt](https://letsencrypt.org/) is a new free, automated, and open source, Certificate Authority.
 
 [Certbot](https://certbot.eff.org/) is a console based certificate generation tool for Let's Encrypt.
@@ -6,7 +6,7 @@
 In this recipe, we will generate a Let's Encypt certificate using Certbot. This certificate will then be deployed for use in the MinIO server.
 
 ## 1. Prerequisites
-- Install MinIO Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+- Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 - Install Certbot from [here](https://certbot.eff.org/)
 
 ## 2. Dependencies

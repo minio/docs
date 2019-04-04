@@ -1,4 +1,4 @@
-# 如何使用Træfɪk代理多个MinIO服务 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用Træfɪk代理多个MinIO服务 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 [Træfɪk](https://traefik.io/)是一个用Go语言写的先进（和流行技术结合的比较好）的反向代理。它支持多种配置方式，本文将介绍如何通过Docker设置多个MinIO实例，并用Træfɪk可实现通过不同的子域名进行访问。 
 
@@ -64,7 +64,7 @@ docker run -d \
 
 现在咱们可以准备多个MinIO的实例，来演示一个多租户场景的解决方案。你可以启动多个MinIO实例，让Træfɪk基于不同的凭据信息来进行路由。
 
-我们将从宿主机上启动多个带有挂载卷的MinIO实例。如果你更喜欢data containers，请参考[MinIO Docker 快速入门](https://docs.minio.io/docs/minio-docker-quickstart-guide).
+我们将从宿主机上启动多个带有挂载卷的MinIO实例。如果你更喜欢data containers，请参考[MinIO Docker 快速入门](https://docs.min.io/docs/minio-docker-quickstart-guide).
 
 ```sh
 for i in $(seq 1 5); do

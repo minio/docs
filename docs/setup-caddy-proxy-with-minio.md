@@ -1,4 +1,4 @@
-# Setup Caddy proxy with MinIO Server  [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Setup Caddy proxy with MinIO Server  [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Caddy is a web server like Apache, nginx, or lighttpd. The purpose of Caddy is to streamline  web development, deployment, and hosting workflows so that anyone can host their own web sites without requiring special technical knowledge.
 
@@ -6,7 +6,7 @@ In this recipe we will learn how to set up Caddy proxy with MinIO Server.
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 

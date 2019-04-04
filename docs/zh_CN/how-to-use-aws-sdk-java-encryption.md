@@ -1,4 +1,4 @@
-# 如何使用AWS SDK for Java给MinIO Server进行加密 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for Java给MinIO Server进行加密 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `aws-sdk` for Java是java语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk` for Java给MinIO Server进行加密，使用对称加密和非对称加密。
 

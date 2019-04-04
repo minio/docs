@@ -1,11 +1,11 @@
-# Running MinIO Prometheus Exporter [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Running MinIO Prometheus Exporter [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 This recipe explains how to run a MinIO Prometheus exporter.
 
 
 ## 1. Prerequisites
 
-* Install MinIO Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+* Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 * Get the minio-exporter from [here](https://github.com/joe-pll/minio-exporter).
 
 ## 2. Running the exporter

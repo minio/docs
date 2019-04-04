@@ -1,4 +1,4 @@
-# How to install Golang? [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to install Golang? [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 ## Ubuntu (Xenial) 16.04
 

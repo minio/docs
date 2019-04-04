@@ -1,11 +1,11 @@
-# Aggregate Apache Logs with fluentd plugin for MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Aggregate Apache Logs with fluentd plugin for MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 In this recipe, we will learn how to use MinIO as log aggregator for fluentd using `fluent-plugin-s3` plugin.
 
 ## 1. Prerequisites
 
-* Install MinIO Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
-* Install `mc` from [here](http://docs.minio.io/docs/minio-client-quickstart-guide)
+* Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
+* Install `mc` from [here](https://docs.min.io/docs/minio-client-quickstart-guide)
 
 ## 2. Installation
 

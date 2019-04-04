@@ -1,4 +1,4 @@
-# 如何使用Cloud Explorer操作MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用Cloud Explorer操作MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 在本文中，我们将学习如何使用Cloud Explorer对MinIO进行基本操作。Cloud Explorer是一个开源的S3客户端，它适用于Windows，Linux和Mac。它为每个支持的操作系统提供图形和命令行界面。如果你有功能建议或发现错误，请提issue。
 
@@ -15,7 +15,7 @@
 
 - 已经安装并运行[Cloud Explorer](https://github.com/rusher81572/cloudExplorer)。
 
-- MinIO Server已经在本地运行，端口9000, 参考 [MinIO快速入门](https://docs.minio.io/docs/minio-quickstart-guide)来安装MinIO。
+- MinIO Server已经在本地运行，端口9000, 参考 [MinIO快速入门](https://docs.min.io/docs/minio-quickstart-guide)来安装MinIO。
 
 
 ## 步骤
@@ -43,6 +43,6 @@
 
 ## 了解更多
 
-- [MinIO Client完全指南](https://docs.minio.io/docs/minio-client-complete-guide)
+- [MinIO Client完全指南](https://docs.min.io/docs/minio-client-complete-guide)
 - [Cloud Explorer主页](https://github.com/rusher81572/cloudExplorer)
 - [Linux-toys.com](https://www.linux-toys.com/?page_id=211)

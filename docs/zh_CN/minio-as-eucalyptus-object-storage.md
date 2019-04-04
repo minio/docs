@@ -1,6 +1,6 @@
 # MinIO做为Eucalyptus ObjectStorage后端存储
 
-[MinIO](https://www.minio.io/)是一种新的用Go编写的云存储，可以将任何数据存储为对象，还有另外一个强大的功能，它兼容AWS S3，这使得MinIO结合Eucalyptus使用非常有用。
+[MinIO](https://www.min.io/)是一种新的用Go编写的云存储，可以将任何数据存储为对象，还有另外一个强大的功能，它兼容AWS S3，这使得MinIO结合Eucalyptus使用非常有用。
 
 [Eucalyptus](http://www.eucalyptus.com)支持多个ObjectStorage后端，Riak CS（云存储），Ceph RGW，而且Eucalyptus已经有S3兼容的Walrus。Eucalyptus ObjectStorage充当后端服务的网关。Eucalyptus仍然处理所有AWS兼容的身份认证和访问管理。由于MinIO与AWS S3兼容，我们实际上也可以将其与Eucalyptus一起使用。但是，即使可以使用任何与AWS S3兼容的对象存储后端，除非在Eucalyptus网站/文档中另行指定，否则不支持这些后端。
 
@@ -10,7 +10,7 @@
 
 
 ```
-$ wget https://dl.minio.io/server/minio/release/linux-amd64/minio
+$ wget https://dl.min.io/server/minio/release/linux-amd64/minio
 $ chmod +x minio
 $ ./minio server ~/MinIOBackend
 ```
@@ -27,14 +27,14 @@ SqsARNs:
 Browser Access:
    http://172.31.21.31:9000  http://127.0.0.1:9000
 
-Command-line Access: https://docs.minio.io/docs/minio-client-quickstart-guide
+Command-line Access: https://docs.min.io/docs/minio-client-quickstart-guide
    $ mc config host add myminio http://172.31.21.31:9000 GFQX5XMP1DSTIQ8JKRXN aFLQegoeIgzF/hK+Xymba7JwSANfn98ANNcKXz+S
 
 Object API (Amazon S3 compatible):
-   Go:         https://docs.minio.io/docs/golang-client-quickstart-guide
-   Java:       https://docs.minio.io/docs/java-client-quickstart-guide
-   Python:     https://docs.minio.io/docs/python-client-quickstart-guide
-   JavaScript: https://docs.minio.io/docs/javascript-client-quickstart-guide
+   Go:         https://docs.min.io/docs/golang-client-quickstart-guide
+   Java:       https://docs.min.io/docs/java-client-quickstart-guide
+   Python:     https://docs.min.io/docs/python-client-quickstart-guide
+   JavaScript: https://docs.min.io/docs/javascript-client-quickstart-guide
 ```
 
 MinIO还附带了一个有用的Web UI，一旦我们运行MinIO，就可以访问它。

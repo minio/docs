@@ -1,4 +1,4 @@
-# Rclone结合MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Rclone结合MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `Rclone`是一个开源的命令行程序，用来同步文件和目录进或者出云存储系统。它旨在成为"云存储的rsync"。
 
@@ -6,7 +6,7 @@
 
 ## 1. 前提条件
 
-首先从[minio.io](https://minio.io/)下载并安装MinIO。
+首先从[min.io](https://min.io/)下载并安装MinIO。
 
 ## 2. 安装
 
@@ -25,14 +25,14 @@ Region:    us-east-1
 浏览器访问：
   http://10.0.0.3:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
 
-命令行访问： https://docs.minio.io/docs/minio-client-quickstart-guide
+命令行访问： https://docs.min.io/docs/minio-client-quickstart-guide
   $ mc config host add myminio http://10.0.0.3:9000 USWUXHGYZQYFYFFIT3RE MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03
 
 Object API (Amazon S3 compatible):
-  Go:         https://docs.minio.io/docs/golang-client-quickstart-guide
-  Java:       https://docs.minio.io/docs/java-client-quickstart-guide
-  Python:     https://docs.minio.io/docs/python-client-quickstart-guide
-  JavaScript: https://docs.minio.io/docs/javascript-client-quickstart-guide
+  Go:         https://docs.min.io/docs/golang-client-quickstart-guide
+  Java:       https://docs.min.io/docs/java-client-quickstart-guide
+  Python:     https://docs.min.io/docs/python-client-quickstart-guide
+  JavaScript: https://docs.min.io/docs/javascript-client-quickstart-guide
 ```
 
 你现在需要将这些信息配置到rclone。

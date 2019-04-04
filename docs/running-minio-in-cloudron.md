@@ -1,4 +1,4 @@
-# How to run MinIO in Cloudron [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run MinIO in Cloudron [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 [Cloudron](https://cloudron.io) is a platform that makes it easy to run and maintain web apps on your server.
 

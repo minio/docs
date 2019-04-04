@@ -1,6 +1,6 @@
 # MinIO as Eucalyptus ObjectStorage backend
 
-[MinIO](https://www.minio.io/), the new cloud storage written in Go that let's you store any data as objects also has another great feature, it's AWS S3 compatible and that makes MinIO really useful with Eucalyptus.
+[MinIO](https://www.min.io/), the new cloud storage written in Go that let's you store any data as objects also has another great feature, it's AWS S3 compatible and that makes MinIO really useful with Eucalyptus.
 
 [Eucalyptus](http://www.eucalyptus.com) supports multiple ObjectStorage backends, Riak CS (Cloud Storage), Ceph RGW and Eucalyptus already comes with S3 compatible Walrus. Eucalyptus ObjectStorage service acts as a gateway for the backends. Eucalyptus still handles all the AWS compatible Identity and Access Management stuffs. As MinIO is compatible with AWS S3, we can actually use it with Eucalyptus as well. However, even though it is possible to use any object storage backend that is compatible with AWS S3, they are not supported unless specified otherwise on the Eucalyptus website/documentation.
 
@@ -9,7 +9,7 @@ The first step would be to start a MinIO server.
 Deploying a basic MinIO server is super simple. For this demo I have used an Eucalyptus instance (virtual machine) running Ubuntu 16.04.1 LTS (Xenial Xerus).
 
 ```
-$ wget https://dl.minio.io/server/minio/release/linux-amd64/minio
+$ wget https://dl.min.io/server/minio/release/linux-amd64/minio
 $ chmod +x minio
 $ ./minio server ~/MinIOBackend
 ```
@@ -25,14 +25,14 @@ SqsARNs:
 Browser Access:
    http://172.31.21.31:9000  http://127.0.0.1:9000
 
-Command-line Access: https://docs.minio.io/docs/minio-client-quickstart-guide
+Command-line Access: https://docs.min.io/docs/minio-client-quickstart-guide
    $ mc config host add myminio http://172.31.21.31:9000 GFQX5XMP1DSTIQ8JKRXN aFLQegoeIgzF/hK+Xymba7JwSANfn98ANNcKXz+S
 
 Object API (Amazon S3 compatible):
-   Go:         https://docs.minio.io/docs/golang-client-quickstart-guide
-   Java:       https://docs.minio.io/docs/java-client-quickstart-guide
-   Python:     https://docs.minio.io/docs/python-client-quickstart-guide
-   JavaScript: https://docs.minio.io/docs/javascript-client-quickstart-guide
+   Go:         https://docs.min.io/docs/golang-client-quickstart-guide
+   Java:       https://docs.min.io/docs/java-client-quickstart-guide
+   Python:     https://docs.min.io/docs/python-client-quickstart-guide
+   JavaScript: https://docs.min.io/docs/javascript-client-quickstart-guide
 ```
 
 MinIO also comes with a helpful web UI which can be accessible once we have MinIO running.

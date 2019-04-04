@@ -1,11 +1,11 @@
-# How to use fog aws for Ruby with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use fog aws for Ruby with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `fog-aws` is the module for 'fog' gem to support Amazon Web Services <http://aws.amazon.com/>.
 In this recipe we will learn how to use `fog-aws` for Ruby with MinIO server.
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 

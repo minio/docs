@@ -1,4 +1,4 @@
-# How to run MinIO in FreeNAS [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run MinIO in FreeNAS [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 In this recipe we will learn how to run MinIO with FreeNAS. 
 
@@ -35,7 +35,7 @@ Create Directory: Ticked
 Download MinIO into the jail:
 
 ```
-curl -Lo/<jail_root>/Minio/usr/local/bin/minio https://dl.minio.io/server/minio/release/freebsd-amd64/minio
+curl -Lo/<jail_root>/Minio/usr/local/bin/minio https://dl.min.io/server/minio/release/freebsd-amd64/minio
 chmod +x /<jail_root>/Minio/usr/local/bin/minio
 ```
 

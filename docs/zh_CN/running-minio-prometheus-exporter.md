@@ -1,11 +1,11 @@
-# 运行MinIO Prometheus Exporter [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 运行MinIO Prometheus Exporter [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 本文介绍了如何运行MinIO Prometheus exporter。
 
 
 ## 1. 前提条件
 
-* 从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
+* 从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 * 从[这里](https://github.com/joe-pll/minio-exporter)下载并安装minio-exporter。
 
 ## 2. 运行exporter

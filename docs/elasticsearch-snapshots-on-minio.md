@@ -1,10 +1,10 @@
-# Elasticsearch snapshots on MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Elasticsearch snapshots on MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Elasticsearch is a distributed, RESTful search and analytics engine. In this recipe we'll see how to store Elasticsearch `6.x` snapshots to MinIO server.
 
 ## 1. Prerequisites
 
-- Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+- Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 - Download Elasticsearch version `6.2.4` from [here](https://www.elastic.co/downloads/elasticsearch).
 
 ## 2. Installation

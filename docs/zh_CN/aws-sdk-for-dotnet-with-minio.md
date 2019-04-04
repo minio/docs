@@ -1,10 +1,10 @@
-# 如何使用AWS SDK for .NET操作MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for .NET操作MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `aws-sdk-dotnet`是.NET Framework的官方AWS开发工具包。在本文中，我们将学习如何使用`aws-sdk-dotnet`来操作MinIO Server。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 
 如果在本地运行MinIO Server,必须要设置`MINIO_REGION`环境变量。
 

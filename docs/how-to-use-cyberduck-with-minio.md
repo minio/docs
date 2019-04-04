@@ -1,4 +1,4 @@
-# How to use Cyberduck with MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use Cyberduck with MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 In this document you will learn how to carry out basic operations on MinIO using Cyberduck. Cyberduck is an open source client for FTP and SFTP, WebDAV, OpenStack Swift, and Amazon S3, available for MacOS and Windows. It is released under the GPL license v2.0.  
 
@@ -6,9 +6,9 @@ In this document you will learn how to carry out basic operations on MinIO using
 
 * [Cyberduck](https://cyberduck.io/) is installed and running.  Since MinIO is Amazon S3 compatible, download a generic ``HTTP`` S3 profile from [here](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTP).
 
-* MinIO Server is running on localhost on port 9000 in ``HTTP``, follow [MinIO quickstart guide](https://docs.minio.io/docs/minio-quickstart-guide) for installing MinIO. 
+* MinIO Server is running on localhost on port 9000 in ``HTTP``, follow [MinIO quickstart guide](https://docs.min.io/docs/minio-quickstart-guide) for installing MinIO. 
 
-_NOTE:_ You can also run MinIO in ``HTTPS``, follow this [guide](https://docs.minio.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio) along with Cyberduck generic ``HTTPS`` S3 profile from [here](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS) 
+_NOTE:_ You can also run MinIO in ``HTTPS``, follow this [guide](https://docs.min.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio) along with Cyberduck generic ``HTTPS`` S3 profile from [here](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS) 
 
 ## 2. Steps
 
@@ -44,7 +44,7 @@ Once the connection is established you can explore further, some of the operatio
 
 ## 3. Explore Further
 
-* [MinIO Client complete guide](https://docs.minio.io/docs/minio-client-complete-guide)
+* [MinIO Client complete guide](https://docs.min.io/docs/minio-client-complete-guide)
 * [Cyberduck project homepage](https://cyberduck.io)
 
 
