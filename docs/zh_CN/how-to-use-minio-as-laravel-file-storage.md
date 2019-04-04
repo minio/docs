@@ -3,7 +3,7 @@
 `Laravel`有一个可定制的文件存储系统，能够为它创建自定义的磁盘。在本文中，我们将实现一个自定义文件系统磁盘来使用MinIO服务器来管理文件。
 
 ## 1. 前提条件
-从[这里](https://www.min.io/downloads.html)下载并安装MinIO Server。
+从[这里](https://www.min.io/download)下载并安装MinIO Server。
 
 ## 2. 给Laravel安装必要的依赖
 
