@@ -55,7 +55,3 @@ print "Downloaded 'testobject' as  #{download_testobject}."
 ruby example.rb
 Downloaded 'testobject' as  Hello from MinIO!!.
 ```
-
-## 5. 了解更多
-
-* [RoR Resume Uploader App](https://docs.minio.io/docs/ror-resume-uploader-app)

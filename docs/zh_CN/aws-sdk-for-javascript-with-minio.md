@@ -58,4 +58,4 @@ Successfully uploaded data to testbucket/testobject
 ```
 ## 5. 了解更多
 
-* [Javascript Shopping App](https://docs.minio.io/docs/javascript-shopping-app)
+* [Javascript Shopping App](https://github.com/minio/minio-js-store-app)
