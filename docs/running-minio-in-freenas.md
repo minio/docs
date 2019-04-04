@@ -36,7 +36,7 @@ Download MinIO into the jail:
 
 ```
 curl -Lo/<jail_root>/Minio/usr/local/bin/minio https://dl.minio.io/server/minio/release/freebsd-amd64/minio
-chmod +x /<jail_root>/MinIO/usr/local/bin/minio
+chmod +x /<jail_root>/Minio/usr/local/bin/minio
 ```
 
 ### Create MinIO Service

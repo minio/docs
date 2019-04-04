@@ -8,11 +8,11 @@ This guide describes how to use the [`presignedPutObject`](https://docs.minio.io
 2. [Create the Client-side Web Application](#createclient)
 
 ## <a name="createserver"></a>1. Create the Server
-The server consists of an [Express](https://expressjs.com) Node.js server that exposes an endpoint called `/presignedUrl`. This endpoint uses a `MinIO.Client` object to generate a short-lived, pre-signed URL that can be used to upload a file to Mino Server.
+The server consists of an [Express](https://expressjs.com) Node.js server that exposes an endpoint called `/presignedUrl`. This endpoint uses a `Minio.Client` object to generate a short-lived, pre-signed URL that can be used to upload a file to Mino Server.
 
 ```js
 // In order to use the MinIO JavaScript API to generate the pre-signed URL, begin by instantiating
-// a `MinIO.Client` object and pass in the values for your server.
+// a `Minio.Client` object and pass in the values for your server.
 // The example below uses values for play.minio.io:9000
 
 const MinIO = require('minio')
