@@ -1,11 +1,11 @@
-# Arq backup with MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Arq backup with MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Arq backup software is available for Mac and Windows. Arq stores multiple versions of files in encrypted format. The  backups can be stored on various cloud backends including MinIO. This document will walk you through arqbackup configuration with MinIO backend.
 
 ## 1. Prerequisites
 
 * [Arq](https://www.arqbackup.com/) backup installed.
-* MinIO Server is running on localhost:9000, follow [MinIO quickstart guide](https://docs.minio.io/docs/minio-quickstart-guide) for installing MinIO.
+* MinIO Server is running on localhost:9000, follow [MinIO quickstart guide](https://docs.min.io/docs/minio-quickstart-guide) for installing MinIO.
 
 ## 2. Steps
 
@@ -17,6 +17,6 @@ Next select an existing bucket for storing backup or create a new bucket for Arq
 
 ## 3. Explore Further
 
-* [MinIO Client complete guide](https://docs.minio.io/docs/minio-client-complete-guide)
+* [MinIO Client complete guide](https://docs.min.io/docs/minio-client-complete-guide)
 * [Arq backup homepage](https://www.arqbackup.com/)
 

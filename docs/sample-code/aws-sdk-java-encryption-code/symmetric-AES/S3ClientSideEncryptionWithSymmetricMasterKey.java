@@ -89,7 +89,7 @@ public class S3ClientSideEncryptionWithSymmetricMasterKey {
 						encryptionMaterials));
 		Region usEast1 = Region.getRegion(Regions.US_EAST_1);
 		encryptionClient.setRegion(usEast1);
-		encryptionClient.setEndpoint("https://play.minio.io:9000");
+		encryptionClient.setEndpoint("https://play.min.io:9000");
 
 		final S3ClientOptions clientOptions = S3ClientOptions.builder()
 				.setPathStyleAccess(true).build();

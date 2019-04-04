@@ -1,4 +1,4 @@
-# 为MinIO Server设置Apache HTTP proxy [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 为MinIO Server设置Apache HTTP proxy [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Apache HTTP是一个开源Web服务器和一个反向代理服务器。  
 
@@ -6,7 +6,7 @@ Apache HTTP是一个开源Web服务器和一个反向代理服务器。
 
 ## 1. 前提条件
 
-从[这里](http://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO Server。 记住它的IP和端口。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。 记住它的IP和端口。
 
 ## 2. 安装
 

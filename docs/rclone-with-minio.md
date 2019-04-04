@@ -1,4 +1,4 @@
-# Rclone with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Rclone with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `Rclone` is an open source command line program to sync files and
 directories to and from cloud storage systems.  It aims to be "rsync
@@ -8,7 +8,7 @@ This recipe describes how to use rclone with MinIO Server.
 
 ## 1. Prerequisites
 
-First install MinIO Server from [minio.io](https://minio.io/).
+First install MinIO Server from [min.io](https://min.io/).
 
 ## 2. Installation
 
@@ -27,14 +27,14 @@ Region:    us-east-1
 Browser Access:
   http://10.0.0.3:9000  http://127.0.0.1:9000  http://172.17.0.1:9000
 
-Command-line Access: https://docs.minio.io/docs/minio-client-quickstart-guide
+Command-line Access: https://docs.min.io/docs/minio-client-quickstart-guide
   $ mc config host add myminio http://10.0.0.3:9000 USWUXHGYZQYFYFFIT3RE MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03
 
 Object API (Amazon S3 compatible):
-  Go:         https://docs.minio.io/docs/golang-client-quickstart-guide
-  Java:       https://docs.minio.io/docs/java-client-quickstart-guide
-  Python:     https://docs.minio.io/docs/python-client-quickstart-guide
-  JavaScript: https://docs.minio.io/docs/javascript-client-quickstart-guide
+  Go:         https://docs.min.io/docs/golang-client-quickstart-guide
+  Java:       https://docs.min.io/docs/java-client-quickstart-guide
+  Python:     https://docs.min.io/docs/python-client-quickstart-guide
+  JavaScript: https://docs.min.io/docs/javascript-client-quickstart-guide
 ```
 
 You now need to configure those details into rclone.

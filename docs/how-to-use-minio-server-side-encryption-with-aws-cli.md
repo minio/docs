@@ -12,7 +12,7 @@ A client must specify three HTTP headers for SSE-C requests:
 * `X-Amz-Server-Side-Encryption-Customer-Key`: The secret encryption key. It must be a 256-bit Base64-encoded string.
 * `X-Amz-Server-Side-Encryption-Customer-Key-MD5`: The encryption key MD5 checksum. It must be set to the MD5-sum of the encryption key. Note: The MD5 checksum is the MD5 sum of the raw binary key, not of the base64-encoded key.
 
-Install the MinIO Server with TLS as described [here](https://docs.minio.io/docs/how-to-secure-access-to-minio-server-with-tls).
+Install the MinIO Server with TLS as described [here](https://docs.min.io/docs/how-to-secure-access-to-minio-server-with-tls).
 
 **Note**: Tools like `aws-cli` or `mc` will display an error if a self-signed TLS certificate is used when trying to upload objects to the server. See [Let's Encrypt](https://letsencrypt.org/) to get a CA-signed TLS certificate. Self-signed certificates should only be used for development, testing or internal usage.
 
@@ -21,7 +21,7 @@ Install the MinIO Server with TLS as described [here](https://docs.minio.io/docs
 This section describes how to use server-side encryption with customer-provided encryption (SSE-C) keys via the aws-cli.
 
 ### 2.1 Install the aws-cli 
-You can install the AWS Command Line Interface using the procedure described [here](https://docs.minio.io/docs/aws-cli-with-minio).
+You can install the AWS Command Line Interface using the procedure described [here](https://docs.min.io/docs/aws-cli-with-minio).
 
 ### 2.2 Create a bucket named `my-bucket`
 

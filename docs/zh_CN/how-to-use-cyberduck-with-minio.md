@@ -1,4 +1,4 @@
-# 如何使用Cyberduck结合MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用Cyberduck结合MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 在本文档中，你将学习如何使用Cyber​​duck对MinIO进行基本操作。Cyber​​duck是适用于MacOS和Windows的FTP和SFTP，WebDAV，OpenStack Swift和Amazon S3的开源客户端。它是在GPL许可证v2.0下发布的。  
 
@@ -6,9 +6,9 @@
 
 * [Cyberduck](https://cyberduck.io/)安装并运行。因为MinIO与Amazon S3兼容，所以你可以从[这里](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTP)下载一个通用的``HTTP`` S3 配置文件。
 
-* MinIO Server已经在本地运行，采用``http``,端口9000, 参考 [MinIO快速入门](https://docs.minio.io/docs/minio-quickstart-guide)来安装MinIO。
+* MinIO Server已经在本地运行，采用``http``,端口9000, 参考 [MinIO快速入门](https://docs.min.io/docs/minio-quickstart-guide)来安装MinIO。
 
-_注意:_ 你也可以用``HTTPS``方式来运行MinIO, 参考[这里](https://docs.minio.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio)，以及[这里](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS)描述的Cyberduck通用``HTTPS`` S3配置文件。
+_注意:_ 你也可以用``HTTPS``方式来运行MinIO, 参考[这里](https://docs.min.io/docs/generate-let-s-encypt-certificate-using-concert-for-minio)，以及[这里](https://trac.cyberduck.io/wiki/help/en/howto/s3#HTTPS)描述的Cyberduck通用``HTTPS`` S3配置文件。
 
 ## 2. 步骤
 
@@ -44,7 +44,7 @@ _注意:_ 你也可以用``HTTPS``方式来运行MinIO, 参考[这里](https://d
 
 ## 3. 了解更多
 
-* [MinIO Client完全指南](https://docs.minio.io/docs/minio-client-complete-guide)
+* [MinIO Client完全指南](https://docs.min.io/docs/minio-client-complete-guide)
 * [Cyberduck project主页](https://cyberduck.io)
 
 

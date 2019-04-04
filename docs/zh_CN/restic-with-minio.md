@@ -1,4 +1,4 @@
-# restic结合MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# restic结合MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `restic`是一个快速，高性能，并且安全的备份工具。这是一个在``BSD 2-Clause License``下的开源项目。
 
@@ -6,7 +6,7 @@
 
 ## 1. 前提条件
 
-从[这里](http://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO。
 
 ## 2. 安装
 

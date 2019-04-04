@@ -1,16 +1,16 @@
-# Store MongoDB Backups in MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Store MongoDB Backups in MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 In this recipe we will learn how to store MongoDB backups in MinIO Server.
 
 ## 1. Prerequisites
 
-* Install mc from [here](https://docs.minio.io/docs/minio-client-quickstart-guide).
-* Install MinIO Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+* Install mc from [here](https://docs.min.io/docs/minio-client-quickstart-guide).
+* Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 * MongoDB official [doc](https://docs.mongodb.com/).
 
 ## 2. Configuration Steps
 
-MinIO server is running using alias ``minio1``. Follow MinIO client complete guide [here](https://docs.minio.io/docs/minio-client-complete-guide) for details. MongoDB backups are stored in ``mongobkp`` directory.
+MinIO server is running using alias ``minio1``. Follow MinIO client complete guide [here](https://docs.min.io/docs/minio-client-complete-guide) for details. MongoDB backups are stored in ``mongobkp`` directory.
 
 ### Create a bucket.
 
@@ -45,7 +45,7 @@ mongodump -h mongo-server1 -p 27017 --archive | pv -brat | ssh user@minio-server
 
 ### Continuously mirror local backup to MinIO server.
 
-Continuously mirror ``mongobkp`` folder recursively to MinIO. Read more on ``mc mirror`` [here](https://docs.minio.io/docs/minio-client-complete-guide#mirror) 
+Continuously mirror ``mongobkp`` folder recursively to MinIO. Read more on ``mc mirror`` [here](https://docs.min.io/docs/minio-client-complete-guide#mirror) 
 
 ```sh
 mc mirror --force --remove --watch  mongobkp/ minio1/mongobkp

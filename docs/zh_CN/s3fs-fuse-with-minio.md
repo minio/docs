@@ -1,4 +1,4 @@
-# 使用s3fs-fuse操作MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 使用s3fs-fuse操作MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 s3fs允许Linux和Mac OS X通过FUSE安装S3存储桶。请注意，你将无法使用s3fs创建目录，因为MinIO不支持创建文件夹。
 
@@ -6,13 +6,13 @@ s3fs允许Linux和Mac OS X通过FUSE安装S3存储桶。请注意，你将无法
 
 ## 1. 前提条件
 
-从[这里](http://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 
 ## 2. 安装
 
 从<https://github.com/s3fs-fuse/s3fs-fuse>下载并安装`s3fs-fuse`。
 
-参考[MinIO Client快速入门](https://docs.minio.io/docs/minio-client-quickstart-guide)创建一个存储桶。
+参考[MinIO Client快速入门](https://docs.min.io/docs/minio-client-quickstart-guide)创建一个存储桶。
 
 ## 3. 配置
 

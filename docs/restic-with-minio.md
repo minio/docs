@@ -1,4 +1,4 @@
-# restic with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# restic with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `restic` is a fast, efficient and secure backup tool. It is an open source project available under ``BSD 2-Clause License``.
 
@@ -6,7 +6,7 @@ In this recipe we will learn how to use `restic` to backup data into MinIO Serve
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 

@@ -1,4 +1,4 @@
-# How to monitor MinIO server with Prometheus [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to monitor MinIO server with Prometheus [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 [Prometheus](https://prometheus.io) is a cloud-native monitoring platform, built originally at SoundCloud. Prometheus offers a multi-dimensional data model with time series data identified by metric name and key/value pairs. The data collection happens via a pull model over HTTP. Targets to pull data are discovered via service discovery or static configuration.
 
@@ -8,7 +8,7 @@ This document explains how to setup Prometheus and configure it to scrape data f
 
 ## Prerequisites
 
-MinIO server release `RELEASE.2018-05-11T00-29-24Z` or later running. To get started with MinIO, refer [MinIO QuickStart Document](https://docs.minio.io/docs/minio-quickstart-guide). Follow below steps to get started with MinIO monitoring using Prometheus.
+MinIO server release `RELEASE.2018-05-11T00-29-24Z` or later running. To get started with MinIO, refer [MinIO QuickStart Document](https://docs.min.io/docs/minio-quickstart-guide). Follow below steps to get started with MinIO monitoring using Prometheus.
 
 ### 1. Download Prometheus
 
@@ -59,7 +59,7 @@ Here `prometheus.yml` is the name of configuration file. You can now see MinIO m
 
 ## List of MinIO metric exposed
 
-MinIO server exposes the following metrics on `/minio/prometheus/metrics` endpoint. All of these can be accessed via Prometheus dashboard. The full list of exposed metrics along with their definition is available in the demo server at https://play.minio.io:9000/minio/prometheus/metrics
+MinIO server exposes the following metrics on `/minio/prometheus/metrics` endpoint. All of these can be accessed via Prometheus dashboard. The full list of exposed metrics along with their definition is available in the demo server at https://play.min.io:9000/minio/prometheus/metrics
 
 - standard go runtime metrics prefixed by `go_` 
 - process level metrics prefixed with `process_`

@@ -1,4 +1,4 @@
-# Deploy Alluxio with MinIO [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Deploy Alluxio with MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 In this recipe we will learn how to setup MinIO as a persistent storage layer for [Alluxio](http://alluxio.org). The Alluxio documentation for using Alluxio with MinIO can be found [here](http://www.alluxio.org/docs/master/en/Configuring-Alluxio-with-MinIO.html).
 
@@ -6,12 +6,12 @@ Alluxio provides memory-speed virtual distributed storage for applications. By u
 
 ## 1. Prerequisites
 
-* Install MinIO Server from [here](https://www.minio.io/).
+* Install MinIO Server from [here](https://www.min.io/).
 * Install Alluxio from [here](http://www.alluxio.org/download)
 
 ## 2. Setup
 
-This section describes how to set up Alluxio with MinIO assumed to be already running. See the [MinIO quick start guide](https://docs.minio.io/docs/minio-quickstart-guide) for how to set up MinIO.
+This section describes how to set up Alluxio with MinIO assumed to be already running. See the [MinIO quick start guide](https://docs.min.io/docs/minio-quickstart-guide) for how to set up MinIO.
 
 Extract the downloaded Alluxio binary, using the appropriate version and distribution. If MinIO is the only storage you are using with Alluxio, the distribution is irrelevant.
 

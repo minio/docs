@@ -1,4 +1,4 @@
-# Setup Nginx proxy with MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Setup Nginx proxy with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Nginx is an open source Web server and a reverse proxy server.  
 
@@ -6,7 +6,7 @@ In this recipe we will learn how to set up Nginx proxy with MinIO Server.
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 

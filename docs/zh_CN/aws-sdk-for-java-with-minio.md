@@ -1,10 +1,10 @@
-# 如何使用AWS SDK for Java操作MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for Java操作MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `aws-sdk-java`是Java语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk-java`操作MinIO Server。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 
 ## 2. 设置依赖
 
@@ -164,4 +164,4 @@ Total time: 3 seconds
 ```
 ## 5. 了解更多
 
-* [MinIO Java Library for Amazon S3](https://docs.minio.io/docs/java-client-quickstart-guide)
+* [MinIO Java Library for Amazon S3](https://docs.min.io/docs/java-client-quickstart-guide)

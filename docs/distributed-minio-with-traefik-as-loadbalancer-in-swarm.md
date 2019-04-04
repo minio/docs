@@ -1,4 +1,4 @@
-# How to run distributed MinIO in Docker swarm with Træfɪk loadbalancer [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run distributed MinIO in Docker swarm with Træfɪk loadbalancer [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 [Træfɪk](https://traefik.io/) is a modern reverse proxy also written in Go. It supports multiple ways to get configured, this cookbook will explain how you can setup distributed MinIO in Docker swarm which can be accessed inside swarm using a generic name (instead of `minio1`, `minio2`, ...) and expose MinIO to the outside world with just one (loadbalanced) port through Træfɪk.
 
@@ -8,7 +8,7 @@ You have a running Docker swarm, if not head over to [Docker Swarm mode overview
 
 ## 2. Steps
 
-Based on official [Deploy MinIO on Docker Swarm](https://docs.minio.io/docs/deploy-minio-on-docker-swarm) docs, we will deploy MinIO using a Docker Compose file.
+Based on official [Deploy MinIO on Docker Swarm](https://docs.min.io/docs/deploy-minio-on-docker-swarm) docs, we will deploy MinIO using a Docker Compose file.
 
 * strip the ports per MinIO and add Træfɪk as loadbalancer in front of
 * add Træfɪk labels (mind the `Host:...` label which configures the frontend rule where Træfɪk is listening for Swarm internal and external access) to each MinIO service
@@ -17,7 +17,7 @@ Based on official [Deploy MinIO on Docker Swarm](https://docs.minio.io/docs/depl
 
 ### 2.1 Add Docker swarm secrets
 
-Also see [MinIO Docker Quickstart Guide](https://docs.minio.io/docs/minio-docker-quickstart-guide)
+Also see [MinIO Docker Quickstart Guide](https://docs.min.io/docs/minio-docker-quickstart-guide)
 
 ```sh
 echo "AKIAIOSFODNN7EXAMPLE" | docker secret create access_key -

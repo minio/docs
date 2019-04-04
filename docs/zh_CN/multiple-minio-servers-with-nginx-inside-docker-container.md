@@ -1,4 +1,4 @@
-# 如何在docker container中运行多个使用Nginx的MinIO Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何在docker container中运行多个使用Nginx的MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Nginx是一个开源的Web服务器和反向代理服务器。
 
