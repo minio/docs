@@ -1,6 +1,6 @@
-# How to run distributed Minio in Docker swarm with Træfɪk loadbalancer [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run distributed MinIO in Docker swarm with Træfɪk loadbalancer [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-[Træfɪk](https://traefik.io/) is a modern reverse proxy also written in Go. It supports multiple ways to get configured, this cookbook will explain how you can setup distributed Minio in Docker swarm which can be accessed inside swarm using a generic name (instead of `minio1`, `minio2`, ...) and expose Minio to the outside world with just one (loadbalanced) port through Træfɪk.
+[Træfɪk](https://traefik.io/) is a modern reverse proxy also written in Go. It supports multiple ways to get configured, this cookbook will explain how you can setup distributed MinIO in Docker swarm which can be accessed inside swarm using a generic name (instead of `minio1`, `minio2`, ...) and expose MinIO to the outside world with just one (loadbalanced) port through Træfɪk.
 
 ## 1. Prerequisites
 
@@ -8,16 +8,16 @@ You have a running Docker swarm, if not head over to [Docker Swarm mode overview
 
 ## 2. Steps
 
-Based on official [Deploy Minio on Docker Swarm](https://docs.minio.io/docs/deploy-minio-on-docker-swarm) docs, we will deploy Minio using a Docker Compose file.
+Based on official [Deploy MinIO on Docker Swarm](https://docs.min.io/docs/deploy-minio-on-docker-swarm) docs, we will deploy MinIO using a Docker Compose file.
 
-* strip the ports per Minio and add Træfɪk as loadbalancer in front of
-* add Træfɪk labels (mind the `Host:...` label which configures the frontend rule where Træfɪk is listening for Swarm internal and external access) to each Minio service
+* strip the ports per MinIO and add Træfɪk as loadbalancer in front of
+* add Træfɪk labels (mind the `Host:...` label which configures the frontend rule where Træfɪk is listening for Swarm internal and external access) to each MinIO service
 * add `minioproxy` Træfɪk service
 * Bonus: as we are using Docker swarm, we can also use secrets instead of environment variables (more secure)
 
 ### 2.1 Add Docker swarm secrets
 
-Also see [Minio Docker Quickstart Guide](https://docs.minio.io/docs/minio-docker-quickstart-guide)
+Also see [MinIO Docker Quickstart Guide](https://docs.min.io/docs/minio-docker-quickstart-guide)
 
 ```sh
 echo "AKIAIOSFODNN7EXAMPLE" | docker secret create access_key -
@@ -157,7 +157,7 @@ docker stack deploy --compose-file=docker-compose.yaml minio_stack
 
 ### Inside Swarm
 
-Now we spin up a Minio mc test container on one of the Docker swarm nodes to access loadbalanced Minio using it's generic name.
+Now we spin up a MinIO mc test container on one of the Docker swarm nodes to access loadbalanced MinIO using it's generic name.
 
 ```sh
 docker run --rm -it --network minio_distributed --entrypoint=/bin/sh minio/mc

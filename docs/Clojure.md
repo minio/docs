@@ -1,4 +1,4 @@
-# How to use Minio SDK for java with Clojure
+# How to use MinIO SDK for java with Clojure
 
 In this receipe we will learn how to use `minio-java` with Clojure.
 
@@ -73,10 +73,10 @@ Use classes and methods from the imported class in your project.
 (defn -main
   [& args]
     ;; makeBucket
-    (.makeBucket (new io.minio.MinioClient "https://play.minio.io:9000" "Q3AM3UQ867SPQQA43P2F" "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG") "testbucketclojure")
+    (.makeBucket (new io.minio.MinioClient "https://play.min.io:9000" "Q3AM3UQ867SPQQA43P2F" "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG") "testbucketclojure")
     
     ;;putObject
-    (.putObject (new io.minio.MinioClient "https://play.minio.io:9000" "Q3AM3UQ867SPQQA43P2F" "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG") "testbucketclojure"  "objectname" "/Users/aarushiarya/Desktop/testFile")
+    (.putObject (new io.minio.MinioClient "https://play.min.io:9000" "Q3AM3UQ867SPQQA43P2F" "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG") "testbucketclojure"  "objectname" "/Users/aarushiarya/Desktop/testFile")
     (println "Done.")
     )
     

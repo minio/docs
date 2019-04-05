@@ -1,8 +1,8 @@
-# How to use AWS SDK for Java for encryption with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Java for encryption with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-`aws-sdk` for Java is the official AWS SDK for Java. In this recipe we will learn how to use `aws-sdk` for Java for encryption on Minio server using both Symmetric and Asymmetric approach.
+`aws-sdk` for Java is the official AWS SDK for Java. In this recipe we will learn how to use `aws-sdk` for Java for encryption on MinIO server using both Symmetric and Asymmetric approach.
 
-Encryption allows additional security layer for sensitive user data (images, audio clips, etc.) stored on Minio server.
+Encryption allows additional security layer for sensitive user data (images, audio clips, etc.) stored on MinIO server.
 
 ## Prerequisites
 
@@ -29,11 +29,11 @@ Symmetric Encryption uses single key for both encryption and decryption. Followi
     EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
       mySymmetricKey);
 
-    // Add Minio server accessKey and secretKey  
+    // Add MinIO server accessKey and secretKey  
     AWSCredentials credentials = new BasicAWSCredentials(
       "USWUXHGYZQYFYFFIT3RE", "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");
 
-    // Create encryption client with Minio server as endpoint  
+    // Create encryption client with MinIO server as endpoint  
     AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
       credentials, new StaticEncryptionMaterialsProvider(
       encryptionMaterials));
@@ -42,9 +42,9 @@ Symmetric Encryption uses single key for both encryption and decryption. Followi
     encryptionClient.setEndpoint("http://localhost:9000");
 ```
 
-### 3. Operations on Minio using AWS S3 encryption client
+### 3. Operations on MinIO using AWS S3 encryption client
 
-Use the encryption client created in previous steps to perform operations on Minio server.
+Use the encryption client created in previous steps to perform operations on MinIO server.
 
 ```java
     // Create the bucket
@@ -94,11 +94,11 @@ Asymmetric Encryption uses public key and private key for encryption and decrypt
     EncryptionMaterials encryptionMaterials = new EncryptionMaterials(
       loadedKeyPair);
 
-    // Add Minio server accessKey and secretKey
+    // Add MinIO server accessKey and secretKey
     AWSCredentials credentials = new BasicAWSCredentials("USWUXHGYZQYFYFFIT3RE",
       "MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03");	   
 
-    // Create encryption client with Minio server as endpoint   
+    // Create encryption client with MinIO server as endpoint   
     AmazonS3EncryptionClient encryptionClient = new AmazonS3EncryptionClient(
       credentials, new StaticEncryptionMaterialsProvider(encryptionMaterials));
     Region usEast1 = Region.getRegion(Regions.US_EAST_1);
@@ -106,9 +106,9 @@ Asymmetric Encryption uses public key and private key for encryption and decrypt
     encryptionClient.setEndpoint("http://localhost:9000");
 ```
 
-### 3. Operations on Minio using AWS S3 encryption client
+### 3. Operations on MinIO using AWS S3 encryption client
 
-Use the encryption client created in previous steps to perform operations on Minio server.
+Use the encryption client created in previous steps to perform operations on MinIO server.
 
 ```java
     // Create the bucket
@@ -140,4 +140,4 @@ Once the object is downloaded, check if the decrypted object is same as the plai
 
 Complete working code for Asymmetric RSA encryption can be found [here](./sample-code/aws-sdk-java-encryption-code/asymmetric-RSA/)
 
-*Note*: When Minio generates a presignedURL it would be generated for an encrypted object. So, downloading this object through other methods like curl you would get an encrypted object. This is because curl has no awareness of encryption details.
+*Note*: When MinIO generates a presignedURL it would be generated for an encrypted object. So, downloading this object through other methods like curl you would get an encrypted object. This is because curl has no awareness of encryption details.

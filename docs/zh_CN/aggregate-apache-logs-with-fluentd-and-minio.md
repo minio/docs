@@ -1,11 +1,11 @@
-# 使用fluentd插件聚合Apache日志[![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 使用fluentd插件聚合Apache日志[![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-在本文中，我们将学习如何使用`fluent-plugin-s3`插件结合Minio做为日志聚合器。
+在本文中，我们将学习如何使用`fluent-plugin-s3`插件结合MinIO做为日志聚合器。
 
 ## 1. 前提提件
 
-* 从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载Minio Server。
-* 从[这里](http://docs.minio.io/docs/minio-client-quickstart-guide)下载`mc`。
+* 从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载MinIO Server。
+* 从[这里](https://docs.min.io/docs/minio-client-quickstart-guide)下载`mc`。
 
 ## 2. 安装
 
@@ -25,7 +25,7 @@ mc mb myminio/fluentd
 Bucket created successfully ‘myminio/fluentd’.
 ```
 
-### 第二步：修改fluentd配置以使用Minio作为存储后端。
+### 第二步：修改fluentd配置以使用MinIO作为存储后端。
 将`aws_key_id`, `aws_sec_key`, `s3_bucket`,  `s3_endpoint`替换为你自己的值。
 
 将 `/etc/td-agent/td-agent.conf` 替换为:
@@ -88,7 +88,7 @@ ab -n 100 -c 10 http://localhost/
 
 ### 第六步: 验证聚合的日志。
 
-Minio Server的fluent存储桶应该显示聚合后的日志。
+MinIO Server的fluent存储桶应该显示聚合后的日志。
 
 ```sh
 mc ls myminio/fluentd/logs/

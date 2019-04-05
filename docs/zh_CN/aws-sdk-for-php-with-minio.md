@@ -1,10 +1,10 @@
-# 如何使用AWS SDK for PHP操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for PHP操作MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-`aws-sdk-php`是PHP语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk-php`来操作Minio Server。
+`aws-sdk-php`是PHP语言版本的官方AWS SDK。本文我们将学习如何使用`aws-sdk-php`来操作MinIO Server。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 
 ## 2. 安装
 
@@ -12,7 +12,7 @@
 
 ## 3. 使用GetObject和PutObject
 
-下面示例描述的是如何使用aws-sdk-php对Minio Server进行putObject和getObject操作。请将``example.php``文件中的``endpoint``,``key``, ``secret``, ``Bucket``修改为你的本地配置。注意，我们将`use_path_style_endpoint`设置为`true`以使用AWS SDK for PHP来操作Minio。了解更多，请参考[AWS SDK for PHP](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html#___construct)。
+下面示例描述的是如何使用aws-sdk-php对MinIO Server进行putObject和getObject操作。请将``example.php``文件中的``endpoint``,``key``, ``secret``, ``Bucket``修改为你的本地配置。注意，我们将`use_path_style_endpoint`设置为`true`以使用AWS SDK for PHP来操作MinIO。了解更多，请参考[AWS SDK for PHP](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html#___construct)。
 
 
 ```php
@@ -38,7 +38,7 @@ $s3 = new Aws\S3\S3Client([
 $insert = $s3->putObject([
      'Bucket' => 'testbucket',
      'Key'    => 'testkey',
-     'Body'   => 'Hello from Minio!!'
+     'Body'   => 'Hello from MinIO!!'
 ]);
 
 // 下载文件的内容
@@ -56,7 +56,7 @@ echo $retrive['Body'];
 
 ```sh
 php example.php
-Hello from Minio!!
+Hello from MinIO!!
 ```
 
 ## 4. 生成pre-signed URL

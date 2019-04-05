@@ -1,14 +1,14 @@
-# How to monitor Minio server with Prometheus [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to monitor MinIO server with Prometheus [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 [Prometheus](https://prometheus.io) is a cloud-native monitoring platform, built originally at SoundCloud. Prometheus offers a multi-dimensional data model with time series data identified by metric name and key/value pairs. The data collection happens via a pull model over HTTP. Targets to pull data are discovered via service discovery or static configuration.
 
-Minio exports Prometheus compatible data as an unauthorized endpoint at `/minio/prometheus/metrics`. Users looking to monitor their Minio instances can point Prometheus configuration to scrape data from this endpoint.
+MinIO exports Prometheus compatible data as an unauthorized endpoint at `/minio/prometheus/metrics`. Users looking to monitor their MinIO instances can point Prometheus configuration to scrape data from this endpoint.
 
-This document explains how to setup Prometheus and configure it to scrape data from Minio servers.
+This document explains how to setup Prometheus and configure it to scrape data from MinIO servers.
 
 ## Prerequisites
 
-Minio server release `RELEASE.2018-05-11T00-29-24Z` or later running. To get started with Minio, refer [Minio QuickStart Document](https://docs.minio.io/docs/minio-quickstart-guide). Follow below steps to get started with Minio monitoring using Prometheus.
+MinIO server release `RELEASE.2018-05-11T00-29-24Z` or later running. To get started with MinIO, refer [MinIO QuickStart Document](https://docs.min.io/docs/minio-quickstart-guide). Follow below steps to get started with MinIO monitoring using Prometheus.
 
 ### 1. Download Prometheus
 
@@ -35,7 +35,7 @@ Refer [Prometheus documentation](https://prometheus.io/docs/introduction/first_s
 
 ### 2. Prometheus configuration
 
-Prometheus configuration is written in YAML. Add Minio server details to the config file under `scrape_configs` section
+Prometheus configuration is written in YAML. Add MinIO server details to the config file under `scrape_configs` section
 
 ```yaml
 scrape_configs:
@@ -45,7 +45,7 @@ scrape_configs:
       - targets: ['localhost:9000']
 ```
 
-Note that `localhost:9000` is Minio server instance address, you need to change it to appropriate value in your configuration file.
+Note that `localhost:9000` is MinIO server instance address, you need to change it to appropriate value in your configuration file.
 
 ### 3. Start Prometheus
 
@@ -55,38 +55,38 @@ Start Prometheus by running
 ./prometheus --config.file=prometheus.yml
 ```
 
-Here `prometheus.yml` is the name of configuration file. You can now see Minio metrics in Prometheus dashboard. By default Prometheus dashboard is accessible at `http://localhost:9090`.
+Here `prometheus.yml` is the name of configuration file. You can now see MinIO metrics in Prometheus dashboard. By default Prometheus dashboard is accessible at `http://localhost:9090`.
 
-## List of Minio metric exposed
+## List of MinIO metric exposed
 
-Minio server exposes the following metrics on `/minio/prometheus/metrics` endpoint. All of these can be accessed via Prometheus dashboard. The full list of exposed metrics along with their definition is available in the demo server at https://play.minio.io:9000/minio/prometheus/metrics
+MinIO server exposes the following metrics on `/minio/prometheus/metrics` endpoint. All of these can be accessed via Prometheus dashboard. The full list of exposed metrics along with their definition is available in the demo server at https://play.min.io:9000/minio/prometheus/metrics
 
 - standard go runtime metrics prefixed by `go_` 
 - process level metrics prefixed with `process_`
 - prometheus scrap metrics prefixed with `promhttp_`
 
-- `minio_disk_storage_used_bytes` : Total byte count of disk storage used by current Minio server instance
+- `minio_disk_storage_used_bytes` : Total byte count of disk storage used by current MinIO server instance
 - `minio_http_requests_duration_seconds_bucket` : Cumulative counters for all the request types (HEAD/GET/PUT/POST/DELETE) in different time brackets
 - `minio_http_requests_duration_seconds_count` : Count of current number of observations i.e. total HTTP requests (HEAD/GET/PUT/POST/DELETE)
 - `minio_http_requests_duration_seconds_sum` : Current aggregate time spent servicing all HTTP requests (HEAD/GET/PUT/POST/DELETE) in seconds
-- `minio_network_received_bytes_total` : Total number of bytes received by current Minio server instance
-- `minio_network_sent_bytes_total` : Total number of bytes sent by current Minio server instance
-- `minio_offline_disks` : Total number of offline disks for current Minio server instance
-- `minio_total_disks` : Total number of disks for current Minio server instance
+- `minio_network_received_bytes_total` : Total number of bytes received by current MinIO server instance
+- `minio_network_sent_bytes_total` : Total number of bytes sent by current MinIO server instance
+- `minio_offline_disks` : Total number of offline disks for current MinIO server instance
+- `minio_total_disks` : Total number of disks for current MinIO server instance
 - `minio_disk_storage_available_bytes` : Current storage space available to MinIO server in bytes
 - `minio_disk_storage_total_bytes` : Total storage space available to MinIO server in bytes
-- `process_start_time_seconds` : Start time of Minio server since unix epoch in seconds
+- `process_start_time_seconds` : Start time of MinIO server since unix epoch in seconds
 
-If you're running Minio gateway, disk/storage information is not exposed. Only following metrics are available
+If you're running MinIO gateway, disk/storage information is not exposed. Only following metrics are available
 
 - `minio_http_requests_duration_seconds_bucket` : Cumulative counters for all the request types (HEAD/GET/PUT/POST/DELETE) in different time brackets
 - `minio_http_requests_duration_seconds_count` : Count of current number of observations i.e. total HTTP requests (HEAD/GET/PUT/POST/DELETE)
 - `minio_http_requests_duration_seconds_sum` : Current aggregate time spent servicing all HTTP requests (HEAD/GET/PUT/POST/DELETE) in seconds
-- `minio_network_received_bytes_total` : Total number of bytes received by current Minio server instance
-- `minio_network_sent_bytes_total` : Total number of bytes sent by current Minio server instance
-- `process_start_time_seconds` : Start time of Minio server since unix epoch in seconds
+- `minio_network_received_bytes_total` : Total number of bytes received by current MinIO server instance
+- `minio_network_sent_bytes_total` : Total number of bytes sent by current MinIO server instance
+- `process_start_time_seconds` : Start time of MinIO server since unix epoch in seconds
 
-For Minio instances with [`caching`](https://github.com/minio/minio/tree/master/docs/disk-caching) enabled, these additional metrics are available.
+For MinIO instances with [`caching`](https://github.com/minio/minio/tree/master/docs/disk-caching) enabled, these additional metrics are available.
 
-- `minio_disk_cache_storage_bytes` : Total byte count of cache capacity available for current Minio server instance
-- `minio_disk_cache_storage_free_bytes` : Total byte count of free cache available for current Minio server instance
+- `minio_disk_cache_storage_bytes` : Total byte count of cache capacity available for current MinIO server instance
+- `minio_disk_cache_storage_free_bytes` : Total byte count of free cache available for current MinIO server instance

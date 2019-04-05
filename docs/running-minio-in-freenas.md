@@ -1,6 +1,6 @@
-# How to run Minio in FreeNAS [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run MinIO in FreeNAS [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-In this recipe we will learn how to run Minio with FreeNAS. 
+In this recipe we will learn how to run MinIO with FreeNAS. 
 
 ## 1. Prerequisites
 
@@ -31,16 +31,16 @@ Read Only:        Unticked
 Create Directory: Ticked
 ```
 
-### Download Minio
-Download Minio into the jail:
+### Download MinIO
+Download MinIO into the jail:
 
 ```
-curl -Lo/<jail_root>/Minio/usr/local/bin/minio https://dl.minio.io/server/minio/release/freebsd-amd64/minio
+curl -Lo/<jail_root>/Minio/usr/local/bin/minio https://dl.min.io/server/minio/release/freebsd-amd64/minio
 chmod +x /<jail_root>/Minio/usr/local/bin/minio
 ```
 
-### Create Minio Service
-Create a new Minio service file:
+### Create MinIO Service
+Create a new MinIO service file:
 
 ```
 touch /<jail_root>/Minio/usr/local/etc/rc.d/minio
@@ -90,7 +90,7 @@ command_args="-c -f -p ${pidfile} /usr/local/bin/${name} -C \"${minio_config}\" 
 run_rc_command "$1"
 ```
 
-### Configure Minio Startup
+### Configure MinIO Startup
 Edit `/<jail_root>/Minio/etc/rc.conf`:
 
 ```
@@ -106,24 +106,24 @@ minio_disks="</path/to/your/dataset/inside/jail>"
 minio_address="<listen address / port>" (Defaults to :443)
 ```
 
-### Create Minio config directories
+### Create MinIO config directories
 
 ```
 mkdir -p /<jail_root>/Minio/etc/minio/certs
 ```
 
-### Create Minio Private and Public Keys (Optional, if HTTPS required and `minio_address` set on port 443)
+### Create MinIO Private and Public Keys (Optional, if HTTPS required and `minio_address` set on port 443)
 
 ```
 nano /<jail_root>/Minio/etc/minio/certs/public.crt
 nano /<jail_root>/Minio/etc/minio/certs/private.key
 ```
 
-### Start Minio Jail
+### Start MinIO Jail
 Browse to `Jails -> View Jails` in the FreeNAS UI, select `Minio` and press the `Start` button (3rd from Left):
 
-### Test Minio
-Browse to `http(s)://<ip_address>:<port>` and confirm Minio loads.
+### Test MinIO
+Browse to `http(s)://<ip_address>:<port>` and confirm MinIO loads.
 
 
 

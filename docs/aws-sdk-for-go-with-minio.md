@@ -1,10 +1,10 @@
-# How to use AWS SDK for Go with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Go with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-`aws-sdk-go` is the official AWS SDK for the Go programming language. In this recipe we will learn how to use `aws-sdk-go` with Minio server.
+`aws-sdk-go` is the official AWS SDK for the Go programming language. In this recipe we will learn how to use `aws-sdk-go` with MinIO server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
  
 ## 2. Installation
 
@@ -14,7 +14,7 @@ Install ``aws-sdk-go`` from AWS SDK for Go official docs [here](https://aws.amaz
 
 Please replace ``Endpoint``,``Credentials``, ``Bucket`` with your local setup in this ``example.go`` file.
 
-Example below shows putObject and getObject operations on Minio server using aws-sdk-go.
+Example below shows putObject and getObject operations on MinIO server using aws-sdk-go.
 
 ```go
 package main
@@ -35,7 +35,7 @@ func main() {
 	bucket := aws.String("newbucket")
 	key := aws.String("testobject")
 	
-	// Configure to use Minio Server
+	// Configure to use MinIO Server
 	s3Config := &aws.Config{
 		Credentials:      credentials.NewStaticCredentials("YOUR-ACCESSKEYID", "YOUR-SECRETACCESSKEY", ""),
 		Endpoint:         aws.String("http://localhost:9000"),
@@ -61,7 +61,7 @@ func main() {
 
 	// Upload a new object "testobject" with the string "Hello World!" to our "newbucket".
 	_, err = s3Client.PutObject(&s3.PutObjectInput{
-		Body:   strings.NewReader("Hello from Minio!!"),
+		Body:   strings.NewReader("Hello from MinIO!!"),
 		Bucket: bucket,
 		Key:    key,
 	})

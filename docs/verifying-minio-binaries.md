@@ -1,20 +1,20 @@
-# Verifying Minio Binaries [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Verifying MinIO Binaries [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-When using binaries from the Internet a best practice is to verify their integrity.  Minio's download site, <https://dl.minio.io/>, provides PGP signature, SHA256 checksum, and SHA1 checksum files to help verify each release of Minio Server and Minio Client.
+When using binaries from the Internet a best practice is to verify their integrity.  MinIO's download site, <https://dl.min.io/>, provides PGP signature, SHA256 checksum, and SHA1 checksum files to help verify each release of MinIO Server and MinIO Client.
 
-In this recipe we will learn how to confirm a binary came from Minio and has not been modified.  Feel free to perform one or more of the verification steps listed below.
+In this recipe we will learn how to confirm a binary came from MinIO and has not been modified.  Feel free to perform one or more of the verification steps listed below.
 
-**NOTE:** Although the instructions will reference Minio Server release [`minio.RELEASE.2017-11-22T19-55-46Z`](https://github.com/minio/minio/releases/tag/RELEASE.2017-11-22T19-55-46Z) ([Downloads](https://dl.minio.io/server/minio/release/), [Release Notes](https://github.com/minio/minio/releases)), the same general steps will apply to Minio Client ([Downloads](https://dl.minio.io/client/mc/release/), [Release Notes](https://github.com/minio/mc/releases)).
+**NOTE:** Although the instructions will reference MinIO Server release [`minio.RELEASE.2017-11-22T19-55-46Z`](https://github.com/minio/minio/releases/tag/RELEASE.2017-11-22T19-55-46Z) ([Downloads](https://dl.min.io/server/minio/release/), [Release Notes](https://github.com/minio/minio/releases)), the same general steps will apply to MinIO Client ([Downloads](https://dl.min.io/client/mc/release/), [Release Notes](https://github.com/minio/mc/releases)).
 
 ## 1. Prerequisites
 
-1. Navigate to the Minio Server release directory for your platform.  For example:
+1. Navigate to the MinIO Server release directory for your platform.  For example:
 
-* **Linux (64-bit):** <https://dl.minio.io/server/minio/release/linux-amd64/>
-* **Windows (64-bit):** <https://dl.minio.io/server/minio/release/windows-amd64/>
-* **macOS (64-bit):** <https://dl.minio.io/server/minio/release/darwin-amd64/>
+* **Linux (64-bit):** <https://dl.min.io/server/minio/release/linux-amd64/>
+* **Windows (64-bit):** <https://dl.min.io/server/minio/release/windows-amd64/>
+* **macOS (64-bit):** <https://dl.min.io/server/minio/release/darwin-amd64/>
 
-2. Assuming you want the latest release of Minio Server, and the latest release is `minio.RELEASE.2017-11-22T19-55-46Z`, download the following to a working directory:
+2. Assuming you want the latest release of MinIO Server, and the latest release is `minio.RELEASE.2017-11-22T19-55-46Z`, download the following to a working directory:
 
 * `minio.RELEASE.2017-11-22T19-55-46Z`: The binary compiled for your platform of choice.
 * `minio.RELEASE.2017-11-22T19-55-46Z.asc`: The PGP signature for the binary.
@@ -29,8 +29,8 @@ In this recipe we will learn how to confirm a binary came from Minio and has not
 
 ### Linux, Windows, and macOS
 ```sh
-# Import the public key used for Minio releases
-# User ID = Minio Trusted <trusted@minio.io>
+# Import the public key used for MinIO releases
+# User ID = MinIO Trusted <trusted@min.io>
 # Key ID = F9AAC728
 # Key Fingerprint = 4405 F3F0 DDBA 1B9E 68A3  1D25 12C7 4390 F9AA C728
 gpg --interactive --with-fingerprint --keyserver pgp.mit.edu --recv-keys 12C74390F9AAC728

@@ -1,10 +1,10 @@
-# 如何使用AWS SDK for iOS(swift-3)操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for iOS(swift-3)操作MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-本文我们将学习如何使用`AWSS3` for iOS来操作Minio Server。`AWSS3` for iOS是swift/objective-c语言版本的官方AWS SDK。
+本文我们将学习如何使用`AWSS3` for iOS来操作MinIO Server。`AWSS3` for iOS是swift/objective-c语言版本的官方AWS SDK。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 
 如果想要最新版的`AWSS3` SDK v2.5.5能正常操作minio/minio:edge，你需要修改`AWSS3` SDK中的`AWSSignature.m`文件，删除这一行，`[urlRequest setValue:@"Chunked" forHTTPHeaderField:@"Transfer-Encoding"];`，请关注[aws-sdk-ios #638](https://github.com/aws/aws-sdk-ios/pull/638)。
 
@@ -18,7 +18,7 @@
 
 修改`accessKey`, `secretKey` 和 `url`，根据你的需求修改region， service必须设置成`.S3`。
 
-（如果你在`url`中键入`xxxx:9000`，`AWSS3`会自动删除端口号，目前它只支持没有端口的URL，所以请确保你有一个到9000的域映射，你可能需要参考[如何给Minio Server设置Nginx代理](https://docs.minio.io/docs/setup-nginx-proxy-with-minio))
+（如果你在`url`中键入`xxxx:9000`，`AWSS3`会自动删除端口号，目前它只支持没有端口的URL，所以请确保你有一个到9000的域映射，你可能需要参考[如何给MinIO Server设置Nginx代理](https://docs.min.io/docs/setup-nginx-proxy-with-minio))
 
 ``` swift
 let accessKey = "XXXXXXX"
@@ -63,4 +63,4 @@ transferManager.upload(uploadRequest).continueWith { (task: AWSTask<AnyObject>) 
 
 <img src="../screenshots/iOS-test-app.png" alt="screenshot" height="250">
 
-3. 通过`Minio Browser`访问, 在images这个存储桶里,应该有一个叫prefix_test.jpg的文件，这就代表你成功了。 
+3. 通过`MinIO Browser`访问, 在images这个存储桶里,应该有一个叫prefix_test.jpg的文件，这就代表你成功了。 

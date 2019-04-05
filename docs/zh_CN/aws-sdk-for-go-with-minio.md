@@ -1,10 +1,10 @@
-# 如何使用AWS SDK for Go操作Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用AWS SDK for Go操作MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-`aws-sdk-go`是GO语言版本的官方AWS SDK。本文将学习如何使用`aws-sdk-go`来操作Minio Server。
+`aws-sdk-go`是GO语言版本的官方AWS SDK。本文将学习如何使用`aws-sdk-go`来操作MinIO Server。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
  
 ## 2. 安装
 
@@ -14,7 +14,7 @@
 
 替换``example.go``文件中的``Endpoint``,``Credentials``, ``Bucket``配置成你的本地配置。
 
-下面的示例讲的是如何使用aws-sdk-go从Minio Server上putObject和getObject。
+下面的示例讲的是如何使用aws-sdk-go从MinIO Server上putObject和getObject。
 
 ```go
 package main
@@ -35,7 +35,7 @@ func main() {
 	bucket := aws.String("newbucket")
 	key := aws.String("testobject")
 	
-	//  配置成使用Minio Server。
+	//  配置成使用MinIO Server。
 	s3Config := &aws.Config{
 		Credentials:      credentials.NewStaticCredentials("YOUR-ACCESSKEYID", "YOUR-SECRETACCESSKEY", ""),
 		Endpoint:         aws.String("http://localhost:9000"),
@@ -61,7 +61,7 @@ func main() {
 
 	// 上传一个新的文件"testobject"到存储桶"newbucket",内容是"Hello World!" 。
 	_, err = s3Client.PutObject(&s3.PutObjectInput{
-		Body:   strings.NewReader("Hello from Minio!!"),
+		Body:   strings.NewReader("Hello from MinIO!!"),
 		Bucket: bucket,
 		Key:    key,
 	})

@@ -1,8 +1,8 @@
-# How to run Minio in Cloudron [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to run MinIO in Cloudron [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 [Cloudron](https://cloudron.io) is a platform that makes it easy to run and maintain web apps on your server.
 
-In this recipe, we will learn how to run Minio in Cloudron.
+In this recipe, we will learn how to run MinIO in Cloudron.
 
 ## 1. Prerequisites
 
@@ -14,27 +14,27 @@ In this recipe, we will learn how to run Minio in Cloudron.
 
 ### Install from Cloudron App Store
 
-Go to the Cloudron App Store page and search for 'Minio'.
+Go to the Cloudron App Store page and search for 'MinIO'.
 
-  ![Minio in Cloudron App Store](screenshots/cloudron/appstore.png?raw=true "Search for Minio on Cloudron App Store")
+  ![MinIO in Cloudron App Store](screenshots/cloudron/appstore.png?raw=true "Search for MinIO on Cloudron App Store")
 
 
-### Install Minio
+### Install MinIO
 
-The install dialog lets you enter any subdomain on which you want Minio installed. Here we choose the subdomain `s3`.
+The install dialog lets you enter any subdomain on which you want MinIO installed. Here we choose the subdomain `s3`.
 
-  ![Install Cloudron](screenshots/cloudron/install.png?raw=true "Install Minio on any subdomain")
+  ![Install Cloudron](screenshots/cloudron/install.png?raw=true "Install MinIO on any subdomain")
 
 ### Accessing minio
 
-Click the Minio app icon in the installed apps list to access Minio.
+Click the MinIO app icon in the installed apps list to access MinIO.
 
-  ![Minio is installed on Cloudron](screenshots/cloudron/installed.png?raw=true "Minio is installed and running")
+  ![MinIO is installed on Cloudron](screenshots/cloudron/installed.png?raw=true "MinIO is installed and running")
 
-### Minio running with Lets Encrypt
+### MinIO running with Lets Encrypt
 
-Notice how minio is already setup with Lets Encrypt Certificate. You can access Minio with Access Key `admin` and
+Notice how minio is already setup with Lets Encrypt Certificate. You can access MinIO with Access Key `admin` and
 Secret Key `secretkey`.
 
-  ![Minio running on Cloudron](screenshots/cloudron/running.png?raw=true "Minio is live with Lets Encrypt")
+  ![MinIO running on Cloudron](screenshots/cloudron/running.png?raw=true "MinIO is live with Lets Encrypt")
 

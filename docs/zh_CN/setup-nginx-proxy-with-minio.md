@@ -1,12 +1,12 @@
-# 为Minio Server设置Nginx代理 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 为MinIO Server设置Nginx代理 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Nginx是一个开源的Web服务器和反向代理服务器。  
 
-在本文中，我们将学习如何给Minio Server设置Nginx代理。
+在本文中，我们将学习如何给MinIO Server设置Nginx代理。
 
 ## 1. 前提条件
 
-从[这里](http://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 
 ## 2. 安装
 
@@ -73,7 +73,7 @@ server {
 
 ## 4. 步骤
 
-### 第一步: 启动Minio Server。
+### 第一步: 启动MinIO Server。
 
 ```sh
 minio server /mydatadir
@@ -87,4 +87,4 @@ sudo service nginx restart
 
 ## 了解更多
 
-参考[这里](https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/)了解更多Minio和Nginx的配置选项。
+参考[这里](https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/)了解更多MinIO和Nginx的配置选项。

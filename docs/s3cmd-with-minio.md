@@ -1,12 +1,12 @@
-# S3cmd with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# S3cmd with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `S3cmd` is a CLI client for managing data in AWS S3, Google Cloud Storage or any cloud storage service provider that uses the s3 protocol.  `S3cmd` is open source and is distributed under the GPLv2 license.
 
-In this recipe we will learn how to configure and use S3cmd to manage data with Minio Server.
+In this recipe we will learn how to configure and use S3cmd to manage data with MinIO Server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
@@ -14,16 +14,16 @@ Install `S3cmd` from <http://s3tools.org/s3cmd>.
 
 ## 3. Configuration
 
-We will run `S3cmd` on <https://play.minio.io:9000>.
+We will run `S3cmd` on <https://play.min.io:9000>.
 
-Access credentials shown in this example belong to <https://play.minio.io:9000>. These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Minio keys in deployment.
+Access credentials shown in this example belong to <https://play.min.io:9000>. These credentials are open to public. Feel free to use this service for testing and development. Replace with your own MinIO keys in deployment.
 
 Edit the following fields in your s3cmd configuration file `~/.s3cfg`
 
 ```sh
 # Setup endpoint
-host_base = play.minio.io:9000
-host_bucket = play.minio.io:9000
+host_base = play.min.io:9000
+host_bucket = play.min.io:9000
 bucket_location = us-east-1
 use_https = True
 

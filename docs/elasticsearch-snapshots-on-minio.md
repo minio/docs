@@ -1,10 +1,10 @@
-# Elasticsearch snapshots on Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Elasticsearch snapshots on MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-Elasticsearch is a distributed, RESTful search and analytics engine. In this recipe we'll see how to store Elasticsearch `6.x` snapshots to Minio server.
+Elasticsearch is a distributed, RESTful search and analytics engine. In this recipe we'll see how to store Elasticsearch `6.x` snapshots to MinIO server.
 
 ## 1. Prerequisites
 
-- Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+- Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 - Download Elasticsearch version `6.2.4` from [here](https://www.elastic.co/downloads/elasticsearch).
 
 ## 2. Installation
@@ -21,10 +21,10 @@ sudo bin/elasticsearch-plugin install repository-s3
 
 ## 4. Configure Elasticsearch
 
-S3 Repository plugin points to AWS S3 by default. Add the below fields to `conf/elasticsearch.yml` file, so that the S3 Repository plugin talks to the Minio installation.
+S3 Repository plugin points to AWS S3 by default. Add the below fields to `conf/elasticsearch.yml` file, so that the S3 Repository plugin talks to the MinIO installation.
 
 ```yaml
-s3.client.default.endpoint: "http://127.0.0.1:9000" # Replace with actual Minio server endpoint
+s3.client.default.endpoint: "http://127.0.0.1:9000" # Replace with actual MinIO server endpoint
 s3.client.default.protocol: http                    # Replace with actual protocol (http/https)
 ```
 
@@ -35,9 +35,9 @@ bin/elasticsearch-keystore add s3.client.default.access_key
 bin/elasticsearch-keystore add s3.client.default.secret_key
 ```
 
-## 5. Configure Minio server
+## 5. Configure MinIO server
 
-Assuming Minio server is running on `http://127.0.0.1:9000`. Create a bucket called `elasticsearch` on your Minio server. This is the bucket to store Elasticsearch snapshots. Using `mc`
+Assuming MinIO server is running on `http://127.0.0.1:9000`. Create a bucket called `elasticsearch` on your MinIO server. This is the bucket to store Elasticsearch snapshots. Using `mc`
 
 ```sh
 mc config host add myminio http://127.0.0.1:9000 minio minio123
@@ -75,13 +75,13 @@ curl -X GET http://127.0.0.1:9200/_snapshot/my_minio_repository?pretty
 
 ## 7. Create Snapshots
 
-We're now all set to create snapshots. Create a snapshot using 
+We're now all set to create snapshots. Create a snapshot using
 
 ```sh
 curl -X PUT http://127.0.0.1:9200/_snapshot/my_minio_repository/snapshot_1/\?wait_for_completion=true
 ```
 
-This will make a snapshot and upload it to the Minio repository we just created. Verify using 
+This will make a snapshot and upload it to the MinIO repository we just created. Verify using 
 
 ```sh
 curl -X GET http://127.0.0.1:9200/_snapshot/my_minio_repository/snapshot_1/

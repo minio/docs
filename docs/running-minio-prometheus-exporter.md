@@ -1,16 +1,16 @@
-# Running Minio Prometheus Exporter [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Running MinIO Prometheus Exporter [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-This recipe explains how to run a Minio Prometheus exporter.
+This recipe explains how to run a MinIO Prometheus exporter.
 
 
 ## 1. Prerequisites
 
-* Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+* Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 * Get the minio-exporter from [here](https://github.com/joe-pll/minio-exporter).
 
 ## 2. Running the exporter
 
-Once the Minio server starts there are two ways to run the exporter, via building the binaries or using the docker image.
+Once the MinIO server starts there are two ways to run the exporter, via building the binaries or using the docker image.
 
 ### Run the exporter using the binaries
 ```bash
@@ -23,9 +23,9 @@ make
 | version | Print version number and leave | |
 | web.listen-address | The address to listen on to expose metrics. | *:9290* |
 | web.telemetry-path | The listening path for metrics. | */metrics* |
-| minio.server | The URL of the minio server. Use HTTPS if Minio accepts secure connections only. | *http://localhost:9000* |
-| minio.access-key | The value of the Minio access key. It is required in order to connect to the server | "" |
-| minio.access-secret | The calue of the Minio access secret. It is required in order to connect to the server | "" |
+| minio.server | The URL of the minio server. Use HTTPS if MinIO accepts secure connections only. | *http://localhost:9000* |
+| minio.access-key | The value of the MinIO access key. It is required in order to connect to the server | "" |
+| minio.access-secret | The calue of the MinIO access secret. It is required in order to connect to the server | "" |
 | minio.bucket-stats | Collect statistics about the buckets and files in buckets. It requires more computation, use it carefully in case of large buckets. | false |
 
 ```bash
@@ -42,9 +42,9 @@ docker run -p 9290:9290 joepll/minio-exporter -minio.server "minio.host:9000" -m
 The same result can be achieved with Enviroment variables.
 * **LISTEN_ADDRESS**: is the exporter address, as the option *web.listen-address*
 * **METRIC_PATH**: the telemetry path. It corresponds to *web.telemetry-path*
-* **MINIO_URL**: the URL of the Minio server, as *minio.server*
-* **MINIO_ACCESS_KEY**: the Minio access key (*minio.access-key*)
-* **MINIO_ACCESS_SECRET**: the Minio access secret (*minio.access-secret*)
+* **MINIO_URL**: the URL of the MinIO server, as *minio.server*
+* **MINIO_ACCESS_KEY**: the MinIO access key (*minio.access-key*)
+* **MINIO_ACCESS_SECRET**: the MinIO access secret (*minio.access-secret*)
 
 
 ```bash

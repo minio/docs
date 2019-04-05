@@ -1,10 +1,10 @@
-# 部署Apache Spark结合Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 部署Apache Spark结合MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-Apache Spark是用于快速处理大规模数据的通用引擎。 在本文中，我们将学习如何在Apache Spark-Shell上启动作业，将数据读写到Minio Server。
+Apache Spark是用于快速处理大规模数据的通用引擎。 在本文中，我们将学习如何在Apache Spark-Shell上启动作业，将数据读写到MinIO Server。
 
 ## 1. 前提条件
 
-- 从[这里](http://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
+- 从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 - 从[这里](https://www.apache.org/dist/spark/spark-2.1.2/spark-2.1.2-bin-without-hadoop.tgz)下载Apache Spark版本 `spark-2.1.2-bin-without-hadoop`。
 - 从[这里](https://www.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz)下载Apache Hadoop版本 `hadoop-2.8.2`。  
 - 下载其它依赖
@@ -32,7 +32,7 @@ export PATH=$PATH:$HADOOP_HOME/bin
 export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 ```
 
-然后打开`$HADOOP_HOME/etc/hadoop/core-site.xml`进行编辑。在本示例中，Minio Server运行在`http://127.0.0.1:9000`，access key是`minio`,secret key是`minio123`，请根据你的实际值进行修改。
+然后打开`$HADOOP_HOME/etc/hadoop/core-site.xml`进行编辑。在本示例中，MinIO Server运行在`http://127.0.0.1:9000`，access key是`minio`,secret key是`minio123`，请根据你的实际值进行修改。
 
 
 ```xml
@@ -101,11 +101,11 @@ Type :help for more information.
 scala> 
 ```
 
-## 4. 测试Spark-Shell是否能操作Minio server
+## 4. 测试Spark-Shell是否能操作MinIO server
 
 ### 读
 
-在本示例中，Minio Server是运行在`http://127.0.0.1:9000`.要测试Spark-Shell是否可以正常读，请在你的Minio Server上创建一个名为`spark-test`的存储桶，然后上传一个测试文件。以下是使用`mc`操作的示例
+在本示例中，MinIO Server是运行在`http://127.0.0.1:9000`.要测试Spark-Shell是否可以正常读，请在你的MinIO Server上创建一个名为`spark-test`的存储桶，然后上传一个测试文件。以下是使用`mc`操作的示例
 
 ```sh
 mc config host add myminio http://127.0.0.1:9000 minio minio123
@@ -124,7 +124,7 @@ b1.collect().foreach(println)
 
 ### 写
 
-为了测试Spark-Shell是否可以写数据到Minio Server,请切换到Spark-Shell terminal,然后运行
+为了测试Spark-Shell是否可以写数据到MinIO Server,请切换到Spark-Shell terminal,然后运行
 
 ```sh
 import spark.implicits._
@@ -135,7 +135,7 @@ distData.saveAsTextFile("s3a://spark-test/test-write")
 
 你应该可以看见在`spark-test`存储桶下创建一了一个名为`test-write`的对象，数据是写入到该文件中。
 
-### Minio server使用HTTPS
+### MinIO server使用HTTPS
 
 如果你想使用自签名的证书来进行测试，你需要将这些证书添加到本地的JRE `cacerts`目录下。请参考以下脚本
 

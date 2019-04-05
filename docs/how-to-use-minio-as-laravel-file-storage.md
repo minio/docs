@@ -1,10 +1,10 @@
-# How to use Minio Server as [Laravel](https://laravel.com) Custom File Storage 
+# How to use MinIO Server as [Laravel](https://laravel.com) Custom File Storage 
 
-`Laravel` has a customizable file storage system with ability to create custom drivers for it. In this recipe we will implement a custom file system driver to use Minio server for managing files.
+`Laravel` has a customizable file storage system with ability to create custom drivers for it. In this recipe we will implement a custom file system driver to use MinIO server for managing files.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](https://www.minio.io/downloads.html).
+Install MinIO Server from [here](https://www.min.io/download).
 
 ## 2. Install Required Dependency for Laravel
 
@@ -15,8 +15,8 @@ composer require coraxster/flysystem-aws-s3-v3-minio
 ```
 
 
-## 3. Create Minio Storage ServiceProvider 
-Create `MinioStorageServiceProvider.php` file in `app/Providers/` directory with this content:
+## 3. Create MinIO Storage ServiceProvider 
+Create `MinIOStorageServiceProvider.php` file in `app/Providers/` directory with this content:
 
 ```php
 <?php
@@ -30,7 +30,7 @@ use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use League\Flysystem\Filesystem;
 use Storage;
 
-class MinioStorageServiceProvider extends ServiceProvider
+class MinIOStorageServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -72,7 +72,7 @@ class MinioStorageServiceProvider extends ServiceProvider
 
 Register service provider by adding this line in `config/app.php` on `providers` section :  
 ```php
-App\Providers\MinioStorageServiceProvider::class
+App\Providers\MinIOStorageServiceProvider::class
 ```
 
 Add config for minio in `disks` section of `config/filesystems.php` file :
@@ -94,7 +94,7 @@ Add config for minio in `disks` section of `config/filesystems.php` file :
 ```  
 Note : `region` is not required & can be set to anything.
 
-## 4. Use Storage with Minio in Laravel
+## 4. Use Storage with MinIO in Laravel
 Now you can use `disk` method on storage facade to use minio driver :  
 ```php
 Storage::disk('minio')->put('avatars/1', $fileContents);
@@ -105,4 +105,4 @@ Or you can set default cloud driver to `minio` in `filesystems.php` config file 
 ```
 
 ##  Sample Project
-If you want, you could explore [laravel-minio-sample](https://github.com/m2sh/laravel-minio-sample) project and the  [unit tests](https://github.com/m2sh/laravel-minio-sample/blob/master/tests/Unit/MinioStorageTest.php) for understanding how to use Minio Server with Laravel
+If you want, you could explore [laravel-minio-sample](https://github.com/m2sh/laravel-minio-sample) project and the  [unit tests](https://github.com/m2sh/laravel-minio-sample/blob/master/tests/Unit/MinIOStorageTest.php) for understanding how to use MinIO Server with Laravel

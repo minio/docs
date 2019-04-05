@@ -1,11 +1,11 @@
-# How to use fog aws for Ruby with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use fog aws for Ruby with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 `fog-aws` is the module for 'fog' gem to support Amazon Web Services <http://aws.amazon.com/>.
-In this recipe we will learn how to use `fog-aws` for Ruby with Minio server.
+In this recipe we will learn how to use `fog-aws` for Ruby with MinIO server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
@@ -15,7 +15,7 @@ Install `fog-aws` for Ruby from  [here](https://github.com/fog/fog-aws)
 
 Please replace ``host``, ``endpoint``, ``access_key_id``, ``secret_access_key``, ``Bucket`` and ``Object`` with your local setup in this ``example.rb`` file.
 
-Example below shows put_object() and get_object() operations on Minio server using `fog-aws Ruby`.
+Example below shows put_object() and get_object() operations on MinIO server using `fog-aws Ruby`.
 
 ```ruby
 require 'fog/aws'
@@ -39,7 +39,7 @@ connection = Fog::Storage.new({
 connection.put_object(
         'testbucket',
         'testobject',
-        'Hello from Minio!!',
+        'Hello from MinIO!!',
         content_type: 'text/plain'
 )
 
@@ -57,5 +57,5 @@ print "Downloaded 'testobject' as  #{download_testobject}."
 
 ```sh
 ruby example.rb
-Downloaded 'testobject' as  Hello from Minio!!.
+Downloaded 'testobject' as  Hello from MinIO!!.
 ```

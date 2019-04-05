@@ -1,10 +1,10 @@
-# Apache Spark with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Apache Spark with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-Apache Spark is a fast and general engine for large-scale data processing. In this recipe we'll see how to launch jobs on Apache Spark-Shell that reads/writes data to a Minio server.
+Apache Spark is a fast and general engine for large-scale data processing. In this recipe we'll see how to launch jobs on Apache Spark-Shell that reads/writes data to a MinIO server.
 
 ## 1. Prerequisites
 
-- Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+- Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 - Download Apache Spark version `spark-2.3.0-bin-without-hadoop` from [here](https://www.apache.org/dyn/closer.lua/spark/spark-2.3.0/spark-2.3.0-bin-without-hadoop.tgz).
 - Download Apache Hadoop version `hadoop-2.8.2` from [here](https://archive.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz).
 - Download other dependencies
@@ -35,7 +35,7 @@ export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
 export SPARK_DIST_CLASSPATH=$(hadoop classpath)
 ```
 
-Then, open the file `$HADOOP_HOME/etc/hadoop/core-site.xml` for editing. In this example Minio server is running at `http://127.0.0.1:9000` with access key `minio` and secret key `minio123`. Make sure to update relevant sections with valid Minio server endpoint and credentials.
+Then, open the file `$HADOOP_HOME/etc/hadoop/core-site.xml` for editing. In this example MinIO server is running at `http://127.0.0.1:9000` with access key `minio` and secret key `minio123`. Make sure to update relevant sections with valid MinIO server endpoint and credentials.
 
 
 ```xml
@@ -108,7 +108,7 @@ scala>
 
 [Spark History Server](https://spark.apache.org/docs/latest/monitoring.html) provides web UI for completed and running Spark applications. Once Spark jobs are configured to log events, the history server displays both completed and incomplete Spark jobs. If an application makes multiple attempts after failures, the failed attempts will be displayed, as well as any ongoing incomplete attempt or the final successful attempt.
 
-Minio can be used as the storage back-end for Spark history back-end using the `s3a` file system. As we already have `$HADOOP_HOME/etc/hadoop/core-site.xml` file configured with `s3a` file system details. We need to now set up the `conf/spark-defaults.conf` file so history server uses `s3a` to store the files.
+MinIO can be used as the storage back-end for Spark history back-end using the `s3a` file system. As we already have `$HADOOP_HOME/etc/hadoop/core-site.xml` file configured with `s3a` file system details. We need to now set up the `conf/spark-defaults.conf` file so history server uses `s3a` to store the files.
 
 By default the `conf` directory has a `spark-defaults.conf.template` file, make a copy of the template file and rename it to `spark-defaults.conf`. Then add the below content to the file
 
@@ -120,7 +120,7 @@ spark.history.fs.logDirectory       s3a://spark/
 spark.hadoop.fs.s3a.impl            org.apache.hadoop.fs.s3a.S3AFileSystem
 ```
 
-Next step is to add jar files specified under the `spark.jars.packages` section to the `jars` directory. Once the files are added, create a new bucket called `spark` in the Minio instance specified in the `$HADOOP_HOME/etc/hadoop/core-site.xml` file. This is because we specified the log directory as `s3a://spark/`. 
+Next step is to add jar files specified under the `spark.jars.packages` section to the `jars` directory. Once the files are added, create a new bucket called `spark` in the MinIO instance specified in the `$HADOOP_HOME/etc/hadoop/core-site.xml` file. This is because we specified the log directory as `s3a://spark/`. 
 
 Finally start Spark history server using
 
@@ -130,11 +130,11 @@ Finally start Spark history server using
 
 If everything works fine you should be able to see the console on `http://localhost:18080/`.
 
-## 5. Test if Spark-Shell can communicate with Minio server
+## 5. Test if Spark-Shell can communicate with MinIO server
 
 ### Read
 
-For this recipe, Minio server is running on `http://127.0.0.1:9000`. To test if read works on Spark-Shell, create a bucket called `spark-test` on your Minio server and upload a test file. Here is
+For this recipe, MinIO server is running on `http://127.0.0.1:9000`. To test if read works on Spark-Shell, create a bucket called `spark-test` on your MinIO server and upload a test file. Here is
 how to do this with `mc`
 
 ```sh
@@ -150,13 +150,13 @@ val b1 = sc.textFile("s3a://spark-test/test.json")
 b1.collect().foreach(println)
 ```
 
-You should be able to see the text file you uploaded to Minio server.
+You should be able to see the text file you uploaded to MinIO server.
 
 If you configured Spark history server as described in step 4, you can see the event logs on the console here `http://localhost:18080/`.
 
 ### Write
 
-To test if Spark-Shell can write back to Minio server, switch to Spark-Shell terminal and run 
+To test if Spark-Shell can write back to MinIO server, switch to Spark-Shell terminal and run 
 
 ```sh
 import spark.implicits._
@@ -167,7 +167,7 @@ distData.saveAsTextFile("s3a://spark-test/test-write")
 
 You should see a prefix called `test-write` created inside the bucket `spark-test`. The data is written under the `test-write` prefix.
 
-### Minio server configured with HTTPS
+### MinIO server configured with HTTPS
 
 In case you are planning to use self-signed certificates for testing purposes, you'll need to add these certificates to local JRE `cacerts`. You can do this using
 

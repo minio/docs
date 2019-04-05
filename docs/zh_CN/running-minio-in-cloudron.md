@@ -1,8 +1,8 @@
-# 如何在Cloudron中运行Minio [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何在Cloudron中运行MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 [Cloudron](https://cloudron.io)是一个方便在你的服务器上运行和维护Web应用程序的平台。 
 
-在本文中，我们将学习如何在Cloudron中运行Minio。
+在本文中，我们将学习如何在Cloudron中运行MinIO。
 
 ## 1. 前提条件
 
@@ -13,26 +13,26 @@
 
 ### 从Cloudron App Store安装
 
-到Cloudron App Store页面，搜索'Minio'。
+到Cloudron App Store页面，搜索'MinIO'。
 
-  ![Minio in Cloudron App Store](../screenshots/cloudron/appstore.png)
+  ![MinIO in Cloudron App Store](../screenshots/cloudron/appstore.png)
 
 
-### 安装Minio
+### 安装MinIO
 
-安装对话框允许您输入要安装Minio的任何子域。这里我们选择子域`s3`。
+安装对话框允许您输入要安装MinIO的任何子域。这里我们选择子域`s3`。
 
   ![Install Cloudron](../screenshots/cloudron/install.png)
 
-### 访问Minio
+### 访问MinIO
 
-单击安装的应用程序列表中的Minio应用程序图标访问Minio 。
+单击安装的应用程序列表中的MinIO应用程序图标访问MinIO 。
 
-  ![Minio is installed on Cloudron](../screenshots/cloudron/installed.png)
+  ![MinIO is installed on Cloudron](../screenshots/cloudron/installed.png)
 
-### 结合Let's Encrypt运行Minio
+### 结合Let's Encrypt运行MinIO
 
-注意Minio已经设置好了Let's Encrypt的证书，你可以用Access Key `admin`和Secret Key `secretkey`来访问Minio。
+注意MinIO已经设置好了Let's Encrypt的证书，你可以用Access Key `admin`和Secret Key `secretkey`来访问MinIO。
 
-  ![Minio运行于Cloudron](../screenshots/cloudron/running.png)
+  ![MinIO运行于Cloudron](../screenshots/cloudron/running.png)
 

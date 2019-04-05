@@ -1,10 +1,10 @@
-# How to use AWS SDK for Java with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Java with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-`aws-sdk-java` is the official AWS SDK for the Java programming language. In this recipe we will learn how to use `aws-sdk-java` with Minio server.
+`aws-sdk-java` is the official AWS SDK for the Java programming language. In this recipe we will learn how to use `aws-sdk-java` with MinIO server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Setup dependencies
 
@@ -55,7 +55,7 @@ You can either download and install the [aws-java-sdk](https://sdk-for-java.amaz
 
 Replace ``aws-java-sdk-1.11.213/samples/AmazonS3/S3Sample.java`` with code below and update ``Endpoint``,``BasicAWSCredentials``, ``bucketName``, ``uploadFileName`` and ``keyName`` with your local setup.
 
-Example below shows upload and download object operations on Minio server using aws-sdk-java.
+Example below shows upload and download object operations on MinIO server using aws-sdk-java.
 
 ```java
 import java.io.BufferedReader;
@@ -164,4 +164,4 @@ Total time: 3 seconds
 ```
 ## 5. Explore Further
 
-* [Minio Java Library for Amazon S3](https://docs.minio.io/docs/java-client-quickstart-guide)
+* [MinIO Java Library for Amazon S3](https://docs.min.io/docs/java-client-quickstart-guide)

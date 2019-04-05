@@ -1,10 +1,10 @@
-# How to use AWS SDK for Python with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for Python with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-`aws-sdk-python` is the official AWS SDK for the Python programming language. In this recipe we will learn how to use `aws-sdk-python` with Minio server.
+`aws-sdk-python` is the official AWS SDK for the Python programming language. In this recipe we will learn how to use `aws-sdk-python` with MinIO server.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](http://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 ## 2. Installation
 
@@ -14,7 +14,7 @@ Install `aws-sdk-python` from AWS SDK for Python official docs [here](https://aw
 
 Please replace ``endpoint_url``,``aws_access_key_id``, ``aws_secret_access_key``, ``Bucket`` and ``Object`` with your local setup in this ``example.py`` file.
 
-Example below shows upload and download object operations on Minio server using aws-sdk-python.
+Example below shows upload and download object operations on MinIO server using aws-sdk-python.
 
 ```python
 #!/usr/bin/env/python
@@ -49,4 +49,4 @@ Downloaded 'piano.mp3' as  'classical.mp3'.
 ```
 ## 5. Explore Further
 
-* [Minio Python Library for Amazon S3](https://docs.minio.io/docs/python-client-quickstart-guide)
+* [MinIO Python Library for Amazon S3](https://docs.min.io/docs/python-client-quickstart-guide)

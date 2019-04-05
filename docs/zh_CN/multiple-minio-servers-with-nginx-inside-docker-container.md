@@ -1,10 +1,10 @@
-# 如何在docker container中运行多个使用Nginx的Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何在docker container中运行多个使用Nginx的MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Nginx是一个开源的Web服务器和反向代理服务器。
 
-在本文中，我们将学习如何使用Docker compose搭建一个Nginx和多个Minio实例。
+在本文中，我们将学习如何使用Docker compose搭建一个Nginx和多个MinIO实例。
 
-如果您想测试一下你的Minio生产环境设置能否与nginx使用，并且你希望在docker容器中安装nginx而不是本地安装，那么本教程将对您有所帮助。
+如果您想测试一下你的MinIO生产环境设置能否与nginx使用，并且你希望在docker容器中安装nginx而不是本地安装，那么本教程将对您有所帮助。
 
 ## 1. 前提条件
 
@@ -12,9 +12,9 @@ Nginx是一个开源的Web服务器和反向代理服务器。
 
 ## 2. 步骤
 
-### 获取用于Docker Compose的Minio设置
+### 获取用于Docker Compose的MinIO设置
 
-下载[docker-compose.yaml](https://github.com/minio/minio/blob/master/docs/orchestration/docker-compose/docker-compose.yaml?raw=true) 到你的当前工作目录。Docker Compose会自动拉取Minio Docker镜像，所以不需要手动下载Minio的安装文件。
+下载[docker-compose.yaml](https://github.com/minio/minio/blob/master/docs/orchestration/docker-compose/docker-compose.yaml?raw=true) 到你的当前工作目录。Docker Compose会自动拉取MinIO Docker镜像，所以不需要手动下载MinIO的安装文件。
 
 ### 在Docker Compose配置文件中加入nginx的配置
 

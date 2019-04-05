@@ -1,9 +1,9 @@
-# 如何使用Minio Server做为[Laravel](https://laravel.com)自定义文件存储 
+# 如何使用MinIO Server做为[Laravel](https://laravel.com)自定义文件存储 
 
-`Laravel`有一个可定制的文件存储系统，能够为它创建自定义的磁盘。在本文中，我们将实现一个自定义文件系统磁盘来使用Minio服务器来管理文件。
+`Laravel`有一个可定制的文件存储系统，能够为它创建自定义的磁盘。在本文中，我们将实现一个自定义文件系统磁盘来使用MinIO服务器来管理文件。
 
 ## 1. 前提条件
-从[这里](https://www.minio.io/downloads.html)下载并安装Minio Server。
+从[这里](https://www.min.io/download)下载并安装MinIO Server。
 
 ## 2. 给Laravel安装必要的依赖
 
@@ -14,8 +14,8 @@ composer require coraxster/flysystem-aws-s3-v3-minio
 ```
 
 
-## 3. 创建Minio Storage ServiceProvider 
-在`app/Providers/`文件下创建`MinioStorageServiceProvider.php`文件，内容如下：
+## 3. 创建MinIO Storage ServiceProvider 
+在`app/Providers/`文件下创建`MinIOStorageServiceProvider.php`文件，内容如下：
 
 ```php
 <?php
@@ -29,7 +29,7 @@ use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use League\Flysystem\Filesystem;
 use Storage;
 
-class MinioStorageServiceProvider extends ServiceProvider
+class MinIOStorageServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -72,7 +72,7 @@ class MinioStorageServiceProvider extends ServiceProvider
 通过在`providers`部分的`config/app.php`中添加这一行来注册服务提供者：  
 
 ```php
-App\Providers\MinioStorageServiceProvider::class
+App\Providers\MinIOStorageServiceProvider::class
 ```
 
 在`config/filesystems.php`文件的`disks`部分添加minio配置：
@@ -94,7 +94,7 @@ App\Providers\MinioStorageServiceProvider::class
 ```  
 注意 : `region`并不是必须的，而且可以设置成任何值。
 
-## 4. 在Laravel中使用Minio存储
+## 4. 在Laravel中使用MinIO存储
 现在你可以用`disk`方法来使用minio磁盘。
 
 ```php
@@ -107,4 +107,4 @@ Storage::disk('minio')->put('avatars/1', $fileContents);
 ```
 
 ##  示例工程
-如果你想的话，你可以自己研究[laravel-minio-sample](https://github.com/m2sh/laravel-minio-sample)项目和[unit tests](https://github.com/m2sh/laravel-minio-sample/blob/master/tests/Unit/MinioStorageTest.php)，来加深对Laravel结合Minio Server使用的理解。
+如果你想的话，你可以自己研究[laravel-minio-sample](https://github.com/m2sh/laravel-minio-sample)项目和[unit tests](https://github.com/m2sh/laravel-minio-sample/blob/master/tests/Unit/MinIOStorageTest.php)，来加深对Laravel结合MinIO Server使用的理解。

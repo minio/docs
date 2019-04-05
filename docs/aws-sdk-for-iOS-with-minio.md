@@ -1,10 +1,10 @@
-# How to use AWS SDK for iOS(swift-3) with Minio Server [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# How to use AWS SDK for iOS(swift-3) with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-In this recipe we will learn how to use `AWSS3` for iOS with Minio server. `AWSS3` is the official AWS S3 SDK for the swift/objective-c programming language.
+In this recipe we will learn how to use `AWSS3` for iOS with MinIO server. `AWSS3` is the official AWS S3 SDK for the swift/objective-c programming language.
 
 ## 1. Prerequisites
 
-Install Minio Server from [here](https://docs.minio.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
 To get latest `AWSS3` SDK v2.5.5 working with minio/minio:edge, you have to modify file `AWSSignature.m` from `AWSS3` SDK, remove line `[urlRequest setValue:@"Chunked" forHTTPHeaderField:@"Transfer-Encoding"];`, keep track on [aws-sdk-ios #638](https://github.com/aws/aws-sdk-ios/pull/638)
 
@@ -18,7 +18,7 @@ we only need 'AWSS3'
 
 Please replace `accessKey`, `secretKey`, and `url`, change the region base on what you need, service must set to `.S3`
 
-(`AWSS3` will auto remove port number if you type `xxxx:9000` in `url`, currently it only support full url without port, so please make sure you have a domain map to port 9000, you may need refer to this [Setup Nginx proxy with Minio Server](https://docs.minio.io/docs/setup-nginx-proxy-with-minio))
+(`AWSS3` will auto remove port number if you type `xxxx:9000` in `url`, currently it only support full url without port, so please make sure you have a domain map to port 9000, you may need refer to this [Setup Nginx proxy with MinIO Server](https://docs.min.io/docs/setup-nginx-proxy-with-minio))
 
 ``` swift
 let accessKey = "XXXXXXX"
@@ -62,4 +62,4 @@ for example if you running that eample project
 2. Click upload button on screen
 <img src="/docs/screenshots/iOS-test-app.png" alt="screenshot" height="250">
 
-3. Check on `Minio Browser`, inside images bucket, there should be an image there called prefix_test.jpg, means you susccessful upload the image
+3. Check on `MinIO Browser`, inside images bucket, there should be an image there called prefix_test.jpg, means you susccessful upload the image

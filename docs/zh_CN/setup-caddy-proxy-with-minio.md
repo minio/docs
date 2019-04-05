@@ -1,12 +1,12 @@
-# 为Minio Server设置Caddy proxy  [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 为MinIO Server设置Caddy proxy  [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Caddy是一个类似于Apache，nginx或者lighttpd的web服务器。Caddy的目的是简化Web开发，部署和托管工作流程，以便任何人都可以托管自己的网站而不需要特殊的技术知识。
 
-在本文中，我们将学习如何给Minio Server设置Caddy代理。
+在本文中，我们将学习如何给MinIO Server设置Caddy代理。
 
 ## 1. 前提条件
 
-从[这里](http://docs.minio.io/docs/minio-quickstart-guide)下载并安装Minio Server。
+从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 
 ## 2. 安装
 

@@ -1,4 +1,4 @@
-# Using pre-signed URLs to download via the browser [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# Using pre-signed URLs to download via the browser [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Using presigned URLs, you can allow a browser to download a private file
 directly from S3 without exposing your S3 credentials to the user. The
@@ -11,10 +11,10 @@ file and run it.
 ### Server code
 
 ```js
-const Minio = require('minio')
+const MinIO = require('minio')
 
-var client = new Minio.Client({
-    endPoint: 'play.minio.io',
+var client = new MinIO.Client({
+    endPoint: 'play.min.io',
     port: 9000,
     secure: true,
     accessKey: 'Q3AM3UQ867SPQQA43P2F',
@@ -22,11 +22,11 @@ var client = new Minio.Client({
 })
 ```
 
-In order to sign the request, we need to create the Minio client and pass it
+In order to sign the request, we need to create the MinIO client and pass it
 our credentials. With the client, you can download and upload files,
 among [much more](https://github.com/minio/minio-js/blob/master/docs/API.md).
 
-These are real credentials to an example Minio server — try it out!
+These are real credentials to an example MinIO server — try it out!
 
 ```js
 // express is a small HTTP server wrapper, but this works with any HTTP server
@@ -45,7 +45,7 @@ server.get('/presignedUrl', (req, res) => {
 server.listen(8080)
 ```
 
-[`presignedGetObject`](https://docs.minio.io/docs/javascript-client-api-reference#presignedGetObject)
+[`presignedGetObject`](https://docs.min.io/docs/javascript-client-api-reference#presignedGetObject)
 creates the URL we can use to download `pictures/house.png`. The link will
 automatically expire after 7 days — this can be adjusted using the optional
 `expiry` argument.

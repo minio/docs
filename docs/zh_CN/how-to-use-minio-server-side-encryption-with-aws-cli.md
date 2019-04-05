@@ -1,7 +1,7 @@
-# 如何使用aws-cli调用Minio服务端加密 [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
+# 如何使用aws-cli调用MinIO服务端加密 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
  
 
-Minio支持采用客户端提供的秘钥（SSE-C）进行S3服务端加密。
+MinIO支持采用客户端提供的秘钥（SSE-C）进行S3服务端加密。
 客户端**必须**为SSE-C请求指定三个HTTP请求头：
  - 算法标识符: `X-Amz-Server-Side-Encryption-Customer-Algorithm`  
    唯一的合法值是: `AES256`。
@@ -14,20 +14,20 @@ Minio支持采用客户端提供的秘钥（SSE-C）进行S3服务端加密。
  - 根据S3规范，minio服务器将拒绝任何通过不安全（非TLS）连接进行的SSE-C请求。 这意味着SSE-C**必须是**TLS / HTTPS。
  - SSE-C请求包含加密密钥。 如果通过非TLS连接进行SSE-C请求，则**必须**将SSE-C加密密钥视为受损。
  - 根据S3规范，SSE-C PUT操作返回的content-md5与上传对象的MD5-sum不匹配。
- - Minio Server使用防篡改加密方案来加密对象，并且**不会保存**加密密钥。 这意味着您有责任保管好加密密钥。 如果你丢失了某个对象的加密密钥，你将会丢失该对象。
- - Minio Server期望SSE-C加密密钥是*高熵*的。加密密钥是**不是**密码。如果你想使用密码，请确保使用诸如Argon2，scrypt或PBKDF2的基于密码的密钥派生函数（PBKDF）来派生高熵密钥。
+ - MinIO Server使用防篡改加密方案来加密对象，并且**不会保存**加密密钥。 这意味着您有责任保管好加密密钥。 如果你丢失了某个对象的加密密钥，你将会丢失该对象。
+ - MinIO Server期望SSE-C加密密钥是*高熵*的。加密密钥是**不是**密码。如果你想使用密码，请确保使用诸如Argon2，scrypt或PBKDF2的基于密码的密钥派生函数（PBKDF）来派生高熵密钥。
 
 ## 1. 前提条件
 
-从[这里](https://docs.minio.io/docs/how-to-secure-access-to-minio-server-with-tls)下载Minio Server,并安装成带有**TLS**的服务。
+从[这里](https://docs.min.io/docs/how-to-secure-access-to-minio-server-with-tls)下载MinIO Server,并安装成带有**TLS**的服务。
 
-注意一下，如果你使用的是自己签名的TLS证书，那么当你往Minio Server上传文件时，像aws-cli或者是mc这些工具就会报错。如果你想获得一个CA结构签名的TLS证书，请参考`Let's Encrypt`。自己签名的证书应该仅做为内部开发和测试。
+注意一下，如果你使用的是自己签名的TLS证书，那么当你往MinIO Server上传文件时，像aws-cli或者是mc这些工具就会报错。如果你想获得一个CA结构签名的TLS证书，请参考`Let's Encrypt`。自己签名的证书应该仅做为内部开发和测试。
 
 ## 2. 使用SSE-C和aws-cli
 
-从[这里](https://docs.minio.io/docs/aws-cli-with-minio)下载并安装aws-cli。
+从[这里](https://docs.min.io/docs/aws-cli-with-minio)下载并安装aws-cli。
 
-假设你在本地运行了一个Minio Server,地址是`https://localhost:9000`，并且使用的是自己签名的证书。为了绕过TLS证书的验证，你需要指定`--no-verify-ssl`。如果你的Minio Server使用的是一个CA认证的证书，那你**永远永远永远**不要指定`--no-verify-ssl，否则aws-cli会接受任何证书。
+假设你在本地运行了一个MinIO Server,地址是`https://localhost:9000`，并且使用的是自己签名的证书。为了绕过TLS证书的验证，你需要指定`--no-verify-ssl`。如果你的MinIO Server使用的是一个CA认证的证书，那你**永远永远永远**不要指定`--no-verify-ssl，否则aws-cli会接受任何证书。
 
 ### 2.1 上传一个对象
 
