@@ -1,8 +1,8 @@
 # How to monitor MinIO server with Prometheus [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-[Prometheus](https://prometheus.io) is a cloud-native monitoring platform, built originally at SoundCloud. Prometheus offers a multi-dimensional data model with time series data identified by metric name and key/value pairs. The data collection happens via a pull model over HTTP. Targets to pull data are discovered via service discovery or static configuration.
+[Prometheus](https://prometheus.io) is a cloud-native monitoring platform, built originally at SoundCloud. Prometheus offers a multi-dimensional data model with time series data identified by metric name and key/value pairs. The data collection happens via a pull model over HTTP/HTTPS. Targets to pull data from are discovered via service discovery or static configuration.
 
-MinIO exports Prometheus compatible data as an unauthorized endpoint at `/minio/prometheus/metrics`. Users looking to monitor their MinIO instances can point Prometheus configuration to scrape data from this endpoint.
+MinIO exports Prometheus compatible data as an authorized endpoint at `/minio/prometheus/metrics`. Users looking to monitor their MinIO instances can point Prometheus configuration to scrape data from this endpoint.
 
 This document explains how to setup Prometheus and configure it to scrape data from MinIO servers.
 
@@ -33,35 +33,42 @@ The Prometheus monitoring server
 
 Refer [Prometheus documentation](https://prometheus.io/docs/introduction/first_steps/) for more details.
 
-### 2. Prometheus configuration
+### 2. Generate the Prometheus Config with mc
 
-Prometheus configuration is written in YAML. Add MinIO server details to the config file under `scrape_configs` section
+The Prometheus endpoint in MinIO requires authorization. For secured access using a bearer token approach, override the default Prometheus config with the one generated using mc.
+To generate a Prometheus config for an alias, use [mc](https://docs.min.io/docs/minio-client-quickstart-guide) as follows `mc admin prometheus generate <alias>`.
+
+The command will generate the `scrape_configs` section of the prometheus.yml as follows:
 
 ```yaml
 scrape_configs:
-  - job_name: minio
-    metrics_path: /minio/prometheus/metrics
-    static_configs:
-      - targets: ['localhost:9000']
+- job_name: minio-job
+  bearer_token: <secret>
+  metrics_path: /minio/prometheus/metrics
+  scheme: http
+  static_configs:
+  - targets: ['localhost:9000']
 ```
 
-Note that `localhost:9000` is MinIO server instance address, you need to change it to appropriate value in your configuration file.
 
-### 3. Start Prometheus
+### 3. Update `scrape_configs` section in prometheus.yml
 
-Start Prometheus by running
+To authorize every scrape request, copy and paste the generated `scrape_configs` section in the prometheus.yml and restart the Prometheus service.
+
+### 4. Start Prometheus
+
+Start (or) Restart Prometheus service by running
 
 ```sh
 ./prometheus --config.file=prometheus.yml
 ```
-
 Here `prometheus.yml` is the name of configuration file. You can now see MinIO metrics in Prometheus dashboard. By default Prometheus dashboard is accessible at `http://localhost:9090`.
 
 ## List of MinIO metric exposed
 
 MinIO server exposes the following metrics on `/minio/prometheus/metrics` endpoint. All of these can be accessed via Prometheus dashboard. The full list of exposed metrics along with their definition is available in the demo server at https://play.min.io:9000/minio/prometheus/metrics
 
-- standard go runtime metrics prefixed by `go_` 
+- standard go runtime metrics prefixed by `go_`
 - process level metrics prefixed with `process_`
 - prometheus scrap metrics prefixed with `promhttp_`
 
