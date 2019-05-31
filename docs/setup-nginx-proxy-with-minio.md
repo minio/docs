@@ -29,6 +29,7 @@ server {
  # To disable buffering
  proxy_buffering off;
  location / {
+   proxy_http_version 1.1
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9000;
    health_check uri=/minio/health/ready;
@@ -50,12 +51,14 @@ If you want to serve web-application and MinIO from the same nginx port then you
 ```sh
  # Proxy requests to the bucket "photos" to MinIO server running on port 9000
  location /photos/ {
+   proxy_http_version 1.1
    proxy_buffering off;
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9000;
  }
  # Proxy any other request to the application server running on port 9001
  location / {
+   proxy_http_version 1.1
    proxy_buffering off;
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9001;
