@@ -58,39 +58,48 @@ The client-side web application's user interface contains a selector field that 
 
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
+  // `upload` iterates through all files selected and invokes a helper function called `retrieveNewURL`.
+  function upload() {
+    // Reset status text on every upload.
+    $('#status').text(`No uploads`)
+    // Get selected files from the input element.
+    var files = $("#selector")[0].files
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i]
+      // Retrieve a URL from our server.
+      retrieveNewURL(file, (file, url) => {
+        // Upload the file to the server.
+        uploadFile(file, url)
+      })
+    }
+  }
 
-// `upload` iterates through all files selected and invokes a helper function called `retrieveNewURL`.
-function upload() {
-   [$('#selector')[0].files].forEach(fileObj => {
-     var file = fileObj[0]
-     // Retrieve a URL from our server.
-     retrieveNewURL(file, url => {
-       // Upload the file to the server.
-       uploadFile(file, url)
-     })
-   })
-}
+  //`retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
+  // generate a pre-signed URL for use in uploading that file: 
+  function retrieveNewURL(file, cb) {
+    $.get(`/presignedUrl?name=${file.name}`, (url) => {
+      cb(file, url)
+    })
+  }
 
-//`retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
-// generate a pre-signed URL for use in uploading that file: 
-function retrieveNewURL(file, cb) {
-   $.get(`/presignedUrl?name=${file.name}`, (url) => {
-     cb(url)
-   })
-}
-
-// ``uploadFile` accepts the current filename and the pre-signed URL. It then invokes `XMLHttpRequest()`
-// to upload this file to S3 at `play.min.io:9000` using the URL:
-function uploadFile(file, url) {
-     var xhr = new XMLHttpRequest ()
-     xhr.open('PUT', url, true)
-     xhr.send(file)
-     xhr.onload = () => {
-       if (xhr.status == 200) {
-         $('#status').text(`Uploaded ${file.name}.`)
-       }
-     }
-}
+  // ``uploadFile` accepts the current filename and the pre-signed URL. It then invokes `XMLHttpRequest()`
+  // to upload this file to S3 at `play.min.io:9000` using the URL:
+  function uploadFile(file, url) {
+    var xhr = new XMLHttpRequest()
+    xhr.open('PUT', url, true)
+    xhr.send(file)
+    xhr.onload = () => {
+      if (xhr.status == 200) {
+        if ($('#status').text() === 'No uploads') {
+          // For the first file being uploaded, change upload status text directly.
+          $('#status').text(`Uploaded ${file.name}.`)
+        } else {
+          // If multiple files are uploaded, append upload status on the next line.
+          $('#status').append(`<br>Uploaded ${file.name}.`)
+        }
+      }
+    }
+  }
 </script>
 ```
 
