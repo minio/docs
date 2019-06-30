@@ -56,51 +56,50 @@ The client-side web application's user interface contains a selector field that 
 
 <div id="status">No uploads</div>
 
-<script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
   // `upload` iterates through all files selected and invokes a helper function called `retrieveNewURL`.
   function upload() {
-    // Reset status text on every upload.
-    $('#status').text(`No uploads`)
-    // Get selected files from the input element.
-    var files = $("#selector")[0].files
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i]
-      // Retrieve a URL from our server.
-      retrieveNewURL(file, (file, url) => {
-        // Upload the file to the server.
-        uploadFile(file, url)
-      })
-    }
-  }
-
-  //`retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
-  // generate a pre-signed URL for use in uploading that file: 
-  function retrieveNewURL(file, cb) {
-    $.get(`/presignedUrl?name=${file.name}`, (url) => {
-      cb(file, url)
-    })
-  }
-
-  // ``uploadFile` accepts the current filename and the pre-signed URL. It then invokes `XMLHttpRequest()`
-  // to upload this file to S3 at `play.min.io:9000` using the URL:
-  function uploadFile(file, url) {
-    var xhr = new XMLHttpRequest()
-    xhr.open('PUT', url, true)
-    xhr.send(file)
-    xhr.onload = () => {
-      if (xhr.status == 200) {
-        if ($('#status').text() === 'No uploads') {
-          // For the first file being uploaded, change upload status text directly.
-          $('#status').text(`Uploaded ${file.name}.`)
-        } else {
-          // If multiple files are uploaded, append upload status on the next line.
-          $('#status').append(`<br>Uploaded ${file.name}.`)
+        // Get selected files from the input element.
+        var files = document.querySelector("#selector").files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            // Retrieve a URL from our server.
+            retrieveNewURL(file, (file, url) => {
+                // Upload the file to the server.
+                uploadFile(file, url);
+            });
         }
-      }
     }
-  }
+
+    //`retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
+    // generate a pre-signed URL for use in uploading that file: 
+    function retrieveNewURL(file, cb) {
+        fetch(`/presignedUrl?name=${file.name}`).then((response) => {
+            response.text().then((url) => {
+                cb(file, url);
+            });
+        }).catch((e) => {
+            console.error(e);
+        });
+    }
+
+    // ``uploadFile` accepts the current filename and the pre-signed URL. It then invokes `XMLHttpRequest()`
+    // to upload this file to S3 at `play.min.io:9000` using the URL:
+    function uploadFile(file, url) {
+        if (document.querySelector('#status').innerText === 'No uploads') {
+            document.querySelector('#status').innerHTML = '';
+        }
+        fetch(url, {
+            method: 'PUT',
+            body: file
+        }).then(() => {
+            // If multiple files are uploaded, append upload status on the next line.
+            document.querySelector('#status').innerHTML += `<br>Uploaded ${file.name}.`;
+        }).catch((e) => {
+            console.error(e);
+        });
+    }
 </script>
 ```
 
-**Note:** This web application uses [jQuery](http://jquery.com/).
+**Note:** This uses the [File API](https://developer.mozilla.org/en-US/docs/Web/API/File), [QuerySelector API](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector), [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) & [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
