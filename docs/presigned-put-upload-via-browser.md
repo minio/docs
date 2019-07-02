@@ -71,7 +71,7 @@ The client-side web application's user interface contains a selector field that 
         }
     }
 
-    //`retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
+    // `retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
     // generate a pre-signed URL for use in uploading that file: 
     function retrieveNewURL(file, cb) {
         fetch(`/presignedUrl?name=${file.name}`).then((response) => {
@@ -83,7 +83,7 @@ The client-side web application's user interface contains a selector field that 
         });
     }
 
-    // ``uploadFile` accepts the current filename and the pre-signed URL. It then invokes `XMLHttpRequest()`
+    // ``uploadFile` accepts the current filename and the pre-signed URL. It then uses `Fetch API`
     // to upload this file to S3 at `play.min.io:9000` using the URL:
     function uploadFile(file, url) {
         if (document.querySelector('#status').innerText === 'No uploads') {

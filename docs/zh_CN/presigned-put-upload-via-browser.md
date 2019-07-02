@@ -40,9 +40,7 @@ server.listen(8080)
 
 ### 客户端代码
 
-程序使用了[jQuery](http://jquery.com/).
-
-用户通过浏览器选择了一个文件进行上传，然后在方法内部从Node.js服务端获得了一个URL。然后通过`XMLHttpRequest()`往这个URL发请求，直接把文件上传到`play.min.io:9000`。
+用户通过浏览器选择了一个文件进行上传，然后在方法内部从Node.js服务端获得了一个URL。然后通过`Fetch API`往这个URL发请求，直接把文件上传到`play.min.io:9000`。
 
 ```html
 <input type="file" id="selector" multiple>
@@ -50,52 +48,51 @@ server.listen(8080)
 
 <div id="status">No uploads</div>
 
-<script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
-  // `upload` iterates through all files selected and invokes a helper function called `retrieveNewURL`.
-  function upload() {
-    // Reset status text on every upload.
-    $('#status').text(`No uploads`)
-    // Get selected files from the input element.
-    var files = $("#selector")[0].files
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i]
-      // 从服务器获取一个URL
-      retrieveNewURL(file, (file, url) => {
-        // 上传文件到服务器
-        uploadFile(file, url)
-      })
-    }
-  }
-
-  // 发请求到Node.js server获取上传URL。
-  //`retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
-  // generate a pre-signed URL for use in uploading that file: 
-  function retrieveNewURL(file, cb) {
-    $.get(`/presignedUrl?name=${file.name}`, (url) => {
-      cb(file, url)
-    })
-  }
-
-  // 使用XMLHttpRequest来上传文件到S3。
-  // ``uploadFile` accepts the current filename and the pre-signed URL. It then invokes `XMLHttpRequest()`
-  // to upload this file to S3 at `play.min.io:9000` using the URL:
-  function uploadFile(file, url) {
-    var xhr = new XMLHttpRequest()
-    xhr.open('PUT', url, true)
-    xhr.send(file)
-    xhr.onload = () => {
-      if (xhr.status == 200) {
-        if ($('#status').text() === 'No uploads') {
-          // For the first file being uploaded, change upload status text directly.
-          $('#status').text(`Uploaded ${file.name}.`)
-        } else {
-          // If multiple files are uploaded, append upload status on the next line.
-          $('#status').append(`<br>Uploaded ${file.name}.`)
+    // `upload` iterates through all files selected and invokes a helper function called `retrieveNewURL`.
+    function upload() {
+        // Get selected files from the input element.
+        var files = document.querySelector("#selector").files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            // 从服务器获取一个URL
+            retrieveNewURL(file, (file, url) => {
+                // 上传文件到服务器
+                uploadFile(file, url);
+            });
         }
-      }
     }
-  }
+
+    // 发请求到Node.js server获取上传URL。
+    // `retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
+    // generate a pre-signed URL for use in uploading that file: 
+    function retrieveNewURL(file, cb) {
+        fetch(`/presignedUrl?name=${file.name}`).then((response) => {
+            response.text().then((url) => {
+                cb(file, url);
+            });
+        }).catch((e) => {
+            console.error(e);
+        });
+    }
+
+    // 使用Fetch API来上传文件到S3。
+    // ``uploadFile` accepts the current filename and the pre-signed URL. It then uses `Fetch API`
+    // to upload this file to S3 at `play.min.io:9000` using the URL:
+    function uploadFile(file, url) {
+        if (document.querySelector('#status').innerText === 'No uploads') {
+            document.querySelector('#status').innerHTML = '';
+        }
+        fetch(url, {
+            method: 'PUT',
+            body: file
+        }).then(() => {
+            // If multiple files are uploaded, append upload status on the next line.
+            document.querySelector('#status').innerHTML += `<br>Uploaded ${file.name}.`;
+        }).catch((e) => {
+            console.error(e);
+        });
+    }
 </script>
 ```
 
