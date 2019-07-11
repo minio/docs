@@ -1,6 +1,6 @@
 # Setup Nginx proxy with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-Nginx is an open source Web server and a reverse proxy server.  
+Nginx is an open source Web server and a reverse proxy server.
 
 In this recipe we will learn how to set up Nginx proxy with MinIO Server.
 
@@ -10,7 +10,7 @@ Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide
 
 ## 2. Installation
 
-Install Nginx from [here](http://nginx.org/en/download.html).  
+Install Nginx from [here](http://nginx.org/en/download.html).
 
 ## 3. Configuration
 
@@ -23,14 +23,19 @@ server {
  server_name example.com;
  # To allow special characters in headers
  ignore_invalid_headers off;
- # Allow any size file to be uploaded.  
+ # Allow any size file to be uploaded.
  # Set to a value such as 1000m; to restrict file size to a specific value
  client_max_body_size 0;
  # To disable buffering
  proxy_buffering off;
+
  location / {
    proxy_http_version 1.1
    proxy_set_header Host $http_host;
+   # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
+   proxy_read_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
+   proxy_send_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
+   proxy_request_buffering off; # Disable any internal request bufferring.
    proxy_pass http://localhost:9000;
    health_check uri=/minio/health/ready;
  }
@@ -53,6 +58,10 @@ If you want to serve web-application and MinIO from the same nginx port then you
  location /photos/ {
    proxy_http_version 1.1
    proxy_buffering off;
+   # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
+   proxy_read_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
+   proxy_send_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
+   proxy_request_buffering off; # Disable any internal request bufferring.
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9000;
  }
@@ -60,6 +69,10 @@ If you want to serve web-application and MinIO from the same nginx port then you
  location / {
    proxy_http_version 1.1
    proxy_buffering off;
+   # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
+   proxy_read_timeout 15m; # Default value is 60s which is too less for MinIO.
+   proxy_send_timeout 15m; # Default value is 60s which is too less for MinIO.
+   proxy_request_buffering off; # Disable any internal request bufferring.
    proxy_set_header Host $http_host;
    proxy_pass http://localhost:9001;
  }
