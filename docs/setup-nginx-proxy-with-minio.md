@@ -33,7 +33,7 @@ server {
    proxy_http_version 1.1
    proxy_set_header Host $http_host;
    # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
-   proxy_read_timeout 15m; # Default value is 60s which is too less for MinIO.
+   proxy_read_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
    proxy_send_timeout 15m; # Default value is 60s which is too less for MinIO.
    proxy_request_buffering off; # Disable any internal request bufferring.
    proxy_pass http://localhost:9000;
