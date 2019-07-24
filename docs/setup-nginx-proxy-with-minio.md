@@ -30,7 +30,7 @@ server {
  proxy_buffering off;
 
  location / {
-   proxy_http_version 1.1
+   proxy_http_version 1.1;
    proxy_set_header Host $http_host;
    # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
    proxy_read_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
@@ -56,7 +56,7 @@ If you want to serve web-application and MinIO from the same nginx port then you
 ```sh
  # Proxy requests to the bucket "photos" to MinIO server running on port 9000
  location /photos/ {
-   proxy_http_version 1.1
+   proxy_http_version 1.1;
    proxy_buffering off;
    # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
    proxy_read_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
@@ -67,7 +67,7 @@ If you want to serve web-application and MinIO from the same nginx port then you
  }
  # Proxy any other request to the application server running on port 9001
  location / {
-   proxy_http_version 1.1
+   proxy_http_version 1.1;
    proxy_buffering off;
    # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
    proxy_read_timeout 15m; # Default value is 60s which is too less for MinIO.
