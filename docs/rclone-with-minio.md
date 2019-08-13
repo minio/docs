@@ -58,6 +58,7 @@ Which makes the config file look like this
 
 ```sh
 [minio]
+type = s3
 env_auth = false
 access_key_id = USWUXHGYZQYFYFFIT3RE
 secret_access_key = MOJRH0mkL1IPauahWITSVvyDrQbEEIwljvmxdq03F
