@@ -70,11 +70,6 @@ server_side_encryption =
 
 ## 4. Commands
 
-MinIO doesn't support all the features of S3 yet.  In particular it
-doesn't support MD5 checksums (ETags) or metadata.  This means Rclone
-can't check MD5SUMs or store the modified date.  However you can work
-around this with the `--size-only` flag of Rclone.
-
 Here are some example commands
 
 List buckets
@@ -87,11 +82,11 @@ Make a new bucket
 
 Copy files into that bucket
 
-    rclone --size-only copy /path/to/files minio:bucket
+    rclone copy /path/to/files minio:bucket
 
 Copy files back from that bucket
 
-    rclone --size-only copy minio:bucket /tmp/bucket-copy
+    rclone copy minio:bucket /tmp/bucket-copy
 
 List all the files in the bucket
 
@@ -99,10 +94,10 @@ List all the files in the bucket
 
 Sync files into that bucket - try with `--dry-run` first
 
-    rclone --size-only --dry-run sync /path/to/files minio:bucket
+    rclone --dry-run sync /path/to/files minio:bucket
 
 Then sync for real
 
-    rclone --size-only sync /path/to/files minio:bucket
+    rclone sync /path/to/files minio:bucket
 
-See the [Rclone web site](http://rclone.org) for more examples and docs.
+See the [Rclone web site](https://rclone.org/s3/#minio) for more examples and docs.
