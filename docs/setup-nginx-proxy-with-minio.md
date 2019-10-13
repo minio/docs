@@ -36,8 +36,9 @@ server {
    proxy_read_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
    proxy_send_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
    proxy_request_buffering off; # Disable any internal request bufferring.
-   proxy_pass http://localhost:9000;
-   health_check uri=/minio/health/ready;
+   proxy_pass http://localhost:9000; # If you are using docker-compose this would be the hostname i.e. minio
+   # Health Check endpoint might go here. See https://www.nginx.com/resources/wiki/modules/healthcheck/
+   # /minio/health/ready;
  }
 }
 ```
@@ -51,7 +52,7 @@ Note:
 * Nginx disallows special characters by default.  Set ``ignore_invalid_headers off;`` to allow headers with special characters.
 
 ### Proxy requests based on the bucket
-If you want to serve web-application and MinIO from the same nginx port then you can proxy the MinIO requests based on the bucket name
+If you want to serve web-application and MinIO from the same nginx port then you can proxy the MinIO requests based on the bucket name using path based routing. For nginx this uses the `location` directive, which also supports object key pattern-match based proxy splitting.
 
 ```sh
  # Proxy requests to the bucket "photos" to MinIO server running on port 9000
