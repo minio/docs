@@ -1,21 +1,17 @@
-# How to use MinIO Server as [Laravel](https://laravel.com) Custom File Storage 
-
+# How to use MinIO Server as [Laravel](https://laravel.com) Custom File Storage
 `Laravel` has a customizable file storage system with ability to create custom drivers for it. In this recipe we will implement a custom file system driver to use MinIO server for managing files.
 
 ## 1. Prerequisites
-
 Install MinIO Server from [here](https://www.min.io/download).
 
 ## 2. Install Required Dependency for Laravel
-
 Install `league/flysystem` package for [`aws-s3`](https://github.com/coraxster/flysystem-aws-s3-v3-minio)  :
 fork based on https://github.com/thephpleague/flysystem-aws-s3-v3
 ```
 composer require coraxster/flysystem-aws-s3-v3-minio
 ```
 
-
-## 3. Create MinIO Storage ServiceProvider 
+## 3. Create MinIO Storage ServiceProvider
 Create `MinIOStorageServiceProvider.php` file in `app/Providers/` directory with this content:
 
 ```php
@@ -70,7 +66,7 @@ class MinIOStorageServiceProvider extends ServiceProvider
 }
 ```
 
-Register service provider by adding this line in `config/app.php` on `providers` section :  
+Register service provider by adding this line in `config/app.php` on `providers` section :
 ```php
 App\Providers\MinIOStorageServiceProvider::class
 ```
@@ -91,11 +87,11 @@ Add config for minio in `disks` section of `config/filesystems.php` file :
     ]
 
   ]
-```  
+```
 Note : `region` is not required & can be set to anything.
 
 ## 4. Use Storage with MinIO in Laravel
-Now you can use `disk` method on storage facade to use minio driver :  
+Now you can use `disk` method on storage facade to use minio driver :
 ```php
 Storage::disk('minio')->put('avatars/1', $fileContents);
 ```
@@ -104,5 +100,5 @@ Or you can set default cloud driver to `minio` in `filesystems.php` config file 
 'cloud' => env('FILESYSTEM_CLOUD', 'minio'),
 ```
 
-##  Sample Project
+## Sample Project
 If you want, you could explore [laravel-minio-sample](https://github.com/m2sh/laravel-minio-sample) project and the  [unit tests](https://github.com/m2sh/laravel-minio-sample/blob/master/tests/Unit/MinIOStorageTest.php) for understanding how to use MinIO Server with Laravel

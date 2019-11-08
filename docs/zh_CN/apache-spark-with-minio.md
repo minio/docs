@@ -1,20 +1,18 @@
 # 部署Apache Spark结合MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
-
 Apache Spark是用于快速处理大规模数据的通用引擎。 在本文中，我们将学习如何在Apache Spark-Shell上启动作业，将数据读写到MinIO Server。
 
 ## 1. 前提条件
-
 - 从[这里](https://docs.min.io/docs/minio-quickstart-guide)下载并安装MinIO Server。
 - 从[这里](https://www.apache.org/dist/spark/spark-2.1.2/spark-2.1.2-bin-without-hadoop.tgz)下载Apache Spark版本 `spark-2.1.2-bin-without-hadoop`。
-- 从[这里](https://www.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz)下载Apache Hadoop版本 `hadoop-2.8.2`。  
+- 从[这里](https://www.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz)下载Apache Hadoop版本 `hadoop-2.8.2`。
 - 下载其它依赖
-    - [`Hadoop 2.8.2`](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws/2.8.2)
-    - [`HttpClient 4.5.3`](https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient/4.5.3)
-    - [`Joda Time 2.9.9`](https://mvnrepository.com/artifact/joda-time/joda-time/2.9.9)
-    - [`AWS SDK For Java Core 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-core/1.11.234)
-    - [`AWS SDK For Java 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk/1.11.234)
-    - [`AWS Java SDK For AWS KMS 1.11.234`](http://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kms/1.11.234)
-    - [`AWS Java SDK For Amazon S3 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3/1.11.234)
+  - [`Hadoop 2.8.2`](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws/2.8.2)
+  - [`HttpClient 4.5.3`](https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient/4.5.3)
+  - [`Joda Time 2.9.9`](https://mvnrepository.com/artifact/joda-time/joda-time/2.9.9)
+  - [`AWS SDK For Java Core 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-core/1.11.234)
+  - [`AWS SDK For Java 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk/1.11.234)
+  - [`AWS Java SDK For AWS KMS 1.11.234`](http://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kms/1.11.234)
+  - [`AWS Java SDK For Amazon S3 1.11.234`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3/1.11.234)
 
 ## 2. 安装
 
@@ -75,7 +73,6 @@ export SPARK_DIST_CLASSPATH=$(hadoop classpath)
     <description>The implementation class of the S3A Filesystem</description>
   </property>
 </configuration>
-
 ```
 
 然后启动Spark-Shell
@@ -93,12 +90,12 @@ Welcome to
     _\ \/ _ \/ _ `/ __/  '_/
    /___/ .__/\_,_/_/ /_/\_\   version 2.1.2
       /_/
-         
+
 Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_151)
 Type in expressions to have them evaluated.
 Type :help for more information.
 
-scala> 
+scala>
 ```
 
 ## 4. 测试Spark-Shell是否能操作MinIO server

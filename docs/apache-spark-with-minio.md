@@ -8,13 +8,13 @@ Apache Spark is a fast and general engine for large-scale data processing. In th
 - Download Apache Spark version `spark-2.3.0-bin-without-hadoop` from [here](https://www.apache.org/dyn/closer.lua/spark/spark-2.3.0/spark-2.3.0-bin-without-hadoop.tgz).
 - Download Apache Hadoop version `hadoop-2.8.2` from [here](https://archive.apache.org/dist/hadoop/core/hadoop-2.8.2/hadoop-2.8.2.tar.gz).
 - Download other dependencies
-    - [`Hadoop 2.8.2`](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws/2.8.2)
-    - [`HttpClient 4.5.3`](https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient/4.5.3)
-    - [`Joda Time 2.9.9`](https://mvnrepository.com/artifact/joda-time/joda-time/2.9.9)
-    - [`AWS SDK For Java Core 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-core/1.11.524)
-    - [`AWS SDK For Java 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk/1.11.524)
-    - [`AWS Java SDK For AWS KMS 1.11.524`](http://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kms/1.11.524)
-    - [`AWS Java SDK For Amazon S3 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3/1.11.524)
+  - [`Hadoop 2.8.2`](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws/2.8.2)
+  - [`HttpClient 4.5.3`](https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient/4.5.3)
+  - [`Joda Time 2.9.9`](https://mvnrepository.com/artifact/joda-time/joda-time/2.9.9)
+  - [`AWS SDK For Java Core 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-core/1.11.524)
+  - [`AWS SDK For Java 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk/1.11.524)
+  - [`AWS Java SDK For AWS KMS 1.11.524`](http://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kms/1.11.524)
+  - [`AWS Java SDK For Amazon S3 1.11.524`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3/1.11.524)
 
 ## 2. Installation
 
@@ -78,7 +78,6 @@ Then, open the file `$HADOOP_HOME/etc/hadoop/core-site.xml` for editing. In this
     <description>The implementation class of the S3A Filesystem</description>
   </property>
 </configuration>
-
 ```
 
 Then start Spark-Shell by
@@ -96,12 +95,12 @@ Welcome to
     _\ \/ _ \/ _ `/ __/  '_/
    /___/ .__/\_,_/_/ /_/\_\   version 2.3.0
       /_/
-         
+
 Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_162)
 Type in expressions to have them evaluated.
 Type :help for more information.
 
-scala> 
+scala>
 ```
 
 ## 4. (Optional) Start Spark-History server
@@ -120,13 +119,13 @@ spark.history.fs.logDirectory       s3a://spark/
 spark.hadoop.fs.s3a.impl            org.apache.hadoop.fs.s3a.S3AFileSystem
 ```
 
-Next step is to add jar files specified under the `spark.jars.packages` section to the `jars` directory. Once the files are added, create a new bucket called `spark` in the MinIO instance specified in the `$HADOOP_HOME/etc/hadoop/core-site.xml` file. This is because we specified the log directory as `s3a://spark/`. 
+Next step is to add jar files specified under the `spark.jars.packages` section to the `jars` directory. Once the files are added, create a new bucket called `spark` in the MinIO instance specified in the `$HADOOP_HOME/etc/hadoop/core-site.xml` file. This is because we specified the log directory as `s3a://spark/`.
 
 Finally start Spark history server using
 
 ```sh
-./sbin/start-history-server.sh 
-``` 
+./sbin/start-history-server.sh
+```
 
 If everything works fine you should be able to see the console on `http://localhost:18080/`.
 
@@ -156,7 +155,7 @@ If you configured Spark history server as described in step 4, you can see the e
 
 ### Write
 
-To test if Spark-Shell can write back to MinIO server, switch to Spark-Shell terminal and run 
+To test if Spark-Shell can write back to MinIO server, switch to Spark-Shell terminal and run
 
 ```sh
 import spark.implicits._

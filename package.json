@@ -1,7 +1,7 @@
 {
   "name": "cookbook",
   "version": "1.0.0",
-  "description": "Minio Cookbook",
+  "description": "MinIO Cookbook",
   "directories": {
     "doc": "docs"
   },
@@ -9,7 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/minio/cookbook.git"
   },
-  "author": "Minio, Inc.",
+  "author": "MinIO, Inc.",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/minio/cookbook/issues"

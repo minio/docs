@@ -1,5 +1,4 @@
 # How to use MinIO SDK for java with Clojure
-
 In this receipe we will learn how to use `minio-java` with Clojure.
 
 ## Prerequisites
@@ -11,7 +10,7 @@ lein --help
 ```
 
 ## Clojure Project
-Following are the steps involved foe using minio-java with Clojure : 
+Following are the steps involved foe using minio-java with Clojure:
 
 ### 1. Setup
 Create a new Clojure project using Leiningen.
@@ -30,7 +29,7 @@ lein deps
 ```
 Run this command to install list of dependencies to your project.
 
-Use Leiningen to start Clojure now - 
+Use Leiningen to start Clojure now -
 ```
 lein repl
 ```
@@ -45,7 +44,7 @@ nil
 Or you can run the project using command - `lein run`.
 
 ### 2. Download minio-java from maven
-Go to [`maven`](http://search.maven.org/) and search `minio`. 
+Go to [`maven`](http://search.maven.org/) and search `minio`.
 Download the lastest version and add dependency in the `project.clj`.
 
 ```
@@ -74,12 +73,10 @@ Use classes and methods from the imported class in your project.
   [& args]
     ;; makeBucket
     (.makeBucket (new io.minio.MinioClient "https://play.min.io:9000" "Q3AM3UQ867SPQQA43P2F" "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG") "testbucketclojure")
-    
+
     ;;putObject
     (.putObject (new io.minio.MinioClient "https://play.min.io:9000" "Q3AM3UQ867SPQQA43P2F" "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG") "testbucketclojure"  "objectname" "/Users/aarushiarya/Desktop/testFile")
     (println "Done.")
     )
-    
+
 ```
-
-

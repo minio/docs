@@ -29,7 +29,7 @@ connection = Fog::Storage.new({
                                                          # minio configuration
     host:                  'localhost',              # Provide your host name here, otherwise fog-aws defaults to
                                                          # s3.amazonaws.com
-    endpoint:              'http://localhost:9000', # Required, otherwise defauls to nil
+    endpoint:              'http://localhost:9000', # Required, otherwise defaults to nil
     path_style:         	true,                        # Required
 })
 

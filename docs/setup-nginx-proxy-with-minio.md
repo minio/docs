@@ -21,6 +21,7 @@ Add the following content as a file ``/etc/nginx/sites-enabled``, e.g. ``/etc/ng
 server {
  listen 80;
  server_name example.com;
+
  # To allow special characters in headers
  ignore_invalid_headers off;
  # Allow any size file to be uploaded.
@@ -30,15 +31,19 @@ server {
  proxy_buffering off;
 
  location / {
-   proxy_http_version 1.1;
+   proxy_set_header X-Real-IP $remote_addr;
+   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+   proxy_set_header X-Forwarded-Proto $scheme;
    proxy_set_header Host $http_host;
-   # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
-   proxy_read_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
-   proxy_send_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
-   proxy_request_buffering off; # Disable any internal request bufferring.
+
+   proxy_connect_timeout  300;
+   # Default is HTTP/1, keepalive is only enabled in HTTP/1.1
+   proxy_http_version 1.1;
+   proxy_set_header Connection "";
+
    proxy_pass http://localhost:9000; # If you are using docker-compose this would be the hostname i.e. minio
    # Health Check endpoint might go here. See https://www.nginx.com/resources/wiki/modules/healthcheck/
-   # /minio/health/ready;
+   # /minio/health/live;
  }
 }
 ```
@@ -57,24 +62,28 @@ If you want to serve web-application and MinIO from the same nginx port then you
 ```sh
  # Proxy requests to the bucket "photos" to MinIO server running on port 9000
  location /photos/ {
-   proxy_http_version 1.1;
-   proxy_buffering off;
-   # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
-   proxy_read_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
-   proxy_send_timeout 15m; # Default value is 60s which is not sufficient for MinIO.
-   proxy_request_buffering off; # Disable any internal request bufferring.
+   proxy_set_header X-Real-IP $remote_addr;
+   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+   proxy_set_header X-Forwarded-Proto $scheme;
    proxy_set_header Host $http_host;
+
+   proxy_connect_timeout  300;
+   # Default is HTTP/1, keepalive is only enabled in HTTP/1.1
+   proxy_http_version 1.1;
+   proxy_set_header Connection "";
    proxy_pass http://localhost:9000;
  }
  # Proxy any other request to the application server running on port 9001
  location / {
-   proxy_http_version 1.1;
-   proxy_buffering off;
-   # proxy_ssl_session_reuse on; # enable this if you are internally connecting over SSL
-   proxy_read_timeout 15m; # Default value is 60s which is too less for MinIO.
-   proxy_send_timeout 15m; # Default value is 60s which is too less for MinIO.
-   proxy_request_buffering off; # Disable any internal request bufferring.
+   proxy_set_header X-Real-IP $remote_addr;
+   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+   proxy_set_header X-Forwarded-Proto $scheme;
    proxy_set_header Host $http_host;
+
+   proxy_connect_timeout  300;
+   # Default is HTTP/1, keepalive is only enabled in HTTP/1.1
+   proxy_http_version 1.1;
+   proxy_set_header Connection "";
    proxy_pass http://localhost:9001;
  }
 ```
