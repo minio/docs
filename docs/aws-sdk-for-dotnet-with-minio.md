@@ -1,18 +1,17 @@
 # How to use AWS SDK for .NET with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
-
 `aws-sdk-dotnet` is the official AWS SDK for the .NET Framework. In this recipe we will learn how to use `aws-sdk-dotnet` with MinIO server.
 
 ## 1. Prerequisites
 
 Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
 
-When running MinIO server locally, the `MINIO_REGION` enviroment variable must be set.
+When running MinIO server locally, the `MINIO_REGION` environment variable must be set.
 
 Install Visual Studio 2015,  Visual Studio 2017 or Visual Studio Code. Find installation of the Visual Studio editions [here](https://www.visualstudio.com/downloads/).
 
 ## 2. Installation
 
-`aws-sdk-dotnet` installation is available as [Nuget package](https://www.nuget.org/packages/AWSSDK.S3/). This package contains only libraries that are necessary for work with AWS S3. 
+`aws-sdk-dotnet` installation is available as [Nuget package](https://www.nuget.org/packages/AWSSDK.S3/). This package contains only libraries that are necessary for work with AWS S3.
 Installation of the Nuget package is performed using "Manage Nuget Packages..." UI or by using Nuget Manager Console by typing ``Install-Package AWSSDK.S3``. The installation will automatically download the library for the .NET platform which is compatible with your project. The package exists for .NET Frameworks 3.5 and 4.5 and also for .NET Core 1.1.
 
 The older (version 2) package is also [available](https://www.nuget.org/packages/AWSSDK/), but it is not recommended for use since it downloads _all_ AWS SDK libraries and not only the S3 module.
@@ -43,11 +42,11 @@ class Program
     {
         var config = new AmazonS3Config
         {
-            RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL and it should match the `MINIO_REGION` enviroment variable.
+            RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL and it should match the `MINIO_REGION` environment variable.
             ServiceURL = "http://localhost:9000", // replace http://localhost:9000 with URL of your MinIO server
             ForcePathStyle = true // MUST be true to work correctly with MinIO server
         };
-        var amazonS3Client = new AmazonS3Client(accessKey, secretKey, config); 
+        var amazonS3Client = new AmazonS3Client(accessKey, secretKey, config);
 
         // uncomment the following line if you like to troubleshoot communication with S3 storage and implement private void OnAmazonS3Exception(object sender, Amazon.Runtime.ExceptionEventArgs e)
         // amazonS3Client.ExceptionEvent += OnAmazonS3Exception;

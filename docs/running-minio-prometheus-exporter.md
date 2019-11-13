@@ -39,7 +39,7 @@ docker pull joepll/minio-exporter
 docker run -p 9290:9290 joepll/minio-exporter -minio.server "minio.host:9000" -minio.access-key "login_name" -minio.access-secret "login_secret"
 ```
 
-The same result can be achieved with Enviroment variables.
+The same result can be achieved with Environment variables.
 * **LISTEN_ADDRESS**: is the exporter address, as the option *web.listen-address*
 * **METRIC_PATH**: the telemetry path. It corresponds to *web.telemetry-path*
 * **MINIO_URL**: the URL of the MinIO server, as *minio.server*

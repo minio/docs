@@ -3,7 +3,6 @@ language: node_js
 cache:
   directories:
     - $HOME/.npm
-    - $HOME/.yarn-cache
     - node_modules
 
 os:
@@ -13,15 +12,7 @@ env:
   - ARCH=x86_64
 
 node_js:
-  - '6'
-  
-before_install:
-  - npm i -g yarn
-
-install:
-  - yarn
+  - '12'
 
 script:
-  - yarn lint
-    
-  
+  - npm run lint

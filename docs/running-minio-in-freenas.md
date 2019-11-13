@@ -1,6 +1,5 @@
 # How to run MinIO in FreeNAS [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
-
-In this recipe we will learn how to run MinIO with FreeNAS. 
+In this recipe we will learn how to run MinIO with FreeNAS.
 
 ## 1. Prerequisites
 
@@ -124,6 +123,3 @@ Browse to `Jails -> View Jails` in the FreeNAS UI, select `Minio` and press the 
 
 ### Test MinIO
 Browse to `http(s)://<ip_address>:<port>` and confirm MinIO loads.
-
-
-
