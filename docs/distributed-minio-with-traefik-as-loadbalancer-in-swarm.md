@@ -115,7 +115,7 @@ services:
       - access_key
 
   minioproxy:
-    image: traefik
+    image: traefik:v1.7.16
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
