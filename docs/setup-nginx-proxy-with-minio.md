@@ -1,4 +1,4 @@
-# Setup Nginx proxy with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
+# Set up Nginx proxy with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 Nginx is an open source Web server and a reverse proxy server.
 
