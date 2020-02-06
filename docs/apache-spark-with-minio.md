@@ -69,8 +69,7 @@ Remember to update the `s3a` related args as per your actual MinIO deployment va
 
 ### Read Test
 
-For this recipe, MinIO server is running on `http://127.0.0.1:9000`. To test if read works on Spark-Shell, create a bucket called `spark-test` on your MinIO server and upload a test file. Here is
-how to do this with `mc`
+For this recipe, MinIO server is running on `http://127.0.0.1:9000`. To test if read works on Spark-Shell, create a bucket called `spark-test` on your MinIO server and upload a test file. Here is how to do this with `mc`
 
 ```sh
 mc config host add myminio http://127.0.0.1:9000 minio minio123
@@ -87,8 +86,6 @@ b1.collect().foreach(println)
 
 You should be able to see the text file you uploaded to MinIO server.
 
-If you configured Spark history server as described in step 4, you can see the event logs on the console here `http://localhost:18080/`.
-
 ### Write Test
 
 To test if Spark-Shell can write back to MinIO server, switch to Spark-Shell terminal and run
@@ -101,16 +98,6 @@ distData.saveAsTextFile("s3a://spark-test/test-write")
 ```
 
 You should see a prefix called `test-write` created inside the bucket `spark-test`. The data is written under the `test-write` prefix.
-
-### MinIO server configured with HTTPS
-
-In case you are planning to use self-signed certificates for testing purposes, you'll need to add these certificates to local JRE `cacerts`. You can do this using
-
-```sh
-keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -noprompt -alias mycert -file /home/username/.minio/certs/public.crt
-```
-
-Also, change the scheme to `https` in `fs.s3a.endpoint` in file `$HADOOP_HOME/etc/hadoop/core-site.xml`.
 
 ## 5. (Optional) Start Spark-History server
 
@@ -149,17 +136,11 @@ You can create, read, and write Delta tables on MinIO using the `s3a` connector.
 --conf spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem
 ```
 
-Here, we're using the Delta Lake release `0.5.0` with Scala `2.11` release, while the `s3a` fields based on the MinIO cluster. After you run this and get the Spark console, you can run delta and Spark APIs. Refer Delta Lake [storage configuration docs](https://docs.delta.io/latest/delta-storage.html) here.
-
-### Write Test
-
-To test if you can use the delta API, use the below commands in spark console
+Here, we're using the Delta Lake release `0.5.0` with Scala `2.11` release, while the `s3a` fields based on the MinIO cluster. After you run this and get the Spark console, you can run delta and Spark APIs. Refer Delta Lake [storage configuration docs](https://docs.delta.io/latest/delta-storage.html) here. To test if you can use the delta API, use the below commands in spark console
 
 ```sh
 spark.range(5).write.format("delta").save("s3a://spark-test/delta")
 ```
-
-### Read Test
 
 To check if the reads are working fine, attempt reading the file we created in write test.
 
@@ -167,3 +148,21 @@ To check if the reads are working fine, attempt reading the file we created in w
 val df = spark.read.format("delta").load("s3a://spark-test/delta")
 df.show()
 ```
+
+## 7. Configuration Notes
+
+### MinIO server configured with HTTPS
+
+In case you are planning to use self-signed certificates for testing purposes, you'll need to add these certificates to local JRE `cacerts`. You can do this using
+
+```sh
+keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -noprompt -alias mycert -file /home/username/.minio/certs/public.crt
+```
+
+Also, change the scheme to `https` in `spark.hadoop.fs.s3a.endpoint` field while passing to `spark-shell`.
+
+### MinIO server with custom region
+
+If you're using MinIO with a custom region (instead of default region `us-east-1`), you'll need to use endpoint with relevant region added. For example, if your MinIO server is running with region `ap-southeast-1` at `http://localhost:9000`, then `spark.hadoop.fs.s3a.endpoint` flag should be set to `http://s3.ap-southeast-1.localhost:9000`.
+
+However, please do note that this approach will not work if you're passing MinIO server's IP address in the `spark.hadoop.fs.s3a.endpoint` flag.
