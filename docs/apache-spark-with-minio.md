@@ -165,4 +165,4 @@ Also, change the scheme to `https` in `spark.hadoop.fs.s3a.endpoint` field while
 
 If you are using MinIO with a custom region (instead of default region `us-east-1`), you'll need to use endpoint with relevant region added. For example, if your MinIO server is running with region `ap-southeast-1` at `http://localhost:9000`, then `spark.hadoop.fs.s3a.endpoint` flag should be set to `http://s3.ap-southeast-1.localhost:9000`.
 
-However, please do note that this approach will not work if you're passing MinIO server's IP address in the `spark.hadoop.fs.s3a.endpoint` flag.
+However, please do note that this approach will not work if you are passing MinIO server's IP address in the `spark.hadoop.fs.s3a.endpoint` flag.
