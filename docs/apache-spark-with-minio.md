@@ -136,7 +136,7 @@ You can create, read, and write Delta tables on MinIO using the `s3a` connector.
 --conf spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem
 ```
 
-Here, we're using the Delta Lake release `0.5.0` with Scala `2.11` release, while the `s3a` fields based on the MinIO cluster. After you run this and get the Spark console, you can run delta and Spark APIs. Refer Delta Lake [storage configuration docs](https://docs.delta.io/latest/delta-storage.html) here. To test if you can use the delta API, use the below commands in spark console
+Here, we are using Delta Lake release `0.5.0` with Scala `2.11` release, while the `s3a` fields are based on the MinIO cluster. After you run this and get the Spark console, you can run delta and Spark APIs. Refer Delta Lake [storage configuration docs](https://docs.delta.io/latest/delta-storage.html) here. To test if you can use the delta API, use the commands given below in spark console
 
 ```sh
 spark.range(5).write.format("delta").save("s3a://spark-test/delta")
