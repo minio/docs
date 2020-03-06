@@ -36,10 +36,11 @@ server {
    proxy_set_header X-Forwarded-Proto $scheme;
    proxy_set_header Host $http_host;
 
-   proxy_connect_timeout  300;
+   proxy_connect_timeout 300;
    # Default is HTTP/1, keepalive is only enabled in HTTP/1.1
    proxy_http_version 1.1;
    proxy_set_header Connection "";
+   chunked_transfer_encoding off;
 
    proxy_pass http://localhost:9000; # If you are using docker-compose this would be the hostname i.e. minio
    # Health Check endpoint might go here. See https://www.nginx.com/resources/wiki/modules/healthcheck/
@@ -67,12 +68,15 @@ If you want to serve web-application and MinIO from the same nginx port then you
    proxy_set_header X-Forwarded-Proto $scheme;
    proxy_set_header Host $http_host;
 
-   proxy_connect_timeout  300;
+   proxy_connect_timeout 300;
    # Default is HTTP/1, keepalive is only enabled in HTTP/1.1
    proxy_http_version 1.1;
    proxy_set_header Connection "";
+   chunked_transfer_encoding off;
+
    proxy_pass http://localhost:9000;
  }
+
  # Proxy any other request to the application server running on port 9001
  location / {
    proxy_set_header X-Real-IP $remote_addr;
@@ -80,10 +84,12 @@ If you want to serve web-application and MinIO from the same nginx port then you
    proxy_set_header X-Forwarded-Proto $scheme;
    proxy_set_header Host $http_host;
 
-   proxy_connect_timeout  300;
+   proxy_connect_timeout 300;
    # Default is HTTP/1, keepalive is only enabled in HTTP/1.1
    proxy_http_version 1.1;
    proxy_set_header Connection "";
+   chunked_transfer_encoding off;
+
    proxy_pass http://localhost:9001;
  }
 ```
