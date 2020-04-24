@@ -7,7 +7,7 @@ In this recipe, we will learn how to run MinIO in Cloudron.
 ## 1. Prerequisites
 
 * You have Cloudron installed and running, if not follow [install instructions](https://cloudron.io/get.html#selfhost).
-* If you don't have a Cloudron, you can play with the [demo instance](https://my-demo.cloudron.me). The username and
+* If you don't have a Cloudron, you can play with the [demo instance](https://my.demo.cloudron.io). The username and
   password for the demo instance is `cloudron`.
 
 ## 2. Installation Steps
