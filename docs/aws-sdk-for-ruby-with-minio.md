@@ -55,3 +55,9 @@ print "Downloaded 'testobject' as  'download_testobject'. "
 ruby example.rb
 Downloaded 'testobject' as  'download_testobject'.
 ```
+## 5. Don't forget to run the minio server
+
+e.g.
+```sh
+./minio server /data
+```
