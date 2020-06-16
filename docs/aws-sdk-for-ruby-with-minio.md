@@ -57,7 +57,10 @@ Downloaded 'testobject' as  'download_testobject'.
 ```
 ## 5. Don't forget to run the minio server
 
+([Review the documentation](https://docs.min.io/) for specifics)
+
 e.g.
+
 ```sh
 ./minio server /data
 ```
