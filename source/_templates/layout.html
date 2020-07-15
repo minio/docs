@@ -1,0 +1,44 @@
+{# Import the theme's layout. #}
+{% extends "!layout.html" %}
+
+{# Custom CSS overrides #}
+
+{# Override content block #}
+
+{%- block header %}
+   <div class="header">
+      <a href="https://min.io">
+         <img class="logo" src="{{ pathto('_static/docs-logo.svg',1) }}" alt="Logo"/>
+      </a>
+      <div class="navbar">
+         <p style="color: white">This will someday contain a header</p>
+      </div>
+   </div>
+{%- endblock %}
+
+{%- block content %}
+   <div class="document">
+      {{ sidebar() }}
+      <div class=body>
+         {% block alertbar -%}
+            <div class="alert alert-info">
+               <span class="alert-message">
+                  <p>We're building a new version of the MinIO Documentation!
+                     If you can't find what you're looking for, check our 
+                     <a href="https://docs.min.io"> legacy documentation</a>. 
+                     Thank you for your patience.
+                  </p>
+               </span>
+            </div>
+         {% endblock %}
+         {% block body %} {% endblock %}
+         <div class="footer">
+            &copy;{{ copyright }}
+         </div>
+      </div>
+      <div id=localtoc class=localtoc>
+      </div>
+   </div>
+{%- endblock %}
+
+{%- block footer %}{%- endblock %}

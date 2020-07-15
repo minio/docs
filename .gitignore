@@ -1,0 +1,13 @@
+# Ignore build directory
+build
+
+# Ignore venv
+venv
+
+# Ignore vscode
+
+.vscode
+
+# ignore pycache
+
+__pycache__
