@@ -47,7 +47,7 @@ logger = logging.getLogger(__name__)
 class MinioMCCommand(SphinxDirective):
    """
    Description of a MinIO MC Command. Use this class when describing a top level
-   ``mc`` or ``mc admin`` command. ``MinioSubcommand`` objects use this
+   ``mc`` or ``mc admin`` command. ``MinioMCObjects`` objects use this
    as a prefix for linking purposes. 
    """
 
@@ -102,6 +102,7 @@ class MinioMCObject(ObjectDescription):
        'noindexentry': directives.flag,
        'fullpath': directives.flag,
        'option': directives.flag,
+       'notext': directives.flag,
     }
 
     def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
@@ -153,6 +154,8 @@ class MinioMCObject(ObjectDescription):
         
         if (alias != None):
            signode += addnodes.desc_name(name + ', ' + alias, format_name + ', ' + format_alias)
+        elif 'notext' in self.options:
+           signode += addnodes.desc_name(name, '')
         else:
            signode += addnodes.desc_name(name, format_name)
         

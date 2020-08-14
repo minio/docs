@@ -35,8 +35,10 @@ The following table lists :mc-cmd:`mc admin` commands:
    * - Command
      - Description
 
-   * - :mc:`mc service`
-     - Restart or stop MinIO servers. 
+   * - :mc:`mc admin service`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-service.rst
+          :start-after: start-mc-admin-service-desc
+          :end-before: end-mc-admin-service-desc
 
 
 .. _mc-admin-install:

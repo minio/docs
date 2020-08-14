@@ -21,6 +21,103 @@ support for both filesystems and Amazon S3-compatible cloud storage services
 
    mc [FLAGS] COMMAND [COMMAND FLAGS | -h] [ARGUMENTS...] ALIAS
 
+Quickstart
+----------
+
+1) Install ``mc``
+~~~~~~~~~~~~~~~~~
+
+Ensure that the host machine has :mc-cmd:`mc`
+:ref:`installed <mc-install>` prior to starting this procedure:
+
+.. include:: /includes/minio-mc-installation.rst
+
+2) Add an S3-Compatible Service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. important::
+
+   The following example temporarily disables the bash history to mitigate the
+   risk of authentication credentials leaking in plain text. This is a basic
+   security measure and does not mitigate all possible attack vectors. Defer to
+   security best practices for your operating system for inputting sensitive
+   information on the command line.
+
+Use the :mc-cmd:`mc alias add` command to add an Amazon S3-compatible host
+to the :mc-cmd:`mc` :ref:`configuration <mc-configuration>`.
+
+.. code-block:: shell
+   :class: copyable
+
+   bash +o history
+   mc alias add ALIAS ENDPOINT ACCESS_KEY SECRET_KEY --api [S3v2|S3v4]
+   bash -o history
+
+- Replace ``ALIAS`` with a name to associate to the S3 service. 
+  :mc-cmd:`mc` commands typically require ``ALIAS`` as an argument for
+  identifying which S3 service to execute against.
+
+- Replace ``ENDPOINT`` with the URL endpoint of the S3 service.
+
+- Replace ``ACCESS_KEY`` and ``SECRET_KEY`` with the access and secret 
+  keys for a user on the S3 service. 
+
+- The ``--api`` flag is optional and defaults to ``S3v4`` if ommitted.
+
+Replace each argument with the required values. Specifying only the 
+``mc config host add`` command starts an input prompt for entering the
+required values.
+
+Each of the following tabs contains a provider-specific example:
+
+.. tabs::
+
+   .. tab:: MinIO Server
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc alias add myminio https://minioserver.example.net ACCESS_KEY SECRET KEY
+
+   .. tab:: AWS S3 Storage
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc alias add myS3 https://s3.amazon.com/endpoint ACCESS_KEY SECRET KEY
+
+   .. tab:: Google Cloud Storage
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc alias add myGCS https://storage.googleapis.com/endpoint ACCESS_KEY SECRET KEY
+
+3) Test the Connection
+~~~~~~~~~~~~~~~~~~~~~~
+
+Use the :mc-cmd:`mc info` command to test the connection to
+the newly added MinIO deployment:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc info myminio
+
+The command returns information on the S3 service if successful. If
+unsuccessful, check each of the following:
+
+- The host machine has connectivity to the S3 service URL (i.e. using ``ping``
+  or ``traceroute``).
+
+- The specified ``ACCESSKEY`` and ``SECRETKEY`` correspond to a user on the
+  S3 service. The user must have permission to perform actions on the
+  service. 
+  
+  For MinIO deployments, see :doc:`/security/minio-authentication-authorization`
+  for more information on user access permissions. For other S3-compatible
+  services, defer to the documentation for that service.
+
 Command Quick Reference
 -----------------------
 
@@ -161,15 +258,16 @@ The following table lists :mc-cmd:`mc` commands:
      
 
 :mc-cmd:`mc` also includes an administration extension for managing MinIO
-deployments. See :program:`mc admin` for more complete documentation.
+deployments. See :mc-cmd:`mc admin` for more complete documentation.
 
 .. _mc-configuration:
 
 Configuration File
 ------------------
 
-:mc-cmd:`mc` stores data in a configuration file. Use the
-``--config-dir`` flag to specify a path to a ``JSON`` formatted configuration file.
+:mc-cmd:`mc` uses a ``JSON`` formatted configuration file used for storing
+certain kinds of information, such as the :mc-cmd:`aliases <mc alias>` for 
+each configured S3-compatible service.
 
 For Linux and OSX, the default configuration file location is 
 ``~/.mc/config.json``.
@@ -184,6 +282,8 @@ The following list describes each possible file path location in the order
 #. ``USERPROFILE\.mc\config.json``
 #. ``HOMEDRIVE+HOMEPATH\.mc\config.json``
 
+You can use the ``--config-dir``
+
 .. _mc-install:
 
 Installation
@@ -191,77 +291,19 @@ Installation
 
 .. include:: /includes/minio-mc-installation.rst
 
-Quickstart
-----------
-
-Ensure that the host machine has :mc-cmd:`mc`
-:ref:`installed <mc-install>` prior to starting this procedure.
-
-.. important::
-
-   The following example temporarily disables the bash history to mitigate the
-   risk of authentication credentials leaking in plain text. This is a basic
-   security measure and does not mitigate all possible attack vectors. Defer to
-   security best practices for your operating system for inputting sensitive
-   information on the command line.
-
-Use the :subcommand:`mc alias add` command to add an Amazon S3-compatible host
-to the :mc-cmd:`mc` :ref:`configuration <mc-configuration>`.
+:mc:`mc` includes a default :mc-cmd:`alias <mc alias>` for the
+https://play.min.io MinIO deployment. If the host machine has internet access,
+you can use the ``play`` alias for testing and development purposes. For
+example, the following lists all buckets on ``https://play.min.io``:
 
 .. code-block:: shell
    :class: copyable
 
-   bash +o history
-   mc alias add ALIAS ENDPOINT ACCESS_KEY SECRET_KEY --api [S3v2|S3v4]
-   bash -o history
+   mc ls play
 
-- Replace ``ALIAS`` with a name to associate to the S3 service. 
-  :mc-cmd:`mc` commands typically require ``ALIAS`` as an argument for
-  identifying which S3 service to execute against.
-
-- Replace ``ENDPOINT`` with the URL endpoint of the S3 service.
-
-- Replace ``ACCESS_KEY`` and ``SECRET_KEY`` with the access and secret 
-  keys for the S3 service. 
-
-- The ``--api`` flag is optional and defaults to ``S3v4`` if ommitted.
-
-Replace each argument with the required values. Specifying only the 
-``mc config host add`` command starts an input prompt for entering the
-required values.
-
-Each of the following tabs contains a provider-specific example:
-
-.. tabs::
-
-   .. tab:: MinIO Server
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc alias add myminio https://minioserver.example.net ACCESS_KEY SECRET KEY
-
-   .. tab:: AWS S3 Storage
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc alias add myS3 https://s3.amazon.com/endpoint ACCESS_KEY SECRET KEY
-
-   .. tab:: Google Cloud Storage
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc alias add myGCS https://storage.googleapis.com/endpoint ACCESS_KEY SECRET KEY
-
-Use the :command:`mc info` command to test the connection to
-the newly added MinIO deployment:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc info ALIAS
+The ``play`` MinIO deployment provides a simple sandbox for testing core S3
+functionality. Any S3-compatible tool can view and interact with data on
+``play``. Any data stored on ``play`` is public-facing and modifyable.
 
 .. _minio-mc-global-options:
 
@@ -281,6 +323,12 @@ Global Options
       :class: copyable
 
       mc --debug ls play
+
+.. option:: --config-dir
+
+   The path to a ``JSON`` formatted configuration file that
+   :program:`mc` uses for storing data. See :ref:`mc-configuration` for
+   more information on how :program:`mc` uses the configuration file.
 
 .. option:: --JSON
 

@@ -6,7 +6,7 @@
 
 .. contents:: On This Page
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc admin service
 
@@ -18,6 +18,46 @@ Description
 The :mc-cmd:`mc admin service` command can restart or stop MinIO servers.
 
 .. end-mc-admin-service-desc
+
+:mc-cmd:`mc admin service` affects *all* MinIO servers in the target deployment
+at the same time. The command interrupts in-progress API operations on
+the MinIO deployment. Exercise caution before issuing an update command on
+production environments.
+
+
+.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+   :class: note
+
+   .. include:: /includes/facts-mc-admin.rst
+      :start-after: start-minio-only
+      :end-before: end-minio-only
+
+Examples
+--------
+
+Restart MinIO Servers in Target Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/play-alias-available.rst
+   :start-after: myminio-alias
+   :end-before: end-myminio-alias
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin service restart myminio
+
+Stop MinIO Servers in Target Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/play-alias-available.rst
+   :start-after: myminio-alias
+   :end-before: end-myminio-alias
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin service stop myminio
 
 Syntax
 ------
@@ -61,55 +101,3 @@ Syntax
    :mc-cmd:`~mc admin service stop` stops *all* MinIO servers in the
    deployment.
 
-Behavior
---------
-
-Simultaneous Restart or Stop
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:mc-cmd:`mc admin service restart` and :mc-cmd:`mc admin service stop`
-affect *all* MinIO servers in the target deployment at the same time.
-The commands do not perform a rolling restart or similar zero or near-zero
-downtime restart procedure. Use :mc-cmd:`mc alias list` to review the currently
-configured aliases and their corresponding endpoints.
-
-.. important::
-   
-   ``mc admin service restart`` and ``mc admin service stop`` interrupts
-   in-progress API operations on the MinIO deployment. Exercise caution before
-   issuing either command in production environments.
-
-
-MinIO Deployments Only
-~~~~~~~~~~~~~~~~~~~~~~
-
-:mc-cmd:`mc admin service` is intended for use with MinIO servers only. MinIO
-provides no guarantees or support for using :mc-cmd:`mc admin service` 
-with other S3-compatible services.
-
-Examples
---------
-
-Restart MinIO Servers in Target Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: myminio-alias
-   :end-before: end-myminio-alias
-
-.. code-block:: shell
-   :class: copyable
-
-   mc admin service restart myminio
-
-Stop MinIO Servers in Target Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: myminio-alias
-   :end-before: end-myminio-alias
-
-.. code-block:: shell
-   :class: copyable
-
-   mc admin service stop myminio

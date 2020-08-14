@@ -82,12 +82,12 @@
 
    .. tab:: Source
 
-      Source installation is intended for developers and advanced users. The
-      :mc-cmd:`mc admin update` command does not support updating source-based
-      installations.
+      Installation from source is intended for developers and advanced users
+      and requires a working Golang environment. See 
+      `How to install Golang <https://golang.org/doc/install>`__.
 
-      Source installation requires a working Golang environment. 
-      See `How to install Golang <https://golang.org/doc/install>`__
+      Run the following commands in a terminal environment to install ``mc``
+      from source:
 
       .. code-block:: shell
          :class: copyable
@@ -96,17 +96,7 @@
          cd ${GOPATH}/src/github.com/minio/mc
          make
 
-:command:`mc` includes the https://play.min.io MinIO server for testing
-and development under the ``play`` alias. If the host machine has access to
-the public internet, you can use the ``play`` alias for testing and development
-purposes. For example, the following lists all buckets on 
-``https://play.min.io``:
+      To update a source-based installation, use ``go get -u``. 
+      :mc-cmd:`mc update` does not support source-based installations.
 
-.. code-block:: shell
-   :class: copyable
 
-   mc ls play
-
-The ``play`` alias is strictly for testing and development. Any S3-compatible
-tool can view and interact with data on ``play``. You should only store data on
-``play`` that is safe for public interaction. 

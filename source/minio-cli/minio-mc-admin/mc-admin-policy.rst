@@ -23,35 +23,52 @@ documents to define rules for accessing resources on a MinIO server.
 
 For complete documentation on MinIO PBAC, including policy document JSON
 structure and syntax, see
-:doc:`/security/minio-security-policy-based-access-control`.
+:doc:`/security/minio-authentication-authorization`.
 
-By default, MinIO deployments use the access key and secret key
-specified when starting the MinIO server or servers as the root credentials.
-These credentials provide complete control over the MinIO deployment and are
-not intended for use outside of administrative operations.
+Quick Reference
+---------------
 
-MinIO strongly recommends using :mc-cmd:`mc admin policy` to configure PBAC
-such that applications have the minimal set of privileges required for
-completing their workloads. MinIO provides :ref:`minio-security-pbac-built-in`
-policies as a baseline for configuring PBAC:
+:mc-cmd:`mc admin policy add TARGET POLICYNAME POLICYFILE <mc admin policy add>`
+   Creates a new policy on the target MinIO deployment. 
 
-- :userpolicy:`readonly`
-- :userpolicy:`readwrite`
-- :userpolicy:`diagnostics`
-- :userpolicy:`writeonly`
+   .. code-block:: shell
+      :class: copyable
 
-To apply a built-in policy to a user or group, use the 
-:mc-cmd:`mc admin policy set` command:
+      mc admin policy add play myNewPolicy /path/to/policy.json
 
-.. code-block:: shell
-   :class: copyable
+:mc-cmd:`mc admin policy list TARGET <mc admin policy list>`
+   Lists the available policies on the target MinIO deployment.
 
-   mc admin policy set myminio myReadOnlyPolicy readOnlyUser
+   .. code-block:: shell
+      :class: copyable
+      
+      mc admin policy list play
 
-   mc admin policy set myminio myReadWritePolicy readWriteGroup
+:mc-cmd:`mc admin policy info TARGET POLICYNAME <mc admin policy info>`
+   Returns the policy in JSON format from the target MinIO deployment.
 
-For more information on creating users and groups, see 
-:mc-cmd:`mc admin users` and :mc-cmd:`mc admin groups` respectively.
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin policy info play myNewPolicy
+
+:mc-cmd:`mc admin policy set TARGET POLICYNAME user=|group= <mc admin policy set>`
+   Associates a policy to a user or group on the target MinIO deployment.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin policy set play myNewPolicy user=myMinioUser
+
+      mc admin policy set play myNewGroupPolicy group=myMinioGroup
+
+:mc-cmd:`mc admin policy remove TARGET POLICYNAME <mc admin policy remove>`
+   Removes a policy from the target MinIO deployment.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin policy remove play myNewPolicy
 
 Examples
 --------
@@ -61,9 +78,9 @@ Create a Policy
 
 .. include:: /includes/play-alias-available.rst
    :start-after: myminio-alias
-   :end-before: myminio-alias
+   :end-before: end-myminio-alias
 
-For example, consider the following JSON policy document:
+Consider the following JSON policy document:
 
 .. code-block:: javascript
    :class: copyable
@@ -83,7 +100,6 @@ For example, consider the following JSON policy document:
       ]
    }
 
-
 The following :mc-cmd:`mc admin policy add` command creates a new policy
 ``listbucketsonly`` on the ``myminio`` MinIO deployment using the
 example JSON policy document:
@@ -100,74 +116,105 @@ List Available Policies
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
+   :start-after: myminio-alias
+   :end-before: end-myminio-alias
 
 The following :mc-cmd:`mc admin policy list` command lists the available
-policies on the ``play`` MinIO deployment:
+policies on the ``myminio`` MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
+
+   mc admin policy list myminio
+
+The command returns output that resembles the following:
+
+.. code-block:: shell
+
+   readwrite
+   writeonly
+
+To retrieve information on a specific policy, use the 
+:mc-cmd:`mc admin policy info` command:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin policy info myminio writeonly
+
+The command returns output that resembles the following:
+
+.. code-block:: javascript
+
+   {
+      "Version": "2012-10-17",
+      "Statement": [
+         {
+            "Effect": "Allow",
+            "Action": [
+               "s3:PutObject"
+            ],
+            "Resource": [
+               "arn:aws:s3:::*"
+            ]
+         }
+      ]
+   }
 
 Remove a Policy
 ~~~~~~~~~~~~~~~
 
 .. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
+   :start-after: myminio-alias
+   :end-before: end-myminio-alias
+
+The following :mc-cmd:`mc admin policy remove` command removes a policy
+on the ``myminio`` MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
+
+   mc admin policy remove myminio listbucketsonly
+
 
 Apply a Policy to a User or Group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
+   :start-after: myminio-alias
+   :end-before: end-myminio-alias
+
+- Use the :mc-cmd:`mc admin user list` command to return a list of
+  users on the target MinIO deployment. 
+
+- Use the :mc-cmd:`mc admin group list` command to return a list of
+  users on the target MinIO deployment.
+
+The following :mc-cmd:`mc admin policy set` command associates the 
+``listbucketsonly`` policy to a user on the ``myminio`` MinIO deployment. 
+Replace the ``<USER>`` with the name of a user that exists on the deployment.
 
 .. code-block:: shell
    :class: copyable
+
+   mc admin policy set myminio listbucketsonly user=<USER>
+
+The following :mc-cmd:`mc admin policy set` command associates the 
+``listbucketsonly`` policy to a group on the ``myminio`` MinIO deployment. 
+Replace the ``<GROUP>`` with the name of a user that exists on the deployment.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin policy set myminio listbucketsonly group=<GROUP>
 
 Syntax
 ------
 
-:mc-cmd:`mc admin policy` has the following syntax:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc admin policy SUBCOMMAND [ARGUMENTS]
-
-:mc-cmd:`mc admin policy` supports the following subcommands:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 40 60
-   :width: 100%
-
-   * - Subcommand
-     - Description
-
-   * - :mc-cmd:`mc admin policy add`
-     - Creates a new policy on the target MinIO deployment.
-
-   * - :mc-cmd:`mc admin policy list`
-     - Lists the available policies on the target MinIO deployment.
-
-   * - :mc-cmd:`mc admin policy info`
-     - Returns the policy in JSON format from the target MinIO deployment.
-
-   * - :mc-cmd:`mc admin policy set`
-     - Associates a policy to a user or group on the target MinIO deployment.
-
-   * - :mc-cmd:`mc admin policy remove`
-     - Removes a policy from the target MinIO deployment.
-
 .. mc-cmd:: add
    :fullpath:
 
-   :mc-cmd:`mc admin policy add` creates a new policy on the target MinIO
+   Creates a new policy on the target MinIO
    deployment. The command has the following syntax:
 
    .. code-block:: shell
@@ -197,7 +244,7 @@ Syntax
 .. mc-cmd:: list
    :fullpath:
 
-   This command lists all policies on the target MinIO deployment. The command
+   Lists all policies on the target MinIO deployment. The command
    has the following syntax:
 
    .. code-block:: shell
@@ -206,7 +253,7 @@ Syntax
       mc admin policy list TARGET
 
    For example, the following command lists all policies on the 
-   ``play`` MinIO deployment:
+   ``myminio`` MinIO deployment:
 
    .. code-block:: shell
       :class: copyable
@@ -223,7 +270,7 @@ Syntax
 .. mc-cmd:: info
    :fullpath:
 
-   This command returns the specified policy in JSON format if it exists 
+   Returns the specified policy in JSON format if it exists 
    on the target MinIO deployment. The command has the following syntax:
 
    .. code-block:: shell
@@ -245,13 +292,16 @@ Syntax
 .. mc-cmd:: set
    :fullpath:
 
-   This command applies an existing policy to a user or group on the 
-   target MinIO deployment. The command has the following syntax:
+   Applies an existing policy to a user or group on the 
+   target MinIO deployment. :mc-cmd:`mc admin policy set` overwrites the
+   existing policy associated to the user or group.
+   
+   The command has the following syntax:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin policy set TARGET POLICYNAME [ user=USERNAME | group=GROUPNAME ]
+      mc admin policy set TARGET POLICYNAME[,POLICYNAME,...] [ user=USERNAME | group=GROUPNAME ]
 
    The command accepts the following arguments:
 
@@ -266,12 +316,21 @@ Syntax
 
       The name of the policy which the command associates to the specified
       :mc-cmd:`~mc admin policy set user` or 
-      :mc-cmd:`~mc admin policy set group`.
+      :mc-cmd:`~mc admin policy set group`. Specify multiple policies
+      as a comma-separated list.
+
+      MinIO deployments include the following :ref:`built-in policies
+      <minio-auth-authz-pbac-built-in>` policies by default:
+
+      - :userpolicy:`readonly` 
+      - :userpolicy:`readwrite`
+      - :userpolicy:`diagnostics`
+      - :userpolicy:`writeonly`
 
    .. mc-cmd:: user
 
       The name of the user to which the command associates the
-      :mc-cmd:`~mc admin policy set POLICYNAME`.
+      :mc-cmd:`~mc admin policy set POLICYNAME`. 
 
       Mutually exclusive with :mc-cmd:`~mc admin policy set GROUP`
 
@@ -299,7 +358,7 @@ Syntax
    .. mc-cmd:: TARGET
 
       The :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment on which
-      the command removes the :mc-cmd:`~mc admin policy set POLICYNAME`.
+      the command removes the :mc-cmd:`~mc admin policy remove POLICYNAME`.
 
    .. mc-cmd:: POLICYNAME
 

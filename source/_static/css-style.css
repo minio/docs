@@ -78,6 +78,10 @@ div.document {
     top: 75px;
 }
 
+div.section code {
+   color: #c72e49;
+}
+
 div.topic {
     background-color: #edf7f71A;
 }
@@ -98,18 +102,29 @@ div.localtoc ul {
 }
 
 div.localtoc ul li {
-   padding: 2px 0px;
-   transition: all 50ms ease-in-out;
+   transition: all 10ms ease-in-out;
 }
 
-div.localtoc ul li.active {
+/* div.localtoc ul li.active {
    color: #c72e49;
+   list-style: square;
+   position: relative;
+   border-left: 5px solid #c72e49;
+   padding-left: 5px;
+   margin-left: -10px;
+} */
+
+div.localtoc ul li p {
+   padding-top: 3px;
+   padding-bottom: 3px;
+}
+
+div.localtoc ul li p.active-p {
    position: relative;
    border-left: 5px solid #c72e49;
    padding-left: 5px;
    margin-left: -10px;
 }
-
 
 div.body a {
     color: #c72e49;
