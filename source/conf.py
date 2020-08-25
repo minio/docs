@@ -42,7 +42,18 @@ extensions = [
     'sphinx_tabs.tabs',
     'recommonmark',
     'sphinx_markdown_tables',
+    'sphinx-prompt', 
+    'sphinx_substitution_extensions'
 ]
+
+# -- Code Substitutions
+
+rst_prolog = """
+.. |server-release|         replace:: RELEASE.2020-08-27T05-16-20Z
+.. |operator-release|       replace:: v3.0.13
+.. |mc-release|             replace:: RELEASE.2020-08-20T00-23-01Z
+.. |kubectl-plugin-release| replace:: kubectl-minio-RELEASE
+"""
 
 # -- External Links
 
