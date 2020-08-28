@@ -1,19 +1,21 @@
-#Requirements
+# MinIO Docs
 
-Python3 (any version should be fine, latest is ideal)
+## Requirements
 
-Suggest creating a virtual environment to keep things clean and simple:
-
-Start by cloning the repository. `cd` into the cloned repo and `git checkout dev`. You might need to `git fetch` to refresh the repo.
-
-Once in the repository root, run the following.
+- python3 (any version should be fine, latest is ideal)
+- suggest creating a virtual environment to keep things clean and simple:
+- start by cloning the repository. `cd` into the cloned repo. You might need to `git fetch` to refresh the repo.
+- once in the repository root, run the following.
 
 ```shell
-
 python3 -m venv venv
+```
 
+```shell
 source venv/bin/activate
+```
 
+```shell
 pip3 install -r requirements.txt
 ```
 
@@ -35,9 +37,9 @@ Still need to work out deployment steps, but this should work for testing locall
 
 The `source` directory contains all of the source files, including css and js.
 
-The `sphinxext` directory contains some python stuff related to the custom directive/roles, and its a rats nest right now. 
+The `sphinxext` directory contains some python stuff related to the custom directive/roles, and its a rats nest right now.
 
-#TODO
+## TODO
 
 - Finish the remainder of the `mc`, `mc admin`, and `minio` reference material
 - Refine structure of reference pages
@@ -49,4 +51,3 @@ The `sphinxext` directory contains some python stuff related to the custom direc
 - Transition cookbook material as needed
 - Flesh out Baremetal deployment section
 - Scan for any remaining legacy material that needs migration
-
