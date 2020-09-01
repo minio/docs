@@ -24,21 +24,35 @@ Installation
 Prerequisites
 ~~~~~~~~~~~~~
 
-- Kubernetes v1.17.0 or later
+.. list-table::
+   :width: 100%
+   :widths: 10 90
 
-- One Persistant Volumes (``PV``) created using the 
-  :doc:`MinIO Direct CSI </kubernetes/direct-csi>`
-  plugin for each :mc-cmd:`volume <kubectl minio tenant create volumes>` 
-  the ``minio`` server uses. For example, if the MinIO deployment will have
-  4 servers with 4 volumes each, the Kubernetes cluster should have 16
-  total ``PV`` created using the MinIO Direct CSI plugin.
+   * - .. raw:: html
 
-- ``kubectl`` configured for access to the target Kubernetes cluster. Note
-  that ``kubectl`` is suppored within one minor version older or newer than
-  the ``kube-apiserver`` on the destination cluser. See
-  the Kubernetes documentation 
-  :kube-docs:`Kubernetes version and version skew support policy
-  <setup/release/version-skew-policy>`
+          <input type="checkbox">
+
+     - Kubernetes v1.17.0 or later.
+
+   * - .. raw:: html
+
+          <input type="checkbox">
+   
+     - Persistant Volumes (``PV``) created using the 
+       :doc:`MinIO Direct CSI </kubernetes/direct-csi>` plugin. 
+       
+       The cluster should have one Direct CSI ``PV`` for each planned 
+       :mc-cmd:`volume <kubectl minio tenant create volumes>` in the MinIO
+       tenant. For example, if the MinIO deployment will have 4 servers with 4
+       volumes each, the Kubernetes cluster should have 16 total ``PV`` created
+       using the MinIO Direct CSI plugin.
+
+   * - .. raw:: html
+
+          <input type="checkbox">
+   
+     - A machine with ``kubectl`` installed and configured with access to the
+       target Kubernetes cluster. 
 
 This procedure assumes the default ``kubectl`` context points to the
 Kubernetes cluster in which you want to deploy the MinIO tenant. To
@@ -50,31 +64,24 @@ specify a different context, include the ``--context`` argument to
 1) Download the ``kubectl-minio`` Plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :minio-git:`Github Releases Page <opreator/releases>` lists all
-releases for the MinIO ``operator`` and the ``kubectl-minio`` plugin.
+Download the latest ``kubectl-minio`` binary from the MinIO ``operator``
+:minio-git:`github repository <opreator/releases>` and place it into your system
+``PATH``. You may need to use ``chmod`` or an equivalent utility to set the
+binary as executable.
 
-Download the latest release onto a host machine with ``kubectl`` installed.
-The following command downloads the latest stable version of the 
-``kubectl-minio`` plugin:
+The following command:
+
+- Uses ``wget`` to download the latest stable version of the ``kubectl-minio``
+  plugin to the ``/usr/local/bin`` directory, *and*
+
+- Uses ``sudo chmod`` to set the binary as executable.
 
 .. code-block:: shell
    :class: copyable
    :substitutions:
 
-   wget https://github.com/minio/operator/releases/download/|operator-release|/|kubectl-plugin-release| \
-      -O ~/Downloads/kubectl-minio
-
-You may need to use ``chmod`` or an equivalent utility to set the binary file
-as executable:
-
-.. code-block:: shell
-   
-   sudo chmod +x ~/Downloads/kubectl-minio
-
-2) Move the ``kubectl-minio`` Binary into your System Path
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The location of your system path depends on your filesystem.
+   wget https://github.com/minio/operator/releases/download/|operator-release|/|kubectl-plugin-release| -O ~/usr/local/bin/kubectl-minio \
+   && sudo chmod +x /usr/local/bin/kubectl-minio
 
 - For Linux and OSX, type ``echo $PATH`` into a terminal to check which
   directories are included in the system path. Copy the ``kubectl-minio``
@@ -85,7 +92,7 @@ The location of your system path depends on your filesystem.
   system ``PATH`` environment variable. Defer to documentation on your version
   of Windows for instructions on setting the ``PATH`` variable.
 
-3) Validate the Installation
+2) Validate the Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Run the following ``kubectl`` command to validate the installation:
@@ -96,7 +103,7 @@ Run the following ``kubectl`` command to validate the installation:
 
 The operation should return the latest version of the ``kubectl-minio`` plugin.
 
-4) Create the Kubernetes Namespace
+3) Create the Kubernetes Namespace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Run the following ``kubectl`` command to create the namespace for the
@@ -105,9 +112,9 @@ MinIO tenant:
 .. code-block:: shell
    :class: copyable
 
-   kubectl create ns MinIOTenant1
+   kubectl create ns minio-tenant1
 
-5) Create a Kubernetes Secret for MinIO
+4) Create a Kubernetes Secret for MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO servers require an access key and secret key for configuring the
@@ -116,28 +123,45 @@ MinIO servers require an access key and secret key for configuring the
 .. code-block:: shell
    :class: copyable
 
-   kubectl create secret generic MinIOTenant1Secret \
+   kubectl create secret generic minio-tenant1-secret \
     --from-literal=accesskey=YOUR-ACCESS-KEY \
     --from-literal=secretkey=YOUR-SECRET-KEY-CHANGE-THIS
 
-6) Create a MinIO Tenant
+5) Create a MinIO Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Run the :mc-cmd:`kubectl minio tenant create` command to create a MinIO
 tenant on a Kubernetes cluster. The following example uses the
-default ``kubectl`` context.
+default ``kubectl`` context:
 
 .. code-block:: shell
    :class: copyable
 
    kubectl minio tenant create \
-     --name MinIOTenant1
+     --name minio-tenant1
      --namespace minio \
      --storageClass direct.csi.min.io \
      --servers 4 \
      --volumes 4 \
      --capacity 16Ti \
-     --secret MinIOTenant1Secret
+     --secret minio-tenant1-secret
+
+- :mc-cmd-option:`~kubectl minio tenant create servers` sets the total number
+  of ``minio`` servers in the cluster to ``4``. 
+
+- :mc-cmd-option:`~kubectl minio tenant create volumes` sets the total number
+  of volumes per server to ``4``. This results in ``16`` volumes across the
+  cluster. 
+
+- :mc-cmd-option:`~kubectl minio tenant create storageClass` sets the
+  storage class of each volume to ``direct.csi.min.io``. This ensures each
+  generated Persistant Volume Claim (``PVC``) binds to a Direct CSI 
+  Persistant Volume (``PV``).
+
+- :mc-cmd-option:`~kubectl minio tenant create capacity` sets the total
+  MinIO deployment storage capacity to ``16Ti`` or 16 Tebibytes. 
+  ``kubectl-minio`` distributes the capacity evenly over the total nunber of
+  volumes. In this example, the deployment has 16 x ``1Ti`` (1 Tebibyte) drives.
 
 Quick Reference
 ---------------
@@ -172,7 +196,13 @@ Supported Capacity Units
 
 The :mc-cmd:`kubectl minio tenant create` command requires specifying the
 total :mc-cmd-option:`~kubectl minio tenant create capacity` of the
-deployment. MinIO supports the following units:
+deployment. Similarly, the :mc-cmd:`kubectl minio tenant volumes add`
+requires specifying the total additional 
+:mc-cmd-option:`~kubectl minio tenant volumes add capacity` storage to add
+to the deployment.
+
+MinIO supports the following units when specifying storage ``capacity`` for
+tenant creation or expansion:
 
 .. list-table::
    :header-rows: 1
