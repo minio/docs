@@ -18,8 +18,43 @@ The MinIO ``kubectl-minio`` plugin is a part of the
 :minio-git:`MinIO Kubernetes Operator <operator/tree/master/kubectl-minio>` 
 Github repository.
 
+.. _minio-kubectl-minio-installation:
+
 Installation
 ------------
+
+Download the latest ``kubectl-minio`` binary from the MinIO ``operator``
+:minio-git:`github repository <operator/releases>` and place it into your system
+``PATH``. You may need to use ``chmod`` or an equivalent utility to set the
+binary as executable.
+
+The following command:
+
+- Uses ``wget`` to download the latest stable version of the ``kubectl-minio``
+  plugin to the ``/usr/local/bin`` directory, *and*
+
+- Uses ``sudo chmod`` to set the binary as executable.
+
+.. code-block:: shell
+   :class: copyable
+   :substitutions:
+
+   wget https://github.com/minio/operator/releases/download/|operator-release|/|kubectl-plugin-release| -O ~/usr/local/bin/kubectl-minio \
+   && sudo chmod +x /usr/local/bin/kubectl-minio
+
+- For Linux and OSX, type ``echo $PATH`` into a terminal to check which
+  directories are included in the system path. Copy the ``kubectl-minio``
+  plugin into the appropraite directory. For example,
+  ``/usr/local/bin``.
+
+- For Windows, ensure the path to the ``kubectl-minio`` binary exists in the
+  system ``PATH`` environment variable. Defer to documentation on your version
+  of Windows for instructions on setting the ``PATH`` variable.
+
+.. _minio-kubectl-minio-create-tenant:
+
+Create a MinIO Tenant using the MinIO Kubernetes Plugin
+-------------------------------------------------------
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -38,7 +73,7 @@ Prerequisites
 
           <input type="checkbox">
    
-     - Persistant Volumes (``PV``) created using the 
+     - Persistent Volumes (``PV``) created using the 
        :doc:`MinIO Direct CSI </kubernetes/direct-csi>` plugin. 
        
        The cluster should have one Direct CSI ``PV`` for each planned 
@@ -65,7 +100,7 @@ specify a different context, include the ``--context`` argument to
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Download the latest ``kubectl-minio`` binary from the MinIO ``operator``
-:minio-git:`github repository <opreator/releases>` and place it into your system
+:minio-git:`github repository <operator/releases>` and place it into your system
 ``PATH``. You may need to use ``chmod`` or an equivalent utility to set the
 binary as executable.
 
@@ -155,8 +190,8 @@ default ``kubectl`` context:
 
 - :mc-cmd-option:`~kubectl minio tenant create storageClass` sets the
   storage class of each volume to ``direct.csi.min.io``. This ensures each
-  generated Persistant Volume Claim (``PVC``) binds to a Direct CSI 
-  Persistant Volume (``PV``).
+  generated Persistent Volume Claim (``PVC``) binds to a Direct CSI 
+  Persistent Volume (``PV``).
 
 - :mc-cmd-option:`~kubectl minio tenant create capacity` sets the total
   MinIO deployment storage capacity to ``16Ti`` or 16 Tebibytes. 
@@ -182,12 +217,42 @@ Behavior
 
 .. _kubectl-minio-pvc:
 
-Persistant Volumes and Persistant Volume Claims
+Persistent Volumes and Persistent Volume Claims
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section will discuss in detail how the ``kubectl-minio`` plugin provisions
-Persistant Volume Claims (``PVC``) and what Persistant Volumes (``PV``) those
-claims are designed for. 
+The MinIO ``kubectl-minio`` plugin automatically generates
+Persistent Volume Claims (``PVC``) during tenant creation. The plugin calculates
+the total number of ``PVC`` to create by multiplying the number of
+:mc-cmd:`servers <kubectl minio tenant create servers>` by the number of 
+:mc-cmd:`volumes <kubectl minio tenant create volumes>` per server. 
+The plugin also sets the total requested capacity of each ``PVC`` by
+dividing the total number of volumes by the total tenant
+:mc-cmd:`capacity <kubectl minio tenant create capacity>`. 
+
+For example, consider a MinIO tenant with:
+
+- 4 servers,
+- 4 volumes per server, *and*
+- 16 ``Ti`` total capacity.
+
+The MinIO tenant has a total of ``(4 servers x 4 volumes / server)`` or
+``16`` volumes. Each volume has ``(16 volumes / 16 Ti capacity)`` or
+1 ``Ti`` capacity each.
+
+MinIO provides the :doc:`Direct CSI plugin </kubernetes/direct-csi>` for
+creating ``PV`` using locally-attached disks. When creating the MinIO tenant,
+set the :mc-cmd:`storageClass <kubectl minio tenant create storageclass>` to
+``direct.csi.min.io`` to bind the generated ``PVC`` to Direct CSI ``PV``. The
+``kubectl-minio`` plugin ensures that each ``minio`` server pod uses only
+``PVC`` volumes which correspond to a Direct CSI ``PV`` on the node running that
+pod.
+
+MinIO strongly recommends using Persistent Volumes (``PV``) that correspond to
+locally attached disks for maximum performance. MinIO cannot guarantee
+predictable behavior, performance, or reliabilty with non-local ``PV`` volumes.
+The MinIO Direct CSI plugin is specifically optimized for locally-attached
+storage. See :doc:`Direct CSI plugin </kubernetes/direct-csi>` for more
+information.
 
 .. _kubectl-minio-capacity-units:
 
@@ -359,8 +424,8 @@ The ``kubectl-minio`` operator adds the following commands to ``kubectl``:
       evenly distributes the specified number of volumes across the ``minio``
       servers in the deployment.
 
-      The operator generates a Persistant Volume Claim (``PVC``) for
-      each volume. The operator assumes that the appropriate Persistant
+      The operator generates a Persistent Volume Claim (``PVC``) for
+      each volume. The operator assumes that the appropriate Persistent
       Volumes (``PV``) exist to satisfy each generated ``PVC``. 
 
       For example, with ``--servers 4`` and ``--volumes 16``, the operator
@@ -375,7 +440,7 @@ The ``kubectl-minio`` operator adds the following commands to ``kubectl``:
       Specify an integer and :ref:`unit of measurement
       <kubectl-minio-capacity-units>`.
 
-      The operator generates a Persistant Volume Claim (``PVC``) for each
+      The operator generates a Persistent Volume Claim (``PVC``) for each
       :mc-cmd:`volume <kubectl minio tenant create volumes>` in the
       deployment. The operator uses the ``capacity`` to set the
       ``resources.requests.storage`` key of each ``PVC``. Specifically,
@@ -398,10 +463,10 @@ The ``kubectl-minio`` operator adds the following commands to ``kubectl``:
    .. mc-cmd:: storage-class, s
       :option:
 
-      The name of the storage to use during Persistant Volume Claim (``PVC``)
+      The name of the storage to use during Persistent Volume Claim (``PVC``)
       generation.
 
-      The operator generates a Persistant Volume Claim (``PVC``) for each
+      The operator generates a Persistent Volume Claim (``PVC``) for each
       :mc-cmd:`volume <kubectl minio tenant create volumes>` in the
       deployment. The operator uses the ``storage-class`` to set the
       ``storageClassName`` key of each ``PVC``. The ``PVC`` storage class
@@ -530,8 +595,8 @@ The ``kubectl-minio`` operator adds the following commands to ``kubectl``:
    :fullpath:
 
    Deletes a MinIO tenant in the Kubernetes cluster. The command
-   *only* removes pods and Persistant Volume Claims (``PVC``). The command
-   does *not* remove any Persistant Volumes (``PV``) used by the deleted
+   *only* removes pods and Persistent Volume Claims (``PVC``). The command
+   does *not* remove any Persistent Volumes (``PV``) used by the deleted
    ``PVC``. 
    
    The command has the following syntax:
@@ -596,8 +661,8 @@ The ``kubectl-minio`` operator adds the following commands to ``kubectl``:
       evenly distributes the specified number of volumes across the ``minio``
       servers in the zone.
 
-      The operator generates a Persistant Volume Claim (``PVC``) for
-      each volume. The operator assumes that the appropriate Persistant
+      The operator generates a Persistent Volume Claim (``PVC``) for
+      each volume. The operator assumes that the appropriate Persistent
       Volumes (``PV``) exist to satisfy each generated ``PVC``. 
 
       For example, with ``--servers 4`` and ``--volumes 16``, the operator
@@ -612,7 +677,7 @@ The ``kubectl-minio`` operator adds the following commands to ``kubectl``:
       Specify an integer and :ref:`unit of measurement
       <kubectl-minio-capacity-units>`.
 
-      The operator generates a Persistant Volume Claim (``PVC``) for each
+      The operator generates a Persistent Volume Claim (``PVC``) for each
       :mc-cmd:`volume <kubectl minio tenant volume add volumes>` in the
       deployment. The operator uses the ``capacity`` to set the
       ``resources.requests.storage`` key of each ``PVC``. Specifically,

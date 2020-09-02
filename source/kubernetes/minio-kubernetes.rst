@@ -152,7 +152,7 @@ where cluster downtime or data loss does not impact production workloads.
 Volume Configuration
 --------------------
 
-MinIO recommends provisioning :kube-docs:`persistant volumes
+MinIO recommends provisioning :kube-docs:`Persistent Polumes
 <concepts/storage/persistent-volumes/>` (``PV``) to use as disks for each MinIO
 server in the deployment. For example, if the node host machine has four
 locally-attached NVME drives, you should create a single ``PV`` for each drive.
@@ -160,7 +160,7 @@ The MinIO :minio-git:`Direct CSI Driver <minio/direct-csi>` is specifically
 designed and optimized for locally attached storage. Alternatively, you can
 create a Kubernetes :kube-docs:`local volume <concepts/storage/volumes/#local>`
 for each drive. When creating a MinIO pod specification, use a
-:kube-docs:`persistantVolumeClaim
+:kube-docs:`Persistant Volume Claim
 <concepts/storage/volumes/#persistentvolumeclaim>` (``PVC``) to reference the
 appropriate ``PV``.
 
