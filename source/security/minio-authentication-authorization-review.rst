@@ -13,8 +13,8 @@ Overview
 
 *Authentication* is the process of verifying the identity of a connecting
 client. MinIO authentication requires providing user credentials in the form of
-an access key and corresponding secret key. The MinIO deployment only grants
-access *if*:
+an access key (username) and corresponding secret key (password). The MinIO
+deployment only grants access *if*:
 
 - The access key corresponds to a user on the deployment, *and*
 - The secret key corresponds to the specified access key.
@@ -36,15 +36,6 @@ referenced in a user's assigned or inherited policies.
 
 - For more information on MinIO policy creation, see
   :ref:`minio-auth-authz-pbac-policies`.
-
-MinIO also supports Secure Token Service (STS) authentication, where clients use
-a supported OIDC-compliant third-party identity provider to perform
-authentication. MinIO uses the security token returned by the provider to
-generate a random access key and secret key that the client can use for
-authenticating to the deployment. The username specified to the third-party
-identity provider *must* match an existing user on the MinIO deployment. MinIO
-uses the policies associated to that existing user for authorizing client
-operations. For more information, see :ref:`minio-sts-overview`.
 
 .. _minio-auth-authz-users:
 
@@ -569,8 +560,8 @@ The following table lists the MinIO-supported policy action keys.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO supports the following actions for use with defining policies
-for :mc-cmd:`mc admin` operations. These actions are **only** valid for
-MinIO deployments and are **not** intended for use with other S3-compatible
+for :mc-cmd:`mc admin` operations. These actions are *only* valid for
+MinIO deployments and are *not* intended for use with other S3-compatible
 services:
 
 .. policy-action:: admin:*

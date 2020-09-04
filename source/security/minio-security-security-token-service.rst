@@ -1,3 +1,5 @@
+.. _minio-sts-overview:
+
 ============================
 MinIO Security Token Service
 ============================
