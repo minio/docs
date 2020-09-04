@@ -101,11 +101,9 @@ Syntax
    object(s). Requires the bucket to have versioning enabled. Use 
    :mc:`mc version` to enable bucket versioning.
 
-   Use :mc-cmd-option:`~mc rm rewind` and 
-   :mc-cmd-option:`~mc rm versions` together to clear the
-   object lock settings of all versions of the object or object(s) which
-   existed at the specified duration prior to the current date. *or* at the
-   specified date.
+   Use :mc-cmd-option:`~mc rm versions` and 
+   :mc-cmd-option:`~mc rm rewind` together to display on those object
+   versions which existed at a specific point in time.
 
    Mutually exclusive with :mc-cmd-option:`~mc rm version-id`.
 

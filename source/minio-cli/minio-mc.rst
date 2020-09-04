@@ -185,6 +185,11 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /minio-cli/minio-mc/mc-lock.rst
           :start-after: start-mc-lock-desc
           :end-before: end-mc-lock-desc
+
+   * - :mc:`mc ls`
+     - .. include:: /minio-cli/minio-mc/mc-ls.rst
+          :start-after: start-mc-ls-desc
+          :end-before: end-mc-ls-desc
      
    * - :mc:`mc mb`
      - .. include:: /minio-cli/minio-mc/mc-mb.rst

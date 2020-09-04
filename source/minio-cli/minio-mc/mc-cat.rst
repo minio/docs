@@ -46,15 +46,16 @@ Syntax
    specified duration. Enclose the specified date or duration in double
    quotes ``"``.
 
-   :mc-cmd:`mc cat rewind` requires the specified :mc-cmd:`~mc cat SOURCE`
-   bucket to have Bucket Versioning enabled. See
-   :mc-cmd:`mc versioning`.
-
    - For a date in time, specify an ISO8601-formatted timestamp. For example:
      ``--rewind "2020.03.24T10:00"``.
 
    - For duration, specify a string in ``#d#hh#mm#ss`` format. For example:
      ``--rewind "1d2hh3mm4ss"``.
+
+   :mc-cmd:`mc cat rewind` requires the specified :mc-cmd:`~mc cat SOURCE`
+   be an S3-compatible service that supports Bucket Versioning. For
+   MinIO deployments, use :mc-cmd:`mc version` to enable or disable bucket
+   versioning.
 
 .. mc-cmd:: encrypt-key
    :option:
