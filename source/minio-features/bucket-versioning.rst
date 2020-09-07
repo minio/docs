@@ -36,7 +36,7 @@ delete an object and its entire version history, use the
 Enable Bucket Versioning
 ------------------------
 
-Enabling bucket versioning on a MinIO deployemnt requires that the deployment
+Enabling bucket versioning on a MinIO deployment requires that the deployment
 have *at least* four disks. Specifically, Bucket Versioning depends on
 :doc:`Erasure Coding </introduction/erasure-coding>`. For MinIO deployments that
 meet the disk requirements, use the :mc-cmd:`mc version enable` command to
