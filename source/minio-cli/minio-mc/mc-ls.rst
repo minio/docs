@@ -26,16 +26,16 @@ Quick Reference
 
 :mc-cmd:`mc ls play/mybucket <mc ls TARGET>`
    Lists the contents of the ``mybucket`` bucket. ``play`` corresponds to the
-   :mc-cmd:`alias <mc-alias>` of a configured S3-compatible service.
+   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
 
 :mc-cmd:`mc ls --recursive play <mc ls recursive>`
    Recursively lists all buckets and objects on the S3-compatible service.
-   ``play`` corresponds to the :mc-cmd:`alias <mc-alias>` of a configured
+   ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a configured
    S3-compatible service.
 
 :mc-cmd:`mc ls --versions play/myversionedbucket <mc ls versions>`
    Lists the version of all objects in the ``myversionbucket`` bucket. ``play``
-   corresponds to the :mc-cmd:`alias <mc-alias>` of a configured S3-compatible
+   corresponds to the :mc-cmd:`alias <mc alias>` of a configured S3-compatible
    service.
 
    :mc-cmd-option:`mc ls versions` requires :ref:`bucket versioning
@@ -45,14 +45,21 @@ Quick Reference
 :mc-cmd:`mc ls --rewind 7d play/myversionedbucket <mc ls versions>`
    Lists the contents of the ``myversionedbucket`` bucket as they
    existed 7 days prior to the current date. ``play`` corresponds to the
-   :mc-cmd:`alias <mc-alias>` of a configured S3-compatible service.
+   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
 
-   :mc-cmd-option:`mc ls versions`  requires :ref:`bucket versioning
+   :mc-cmd-option:`mc ls versions` requires :ref:`bucket versioning
    <minio-bucket-versioning>`. Use :mc:`mc versions` to enable versioning
    on a bucket.
 
 Syntax
 ------
+
+.. Replacement substitutions
+
+.. |command| replace:: :mc-cmd:`mc ls`
+.. |rewind| replace:: :mc-cmd-option:`~mc ls rewind`
+.. |versions| replace:: :mc-cmd-option:`~mc ls versions`
+.. |alias| replace:: :mc-cmd-option:`~mc ls TARGET`
 
 :mc-cmd:`mc ls` has the following syntax:
 
@@ -92,38 +99,24 @@ Syntax
 .. mc-cmd:: versions
    :option:
 
-   Returns all versions of objects in the specified
-   :mc-cmd:`~mc ls TARGET` bucket.
+   .. include:: /includes/facts-versioning.rst
+      :start-after: start-versions-desc
+      :end-before: end-versions-desc
 
    Use :mc-cmd-option:`~mc ls versions` and 
    :mc-cmd-option:`~mc ls rewind` together to display on those object
    versions which existed at a specific point in time.
 
-   :mc-cmd-option:`mc ls versions` requires that the specified
-   :mc-cmd:`~mc ls TARGET` be an S3-compatible service that supports
-   :ref:`minio-bucket-versioning`:. For MinIO deployments, use :mc-cmd:`mc version` to
-   enable or disable bucket versioning.
-
 .. mc-cmd:: rewind
    :option:
-
-   Returns the contents of the bucket at a specified date or
-   after the specified duration.
-
-   - For a date in time, specify an ISO8601-formatted timestamp. For example:
-     ``--rewind "2020.03.24T10:00"``.
-
-   - For duration, specify a string in ``#d#hh#mm#ss`` format. For example:
-     ``--rewind "1d2hh3mm4ss"``.
+   
+   .. include:: /includes/facts-versioning.rst
+      :start-after: start-rewind-desc
+      :end-before: end-rewind-desc
 
    Use :mc-cmd-option:`~mc ls rewind` and 
    :mc-cmd-option:`~mc ls versions` together to display on those object
    versions which existed at a specific point in time.
-
-   :mc-cmd-option:`mc ls rewind` requires that the specified 
-   :mc-cmd:`~mc ls TARGET` be an S3-compatible service that supports
-   Bucket Versioning. For MinIO deployments, use :mc-cmd:`mc version` to
-   enable or disable bucket versioning. 
 
 .. mc-cmd:: incomplete, -I
    :option:
