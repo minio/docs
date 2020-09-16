@@ -39,6 +39,7 @@ Syntax
 :mc:`~mc share` supports the following commands:
 
 .. mc-cmd:: download
+   :fullpath:
 
    Generates a URL for using an HTTP GET request to retrieve the
    object(s).

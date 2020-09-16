@@ -37,7 +37,7 @@ Quick Reference
    :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
 
    :mc-cmd-option:`mc head rewind` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc versions` to enable versioning
+   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
    on a bucket.
 
 :mc-cmd:`mc head --version-id 4f85ff5c-ade5-4fb7-be54-1b62dd00f45f play/object.txt <mc head version-id>`
@@ -46,7 +46,7 @@ Quick Reference
    :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
 
    :mc-cmd-option:`mc head version-id` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc versions` to enable versioning
+   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
    on a bucket.
 
    Use :mc-cmd:`mc ls versions play\myobject.txt <mc ls versions>` to list all 

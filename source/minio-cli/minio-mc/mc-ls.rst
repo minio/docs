@@ -39,7 +39,7 @@ Quick Reference
    service.
 
    :mc-cmd-option:`mc ls versions` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc versions` to enable versioning
+   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
    on a bucket.
 
 :mc-cmd:`mc ls --rewind 7d play/myversionedbucket <mc ls versions>`
@@ -48,7 +48,7 @@ Quick Reference
    :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
 
    :mc-cmd-option:`mc ls versions` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc versions` to enable versioning
+   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
    on a bucket.
 
 Syntax
