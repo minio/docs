@@ -18,15 +18,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
    // how to resolve that.
 
    let options = {
-      root: document.querySelector('#scrollArea'),
+      root: document.querySelector('div.center'),
       rootMargin: '-150px 0px -300px 0px'
    }
 
    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
           const id = entry.target.getAttribute('id');
-          console.log("entry is " + id + " Ratio is " + entry.intersectionRatio)
-          console.log(entry.rootBounds)
           
           if (id == document.querySelector('.section[id]').getAttribute('id'))
             return 0
@@ -60,6 +58,26 @@ window.addEventListener('DOMContentLoaded', (event) => {
          observer.observe(section);
   });
 
+  const leftcolumn = document.querySelector('.left');
+  const centercolumn = document.querySelector('.center');
+  const rightcolumn = document.querySelector('.right');
+  const button = document.querySelector('.sphinxsidebarbutton');
+  const sidebarwrapper = document.querySelector('.sphinxsidebarwrapper');
+
+  function expando() {
+    button.classList.toggle('collapsed');
+    leftcolumn.classList.toggle('collapsed');
+    centercolumn.classList.toggle('collapsed');
+    sidebarwrapper.classList.toggle('collapsed');
+    if (button.textContent == "[x] Collapse") {
+       button.textContent = "[x] Expand";
+    }
+    else {
+       button.textContent = "[x] Collapse";
+    }
+  }
+   
+  button.addEventListener( "click", expando );
      
 
 });

@@ -5,22 +5,61 @@
 
 {# Override content block #}
 
+{%- macro miniosidebar() %}
+      {%- if render_sidebar %}
+      <div class="sphinxsidebarwrapper" role="navigation">
+        {%- block sidebarlogo %}
+        {%- if logo %}
+          <p class="logo"><a href="{{ pathto(master_doc)|e }}">
+            <img class="logo" src="{{ pathto('_static/' + logo, 1)|e }}" alt="Logo"/>
+          </a></p>
+        {%- endif %}
+        {%- endblock %}
+        {%- if sidebars != None %}
+          {#- new style sidebar: explicitly include/exclude templates #}
+          {%- for sidebartemplate in sidebars %}
+          {%- include sidebartemplate %}
+          {%- endfor %}
+        {%- else %}
+          {#- old style sidebars: using blocks -- should be deprecated #}
+          {%- block sidebartoc %}
+          {%- include "localtoc.html" %}
+          {%- endblock %}
+          {%- block sidebarrel %}
+          {%- include "relations.html" %}
+          {%- endblock %}
+          {%- block sidebarsourcelink %}
+          {%- include "sourcelink.html" %}
+          {%- endblock %}
+          {%- if customsidebar %}
+          {%- include customsidebar %}
+          {%- endif %}
+          {%- block sidebarsearch %}
+          {%- include "searchbox.html" %}
+          {%- endblock %}
+        {%- endif %}
+      </div>
+      {%- endif %}
+{%- endmacro %}
+
 {%- block header %}
-   <div class="header">
+   <nav class="navigation">
       <a href="https://min.io">
          <img class="logo" src="{{ pathto('_static/docs-logo.svg',1) }}" alt="Logo"/>
       </a>
-      <div class="navbar">
-         <p style="color: white">This will someday contain a header</p>
-      </div>
-   </div>
+   </nav>
 {%- endblock %}
 
 {%- block content %}
-   <div class="document">
-      {{ sidebar() }}
-      <div class=body>
-         {% block alertbar -%}
+
+   <div class="left column">
+      <button class="sphinxsidebarbutton button-collapse">[x] Collapse</button>
+      {{ miniosidebar() }}
+   </div>
+   <div class="flexwrapper">
+      <div class="center column">
+         <div class="body">
+            {% block alertbar -%}
             <div class="alert alert-info">
                <span class="alert-message">
                   <p>We're building a new version of the MinIO Documentation!
@@ -30,14 +69,17 @@
                   </p>
                </span>
             </div>
-         {% endblock %}
-         {% block body %} {% endblock %}
-         <div class="footer">
-            &copy;{{ copyright }}
+            {% endblock %}
+            {% block body %} {% endblock %}
+            <div class="footer">
+               &copy;{{ copyright }}
+            </div>
+            </div>
          </div>
+      <div class="right column">
+         <div id=localtoc class=localtoc></div>
       </div>
-      <div id=localtoc class=localtoc>
-      </div>
+
    </div>
 {%- endblock %}
 

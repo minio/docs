@@ -1,246 +1,257 @@
 @font-face {
-    font-family: "Mark";
-    src: url("fonts/Mark-Regular.woff2") format("woff2"),
-         url("fonts/Mark-Regular.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
+   font-family: "Mark";
+   src: url("fonts/Mark-Regular.woff2") format("woff2"),
+        url("fonts/Mark-Regular.woff") format("woff");
+   font-weight: normal;
+   font-style: normal;
 }
 
 :root {
-   --table-border-color: #e6e6e6;
+  --table-border-color: #e6e6e6;
+  --minio-red: #c72e49;
+  --minio-midnight: #012b35;
+  --minio-nautical: #00303f;
+  --minio-meridian: #132742;
+  --minio-glacier: #edf7f7;
+
 }
 
 body {
-  font-family: Mark, Helvetica, sans-serif;
-  font-size: 100%;
-}
-
-div.body {
-   min-width: 500px;
-   max-width: 600px;
-   margin: 0 0 0 300px;
-   position: relative;
-   z-index: 0;
-   padding-top: 10px;
-}
-
-div.body p {
-   font-size: 90%;
-}
-
-div.admonition {
    font-family: Mark, Helvetica, sans-serif;
-   border-left: 5px solid #c72e49;
-}
-
-div.admonition p.admonition-title {
-   font-family: Mark, Helvetica, sans-serif;
-   text-transform: uppercase;
    font-size: 100%;
-   font-weight: bold;
 }
 
-div.body h1,
-div.body h2,
-div.body h3,
-div.body h4,
-div.body h5,
-div.body h6 {
-    font-family: Mark, sans-serif;
-    font-weight: normal;
-    margin: 30px 0px 10px 0px;
-    padding: 0;
-    color: #c72e49;
+div.flexwrapper {
+   display: flex;
+   flex-flow: row wrap;
+   
+   width: auto;
+   height: 100vh;
+   /* overflow: hidden;
+   Have to comment this out because clicking anchors breaks layout. */
 }
 
-div.sphinxsidebar {
-    width: 300px;
-    font-size: 80%;
-    line-height: 1.5;
-    box-shadow: 5px 5px 5px #e6e6e6;
-    height: 100%;
-    z-index: 1
+div :target.h1,h2,h3,h4 {
+   scroll-margin-top: 100px;
 }
 
-div.sphinxsidebar h3,
-div.sphinxsidebar h4 {
-    font-family: Mark, sans-serif;
-    font-size: 24px;
-    font-weight: normal;
-    margin: 0 0 5px 0;
-    padding: 0;
-}
+/* Left Column CSS */
 
-div.document {
-    margin: 0 0 0 0;
-    width: 100%;
-    position: relative;
-    top: 75px;
-}
-
-div.section code {
-   color: #c72e49;
-}
-
-div.topic {
-    background-color: #edf7f71A;
-}
-
-div.localtoc {
+body div.left  {
+   width: 250px;
+   /* flex-shrink: 0; */
    position: fixed;
-   top: 75px;
-   right: 0px;
-   margin-right: 18px;
-   min-width: 200px;
-   max-width: 250px;
-   font-size: 90%;
+   display: block;
+   left: 0px;
+   top: 85px;
+   color: var(--minio-meridian);
+   z-index: 5;
 }
 
-div.localtoc ul {
+body div.left li.toctree-l1 a {
+   color: var(--minio-meridian);
+}
+body div.left div.sphinxsidebarwrapper {
+   padding: 0 0 0 5px;
+}
+
+body div.left div.sphinxsidebarwrapper ul {
    list-style: none;
-   margin: 0px 10px;
+   margin-left: 10px;
 }
 
-div.localtoc ul li {
-   transition: all 10ms ease-in-out;
+body div.left button.sphinxsidebarbutton {
+   width: 100px;
+   margin-left: auto;
+   background: none;
+   border: none;
+   margin-bottom: 5px;
 }
 
-/* div.localtoc ul li.active {
-   color: #c72e49;
-   list-style: square;
-   position: relative;
-   border-left: 5px solid #c72e49;
-   padding-left: 5px;
-   margin-left: -10px;
-} */
-
-div.localtoc ul li p {
-   padding-top: 3px;
-   padding-bottom: 3px;
-}
-
-div.localtoc ul li p.active-p {
-   position: relative;
-   border-left: 5px solid #c72e49;
-   padding-left: 5px;
-   margin-left: -10px;
-}
-
-div.body a {
-    color: #c72e49;
-    text-decoration: none;
-}
-
-div.body :target {
-   scroll-margin-top: 75px;
-}
-
-div.body a.reference.internal code {
-   color: #c72e49;
-}
-
-div.sphinxsidebar a.current.reference.internal {
-    color: #c72e49;
-    font-weight: bold;
-    position: relative;
-    border-left: 5px solid #c72e49;
-    padding-left: 5px;
-    margin-left: -10px;
-
-}
-
-div.contents.local.topic a{
-    border-bottom: none;
-}
-
-div.sphinxsidebar a.reference.internal {
-    margin: 10px 0px 10px 0px;
-    display: block;
-    border-bottom: 0px;
-}
-
-div.sphinxsidebar a:hover {
-    text-decoration: none;
-}
-
-img.logo {
-    height: 120px;
-}
-
-div.sphinxsidebar ul ul {
-    list-style: none;
-}
-
-dt {
+body div.left div.sphinxsidebarwrapper a.current.reference.internal {
+   color: var(--minio-red);
    font-weight: bold;
+   position: relative;
+   border-left: 5px solid var(--minio-red);
+   padding-left: 5px;
+   margin-left: -10px;
+
 }
 
-div.body table.docutils {
-   border-color: var(--table-border-color);
+body div.left div.sphinxsidebarwrapper li.toctree-l1 {
+   margin-top: 10px;
+   margin-bottom: 10px;
+   padding-bottom: 5px;
+   border-bottom: 1px solid var(--table-border-color);
+   list-style: none;
 }
+
+body div.left a.reference {
+   text-decoration: none;
+   border: none;
+}
+
+
+
+/* Center Column CSS */
 
 div.body div.alert-info {
 
-   background-color:#c72e491a;
    padding-left: 5px;
    padding-right: 5px;
-   border: 2px #c72e49 solid;
+   border: 2px var(--minio-red) solid;
    border-radius: 10px;
-
+ 
 }
 
-div.body div.alert-info p {
-   text-align: center;
-}
-
-div.body table.docutils th {
-   border-top: 1px solid var(--table-border-color);
-   border-bottom: 1px solid var(--table-border-color);
-   border-left: none;
-   border-right: none;
-}
-
-div.body table.docutils td {
-   border-top: 1px solid var(--table-border-color);
-   border-bottom: 1px solid var(--table-border-color);
-   border-left: none;
-   border-right: none;
-}
-
-div.header {
-   background-color: #01262e;
-   height: 75px;
-   width: 100%;
-   position: fixed;
-   z-index: 2;
-   top: 0px;
-}
-
-div.header img.logo {
+body div.center {
+   flex: 9;
+   overflow-y: auto;
+   overflow-x: hidden;
+   flex-grow: 9;
+   flex-shrink: 4;
+   z-index: 0;
+   margin-left: 250px;
+   margin-top: 85px;
+   scroll-margin-top: 85px;
    height: 100%;
-   padding-top: 28.5px;
    padding-left: 10px;
-}
-
-div.header div.navbar {
-   float: right;
-   text-align: center;
    padding-right: 10px;
 }
 
-div.header img.logo {
-   height: 18px;
+body div.center div.admonition p.admonition-title {
+   font-family: Mark, Helvetica, sans-serif;
+   font-size: 110%;
 }
 
-div.footer {
-   width: 100%;
-   text-align: center;
+body div.center h1,
+body div.center h2,
+body div.center h3,
+body div.center h4,
+body div.center h5,
+body div.center h6 {
+   font-family: Mark, sans-serif;
+   font-weight: normal;
+   margin: 30px 0px 10px 0px;
+   padding: 0;
 }
 
-dl.minio {
+body #toc-backref {
+   color: var(--minio-meridian);
+}
+
+body div.center a.reference.internal {
+   color: var(--minio-red);
+   text-decoration: none;
+}
+
+body div.center a.reference.internal code {
+   color: var(--minio-red);
+}
+
+body div.center a.toc-backref {
+   text-decoration: none;
+   color: var(--minio-meridian);
+}
+
+body div.center dl.minio {
    border-bottom: 1px solid #01262e2a;
    border-top: 1px solid #01262e2a;
    padding-top: 10px;
    padding-bottom: 10px;
 }
 
+body div.center code.descclassname {
+   font-weight: bold;
+}
+
+body div.center table.docutils {
+   border: 1px solid var(--table-border-color);
+}
+
+body div.center table.docutils th {
+   border-top: 1px solid var(--table-border-color);
+   border-bottom: 1px solid var(--table-border-color);
+   border-left: none;
+   border-right: none;
+ }
+ 
+ body div.center table.docutils td {
+   border-top: 1px solid var(--table-border-color);
+   border-bottom: 1px solid var(--table-border-color);
+   border-left: none;
+   border-right: none;
+ }
+
+body div.center p {
+   padding-left: 10px;
+}
+
+/* Right-Column CSS */
+
+body div.right {
+   flex: 3;
+   flex-shrink: 0;
+   margin-left: 10px;
+   margin-top: 85px;
+}
+
+body div.right div.topic {
+   background-color: #fff;
+   border-style: none;
+}
+
+body div.right ul.simple {
+   margin-left: 5px;
+}
+
+body div.right ul {
+   list-style: none;
+}
+
+body div.right a.reference.internal {
+   color: var(--minio-meridian);
+   text-decoration: none;
+   border-bottom: none;
+}
+
+body div.right p.active-p {
+   border-left: 5px solid var(--minio-red);
+   padding-left: 5px;
+   margin-left: -10px;
+}
+
+/* Collapse CSS */
+
+body div.left.collapsed {
+   left: -300px;
+}
+
+body div.left button.sphinxsidebarbutton.collapsed {
+   left: 0px;
+   position: fixed;
+}
+
+body div.column.collapsed {
+   margin-left: 50px;
+}
+
+/* Navigation CSS */
+
+nav.navigation img.logo {
+   height: 18px;
+   padding-top: 28.5px;
+   padding-left: 10px;
+}
+
+
+nav.navigation {
+   position: fixed;
+   background-color: black;
+   width: 100%;
+   height: 75px;
+   top: 0px;
+   z-index: 1;
+}
+
+/* Admonition CSS TODO*/
