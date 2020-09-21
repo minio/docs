@@ -24,6 +24,34 @@ specifying an alias for that service.
 
 .. end-mc-alias-desc
 
+Using :mc-cmd:`mc alias` to add or remove an S3-compatible host is equivalent
+to manually editing entries in the :program:`mc` 
+:ref:`configuration file <mc-configuration>`. 
+
+.. important::
+
+   :mc-cmd:`mc alias` requires specifying an access key and corresponding
+   secret key for a user on the S3-compatible host. :program:`mc` can
+   only perform operations on that host for which the user has explicit
+   permission. If the specified user cannot perform an action or access
+   a resource on the S3 host, :program:`mc` inherits those restrictions.
+
+Quick Reference
+---------------
+
+:mc-cmd:`mc alias add ALIAS HOSTNAME ACCESSKEY SECRETKEY <mc alias add>`
+   Adds the specified S3-compatible host to the
+   :program:`mc` :ref:`configuration file <mc-configuration>`.
+   :program:`mc` commands can access the host using the
+   specified ``ALIAS``.
+
+:mc-cmd:`mc alias remove ALIAS <mc alias remove>`
+   Removes the S3-compatible host associated to the specified alias from the
+   :program:`mc` :ref:`configuration file <mc-configuration>`. 
+
+:mc-cmd:`mc alias list <mc alias list>`
+   Lists all S3-compatible hosts and aliases in the :program:`mc`
+   :ref:`configuration file <mc-configuration>`.
 
 Syntax
 ------

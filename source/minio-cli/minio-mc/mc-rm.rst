@@ -23,6 +23,12 @@ To completely remove a bucket, use :mc:`mc rb` instead.
 Syntax
 ------
 
+.. |command| replace:: :mc-cmd:`mc rm`
+.. |rewind| replace:: :mc-cmd-option:`~mc rm rewind`
+.. |versions| replace:: :mc-cmd-option:`~mc rm versions`
+.. |versionid| replace:: :mc-cmd-option:`~mc rm version-id`
+.. |alias| replace:: :mc-cmd-option:`~mc rm TARGET`
+
 :mc:`~mc rm` has the following syntax:
 
 .. code-block:: shell
@@ -81,54 +87,36 @@ Syntax
    Allows running :mc:`mc rm` when the :mc-cmd:`~mc rm TARGET` specifies the
    root (all buckets) on the S3-compatible service.
 
-.. mc-cmd:: version-id
+.. mc-cmd:: versions
    :option:
 
-   Removes the specified version of the :mc-cmd:`~mc rm TARGET` object. Requires
-   the bucket to have versioning enabled. Use :mc:`mc version` to enable bucket
-   versioning.
+   .. include:: /includes/facts-versioning.rst
+      :start-after: start-versions-desc
+      :end-before: end-versions-desc
+
+   Use :mc-cmd-option:`~mc rm versions` and 
+   :mc-cmd-option:`~mc rm rewind` together to remove all object
+   versions which existed at a specific point in time.
+
+.. mc-cmd:: rewind
+   :option:
+
+   .. include:: /includes/facts-versioning.rst
+      :start-after: start-rewind-desc
+      :end-before: end-rewind-desc
+
+.. mc-cmd:: version-id, vid
+   :option:
+
+   .. include:: /includes/facts-versioning.rst
+      :start-after: start-version-id-desc
+      :end-before: end-version-id-desc
 
    Mutually exclusive with any of the following flags:
    
    - :mc-cmd-option:`~mc rm versions`
    - :mc-cmd-option:`~mc rm rewind`
    - :mc-cmd-option:`~mc rm recursive`
-
-.. mc-cmd:: versions
-   :option:
-
-   Removes all versions of the :mc-cmd:`~mc rm TARGET` object or
-   object(s). Requires the bucket to have versioning enabled. Use 
-   :mc:`mc version` to enable bucket versioning.
-
-   Use :mc-cmd-option:`~mc rm rewind` and 
-   :mc-cmd-option:`~mc rm versions` together to clear the
-   object lock settings of all versions of the object or object(s) which
-   existed at the specified duration prior to the current date. *or* at the
-   specified date.
-
-   Mutually exclusive with :mc-cmd-option:`~mc rm version-id`.
-
-.. mc-cmd:: rewind
-   :option:
-
-   Removes the latest version of the object or object(s) which existed at either
-   the specified duration prior to the current date *or* at a specific date.
-
-   - For duration, specify a string in ``#d#hh#mm#ss`` format. For example:
-      ``--rewind "1d2hh3mm4ss"``.
-
-   - For a date in time, specify an ISO8601-formatted timestamp. For example:
-      ``--rewind "2020.03.24T10:00"``.
-
-   For example, to clear the object lock settings to the object or object(s)
-   as they existed 30 days prior to the current date: ``--rewind "30d"``
-
-   Use :mc-cmd-option:`~mc rm rewind` and :mc-cmd-option:`~mc rm versions`
-   together to remove all versions of the object or object(s) which existed at
-   the specified duration prior to the current date *or* at the specified date.
-
-   Mutually exclusive with :mc-cmd-option:`~mc rm version-id`.
 
 .. mc-cmd:: older-than
    :option:

@@ -28,6 +28,10 @@ tree listing of the directory and all of its subdirectories.
 Syntax
 ------
 
+.. |command| replace:: :mc-cmd:`mc tree`
+.. |rewind| replace:: :mc-cmd-option:`~mc tree set rewind`
+.. |alias| replace:: :mc-cmd-option:`~mc tree set TARGET`
+
 :mc:`~mc tree` has the following syntax:
 
 .. code-block:: shell
@@ -54,6 +58,13 @@ Syntax
    :option:
 
    Includes files in the object or directory in the :mc:`mc tree` output.
+
+.. mc-cmd:: rewind
+   :option:
+
+   .. include:: /includes/facts-versioning.rst
+      :start-after: start-rewind-desc
+      :end-before: end-rewind-desc
 
 Examples
 --------

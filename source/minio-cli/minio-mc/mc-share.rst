@@ -28,6 +28,10 @@ documentation on :aws-docs:`Pre-Signed URLs
 Syntax
 ------
 
+.. |command| replace:: :mc-cmd:`mc share download`
+.. |versionid| replace:: :mc-cmd-option:`~mc share download version-id`
+.. |alias| replace:: :mc-cmd-option:`~mc share download TARGET`
+
 .. code-block:: shell
 
    mc share COMMAND
@@ -35,6 +39,7 @@ Syntax
 :mc:`~mc share` supports the following commands:
 
 .. mc-cmd:: download
+   :fullpath:
 
    Generates a URL for using an HTTP GET request to retrieve the
    object(s).
@@ -61,6 +66,13 @@ Syntax
       bucket or bucket prefix. 
          
       Required if any ``TARGET`` specifies a path to a bucket or bucket prefix.
+
+   .. mc-cmd:: version-id, vid
+      :option:
+
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-version-id-desc
+         :end-before: end-version-id-desc
 
    .. mc-cmd:: expire, E
       :option:

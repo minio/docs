@@ -185,6 +185,11 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /minio-cli/minio-mc/mc-lock.rst
           :start-after: start-mc-lock-desc
           :end-before: end-mc-lock-desc
+
+   * - :mc:`mc ls`
+     - .. include:: /minio-cli/minio-mc/mc-ls.rst
+          :start-after: start-mc-ls-desc
+          :end-before: end-mc-ls-desc
      
    * - :mc:`mc mb`
      - .. include:: /minio-cli/minio-mc/mc-mb.rst
@@ -235,6 +240,11 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /minio-cli/minio-mc/mc-stat.rst
           :start-after: start-mc-stat-desc
           :end-before: end-mc-stat-desc
+
+   * - :mc:`mc tag`
+     - .. include:: /minio-cli/minio-mc/mc-tag.rst
+          :start-after: start-mc-tag-desc
+          :end-before: end-mc-tag-desc
      
    * - :mc:`mc tree`
      - .. include:: /minio-cli/minio-mc/mc-tree.rst

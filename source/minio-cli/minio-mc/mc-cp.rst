@@ -20,8 +20,33 @@ S3-compatible service.
 
 .. end-mc-cp-desc
 
+Quick Reference
+---------------
+
+:mc-cmd:`mc cp ~/Data/myobject.txt play/data/myobject.txt <mc cp>`
+   Copies ``myobject.txt`` from the local filesystem ``~/Data`` folder to the
+   ``data`` bucket. ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a
+   configured S3-compatible service.
+   
+
+:mc-cmd:`mc cp --recursive ~/Data/ play/data <mc cp recursive`
+   Recursively copies the contents of ``~/Data/`` to the ``data`` bucket.
+   ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a configured
+   S3-compatible service.
+
+:mc-cmd:`mc cp --rewind "30d" play/data/object.txt play/data/object-30d.txt <mc cp rewind>`
+   Copies ``object.txt`` from the ``data`` bucket as it existed 30 days prior to
+   the current date. The command creates the copy ``objects-30d.txt`` in the
+   same bucket. ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a
+   configured S3-compatible service.
+
 Syntax
 ------
+
+.. |command| replace:: :mc-cmd:`mc cp`
+.. |rewind| replace:: :mc-cmd-option:`~mc cp rewind`
+.. |versionid| replace:: :mc-cmd-option:`~mc cp version-id`
+.. |alias| replace:: :mc-cmd-option:`~mc cp SOURCE`
 
 :mc:`~mc cp` has the following syntax:
 
@@ -71,6 +96,20 @@ Syntax
    Recursively copy the contents of each bucket or directory
    :mc-cmd:`~mc cp SOURCE` to the :mc-cmd:`~mc cp TARGET`
    bucket.
+
+.. mc-cmd:: rewind
+   :option:
+
+   .. include:: /includes/facts-versioning.rst
+      :start-after: start-rewind-desc
+      :end-before: end-rewind-desc
+
+.. mc-cmd:: version-id, vid
+   :option:
+
+   .. include:: /includes/facts-versioning.rst
+      :start-after: start-version-id-desc
+      :end-before: end-version-id-desc
 
 .. mc-cmd:: older-than
    :option:
