@@ -8,12 +8,16 @@
 
 :root {
   --table-border-color: #e6e6e6;
-  --minio-red: #c72e49;
+  --minio-red: rgb(199, 46, 73);
   --minio-midnight: #012b35;
   --minio-nautical: #00303f;
   --minio-meridian: #132742;
   --minio-glacier: #edf7f7;
 
+}
+
+html {
+   scroll-behavior: smooth;
 }
 
 body {
@@ -26,12 +30,11 @@ div.flexwrapper {
    flex-flow: row wrap;
    
    width: auto;
-   height: 100vh;
    /* overflow: hidden;
    Have to comment this out because clicking anchors breaks layout. */
 }
 
-div :target.h1,h2,h3,h4 {
+body :target {
    scroll-margin-top: 100px;
 }
 
@@ -46,6 +49,7 @@ body div.left  {
    top: 85px;
    color: var(--minio-meridian);
    z-index: 5;
+   border-right: 1px solid var(--minio-glacier);
 }
 
 body div.left li.toctree-l1 a {
@@ -53,6 +57,7 @@ body div.left li.toctree-l1 a {
 }
 body div.left div.sphinxsidebarwrapper {
    padding: 0 0 0 5px;
+   margin-top: 15px;
 }
 
 body div.left div.sphinxsidebarwrapper ul {
@@ -62,10 +67,11 @@ body div.left div.sphinxsidebarwrapper ul {
 
 body div.left button.sphinxsidebarbutton {
    width: 100px;
-   margin-left: auto;
    background: none;
    border: none;
-   margin-bottom: 5px;
+   position: fixed;
+   left: 115px;
+   top: 75px;
 }
 
 body div.left div.sphinxsidebarwrapper a.current.reference.internal {
@@ -76,6 +82,11 @@ body div.left div.sphinxsidebarwrapper a.current.reference.internal {
    padding-left: 5px;
    margin-left: -10px;
 
+}
+
+body div.left div.sphinxsidebarwrapper h1.logo {
+   font-size: 110%;
+   margin: 0px;
 }
 
 body div.left div.sphinxsidebarwrapper li.toctree-l1 {
@@ -194,6 +205,7 @@ body div.right {
    flex-shrink: 0;
    margin-left: 10px;
    margin-top: 85px;
+   border-left: 1px solid var(--minio-glacier);
 }
 
 body div.right div.topic {
@@ -201,12 +213,28 @@ body div.right div.topic {
    border-style: none;
 }
 
+body div.right div.localtoc {
+   position: sticky;
+   top: 85px;
+}
+
 body div.right ul.simple {
    margin-left: 5px;
 }
 
+body div.right ul li {
+   border-top: 1px solid var(--minio-glacier);
+   border-bottom: 1px solid var(--minio-glacier);
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+
 body div.right ul {
    list-style: none;
+}
+
+body div.right ul li ul {
+   margin-left: 10px;
 }
 
 body div.right a.reference.internal {
@@ -220,6 +248,7 @@ body div.right p.active-p {
    padding-left: 5px;
    margin-left: -10px;
 }
+
 
 /* Collapse CSS */
 

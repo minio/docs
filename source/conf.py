@@ -22,7 +22,7 @@ sys.path.append(os.path.abspath('../sphinxext'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'DOCS@MinIO'
+project = 'MinIO Documentation'
 copyright = '2020, MinIO'
 author = 'Ravind Kumar'
 

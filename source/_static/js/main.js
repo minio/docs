@@ -18,8 +18,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
    // how to resolve that.
 
    let options = {
-      root: document.querySelector('div.center'),
-      rootMargin: '-150px 0px -300px 0px'
+      rootMargin: '-85px 0px 0px 0px'
    }
 
    const observer = new IntersectionObserver(entries => {
@@ -69,11 +68,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     leftcolumn.classList.toggle('collapsed');
     centercolumn.classList.toggle('collapsed');
     sidebarwrapper.classList.toggle('collapsed');
-    if (button.textContent == "[x] Collapse") {
-       button.textContent = "[x] Expand";
+    if (button.textContent == "Collapse x") {
+       button.textContent = "Expand x";
     }
     else {
-       button.textContent = "[x] Collapse";
+       button.textContent = "Collapse x";
     }
   }
    
