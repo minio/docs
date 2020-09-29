@@ -22,7 +22,7 @@ html {
 
 body {
    font-family: Mark, Helvetica, sans-serif;
-   font-size: 100%;
+   font-size: 15px;
 }
 
 div.flexwrapper {
@@ -41,20 +41,32 @@ body :target {
 /* Left Column CSS */
 
 body div.left  {
-   width: 250px;
+   width: 300px;
    /* flex-shrink: 0; */
    position: fixed;
    display: block;
    left: 0px;
-   top: 85px;
+   top: 90px;
    color: var(--minio-meridian);
    z-index: 5;
-   border-right: 1px solid var(--minio-glacier);
+   background: #f9f9f9 0% 0% no-repeat padding-box;
+   opacity: 1;
+   height: 100vh;
+}
+
+body div.left a.active {
+   color: var(--minio-meridian);
 }
 
 body div.left li.toctree-l1 a {
-   color: var(--minio-meridian);
+   color: #1C1C1C;
 }
+
+body div.left li.toctree-l2 a {
+   color: #2b2b2b;
+   font-size: 14px;
+}
+
 body div.left div.sphinxsidebarwrapper {
    padding: 0 0 0 5px;
    margin-top: 15px;
@@ -70,17 +82,15 @@ body div.left button.sphinxsidebarbutton {
    background: none;
    border: none;
    position: fixed;
-   left: 115px;
-   top: 75px;
+   left: 200px;
+   top: 90px;
+   color: gray;
 }
 
 body div.left div.sphinxsidebarwrapper a.current.reference.internal {
    color: var(--minio-red);
    font-weight: bold;
    position: relative;
-   border-left: 5px solid var(--minio-red);
-   padding-left: 5px;
-   margin-left: -10px;
 
 }
 
@@ -93,7 +103,6 @@ body div.left div.sphinxsidebarwrapper li.toctree-l1 {
    margin-top: 10px;
    margin-bottom: 10px;
    padding-bottom: 5px;
-   border-bottom: 1px solid var(--table-border-color);
    list-style: none;
 }
 
@@ -102,7 +111,17 @@ body div.left a.reference {
    border: none;
 }
 
+body div.left li.toctree-l2 {
+   margin: 10px 0 10px 0;
+}
 
+body div.left div.searchformwrapper {
+   margin-top: 25px;
+}
+
+#docs-search {
+   padding-left: 10px;
+}
 
 /* Center Column CSS */
 
@@ -122,8 +141,8 @@ body div.center {
    flex-grow: 9;
    flex-shrink: 4;
    z-index: 0;
-   margin-left: 250px;
-   margin-top: 85px;
+   margin-left: 300px;
+   margin-top: 90px;
    scroll-margin-top: 85px;
    height: 100%;
    padding-left: 10px;
@@ -194,8 +213,22 @@ body div.center table.docutils th {
    border-right: none;
  }
 
-body div.center p {
-   padding-left: 10px;
+body div.center dl dd {
+   margin-left: 15px;
+}
+
+body div.center div.footer {
+   text-align: center;
+   width: auto;
+   /*
+   Future work: Force padding up so that H3s can still scroll within the
+   IntersectionObserver window. Useful for ensuring short sections at the 
+   bottom of the page still get picked up. Might be useful for auto-hide of 
+   l2 content. 
+
+
+   padding-top: 100px;
+   */
 }
 
 /* Right-Column CSS */
@@ -204,8 +237,9 @@ body div.right {
    flex: 3;
    flex-shrink: 0;
    margin-left: 10px;
-   margin-top: 85px;
+   margin-top: 90px;
    border-left: 1px solid var(--minio-glacier);
+   font-size: 13px;
 }
 
 body div.right div.topic {
@@ -223,8 +257,6 @@ body div.right ul.simple {
 }
 
 body div.right ul li {
-   border-top: 1px solid var(--minio-glacier);
-   border-bottom: 1px solid var(--minio-glacier);
    padding-top: 5px;
    padding-bottom: 5px;
 }
@@ -253,7 +285,7 @@ body div.right p.active-p {
 /* Collapse CSS */
 
 body div.left.collapsed {
-   left: -300px;
+   left: -350px;
 }
 
 body div.left button.sphinxsidebarbutton.collapsed {
@@ -278,7 +310,7 @@ nav.navigation {
    position: fixed;
    background-color: black;
    width: 100%;
-   height: 75px;
+   height: 90px;
    top: 0px;
    z-index: 1;
 }

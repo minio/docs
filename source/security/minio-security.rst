@@ -41,7 +41,7 @@ MinIO provides support for the following security features:
    :titlesonly:
    :hidden:
 
-   /security/minio-authentication-authorization-review
+   /security/minio-authentication-authorization
    /security/minio-security-TLS-encryption
    /security/minio-security-server-side-encryption
    /security/minio-security-security-token-service 

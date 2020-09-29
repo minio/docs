@@ -1,10 +1,10 @@
-=================
-MinIO Client (mc)
-=================
+=====================
+MinIO Client (``mc``)
+=====================
 
 .. default-domain:: minio
 
-.. contents:: On This Page
+.. contents:: Table of Contents
    :local:
    :depth: 1
 
@@ -21,14 +21,16 @@ support for both filesystems and Amazon S3-compatible cloud storage services
 
    mc [FLAGS] COMMAND [COMMAND FLAGS | -h] [ARGUMENTS...] ALIAS
 
+.. _mc-install:
+
 Quickstart
 ----------
 
 1) Install ``mc``
 ~~~~~~~~~~~~~~~~~
 
-Ensure that the host machine has :mc-cmd:`mc`
-:ref:`installed <mc-install>` prior to starting this procedure:
+Install the :program:`mc` command line tool onto the host machine. Click
+the tab that corresponds to the host machine operating system or environment:
 
 .. include:: /includes/minio-mc-installation.rst
 
@@ -43,26 +45,24 @@ Ensure that the host machine has :mc-cmd:`mc`
    security best practices for your operating system for inputting sensitive
    information on the command line.
 
-Use the :mc-cmd:`mc alias add` command to add an Amazon S3-compatible host
+Use the :mc-cmd:`mc alias set` command to add an Amazon S3-compatible service
 to the :mc-cmd:`mc` :ref:`configuration <mc-configuration>`.
 
 .. code-block:: shell
    :class: copyable
 
    bash +o history
-   mc alias add ALIAS ENDPOINT ACCESS_KEY SECRET_KEY --api [S3v2|S3v4]
+   mc alias set ALIAS HOSTNAME ACCESS_KEY SECRET_KEY
    bash -o history
 
 - Replace ``ALIAS`` with a name to associate to the S3 service. 
   :mc-cmd:`mc` commands typically require ``ALIAS`` as an argument for
   identifying which S3 service to execute against.
 
-- Replace ``ENDPOINT`` with the URL endpoint of the S3 service.
+- Replace ``HOSTNAME`` with the URL endpoint or IP address of the S3 service.
 
 - Replace ``ACCESS_KEY`` and ``SECRET_KEY`` with the access and secret 
   keys for a user on the S3 service. 
-
-- The ``--api`` flag is optional and defaults to ``S3v4`` if ommitted.
 
 Replace each argument with the required values. Specifying only the 
 ``mc config host add`` command starts an input prompt for entering the
@@ -77,21 +77,21 @@ Each of the following tabs contains a provider-specific example:
       .. code-block:: shell
          :class: copyable
 
-         mc alias add myminio https://minioserver.example.net ACCESS_KEY SECRET KEY
+         mc alias set myminio https://minioserver.example.net ACCESS_KEY SECRET KEY
 
    .. tab:: AWS S3 Storage
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias add myS3 https://s3.amazon.com/endpoint ACCESS_KEY SECRET KEY
+         mc alias set myS3 https://s3.amazon.com/endpoint ACCESS_KEY SECRET KEY
 
    .. tab:: Google Cloud Storage
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias add myGCS https://storage.googleapis.com/endpoint ACCESS_KEY SECRET KEY
+         mc alias set myGCS https://storage.googleapis.com/endpoint ACCESS_KEY SECRET KEY
 
 3) Test the Connection
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -117,6 +117,8 @@ unsuccessful, check each of the following:
   For MinIO deployments, see :doc:`/security/minio-authentication-authorization`
   for more information on user access permissions. For other S3-compatible
   services, defer to the documentation for that service.
+
+.. _minio-mc-commands:
 
 Command Quick Reference
 -----------------------
@@ -294,33 +296,14 @@ The following list describes each possible file path location in the order
 
 You can use the ``--config-dir``
 
-.. _mc-install:
-
-Installation
-------------
-
-.. include:: /includes/minio-mc-installation.rst
-
-:mc:`mc` includes a default :mc-cmd:`alias <mc alias>` for the
-https://play.min.io MinIO deployment. If the host machine has internet access,
-you can use the ``play`` alias for testing and development purposes. For
-example, the following lists all buckets on ``https://play.min.io``:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc ls play
-
-The ``play`` MinIO deployment provides a simple sandbox for testing core S3
-functionality. Any S3-compatible tool can view and interact with data on
-``play``. Any data stored on ``play`` is public-facing and modifyable.
-
 .. _minio-mc-global-options:
 
 Global Options
 --------------
 
 .. program:: mc
+
+All :ref:`commands <minio-mc-commands>` support the following global options:
 
 .. option:: --debug
 

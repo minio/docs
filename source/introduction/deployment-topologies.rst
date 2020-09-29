@@ -2,6 +2,8 @@
 Deployment Topologies
 =====================
 
+.. default-domain:: minio
+
 MinIO supports three deployment topologies:
 
 .. list-table::
@@ -25,7 +27,7 @@ MinIO supports three deployment topologies:
 
    * - :ref:`Active-Active <minio-deployment-active-active>`
      - Multiple distributed deployments with intra-deployment
-       replication to synchronize :ref:`objects <minio-object>` across
+       replication to synchronize :ref:`objects <objects>` across
        deployments.
 
        Active-Active Distributed deployments are ideal for production 
@@ -43,6 +45,7 @@ TBD:
 - Link to deployment tutorials (kubernetes, bare-metal)
 
 .. _minio-deployment-distributed:
+.. _minio-zones:
 
 Distributed Deployment
 ----------------------
@@ -51,6 +54,7 @@ TBD:
 - Add a diagram of a distributed deployment
 - List the drawbacks (if any)
 - Link to deployment tutorials (kubernetes, bare-metal)
+- Discuss horizontal expansion / zones
 
 .. _minio-deployment-active-active:
 

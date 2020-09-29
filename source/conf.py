@@ -85,14 +85,14 @@ html_favicon = '_static/favicon.png'
 
 html_sidebars = {
     '**' : [
-        'about.html',
-        'navigation.html',
         'searchbox.html',
+        'navigation.html',
     ]
 }
 
 html_theme_options = {
     'fixed_sidebar' : 'true',
+    'show_relbars': 'true',
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,

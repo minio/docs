@@ -4,9 +4,9 @@
 
 .. default-domain:: minio
 
-.. contents:: On This Page
+.. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc alias
 
@@ -28,43 +28,77 @@ Using :mc-cmd:`mc alias` to add or remove an S3-compatible host is equivalent
 to manually editing entries in the :program:`mc` 
 :ref:`configuration file <mc-configuration>`. 
 
-.. important::
+S3 Access Control and Limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   :mc-cmd:`mc alias` requires specifying an access key and corresponding
-   secret key for a user on the S3-compatible host. :program:`mc` can
-   only perform operations on that host for which the user has explicit
-   permission. If the specified user cannot perform an action or access
-   a resource on the S3 host, :program:`mc` inherits those restrictions.
+:mc-cmd:`mc alias` requires specifying an access key and corresponding secret
+key for a user on the S3-compatible host. :program:`mc` can only perform
+operations on that host for which the user has explicit permission. If the
+specified user cannot perform an action or access a resource on the S3 host,
+:program:`mc` inherits those restrictions.
 
-Quick Reference
----------------
+For more information on MinIO Access Control, see
+:ref:`minio-auth-authz-overview`. 
 
-:mc-cmd:`mc alias add ALIAS HOSTNAME ACCESSKEY SECRETKEY <mc alias add>`
-   Adds the specified S3-compatible host to the
-   :program:`mc` :ref:`configuration file <mc-configuration>`.
-   :program:`mc` commands can access the host using the
-   specified ``ALIAS``.
+For more complete documentation on S3 Access Control, see
+:s3-docs:`Amazon S3 Security <security.html>`.
 
-:mc-cmd:`mc alias remove ALIAS <mc alias remove>`
-   Removes the S3-compatible host associated to the specified alias from the
-   :program:`mc` :ref:`configuration file <mc-configuration>`. 
+For all other S3-compatible services, defer to the documentation for that
+service.
 
-:mc-cmd:`mc alias list <mc alias list>`
-   Lists all S3-compatible hosts and aliases in the :program:`mc`
-   :ref:`configuration file <mc-configuration>`.
+Common Operations
+-----------------
+
+Add an S3-Compatible Service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc alias set` to add an S3-compatible service for use with
+:program:`mc`:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc alias set ALIAS HOSTNAME ACCESSKEY SECRETKEY
+
+- Replace ``ALIAS`` with the name of the alias to associate to the S3-compatible service.
+
+- Replace ``HOSTNAME`` with the hostname or IP address of the S3-compatible service.
+
+- Replace ``ACCESSKEY`` and ``SECRETKEY`` with the access and secret key for a 
+  user on the S3-compatible service.
+
+Remove a Configured S3-Compatible Service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc alias remove` to remove an S3-compatible alias from the
+:program:`mc` configuration:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc alias remove ALIAS
+
+- Replace ``ALIAS`` with the name of the S3-compatible service to remove. 
+
+Use :mc-cmd:`mc alias list` to list the currently configured S3-compatible
+services.
+
+List Configured S3-Compatible Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc alias list` to list all configured S3-compatible aliases:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc alias list
+
 
 Syntax
 ------
 
-:mc-cmd:`~mc alias` has the following syntax:
-
-.. code-block:: shell
-   
-   mc alias COMMAND [COMMAND FLAGS | -h ] [ARGUMENTS]
-
-:mc-cmd:`~mc alias` supports the following commands:
-
-.. mc-cmd:: add, a
+.. mc-cmd:: set, s
+   :fullpath:
 
    Adds a new S3-compatible host to the configuration file. The command
    has the following syntax:
@@ -72,9 +106,9 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc alias add ALIAS HOSTNAME ACCESS_KEY SECRET_KEY --api [S3v2|S3v4]
+      mc alias set ALIAS HOSTNAME ACCESS_KEY SECRET_KEY --api [S3v2|S3v4]
 
-   :mc-cmd:`mc alias add` supports the following arguments:
+   :mc-cmd:`mc alias set` supports the following arguments:
 
    .. mc-cmd:: ALIAS
 
@@ -111,6 +145,7 @@ Syntax
 
 
 .. mc-cmd:: remove, rm
+   :fullpath:
 
    Removes a host entry from the configuration file. The command has the
    following syntax:
@@ -121,6 +156,7 @@ Syntax
       mc alias remove ALIAS
 
 .. mc-cmd:: list, ls
+   :fullpath:
 
    Lists all hosts in the configuration file. The command has the following
    syntax:
@@ -129,9 +165,6 @@ Syntax
       :class: copyable
 
       mc alias list
-
-Behavior
---------
 
 Examples
 --------
@@ -142,21 +175,4 @@ Add a New S3 Service Alias
 .. code-block:: shell
    :class: copyable
 
-   mc alias add myminio https://myminio.example.net myminioaccesskey myminiosecretkey
-
-Remove an Existing S3 Service Alias
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: shell
-   :class: copyable
-
-   mc alias remove myminio 
-
-
-List All Configured S3 Service Aliases
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: shell
-   :class: copyable
-
-   mc alias list
+   mc alias set myminio https://myminio.example.net myminioaccesskey myminiosecretkey

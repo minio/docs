@@ -4,7 +4,7 @@ MinIO Admin (``mc admin``)
 
 .. default-domain:: minio
 
-.. contents:: On This Page
+.. contents:: Table of Contents
    :local:
    :depth: 1
 
@@ -62,8 +62,8 @@ Ensure that the host machine has :command:`mc`
    security best practices for your operating system for inputting sensitive
    information on the command line.
 
-Use the :subcommand:`mc alias add` command to add the
-deployment to the :command:`mc` configuration.
+Use the :mc-cmd:`mc alias set` command to add the
+deployment to the :program:`mc` configuration.
 
 .. code-block:: shell
    :class: copyable
@@ -111,7 +111,7 @@ The command has the following syntax:
 
 If the specified ``<ALIAS>`` corresponds to a distributed MinIO deployment, the
 command returns information for each MinIO server in the deployment. Use
-:subcommand:`mc alias add` to list the currently configured aliases and their
+:subcommand:`mc alias set` to list the currently configured aliases and their
 corresponding endpoints.
 
 *Display MinIO Server Information*
@@ -148,7 +148,7 @@ The command has the following syntax:
 
 If the specified ``<ALIAS>`` corresponds to a distributed MinIO deployment, the
 command adds the policy to each MinIO server in the deployment. Use
-:subcommand:`mc alias add` to list the currently configured aliases and their
+:subcommand:`mc alias set` to list the currently configured aliases and their
 corresponding endpoints.
 
 MinIO servers include the following canned policies:

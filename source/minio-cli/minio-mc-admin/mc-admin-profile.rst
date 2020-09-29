@@ -4,7 +4,7 @@
 
 .. default-domain:: minio
 
-.. contents:: On This Page
+.. contents:: Table of Contents
    :local:
    :depth: 2
 

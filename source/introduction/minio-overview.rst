@@ -2,6 +2,8 @@
 Introduction
 ============
 
+.. default-domain:: minio
+
 MinIO is a High Performance Object Storage released under Apache License v2.0.
 It is API compatible with Amazon S3 cloud storage service. Use MinIO to build
 high performance infrastructure for machine learning, analytics and application
@@ -10,50 +12,55 @@ data workloads.
 What Is Object Storage?
 -----------------------
 
-Applications create, update, retrieve, and delete data as part of normal 
-operations. MinIO provides a complete solution for managing the storage 
-and access of that data as :ref:`objects <minio-object>`. Applications group
-objects into one or more :ref:`buckets <minio-bucket>`. 
+.. _objects:
 
-MinIO is fully compatible with the Amazon Web Services Simple Storage Service
-(AWS S3) API. Applications using the AWS S3 API can seamlessly transition to
-using a MinIO deployment for managing their application's object storage with
-minimal code changes. 
+An :ref:`object <objects>` is binary data, sometimes referred to as a Binary
+Large OBject (BLOB). Blobs can be images, audio files, spreadsheets, or even
+binary executable code. Object Storage platforms like MinIO provide dedicated
+tools and capabilities for storing, retrieving, and searching for blobs. 
 
-Erasure Coding
---------------
+.. _buckets:
 
-MinIO Erasure Coding guarantees object retrieval as long as the deployment
-has at least half of its drives operational. Specifically, the deployment
-can lose `(n/2)-1` drives and still service create, retrieval, update, and 
-delete operations.
+MinIO Object Storage uses :ref:`buckets <buckets>` to organize objects. 
+A bucket is similar to a folder or directory in a filesystem, where each
+bucket can hold an arbitrary number of objects. MinIO buckets provide the 
+same functionality as AWS S3 buckets. 
 
-For example, consider a deployment with 12 data drives. MinIO splits the
-12 drive set into 6 data drives and 6 parity drives. As long as *at least* 7
-drives are online, the MinIO server can guarantee retrieval of any stored
-object. 
+For example, consider an application that hosts a web blog. The application
+needs to store a variety of blobs, including rich multimedia like videos and
+images. The structure of objects on the MinIO server might look similar to the
+following:
 
-For more information on MinIO Erasure Coding, see
-:ref:`minio-erasure-coding`.
+.. code-block:: shell
 
-Bitrot Protection
------------------
+   / #root
+   /images/
+      2020-01-02-blog-title.png
+      2020-01-03-blog-title.png
+   /videos/
+      2020-01-03-blog-cool-video.mp4
+   /blogs/
+      2020-01-02-blog.md
+      2020-01-03-blog.md
+   /comments/
+      2020-01-02-blog-comments.json
+      2020-01-02-blog-comments.json
 
-MinIO Bitrot Protection heals objects that have degraded due to 
-disk corruption. When applications request a specific object, MinIO 
-automatically checks for corruption and applies a healing algorithm to 
-reconstruct the object. 
+Deploying MinIO
+---------------
 
-For more information on MinIO Bitrot Protection, see 
-:ref:`minio-bitrot-protection`.
+For Kubernetes clusters, use the MinIO Kubernetes Operator.
+See :ref:`minio-kubernetes` for more information.
 
+For bare-metal environments, including private cloud services
+or containerized environments, install and run the :mc:`minio server` on
+each host in the MinIO deployment. See :ref:`minio-baremetal` for more 
+information.
 
 .. toctree::
    :hidden:
    :titlesonly:
 
-   /introduction/buckets.rst
-   /introduction/objects.rst
    /introduction/deployment-topologies.rst
    /introduction/erasure-coding.rst
    /introduction/bitrot-protection.rst

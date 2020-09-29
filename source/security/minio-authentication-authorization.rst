@@ -1,10 +1,12 @@
+.. _minio-auth-authz-overview:
+
 ================================
 Authentication and Authorization
 ================================
 
 .. default-domain:: minio
 
-.. contents:: On This Page
+.. contents:: Table of Contents
    :local:
    :depth: 2
 
@@ -104,6 +106,8 @@ their assigned groups.
    documentation on 
    :iam-docs:`Determining Whether a Request is Allowed or Denied Within an Account 
    <reference_policies_evaluation-logic.html#policy-eval-denyallow>`.
+
+.. _minio-auth-authz-root:
 
 ``root`` User
 ~~~~~~~~~~~~~

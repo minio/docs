@@ -533,6 +533,7 @@ class MinIODomain(Domain):
         'mc-cmd':         ObjType(_('mc-cmd'),        'mc-cmd'),
         'mc-cmd-option':  ObjType(_('mc-cmd-option'), 'mc-cmd-option'),
         'policy-action':  ObjType(_('policy-action'), 'policy-action'),
+        'envvar':        ObjType(_('envvar'),       'envvar')
     }
     directives = {
         'data':            MinioObject,
@@ -543,7 +544,8 @@ class MinIODomain(Domain):
         'flag':            MinioObject,
         'mc':              MinioMCCommand,
         'mc-cmd':          MinioMCObject,
-        'policy-action':   MinioObject
+        'policy-action':   MinioObject,
+        'envvar':          MinioObject
     }
     roles = {
         'data':             MinioXRefRole(),
@@ -556,6 +558,7 @@ class MinIODomain(Domain):
         'mc-cmd':           MinioXRefRole(),
         'mc-cmd-option':    MinioCMDOptionXRefRole(),
         'policy-action':    MinioXRefRole(),
+        'envvar':           MinioXRefRole(),
 
     }
     initial_data = {

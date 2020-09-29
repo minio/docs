@@ -1,10 +1,12 @@
+.. _minio-TLS:
+
 ==============================
 MinIO Transport Layer Security
 ==============================
 
 .. default-domain:: minio
 
-.. contents:: On This Page
+.. contents:: Table of Contents
    :local:
    :depth: 1
 

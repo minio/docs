@@ -4,6 +4,8 @@
 Erasure Coding
 ==============
 
+.. default-domain:: minio
+
 MinIO protects data with per-object, inline erasure coding, which is written in
 assembly code to deliver the highest performance possible. MinIO uses
 Reed-Solomon code to stripe objects into `n/2` data and ``n/2`` parity blocks -
