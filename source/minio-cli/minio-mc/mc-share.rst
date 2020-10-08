@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc share
 
@@ -25,18 +25,142 @@ For more information on shareable object URLs, see the Amazon S3
 documentation on :aws-docs:`Pre-Signed URLs 
 <AmazonS3/latest/dev/ShareObjectPreSignedURL.html>`.
 
+Examples
+--------
+
+Generate a CURL GET Command
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: Get Specific Object
+
+      Use :mc-cmd:`mc share download` to generate a URL that supports
+      ``GET`` requests for an object:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc share download --expire DURATION ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc share download TARGET>` with the 
+        :mc:`alias <mc alias>` of the S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc share download TARGET>` with the path to the
+        object on the S3-compatible host.
+
+      - Replace :mc-cmd:`DURATION <mc share download expire>` with the duration
+        after which the URL expires. For example, to set a 30 day expiry, 
+        specify ``30d``.
+
+   .. tab:: Get Object(s) in a Bucket
+
+      Use :mc-cmd:`mc share download` with the 
+      :mc-cmd-option:`~mc share download recursive` option to generate a URL for
+      each object in a bucket. Each URL supports ``GET`` requests for its
+      associated object:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc share download --recursive --expire DURATION ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc share download TARGET>` with the 
+        :mc:`alias <mc alias>` of the S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc share download TARGET>` with the path to the
+        bucket or bucket prefix on the S3-compatible host.
+
+      - Replace :mc-cmd:`DURATION <mc share download expire>` with the duration
+        after which the URL expires. For example, to set a 30 day expiry, 
+        specify ``30d``.
+
+Generate a CURL POST Command
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: Upload to Object
+
+      Use :mc-cmd:`mc share upload` to generate a URL that supports
+      ``POST`` requests for uploading a file to a specific object location
+      on an S3-compatible host:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc share upload --expire DURATION ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc share upload TARGET>` with the 
+        :mc:`alias <mc alias>` of the S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc share upload TARGET>` with the path to the
+        object on the S3-compatible host.
+
+      - Replace :mc-cmd:`DURATION <mc share upload expire>` with the duration
+        after which the URL expires. For example, to set a 30 day expiry, 
+        specify ``30d``.
+
+   .. tab:: Upload File(s) to Bucket
+
+      Use :mc-cmd:`mc share upload` with the 
+      :mc-cmd-option:`~mc share upload recursive` option to generate a URL that
+      supports ``POST`` requests for uploading files to a bucket on an
+      S3-compatible host:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc share upload --recursive --expire DURATION ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc share upload TARGET>` with the 
+        :mc:`alias <mc alias>` of the S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc share upload TARGET>` with the path to the
+        bucket or bucket prefix on the S3-compatible host.
+
+      - Replace :mc-cmd:`DURATION <mc share upload expire>` with the duration
+        after which the URL expires. For example, to set a 30 day expiry, 
+        specify ``30d``.
+
+      The command returns a CURL command for uploading an object to the
+      specified bucket prefix. 
+
+      - Replace the ``<FILE>`` string in the returned CURL command with the path
+        to the file to upload. 
+      
+      - Replace the ``<NAME>`` string in the returned CURL command with the name
+        of the file in the bucket.
+
+      You can use a shell script loop to recursively upload the contents of a
+      filesystem directory to the S3-compatible service:
+
+      .. code-block:: shell
+
+         #!/bin/sh
+
+         for file in ~/Documents/photos/
+         do
+            curl https://play.min.io/mybucket/ \
+            -F policy=AAAAA -F x-amz-algorithm=AWS4-HMAC-SHA256 \
+            -F x-amz-credential=AAAA/us-east-1/s3/aws4_request \
+            -F x-amz-date=20200812T202556Z \
+            -F x-amz-signature=AAAA \
+            -F bucket=rkbucket -F key=mydata/${file} -F file=@${file}
+
+         done
+
+      Defer to the documented best practices for your preferred scripting language
+      for iterating through files in a directory.
+
+
+
 Syntax
 ------
 
 .. |command| replace:: :mc-cmd:`mc share download`
 .. |versionid| replace:: :mc-cmd-option:`~mc share download version-id`
 .. |alias| replace:: :mc-cmd-option:`~mc share download TARGET`
-
-.. code-block:: shell
-
-   mc share COMMAND
-
-:mc:`~mc share` supports the following commands:
 
 .. mc-cmd:: download
    :fullpath:
@@ -123,7 +247,7 @@ Syntax
 
       Replace ``<FILE>`` with the path to the file to upload.
 
-      Replace ``<NAME>`` with the name of the file once uploaded.
+      Replace ``<NAME>`` with the file once uploaded.
          
 
    .. mc-cmd:: expire, E
@@ -159,118 +283,3 @@ Syntax
    
       List all unexpired URLs generated by :mc-cmd:`mc share download`.
 
-Behavior
---------
-
-Examples
---------
-
-Generate a CURL GET Command for an Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc share download play/mybucket/myobject.txt
-
-To specify a custom expiry, pass the ``--expiry`` flag. The following
-command sets a 4 hour expiry for the generated URL:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc share download --expiry 4h play/mybucket/myobject.txt
-
-Generate a CURL GET Command For Each Object in Bucket or Bucket Prefix
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc share download --recursive play/mybucket/
-
-The command returns a CURL command for each object in the bucket or bucket
-prefix.
-
-To specify a custom expiry, pass the ``--expiry`` flag. The following
-command sets a 4 hour expiry for the generated URL:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc share download --recursive --expiry 4h play/mybucket/
-
-Generate a CURL POST Command for an Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-
-   mc share upload play/mybucket/myobject.csv
-
-The command returns a CURL command for uploading an object to the specified
-bucket with the object name. Replace the ``<FILE>`` string in the returned
-CURL command with the path to the file to upload.
-
-To specify a custom expiry, pass the ``--expiry`` flag. The following
-command sets a 4 hour expiry for the generated URL:
-
-.. code-block:: shell
-
-   mc share upload --expiry 4h play/mybucket/myobject.csv
-
-Generate a CURL POST Command for a Bucket or Bucket Prefix
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-
-   mc share upload --recursive play/mybucket/photos
-
-The command returns a CURL command for uploading an object to the specified
-bucket prefix. Replace the ``<FILE>>`` string in the returned
-CURL command with the path to the file to upload. Replace the ``<NAME>``
-string in the returned CURL command with the name of the file in the bucket.
-
-To specify a custom expiry, pass the ``--expiry`` flag. The following
-command sets a 4 hour expiry for the generated URL:
-
-.. code-block:: shell
-
-   mc share upload --recursive --expiry 4h play/mybucket/photos
-
-You can use a shell script loop to recursively upload the contents of a bucket
-to the S3-compatible service. The following example uses a ``for in`` 
-loop:
-
-.. code-block:: shell
-
-   #!/bin/sh
-
-   for file in ~/Documents/photos/
-   do
-      curl https://play.min.io/mybucket/ \
-        -F policy=AAAAA -F x-amz-algorithm=AWS4-HMAC-SHA256 \
-        -F x-amz-credential=AAAA/us-east-1/s3/aws4_request \
-        -F x-amz-date=20200812T202556Z \
-        -F x-amz-signature=AAAA \
-        -F bucket=rkbucket -F key=mydata/${file} -F file=@${file}
-
-   done
-
-Defer to the documented best practices for your preferred scripting language
-for iterating through files in a directory.

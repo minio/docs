@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc policy
 
@@ -27,6 +27,92 @@ You can set or remove policies on individual folders or objects inside of a
 bucket for more granular control over anonymous access to a bucket's
 contents.
 
+Examples
+--------
+
+Get Current Anonymous Policy for Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc policy get` to retrieve the current anonymous policy for a 
+bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc policy get ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc policy get TARGET>` with the 
+  :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc policy get TARGET>` with the destination bucket.
+
+Use :mc-cmd:`mc policy get-json` to retrieve the 
+:s3-docs:`IAM JSON policy document <using-iam-policies>` of a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc policy get-json ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc policy get-json TARGET>` with the 
+  :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc policy get-json TARGET>` with the destination
+  bucket.
+
+Set Anonymous Policy for Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc policy set` to set the anonymous policy for a 
+bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc policy set POLICY ALIAS/PATH
+
+- Replace :mc-cmd:`POLICY <mc policy set PERMISSION>` with a supported
+  :mc-cmd:`permission <mc policy set PERMISSION>`.
+
+- Replace :mc-cmd:`ALIAS <mc policy set TARGET>` with the 
+  :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc policy set TARGET>` with the destination bucket.
+
+Use :mc-cmd:`mc policy set-json` to use a
+:s3-docs:`IAM JSON policy document <using-iam-policies>` to set the anonymous
+policy for a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc policy set-json POLICY ALIAS/PATH
+
+- Replace :mc-cmd:`POLICY <mc policy set-json FILE>` with the JSON-formatted
+  IAM policy document to use for setting the anonymous policy.
+
+- Replace :mc-cmd:`ALIAS <mc policy set-json TARGET>` with the 
+  :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc policy set-json TARGET>` with the destination
+  bucket.
+
+Remove Anonymous Policy for Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc policy set` to clear the anonymous policy for a 
+bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc policy set none ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc policy set TARGET>` with the 
+  :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc policy set TARGET>` with the destination bucket.
+
 Syntax
 ------
 
@@ -39,6 +125,7 @@ Syntax
 :mc:`~mc policy` supports the following commands:
 
 .. mc-cmd:: set
+   :fullpath:
 
    Adds one of the following built-in policies to the specified 
    bucket. The command has the following syntax:
@@ -74,6 +161,7 @@ Syntax
          mc set public play/mybucket
 
 .. mc-cmd:: set-json
+   :fullpath:
 
    Adds an AWS S3 :s3-docs:`JSON policy <using-iam-policies>` to the 
    specified bucket. The command has the following syntax:
@@ -92,7 +180,7 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The full path to the bucket, folder, orobject to which the command applies
+      The full path to the bucket, folder, or object to which the command applies
       the specified :mc-cmd:`~mc policy set-json FILE` S3 policy document.
       Specify the :mc:`alias <mc alias>` of a configured S3 service as the
       prefix to the ``TARGET`` path. For example:
@@ -102,6 +190,7 @@ Syntax
          mc set public play/mybucket
 
 .. mc-cmd:: get
+   :fullpath:
 
    Prints the current anonymous policy for the specified bucket, folder,
    or object on the console.
@@ -113,15 +202,21 @@ Syntax
 
       mc policy get TARGET
       
-   Specify the :mc:`alias <mc alias>` of a configured S3 service
-   as the prefix to the ``TARGET`` bucket path. For example:
+   The command requires the following arguments:
 
-   .. code-block:: shell
-      :class: copyable
-      
-      mc get play/mybucket
+   .. mc-cmd:: TARGET
+
+      The full path to the bucket, folder, or object for which the command
+      returns the current anonymous policy. Specify the :mc:`alias <mc alias>`
+      of a configured S3 service as the prefix to the ``TARGET`` path. For
+      example:
+
+      .. code-block:: shell
+               
+         mc set public play/mybucket
 
 .. mc-cmd:: get-json
+   :fullpath:
 
    Returns the current anonymous policy for the specified bucket, folder,
    or object in ``JSON`` format.
@@ -132,16 +227,22 @@ Syntax
       :class: copyable
 
       mc policy get-json TARGET
-      
-   Specify the :mc:`alias <mc alias>` of a configured S3 service
-   as the prefix to the ``TARGET`` bucket path. For example:
 
-   .. code-block:: shell
-      :class: copyable
+   The command requires the following arguments:
       
-      mc policy get-json play/mybucket
+   .. mc-cmd:: TARGET
+
+      The full path to the bucket, folder, or object for which the command
+      returns the current anonymous policy JSON document. Specify the :mc:`alias
+      <mc alias>` of a configured S3 service as the prefix to the ``TARGET``
+      path. For example:
+
+      .. code-block:: shell
+               
+         mc set public play/mybucket
 
 .. mc-cmd:: list
+   :fullpath:
 
    Prints the anonymous policy for the specified bucket and any folders
    or objects with a different anonymous policy from the bucket.
@@ -153,69 +254,18 @@ Syntax
 
       mc policy list TARGET
 
-   Specify the :mc:`alias <mc alias>` of a configured S3 service
-   as the prefix to the ``TARGET`` bucket path. For example:
+   The command requires the following arguments:
+      
+   .. mc-cmd:: TARGET
 
-   .. code-block:: shell
-      :class: copyable
+      The full path to the bucket, folder, or object for which the command
+      returns the current anonymous policy JSON document. Specify the :mc:`alias
+      <mc alias>` of a configured S3 service as the prefix to the ``TARGET``
+      path. For example:
 
-      mc policy list play/mybucket
+      .. code-block:: shell
+               
+         mc set public play/mybucket
          
 
-Examples
---------
 
-Get Current Anonymous Policy for Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc policy get play/mybucket
-
-To retrieve the :s3-docs`IAM JSON policy document <using-iam-policies>`, use the 
-:mc-cmd:`mc policy get-json` mc:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc policy get-json play/mybucket
-
-Set Anonymous Policy for Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc policy set upload play/mybucket
-
-See :mc-cmd:`mc policy set` for the list of supported built-in policies.
-
-To set the anonymous policy for the specified bucket using
-an :s3-docs:`IAM JSON file <using-iam-policies>`, use the 
-:mc-cmd:`mc policy set-json` mc:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc policy set-json ~/policies/s3-upload.json play/mybucket
-
-Remove Anonymous Policy for Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc policy set none play/mybucket

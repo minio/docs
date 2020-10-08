@@ -85,6 +85,7 @@ body div.left button.sphinxsidebarbutton {
    left: 200px;
    top: 90px;
    color: gray;
+   font-family: Mark, Helvetica, sans-serif;
 }
 
 body div.left div.sphinxsidebarwrapper a.current.reference.internal {
@@ -161,9 +162,17 @@ body div.center h4,
 body div.center h5,
 body div.center h6 {
    font-family: Mark, sans-serif;
-   font-weight: normal;
+   font-weight: bold;
    margin: 30px 0px 10px 0px;
    padding: 0;
+}
+
+body div.center h2 {
+   font-size: 24px;
+}
+
+body div.center h3 {
+   font-size: 18px;
 }
 
 body #toc-backref {
@@ -185,10 +194,8 @@ body div.center a.toc-backref {
 }
 
 body div.center dl.minio {
-   border-bottom: 1px solid #01262e2a;
-   border-top: 1px solid #01262e2a;
-   padding-top: 10px;
-   padding-bottom: 10px;
+   margin-top: 10px;
+   margin-bottom: 10px;
 }
 
 body div.center code.descclassname {
@@ -212,6 +219,10 @@ body div.center table.docutils th {
    border-left: none;
    border-right: none;
  }
+
+body div.center dl {
+   margin: 20px 0 20px 0;
+}
 
 body div.center dl dd {
    margin-left: 15px;

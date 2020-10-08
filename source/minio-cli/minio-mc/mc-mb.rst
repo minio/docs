@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc mb
 
@@ -21,6 +21,37 @@ creates a new bucket. For targets on a filesystem, :mc:`mc mb` has
 equivalent functionality to ``mkdir -p``. 
 
 .. end-mc-mb-desc
+
+Bucket Limits for Non-MinIO S3 Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Certain S3 services may restrict the number of buckets a given user or account
+can create. For example, Amazon S3 limits each account to 
+:s3-docs:`100 buckets <BucketRestrictions.html>`. :mc:`mc mb` may return an 
+error if the user has reached bucket limits on the target S3 service.
+
+MinIO Object Storage deployments do not place any limits on the number of
+buckets each user can create.
+
+Examples
+--------
+
+Create Bucket
+~~~~~~~~~~~~~
+
+Use :mc:`mc mb` to create a bucket on an S3-compatible host. The 
+:mc-cmd-option:`~mc mb with-lock` option creates the bucket with locking
+enabled:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc mb --with-lock ALIAS/BUCKET
+
+- Replace :mc-cmd:`ALIAS <mc mb TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`BUCKET <mc mb TARGET>` with the bucket to create.
 
 Syntax
 ------
@@ -72,24 +103,3 @@ Syntax
       Bucket Object Retention, or Bucket Legal Hold if object locking is
       disabled for a bucket.
 
-Behavior
---------
-
-Certain S3 services may restrict the number of buckets a given user or account
-can create. For example, Amazon S3 limits each account to 
-:s3-docs:`100 buckets <BucketRestrictions.html>`. :mc:`mc mb` may return an 
-error if the user has reached bucket limits on the target S3 service.
-
-MinIO Object Storage deployments do not place any limits on the number of
-buckets each user can create.
-
-Examples
---------
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-
-   mc mb --with-lock play/mybucket

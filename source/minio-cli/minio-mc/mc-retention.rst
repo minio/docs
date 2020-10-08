@@ -23,30 +23,246 @@ object locking and data retention, see <link>.
 
 .. end-mc-retention-desc
 
-.. important::
-
-   :mc:`mc retention` *requires* that the specified bucket has object locking
-   enabled. You can **only** enable object locking at bucket creation. See
-   :mc-cmd-option:`mc mb with-lock` for documentation on creating buckets with
-   object locking enabled. 
-
 .. note::
 
-   Starting in version :release:``, :mc:`mc retention` fully replaces :mc:`mc
-   lock` for setting the default object lock settings for a bucket.
-   :release:`` deprecates and removes :mc:`mc lock`.
+   Starting in version :release:`RELEASE.2020-09-18T00-13-21Z`, 
+   :mc:`mc retention` fully replaces :mc:`mc lock` for setting the default 
+   object lock settings for a bucket.
 
-Syntax
-------
+   Use :mc-cmd:`mc retention set` with the 
+   :mc-cmd-option:`~mc retention set default` option to set the default
+   object lock settings for a bucket.
 
-:mc:`~mc retention` has the following syntax:
+Bucket Must Enable Object Locking
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:mc:`mc retention` *requires* that the specified bucket has object locking
+enabled. You can **only** enable object locking at bucket creation. See
+:mc-cmd-option:`mc mb with-lock` for documentation on creating buckets with
+object locking enabled. 
+
+Retention of Object Versions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For buckets with :mc:`versioning enabled <mc version>`, :mc:`mc retention` by
+default operates on the *latest* version of the target object or object(s). 
+
+.. list-table::
+   :header-rows: 1
+   :widths: 50 50
+   :width: 100%
+
+   * - Operate on Multiple Versions
+     - Operate on Single Version
+
+   * - | :mc-cmd-option:`mc retention set versions`
+       | :mc-cmd-option:`mc retention clear versions`
+       | :mc-cmd-option:`mc retention info versions`
+
+     - | :mc-cmd-option:`mc retention set version-id`
+       | :mc-cmd-option:`mc retention clear version-id`
+       | :mc-cmd-option:`mc retention info version-id`
+
+Interaction with Legal Holds
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Locking an object prevents any modification or deletion of that
+object, similar to the :mc-cmd:`COMPLIANCE <mc retention set MODE>` object
+locking mode. Objects can have simultaneous retention-based locks *and*
+legal hold locks. 
+
+The legal hold lock *overrides* any retention locking, such that an object under
+legal hold remains locked *even if* the retention period expires. Setting,
+modifying, or clearing retention settings for an object under legal hold has no
+effect until the legal hold either expires or is explicitly disabled.
+
+For more information on object legal holds, see :mc-cmd:`mc legalhold`.
+
+Examples
+--------
+
+Set Default Bucket Retention Settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc retention set` with the
+:mc-cmd-option:`~mc retention set recursive` and
+:mc-cmd-option:`~mc retention set default` to set the default bucket
+retention settings.
 
 .. code-block:: shell
    :class: copyable
 
-   mc retention COMMANDS [COMMAND ARGUMENTS]
+   mc retention --recursive --default set ALIAS/PATH MODE DURATION
 
-:mc:`~mc retention` supports the following commands:
+- Replace :mc-cmd:`ALIAS <mc retention set TARGET>` with the
+  :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc retention set TARGET>` with the path to the bucket.
+
+- Replace :mc-cmd:`MODE <mc retention set MODE>` with the retention mode to
+  enable. MinIO supports the AWS S3 retention modes ``governance`` and
+  ``compliance``.
+
+- Replace :mc-cmd:`DURATION <mc retention set VALIDITY>` with the duration which
+  the object lock should remain in effect. For example, to set a retention
+  period of 30 days, specify ``30d``
+
+.. include:: /includes/facts-locking.rst
+   :start-after: start-command-requires-locking-desc
+   :end-before: end-command-requires-locking-desc
+
+Set Object Lock Configuration for Versioned Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: Specific Version
+
+      Use :mc-cmd:`mc retention set` with
+      :mc-cmd-option:`~mc retention set version-id` to apply the retention
+      settings to a specific object version:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc retention set --version-id VERSION ALIAS/PATH MODE DURATION
+
+      - Replace :mc-cmd:`VERSION <mc retention set version-id>` with the version
+        of the object.
+
+      - Replace :mc-cmd:`ALIAS <mc retention set TARGET>` with the
+        :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc retention set TARGET>` with the path to the object.
+
+      - Replace :mc-cmd:`MODE <mc retention set MODE>` with the retention mode
+        to enable. MinIO supports the AWS S3 retention modes ``governance`` and
+        ``compliance``.
+
+      - Replace :mc-cmd:`DURATION <mc retention set VALIDITY>` with the duration
+        which the object lock should remain in effect. For example, to set a
+        retention period of 30 days, specify ``30d``
+
+   .. tab:: All Versions
+
+      Use :mc-cmd:`mc retention set` with
+      :mc-cmd-option:`~mc retention set versions` to apply the retention
+      settings to a specific object version:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc retention set --versions ALIAS/PATH MODE DURATION
+
+      - Replace :mc-cmd:`ALIAS <mc retention set TARGET>` with the
+        :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc retention set TARGET>` with the path to the object.
+
+      - Replace :mc-cmd:`MODE <mc retention set MODE>` with the retention mode
+        to enable. MinIO supports the AWS S3 retention modes ``governance`` and
+        ``compliance``.
+
+      - Replace :mc-cmd:`DURATION <mc retention set VALIDITY>` with the duration
+        which the object lock should remain in effect. For example, to set a
+        retention period of 30 days, specify ``30d``
+
+
+.. include:: /includes/facts-locking.rst
+   :start-after: start-command-requires-locking-desc
+   :end-before: end-command-requires-locking-desc
+
+Retrieve Object Lock Settings for an Object or Object(s)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: Specific Object
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc retention info ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc retention info TARGET>` with the
+        :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc retention info TARGET>` with the path to the
+        object.
+
+   .. tab:: Multiple Objects
+
+      Use :mc-cmd:`mc retention info` with
+      :mc-cmd-option:`~mc retention info recursive` to retrieve the retention
+      settings for all objects in a bucket:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc retention infoset --recursive ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc retention info TARGET>` with the
+        :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc retention info TARGET>` with the path to the 
+        bucket.
+
+
+.. include:: /includes/facts-locking.rst
+   :start-after: start-command-requires-locking-desc
+   :end-before: end-command-requires-locking-desc
+
+Clear Object Lock Settings for an Object or Object(s)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: Specific Object
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc retention clear ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc retention clear TARGET>` with the
+        :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc retention clear TARGET>` with the path to the
+        object.
+
+
+   .. tab:: Multiple Objects
+
+      Use :mc-cmd:`mc retention clear` with
+      :mc-cmd-option:`~mc retention clear recursive` to clear the retention
+      settings from all objects in a bucket:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc retention clear --recursive ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc retention clear TARGET>` with the
+        :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc retention clear TARGET>` with the path to the 
+        bucket.
+
+
+.. include:: /includes/facts-locking.rst
+   :start-after: start-command-requires-locking-desc
+   :end-before: end-command-requires-locking-desc
+
+Syntax
+------
+
+.. replacements for mc retention set
+
+.. |command| replace:: :mc-cmd:`mc retention set`
+.. |rewind| replace:: :mc-cmd-option:`~mc retention set rewind`
+.. |versionid| replace:: :mc-cmd-option:`~mc retention set version-id`
+.. |alias| replace:: :mc-cmd-option:`~mc retention set TARGET`
+.. |versions| replace:: :mc-cmd-option:`~mc retention set versions`
 
 .. mc-cmd:: set
    :fullpath:
@@ -61,118 +277,31 @@ Syntax
 
       mc retention set [FLAGS] TARGET MODE VALIDITY
 
-   - If the ``TARGET`` specifies a bucket or bucket prefix, include
-     :mc-cmd-option:`~mc retention set recursive` to apply the object lock
-     settings to the bucket contents.
-
-   - If the ``TARGET`` bucket has versioning enabled, :mc-cmd:`mc retention set`
-     by default applies to only the latest object version. Use
-     :mc-cmd-option:`~mc retention set verison-id` or
-     :mc-cmd-option:`~mc retention set versions` to apply the object lock
-     settings to a specific version or to all versions of the object.
-
    :mc-cmd:`mc retention set` supports the following arguments:
-
-   .. mc-cmd:: bypass
-      :option:
-
-      Allows a user with the ``s3:BypassGovernanceRetention`` permission
-      to modify the object. Requires the ``governance`` retention 
-      :mc-cmd:`~mc retention set MODE`
-
-   .. mc-cmd:: recursive, r
-      :option:
-
-      Recursively applies the object lock settings to all objects in the
-      specified :mc-cmd:`~mc retention set TARGET` path.
-
-      Mutually exclusive with :mc-cmd-option:`~mc retention set version-id`.
-
-   .. mc-cmd:: default
-      :option:
-
-      Sets the default object lock settings for the bucket specified to
-      :mc-cmd:`~mc retention set TARGET` using the
-      :mc-cmd:`~mc retention set MODE` and :mc-cmd:`~mc retention set VALIDITY`. 
-      Any objects created in the bucket inherit the default object lock settings
-      unless explicitly overriden using :mc-cmd:`mc retention set`.
-
-      .. versionadded:: RELEASE.2020-08-XXT00-00-00Z
-
-         :mc-cmd-option:`mc retention set default` replaces the functionality of
-         the deprecated :mc-cmd:`mc lock` command.
-      
-      If specifying :mc-cmd-option:`~mc retention set default`, 
-      :mc-cmd:`mc retention set` ignores all other flags.
-
-   .. mc-cmd:: version-id
-      :option:
-
-      Applies the object lock settings to the specified version of the
-      :mc-cmd:`~mc retention set TARGET` object. Requires
-      the bucket to have versioning enabled. Use :mc:`mc version` to
-      enable bucket versioning.
-
-      Mutually exclusive with any of the following flags:
-      
-      - :mc-cmd-option:`~mc retention set versions`
-      - :mc-cmd-option:`~mc retention set rewind`
-      - :mc-cmd-option:`~mc retention set recursive`
-
-   .. mc-cmd:: versions
-      :option:
-
-      Applies the object lock settings to all versions of the 
-      :mc-cmd:`~mc retention set TARGET` object or object(s). Requires the
-      bucket to have versioning enabled. Use :mc:`mc version` to enable bucket
-      versioning.
-
-      Use :mc-cmd-option:`~mc retention set rewind` and 
-      :mc-cmd-option:`~mc retention set versions` together to apply the object
-      lock settings to all versions of the object or object(s) which existed at
-      the specified duration prior to the current date. *or* at the specified
-      date.
-
-      Mutually exclusive with :mc-cmd-option:`~mc retention set version-id`.
-
-   .. mc-cmd:: rewind
-      :option:
-
-      Applies the object lock settings to the latest version of the object or
-      object(s) which existed at either the specified duration prior to the
-      current date *or* at a specific date.
-
-      - For duration, specify a string in ``#d#hh#mm#ss`` format. For example:
-        ``--rewind "1d2hh3mm4ss"``.
-
-      - For a date in time, specify an ISO8601-formatted timestamp. For example:
-        ``--rewind "2020.03.24T10:00"``.
-
-      For example, to apply the object lock settings to the object or object(s)
-      as they existed 30 days prior to the current date: ``--rewind "30d"``
-
-      Use :mc-cmd-option:`~mc retention set rewind` and 
-      :mc-cmd-option:`~mc retention set versions` together to apply the object
-      lock settings to all versions of the object or object(s) which existed at
-      the specified duration prior to the current date. *or* at the specified
-      date.
-
-      Mutually exclusive with :mc-cmd-option:`~mc retention set version-id`.
 
    .. mc-cmd:: TARGET
 
-      *Required* The full path to the object or objects for which to set
-      object lock configuration. Specify the :mc-cmd:`alias <mc alias>` of
-      a configured S3-compatible service as the prefix to the ``TARGET`` bucket
-      path. For example:
+      *Required* 
+      
+      The full path to the object or objects for which to set object lock
+      configuration. Specify the :mc-cmd:`alias <mc alias>` of a configured
+      S3-compatible service as the prefix to the ``TARGET`` bucket path. For
+      example:
 
       .. code-block:: shell
 
          mc retention play/mybucket/object.txt MODE VALIDITY
 
-      If specifying a bucket prefix, include the 
-      :mc-cmd-option:`~mc retention set recursive` flag to apply the object
-      lock configuration to all objects in the bucket.
+      - If the ``TARGET`` specifies a bucket or bucket prefix, include
+        :mc-cmd-option:`~mc retention set recursive` to apply the object lock
+        settings to the bucket contents.
+
+      - If the ``TARGET`` bucket has versioning enabled, 
+        :mc-cmd:`mc retention set`
+        by default applies to only the latest object version. Use
+        :mc-cmd-option:`~mc retention set version-id` or
+        :mc-cmd-option:`~mc retention set versions` to apply the object lock
+        settings to a specific version or to all versions of the object.
 
    .. mc-cmd:: MODE
 
@@ -199,7 +328,77 @@ Syntax
       - For years, specify a string formatted as ``Ny``. For example, 
         ``1y`` for 1 year after object creation.
 
+   .. mc-cmd:: bypass
+      :option:
+
+      Allows a user with the ``s3:BypassGovernanceRetention`` permission
+      to modify the object. Requires the ``governance`` retention 
+      :mc-cmd:`~mc retention set MODE`
+
+   .. mc-cmd:: recursive, r
+      :option:
+
+      Recursively applies the object lock settings to all objects in the
+      specified :mc-cmd:`~mc retention set TARGET` path.
+
+      Mutually exclusive with :mc-cmd-option:`~mc retention set version-id`.
+
+   .. mc-cmd:: default
+      :option:
+
+      Sets the default object lock settings for the bucket specified to
+      :mc-cmd:`~mc retention set TARGET` using the
+      :mc-cmd:`~mc retention set MODE` and :mc-cmd:`~mc retention set VALIDITY`. 
+      Any objects created in the bucket inherit the default object lock settings
+      unless explicitly overriden using :mc-cmd:`mc retention set`.
+      
+      If specifying :mc-cmd-option:`~mc retention set default`, 
+      :mc-cmd:`mc retention set` ignores all other flags.
+
+      Starting in :release:`RELEASE.2020-09-18T00-13-21Z`, 
+      :mc-cmd-option:`mc retention set default` replaces the functionality of
+      the deprecated :mc-cmd:`mc lock` command.
+
+   .. mc-cmd:: rewind
+      :option:
+
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-rewind-desc
+         :end-before: end-rewind-desc
+
+   .. mc-cmd:: version-id, vid
+      :option:
+   
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-version-id-desc
+         :end-before: end-version-id-desc
+
+      Mutually exclusive with any of the following flags:
+      
+      - :mc-cmd-option:`~mc retention set versions`
+      - :mc-cmd-option:`~mc retention set rewind`
+      - :mc-cmd-option:`~mc retention set recursive`
+
+   .. mc-cmd:: versions
+      :option:
+
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-versions-desc
+         :end-before: end-versions-desc
+
+      Use :mc-cmd-option:`~mc retention set versions` and
+      :mc-cmd-option:`~mc retention set rewind` together to apply the
+      retention settings to all object versions that existed at a
+      specific point-in-time.
+
+.. |command-2| replace:: :mc-cmd:`mc retention info`
+.. |rewind-2| replace:: :mc-cmd-option:`~mc retention info rewind`
+.. |versionid-2| replace:: :mc-cmd-option:`~mc retention info version-id`
+.. |versions-2| replace:: :mc-cmd-option:`~mc retention info versions`
+.. |alias-2| replace:: :mc-cmd-option:`~mc retention info TARGET`
+
 .. mc-cmd:: info
+   :fullpath:
 
    Returns the current object lock setting for the specified 
    :mc-cmd:`~mc retention info TARGET`. 
@@ -211,17 +410,30 @@ Syntax
 
       mc retention info [ARGUMENTS] TARGET
 
-   - If the ``TARGET`` specifies a bucket or bucket prefix, include 
-     :mc-cmd-option:`~mc retention info recursive` to return the object
-     lock settings for all objects in the bucket or bucket prefix.
-
-   - If the ``TARGET`` bucket has versioning enabled, 
-     :mc-cmd:`mc retention info` by default applies to only the latest object
-     version. Use :mc-cmd-option:`~mc retention info verison-id` or
-     :mc-cmd-option:`~mc retention info versions` to return the object lock
-     settings for a specific version or for all versions of the object.
-
    :mc-cmd:`mc retention info` supports the following arguments:
+
+   .. mc-cmd:: TARGET
+
+      *Required* 
+      
+      The full path to the object for which to retreive
+      the object lock configuration. Specify the :mc-cmd:`alias <mc alias>` of a
+      configured S3-compatible service as the prefix to the ``TARGET`` bucket
+      path. For example:
+
+      .. code-block:: shell
+
+         mc retention info play/mybucket/object.txt
+
+      - If the ``TARGET`` specifies a bucket or bucket prefix, include 
+        :mc-cmd-option:`~mc retention info recursive` to return the object
+        lock settings for all objects in the bucket or bucket prefix.
+
+      - If the ``TARGET`` bucket has versioning enabled, 
+        :mc-cmd:`mc retention info` by default applies to only the latest object
+        version. Use :mc-cmd-option:`~mc retention info version-id` or
+        :mc-cmd-option:`~mc retention info versions` to return the object lock
+        settings for a specific version or for all versions of the object.
 
    .. mc-cmd:: recursive, r
       :option:
@@ -237,21 +449,26 @@ Syntax
       Returns the default object lock settings for the bucket specified to
       :mc-cmd:`~mc retention info TARGET`.
 
-      .. versionadded:: RELEASE.2020-08-XXT00-00-00Z
-
-         :mc-cmd-option:`mc retention info default` replaces the functionality
-         of the deprecated :mc-cmd:`mc lock info` command.
-      
       If specifying :mc-cmd-option:`~mc retention info default`, 
       :mc-cmd:`mc retention info` ignores all other flags.
 
-   .. mc-cmd:: version-id
+      Starting in :release:`RELEASE.2020-09-18T00-13-21Z`, 
+      :mc-cmd-option:`mc retention info default` replaces the functionality of
+      the deprecated :mc-cmd:`mc lock` command.
+
+   .. mc-cmd:: rewind
       :option:
 
-      Returns the object lock settings of the specified version of the
-      :mc-cmd:`~mc retention info TARGET` object. Requires
-      the bucket to have versioning enabled. Use :mc:`mc version` to
-      enable bucket versioning.
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-rewind-desc-2
+         :end-before: end-rewind-desc-2
+
+   .. mc-cmd:: version-id, vid
+      :option:
+   
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-version-id-desc-2
+         :end-before: end-version-id-desc-2
 
       Mutually exclusive with any of the following flags:
       
@@ -262,80 +479,55 @@ Syntax
    .. mc-cmd:: versions
       :option:
 
-      Returns the object lock settings of all versions of the 
-      :mc-cmd:`~mc retention info TARGET` object or object(s). Requires the
-      bucket to have versioning enabled. Use :mc:`mc version` to enable bucket
-      versioning.
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-versions-desc-2
+         :end-before: end-versions-desc-2
 
-      Use :mc-cmd-option:`~mc retention info rewind` and 
-      :mc-cmd-option:`~mc retention info versions` together to return the object
-      lock settings of all versions of the object or object(s) which existed at
-      the specified duration prior to the current date. *or* at the specified
-      date.
+      Use :mc-cmd-option:`~mc retention info versions` and
+      :mc-cmd-option:`~mc retention info rewind` together to retrieve the
+      retention settings for all object versions that existed at a
+      specific point-in-time.
 
-      Mutually exclusive with :mc-cmd-option:`~mc retention info version-id`.
-
-   .. mc-cmd:: rewind
-      :option:
-
-      Returns the object lock settings of the latest version of the object or
-      object(s) which existed at either the specified duration prior to the
-      current date *or* at a specific date.
-
-      - For duration, specify a string in ``#d#hh#mm#ss`` format. For example:
-        ``--rewind "1d2hh3mm4ss"``.
-
-      - For a date in time, specify an ISO8601-formatted timestamp. For example:
-        ``--rewind "2020.03.24T10:00"``.
-
-      For example, to return the object lock settings to the object or object(s)
-      as they existed 30 days prior to the current date: ``--rewind "30d"``
-
-      Use :mc-cmd-option:`~mc retention info rewind` and 
-      :mc-cmd-option:`~mc retention info versions` together to return the object
-      lock settings of all versions of the object or object(s) which existed at
-      the specified duration prior to the current date. *or* at the specified
-      date.
-
-      Mutually exclusive with :mc-cmd-option:`~mc retention info version-id`.
-
-   .. mc-cmd:: TARGET
-
-      *Required* The full path to the object for which to retreive
-      the object lock configuration. Specify the :mc-cmd:`alias <mc alias>` of a
-      configured S3-compatible service as the prefix to the ``TARGET`` bucket
-      path. For example:
-
-      .. code-block:: shell
-
-         mc retention play/mybucket/object.txt MODE VALIDITY
-
-      If specifying a bucket or bucket prefix, include the 
-      :mc-cmd-option:`~mc retention info recursive` flag to return the object
-      lock configuration to all objects in the prefix.
+.. |command-3| replace:: :mc-cmd:`mc retention clear`
+.. |rewind-3| replace:: :mc-cmd-option:`~mc retention clear rewind`
+.. |versionid-3| replace:: :mc-cmd-option:`~mc retention clear version-id`
+.. |versions-3| replace:: :mc-cmd-option:`~mc retention clear versions`
+.. |alias-3| replace:: :mc-cmd-option:`~mc retention clear TARGET`
 
 .. mc-cmd:: clear
+   :fullpath:
 
    Clears the object lock setting for the specified ``TARGET``. 
 
-   :mc-cmd:`mc retention info` has the following syntax:
+   :mc-cmd:`mc retention clear` has the following syntax:
 
    .. code-block:: shell
       :class: copyable
 
       mc retention clear [ARGUMENTS] TARGET
 
-   - If the ``TARGET`` specifies a bucket or bucket prefix, include
-     :mc-cmd-option:`~mc retention clear recursive` to clear the object lock
-     settings to the bucket contents.
+   :mc-cmd:`mc retention clear` supports the following arguments:
 
-   - If the ``TARGET`` bucket has versioning enabled,
-     :mc-cmd:`mc retention clear` by default applies to only the latest object
-     version. Use :mc-cmd-option:`~mc retention clear verison-id` or
-     :mc-cmd-option:`~mc retention clear versions` to clear the object lock
-     settings for a specific version or for all versions of the object.
+   .. mc-cmd:: TARGET
 
-   :mc-cmd:`mc retention info` supports the following arguments:
+      *Required* The full path to the object or objects for which to clear
+      the object lock configuration. Specify the :mc-cmd:`alias <mc alias>` of a
+      configured S3-compatible service as the prefix to the ``TARGET`` bucket
+      path. For example:
+
+      .. code-block:: shell
+
+         mc retention clear play/mybucket/object.txt
+
+      - If the ``TARGET`` specifies a bucket or bucket prefix, include
+        :mc-cmd-option:`~mc retention clear recursive` to clear the object lock
+        settings to the bucket contents.
+
+      - If the ``TARGET`` bucket has versioning enabled,
+        :mc-cmd:`mc retention clear` by default applies to only the latest
+        object version. Use :mc-cmd-option:`~mc retention clear version-id` or
+        :mc-cmd-option:`~mc retention clear versions` to clear the object lock
+        settings for a specific version or for all versions of the object.
 
    .. mc-cmd:: recursive, r
       :option:
@@ -350,22 +542,27 @@ Syntax
 
       Clears the default object lock settings for the bucket specified to
       :mc-cmd:`~mc retention clear TARGET`.
-
-      .. versionadded:: RELEASE.2020-08-XXT00-00-00Z
-
-         :mc-cmd-option:`mc retention clear default` replaces the functionality
-         of the deprecated :mc-cmd:`mc lock clear` command.
       
       If specifying :mc-cmd-option:`~mc retention clear default`, 
       :mc-cmd:`mc retention clear` ignores all other flags.
 
-   .. mc-cmd:: version-id
+      Starting in :release:`RELEASE.2020-09-18T00-13-21Z`, 
+      :mc-cmd-option:`mc retention clear default` replaces the functionality of
+      the deprecated :mc-cmd:`mc lock` command.
+
+   .. mc-cmd:: rewind
       :option:
 
-      Clears the object lock settings of the specified version of the
-      :mc-cmd:`~mc retention clear TARGET` object. Requires
-      the bucket to have versioning enabled. Use :mc:`mc version` to
-      enable bucket versioning.
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-rewind-desc-3
+         :end-before: end-rewind-desc-3
+
+   .. mc-cmd:: version-id, vid
+      :option:
+   
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-version-id-desc-3
+         :end-before: end-version-id-desc-3
 
       Mutually exclusive with any of the following flags:
       
@@ -376,211 +573,15 @@ Syntax
    .. mc-cmd:: versions
       :option:
 
-      Clears the object lock settings of all versions of the 
-      :mc-cmd:`~mc retention clear TARGET` object or object(s). Requires the
-      bucket to have versioning enabled. Use :mc:`mc version` to enable bucket
-      versioning.
+      .. include:: /includes/facts-versioning.rst
+         :start-after: start-versions-desc-3
+         :end-before: end-versions-desc-3
 
-      Use :mc-cmd-option:`~mc retention clear rewind` and 
-      :mc-cmd-option:`~mc retention clear versions` together to clear the
-      object lock settings of all versions of the object or object(s) which
-      existed at the specified duration prior to the current date. *or* at the
-      specified date.
+      Use :mc-cmd-option:`~mc retention clear versions` and
+      :mc-cmd-option:`~mc retention clear rewind` together to remove the
+      retention settings from all object versions that existed at a
+      specific point-in-time.
 
-      Mutually exclusive with :mc-cmd-option:`~mc retention clear version-id`.
 
-   .. mc-cmd:: rewind
-      :option:
 
-      Clears the object lock settings of the latest version of the object or
-      object(s) which existed at either the specified duration prior to the
-      current date *or* at a specific date.
 
-      - For duration, specify a string in ``#d#hh#mm#ss`` format. For example:
-        ``--rewind "1d2hh3mm4ss"``.
-
-      - For a date in time, specify an ISO8601-formatted timestamp. For example:
-        ``--rewind "2020.03.24T10:00"``.
-
-      For example, to clear the object lock settings to the object or object(s)
-      as they existed 30 days prior to the current date: ``--rewind "30d"``
-
-      Use :mc-cmd-option:`~mc retention clear rewind` and 
-      :mc-cmd-option:`~mc retention clear versions` together to clear the
-      object lock settings of all versions of the object or object(s) which
-      existed at the specified duration prior to the current date *or* at the
-      specified date.
-
-      Mutually exclusive with :mc-cmd-option:`~mc retention clear version-id`.
-
-   .. mc-cmd:: TARGET
-
-      *Required* The full path to the object or objects for which to clear
-      the object lock configuration. Specify the :mc-cmd:`alias <mc alias>` of a
-      configured S3-compatible service as the prefix to the ``TARGET`` bucket
-      path. For example:
-
-      .. code-block:: shell
-
-         mc retention clear play/mybucket/object.txt MODE VALIDITY
-
-      If specifying a bucket prefix, include the 
-      :mc-cmd-option:`~mc retention info recursive` flag to return the object
-      lock configuration to all objects in the prefix.
-
-Behavior
---------
-
-Bucket Must Enable Object Locking
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:mc:`mc retention` *requires* that the specified bucket has object locking
-enabled. You can **only** enable object locking at bucket creation. See
-:mc-cmd-option:`mc mb with-lock` for documentation on creating buckets with
-object locking enabled. 
-
-Retention of Object Versions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For buckets with :mc:`versioning enabled <mc version>`, :mc:`mc retention` by
-default operates on the *latest* version of the target object or object(s). 
-
-- Use the :mc-cmd-option:`mc retention set versions`,
-  :mc-cmd-option:`mc retention info versions`, or
-  :mc-cmd-option:`mc retention clear versions` to target 
-  all versions of an object or object(s).
-
-- Use the :mc-cmd-option:`mc retention set version-id`,
-  :mc-cmd-option:`mc retention info version-id`, or
-  :mc-cmd-option:`mc retention clear version-id` to target a specific
-  version of an object.
-
-Interaction with Legal Holds
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Enabling a legal hold on an object prevents any modification or deletion of that
-object, similar to the :mc-cmd:`COMPLIANCE <mc retention set MODE>` object
-locking mode. Legal holds are independent of object lock settings - an object
-can have both a legal hold *and* object locking enabled at the same time.
-*However*, the legal hold *overrides* the object lock settings. That is,
-regardless of the object lock settings, the legal hold prevents any object
-modification or deletion until the hold is explicitly lifted. Setting,
-modifying, or clearing object lock settings for an object under legal hold has
-no effect until the legal hold either expires or is explicitly disabled.
-
-For more information on object legal holds, see :mc-cmd:`mc legalhold`.
-
-Examples
---------
-
-Set Bucket Object Lock Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-This example assumes that the specified bucket has object locking enabled. 
-See :mc-cmd-option:`mc mb with-lock` for more information on creating buckets
-with object locking enabled.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc retention --recursive --default set play/mybucket/ governance 30d
-
-Set Object Lock Configuration for Specific Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-This example assumes that the specified bucket has object locking enabled. 
-See :mc-cmd-option:`mc mb with-lock` for more information on creating buckets
-with object locking enabled.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc retention set play/mybucket/data.csv governance 30d
-
-Set Object Lock Configuration for Versioned Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-This example assumes that the specified bucket has object locking enabled. 
-See :mc-cmd-option:`mc mb with-lock` for more information on creating buckets
-with object locking enabled.
-
-For buckets with :mc:`versioning <mc version>` enabled, use the 
-:mc-cmd-option:`~mc retention set versions` option to apply the object lock 
-settings to all versions of the object.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc retention --versions set play/mybucket/data.csv governance 30d
-
-Use the :mc-cmd-option:`~mc retention set version-id` option to apply the 
-object lock settings to a specific version of the object.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc retention --version-id hTyrbac12.sdsd set play/mybucket/data.csv governance 30d
-
-Retrieve Object Lock Settings for an Object or Object(s)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-This example assumes that the specified bucket has object locking enabled. 
-See :mc-cmd-option:`mc mb with-lock` for more information on creating buckets
-with object locking enabled.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc retention info play/mybucket/data.csv
-
-To retrieve the object lock settings for all objects in the bucket or a bucket
-prefix, include the :mc-cmd-option:`~mc retention info recursive` option:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc retention --recursive info play/mybucket
-
-   mc retention --recursive info play/mybucket/myprefix/
-
-Clear Object Lock Settings for an Object or Object(s)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-This example assumes that the specified bucket has object locking enabled. 
-See :mc-cmd-option:`mc mb with-lock` for more information on creating buckets
-with object locking enabled.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc retention clear play/mybucket/data.csv
-
-To clear the object lock settings for all objects in the bucket or a bucket
-prefix, include the :mc-cmd-option:`~mc retention info recursive` option:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc retention --recursive clear play/mybucket
-
-   mc retention --recursive clear play/mybucket/myprefix/

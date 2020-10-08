@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc::  mc head
 
@@ -20,37 +20,77 @@ where ``n`` is an argument specified to the command.
 
 .. end-mc-head-desc
 
-Quick Reference
----------------
+:mc:`mc head` does not perform any transformation or formatting of object
+contents to facilitate readability.
 
-:mc-cmd:`mc head play/object.txt <mc head SOURCE>`
-   Returns the first 10 lines of ``object.txt``. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+Examples
+--------
 
-:mc-cmd:`mc head --lines 20 play/object.txt <mc head lines>`
-   Returns the first 20 lines of ``object.txt``. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+View Partial Contents of an Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc head --rewind "30d" play/object.txt <mc head rewind>`
-   Returns the first 10 lines of ``object.txt`` as it existed 30 days prior to
-   the current date. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+Use :mc-cmd:`mc head` to return the first 10 lines of an object:
 
-   :mc-cmd-option:`mc head rewind` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
-   on a bucket.
+.. code-block:: shell
+   :class: copyable
 
-:mc-cmd:`mc head --version-id 4f85ff5c-ade5-4fb7-be54-1b62dd00f45f play/object.txt <mc head version-id>`
-   Returns the first 10 lines of the ``object.txt`` version with matching
-   ``--version-id``. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+   mc head ALIAS/PATH
 
-   :mc-cmd-option:`mc head version-id` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
-   on a bucket.
+- Replace :mc-cmd:`ALIAS <mc head SOURCE>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
 
-   Use :mc-cmd:`mc ls versions play\myobject.txt <mc ls versions>` to list all 
-   versions of the object.
+- Replace :mc-cmd:`PATH <mc head SOURCE>` with the path to the object on the
+  S3-compatible host.
+
+View Partial Contents of an Object at a Point in Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc head rewind` to return the first 10 lines of the
+object at a specific point-in-time in the past:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc head ALIAS/PATH --rewind DURATION
+
+- Replace :mc-cmd:`ALIAS <mc head SOURCE>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc head SOURCE>` with the path to the object on the
+  S3-compatible host.
+
+- Replace :mc-cmd:`DURATION <mc head rewind>` with the point-in-time in the past
+  at which the command returns the object. For example, specify ``30d`` to
+  return the version of the object 30 days prior to the current date.
+
+.. include:: /includes/facts-versioning.rst
+   :start-after: start-versioning-admonition
+   :end-before: end-versioning-admonition
+
+View Partial Contents of an Object with Specific Version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc head version-id` to return the first 10 lines of the
+object at a specific point-in-time in the past:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc head ALIAS/PATH --version-id VERSION
+
+- Replace :mc-cmd:`ALIAS <mc head SOURCE>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc head SOURCE>` with the path to the object on the
+  S3-compatible host.
+
+- Replace :mc-cmd:`VERSION <mc head version-id>` with the version of the object.
+  For example, specify ``30d`` to return the version of the object 30 days prior
+  to the current date.
+
+.. include:: /includes/facts-versioning.rst
+   :start-after: start-versioning-admonition
+   :end-before: end-versioning-admonition
 
 Syntax
 ------
@@ -117,39 +157,3 @@ Syntax
    :mc-cmd-option:`~mc head encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
-
-Behavior
---------
-
-:mc:`mc head` makes no assumptions about the format of the object data.
-If the object data is not human readable, the output of :mc:`mc head`
-will also not be human readable.
-
-Examples
---------
-
-Display ``n`` Lines of an Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc head --lines 20 play/mybucket/myobject.txt
-
-Display ``n`` Lines of an Encrypted Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc head lines --20 \
-     --encrypt-key "play/mybucket=32byteslongsecretkeymustbegiven1" \
-     play/mybucket/myobject.txt

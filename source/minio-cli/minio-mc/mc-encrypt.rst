@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc encrypt
 
@@ -24,18 +24,26 @@ For more information on configuring SSE, see
 
 .. end-mc-encrypt-desc
 
+Behavior
+~~~~~~~~
+
+:mc:`mc encrypt` makes no assumptions about the MinIO server's current
+encryption state. Specifying default encryption settings which the 
+server cannot support may result in undesired behavior.
+
+Setting or modifying the default server-side encryption settings does *not*
+automatically encrypt or decrypt the existing bucket contents. If the bucket
+contents *must* have consistent encryption, use the
+:mc:`mc mv` mc with the :mc-cmd-option:`~mc mv encrypt` or
+:mc-cmd-option:`~mc mv encrypt-key` arguments to manually modify the
+encryption settings or encrypted state of the bucket contents *before*
+changing the bucket default. 
+
 Syntax
 ------
 
-:mc:`~mc encrypt` has the following syntax:
-
-.. code-block:: shell
-
-   mc encrypt COMMAND [COMMAND FLAGS] [ARGUMENTS...]
-
-:mc:`~mc encrypt` supports the following commands:
-
 .. mc-cmd:: set
+   :fullpath:
 
    Sets the default encryption settings for the bucket. The command has the
    following syntax:
@@ -58,7 +66,7 @@ Syntax
    .. mc-cmd:: KMSKEY
 
       Specify the KMS Master Key to use for performing SSE object encryption.
-      Only required if :mc-cmd:`~mc encrypt ENCRYPTION` is ``sse-kms``.
+      Only required if :mc-cmd:`~mc encrypt set ENCRYPTION` is ``sse-kms``.
 
    .. mc-cmd:: TARGET
 
@@ -71,6 +79,7 @@ Syntax
          mc encrypt set ENCRYPTION [KMSKEY] play/mybucket
 
 .. mc-cmd:: clear
+   :fullpath:
 
    Removes the default encryption settings for the bucket. The command has
    the following syntax:
@@ -85,13 +94,14 @@ Syntax
 
       The full path to the bucket on which to clear the default SSE mode.
       Specify the :mc-cmd:`~mc alias` of a configured S3 service as the prefix
-      to the TARGET path. For example:
+      to the ``TARGET`` path. For example:
 
       .. code-block:: shell
 
          mc encrypt remove play/mybucket
 
 .. mc-cmd:: info
+   :fullpath:
 
    Returns the current default bucket encryption settings. The command
    has the following syntax:
@@ -106,29 +116,10 @@ Syntax
 
       The full path to the bucket on which to return the default SSE mode.
       Specify the :mc-cmd:`~mc alias` of a configured S3 service as the prefix
-      to the TARGET path. For example:
+      to the ``TARGET`` path. For example:
 
       .. code-block:: shell
 
          mc encrypt remove play/mybucket
 
-Behavior
---------
-
-:mc:`mc encrypt` makes no assumptions about the MinIO server's current
-encryption state. Specifying default encryption settings which the 
-server cannot support may result in undesired behavior.
-
-Setting or modifying the default server-side encryption settings does *not*
-automatically encrypt or decrypt the existing bucket contents. If the bucket
-contents *must* have consistent encryption settings, use the
-:mc:`mc mv` mc with the :mc-cmd:`~mc mv --encrypt` or
-:mc-cmd:`~mc mv --encrypt-key` arguments to manually modify the
-encryption settings or encrypted state of the bucket contents *before*
-changing the bucket default. 
-
-Examples
---------
-
-ToDo
 

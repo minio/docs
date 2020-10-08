@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc stat
 
@@ -20,6 +20,41 @@ specified S3-compatible service bucket. :mc:`mc stat` has similar functionality
 as the ``stat`` command when used on a filesystem path.
 
 .. end-mc-stat-desc
+
+Examples
+--------
+
+.. tabs::
+
+   .. tab:: Single Object
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc stat ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc stat TARGET>` with the 
+        :mc:`alias <mc alias>` of the S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc stat TARGET>` with the path to the bucket
+        or object on the S3-compatible host.
+
+   .. tab:: Object(s) in Bucket
+
+      Use :mc:`mc stat` with the :mc-cmd-option:`~mc stat recursive` option
+      to apply the operation to all objects in the bucket:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc stat --recursive ALIAS/PATH
+
+      - Replace :mc-cmd:`ALIAS <mc stat TARGET>` with the 
+        :mc:`alias <mc alias>` of the S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc stat TARGET>` with the path to the bucket
+        or object on the S3-compatible host.
+
 
 Syntax
 ------
@@ -71,18 +106,3 @@ Syntax
    :mc-cmd-option:`~mc stat encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
-
-
-
-Behavior
---------
-
-Examples
---------
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable

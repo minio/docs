@@ -20,33 +20,66 @@ bucket or object.
 
 .. end-mc-tag-desc.
 
-Quick Reference
----------------
+Examples
+--------
 
-:mc-cmd:`mc tag set play/mybucket/myobject.csv "tag1=value1,tag2=value2" <mc tag set>`
-   Applies the tags ``tag1`` and ``tag2`` and their corresponding values to 
-   the ``myobject.csv`` object in the ``mybucket`` bucket. ``play`` 
-   corresponds to the :mc-cmd:`alias <mc alias>` of a configured S3-compatible
-   service.
+Apply Tags to a Bucket or Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc tag remove play/mybucket/myobject.csv <mc tag remove>`
-   Removes all tags assigned to the ``myobject.csv`` bucket. ``play`` 
-   corresponds to the :mc-cmd:`alias <mc alias>` of a configured S3-compatible
-   service.
+Use :mc-cmd:`mc tag set` to apply tags to a bucket or object:
 
-:mc-cmd:`mc tag info play/mybucket/myobject.csv <mc tag info>`
-   Retrieves the tags assigned to the ``myobject.csv`` bucket. ``play`` 
-   corresponds to the :mc-cmd:`alias <mc alias>` of a configured S3-compatible
-   service.
+.. code-block:: shell
+   :class: copyable
+
+   mc tag ALIAS/PATH "TAGS"
+
+- Replace :mc-cmd:`ALIAS <mc tag set TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc tag set TARGET>` with the path to the bucket
+  or object on the S3-compatible host.
+
+- Replace :mc-cmd:`TAGS <mc tag TAGS>` with one or more comma-separated
+  key-value pairs for each tag and its corresponding value.
+
+Remove Tags from a Bucket or Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc tag remove` to remove all tags from a bucket or object:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc tag ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc tag remove TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc tag remove TARGET>` with the path to the bucket
+  or object on the S3-compatible host.
+
+List Tags for a Bucket or Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Remove Tags from a Bucket or Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc tag info` to retrieve all tags for a bucket or object:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc tag ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc tag info TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc tag info TARGET>` with the path to the bucket
+  or object on the S3-compatible host.
+
 
 Syntax
 ------
-
-.. code-block:: shell
-
-   mc tag COMMAND
-
-:mc:`mc tag` supports the following commands:
 
 .. |command| replace:: :mc-cmd:`mc tag set`
 .. |rewind| replace:: :mc-cmd-option:`~mc tag set rewind`

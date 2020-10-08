@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc tree
 
@@ -17,13 +17,27 @@ Description
 
 The :mc:`mc tree` command lists buckets and directories in a tree format. 
 
-When applied to an S3-compatible service bucket, :mc:`mc tree` returns
-a tree listing of the bucket and all bucket prefixes.
-
-When applied to a local filesystem directory, :mc:`mc tree` returns a 
-tree listing of the directory and all of its subdirectories.
-
 .. end-mc-tree-desc
+
+- When applied to an S3-compatible service bucket, :mc:`mc tree` returns
+  a tree listing of the bucket and all bucket prefixes.
+
+- When applied to a local filesystem directory, :mc:`mc tree` returns a 
+  tree listing of the directory and all of its subdirectories.
+
+Examples
+--------
+
+.. code-block:: shell
+   :class: copyable
+
+   mc tree ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc tree TARGET>` with the :mc:`alias <mc alias>` 
+  of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc tree TARGET>` with the path to the bucket on the
+  S3-compatible host.
 
 Syntax
 ------
@@ -66,14 +80,3 @@ Syntax
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-Examples
---------
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc tree play/mybucket

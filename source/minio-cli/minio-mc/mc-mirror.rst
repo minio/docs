@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc mirror
 
@@ -15,11 +15,73 @@ Description
 
 .. start-mc-mirror-desc
 
-The :mc:`mc mirror` command synchronizes content between a source
-filesystem and a target S3-compatible service. :mc:`~mc mirror` has
-similar functionality to ``rsync``. 
+The :mc:`mc mirror` command synchronizes content to an S3-compatible host,
+similar to the ``rsync`` utility. :mc:`mc mirror` supports both filesystems and
+S3-compatible hosts as the synchronization source.
 
 .. end-mc-mirror-desc
+
+Examples
+--------
+
+Mirror a Local Directory to an S3-Compatible Host
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc mirror` to mirror files from a filesystem to an S3 Host:
+
+.. code-block::
+   :class: copyable
+
+   mc mirror FILEPATH ALIAS/PATH
+
+- Replace :mc-cmd:`FILEPATH <mc mirror SOURCE>` with the full file path to the
+  directory to mirror.
+
+- Replace :mc-cmd:`ALIAS <mc mirror TARGET>` with the :mc-cmd:`alias <mc alias>`
+  of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc mirror TARGET>` with the destination bucket.
+
+Continuously Mirror a Local Directory to an S3-Compatible Host
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc watch` with :mc-cmd-option:`~mc mirror watch` to continuously mirror
+files from a filesystem to an S3-compatible host:
+
+.. code-block::
+   :class: copyable
+
+   mc mirror FILEPATH ALIAS/PATH
+
+- Replace :mc-cmd:`FILEPATH <mc mirror SOURCE>` with the full file path to the
+  directory to mirror.
+
+- Replace :mc-cmd:`ALIAS <mc mirror TARGET>` with the :mc-cmd:`alias <mc alias>`
+  of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc mirror TARGET>` with the destination bucket.
+
+Continuously Mirror S3 Bucket to an S3-Compatible Host
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc mirror` with :mc-cmd-option:`~mc mirror watch` to continuously
+mirror objects in a bucket on one S3-compatible host to another S3-compatible
+host.
+
+.. code-block::
+   :class: copyable
+
+   mc mirror --watch SRCALIAS/SRCPATH TGTALIAS/TGTPATH
+
+- Replace :mc-cmd:`SRCALIAS <mc mirror SOURCE>` with :mc-cmd:`alias <mc alias>`
+  of a configured S3-compatible host.
+
+- Replace :mc-cmd:`SRCPATH <mc mirror SOURCE>` with the bucket to mirror.
+
+- Replace :mc-cmd:`TGTALIAS <mc mirror TARGET>` with the 
+  :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`TGTPATH <mc mirror TARGET>` with the destination bucket.
 
 Syntax
 ------
@@ -34,20 +96,53 @@ Syntax
 
 .. mc-cmd:: SOURCE
 
-   **REQUIRED**
+   *REQUIRED*
 
-   The full path to the object or directory to synchronize. If specifying
-   a directory, :mc:`mc mirror` synchronizes all objects in the 
+   The file(s) or object(s) to synchronize to the :mc-cmd:`~mc mirror TARGET`
+   S3 host.
+
+   For objects on S3-compatible hosts, specify the path to the object as 
+   ``ALIAS/PATH``, where:
+
+   - ``ALIAS`` is the :mc:`alias <mc alias>` of a configured S3-compatible host,
+     *and*
+
+   - ``PATH`` is the path to the bucket or object. If specifying a bucket,
+     :mc:`mc mirror` synchronizes all objects in the bucket.
+
+   .. code-block:: shell
+
+      mc mirror [FLAGS] play/mybucket/ TARGET
+
+   For files on a filesystem, specify the full filesystem path to the file or
+   directory :
+
+   .. code-block:: shell
+
+      mc mirror [FLAGS] ~/data/ TARGET
+
+   If specifying a directory, :mc-cmd:`mc mirror` synchronizes all files in the
    directory.
 
 .. mc-cmd:: TARGET
 
-   **REQUIRED**
+   *REQUIRED*
 
    The full path to bucket in which :mc:`mc mirror` copies
-   synchronized SOURCE objects. Specify the :mc:`alias <mc alias>` of a
-   configured S3 service as the prefix to the :mc-cmd:`~mc mirror TARGET`
-   path. 
+   synchronized SOURCE objects. Specify the ``TARGET`` as
+   ``ALIAS/PATH``, where:
+
+   - ``ALIAS`` is the :mc:`alias <mc alias>` of a configured S3-compatible
+     host, *and*
+
+   - ``PATH`` is the path to the bucket.
+
+   .. code-block:: shell
+
+      mc mirror SOURCE play/mybucket
+
+   :mc:`mc mirror` uses the object or file names from the
+   :mc-cmd:`~mc mirror SOURCE` when synchronizing to the ``TARGET`` bucket.
 
 .. mc-cmd:: overwrite
    :option:
@@ -140,34 +235,3 @@ Syntax
    You can only delete encrypted objects if you specify the correct
    :mc-cmd-option:`~mc mirror encrypt-key` secret key.
 
-Behavior
---------
-
-Examples
---------
-
-Mirror a Local Directory to an S3 Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-
-.. code-block::
-   :class: copyable
-
-   mc mirror ~/data/ play/mybucket
-
-Continuously Mirror a Local Directory to an S3 Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-
-.. code-block::
-   :class: copyable
-
-   mc mirror --watch ~/data/ play/mybucket

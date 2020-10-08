@@ -103,3 +103,5 @@ html_static_path = ['_static']
 html_css_files = ['css-style.css']
 
 html_js_files = ['js/main.js']
+
+html_title = 'MinIO Documentation'

@@ -30,52 +30,69 @@ mode on the object.
    See :mc-cmd-option:`mc mb with-lock` for documentation on creating
    buckets with object locking enabled. 
 
-Quick Reference
----------------
+Examples
+--------
 
-:mc-cmd:`mc legalhold set play/mybucket/myobject.txt <mc legalhold set>`
-   Enables legalhold on the ``myobject.txt`` object in the ``mybucket`` bucket.
-   ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a configured
-   S3-compatible service.
+Enable Legal Hold On Objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc legalhold set --recursive play/mybucket <mc legalhold set recursive>`
-   Recursively enables legalhold on the contents of the ``mybucket`` bucket.
-   ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a configured
-   S3-compatible service.
-
-:mc-cmd:`mc legalhold set --rewind "30d" --recursive play/mybucket <mc legalhold set rewind>`
-   Recursively enables legalhold on the contents of the ``mybucket`` bucket 
-   as they existed 30 days prior to the current date. ``play`` corresponds 
-   to the :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
-
-   :mc-cmd-option:`mc legalhold set rewind` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
-   on a bucket.
-
-:mc-cmd:`mc legalhold clear play/mybucket/myobject.txt <mc legalhold clear>`
-   Removes legalhold on the ``myobject.txt`` object in the ``mybucket``
-   bucket. ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a 
-   configured S3-compatible service.
-
-:mc-cmd:`mc legalhold info play/mybucket/myobject.txt <mc legalhold info>`
-   Retrieves the legalhold status of the ``myobject.txt`` object in the
-   ``mybucket`` bucket. ``play`` corresponds to the :mc-cmd:`alias <mc alias>`
-   of a configured S3-compatible service.
-
-Syntax
-------
+Use :mc-cmd:`mc legalhold set` to enable legal hold on objects:
 
 .. code-block:: shell
    :class: copyable
 
-   mc legalhold COMMAND
+   mc legalhold set [--recursive] ALIAS/PATH 
 
-:mc:`~mc legalhold` supports the following commands:
+- Replace :mc-cmd:`ALIAS <mc legalhold set TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc legalhold set TARGET>` with the path to the bucket
+  or object on the S3-compatible host. If specifying the path to a bucket,
+  include the :mc-cmd-option:`~mc legalhold set recursive` option.
+
+Remove Legal Hold From Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc legalhold clear` to remove legal hold on objects:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc legalhold clear [--recursive] ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc legalhold clear TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc legalhold clear TARGET>` with the path to the bucket
+  or object on the S3-compatible host. If specifying the path to a bucket,
+  include the :mc-cmd-option:`~mc legahold clear recursive` option.
+
+Retrieve the Legal Hold Status Objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc legalhold info` to retrieve the legal hold status of an object.
+Include :mc-cmd-option:`~mc legalhold info recursive` to return the legal hold
+status of the contents of a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc legalhold clear [--recursive] ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc legalhold clear TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc legalhold clear TARGET>` with the path to the object
+  or bucket on the S3-compatible host. If specifying the path to a bucket,
+  include the :mc-cmd-option:`~mc legalhold info recursive` option.
+
+Syntax
+------
 
 .. replacements for mc legalhold set
 
 .. |command| replace:: :mc-cmd:`mc legalhold set`
-.. |rewind| replace:: :mc-cmd-option:`~mc legalhold info rewind`
+.. |rewind| replace:: :mc-cmd-option:`~mc legalhold set rewind`
 .. |versionid| replace:: :mc-cmd-option:`~mc legalhold set version-id`
 .. |alias| replace:: :mc-cmd-option:`~mc legalhold set TARGET`
 
@@ -95,11 +112,13 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      *Required* The full path to the object or bucket on which to enable
+      *Required* 
+      
+      The full path to the object or bucket on which to enable
       the legal hold. Specify the :mc-cmd:`alias <mc alias>` of a configured
       S3-compatible service as the prefix to the ``TARGET`` path. For example:
 
-      .. code-block::
+      .. code-block:: shell
 
          mc legalhold set play/mybucket/myobject.txt
 
@@ -231,37 +250,4 @@ Syntax
       .. include:: /includes/facts-versioning.rst
          :start-after: start-version-id-desc-3
          :end-before: end-version-id-desc-3
-
-Examples
---------
-
-Enable Legal Hold on Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-This example assumes that the specified bucket has object locking enabled. 
-See :mc-cmd-option:`mc mb with-lock` for more information on creating buckets
-with object locking enabled.
-
-.. code-block:: shell
-
-   mc legalhold set --recursive play/mybucket
-
-Enable Legal Hold on an Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-This example assumes that the specified bucket has object locking enabled. 
-See :mc-cmd-option:`mc mb with-lock` for more information on creating buckets
-with object locking enabled.
-
-.. code-block:: shell
-
-   mc legalhold set play/mybucket/myobject.csv
 

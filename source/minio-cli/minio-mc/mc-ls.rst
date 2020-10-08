@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc ls
 
@@ -21,35 +21,71 @@ functionality as the ``ls`` command.
 
 .. end-mc-ls-desc
 
-Quick Reference
----------------
+Examples
+--------
 
-:mc-cmd:`mc ls play/mybucket <mc ls TARGET>`
-   Lists the contents of the ``mybucket`` bucket. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+List Bucket Contents
+~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc ls --recursive play <mc ls recursive>`
-   Recursively lists all buckets and objects on the S3-compatible service.
-   ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a configured
-   S3-compatible service.
+Use :mc-cmd:`mc ls <mc ls TARGET>` to list the contents of a bucket:
 
-:mc-cmd:`mc ls --versions play/myversionedbucket <mc ls versions>`
-   Lists the version of all objects in the ``myversionbucket`` bucket. ``play``
-   corresponds to the :mc-cmd:`alias <mc alias>` of a configured S3-compatible
-   service.
+.. code-block:: shell
+   :class: copyable
 
-   :mc-cmd-option:`mc ls versions` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
-   on a bucket.
+   mc ls [--recursive] ALIAS/PATH
 
-:mc-cmd:`mc ls --rewind 7d play/myversionedbucket <mc ls versions>`
-   Lists the contents of the ``myversionedbucket`` bucket as they
-   existed 7 days prior to the current date. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+- Replace :mc-cmd:`ALIAS <mc ls TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
 
-   :mc-cmd-option:`mc ls versions` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
-   on a bucket.
+- Replace :mc-cmd:`PATH <mc ls TARGET>` with the path to the bucket on the
+  S3-compatible host.
+
+  If specifying the path to the S3 root (``ALIAS`` only), include the
+  :mc-cmd-option:`~mc ls recursive` option.
+
+List Object Versions
+~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc ls versions` to list all versions of an object:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ls --versions ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc ls TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc ls TARGET>` with the path to the bucket or object on
+  the S3-compatible host.
+
+.. include:: /includes/facts-versioning.rst
+   :start-after: start-versioning-admonition
+   :end-before: end-versioning-admonition
+
+List Bucket Contents at Point in Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc ls versions` to list all versions of an object:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ls --rewind DURATION ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc ls TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc ls TARGET>` with the path to the bucket or object on
+  the S3-compatible host.
+
+- Replace :mc-cmd:`DURATION <mc ls rewind>` with the point-in-time in the past
+  at which the command returns the object. For example, specify ``30d`` to
+  return the version of the object 30 days prior to the current date.
+
+.. include:: /includes/facts-versioning.rst
+   :start-after: start-versioning-admonition
+   :end-before: end-versioning-admonition
 
 Syntax
 ------
@@ -71,7 +107,6 @@ Syntax
 :mc-cmd:`mc ls` supports the following arguments:
 
 .. mc-cmd:: TARGET
-   :fullpath:
 
    *Required* The full path to one or more locations whose contents the command
    lists. 

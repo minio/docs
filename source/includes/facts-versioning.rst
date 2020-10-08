@@ -129,3 +129,13 @@ that supports :ref:`minio-bucket-versioning`. For MinIO deployments, use
 :mc-cmd:`mc version` to enable or disable bucket versioning.
 
 .. end-version-id-desc-3
+
+.. start-versioning-admonition
+
+.. admonition:: Requires Versioning
+   :class: note
+
+   |command| requires :ref:`bucket versioning <minio-bucket-versioning>` to
+   use this feature. Use :mc:`mc version` to enable versioning on a bucket.
+
+.. end-versioning-admonition

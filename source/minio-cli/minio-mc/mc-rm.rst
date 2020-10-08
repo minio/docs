@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc rm
 
@@ -20,6 +20,92 @@ To completely remove a bucket, use :mc:`mc rb` instead.
 
 .. end-mc-rm-desc
 
+Deleting Bucket Contents
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using :mc:`mc rm` to remove all contents in a bucket does not delete the bucket
+itself. Any configurations associated to the bucket remain in place, such as
+:mc-cmd-option:`default object lock settings <mc retention set default>`.
+
+To completely remove a bucket, use :mc:`mc rb` instead of :mc:`mc rm`.
+
+Examples
+--------
+
+Remove a Single Object
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+   :class: copyable
+
+   mc rm ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc rm TARGET>` with the :mc:`alias <mc alias>` of
+  a configured S3-compatible service.
+
+- Replace :mc-cmd:`PATH <mc rm TARGET>` with the path to the object.
+
+
+Recursively Remove a Bucket's Contents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc rm` with the
+:mc-cmd-option:`~mc rm recursive` and :mc-cmd-option:`~mc rm force` options
+to recursively remove a bucket's contents.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc rm --recursive --force ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc rm TARGET>` with the :mc:`alias <mc alias>` of
+  a configured S3-compatible service.
+
+- Replace :mc-cmd:`PATH <mc rm TARGET>` with the path to the bucket.
+
+This operation does *not* remove the bucket. Use :mc:`mc rb` to remove the
+bucket along with all contents and associated configurations.
+
+Remove All Incomplete Upload Files for an Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc rm` with the :mc-cmd-option:`~mc rm incomplete` option to remove
+incomplete upload files for an object. 
+
+.. code-block:: shell
+   :class: copyable
+
+   mc rm --recursive --force ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc rm TARGET>` with the :mc:`alias <mc alias>` of
+  a configured S3-compatible service.
+
+- Replace :mc-cmd:`PATH <mc rm TARGET>` with the path to the object.
+
+Removing incomplete upload files prevents resuming the upload using the
+:mc-cmd:`mc mv --continue` or :mc-cmd:`mc cp --continue` commands.
+
+Roll Object Back To Previous Version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc rm` with :mc-cmd-option:`~mc rm rewind` to
+remove all object versions created after the specified point-in-time. This
+effectively "rolls back" the object to its state at that time.
+
+.. code-block:: shell
+   :class: moveable
+
+   mc rm --rewind DURATION ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc rm TARGET>` with the :mc:`alias <mc alias>` of
+  a configured S3-compatible service.
+
+- Replace :mc-cmd:`PATH <mc rm TARGET>` with the path to the object.
+
+- Replace :mc-cmd:`DURATION <mc rm rewind>` with the duration in the past to
+  apply the command. For example, to restore an object to its state 30 days
+  in the past, specify ``30d``.
+
 Syntax
 ------
 
@@ -29,7 +115,7 @@ Syntax
 .. |versionid| replace:: :mc-cmd-option:`~mc rm version-id`
 .. |alias| replace:: :mc-cmd-option:`~mc rm TARGET`
 
-:mc:`~mc rm` has the following syntax:
+:mc:`mc rm` has the following syntax:
 
 .. code-block:: shell
 
@@ -175,68 +261,7 @@ Syntax
    environment variable for populating the list of encryption key-value
    pairs as an alternative to specifying them on the command line.
 
-Behavior
---------
 
-Deleting Bucket Contents
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Using :mc:`mc rm` to remove all contents in a bucket does not delete the bucket
-itself. Any configurations associated to the bucket remain in place, such as
-:mc-cmd-option:`default object lock settings <mc retention set default>`.
-
-To completely remove a bucket, use :mc:`mc rb` instead of :mc:`mc rm`.
-
-Examples
---------
-
-Remove a Single Object
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc rm play/mybucket/myobject.txt
-
-Recursively Remove a Bucket's Contents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-   
-   mc rm --recursive --force play/mybucket
-
-Remove All Incomplete Upload Files for an Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: moveable
-
-    mc rm --incomplete play/mybucket/myobject.1gig
-
-Remove Objects Older Than Specified Time Period
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: moveable
-
-   mc rm --recursive --force --older-than 1d2h30m play/mybucket
 
 
 

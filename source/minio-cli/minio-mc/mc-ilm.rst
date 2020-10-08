@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc ilm
 
@@ -22,18 +22,98 @@ information.
 
 .. end-mc-ilm-desc
 
+Examples
+--------
+
+Expire Bucket Contents After Specific Date
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc ilm add` with :mc-cmd-option:`~mc ilm add expiry-date` to
+expire bucket contents after a specific date.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ilm add --id "RULE" --expiry-date "DATE" ALIAS/PATH
+
+- Replace :mc-cmd:`RULE <mc ilm add id>` with the unique name of the lifecycle
+  management rule.
+
+- Replace :mc-cmd:`DATE <mc ilm add expiry-date>` with the future date after
+  which to expire the object. For example, specify "2021-01-01" to expire
+  objects after January 1st, 2021.
+
+- Replace :mc-cmd:`ALIAS <mc ilm add TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc ilm add TARGET>` with the path to the bucket on the
+  S3-compatible host.
+
+Expire Bucket Contents After Number of Days
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc ilm add` with :mc-cmd-option:`~mc ilm add expiry-days` to
+expire bucket contents a number of days after object creation:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ilm add --id "RULE" --expiry-days "DAYS" ALIAS/PATH
+
+- Replace :mc-cmd:`RULE <mc ilm add id>` with the unique name of the lifecycle
+  management rule.
+
+- Replace :mc-cmd:`DATE <mc ilm add expiry-date>` with the number of days after
+  which to expire the object. For example, specify ``30d`` to expire the
+  object 30 days after creation.
+
+- Replace :mc-cmd:`ALIAS <mc ilm add TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc ilm add TARGET>` with the path to the bucket on the
+  S3-compatible host.
+
+List Bucket Lifecycle Management Rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc ilm list` to list a bucket's lifecycle management rules:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ilm list ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc ilm add TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc ilm add TARGET>` with the path to the bucket on the
+  S3-compatible host.
+
+Remove a Bucket Lifecycle Management Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc ilm remove` to remove a bucket lifecycle management rule:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ilm remove --id "RULE" ALIAS/PATH
+
+- Replace :mc-cmd:`RULE <mc ilm add id>` with the unique name of the lifecycle
+  management rule.
+
+- Replace :mc-cmd:`ALIAS <mc ilm add TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc ilm add TARGET>` with the path to the bucket on the
+  S3-compatible host.
+
+
 Syntax
 ------
 
-:mc:`mc ilm` has the following syntax:
-
-.. code-block:: shell
-
-   mc ilm COMMAND [COMMAND FLAGS] [ARGUMENTS...]
-
-:mc:`mc ilm` supports the following subcommands:
-
 .. mc-cmd:: list
+   :fullpath:
 
    Lists the current lifecycle management rules of the specified bucket. The
    subcommand has the following syntax:
@@ -79,6 +159,7 @@ Syntax
       - ``expiry set``
 
 .. mc-cmd:: add
+   :fullpath:
 
    Adds or modifies bucket lifecycle management rules. The command has
    the following syntax:
@@ -90,15 +171,19 @@ Syntax
 
    .. mc-cmd:: TARGET
       
-      *Required* The full path to the bucket from which to add or modify the 
-      lifecycle management rule. Specify the :mc-cmd:`alias <mc alias>` 
-      of a configured S3 service as the prefix to the ``TARGET`` path.
+      *Required* 
+      
+      The full path to the bucket from which to add or modify the lifecycle
+      management rule. Specify the :mc-cmd:`alias <mc alias>` of a configured S3
+      service as the prefix to the ``TARGET`` path.
+
+      Specify all ``[FLAGS]`` *prior* to the ``TARGET``.
 
       For example:
 
       .. code-block:: shell
 
-         mc ilm list play/mybucket
+         mc ilm list [FLAGS] play/mybucket
 
    .. mc-cmd:: id
       :option:
@@ -165,6 +250,7 @@ Syntax
       Disables the rule with matching :mc-cmd-option:`~mc ilm add id`.
 
 .. mc-cmd:: remove
+   :fullpath:
 
    Removes an existing lifecycle management rule from the bucket.  The
    command has the following syntax:
@@ -207,6 +293,7 @@ Syntax
       Required if specifying :mc-cmd-option:`~mc ilm remove all`.
 
 .. mc-cmd:: export
+   :fullpath:
 
    Export the JSON-formatted lifecycle configuration to ``STDOUT``. The command
    has the following syntax:
@@ -230,6 +317,7 @@ Syntax
          mc ilm export play/mybucket > play_mybucket_lifecycle_rules.json
 
 .. mc-cmd:: import
+   :fullpath:
 
    Import a JSON-formatted lifecycle configuration from ``STDIN``. The command
    has the following syntax:
@@ -251,30 +339,3 @@ Syntax
 
          mc ilm import play/mybucket < play_mybucket_lifecycle_rules.json
 
-Examples
---------
-
-Add a Bucket Lifecycle Management Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc ilm add --id "Devices" --expiry-date "2021-01-23" play/mybucket
-
-
-Remove a Bucket Lifecycle Management Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc ilm remove --id "Devices" play/mybucket

@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc cat
 
@@ -22,33 +22,72 @@ display the contents of the specified file or object to ``STDOUT``.
 
 .. end-mc-cat-desc
 
-Quick Reference
----------------
+Common Operations
+-----------------
 
-:mc-cmd:`mc cat play\object.txt <mc cat SOURCE>`
-   Returns the contents of ``object.txt``. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+View an S3 Object
+~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc cat --rewind "30d" play\myobject.txt <mc cat rewind>`
-   Returns the contents of the ``object.txt`` as it existed ``30`` days
-   prior to the current date. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+Use :mc-cmd:`mc cat` to return the object:
 
-   :mc-cmd-option:`mc cat rewind` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
-   on a bucket.
+.. code-block:: shell
+   :class: copyable
 
-:mc-cmd:`mc cat --version-id 4f85ff5c-ade5-4fb7-be54-1b62dd00f45f play\myobject.txt <mc cat version-id>`
-   Returns the contents of the ``object.txt`` version with matching
-   ``--version-id``. ``play`` corresponds to the
-   :mc-cmd:`alias <mc alias>` of a configured S3-compatible service.
+   mc cat ALIAS/PATH
 
-   :mc-cmd-option:`mc cat version-id` requires :ref:`bucket versioning
-   <minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
-   on a bucket.
+- Replace :mc-cmd:`ALIAS <mc cat SOURCE>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
 
-   Use :mc-cmd:`mc ls versions play\myobject.txt <mc ls versions>` to list all 
-   versions of the object.
+- Replace :mc-cmd:`PATH <mc cat SOURCE>` with the path to the object on the
+  S3-compatible host.
+
+View an S3 Object at a Point-In-Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc cat rewind` to return the object at a specific
+point-in-time in the past:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc cat ALIAS/PATH --rewind DURATION
+
+- Replace :mc-cmd:`ALIAS <mc cat SOURCE>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc cat SOURCE>` with the path to the object on the
+  S3-compatible host.
+
+- Replace :mc-cmd:`DURATION <mc cat rewind>` with the point-in-time in the past
+  at which the command returns the object. For example, specify ``30d`` to
+  return the version of the object 30 days prior to the current date.
+
+.. include:: /includes/facts-versioning.rst
+   :start-after: start-versioning-admonition
+   :end-before: end-versioning-admonition
+
+View an S3 Object with Specific Version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc cat version-id` to return a specific version of the 
+object:
+
+.. code-block:: shell
+
+   mc cat ALIAS/PATH --version-id VERSION
+
+- Replace :mc-cmd:`ALIAS <mc cat SOURCE>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc cat SOURCE>` with the path to the object on the
+  S3-compatible host.
+
+- Replace :mc-cmd:`VERSION <mc cat version-id>` with the specific version of the
+  object to return.
+
+.. include:: /includes/facts-versioning.rst
+   :start-after: start-versioning-admonition
+   :end-before: end-versioning-admonition
 
 Syntax
 ------
@@ -72,7 +111,27 @@ Syntax
 
    **REQUIRED**
 
-   The full path to the file or object to concatenate. 
+   The object to concatenate.
+
+   For objects on S3-compatible hosts, specify the path to the object as 
+   ``ALIAS/PATH``, where:
+
+   - ``ALIAS`` is the :mc:`alias <mc alias>` of a configured S3-compatible host,
+     *and*
+
+   - ``PATH`` is the path to the object.
+
+   .. code-block:: shell
+
+      mc cat play/mybucket/object.txt
+
+   For files on a filesystem, specify the full filesystem path to the file as
+   ``SOURCE``:
+
+   .. code-block:: shell
+
+      mc cat ~/data/object.txt
+  
 
 .. mc-cmd:: rewind
    :option:
@@ -105,64 +164,3 @@ Syntax
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
-Examples
---------
-
-Display the Contents of an Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc cat play/mybucket/object.txt
-
-Display the Contents of a Server Encrypted Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc cat --encrypt-key="play/mybucket=32ByteLongSecretKeyMustBeGiven1" play/mybucket/object.txt
-
-If the secret key contains non-printable characters, specify a ``base64``
-encoded string instead:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc cat --encrypt-key="play/mybucket=MzJieXRlc2xvbmdzZWNyZWFiY2RlZmcJZ2l2ZW5uMjE=" play/mybucket/object.txt
-
-Display the Past Contents of an Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-To retrieve the contents of an object a specific number of days in the past, 
-specify :mc-cmd-option:`mc cat rewind` with a duration of ``##d``:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc cat --rewind "10d" play/mybucket/object.txt
-
-To retrieve the contents of an object at a specific date or time in the past,
-specify :mc-cmd-option:`mc cat rewind` with an ISO8601-formatted timestamp:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc cat --rewind "2020.03.04T12:34" play/mybucket/object.txt
-
-:mc-cmd-option:`mc cat rewind` requires :ref:`bucket versioning
-<minio-bucket-versioning>`. Use :mc:`mc version` to enable versioning
-on a bucket.

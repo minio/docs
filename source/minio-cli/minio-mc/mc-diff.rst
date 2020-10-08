@@ -22,27 +22,8 @@ of objects.
 
 .. end-mc-diff-desc
 
-Syntax
-------
-
-:mc:`~mc diff` has the following syntax:
-
-.. code-block:: shell
-
-   mc diff FIRST SECOND
-
-:mc:`~mc diff` supports the following arguments:
-
-.. mc-cmd:: FIRST
-
-   The path to a filesystem directory or S3-compatible bucket.
-
-.. mc-cmd:: SECOND
-
-   The path to a filesystem directory or S3-compatible bucket.
-
-Behavior
---------
+Output Legend
+~~~~~~~~~~~~~
 
 :mc:`mc diff` uses the following legend when formatting the diff output:
 
@@ -63,3 +44,22 @@ Examples
    :class: copyable
 
    mc diff play/bucket1 play/bucket2
+
+Syntax
+------
+
+:mc:`mc diff` has the following syntax:
+
+.. code-block:: shell
+
+   mc diff FIRST SECOND
+
+:mc:`~mc diff` supports the following arguments:
+
+.. mc-cmd:: FIRST
+
+   The path to a filesystem directory or S3-compatible bucket.
+
+.. mc-cmd:: SECOND
+
+   The path to a filesystem directory or S3-compatible bucket.

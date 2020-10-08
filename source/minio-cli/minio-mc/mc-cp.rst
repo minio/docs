@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc cp
 
@@ -20,25 +20,162 @@ S3-compatible service.
 
 .. end-mc-cp-desc
 
-Quick Reference
----------------
+Examples
+~~~~~~~~
 
-:mc-cmd:`mc cp ~/Data/myobject.txt play/data/myobject.txt <mc cp>`
-   Copies ``myobject.txt`` from the local filesystem ``~/Data`` folder to the
-   ``data`` bucket. ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a
-   configured S3-compatible service.
-   
+Copy Object to S3
+~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc cp --recursive ~/Data/ play/data <mc cp recursive`
-   Recursively copies the contents of ``~/Data/`` to the ``data`` bucket.
-   ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a configured
-   S3-compatible service.
+Use :mc-cmd:`mc cp` to copy an object to an S3-compatible host:
 
-:mc-cmd:`mc cp --rewind "30d" play/data/object.txt play/data/object-30d.txt <mc cp rewind>`
-   Copies ``object.txt`` from the ``data`` bucket as it existed 30 days prior to
-   the current date. The command creates the copy ``objects-30d.txt`` in the
-   same bucket. ``play`` corresponds to the :mc-cmd:`alias <mc alias>` of a
-   configured S3-compatible service.
+.. tabs::
+
+   .. tab:: Filesystem to S3
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc cp SOURCE ALIAS/PATH
+
+      - Replace :mc-cmd:`SOURCE <mc cp SOURCE>` with the filesystem path to the
+        object.
+
+      - Replace :mc-cmd:`ALIAS <mc cp TARGET>` with the :mc:`alias <mc alias>`
+        of a configured S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc cp TARGET>` with the path to the object on 
+        the S3-compatible host. You can specify a different object name to
+        "rename" the object on copy.
+
+   .. tab:: S3 to S3
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc cp SRCALIAS/SRCPATH TGTALIAS/TGTPATH
+
+      - Replace :mc-cmd:`SRCALIAS <mc cp SOURCE>` with the 
+        :mc:`alias <mc alias>` of a source S3-compatible host.
+
+      - Replace :mc-cmd:`SRCPATH <mc cp SOURCE>` with the path to the 
+        object on the S3-compatible host.
+
+      - Replace :mc-cmd:`TGTALIAS <mc cp TARGET>` with the 
+        :mc:`alias <mc alias>` of a target S3-compatible host.
+
+      - Replace :mc-cmd:`TGTPATH <mc cp TARGET>` with the path to the 
+        object on a target S3-compatible host. Omit the object name to use
+        the ``SRCPATH`` object name.
+
+Recursively Copy Objects to S3
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc cp recursive` to recursively copy objects to an
+S3-compatible host:
+
+.. tabs::
+
+   .. tab:: Filesystem to S3
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc cp --recursive SOURCE ALIAS/PATH
+
+      - Replace :mc-cmd:`SOURCE <mc cp SOURCE>` with the filesystem path to the
+        directory containing the file(s).
+
+      - Replace :mc-cmd:`ALIAS <mc cp TARGET>` with the :mc:`alias <mc alias>`
+        of a configured S3-compatible host.
+
+      - Replace :mc-cmd:`PATH <mc cp TARGET>` with the path to the object on 
+        the S3-compatible host. :mc-cmd:`mc cp` uses the ``SOURCE`` filenames
+        when creating the objects on the target host.
+
+   .. tab:: S3 to S3
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc cp --recursive SRCALIAS/SRCPATH TGTALIAS/TGTPATH
+
+      - Replace :mc-cmd:`SRCALIAS <mc cp SOURCE>` with the 
+        :mc:`alias <mc alias>` of a source S3-compatible host.
+
+      - Replace :mc-cmd:`SRCPATH <mc cp SOURCE>` with the path to the 
+        bucket or bucket prefix on the source S3-compatible host.
+
+      - Replace :mc-cmd:`TGTALIAS <mc cp TARGET>` with the 
+        :mc:`alias <mc alias>` of a target S3-compatible host.
+
+      - Replace :mc-cmd:`TGTPATH <mc cp TARGET>` with the path to the 
+        object on the target S3-compatible host. :mc-cmd:`mc cp` uses the
+        ``SRCPATH`` object names when creating objects on the target
+        host.
+
+Copy Point-In-Time Version of Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc cp rewind` to copy an object as it existed at a 
+specific point in time. This command only applies to S3-to-S3 copy.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc cp --rewind DURATION SRCALIAS/SRCPATH TGTALIAS/TGTPATH
+
+- Replace :mc-cmd:`DURATION <mc cp rewind>` with the point-in-time in the 
+  past at which the command copies the object. For example, specify
+  ``30d`` to copy the version of the object 30 days prior to the 
+  current date.
+
+- Replace :mc-cmd:`SRCALIAS <mc cp SOURCE>` with the 
+  :mc:`alias <mc alias>` of a source S3-compatible host.
+
+- Replace :mc-cmd:`SRCPATH <mc cp SOURCE>` with the path to the 
+  object on the source S3-compatible host.
+
+- Replace :mc-cmd:`TGTALIAS <mc cp TARGET>` with the 
+  :mc:`alias <mc alias>` of a target S3-compatible host.
+
+- Replace :mc-cmd:`TGTPATH <mc cp TARGET>` with the path to the 
+  object on the target S3-compatible host. Omit the object name to use
+  the ``SRCPATH`` object name.
+
+.. include:: /includes/facts-versioning.rst
+   :start-after: start-versioning-admonition
+   :end-before: end-versioning-admonition
+
+Copy Specific Version of Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc cp version-id` to copy a specific version of an object. This
+command only applies to S3-to-S3 copy.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc cp --version-id VERSION SRCALIAS/SRCPATH TGTALIAS/TGTPATH
+
+- Replace :mc-cmd:`VERSION <mc cp rewind>` with the version of the object to
+  copy.
+
+- Replace :mc-cmd:`SRCALIAS <mc cp SOURCE>` with the 
+  :mc:`alias <mc alias>` of a source S3-compatible host.
+
+- Replace :mc-cmd:`SRCPATH <mc cp SOURCE>` with the path to the 
+  object on the source S3-compatible host.
+
+- Replace :mc-cmd:`TGTALIAS <mc cp TARGET>` with the 
+  :mc:`alias <mc alias>` of a target S3-compatible host.
+
+- Replace :mc-cmd:`TGTPATH <mc cp TARGET>` with the path to the 
+  object on the target S3-compatible host. Omit the object name to use
+  the ``SRCPATH`` object name.
+
+.. include:: /includes/facts-versioning.rst
+   :start-after: start-versioning-admonition
+   :end-before: end-versioning-admonition
 
 Syntax
 ------
@@ -48,7 +185,7 @@ Syntax
 .. |versionid| replace:: :mc-cmd-option:`~mc cp version-id`
 .. |alias| replace:: :mc-cmd-option:`~mc cp SOURCE`
 
-:mc:`~mc cp` has the following syntax:
+:mc:`mc cp` has the following syntax:
 
 .. code-block:: shell
 

@@ -28,14 +28,14 @@ Using :mc-cmd:`mc alias` to add or remove an S3-compatible host is equivalent
 to manually editing entries in the :program:`mc` 
 :ref:`configuration file <mc-configuration>`. 
 
-S3 Access Control and Limitations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required Credentials and Access Control
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :mc-cmd:`mc alias` requires specifying an access key and corresponding secret
-key for a user on the S3-compatible host. :program:`mc` can only perform
-operations on that host for which the user has explicit permission. If the
-specified user cannot perform an action or access a resource on the S3 host,
-:program:`mc` inherits those restrictions.
+key for the S3-compatible host. :program:`mc` functionality is limited based
+on the policies associated to the specified credentials. For example, 
+if the specified credentials do not have read/write access to a specific bucket,
+:program:`mc` cannot perform read or write operations on that bucket.
 
 For more information on MinIO Access Control, see
 :ref:`minio-auth-authz-overview`. 
@@ -46,8 +46,8 @@ For more complete documentation on S3 Access Control, see
 For all other S3-compatible services, defer to the documentation for that
 service.
 
-Common Operations
------------------
+Examples
+--------
 
 Add an S3-Compatible Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,12 +60,15 @@ Use :mc-cmd:`mc alias set` to add an S3-compatible service for use with
 
    mc alias set ALIAS HOSTNAME ACCESSKEY SECRETKEY
 
-- Replace ``ALIAS`` with the name of the alias to associate to the S3-compatible service.
+- Replace :mc-cmd:`~mc alias set ALIAS` with the alias to associate
+  to the S3-compatible service.
 
-- Replace ``HOSTNAME`` with the hostname or IP address of the S3-compatible service.
+- Replace :mc-cmd:`~mc alias set HOSTNAME` with the hostname or IP address of
+  the S3-compatible service.
 
-- Replace ``ACCESSKEY`` and ``SECRETKEY`` with the access and secret key for a 
-  user on the S3-compatible service.
+- Replace :mc-cmd:`~mc alias set ACCESSKEY` and 
+  :mc-cmd:`~mc alias set SECRETKEY` with the access and secret key for a user on 
+  the S3-compatible service.
 
 Remove a Configured S3-Compatible Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -78,10 +81,11 @@ Use :mc-cmd:`mc alias remove` to remove an S3-compatible alias from the
 
    mc alias remove ALIAS
 
-- Replace ``ALIAS`` with the name of the S3-compatible service to remove. 
+- Replace :mc-cmd:`~mc alias remove ALIAS` with the alias of the S3-compatible 
+  service to remove. 
 
-Use :mc-cmd:`mc alias list` to list the currently configured S3-compatible
-services.
+Use :mc-cmd:`mc alias list` to list the currently configured aliases and their
+associated S3-compatible service.
 
 List Configured S3-Compatible Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,13 +110,13 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc alias set ALIAS HOSTNAME ACCESS_KEY SECRET_KEY --api [S3v2|S3v4]
+      mc alias set ALIAS HOSTNAME ACCESSKEY SECRETKEY --api [S3v2|S3v4]
 
    :mc-cmd:`mc alias set` supports the following arguments:
 
    .. mc-cmd:: ALIAS
 
-      The name to associate to the S3-compatible service.
+      *Required* The name to associate to the S3-compatible service.
 
       The specified string cannot match any existing host aliases. Use
       :mc-cmd:`~mc alias list` to view the current host aliases before
@@ -120,24 +124,24 @@ Syntax
 
    .. mc-cmd:: HOSTNAME
    
-      The URL for the S3-compatible service endpoint.
+      *Required* The URL for the S3-compatible service endpoint.
 
-   .. mc-cmd:: ACCESS_KEY
+   .. mc-cmd:: ACCESSKEY
 
-      The access key for authenticating to the S3 service. The
-      ``ACCESS_KEY`` must correspond to a user or role on the S3 service.
+      *Required* The access key for authenticating to the S3 service. The
+      ``ACCESSKEY`` must correspond to a user or role on the S3 service.
 
       :mc-cmd:`mc` can only perform an operation on the S3 service if
-      the ``ACCESS_KEY`` user or role grants the required permissions.
+      the ``ACCESSKEY`` user or role grants the required permissions.
 
-   .. mc-cmd:: SECRET_KEY
+   .. mc-cmd:: SECRETKEY
    
-      The corresponding secret for the specified ``ACCESS_KEY``. 
+      *Required* The corresponding secret for the specified ``ACCESSKEY``. 
 
    .. mc-cmd:: api
       :option:
       
-      The Amazon S3 Signature version to use when connecting to the
+      *Optional* The Amazon S3 Signature version to use when connecting to the
       S3 service. Supports the following values:
 
       - ``S3v2``
@@ -155,6 +159,13 @@ Syntax
 
       mc alias remove ALIAS
 
+   .. mc-cmd:: ALIAS
+
+      *Required* The alias to remove.
+      
+      Use :mc-cmd:`~mc alias list` to validate the alias and its associated
+      S3-compatible service before removing it.
+
 .. mc-cmd:: list, ls
    :fullpath:
 
@@ -166,13 +177,3 @@ Syntax
 
       mc alias list
 
-Examples
---------
-
-Add a New S3 Service Alias
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: shell
-   :class: copyable
-
-   mc alias set myminio https://myminio.example.net myminioaccesskey myminiosecretkey

@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc watch
 
@@ -20,6 +20,22 @@ service bucket or local filesystem path. For S3 services, use :mc:`mc event` to
 configure bucket event notifications on S3-compatible services.
 
 .. end-mc-watch-desc
+
+Examples
+--------
+
+Watch for Events in a Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+   :class: copyable
+
+   mc watch --recursive ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc watch TARGET>` with the :mc:`alias <mc alias>`
+  of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc watch TARGET>` with the path to the bucket.
 
 Syntax
 ------
@@ -78,31 +94,5 @@ Syntax
       Recursively watch for events in the specified 
       :mc-cmd:`~mc watch TARGET` bucket path or local directory.
 
-Examples
---------
-
-Watch for Events in a Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc watch play/testbucket
-
-Watch for Events in a Local Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc watch ~/photos
 
    

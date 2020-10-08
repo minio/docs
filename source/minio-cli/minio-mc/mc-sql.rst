@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc sql
 
@@ -23,6 +23,146 @@ queries on objects in the specified S3-compatible service.
 See :s3-docs:`Selecting content from objects 
 <selecting-content-from-objects>` for more information on S3 Select behavior
 and limitations.
+
+Input Formats
+~~~~~~~~~~~~~
+
+:mc:`mc sql` supports the following input formats:
+
+- ``.csv``
+- ``.json``
+- ``.parquet``
+
+For ``.csv`` file types, use :mc-cmd-option:`mc sql csv-input` to 
+specify the CSV data format. See :ref:`mc-sql-csv-format` for more 
+information on CSV formatting fields.
+
+For ``.json`` file types, use :mc-cmd-option:`mc sql json-input` to specify
+the JSON data format.
+
+For ``.parquet`` file types, :mc-cmd:`mc sql` automatically interprets the
+data format.
+
+.. _mc-sql-csv-format:
+
+CSV Formatting Fields
+~~~~~~~~~~~~~~~~~~~~~
+
+The following table lists valid key-value pairs for use with
+:mc-cmd-option:`mc sql csv-input` and :mc-cmd-option:`mc sql csv-output`. 
+Certain key pairs are only valid for :mc-cmd-option:`~mc sql csv-input`
+See the documentation for S3 API :s3-api:`CSVInput <API_CSVInput.html>` for more 
+information on S3 CSV formatting.
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: 20 20 60
+   :width: 100%
+
+   * - Key
+     - ``--csv-input`` Only
+     - Description
+
+   * - ``rd``
+     -
+     - The character that seperates each record (row) in the input ``.csv``
+       file.
+         
+       Corresponds to ``RecordDelimiter`` in the S3 API ``CSVInput``.
+
+   * - ``fd``
+     -
+     - The character that seperates each field in a record. Defaults to 
+       ``,``.
+      
+       Corresponds to ``FieldDelimeter`` in the S3 API ``CSVInput``.
+   
+   * - ``qc``
+     -
+     - The character used for escaping when the ``fd`` character is part of 
+       a value. Defaults to ``"``.
+
+       Corresponds to ``QuoteCharacter`` in the S3 API ``CSVInput``.
+   
+   * - ``qec``
+     -
+     - The character used for escaping a quotation mark ``"`` character
+       inside an already escaped value. 
+
+       Corresponds to ``QuoteEscapeCharacter`` in the S3 API ``CSVInput``.
+   
+   * - ``fh``
+     - Yes
+     - The content of the first line in the ``.csv`` file. 
+        
+       Specify one of the following supported values:
+
+       - ``NONE`` - The first line is not a header.
+       - ``IGNORE`` - Ignore the first line.
+       - ``USE`` - The first line is a header.
+
+       For ``NONE`` or ``IGNORE``, you must specify column positions
+       ``_#`` to identify a column in the :mc-cmd-option:`~mc sql query` 
+       statement.
+
+       For ``USE``, you can specify header values to identify a column in 
+       the :mc-cmd-option:`~mc sql query` statement.
+
+       Corresponds to ``FieldHeaderInfo`` in the S3 API ``CSVInput``.
+   
+   * - ``cc``
+     - Yes
+     - The character used to indicate a record should be ignored. The
+       character *must* appear at the beginning of the record.
+
+       Corresponds to ``Comment`` in the S3 API ``CSVInput``.
+   
+   * - ``qrd``
+     - Yes
+     - Specify ``TRUE`` to indicate that fields may contain record delimiter
+       values (``rd``).
+
+       Defaults to ``FALSE``.
+
+       Corresponds to ``AllowQuotedRecordDelimiter`` in the S3 API
+       ``CSVInput``.
+
+Examples
+--------
+
+Select all Columns in all Objects in a Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc sql` with the :mc-cmd-option:`~mc sql recursive` and
+:mc-cmd-option:`~mc sql query` options to apply the query to all objects 
+in a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc sql --recursive --query "select * from S3Object" ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc sql TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc sql TARGET>` with the path to the bucket
+  on the S3-compatible host.
+
+Run an Aggregation Query on an Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc sql` with the :mc-cmd-option:`~mc sql query` option to query 
+an object on an S3-compatible host:
+
+.. code-block:: shell
+
+   mc sql --query "select count(s.power) from S3Object" ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc sql TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc sql TARGET>` with the path to the object
+  on the S3-compatible host.
 
 Syntax
 ------
@@ -139,146 +279,3 @@ Syntax
    environment variable for populating the list of encryption key-value
    pairs as an alternative to specifying them on the command line.
 
-Behavior
---------
-
-Input Formats
-~~~~~~~~~~~~~
-
-:mc:`mc sql` supports the following input formats:
-
-- ``.csv``
-- ``.json``
-- ``.parquet``
-
-For ``.csv`` file types, use :mc-cmd-option:`mc sql csv-input` to 
-specify the CSV data format. See :ref:`mc-sql-csv-format` for more 
-information on CSV formatting fields.
-
-For ``.json`` file types, use :mc-cmd-option:`mc sql json-input` to specify
-the JSON data format.
-
-For ``.parquet`` file types, :mc-cmd:`mc sql` automatically interprets the
-data format.
-
-.. _mc-sql-csv-format:
-
-CSV Formatting Fields
-~~~~~~~~~~~~~~~~~~~~~
-
-The following table lists valid key-value pairs for use with
-:mc-cmd-option:`mc sql csv-input` and :mc-cmd-option:`mc sql csv-output`. 
-Certain key pairs are only valid for :mc-cmd-option:`~mc sql csv-input`
-See the documentation for S3 API :s3-api:`CSVInput <API_CSVInput.html>` for more 
-information on S3 CSV formatting.
-
-.. list-table:: 
-   :header-rows: 1
-   :widths: 20 20 60
-   :width: 100%
-
-   * - Key
-     - ``--csv-input`` Only
-     - Description
-
-   * - ``rd``
-     -
-     - The character that seperates each record (row) in the input ``.csv``
-       file.
-         
-       Corresponds to ``RecordDelimiter`` in the S3 API ``CSVInput``.
-
-   * - ``fd``
-     -
-     - The character that seperates each field in a record. Defaults to 
-       ``,``.
-      
-       Corresponds to ``FieldDelimeter`` in the S3 API ``CSVInput``.
-   
-   * - ``qc``
-     -
-     - The character used for escaping when the ``fd`` character is part of 
-       a value. Defaults to ``"``.
-
-       Corresponds to ``QuoteCharacter`` in the S3 API ``CSVInput``.
-   
-   * - ``qec``
-     -
-     - The character used for escaping a quotation mark ``"`` character
-       inside an already escaped value. 
-
-       Corresponds to ``QuoteEscapeCharacter`` in the S3 API ``CSVInput``.
-   
-   * - ``fh``
-     - Yes
-     - The content of the first line in the ``.csv`` file. 
-        
-       Specify one of the following supported values:
-
-       - ``NONE`` - The first line is not a header.
-       - ``IGNORE`` - Ignore the first line.
-       - ``USE`` - The first line is a header.
-
-       For ``NONE`` or ``IGNORE``, you must specify column positions
-       ``_#`` to identify a column in the :mc-cmd-option:`~mc sql query` 
-       statement.
-
-       For ``USE``, you can specify header values to identify a column in 
-       the :mc-cmd-option:`~mc sql query` statement.
-
-       Corresponds to ``FieldHeaderInfo`` in the S3 API ``CSVInput``.
-   
-   * - ``cc``
-     - Yes
-     - The character used to indicate a record should be ignored. The
-       character *must* appear at the beginning of the record.
-
-       Corresponds to ``Comment`` in the S3 API ``CSVInput``.
-   
-   * - ``qrd``
-     - Yes
-     - Specify ``TRUE`` to indicate that fields may contain record delimiter
-       values (``rd``).
-
-       Defaults to ``FALSE``.
-
-       Corresponds to ``AllowQuotedRecordDelimiter`` in the S3 API
-       ``CSVInput``.
-
-Examples
---------
-
-Select all Columns in all Objects in a Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-
-   mc sql --recursive \
-     --query "select * from S3Object" s3/personalbucket/my-large-csvs/
-
-Run an Aggregation Query on an Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-
-   mc sql --query "select count(s.power) from S3Object" myminio/iot-devices/power-ratio.csv
-
-Run an Aggregation Query on an Encrypted Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-
-   mc sql --encrypt-key "myminio/iot-devices=32byteslongsecretkeymustbegiven1" \
-    --query "select count(s.power) from S3Object" myminio/iot-devices/power-ratio-encrypted.csv

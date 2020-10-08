@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc rb
 
@@ -19,9 +19,25 @@ The :mc:`mc rb` command removes a bucket and all its contents on the target
 S3-compatible service.
 
 Removing a bucket with :mc:`mc rb` also removes any configurations associated to
-that bucket. To remove only the contents of a bucket, use :mc:`mc rb` instead.
+that bucket. To remove only the contents of a bucket, use :mc:`mc rm` instead.
 
 .. end-mc-rb-desc
+
+Example
+-------
+
+Remove a Bucket
+~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+   :class: copyable
+
+   mc rb ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc rb TARGET>` with the :mc-cmd:`alias <mc alias>` of
+  a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc rb TARGET>` with the path to the bucket to remove.
 
 Syntax
 ------
@@ -31,7 +47,19 @@ Syntax
 .. code-block:: shell
    :class: copyable
 
-   mc rb [FLAGS] SOURCE TARGET
+   mc rb [FLAGS] TARGET [TARGET...]
+
+.. mc-cmd:: TARGET
+
+   *REQUIRED*
+
+   The full path to the bucket to remove. Specify ``TARGET`` as
+   ``ALIAS/PATH``, where:
+
+   - ``ALIAS`` is the :mc:`alias <mc alias>` of a configured S3-compatible
+     host, *and*
+
+   - ``PATH`` is the path to the bucket.
 
 .. mc-cmd:: force
    :option:
@@ -43,17 +71,3 @@ Syntax
    
    Allows running :mc:`mc rb` when the :mc-cmd:`~mc rb TARGET` specifies the
    root (all buckets) on the S3-compatible service.
-
-Behavior
---------
-
-Examples
---------
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-
-   mc rb play/mybucket

@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc mv
 
@@ -19,6 +19,120 @@ The :mc:`mc mv` command moves data from one or more sources to a target
 S3-compatible service.
 
 .. end-mc-mv-desc
+
+Checksum Verification
+~~~~~~~~~~~~~~~~~~~~~
+
+:mc:`mc mv` verifies all move operations to object storage using MD5SUM
+checksums. 
+
+Resume Move Operations
+~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd-option:`mc mv continue` to resume an interrupted or failed
+move operation from the point of failure. 
+
+Examples
+--------
+
+Move Files from Filesystem to S3-Compatible Host
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+   :class: copyable
+
+   mc mv [--recursive] FILEPATH ALIAS/PATH
+
+- Replace :mc-cmd:`FILEPATH <mc mv SOURCE>` with the full file path to the
+  file to move. 
+
+  If specifying the path to a directory, include the :mc-cmd-option:`~mc mv
+  recursive` flag.
+
+  :mc:`mc mv` *removes* the files from the source after
+  successfully moving it to the destination.
+
+- Replace :mc-cmd:`ALIAS <mc mv TARGET>` with the :mc-cmd:`alias <mc alias>`
+  of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc mv TARGET>` with the destination bucket.
+
+Move a File from Filesystem to S3-Compatible Host with Custom Metadata
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc mv` with the :mc-cmd-option:`~mc mv attr` option to set custom
+attributes on file(s).
+
+.. code-block:: shell
+   :class: copyable
+
+   mc mv --attr "ATTRIBUTES" FILEPATH ALIAS/PATH
+
+- Replace :mc-cmd:`FILEPATH <mc mv SOURCE>` with the full file path to the
+  file to move. :mc:`mc mv` *removes* the file from the source after
+  successfully moving it to the destination.
+
+- Replace :mc-cmd:`ALIAS <mc mv TARGET>` with the :mc-cmd:`alias <mc alias>`
+  of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc mv TARGET>` with the destination bucket.
+
+- Replace :mc-cmd:`ATTRIBUTES <mc mv attr>` with one or more comma-separated
+  key-value pairs ``KEY=VALUE``. Each pair represents one attribute key and
+  value.
+
+Move Bucket Between S3-Compatible Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+   :class: copyable
+
+    mc mv --recursive SRCALIAS/SRCPATH TGTALIAS/TGTPATH
+
+- Replace :mc-cmd:`SRCALIAS <mc mv SOURCE>` with the :mc-cmd:`alias <mc alias>`
+  of a configured S3-compatible host.
+
+- Replace :mc-cmd:`SRCPATH <mc mv SOURCE>` with the path to the bucket.
+  :mc:`mc mv` *removes* the bucket and its contents from the source after
+  successfully moving it to the destination.
+
+- Replace :mc-cmd:`TGTALIAS <mc mv TARGET>` with the :mc-cmd:`alias <mc alias>`
+  of a configured S3-compatible host.
+
+- Replace :mc-cmd:`TGTPATH <mc mv TARGET>` with the path to the bucket.
+
+
+Move File to S3-Compatible Host with Specific Storage Class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc mv` with the :mc-cmd-option:`~mc mv storage-class` option to set
+the storage class on the destination S3-compatible host.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc mv --storage-class CLASS FILEPATH ALIAS/PATH
+
+- Replace :mc-cmd:`CLASS <mc mv storage-class>` with the storage class to 
+  associate to the files.
+
+- Replace :mc-cmd:`FILEPATH <mc mv SOURCE>` with the full file path to the
+  file to move. :mc:`mc mv` *removes* the file from the source after
+  successfully moving it to the destination.
+
+- Replace :mc-cmd:`ALIAS <mc mv TARGET>` with the :mc-cmd:`alias <mc alias>`
+  of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc mv TARGET>` with the destination bucket.
+
+- Replace :mc-cmd:`ATTRIBUTES <mc mv attr>` with one or more comma-separated
+  key-value pairs ``KEY=VALUE``. Each pair represents one attribute key and
+  value.
+
+   mc mv --storage-class REDUCED_REDUNDANCY myobject.txt play/mybucket
+
+
+
 
 Syntax
 ------
@@ -33,7 +147,7 @@ Syntax
 
 .. mc-cmd:: SOURCE
 
-   **REQUIRED**
+   *REQUIRED*
    
    The object or objects to move. You can specify both local paths
    and S3 paths using a configured S3 service :mc:`alias <mc alias>`. 
@@ -52,10 +166,10 @@ Syntax
 
 .. mc-cmd:: TARGET
 
-   **REQUIRED**
+   *REQUIRED*
 
    The full path to the bucket to move the specified 
-   :mc-cmd:`~mc mv SOURCES` to. Specify the :mc:`alias <mc alias>` 
+   :mc-cmd:`~mc mv SOURCE` to. Specify the :mc:`alias <mc alias>` 
    of a configured S3 service as the prefix to the 
    :mc-cmd:`~mc mv TARGET` path. 
 
@@ -152,123 +266,5 @@ Syntax
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
-Behavior
---------
-
-:mc:`mc mv` verifies all move operations to
-object storage using MD5SUM checksums. 
-
-Interrupted or failed move operations can resume from the point of failure
-by issuing the :mc:`mc mv` operation again with the 
-:mc-cmd-option:`~mc mv continue` argument.
-
-Examples
---------
-
-Move a text file to an object storage.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc mv myobject.txt play/mybucket
-
-Move a text file to an object storage with specified metadata.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-   
-   mc mv --attr key1=value1;key2=value2 myobject.txt play/mybucket
-
-Move a folder recursively from MinIO cloud storage to Amazon S3 cloud storage with specified metadata.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-s3-alias
-   :end-before: end-play-s3-alias
-
-.. code-block:: shell
-   :class: copyable
-
-    mc mv --attr Cache-Control=max-age=90000,min-fresh=9000\;key1=value1\;key2=value2 \
-      --recursive play/mybucket/bucketname/ s3/mybucket/
-
-
-Move a text file to an object storage and assign ``storage-class`` REDUCED_REDUNDANCY to the uploaded object.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc mv --storage-class REDUCED_REDUNDANCY myobject.txt play/mybucket
-
-Move a server-side encrypted file to an object storage.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-s3-alias
-   :end-before: end-play-s3-alias
-
-.. code-block:: shell
-   :class: copyable
-
-   mc mv --recursive \
-     --encrypt-key "s3/documents/=32byteslongsecretkeymustbegiven1 , myminio/documents/=32byteslongsecretkeymustbegiven2" \ 
-     s3/documents/myobject.txt myminio/documents/
-
-Perform key-rotation on a server-side encrypted object.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:mc:`mc mv` key rotation requires creating an additional alias with the same
-endpoing as the target S3 service alias. :mc:`mc mv` decrypts
-the object using the old secret key, encrypts the object using the new
-secret key, and replaces the old object with the newly encrypted object.
-
-The following example assumes that the ``myminio1`` and ``myminio2`` aliases
-exists in the :mc:`mc` :ref:`configuration file <mc-configuration>`. See
-:mc:`mc alias` for more information on aliases.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc mv --encrypt-key 'myminio1/mybucket=32byteslongsecretkeymustgenerate , myminio2/mybucket/=32byteslongsecretkeymustgenerat1' \
-     myminio1/mybucket/encryptedobject myminio2/mybucket/encryptedobject
-
-Move a javascript file to object storage and assign ``Cache-Control`` header to the uploaded object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc mv --attr Cache-Control=no-cache myscript.js play/mybucket
-
-Move a text file to an object storage and preserve the filesyatem attributes.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc mv -a myobject.txt play/mybucket
 
 

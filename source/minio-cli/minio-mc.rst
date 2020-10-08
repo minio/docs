@@ -184,9 +184,8 @@ The following table lists :mc-cmd:`mc` commands:
           :end-before: end-mc-legalhold-desc
      
    * - :mc:`mc lock`
-     - .. include:: /minio-cli/minio-mc/mc-lock.rst
-          :start-after: start-mc-lock-desc
-          :end-before: end-mc-lock-desc
+     - Deprecated since 
+       :release:`RELEASE.2020-09-18T00-13-21Z`. Use :mc:`mc retention`.
 
    * - :mc:`mc ls`
      - .. include:: /minio-cli/minio-mc/mc-ls.rst

@@ -138,7 +138,7 @@ Syntax
             - Replace ``DESTHOSTNAME`` with the hostname and port of the MinIO
               deployment (i.e. ``minio-server.example.net:9000``).
 
-            - Replace ``DESTBUCKET`` with the name of the bucket on the
+            - Replace ``DESTBUCKET`` with the bucket on the
               destination.
 
    .. mc-cmd:: region

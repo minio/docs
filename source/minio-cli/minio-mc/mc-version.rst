@@ -45,24 +45,56 @@ versioned data after disabling bucket versioning. Use
 :mc-cmd:`mc rm --versions ALIAS/BUCKET/OBJECT <mc rm versions>` to delete an 
 object *and* all its versions.
 
-Quick Reference
----------------
+Common Operations
+-----------------
 
-:mc-cmd:`mc version enable play/mybucket <mc version enable>`
-   Enables bucket versioning on the ``mybucket`` bucket. ``play``
-   corresponds to the :mc-cmd:`alias <mc alias>` of a configured
-   S3-compatible service.
+Enable Bucket Versioning
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc version disable play/mybucket <mc version disable>`
-   Disables bucket versioning on the ``mybucket`` bucket. ``play``
-   corresponds to the :mc-cmd:`alias <mc alias>` of a configured
-   S3-compatible service.
+Use :mc-cmd:`mc version enable` to enable versioning on a bucket:
 
+.. code-block:: shell
+   :class: copyable
 
-:mc-cmd:`mc version info play/mybucket <mc version info>`
-   Retrieves the bucket versioning status of the ``mybucket`` bucket. ``play``
-   corresponds to the :mc-cmd:`alias <mc alias>` of a configured
-   S3-compatible service.
+   mc version enable ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc version enable TARGET>` with the
+  :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc version enable TARGET>` with the bucket on which
+  to enable versioning.
+
+Disable Bucket Versioning
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc version disable` to disable versioning on a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc version disable ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc version disable TARGET>` with the
+  :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc version disable TARGET>` with the bucket on which
+  to disable versioning.
+
+Get Bucket Versioning Status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc version info` to enable versioning on a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc version info ALIAS/PATH
+
+- Replace :mc-cmd:`ALIAS <mc version info TARGET>` with the
+  :mc:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc version info TARGET>` with the bucket on which
+  to retrieve the versioning status.
 
 
 Syntax
@@ -148,30 +180,3 @@ Syntax
       .. code-block:: shell
 
          mc version info play/mybucket
-
-Examples
---------
-
-Enable Bucket Versioning
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc version play/mybucket enable
-
-Disable Bucket Versioning
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc version play/mybucket suspend

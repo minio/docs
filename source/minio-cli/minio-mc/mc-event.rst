@@ -6,7 +6,7 @@
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 .. mc:: mc event
 
@@ -26,18 +26,124 @@ for more information.
 
 .. end-mc-event-desc
 
+.. _mc-event-supported-events:
+
+Supported Bucket Events
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The following table lists the supported S3 Event and the corresponding 
+:mc:`mc event` alias:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+   :width: 100%
+
+   * - MinIO Alias
+     - Corresponding S3 Event
+
+   * - ``put``
+     - ``s3:ObjectCreated:Put`` 
+
+   * - ``completeMultipartUpload``
+     - ``s3:ObjectCreated:CompleteMultipartUpload`` 
+
+   * - ``head``
+     - ``s3:ObjectAccessed:Head``
+
+   * - ``post``
+     - ``s3:ObjectCreated:Post``
+
+   * - ``delete``
+     - ``s3:ObjectRemoved:Delete``
+
+   * - ``copy``
+     - ``s3:ObjectCreated:Copy``
+
+   * - ``get``
+     - ``s3:ObjectAccessed:Get``
+
+For more complete documentation on the listed S3 events, see 
+:s3-docs:`S3 Supported Event Types
+<NotificationHowTo.html#notification-how-to-event-types-and-destinations>`.
+
+Examples
+--------
+
+Add New Event Notification to a Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc event add` to add a notification event to a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc event add ALIAS/PATH ARN --event EVENTS
+
+- Replace :mc-cmd:`ALIAS <mc event add TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc event add TARGET>` with the path to the bucket on
+  the S3-compatible host.
+
+- Replace :mc-cmd:`ARN <mc event add ARN>` with the 
+  :aws-docs:`Amazon Resource Name (ARN) 
+  <general/latest/gr/aws-arns-and-namespaces>` of the notification target.
+
+- Replace :mc-cmd:`EVENTS <mc event add event>` with a comma-separated list of
+  :ref:`events <mc-event-supported-events>`.
+
+
+Remove an Event Notification from a Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc event remove` to remove a notification event from a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc event remove ALIAS/PATH ARN --event EVENTS
+
+- Replace :mc-cmd:`ALIAS <mc event add TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc event add TARGET>` with the path to the bucket on
+  the S3-compatible host.
+
+- Replace :mc-cmd:`ARN <mc event add ARN>` with the 
+  :aws-docs:`Amazon Resource Name (ARN) 
+  <general/latest/gr/aws-arns-and-namespaces>` of the notification target.
+
+- Replace :mc-cmd:`EVENTS <mc event add event>` with a comma-separated list of
+  :ref:`events <mc-event-supported-events>` to remove.
+
+List Bucket Notification Events
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc event list` to list all configured notification events on a
+bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc event list ALIAS/PATH ARN
+
+- Replace :mc-cmd:`ALIAS <mc event add TARGET>` with the 
+  :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc event add TARGET>` with the path to the bucket on
+  the S3-compatible host.
+
+- Replace :mc-cmd:`ARN <mc event add ARN>` with the 
+  :aws-docs:`Amazon Resource Name (ARN) 
+  <general/latest/gr/aws-arns-and-namespaces>` of the notification target.
+
+
 Syntax
 ------
   
-:mc:`~mc event` has the following syntax:
-
-.. code-block:: shell
-
-   mc event COMMAND [COMMAND FLAGS | -h] [ARGUMENTS ...]
-
-:mc:`~mc event` supports the following commands:
-
 .. mc-cmd:: add
+   :fullpath:
 
    Adds a new bucket event notification. For supported event types, see
    :ref:`mc-event-supported-events`. The command has the following syntax:
@@ -98,6 +204,7 @@ Syntax
       ``play/mybucket/*.jpg`` trigger bucket notifications.
 
 .. mc-cmd:: remove
+   :fullpath:
 
    Removes an existing bucket event notification. The command has the
    following syntax:
@@ -161,6 +268,7 @@ Syntax
       bucket notifications in ``play/mybucket/*.jpg``.
 
 .. mc-cmd:: list
+   :fullpath:
 
    Lists bucket event notifications.
 
@@ -194,77 +302,5 @@ Syntax
       notification target at server startup. See 
       :doc:`/minio-features/bucket-notifications` for more information.
 
-Behavior
---------
-
-.. _mc-event-supported-events:
-
-Supported Bucket Events
-~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO supports the following S3 events.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 80
-   :width: 100%
-
-   * - MinIO Alias
-     - Corresponding S3 Event
-
-   * - ``put``
-     - ``s3:ObjectCreated:Put`` 
-
-   * - ``completeMultipartUpload``
-     - ``s3:ObjectCreated:CompleteMultipartUpload`` 
-
-   * - ``head``
-     - ``s3:ObjectAccessed:Head``
-
-   * - ``post``
-     - ``s3:ObjectCreated:Post``
-
-   * - ``delete``
-     - ``s3:ObjectRemoved:Delete``
-
-   * - ``copy``
-     - ``s3:ObjectCreated:Copy``
-
-   * - ``get``
-     - ``s3:ObjectAccessed:Get``
-
-For more complete documentation on the listed S3 events, see 
-:s3-docs:`S3 Supported Event Types
-<NotificationHowTo.html#notification-how-to-event-types-and-destinations>`.
-
-Examples
---------
-
-Create a New Notification Event in Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc event play/mybucket arn:minio:sqs::notification-target-name:notification-target \
-     --event put,delete
-
-
-Remove an Existing Notification Event in Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/play-alias-available.rst
-   :start-after: play-alias-only
-   :end-before: end-play-alias-only
-
-.. code-block:: shell
-   :class: copyable
-
-   mc event play/mybucket arn:minio:sqs::notification-target-name:notification-target \
-     --event put,delete
 
 
