@@ -696,7 +696,7 @@
              y="337.77352"><tspan
                style="shape-inside:url(#rect1738-25-1)">KES Key Management Service
 </tspan></tspan><tspan
-             x="99.629028"
+             x="97.629028"
              y="347.77352"><tspan
                style="shape-inside:url(#rect1738-25-1)">MinIO Console Server</tspan></tspan></text>
       </g>
@@ -763,9 +763,9 @@
            y="327.77352"><tspan
              style="shape-inside:url(#rect1738-25-1-5)">Kubernetes Control Plane
 </tspan></tspan><tspan
-           x="73.63707"
+           x="86.253082"
            y="337.77352"><tspan
-             style="shape-inside:url(#rect1738-25-1-5)">MinIO Kubernetes Operator</tspan></tspan></text>
+             style="shape-inside:url(#rect1738-25-1-5)">MinIO Kubernetes Plugin</tspan></tspan></text>
     </g>
   </g>
 </svg>
