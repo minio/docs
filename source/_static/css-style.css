@@ -176,7 +176,19 @@ body div.center h2 {
 }
 
 body div.center h3 {
-   font-size: 18px;
+   font-size: 20px;
+}
+
+body div.center h4 {
+   font-size: 16px;
+}
+
+body div.center h4 {
+   font-size: 16px;
+}
+
+body div.indent {
+   margin-left: 20px;
 }
 
 body #toc-backref {

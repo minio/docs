@@ -105,3 +105,13 @@ html_css_files = ['css-style.css']
 html_js_files = ['js/main.js']
 
 html_title = 'MinIO Documentation'
+
+# rst_epilog contains common replacements for all pages
+
+rst_epilog = """
+
+.. |minio-operator-release| replace:: ``minio/k8s-operator:v3.0.27``
+
+.. |minio-server-release| replace::   ``minio/minio:RELEASE.2020-10-03T02-19-42Z``
+
+"""
