@@ -1,3 +1,5 @@
+.. _minio-sse:
+
 =============================
 Server-Side Object Encryption
 =============================
@@ -24,8 +26,8 @@ SSE-C
 
 SSE-S3
    The server uses a secret key managed by a Key Management System (KMS)
-   to perform encryption and decryption. SSE-S3 requires a compatible KMS
-   provider accessible by the MinIO server.
+   to perform encryption and decryption. SSE-S3 requires using 
+   :ref:`MinIO KES <minio-kes>` and a supported KMS.
 
 Encryption Process Overview
 ---------------------------
@@ -56,11 +58,9 @@ object:
        object. MinIO encrypts the OEK using the KEK and stores the encrypted
        OEK as metadata with the object.
 
-SSE Encryption Types
---------------------
 
-SSE with Client Provided Keys (SSE-C)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SSE using S3-Client Keys (SSE-C)
+--------------------------------
 
 SSE-C allows S3 clients to specify an Encryption Key (EK) for encrypting or
 decrypting an object stored on the MinIO server. The S3 client sends the secret
@@ -77,7 +77,7 @@ compromise of that EK *also* results in the loss or compromise of all data
 encrypted with that EK.
 
 Key Rotation
-````````````
+~~~~~~~~~~~~
 
 S3 clients can rotate the client EK of an existing object using an S3 ``COPY``
 operation. The ``COPY`` source and destination *must* be the same, while the
@@ -93,8 +93,8 @@ object:
 
 Such a special COPY request is also known as S3 SSE-C key rotation.
 
-SSE with KMS Provided Keys (SSE-S3)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SSE using a Key Management Service (SSE-S3)
+-------------------------------------------
 
 SSE-S3 allows S3 clinets to encrypt or decrypt an object at the MinIO server
 using an external Key Management Service (KMS). The MinIO server requires
@@ -108,14 +108,19 @@ the KMS provide the following services:
   along with an encrypted data key. The KMS uses the master key to decrypt
   the data key and return the plain data key.
 
-The MinIO server requests a new data key from the KMS for each uploaded 
-object and uses that data key as the Encryption Key (EK). MinIO stores
-the encrypted EK and the master key ID as part of the object metadata.
-While the MinIO server never stores the plain EK to disk, the EK resides
-in system RAM during the encryption or decryption process.
+Enabling SSE-S3 requires deploying one or more 
+:ref:`MinIO Key Encryption Servers (KES) <minio-kes>` and configuring the
+:mc:`minio` server for access to KES. The KES handles processing
+cryptographic key requests to the KMS service.
+
+With SSE-S3, the MinIO server requests a new data key for each uploaded object
+and uses that data key as the Encryption Key (EK). MinIO stores the encrypted EK
+and the master key ID as part of the object metadata. While the MinIO server
+never stores the plain EK to disk, the EK resides in system RAM during the
+encryption or decryption process.
 
 Key Rotation
-````````````
+~~~~~~~~~~~~
 
 The MinIO server supports key rotation for SSE-S3 encrypted objects. The MinIO
 server decrypts the Object Encryption Key (OEK) using the current encrypted data
@@ -130,7 +135,7 @@ Only the root MinIO user can perform an SSE-S3 key rotation using the Admin-API 
 the ``mc`` client. Refer to the ``mc admin guide`` <todo>
 
 Secure Erasure and Locking
-``````````````````````````
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The MinIO server requires an available KMS to en/decrypt SSE-S3 encrypted
 objects. Therefore it is possible to erase or lock some or all encrypted

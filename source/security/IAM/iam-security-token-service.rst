@@ -1,14 +1,14 @@
-.. _minio-sts-overview:
+.. _minio-sts:
 
-============================
-MinIO Security Token Service
-============================
+======================
+Security Token Service
+======================
 
 .. default-domain:: minio
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 Overview
 --------

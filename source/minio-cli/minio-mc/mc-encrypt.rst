@@ -20,7 +20,7 @@ bucket Server-Side Encryption (SSE) mode. MinIO automatically encrypts
 objects using the specified SSE mode.
 
 For more information on configuring SSE, see
-:doc:`/security/minio-security-server-side-encryption`.
+:ref:`minio-sse`
 
 .. end-mc-encrypt-desc
 

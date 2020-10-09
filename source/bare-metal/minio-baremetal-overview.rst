@@ -70,13 +70,13 @@ The example command breaks down as follows:
    :width: 100%
 
    * - :envvar:`MINIO_ACCESS_KEY`
-     - The access key for the :ref:`root <minio-auth-authz-root>` user.
+     - The access key for the :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string. 
 
    * - :envvar:`MINIO_SECRET_KEY`
      - The corresponding secret key to use for the 
-       :ref:`root <minio-auth-authz-root>` user.
+       :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string.
 
@@ -189,13 +189,13 @@ The example command breaks down as follows:
    :width: 100%
 
    * - :envvar:`MINIO_ACCESS_KEY`
-     - The access key for the :ref:`root <minio-auth-authz-root>` user.
+     - The access key for the :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string. 
 
    * - :envvar:`MINIO_SECRET_KEY`
      - The corresponding secret key to use for the 
-       :ref:`root <minio-auth-authz-root>` user.
+       :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string.
 
@@ -267,7 +267,7 @@ version of the ``minio`` server process:
 The command uses the following options:
 
 - ``-e MINIO_ACCESS_KEY`` and ``-e MINIO_SECRET_KEY`` for configuring the
-   :ref:`root <minio-auth-authz-root>` user credentials.
+   :ref:`root <minio-users-root>` user credentials.
 
 - ``-v /mnt/disk<int>:/disk<int>`` for configuring each disk the ``minio``
    server uses.
@@ -295,7 +295,7 @@ bleeding-edge version of the ``minio`` server process:
 The command uses the following options:
 
 - ``MINIO_ACCESS_KEY`` and ``MINIO_SECRET_KEY`` for configuring the
-   :ref:`root <minio-auth-authz-root>` user credentials.
+   :ref:`root <minio-users-root>` user credentials.
 
 - ``-v /mnt/disk<int>:/disk<int>`` for configuring each disk the ``minio`` 
    server uses. 

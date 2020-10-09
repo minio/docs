@@ -262,7 +262,7 @@ Root Credentials
 
 .. envvar:: MINIO_ACCESS_KEY
 
-   The access key for the :ref:`root <minio-auth-authz-root>` user. 
+   The access key for the :ref:`root <minio-users-root>` user. 
 
    .. warning::
 
@@ -275,7 +275,7 @@ Root Credentials
 
 .. envvar:: MINIO_SECRET_KEY
 
-   The secret key for the :ref:`root <minio-auth-authz-root>` user.
+   The secret key for the :ref:`root <minio-users-root>` user.
 
    .. warning::
 
@@ -288,7 +288,7 @@ Root Credentials
 
 .. envvar:: MINIO_ACCESS_KEY_OLD
 
-   Used for rotating the :ref:`root <minio-auth-authz-root>` user access
+   Used for rotating the :ref:`root <minio-users-root>` user access
    key.
 
    Restart the :mc:`minio server` process with *all* of the following
@@ -306,7 +306,7 @@ Root Credentials
 
 .. envvar:: MINIO_SECRET_KEY_OLD
 
-   Used for rotating the :ref:`root <minio-auth-authz-root>` user secret
+   Used for rotating the :ref:`root <minio-users-root>` user secret
    key.
 
    Restart the :mc:`minio server` process with *all* of the following
