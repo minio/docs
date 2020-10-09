@@ -1,8 +1,8 @@
-.. _minio-auth-authz-overview:
+.. _minio-policy:
 
-================================
-Authentication and Authorization
-================================
+========
+Policies
+========
 
 .. default-domain:: minio
 
@@ -13,205 +13,33 @@ Authentication and Authorization
 Overview
 --------
 
-*Authentication* is the process of verifying the identity of a connecting
-client. MinIO authentication requires providing user credentials in the form of
-an access key (username) and corresponding secret key (password). The MinIO
-deployment only grants access *if*:
+A *policy* is a document that describes the resources and operations to which
+a MinIO :ref:`user <minio-users>` or the members of a :ref:`group 
+<minio-groups>` have access. 
 
-- The access key corresponds to a user on the deployment, *and*
-- The secret key corresponds to the specified access key.
+MinIO uses Policy-Based Access Control (PBAC) to define the *authorized*
+resources and operations to which a :ref:`user <minio-users>` or members of a
+:ref:`group <minio-groups>` have access. 
 
-*Authorization* is the process of restricting the actions and resources the
-authenticated client can perform on the deployment. MinIO uses Policy-Based
-Access Control (PBAC), where each policy describes one or more rules that
-outline the permissions of a user or group of users. MinIO supports a subset of
-:iam-docs:`IAM actions and conditions
-<reference_policies_actions-resources-contextkeys.html>` when creating policies.
-By default, MinIO *denies* access to actions or resources not explicitly
-referenced in a user's assigned or inherited policies.
+MinIO by default *denies* access to any
+resource or operation not explicitly allowed by a user's assigned or inherited
+policies.
 
-- For more information on MinIO user management, see 
-  :ref:`minio-auth-authz-users`.
+MinIO PBAC uses AWS IAM-compatible JSON
+syntax for defining policies. For example, MinIO can use IAM policies designed
+for use with AWS S3 or S3-compatible services.
 
-- For more information on MinIO group management, see
-  :ref:`minio-auth-authz-groups`.
+The MinIO documentation makes a best-effort to cover IAM-specific behavior and
+functionality. Consider deferring to the :iam-docs:`IAM documentation <>` for
+more complete documentation on IAM, IAM policies, or IAM JSON syntax.
 
-- For more information on MinIO policy creation, see
-  :ref:`minio-auth-authz-pbac-policies`.
-
-.. _minio-auth-authz-users:
-
-Users
------
-
-A *user* is an identity with associated privileges on a MinIO deployment. Each
-user consists of a unique access key (username) and corresponding secret key
-(password).  The access key and secret key support *authentication* on the MinIO
-deployment, similar to a username and password. Clients must specify both a
-valid access key (username) and the corresponding secret key (password) to
-access the MinIO deployment. 
-
-Each user can have one or more assigned :ref:`policies
-<minio-auth-authz-pbac-policies>` that explicitly list the actions and resources
-to which the user is allowed or denied access. Policies support *authorization*
-of operations on the MinIO deployment, such that clients can only perform
-an operation if the user's assigned policies allow access to both the operation
-*action* and the target *resources*.
-
-For example, consider the following table of users. Each user is assigned
-a :ref:`built-in policy <minio-auth-authz-pbac-built-in>` or
-a supported :ref:`action <minio-auth-authz-pbac-actions>`. The table
-describes a subset of operations a client could perform if authenticated
-as that user:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 40 40
-   :width: 100%
-
-   * - User
-     - Policy
-     - Operations
-
-   * - ``Operations``
-     - | :userpolicy:`readwrite` on ``finance`` bucket
-       | :userpolicy:`readonly` on ``audit`` bucket
-     
-     - | ``PUT`` and ``GET`` on ``finance`` bucket.
-       | ``PUT`` on ``audit`` bucket
-
-   * - ``Auditing``
-     - | :userpolicy:`readonly` on ``audit`` bucket
-     - ``GET`` on ``audit`` bucket
-
-   * - ``Admin``
-     - :policy-action:`admin:*`
-     - All :mc-cmd:`mc admin` commands.
-
-Users also inherit permissions from their assigned :ref:`groups
-<minio-auth-authz-groups>`. A user's total set of permissions consists of their
-explicitly assigned permissions *and* the inherited permissions from each of
-their assigned groups.
-
-.. admonition:: ``Deny`` overrides ``Allow``
-   :class: note
-
-   MinIO follows the IAM policy evaluation rules where a ``Deny`` rule overrides
-   ``Allow`` rule on the same action/resource. For example, if a user has an
-   explicitly assigned policy with an ``Allow`` rule for an action/resource
-   while one of its groups has an assigned policy with a ``Deny`` rule for that
-   action/resource, MinIO would apply only the ``Deny`` rule. 
-
-   For more information on IAM policy evaluation logic, see the IAM
-   documentation on 
-   :iam-docs:`Determining Whether a Request is Allowed or Denied Within an Account 
-   <reference_policies_evaluation-logic.html#policy-eval-denyallow>`.
-
-.. _minio-auth-authz-root:
-
-``root`` User
-~~~~~~~~~~~~~
-
-By default, MinIO deployments provide ``root`` user with access to all actions
-and resources on the deployment. The ``root`` user credentials are set when
-starting the ``minio`` server. When specifying the ``root`` access key and
-secret key, consider using *long, unique, and random* strings. Exercise all
-possible precautions in storing the access key and secret key, such that only
-known and trusted individuals who *require* superuser access to the deployment
-can retrieve the ``root`` credentials.
-
-- MinIO *strongly discourages* using the ``root`` user for regular client access
-  regardless of the environment (development, staging, or production).
-
-- MinIO *strongly recommends* creating users such that each client has access to
-  the minimal set of actions and resources required to perform their assigned
-  workloads. 
-
-.. _minio-auth-authz-groups:
-
-Groups
-------
-
-A *group* is a collection of :ref:`users <minio-auth-authz-users>`. Each group
-can have one or more assigned :ref:`policies <minio-auth-authz-pbac-policies>`
-that explicitly list the actions and resources to which group members are
-allowed or denied access.
-
-For example, consider the following groups. Each group is assigned a
-:ref:`built-in policy <minio-auth-authz-pbac-built-in>` or supported
-:ref:`policy action <minio-auth-authz-pbac-actions>`. Each group also has one or
-more assigned users. Each user's total set of permissions consists of their
-explicitly assigned permission *and* the inherited permissions from each of
-their assigned groups.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 40 40
-   :width: 100%
-
-   * - Group
-     - Policy
-     - Members
-
-   * - ``Operations``
-     - | :userpolicy:`readwrite` on ``finance`` bucket
-       | :userpolicy:`readonly` on ``audit`` bucket
-     
-     - ``john.doe``, ``jane.doe``
-
-   * - ``Auditing``
-     - | :userpolicy:`readonly` on ``audit`` bucket
-     - ``jen.doe``, ``joe.doe``
-
-   * - ``Admin``
-     - :policy-action:`admin:*`
-     - ``greg.doe``, ``jen.doe``
-
-Groups provide a simplified method for managing shared permissions among
-users with common access patterns and workloads. Client's *cannot* authenticate
-to a MinIO deployment using a group as an identity.
-
-.. admonition:: ``Deny`` overrides ``Allow``
-   :class: note
-
-   MinIO follows the IAM standard where a ``Deny`` rule overrides ``Allow`` rule
-   on the same action or resource. For example, if a user has an explicitly
-   assigned policy with an ``Allow`` rule for an action/resource while one of
-   its groups has an assigned policy with a ``Deny`` rule for that
-   action/resource, MinIO would apply only the ``Deny`` rule. 
-
-   For more information on IAM policy evaluation logic, see the IAM
-   documentation on 
-   :iam-docs:`Determining Whether a Request is Allowed or Denied Within an Account 
-   <reference_policies_evaluation-logic.html#policy-eval-denyallow>`.
-
-.. _minio-auth-authz-pbac-policies:
-
-Policies
---------
-
-MinIO uses Policy-Based Access Control (PBAC) for supporting *authorization* of
-users who have successfully *authenticated* to the deployment. Each policy
-describes one or more rules that outline the permissions of a user or group of
-users. MinIO PBAC follows the guidelines and standards set by AWS Identity and
-Access Management (IAM). MinIO supports a subset of :iam-docs:`IAM actions and
-conditions <reference_policies_actions-resources-contextkeys.html>` when
-creating policies. By default, MinIO *denies* access to actions or resources not
-explicitly referenced in a user's assigned or inherited policies.
-
-This section focuses on MinIO's implementation and extensions of IAM policies
-and access management. A complete description of IAM or IAM policies is out
-of scope of this documentation. Consider deferring to the
-:iam-docs:`IAM documentation <>` for more complete documentation on the
-IAM service.
-
-.. _minio-auth-authz-pbac-built-in:
+.. _minio-policy-built-in:
 
 Built-In Policies
-~~~~~~~~~~~~~~~~~
+-----------------
 
-MinIO provides the following built-in policies for assigning to users
-and groups:
+MinIO provides the following built-in policies for assigning to 
+:ref:`users <minio-users>` or :ref:`groups <minio-groups>`:
 
 .. userpolicy:: readonly
 
@@ -231,15 +59,18 @@ and groups:
    Grants write-only permissions for all buckets and objects on the MinIO 
    server.
 
-.. _minio-auth-authz-pbac-document:
+Use :mc-cmd:`mc admin policy set` to associate a policy to a 
+user or group on a MinIO deployment.
+
+.. _minio-policy-document:
 
 Policy Document Structure
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 MinIO policy documents use the same schema as 
 :aws-docs:`AWS IAM Policy <IAM/latest/UserGuide/access.html>` documents.
 
-The following sample document provides a general schema for creating custom
+The following sample document provides a template for creating custom
 policies for use with a MinIO deployment. For more complete documentation on IAM
 policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
 <IAM/latest/UserGuide/reference_policies_elements.html>`. 
@@ -266,7 +97,7 @@ policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
    }
 
 - For the ``Statement.Action`` array, specify one or more 
-  :ref:`supported S3 actions <minio-auth-authz-pbac-actions>`. MinIO deployments
+  :ref:`supported S3 actions <minio-policy-actions>`. MinIO deployments
   supports a subset of AWS S3 actions.
 
 - For the ``Statement.Resource`` key, you can replace the ``*`` with 
@@ -274,13 +105,13 @@ policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
   Using ``*`` applies the statement to all resources on the MinIO deployment.
 
 - For the ``Statement.Condition`` key, you can specify one or more 
-  :ref:`supported Conditions <minio-auth-authz-pbac-conditions>`. MinIO
+  :ref:`supported Conditions <minio-policy-conditions>`. MinIO
   deployments supports a subset of AWS S3 conditions.
 
-.. _minio-auth-authz-pbac-actions:
+.. _minio-policy-actions:
 
-Supported Policy Actions
-~~~~~~~~~~~~~~~~~~~~~~~~
+Supported S3 Policy Actions
+---------------------------
 
 MinIO policy documents support a subset of IAM 
 :iam-docs:`S3 Action keys <list_amazons3.html#amazons3-actions-as-permissions>`. 
@@ -558,7 +389,7 @@ The following table lists the MinIO-supported policy action keys.
    <API_GetObjectVersionForReplication.html>` IAM action.
 
 
-.. _minio-auth-authz-pbac-mc-admin-actions:
+.. _minio-policy-mc-admin-actions:
 
 ``mc admin`` Policy Action Keys
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -716,10 +547,10 @@ services:
 
    Allows getting bucket targets
 
-.. _minio-auth-authz-pbac-conditions:
+.. _minio-policy-conditions:
 
-Supported Policy Condition Keys
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Supported S3 Policy Condition Keys
+----------------------------------
 
 MinIO policy documents support IAM 
 :iam-docs:`conditional statements <reference_policies_elements_condition.html>`. 
@@ -732,7 +563,7 @@ information on any listed condition key, see the
 <reference_policies_elements_condition.html>`
 
 MinIO supports the following condition keys for all supported 
-:ref:`actions <minio-auth-authz-pbac-actions>`:
+:ref:`actions <minio-policy-actions>`:
 
 - ``aws:Referer``
 - ``aws:SourceIp``
@@ -802,10 +633,10 @@ actions:
      - ``s3:versionid``
 
 ``mc admin`` Policy Condition Keys
-``````````````````````````````````
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO supports the following conditions for use with defining policies for
-:mc-cmd:`mc admin` :ref:`actions <minio-auth-authz-pbac-mc-admin-actions>`.
+:mc-cmd:`mc admin` :ref:`actions <minio-policy-mc-admin-actions>`.
 
 - ``aws:Referer``
 - ``aws:SourceIp``
@@ -818,19 +649,18 @@ For complete information on any listed condition key, see the :iam-docs:`IAM
 Condition Element Documentation <reference_policies_elements_condition.html>`
 
 Creating Custom Policies
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
-Use the ``mc admin policy`` command to add a policy to the MinIO
+Use the :mc-cmd:`mc admin policy add` command to add a policy to the MinIO
 server. The policy *must* be a valid JSON document formatted according to
 IAM policy specifications. For example:
 
 .. code-block:: shell
 
-   mc config host add myminio http://myminio1.example.net:9000 <access_key> <secret_key>
-
    mc admin policy add myminio/ new_policy new_policy.json
 
-To add this policy to a user or group, use the ``mc admin policy set`` command:
+Use the :mc-cmd:`mc admin policy set` command to associate a policy to a
+:ref:`user <minio-users>` or :ref:`group <minio-groups>`.
 
 .. code-block:: shell
 
@@ -838,3 +668,8 @@ To add this policy to a user or group, use the ``mc admin policy set`` command:
 
    mc admin policy set myminio/ new_policy group=group_name
 
+.. note::
+
+   ``myminio`` refers to the :mc-cmd:`alias <mc alias>` of an S3-compatible
+   host configured for use with :program:`mc`. See :mc-cmd:`mc alias` for
+   more information on aliases.

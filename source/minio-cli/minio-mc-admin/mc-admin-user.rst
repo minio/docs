@@ -36,7 +36,7 @@ MinIO uses Policy-Based Access Control (PBAC) to support *authorization* of
 users who have successfully *authenticated* to the deployment. Each policy
 includes rules that dictate the allowed or denied actions/resources on the
 deployment. You can assign one or more :ref:`policies
-<minio-auth-authz-pbac-policies>` to a User. Users *also* inherit the policies
+<minio-policy>` to a User. Users *also* inherit the policies
 of any groups of which they are members. A user's total set of permissions
 includes their explicitly assigned policies *and* any policies inherited via
 group membership.
@@ -55,8 +55,8 @@ Each user's total set of permissions consists of their explicitly assigned
 permission *and* the inherited permissions from each of their assigned groups.
 
 For more information on MinIO users and groups, see
-:ref:`minio-auth-authz-users` and :ref:`minio-auth-authz-groups`. For 
-more information on MinIO policies, see :ref:`minio-auth-authz-pbac-policies`.
+:ref:`minio-users` and :ref:`minio-groups`. For 
+more information on MinIO policies, see :ref:`minio-policy`.
 
 .. admonition:: ``Deny`` overrides ``Allow``
    :class: note

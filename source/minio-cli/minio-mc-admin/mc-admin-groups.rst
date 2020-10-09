@@ -19,9 +19,9 @@ The :mc-cmd:`mc admin group` command manages groups on a MinIO deployment.
 
 .. end-mc-admin-groups-desc
 
-A :ref:`group <minio-auth-authz-groups>` is a collection of :ref:`users
-<minio-auth-authz-users>`. Each group can have one or more assigned
-:ref:`policies <minio-auth-authz-pbac-policies>` that explicitly list the
+A :ref:`group <minio-groups>` is a collection of :ref:`users
+<minio-users>`. Each group can have one or more assigned
+:ref:`policies <minio-policy>` that explicitly list the
 actions and resources to which group members are allowed or denied access.
 Groups provide a simplified method for managing shared permissions among users
 with common access patterns and workloads. 
@@ -40,7 +40,7 @@ MinIO uses Policy-Based Access Control (PBAC) to support *authorization* of
 users who have successfully *authenticated* to the deployment. Each policy
 includes rules that dictate the allowed or denied actions/resources on the
 deployment. You can assign one or more :ref:`policies
-<minio-auth-authz-pbac-policies>` to a group. Users with membership in the
+<minio-policy>` to a group. Users with membership in the
 group inherit the group's assigned policies. A user's total set of permissions
 includes their explicitly assigned policies *and* any policies inherited
 via group membership.
@@ -49,8 +49,8 @@ Newly created groups have *no* policies by default. To configure a group's
 assigned policies, use the :mc-cmd:`mc admin policy set` command.
 
 For more information on MinIO users and groups, see
-:ref:`minio-auth-authz-users` and :ref:`minio-auth-authz-groups`. For 
-more information on MinIO policies, see :ref:`minio-auth-authz-pbac-policies`.
+:ref:`minio-users` and :ref:`minio-groups`. For 
+more information on MinIO policies, see :ref:`minio-policy`.
 
 .. admonition:: ``Deny`` overrides ``Allow``
    :class: note
@@ -84,25 +84,16 @@ Quick Reference
 
 :mc-cmd:`mc admin group enable TARGET GROUPNAME <mc admin group enable>`
    Enables a group on the MinIO deployment. Users can only inherit
-   :ref:`policies <minio-auth-authz-pbac-policies>` assigned to an enabled group.
+   :ref:`policies <minio-policy>` assigned to an enabled group.
 
 :mc-cmd:`mc admin group disable TARGET GROUPNAME <mc admin group disable>`
    Disables a group on the MinIO deployment. Users cannot inherit :ref:`policies
-   <minio-auth-authz-pbac-policies>` assigned to a disabled group.
+   <minio-policy>` assigned to a disabled group.
 
 Syntax
 ------
 
-:mc-cmd:`mc admin group` has the following syntax:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc admin group [SUBCOMMAND] [ARGUMENTS]
-
-:mc-cmd:`mc admin group` supports the following subcommands:
-
-.. mc-cmd:: mc admin group add
+.. mc-cmd:: add
    :fullpath:
 
    Adds an existing user to the group. The command creates the group if it
@@ -134,12 +125,12 @@ Syntax
       deployment. Use :mc-cmd:`mc admin user list` to review the available
       users on the deployment. 
 
-.. mc-cmd:: mc admin group info
+.. mc-cmd:: info
    :fullpath:
 
    Returns details for the group on the target deployment, such as all
-   :ref:`users <minio-auth-authz-users>` with membership in the group and the
-   assigned :ref:`policies <minio-auth-authz-pbac-policies>`. The command has
+   :ref:`users <minio-users>` with membership in the group and the
+   assigned :ref:`policies <minio-policy>`. The command has
    the following syntax:
 
    .. code-block:: shell
@@ -158,7 +149,7 @@ Syntax
 
       The name of the group.
 
-.. mc-cmd:: mc admin group list
+.. mc-cmd:: list
    :fullpath:
 
    List all groups on the target MinIO deployment. The command has the
@@ -176,12 +167,12 @@ Syntax
       The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from
       which to retrieve groups.
 
-.. mc-cmd:: mc admin group remove
+.. mc-cmd:: remove
    :fullpath:
 
    Removes a group on the target MinIO deployment. Removing a group does *not*
-   remove any users with membership in the group. Use :mc-cmd:`mc admin user
-   remove` to remove users from a group. 
+   remove any users with membership in the group. Use 
+   :mc-cmd:`mc admin user remove` to remove users from a group. 
    
    The command has the following syntax:
 
@@ -205,7 +196,7 @@ Syntax
    :fullpath:
 
    Enables the group on the target MinIO deployment. Users can only inherit
-   :ref:`policies <minio-auth-authz-pbac-policies>` from an enabled group.
+   :ref:`policies <minio-policy>` from an enabled group.
    Groups are enabled on creation by default. The command has the following
    syntax:
 
@@ -229,7 +220,7 @@ Syntax
    :fullpath:
 
    Disables the group on the target MinIO deployment. Users cannot inherit
-   :ref:`policies <minio-auth-authz-pbac-policies>` from a disabled group. The
+   :ref:`policies <minio-policy>` from a disabled group. The
    command has the following syntax:
 
    .. code-block:: shell

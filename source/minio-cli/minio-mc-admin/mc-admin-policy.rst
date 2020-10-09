@@ -23,52 +23,7 @@ documents to define rules for accessing resources on a MinIO server.
 
 For complete documentation on MinIO PBAC, including policy document JSON
 structure and syntax, see
-:doc:`/security/minio-authentication-authorization`.
-
-Quick Reference
----------------
-
-:mc-cmd:`mc admin policy add TARGET POLICYNAME POLICYFILE <mc admin policy add>`
-   Creates a new policy on the target MinIO deployment. 
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin policy add play myNewPolicy /path/to/policy.json
-
-:mc-cmd:`mc admin policy list TARGET <mc admin policy list>`
-   Lists the available policies on the target MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-      
-      mc admin policy list play
-
-:mc-cmd:`mc admin policy info TARGET POLICYNAME <mc admin policy info>`
-   Returns the policy in JSON format from the target MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin policy info play myNewPolicy
-
-:mc-cmd:`mc admin policy set TARGET POLICYNAME user=|group= <mc admin policy set>`
-   Associates a policy to a user or group on the target MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin policy set play myNewPolicy user=myMinioUser
-
-      mc admin policy set play myNewGroupPolicy group=myMinioGroup
-
-:mc-cmd:`mc admin policy remove TARGET POLICYNAME <mc admin policy remove>`
-   Removes a policy from the target MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin policy remove play myNewPolicy
+:ref:`minio-auth-authz-overview`.
 
 Examples
 --------
@@ -320,7 +275,7 @@ Syntax
       as a comma-separated list.
 
       MinIO deployments include the following :ref:`built-in policies
-      <minio-auth-authz-pbac-built-in>` policies by default:
+      <minio-policy-built-in>` policies by default:
 
       - :userpolicy:`readonly` 
       - :userpolicy:`readwrite`

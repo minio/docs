@@ -116,6 +116,10 @@ body div.left li.toctree-l2 {
    margin: 10px 0 10px 0;
 }
 
+body div.left li.toctree-l3 {
+   margin: 10px 0 10px 0;
+}
+
 body div.left div.searchformwrapper {
    margin-top: 25px;
 }

@@ -22,7 +22,7 @@ Users deploying onto a Kubernetes cluster should start with our
    /minio-features/overview
    /bare-metal/minio-baremetal-overview
    /kubernetes/minio-kubernetes-overview
-   /security/minio-security
+   /security/security-overview
    /minio-cli/minio-mc
    /minio-cli/minio-mc-admin
    /minio-server/minio-server

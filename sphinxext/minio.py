@@ -258,7 +258,7 @@ class MinioObject(ObjectDescription):
 
     #: If ``allow_nesting`` is ``True``, the object prefixes will be accumulated
     #: based on directive nesting
-    allow_nesting = False
+    allow_nesting = True
 
     option_spec = {
         'noindex': directives.flag,
@@ -273,73 +273,24 @@ class MinioObject(ObjectDescription):
         directives.
         """
         sig = sig.strip()
-        if '(' in sig and sig[-1:] == ')':
-            member, arglist = sig.split('(', 1)
-            member = member.strip()
-            arglist = arglist[:-1].strip()
-        elif ',' in sig:
-           # Bit ugly. For subcommands w/ aliases
-           member, alias = sig.split(',', 1)
-           member = member.strip()
-           alias = alias.strip()
-        else:
-            member = sig
-            arglist = None
-            alias = None
+
+        member = sig
         # If construct is nested, prefix the current prefix
         prefix = self.env.ref_context.get('minio:object', None)
-        mod_name = self.env.ref_context.get('minio:command')
-        name = member
-        try:
-            member_prefix, member_name = member.rsplit('.', 1)
-        except ValueError:
-            member_name = name
-            member_prefix = ''
-        finally:
-            name = member_name
-            if prefix and member_prefix:
-                prefix = '.'.join([prefix, member_prefix])
-            elif prefix is None and member_prefix:
-                prefix = member_prefix
-        fullname = name
-        if prefix and self.allow_nesting==False:
-            fullname = '.'.join([prefix, name])
-        elif prefix and self.allow_nesting==True:
-            fullname = ' '.join([prefix, name])
 
-        signode['module'] = mod_name
+        fullname = member
+
+        if prefix:
+          fullname = '.'.join([prefix, member])
+
         signode['object'] = prefix
         signode['fullname'] = fullname
 
-        if self.display_prefix:
-            signode += addnodes.desc_annotation(self.display_prefix,
-                                                self.display_prefix)
+        if prefix:  
+          signode += addnodes.desc_addname(prefix + '.', prefix + '.')
         
-        # In our current usage, we only nest for command/subcommand. So we 
-        # need to split some of the logic here from nesting of YAML or JSON
-        # So if allow_nesting is true, we should use " " instead of "." for
-        # the prefix description.
-        # We also have an exit for the 'subcommand' type so that we don't end 
-        # up building long name strings for subcommands
-        # Finally for subcommands w/ aliases, need to append the alias name
+        signode += addnodes.desc_name(member, member)
 
-
-        if prefix and self.allow_nesting == False:
-            signode += addnodes.desc_addname(prefix + '.', prefix + '.')
-        elif prefix and self.allow_nesting == True and self.objtype != 'subcommand':
-            signode += addnodes.desc_addname(prefix + ' ', prefix + ' ')
-            signode += addnodes.desc_addname(alias + ' ', alias + ' ')
-        elif mod_name:
-            signode += addnodes.desc_addname(mod_name + '.', mod_name + '.')
-        if (alias != None):
-           signode += addnodes.desc_name(name + ", " + alias, name + ", " + alias)
-        else:
-           signode += addnodes.desc_name(name, name)
-        if self.has_arguments:
-            if not arglist:
-                signode += addnodes.desc_parameterlist()
-            else:
-                _pseudo_parse_arglist(signode, arglist)
         return fullname, prefix
 
     def add_target_and_index(self, name_obj: Tuple[str, str], sig: str,
@@ -533,7 +484,7 @@ class MinIODomain(Domain):
         'mc-cmd':         ObjType(_('mc-cmd'),        'mc-cmd'),
         'mc-cmd-option':  ObjType(_('mc-cmd-option'), 'mc-cmd-option'),
         'policy-action':  ObjType(_('policy-action'), 'policy-action'),
-        'envvar':        ObjType(_('envvar'),       'envvar')
+        'envvar':         ObjType(_('envvar'),       'envvar')
     }
     directives = {
         'data':            MinioObject,
