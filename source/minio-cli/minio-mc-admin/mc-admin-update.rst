@@ -36,14 +36,16 @@ production environments.
 Examples
 --------
 
-.. include:: /includes/play-alias-available.rst
-   :start-after: myminio-alias
-   :end-before: end-myminio-alias
+Use :mc:`mc admin update` to update each :mc:`minio` server process in the
+MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin update myminio
+   mc admin update ALIAS
+
+Replace :mc-cmd:`ALIAS <mc admin update ALIAS>` with the 
+:mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
 Syntax
 ------

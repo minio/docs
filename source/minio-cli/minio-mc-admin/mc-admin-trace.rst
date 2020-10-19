@@ -28,6 +28,20 @@ request against each MinIO server in a deployment.
       :start-after: start-minio-only
       :end-before: end-minio-only
 
+Example
+-------
+
+Use :mc:`mc admin trace` to perform an HTTP trace of each MinIO server in
+the deployment:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin trace ALIAS
+
+- Replace :mc-cmd:`ALIAS <mc admin trace TARGET>` with the 
+  :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
 Syntax
 ------
 

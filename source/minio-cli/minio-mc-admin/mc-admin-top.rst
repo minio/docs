@@ -33,22 +33,27 @@ or MinIO Gateway deployments.
 Syntax
 ------
 
-:mc-cmd:`mc admin top` has the following syntax:
+.. mc-cmd:: locks
+   :fullpath:
 
-.. code-block:: shell
-   :class: copyable
+   Returns the 10 oldest locks on the MinIO deployment.
 
-   mc admin top lock TARGET
+   The command has the following syntax:
 
-The command supports the following arguments:
+   .. code-block:: shell
+      :class: copyable
 
-.. mc-cmd:: TARGET
+      mc admin top locks TARGET
 
-   The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from which
-   the command retrieves statistics.
+   The command supports the following arguments:
 
-   The alias *must* correspond to a distributed (multi-node) MinIO deployment.
-   The command returns an error for standalone MinIO deployments or MinIO
-   Gateway deployments.
+   .. mc-cmd:: TARGET
+
+      The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from which
+      the command retrieves statistics.
+
+      The alias *must* correspond to a distributed (multi-node) MinIO deployment.
+      The command returns an error for standalone MinIO deployments or MinIO
+      Gateway deployments.
 
 

@@ -1,6 +1,6 @@
-==================================
+=========================
 ``mc admin bucket quota``
-==================================
+=========================
 
 .. default-domain:: minio
 
@@ -71,25 +71,82 @@ specified size value:
 
 Omitting the suffix defaults to ``bytes``.
 
+Examples
+--------
 
-Quick Reference
----------------
+Configure a Hard Quota on a Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc admin bucket quota play/mybucket --hard 10GB <mc admin bucket quota hard>`
-   Adds a hard quota of ``10GB`` to the ``mybucket`` bucket on the
-   MinIO deployment with the ``play`` :mc-cmd:`alias <mc alias>`. MinIO
-   rejects any ``PUT`` request that would result in the bucket exceeding
-   the configured quota.
+Use :mc:`mc admin bucket quota` with the
+:mc-cmd-option:`~mc admin bucket quota hard` flag to specify a hard quota 
+on a bucket. Hard quotas prevent the bucket size from growing past the specified
+limit.
 
-:mc-cmd:`mc admin bucket quota play/mybucket --fifo 10GB <mc admin bucket quota fifo>`
-   Adds a hard quota of ``10GB`` to the ``mybucket`` bucket on the
-   MinIO deployment with the ``play`` :mc-cmd:`alias <mc alias>`. MinIO
-   removes the oldest objects on the bucket until it can satisfy the size
-   of an incoming ``PUT`` request.
+.. code-block:: shell
+   :class: copyable
 
-:mc-cmd:`mc admin bucket quota play/mybucket --clear <mc admin bucket quota clear>`
-   Removes all quotas from the ``mybucket`` bucket on the MinIO deployment
-   with the ``play`` :mc-cmd:`alias <mc alias>`.
+   mc admin bucket quota TARGET/BUCKET --hard LIMIT
+
+- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
+  MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
+  set the hard quota.
+
+- Replace ``LIMIT`` with the maximum size to which the bucket can grow. 
+  For example, to set a hard limit of 10 Terrabytes, specify ``10t``.
+  See :ref:`mc-admin-bucket-quota-units` for supported units.
+
+Configure a First-In First-Out (FIFO) Quota on a Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc admin bucket quota` with the
+:mc-cmd-option:`~mc admin bucket quota fifo` flag to specify a quota with
+First-In First-Out deletion of content. FIFO quotas prevent the bucket size
+from growing past the specified limit by deleting the oldest content on the
+bucket to make room for newer content.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin bucket quota TARGET/BUCKET --fifo LIMIT
+
+- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
+  MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
+  set the quota.
+
+- Replace ``LIMIT`` with the maximum size to which the bucket can grow. 
+  For example, to set a limit of 10 Terrabytes, specify ``10t``.
+  See :ref:`mc-admin-bucket-quota-units` for supported units.
+
+Retrieve Bucket Quota Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc admin bucket quota` to retrieve the current quota configuration
+for a bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin bucket quota TARGET/BUCKET
+
+Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
+MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
+retreive the quota.
+
+Clear Configured Bucket Quota
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc admin bucket quota` with the
+:mc-cmd-option:`~mc admin bucket quota clear` flag to clear all quotas from
+a bucket.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin bucket quota TARGET/BUCKET --clear
+
+- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
+  MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
+  clear the quota.
 
 Syntax
 ------
@@ -99,7 +156,7 @@ Syntax
 .. code-block:: shell
    :class: copyable
 
-   mc admin bucket quota TARGET [FLAGS] [ARGUMENTS]
+   mc admin bucket quota TARGET [ARGUMENTS]
 
 :mc-cmd:`mc admin bucket quota` supports the following arguments:
 
@@ -113,6 +170,9 @@ Syntax
       :class: copyable
 
       mc admin bucket quota play/mybucket
+
+   Omit all other arguments to return the current quota settings for the
+   specified bucket.
 
 .. mc-cmd:: hard
    :option:
@@ -129,8 +189,9 @@ Syntax
 .. mc-cmd:: fifo
    :option:
 
-   Sets a limit to the bucket storage size after which MinIO removes the oldest
-   objects in the bucket until the bucket size drops below the specified limit.
+   Sets a maximum limit to the bucket storage size. The MinIO server removes
+   the oldest objects in the bucket to make space for newer objects such that
+   the bucket size remains below the specified limit.
 
    For example, a ``fifo`` limit of ``10GB`` would result in removal of the
    oldest objects in the bucket once it reaches ``10GB`` in size. 

@@ -13,11 +13,11 @@
 Description
 -----------
 
-.. start-mc-admin-groups-desc
+.. start-mc-admin-group-desc
 
 The :mc-cmd:`mc admin group` command manages groups on a MinIO deployment.
 
-.. end-mc-admin-groups-desc
+.. end-mc-admin-group-desc
 
 A :ref:`group <minio-groups>` is a collection of :ref:`users
 <minio-users>`. Each group can have one or more assigned
@@ -65,6 +65,113 @@ more information on MinIO policies, see :ref:`minio-policy`.
    documentation on 
    :iam-docs:`Determining Whether a Request is Allowed or Denied Within an Account 
    <reference_policies_evaluation-logic.html#policy-eval-denyallow>`.
+
+Examples
+--------
+
+Create a New Group
+~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin group add` to create a new group to an S3-compatible host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin group add ALIAS GROUPNAME MEMBER [MEMBER...]
+
+- Replace :mc-cmd:`ALIAS <mc admin group add ALIAS>` with the 
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`GROUPNAME <mc admin group add GROUPNAME>` with the name
+  of the group to create.
+
+- Replace :mc-cmd:`MEMBER <mc admin group add MEMBERS>` with *at least* one
+  :mc-cmd:`user <mc admin user>` on the S3 host. Specify multiple members 
+  as a list: ``MEMBER1 MEMBER2 MEMBER3``
+
+List Available Groups
+~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin group list` to list list all groups on an S3-compatible
+host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin group list ALIAS
+
+- Replace :mc-cmd:`ALIAS <mc admin group info ALIAS>` with the 
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+
+View Group Details
+~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin group info` to view detailed group information on an 
+S3-compatible host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin group info ALIAS GROUPNAME
+
+- Replace :mc-cmd:`ALIAS <mc admin group info ALIAS>` with the 
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`GROUPNAME <mc admin group info GROUPNAME>` with the name of
+  the group.
+
+Remove a Group
+~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin group remove` to remove a group from an S3-compatible
+host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin group remove ALIAS GROUPNAME
+
+- Replace :mc-cmd:`ALIAS <mc admin group remove ALIAS>` with the 
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`GROUPNAME <mc admin group remove GROUPNAME>` with the
+  name of the group.
+
+Disable a Group
+~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin group disable` to disable a group on an S3-compatible
+host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin group disable ALIAS GROUPNAME
+
+- Replace :mc-cmd:`ALIAS <mc admin group disable ALIAS>` with the 
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`GROUPNAME <mc admin group disable GROUPNAME>` with the name
+  of the group.
+
+Enable a Group
+~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin group enable` to enable a group on an S3-compatible
+host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin group enable ALIAS GROUPNAME
+
+- Replace :mc-cmd:`ALIAS <mc admin group enable ALIAS>` with the 
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`GROUPNAME <mc admin group enable GROUPNAME>` with the name
+  of the group.
+
 
 Quick Reference
 ---------------
@@ -192,7 +299,7 @@ Syntax
 
       The name of the group to remove.
 
-.. mc-cmd:: mc admin group enable
+.. mc-cmd:: enable
    :fullpath:
 
    Enables the group on the target MinIO deployment. Users can only inherit
@@ -216,7 +323,7 @@ Syntax
 
       The name of the group to enable. 
 
-.. mc-cmd:: mc admin group disable
+.. mc-cmd:: disable
    :fullpath:
 
    Disables the group on the target MinIO deployment. Users cannot inherit

@@ -20,11 +20,6 @@ purposes.
 
 .. end-mc-admin-profile-desc
 
-:mc-cmd:`mc admin profile` produces a ``ZIP`` archive ``profile.zip`` that
-contains one or more ``.pprof`` files. Use the 
-`pprof <https://github.com/google/pprof>`__ ``go`` utility to read the
-profile data.
-
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
 
@@ -32,20 +27,72 @@ profile data.
       :start-after: start-minio-only
       :end-before: end-minio-only
 
-Quick Reference
----------------
+Profile Data Format
+~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc admin profile start --type cpu myminio/ <mc admin profile start>`
-   Starts profiling data related to ``cpu`` statistics
-   on the ``myminio`` :mc-cmd:`alias <mc alias>`.
+:mc-cmd:`mc admin profile` produces a ``ZIP`` archive ``profile.zip`` that
+contains one or more ``.pprof`` files. Use the 
+`pprof <https://github.com/google/pprof>`__ ``go`` utility to read the
+profile data.
 
-:mc-cmd:`mc admin profile start --type "cpu,mem,block" myminio/ <mc admin profile start>`
-   Starts profiling data related to ``cpu``, ``mem``, and ``block`` statistics
-   on the ``myminio`` :mc-cmd:`alias <mc alias>`.
+Examples
+--------
 
-:mc-cmd:`mc admin profile stop myminio/ <mc admin profile stop>`
-   Stops profiling data on the ``myminio`` :mc-cmd:`alias <mc alias>` and
-   dumps the recorded data to ``profile.zip``.
+Profile Data for Single Resource
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin profile start` with the
+:mc-cmd-option:`~mc admin profile start type` flag to start profiling the
+resource:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin profile start --type "TYPE" ALIAS
+
+- Replace :mc-cmd:`ALIAS <mc admin profile start ALIAS>` with the
+  :mc-cmd:`alias <mc alias>` of the MinIO host.
+
+- Replace :mc-cmd:`TYPE <mc admin profile start type>` with the resource to
+  profile.
+
+Use :mc-cmd:`mc admin profile stop` to stop profiling data from the specified
+resource and output the results:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin profile stop
+
+The command outputs the profiled data as ``profile.zip``.
+
+Profile Data for Multiple Resources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin profile start` with the
+:mc-cmd-option:`~mc admin profile start type` flag to start profiling the
+resources:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin profile start --type "TYPE,[TYPE...]" ALIAS
+
+- Replace :mc-cmd:`ALIAS <mc admin profile start ALIAS>` with the
+  :mc-cmd:`alias <mc alias>` of the MinIO host.
+
+- Replace :mc-cmd:`TYPE <mc admin profile start type>` with the resources to
+  profile. Specify multiple resources as a comma-separated list.
+
+Use :mc-cmd:`mc admin profile stop` to stop profiling data from the specified
+resources and output the results:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin profile stop
+
+The command outputs the profiled data as ``profile.zip``.
 
 Syntax
 ------

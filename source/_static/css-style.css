@@ -232,6 +232,10 @@ body div.center dl dd {
    margin-left: 15px;
 }
 
+body div.center table.docutils td {
+   padding: 20px 10px;
+}
+
 body div.center div.footer {
    text-align: center;
    width: auto;

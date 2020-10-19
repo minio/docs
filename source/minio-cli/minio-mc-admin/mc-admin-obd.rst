@@ -15,14 +15,23 @@ Description
 
 .. start-mc-admin-obd-desc
 
-The :mc-cmd:`mc admin obd` command generates detailed diagnostics for the
+The :mc:`mc admin obd` command generates detailed diagnostics for the
 target MinIO deployment as a ``GZIP`` compressed ``JSON`` file. MinIO Support
-may request the output of :mc-cmd:`mc admin obd` as part of troubleshooting
+may request the output of :mc:`mc admin obd` as part of troubleshooting
 and diagnostics.
 
 .. end-mc-admin-obd-desc
 
-The :mc-cmd:`mc admin odb` output may contain sensitive information about your
+:mc:`mc admin odb` names the file using the following pattern:
+
+.. code-block:: none
+
+   alias-health_YYYYMMDDHHMMSS.json.gzip
+
+The ``alias`` is the :mc-cmd:`~mc admin obd TARGET` MinIO deployment from which
+:mc:`mc admin odb` returned the diagnostics.
+
+The :mc:`mc admin odb` output may contain sensitive information about your
 environment. Exercise all possible precautions, such as redacting sensitive
 fields, prior to sharing the data on any public forum. 
 
@@ -46,6 +55,8 @@ Syntax
 :mc-cmd:`mc admin obd` supports the following arguments:
 
 .. mc-cmd:: TARGET
+
+   *Required*
 
    The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from which
    the command retrieves the diagnostic data.

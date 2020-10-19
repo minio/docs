@@ -29,17 +29,86 @@ The following table lists :mc-cmd:`mc admin` commands:
 
 .. list-table::
    :header-rows: 1
-   :widths: 25 75
+   :widths: 40 60
    :width: 100%
 
    * - Command
      - Description
+
+   * - :mc:`mc admin bucket remote`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-bucket-remote.rst
+          :start-after: start-mc-admin-bucket-remote-desc
+          :end-before: end-mc-admin-bucket-remote-desc
+
+   * - :mc:`mc admin bucket quota`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-bucket-quota.rst
+          :start-after: start-mc-admin-bucket-quota-desc
+          :end-before: end-mc-admin-bucket-quota-desc
+
+   * - :mc:`mc admin group`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-group.rst
+          :start-after: start-mc-admin-group-desc
+          :end-before: end-mc-admin-group-desc
+
+   * - :mc:`mc admin heal`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-heal.rst
+          :start-after: start-mc-admin-heal-desc
+          :end-before: end-mc-admin-heal-desc
+
+   * - :mc:`mc admin info`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-info.rst
+          :start-after: start-mc-admin-info-desc
+          :end-before: end-mc-admin-info-desc
+
+   * - :mc:`mc admin kms key`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-kms-key.rst
+          :start-after: start-mc-admin-kms-key-desc
+          :end-before: end-mc-admin-kms-key-desc
+
+   * - :mc:`mc admin obd`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-obd.rst
+          :start-after: start-mc-admin-obd-desc
+          :end-before: end-mc-admin-obd-desc
+
+   * - :mc:`mc admin policy`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-policy.rst
+          :start-after: start-mc-admin-policy-desc
+          :end-before: end-mc-admin-policy-desc
+
+   * - :mc:`mc admin profile`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-profile.rst
+          :start-after: start-mc-admin-profile-desc
+          :end-before: end-mc-admin-profile-desc
+
+   * - :mc:`mc admin prometheus`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-prometheus.rst
+          :start-after: start-mc-admin-prometheus-desc
+          :end-before: end-mc-admin-prometheus-desc
 
    * - :mc:`mc admin service`
      - .. include:: /minio-cli/minio-mc-admin/mc-admin-service.rst
           :start-after: start-mc-admin-service-desc
           :end-before: end-mc-admin-service-desc
 
+   * - :mc:`mc admin top`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-top.rst
+          :start-after: start-mc-admin-top-desc
+          :end-before: end-mc-admin-top-desc
+
+   * - :mc:`mc admin trace`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-trace.rst
+          :start-after: start-mc-admin-trace-desc
+          :end-before: end-mc-admin-trace-desc
+
+   * - :mc:`mc admin update`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-update.rst
+          :start-after: start-mc-admin-update-desc
+          :end-before: end-mc-admin-update-desc
+
+   * - :mc:`mc admin user`
+     - .. include:: /minio-cli/minio-mc-admin/mc-admin-user.rst
+          :start-after: start-mc-admin-user-desc
+          :end-before: end-mc-admin-user-desc
 
 .. _mc-admin-install:
 
@@ -76,7 +145,7 @@ Replace each argument with the required values. Specifying only the
 ``mc config host add`` command starts an input prompt for entering the
 required values.
 
-Use the :ref:`mc admin info <mc-admin-info>` command to test the connection to
+Use the :mc-cmd:`mc admin info` command to test the connection to
 the newly added MinIO deployment:
 
 .. code-block:: shell
@@ -89,153 +158,6 @@ Global Options
 
 :mc-cmd:`mc admin` supports the same global options as 
 :mc-cmd:`mc`. See :ref:`minio-mc-global-options`.
-
-
-
-.. _mc-admin-info:
-
-``mc admin info``
-~~~~~~~~~~~~~~~~~
-
-The ``mc admin info`` command returns diagnostic information of a MinIO server.
-
-The command has the following syntax:
-
-.. code-block:: none
-
-   NAME:
-     mc admin info COMMAND <ALIAS>
-
-   FLAGS
-     --debug    Returns verbose information for debugging
-
-If the specified ``<ALIAS>`` corresponds to a distributed MinIO deployment, the
-command returns information for each MinIO server in the deployment. Use
-:subcommand:`mc alias set` to list the currently configured aliases and their
-corresponding endpoints.
-
-*Display MinIO Server Information*
-
-.. code-block:: shell
-   :class: copyable
-
-   mc admin info myminio
-
-.. _mc-admin-policy:
-
-``mc admin policy``
-~~~~~~~~~~~~~~~~~~~
-
-The ``mc admin policy`` command can add, remove, list, get info, and set 
-policies for a user on the MinIO server. MinIO policies are fully compatible
-with AWS IAM S3 policies. See
-:aws-docs:`AWS Policies and Permissions in Amazon S3 
-<AmazonS3/latest/dev/access-policy-language-overview.html>`.
-
-The command has the following syntax:
-
-.. code-block:: none
-
-   NAME:
-     mc admin policy COMMAND <ALIAS>
-
-   COMMANDS:
-     add      add new policy
-     remove   remove policy
-     list     list all policies
-     info     show info on a policy
-     set      set IAM policy on a user or group
-
-If the specified ``<ALIAS>`` corresponds to a distributed MinIO deployment, the
-command adds the policy to each MinIO server in the deployment. Use
-:subcommand:`mc alias set` to list the currently configured aliases and their
-corresponding endpoints.
-
-MinIO servers include the following canned policies:
-
-.. code-block:: none
-
-   diagnostics
-   readonly
-   readwrite
-   writeonly
-
-Example: Add a new policy to a MinIO server
-```````````````````````````````````````````
-
-Applying the following example policy ``listbucketsonly.json`` to a user
-restricts that user to only listing the top layer buckets in the MinIO server.
-The user cannot list any other resources, including any objects in the top layer
-buckets.
-
-The following operation creates the policy on the ``/tmp`` folder
-
-.. code-block:: shell
-
-   cat <<EOF >> /tmp/listbucketsonly.json
-      {
-      "Version": "2012-10-17",
-      "Statement": [
-         {
-            "Effect": "Allow",
-            "Action": [
-            "s3:ListAllMyBuckets"
-            ],
-            "Resource": [
-            "arn:aws:s3:::*"
-            ]
-         }
-      ]
-      }
-   EOF 
-
-Use the ``mc admin policy add`` command to add the policy to the MinIO server.
-Replace ``<ALIAS>`` with the alias for the desired MinIO deployment. 
-
-.. code-block:: shell
-
-   mc admin policy add <ALIAS> listbucketsonly /tmp/listbucketsonly.json
-
-Example: Remove a policy from a MinIO Server
-````````````````````````````````````````````
-
-Use the ``mc admin policy <ALIAS> remove`` command to remove a policy from the
-MinIO server. 
-
-.. todo :  what happens to current users who have that policy?
-
-.. code-block:: shell
-
-   mc admin policy remove <ALIAS> listbucketsonly
-
-Example: Display an existing policy
-```````````````````````````````````
-
-Use the ``mc admin policy <ALIAS> info`` command to retrieve policy's JSON
-structure. Replace ``<ALIAS>`` with the alias for the desired MinIO deployment. 
-
-.. code-block:: shell
-
-   mc admin policy info <ALIAS> writeonly
-
-Example: Associate a policy to a user or group
-``````````````````````````````````````````````
-
-Use the ``mc admin policy <ALIAS> set`` command to set a policy to a user or
-group:
-
-**Set policy for a user**
-
-.. code-block:: shell
-
-   mc admin policy set <ALIAS> <POLICY> user=<USERNAME>
-
-**Set policy for a group**
-
-.. code-block:: shell
-
-   mc admin policy set <ALIAS> <POLICY> group=<GROUP>
-
 
 .. toctree::
    :titlesonly:

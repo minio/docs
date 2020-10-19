@@ -13,15 +13,12 @@
 Description
 -----------
 
-.. start-mc-admin-bucket remote-desc
+.. start-mc-admin-bucket-remote-desc
 
-The :mc-cmd:`mc admin bucket remote` command manages remote targets for 
-supporting bucket replication.
+The :mc-cmd:`mc admin bucket remote` command manages the ``ARN`` resources
+for use with :mc-cmd:`bucket replication <mc replicate>`.
 
-.. end-mc-admin-bucket remote-desc
-
-:mc-cmd:`mc admin bucket remote` creates the required ``ARN`` resource for
-use with :mc-cmd:`mc replicate`.
+.. end-mc-admin-bucket-remote-desc
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -30,67 +27,87 @@ use with :mc-cmd:`mc replicate`.
       :start-after: start-minio-only
       :end-before: end-minio-only
 
-MinIO Deployments Only
-~~~~~~~~~~~~~~~~~~~~~~
+Examples
+--------
 
-:mc-cmd:`mc admin bucket remote` only supports MinIO deployments for the source
-and target. MinIO provides no support or guarantees for other S3-compatible
-services.
+Add a New Replication Target
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Quick Reference
----------------
-
-:mc-cmd:`mc admin bucket remote add play/mybucket target/mybucket <mc admin bucket remote add>`
-   Adds a new remote target ``target/mybucket`` to ``play/mybucket``,
-   where ``target`` and ``play`` are :mc-cmd:`aliases <mc alias>` for
-   configured MinIO deployments.
-   
-   The command returns an ``ARN`` associated to the configured target.
-   :mc-cmd:`mc replicate` requires the ``ARN`` to enable replication
-   from a source bucket to a destination deployment and bucket.
-
-:mc-cmd:`mc admin bucket remote ls play/mybucket  <mc admin bucket remote ls>`
-   Lists all remote targets for ``play/mybucket``, where
-   ``play`` is a :mc-cmd:`alias <mc alias>` for a configured MinIO deployment.
-
-   The command returns an ``ARN`` associated to each configured remote target.
-   :mc-cmd:`mc replicate` requires the ``ARN`` to enable replication
-   from a source bucket to a destination deployment and bucket.
-
-:mc-cmd:`mc admin bucket remote rm play/mybucket target/mybucket <mc admin bucket remote rm>`
-   Removes the remote target ``target/mybucket`` from ``play/mybucket``,
-   where ``target`` and ``play`` are :mc-cmd:`aliases <mc alias>` for
-   configured MinIO deployments.
-
-   Removing a remote target halts any in-progress bucket replication
-   relying on that remote target's ARN. 
-
-Syntax
-------
-
-:mc-cmd:`mc admin bucket remote` has the following syntax:
+Use :mc-cmd:`mc admin bucket remote add` to create a new replication target 
+ARN for use with :mc-cmd:`mc replicate`:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin bucket remote SUBCOMMAND [ARGUMENTS]
+   mc admin bucket remote add TARGET/BUCKET SOURCE/BUCKET
 
-:mc-cmd:`mc admin bucket remote` supports the following subcommands:
+- Replace :mc-cmd:`TARGET <mc admin bucket remote add TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the MinIO deployment to use as the replication
+  target. Replace ``BUCKET`` with the full path of the bucket into which MinIO
+  replicates objects from the ``SOURCE``.
+
+- Replace :mc-cmd:`SOURCE <mc admin bucket remote add SOURCE>` with the
+  :mc-cmd:`alias <mc alias>` of the MinIO deployment to use as the
+  replication source. Replace ``BUCKET`` with the full path of the bucket from
+  which MinIO replicates objects into the ``TARGET``.
+
+Remove an Existing Replication Target
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin bucket remote rm` to remove a replication target from a 
+bucket:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin bucket remote rm SOURCE/BUCKET --arn ARN
+
+- Replace :mc-cmd:`SOURCE <mc admin bucket remote rm SOURCE>` with the
+  :mc-cmd:`alias <mc alias>` of the MinIO deployment being used as the
+  replication source. Replace ``BUCKET`` with the full path of the bucket from
+  which MinIO replicates objects.
+
+- Replace :mc-cmd:`ARN <mc admin bucket remote rm ARN>` with the 
+  ARN of the remote target. 
+
+Removing the target halts all in-progress 
+:mc-cmd:`bucket replication <mc replicate>` to the target.
+
+Retrieve Configured Replication Targets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin bucket remote ls` to list a bucket's configured
+replication targets:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin bucket remote ls SOURCE/BUCKET
+
+- Replace :mc-cmd:`SOURCE <mc admin bucket remote ls SOURCE>` with the
+  :mc-cmd:`alias <mc alias>` of the MinIO deployment being used as the
+  replication source. Replace ``BUCKET`` with the full path of the bucket from
+  which MinIO replicates objects.
+
+Syntax
+------
 
 .. mc-cmd:: add
    :fullpath:
 
-   Adds a remote target to a bucket on the MinIO deployment. The
+   Adds a remote target to a bucket on a MinIO deployment. The
    command has the following syntax:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin bucket add TARGET DESTINATION --service "replication" [ARGUMENTS]
+      mc admin bucket add TARGET DESTINATION --service "replication" [FLAGS]
 
    The command accepts the following arguments:
 
    .. mc-cmd:: TARGET
+
+      *Required*
 
       The full path to the bucket to which the command adds the remote target.
       Specify the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment as
@@ -103,52 +120,46 @@ Syntax
 
    .. mc-cmd:: DESTINATION
 
-      The target MinIO deployment and bucket. Specify one of the two
-      following formats:
+      *Required*
 
-      .. tabs::
+      The target MinIO deployment and bucket.
 
-         .. tab:: ``alias/bucket``
+      Specify the full URL to the destination MinIO deployment and bucket
+      using the following format:
 
-            Specify the :mc-cmd:`alias <mc alias>` of a configured MinIO
-            deployment as the prefix and destination bucket name as the suffix
-            using a forward slash ``/`` as a delimiter:
+      .. code-block:: shell
+         :class: copyable
 
-            .. code-block:: shell
-               :class: copyable
+         http(s)://ACCESSKEY:SECRETKEY@DESTHOSTNAME/DESTBUCKET
 
-               <alias>/<bucket>
+      - Replace ``ACCESSKEY`` with the access key for a user on the
+         destination MinIO deployment.
 
-         .. tab:: URL
+      - Replace ``SECRETKEY`` with the secret key for a user on the
+         destination MinIO deployment.
 
-            Specify the full URL to the destination MinIO deployment and bucket
-            using the following format:
+      - Replace ``DESTHOSTNAME`` with the hostname and port of the MinIO
+         deployment (i.e. ``minio-server.example.net:9000``).
 
-            .. code-block:: shell
-               :class: copyable
+      - Replace ``DESTBUCKET`` with the bucket on the
+         destination.
 
-               http(s)://ACCESSKEY:SECRETKEY@DESTHOSTNAME/DESTBUCKET
+   .. mc-cmd:: service
+      :option:
 
-            - Replace ``ACCESSKEY`` with the access key for a user on the
-              destination MinIO deployment.
+      *Required*
 
-            - Replace ``SECRETKEY`` with the secret key for a user on the
-              destination MinIO deployment.
-
-            - Replace ``DESTHOSTNAME`` with the hostname and port of the MinIO
-              deployment (i.e. ``minio-server.example.net:9000``).
-
-            - Replace ``DESTBUCKET`` with the bucket on the
-              destination.
+      Specify ``"replication"``.
 
    .. mc-cmd:: region
       :option:
 
       The region of the :mc-cmd:`~mc admin bucket remote DESTINATION`. 
 
-      Mutually exclusive with :mc-cmd-option:`~mc admin bucket remote path`
+      Mutually exclusive with :mc-cmd-option:`~mc admin bucket remote add path`
 
    .. mc-cmd:: path
+      :option:
 
       The bucket path lookup supported by the destination server. Specify
       one of the following:
@@ -157,7 +168,8 @@ Syntax
       - ``off``
       - ``auto`` (Default)
 
-      Mutually exclusive with :mc-cmd-option:`~mc admin bucket remote region`
+      Mutually exclusive with 
+      :mc-cmd-option:`~mc admin bucket remote add region`
 
 .. mc-cmd:: ls
    :fullpath:
@@ -183,6 +195,13 @@ Syntax
 
          mc admin bucket ls play/mybucket
 
+   .. mc-cmd:: service
+      :option:
+
+      *Required*
+
+      Specify ``"replication"``.
+
 
 .. mc-cmd:: rm
    :fullpath:
@@ -193,11 +212,13 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc admin bucket rm TARGET --arn
+      mc admin bucket rm TARGET --arn ARN
 
    The command accepts the following arguments:
 
    .. mc-cmd:: TARGET
+
+      *Required*
 
       The full path to the bucket for which the command <ACTION>. Specify the
       :mc-cmd:`alias <mc alias>` of a configured MinIO deployment as the
@@ -210,6 +231,8 @@ Syntax
 
    .. mc-cmd:: ARN
       :option:
+
+      *Required*
 
       The ``ARN`` of the remote target for which the command removes from the
       target bucket. Use :mc-cmd:`mc admin bucket ls` to list all remote

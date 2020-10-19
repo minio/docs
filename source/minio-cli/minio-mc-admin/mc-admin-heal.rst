@@ -15,15 +15,15 @@ Description
 
 .. start-mc-admin-heal-desc
 
-The :mc-cmd:`mc admin heal` command scans for objects that are damaged or
+The :mc:`mc admin heal` command scans for objects that are damaged or
 corrupted and heals those objects.  
 
-:mc-cmd:`mc admin heal` is resource intensive and typically not required even
+.. end-mc-admin-heal-desc
+
+:mc:`mc admin heal` is resource intensive and typically not required even
 after disk failures or corruption events. Instead, MinIO automatically heals
 objects damaged by silent bitrot corruption, disk failure, or other issues on
 POST/GET. MinIO also performs periodic background object healing.
-
-.. end-mc-admin-heal-desc
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -35,16 +35,18 @@ POST/GET. MinIO also performs periodic background object healing.
 Syntax
 ------
 
-:mc-cmd:`mc admin heal` has the following syntax:
+:mc:`mc admin heal` has the following syntax:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin heal [FLAGS] TARGET
 
-:mc-cmd:`mc admin heal` supports the following arguments:
+:mc:`mc admin heal` supports the following arguments:
 
 .. mc-cmd:: TARGET
+
+   *Required*
 
    The full path to the bucket or bucket prefix on which the command should
    perform object healing. Specify the :mc-cmd:`alias <mc alias>` of a

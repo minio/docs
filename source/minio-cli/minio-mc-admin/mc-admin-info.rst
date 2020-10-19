@@ -15,7 +15,7 @@ Description
 
 .. start-mc-admin-info-desc
 
-The :mc-cmd:`mc admin info` command displays information on a MinIO server.
+The :mc:`mc admin info` command displays information on a MinIO server.
 For distributed MinIO deployments, :mc:`mc admin info` displays information
 for each MinIO server in the deployment.
 
@@ -44,5 +44,4 @@ Syntax
    mc admin info TARGET
 
 Specify the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment as the
-``TARGET``. :mc-cmd:`~mc admin service restart` restarts *all* MinIO servers in
-the deployment.
+``TARGET``.

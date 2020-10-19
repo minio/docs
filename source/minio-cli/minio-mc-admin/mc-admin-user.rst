@@ -15,12 +15,12 @@ Description
 
 .. start-mc-admin-user-desc
 
-The :mc-cmd:`mc admin user` command manages users on a MinIO deployment.
+The :mc-cmd:`mc admin user` command manages users on a MinIO deployment. Clients
+*must* authenticate to the MinIO deployment with the access key and secret key
+associated to a user on the deployment. MinIO users constitue a key component in
+MinIO Identity and Access Management.
 
 .. end-mc-admin-user-desc
-
-Clients authenticate to the MinIO deployment with the access key and secret key
-associated to a user on the deployment.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -72,68 +72,124 @@ more information on MinIO policies, see :ref:`minio-policy`.
    :iam-docs:`Determining Whether a Request is Allowed or Denied Within an Account 
    <reference_policies_evaluation-logic.html#policy-eval-denyallow>`.
 
-Quick Reference
----------------
+Examples
+--------
 
-:mc-cmd:`mc admin user add TARGET ACCESSKEY SECRETKEY <mc admin user add>`
-   Adds a new user to a MinIO deployment.
+Create a New User
+~~~~~~~~~~~~~~~~~
 
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin user add play myNewUser myNewUserSecretKey
-
-:mc-cmd:`mc admin user list TARGET <mc admin user list>`
-   Lists all users on a MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin user list play
-
-:mc-cmd:`mc admin user info TARGET USERNAME <mc admin user info>`
-   Returns detailed information for a user on a MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin user info play myNewUser
-
-:mc-cmd:`mc admin user remove TARGET USERNAME <mc admin user remove>`
-   Removes a user from a MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin user remove play myNewUser
-
-:mc-cmd:`mc admin user enable TARGET USERNAME <mc admin user enable>`
-   Enables a user on a MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin user enable play myNewUser
-
-:mc-cmd:`mc admin user disable TARGET USERNAME <mc admin user disable>`
-   Disables a user on a MinIO deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin user disable play myNewUser
-
-Syntax
-------
-
-:mc-cmd:`mc admin user` has the following syntax:
+Use :mc-cmd:`mc admin user add` to create a user on an S3-compatible host:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin user SUBCOMMAND
+      mc admin user add ALIAS ACCESSKEY SECRETKEY
 
-:mc-cmd:`mc admin user` supports the following subcommands:
+- Replace :mc-cmd:`ALIAS <mc admin user add TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`ACCESSKEY <mc admin user add ACCESSKEY>` with the 
+  access key for the user. MinIO allows retrieving the access key after
+  user creation through the :mc-cmd:`mc admin user info` command.
+
+- Replace :mc-cmd:`SECRETKEY <mc admin user add SECRETKEY>` with the
+  secret key for the user. MinIO *does not* provide any method for retrieving
+  the secret key once set.
+
+Specify a unique, random, and long string for both the ``ACCESSKEY`` and 
+``SECRETKEY``. Your organization may have specific internal or regulatory
+requirements around generating values for use with access or secret keys. 
+
+List Available Users
+~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin user list` to list all users on an S3-compatible host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin user list ALIAS 
+
+- Replace :mc-cmd:`ALIAS <mc admin user list TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+:mc-cmd:`mc admin user list` does *not* return the access key or secret key
+associated to a user. Use :mc-cmd:`mc admin user info` to retrieve detailed
+user information, including the user access key.
+
+View User Details
+~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin user info` to view detailed user information on an
+S3-compatible host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin user info ALIAS USERNAME
+
+- Replace :mc-cmd:`ALIAS <mc admin user info TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`USERNAME <mc admin user info USERNAME>` with the name of
+  the user.
+
+Remove a User
+~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin user remove` to remove a user from an S3-compatible host:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin user remove ALIAS USERNAME
+
+- Replace :mc-cmd:`ALIAS <mc admin user remove TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the name of
+  the user to remove.
+
+Disable a User
+~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin user disable` to disable a user on an S3-compatible host.
+Disabling a user prevents clients from authenticating to the S3 host with that
+user's credentials, but does *not* remove that user from the S3 host.
+
+Use :mc-cmd:`mc admin user enable` to enable a disabled user on an S3-compatible
+host.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin user disable ALIAS USERNAME
+
+- Replace :mc-cmd:`ALIAS <mc admin user disable TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`USERNAME <mc admin user disable USERNAME>` with the name of
+  the user to disable.
+
+Enable a User
+~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin user enable` to enable a user on an S3-compatible
+host.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin user enable ALIAS USERNAME
+
+- Replace :mc-cmd:`ALIAS <mc admin user enable TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`USERNAME <mc admin user enable USERNAME>` with the name of
+  the user to enable.
+
+Syntax
+------
 
 .. mc-cmd:: add
    :fullpath:
@@ -187,6 +243,7 @@ Syntax
       the command lists users.
 
 .. mc-cmd:: info
+   :fullpath:
 
    Returns detailed information of a user on the target MinIO deployment. The
    command has the following syntax:
@@ -231,6 +288,7 @@ Syntax
       the user to remove. 
 
 .. mc-cmd:: disable
+   :fullpath:
 
    Disables a user on the target MinIO deployment. Clients cannot use the
    user credentials to authenticate to the MinIO deployment. Disabling
@@ -256,6 +314,7 @@ Syntax
       the user to disable. 
 
 .. mc-cmd:: enable
+   :fullpath:
 
    Enables a user on the target deployment. Clients can only use enabled
    users to authenticate to the MinIO deployment. Users created using
