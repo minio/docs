@@ -25,4 +25,5 @@ Users deploying onto a Kubernetes cluster should start with our
    /security/security-overview
    /minio-cli/minio-mc
    /minio-cli/minio-mc-admin
+   /minio-cli/minio-kes-reference
    /minio-server/minio-server

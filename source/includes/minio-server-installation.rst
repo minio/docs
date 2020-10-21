@@ -63,16 +63,16 @@
 
    .. tab:: Windows
 
-      Open the following file in a browser:
+      Open the following URL in a browser and save the file:
       
       https://dl.min.io/server/minio/release/windows-amd64/minio.exe
 
       Execute the file by double clicking on it, *or* by running the
       following in the command prompt or powershell:
 
-      .. code-block:: powershell
+      .. code-block:: doscon
 
-         \path\to\mc.exe --help
+         C:\path\to\mc.exe --help
 
    .. tab:: Source
 

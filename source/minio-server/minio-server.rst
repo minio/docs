@@ -321,3 +321,42 @@ Root Credentials
    the server configuration with the new credentials. After the process
    restarts successfully, you can restart it without 
    :envvar:`MINIO_SECRET_KEY_OLD`.
+
+Key Encryption Service (KES)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following environment variables support configuring access to
+MinIO :ref:`Key Encryption Service <minio-kes>`:
+
+.. envvar:: MINIO_KMS_KES_ENDPOINT
+
+   The endpoint of the KES server. :mc:`kes server` by default binds to
+   port ``7373`` on all network interfaces.
+
+.. envvar:: MINIO_KMS_KES_KEY_FILE
+
+   The key file of the x.509 identity to use when authenticating to the
+   KES server. The specified identity *must* have KES policies attached
+   such that it can access *at minimum* the following API endpoints:
+
+   <list to follow>
+
+   See :ref:`minio-kes-iam` for more information on KES Identity and Access
+   Management.
+
+.. envvar:: MINIO_KMS_KES_CERT_FILE
+
+   The public certificate of the x.509 identity to use when authenticating 
+   to the KES server. The specified identity *must* have KES policies
+   attached such that it can access *at minimum* the following API endpoints:
+
+   <list to follow>
+
+   See :ref:`minio-kes-iam` for more information on KES Identity and Access
+   Management.
+
+.. envvar:: MINIO_KMS_KES_KEY_NAME
+
+   Sets the name of the Customer Master Key (CMK) to use for performing
+   Server-Side Encryption on the MinIO deployment. 
+
