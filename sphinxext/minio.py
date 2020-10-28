@@ -296,7 +296,12 @@ class MinioObject(ObjectDescription):
     def add_target_and_index(self, name_obj: Tuple[str, str], sig: str,
                              signode: desc_signature) -> None:
         mod_name = self.env.ref_context.get('minio:module')
-        fullname = (mod_name + '.' if mod_name else '') + name_obj[0]
+        
+        if (self.objtype == "mc" or self.objtype == "mc-cmd" or self.objtype == "mc-cmd-option"):
+           fullname = (mod_name + '.' if mod_name else '') + name_obj[0]
+        else:
+           fullname = self.objtype + "." + name_obj[0]
+        
         node_id = make_id(self.env, self.state.document, '', fullname)
         signode['ids'].append(node_id)
 
@@ -313,11 +318,13 @@ class MinioObject(ObjectDescription):
 
         if 'noindexentry' not in self.options:
             indextext = self.get_index_text(mod_name, name_obj)
+            
             if indextext:
                 self.indexnode['entries'].append(('single', indextext, node_id, '', None))
 
     def get_index_text(self, objectname: str, name_obj: Tuple[str, str]) -> str:
         name, obj = name_obj
+
         if self.objtype == 'function':
             if not obj:
                 return _('%s() (built-in function)') % name
@@ -424,7 +431,7 @@ class MinioCMDOptionXRefRole(XRefRole):
         # basically what sphinx.domains.python.PyXRefRole does
         refnode['minio:object'] = env.ref_context.get('minio:object')
         refnode['minio:module'] = env.ref_context.get('minio:module')
-        refnode['minio:command'] = env.ref_context.get('minio:commannd')
+        refnode['minio:command'] = env.ref_context.get('minio:command')
         if not has_explicit_title:
             title = title.lstrip('.')
             target = target.lstrip('~')
@@ -441,6 +448,7 @@ class MinioCMDOptionXRefRole(XRefRole):
         if target[0:1] == '.':
             target = target[1:]
             refnode['refspecific'] = True
+
         return title, target
 
 class MinioXRefRole(XRefRole):
@@ -449,7 +457,8 @@ class MinioXRefRole(XRefRole):
         # basically what sphinx.domains.python.PyXRefRole does
         refnode['minio:object'] = env.ref_context.get('minio:object')
         refnode['minio:module'] = env.ref_context.get('minio:module')
-        refnode['minio:command'] = env.ref_context.get('minio:commannd')
+        refnode['minio:command'] = env.ref_context.get('minio:command')
+        
         if not has_explicit_title:
             title = title.lstrip('.')
             target = target.lstrip('~')
@@ -466,7 +475,14 @@ class MinioXRefRole(XRefRole):
         if target[0:1] == '.':
             target = target[1:]
             refnode['refspecific'] = True
+
+        if (self.reftype == "mc" or self.reftype == "mc-cmd" or self.reftype == "mc-cmd-option"):
+          return title, target
+        
+        target = self.reftype + "." + target
+
         return title, target
+
 
 class MinIODomain(Domain):
     """MinIO language domain."""
@@ -477,21 +493,17 @@ class MinIODomain(Domain):
         'data':           ObjType(_('data'),          'data'),
         'kubeconf':       ObjType(_('kubeconf'),      'kubeconf'),
         'userpolicy':     ObjType(_('userpolicy'),    'userpolicy'),
-        'command':        ObjType(_('command'),       'command'),
-        'subcommand':     ObjType(_('subcommand'),    'subcommand'),
         'flag':           ObjType(_('flag'),          'flag'),
         'mc':             ObjType(_('mc'),            'mc'),
         'mc-cmd':         ObjType(_('mc-cmd'),        'mc-cmd'),
         'mc-cmd-option':  ObjType(_('mc-cmd-option'), 'mc-cmd-option'),
         'policy-action':  ObjType(_('policy-action'), 'policy-action'),
-        'envvar':         ObjType(_('envvar'),       'envvar')
+        'envvar':         ObjType(_('envvar'),        'envvar')
     }
     directives = {
         'data':            MinioObject,
         'kubeconf':        MinioObject,
         'userpolicy':      MinioObject,
-        'command':         MinioCommand,
-        'subcommand':      MinioCommand,
         'flag':            MinioObject,
         'mc':              MinioMCCommand,
         'mc-cmd':          MinioMCObject,
@@ -502,8 +514,6 @@ class MinIODomain(Domain):
         'data':             MinioXRefRole(),
         'kubeconf':         MinioXRefRole(),
         'userpolicy':       MinioXRefRole(),
-        'command':          MinioXRefRole(),
-        'subcommand':       MinioXRefRole(),
         'flag':             MinioXRefRole(),
         'mc':               MinioXRefRole(),
         'mc-cmd':           MinioXRefRole(),
@@ -591,6 +601,7 @@ class MinIODomain(Domain):
         mod_name = node.get('minio:module')
         prefix = node.get('minio:object')
         searchorder = 1 if node.hasattr('refspecific') else 0
+
         name, obj = self.find_obj(env, mod_name, prefix, target, typ, searchorder)
         if not obj:
             return None

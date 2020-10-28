@@ -43,8 +43,8 @@ Syntax
 ------
 
 .. |command| replace:: :mc-cmd:`mc tree`
-.. |rewind| replace:: :mc-cmd-option:`~mc tree set rewind`
-.. |alias| replace:: :mc-cmd-option:`~mc tree set TARGET`
+.. |rewind| replace:: :mc-cmd-option:`~mc tree rewind`
+.. |alias| replace:: :mc-cmd-option:`~mc tree TARGET`
 
 :mc:`~mc tree` has the following syntax:
 
@@ -61,7 +61,7 @@ Syntax
    filesystem directory.
 
    For objects on an S3-compatible service, specify the :mc:`alias <mc alias>`
-   of a configured service as the prefix to the :mc-cmd:`~mc stat TARGET`
+   of a configured service as the prefix to the :mc-cmd:`~mc tree TARGET`
    path. For example:
 
    .. code-block:: shell

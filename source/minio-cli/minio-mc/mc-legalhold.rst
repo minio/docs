@@ -65,7 +65,7 @@ Use :mc-cmd:`mc legalhold clear` to remove legal hold on objects:
 
 - Replace :mc-cmd:`PATH <mc legalhold clear TARGET>` with the path to the bucket
   or object on the S3-compatible host. If specifying the path to a bucket,
-  include the :mc-cmd-option:`~mc legahold clear recursive` option.
+  include the :mc-cmd-option:`~mc legalhold clear recursive` option.
 
 Retrieve the Legal Hold Status Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

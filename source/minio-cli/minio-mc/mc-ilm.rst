@@ -197,7 +197,7 @@ Syntax
       
       The path to the specific subset of the :mc-cmd:`~mc ilm add TARGET` bucket
       on which to apply the lifecycle configuration rule. MinIO appends the
-      :mc-cmd-option:`~mc cmd add prefix` field to the ``TARGET`` path to
+      :mc-cmd-option:`~mc ilm add prefix` field to the ``TARGET`` path to
       construct the full path.
 
       Omit to apply the rule to the entire ``TARGET`` bucket.

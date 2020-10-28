@@ -42,7 +42,7 @@ Syntax
 
 .. mc-cmd:: TARGET
 
-   The :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment from which
+   The :mc:`alias <mc alias>` of a configured MinIO deployment from which
    the command retrieves server logs.
 
 .. mc-cmd:: NODENAME

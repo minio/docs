@@ -31,7 +31,7 @@ Use :mc-cmd:`mc tag set` to apply tags to a bucket or object:
 .. code-block:: shell
    :class: copyable
 
-   mc tag ALIAS/PATH "TAGS"
+   mc tag set ALIAS/PATH "TAGS"
 
 - Replace :mc-cmd:`ALIAS <mc tag set TARGET>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
@@ -39,7 +39,7 @@ Use :mc-cmd:`mc tag set` to apply tags to a bucket or object:
 - Replace :mc-cmd:`PATH <mc tag set TARGET>` with the path to the bucket
   or object on the S3-compatible host.
 
-- Replace :mc-cmd:`TAGS <mc tag TAGS>` with one or more comma-separated
+- Replace :mc-cmd:`TAGS <mc tag set TAGS>` with one or more comma-separated
   key-value pairs for each tag and its corresponding value.
 
 Remove Tags from a Bucket or Object
@@ -50,7 +50,7 @@ Use :mc-cmd:`mc tag remove` to remove all tags from a bucket or object:
 .. code-block:: shell
    :class: copyable
 
-   mc tag ALIAS/PATH
+   mc tag remove ALIAS/PATH
 
 - Replace :mc-cmd:`ALIAS <mc tag remove TARGET>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
@@ -61,22 +61,18 @@ Use :mc-cmd:`mc tag remove` to remove all tags from a bucket or object:
 List Tags for a Bucket or Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Remove Tags from a Bucket or Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Use :mc-cmd:`mc tag info` to retrieve all tags for a bucket or object:
+Use :mc-cmd:`mc tag list` to retrieve all tags for a bucket or object:
 
 .. code-block:: shell
    :class: copyable
 
-   mc tag ALIAS/PATH
+   mc tag list ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc tag info TARGET>` with the 
+- Replace :mc-cmd:`ALIAS <mc tag list TARGET>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc tag info TARGET>` with the path to the bucket
+- Replace :mc-cmd:`PATH <mc tag list TARGET>` with the path to the bucket
   or object on the S3-compatible host.
-
 
 Syntax
 ------
@@ -106,8 +102,8 @@ Syntax
 
       **Required** The full path to the bucket or object to which to set the
       :mc-cmd-option:`~mc tag set TAGS`. Specify the :mc-cmd:`alias <mc alias>`
-      of a configured S3-compatible service as the prefix to the :mc-cmd:`~mc
-      tag TARGET` path. For example:
+      of a configured S3-compatible service as the prefix to the 
+      :mc-cmd:`~mc tag set TARGET` path. For example:
 
       .. code-block:: shell
 
@@ -125,8 +121,8 @@ Syntax
          :start-after: start-versions-desc
          :end-before: end-versions-desc
 
-      Use :mc-cmd-option:`~mc rm versions` and 
-      :mc-cmd-option:`~mc rm rewind` together to apply the tag all object
+      Use :mc-cmd-option:`~mc tag set versions` and 
+      :mc-cmd-option:`~mc tag set rewind` together to apply the tag all object
       versions which existed at a specific point in time.
 
    .. mc-cmd:: rewind
@@ -167,7 +163,8 @@ Syntax
 
       **Required** The full path to the bucket or object from which to remove
       tags. Specify the :mc-cmd:`alias <mc alias>` of a configured S3-compatible
-      service as the prefix to the :mc-cmd:`~mc tag TARGET` path. For example:
+      service as the prefix to the :mc-cmd:`~mc tag remove TARGET` path. For 
+      example:
 
       .. code-block:: shell
 
@@ -180,9 +177,9 @@ Syntax
          :start-after: start-versions-desc-2
          :end-before: end-versions-desc-2
 
-      Use :mc-cmd-option:`~mc rm versions` and 
-      :mc-cmd-option:`~mc rm rewind` together to apply the tag all object
-      versions which existed at a specific point in time.
+      Use :mc-cmd-option:`~mc tag remove versions` and 
+      :mc-cmd-option:`~mc tag remove rewind` together to remove the tag from 
+      object versions which existed at a specific point in time.
 
    .. mc-cmd:: rewind
       :option:
@@ -223,8 +220,8 @@ Syntax
 
       **Required** The full path to the bucket or object for which the command
       lists tags. Specify the :mc-cmd:`alias <mc alias>` of a
-      configured S3-compatible service as the prefix to the :mc-cmd:`~mc tag
-      TARGET` path. For example:
+      configured S3-compatible service as the prefix to the 
+      :mc-cmd:`~mc tag list TARGET` path. For example:
 
       .. code-block:: shell
 
@@ -237,9 +234,9 @@ Syntax
          :start-after: start-versions-desc-3
          :end-before: end-versions-desc-3
 
-      Use :mc-cmd-option:`~mc rm versions` and 
-      :mc-cmd-option:`~mc rm rewind` together to apply the tag all object
-      versions which existed at a specific point in time.
+      Use :mc-cmd-option:`~mc tag list versions` and 
+      :mc-cmd-option:`~mc tag list rewind` together to list all tags applied to
+      all object versions which existed at a specific point in time.
 
    .. mc-cmd:: rewind
       :option:

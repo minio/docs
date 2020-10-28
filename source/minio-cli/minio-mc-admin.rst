@@ -120,7 +120,7 @@ Installation
 Quickstart
 ----------
 
-Ensure that the host machine has :command:`mc`
+Ensure that the host machine has :mc:`mc`
 :ref:`installed <mc-admin-install>` prior to starting this procedure.
 
 .. important::

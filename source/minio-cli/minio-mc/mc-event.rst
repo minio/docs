@@ -186,21 +186,21 @@ Syntax
    .. mc-cmd:: prefix
       :option:
 
-      The bucket prefix in which the specified :mc-cmd-option:`~mc event event`
-      can trigger a bucket notification.
+      The bucket prefix in which the specified 
+      :mc-cmd-option:`~mc event add event` can trigger a bucket notification.
 
-      For example, given a :mc-cmd:`~mc event TARGET` of ``play/mybucket`` and a 
-      :mc-cmd-option:`~mc event prefix` of ``photos``, only events in 
+      For example, given a :mc-cmd:`~mc event add TARGET` of ``play/mybucket``
+      and a :mc-cmd-option:`~mc event add prefix` of ``photos``, only events in
       ``play/mybucket/photos`` trigger bucket notifications.
 
    .. mc-cmd:: suffix
       :option:
 
-      The bucket suffix in which the specified :mc-cmd-option:`~mc event event`
-      can trigger a bucket notification. 
+      The bucket suffix in which the specified 
+      :mc-cmd-option:`~mc event add event` can trigger a bucket notification. 
 
-      For example, given a :mc-cmd:`~mc event TARGET` of ``play/mybucket`` and a 
-      :mc-cmd-option:`~mc event suffix` of ``.jpg``, only events in 
+      For example, given a :mc-cmd:`~mc event add TARGET` of ``play/mybucket``
+      and a :mc-cmd-option:`~mc event add suffix` of ``.jpg``, only events in
       ``play/mybucket/*.jpg`` trigger bucket notifications.
 
 .. mc-cmd:: remove
@@ -237,8 +237,8 @@ Syntax
    .. mc-cmd:: force
       :option:
       
-      Removes all events on the :mc-cmd:`~mc event TARGET` bucket with the
-      :mc-cmd-option:`~mc event ARN` notification target.
+      Removes all events on the :mc-cmd:`~mc event remove TARGET` bucket with
+      the :mc-cmd-option:`~mc event remove ARN` notification target.
 
    .. mc-cmd:: event
       :option:
@@ -246,26 +246,28 @@ Syntax
       The event(s) to remove. Specify multiple events using a comma ``,``
       delimiter. See :ref:`mc-event-supported-events` for supported events.
 
-      Defaults to removing all events on the :mc-cmd:`~mc event TARGET` bucket
-      with the :mc-cmd-option:`~mc event ARN` notification target.
+      Defaults to removing all events on the :mc-cmd:`~mc event remove TARGET`
+      bucket with the :mc-cmd-option:`~mc event remove ARN` notification target.
 
    .. mc-cmd:: prefix
       :option:
 
       The bucket prefix in which the command removes bucket notifications.
 
-      For example, given a :mc-cmd:`~mc event TARGET` of ``play/mybucket`` and a
-      :mc-cmd-option:`~mc event prefix` of ``photos``, the command only removes
-      bucket notifications in ``play/mybucket/photos``.
+      For example, given a :mc-cmd:`~mc event remove TARGET` of
+      ``play/mybucket`` and a :mc-cmd-option:`~mc event remove prefix` of
+      ``photos``, the command only removes bucket notifications in
+      ``play/mybucket/photos``.
 
    .. mc-cmd:: suffix
       :option:
 
       The bucket suffix in which the command removes bucket notifications. 
 
-      For example, given a :mc-cmd:`~mc event TARGET` of ``play/mybucket`` and a 
-      :mc-cmd-option:`~mc event suffix` of ``.jpg``, the command only removes
-      bucket notifications in ``play/mybucket/*.jpg``.
+      For example, given a :mc-cmd:`~mc event remove TARGET` of
+      ``play/mybucket`` and a :mc-cmd-option:`~mc event remove suffix` of
+      ``.jpg``, the command only removes bucket notifications in
+      ``play/mybucket/*.jpg``.
 
 .. mc-cmd:: list
    :fullpath:

@@ -46,8 +46,8 @@ Move Files from Filesystem to S3-Compatible Host
 - Replace :mc-cmd:`FILEPATH <mc mv SOURCE>` with the full file path to the
   file to move. 
 
-  If specifying the path to a directory, include the :mc-cmd-option:`~mc mv
-  recursive` flag.
+  If specifying the path to a directory, include the 
+  :mc-cmd-option:`~mc mv recursive` flag.
 
   :mc:`mc mv` *removes* the files from the source after
   successfully moving it to the destination.

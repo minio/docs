@@ -57,7 +57,7 @@ Suspend Bucket Versioning
 -------------------------
 
 You can suspend bucket versioning at any time using 
-:mc-cmd:`mc version suspend`. MinIO retains all existing object versions. During
+:mc-cmd:`mc version disable`. MinIO retains all existing object versions. During
 suspension, MinIO allows overwrites of any *unversioned* object. Applications
 can continue referencing any existing object version.
 

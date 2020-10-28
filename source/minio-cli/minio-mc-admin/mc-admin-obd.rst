@@ -22,16 +22,16 @@ and diagnostics.
 
 .. end-mc-admin-obd-desc
 
-:mc:`mc admin odb` names the file using the following pattern:
+:mc:`mc admin obd` names the file using the following pattern:
 
 .. code-block:: none
 
    alias-health_YYYYMMDDHHMMSS.json.gzip
 
 The ``alias`` is the :mc-cmd:`~mc admin obd TARGET` MinIO deployment from which
-:mc:`mc admin odb` returned the diagnostics.
+:mc:`mc admin obd` returned the diagnostics.
 
-The :mc:`mc admin odb` output may contain sensitive information about your
+The :mc:`mc admin obd` output may contain sensitive information about your
 environment. Exercise all possible precautions, such as redacting sensitive
 fields, prior to sharing the data on any public forum. 
 

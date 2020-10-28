@@ -56,7 +56,7 @@ Syntax
 
 .. mc-cmd:: TARGET
 
-   Specify the :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment
+   Specify the :mc:`alias <mc alias>` of a configured MinIO deployment
    against which the command issues ``HTTP TRACE`` requests.
 
 .. mc-cmd:: all, a

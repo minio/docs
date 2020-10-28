@@ -217,7 +217,7 @@ Syntax
    **REQUIRED**
 
    The full path to the bucket to copy the specified 
-   :mc-cmd:`~mc cp SOURCES` to. Specify the :mc:`alias <mc alias>` 
+   :mc-cmd:`~mc cp SOURCE` to. Specify the :mc:`alias <mc alias>` 
    of a configured S3 service as the prefix to the 
    :mc-cmd:`~mc cp TARGET` path. 
 

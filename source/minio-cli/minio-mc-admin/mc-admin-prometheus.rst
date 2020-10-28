@@ -46,6 +46,6 @@ Syntax
 
 .. mc-cmd:: TARGET
 
-   The :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment for which
+   The :mc:`alias <mc alias>` of a configured MinIO deployment for which
    the command generates a Prometheus-compatible configuration file.
 

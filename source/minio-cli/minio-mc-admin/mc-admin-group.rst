@@ -79,7 +79,7 @@ Use :mc-cmd:`mc admin group add` to create a new group to an S3-compatible host:
 
    mc admin group add ALIAS GROUPNAME MEMBER [MEMBER...]
 
-- Replace :mc-cmd:`ALIAS <mc admin group add ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc admin group add TARGET>` with the 
   :mc-cmd:`alias <mc alias>` of the S3-compatible host.
 
 - Replace :mc-cmd:`GROUPNAME <mc admin group add GROUPNAME>` with the name
@@ -100,7 +100,7 @@ host:
 
    mc admin group list ALIAS
 
-- Replace :mc-cmd:`ALIAS <mc admin group info ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc admin group list TARGET>` with the 
   :mc-cmd:`alias <mc alias>` of the S3-compatible host.
 
 
@@ -115,7 +115,7 @@ S3-compatible host:
 
    mc admin group info ALIAS GROUPNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin group info ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc admin group info TARGET>` with the 
   :mc-cmd:`alias <mc alias>` of the S3-compatible host.
 
 - Replace :mc-cmd:`GROUPNAME <mc admin group info GROUPNAME>` with the name of
@@ -132,7 +132,7 @@ host:
 
    mc admin group remove ALIAS GROUPNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin group remove ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc admin group remove TARGET>` with the 
   :mc-cmd:`alias <mc alias>` of the S3-compatible host.
 
 - Replace :mc-cmd:`GROUPNAME <mc admin group remove GROUPNAME>` with the
@@ -149,7 +149,7 @@ host:
 
    mc admin group disable ALIAS GROUPNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin group disable ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc admin group disable TARGET>` with the 
   :mc-cmd:`alias <mc alias>` of the S3-compatible host.
 
 - Replace :mc-cmd:`GROUPNAME <mc admin group disable GROUPNAME>` with the name
@@ -166,7 +166,7 @@ host:
 
    mc admin group enable ALIAS GROUPNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin group enable ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc admin group enable TARGET>` with the 
   :mc-cmd:`alias <mc alias>` of the S3-compatible host.
 
 - Replace :mc-cmd:`GROUPNAME <mc admin group enable GROUPNAME>` with the name

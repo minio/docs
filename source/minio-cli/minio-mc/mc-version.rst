@@ -123,9 +123,9 @@ Syntax
    .. mc-cmd:: TARGET
 
       **Required** The full path to the bucket on which to enable bucket
-      versioning. Specify the :command:`alias <mc alias>` of a configured
-      S3-compatible service as the prefix to the :mc-cmd:`~mc version TARGET`
-      path. For example:
+      versioning. Specify the :mc:`alias <mc alias>` of a configured
+      S3-compatible service as the prefix to the 
+      :mc-cmd:`~mc version enable TARGET` path. For example:
 
       .. code-block:: shell
 
@@ -148,9 +148,9 @@ Syntax
    .. mc-cmd:: TARGET
 
       **Required** The full path to the bucket on which to disable bucket
-      versioning. Specify the :command:`alias <mc alias>` of a configured
-      S3-compatible service as the prefix to the :mc-cmd:`~mc version TARGET`
-      path. For example:
+      versioning. Specify the :mc:`alias <mc alias>` of a configured
+      S3-compatible service as the prefix to the 
+      :mc-cmd:`~mc version disable TARGET` path. For example:
 
       .. code-block:: shell
 
@@ -173,9 +173,9 @@ Syntax
    .. mc-cmd:: TARGET
 
       **Required** The full path to the bucket on which to retrieve the bucket
-      versioning status. Specify the :command:`alias <mc alias>` of a configured
-      S3-compatible service as the prefix to the :mc-cmd:`~mc version TARGET`
-      path. For example:
+      versioning status. Specify the :mc:`alias <mc alias>` of a configured
+      S3-compatible service as the prefix to the 
+      :mc-cmd:`~mc version info TARGET` path. For example:
 
       .. code-block:: shell
 

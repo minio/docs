@@ -178,16 +178,17 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The full path to the object for which :mc:`mc share` generates a URL.
+      The full path to the object for which :mc:`mc share download` generates a 
+      URL.
 
       If any ``TARGET`` specifies a path to a bucket, :mc:`mc share` *must*
-      include the :mc-cmd-option:`mc share recursive` argument.
+      include the :mc-cmd-option:`mc share download recursive` argument.
 
    .. mc-cmd:: recursive, r
       :option:
       
-      Recursively generate URLs for all objects in a :mc-cmd:`mc share TARGET`
-      bucket or bucket prefix. 
+      Recursively generate URLs for all objects in a 
+      :mc-cmd:`mc share download TARGET` bucket or bucket prefix. 
          
       Required if any ``TARGET`` specifies a path to a bucket or bucket prefix.
 

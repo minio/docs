@@ -96,13 +96,13 @@ Each of the following tabs contains a provider-specific example:
 3) Test the Connection
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc info` command to test the connection to
+Use the :mc-cmd:`mc admin info` command to test the connection to
 the newly added MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc info myminio
+   mc admin info myminio
 
 The command returns information on the S3 service if successful. If
 unsuccessful, check each of the following:
@@ -309,7 +309,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    Enables verbose output to the console.
 
    For example, the following operation adds verbose output to the 
-   :command:`mc ls` command:
+   :mc:`mc ls` command:
 
    .. code-block:: shell
       :class: copyable
@@ -328,7 +328,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    console.
 
    For example, the following operation adds JSON Lines output to the 
-   :command:`mc ls` command:
+   :mc:`mc ls` command:
 
    .. code-block:: shell
       :class: copyable

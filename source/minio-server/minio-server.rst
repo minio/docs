@@ -320,4 +320,4 @@ Root Credentials
    The :mc:`minio server` process automatically detects and re-encrypts 
    the server configuration with the new credentials. After the process
    restarts successfully, you can restart it without 
-   :envvar:`SECRET_KEY_OLD`.
+   :envvar:`MINIO_SECRET_KEY_OLD`.

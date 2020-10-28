@@ -91,6 +91,6 @@
          make
 
       To update a source-based installation, use ``go get -u``. 
-      :mc-cmd:`minio update` does not support source-based installations.
+      :mc-cmd:`mc admin update` does not support source-based installations.
 
 

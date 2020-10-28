@@ -189,7 +189,7 @@ Syntax
       The name of the policy to add. 
       
       Specifying the name of an existing policy overwrites that policy on the
-      :mc-cmd:`~mc admin policy TARGET` MinIO deployment.
+      :mc-cmd:`~mc admin policy add TARGET` MinIO deployment.
 
    .. mc-cmd:: POLICYPATH
 
@@ -215,7 +215,7 @@ Syntax
 
       mc admin policy list play
 
-   The :mc-cmd:`mc admin policy add` command accepts the following arguments:
+   The :mc-cmd:`mc admin policy list` command accepts the following arguments:
 
    .. mc-cmd:: TARGET
 
@@ -262,7 +262,7 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment on which
+      The :mc:`alias <mc alias>` of a configured MinIO deployment on which
       the command associates the :mc-cmd:`~mc admin policy set POLICYNAME`
       to the :mc-cmd:`~mc admin policy set user` or
       :mc-cmd:`~mc admin policy set group`.
@@ -287,7 +287,7 @@ Syntax
       The name of the user to which the command associates the
       :mc-cmd:`~mc admin policy set POLICYNAME`. 
 
-      Mutually exclusive with :mc-cmd:`~mc admin policy set GROUP`
+      Mutually exclusive with :mc-cmd:`~mc admin policy set group`
 
    .. mc-cmd:: group
 
@@ -295,7 +295,7 @@ Syntax
       :mc-cmd:`~mc admin policy set POLICYNAME`. All users with membership in
       the group inherit the policies associated to the group.
 
-      Mutually exclusive with :mc-cmd:`~mc admin policy set USER`
+      Mutually exclusive with :mc-cmd:`~mc admin policy set user`
 
 .. mc-cmd:: remove
    :fullpath:
@@ -312,7 +312,7 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment on which
+      The :mc:`alias <mc alias>` of a configured MinIO deployment on which
       the command removes the :mc-cmd:`~mc admin policy remove POLICYNAME`.
 
    .. mc-cmd:: POLICYNAME

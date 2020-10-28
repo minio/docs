@@ -262,8 +262,7 @@ Syntax
 
    .. mc-cmd:: USERNAME
 
-      The username (:mc-cmd:`ACCESSKEY <mc admin user set ACCESSKEY>`) for the
-      user whose information the command retrieves. 
+      The name of the user whose information the command retrieves.
 
 .. mc-cmd:: remove
 
@@ -279,13 +278,12 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment on which
+      The :mc:`alias <mc alias>` of a configured MinIO deployment on which
       the command removes the specified user.
 
    .. mc-cmd:: USERNAME
 
-      The username (:mc-cmd:`ACCESSKEY <mc admin user set ACCESSKEY>`) for
-      the user to remove. 
+      The name of the user which the command removes.
 
 .. mc-cmd:: disable
    :fullpath:
@@ -305,13 +303,12 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment on which
+      The :mc:`alias <mc alias>` of a configured MinIO deployment on which
       the command disables the specified user.
 
    .. mc-cmd:: USERNAME
 
-      The username (:mc-cmd:`ACCESSKEY <mc admin user set ACCESSKEY>`) for
-      the user to disable. 
+      The name of the user to disable. 
 
 .. mc-cmd:: enable
    :fullpath:
@@ -331,10 +328,9 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc-alias>` of a configured MinIO deployment on which
+      The :mc:`alias <mc alias>` of a configured MinIO deployment on which
       the command enables the specified user.
 
    .. mc-cmd:: USERNAME
 
-      The username (:mc-cmd:`ACCESSKEY <mc admin user set ACCESSKEY>`) for
-      the user to enable. 
+      The name of the user to enable. 

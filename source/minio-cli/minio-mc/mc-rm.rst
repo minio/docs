@@ -83,7 +83,7 @@ incomplete upload files for an object.
 - Replace :mc-cmd:`PATH <mc rm TARGET>` with the path to the object.
 
 Removing incomplete upload files prevents resuming the upload using the
-:mc-cmd:`mc mv --continue` or :mc-cmd:`mc cp --continue` commands.
+:mc-cmd-option:`mc mv continue` or :mc-cmd-option:`mc cp continue` commands.
 
 Roll Object Back To Previous Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -138,8 +138,8 @@ Syntax
       mc rm play/mybucket/object.txt play/mybucket/otherobject.txt
 
    If specifying the path to a bucket or bucket prefix, you **must** also
-   specify the :mc-cmd-option:`~mc rm recursive` and :mc-cmd-option:`~mc rm
-   force` arguments. For example:
+   specify the :mc-cmd-option:`~mc rm recursive` and 
+   :mc-cmd-option:`~mc rm force` arguments. For example:
 
    .. code-block:: shell
 

@@ -543,7 +543,8 @@ Create a MinIO Tenant
       *Required*
 
       The name of the MinIO tenant which the command creates. The
-      name *must* be unique in the :mc-cmd:`~mc tenant create namespace`.
+      name *must* be unique in the 
+      :mc-cmd:`~kubectl minio tenant create namespace`.
 
    .. mc-cmd:: servers
       :option:

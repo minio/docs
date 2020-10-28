@@ -71,21 +71,21 @@ Syntax
    .. mc-cmd:: prefix
       :option:
 
-      The bucket prefix in which to watch for the speciified 
-      :mc-cmd-option:`~mc event event`.
+      The bucket prefix in which to watch for the specified 
+      :mc-cmd-option:`~mc watch event`.
 
-      For example, given a :mc-cmd:`~mc event TARGET` of ``play/mybucket`` and a 
-      :mc-cmd-option:`~mc event prefix` of ``photos``, only events in 
+      For example, given a :mc-cmd:`~mc watch TARGET` of ``play/mybucket`` and a 
+      :mc-cmd-option:`~mc watch prefix` of ``photos``, only events in 
       ``play/mybucket/photos`` trigger bucket notifications.
 
    .. mc-cmd:: suffix
       :option:
 
-      The bucket suffix in which to watch for the speciified 
-      :mc-cmd-option:`~mc event event`.
+      The bucket suffix in which to watch for the specified 
+      :mc-cmd-option:`~mc watch event`.
 
-      For example, given a :mc-cmd:`~mc event TARGET` of ``play/mybucket`` and a 
-      :mc-cmd-option:`~mc event suffix` of ``.jpg``, only events in 
+      For example, given a :mc-cmd:`~mc watch TARGET` of ``play/mybucket`` and a 
+      :mc-cmd-option:`~mc watch suffix` of ``.jpg``, only events in 
       ``play/mybucket/*.jpg`` trigger bucket notifications.
 
    .. mc-cmd:: recursive, r

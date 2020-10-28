@@ -50,7 +50,7 @@ resource:
 
    mc admin profile start --type "TYPE" ALIAS
 
-- Replace :mc-cmd:`ALIAS <mc admin profile start ALIAS>` with the
+- Replace :mc-cmd:`ALIAS <mc admin profile start TARGET>` with the
   :mc-cmd:`alias <mc alias>` of the MinIO host.
 
 - Replace :mc-cmd:`TYPE <mc admin profile start type>` with the resource to
@@ -78,7 +78,7 @@ resources:
 
    mc admin profile start --type "TYPE,[TYPE...]" ALIAS
 
-- Replace :mc-cmd:`ALIAS <mc admin profile start ALIAS>` with the
+- Replace :mc-cmd:`ALIAS <mc admin profile start TARGET>` with the
   :mc-cmd:`alias <mc alias>` of the MinIO host.
 
 - Replace :mc-cmd:`TYPE <mc admin profile start type>` with the resources to
