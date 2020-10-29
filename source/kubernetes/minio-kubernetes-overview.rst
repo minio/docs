@@ -872,3 +872,9 @@ Delete a MinIO Tenant
       The namespace in which to look for the MinIO Tenant.
 
       Defaults to ``minio``.
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   /kubernetes/minio-operator-reference
