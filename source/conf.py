@@ -42,6 +42,8 @@ extensions = [
     'sphinx_tabs.tabs',
     'recommonmark',
     'sphinx_markdown_tables',
+    'sphinx-prompt',
+    'sphinx_substitution_extensions'
 ]
 
 # -- External Links
@@ -53,7 +55,7 @@ extlinks = {
     'kube-docs' : ('https://kubernetes.io/docs/%s', ''),
     'minio-git' : ('https://github.com/minio/%s',''),
     'github'    : ('https://github.com/%s',''),
-    'kube-api'  : ('https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/%s',''),
+    'kube-api'  : ('https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/%s',''),
     'aws-docs'  : ('https://docs.aws.amazon.com/%s',''),
     's3-docs'   : ('https://docs.aws.amazon.com/AmazonS3/latest/dev/%s',''),
     's3-api'    : ('https://docs.aws.amazon.com/AmazonS3/latest/API/%s',''),
@@ -110,8 +112,14 @@ html_title = 'MinIO Documentation'
 
 rst_epilog = """
 
-.. |minio-operator-release| replace:: ``minio/k8s-operator:v3.0.27``
+.. |minio-operator-release| replace:: ``minio/k8s-operator:v3.0.28``
 
 .. |minio-server-release| replace::   ``minio/minio:RELEASE.2020-10-03T02-19-42Z``
+
+"""
+
+rst_prolog = """
+
+.. |minio-operator-latest-version| replace:: v3.0.28
 
 """
