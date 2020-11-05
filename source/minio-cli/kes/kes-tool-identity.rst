@@ -10,7 +10,7 @@
 
 .. mc:: kes tool identity
 
-The :mc:`kes tool identity` command creates a self-signed x.509 certificate
+The :mc:`kes tool identity new` command creates a self-signed x.509 certificate
 for use with deploying a :mc:`kes server` for local evaluation and initial
 development. 
 
@@ -22,7 +22,7 @@ command.
   
 - For more complete conceptual information on KES, see :ref:`minio-kes`.
 
-:mc:`kes tool identity` only supports generating self-signed certificates and
+:mc:`kes tool identity new` only supports generating self-signed certificates and
 is best suited for supporting early development and evaluation of KES. To
 configure a KES server to use an x.509 certificate generated through other
 means, including ACME-based tools like CertBot, use :mc:`kes identity assign`
@@ -42,7 +42,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      kes tool identity new [ARGUMENTS] NAME
+      kes tool identity new [OPTIONS] [SUBJECT-NAME]
 
    The command accepts the following arguments:
 
@@ -90,7 +90,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      kes tool identity of [ARGUMENTS] NAME
+      kes tool identity of [OPTIONS] CERTIFICATE
 
    The command accepts the following arguments:
 

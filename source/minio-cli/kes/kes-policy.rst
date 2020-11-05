@@ -132,12 +132,12 @@ Syntax
 .. mc-cmd:: show
    :fullpath:
 
-   This command outputs the policy JSON document too ``STDOUT``.
+   This command outputs the policy document to ``STDOUT``.
 
 .. mc-cmd:: list
    :fullpath:
 
-   This command lists all policies on the KES server.
+   This command lists policies on the KES server.
 
 .. mc-cmd:: delete
    :fullpath:

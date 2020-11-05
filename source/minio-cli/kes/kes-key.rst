@@ -38,7 +38,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      kes key create [ARGUMENTS] NAME [KEY]
+      kes key create [OPTIONS] NAME [KEY]
 
    The command accepts the following arguments:
 
@@ -74,7 +74,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      kes key delete [ARGUMENTS] NAME
+      kes key delete [OPTIONS] NAME
 
    The command accepts the following arguments:
 
@@ -129,7 +129,7 @@ Syntax
 .. mc-cmd:: decrypt
    :fullpath: 
    
-   Decrypt the cyphertext associated to a cryptographic key generated using
+   Decrypt the ciphertext and return the plain cryptographic key produced :mc-cmd:`kes key derive`
    :mc-cmd:`kes key derive`.
 
    The command has the following syntax:
@@ -145,7 +145,7 @@ Syntax
    
       *Required*
 
-      The name of master key used to generate teh cryptographic key.
+      The name of master key used to generate the cryptographic key.
       
       :mc-cmd:`kes key decrypt` fails if the specified master key
       was not used to encrypt the :mc-cmd:`~kes key decrypt CIPHERTEXT`.

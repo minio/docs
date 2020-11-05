@@ -11,7 +11,7 @@
 .. mc:: kes server
 
 The :mc:`kes server` command starts a MinIO Key Encryption Server (KES) server.
-The :mc:`kes server` process handles requests for creating and retrieving
+The :mc:`kes server` handles requests for creating and retrieving
 cryptography keys from a supported Key Management System (KMS). KES is a 
 required component for enabling Server-Side Object Encryption in MinIO
 deployments.
@@ -46,14 +46,14 @@ The command has the following syntax:
 .. code-block:: shell
    :class: copyable
 
-   kes server --cert CERTIFICATE --key PRIVATEKEY --root ROOT_IDENTITY [OPTIONAL_FLAGS]
+   kes server [OPTIONS]
 
 :mc:`kes server` supports the following arguments:
 
 .. mc-cmd:: cert
    :option:
 
-   The location of the public certificate ``.crt`` to use for
+    Path to KES server X.509 certificate served by the KES server to clients when a :abbr: `TLS (Transport Layer Encryption)` connection is established
    enabling :abbr:`TLS (Transport Layer Encryption)`.
 
 .. mc-cmd:: config
@@ -65,13 +65,14 @@ The command has the following syntax:
 .. mc-cmd:: key
    :option:
 
-   The location of the private key ``.key`` to use for enabling
+   Path to the KES server private key that corresponds to the X.509 server certificate.
    :abbr:`TLS (Transport Layer Encryption`). 
 
 .. mc-cmd:: root
    :option:
 
-   The identity with root permissions on the KES server. Use 
+   The identity with root permissions on the KES server. `kes tool identity of CERTIFICATE`` to
+   compute the X.509 identity of an arbitrary client certificate.
    ``kes tool identity of CERTIFICATE`` to retrieve the certificate to use
    for the root identity.
 
@@ -85,7 +86,8 @@ The command has the following syntax:
 .. mc-cmd:: auth
    :option:
 
-   Disables strict validation of TLS certificates. Required if using
+   Determines whether the KES server verifies the X.509 certificate of its clients. Valid options are `{ on | off }`.
+   If disabled, the KES server accepts arbitrary clients connections but still enforces policy-based access control.
    self-signed certificates for the
    :mc-cmd-option:`~kes server key` and
    :mc-cmd-option:`~kes server cert`.
