@@ -335,28 +335,35 @@ MinIO :ref:`Key Encryption Service <minio-kes>`:
 
 .. envvar:: MINIO_KMS_KES_KEY_FILE
 
-   The key file of the x.509 identity to use when authenticating to the
-   KES server. The specified identity *must* have KES policies attached
-   such that it can access *at minimum* the following API endpoints:
+   The private key associated to the the :envvar:`MINIO_KMS_KES_CERT_FILE` 
+   x.509 certificate to use when authenticating to the KES server. 
+   The KES server requires clients to present both their certificate and
+   private key for performing mutual TLS (mTLS).
 
-   <list to follow>
-
-   See :ref:`minio-kes-iam` for more information on KES Identity and Access
-   Management.
+   For more complete documentation on KES authentication and authorization, see 
+   :ref:`minio-kes-access-control`.
 
 .. envvar:: MINIO_KMS_KES_CERT_FILE
 
-   The public certificate of the x.509 identity to use when authenticating 
-   to the KES server. The specified identity *must* have KES policies
-   attached such that it can access *at minimum* the following API endpoints:
+   The x.509 certificate to present to the KES server. The KES server computes
+   an :ref:`identity <minio-kes-authorization>` from the certificate and
+   compares it to the configured :ref:`policies <minio-kes-policy>` on the
+   server. The KES server grants the :mc:`minio` server access to only those
+   operations explicitly granted by the policy.
+   
+   Ensure the KES server has a policy that contains the identity of the
+   specified certificate, where the policy grants access to *at minimum* the
+   following endpoints:
 
    <list to follow>
 
-   See :ref:`minio-kes-iam` for more information on KES Identity and Access
-   Management.
+   For more complete documentation on KES authentication and authorization, see 
+   :ref:`minio-kes-access-control`.
 
 .. envvar:: MINIO_KMS_KES_KEY_NAME
 
-   Sets the name of the Customer Master Key (CMK) to use for performing
-   Server-Side Encryption on the MinIO deployment. 
+   The name of an external key (EK) to retrieve from the Key Management System
+   (KMS) configured on KES. :mc:`minio` uses the
+   EK to generate additional cryptographic keys for performing
+   Server Side Encryption of objects (SSE-S3). 
 

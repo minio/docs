@@ -20,9 +20,6 @@ This page provides reference information for the :mc:`kes server` command.
 For more complete conceptual information on KEs, see
 :ref:`minio-kes`.
 
-Server Configuration File
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
 Examples
 --------
 
@@ -53,7 +50,7 @@ The command has the following syntax:
 .. mc-cmd:: cert
    :option:
 
-    Path to KES server X.509 certificate served by the KES server to clients when a :abbr: `TLS (Transport Layer Encryption)` connection is established
+   Path to KES server X.509 certificate served by the KES server to clients when a :abbr: `TLS (Transport Layer Encryption)` connection is established
    enabling :abbr:`TLS (Transport Layer Encryption)`.
 
 .. mc-cmd:: config
@@ -71,17 +68,14 @@ The command has the following syntax:
 .. mc-cmd:: root
    :option:
 
-   The identity with root permissions on the KES server. `kes tool identity of CERTIFICATE`` to
-   compute the X.509 identity of an arbitrary client certificate.
-   ``kes tool identity of CERTIFICATE`` to retrieve the certificate to use
-   for the root identity.
+   The identity with root permissions on the KES server. 
+   
+   Use the :mc-cmd:`kes tool identity of` command to compute the X.509 identity
+   of an arbitrary client certificate. 
+   
+   .. code-block:: shell
 
-.. mc-cmd:: port
-   :option:
-
-   The port on which the :mc:`kes server` listens.
-
-   Defaults to ``7373``. 
+      kes tool identity of CERTIFICATE
 
 .. mc-cmd:: auth
    :option:

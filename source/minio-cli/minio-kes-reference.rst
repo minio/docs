@@ -18,13 +18,14 @@ key-management system for high-performance applications. KES provides
 a bridge between applications running in bare-metal or orchestrated
 environments to centralised KMS solutions. 
 
-This page provides a reference for the :mc:`kes` command line tool. For more
-complete conceptual information on KES, see :ref:`minio-kes`.
+KES is designed for simplicity, scalability, and security. It requires 
+minimal configuration to enable full functionality and requires only
+basic familiarity with cryptography or key-management concepts.
 
-For tutorials on deploying KES to support Server-Side Object Encryption, see:
-
-- Server-Side Object Encryption with Thales CipherText
-- Other similar tutorials.
+This page contains conceptual and reference information on using KES for
+performing cryptographic key operations and general data encryption/decryption.
+For documentation on deploying KES to support MinIO Server-Side Encryption
+(SSE-S3), see :ref:`minio-kes`.
 
 .. _minio-kes-installation:
 
@@ -32,6 +33,282 @@ Installation
 ------------
 
 .. include:: /includes/minio-kes-installation.rst
+
+.. _minio-kes-access-control:
+
+KES Access Control
+------------------
+
+KES uses mutual TLS authentication (mTLS) for performing both authentication and
+authorization of clients making requests to the KES server. 
+
+Authentication
+~~~~~~~~~~~~~~
+   
+Both the client and server present their x.509 certificate and
+corresponding private key to their peer. The server only accepts the
+connection if the client certificate is valid and authentic:
+
+- A "valid" certificate is well-formed and current (i.e. not expired). 
+   
+  mTLS also mTLS also requires the following `Extended Key Usage
+  <https://tools.ietf.org/html/rfc5280#section-4.2.1.12>`__ extensions for 
+  the client and server. Specifically:
+
+  - The client certificate *must* include Client Authentication
+     (``extendedKeyUsage = clientAuth``)
+  
+  - The server certificate *must* include Server Authentication
+     (``extendedKeyUsage = serverAuth``)
+
+- An "authentic" certificate is issued by a trusted Certificate Authority
+  (CA). Both client and server *must* include the peer certificate CA 
+  in their local system trust store.
+
+  You can start the KES server with the :mc-cmd-option:`kes server auth`
+  option to perform mTLS with untrusted certificates during testing or early
+  development. However, untrusted certificates present a security
+  vulnerability and may open the KES server to access by unknown parties.
+  MinIO strongly recommends only allowing trusted certificates in production
+  environments.
+
+Once authenticated, the KES server proceeds to check if the client
+is *authorized* to perform the requested operation.
+
+.. _minio-kes-authorization:
+
+Authorization
+~~~~~~~~~~~~~
+   
+KES uses Policy-Based Access Control (PBAC) for determining what operations
+a given client has permission to perform. Each policy consists of
+one or more identities, where each identity corresponds to the
+SHA-256 hash of an x.509 certificate. The server only allows the
+client to perform the requested operation if *all* of the following
+are true:
+
+- A policy on the KES server contains the client identity.
+
+- The policy explicitly allows the requested operation.
+
+If no such policy exists on the KES server *or* if the policy does not
+explicitly allow the requested operation, the KES server denies the
+client's request. For more complete documentation on policies, 
+see :ref:`minio-kes-policy`.
+
+.. _minio-kes-policy:
+
+KES Policies
+~~~~~~~~~~~~
+
+KES uses policy-based access control (PBAC), where a policy describes the
+operations which an authenticated client may perform. 
+
+The following ``YAML`` document provides an example of the :kesconf:`policy`
+section of the KES server configuration document. The policy ``minio-sse`` 
+includes the appropriate :ref:`API endpoints <minio-kes-endpoints>` for 
+supporting MinIO Server-Side Encryption:
+
+.. code-block:: yaml
+   :class: copyable
+
+   policy:
+      minio-sse:
+         paths:
+         - /v1/key/create/*
+         - /v1/key/generate/*
+         - /v1/key/decrypt/*
+         - /v1/key/delete/*
+         identities:
+         - <SHA-256 HASH>
+
+- Each element in the :kesconf:`policy.policyname.paths` array represents an 
+  :ref:`API endpoint <minio-kes-endpoints>` to which the policy grants access.
+
+- Each element in the :kesconf:`policy.policyname.identities` array represents
+  the SHA-256 hash of an x.509 certificate presented by a client.
+
+  Use the :mc-cmd:`kes tool identity of` command to compute the identity hash
+  of a client's x.509 certificate. 
+
+Policies and identities have a one-to-many relationship, where one policy can
+contain many identities. *However*, a given identity can associate to at most
+one policy at a time.
+
+The KES server provides two methods for configuring policies:
+
+- The :kesconf:`policy` section of the KES
+  :ref:`configuration file <minio-kes-config>` lists the persistent
+  policies for the KES server.
+
+- The :mc:`kes policy` command supports creating *ephemeral* policies for the
+  KES server. The :mc:`kes identity` command supports *ephemeral* modification
+  of the identities associated to policies on the KES server.  
+  
+  Policies created or modified using either :mc:`kes policy` or 
+  :mc:`kes identity` disappear after restarting the KES server.
+
+.. important::
+
+   Each KES server has its own configuration file from which it derives all
+   persistent policies. With distributed KES deployments, each server has its
+   own independent and distinct policy-identity set based on its configuration
+   file. This may allow for an identity to associate to different policies
+   depending on which KES server a client connects to.
+
+   Exercise caution in allowing KES servers to contain differing policies, 
+   as it may result in inconsistent client encryption behavior between
+   servers. MinIO strongly recommends synchronizing changes to configuration
+   files in distributed KES deployments.
+
+<TODO: Tutorial on adding/removing identities to the KES server>
+
+.. _minio-kes-root:
+
+KES Root Identity
+~~~~~~~~~~~~~~~~~
+
+The KES ``root`` identity has super-administrator access to all
+:ref:`minio-kes-endpoints` and can perform any action on any resource on the KES
+server.
+
+The KES server :mc:`kes` requires specifying a ``root`` identity on startup
+via either the :mc-cmd-option:`kes server root` commandline option *or*
+the :kesconf:`root` server configuration field.
+
+KES computes a SHA-256 hash of an authenticated client's x.509 certificate
+to determine which policies to assign to the client. For the ``root``
+identity, the client's x.509 certificate *must* match that specified to the
+:mc:`kes` server.
+
+To effectively disable the ``root`` account, specify a value for which the
+SHA-256 hash of an x.509 certificate could *never* match. For example:
+
+.. tabs::
+
+   .. tab:: Command Line
+
+      - ``kes server --root=_``
+
+      - ``kes server --root=disabled``
+
+   .. tab:: Configuration File
+
+      - ``root: _``
+
+      - ``root: disabled``
+
+
+Exercise caution when storing or transmitting the ``root`` x.509 certificate and
+private key, as any client with access to these credentials can perform
+super-administrator actions on the KES server.
+
+.. _minio-kes-endpoints:
+
+KES API Endpoints
+-----------------
+
+The following section lists the available KES API endpoints as a quick
+reference. For more complete documentation on syntax and usage for each
+endpoint, see the :minio-git:`KES Wiki </kes/wiki/Server-API>`.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+   :width: 100%
+
+   * - Endpoint
+     - Description
+
+   * - ``/version``
+     - Returns the version of the KES server.
+
+   * - ``/v1/key/create``
+     - Creates a cryptographic key on the KES server.
+
+       To restrict access to a specific key prefix, specify that prefix as
+       an argument to the API. For example, the following endpoint pattern
+       allows creating keys with the prefix ``myapp``:
+
+       .. code-block:: shell
+
+          /v1/key/create/myapp-*
+
+   * - ``/v1/key/import``
+     - Imports a cryptographic key into the KES server.
+
+   * - ``/v1/key/delete``
+     - Deletes a cryptographic key on the KES server.
+
+       Deleting a cryptographic key prevents decrypting any data encrypted
+       with that key, rendering that data permanently unreadable. Consider
+       restricting access to this endpoint to only those clients which require
+       it.
+
+   * - ``/v1/key/generate``
+     - Generates a Data Encryption Key (DEK) on the KES server. 
+       Client's can use the DEK for performing Server-Side Object Encryption.
+
+   * - ``/v1/key/encrypt``
+     - Encrypts a plaintext value using a Data Encryption Key.
+
+   * - ``/v1/key/decrypt``
+     - Decrypts a ciphertext value using a Data Encryption Key.
+
+   * - ``/v1/policy/write``
+     - Adds a new :ref:`policy <minio-kes-policy>` to the KES server.
+
+   * - ``/v1/policy/read``
+     - Retrieves an existing :ref:`policy <minio-kes-policy>` from the KES
+       server.
+
+   * - ``/v1/policy/list``
+     - Lists all :ref:`policies <minio-kes-policy>` on the KES server.
+
+   * - ``/v1/policy/delete``
+     - Deletes a :ref:`policy <minio-kes-policy>` from the KES server.
+
+   * - ``/v1/identity/assign``
+     - Assigns an x.509 identity to a :ref:`policy <minio-kes-policy>` on the
+       KES server.
+
+   * - ``/v1/identity/list``
+     - Lists all x.509 identities associated to a 
+       :ref:`policy <minio-kes-policy>` on the KES server.
+
+   * - ``/v1/identity/forget``
+     - Remove an x.509 identity associated to a :ref:`policy <minio-kes-policy>`
+       on the KES server.
+
+   * - ``/v1/log/audit/trace``
+     - Returns a stream of audit log events produced by the KES server.
+
+   * - ``/v1/log/log/error/trace``
+     - Returns a stream of error events produced by the KES server.
+
+.. _minio-kes-supported-kms:
+
+Supported Key Management Systems
+--------------------------------
+
+MinIO Key Encryption Service (KES) stores any Secret keys it generates on
+an external Key Management System (KMS).
+
+The following table lists all supported KMS:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+   :width: 100%
+
+   * - KMS
+     - Description
+
+   * - Filesystem
+     - Stores Secret keys directly on the filesystem.
+
+       Use Filesystem KMS only for local development or initial evaluation
+       of KES. *Never* use Filesystem KMS for production.
 
 .. _minio-kes-config:
 
@@ -59,7 +336,7 @@ General Configuration
 
 .. kesconf:: root
 
-   Specify ``disabled`` to disable the :ref:`root <minio-kes-iam-root>` identity
+   Specify ``disabled`` to disable the :ref:`root <minio-kes-root>` identity
    on the KES server. The ``root`` identity has super administrator access to
    the KES server.
 
@@ -241,8 +518,8 @@ Policy Configuration
 ~~~~~~~~~~~~~~~~~~~~
 
 The following section describes policy-related configuration for the KES server.
-Policies control :ref:`Identity and Access Management <minio-kes-iam>` for
-the KES server.
+Policies are a component of :ref:`KES access control 
+<minio-kes-access-control>`.
 
 Policies listed in this section are *persistent* through KES server restarts.
 Policies created using :mc:`kes policy` are *ephemeral* and are removed after
@@ -278,21 +555,23 @@ KES configuration file:
 
       <APIVERSION>/<API>/<operation>/[<argument>/<argument>/]
 
-   You can specify an asterisk ``*`` to create a catch-all pattern for
-   a given endpoint. For example, the following endpoint pattern 
-   allows complete access to key creation via the ``/v1/key/create`` 
-   endpoint:
+   For example, the following endpoint pattern allows complete access to key
+   creation via the ``/v1/key/create`` endpoint:
 
 .. kesconf:: policy.policyname.identities
 
-   An array of x.509 identities associated to the policy. KES grants clients
-   authenticating with a matching x.509 certificate access to the
-   endpoints listed in the :kespolicy:`~policyName.paths` for the 
-   policy.
+   An array of identities associated to the policy. An :ref:`identity
+   <minio-kes-authorization>` consists of the SHA-256 hash of an x.509
+   certificate. Use :mc-cmd:`kes tool identity of` to compute the identity of
+   each x.509 certificate you want to associate to the policy and specify that
+   value to the array.
 
-   Use :mc-cmd:`kes tool identity of` to compute the name of each x.509
-   certificate you want to associate to the policy and specify that value
-   to the array.
+   KES grants clients authenticating with an x.509 certificate identity in the
+   array access to the KES API endpoints listed in the
+   :kesconf:`~policy.policyname.paths`.
+
+   A given unique identity can associate to no more than *one* policy on the
+   KES server.
 
 Filesystem KMS Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -412,6 +691,65 @@ Hashicorp Vault KMS, see <TODO>.
    sign the Vault TLS certificates. 
    
 
+Thales CipherTrust / Gemalto KeySecure Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following section describes Thales CipherTrust (formerly Gemalto
+KeySecure)-related configuration for the KES server.
+
+For more complete documentation on configuring KES for connecting to a 
+CipherTrust KMS, see :doc:`/security/encryption/sse-s3-thales`.
+
+.. code-block:: yaml
+
+   keys:
+      gemalto:
+         keysecure:
+            endpoint: : https://[IP|HOSTNAME]
+            credentials:
+               token: "<string>"
+               domain: "<string>"
+               retry: "<string>"
+            tls:
+               ca: <string>
+
+.. kesconf:: keys.gemalto.keysecure
+
+   The root field for Thales CipherTrust / Gemalto KeySecure configuration.
+
+.. kesconf:: keys.gemalto.keysecure.endpoint
+
+   *Required*
+
+   The URL endpoint of the CipherTrust/KeySecure server.
+
+.. kesconf:: keys.gemalto.keysecure.credentials.token
+
+   *Required*
+
+   A refresh token generated by the CipherTrust/KeySecure server.
+   KES uses refresh tokens for generating short-lived authentication 
+   tokens.
+
+.. kesconf:: keys.gemalto.keysecure.credentials.domain
+
+   The domain of the CipherTrust/KeySecure server. Omit to default to the
+   root domain.
+
+.. kesconf:: keys.gemalto.keysecure.credentials.retry
+
+   The duration KES waits before attempting to reconnect to the
+   CipherTrust/KeySecure server. Specify a string as ``##h##m##s``.
+
+.. kesconf:: keys.gemalto.keysecure.tls.ca
+
+   The Certificate Authority which issued the CipherTrust/KeySecure TLS
+   certificates. 
+
+   If you cannot provide the CipherTrust/KeySecure CA, start the
+   KES server with :mc-cmd:`--auth off <kes server auth>` to disable
+   x.509 certificate validation. MinIO strongly recommends *against*
+   starting KES without certificate validation in production environments.
 
 .. toctree::
    :titlesonly:

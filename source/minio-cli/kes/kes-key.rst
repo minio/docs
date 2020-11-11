@@ -10,8 +10,10 @@
 
 .. mc:: kes key
 
-The :mc:`kes key` command manages creating cryptographic keys for use with
-Server-Side Object Encryption (SSE).
+The :mc:`kes key` command creates, utilizes, and deletes cryptographic keys
+(Secrets) through the MinIO Key Encryption Service (KES). KES stores 
+created secrets on the configured :ref:`Key Management System (KMS) 
+<minio-kes-supported-kms>`.
 
 This page provides reference information for the :mc:`kes key`
 command. 
@@ -21,17 +23,24 @@ command.
 - For an example of using :mc:`kes key` to generate secret keys using
   Thales CipherTrust as the KMS, see <tutorial>
 
-- Other specific tutorials to follow.
-
 Syntax
 ------
 
 .. mc-cmd:: create
    :fullpath:
 
-   Creates a new secret key on the KES server.
+   Creates a new Secret cryptographic key using the MinIO Key Encryption
+   Service (KES). The Secret key supports generation of
+   Data Encryption Keys (DEK) via the :mc:`kes key derive` command.
 
-   Creates a new CMK.
+   The created Secret key also supports enabling MinIO Server-Side Encryption
+   (SSE-S3). Specify the created key name to the
+   :envvar:`MINIO_KMS_KES_KEY_NAME` environment variable before starting the
+   :mc:`minio` server.
+
+   KES stores the Secret key on the configured 
+   :ref:`Key Management System (KMS) <minio-kes-supported-kms>`. 
+   KES *never* returns the Secret key to clients.
 
    The command has the following syntax:
 
@@ -44,30 +53,50 @@ Syntax
 
    .. mc-cmd:: NAME
 
-      The name of the secret key.
+      The name of the Secret key. 
+
+      - If the :mc-cmd:`kes key create NAME` command *includes* 
+        :mc-cmd:`~kes key create KEY`, the command imports the ``KEY``
+        and labels it using the specified :mc-cmd:`~kes key create NAME`.
+
+      - If the :mc-cmd:`kes key create NAME` command *omits* 
+        :mc-cmd:`~kes key create KEY`, the command creates a new Secret on the
+        configured KMS and labels it using the
+        specified :mc-cmd:`~kes key create NAME`.
 
    .. mc-cmd:: KEY
 
       *Optional*
       
-      The value to use as the secret key. Specify a base64-encoded string.
+      The Secret key to import into the configured KMS. Specify a base64-encoded
+      string.
 
-      Omit :mc-cmd:`~kes key create KEY` to direct KES to automatically
-      generate a random value for the key.
-
+      Specifying this option directs :mc-cmd:`kes key create` to
+      use the ``v1/key/import`` API endpoint, which has distinct 
+      :ref:`policy <minio-kes-policy>` requirements compared to 
+      key creation.
+      
    .. mc-cmd:: insecure, k
       :option:
 
-      Skips x.509 Certificate Validation during TLS handshakes. This option
-      is required if using self-signed certificates.
+      *Optional*
+
+      .. include:: /includes/common-minio-kes.rst
+         :start-after: start-kes-insecure
+         :end-before: end-kes-insecure
 
 .. mc-cmd:: delete
    :fullpath:
 
-   Deletes a master key on the KES server. Deleting a master key prevents
-   decrypting any cryptographic keys derived using that master key, which
+   Deletes a Secret key on the KES server. Deleting a Secret key prevents
+   decrypting any cryptographic keys derived using that Secret key, which
    in turn prevents decrypting any objects encrypted with those cryptographic
    keys. 
+
+   .. warning::
+
+      Deleting a Secret key renders all data encrypted using that key
+      permanently unreadable.
 
    The command has the following syntax:
 
@@ -82,19 +111,31 @@ Syntax
 
       *Required*
 
-      The name of the master key to delete.
+      The name of the Secret key to delete.
 
    .. mc-cmd:: insecure, k
       :option:
 
-      Skips x.509 Certificate Validation during TLS handshakes. This option
-      is required if using self-signed certificates.
+      *Optional*
+
+      .. include:: /includes/common-minio-kes.rst
+         :start-after: start-kes-insecure
+         :end-before: end-kes-insecure
 
 .. mc-cmd:: derive
    :fullpath:
 
-   Derives a new cryptographic key using a master key on the KES server. The
-   cryptographic key can support Server-Side Object Encryption (SSE-S3).
+   Derives a new cryptographic Data Encryption Key (DEK) using a Secret key on
+   the KES server.
+
+   The command returns the plaintext and ciphertext representations of the DEK.
+   To encrypt or decrypt data using the DEK, use the following procedure:
+
+   1. Use :mc-cmd:`kes key decrypt` on the ciphertext to extract the plaintext.
+   2. Encrypt or decrypt data using the plaintext.
+
+   Avoid storing the plaintext on disk, as it allows decryption of data
+   without requiring access to the Secret key used to generate the DEK.
 
    The command has the following syntax:
 
@@ -110,34 +151,41 @@ Syntax
 
       *Required*
 
-      The name of the master key on the KES server to use to generate the
-      cryptographic key.
+      The name of the Secret key to use to generate the DEK.
 
    .. mc-cmd:: CONTEXT
 
       *Optional*
 
-      A base64-encoded string to use with the master key for deriving the
-      cryptographic key.
+      A base64-encoded string to use with the Secret key for deriving the
+      DEK. If specified, the ``CONTEXT`` is *required* to decrypt the DEK
+      ciphertext.
 
    .. mc-cmd:: insecure, k
       :option:
 
-      Skips x.509 Certificate Validation during TLS handshakes. This option
-      is required if using self-signed certificates.
+      *Optional*
+
+      .. include:: /includes/common-minio-kes.rst
+         :start-after: start-kes-insecure
+         :end-before: end-kes-insecure
 
 .. mc-cmd:: decrypt
    :fullpath: 
    
-   Decrypt the ciphertext and return the plain cryptographic key produced :mc-cmd:`kes key derive`
-   :mc-cmd:`kes key derive`.
+   Decrypt the Data Encryption Key (DEK) ciphertext and return the plaintext
+   key.
+
+   Use the plaintext value for encrypting or decrypting data using the DEK. 
+   Avoid storing the plaintext on disk, as it allows decryption of data
+   without requiring access to the Secret key used to generate the DEK.
 
    The command has the following syntax:
 
    .. code-block:: shell
       :class: copyable
 
-      kes key decrypt [ARGUMENTS] NAME CIPHERTEXT [CONTEXT]
+      kes key decrypt [OPTIONS] NAME CIPHERTEXT [CONTEXT]
 
    The command accepts the following arguments:
 
@@ -145,28 +193,31 @@ Syntax
    
       *Required*
 
-      The name of master key used to generate the cryptographic key.
+      The name of Secret key used to generate the DEK key.
       
-      :mc-cmd:`kes key decrypt` fails if the specified master key
+      :mc-cmd:`kes key decrypt` fails if the specified Secret key
       was not used to encrypt the :mc-cmd:`~kes key decrypt CIPHERTEXT`.
 
    .. mc-cmd:: CIPHERTEXT
 
       *Required*
 
-      The cryptographic key to decrypt using the specified 
-      :mc-cmd:`master key <kes key decrypt NAME>`.
+      The DEK ciphertext to decrypt using the specified 
+      :mc-cmd:`Secret <kes key decrypt NAME>`.
 
    .. mc-cmd:: CONTEXT
 
       *Optional*
 
       The base64-encoded string specified to 
-      :mc-cmd:`kes key derive CONTEXT` when creating the cryptographic key, if
+      :mc-cmd:`kes key derive CONTEXT` when creating the DEK key, if
       any.
 
    .. mc-cmd:: insecure, k
       :option:
 
-      Skips x.509 Certificate Validation during TLS handshakes. This option
-      is required if using self-signed certificates.
+      *Optional*
+
+      .. include:: /includes/common-minio-kes.rst
+         :start-after: start-kes-insecure
+         :end-before: end-kes-insecure
