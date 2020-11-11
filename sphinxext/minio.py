@@ -498,7 +498,9 @@ class MinIODomain(Domain):
         'mc-cmd':         ObjType(_('mc-cmd'),        'mc-cmd'),
         'mc-cmd-option':  ObjType(_('mc-cmd-option'), 'mc-cmd-option'),
         'policy-action':  ObjType(_('policy-action'), 'policy-action'),
-        'envvar':         ObjType(_('envvar'),        'envvar')
+        'envvar':         ObjType(_('envvar'),        'envvar'),
+        'kespolicy':      ObjType(_('kespolicy'),     'kespolicy'),
+        'kesconf':        ObjType(_('kesconf'),     'kesconf'),
     }
     directives = {
         'data':            MinioObject,
@@ -508,7 +510,9 @@ class MinIODomain(Domain):
         'mc':              MinioMCCommand,
         'mc-cmd':          MinioMCObject,
         'policy-action':   MinioObject,
-        'envvar':          MinioObject
+        'envvar':          MinioObject,
+        'kespolicy':       MinioObject,
+        'kesconf':         MinioObject,
     }
     roles = {
         'data':             MinioXRefRole(),
@@ -520,6 +524,8 @@ class MinIODomain(Domain):
         'mc-cmd-option':    MinioCMDOptionXRefRole(),
         'policy-action':    MinioXRefRole(),
         'envvar':           MinioXRefRole(),
+        'kespolicy':        MinioXRefRole(),
+        'kesconf':          MinioXRefRole(),
 
     }
     initial_data = {

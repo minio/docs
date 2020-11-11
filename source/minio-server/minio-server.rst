@@ -321,3 +321,49 @@ Root Credentials
    the server configuration with the new credentials. After the process
    restarts successfully, you can restart it without 
    :envvar:`MINIO_SECRET_KEY_OLD`.
+
+Key Encryption Service (KES)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following environment variables support configuring access to
+MinIO :ref:`Key Encryption Service <minio-kes>`:
+
+.. envvar:: MINIO_KMS_KES_ENDPOINT
+
+   The endpoint of the KES server. :mc:`kes server` by default binds to
+   port ``7373`` on all network interfaces.
+
+.. envvar:: MINIO_KMS_KES_KEY_FILE
+
+   The private key associated to the the :envvar:`MINIO_KMS_KES_CERT_FILE` 
+   x.509 certificate to use when authenticating to the KES server. 
+   The KES server requires clients to present both their certificate and
+   private key for performing mutual TLS (mTLS).
+
+   For more complete documentation on KES authentication and authorization, see 
+   :ref:`minio-kes-access-control`.
+
+.. envvar:: MINIO_KMS_KES_CERT_FILE
+
+   The x.509 certificate to present to the KES server. The KES server computes
+   an :ref:`identity <minio-kes-authorization>` from the certificate and
+   compares it to the configured :ref:`policies <minio-kes-policy>` on the
+   server. The KES server grants the :mc:`minio` server access to only those
+   operations explicitly granted by the policy.
+   
+   Ensure the KES server has a policy that contains the identity of the
+   specified certificate, where the policy grants access to *at minimum* the
+   following endpoints:
+
+   <list to follow>
+
+   For more complete documentation on KES authentication and authorization, see 
+   :ref:`minio-kes-access-control`.
+
+.. envvar:: MINIO_KMS_KES_KEY_NAME
+
+   The name of an external key (EK) to retrieve from the Key Management System
+   (KMS) configured on KES. :mc:`minio` uses the
+   EK to generate additional cryptographic keys for performing
+   Server Side Encryption of objects (SSE-S3). 
+
