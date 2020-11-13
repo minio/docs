@@ -58,36 +58,40 @@ The command accepts the following arguments:
    The hostname of a :mc:`minio server` process.
 
    For standalone deployments, this field is *optional*. You can start a 
-   standalone :mc:`minio <minio server>` process with only the
+   standalone :mc:`~minio server` process with only the
    :mc-cmd:`~minio server DIRECTORIES` argument.
 
-   For distributed deployments, specify the hostname of each 
-   :mc:`minio <minio server>` in the deployment. 
+   For distributed deployments, specify the hostname of each :mc:`minio server`
+   in the deployment. The group of :mc:`minio server` processes represent a
+   single :ref:`Server Set <minio-intro-server-set>`.
 
    :mc-cmd:`~minio server HOSTNAME` supports MinIO expansion notation
-   ``{x...y}`` to denote a sequential series of hostnames. For example,
+   ``{x...y}`` to denote a sequential series of hostnames. MinIO *requires*
+   sequential hostnames to identify each :mc:`minio server` process in the set.
+   
+   For example,
    ``https://minio{1...4}.example.net`` expands to:
 
    - ``https://minio1.example.net``
    - ``https://minio2.example.net``
    - ``https://minio3.example.net``
    - ``https://minio4.example.net``
+
+   You must run the :mc:`minio server` command with the *same* combination of
+   :mc-cmd:`~minio server HOSTNAME` and :mc-cmd:`~minio server DIRECTORIES` on
+   each host in the Server Set.
    
-   The set of :mc:`minio server` processes in :mc-cmd:`~minio server HOSTNAME`
-   define a single :ref:`zone <minio-zones>`. MinIO *requires* sequential
-   hostnames to identify each :mc:`minio server` process in the zone. 
-   
-   Each additional ``HOSTNAME/DIRECTORIES`` pair denotes an additional zone for
-   the purpose of horizontal expansion of the MinIO deployment. For more
-   information on zones, see :ref:`minio-zones`.
+   Each additional ``HOSTNAME/DIRECTORIES`` pair denotes an additional Server
+   Set for the purpose of horizontal expansion of the MinIO deployment. For more
+   information on Server Sets, see :ref:`Server Set <minio-intro-server-set>`.
 
 .. mc-cmd:: DIRECTORIES
 
-   The directories or disks the :mc:`minio server` process uses as the 
+   The directories or drives the :mc:`minio server` process uses as the 
    storage backend. 
 
    :mc-cmd:`~minio server DIRECTORIES` supports MinIO expansion notation
-   ``{x...y}`` to denote a sequential series of folders or disks. For example,
+   ``{x...y}`` to denote a sequential series of folders or drives. For example,
    ``/mnt/disk{1...4}`` expands to:
 
    - ``/mnt/disk1``
@@ -98,14 +102,16 @@ The command accepts the following arguments:
    The :mc-cmd:`~minio server DIRECTORIES` path(s) *must* be empty when first
    starting the :mc:`minio <minio server>` process.
 
-   The :mc:`minio server` process requires *at least* 4 disks or directories
+   The :mc:`minio server` process requires *at least* 4 drives or directories
    to enable :ref:`erasure coding <minio-erasure-coding>`.
 
    .. important::
 
-      MinIO recommends locally-attached disks, where the
+      MinIO recommends locally-attached drives, where the
       :mc-cmd:`~minio server DIRECTORIES` path points to each disk on the
-      host machine. 
+      host machine. MinIO recommends *against* using network-attached
+      storage, as network latency reduces performance of those drives
+      compared to locally-attached storage.
 
       For development or evaluation, you can specify multiple logical
       directories or partitions on a single physical volume to enable erasure
@@ -321,3 +327,36 @@ Root Credentials
    the server configuration with the new credentials. After the process
    restarts successfully, you can restart it without 
    :envvar:`MINIO_SECRET_KEY_OLD`.
+
+Storage Class
+~~~~~~~~~~~~~
+
+These environment variables configure the :ref:`parity <minio-ec-parity>`
+to use for objects written to the MinIO cluster. 
+
+MinIO Storage Classes are distinct from AWS Storage Classes, where the latter
+refers to the specific storage tier on which to store a given object. 
+
+.. envvar:: MINIO_STORAGE_CLASS_STANDARD
+
+   The number of :ref:`parity blocks <minio-ec-parity>` to create for 
+   objects with the standard (default) storage class. MinIO uses the
+   ``EC:N`` notation to refer to the number of parity blocks (``N``).
+   This environment variable only applies to deployments with 
+   :ref:`Erasure Coding <minio-erasure-coding>` enabled. 
+
+   Defaults to ``4``. 
+
+.. envvar:: MINIO_STORAGE_CLASS_REDUCED
+
+   The number of :ref:`parity blocks <minio-ec-parity>` to create for objects
+   with the reduced redundancy storage class. MinIO uses the ``EC:N``
+   notation to refer to the number of parity blocks (``N``). This environment
+   variable only applies to deployments with :ref:`Erasure Coding
+   <minio-erasure-coding>` enabled. 
+
+   Defaults to ``2``.
+
+.. envvar:: MINIO_STORAGE_CLASS_COMMENT
+
+   Adds a comment to the storage class settings.

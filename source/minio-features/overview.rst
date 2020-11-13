@@ -33,3 +33,4 @@ The following table lists MinIO features and their corresponding documentation:
 
    /minio-features/bucket-notifications
    /minio-features/bucket-versioning
+   /minio-features/erasure-coding
