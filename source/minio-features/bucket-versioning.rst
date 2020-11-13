@@ -38,7 +38,7 @@ Enable Bucket Versioning
 
 Enabling bucket versioning on a MinIO deployment requires that the deployment
 have *at least* four disks. Specifically, Bucket Versioning depends on
-:doc:`Erasure Coding </introduction/erasure-coding>`. For MinIO deployments that
+:ref:`Erasure Coding <minio-erasure-coding>`. For MinIO deployments that
 meet the disk requirements, use the :mc-cmd:`mc version enable` command to
 enable versioning on a specific bucket. 
 
