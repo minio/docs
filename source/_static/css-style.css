@@ -169,6 +169,9 @@ body div.center h6 {
    font-weight: bold;
    margin: 30px 0px 10px 0px;
    padding: 0;
+   text-decoration: underline;
+   text-underline-offset: 8px;
+   color: var(--minio-nautical);
 }
 
 body div.center h2 {
@@ -260,6 +263,16 @@ body div.center div.footer {
 
    padding-top: 100px;
    */
+}
+
+body div.center dl.bold-dt dt {
+   font-weight: bold;
+   color: var(--minio-nautical);`
+}
+
+body div.center span.guilabel {
+   font-weight: bold;
+   color: var(--minio-nautical);
 }
 
 /* Right-Column CSS */
