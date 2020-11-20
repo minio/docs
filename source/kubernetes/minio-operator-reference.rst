@@ -789,7 +789,7 @@ of a MinIO Tenant, including automatic TLS certificate generation.
    encryption. Use wildcard patterns when constructing the ``commonName`` 
    to ensure the generated certificates match the Kubernetes-generated
    DNS names of Tenant resources. See the Kubernetes documentation on
-   :kubedocs:`DNS for Services and Pods 
+   :kube-docs:`DNS for Services and Pods 
    <concepts/services-networking/dns-pod-service/>` for more information on 
    Kubernetes DNS.
 
@@ -831,7 +831,7 @@ of a MinIO Tenant, including automatic TLS certificate generation.
    Use wildcard patterns when constructing the DNS-related fields
    to ensure the generated certificates match the Kubernetes-generated
    DNS names of Tenant resources. See the Kubernetes documentation on
-   :kubedocs:`DNS for Services and Pods 
+   :kube-docs:`DNS for Services and Pods 
    <concepts/services-networking/dns-pod-service/>` for more information on 
    Kubernetes DNS.
 
