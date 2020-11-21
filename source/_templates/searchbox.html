@@ -1,11 +1,5 @@
 {%- if pagename != "search" and builder != "singlehtml" %}
-<div id="searchbox" style="display: none" role="search">
-   <div class="searchformwrapper">
-      <form class="search" action="{{ pathto('search') }}" method="get">
-         <input type="text" id="docs-search" name="q" aria-labelledby="searchlabel" placeholder="Search documentation" />
-         <input type="submit" value="{{ _('Go') }}" />
-      </form>
-   </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+<form class="search" action="{{ pathto('search') }}" method="get" role="search">
+   <input type="text" class="search__text" id="docs-search" name="q" aria-labelledby="searchlabel" placeholder="Search Documentation" />
+</form>
 {%- endif %}

@@ -65,20 +65,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const button = document.querySelector('.sphinxsidebarbutton');
   const sidebarwrapper = document.querySelector('.sphinxsidebarwrapper');
 
-  function expando() {
-    button.classList.toggle('collapsed');
-    leftcolumn.classList.toggle('collapsed');
-    centercolumn.classList.toggle('collapsed');
-    sidebarwrapper.classList.toggle('collapsed');
-    if (button.textContent == "Collapse x") {
-       button.textContent = "Expand x";
-    }
-    else {
-       button.textContent = "Collapse x";
-    }
-  }
-   
-  button.addEventListener( "click", expando );
-     
+  const sidebarToggle = document.querySelector('.sidebar-toggle');
 
+  function toggleSidebar() {
+      document.body.classList.toggle('sidebar-toggled');
+  }
+
+  sidebarToggle.addEventListener( "click", toggleSidebar );
 });

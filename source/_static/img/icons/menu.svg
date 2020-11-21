@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="15px" viewBox="0 0 22 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Group" transform="translate(1.000000, 1.500000)" stroke="#C72C48" stroke-width="1.25">
+            <line x1="-1.66533454e-16" y1="6" x2="20" y2="6" id="Line"></line>
+            <line x1="-1.66533454e-16" y1="0.5" x2="20" y2="0.5" id="Line"></line>
+            <line x1="-1.66533454e-16" y1="11.5" x2="20" y2="11.5" id="Line"></line>
+        </g>
+    </g>
+</svg>
