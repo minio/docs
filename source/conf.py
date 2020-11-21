@@ -88,23 +88,23 @@ html_favicon = '_static/favicon.png'
 html_sidebars = {
     '**' : [
         'searchbox.html',
-        'navigation.html',
+        'navigation.html'
     ]
 }
 
 html_theme_options = {
     'fixed_sidebar' : 'true',
-    'show_relbars': 'true',
+    'show_relbars': 'false'
 }
 
-html_short_title = "MinIO Object Storage"
+html_short_title = "MinIO Hybrid Cloud"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_css_files = ['css-style.css']
+html_css_files = ['css/main.min.css']
 
 html_js_files = ['js/main.js']
 

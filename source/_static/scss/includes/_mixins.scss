@@ -1,0 +1,18 @@
+// Get theme colors
+@function breakpoints($key) {
+    @return map-get($breakpoints, $key);
+}
+
+
+// Breakpoints
+@mixin breakpoint-min($bp) {
+    @media (min-width: $bp) {
+        @content;
+    }
+}
+
+@mixin breakpoint-max($bp) {
+    @media (max-width: ($bp - 1)) {
+        @content;
+    }
+}

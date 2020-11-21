@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &:focus,
+    &:active {
+        outline: none;
+    }
+}
+
+html {
+    font-size: $root-font-size;
+}
+
+body {
+    all: unset;
+    font-family: $font-family-base;
+    font-size: 1rem;
+    line-height: $body-line-height;
+    color: $body-color;
+    background-color: $body-bg;
+    font-weight: $font-weight-normal;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover {
+        color: $link-hover-color;
+        text-decoration: none;
+    }
+}
+
+h1, h2, h3, h4, h5 {
+    color: $docs-item-main-color;
+    & > a.toc-backref {
+        color: $docs-item-main-color;
+    }
+}
+
+div.admonition {
+    & > p.admonition-title {
+        font-weight: bold;
+        font-family: $font-family-base;
+        font-size: 1.2rem;
+    }
+
+    &.warning {
+        background-color: $docs-item-admonition-warning-body;
+        border: none;
+        border-left: 4px solid $docs-item-admonition-warning-border;
+    }
+
+    &.important {
+        background-color: $docs-item-admonition-important-body;
+        border: none;
+        border-left: 4px solid $docs-item-admonition-important-border;
+    }
+
+    &.note {
+        background-color: $docs-item-admonition-note-body;
+        border: none;
+        border-left: 4px solid $docs-item-admonition-note-border;
+    }
+}
+
+dl.minio {
+    margin: 10px 0 10px 0;
+}
+
+div.footer {
+    width: auto;
+    margin: 0px;
+}
+
+.align-default {
+    text-align: left;
+}
+
+table.docutils {
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+
+    & > thead tr th {
+        border: none;
+        border-bottom: 1px solid $docs-item-table-border;
+        font-size: 1rem;
+        color: $theme-red;
+    }
+
+    & > tbody tr td {
+        border: none;
+        border-bottom: 1px solid $docs-item-table-border;
+
+        & > p {
+            font-size: .90rem;
+        }
+    }
+
+}
+
+.xref {
+    color: $theme-red;
+}

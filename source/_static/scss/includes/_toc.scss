@@ -1,0 +1,30 @@
+div#localtoc {
+    font-size: 13px;
+    margin-left: 20px;
+}
+
+#table-of-contents {
+    background: none;
+    border-style: none;
+    ul {
+        list-style: none;
+        margin: 10px 0px 10px 0px;
+
+        & > {
+            li {
+                list-style: none;
+                margin: 10px 0px 10px 0px;
+
+                & > p a.reference {
+                    text-decoration: none;
+                    border-bottom: none;
+                    color: $docs-item-main-color;
+                }
+
+                & > ul {
+                        margin: 10px 0px 10px 10px;
+                }
+            }
+        }
+}
+}

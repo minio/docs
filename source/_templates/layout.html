@@ -8,84 +8,112 @@
 {%- set url_root = pathto('index', 1) %}
 
 {%- macro miniosidebar() %}
-      {%- if render_sidebar %}
-      <div class="sphinxsidebarwrapper" role="navigation">
-        {%- block sidebarlogo %}
-        {%- if logo %}
-          <p class="logo"><a href="{{ pathto(master_doc)|e }}">
-            <img class="logo" src="{{ pathto('_static/' + logo, 1)|e }}" alt="Logo"/>
-          </a></p>
-        {%- endif %}
-        {%- endblock %}
-        {%- if sidebars != None %}
-          {#- new style sidebar: explicitly include/exclude templates #}
-          {%- for sidebartemplate in sidebars %}
-          {%- include sidebartemplate %}
-          {%- endfor %}
-        {%- else %}
-          {#- old style sidebars: using blocks -- should be deprecated #}
-          {%- block sidebartoc %}
-          {%- include "localtoc.html" %}
-          {%- endblock %}
-          {%- block sidebarrel %}
-          {%- include "relations.html" %}
-          {%- endblock %}
-          {%- block sidebarsourcelink %}
-          {%- include "sourcelink.html" %}
-          {%- endblock %}
-          {%- if customsidebar %}
-          {%- include customsidebar %}
-          {%- endif %}
-          {%- block sidebarsearch %}
-          {%- include "searchbox.html" %}
-          {%- endblock %}
-        {%- endif %}
-      </div>
-      {%- endif %}
+   {%- if render_sidebar %}
+      <nav
+         class="docs"
+         role="navigation"
+      >
+         {%- block sidebarlogo %}
+            {%- if logo %}
+               <p class="logo">
+                  <a href="{{ pathto(master_doc)|e }}">
+                     <img
+                        class="logo"
+                        src="{{ pathto('_static/' + logo, 1)|e }}"
+                        alt="Logo"
+                     />
+                  </a>
+               </p>
+            {%- endif %}
+         {%- endblock %}
+
+         {%- if sidebars != None %}
+            {#- new style sidebar: explicitly include/exclude templates #}
+            {%- for sidebartemplate in sidebars %}
+               {%- include sidebartemplate %}
+            {%- endfor %}
+         {%- else %}
+            {#- old style sidebars: using blocks -- should be deprecated #}
+            {%- block sidebartoc %}
+               {%- include "localtoc.html" %}
+            {%- endblock %}
+
+            {%- block sidebarrel %}
+               {%- include "relations.html" %}
+            {%- endblock %}
+
+            {%- block sidebarsourcelink %}
+               {%- include "sourcelink.html" %}
+            {%- endblock %}
+
+            {%- if customsidebar %}
+               {%- include customsidebar %}
+            {%- endif %}
+
+            {%- block sidebarsearch %}
+               {%- include "searchbox.html" %}
+            {%- endblock %}
+         {%- endif %}
+      </nav>
+   {%- endif %}
 {%- endmacro %}
 
 {%- block header %}
-   <nav class="navigation">
-      <a href="https://min.io">
-         <img class="logo" src="{{ pathto('_static/docs-logo.svg',1) }}" alt="Logo"/>
+   <header class="header">
+      <i class="sidebar-toggle"></i>
+      <a
+         class="logo"
+         href="https://min.io"
+      >
+         <img
+            src="{{ pathto('_static/img/docs-logo.svg',1) }}"
+            alt="Logo"
+         />
       </a>
-   </nav>
+
+      <nav class="nav">
+         <a href="https://min.io/product/overview"><span>Product</span></a>
+         <a class="active" href="/"><span>Docs</span></a>
+         <a href="https://min.io/solutions/vmware"><span>Solutions</span></a>
+         <a href="https://min.io/resources"><span>Resources</span></a>
+         <a href="https://blog.min.io/"><span>Blog</span></a>
+         <a href="https://min.io/pricing"><span>Pricing</span></a>
+         <a href="https://min.io/download"><span>Download</span></a>
+      </nav>
+   </header>
 {%- endblock %}
 
 {%- block content %}
-
-   <div class="left column">
-      <h3>
-         <a class="index-link" href="{{ pathto('index') }}">{{ shorttitle }}</a>
-       </h3>
-      <button class="sphinxsidebarbutton button-collapse">Collapse x</button>
-      {{ miniosidebar() }}
-   </div>
-   <div class="flexwrapper">
-      <div class="center column">
-         <div class="body">
-            {% block alertbar -%}
-            <div class="alert alert-info">
+   <section class="content">
+      <aside class="sidebar">
+         <div>
+            <h3>
+               <a class="index-link" href="{{ pathto('index') }}">{{ shorttitle}} </a>
+            </h3>
+            {{ miniosidebar() }}
+         </div>
+      </aside>
+      <div class="content__main">
+         {% block alertbar -%}
+            <div class="admonition important">
                <span class="alert-message">
                   <p>Welcome to the upcoming version of the MinIO Documentation!
                      The content of these pages may change at any time.
-                     If you can't find what you're looking for, check our 
-                     <a href="https://docs.min.io"> legacy documentation</a>. 
+                     If you can't find what you're looking for, check our
+                     <a href="https://docs.min.io"> legacy documentation</a>.
                      Thank you for your patience.
                   </p>
                </span>
             </div>
-            {% endblock %}
-            {% block body %} {% endblock %}
-            <div class="footer">
-               &copy;{{ copyright }}
-            </div>
-            </div>
+         {% endblock %}
+         {% block body %} {% endblock %}
+         <div class="footer">
+            &copy;{{ copyright }}
          </div>
-      <div class="right column">
-         <div id=localtoc class=localtoc></div>
       </div>
-
+      <div class="content__right">
+         <div id=localtoc></div>
+      </div>
    </div>
 {%- endblock %}
 

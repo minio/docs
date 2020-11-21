@@ -1,0 +1,140 @@
+.header {
+    height: $header-height;
+    background-color: $header-bg;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px rgba($black, 0.1);
+    width: 100%;
+    z-index: $z-index-header;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+
+    @extend %content-padding;
+}
+
+.logo {
+    flex-shrink: 0;
+    display: inline-flex;
+
+    & > img {
+        height: $logo-height;
+    }
+}
+
+.nav {
+    margin-left: auto;
+
+    & > a {
+        &, &:hover {
+            color: $nav-color;
+        }
+
+        font-size: 0.95rem;
+        line-height: 100%;
+        padding: 0.4rem 1.2rem 0.55rem;
+        border-radius: $border-radius-sm;
+
+        &:not(:last-child) {
+            & > span {
+                position: relative;
+    
+                &::after {
+                    content: '';
+                    height: 1px;
+                    width: 100%;
+                    background-color: $nav-border-color;
+                    bottom: -10px;
+                    transform: translateY(0);
+                    left: 0;
+                    position: absolute;
+                    opacity: 0;
+                    transition: opacity 250ms, transform 250ms;
+                    pointer-events: none;
+                }
+            }
+    
+            &.active,
+            &:hover {
+                & > span {
+                    &::after {
+                        transform: translateY(-4px);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        &:last-child {
+            border: 1px solid $theme-red;
+            transition: background-color 300ms, color 300ms;
+
+            &:hover {
+                background-color: $theme-red;
+                color: $white;
+            }
+        }
+    }
+}
+
+.sidebar-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 0 1rem 0 -0.35rem;
+    cursor: pointer;
+    border-radius: $border-radius-sm;
+    transition: background-color 300ms;
+    flex-shrink: 0;
+
+    @include breakpoint-min(breakpoints(lg)) {
+        display: none;
+    }
+
+    &:hover {
+        background-color: $sidebar-toggle-hover-bg;
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 1;
+        transition: opacity 250ms, transform 250ms;
+    }
+
+    &::before {
+        background-image: $sidebar-toggle-icon;
+        opacity: 1;
+        transform: scale(1);
+        
+    }
+
+    &::after {
+        background-image: $sidebar-toggle-collapse-icon;
+        opacity: 0;
+        transform: scale(0.25);
+    }
+}
+
+.sidebar-toggled {
+    .sidebar-toggle {
+        &::before {
+            opacity: 0;
+            transform: scale(0.25);
+            
+        }
+    
+        &::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+}

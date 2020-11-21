@@ -1,0 +1,35 @@
+%content-padding {
+    @include breakpoint-min(breakpoints(xl)) {
+        padding: 0 $content-padding;
+    }
+
+    @include breakpoint-max(breakpoints(xl)) {
+        padding: 0 $content-padding-sm;
+    }
+}
+
+.content {
+    
+    //height: 100%;
+    overflow: auto;
+    @extend %content-padding;
+    display: flex;
+    flex-wrap: nowrap;
+    height: calc(100vh - #{$header-height});
+    
+}
+
+.content__main {
+    flex: 1;
+    min-width: 0;
+    padding: 1.5rem 3rem;
+    background-color: $content-bg;
+    align-self: flex-start;
+}
+
+.content__right {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    max-width: 200px;
+}

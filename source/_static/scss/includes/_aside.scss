@@ -1,0 +1,127 @@
+.sidebar {
+    width: $sidebar-width;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background-color: $sidebar-bg;
+    overflow-y: auto;
+    padding: 1.5rem 1.5rem 1.5rem 0;
+    transition: opacity 400ms, transform 300ms;
+    z-index: $z-index-header - 1;
+
+    @include breakpoint-max(breakpoints(lg)) {
+        position: fixed;
+        left: 0;
+        transform: translate3d(-100%, 0, 0);
+        height: 100%;
+        padding: ($header-height + $content-padding-sm) $content-padding-sm $content-padding-sm;
+        box-shadow: 3px 0 10px rgba($black, 0.1);
+        opacity: 0;
+    }
+}
+
+.index-link {
+    color: $docs-item-main-color;
+    font-size: .8rem;
+    text-transform: uppercase;
+
+    &:hover {
+        color: $docs-item-main-color;
+    }
+}
+
+.sidebar-toggled {
+    .sidebar {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+ 
+.search {
+    margin-bottom: 1rem;
+}
+
+.search__text {
+    appearance: none;
+    border: 1px solid $search-border-color;
+    height: $search-height;
+    border-radius: $border-radius-sm;
+    background-color: $white;
+    color: $search-color;
+    font-size: 0.85rem;
+    width: 100%;
+    padding: 0 1rem 0.1rem 2.6rem;
+    background: $search-icon no-repeat center left 1rem;
+    background-color: $search-bg;
+
+    &:focus {
+        border-color: $search-focus-border-color
+    }
+}
+
+.docs {
+    ul {
+        list-style: none;
+        padding: 0;
+        font-size: .95rem;
+
+        & > li {
+            & > a {
+                &, & > code {
+                    all: unset;
+                }
+
+                &:hover {
+                    border: 0;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    & > ul {
+        margin: 0;
+
+        & > li {
+            & > a {
+                color: $docs-item-main-color;
+                padding: 0.5rem 0;
+                display: flex;
+                align-items: center;
+            
+                &:hover {
+                    color: $docs-item-main-hover-color;
+                }
+            }
+
+            &.current {
+                & > a {
+                    color: $docs-item-main-active-color;
+                    font-weight: $font-weight-medium;
+                }
+            }
+
+            & > ul {
+                margin: 0 0 0.5rem;
+
+                & > li {
+                    & > a {
+                        font-size: 0.85rem;
+                        color: $docs-item-sub-color;
+                        display: block;
+                        padding: 0.4rem 0;
+
+                        &:hover {
+                            color: $docs-item-sub-hover-color;
+                        }
+
+                        &.current {
+                            color: $docs-item-sub-active-color;
+                            font-weight: $font-weight-medium;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
