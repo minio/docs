@@ -15,10 +15,7 @@ Overview
 
 MinIO is a Kubernetes-native, high performance object storage suite that
 maintains AWS S3 API compatibility, allowing applications to seamlessly migrate
-to private or hybrid cloud infrastructures. VMware Cloud Foundation (VCF) with
-Tanzu is an enterprise-grade platform for running both traditional and modern
-Kubernetes-based applications in production with all the power of virtualized
-storage, networking, and associated management. 
+to private or hybrid cloud infrastructures.  
 
 Starting with VMware vSphere 7 Update 1 (7U1), vSphere includes MinIO's
 first-party integration through the vSAN Data Persistence Platform (DPP). 
@@ -30,7 +27,7 @@ IMAGE
 
 This documentation assumes familiarity with all referenced VMware components,
 including but not limited to VMware vCenter,VMware vSAN, VMware vSAN Data
-Persistence Platform, vSAN Direct Configuration, and vSAN SNA. While this
+Persistence Platform, vSAN Direct, and vSAN SNA. While this
 documentation *may* provide guidance for configuring or deploying VMware
 components on a best-effort basis, it is not a replacement for dedicated
 VMware-specific documentation.
@@ -39,7 +36,7 @@ vSAN Direct and vSAN SNA Storage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 VMware vSphere 7U1 and the VMware Data Persistence Platform (DPP) offer
-two new vSAN data paths specifically designed for cloud-native stateful
+two vSAN data paths specifically designed for cloud-native stateful
 services like MinIO.
 
 .. class:: bold-dt
@@ -52,7 +49,7 @@ vSAN SNA Drives
    vSAN SNA drives are ideal for clusters where the MinIO Tenant must share
    the physical infrastructure with other stateful or stateless workloads.
 
-vSAN Direct Drives
+vSAN Direct
    Allows creating independent datastores on every disk attached to a node,
    where applications running on that node can have direct access to those
    disks. The MinIO Tenant can fully utilize the available throughput of the
@@ -61,9 +58,8 @@ vSAN Direct Drives
    vSAN Direct drives are ideal for clusters dedicated to running the MinIO
    Tenant.
 
-While MinIO can make efficient use of either data path, vSAN Direct most closely
-mirrors MinIO best practices around ensuring the shortest possible path between
-a MinIO process and its connected storage.
+While MinIO can make efficient use of either data path, vSAN Direct is well aligned with MinIO's best practices around ensuring a fast path between
+a MinIO process and its storage. vSAN Direct also allows for independent fault domains for the disks used by a MinIO Pod.
 
 MinIO recommends using only *one* type of vSAN data path for all drives intended
 for use by a given MinIO Tenant. vSphere administrators should create
@@ -81,7 +77,7 @@ which the MinIO Tenant will be deployed has access to that policy.
 Enable MinIO for VMware vSphere
 -------------------------------
 
-VMware vSphere 7 Update 1 includes the MinIO Client Plugin. You have to
+VMware vSphere 7 Update 1 XXX includes the MinIO Client Plugin. You have to
 explicitly enable the plugin from the :guilabel:`Client Plugins` view in
 vCenter. 
 
