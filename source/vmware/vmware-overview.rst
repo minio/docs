@@ -43,20 +43,18 @@ services like MinIO.
 
 vSAN SNA Drives
    Allows creating vSAN storage objects that are co-located with their
-   associated compute resources. The MinIO tenant can utilize the local storage
-   with less overhead as compared to traditional vSAN networked storage.
-
-   vSAN SNA drives are ideal for clusters where the MinIO Tenant must share
-   the physical infrastructure with other stateful or stateless workloads.
+   associated compute resources. Each MinIO pod only uses drives that are local
+   to the node it is running on. The pod relies on MinIO :ref:`Erasure Coding
+   <minio-erasure-coding>` to provide durability or availability of data instead
+   of vSAN.
 
 vSAN Direct
    Allows creating independent datastores on every disk attached to a node,
    where applications running on that node can have direct access to those
    disks. The MinIO Tenant can fully utilize the available throughput of the
-   drive with none of the overhead associated to distributed storage.
+   locally attached disk without the overhead of network-attached storage.
 
-   vSAN Direct drives are ideal for clusters dedicated to running the MinIO
-   Tenant.
+   vSAN Direct drives are ideal for running MinIO Tenants.
 
 While MinIO can make efficient use of either data path, vSAN Direct is well aligned with MinIO's best practices around ensuring a fast path between
 a MinIO process and its storage. vSAN Direct also allows for independent fault domains for the disks used by a MinIO Pod.
