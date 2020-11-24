@@ -45,8 +45,8 @@ vSAN SNA Drives
    Allows creating vSAN storage objects that are co-located with their
    associated compute resources. Each MinIO pod only uses drives that are local
    to the node it is running on. The pod relies on MinIO :ref:`Erasure Coding
-   <minio-erasure-coding>` to provide durability or availability of data instead
-   of vSAN.
+   <minio-erasure-coding>` for durability or availability of data and
+   makes no use of vSAN durability or availability features.
 
 vSAN Direct
    Allows creating independent datastores on every disk attached to a node,
@@ -56,8 +56,10 @@ vSAN Direct
 
    vSAN Direct drives are ideal for running MinIO Tenants.
 
-While MinIO can make efficient use of either data path, vSAN Direct is well aligned with MinIO's best practices around ensuring a fast path between
-a MinIO process and its storage. vSAN Direct also allows for independent fault domains for the disks used by a MinIO Pod.
+While MinIO can make efficient use of either data path, vSAN Direct is aligned
+with MinIO's best practices around ensuring a fast path between a MinIO process
+and its storage. vSAN Direct also allows for independent fault domains for the
+disks used by a MinIO Pod.
 
 MinIO recommends using only *one* type of vSAN data path for all drives intended
 for use by a given MinIO Tenant. vSphere administrators should create
@@ -298,11 +300,18 @@ displays the Access Keys and Secret Keys for the MinIO Tenant and MinIO Console.
 
 IMAGE
 
+- The :guilabel:`MinIO's Access Key` and :guilabel:`MinIO's Secret Key` 
+  are the credentials for the :ref:`minio-users-root`. 
+
+- The :guilabel:`Console's Access Key` and :guilabel:`Console's Secret Key`
+  are the credentials for accessing the MinIO Console.
+
 MinIO displays the Access Keys *once*. Click the :guilabel:`Copy Credentials`
 button to copy the keys to your system clipboard. 
 
-Store the keys in a secure location, such as a password-protected key vault.
-Ensure only authorized users can access the generated keys. 
+MinIO displays the Access Keys *once*. Click the :guilabel:`Copy Credentials`
+button to copy the keys to your system clipboard. Store the keys in a secure
+location, such as a password-protected key vault. 
 
 .. important::
 
