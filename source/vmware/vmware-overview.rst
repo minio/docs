@@ -20,8 +20,7 @@ to private or hybrid cloud infrastructures.
 Starting with VMware vSphere 7 Update 1 (7U1), vSphere includes MinIO's
 first-party integration through the vSAN Data Persistence Platform (DPP). 
 IT administrators using vSphere can provision high-performance multi-tenant
-object storage entirely through the vCenter interface and with minimal
-manual interaction with the underlying Kubernetes infrastructure. 
+object storage entirely through the vCenter interface. 
 
 IMAGE
 
@@ -61,7 +60,7 @@ with MinIO's best practices around ensuring a fast path between a MinIO process
 and its storage. vSAN Direct also allows for independent fault domains for the
 disks used by a MinIO Pod.
 
-MinIO recommends using only *one* type of vSAN data path for all drives intended
+MinIO only uses *one* type of vSAN data path for all drives intended
 for use by a given MinIO Tenant. vSphere administrators should create
 a :vmware7-docs:`Storage Policy
 <com.vmware.vsphere.storage.doc/GUID-720298C6-ED3A-4E80-87E8-076FFF02655A.html>`
@@ -195,8 +194,6 @@ configuration fields:
 
    * - :guilabel:`Storage Class`
      - Select an available Storage Class associated to the specified namespace.
-       Ensure the Storage Class provides access to the vSAN Direct Configuration
-       disks in the cluster.
 
 Click :guilabel:`Next` after entering the requested information.
 
