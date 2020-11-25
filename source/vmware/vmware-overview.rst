@@ -118,8 +118,8 @@ This procedure assumes the following:
    * - Component
      - 
 
-   * - VMware vSphere v7 Update 1
-     - 
+   * - VMware vCenter v7 Update 1
+     -
 
    * - VMware ESXi Hosts
      - Ensure the cluster has *at least* as many ESXi hosts as MinIO nodes
@@ -127,24 +127,18 @@ This procedure assumes the following:
 
    * - :vmware7-docs:`Storage Policy 
        <com.vmware.vsphere.storage.doc/GUID-720298C6-ED3A-4E80-87E8-076FFF02655A.html>` 
-     - MinIO ensures any PVCs generated to support the Tenant bind *only* to
-       PVs associated to the specified storage policy. 
+     - MinIO uses the disks associated to an available Storage Policy when
+       provisioning PVCs. 
 
-       The Storage Policy should point to a group of *either*:
+       Select either a vSAN Direct *or* vSAN SNA-based storage policy.
 
-       - vSAN Direct disks *or*
-
-       - vSAN SNA disks
-
-       The disks *must* be directly connected to the ESXi hosts onto which MinIO
-       deploys. MinIO strongly recommends *against* provisioning networked
-       storage for use with the Tenant.
+       vSAN Direct and vSAN SNA require using locally-attached disks. MinIO
+       strongly recommends *against* using networked storage.
 
    * - :vmware7-docs:`Namespace 
        <vmware-vsphere-with-tanzu/GUID-1544C9FE-0B23-434E-B823-C59EFC2F7309.html>`
        
-     - MinIO recommends creating a new namespace for each MinIO Tenant you
-       deploy into the cluster.
+     - MinIO supports only *one* MinIO Tenant per Kubernetes Namespace.
 
        Ensure the namespace has access to the Storage Policy associated to the
        vSAN Direct or vSAN SNA disks.
