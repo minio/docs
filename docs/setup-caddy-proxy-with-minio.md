@@ -17,13 +17,12 @@ Install Caddy Server from [here](https://caddyserver.com/download).
 Create a caddy configuration file as below, change the ip addresses according to your local minio and DNS configuration.
 
 ```sh
-your.public.com
-
-proxy / localhost:9000 {
-    header_upstream X-Forwarded-Proto {scheme}
-    header_upstream X-Forwarded-Host {host}
-    header_upstream Host {host}
-    health_check /minio/health/ready
+your.public.com {
+    reverse_proxy localhost:9000 {
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-Host {host}
+        header_up Host {host}
+    }
 }
 ```
 
