@@ -17,12 +17,12 @@ Caddy是一个类似于Apache，nginx或者lighttpd的web服务器。Caddy的目
 如下创建Caddy配置文件，根据你的本地minio和DNS配置更改IP地址。
 
 ```sh
-your.public.com
-
-proxy / localhost:9000 {
-    header_upstream X-Forwarded-Proto {scheme}
-    header_upstream X-Forwarded-Host {host}
-    header_upstream Host {host}
+your.public.com {
+    reverse_proxy localhost:9000 {
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-Host {host}
+        header_up Host {host}
+    }
 }
 ```
 
