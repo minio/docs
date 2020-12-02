@@ -5,6 +5,8 @@
 
 {# Override content block #}
 
+{%- set url_root = pathto('index', 1) %}
+
 {%- macro miniosidebar() %}
       {%- if render_sidebar %}
       <div class="sphinxsidebarwrapper" role="navigation">
@@ -53,6 +55,9 @@
 {%- block content %}
 
    <div class="left column">
+      <h3>
+         <a class="index-link" href="{{ pathto('index') }}">{{ shorttitle }}</a>
+       </h3>
       <button class="sphinxsidebarbutton button-collapse">Collapse x</button>
       {{ miniosidebar() }}
    </div>

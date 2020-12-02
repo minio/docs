@@ -22,7 +22,7 @@ sys.path.append(os.path.abspath('../sphinxext'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'MinIO Documentation'
+project = 'MinIO Hybrid Cloud'
 copyright = '2020, MinIO'
 author = 'Ravind Kumar'
 
@@ -96,6 +96,8 @@ html_theme_options = {
     'fixed_sidebar' : 'true',
     'show_relbars': 'true',
 }
+
+html_short_title = "MinIO Object Storage"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

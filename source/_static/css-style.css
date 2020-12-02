@@ -13,6 +13,7 @@
   --minio-nautical: #00303f;
   --minio-meridian: #132742;
   --minio-glacier: #edf7f7;
+  font-family: Mark, Helvetica, sans-serif;
 
 }
 
@@ -70,6 +71,7 @@ body div.left li.toctree-l2 a {
 body div.left div.sphinxsidebarwrapper {
    padding: 0 0 0 5px;
    margin-top: 15px;
+   font-size: 14px;
 }
 
 body div.left div.sphinxsidebarwrapper ul {
@@ -78,6 +80,7 @@ body div.left div.sphinxsidebarwrapper ul {
 }
 
 body div.left button.sphinxsidebarbutton {
+   font-size: 12px;
    width: 100px;
    background: none;
    border: none;
@@ -126,6 +129,22 @@ body div.left div.searchformwrapper {
 
 #docs-search {
    padding-left: 10px;
+   font-size: 14px;
+   height: 25px;
+}
+
+body div.left a.index-link {
+   padding-left: 10px;
+   text-decoration: none;
+   color: black;
+   text-transform: uppercase;
+   font-size: 14px;
+
+}
+
+#docs-search-go {
+   padding-left: 10px;
+   font-size: 14px;
 }
 
 /* Center Column CSS */
