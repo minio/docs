@@ -20,6 +20,8 @@ Deploy a Tenant using the MinIO Console
 This procedure documents deploying a MinIO Tenant using the 
 MinIO Operator Console. 
 
+.. Return to this when Operator Console is ready.
+
 Deploy a Tenant using the MinIO Kubernetes Plugin
 -------------------------------------------------
 
@@ -51,11 +53,23 @@ specify the namespace you want to deploy the MinIO operator into.
 2) Configure the Persistent Volumes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create a :kube-docs:`Persistent Volume (PV) <concepts/storage/volumes/>`
-for each drive on each node. 
+MinIO automatically generates one 
+:kube-docs:`Persistent Volume Claim (PVC) 
+<concepts/storage/persistent-volumes/#persistentvolumeclaims>` for each 
+volume in the cluster. The cluster *must* have an equal number of 
+:kube-docs:`Persistent Volumes (PV) <concepts/storage/volumes/>`. MinIO 
+*strongly recommends* using locally-attached storage to maximize performance and 
+throughput.
 
-MinIO recommends using :kube-docs:`local <concepts/storage/volumes/#local>` PVs
-to ensure best performance and operations:
+The following steps create the necessary 
+:kube-docs:`StorageClass <concepts/storage/storage-classes/>` and 
+:kube-docs:`local <concepts/storage/volumes/#local>` Persistent Volumes (PV)
+resources such that each MinIO Pod and their associated storage are local 
+to the same Node.
+
+You can skip this step if the cluster already has local ``PV`` resources and a
+``StorageClass`` configured for use by the MinIO Tenant.
+
 
 a. Create a ``StorageClass`` for the MinIO ``local`` Volumes
 ````````````````````````````````````````````````````````````
@@ -80,7 +94,7 @@ a. Create a ``StorageClass`` for the MinIO ``local`` Volumes
    ``WaitForFirstConsumer`` to ensure correct binding of each pod's 
    :kube-docs:`Persistent Volume Claims (PVC) 
    <concepts/storage/persistent-volumes/#persistentvolumeclaims>` to the
-   Node ``PV``.
+   Node's local ``PV``.
 
 b. Create the Required Persistent Volumes
 `````````````````````````````````````````
@@ -99,7 +113,7 @@ b. Create the Required Persistent Volumes
          name: PV-NAME
       spec:
          capacity:
-            storage: 100Gi
+            storage: 1Ti
          volumeMode: Filesystem
          accessModes:
          - ReadWriteOnce
@@ -135,7 +149,7 @@ b. Create the Required Persistent Volumes
 
       * - .. code-block:: yaml
 
-             nodeAfinnity:
+             nodeAffinity:
                required: 
                  nodeSelectorTerms:
                  - key: 
@@ -189,11 +203,15 @@ the MinIO Tenant:
 
    kubectl create namespace minio-tenant-1
 
+MinIO supports exactly *one* Tenant per namespace.
+
 4) Create the MinIO Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the :mc-cmd:`kubectl minio tenant create` command to create the MinIO
-Tenant.
+Tenant. The command always uses the latest stable Docker image of the 
+:github:`MinIO Server <minio/releases>` and 
+:github:`MinIO Console <console/releases>`.
 
 The following example creates a 4-node MinIO deployment with a
 total capacity of 16Ti across 16 drives.
@@ -201,13 +219,12 @@ total capacity of 16Ti across 16 drives.
 .. code-block:: shell
    :class: copyable
 
-   kubectl minio tenant create            \
-     --name             minio-tenant-1    \
-     --servers          4                 \
-     --volumes          16                \
-     --capacity         16Ti              \
-     --storageClassName local-storage     \
-     --namespace minio-tenant-1
+   kubectl minio tenant create minio-tenant-1   \
+     --servers                 4                \
+     --volumes                 16               \
+     --capacity                16Ti             \
+     --storageClassName        local-storage    \
+     --namespace               minio-tenant-1
 
 The following table explains each argument specified to the command:
 
@@ -219,7 +236,7 @@ The following table explains each argument specified to the command:
    * - Argument
      - Description
 
-   * - :mc-cmd-option:`~kubectl minio tenant create name`
+   * - :mc-cmd:`minio-tenant-1 <kubectl minio tenant create TENANT_NAME>`
      - The name of the MinIO Tenant which the command creates.
 
    * - :mc-cmd-option:`~kubectl minio tenant create servers`
@@ -240,59 +257,27 @@ The following table explains each argument specified to the command:
    * - :mc-cmd-option:`~kubectl minio tenant create storageClassName`
      - The Kubernetes ``StorageClass`` to use when creating each PVC.
 
-.. leave the broken link alone. Once the IAM sections are fleshed out, this
-  link should work again.
+On success, the command returns the following:
 
-If :mc-cmd:`kubectl minio tenant create` succeeds in creating the MinIO Tenant,
-the command outputs connection information to the terminal. The output includes
-the credentials for the ``minio`` :ref:`root <minio-users-root>` user and
-the MinIO Console Service.
+- The administrative username and password for the Tenant. Store these 
+  credentials in a secure location, such as a password protected 
+  key manager. MinIO does *not* show these credentials again.
 
-.. code-block:: shell
-   :emphasize-lines: 1-3, 7-9
-   
-   Tenant
-   Access Key: 999466bb-8bd6-4d73-8115-61df1b0311f4
-   Secret Key: f8e5ecc3-7657-493b-b967-aaf350daeec9
-   Version: minio/minio:RELEASE.2020-09-26T03-44-56Z
-   ClusterIP Service: minio-tenant-1-internal-service
+- The Service created for connecting to the MinIO Console. The Console
+  supports administrative operations on the Tenant, such as configuring 
+  Identity and Access Management (IAM) and bucket configurations.
 
-   MinIO Console
-   Access Key: e9ae0f3f-18e5-44c6-a2aa-dc2e95497734
-   Secret Key: 498ae13a-2f70-4adf-a38e-730d24327426
-   Version: minio/console:v0.3.14
-   ClusterIP Service: minio-tenant-1-console
-
-:mc-cmd:`kubectl minio` stores all credentials using Kubernetes Secrets, where
-each secret is prefixed with the tenant 
-:mc-cmd:`name <kubectl minio tenant create name>`:
-
-.. code-block:: shell
-
-   > kubectl get secrets --namespace minio-tenant-1
-
-   NAME                            TYPE       DATA   AGE
-
-   minio-tenant-1-console-secret   Opaque     5      123d4h
-   minio-tenant-1-console-tls      Opaque     2      123d4h
-   minio-tenant-1-creds-secret     Opaque     2      123d4h
-   minio-tenant-1-tls              Opaque     2      123d4h
-
-Kubernetes administrators with the correct permissions can view the secret
-contents and extract the access and secret key:
-
-.. code-block:: shell
-
-   kubectl get secrets minio-tenant-1-creds-secret -o yaml
-
-The access key and secret key are ``base64`` encoded. You must decode the
-values prior to specifying them to any S3-compatible tools.
+- The Service created for connecting to the MinIO Tenant. Applications 
+  should use this service for performing operations against the MinIO 
+  Tenant.
 
 5) Configure Access to the Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc:`kubectl minio` creates a service for the MinIO Tenant.
-Use ``kubectl get svc`` to retrieve the service name:
+:mc:`kubectl minio` creates a service for the MinIO Tenant and MinIO Console.
+The output of :mc-cmd:`kubectl minio tenant create` includes the details for 
+both services. You can also use ``kubectl get svc`` to retrieve the service 
+name:
 
 .. code-block:: shell
    :class: copyable
@@ -308,45 +293,44 @@ The command returns output similar to the following:
    minio-tenant-1-console   ClusterIP   10.97.87.X      <none>        9090/TCP,9443/TCP   129m
    minio-tenant-1-hl        ClusterIP   None            <none>        9000/TCP            137m
 
-The created services are visible only within the Kubernetes cluster. External
-access to Kubernetes cluster resources requires creating an 
-:kube-docs:`Ingress object <concepts/services-networking/ingress>` that routes
-traffic from an externally-accessible IP address or hostname to the ``minio``
-service. Configuring Ingress also requires creating an 
-:kube-docs:`Ingress Controller 
-<concepts/services-networking/ingress-controller>` in the cluster.
-Defer to the :kube-docs:`Kubernetes Documentation 
-<concepts/services-networking>` for guidance on creating and configuring the
-required resources for external access to cluster resources.
+- The ``minio`` service corresponds to the MinIO Tenant service. Applications 
+  should use this service for performing operations against the MinIO Tenant.
 
-The following example Ingress object depends on the
-`NGINX Ingress Controller for Kubernetes 
-<https://www.nginx.com/products/nginx/kubernetes-ingress-controller>`__. 
-The example is intended as a *demonstration* for creating an Ingress object and
-may not reflect the configuration and topology of your Kubernetes cluster and
-MinIO tenant. You may need to add or remove listed fields to suit your
-Kubernetes cluster. **Do not** use this example as-is or without modification.
+- The ``minio-tenant-1-console`` service corresponds to the MinIO Console. 
+  Administrators should use this service for accessing the MinIO Console and 
+  performing administrative operations on the MinIO Tenant.
 
-.. code-block:: yaml
+- The ``minio-tenant-1-hl`` corresponds to a headless service used to 
+  facilitate communication between Pods in the Tenant. 
 
-   apiVersion: networking.k8s.io/v1
-   kind: Ingress
-   metadata:
-     name: minio-ingress
-     annotations:
-       kubernetes.io/tls-acme: "true"
-       kubernetes.io/ingress.class: "nginx"
-       nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-   spec:
-     tls:
-     - hosts:
-       - minio.example.com
-       secretName: minio-ingress-tls
-     rules:
-     - host: minio.example.com
-       http:
-         paths:
-         - path: /
-           backend:
-             serviceName: minio
-             servicePort: http
+By default each service is visible only within the Kubernetes cluster. 
+Applications deployed inside the cluster can access the services using the 
+``CLUSTER-IP``. For applications external to the Kubernetes cluster, 
+you must configure the appropriate network rules to expose access to the 
+service. Kubernetes provides multiple options for configuring external access 
+to services. See the Kubernetes documentation on 
+:kube-docs:`Publishing Services (ServiceTypes)
+<concepts/services-networking/service/#publishing-services-service-types>`
+and :kube-docs:`Ingress <concepts/services-networking/ingress/>`
+for more complete information on configuring external access to services.
+
+You can temporarily expose each service using the 
+``kubectl port-forward`` utility. Run the following examples to forward 
+traffic from the local host running ``kubectl`` to the services running inside 
+the Kubernetes cluster.
+
+.. tabs::
+
+   .. tab:: MinIO Tenant
+
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl port-forward service/minio 443:443
+
+   .. tab:: MinIO Console
+   
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl port-forward service/minio-tenant-1-console 9443:9443

@@ -69,8 +69,6 @@ Run the following command to update :mc:`kubectl minio`:
 
    kubectl krew upgrade
 
-
-
 MinIO Kubernetes Plugin Syntax
 ------------------------------
 
@@ -186,44 +184,54 @@ Create a MinIO Tenant
 .. mc-cmd:: tenant create
    :fullpath:
 
-   Creates a MinIO Tenant using the 
-   :minio-git:`latest release <minio/minio/releases/latest>` of ``minio``:
+   Creates a MinIO Tenant with the following resources in the Kubernetes
+   cluster. :mc-cmd:`~kubectl minio tenant create` always uses the 
+   latest stable version of the 
+   :github:`MinIO Server <minio/releases>` and 
+   :github:`MinIO Console <console/releases>`.
 
-   ``minio/minio:latest``
+   .. tabs::
 
-   The command creates the following resources in the Kubernetes cluster. 
+      .. tab:: SYNTAX
 
-   - The MinIO Tenant.
+         The command has the following syntax:
 
-   - Persistent Volume Claims (``PVC``) for each  
-     :mc-cmd:`volume <kubectl minio tenant create volumes>` in the tenant.
+         .. code-block:: shell
 
-   - Pods for each
-     :mc-cmd:`server <kubectl minio tenant create servers>` in the tenant.
+            kubectl minio tenant create TENANT_NAME FLAGS [ FLAGS ]
 
-   - Kubernetes secrets for storing access keys and secret keys. Each
-     secret is prefixed with the Tenant name.
+      .. tab:: EXAMPLE
 
-   - The MinIO Console Service (MCS). See the :minio-git:`console <console>` 
-     Github repository for more information on MCS.
+         The following example creates a MinIO Tenant consisting of 
+         4 MinIO servers with 8 drives each and a total capacity of 
+         32Ti:
 
-   The command has the following syntax:
+         .. code-block:: shell
 
-   .. code-block:: shell
-      :class: copyable
+            kubectl minio tenant create minio-tenant-1 \
+              --servers          4                     \
+              --volumes          8                     \
+              --capacity         32Ti                  \
+              --namespace        minio-tenant-1        \
+              --storageClassName local-storage
 
-      kubectl minio tenant create          \
-        --names            NAME            \
-        --servers          SERVERS         \
-        --volumes          VOLUMES         \
-        --capacity         CAPACITY        \
-        --storageClassName STORAGECLASS    \
-        [OPTIONAL_FLAGS]
+   On success, the command returns the following:
+
+   - The administrative username and password for the Tenant. Store these 
+     credentials in a secure location, such as a password protected 
+     key manager. MinIO does *not* show these credentials again.
+
+   - The Service created for connecting to the MinIO Console. The Console
+     supports administrative operations on the Tenant, such as configuring 
+     Identity and Access Management (IAM) and bucket configurations.
+
+   - The Service created for connecting to the MinIO Tenant. Applications 
+     should use this service for performing operations against the MinIO 
+     Tenant.
 
    The command supports the following arguments:
 
-   .. mc-cmd:: name
-      :option:
+   .. mc-cmd:: TENANT_NAME
 
       *Required*
 
@@ -248,25 +256,31 @@ Create a MinIO Tenant
 
       *Required*
 
-      The number of volumes in the MinIO tenant. :mc:`kubectl minio`
-      generates one Persistent Volume Claim (``PVC``) for each volume.
-      :mc:`kubectl minio` divides the 
-      :mc-cmd-option:`~kubectl minio tenant create capacity` by the number of
-      volumes to determine the amount of ``resources.requests.storage`` to
-      set for each ``PVC``.
-      
-      :mc:`kubectl minio` determines
-      the number of ``PVC`` to associate to each ``minio`` server by dividing
-      :mc-cmd-option:`~kubectl minio tenant create volumes` by 
-      :mc-cmd-option:`~kubectl minio tenant create servers`.
+      The number of volumes in the MinIO tenant. 
+      :mc-cmd:`kubectl minio tenant create`
+      generates one :kube-docs:`Persistent Volume Claim (PVC) 
+      <concepts/storage/persistent-volumes/#persistentvolumeclaims>` for each 
+      volume. 
 
-      :mc:`kubectl minio` also configures each ``PVC`` with node-aware
-      selectors, such that the ``minio`` server process uses a ``PVC``
-      which correspond to a ``local`` Persistent Volume (``PV``) on the 
-      same node running that process. This ensures that each process
-      uses local disks for optimal performance.
+      The number of volumes affects both the requested storage of each 
+      ``PVC`` *and* the number of ``PVC`` to associate to each MinIO Pod in 
+      the cluster:
 
-      If the specified number of volumes exceeds the number of 
+      - The command :mc:`kubectl minio` divides the 
+        :mc-cmd-option:`~kubectl minio tenant create capacity` by the number of 
+        volumes to determine the amount of ``resources.requests.storage`` to set 
+        for each ``PVC``.
+
+      - :mc:`kubectl minio` determines the number of ``PVC`` to associate to 
+        each ``minio`` server by dividing
+        :mc-cmd-option:`~kubectl minio tenant create volumes` by 
+        :mc-cmd-option:`~kubectl minio tenant create servers`.
+
+      The command generates each ``PVC`` with Pod-specific selectors, such that
+      each Pod only uses ``PV`` that are locally-attached to the node running
+      that Pod.
+
+      If the specified number of volumes exceeds the number of unbound
       ``PV`` available on the cluster, :mc:`kubectl minio tenant create`
       hangs and waits until the required ``PV`` exist.
 
@@ -281,14 +295,14 @@ Create a MinIO Tenant
       amount of ``resources.requests.storage`` to set for each
       Persistent Volume Claim (``PVC``).
 
-      If the existing Persistent Volumes (``PV``) in the cluster cannot
-      satisfy the requested storage, :mc:`kubectl minio tenant create`
-      hangs and waits until the required storage exists.
+      If no Persistent Volumes (``PV``) can satisfy the requested storage,
+      :mc:`kubectl minio tenant create` hangs and waits until the required
+      storage exists.
 
    .. mc-cmd:: storageClassName
       :option:
 
-      *Required*
+      *Optional*
 
       The name of the Kubernetes 
       :kube-docs:`Storage Class <concepts/storage/storage-classes/>` to use
@@ -298,10 +312,25 @@ Create a MinIO Tenant
       *must* match the ``StorageClassName`` of the Persistent Volumes (``PVs``)
       to which the ``PVCs`` should bind.
 
+      MinIO strongly recommends creating a Storage Class that corresponds to 
+      locally-attached volumes on the host machines on which the Tenant 
+      deploys. This ensures each pod can use locally-attached storage for 
+      maximum performance and throughput. See the 
+      :doc:`/tutorials/deploy-minio-tenant` tutorial for guidance 
+      on creating Storage Classes for supporting the MinIO Tenant.
+
+      Defaults to ``default``.
+
    .. mc-cmd:: namespace
       :option:
 
-      The namespace in which to create the MinIO Tenant. 
+      *Optional*
+
+      The namespace in which to create the MinIO Tenant and its associated
+      resources. 
+      
+      MinIO supports exactly *one* MinIO Tenant per namespace. Create
+      a unique namespace for each MinIO Tenant deployed into the cluster.
 
       Defaults to ``minio``.
 
@@ -309,13 +338,14 @@ Create a MinIO Tenant
       :option:
 
       The name of the Kubernetes Secret which contains the 
-      MinIO Key Encryption Service (KES) configuration.
+      MinIO Key Encryption Service (KES) configuration. Required for 
+      enabling Server Side Encryption of objects (SSE-S3).
 
    .. mc-cmd:: output
       :option:
 
-      Outputs the generated ``YAML`` objects to ``STDOUT`` for further
-      customization. 
+      Outputs the generated ``YAML``-formatted specification objects to
+      ``STDOUT`` for further customization. 
       
       :mc-cmd-option:`~kubectl minio tenant create output` does 
       **not** create the MinIO Tenant. Use ``kubectl apply -f <FILE>`` to
@@ -331,33 +361,39 @@ Expand a MinIO Tenant
 .. mc-cmd:: tenant expand
    :fullpath:
 
-   Adds a new zone to an existing MinIO Tenant.
+   Extends the total capacity of a MinIO Tenant by adding a new Pool. A Pool
+   consists of an independent set of pods running the MinIO Server and 
+   MinIO Console. The new pool uses the same Docker image for the 
+   MinIO Server and Console as the existing Tenant.
 
-   The command creates the new zone using the 
-   :minio-git:`latest release <minio/minio/releases/latest>` of ``minio``:
+   .. tabs::
 
-   ``minio/minio:latest``
+      .. tab:: SYNTAX
 
-   Consider using :mc-cmd:`kubectl minio tenant upgrade` to upgrade the
-   MinIO tenant *before* adding the new zone to ensure consistency across the
-   entire tenant.
+         The command has the following syntax:
 
-   The command has the following syntax:
+         .. code-block:: shell
 
-   .. code-block:: shell
-      :class: copyable
+            kubectl minio tenant expand TENANT_NAME --REQ_FLAGS [OPT_FLAGS]
 
-      kubectl minio tenant expand  \
-        --names    NAME            \
-        --servers  SERVERS         \
-        --volumes  VOLUMES         \
-        --capacity CAPACITY        \
-        [OPTIONAL_FLAGS]
+      .. tab:: EXAMPLE
+
+         The following example expands a MinIO Tenant with a Pool consisting of 
+         4 MinIO servers with 8 drives each and a total additional capacity of 
+         32Ti:
+
+         .. code-block:: shell
+
+            kubectl minio tenant expand minio-tenant-1 \
+              --servers          4                     \
+              --volumes          8                     \
+              --capacity         32Ti                  \
+              --namespace        minio-tenant-1        \
+              --storageClassName local-storage
 
    The command supports the following arguments:
 
-   .. mc-cmd:: name
-      :option:
+   .. mc-cmd:: TENANT_NAME
 
       *Required*
 
@@ -368,39 +404,41 @@ Expand a MinIO Tenant
 
       *Required*
 
-      The number of ``minio`` servers to deploy in the new MinIO Tenant zone.
+      The number of ``minio`` servers to deploy in the new MinIO Tenant Pool.
       
       Ensure that the specified number of 
       :mc-cmd-option:`~kubectl minio tenant expand servers` does *not* exceed
-      the number of unused nodes in the Kubernetes cluster. MinIO strongly
-      recommends sizing the cluster to have one node per MinIO server in the new
-      zone.
+      the number of available nodes in the Kubernetes cluster.
 
    .. mc-cmd:: volumes
       :option:
 
       *Required*
 
-      The number of volumes in the new MinIO Tenant zone. 
+      The number of volumes in the new MinIO Tenant Pool. 
       :mc:`kubectl minio` generates one Persistent Volume Claim (``PVC``) for
-      each volume. :mc:`kubectl minio` divides the 
-      :mc-cmd-option:`~kubectl minio tenant expand capacity` by the number of
-      volumes to determine the amount of ``resources.requests.storage`` to set
-      for each ``PVC``.
-      
-      :mc:`kubectl minio` determines
-      the number of ``PVC`` to associate to each ``minio`` server by dividing
-      :mc-cmd-option:`~kubectl minio tenant expand volumes` by 
-      :mc-cmd-option:`~kubectl minio tenant expand servers`.
+      each volume. 
 
-      :mc:`kubectl minio` also configures each ``PVC`` with node-aware
-      selectors, such that the ``minio`` server process uses a ``PVC``
-      which correspond to a ``local`` Persistent Volume (``PV``) on the 
-      same node running that process. This ensures that each process
-      uses local disks for optimal performance.
+      The number of volumes affects both the requested storage of each 
+      ``PVC`` *and* the number of ``PVC`` to associate to each MinIO Pod in 
+      the new Pool:
 
-      If the specified number of volumes exceeds the number of 
-      ``PV`` available on the cluster, :mc:`kubectl minio tenant expand`
+      - The command :mc:`kubectl minio` divides the 
+        :mc-cmd-option:`~kubectl minio tenant expand capacity` by the number of 
+        volumes to determine the amount of ``resources.requests.storage`` to set 
+        for each ``PVC``.
+
+      - :mc:`kubectl minio` determines the number of ``PVC`` to associate to 
+        each ``minio`` server by dividing
+        :mc-cmd-option:`~kubectl minio tenant expand volumes` by 
+        :mc-cmd-option:`~kubectl minio tenant expand servers`.
+
+      The command generates each ``PVC`` with Pod-specific selectors, such that
+      each Pod only uses ``PV`` that are locally-attached to the node running
+      that Pod.
+
+      If the specified number of volumes exceeds the number of unbound
+      ``PV`` available in the cluster, :mc:`kubectl minio tenant expand`
       hangs and waits until the required ``PV`` exist.
 
    .. mc-cmd:: capacity
@@ -408,20 +446,20 @@ Expand a MinIO Tenant
 
       *Required*
 
-      The total capacity of the new MinIO Tenant zone. :mc:`kubectl minio` 
+      The total capacity of the new MinIO Tenant Pool. :mc:`kubectl minio` 
       divides the capacity by the number of
       :mc-cmd-option:`~kubectl minio tenant expand volumes` to determine the 
       amount of ``resources.requests.storage`` to set for each
       Persistent Volume Claim (``PVC``).
 
-      If the existing Persistent Volumes (``PV``) in the cluster cannot
-      satisfy the requested storage, :mc:`kubectl minio tenant expand`
-      hangs and waits until the required storage exists.
+      If the existing Persistent Volumes (``PV``) can satisfy the requested
+      storage, :mc:`kubectl minio tenant expand` hangs and waits until the
+      required storage exists.
 
    .. mc-cmd:: namespace
       :option:
 
-      The namespace in which to create the new MinIO Tenant zone. The namespace
+      The namespace in which to create the new MinIO Tenant Pool. The namespace
       *must* match that of the MinIO Tenant being extended.
 
       Defaults to ``minio``.
@@ -433,11 +471,11 @@ Expand a MinIO Tenant
       customization. 
       
       :mc-cmd-option:`~kubectl minio tenant expand output` does **not** create
-      the new MinIO Tenant zone. Use ``kubectl apply -f <FILE>`` to manually
+      the new MinIO Tenant Pool. Use ``kubectl apply -f <FILE>`` to manually
       create the MinIO tenant using the generated file.
 
-Get MinIO Tenant Zones
-~~~~~~~~~~~~~~~~~~~~~~
+Get MinIO Tenant Details
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/facts-kubectl-plugin.rst
    :start-after: start-kubectl-minio-requires-operator-desc
@@ -446,19 +484,35 @@ Get MinIO Tenant Zones
 .. mc-cmd:: tenant info
    :fullpath:
 
-   Lists all existing MinIO zones in a MinIO Tenant.
+   Displays information on a MinIO Tenant, including but not limited to:
 
-   The command has the following syntax:
+   - The total capacity of the Tenant
+   - The version of MinIO server and MinIO Console running on the Tenant
+   - The configuration of each Pool in the Tenant.
 
-   .. code-block:: shell
-      :class: copyable
+   .. tabs::
 
-      kubectl minio tenant info --names NAME [OPTIONAL_FLAGS]
+      .. tab:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+
+            kubectl minio tenant info TENANT_NAME [ FLAGS ]
+
+      .. tab:: EXAMPLE
+
+         The following example retrieves the information of the MinIO 
+         Tenant ``minio-tenant-1`` in the namespace ``minio-tenant-1``.
+
+         .. code-block:: shell
+
+            kubectl minio tenant info minio-tenant-1 \
+              --namespace minio-tenant-1 
 
    The command supports the following arguments:
 
-   .. mc-cmd:: name
-      :option:
+   .. mc-cmd:: TENANT_NAME
 
       *Required*
 
@@ -467,6 +521,8 @@ Get MinIO Tenant Zones
 
    .. mc-cmd:: namespace
       :option:
+
+      *Optional*
 
       The namespace in which to look for the MinIO Tenant.
 
@@ -486,25 +542,43 @@ Upgrade MinIO Tenant
    
    .. important::
 
-      MinIO upgrades *all* ``minio`` server processes at once. This may
-      result in a brief period of downtime if a majority (``n/2-1``) of 
-      servers are offline at the same time.
+      MinIO upgrades the image used by all pods in the Tenant at once. This may
+      result in downtime until the upgrade process completes.
 
-   The command has the following syntax:
+   .. tabs::
 
-   .. code-block:: shell
-      :class: copyable
+      .. tab:: SYNTAX
 
-      kubectl minio tenant upgrade --names NAME [OPTIONAL_FLAGS]
+         The command has the following syntax:
+
+         .. code-block:: shell
+
+            kubectl minio tenant upgrade TENANT_NAME FLAGS [FLAGS]
+
+      .. tab:: EXAMPLE
+
+         The following example upgrades a MinIO Tenant to use the latest 
+         stable version of the MinIO server:
+
+         .. code-block:: shell
+
+            kubectl minio tenant upgrade minio-tenant-1 \
+              --image  minio/minio
 
    The command supports the following arguments:
 
-   .. mc-cmd:: name
-      :option:
+   .. mc-cmd:: TENANT_NAME
 
       *Required*
 
       The name of the MinIO Tenant which the command updates.
+
+   .. mc-cmd:: image
+      :option:
+
+      *Required*
+
+      The Docker image to use for upgrading the MinIO Tenant.
 
    .. mc-cmd:: namespace
       :option:
@@ -512,6 +586,16 @@ Upgrade MinIO Tenant
       The namespace in which to look for the MinIO Tenant.
 
       Defaults to ``minio``.
+
+   .. mc-cmd:: output
+      :option:
+
+      Outputs the generated ``YAML``-formatted specification objects to
+      ``STDOUT`` for further customization. 
+      
+      :mc-cmd-option:`~kubectl minio tenant upgrade output` does 
+      **not** upgrade the MinIO Tenant. Use ``kubectl apply -f <FILE>`` to
+      manually upgrade the MinIO tenant using the generated file.
 
 Delete a MinIO Tenant
 ~~~~~~~~~~~~~~~~~~~~~
@@ -525,27 +609,47 @@ Delete a MinIO Tenant
 
    Deletes the MinIO Tenant and its associated resources.
 
-   Kubernetes only deletes the Minio Tenant Persistent Volume Claims (``PVC``)
-   if the underlying Persistent Volumes (``PV``) were created with a 
-   reclaim policy of ``recycle`` or ``delete``. ``PV`` with a reclaim policy of
-   ``retain`` require manual deletion of their associated ``PVC``.
-   
+   The delete behavior of each Persistent Volume Claims (``PVC``) generated by the 
+   Tenant depends on the 
+   :kube-docs:`Reclaim Policy 
+   <concepts/storage/persistent-volumes/#reclaim-policy>` of its bound 
+   Persistent Volume (``PV``):
+
+   - For ``recycle`` or ``delete`` policies, the command deletes the ``PVC``.
+
+   - For ``retain``, the command retains the ``PVC``.
+
    Deletion of the underlying ``PV``, whether automatic or manual, results in
    the loss of any objects stored on the MinIO Tenant. Perform all due 
    diligence in ensuring the safety of stored data *prior* to deleting the 
    tenant.
 
-   The command has the following syntax:
+   .. tabs::
+
+      .. tab:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+
+            kubectl minio tenant delete TENANT_NAME FLAGS [ FLAGS ]
+
+      .. tab:: EXAMPLE
+
+            kubectl minio tenant delete minio-tenant-1 \
+              --namespace minio-tenant-1
+
+   The command includes a confirmation prompt that requires explicit 
+   approval of the delete operation.
 
    .. code-block:: shell
       :class: copyable
 
-      kubectl minio tenant delete --names NAME [OPTIONAL_FLAGS]
+      kubectl minio tenant delete --names TENANT_NAME [OPTIONAL_FLAGS]
 
    The command supports the following arguments:
 
-   .. mc-cmd:: name
-      :option:
+   .. mc-cmd:: TENANT_NAME
 
       *Required*
 
@@ -553,6 +657,8 @@ Delete a MinIO Tenant
 
    .. mc-cmd:: namespace
       :option:
+
+      *Optional*
 
       The namespace in which to look for the MinIO Tenant.
 
