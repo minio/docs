@@ -159,6 +159,7 @@ Kubernetes Object API to support creating MinIO ``Tenant`` objects.
             :kubeconf:`~spec.console`: <object>
             :kubeconf:`~spec.credsSecret`: <object>
             :kubeconf:`~spec.env`: <object>
+            :kubeconf:`~spec.externalCaCertSecret`: <array>
             :kubeconf:`~spec.externalCertSecret`: <array>
             :kubeconf:`~spec.externalClientCertSecret`: <object>
             :kubeconf:`~spec.image`: minio/minio:latest
@@ -168,7 +169,6 @@ Kubernetes Object API to support creating MinIO ``Tenant`` objects.
             :kubeconf:`~spec.podManagementPolicy`: <string>
             :kubeconf:`~spec.priorityClassName`: <string>
             :kubeconf:`~spec.requestAutoCert`: <boolean>
-            :kubeconf:`~spec.s3`: <object>
             :kubeconf:`~spec.securityContext`: <object>
             :kubeconf:`~spec.pools`: <array>
             :kubeconf:`~spec.serviceAccountName`: <string>
@@ -747,8 +747,11 @@ of a MinIO Tenant, including automatic TLS certificate generation.
       :kubeconf:`~spec.requestAutoCert`: <boolean>
       :kubeconf:`~spec.certConfig`:
          :kubeconf:`~spec.certConfig.commonName`: <string>
-         :kubeconf:`~spec.certConfig.dnsNames`: <string>
-         :kubeconf:`~spec.certConfig.organizationName`: <string>
+         :kubeconf:`~spec.certConfig.dnsNames`: <array>
+         :kubeconf:`~spec.certConfig.organizationName`: <array>
+         :kubeconf:`~spec.externalCaCertSecret`:
+            - name: <string>
+              type: kubernetes.io/tls
          :kubeconf:`~spec.externalCertSecret`: 
             - name: <string>
               type: kubernetes.io/tls
@@ -760,16 +763,28 @@ of a MinIO Tenant, including automatic TLS certificate generation.
 
    *Optional*
 
-   Specify ``true`` to enable automatic TLS certificate generation and
-   signing using the Kubernetes ``certificates.k8s.io`` API. The MinIO Operator
-   generates *self-signed* x.509 certificates. 
+   Enables or disables automatic generation of self-signed x.509 certificates 
+   for supporting TLS on pods and services in the MinIO Tenant. 
+
+   - Specify ``true`` to enable (Default).
+   - Specify ``false`` to disable.
+
+   Certificates generated as part of :kubeconf:`~spec.requestAutoCert` are 
+   *always* self-signed. Use :kubeconf:`~spec.externalCertSecret` to 
+   specify custom x.509 certificates for use by the MinIO Tenant, such as 
+   certificates signed by a trusted Certificate Authority (CA).
+
+   - Use the :kubeconf:`~spec.externalCertSecret` field to specify
+     custom x.509 certificates for use by pods and services in the MinIO Tenant. 
+
+   - Use the :kubeconf:`~spec.externalCaCertSecret` field to specify
+     Certificate Authorities (CA) for the MinIO Tenant to use when verifying 
+     the x.509 certificates presented by a client.
    
    See the Kubernetes documentation on
    :kube-docs:`Manage TLS Certificates in a Cluster 
-   <tasks/tls/managing-tls-in-a-cluster/>` for more information.
-
-   This field is **mutually exclusive** with 
-   :kubeconf:`spec.externalCertSecret`.
+   <tasks/tls/managing-tls-in-a-cluster/>` for more information on certificate
+   generation in Kubernetes clusters.
 
 .. kubeconf:: spec.certConfig
 
@@ -818,15 +833,39 @@ of a MinIO Tenant, including automatic TLS certificate generation.
    If :kubeconf:`spec.requestAutoCert` is ``false`` or omitted, this field has
    no effect.
 
+.. kubeconf:: spec.externalCaCertSecret
+
+   *Optional*
+
+   One or more Kubernetes secrets containing Certificate Authority (CA)
+   certificates used by MinIO for validating the TLS certificate presented by
+   external services. Required if using MinIO integrations where the service TLS
+   certificates are signed by an unknown CA.
+
+   Specify an array where each element contains the following fields:
+
+   - ``names`` specifies the name of the Kubernetes secret, and
+   - ``types`` specifies ``kubernetes.io/tls``
+
+   .. code-block:: yaml
+
+      spec:
+         externalCaCertSecret:
+            - name: tenant-external-client-cert-secret-name
+              type: kubernetes.io/tls
+
 .. kubeconf:: spec.externalCertSecret
 
    *Optional*
 
-   One or more Kubernetes secrets that contain custom TLS certificate and 
-   private key pairs. Use this field for specifying certificates signed by
-   a Certificate Authority (CA) of your choice.
+   One or more Kubernetes secrets that contain custom TLS certificate and
+   private key pairs. The Operator uses these certificates when configuring Pod
+   TLS and for enabling TLS with SNI support on each pod. Specifically, MinIO
+   copies all specified certificates to each pod and service in the cluster.
+   When the pod/service responds to a TLS connection request, it uses 
+   SNI to select the certificate with matching ``subjectAlternativeName``.
 
-   Each item in the array contains an object where:
+   Specify an array where each element contains the following fields:
 
    - ``names`` specifies the name of the Kubernetes secret, and
    - ``types`` specifies ``kubernetes.io/tls``
@@ -845,30 +884,38 @@ of a MinIO Tenant, including automatic TLS certificate generation.
             - name: tenant-external-cert-secret-name
               type: kubernetes.io/tls
 
-   This field is **mutually exclusive** with :kubeconf:`spec.requestAutoCert`.
+   - If :kubeconf:`~spec.requestAutoCert` is enabled, each pod/service has 
+     both auto-generated TLS certificates *and* custom certificates.
+
+   - If :kubeconf:`~spec.requestAutoCert` is *disabled*, any pod/service 
+     whose hostname does not match a custom certificate cannot make 
+     TLS connections. This may result in connectivity errors. Consider 
+     specifying at least one certificate with a wildcard pattern applicable 
+     to any pod or service in the Tenant. 
 
 .. kubeconf:: spec.externalClientCertSecret
 
    *Optional*
 
-   The Kubernetes secret that contains the custom Certificate Authority
-   certificate and private key used to sign x.509 certificates used by clients
-   connecting to the MinIO Tenant. 
+   A Kubernetes secret containing a custom Certificate Authority 
+   certificate and private key used by MinIO pods for performing 
+   mutual TLS (mTLS) authentication to a KES service. The specified 
+   certificate and private key *must* correspond to an identity on the 
+   KES server. For example, specify the certificate and private key 
+   that correspond to the root identity of the 
+   :kubeconf:`spec.kes.kesSecret` configuration.
 
-   Specify an object where:
+   Specify an object containing the following fields:
 
-   - ``names`` specifies the name of the Kubernetes secret, and
-   - ``types`` specifies ``kubernetes.io/tls``
+   - ``names`` - The name of the Kubernetes secret
+   - ``types`` - Set to ``kubernetes.io/tls``
 
-   .. code-block:: yaml
-
-      spec:
-         externalClientCertSecret:
-            name: tenant-external-client-cert-secret-name
-            type: kubernetes.io/tls
-
-
-
+   If the specified certificate does not correspond to an identity 
+   on the KES server, *or* if the identity does not have the required 
+   policies for performing operations on the KES server, the 
+   MinIO pods may encounter unexpected behavior or errors when 
+   attempting to perform KES-related operations such as 
+   Server-Side Encryption (SSE-S3).
 
 MinIO Console Service
 ~~~~~~~~~~~~~~~~~~~~~
@@ -884,6 +931,9 @@ in the MinIO Tenant.
          :kubeconf:`~spec.console.consoleSecret`:
             name: <string>
          :kubeconf:`~spec.console.env`: <array>
+         :kubeconf:`~spec.console.externalCaCertSecret`:
+            - name: <string>
+              type: kubernetes.io/tls
          :kubeconf:`~spec.console.externalCertSecret`: 
             name: <string>
             type: kubernetes.io/tls
@@ -936,14 +986,45 @@ in the MinIO Tenant.
       :start-after: start-kubeapi-envvar
       :end-before: end-kubeapi-envvar
 
+.. kubeconf:: spec.console.externalCaCertSecret
+
+   *Optional*
+
+   One or more Kubernetes secrets containing Certificate Authority (CA)
+   certificates used by MinIO Console for validating TLS connections from
+   connecting clients.
+
+   The MinIO Console rejects connections from clients specifying untrusted x.509
+   certificates by default.
+
+   Specify an array where each element contains the following fields:
+
+   - ``names`` specifies the name of the Kubernetes secret, and
+   - ``types`` specifies ``kubernetes.io/tls``
+
 .. kubeconf:: spec.console.externalCertSecret
 
    *Optional*
 
-   The name of the Kubernetes secret containing the custom Certificate
-   Authority certificate and private key to use for configuring TLS on the 
-   Console object. Specify an object where ``names`` specifies the name
-   of the secret and ``types`` specifies ``kubernetes.io/tls``:
+   One or more Kubernetes secrets that contain custom TLS certificate and
+   private key pairs. The Operator uses these certificates when configuring
+   MinIO Console Pod TLS and for enabling TLS with SNI support on each pod.
+   Specifically, MinIO copies all specified certificates to each Console pod and
+   service in the cluster. When the pod/service responds to a TLS connection
+   request, it uses SNI to select the certificate with matching
+   ``subjectAlternativeName``.
+
+   Specify an array where each element contains the following fields:
+
+   - ``names`` specifies the name of the Kubernetes secret, and
+   - ``types`` specifies ``kubernetes.io/tls``
+
+   Use wildcard patterns when constructing the DNS-related fields
+   to ensure the generated certificates match the Kubernetes-generated
+   DNS names of Tenant resources. See the Kubernetes documentation on
+   :kube-docs:`DNS for Services and Pods 
+   <concepts/services-networking/dns-pod-service/>` for more information on 
+   Kubernetes DNS.
 
    .. code-block:: yaml
 
@@ -952,6 +1033,23 @@ in the MinIO Tenant.
             externalCertSecret:
                name: console-external-secret-cert-name
                type: kubernetes.io/tls
+
+   - If :kubeconf:`~spec.requestAutoCert` is enabled, each pod/service has 
+     both auto-generated TLS certificates *and* custom certificates.
+
+   - If :kubeconf:`~spec.requestAutoCert` is *disabled*, any pod/service 
+     whose hostname does not match a custom certificate cannot make 
+     TLS connections. This may result in connectivity errors. Consider 
+     specifying at least one certificate with a wildcard pattern applicable 
+     to any pod or service in the Tenant. 
+
+   .. code-block:: yaml
+
+      spec:
+         externalCaCertSecret:
+            - name: tenant-external-client-cert-secret-name
+              type: kubernetes.io/tls
+
 
 .. kubeconf:: spec.console.image
 
@@ -1050,6 +1148,13 @@ Key Encryption Service (KES) in the MinIO Tenant.
 
    Omit to deploy the MinIO Tenant without an attached KES service.
 
+.. kubeconf:: spec.clientCertSecret: <object>
+
+   *Optional*
+
+   The Certificate Authority and x.509 private key/public key to use 
+   for performing mutual TLS (mTLS) to supported Key Management Services.
+
 .. kubeconf:: spec.kes.kesSecret
 
    *Required if specifying* :kubeconf:`spec.kes`.
@@ -1063,6 +1168,24 @@ Key Encryption Service (KES) in the MinIO Tenant.
          kes:
             kesSecret:
                name: kes-secret-name
+
+   The secret contents should resemble the following:
+
+   .. code-block:: yaml
+
+      apiVersion: v1
+      kind: Secret
+      metadata: kes-config
+      type: opaque
+      stringData:
+         server-config.yaml: |-
+           # KES Configuration Options
+
+   The MinIO Operator Github repository contains an example
+   :minio-git:`kes-secret.yaml </operator/blob/master/examples/kes-secret.yaml>`
+   for reference. For more complete documentation on the KES 
+   configuration file, see :minio-git:`KES Config File 
+   <kes/wiki/Configuration#config-file>`.
 
 .. kubeconf:: spec.kes.annotations
 
