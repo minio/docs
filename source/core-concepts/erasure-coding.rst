@@ -28,10 +28,10 @@ servicing read and write requests in the event of drive or pod failure.
 Specifically:
 
 - For read operations, the MinIO Tenant can tolerate the loss of up to
-  ``N`` drives.
+  ``N`` drives in the Erasure Set.
 
 - For write operations, the MinIO Tenant can tolerate the loss of up to
-  ``N-1`` drives.
+  ``N-1`` drives in the Erasure Set.
 
 Since parity blocks require storage space, higher levels of parity 
 provide increased tolerance to drive or pod failure at the cost of
@@ -80,7 +80,7 @@ consisting of 16 drives for this Tenant.
 Erasure Sets
 ------------
 
-An *Erasure Set* is a set of drives in a MinIO Tenant that support
+An *Erasure Set* is a set of drives in a MinIO Tenant Pool that support
 Erasure Coding. MinIO evenly distributes object data and parity blocks among
 the drives in the Erasure Set. 
 

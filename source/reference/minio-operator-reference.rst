@@ -170,10 +170,9 @@ Kubernetes Object API to support creating MinIO ``Tenant`` objects.
             :kubeconf:`~spec.requestAutoCert`: <boolean>
             :kubeconf:`~spec.s3`: <object>
             :kubeconf:`~spec.securityContext`: <object>
-            :kubeconf:`~spec.serverSet`: <array>
+            :kubeconf:`~spec.pools`: <array>
             :kubeconf:`~spec.serviceAccountName`: <string>
             :kubeconf:`~spec.subPath`: <string>
-            :kubeconf:`~spec.serverSet`: <array>
 
    .. tab:: Minimum Required Fields
 
@@ -189,15 +188,15 @@ Kubernetes Object API to support creating MinIO ``Tenant`` objects.
             :kubeconf:`~metadata.labels`:
                app: minio
          :kubeconf:`spec`:
-            :kubeconf:`~spec.serverSet` :
-               - :kubeconf:`~spec.serverSet.servers` : <int> 
-               :kubeconf:`~spec.serverSet.volumeClaimTemplate`:
-                  :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec`:
-                     :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.accessModes`: <string>
-                     :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.resources`:
+            :kubeconf:`~spec.pools` :
+               - :kubeconf:`~spec.pools.servers` : <int> 
+               :kubeconf:`~spec.pools.volumeClaimTemplate`:
+                  :kubeconf:`~spec.pools.volumeClaimTemplate.spec`:
+                     :kubeconf:`~spec.pools.volumeClaimTemplate.spec.accessModes`: <string>
+                     :kubeconf:`~spec.pools.volumeClaimTemplate.spec.resources`:
                         requests:
                            storage: <string>
-               :kubeconf:`~spec.serverSet.volumesPerServer`: <int>
+               :kubeconf:`~spec.pools.volumesPerServer`: <int>
 
 
 Core Fields
@@ -222,15 +221,15 @@ The following fields describe the core settings used to deploy a MinIO Tenant.
       :kubeconf:`~spec.credsSecret`: <object>
       :kubeconf:`~spec.env`: <object>
 
-      :kubeconf:`~spec.serverSet`:
-         - :kubeconf:`~spec.serverSet.affinity`: <object>
-           :kubeconf:`~spec.serverSet.name`: <string>
-           :kubeconf:`~spec.serverSet.nodeSelector`: <object>
-           :kubeconf:`~spec.serverSet.resources`: <object>
-           :kubeconf:`~spec.serverSet.servers`: <int>
-           :kubeconf:`~spec.serverSet.tolerations`: <array>
-           :kubeconf:`~spec.serverSet.volumeClaimTemplate`: <object>
-           :kubeconf:`~spec.serverSet.volumesPerServer`: <integer>
+      :kubeconf:`~spec.pools`:
+         - :kubeconf:`~spec.pools.affinity`: <object>
+           :kubeconf:`~spec.pools.name`: <string>
+           :kubeconf:`~spec.pools.nodeSelector`: <object>
+           :kubeconf:`~spec.pools.resources`: <object>
+           :kubeconf:`~spec.pools.servers`: <int>
+           :kubeconf:`~spec.pools.tolerations`: <array>
+           :kubeconf:`~spec.pools.volumeClaimTemplate`: <object>
+           :kubeconf:`~spec.pools.volumesPerServer`: <integer>
 
 .. kubeconf:: apiVersion
 
@@ -384,48 +383,50 @@ The following fields describe the core settings used to deploy a MinIO Tenant.
 
    Defaults to empty (``""``).
 
-.. kubeconf:: spec.serverSet
+.. kubeconf:: spec.pools
 
    *Required*
 
-   The configuration for each MinIO Server Set deployed in the MinIO Tenant. A
-   Server Set consists of one or more ``minio`` servers. 
+   The configuration for each MinIO Pool deployed in the MinIO Tenant. A
+   Pool consists of one or more ``minio`` servers which represent as single
+   "block" of storage. Pools are independent of each other and support 
+   horizontal scaling of available storage resources in the MinIO Tenant.
 
-   Each element in the :kubeconf:`~spec.serverSet` array is an object that *must*
+   Each element in the :kubeconf:`~spec.pools` array is an object that *must*
    contain the following fields:
 
-   - :kubeconf:`~spec.serverSet.servers`
-   - :kubeconf:`~spec.serverSet.volumeClaimTemplate`
-   - :kubeconf:`~spec.serverSet.volumesPerServer`
+   - :kubeconf:`~spec.pools.servers`
+   - :kubeconf:`~spec.pools.volumeClaimTemplate`
+   - :kubeconf:`~spec.pools.volumesPerServer`
 
-   :kubeconf:`~spec.serverSet` must have *at least* one element in the array. 
+   :kubeconf:`~spec.pools` must have *at least* one element in the array. 
 
-.. kubeconf:: spec.serverSet.affinity
+.. kubeconf:: spec.pools.affinity
 
    *Optional*
 
    The configuration for node affinity, pod affinity, and pod anti-affinity
-   applied to each pod in the Server Set.
+   applied to each pod in the Pool.
 
    .. include:: /includes/common-minio-kubernetes.rst
       :start-after: start-kubeapi-affinity
       :end-before: end-kubeapi-affinity
 
-.. kubeconf:: spec.serverSet.name
+.. kubeconf:: spec.pools.name
 
    *Optional*
 
-   The name of the MinIO Server Set object.
+   The name of the MinIO Pool object.
    
-   The MinIO Operator automatically generates the Server Set
+   The MinIO Operator automatically generates the Pool
    name if this field is omitted. 
 
-.. kubeconf:: spec.serverSet.nodeSelector
+.. kubeconf:: spec.pools.nodeSelector
 
    *Optional*
 
    The filter to apply when selecting which node or nodes on which to
-   deploy each pod in the Server Set. See the Kubernetes documentation on 
+   deploy each pod in the Pool. See the Kubernetes documentation on 
    :kube-docs:`Assigning Pods to Nodes 
    <concepts/scheduling-eviction/assign-pod-node>` for more information.
 
@@ -433,19 +434,19 @@ The following fields describe the core settings used to deploy a MinIO Tenant.
       :start-after: start-kubeapi-nodeselector
       :end-before: end-kubeapi-nodeselector
 
-.. kubeconf:: spec.serverSet.resources
+.. kubeconf:: spec.pools.resources
 
    *Optional*
 
    The :kube-docs:`resources 
    <concepts/configuration/manage-resources-containers/>` each pod in the
-   Server Set requests.
+   Pool requests.
 
    .. include:: /includes/common-minio-kubernetes.rst
       :start-after: start-kubeapi-resources
       :end-before: end-kubeapi-resources   
 
-.. kubeconf:: spec.serverSet.servers
+.. kubeconf:: spec.pools.servers
 
    *Required*
 
@@ -453,49 +454,49 @@ The following fields describe the core settings used to deploy a MinIO Tenant.
    
    The minimum number of servers is ``2``. MinIO recommends
    a minimum of ``4`` servers for optimal availability and
-   distribution of data in the Server Set.
+   distribution of data in the Pool.
 
-.. kubeconf:: spec.serverSet.tolerations
+.. kubeconf:: spec.pools.tolerations
 
    *Optional*
 
    The :kube-docs:`Tolerations 
    <concepts/scheduling-eviction/taint-and-toleration/>` applied to pods
-   deployed in the Server Set.
+   deployed in the Pool.
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate
+.. kubeconf:: spec.pools.volumeClaimTemplate
    :noindex:
 
    *Required*
 
    The configuration template to apply to each Persistent Volume Claim (``PVC``)
-   created as part of the Server Set. 
+   created as part of the Pool. 
 
-   See :kubeconf:`spec.serverSet.volumeClaimTemplate` for more complete
+   See :kubeconf:`spec.pools.volumeClaimTemplate` for more complete
    documentation on the full specification of the ``volumeClaimTemplate``
    object.
 
    The MinIO Operator calculates the number of ``PVC`` to generate by 
-   multiplying :kubeconf:`spec.serverSet.volumesPerServer` by 
-   :kubeconf:`spec.serverSet.servers`.
+   multiplying :kubeconf:`spec.pools.volumesPerServer` by 
+   :kubeconf:`spec.pools.servers`.
 
-.. kubeconf:: spec.serverSet.volumesPerServer
+.. kubeconf:: spec.pools.volumesPerServer
 
    *Required*
 
    The number of Persistent Volume Claims (``PVC``) to create for each
-   :kubeconf:`server <spec.serverSet.servers>` in the Server Set.
+   :kubeconf:`server <spec.pools.servers>` in the Pool.
    
-   The total number of volumes in the Server Set *must* be greater than
+   The total number of volumes in the Pool *must* be greater than
    4. Specifically:
    
    .. parsed-literal::
 
-     :kubeconf:`~spec.serverSet.servers` X :kubeconf:`~spec.serverSet.volumesPerServer` > 4
+     :kubeconf:`~spec.pools.servers` X :kubeconf:`~spec.pools.volumesPerServer` > 4
 
    The MinIO Operator calculates the number of ``PVC`` to generate by 
-   multiplying :kubeconf:`spec.serverSet.volumesPerServer` by 
-   :kubeconf:`spec.serverSet.servers`.
+   multiplying :kubeconf:`spec.pools.volumesPerServer` by 
+   :kubeconf:`spec.pools.servers`.
 
 Volume Claim Template
 ~~~~~~~~~~~~~~~~~~~~~
@@ -506,111 +507,111 @@ Claims (``PVC``) for use in the MinIO Tenant.
 .. parsed-literal::
 
    spec:
-      serverSet:
-      - :kubeconf:`~spec.serverSet.volumeClaimTemplate`
-           :kubeconf:`~spec.serverSet.volumeClaimTemplate.apiVersion`: <string>
-           :kubeconf:`~spec.serverSet.volumeClaimTemplate.kind`: <string>
-           :kubeconf:`~spec.serverSet.volumeClaimTemplate.metadata`: <object>
-           :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec`:
-              :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.accessModes`: <array>
-              :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.dataSource`: <object>
-              :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.resources`: <object>
-              :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.selector`: <object>
-              :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.storageClassName`: <string>
-              :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.volumeMode`: <string>
-              :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.volumeName`: <string>
+      pools:
+      - :kubeconf:`~spec.pools.volumeClaimTemplate`
+           :kubeconf:`~spec.pools.volumeClaimTemplate.apiVersion`: <string>
+           :kubeconf:`~spec.pools.volumeClaimTemplate.kind`: <string>
+           :kubeconf:`~spec.pools.volumeClaimTemplate.metadata`: <object>
+           :kubeconf:`~spec.pools.volumeClaimTemplate.spec`:
+              :kubeconf:`~spec.pools.volumeClaimTemplate.spec.accessModes`: <array>
+              :kubeconf:`~spec.pools.volumeClaimTemplate.spec.dataSource`: <object>
+              :kubeconf:`~spec.pools.volumeClaimTemplate.spec.resources`: <object>
+              :kubeconf:`~spec.pools.volumeClaimTemplate.spec.selector`: <object>
+              :kubeconf:`~spec.pools.volumeClaimTemplate.spec.storageClassName`: <string>
+              :kubeconf:`~spec.pools.volumeClaimTemplate.spec.volumeMode`: <string>
+              :kubeconf:`~spec.pools.volumeClaimTemplate.spec.volumeName`: <string>
            status: <object>
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate
+.. kubeconf:: spec.pools.volumeClaimTemplate
 
    *Required*
 
    The configuration template to apply to each Persistent Volume Claim (``PVC``)
-   created as part of a :kubeconf:`Server Set <spec.serverSet>`. The
-   :kubeconf:`~spec.serverSet.volumeClaimTemplate` dictates which Persistent Volumes
+   created as part of a :kubeconf:`Pool <spec.pools>`. The
+   :kubeconf:`~spec.pools.volumeClaimTemplate` dictates which Persistent Volumes
    (``PV``) the generated ``PVC`` can bind to.
 
-   The :kubeconf:`~spec.serverSet.volumeClaimTemplate` *requires* at minimum
+   The :kubeconf:`~spec.pools.volumeClaimTemplate` *requires* at minimum
    the following fields:
 
-   - :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.resources`
-   - :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.accessModes`
+   - :kubeconf:`~spec.pools.volumeClaimTemplate.spec.resources`
+   - :kubeconf:`~spec.pools.volumeClaimTemplate.spec.accessModes`
 
    The MinIO Operator calculates the number of ``PVC`` to generate by 
-   multiplying :kubeconf:`spec.serverSet.volumesPerServer` by 
-   :kubeconf:`spec.serverSet.servers`.
+   multiplying :kubeconf:`spec.pools.volumesPerServer` by 
+   :kubeconf:`spec.pools.servers`.
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.apiVersion
+.. kubeconf:: spec.pools.volumeClaimTemplate.apiVersion
 
    *Optional*
 
-   The API Version of the :kubeconf:`~spec.serverSet.volumeClaimTemplate`.
+   The API Version of the :kubeconf:`~spec.pools.volumeClaimTemplate`.
    
    Specify ``minio.min.io/v1``.
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.kind
+.. kubeconf:: spec.pools.volumeClaimTemplate.kind
 
    *Optional*
 
    The REST resource the object represents.
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.metadata
+.. kubeconf:: spec.pools.volumeClaimTemplate.metadata
 
    *Optional*
 
-   The metadata for the :kubeconf:`~spec.serverSet.volumeClaimTemplate`. 
+   The metadata for the :kubeconf:`~spec.pools.volumeClaimTemplate`. 
 
    .. include:: /includes/common-minio-kubernetes.rst
       :start-after: start-kubeapi-objectmeta
       :end-before: end-kubeapi-objectmeta
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.spec
+.. kubeconf:: spec.pools.volumeClaimTemplate.spec
 
    The specification applied to each Persistent Volume Claim (``PVC``) created
-   using the :kubeconf:`~spec.serverSet.volumeClaimTemplate`.
+   using the :kubeconf:`~spec.pools.volumeClaimTemplate`.
 
    .. include:: /includes/common-minio-kubernetes.rst
       :start-after: start-kubeapi-persistentvolumeclaimspec
       :end-before: end-kubeapi-persistentvolumeclaimspec
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.spec.accessModes
+.. kubeconf:: spec.pools.volumeClaimTemplate.spec.accessModes
 
    *Required*
 
    The desired :kube-docs:`access mode 
    <concepts/storage/persistent-volumes#access-modes-1>` for each Persistent 
    Volume Claim (``PVC``) created using the
-   :kubeconf:`~spec.serverSet.volumeClaimTemplate`.
+   :kubeconf:`~spec.pools.volumeClaimTemplate`.
 
    .. include:: /includes/common-minio-kubernetes.rst
       :start-after: start-kubeapi-persistentvolumeclaimspec
       :end-before: end-kubeapi-persistentvolumeclaimspec
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.spec.dataSource
+.. kubeconf:: spec.pools.volumeClaimTemplate.spec.dataSource
 
    *Optional*
 
    The data source to use for each Persistent Volume Claim (``PVC``)
-   created using the :kubeconf:`~spec.serverSet.volumeClaimTemplate`.
+   created using the :kubeconf:`~spec.pools.volumeClaimTemplate`.
 
    .. include:: /includes/common-minio-kubernetes.rst
       :start-after: start-kubeapi-persistentvolumeclaimspec
       :end-before: end-kubeapi-persistentvolumeclaimspec
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.spec.resources
+.. kubeconf:: spec.pools.volumeClaimTemplate.spec.resources
 
    *Required*
 
    The resources requested by each Persistent Volume Claim (``PVC``) created
-   using the :kubeconf:`~spec.serverSet.volumeClaimTemplate`.
+   using the :kubeconf:`~spec.pools.volumeClaimTemplate`.
 
-   The :kubeconf:`~spec.serverSet.volumeClaimTemplate.spec.resources` object
+   The :kubeconf:`~spec.pools.volumeClaimTemplate.spec.resources` object
    *must* include a ``requests.storage`` object:
 
    .. code-block:: yaml
 
       spec:
-         serverSet:
+         pools:
             - name: minio-server-set-1
               volumeClaimTemplate:
                  spec: 
@@ -656,7 +657,7 @@ Claims (``PVC``) for use in the MinIO Tenant.
       :start-after: start-kubeapi-persistentvolumeclaimspec
       :end-before: end-kubeapi-persistentvolumeclaimspec
    
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.spec.selector
+.. kubeconf:: spec.pools.volumeClaimTemplate.spec.selector
 
    *Optional*
 
@@ -667,18 +668,18 @@ Claims (``PVC``) for use in the MinIO Tenant.
       :start-after: start-kubeapi-persistentvolumeclaimspec
       :end-before: end-kubeapi-persistentvolumeclaimspec
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.spec.storageClassName
+.. kubeconf:: spec.pools.volumeClaimTemplate.spec.storageClassName
 
    *Optional*
 
    The storage class to apply to each Persistent Volume Claim (``PVC``) 
-   created using the :kubeconf:`~spec.serverSet.volumeClaimTemplate`.
+   created using the :kubeconf:`~spec.pools.volumeClaimTemplate`.
 
    .. include:: /includes/common-minio-kubernetes.rst
       :start-after: start-kubeapi-persistentvolumeclaimspec
       :end-before: end-kubeapi-persistentvolumeclaimspec
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.spec.volumeMode
+.. kubeconf:: spec.pools.volumeClaimTemplate.spec.volumeMode
 
    *Optional*
 
@@ -689,12 +690,12 @@ Claims (``PVC``) for use in the MinIO Tenant.
       :start-after: start-kubeapi-persistentvolumeclaimspec
       :end-before: end-kubeapi-persistentvolumeclaimspec
 
-.. kubeconf:: spec.serverSet.volumeClaimTemplate.spec.volumeName
+.. kubeconf:: spec.pools.volumeClaimTemplate.spec.volumeName
 
    *Optional*
 
    The name to apply to each Persistent Volume Claim (``PVC``) created
-   using the :kubeconf:`~spec.serverSet.volumeClaimTemplate`.
+   using the :kubeconf:`~spec.pools.volumeClaimTemplate`.
 
 MinIO Docker Image
 ~~~~~~~~~~~~~~~~~~
