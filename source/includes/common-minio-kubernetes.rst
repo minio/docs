@@ -81,3 +81,22 @@ See the Kubernetes API reference on
 for more complete documentation on this field.
 
 .. end-kubeapi-persistentvolumeclaimspec
+
+.. start-console-access
+
+.. admonition:: MinIO Console Connectivity
+   :class: note
+
+   The following procedure assumes use of a MinIO Console instance 
+   deployed as part of the MinIO Tenant. Since Kubernetes restricts external
+   access The procedure therefore assumes that:
+
+   - The user is accessing the Console from a host inside the Kubernetes cluster,
+  
+     *-or-*
+
+   - The Kubernetes Cluster has an 
+     :kube-docs:`Ingress <concepts/services-networking/ingress/>` resource 
+     configured to grant external access to the MinIO Tenant and Console.
+
+.. end-console-access

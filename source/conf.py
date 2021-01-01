@@ -43,7 +43,8 @@ extensions = [
     'recommonmark',
     'sphinx_markdown_tables',
     'sphinx-prompt',
-    'sphinx_substitution_extensions'
+    'sphinx_substitution_extensions',
+    'sphinx_togglebutton'
 ]
 
 # -- External Links
@@ -97,7 +98,7 @@ html_theme_options = {
     'show_relbars': 'true',
 }
 
-html_short_title = "MinIO Object Storage"
+html_short_title = "Hybrid Cloud Object Storage"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -108,7 +109,7 @@ html_css_files = ['css-style.css']
 
 html_js_files = ['js/main.js']
 
-html_title = 'MinIO Documentation'
+html_title = 'MinIO Hybrid Cloud Documentation'
 
 # rst_epilog contains common replacements for all pages
 

@@ -149,13 +149,44 @@ body div.left a.index-link {
 
 /* Center Column CSS */
 
-div.body div.alert-info {
+body div.center div.alert-info {
 
    padding-left: 5px;
    padding-right: 5px;
    border: 2px var(--minio-red) solid;
    border-radius: 10px;
  
+}
+
+body div.center div.admonition button.toggle-button {
+   border-radius: 0px;
+   width: 20px;
+   height: 20px;
+   top: auto;
+}
+
+body div.center div.admonition button.toggle-button::before {
+   font-size: 10px;
+}
+
+body div.center div.admonition button.toggle-button div.bar.horizontal {
+   width: 14px;
+   height: 2px;
+   left: 3px;
+}
+
+body div.center div.admonition button.toggle-button div.bar.vertical {
+   width: 14px;
+   height: 2px;
+   left: 3px;
+}
+
+body div.center div.admonition p.admonition-title {
+   font-weight: bold;
+}
+
+body div.center span.guilabel {
+   font-weight: bold;
 }
 
 body div.center {
@@ -171,6 +202,10 @@ body div.center {
    height: 100%;
    padding-left: 10px;
    padding-right: 10px;
+}
+
+body div.center img {
+   box-shadow: gray 0px 0px 5px;
 }
 
 body div.center div.admonition p.admonition-title {
