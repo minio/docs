@@ -2,8 +2,8 @@
 <div id="searchbox" style="display: none" role="search">
    <div class="searchformwrapper">
       <form class="search" action="{{ pathto('search') }}" method="get">
+         <input type="image" id="docs-mag" src="{{ pathto('_static/search.svg', 1)|e }}" alt="search">
          <input type="text" id="docs-search" name="q" aria-labelledby="searchlabel" placeholder="Search documentation" />
-         <input type="submit" id="docs-search-go" value="{{ _('Go') }}" />
       </form>
    </div>
 </div>

@@ -24,6 +24,7 @@ html {
 body {
    font-family: Mark, Helvetica, sans-serif;
    font-size: 15px;
+   color: #323232;
 }
 
 div.flexwrapper {
@@ -42,21 +43,23 @@ body :target {
 /* Left Column CSS */
 
 body div.left  {
-   width: 300px;
+   width: 320px;
    /* flex-shrink: 0; */
    position: fixed;
    display: block;
    left: 0px;
-   top: 90px;
+   top: 100px;
    color: var(--minio-meridian);
-   z-index: 5;
    background: #f9f9f9 0% 0% no-repeat padding-box;
    opacity: 1;
    height: 100vh;
+   overflow-y: auto;
+   padding-left: 30px;
 }
 
 body div.left a.active {
    color: var(--minio-meridian);
+   font-weight: bold;
 }
 
 body div.left li.toctree-l1 a {
@@ -64,19 +67,37 @@ body div.left li.toctree-l1 a {
 }
 
 body div.left li.toctree-l2 a {
-   color: #2b2b2b;
-   font-size: 14px;
+   color: #494949;
 }
 
 body div.left div.sphinxsidebarwrapper {
-   padding: 0 0 0 5px;
    margin-top: 15px;
    font-size: 14px;
 }
 
 body div.left div.sphinxsidebarwrapper ul {
    list-style: none;
-   margin-left: 10px;
+   margin: 0px;
+}
+
+body div.left div.sphinxsidebarwrapper ul.current ul.current {
+   margin: 0px;
+}
+
+/* Collapse CSS */
+
+body div.left.collapsed {
+   left: -400px;
+}
+
+body div.left button.sphinxsidebarbutton.collapsed {
+   left: -20px;
+   top: 120px;
+   position: fixed;
+}
+
+body div.column.collapsed {
+   margin-left: 50px;
 }
 
 body div.left button.sphinxsidebarbutton {
@@ -85,11 +106,13 @@ body div.left button.sphinxsidebarbutton {
    background: none;
    border: none;
    position: fixed;
-   left: 200px;
-   top: 90px;
+   left: 230px;
+   top: 120px;
    color: gray;
    font-family: Mark, Helvetica, sans-serif;
 }
+
+/* End Collapse CSS */
 
 body div.left div.sphinxsidebarwrapper a.current.reference.internal {
    color: var(--minio-red);
@@ -100,14 +123,18 @@ body div.left div.sphinxsidebarwrapper a.current.reference.internal {
 
 body div.left div.sphinxsidebarwrapper h1.logo {
    font-size: 110%;
-   margin: 0px;
 }
 
 body div.left div.sphinxsidebarwrapper li.toctree-l1 {
-   margin-top: 10px;
-   margin-bottom: 10px;
-   padding-bottom: 5px;
    list-style: none;
+   margin: 20px 0 20px 0;
+   font-size: 15px;
+}
+
+body div.left div.sphinxsidebarwrapper li.toctree-l2 {
+   list-style: none;
+   margin: 20px 0 20px 0;
+   font-size: 14px;
 }
 
 body div.left a.reference {
@@ -115,22 +142,23 @@ body div.left a.reference {
    border: none;
 }
 
-body div.left li.toctree-l2 {
-   margin: 10px 0 10px 0;
-}
-
-body div.left li.toctree-l3 {
-   margin: 10px 0 10px 0;
-}
-
-body div.left div.searchformwrapper {
-   margin-top: 25px;
+#docs-mag {
+   position: relative;
+   top: 3px;
+   opacity: 50%;
+   z-index: 2;
+   left: 5px;
 }
 
 #docs-search {
-   padding-left: 10px;
    font-size: 14px;
-   height: 25px;
+   border: 1px solid #f0f0f0;
+   background: #FFF 0% 0% no-repeat padding-box;
+   width: 230px;
+   position: relative;
+   left: -20px;
+   padding-left: 30px;
+   height: 30px;
 }
 
 body div.left a.index-link {
@@ -142,35 +170,57 @@ body div.left a.index-link {
 
 }
 
-#docs-search-go {
-   padding-left: 10px;
-   font-size: 14px;
-}
-
 /* Center Column CSS */
 
 div.body div.alert-info {
 
-   padding-left: 5px;
-   padding-right: 5px;
+   padding: 5px;
    border: 2px var(--minio-red) solid;
    border-radius: 10px;
+   margin: 0px;
  
 }
 
 body div.center {
-   flex: 9;
+   flex: 9 4 0%;
    overflow-y: auto;
    overflow-x: hidden;
-   flex-grow: 9;
-   flex-shrink: 4;
    z-index: 0;
-   margin-left: 300px;
-   margin-top: 90px;
-   scroll-margin-top: 85px;
+   margin-left: 340px;
+   margin-top: 100px;
+   scroll-margin-top: 95px;
    height: 100%;
    padding-left: 10px;
    padding-right: 10px;
+}
+
+body div.center div.admonition p.admonition-title {
+   font-weight: bold;
+}
+
+body div.center div.admonition {
+   border-radius: 0 3px 3px 0;
+   border: 0px;
+}
+
+body div.center div.admonition.warning {
+   background-color: #FFF2F2;
+   border-left: 4px solid #E54253;
+}
+
+body div.center div.admonition.important {
+   background-color: #FFF9E6;
+   border-left: 4px solid #EDBC39;
+}
+
+body div.center div.admonition.note {
+   background-color: #EDF9FF;
+   border-left: 4px solid #2592EF;
+}
+
+body div.center p {
+   font-size: 15px;
+   color: #323232;
 }
 
 body div.center div.admonition p.admonition-title {
@@ -190,16 +240,16 @@ body div.center h6 {
    padding: 0;
 }
 
+body div.center h1 {
+   font-size: 30px;
+}
+
 body div.center h2 {
-   font-size: 24px;
+   font-size: 21px;
 }
 
 body div.center h3 {
-   font-size: 20px;
-}
-
-body div.center h4 {
-   font-size: 16px;
+   font-size: 18px;
 }
 
 body div.center h4 {
@@ -286,10 +336,9 @@ body div.center div.footer {
 body div.right {
    flex: 3;
    flex-shrink: 0;
-   margin-left: 10px;
-   margin-top: 90px;
-   border-left: 1px solid var(--minio-glacier);
+   margin: 90px 20px 0px 20px;
    font-size: 13px;
+   color: #2b2b2b;
 }
 
 body div.right div.topic {
@@ -299,7 +348,7 @@ body div.right div.topic {
 
 body div.right div.localtoc {
    position: sticky;
-   top: 85px;
+   top: 100px;
 }
 
 body div.right ul.simple {
@@ -320,7 +369,7 @@ body div.right ul li ul {
 }
 
 body div.right a.reference.internal {
-   color: var(--minio-meridian);
+   color: #2b2b2b;
    text-decoration: none;
    border-bottom: none;
 }
@@ -332,37 +381,20 @@ body div.right p.active-p {
 }
 
 
-/* Collapse CSS */
 
-body div.left.collapsed {
-   left: -350px;
-}
-
-body div.left button.sphinxsidebarbutton.collapsed {
-   left: 0px;
-   position: fixed;
-}
-
-body div.column.collapsed {
-   margin-left: 50px;
-}
 
 /* Navigation CSS */
 
-nav.navigation img.logo {
-   height: 18px;
-   padding-top: 28.5px;
-   padding-left: 10px;
+header {
+   position: fixed;
+   width: 100%;
+   height: 100px;
+   top: 0px;
+   background-color: white;
 }
 
-
-nav.navigation {
-   position: fixed;
-   background-color: black;
-   width: 100%;
-   height: 90px;
-   top: 0px;
-   z-index: 1;
+header #header-logo-link img {
+   height: 18px;
 }
 
 /* Admonition CSS TODO*/

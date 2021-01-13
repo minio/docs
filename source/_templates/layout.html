@@ -45,11 +45,7 @@
 {%- endmacro %}
 
 {%- block header %}
-   <nav class="navigation">
-      <a href="https://min.io">
-         <img class="logo" src="{{ pathto('_static/docs-logo.svg',1) }}" alt="Logo"/>
-      </a>
-   </nav>
+   {%- include "header.html" %}
 {%- endblock %}
 
 {%- block content %}
