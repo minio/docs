@@ -87,6 +87,12 @@ table.docutils {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
 
+    & > tbody tr th.stub {
+        border: none;
+        border-bottom: 1px solid $docs-item-table-border;
+        color: $theme-red
+    }
+
     & > thead tr th {
         border: none;
         border-bottom: 1px solid $docs-item-table-border;
@@ -107,4 +113,8 @@ table.docutils {
 
 .xref {
     color: $theme-red;
+}
+
+img {
+    box-shadow: 0px 0px 5px lightgray;
 }

@@ -243,6 +243,10 @@ table.docutils {
   box-shadow: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none; }
+  table.docutils > tbody tr th.stub {
+    border: none;
+    border-bottom: 1px solid #e6e6e6;
+    color: #C72C48; }
   table.docutils > thead tr th {
     border: none;
     border-bottom: 1px solid #e6e6e6;
@@ -256,6 +260,10 @@ table.docutils {
 
 .xref {
   color: #C72C48; }
+
+img {
+  -webkit-box-shadow: 0px 0px 5px lightgray;
+          box-shadow: 0px 0px 5px lightgray; }
 
 @media (min-width: 1200px) {
   .content, .header {
