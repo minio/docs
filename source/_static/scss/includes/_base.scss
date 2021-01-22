@@ -43,6 +43,8 @@ h1, h2, h3, h4, h5 {
 }
 
 div.admonition {
+    margin-top: 0;
+
     & > p.admonition-title {
         font-weight: bold;
         font-family: $font-family-base;
@@ -115,6 +117,8 @@ table.docutils {
     color: $theme-red;
 }
 
-img {
-    box-shadow: 0px 0px 5px lightgray;
+.content__main {
+    img {
+        box-shadow: 0px 0px 5px lightgray;
+    }
 }

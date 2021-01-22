@@ -3,7 +3,7 @@
     background-color: $header-bg;
     display: flex;
     align-items: center;
-    box-shadow: 0 0 10px rgba($black, 0.1);
+    box-shadow: 0 0 0.75rem rgba($black, 0.1);
     width: 100%;
     z-index: $z-index-header;
     flex-shrink: 0;
@@ -11,130 +11,261 @@
     align-items: center;
 
     @extend %content-padding;
+
+    .toggle-icon {
+        @include breakpoint-min(breakpoints(lg)) {
+            display: none;
+        }
+    } 
+
+    .toggle-icon--menu {
+        margin-left: auto;
+    }
 }
 
 .logo {
     flex-shrink: 0;
     display: inline-flex;
 
-    & > img {
+    @include breakpoint-max(breakpoints(lg)) {
+        margin-left: 1rem;
+    }
+
+    &>img {
         height: $logo-height;
+        box-shadow: none;
     }
 }
 
 .nav {
     margin-left: auto;
 
-    & > a {
-        &, &:hover {
-            color: $nav-color;
-        }
+    @include breakpoint-max(breakpoints(lg)) {
+        position: fixed;
+        height: 100vh;
+        width: $sidebar-width;
+        top: 0;
+        right: 0;
+        transform: translate3d($sidebar-width, 0, 0);
+        opacity: 0;
+        box-shadow: 0 0 0.8rem rgba($black, 0.1);
+        background-color: rgba($white, 0.9925);
+        pointer-events: none;
+        transition: opacity 400ms, transform 300ms;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 2rem 2rem;
+        height: 100%;
+        overflow-y: auto;
+    }
 
-        font-size: 0.95rem;
-        line-height: 100%;
+    & > .toggle-icon {
+        position: absolute;
+        top: 0.7rem;
+        right: 0.7rem;
+        z-index: 1;
+    }
+}
+
+.nav-toggled {
+    .nav {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.nav__item {
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 100%;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+
+    &,
+    &:hover {
+        color: $nav-color;
+    }
+
+    @include breakpoint-min(breakpoints(lg)) {
         padding: 0.4rem 1.2rem 0.55rem;
-        border-radius: $border-radius-sm;
 
-        &:not(:last-child) {
-            & > span {
-                position: relative;
-    
-                &::after {
-                    content: '';
-                    height: 1px;
-                    width: 100%;
-                    background-color: $nav-border-color;
-                    bottom: -10px;
-                    transform: translateY(0);
-                    left: 0;
-                    position: absolute;
-                    opacity: 0;
-                    transition: opacity 250ms, transform 250ms;
-                    pointer-events: none;
-                }
+        &:hover {
+            .nav__dropdown {
+                opacity: 1;
+                pointer-events: all;
             }
-    
-            &.active,
-            &:hover {
-                & > span {
-                    &::after {
-                        transform: translateY(-4px);
-                        opacity: 1;
-                    }
-                }
+        }
+    }
+
+    @include breakpoint-max(breakpoints(lg)) {
+        padding: 0.85rem 0;
+    }
+
+    &:last-child {
+        border: 1px solid $theme-red;
+        transition: background-color 300ms, color 300ms;
+        text-align: center;
+
+        &:hover {
+            background-color: $theme-red;
+            color: $white;
+        }
+
+        @include breakpoint-max(breakpoints(lg)) {
+            margin-top: 1rem;
+        }
+    }
+}
+
+a.nav__item {
+    &:not(:last-child) {
+        &>span {
+            position: relative;
+            cursor: pointer;
+
+            &:after {
+                left: 0;
+                bottom: -7px;
+                height: 1px;
+                width: 100%;
+                position: absolute;
+                content: "";
+                opacity: 0;
+                transform: translateY(5px);
+                transition: opacity 250ms, transform 250ms;
+                background-color: $nav-border-color;
             }
         }
 
-        &:last-child {
-            border: 1px solid $theme-red;
-            transition: background-color 300ms, color 300ms;
-
-            &:hover {
-                background-color: $theme-red;
-                color: $white;
+        &.active,
+        &:hover {
+            &>span {
+                &::after {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
             }
         }
     }
 }
 
-.sidebar-toggle {
+span.nav__item {
+    @include breakpoint-min(breakpoints(lg)) {
+        &:after {
+            left: 50%;
+            margin-left: -12px;
+            content: "";
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 12px 10px;
+            border-color: transparent transparent $white transparent;
+            position: absolute;
+            bottom: -3px;
+            opacity: 0;
+            transition: opacity 200ms;
+        }
+
+        &:hover {
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.nav__dropdown {
+    @include breakpoint-min(breakpoints(lg)) {
+        background-color: $white;
+        padding: 1.25rem;
+        border-radius: $border-radius;
+        box-shadow: 0 -1px 1.25rem rgba($black, 0.13);
+        margin-top: 0.3rem;
+        width: 24rem;
+        transform: translateX(calc(-50% + 2.8rem));
+        position: absolute;
+        left: 0;
+        top: 86%;
+        opacity: 0;
+        transition: opacity 200ms;
+        pointer-events: none;
+        max-height: calc(100vh - 5rem);
+        overflow-y: auto;
+    }
+
+    @include breakpoint-max(breakpoints(lg)) {
+        margin: 1rem (-$content-padding-sm) -0.8rem;
+        padding: 0.5rem $content-padding-sm;
+        background-color: $nav-dropdown-mobile-bg;
+    }
+}
+
+.nav__sub {
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+    color: $black;
     position: relative;
-    width: 40px;
-    height: 40px;
-    margin: 0 1rem 0 -0.35rem;
+
+    @include breakpoint-min(breakpoints(lg)) {
+        padding: 1rem;
+        border-radius: $border-radius;
+        transition: background-color 300ms;
+
+        &:hover {
+            background-color: $nav-sub-hover-bg;
+            color: $black;
+        }
+    }
+
+    @include breakpoint-max(breakpoints(lg)) {
+        padding: 0.75rem 0;
+    }
+
+    &>small {
+        display: block;
+        font-size: 0.8rem;
+        color: lighten($text-muted-color, 5%);
+        margin-top: 0.7rem;
+        line-height: 1.4;
+    }
+}
+
+.nav__close {
+    position: absolute;
+    top: 1.25rem;
+    left: -2.7rem;
+}
+
+.toggle-icon {
+    width: 2.5rem;
+    height: 2.5rem;
     cursor: pointer;
     border-radius: $border-radius-sm;
     transition: background-color 300ms;
     flex-shrink: 0;
-
-    @include breakpoint-min(breakpoints(lg)) {
-        display: none;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    background-position: center;
 
     &:hover {
-        background-color: $sidebar-toggle-hover-bg;
-    }
-
-    &::before,
-    &::after {
-        content: '';
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 1;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 1;
-        transition: opacity 250ms, transform 250ms;
-    }
-
-    &::before {
-        background-image: $sidebar-toggle-icon;
-        opacity: 1;
-        transform: scale(1);
-        
-    }
-
-    &::after {
-        background-image: $sidebar-toggle-collapse-icon;
-        opacity: 0;
-        transform: scale(0.25);
+        background-color: $toggle-icon-hover-bg;
     }
 }
 
-.sidebar-toggled {
-    .sidebar-toggle {
-        &::before {
-            opacity: 0;
-            transform: scale(0.25);
-            
-        }
-    
-        &::after {
-            opacity: 1;
-            transform: scale(1);
-        }
+$toggleIcons: (
+    docs: 'docs.svg', 
+    close: 'close-circle.svg',
+    menu: 'menu.svg',
+    toc: 'toc.svg'
+);
+
+@each $name, $icon in $toggleIcons {
+    .toggle-icon--#{$name} {
+        background-image: url(../img/icons/#{$icon});
     }
 }

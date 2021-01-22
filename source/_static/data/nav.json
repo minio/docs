@@ -1,0 +1,43 @@
+{
+    "Product": {
+        "Overview": {
+            "description": "Dive in to the features and architecture",
+            "link": "https://min.io/product/overview"
+        },
+        "Integrations": {
+            "description": "Browse our vast portfolio of integrations",
+            "link": "https://min.io/product/integrations"
+        },
+        "Reference Hardware": {
+            "description": "See recommended HW from our partners",
+            "link": "https://min.io/product/reference-hardware"
+        }
+    },
+    "Docs": "https://docs.min.io/",
+    "Solutions": {
+        "VMware": {
+            "description": "Discover how MinIO integrates with VMware across the portfolio from the Persistent Data platform to TKGI and how we support their Kubernetes ambitions.",
+            "link": "https://min.io/solutions/vmware"
+        },
+        "Splunk": {
+            "description": "Find out how MinIO is delivering performance at scale for Splunk SmartStores",
+            "link": "https://min.io/solutions/optimize-splunk-smartstore-performance"
+        },
+        "Veeam": {
+            "description": "Learn how MinIO and Veeam have partnered to drive performance and scalability for a variety of backup use cases.",
+            "link": "https://min.io/solutions/veeam"
+        },
+        "Azure to AWS S3 Gateway": {
+            "description": "Learn how MinIO allows Azure Blob to speak Amazon’s S3 API",
+            "link": "https://min.io/solutions/azure-s3-api-integration"
+        },
+        "Teradata": {
+            "description": "Discover why MinIO is the Native Object Store (NOS) of choice for at-scale Teradata deployments",
+            "link": "https://min.io/solutions/native-object-store-for-teradata"
+        }
+    },
+    "Resources": "https://min.io/resources",
+    "Blog": "https://blog.min.io/",
+    "Pricing": "https://min.io/pricing",
+    "Download": "https://min.io/download"
+}
