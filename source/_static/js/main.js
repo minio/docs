@@ -1,75 +1,65 @@
-window.addEventListener('DOMContentLoaded', (event) => {
-   console.log('DOM fully loaded and parsed');
+window.addEventListener("DOMContentLoaded", (event) => {
+	var topic = document.getElementById("table-of-contents");
+	if (topic != null) {
+		document
+			.getElementById("localtoc")
+			.appendChild(document.getElementById("table-of-contents"));
+	}
 
-   var topic = document.getElementById('table-of-contents');
-
-   if (topic != null) {
-      document.getElementById('localtoc').appendChild(
-         document.getElementById('table-of-contents')
-      );
-
-      console.log("moving local toc");
-   }
+	// Toggle Sidebars
+	$('body').on('click', '[data-toggle]', function() {
+		var target = $(this).attr('data-toggle');
+		target === 'sidebar' ? $('body').removeClass('nav-toggled') : $('body').removeClass('sidebar-toggled');
+		$('body').toggleClass(target + '-toggled');
+	});
 
 
-   // There's probably a better way to refine what sections are shown on screen.
-   // Experimenting with setting the `intersectionRatio` and such tends to stop
-   // this from working, especially if the 'section' is really long. Not sure
-   // how to resolve that.
+	// Render navigation menu
+	if($('#nav')[0]) {
+		var navData = '/_static/data/nav.json';
+		var nav = $('.nav');
 
-   // Removing this from the logic flow until we have better / cleaner logic.
+		$.getJSON( navData, function(data) {
+			var navToggle = $('<i class="toggle-icon toggle-icon--menu" />');
+			navToggle.attr('data-toggle', 'nav');
+			nav.after(navToggle);
 
-//    let options = {
-//       rootMargin: '-100px 0px 0px -100px'
-//    }
+			var navClose = $('<i />');
+			navClose.addClass('toggle-icon toggle-icon--close');
+			navClose.attr('data-toggle', 'nav');
+			nav.append(navClose);
 
-//    const observer = new IntersectionObserver(entries => {
-//       entries.forEach(entry => {
-//           const id = entry.target.getAttribute('id');
-          
-//           if (id == document.querySelector('.section[id]').getAttribute('id'))
-//             return 0
-//           if (entry.intersectionRatio > 0) {
-              
+			$.each(data, function(nav, navValue) {
+				var navElem = typeof navValue === 'object' ? '<span />' : '<a />';
 
-//               pElement = document.querySelector(`#on-this-page li a[href="#${id}"]`).parentElement;
-//               liElement = document.querySelector(`#on-this-page li a[href="#${id}"]`).parentElement.parentElement;
-              
-//               liElement.classList.add('active');
-//               pElement.classList.add('active-p');
+				var navLink = $(navElem);
+				navLink.addClass(nav === 'Docs' ? 'nav__item active' : 'nav__item');
+				navLink.html('<span>' + nav + '</span>');
 
-//               liElementParent = liElement.parentElement.parentElement
+				if(navElem === '<a />') {
+					navLink.attr('href', navValue);
+				}
+				else {
+					var navDropdown = $('<div class="nav__dropdown" />');
 
-//               if (liElementParent.tagName == "LI") {
-//                  //liElementParent.classList.remove("active")
-//                  // Need to re-visit this logic
-//               }
-
-              
-
-//           } else {
-//               document.querySelector(`#on-this-page li a[href="#${id}"]`).parentElement.parentElement.classList.remove('active');
-//               document.querySelector(`#on-this-page li a[href="#${id}"]`).parentElement.classList.remove('active-p');
-//           }
-//       });
-//   },options);
-
-//   // Track all sections that have an `id` applied
-//   document.querySelectorAll('.section[id]').forEach((section) => {
-//          observer.observe(section);
-//   });
-
-  const leftcolumn = document.querySelector('.left');
-  const centercolumn = document.querySelector('.center');
-  const rightcolumn = document.querySelector('.right');
-  const button = document.querySelector('.sphinxsidebarbutton');
-  const sidebarwrapper = document.querySelector('.sphinxsidebarwrapper');
-
-  const sidebarToggle = document.querySelector('.sidebar-toggle');
-
-  function toggleSidebar() {
-      document.body.classList.toggle('sidebar-toggled');
-  }
-
-  sidebarToggle.addEventListener( "click", toggleSidebar );
+					$.each(navValue, function(sub, subValue) {
+						var navSub = $('<a />');
+						navSub.addClass('nav__sub');
+						navSub.text(sub);
+						navSub.attr({
+							'href': subValue.link,
+							'target': '_blank',
+							'rel': 'noreferrer'
+						});
+						navSub.append('<small>' + subValue.description + '</small>');
+						navDropdown.append(navSub);
+						navLink.append(navDropdown)
+					});
+				}
+				
+				$('#nav').append(navLink);
+			});
+			
+		});
+	}
 });

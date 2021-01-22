@@ -58,7 +58,7 @@
 
 {%- block header %}
    <header class="header">
-      <i class="sidebar-toggle"></i>
+      <i class="toggle-icon toggle-icon--docs" data-toggle="sidebar"></i>
       <a
          class="logo"
          href="https://min.io"
@@ -69,27 +69,20 @@
          />
       </a>
 
-      <nav class="nav">
-         <a href="https://min.io/product/overview"><span>Product</span></a>
-         <a class="active" href="/"><span>Docs</span></a>
-         <a href="https://min.io/solutions/vmware"><span>Solutions</span></a>
-         <a href="https://min.io/resources"><span>Resources</span></a>
-         <a href="https://blog.min.io/"><span>Blog</span></a>
-         <a href="https://min.io/pricing"><span>Pricing</span></a>
-         <a href="https://min.io/download"><span>Download</span></a>
-      </nav>
+      <nav id="nav" class="nav"></nav>
    </header>
 {%- endblock %}
 
 {%- block content %}
    <section class="content">
       <aside class="sidebar">
-         <div>
-            <h3>
-               <a class="index-link" href="{{ pathto('index') }}">{{ shorttitle}} </a>
-            </h3>
-            {{ miniosidebar() }}
-         </div>
+         <i class="toggle-icon toggle-icon--close" data-toggle="sidebar"></i>
+
+         <h3 class="sidebar__title">
+            <a href="{{ pathto('index') }}">{{ shorttitle}} </a>
+         </h3>
+         
+         {{ miniosidebar() }}
       </aside>
       <div class="content__main">
          {% block alertbar -%}

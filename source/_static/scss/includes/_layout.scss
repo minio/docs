@@ -22,9 +22,16 @@
 .content__main {
     flex: 1;
     min-width: 0;
-    padding: 1.5rem 3rem;
     background-color: $content-bg;
     align-self: flex-start;
+
+    @include breakpoint-min(breakpoints(xl)) {
+        padding: $content-padding;
+    }
+
+    @include breakpoint-max(breakpoints(xl)) {
+        padding: $content-padding-sm;
+    }
 }
 
 .content__right {

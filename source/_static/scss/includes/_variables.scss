@@ -4,7 +4,6 @@ $black: #000000;
 $theme-red: #C72C48;
 $theme-hover-bg: rgb(245, 245, 245);
 
-
 // Breakpoints
 $breakpoints: (
   xs: 0,
@@ -29,11 +28,17 @@ $body-color: #4b4b4b;
 $body-bg: #F9F9F9;
 
 
+// Text
+$text-color: #4b4b4b;
+$text-hover-color: darken($text-color, 20%);
+$text-muted-color: #727272;
+
+
 // Layout
 $container-width: 95%;
 $content-bg: $white;
 $content-padding: 4rem;
-$content-padding-sm: 1.5rem;
+$content-padding-sm: 2rem;
 
 
 // Font weight
@@ -87,12 +92,12 @@ $docs-item-admonition-note-border: #2592EF;
 $docs-item-table-border: #e6e6e6;
 
 
-// Sidebar toggle
-$sidebar-toggle-collapse-icon: url(../img/icons/arrow-back.svg);
-$sidebar-toggle-icon: url(../img/icons/menu.svg);
-$sidebar-toggle-hover-bg: rgba($theme-red, 0.075);
+// Toggle icon
+$toggle-icon-hover-bg: rgba($theme-red, 0.075);
 
 
 // Nav
 $nav-color: $body-color;
 $nav-border-color: #4b4b4b;
+$nav-sub-hover-bg: #f8f8f8;
+$nav-dropdown-mobile-bg: lighten($theme-hover-bg, 1.5%);
