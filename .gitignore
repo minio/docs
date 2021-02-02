@@ -1,17 +1,6 @@
-# Ignore build directory
 build
-
-# Ignore venv
 venv
-
-# Ignore vscode
-
 .vscode
-
-# ignore pycache
-
 __pycache__
-
-# ignore node
-
 node_modules
+npm-debug.log

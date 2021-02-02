@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 	// Render navigation menu
 	if($('#nav')[0]) {
-		var navData = '/_static/data/nav.json';
+		var navData = '_static/data/nav.json'; // Keep this link relative
 		var nav = $('.nav');
 
 		$.getJSON( navData, function(data) {

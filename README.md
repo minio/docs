@@ -19,6 +19,12 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
+```shell
+nvm install v14.5.0
+nvm use v14.5.0
+npm install
+```
+
 To make the build, do:
 
 ```shell

@@ -64,4 +64,4 @@ gulp.task('watch', function () {
 });
 
 // Build
-gulp.task('default', gulp.series('handleStyle', 'handleJs', 'watch'));
+gulp.task('default', gulp.series('handleStyle', 'handleJs'));

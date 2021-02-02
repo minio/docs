@@ -4,6 +4,7 @@
   "description": "Official MinIO documentation",
   "main": "index.rst",
   "scripts": {
+    "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
