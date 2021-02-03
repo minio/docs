@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require ('gulp');
+var cleanCSS = require('gulp-clean-css');
 var $ = require ('gulp-load-plugins') ();
 var connect = require('gulp-connect');
 
@@ -31,7 +32,7 @@ gulp.task('handleStyle', function() {
         .pipe($.sass ())
         .pipe($.autoprefixer())
         .pipe(gulp.dest (paths.css.dir))
-        .pipe($.cssmin())
+        .pipe(cleanCSS())
         .pipe($.rename({
             suffix: '.min'
         }))
