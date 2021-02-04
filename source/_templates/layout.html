@@ -1,7 +1,24 @@
 {# Import the theme's layout. #}
 {% extends "!layout.html" %}
 
+
 {# Custom CSS overrides #}
+
+{% block extrahead %}
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56860620-1"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-56860620-1');
+   </script>
+
+  {{ super() }}
+
+   <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0088/9671.js" async="async"></script>
+
+{% endblock %}
 
 {# Override content block #}
 
@@ -57,6 +74,7 @@
 {%- endmacro %}
 
 {%- block header %}
+
    <header class="header">
       <i class="toggle-icon toggle-icon--docs" data-toggle="sidebar"></i>
       <a
@@ -108,4 +126,5 @@
    </div>
 {%- endblock %}
 
-{%- block footer %}{%- endblock %}
+{%- block footer %}
+{%- endblock %}
