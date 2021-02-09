@@ -6,6 +6,7 @@
     background-color: $sidebar-bg;
     transition: opacity 400ms, transform 300ms;
     padding: $content-padding-sm $content-padding-sm $content-padding-sm 0;
+    overflow-y: auto;
 
     @include breakpoint-max(breakpoints(lg)) {
         position: fixed;

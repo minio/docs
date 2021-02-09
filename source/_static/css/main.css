@@ -559,7 +559,8 @@ a.nav__item:not(:last-child).active > span::after, a.nav__item:not(:last-child):
   transition: opacity 400ms, -webkit-transform 300ms;
   transition: opacity 400ms, transform 300ms;
   transition: opacity 400ms, transform 300ms, -webkit-transform 300ms;
-  padding: 2rem 2rem 2rem 0; }
+  padding: 2rem 2rem 2rem 0;
+  overflow-y: auto; }
   @media (max-width: 991px) {
     .sidebar {
       position: fixed;
