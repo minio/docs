@@ -62,9 +62,9 @@ class MinioMCCommand(SphinxDirective):
    def run(self) -> List[Node]:
       command = self.arguments[0].strip()
       if (len(self.arguments) > 1):
-         command += " " + self.arguments[1].strip()
+         command += "-" + self.arguments[1].strip().replace(" ","-")
       
-      self.env.ref_context['minio:command'] = command
+      self.env.ref_context['minio:mc'] = command
       noindex = 'noindex' in self.options
       ret = []
       if not noindex:
@@ -74,7 +74,7 @@ class MinioMCCommand(SphinxDirective):
          domain.note_module(command, node_id)
          # Make a duplicate entry in 'objects' to facilitate searching for
          # the module in JavaScriptDomain.find_obj()
-         domain.note_object(command, 'command', node_id,
+         domain.note_object(command, 'mc', node_id,
                               location=(self.env.docname, self.lineno))
 
          target = nodes.target('', '', ids=[node_id], ismod=True)
@@ -125,12 +125,12 @@ class MinioMCObject(ObjectDescription):
         prefix = self.env.ref_context.get('minio:object', None)
 
         #Grab the top-level command name.
-        command_name = self.env.ref_context.get('minio:command')
+        command_name = self.env.ref_context.get('minio:mc').replace("-"," ")
         name = member
         format_name = member
         format_alias = alias
         if prefix:
-            fullname = ' '.join([prefix, name])
+            fullname = '-'.join([prefix, name])
         else:
             fullname = name
 
@@ -146,11 +146,11 @@ class MinioMCObject(ObjectDescription):
         signode['fullname'] = fullname
 
         if prefix:
-           signode += addnodes.desc_addname(prefix + ' ', ' ')
+           signode += addnodes.desc_addname(prefix + '-', ' ')
         elif command_name and ('fullpath' in self.options):
-           signode += addnodes.desc_addname(command_name + ' ', command_name + ' ')
+           signode += addnodes.desc_addname(command_name + '-', command_name + ' ')
         elif command_name:
-           signode += addnodes.desc_addname(command_name + ' ', ' ')
+           signode += addnodes.desc_addname(command_name + '-', ' ')
         
         if (alias != None):
            signode += addnodes.desc_name(name + ', ' + alias, format_name + ', ' + format_alias)
@@ -163,8 +163,8 @@ class MinioMCObject(ObjectDescription):
 
     def add_target_and_index(self, name_obj: Tuple[str, str], sig: str,
                              signode: desc_signature) -> None:
-        mod_name = self.env.ref_context.get('minio:command')
-        fullname = (mod_name + ' ' if mod_name else '') + name_obj[0]
+        mod_name = self.env.ref_context.get('minio:mc')
+        fullname = (mod_name + '-' if mod_name else '') + name_obj[0]
         node_id = make_id(self.env, self.state.document, '', fullname)
         signode['ids'].append(node_id)
 
@@ -400,38 +400,13 @@ class MinioObject(ObjectDescription):
         """
         return fullname.replace('$', '_S_')
 
-class MinioCallable(MinioObject):
-    """Description of a MinIO function, method or constructor."""
-    has_arguments = True
-
-    doc_field_types = [
-        TypedField('arguments', label=_('Arguments'),
-                   names=('argument', 'arg', 'parameter', 'param'),
-                   typerolename='func', typenames=('paramtype', 'type')),
-        GroupedField('errors', label=_('Throws'), rolename='err',
-                     names=('throws', ),
-                     can_collapse=True),
-        Field('returnvalue', label=_('Returns'), has_arg=False,
-              names=('returns', 'return')),
-        Field('returntype', label=_('Return type'), has_arg=False,
-              names=('rtype',)),
-    ]
-
-class MinioConstructor(MinioCallable):
-    """Like a callable but with a different prefix."""
-    display_prefix = 'class '
-    allow_nesting = True
-
-class MinioCommand(MinioObject):
-   allow_nesting = True
-
 class MinioCMDOptionXRefRole(XRefRole):
     def process_link(self, env: BuildEnvironment, refnode: Element,
                      has_explicit_title: bool, title: str, target: str) -> Tuple[str, str]:
         # basically what sphinx.domains.python.PyXRefRole does
         refnode['minio:object'] = env.ref_context.get('minio:object')
         refnode['minio:module'] = env.ref_context.get('minio:module')
-        refnode['minio:command'] = env.ref_context.get('minio:command')
+        refnode['minio:mc'] = env.ref_context.get('minio:mc')
         if not has_explicit_title:
             title = title.lstrip('.')
             target = target.lstrip('~')
@@ -448,6 +423,7 @@ class MinioCMDOptionXRefRole(XRefRole):
         if target[0:1] == '.':
             target = target[1:]
             refnode['refspecific'] = True
+        target = target.replace(" ","-")
 
         return title, target
 
@@ -457,7 +433,7 @@ class MinioXRefRole(XRefRole):
         # basically what sphinx.domains.python.PyXRefRole does
         refnode['minio:object'] = env.ref_context.get('minio:object')
         refnode['minio:module'] = env.ref_context.get('minio:module')
-        refnode['minio:command'] = env.ref_context.get('minio:command')
+        refnode['minio:mc'] = env.ref_context.get('minio:mc')
         
         if not has_explicit_title:
             title = title.lstrip('.')
@@ -477,6 +453,7 @@ class MinioXRefRole(XRefRole):
             refnode['refspecific'] = True
 
         if (self.reftype == "mc" or self.reftype == "mc-cmd" or self.reftype == "mc-cmd-option"):
+          target = target.replace(" ","-")
           return title, target
         
         target = self.reftype + "." + target
@@ -549,7 +526,7 @@ class MinIODomain(Domain):
 
     @property
     def command(self) -> Dict[str, Tuple[str, str]]:
-       return self.data.setdefault('command', {}) # command -> commandname, node_id
+       return self.data.setdefault('mc', {}) # command -> commandname, node_id
 
     def note_command(self, commandname: str, node_id: str) -> None:
        self.command[commandname] = (self.env.docname, node_id)
