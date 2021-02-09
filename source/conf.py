@@ -62,6 +62,8 @@ extlinks = {
     'iam-docs'  : ('https://docs.aws.amazon.com/IAM/latest/UserGuide/%s',''),
     'release'   : ('https://github.com/minio/mc/releases/tag/%s',''),
     'legacy'    : ('https://docs.min.io/docs/%s',''),
+    'docs-k8s'  : ('https://docs.min.io/minio/k8s/%s',''),
+
 }
 
 # Add any paths that contain templates here, relative to this directory.
@@ -97,7 +99,7 @@ html_theme_options = {
     'show_relbars': 'false'
 }
 
-html_short_title = "MinIO Hybrid Cloud"
+html_short_title = "MinIO Object Storage for Baremetal Infrastructure"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

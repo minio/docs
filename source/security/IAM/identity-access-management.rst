@@ -61,10 +61,9 @@ For complete documentation on creating MinIO users and groups, see
 :ref:`minio-users` and :ref:`minio-groups`.
 
 MinIO *also* supports federating identity management to supported third-party
-services through the :ref:`Secure Token Service <minio-sts>`. Supported
-identity providers include Okta, Facebook, Google, and Active Directory/LDAP.
-For more complete documentation on MinIO STS configuration, see
-:ref:`minio-sts`.
+services through the :legacy:`Secure Token Service
+<minio-sts-quickstart-guide.html>`. Supported identity providers include Okta,
+Facebook, Google, and Active Directory/LDAP. 
 
 Policies
 --------
@@ -85,6 +84,15 @@ policy building tools. For more complete documentation on MinIO policies, see
 To assign policies to users or groups, use the :mc-cmd:`mc admin policy set` 
 command from the :program:`mc` command line tool.
 
+Security Token Service
+----------------------
+
+The MinIO Security Token Service (STS) is an endpoint service that 
+enables clients to request temporary credentials for MinIO resources. 
+
+See :legacy:`MinIO STS Quickstart Guide <minio-sts-quickstart-guide.html>` 
+for more information. 
+
 .. toctree::
    :hidden:
    :titlesonly:
@@ -92,5 +100,3 @@ command from the :program:`mc` command line tool.
    /security/IAM/iam-users
    /security/IAM/iam-groups
    /security/IAM/iam-policies
-   /security/IAM/iam-providers
-   /security/IAM/iam-security-token-service

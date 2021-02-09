@@ -134,52 +134,52 @@ The following table lists :mc-cmd:`mc` commands:
      - Description
 
    * - :mc:`mc alias`
-     - .. include:: /minio-cli/minio-mc/mc-alias.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-alias.rst
           :start-after: start-mc-alias-desc
           :end-before: end-mc-alias-desc
      
    * - :mc:`mc cat`
-     - .. include:: /minio-cli/minio-mc/mc-cat.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-cat.rst
           :start-after: start-mc-cat-desc
           :end-before: end-mc-cat-desc
      
    * - :mc:`mc cp`
-     - .. include:: /minio-cli/minio-mc/mc-cp.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-cp.rst
           :start-after: start-mc-cp-desc
           :end-before: end-mc-cp-desc
      
    * - :mc:`mc diff`
-     - .. include:: /minio-cli/minio-mc/mc-diff.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-diff.rst
           :start-after: start-mc-diff-desc
           :end-before: end-mc-diff-desc
      
    * - :mc:`mc encrypt`
-     - .. include:: /minio-cli/minio-mc/mc-encrypt.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-encrypt.rst
           :start-after: start-mc-encrypt-desc
           :end-before: end-mc-encrypt-desc
      
    * - :mc:`mc event`
-     - .. include:: /minio-cli/minio-mc/mc-event.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-event.rst
           :start-after: start-mc-event-desc
           :end-before: end-mc-event-desc
      
    * - :mc:`mc find`
-     - .. include:: /minio-cli/minio-mc/mc-find.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-find.rst
           :start-after: start-mc-find-desc
           :end-before: end-mc-find-desc
      
    * - :mc:`mc head`
-     - .. include:: /minio-cli/minio-mc/mc-head.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-head.rst
           :start-after: start-mc-head-desc
           :end-before: end-mc-head-desc
      
    * - :mc:`mc ilm`
-     - .. include:: /minio-cli/minio-mc/mc-ilm.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-ilm.rst
           :start-after: start-mc-ilm-desc
           :end-before: end-mc-ilm-desc
      
    * - :mc:`mc legalhold`
-     - .. include:: /minio-cli/minio-mc/mc-legalhold.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-legalhold.rst
           :start-after: start-mc-legalhold-desc
           :end-before: end-mc-legalhold-desc
      
@@ -188,82 +188,82 @@ The following table lists :mc-cmd:`mc` commands:
        :release:`RELEASE.2020-09-18T00-13-21Z`. Use :mc:`mc retention`.
 
    * - :mc:`mc ls`
-     - .. include:: /minio-cli/minio-mc/mc-ls.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-ls.rst
           :start-after: start-mc-ls-desc
           :end-before: end-mc-ls-desc
      
    * - :mc:`mc mb`
-     - .. include:: /minio-cli/minio-mc/mc-mb.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-mb.rst
           :start-after: start-mc-mb-desc
           :end-before: end-mc-mb-desc
      
    * - :mc:`mc mirror`
-     - .. include:: /minio-cli/minio-mc/mc-mirror.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-mirror.rst
           :start-after: start-mc-mirror-desc
           :end-before: end-mc-mirror-desc
      
    * - :mc:`mc mv`
-     - .. include:: /minio-cli/minio-mc/mc-mv.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-mv.rst
           :start-after: start-mc-mv-desc
           :end-before: end-mc-mv-desc
      
    * - :mc:`mc policy`
-     - .. include:: /minio-cli/minio-mc/mc-policy.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-policy.rst
           :start-after: start-mc-policy-desc
           :end-before: end-mc-policy-desc
      
    * - :mc:`mc rb`
-     - .. include:: /minio-cli/minio-mc/mc-rb.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-rb.rst
           :start-after: start-mc-rb-desc
           :end-before: end-mc-rb-desc
      
    * - :mc:`mc retention`
-     - .. include:: /minio-cli/minio-mc/mc-retention.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-retention.rst
           :start-after: start-mc-retention-desc
           :end-before: end-mc-retention-desc
      
    * - :mc:`mc rm`
-     - .. include:: /minio-cli/minio-mc/mc-rm.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-rm.rst
           :start-after: start-mc-rm-desc
           :end-before: end-mc-rm-desc
      
    * - :mc:`mc share`
-     - .. include:: /minio-cli/minio-mc/mc-share.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-share.rst
           :start-after: start-mc-share-desc
           :end-before: end-mc-share-desc
      
    * - :mc:`mc sql`
-     - .. include:: /minio-cli/minio-mc/mc-sql.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-sql.rst
           :start-after: start-mc-sql-desc
           :end-before: end-mc-sql-desc
      
    * - :mc:`mc stat`
-     - .. include:: /minio-cli/minio-mc/mc-stat.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-stat.rst
           :start-after: start-mc-stat-desc
           :end-before: end-mc-stat-desc
 
    * - :mc:`mc tag`
-     - .. include:: /minio-cli/minio-mc/mc-tag.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-tag.rst
           :start-after: start-mc-tag-desc
           :end-before: end-mc-tag-desc
      
    * - :mc:`mc tree`
-     - .. include:: /minio-cli/minio-mc/mc-tree.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-tree.rst
           :start-after: start-mc-tree-desc
           :end-before: end-mc-tree-desc
      
    * - :mc:`mc update`
-     - .. include:: /minio-cli/minio-mc/mc-update.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-update.rst
           :start-after: start-mc-update-desc
           :end-before: end-mc-update-desc
      
    * - :mc:`mc version`
-     - .. include:: /minio-cli/minio-mc/mc-version.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-version.rst
           :start-after: start-mc-version-desc
           :end-before: end-mc-version-desc
      
    * - :mc:`mc watch`
-     - .. include:: /minio-cli/minio-mc/mc-watch.rst
+     - .. include:: /reference/minio-cli/minio-mc/mc-watch.rst
           :start-after: start-mc-watch-desc
           :end-before: end-mc-watch-desc
      
@@ -359,7 +359,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    :hidden:
    :glob:
 
-   /minio-cli/minio-mc/*
+   /reference/minio-cli/minio-mc/*
 
 
 

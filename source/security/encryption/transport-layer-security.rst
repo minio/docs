@@ -30,11 +30,6 @@ You can customize the certificate directory by passing the ``--certs-dir``
 option to ``minio server``. The ``certs`` directory must also include any
 intermediate certificates required to establish a chain of trust to the root CA.
 
-Creating a Certificate for a MinIO Server
------------------------------------------
-
-This section includes guidance for creating a private key and public
-certificate for a MinIO Server instance.
-
-For MinIO deployments on Kubernetes, see the <future TLS kubernetes doc>
-tutorial for more specific instructions.
+For more information, see 
+:minio-git:`How to secure access to MinIO server with TLS 
+<minio/tree/master/docs/tls>`. 

@@ -1,5 +1,7 @@
 .. _minio-sts:
 
+:orphan:
+
 ======================
 Security Token Service
 ======================
@@ -9,6 +11,13 @@ Security Token Service
 .. contents:: Table of Contents
    :local:
    :depth: 2
+
+.. important::
+
+   This page is under active development and isn't ready for prime-time. 
+   If you've found this page, consider checking out our legacy documentation on
+   :legacy:`MinIO STS Quickstart Guide <minio-sts-quickstart-guide.html>` 
+   for more information. 
 
 Overview
 --------

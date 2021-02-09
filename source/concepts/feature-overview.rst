@@ -16,21 +16,28 @@ The following table lists MinIO features and their corresponding documentation:
    * - Feature
      - Description
 
-   * - :doc:`Bucket Notifications </minio-features/bucket-notifications>`
+   * - :doc:`Bucket Notifications </concepts/bucket-notifications>`
      - MinIO Bucket Notifications allows you to automatically publish
        notifications to one or more configured notification targets when
        specific events occur in a bucket. 
 
-   * - :doc:`Bucket Versioning </minio-features/bucket-versioning>`
+   * - :doc:`Bucket Versioning </concepts/bucket-versioning>`
      - MinIO Bucket Versioning supports keeping multiple "versions" of an 
        object in a single bucket. Write operations which would normally
        overwrite an existing object instead result in the creation of a new
        versioned object.
 
+   * - :doc:`Erasure Coding </concepts/erasure-coding>`
+     - MinIO Erasure Coding is a data redundancy and availability feature that 
+       allows MinIO deployments to automatically reconstruct objects on-the-fly
+       despite the loss of multiple drives or nodes on the cluster. Erasure 
+       coding provides object-level healing with less overhead than adjacent 
+       technologies such as RAID ro replication.
+
 .. toctree::
    :titlesonly:
    :hidden:
 
-   /minio-features/bucket-notifications
-   /minio-features/bucket-versioning
-   /minio-features/erasure-coding
+   /concepts/bucket-notifications
+   /concepts/bucket-versioning
+   /concepts/erasure-coding

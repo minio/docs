@@ -227,6 +227,9 @@ div.admonition {
     border: none;
     border-left: 4px solid #2592EF; }
 
+dl {
+  margin: 10px 0 10px 0; }
+
 dl.minio {
   margin: 10px 0 10px 0; }
 

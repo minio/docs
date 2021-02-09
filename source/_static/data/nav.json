@@ -13,7 +13,24 @@
             "link": "https://min.io/product/reference-hardware"
         }
     },
-    "Docs": "https://docs.min.io/",
+    "Docs": {
+        "MinIO Baremetal" : {
+            "description": "MinIO Object Storage for Baremetal Infrastructure",
+            "link": "https://docs.min.io/minio/baremetal"
+        },
+        "MinIO Hybrid Cloud" : {
+            "description" : "MinIO Object Storage for Kubernetes-Managed Private and Public Cloud Infrastructure",
+            "link" : "https://docs.min.io/minio/k8s"
+        },
+        "MinIO for VMware Cloud Foundation" : {
+            "description" : "MinIO Object Storage for VMware Cloud Foundation 4.2",
+            "link" : "https://docs.min.io/minio/vsphere"
+        },
+        "MinIO Legacy Documentation" : {
+            "description" : "MinIO Object Storage Legacy Documentation",
+            "link" : "https://docs.min.io"
+        }
+    },
     "Solutions": {
         "VMware": {
             "description": "Discover how MinIO integrates with VMware across the portfolio from the Persistent Data platform to TKGI and how we support their Kubernetes ambitions.",

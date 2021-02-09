@@ -24,10 +24,11 @@ The :mc:`minio server` command starts the MinIO server process:
    minio server /mnt/disk{1...4}
 
 For examples of deploying :mc:`minio server` on a bare metal environment, 
-see :ref:`minio-baremetal`.
+see :ref:`minio-installation`.
 
 For examples of deploying :mc:`minio server` on a Kubernetes environment,
-see :ref:`minio-kubernetes`.
+see :docs-k8s:`Kubernetes documentation <>`.
+
 
 Configuration Settings
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -63,7 +64,7 @@ The command accepts the following arguments:
 
    For distributed deployments, specify the hostname of each :mc:`minio server`
    in the deployment. The group of :mc:`minio server` processes represent a
-   single :ref:`Server Set <minio-intro-server-set>`.
+   single :ref:`Server Pool <minio-intro-server-pool>`.
 
    :mc-cmd:`~minio server HOSTNAME` supports MinIO expansion notation
    ``{x...y}`` to denote a sequential series of hostnames. MinIO *requires*
@@ -79,11 +80,11 @@ The command accepts the following arguments:
 
    You must run the :mc:`minio server` command with the *same* combination of
    :mc-cmd:`~minio server HOSTNAME` and :mc-cmd:`~minio server DIRECTORIES` on
-   each host in the Server Set.
+   each host in the Server Pool.
    
    Each additional ``HOSTNAME/DIRECTORIES`` pair denotes an additional Server
    Set for the purpose of horizontal expansion of the MinIO deployment. For more
-   information on Server Sets, see :ref:`Server Set <minio-intro-server-set>`.
+   information on Server Pools, see :ref:`Server Pool <minio-intro-server-pool>`.
 
 .. mc-cmd:: DIRECTORIES
 

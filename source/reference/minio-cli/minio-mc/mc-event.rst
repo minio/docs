@@ -21,7 +21,7 @@ the bucket event notifications.
 MinIO automatically sends triggered events to the configured notification
 targets. MinIO supports notification targets like AMQP, Redis, ElasticSearch,
 NATS and PostgreSQL. See 
-:doc:`MinIO Bucket Notifications </minio-features/bucket-notifications>`
+:doc:`MinIO Bucket Notifications </concepts/bucket-notifications>`
 for more information.
 
 .. end-mc-event-desc
@@ -171,7 +171,7 @@ Syntax
 
       The MinIO server outputs an ARN for each configured 
       notification target at server startup. See 
-      :doc:`/minio-features/bucket-notifications` for more
+      :doc:`/concepts/bucket-notifications` for more
       information.
 
    .. mc-cmd:: event
@@ -232,7 +232,7 @@ Syntax
 
       The MinIO server outputs an ARN for each configured 
       notification target at server startup. See 
-      :doc:`/minio-features/bucket-notifications` for more information.
+      :doc:`/concepts/bucket-notifications` for more information.
 
    .. mc-cmd:: force
       :option:
@@ -302,7 +302,7 @@ Syntax
 
       The MinIO server outputs an ARN for each configured 
       notification target at server startup. See 
-      :doc:`/minio-features/bucket-notifications` for more information.
+      :doc:`/concepts/bucket-notifications` for more information.
 
 
 

@@ -1,3 +1,4 @@
+:orphan:
 .. _minio-sse:
 
 =============================
@@ -9,6 +10,13 @@ Server-Side Object Encryption
 .. contents:: Table of Contents
    :local:
    :depth: 1
+
+.. important::
+
+   This page is under active development and isn't ready for prime-time. 
+   If you've found this page, consider checking out our legacy documentation on 
+   :legacy:`MinIO Security Overview <minio-security-overview.html>` while 
+   we work on cleaning this page up.
 
 Overview
 --------
@@ -27,7 +35,7 @@ SSE-C
 SSE-S3
    The server uses a secret key managed by a Key Management System (KMS)
    to perform encryption and decryption. SSE-S3 requires using 
-   :ref:`MinIO KES <minio-kes>` and a supported KMS.
+   :minio-git:`MinIO KES <kes>` and a supported KMS.
 
 Encryption Process Overview
 ---------------------------
@@ -109,8 +117,8 @@ the KMS provide the following services:
   the data key and return the plain data key.
 
 Enabling SSE-S3 requires deploying one or more 
-:ref:`MinIO Key Encryption Servers (KES) <minio-kes>` and configuring the
-:mc:`minio` server for access to KES. The KES handles processing
+:minio-git:`MinIO Key Encryption Service (KES) instances <minio/kes>` and
+configuring the :mc:`minio` server for access to KES. The KES handles processing
 cryptographic key requests to the KMS service.
 
 With SSE-S3, the MinIO server requests a new data key for each uploaded object
@@ -128,8 +136,6 @@ key and the master key ID of the object metadata. If this succeeds, the server
 requests a new data key from the KMS using the master key ID of the current
 MinIO KMS configuration and re-wraps the OEK with a new KEK derived from the new
 data key / EK.
-
-<Diagram to come>
 
 Only the root MinIO user can perform an SSE-S3 key rotation using the Admin-API via
 the ``mc`` client. Refer to the ``mc admin guide`` <todo>

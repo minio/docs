@@ -12,17 +12,16 @@ First-time users of MinIO *or* object storage services should start with
 our :doc:`Introduction </introduction/minio-overview>`.
 
 Users deploying onto a Kubernetes cluster should start with our 
-:doc:`Kubernetes documentation </kubernetes/minio-kubernetes-overview>`.
+:docs-k8s:`Kubernetes documentation <>`.
 
 .. toctree::
    :titlesonly:
    :hidden:
 
    /introduction/minio-overview
-   /minio-features/overview
-   /bare-metal/minio-baremetal-overview
-   /kubernetes/minio-kubernetes-overview
+   /concepts/feature-overview
+   /tutorials/minio-installation
    /security/security-overview
-   /minio-cli/minio-mc
-   /minio-cli/minio-mc-admin
-   /minio-server/minio-server
+   /reference/minio-cli/minio-mc
+   /reference/minio-cli/minio-mc-admin
+   /reference/minio-server/minio-server

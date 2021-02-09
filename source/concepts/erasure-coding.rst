@@ -12,7 +12,7 @@ Erasure Coding
 
 MinIO Erasure Coding is a data redundancy and availability feature that allows
 MinIO deployments to automatically reconstruct objects on-the-fly despite the
-loss of multiple drives or nodes in the cluster.Erasure Coding provides
+loss of multiple drives or nodes in the cluster. Erasure Coding provides
 object-level healing with less overhead than adjacent technologies such as
 RAID or replication. 
 
@@ -24,19 +24,15 @@ number of nodes, and number of drives per node in the Erasure Set, MinIO can
 tolerate the loss of up to half (``N/2``) of drives and still retrieve stored
 objects.
 
-For example, consider the following small-scale MinIO deployment consisting of a
-single :ref:`Server Set <minio-intro-server-set>` with 4 :mc:`minio server`
+For example, consider a small-scale MinIO deployment consisting of a
+single :ref:`Server Pool <minio-intro-server-pool>` with 4 :mc:`minio server`
 nodes. Each node in the deployment has 4 locally attached ``1Ti`` drives for
-a total of 16 drives:
-
-<DIAGRAM>
+a total of 16 drives.
 
 MinIO creates :ref:`Erasure Sets <minio-ec-erasure-set>` by dividing the total
 number of drives in the deployment into sets consisting of between 4 and 16
 drives each. In the example deployment, the largest possible Erasure Set size
-that evenly divides into the total number of drives is ``16``:
-
-<DIAGRAM>
+that evenly divides into the total number of drives is ``16``.
 
 MinIO uses a Reed-Solomon algorithm to split objects into data and parity blocks
 based on the size of the Erasure Set. MinIO then uniformly distributes the
@@ -44,8 +40,6 @@ data and parity blocks across the Erasure Set drives such that each drive
 in the set contains no more than one block per object. MinIO uses
 the ``EC:N`` notation to refer to the number of parity blocks (``N``) in the
 Erasure Set.
-
-<DIAGRAM>
 
 The number of parity blocks in a deployment controls the deployment's relative
 data redundancy. Higher levels of parity allow for higher tolerance of drive
@@ -92,9 +86,6 @@ deployment:
 - For more information on selecting Erasure Code Parity, see
   :ref:`minio-ec-parity`
 
-- For more information on Erasure Code Object Healing, see
-  :ref:`minio-ec-object-healing`.
-
 .. _minio-ec-erasure-set:
 
 Erasure Sets
@@ -105,34 +96,34 @@ Erasure Coding. MinIO evenly distributes object data and parity blocks among
 the drives in the Erasure Set. 
 
 MinIO calculates the number and size of *Erasure Sets* by dividing the total
-number of drives in the :ref:`Server Set <minio-intro-server-set>` into sets
+number of drives in the :ref:`Server Pool <minio-intro-server-pool>` into sets
 consisting of between 4 and 16 drives each. MinIO considers two factors when
 selecting the Erasure Set size:
 
 - The Greatest Common Divisor (GCD) of the total drives.
 
-- The number of :mc:`minio server` nodes in the Server Set.
+- The number of :mc:`minio server` nodes in the Server Pool.
 
 For an even number of nodes, MinIO uses the GCD to calculate the Erasure Set
 size and ensure the minimum number of Erasure Sets possible. For an odd number
 of nodes, MinIO selects a common denominator that results in an odd number of
 Erasure Sets to facilitate more uniform distribution of erasure set drives
-among nodes in the Server Set.
+among nodes in the Server Pool.
 
-For example, consider a Server Set consisting of 4 nodes with 8 drives each
+For example, consider a Server Pool consisting of 4 nodes with 8 drives each
 for a total of 32 drives. The GCD of 16 produces 2 Erasure Sets of 16 drives 
 each with uniform distribution of erasure set drives across all 4 nodes.
 
-Now consider a Server Set consisting of 5 nodes with 8 drives each for a total
+Now consider a Server Pool consisting of 5 nodes with 8 drives each for a total
 of 40 drives. Using the GCD, MinIO would create 4 erasure sets with 10 drives
 each. However, this distribution would result in uneven distribution with
 one node contributing more drives to the Erasure Sets than the others. 
 MinIO instead creates 5 erasure sets with 8 drives each to ensure uniform
 distribution of Erasure Set drives per Nodes.
 
-MinIO generally recommends maintaining an even number of nodes in a Server Set
+MinIO generally recommends maintaining an even number of nodes in a Server Pool
 to facilitate simplified human calculation of the number and size of
-Erasure Sets in the Server Set.
+Erasure Sets in the Server Pool.
 
 .. _minio-ec-parity:
 
@@ -179,7 +170,7 @@ Write Quorum
   to serve write operations. MinIO requires enough available drives to
   eliminate the risk of split-brain scenarios. 
   
-  MinIO Write Quorum is ``DRIVES - (EC:N-1)``.
+  MinIO Write Quorum is ``(DRIVES - (EC:N)) + 1``.
 
 Storage Classes
 ~~~~~~~~~~~~~~~
@@ -204,8 +195,26 @@ MinIO provides the following two storage classes:
    - The :mc:`mc admin config` command to modify the ``storage_class.standard``
      configuration setting.
 
-   Starting with <RELEASE>, MinIO defaults ``STANDARD`` storage class to
-   ``EC:4``.
+   Starting with :minio-git:`RELEASE.2021-01-30T00-20-58Z 
+   <minio/releases/tag/RELEASE.2021-01-30T00-20-58Z>`, MinIO defaults 
+   ``STANDARD`` storage class based on the number of volumes in the Erasure Set:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 70
+      :width: 100%
+
+      * - Erasure Set Size
+        - Default Parity (EC:N)
+
+      * - 5 or Fewer 
+        - EC:2
+
+      * - 6 - 7
+        - EC:3
+
+      * - 8 or more 
+        - EC:4
 
    The maximum value is half of the total drives in the
    :ref:`Erasure Set <minio-ec-erasure-set>`.
@@ -252,19 +261,12 @@ interfacing with the MinIO server.
   created.
 
 
-.. _minio-ec-object-healing:
-
-Object Healing
---------------
-
-TODO
-
 .. _minio-ec-bitrot-protection:
 
 BitRot Protection
 -----------------
 
-TODO- ReWrite w/ more detail.
+.. TODO- ReWrite w/ more detail.
 
 Silent data corruption or bitrot is a serious problem faced by disk drives
 resulting in data getting corrupted without the user’s knowledge. The reasons

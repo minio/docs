@@ -31,28 +31,29 @@ needs to store a variety of blobs, including rich multimedia like videos and
 images. The structure of objects on the MinIO server might look similar to the
 following:
 
-.. code-block:: shell
+.. code-block:: text
 
    / #root
    /images/
-      2020-01-02-blog-title.png
-      2020-01-03-blog-title.png
+      2020-01-02-MinIO-Diagram.png
+      2020-01-03-MinIO-Advanced-Deployment.png
+      MinIO-Logo.png
    /videos/
-      2020-01-03-blog-cool-video.mp4
-   /blogs/
-      2020-01-02-blog.md
-      2020-01-03-blog.md
-   /comments/
-      2020-01-02-blog-comments.json
-      2020-01-02-blog-comments.json
+      2020-01-04-MinIO-Interview.mp4
+   /articles/
+      /john.doe/
+         2020-01-02-MinIO-Object-Storage.md
+         2020-01-02-MinIO-Object-Storage-comments.json
+      /jane.doe/
+         2020-01-03-MinIO-Advanced-Deployment.png
+         2020-01-02-MinIO-Advanced-Deployment-comments.json
+         2020-01-04-MinIO-Interview.md
+
+MinIO supports multiple levels of nested directories and objects to support 
+even the most dynamic object storage workloads.
 
 Deployment Architecture
 -----------------------
-
-The following diagram describes the individual components in a MinIO 
-deployment:
-
-<DIAGRAM ErasureSet -> ServerSet -> Cluster >
 
 :ref:`Erasure Set <minio-ec-erasure-set>`
    A set of disks that supports MinIO :ref:`Erasure Coding
@@ -66,66 +67,68 @@ deployment:
    impact despite the loss of up to half (``N/2``) of the total drives in the
    deployment.
 
-.. _minio-intro-server-set:
+.. _minio-intro-server-pool:
 
-:ref:`Server Set <minio-intro-server-set>`
+:ref:`Server Pool <minio-intro-server-pool>`
    A set of MinIO :mc-cmd:`minio server` nodes which pool their drives and
    resources for supporting object storage/retrieval requests. The
    :mc-cmd:`~minio server HOSTNAME` argument passed to the 
-   :mc-cmd:`minio server` command represents a Server Set:
+   :mc-cmd:`minio server` command represents a Server Pool:
 
    .. code-block:: shell
 
       minio server https://minio{1...4}.example.net/mnt/disk{1...4}
                    
-                   |                    Server Set                |
+                   |                    Server Pool                |
 
-   The above example describes a single Server Set with
+   The above example describes a single Server Pool with
    4 :mc:`minio server` nodes and 4 drives each for a total of 16 drives. 
    MinIO requires starting each :mc:`minio server` in the set with the same
    startup command to enable awareness of all set peers.
 
    See :mc-cmd:`minio server` for complete syntax and usage.
 
-   MinIO calculates the size and number of Erasure Sets in the Server Set based
+   MinIO calculates the size and number of Erasure Sets in the Server Pool based
    on the total number of drives in the set *and* the number of :mc:`minio`
    servers in the set. See :ref:`minio-ec-erasure-set` for more information.
 
 .. _minio-intro-cluster:
 
 :ref:`Cluster <minio-intro-cluster>`
-   The whole MinIO deployment consisting of one or more Server Sets. Each
+   The whole MinIO deployment consisting of one or more Server Pools. Each
    :mc-cmd:`~minio server HOSTNAME` argument passed to the 
-   :mc-cmd:`minio server` command represents one Server Set:
+   :mc-cmd:`minio server` command represents one Server Pool:
 
    .. code-block:: shell
 
       minio server https://minio{1...4}.example.net/mnt/disk{1...4} \
                    https://minio{5...8}.example.net/mnt/disk{1...4}
                    
-                   |                    Server Set                |
+                   |                    Server Pool                |
    
-   The above example describes two Server Sets, each consisting of 4
-   :mc:`minio server` nodes with 4 drives each for a total of 32 drives.
+   The above example describes two Server Pools, each consisting of 4
+   :mc:`minio server` nodes with 4 drives each for a total of 32 drives. MinIO 
+   always stores each unique object and all versions of that object on the 
+   same Server Pool.
 
-   Server Set expansion is a function of Horizontal Scaling, where each new set
-   expands the cluster storage and compute resources. Server Set expansion
+   Server Pool expansion is a function of Horizontal Scaling, where each new set
+   expands the cluster storage and compute resources. Server Pool expansion
    is not intended to support migrating existing sets to newer hardware. 
 
-   MinIO Standalone clusters consist of a single Server Set with a single
+   MinIO Standalone clusters consist of a single Server Pool with a single
    :mc:`minio server` node. Standalone clusters are best suited for initial
    development and evaluation. MinIO strongly recommends production
    clusters consist of a *minimum* of 4 :mc:`minio server` nodes in a 
-   Server Set.
+   Server Pool.
 
 Deploying MinIO
 ---------------
 
-For Kubernetes clusters, use the MinIO Kubernetes Operator.
-See :ref:`minio-kubernetes` for more information.
+Users deploying onto a Kubernetes cluster should start with our 
+:docs-k8s:`Kubernetes documentation <>`.
 
 For bare-metal environments, including private cloud services
 or containerized environments, install and run the :mc:`minio server` on
-each host in the MinIO deployment. See :ref:`minio-baremetal` for more 
-information.
+each host in the MinIO deployment. 
+See :ref:`minio-installation` for more information.
 
