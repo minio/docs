@@ -43,7 +43,8 @@ extensions = [
     'recommonmark',
     'sphinx_markdown_tables',
     'sphinx-prompt',
-    'sphinx_substitution_extensions'
+    'sphinx_substitution_extensions',
+    'sphinx_togglebutton'
 ]
 
 # -- External Links
@@ -57,7 +58,7 @@ extlinks = {
     'github'    : ('https://github.com/%s',''),
     'kube-api'  : ('https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/%s',''),
     'aws-docs'  : ('https://docs.aws.amazon.com/%s',''),
-    's3-docs'   : ('https://docs.aws.amazon.com/AmazonS3/latest/dev/%s',''),
+    's3-docs'   : ('https://docs.aws.amazon.com/AmazonS3/latest/userguide/%s',''),
     's3-api'    : ('https://docs.aws.amazon.com/AmazonS3/latest/API/%s',''),
     'iam-docs'  : ('https://docs.aws.amazon.com/IAM/latest/UserGuide/%s',''),
     'release'   : ('https://github.com/minio/mc/releases/tag/%s',''),
