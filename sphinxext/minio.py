@@ -268,6 +268,8 @@ class MinioObject(ObjectDescription):
     option_spec = {
         'noindex': directives.flag,
         'noindexentry': directives.flag,
+        'noprefix': directives.flag,
+        'delimiter': directives.unchanged,
     }
 
     def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
@@ -278,6 +280,13 @@ class MinioObject(ObjectDescription):
         directives.
         """
         sig = sig.strip()
+
+        noprefix = 'noprefix' in self.options
+        if ('delimiter' in self.options):
+           delimiter = self.options.get('delimiter').strip('"')
+        else:
+           delimiter = "."
+
 
         member = sig
         # If construct is nested, prefix the current prefix
@@ -291,8 +300,9 @@ class MinioObject(ObjectDescription):
         signode['object'] = prefix
         signode['fullname'] = fullname
 
-        if prefix:  
-          signode += addnodes.desc_addname(prefix + '.', prefix + '.')
+        if prefix and (noprefix == False):  
+        #  signode += addnodes.desc_addname(prefix + '.', prefix + '.')
+          signode += addnodes.desc_addname(prefix + delimiter, prefix + delimiter)
         
         signode += addnodes.desc_name(member, member)
 
@@ -480,7 +490,8 @@ class MinIODomain(Domain):
         'mc-cmd':         ObjType(_('mc-cmd'),        'mc-cmd'),
         'mc-cmd-option':  ObjType(_('mc-cmd-option'), 'mc-cmd-option'),
         'policy-action':  ObjType(_('policy-action'), 'policy-action'),
-        'envvar':         ObjType(_('envvar'),        'envvar')
+        'envvar':         ObjType(_('envvar'),        'envvar'),
+        'mc-conf':        ObjType(_('mc-conf'),       'mc-conf')
     }
     directives = {
         'data':            MinioObject,
@@ -490,7 +501,8 @@ class MinIODomain(Domain):
         'mc':              MinioMCCommand,
         'mc-cmd':          MinioMCObject,
         'policy-action':   MinioObject,
-        'envvar':          MinioObject
+        'envvar':          MinioObject,
+        'mc-conf':         MinioObject,
     }
     roles = {
         'data':             MinioXRefRole(),
@@ -502,6 +514,7 @@ class MinIODomain(Domain):
         'mc-cmd-option':    MinioCMDOptionXRefRole(),
         'policy-action':    MinioXRefRole(),
         'envvar':           MinioXRefRole(),
+        'mc-conf':          MinioXRefRole(),
 
     }
     initial_data = {

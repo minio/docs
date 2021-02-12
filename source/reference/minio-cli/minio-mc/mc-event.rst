@@ -19,10 +19,10 @@ The :mc:`mc event` command supports adding, removing, and listing
 the bucket event notifications.
 
 MinIO automatically sends triggered events to the configured notification
-targets. MinIO supports notification targets like AMQP, Redis, ElasticSearch,
-NATS and PostgreSQL. See 
-:doc:`MinIO Bucket Notifications </concepts/bucket-notifications>`
-for more information.
+targets. MinIO supports notification targets like AMQP (RabbitMQ), Redis,
+ElasticSearch, NATS and PostgreSQL. See 
+:doc:`MinIO Bucket Notifications </monitoring/bucket-notifications/bucket-notifications>` for more 
+information.
 
 .. end-mc-event-desc
 
@@ -31,37 +31,30 @@ for more information.
 Supported Bucket Events
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The following table lists the supported S3 Event and the corresponding 
-:mc:`mc event` alias:
+MinIO supports the following S3 event types:
 
-.. list-table::
-   :header-rows: 1
-   :widths: 20 80
-   :width: 100%
-
-   * - MinIO Alias
-     - Corresponding S3 Event
-
-   * - ``put``
-     - ``s3:ObjectCreated:Put`` 
-
-   * - ``completeMultipartUpload``
-     - ``s3:ObjectCreated:CompleteMultipartUpload`` 
-
-   * - ``head``
-     - ``s3:ObjectAccessed:Head``
-
-   * - ``post``
-     - ``s3:ObjectCreated:Post``
-
-   * - ``delete``
-     - ``s3:ObjectRemoved:Delete``
-
-   * - ``copy``
-     - ``s3:ObjectCreated:Copy``
-
-   * - ``get``
-     - ``s3:ObjectAccessed:Get``
+- :data:`s3:ObjectRemoved:DeleteMarkerCreated`
+- :data:`s3:ObjectRemoved:Delete`
+- :data:`s3:ObjectCreated:PutRetention`
+- :data:`s3:ObjectCreated:PutLegalHold`
+- :data:`s3:ObjectCreated:Put`
+- :data:`s3:ObjectCreated:Post`
+- :data:`s3:ObjectCreated:Copy`
+- :data:`s3:ObjectCreated:CompleteMultipartUpload`
+- :data:`s3:ObjectAccessed:Head`
+- :data:`s3:ObjectAccessed:GetRetention`
+- :data:`s3:ObjectAccessed:GetLegalHold`
+- :data:`s3:ObjectAccessed:Get`
+- :data:`s3:Replication:OperationCompletedReplication`
+- :data:`s3:Replication:OperationFailedReplication`
+- :data:`s3:Replication:OperationMissedThreshold`
+- :data:`s3:Replication:OperationNotTracked`
+- :data:`s3:Replication:OperationReplicatedAfterThreshold`
+- :data:`s3:ObjectRestore:Post`
+- :data:`s3:ObjectRestore:Completed`
+- :data:`s3:BucketCreated`
+- :data:`s3:BucketRemoved`
+   
 
 For more complete documentation on the listed S3 events, see 
 :s3-docs:`S3 Supported Event Types
@@ -171,7 +164,7 @@ Syntax
 
       The MinIO server outputs an ARN for each configured 
       notification target at server startup. See 
-      :doc:`/concepts/bucket-notifications` for more
+      :doc:`/monitoring/bucket-notifications/bucket-notifications` for more
       information.
 
    .. mc-cmd:: event
@@ -232,7 +225,7 @@ Syntax
 
       The MinIO server outputs an ARN for each configured 
       notification target at server startup. See 
-      :doc:`/concepts/bucket-notifications` for more information.
+      :doc:`/monitoring/bucket-notifications/bucket-notifications` for more information.
 
    .. mc-cmd:: force
       :option:
@@ -302,7 +295,7 @@ Syntax
 
       The MinIO server outputs an ARN for each configured 
       notification target at server startup. See 
-      :doc:`/concepts/bucket-notifications` for more information.
+      :doc:`/monitoring/bucket-notifications/bucket-notifications` for more information.
 
 
 
