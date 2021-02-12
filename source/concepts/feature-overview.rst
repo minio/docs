@@ -16,7 +16,7 @@ The following table lists MinIO features and their corresponding documentation:
    * - Feature
      - Description
 
-   * - :doc:`Bucket Notifications </concepts/bucket-notifications>`
+   * - :doc:`Bucket Notifications </monitoring/bucket-notifications/bucket-notifications>`
      - MinIO Bucket Notifications allows you to automatically publish
        notifications to one or more configured notification targets when
        specific events occur in a bucket. 
@@ -38,6 +38,5 @@ The following table lists MinIO features and their corresponding documentation:
    :titlesonly:
    :hidden:
 
-   /concepts/bucket-notifications
    /concepts/bucket-versioning
    /concepts/erasure-coding
