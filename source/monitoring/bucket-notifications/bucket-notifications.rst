@@ -38,6 +38,12 @@ MinIO supports publishing event notifications to the following targets:
 
        See :ref:`minio-bucket-notifications-publish-amqp` for a tutorial.
 
+   * - :guilabel:`MQTT`
+     - Publish notifications to an `MQTT <https://www.mqtt.org/>`__  
+       server/broker endpoint.
+
+       See :ref:`minio-bucket-notifications-publish-mqtt` for a tutorial.
+
 Supported S3 Event Types
 ------------------------
 
@@ -102,3 +108,4 @@ You can only listen to these events through the :legacy:`ListenNotification
    :hidden:
 
    /monitoring/bucket-notifications/publish-events-to-amqp
+   /monitoring/bucket-notifications/publish-events-to-mqtt
