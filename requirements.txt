@@ -1,4 +1,4 @@
-sphinx == 3.1.2
+sphinx == 3.5.0
 sphinx-copybutton == 0.2.12
 git+https://github.com/ravindk89/sphinx-tabs
 recommonmark == 0.6.0

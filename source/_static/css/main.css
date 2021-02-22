@@ -202,11 +202,24 @@ a {
   a:hover {
     color: #0036b9;
     text-decoration: none; }
+  a > img.anchor {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    height: 1rem; }
 
-h1, h2, h3, h4, h5 {
-  color: #1C1C1C; }
-  h1 > a.toc-backref, h2 > a.toc-backref, h3 > a.toc-backref, h4 > a.toc-backref, h5 > a.toc-backref {
+h1, h2, h3, h4, h5, h6 {
+  color: #1C1C1C;
+  position: relative; }
+  h1 > .toc-backref, h2 > .toc-backref, h3 > .toc-backref, h4 > .toc-backref, h5 > .toc-backref, h6 > .toc-backref {
     color: #1C1C1C; }
+  h1 > .headerlink, h2 > .headerlink, h3 > .headerlink, h4 > .headerlink, h5 > .headerlink, h6 > .headerlink {
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    opacity: 0.5; }
+    h1 > .headerlink:hover, h2 > .headerlink:hover, h3 > .headerlink:hover, h4 > .headerlink:hover, h5 > .headerlink:hover, h6 > .headerlink:hover {
+      background-color: transparent;
+      opacity: 1; }
 
 div.admonition {
   margin-top: 0; }
