@@ -110,6 +110,8 @@ html_css_files = ['css/main.min.css']
 
 html_js_files = ['js/main.js']
 
+html_permalinks_icon = "<img class='anchor' src=https://docs.min.io/minio/baremetal/_static/img/anchor-link.svg />"
+
 html_title = 'MinIO Documentation'
 
 # rst_epilog contains common replacements for all pages

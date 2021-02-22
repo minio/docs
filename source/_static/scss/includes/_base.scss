@@ -33,12 +33,31 @@ a {
         color: $link-hover-color;
         text-decoration: none;
     }
+
+    & > img.anchor {
+       box-shadow: none;
+       height: 1rem; 
+    }
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
     color: $docs-item-main-color;
-    & > a.toc-backref {
+    position: relative;
+    
+    & > .toc-backref {
         color: $docs-item-main-color;
+    }
+
+    & > .headerlink {
+        position: absolute;
+        left: -1.5rem;
+        top: 0;
+        opacity: 0.5;
+
+        &:hover {
+            background-color: transparent;
+            opacity: 1;
+        }
     }
 }
 

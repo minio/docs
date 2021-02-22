@@ -118,6 +118,11 @@ class MinioMCObject(ObjectDescription):
            member, alias = sig.split(',', 1)
            member = member.strip()
            alias = alias.strip()
+        elif ' ' in sig:
+           # For subcommands with spaces
+           # Need to find a better way of specifying aliases, this is very hacky
+           member = sig.replace(' ', '-')
+           alias = None
         else:
             member = sig
             alias = None
