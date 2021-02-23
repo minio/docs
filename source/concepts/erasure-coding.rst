@@ -73,7 +73,7 @@ deployment:
      - 10 Tebibytes
      - 0.625
      - 10
-     - 16
+     - 11
 
    * - ``EC: 8``
      - 8 Tebibytes
