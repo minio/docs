@@ -172,6 +172,8 @@ Write Quorum
   
   MinIO Write Quorum is ``(DRIVES - (EC:N)) + 1``.
 
+.. _minio-ec-storage-class:
+
 Storage Classes
 ~~~~~~~~~~~~~~~
 
