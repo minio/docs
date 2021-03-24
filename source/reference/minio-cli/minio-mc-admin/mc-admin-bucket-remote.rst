@@ -34,7 +34,7 @@ Add a New Replication Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc admin bucket remote add` to create a new replication target 
-ARN for use with :mc-cmd:`mc replicate`:
+ARN for use with :mc-cmd:`mc replicate add`:
 
 .. code-block:: shell
    :class: copyable
@@ -170,6 +170,18 @@ Syntax
 
       Mutually exclusive with 
       :mc-cmd-option:`~mc admin bucket remote add region`
+
+   .. mc-cmd:: sync
+      :option:
+
+      Enables synchronous replication, where MinIO attempts to replicate
+      the object *prior* to returning the PUT object response. Synchronous 
+      replication may increase the time spent waiting for PUT operations
+      to return successfully.
+
+      By default, :mc-cmd:`mc admin bucket remote add` operates in 
+      asynchronous mode, where MinIO attempts replicating objects
+      *after* returning the PUT object response.
 
 .. mc-cmd:: ls
    :fullpath:

@@ -21,6 +21,7 @@ Users deploying onto a Kubernetes cluster should start with our
    /introduction/minio-overview
    /concepts/feature-overview
    /tutorials/minio-installation
+   /replication/replication-overview
    /security/security-overview
    /monitoring/monitoring-overview
    /reference/minio-cli/minio-mc
