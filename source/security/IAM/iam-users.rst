@@ -84,7 +84,7 @@ action by default.
 
 MinIO deployments have a ``root`` user with access to all actions and resources
 on the deployment. When a :mc:`minio` server first starts, it sets the ``root``
-user credentials by checking the value of the following envrionment variables:
+user credentials by checking the value of the following environment variables:
 
 - :envvar:`MINIO_ACCESS_KEY`
 - :envvar:`MINIO_SECRET_KEY`
