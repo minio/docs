@@ -21,6 +21,23 @@ S3-compatible hosts as the synchronization source.
 
 .. end-mc-mirror-desc
 
+MinIO Trims Empty Prefixes on Object Removal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The :mc-cmd-option:`mc mirror watch` command continuously synchronizes the
+source and destination targets. This includes automatically removing objects
+on the destination if they are removed on the source.
+
+.. |command| replace:: :mc-cmd-option:`mc mirror watch`
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-remove-api-trims-prefixes
+   :end-before: end-remove-api-trims-prefixes
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-remove-api-trims-prefixes-fs
+   :end-before: end-remove-api-trims-prefixes-fs
+
 Examples
 --------
 
