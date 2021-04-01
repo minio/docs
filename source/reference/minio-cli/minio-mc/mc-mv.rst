@@ -32,6 +32,19 @@ Resume Move Operations
 Use :mc-cmd-option:`mc mv continue` to resume an interrupted or failed
 move operation from the point of failure. 
 
+MinIO Trims Empty Prefixes on Object Removal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. |command| replace:: :mc-cmd:`mc mv`
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-remove-api-trims-prefixes
+   :end-before: end-remove-api-trims-prefixes
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-remove-api-trims-prefixes-fs
+   :end-before: end-remove-api-trims-prefixes-fs
+
 Examples
 --------
 

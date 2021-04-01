@@ -29,6 +29,17 @@ itself. Any configurations associated to the bucket remain in place, such as
 
 To completely remove a bucket, use :mc:`mc rb` instead of :mc:`mc rm`.
 
+MinIO Trims Empty Prefixes on Object Removal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-remove-api-trims-prefixes
+   :end-before: end-remove-api-trims-prefixes
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-remove-api-trims-prefixes-fs
+   :end-before: end-remove-api-trims-prefixes-fs
+
 Examples
 --------
 
