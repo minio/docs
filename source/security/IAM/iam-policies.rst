@@ -338,14 +338,14 @@ The following table lists the MinIO-supported policy action keys.
    
    Corresponds to the :s3-api:`s3:Delete <API_Delete.html>` IAM action.
 
-.. policy-action:: s3:PutBucketEncryption
+.. policy-action:: s3:PutEncryptionConfiguration
    
-   Corresponds to the :s3-api:`s3:PutBucketEncryption
+   Corresponds to the :s3-api:`s3:PutEncryptionConfiguration
    <API_PutBucketEncryption.html>` IAM action.
 
-.. policy-action:: s3:GetBucketEncryption
+.. policy-action:: s3:GetEncryptionConfiguration
    
-   Corresponds to the :s3-api:`s3:GetBucketEncryption
+   Corresponds to the :s3-api:`s3:GetEncryptionConfiguration
    <API_GetBucketEncryption.html>` IAM action.
 
 .. policy-action:: s3:PutBucketVersioning
@@ -511,7 +511,7 @@ services:
 
    Allows disable group permission
 
-.. policy-action:: admin:CreatePolicy"
+.. policy-action:: admin:CreatePolicy
 
    Allows create policy permission
 

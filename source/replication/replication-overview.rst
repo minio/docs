@@ -68,6 +68,7 @@ replication while adding the following MinIO-only features:
    :titlesonly:
 
    /replication/enable-server-side-one-way-bucket-replication
+   /replication/enable-server-side-two-way-bucket-replication
    
 
 .. _minio-bucket-replication-clientside:
