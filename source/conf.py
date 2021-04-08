@@ -111,6 +111,8 @@ html_css_files = ['css/main.min.css']
 
 html_js_files = ['js/main.js']
 
+html_extra_path = [ 'extra']
+
 html_permalinks_icon = "<img class='anchor' src=https://docs.min.io/minio/baremetal/_static/img/anchor-link.svg />"
 
 html_title = 'MinIO Documentation'
