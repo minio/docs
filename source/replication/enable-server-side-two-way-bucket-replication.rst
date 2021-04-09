@@ -322,12 +322,12 @@ A\) Create Replication Administrators
    .. code-block:: shell
       :class: copyable
 
-      wget https://docs.min.io/minio/baremetal/examples/ReplicationAdminPolicy.json | \
+      wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationAdminPolicy.json | \
       mc admin policy add Alpha ReplicationAdminPolicy /dev/stdin
       mc admin user add Alpha alphaReplicationAdmin LongRandomSecretKey
       mc admin policy set Alpha ReplicationAdminPolicy user=alphaReplicationAdmin
       
-      wget https://docs.min.io/minio/baremetal/examples/ReplicationAdminPolicy.json | \
+      wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationAdminPolicy.json | \
       mc admin policy add Baker ReplicationAdminPolicy /dev/stdin
       mc admin user add Baker bakerReplicationAdmin LongRandomSecretKey
       mc admin policy set baker ReplicationAdminPolicy user=bakerReplicationAdmin
@@ -341,12 +341,12 @@ B\) Create Remote Replication Administrators
    .. code-block:: shell
       :class: copyable
       
-      wget https://docs.min.io/minio/baremetal/examples/ReplicationRemoteUserPolicy.json | \
+      wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationRemoteUserPolicy.json | \
       mc admin policy add Alpha ReplicationRemoteUserPolicy /dev/stdin
       mc admin user add Alpha alphaReplicationRemoteUser LongRandomSecretKey
       mc admin policy set Alpha ReplicationRemoteUserPolicy user=alphaReplicationRemoteUser
       
-      wget https://docs.min.io/minio/baremetal/examples/ReplicationRemoteUserPolicy.json | \
+      wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationRemoteUserPolicy.json | \
       mc admin policy add Baker ReplicationRemoteUserPolicy /dev/stdin
       mc admin user add Baker bakerReplicationRemoteUser LongRandomSecretKey
       mc admin policy set Baker ReplicationRemoteUserPolicy user=bakerReplicationRemoteUser
