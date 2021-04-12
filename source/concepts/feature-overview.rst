@@ -32,7 +32,7 @@ The following table lists MinIO features and their corresponding documentation:
        allows MinIO deployments to automatically reconstruct objects on-the-fly
        despite the loss of multiple drives or nodes on the cluster. Erasure 
        coding provides object-level healing with less overhead than adjacent 
-       technologies such as RAID ro replication.
+       technologies such as RAID or replication.
 
 .. toctree::
    :titlesonly:
