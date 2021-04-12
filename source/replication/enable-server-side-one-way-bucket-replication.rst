@@ -11,32 +11,34 @@ Enable One-Way Server-Side Bucket Replication
    :depth: 2
 
 
-MinIO Server-Side Bucket Replication supports automatically synchronizing 
-objects between a source and destination bucket. The destination bucket
-can be on the same MinIO cluster as the source *or* an independent remote
-MinIO cluster.
-
 The procedure on this page creates a new bucket replication rule for
-one-way synchronization of objects from a source MinIO cluster to a destination
-MinIO cluster. 
+one-way synchronization of objects between MinIO buckets.
 
-- Use the :mc-cmd:`mc replicate edit` command to modify an existing
-  replication rule.
+.. image:: /images/active-active-replication.svg
+   :width: 600px
+   :alt: Active-Active Replication synchronizes data between two remote clusters.
+   :align: center
 
-- Use the :mc-cmd-option:`mc replicate edit` command with the
-  :mc-cmd-option:`--state "disable" <mc replicate edit state>` flag to
-  disable an existing replication rule.
+MinIO server-side replication supports at most *two* MinIO clusters. Both
+clusters *must* run MinIO.
 
-- Use the :mc-cmd:`mc replicate rm` command to remove an existing replication
-  rule.
+- To configure replication between arbitrary S3-compatible services, use
+  :mc-cmd:`mc mirror`.
 
+- To configure two-way "active-active" replication between MinIO clusters,
+  see :ref:`minio-bucket-replication-serverside-twoway`.
 
-.. todo: Diagram
+.. seealso::
 
-.. todo
-   This procedure specifically enables only one-way replication between the 
-   source and destination buckets. For a procedure on two-way "active-active"
-   replication, see <tutorial>.
+   - Use the :mc-cmd:`mc replicate edit` command to modify an existing
+     replication rule.
+
+   - Use the :mc-cmd-option:`mc replicate edit` command with the
+     :mc-cmd-option:`--state "disable" <mc replicate edit state>` flag to
+     disable an existing replication rule.
+
+   - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication
+     rule.
 
 .. _minio-bucket-replication-serverside-oneway-requirements:
 
@@ -72,13 +74,26 @@ Use the :mc-cmd:`mc version enable` command to enable versioning on
 - Replace :mc-cmd:`PATH <mc version enable TARGET>` with the bucket on which
   to enable versioning.
 
-``mc`` Command Line Interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Install and Configure ``mc`` with Access to Both Clusters.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on both the source 
-and destination MinIO cluster. See the ``mc`` 
-:ref:`Installation Quickstart <mc-install>` for instructions on downloading
-and installing ``mc``.
+This procedure uses :mc:`mc` for performing operations on both the source and
+destination MinIO cluster. Install :mc:`mc` on a machine with network access to
+both source and destination clusters. See the ``mc`` 
+:ref:`Installation Quickstart <mc-install>` for instructions on downloading and
+installing ``mc``.
+
+Use the :mc:`mc alias` command to create an alias for both MinIO clusters.
+Alias creation requires specifying an access key for a user on the cluster.
+This user **must** have permission to create and manage users and policies
+on the cluster. Specifically, ensure the user has *at minimum*:
+
+- :policy-action:`admin:CreateUser`
+- :policy-action:`admin:ListUsers`
+- :policy-action:`admin:GetUser`
+- :policy-action:`admin:CreatePolicy`
+- :policy-action:`admin:GetPolicy`
+- :policy-action:`admin:AttachUserOrGroupPolicy`
 
 .. _minio-bucket-replication-serverside-oneway-permissions:
 
@@ -90,10 +105,10 @@ source and destination clusters:
 
 .. tabs::
 
-   .. tab:: Source Policy
+   .. tab:: Replication Admin
 
-      The source cluster *must* have a user with *at minimum* following attached
-      *or* inherited policy:
+      The following policy provides permissions for configuring and enabling
+      replication on a cluster. 
 
       .. code-block:: shell
          :class: copyable
@@ -107,7 +122,7 @@ source and destination clusters:
                         "admin:GetBucketTarget"
                      ],
                      "Effect": "Allow",
-                     "Sid": ""
+                     "Sid": "EnableRemoteBucketConfiguration"
                },
                {
                      "Effect": "Allow",
@@ -116,25 +131,37 @@ source and destination clusters:
                         "s3:ListBucket",
                         "s3:ListBucketMultipartUploads",
                         "s3:GetBucketLocation",
-                        "s3:GetBucketVersioning"
+                        "s3:GetBucketVersioning",
+                        "s3:GetObjectRetention",
+                        "s3:GetObjectLegalHold",
+                        "s3:PutReplicationConfiguration"
                      ],
                      "Resource": [
-                        "arn:aws:s3:::SOURCEBUCKETNAME"
-                     ]
+                        "arn:aws:s3:::*"
+                     ],
+                     "Sid": "EnableReplicationRuleConfiguration"
                }
             ]
          }
 
-      Replace ``SOURCEBUCKETNAME`` with the name of the source bucket from which
-      MinIO replicates objects. 
+      - The ``"EnableRemoteBucketConfiguration"`` statement grants permission
+        for creating a remote target for supporting replication.
 
-      Use the :mc-cmd:`mc admin policy set` command to associate the policy to
-      a user on the source MinIO cluster.
+      - The ``"EnableReplicationRuleConfiguration"`` statement grants permission
+        for creating replication rules on a bucket. The ``"arn:aws:s3:::*``
+        resource applies the replication permissions to *any* bucket on the
+        source cluster. You can restrict the user policy to specific buckets
+        as-needed.
 
-   .. tab:: Destination Policy
+      Use the :mc-cmd:`mc admin policy add` to add this policy to the
+      source cluster. Use :mc-cmd:`mc admin user add` to create a user
+      on the source cluster and :mc-cmd:`mc admin policy set` to associate
+      the policy to that new user.
 
-      The destination cluster *must* have a user with *at minimum* the
-      following attached *or* inherited policy:
+   .. tab:: Replication Remote User
+
+      The following policy provides permissions for enabling synchronization of
+      replicated data *into* the cluster. 
 
       .. code-block:: shell
          :class: copyable
@@ -150,11 +177,13 @@ source and destination clusters:
                         "s3:ListBucketMultipartUploads",
                         "s3:GetBucketLocation",
                         "s3:GetBucketVersioning",
-                        "s3:GetBucketObjectLockConfiguration"
+                        "s3:GetBucketObjectLockConfiguration",
+                        "s3:GetEncryptionConfiguration"
                      ],
                      "Resource": [
-                        "arn:aws:s3:::DESTINATIONBUCKETNAME"
-                     ]
+                        "arn:aws:s3:::*"
+                     ],
+                     "Sid": "EnableReplicationOnBucket"
                },
                {
                      "Effect": "Allow",
@@ -166,23 +195,39 @@ source and destination clusters:
                         "s3:GetObjectVersion",
                         "s3:GetObjectVersionTagging",
                         "s3:PutObject",
+                        "s3:PutObjectRetention",
+                        "s3:PutBucketObjectLockConfiguration",
+                        "s3:PutObjectLegalHold",
                         "s3:DeleteObject",
                         "s3:ReplicateObject",
                         "s3:ReplicateDelete"
                      ],
                      "Resource": [
-                        "arn:aws:s3:::DESTINATIONBUCKETNAME/*"
-                     ]
+                        "arn:aws:s3:::*"
+                     ],
+                     "Sid": "EnableReplicatingDataIntoBucket"
                }
             ]
          }
 
-      Replace ``DESTINATIONBUCKETNAME`` with the name of the target bucket to
-      which MinIO replicates objects.
+      - The ``"EnableReplicationOnBucket"`` statement grants permission for 
+        a remote target to retrieve bucket-level configuration for supporting
+        replication operations on *all* buckets in the MinIO cluster. To
+        restrict the policy to specific buckets, specify those buckets as an
+        element in the ``Resource`` array similar to
+        ``"arn:aws:s3:::bucketName"``.
 
-      Use the :mc-cmd:`mc admin policy set` command to associate the policy 
-      to a user on the target MinIO cluster.
+      - The ``"EnableReplicatingDataIntoBucket"`` statement grants permission
+        for a remote target to synchronize data into *any* bucket in the MinIO
+        cluster. To restrict the policy to specific buckets, specify those 
+        buckets as an element in the ``Resource`` array similar to 
+        ``"arn:aws:s3:::bucketName/*"``.
 
+      Use the :mc-cmd:`mc admin policy add` to add this policy to the
+      destination cluster. Use :mc-cmd:`mc admin user add` to create a user
+      on the destination cluster and :mc-cmd:`mc admin policy set` to associate
+      the policy to that new user.
+      
 MinIO strongly recommends creating users specifically for supporting 
 bucket replication operations. See 
 :mc:`mc admin user` and :mc:`mc admin policy` for more complete
@@ -198,6 +243,14 @@ MinIO performs replication as part of writing an object (PUT operations). MinIO
 does *not* apply replication rules to existing objects in the bucket. Use
 :mc:`mc cp` or :mc:`mc mirror` to migrate existing objects to the destination
 bucket.
+
+For buckets with active write operations during the procedure, any objects
+written *before* configuring bucket replication remain unreplicated. 
+
+Consider scheduling a maintenance period during which applications stop
+all write operations to the bucket or buckets for which you are configuring
+bucket replication. Restart write operations at the completion of the
+procedure to ensure consistent object replication.
 
 Replication of Delete Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -237,51 +290,66 @@ MinIO does *not* support replicating client-side encrypted objects
 Procedure
 ---------
 
-1) Configure ``mc`` Access to the Source and Destination Cluster
+1) Configure User Accounts and Policies for Replication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This step creates users and policies on both MinIO clusters for
+supporting replication operations. You can skip this step if both
+clusters already have users with the necessary
+:ref:`permissions <minio-bucket-replication-serverside-oneway-permissions>`.
+
+The following examples use ``Alpha`` and ``Baker`` as placeholder :mc:`aliases
+<mc alias>` for each MinIO cluster. You should replace these values with the
+appropriate aliases for the MinIO clusters on which you are configuring bucket
+replication. These examples assume that the specified aliases have
+the necessary permissions for creating policies and users on both clusters. See
+:ref:`minio-users` and :ref:`minio-policy` for more complete documentation on
+MinIO users and policies respectively.
+
+A\) Create Replication Administrator
+   The following code creates a user and policy for supporting configuring
+   replication on the ``Alpha`` cluster. Replace the
+   password ``LongRandomSecretKey`` with a long, random, and secure secret key 
+   as per your organizations best practices for password generation.
+
+   .. code-block:: shell
+      :class: copyable
+
+      wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationAdminPolicy.json | \
+      mc admin policy add Alpha ReplicationAdminPolicy /dev/stdin
+      mc admin user add Alpha alphaReplicationAdmin LongRandomSecretKey
+      mc admin policy set Alpha ReplicationAdminPolicy user=alphaReplicationAdmin
+
+B\) Create Remote Replication User
+   The following code creates a user and policy for supporting synchronizing
+   data into the ``Baker`` cluster. Replace the password
+   ``LongRandomSecretKey`` with a long, random, and secure secret key as per
+   your organizations best practices for password generation.
+
+   .. code-block:: shell
+      :class: copyable
+      
+      wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationRemoteUserPolicy.json | \
+      mc admin policy add Baker ReplicationRemoteUserPolicy /dev/stdin
+      mc admin user add Baker bakerReplicationRemoteUser LongRandomSecretKey
+      mc admin policy set Baker ReplicationRemoteUserPolicy user=bakerReplicationRemoteUser
+
+2) Configure ``mc`` Access to the Source and Destination Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the :mc-cmd:`mc alias set` command to add an alias for both source 
 and destination MinIO clusters. 
 
-.. tabs::
+Use the :mc-cmd:`mc alias set` command to add a replication-specific alias for
+both remote clusters:
 
-   .. tab: Source Cluster
+.. code-block:: shell
+   :class: copyable
 
-      .. code-block:: shell
-         :class: copyable
+   mc admin set AlphaReplication HOSTNAME AlphaReplicationAdmin LongRandomSecretKey
+   mc admin set BakerReplication HOSTNAME BakerReplicationUser LongRandomSecretKey
 
-         mc alias set SourceCluster HOSTNAME ACCESSKEY SECRETKEY
-
-      - Replace :mc-cmd:`~mc alias set HOSTNAME` with the hostname or IP address
-        of a node in the source MinIO cluster. For distributed MinIO clusters
-        using a load balancer, specify the hostname or IP address of that load
-        balancer.
-
-      - Replace :mc-cmd:`~mc alias set ACCESSKEY` and 
-        :mc-cmd:`~mc alias set SECRETKEY` with the access and secret key for a
-        user with the :ref:`required permissions
-        <minio-bucket-replication-serverside-oneway-permissions>` on the source
-        MinIO cluster.
-
-   .. tab:: DestinationCluster
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc alias set DestinationCluster HOSTNAME ACCESSKEY SECRETKEY
-
-      - Replace :mc-cmd:`~mc alias set HOSTNAME` with the hostname or IP address
-        of a node in the destination MinIO cluster. For distributed MinIO
-        clusters using a load balancer, specify the hostname or IP address of
-        that load balancer.
-
-      - Replace :mc-cmd:`~mc alias set ACCESSKEY` and 
-        :mc-cmd:`~mc alias set SECRETKEY` with the access and secret key for a
-        user with the :ref:`required permissions
-        <minio-bucket-replication-serverside-oneway-permissions>` on the
-        destination MinIO cluster.
-
-2) Create a Replication Target for the Destination Cluster
+3) Create a Replication Target for the Destination Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the :mc-cmd:`mc admin bucket remote` command to create a replication target
@@ -292,35 +360,24 @@ bucket.
 .. code-block:: shell
    :class: copyable
 
-   mc admin bucket remote add SourceCluster/SOURCEBUCKET \
-      https://ACCESSKEY:SECRETKEY@HOSTNAME/DESTINATIONBUCKET
+   mc admin bucket remote add AlphaReplication/SOURCEBUCKET \
+      https://bakerReplicationRemoteUser:LongRandomSecretKey@HOSTNAME/DESTINATIONBUCKET
       --service "replication"
       [--sync]
 
-- Replace ``SOURCEBUCKET`` with the name of the bucket on the source cluster.
-  The name of the bucket *must* match the bucket name specified to the source
-  user's replication :ref:`policy
-  <minio-bucket-replication-serverside-oneway-permissions>`.
+   - Replace ``SOURCEBUCKET`` with the name of the source bucket on the 
+     ``Alpha`` cluster.
 
-- Replace ``ACCESSKEY`` and ``SECRETKEY`` with the access and secret key for 
-  a user with the :ref:`required permissions 
-  <minio-bucket-replication-serverside-oneway-permissions>` on the destination
-  MinIO cluster.
+   - Replace ``HOSTNAME`` with the URL of the ``Baker`` cluster.
 
-- Replace the ``HOSTNAME`` with the hostname or IP address of
-  a node in the MinIO cluster. For distributed MinIO clusters using a 
-  load balancer, specify the hostname or IP address of that load balancer.
+   - Replace ``DESTINATIONBUCKET`` with the name of the target bucket on the
+     ``Baker`` cluster.
 
-- Replace the ``DESTINATIONBUCKET`` with the name of the bucket on the
-  destination cluster. The name of the bucket *must* match the bucket name
-  specified to the destination user's replication :ref:`policy
-  <minio-bucket-replication-serverside-oneway-permissions>`.
-
-- MinIO defaults to using asynchronous object replication, where MinIO 
-  replicates objects *after* returning the PUT object response. Specify the
-  :mc-cmd-option:`~mc admin bucket remote add sync` option to enable
-  synchronous replication, where MinIO attempts to replicate the object
-  *prior* to returning the PUT object response.
+   - Specify the :mc-cmd-option:`~mc admin bucket remote add sync` option to
+     enable synchronous replication. Omit the option to use the default of 
+     asynchronous replication. See the reference documentation for 
+     :mc-cmd-option:`~mc admin bucket remote add sync` for more information
+     on synchronous vs asynchronous replication.
 
 The command returns an ARN similar to the following:
 
@@ -330,7 +387,7 @@ The command returns an ARN similar to the following:
 
 Copy the ARN string for use in the next step.
 
-3) Create a New Bucket Replication Rule
+4) Create a New Bucket Replication Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the :mc-cmd:`mc replicate add` command to add the new server-side
@@ -339,29 +396,35 @@ replication rule to the source MinIO cluster.
 .. code-block:: shell
    :class: copyable
 
-   mc replicate add SourceCluster/SOURCEBUCKET \
+   mc replicate add AlphaReplication/SOURCEBUCKET \
       --remote-bucket DESTINATIONBUCKET \
       --arn 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
       --replicate "delete,delete-marker"
 
-- Replace ``SOURCEBUCKET`` with the name of the bucket on the source cluster.
+   - Replace ``SOURCEBUCKET`` with the name of the bucket from which Alpha
+     replicates data. The name *must* match the bucket specified when
+     creating the remote target in the previous step.
 
-- Replace the ``DESTINATIONBUCKET`` with the name of the bucket on the
-  destination cluster.
+   - Replace the ``DESTINATIONBUCKET`` with the name of the ``Baker`` bucket to
+     which Alpha replicates data. The name *must* match the bucket specified
+     when creating the remote target in the previous step.
 
-- Replace the ``--arn`` value with the ARN returned in the previous step.
-  
-- Replace ``PRIORITY`` with the integer priority of this replication rule. 
+   - Replace the ``--arn`` value with the ARN returned in the previous step. 
+     Ensure you specify the ARN created on the ``Alpha`` cluster. You can use
+     :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured
+     on the cluster.
+   
+   - The ``--replicate "delete,delete-marker"`` flag enables replicating delete
+     markers and deletion of object versions. See 
+     :mc-cmd-option:`mc replicate add replicate` for more complete
+     documentation. Omit these fields to disable replication of delete 
+     operations.
 
-- The ``--replicate "delete,delete-marker"`` flag enables replicating delete
-  markers and deletion of object versions. See 
-  :mc-cmd-option:`mc replicate add replicate` for more complete documentation.
-  Omit this field to disable replication of delete operations.
 
 Specify any other supported optional arguments for 
 :mc-cmd:`mc replicate add`.
 
-4) Validate the Replication Configuration
+5) Validate the Replication Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc cp` to copy a new object to the source bucket. 
@@ -369,14 +432,14 @@ Use :mc-cmd:`mc cp` to copy a new object to the source bucket.
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/foo.txt SourceCluster/SOURCEBUCKET
+   mc cp ~/foo.txt Alpha/SOURCEBUCKET
 
 Use :mc-cmd:`mc ls` to verify the object exists on the destination bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ls DestinationCluster/DESTINATIONBUCKET
+   mc ls Baker/DESTINATIONBUCKET
 
 If the remote target was configured *without* the 
 :mc-cmd-option:`~mc admin bucket remote add sync` option, the destination
