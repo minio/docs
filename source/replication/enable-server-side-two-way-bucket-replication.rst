@@ -14,17 +14,26 @@ Enable Two-Way Server-Side Bucket Replication
 The procedure on this page creates a new bucket replication rule for two-way
 "active-active" synchronization of objects between MinIO buckets.
 
-.. todo: Diagram
+.. image:: /images/active-active-replication.svg
+   :width: 600px
+   :alt: Active-Active Replication synchronizes data between two remote clusters.
+   :align: center
 
-MinIO server-side replication supports active-active replication between
-at most *two* MinIO clusters. MinIO does not support arbitrary S3-compatible
-services.
+MinIO server-side replication supports at most *two* MinIO clusters. Both
+clusters *must* run MinIO.
 
 - To configure replication between arbitrary S3-compatible services, use
   :mc-cmd:`mc mirror`.
 
 - To configure one-way "active-passive" replication between MinIO clusters,
   see :ref:`minio-bucket-replication-serverside-oneway`.
+
+MinIO Active-Active replication is designed for synchronizing objects between
+two MinIO clusters. MinIO does not support Active-Active replication between
+more than two clusters (multi-site). Enterprises looking to implement multi-site
+replication should consider leveraging `MinIO SUBNET
+<https://min.io/pricing?ref=docs>`__ support to access the expertise, planning,
+and engineering resources required for addressing that use case. 
 
 .. seealso::
 
@@ -37,13 +46,6 @@ services.
 
    - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication
      rule.
-
-.. todo: Diagram
-
-.. todo
-   This procedure specifically enables only two-way replication between the 
-   source and destination buckets. For a procedure on two-way "active-active"
-   replication, see <tutorial>.
 
 .. _minio-bucket-replication-serverside-twoway-requirements:
 
@@ -193,6 +195,7 @@ destination clusters to configure and enable replication rules.
                         "s3:GetObjectVersionTagging",
                         "s3:PutObject",
                         "s3:PutObjectRetention",
+                        "s3:PutBucketObjectLockConfiguration",
                         "s3:PutObjectLegalHold",
                         "s3:DeleteObject",
                         "s3:ReplicateObject",
@@ -291,8 +294,6 @@ MinIO supports replicating objects with retention settings, such as
 source and destination bucket *must* have object locking enabled for MinIO
 to replicate objects with their associated retention settings.
 
-
-
 Procedure
 ---------
 
@@ -304,14 +305,13 @@ supporting replication operations. You can skip this step if both
 clusters already have users with the necessary
 :ref:`permissions <minio-bucket-replication-serverside-twoway-permissions>`.
 
-The following examples that the :mc:`alias <mc alias>` for each cluster
-provides the necessary permissions for creating policies and users on both
-clusters. See :ref:`minio-users` and :ref:`minio-policy` for more complete
-documentation on MinIO users and policies respectively.
-
-Replace ``Alpha`` and ``Baker`` in the following examples with the appropriate
-:mc:`aliases <mc alias>` for the MinIO clusters on which you are configuring
-bucket replication.
+The following examples use ``Alpha`` and ``Baker`` as placeholder :mc:`aliases
+<mc alias>` for each MinIO cluster. You should replace these values with the
+appropriate aliases for the MinIO clusters on which you are configuring bucket
+replication. These examples assume that the specified aliases have
+the necessary permissions for creating policies and users on both clusters. See
+:ref:`minio-users` and :ref:`minio-policy` for more complete documentation on
+MinIO users and policies respectively.
 
 A\) Create Replication Administrators
    The following code creates policies and users for supporting configuring
@@ -332,7 +332,7 @@ A\) Create Replication Administrators
       mc admin user add Baker bakerReplicationAdmin LongRandomSecretKey
       mc admin policy set baker ReplicationAdminPolicy user=bakerReplicationAdmin
 
-B\) Create Remote Replication Administrators
+B\) Create Remote Replication User
    The following code creates policies and users for supporting synchronizing data
    to the ``Alpha`` and ``Baker`` clusters. Replace the password
    ``LongRandomSecretKey`` with a long, random, and secure secret key as per your

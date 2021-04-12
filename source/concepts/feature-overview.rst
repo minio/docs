@@ -34,6 +34,12 @@ The following table lists MinIO features and their corresponding documentation:
        coding provides object-level healing with less overhead than adjacent 
        technologies such as RAID or replication.
 
+   * - :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`
+     - MinIO Server-Side Bucket Replication is an automatic bucket-level
+       configuration that synchronizes objects between MinIO clusters. 
+       MinIO supports one-way "active-passive" and two-way "active-active"
+       configurations.
+
 .. toctree::
    :titlesonly:
    :hidden:
