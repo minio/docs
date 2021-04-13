@@ -63,8 +63,8 @@ $sidebar-bg: #F9F9F9;
 
 
 // Border Radius
-$border-radius: 0.4rem;
-$border-radius-sm: 0.2rem;
+$border-radius: 0.1875rem;
+$border-radius-lg: 0.3125rem;
 
 
 // Search
@@ -97,7 +97,11 @@ $toggle-icon-hover-bg: rgba($theme-red, 0.075);
 
 
 // Nav
-$nav-color: $body-color;
+$nav-link-color: $body-color;
 $nav-border-color: #4b4b4b;
 $nav-sub-hover-bg: #f8f8f8;
-$nav-dropdown-mobile-bg: lighten($theme-hover-bg, 1.5%);
+$nav-mobile-bg: $white;
+$nav-mobile-width: 300px;
+$nav-mobile-box-shadow: 0 0 10px rgba($black, 0.1);
+$nav-active-z-index: 100;
+$nav-arrow-icon: url(../img/icons/nav-arrow.svg) no-repeat center;

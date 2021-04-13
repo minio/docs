@@ -74,7 +74,6 @@
 {%- endmacro %}
 
 {%- block header %}
-
    <header class="header">
       <i class="toggle-icon toggle-icon--docs" data-toggle="sidebar"></i>
       <a
@@ -87,7 +86,7 @@
          />
       </a>
 
-      <nav id="nav" class="nav"></nav>
+      {%- include "top-navigation.html" %}
    </header>
 {%- endblock %}
 
