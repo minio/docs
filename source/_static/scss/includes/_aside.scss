@@ -5,7 +5,7 @@
     top: 0;
     background-color: $sidebar-bg;
     transition: opacity 400ms, transform 300ms;
-    padding: $content-padding-sm $content-padding-sm $content-padding-sm 0;
+    padding: $content-padding-sm + 1 $content-padding-sm $content-padding-sm 0;
     overflow-y: auto;
 
     @include breakpoint-max(breakpoints(lg)) {
@@ -80,7 +80,7 @@
     background-color: $search-bg;
 
     @include breakpoint-min(breakpoints(lg)) {
-        border-radius: $border-radius-sm;
+        border-radius: $border-radius;
     }
 
     &:focus {
