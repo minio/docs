@@ -150,6 +150,7 @@ such as versioning and replication.
    /introduction/minio-overview
    /concepts/feature-overview
    /tutorials/minio-installation
+   /lifecycle-management/lifecycle-management-overview
    /replication/replication-overview
    /security/security-overview
    /monitoring/monitoring-overview
