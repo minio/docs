@@ -547,6 +547,16 @@ services:
 
    Allows getting bucket targets
 
+.. policy-action:: admin:SetTier
+
+   Allows creating and modifying remote storage tiers using the 
+   :mc-cmd:`mc admin tier` command.
+
+.. policy-action:: admin:ListTier
+
+   Allows listing configured remote storage tiers using the
+   :mc-cmd:`mc admin tier` command.
+
 .. _minio-policy-conditions:
 
 Supported S3 Policy Condition Keys
