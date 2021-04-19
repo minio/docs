@@ -14,9 +14,9 @@ Enable One-Way Server-Side Bucket Replication
 The procedure on this page creates a new bucket replication rule for
 one-way synchronization of objects between MinIO buckets.
 
-.. image:: /images/active-active-replication.svg
+.. image:: /images/active-passive-replication.svg
    :width: 600px
-   :alt: Active-Active Replication synchronizes data between two remote clusters.
+   :alt: Active-Passive Replication synchronizes data from a source MinIO cluster to a remote MinIO cluster.
    :align: center
 
 MinIO server-side replication supports at most *two* MinIO clusters. Both
