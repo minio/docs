@@ -24,7 +24,7 @@ object lock settings inherit the bucket default.
 
 .. note::
 
-   Starting in version :release:`RELEASE.2020-09-18T00-13-21Z`, 
+   Starting in version :mc-release:`RELEASE.2020-09-18T00-13-21Z`, 
    :mc:`mc retention` fully replaces :mc:`mc lock` for setting the default 
    object lock settings for a bucket.
 
@@ -385,7 +385,7 @@ Syntax
       If specifying :mc-cmd-option:`~mc retention set default`, 
       :mc-cmd:`mc retention set` ignores all other flags.
 
-      Starting in :release:`RELEASE.2020-09-18T00-13-21Z`, 
+      Starting in :mc-release:`RELEASE.2020-09-18T00-13-21Z`, 
       :mc-cmd-option:`mc retention set default` replaces the functionality of
       the deprecated :mc-cmd:`mc lock` command.
 
@@ -482,7 +482,7 @@ Syntax
       If specifying :mc-cmd-option:`~mc retention info default`, 
       :mc-cmd:`mc retention info` ignores all other flags.
 
-      Starting in :release:`RELEASE.2020-09-18T00-13-21Z`, 
+      Starting in :mc-release:`RELEASE.2020-09-18T00-13-21Z`, 
       :mc-cmd-option:`mc retention info default` replaces the functionality of
       the deprecated :mc-cmd:`mc lock` command.
 
@@ -576,7 +576,7 @@ Syntax
       If specifying :mc-cmd-option:`~mc retention clear default`, 
       :mc-cmd:`mc retention clear` ignores all other flags.
 
-      Starting in :release:`RELEASE.2020-09-18T00-13-21Z`, 
+      Starting in :mc-release:`RELEASE.2020-09-18T00-13-21Z`, 
       :mc-cmd-option:`mc retention clear default` replaces the functionality of
       the deprecated :mc-cmd:`mc lock` command.
 
