@@ -20,7 +20,7 @@ object retention for a configurable period of time.
 .. admonition:: DEPRECATED
    :class: important
 
-   :mc:`mc lock` was deprecated in :release:`RELEASE.2020-09-18T00-13-21Z`. Use
+   :mc:`mc lock` was deprecated in :mc-release:`RELEASE.2020-09-18T00-13-21Z`. Use
    :mc:`mc retention` to set, retrieve, or clear the bucket default object lock
    configuration.
 

@@ -58,7 +58,21 @@ procedure.
       products and services, and is not intended as a complete guide to the larger
       topic of TLS/SSL certificate creation and management.
 
-3\) Run the ``minio`` Server
+3\) Generate an Encryption Key for the MinIO Backend
+   Starting in the :minio-release:`RELEASE.2021-04-22T15-44-28Z` release, MinIO
+   requires a user-specified encryption key or Key Management System (KMS) for
+   encrypting the backend (users, groups, policies, and server configuration). 
+
+   Generate a 256-bit encryption key and encode it as a base64 string:
+
+   .. code-block:: shell
+      :class: copyable
+
+      cat /dev/urandom | head -c 32 | base64 -
+
+   Copy the value for use in the next step.
+
+4\) Run the ``minio`` Server
    Issue the following command on each host machine in the deployment. The
    following example assumes that:
 
@@ -71,8 +85,9 @@ procedure.
    .. code-block:: shell
       :class: copyable
 
-      export MINIO_ACCESS_KEY=minio-admin
-      export MINIO_SECRET_KEY=minio-secret-key-CHANGE-ME
+      export MINIO_ROOT_USER_FILE=minio-admin
+      export MINIO_ROOT_PASSWORD_FILE=minio-secret-key-CHANGE-ME
+      export MINIO_KMS_SECRET_KEY=base64encoded256bitkey
       minio server https://minio{1...4}.example.com/mnt/disk{1...4}/data
 
    The example command breaks down as follows:
@@ -81,16 +96,20 @@ procedure.
       :widths: 40 60
       :width: 100%
 
-      * - :envvar:`MINIO_ACCESS_KEY`
+      * - :envvar:`MINIO_ROOT_USER_FILE`
         - The access key for the :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string. 
 
-      * - :envvar:`MINIO_SECRET_KEY`
+      * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
         - The corresponding secret key to use for the 
           :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string.
+
+      * - :envvar:`MINIO_KMS_SECRET_KEY`
+        - The key to use for encrypting the MinIO backend (users, groups,
+          policies, and server configuration).
 
       * - ``https://minio{1...4}.example.com/``
         - The DNS hostname of each server in the distributed deployment. 
@@ -147,8 +166,9 @@ version of the ``minio`` server process:
    :class: copyable
 
    docker run -p 9000:9000 \
-   -e "MINIO_ACCESS_KEY=ROOT_ACCESS_KEY" \
-   -e "MINIO_SECRET_KEY=SECRET_ACCESS_KEY_CHANGE_ME" \
+   -e "MINIO_ROOT_USER_FILE=ROOT_ACCESS_KEY" \
+   -e "MINIO_ROOT_PASSWORD_FILE=SECRET_ACCESS_KEY_CHANGE_ME" \
+   -e "MINIO_KMS_SECRET_KEY=base64encoded256bitkey" \
    -v /mnt/disk1:/disk1 \
    -v /mnt/disk2:/disk2 \
    -v /mnt/disk3:/disk3 \
@@ -157,11 +177,34 @@ version of the ``minio`` server process:
 
 The command uses the following options:
 
-- ``-e MINIO_ACCESS_KEY`` and ``-e MINIO_SECRET_KEY`` for configuring the
-   :ref:`root <minio-users-root>` user credentials.
+.. list-table::
+   :widths: 40 60
+   :width: 100%
 
-- ``-v /mnt/disk<int>:/disk<int>`` for configuring each disk the ``minio``
-   server uses.
+   * - :envvar:`MINIO_ROOT_USER_FILE`
+     - The access key for the :ref:`root <minio-users-root>` user.
+
+       Replace this value with a unique, random, and long string. 
+
+   * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
+     - The corresponding secret key to use for the 
+       :ref:`root <minio-users-root>` user.
+
+       Replace this value with a unique, random, and long string.
+
+   * - :envvar:`MINIO_KMS_SECRET_KEY`
+     - The key to use for encrypting the MinIO backend (users, groups,
+       policies, and server configuration).
+
+       Replace this value with a 256-bit base64-encrypted string:
+
+       .. code-block:: shell
+         :class: copyable
+ 
+         cat /dev/urandom | head -c 32 | base64 -
+
+   * - ``-v /mnt/disk<int>:/disk<int>`` 
+     - The path to each each disk the ``minio`` server uses. 
 
 Bleeding Edge MinIO
 ~~~~~~~~~~~~~~~~~~~
@@ -175,8 +218,9 @@ bleeding-edge version of the ``minio`` server process:
    :class: copyable
 
    docker run -p 9000:9000 \
-   -e "MINIO_ACCESS_KEY=ROOT_ACCESS_KEY" \
-   -e "MINIO_SECRET_KEY=SECRET_ACCESS_KEY_CHANGE_ME" \
+   -e "MINIO_ROOT_USER_FILE=ROOT_ACCESS_KEY" \
+   -e "MINIO_ROOT_PASSWORD_FILE=SECRET_ACCESS_KEY_CHANGE_ME" \
+   -e "MINIO_KMS_SECRET_KEY=base64encoded256bitkey" \
    -v /mnt/disk1:/disk1 \
    -v /mnt/disk2:/disk2 \
    -v /mnt/disk3:/disk3 \
@@ -185,11 +229,34 @@ bleeding-edge version of the ``minio`` server process:
 
 The command uses the following options:
 
-- ``MINIO_ACCESS_KEY`` and ``MINIO_SECRET_KEY`` for configuring the
-   :ref:`root <minio-users-root>` user credentials.
+.. list-table::
+   :widths: 40 60
+   :width: 100%
 
-- ``-v /mnt/disk<int>:/disk<int>`` for configuring each disk the ``minio`` 
-   server uses. 
+   * - :envvar:`MINIO_ROOT_USER_FILE`
+     - The access key for the :ref:`root <minio-users-root>` user.
+
+       Replace this value with a unique, random, and long string. 
+
+   * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
+     - The corresponding secret key to use for the 
+       :ref:`root <minio-users-root>` user.
+
+       Replace this value with a unique, random, and long string.
+
+   * - :envvar:`MINIO_KMS_SECRET_KEY`
+     - The key to use for encrypting the MinIO backend (users, groups,
+       policies, and server configuration).
+
+       Replace this value with a 256-bit base64-encrypted string:
+
+       .. code-block:: shell
+         :class: copyable
+ 
+         cat /dev/urandom | head -c 32 | base64 -
+
+   * - ``-v /mnt/disk<int>:/disk<int>`` 
+     - The path to each each disk the ``minio`` server uses. 
 
 Standalone Installation
 -----------------------
@@ -222,7 +289,21 @@ environments.
       products and services, and is not intended as a complete guide to the larger
       topic of TLS/SSL certificate creation and management.
 
-3\) Run the ``minio`` Server
+3\) Generate an Encryption Key for the MinIO Backend
+   Starting in the :minio-release:`RELEASE.2021-04-22T15-44-28Z` release, MinIO
+   requires a user-specified encryption key or Key Management System (KMS) for
+   encrypting the backend (users, groups, policies, and server configuration). 
+
+   Generate a 256-bit encryption key and encode it as a base64 string:
+
+   .. code-block:: shell
+      :class: copyable
+
+      cat /dev/urandom | head -c 32 | base64 -
+
+   Copy the value for use in the next step.
+
+4\) Run the ``minio`` Server
    Issue the following command to start the :program:`minio` server. The following
    example assumes the host machine has *at least* four disks, which is the minimum
    required number of disks to enable :ref:`erasure coding <minio-erasure-coding>`:
@@ -230,8 +311,8 @@ environments.
    .. code-block:: shell
       :class: copyable
 
-      export MINIO_ACCESS_KEY=minio-admin
-      export MINIO_SECRET_KEY=minio-secret-key-CHANGE-ME
+      export MINIO_ROOT_USER_FILE=minio-admin
+      export MINIO_ROOT_PASSWORD_FILE=minio-secret-key-CHANGE-ME
       minio server /mnt/disk{1...4}/data
 
    The example command breaks down as follows:
@@ -240,12 +321,12 @@ environments.
       :widths: 40 60
       :width: 100%
 
-      * - :envvar:`MINIO_ACCESS_KEY`
+      * - :envvar:`MINIO_ROOT_USER_FILE`
         - The access key for the :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string. 
 
-      * - :envvar:`MINIO_SECRET_KEY`
+      * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
         - The corresponding secret key to use for the 
           :ref:`root <minio-users-root>` user.
 
