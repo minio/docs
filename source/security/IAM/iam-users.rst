@@ -86,19 +86,11 @@ MinIO deployments have a ``root`` user with access to all actions and resources
 on the deployment. When a :mc:`minio` server first starts, it sets the ``root``
 user credentials by checking the value of the following environment variables:
 
-- :envvar:`MINIO_ACCESS_KEY`
-- :envvar:`MINIO_SECRET_KEY`
+- :envvar:`MINIO_ROOT_USER_FILE`
+- :envvar:`MINIO_ROOT_PASSWORD_FILE`
 
-To rotate the ``root`` user credentials, set the following environment 
-variables and restart the :mc:`minio` server:
-
-- :envvar:`MINIO_ACCESS_KEY` to the new access key.
-- :envvar:`MINIO_SECRET_KEY` to the new secret key.
-- :envvar:`MINIO_ACCESS_KEY_OLD` to the old access key.
-- :envvar:`MINIO_SECRET_KEY_OLD` to the old secret key.
-
-After the :mc:`minio` server starts successfully, you can unset the
-:envvar:`MINIO_ACCESS_KEY_OLD` and :envvar:`MINIO_SECRET_KEY_OLD`. 
+Rotating the root user credentials requires updating either or both 
+variables for all MinIO servers in the deployment.
 
 When specifying the ``root`` access key and secret key, consider using *long,
 unique, and random* strings. Exercise all possible precautions in storing the
@@ -118,11 +110,44 @@ If these variables are unset, :mc:`minio` defaults to ``minioadmin`` and
 discourages* use of the default credentials regardless of deployment
 environment.
 
+MinIO :minio-release:`RELEASE.2021-04-22T15-44-28Z` and later deprecates the
+following variables used for setting or updating root user
+credentials:
+
+- :envvar:`MINIO_ACCESS_KEY` to the new access key.
+- :envvar:`MINIO_SECRET_KEY` to the new secret key.
+- :envvar:`MINIO_ACCESS_KEY_OLD` to the old access key.
+- :envvar:`MINIO_SECRET_KEY_OLD` to the old secret key.
+
 Create a User
 -------------
 
 Use the :mc-cmd:`mc admin user add` command to create a new user on the
 MinIO deployment:
+
+.. code-block:: shell
+   :class: copyable
+
+      mc admin user add ALIAS ACCESSKEY SECRETKEY
+
+- Replace :mc-cmd:`ALIAS <mc admin user add TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
+- Replace :mc-cmd:`ACCESSKEY <mc admin user add ACCESSKEY>` with the 
+  access key for the user. MinIO allows retrieving the access key after
+  user creation through the :mc-cmd:`mc admin user info` command.
+
+- Replace :mc-cmd:`SECRETKEY <mc admin user add SECRETKEY>` with the
+  secret key for the user. MinIO *does not* provide any method for retrieving
+  the secret key once set.
+
+Specify a unique, random, and long string for both the ``ACCESSKEY`` and 
+``SECRETKEY``. Your organization may have specific internal or regulatory
+requirements around generating values for use with access or secret keys. 
+
+After creating the user, use :mc-cmd:`mc admin policy set` to associate 
+a :ref:`minio-policy` to the new user. You can also use
+:mc-cmd:`mc admin group add` to add the user to a :ref:`minio-groups`.
 
 Delete a User
 -------------
@@ -130,9 +155,13 @@ Delete a User
 Use the :mc-cmd:`mc admin user remove` command to remove a user on a 
 MinIO deployment:
 
-Authenticate as a User
-----------------------
+.. code-block:: shell
+   :class: copyable
 
-ToDo: Examples of authenticating to a MinIO deployment with a created user. 
+   mc admin user remove ALIAS USERNAME
 
-Should have examples with `mc` and each of the SDKs. 
+- Replace :mc-cmd:`ALIAS <mc admin user remove TARGET>` with the
+  :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
+- Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the name of
+  the user to remove.

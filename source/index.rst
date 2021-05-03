@@ -68,9 +68,32 @@ such as versioning and replication.
 
       export MINIO_ROOT_USER_FILE=myminioaccesskey
       export MINIO_ROOT_PASSWORD_FILE=myminiosecretkey
-      export MINIO_KMS_SECRET_KEY=myminioencryptionkey
+      export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
       minio server /mnt/data
+
+   .. list-table::
+      :stub-columns: 1
+      :widths: 30 60
+      :width: 100%
+
+      * - :envvar:`MINIO_ROOT_USER_FILE`
+        - The :ref:`root user <minio-users-root>` access key. Replace the
+          sample value with a long, random, and unique string.
+
+      * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
+        - The :ref:`root user <minio-users-root>` secret key. Replace the
+          sample value with a long, random, and unique string.
+
+      * - :envvar:`MINIO_KMS_SECRET_KEY`
+        - The encryption key for the MinIO IAM backend. Replace the
+          sample value with a 32-bit base-64 encoded value. For example,
+          use the following command to generate a random key:
+
+          .. code-block:: shell
+             :class: copyable
+
+             cat /dev/urandom`` | head -c 32 | base64 -
 
    MinIO by default listens on port ``9000``. Applications running on the
    same host can connect and perform S3 operations on the MinIO server
@@ -79,13 +102,6 @@ such as versioning and replication.
    You can also use the :mc:`mc` commandline tool to perform operations on the
    MinIO server. Use :mc:`mc alias set` to update the ``myminio`` alias with
    the access key and secret key set on the MinIO server.
-
-   For complete documentation on the environment variables specified above, see
-   the corresponding reference documentation:
-
-   - :envvar:`MINIO_ROOT_USER_FILE`
-   - :envvar:`MINIO_ROOT_PASSWORD_FILE`
-   - :envvar:`MINIO_KMS_SECRET_KEY`
 
 3\) Configure Console User for MinIO
    Create a a :ref:`policy <minio-policy>` and :ref:`user <minio-users>` for

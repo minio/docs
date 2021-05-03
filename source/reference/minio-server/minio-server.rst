@@ -265,6 +265,22 @@ Key Management Service and Encryption
    See :minio-git:`KMS IAM/Config Encryption
    <minio/blob/master/docs/kms/IAM.md>` for more information.
 
+   Specify a 32-bit base-64 encrypted string in the following format:
+
+   ``<key-name>:<encryption-string>``
+
+   - Replace the ``<key-name>`` with any string. You must use this
+     key name if you later migrate to using a dedicated KMS for 
+     managing encryption keys.
+
+   - Replace ``<encryption-key>`` with a 32-bit base64 encoded value.
+     For example:
+
+     .. code-block:: shell
+        :class: copyable
+
+        cat /dev/urandom | head -c 32 | base64 -
+
    Prior to :minio-release:`RELEASE.2021-04-22T15-44-28Z`, MinIO used the
    :ref:`root <minio-users-root>` user credentials for encrypting the backend. 
 
@@ -275,17 +291,18 @@ Key Management Service and Encryption
 
 .. envvar:: MINIO_KMS_KES_KEY_FILE
 
-   The private key associated to the the :envvar:`MINIO_KMS_KES_CERT_FILE` 
-   x.509 certificate to use when authenticating to the KES server. 
-   The KES server requires clients to present their certificate for performing mutual TLS (mTLS).
+   The private key associated to the the :envvar:`MINIO_KMS_KES_CERT_FILE` x.509
+   certificate to use when authenticating to the KES server. The KES server
+   requires clients to present their certificate for performing mutual TLS
+   (mTLS).
 
    See the :minio-git:`KES wiki <kes/wiki/Configuration#policy-configuration>` 
    for more complete documentation on KES access control.
 
 .. envvar:: MINIO_KMS_KES_CERT_FILE
 
-   The x.509 certificate to present to the KES server. 
-   The KES server requires clients to present their certificate and for performing mutual TLS (mTLS).
+   The x.509 certificate to present to the KES server. The KES server requires
+   clients to present their certificate for performing mutual TLS (mTLS).
 
    The KES server computes an 
    :minio-git:`identity <kes/wiki/Configuration#policy-configuration>`
@@ -299,10 +316,10 @@ Key Management Service and Encryption
 
 .. envvar:: MINIO_KMS_KES_KEY_NAME
 
-   The name of an external key at the Key Management System (KMS) to perform en/decryption operations
-   configured on the KES server. MinIO uses this key for supporting
-   server-side encryption of objects (SSE-S3) and MinIO backend encryption.
-
+   The name of an external key on the Key Management system (KMS) configured on
+   the KES server and used for performing en/decryption operations. MinIO uses
+   this key for supporting server-side encryption of objects (SSE-S3) and MinIO
+   backend encryption.
 
 Storage Class
 ~~~~~~~~~~~~~
