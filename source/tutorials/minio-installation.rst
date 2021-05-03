@@ -193,7 +193,7 @@ The command uses the following options:
        Replace this value with a unique, random, and long string.
 
    * - :envvar:`MINIO_KMS_SECRET_KEY`
-     - The key to use for encrypting the MinIO backend (users, groups,
+     - The key to use for encrypting the MinIO backend (S3 objects, users, groups,
        policies, and server configuration).
 
        Replace this value with a 256-bit base64-encrypted string:

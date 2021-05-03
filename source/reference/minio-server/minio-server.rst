@@ -277,8 +277,7 @@ Key Management Service and Encryption
 
    The private key associated to the the :envvar:`MINIO_KMS_KES_CERT_FILE` 
    x.509 certificate to use when authenticating to the KES server. 
-   The KES server requires clients to present both their certificate and
-   private key for performing mutual TLS (mTLS).
+   The KES server requires clients to present their certificate for performing mutual TLS (mTLS).
 
    See the :minio-git:`KES wiki <kes/wiki/Configuration#policy-configuration>` 
    for more complete documentation on KES access control.
@@ -286,8 +285,7 @@ Key Management Service and Encryption
 .. envvar:: MINIO_KMS_KES_CERT_FILE
 
    The x.509 certificate to present to the KES server. 
-   The KES server requires clients to present both their certificate and
-   private key for performing mutual TLS (mTLS).
+   The KES server requires clients to present their certificate and for performing mutual TLS (mTLS).
 
    The KES server computes an 
    :minio-git:`identity <kes/wiki/Configuration#policy-configuration>`
@@ -301,7 +299,7 @@ Key Management Service and Encryption
 
 .. envvar:: MINIO_KMS_KES_KEY_NAME
 
-   The name of an external ke to retrieve from the Key Management System (KMS)
+   The name of an external key at the Key Management System (KMS) to perform en/decryption operations
    configured on the KES server. MinIO uses this key for supporting
    server-side encryption of objects (SSE-S3) and MinIO backend encryption.
 
