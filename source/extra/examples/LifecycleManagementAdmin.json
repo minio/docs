@@ -1,0 +1,24 @@
+{
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+            "Action": [
+               "admin:SetTier",
+               "admin:ListTier"
+            ],
+            "Effect": "Allow",
+            "Sid": "EnableRemoteTierManagement"
+      },
+      {
+            "Action": [
+               "s3:PutBucketLifecycle",
+               "s3:GetBucketLifecycle"
+            ],
+            "Resource": [
+                        "arn:aws:s3:::*"
+            ],
+            "Effect": "Allow",
+            "Sid": "EnableLifecycleManagementRules"
+      }
+   ]
+}
