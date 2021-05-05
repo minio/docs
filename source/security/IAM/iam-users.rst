@@ -86,8 +86,8 @@ MinIO deployments have a ``root`` user with access to all actions and resources
 on the deployment. When a :mc:`minio` server first starts, it sets the ``root``
 user credentials by checking the value of the following environment variables:
 
-- :envvar:`MINIO_ROOT_USER_FILE`
-- :envvar:`MINIO_ROOT_PASSWORD_FILE`
+- :envvar:`MINIO_ROOT_USER`
+- :envvar:`MINIO_ROOT_PASSWORD`
 
 Rotating the root user credentials requires updating either or both 
 variables for all MinIO servers in the deployment.

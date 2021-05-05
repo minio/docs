@@ -66,8 +66,8 @@ such as versioning and replication.
    .. code-block:: shell
       :class: copyable
 
-      export MINIO_ROOT_USER_FILE=myminioaccesskey
-      export MINIO_ROOT_PASSWORD_FILE=myminiosecretkey
+      export MINIO_ROOT_USER=myminioaccesskey
+      export MINIO_ROOT_PASSWORD=myminiosecretkey
       export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
       minio server /mnt/data
@@ -77,11 +77,11 @@ such as versioning and replication.
       :widths: 30 60
       :width: 100%
 
-      * - :envvar:`MINIO_ROOT_USER_FILE`
+      * - :envvar:`MINIO_ROOT_USER`
         - The :ref:`root user <minio-users-root>` access key. Replace the
           sample value with a long, random, and unique string.
 
-      * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
+      * - :envvar:`MINIO_ROOT_PASSWORD`
         - The :ref:`root user <minio-users-root>` secret key. Replace the
           sample value with a long, random, and unique string.
 

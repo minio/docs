@@ -175,31 +175,31 @@ environment variables during startup to set configuration settings.
 Root Credentials
 ~~~~~~~~~~~~~~~~
 
-.. envvar:: MINIO_ROOT_USER_FILE
+.. envvar:: MINIO_ROOT_USER
 
    The access key for the :ref:`root <minio-users-root>` user.
 
    .. warning::
 
-      If :envvar:`MINIO_ROOT_USER_FILE` is unset, 
+      If :envvar:`MINIO_ROOT_USER` is unset, 
       :mc:`minio` defaults to ``minioadmin``.
 
       **NEVER** use the default credentials in production environments. 
       MinIO strongly recommends specifying a unique, long, and random
-      :envvar:`MINIO_ROOT_USER_FILE` value for all environments.
+      :envvar:`MINIO_ROOT_USER` value for all environments.
 
-.. envvar:: MINIO_ROOT_PASSWORD_FILE
+.. envvar:: MINIO_ROOT_PASSWORD
 
    The access key for the :ref:`root <minio-users-root>` user.
 
    .. warning::
 
-      If :envvar:`MINIO_ROOT_PASSWORD_FILE` is unset, 
+      If :envvar:`MINIO_ROOT_PASSWORD` is unset, 
       :mc:`minio` defaults to ``minioadmin``.
 
       **NEVER** use the default credentials in production environments. 
       MinIO strongly recommends specifying a unique, long, and random
-      :envvar:`MINIO_ROOT_PASSWORD_FILE` value for all environments.
+      :envvar:`MINIO_ROOT_PASSWORD` value for all environments.
 
 .. envvar:: MINIO_ACCESS_KEY
 
@@ -208,7 +208,7 @@ Root Credentials
    The access key for the :ref:`root <minio-users-root>` user. 
 
    This environment variable is *deprecated* in favor of the 
-   :envvar:`MINIO_ROOT_USER_FILE` environment variable. 
+   :envvar:`MINIO_ROOT_USER` environment variable. 
 
    .. warning::
 
@@ -226,7 +226,7 @@ Root Credentials
    The secret key for the :ref:`root <minio-users-root>` user.
 
    This environment variable is *deprecated* in favor of the
-   :envvar:`MINIO_ROOT_PASSWORD_FILE` environment variable.
+   :envvar:`MINIO_ROOT_PASSWORD` environment variable.
 
    .. warning::
 
@@ -242,7 +242,7 @@ Root Credentials
    .. deprecated:: RELEASE.2021-04-22T15-44-28Z
 
    To perform root credential rotation, modify the
-   :envvar:`MINIO_ROOT_USER_FILE` and `MINIO_ROOT_PASSWORD_FILE` environment
+   :envvar:`MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` environment
    variables.
 
 .. envvar:: MINIO_SECRET_KEY_OLD
@@ -250,7 +250,7 @@ Root Credentials
    .. deprecated:: RELEASE.2021-04-22T15-44-28Z
 
    To perform root credential rotation, modify the
-   :envvar:`MINIO_ROOT_USER_FILE` and `MINIO_ROOT_PASSWORD_FILE` environment
+   :envvar:`MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` environment
    variables.
 
 Key Management Service and Encryption
