@@ -53,17 +53,18 @@ extensions = [
 # Helpful for sites we tend to make lots of references to.
 
 extlinks = {
-    'kube-docs' : ('https://kubernetes.io/docs/%s', ''),
-    'minio-git' : ('https://github.com/minio/%s',''),
-    'github'    : ('https://github.com/%s',''),
-    'kube-api'  : ('https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/%s',''),
-    'aws-docs'  : ('https://docs.aws.amazon.com/%s',''),
-    's3-docs'   : ('https://docs.aws.amazon.com/AmazonS3/latest/userguide/%s',''),
-    's3-api'    : ('https://docs.aws.amazon.com/AmazonS3/latest/API/%s',''),
-    'iam-docs'  : ('https://docs.aws.amazon.com/IAM/latest/UserGuide/%s',''),
-    'release'   : ('https://github.com/minio/mc/releases/tag/%s',''),
-    'legacy'    : ('https://docs.min.io/docs/%s',''),
-    'docs-k8s'  : ('https://docs.min.io/minio/k8s/%s',''),
+    'kube-docs'       : ('https://kubernetes.io/docs/%s', ''),
+    'minio-git'       : ('https://github.com/minio/%s',''),
+    'github'          : ('https://github.com/%s',''),
+    'kube-api'        : ('https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/%s',''),
+    'aws-docs'        : ('https://docs.aws.amazon.com/%s',''),
+    's3-docs'         : ('https://docs.aws.amazon.com/AmazonS3/latest/userguide/%s',''),
+    's3-api'          : ('https://docs.aws.amazon.com/AmazonS3/latest/API/%s',''),
+    'iam-docs'        : ('https://docs.aws.amazon.com/IAM/latest/UserGuide/%s',''),
+    'minio-release'   : ('https://github.com/minio/minio/releases/tag/%s',''),
+    'mc-release'      : ('https://github.com/minio/mc/releases/tag/%s',''),
+    'legacy'          : ('https://docs.min.io/docs/%s',''),
+    'docs-k8s'        : ('https://docs.min.io/minio/k8s/%s',''),
 
 }
 

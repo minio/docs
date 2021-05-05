@@ -71,8 +71,10 @@ procedure.
    .. code-block:: shell
       :class: copyable
 
-      export MINIO_ACCESS_KEY=minio-admin
-      export MINIO_SECRET_KEY=minio-secret-key-CHANGE-ME
+      export MINIO_ROOT_USER=minio-admin
+      export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+      export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
+
       minio server https://minio{1...4}.example.com/mnt/disk{1...4}/data
 
    The example command breaks down as follows:
@@ -81,19 +83,48 @@ procedure.
       :widths: 40 60
       :width: 100%
 
-      * - :envvar:`MINIO_ACCESS_KEY`
+      * - :envvar:`MINIO_ROOT_USER`
         - The access key for the :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string. 
 
-      * - :envvar:`MINIO_SECRET_KEY`
+      * - :envvar:`MINIO_ROOT_PASSWORD`
         - The corresponding secret key to use for the 
           :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string.
 
-      * - ``https://minio{1...4}.example.com/``
+      * - :envvar:`MINIO_KMS_SECRET_KEY`
+        - The key to use for encrypting the MinIO backend (users, groups,
+          policies, and server configuration).
+
+          Use the following format when specifying the encryption key:
+
+          ``<key-name>:<encryption-key>``
+   
+          - Replace the ``<key-name>`` with any string. You must use this
+            key name if you later migrate to using a dedicated KMS for 
+            managing encryption keys.
+
+          - Replace ``<encryption-key>`` with a 32-bit base64 encoded value.
+            For example:
+
+            .. code-block:: shell
+               :class: copyable
+     
+               cat /dev/urandom | head -c 32 | base64 -
+
+      * - ``minio{1...4}.example.com/``
         - The DNS hostname of each server in the distributed deployment. 
+
+          The command uses MinIO expansion notation ``{x...y}`` to denote a
+          sequential series. Specifically, the hostname
+          ``https://minio{1...4}.example.com`` expands to:
+     
+          - ``https://minio1.example.com``
+          - ``https://minio2.example.com``
+          - ``https://minio3.example.com``
+          - ``https://minio4.example.com``
 
       * - ``/mnt/disk{1...4}/data``
         - The path to each disk on the host machine. 
@@ -101,25 +132,16 @@ procedure.
           ``/data`` is an optional folder in which the ``minio`` server stores
           all information related to the deployment. 
 
+          The command uses MinIO expansion notation ``{x...y}`` to denote a sequential
+          series. Specifically,  ``/mnt/disk{1...4}/data`` expands to:
+         
+          - ``/mnt/disk1/data``
+          - ``/mnt/disk2/data``
+          - ``/mnt/disk3/data``
+          - ``/mnt/disk4/data``
+
           See :mc-cmd:`minio server DIRECTORIES` for more information on
           configuring the backing storage for the :mc:`minio server` process.
-
-   The command uses MinIO expansion notation ``{x...y}`` to denote a sequential
-   series. Specifically:
-
-   -  The hostname ``https://minio{1...4}.example.com`` expands to:
-
-      - ``https://minio1.example.com``
-      - ``https://minio2.example.com``
-      - ``https://minio3.example.com``
-      - ``https://minio4.example.com``
-
-   - ``/mnt/disk{1...4}/data`` expands to
-   
-      - ``/mnt/disk1/data``
-      - ``/mnt/disk2/data``
-      - ``/mnt/disk3/data``
-      - ``/mnt/disk4/data``
 
 4\) Connect to the Server
    Use the :mc-cmd:`mc alias set` command from a machine with connectivity to any
@@ -147,8 +169,9 @@ version of the ``minio`` server process:
    :class: copyable
 
    docker run -p 9000:9000 \
-   -e "MINIO_ACCESS_KEY=ROOT_ACCESS_KEY" \
-   -e "MINIO_SECRET_KEY=SECRET_ACCESS_KEY_CHANGE_ME" \
+   -e "MINIO_ROOT_USER_FILE=ROOT_ACCESS_KEY" \
+   -e "MINIO_ROOT_PASSWORD_FILE=SECRET_ACCESS_KEY_CHANGE_ME" \
+   -e "MINIO_KMS_SECRET_KEY_FILE=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=" \
    -v /mnt/disk1:/disk1 \
    -v /mnt/disk2:/disk2 \
    -v /mnt/disk3:/disk3 \
@@ -157,11 +180,43 @@ version of the ``minio`` server process:
 
 The command uses the following options:
 
-- ``-e MINIO_ACCESS_KEY`` and ``-e MINIO_SECRET_KEY`` for configuring the
-   :ref:`root <minio-users-root>` user credentials.
+.. list-table::
+   :widths: 40 60
+   :width: 100%
 
-- ``-v /mnt/disk<int>:/disk<int>`` for configuring each disk the ``minio``
-   server uses.
+   * - :envvar:`MINIO_ROOT_USER_FILE <MINIO_ROOT_USER>`
+     - The access key for the :ref:`root <minio-users-root>` user.
+
+       Replace this value with a unique, random, and long string. 
+
+   * - :envvar:`MINIO_ROOT_PASSWORD_FILE <MINIO_ROOT_PASSWORD>`
+     - The corresponding secret key to use for the 
+       :ref:`root <minio-users-root>` user.
+
+       Replace this value with a unique, random, and long string.
+
+   * - :envvar:`MINIO_KMS_SECRET_KEY_FILE <MINIO_KMS_SECRET_KEY>`
+     - The key to use for encrypting the MinIO backend (S3 objects, users,
+       groups, policies, and server configuration).
+
+       Use the following format when specifying the encryption key:
+
+       ``<key-name>:<encryption-key>``
+
+       - Replace the ``<key-name>`` with any string. You must use this
+         key name if you later migrate to using a dedicated KMS for 
+         managing encryption keys.
+
+       - Replace ``<encryption-key>`` with a 32-bit base64 encoded value. 
+         For example:
+
+         .. code-block:: shell
+            :class: copyable
+ 
+            cat /dev/urandom | head -c 32 | base64 -
+
+   * - ``-v /mnt/disk<int>:/disk<int>`` 
+     - The path to each each disk the ``minio`` server uses. 
 
 Bleeding Edge MinIO
 ~~~~~~~~~~~~~~~~~~~
@@ -175,8 +230,9 @@ bleeding-edge version of the ``minio`` server process:
    :class: copyable
 
    docker run -p 9000:9000 \
-   -e "MINIO_ACCESS_KEY=ROOT_ACCESS_KEY" \
-   -e "MINIO_SECRET_KEY=SECRET_ACCESS_KEY_CHANGE_ME" \
+   -e "MINIO_ROOT_USER_FILE=ROOT_ACCESS_KEY" \
+   -e "MINIO_ROOT_PASSWORD_FILE=SECRET_ACCESS_KEY_CHANGE_ME" \
+   -e "MINIO_KMS_SECRET_KEY_FILE=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=" \
    -v /mnt/disk1:/disk1 \
    -v /mnt/disk2:/disk2 \
    -v /mnt/disk3:/disk3 \
@@ -185,11 +241,50 @@ bleeding-edge version of the ``minio`` server process:
 
 The command uses the following options:
 
-- ``MINIO_ACCESS_KEY`` and ``MINIO_SECRET_KEY`` for configuring the
-   :ref:`root <minio-users-root>` user credentials.
+.. list-table::
+   :widths: 40 60
+   :width: 100%
 
-- ``-v /mnt/disk<int>:/disk<int>`` for configuring each disk the ``minio`` 
-   server uses. 
+   * - :envvar:`MINIO_ROOT_USER_FILE <MINIO_ROOT_USER>`
+     - The access key for the :ref:`root <minio-users-root>` user.
+
+       Replace this value with a unique, random, and long string. 
+
+   * - :envvar:`MINIO_ROOT_PASSWORD_FILE <MINIO_ROOT_PASSWORD>`
+     - The corresponding secret key to use for the 
+       :ref:`root <minio-users-root>` user.
+
+       Replace this value with a unique, random, and long string.
+
+   * - :envvar:`MINIO_KMS_SECRET_KEY_FILE <MINIO_KMS_SECRET_KEY>`
+     - The key to use for encrypting the MinIO backend (S3 objects, users,
+       groups, policies, and server configuration).
+
+       Replace this value with a 32-bit base64-encrypted string:
+
+       .. code-block:: shell
+         :class: copyable
+ 
+         cat /dev/urandom | head -c 32 | base64 -
+
+       Use the following format when specifying the encryption key:
+
+       ``<key-name>:<encryption-key>``
+
+       - Replace the ``<key-name>`` with any string. You must use this
+         key name if you later migrate to using a dedicated KMS for 
+         managing encryption keys.
+
+       - Replace ``<encryption-key>`` with a 32-bit base64 encoded value. 
+         For example:
+
+         .. code-block:: shell
+            :class: copyable
+
+            cat /dev/urandom | head -c 32 | base64 -
+
+   * - ``-v /mnt/disk<int>:/disk<int>`` 
+     - The path to each each disk the ``minio`` server uses. 
 
 Standalone Installation
 -----------------------
@@ -230,8 +325,10 @@ environments.
    .. code-block:: shell
       :class: copyable
 
-      export MINIO_ACCESS_KEY=minio-admin
-      export MINIO_SECRET_KEY=minio-secret-key-CHANGE-ME
+      export MINIO_ROOT_USER=minio-admin
+      export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+      export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
+
       minio server /mnt/disk{1...4}/data
 
    The example command breaks down as follows:
@@ -240,16 +337,36 @@ environments.
       :widths: 40 60
       :width: 100%
 
-      * - :envvar:`MINIO_ACCESS_KEY`
+      * - :envvar:`MINIO_ROOT_USER`
         - The access key for the :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string. 
 
-      * - :envvar:`MINIO_SECRET_KEY`
+      * - :envvar:`MINIO_ROOT_PASSWORD`
         - The corresponding secret key to use for the 
           :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string.
+
+      * - :envvar:`MINIO_KMS_SECRET_KEY`
+        - The key to use for encrypting the MinIO backend (users, groups,
+          policies, and server configuration).
+
+          Use the following format when specifying the encryption key:
+
+          ``<key-name>:<encryption-key>``
+   
+          - Replace the ``<key-name>`` with any string. You must use this
+            key name if you later migrate to using a dedicated KMS for 
+            managing encryption keys.
+
+          - Replace ``<encryption-key>`` with a 32-bit base64 encoded value.
+            For example:
+
+            .. code-block:: shell
+               :class: copyable
+     
+               cat /dev/urandom | head -c 32 | base64 -
 
       * - ``/mnt/disk{1...4}/data``
         - The path to each disk on the host machine. 
@@ -260,13 +377,13 @@ environments.
           See :mc-cmd:`minio server DIRECTORIES` for more information on
           configuring the backing storage for the :mc:`minio server` process.
 
-   The command uses MinIO expansion notation ``{x...y}`` to denote a sequential
-   series. Specifically, ``/mnt/disk{1...4}/data`` expands to:
-   
-   - ``/mnt/disk1/data``
-   - ``/mnt/disk2/data``
-   - ``/mnt/disk3/data``
-   - ``/mnt/disk4/data``
+          The command uses MinIO expansion notation ``{x...y}`` to denote a
+          sequential series. Specifically, ``/mnt/disk{1...4}/data`` expands to:
+            
+          - ``/mnt/disk1/data``
+          - ``/mnt/disk2/data``
+          - ``/mnt/disk3/data``
+          - ``/mnt/disk4/data``
 
 4\) Connect to the Server
    Use the :mc-cmd:`mc alias set` command from a machine with connectivity to

@@ -175,9 +175,40 @@ environment variables during startup to set configuration settings.
 Root Credentials
 ~~~~~~~~~~~~~~~~
 
+.. envvar:: MINIO_ROOT_USER
+
+   The access key for the :ref:`root <minio-users-root>` user.
+
+   .. warning::
+
+      If :envvar:`MINIO_ROOT_USER` is unset, 
+      :mc:`minio` defaults to ``minioadmin``.
+
+      **NEVER** use the default credentials in production environments. 
+      MinIO strongly recommends specifying a unique, long, and random
+      :envvar:`MINIO_ROOT_USER` value for all environments.
+
+.. envvar:: MINIO_ROOT_PASSWORD
+
+   The access key for the :ref:`root <minio-users-root>` user.
+
+   .. warning::
+
+      If :envvar:`MINIO_ROOT_PASSWORD` is unset, 
+      :mc:`minio` defaults to ``minioadmin``.
+
+      **NEVER** use the default credentials in production environments. 
+      MinIO strongly recommends specifying a unique, long, and random
+      :envvar:`MINIO_ROOT_PASSWORD` value for all environments.
+
 .. envvar:: MINIO_ACCESS_KEY
 
+   .. deprecated:: RELEASE.2021-04-22T15-44-28Z
+
    The access key for the :ref:`root <minio-users-root>` user. 
+
+   This environment variable is *deprecated* in favor of the 
+   :envvar:`MINIO_ROOT_USER` environment variable. 
 
    .. warning::
 
@@ -190,7 +221,12 @@ Root Credentials
 
 .. envvar:: MINIO_SECRET_KEY
 
+   .. deprecated:: RELEASE.2021-04-22T15-44-28Z
+
    The secret key for the :ref:`root <minio-users-root>` user.
+
+   This environment variable is *deprecated* in favor of the
+   :envvar:`MINIO_ROOT_PASSWORD` environment variable.
 
    .. warning::
 
@@ -203,39 +239,87 @@ Root Credentials
 
 .. envvar:: MINIO_ACCESS_KEY_OLD
 
-   Used for rotating the :ref:`root <minio-users-root>` user access
-   key.
+   .. deprecated:: RELEASE.2021-04-22T15-44-28Z
 
-   Restart the :mc:`minio server` process with *all* of the following
-   environment variables to rotate the root credentials:
-
-   - :envvar:`MINIO_ACCESS_KEY_OLD` set to the old access key.
-   - :envvar:`MINIO_ACCESS_KEY` set to the new access key.
-   - :envvar:`MINIO_SECRET_KEY_OLD` set to the old secret key.
-   - :envvar:`MINIO_SECRET_KEY` set to the new secret key.
-
-   The :mc:`minio server` process automatically detects and re-encrypts 
-   the server configuration with the new credentials. After the process
-   restarts successfully, you can restart it without 
-   :envvar:`MINIO_ACCESS_KEY_OLD`.
+   To perform root credential rotation, modify the
+   :envvar:`MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` environment
+   variables.
 
 .. envvar:: MINIO_SECRET_KEY_OLD
 
-   Used for rotating the :ref:`root <minio-users-root>` user secret
-   key.
+   .. deprecated:: RELEASE.2021-04-22T15-44-28Z
 
-   Restart the :mc:`minio server` process with *all* of the following
-   environment variables to rotate the root credentials:
+   To perform root credential rotation, modify the
+   :envvar:`MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` environment
+   variables.
 
-   - :envvar:`MINIO_ACCESS_KEY_OLD` set to the old access key.
-   - :envvar:`MINIO_ACCESS_KEY` set to the new access key.
-   - :envvar:`MINIO_SECRET_KEY_OLD` set to the old secret key.
-   - :envvar:`MINIO_SECRET_KEY` set to the new secret key.
+Key Management Service and Encryption
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   The :mc:`minio server` process automatically detects and re-encrypts 
-   the server configuration with the new credentials. After the process
-   restarts successfully, you can restart it without 
-   :envvar:`MINIO_SECRET_KEY_OLD`.
+.. envvar:: MINIO_KMS_SECRET_KEY
+
+   .. versionadded:: RELEASE.2021-04-22T15-44-28Z
+
+   The client-provided encryption key to use for encrypting the
+   MinIO backend (users, groups, policies, and server configuration).
+   See :minio-git:`KMS IAM/Config Encryption
+   <minio/blob/master/docs/kms/IAM.md>` for more information.
+
+   Specify a 32-bit base-64 encrypted string in the following format:
+
+   ``<key-name>:<encryption-string>``
+
+   - Replace the ``<key-name>`` with any string. You must use this
+     key name if you later migrate to using a dedicated KMS for 
+     managing encryption keys.
+
+   - Replace ``<encryption-key>`` with a 32-bit base64 encoded value.
+     For example:
+
+     .. code-block:: shell
+        :class: copyable
+
+        cat /dev/urandom | head -c 32 | base64 -
+
+   Prior to :minio-release:`RELEASE.2021-04-22T15-44-28Z`, MinIO used the
+   :ref:`root <minio-users-root>` user credentials for encrypting the backend. 
+
+.. envvar:: MINIO_KMS_KES_ENDPOINT
+
+   The endpoint for the MinIO Key Encryption Service (KES) process to use
+   for supporting SSE-S3 and MinIO backend encryption operations.
+
+.. envvar:: MINIO_KMS_KES_KEY_FILE
+
+   The private key associated to the the :envvar:`MINIO_KMS_KES_CERT_FILE` x.509
+   certificate to use when authenticating to the KES server. The KES server
+   requires clients to present their certificate for performing mutual TLS
+   (mTLS).
+
+   See the :minio-git:`KES wiki <kes/wiki/Configuration#policy-configuration>` 
+   for more complete documentation on KES access control.
+
+.. envvar:: MINIO_KMS_KES_CERT_FILE
+
+   The x.509 certificate to present to the KES server. The KES server requires
+   clients to present their certificate for performing mutual TLS (mTLS).
+
+   The KES server computes an 
+   :minio-git:`identity <kes/wiki/Configuration#policy-configuration>`
+   from the certificate and compares it to its configured    
+   policies. The KES server grants the
+   :mc:`minio` server access to only those operations explicitly granted by the
+   policy.
+
+   See the :minio-git:`KES wiki <kes/wiki/Configuration#policy-configuration>`
+   for more complete documentation on KES access control.
+
+.. envvar:: MINIO_KMS_KES_KEY_NAME
+
+   The name of an external key on the Key Management system (KMS) configured on
+   the KES server and used for performing en/decryption operations. MinIO uses
+   this key for supporting server-side encryption of objects (SSE-S3) and MinIO
+   backend encryption.
 
 Storage Class
 ~~~~~~~~~~~~~

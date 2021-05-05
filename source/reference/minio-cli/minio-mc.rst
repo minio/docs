@@ -19,7 +19,9 @@ support for both filesystems and Amazon S3-compatible cloud storage services
 
 .. code-block:: shell
 
-   mc [FLAGS] COMMAND [COMMAND FLAGS | -h] [ARGUMENTS...] ALIAS
+   mc [FLAGS] COMMAND [ARGUMENTS...] [COMMAND FLAGS | -h] 
+
+See :ref:`minio-mc-commands` for a list of supported commands:
 
 .. _mc-install:
 
@@ -185,7 +187,7 @@ The following table lists :mc-cmd:`mc` commands:
      
    * - :mc:`mc lock`
      - Deprecated since 
-       :release:`RELEASE.2020-09-18T00-13-21Z`. Use :mc:`mc retention`.
+       :mc-release:`RELEASE.2020-09-18T00-13-21Z`. Use :mc:`mc retention`.
 
    * - :mc:`mc ls`
      - .. include:: /reference/minio-cli/minio-mc/mc-ls.rst
