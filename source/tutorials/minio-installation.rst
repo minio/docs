@@ -71,8 +71,8 @@ procedure.
    .. code-block:: shell
       :class: copyable
 
-      export MINIO_ROOT_USER_FILE=minio-admin
-      export MINIO_ROOT_PASSWORD_FILE=minio-secret-key-CHANGE-ME
+      export MINIO_ROOT_USER=minio-admin
+      export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
       export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
       minio server https://minio{1...4}.example.com/mnt/disk{1...4}/data
@@ -83,12 +83,12 @@ procedure.
       :widths: 40 60
       :width: 100%
 
-      * - :envvar:`MINIO_ROOT_USER_FILE`
+      * - :envvar:`MINIO_ROOT_USER`
         - The access key for the :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string. 
 
-      * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
+      * - :envvar:`MINIO_ROOT_PASSWORD`
         - The corresponding secret key to use for the 
           :ref:`root <minio-users-root>` user.
 
@@ -171,7 +171,7 @@ version of the ``minio`` server process:
    docker run -p 9000:9000 \
    -e "MINIO_ROOT_USER_FILE=ROOT_ACCESS_KEY" \
    -e "MINIO_ROOT_PASSWORD_FILE=SECRET_ACCESS_KEY_CHANGE_ME" \
-   -e "MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=" \
+   -e "MINIO_KMS_SECRET_KEY_FILE=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=" \
    -v /mnt/disk1:/disk1 \
    -v /mnt/disk2:/disk2 \
    -v /mnt/disk3:/disk3 \
@@ -184,20 +184,20 @@ The command uses the following options:
    :widths: 40 60
    :width: 100%
 
-   * - :envvar:`MINIO_ROOT_USER_FILE`
+   * - :envvar:`MINIO_ROOT_USER_FILE <MINIO_ROOT_USER>`
      - The access key for the :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string. 
 
-   * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
+   * - :envvar:`MINIO_ROOT_PASSWORD_FILE <MINIO_ROOT_PASSWORD>`
      - The corresponding secret key to use for the 
        :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string.
 
-   * - :envvar:`MINIO_KMS_SECRET_KEY`
-     - The key to use for encrypting the MinIO backend (S3 objects, users, groups,
-       policies, and server configuration).
+   * - :envvar:`MINIO_KMS_SECRET_KEY_FILE <MINIO_KMS_SECRET_KEY>`
+     - The key to use for encrypting the MinIO backend (S3 objects, users,
+       groups, policies, and server configuration).
 
        Use the following format when specifying the encryption key:
 
@@ -232,7 +232,7 @@ bleeding-edge version of the ``minio`` server process:
    docker run -p 9000:9000 \
    -e "MINIO_ROOT_USER_FILE=ROOT_ACCESS_KEY" \
    -e "MINIO_ROOT_PASSWORD_FILE=SECRET_ACCESS_KEY_CHANGE_ME" \
-   -e "MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=" \
+   -e "MINIO_KMS_SECRET_KEY_FILE=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=" \
    -v /mnt/disk1:/disk1 \
    -v /mnt/disk2:/disk2 \
    -v /mnt/disk3:/disk3 \
@@ -245,20 +245,20 @@ The command uses the following options:
    :widths: 40 60
    :width: 100%
 
-   * - :envvar:`MINIO_ROOT_USER_FILE`
+   * - :envvar:`MINIO_ROOT_USER_FILE <MINIO_ROOT_USER>`
      - The access key for the :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string. 
 
-   * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
+   * - :envvar:`MINIO_ROOT_PASSWORD_FILE <MINIO_ROOT_PASSWORD>`
      - The corresponding secret key to use for the 
        :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string.
 
-   * - :envvar:`MINIO_KMS_SECRET_KEY`
-     - The key to use for encrypting the MinIO backend (users, groups,
-       policies, and server configuration).
+   * - :envvar:`MINIO_KMS_SECRET_KEY_FILE <MINIO_KMS_SECRET_KEY>`
+     - The key to use for encrypting the MinIO backend (S3 objects, users,
+       groups, policies, and server configuration).
 
        Replace this value with a 32-bit base64-encrypted string:
 
@@ -325,8 +325,8 @@ environments.
    .. code-block:: shell
       :class: copyable
 
-      export MINIO_ROOT_USER_FILE=minio-admin
-      export MINIO_ROOT_PASSWORD_FILE=minio-secret-key-CHANGE-ME
+      export MINIO_ROOT_USER=minio-admin
+      export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
       export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
       minio server /mnt/disk{1...4}/data
@@ -337,12 +337,12 @@ environments.
       :widths: 40 60
       :width: 100%
 
-      * - :envvar:`MINIO_ROOT_USER_FILE`
+      * - :envvar:`MINIO_ROOT_USER`
         - The access key for the :ref:`root <minio-users-root>` user.
 
           Replace this value with a unique, random, and long string. 
 
-      * - :envvar:`MINIO_ROOT_PASSWORD_FILE`
+      * - :envvar:`MINIO_ROOT_PASSWORD`
         - The corresponding secret key to use for the 
           :ref:`root <minio-users-root>` user.
 
