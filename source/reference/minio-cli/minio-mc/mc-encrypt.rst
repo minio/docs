@@ -60,7 +60,7 @@ Syntax
       Specify the server-side encryption type to use as the default SSE mode.
       Supports the following values:
 
-      - ``sse-kms`` - SSE using a Key Management System (KMS)
+      - ``sse-kms`` - SSE using a Key Management System (KMS).
       - ``sse-s3`` - SSE using client-provided keys (SSE-C).
 
    .. mc-cmd:: KMSKEY
