@@ -93,7 +93,7 @@ such as versioning and replication.
           .. code-block:: shell
              :class: copyable
 
-             cat /dev/urandom`` | head -c 32 | base64 -
+             cat /dev/urandom | head -c 32 | base64 -
 
    MinIO by default listens on port ``9000``. Applications running on the
    same host can connect and perform S3 operations on the MinIO server

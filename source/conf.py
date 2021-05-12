@@ -22,8 +22,8 @@ sys.path.append(os.path.abspath('../sphinxext'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'MinIO Documentation'
-copyright = '2020, MinIO'
+project = 'MinIO Baremetal Documentation'
+copyright = '2020-Present, MinIO, Inc. '
 author = 'Ravind Kumar'
 
 # The full version, including alpha/beta/rc tags
@@ -116,20 +116,5 @@ html_extra_path = [ 'extra']
 
 html_permalinks_icon = "<img class='anchor' src=https://docs.min.io/minio/baremetal/_static/img/anchor-link.svg />"
 
-html_title = 'MinIO Documentation'
+html_title = 'MinIO Baremetal Documentation'
 
-# rst_epilog contains common replacements for all pages
-
-rst_epilog = """
-
-.. |minio-operator-release| replace:: ``minio/k8s-operator:v3.0.28``
-
-.. |minio-server-release| replace::   ``minio/minio:RELEASE.2020-10-03T02-19-42Z``
-
-"""
-
-rst_prolog = """
-
-.. |minio-operator-latest-version| replace:: v3.0.28
-
-"""
