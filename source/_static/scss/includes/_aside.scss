@@ -92,9 +92,13 @@
     ul {
         list-style: none;
         padding: 0;
-        font-size: .95rem;
+        margin: 0.5rem 0 0.5rem 0;
+        font-size: .90rem;
 
         & > li {
+
+            margin: 0.5rem 0 0.5rem 0;
+
             & > a {
                 &, & > code {
                     all: unset;
@@ -105,51 +109,30 @@
                     cursor: pointer;
                 }
             }
-        }
-    }
 
-    & > ul {
-        margin: 0;
+            &.active {
 
-        & > li {
-            & > a {
-                color: $docs-item-main-color;
-                padding: 0.5rem 0;
-                display: flex;
-                align-items: center;
-            
-                &:hover {
-                    color: $docs-item-main-hover-color;
-                }
+               & > a {
+                  color: $docs-item-main-active-color;
+                  font-weight: $font-weight-medium;
+               }
             }
 
-            &.current {
-                & > a {
-                    color: $docs-item-main-active-color;
-                    font-weight: $font-weight-medium;
-                }
+            &.active-parent {
+
+               & > a {
+                  color: $docs-item-sub-color;
+                  font-weight: $font-weight-medium;
+               }
             }
 
-            & > ul {
-                margin: 0 0 0.5rem;
+            & > ul { 
 
-                & > li {
-                    & > a {
-                        font-size: 0.85rem;
-                        color: $docs-item-sub-color;
-                        display: block;
-                        padding: 0.4rem 0;
-
-                        &:hover {
-                            color: $docs-item-sub-hover-color;
-                        }
-
-                        &.current {
-                            color: $docs-item-sub-active-color;
-                            font-weight: $font-weight-medium;
-                        }
-                    }
-                }
+               & > li {
+                  margin: 0.5rem 0 0.5rem 0.5rem;
+                  font-size: 0.85rem;
+               }
+               
             }
         }
     }
