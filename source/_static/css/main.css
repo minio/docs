@@ -732,41 +732,24 @@ table.docutils {
 .docs ul {
   list-style: none;
   padding: 0;
-  font-size: .95rem; }
-  .docs ul > li > a, .docs ul > li > a > code {
-    all: unset; }
-  .docs ul > li > a:hover {
-    border: 0;
-    cursor: pointer; }
-
-.docs > ul {
-  margin: 0; }
-  .docs > ul > li > a {
-    color: #1C1C1C;
-    padding: 0.5rem 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center; }
-    .docs > ul > li > a:hover {
-      color: #000000; }
-  .docs > ul > li.current > a {
-    color: #C72C48;
-    font-weight: 500; }
-  .docs > ul > li > ul {
-    margin: 0 0 0.5rem; }
-    .docs > ul > li > ul > li > a {
-      font-size: 0.85rem;
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: .90rem; }
+  .docs ul > li {
+    margin: 0.5rem 0 0.5rem 0; }
+    .docs ul > li > a, .docs ul > li > a > code {
+      all: unset; }
+    .docs ul > li > a:hover {
+      border: 0;
+      cursor: pointer; }
+    .docs ul > li.active > a {
+      color: #C72C48;
+      font-weight: 500; }
+    .docs ul > li.active-parent > a {
       color: #494949;
-      display: block;
-      padding: 0.4rem 0; }
-      .docs > ul > li > ul > li > a:hover {
-        color: black; }
-      .docs > ul > li > ul > li > a.current {
-        color: black;
-        font-weight: 500; }
+      font-weight: 500; }
+    .docs ul > li > ul > li {
+      margin: 0.5rem 0 0.5rem 0.5rem;
+      font-size: 0.85rem; }
 
 div#localtoc {
   font-size: 13px;
