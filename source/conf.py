@@ -44,7 +44,8 @@ extensions = [
     'sphinx_markdown_tables',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
-    'sphinx_togglebutton'
+    'sphinx_togglebutton',
+    'sphinxcontrib.images',
 ]
 
 # -- External Links
@@ -79,6 +80,12 @@ exclude_patterns = ['includes/*.rst']
 # Copy-Button Customization
 
 copybutton_selector = "div.copyable pre"
+
+# sphinxcontrib-images customization
+
+images_config = { 
+   'override_image_directive' : True
+}
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -340,7 +340,7 @@ refers to the specific storage tier on which to store a given object.
 
    Defaults to ``4``. 
 
-.. envvar:: MINIO_STORAGE_CLASS_REDUCED
+.. envvar:: MINIO_STORAGE_CLASS_RRS
 
    The number of :ref:`parity blocks <minio-ec-parity>` to create for objects
    with the reduced redundancy storage class. MinIO uses the ``EC:N``

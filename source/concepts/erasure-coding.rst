@@ -232,7 +232,7 @@ MinIO provides the following two storage classes:
    You can configure the ``REDUCED_REDUNDANCY`` storage class parity using
    either:
 
-   - The :envvar:`MINIO_STORAGE_CLASS_REDUCED` environment variable, *or*
+   - The :envvar:`MINIO_STORAGE_CLASS_RRS` environment variable, *or*
    - The :mc:`mc admin config` command to modify the 
      ``storage_class.rrs`` configuration setting.
 
