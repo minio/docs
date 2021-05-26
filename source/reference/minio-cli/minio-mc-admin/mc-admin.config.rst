@@ -1,4 +1,4 @@
-===================
+m===================
 ``mc admin config``
 ===================
 
@@ -52,6 +52,144 @@ Configuration Settings
 
 The following configuration settings define runtime behavior of the 
 MinIO :mc:`server <minio server>` process:
+
+.. _minio-server-config-logging-logs:
+
+HTTP Webhook Log Target
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. mc-conf:: logger_webhook
+
+   The top-level configuration key for defining an HTTP webhook target for
+   publishing :ref:`MinIO logs <minio-logging>`. 
+
+   Use :mc-cmd:`mc admin config set` to set or update an HTTP webhook target.
+   Specify additional optional arguments as a whitespace (``" "``)-delimited 
+   list.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config set logger_webhook \
+         endpoint="http://webhook.example.net" [ARGUMENTS=VALUE ...]
+
+   You can specify multiple HTTP webhook targets by appending 
+   ``[:name]`` to the top-level key. For example, the following commands
+   set two distinct HTTP webhook targets as ``primary`` and ``secondary``
+   respectively:
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config set logger_webhook:primary \
+         endpoint="http://webhook-01.example.net" [ARGUMENTS=VALUE ...]
+
+
+      mc admin config set logger_webhook:secondary \
+         endpoint="http://webhook-02.example.net" [ARGUMENTS=VALUE ...]
+
+   The :mc-conf:`logger_webhook` configuration key accepts the following 
+   arguments:
+
+   .. mc-conf:: endpoint
+
+      *Required*
+
+      The HTTP endpoint of the webhook.
+
+      This setting corresponds to the
+      :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT` environment variable.
+
+   .. mc-conf:: auth_token
+
+      *Optional*
+
+      The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
+      Omit for webhooks which do not enforce authentication.
+
+      This setting corresponds to the
+      :envvar:`MINIO_LOGGER_WEBHOOK_AUTH_TOKEN` environment variable.
+
+.. _minio-server-config-logging-audit:
+
+HTTP Webhook Audit Log Target
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. mc-conf:: audit_webhook
+
+   The top-level configuration key for defining an HTTP webhook target for
+   publishing :ref:`MinIO audit logs <minio-logging>`. 
+
+   Use :mc-cmd:`mc admin config set` to set or update an HTTP webhook target.
+   Specify additional optional arguments as a whitespace (``" "``)-delimited 
+   list.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config set audit_webhook \
+         endpoint="http://webhook.example.net" [ARGUMENTS=VALUE ...]
+
+   You can specify multiple HTTP webhook targets by appending 
+   ``[:name]`` to the top-level key. For example, the following commands
+   set two distinct HTTP webhook targets as ``primary`` and ``secondary``
+   respectively:
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config set audit_webhook:primary \
+         endpoint="http://webhook-01.example.net" [ARGUMENTS=VALUE ...]
+
+
+      mc admin config set audit_webhook:secondary \
+         endpoint="http://webhook-02.example.net" [ARGUMENTS=VALUE ...]
+
+   The :mc-conf:`audit_webhook` configuration key accepts the following 
+   arguments:
+
+   .. mc-conf:: endpoint
+
+      *Required*
+
+      The HTTP endpoint of the webhook.
+
+      This setting corresponds to the 
+      :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT` environment variable.
+
+   .. mc-conf:: auth_token
+      
+      *Optional*
+
+      The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
+      Omit for webhooks which do not enforce authentication.
+
+      This setting corresponds to the 
+      :envvar:`MINIO_AUDIT_WEBHOOK_AUTH_TOKEN` environment variable.
+
+   .. mc-conf:: client_cert
+
+      *Optional*
+
+      The x.509 client certificate to present to the HTTP webhook. Omit for
+      webhooks which do not require clients to present a known TLS certificate.
+
+      Requires specifying :mc-conf:`~audit_webhook.client_key`.
+
+      This setting corresponds to the
+      :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_CERT` environment variable.
+
+   .. mc-conf:: client_key
+
+      *Optional*
+
+      The x.509 private key to present to the HTTP webhook. Omit for
+      webhooks which do not require clients to present a known TLS certificate.
+
+      Requires specifying :mc-conf:`~audit_webhook.client_cert`.
+
+      This setting corresponds to the
+      :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_KEY` environment variable.
 
 .. _minio-server-config-bucket-notification-amqp:
 
