@@ -157,6 +157,8 @@ on any single drive.
 The specified parity for an object also dictates the minimum number of Erasure
 Set drives ("Quorum") required for MinIO to either read or write that object:
 
+.. _minio-read-quorum:
+
 Read Quorum
    The minimum number of Erasure Set drives required for MinIO to 
    serve read operations. MinIO can automatically reconstruct an object
@@ -164,6 +166,8 @@ Read Quorum
    provide Read Quorum for that object.
   
    MinIO Read Quorum is ``DRIVES - (EC:N)``.
+
+.. _minio-write-quorum:
 
 Write Quorum
   The minimum number of Erasure Set drives required for MinIO

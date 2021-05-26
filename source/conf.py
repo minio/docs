@@ -40,12 +40,12 @@ extensions = [
     'minio',
     'sphinx_copybutton',
     'sphinx_tabs.tabs',
-    'recommonmark',
     'sphinx_markdown_tables',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinx_togglebutton',
     'sphinxcontrib.images',
+    'myst_parser',
 ]
 
 # -- External Links
@@ -66,6 +66,7 @@ extlinks = {
     'mc-release'      : ('https://github.com/minio/mc/releases/tag/%s',''),
     'legacy'          : ('https://docs.min.io/docs/%s',''),
     'docs-k8s'        : ('https://docs.min.io/minio/k8s/%s',''),
+    'prometheus-docs' : ('https://prometheus.io/docs/%s',''),
 
 }
 
@@ -75,7 +76,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['includes/*.rst']
+exclude_patterns = ['includes/*.rst', 'includes/imports/*']
 
 # Copy-Button Customization
 

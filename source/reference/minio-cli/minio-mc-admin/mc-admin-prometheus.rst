@@ -35,17 +35,22 @@ legacy documentation site
 Syntax
 ------
 
-:mc-cmd:`mc admin prometheus` has the following syntax:
+.. mc-cmd:: generate
+   :fullpath:
 
-.. code-block:: shell
-   :class: copyable
+   Generates a JWT bearer token for use with configuring 
+   :ref:`Prometheus metrics collection <minio-metrics-and-alerts>`. The command
+   has the following syntax:
 
-   mc admin prometheus generate TARGET
+   .. code-block:: shell
+      :class: copyable
 
-:mc-cmd:`mc admin prometheus` supports the following:
+      mc admin prometheus generate TARGET
 
-.. mc-cmd:: TARGET
+   The command accepts the following arguments:
 
-   The :mc:`alias <mc alias>` of a configured MinIO deployment for which
-   the command generates a Prometheus-compatible configuration file.
+   .. mc-cmd:: TARGET
+
+      The :mc:`alias <mc alias>` of a configured MinIO deployment for which
+      the command generates a Prometheus-compatible configuration file.
 
