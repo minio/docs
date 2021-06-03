@@ -25,8 +25,8 @@ deployment only grants access *if*:
 authenticated client can perform on the deployment. MinIO uses Policy-Based
 Access Control (PBAC), where each policy describes one or more rules that
 outline the permissions of a user or group of users. MinIO supports a subset of
-:iam-docs:`IAM actions and conditions
-<reference_policies_actions-resources-contextkeys.html>` when creating policies.
+:ref:`actions <minio-policy-actions>` and 
+:ref:`conditions <minio-policy-conditions>` when creating policies.
 By default, MinIO *denies* access to actions or resources not explicitly
 referenced in a user's assigned or inherited policies.
 
