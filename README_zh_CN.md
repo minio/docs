@@ -12,6 +12,7 @@
 
 ### 文档列表
 
+- [JuiceFS 使用 MinIO 存储](./docs/zh_CN/juicefs-with-minio.md)
 - [部署Alluxioj结合MinIO](./docs/zh_CN/alluxio-with-minio.md)
 - [结合MinIO运行Deis Workflow](./docs/zh_CN/running-deis-workflow-with-minio.md)
 - [使用AWS CLI结合MinIO Server](./docs/zh_CN/aws-cli-with-minio.md)

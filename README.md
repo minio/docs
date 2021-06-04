@@ -12,6 +12,7 @@ Note: You can also refer to [Awesome MinIO](https://github.com/minio/awesome-min
 
 ### List of Recipes
 
+- [JuiceFS with MinIO](./docs/juicefs-with-minio.md)
 - [Alluxio with MinIO](./docs/alluxio-with-minio.md)
 - [Running Deis Workflow with MinIO](./docs/running-deis-workflow-with-minio.md)
 - [AWS CLI with MinIO](./docs/aws-cli-with-minio.md)
