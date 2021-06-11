@@ -137,6 +137,10 @@ events:
 
 .. data:: s3:ObjectRestore:Post
 .. data:: s3:ObjectRestore:Completed
+.. data:: s3:ObjectTransition:*
+.. data:: s3:ObjectTransition:Failed
+.. data:: s3:ObjectTransition:Complete
+
 
 Global Events
 ~~~~~~~~~~~~~
