@@ -38,7 +38,7 @@ if the specified credentials do not have read/write access to a specific bucket,
 :program:`mc` cannot perform read or write operations on that bucket.
 
 For more information on MinIO Access Control, see
-:ref:`minio-auth-authz-overview`. 
+:ref:`minio-access-management`. 
 
 For more complete documentation on S3 Access Control, see
 :s3-docs:`Amazon S3 Security <security.html>`.

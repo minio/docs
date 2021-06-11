@@ -302,7 +302,7 @@ The following examples use ``Alpha`` and ``Baker`` as placeholder :mc:`aliases
 appropriate aliases for the MinIO clusters on which you are configuring bucket
 replication. These examples assume that the specified aliases have
 the necessary permissions for creating policies and users on both clusters. See
-:ref:`minio-users` and :ref:`minio-policy` for more complete documentation on
+:ref:`minio-users` and :ref:`MinIO Policy Based Access Control <minio-policy>` for more complete documentation on
 MinIO users and policies respectively.
 
 A\) Create Replication Administrator

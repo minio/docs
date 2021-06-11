@@ -56,7 +56,7 @@ permission *and* the inherited permissions from each of their assigned groups.
 
 For more information on MinIO users and groups, see
 :ref:`minio-users` and :ref:`minio-groups`. For 
-more information on MinIO policies, see :ref:`minio-policy`.
+more information on MinIO policies, see :ref:`MinIO Policy Based Access Control <minio-policy>`.
 
 .. admonition:: ``Deny`` overrides ``Allow``
    :class: note
