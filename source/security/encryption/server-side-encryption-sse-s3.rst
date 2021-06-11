@@ -33,8 +33,6 @@ following KMS providers:
 - Thales CipherTrust (formerly Gemalto KeySecure)
 - Hashicorp KeyVault
 
-
-
 Requirements
 ------------
 

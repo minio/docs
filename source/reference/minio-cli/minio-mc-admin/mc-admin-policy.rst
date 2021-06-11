@@ -23,7 +23,7 @@ documents to define rules for accessing resources on a MinIO server.
 
 For complete documentation on MinIO PBAC, including policy document JSON
 structure and syntax, see
-:ref:`minio-auth-authz-overview`.
+:ref:`minio-access-management`.
 
 Examples
 --------

@@ -88,7 +88,7 @@ secret key as per your organizations best practices for password generation.
 
 This example assumes that the specified
 aliases have the necessary permissions for creating policies and users
-on the deployment. See :ref:`minio-users` and :ref:`minio-policy` for more
+on the deployment. See :ref:`minio-users` and :ref:`MinIO Policy Based Access Control <minio-policy>` for more
 complete documentation on MinIO users and policies respectively.
 
 .. end-create-transition-user-desc

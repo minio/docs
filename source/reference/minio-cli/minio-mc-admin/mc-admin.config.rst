@@ -1929,3 +1929,280 @@ using these environment variables.
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_NOTIFY_WEBHOOK_COMMENT` environment variable.
+
+Active Directory / LDAP Identity Management
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following section documents settings for enabling external identity 
+management using an Active Directory or LDAP service. See 
+:ref:`minio-external-identity-management-ad-ldap` for a tutorial on using these 
+configuration settings.
+
+.. mc-conf:: identity_ldap
+
+   The top-level key for configuring
+   :ref:`external identity management using Active Directory or LDAP 
+   <minio-external-identity-management-ad-ldap>`.
+
+   Use the :mc-cmd:`mc admin config set` to set or update the 
+   AD/LDAP configuration. The following arguments are *required*:
+
+   - :mc-conf:`~identity_ldap.server_addr`
+   - :mc-conf:`~identity_ldap.lookup_bind_dn`
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config set identity_ldap \
+         server_addr="https://ad-ldap.example.net/" \
+         lookup_bind_dn="cn=miniolookupuser,dc=ldapserver,dc=com"
+         lookUP-bind_dn_password="userpassword"
+
+   The :mc-conf:`identity_ldap` configuration key supports the following
+   arguments:
+
+   .. mc-conf:: server_addr
+      :delimiter: " "
+
+   *Required*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-ad-ldap-server-addr
+      :end-before: end-minio-ad-ldap-server-addr
+
+   This environment configuration setting with the 
+   :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR` environment variable.
+
+   .. mc-conf:: sts_expiry
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-sts-expiry
+         :end-before: end-minio-ad-ldap-sts-expiry
+
+      This environment configuration setting with the 
+      :envvar:`MINIO_IDENTITY_LDAP_STS_EXPIRY` environment variable.
+
+   .. mc-conf:: lookup_bind_dn
+      :delimiter: " "
+
+      *Required*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-lookup-bind-dn
+         :end-before: end-minio-ad-ldap-lookup-bind-dn
+
+      This environment configuration setting with the 
+      :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN` environment variable.
+
+   .. mc-conf:: lookup_bind_password
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-lookup-bind-password
+         :end-before: end-minio-ad-ldap-lookup-bind-password
+         
+      This environment variable configuration setting the 
+      :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD` environment variable.
+
+   .. mc-conf:: user_dn_search_base_dn
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-user-dn-search-base-dn
+         :end-before: end-minio-ad-ldap-user-dn-search-base-dn
+         
+      This environment variable configuration setting the 
+      :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN` environment variable.
+
+   .. mc-conf:: user_dn_search_filter
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-user-dn-search-filter
+         :end-before: end-minio-ad-ldap-user-dn-search-filter
+         
+      This environment variable configuration setting the 
+      :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER` environment variable.
+
+   .. mc-conf:: username_format
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-username-format
+         :end-before: end-minio-ad-ldap-username-format
+
+      This environment configuration setting with the 
+      :envvar:`MINIO_IDENTITY_LDAP_USERNAME_FORMAT` environment variable.
+
+   .. mc-conf:: group_search_filter
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-group-search-filter
+         :end-before: end-minio-ad-ldap-group-search-filter
+         
+      This environment variable configuration setting the 
+      :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER` environment variable.
+
+   .. mc-conf:: group_search_base_dn
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-group-search-base-dn
+         :end-before: end-minio-ad-ldap-group-search-base-dn
+         
+      This environment variable configuration setting the 
+      :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN` environment variable.
+
+   .. mc-conf:: tls_skip_verify
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-tls-skip-verify
+         :end-before: end-minio-ad-ldap-tls-skip-verify
+
+      This environment configuration setting with the 
+      :envvar:`MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY` environment variable.
+
+   .. mc-conf:: server_insecure
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-server-insecure
+         :end-before: end-minio-ad-ldap-server-insecure
+
+      This environment configuration setting with the 
+      :envvar:`MINIO_IDENTITY_LDAP_SERVER_INSECURE` environment variable.
+
+   .. mc-conf:: server_starttls
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-server-starttls
+         :end-before: end-minio-ad-ldap-server-starttls
+
+      This environment configuration setting with the 
+      :envvar:`MINIO_IDENTITY_LDAP_SERVER_STARTTLS` environment variable.
+
+   .. mc-conf:: comment
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-comment
+         :end-before: end-minio-ad-ldap-comment
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_LDAP_COMMENT` environment variable.   
+
+OpenID Identity Management
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following section documents settings for enabling external identity
+management using an OpenID Connect (OIDC)-compatible provider. 
+See :ref:`minio-external-identity-management-openid` for a tutorial on using these
+configuration settings.
+
+.. mc-conf:: identity_openid
+
+   The top-level configuration key for configuring
+   :ref:`external identity management using OpenID <minio-external-identity-management-openid>`.
+
+   Use :mc-cmd:`mc admin config set` to set or update the OpenID configuration.
+   The :mc-conf:`~identity_openid.config_url` argument is *required*. Specify
+   additional optional arguments as a whitespace (``" "``)-delimited list.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config set identity_openid \ 
+        config_url="https://openid-provider.example.net/.well-known/openid-configuration"
+        [ARGUMENT="VALUE"] ... \
+
+   The :mc-conf:`identity_openid` configuration key supports the following 
+   arguments:
+
+   .. mc-conf:: config_url
+      :delimiter: " "
+
+      *Required*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-config-url
+         :end-before: end-minio-openid-config-url
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_OPENID_CONFIG_URL` environment variable.
+
+   .. mc-conf:: client_id
+      :delimiter: " "
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-client-id
+         :end-before: end-minio-openid-client-id
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_OPENID_CLIENT_ID` environment variable.
+      
+   .. mc-conf:: claim_name
+      :delimiter: " "
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-claim-name
+         :end-before: end-minio-openid-claim-name
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_OPENID_CLAIM_NAME` environment variable.
+      
+   .. mc-conf:: claim_prefix
+      :delimiter: " "
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-claim-prefix
+         :end-before: end-minio-openid-claim-prefix
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_OPENID_CLAIM_PREFIX` environment variable.
+      
+   .. mc-conf:: scopes
+      :delimiter: " "
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-scopes
+         :end-before: end-minio-openid-scopes
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_OPENID_SCOPES` environment variable.
+      
+   .. mc-conf:: comment
+      :delimiter: " "
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-comment
+         :end-before: end-minio-openid-comment
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_OPENID_COMMENT` environment variable.
+      

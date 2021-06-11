@@ -116,7 +116,7 @@ unsuccessful, check each of the following:
   S3 service. The user must have permission to perform actions on the
   service. 
   
-  For MinIO deployments, see :ref:`minio-auth-authz-overview`
+  For MinIO deployments, see :ref:`minio-access-management`
   for more information on user access permissions. For other S3-compatible
   services, defer to the documentation for that service.
 
