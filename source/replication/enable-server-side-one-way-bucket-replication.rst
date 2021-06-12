@@ -365,19 +365,19 @@ bucket.
       --service "replication"
       [--sync]
 
-   - Replace ``SOURCEBUCKET`` with the name of the source bucket on the 
-     ``Alpha`` cluster.
+- Replace ``SOURCEBUCKET`` with the name of the source bucket on the 
+  ``Alpha`` cluster.
 
-   - Replace ``HOSTNAME`` with the URL of the ``Baker`` cluster.
+- Replace ``HOSTNAME`` with the URL of the ``Baker`` cluster.
 
-   - Replace ``DESTINATIONBUCKET`` with the name of the target bucket on the
-     ``Baker`` cluster.
+- Replace ``DESTINATIONBUCKET`` with the name of the target bucket on the
+  ``Baker`` cluster.
 
-   - Specify the :mc-cmd-option:`~mc admin bucket remote add sync` option to
-     enable synchronous replication. Omit the option to use the default of 
-     asynchronous replication. See the reference documentation for 
-     :mc-cmd-option:`~mc admin bucket remote add sync` for more information
-     on synchronous vs asynchronous replication.
+- Specify the :mc-cmd-option:`~mc admin bucket remote add sync` option to
+  enable synchronous replication. Omit the option to use the default of 
+  asynchronous replication. See the reference documentation for 
+  :mc-cmd-option:`~mc admin bucket remote add sync` for more information
+  on synchronous vs asynchronous replication.
 
 The command returns an ARN similar to the following:
 
@@ -401,24 +401,24 @@ replication rule to the source MinIO cluster.
       --arn 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
       --replicate "delete,delete-marker"
 
-   - Replace ``SOURCEBUCKET`` with the name of the bucket from which Alpha
-     replicates data. The name *must* match the bucket specified when
-     creating the remote target in the previous step.
+- Replace ``SOURCEBUCKET`` with the name of the bucket from which Alpha
+  replicates data. The name *must* match the bucket specified when
+  creating the remote target in the previous step.
 
-   - Replace the ``DESTINATIONBUCKET`` with the name of the ``Baker`` bucket to
-     which Alpha replicates data. The name *must* match the bucket specified
-     when creating the remote target in the previous step.
+- Replace the ``DESTINATIONBUCKET`` with the name of the ``Baker`` bucket to
+  which Alpha replicates data. The name *must* match the bucket specified
+  when creating the remote target in the previous step.
 
-   - Replace the ``--arn`` value with the ARN returned in the previous step. 
-     Ensure you specify the ARN created on the ``Alpha`` cluster. You can use
-     :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured
-     on the cluster.
-   
-   - The ``--replicate "delete,delete-marker"`` flag enables replicating delete
-     markers and deletion of object versions. See 
-     :mc-cmd-option:`mc replicate add replicate` for more complete
-     documentation. Omit these fields to disable replication of delete 
-     operations.
+- Replace the ``--arn`` value with the ARN returned in the previous step. 
+  Ensure you specify the ARN created on the ``Alpha`` cluster. You can use
+  :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured
+  on the cluster.
+
+- The ``--replicate "delete,delete-marker"`` flag enables replicating delete
+  markers and deletion of object versions. See 
+  :mc-cmd-option:`mc replicate add replicate` for more complete
+  documentation. Omit these fields to disable replication of delete 
+  operations.
 
 
 Specify any other supported optional arguments for 
