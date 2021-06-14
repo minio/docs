@@ -1,3 +1,13 @@
+// Using CSS variables to match the parent site's nav configs.
+:root {
+	--nav-text-color: #{$black};
+	--nav-item-border-color: #{$black};
+	--nav-item-arrow: #{$nav-arrow-icon};
+    --nav-toggle-hover-border-color: #{$black};
+	--nav-bg-gray: #{$nav-sub-hover-bg};
+    --header-bg: #{$white};
+}
+
 .header {
     height: $header-height;
     background-color: $header-bg;
@@ -40,9 +50,13 @@
 .nav {
 	z-index: 1;
 	transition: opacity 300ms, transform 300ms;
-	display: flex;
 	margin-left: auto;
 	font-size: 0.9375rem;
+
+	@include breakpoint-min(breakpoints(lg)) {
+		display: flex;
+		align-items: center;
+	}
 
 	@include breakpoint-max(breakpoints(lg)) {
 		height: 100vh;
@@ -81,10 +95,9 @@
 }
 
 .nav__item {
-	position: relative;
-
 	&:hover {
-		.nav__dropdown {
+		.nav__dropdown,
+		& ~ .nav__dropdown--product {
 			opacity: 1;
 			pointer-events: auto;
 		}
@@ -97,20 +110,59 @@
 			}
 		}
 	}
+
+	@include breakpoint-min(breakpoints(lg)) {
+		.nav__link {
+			margin-right: 0.75rem;
+			background: var(--nav-item-arrow) no-repeat top 2.45rem right 0.25rem;
+
+			&:after {
+				opacity: 0;
+				pointer-events: none;
+				box-sizing: border-box;
+				left: 50%;
+				margin-left: -3px;
+				content: "";
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0 6px 4px;
+				border-color: transparent transparent #fff;
+				position: absolute;
+				bottom: 1rem;
+				transition: opacity 200ms;
+				z-index: 2;
+			}
+		}
+
+		&:hover {
+			.nav__link {
+				&:after {
+					opacity: 1;
+				}
+			}
+		}
+	}	
 }
 
 .nav__link {
-	line-height: 100%;
+	position: relative;
 
 	&,
 	&:hover {
-		color: $nav-link-color;
+		color: var(--nav-text-color);
 	}
 
 	@include breakpoint-min(breakpoints(lg)) {
-		padding: 0.625rem 1.25rem 0.8125rem;
+		padding: 0 1.25rem;
 		margin-left: 0.25rem;
 		cursor: pointer;
+		
+		&:not(.nav__link--download) {
+			height: $header-height;
+			display: flex;
+			align-items: center;
+		}
 
 		& > span {
 			position: relative;
@@ -118,7 +170,7 @@
 			&:before {
 				height: 1px;
 				width: 100%;
-				background-color: $nav-link-color;
+				background-color: var(--nav-item-border-color);
 				position: absolute;
 				bottom: -8px;
 				left: 0;
@@ -144,7 +196,11 @@
 	@include breakpoint-max(breakpoints(lg)) {
 		font-weight: $font-weight-medium;
 		color: $black;
-		padding: 0.75rem 1.75rem;
+
+		& > span { 
+			display: block;
+			padding: 0.5rem 1.5rem;
+		}
 	}
 }
 
@@ -161,7 +217,8 @@
 	border: 1px solid $theme-red;
 	transition: background-color 300ms, color 300ms;
 	border-radius: $border-radius;
-
+	padding: 0.5rem 1.25rem 0.6rem;
+	
 	&:hover {
 		background-color: $theme-red;
 		color: $white;
@@ -170,78 +227,68 @@
 	@include breakpoint-max(breakpoints(lg)) {
 		margin: 1.5rem;
 		text-align: center;
+		padding: 0.5rem 1rem;
+		display: block;
 	}
 }
 
 .nav__dropdown {
 	@include breakpoint-min(breakpoints(lg)) {
-		margin-top: 0.3125rem;
 		width: 385px;
 		transform: translateX(calc(-50% + 3rem));
 		position: absolute;
 		left: 0;
-		top: 90%;
+		top: 4rem;
 		opacity: 0;
 		transition: opacity 200ms;
 		pointer-events: none;
-
-		&:before {
-			left: 50%;
-			margin-left: -5px;
-			content: "";
-			width: 0;
-			height: 0;
-			border-style: solid;
-			border-width: 0 10px 8px;
-			border-color: transparent transparent $white transparent;
-			position: absolute;
-			top: -8px;
-		}
+		border-radius: $border-radius-lg;
+		overflow: hidden;
+		box-shadow: 0 0.0625rem 1.25rem rgba($black, 0.13);
+		background-color: $white;
+		z-index: 1;
 
 		.nav__dropdown__inner {
 			padding: 1.5rem;
 			max-height: calc(100vh - 5rem);
 			overflow-y: auto;
-			border-radius: $border-radius;
-			box-shadow: 0 0.0625rem 1.25rem rgba($black, 0.13);
-			background-color: $white;
+			border-radius: $border-radius-lg;	
 		}
 	}
 
 	@include breakpoint-max(breakpoints(lg)) {
 		.nav__dropdown__inner {
-			background-color: $nav-sub-hover-bg;
-			padding: 0.5rem 1rem;
+			background-color: var(--nav-bg-gray);
+			padding: 0.5rem 0.8rem;
 			margin-bottom: 1rem;
 		}
 	}
 }
 
-.nav__dropdown--lg {
+.nav__dropdown--product {
 	@include breakpoint-min(breakpoints(lg)) {
-		width: 800px;
+		&:hover {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		width: calc(100% - 3.5rem);
+		max-width: 1200px;
+		transform: translateX(0);
+		left: auto;
+		right: 1.75rem;
 
         .nav__dropdown__inner {
-            padding: 3.5rem;
+            padding: 2.5rem 2.25rem;
         }
 	}
-
-	@media (max-width: map_get($breakpoints, xl)) and (min-width: map_get($breakpoints, lg)) {
-		width: 500px;
-
-        .nav__dropdown__inner {
-            padding: 1.5rem;
-        }
-	}
-
-	
 }
 
 .nav__sub {
 	padding: 0.6rem 0.75rem;
 	font-weight: $font-weight-medium;
 	color: $black;
-	border-radius: 0.25rem;
+	border-radius: $border-radius;
 
 	@include breakpoint-max(breakpoints(lg)) {
 		font-size: 0.85rem;
@@ -266,40 +313,29 @@
 	}
 
 	&:hover {
-		background-color: $nav-sub-hover-bg;
+		background-color: var(--nav-bg-gray);
 		color: $black;
-	}
-}
-
-.nav__arrow {
-	width: 9px;
-	height: 5px;
-	background: $nav-arrow-icon;
-	display: inline-block;
-	margin-left: 4px;
-
-	@include breakpoint-max(breakpoints(lg)) {
-		display: none;
 	}
 }
 
 .nav__feature {
 	@include breakpoint-min(breakpoints(lg)) {
 		display: flex;
-		align-items: flex-start;
 	}
 }
 
 .nav__column {
-	flex: 1;
-}
-
-.nav__column--main {
 	@include breakpoint-min(breakpoints(lg)) {
-        padding-right: 1rem;
+		padding: 0 1rem;
 
-		& > .nav__sub {
-			margin-top: 1rem;
+		&:not(:first-child) {
+			flex: 1;
+		}
+
+		&:first-child {
+			& > .nav__sub {
+				margin-top: 1rem;
+			}
 		}
 	}
 }
@@ -308,11 +344,14 @@
 	text-transform: uppercase;
 	font-size: 0.6rem;
 	padding-left: 0.75rem;
-	margin-bottom: 0.2rem;
+	margin-bottom: 0.5rem;
+	line-height: 100%;
 
 	@include breakpoint-max(breakpoints(lg)) {
 		margin-top: 1rem;
 	}
+
+	
 }
 
 .nav__lead {
@@ -356,6 +395,15 @@
 			margin-top: 0.5rem;
 		}
 	}
+
+	@include breakpoint-max(breakpoints(lg)) {
+		display: none;
+	}
+}
+
+.nav__seperator {
+	border-left: 1px solid var(--nav-bg-gray);
+	margin: 0 1rem;
 
 	@include breakpoint-max(breakpoints(lg)) {
 		display: none;
