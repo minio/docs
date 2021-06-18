@@ -361,8 +361,8 @@ both remote clusters:
 .. code-block:: shell
    :class: copyable
 
-   mc admin set AlphaReplication HOSTNAME AlphaReplicationAdmin LongRandomSecretKey
-   mc admin set BakerReplication HOSTNAME BakerReplicationAdmin LongRandomSecretKey
+   mc alias set AlphaReplication HOSTNAME AlphaReplicationAdmin LongRandomSecretKey
+   mc alias set BakerReplication HOSTNAME BakerReplicationAdmin LongRandomSecretKey
 
 3) Create a Replication Target for Each Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
