@@ -165,15 +165,49 @@ documentation on adding users and policies to a MinIO cluster.
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO performs replication as part of writing an object (PUT operations). 
-MinIO does *not* apply replication rules to existing objects written
-*before* enabling replication.
+Starting with :mc:`mc` :minio-git:`RELEASE.2021-06-13T17-48-22Z
+<mc/releases/tag/RELEASE.2021-06-13T17-48-22Z>` and :mc:`minio`
+:minio-git:`RELEASE.2021-06-07T21-40-51Z
+<minio/releases/tag/RELEASE.2021-06-07T21-40-51Z>`, MinIO supports automatically
+replicating existing objects in a bucket. MinIO existing object replication
+implements functionality similar to 
+`AWS: Replicating existing objects between S3 buckets
+<https://aws.amazon.com/blogs/storage/replicating-existing-objects-between-s3-buckets/>`__
+without the overhead of contacting technical support. 
 
-For buckets with existing objects, consider using :mc:`mc mirror` or 
-:mc:`mc cp` to seed the destination bucket. Consider scheduling a maintenance
-window during which applications stop writes to the bucket. Once 
-the :mc:`~mc mirror` or :mc:`~mc cp` fully sync the source and destination,
-enable bucket replication and resume normal operations on the bucket.
+- To enable replication of existing objects when creating a new replication
+  rule, include ``"existing-objects"`` to the list of replication features 
+  specified to :mc-cmd-option:`mc replicate add replicate`.
+
+- To enable replication of existing objects for an existing replication rule,
+  add ``"existing-objects"`` to the list of existing replication features using
+  :mc-cmd-option:`mc replicate add replicate`. You must specify *all*
+  desired replication features when editing the replication rule. 
+
+See :ref:`minio-replication-behavior-existing-objects` for more complete
+documentation on this behavior.
+
+Synchronization of Metadata Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO supports :ref:`two-way active-active
+<minio-bucket-replication-serverside-twoway>` replication configurations, where
+MinIO synchronizes new and modified objects between a bucket on two MinIO
+deployments. Starting with :mc:`mc` :minio-git:`RELEASE.2021-05-18T03-39-44Z
+<mc/release/tag/RELEASE.2021-05-18T03-39-44Z>`, MinIO by default synchronizes
+metadata-only changes to a replicated object back to the "source" deployment.
+Prior to the this update, MinIO did not support synchronizing metadata-only
+changes to a replicated object.
+
+With metadata synchronization enabled, MinIO resets the object 
+:ref:`replication status <minio-replication-process>` to indicate 
+replication eligibility. Specifically, when an application performs a
+metadata-only update to an object with the ``REPLICA`` status, MinIO marks the
+object as ``PENDING`` and eligible for replication.
+
+To disable metadata synchronization, use the 
+:mc-cmd-option:`mc replicate edit replicate` command and omit 
+``replica-metadata-sync`` from the replication feature list. 
 
 Replication of Delete Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -184,52 +218,21 @@ Specifically, MinIO can replicate both
 of specific versioned objects:
 
 - For delete operations on an object, MinIO replication also creates the delete
-  marker on the target bucket.
+  marker on the target bucket. 
 
 - For delete operations on versions of an object,
   MinIO replication also deletes those versions on the target bucket.
 
+MinIO does *not* replicate objects deleted due to
+:ref:`lifecycle management expiration rules
+<minio-lifecycle-management-expiration>`. MinIO only replicates explicit
+client-driven delete operations.
+
 MinIO requires explicitly enabling replication of delete operations using the
 :mc-cmd-option:`mc replicate add replicate` flag. This procedure includes the
 required flags for enabling replication of delete operations and delete markers.
-
-.. note::
-
-   If a delete operation removes the last object in a bucket prefix, MinIO
-   recursively deletes any empty directories within that prefix. For example:
-
-   ``play/mybucket/path/to/foo.txt``
-
-   The bucket prefix is ``/path/to/foo.txt``. If ``foo.txt`` is the last object
-   in prefix, MinIO deletes the entire prefix. If an object exists at ``/path``,
-   MinIO stops deleting the prefix at that point. 
-
-.. admonition:: MinIO Trims Empty Object Prefixes
-
-   If a delete operation removes the last object in a bucket prefix, MinIO
-   recursively removes each empty part of the prefix up to the bucket root.
-   MinIO only applies the recursive removal to prefixes created *implicitly* as
-   part of object write operations - that is, the prefix was not created using
-   an explicit directory creation command such as :mc:`mc mb`.
-
-   If a replication rule enables replication delete operations, the replication
-   process *also* applies the implicit prefix trimming behavior on the
-   destination MinIO cluster.
-
-   For example, consider a bucket ``photos`` with the following object prefixes:
-   
-   - ``photos/2021/january/myphoto.jpg``
-   - ``photos/2021/february/myotherphoto.jpg``
-   - ``photos/NYE21/NewYears.jpg``
-
-   ``photos/NYE21`` is the *only* prefix explicitly created using :mc:`mc mb`.
-   All other prefixes were *implicitly* created as part of writing the object
-   located at that prefix. If a command removes ``myphoto.jpg``, it also
-   automatically trims the empty ``/janaury`` prefix. If <command> then removes
-   the ``myotherphoto.jpg``, it also automatically trims both the ``/february``
-   prefix *and* the now-empty ``/2021`` prefix. If <command> removes the
-   ``NewYears.jpg`` object, the ``/NYE21`` prefix remains in place since it was
-   *explicitly* created.
+See :ref:`minio-replication-behavior-delete` for more complete documentation
+on this behavior.
 
 Replication of Encrypted Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -448,7 +451,7 @@ Syntax
       *Optional*
 
       Specify a comma-separated list of the following values to enable extended
-      replication features:
+      replication features. 
 
       - ``delete`` - Directs MinIO to replicate DELETE operations to the
         destination bucket.
@@ -456,6 +459,8 @@ Syntax
       - ``delete-marker`` - Directs MinIO to replicate delete markers to the 
         destination bucket. 
 
+      - ``existing-objects`` - Directs MinIO to replicate objects created
+        before replication was enabled *or* while replication was suspended.
 
    .. mc-cmd:: tags
       :option:
@@ -522,6 +527,15 @@ Syntax
       does not begin replicating objects using the rule until it 
       is enabled using :mc-cmd:`mc replicate edit`.
 
+      Objects created while replication is disabled are not
+      immediately eligible for replication after enabling the rule.
+      You must explicitly enable replication of existing
+      objects by including ``"existing-objects"`` to the list of
+      replication features specified to 
+      :mc-cmd-option:`mc replicate edit replicate`. See
+      :ref:`minio-replication-behavior-existing-objects` for more
+      information.
+
 
 .. mc-cmd:: edit
    :fullpath:
@@ -581,10 +595,21 @@ Syntax
       - ``delete-marker`` - Directs MinIO to replicate delete markers to the 
         destination bucket. 
 
-      MinIO does *not* apply the updated replication rules to existing 
-      objects in the source bucket. For example, enabling delete marker
-      replication does not automatically replicate existing objects with 
-      delete markers. 
+      - ``replica-metadata-sync`` - Directs MinIO to synchronize metadata-only
+        changes on a replicated object back to the source. This feature only
+        effects :ref:`two-way active-active
+        <minio-bucket-replication-serverside-twoway>` replication
+        configurations.
+
+        Omitting this value directs MinIO to stop replicating metadata-only
+        changes back to the source. 
+
+      - ``existing-objects`` - Directs MinIO to replicate objects created
+        prior to configuring or enabling replication. MinIO by default does
+        *not* synchronize existing objects to the remote target.
+
+        See :ref:`minio-replication-behavior-existing-objects` for more
+        information.
 
 
    .. mc-cmd:: tags
@@ -639,11 +664,16 @@ Syntax
       Enables or disables the replication rule. Specify one of the following
       values:
 
-      - ``"enable"`` - Enables the replication rule. MinIO begins replicating
-        objects written *after* enabling the rule. Existing objects require
-        manual migration to the destination bucket.
+      - ``"enable"`` - Enables the replication rule.
 
       - ``"disable"`` - Disables the replication rule. 
+
+      Objects created while replication is disabled are not immediately eligible
+      for replication after enabling the rule. You must explicitly enable
+      replication of existing objects by including ``"existing-objects"`` to the
+      list of replication features specified to 
+      :mc-cmd-option:`mc replicate edit replicate`. See
+      :ref:`minio-replication-behavior-existing-objects` for more information.
 
 .. mc-cmd:: ls
    :fullpath:
@@ -666,11 +696,11 @@ Syntax
       The full path to the bucket on which to list the
       replication configurations. Specify the 
       :mc:`alias <mc alias>` of a configured MinIO service as the prefix to the 
-      :mc-cmd:`~mc replicate add SOURCE` path. For example:
+      :mc-cmd:`~mc replicate ls SOURCE` path. For example:
 
       .. code-block:: shell
 
-         mc replicate add play/mybucket
+         mc replicate ls play/mybucket
 
    .. mc-cmd:: insecure
       :option:
@@ -765,11 +795,11 @@ Syntax
       The full path to the bucket to which to import the
       replication configurations. Specify the 
       :mc:`alias <mc alias>` of a configured MinIO service as the prefix to the 
-      :mc-cmd:`~mc replicate add SOURCE` path. For example:
+      :mc-cmd:`~mc replicate import SOURCE` path. For example:
 
       .. code-block:: shell
 
-         mc replicate export play/mybucket
+         mc replicate import play/mybucket
 
    .. mc-cmd:: insecure
       :option:
@@ -803,7 +833,7 @@ Syntax
       The full path to the bucket on which to remove the bucket
       replication configuration. Specify the 
       :mc:`alias <mc alias>` of a configured MinIO service as the prefix to the 
-      :mc-cmd:`~mc replicate edit SOURCE` path. For example:
+      :mc-cmd:`~mc replicate rm SOURCE` path. For example:
 
       .. code-block:: shell
 
@@ -828,3 +858,39 @@ Syntax
       *Optional*
 
       Required if specifying :mc-cmd-option:`~mc replicate rm all` .
+
+.. mc-cmd:: resync, reset
+   :fullpath:
+
+   Resynchronizes all objects in the specified bucket to the remote target
+   bucket. See :ref:`minio-replication-behavior-resync` for
+   more complete documentation.
+
+   :mc-cmd:`mc replicate resync` has the following syntax:
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc replicate resync SOURCE [args]
+
+   :mc-cmd:`mc replicate resync` supports the following arguments:
+
+   .. mc-cmd:: SOURCE
+
+      *Required*
+
+      The full path to the bucket on which to resync the bucket
+      replication status. Specify the 
+      :mc:`alias <mc alias>` of a configured MinIO service as the prefix to the 
+      :mc-cmd:`~mc replicate edit SOURCE` path. For example:
+
+      .. code-block:: shell
+
+         mc replicate resync play/mybucket
+
+   .. mc-cmd:: older-than
+
+      *Optional*
+
+      Specify a duration in days where MinIO only resynchronizes objects
+      older than the specified duration.
