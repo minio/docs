@@ -238,18 +238,17 @@ Considerations
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO performs replication as part of writing an object (PUT operations). MinIO
-does *not* apply replication rules to existing objects in the bucket. Use
-:mc:`mc cp` or :mc:`mc mirror` to migrate existing objects to the destination
-bucket.
+Starting with :mc:`mc` :minio-git:`RELEASE.2021-06-13T17-48-22Z
+<mc/releases/tag/RELEASE.2021-06-13T17-48-22Z>` and :mc:`minio`
+:minio-git:`RELEASE.2021-06-07T21-40-51Z
+<minio/releases/tag/RELEASE.2021-06-07T21-40-51Z>`, MinIO supports automatically
+replicating existing objects in a bucket.
 
-For buckets with active write operations during the procedure, any objects
-written *before* configuring bucket replication remain unreplicated. 
-
-Consider scheduling a maintenance period during which applications stop
-all write operations to the bucket or buckets for which you are configuring
-bucket replication. Restart write operations at the completion of the
-procedure to ensure consistent object replication.
+MinIO requires explicitly enabling replication of existing objects using the
+:mc-cmd-option:`mc replicate add replicate` or
+:mc-cmd-option:`mc replicate edit replicate` and including the 
+``existing-objects`` replication feature flag. This procedure includes the
+required flags for enabling replication of existing objects.
 
 Replication of Delete Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -460,7 +459,7 @@ A\) Create Replication Rule on Alpha
       mc replicate add AlphaReplication/SOURCEBUCKET \
          --remote-bucket DESTINATIONBUCKET \
          --arn 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
-         --replicate "delete,delete-marker"
+         --replicate "delete,delete-marker,existing-objects"
 
    - Replace ``SOURCEBUCKET`` with the name of the bucket from which Alpha
      replicates data. The name *must* match the bucket specified when
@@ -475,11 +474,15 @@ A\) Create Replication Rule on Alpha
      :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured
      on the cluster.
    
-   - The ``--replicate "delete,delete-marker"`` flag enables replicating delete
-     markers and deletion of object versions. See 
-     :mc-cmd-option:`mc replicate add replicate` for more complete
-     documentation. Omit these fields to disable replication of delete 
-     operations.
+   - The ``--replicate "delete,delete-marker,existing-objects"`` flag enables
+     the following replication features:
+      
+     - :ref:`Replication of Deletes <minio-replication-behavior-delete>` 
+     - :ref:`Replication of existing Objects <minio-replication-behavior-existing-objects>`
+      
+     See :mc-cmd-option:`mc replicate add replicate` for more complete
+     documentation. Omit these fields to disable replication of delete operations
+     or replication of existing objects respectively.
 
    Specify any other supported optional arguments for 
    :mc-cmd:`mc replicate add`.
@@ -496,7 +499,7 @@ B\) Create Replication Rule on Baker
       mc replicate add BakerReplication/SOURCEBUCKET \
          --remote-bucket DESTINATIONBUCKET \
          --arn 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
-         --replicate "delete,delete-marker"
+         --replicate "delete,delete-marker,existing-objects"
 
    - Replace ``SOURCEBUCKET`` with the name of the bucket from which Baker
      replicates data. The name *must* match the bucket specified when
@@ -511,11 +514,18 @@ B\) Create Replication Rule on Baker
      :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured
      on the cluster.
 
-   - The ``--replicate "delete,delete-marker"`` flag enables replicating delete
-     markers and deletion of object versions. See 
-     :mc-cmd-option:`mc replicate add replicate` for more complete
-     documentation. Omit these fields to disable replication of delete 
-     operations.
+   - The ``--replicate "delete,delete-marker,existing-objects"`` flag enables
+     the following replication features:
+      
+     - :ref:`Replication of Deletes <minio-replication-behavior-delete>` 
+     - :ref:`Replication of existing Objects <minio-replication-behavior-existing-objects>`
+      
+     See :mc-cmd-option:`mc replicate add replicate` for more complete
+     documentation. Omit these fields to disable replication of delete operations
+     or replication fof existing objects respectively.
+
+   Specify any other supported optional arguments for 
+   :mc-cmd:`mc replicate add`.
 
    Specify any other supported optional arguments for 
    :mc-cmd:`mc replicate add`.

@@ -134,14 +134,48 @@ You must explicitly enable synchronous replication when configuring the remote
 target target using the :mc-cmd:`mc admin bucket remote add` command with the
 :mc-cmd-option:`~mc admin bucket remote add sync` flag.
 
+.. _minio-replication-behavior-resync:
+
+Resynchronization
+~~~~~~~~~~~~~~~~~
+
+The :mc-cmd:`mc replicate resync` command can reset replication synchronization
+for a remote target. The resynchronization process attempts to queue all
+objects on the source bucket regardless of their 
+:ref:`replication status <minio-replication-process>`. Resynchronization
+primarily supports recovery after partial or total loss of a remote 
+replication target.
+
+Initiating resynchronization on a bucket uses the same core 
+:ref:`replication scanner and queue system <minio-replication-process>`
+for detecting and synchronizing objects. MinIO does not prioritize objects
+in the target bucket, nor does it empty or otherwise modify the queue to
+favor objects in the target bucket. MinIO skips synchronizing those 
+objects whose remote copy exactly match the source, including object
+metadata.
+
+:mc-cmd:`mc replicate resync` operates at the bucket level and does
+*not* support prefix-level granularity. Initiating resynchronization on a large
+bucket may result in a significant increase in replication-related load
+and traffic. Use this command with caution and only when necessary.
+
+Replication Behavior
+~~~~~~~~~~~~~~~~~~~~
+
+.. _minio-replication-behavior-delete:
+
 Replication of Delete Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++
 
 MinIO supports replicating delete operations, where MinIO synchronizes
 deleting specific object versions *and* new :s3-docs:`delete markers 
 <delete-marker-replication.html>`. Delete operation replication uses
 the same :ref:`replication process <minio-replication-process>` as all other
 replication operations. 
+
+MinIO only replicates explicit client-driven delete operations. MinIO does *not*
+replicate objects deleted due to :ref:`lifecycle management expiration rules
+<minio-lifecycle-management-expiration>`.
 
 For delete marker replication, MinIO begins the replication process after
 a delete operation creates the delete marker. MinIO uses the 
@@ -166,6 +200,85 @@ specify both or either ``delete`` and ``delete-marker`` to enable versioned
 deletes and delete marker replication respectively. To enable both, specify both
 strings using a comma separator ``delete,delete-marker``.
 
+.. admonition:: MinIO Trims Empty Object Prefixes on Source and Remote Bucket
+   :class: note, dropdown
+
+   If a delete operation removes the last object in a bucket prefix, MinIO
+   recursively removes each empty part of the prefix up to the bucket root.
+   MinIO only applies the recursive removal to prefixes created *implicitly* as
+   part of object write operations - that is, the prefix was not created using
+   an explicit directory creation command such as :mc:`mc mb`.
+
+   If a replication rule enables replication delete operations, the replication
+   process *also* applies the implicit prefix trimming behavior on the
+   destination MinIO cluster.
+
+   For example, consider a bucket ``photos`` with the following object prefixes:
+   
+   - ``photos/2021/january/myphoto.jpg``
+   - ``photos/2021/february/myotherphoto.jpg``
+   - ``photos/NYE21/NewYears.jpg``
+
+   ``photos/NYE21`` is the *only* prefix explicitly created using :mc:`mc mb`.
+   All other prefixes were *implicitly* created as part of writing the object
+   located at that prefix. 
+   
+   - A command removes ``myphoto.jpg``. MinIO automatically trims the empty
+     ``/janaury`` prefix. 
+   
+   - A command then removes the ``myotherphoto.jpg``. MinIO automatically
+     trims the ``/february`` prefix *and* the now-empty ``/2021`` prefix. 
+   
+   - A command removes the ``NewYears.jpg`` object. MinIO leaves the 
+     ``/NYE21`` prefix remains in place since it was *explicitly* created.
+
+.. _minio-replication-behavior-existing-objects:
+
+Replication of Existing Objects
++++++++++++++++++++++++++++++++
+
+MinIO by default does not enable existing object replication. Objects
+created before replication was configured *or* while replication is
+disabled are not synchronized to the target deployment.
+Starting with :mc:`mc` :minio-git:`RELEASE.2021-06-13T17-48-22Z
+<mc/releases/tag/RELEASE.2021-06-13T17-48-22Z>` and :mc:`minio`
+:minio-git:`RELEASE.2021-06-07T21-40-51Z
+<minio/releases/tag/RELEASE.2021-06-07T21-40-51Z>`, MinIO supports enabling
+replication of existing objects in a bucket. 
+
+Enabling existing object replication marks all objects or object prefixes that
+satisfy the replication rules as eligible for synchronization to the source
+cluster, *even if* those objects were created prior to configuring or enabling
+replication. You can enable existing object replication while configuring
+or modifying a replication rule:
+
+- For new replication rules, include ``"existing-objects"`` to the list of
+  replication features specified to :mc-cmd-option:`mc replicate add replicate`.
+
+- For existing replication rules, add ``"existing-objects"`` to the list of
+  existing replication features using 
+  :mc-cmd-option:`mc replicate edit replicate`. You must specify *all* desired
+  replication features when editing the replication rule. 
+
+Enabling existing object replication does not increase the priority of objects
+pending replication. MinIO uses the same core 
+:ref:`replication scanner and queue system <minio-replication-process>` for
+detecting and synchronizing objects regardless of the enabled replication
+feature. The time required to fully synchronize a bucket depends on a number of
+factors, including but not limited to the current cluster replication load,
+overall cluster load, and the size of the namespace (all objects in the bucket).
+
+MinIO does not synchronize existing unversioned objects. Specifically, the
+bucket *must* have :ref:`versioning <minio-bucket-versioning>` enabled when the
+object was created. 
+
+MinIO existing object replication
+implements functionality similar to 
+`AWS: Replicating existing objects between S3 buckets
+<https://aws.amazon.com/blogs/storage/replicating-existing-objects-between-s3-buckets/>`__
+without the overhead of contacting technical support. 
+
+
 .. toctree::
    :hidden:
    :titlesonly:
@@ -181,4 +294,3 @@ Client-Side Bucket Replication
 
 The :mc:`mc` command :mc-cmd:`mc mirror` supports watching a source bucket
 and automatically replicating objects to a destination bucket. 
-
