@@ -135,6 +135,16 @@ The command accepts the following arguments:
    If omitted, :mc:`minio <minio server>` binds to port ``9000`` on all
    configured IP addresses or hostnames on the host machine.
 
+.. mc-cmd:: console-address
+   :option:
+
+   *Optional*
+
+   Specifies a static port for the embedded MinIO Console.
+
+   Omit to direct MinIO to generate a dynamic port at server startup. The
+   MinIO server outputs the port to the system log.
+
 .. mc-cmd:: certs-dir, -S
    :option:
 
@@ -252,6 +262,45 @@ Root Credentials
    To perform root credential rotation, modify the
    :envvar:`MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` environment
    variables.
+
+MinIO Console
+~~~~~~~~~~~~~
+
+The following environment variables control behavior for the embedded
+MinIO Console:
+
+.. envvar:: MINIO_PROMETHEUS_URL
+
+   *Optional*
+
+   Specify the URL for a Prometheus service configured to 
+   :ref:`scrape MinIO metrics <minio-metrics-collect-using-prometheus>`.
+
+   The MinIO Console populates the :guilabel:`Dashboard` with cluster metrics
+   using the ``minio-job`` Prometheus scraping job.
+
+.. envvar:: MINIO_LOG_QUERY_URL
+
+   *Optional*
+
+   Specify the URL of a PostgreSQL service to which MinIO writes 
+   :ref:`Audit logs <minio-logging-publish-audit-logs>`. The embedded
+   MinIO Console provides a Log Search tool that allows querying the
+   PostgreSQL service for collected logs.
+
+.. envvar:: MINIO_BROWSER
+
+   *Optional*
+
+   Specify ``off`` to disable the embedded MinIO Console.
+
+.. envvar:: MINIO_BROWSER_REDIRECT
+
+   *Optional*
+
+   Specify ``false`` to direct MinIO to prevent redirecting browsers accessing
+   the ``localhost:9000`` URL to the MinIO Console. MinIO instead throws an
+   XML access error.
 
 Key Management Service and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
