@@ -171,14 +171,25 @@ Prometheus includes a
 visualizing collected metrics. 
 
 The :minio-git:`MinIO Console <console>` supports visualizing collected metrics
-from Prometheus. Specify the following environment variables prior to starting
-the Console server:
+from Prometheus. Specify the URL of the Prometheus service to the
+:envvar:`MINIO_PROMETHEUS_URL` environment variable to each MinIO server
+in the deployment:
 
-- ``CONSOLE_PROMETHEUS_URL=https://prometheus.example.net`` - replace the 
-  hostname with the URL for the Prometheus server.
+.. code-block:: shell
+   :class: copyable
 
-- ``CONSOLE_PROMETHEUS_JOB_ID=minio-job`` - replace the example job ID with the
-  name of the ``scrape_configs.job_name`` for the MinIO cluster. 
+   set MINIO_PROMETHEUS_URL="https://prometheus.example.net"
+
+Restart the deployment using :mc-cmd:`mc admin service restart` to apply the
+changes.
+
+The MinIO Console uses the metrics collected by the ``minio-job`` scraping
+job to populate the Dashboard metrics:
+
+.. image:: /images/minio-console-dashboard.png
+   :width: 600px
+   :alt: MinIO Console Dashboard displaying Monitoring Data
+   :align: center
 
 MinIO also publishes a `Grafana Dashboard
 <https://grafana.com/grafana/dashboards/13502>`_ for visualizing collected

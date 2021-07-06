@@ -95,53 +95,48 @@ such as versioning and replication.
 
              cat /dev/urandom | head -c 32 | base64 -
 
-   MinIO by default listens on port ``9000``. Applications running on the
-   same host can connect and perform S3 operations on the MinIO server
-   using the ``http://localhost:9000`` url.
+   The output resembles the following:
+
+   .. code-block:: shell
+
+      API: http://127.0.0.1:9000      
+      RootUser: minioadmin
+      RootPass: minioadmin
+      Region:   us-east-1
+      Console: http://127.0.0.1:64518 
+      RootUser: minioadmin
+      RootPass: minioadmin
+      Command-line: https://docs.min.io/docs/minio-client-quickstart-guide
+         $ mc alias set myminio http://127.0.0.1:9000 minioadmin minioadmin
+      Documentation: https://docs.min.io
+
+   Applications should use one of the addresses listed in the :guilabel:`API`
+   key for connecting to and performing operations on the MinIO Tenant. 
+   For early development and application, applications can authenticate
+   using the :guilabel:`RootUser` and :guilabel:`RootPass` credentials.
+   For long-term development and production, create dedicated users. 
+   See :doc:`/security/security-overview` for more information.
 
    You can also use the :mc:`mc` commandline tool to perform operations on the
    MinIO server. Use :mc:`mc alias set` to update the ``myminio`` alias with
    the access key and secret key set on the MinIO server.
 
-3\) Configure Console User for MinIO
-   Create a a :ref:`policy <minio-policy>` and :ref:`user <minio-users>` for
-   supporting the :minio-git:`MinIO Console <console>`. The Console provides a
-   rich graphical user interface for interacting with the MinIO server.
-
-   The following command downloads the JSON policy file, creates the appropriate
-   policy, and assigns that policy to a user:
-
-   .. code-block:: shell
-      :class: copyable
-
-      wget -O - https://docs.min.io/minio/baremetal/examples/ConsoleAdmin.json | \
-      mc admin policy add myminio ConsoleAdminPolicy /dev/stdin
-      mc admin user add myminio consoleAdmin LongRandomSecretKey
-      mc admin policy set Alpha ConsoleAdminPolicy user=consoleAdmin
-
-4\) Install and run the MinIO Console
-   Download the :minio-git:`Latest Stable <console/releases/latest>` version
-   of MinIO Console for the host operating system.
+3\) Open MinIO Console
    
-   Set the ``CONSOLE_MINIO_SERVER`` environment variable with the
-   URL of the MinIO server:
+   Open your browser and http://127.0.0.1:9000 to open the MinIO Console
+   login page.
+   
+   Log in with the :guilabel:`Root User` and :guilabel:`Root Pass` from the
+   previous step.
+   
+   .. image:: /images/minio-console-dashboard.png
+      :width: 600px
+      :alt: MinIO Console Dashboard displaying Monitoring Data
+      :align: center
 
-   .. code-block:: shell
-      :class: copyable
-
-      export CONSOLE_MINIO_SERVER=http://localhost:9000
-
-   Run the Console:
-
-   .. code-block:: shell
-      :class: copyable
-
-      ./console server
-
-5\) Open the MinIO Console
-   Open your browser and navigate to ``http://localhost:9090`` to access the
-   MinIO Console. Log in with the ``consoleAdmin`` access key and secret key to
-   begin interacting with the MinIO Tenant.
+   You can use the MinIO Console for general administration tasks like
+   Identity and Access Management, Metrics and Log Monitoring, or 
+   Server Configuration.
 
 .. toctree::
    :titlesonly:
