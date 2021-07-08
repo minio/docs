@@ -294,13 +294,6 @@ MinIO Console:
 
    Specify ``off`` to disable the embedded MinIO Console.
 
-.. envvar:: MINIO_BROWSER_REDIRECT
-
-   *Optional*
-
-   Specify ``false`` to direct MinIO to prevent redirecting browsers accessing
-   the ``localhost:9000`` URL to the MinIO Console. MinIO instead throws an
-   XML access error.
 
 Key Management Service and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
