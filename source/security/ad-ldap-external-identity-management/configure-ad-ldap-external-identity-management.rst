@@ -38,6 +38,13 @@ MinIO requires a read-only service account with which it
 :ref:`binds <minio-external-identity-management-ad-ldap-lookup-bind>` to perform
 authenticated user and group queries.
 
+Ensure each AD/LDAP user and group intended for use with MinIO has a
+corresponding :ref:`policy
+<minio-external-identity-management-ad-ldap-access-control>` on the MinIO
+deployment. An AD/LDAP user with no assigned policy *and* with membership in
+groups with no assigned policy has no permission to access any action or
+resource on the MinIO cluster.
+
 MinIO Cluster
 ~~~~~~~~~~~~~
 
@@ -88,10 +95,17 @@ environment variables and configuration settings respectively:
       - :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR`
       - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN`
       - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD`
+      - :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN`
+      - :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER`
 
       .. code-block:: shell
          :class: copyable
 
+         export MINIO_IDENTITY_LDAP_SERVER_ADDR="ldaps.example.net:636"
+         export MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net"
+         export MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN="dc=example,dc=net"
+         export MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER="(&(objectCategory=user)(sAMAccountName=%s))"
+         export MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD="xxxxxxxxx"
 
       For complete documentation on these variables, see
       :ref:`minio-server-envvar-external-identity-management-ad-ldap`
@@ -113,11 +127,20 @@ environment variables and configuration settings respectively:
       - :mc-conf:`identity_ldap lookup_bind_dn <identity_ldap.lookup_bind_dn>`
 
       - :mc-conf:`identity_ldap lookup_bind_password <identity_ldap.lookup_bind_password>`
+      
+      - :mc-conf:`identity_ldap user_dn_search_base_dn <identity_ldap.user_dn_search_base_dn>`
+      
+      - :mc-conf:`identity_ldap user_dn_search_filter <identity_ldap.user_dn_search_filter>`
 
       .. code-block:: shell
          :class: copyable
 
          mc admin config set ALIAS/ identity_ldap \
+            server_addr="ldaps.example.net:636" \
+            lookup_bind_dn="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net" \
+            lookup_bind_password="xxxxxxxx" \
+            user_dn_search_base_dn="DC=example,DC=net" \
+            user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"
 
       For more complete documentation on these settings, see
       :mc-conf:`identity_ldap`.

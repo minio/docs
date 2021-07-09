@@ -49,7 +49,7 @@ Consider the following JSON policy document:
                "s3:ListAllMyBuckets"
             ],
             "Resource": [
-               "arn:minio:s3:::*"
+               "arn:aws:s3:::*"
             ]
          }
       ]

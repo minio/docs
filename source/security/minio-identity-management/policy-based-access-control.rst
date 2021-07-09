@@ -1,7 +1,7 @@
-.. _minio-access-management:
+.. _minio-policy:
 
 =================
-Access Management
+Policy Management
 =================
 
 .. default-domain:: minio
@@ -9,8 +9,6 @@ Access Management
 .. contents:: Table of Contents
    :local:
    :depth: 2
-
-.. _minio-policy:
 
 Overview
 --------
@@ -20,75 +18,16 @@ and resources to which an authenticated user has access. Each policy describes
 one or more :ref:`actions <minio-policy-actions>` and :ref:`conditions
 <minio-policy-conditions>` that outline the permissions of a 
 :ref:`user <minio-users>` or :ref:`group <minio-groups>` of
-users. By default, MinIO *denies* access to actions or resources not explicitly
-referenced in a user's assigned or inherited policies.
+users. 
 
-MinIO manages the creation and storage of policies. The process for 
-assigning a policy to a user or group depends on the configured
-:ref:`IDentity Provider (IDP) <minio-authentication-and-identity-management>`.
-
-MinIO deployments using the :ref:`MinIO Internal IDP <minio-internal-idp>`
-require explicitly associating a user to a policy or policies using the
-:mc-cmd:`mc admin policy set`  command. A user can also inherit the policies
-attached to the :ref:`groups <minio-groups>` in which they have membership.
-
-For MinIO deployments using an External IDP, policy assignment depends on the
-choice of IDP:
-
-.. list-table::
-   :stub-columns: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - :ref:`OpenID Connect (OIDC)  <minio-external-identity-management-openid>`
-     - MinIO checks for a JSON Web Token (JWT) claim (``policy`` by default)
-       containing the name of the policy or policies to attach to the
-       authenticated user. If the policies do not exist, the user cannot
-       perform any action on the MinIO deployment.
-
-       MinIO does not support assigning OIDC user identities to 
-       :ref:`groups <minio-groups>`. The IDP administrator must instead
-       assign all necessary policies to the user's policy claim.
-
-       See :ref:`Access Control for Externally Managed Identities 
-       <minio-external-identity-management-openid-access-control>` for
-       more information.
-
-   * - :ref:`Active Directory / LDAP (AD/LDAP)
-       <minio-external-identity-management-ad-ldap>`
-     - MinIO checks for a policy whose name matches the Distinguished Name (DN)
-       of the authenticated AD/LDAP user.
-
-       MinIO also supports querying for the authenticated AD/LDAP user's 
-       group memberships. MinIO assigns any policy whose name matches the
-       DN for each returned group.
-
-       If no policies match either the user DN *or* any of the user's group DNs,
-       the user cannot perform any action on the MinIO deployment.
-
-       See :ref:`Access Control for Externally Managed Identities
-       <minio-external-identity-management-ad-ldap-access-control>` for more
-       information.
-     
 MinIO PBAC is built for compatibility with AWS IAM policy syntax, structure, and
 behavior. The MinIO documentation makes a best-effort to cover IAM-specific
 behavior and functionality. Consider deferring to the :iam-docs:`IAM
-documentation <>` for more complete documentation on IAM, IAM policies, or IAM
-JSON syntax.
+documentation <>` for more complete documentation on AWS IAM-specific topics.
 
-.. admonition:: ``Deny`` overrides ``Allow``
-   :class: note
-
-   MinIO follows AWS IAM policy evaluation rules where a ``Deny`` rule overrides
-   ``Allow`` rule on the same action/resource. For example, if a user has an
-   explicitly assigned policy with an ``Allow`` rule for an action/resource
-   while one of its groups has an assigned policy with a ``Deny`` rule for that
-   action/resource, MinIO would apply only the ``Deny`` rule. 
-
-   For more information on IAM policy evaluation logic, see the IAM
-   documentation on 
-   :iam-docs:`Determining Whether a Request is Allowed or Denied Within an Account 
-   <reference_policies_evaluation-logic.html#policy-eval-denyallow>`.
+The :mc-cmd:`mc admin policy` command supports creation and management of
+policies on the MinIO deployment. See the command reference for examples of
+usage.
 
 .. _minio-policy-built-in:
 
@@ -189,13 +128,13 @@ policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
          {
             "Effect" : "Allow",
             "Action" : [ "s3:<ActionName>", ... ],
-            "Resource" : "arn:minio:s3:::*",
+            "Resource" : "arn:aws:s3:::*",
             "Condition" : { ... }
          },
          {
             "Effect" : "Deny",
             "Action" : [ "s3:<ActionName>", ... ],
-            "Resource" : "arn:minio:s3:::*",
+            "Resource" : "arn:aws:s3:::*",
             "Condition" : { ... }
          }
       ]
@@ -762,63 +701,3 @@ MinIO supports the following conditions for use with defining policies for
 
 For complete information on any listed condition key, see the :iam-docs:`IAM
 Condition Element Documentation <reference_policies_elements_condition.html>`
-
-.. _minio-groups:
-
-MinIO Groups
-------------
-
-A *group* is a collection of :ref:`users <minio-users>`. Each group
-can have one or more assigned :ref:`policies <minio-policy>`
-that explicitly list the actions and resources to which group members are
-allowed or denied access.
-
-For example, consider the following groups. Each group is assigned a
-:ref:`built-in policy <minio-policy-built-in>` or supported
-:ref:`policy action <minio-policy-actions>`. Each group also has one or
-more assigned users. Each user's total set of permissions consists of their
-explicitly assigned permission *and* the inherited permissions from each of
-their assigned groups. MinIO by default *denies* access to any resource or
-operation not explicitly allowed by a user's assigned or inherited policies.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 40 40
-   :width: 100%
-
-   * - Group
-     - Policy
-     - Members
-
-   * - ``Operations``
-     - | :userpolicy:`readwrite` on ``finance`` bucket
-       | :userpolicy:`readonly` on ``audit`` bucket
-     
-     - ``john.doe``, ``jane.doe``
-
-   * - ``Auditing``
-     - | :userpolicy:`readonly` on ``audit`` bucket
-     - ``jen.doe``, ``joe.doe``
-
-   * - ``Admin``
-     - :policy-action:`admin:*`
-     - ``greg.doe``, ``jen.doe``
-
-Groups provide a simplified method for managing shared permissions among
-users with common access patterns and workloads. Client's *cannot* authenticate
-to a MinIO deployment using a group as an identity. Use the
-:mc-cmd:`mc admin group` command to create and manage groups on MinIO.
-
-.. admonition:: ``Deny`` overrides ``Allow``
-   :class: note
-
-   MinIO follows the IAM standard where a ``Deny`` rule overrides ``Allow`` rule
-   on the same action or resource. For example, if a user has an explicitly
-   assigned policy with an ``Allow`` rule for an action/resource while one of
-   its groups has an assigned policy with a ``Deny`` rule for that
-   action/resource, MinIO would apply only the ``Deny`` rule. 
-
-   For more information on IAM policy evaluation logic, see the IAM
-   documentation on 
-   :iam-docs:`Determining Whether a Request is Allowed or Denied Within an Account 
-   <reference_policies_evaluation-logic.html#policy-eval-denyallow>`.

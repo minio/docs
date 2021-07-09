@@ -1949,14 +1949,19 @@ configuration settings.
 
    - :mc-conf:`~identity_ldap.server_addr`
    - :mc-conf:`~identity_ldap.lookup_bind_dn`
+   - :mc-conf:`~identity_ldap.lookup_bind_password`
+   - :mc-conf:`~identity_ldap.user_dn_search_base_dn`
+   - :mc-conf:`~identity_ldap.user_dn_search_filter`
 
    .. code-block:: shell
       :class: copyable
 
       mc admin config set identity_ldap \
          server_addr="https://ad-ldap.example.net/" \
-         lookup_bind_dn="cn=miniolookupuser,dc=ldapserver,dc=com"
-         lookUP-bind_dn_password="userpassword"
+         lookup_bind_dn="cn=miniolookupuser,dc=example,dc=net" \
+         lookup_bind_dn_password="userpassword" \
+         user_dn_search_base_dn="dc=example,dc=net" \
+         user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"
 
    The :mc-conf:`identity_ldap` configuration key supports the following
    arguments:
@@ -2000,7 +2005,7 @@ configuration settings.
    .. mc-conf:: lookup_bind_password
       :delimiter: " "
 
-      *Optional*
+      *Required*
 
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-ad-ldap-lookup-bind-password
@@ -2012,7 +2017,7 @@ configuration settings.
    .. mc-conf:: user_dn_search_base_dn
       :delimiter: " "
 
-      *Optional*
+      *Required*
 
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-ad-ldap-user-dn-search-base-dn
@@ -2024,7 +2029,7 @@ configuration settings.
    .. mc-conf:: user_dn_search_filter
       :delimiter: " "
 
-      *Optional*
+      *Required*
 
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-ad-ldap-user-dn-search-filter
@@ -2165,6 +2170,16 @@ configuration settings.
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_OPENID_CLIENT_ID` environment variable.
+
+   .. mc-conf:: client_secret
+      :delimiter: " "
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-client-secret
+         :end-before: end-minio-openid-client-secret
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_OPENID_CLIENT_SECRET` environment variable.
       
    .. mc-conf:: claim_name
       :delimiter: " "
@@ -2196,6 +2211,19 @@ configuration settings.
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_OPENID_SCOPES` environment variable.
       
+   .. mc-conf:: redirect_uri
+      :delimiter: " "
+
+      *Optional*
+
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-redirect-uri
+         :end-before: end-minio-openid-redirect-uri
+
+      This configuration setting corresponds with the 
+      :envvar:`MINIO_IDENTITY_OPENID_REDIRECT_URI` environment variable.
+
    .. mc-conf:: comment
       :delimiter: " "
 

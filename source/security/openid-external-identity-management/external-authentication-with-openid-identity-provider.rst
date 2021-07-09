@@ -52,6 +52,11 @@ credentials is as follows:
 1. Authenticate to the configured :abbr:`OIDC (OpenID Connect)`
    provider and retrieve a 
    `JSON Web Token (JWT) <https://jwt.io/introduction>`__. 
+   
+   MinIO only supports the 
+   `OpenID Authorization Code Flow 
+   <https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth>`__. 
+   Authentication using Implicit Flow is not supported.
 
 2. Specify the :abbr:`JWT (JSON Web Token)` to the MinIO Security Token Service
    (STS) :ref:`minio-sts-assumerolewithwebidentity` API endpoint. 

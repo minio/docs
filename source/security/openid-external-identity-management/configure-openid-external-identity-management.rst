@@ -93,12 +93,13 @@ environment variables and configuration settings respectively:
       .. code-block:: shell
          :class: copyable
 
-         set MINIO_IDENTITY_OPENID_CONFIG_URL="https://openid-provider.example.net/.well-known/openid-configuration"
-         set MINIO_IDENTITY_OPENID_CLIENT_ID="<string>"
-         set MINIO_IDENTITY_OPENID_CLAIM_NAME="<string>"
-         set MINIO_IDENTITY_OPENID_CLAIM_PREFIX="<string>"
-         set MINIO_IDENTITY_OPENID_SCOPES="<string>"
-         set MINIO_IDENTITY_OPENID_COMMENT="<string>"
+         export MINIO_IDENTITY_OPENID_CONFIG_URL="https://openid-provider.example.net/.well-known/openid-configuration"
+         export MINIO_IDENTITY_OPENID_CLIENT_ID="<string>"
+         export MINIO_IDENTITY_OPENID_CLAIM_NAME="<string>"
+         export MINIO_IDENTITY_OPENID_CLAIM_PREFIX="<string>"
+         export MINIO_IDENTITY_OPENID_SCOPES="<string>"
+         export MINIO_IDENTITY_OPENID_REDIRECT_URI="<string>"
+         export MINIO_IDENTITY_OPENID_COMMENT="<string>"
 
       Replace the ``MINIO_IDENTITY_OPENID_CONFIG_URL`` with the URL endpoint of
       the :abbr:`OIDC (OpenID Connect)` provider discovery document. 
@@ -128,6 +129,7 @@ environment variables and configuration settings respectively:
             claim_name="<string>" \
             claim_prefix="<string>" \
             scopes="<string>" \
+            redirect_uri="<string>" \
             comment="<string>"
 
       Replace the ``config_url`` with the URL endpoint of the 

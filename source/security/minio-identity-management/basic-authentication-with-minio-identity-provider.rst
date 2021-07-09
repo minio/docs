@@ -1,9 +1,6 @@
-.. _minio-internal-idp:
-.. _minio-users:
-
-==================================
-MinIO Internal Identity Management
-==================================
+====================================
+MinIO Identity and Access Management
+====================================
 
 .. default-domain:: minio
 
@@ -14,16 +11,41 @@ MinIO Internal Identity Management
 Overview
 --------
 
+MinIO provides an internal Identity and Access Management subsystem that
+supports the creation of user identities, groups, and policies in support of
+authentication and authorization of client operations.
+
+*Authentication* is the process of verifying the identity of a connecting
+client. MinIO requires clients authenticate using :s3-api:`AWS Signature Version
+4 protocol <sig-v4-authenticating-requests.html>` with support for the
+deprecated Signature Version 2 protocol. Specifically, clients must present a
+valid access key and secret key to access any S3 or MinIO administrative API,
+such as ``PUT``, ``GET``, and ``DELETE`` operations. MinIO provides
+a built-in :ref:`IDentity Provider (IDP) <minio-internal-idp>` for creating and
+managing user identities in support of client authentication.
+
+*Authorization* is the process of restricting the actions and resources the
+authenticated client can perform on the deployment. MinIO uses Policy-Based
+Access Control (PBAC), where each policy describes one or more rules that
+outline the permissions of a user or group of users. MinIO supports a subset of
+:ref:`actions <minio-policy-actions>` and 
+:ref:`conditions <minio-policy-conditions>` when creating policies.
+By default, MinIO *denies* access to actions or resources not explicitly
+referenced in a user's assigned or inherited policies.
+
+.. _minio-internal-idp:
+
+Identity Management
+-------------------
+
 MinIO includes a built-in IDentity Provider (IDP) that provides core identity
-management functionality. The MiNIO IDP supports creating an arbitrary number of
+management functionality. The MinIO IDP supports creating an arbitrary number of
 long-lived users on the deployment for supporting client authentication. 
 
-A *user* is an identity with associated privileges on a MinIO deployment. Each
-user consists of a unique access key (username) and corresponding secret key
-(password).  The access key and secret key support *authentication* on the MinIO
-deployment, similar to a username and password. Clients must specify both a
-valid access key (username) and the corresponding secret key (password) to
-access the MinIO deployment.
+Each user consists of a unique access key (username) and corresponding secret
+key (password). Clients must authenticate their identity by specifying both
+a valid access key (username) and the corresponding secret key (password) of
+an existing MinIO user.
 
 Administrators use the :mc-cmd:`mc admin user` command to create and manage
 MinIO users. The :minio-git:`MinIO Console <console>` provides a graphical
@@ -54,167 +76,94 @@ user's authorized actions and resources *or* assign the user to :ref:`groups
    the exception of creating :ref:`service accounts
    <minio-idp-service-account>`.
 
-.. _minio-users-root:
+.. _minio-access-management:
 
-MinIO ``root`` User
-~~~~~~~~~~~~~~~~~~~
+Access Management
+-----------------
 
-MinIO deployments have a ``root`` user with access to all actions and resources
-on the deployment, regardless of the configured :ref:`identity manager
-<minio-authentication-and-identity-management>`. When a :mc:`minio` server first
-starts, it sets the ``root`` user credentials by checking the value of the
-following environment variables:
+MinIO uses Policy-Based Access Control (PBAC) to define the authorized actions
+and resources to which an authenticated user has access. Each policy describes
+one or more :ref:`actions <minio-policy-actions>` and :ref:`conditions
+<minio-policy-conditions>` that outline the permissions of a 
+:ref:`user <minio-users>` or :ref:`group <minio-groups>` of
+users. 
 
-- :envvar:`MINIO_ROOT_USER`
-- :envvar:`MINIO_ROOT_PASSWORD`
+MinIO manages the creation and storage of policies. The process for 
+assigning a policy to a user or group depends on the configured
+:ref:`IDentity Provider (IDP) <minio-authentication-and-identity-management>`.
 
-Rotating the root user credentials requires updating either or both variables
-for all MinIO servers in the deployment. Specify *long, unique, and random*
-strings for root credentials. Exercise all possible precautions in storing the
-access key and secret key, such that only known and trusted individuals who
-*require* superuser access to the deployment can retrieve the ``root``
-credentials.
+MinIO deployments using the :ref:`MinIO Internal IDP <minio-internal-idp>`
+require explicitly associating a user to a policy or policies using the
+:mc-cmd:`mc admin policy set`  command. A user can also inherit the policies
+attached to the :ref:`groups <minio-groups>` in which they have membership.
 
-- MinIO *strongly discourages* using the ``root`` user for regular client access
-  regardless of the environment (development, staging, or production).
+By default, MinIO *denies* access to actions or resources not explicitly allowed
+by an attached or inherited policy. A user with no explicitly assigned or
+inherited policies cannot perform any S3 or MinIO administrative API operations.
 
-- MinIO *strongly recommends* creating users such that each client has access to
-  the minimal set of actions and resources required to perform their assigned
-  workloads. 
-
-If these variables are unset, :mc:`minio` defaults to ``minioadmin`` and
-``minioadmin`` as the access key and secret key respectively. MinIO *strongly
-discourages* use of the default credentials regardless of deployment
-environment.
-
-.. admonition:: Deprecation of Legacy Root User Environment Variables
-   :class: dropdown, important
-
-   MinIO :minio-release:`RELEASE.2021-04-22T15-44-28Z` and later deprecates the
-   following variables used for setting or updating root user
-   credentials:
-
-   - :envvar:`MINIO_ACCESS_KEY` to the new access key.
-   - :envvar:`MINIO_SECRET_KEY` to the new secret key.
-   - :envvar:`MINIO_ACCESS_KEY_OLD` to the old access key.
-   - :envvar:`MINIO_SECRET_KEY_OLD` to the old secret key.
-
-Access Control
---------------
-
-A user by default has no associated :ref:`privileges <minio-access-management>`.
-You must either explicitly assign a :ref:`policy <minio-policy>` describing
-the user's authorized actions and resources *or* assign the user to 
-:ref:`groups <minio-groups>` which have associated policies. A user with
-no explicitly assigned or inherited policies cannot perform any S3 or
-MinIO administrative API operations.
-
-For example, consider the following table of users. Each user is assigned
-a :ref:`built-in policy <minio-policy-built-in>` or
-a supported :ref:`action <minio-policy-actions>`. The table
-describes a subset of operations a client could perform if authenticated
-as that user:
+For MinIO deployments using an External IDP, policy assignment depends on the
+choice of IDP:
 
 .. list-table::
-   :header-rows: 1
-   :widths: 20 40 40
+   :stub-columns: 1
+   :widths: 30 70
    :width: 100%
 
-   * - User
-     - Policy
-     - Operations
+   * - :ref:`OpenID Connect (OIDC)  <minio-external-identity-management-openid>`
+     - MinIO checks for a JSON Web Token (JWT) claim (``policy`` by default)
+       containing the name of the policy or policies to attach to the
+       authenticated user. If the policies do not exist, the user cannot
+       perform any action on the MinIO deployment.
 
-   * - ``Operations``
-     - | :userpolicy:`readwrite` on ``finance`` bucket
-       | :userpolicy:`readonly` on ``audit`` bucket
+       MinIO does not support assigning OIDC user identities to 
+       :ref:`groups <minio-groups>`. The IDP administrator must instead
+       assign all necessary policies to the user's policy claim.
+
+       See :ref:`Access Control for Externally Managed Identities 
+       <minio-external-identity-management-openid-access-control>` for
+       more information.
+
+   * - :ref:`Active Directory / LDAP (AD/LDAP)
+       <minio-external-identity-management-ad-ldap>`
+     - MinIO checks for a policy whose name matches the Distinguished Name (DN)
+       of the authenticated AD/LDAP user.
+
+       MinIO also supports querying for the authenticated AD/LDAP user's 
+       group memberships. MinIO assigns any policy whose name matches the
+       DN for each returned group.
+
+       If no policies match either the user DN *or* any of the user's group DNs,
+       the user cannot perform any action on the MinIO deployment.
+
+       See :ref:`Access Control for Externally Managed Identities
+       <minio-external-identity-management-ad-ldap-access-control>` for more
+       information.
      
-     - | ``PUT`` and ``GET`` on ``finance`` bucket.
-       | ``PUT`` on ``audit`` bucket
+MinIO PBAC is built for compatibility with AWS IAM policy syntax, structure, and
+behavior. The MinIO documentation makes a best-effort to cover IAM-specific
+behavior and functionality. Consider deferring to the :iam-docs:`IAM
+documentation <>` for more complete documentation on IAM, IAM policies, or IAM
+JSON syntax.
 
-   * - ``Auditing``
-     - | :userpolicy:`readonly` on ``audit`` bucket
-     - ``GET`` on ``audit`` bucket
+.. admonition:: ``Deny`` overrides ``Allow``
+   :class: note
 
-   * - ``Admin``
-     - :policy-action:`admin:*`
-     - All :mc-cmd:`mc admin` commands.
+   MinIO follows AWS IAM policy evaluation rules where a ``Deny`` rule overrides
+   ``Allow`` rule on the same action/resource. For example, if a user has an
+   explicitly assigned policy with an ``Allow`` rule for an action/resource
+   while one of its groups has an assigned policy with a ``Deny`` rule for that
+   action/resource, MinIO would apply only the ``Deny`` rule. 
 
-Each user can access only those resources and operations which are *explicitly*
-granted by the built-in role. MinIO denies access to any other resource or
-action by default.
+   For more information on IAM policy evaluation logic, see the IAM
+   documentation on 
+   :iam-docs:`Determining Whether a Request is Allowed or Denied Within an Account 
+   <reference_policies_evaluation-logic.html#policy-eval-denyallow>`.
 
-.. _minio-idp-service-account:
+   .. toctree::
+      :titlesonly:
+      :hidden:
 
-Service Accounts
-----------------
-
-MinIO service accounts are child identities of a MinIO User. Each 
-service account inherits its privileges based on the 
-:ref:`policies <minio-policy>` attached to it's parent user *or* those 
-groups in which the parent user has membership. Service accounts also support
-an optional inline policy which further restricts access to a subset of 
-actions and resources available to the parent user.
-
-A MinIO user can generate any number of service accounts. This allows
-application owners to generate arbitrary service accounts for their applications
-without requiring action from the MinIO administrators. Since the generated
-service accounts have the same or fewer permissions as the parents,
-administrators can focus on managing the top-level parent users without
-micro-managing generated service accounts.
-
-Service accounts are only available through the :minio-git:`MinIO Console 
-<console>`. After logging into the Console, click :guilabel:`Account`
-from the left navigation to view all service accounts associated to the
-authenticated user. Click :guilabel:`Create Service Account` to create
-new service accounts.
-
-User Management
----------------
-
-Create a User
-~~~~~~~~~~~~~
-
-Use the :mc-cmd:`mc admin user add` command to create a new user on the
-MinIO deployment:
-
-.. code-block:: shell
-   :class: copyable
-
-      mc admin user add ALIAS ACCESSKEY SECRETKEY
-
-- Replace :mc-cmd:`ALIAS <mc admin user add TARGET>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO deployment.
-
-- Replace :mc-cmd:`ACCESSKEY <mc admin user add ACCESSKEY>` with the 
-  access key for the user. MinIO allows retrieving the access key after
-  user creation through the :mc-cmd:`mc admin user info` command.
-
-- Replace :mc-cmd:`SECRETKEY <mc admin user add SECRETKEY>` with the
-  secret key for the user. MinIO *does not* provide any method for retrieving
-  the secret key once set.
-
-Specify a unique, random, and long string for both the ``ACCESSKEY`` and 
-``SECRETKEY``. Your organization may have specific internal or regulatory
-requirements around generating values for use with access or secret keys. 
-
-After creating the user, use :mc-cmd:`mc admin policy set` to associate 
-a :ref:`MinIO Policy Based Access Control <minio-policy>` to the new user. You can also use
-:mc-cmd:`mc admin group add` to add the user to a :ref:`minio-groups`.
-
-Delete a User
-~~~~~~~~~~~~~
-
-Use the :mc-cmd:`mc admin user remove` command to remove a user on a 
-MinIO deployment:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc admin user remove ALIAS USERNAME
-
-- Replace :mc-cmd:`ALIAS <mc admin user remove TARGET>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO deployment.
-
-- Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the name of
-  the user to remove.
+      /security/minio-identity-management/user-management
+      /security/minio-identity-management/group-management
+      /security/minio-identity-management/policy-based-access-control
 

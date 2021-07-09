@@ -12,6 +12,14 @@ credentials against the :abbr:`OIDC (OpenID Connect)` compatible provider.
 
 .. end-minio-openid-client-id
 
+.. start-minio-openid-client-secret
+
+Specify the client secret MinIO uses when authenticating user credentials
+against the :abbr:`OIDC (OpenID Connect)` compatible provider. This field
+may be optional depending on the provider.
+
+.. end-minio-openid-client-secret
+
 .. start-minio-openid-jwks-url
 
 Specify the URL for the JSON Web Key Set (JWKS) for MinIO to use when verifying
@@ -63,6 +71,35 @@ Specify a comma-separated list of
 Defaults to those scopes advertised in the discovery document.
 
 .. end-minio-openid-scopes
+
+.. start-minio-openid-redirect-uri
+
+Specify the redirect URI the MinIO Console uses when authenticating against the
+configured provider. Include the console port and ``/oauth_callback`` 
+as part of the URL:
+
+.. code-block:: shell
+
+   http://minio.example.net:consoleport/oauth_callback
+
+MinIO defaults to using the hostname of the node making the authentication
+request. MinIO deployments behind a load balancer or reverse proxy *may* 
+need to specify this field to ensure the OIDC provider returns the 
+authentication response to the correct URL.
+
+The specified URI *must* match one of the approved
+redirect / callback URIs on the provider. See the OpenID `Authentication Request 
+<https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest>`__ for
+more information.
+
+.. note::
+
+   The embedded MinIO Console by default uses a random port number selected at
+   server startup. Start the MinIO server process with the
+   :mc-cmd-option:`~minio server console-address` option to specify a static
+   port number.
+
+.. end-minio-openid-redirect-uri
 
 .. start-minio-openid-comment
 
