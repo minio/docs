@@ -2284,6 +2284,18 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
    :mc-conf:`identity_openid client_id 
    <identity_openid.client_id>` setting.
 
+.. envvar:: MINIO_IDENTITY_OPENID_CLIENT_SECRET
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-client-secret
+      :end-before: end-minio-openid-client-secret
+   
+   This environment variable corresponds with the 
+   :mc-conf:`identity_openid client_secret 
+   <identity_openid.client_secret>` setting.
+
 .. envvar:: MINIO_IDENTITY_OPENID_CLAIM_NAME
 
    *Optional*
@@ -2319,6 +2331,19 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
    This environment variable corresponds with the 
    :mc-conf:`identity_openid scopes 
    <identity_openid.scopes>` setting.
+
+.. envvar:: MINIO_IDENTITY_OPENID_REDIRECT_URI
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-redirect-uri
+      :end-before: end-minio-openid-redirect-uri
+
+   This environment variable corresponds with the 
+   :mc-conf:`identity_openid scopes 
+   <identity_openid.redirect_uri>` setting.
+   
 
 .. envvar:: MINIO_IDENTITY_OPENID_COMMENT
 

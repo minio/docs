@@ -229,9 +229,10 @@ configuration settings required for enabling group lookups:
       - :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN`
       - :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER`
 
-      See the :ref:`` reference documentation for more information on these
-      variables. The :ref:`` tutorial includes complete instructions on
-      setting these values.
+      See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
+      reference documentation for more information on these variables. The
+      :ref:`minio-authenticate-using-openid-generic` tutorial includes complete
+      instructions on setting these values.
 
    .. tab:: Configuration Setting
 
@@ -240,8 +241,9 @@ configuration settings required for enabling group lookups:
       - :mc-conf:`identity_ldap group_search_filter <identity_ldap.group_search_filter>`
 
       See the :mc-conf:`identity_ldap` reference documentation for more
-      information on these settings. The :ref:`` tutorial includes
-      complete instructions on setting these variables.
+      information on these settings. The
+      :ref:`minio-authenticate-using-openid-generic` tutorial includes complete
+      instructions on setting these variables.
 
 
 .. toctree::
