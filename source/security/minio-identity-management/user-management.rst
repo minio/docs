@@ -47,12 +47,13 @@ the exception of creating :ref:`service accounts
 Service Accounts
 ----------------
 
-MinIO service accounts are child identities of a MinIO User. Each 
-service account inherits its privileges based on the 
-:ref:`policies <minio-policy>` attached to it's parent user *or* those 
-groups in which the parent user has membership. Service accounts also support
-an optional inline policy which further restricts access to a subset of 
-actions and resources available to the parent user.
+MinIO service accounts are child identities of an authenticated MinIO user,
+including :ref:`externally managed identities
+<minio-authentication-and-identity-management>`. Each service account inherits
+its privileges based on the :ref:`policies <minio-policy>` attached to it's
+parent user *or* those groups in which the parent user has membership. Service
+accounts also support an optional inline policy which further restricts access
+to a subset of actions and resources available to the parent user.
 
 A MinIO user can generate any number of service accounts. This allows
 application owners to generate arbitrary service accounts for their applications
@@ -61,11 +62,17 @@ service accounts have the same or fewer permissions as the parents,
 administrators can focus on managing the top-level parent users without
 micro-managing generated service accounts.
 
-Service accounts are only available through the :minio-git:`MinIO Console 
-<console>`. After logging into the Console, click :guilabel:`Account`
-from the left navigation to view all service accounts associated to the
-authenticated user. Click :guilabel:`Create Service Account` to create
-new service accounts.
+Service accounts creation and management is only available through the
+:minio-git:`MinIO Console <console>`. After logging into the Console, click
+:guilabel:`Account` from the left navigation to view all service accounts
+associated to the authenticated user. Click :guilabel:`Create Service Account`
+to create new service accounts.
+
+.. admonition:: Service Accounts are for Programmatic Access
+   :class: dropdown, note
+
+   Service Accounts support programmatic access by applications. You cannot
+   use a Service Account to log into the MinIO Console.
 
 .. _minio-users-root:
 
