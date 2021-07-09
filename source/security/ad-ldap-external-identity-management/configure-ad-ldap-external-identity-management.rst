@@ -106,6 +106,8 @@ environment variables and configuration settings respectively:
          export MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN="dc=example,dc=net"
          export MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER="(&(objectCategory=user)(sAMAccountName=%s))"
          export MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD="xxxxxxxxx"
+         export MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER="(&(objectClass=group)(member=%d))"
+         export MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN="ou=MinIO Users,dc=example,dc=net"
 
       For complete documentation on these variables, see
       :ref:`minio-server-envvar-external-identity-management-ad-ldap`
@@ -140,7 +142,9 @@ environment variables and configuration settings respectively:
             lookup_bind_dn="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net" \
             lookup_bind_password="xxxxxxxx" \
             user_dn_search_base_dn="DC=example,DC=net" \
-            user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"
+            user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))" \
+            group_search_filter= "(&(objectClass=group)(member=%d))" \
+            group_search_base_dn="ou=MinIO Users,dc=example,dc=net" 
 
       For more complete documentation on these settings, see
       :mc-conf:`identity_ldap`.
@@ -176,9 +180,9 @@ AD/LDAP provider, generating temporary credentials using
 the MinIO :ref:`minio-sts-assumerolewithldapidentity` Security Token Service
 (STS) endpoint, and logging the user into the MinIO deployment.
 
-Starting in RELEASE, the MinIO Console is embedded in the MinIO server.
-You can access the Console by opening the root URL for the MinIO cluster.
-For example, ``https://minio.example.net:9001``.
+Starting in :minio-release:`RELEASE.2021-07-08T01-15-01Z`, the MinIO Console is
+embedded in the MinIO server. You can access the Console by opening the root URL
+for the MinIO cluster. For example, ``https://minio.example.net:9000``.
 
 From the Console, click :guilabel:`BUTTON` to begin the Active Directory / LDAP
 authentication flow.

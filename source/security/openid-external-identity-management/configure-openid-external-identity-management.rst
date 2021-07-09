@@ -95,6 +95,7 @@ environment variables and configuration settings respectively:
 
          export MINIO_IDENTITY_OPENID_CONFIG_URL="https://openid-provider.example.net/.well-known/openid-configuration"
          export MINIO_IDENTITY_OPENID_CLIENT_ID="<string>"
+         export MINIO_IDENTITY_OPENID_CLIENT_SECRET="<string>"
          export MINIO_IDENTITY_OPENID_CLAIM_NAME="<string>"
          export MINIO_IDENTITY_OPENID_CLAIM_PREFIX="<string>"
          export MINIO_IDENTITY_OPENID_SCOPES="<string>"
@@ -126,6 +127,7 @@ environment variables and configuration settings respectively:
          mc admin config set ALIAS/ identity_openid \
             config_url="https://openid-provider.example.net/.well-known/openid-configuration" \
             client_id="<string>" \
+            client_secret="<string>" \
             claim_name="<string>" \
             claim_prefix="<string>" \
             scopes="<string>" \
@@ -169,9 +171,9 @@ The MinIO Console supports the full workflow of authenticating to the
 the MinIO :ref:`minio-sts-assumerolewithwebidentity` Security Token Service
 (STS) endpoint, and logging the user into the MinIO deployment.
 
-Starting in RELEASE, the MinIO Console is embedded in the MinIO server.
-You can access the Console by opening the root URL for the MinIO cluster.
-For example, ``https://minio.example.net:9001``.
+Starting in :minio-release:`RELEASE.2021-07-08T01-15-01Z`, the MinIO Console is
+embedded in the MinIO server. You can access the Console by opening the root URL
+for the MinIO cluster. For example, ``https://minio.example.net:9000``.
 
 From the Console, click :guilabel:`BUTTON` to begin the OpenID authentication
 flow.
@@ -234,4 +236,4 @@ access key, secret key, session token, and expiration date. Applications
 can use the access key and secret key to access and perform operations on
 MinIO.
 
-SEe the :ref:`minio-sts-assumerolewithwebidentity` for reference documentation.
+See the :ref:`minio-sts-assumerolewithwebidentity` for reference documentation.

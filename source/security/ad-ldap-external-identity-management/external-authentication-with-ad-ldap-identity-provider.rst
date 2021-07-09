@@ -248,6 +248,7 @@ configuration settings required for enabling group lookups:
 
 .. toctree::
    :titlesonly:
+   :hidden:
 
    /security/ad-ldap-external-identity-management/configure-ad-ldap-external-identity-management.rst
    /security/ad-ldap-external-identity-management/AssumeRoleWithLDAPIdentity.rst
