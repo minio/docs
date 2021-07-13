@@ -216,7 +216,7 @@ Once the application retrieves the JWT token, use the
 .. code-block:: shell
    :class: copyable
 
-   POST https://minio.example.net/Action=AssumeRoleWithWebIdentity
+   POST https://minio.example.net?Action=AssumeRoleWithWebIdentity
    &WebIdentityToken=TOKEN
    &Version=2011-06-15
    &DurationSeconds=86400

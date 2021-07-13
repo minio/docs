@@ -214,7 +214,7 @@ managing this workflow.
 
 .. code-block:: shell
 
-   POST https://minio.example.net/Action=AssumeRoleWithLDAPIDentity
+   POST https://minio.example.net?Action=AssumeRoleWithLDAPIdentity
    &LDAPUsername=USERNAME
    &LDAPPassword=PASSWORD
    &Version=2011-06-15

@@ -34,7 +34,7 @@ The ``AssumeRoleWithWebIdentity`` endpoint has the following form:
 
 .. code-block:: shell
 
-   POST https://minio.example.net/Action=AssumeRoleWithWebIdentity[&ARGS]
+   POST https://minio.example.net?Action=AssumeRoleWithWebIdentity[&ARGS]
 
 The following example uses all supported arguments. Replace the
 ``minio.example.net`` hostname with the appropriate URL for your MinIO 
@@ -42,7 +42,7 @@ cluster:
 
 .. code-block:: shell
 
-   POST https://minio.example.net/Action=AssumeRoleWithWebIdentity
+   POST https://minio.example.net?Action=AssumeRoleWithWebIdentity
    &WebIdentityToken=TOKEN
    &Version=2011-06-15
    &DurationSeconds=86000
