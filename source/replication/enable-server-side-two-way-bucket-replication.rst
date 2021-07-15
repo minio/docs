@@ -108,39 +108,9 @@ destination clusters to configure and enable replication rules.
       The following policy provides permissions for configuring and enabling
       replication on a cluster. 
 
-      .. code-block:: shell
+      .. literalinclude:: /extra/examples/ReplicationAdminPolicy.json
          :class: copyable
-
-         {
-            "Version": "2012-10-17",
-            "Statement": [
-               {
-                     "Action": [
-                        "admin:SetBucketTarget",
-                        "admin:GetBucketTarget"
-                     ],
-                     "Effect": "Allow",
-                     "Sid": "EnableRemoteBucketConfiguration"
-               },
-               {
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:GetReplicationConfiguration",
-                        "s3:ListBucket",
-                        "s3:ListBucketMultipartUploads",
-                        "s3:GetBucketLocation",
-                        "s3:GetBucketVersioning",
-                        "s3:GetObjectRetention",
-                        "s3:GetObjectLegalHold",
-                        "s3:PutReplicationConfiguration"
-                     ],
-                     "Resource": [
-                        "arn:aws:s3:::*"
-                     ],
-                     "Sid": "EnableReplicationRuleConfiguration"
-               }
-            ]
-         }
+         :language: json
 
       - The ``"EnableRemoteBucketConfiguration"`` statement grants permission
         for creating a remote target for supporting replication.
@@ -162,52 +132,9 @@ destination clusters to configure and enable replication rules.
       replicated data *into* the cluster. Use the :mc-cmd:`mc admin policy add`
       to add this policy to *both* clusters.
 
-      .. code-block:: shell
+      .. literalinclude:: /extra/examples/ReplicationRemoteUserPolicy.json
          :class: copyable
-
-         {
-            "Version": "2012-10-17",
-            "Statement": [
-               {
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:GetReplicationConfiguration",
-                        "s3:ListBucket",
-                        "s3:ListBucketMultipartUploads",
-                        "s3:GetBucketLocation",
-                        "s3:GetBucketVersioning",
-                        "s3:GetBucketObjectLockConfiguration",
-                        "s3:GetEncryptionConfiguration"
-                     ],
-                     "Resource": [
-                        "arn:aws:s3:::*"
-                     ],
-                     "Sid": "EnableReplicationOnBucket"
-               },
-               {
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:GetReplicationConfiguration",
-                        "s3:ReplicateTags",
-                        "s3:AbortMultipartUpload",
-                        "s3:GetObject",
-                        "s3:GetObjectVersion",
-                        "s3:GetObjectVersionTagging",
-                        "s3:PutObject",
-                        "s3:PutObjectRetention",
-                        "s3:PutBucketObjectLockConfiguration",
-                        "s3:PutObjectLegalHold",
-                        "s3:DeleteObject",
-                        "s3:ReplicateObject",
-                        "s3:ReplicateDelete"
-                     ],
-                     "Resource": [
-                        "arn:aws:s3:::*"
-                     ],
-                     "Sid": "EnableReplicatingDataIntoBucket"
-               }
-            ]
-         }
+         :language: json
 
       - The ``"EnableReplicationOnBucket"`` statement grants permission for 
         a remote target to retrieve bucket-level configuration for supporting
