@@ -67,6 +67,7 @@ extlinks = {
     'legacy'          : ('https://docs.min.io/docs/%s',''),
     'docs-k8s'        : ('https://docs.min.io/minio/k8s/%s',''),
     'prometheus-docs' : ('https://prometheus.io/docs/%s',''),
+    'podman-docs'     : ('http://docs.podman.io/en/latest/%s',''),
 
 }
 

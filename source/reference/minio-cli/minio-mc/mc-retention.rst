@@ -1,3 +1,5 @@
+.. _minio-bucket-locking:
+
 ================
 ``mc retention``
 ================
