@@ -68,7 +68,6 @@ such as versioning and replication.
 
       export MINIO_ROOT_USER=myminioaccesskey
       export MINIO_ROOT_PASSWORD=myminiosecretkey
-      export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
       minio server /mnt/data
 
@@ -84,16 +83,6 @@ such as versioning and replication.
       * - :envvar:`MINIO_ROOT_PASSWORD`
         - The :ref:`root user <minio-users-root>` secret key. Replace the
           sample value with a long, random, and unique string.
-
-      * - :envvar:`MINIO_KMS_SECRET_KEY`
-        - The encryption key for the MinIO IAM backend. Replace the
-          sample value with a 32-bit base-64 encoded value. For example,
-          use the following command to generate a random key:
-
-          .. code-block:: shell
-             :class: copyable
-
-             cat /dev/urandom | head -c 32 | base64 -
 
    The output resembles the following:
 
@@ -144,7 +133,7 @@ such as versioning and replication.
 
    /introduction/minio-overview
    /concepts/feature-overview
-   /tutorials/minio-installation
+   /installation/deployment-and-management
    /lifecycle-management/lifecycle-management-overview
    /replication/replication-overview
    /security/security-overview

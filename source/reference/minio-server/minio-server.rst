@@ -302,9 +302,16 @@ Key Management Service and Encryption
 
    .. versionadded:: RELEASE.2021-04-22T15-44-28Z
 
-   The client-provided encryption key to use for encrypting the
-   MinIO backend (users, groups, policies, and server configuration).
-   See :minio-git:`KMS IAM/Config Encryption
+   The client-provided encryption key to use for encrypting the MinIO backend
+   (users, groups, policies, and server configuration). Single-key backend
+   encryption provides a baseline of security for non-production environments,
+   and does not support features like key rotation.
+
+   Do not use this setting in production environments. Use the MinIO
+   :minio-git:`Key Encryption Service (KES) <kes>` and an external Key
+   Management System (KMS) to enable encryption functionality. Specify the
+   name of the encryption key to use to the :envvar:`MINIO_KMS_KES_KEY_NAME`
+   instead. See :minio-git:`KMS IAM/Config Encryption
    <minio/blob/master/docs/kms/IAM.md>` for more information.
 
    Specify a 32-bit base-64 encrypted string in the following format:
@@ -362,6 +369,8 @@ Key Management Service and Encryption
    the KES server and used for performing en/decryption operations. MinIO uses
    this key for supporting server-side encryption of objects (SSE-S3) and MinIO
    backend encryption.
+
+.. _minio-server-envvar-storage-class:
 
 Storage Class
 ~~~~~~~~~~~~~
