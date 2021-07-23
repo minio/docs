@@ -126,3 +126,6 @@ html_permalinks_icon = "<img class='anchor' src=https://docs.min.io/minio/bareme
 
 html_title = 'MinIO Baremetal Documentation'
 
+# -- Options for Sphinx Tabs -------------------------------------------------
+
+sphinx_tabs_disable_css_loading = True

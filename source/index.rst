@@ -43,7 +43,7 @@ MinIO S3-compatible object storage. Filesystem mode does not support features
 such as versioning and replication.
 
 1\) Create a Data Folder
-   Create a folder on the local drive for MinIO to use for object storag
+   Create a folder on the local drive for MinIO to use for object storage
    operations. For example:
 
    .. code-block:: shell
@@ -122,7 +122,6 @@ such as versioning and replication.
    the access key and secret key set on the MinIO server.
 
 3\) Open MinIO Console
-   
    Open your browser and http://127.0.0.1:9000 to open the MinIO Console
    login page.
    
