@@ -38,6 +38,11 @@ a {
        box-shadow: none;
        height: 1rem; 
     }
+
+    &.reference {
+       text-decoration: none;
+       border-bottom: none;
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -61,13 +66,40 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+dl {
+   & > dt {
+      font-weight: bold;
+   }
+}
+
+// Hack because sphinx renders nested ul elements as dl/dt/dd for some reason
+
+li {
+   & dl.simple {
+      font-weight: normal;
+
+      & dt {
+         font-weight: normal;
+      }
+
+      & dd {
+         margin-left: 0px;
+      }
+   }
+}
+
 div.admonition {
     margin-top: 0;
+    padding: 10px 20px;
+
+    background: rgba($black, .01);
+    border: none;
+    border-left: 4px solid grey;
 
     & > p.admonition-title {
         font-weight: bold;
         font-family: $font-family-base;
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     &.warning {
@@ -115,7 +147,8 @@ table.docutils {
     & > tbody tr th.stub {
         border: none;
         border-bottom: 1px solid $docs-item-table-border;
-        color: $theme-red
+        color: $theme-red;
+        font-size: .9rem;
     }
 
     & > thead tr th {
@@ -123,6 +156,7 @@ table.docutils {
         border-bottom: 1px solid $docs-item-table-border;
         font-size: 1rem;
         color: $theme-red;
+        font-size: .9rem;
     }
 
     & > tbody tr td {
@@ -136,6 +170,34 @@ table.docutils {
 
 }
 
+.sphinx-tabs-tab {
+   color: rgba($black, .5);
+
+   background: none;
+   border: none;
+   padding: 0px 20px 10px 20px;
+   
+   &[aria-selected=true] {
+      color: $theme-red;
+      font-weight: bold;
+      border-bottom: .15em solid $theme-red;
+   }
+}
+
+button.toggle-button {
+   width: 1.25em;
+   height: 1.25em;
+
+   &.toggle-button-hidden:before {
+      left: -7em;
+   }
+
+   & > .bar {
+      width: 14px;
+      left: 13%;
+   }
+}
+
 .xref {
     color: $theme-red;
 }
@@ -144,4 +206,8 @@ table.docutils {
     img {
         box-shadow: 0px 0px 5px lightgray;
     }
+}
+
+ul.simple li {
+   margin: 0px 0px 10px 0px;
 }
