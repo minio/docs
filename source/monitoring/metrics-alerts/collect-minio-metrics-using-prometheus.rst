@@ -49,8 +49,9 @@ Procedure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO by default requires authentication for requests made to the metrics
-endpoints. This step is not required for MinIO deployments started with 
-:envvar:`MINIO_PROMETHEUS_AUTH_TYPE` set to ``"public"``.
+endpoints. While step is not required for MinIO deployments started with 
+:envvar:`MINIO_PROMETHEUS_AUTH_TYPE` set to ``"public"``, you can still use the
+command output for retrieving a Prometheus ``scrape_configs`` entry.
 
 Use the :mc-cmd:`mc admin prometheus generate` command to generate a
 JWT bearer token for use by Prometheus in making authenticated scraping
@@ -77,30 +78,14 @@ The command returns output similar to the following:
      static_configs:
      - targets: [minio.example.net]
 
-You can specify the output block to the 
+The ``targets`` array can contain the hostname for any node in the deployment.
+For clusters with a load balancer managing connections between MinIO nodes,
+specify the address of the load balancer.
+
+Specify the output block to the 
 :prometheus-docs:`scrape_config 
 <prometheus/latest/configuration/configuration/#scrape_config>` section of
-the Prometheus configuration. Change the ``job_name`` to match a label or
-identifier for the MinIO cluster being scraped.
-
-The :mc-cmd:`mc admin prometheus generate` command generates a scrape config
-for only the ``/minio/v2/metrics/cluster`` endpoint. You can use the generated
-config to create a node-level metric scraping job:
-
-.. code-block:: yaml
-   :class: copyable
-
-   scrape_configs:
-   - job_name: minio-job
-     bearer_token: TOKEN
-     metrics_path: /minio/v2/metrics/node
-     scheme: https
-     static_configs:
-     - targets: [minio-01.example.net]
-
-Change the ``job_name`` to match a label or identifier for the MinIO node
-being scraped. Change the ``static_configs.targets`` to specify the
-hostname for the node being scraped.
+the Prometheus configuration. 
 
 2) Configure and Run Prometheus
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,18 +104,12 @@ configuration file:
       scrape_interval: 15s
    
       scrape_configs:
-         - job_name: minio-cluster-metrics
+         - job_name: minio-job
            bearer_token: TOKEN
            metrics_path: /minio/v2/metrics/cluster
            scheme: https
            static_configs:
            - targets: [minio.example.net]
-         - job_name: minio-node-01-metrics
-           bearer_token: TOKEN
-           metrics_path: /minio/v2/metrics/node
-           scheme: https
-           static_configs:
-           - targets: [minio-01.example.net]
 
 Start the Prometheus cluster using the configuration file:
 
@@ -165,11 +144,6 @@ list of published metrics.
 4) Visualize Collected Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Prometheus includes a 
-:prometheus-docs:`graphing interface 
-<prometheus/latest/getting_started/#using-the-graphing-interface>` for
-visualizing collected metrics. 
-
 The :minio-git:`MinIO Console <console>` supports visualizing collected metrics
 from Prometheus. Specify the URL of the Prometheus service to the
 :envvar:`MINIO_PROMETHEUS_URL` environment variable to each MinIO server
@@ -178,7 +152,10 @@ in the deployment:
 .. code-block:: shell
    :class: copyable
 
-   set MINIO_PROMETHEUS_URL="https://prometheus.example.net"
+   export MINIO_PROMETHEUS_URL="https://prometheus.example.net"
+
+If you set a custom ``job_name`` for the Prometheus scraping job, you must also
+set :envvar:`MINIO_PROMETHEUS_JOB_ID` to match that job name.
 
 Restart the deployment using :mc-cmd:`mc admin service restart` to apply the
 changes.
@@ -196,3 +173,7 @@ MinIO also publishes a `Grafana Dashboard
 metrics. For more complete documentation on configuring a Prometheus data source
 for Grafana, see :prometheus-docs:`Grafana Support for Prometheus
 <visualization/grafana/>`.
+
+Prometheus includes a :prometheus-docs:`graphing interface
+<prometheus/latest/getting_started/#using-the-graphing-interface>` for
+visualizing collected metrics. 

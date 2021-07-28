@@ -279,6 +279,21 @@ MinIO Console:
    The MinIO Console populates the :guilabel:`Dashboard` with cluster metrics
    using the ``minio-job`` Prometheus scraping job.
 
+   If you are using a standalone MinIO Console process, this variable
+   corresponds to ``CONSOLE_PROMETHEUS_URL``.
+
+.. envvar:: MINIO_PROMETHEUS_JOB_ID
+
+   *Optional*
+
+   Specify the custom Prometheus job ID used for 
+   :ref:`scraping MinIO metrics <minio-metrics-collect-using-prometheus>`. 
+
+   MinIO defaults to ``minio-job``.
+
+   If you are using a standalone MinIO Console process, this variable
+   corresponds to ``CONSOLE_PROMETHEUS_JOB_ID``.
+
 .. envvar:: MINIO_LOG_QUERY_URL
 
    *Optional*
