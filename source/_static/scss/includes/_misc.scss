@@ -1,0 +1,46 @@
+// Toggle icons
+$toggleIcons: (
+    docs: 'docs.svg',
+    menu: 'menu.svg',
+    close: 'close-circle.svg',
+    toc: 'toc.svg'
+);
+
+@each $name, $icon in $toggleIcons {
+    .toggle-icon--#{$name} {
+        background-image: url(../img/icons/#{$icon});
+    }
+}
+
+// Custom scrollbar
+.scrollbar {
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+
+  &:hover {
+    scrollbar-color: $scrollbar-bg transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $scrollbar-bg;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 1rem;
+    border: 3px solid transparent;
+    background-clip: content-box;
+
+    &:hover {
+      background-color: $scrollbar-hover-bg;
+    }
+  }
+}

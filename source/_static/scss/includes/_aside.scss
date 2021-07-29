@@ -1,40 +1,54 @@
 .sidebar {
     width: $sidebar-width;
-    position: sticky;
-    position: -webkit-sticky;
+    position: fixed;
+    left: 0;
     top: 0;
     background-color: $sidebar-bg;
     transition: opacity 400ms, transform 300ms;
-    padding: $content-padding-sm + 1 $content-padding-sm $content-padding-sm 0;
+    padding: $content-padding + 1 $content-padding $content-padding - 0.75 $content-padding;
     overflow-y: auto;
+    height: 100%;
+    z-index: $z-index-header - 1;
 
-    @include breakpoint-max(breakpoints(lg)) {
-        position: fixed;
-        left: 0;
+    @include breakpoint-min(breakpoints(xl)) {
+        padding-top: $content-padding + $header-height;
+    }
+
+    @include breakpoint-max(breakpoints(xl)) {
         transform: translate3d(-100%, 0, 0);
-        height: 100%;
-        box-shadow: 0 0 1.5rem rgba($black, 0.15);
-        opacity: 0;
         z-index: $z-index-header + 1;
-        pointer-events: none;
-        height: 100%;
-        overflow-y: auto;
-        padding-left: $content-padding-sm;
     }
 
     & > .toggle-icon {
-        @include breakpoint-min(breakpoints(lg)) {
+        @include breakpoint-min(breakpoints(xl)) {
             display: none;
         }
 
         position: absolute;
         top: 0.7rem;
-        right: 0.7rem;
+        right: 0.15rem;
+    }
+}
+
+.sidebar-toggled {
+    .sidebar {
+        @include breakpoint-min(breakpoints(xl)) {
+            transform: translate3d(-100%, 0, 0);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @include breakpoint-max(breakpoints(xl)) {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+            pointer-events: all;
+            box-shadow: 0.25rem 0 0.75rem rgba($black, 0.1);
+        }
     }
 }
 
 .sidebar__title {
-    margin: 0 0 1.5rem;
+    margin: -0.25rem 0 1.5rem;
     line-height: 100%;
 
     & > a {
@@ -49,22 +63,9 @@
         }
     }
 }
-
-.sidebar-toggled {
-    .sidebar {
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
-        pointer-events: all;
-    }
-}
  
 .search {
     margin-bottom: 0.8rem;
-
-    @include breakpoint-max(breakpoints(lg)) {
-        margin-right: -1rem;
-        margin-left: -1rem;
-    }
 }
 
 .search__text {
@@ -78,10 +79,7 @@
     padding: 0 1rem 0.1rem 2.6rem;
     background: $search-icon no-repeat center left 1rem;
     background-color: $search-bg;
-
-    @include breakpoint-min(breakpoints(lg)) {
-        border-radius: $border-radius;
-    }
+    border-radius: $border-radius;
 
     &:focus {
         border-color: $search-focus-border-color
@@ -89,6 +87,8 @@
 }
 
 .docs {
+    margin-right: -0.65rem;
+
     ul {
         list-style: none;
         padding: 0;

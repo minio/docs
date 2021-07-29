@@ -92,7 +92,7 @@
 
 {%- block content %}
    <section class="content">
-      <aside class="sidebar">
+      <aside class="sidebar scrollbar">
          <i class="toggle-icon toggle-icon--close" data-toggle="sidebar"></i>
 
          <h3 class="sidebar__title">
@@ -101,6 +101,9 @@
          
          {{ miniosidebar() }}
       </aside>
+      <div class="content__aside">
+         <div id=localtoc></div>
+      </div>
       <div class="content__main">
          {% block alertbar -%}
             <div class="admonition important">
@@ -119,9 +122,6 @@
          <div class="footer">
             &copy;{{ copyright }}
          </div>
-      </div>
-      <div class="content__right">
-         <div id=localtoc></div>
       </div>
    </div>
 {%- endblock %}

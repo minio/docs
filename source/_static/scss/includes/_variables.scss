@@ -38,7 +38,6 @@ $text-muted-color: #727272;
 $container-width: 95%;
 $content-bg: $white;
 $content-padding: 1.75rem;
-$content-padding-sm: 1rem;
 
 
 // Font weight
@@ -58,7 +57,7 @@ $logo-height: 1.05rem;
 
 
 // Sidebar
-$sidebar-width: 18rem;
+$sidebar-width: 19rem;
 $sidebar-bg: #F9F9F9;
 
 
@@ -105,3 +104,8 @@ $nav-mobile-width: 300px;
 $nav-mobile-box-shadow: 0 0 10px rgba($black, 0.1);
 $nav-active-z-index: 100;
 $nav-arrow-icon: url(../img/icons/nav-arrow.svg);
+
+
+// Scrollbar
+$scrollbar-bg: #dddddd;
+$scrollbar-hover-bg: #cecece;

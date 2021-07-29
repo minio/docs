@@ -1,11 +1,24 @@
-div#localtoc {
-    font-size: 13px;
-    margin-left: 20px;
+#localtoc {
+    font-size: 0.8rem;
 }
 
 #table-of-contents {
     background: none;
     border-style: none;
+    padding: $content-padding $content-padding $content-padding - 0.6rem $content-padding;
+    margin: 0;
+
+    @include breakpoint-min(breakpoints(lg)) {
+        width: 13rem;
+    }
+
+
+    .topic-title {
+        margin: 0;
+        font-weight: $font-weight-medium;
+        color: $black;
+    }
+
     ul {
         list-style: none;
         margin: 10px 0px 10px 0px;
