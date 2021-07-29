@@ -1,22 +1,12 @@
-%content-padding {
-    @include breakpoint-min(breakpoints(xl)) {
-        padding: 0 $content-padding;
-    }
-
-    @include breakpoint-max(breakpoints(xl)) {
-        padding: 0 $content-padding-sm;
-    }
-}
-
 .content {
-    
-    //height: 100%;
-    overflow: auto;
-    @extend %content-padding;
-    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
     flex-wrap: nowrap;
     height: calc(100vh - #{$header-height});
-    
+
+    @include breakpoint-min(breakpoints(lg)) {
+        display: flex;
+    }
 }
 
 .content__main {
@@ -24,19 +14,26 @@
     min-width: 0;
     background-color: $content-bg;
     align-self: flex-start;
+    padding: $content-padding;
 
-    @include breakpoint-min(breakpoints(xl)) {
-        padding: $content-padding;
-    }
-
-    @include breakpoint-max(breakpoints(xl)) {
-        padding: $content-padding-sm;
+    @include breakpoint-min(breakpoints(xl)) { 
+        padding-left: $sidebar-width + $content-padding;
+        transition: padding-left 300ms;
+        will-change: padding-left;
     }
 }
 
-.content__right {
-    flex-shrink: 0;
-    position: sticky;
-    top: 0;
-    max-width: 200px;
+.sidebar-toggled {
+    .content__main {
+        padding-left: $content-padding;
+    }
+}
+
+.content__aside {
+    @include breakpoint-min(breakpoints(lg)) {
+        flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        order: 2;
+    }
 }

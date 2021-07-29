@@ -3,9 +3,9 @@
 	--nav-text-color: #{$black};
 	--nav-item-border-color: #{$black};
 	--nav-item-arrow: #{$nav-arrow-icon};
-    --nav-toggle-hover-border-color: #{$black};
+	--nav-toggle-hover-border-color: #{$black};
 	--nav-bg-gray: #{$nav-sub-hover-bg};
-    --header-bg: #{$white};
+	--header-bg: #{$white};
 }
 
 .header {
@@ -19,27 +19,13 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
-
-    @extend %content-padding;
-
-    .toggle-icon {
-        @include breakpoint-min(breakpoints(lg)) {
-            display: none;
-        }
-    } 
-
-    .toggle-icon--menu {
-        margin-left: auto;
-    }
+		padding: 0 1.25rem;
 }
 
 .logo {
     flex-shrink: 0;
     display: inline-flex;
-
-    @include breakpoint-max(breakpoints(lg)) {
-        margin-left: 1rem;
-    }
+    margin-left: 0.75rem;
 
     &>img {
         height: $logo-height;
@@ -429,15 +415,10 @@
     }
 }
 
-$toggleIcons: (
-    docs: 'docs.svg',
-    menu: 'menu.svg',
-    close: 'close-circle.svg',
-    toc: 'toc.svg'
-);
+[data-toggle="nav"] {
+	margin-left: auto;
 
-@each $name, $icon in $toggleIcons {
-    .toggle-icon--#{$name} {
-        background-image: url(../img/icons/#{$icon});
-    }
+	@include breakpoint-min(breakpoints(lg)) { 
+		display: none;
+	}
 }
