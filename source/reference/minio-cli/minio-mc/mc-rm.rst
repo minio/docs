@@ -99,23 +99,31 @@ Removing incomplete upload files prevents resuming the upload using the
 Roll Object Back To Previous Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc rm` with :mc-cmd-option:`~mc rm rewind` to
-remove all object versions created after the specified point-in-time. This
+Use :mc:`mc rm` with :mc-cmd-option:`~mc rm versions` and 
+:mc-cmd-option:`~mc rm newer-than` to
+remove all object versions newer than the specified duration of time. This
 effectively "rolls back" the object to its state at that time.
+
+.. important::
+
+   Removing specific versions of an object is a *destructive* action. You cannot
+   restore the deleted object versions.
 
 .. code-block:: shell
    :class: moveable
 
-   mc rm --rewind DURATION ALIAS/PATH
+   mc rm ALIAS/PATH --versions --newer-than DURATION
 
 - Replace :mc-cmd:`ALIAS <mc rm TARGET>` with the :mc:`alias <mc alias>` of
   a configured S3-compatible service.
 
-- Replace :mc-cmd:`PATH <mc rm TARGET>` with the path to the object.
+- Replace :mc-cmd:`PATH <mc rm TARGET>` with the path to the object. For 
+  example, ``/mybucket/myobject``.
 
-- Replace :mc-cmd:`DURATION <mc rm rewind>` with the duration in the past to
-  apply the command. For example, to restore an object to its state 30 days
-  in the past, specify ``30d``.
+- Replace :mc-cmd:`DURATION <mc rm newer-than>` with the number of days in the
+  past from the current host time from which the operation begins removing
+  versions of the object. For example, to remove all versions of the object
+  created in the last 30 days, specify ``"30d"``.
 
 Syntax
 ------
