@@ -20,7 +20,7 @@ endpoints using a Prometheus instance, including deploying and configuring
 a simple Prometheus server for collecting metrics. 
 
 This procedure is not a replacement for the official
-:prometheus-docs:`Prometheus Documentation`. Any specific guidance
+:prometheus-docs:`Prometheus Documentation <>`. Any specific guidance
 related to configuring, deploying, and using Prometheus is made on a best-effort
 basis.
 

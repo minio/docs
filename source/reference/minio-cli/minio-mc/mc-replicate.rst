@@ -194,7 +194,7 @@ MinIO supports :ref:`two-way active-active
 <minio-bucket-replication-serverside-twoway>` replication configurations, where
 MinIO synchronizes new and modified objects between a bucket on two MinIO
 deployments. Starting with :mc:`mc` :minio-git:`RELEASE.2021-05-18T03-39-44Z
-<mc/release/tag/RELEASE.2021-05-18T03-39-44Z>`, MinIO by default synchronizes
+<mc/releases/tag/RELEASE.2021-05-18T03-39-44Z>`, MinIO by default synchronizes
 metadata-only changes to a replicated object back to the "source" deployment.
 Prior to the this update, MinIO did not support synchronizing metadata-only
 changes to a replicated object.
