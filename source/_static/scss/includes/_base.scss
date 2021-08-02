@@ -181,6 +181,7 @@ table.docutils {
       color: $theme-red;
       font-weight: bold;
       border-bottom: .15em solid $theme-red;
+      pointer-events: none;
    }
 }
 

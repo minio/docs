@@ -300,7 +300,8 @@ table.docutils {
   .sphinx-tabs-tab[aria-selected=true] {
     color: #C72C48;
     font-weight: bold;
-    border-bottom: 0.15em solid #C72C48; }
+    border-bottom: 0.15em solid #C72C48;
+    pointer-events: none; }
 
 button.toggle-button {
   width: 1.25em;
