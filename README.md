@@ -1,59 +1,38 @@
 # MinIO Docs
 
-## Requirements
+# Build Instructions
 
-- python3 (any version should be fine, latest is ideal)
-- suggest creating a virtual environment to keep things clean and simple:
-- start by cloning the repository. `cd` into the cloned repo. You might need to `git fetch` to refresh the repo.
-- once in the repository root, run the following.
+MinIO uses [Sphinx](https://www.sphinx-doc.org/en/master/index.html) to generate
+static HTML pages using ReSTructured Text.
 
-```shell
-python3 -m venv venv
-```
+## Prerequisites
 
-```shell
-source venv/bin/activate
-```
+- Python 3.6.0 or later. MinIO uses the latest stable version of Python for regular writing and development work.
 
-```shell
-pip3 install -r requirements.txt
-```
+- NodeJS 14.5.0 or later.
 
-```shell
-nvm install v14.5.0
-nvm use v14.5.0
-npm install
-```
+- `git` or a git-compatible client.
 
-To make the build, do:
+- Access to https://github.com/minio/docs
 
-```shell
-make html
-```
+All instructions below are intended for Linux systems. Windows builds may work
+using the following instructions as general guidance.
 
-Artifacts output to the `build/` directory as HTML. Just open `index.html` to get started poking around.
+## Build Process
 
-If you modify things, I suggest doing clean builds to make sure all artifacts are fresh:
+1. Run `git checkout https://github.com/minio/docs` and `cd docs` to move into
+   the working directory.
 
-```shell
-rm -rf build/ && make html
-```
+2. Create a new virtual environment `python -3 m venv venv`. Activate it using
+   `source venv/bin/activate`.
 
-Still need to work out deployment steps, but this should work for testing locally.
+3. Run `pip install -r requirements.txt` to setup the Python environment.
 
-The `source` directory contains all of the source files, including css and js.
+4. Run `make html`
 
-The `sphinxext` directory contains some python stuff related to the custom directive/roles, and its a rats nest right now.
+5. Run `python -m http.server --directory build/BRANCH/html`. Open your
+   browser to the output URL to view the staged output.
 
-## TODO
+This project is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
 
-- Finish the remainder of the `mc`, `mc admin`, and `minio` reference material
-- Refine structure of reference pages
-- Transition all MinIO Features from legacy documentation and format for RST
-- Flesh out Kubernetes section (pending operator/plugin work completion)
-- Flesh out introduction / concepts section
-- Re-write security docs
-- Create references for KES, Sidekick, MCS, Gateway
-- Transition cookbook material as needed
-- Flesh out Baremetal deployment section
-- Scan for any remaining legacy material that needs migration
+See [CONTRIBUTIONS](https://github.com/minio/docs/tree/master/CONTRIBUTIONS.md) for more information on contributing content to the MinIO Documentation project.

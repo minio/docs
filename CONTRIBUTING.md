@@ -1,7 +1,46 @@
+# How To Contribute
+
+## Pull Requests
+
+1. [Fork our repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo) to your own account.
+
+2. Create a new branch for your work. Try to choose a specific branch name. If you are working on something related to an existing issue, please use the format `DOCS-<ISSUE>` for the branch name.
+
+3. When you have completed your work, push your branch to your fork and create a new Pull Request. 
+
+4. As part of ongoing reviews, just do normal commits with *no* rebase between commits. This keeps the commit tree clean.
+
+5. If your pull is approved, we will request that you squash your work into one commit (`git rebase -i HEAD~n` where `n` is the number of commits in the branch).
+
+6. Once your approved pull is down to one squashed commit, do a `git pull --rebase` and resolve any remaining merge conflicts
+
+7. Push back up to your branch. you might need to `git push -f` after squash + rebase
+
+8. We will merge when we are able. 
+
+We appreciate your contributions, and ask for your patience during reviews. 
+
+## Issues
+
+When creating a new issue, please consider the following:
+
+- Search to see if your issue already exists. We will close duplicate or closely related issues as such. 
+
+- Provide links to the page or pages in question. If you ran into issues during a tutorial, tell us more about your deployment environment and specific error messages you saw. 
+
+- Keep it simple - the larger or more complex a request, the less likely it can be addressed in the short-term. We reserve the right to close feature requests if we cannot action them in a reasonable time frame. 
+
+## Not a Support Channel
+
+If you need support for your MinIO deployment, please check out our 
+[community Slack Channel](https://slack.min.io/). 
+
+We provide help with documentation-related issues on a best effort basis. Users who require help on a strict time frame can join the [MinIO Subscription Network (SUBNET)](https://min.io/pricing).
+
 
 # Contributors License Agreement
 
-
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode). All contributions to this work must be made under the same license.
 
 # Contributor Covenant Code of Conduct
 
