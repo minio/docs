@@ -291,8 +291,8 @@ The example command breaks down as follows:
        configuring the backing storage for the :mc:`minio server` process.
 
    * - ``--console-address ":9001"``
-     - The static port on which the embedded MinIO Console listens for incoming
-       connections.
+     - The static port on which the embedded :ref:`MinIO Console
+       <minio-console>` listens for incoming connections.
 
        Omit to allow MinIO to select a dynamic port for the MinIO Console. 
        Browsers opening the root node hostname 
@@ -306,7 +306,7 @@ You may specify other :ref:`environment variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Open your browser and access any of the MinIO hostnames at port ``:9001`` to
-open the MinIO Console login page. For example,
+open the :ref:`MinIO Console <minio-console>` login page. For example,
 ``https://minio1.example.com:9001``.
 
 Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`

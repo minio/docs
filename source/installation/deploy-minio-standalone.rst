@@ -59,8 +59,9 @@ to the following:
    WARNING: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables
 
 Open your browser to any of the listed :guilabel:`Console` addresses to open the
-MinIO Console and log in with the :guilabel:`RootUser` and :guilabel:`RootPass`. 
-You can use the MinIO Console for performing administration on the MinIO server.
+:ref:`MinIO Console <minio-console>` and log in with the :guilabel:`RootUser`
+and :guilabel:`RootPass`. You can use the MinIO Console for performing
+administration on the MinIO server.
 
 For applications, use the :guilabel:`API` addresses to access the MinIO
 server and perform S3 operations.
@@ -175,7 +176,7 @@ You may specify other :ref:`environment variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Open your browser to the DNS name or IP address corresponding to the 
-container and the MinIO Console port. For example,
+container and the :ref:`MinIO Console <minio-console>` port. For example,
 ``https://127.0.0.1:9001``.
 
 Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`
@@ -334,8 +335,8 @@ The example command breaks down as follows:
 
        Port ``9000`` is the default MinIO server listen port. 
 
-       Port ``9001`` is the MinIO Console listen port specified by
-       the ``--console-address`` argument.
+       Port ``9001`` is the :ref:`MinIO Console <minio-console>` listen port
+       specified by the ``--console-address`` argument.
 
    * - ``-v /data:/data``
      - Mounts a local volume to the container at the specified path.
@@ -374,7 +375,7 @@ The example command breaks down as follows:
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Open your browser to the DNS name or IP address corresponding to the 
-container and the MinIO Console port. For example,
+container and the :ref:`MinIO Console <minio-console>` port. For example,
 ``https://127.0.0.1:9001``.
 
 Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`

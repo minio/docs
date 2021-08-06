@@ -111,8 +111,8 @@ such as versioning and replication.
    the access key and secret key set on the MinIO server.
 
 3\) Open MinIO Console
-   Open your browser and http://127.0.0.1:9000 to open the MinIO Console
-   login page.
+   Open your browser and http://127.0.0.1:9000 to open the 
+   :ref:`MinIO Console <minio-console>` login page.
    
    Log in with the :guilabel:`Root User` and :guilabel:`Root Pass` from the
    previous step.
@@ -124,7 +124,7 @@ such as versioning and replication.
 
    You can use the MinIO Console for general administration tasks like
    Identity and Access Management, Metrics and Log Monitoring, or 
-   Server Configuration.
+   Server Configuration. See :ref:`minio-console` for more information.
 
 .. toctree::
    :titlesonly:
@@ -141,3 +141,4 @@ such as versioning and replication.
    /reference/minio-cli/minio-mc-admin
    /reference/minio-server/minio-server
    /reference/minio-server/minio-gateway
+   /console/minio-console
