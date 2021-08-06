@@ -322,6 +322,11 @@ button.toggle-button {
 ul.simple li {
   margin: 0px 0px 10px 0px; }
 
+video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
 .content {
   overflow-y: auto;
   overflow-x: hidden;
@@ -362,6 +367,11 @@ ul.simple li {
     -webkit-box-ordinal-group: 3;
         -ms-flex-order: 2;
             order: 2; } }
+
+.content__right {
+  position: sticky;
+  top: 0;
+  overflow: scroll; }
 
 :root {
   --nav-text-color: #000000;

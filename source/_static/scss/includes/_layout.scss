@@ -37,3 +37,9 @@
         order: 2;
     }
 }
+
+.content__right {
+    position: sticky;
+    top: 0;
+    overflow: scroll;
+}
