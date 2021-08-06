@@ -309,6 +309,40 @@ MinIO Console:
 
    Specify ``off`` to disable the embedded MinIO Console.
 
+.. envvar:: MINIO_SERVER_URL
+
+   *Optional*
+
+   Specify the URL hostname the MinIO Console should use for connecting to the
+   MinIO Server.
+
+   This variable may be necessary if the MinIO Server TLS certificates do 
+   not contain any IP Subject Alternative Names (SAN). Specifically, the
+   Console uses the MinIO Server IP address by default. If the Server TLS does
+   not contain that IP address, then the Console cannot validate the TLS
+   connection.
+
+.. envvar:: MINIO_BROWSER_REDIRECT_URL
+
+   *Optional*
+
+   Specify the URL the MinIO Console provides as the redirect URL to the 
+   configured :ref:`external identity manager 
+   <minio-authentication-and-identity-management>`.
+
+   This variable may be necessary for MinIO deployments behind a reverse 
+   proxy, load balancer, or similar technology where the internal 
+   hostname or IP structure is not reachable from the external network. 
+
+   For example, consider a MinIO deployment behind a proxy where
+   ``https://minio.example.net`` redirects to the MinIO deployment on port 
+   ``:9000`` and ``https://console.minio.example.net`` redirects to the
+   MinIO Console on port ``:9001``. 
+   
+   By default, the MinIO Console use its *internal* hostname as part of the
+   request. Set this variable to ``https://console.minio.example.net`` to ensure
+   the external identity provider has a reachable URL to which to send the
+   authentication response.
 
 Key Management Service and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
