@@ -28,6 +28,18 @@ The following procedure deploys MinIO in :guilabel:`Standalone Mode` consisting
 of a single MinIO server and a single drive or storage volume. Standalone
 deployments are best suited for evaluation and initial development environments.
 
+.. admonition:: Network File System Volumes Break Consistency Guarantees
+   :class: note
+
+   MinIO's strict **read-after-write** and **list-after-write** consistency
+   model requires local disk filesystems (``xfs``, ``ext4``, etc.).
+
+   MinIO cannot provide consistency guarantees if the underlying storage
+   volumes are NFS or a similar network-attached storage volume. 
+
+   For deployments that *require* using network-attached storage, use
+   NFSv4 for best results.
+
 1) Download and Run MinIO Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -207,6 +219,18 @@ environments.
 The procedure uses `Podman <https://podman.io/>`__ for running the MinIO
 container in rootfull mode. Configuring for rootless mode is out of scope for
 this procedure.
+
+.. admonition:: Network File System Volumes Break Consistency Guarantees
+   :class: note
+
+   MinIO's strict **read-after-write** and **list-after-write** consistency
+   model requires local disk filesystems (``xfs``, ``ext4``, etc.).
+
+   MinIO cannot provide consistency guarantees if the underlying storage
+   volumes are NFS or a similar network-attached storage volume. 
+
+   For deployments that *require* using network-attached storage, use
+   NFSv4 for best results.
 
 1) Create a Configuration File to store Environment Variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
