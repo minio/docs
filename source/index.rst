@@ -8,7 +8,7 @@ Welcome to the MinIO Documentation! MinIO is a high performance object storage
 solution with native support for Kubernetes deployments. MinIO provides an 
 Amazon Web Services S3-compatible API and supports all core S3 features. 
 MinIO is released under `GNU Affero General Public License v3.0 
-`<https://www.gnu.org/licenses/agpl-3.0.en.html>__`.
+<https://www.gnu.org/licenses/agpl-3.0.en.html>`__.
 
 You can get started exploring MinIO features using our ``play`` server at
 https://play.min.io. ``play`` is a *public* MinIO cluster running the latest
