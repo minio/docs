@@ -4,10 +4,13 @@ Introduction
 
 .. default-domain:: minio
 
-MinIO is a High Performance Object Storage released under Apache License v2.0.
-It is API compatible with Amazon S3 cloud storage service. Use MinIO to build
-high performance infrastructure for machine learning, analytics and application
-data workloads.
+MinIO is software-defined high performance object storage released under 
+`GNU Affero General Public License v3.0 
+`<https://www.gnu.org/licenses/agpl-3.0.en.html>`__. 
+
+MinIO is API compatible with Amazon's S3 cloud storage service. Use MinIO to 
+build high performance infrastructure for machine learning, analytics and 
+application data workloads.
 
 What Is Object Storage?
 -----------------------
