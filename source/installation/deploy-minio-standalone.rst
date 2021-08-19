@@ -107,6 +107,7 @@ command:
 
    export MINIO_ROOT_USER=minio-admin
    export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+   #export MINIO_SERVER_URL=https://minio.example.net
    #export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
    minio server /data --console-address ":9001"
@@ -127,6 +128,13 @@ The example command breaks down as follows:
        :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string.
+
+   * - :envvar:`MINIO_SERVER_URL`
+     - The URL hostname the MinIO Console uses for connecting to the MinIO 
+       server. This variable is *required* if specifying TLS certificates
+       which **do not** contain the IP address of the MinIO Server host
+       as a :rfc:`Subject Alternative Name <rfc5280#section-4.2.1.6>`. 
+       Specify a hostname covered by one of the TLS certificate SAN entries.
 
    * - :envvar:`MINIO_KMS_SECRET_KEY`
      - The key to use for encrypting the MinIO backend (users, groups,
@@ -248,6 +256,7 @@ following environment variables:
 
    export MINIO_ROOT_USER=minio-admin
    export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+   #export MINIO_SERVER_URL=https://minio.example.net
    #export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
 Create the Podman secret using the ``config.env`` file:
@@ -273,6 +282,13 @@ The following table details each environment variable set in ``config.env``:
        :ref:`root <minio-users-root>` user.
 
        Replace this value with a unique, random, and long string.
+
+   * - :envvar:`MINIO_SERVER_URL`
+     - The URL hostname the MinIO Console uses for connecting to the MinIO 
+       server. This variable is *required* if specifying TLS certificates
+       which **do not** contain the IP address of the MinIO Server host
+       as a :rfc:`Subject Alternative Name <rfc5280#section-4.2.1.6>`. 
+       Specify a hostname covered by one of the TLS certificate SAN entries.
 
    * - :envvar:`MINIO_KMS_SECRET_KEY`
      - The key to use for encrypting the MinIO backend (users, groups,

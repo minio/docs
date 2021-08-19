@@ -64,25 +64,31 @@ the MinIO Console:
        configuring Prometheus to collect metrics from MinIO.
 
    * - :envvar:`MINIO_SERVER_URL`
-     - The URL hostname for the MinIO Server. 
-       
-       The MinIO Console by default uses the local hostname (i.e. ``$HOSTNAME``)
-       as the address for the MinIO server. You may need to set this variable
-       in the following scenarios:
+     - The URL hostname the MinIO Console uses for connecting to the MinIO 
+       Server. The hostname *must* be resolveable and reachable for the
+       Console to function correctly.
 
-       - The MinIO server TLS certificates do not cover the local hostname
-         (i.e. in IP or DNS :abbr:`SAN (Subject Alternative Name)`) such that
-         the Console cannot validate the TLS certificates.
-         
-         Specify a hostname contained in the TLS certificate to allow the MinIO
+       The MinIO Console connects to the MinIO Server using an IP 
+       address by default. For example, when the MinIO Server starts up, 
+       the server logs include a line 
+       ``API: https://<IP ADDRESS 1> https://<IP ADDRESS 2>``.
+       The MinIO Console defaults to connecting using ``<IP ADDRESS 1>``.
+
+       The MinIO Console may require setting this variable in the following 
+       scenarios:
+       
+       - The MinIO server TLS certificates do not include the local IP address
+         as a :rfc:`Subject Alternative Name <rfc5280#section-4.2.1.6>` (SAN). 
+         Specify a hostname contained in the TLS certificate to allow the MinIO 
          Console to validate the TLS connection.
 
-       - The MinIO server's local hostname is not reachable by the MinIO
+       - The MinIO server's local IP address is not reachable by the MinIO
          Console. Specify a resolveable hostname for the MinIO Server.
 
-       - The MinIO deployment uses a load balancer for managing incoming
-         requests. Specify the load balancer URL corresponding to the
-         MinIO deployment.
+       - A load balancer or reverse proxy controls traffic to the MinIO server,
+         such that the MinIO Console cannot reach the server without going
+         through the load balancer/proxy. Specify the load balancer/proxy 
+         URL for the MinIO server.
 
    * - :envvar:`MINIO_BROWSER_REDIRECT_URL`
      - The externally resolvable hostname for the MinIO Console used by the 
@@ -95,6 +101,35 @@ the MinIO Console:
        public internet. Specify an externally reachable hostname that resolves
        to the MinIO Console.
 
+Static vs Dynamic Port Assignment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO by default selects a random port for the MinIO Console on each server
+startup. Browser clients accessing the MinIO Server are automatically 
+redirected to the MinIO Console on its dynamically selected port. 
+This behavior emulates the legacy web browser behavior while reducing the
+the risk of a port collision on systems which were running MinIO *before* the 
+embedded Console update.
+
+You can select an explicit static port by passing the 
+:mc-cmd-option:`minio server console-address` commandline option when starting 
+each MinIO Server in the deployment. 
+
+For example, the following command starts a distributed MinIO deployment using
+a static port assignment of ``9001`` for the MinIO Console. This deployment
+would respond to S3 API operations on the default MinIO server port ``:9000``
+and browser access on the MinIO Console port ``:9001``.
+
+.. code-block:: shell
+   :class: copyable
+
+   minio server https://minio-{1...4}.example.net/mnt/disk-{1...4} \
+         --console-address ":9001"
+
+Deployments behind network routing components which require static ports for 
+routing rules may require setting a static MinIO Console port. For example,
+load balancers, reverse proxies, or Kubernetes ingress may by default block
+or exhibit unexpected behavior with the the dynamic redirection behavior.
 
 Dashboard
 ---------

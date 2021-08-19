@@ -197,6 +197,7 @@ following example assumes that:
 
    export MINIO_ROOT_USER=minio-admin
    export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+   #export MINIO_SERVER_URL=https://minio.example.net
    #export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
    minio server https://minio{1...4}.example.com/mnt/disk{1...4}/data --console-address ":9001"
@@ -219,6 +220,13 @@ The example command breaks down as follows:
 
        Specify the *same* unique, random, and long string for all
        nodes in the deployment.
+
+   * - :envvar:`MINIO_SERVER_URL`
+     - The URL hostname the MinIO Console uses for connecting to the MinIO 
+       server. This variable is *required* if specifying TLS certificates
+       which **do not** contain the IP address of the MinIO Server host
+       as a :rfc:`Subject Alternative Name <rfc5280#section-4.2.1.6>`. 
+       Specify a hostname covered by one of the TLS certificate SAN entries.
 
    * - :envvar:`MINIO_KMS_SECRET_KEY`
      - The key to use for encrypting the MinIO backend (users, groups,
