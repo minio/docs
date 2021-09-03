@@ -90,6 +90,11 @@ The following table lists :mc-cmd:`mc admin` commands:
           :start-after: start-mc-admin-service-desc
           :end-before: end-mc-admin-service-desc
 
+   * - :mc:`mc admin speedtest`
+     - .. include:: /reference/minio-cli/minio-mc-admin/mc-admin-speedtest.rst
+          :start-after: start-mc-admin-speedtest-desc
+          :end-before: end-mc-admin-speedtest-desc
+
    * - :mc:`mc admin tier`
      - .. include:: /reference/minio-cli/minio-mc-admin/mc-admin-tier.rst
           :start-after: start-mc-admin-tier-desc
