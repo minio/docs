@@ -24,9 +24,9 @@ as the ``stat`` command when used on a filesystem path.
 Examples
 --------
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Single Object
+   .. tab-item:: Single Object
 
       .. code-block:: shell
          :class: copyable
@@ -39,7 +39,7 @@ Examples
       - Replace :mc-cmd:`PATH <mc stat TARGET>` with the path to the bucket
         or object on the S3-compatible host.
 
-   .. tab:: Object(s) in Bucket
+   .. tab-item:: Object(s) in Bucket
 
       Use :mc:`mc stat` with the :mc-cmd-option:`~mc stat recursive` option
       to apply the operation to all objects in the bucket:

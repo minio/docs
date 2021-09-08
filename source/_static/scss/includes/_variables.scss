@@ -2,7 +2,19 @@
 $white: #ffffff;
 $black: #000000;
 $theme-red: #C72C48;
+$theme-red-light: rgba($theme-red, 0.5);
+$theme-red-lighter: rgba($theme-red, 0.25);
 $theme-hover-bg: rgb(245, 245, 245);
+
+// Overrides for sphinx-design
+// https://sphinx-design.readthedocs.io/en/alabaster-theme/css_variables.html
+
+:root {
+   --sd-color-tabs-label-active: #{$theme-red};
+   --sd-color-tabs-label-inactive: #{$theme-red-light};
+   --sd-color-tabs-overline: #{$theme-red-light};
+   --sd-color-tabs-underline: #{$theme-red-lighter};
+}
 
 // Breakpoints
 $breakpoints: (

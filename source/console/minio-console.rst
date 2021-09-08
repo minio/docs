@@ -78,7 +78,7 @@ the MinIO Console:
        scenarios:
        
        - The MinIO server TLS certificates do not include the local IP address
-         as a :rfc:`Subject Alternative Name <rfc5280#section-4.2.1.6>` (SAN). 
+         as a :rfc:`Subject Alternative Name <5280#section-4.2.1.6>` (SAN). 
          Specify a hostname contained in the TLS certificate to allow the MinIO 
          Console to validate the TLS connection.
 

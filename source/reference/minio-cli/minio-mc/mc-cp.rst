@@ -28,9 +28,9 @@ Copy Object to S3
 
 Use :mc-cmd:`mc cp` to copy an object to an S3-compatible host:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Filesystem to S3
+   .. tab-item:: Filesystem to S3
 
       .. code-block:: shell
          :class: copyable
@@ -47,7 +47,7 @@ Use :mc-cmd:`mc cp` to copy an object to an S3-compatible host:
         the S3-compatible host. You can specify a different object name to
         "rename" the object on copy.
 
-   .. tab:: S3 to S3
+   .. tab-item:: S3 to S3
 
       .. code-block:: shell
          :class: copyable
@@ -73,9 +73,9 @@ Recursively Copy Objects to S3
 Use :mc-cmd-option:`mc cp recursive` to recursively copy objects to an
 S3-compatible host:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Filesystem to S3
+   .. tab-item:: Filesystem to S3
 
       .. code-block:: shell
          :class: copyable
@@ -92,7 +92,7 @@ S3-compatible host:
         the S3-compatible host. :mc-cmd:`mc cp` uses the ``SOURCE`` filenames
         when creating the objects on the target host.
 
-   .. tab:: S3 to S3
+   .. tab-item:: S3 to S3
 
       .. code-block:: shell
          :class: copyable

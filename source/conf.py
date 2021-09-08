@@ -39,13 +39,13 @@ extensions = [
     'sphinx.ext.extlinks',
     'minio',
     'sphinx_copybutton',
-    'sphinx_tabs.tabs',
     'sphinx_markdown_tables',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinx_togglebutton',
     'sphinxcontrib.images',
     'myst_parser',
+    'sphinx_design',
 ]
 
 # -- External Links
@@ -68,7 +68,6 @@ extlinks = {
     'docs-k8s'        : ('https://docs.min.io/minio/k8s/%s',''),
     'prometheus-docs' : ('https://prometheus.io/docs/%s',''),
     'podman-docs'     : ('https://docs.podman.io/en/latest/%s',''),
-    'rfc'             : ('https://datatracker.ietf.org/doc/html/%s',''),
 
 }
 
@@ -118,7 +117,7 @@ html_short_title = "MinIO Object Storage for Baremetal Infrastructure"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_css_files = ['css/main.min.css']
+html_css_files = ['css/main.min.css', 'custom.css']
 
 html_js_files = ['js/main.js']
 

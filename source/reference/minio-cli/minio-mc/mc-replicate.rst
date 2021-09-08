@@ -62,9 +62,9 @@ Required Permissions
 Bucket Replication requires at minimum the following permissions on the 
 source and destination clusters:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Source Policy
+   .. tab-item:: Source Policy
 
       The source cluster *must* have a user with *at minimum* following attached
       *or* inherited policy:
@@ -105,7 +105,7 @@ source and destination clusters:
       Use the :mc-cmd:`mc admin policy set` command to associate the policy to
       a user on the source MinIO cluster.
 
-   .. tab:: Destination Policy
+   .. tab-item:: Destination Policy
 
       The destination cluster *must* have a user with *at minimum* the
       following attached *or* inherited policy:

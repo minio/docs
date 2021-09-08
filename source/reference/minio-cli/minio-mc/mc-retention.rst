@@ -51,9 +51,9 @@ default operates on the *latest* version of the target object or object(s).
 direct the command to operate on either a specific object version *or* all
 versions of an object:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Specific Object Version
+   .. tab-item:: Specific Object Version
 
       To direct :mc:`mc retention` to operate on a specific version of an
       object, include the ``--version-id`` argument:
@@ -62,7 +62,7 @@ versions of an object:
       - :mc-cmd-option:`mc retention clear version-id`
       - :mc-cmd-option:`mc retention info version-id`
 
-   .. tab:: All Object Versions
+   .. tab-item:: All Object Versions
 
       To direct :mc:`mc retention` to operate on *all* versions of an object, 
       include the ``--versions`` argument:
@@ -122,9 +122,9 @@ retention settings.
 Set Object Lock Configuration for Versioned Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Specific Version
+   .. tab-item:: Specific Version
 
       Use :mc-cmd:`mc retention set` with
       :mc-cmd-option:`~mc retention set version-id` to apply the retention
@@ -152,7 +152,7 @@ Set Object Lock Configuration for Versioned Object
       - Replace :mc-cmd:`PATH <mc retention set TARGET>` with the path to the
         object.
 
-   .. tab:: All Versions
+   .. tab-item:: All Versions
 
       Use :mc-cmd:`mc retention set` with
       :mc-cmd-option:`~mc retention set versions` to apply the retention
@@ -186,9 +186,9 @@ Set Object Lock Configuration for Versioned Object
 Retrieve Object Lock Settings for an Object or Object(s)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Specific Object
+   .. tab-item:: Specific Object
 
       .. code-block:: shell
          :class: copyable
@@ -201,7 +201,7 @@ Retrieve Object Lock Settings for an Object or Object(s)
       - Replace :mc-cmd:`PATH <mc retention info TARGET>` with the path to the
         object.
 
-   .. tab:: Multiple Objects
+   .. tab-item:: Multiple Objects
 
       Use :mc-cmd:`mc retention info` with
       :mc-cmd-option:`~mc retention info recursive` to retrieve the retention
@@ -247,9 +247,9 @@ object lock settings for a bucket:
 Clear Object Lock Settings for an Object or Object(s)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Specific Object
+   .. tab-item:: Specific Object
 
       .. code-block:: shell
          :class: copyable
@@ -263,7 +263,7 @@ Clear Object Lock Settings for an Object or Object(s)
         object.
 
 
-   .. tab:: Multiple Objects
+   .. tab-item:: Multiple Objects
 
       Use :mc-cmd:`mc retention clear` with
       :mc-cmd-option:`~mc retention clear recursive` to clear the retention

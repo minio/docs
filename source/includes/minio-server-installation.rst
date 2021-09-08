@@ -1,6 +1,6 @@
-.. tabs::
+.. tab-set::
 
-   .. tab:: Linux
+   .. tab-item:: Linux
 
       The following commands add a *temporary* extension to your system
       PATH for running the ``minio`` utility. Defer to your operating system
@@ -37,7 +37,7 @@
 
          minio --help
 
-   .. tab:: macOS
+   .. tab-item:: macOS
 
 
       **Homebrew**
@@ -61,7 +61,7 @@
          export PATH=$PATH:$HOME/minio-binaries/
 
 
-   .. tab:: Windows
+   .. tab-item:: Windows
 
       Open the following file in a browser:
       
@@ -74,7 +74,7 @@
 
          \path\to\mc.exe --help
 
-   .. tab:: Source
+   .. tab-item:: Source
 
       Installation from source is intended for developers and advanced users
       and requires a working Golang environment. See 

@@ -74,9 +74,9 @@ methods require starting/restarting the MinIO deployment to apply changes. The
 following tabs provide a quick reference of all required and optional
 environment variables and configuration settings respectively:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Environment Variables
+   .. tab-item:: Environment Variables
 
       MinIO supports specifying the :abbr:`OIDC (OpenID Connect)` provider
       settings using :ref:`environment variables
@@ -108,7 +108,7 @@ environment variables and configuration settings respectively:
       For complete documentation on these variables, see
       :ref:`minio-server-envvar-external-identity-management-openid`
 
-   .. tab:: Configuration Settings
+   .. tab-item:: Configuration Settings
 
       MinIO supports specifying the :abbr:`OIDC (OpenID Connect)` provider
       settings using :mc-conf:`configuration settings <identity_openid>`. The 

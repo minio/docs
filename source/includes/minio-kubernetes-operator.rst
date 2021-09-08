@@ -1,6 +1,6 @@
-.. tabs::
+.. tab-set::
 
-   .. tab:: SSH
+   .. tab-item:: SSH
 
       .. code-block:: shell
          :class: copyable
@@ -10,7 +10,7 @@
 
          git clone git@github.com:minio/minio-operator.git
 
-   .. tab:: HTTPS
+   .. tab-item:: HTTPS
 
       .. code-block:: shell
          :class: copyable

@@ -72,23 +72,23 @@ required values.
 
 Each of the following tabs contains a provider-specific example:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: MinIO Server
+   .. tab-item:: MinIO Server
 
       .. code-block:: shell
          :class: copyable
 
          mc alias set myminio https://minioserver.example.net ACCESS_KEY SECRET KEY
 
-   .. tab:: AWS S3 Storage
+   .. tab-item:: AWS S3 Storage
 
       .. code-block:: shell
          :class: copyable
 
          mc alias set myS3 https://s3.amazon.com/endpoint ACCESS_KEY SECRET KEY
 
-   .. tab:: Google Cloud Storage
+   .. tab-item:: Google Cloud Storage
 
       .. code-block:: shell
          :class: copyable

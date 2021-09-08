@@ -86,9 +86,10 @@ The following tabs provide instructions for a self-managed MinIO KES service
 appropriate for evaluation environments *only* and should *never* be used
 for Production or any other environment which requires strict data security:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Self-Managed KES
+   .. tab-item:: Self-Managed KES
+      :sync: self-kes
 
       Set the following environment variables in the terminal or shell:
 
@@ -114,7 +115,8 @@ for Production or any other environment which requires strict data security:
            - The corresponding certificate for the :minio-git:`identity
              <kes/wiki/Configuration#policy-configuration>` on the KES server.
              
-   .. tab:: MinIO ``Play`` Sandbox
+   .. tab-item:: MinIO ``Play`` Sandbox
+      :sync: play-kes
 
       .. important::
 
@@ -188,9 +190,10 @@ appropriate for evaluation environments *only* and should *never* be used
 for Production or any other environment which requires strict data security.
 Select the same tab used for the previous step:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Self-Managed KES
+   .. tab-item:: Self-Managed KES
+      :sync: self-kes
 
       Specify the following environment variables in the shell or terminal:
 
@@ -232,7 +235,8 @@ Select the same tab used for the previous step:
              the configured Key Management System (KMS). Specify the name of the
              key created in the previous step. 
 
-   .. tab:: MinIO ``Play`` Sandbox
+   .. tab-item:: MinIO ``Play`` Sandbox
+      :sync: play-kes
 
       .. important::
 

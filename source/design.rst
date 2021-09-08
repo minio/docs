@@ -55,27 +55,145 @@ Containers
       .. container::
          :class: class-name
 
+Sphinx Design
+-------------
+
+The following components come from 
+:github:`sphinx-design <executablebooks/sphinx-design>`
+
 Tabs
 ~~~~
 
-.. tabs::
+MinIO uses the ExecutableBooks 
+:github:`sphinx-design <executablebooks/sphinx-design>`  library for tabs.
 
-   .. tab:: This is tab one
+.. tab-set::
 
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pellentesque,
-      elit sit amet fringilla feugiat, tortor tortor mollis quam, eget molestie
-      mauris dolor et justo. Praesent purus sapien, maximus in enim non, lacinia
-      pretium purus. Cras a ligula in dolor pulvinar dignissim in vel dui. Class
-      aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-      himenaeos. 
+   .. tab-item:: Plain Text
 
-   .. tab:: This is tab two
+      This is plain text content
 
-      Proin accumsan fermentum dui quis sodales. Fusce purus quam,
-      lacinia at semper sit amet, suscipit ac nunc. Quisque sit amet libero at
-      metus egestas efficitur. Nulla dictum velit non lectus iaculis lacinia.
-      Maecenas porttitor, elit eu pellentesque dictum, tellus neque rhoncus quam,
-      in rhoncus urna lectus nec turpis.
+   .. tab-item:: Text and Code
+
+      This is plain text content with code:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc admin info ALIAS
+
+Cards
+~~~~~
+
+.. card:: Title of the card
+
+   This is the header of the card
+   ^^^
+   This is content inside of the card.
+
+   The card can contain varying content. 
+
+   .. code-block:: shell
+
+      echo "This is some code block"
+
+   +++
+   This is the footer of the card
+
+.. card:: This card is clickable
+   :link: https://min.io
+
+   Clicking this card will take you to https://min.io
+
+.. card:: This card is clickable
+   :link: objects
+   :link-type: ref
+
+   Clicking this card will take you to the location of the ``objects`` reference
+   anchor.
+
+.. card-carousel:: 4
+
+   .. card:: Card Carousel 1
+
+      This is the first item in the carousel
+
+   .. card:: Card Carousel 2
+
+      This is the second item in the carousel
+
+   .. card:: Card Carousel 3
+
+      This is the third item in the carousel
+
+   .. card:: Card Carousel 4
+
+      This is the fourth item in the carousel
+
+Grids
+~~~~~
+
+.. grid:: 1 1 3 3
+   :outline:
+   :gutter: 2
+
+   .. grid-item::
+
+      The first item in the grid
+
+   .. grid-item::
+
+      The second item in the grid
+
+   .. grid-item::
+
+      The third item in the grid
+
+      .. grid:: 1 1 1 1
+         :outline:
+
+         .. grid-item::
+
+            SubGrid Item 1
+
+         .. grid-item::
+
+            SubGrid Item 2
+
+         .. grid-item::
+
+            SubGrid Item 3
+
+.. grid:: 2 2 3 3
+   :gutter: 3
+
+   .. grid-item-card:: Card 1
+
+      Card 1 content
+
+   .. grid-item-card:: Card 2
+
+      Card 2 content
+
+   .. grid-item::
+      :child-direction: row
+      :child-align: spaced
+
+      .. grid:: 1 1 1 1
+         :gutter: 3
+         :padding: 0
+
+         .. grid-item-card:: SubCard 1
+
+            SubCard 1 content
+
+         .. grid-item-card:: SubCard 2
+
+            SubCard 2 content
+
+         .. grid-item-card:: SubCard 3
+
+            SubCard 3 content
 
 Header 1
 --------
@@ -311,11 +429,11 @@ This is a numbered list:
 
 3) Item C
 
-  1) Item C.1
+  3) Item C.1
 
-  2) Item C.2
+  4) Item C.2
 
-  3) Item C.3
+  5) Item C.3
 
     1) Item C.3.1
 
@@ -385,3 +503,6 @@ for display. This is intentional (For now).
    .. data:: bar
 
       These are nested and linked.
+
+
+
