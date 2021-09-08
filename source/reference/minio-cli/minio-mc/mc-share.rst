@@ -31,9 +31,9 @@ Examples
 Generate a CURL GET Command
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Get Specific Object
+   .. tab-item:: Get Specific Object
 
       Use :mc-cmd:`mc share download` to generate a URL that supports
       ``GET`` requests for an object:
@@ -53,7 +53,7 @@ Generate a CURL GET Command
         after which the URL expires. For example, to set a 30 day expiry, 
         specify ``30d``.
 
-   .. tab:: Get Object(s) in a Bucket
+   .. tab-item:: Get Object(s) in a Bucket
 
       Use :mc-cmd:`mc share download` with the 
       :mc-cmd-option:`~mc share download recursive` option to generate a URL for
@@ -78,9 +78,9 @@ Generate a CURL GET Command
 Generate a CURL POST Command
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Upload to Object
+   .. tab-item:: Upload to Object
 
       Use :mc-cmd:`mc share upload` to generate a URL that supports
       ``POST`` requests for uploading a file to a specific object location
@@ -101,7 +101,7 @@ Generate a CURL POST Command
         after which the URL expires. For example, to set a 30 day expiry, 
         specify ``30d``.
 
-   .. tab:: Upload File(s) to Bucket
+   .. tab-item:: Upload File(s) to Bucket
 
       Use :mc-cmd:`mc share upload` with the 
       :mc-cmd-option:`~mc share upload recursive` option to generate a URL that

@@ -135,16 +135,16 @@ The following diagrams describe the key hierarchy built by MinIO
 for each object. Each tab corresponds to the specific hierarchy for 
 SSE-S3 and SSE-C respectively:
 
-.. tabs::
+.. tab-set::
    
-   .. tab:: SSE-S3
+   .. tab-item:: SSE-S3
 
       .. image:: /images/minio-encryption-sse-s3-key-hierarchy.svg
          :width: 600px
          :alt: Key Hierarchy for MinIO SSE-S protected objects. Customer Master Key  to  Encryption Key  to Key Encryption Key  to Object Encryption Key. Only encrypted key metadata is kept on disk.
          :align: center
 
-   .. tab:: SSE-C
+   .. tab-item:: SSE-C
 
       .. image:: /images/minio-encryption-sse-c-key-hierarchy.svg
          :width: 600px

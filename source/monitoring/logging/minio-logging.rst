@@ -41,9 +41,9 @@ You can configure a new HTTP webhook endpoint to which MinIO publishes
 :mc:`minio server` logs using either environment variables *or* by setting 
 runtime configuration settings. 
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Environment Variables
+   .. tab-item:: Environment Variables
 
       MinIO supports specifying the :mc:`minio server` log HTTP webhook endpoint
       and associated configuration settings using :ref:`environment variables
@@ -83,7 +83,7 @@ runtime configuration settings.
       must specify the same environment variables and settings on 
       *all* MinIO servers in the deployment.
 
-   .. tab:: Configuration Settings
+   .. tab-item:: Configuration Settings
 
       MinIO supports adding or updating log HTTP webhook endpoints on a MinIO
       deployment using the :mc-cmd:`mc admin config set` command and the
@@ -126,9 +126,9 @@ You can configure a new HTTP webhook endpoint to which MinIO publishes audit
 logs using either environment variables *or* by setting runtime configuration
 settings:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Environment Variables
+   .. tab-item:: Environment Variables
 
       MinIO supports specifying the audit log HTTP webhook endpoint and
       associated configuration settings using :ref:`environment variables
@@ -175,7 +175,7 @@ settings:
       must specify the same environment variables and settings on 
       *all* MinIO servers in the deployment.
 
-   .. tab:: Configuration Settings
+   .. tab-item:: Configuration Settings
 
       MinIO supports adding or updating audit log HTTP webhook endpoints on a
       MinIO deployment using the :mc-cmd:`mc admin config set` command and the

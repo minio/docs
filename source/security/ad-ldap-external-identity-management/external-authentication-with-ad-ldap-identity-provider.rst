@@ -107,9 +107,9 @@ group lookups.
 The following tabs provide a reference of the environment variables and
 configuration settings required for enabling Lookup-Bind mode. 
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Environment Variable
+   .. tab-item:: Environment Variable
 
       - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN`
       - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD`
@@ -121,7 +121,7 @@ configuration settings required for enabling Lookup-Bind mode.
       :ref:`minio-authenticate-using-openid-generic` tutorial includes complete
       instructions on setting these values.
 
-   .. tab:: Configuration Setting
+   .. tab-item:: Configuration Setting
 
       - :mc-conf:`identity_ldap lookup_bind_dn <identity_ldap.lookup_bind_dn>`
       - :mc-conf:`identity_ldap lookup_bind_password <identity_ldap.lookup_bind_password>`
@@ -151,16 +151,16 @@ using :ref:`minio-external-identity-management-ad-ldap-lookup-bind` wherever pos
 The following tabs provide a reference of the environment variables and
 configuration settings required for enabling Username-Bind mode.
 
-.. tabs::
+.. tab-set::
    
-   .. tab:: Environment Variable
+   .. tab-item:: Environment Variable
 
       - :envvar:`MINIO_IDENTITY_LDAP_USERNAME_FORMAT`
 
       See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
       reference documentation for more information on this variable.
 
-   .. tab:: Configuration Setting
+   .. tab-item:: Configuration Setting
 
       - :mc-conf:`identity_ldap username_format <identity_ldap.username_format>`
 
@@ -222,9 +222,9 @@ DN and assigns each matching policy to the authenticated user.
 The following tabs provide a reference of the environment variables and
 configuration settings required for enabling group lookups:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Environment Variable
+   .. tab-item:: Environment Variable
 
       - :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN`
       - :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER`
@@ -234,7 +234,7 @@ configuration settings required for enabling group lookups:
       :ref:`minio-authenticate-using-openid-generic` tutorial includes complete
       instructions on setting these values.
 
-   .. tab:: Configuration Setting
+   .. tab-item:: Configuration Setting
 
 
       - :mc-conf:`identity_ldap group_search_base_dn <identity_ldap.group_search_base_dn>`

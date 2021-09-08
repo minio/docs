@@ -1,6 +1,6 @@
-.. tabs::
+.. tab-set::
 
-   .. tab:: Docker
+   .. tab-item:: Docker
 
       **Stable**
 
@@ -21,7 +21,7 @@
          docker run minio/mc:edge admin info server play
 
 
-   .. tab:: Linux
+   .. tab-item:: Linux
 
       The following commands add a *temporary* extension to your system
       PATH for running the ``mc`` utility. Defer to your operating system
@@ -58,7 +58,7 @@
 
          mc --help
 
-   .. tab:: macOS
+   .. tab-item:: macOS
 
       .. code-block:: shell
          :class: copyable
@@ -67,7 +67,7 @@
          mc --help
 
 
-   .. tab:: Windows
+   .. tab-item:: Windows
 
       Open the following file in a browser:
       
@@ -80,7 +80,7 @@
 
          \path\to\mc.exe --help
 
-   .. tab:: Source
+   .. tab-item:: Source
 
       Installation from source is intended for developers and advanced users
       and requires a working Golang environment. See 

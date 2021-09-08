@@ -53,9 +53,9 @@ See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 You can configure a new Kafka service endpoint using either environment variables
 *or* by setting runtime configuration settings.
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Environment Variables
+   .. tab-item:: Environment Variables
 
       MinIO supports specifying the Kafka service endpoint and associated
       configuration settings using 
@@ -110,7 +110,7 @@ You can configure a new Kafka service endpoint using either environment variable
       <minio-server-envvar-bucket-notification-kafka>` for complete documentation
       on each environment variable.
 
-   .. tab:: Configuration Settings
+   .. tab-item:: Configuration Settings
 
       MinIO supports adding or updating Kafka endpoints on a running 
       :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 

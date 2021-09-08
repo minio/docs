@@ -103,9 +103,9 @@ Required Permissions
 Bucket Replication requires at minimum the following permissions on the 
 source and destination clusters:
 
-.. tabs::
+.. tab-set::
 
-   .. tab:: Replication Admin
+   .. tab-item:: Replication Admin
 
       The following policy provides permissions for configuring and enabling
       replication on a cluster. 
@@ -128,7 +128,7 @@ source and destination clusters:
       on the source cluster and :mc-cmd:`mc admin policy set` to associate
       the policy to that new user.
 
-   .. tab:: Replication Remote User
+   .. tab-item:: Replication Remote User
 
       The following policy provides permissions for enabling synchronization of
       replicated data *into* the cluster. 

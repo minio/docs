@@ -225,7 +225,7 @@ The example command breaks down as follows:
      - The URL hostname the MinIO Console uses for connecting to the MinIO 
        server. This variable is *required* if specifying TLS certificates
        which **do not** contain the IP address of the MinIO Server host
-       as a :rfc:`Subject Alternative Name <rfc5280#section-4.2.1.6>`. 
+       as a :rfc:`Subject Alternative Name <5280#section-4.2.1.6>`. 
        Specify a hostname covered by one of the TLS certificate SAN entries.
 
    * - :envvar:`MINIO_KMS_SECRET_KEY`
