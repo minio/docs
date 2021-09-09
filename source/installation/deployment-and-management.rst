@@ -25,10 +25,13 @@ Standalone Deployments
    to the full set of MinIO's advanced S3 features and functionality.
 
 Distributed Deployments
-   Two or more MinIO servers with multiple storage volumes per server. 
-   Distributed deployments are best for production environments and
+   One or more MinIO servers with *at least* four total storage volumes across
+   all servers. Distributed deployments are best for production environments and
    workloads and support all of MinIO's core and advanced S3 features and
-   functionality. 
+   functionality.
+
+   MinIO recommends a baseline topology of 4 nodes with 4 drives each 
+   for production environments.
 
 .. _minio-installation-comparison:
 

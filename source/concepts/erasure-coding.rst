@@ -16,84 +16,48 @@ loss of multiple drives or nodes in the cluster. Erasure Coding provides
 object-level healing with less overhead than adjacent technologies such as
 RAID or replication. 
 
-Erasure Coding splits objects into data and parity blocks, where parity blocks
-support reconstruction of missing or corrupted data blocks. MinIO distributes
-both data and parity blocks across :mc:`minio server` nodes and drives in an
-:ref:`Erasure Set <minio-ec-erasure-set>`. Depending on the configured parity,
-number of nodes, and number of drives per node in the Erasure Set, MinIO can
-tolerate the loss of up to half (``N/2``) of drives and still retrieve stored
-objects.
+MinIO splits each new object into data and parity blocks, where parity blocks
+support reconstruction of missing or corrupted data blocks. MinIO writes these
+blocks to a single :ref:`erasure set <minio-ec-erasure-set>` in the deployment.
+Since erasure set drives are striped across the deployment, a given node 
+typically contains only a portion of data or parity blocks for each object.
+MinIO can therefore tolerate the loss of multiple drives or nodes in the
+deployment depending on the configured parity and deployment topology.
 
-For example, consider a small-scale MinIO deployment consisting of a
-single :ref:`Server Pool <minio-intro-server-pool>` with 4 :mc:`minio server`
-nodes. Each node in the deployment has 4 locally attached ``1Ti`` drives for
-a total of 16 drives.
+.. image:: /images/erasure-code.jpg
+   :width: 600px
+   :alt: MinIO Erasure Coding example
+   :align: center
 
-MinIO creates :ref:`Erasure Sets <minio-ec-erasure-set>` by dividing the total
-number of drives in the deployment into sets consisting of between 4 and 16
-drives each. In the example deployment, the largest possible Erasure Set size
-that evenly divides into the total number of drives is ``16``.
+At maximum parity, MinIO can tolerate the loss of up to half the drives per
+erasure set (``N/2-1``) and still perform read and write operations. MinIO
+defaults to 4 parity blocks per object with tolerance for the loss of 4 drives
+per erasure set. For more complete information on selecting erasure code parity,
+see :ref:`minio-ec-parity`.
 
-MinIO uses a Reed-Solomon algorithm to split objects into data and parity blocks
-based on the size of the Erasure Set. MinIO then uniformly distributes the
-data and parity blocks across the Erasure Set drives such that each drive
-in the set contains no more than one block per object. MinIO uses
-the ``EC:N`` notation to refer to the number of parity blocks (``N``) in the
-Erasure Set.
+Erasure coding requires a minimum of 4 drives is only available with 
+:ref:`distributed <minio-installation-comparison>` MinIO deployments. Erasure
+coding is is a core requirement for the following MinIO features:
 
-The number of parity blocks in a deployment controls the deployment's relative
-data redundancy. Higher levels of parity allow for higher tolerance of drive
-loss at the cost of total available storage. For example, using EC:4 in our
-example deployment results in 12 data blocks and 4 parity blocks. The parity
-blocks take up some portion of space in the deployment, reducing total storage.
-*However*, the parity blocks allow MinIO to reconstruct the object with only 
-8 data blocks, increasing resilience to data corruption or loss.
+- :ref:`Object Versioning <minio-bucket-versioning>`
+- :ref:`Server-Side Replication <minio-bucket-replication>`
+- :ref:`Write-Once Read-Many Locking <minio-bucket-locking>`
 
-The following table lists the outcome of varying EC levels on the example
-deployment:
-
-.. list-table:: Outcome of Parity Settings on a 16 Drive MinIO Cluster
-   :header-rows: 1
-   :widths: 20 20 20 20 20
-   :width: 100%
-
-   * - Parity
-     - Total Storage
-     - Storage Ratio
-     - Minimum Drives for Read Operations
-     - Minimum Drives for Write Operations
-
-   * - ``EC: 4`` (Default)
-     - 12 Tebibytes
-     - 0.750
-     - 12
-     - 13
-
-   * - ``EC: 6``
-     - 10 Tebibytes
-     - 0.625
-     - 10
-     - 11
-
-   * - ``EC: 8``
-     - 8 Tebibytes
-     - 0.500
-     - 8
-     - 9
-
-- For more information on Erasure Sets, see :ref:`minio-ec-erasure-set`.
-
-- For more information on selecting Erasure Code Parity, see
-  :ref:`minio-ec-parity`
+Use the MinIO `Erasure Code Calculator 
+<https://min.io/product/erasure-code-calculator?ref=docs>`__ when planning and
+designing your MinIO deployment to explore the effect of erasure code settings
+on your intended topology.
 
 .. _minio-ec-erasure-set:
 
 Erasure Sets
 ------------
 
-An *Erasure Set* is a set of drives in a MinIO deployment that support
-Erasure Coding. MinIO evenly distributes object data and parity blocks among
-the drives in the Erasure Set. 
+An *Erasure Set* is a set of drives in a MinIO deployment that support Erasure
+Coding. MinIO evenly distributes object data and parity blocks among the drives
+in the Erasure Set. MinIO randomly and uniformly distributes the data and parity
+blocks across drives in the erasure set with *no overlap*. Each unique object
+has no more than one data or parity block per drive in the set.
 
 MinIO calculates the number and size of *Erasure Sets* by dividing the total
 number of drives in the :ref:`Server Pool <minio-intro-server-pool>` into sets
@@ -131,50 +95,59 @@ Erasure Code Parity (``EC:N``)
 ------------------------------
 
 MinIO uses a Reed-Solomon algorithm to split objects into data and parity blocks
-based on the size of the Erasure Set. MinIO uses parity blocks to automatically
-heal damaged or missing data blocks when reconstructing an object. MinIO uses
-the ``EC:N`` notation to refer to the number of parity blocks (``N``) in the
-Erasure Set.
+based on the :ref:`Erasure Set <minio-ec-erasure-set>` size in the deployment.
+For a given erasure set of size ``M``, MinIO splits objects into ``N`` parity
+blocks and ``M-N`` data blocks. 
 
-MinIO uses a hash of an object's name to determine into which Erasure Set to
-store that object. MinIO always uses that erasure set for objects with a
-matching name. For example, MinIO stores all :ref:`versions
-<minio-bucket-versioning>` of an object in the same Erasure Set.
+MinIO uses the ``EC:N`` notation to refer to the number of parity blocks (``N``)
+in the deployment. MinIO defaults to ``EC:4`` or 4 parity blocks per object.
+MinIO uses the same ``EC:N`` value for all erasure sets and
+:ref:`server pools <minio-intro-server-pool>` in the deployment.
 
-After MinIO selects an object's Erasure Set, it divides the object based on the
-number of drives in the set and the configured parity. MinIO creates:
+MinIO can tolerate the loss of up to ``N`` drives per erasure set and 
+continue performing read and write operations ("quorum"). If ``N`` is equal
+to exactly 1/2 the drives in the erasure set, MinIO write quorum requires
+``N+1`` drives to avoid data inconsistency ("split-brain").
 
-- ``(Erasure Set Drives) - EC:N`` Data Blocks, *and*
-- ``EC:N`` Parity Blocks.
+Setting the parity for a deployment is a balance between availability
+and total usable storage. Higher parity values increase resiliency to drive
+or node failure at the cost of usable storage, while lower parity provides
+maximum storage with reduced tolerance for drive/node failures. 
+Use the MinIO `Erasure Code Calculator 
+<https://min.io/product/erasure-code-calculator?ref=docs>`__ to explore the
+effect of parity on your planned cluster deployment.
 
-MinIO randomly and uniformly distributes the data and parity blocks across
-drives in the erasure set with *no overlap*. While a drive may contain both data
-and parity blocks for multiple unique objects, a single unique object has no
-more than one block per drive in the set. For versioned objects, MinIO selects
-the same drives for both data and parity storage while maintaining zero overlap
-on any single drive.
+The following table lists the outcome of varying erasure code parity levels on
+a MinIO deployment consisting of 1 node and 16 1TB drives:
 
-The specified parity for an object also dictates the minimum number of Erasure
-Set drives ("Quorum") required for MinIO to either read or write that object:
+.. list-table:: Outcome of Parity Settings on a 16 Drive MinIO Cluster
+   :header-rows: 1
+   :widths: 20 20 20 20 20
+   :width: 100%
 
-.. _minio-read-quorum:
+   * - Parity
+     - Total Storage
+     - Storage Ratio
+     - Minimum Drives for Read Operations
+     - Minimum Drives for Write Operations
 
-Read Quorum
-   The minimum number of Erasure Set drives required for MinIO to 
-   serve read operations. MinIO can automatically reconstruct an object
-   with corrupted or missing data blocks if enough drives are online to
-   provide Read Quorum for that object.
-  
-   MinIO Read Quorum is ``DRIVES - (EC:N)``.
+   * - ``EC: 4`` (Default)
+     - 12 Tebibytes
+     - 0.750
+     - 12
+     - 12
 
-.. _minio-write-quorum:
+   * - ``EC: 6``
+     - 10 Tebibytes
+     - 0.625
+     - 10
+     - 10
 
-Write Quorum
-  The minimum number of Erasure Set drives required for MinIO
-  to serve write operations. MinIO requires enough available drives to
-  eliminate the risk of split-brain scenarios. 
-  
-  MinIO Write Quorum is ``(DRIVES - (EC:N)) + 1``.
+   * - ``EC: 8``
+     - 8 Tebibytes
+     - 0.500
+     - 8
+     - 9
 
 .. _minio-ec-storage-class:
 
@@ -224,6 +197,8 @@ MinIO provides the following two storage classes:
 
    The maximum value is half of the total drives in the
    :ref:`Erasure Set <minio-ec-erasure-set>`.
+
+   The minimum value is ``2``.
 
    ``STANDARD`` parity *must* be greater than or equal to
    ``REDUCED_REDUNDANCY``. If ``REDUCED_REDUNDANCY`` is unset, ``STANDARD``

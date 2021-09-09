@@ -43,7 +43,7 @@ Cluster Write Quorum
 --------------------
 
 Use the following endpoint to test if a MinIO cluster has 
-:ref:`write quorum <minio-write-quorum>`:
+:ref:`write quorum <minio-ec-parity>`:
 
 .. code-block:: shell
    :class: copyable
@@ -76,7 +76,7 @@ Cluster Read Quorum
 --------------------
 
 Use the following endpoint to test if a MinIO cluster has 
-:ref:`read quorum <minio-read-quorum>`:
+:ref:`read quorum <minio-ec-parity>`:
 
 .. code-block:: shell
    :class: copyable
@@ -104,7 +104,7 @@ Cluster Maintenance Check
 -------------------------
 
 Use the following endpoint to test if the MinIO cluster can maintain
-both :ref:`read <minio-read-quorum>` and :ref:`write <minio-write-quorum>`
+both :ref:`read <minio-ec-parity>` and :ref:`write <minio-ec-parity>`
 if the specified MinIO server is taken down for maintenance:
 
 .. code-block:: shell
