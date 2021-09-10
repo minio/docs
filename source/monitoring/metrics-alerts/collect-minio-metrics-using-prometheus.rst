@@ -103,13 +103,13 @@ configuration file:
    global:
       scrape_interval: 15s
    
-      scrape_configs:
-         - job_name: minio-job
-           bearer_token: TOKEN
-           metrics_path: /minio/v2/metrics/cluster
-           scheme: https
-           static_configs:
-           - targets: [minio.example.net]
+   scrape_configs:
+      - job_name: minio-job
+        bearer_token: TOKEN
+        metrics_path: /minio/v2/metrics/cluster
+        scheme: https
+        static_configs:
+        - targets: [minio.example.net]
 
 Start the Prometheus cluster using the configuration file:
 
