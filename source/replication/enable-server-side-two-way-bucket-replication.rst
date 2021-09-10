@@ -212,13 +212,20 @@ destination clusters to ensure the safety of objects during transmission.
 MinIO does *not* support replicating client-side encrypted objects 
 (SSE-C).
 
-Replication of Object Retention (WORM, Legal Hold)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Replication of Locked Objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports replicating objects with retention settings, such as
-:abbr:`WORM (Write-Once Read-Many)` object locking or legal holds. Both the
-source and destination bucket *must* have object locking enabled for MinIO
-to replicate objects with their associated retention settings.
+MinIO supports replicating objects held under 
+:ref:`WORM Locking <minio-object-locking>`. Both replication buckets *must* have
+object locking enabled for MinIO to replicate the locked object. For
+active-active configuration, MinIO recommends using the *same* 
+retention rules on both buckets to ensure consistent behavior across
+sites.
+
+You must enable object locking during bucket creation as per S3 behavior. 
+You can then configure object retention rules at any time.
+Object locking requires :ref:`versioning <minio-bucket-versioning>` and
+enables the feature implicitly.
 
 Procedure
 ---------

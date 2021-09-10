@@ -44,5 +44,4 @@ The following table lists MinIO features and their corresponding documentation:
    :titlesonly:
    :hidden:
 
-   /concepts/bucket-versioning
    /concepts/erasure-coding

@@ -134,6 +134,7 @@ such as versioning and replication.
 
    /introduction/minio-overview
    /concepts/feature-overview
+   Object Retention </object-retention/minio-object-retention>
    /installation/deployment-and-management
    /lifecycle-management/lifecycle-management-overview
    /replication/replication-overview
