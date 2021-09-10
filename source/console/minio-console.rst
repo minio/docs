@@ -194,6 +194,8 @@ change or retrieve the credentials later. To rotate credentials for an
 application, create a new service account and delete the old one once the 
 application updates to using the new credentials.
 
+.. _minio-console-admin-buckets:
+
 Admin: Buckets
 --------------
 
@@ -216,7 +218,7 @@ You can select a bucket to view more specific details for that bucket:
 
 .. image:: /images/minio-console/console-bucket-overview.png
    :width: 600px
-   :alt: MinIO Console Create Bucket
+   :alt: MinIO Console Bucket Management
    :align: center
 
 - The :guilabel:`Summary` tab displays a summary of the bucket configuration.
