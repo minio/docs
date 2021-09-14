@@ -418,7 +418,7 @@ An object under ``COMPLIANCE`` lock is protected from write operations by *all*
 users, including the :ref:`MinIO root <minio-users-root>` user.
 
 ``COMPLIANCE`` locked objects enforce complete immutability for locked objects.
-However, you cannot change or remove the lock before the configured retention
+You cannot change or remove the lock before the configured retention
 duration has passed.
 
 The MinIO ``COMPLIANCE`` lock is functionally identical to the 
