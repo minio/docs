@@ -42,7 +42,7 @@ class Program
     {
         var config = new AmazonS3Config
         {
-            RegionEndpoint = RegionEndpoint.USEast1, // MUST set this before setting ServiceURL and it should match the `MINIO_REGION` environment variable.
+            AuthenticationRegion = RegionEndpoint.USEast1.SystemName, // Should match the `MINIO_REGION` environment variable.
             ServiceURL = "http://localhost:9000", // replace http://localhost:9000 with URL of your MinIO server
             ForcePathStyle = true // MUST be true to work correctly with MinIO server
         };
