@@ -415,9 +415,18 @@ Key Management Service and Encryption
 .. envvar:: MINIO_KMS_KES_KEY_NAME
 
    The name of an external key on the Key Management system (KMS) configured on
-   the KES server and used for performing en/decryption operations. MinIO uses
-   this key for supporting server-side encryption of objects (SSE-S3) and MinIO
-   backend encryption.
+   the KES server and used for performing en/decryption operations. MinIO
+   uses this key for the following:
+
+   - Encrypting backend data (
+     :ref:`IAM <minio-authentication-and-identity-management>`, 
+     server configuration).
+
+   - The default encryption key for Server-Side Encryption with 
+     :ref:`SSE-KMS <minio-encryption-sse-kms>`.
+
+   - The encryption key for Server-Side Encryption with
+     :ref:`SSE-S3 <minio-encryption-sse-s3>`.
 
 .. _minio-server-envvar-storage-class:
 

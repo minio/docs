@@ -15,14 +15,14 @@ Description
 
 .. start-mc-encrypt-desc
 
-The :mc:`mc encrypt` mc sets, updates, or disables the default
-bucket Server-Side Encryption (SSE) mode. MinIO automatically encrypts
-objects using the specified SSE mode.
+The :mc:`mc encrypt` mc sets, updates, or disables the default bucket
+Server-Side Encryption (SSE) mode. MinIO automatically encrypts objects using
+the specified SSE mode.
+
+.. end-mc-encrypt-desc
 
 For more information on configuring SSE, see
 :ref:`minio-sse`
-
-.. end-mc-encrypt-desc
 
 Behavior
 ~~~~~~~~
@@ -60,8 +60,15 @@ Syntax
       Specify the server-side encryption type to use as the default SSE mode.
       Supports the following values:
 
-      - ``sse-kms`` - SSE using a Key Management System (KMS).
-      - ``sse-s3`` - SSE using client-provided keys (SSE-C).
+      - ``sse-kms`` - Encrypt objects using the key specified in 
+        :mc-cmd:`~mc encrypt set KMSKEY`. MinIO
+        must have access to the specified key on the external KMS to
+        successfully encrypt or decrypt objects protected using SSE-KMS.
+
+      - ``sse-s3`` - Encrypt objects using the key specified to
+        :envvar:`MINIO_KMS_KES_KEY_NAME`. MinIO must have access to the
+        specified key on the external KMS to successfully encrypt or decrypt
+        objects protected using SSE-S3.
 
    .. mc-cmd:: KMSKEY
 
