@@ -68,6 +68,7 @@ extlinks = {
     'docs-k8s'        : ('https://docs.min.io/minio/k8s/%s',''),
     'prometheus-docs' : ('https://prometheus.io/docs/%s',''),
     'podman-docs'     : ('https://docs.podman.io/en/latest/%s',''),
+    'podman-git'      : ('https://github.com/containers/podman/%s','')
 
 }
 
@@ -130,3 +131,10 @@ html_title = 'MinIO Baremetal Documentation'
 # -- Options for Sphinx Tabs -------------------------------------------------
 
 sphinx_tabs_disable_css_loading = True
+
+rst_prolog = """
+
+.. |podman| replace:: `Podman <https://podman.io/>`__
+.. |kes-stable| replace:: 0.16.1
+
+"""
