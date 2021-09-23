@@ -206,12 +206,18 @@ Syntax
       Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
+      MinIO does *not* support changing the account name associated to an Azure
+      remote tier. Azure storage backends are tied to the account, such that
+      changing the account would change the storage backend and prevent access
+      to any objects transitioned to the original account/backend.
+
    .. mc-cmd:: account-key
       :option:
 
       *Required*
       
-      The account key for a user on the remote Azure tier.
+      The account key for the :mc-cmd-option:`~mc admin tier add account-name` 
+      associated to the remote Azure tier.
 
       Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other value of ``TIER_TYPE``.
@@ -327,25 +333,15 @@ Syntax
       :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other ``TIER_TYPE``.
 
-   .. mc-cmd:: account-name
-      :option:
-
-      *Required*
-      
-      The account name for a user on the remote Azure tier. The user
-      must have permission to perform read/write/list/delete operations on the
-      remote bucket or bucket prefix.
-      
-      This option only applies to remote storage tiers with 
-      :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
-      This option has no effect for any other ``TIER_TYPE``.
-
    .. mc-cmd:: account-key
       :option:
 
       *Required*
-      
+
       The account key for a user on the remote Azure tier.
+      Use this option to rotate the credentials for the
+      :mc-cmd-option:`~mc admin tier add account-name` 
+      associated to the remote tier.
 
       This option only applies to remote storage tiers with 
       :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 

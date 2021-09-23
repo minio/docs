@@ -98,6 +98,16 @@ objects.
 MinIO also ignores any objects in the remote bucket or bucket prefix not
 explicitly managed by MinIO. 
 
+.. important::
+
+   MinIO does *not* support changing the account name associated to an Azure
+   remote tier. Azure storage backends are tied to the account, such that
+   changing the account would change the storage backend and prevent access
+   to any objects transitioned to the original account/backend.
+
+   Please contact `MinIO Support <https://min.io/pricing?ref=docs>`__ if you need
+   situation-specific guidance around configuring Azure remote tiers.
+
 Procedure
 ---------
 
@@ -162,6 +172,8 @@ The example above uses the following arguments:
        *must* correspond to an :abbr:`Azure (Microsoft Azure)` user with the
        required :ref:`permissions
        <minio-lifecycle-management-transition-to-azure-permissions-remote>`.
+
+       You cannot change this account name after creating the tier.
 
    * - :mc-cmd:`KEY <mc admin tier add account-key>`
      - The corresponding key for the specified ``ACCOUNT``.
