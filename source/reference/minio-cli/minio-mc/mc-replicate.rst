@@ -30,8 +30,8 @@ Create Remote Target Before Configuring Replication
 Server-Side Replication Requires MinIO Source and Destination
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO server-side replication only works between MinIO clusters. Both the
-source and destination clusters *must* run MinIO. 
+MinIO server-side replication only works between MinIO deployments. Both the
+source and destination deployments *must* run MinIO. 
 
 To configure replication between arbitrary S3-compatible services,
 use :mc-cmd:`mc mirror`.
@@ -51,7 +51,7 @@ Use the :mc-cmd:`mc version enable` command to enable versioning on
    mc version enable ALIAS/PATH
 
 - Replace :mc-cmd:`ALIAS <mc version enable TARGET>` with the
-  :mc:`alias <mc alias>` of the MinIO cluster.
+  :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`PATH <mc version enable TARGET>` with the bucket on which
   to enable versioning.
@@ -59,108 +59,62 @@ Use the :mc-cmd:`mc version enable` command to enable versioning on
 Required Permissions
 ~~~~~~~~~~~~~~~~~~~~
 
-Bucket Replication requires at minimum the following permissions on the 
-source and destination clusters:
-
-.. tab-set::
-
-   .. tab-item:: Source Policy
-
-      The source cluster *must* have a user with *at minimum* following attached
-      *or* inherited policy:
-
-      .. code-block:: shell
-         :class: copyable
-
-         {
-            "Version": "2012-10-17",
-            "Statement": [
-               {
-                     "Action": [
-                        "admin:SetBucketTarget",
-                        "admin:GetBucketTarget"
-                     ],
-                     "Effect": "Allow",
-                     "Sid": ""
-               },
-               {
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:GetReplicationConfiguration",
-                        "s3:ListBucket",
-                        "s3:ListBucketMultipartUploads",
-                        "s3:GetBucketLocation",
-                        "s3:GetBucketVersioning"
-                     ],
-                     "Resource": [
-                        "arn:aws:s3:::SOURCEBUCKETNAME"
-                     ]
-               }
-            ]
-         }
-
-      Replace ``SOURCEBUCKETNAME`` with the name of the source bucket from which
-      MinIO replicates objects. 
-
-      Use the :mc-cmd:`mc admin policy set` command to associate the policy to
-      a user on the source MinIO cluster.
-
-   .. tab-item:: Destination Policy
-
-      The destination cluster *must* have a user with *at minimum* the
-      following attached *or* inherited policy:
-
-      .. code-block:: shell
-         :class: copyable
-
-         {
-            "Version": "2012-10-17",
-            "Statement": [
-               {
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:GetReplicationConfiguration",
-                        "s3:ListBucket",
-                        "s3:ListBucketMultipartUploads",
-                        "s3:GetBucketLocation",
-                        "s3:GetBucketVersioning",
-                        "s3:GetBucketObjectLockConfiguration"
-                     ],
-                     "Resource": [
-                        "arn:aws:s3:::DESTINATIONBUCKETNAME"
-                     ]
-               },
-               {
-                     "Effect": "Allow",
-                     "Action": [
-                        "s3:GetReplicationConfiguration",
-                        "s3:ReplicateTags",
-                        "s3:AbortMultipartUpload",
-                        "s3:GetObject",
-                        "s3:GetObjectVersion",
-                        "s3:GetObjectVersionTagging",
-                        "s3:PutObject",
-                        "s3:DeleteObject",
-                        "s3:ReplicateObject",
-                        "s3:ReplicateDelete"
-                     ],
-                     "Resource": [
-                        "arn:aws:s3:::DESTINATIONBUCKETNAME/*"
-                     ]
-               }
-            ]
-         }
-
-      Replace ``DESTINATIONBUCKETNAME`` with the name of the target bucket to
-      which MinIO replicates objects.
-
-      Use the :mc-cmd:`mc admin policy set` command to associate the policy 
-      to a user on the target MinIO cluster.
-
 MinIO strongly recommends creating users specifically for supporting 
 bucket replication operations. See 
 :mc:`mc admin user` and :mc:`mc admin policy` for more complete
-documentation on adding users and policies to a MinIO cluster.
+documentation on adding users and policies to a MinIO deployment.
+
+.. tab-set::
+
+   .. tab-item:: Replication Admin
+
+      The following policy provides permissions for configuring and enabling
+      replication on a deployment. 
+
+      .. literalinclude:: /extra/examples/ReplicationAdminPolicy.json
+         :class: copyable
+         :language: json
+
+      - The ``"EnableRemoteBucketConfiguration"`` statement grants permission
+        for creating a remote target for supporting replication.
+
+      - The ``"EnableReplicationRuleConfiguration"`` statement grants permission
+        for creating replication rules on a bucket. The ``"arn:aws:s3:::*``
+        resource applies the replication permissions to *any* bucket on the
+        source deployment. You can restrict the user policy to specific buckets
+        as-needed.
+
+      Use the :mc-cmd:`mc admin policy add` to add this policy to each
+      deployment acting as a replication source. Use :mc-cmd:`mc admin user add`
+      to create a user on the deployment and :mc-cmd:`mc admin policy set`
+      to associate the policy to that new user.
+
+   .. tab-item:: Replication Remote User
+
+      The following policy provides permissions for enabling synchronization of
+      replicated data *into* the deployment. 
+
+      .. literalinclude:: /extra/examples/ReplicationRemoteUserPolicy.json
+         :class: copyable
+         :language: json
+
+      - The ``"EnableReplicationOnBucket"`` statement grants permission for 
+        a remote target to retrieve bucket-level configuration for supporting
+        replication operations on *all* buckets in the MinIO deployment. To
+        restrict the policy to specific buckets, specify those buckets as an
+        element in the ``Resource`` array similar to
+        ``"arn:aws:s3:::bucketName"``.
+
+      - The ``"EnableReplicatingDataIntoBucket"`` statement grants permission
+        for a remote target to synchronize data into *any* bucket in the MinIO
+        deployment. To restrict the policy to specific buckets, specify those 
+        buckets as an element in the ``Resource`` array similar to 
+        ``"arn:aws:s3:::bucketName/*"``.
+
+      Use the :mc-cmd:`mc admin policy add` to add this policy to each
+      deployment acting as a replication target. Use :mc-cmd:`mc admin user add`
+      to create a user on the deployment and :mc-cmd:`mc admin policy set`
+      to associate the policy to that new user.
 
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -242,10 +196,10 @@ Server-Side Encryption (SSE-S3). Both the source and destination buckets
 *must* have automatic SSE-S3 enabled for MinIO to replicate an encrypted object.
 
 As part of the replication process, MinIO *decrypts* the object on the source
-bucket and transmits the unencrypted object. The destination MinIO cluster then
+bucket and transmits the unencrypted object. The destination MinIO deployment then
 re-encrypts the object using the destination bucket SSE-S3 configuration. MinIO
 *strongly recommends* :ref:`enabling TLS <minio-TLS>` on both source and
-destination clusters to ensure the safety of objects during transmission.
+destination deployments to ensure the safety of objects during transmission.
 
 MinIO does *not* support replicating client-side encrypted objects 
 (SSE-C).
@@ -274,7 +228,7 @@ prefix. :mc:`mc replicate` depends on the ARN resource returned by
       [--FLAGS]
 
 - Replace :mc-cmd:`ALIAS <mc replicate add SOURCE>` with the 
-  :mc:`alias <mc alias>` of the MinIO cluster.
+  :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`PATH <mc replicate add SOURCE>` with the path to the 
   bucket or bucket prefix on which to add the new rule.
@@ -301,7 +255,7 @@ Use :mc-cmd:`mc replicate edit` to modify an existing replication rule.
       [--FLAGS]
 
 - Replace :mc-cmd:`ALIAS <mc replicate edit SOURCE>` with the 
-  :mc:`alias <mc alias>` of the MinIO cluster.
+  :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`PATH <mc replicate edit SOURCE>` with the path to the 
   bucket or bucket prefix on which the rule exists.
@@ -333,7 +287,7 @@ replication rule.
       --state "disabled"|"enabled"
 
 - Replace :mc-cmd:`ALIAS <mc replicate edit SOURCE>` with the 
-  :mc:`alias <mc alias>` of the MinIO cluster.
+  :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`PATH <mc replicate edit SOURCE>` with the path to the 
   bucket or bucket prefix on which the rule exists.
@@ -365,7 +319,7 @@ Use :mc-cmd:`mc replicate rm` to remove an existing replication rule:
    mc replicate rm ALIAS/PATH --id ID
 
 - Replace :mc-cmd:`ALIAS <mc replicate rm SOURCE>` with the 
-  :mc:`alias <mc alias>` of the MinIO cluster.
+  :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`PATH <mc replicate rm SOURCE>` with the path to the 
   bucket or bucket prefix on which the rule exists.
@@ -416,33 +370,32 @@ Syntax
 
          mc replicate add play/mybucket
 
-
    .. mc-cmd:: arn
       :option:
 
-      *Required*
-
-      Specify the ARN for the destination cluster and bucket. You can
-      retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
-      
-      - Use the :mc-cmd:`mc admin bucket remote ls` to retrieve a list of 
-        ARNs for the bucket on the destination cluster.
-
-      - Use the :mc-cmd:`mc admin bucket remote add` to create an ARN for 
-        the bucket on the destination cluster. 
-
-      The specified ARN bucket *must* match the value specified to
-      :mc-cmd-option:`~mc replicate add remote-bucket`.
-
+      *Deprecated in* :mc-release:`RELEASE.2021-09-23T05-44-03Z`. 
+      :mc-cmd-option:`mc replicate add remote-bucket` supersedes all
+      functionality provided by this option.
 
    .. mc-cmd:: remote-bucket
       :option:
 
       *Required*
 
-      Specify the name of the bucket on the destination cluster. The 
-      name *must* match the ARN specified to 
-      :mc-cmd-option:`~mc replicate add arn`.
+      Specify the ARN for the destination deployment and bucket. You can
+      retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
+      
+      - Use the :mc-cmd:`mc admin bucket remote ls` to retrieve a list of 
+        ARNs for the bucket on the destination deployment.
+
+      - Use the :mc-cmd:`mc admin bucket remote add` to create a replication ARN
+        for the bucket on the destination deployment. 
+
+      The specified ARN bucket *must* match the value specified to
+      :mc-cmd-option:`~mc replicate add remote-bucket`.
+
+      *Added in* :mc-release:`RELEASE.2021-09-23T05-44-03Z`. Requires
+      MinIO server :minio-release:`RELEASE.2021-09-23T04-46-24Z`.
 
 
    .. mc-cmd:: replicate
@@ -513,8 +466,8 @@ Syntax
 
       *Optional*
 
-      Disables verification of the destination cluster's TLS certificate.
-      This option may be required if the destination cluster uses a 
+      Disables verification of the destination deployment's TLS certificate.
+      This option may be required if the destination deployment uses a 
       self-signed certificate *or* a certificate signed by an unknown 
       Certificate Authority.
 
@@ -576,7 +529,7 @@ Syntax
 
       *Optional*
 
-      Specify the name of the bucket on the destination cluster. The 
+      Specify the name of the bucket on the destination deployment. The 
       name *must* match the replication rule ARN. Use 
       :mc-cmd:`mc replicate ls` to validate the ARN for each configured
       replication rule on the bucket.
@@ -651,8 +604,8 @@ Syntax
 
       *Optional*
 
-      Disables verification of the destination cluster's TLS certificate.
-      This option may be required if the destination cluster uses a 
+      Disables verification of the destination deployment's TLS certificate.
+      This option may be required if the destination deployment uses a 
       self-signed certificate *or* a certificate signed by an unknown 
       Certificate Authority.
 
@@ -707,8 +660,8 @@ Syntax
 
       *Optional*
 
-      Disables verification of the destination cluster's TLS certificate.
-      This option may be required if the destination cluster uses a 
+      Disables verification of the destination deployment's TLS certificate.
+      This option may be required if the destination deployment uses a 
       self-signed certificate *or* a certificate signed by an unknown 
       Certificate Authority.
 
@@ -760,8 +713,8 @@ Syntax
 
       *Optional*
 
-      Disables verification of the destination cluster's TLS certificate.
-      This option may be required if the destination cluster uses a 
+      Disables verification of the destination deployment's TLS certificate.
+      This option may be required if the destination deployment uses a 
       self-signed certificate *or* a certificate signed by an unknown 
       Certificate Authority.
 
@@ -806,8 +759,8 @@ Syntax
 
       *Optional*
 
-      Disables verification of the destination cluster's TLS certificate.
-      This option may be required if the destination cluster uses a 
+      Disables verification of the destination deployment's TLS certificate.
+      This option may be required if the destination deployment uses a 
       self-signed certificate *or* a certificate signed by an unknown 
       Certificate Authority.
 
