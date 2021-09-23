@@ -24,6 +24,9 @@ The procedure on this page creates a new bucket replication rule for two-way
 
 - To configure one-way "active-passive" replication between MinIO clusters,
   see :ref:`minio-bucket-replication-serverside-oneway`.
+  
+- To configure multi-site "active-active" replication between MinIO clusters,
+  see :ref:`minio-bucket-replication-serverside-multi`.
 
 This tutorial covers configuring Active-Active replication between two
 MinIO clusters. For a tutorial on multi-site replication between three

@@ -27,7 +27,7 @@ all sites.
   :mc-cmd:`mc mirror`.
 
 - To configure one-way "active-active" replication between two MinIO
-  deployments, see :ref:`minio-bucket-replication-serverside-oneway`.
+  deployments, see :ref:`minio-bucket-replication-serverside-twoway`.
 
 - To configure one-way "active-passive" replication between MinIO deployments,
   see :ref:`minio-bucket-replication-serverside-oneway`.

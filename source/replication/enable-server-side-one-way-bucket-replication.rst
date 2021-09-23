@@ -25,6 +25,9 @@ one-way synchronization of objects between MinIO buckets.
 - To configure two-way "active-active" replication between MinIO clusters,
   see :ref:`minio-bucket-replication-serverside-twoway`.
 
+- To configure multi-site "active-active" replication between MinIO clusters,
+  see :ref:`minio-bucket-replication-serverside-multi`
+
 .. seealso::
 
    - Use the :mc-cmd:`mc replicate edit` command to modify an existing
