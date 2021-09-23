@@ -14,13 +14,10 @@ Enable Two-Way Server-Side Bucket Replication
 The procedure on this page creates a new bucket replication rule for two-way
 "active-active" synchronization of objects between MinIO buckets.
 
-.. image:: /images/active-active-replication.svg
+.. image:: /images/replication/active-active-twoway-replication.svg
    :width: 600px
    :alt: Active-Active Replication synchronizes data between two remote clusters.
    :align: center
-
-MinIO server-side replication supports at most *two* MinIO clusters. Both
-clusters *must* run MinIO.
 
 - To configure replication between arbitrary S3-compatible services, use
   :mc-cmd:`mc mirror`.
@@ -28,12 +25,10 @@ clusters *must* run MinIO.
 - To configure one-way "active-passive" replication between MinIO clusters,
   see :ref:`minio-bucket-replication-serverside-oneway`.
 
-MinIO Active-Active replication is designed for synchronizing objects between
-two MinIO clusters. MinIO does not support Active-Active replication between
-more than two clusters (multi-site). Enterprises looking to implement multi-site
-replication should consider leveraging `MinIO SUBNET
-<https://min.io/pricing?ref=docs>`__ support to access the expertise, planning,
-and engineering resources required for addressing that use case. 
+This tutorial covers configuring Active-Active replication between two
+MinIO clusters. For a tutorial on multi-site replication between three
+or more MinIO clusters, see :ref:`minio-bucket-replication-serverside-multi` 
+(new in VERSION).
 
 .. seealso::
 
@@ -52,8 +47,17 @@ and engineering resources required for addressing that use case.
 Requirements
 ------------
 
-Enable Versioning on Source and Destination Buckets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Replication Requires MinIO Remote Targets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO server-side replication only works between MinIO clusters. Both the
+source and destination clusters *must* run MinIO. 
+
+To configure replication between arbitrary S3-compatible services,
+use :mc-cmd:`mc mirror`.
+
+Replication Requires Versioning
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO relies on the immutability protections provided by versioning to
 synchronize objects between the source and replication target.
@@ -162,6 +166,22 @@ documentation on adding users and policies to a MinIO cluster.
 Considerations
 --------------
 
+Use Consistent Replication Settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO supports customizing the replication configuration to enable or disable
+the following replication behaviors:
+
+- Replication of delete operations
+- Replication of delete markers
+- Replication of existing objects
+- Replication of metadata-only changes
+
+When configuring replication rules for a bucket, ensure that both MinIO
+deployments participating in active-active replication use the *same*
+replication behaviors to ensure consistent and predictable synchronization of
+objects.
+
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -226,6 +246,22 @@ You must enable object locking during bucket creation as per S3 behavior.
 You can then configure object retention rules at any time.
 Object locking requires :ref:`versioning <minio-bucket-versioning>` and
 enables the feature implicitly.
+
+Multi-Site Replication
+~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO supports configuring multiple remote targets per bucket or bucket prefix.
+This enables configuring multi-site active-active replication between MinIO
+deployments.
+
+This procedure covers active-active replication between *two* MinIO sites. 
+You can repeat this procedure for each "pair" of MinIO deployments in the
+replication mesh. For a dedicated tutorial, see 
+:ref:`minio-bucket-replication-serverside-multi`.
+
+MinIO multi-site replication requires MinIO server
+:minio-release:`RELEASE.2021-09-23T04-46-24Z` and :mc:`mc`
+:mc-release:`RELEASE.2021-09-23T05-44-03Z` and later.
 
 Procedure
 ---------

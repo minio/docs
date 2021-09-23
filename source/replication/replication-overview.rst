@@ -11,8 +11,7 @@ Bucket Replication
    :depth: 2
 
 MinIO supports server-side and client-side replication of objects between source
-and destination buckets. MinIO offers both active-passive (one-way) and
-active-active (two-way) flavors of the following replication types:
+and destination buckets.
 
 :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`
   Configure per-bucket rules for automatically synchronizing objects between
@@ -61,6 +60,9 @@ replication while adding the following MinIO-only features:
 - Active-Active (Two-Way) replication of objects between source and destination
   buckets.
 
+- Multi-Site replication of objects between three or more MinIO deployments
+  (New in :minio-release:`RELEASE.2021-09-23T04-46-24Z`).
+
 .. _minio-replication-process:
 
 Replication Process
@@ -87,6 +89,10 @@ replication state of the object:
        if the object meets one of the configured replication rules on the
        bucket. MinIO continuously scans for ``PENDING`` objects not yet in the
        replication queue and adds them to the queue as space is available.
+
+       For multi-site replication, objects remain
+       in the ``PENDING`` state until replicated to *all* configured
+       remotes for that bucket or bucket prefix.
 
    * - ``COMPLETED``
      - The object has successfully replicated to the remote cluster.
@@ -270,7 +276,9 @@ overall cluster load, and the size of the namespace (all objects in the bucket).
 
 MinIO does not synchronize existing unversioned objects. Specifically, the
 bucket *must* have :ref:`versioning <minio-bucket-versioning>` enabled when the
-object was created. 
+object was created. You can use the :mc-cmd:`mc cp` command to create a 
+"versioned" copy of that object. Once that object replicates successfully,
+you can delete the unversioned object (versionid = ``null``).
 
 MinIO existing object replication
 implements functionality similar to 
@@ -285,6 +293,7 @@ without the overhead of contacting technical support.
 
    /replication/enable-server-side-one-way-bucket-replication
    /replication/enable-server-side-two-way-bucket-replication
+   /replication/enable-server-side-multi-site-bucket-replication
    
 
 .. _minio-bucket-replication-clientside:

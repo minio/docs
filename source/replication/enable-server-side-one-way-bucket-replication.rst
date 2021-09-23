@@ -14,13 +14,10 @@ Enable One-Way Server-Side Bucket Replication
 The procedure on this page creates a new bucket replication rule for
 one-way synchronization of objects between MinIO buckets.
 
-.. image:: /images/active-passive-replication.svg
+.. image:: /images/replication/active-passive-oneway-replication.svg
    :width: 600px
    :alt: Active-Passive Replication synchronizes data from a source MinIO cluster to a remote MinIO cluster.
    :align: center
-
-MinIO server-side replication supports at most *two* MinIO clusters. Both
-clusters *must* run MinIO.
 
 - To configure replication between arbitrary S3-compatible services, use
   :mc-cmd:`mc mirror`.
@@ -225,6 +222,23 @@ You must enable object locking during bucket creation as per S3 behavior.
 You can then configure object retention rules at any time.
 Object locking requires :ref:`versioning <minio-bucket-versioning>` and
 enables the feature implicitly.
+
+Multi-Site Replication
+~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO supports configuring multiple remote targets per
+bucket or bucket prefix. For example, you can configure a bucket to replicate
+data to two or more remote MinIO deployments, where one deployment is a 1:1 copy
+(replication of all operations including deletions) and another is a full
+historical record (replication of only non-destructive write operations).
+
+This procedure documents one-way replication to a single remote MinIO
+deployment. You can repeat this tutorial for multiple remote targets for a
+single bucket.
+
+MinIO multi-site replication requires MinIO server
+:minio-release:`RELEASE.2021-09-23T04-46-24Z` and :mc:`mc`
+:mc-release:`RELEASE.2021-09-23T05-44-03Z` and later.
 
 Procedure
 ---------
