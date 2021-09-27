@@ -15,7 +15,7 @@ The procedure on this page creates a new bucket replication rule for
 one-way synchronization of objects between MinIO buckets.
 
 .. image:: /images/replication/active-passive-oneway-replication.svg
-   :width: 600px
+   :width: 450px
    :alt: Active-Passive Replication synchronizes data from a source MinIO cluster to a remote MinIO cluster.
    :align: center
 
