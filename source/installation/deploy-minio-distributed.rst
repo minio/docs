@@ -53,15 +53,26 @@ components such as ingress or load balancers.
 
 MinIO *requires* using sequentially-numbered hostnames to represent each
 :mc:`minio server` process in the deployment. Create the necessary DNS hostname
-mappings *prior* to starting this procedure. For example, the following hostnames
-would support a 4-node distributed deployment:
+mappings *prior* to starting this procedure. For example, the following
+hostnames would support a 4-node distributed deployment:
 
 - ``minio1.example.com``
 - ``minio2.example.com``
 - ``minio3.example.com``
 - ``minio4.example.com``
 
-Configuring network and DNS to support MinIO is out of scope for this procedure.
+MinIO **strongly recomends** using a load balancer to manage connectivity to
+the cluster. The Load Balancer should use a Least Connections algorithm for
+routing requests to the MinIO deployment. Any MinIO node in the deployment can
+receive and process client requests. 
+
+The following load balancers are known to work well with MinIO:
+
+- `NGINX <https://www.nginx.com/products/nginx/load-balancing/>`__
+- `HAProxy <https://cbonte.github.io/haproxy-dconv/2.3/intro.html#3.3.5>`__
+
+Configuring network, load balancers, and DNS to support MinIO is out of scope
+for this procedure.
 
 Local JBOD Storage with Sequential Mounts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -71,7 +82,7 @@ best performance. RAID or similar technologies do not provide additional
 resilience or availability benefits when used with distributed MinIO
 deployments, and typically reduce system performance.
 
-MinIO generally recommends ``xfs`` formatted drives for best performance.
+MinIO generally recommends ``xfs`` formatted drives for best performance. 
 
 MinIO **requires** using sequentially-numbered drives on each node in the
 deployment, where the number sequence is *duplicated* across all nodes.
@@ -84,7 +95,11 @@ per node distributed deployment:
 - ``/mnt/disk4``
 
 Each mount should correspond to a locally-attached drive of the same type and
-size. MinIO limits the size used per disk to the smallest drive in the
+size. If using ``/etc/fstab`` or a similar file-based mount configuration, 
+MinIO **strongly recommends** using drive UUID or labels to assign drives to
+mounts. This ensures that drive ordering cannot change after a reboot. 
+
+MinIO limits the size used per disk to the smallest drive in the
 deployment. For example, if the deployment has 15 10TB disks and 1 1TB disk,
 MinIO limits the per-disk capacity to 1TB. Similarly, use the same model NVME,
 SSD, or HDD drives consistently across all nodes. Mixing drive types in the
@@ -140,6 +155,29 @@ level by setting the appropriate
 `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for
 guidance in selecting the appropriate erasure code parity level for your
 cluster.
+
+Capacity-Based Planning
+~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO generally recommends planning capacity such that
+:ref:`server pool expansion <expand-minio-distributed>` is only required after
+2+ years of deployment uptime. 
+
+For example, consider an application suite that is estimated to produce 10TB of
+data per year. The MinIO deployment should provide *at minimum*:
+
+``10TB + 10TB + 10TB  = 30TB`` 
+
+MinIO recommends adding buffer storage to account for potential growth in 
+stored data (e.g. 40TB of total usable storage). As a rule-of-thumb, more
+capacity initially is preferred over frequent just-in-time expansion to meet
+capacity requirements.
+
+Since MinIO :ref:`erasure coding <minio-erasure-coding>` requires some
+storage for parity, the total **raw** storage must exceed the planned **usable**
+capacity. Consider using the MinIO `Erasure Code Calculator
+<https://min.io/product/erasure-code-calculator>`__ for guidance in planning
+capacity around specific erasure code settings.
 
 .. _deploy-minio-distributed-baremetal:
 
@@ -197,10 +235,10 @@ following example assumes that:
 
    export MINIO_ROOT_USER=minio-admin
    export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
-   #export MINIO_SERVER_URL=https://minio.example.net
-   #export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
+   export MINIO_SERVER_URL=https://minio.example.net
 
-   minio server https://minio{1...4}.example.com/mnt/disk{1...4}/data --console-address ":9001"
+   minio server https://minio{1...4}.example.com/mnt/disk{1...4}/data \ 
+                --console-address ":9001"
 
 The example command breaks down as follows:
 
@@ -223,45 +261,13 @@ The example command breaks down as follows:
 
    * - :envvar:`MINIO_SERVER_URL`
      - The URL hostname the MinIO Console uses for connecting to the MinIO 
-       server. This variable is *required* if specifying TLS certificates
-       which **do not** contain the IP address of the MinIO Server host
-       as a :rfc:`Subject Alternative Name <5280#section-4.2.1.6>`. 
-       Specify a hostname covered by one of the TLS certificate SAN entries.
-
-   * - :envvar:`MINIO_KMS_SECRET_KEY`
-     - The key to use for encrypting the MinIO backend (users, groups,
-       policies, and server configuration). Single-key backend encryption
-       provides a baseline of security for non-production environments, and does
-       not support features like key rotation. You can leave this command
-       commented to deploy MinIO without backend encryption. 
+       server. Specify the hostname of the load balancer which manages
+       connections to the MinIO deployment. 
        
-       Do not use this setting in production environments. Use the MinIO
-       :minio-git:`Key Encryption Service (KES) <kes>` and an external Key
-       Management System (KMS) to enable encryption functionality. Specify the
-       name of the encryption key to use to the :envvar:`MINIO_KMS_KES_KEY_NAME`
-       instead. See :minio-git:`KMS IAM/Config Encryption
-       <minio/blob/master/docs/kms/IAM.md>` for more information.
-
-       Specify the *same* encryption key for all nodes in the deployment.
-
-       Use the following format when specifying the encryption key:
-
-       ``<key-name>:<encryption-key>``
-
-       - Replace the ``<key-name>`` with any string. You must use this
-         key name if you later migrate to using a dedicated KMS for 
-         managing encryption keys.
-
-       - Replace ``<encryption-key>`` with a 32-bit base64 encoded value.
-         For example:
-
-         .. code-block:: shell
-            :class: copyable
-  
-            cat /dev/urandom | head -c 32 | base64 -
-
-         Copy the key to a secure location. MinIO cannot decode the backend
-         without this key.
+       This variable is *required* if specifying TLS certificates which **do
+       not** contain the IP address of the MinIO Server host as a        
+       :rfc:`Subject Alternative Name <5280#section-4.2.1.6>`. The hostname
+       *must* covered by one of the TLS certificate SAN entries.
 
    * - ``minio{1...4}.example.com/``
      - The DNS hostname of each server in the distributed deployment specified
@@ -308,7 +314,9 @@ The example command breaks down as follows:
        Console.
 
 You may specify other :ref:`environment variables 
-<minio-server-environment-variables>` as required by your deployment.
+<minio-server-environment-variables>` as required by your deployment. 
+All MinIO nodes in the deployment should include the same environment variables
+with the same values for each variable.
 
 4) Open the MinIO Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~

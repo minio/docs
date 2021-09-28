@@ -17,10 +17,10 @@ Upgrade a MinIO Deployment
    clusters.  You should *always* test upgrades in a lower environment
    (dev/QA/staging) *before* applying upgrades to production deployments.
 
-   Exercise particular caution if upgrading to a 
-   :minio-git:`release <minio/releases>` that has backwards breaking changes.
-   MinIO always includes warnings in release notes if a given version does
-   *not* support downgrades.
+   Exercise particular caution if upgrading to a :minio-git:`release
+   <minio/releases>` that has backwards breaking changes. MinIO includes
+   warnings in release notes for any version known to not support
+   downgrades.
 
    For MinIO deployments that are significantly behind latest stable 
    (6+ months), consider using 
