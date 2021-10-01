@@ -230,6 +230,13 @@ Syntax
    - ``BZIP2``
    - ``NONE`` (default)
 
+   Compression schemes supported by MinIO backend only:
+
+   - ``ZSTD`` `Zstandard <https://facebook.github.io/zstd/>`__
+   - ``LZ4`` `LZ4 <https://lz4.github.io/lz4/>`__ stream
+   - ``S2`` `S2 <https://github.com/klauspost/compress/tree/master/s2#s2-compression>`__ framed stream
+   - ``SNAPPY`` `Snappy <http://google.github.io/snappy/>`__ framed stream
+
 .. mc-cmd:: csv-output
    :option:
 
