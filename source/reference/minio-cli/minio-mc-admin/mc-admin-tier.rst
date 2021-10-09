@@ -45,8 +45,8 @@ Required Permissions
 MinIO requires the following permissions scoped to to the bucket or buckets 
 for which you are creating lifecycle management rules.
 
-- :policy-action:`s3:PutBucketLifecycle`
-- :policy-action:`s3:GetBucketLifecycle`
+- :policy-action:`s3:PutLifecycleConfiguration`
+- :policy-action:`s3:GetLifecycleConfiguration`
 
 MinIO also requires the following administrative permissions on the cluster
 in which you are creating remote tiers for object transition lifecycle
