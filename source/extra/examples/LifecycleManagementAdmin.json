@@ -11,8 +11,8 @@
       },
       {
             "Action": [
-               "s3:PutBucketLifecycle",
-               "s3:GetBucketLifecycle"
+               "s3:PutLifecycleConfiguration",
+               "s3:GetLifecycleConfiguration"
             ],
             "Resource": [
                         "arn:aws:s3:::*"

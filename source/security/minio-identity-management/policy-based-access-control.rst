@@ -253,15 +253,15 @@ The following table lists the MinIO-supported policy action keys.
    
    Corresponds to the :s3-api:`s3:ListParts <API_ListParts.html>` IAM action.
 
-.. policy-action:: s3:PutBucketLifecycle
+.. policy-action:: s3:PutLifecycleConfiguration
    
-   Corresponds to the :s3-api:`s3:PutBucketLifecycle
-   <API_PutBucketLifecycle.html>` IAM action.
+   Corresponds to the :s3-api:`s3:PutLifecycleConfiguration
+   <API_PutBucketLifecycleConfiguration.html>` IAM action.
 
-.. policy-action:: s3:GetBucketLifecycle
+.. policy-action:: s3:GetLifecycleConfiguration
    
-   Corresponds to the :s3-api:`s3:GetBucketLifecycle
-   <API_GetBucketLifecycle.html>` IAM action.
+   Corresponds to the :s3-api:`s3:GetLifecycleConfiguration
+   <API_GetBucketLifecycleConfiguration.html>` IAM action.
 
 .. policy-action:: s3:PutObjectNotification
    
