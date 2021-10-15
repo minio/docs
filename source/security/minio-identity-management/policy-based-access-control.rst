@@ -8,7 +8,7 @@ Policy Management
 
 .. contents:: Table of Contents
    :local:
-   :depth: 2
+   :depth: 1
 
 Overview
 --------
@@ -141,8 +141,8 @@ policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
    }
 
 - For the ``Statement.Action`` array, specify one or more 
-  :ref:`supported S3 actions <minio-policy-actions>`. MinIO deployments
-  supports a subset of AWS S3 actions.
+  :ref:`supported S3 API operations <minio-policy-actions>`. MinIO deployments
+  supports a subset of AWS S3 API operations.
 
 - For the ``Statement.Resource`` key, you can replace the ``*`` with 
   the specific bucket to which the policy statement should apply. 
@@ -160,80 +160,213 @@ Supported S3 Policy Actions
 MinIO policy documents support a subset of IAM 
 :iam-docs:`S3 Action keys <list_amazons3.html#amazons3-actions-as-permissions>`. 
 
-The following table lists the MinIO-supported policy action keys.
+The following actions control access to common S3 operations. The remaining
+subsections document actions for more advanced S3 operations:
 
 .. policy-action:: s3:*
    
-   Selector for all supported S3 actions.
-
-.. policy-action:: s3:AbortMultipartUpload
-   
-   Corresponds to the :s3-api:`s3:AbortMultipartUpload
-   <API_AbortMultipartUpload.html>` IAM action.
+   Selector for *all* MinIO S3 operations. Applying this action to a given
+   resource allows the user to perform *any* S3 operation against that
+   resource. 
 
 .. policy-action:: s3:CreateBucket
    
-   Corresponds to the :s3-api:`s3:CreateBucket <API_CreateBucket.html>` IAM
-   action.
+   Controls access to the :s3-api:`CreateBucket <API_CreateBucket.html>` S3 API
+   operation.
 
 .. policy-action:: s3:DeleteBucket
    
-   Corresponds to the :s3-api:`s3:DeleteBucket <API_DeleteBucket.html>` IAM
-   action.
+   Controls access to the :s3-api:`DeleteBucket <API_DeleteBucket.html>` S3 API
+   operation.
 
 .. policy-action:: s3:ForceDeleteBucket
    
-   Corresponds to the :s3-api:`s3:DeleteBucket <API_ForceDeleteBucket.html>`
-   IAM action for operations with the ``x-minio-force-delete`` flag.
-
-.. policy-action:: s3:DeleteBucketPolicy
-   
-   Corresponds to the :s3-api:`s3:DeleteBucketPolicy
-   <API_DeleteBucketPolicy.html>` IAM action.
-
-.. policy-action:: s3:DeleteObject
-   
-   Corresponds to the :s3-api:`s3:DeleteObject <API_DeleteObject.html>` IAM
-   action.
+   Controls access to the :s3-api:`DeleteBucket <API_DeleteBucket.html>`
+   S3 API operation for operations with the ``x-minio-force-delete`` flag.
+   Required for removing non-empty buckets.
 
 .. policy-action:: s3:GetBucketLocation
    
-   Corresponds to the :s3-api:`s3:GetBucketLocation
-   <API_GetBucketLocation.html>` IAM action.
-
-.. policy-action:: s3:GetBucketNotification
-   
-   Corresponds to the :s3-api:`s3:GetBucketNotification
-   <API_GetBucketNotification.html>` IAM action.
-
-.. policy-action:: s3:GetBucketPolicy
-   
-   Corresponds to the :s3-api:`s3:GetBucketPolicy <API_GetBucketPolicy.html>`
-   IAM action.
-
-.. policy-action:: s3:GetObject
-   
-   Corresponds to the :s3-api:`s3:GetObject <API_GetObject.html>` IAM action.
-
-.. policy-action:: s3:HeadBucket
-   
-   Corresponds to the :s3-api:`s3:HeadBucket <API_HeadBucket.html>` IAM action.
-       
-  *This action is unused in MinIO.*
+   Controls access to the :s3-api:`GetBucketLocation
+   <API_GetBucketLocation.html>` S3 API operation.
 
 .. policy-action:: s3:ListAllMyBuckets
    
-   Corresponds to the :s3-api:`s3:ListAllMyBuckets <API_ListAllMyBuckets.html>`
-   IAM action.
+   Controls access to the :s3-api:`ListBuckets <API_ListBuckets.html>`
+   S3 API operation.
+
+.. policy-action:: s3:DeleteObject
+   
+   Controls access to the :s3-api:`DeleteObject <API_DeleteObject.html>` S3 API
+   operation.
+
+.. policy-action:: s3:GetObject
+   
+   Controls access to the :s3-api:`GetObject <API_GetObject.html>` S3 API
+   operation.
 
 .. policy-action:: s3:ListBucket
    
-   Corresponds to the :s3-api:`s3:ListBucket <API_ListBucket.html>` IAM action.
+   Controls access to the :s3-api:`ListObjectsV2 <API_ListObjectsV2.html>` S3 API
+   operation.
 
-.. policy-action:: s3:ListMultipartUploads
+.. policy-action:: s3:PutObject
    
-   Corresponds to the :s3-api:`s3:ListMultipartUploads
-   <API_ListMultipartUploads.html>` IAM action.
+   Controls access to the :s3-api:`PutObject <API_PutObject.html>` S3 API
+   operation.
+
+.. policy-action:: s3:PutObjectTagging
+
+   Controls access to the :s3-api:`PutObjectTagging <API_PutObjectTagging.html>`
+   S3 API operation.
+
+.. policy-action:: s3:GetObjectTagging
+
+   Controls access to the :s3-api:`GetObjectTagging <API_GetObjectTagging.html>`
+   S3 API operation.
+
+Bucket Configuration
+~~~~~~~~~~~~~~~~~~~~
+
+.. policy-action:: s3:GetBucketPolicy
+   
+   Controls access to the :s3-api:`GetBucketPolicy <API_GetBucketPolicy.html>`
+   S3 API operation.
+
+.. policy-action:: s3:PutBucketPolicy
+   
+   Controls access to the :s3-api:`PutBucketPolicy <API_PutBucketPolicy.html>`
+   S3 API operation.
+
+.. policy-action:: s3:DeleteBucketPolicy
+   
+   Controls access to the :s3-api:`DeleteBucketPolicy
+   <API_DeleteBucketPolicy.html>` S3 API operation.
+
+.. policy-action:: s3:GetBucketTagging
+   
+   Controls access to the :s3-api:`GetBucketTagging <API_GetBucketTagging.html>`
+   S3 API operation.
+
+.. policy-action:: s3:PutBucketTagging
+   
+   Controls access to the :s3-api:`PutBucketTagging <API_PutBucketTagging.html>`
+   S3 API operation.
+
+Multipart Upload
+~~~~~~~~~~~~~~~~
+
+.. policy-action:: s3:AbortMultipartUpload
+   
+   Controls access to the :s3-api:`AbortMultipartUpload
+   <API_AbortMultipartUpload.html>` S3 API operation.
+
+.. policy-action:: s3:ListMultipartUploadParts
+   
+   Controls access to the :s3-api:`ListParts <API_ListParts.html>` S3 API
+   operation.
+
+.. policy-action:: s3:ListBucketMultipartUploads
+   
+   Controls access to the :s3-api:`ListMultipartUploads
+   <API_ListMultipartUploads.html>` S3 API operation.
+
+Versioning and Retention
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. policy-action:: s3:PutBucketVersioning
+   
+   Controls access to the :s3-api:`PutBucketVersioning
+   <API_PutBucketVersioning.html>` S3 API operation.
+
+.. policy-action:: s3:GetBucketVersioning
+   
+   Controls access to the :s3-api:`GetBucketVersioning
+   <API_GetBucketVersioning.html>` S3 API operation.
+
+.. policy-action:: s3:DeleteObjectVersion
+   
+   Controls access to the :s3-api:`DeleteObjectVersion
+   <API_DeleteObjectVersion.html>` S3 API operation.
+
+.. policy-action:: s3:DeleteObjectVersionTagging
+   
+   Controls access to the :s3-api:`DeleteObjectVersionTagging
+   <API_DeleteObjectVersionTagging.html>`  S3 API operation.
+
+.. policy-action:: s3:GetObjectVersion
+   
+   Controls access to the :s3-api:`GetObjectVersion
+   <API_GetObjectVersion.html>`  S3 API operation.
+
+.. policy-action:: s3:BypassGovernanceRetention
+   
+   Controls access to the following S3 API operations on objects
+   locked under :mc-cmd:`GOVERNANCE <mc retention set MODE>`
+   retention mode:
+  
+   - ``PutObjectRetention`` 
+   - ``PutObject`` 
+   - ``DeleteObject``
+
+   See the S3 documentation on :s3-docs:`s3:BypassGovernanceRetention
+   <object-lock-managing.html#object-lock-managing-bypass>` for more 
+   information.
+
+.. policy-action:: s3:PutObjectRetention
+   
+   Controls access to the :s3-api:`PutObjectRetention
+   <API_PutObjectRetention.html>`  S3 API operation.
+
+   Required for any ``PutObject`` operation that specifies 
+   :ref:`retention metadata <minio-object-locking>`.
+
+.. policy-action:: s3:GetObjectRetention
+   
+   Controls access to the :s3-api:`GetObjectRetention
+   <API_GetObjectRetention.html>` S3 API operation.
+
+   Required for including :ref:`object locking metadata <minio-object-locking>`
+   as part of the response to a ``GetObject`` or ``HeadObject`` operation.
+
+.. policy-action:: s3:GetObjectLegalHold
+   
+   Controls access to the :s3-api:`GetObjectLegalHold
+   <API_GetObjectLegalHold.html>` S3 API operation.
+
+   Required for including :ref:`object locking metadata <minio-object-locking>`
+   as part of the response to a ``GetObject`` or ``HeadObject`` operation.
+
+.. policy-action:: s3:PutObjectLegalHold
+   
+   Controls access to the :s3-api:`PutObjectLegalHold
+   <API_PutObjectLegalHold.html>` S3 API operation.
+
+   Required for any ``PutObject`` operation that specifies   
+   :ref:`legal hold metadata <minio-object-locking>`.
+
+.. policy-action:: s3:GetBucketObjectLockConfiguration
+   
+   Controls access to the :s3-api:`GetObjectLockConfiguration
+   <API_GetObjectLockConfiguration.html>` S3 API operation.
+
+.. policy-action:: s3:PutBucketObjectLockConfiguration
+   
+   Controls access to the :s3-api:`PutObjectLockConfiguration 
+   <API_PutObjectLockConfiguration.html>` S3 API operation.
+
+Bucket Notifications
+~~~~~~~~~~~~~~~~~~~~
+
+.. policy-action:: s3:GetBucketNotification
+   
+   Controls access to the :s3-api:`GetBucketNotification
+   <API_GetBucketNotification.html>` S3 API operation.
+
+.. policy-action:: s3:PutBucketNotification
+   
+   Controls access to the :s3-api:`PutBucketNotification
+   <API_PutBucketNotification.html>` S3 API operation.
 
 .. policy-action:: s3:ListenNotification
   
@@ -249,194 +382,158 @@ The following table lists the MinIO-supported policy action keys.
 
    This action is **not** intended for use with other S3-compatible services.
 
-.. policy-action:: s3:ListParts
-   
-   Corresponds to the :s3-api:`s3:ListParts <API_ListParts.html>` IAM action.
+Object Lifecycle Management
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. policy-action:: s3:PutLifecycleConfiguration
    
-   Corresponds to the :s3-api:`s3:PutLifecycleConfiguration
-   <API_PutBucketLifecycleConfiguration.html>` IAM action.
+   Controls access to the :s3-api:`PutLifecycleConfiguration
+   <API_PutBucketLifecycleConfiguration.html>` S3 API operation.
 
 .. policy-action:: s3:GetLifecycleConfiguration
    
-   Corresponds to the :s3-api:`s3:GetLifecycleConfiguration
-   <API_GetBucketLifecycleConfiguration.html>` IAM action.
+   Controls access to the :s3-api:`GetLifecycleConfiguration
+   <API_GetBucketLifecycleConfiguration.html>` S3 API operation.
 
-.. policy-action:: s3:PutObjectNotification
-   
-   Corresponds to the :s3-api:`s3:PutObjectNotification
-   <API_PutObjectNotification.html>` IAM action.
-
-.. policy-action:: s3:PutBucketPolicy
-   
-   Corresponds to the :s3-api:`s3:PutBucketPolicy <API_PutBucketPolicy.html>`
-   IAM action.
-
-.. policy-action:: s3:PutObject
-   
-   Corresponds to the :s3-api:`s3:PutObject <API_PutObject.html>` IAM action.
-
-.. policy-action:: s3:DeleteObjectVersion
-   
-   Corresponds to the :s3-api:`s3:DeleteObjectVersion
-   <API_DeleteObjectVersion.html>` IAM action.
-
-.. policy-action:: s3:DeleteObjectVersionTagging
-   
-   Corresponds to the :s3-api:`s3:DeleteObjectVersionTagging
-   <API_DeleteObjectVersionTagging.html>`  IAM action.
-
-.. policy-action:: s3:GetObjectVersion
-   
-   Corresponds to the :s3-api:`s3:GetObjectVersion
-   <API_GetObjectVersion.html>`  IAM action.
-
-.. policy-action:: s3:GetObjectVersionTagging
-   
-   Corresponds to the :s3-api:`s3:GetObjectVersionTagging
-   <API_GetObjectVersionTagging.html>`  IAM action.
-
-.. policy-action:: s3:PutObjectVersionTagging
-   
-   Corresponds to the :s3-api:`s3:PutObjectVersionTagging
-   <API_PutObjectVersionTagging.html>`  IAM action.
-
-.. policy-action:: s3:BypassGovernanceRetention
-   
-   Corresponds to the :s3-docs:`s3:BypassGovernanceRetention
-   <object-lock-managing.html#object-lock-managing-bypass>` IAM action.
-
-   This action applies to the following API operations on objects locked under
-   :mc-cmd:`GOVERNANCE <mc retention set MODE>` retention mode:
-  
-   - ``PutObjectRetention`` 
-   - ``PutObject`` 
-   - ``DeleteObject``
-
-.. policy-action:: s3:PutObjectRetention
-   
-   Corresponds to the :s3-api:`s3:PutObjectRetention
-   <API_PutObjectRetention.html>`  IAM action.
-
-.. policy-action:: s3:GetObjectRetention
-   
-   Corresponds to the :s3-api:`s3:GetObjectRetention
-   <API_GetObjectRetention.html>` IAM action.
-
-   This action applies to the following API operations on objects locked under
-   any retention mode:
-
-   - ``GetObject`` 
-   - ``HeadObject``
-
-.. policy-action:: s3:GetObjectLegalHold
-   
-   Corresponds to the :s3-api:`s3:GetObjectLegalHold
-   <API_GetObjectLegalHold.html>` IAM action.
-
-   This action applies to the following API operations on objects locked under
-   legal hold:
-
-   - ``GetObject``
-
-.. policy-action:: s3:PutObjectLegalHold
-   
-   Corresponds to the :s3-api:`s3:PutObjectLegalHold
-   <API_PutObjectLegalHold.html>` IAM action.
-
-   This action applies to the following API operations on objects locked
-   under legal hold:
-
-   - ``PutObject``
-
-.. policy-action:: s3:GetBucketObjectLockConfiguration
-   
-   Corresponds to the :s3-api:`s3:GetBucketObjectLockConfiguration
-   <API_GetBucketObjectLockConfiguration.html>` IAM action.
-
-.. policy-action:: s3:PutBucketObjectLockConfiguration
-   
-   Corresponds to the :s3-api:`s3:PutBucketObjectLockConfiguration 
-   <API_PutBucketObjectLockConfiguration.html>` IAM action.
-
-.. policy-action:: s3:GetBucketTagging
-   
-   Corresponds to the :s3-api:`s3:GetBucketTagging <API_GetBucketTagging.html>`
-   IAM action.
-
-.. policy-action:: s3:PutBucketTagging
-   
-   Corresponds to the :s3-api:`s3:PutBucketTagging <API_PutBucketTagging.html>`
-   IAM action.
-
-.. policy-action:: s3:Get
-   
-   Corresponds to the :s3-api:`s3:Get <API_Get.html>` IAM action.
-
-.. policy-action:: s3:Put
-   
-   Corresponds to the :s3-api:`s3:Put <API_Put.html>` IAM action.
-
-.. policy-action:: s3:Delete
-   
-   Corresponds to the :s3-api:`s3:Delete <API_Delete.html>` IAM action.
+Object Encryption
+~~~~~~~~~~~~~~~~~
 
 .. policy-action:: s3:PutEncryptionConfiguration
    
-   Corresponds to the :s3-api:`s3:PutEncryptionConfiguration
-   <API_PutBucketEncryption.html>` IAM action.
+   Controls access to the :s3-api:`PutEncryptionConfiguration
+   <API_PutBucketEncryption.html>` S3 API operation.
 
 .. policy-action:: s3:GetEncryptionConfiguration
    
-   Corresponds to the :s3-api:`s3:GetEncryptionConfiguration
-   <API_GetBucketEncryption.html>` IAM action.
+   Controls access to the :s3-api:`GetEncryptionConfiguration
+   <API_GetBucketEncryption.html>` S3 API operation.
 
-.. policy-action:: s3:PutBucketVersioning
-   
-   Corresponds to the :s3-api:`s3:PutBucketVersioning
-   <API_PutBucketVersioning.html>` IAM action.
-
-.. policy-action:: s3:GetBucketVersioning
-   
-   Corresponds to the :s3-api:`s3:GetBucketVersioning
-   <API_GetBucketVersioning.html>` IAM action.
+Bucket Replication
+~~~~~~~~~~~~~~~~~~
 
 .. policy-action:: s3:GetReplicationConfiguration
    
-   Corresponds to the :s3-api:`s3:GetReplicationConfiguration 
-   <API_GetReplicationConfiguration.html>` IAM action.
+   Controls access to the :s3-api:`GetBucketReplication 
+   <API_GetBucketReplication.html>` S3 API operation.
 
 .. policy-action:: s3:PutReplicationConfiguration
    
-   Corresponds to the :s3-api:`s3:PutReplicationConfiguration
-   <PutReplicationConfiguration.html>` IAM action.
+   Controls access to the :s3-api:`PutBucketReplication
+   <PutBucketReplication.html>` S3 API operation.
 
 .. policy-action:: s3:ReplicateObject
-   
-   Corresponds to the :s3-api:`s3:ReplicateObject <API_ReplicateObject.html>`
-   IAM action.
+
+   MinIO Extension for controlling API operations related to 
+   :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
+
+   Required for server-side replication.
 
 .. policy-action:: s3:ReplicateDelete
-   
-   Corresponds to the :s3-api:`s3:ReplicateDelete <API_ReplicateDelete.html>`
-   IAM action.
 
+   MinIO Extension for controlling API operations related to 
+   :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
+
+   Required for synchronizing delete operations as part of server-side
+   replication.
+   
 .. policy-action:: s3:ReplicateTags
-   
-   Corresponds to the :s3-api:`s3:ReplicateTags <API_ReplicateTags.html>` IAM
-   action.
 
+   MinIO Extension for controlling API operations related to 
+   :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
+
+   Required for server-side replication.
+   
 .. policy-action:: s3:GetObjectVersionForReplication
-   
-   Corresponds to the :s3-api:`s3:GetObjectVersionForReplication 
-   <API_GetObjectVersionForReplication.html>` IAM action.
 
+   MinIO Extension for controlling API operations related to 
+   :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
+
+   Required for server-side replication.
+   
+.. _minio-policy-conditions:
+
+Supported S3 Policy Condition Keys
+----------------------------------
+
+MinIO policy documents support IAM 
+:iam-docs:`conditional statements <reference_policies_elements_condition.html>`. 
+
+Each condition element consists of 
+:iam-docs:`operators <reference_policies_elements_condition_operators.html>` 
+and condition keys. MinIO supports a subset of IAM condition keys. For complete
+information on any listed condition key, see the 
+:iam-docs:`IAM Condition Element Documentation 
+<reference_policies_elements_condition.html>`
+
+MinIO supports the following condition keys for all supported 
+:ref:`actions <minio-policy-actions>`:
+
+- ``aws:Referer``
+- ``aws:SourceIp``
+- ``aws:UserAgent``
+- ``aws:SecureTransport``
+- ``aws:CurrentTime``
+- ``aws:EpochTime``
+- ``aws:PrincipalType``
+- ``aws:userid``
+- ``aws:username``
+- ``x-amz-content-sha256``
+
+The following table lists additional supported condition keys for specific
+actions:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%
+
+   * - Action Key
+     - Condition Keys
+
+   * - :policy-action:`s3:GetObject`
+     - | ``x-amz-server-side-encryption``
+       | ``x-amz-server-side-encryption-customer-algorithm``
+
+   * - :policy-action:`s3:ListBucket`
+     - | ``prefix``
+       | ``delimiter``
+       | ``max-keys``
+
+   * - :policy-action:`s3:PutObject`
+     - | ``x-amz-copy-source`` 
+       | ``x-amz-server-side-encryption``
+       | ``x-amz-server-side-encryption-customer-algorithm``
+       | ``x-amz-metadata-directive``
+       | ``x-amz-storage-class``
+       | ``object-lock-retain-until-date``
+       | ``object-lock-mode``
+       | ``object-lock-legal-hold``
+
+   * - :policy-action:`s3:PutObjectRetention`
+     - | ``x-amz-object-lock-remaining-retention-days``
+       | ``x-amz-object-lock-retain-until-date``
+       | ``x-amz-object-lock-mode``
+
+   * - :policy-action:`s3:PutObjectLegalHold`
+     - ``object-lock-legal-hold``
+
+   * - :policy-action:`s3:BypassGovernanceRetention`
+     - | ``object-lock-remaining-retention-days``
+       | ``object-lock-retain-until-date``
+       | ``object-lock-mode``
+       | ``object-lock-legal-hold``
+
+   * - :policy-action:`s3:GetObjectVersion`
+     - ``versionid``
+
+
+   * - :policy-action:`s3:DeleteObjectVersion`
+     - ``versionid``
 
 .. _minio-policy-mc-admin-actions:
 
 ``mc admin`` Policy Action Keys
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 MinIO supports the following actions for use with defining policies
 for :mc-cmd:`mc admin` operations. These actions are *only* valid for
@@ -601,93 +698,8 @@ services:
    Allows listing configured remote storage tiers using the
    :mc-cmd:`mc admin tier` command.
 
-.. _minio-policy-conditions:
-
-Supported S3 Policy Condition Keys
-----------------------------------
-
-MinIO policy documents support IAM 
-:iam-docs:`conditional statements <reference_policies_elements_condition.html>`. 
-
-Each condition element consists of 
-:iam-docs:`operators <reference_policies_elements_condition_operators.html>` 
-and condition keys. MinIO supports a subset of IAM condition keys. For complete
-information on any listed condition key, see the 
-:iam-docs:`IAM Condition Element Documentation 
-<reference_policies_elements_condition.html>`
-
-MinIO supports the following condition keys for all supported 
-:ref:`actions <minio-policy-actions>`:
-
-- ``aws:Referer``
-- ``aws:SourceIp``
-- ``aws:UserAgent``
-- ``aws:SecureTransport``
-- ``aws:CurrentTime``
-- ``aws:EpochTime``
-- ``aws:PrincipalType``
-- ``aws:userid``
-- ``aws:username``
-- ``s3:x-amz-content-sha256``
-
-The following table lists additional supported condition keys for specific
-actions:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Action Key
-     - Condition Keys
-
-   * - :policy-action:`s3:GetObject`
-     - | ``s3:x-amz-server-side-encryption``
-       | ``s3:x-amz-server-side-encryption-customer-algorithm``
-
-   * - :policy-action:`s3:ListBucket`
-     - | ``s3:prefix``
-       | ``s3:delimiter``
-       | ``s3:max-keys``
-
-   * - :policy-action:`s3:PutObject`
-     - | ``s3:x-amz-copy-source`` 
-       | ``s3:x-amz-server-side-encryption``
-       | ``s3:x-amz-server-side-encryption-customer-algorithm``
-       | ``s3:x-amz-metadata-directive``
-       | ``s3:x-amz-storage-class``
-       | ``s3:object-lock-retain-until-date``
-       | ``s3:object-lock-mode``
-       | ``s3:object-lock-legal-hold``
-
-   * - :policy-action:`s3:PutObjectRetention`
-     - | ``s3:x-amz-object-lock-remaining-retention-days``
-       | ``s3:x-amz-object-lock-retain-until-date``
-       | ``s3:x-amz-object-lock-mode``
-
-   * - :policy-action:`s3:PutObjectLegalHold`
-     - ``s3:object-lock-legal-hold``
-
-   * - :policy-action:`s3:BypassGovernanceRetention`
-     - | ``s3:object-lock-remaining-retention-days``
-       | ``s3:object-lock-retain-until-date``
-       | ``s3:object-lock-mode``
-       | ``s3:object-lock-legal-hold``
-
-   * - :policy-action:`s3:GetObjectVersion`
-     - ``s3:versionid``
-
-   * - :policy-action:`s3:GetObjectVersionTagging`
-     - ``s3:versionid``
-
-   * - :policy-action:`s3:DeleteObjectVersion`
-     - ``s3:versionid``
-
-   * - :policy-action:`s3:DeleteObjectVersionTagging`
-     - ``s3:versionid``
-
 ``mc admin`` Policy Condition Keys
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
 MinIO supports the following conditions for use with defining policies for
 :mc-cmd:`mc admin` :ref:`actions <minio-policy-mc-admin-actions>`.
