@@ -103,7 +103,7 @@ service is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-amqp-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-amqp-queue-limit
 
@@ -212,7 +212,7 @@ server/broker is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-mqtt-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-mqtt-queue-limit
 
@@ -292,7 +292,7 @@ authentication.
 
 .. start-minio-notify-elasticsearch-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-elasticsearch-queue-limit
 
@@ -366,7 +366,7 @@ server/broker is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-nsq-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-nsq-queue-limit
 
@@ -445,7 +445,7 @@ server/broker is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-redis-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-redis-queue-limit
 
@@ -590,7 +590,7 @@ server/broker is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-nats-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-nats-queue-limit
 
@@ -678,7 +678,7 @@ server/broker is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-postgresql-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-postgresql-queue-limit
 
@@ -777,7 +777,7 @@ server/broker is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-mysql-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-mysql-queue-limit
 
@@ -909,7 +909,7 @@ server/broker is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-kafka-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-kafka-queue-limit
 
@@ -975,7 +975,7 @@ service is offline and replays the directory when connectivity resumes.
 
 .. start-minio-notify-webhook-queue-limit
 
-Specify the maximum limit for undelivered messages. Defaults to ``10000``.
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 
 .. end-minio-notify-webhook-queue-limit
 
