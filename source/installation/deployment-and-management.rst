@@ -81,6 +81,8 @@ For tutorials on deploying a standalone MinIO deployment, see:
 - :ref:`deploy-minio-standalone`
 - :ref:`deploy-minio-standalone-container`
 
+.. _minio-installation-platform-support:
+
 Platform Support
 ----------------
 
@@ -104,11 +106,12 @@ platforms.
        - S390X
 
    * - macOS
-     - MinIO recommends non-EOL macOS versions (10.14+)
+     - MinIO recommends non-EOL macOS versions (10.14+).
 
    * - Microsoft Windows
      - MinIO recommends non-EOL Windows versions (Windows 10, Windows Server 
-       2016+)
+       2016+). Support for running :ref:`distributed MinIO deployments 
+       <deploy-minio-distributed>` is *experimental* on Windows OS.
 
 
 For unlisted platforms or architectures, please reach out to MinIO at 
