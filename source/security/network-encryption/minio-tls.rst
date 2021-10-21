@@ -215,28 +215,12 @@ supported by
 .. admonition:: Use ECDSA/EdDSA over RSA when when generating certificates
    :class: note
 
-<<<<<<< HEAD
-   TLS certificates created using Elliptic Curve Cryptography (ECC)
-   cipher suites have lower computation requirements compared to RSA cipher
-   suites. Specifically, MinIO recommends using certificates created with any of
-   the following supported TLS 1.2 cipher suites wherever possible:
-
-   - ``TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305``
-   - ``TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256``
-   - ``TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384``
-
-   All TLS 1.3 cipher suites use ECC by default.
-=======
-   TLS certificates created using 
-   :wiki:`Elliptic Curve Cryptography (ECC) <Elliptic-curve_cryptography>` have 
-   lower computation requirements compared to 
-   :wikI:`RSA <RSA_(cryptosystem)>`. Specifically, MinIO
-   recommends generating 
-   ECDSA (e.g. `NIST P-256 curve 
-   <https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf>`__) or 
-   EdDSA (e.g. :rfc:`Curve25519 <7748>`) TLS private keys/certificates wherever 
+   TLS certificates created using Elliptic Curve Cryptography (ECC) have lower
+   computation requirements compared to RSA. Specifically, MinIO recommends
+   generating ECDSA (e.g. `NIST P-256 curve
+   <https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf>`__) or EdDSA
+   (e.g. :rfc:`Curve25519 <7748>`) TLS private keys/certificates wherever
    possible.
->>>>>>> 3cb1c9e (Final pass)
 
 Third-Party Certificate Authorities
 -----------------------------------
