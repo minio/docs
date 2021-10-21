@@ -24,6 +24,10 @@ available storage capacity of the cluster while maintaining the overall
 own failure domain, where the loss of one or more disks or nodes in that pool
 does not effect the availability of other pools in the deployment.
 
+MinIO does not rebalance objects across the new server pools. MinIO
+prefers new write operations to the pool with the most free
+storage, which is typically the newly added pool. 
+
 The procedure on this page expands an existing 
 :ref:`distributed <deploy-minio-distributed>` MinIO deployment with an
 additional server pool. 
@@ -33,53 +37,76 @@ additional server pool.
 Prerequisites
 -------------
 
-Networking and Hostnames
+Networking and Firewalls
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each node should have full bidirectional network access to every other node in
-the new server pool *and* the existing pools in the deployment. For
-containerized or orchestrated infrastructures, this may require specific
-configuration of networking and routing components such as ingress or load
-balancers.
+Each node should have full bidirectional network access to every other
+node in the deployment. For containerized or orchestrated infrastructures,
+this may require specific configuration of networking and routing 
+components such as ingress or load balancers. Certain operating systems
+may also require setting firewall rules. For example, the following command
+explicitly opens the default MinIO server API port ``9000`` on servers using firewalld:
 
-MinIO *requires* using sequentially-numbered hostnames to represent each
-:mc:`minio server` process in the server pool. Create the necessary DNS hostname
-mappings *prior* to starting this procedure. For example, the following
-hostnames would support a 4-node distributed server pool:
+.. code-block:: shell
+   :class: copyable
 
-- ``minio1.example.com``
-- ``minio2.example.com``
-- ``minio3.example.com``
-- ``minio4.example.com``
+   firewall-cmd --permanent --zone=public --add-port=9000/tcp
+   firewall-cmd --reload
 
-MinIO **strongly recomends** using a load balancer to manage connectivity to
-the cluster. The Load Balancer should use a Least Connections algorithm for
-routing requests to the MinIO deployment. Any MinIO node in the deployment can
-receive and process client requests. For pool expansion, you should update the
-load balancer after completing the procedure to include the new pool hostnames.
+If you set a static :ref:`MinIO Console <minio-console>` port (e.g. ``:9001``)
+you must *also* grant access to that port to ensure connectivity from external
+clients.
+
+MinIO **strongly recomends** using a load balancer to manage connectivity to the
+cluster. The Load Balancer should use a "Least Connections" algorithm for
+routing requests to the MinIO deployment, since any MinIO node in the deployment
+can receive, route, or process client requests. 
 
 The following load balancers are known to work well with MinIO:
 
 - `NGINX <https://www.nginx.com/products/nginx/load-balancing/>`__
 - `HAProxy <https://cbonte.github.io/haproxy-dconv/2.3/intro.html#3.3.5>`__
 
-Configuring network, load balancers, and DNS to support MinIO is out of scope
-for this procedure.
+Configuring firewalls or load balancers to support MinIO is out of scope for
+this procedure.
 
-Local Storage
-~~~~~~~~~~~~~
+Sequential Hostnames
+~~~~~~~~~~~~~~~~~~~~
+
+MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential
+series of MinIO hosts when creating a server pool. MinIO therefore *requires*
+using sequentially-numbered hostnames to represent each
+:mc:`minio server` process in the pool. 
+
+Create the necessary DNS hostname mappings *prior* to starting this procedure.
+For example, the following hostnames would support a 4-node distributed
+server pool:
+
+- ``minio5.example.com``
+- ``minio6.example.com``
+- ``minio7.example.com``
+- ``minio8.example.com``
+
+You can specify the entire range of hostnames using the expansion notation
+``minio{5...8}.example.com``.
+
+Configuring DNS to support MinIO is out of scope for this procedure.
+
+Local JBOD Storage with Sequential Mounts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO strongly recommends local :abbr:`JBOD (Just a Bunch of Disks)` arrays for
 best performance. RAID or similar technologies do not provide additional
 resilience or availability benefits when used with distributed MinIO
 deployments, and typically reduce system performance.
 
-MinIO generally recommends ``xfs`` formatted drives for best performance.
+MinIO generally recommends ``xfs`` formatted drives for best performance. 
 
-MinIO **requires** using sequentially-numbered drives on each node in the
-deployment, where the number sequence is *duplicated* across all nodes.
-For example, the following sequence of mounted drives would support a 4-drive
-per node distributed deployment:
+MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential
+series of disks when creating a server pool. MinIO therefore *requires*
+using sequentially-numbered drives on each node in the deployment, where the
+number sequence is *duplicated* across all nodes. For example, the following
+sequence of mounted drives would support a 4-drive per node server pool:
 
 - ``/mnt/disk1``
 - ``/mnt/disk2``
@@ -90,6 +117,10 @@ Each mount should correspond to a locally-attached drive of the same type and
 size. If using ``/etc/fstab`` or a similar file-based mount configuration, 
 MinIO **strongly recommends** using drive UUID or labels to assign drives to
 mounts. This ensures that drive ordering cannot change after a reboot. 
+
+You can specify the entire range of disks using the expansion notation
+``/mnt/disk{1...4}``. If you want to use a specific subfolder on each disk,
+specify it as ``/mnt/disk{1...4}/minio``.
 
 MinIO limits the size used per disk to the smallest drive in the
 deployment. For example, if the deployment has 15 10TB disks and 1 1TB disk,
@@ -112,16 +143,20 @@ same distributed deployment can result in unpredictable performance.
 Minimum Drives for Erasure Code Parity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO requires each pool satisfy the deployment
-:ref:`erasure code <minio-erasure-coding>` settings. Specifically,
-the new pool must have *at least* 2x the number of drives as the
-:ref:`Standard <minio-ec-storage-class>` parity storage class. This requirement
-ensures the new server pool can satisfy the 
+MinIO requires each pool satisfy the deployment :ref:`erasure code
+<minio-erasure-coding>` settings. Specifically the new pool topology must 
+support a minimum of ``2 x EC:N`` drives per 
+:ref:`erasure set <minio-ec-erasure-set>`, where ``EC:N`` is the 
+:ref:`Standard <minio-ec-storage-class>` parity storage class of the
+deployment. This requirement ensures the new server pool can satisfy the
 expected :abbr:`SLA (Service Level Agreement)` of the deployment.
 
-For example, consider a MinIO deployment with a single 16-node server pool
-using the default erasure code parity ``EC:4``. The new server pool
-must *at least* 8 drives (``4*2``) to satisfy ``EC:4``.
+You can use the 
+`MinIO Erasure Code Calculator 
+<https://min.io/product/erasure-code-calculator?ref=docs>`__ to check the
+:guilabel:`Erasure Code Stripe Size (K+M)` of your new pool. If the highest
+listed value is at least ``2 x EC:N``, the pool supports the deployment's
+erasure parity settings.
 
 Considerations
 --------------
@@ -135,10 +170,9 @@ adapters) and software (operating system, kernel settings, system services) is
 consistent across all nodes in the pool. The new pool may exhibit unpredictable
 performance if nodes have heterogeneous hardware or software configurations.
 
-Similarly, MinIO also recommends that the hardware and software configurations
-for the new pool nodes are substantially similar to existing server pools. This
-ensures consistent performance of operations across the cluster regardless of
-which pool a given application performs operations against.
+The new server pool does **not** need to be substantially similar in hardware
+and software configuration to any existing server pool, though this may allow
+for simplified cluster management and more predictable performance across pools.
 
 See :ref:`deploy-minio-distributed-recommendations` for more guidance on
 selecting hardware for MinIO deployments.
@@ -178,170 +212,209 @@ capacity. Consider using the MinIO `Erasure Code Calculator
 <https://min.io/product/erasure-code-calculator>`__ for guidance in planning
 capacity around specific erasure code settings.
 
-Procedure
----------
+Recommended Operating Systems
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tutorial assumes all hosts running MinIO use a 
+:ref:`recommended Linux operating system <minio-installation-platform-support>`
+such as RHEL8+ or Ubuntu 18.04+. 
+
+For other operating systems such as Windows or OSX, visit
+`https://min.io/download <https://min.io/download?ref=docs>`__ and select the
+tab associated to your operating system. Follow the displayed instructions to
+install the MinIO server binary on each node. Defer to the OS best practices for
+starting MinIO as a service (e.g. not attached to the terminal/shell session).
+
+Support for running MinIO in distributed mode on Windows hosts is
+**experimental**. Contact MinIO at hello@min.io if your infrastructure requires
+deployment onto Windows hosts.
+
+.. _expand-minio-distributed-baremetal:
+
+Expand a Distributed MinIO Deployment
+-------------------------------------
 
 The following procedure adds a :ref:`Server Pool <minio-intro-server-pool>`
 to an existing MinIO deployment. Each Pool expands the total available
 storage capacity of the cluster while maintaining the overall 
 :ref:`availability <minio-erasure-coding>` of the cluster.
 
+All commands provided below use example values. Replace these values with
+those appropriate for your deployment.
+
 Review the :ref:`expand-minio-distributed-prereqs` before starting this
 procedure.
 
-1) Install the MinIO Binary on Each Node
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Install the MinIO Binary on Each Node in the New Server Pool
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install the :program:`minio` binary onto each node in the new server pool. Visit
-`https://min.io/download <https://min.io/download?ref=docs>`__ and select the
-tab most relevant to your use case. Follow the displayed instructions to
-install the MinIO server binary on each node. Do *not* run the process yet.
-
-.. important:: 
-
-   The MinIO server version **must** match across all MinIO nodes in the
-   deployment. If your existing deployment has not been 
-   :ref:`upgraded to the latest stable release <minio-upgrade>`, 
-   you may need to retrieve a specific version from the MinIO
-   `download archives <https://dl.min.io/server/minio/release/>`__.
-
-   MinIO encourages any organization running older versions of MinIO to 
-   engage with `MinIO Support <https://min.io/pricing?ref=docs>`__ to provide
-   support and guidance for server expansion.
+.. include:: /includes/common-installation.rst
+   :start-after: start-install-minio-binary-desc
+   :end-before: end-install-minio-binary-desc
 
 2) Add TLS/SSL Certificates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO enables :ref:`Transport Layer Security (TLS) <minio-TLS>` 1.2+ 
-automatically upon detecting a valid x.509 certificate (``.crt``) and
-private key (``.key``) in the MinIO ``certs`` directory:
+.. include:: /includes/common-installation.rst
+   :start-after: start-install-minio-tls-desc
+   :end-before: end-install-minio-tls-desc
 
-- For Linux/MacOS: ``${HOME}/.minio/certs``
 
-- For Windows: ``%%USERPROFILE%%\.minio\certs``
+3) Create the ``systemd`` Service File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensure each node has the necessary x.509 certificates in the
-``certs`` directory.
+.. include:: /includes/common-installation.rst
+   :start-after: start-install-minio-systemd-desc
+   :end-before: end-install-minio-systemd-desc
 
-You can override the certificate directory using the 
-:mc-cmd-option:`minio server certs-dir` commandline argument.
+4) Create the Service Environment File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can optionally skip this step to deploy without TLS enabled. MinIO
-strongly recommends *against* non-TLS deployments outside of early development.
+Create an environment file at ``/etc/default/minio``. The MinIO 
+service uses this file as the source of all 
+:ref:`environment variables <minio-server-environment-variables>` used by
+MinIO *and* the ``minio.service`` file.
 
-3) Run the MinIO Server Process
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The following examples assumes that:
 
-Issue the following command on all nodes in the deployment, including the
-existing server pools. This *requires* stopping all MinIO server processes:
+- The deployment has a single server pool consisting of four MinIO server hosts
+  with sequential hostnames.
 
-The following example assumes that:
+  .. code-block:: shell
 
-- The existing deployment consists of a single server pool reachable via
-  ``https://minio{1...4}.example.com``.
+     minio1.example.com   minio3.example.com   
+     minio2.example.com   minio4.example.com   
 
-- The new pool consists of hostnames reachable via 
-  ``https://minio{5...8}.example.com``.
+  Each host has 4 locally attached drives with
+  sequential mount points:
 
-- All nodes in the new pool have sequential hostnames (i.e.
-  ``minio5.example.com``, ``minio6.example.com``, etc.).
+  .. code-block:: shell
 
-- Each node has 4 locally-attached disks mounted using sequential naming
-  semantics (i.e. ``/mnt/disk1/data``, ``/mnt/disk2/data``, etc.).
+     /mnt/disk1/minio   /mnt/disk3/minio 
+     /mnt/disk2/minio   /mnt/disk4/minio
+
+- The new server pool consists of eight new MinIO hosts with sequential
+  hostnames:
+
+  .. code-block:: shell
+
+     minio5.example.com   minio9.example.com
+     minio6.example.com   minio10.example.com
+     minio7.example.com   minio11.example.com
+     minio8.example.com   minio12.example.com
+
+- All hosts have eight locally-attached disks with sequential mount-points:
+
+  .. code-block:: shell
+     
+     /mnt/disk1/minio  /mnt/disk5/minio
+     /mnt/disk2/minio  /mnt/disk6/minio
+     /mnt/disk3/minio  /mnt/disk7/minio
+     /mnt/disk4/minio  /mnt/disk8/minio
+
+- The deployment has a load balancer running at ``https://minio.example.net``
+  that manages connections across all MinIO hosts. The load balancer should
+  not be routing requests to the new hosts at this step, but should have 
+  the necessary configuration updates planned.
+
+Modify the example to reflect your deployment topology:
 
 .. code-block:: shell
    :class: copyable
 
-   export MINIO_ROOT_USER=minio-admin
-   export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
-   export MINIO_SERVER_URL=https://minio.example.net
+   # Set the hosts and volumes MinIO uses at startup
+   # The command uses MinIO expansion notation {x...y} to denote a
+   # sequential series. 
+   # 
+   # The following example starts the MinIO server with two server pools.
+   #
+   # The space delimiter indicates a seperate server pool
+   #
+   # The second set of hostnames and volumes is the newly added pool.
+   # The pool has sufficient stripe size to meet the existing erasure code
+   # parity of the deployment (2 x EC:4)
 
-   minio server https://minio{1...4}.example.com/mnt/disk{1...4}/data \ 
-                https://minio{5...8}.example.com/mnt/disk{1...4}/data \ 
-                --console-address ":9001"
+   MINIO_VOLUMES="https://minio{1...4}.example.net/mnt/disk{1...4}/minio https://minio{5...12}.example.net/mnt/disk{1...8}/minio"
 
-The example command breaks down as follows:
+   # Set all MinIO server options
+   #
+   # The following explicitly sets the MinIO Console listen address to
+   # port 9001 on all network interfaces. The default behavior is dynamic
+   # port selection.
 
-.. list-table::
-   :widths: 40 60
-   :width: 100%
+   MINIO_OPTS="--console-address :9001"
 
-   * - :envvar:`MINIO_ROOT_USER`
-     - The access key for the :ref:`root <minio-users-root>` user.
+   # Set the root username. This user has unrestricted permissions to
+   # perform S3 and administrative API operations on any resource in the
+   # deployment.
+   #
+   # Defer to your organizations requirements for superadmin user name.
 
-       Specify the *same* unique, random, and long string for all
-       nodes in the deployment.
+   MINIO_ROOT_USER=minioadmin
 
-   * - :envvar:`MINIO_ROOT_PASSWORD`
-     - The corresponding secret key to use for the 
-       :ref:`root <minio-users-root>` user.
+   # Set the root password
+   #
+   # Use a long, random, unique string that meets your organizations
+   # requirements for passwords.
 
-       Specify the *same* unique, random, and long string for all
-       nodes in the deployment.
+   MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
 
-   * - :envvar:`MINIO_SERVER_URL`
-     - The URL hostname the MinIO Console uses for connecting to the MinIO 
-       server. Specify the hostname of the load balancer which manages
-       connections to the MinIO deployment. 
-       
-       This variable is *required* if specifying TLS certificates which **do
-       not** contain the IP address of the MinIO Server host as a        
-       :rfc:`Subject Alternative Name <5280#section-4.2.1.6>`. The hostname
-       *must* covered by one of the TLS certificate SAN entries.
+   # Set to the URL of the load balancer for the MinIO deployment
+   # This value *must* match across all MinIO servers. If you do
+   # not have a load balancer, set this value to to any *one* of the
+   # MinIO hosts in the deployment as a temporary measure.
+   MINIO_SERVER_URL="https://minio.example.net"
 
-   * - ``minio{1...4}.example.com/``
-     - The DNS hostname of each existing MinIO server in the deployment.
-       Each set of hostnames describes a single server pool in the
-       deployment.
+You may specify other :ref:`environment variables
+<minio-server-environment-variables>` or server commandline options as required
+by your deployment. All MinIO nodes in the deployment should include the same
+environment variables with the matching values.
 
-       The command uses MinIO expansion notation ``{x...y}`` to denote a
-       sequential series. Specifically, the hostname
-       ``https://minio{1...4}.example.com`` expands to:
-  
-       - ``https://minio1.example.com``
-       - ``https://minio2.example.com``
-       - ``https://minio3.example.com``
-       - ``https://minio4.example.com``
+5) Stop the MinIO Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-       These hostnames should match the existing server pool hostname sets used
-       to start each MinIO server in the deployment.
+.. important::
 
-   * - ``minio{5...8}.example.com/``
-     - The DNS hostname of each server in the new server pool.
+   This step *requires* stopping the MinIO deployment and results in
+   immediate downtime of the object storage API. This downtime period is
+   typically as short as necessary for running terminal commands on multiple
+   hosts simultaneously.
 
-       The command uses MinIO expansion notation ``{x...y}`` to denote a
-       sequential series. Specifically, the hostname
-       ``https://minio{5...8}.example.com`` expands to:
-  
-       - ``https://minio5.example.com``
-       - ``https://minio6.example.com``
-       - ``https://minio7.example.com``
-       - ``https://minio8.example.com``
+   Applications using standard S3 SDKs (e.g. from AWS or MinIO) retry operations
+   automatically, such that downtime is typically not observed from the
+   application side. Planning expansion procedures during a maintenance or
+   low-traffic period may mitigate any potential delay or interruption of
+   services.
 
-       The expanded set of hostnames must include all MinIO server nodes in the
-       server pool. Do **not** use a space-delimited series 
-       (e.g. ``"HOSTNAME1 HOSTNAME2"``), as MinIO treats these as individual
-       server pools instead of grouping the hosts into one server pool.
+MinIO does **not** support rolling restarts and requires stopping
+and starting the entire deployment at once.
 
-   * - ``--console-address ":9001"``
-     - The static port on which the embedded MinIO Console listens for incoming
-       connections.
+Issue the following command on each host machine running a MinIO server in the
+deployment:
 
-       Omit to allow MinIO to select a dynamic port for the MinIO Console. 
-       Browsers opening the root node hostname 
-       ``https://minio1.example.com:9000`` are automatically redirected to the
-       Console.
+.. code-block:: shell
+   :class: copyable
 
-You may specify other :ref:`environment variables 
-<minio-server-environment-variables>` as required by your deployment. 
-All MinIO nodes in the deployment should include the same environment variables
-with the same values for each variable.
+   sudo systemctl stop minio.service
 
-4) Next Steps
+6) Restart the MinIO Deployment with Expanded Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Issue the following commands on each node in the deployment to start the
+MinIO service:
+
+.. include:: /includes/common-installation.rst
+   :start-after: start-install-minio-start-service-desc
+   :end-before: end-install-minio-start-service-desc
+
+7) Next Steps
 ~~~~~~~~~~~~~
 
-- Use the :ref:`MinIO Console <minio-console>` to monitor traffic and confirm
-  cluster storage expansion.
+- Update any load balancers, reverse proxies, or other network control planes
+  to route client requests to the new hosts in the MinIO distributed deployment.
+  While MinIO automatically manages routing internally, having the control
+  planes handle initial connection management may reduce network hops and
+  improve efficiency.
 
-- Update the load balancer managing connections to the MinIO deployment to
-  include the new server pool hostnames
+- Review the :ref:`MinIO Console <minio-console>` to confirm the updated
+  cluster topology and monitor performance.
