@@ -37,23 +37,46 @@ Built-In Policies
 MinIO provides the following built-in policies for assigning to 
 :ref:`users <minio-users>` or :ref:`groups <minio-groups>`:
 
+.. userpolicy:: consoleAdmin
+
+   Grants complete access to all S3 and administrative API operations against
+   all resources on the MinIO server. Equivalent to the following set of
+   actions:
+
+   - :policy-action:`s3:*`
+   - :policy-action:`admin:*`
+
 .. userpolicy:: readonly
 
    Grants read-only permissions for all buckets and objects on the MinIO server.
+   Equivalent to the following set of actions:
+
+   - :policy-action:`s3:GetBucketLocation`
+   - :policy-action:`s3:GetObject`
 
 .. userpolicy:: readwrite
 
    Grants read and write permissions for all buckets and objects on the
-   MinnIO server.
+   MinIO server. Equivalent to :policy-action:`s3:*`.
 
 .. userpolicy:: diagnostics
 
-   Grants permission to perform diagnostic actions on the MinIO server.
+   Grants permission to perform diagnostic actions on the MinIO server. 
+   Specifically includes the following actions:
+
+   - :policy-action:`admin:ServerTrace`
+   - :policy-action:`admin:Profiling`
+   - :policy-action:`admin:ConsoleLog`
+   - :policy-action:`admin:ServerInfo`
+   - :policy-action:`admin:TopLocksInfo`
+   - :policy-action:`admin:OBDInfo`
+   - :policy-action:`admin:BandwidthMonitor`
+   - :policy-action:`admin:Prometheus`
 
 .. userpolicy:: writeonly
 
    Grants write-only permissions for all buckets and objects on the MinIO 
-   server.
+   server. Equivalent to the :policy-action:`s3:PutObject` action.
 
 Use :mc-cmd:`mc admin policy set` to associate a policy to a 
 user or group on a MinIO deployment.

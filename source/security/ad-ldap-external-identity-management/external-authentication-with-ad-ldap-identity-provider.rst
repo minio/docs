@@ -177,32 +177,45 @@ Access Control for Externally Managed Identities
 
 MinIO uses :ref:`Policy Based Access Control (PBAC) <minio-access-management>`
 to define the actions and resources to which an authenticated user has access.
-MinIO supports creating and managing :ref:`policies <minio-policy>` which an
-externally managed user can claim. 
+When using an Active Directory/LDAP server for identity management
+(authentication), MinIO maintains control over access (authorization) 
+through PBAC. 
 
-For identities managed by the external Active Directory / LDAP server, 
-MinIO attempts to match existing policies to the authenticated user's 
-Distinguished Name (DN). 
+When a user successfully authenticates to MinIO using their AD/LDAP
+credentials, MinIO searches for all :ref:`policies <minio-policy>` which
+are explicitly associated to that user's Distinguished Name (DN). 
+Specifically, the policy must be assigned to a user with a matching DN
+using the :mc-cmd:`mc admin policy set` command. 
 
-MinIO also supports querying for the user's AD/LDAP group membership. MinIO
-attempts to match existing policies to the DN for each of the user's groups. See
-:ref:`minio-external-identity-management-ad-ldap-access-control-group-lookup`
-for more information.
-
-For example, consider the following user and group DNs:
+For example, consider the following policy assignments:
 
 .. code-block:: shell
 
-   cn=applicationUser,cn=users,dc=example,dc=com
-   cn=applicationGroup,cn=groups,dc=example,dc=com
+   mc admin policy set consoleAdmin user='cn=sisko,cn=users,dc=example,dc=com'
+   mc admin policy set readWrite user='cn=dax,cn=users,dc=example,dc=com'
+   mc admin policy set diagnostics user='cn=dax,cn=users,dc=example,dc=com'
 
-MinIO attaches the policies with names matching the *full* DN for the user and
-group to the authenticated user.
+- MinIO would assign an authenticated user with DN matching 
+  ``cn=sisko,cn=users,dc=example,dc=com`` the :userpolicy:`consoleAdmin`
+  policy, granting complete access to the MinIO server.
 
-The authenticated users complete set of permissions consists of its
-explicitly assigned and inherited policies. If the user DN and group DNs
-do not match any policies on the MinIO deployment, MinIO denies authorization
-for any and all operations issued by that user.
+- MinIO would assign an authenticated user with DN matching
+  ``cn=dax,cn=users,dc=example,dc=com`` both the :userpolicy:`readwrite` and
+  :userpolicy:`diagnostics` policies, granting general read/write access to the
+  MinIO server *and* access to diagnostic administrative operations.
+
+- MinIO would assign no policies to an authenticated user with DN matching 
+  ``cn=quark,cn=users,dc=example,dc=com`` and deny all access to API operations.
+
+MinIO also supports querying for the user's AD/LDAP group membership. MinIO
+attempts to match existing policies to the DN for each of the user's groups. The
+authenticated users complete set of permissions consists of its explicitly
+assigned and group-inherited policies. See
+:ref:`minio-external-identity-management-ad-ldap-access-control-group-lookup`
+for more information.
+
+MinIO uses deny-by-default behavior where a user with no explicitly assigned or
+group-inherited policies cannot access any resource on the MinIO deployment.
 
 MinIO provides :ref:`built-in policies <minio-policy-built-in>` for basic access
 control. You can create new policies using the :mc:`mc admin policy` command.
@@ -219,6 +232,23 @@ groups in which the authenticated user has membership. MinIO
 attempts to match existing :ref:`policies <minio-policy>` to each group
 DN and assigns each matching policy to the authenticated user.
 
+For example, consider the following policy assignments:
+
+.. code-block:: shell
+
+   mc admin policy set consoleAdmin group='cn=ops,cn=groups,dc=example,dc=com'
+   mc admin policy set diagnostics group='cn=engineering,cn=groups,dc=example,dc=com'
+
+- MinIO would assign any authenticating user with membership in the
+  ``cn=ops,cn=groups,dc=example,dc=com`` AD/LDAP group the
+  :userpolicy:`consoleAdmin` policy, granting complete access to the MinIO
+  server.
+
+- MinIO would assign any authenticating user with membership in the
+  ``cn=engineering,cn=groups,dc=example,dc=com`` AD/LDAP group the
+  :userpolicy:`diagnostics` policy, granting access to diagnostic administrative
+  operations.
+
 The following tabs provide a reference of the environment variables and
 configuration settings required for enabling group lookups:
 
@@ -231,7 +261,7 @@ configuration settings required for enabling group lookups:
 
       See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
       reference documentation for more information on these variables. The
-      :ref:`minio-authenticate-using-openid-generic` tutorial includes complete
+      :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
       instructions on setting these values.
 
    .. tab-item:: Configuration Setting
@@ -242,7 +272,7 @@ configuration settings required for enabling group lookups:
 
       See the :mc-conf:`identity_ldap` reference documentation for more
       information on these settings. The
-      :ref:`minio-authenticate-using-openid-generic` tutorial includes complete
+      :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
       instructions on setting these variables.
 
 
