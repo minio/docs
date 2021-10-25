@@ -721,6 +721,15 @@ services:
    Allows listing configured remote storage tiers using the
    :mc-cmd:`mc admin tier` command.
 
+.. policy-action:: admin:BandwidthMonitor
+
+   Allows retrieving metrics related to current bandwidth consumption.
+
+.. policy-action:: admin:Prometheus
+
+   Allows access to MinIO :ref:`metrics <minio-metrics-and-alerts-endpoints>`. 
+   Only required if MinIO requires authentication for scraping metrics.
+
 ``mc admin`` Policy Condition Keys
 ----------------------------------
 
