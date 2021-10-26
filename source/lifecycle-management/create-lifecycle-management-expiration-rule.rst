@@ -59,27 +59,6 @@ transition lifecycle management rules on any bucket in the cluster:.
    :language: json
    :class: copyable
 
-Expire Objects after Calendar Date
-----------------------------------
-
-Use :mc-cmd:`mc ilm add` with :mc-cmd-option:`~mc ilm add expiry-date` to
-expire bucket contents after a specific date.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc ilm add ALIAS/PATH --expiry-date "DATE"
-
-- Replace :mc-cmd:`ALIAS <mc ilm add TARGET>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
-
-- Replace :mc-cmd:`PATH <mc ilm add TARGET>` with the path to the bucket on the
-  S3-compatible host.
-
-- Replace :mc-cmd:`DATE <mc ilm add expiry-date>` with the calendar date after
-  which to expire the object. For example, specify "2021-01-01" to expire
-  objects after January 1st, 2021.
-
 Expire Objects after Number of Days
 -----------------------------------
 

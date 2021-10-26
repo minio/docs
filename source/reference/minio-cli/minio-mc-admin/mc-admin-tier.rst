@@ -162,6 +162,8 @@ Syntax
 
       The name to associate with the new remote tier. The name *must*
       be unique across all configured tiers on the MinIO cluster.
+
+      You **must** specify the tier in all-caps, e.g. ``WARM_TIER``.
    
    .. mc-cmd:: endpoint
       :option:

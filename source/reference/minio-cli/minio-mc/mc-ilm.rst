@@ -36,33 +36,12 @@ Expiry vs Transition
 MinIO supports specifying both expiry and transition rules in the same
 bucket or bucket prefix. MinIO can execute an expiration rule on an object
 regardless of its transition status. Use
-:mc-cmd:`mc ilm list` to review the currently configured object lifecycle
+:mc-cmd:`mc ilm ls` to review the currently configured object lifecycle
 management rules for any potential interactions between expiry and transition
 rules.
 
 Examples
 --------
-
-Expire Bucket Contents After Specific Date
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Use :mc-cmd:`mc ilm add` with :mc-cmd-option:`~mc ilm add expiry-date` to
-expire bucket contents after a specific date.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc ilm add ALIAS/PATH --expiry-date "DATE"
-
-- Replace :mc-cmd:`ALIAS <mc ilm add TARGET>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
-
-- Replace :mc-cmd:`PATH <mc ilm add TARGET>` with the path to the bucket on the
-  S3-compatible host.
-
-- Replace :mc-cmd:`DATE <mc ilm add expiry-date>` with the calendar date after
-  which to expire the object. For example, specify "2021-01-01" to expire
-  objects after January 1st, 2021.
 
 Expire Bucket Contents After Number of Days
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,17 +67,17 @@ expire bucket contents a number of days after object creation:
 List Bucket Lifecycle Management Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc ilm list` to list a bucket's lifecycle management rules:
+Use :mc-cmd:`mc ilm ls` to list a bucket's lifecycle management rules:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm list ALIAS/PATH
+   mc ilm ls ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc ilm list TARGET>` with the 
+- Replace :mc-cmd:`ALIAS <mc ilm ls TARGET>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc ilm list TARGET>` with the path to the bucket on the
+- Replace :mc-cmd:`PATH <mc ilm ls TARGET>` with the path to the bucket on the
   S3-compatible host.
 
 Remove a Bucket Lifecycle Management Rule
@@ -124,7 +103,7 @@ Use :mc-cmd:`mc ilm remove` to remove a bucket lifecycle management rule:
 Syntax
 ------
 
-.. mc-cmd:: list
+.. mc-cmd:: ls
    :fullpath:
 
    Lists the current lifecycle management rules of the specified bucket. The
@@ -133,7 +112,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc ilm list TARGET [FLAGS]
+      mc ilm ls TARGET [FLAGS]
 
    The subcommand supports the following arguments:
 
@@ -147,7 +126,7 @@ Syntax
 
       .. code-block:: shell
 
-         mc ilm list play/mybucket
+         mc ilm ls play/mybucket
    
    .. mc-cmd:: expiry
       :option:
@@ -222,8 +201,13 @@ Syntax
       after being created. MinIO marks the object for deletion once the
       system host datetime passes that calendar date.
 
-      Specifying a calendar date that is *prior* to the current system host
-      datetime marks all objects covered by the rule for deletion.
+      Exercise caution when using this option, as its behavior can result in
+      immediate expiration of uploaded objects. Any objects created *after* 
+      the specified expiration date are automatically eligible for expiration. 
+      Similarly, specifying a calendar date that is *prior* to the current 
+      system host datetime marks all objects covered by the rule for deletion. 
+      Consider immediately removing any ILM rule using this option once the
+      specified calendar date has passed.
 
       For versioned buckets, the expiry rule applies only to the *current*
       object version. Use the 
@@ -304,10 +288,20 @@ Syntax
       :mc-cmd-option:`~mc ilm add storage-class` once the system host datetime
       passes that calendar date.
 
+      Exercise caution when using this option, as its behavior can result in
+      immediate transition of uploaded objects. Any objects created *after* 
+      the specified transition date are automatically eligible for transition. 
+      Similarly, specifying a calendar date that is *prior* to the current 
+      system host datetime marks all objects covered by the rule for transition. 
+      Consider immediately removing any ILM rule using this option once the
+      specified calendar date has passed.
+
       For versioned buckets, the transition rule applies only to the *current*
       object version. Use the 
       :mc-cmd-option:`~mc ilm add noncurrentversion-transition-days` option
       to apply transition behavior to noncurrent object versions.
+
+      Requires specifying :mc-cmd-option:`~mc ilm add storage-class`.
 
       MinIO uses a scanner process to check objects against all configured
       lifecycle management rules. Slow scanning due to high IO workloads or
@@ -327,6 +321,8 @@ Syntax
       :mc-cmd-option:`~mc ilm add noncurrentversion-transition-days` option
       to apply transition behavior to noncurrent object versions.
 
+      Requires specifying :mc-cmd-option:`~mc ilm add storage-class`.
+
       MinIO uses a scanner process to check objects against all configured
       lifecycle management rules. Slow scanning due to high IO workloads or
       limited system resources may delay application of lifecycle management
@@ -342,7 +338,8 @@ Syntax
       :mc-cmd-option:`~mc ilm add storage-class` once the system host datetime
       passes that calendar date.
 
-      This option has no effect on non-versioned buckets.
+      This option has no effect on non-versioned buckets. Requires specifying
+      :mc-cmd-option:`~mc ilm add noncurrentversion-transition-storage-class`.
 
       This option has the same behavior as the 
       S3 ``NoncurrentVersionTransition`` action.
@@ -352,18 +349,20 @@ Syntax
       limited system resources may delay application of lifecycle management
       rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
+   .. mc-cmd:: noncurrentversion-transition-storage-class
+      :option:
+
+      The remote storage tier to which MinIO 
+      :ref:`transitions noncurrent objects versions 
+      <minio-lifecycle-management-tiering>`. 
+      Specify a remote storage tier created by :mc-cmd:`mc admin tier`.
+
    .. mc-cmd:: storage-class
       :option:
 
       The remote storage tier to which MinIO 
       :ref:`transition objects <minio-lifecycle-management-tiering>`.
       Specify a remote storage tier created by :mc-cmd:`mc admin tier`. 
-
-      If using :mc-cmd:`mc ilm add` against an Amazon S3 service, this argument
-      is the Amazon S3 storage class to transition objects covered by the rule.
-      See :s3-docs:`Transition objects using Amazon S3 Lifecycle
-      <lifecycle-transition-general-considerations.html>` for more information
-      on S3 storage classes.
 
    .. mc-cmd:: disable
       :option:
@@ -405,7 +404,7 @@ Syntax
 
       *Required*
 
-      The unique ID of the rule. Use :mc-cmd:`mc ilm list` to list bucket rules
+      The unique ID of the rule. Use :mc-cmd:`mc ilm ls` to list bucket rules
       and retrieve the ``id`` for the rule you want to modify.
 
    .. mc-cmd:: tags
@@ -449,6 +448,14 @@ Syntax
 
       The number of days to retain an object after being created. MinIO
       marks the object for deletion after the specified number of days pass.
+
+      Exercise caution when using this option, as its behavior can result in
+      immediate expiration of uploaded objects. Any objects created *after* 
+      the specified expiration date are automatically eligible for expiration. 
+      Similarly, specifying a calendar date that is *prior* to the current 
+      system host datetime marks all objects covered by the rule for deletion. 
+      Consider immediately removing any ILM rule using this option once the
+      specified calendar date has passed.
 
       For versioned buckets, the expiry rule applies only to the *current*
       object version. Use the 
@@ -508,10 +515,20 @@ Syntax
       :mc-cmd-option:`~mc ilm edit storage-class` once the system host datetime
       passes that calendar date.
 
+      Exercise caution when using this option, as its behavior can result in
+      immediate transition of uploaded objects. Any objects created *after* 
+      the specified transition date are automatically eligible for transition. 
+      Similarly, specifying a calendar date that is *prior* to the current 
+      system host datetime marks all objects covered by the rule for transition. 
+      Consider immediately removing any ILM rule using this option once the
+      specified calendar date has passed.
+
       For versioned buckets, the transition rule applies only to the *current*
       object version. Use the 
       :mc-cmd-option:`~mc ilm edit noncurrentversion-transition-days` option
       to apply transition behavior to noncurrent object versions.
+
+      Requires specifying :mc-cmd-option:`~mc ilm edit storage-class`.
 
       MinIO uses a scanner process to check objects against all configured
       lifecycle management rules. Slow scanning due to high IO workloads or
@@ -531,6 +548,8 @@ Syntax
       :mc-cmd-option:`~mc ilm edit noncurrentversion-transition-days` option
       to apply transition behavior to noncurrent object versions.
 
+      Requires specifying :mc-cmd-option:`~mc ilm edit storage-class`.
+
       MinIO uses a scanner process to check objects against all configured
       lifecycle management rules. Slow scanning due to high IO workloads or
       limited system resources may delay application of lifecycle management
@@ -546,7 +565,8 @@ Syntax
       :mc-cmd-option:`~mc ilm edit storage-class` once the system host datetime
       passes that calendar date.
 
-      This option has no effect on non-versioned buckets.
+      This option has no effect on non-versioned buckets. Requires specifying
+      :mc-cmd-option:`~mc ilm edit noncurrentversion-transition-storage-class`.
 
       This option has the same behavior as the 
       S3 ``NoncurrentVersionTransition`` action.
@@ -556,6 +576,18 @@ Syntax
       limited system resources may delay application of lifecycle management
       rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
+   .. mc-cmd:: noncurrentversion-transition-storage-class
+      :option:
+
+      The remote storage tier to which MinIO 
+      :ref:`transitions noncurrent objects versions 
+      <minio-lifecycle-management-tiering>`. 
+      Specify a remote storage tier created by :mc-cmd:`mc admin tier`.
+
+      MinIO does *not* automatically migrate objects from the previously
+      specified remote tier to the new remote tier. MinIO continues to
+      route requests for objects stored on the old remote tier.
+
    .. mc-cmd:: storage-class
       :option:
 
@@ -563,11 +595,9 @@ Syntax
       :ref:`transition objects <minio-lifecycle-management-tiering>`.
       Specify a remote storage tier created by :mc-cmd:`mc admin tier`. 
 
-      If using :mc-cmd:`mc ilm edit` against an Amazon S3 service, this argument
-      is the Amazon S3 storage class to transition objects covered by the rule.
-      See :s3-docs:`Transition objects using Amazon S3 Lifecycle
-      <lifecycle-transition-general-considerations.html>` for more information
-      on S3 storage classes.
+      MinIO does *not* automatically migrate objects from the previously
+      specified remote tier to the new remote tier. MinIO continues to
+      route requests for objects stored on the old remote tier.
 
    .. mc-cmd:: disable
       :option:
@@ -604,7 +634,7 @@ Syntax
 
       *Required*
       
-      The unique ID of the rule. Use :mc-cmd:`mc ilm list` to list bucket rules
+      The unique ID of the rule. Use :mc-cmd:`mc ilm ls` to list bucket rules
       and retrieve the ``id`` for the rule you want to remove.
 
       Mutually exclusive with :mc-cmd-option:`mc ilm remove all`
