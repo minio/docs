@@ -49,15 +49,9 @@ objects. Object transition is *not* a replacement for backup/recovery
 strategies such as :ref:`minio-bucket-replication`.
 
 Use the :mc-cmd:`mc admin tier` command to create a remote target for tiering
-data to a supported Cloud Service Provider object storage You can then use the
-:mc-cmd:`mc ilm add` command with one of the following commandline options to
-create new transition rules on a bucket:
-
-- :mc-cmd-option:`mc ilm add transition-date` to transition objects after
-  a specified calendar date.
-
-- :mc-cmd-option:`mc ilm add transition-days` to transition object after
-  a specified number of calendar days.
+data to a supported Cloud Service Provider object storage. You can then use the
+:mc-cmd-option:`mc ilm add transition-days` command to transition objects to the
+remote tier after a specified number of calendar days.
 
 Versioned Buckets
 ~~~~~~~~~~~~~~~~~
@@ -68,7 +62,8 @@ on :ref:`versioned buckets <minio-bucket-versioning>`. Specifically, MinIO by
 default applies the transition operation to the *current* object version. 
 
 To transition noncurrent object versions, specify the 
-:mc-cmd-option:`~mc ilm add noncurrentversion-transition-days` option
+:mc-cmd-option:`~mc ilm add noncurrentversion-transition-days` and
+:mc-cmd-option:`~mc ilm add noncurrentversion-transition-storage-class` options
 when creating the transition rule. 
 
 .. _minio-lifecycle-management-expiration:

@@ -141,7 +141,7 @@ The example above uses the following arguments:
 
 .. list-table::
    :header-rows: 1
-   :widths: 40 60
+   :widths: 30 70
    :width: 100%
 
    * - Argument
@@ -152,8 +152,9 @@ The example above uses the following arguments:
        the S3 remote tier.
    
    * - :mc-cmd:`TIER_NAME <mc admin tier add TIER_NAME>`
-     - The name to associate with the new S3 remote storage tier. This value
-       is required in the next step.
+     - The name to associate with the new S3 remote storage tier. Specify the
+       name in all-caps, e.g. ``S3_TIER``. This value is required in the next
+       step.
 
    * - :mc-cmd:`HOSTNAME <mc admin tier add endpoint>`
      - The URL endpoint for the S3 storage backend.
@@ -198,16 +199,16 @@ The example above uses the following arguments:
 3) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc ilm list` command to review the configured transition
+Use the :mc-cmd:`mc ilm ls` command to review the configured transition
 rules:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm list ALIAS/PATH --transition
+   mc ilm ls ALIAS/PATH --transition
 
-- Replace :mc-cmd:`ALIAS <mc ilm list TARGET>` with the :mc:`alias <mc alias>`
+- Replace :mc-cmd:`ALIAS <mc ilm ls TARGET>` with the :mc:`alias <mc alias>`
   of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc ilm list TARGET>` with the name of the bucket for
+- Replace :mc-cmd:`PATH <mc ilm ls TARGET>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.
