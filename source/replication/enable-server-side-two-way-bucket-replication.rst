@@ -302,7 +302,7 @@ A\) Create Replication Administrators
       wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationAdminPolicy.json | \
       mc admin policy add Baker ReplicationAdminPolicy /dev/stdin
       mc admin user add Baker bakerReplicationAdmin LongRandomSecretKey
-      mc admin policy set baker ReplicationAdminPolicy user=bakerReplicationAdmin
+      mc admin policy set Baker ReplicationAdminPolicy user=bakerReplicationAdmin
 
 B\) Create Remote Replication User
    The following code creates policies and users for supporting synchronizing data
