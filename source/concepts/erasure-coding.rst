@@ -37,7 +37,7 @@ see :ref:`minio-ec-parity`.
 
 Erasure coding requires a minimum of 4 drives is only available with 
 :ref:`distributed <minio-installation-comparison>` MinIO deployments. Erasure
-coding is is a core requirement for the following MinIO features:
+coding is a core requirement for the following MinIO features:
 
 - :ref:`Object Versioning <minio-bucket-versioning>`
 - :ref:`Server-Side Replication <minio-bucket-replication>`
