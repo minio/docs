@@ -36,22 +36,29 @@ following public cloud storage services:
 - :ref:`Microsoft Azure Blob Storage 
   <minio-lifecycle-management-transition-to-azure>`
 
-MinIO object transition supports use cases like moving aged data from
-MinIO clusters in private or public cloud infrastructure to low-cost
-public cloud storage solutions.
-
-MinIO manages retrieving tiered objects on-the-fly without any additional
-application-side logic. MinIO retains the minimum object metadata required to
-support retrieving objects transitioned to a remote tier. MinIO therefore
-*requires* exclusive access to the data on the remote storage tier. Object
-retrieval assumes no external mutation, migration, or deletion of stored
-objects. Object transition is *not* a replacement for backup/recovery 
-strategies such as :ref:`minio-bucket-replication`.
+MinIO object transition supports use cases like moving aged data from MinIO
+clusters in private or public cloud infrastructure to low-cost private or public cloud
+storage solutions. MinIO manages retrieving tiered objects on-the-fly without
+any additional application-side logic. 
 
 Use the :mc-cmd:`mc admin tier` command to create a remote target for tiering
 data to a supported Cloud Service Provider object storage. You can then use the
 :mc-cmd-option:`mc ilm add transition-days` command to transition objects to the
 remote tier after a specified number of calendar days.
+
+Exclusive Access to Remote Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-tiering.rst
+   :start-after: start-transition-bucket-access-desc
+   :end-before: end-transition-bucket-access-desc
+
+Availability of Remote Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-tiering.rst
+   :start-after: start-transition-data-loss-desc
+   :end-before: end-transition-data-loss-desc
 
 Versioned Buckets
 ~~~~~~~~~~~~~~~~~
