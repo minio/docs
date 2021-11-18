@@ -82,3 +82,48 @@ on the deployment. See :ref:`minio-users` and :ref:`MinIO Policy Based Access Co
 complete documentation on MinIO users and policies respectively.
 
 .. end-create-transition-user-desc
+
+.. start-transition-bucket-access-desc
+
+MinIO *requires* exclusive access to the transitioned data on the remote storage
+tier. MinIO ignores any objects in the remote bucket or bucket prefix not
+explicitly managed by the MinIO deployment. Automatic transition and transparent
+object retrieval depend on the following assumptions:
+
+- No external mutation, migration, or deletion of objects on the remote storage. 
+- No lifecycle management rules (e.g. transition or expiration) on the remote 
+  storage bucket.
+
+MinIO stores all transitioned objects in the remote storage bucket or resource
+under a unique per-deployment prefix value. This value is not intended to
+support identifying the source deployment from the backend. MinIO supports an
+additional optional human-readable prefix when configuring the remote target,
+which may facilitate operations related to diagnostics, maintenance, or disaster
+recovery. 
+
+MinIO recommends specifying this optional prefix for remote storage tiers which
+contain other data, including transitioned objects from other MinIO deployments.
+This tutorial includes the necessary syntax for setting this prefix.
+
+.. end-transition-bucket-access-desc
+
+.. start-transition-data-loss-desc
+
+MinIO creates metadata for each transitioned object that identifies its location
+on the remote storage. This metadata is required for accessing the object, such
+that applications cannot access a transition object independent of MinIO.
+Availability of the transitioned data therefore depends on the same core
+protections that :ref:`erasure coding <minio-erasure-coding>` and distributed
+deployment topologies provide for all objects on the MinIO deployment. Using
+object transition does not provide any additional business continuity or
+disaster recovery benefits.
+
+Workloads that require :abbr:`BC/DR (Business Continuity/Disaster Recovery)`
+protections should implement MinIO :ref:`Server-Side replication
+<minio-bucket-replication-serverside>`. Replication ensures objects remains
+preserved on the remote replication site, such that you can resynchronize from
+the remote in the event of partial or total data loss. See
+:ref:`minio-replication-behavior-resync` for more complete documentation on
+using replication to recover after partial or total data loss.
+
+.. end-transition-data-loss-desc

@@ -232,6 +232,12 @@ MinIO requires explicitly enabling replication of delete operations using the
 :mc-cmd-option:`mc replicate edit replicate`. This procedure includes the
 required flags for enabling replication of delete operations and delete markers.
 
+MinIO does *not* replicate delete operations resulting from the application of
+:ref:`lifecycle management expiration rules
+<minio-lifecycle-management-expiration>`. Configure matching expiration rules
+for the bucket on all replication sites to ensure consistent application of
+object expiration.
+
 Replication of Encrypted Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -412,7 +418,7 @@ the remote as a target:
   the following replication features:
   
   - :ref:`Replication of Deletes <minio-replication-behavior-delete>` 
-  - :ref:`Replication of existing Objects <minio-replication-behavior-existing-objects>`
+  - :ref:`Replication of Existing Objects <minio-replication-behavior-existing-objects>`
   
   See :mc-cmd-option:`mc replicate add replicate` for more complete
   documentation. Omit these fields to disable replication of delete operations

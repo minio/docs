@@ -86,17 +86,19 @@ lifecycle management rules. Slow scanning due to high IO workloads or
 limited system resources may delay application of lifecycle management
 rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
-Exclusive Bucket Access
-~~~~~~~~~~~~~~~~~~~~~~~
+Exclusive Access to Remote Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO retains the minimum object metadata required to
-support retrieving objects transitioned to a remote tier. MinIO therefore
-*requires* exclusive access to the data on the remote storage tier. Object
-retrieval assumes no external mutation, migration, or deletion of stored
-objects.
+.. include:: /includes/common-minio-tiering.rst
+   :start-after: start-transition-bucket-access-desc
+   :end-before: end-transition-bucket-access-desc
 
-MinIO also ignores any objects in the remote bucket or bucket prefix not
-explicitly managed by MinIO. 
+Availability of Remote Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-tiering.rst
+   :start-after: start-transition-data-loss-desc
+   :end-before: end-transition-data-loss-desc
 
 Procedure
 ---------
@@ -122,7 +124,7 @@ service as the remote storage tier:
    mc admin tier add gcs TARGET TIER_NAME \
       --endpoint https://HOSTNAME \
       --bucket BUCKET \
-      --prefix PREFIX
+      --prefix PREFIX \
       --credentials-file CREDENTIALS \
       --region REGION
 
@@ -155,7 +157,16 @@ The example above uses the following arguments:
 
    * - :mc-cmd:`PREFIX <mc admin tier add prefix>`
      - The optional bucket prefix within which MinIO transitions objects.
-       Omit this argument to transition objects to the bucket root.
+
+       MinIO stores all transitioned objects in the specified ``BUCKET`` under a
+       unique per-deployment prefix value. Omit this argument to use only that
+       value for isolating and organizing data within the remote storage.
+
+       MinIO recommends specifying this optional prefix for remote storage tiers
+       which contain other data, including transitioned objects from other MinIO
+       deployments. This prefix should provide a clear reference back to the
+       source MinIO deployment to faciliate ease of operations related to
+       diagnostics, maintenance, or disaster recovery.
 
    * - :mc-cmd:`CREDENTIALS <mc admin tier add credentials-file>`
      - The `credential file
@@ -178,7 +189,7 @@ The example above uses the following arguments:
    :end-before: end-create-transition-rule-desc
 
 
-3) Verify the Transition Rule
+4) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the :mc-cmd:`mc ilm ls` command to review the configured transition
