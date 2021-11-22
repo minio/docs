@@ -40,7 +40,7 @@ MinIO provides the following built-in policies for assigning to
 .. userpolicy:: consoleAdmin
 
    Grants complete access to all S3 and administrative API operations against
-   all resources on the MinIO server. Equivalent to the following set of
+   all resources on the MinIO deployment. Equivalent to the following set of
    actions:
 
    - :policy-action:`s3:*`
@@ -48,11 +48,24 @@ MinIO provides the following built-in policies for assigning to
 
 .. userpolicy:: readonly
 
-   Grants read-only permissions for all buckets and objects on the MinIO server.
+   Grants read-only permissions on any object on the MinIO deployment. The GET
+   action *must* apply to a specific object without requiring any listing.
    Equivalent to the following set of actions:
 
    - :policy-action:`s3:GetBucketLocation`
    - :policy-action:`s3:GetObject`
+
+   For example, this policy specifically supports GET operations on objects at a
+   specific path (e.g. ``GET play/mybucket/object.file``), such as:
+
+   - :mc-cmd:`mc cp`
+   - :mc-cmd:`mc stat`
+   - :mc-cmd:`mc head`
+   - :mc-cmd:`mc cat`
+
+   The exclusion of listing permissions is intentional, as typical use cases
+   do not intend for a "read-only" role to have complete discoverability
+   (listing all buckets and objects) on the object storage resource.
 
 .. userpolicy:: readwrite
 
@@ -61,7 +74,7 @@ MinIO provides the following built-in policies for assigning to
 
 .. userpolicy:: diagnostics
 
-   Grants permission to perform diagnostic actions on the MinIO server. 
+   Grants permission to perform diagnostic actions on the MinIO deployment. 
    Specifically includes the following actions:
 
    - :policy-action:`admin:ServerTrace`
@@ -75,8 +88,10 @@ MinIO provides the following built-in policies for assigning to
 
 .. userpolicy:: writeonly
 
-   Grants write-only permissions for all buckets and objects on the MinIO 
-   server. Equivalent to the :policy-action:`s3:PutObject` action.
+   Grants write-only permissions to any namespace (bucket and path to object)
+   the MinIO deployment. The PUT action *must* apply to a specific object
+   location without requiring any listing. 
+   Equivalent to the :policy-action:`s3:PutObject` action.
 
 Use :mc-cmd:`mc admin policy set` to associate a policy to a 
 user or group on a MinIO deployment.
