@@ -179,3 +179,51 @@ Server Configuration. Each MinIO server includes its own embedded MinIO
 Console.
 
 .. end-install-minio-console-desc
+
+.. start-local-jbod-desc
+
+MinIO strongly recommends local :abbr:`JBOD (Just a Bunch of Disks)` arrays with
+XFS-formatted disks for best performance. RAID or similar technologies do not
+provide additional resilience or availability benefits when used with
+distributed MinIO deployments, and typically reduce system performance. 
+
+Ensure all nodes in the |deployment| use the same type (NVMe, SSD, or HDD)  of
+drive with identical capacity (e.g. ``N`` TB) . MinIO does not distinguish drive
+types and does not benefit from mixed storage types. Additionally. MinIO limits
+the size used per disk to the smallest drive in the deployment. For example, if
+the deployment has 15 10TB disks and 1 1TB disk, MinIO limits the per-disk
+capacity to 1TB.
+
+MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential
+series of disks when creating the new |deployment|, where all nodes in the
+|deployment| have an identical set of mounted drives. MinIO also
+requires that the ordering of physical disks remain constant across restarts,
+such that a given mount point always points to the same formatted disk. MinIO
+therefore **strongly recommends** using ``/etc/fstab`` or a similar file-based
+mount configuration to ensure that drive ordering cannot change after a reboot.
+For example:
+
+.. code-block:: shell
+
+   $ mkfs.xfs /dev/sdb -L DISK1
+   $ mkfs.xfs /dev/sdc -L DISK2
+   $ mkfs.xfs /dev/sdd -L DISK3
+   $ mkfs.xfs /dev/sde -L DISK4
+
+   $ nano /etc/fstab
+
+     # <file system>  <mount point>  <type>  <options>         <dump>  <pass>
+     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime  0       2
+     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime  0       2
+     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
+     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
+
+You can then specify the entire range of disks using the expansion notation
+``/mnt/disk{1...4}``. If you want to use a specific subfolder on each disk,
+specify it as ``/mnt/disk{1...4}/minio``.
+
+MinIO **does not** support arbitrary migration of a drive with existing MinIO
+data to a new mount position, whether intentional or as the result of OS-level
+behavior.
+
+.. end-local-jbod-desc
