@@ -37,9 +37,9 @@ following public cloud storage services:
   <minio-lifecycle-management-transition-to-azure>`
 
 MinIO object transition supports use cases like moving aged data from MinIO
-clusters in private or public cloud infrastructure to low-cost private or public cloud
-storage solutions. MinIO manages retrieving tiered objects on-the-fly without
-any additional application-side logic. 
+clusters in private or public cloud infrastructure to low-cost private or public
+cloud storage solutions. MinIO manages retrieving tiered objects on-the-fly
+without any additional application-side logic. 
 
 Use the :mc-cmd:`mc admin tier` command to create a remote target for tiering
 data to a supported Cloud Service Provider object storage. You can then use the

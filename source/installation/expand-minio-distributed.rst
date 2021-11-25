@@ -95,38 +95,11 @@ Configuring DNS to support MinIO is out of scope for this procedure.
 Local JBOD Storage with Sequential Mounts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO strongly recommends local :abbr:`JBOD (Just a Bunch of Disks)` arrays for
-best performance. RAID or similar technologies do not provide additional
-resilience or availability benefits when used with distributed MinIO
-deployments, and typically reduce system performance.
+.. |deployment| replace:: server pool
 
-MinIO generally recommends ``xfs`` formatted drives for best performance. 
-
-MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential
-series of disks when creating a server pool. MinIO therefore *requires*
-using sequentially-numbered drives on each node in the deployment, where the
-number sequence is *duplicated* across all nodes. For example, the following
-sequence of mounted drives would support a 4-drive per node server pool:
-
-- ``/mnt/disk1``
-- ``/mnt/disk2``
-- ``/mnt/disk3``
-- ``/mnt/disk4``
-
-Each mount should correspond to a locally-attached drive of the same type and
-size. If using ``/etc/fstab`` or a similar file-based mount configuration, 
-MinIO **strongly recommends** using drive UUID or labels to assign drives to
-mounts. This ensures that drive ordering cannot change after a reboot. 
-
-You can specify the entire range of disks using the expansion notation
-``/mnt/disk{1...4}``. If you want to use a specific subfolder on each disk,
-specify it as ``/mnt/disk{1...4}/minio``.
-
-MinIO limits the size used per disk to the smallest drive in the
-deployment. For example, if the deployment has 15 10TB disks and 1 1TB disk,
-MinIO limits the per-disk capacity to 1TB. Similarly, use the same model NVME,
-SSD, or HDD drives consistently across all nodes. Mixing drive types in the
-same distributed deployment can result in unpredictable performance.
+.. include:: /includes/common-installation.rst
+   :start-after: start-local-jbod-desc
+   :end-before: end-local-jbod-desc
 
 .. admonition:: Network File System Volumes Break Consistency Guarantees
    :class: note
@@ -164,11 +137,16 @@ Considerations
 Homogeneous Node Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO strongly recommends selecting a hardware configuration for all nodes in
-the new server pool. Ensure the hardware (CPU, memory, motherboard, storage
-adapters) and software (operating system, kernel settings, system services) is
-consistent across all nodes in the pool. The new pool may exhibit unpredictable
-performance if nodes have heterogeneous hardware or software configurations.
+MinIO strongly recommends selecting substantially similar hardware
+configurations for all nodes in the new server pool. Ensure the hardware (CPU,
+memory, motherboard, storage adapters) and software (operating system, kernel
+settings, system services) is consistent across all nodes in the pool. 
+
+The new pool may exhibit unpredictable performance if nodes have heterogeneous
+hardware or software configurations. Workloads that benefit from storing aged
+data on lower-cost hardware should instead deploy a dedicated "warm" or "cold"
+MinIO deployment and :ref:`transition <minio-lifecycle-management-tiering>`
+data to that tier.
 
 The new server pool does **not** need to be substantially similar in hardware
 and software configuration to any existing server pool, though this may allow
