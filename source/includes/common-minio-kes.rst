@@ -338,8 +338,8 @@ deployment. This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and
    :class: copyable
 
    export MINIO_KMS_KES_ENDPOINT=https://HOSTNAME:7373
-   export MINIO_KMS_KES_CLIENT_CERT=~/minio-kes.cert
-   export MINIO_KMS_KES_CLIENT_KEY=~/minio-kes.key
+   export MINIO_KMS_KES_CERT_FILE=~/minio-kes.cert
+   export MINIO_KMS_KES_KEY_FILE=~/minio-kes.key
    export MINIO_KMS_KES_CAPATH=~/server.cert
    export MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
