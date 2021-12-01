@@ -62,7 +62,7 @@ Use :mc:`mc mirror` to mirror files from a filesystem to an S3 Host:
 Continuously Mirror a Local Directory to an S3-Compatible Host
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc watch` with :mc-cmd-option:`~mc mirror watch` to continuously mirror
+Use :mc:`mc mirror` with :mc-cmd-option:`~mc mirror watch` to continuously mirror
 files from a filesystem to an S3-compatible host:
 
 .. code-block::
