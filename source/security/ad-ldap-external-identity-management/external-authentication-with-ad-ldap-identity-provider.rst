@@ -192,8 +192,7 @@ For example, consider the following policy assignments:
 .. code-block:: shell
 
    mc admin policy set consoleAdmin user='cn=sisko,cn=users,dc=example,dc=com'
-   mc admin policy set readWrite user='cn=dax,cn=users,dc=example,dc=com'
-   mc admin policy set diagnostics user='cn=dax,cn=users,dc=example,dc=com'
+   mc admin policy set readwrite,diagnostics user='cn=dax,cn=users,dc=example,dc=com'
 
 - MinIO would assign an authenticated user with DN matching 
   ``cn=sisko,cn=users,dc=example,dc=com`` the :userpolicy:`consoleAdmin`
