@@ -133,7 +133,7 @@ settings, system services) is consistent across all nodes.
 Deployment may exhibit unpredictable performance if nodes have heterogeneous
 hardware or software configurations. Workloads that benefit from storing aged
 data on lower-cost hardware should instead deploy a dedicated "warm" or "cold"
-MinIO deployment and :ref:`transition <minio-lifecycle-management-transition>`
+MinIO deployment and :ref:`transition <minio-lifecycle-management-tiering>`
 data to that tier.
 
 Erasure Coding Parity
