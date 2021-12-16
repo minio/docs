@@ -65,18 +65,18 @@ Replication Requires Versioning
 MinIO relies on the immutability protections provided by versioning to
 synchronize objects between the source and replication target.
 
-Use the :mc-cmd:`mc version enable` command to enable versioning on 
+Use the :mc-cmd:`mc version suspend` command to enable versioning on 
 *both* the source and destination bucket before starting this procedure:
 
 .. code-block:: shell
    :class: copyable
 
-   mc version enable ALIAS/PATH
+   mc version ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc version enable TARGET>` with the
+- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the
   :mc:`alias <mc alias>` of the MinIO cluster.
 
-- Replace :mc-cmd:`PATH <mc version enable TARGET>` with the bucket on which
+- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which
   to enable versioning.
 
 Install and Configure ``mc`` with Access to Both Clusters.
@@ -438,20 +438,15 @@ A\) Create Replication Rule on Alpha
       :class: copyable
 
       mc replicate add AlphaReplication/SOURCEBUCKET \
-         --remote-bucket DESTINATIONBUCKET \
-         --arn 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
+         --remote-bucket 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
          --replicate "delete,delete-marker,existing-objects"
 
    - Replace ``SOURCEBUCKET`` with the name of the bucket from which Alpha
      replicates data. The name *must* match the bucket specified when
      creating the remote target in the previous step.
 
-   - Replace the ``DESTINATIONBUCKET`` with the name of the ``Baker`` bucket to
-     which Alpha replicates data. The name *must* match the bucket specified
-     when creating the remote target in the previous step.
-
-   - Replace the ``--arn`` value with the ARN returned in the previous step. 
-     Ensure you specify the ARN created on the ``Alpha`` cluster. You can use
+   - Replace the ``--remote-bucket`` value ARN returned in the previous step. 
+     Ensure you specify the ARN created for the ``Baker`` cluster. You can use
      :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured
      on the cluster.
    
@@ -478,22 +473,17 @@ B\) Create Replication Rule on Baker
       :class: copyable
 
       mc replicate add BakerReplication/SOURCEBUCKET \
-         --remote-bucket DESTINATIONBUCKET \
-         --arn 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
+         --remote-bucket 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
          --replicate "delete,delete-marker,existing-objects"
 
    - Replace ``SOURCEBUCKET`` with the name of the bucket from which Baker
      replicates data. The name *must* match the bucket specified when
      creating the remote target in the previous step.
 
-   - Replace the ``DESTINATIONBUCKET`` with the name of the ``Alpha`` bucket to
-     which Baker replicates data. The name *must* match the bucket specified
-     when creating the remote target in the previous step.
-
-   - Replace the ``--arn`` value with the ARN returned in the previous step. 
-     Ensure you specify the ARN created on the ``Alpha`` cluster. You can use
-     :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured
-     on the cluster.
+   - Replace the ``--remote-bucket`` with the value with the ARN returned in the
+     previous step. Ensure you specify the ARN created for the ``Alpha``
+     cluster. You can use :mc-cmd:`mc admin bucket remote ls` to list all remote
+     ARNs configured on the cluster.
 
    - The ``--replicate "delete,delete-marker,existing-objects"`` flag enables
      the following replication features:
@@ -504,9 +494,6 @@ B\) Create Replication Rule on Baker
      See :mc-cmd-option:`mc replicate add replicate` for more complete
      documentation. Omit these fields to disable replication of delete operations
      or replication fof existing objects respectively.
-
-   Specify any other supported optional arguments for 
-   :mc-cmd:`mc replicate add`.
 
    Specify any other supported optional arguments for 
    :mc-cmd:`mc replicate add`.

@@ -78,19 +78,19 @@ Replication Requires Versioning
 MinIO relies on the immutability protections provided by versioning to
 synchronize objects as part of replication.
 
-Use the :mc-cmd:`mc version enable` command to enable versioning for the bucket
+Use the :mc-cmd:`mc version suspend` command to enable versioning for the bucket
 across *all* MinIO deployments participating in the multi-site replication
 configuration.
 
 .. code-block:: shell
    :class: copyable
 
-   mc version enable ALIAS/PATH
+   mc version ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc version enable TARGET>` with the
+- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the
   :mc:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc version enable TARGET>` with the bucket on which
+- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which
   to enable versioning.
 
 Install and Configure ``mc`` with Access to Both Clusters.

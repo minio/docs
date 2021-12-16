@@ -27,7 +27,7 @@ The MinIO Client :mc:`mc` commandline interface includes an
    mc mb --with-lock play/mynewbucket
    mc cp ~/data/mytestdata play/mynewbucket
 
-See the :doc:`MinIO Client Complete Reference </reference/minio-cli/minio-mc>`
+See the :doc:`MinIO Client Complete Reference </reference/minio-mc>`
 for complete documentation on the available :mc:`mc` commands.
 
 - First-time users of MinIO *or* object storage services should start with 
@@ -128,6 +128,28 @@ such as versioning and replication.
    Identity and Access Management, Metrics and Log Monitoring, or 
    Server Configuration. See :ref:`minio-console` for more information.
 
+Licensing
+---------
+
+We have designed MinIO as an Open Source software for the Open Source software
+community. This requires applications to consider whether their usage of MinIO
+is in compliance with the 
+:minio-git:`GNU AGPLv3 license <mc/blob/master/LICENSE>`.
+
+MinIO cannot make the determination as to whether your application's usage of
+MinIO is in compliance with the AGPLv3 license requirements. You should instead
+rely on your own legal counsel or licensing specialists to audit and ensure your
+application is in compliance with the licenses of MinIO and all other
+open-source projects with which your application integrates or interacts. We
+understand that AGPLv3 licensing is complex and nuanced. It is for that reason
+we strongly encourage using experts in licensing to make any such determinations
+around compliance instead of relying on apocryphal or anecdotal advice.
+
+`MinIO Commercial Licensing <https://min.io/pricing>`__ is the best option for
+applications that trigger AGPLv3 obligations (e.g. open sourcing your
+application). Applications using MinIO - or any other OSS-licensed code -
+without validating their usage do so at their own risk.
+
 .. toctree::
    :titlesonly:
    :hidden:
@@ -140,8 +162,8 @@ such as versioning and replication.
    /replication/replication-overview
    /security/security-overview
    /monitoring/monitoring-overview
-   /reference/minio-cli/minio-mc
-   /reference/minio-cli/minio-mc-admin
+   /reference/minio-mc
+   /reference/minio-mc-admin
    /reference/minio-server/minio-server
    /reference/minio-server/minio-gateway
    /console/minio-console

@@ -23,11 +23,11 @@ The example above specifies the following arguments:
    * - Argument
      - Description
 
-   * - :mc-cmd:`ALIAS <mc ilm add TARGET>`
+   * - :mc-cmd:`ALIAS <mc ilm add ALIAS>`
      - Specify the :mc:`alias <mc alias>` of the MinIO deployment for which
        you are creating the lifecycle management rule.
 
-   * - :mc-cmd:`BUCKET <mc ilm add TARGET>`
+   * - :mc-cmd:`BUCKET <mc ilm add ALIAS>`
      - Specify the full path to the bucket for which you are
        creating the lifecycle management rule.
 
@@ -41,13 +41,15 @@ The example above specifies the following arguments:
 
    * - :mc-cmd:`DAYS <mc ilm add transition-days>`
      - The number of calendar days after which MinIO marks an object as 
-       eligible for transition. 
+       eligible for transition. Specify the number of days as an integer,
+       e.g. ``30`` for 30 days.
 
    * - :mc-cmd:`NONCURRENT_DAYS <mc ilm add noncurrentversion-transition-days>`
      - The number of calendar days after which MinIO marks a noncurrent
        object version as eligible for transition. MinIO specifically measures
        the time since an object *became* non-current instead of the object
-       creation time. 
+       creation time. Specify the number of days as an integer,
+       e.g. ``90`` for 90 days.
        
        Omit this value to ignore noncurrent object versions.
 

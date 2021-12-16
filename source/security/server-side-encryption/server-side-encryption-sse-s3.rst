@@ -227,10 +227,10 @@ of all objects written to a specific bucket.
 
    mc encrypt set sse-s3 ALIAS/BUCKET
 
-- Replace :mc-cmd:`ALIAS <mc encrypt set TARGET>` with the 
+- Replace :mc-cmd:`ALIAS <mc encrypt set ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment on which you enabled SSE-S3.
 
-- Replace :mc-cmd:`BUCKET <mc encrypt set TARGET>`  with the full path to the
+- Replace :mc-cmd:`BUCKET <mc encrypt set ALIAS>`  with the full path to the
   bucket or bucket prefix on which you want to enable automatic SSE-S3.
 
 .. _minio-encryption-sse-s3-erasure-locking:

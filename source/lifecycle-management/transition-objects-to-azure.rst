@@ -206,8 +206,8 @@ rules:
 
    mc ilm ls ALIAS/PATH --transition
 
-- Replace :mc-cmd:`ALIAS <mc ilm ls TARGET>` with the :mc:`alias <mc alias>`
+- Replace :mc-cmd:`ALIAS <mc ilm ls ALIAS>` with the :mc:`alias <mc alias>`
   of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc ilm ls TARGET>` with the name of the bucket for
+- Replace :mc-cmd:`PATH <mc ilm ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

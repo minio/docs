@@ -24,7 +24,7 @@ and destination buckets.
   remote replication target.
 
 :ref:`Client-side Bucket Replication <minio-bucket-replication-clientside>`
-  Use the :mc-cmd:`mc mirror` process to synchronize objects between buckets
+  Use The command process to synchronize objects between buckets
   within the same S3-compatible cluster *or* between two independent
   S3-compatible clusters. Client-side replication using :mc-cmd:`mc mirror`
   supports MinIO-to-S3 and similar replication configurations.
@@ -105,10 +105,16 @@ Replication of Delete Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO supports replicating delete operations, where MinIO synchronizes
-deleting specific object versions *and* new :s3-docs:`delete markers 
-<delete-marker-replication.html>`. Delete operation replication uses
-the same :ref:`replication process <minio-replication-process>` as all other
-replication operations. 
+deleting specific object versions *and* new 
+:s3-docs:`delete markers <delete-marker-replication.html>`. Delete operation
+replication uses the same :ref:`replication process <minio-replication-process>`
+as all other replication operations. 
+
+MinIO requires explicitly enabling versioned deletes and delete marker
+replication . Use the :mc-cmd-option:`mc replicate add replicate` field to
+specify both or either ``delete`` and ``delete-marker`` to enable versioned
+deletes and delete marker replication respectively. To enable both, specify both
+strings using a comma separator ``delete,delete-marker``.
 
 For delete marker replication, MinIO begins the replication process after
 a delete operation creates the delete marker. MinIO uses the 
@@ -126,12 +132,6 @@ While this process ensures near-synchronized version deletion, it may result
 in listing operations returning the object version after the initial
 delete operation. MinIO uses the ``X-Minio-Replication-Delete-Status`` for
 tracking delete version replication status.
-
-MinIO requires explicitly enabling versioned deletes and delete marker
-replication . Use the :mc-cmd-option:`mc replicate add replicate` field to
-specify both or either ``delete`` and ``delete-marker`` to enable versioned
-deletes and delete marker replication respectively. To enable both, specify both
-strings using a comma separator ``delete,delete-marker``.
 
 MinIO only replicates explicit client-driven delete operations. MinIO does *not*
 replicate objects deleted from the application of  
@@ -211,7 +211,7 @@ overall cluster load, and the size of the namespace (all objects in the bucket).
 
 MinIO does not synchronize existing unversioned objects. Specifically, the
 bucket *must* have :ref:`versioning <minio-bucket-versioning>` enabled when the
-object was created. You can use the :mc-cmd:`mc cp` command to create a 
+object was created. You can use The command command to create a 
 "versioned" copy of that object. Once that object replicates successfully,
 you can delete the unversioned object (versionid = ``null``).
 

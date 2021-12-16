@@ -212,7 +212,7 @@ the MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use the :mc-cmd:`mc mb` command with the :mc-cmd-option:`~mc mb with-lock`
+      Use The command command with the :mc-cmd-option:`~mc mb with-lock`
       option to create a bucket with object locking enabled:
 
       .. code-block:: shell
@@ -224,7 +224,7 @@ the MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
         MinIO deployment.
 
       - Replace ``BUCKET`` with the 
-        :mc:`name <mc version enable TARGET>` of the bucket to create.
+        :mc:`name <mc version ALIAS>` of the bucket to create.
 
 Configure Bucket-Default Object Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -282,7 +282,7 @@ preferred SDK.
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use the :mc-cmd:`mc retention` command with the
+      Use The command command with the
       :mc-cmd-option:`--recursive <mc retention set recursive>` and
       :mc-cmd-option:`--default <mc retention set default>` options to set the
       default retention mode for a bucket:
@@ -299,10 +299,10 @@ preferred SDK.
       - Replace :mc-cmd:`DURATION <mc retention set VALIDITY>` with the 
         duration for which the object lock remains in effect.
 
-      - Replace :mc-cmd:`ALIAS <mc retention set TARGET>` with the 
+      - Replace :mc-cmd:`ALIAS <mc retention set ALIAS>` with the 
         :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-      - Replace :mc-cmd:`BUCKET <mc retention set TARGET>` with the 
+      - Replace :mc-cmd:`BUCKET <mc retention set ALIAS>` with the 
         name of the bucket on which to set the default retention rule.
 
 Enable Legal Hold Retention
@@ -341,7 +341,7 @@ WORM locked until the retention lock expires *and* the legal hold is lifted.
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use the :mc-cmd:`mc legalhold` command to enable or disable the legal
+      Use The command command to enable or disable the legal
       hold on an object.
 
       .. code-block:: shell
@@ -349,10 +349,10 @@ WORM locked until the retention lock expires *and* the legal hold is lifted.
 
          mc legalhold set ALIAS/PATH
 
-      - Replace :mc-cmd:`ALIAS <mc legalhold set TARGET>` with the 
+      - Replace :mc-cmd:`ALIAS <mc legalhold set ALIAS>` with the 
         :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-      - Replace :mc-cmd:`PATH <mc legalhold set TARGET>` with the 
+      - Replace :mc-cmd:`PATH <mc legalhold set ALIAS>` with the 
         path to the object for which to enable the legal hold. 
 
 .. _minio-object-locking-retention-modes:

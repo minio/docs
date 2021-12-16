@@ -1,26 +1,5 @@
 .. tab-set::
 
-   .. tab-item:: Docker
-
-      **Stable**
-
-      .. code-block:: shell
-         :class: copyable
-
-         docker pull minio/mc
-         docker run minio/mc admin info play
-
-      **Edge**
-
-      *Do not use bleeding-edge deployments of MinIO in production environments*
-
-      .. code-block:: shell
-         :class: copyable
-
-         docker pull minio/mc:edge
-         docker run minio/mc:edge admin info server play
-
-
    .. tab-item:: Linux
 
       The following commands add a *temporary* extension to your system

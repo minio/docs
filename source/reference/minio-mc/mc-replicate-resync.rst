@@ -1,0 +1,136 @@
+.. _minio-mc-replicate-resync:
+
+=======================
+``mc replicate resync``
+=======================
+
+.. default-domain:: minio
+
+.. contents:: Table of Contents
+   :local:
+   :depth: 2
+
+.. mc:: mc replicate reset
+.. mc:: mc replicate resync
+
+Syntax
+------
+
+.. start-mc-replicate-resync-desc
+
+The :mc:`mc replicate resync` command resynchronizes all objects in the
+specified MinIO bucket to a remote :ref:`replication
+<minio-bucket-replication-serverside>` target. 
+
+.. end-mc-replicate-resync-desc
+
+This command *requires* first configuring the remote bucket target using the
+:mc-cmd:`mc admin bucket remote add` command. You must specify the resulting
+remote ARN as part of running :mc-cmd:`mc replicate resync`.
+
+This command supports rebuilding a MinIO deployment using an active-active
+replication remote as the "backup" source. See the following tutorials
+for more information on active-active replication:
+
+- :ref:`minio-bucket-replication-serverside-twoway`
+- :ref:`minio-bucket-replication-serverside-multi`
+
+.. tab-set::
+
+   .. tab-item:: EXAMPLE
+
+      The following command resynchronizes the content of the 
+      ``mydata`` bucket on the ``myminio`` MinIO deployment to the remote
+      MinIO deployment associated to the specified ``--remote-bucket``:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc replicate resync  \
+            --remote-bucket "arn:minio:replication::d3c086c7-1d64-40c2-954b-fe8222907033:mydata" \ 
+            myminio/mydata
+
+   .. tab-item:: SYNTAX
+
+      The command has the following syntax:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc [GLOBALFLAGS] replicate resync          \
+                          --remote-bucket "string"  \
+                          [--older-than "string"]   \
+                          ALIAS
+
+      .. include:: /includes/common-minio-mc.rst
+         :start-after: start-minio-syntax
+         :end-before: end-minio-syntax
+
+Parameters
+~~~~~~~~~~
+
+.. mc-cmd:: ALIAS
+
+   *Required* the :ref:`alias <alias>` of the MinIO deployment and full path to
+   the bucket or bucket prefix which MinIO uses as the replication source. For
+   example:
+
+   .. code-block:: none
+
+      mc replicate resync myminio/mybucket
+
+.. mc-cmd:: remote-bucket
+   :option:
+
+   *Required* Specify the ARN for the destination deployment and bucket. You
+   can retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
+    
+   - Use the :mc-cmd:`mc admin bucket remote ls` to retrieve a list of 
+     ARNs for the bucket on the destination deployment.
+
+   - Use the :mc-cmd:`mc admin bucket remote add` to create a replication ARN
+     for the bucket on the destination deployment.
+
+.. mc-cmd:: older-than
+
+   *Optional*  Specify a duration in days where MinIO only resynchronizes
+   objects older than the specified duration.
+
+Global Flags
+~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-globals
+   :end-before: end-minio-mc-globals
+
+Examples
+--------
+
+Resynchronize Remote Replication Target from Source Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following :mc-cmd:`mc replicate resync` command resynchronizes all objects
+on the specified source bucket to the remote target regardless of their
+replication status:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc replicate resync --remote-bucket "arn:minio:replication::UUID:mybucket" myminio/mybucket
+
+- Replace ``myminio/mybucket`` with the :mc-cmd:`~mc replicate add ALIAS` and
+  full bucket path for which to create the replication configuration.
+
+- Replace the :mc-cmd-option:`~mc replicate add remote-bucket` value with the 
+  ARN of the remote target. Use :mc-cmd:`mc admin bucket remote ls` to list
+  all configured remote replication targets.
+
+Behavior
+--------
+
+S3 Compatibility
+~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-s3-compatibility
+   :end-before: end-minio-mc-s3-compatibility
