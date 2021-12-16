@@ -243,19 +243,19 @@ enable versioning on only a prefix or subset of objects in a bucket.
 
    .. tab-item:: MinIO CLI
 
-      Use the :mc-cmd:`mc version enable` command to enable versioning on an 
+      Use the :mc-cmd:`mc version suspend` command to enable versioning on an 
       existing bucket:
 
       .. code-block:: shell
          :class: copyable
 
-         mc version enable ALIAS/BUCKET
+         mc version ALIAS/BUCKET
 
       - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
         MinIO deployment.
 
       - Replace ``BUCKET`` with the 
-        :mc:`target bucket <mc version enable TARGET>` on which to enable
+        :mc:`target bucket <mc version ALIAS>` on which to enable
         versioning.
 
 Objects created prior to enabling versioning have a 
@@ -295,19 +295,19 @@ MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
 
    .. tab-item:: MinIO CLI
 
-      Use the :mc-cmd:`mc version disable` command to enable versioning on an 
+      Use the :mc-cmd:`mc version suspend` command to enable versioning on an 
       existing bucket:
 
       .. code-block:: shell
          :class: copyable
 
-         mc version disable ALIAS/BUCKET
+         mc version suspend ALIAS/BUCKET
 
       - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
         MinIO deployment.
 
       - Replace ``BUCKET`` with the 
-        :mc:`target bucket <mc version enable TARGET>` on which to disable
+        :mc:`target bucket <mc version ALIAS>` on which to disable
         versioning.
 
 Objects created while versioning is suspended are assigned a 

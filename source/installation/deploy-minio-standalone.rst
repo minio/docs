@@ -108,7 +108,6 @@ command:
    export MINIO_ROOT_USER=minio-admin
    export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
    #export MINIO_SERVER_URL=https://minio.example.net
-   #export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
    minio server /data --console-address ":9001"
 
@@ -135,40 +134,6 @@ The example command breaks down as follows:
        which **do not** contain the IP address of the MinIO Server host
        as a :rfc:`Subject Alternative Name <5280#section-4.2.1.6>`. 
        Specify a hostname covered by one of the TLS certificate SAN entries.
-
-   * - :envvar:`MINIO_KMS_SECRET_KEY`
-     - The key to use for encrypting the MinIO backend (users, groups,
-       policies, and server configuration). Single-key backend encryption
-       provides a baseline of security for non-production environments, and does
-       not support features like key rotation. You can leave this command
-       commented to deploy MinIO without backend encryption. 
-     
-       Do not use this setting in production environments. Use the MinIO
-       :minio-git:`Key Encryption Service (KES) <kes>` and an external Key
-       Management System (KMS) to enable encryption functionality. Specify the
-       name of the encryption key to use to the :envvar:`MINIO_KMS_KES_KEY_NAME`
-       instead. See :minio-git:`KMS IAM/Config Encryption
-       <minio/blob/master/docs/kms/IAM.md>` for more information.
-
-       Use the following format when specifying the encryption key:
-
-       ``<key-name>:<encryption-key>``
-
-       - Replace the ``<key-name>`` with any string. You must use this
-         key name if you later migrate to using a dedicated KMS for 
-         managing encryption keys. See :minio-git:`KMS IAM/Config Encryption
-         <minio/blob/master/docs/kms/IAM.md>` for more information.
-
-       - Replace ``<encryption-key>`` with a 32-bit base64 encoded value.
-         For example:
-
-         .. code-block:: shell
-            :class: copyable
-   
-            cat /dev/urandom | head -c 32 | base64 -
-
-         Save the encryption key to a secure location. You cannot restart the
-         MinIO server without this key.
 
    * - ``/data``
      - The path to each disk on the host machine. 
@@ -257,7 +222,6 @@ following environment variables:
    export MINIO_ROOT_USER=minio-admin
    export MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
    #export MINIO_SERVER_URL=https://minio.example.net
-   #export MINIO_KMS_SECRET_KEY=my-minio-encryption-key:bXltaW5pb2VuY3J5cHRpb25rZXljaGFuZ2VtZTEyMwo=
 
 Create the Podman secret using the ``config.env`` file:
 
@@ -290,39 +254,7 @@ The following table details each environment variable set in ``config.env``:
        as a :rfc:`Subject Alternative Name <5280#section-4.2.1.6>`. 
        Specify a hostname covered by one of the TLS certificate SAN entries.
 
-   * - :envvar:`MINIO_KMS_SECRET_KEY`
-     - The key to use for encrypting the MinIO backend (users, groups,
-       policies, and server configuration). Single-key backend encryption
-       provides a baseline of security for non-production environments, and does
-       not support features like key rotation. You can leave this command
-       commented to deploy MinIO without backend encryption. 
-     
-       Do not use this setting in production environments. Use the MinIO
-       :minio-git:`Key Encryption Service (KES) <kes>` and an external Key
-       Management System (KMS) to enable encryption functionality. Specify the
-       name of the encryption key to use to the :envvar:`MINIO_KMS_KES_KEY_NAME`
-       instead. See :minio-git:`KMS IAM/Config Encryption
-       <minio/blob/master/docs/kms/IAM.md>` for more information.
 
-       Use the following format when specifying the encryption key:
-
-       ``<key-name>:<encryption-key>``
-
-       - Replace the ``<key-name>`` with any string. You must use this
-         key name if you later migrate to using a dedicated KMS for 
-         managing encryption keys. See :minio-git:`KMS IAM/Config Encryption
-         <minio/blob/master/docs/kms/IAM.md>` for more information.
-
-       - Replace ``<encryption-key>`` with a 32-bit base64 encoded value.
-         For example:
-
-         .. code-block:: shell
-            :class: copyable
-   
-            cat /dev/urandom | head -c 32 | base64 -
-
-         Save the encryption key to a secure location. You cannot restart the
-         MinIO server without this key.
 
 You may specify other :ref:`environment variables 
 <minio-server-environment-variables>` as required by your deployment.

@@ -85,14 +85,8 @@ older than 365 days.
 
 .. todo: Diagram of MinIO Expiration
 
-Use the :mc-cmd:`mc ilm add` command with one of the following commandline
-options to create new expiration rules on a bucket:
-
-- :mc-cmd-option:`mc ilm add expiry-date` to expire objects after 
-  a specified calendar date.
-
-- :mc-cmd-option:`mc ilm add expiry-days` to expire objects after a
-  specified number of calendar days.
+Use :mc-cmd-option:`mc ilm add expiry-days` to expire objects after a specified
+number of calendar days.
 
 For buckets with :ref:`replication <minio-bucket-replication>` configured, MinIO
 does not replicate objects deleted by a lifecycle management expiration rule.

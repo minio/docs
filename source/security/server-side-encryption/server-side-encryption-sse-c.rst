@@ -128,11 +128,11 @@ arguments for enabling SSE-S3 encryption:
    mc cp ~/data/mydata.json ALIAS/BUCKET/mydata.json \
       --encrypt-key "ALIAS/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo="
 
-- Replace :mc-cmd:`ALIAS <mc encrypt set TARGET>` with the 
+- Replace :mc-cmd:`ALIAS <mc encrypt set ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment on which you want to write
   the SSE-C encrypted object.
 
-- Replace :mc-cmd:`BUCKET <mc encrypt set TARGET>`  with the full path to the
+- Replace :mc-cmd:`BUCKET <mc encrypt set ALIAS>`  with the full path to the
   bucket or bucket prefix to which you want to write the SSE-C encrypted object.
 
 3) Copy an SSE-C Encrypted Object
@@ -161,13 +161,13 @@ arguments for enabling SSE-S3 encryption:
       --encrypt-key "SOURCE/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo=" \
       --encrypt-key "TARGET/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo="
 
-- Replace :mc-cmd:`SOURCE/BUCKET <mc encrypt set TARGET>` with the 
+- Replace :mc-cmd:`SOURCE/BUCKET <mc encrypt set ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment from which you are reading the
   encrypted object and the full path to the
   bucket or bucket prefix from which you want to read the SSE-C encrypted
   object.
 
-- Replace :mc-cmd:`TARGET/BUCKET <mc encrypt set TARGET>` with the 
+- Replace :mc-cmd:`TARGET/BUCKET <mc encrypt set ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment from which you are writing the
   encrypted object and the full path to the
   bucket or bucket prefix to which you want to write the SSE-C encrypted

@@ -104,18 +104,34 @@ Object Events
 
 MinIO supports triggering notifications on the following S3 object events:
 
-.. data:: s3:ObjectRemoved:DeleteMarkerCreated
-.. data:: s3:ObjectRemoved:Delete
-.. data:: s3:ObjectCreated:PutRetention
-.. data:: s3:ObjectCreated:PutLegalHold
-.. data:: s3:ObjectCreated:Put
-.. data:: s3:ObjectCreated:Post
-.. data:: s3:ObjectCreated:Copy
-.. data:: s3:ObjectCreated:CompleteMultipartUpload
-.. data:: s3:ObjectAccessed:Head
-.. data:: s3:ObjectAccessed:GetRetention
-.. data:: s3:ObjectAccessed:GetLegalHold
 .. data:: s3:ObjectAccessed:Get
+.. data:: s3:ObjectAccessed:GetLegalHold
+.. data:: s3:ObjectAccessed:GetRetention
+.. data:: s3:ObjectAccessed:Head
+.. data:: s3:ObjectCreated:CompleteMultipartUpload
+.. data:: s3:ObjectCreated:Copy
+.. data:: s3:ObjectCreated:DeleteTagging
+.. data:: s3:ObjectCreated:Post
+.. data:: s3:ObjectCreated:Put
+.. data:: s3:ObjectCreated:PutLegalHold
+.. data:: s3:ObjectCreated:PutRetention
+.. data:: s3:ObjectCreated:PutTagging
+.. data:: s3:ObjectRemoved:Delete
+.. data:: s3:ObjectRemoved:DeleteMarkerCreated
+
+Specify the wildcard ``*`` character to select all events related to a prefix:
+
+.. data:: s3:ObjectAccessed:*
+
+   Selects all ``s3:ObjectAccessed``\ -prefixed events.
+   
+.. data:: s3:ObjectCreated:*
+
+   Selects all ``s3:ObjectCreated``\ -prefixed events.
+
+.. data:: s3:ObjectRemoved:*
+
+   Selects all ``s3:ObjectRemoved``\ -prefixed events.
 
 Replication Events
 ~~~~~~~~~~~~~~~~~~
@@ -129,6 +145,10 @@ events:
 .. data:: s3:Replication:OperationNotTracked
 .. data:: s3:Replication:OperationReplicatedAfterThreshold
 
+Specify the wildcard ``*`` character to select all ``s3:Replication`` events:
+
+.. data:: s3:Replication:*
+
 ILM Transition Events
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -137,10 +157,18 @@ events:
 
 .. data:: s3:ObjectRestore:Post
 .. data:: s3:ObjectRestore:Completed
-.. data:: s3:ObjectTransition:*
 .. data:: s3:ObjectTransition:Failed
 .. data:: s3:ObjectTransition:Complete
 
+Specify the wildcard ``*`` character to select all events related to a prefix:
+
+.. data:: s3:ObjectTransition:*
+
+   Selects all ``s3:ObjectTransition``\ -prefixed events.
+
+.. data:: s3:ObjectRestore:*
+
+   Selects all ``s3:ObjectRestore``\ -prefixed events.
 
 Global Events
 ~~~~~~~~~~~~~
@@ -151,7 +179,6 @@ You can only listen to these events through the :legacy:`ListenNotification
 
 .. data:: s3:BucketCreated
 .. data:: s3:BucketRemoved
-
 
 .. todo
 

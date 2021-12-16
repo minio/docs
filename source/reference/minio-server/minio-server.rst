@@ -26,6 +26,17 @@ see :ref:`minio-installation`.
 For examples of deploying :mc:`minio server` on a Kubernetes environment,
 see :docs-k8s:`Kubernetes documentation <>`.
 
+.. admonition:: AGPLv3
+   :class: note
+
+   :program:`minio server` is :minio-git:`AGPLv3 <minio/blob/master/LICENSE>` 
+   licensed Free and Open Source (FOSS) software. 
+
+   Applications integrating :program:`mc` may trigger AGPLv3 compliance
+   requirements. `MinIO Commericla Licensing <https://min.io/pricing>`__
+   is the best option for applications which trigger AGPLv3 obligations where
+   open-sourcing the application is not an option.
+
 Configuration Settings
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -346,41 +357,6 @@ MinIO Console:
 
 Key Management Service and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. envvar:: MINIO_KMS_SECRET_KEY
-
-   .. versionadded:: RELEASE.2021-04-22T15-44-28Z
-
-   The client-provided encryption key to use for encrypting the MinIO backend
-   (users, groups, policies, and server configuration). Single-key backend
-   encryption provides a baseline of security for non-production environments,
-   and does not support features like key rotation.
-
-   Do not use this setting in production environments. Use the MinIO
-   :minio-git:`Key Encryption Service (KES) <kes>` and an external Key
-   Management System (KMS) to enable encryption functionality. Specify the
-   name of the encryption key to use to the :envvar:`MINIO_KMS_KES_KEY_NAME`
-   instead. See :minio-git:`KMS IAM/Config Encryption
-   <minio/blob/master/docs/kms/IAM.md>` for more information.
-
-   Specify a 32-bit base-64 encrypted string in the following format:
-
-   ``<key-name>:<encryption-string>``
-
-   - Replace the ``<key-name>`` with any string. You must use this
-     key name if you later migrate to using a dedicated KMS for
-     managing encryption keys.
-
-   - Replace ``<encryption-key>`` with a 32-bit base64 encoded value.
-     For example:
-
-     .. code-block:: shell
-        :class: copyable
-
-        cat /dev/urandom | head -c 32 | base64 -
-
-   Prior to :minio-release:`RELEASE.2021-04-22T15-44-28Z`, MinIO used the
-   :ref:`root <minio-users-root>` user credentials for encrypting the backend.
 
 .. envvar:: MINIO_KMS_KES_ENDPOINT
 

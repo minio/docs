@@ -70,13 +70,13 @@ expire bucket contents a number of days after object creation:
 
    mc ilm add ALIAS/PATH --expiry-days "DAYS" 
 
-- Replace :mc-cmd:`ALIAS <mc ilm add TARGET>` with the 
+- Replace :mc-cmd:`ALIAS <mc ilm add ALIAS>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc ilm add TARGET>` with the path to the bucket on the
+- Replace :mc-cmd:`PATH <mc ilm add ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
-- Replace :mc-cmd:`DATE <mc ilm add expiry-date>` with the number of days after
+- Replace :mc-cmd:`DAYS <mc ilm add expiry-days>` with the number of days after
   which to expire the object. For example, specify ``30`` to expire the
   object 30 days after creation.
 
@@ -99,10 +99,10 @@ delete markers:
       --noncurrentversion-expiration-days NONCURRENT_DAYS \
       --expired-object-delete-marker
 
-- Replace :mc-cmd:`ALIAS <mc ilm add TARGET>` with the 
+- Replace :mc-cmd:`ALIAS <mc ilm add ALIAS>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc ilm add TARGET>` with the path to the bucket on the
+- Replace :mc-cmd:`PATH <mc ilm add ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
 - Replace :mc-cmd:`NONCURRENT_DAYS 
