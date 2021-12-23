@@ -77,7 +77,7 @@ expire bucket contents a number of days after object creation:
   S3-compatible host.
 
 - Replace :mc-cmd:`DATE <mc ilm add expiry-date>` with the number of days after
-  which to expire the object. For example, specify ``30d`` to expire the
+  which to expire the object. For example, specify ``30`` to expire the
   object 30 days after creation.
 
 Expire Versioned Objects
