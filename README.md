@@ -7,7 +7,9 @@ static HTML pages using ReSTructured Text.
 
 ## Prerequisites
 
-- Python 3.6.0 or later. MinIO uses the latest stable version of Python for regular writing and development work.
+- Python 3.9.X. 
+  
+  *NOTE*: Pythoon 3.10 does not work with the version of Sphinx (3.5.0) used by the MinIO Docs. Newer versions of Sphinx which are compatible with Python 3.10 break the current site layout. Please use Python 3.9.X for building the MinIO documentation.
 
 - NodeJS 14.5.0 or later.
 
@@ -23,7 +25,7 @@ using the following instructions as general guidance.
 1. Run `git checkout https://github.com/minio/docs` and `cd docs` to move into
    the working directory.
 
-2. Create a new virtual environment `python -3 m venv venv`. Activate it using
+2. Create a new virtual environment `python3 -m venv venv`. Activate it using
    `source venv/bin/activate`.
 
 3. Run `pip install -r requirements.txt` to setup the Python environment.
