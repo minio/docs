@@ -482,7 +482,6 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-tag-set
    /reference/minio-mc/mc-tag-list
    /reference/minio-mc/mc-tag-remove
-   /reference/minio-mc/mc-template
    /reference/minio-mc/mc-tree
    /reference/minio-mc/mc-update
    /reference/minio-mc/mc-version
