@@ -54,7 +54,7 @@ display the contents of the specified file or object to ``STDOUT``.
                           [--rewind]      \
                           [--version-id]  \
                           [--encrypt-key] \
-                          PATH
+                          ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -69,12 +69,26 @@ Parameters
 
 .. mc-cmd:: ALIAS
 
-   *Required* The :ref:`alias <alias>` of a MinIO or other S3-compatible
-   service. 
+   *Required* The :ref:`alias <alias>` of a MinIO deployment and the full
+   path to the object. For example:
 
-.. mc-cmd:: PATH
+   .. code-block:: shell
 
-   *Required* The full path to an object on the specified alias.
+      mc cat myminio/mybucket/myobject.txt
+
+   You can specify multiple objects on the same or different MinIO
+   deployment. For example:
+
+   .. code-block:: shell
+
+      mc cat myminio/mybucket/object.txt myminio/myotherbucket/object.txt
+
+   For an object on a local filesystem, specify the full path to that
+   object. For example:
+
+   .. code-block:: shell
+
+      mc cat ~/data/object.txt
 
 .. mc-cmd:: rewind
    :option:

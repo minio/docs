@@ -62,7 +62,7 @@ Parameters
    *Required* The MinIO or other S3-compatible service on which to create the
    new bucket.
 
-   For creating a bucket on MinIO or another S3-compatible service, specify the
+   For creating a bucket on MinIO, specify the
    :ref:`alias <alias>` and the name of the bucket. For example:
 
    .. code-block:: none

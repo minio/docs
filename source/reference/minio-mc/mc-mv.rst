@@ -53,7 +53,7 @@ similar results to the ``mv`` commandline tool.
          [--preserve]                \
          [--recursive]               \
          [--storage-class "string"]  \
-         SOURCE                      \
+         SOURCE [SOURCE...]          \
          TARGET
 
       .. include:: /includes/common-minio-mc.rst
@@ -67,9 +67,9 @@ Parameters
 
    *Required* The object or objects to move. 
    
-   For moving an object from MinIO or another S3-compatible service,
-   specify the :ref:`alias <alias>` and hte full path to the object(s)
-   (e.g. bucket and path to objects). For example:
+   For moving an object from a MinIO bucket, specify the :ref:`alias <alias>`
+   and the full path to the object(s) (e.g. bucket and path to objects). For
+   example:
 
    .. code-block:: shell
 
@@ -82,8 +82,13 @@ Parameters
 
       mc mv ~/mydata/object.txt play/mybucket/object.txt
    
-   You can specify both local paths
-   and S3 paths using a configured S3 service :mc:`alias <mc alias>`. 
+   Specify multiple ``SOURCE`` paths to move multiple objects to the
+   specified :mc-cmd:`~mc mv TARGET`. :mc-cmd:`mc rm` treats the
+   *last* specified alias or filesystem path as the ``TARGET``. For example:
+
+   .. code-block:: shell
+
+      mc mv ~/mydata/object.txt play/mydata/otherobject.txt myminio/mydata
 
    If you specify a directory or bucket to :mc-cmd:`~mc mv SOURCE`, you must
    also specify :mc-cmd-option:`~mc mv recursive` to recursively move the
@@ -98,7 +103,7 @@ Parameters
    :ref:`alias <alias>` of a configured S3 service as the prefix to the 
    :mc-cmd:`~mc mv TARGET` path. 
 
-   For moving an object from MinIO or another S3-compatible service,
+   For moving an object from MinIO,
    specify the :ref:`alias <alias>` and hte full path to the object(s)
    (e.g. bucket and path to objects). For example:
 

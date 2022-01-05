@@ -55,7 +55,7 @@ similar results to the ``rm --rf`` commandline tool.
          mc [GLOBALFLAGS] rb             \
                           --force        \
                           [--dangerous]  \
-                          ALIAS
+                          ALIAS [ALIAS...]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -91,6 +91,13 @@ Parameters
 
       mc rb ~/data/myolddata
 
+   You can specify multiple ``ALIAS`` targets consisting of either
+   MinIO or local filesystem directories. The command attempts to remove
+   *all* specified targets. For example:
+
+   .. code-block:: none
+
+      mc rb --force myminio/mydata ~/data/myolddata
 
 .. mc-cmd:: force
    :option:

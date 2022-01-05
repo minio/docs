@@ -57,7 +57,7 @@ tool.
                           [--rewind "string"]      \
                           [--version-id "string"]  \
                           [--encrypt-key "string"] \
-                          ALIAS
+                          ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -70,15 +70,19 @@ Parameters
 
    *Required* The object or objects to print. 
    
-   For an object on MinIO or another S3-compatible service, specify the 
-   :ref:`alias <alias>` and the full path to that object (e.g. bucket and path
-   to object). For example:
-
-   For example:
+   For an object on MinIO, specify the :ref:`alias <alias>` and the full path to
+   that object (e.g. bucket and path to object). For example:
 
    .. code-block:: none
 
       mc head play/mybucket/object.txt
+
+   You can specify multiple objects on the same or different MinIO
+   deployments. For example:
+
+   .. code-block:: none
+
+      mc head ~/mydata/object.txt myminio/mydata/object.txt
 
    For an object on a local filesystem, specify the full path to that object.
    For example:

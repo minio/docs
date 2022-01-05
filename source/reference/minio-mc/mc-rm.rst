@@ -68,6 +68,7 @@ results to the ``rm`` commandline tool.
                           [--stdin]                \
                           [--version-id "string"]* \
                           [--versions]             \
+                          ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax

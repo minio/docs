@@ -77,7 +77,6 @@ Parameters
    - ``upload`` - Enable upload-only access to the ``ALIAS``.
    - ``public`` - Enable download and upload access to the ``ALIAS``.
 
-
 .. mc-cmd:: ALIAS
 
    *Required* The full path to the bucket or bucket prefix to which the

@@ -66,7 +66,8 @@ similar results to the ``cp`` commandline tool.
                           [--storage-class "string"]                                \
                           [--tags "string"]                                         \
                           [--version-id "string"]                                   \
-                          SOURCE TARGET
+                          SOURCE [SOURCE ...]                                       \
+                          TARGET
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -79,7 +80,7 @@ Parameters
 
    *Required* The object or objects to copy. 
 
-   For copying an object from MinIO or another S3-compatible service,
+   For copying an object from MinIO,
    specify the :ref:`alias <alias>` and the full path to that 
    object (e.g. bucket and path to object). For example:
 
@@ -87,6 +88,13 @@ Parameters
 
       mc cp play/mybucket/object.txt ~/mydata/object.txt
 
+   Specify multiple ``SOURCE`` paths to copy multiple objects to the 
+   specified :mc-cmd:`~mc cp TARGET`. :mc-cmd:`mc cp` treats the 
+   *last* specified alias or filesystem path as the ``TARGET``. For example:
+
+   .. code-block:: none
+
+      mc cp ~/data/object.txt myminio/mydata/object.txt play/mydata/object.txt
 
    For copying an object from a local filesystem, specify the full
    path to that object. For example:
@@ -105,7 +113,7 @@ Parameters
 
    *Required* The full path to which :mc:`mc cp` copies the object.
 
-   For copying an object to MinIO or another S3-compatible service,
+   For copying an object to MinIO,
    specify the :mc:`alias <mc alias>` and the full path to that object
    (e.g. bucket and path to object). For example:
 

@@ -55,7 +55,7 @@ results as the ``ls`` command.
                           [--rewind]      \
                           [--versions]    \
                           [--summarize]   \
-                          ALIAS
+                          ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -69,7 +69,7 @@ Parameters
 
    *Required* The object or objects to copy. 
 
-   For listing objects on MinIO or another S3-compatible service,
+   For listing objects on MinIO,
    specify the :ref:`alias <alias>` and the full path to that 
    object (e.g. bucket and path to object). For example:
 

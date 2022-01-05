@@ -54,7 +54,7 @@ results to the ``stat`` commandline tool.
                           [--rewind "string"]       \
                           [--versions]              \
                           [--version-id "string"]*  \
-                          ALIAS
+                          ALIAS [ALIAS ...]
 
 
       .. include:: /includes/common-minio-mc.rst

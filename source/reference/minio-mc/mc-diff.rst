@@ -57,7 +57,7 @@ Parameters
 
    *Required* The object to compare to the ``TARGET``.
 
-   For an object from MinIO or another S3-compatible service,
+   For an object from MinIO,
    specify the :mc:`alias <mc alias>` and the full path to that 
    object (e.g. bucket and path to object). For example:
 
@@ -77,7 +77,7 @@ Parameters
 
    *Required* The object to compare to the ``SOURCE``.
 
-   For an object from MinIO or another S3-compatible service,
+   For an object from MinIO,
    specify the :mc:`alias <mc alias>` and the full path to that 
    object (e.g. bucket and path to object). For example:
 
