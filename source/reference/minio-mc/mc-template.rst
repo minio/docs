@@ -1,3 +1,5 @@
+:orphan:
+
 ..
 
   Use this file as a template for adding new MinIO `mc` commands and

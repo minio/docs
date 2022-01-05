@@ -193,7 +193,7 @@ MinIO provides the following two storage classes:
 
       - The :envvar:`MINIO_STORAGE_CLASS_RRS` environment variable, *or*
       - The :mc:`mc admin config` command to modify the 
-       ``storage_class.rrs`` configuration setting.
+        ``storage_class.rrs`` configuration setting.
 
       ``REDUCED_REDUNDANCY`` parity *must* be less than or equal to
       ``STANDARD``.
