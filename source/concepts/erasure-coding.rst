@@ -61,33 +61,11 @@ has no more than one data or parity block per drive in the set.
 
 MinIO calculates the number and size of *Erasure Sets* by dividing the total
 number of drives in the :ref:`Server Pool <minio-intro-server-pool>` into sets
-consisting of between 4 and 16 drives each. MinIO considers two factors when
-selecting the Erasure Set size:
+consisting of between 4 and 16 drives each. 
 
-- The Greatest Common Divisor (GCD) of the total drives.
-
-- The number of :mc:`minio server` nodes in the Server Pool.
-
-For an even number of nodes, MinIO uses the GCD to calculate the Erasure Set
-size and ensure the minimum number of Erasure Sets possible. For an odd number
-of nodes, MinIO selects a common denominator that results in an odd number of
-Erasure Sets to facilitate more uniform distribution of erasure set drives
-among nodes in the Server Pool.
-
-For example, consider a Server Pool consisting of 4 nodes with 8 drives each
-for a total of 32 drives. The GCD of 16 produces 2 Erasure Sets of 16 drives 
-each with uniform distribution of erasure set drives across all 4 nodes.
-
-Now consider a Server Pool consisting of 5 nodes with 8 drives each for a total
-of 40 drives. Using the GCD, MinIO would create 4 erasure sets with 10 drives
-each. However, this distribution would result in uneven distribution with
-one node contributing more drives to the Erasure Sets than the others. 
-MinIO instead creates 5 erasure sets with 8 drives each to ensure uniform
-distribution of Erasure Set drives per Nodes.
-
-MinIO generally recommends maintaining an even number of nodes in a Server Pool
-to facilitate simplified human calculation of the number and size of
-Erasure Sets in the Server Pool.
+Use the MinIO 
+`Erasure Coding Calculator <https://min.io/product/erasure-code-calculator>`__
+to determine the optimal erasure set size for your preferred MinIO topology.
 
 .. _minio-ec-parity:
 
@@ -158,71 +136,67 @@ MinIO supports storage classes with Erasure Coding to allow applications to
 specify per-object :ref:`parity <minio-ec-parity>`. Each storage class specifies
 a ``EC:N`` parity setting to apply to objects created with that class. 
 
-MinIO storage classes are *distinct* from Amazon Web Services :s3-docs:`storage
-classes <storage-class-intro.html>`. MinIO storage classes define 
-*parity settings per object*, while AWS storage classes define 
-*storage tiers per object*. 
+MinIO storage classes are *distinct* from Amazon Web Services 
+:s3-docs:`storage classes <storage-class-intro.html>`. MinIO storage classes
+define *parity settings per object*, while AWS storage classes define *storage
+tiers per object*. 
 
 MinIO provides the following two storage classes:
 
-``STANDARD``
-   The ``STANDARD`` storage class is the default class for all objects. 
+.. tab-set::
 
-   You can configure the ``STANDARD`` storage class parity using either:
+   .. tab-item:: ``STANDARD``
 
-   - The :envvar:`MINIO_STORAGE_CLASS_STANDARD` environment variable, *or*
-   - The :mc:`mc admin config` command to modify the ``storage_class.standard``
-     configuration setting.
+      The ``STANDARD`` storage class is the default class for all objects.
+      MinIO sets the ``STANDARD`` parity based on the number of volumes
+      in the Erasure Set:
 
-   Starting with :minio-git:`RELEASE.2021-01-30T00-20-58Z 
-   <minio/releases/tag/RELEASE.2021-01-30T00-20-58Z>`, MinIO defaults 
-   ``STANDARD`` storage class based on the number of volumes in the Erasure Set:
+      .. list-table::
+         :header-rows: 1
+         :widths: 30 70
+         :width: 100%
 
-   .. list-table::
-      :header-rows: 1
-      :widths: 30 70
-      :width: 100%
+         * - Erasure Set Size
+           - Default Parity (EC:N)
 
-      * - Erasure Set Size
-        - Default Parity (EC:N)
+         * - 5 or Fewer 
+           - EC:2
 
-      * - 5 or Fewer 
-        - EC:2
+         * - 6 - 7
+           - EC:3
 
-      * - 6 - 7
-        - EC:3
+         * - 8 or more 
+           - EC:4
 
-      * - 8 or more 
-        - EC:4
+      You can override the default ``STANDARD`` parity using either:
 
-   The maximum value is half of the total drives in the
-   :ref:`Erasure Set <minio-ec-erasure-set>`.
+      - The :envvar:`MINIO_STORAGE_CLASS_STANDARD` environment variable, *or*
+      - The :mc:`mc admin config` command to modify the
+        ``storage_class.standard`` configuration setting.
 
-   The minimum value is ``2``.
+      The maximum value is half of the total drives in the
+      :ref:`Erasure Set <minio-ec-erasure-set>`. The minimum value is ``2``.
 
-   ``STANDARD`` parity *must* be greater than or equal to
-   ``REDUCED_REDUNDANCY``. If ``REDUCED_REDUNDANCY`` is unset, ``STANDARD``
-   parity *must* be greater than 2
+      ``STANDARD`` parity *must* be greater than or equal to
+      ``REDUCED_REDUNDANCY``. If ``REDUCED_REDUNDANCY`` is unset, ``STANDARD``
+      parity *must* be greater than 2.
 
-``REDUCED_REDUNDANCY``
-   The ``REDUCED_REDUNDANCY`` storage class allows creating objects with
-   lower parity than ``STANDARD``. 
+   .. tab-item:: ``REDUCED_REDUNDANCY``
 
-   You can configure the ``REDUCED_REDUNDANCY`` storage class parity using
-   either:
+      The ``REDUCED_REDUNDANCY`` storage class allows creating objects with
+      lower parity than ``STANDARD``. ``REDUCED_REDUNDANCY`` requires 
+      *at least* 5 drives in the MinIO deployment. 
+      
+      MinIO sets the ``REDUCED_REDUNDANCY`` parity to ``EC:2`` by default.
+      You can override ``REDUCED_REDUNDANCY`` storage class parity using
+      either:
 
-   - The :envvar:`MINIO_STORAGE_CLASS_RRS` environment variable, *or*
-   - The :mc:`mc admin config` command to modify the 
-     ``storage_class.rrs`` configuration setting.
+      - The :envvar:`MINIO_STORAGE_CLASS_RRS` environment variable, *or*
+      - The :mc:`mc admin config` command to modify the 
+       ``storage_class.rrs`` configuration setting.
 
-   The default value is ``EC:2``.
-
-   ``REDUCED_REDUNDANCY`` parity *must* be less than or equal to ``STANDARD``.
-   If ``STANDARD`` is unset, ``REDUCED_REDUNDANCY`` must be less than half of
-   the total drives in the :ref:`Erasure Set <minio-ec-erasure-set>`.
-
-   ``REDUCED_REDUNDANCY`` is not supported for MinIO deployments with
-   4 or fewer drives.
+      ``REDUCED_REDUNDANCY`` parity *must* be less than or equal to
+      ``STANDARD``.
 
 MinIO references the ``x-amz-storage-class`` header in request metadata for
 determining which storage class to assign an object. The specific syntax
