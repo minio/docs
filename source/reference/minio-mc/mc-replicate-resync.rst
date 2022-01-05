@@ -46,7 +46,7 @@ for more information on active-active replication:
       .. code-block:: shell
          :class: copyable
 
-         mc replicate resync  \
+         mc replicate resync start \
             --remote-bucket "arn:minio:replication::d3c086c7-1d64-40c2-954b-fe8222907033:mydata" \ 
             myminio/mydata
 
@@ -57,9 +57,9 @@ for more information on active-active replication:
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] replicate resync          \
-                          --remote-bucket "string"  \
-                          [--older-than "string"]   \
+         mc [GLOBALFLAGS] replicate resync start|status  \
+                          --remote-bucket "string"       \
+                          [--older-than "string"]        \
                           ALIAS
 
       .. include:: /includes/common-minio-mc.rst
@@ -70,19 +70,40 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* the :ref:`alias <alias>` of the MinIO deployment and full path to
+   The :ref:`alias <alias>` of the MinIO deployment and full path to
    the bucket or bucket prefix which MinIO uses as the replication source. For
-   example:
+   example, the following command starts replication using the ``data``
+   bucket on the MinIO deployment associated to the ``primary`` alias.
 
    .. code-block:: none
 
-      mc replicate resync myminio/mybucket
+      mc replicate resync start primary/data --remote-bucket "ARN"
+
+.. mc-cmd:: start
+   :required:
+
+   Starts the resynchronization procedure using the specified 
+   :mc-cmd:`bucket <mc replicate resync ALIAS>` as the source and the
+   :mc-cmd:`--remote-bucket <mc replicate resync --remote-bucket>` as the 
+   remote target.
+
+   Mutually exclusive with :mc-cmd:`mc replicate resync status`.
+
+.. mc-cmd:: status
+   :required:
+
+   Returns the status of resynchronization on the specified 
+   :mc-cmd:`bucket <mc replicate resync ALIAS>` to all remote targets.
+
+   Include the :mc-cmd:`~mc replicate resync --remote-bucket` argument to
+   filter the status output to only the specified remote target.
 
 .. mc-cmd:: --remote-bucket
-   
+   :required:
 
-   *Required* Specify the ARN for the destination deployment and bucket. You
+   Specify the ARN for the destination deployment and bucket. You
    can retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
     
    - Use the :mc-cmd:`mc admin bucket remote ls` to retrieve a list of 
@@ -92,9 +113,12 @@ Parameters
      for the bucket on the destination deployment.
 
 .. mc-cmd:: older-than
+   :optional:
 
-   *Optional*  Specify a duration in days where MinIO only resynchronizes
+   Specify a duration in days where MinIO only resynchronizes
    objects older than the specified duration.
+
+   Only valid with :mc-cmd:`mc replicate resync start`.
 
 Global Flags
 ~~~~~~~~~~~~
@@ -116,9 +140,9 @@ replication status:
 .. code-block:: shell
    :class: copyable
 
-   mc replicate resync --remote-bucket "arn:minio:replication::UUID:mybucket" myminio/mybucket
+   mc replicate resync start --remote-bucket "arn:minio:replication::UUID:data" primary/data
 
-- Replace ``myminio/mybucket`` with the :mc-cmd:`~mc replicate add ALIAS` and
+- Replace ``primary/data`` with the :mc-cmd:`~mc replicate add ALIAS` and
   full bucket path for which to create the replication configuration.
 
 - Replace the :mc-cmd:`~mc replicate add --remote-bucket` value with the 

@@ -87,8 +87,7 @@ commands *may* work as documented, any such usage is at your own risk.
 
 - Brackets ``[]`` indicate optional parameters. 
 - Parameters sharing a line are mutually dependent.
-- Parameters sharing a line *and* seperated using the pipe ``|`` operator are 
-  mutually exclusive.
+- Parameters seperated using the pipe ``|`` operator are mutually exclusive.
 
 Copy the example to a text editor and modify as-needed before running the
 command in the terminal/shell.

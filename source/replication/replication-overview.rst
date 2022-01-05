@@ -312,7 +312,7 @@ The replication process generally has one of the following flows:
    /replication/enable-server-side-one-way-bucket-replication
    /replication/enable-server-side-two-way-bucket-replication
    /replication/enable-server-side-multi-site-bucket-replication
-   
+   /replication/server-side-replication-resynchronize-remote   
 
 .. _minio-bucket-replication-clientside:
 

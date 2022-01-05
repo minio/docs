@@ -8,7 +8,7 @@ Enable Two-Way Server-Side Bucket Replication
 
 .. contents:: Table of Contents
    :local:
-   :depth: 2
+   :depth: 1
 
 
 The procedure on this page creates a new bucket replication rule for two-way
@@ -49,35 +49,6 @@ or more MinIO clusters, see :ref:`minio-bucket-replication-serverside-multi`
 
 Requirements
 ------------
-
-Replication Requires MinIO Remote Targets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO server-side replication only works between MinIO clusters. Both the
-source and destination clusters *must* run MinIO. 
-
-To configure replication between arbitrary S3-compatible services,
-use :mc-cmd:`mc mirror`.
-
-Replication Requires Versioning
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO relies on the immutability protections provided by versioning to
-synchronize objects between the source and replication target.
-
-Use the :mc-cmd:`mc version enable` command to enable versioning on
-*both* the source and destination bucket before starting this procedure:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc version ALIAS/PATH
-
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the
-  :mc:`alias <mc alias>` of the MinIO cluster.
-
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which
-  to enable versioning.
 
 Install and Configure ``mc`` with Access to Both Clusters.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,11 +99,6 @@ destination clusters to configure and enable replication rules.
         source cluster. You can restrict the user policy to specific buckets
         as-needed.
 
-      Use the :mc-cmd:`mc admin policy add` to add this policy to *both*
-      clusters. You can then create a user on both clusters using
-      :mc-cmd:`mc admin user add` and associate the policy to those users
-      with :mc-cmd:`mc admin policy set`.
-
    .. tab-item:: Replication Remote User
 
       The following policy provides permissions for enabling synchronization of
@@ -156,15 +122,41 @@ destination clusters to configure and enable replication rules.
         buckets as an element in the ``Resource`` array similar to 
         ``"arn:aws:s3:::bucketName/*"``.
 
-      Use the :mc-cmd:`mc admin policy add` to add this policy to *both*
-      clusters. You can then create a user on both clusters using
-      :mc-cmd:`mc admin user add` and associate the policy to those users
-      with :mc-cmd:`mc admin policy set`.
+Use the reference policies above to create the necessary policies using :mc-cmd:`mc admin policy add`. After creating the necessary policy, MinIO strongly recommends creating a dedicated user or service account for supporting bucket replication operations.
 
-MinIO strongly recommends creating users specifically for supporting 
-bucket replication operations. See 
-:mc:`mc admin user` and :mc:`mc admin policy` for more complete
-documentation on adding users and policies to a MinIO cluster.
+- MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management can create a dedicated :ref:`service account <minio-idp-service-account>` for bucket replication.
+
+- MinIO deployments configured for :ref:`MinIO <minio-users>` user management can create either a dedicated user *or* service account for bucket replication.
+
+See :mc:`mc admin user`, :mc:`mc admin user svcacct`, and :mc:`mc admin policy` for more complete documentation on adding users, service accounts, and policies to a MinIO cluster.
+
+Replication Requires Matching Object Encryption Settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-replication.rst
+   :start-after: start-replication-encrypted-objects
+   :end-before: end-replication-encrypted-objects
+
+Replication Requires MinIO Deployments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-replication.rst
+   :start-after: start-replication-minio-only
+   :end-before: end-replication-minio-only
+
+Replication Requires Versioning
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-replication.rst
+   :start-after: start-replication-requires-versioning
+   :end-before: end-replication-requires-versioning
+
+Replication Requires Matching Object Locking State
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-replication.rst
+   :start-after: start-replication-requires-object-locking
+   :end-before: end-replication-requires-object-locking
 
 Considerations
 --------------
@@ -188,10 +180,7 @@ objects.
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Starting with :mc:`mc` :minio-git:`RELEASE.2021-06-13T17-48-22Z
-<mc/releases/tag/RELEASE.2021-06-13T17-48-22Z>` and :mc:`minio`
-:minio-git:`RELEASE.2021-06-07T21-40-51Z
-<minio/releases/tag/RELEASE.2021-06-07T21-40-51Z>`, MinIO supports automatically
+MinIO supports automatically
 replicating existing objects in a bucket.
 
 MinIO requires explicitly enabling replication of existing objects using the
@@ -226,37 +215,6 @@ on both the source and destination bucket to ensure consistent application
 of object expiration.
 
 See :ref:`minio-replication-behavior-delete` for more complete documentation.
-
-Replication of Encrypted Objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO supports replicating objects encrypted with automatic 
-Server-Side Encryption (SSE-S3). Both the source and destination buckets
-*must* have automatic SSE-S3 enabled for MinIO to replicate an encrypted object.
-
-As part of the replication process, MinIO *decrypts* the object on the source
-bucket and transmits the unencrypted object. The destination MinIO cluster then
-re-encrypts the object using the destination bucket SSE-S3 configuration. MinIO
-*strongly recommends* :ref:`enabling TLS <minio-TLS>` on both source and
-destination clusters to ensure the safety of objects during transmission.
-
-MinIO does *not* support replicating client-side encrypted objects 
-(SSE-C).
-
-Replication of Locked Objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO supports replicating objects held under 
-:ref:`WORM Locking <minio-object-locking>`. Both replication buckets *must* have
-object locking enabled for MinIO to replicate the locked object. For
-active-active configuration, MinIO recommends using the *same* 
-retention rules on both buckets to ensure consistent behavior across
-sites.
-
-You must enable object locking during bucket creation as per S3 behavior. 
-You can then configure object retention rules at any time.
-Object locking requires :ref:`versioning <minio-bucket-versioning>` and
-enables the feature implicitly.
 
 Multi-Site Replication
 ~~~~~~~~~~~~~~~~~~~~~~
