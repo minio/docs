@@ -145,7 +145,7 @@ MinIO provides the following two storage classes:
 
 .. tab-set::
 
-   .. tab-item:: ``STANDARD``
+   .. tab-item:: STANDARD
 
       The ``STANDARD`` storage class is the default class for all objects.
       MinIO sets the ``STANDARD`` parity based on the number of volumes
@@ -181,7 +181,7 @@ MinIO provides the following two storage classes:
       ``REDUCED_REDUNDANCY``. If ``REDUCED_REDUNDANCY`` is unset, ``STANDARD``
       parity *must* be greater than 2.
 
-   .. tab-item:: ``REDUCED_REDUNDANCY``
+   .. tab-item:: REDUCED_REDUNDANCY
 
       The ``REDUCED_REDUNDANCY`` storage class allows creating objects with
       lower parity than ``STANDARD``. ``REDUCED_REDUNDANCY`` requires 
