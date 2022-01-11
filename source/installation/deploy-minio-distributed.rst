@@ -98,6 +98,8 @@ You can specify the entire range of hostnames using the expansion notation
 
 Configuring DNS to support MinIO is out of scope for this procedure.
 
+.. _deploy-minio-distributed-prereqs-storage:
+
 Local JBOD Storage with Sequential Mounts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -111,7 +113,7 @@ Local JBOD Storage with Sequential Mounts
    :class: note
 
    MinIO's strict **read-after-write** and **list-after-write** consistency
-   model requires local disk filesystems (``xfs``, ``ext4``, etc.).
+   model requires local disk filesystems.
 
    MinIO cannot provide consistency guarantees if the underlying storage
    volumes are NFS or a similar network-attached storage volume. 

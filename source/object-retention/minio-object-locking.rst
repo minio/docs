@@ -31,6 +31,7 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
       .. image:: /images/retention/minio-versioning-delete-object.svg
          :alt: Deleting an Object
          :align: center
+         :width: 600px
 
       MinIO versioning preserves the full history of object mutations. 
       However, applications can explicitly delete specific object versions.
@@ -40,6 +41,7 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
       .. image:: /images/retention/minio-object-locking.svg
          :alt: 30 Day Locked Objects
          :align: center
+         :width: 600px
 
       Applying a default 30 Day WORM lock to objects in the bucket ensures
       a minimum period of retention and protection for all object versions.
@@ -49,6 +51,7 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
       .. image:: /images/retention/minio-object-locking-delete.svg
          :alt: Delete Operation in Locked Bucket
          :align: center
+         :width: 600px
 
       Delete operations follow normal behavior in 
       :ref:`versioned buckets <minio-bucket-versioning-delete>`, where MinIO
@@ -61,6 +64,7 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
       .. image:: /images/retention/minio-object-locking-delete-version.svg
          :alt: Versioned Delete Operation in a Locked Bucket
          :align: center
+         :width: 600px
 
       MinIO blocks any attempt to delete a specific object version held under
       WORM lock. The earliest possible time after which a client may delete
