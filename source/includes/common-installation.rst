@@ -16,8 +16,9 @@ recommends using RPM or DEB installation routes.
 
       .. code-block:: shell
          :class: copyable
+         :substitutions:
 
-         wget https://dl.min.io/server/minio/release/linux-amd64/minio.rpm
+         wget |minio-rpm| -O minio.deb
          sudo dnf install minio.rpm
 
    .. tab-item:: DEB (Debian/Ubuntu)
@@ -28,8 +29,9 @@ recommends using RPM or DEB installation routes.
 
       .. code-block:: shell
          :class: copyable
+         :substitutions:
 
-         wget https://dl.min.io/server/minio/release/linux-amd64/minio.deb
+         wget |minio-deb| -O minio.deb
          sudo dpkg -i minio.deb
 
    .. tab-item:: Binary
@@ -53,13 +55,26 @@ MinIO enables :ref:`Transport Layer Security (TLS) <minio-tls>` 1.2+
 automatically upon detecting a valid x.509 certificate (``.crt``) and
 private key (``.key``) in the MinIO ``${HOME}/.minio/certs`` directory.
 
-If *any* MinIO server or client uses certificates signed by an unknown
-Certificate Authority (self-signed or internal CA), you *must* place the CA
-certs in the ``${HOME}/.minio/certs/CAs`` on all MinIO hosts in the deployment.
-MinIO rejects invalid certificates (untrusted, expired, or malformed).
+For ``systemd``-managed deployments, use the ``$HOME`` directory for the
+user which runs the MinIO server process. The provided ``minio.service``
+file runs the process as ``minio-user``. The previous step includes instructions
+for creating this user with a home directory ``/home/minio-user``.
 
-You can override the certificate directory using the 
-:mc-cmd-option:`minio server certs-dir` commandline argument.
+- Place TLS certificates into ``/home/minio-user/.minio/certs``.
+
+- If *any* MinIO server or client uses certificates signed by an unknown
+  Certificate Authority (self-signed or internal CA), you *must* place the CA
+  certs in the ``/home/minio-user/.minio/certs/CAs`` on all MinIO hosts in the
+  deployment. MinIO rejects invalid certificates (untrusted, expired, or
+  malformed).
+
+If the ``minio.service`` file specifies a different user account, use the
+``$HOME`` directory for that account. Alternatively, specify a custom
+certificate directory using the :mc-cmd-option:`minio server certs-dir`
+commandline argument. Modify the ``MINIO_OPTS`` variable in
+``/etc/defaults/minio`` to set this option. The ``systemd`` user which runs the
+MinIO server process *must* have read and listing permissions for the specified
+directory.
 
 For more specific guidance on configuring MinIO for TLS, including multi-domain
 support via Server Name Indication (SNI), see :ref:`minio-tls`. You can

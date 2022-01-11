@@ -222,22 +222,14 @@ procedure.
    :start-after: start-install-minio-binary-desc
    :end-before: end-install-minio-binary-desc
 
-2) Add TLS/SSL Certificates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-installation.rst
-   :start-after: start-install-minio-tls-desc
-   :end-before: end-install-minio-tls-desc
-
-
-3) Create the ``systemd`` Service File
+2) Create the ``systemd`` Service File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common-installation.rst
    :start-after: start-install-minio-systemd-desc
    :end-before: end-install-minio-systemd-desc
 
-4) Create the Service Environment File
+3) Create the Service Environment File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create an environment file at ``/etc/default/minio``. The MinIO 
@@ -312,6 +304,13 @@ You may specify other :ref:`environment variables
 <minio-server-environment-variables>` or server commandline options as required
 by your deployment. All MinIO nodes in the deployment should include the same
 environment variables with the same values for each variable.
+
+4) Add TLS/SSL Certificates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-installation.rst
+   :start-after: start-install-minio-tls-desc
+   :end-before: end-install-minio-tls-desc
 
 5) Run the MinIO Server Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
