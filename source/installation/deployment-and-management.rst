@@ -130,3 +130,4 @@ source-based installations in production environments.
    /installation/expand-minio-distributed
    /installation/deploy-minio-standalone
    /installation/upgrade-minio
+   /installation/restore-minio
