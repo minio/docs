@@ -52,10 +52,11 @@ write errors.
 .. admonition:: MinIO Professional Support
    :class: note
 
-   |subnet| users can `log in <https://subnet.min.io/>`__ and create a new issue
-   related to drive or node failures. Coordination with MinIO Engineering via
-   SUBNET can ensure successful recovery operations of production MinIO
-   deployments, including root-cause analysis, and health diagnostics.
+   `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__ users can
+   `log in <https://subnet.min.io/>`__ and create a new issue related to drive
+   or node failures. Coordination with MinIO Engineering via SUBNET can ensure
+   successful recovery operations of production MinIO deployments, including
+   root-cause analysis, and health diagnostics.
 
    Community users can seek support on the `MinIO Community Slack
    <https://minio.slack.com>`__. Community Support is best-effort only and has
@@ -174,8 +175,8 @@ from the degraded state.
 Monitor the cluster for any further drive failures. Some drive batches may fail
 in close proximity to each other. Deployments seeing higher than expected drive
 failure rates should schedule dedicated maintenance around replacing the known
-bad batch. Consider using |subnet| to coordinate with MinIO engineering around
-guidance for any such operations.
+bad batch. Consider using `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__ to
+coordinate with MinIO engineering around guidance for any such operations.
 
 .. _minio-restore-hardware-failure-node:
 
@@ -197,8 +198,8 @@ node. There are no negative performance implications to using improved hardware.
 The replacement drive hardware should be substantially similar to the failed
 drive. For example, replace a failed SSD with another SSD drive of the same
 capacity. While you can use drives with larger capacity, MinIO uses the
-*smallest* drive's capacity as the ceiling for all drives in the :ref:`Server
-Pool <minio-intro-server-pool>`.
+*smallest* drive's capacity as the ceiling for all drives in the 
+:ref:`Server Pool <minio-intro-server-pool>`.
 
 The following steps provide a more detailed walkthrough of node replacement.
 These steps assume a MinIO deployment where each node has a DNS hostname 
@@ -257,5 +258,6 @@ from the degraded state.
 
 Continue monitoring the deployment until healing completes. Deployments with
 persistent and repeated node failures should schedule dedicated maintenance to
-identify the root cause. Consider using |subnet| to coordinate with MinIO
+identify the root cause. Consider using
+`MinIO SUBNET <https://min.io/pricing?jmp=docs>`__ to coordinate with MinIO
 engineering around guidance for any such operations.
