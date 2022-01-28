@@ -1628,7 +1628,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-brokers
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_BROKERS` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_BROKERS` environment variable.
 
    .. mc-conf:: topic
       :delimiter: " "
@@ -1640,7 +1640,19 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-topic
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_TOPIC` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_TOPIC` environment variable.
+
+   .. mc-conf:: sasl
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-notify-kafka-sasl-root
+         :end-before: end-minio-notify-kafka-sasl-root
+
+      This configuration setting corresponds to the
+      :envvar:`MINIO_NOTIFY_KAFKA_SASL` environment variable.
 
    .. mc-conf:: sasl_username
       :delimiter: " "
@@ -1652,7 +1664,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-sasl-username
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_SASL_USERNAME` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_SASL_USERNAME` environment variable.
 
    .. mc-conf:: sasl_password
       :delimiter: " "
@@ -1664,7 +1676,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-sasl-password
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_SASL_PASSWORD` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_SASL_PASSWORD` environment variable.
 
    .. mc-conf:: sasl_mechanism
       :delimiter: " "
@@ -1676,7 +1688,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-sasl-mechanism
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_SASL_MECHANISM` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_SASL_MECHANISM` environment variable.
 
    .. mc-conf:: tls_client_auth
       :delimiter: " "
@@ -1688,7 +1700,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-tls-client-auth
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH` environment variable.
 
    .. mc-conf:: tls
       :delimiter: " "
@@ -1700,7 +1712,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-tls-root
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_TLS` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_TLS` environment variable.
 
    .. mc-conf:: tls_skip_verify
       :delimiter: " "
@@ -1712,7 +1724,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-tls-skip-verify
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_TLS_SKIP_VERIFY` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_TLS_SKIP_VERIFY` environment variable.
 
    .. mc-conf:: client_tls_cert
       :delimiter: " "
@@ -1724,7 +1736,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-client-tls-cert
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_CLIENT_TLS_CERT` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_CLIENT_TLS_CERT` environment variable.
 
    .. mc-conf:: client_tls_key
       :delimiter: " "
@@ -1736,7 +1748,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-client-tls-key
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_CLIENT_TLS_KEY` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_CLIENT_TLS_KEY` environment variable.
 
    .. mc-conf:: version
       :delimiter: " "
@@ -1748,7 +1760,7 @@ using these environment variables.
          :end-before: end-minio-notify-kafka-version
 
       This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_VERSION` ENVIRONMENT VARIABLE
+      :envvar:`MINIO_NOTIFY_KAFKA_VERSION` environment variable.
 
 
    .. mc-conf:: queue_dir

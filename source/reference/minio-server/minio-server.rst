@@ -1897,6 +1897,18 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    :mc-conf:`notify_kafka topic <notify_kafka.topic>`
    configuration setting.
 
+.. envvar:: MINIO_NOTIFY_KAFKA_SASL
+
+   *Optional*
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-notify-kafka-sasl-root
+      :end-before: end-minio-notify-kafka-sasl-root
+
+   This environment variable corresponds to the
+   :mc-conf:`notify_kafka sasl <notify_kafka.sasl>`
+   configuration setting.
+
 .. envvar:: MINIO_NOTIFY_KAFKA_SASL_USERNAME
 
    *Optional*
@@ -1943,18 +1955,6 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 
    This environment variable corresponds to the
    :mc-conf:`notify_kafka tls_client_auth <notify_kafka.tls_client_auth>`
-   configuration setting.
-
-.. envvar:: MINIO_NOTIFY_KAFKA_SASL
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-kafka-sasl-root
-      :end-before: end-minio-notify-kafka-sasl-root
-
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka sasl <notify_kafka.sasl>`
    configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_TLS
