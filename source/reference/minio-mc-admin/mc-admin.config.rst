@@ -1586,8 +1586,8 @@ using these environment variables.
 
 .. mc-conf:: notify_kafka
 
-   The top-level configuration key for defining an Kafka service endpoint for use
-   with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+   The top-level configuration key for defining an Kafka service endpoint for
+   use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
 
    Use :mc-cmd:`mc admin config set` to set or update an Kafka service endpoint.
    The :mc-conf:`~notify_kafka.brokers` argument is *required* for each target.
@@ -1690,26 +1690,14 @@ using these environment variables.
       This configuration setting corresponds to the
       :ENVVAR:`MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH` ENVIRONMENT VARIABLE
 
-   .. mc-conf:: sasl
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-kafka-sasl
-         :end-before: end-minio-notify-kafka-sasl
-
-      This configuration setting corresponds to the
-      :ENVVAR:`MINIO_NOTIFY_KAFKA_SASL` ENVIRONMENT VARIABLE
-
    .. mc-conf:: tls
       :delimiter: " "
 
       *Optional*
 
       .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-kafka-tls
-         :end-before: end-minio-notify-kafka-tls
+         :start-after: start-minio-notify-kafka-tls-root
+         :end-before: end-minio-notify-kafka-tls-root
 
       This configuration setting corresponds to the
       :ENVVAR:`MINIO_NOTIFY_KAFKA_TLS` ENVIRONMENT VARIABLE

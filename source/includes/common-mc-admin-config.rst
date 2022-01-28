@@ -838,7 +838,8 @@ Specify the SASL mechanism to use for authenticating to the Kafka broker(s).
 MinIO supports the following mechanisms:
 
 - ``PLAIN`` (Default)
-- ``SCRAM``
+- ``SHA256``
+- ``SHA512``
 
 .. end-minio-notify-kafka-sasl-mechanism
 
@@ -852,17 +853,17 @@ more information on possible values for this field.
 
 .. end-minio-notify-kafka-tls-client-auth
 
-.. start-minio-notify-kafka-sasl
+.. start-minio-notify-kafka-sasl-root
 
 Specify ``on`` to enable SASL authentication.
 
-.. end-minio-notify-kafka-sasl
+.. end-minio-notify-kafka-sasl-root
 
-.. start-minio-notify-kafka-tls
+.. start-minio-notify-kafka-tls-root
 
 Specify ``on`` to enable TLS connectivity to the Kafka broker(s)
 
-.. end-minio-notify-kafka-tls
+.. end-minio-notify-kafka-tls-root
 
 .. start-minio-notify-kafka-tls-skip-verify
 

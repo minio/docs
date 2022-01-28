@@ -132,7 +132,6 @@ You can configure a new Kafka service endpoint using either environment variable
             sasl_password="<string>" \
             sasl_mechanism="<string>" \
             tls_client_auth="<string>" \
-            sasl="<string>" \
             tls="<string>" \
             tls_skip_verify="<string>" \
             client_tls_cert="<string>" \
@@ -306,16 +305,17 @@ for the Kafka service endpoint:
    :class: copyable
 
    mc admin config set ALIAS/ notify_kafka:<IDENTIFIER> \
-      url="https://kafka1.example.net:9200, https://kafka2.example.net:9200" \
-      exchange="<string>" \
-      exchange_type="<string>" \
-      routing_key="<string>" \
-      mandatory="<string>" \
-      durable="<string>" \
-      no_wait="<string>" \
-      internal="<string>" \
-      auto_deleted="<string>" \
-      delivery_mode="<string>" \
+      brokers="https://kafka1.example.net:9200, https://kafka2.example.net:9200" \
+      topic="<string>" \
+      sasl_username="<string>" \
+      sasl_password="<string>" \
+      sasl_mechanism="<string>" \
+      tls_client_auth="<string>" \
+      tls="<string>" \
+      tls_skip_verify="<string>" \
+      client_tls_cert="<string>" \
+      client_tls_key="<string>" \
+      version="<string>" \
       queue_dir="<string>" \
       queue_limit="<string>" \
       comment="<string>"
@@ -356,7 +356,7 @@ Kafka target similar to the following:
 
    SQS ARNs: arn:minio:sqs::primary:kafka
 
-3) Validate the Changes
+4) Validate the Changes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on a bucket which has an event configuration using the updated

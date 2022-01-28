@@ -1950,8 +1950,8 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    *Optional*
 
    .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-kafka-sasl
-      :end-before: end-minio-notify-kafka-sasl
+      :start-after: start-minio-notify-kafka-sasl-root
+      :end-before: end-minio-notify-kafka-sasl-root
 
    This environment variable corresponds to the
    :mc-conf:`notify_kafka sasl <notify_kafka.sasl>`
@@ -1962,8 +1962,8 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    *Optional*
 
    .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-kafka-tls
-      :end-before: end-minio-notify-kafka-tls
+      :start-after: start-minio-notify-kafka-tls-root
+      :end-before: end-minio-notify-kafka-tls-root
 
    This environment variable corresponds to the
    :mc-conf:`notify_kafka tls <notify_kafka.tls>`
