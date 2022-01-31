@@ -1,150 +1,166 @@
 <div class="nav">
     <i class="toggle-icon toggle-icon--close" data-toggle="nav"></i>
 
-    <div class="nav__item">
-        <div class="nav__link nav__link--dropdown">
-            <span>Product</span>
-        </div>
+    <div class="nav__top">
+        <a target="_blank" rel="noreferrer" href="https://subnet.min.io/" class="nav__link">
+            <span>Customer Login</span>
+        </a>
+    </div>
+    
+    <div class="nav__bottom">
+        <div class="nav__item">
+            <div class="nav__link nav__link--dropdown" data-href="product">
+                <span>Product</span>
+            </div>
 
-        <div class="nav__dropdown nav__dropdown--product">
-            <div class="nav__dropdown__inner">
-                <div class="nav__feature">
-                    <div class="nav__column">
-                        <div class="nav__sub">
-                            <a href="https://min.io/hybrid-cloud-storage" class="nav__lead">
-                                <img src="{{ pathto('_static/img/icons/hybrid-cloud.svg',1) }}" alt="Hybrid Cloud Object Storage">
-                                Hybrid Cloud Object Storage
-                            </a>
-                            <div class="nav__jump">
-                                <a href="https://min.io/hybrid-cloud-storage#overview">Overview</a>
-                                <a href="https://min.io/hybrid-cloud-storage#architecture">Architecture</a>
-                            </div>
+            <div class="nav__dropdown nav__dropdown--product">
+                <div class="nav__dropdown__inner">
+                    <div class="nav__feature">
+                        <div class="nav__column">
+                            <div class="nav__column__title">Multi-Cloud</div>
+    
+                            <a href="https://min.io/product/private-cloud-vmware-tanzu" class="nav__sub" data-nav="vm-tanzu">MinIO for VMware Tanzu</a>
+                            <a href="https://min.io/product/private-cloud-red-hat-openshift" class="nav__sub" data-nav="open-shift">MinIO for OpenShift</a>
+                            <a href="https://min.io/product/multicloud-suse-rancher" class="nav__sub" data-nav="multicloud-suse-rancher">MinIO for SUSE Rancher</a>
+                            <a href="https://min.io/product/multicloud-elastic-kubernetes-service" class="nav__sub" data-nav="elastic-kubernetes-service">MinIO for Amazon Elastic Kubernetes Service</a>
+                            <a href="https://min.io/product/multicloud-azure-kubernetes-service" class="nav__sub" data-nav="azure-kubernetes-service">MinIO for Azure Kubernetes Service</a>
+                            <a href="https://min.io/product/multicloud-google-kubernetes-service" class="nav__sub" data-nav="google-kubernetes-engine">MinIO for Google Kubernetes Engine</a>
                         </div>
-                        <div class="nav__sub">
-                            <a href="https://min.io/product/overview" class="nav__lead">
-                                <img src="{{ pathto('_static/img/icons/baremetal.svg',1) }}" alt="Baremetal">
-                                Baremetal
-                            </a>
-                            <div class="nav__jump">
-                                <a href="https://min.io/product/overview#features">Overview</a>
-                                <a href="https://min.io/product/overview#architecture">Architecture</a>
-                            </div>
+
+                        <i class="nav__separator"></i>
+
+                        <div class="nav__column">
+                            <div class="nav__column__title">Features</div>
+    
+                            <a href="https://min.io/product/active-data-replication-for-object-storage" class="nav__sub" data-nav="active-active-replication">Active Active Replication</a>
+                            <a href="https://min.io/product/identity-and-access-management" class="nav__sub" data-nav="scalable-identity-access-management">Identity & Access Management</a>
+                            <a href="https://min.io/product/enterprise-object-storage-encryption" class="nav__sub" data-nav="encryption">Encryption</a>
+                            <a href="https://min.io/product/data-immutability-for-object-storage" class="nav__sub" data-nav="object-immutability">Bucket & Object Immutability</a>
+                            <a href="https://min.io/product/object-versioning-bucket-versioning" class="nav__sub" data-nav="versioning">Bucket & Object Versioning</a>
+                            <a href="https://min.io/product/automated-data-tiering-lifecycle-management" class="nav__sub" data-nav="life-cycle">Data Life Cycle Management & Tiering</a>
+                            <a href="https://min.io/product/automated-cloud-data-management-interface" class="nav__sub" data-nav="interface">Automated Data Management Interfaces</a>
+                            <a href="https://min.io/product/object-storage-performance-monitoring" class="nav__sub" data-nav="monitoring">Monitoring</a>
+                            <a href="https://min.io/product/scalable-object-storage" class="nav__sub" data-nav="scalable">Scalability</a>
+                            <a href="https://min.io/product/s3-compatibility" class="nav__sub" data-nav="s3-compatibility">AWS S3 Compatibility</a>
                         </div>
-                        <a href="https://min.io/product/erasure-code-calculator" class="nav__sub nav__lead">
-                            <img src="{{ pathto('_static/img/icons/erasure-code-calculator.svg',1) }}" alt="Erasure Code Calculator">
-                            Erasure Code Calculator
-                        </a>
-                        <a href="https://min.io/product/reference-hardware" class="nav__sub nav__lead">
-                            <img src="{{ pathto('_static/img/icons/ref-hardware.svg',1) }}" alt="Reference Hardware">
-                            Reference Hardware
-                        </a>
-                    </div>
-                    <div class="nav__column">
-                        <div class="nav__column__title">Features</div>
 
-                        <a href="https://min.io/product/active-data-replication-for-object-storage" class="nav__sub">Active Active Replication</a>
-                        <a href="https://min.io/product/identity-and-access-management" class="nav__sub">Identity & Access Management</a>
-                        <a href="https://min.io/product/enterprise-object-storage-encryption" class="nav__sub">Encryption</a>
-                        <a href="https://min.io/product/data-immutability-for-object-storage" class="nav__sub">Bucket & Object Immutability</a>
-                        <a href="https://min.io/product/object-versioning-bucket-versioning" class="nav__sub">Bucket & Object Versioning</a>
-                        <a href="https://min.io/product/automated-data-tiering-lifecycle-management" class="nav__sub">Data Life Cycle Management & Tiering</a>
-                        <a href="https://min.io/product/automated-cloud-data-management-interface" class="nav__sub">Automated Data Management Interfaces</a>
-                        <a href="https://min.io/product/object-storage-performance-monitoring" class="nav__sub">Monitoring</a>
-                        <a href="https://min.io/product/scalable-object-storage" class="nav__sub">Scalability</a>
-                    </div>
-
-                    <i class="nav__seperator"></i>
-
-                    <div class="nav__column">
-                        <div class="nav__column__title">Native Versions</div>
-
-                        <a href="https://min.io/product/private-cloud-vmware-tanzu" class="nav__sub">MinIO for VMware Tanzu</a>
-                        <a href="https://min.io/product/private-cloud-red-hat-openshift" class="nav__sub">MinIO for OpenShift</a>
-                        <a href="https://min.io/product/multicloud-elastic-kubernetes-service" class="nav__sub">MinIO for Amazon Elastic Kubernetes Service</a>
-                        <a href="https://min.io/product/multicloud-azure-kubernetes-service" class="nav__sub">MinIO for Azure Kubernetes Service</a>
-                        <a href="https://min.io/product/multicloud-google-kubernetes-service" class="nav__sub">MinIO for Google Kubernetes Engine</a>
+                        <div class="nav__column">
+                            <div class="nav__sub" data-nav="hybrid-cloud-storage">
+                                <a href="https://min.io/hybrid-cloud-storage" class="nav__lead">
+                                    <img src="{{ pathto('_static/img/icons/hybrid-cloud.svg',1) }}" alt="Hybrid Cloud Object Storage" />
+                                    Hybrid Cloud Object Storage
+                                </a>
+                                <div class="nav__jump">
+                                    <a href="https://min.io/hybrid-cloud-storage#overview">Overview</a>
+                                    <a href="https://min.io/hybrid-cloud-storage#architecture">Architecture</a>
+                                </div>
+                            </div>
+                            <div class="nav__sub" data-nav="overview">
+                                <a href="https://min.io/product/overview" class="nav__lead">
+                                    <img src="{{ pathto('_static/img/icons/baremetal.svg',1) }}" alt="Baremetal" />
+                                    Baremetal
+                                </a>
+                                <div class="nav__jump">
+                                    <a href="https://min.io/product/overview#features">Overview</a>
+                                    <a href="https://min.io/product/overview#architecture">Architecture</a>
+                                </div>
+                            </div>
+                            <a href="https://min.io/product/erasure-code-calculator" class="nav__sub nav__lead" data-nav="erasure-code-calculator">
+                                <img class="h-6" src="{{ pathto('_static/img/icons/erasure-code-calculator.svg',1) }}" alt="Erasure Code Calculator" />
+                                Erasure Code Calculator
+                            </a>
+                            <a href="https://min.io/product/reference-hardware" class="nav__sub nav__lead" data-nav="reference-hardware">
+                                <img src="{{ pathto('_static/img/icons/ref-hardware.svg',1) }}" alt="Reference Hardware" />
+                                Reference Hardware
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    
-    
-    <div class="nav__item">
-        <div class="nav__link nav__link--dropdown nav__link--active">
-            <span>Docs</span>
-
-            <div class="nav__dropdown">
-                <div class="nav__dropdown__inner">
-                    <a class="nav__sub" href="https://docs.min.io/minio/baremetal">
-                        <span class="">MinIO Baremetal</span>
-                        <small class="">MinIO Object Storage for Baremetal Infrastructure</small>
-                    </a>
-                    <a class="nav__sub" href="https://docs.min.io/minio/k8s">
-                        <span class="">MinIO Hybrid Cloud</span>
-                        <small class="">MinIO Object Storage for Kubernetes-Managed Private and Public Cloud Infrastructure</small>
-                    </a>
-                    <a class="nav__sub" href="https://docs.min.io/minio/vsphere">
-                        <span class="">MinIO for VMware Cloud Foundation</span>
-                        <small class="">MinIO Object Storage for VMware Cloud Foundation 4.2</small>
-                    </a>
-                    <a class="nav__sub" href="https://docs.min.io">
-                        <span class="">MinIO Legacy Documentation</span>
-                        <small class="">Legacy Documentation for MinIO Object Storage</small>
-                    </a>
-                </div>
-            </div>  
         </div>
         
-    </div>
-    <div class="nav__item">
-        <div class="nav__link nav__link--dropdown">
-            <span>Solutions</span> 
+        <div class="nav__item">
+            <div class="nav__link nav__link--dropdown" data-href="solutions">
+                <span>Solutions</span> 
 
-            <div class="nav__dropdown">
-                <div class="nav__dropdown__inner">
-                    <a href="https://min.io/solutions/vmware" class="nav__sub">
-                        <span>VMware</span>
-                        <small>Discover how MinIO integrates with VMware across the portfolio from the Persistent Data platform to TKGI and how we support their Kubernetes ambitions.</small>
-                    </a>
-                    <a href="https://min.io/solutions/optimize-splunk-smartstore-performance" class="nav__sub">
-                        <span>Splunk</span>
-                        <small>Find out how MinIO is delivering performance at scale for Splunk SmartStores</small>
-                    </a>
-                    <a href="https://min.io/solutions/veeam" class="nav__sub">
-                        <span>Veeam</span>
-                        <small>Learn how MinIO and Veeam have partnered to drive performance and scalability for a variety of backup use cases.</small>
-                    </a>
-                    <a href="https://min.io/solutions/azure-s3-api-integration" class="nav__sub">
-                        <span>Azure to AWS S3 Gateway</span>
-                        <small>Learn how MinIO allows Azure Blob to speak Amazon’s S3 API</small>
-                    </a>
-                    <a href="https://min.io/solutions/hdfs-migration" class="nav__sub">
-                        <span>HDFS Migration</span>
-                        <small>Modernize and simplify your big data storage infrastructure with high-performance, Kubernetes-native object storage from MinIO.</small>
-                    </a>
-                    <a href="https://min.io/solutions/native-object-store-for-teradata" class="nav__sub">
-                        <span>Teradata</span>
-                        <small>Discover why MinIO is the Native Object Store (NOS) of choice for at-scale Teradata deployments</small>
-                    </a>
-                    <a href="https://min.io/product/integrations" class="nav__sub">
-                        <span>Integrations</span>
-                        <small>Browse our vast portfolio of integrations</small>
-                    </a>
+                <div class="nav__dropdown">
+                    <div class="nav__dropdown__inner">
+                        <a href="https://min.io/product/integrations" class="nav__sub" data-nav="integrations">
+                            <span>Integrations</span>
+                            <small>Browse our vast portfolio of integrations</small>
+                        </a>
+                        <a href="https://min.io/solutions/vmware" class="nav__sub" data-nav="vmware">
+                            <span>VMware</span>
+                            <small>Discover how MinIO integrates with VMware across the portfolio from the Persistent Data platform to TKGI and how we support their Kubernetes ambitions.</small>
+                        </a>
+                        <a href="https://min.io/solutions/optimize-splunk-smartstore-performance" class="nav__sub" data-nav="splunk">
+                            <span>Splunk</span>
+                            <small>Find out how MinIO is delivering performance at scale for Splunk SmartStores</small>
+                        </a>
+                        <a href="https://min.io/solutions/veeam" class="nav__sub" data-nav="veeam">
+                            <span>Veeam</span>
+                            <small>Learn how MinIO and Veeam have partnered to drive performance and scalability for a variety of backup use cases.</small>
+                        </a>
+                        <a href="https://min.io/solutions/azure-s3-api-integration" class="nav__sub" data-nav="azure">
+                            <span>Azure to AWS S3 Gateway</span>
+                            <small>Learn how MinIO allows Azure Blob to speak Amazon’s S3 API</small>
+                        </a>
+                        <a href="https://min.io/solutions/hdfs-migration" class="nav__sub" data-nav="hdfs-migration">
+                            <span>HDFS Migration</span>
+                            <small>Modernize and simplify your big data storage infrastructure with high-performance, Kubernetes-native object storage from MinIO.</small>
+                        </a>
+                        <a href="https://min.io/solutions/native-object-store-for-teradata" class="nav__sub" data-nav="teradata">
+                            <span>Teradata</span>
+                            <small>Discover why MinIO is the Native Object Store (NOS) of choice for at-scale Teradata deployments</small>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="nav__item">
+            <div class="nav__link nav__link--active nav__link--dropdown">
+                <span>Docs</span>
+
+                <div class="nav__dropdown">
+                    <div class="nav__dropdown__inner">
+                        <a href="https://docs.min.io/minio/baremetal" class="nav__sub">
+                            <span class="">MinIO Baremetal</span>
+                            <small class="">MinIO Object Storage for Baremetal Infrastructure</small>
+                        </a>
+                        <a href="https://docs.min.io/minio/k8s" class="nav__sub">
+                            <span class="">MinIO Hybrid Cloud</span>
+                            <small class="">MinIO Object Storage for Kubernetes-Managed Private and Public Cloud Infrastructure</small>
+                        </a>
+                        <a href="https://docs.min.io/minio/vsphere" class="nav__sub">
+                            <span class="">MinIO for VMware Cloud Foundation</span>
+                            <small class="">MinIO Object Storage for VMware Cloud Foundation 4.2</small>
+                        </a>
+                        <a href="https://docs.min.io" class="nav__sub">
+                            <span class="">MinIO Legacy Documentation</span>
+                            <small class="">Legacy Documentation for MinIO Object Storage</small>
+                        </a>
+                    </div>
+                </div>  
+            </div>
+        </div>
+
+        <a href="https://blog.min.io/" class="nav__link">
+            <span>Blog</span>
+        </a>
+
+        <a href="https://min.io/resources" class="nav__link" data-href="resources">
+            <span>Resources</span>
+        </a>
+
+        <a href="https://min.io/partner" class="nav__link" data-href="partners">
+            <span>Partner</span>
+        </a>
+        <a href="https://min.io/pricing" class="nav__link" data-href="pricing">
+            <span>Pricing</span>
+        </a>
+
+        <a class="nav__link nav__link--download" href="https://min.io/download">Download</a>
     </div>
-    <a href="https://min.io/resources" class="nav__link">
-        <span>Resources</span>
-    </a>
-    <a href="https://blog.min.io/" class="nav__link">
-        <span>Blog</span>
-    </a>
-    <a href="https://min.io/pricing" class="nav__link">
-        <span>Pricing</span>
-    </a>
-    <a class="nav__link nav__link--download" href="https://min.io/download">Download</a>
 </div>
 <i class="toggle-icon toggle-icon--menu" data-toggle="nav"></i>

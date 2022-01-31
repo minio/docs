@@ -6,43 +6,46 @@
 	--nav-toggle-hover-border-color: #{$black};
 	--nav-bg-gray: #{$nav-sub-hover-bg};
 	--header-bg: #{$white};
+	--nav-top-border-color: #{$gray-200};
 }
 
 .header {
     height: $header-height;
     background-color: $header-bg;
-    display: flex;
-    align-items: center;
     box-shadow: 0 0 0.75rem rgba($black, 0.1);
     width: 100%;
     z-index: $z-index-header;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-		padding: 0 1.25rem;
+	padding: 0 $content-padding;
+
+	@include breakpoint-max(breakpoints(lg)) {
+		height: $header-height-mobile;
+		display: flex;
+		align-items: center;
+		padding: 0 $content-padding-mobile;
+	}
 }
 
 .logo {
-    flex-shrink: 0;
-    display: inline-flex;
-    margin-left: 0.75rem;
+	display: flex;
+	align-items: center;
 
-    &>img {
-        height: $logo-height;
-        box-shadow: none;
-    }
+	@include breakpoint-min(breakpoints(lg)) {
+		position: absolute;
+		left: 1.3rem;
+		top: 0;
+		z-index: 1;
+	}
+}
+
+.logo__link {
+	margin-left: 0.5rem;
 }
 
 .nav {
 	z-index: 1;
 	transition: opacity 300ms, transform 300ms;
-	margin-left: auto;
-	font-size: 0.9375rem;
-
-	@include breakpoint-min(breakpoints(lg)) {
-		display: flex;
-		align-items: center;
-	}
+	font-size: $font-size-md;
 
 	@include breakpoint-max(breakpoints(lg)) {
 		height: 100vh;
@@ -56,28 +59,52 @@
 		box-shadow: $nav-mobile-box-shadow;
 		overflow-y: auto;
 		background-color: $nav-mobile-bg;
-        padding-top: 2.5rem;
 	}
 
     & > .toggle-icon {
         @include breakpoint-min(breakpoints(lg)) {
             display: none;
         }
-
-        position: absolute;
-        top: 0.7rem;
-        right: 0.7rem;
     }
 }
 
-.nav-toggled {
-	.nav {
-        @include breakpoint-max(breakpoints(lg)) {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-            z-index: $nav-active-z-index;
-        }
-    }
+.nav__top,
+.nav__bottom {
+	@include breakpoint-min(breakpoints(lg)) {
+		display: flex;
+		margin: 0.25rem 0;
+	}
+
+	align-items: center;
+	position: relative;
+	gap: 2rem;
+	justify-content: flex-end;
+}
+
+.nav__top {
+	border-bottom: 1px solid var(--nav-top-border-color);
+	
+	@include breakpoint-max(breakpoints(lg)) {
+		border-bottom: 1px solid $gray-100;
+		padding-bottom: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.nav__link {
+		font-size: $font-size-sm;
+	}
+}
+
+.nav-active {
+	@include breakpoint-max(breakpoints(lg)) {
+		z-index: 1000; //FIXME
+
+		.nav {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+			z-index: $nav-active-z-index;
+		}
+	}
 }
 
 .nav__item {
@@ -99,8 +126,8 @@
 
 	@include breakpoint-min(breakpoints(lg)) {
 		.nav__link {
-			margin-right: 0.75rem;
-			background: var(--nav-item-arrow) no-repeat top 2.45rem right 0.25rem;
+			padding-right: 1.25rem;
+			background: var(--nav-item-arrow) no-repeat top 20px right 0.25rem;
 
 			&:after {
 				opacity: 0;
@@ -115,7 +142,7 @@
 				border-width: 0 6px 4px;
 				border-color: transparent transparent #fff;
 				position: absolute;
-				bottom: 1rem;
+				bottom: -2px;
 				transition: opacity 200ms;
 				z-index: 2;
 			}
@@ -140,15 +167,8 @@
 	}
 
 	@include breakpoint-min(breakpoints(lg)) {
-		padding: 0 1.25rem;
-		margin-left: 0.25rem;
+		padding: 0.5rem 0 0.6rem;
 		cursor: pointer;
-		
-		&:not(.nav__link--download) {
-			height: $header-height;
-			display: flex;
-			align-items: center;
-		}
 
 		& > span {
 			position: relative;
@@ -158,7 +178,7 @@
 				width: 100%;
 				background-color: var(--nav-item-border-color);
 				position: absolute;
-				bottom: -8px;
+				bottom: -4px;
 				left: 0;
 				content: "";
 				transform: translateY(5px);
@@ -203,8 +223,9 @@
 	border: 1px solid $theme-red;
 	transition: background-color 300ms, color 300ms;
 	border-radius: $border-radius;
-	padding: 0.5rem 1.25rem 0.6rem;
-	
+	padding: 0.2rem 0.95rem 0.3rem;
+	margin-left: auto;
+
 	&:hover {
 		background-color: $theme-red;
 		color: $white;
@@ -220,11 +241,11 @@
 
 .nav__dropdown {
 	@include breakpoint-min(breakpoints(lg)) {
-		width: 385px;
+		width: 365px;
 		transform: translateX(calc(-50% + 3rem));
 		position: absolute;
 		left: 0;
-		top: 4rem;
+		top: 2.65rem;
 		opacity: 0;
 		transition: opacity 200ms;
 		pointer-events: none;
@@ -258,11 +279,10 @@
 			pointer-events: auto;
 		}
 
-		width: calc(100% - 3.5rem);
 		max-width: 1200px;
+		width: 100%;
 		transform: translateX(0);
-		left: auto;
-		right: 1.75rem;
+		left: 0;
 
         .nav__dropdown__inner {
             padding: 2.5rem 2.25rem;
@@ -314,11 +334,11 @@
 	@include breakpoint-min(breakpoints(lg)) {
 		padding: 0 1rem;
 
-		&:not(:first-child) {
+		&:not(:last-child) {
 			flex: 1;
 		}
 
-		&:first-child {
+		&:last-child {
 			& > .nav__sub {
 				margin-top: 1rem;
 			}
@@ -387,8 +407,8 @@
 	}
 }
 
-.nav__seperator {
-	border-left: 1px solid var(--nav-bg-gray);
+.nav__separator {
+	border-left: 1px solid $gray-100;
 	margin: 0 1rem;
 
 	@include breakpoint-max(breakpoints(lg)) {
