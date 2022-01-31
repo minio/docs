@@ -6,6 +6,13 @@ $theme-red-light: rgba($theme-red, 0.5);
 $theme-red-lighter: rgba($theme-red, 0.25);
 $theme-hover-bg: rgb(245, 245, 245);
 
+// Gray
+$gray-100: #F7F7F7;
+$gray-200: #dedede;
+$gray-300: #c6c6c6;
+$gray-400: #adadad;
+$gray-500: #949494;
+
 // Overrides for sphinx-design
 // https://sphinx-design.readthedocs.io/en/alabaster-theme/css_variables.html
 
@@ -46,10 +53,17 @@ $text-hover-color: darken($text-color, 20%);
 $text-muted-color: #727272;
 
 
+// Font size
+$font-size-xs: 0.6875rem;
+$font-size-sm: 0.8125rem;
+$font-size-md: 0.9375rem;
+
+
 // Layout
 $container-width: 95%;
 $content-bg: $white;
-$content-padding: 1.75rem;
+$content-padding: 1.75rem; 
+$content-padding-mobile: 1.25rem; 
 
 
 // Font weight
@@ -63,7 +77,8 @@ $link-hover-color: #0036b9;
 
 
 // Header
-$header-height: 5rem;
+$header-height: 5.65rem;
+$header-height-mobile: 4.5rem;
 $header-bg: $white;
 $logo-height: 1.05rem;
 

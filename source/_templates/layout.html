@@ -75,23 +75,24 @@
 
 {%- block header %}
    <header class="header">
-      <i class="toggle-icon toggle-icon--docs" data-toggle="sidebar"></i>
-      <a
-         class="logo"
-         href="https://min.io"
-      >
-         <img
-            src="{{ pathto('_static/img/docs-logo.svg',1) }}"
-            alt="Logo"
-         />
-      </a>
+      <div class="logo">
+         <i class="toggle-icon toggle-icon--docs" data-toggle="sidebar"></i>
+         <a class="logo__link" href="https://min.io">
+            <img
+               width="85"
+               src="{{ pathto('_static/img/docs-logo.svg',1) }}"
+               alt="Logo"
+            />
+         </a>
+      </div>
+      
 
       {%- include "top-navigation.html" %}
    </header>
 {%- endblock %}
 
 {%- block content %}
-   <section class="content">
+   <section class="content scrollbar">
       <aside class="sidebar scrollbar">
          <i class="toggle-icon toggle-icon--close" data-toggle="sidebar"></i>
 

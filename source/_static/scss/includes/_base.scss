@@ -23,6 +23,7 @@ body {
     font-weight: $font-weight-normal;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 a {

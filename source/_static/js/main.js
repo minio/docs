@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 	// Toggle Sidebars
 	$('body').on('click', '[data-toggle]', function() {
 		var target = $(this).attr('data-toggle');
-		target === 'sidebar' ? $('body').removeClass('nav-toggled') : $('body').removeClass('sidebar-toggled');
-		$('body').toggleClass(target + '-toggled');
+		target === 'sidebar' ? $('body').removeClass('nav-active') : $('body').removeClass('sidebar-active');
+		$('body').toggleClass(target + '-active');
 	});
 });
