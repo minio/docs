@@ -4,6 +4,7 @@ var gulp = require ('gulp');
 var cleanCSS = require('gulp-clean-css');
 var $ = require ('gulp-load-plugins') ();
 var connect = require('gulp-connect');
+var sass = require('gulp-sass')(require('sass'));
 
 var paths = {
     scss: {
@@ -29,7 +30,7 @@ var paths = {
 // Compile SCSS
 gulp.task('handleStyle', function() {
     return gulp.src (paths.scss.main)
-        .pipe($.sass ())
+        .pipe(sass ())
         .pipe($.autoprefixer())
         .pipe(gulp.dest (paths.css.dir))
         .pipe(cleanCSS())
