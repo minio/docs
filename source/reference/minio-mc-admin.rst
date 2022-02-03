@@ -45,6 +45,11 @@ The following table lists :mc-cmd:`mc admin` commands:
           :start-after: start-mc-admin-bucket-quota-desc
           :end-before: end-mc-admin-bucket-quota-desc
 
+   * - :mc:`mc admin decommission`
+     - .. include:: /reference/minio-mc-admin/mc-admin-decommission.rst
+          :start-after: start-mc-admin-decommission-desc
+          :end-before: end-mc-admin-decommission-desc
+
    * - :mc:`mc admin group`
      - .. include:: /reference/minio-mc-admin/mc-admin-group.rst
           :start-after: start-mc-admin-group-desc
