@@ -40,12 +40,12 @@ Prerequisites
 Networking and Firewalls
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each node should have full bidirectional network access to every other
-node in the deployment. For containerized or orchestrated infrastructures,
-this may require specific configuration of networking and routing 
-components such as ingress or load balancers. Certain operating systems
-may also require setting firewall rules. For example, the following command
-explicitly opens the default MinIO server API port ``9000`` on servers using firewalld:
+Each node should have full bidirectional network access to every other node in
+the deployment. For containerized or orchestrated infrastructures, this may
+require specific configuration of networking and routing components such as
+ingress or load balancers. Certain operating systems may also require setting
+firewall rules. For example, the following command explicitly opens the default
+MinIO server API port ``9000`` on servers using ``firewalld``:
 
 .. code-block:: shell
    :class: copyable
