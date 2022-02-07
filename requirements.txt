@@ -1,3 +1,4 @@
+docutils == 0.17
 sphinx == 3.5.0
 sphinx-copybutton == 0.4.0
 sphinx-design == 0.0.12
@@ -5,4 +6,4 @@ sphinx-markdown-tables == 0.0.15
 Sphinx-Substitution-Extensions == 2020.9.30.0
 sphinx-togglebutton === 0.2.3
 sphinxcontrib-images === 0.9.4
-myst-parser === 0.15.1
+myst-parser === 0.16.1

@@ -53,6 +53,8 @@ MinIO server API port ``9000`` on servers using ``firewalld``:
    firewall-cmd --permanent --zone=public --add-port=9000/tcp
    firewall-cmd --reload
 
+All MinIO servers in the deployment *must* use the same listen port.
+
 If you set a static :ref:`MinIO Console <minio-console>` port (e.g. ``:9001``)
 you must *also* grant access to that port to ensure connectivity from external
 clients.
@@ -311,8 +313,11 @@ Modify the example to reflect your deployment topology:
    # The second set of hostnames and volumes is the newly added pool.
    # The pool has sufficient stripe size to meet the existing erasure code
    # parity of the deployment (2 x EC:4)
+   #
+   # The command includes the port on which the MinIO servers listen for each
+   # server pool.
 
-   MINIO_VOLUMES="https://minio{1...4}.example.net/mnt/disk{1...4}/minio https://minio{5...12}.example.net/mnt/disk{1...8}/minio"
+   MINIO_VOLUMES="https://minio{1...4}.example.net:9000/mnt/disk{1...4}/minio https://minio{5...12}.example.net:9000/mnt/disk{1...8}/minio"
 
    # Set all MinIO server options
    #
@@ -341,7 +346,7 @@ Modify the example to reflect your deployment topology:
    # This value *must* match across all MinIO servers. If you do
    # not have a load balancer, set this value to to any *one* of the
    # MinIO hosts in the deployment as a temporary measure.
-   MINIO_SERVER_URL="https://minio.example.net"
+   MINIO_SERVER_URL="https://minio.example.net:9000"
 
 You may specify other :ref:`environment variables
 <minio-server-environment-variables>` or server commandline options as required

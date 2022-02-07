@@ -56,5 +56,5 @@ Both versioning and object locking features are available only with
    :titlesonly:
    :hidden:
 
-   Object Versioning </concepts/bucket-versioning>
+   Object Versioning </object-retention/bucket-versioning>
    Object Locking </object-retention/minio-object-locking>

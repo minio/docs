@@ -108,7 +108,7 @@ such as versioning and replication.
    For early development and application, applications can authenticate
    using the :guilabel:`RootUser` and :guilabel:`RootPass` credentials.
    For long-term development and production, create dedicated users. 
-   See :doc:`/security/security-overview` for more information.
+   See :doc:`/security/iam-overview` for more information.
 
    You can also use the :mc:`mc` commandline tool to perform operations on the
    MinIO server. Use :mc:`mc alias set` to update the ``myminio`` alias with
@@ -157,15 +157,16 @@ without validating their usage do so at their own risk.
    :hidden:
 
    /introduction/minio-overview
-   /concepts/feature-overview
-   Object Retention </object-retention/minio-object-retention>
    /installation/deployment-and-management
+   /security/iam-overview
+   /security/encryption-overview
+   Object Retention </object-retention/minio-object-retention>
    /lifecycle-management/lifecycle-management-overview
    /replication/replication-overview
-   /security/security-overview
    /monitoring/monitoring-overview
    /reference/minio-mc
    /reference/minio-mc-admin
    /reference/minio-server/minio-server
    /reference/minio-server/minio-gateway
    /console/minio-console
+   /sdk/minio-drivers

@@ -74,8 +74,10 @@ Deployment Architecture
 
 :ref:`Server Pool <minio-intro-server-pool>`
    A set of MinIO :mc-cmd:`minio server` nodes which pool their drives and
-   resources for supporting object storage/retrieval requests. The
-   :mc-cmd:`~minio server HOSTNAME` argument passed to the 
+   resources for supporting object storage/retrieval requests. Server pools
+   support horizontal expansion for MinIO deployments.
+   
+   The :mc-cmd:`~minio server HOSTNAME` argument passed to the
    :mc-cmd:`minio server` command represents a Server Pool:
 
    .. code-block:: shell
@@ -127,11 +129,20 @@ Deployment Architecture
 Deploying MinIO
 ---------------
 
-Users deploying onto a Kubernetes cluster should start with our 
-:docs-k8s:`Kubernetes documentation <>`.
+.. list-table::
+   :stub-columns: 1
+   :widths: 40 60
+   :width: 100%
 
-For bare-metal environments, including private cloud services
-or containerized environments, install and run the :mc:`minio server` on
-each host in the MinIO deployment. 
-See :ref:`minio-installation` for more information.
+   * - Baremetal
+     - :ref:`deploy-minio-distributed`
+       :ref:`expand-minio-distributed`
 
+   * - Kubernetes
+     - :docs-k8s:`MinIO Kubernetes Operator <>`
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+
+   /concepts/erasure-coding

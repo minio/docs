@@ -46,18 +46,20 @@ Prerequisites
 Networking and Firewalls
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each node should have full bidirectional network access to every other
-node in the deployment. For containerized or orchestrated infrastructures,
-this may require specific configuration of networking and routing 
-components such as ingress or load balancers. Certain operating systems
-may also require setting firewall rules. For example, the following command
-explicitly opens the default MinIO server API port ``9000`` for servers running firewalld :
+Each node should have full bidirectional network access to every other node in
+the deployment. For containerized or orchestrated infrastructures, this may
+require specific configuration of networking and routing components such as
+ingress or load balancers. Certain operating systems may also require setting
+firewall rules. For example, the following command explicitly opens the default
+MinIO server API port ``9000`` for servers running firewalld :
 
 .. code-block:: shell
    :class: copyable
 
    firewall-cmd --permanent --zone=public --add-port=9000/tcp
    firewall-cmd --reload
+
+All MinIO servers in the deployment *must* use the same listen port.
 
 If you set a static :ref:`MinIO Console <minio-console>` port (e.g. ``:9001``)
 you must *also* grant access to that port to ensure connectivity from external
@@ -242,7 +244,7 @@ MinIO *and* the ``minio.service`` file.
 The following examples assumes that:
 
 - The deployment has a single server pool consisting of four MinIO server hosts
-  with sequential hostnames:
+  with sequential hostnames.
 
   .. code-block:: shell
 
@@ -270,8 +272,10 @@ Modify the example to reflect your deployment topology:
    # 
    # The following example covers four MinIO hosts
    # with 4 drives each at the specified hostname and drive locations.
+   # The command includes the port that each MinIO server listens on
+   # (default 9000)
 
-   MINIO_VOLUMES="https://minio{1...4}.example.net/mnt/disk{1...4}/minio"
+   MINIO_VOLUMES="https://minio{1...4}.example.net:9000/mnt/disk{1...4}/minio"
 
    # Set all MinIO server options
    #
@@ -300,7 +304,7 @@ Modify the example to reflect your deployment topology:
    # This value *must* match across all MinIO servers. If you do
    # not have a load balancer, set this value to to any *one* of the
    # MinIO hosts in the deployment as a temporary measure.
-   MINIO_SERVER_URL="https://minio.example.net"
+   MINIO_SERVER_URL="https://minio.example.net:9000"
 
 You may specify other :ref:`environment variables
 <minio-server-environment-variables>` or server commandline options as required
