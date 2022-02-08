@@ -144,29 +144,23 @@ table.docutils {
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
+    font-size: .9rem;
 
     & > tbody tr th.stub {
         border: none;
         border-bottom: 1px solid $docs-item-table-border;
         color: $theme-red;
-        font-size: .9rem;
     }
 
     & > thead tr th {
         border: none;
         border-bottom: 1px solid $docs-item-table-border;
-        font-size: 1rem;
         color: $theme-red;
-        font-size: .9rem;
     }
 
     & > tbody tr td {
         border: none;
         border-bottom: 1px solid $docs-item-table-border;
-
-        & > p {
-            font-size: .90rem;
-        }
     }
 
 }

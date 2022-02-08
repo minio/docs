@@ -344,26 +344,21 @@ table.docutils {
   box-shadow: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
+  font-size: 0.9rem;
 }
 table.docutils > tbody tr th.stub {
   border: none;
   border-bottom: 1px solid #e6e6e6;
   color: #C72C48;
-  font-size: 0.9rem;
 }
 table.docutils > thead tr th {
   border: none;
   border-bottom: 1px solid #e6e6e6;
-  font-size: 1rem;
   color: #C72C48;
-  font-size: 0.9rem;
 }
 table.docutils > tbody tr td {
   border: none;
   border-bottom: 1px solid #e6e6e6;
-}
-table.docutils > tbody tr td > p {
-  font-size: 0.9rem;
 }
 
 .sphinx-tabs-tab {
