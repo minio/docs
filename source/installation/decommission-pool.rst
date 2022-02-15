@@ -175,7 +175,7 @@ pools in the MinIO deployment:
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission myminio
+   mc admin decommission status myminio
 
 The command returns output similar to the following:
 
