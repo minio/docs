@@ -21,6 +21,9 @@ $gray-500: #949494;
    --sd-color-tabs-label-inactive: #{$theme-red-light};
    --sd-color-tabs-overline: #{$theme-red-light};
    --sd-color-tabs-underline: #{$theme-red-lighter};
+   --sd-color-tabs-underline-active: #{$theme-red-lighter};
+   --sd-color-tabs-underline-hover: #{$theme-red-light};
+   --sd-color-tabs-label-hover: #{$theme-red-light};
 }
 
 // Breakpoints
