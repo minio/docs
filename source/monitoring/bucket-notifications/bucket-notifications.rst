@@ -15,10 +15,6 @@ supported external services on certain object or bucket events. MinIO
 supports bucket and object-level S3 events similar to the 
 :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`.
 
-MinIO bucket notifications are available *only* with 
-:mc:`minio server` deployments. MinIO :ref:`Gateway <minio-gateway>`
-does *not* support bucket notifications.
-
 Supported Notification Targets
 ------------------------------
 

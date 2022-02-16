@@ -167,6 +167,5 @@ without validating their usage do so at their own risk.
    /reference/minio-mc
    /reference/minio-mc-admin
    /reference/minio-server/minio-server
-   /reference/minio-server/minio-gateway
    /console/minio-console
    /sdk/minio-drivers
