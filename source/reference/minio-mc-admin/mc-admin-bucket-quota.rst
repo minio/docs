@@ -32,9 +32,8 @@ storage quotas.
 Units of Measurement
 ~~~~~~~~~~~~~~~~~~~~
 
-The :mc-cmd-option:`mc admin bucket quota hard` and 
-:mc-cmd-option:`mc admin bucket quota fifo` flags
-accept the following case-insensitive suffixes to represent the unit of the
+The :mc-cmd-option:`mc admin bucket quota hard` flag
+accepts the following case-insensitive suffixes to represent the unit of the
 specified size value:
 
 .. list-table::
@@ -95,28 +94,6 @@ limit.
   For example, to set a hard limit of 10 Terrabytes, specify ``10t``.
   See :ref:`mc-admin-bucket-quota-units` for supported units.
 
-Configure a First-In First-Out (FIFO) Quota on a Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Use :mc:`mc admin bucket quota` with the
-:mc-cmd-option:`~mc admin bucket quota fifo` flag to specify a quota with
-First-In First-Out deletion of content. FIFO quotas prevent the bucket size
-from growing past the specified limit by deleting the oldest content on the
-bucket to make room for newer content.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc admin bucket quota TARGET/BUCKET --fifo LIMIT
-
-- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
-  MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
-  set the quota.
-
-- Replace ``LIMIT`` with the maximum size to which the bucket can grow. 
-  For example, to set a limit of 10 Terrabytes, specify ``10t``.
-  See :ref:`mc-admin-bucket-quota-units` for supported units.
-
 Retrieve Bucket Quota Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -130,7 +107,7 @@ for a bucket:
 
 Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
 MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
-retreive the quota.
+retrieve the quota.
 
 Clear Configured Bucket Quota
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -183,18 +160,6 @@ Syntax
 
    For example, a hard limit of ``10GB`` would prevent adding any additional
    objects if the bucket reaches ``10GB`` of size.
-
-   See :ref:`mc-admin-bucket-quota-units` for supported unit sizes.
-
-.. mc-cmd:: fifo
-   :option:
-
-   Sets a maximum limit to the bucket storage size. The MinIO server removes
-   the oldest objects in the bucket to make space for newer objects such that
-   the bucket size remains below the specified limit.
-
-   For example, a ``fifo`` limit of ``10GB`` would result in removal of the
-   oldest objects in the bucket once it reaches ``10GB`` in size. 
 
    See :ref:`mc-admin-bucket-quota-units` for supported unit sizes.
 
