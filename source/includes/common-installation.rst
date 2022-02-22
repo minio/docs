@@ -139,7 +139,7 @@ require root (``sudo``) permissions.
    :class: copyable
 
    groupadd -r minio-user
-   useradd -M -r -g minio-user miniouser
+   useradd -M -r -g minio-user minio-user
    chown minio-user:minio-user /mnt/disk1 /mnt/disk2 /mnt/disk3 /mnt/disk4
 
 The specified disk paths are provided as an example. Change them to match
