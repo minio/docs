@@ -112,7 +112,7 @@ the risk of a port collision on systems which were running MinIO *before* the
 embedded Console update.
 
 You can select an explicit static port by passing the 
-:mc-cmd-option:`minio server console-address` commandline option when starting 
+:mc-cmd:`minio server --console-address` commandline option when starting 
 each MinIO Server in the deployment. 
 
 For example, the following command starts a distributed MinIO deployment using

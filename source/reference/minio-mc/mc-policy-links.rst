@@ -69,8 +69,8 @@ Parameters
             
       mc links public [FLAGS] play/mybucket
 
-.. mc-cmd:: recursive
-   :option:
+.. mc-cmd:: --recursive
+   
 
    *Optional* Retrieve the HTTP links recursively.
 

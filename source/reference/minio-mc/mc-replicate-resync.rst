@@ -79,8 +79,8 @@ Parameters
 
       mc replicate resync myminio/mybucket
 
-.. mc-cmd:: remote-bucket
-   :option:
+.. mc-cmd:: --remote-bucket
+   
 
    *Required* Specify the ARN for the destination deployment and bucket. You
    can retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
@@ -121,7 +121,7 @@ replication status:
 - Replace ``myminio/mybucket`` with the :mc-cmd:`~mc replicate add ALIAS` and
   full bucket path for which to create the replication configuration.
 
-- Replace the :mc-cmd-option:`~mc replicate add remote-bucket` value with the 
+- Replace the :mc-cmd:`~mc replicate add --remote-bucket` value with the 
   ARN of the remote target. Use :mc-cmd:`mc admin bucket remote ls` to list
   all configured remote replication targets.
 

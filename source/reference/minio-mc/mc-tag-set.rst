@@ -14,10 +14,10 @@
 .. mc:: mc tag set
 
 .. |command| replace:: :mc-cmd:`mc tag set`
-.. |rewind| replace:: :mc-cmd-option:`~mc tag set rewind`
-.. |versions| replace:: :mc-cmd-option:`~mc tag set versions`
-.. |versionid| replace:: :mc-cmd-option:`~mc tag set version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc tag set ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc tag set --rewind`
+.. |versions| replace:: :mc-cmd:`~mc tag set --versions`
+.. |versionid| replace:: :mc-cmd:`~mc tag set --version-id`
+.. |alias| replace:: :mc-cmd:`~mc tag set ALIAS`
 
 Syntax
 ------
@@ -58,7 +58,7 @@ The :mc:`mc tag set` command sets one or more tags to a bucket or object.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd-option:`mc tag set version-id` is mutually exclusive with
+      :mc-cmd:`mc tag set --version-id` is mutually exclusive with
       multiple parameters. See the reference documentation for more information.
 
 
@@ -85,26 +85,26 @@ Parameters
 
       mc tag set myminio/mybucket/object.txt "key1=value1&key2=value2"
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: versions
-   :option:
+.. mc-cmd:: --versions
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc
       :end-before: end-versions-desc
 
-   Use :mc-cmd-option:`~mc tag set versions` and 
-   :mc-cmd-option:`~mc tag set rewind` together to apply the tag all object
+   Use :mc-cmd:`~mc tag set --versions` and 
+   :mc-cmd:`~mc tag set --rewind` together to apply the tag all object
    versions which existed at a specific point in time.
 
-.. mc-cmd:: version-id, vid
-   :option:
+.. mc-cmd:: --version-id, --vid
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -112,8 +112,8 @@ Parameters
 
    Mutually exclusive with the following parameters:
 
-   - :mc-cmd-option:`~mc tag set rewind`
-   - :mc-cmd-option:`~mc tag set versions`
+   - :mc-cmd:`~mc tag set --rewind`
+   - :mc-cmd:`~mc tag set --versions`
 
 Global Flags
 ~~~~~~~~~~~~

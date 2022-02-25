@@ -83,8 +83,8 @@ Parameters
    :doc:`/monitoring/bucket-notifications/bucket-notifications` for more
    information.
 
-.. mc-cmd:: event
-   :option:
+.. mc-cmd:: --event
+   
 
    *Optional* The event(s) for which MinIO generates bucket notifications. 
 
@@ -102,31 +102,31 @@ Parameters
    associated to each of the supported values.
 
 .. mc-cmd:: ignore-existing, p
-   :option:
+   
 
    *Optional* Directs MinIO to ignore applying the specified event
    triggers if an existing matching trigger exists.
 
-.. mc-cmd:: prefix
-   :option:
+.. mc-cmd:: --prefix
+   
 
    *Optional* The bucket prefix in which the specified 
-   :mc-cmd-option:`~mc event add event` can trigger a bucket notification.
+   :mc-cmd:`~mc event add --event` can trigger a bucket notification.
 
    For example, given a :mc-cmd:`~mc event add ALIAS` of ``play/mybucket``
-   and a :mc-cmd-option:`~mc event add prefix` of ``photos``, only events in
+   and a :mc-cmd:`~mc event add --prefix` of ``photos``, only events in
    ``play/mybucket/photos`` trigger bucket notifications.
 
    Omit to trigger the event for all prefixes and objects in the bucket.
 
-.. mc-cmd:: suffix
-   :option:
+.. mc-cmd:: --suffix
+   
 
    *Optional* The bucket suffix in which the specified 
-   :mc-cmd-option:`~mc event add event` can trigger a bucket notification. 
+   :mc-cmd:`~mc event add --event` can trigger a bucket notification. 
 
    For example, given a :mc-cmd:`~mc event add ALIAS` of ``play/mybucket``
-   and a :mc-cmd-option:`~mc event add suffix` of ``.jpg``, only events in
+   and a :mc-cmd:`~mc event add --suffix` of ``.jpg``, only events in
    ``play/mybucket/*.jpg`` trigger bucket notifications.
 
    Omit to trigger the event for all objects regardless of suffix.

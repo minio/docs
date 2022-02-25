@@ -76,7 +76,7 @@ Parameters
 
    Omit the bucket path to perform a site-wide removal of buckets on the MinIO
    deployment. This operation *requires* specifying 
-   :mc-cmd-option:`~mc rb dangerous` to explicitly acknowledge the permanent
+   :mc-cmd:`~mc rb --dangerous` to explicitly acknowledge the permanent
    removal of *all* data on the deployment. For example:
 
    .. code-block:: none
@@ -85,7 +85,7 @@ Parameters
 
    For removing a directory and its contents on a local filesystem, specify
    the full path to that directory. The 
-   :mc-cmd-option:`~mc rb force` flag is ignored if specified. For example:
+   :mc-cmd:`~mc rb --force` flag is ignored if specified. For example:
 
    .. code-block:: none
 
@@ -99,13 +99,13 @@ Parameters
 
       mc rb --force myminio/mydata ~/data/myolddata
 
-.. mc-cmd:: force
-   :option:
+.. mc-cmd:: --force
+   
 
    *Required* Safety flag to confirm removal of the bucket contents.
 
-.. mc-cmd:: dangerous
-   :option:
+.. mc-cmd:: --dangerous
+   
 
    *Optional* Directs :mc:`mc rb` to perform a site-wide removal of all
    buckets on each specified :mc-cmd:`~mc rb ALIAS` (e.g. ``myminio/``).
@@ -116,7 +116,7 @@ Parameters
 
    .. warning::
 
-      Running :mc-cmd-option:`mc rb dangerous` is irreversible. Exercise all
+      Running :mc-cmd:`mc rb --dangerous` is irreversible. Exercise all
       possible due diligence in ensuring the command applies to only the 
       desired ``ALIAS`` targets prior to execution.
 

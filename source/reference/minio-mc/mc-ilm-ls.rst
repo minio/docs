@@ -62,21 +62,21 @@ Parameters
       mc ilm ls myminio/mydata
 
 
-.. mc-cmd:: expiry
-   :option:
+.. mc-cmd:: --expiry
+   
 
    *Optional* :mc-cmd:`mc ilm ls` returns only fields related to lifecycle rule
    expiration.
 
-   Mutually exclusive with :mc-cmd-option:`~mc ilm ls transition`.
+   Mutually exclusive with :mc-cmd:`~mc ilm ls --transition`.
 
-.. mc-cmd:: transition
-   :option:
+.. mc-cmd:: --transition
+   
 
    *Optional* :mc-cmd:`mc ilm ls` returns only fields related to lifecycle rule
    transition.
 
-   Mutually exclusive with :mc-cmd-option:`~mc ilm ls expiry`.
+   Mutually exclusive with :mc-cmd:`~mc ilm ls --expiry`.
 
 
 Global Flags

@@ -13,9 +13,9 @@
 .. Replacement substitutions
 
 .. |command| replace:: :mc-cmd:`mc ls`
-.. |rewind| replace:: :mc-cmd-option:`~mc ls rewind`
-.. |versions| replace:: :mc-cmd-option:`~mc ls versions`
-.. |alias| replace:: :mc-cmd-option:`~mc ls ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc ls --rewind`
+.. |versions| replace:: :mc-cmd:`~mc ls --versions`
+.. |alias| replace:: :mc-cmd:`~mc ls ALIAS`
 
 Syntax
 ------
@@ -86,48 +86,48 @@ Parameters
       mc ls ~/mydata/object.txt
    
    If you specify a directory or bucket to :mc-cmd:`~mc ls ALIAS`, you must
-   also specify :mc-cmd-option:`~mc ls recursive` to recursively list the
+   also specify :mc-cmd:`~mc ls --recursive` to recursively list the
    contents of that directory or bucket. If you omit the ``--recursive``
    argument, :mc:`~mc ls` only lists objects in the top level of the specified
    directory or bucket.
 
 
 .. mc-cmd:: incomplete, -I
-   :option:
+   
 
    *Optional* Returns any incomplete uploads on the specified 
    :mc-cmd:`~mc ls ALIAS` bucket.
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    *Optional* Recursively lists the contents of each bucket or directory in the
    :mc-cmd:`~mc ls ALIAS`.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
    
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-   Use :mc-cmd-option:`~mc ls rewind` and 
-   :mc-cmd-option:`~mc ls versions` together to display on those object
+   Use :mc-cmd:`~mc ls --rewind` and 
+   :mc-cmd:`~mc ls --versions` together to display on those object
    versions which existed at a specific point in time.
 
-.. mc-cmd:: versions
-   :option:
+.. mc-cmd:: --versions
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc
       :end-before: end-versions-desc
 
-   Use :mc-cmd-option:`~mc ls versions` and 
-   :mc-cmd-option:`~mc ls rewind` together to display on those object
+   Use :mc-cmd:`~mc ls --versions` and 
+   :mc-cmd:`~mc ls --rewind` together to display on those object
    versions which existed at a specific point in time.
 
-.. mc-cmd:: summarize
-   :option:
+.. mc-cmd:: --summarize
+   
 
    *Optional* Displays summarized information for the specified ``ALIAS`` path.
 
@@ -158,12 +158,12 @@ Use :mc-cmd:`mc ls <mc ls ALIAS>` to list the contents of a bucket:
   S3-compatible host.
 
   If specifying the path to the S3 root (``ALIAS`` only), include the
-  :mc-cmd-option:`~mc ls recursive` option.
+  :mc-cmd:`~mc ls --recursive` option.
 
 List Object Versions
 ~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc ls versions` to list all versions of an object:
+Use :mc-cmd:`mc ls --versions` to list all versions of an object:
 
 .. code-block:: shell
    :class: copyable
@@ -183,7 +183,7 @@ Use :mc-cmd-option:`mc ls versions` to list all versions of an object:
 List Bucket Contents at Point in Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc ls versions` to list all versions of an object:
+Use :mc-cmd:`mc ls --versions` to list all versions of an object:
 
 .. code-block:: shell
    :class: copyable
@@ -196,7 +196,7 @@ Use :mc-cmd-option:`mc ls versions` to list all versions of an object:
 - Replace :mc-cmd:`PATH <mc ls ALIAS>` with the path to the bucket or object on
   the S3-compatible host.
 
-- Replace :mc-cmd:`DURATION <mc ls rewind>` with the point-in-time in the past
+- Replace :mc-cmd:`DURATION <mc ls --rewind>` with the point-in-time in the past
   at which the command returns the object. For example, specify ``30d`` to
   return the version of the object 30 days prior to the current date.
 

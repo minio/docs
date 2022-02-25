@@ -205,7 +205,7 @@ interfacing with the MinIO server.
 
 - For the :mc:`mc` command line tool, certain commands include a specific
   option for setting the storage class. For example, the :mc:`mc cp` command
-  has the :mc-cmd-option:`~mc cp storage-class` option for specifying the
+  has the :mc-cmd:`~mc cp storage-class` option for specifying the
   storage class to assign to the object being copied.
 
 - For MinIO SDKs, the ``S3Client`` object has specific methods for setting

@@ -96,7 +96,7 @@ more information.
 
    The embedded MinIO Console by default uses a random port number selected at
    server startup. Start the MinIO server process with the
-   :mc-cmd-option:`~minio server console-address` option to specify a static
+   :mc-cmd:`~minio server --console-address` option to specify a static
    port number.
 
 .. end-minio-openid-redirect-uri

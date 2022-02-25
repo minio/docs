@@ -71,26 +71,26 @@ Parameters
 
 
 .. mc-cmd:: days value                     
-   :option:
+   
 
    *Optional* The number of days after which MinIO expires the restored copy
    of the archived object.
 
 
 .. mc-cmd:: recursive, r                  
-   :option:
+   
 
    *Optional* Restores all objects under the specified prefix.
 
 
 .. mc-cmd:: versions                       
-   :option:
+   
 
    *Optional* Restores all versions of the object on the remote tier.
 
 
 .. mc-cmd:: version-id, vid  
-   :option:
+   
 
    *Optional* Restores the specified version of the object on the remote tier.
 

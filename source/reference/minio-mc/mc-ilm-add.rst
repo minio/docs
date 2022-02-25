@@ -94,8 +94,8 @@ Parameters
 
       mc ilm add myminio/mydata/someprefix
 
-.. mc-cmd:: expiry-days
-   :option:
+.. mc-cmd:: --expiry-days
+   
 
    *Required* The number of days to retain an object after being created. MinIO
    marks the object for deletion after the specified number of days pass. 
@@ -103,7 +103,7 @@ Parameters
 
    For versioned buckets, the expiry rule applies only to the *current*
    object version. Use the 
-   :mc-cmd-option:`~mc ilm add noncurrentversion-expiration-days` option
+   :mc-cmd:`~mc ilm add noncurrentversion-expiration-days` option
    to apply expiration behavior to noncurrent object versions.
 
    MinIO uses a scanner process to check objects against all configured
@@ -113,13 +113,13 @@ Parameters
 
    Mutually exclusive with the following options:
 
-   - :mc-cmd-option:`~mc ilm add expired-object-delete-marker`
+   - :mc-cmd:`~mc ilm add expired-object-delete-marker`
 
    For more complete documentation on object expiration, see
    :ref:`minio-lifecycle-management-expiration`.
 
 .. mc-cmd:: expired-object-delete-marker
-   :option:
+   
 
    *Required* Specify this option to direct MinIO to remove delete markers for
    objects with no remaining object versions. Specifically, the delete
@@ -127,8 +127,8 @@ Parameters
 
    This option is mutually exclusive with the following option:
    
-   - :mc-cmd-option:`~mc ilm add tags`
-   - :mc-cmd-option:`~mc ilm add expiry-days`
+   - :mc-cmd:`~mc ilm add --tags`
+   - :mc-cmd:`~mc ilm add --expiry-days`
 
    MinIO uses a scanner process to check objects against all configured
    lifecycle management rules. Slow scanning due to high IO workloads or
@@ -138,21 +138,21 @@ Parameters
    For more complete documentation on object expiration, see
    :ref:`minio-lifecycle-management-expiration`.
 
-.. mc-cmd:: transition-days
-   :option:
+.. mc-cmd:: --transition-days
+   
 
    *Required* The number of calendar days from object creation after which MinIO
    marks an object as eligible for transition. MinIO transitions the object to
    the configured remote storage tier specified to the 
-   :mc-cmd-option:`~mc ilm add storage-class`. Specify the number of days as an 
+   :mc-cmd:`~mc ilm add --storage-class`. Specify the number of days as an 
    integer, e.g. ``30`` for 30 days.
 
    For versioned buckets, the transition rule applies only to the *current*
    object version. Use the 
-   :mc-cmd-option:`~mc ilm add noncurrentversion-transition-days` option
+   :mc-cmd:`~mc ilm add noncurrentversion-transition-days` option
    to apply transition behavior to noncurrent object versions.
 
-   Requires specifying :mc-cmd-option:`~mc ilm add storage-class`.
+   Requires specifying :mc-cmd:`~mc ilm add --storage-class`.
 
    MinIO uses a scanner process to check objects against all configured
    lifecycle management rules. Slow scanning due to high IO workloads or
@@ -162,17 +162,17 @@ Parameters
    For more complete documentation on object transition, see
    :ref:`minio-lifecycle-management-tiering`.
 
-.. mc-cmd:: storage-class
-   :option:
+.. mc-cmd:: --storage-class
+   
 
    *Required* The remote storage tier to which MinIO 
    :ref:`transition objects <minio-lifecycle-management-tiering>`.
    Specify a remote storage tier created by :mc-cmd:`mc admin tier`. 
 
-   Required if specifying :mc-cmd-option:`~mc ilm add transition-days`.
+   Required if specifying :mc-cmd:`~mc ilm add --transition-days`.
 
-.. mc-cmd:: tags
-   :option:
+.. mc-cmd:: --tags
+   
 
    *Optional* One or more ampersand ``&``-delimited key-value pairs describing
    the object tags to use for filtering objects to which the lifecycle
@@ -180,10 +180,10 @@ Parameters
 
    This option is mutually exclusive with the following option:
 
-   - :mc-cmd-option:`~mc ilm add expired-object-delete-marker`
+   - :mc-cmd:`~mc ilm add expired-object-delete-marker`
 
 .. mc-cmd:: noncurrentversion-expiration-days
-   :option:
+   
 
    *Optional* The number of days to retain an object version after becoming
    *non-current* (i.e. a different version of that object is now the `HEAD`).
@@ -199,17 +199,17 @@ Parameters
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
 .. mc-cmd:: noncurrentversion-transition-days
-   :option:
+   
 
    *Optional* The number of days an object has been non-current (i.e. replaced
    by a newer version of that same object) after which MinIO marks the object
    version as eligible for transition. MinIO transitions the object to the
    configured remote storage tier specified to the 
-   :mc-cmd-option:`~mc ilm add storage-class` once the system host datetime
+   :mc-cmd:`~mc ilm add --storage-class` once the system host datetime
    passes that calendar date.
 
    This option has no effect on non-versioned buckets. Requires specifying
-   :mc-cmd-option:`~mc ilm add noncurrentversion-transition-storage-class`.
+   :mc-cmd:`~mc ilm add noncurrentversion-transition-storage-class`.
 
    This option has the same behavior as the 
    S3 ``NoncurrentVersionTransition`` action.
@@ -220,7 +220,7 @@ Parameters
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
 .. mc-cmd:: noncurrentversion-transition-storage-class
-   :option:
+   
 
    *Optional* The remote storage tier to which MinIO 
    :ref:`transitions noncurrent objects versions
@@ -241,7 +241,7 @@ Examples
 Expire Bucket Contents After Number of Days
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc ilm add` with :mc-cmd-option:`~mc ilm add expiry-days` to
+Use :mc-cmd:`mc ilm add` with :mc-cmd:`~mc ilm add --expiry-days` to
 expire bucket contents a number of days after object creation:
 
 .. code-block:: shell
@@ -255,7 +255,7 @@ expire bucket contents a number of days after object creation:
 - Replace :mc-cmd:`PATH <mc ilm add ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
-- Replace :mc-cmd:`DATE <mc ilm add expiry-days>` with the number of days after
+- Replace :mc-cmd:`DATE <mc ilm add --expiry-days>` with the number of days after
   which to expire the object. For example, specify ``30`` to expire the
   object 30 days after creation.
 

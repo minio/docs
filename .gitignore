@@ -1,6 +1,5 @@
 build
 venv
-sphinx4
 .vscode
 __pycache__
 node_modules
@@ -8,3 +7,5 @@ npm-debug.log
 .python-version
 main.min.css
 main.css
+objects.inv
+output.log

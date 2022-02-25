@@ -77,19 +77,19 @@ Parameters
       mc ls ~/mydata/object.txt
 
 .. mc-cmd:: ignore-existing, p
-   :option:
+   
 
    Directs :mc-cmd:`mc mb` to do nothing if the bucket or directory already
    exists.
 
-.. mc-cmd:: region
-   :option:
+.. mc-cmd:: --region
+   
 
    The region in which to create the specified bucket. Has no effect if the
    specified :mc-cmd:`~mc mb ALIAS` is a filesystem directory.
 
 .. mc-cmd:: with-lock, l
-   :option:
+   
 
    Enables :ref:`object locking <minio-object-locking>` on the specified 
    bucket. Has no effect if the specified ``ALIAS`` is a 
@@ -117,7 +117,7 @@ Create Bucket
 ~~~~~~~~~~~~~
 
 Use :mc:`mc mb` to create a bucket on an S3-compatible host. The 
-:mc-cmd-option:`~mc mb with-lock` option creates the bucket with locking
+:mc-cmd:`~mc mb with-lock` option creates the bucket with locking
 enabled:
 
 .. code-block:: shell

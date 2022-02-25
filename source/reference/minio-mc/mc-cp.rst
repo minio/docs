@@ -13,9 +13,9 @@
 .. mc:: mc cp
 
 .. |command| replace:: :mc-cmd:`mc cp`
-.. |rewind| replace:: :mc-cmd-option:`~mc cp rewind`
-.. |versionid| replace:: :mc-cmd-option:`~mc cp version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc cp SOURCE`
+.. |rewind| replace:: :mc-cmd:`~mc cp --rewind`
+.. |versionid| replace:: :mc-cmd:`~mc cp version-id`
+.. |alias| replace:: :mc-cmd:`~mc cp SOURCE`
 
 Syntax
 ------
@@ -104,7 +104,7 @@ Parameters
       mc cp ~/mydata/object.txt play/mybucket/object.txt
    
    If you specify a directory or bucket to :mc-cmd:`~mc cp SOURCE`, you must
-   also specify :mc-cmd-option:`~mc cp recursive` to recursively copy the
+   also specify :mc-cmd:`~mc cp --recursive` to recursively copy the
    contents of that directory or bucket. If you omit the ``--recursive``
    argument, :mc:`~mc cp` only copies objects in the top level of the specified
    directory or bucket.
@@ -129,25 +129,25 @@ Parameters
 
       mc cp play/mybucket/object.txt ~/mydata/object.txt
 
-.. mc-cmd:: attr
-   :option:
+.. mc-cmd:: --attr
+   
 
    *Optional* Add custom metadata for the object. Specify key-value pairs as
    ``KEY=VALUE\;``. For example, ``--attr
    key1=value1\;key2=value2\;key3=value3``.
 
-.. mc-cmd:: continue, c
-   :option:
+.. mc-cmd:: --continue, c
+   
 
    *Optional* Create or resume a copy session. 
 
-.. mc-cmd:: disable-multipart
-   :option:
+.. mc-cmd:: --disable-multipart
+   
 
    *Optional* Disables multipart upload for the copy session.
 
-.. mc-cmd:: encrypt
-   :option:
+.. mc-cmd:: --encrypt
+   
 
    *Optional* Encrypt or decrypt objects using 
    :ref:`server-side encryption <minio-sse>` with
@@ -158,14 +158,14 @@ Parameters
       object(s).
 
    Enclose the entire list of key-value pairs passed to
-   :mc-cmd-option:`~mc cp encrypt` in double-quotes ``"``.
+   :mc-cmd:`~mc cp --encrypt` in double-quotes ``"``.
 
-   :mc-cmd-option:`~mc cp encrypt` can use the ``MC_ENCRYPT`` environment
+   :mc-cmd:`~mc cp --encrypt` can use the ``MC_ENCRYPT`` environment
    variable for retrieving a list of encryption key-value pairs as an
    alternative to specifying them on the command line.
 
-.. mc-cmd:: encrypt-key
-   :option:
+.. mc-cmd:: --encrypt-key
+   
 
    *Optional* Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
@@ -175,14 +175,14 @@ Parameters
       object(s).
 
    Enclose the entire list of key-value pairs passed to 
-   :mc-cmd-option:`~mc cp encrypt-key` in double quotes ``"``.
+   :mc-cmd:`~mc cp --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd-option:`~mc cp encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc cp --encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
-.. mc-cmd:: legal-hold
-   :option:
+.. mc-cmd:: --legal-hold
+   
 
    *Optional* Enables indefinite :ref:`Legal Hold 
    <minio-object-locking-legalhold>` object locking on the copied objects.
@@ -190,42 +190,42 @@ Parameters
    Specify ``on``.
 
 .. mc-cmd:: md5
-   :option:
+   
 
    *Optional* Forces all uploads to calculate MD5 checksums. 
 
-.. mc-cmd:: newer-than
-   :option:
+.. mc-cmd:: --newer-than
+   
 
    *Optional* Remove object(s) newer than the specified number of days.  Specify
    a string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``
 
    Defaults to ``0`` (all objects).
 
-.. mc-cmd:: older-than
-   :option:
+.. mc-cmd:: --older-than
+   
 
    *Optional* Remove object(s) older than the specified time limit. Specify a
    string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``
       
    Defaults to ``0`` (all objects).
 
-.. mc-cmd:: preserve, a
-   :option:
+.. mc-cmd:: --preserve, a
+   
 
    *Optional* Preserve file system attributes and bucket policy rules of the
    :mc-cmd:`~mc cp SOURCE` directories, buckets, and objects on the 
    :mc-cmd:`~mc cp TARGET` bucket(s).
 
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
    
    *Optional* Recursively copy the contents of each bucket or directory
    :mc-cmd:`~mc cp SOURCE` to the :mc-cmd:`~mc cp TARGET` bucket.
 
-.. mc-cmd:: retention-duration
-   :option:
+.. mc-cmd:: --retention-duration
+   
 
    *Optional* The duration of the :ref:`WORM retention mode 
    <minio-object-locking-retention-modes>` to apply to the copied object(s).
@@ -233,10 +233,10 @@ Parameters
    Specify the duration as a string in
    ``#d#hh#mm#ss`` format. For example: ``--retention-duration "1d2hh3mm4ss"``.
 
-   Requires specifying :mc-cmd-option:`~mc cp retention-mode`.
+   Requires specifying :mc-cmd:`~mc cp --retention-mode`.
 
-.. mc-cmd:: retention-mode
-   :option:
+.. mc-cmd:: --retention-mode
+   
 
    *Optional* enables :ref:`object locking mode
    <minio-object-locking-retention-modes>` on the copied object(s).
@@ -245,17 +245,17 @@ Parameters
    - ``GOVERNANCE``
    - ``COMPLIANCE``
 
-   Requires specifying :mc-cmd-option:`~mc cp retention-duration`.
+   Requires specifying :mc-cmd:`~mc cp --retention-duration`.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: storage-class, sc
-   :option:
+   
 
    *Optional* Set the storage class for the new object(s) on the 
    :mc-cmd:`~mc cp TARGET`. 
@@ -263,8 +263,8 @@ Parameters
    See :aws-docs:`AmazonS3/latest/dev/storage-class-intro.html` for
    more information on S3 storage classses.
 
-.. mc-cmd:: tags
-   :option:
+.. mc-cmd:: --tags
+   
 
    *Optional* Applies one or more tags to the copied objects.
 
@@ -273,7 +273,7 @@ Parameters
    assign to the objects.
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -336,7 +336,7 @@ Use :mc-cmd:`mc cp` to copy an object to an S3-compatible host:
 Recursively Copy Objects to S3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc cp recursive` to recursively copy objects to an
+Use :mc-cmd:`mc cp --recursive` to recursively copy objects to an
 S3-compatible host:
 
 .. tab-set::
@@ -382,7 +382,7 @@ S3-compatible host:
 Copy Point-In-Time Version of Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc cp rewind` to copy an object as it existed at a 
+Use :mc-cmd:`mc cp --rewind` to copy an object as it existed at a 
 specific point in time. This command only applies to S3-to-S3 copy.
 
 .. code-block:: shell
@@ -390,7 +390,7 @@ specific point in time. This command only applies to S3-to-S3 copy.
 
    mc cp --rewind DURATION SRCALIAS/SRCPATH TGTALIAS/TGTPATH
 
-- Replace :mc-cmd:`DURATION <mc cp rewind>` with the point-in-time in the 
+- Replace :mc-cmd:`DURATION <mc cp --rewind>` with the point-in-time in the 
   past at which the command copies the object. For example, specify
   ``30d`` to copy the version of the object 30 days prior to the 
   current date.
@@ -415,7 +415,7 @@ specific point in time. This command only applies to S3-to-S3 copy.
 Copy Specific Version of Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc cp version-id` to copy a specific version of an object. This
+Use :mc-cmd:`mc cp version-id` to copy a specific version of an object. This
 command only applies to S3-to-S3 copy.
 
 .. code-block:: shell
@@ -423,7 +423,7 @@ command only applies to S3-to-S3 copy.
 
    mc cp --version-id VERSION SRCALIAS/SRCPATH TGTALIAS/TGTPATH
 
-- Replace :mc-cmd:`VERSION <mc cp rewind>` with the version of the object to
+- Replace :mc-cmd:`VERSION <mc cp --rewind>` with the version of the object to
   copy.
 
 - Replace :mc-cmd:`SRCALIAS <mc cp SOURCE>` with the 
@@ -452,7 +452,7 @@ checksums.
 
 Interrupted or failed copy operations can resume from the point of failure
 by issuing the :mc:`mc cp` operation again with the 
-:mc-cmd-option:`~mc cp continue` argument.
+:mc-cmd:`~mc cp --continue` argument.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

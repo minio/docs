@@ -49,8 +49,8 @@ MinIO multi-site replication requires MinIO server
    - Use the :mc-cmd:`mc replicate edit` command to modify an existing
      replication rule.
 
-   - Use the :mc-cmd-option:`mc replicate edit` command with the
-     :mc-cmd-option:`--state "disable" <mc replicate edit state>` flag to
+   - Use the :mc-cmd:`mc replicate edit` command with the
+     :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to
      disable an existing replication rule.
 
    - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication
@@ -208,8 +208,8 @@ Starting with :mc:`mc` :minio-git:`RELEASE.2021-06-13T17-48-22Z
 replicating existing objects in a bucket.
 
 MinIO requires explicitly enabling replication of existing objects using the
-:mc-cmd-option:`mc replicate add replicate` or
-:mc-cmd-option:`mc replicate edit replicate` and including the 
+:mc-cmd:`mc replicate add --replicate` or
+:mc-cmd:`mc replicate edit --replicate` and including the 
 ``existing-objects`` replication feature flag. This procedure includes the
 required flags for enabling replication of existing objects.
 
@@ -228,8 +228,8 @@ of specific versioned objects:
   MinIO replication also deletes those versions on the target bucket.
 
 MinIO requires explicitly enabling replication of delete operations using the
-:mc-cmd-option:`mc replicate add replicate` or 
-:mc-cmd-option:`mc replicate edit replicate`. This procedure includes the
+:mc-cmd:`mc replicate add --replicate` or 
+:mc-cmd:`mc replicate edit --replicate`. This procedure includes the
 required flags for enabling replication of delete operations and delete markers.
 
 MinIO does *not* replicate delete operations resulting from the application of
@@ -383,10 +383,10 @@ configuration.
 
 - Replace ``HOSTNAME`` with the URL of the remote MinIO deployment
 
-- (Optional) Specify the :mc-cmd-option:`~mc admin bucket remote add sync`
+- (Optional) Specify the :mc-cmd:`~mc admin bucket remote add sync`
   option to enable synchronous replication. Omit the option to use the default
   of asynchronous replication. See the reference documentation for
-  :mc-cmd-option:`~mc admin bucket remote add sync` for more information on
+  :mc-cmd:`~mc admin bucket remote add sync` for more information on
   synchronous vs asynchronous replication.
 
 The command returns an ARN similar to the following. Copy this ARN for use in
@@ -420,7 +420,7 @@ the remote as a target:
   - :ref:`Replication of Deletes <minio-replication-behavior-delete>` 
   - :ref:`Replication of Existing Objects <minio-replication-behavior-existing-objects>`
   
-  See :mc-cmd-option:`mc replicate add replicate` for more complete
+  See :mc-cmd:`mc replicate add --replicate` for more complete
   documentation. Omit these fields to disable replication of delete operations
   or replication of existing objects respectively.
 

@@ -46,6 +46,7 @@ extensions = [
     'sphinxcontrib.images',
     'myst_parser',
     'sphinx_design',
+    'sphinx.ext.intersphinx'
 ]
 
 # -- External Links

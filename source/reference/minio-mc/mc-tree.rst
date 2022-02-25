@@ -11,8 +11,8 @@
 .. mc:: mc tree
 
 .. |command| replace:: :mc-cmd:`mc tree`
-.. |rewind| replace:: :mc-cmd-option:`~mc tree rewind`
-.. |alias| replace:: :mc-cmd-option:`~mc tree ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc tree --rewind`
+.. |alias| replace:: :mc-cmd:`~mc tree ALIAS`
 
 Syntax
 ------
@@ -82,21 +82,21 @@ Parameters
 
       mc tree ~/minio/mydata/
 
-.. mc-cmd:: depth, d
-   :option:
+.. mc-cmd:: --depth, d
+   
 
    *Optional* Limit the tree depth to the specified integer value. 
    
    Defaults to ``-1`` or unlimited depth.
 
-.. mc-cmd:: files, f
-   :option:
+.. mc-cmd:: --files, f
+   
 
    *Optional* Includes files in the object or directory in the :mc:`mc tree`
    output.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc

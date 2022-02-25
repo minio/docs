@@ -13,10 +13,10 @@
 .. mc:: mc tag remove
 
 .. |command| replace:: :mc-cmd:`mc tag remove`
-.. |rewind| replace:: :mc-cmd-option:`~mc tag remove rewind`
-.. |versions| replace:: :mc-cmd-option:`~mc tag remove versions`
-.. |versionid| replace:: :mc-cmd-option:`~mc tag remove version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc tag remove ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc tag remove --rewind`
+.. |versions| replace:: :mc-cmd:`~mc tag remove --versions`
+.. |versionid| replace:: :mc-cmd:`~mc tag remove version-id`
+.. |alias| replace:: :mc-cmd:`~mc tag remove ALIAS`
 
 Syntax
 ------
@@ -55,7 +55,7 @@ The :mc:`mc tag remove` command removes all tags from a bucket or object.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd-option:`mc tag remove version-id` is mutually exclusive with
+      :mc-cmd:`mc tag remove version-id` is mutually exclusive with
       multiple parameters. See the reference documentation for more information.
 
 Parameters
@@ -71,26 +71,26 @@ Parameters
 
       mc tag remove myminio/mybucket/object.txt
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: versions
-   :option:
+.. mc-cmd:: --versions
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc
       :end-before: end-versions-desc
 
-   Use :mc-cmd-option:`~mc tag remove versions` and 
-   :mc-cmd-option:`~mc tag remove rewind` together to remove tags from all
+   Use :mc-cmd:`~mc tag remove --versions` and 
+   :mc-cmd:`~mc tag remove --rewind` together to remove tags from all
    object versions which existed at a specific point in time.
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -98,8 +98,8 @@ Parameters
 
    Mutually exclusive with the following parameters:
 
-   - :mc-cmd-option:`~mc tag remove rewind`
-   - :mc-cmd-option:`~mc tag remove versions`
+   - :mc-cmd:`~mc tag remove --rewind`
+   - :mc-cmd:`~mc tag remove --versions`
 
 Global Flags
 ~~~~~~~~~~~~

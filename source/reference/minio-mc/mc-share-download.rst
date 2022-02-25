@@ -11,8 +11,8 @@
 .. mc:: mc share download
 
 .. |command| replace:: :mc-cmd:`mc share download`
-.. |versionid| replace:: :mc-cmd-option:`~mc share download version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc share download ALIAS`
+.. |versionid| replace:: :mc-cmd:`~mc share download version-id`
+.. |alias| replace:: :mc-cmd:`~mc share download ALIAS`
 
 Syntax
 ------
@@ -82,7 +82,7 @@ Parameters
       mc share download play/mybucket/object.txt play/mybucket/otherobject.txt
 
    If specifying the path to a bucket or bucket prefix, you **must** also
-   specify the :mc-cmd-option:`~mc share download recursive` argument. For
+   specify the :mc-cmd:`~mc share download --recursive` argument. For
    example:
 
    .. code-block:: shell
@@ -91,8 +91,8 @@ Parameters
 
       mc share download --recursive play/mybucket/myprefix/
 
-.. mc-cmd:: expire, E
-   :option:
+.. mc-cmd:: --expire, E
+   
 
    *Optional* Set the expiration time limit for all generated URLs.
    
@@ -102,8 +102,8 @@ Parameters
 
    Defaults to ``168h`` or 168 hours (7 days).
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
    
    *Optional* Recursively generate URLs for all objects in a 
    :mc-cmd:`mc share download ALIAS` bucket or bucket prefix. 
@@ -111,7 +111,7 @@ Parameters
    Required if any ``ALIAS`` specifies a path to a bucket or bucket prefix.
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -148,14 +148,14 @@ Generate a URL to Download Object(s)
       - Replace :mc-cmd:`PATH <mc share download ALIAS>` with the path to the
         object on the MinIO deployment.
 
-      - Replace :mc-cmd:`DURATION <mc share download expire>` with the duration
+      - Replace :mc-cmd:`DURATION <mc share download --expire>` with the duration
         after which the URL expires. For example, to set a 30 day expiry, 
         specify ``30d``.
 
    .. tab-item:: Get Object(s) in a Bucket
 
       Use :mc-cmd:`mc share download` with the 
-      :mc-cmd-option:`~mc share download recursive` option to generate a URL for
+      :mc-cmd:`~mc share download --recursive` option to generate a URL for
       each object in a bucket. Each URL supports ``GET`` requests for its
       associated object:
 
@@ -170,7 +170,7 @@ Generate a URL to Download Object(s)
       - Replace :mc-cmd:`PATH <mc share download ALIAS>` with the path to the
         bucket or bucket prefix on the MinIO deployment.
 
-      - Replace :mc-cmd:`DURATION <mc share download expire>` with the duration
+      - Replace :mc-cmd:`DURATION <mc share download --expire>` with the duration
         after which the URL expires. For example, to set a 30 day expiry, 
         specify ``30d``.
 

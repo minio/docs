@@ -72,8 +72,8 @@ Parameters
 
       mc sql [FLAGS] play/mybucket
 
-.. mc-cmd:: query, e
-   :option:
+.. mc-cmd:: --query, e
+   
 
    *Required* The SQL statement to execute on the specified 
    :mc-cmd:`~mc sql ALIAS` directory or object. Wrap the entire SQL query in 
@@ -81,15 +81,15 @@ Parameters
 
    Defaults to ``"select * from S3Object"``.
 
-.. mc-cmd:: csv-input
-   :option:
+.. mc-cmd:: --csv-input
+   
 
    *Optional* The data format for ``.csv`` input objects. Specify a string of
    comma-seperated ``key=value,...`` pairs. See :ref:`mc-sql-csv-format` for
    more information on valid keys.
 
-.. mc-cmd:: compression
-   :option:
+.. mc-cmd:: --compression
+   
 
    *Optional* The compression type of the input object. Specify one of the
    following supported values:
@@ -105,8 +105,8 @@ Parameters
    - ``S2`` `S2 <https://github.com/klauspost/compress/tree/master/s2#s2-compression>`__ framed stream
    - ``SNAPPY`` `Snappy <http://google.github.io/snappy/>`__ framed stream
 
-.. mc-cmd:: csv-output
-   :option:
+.. mc-cmd:: --csv-output
+   
 
    *Optional* The data format for ``.csv`` output. Specify a string of
    comma-seperated ``key=value,...`` pairs. See :ref:`mc-sql-csv-format` for
@@ -116,15 +116,15 @@ Parameters
    information.
 
 .. mc-cmd:: csv-output-header
-   :option:
+   
 
    *Optional* The header row of the ``.csv`` output file. Specify a string of
    comma-separated fields as ``field1,field2,...``.
 
    Omit to output a ``.csv`` with no header row.
 
-.. mc-cmd:: encrypt-key
-   :option:
+.. mc-cmd:: --encrypt-key
+   
 
    *Optional* The encryption key to use for performing Server-Side Encryption
    with Client Keys (SSE-C). Specify comma seperated key-value pairs as
@@ -138,12 +138,12 @@ Parameters
    - For ``VALUE``, specify the data key to use for encryption object(s) in
      the bucket or bucket prefix specified to ``KEY``.
 
-   :mc-cmd-option:`~mc sql encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc sql --encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for populating the list of encryption key-value
    pairs as an alternative to specifying them on the command line.
 
-.. mc-cmd:: json-input
-   :option:
+.. mc-cmd:: --json-input
+   
 
    *Optional* The data format for ``.json`` input objects. Specify the type of 
    the JSON contents as ``type=<VALUE>``. The value can be either:
@@ -154,8 +154,8 @@ Parameters
    See the S3 API :s3-api:`JSONInput <API_JSONInput.html>` for more
    information.
 
-.. mc-cmd:: json-output
-   :option:
+.. mc-cmd:: --json-output
+   
 
    *Optional* The data format for the ``.json`` output. Supports the 
    ``rd=value`` key, where ``rd`` is the ``RecordDelimiter`` for the JSON
@@ -166,11 +166,11 @@ Parameters
    See the S3 API :s3-api:`JSONOutput <API_JSONOutput.html>` for more
    information.
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    *Optional* Recursively searches the specified :mc-cmd:`~mc sql ALIAS`
-   directory using the :mc-cmd-option:`~mc sql query` SQL statement.
+   directory using the :mc-cmd:`~mc sql --query` SQL statement.
 
 Global Flags
 ~~~~~~~~~~~~
@@ -185,8 +185,8 @@ Examples
 Select all Columns in all Objects in a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc sql` with the :mc-cmd-option:`~mc sql recursive` and
-:mc-cmd-option:`~mc sql query` options to apply the query to all objects 
+Use :mc:`mc sql` with the :mc-cmd:`~mc sql --recursive` and
+:mc-cmd:`~mc sql --query` options to apply the query to all objects 
 in a bucket:
 
 .. code-block:: shell
@@ -203,7 +203,7 @@ in a bucket:
 Run an Aggregation Query on an Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc sql` with the :mc-cmd-option:`~mc sql query` option to query 
+Use :mc:`mc sql` with the :mc-cmd:`~mc sql --query` option to query 
 an object on an MinIO deployment:
 
 .. code-block:: shell
@@ -228,11 +228,11 @@ Input Formats
 - ``.json``
 - ``.parquet``
 
-For ``.csv`` file types, use :mc-cmd-option:`mc sql csv-input` to 
+For ``.csv`` file types, use :mc-cmd:`mc sql --csv-input` to 
 specify the CSV data format. See :ref:`mc-sql-csv-format` for more 
 information on CSV formatting fields.
 
-For ``.json`` file types, use :mc-cmd-option:`mc sql json-input` to specify
+For ``.json`` file types, use :mc-cmd:`mc sql --json-input` to specify
 the JSON data format.
 
 For ``.parquet`` file types, :mc-cmd:`mc sql` automatically interprets the
@@ -244,8 +244,8 @@ CSV Formatting Fields
 ~~~~~~~~~~~~~~~~~~~~~
 
 The following table lists valid key-value pairs for use with
-:mc-cmd-option:`mc sql csv-input` and :mc-cmd-option:`mc sql csv-output`. 
-Certain key pairs are only valid for :mc-cmd-option:`~mc sql csv-input`
+:mc-cmd:`mc sql --csv-input` and :mc-cmd:`mc sql --csv-output`. 
+Certain key pairs are only valid for :mc-cmd:`~mc sql --csv-input`
 See the documentation for S3 API :s3-api:`CSVInput <API_CSVInput.html>` for more 
 information on S3 CSV formatting.
 
@@ -297,11 +297,11 @@ information on S3 CSV formatting.
        - ``USE`` - The first line is a header.
 
        For ``NONE`` or ``IGNORE``, you must specify column positions
-       ``_#`` to identify a column in the :mc-cmd-option:`~mc sql query` 
+       ``_#`` to identify a column in the :mc-cmd:`~mc sql --query` 
        statement.
 
        For ``USE``, you can specify header values to identify a column in 
-       the :mc-cmd-option:`~mc sql query` statement.
+       the :mc-cmd:`~mc sql --query` statement.
 
        Corresponds to ``FieldHeaderInfo`` in the S3 API ``CSVInput``.
    

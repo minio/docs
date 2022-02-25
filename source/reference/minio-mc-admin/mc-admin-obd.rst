@@ -61,8 +61,8 @@ Syntax
    The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from which
    the command retrieves the diagnostic data.
 
-.. mc-cmd:: deadline
-   :option:
+.. mc-cmd:: --deadline
+   
 
    The maximum duration the command can run. Specify a string as 
    ``##h##m##s``. Defaults to ``1h0m0s``. 

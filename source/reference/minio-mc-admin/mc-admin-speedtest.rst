@@ -52,17 +52,17 @@ Syntax
 
    The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment to run the speedtest against.
 
-.. mc-cmd:: duration
-   :option:
+.. mc-cmd:: --duration
+   
 
    The duration the entire speedtests are run. Defaults to ``10s``.
 
-.. mc-cmd:: size
-   :option:
+.. mc-cmd:: --size
+   
 
    The size of the objects used for uploads/downloads. Defaults to ``64MiB``.
 
-.. mc-cmd:: concurrent
-   :option:
+.. mc-cmd:: --concurrent
+   
 
    The number of concurrent requests per server. Defaults to ``32``.

@@ -42,7 +42,7 @@ Profile Data for Single Resource
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc admin profile start` with the
-:mc-cmd-option:`~mc admin profile start type` flag to start profiling the
+:mc-cmd:`~mc admin profile start type` flag to start profiling the
 resource:
 
 .. code-block:: shell
@@ -70,7 +70,7 @@ Profile Data for Multiple Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc admin profile start` with the
-:mc-cmd-option:`~mc admin profile start type` flag to start profiling the
+:mc-cmd:`~mc admin profile start type` flag to start profiling the
 resources:
 
 .. code-block:: shell
@@ -125,7 +125,7 @@ Syntax
       which the command collects profiling data.
 
    .. mc-cmd:: type
-      :option:
+      
 
       The type(s) of profiling data to collect from the 
       :mc-cmd:`~mc admin profile start TARGET` MinIO deployment.

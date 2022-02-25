@@ -65,22 +65,22 @@ Parameters
 .. mc-cmd:: all
 
    *Required* Removes all rules in the bucket. Mutually exclusive with
-   :mc-cmd-option:`mc ilm rm id`.
+   :mc-cmd:`mc ilm rm id`.
 
-   Mutually exclusive with :mc-cmd-option:`mc ilm rm id`
+   Mutually exclusive with :mc-cmd:`mc ilm rm id`
 
-   Requires including :mc-cmd-option:`~mc ilm rm force`.
+   Requires including :mc-cmd:`~mc ilm rm force`.
 
 .. mc-cmd:: force
 
-   Required if specifying :mc-cmd-option:`~mc ilm rm all`.
+   Required if specifying :mc-cmd:`~mc ilm rm all`.
 
 .. mc-cmd:: id
 
    *Required* The unique ID of the rule. Use :mc-cmd:`mc ilm ls` to list bucket
    rules and retrieve the ``id`` for the rule you want to remove.
 
-   Mutually exclusive with :mc-cmd-option:`mc ilm rm all`
+   Mutually exclusive with :mc-cmd:`mc ilm rm all`
 
 Global Flags
 ~~~~~~~~~~~~

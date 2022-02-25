@@ -22,7 +22,7 @@ from typing import Any, Dict, Iterator, List, Tuple
 from typing import cast
 
 from docutils import nodes
-from docutils.nodes import Element, Node
+from docutils.nodes import Element, Node, Text, emphasis
 from docutils.parsers.rst import directives
 
 from sphinx import addnodes
@@ -53,7 +53,7 @@ class MinioMCCommand(SphinxDirective):
 
    has_content = False
    required_arguments = 1
-   optional_arguments = 1 #for mc admin?
+   optional_arguments = 0 #for mc admin?
    final_argument_whitespace = True
    option_spec = {
       'noindex': directives.flag # in case we do not want to create an index entry. 
@@ -61,20 +61,17 @@ class MinioMCCommand(SphinxDirective):
 
    def run(self) -> List[Node]:
       command = self.arguments[0].strip()
-      if (len(self.arguments) > 1):
-         command += "-" + self.arguments[1].strip().replace(" ","-")
-      
       self.env.ref_context['minio:mc'] = command
       noindex = 'noindex' in self.options
       ret = []
       if not noindex:
          domain = cast(MinIODomain, self.env.get_domain('minio'))
 
-         node_id = make_id(self.env, self.state.document, 'command', command)
-         domain.note_module(command, node_id)
+         node_id = make_id(self.env, self.state.document, 'command', command.replace(" ","."))
+         domain.note_module(command.replace(" ","."), node_id)
          # Make a duplicate entry in 'objects' to facilitate searching for
          # the module in JavaScriptDomain.find_obj()
-         domain.note_object(command, 'mc', node_id,
+         domain.note_object(command.replace(" ","."), 'mc', node_id,
                               location=(self.env.docname, self.lineno))
 
          target = nodes.target('', '', ids=[node_id], ismod=True)
@@ -101,8 +98,10 @@ class MinioMCObject(ObjectDescription):
        'noindex': directives.flag,
        'noindexentry': directives.flag,
        'fullpath': directives.flag,
-       'option': directives.flag,
+       'optional': directives.flag,
+       'required': directives.flag,
        'notext': directives.flag,
+       'alias': directives.unchanged,
     }
 
     def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
@@ -118,58 +117,47 @@ class MinioMCObject(ObjectDescription):
            member, alias = sig.split(',', 1)
            member = member.strip()
            alias = alias.strip()
-        elif ' ' in sig:
-           # For subcommands with spaces
-           # Need to find a better way of specifying aliases, this is very hacky
-           member = sig.replace(' ', '-')
-           alias = None
         else:
             member = sig
             alias = None
-        # If construct is nested, prefix the current prefix
+        # If construct is nested, prefix the current parent
         prefix = self.env.ref_context.get('minio:object', None)
 
+
+        # Using this while transitioning away from comma-based argument list
+        if ('alias' in self.options):
+            alias = self.options.get('alias')
+
         #Grab the top-level command name.
-        command_name = self.env.ref_context.get('minio:mc').replace("-"," ")
+        command_name = self.env.ref_context.get('minio:mc', None)
         name = member
-        format_name = member
-        format_alias = alias
         if prefix:
-            fullname = '-'.join([prefix, name])
+            fullname = '.'.join([prefix, name])
         else:
             fullname = name
 
-        if 'option' in self.options:
-           format_name = "--" + name
-        
-        if 'option' in self.options and alias != None:
-           format_alias = "--" + alias
+        #print("Signature: " + " | command: " + str(command_name) + " | object: " + str(prefix) + " | name: " + str(fullname))
 
 
         signode['command'] = command_name
         signode['object'] = prefix
         signode['fullname'] = fullname
 
-        if prefix:
-           signode += addnodes.desc_addname(prefix + '-', ' ')
-        elif command_name and ('fullpath' in self.options):
-           signode += addnodes.desc_addname(command_name + '-', command_name + ' ')
-        elif command_name:
-           signode += addnodes.desc_addname(command_name + '-', ' ')
-        
-        if (alias != None):
-           signode += addnodes.desc_name(name + ', ' + alias, format_name + ', ' + format_alias)
-        elif 'notext' in self.options:
-           signode += addnodes.desc_name(name, '')
+        signode += addnodes.desc_addname(str(prefix) + "." + command_name + ".")
+
+        if (alias):
+            signode += addnodes.desc_name(name + ", " + alias, name + ", " + alias)
         else:
-           signode += addnodes.desc_name(name, format_name)
-        
+            signode += addnodes.desc_name(name,name)
+
+       
         return fullname, prefix
 
     def add_target_and_index(self, name_obj: Tuple[str, str], sig: str,
                              signode: desc_signature) -> None:
-        mod_name = self.env.ref_context.get('minio:mc')
-        fullname = (mod_name + '-' if mod_name else '') + name_obj[0]
+        mod_name = self.env.ref_context.get('minio:mc').replace(" ", ".")
+        #print("Linking: " + "| modname: " + str(mod_name) + " | name_obj0: " + str(name_obj[0]) + " | name_obj1: " + str(name_obj[1]))
+        fullname = (mod_name + '.' if mod_name else '') + name_obj[0]
         node_id = make_id(self.env, self.state.document, '', fullname)
         signode['ids'].append(node_id)
 
@@ -228,6 +216,13 @@ class MinioMCObject(ObjectDescription):
             if self.allow_nesting:
                 objects = self.env.ref_context.setdefault('minio:objects', [])
                 objects.append(prefix)
+
+    def transform_content(self, contentnode: addnodes.desc_content) -> None:
+        if ('optional' in self.options):
+            contentnode.children = [emphasis(None,Text("Optional"))] + contentnode.children
+        elif ('required' in self.options):
+            contentnode.children = [emphasis(None,Text("Required"))] + contentnode.children
+        pass
 
     def after_content(self) -> None:
         """Handle object de-nesting after content
@@ -415,33 +410,6 @@ class MinioObject(ObjectDescription):
         """
         return fullname.replace('$', '_S_')
 
-class MinioCMDOptionXRefRole(XRefRole):
-    def process_link(self, env: BuildEnvironment, refnode: Element,
-                     has_explicit_title: bool, title: str, target: str) -> Tuple[str, str]:
-        # basically what sphinx.domains.python.PyXRefRole does
-        refnode['minio:object'] = env.ref_context.get('minio:object')
-        refnode['minio:module'] = env.ref_context.get('minio:module')
-        refnode['minio:mc'] = env.ref_context.get('minio:mc')
-        if not has_explicit_title:
-            title = title.lstrip('.')
-            target = target.lstrip('~')
-            if title[0:1] == '~':
-                title = title[1:]
-                # Handle stripping lead path from commands.
-                space = title.rfind(' ')
-                if space != -1:
-                   title = title[space + 1:]
-                title = "--" + title
-            else:
-               #full command, so need to insert the `--`
-               title = title[:title.rfind(" ")] + " --" + title[title.rfind(" ")+1:]
-        if target[0:1] == '.':
-            target = target[1:]
-            refnode['refspecific'] = True
-        target = target.replace(" ","-")
-
-        return title, target
-
 class MinioXRefRole(XRefRole):
     def process_link(self, env: BuildEnvironment, refnode: Element,
                      has_explicit_title: bool, title: str, target: str) -> Tuple[str, str]:
@@ -467,8 +435,8 @@ class MinioXRefRole(XRefRole):
             target = target[1:]
             refnode['refspecific'] = True
 
-        if (self.reftype == "mc" or self.reftype == "mc-cmd" or self.reftype == "mc-cmd-option"):
-          target = target.replace(" ","-")
+        if (self.reftype == "mc" or self.reftype == "mc-cmd"):
+          target = target.replace(" ",".")
           return title, target
         
         target = self.reftype + "." + target
@@ -513,7 +481,6 @@ class MinIODomain(Domain):
         'flag':             MinioXRefRole(),
         'mc':               MinioXRefRole(),
         'mc-cmd':           MinioXRefRole(),
-        'mc-cmd-option':    MinioCMDOptionXRefRole(),
         'policy-action':    MinioXRefRole(),
         'envvar':           MinioXRefRole(),
         'mc-conf':          MinioXRefRole(),

@@ -86,75 +86,75 @@ Parameters
    Issuing :mc-cmd:`mc find ALIAS` with no other arguments returns a list of
    *all* objects or files at the specified path, similar to :mc-cmd:`mc ls`.
 
-.. mc-cmd:: exec
-   :option:
+.. mc-cmd:: --exec
+   
    
    *Optional* Spawns an external process for each object returned by 
    :mc:`mc find`. Supports :ref:`substitution formatting
    <mc-find-substitution-format>` of the output.
 
-.. mc-cmd:: ignore
-   :option:
+.. mc-cmd:: --ignore
+   
 
    *Optional* Exclude objects whose names match the specified wildcard pattern.
 
 
-.. mc-cmd:: larger
-   :option:
+.. mc-cmd:: --larger
+   
 
    *Optional* Match all objects larger than the specified size in 
    :ref:`units <mc-find-units>`.
 
-.. mc-cmd:: maxdepth
-   :option:
+.. mc-cmd:: --maxdepth
+   
 
    *Optional* Limits directory navigation to the specified depth.
 
-.. mc-cmd:: name
-   :option:
+.. mc-cmd:: --name
+   
 
    *Optional* Return objects whose names match the specified wildcard pattern.
 
-.. mc-cmd:: newer-than
-   :option:
+.. mc-cmd:: --newer-than
+   
 
    *Optional* Mirror object(s) newer than the specified number of days.  Specify
    a string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``
 
-.. mc-cmd:: older-than
-   :option:
+.. mc-cmd:: --older-than
+   
 
    *Optional* Mirror object(s) older than the specified time limit. Specify a
    string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``
       
    Defaults to ``0`` (all objects).
 
-.. mc-cmd:: path
-   :option:
+.. mc-cmd:: --path
+   
 
    *Optional* Return the contents of directories whose names match the specified
    wildcard pattern.
 
-.. mc-cmd:: print
-   :option:
+.. mc-cmd:: --print
+   
 
    *Optional* Prints results to ``STDOUT``.  Supports 
    :ref:`substitution formatting <mc-find-substitution-format>` of the output.
 
-.. mc-cmd:: regex
-   :option:
+.. mc-cmd:: --regex
+   
 
    *Optional* Returns objects or the contents of directories whose names match
    the specified PCRE regex pattern.
 
-.. mc-cmd:: smaller
-   :option:
+.. mc-cmd:: --smaller
+   
 
    *Optional* Match all objects smaller than the specifized size in 
    :ref:`units <mc-find-units>`.
 
-.. mc-cmd:: watch
-   :option:
+.. mc-cmd:: --watch
+   
 
    *Optional* Continuously monitor the :mc-cmd:`~mc find ALIAS` and return any
    new objects which match the specified criteria.
@@ -183,7 +183,7 @@ Find a Specific Object in a Bucket
 - Replace :mc-cmd:`PATH <mc find ALIAS>` with the path to a bucket on the
   S3-compatible host. Omit the path to search from the root of the S3 host.
 
-- Replace :mc-cmd:`NAME <mc find name>` with the object.
+- Replace :mc-cmd:`NAME <mc find --name>` with the object.
 
 Find Objects with File Extention in Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -199,13 +199,13 @@ Find Objects with File Extention in Bucket
 - Replace :mc-cmd:`PATH <mc find ALIAS>` with the path to a bucket on the
   S3-compatible host.
 
-- Replace :mc-cmd:`EXTENSION <mc find name>` with the file extention of the 
+- Replace :mc-cmd:`EXTENSION <mc find --name>` with the file extention of the 
   object.
 
 Find All Matching Files and Copy To S3 Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc find` with the :mc-cmd-option:`~mc find exec` option to find
+Use :mc:`mc find` with the :mc-cmd:`~mc find --exec` option to find
 files on a local filesystem and pass them to an :program:`mc` command for
 further processing. The following example uses :mc:`mc cp` to copy the 
 output of :mc:`mc find` to an S3-compatible host.
@@ -218,7 +218,7 @@ output of :mc:`mc find` to an S3-compatible host.
 - Replace :mc-cmd:`FILEPATH <mc find ALIAS>` with the full file path to the
   directory to search.
 
-- Replace :mc-cmd:`EXTENSION <mc find name>` with the file extention of the 
+- Replace :mc-cmd:`EXTENSION <mc find --name>` with the file extention of the 
   object.
 
 - Replace :mc-cmd:`ALIAS <mc find ALIAS>` with the 
@@ -228,7 +228,7 @@ output of :mc:`mc find` to an S3-compatible host.
   S3-compatible host.
 
 To continuously watch the specified directory and copy new objects, 
-include the :mc-cmd-option:`~mc find watch` argument:
+include the :mc-cmd:`~mc find --watch` argument:
 
 .. code-block:: shell
    :class: copyable
@@ -243,7 +243,7 @@ Behavior
 Units of Measurement
 ~~~~~~~~~~~~~~~~~~~~
 
-The :mc-cmd-option:`mc find smaller` and :mc-cmd-option:`mc find larger` flags
+The :mc-cmd:`mc find --smaller` and :mc-cmd:`mc find --larger` flags
 accept the following case-insensitive suffixes to represent the unit of the
 specified size value:
 
@@ -287,7 +287,7 @@ Omitting the suffix defaults to ``bytes``.
 Substitution Format
 ~~~~~~~~~~~~~~~~~~~
 
-The :mc-cmd-option:`mc find exec` and :mc-cmd-option:`mc find print` commands
+The :mc-cmd:`mc find --exec` and :mc-cmd:`mc find --print` commands
 support string substitutions with special interpretations for following
 keywords. 
 

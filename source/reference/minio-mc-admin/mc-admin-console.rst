@@ -49,13 +49,13 @@ Syntax
 
    The specific MinIO server node from which the command retrieves server logs.
 
-.. mc-cmd:: limit, l
-   :option:
+.. mc-cmd:: --limit, l
+   
 
    The number of most recent log entries to show. Defaults to ``10``.
 
-.. mc-cmd:: type, t
-   :option:
+.. mc-cmd:: --type, t
+   
 
    The type of errog logs to return. Specify one or more of the following
    options as a comma-seperated ``,`` list:

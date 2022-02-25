@@ -40,7 +40,7 @@ appropriate TLS certificate for that hostname.
 
 MinIO by default searches an OS-specific directory for TLS keys and
 certificates. For deployments started with a custom TLS directory
-:mc-cmd-option:`minio server certs-dir`, use that directory instead of the
+:mc-cmd:`minio server certs-dir`, use that directory instead of the
 defaults.
 
 .. tab-set::
@@ -234,7 +234,7 @@ necessary CA key for MinIO to explicitly trust:
 
 MinIO by default searches an OS-specific directory for Certificate Authority
 certificates. For deployments started with a custom TLS directory
-:mc-cmd-option:`minio server certs-dir`, use that directory instead of the
+:mc-cmd:`minio server certs-dir`, use that directory instead of the
 defaults.
 
 .. tab-set::
