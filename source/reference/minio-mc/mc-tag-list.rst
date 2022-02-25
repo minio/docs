@@ -13,10 +13,10 @@
 .. mc:: mc tag list
 
 .. |command| replace:: :mc-cmd:`mc tag list`
-.. |rewind| replace:: :mc-cmd-option:`~mc tag list rewind`
-.. |versions| replace:: :mc-cmd-option:`~mc tag list versions`
-.. |versionid| replace:: :mc-cmd-option:`~mc tag list version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc tag list ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc tag list --rewind`
+.. |versions| replace:: :mc-cmd:`~mc tag list --versions`
+.. |versionid| replace:: :mc-cmd:`~mc tag list version-id`
+.. |alias| replace:: :mc-cmd:`~mc tag list ALIAS`
 
 Syntax
 ------
@@ -56,7 +56,7 @@ The :mc:`mc tag list` command lists all tags from a bucket or object.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd-option:`mc tag list version-id` is mutually exclusive with
+      :mc-cmd:`mc tag list version-id` is mutually exclusive with
       multiple parameters. See the reference documentation for more information.
 
 Parameters
@@ -72,26 +72,26 @@ Parameters
 
       mc tag list myminio/mybucket/object.txt
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: versions
-   :option:
+.. mc-cmd:: --versions
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc
       :end-before: end-versions-desc
 
-   Use :mc-cmd-option:`~mc tag list versions` and 
-   :mc-cmd-option:`~mc tag list rewind` together to list tags from all
+   Use :mc-cmd:`~mc tag list --versions` and 
+   :mc-cmd:`~mc tag list --rewind` together to list tags from all
    object versions which existed at a specific point in time.
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -99,8 +99,8 @@ Parameters
 
    Mutually exclusive with the following parameters:
 
-   - :mc-cmd-option:`~mc tag list rewind`
-   - :mc-cmd-option:`~mc tag list versions`
+   - :mc-cmd:`~mc tag list --rewind`
+   - :mc-cmd:`~mc tag list --versions`
 
 Global Flags
 ~~~~~~~~~~~~

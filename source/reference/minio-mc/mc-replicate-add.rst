@@ -85,8 +85,8 @@ Parameters
       mc replicate add --remote-bucket "arn:minio:replica::UUID" play/mybucket
 
 
-.. mc-cmd:: remote-bucket
-   :option:
+.. mc-cmd:: --remote-bucket
+   
 
    *Required* Specify the ARN for the destination deployment and bucket. You
    can retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
@@ -97,8 +97,8 @@ Parameters
    - Use the :mc-cmd:`mc admin bucket remote add` to create a replication ARN
      for the bucket on the destination deployment. 
 
-.. mc-cmd:: disable
-   :option:
+.. mc-cmd:: --disable
+   
 
    *Optional* Creates the replication rule in the "disabled" state. MinIO does
    not begin replicating objects using the rule until it is enabled using
@@ -109,18 +109,18 @@ Parameters
    You must explicitly enable replication of existing
    objects by including ``"existing-objects"`` to the list of
    replication features specified to 
-   :mc-cmd-option:`mc replicate edit replicate`. See
+   :mc-cmd:`mc replicate edit --replicate`. See
    :ref:`minio-replication-behavior-existing-objects` for more
    information.
 
-.. mc-cmd:: id
-   :option:
+.. mc-cmd:: --id
+   
 
    *Optional* Specify a unique ID for the replication rule. MinIO automatically
    generates an ID if one is not specified.
 
-.. mc-cmd:: replicate
-   :option:
+.. mc-cmd:: --replicate
+   
 
    *Optional* Specify a comma-separated list of the following values to enable
    extended replication features. 
@@ -134,16 +134,16 @@ Parameters
    - ``existing-objects`` - Directs MinIO to replicate objects created
      before replication was enabled *or* while replication was suspended.
 
-.. mc-cmd:: storage-class
-   :option:
+.. mc-cmd:: --storage-class
+   
 
    *Optional*
 
    Specify the MinIO :ref:`storage class <minio-ec-storage-class>` to 
    apply to replicated objects. 
 
-.. mc-cmd:: tags
-   :option:
+.. mc-cmd:: --tags
+   
 
    *Optional* Specify one or more ampersand ``&`` separated key-value pair tags
    which MinIO uses for filtering objects to replicate. For example:
@@ -155,8 +155,8 @@ Parameters
    MinIO applies the replication rule to any object whose tag set
    contains the specified replication tags.
 
-.. mc-cmd:: priority
-   :option:
+.. mc-cmd:: --priority
+   
 
    *Optional* Specify the integer priority of the replication rule. The value
    *must* be unique among all other rules on the source bucket. Higher values
@@ -191,11 +191,11 @@ operations, and delete markers to the remote target:
 - Replace ``myminio/mybucket`` with the :mc-cmd:`~mc replicate add ALIAS` and
   full bucket path for which to create the replication configuration.
 
-- Replace the :mc-cmd-option:`~mc replicate add remote-bucket` value with the 
+- Replace the :mc-cmd:`~mc replicate add --remote-bucket` value with the 
   ARN of the remote target. Use :mc-cmd:`mc admin bucket remote ls` to list
   all configured remote replication targets.
 
-- The :mc-cmd-option:`~mc replicate add replicate` flag directs MinIO to
+- The :mc-cmd:`~mc replicate add --replicate` flag directs MinIO to
   replicate all delete operations, delete markers, and existing objects to the
   remote. See :ref:`minio-replication-behavior-delete` and
   :ref:`minio-replication-behavior-existing-objects` for more information on
@@ -218,11 +218,11 @@ to the remote target:
 - Replace ``myminio/mybucket`` with the :mc-cmd:`~mc replicate add ALIAS` and
   full bucket path for which to create the replication configuration.
 
-- Replace the :mc-cmd-option:`~mc replicate add remote-bucket` value with the 
+- Replace the :mc-cmd:`~mc replicate add --remote-bucket` value with the 
   ARN of the remote target. Use :mc-cmd:`mc admin bucket remote ls` to list
   all configured remote replication targets.
 
-- The :mc-cmd-option:`~mc replicate add replicate` flag directs MinIO to
+- The :mc-cmd:`~mc replicate add --replicate` flag directs MinIO to
   replicate all existing objects to the remote. See
   :ref:`minio-replication-behavior-existing-objects` for more information on
   replication behavior.
@@ -339,11 +339,11 @@ without the overhead of contacting technical support.
 
 - To enable replication of existing objects when creating a new replication
   rule, include ``"existing-objects"`` to the list of replication features 
-  specified to :mc-cmd-option:`mc replicate add replicate`.
+  specified to :mc-cmd:`mc replicate add --replicate`.
 
 - To enable replication of existing objects for an existing replication rule,
   add ``"existing-objects"`` to the list of existing replication features using
-  :mc-cmd-option:`mc replicate add replicate`. You must specify *all*
+  :mc-cmd:`mc replicate add --replicate`. You must specify *all*
   desired replication features when editing the replication rule. 
 
 See :ref:`minio-replication-behavior-existing-objects` for more complete
@@ -369,7 +369,7 @@ metadata-only update to an object with the ``REPLICA`` status, MinIO marks the
 object as ``PENDING`` and eligible for replication.
 
 To disable metadata synchronization, use the 
-:mc-cmd-option:`mc replicate edit replicate` command and omit 
+:mc-cmd:`mc replicate edit --replicate` command and omit 
 ``replica-metadata-sync`` from the replication feature list. 
 
 Replication of Delete Operations
@@ -392,7 +392,7 @@ MinIO does *not* replicate objects deleted due to
 client-driven delete operations.
 
 MinIO requires explicitly enabling replication of delete operations using the
-:mc-cmd-option:`mc replicate add replicate` flag. This procedure includes the
+:mc-cmd:`mc replicate add --replicate` flag. This procedure includes the
 required flags for enabling replication of delete operations and delete markers.
 See :ref:`minio-replication-behavior-delete` for more complete documentation
 on this behavior.

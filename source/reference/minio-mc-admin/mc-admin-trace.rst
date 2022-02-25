@@ -59,18 +59,18 @@ Syntax
    Specify the :mc:`alias <mc alias>` of a configured MinIO deployment
    against which the command issues ``HTTP TRACE`` requests.
 
-.. mc-cmd:: all, a
-   :option:
+.. mc-cmd:: --all, a
+   
 
    Returns all traffic on the MinIO deployment, including internode traffic
    between MinIO servers.
 
-.. mc-cmd:: verbose
-   :option:
+.. mc-cmd:: --verbose
+   
 
    Returns verbose ``HTTP TRACE`` output.
 
-.. mc-cmd:: errors, e
-   :option:
+.. mc-cmd:: --errors, e
+   
 
    Returns failed ``HTTP TRACE`` requests only.

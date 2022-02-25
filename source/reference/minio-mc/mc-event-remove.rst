@@ -81,40 +81,40 @@ Parameters
    :ref:`minio-bucket-notifications` for more
    information.
 
-.. mc-cmd:: event
-   :option:
+.. mc-cmd:: --event
+   
    
    *Optional* The event(s) to remove. Specify multiple events using a comma
    ``,`` delimiter. See :ref:`mc-event-supported-events` for supported events.
 
    Defaults to removing all events on the :mc-cmd:`~mc event remove ALIAS`
-   bucket with the :mc-cmd-option:`~mc event remove ARN` notification target.
+   bucket with the :mc-cmd:`~mc event remove ARN` notification target.
 
-.. mc-cmd:: force
-   :option:
+.. mc-cmd:: --force
+   
    
    *Optional* Removes all events on the :mc-cmd:`~mc event remove ALIAS` bucket
-   with the :mc-cmd-option:`~mc event remove ARN` notification target.
+   with the :mc-cmd:`~mc event remove ARN` notification target.
 
-.. mc-cmd:: prefix
-   :option:
+.. mc-cmd:: --prefix
+   
 
    *Optional* The bucket prefix in which the command removes bucket
    notifications.
 
    For example, given a :mc-cmd:`~mc event remove ALIAS` of
-   ``play/mybucket`` and a :mc-cmd-option:`~mc event remove prefix` of
+   ``play/mybucket`` and a :mc-cmd:`~mc event remove --prefix` of
    ``photos``, the command only removes bucket notifications in
    ``play/mybucket/photos``.
 
-.. mc-cmd:: suffix
-   :option:
+.. mc-cmd:: --suffix
+   
 
    *Optional* The bucket suffix in which the command removes bucket
    notifications. 
 
    For example, given a :mc-cmd:`~mc event remove ALIAS` of
-   ``play/mybucket`` and a :mc-cmd-option:`~mc event remove suffix` of
+   ``play/mybucket`` and a :mc-cmd:`~mc event remove --suffix` of
    ``.jpg``, the command only removes bucket notifications in
    ``play/mybucket/*.jpg``.
 

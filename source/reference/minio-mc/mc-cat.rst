@@ -15,9 +15,9 @@
 .. Replacement substitutions
 
 .. |command| replace:: :mc-cmd:`mc cat`
-.. |rewind| replace:: :mc-cmd-option:`~mc cat rewind`
-.. |versionid| replace:: :mc-cmd-option:`~mc cat version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc cat ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc cat --rewind`
+.. |versionid| replace:: :mc-cmd:`~mc cat version-id`
+.. |alias| replace:: :mc-cmd:`~mc cat ALIAS`
 
 Syntax
 ------
@@ -90,22 +90,22 @@ Parameters
 
       mc cat ~/data/object.txt
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
       :end-before: end-version-id-desc
 
-.. mc-cmd:: encrypt-key
-   :option:
+.. mc-cmd:: --encrypt-key
+   
 
    Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
@@ -115,9 +115,9 @@ Parameters
       object(s).
 
    Enclose the entire list of key-value pairs passed to 
-   :mc-cmd-option:`~mc cat encrypt-key` in double quotes ``"``.
+   :mc-cmd:`~mc cat --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd-option:`~mc cat encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc cat --encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
@@ -150,7 +150,7 @@ Use :mc-cmd:`mc cat` to return the object:
 View an S3 Object at a Point-In-Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc cat rewind` to return the object at a specific
+Use :mc-cmd:`mc cat --rewind` to return the object at a specific
 point-in-time in the past:
 
 .. code-block:: shell
@@ -164,7 +164,7 @@ point-in-time in the past:
 - Replace :mc-cmd:`PATH <mc cat ALIAS>` with the path to the object on the
   S3-compatible host.
 
-- Replace :mc-cmd:`DURATION <mc cat rewind>` with the point-in-time in the past
+- Replace :mc-cmd:`DURATION <mc cat --rewind>` with the point-in-time in the past
   at which the command returns the object. For example, specify ``30d`` to
   return the version of the object 30 days prior to the current date.
 
@@ -175,7 +175,7 @@ point-in-time in the past:
 View an S3 Object with Specific Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc cat version-id` to return a specific version of the 
+Use :mc-cmd:`mc cat version-id` to return a specific version of the 
 object:
 
 .. code-block:: shell

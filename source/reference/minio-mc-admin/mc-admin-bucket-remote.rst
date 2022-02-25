@@ -145,21 +145,21 @@ Syntax
          destination.
 
    .. mc-cmd:: service
-      :option:
+      
 
       *Required*
 
       Specify ``"replication"``.
 
    .. mc-cmd:: region
-      :option:
+      
 
       The region of the :mc-cmd:`~mc admin bucket remote add DESTINATION`. 
 
-      Mutually exclusive with :mc-cmd-option:`~mc admin bucket remote add path`
+      Mutually exclusive with :mc-cmd:`~mc admin bucket remote add path`
 
    .. mc-cmd:: path
-      :option:
+      
 
       The bucket path lookup supported by the destination server. Specify
       one of the following:
@@ -169,10 +169,10 @@ Syntax
       - ``auto`` (Default)
 
       Mutually exclusive with 
-      :mc-cmd-option:`~mc admin bucket remote add region`
+      :mc-cmd:`~mc admin bucket remote add region`
 
    .. mc-cmd:: sync
-      :option:
+      
 
       Enables synchronous replication, where MinIO attempts to replicate
       the object *prior* to returning the PUT object response. Synchronous 
@@ -208,7 +208,7 @@ Syntax
          mc admin bucket ls play/mybucket
 
    .. mc-cmd:: service
-      :option:
+      
 
       *Required*
 
@@ -243,7 +243,7 @@ Syntax
          mc admin bucket remove play/mybucket
 
    .. mc-cmd:: ARN
-      :option:
+      
 
       *Required*
 

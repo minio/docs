@@ -155,7 +155,7 @@ Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
    mc admin service restart ALIAS
 
-Replace ``ALIAS`` with the :mc:`alias <mc-alias>` of the deployment to 
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
 The :mc:`minio server` process prints a line on startup for each configured Redis
@@ -180,7 +180,7 @@ event with the configured Redis service as a target:
    mc event add ALIAS/BUCKET arn:minio:sqs::primary:redis \
      --event EVENTS
 
-- Replace ``ALIAS`` with the :mc:`alias <mc-alias>` of a MinIO deployment.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment.
 - Replace ``BUCKET`` with the name of the bucket in which to configure the 
   event.
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
@@ -199,7 +199,7 @@ a given notification target:
 
 Perform an action on the bucket for which you configured the new event and 
 check the Redis service for the notification data. The action required
-depends on which :mc-cmd:`events <mc-event-add-event>` were specified
+depends on which :mc-cmd:`events <mc event add --event>` were specified
 when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
@@ -244,7 +244,7 @@ configured Redis service endpoints in the deployment:
 
    mc admin config get ALIAS/ notify_redis
 
-Replace ``ALIAS`` with the :mc:`alias <mc-alias>` of the MinIO deployment.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment.
 
 The command output resembles the following:
 
@@ -306,7 +306,7 @@ Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
    mc admin service restart ALIAS
 
-Replace ``ALIAS`` with the :mc:`alias <mc-alias>` of the deployment to 
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
 The :mc:`minio server` process prints a line on startup for each configured Redis
@@ -321,7 +321,7 @@ target similar to the following:
 
 Perform an action on a bucket which has an event configuration using the updated
 Redis service endpoint and check the Redis service for the notification data. The
-action required depends on which :mc-cmd:`events <mc-event-add-event>` were
+action required depends on which :mc-cmd:`events <mc event add --event>` were
 specified when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 

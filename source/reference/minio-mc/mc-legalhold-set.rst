@@ -14,9 +14,9 @@
 .. mc:: mc legalhold set
 
 .. |command| replace:: :mc-cmd:`mc legalhold set`
-.. |rewind| replace:: :mc-cmd-option:`~mc legalhold set rewind`
-.. |versionid| replace:: :mc-cmd-option:`~mc legalhold set version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc legalhold set ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc legalhold set --rewind`
+.. |versionid| replace:: :mc-cmd:`~mc legalhold set version-id`
+.. |alias| replace:: :mc-cmd:`~mc legalhold set ALIAS`
 
 Syntax
 ------
@@ -31,7 +31,7 @@ an object or objects.
 
 :mc:`mc legalhold` *requires* that the specified bucket has 
 :ref:`object locking enabled <minio-object-locking>`. You can **only** enable
-object locking at bucket creation. See :mc-cmd-option:`mc mb with-lock` for
+object locking at bucket creation. See :mc-cmd:`mc mb with-lock` for
 documentation on creating buckets with object locking enabled. 
 
 .. tab-set::
@@ -75,21 +75,21 @@ Parameters
       
       mc legalhold set play/mybucket/myobjects/objects.txt
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    *Optional* Applies the legal hold to all objects in the 
    :mc-cmd:`~mc legalhold set ALIAS` bucket or bucket prefix.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -117,7 +117,7 @@ Use :mc-cmd:`mc legalhold set` to enable legal hold on objects:
 
 - Replace :mc-cmd:`PATH <mc legalhold set ALIAS>` with the path to the bucket
   or object on the S3-compatible host. If specifying the path to a bucket or
-  bucket prefix, include the :mc-cmd-option:`~mc legalhold set recursive`
+  bucket prefix, include the :mc-cmd:`~mc legalhold set --recursive`
   option.
 
 Behavior

@@ -131,8 +131,8 @@ The command accepts the following arguments:
       of decreased reliability.
 
 
-.. mc-cmd:: address
-   :option:
+.. mc-cmd:: --address
+   
 
    *Optional* Binds the :mc:`minio <minio server>` server process to a
    specific network address and port number. Specify the address and port as
@@ -146,8 +146,8 @@ The command accepts the following arguments:
    If omitted, :mc:`minio <minio server>` binds to port ``9000`` on all
    configured IP addresses or hostnames on the host machine.
 
-.. mc-cmd:: console-address
-   :option:
+.. mc-cmd:: --console-address
+   
 
    *Optional*
 
@@ -157,7 +157,7 @@ The command accepts the following arguments:
    MinIO server outputs the port to the system log.
 
 .. mc-cmd:: certs-dir, -S
-   :option:
+   
 
    *Optional* Specifies the path to the folder containing certificates the
    :mc:`minio` process uses for configuring TLS/SSL connectivity.
@@ -169,18 +169,18 @@ The command accepts the following arguments:
 
    See :ref:`minio-TLS` for more information on TLS/SSL connectivity.
 
-.. mc-cmd:: quiet
-   :option:
+.. mc-cmd:: --quiet
+   
 
    *Optional* Disables startup information.
 
-.. mc-cmd:: anonymous
-   :option:
+.. mc-cmd:: --anonymous
+   
 
    *Optional* Hides sensitive information from logging.
 
-.. mc-cmd:: json
-   :option:
+.. mc-cmd:: --json
+   
 
    *Optional* Outputs server logs and startup information in ``JSON``
    format.

@@ -75,7 +75,7 @@ Parameters
       mc share upload play/mybucket/object.txt play/mybucket/otherobject.txt
 
    If specifying the path to a bucket or bucket prefix, you **must** also
-   specify the :mc-cmd-option:`~mc share upload recursive` argument. For
+   specify the :mc-cmd:`~mc share upload --recursive` argument. For
    example:
 
    .. code-block:: shell
@@ -84,8 +84,8 @@ Parameters
 
       mc share upload --recursive play/mybucket/myprefix/
 
-.. mc-cmd:: expire, E
-   :option:
+.. mc-cmd:: --expire, E
+   
 
    *Optional* Set the expiration time limit for all generated URLs.
    
@@ -95,8 +95,8 @@ Parameters
 
    Defaults to ``168h`` or 168 hours (7 days).
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
    
    *Optional* Modifies the CURL URL to support uploading objects to a bucket or
    bucket prefix. Required if any ``ALIAS`` specifies a path to a bucket or
@@ -142,16 +142,17 @@ Generate a URL to Upload Object(s)
       - Replace :mc-cmd:`PATH <mc share upload ALIAS>` with the path to the
         object on the MinIO deployment.
 
-      - Replace :mc-cmd:`DURATION <mc share upload expire>` with the duration
+      - Replace :mc-cmd:`DURATION <mc share upload --expire>` with the duration
         after which the URL expires. For example, to set a 30 day expiry, 
         specify ``30d``.
 
    .. tab-item:: Upload Multiple Objects
 
-      Use :mc-cmd:`mc share upload` with the 
-      :mc-cmd-option:`~mc share upload recursive` option to generate a URL that
-      supports ``POST`` requests for uploading files to a bucket on a
-      MinIO deployment:
+      Use :mc-cmd:`mc share upload` with the
+      :mc-cmd:`~mc share upload --recursive` and
+      :mc-cmd:`~mc share upload --expire` options to generate a temporary URL
+      that supports ``POST`` requests for uploading files to a bucket on a MinIO
+      deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -164,7 +165,7 @@ Generate a URL to Upload Object(s)
       - Replace :mc-cmd:`PATH <mc share upload ALIAS>` with the path to the
         bucket or bucket prefix on the MinIO deployment.
 
-      - Replace :mc-cmd:`DURATION <mc share upload expire>` with the duration
+      - Replace :mc-cmd:`DURATION <mc share upload --expire>` with the duration
         after which the URL expires. For example, to set a 30 day expiry, 
         specify ``30d``.
 

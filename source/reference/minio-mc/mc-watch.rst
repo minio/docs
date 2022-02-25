@@ -68,38 +68,38 @@ Parameters
 
       mc tree myminio/mybucket
 
-.. mc-cmd:: event
-   :option:
+.. mc-cmd:: --event
+   
 
    The event(s) to watch for. Specify multiple events using a comma ``,``
    delimiter. See :ref:`mc-event-supported-events` for supported events.
 
    Defaults to ``put,delete, get``.
       
-.. mc-cmd:: prefix
-   :option:
+.. mc-cmd:: --prefix
+   
 
    The bucket prefix in which to watch for the specified 
-   :mc-cmd-option:`~mc watch event`.
+   :mc-cmd:`~mc watch --event`.
 
    For example, given a :mc-cmd:`~mc watch ALIAS` of ``play/mybucket`` and a 
-   :mc-cmd-option:`~mc watch prefix` of ``photos``, only events in 
+   :mc-cmd:`~mc watch --prefix` of ``photos``, only events in 
    ``play/mybucket/photos`` trigger bucket notifications.
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    Recursively watch for events in the specified 
    :mc-cmd:`~mc watch ALIAS` bucket path or local directory.
 
-.. mc-cmd:: suffix
-   :option:
+.. mc-cmd:: --suffix
+   
 
    The bucket suffix in which to watch for the specified 
-   :mc-cmd-option:`~mc watch event`.
+   :mc-cmd:`~mc watch --event`.
 
    For example, given a :mc-cmd:`~mc watch ALIAS` of ``play/mybucket`` and a 
-   :mc-cmd-option:`~mc watch suffix` of ``.jpg``, only events in 
+   :mc-cmd:`~mc watch --suffix` of ``.jpg``, only events in 
    ``play/mybucket/*.jpg`` trigger bucket notifications.
 
 Global Flags

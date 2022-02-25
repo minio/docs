@@ -472,7 +472,7 @@ definitions. The initial table links to each definition.
 
 - :mc:`foo`
 - :mc-cmd:`foo bar`
-- :mc-cmd-option:`foo bar baz`
+- :mc-cmd:`foo bar baz`
 - :data:`foo`
 - :data:`foo.bar`
 
@@ -492,7 +492,7 @@ for display. This is intentional (For now).
       Used for defining various arguments to a CLI command
 
    .. mc-cmd:: baz
-      :option:
+      
 
       Used for defining an option to a CLI command
 

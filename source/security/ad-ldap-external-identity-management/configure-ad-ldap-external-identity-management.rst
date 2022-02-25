@@ -169,7 +169,7 @@ Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
    mc admin service restart ALIAS
 
-Replace ``ALIAS`` with the :mc:`alias <mc-alias>` of the deployment to 
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
 3) Use the MinIO Console to Log In with AD/LDAP Credentials

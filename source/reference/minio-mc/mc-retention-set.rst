@@ -16,10 +16,10 @@
 .. replacements for mc retention set
 
 .. |command| replace:: :mc-cmd:`mc retention set`
-.. |rewind| replace:: :mc-cmd-option:`~mc retention set rewind`
-.. |versionid| replace:: :mc-cmd-option:`~mc retention set version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc retention set ALIAS`
-.. |versions| replace:: :mc-cmd-option:`~mc retention set versions`
+.. |rewind| replace:: :mc-cmd:`~mc retention set --rewind`
+.. |versionid| replace:: :mc-cmd:`~mc retention set --version-id`
+.. |alias| replace:: :mc-cmd:`~mc retention set ALIAS`
+.. |versions| replace:: :mc-cmd:`~mc retention set --versions`
 
 Syntax
 ------
@@ -39,7 +39,7 @@ use :mc:`mc legalhold`.
 
 :mc:`mc retention set` *requires* that the specified bucket has object locking
 enabled. You can **only** enable object locking at bucket creation. See
-:mc-cmd-option:`mc mb with-lock` for documentation on creating buckets with
+:mc-cmd:`mc mb with-lock` for documentation on creating buckets with
 object locking enabled. 
 
 .. tab-set::
@@ -77,7 +77,7 @@ object locking enabled.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd-option:`mc retention set version-id` is mutually exclusive with
+      :mc-cmd:`mc retention set --version-id` is mutually exclusive with
       multiple other parameters. See the reference documentation for more
       information.
 
@@ -123,24 +123,24 @@ Parameters
       mc retention set play/mybucket/object.txt MODE VALIDITY
 
    - If the ``ALIAS`` specifies a bucket or bucket prefix, include
-     :mc-cmd-option:`~mc retention set recursive` to apply the object lock
+     :mc-cmd:`~mc retention set --recursive` to apply the object lock
      settings to the bucket contents.
 
    - :mc-cmd:`mc retention set` by default applies to only the latest object
-     version. Use :mc-cmd-option:`~mc retention set version-id` or
-     :mc-cmd-option:`~mc retention set versions` to apply the object lock
+     version. Use :mc-cmd:`~mc retention set --version-id` or
+     :mc-cmd:`~mc retention set --versions` to apply the object lock
      settings to a specific version or to all versions of the object
      respectively.
 
-.. mc-cmd:: bypass
-   :option:
+.. mc-cmd:: --bypass
+   
 
    *Optional* Allows a user with the ``s3:BypassGovernanceRetention`` permission
    to modify the object. Requires the ``governance`` retention 
    :mc-cmd:`~mc retention set MODE`
 
-.. mc-cmd:: default
-   :option:
+.. mc-cmd:: --default
+   
 
    *Optional* Sets the default object lock settings for the bucket specified to
    :mc-cmd:`~mc retention set ALIAS` using the
@@ -148,26 +148,29 @@ Parameters
    Any objects created in the bucket inherit the default object lock settings
    unless explicitly overriden using :mc-cmd:`mc retention set`.
    
-   If specifying :mc-cmd-option:`~mc retention set default`, 
+   If specifying :mc-cmd:`~mc retention set --default`, 
    :mc-cmd:`mc retention set` ignores all other flags.
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive
+   :optional:
+   :alias: --r
 
-   *Optional* Recursively applies the object lock settings to all objects in the
+   Recursively applies the object lock settings to all objects in the
    specified :mc-cmd:`~mc retention set ALIAS` path.
 
-   Mutually exclusive with :mc-cmd-option:`~mc retention set version-id`.
+   Mutually exclusive with :mc-cmd:`~mc retention set --version-id`.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: version-id, vid
-   :option:
+.. mc-cmd:: --version-id
+   :optional:
+   :alias: --vid
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -175,19 +178,19 @@ Parameters
 
    Mutually exclusive with any of the following flags:
    
-   - :mc-cmd-option:`~mc retention set versions`
-   - :mc-cmd-option:`~mc retention set rewind`
-   - :mc-cmd-option:`~mc retention set recursive`
+   - :mc-cmd:`~mc retention set --versions`
+   - :mc-cmd:`~mc retention set --rewind`
+   - :mc-cmd:`~mc retention set --recursive`
 
-.. mc-cmd:: versions
-   :option:
+.. mc-cmd:: --versions
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc
       :end-before: end-versions-desc
 
-   Use :mc-cmd-option:`~mc retention set versions` and
-   :mc-cmd-option:`~mc retention set rewind` together to apply the
+   Use :mc-cmd:`~mc retention set --versions` and
+   :mc-cmd:`~mc retention set --rewind` together to apply the
    retention settings to all object versions that existed at a
    specific point-in-time.
 
@@ -205,8 +208,8 @@ Set Default Bucket Retention Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc retention set` with the
-:mc-cmd-option:`~mc retention set recursive` and
-:mc-cmd-option:`~mc retention set default` to set the default bucket
+:mc-cmd:`~mc retention set --recursive` and
+:mc-cmd:`~mc retention set --default` to set the default bucket
 retention settings.
 
 .. code-block:: shell
@@ -239,7 +242,7 @@ Set Object Lock Configuration for Versioned Object
    .. tab-item:: Specific Version
 
       Use :mc-cmd:`mc retention set` with
-      :mc-cmd-option:`~mc retention set version-id` to apply the retention
+      :mc-cmd:`~mc retention set --version-id` to apply the retention
       settings to a specific object version:
 
       .. code-block:: shell
@@ -247,7 +250,7 @@ Set Object Lock Configuration for Versioned Object
 
          mc retention set --version-id VERSION MODE DURATION ALIAS/PATH
 
-      - Replace :mc-cmd:`VERSION <mc retention set version-id>` with the version
+      - Replace :mc-cmd:`VERSION <mc retention set --version-id>` with the version
         of the object.
 
       - Replace :mc-cmd:`MODE <mc retention set MODE>` with the retention mode
@@ -267,7 +270,7 @@ Set Object Lock Configuration for Versioned Object
    .. tab-item:: All Versions
 
       Use :mc-cmd:`mc retention set` with
-      :mc-cmd-option:`~mc retention set versions` to apply the retention
+      :mc-cmd:`~mc retention set --versions` to apply the retention
       settings to a specific object version:
 
       .. code-block:: shell
@@ -314,18 +317,18 @@ all versions of an object:
       To direct :mc:`mc retention set` to operate on a specific version of an
       object, include the ``--version-id`` argument:
       
-      - :mc-cmd-option:`mc retention set version-id`
-      - :mc-cmd-option:`mc retention set version-id`
-      - :mc-cmd-option:`mc retention set version-id`
+      - :mc-cmd:`mc retention set --version-id`
+      - :mc-cmd:`mc retention set --version-id`
+      - :mc-cmd:`mc retention set --version-id`
 
    .. tab-item:: All Object Versions
 
       To direct :mc:`mc retention set` to operate on *all* versions of an object, 
       include the ``--versions`` argument:
 
-      - :mc-cmd-option:`mc retention set versions`
-      - :mc-cmd-option:`mc retention set versions`
-      - :mc-cmd-option:`mc retention set versions`
+      - :mc-cmd:`mc retention set --versions`
+      - :mc-cmd:`mc retention set --versions`
+      - :mc-cmd:`mc retention set --versions`
 
 Interaction with Legal Holds
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

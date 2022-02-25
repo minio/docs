@@ -91,8 +91,8 @@ Parameters
       mc mv ~/mydata/object.txt play/mydata/otherobject.txt myminio/mydata
 
    If you specify a directory or bucket to :mc-cmd:`~mc mv SOURCE`, you must
-   also specify :mc-cmd-option:`~mc mv recursive` to recursively move the
-   contents of that directory. If you omit the :mc-cmd-option:`~mc mv recursive`
+   also specify :mc-cmd:`~mc mv --recursive` to recursively move the
+   contents of that directory. If you omit the :mc-cmd:`~mc mv --recursive`
    argument, :mc:`~mc mv` only moves objects in the top level of the specified
    directory or bucket.
 
@@ -121,24 +121,24 @@ Parameters
    The ``TARGET`` object name can differ from the ``SOURCE`` to 
    "rename" the object as part of the move operation. 
 
-   If running :mc-cmd:`mc mv` with the :mc-cmd-option:`~mc mv recursive` option, 
+   If running :mc-cmd:`mc mv` with the :mc-cmd:`~mc mv --recursive` option, 
    :mc-cmd:`mc mv` treats the ``TARGET`` as the bucket prefix for all
    objects at the ``SOURCE``. 
 
-.. mc-cmd:: attr
-   :option:
+.. mc-cmd:: --attr
+   
 
    *Optional* Add custom metadata for the object. Specify key-value pairs as 
    ``KEY=VALUE\;``. For example, 
    ``--attr key1=value1\;key2=value2\;key3=value3``.
 
-.. mc-cmd:: continue, c
-   :option:
+.. mc-cmd:: --continue, c
+   
 
    *Optional* Create or resume a move session. 
 
-.. mc-cmd:: encrypt
-   :option:
+.. mc-cmd:: --encrypt
+   
 
    *Optional* Encrypt or decrypt objects using server-side encryption with
    server-managed keys. Specify key-value pairs as ``KEY=VALUE``.
@@ -148,14 +148,14 @@ Parameters
       object(s).
 
    Enclose the entire list of key-value pairs passed to
-   :mc-cmd-option:`~mc mv encrypt` in double-quotes ``"``.
+   :mc-cmd:`~mc mv --encrypt` in double-quotes ``"``.
 
-   :mc-cmd-option:`~mc mv encrypt` can use the ``MC_ENCRYPT`` environment
+   :mc-cmd:`~mc mv --encrypt` can use the ``MC_ENCRYPT`` environment
    variable for retrieving a list of encryption key-value pairs as an
    alternative to specifying them on the command line.
 
-.. mc-cmd:: encrypt-key
-   :option:
+.. mc-cmd:: --encrypt-key
+   
 
    *Optional* Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
@@ -165,14 +165,14 @@ Parameters
       object(s).
 
    Enclose the entire list of key-value pairs passed to 
-   :mc-cmd-option:`~mc mv encrypt-key` in double quotes ``"``.
+   :mc-cmd:`~mc mv --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd-option:`~mc mv encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc mv --encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
-.. mc-cmd:: newer-than
-   :option:
+.. mc-cmd:: --newer-than
+   
 
    *Optional* Remove object(s) newer than the specified number of days.  Specify
    a string in ``##d#hh#mm#ss`` format. For example: 
@@ -180,29 +180,29 @@ Parameters
 
    Defaults to ``0`` (all objects).
 
-.. mc-cmd:: older-than
-   :option:
+.. mc-cmd:: --older-than
+   
 
    *Optional* Remove object(s) older than the specified time limit. Specify a
    string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``.
       
    Defaults to ``0`` (all objects).
 
-.. mc-cmd:: preserve, a
-   :option:
+.. mc-cmd:: --preserve, a
+   
 
    *Optional* Preserve file system attributes and bucket policy rules of the
    :mc-cmd:`~mc mv SOURCE` directories, buckets, and objects on the 
    :mc-cmd:`~mc mv TARGET` bucket(s).
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
    
    *Optional* Recursively move the contents of each bucket or directory
    :mc-cmd:`~mc mv SOURCE` to the :mc-cmd:`~mc mv TARGET` bucket.
 
 .. mc-cmd:: storage-class, sc
-   :option:
+   
 
    *Optional* Set the storage class for the new object(s) on the 
    :mc-cmd:`~mc mv TARGET`. 
@@ -234,7 +234,7 @@ Move Files from Filesystem to S3-Compatible Host
   file to move. 
 
   If specifying the path to a directory, include the 
-  :mc-cmd-option:`~mc mv recursive` flag.
+  :mc-cmd:`~mc mv --recursive` flag.
 
   :mc:`mc mv` *removes* the files from the source after
   successfully moving it to the destination.
@@ -247,7 +247,7 @@ Move Files from Filesystem to S3-Compatible Host
 Move a File from Filesystem to S3-Compatible Host with Custom Metadata
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc mv` with the :mc-cmd-option:`~mc mv attr` option to set custom
+Use :mc:`mc mv` with the :mc-cmd:`~mc mv --attr` option to set custom
 attributes on file(s).
 
 .. code-block:: shell
@@ -264,7 +264,7 @@ attributes on file(s).
 
 - Replace :mc-cmd:`PATH <mc mv TARGET>` with the destination bucket.
 
-- Replace :mc-cmd:`ATTRIBUTES <mc mv attr>` with one or more comma-separated
+- Replace :mc-cmd:`ATTRIBUTES <mc mv --attr>` with one or more comma-separated
   key-value pairs ``KEY=VALUE``. Each pair represents one attribute key and
   value.
 
@@ -292,7 +292,7 @@ Move Bucket Between S3-Compatible Services
 Move File to S3-Compatible Host with Specific Storage Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc mv` with the :mc-cmd-option:`~mc mv storage-class` option to set
+Use :mc:`mc mv` with the :mc-cmd:`~mc mv storage-class` option to set
 the storage class on the destination S3-compatible host.
 
 .. code-block:: shell
@@ -312,7 +312,7 @@ the storage class on the destination S3-compatible host.
 
 - Replace :mc-cmd:`PATH <mc mv TARGET>` with the destination bucket.
 
-- Replace :mc-cmd:`ATTRIBUTES <mc mv attr>` with one or more comma-separated
+- Replace :mc-cmd:`ATTRIBUTES <mc mv --attr>` with one or more comma-separated
   key-value pairs ``KEY=VALUE``. Each pair represents one attribute key and
   value.
 
@@ -325,19 +325,19 @@ Behavior
 Object Names on Move
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO uses the :mc-cmd-option:`~mc mv SOURCE` object name when moving
-the object to the :mc-cmd-option:`~mc mv TARGET` if no explicit target
+MinIO uses the :mc-cmd:`~mc mv SOURCE` object name when moving
+the object to the :mc-cmd:`~mc mv TARGET` if no explicit target
 object name is specified.
 
 You can specify a different object name for the
-:mc-cmd-option:`~mc mv TARGET` with the same object path to "rename"
+:mc-cmd:`~mc mv TARGET` with the same object path to "rename"
 an object. For example:
 
 .. code-block:: shell
 
    mc mv play/mybucket/object.txt play/mybucket/myobject.txt
 
-For recursive move operations (:mc-cmd-option:`mc mv recursive`), MinIO
+For recursive move operations (:mc-cmd:`mc mv --recursive`), MinIO
 treats the ``TARGET`` path as a prefix for objects on the ``SOURCE``. 
 
 Checksum Verification
@@ -349,7 +349,7 @@ checksums.
 Resume Move Operations
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc mv continue` to resume an interrupted or failed
+Use :mc-cmd:`mc mv --continue` to resume an interrupted or failed
 move operation from the point of failure. 
 
 MinIO Trims Empty Prefixes on Object Removal

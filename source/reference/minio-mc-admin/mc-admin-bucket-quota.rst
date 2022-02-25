@@ -32,7 +32,7 @@ storage quotas.
 Units of Measurement
 ~~~~~~~~~~~~~~~~~~~~
 
-The :mc-cmd-option:`mc admin bucket quota hard` flag
+The :mc-cmd:`mc admin bucket quota --hard` flag
 accepts the following case-insensitive suffixes to represent the unit of the
 specified size value:
 
@@ -77,7 +77,7 @@ Configure a Hard Quota on a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc:`mc admin bucket quota` with the
-:mc-cmd-option:`~mc admin bucket quota hard` flag to specify a hard quota 
+:mc-cmd:`~mc admin bucket quota --hard` flag to specify a hard quota 
 on a bucket. Hard quotas prevent the bucket size from growing past the specified
 limit.
 
@@ -113,7 +113,7 @@ Clear Configured Bucket Quota
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc:`mc admin bucket quota` with the
-:mc-cmd-option:`~mc admin bucket quota clear` flag to clear all quotas from
+:mc-cmd:`~mc admin bucket quota --clear` flag to clear all quotas from
 a bucket.
 
 .. code-block:: shell
@@ -151,8 +151,8 @@ Syntax
    Omit all other arguments to return the current quota settings for the
    specified bucket.
 
-.. mc-cmd:: hard
-   :option:
+.. mc-cmd:: --hard
+   
 
    Sets a maximum limit to the bucket storage size. The MinIO server rejects any
    incoming ``PUT`` request whose contents would exceed the bucket's configured
@@ -163,8 +163,8 @@ Syntax
 
    See :ref:`mc-admin-bucket-quota-units` for supported unit sizes.
 
-.. mc-cmd:: clear
-   :option:
+.. mc-cmd:: --clear
+   
 
    Clears all quotas configured for the bucket. 
 

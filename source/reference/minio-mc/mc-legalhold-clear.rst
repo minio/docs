@@ -13,9 +13,9 @@
 .. mc:: mc legalhold clear
 
 .. |command| replace:: :mc-cmd:`mc legalhold clear`
-.. |rewind| replace:: :mc-cmd-option:`~mc legalhold clear rewind`
-.. |versionid| replace:: :mc-cmd-option:`~mc legalhold clear version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc legalhold clear ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc legalhold clear --rewind`
+.. |versionid| replace:: :mc-cmd:`~mc legalhold clear version-id`
+.. |alias| replace:: :mc-cmd:`~mc legalhold clear ALIAS`
 
 Syntax
 ------
@@ -74,21 +74,21 @@ Parameters
       
       mc legalhold clear play/mybucket/myobjects/objects.txt
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    Removes the legal hold on all objects in the 
    :mc-cmd:`~mc legalhold clear ALIAS` bucket or bucket prefix.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -108,7 +108,7 @@ Retrieve the Legal Hold Status Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc legalhold clear` to retrieve the legal hold status of an object.
-Include :mc-cmd-option:`~mc legalhold clear recursive` to return the legal hold
+Include :mc-cmd:`~mc legalhold clear --recursive` to return the legal hold
 status of the contents of a bucket:
 
 .. code-block:: shell
@@ -121,7 +121,7 @@ status of the contents of a bucket:
 
 - Replace :mc-cmd:`PATH <mc legalhold clear ALIAS>` with the path to the bucket
   or object on the S3-compatible host. If specifying the path to a bucket or
-  bucket prefix, include the :mc-cmd-option:`~mc legalhold clear recursive`
+  bucket prefix, include the :mc-cmd:`~mc legalhold clear --recursive`
   option.
 
 Behavior

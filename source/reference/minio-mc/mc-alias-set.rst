@@ -88,8 +88,8 @@ Parameters
 
    The secret key for authenticating to the S3 service.
 
-.. mc-cmd:: api
-   :option:
+.. mc-cmd:: --api
+   
    
    *Optional*
 
@@ -110,8 +110,8 @@ Parameters
       MinIO server does not rely on nor require ``S3v2``, nor are all API
       operations available on ``S3v2``. 
 
-.. mc-cmd:: path
-   :option:
+.. mc-cmd:: --path
+   
 
    *Optional*
 

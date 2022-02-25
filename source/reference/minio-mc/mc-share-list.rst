@@ -62,13 +62,13 @@ Parameters
 
    *Required* Lists all unexpired presigned download (``GET``) URLs.
 
-   Mutually exclusive with :mc-cmd-option:`mc share list upload`
+   Mutually exclusive with :mc-cmd:`mc share list upload`
 
 .. mc-cmd:: upload
 
    *Required* Lists all unexpired presigned upload (``PUT``) URLs.
 
-   Mutually exclusive with :mc-cmd-option:`mc share list download`
+   Mutually exclusive with :mc-cmd:`mc share list download`
 
 .. mc-cmd:: ALIAS
 

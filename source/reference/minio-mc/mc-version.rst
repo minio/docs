@@ -175,7 +175,7 @@ a versioning ID to any unversioned object.
 Disabling bucket versioning on a bucket with existing versioned data does
 *not* remove any versioned objects. Applications can continue to access
 versioned data after disabling bucket versioning. Use 
-:mc-cmd:`mc rm --versions ALIAS/BUCKET/OBJECT <mc rm versions>` to delete an 
+:mc-cmd:`mc rm --versions ALIAS/BUCKET/OBJECT <mc rm --versions>` to delete an 
 object *and* all its versions.
 
 S3 Compatibility

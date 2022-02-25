@@ -103,8 +103,8 @@ more information.
 You can alternatively perform manual removal of object versions using the 
 following commands:
 
-- :mc-cmd-option:`mc rm versions` - Removes all versions of an object.
-- :mc-cmd-option:`mc rm --versions --older-than <mc rm older-than>` -
+- :mc-cmd:`mc rm --versions` - Removes all versions of an object.
+- :mc-cmd:`mc rm --versions --older-than <mc rm --older-than>` -
    Removes all versions of an object older than the specified calendar date.
 
 .. _minio-bucket-versioning-id:
@@ -189,16 +189,16 @@ are **irreversible**.
 The following :mc:`mc` commands operate on ``DeleteMarkers`` or versioned 
 objects:
 
-- Use :mc-cmd-option:`mc ls versions` to view all versions of an object,
+- Use :mc-cmd:`mc ls --versions` to view all versions of an object,
   including delete markers.
 
-- Use :mc-cmd-option:`mc cp --version-id=UUID ... <mc cp version-id>` to 
+- Use :mc-cmd:`mc cp --version-id=UUID ... <mc cp version-id>` to 
   retrieve the version of the "deleted" object with matching ``UUID``.
 
-- Use :mc-cmd-option:`mc rm --version-id=UUID ... <mc rm version-id>` to delete
+- Use :mc-cmd:`mc rm --version-id=UUID ... <mc rm version-id>` to delete
   the version of the object with matching ``UUID``.
 
-- Use :mc-cmd-option:`mc rm versions` to delete *all* versions of an object.
+- Use :mc-cmd:`mc rm --versions` to delete *all* versions of an object.
 
 Tutorials
 ---------

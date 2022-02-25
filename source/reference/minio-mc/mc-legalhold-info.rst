@@ -13,9 +13,9 @@
 .. mc:: mc legalhold info
 
 .. |command| replace:: :mc-cmd:`mc legalhold info`
-.. |rewind| replace:: :mc-cmd-option:`~mc legalhold info rewind`
-.. |versionid| replace:: :mc-cmd-option:`~mc legalhold info version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc legalhold info ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc legalhold info --rewind`
+.. |versionid| replace:: :mc-cmd:`~mc legalhold info version-id`
+.. |alias| replace:: :mc-cmd:`~mc legalhold info ALIAS`
 
 Syntax
 ------
@@ -29,7 +29,7 @@ The :mc:`mc legalhold info` command returns the current :ref:`legal hold
 
 :mc:`mc legalhold` *requires* that the specified bucket has object locking
 enabled. You can **only** enable object locking at bucket creation. See
-:mc-cmd-option:`mc mb with-lock` for documentation on creating buckets with
+:mc-cmd:`mc mb with-lock` for documentation on creating buckets with
 object locking enabled. 
 
 .. tab-set::
@@ -73,21 +73,21 @@ Parameters
       
       mc legalhold info play/mybucket/myobjects/objects.txt
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    Returns the legal hold status of all objects in the 
    :mc-cmd:`~mc legalhold info ALIAS` bucket or bucket prefix.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -107,7 +107,7 @@ Retrieve the Legal Hold Status Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc legalhold info` to retrieve the legal hold status of an object.
-Include :mc-cmd-option:`~mc legalhold info recursive` to return the legal hold
+Include :mc-cmd:`~mc legalhold info --recursive` to return the legal hold
 status of the contents of a bucket:
 
 .. code-block:: shell
@@ -120,7 +120,7 @@ status of the contents of a bucket:
 
 - Replace :mc-cmd:`PATH <mc legalhold info ALIAS>` with the path to the bucket
   or object on the S3-compatible host. If specifying the path to a bucket or
-  bucket prefix, include the :mc-cmd-option:`~mc legalhold info recursive`
+  bucket prefix, include the :mc-cmd:`~mc legalhold info --recursive`
   option.
 
 

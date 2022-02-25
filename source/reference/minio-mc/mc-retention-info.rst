@@ -11,10 +11,10 @@
 .. mc:: mc retention info
 
 .. |command| replace:: :mc-cmd:`mc retention info`
-.. |rewind| replace:: :mc-cmd-option:`~mc retention info rewind`
-.. |versionid| replace:: :mc-cmd-option:`~mc retention info version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc retention info ALIAS`
-.. |versions| replace:: :mc-cmd-option:`~mc retention info versions`
+.. |rewind| replace:: :mc-cmd:`~mc retention info --rewind`
+.. |versionid| replace:: :mc-cmd:`~mc retention info version-id`
+.. |alias| replace:: :mc-cmd:`~mc retention info ALIAS`
+.. |versions| replace:: :mc-cmd:`~mc retention info --versions`
 
 Syntax
 ------
@@ -33,7 +33,7 @@ use :mc:`mc legalhold`.
 
 :mc:`mc retention info` *requires* that the specified bucket has object locking
 enabled. You can **only** enable object locking at bucket creation. See
-:mc-cmd-option:`mc mb with-lock` for documentation on creating buckets with
+:mc-cmd:`mc mb with-lock` for documentation on creating buckets with
 object locking enabled. 
 
 .. tab-set::
@@ -67,7 +67,7 @@ object locking enabled.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd-option:`mc retention info version-id` is mutually exclusive with
+      :mc-cmd:`mc retention info version-id` is mutually exclusive with
       multiple other parameters. See the reference documentation for more
       information.
 
@@ -88,42 +88,42 @@ Parameters
       mc retention info play/mybucket/object.txt
 
    - If the ``ALIAS`` specifies a bucket or bucket prefix, include 
-      :mc-cmd-option:`~mc retention info recursive` to return the object
+      :mc-cmd:`~mc retention info --recursive` to return the object
       lock settings for all objects in the bucket or bucket prefix.
 
    - If the ``ALIAS`` bucket has versioning enabled, 
       :mc-cmd:`mc retention info` by default applies to only the latest object
-      version. Use :mc-cmd-option:`~mc retention info version-id` or
-      :mc-cmd-option:`~mc retention info versions` to return the object lock
+      version. Use :mc-cmd:`~mc retention info version-id` or
+      :mc-cmd:`~mc retention info --versions` to return the object lock
       settings for a specific version or for all versions of the object.
 
 
-.. mc-cmd:: default
-   :option:
+.. mc-cmd:: --default
+   
 
    *Optional* Returns the default object lock settings for the bucket specified
    to :mc-cmd:`~mc retention info ALIAS`.
 
-   If specifying :mc-cmd-option:`~mc retention info default`, 
+   If specifying :mc-cmd:`~mc retention info --default`, 
    :mc-cmd:`mc retention info` ignores all other flags.
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    *Optional* Recursively returns the object lock settings for all objects in the
    specified :mc-cmd:`~mc retention info ALIAS` path.
 
-   Mutually exclusive with :mc-cmd-option:`~mc retention info version-id`.
+   Mutually exclusive with :mc-cmd:`~mc retention info version-id`.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -131,19 +131,19 @@ Parameters
 
    Mutually exclusive with any of the following flags:
    
-   - :mc-cmd-option:`~mc retention info versions`
-   - :mc-cmd-option:`~mc retention info rewind`
-   - :mc-cmd-option:`~mc retention info recursive`
+   - :mc-cmd:`~mc retention info --versions`
+   - :mc-cmd:`~mc retention info --rewind`
+   - :mc-cmd:`~mc retention info --recursive`
 
-.. mc-cmd:: versions
-   :option:
+.. mc-cmd:: --versions
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc
       :end-before: end-versions-desc
 
-   Use :mc-cmd-option:`~mc retention info versions` and
-   :mc-cmd-option:`~mc retention info rewind` together to retrieve the
+   Use :mc-cmd:`~mc retention info --versions` and
+   :mc-cmd:`~mc retention info --rewind` together to retrieve the
    retention settings for all object versions that existed at a
    specific point-in-time.
 
@@ -178,7 +178,7 @@ Retrieve Object Lock Settings for an Object or Object(s)
    .. tab-item:: Multiple Objects
 
       Use :mc-cmd:`mc retention info` with
-      :mc-cmd-option:`~mc retention info recursive` to retrieve the retention
+      :mc-cmd:`~mc retention info --recursive` to retrieve the retention
       settings for all objects in a bucket:
 
       .. code-block:: shell
@@ -200,7 +200,7 @@ Retrieve Default Object Lock Settings for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc retention info` with 
-:mc-cmd-option:`~mc retention info default` to retrieve the default 
+:mc-cmd:`~mc retention info --default` to retrieve the default 
 object lock settings for a bucket:
 
 .. code-block:: shell

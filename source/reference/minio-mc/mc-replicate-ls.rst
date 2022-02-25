@@ -64,8 +64,8 @@ Parameters
       mc replicate ls myminio/mybucket
 
 
-.. mc-cmd:: status
-   :option:
+.. mc-cmd:: --status
+   
 
    *Optional*  Filter replication rules on the bucket based on their status.
    Specify one of the following values:

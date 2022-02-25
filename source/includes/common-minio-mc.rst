@@ -1,8 +1,8 @@
 .. start-minio-mc-globals
 
-.. mc-cmd:: debug
-   :option:
-
+.. mc-cmd:: --debug
+   :optional:
+   
    Enables verbose output to the console.
 
    For example:
@@ -12,8 +12,8 @@
 
       mc --debug COMMAND
 
-.. mc-cmd:: config-dir
-   :option:
+.. mc-cmd:: --config-dir
+   :optional:
 
    The path to a ``JSON`` formatted configuration file that
    :program:`mc` uses for storing data. See :ref:`mc-configuration` for
@@ -21,8 +21,8 @@
 
 .. start-minio-mc-json-globals
 
-.. mc-cmd:: JSON
-   :option:
+.. mc-cmd:: --JSON
+   :optional:
 
    Enables `JSON lines <http://jsonlines.org/>`_ formatted output to the
    console.
@@ -36,31 +36,31 @@
 
 .. end-minio-mc-json-globals
 
-.. mc-cmd:: no-color
-   :option:
+.. mc-cmd:: --no-color
+   :optional:
 
    Disables the built-in color theme for console output. Useful for dumb
    terminals.
 
-.. mc-cmd:: quiet
-   :option:
+.. mc-cmd:: --quiet
+   :optional:
 
    Suppresses console output. 
 
-.. mc-cmd:: insecure
-   :option:
+.. mc-cmd:: --insecure
+   :optional:
 
    Disables TLS/SSL certificate verification. Allows TLS connectivity to 
    servers with invalid certificates. Exercise caution when using this
    option against untrusted S3 hosts.
 
-.. mc-cmd:: version
-   :option:
+.. mc-cmd:: --version
+   :optional:   
 
    Displays the current version of :mc-cmd:`mc`. 
 
-.. mc-cmd:: help
-   :option:
+.. mc-cmd:: --help
+   :optional:
 
    Displays a summary of command usage on the terminal.
 

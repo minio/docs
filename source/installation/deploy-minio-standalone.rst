@@ -93,7 +93,7 @@ certificate (``public.crt``) in the MinIO ``certs`` directory:
 - For Windows: ``%%USERPROFILE%%\.minio\certs``
 
 You can override the certificate directory using the 
-:mc-cmd-option:`minio server certs-dir` commandline argument.
+:mc-cmd:`minio server certs-dir` commandline argument.
 
 3) Run the MinIO Server with Non-Default Credentials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

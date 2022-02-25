@@ -11,10 +11,10 @@
 .. mc:: mc stat
 
 .. |command| replace:: :mc-cmd:`mc stat`
-.. |rewind| replace:: :mc-cmd-option:`~mc stat rewind`
-.. |versions| replace:: :mc-cmd-option:`~mc stat versions`
-.. |versionid| replace:: :mc-cmd-option:`~mc stat version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc stat ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc stat --rewind`
+.. |versions| replace:: :mc-cmd:`~mc stat --versions`
+.. |versionid| replace:: :mc-cmd:`~mc stat version-id`
+.. |alias| replace:: :mc-cmd:`~mc stat ALIAS`
 
 Syntax
 -----------
@@ -61,7 +61,7 @@ results to the ``stat`` commandline tool.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd-option:`mc stat version-id` is mutually exclusive with multiple
+      :mc-cmd:`mc stat version-id` is mutually exclusive with multiple
       parameters. See the reference documentation for more information.
 
 Parameters
@@ -83,7 +83,7 @@ Parameters
       mc stat play/mybucket/myobject.txt myminio/mybucket/myobject.txt
 
    If specifying the path to a bucket or bucket prefixy, you **must**
-   include the :mc-cmd-option:`mc stat recursive` flag:
+   include the :mc-cmd:`mc stat --recursive` flag:
 
    .. code-block:: shell
 
@@ -96,8 +96,8 @@ Parameters
 
       mc stat ~/data/myobject.txt
 
-.. mc-cmd:: encrypt-key
-   :option:
+.. mc-cmd:: --encrypt-key
+   
 
    *Optional* Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
@@ -107,38 +107,38 @@ Parameters
       object(s).
 
    Enclose the entire list of key-value pairs passed to 
-   :mc-cmd-option:`~mc stat encrypt-key` in double quotes ``"``.
+   :mc-cmd:`~mc stat --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd-option:`~mc stat encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc stat --encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    *Optional* Recursively :mc:`mc stat` the contents of the MinIO bucket
    specified to :mc-cmd:`~mc stat ALIAS`.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: versions
-   :option:
+.. mc-cmd:: --versions
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc
       :end-before: end-versions-desc
 
-   Use :mc-cmd-option:`~mc stat versions` and 
-   :mc-cmd-option:`~mc stat rewind` together to remove all object
+   Use :mc-cmd:`~mc stat --versions` and 
+   :mc-cmd:`~mc stat --rewind` together to remove all object
    versions which existed at a specific point in time.
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -146,9 +146,9 @@ Parameters
 
    Mutually exclusive with any of the following flags:
    
-   - :mc-cmd-option:`~mc stat versions`
-   - :mc-cmd-option:`~mc stat rewind`
-   - :mc-cmd-option:`~mc stat recursive`
+   - :mc-cmd:`~mc stat --versions`
+   - :mc-cmd:`~mc stat --rewind`
+   - :mc-cmd:`~mc stat --recursive`
 
 Examples
 --------
@@ -170,7 +170,7 @@ Examples
 
    .. tab-item:: Object(s) in Bucket
 
-      Use :mc:`mc stat` with the :mc-cmd-option:`~mc stat recursive` option
+      Use :mc:`mc stat` with the :mc-cmd:`~mc stat --recursive` option
       to apply the operation to all objects in the bucket:
 
       .. code-block:: shell

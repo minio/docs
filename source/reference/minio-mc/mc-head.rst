@@ -14,9 +14,9 @@
 
 
 .. |command| replace:: :mc-cmd:`mc head`
-.. |rewind| replace:: :mc-cmd-option:`~mc head rewind`
-.. |versionid| replace:: :mc-cmd-option:`~mc head version-id`
-.. |alias| replace:: :mc-cmd-option:`~mc head ALIAS`
+.. |rewind| replace:: :mc-cmd:`~mc head --rewind`
+.. |versionid| replace:: :mc-cmd:`~mc head version-id`
+.. |alias| replace:: :mc-cmd:`~mc head ALIAS`
 
 Syntax
 ------
@@ -92,14 +92,14 @@ Parameters
       mc head ~/mydata/object.txt
 
 .. mc-cmd::  lines, n
-   :option:
+   
 
    *Optional* The number of lines to print.
 
    Defaults to ``10``.
 
 .. mc-cmd::  encrypt-key
-   :option:
+   
 
    *Optional*  Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
@@ -109,21 +109,21 @@ Parameters
       object(s).
 
    Enclose the entire list of key-value pairs passed to 
-   :mc-cmd-option:`~mc head encrypt-key` in double quotes ``"``.
+   :mc-cmd:`~mc head encrypt-key` in double quotes ``"``.
 
-   :mc-cmd-option:`~mc head encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc head encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
-.. mc-cmd:: rewind
-   :option:
+.. mc-cmd:: --rewind
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: version-id, vid
-   :option:
+   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -159,7 +159,7 @@ Use :mc-cmd:`mc head` to return the first 10 lines of an object:
 View Partial Contents of an Object at a Point in Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc head rewind` to return the first 10 lines of the
+Use :mc-cmd:`mc head --rewind` to return the first 10 lines of the
 object at a specific point-in-time in the past:
 
 .. code-block:: shell
@@ -173,7 +173,7 @@ object at a specific point-in-time in the past:
 - Replace :mc-cmd:`PATH <mc head ALIAS>` with the path to the object on the
   S3-compatible host.
 
-- Replace :mc-cmd:`DURATION <mc head rewind>` with the point-in-time in the past
+- Replace :mc-cmd:`DURATION <mc head --rewind>` with the point-in-time in the past
   at which the command returns the object. For example, specify ``30d`` to
   return the version of the object 30 days prior to the current date.
 
@@ -184,7 +184,7 @@ object at a specific point-in-time in the past:
 View Partial Contents of an Object with Specific Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd-option:`mc head version-id` to return the first 10 lines of the
+Use :mc-cmd:`mc head version-id` to return the first 10 lines of the
 object at a specific point-in-time in the past:
 
 .. code-block:: shell

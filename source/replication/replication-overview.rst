@@ -111,7 +111,7 @@ replication uses the same :ref:`replication process <minio-replication-process>`
 as all other replication operations. 
 
 MinIO requires explicitly enabling versioned deletes and delete marker
-replication . Use the :mc-cmd-option:`mc replicate add replicate` field to
+replication . Use the :mc-cmd:`mc replicate add --replicate` field to
 specify both or either ``delete`` and ``delete-marker`` to enable versioned
 deletes and delete marker replication respectively. To enable both, specify both
 strings using a comma separator ``delete,delete-marker``.
@@ -194,11 +194,11 @@ replication. You can enable existing object replication while configuring
 or modifying a replication rule:
 
 - For new replication rules, include ``"existing-objects"`` to the list of
-  replication features specified to :mc-cmd-option:`mc replicate add replicate`.
+  replication features specified to :mc-cmd:`mc replicate add --replicate`.
 
 - For existing replication rules, add ``"existing-objects"`` to the list of
   existing replication features using 
-  :mc-cmd-option:`mc replicate edit replicate`. You must specify *all* desired
+  :mc-cmd:`mc replicate edit --replicate`. You must specify *all* desired
   replication features when editing the replication rule. 
 
 Enabling existing object replication does not increase the priority of objects
@@ -242,7 +242,7 @@ it may also increase the time of each write operation due to replication load.
 
 You must explicitly enable synchronous replication when configuring the remote
 target target using the :mc-cmd:`mc admin bucket remote add` command with the
-:mc-cmd-option:`~mc admin bucket remote add sync` flag.
+:mc-cmd:`~mc admin bucket remote add sync` flag.
 
 Replication Internals
 ~~~~~~~~~~~~~~~~~~~~~

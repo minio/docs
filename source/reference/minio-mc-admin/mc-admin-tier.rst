@@ -129,8 +129,8 @@ Syntax
 
              Requires specifying the following additional options:
 
-             - :mc-cmd-option:`~mc admin tier add access-key`
-             - :mc-cmd-option:`~mc admin tier add secret-key`
+             - :mc-cmd:`~mc admin tier add access-key`
+             - :mc-cmd:`~mc admin tier add secret-key`
 
          * - ``azure``
            - Use :abbr:`Azure (Microsoft Azure)` Blob Storage as the storage
@@ -138,8 +138,8 @@ Syntax
 
              Requires specifying the following additional options:
 
-             - :mc-cmd-option:`~mc admin tier add account-name`
-             - :mc-cmd-option:`~mc admin tier add account-key`
+             - :mc-cmd:`~mc admin tier add account-name`
+             - :mc-cmd:`~mc admin tier add account-key`
          
          * - ``gcs`` 
            - Use :abbr:`GCP (Google Cloud Platform)` Cloud Storage as the
@@ -147,7 +147,7 @@ Syntax
 
              Requires specifying the following additional option:
 
-             - :mc-cmd-option:`~mc admin tier add credentials-file`
+             - :mc-cmd:`~mc admin tier add credentials-file`
 
    .. mc-cmd:: TARGET
 
@@ -166,7 +166,7 @@ Syntax
       You **must** specify the tier in all-caps, e.g. ``WARM_TIER``.
    
    .. mc-cmd:: endpoint
-      :option:
+      
 
       *Required*
       
@@ -175,7 +175,7 @@ Syntax
       :mc-cmd:`~mc admin tier add TIER_TYPE`. 
 
    .. mc-cmd:: access-key
-      :option:
+      
 
       *Required*
       
@@ -187,7 +187,7 @@ Syntax
       This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: secret-key
-      :option:
+      
 
       *Required*
       
@@ -197,7 +197,7 @@ Syntax
       This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: account-name
-      :option:
+      
 
       *Required*
       
@@ -214,18 +214,18 @@ Syntax
       to any objects transitioned to the original account/backend.
 
    .. mc-cmd:: account-key
-      :option:
+      
 
       *Required*
       
-      The account key for the :mc-cmd-option:`~mc admin tier add account-name` 
+      The account key for the :mc-cmd:`~mc admin tier add account-name` 
       associated to the remote Azure tier.
 
       Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: credentials-file
-      :option:
+      
 
       *Required*
       
@@ -238,14 +238,14 @@ Syntax
       This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: bucket
-      :option:
+      
 
       *Required*
       
       The bucket on the remote tier to which MinIO transitions objects.
 
    .. mc-cmd:: prefix
-      :option:
+      
 
       *Optional*
       
@@ -255,7 +255,7 @@ Syntax
       Omit this field to transition objects into the bucket root.
 
    .. mc-cmd:: storage-class
-      :option:
+      
 
       *Optional*
 
@@ -271,7 +271,7 @@ Syntax
       ``s3``. This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: region
-      :option:
+      
 
       *Optional*
 
@@ -312,7 +312,7 @@ Syntax
       when creating the remote tier.
 
    .. mc-cmd:: access-key
-      :option:
+      
 
       *Optional*
       
@@ -325,7 +325,7 @@ Syntax
       This option has no effect for any other ``TIER_TYPE``.
 
    .. mc-cmd:: secret-key
-      :option:
+      
 
       *Optional*
       
@@ -336,13 +336,13 @@ Syntax
       This option has no effect for any other ``TIER_TYPE``.
 
    .. mc-cmd:: account-key
-      :option:
+      
 
       *Required*
 
       The account key for a user on the remote Azure tier.
       Use this option to rotate the credentials for the
-      :mc-cmd-option:`~mc admin tier add account-name` 
+      :mc-cmd:`~mc admin tier add account-name` 
       associated to the remote tier.
 
       This option only applies to remote storage tiers with 
@@ -350,7 +350,7 @@ Syntax
       This option has no effect for any other ``TIER_TYPE``.
 
    .. mc-cmd:: credentials-file
-      :option:
+      
 
       *Required*
       

@@ -60,8 +60,8 @@ Syntax
    If the ``TARGET`` bucket or bucket prefix has an active healing scan,
    the command returns the status of that scan.
 
-.. mc-cmd:: scan
-   :option:
+.. mc-cmd:: --scan
+   
 
    The type of scan to perform. Specify one of the following supported scan
    modes:
@@ -69,28 +69,28 @@ Syntax
    - ``normal`` (default)
    - ``deep``
 
-.. mc-cmd:: recursive, r
-   :option:
+.. mc-cmd:: --recursive, r
+   
 
    Recursively scans for objects in the specified bucket or bucket prefix.
 
-.. mc-cmd:: dry-run
-   :option:
+.. mc-cmd:: --dry-run
+   
 
    Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, 
    but does *not* perform any object healing.
 
 .. mc-cmd:: force-start, f
-   :option:
+   
 
    Force starts the healing process.
 
 .. mc-cmd:: force-stop, s
-   :option:
+   
 
    Force stops the healing sequence.
 
-.. mc-cmd:: remove
-   :option:
+.. mc-cmd:: --remove
+   
 
    Removes dangling objects in the healing process. 

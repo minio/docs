@@ -69,23 +69,23 @@ Parameters
       mc replicate rm --id "ID" myminio/mybucket
 
 
-.. mc-cmd:: id
-   :option:
+.. mc-cmd:: --id
+   
 
    *Required* Specify the unique ID for a configured replication rule.
 
-   You can omit this option if specifying :mc-cmd-option:`~mc replicate rm all`
+   You can omit this option if specifying :mc-cmd:`~mc replicate rm --all`
 
-.. mc-cmd:: all
-   :option:
+.. mc-cmd:: --all
+   
 
    *Optional* Removes all replication rules on the specified bucket. Requires
-   specifying the :mc-cmd-option:`~mc replicate rm force` flag.
+   specifying the :mc-cmd:`~mc replicate rm --force` flag.
 
-.. mc-cmd:: force
-   :option:
+.. mc-cmd:: --force
+   
 
-   *Optional* Required if specifying :mc-cmd-option:`~mc replicate rm all` .
+   *Optional* Required if specifying :mc-cmd:`~mc replicate rm --all` .
 
 
 Global Flags
@@ -108,7 +108,7 @@ Use :mc-cmd:`mc replicate rm` to remote a bucket replication rule:
 
    mc replicate rm --id "ID" ALIAS/PATH
 
-- Replace :mc-cmd-option:`ID <mc replicate rm id>` with the unique ID of the
+- Replace :mc-cmd:`ID <mc replicate rm --id>` with the unique ID of the
   replication rule to remove. Use :mc-cmd:`mc replicate ls` to list all
   replication rules for the bucket.
 
