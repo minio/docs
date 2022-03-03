@@ -371,10 +371,10 @@ A\) Create a Replication Target for Alpha -> Baker
    - Replace ``DESTINATIONBUCKET`` with the name of the target bucket on the
      ``Baker`` cluster.
 
-   - Specify the :mc-cmd:`~mc admin bucket remote add sync` option to
+   - Specify the :mc-cmd:`~mc admin bucket remote add` option to
      enable synchronous replication. Omit the option to use the default of 
      asynchronous replication. See the reference documentation for 
-     :mc-cmd:`~mc admin bucket remote add sync` for more information
+     :mc-cmd:`~mc admin bucket remote add` for more information
      on synchronous vs asynchronous replication.
 
    The command returns an ARN similar to the following. Copy this ARN for use in
@@ -405,10 +405,10 @@ B\) Create a Replication Target for Baker -> Alpha
    - Replace ``DESTINATIONBUCKET`` with the name of the remote replication 
      target on the ``Alpha`` cluster.
 
-   - Specify the :mc-cmd:`~mc admin bucket remote add sync` option to
+   - Specify the :mc-cmd:`~mc admin bucket remote add` option to
      enable synchronous replication. Omit the option to use the default of 
      asynchronous replication. See the reference documentation for 
-     :mc-cmd:`~mc admin bucket remote add sync` for more information
+     :mc-cmd:`~mc admin bucket remote add` for more information
      on synchronous vs asynchronous replication.
 
    The command returns an ARN similar to the following. Copy this ARN for use in
@@ -530,5 +530,5 @@ Use :mc-cmd:`mc ls` to verify the object exists on the destination bucket:
    mc ls Alpha/DESTINATIONBUCKET
 
 If the remote target was configured *without* the 
-:mc-cmd:`~mc admin bucket remote add sync` option, the destination
+:mc-cmd:`~mc admin bucket remote add` option, the destination
 bucket may have some delay before it receives the new object.

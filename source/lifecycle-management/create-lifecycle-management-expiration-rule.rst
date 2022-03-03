@@ -87,10 +87,10 @@ Use :mc-cmd:`mc ilm add` to expiring noncurrent object versions and object
 delete markers: 
 
 - To expire noncurrent object versions after a specific duration in days,
-  include :mc-cmd:`~mc ilm add noncurrentversion-expiration-days`.
+  include :mc-cmd:`~mc ilm add --noncurrentversion-expiration-days`.
 
 - To expire delete markers for objects with no remaining versions, 
-  include :mc-cmd:`~mc ilm add expired-object-delete-marker`.
+  include :mc-cmd:`~mc ilm add --expired-object-delete-marker`.
 
 .. code-block:: shell
    :class: copyable
@@ -106,7 +106,7 @@ delete markers:
   S3-compatible host.
 
 - Replace :mc-cmd:`NONCURRENT_DAYS 
-  <mc ilm add noncurrentversion-expiration-days>` with the number of days after
+  <mc ilm add --noncurrentversion-expiration-days>` with the number of days after
   which to expire noncurrent object versions. For example, specify ``30d`` to
   expire a version after it has been noncurrent for at least 30 days.
 

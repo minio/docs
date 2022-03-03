@@ -12,7 +12,7 @@
 
 .. |command| replace:: :mc-cmd:`mc retention clear`
 .. |rewind| replace:: :mc-cmd:`~mc retention clear --rewind`
-.. |versionid| replace:: :mc-cmd:`~mc retention clear version-id`
+.. |versionid| replace:: :mc-cmd:`~mc retention clear --version-id`
 .. |versions| replace:: :mc-cmd:`~mc retention clear --versions`
 .. |alias| replace:: :mc-cmd:`~mc retention clear ALIAS`
 
@@ -63,7 +63,7 @@ To change the retention status of an object under
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd:`mc retention clear version-id` is mutually exclusive with
+      :mc-cmd:`mc retention clear --version-id` is mutually exclusive with
       multiple other parameters. See the reference documentation for more
       information.
 
@@ -87,7 +87,7 @@ Parameters
 
    - If the ``ALIAS`` bucket has versioning enabled,
       :mc-cmd:`mc retention clear` by default applies to only the latest
-      object version. Use :mc-cmd:`~mc retention clear version-id` or
+      object version. Use :mc-cmd:`~mc retention clear --version-id` or
       :mc-cmd:`~mc retention clear --versions` to clear the object lock
       settings for a specific version or for all versions of the object.
 
@@ -106,7 +106,7 @@ Parameters
    *Optional* Recursively clears the object lock settings for all objects in the
    specified :mc-cmd:`~mc retention clear ALIAS` path.
 
-   Mutually exclusive with :mc-cmd:`~mc retention clear version-id`.
+   Mutually exclusive with :mc-cmd:`~mc retention clear --version-id`.
 
 .. mc-cmd:: --rewind
    
@@ -115,7 +115,7 @@ Parameters
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst

@@ -130,7 +130,7 @@ new remote storage tier:
 .. code-block:: shell
    :class: copyable
 
-   mc admin tier add s3 TARGET TIER_NAME \
+   mc admin tier add --s3 TARGET TIER_NAME \
       --endpoint https://HOSTNAME \
       --bucket BUCKET \
       --prefix PREFIX
@@ -158,14 +158,14 @@ The example above uses the following arguments:
        name in all-caps, e.g. ``S3_TIER``. This value is required in the next
        step.
 
-   * - :mc-cmd:`HOSTNAME <mc admin tier add endpoint>`
+   * - :mc-cmd:`HOSTNAME <mc admin tier add --endpoint>`
      - The URL endpoint for the S3 storage backend.
 
-   * - :mc-cmd:`BUCKET <mc admin tier add bucket>`
+   * - :mc-cmd:`BUCKET <mc admin tier add --bucket>`
      - The name of the bucket on the S3 storage backend to which MinIO
        transitions objects.
 
-   * - :mc-cmd:`PREFIX <mc admin tier add prefix>`
+   * - :mc-cmd:`PREFIX <mc admin tier add --prefix>`
      - The optional bucket prefix within which MinIO transitions objects.
 
        MinIO stores all transitioned objects in the specified ``BUCKET`` under a
@@ -178,21 +178,21 @@ The example above uses the following arguments:
        source MinIO deployment to faciliate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`ACCESS_KEY <mc admin tier add access-key>`
+   * - :mc-cmd:`ACCESS_KEY <mc admin tier add --access-key>`
      - The S3 access key MinIO uses to access the bucket. The
        access key *must* correspond to an IAM user with the 
        required 
        :ref:`permissions 
        <minio-lifecycle-management-transition-to-s3-permissions-remote>`.
 
-   * - :mc-cmd:`SECRET_KEY <mc admin tier add secret-key>`
+   * - :mc-cmd:`SECRET_KEY <mc admin tier add --secret-key>`
      - The corresponding secret key for the specified ``ACCESS_KEY``.
 
-   * - :mc-cmd:`REGION <mc admin tier add region>`
+   * - :mc-cmd:`REGION <mc admin tier add --region>`
      - The AWS S3 region of the specified ``BUCKET``. You can safely omit this
        option if the ``HOSTNAME`` includes the region.
 
-   * - :mc-cmd:`STORAGE_CLASS <mc admin tier add storage-class>`
+   * - :mc-cmd:`STORAGE_CLASS <mc admin tier add --storage-class>`
      - The S3 storage class to which MinIO transitions objects. Specify
        one of the following supported storage classes:
 

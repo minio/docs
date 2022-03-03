@@ -1765,7 +1765,7 @@ ObjectStat objectStat =
         StatObjectArgs.builder()
             .bucket("my-bucketname")
             .object("my-objectname")
-            .versionId("version-id")
+            .versionId(--version-id")
             .build());
 
 // Get information of a SSE-C encrypted versioned object.
@@ -1774,7 +1774,7 @@ ObjectStat objectStat =
         StatObjectArgs.builder()
             .bucket("my-bucketname")
             .object("my-objectname")
-            .versionId("version-id")
+            .versionId(--version-id")
             .ssec(ssec)
             .build());
 ```

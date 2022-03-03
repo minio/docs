@@ -37,14 +37,14 @@ The example above specifies the following arguments:
 
        If you want to transition noncurrent object versions to a distinct
        remote tier, specify a different tier name for 
-       :mc-cmd:`~mc ilm add noncurrentversion-transition-storage-class`.
+       :mc-cmd:`~mc ilm add --noncurrentversion-transition-storage-class`.
 
    * - :mc-cmd:`DAYS <mc ilm add --transition-days>`
      - The number of calendar days after which MinIO marks an object as 
        eligible for transition. Specify the number of days as an integer,
        e.g. ``30`` for 30 days.
 
-   * - :mc-cmd:`NONCURRENT_DAYS <mc ilm add noncurrentversion-transition-days>`
+   * - :mc-cmd:`NONCURRENT_DAYS <mc ilm add --noncurrentversion-transition-days>`
      - The number of calendar days after which MinIO marks a noncurrent
        object version as eligible for transition. MinIO specifically measures
        the time since an object *became* non-current instead of the object

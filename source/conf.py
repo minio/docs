@@ -38,6 +38,7 @@ release = '0.1'
 extensions = [
     'sphinx.ext.extlinks',
     'minio',
+    'cond',
     'sphinx_copybutton',
     'sphinx_markdown_tables',
     'sphinx-prompt',

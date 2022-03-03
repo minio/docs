@@ -13,7 +13,7 @@
 .. |command| replace:: :mc-cmd:`mc rm`
 .. |rewind| replace:: :mc-cmd:`~mc rm --rewind`
 .. |versions| replace:: :mc-cmd:`~mc rm --versions`
-.. |versionid| replace:: :mc-cmd:`~mc rm version-id`
+.. |versionid| replace:: :mc-cmd:`~mc rm --version-id`
 .. |alias| replace:: :mc-cmd:`~mc rm ALIAS`
 
 Syntax
@@ -75,7 +75,7 @@ results to the ``rm`` commandline tool.
          :end-before: end-minio-syntax
 
       :mc-cmd:`mc rm --force` is required by multiple parameters.
-      :mc-cmd:`mc rm version-id` is mutually exclusive with multiple
+      :mc-cmd:`mc rm --version-id` is mutually exclusive with multiple
       parameters. See the reference documentation for more information.
 
 Parameters
@@ -232,7 +232,7 @@ Parameters
    :mc-cmd:`~mc rm --fake` flag to validate the scope of the
    recursive delete operation.
 
-   Mutually exclusive with :mc-cmd:`mc rm version-id`
+   Mutually exclusive with :mc-cmd:`mc rm --version-id`
 
 .. mc-cmd:: --rewind
    
@@ -257,7 +257,7 @@ Parameters
    :mc-cmd:`~mc rm --rewind` together to remove all object
    versions which existed at a specific point in time.
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst
@@ -395,7 +395,7 @@ that marks an object as deleted while retaining all previous versions of that
 object.
 
 - To remove a specific object version from a bucket, use
-  :mc-cmd:`mc rm version-id`
+  :mc-cmd:`mc rm --version-id`
 
 - To remove all versions of an object from a bucket, use
   :mc-cmd:`mc rm --versions`

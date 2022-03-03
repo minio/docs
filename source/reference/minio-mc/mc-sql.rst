@@ -115,7 +115,7 @@ Parameters
    See the S3 API :s3-api:`CSVOutput <API_CSVOutput.html>` for more
    information.
 
-.. mc-cmd:: csv-output-header
+.. mc-cmd:: --csv-output-header
    
 
    *Optional* The header row of the ``.csv`` output file. Specify a string of

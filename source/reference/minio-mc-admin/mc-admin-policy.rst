@@ -152,7 +152,7 @@ Replace the ``<USER>`` with the name of a user that exists on the deployment.
 .. code-block:: shell
    :class: copyable
 
-   mc admin policy set myminio listbucketsonly user=<USER>
+   mc admin policy set --myminio listbucketsonly user=<USER>
 
 The following :mc-cmd:`mc admin policy set` command associates the 
 ``listbucketsonly`` policy to a group on the ``myminio`` MinIO deployment. 
@@ -161,7 +161,7 @@ Replace the ``<GROUP>`` with the name of a user that exists on the deployment.
 .. code-block:: shell
    :class: copyable
 
-   mc admin policy set myminio listbucketsonly group=<GROUP>
+   mc admin policy set --myminio listbucketsonly group=<GROUP>
 
 Syntax
 ------
@@ -264,14 +264,14 @@ Syntax
 
       The :mc:`alias <mc alias>` of a configured MinIO deployment on which
       the command associates the :mc-cmd:`~mc admin policy set POLICYNAME`
-      to the :mc-cmd:`~mc admin policy set user` or
-      :mc-cmd:`~mc admin policy set group`.
+      to the :mc-cmd:`~mc admin policy set --user` or
+      :mc-cmd:`~mc admin policy set --group`.
 
    .. mc-cmd:: POLICYNAME
 
       The name of the policy which the command associates to the specified
-      :mc-cmd:`~mc admin policy set user` or 
-      :mc-cmd:`~mc admin policy set group`. Specify multiple policies
+      :mc-cmd:`~mc admin policy set --user` or 
+      :mc-cmd:`~mc admin policy set --group`. Specify multiple policies
       as a comma-separated list.
 
       MinIO deployments include the following :ref:`built-in policies
@@ -282,20 +282,20 @@ Syntax
       - :userpolicy:`diagnostics`
       - :userpolicy:`writeonly`
 
-   .. mc-cmd:: user
+   .. mc-cmd:: --user
 
       The name of the user to which the command associates the
       :mc-cmd:`~mc admin policy set POLICYNAME`. 
 
-      Mutually exclusive with :mc-cmd:`~mc admin policy set group`
+      Mutually exclusive with :mc-cmd:`~mc admin policy set --group`
 
-   .. mc-cmd:: group
+   .. mc-cmd:: --group
 
       The name of the group to which the command associates the 
       :mc-cmd:`~mc admin policy set POLICYNAME`. All users with membership in
       the group inherit the policies associated to the group.
 
-      Mutually exclusive with :mc-cmd:`~mc admin policy set user`
+      Mutually exclusive with :mc-cmd:`~mc admin policy set --user`
 
 .. mc-cmd:: remove
    :fullpath:

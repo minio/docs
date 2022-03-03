@@ -383,10 +383,10 @@ configuration.
 
 - Replace ``HOSTNAME`` with the URL of the remote MinIO deployment
 
-- (Optional) Specify the :mc-cmd:`~mc admin bucket remote add sync`
+- (Optional) Specify the :mc-cmd:`~mc admin bucket remote add`
   option to enable synchronous replication. Omit the option to use the default
   of asynchronous replication. See the reference documentation for
-  :mc-cmd:`~mc admin bucket remote add sync` for more information on
+  :mc-cmd:`~mc admin bucket remote add` for more information on
   synchronous vs asynchronous replication.
 
 The command returns an ARN similar to the following. Copy this ARN for use in

@@ -80,12 +80,12 @@ Syntax
    Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, 
    but does *not* perform any object healing.
 
-.. mc-cmd:: force-start, f
+.. mc-cmd:: --force-start, f
    
 
    Force starts the healing process.
 
-.. mc-cmd:: force-stop, s
+.. mc-cmd:: --force-stop, s
    
 
    Force stops the healing sequence.

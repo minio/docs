@@ -122,7 +122,7 @@ Use the :mc-cmd:`mc admin tier add` command to add a new remote storage tier:
 .. code-block:: shell
    :class: copyable
 
-   mc admin tier add azure TARGET TIER_NAME \
+   mc admin tier add --azure TARGET TIER_NAME \
       --endpoint https://HOSTNAME
       --bucket BUCKET \
       --prefix PREFIX
@@ -150,15 +150,15 @@ The example above uses the following arguments:
        remote storage tier. Specify the name in all-caps, e.g. ``AZURE_TIER``.
        This value is required in the next step.
 
-   * - :mc-cmd:`HOSTNAME <mc admin tier add endpoint>`
+   * - :mc-cmd:`HOSTNAME <mc admin tier add --endpoint>`
      - The URL endpoint for the :abbr:`Azure (Microsoft Azure)` storage
        backend.
 
-   * - :mc-cmd:`BUCKET <mc admin tier add bucket>`
+   * - :mc-cmd:`BUCKET <mc admin tier add --bucket>`
      - The name of the bucket on the :abbr:`Azure (Microsoft Azure)` storage
        backend to which MinIO transitions objects.
 
-   * - :mc-cmd:`PREFIX <mc admin tier add prefix>`
+   * - :mc-cmd:`PREFIX <mc admin tier add --prefix>`
      - The optional bucket prefix within which MinIO transitions objects.
 
        MinIO stores all transitioned objects in the specified ``BUCKET`` under a
@@ -171,7 +171,7 @@ The example above uses the following arguments:
        source MinIO deployment to faciliate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`ACCOUNT <mc admin tier add account-name>`
+   * - :mc-cmd:`ACCOUNT <mc admin tier add --account-name>`
      - The account name MinIO uses to access the bucket. The account name
        *must* correspond to an :abbr:`Azure (Microsoft Azure)` user with the
        required :ref:`permissions
@@ -179,10 +179,10 @@ The example above uses the following arguments:
 
        You cannot change this account name after creating the tier.
 
-   * - :mc-cmd:`KEY <mc admin tier add account-key>`
+   * - :mc-cmd:`KEY <mc admin tier add --account-key>`
      - The corresponding key for the specified ``ACCOUNT``.
 
-   * - :mc-cmd:`REGION <mc admin tier add region>`
+   * - :mc-cmd:`REGION <mc admin tier add --region>`
      - The :abbr:`Azure (Microsoft Azure)` blob storage region of the specified
        ``BUCKET``. You can safely omit this option if the ``HOSTNAME`` includes
        the region.

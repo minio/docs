@@ -11,7 +11,7 @@
 .. mc:: mc share download
 
 .. |command| replace:: :mc-cmd:`mc share download`
-.. |versionid| replace:: :mc-cmd:`~mc share download version-id`
+.. |versionid| replace:: :mc-cmd:`~mc share download --version-id`
 .. |alias| replace:: :mc-cmd:`~mc share download ALIAS`
 
 Syntax
@@ -110,7 +110,7 @@ Parameters
       
    Required if any ``ALIAS`` specifies a path to a bucket or bucket prefix.
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst

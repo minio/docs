@@ -15,7 +15,7 @@
 .. |command| replace:: :mc-cmd:`mc tag list`
 .. |rewind| replace:: :mc-cmd:`~mc tag list --rewind`
 .. |versions| replace:: :mc-cmd:`~mc tag list --versions`
-.. |versionid| replace:: :mc-cmd:`~mc tag list version-id`
+.. |versionid| replace:: :mc-cmd:`~mc tag list --version-id`
 .. |alias| replace:: :mc-cmd:`~mc tag list ALIAS`
 
 Syntax
@@ -56,7 +56,7 @@ The :mc:`mc tag list` command lists all tags from a bucket or object.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd:`mc tag list version-id` is mutually exclusive with
+      :mc-cmd:`mc tag list --version-id` is mutually exclusive with
       multiple parameters. See the reference documentation for more information.
 
 Parameters
@@ -90,7 +90,7 @@ Parameters
    :mc-cmd:`~mc tag list --rewind` together to list tags from all
    object versions which existed at a specific point in time.
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst

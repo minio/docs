@@ -70,26 +70,26 @@ Parameters
       mc ilm restore myminio/mybucket/object.txt
 
 
-.. mc-cmd:: days value                     
+.. mc-cmd:: --days                     
    
 
    *Optional* The number of days after which MinIO expires the restored copy
    of the archived object.
 
 
-.. mc-cmd:: recursive, r                  
+.. mc-cmd:: --recursive, r                  
    
 
    *Optional* Restores all objects under the specified prefix.
 
 
-.. mc-cmd:: versions                       
+.. mc-cmd:: --versions                       
    
 
    *Optional* Restores all versions of the object on the remote tier.
 
 
-.. mc-cmd:: version-id, vid  
+.. mc-cmd:: --version-id, vid  
    
 
    *Optional* Restores the specified version of the object on the remote tier.

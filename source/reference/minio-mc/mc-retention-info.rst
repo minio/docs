@@ -12,7 +12,7 @@
 
 .. |command| replace:: :mc-cmd:`mc retention info`
 .. |rewind| replace:: :mc-cmd:`~mc retention info --rewind`
-.. |versionid| replace:: :mc-cmd:`~mc retention info version-id`
+.. |versionid| replace:: :mc-cmd:`~mc retention info --version-id`
 .. |alias| replace:: :mc-cmd:`~mc retention info ALIAS`
 .. |versions| replace:: :mc-cmd:`~mc retention info --versions`
 
@@ -67,7 +67,7 @@ object locking enabled.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd:`mc retention info version-id` is mutually exclusive with
+      :mc-cmd:`mc retention info --version-id` is mutually exclusive with
       multiple other parameters. See the reference documentation for more
       information.
 
@@ -93,7 +93,7 @@ Parameters
 
    - If the ``ALIAS`` bucket has versioning enabled, 
       :mc-cmd:`mc retention info` by default applies to only the latest object
-      version. Use :mc-cmd:`~mc retention info version-id` or
+      version. Use :mc-cmd:`~mc retention info --version-id` or
       :mc-cmd:`~mc retention info --versions` to return the object lock
       settings for a specific version or for all versions of the object.
 
@@ -113,7 +113,7 @@ Parameters
    *Optional* Recursively returns the object lock settings for all objects in the
    specified :mc-cmd:`~mc retention info ALIAS` path.
 
-   Mutually exclusive with :mc-cmd:`~mc retention info version-id`.
+   Mutually exclusive with :mc-cmd:`~mc retention info --version-id`.
 
 .. mc-cmd:: --rewind
    
@@ -122,7 +122,7 @@ Parameters
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst

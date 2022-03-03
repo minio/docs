@@ -156,7 +156,7 @@ The command accepts the following arguments:
    Omit to direct MinIO to generate a dynamic port at server startup. The
    MinIO server outputs the port to the system log.
 
-.. mc-cmd:: certs-dir, -S
+.. mc-cmd:: --certs-dir, -S
    
 
    *Optional* Specifies the path to the folder containing certificates the

@@ -242,7 +242,7 @@ it may also increase the time of each write operation due to replication load.
 
 You must explicitly enable synchronous replication when configuring the remote
 target target using the :mc-cmd:`mc admin bucket remote add` command with the
-:mc-cmd:`~mc admin bucket remote add sync` flag.
+:mc-cmd:`~mc admin bucket remote add` flag.
 
 Replication Internals
 ~~~~~~~~~~~~~~~~~~~~~

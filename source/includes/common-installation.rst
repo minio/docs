@@ -70,7 +70,7 @@ for creating this user with a home directory ``/home/minio-user``.
 
 If the ``minio.service`` file specifies a different user account, use the
 ``$HOME`` directory for that account. Alternatively, specify a custom
-certificate directory using the :mc-cmd:`minio server certs-dir`
+certificate directory using the :mc-cmd:`minio server --certs-dir`
 commandline argument. Modify the ``MINIO_OPTS`` variable in
 ``/etc/defaults/minio`` to set this option. The ``systemd`` user which runs the
 MinIO server process *must* have read and listing permissions for the specified

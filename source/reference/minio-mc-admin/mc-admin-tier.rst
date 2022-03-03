@@ -129,8 +129,8 @@ Syntax
 
              Requires specifying the following additional options:
 
-             - :mc-cmd:`~mc admin tier add access-key`
-             - :mc-cmd:`~mc admin tier add secret-key`
+             - :mc-cmd:`~mc admin tier add --access-key`
+             - :mc-cmd:`~mc admin tier add --secret-key`
 
          * - ``azure``
            - Use :abbr:`Azure (Microsoft Azure)` Blob Storage as the storage
@@ -138,8 +138,8 @@ Syntax
 
              Requires specifying the following additional options:
 
-             - :mc-cmd:`~mc admin tier add account-name`
-             - :mc-cmd:`~mc admin tier add account-key`
+             - :mc-cmd:`~mc admin tier add --account-name`
+             - :mc-cmd:`~mc admin tier add --account-key`
          
          * - ``gcs`` 
            - Use :abbr:`GCP (Google Cloud Platform)` Cloud Storage as the
@@ -147,7 +147,7 @@ Syntax
 
              Requires specifying the following additional option:
 
-             - :mc-cmd:`~mc admin tier add credentials-file`
+             - :mc-cmd:`~mc admin tier add --credentials-file`
 
    .. mc-cmd:: TARGET
 
@@ -165,7 +165,7 @@ Syntax
 
       You **must** specify the tier in all-caps, e.g. ``WARM_TIER``.
    
-   .. mc-cmd:: endpoint
+   .. mc-cmd:: --endpoint
       
 
       *Required*
@@ -174,7 +174,7 @@ Syntax
       *must* resolve to the provider specified to
       :mc-cmd:`~mc admin tier add TIER_TYPE`. 
 
-   .. mc-cmd:: access-key
+   .. mc-cmd:: --access-key
       
 
       *Required*
@@ -186,7 +186,7 @@ Syntax
       Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
-   .. mc-cmd:: secret-key
+   .. mc-cmd:: --secret-key
       
 
       *Required*
@@ -196,7 +196,7 @@ Syntax
       Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
-   .. mc-cmd:: account-name
+   .. mc-cmd:: --account-name
       
 
       *Required*
@@ -213,18 +213,18 @@ Syntax
       changing the account would change the storage backend and prevent access
       to any objects transitioned to the original account/backend.
 
-   .. mc-cmd:: account-key
+   .. mc-cmd:: --account-key
       
 
       *Required*
       
-      The account key for the :mc-cmd:`~mc admin tier add account-name` 
+      The account key for the :mc-cmd:`~mc admin tier add --account-name` 
       associated to the remote Azure tier.
 
       Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
-   .. mc-cmd:: credentials-file
+   .. mc-cmd:: --credentials-file
       
 
       *Required*
@@ -237,24 +237,24 @@ Syntax
       Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``gcs``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
-   .. mc-cmd:: bucket
+   .. mc-cmd:: --bucket
       
 
       *Required*
       
       The bucket on the remote tier to which MinIO transitions objects.
 
-   .. mc-cmd:: prefix
+   .. mc-cmd:: --prefix
       
 
       *Optional*
       
-      The prefix path for the specified :mc-cmd:`~mc admin tier add bucket`
+      The prefix path for the specified :mc-cmd:`~mc admin tier add --bucket`
       to which MinIO transitions objects.
 
       Omit this field to transition objects into the bucket root.
 
-   .. mc-cmd:: storage-class
+   .. mc-cmd:: --storage-class
       
 
       *Optional*
@@ -270,7 +270,7 @@ Syntax
       This option only applies if :mc-cmd:`~mc admin tier add TIER_TYPE` is 
       ``s3``. This option has no effect for any other value of ``TIER_TYPE``.
 
-   .. mc-cmd:: region
+   .. mc-cmd:: --region
       
 
       *Optional*
@@ -311,7 +311,7 @@ Syntax
       corresponds to the :mc-cmd:`mc admin tier add TIER_NAME` specified
       when creating the remote tier.
 
-   .. mc-cmd:: access-key
+   .. mc-cmd:: --access-key
       
 
       *Optional*
@@ -324,7 +324,7 @@ Syntax
       :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other ``TIER_TYPE``.
 
-   .. mc-cmd:: secret-key
+   .. mc-cmd:: --secret-key
       
 
       *Optional*
@@ -335,21 +335,21 @@ Syntax
       :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other ``TIER_TYPE``.
 
-   .. mc-cmd:: account-key
+   .. mc-cmd:: --account-key
       
 
       *Required*
 
       The account key for a user on the remote Azure tier.
       Use this option to rotate the credentials for the
-      :mc-cmd:`~mc admin tier add account-name` 
+      :mc-cmd:`~mc admin tier add --account-name` 
       associated to the remote tier.
 
       This option only applies to remote storage tiers with 
       :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other ``TIER_TYPE``.
 
-   .. mc-cmd:: credentials-file
+   .. mc-cmd:: --credentials-file
       
 
       *Required*

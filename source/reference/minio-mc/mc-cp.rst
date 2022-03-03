@@ -14,7 +14,7 @@
 
 .. |command| replace:: :mc-cmd:`mc cp`
 .. |rewind| replace:: :mc-cmd:`~mc cp --rewind`
-.. |versionid| replace:: :mc-cmd:`~mc cp version-id`
+.. |versionid| replace:: :mc-cmd:`~mc cp --version-id`
 .. |alias| replace:: :mc-cmd:`~mc cp SOURCE`
 
 Syntax
@@ -272,7 +272,7 @@ Parameters
    ``KEY1=VALUE1&KEY2=VALUE2``, where each pair represents one tag to
    assign to the objects.
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst
@@ -415,7 +415,7 @@ specific point in time. This command only applies to S3-to-S3 copy.
 Copy Specific Version of Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc cp version-id` to copy a specific version of an object. This
+Use :mc-cmd:`mc cp --version-id` to copy a specific version of an object. This
 command only applies to S3-to-S3 copy.
 
 .. code-block:: shell

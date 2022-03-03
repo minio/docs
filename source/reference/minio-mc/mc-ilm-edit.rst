@@ -101,7 +101,7 @@ Parameters
 
    For versioned buckets, the expiry rule applies only to the *current*
    object version. Use the 
-   :mc-cmd:`~mc ilm edit noncurrentversion-expiration-days` option
+   :mc-cmd:`~mc ilm edit --noncurrentversion-expiration-days` option
    to apply expiration behavior to noncurrent object versions.
 
    MinIO uses a scanner process to check objects against all configured
@@ -111,9 +111,9 @@ Parameters
 
    Mutually exclusive with the following options:
 
-   - :mc-cmd:`~mc ilm edit expired-object-delete-marker`
+   - :mc-cmd:`~mc ilm edit --expired-object-delete-marker`
 
-.. mc-cmd:: expired-object-delete-marker
+.. mc-cmd:: --expired-object-delete-marker
    
 
    *Optional* Specify this option to direct MinIO to remove delete markers for
@@ -130,7 +130,7 @@ Parameters
    limited system resources may delay application of lifecycle management
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
-.. mc-cmd:: noncurrentversion-expiration-days
+.. mc-cmd:: --noncurrentversion-expiration-days
    
 
    *Optional* The number of days to retain an object version after becoming
@@ -146,7 +146,7 @@ Parameters
    limited system resources may delay application of lifecycle management
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
-.. mc-cmd:: noncurrentversion-transition-days
+.. mc-cmd:: --noncurrentversion-transition-days
    
 
    *Optional* The number of days an object has been non-current (i.e. replaced
@@ -157,7 +157,7 @@ Parameters
    passes that calendar date.
 
    This option has no effect on non-versioned buckets. Requires specifying
-   :mc-cmd:`~mc ilm edit noncurrentversion-transition-storage-class`.
+   :mc-cmd:`~mc ilm edit --noncurrentversion-transition-storage-class`.
 
    This option has the same behavior as the 
    S3 ``NoncurrentVersionTransition`` action.
@@ -167,7 +167,7 @@ Parameters
    limited system resources may delay application of lifecycle management
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
-.. mc-cmd:: noncurrentversion-transition-storage-class
+.. mc-cmd:: --noncurrentversion-transition-storage-class
    
 
    *Optional* The remote storage tier to which MinIO 
@@ -187,7 +187,7 @@ Parameters
 
    This option is mutually exclusive with the following option:
 
-   - :mc-cmd:`~mc ilm edit expired-object-delete-marker`
+   - :mc-cmd:`~mc ilm edit --expired-object-delete-marker`
 
 .. mc-cmd:: --transition-days
    
@@ -199,7 +199,7 @@ Parameters
 
    For versioned buckets, the transition rule applies only to the *current*
    object version. Use the 
-   :mc-cmd:`~mc ilm edit noncurrentversion-transition-days` option
+   :mc-cmd:`~mc ilm edit --noncurrentversion-transition-days` option
    to apply transition behavior to noncurrent object versions.
 
    Requires specifying :mc-cmd:`~mc ilm edit --storage-class`.

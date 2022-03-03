@@ -121,7 +121,7 @@ service as the remote storage tier:
 .. code-block:: shell
    :class: copyable
 
-   mc admin tier add gcs TARGET TIER_NAME \
+   mc admin tier add --gcs TARGET TIER_NAME \
       --endpoint https://HOSTNAME \
       --bucket BUCKET \
       --prefix PREFIX \
@@ -147,15 +147,15 @@ The example above uses the following arguments:
        remote storage tier. Specify the name in all-caps, e.g. ``GCS_TIER``.
        This value is required in the next step.
 
-   * - :mc-cmd:`HOSTNAME <mc admin tier add endpoint>`
+   * - :mc-cmd:`HOSTNAME <mc admin tier add --endpoint>`
      - The URL endpoint for the :abbr:`GCS (Google Cloud Storage)` storage
        backend.
 
-   * - :mc-cmd:`BUCKET <mc admin tier add bucket>`
+   * - :mc-cmd:`BUCKET <mc admin tier add --bucket>`
      - The name of the bucket on the :abbr:`GCS (Google Cloud Storage)` storage
        backend to which MinIO transitions objects.
 
-   * - :mc-cmd:`PREFIX <mc admin tier add prefix>`
+   * - :mc-cmd:`PREFIX <mc admin tier add --prefix>`
      - The optional bucket prefix within which MinIO transitions objects.
 
        MinIO stores all transitioned objects in the specified ``BUCKET`` under a
@@ -168,7 +168,7 @@ The example above uses the following arguments:
        source MinIO deployment to faciliate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`CREDENTIALS <mc admin tier add credentials-file>`
+   * - :mc-cmd:`CREDENTIALS <mc admin tier add --credentials-file>`
      - The `credential file
        <https://cloud.google.com/docs/authentication/getting-started>`__ for a
        user on the remote GCS tier. The specified user credentials *must*
@@ -176,7 +176,7 @@ The example above uses the following arguments:
        :ref:`permissions 
        <minio-lifecycle-management-transition-to-gcs-permissions-remote>`.
 
-   * - :mc-cmd:`REGION <mc admin tier add region>`
+   * - :mc-cmd:`REGION <mc admin tier add --region>`
      - The :abbr:`GCS (Google Cloud Storage)` region of the specified
        ``BUCKET``. You can safely omit this
        option if the ``HOSTNAME`` includes the region.

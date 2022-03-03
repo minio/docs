@@ -16,7 +16,7 @@
 
 .. |command| replace:: :mc-cmd:`mc cat`
 .. |rewind| replace:: :mc-cmd:`~mc cat --rewind`
-.. |versionid| replace:: :mc-cmd:`~mc cat version-id`
+.. |versionid| replace:: :mc-cmd:`~mc cat --version-id`
 .. |alias| replace:: :mc-cmd:`~mc cat ALIAS`
 
 Syntax
@@ -97,7 +97,7 @@ Parameters
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst
@@ -175,7 +175,7 @@ point-in-time in the past:
 View an S3 Object with Specific Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc cat version-id` to return a specific version of the 
+Use :mc-cmd:`mc cat --version-id` to return a specific version of the 
 object:
 
 .. code-block:: shell
@@ -188,7 +188,7 @@ object:
 - Replace :mc-cmd:`PATH <mc cat ALIAS>` with the path to the object on the
   S3-compatible host.
 
-- Replace :mc-cmd:`VERSION <mc cat version-id>` with the specific version of the
+- Replace :mc-cmd:`VERSION <mc cat --version-id>` with the specific version of the
   object to return.
 
 .. include:: /includes/facts-versioning.rst

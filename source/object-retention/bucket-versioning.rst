@@ -192,10 +192,10 @@ objects:
 - Use :mc-cmd:`mc ls --versions` to view all versions of an object,
   including delete markers.
 
-- Use :mc-cmd:`mc cp --version-id=UUID ... <mc cp version-id>` to 
+- Use :mc-cmd:`mc cp --version-id=UUID ... <mc cp --version-id>` to 
   retrieve the version of the "deleted" object with matching ``UUID``.
 
-- Use :mc-cmd:`mc rm --version-id=UUID ... <mc rm version-id>` to delete
+- Use :mc-cmd:`mc rm --version-id=UUID ... <mc rm --version-id>` to delete
   the version of the object with matching ``UUID``.
 
 - Use :mc-cmd:`mc rm --versions` to delete *all* versions of an object.

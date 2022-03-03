@@ -14,7 +14,7 @@
 
 .. |command| replace:: :mc-cmd:`mc legalhold info`
 .. |rewind| replace:: :mc-cmd:`~mc legalhold info --rewind`
-.. |versionid| replace:: :mc-cmd:`~mc legalhold info version-id`
+.. |versionid| replace:: :mc-cmd:`~mc legalhold info --version-id`
 .. |alias| replace:: :mc-cmd:`~mc legalhold info ALIAS`
 
 Syntax
@@ -86,7 +86,7 @@ Parameters
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst

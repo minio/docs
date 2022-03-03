@@ -13,7 +13,7 @@
 .. |command| replace:: :mc-cmd:`mc stat`
 .. |rewind| replace:: :mc-cmd:`~mc stat --rewind`
 .. |versions| replace:: :mc-cmd:`~mc stat --versions`
-.. |versionid| replace:: :mc-cmd:`~mc stat version-id`
+.. |versionid| replace:: :mc-cmd:`~mc stat --version-id`
 .. |alias| replace:: :mc-cmd:`~mc stat ALIAS`
 
 Syntax
@@ -61,7 +61,7 @@ results to the ``stat`` commandline tool.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd:`mc stat version-id` is mutually exclusive with multiple
+      :mc-cmd:`mc stat --version-id` is mutually exclusive with multiple
       parameters. See the reference documentation for more information.
 
 Parameters
@@ -137,7 +137,7 @@ Parameters
    :mc-cmd:`~mc stat --rewind` together to remove all object
    versions which existed at a specific point in time.
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst

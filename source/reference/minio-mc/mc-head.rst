@@ -15,7 +15,7 @@
 
 .. |command| replace:: :mc-cmd:`mc head`
 .. |rewind| replace:: :mc-cmd:`~mc head --rewind`
-.. |versionid| replace:: :mc-cmd:`~mc head version-id`
+.. |versionid| replace:: :mc-cmd:`~mc head --version-id`
 .. |alias| replace:: :mc-cmd:`~mc head ALIAS`
 
 Syntax
@@ -66,7 +66,7 @@ tool.
 Parameters
 ~~~~~~~~~~
 
-.. mc-cmd::  ALIAS
+.. mc-cmd:: ALIAS
 
    *Required* The object or objects to print. 
    
@@ -91,14 +91,14 @@ Parameters
 
       mc head ~/mydata/object.txt
 
-.. mc-cmd::  lines, n
+.. mc-cmd:: --lines, n
    
 
    *Optional* The number of lines to print.
 
    Defaults to ``10``.
 
-.. mc-cmd::  encrypt-key
+.. mc-cmd:: --encrypt-key
    
 
    *Optional*  Encrypt or decrypt objects using server-side encryption with
@@ -109,9 +109,9 @@ Parameters
       object(s).
 
    Enclose the entire list of key-value pairs passed to 
-   :mc-cmd:`~mc head encrypt-key` in double quotes ``"``.
+   :mc-cmd:`~mc head --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd:`~mc head encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc head --encrypt-key` can use the ``MC_ENCRYPT_KEY``
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
@@ -122,7 +122,7 @@ Parameters
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: version-id, vid
+.. mc-cmd:: --version-id, vid
    
 
    .. include:: /includes/facts-versioning.rst
@@ -184,7 +184,7 @@ object at a specific point-in-time in the past:
 View Partial Contents of an Object with Specific Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc head version-id` to return the first 10 lines of the
+Use :mc-cmd:`mc head --version-id` to return the first 10 lines of the
 object at a specific point-in-time in the past:
 
 .. code-block:: shell
@@ -198,7 +198,7 @@ object at a specific point-in-time in the past:
 - Replace :mc-cmd:`PATH <mc head ALIAS>` with the path to the object on the
   S3-compatible host.
 
-- Replace :mc-cmd:`VERSION <mc head version-id>` with the version of the object.
+- Replace :mc-cmd:`VERSION <mc head --version-id>` with the version of the object.
   For example, specify ``30d`` to return the version of the object 30 days prior
   to the current date.
 
