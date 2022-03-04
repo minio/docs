@@ -25,10 +25,6 @@ The following procedure adds a new Elasticsearch service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
 deployment.
 
-.. include:: /includes/common-admonitions.rst
-   :start-after: start-restart-downtime
-   :end-before: end-restart-downtime
-
 Prerequisites
 ~~~~~~~~~~~~~
 
@@ -159,15 +155,6 @@ You can configure a new Elasticsearch service endpoint using either environment 
 You must restart the MinIO deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
-.. important::
-
-   MinIO restarts *all* :mc:`minio server` processes associated to the 
-   deployment at the same time. Applications may experience a brief period of 
-   downtime during the restart process. 
-
-   Consider scheduling the restart during a maintenance period to minimize
-   interruption of services.
-
 .. code-block:: shell
    :class: copyable
 
@@ -236,10 +223,6 @@ Update an Elasticsearch Endpoint in a MinIO Deployment
 The following procedure updates an existing Elasticsearch service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
 deployment.
-
-.. include:: /includes/common-admonitions.rst
-   :start-after: start-restart-downtime
-   :end-before: end-restart-downtime
 
 Prerequisites
 ~~~~~~~~~~~~~~
@@ -318,15 +301,6 @@ of Elasticsearch configuration settings.
 
 You must restart the MinIO deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
-
-.. important::
-
-   MinIO restarts *all* :mc:`minio server` processes associated to the 
-   deployment at the same time. Applications may experience a brief period of 
-   downtime during the restart process. 
-
-   Consider scheduling the restart during a maintenance period to minimize
-   interruption of services.
 
 .. code-block:: shell
    :class: copyable

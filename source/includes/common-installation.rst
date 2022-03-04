@@ -49,6 +49,57 @@ recommends using RPM or DEB installation routes.
 
 .. end-install-minio-binary-desc
 
+.. start-upgrade-minio-binary-desc
+
+The following tabs provide examples of updating MinIO onto 64-bit Linux
+operating systems using RPM, DEB, or binary:
+
+.. tab-set::
+
+   .. tab-item:: RPM (RHEL)
+      :sync: rpm
+
+      Use the following commands to download the latest stable MinIO RPM and
+      update the existing installation.
+
+      .. code-block:: shell
+         :class: copyable
+         :substitutions:
+
+         wget |minio-rpm| -O minio.deb
+         sudo dnf update minio.rpm
+
+   .. tab-item:: DEB (Debian/Ubuntu)
+      :sync: deb
+
+      Use the following commands to download the latest stable MinIO DEB and
+      upgrade the existing installation:
+
+      .. code-block:: shell
+         :class: copyable
+         :substitutions:
+
+         wget |minio-deb| -O minio.deb
+         sudo dpkg -i minio.deb
+
+   .. tab-item:: Binary
+      :sync: binary
+
+      Use the following commands to download the latest stable MinIO binary and
+      overwrite the existing binary:
+
+      .. code-block:: shell
+         :class: copyable
+
+         wget https://dl.min.io/server/minio/release/linux-amd64/minio
+         chmod +x minio
+         sudo mv minio /usr/local/bin/
+
+      Replace ``/usr/local/bin`` with the location of the existing MinIO
+      binary. Run ``which minio`` to identify the path if not already known.
+
+.. end-upgrade-minio-binary-desc
+
 .. start-install-minio-tls-desc
 
 MinIO enables :ref:`Transport Layer Security (TLS) <minio-tls>` 1.2+ 
@@ -174,6 +225,27 @@ transient and should resolve as the deployment comes online.
 
 .. end-install-minio-start-service-desc
 
+.. start-install-minio-restart-service-desc
+
+.. code-block:: shell
+   :class: copyable
+
+   sudo systemctl restart minio.service
+
+Use the following commands to confirm the service is online and functional:
+
+.. code-block:: shell
+   :class: copyable
+
+   sudo systemctl status minio.service
+   journalctl -f -u minio.service
+
+MinIO may log an increased number of non-critical warnings while the 
+server processes connect and synchronize. These warnings are typically 
+transient and should resolve as the deployment comes online.
+
+.. end-install-minio-restart-service-desc
+
 .. start-install-minio-console-desc
 
 Open your browser and access any of the MinIO hostnames at port ``:9001`` to
@@ -250,3 +322,13 @@ data to a new mount position, whether intentional or as the result of OS-level
 behavior.
 
 .. end-local-jbod-desc
+
+.. start-nondisruptive-upgrade-desc
+
+MinIO strongly recommends restarting all nodes simultaneously. MinIO operations
+are atomic and strictly consistent. As such the restart procedure is
+non-disruptive to applications and ongoing operations.
+
+Do **not** perform "rolling" (e.g. one node at a time) restarts.
+
+.. end-nondisruptive-upgrade-desc

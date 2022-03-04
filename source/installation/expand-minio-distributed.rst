@@ -157,14 +157,15 @@ for simplified cluster management and more predictable performance across pools.
 See :ref:`deploy-minio-distributed-recommendations` for more guidance on
 selecting hardware for MinIO deployments.
 
-Expansion Requires Downtime
+Expansion is Non-Disruptive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Adding a new server pool requires restarting *all* MinIO nodes in the
-deployment at around same time. This results in a brief period of downtime.
-S3 SDKs typically include retry logic, such that application impact should be
-minimal. You can plan for a maintenance period during which you perform this
-procedure to provide additional buffer 
+deployment at around same time. 
+
+.. include:: /includes/common-installation.rst
+   :start-after: start-nondisruptive-upgrade-desc
+   :end-before: end-nondisruptive-upgrade-desc
 
 Capacity-Based Planning
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -353,44 +354,21 @@ You may specify other :ref:`environment variables
 by your deployment. All MinIO nodes in the deployment should include the same
 environment variables with the matching values.
 
-5) Stop the MinIO Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. important::
-
-   This step *requires* stopping the MinIO deployment and results in
-   immediate downtime of the object storage API. This downtime period is
-   typically as short as necessary for running terminal commands on multiple
-   hosts simultaneously.
-
-   Applications using standard S3 SDKs (e.g. from AWS or MinIO) retry operations
-   automatically, such that downtime is typically not observed from the
-   application side. Planning expansion procedures during a maintenance or
-   low-traffic period may mitigate any potential delay or interruption of
-   services.
-
-MinIO does **not** support rolling restarts and requires stopping
-and starting the entire deployment at once.
-
-Issue the following command on each host machine running a MinIO server in the
-deployment:
-
-.. code-block:: shell
-   :class: copyable
-
-   sudo systemctl stop minio.service
-
-6) Restart the MinIO Deployment with Expanded Configuration
+5) Restart the MinIO Deployment with Expanded Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Issue the following commands on each node in the deployment to start the
-MinIO service:
+Issue the following commands on each node **simultaneously** in the deployment
+to restart the MinIO service:
 
 .. include:: /includes/common-installation.rst
-   :start-after: start-install-minio-start-service-desc
-   :end-before: end-install-minio-start-service-desc
+   :start-after: start-install-minio-restart-service-desc
+   :end-before: end-install-minio-restart-service-desc
 
-7) Next Steps
+.. include:: /includes/common-installation.rst
+   :start-after: start-nondisruptive-upgrade-desc
+   :end-before: end-nondisruptive-upgrade-desc
+
+6) Next Steps
 ~~~~~~~~~~~~~
 
 - Update any load balancers, reverse proxies, or other network control planes
