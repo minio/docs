@@ -152,14 +152,15 @@ resumes only after you manually re-initiate the decommissioning operation.
 The pool remains in the decommissioning state *regardless* of the interruption.
 A pool can *never* return to active status after decommissioning begins.
 
-Decommissioning Requires Downtime
+Decommissioning is Non-Disruptive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Removing a decommissioned server pool requires restarting *all* MinIO
-nodes in the deployment at around the same time. This results in a 
-brief period of downtime. S3 SDKs typically include retry logic, such that
-application impact should be minimal. You can plan for a maintenance period
-during which you perform this procedure to provide additional buffer.
+nodes in the deployment at around the same time.
+
+.. include:: /includes/common-installation.rst
+   :start-after: start-nondisruptive-upgrade-desc
+   :end-before: end-nondisruptive-upgrade-desc
 
 .. _minio-decommissioning-server-pool:
 
@@ -328,25 +329,16 @@ out of scope for this procedure.
 6) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Stop the MinIO server nodes in the decommissioned pool at the same time.
+Issue the following commands on each node **simultaneously** in the deployment
+to restart the MinIO service:
 
-.. code-block:: shell
-   :class: copyable
+.. include:: /includes/common-installation.rst
+   :start-after: start-install-minio-restart-service-desc
+   :end-before: end-install-minio-restart-service-desc
 
-   sudo systemctl stop minio
-
-Restart the remaining MinIO server nodes in the deployment at the same time:
-
-.. code-block:: shell
-   :class: copyable
-
-   sudo systemctl restart minio
-
-The :mc-cmd:`mc admin service restart` command does not reload variables
-from the environment file and is insufficient for this step.
-
-Use ``systemctl status``, ``journalctl -f -u minio``, and 
-:mc-cmd:`mc admin console` to monitor the deployment startup.
+.. include:: /includes/common-installation.rst
+   :start-after: start-nondisruptive-upgrade-desc
+   :end-before: end-nondisruptive-upgrade-desc
 
 Once the deployment is online, use :mc-cmd:`mc admin info` to confirm the
 uptime of all remaining servers in the deployment.

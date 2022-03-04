@@ -155,15 +155,6 @@ environment variables and configuration settings respectively:
 You must restart the MinIO deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
-.. important::
-
-   MinIO restarts *all* :mc:`minio server` processes associated to the 
-   deployment at the same time. Applications may experience a brief period of 
-   downtime during the restart process. 
-
-   Consider scheduling the restart during a maintenance period to minimize
-   interruption of services.
-
 .. code-block:: shell
    :class: copyable
 

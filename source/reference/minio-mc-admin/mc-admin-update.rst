@@ -21,17 +21,27 @@ environments where the deployment does not have public internet access.
 
 .. end-mc-admin-update-desc
 
-:mc-cmd:`mc admin update` affects *all* MinIO servers in the target deployment
-at the same time. The update procedure interrupts in-progress API operations on
-the MinIO deployment. Exercise caution before issuing an update command on
-production environments.
-
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
 
    .. include:: /includes/facts-mc-admin.rst
       :start-after: start-minio-only
       :end-before: end-minio-only
+
+
+Considerations
+--------------
+
+Updates are Non-Disruptive
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:mc-cmd:`mc admin update` updates the binary and restarts all MinIO servers in
+the deployment simultaneously. MinIO operations are atomic and strictly
+consistent and as such the restart process is non-disruptive to applications.
+
+MinIO strongly recommends only performing simultaneous upgrade-and-restart
+procedures. Do not perform "rolling" (e.g one node at a time) upgrade 
+procedures.
 
 Examples
 --------
@@ -65,8 +75,7 @@ Syntax
 
    If the specified ``ALIAS`` corresponds to a distributed MinIO
    deployment, :mc-cmd:`mc admin update` updates *all* MinIO servers
-   in the deployment at the same time. The command does not perform a 
-   rolling upgrade or similar zero or near-zero downtime upgrade procedure.
+   in the deployment at the same time. 
 
    Use :mc-cmd:`mc alias list` to review the configured aliases and their
    corresponding MinIO deployment endpoints.

@@ -21,10 +21,6 @@ The following procedure adds a new Redis service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
 deployment.
 
-.. include:: /includes/common-admonitions.rst
-   :start-after: start-restart-downtime
-   :end-before: end-restart-downtime
-
 Prerequisites
 ~~~~~~~~~~~~~
 
@@ -141,15 +137,6 @@ You can configure a new Redis service endpoint using either environment variable
 You must restart the MinIO deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
-.. important::
-
-   MinIO restarts *all* :mc:`minio server` processes associated to the 
-   deployment at the same time. Applications may experience a brief period of 
-   downtime during the restart process. 
-
-   Consider scheduling the restart during a maintenance period to minimize
-   interruption of services.
-
 .. code-block:: shell
    :class: copyable
 
@@ -219,10 +206,6 @@ The following procedure updates an existing Redis service endpoint for
 supporting :ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
 deployment.
 
-.. include:: /includes/common-admonitions.rst
-   :start-after: start-restart-downtime
-   :end-before: end-restart-downtime
-
 Prerequisites
 ~~~~~~~~~~~~~~
 
@@ -291,15 +274,6 @@ Redis configuration settings.
 
 You must restart the MinIO deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
-
-.. important::
-
-   MinIO restarts *all* :mc:`minio server` processes associated to the 
-   deployment at the same time. Applications may experience a brief period of 
-   downtime during the restart process. 
-
-   Consider scheduling the restart during a maintenance period to minimize
-   interruption of services.
 
 .. code-block:: shell
    :class: copyable
