@@ -216,7 +216,7 @@ the MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use The command command with the :mc-cmd:`~mc mb with-lock`
+      Use The command command with the :mc-cmd:`~mc mb --with-lock`
       option to create a bucket with object locking enabled:
 
       .. code-block:: shell

@@ -31,7 +31,7 @@ an object or objects.
 
 :mc:`mc legalhold` *requires* that the specified bucket has 
 :ref:`object locking enabled <minio-object-locking>`. You can **only** enable
-object locking at bucket creation. See :mc-cmd:`mc mb with-lock` for
+object locking at bucket creation. See :mc-cmd:`mc mb --with-lock` for
 documentation on creating buckets with object locking enabled. 
 
 .. tab-set::

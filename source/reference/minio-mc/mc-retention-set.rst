@@ -39,7 +39,7 @@ use :mc:`mc legalhold`.
 
 :mc:`mc retention set` *requires* that the specified bucket has object locking
 enabled. You can **only** enable object locking at bucket creation. See
-:mc-cmd:`mc mb with-lock` for documentation on creating buckets with
+:mc-cmd:`mc mb --with-lock` for documentation on creating buckets with
 object locking enabled. 
 
 .. tab-set::
