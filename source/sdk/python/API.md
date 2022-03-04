@@ -828,7 +828,7 @@ __Example__
 
 ```py
 config = ObjectLockConfig(GOVERNANCE, 15, DAYS)
-client.set_object_lock_condig("my-bucket", config)
+client.set_object_lock_config("my-bucket", config)
 ```
 
 ## 3. Object operations
@@ -849,7 +849,7 @@ __Parameters__
 | `length`             | _int_            | Number of bytes of object data from offset.          |
 | `request_headers`    | _dict_           | Any additional headers to be added with GET request. |
 | `ssec`               | _SseCustomerKey_ | Server-side encryption customer key.                 |
-| `version_id`         | _str_            |--version-id of the object.                            |
+| `version_id`         | _str_            | Version-ID of the object.                            |
 | `extra_query_params` | _dict_           | Extra query parameters for advanced usage.           |
 
 __Return Value__
@@ -869,7 +869,7 @@ finally:
     response.close()
     response.release_conn()
 
-# Get data of an object of --version-id.
+# Get data of an object of version-ID.
 try:
     response = client.get_object(
         "my-bucket", "my-object",
@@ -954,7 +954,7 @@ __Parameters__
 | `file_path`          | _str_            | Name of file to download.                            |
 | `request_headers`    | _dict_           | Any additional headers to be added with GET request. |
 | `ssec`               | _SseCustomerKey_ | Server-side encryption customer key.                 |
-| `version_id`         | _str_            |--version-id of the object.                            |
+| `version_id`         | _str_            | Version-ID of the object.                            |
 | `extra_query_params` | _dict_           | Extra query parameters for advanced usage.           |
 | `tmp_file_path`      | _str_            | Path to a temporary file.                            |
 
@@ -970,7 +970,7 @@ __Example__
 # Download data of an object.
 client.fget_object("my-bucket", "my-object", "my-filename")
 
-# Download data of an object of --version-id.
+# Download data of an object of version-ID.
 client.fget_object(
     "my-bucket", "my-object", "my-filename",
     version_id="dfbd25b3-abec-4184-a4e8-5a35a5c1174d",
@@ -1144,7 +1144,7 @@ result = client.put_object(
     "my-bucket", "my-object", io.BytesIO(b"hello"), 5,
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1157,7 +1157,7 @@ result = client.put_object(
     "my-bucket", "my-object", data, length=-1, part_size=10*1024*1024,
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1168,7 +1168,7 @@ result = client.put_object(
     content_type="application/csv",
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1179,7 +1179,7 @@ result = client.put_object(
     metadata={"My-Project": "one"},
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1190,7 +1190,7 @@ result = client.put_object(
     sse=SseCustomerKey(b"32byteslongsecretkeymustprovided"),
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1201,7 +1201,7 @@ result = client.put_object(
     sse=SseKMS("KMS-KEY-ID", {"Key1": "Value1", "Key2": "Value2"}),
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1212,7 +1212,7 @@ result = client.put_object(
     sse=SseS3(),
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1230,7 +1230,7 @@ result = client.put_object(
     legal_hold=True,
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1241,7 +1241,7 @@ result = client.put_object(
     progress=Progress(),
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1281,7 +1281,7 @@ result = client.fput_object(
     "my-bucket", "my-object", "my-filename",
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1292,7 +1292,7 @@ result = client.fput_object(
     content_type="application/csv",
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1303,7 +1303,7 @@ result = client.fput_object(
     metadata={"My-Project": "one"},
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1314,7 +1314,7 @@ result = client.fput_object(
     sse=SseCustomerKey(b"32byteslongsecretkeymustprovided"),
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1325,7 +1325,7 @@ result = client.fput_object(
     sse=SseKMS("KMS-KEY-ID", {"Key1": "Value1", "Key2": "Value2"}),
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1336,7 +1336,7 @@ result = client.fput_object(
     sse=SseS3(),
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1354,7 +1354,7 @@ result = client.fput_object(
     legal_hold=True,
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1365,7 +1365,7 @@ result = client.fput_object(
     progress=Progress(),
 )
 print(
-    "created {0} object; etag: {1},--version-id: {2}".format(
+    "created {0} object; etag: {1}, version-id: {2}".format(
         result.object_name, result.etag, result.version_id,
     ),
 )
@@ -1404,7 +1404,7 @@ print(
     ),
 )
 
-# Get object information of --version-id.
+# Get object information of version-ID.
 result = client.stat_object(
     "my-bucket", "my-object",
     version_id="dfbd25b3-abec-4184-a4e8-5a35a5c1174d",

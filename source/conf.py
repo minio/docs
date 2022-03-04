@@ -47,7 +47,7 @@ extensions = [
     'sphinxcontrib.images',
     'myst_parser',
     'sphinx_design',
-    'sphinx.ext.intersphinx'
+    'sphinx.ext.intersphinx',
 ]
 
 # -- External Links
@@ -139,10 +139,10 @@ rst_prolog = """
 .. |podman| replace:: `Podman <https://podman.io/>`__
 .. |kes-stable| replace:: 0.16.1
 
-.. |minio-tag| replace:: `RELEASE.2022-02-16T00-35-27Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-02-16T00-35-27Z>`__
-.. |minio-latest| replace:: RELEASE.2022-02-16T00-35-27Z
-.. |minio-rpm| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio-20220216003527.0.0.x86_64.rpm
-.. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio_20220216003527.0.0_amd64.deb
+.. |minio-tag| replace:: `RELEASE.2022-03-03T21-21-16Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-03-03T21-21-16Z>`__
+.. |minio-latest| replace:: RELEASE.2022-03-03T21-21-16Z
+.. |minio-rpm| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio-20220303212116.0.0.x86_64.rpm
+.. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio_20220303212116.0.0_amd64.deb
 .. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`
 
 """
