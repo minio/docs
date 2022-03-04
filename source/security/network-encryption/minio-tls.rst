@@ -70,13 +70,13 @@ defaults.
 
          ${HOME}/.minio/certs
            private.key
-           public.cert
+           public.crt
            s3-example.net/
              private.key
-             public.cert
+             public.crt
            internal-example.net/
              private.key
-             public.cert
+             public.crt
 
    .. tab-item:: OSX
       :sync: osx
@@ -103,13 +103,13 @@ defaults.
 
          ${HOME}/.minio/certs
            private.key
-           public.cert
+           public.crt
            s3-example.net/
              private.key
-             public.cert
+             public.crt
            internal-example.net/
              private.key
-             public.cert
+             public.crt
 
    .. tab-item:: Windows
       :sync: windows
@@ -136,13 +136,13 @@ defaults.
 
          %%USERPROFILE%%\.minio\certs
            private.key
-           public.cert
+           public.crt
            s3-example.net\
              private.key
-             public.cert
+             public.crt
            internal-example.net\
              private.key
-             public.cert
+             public.crt
 
 .. admonition:: MinIO Console TLS Connectivity
    :class: important
