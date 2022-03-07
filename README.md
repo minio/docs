@@ -34,4 +34,4 @@ using the following instructions as general guidance.
 
 This project is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
 
-See [CONTRIBUTIONS](https://github.com/minio/docs/tree/master/CONTRIBUTIONS.md) for more information on contributing content to the MinIO Documentation project.
+See [CONTRIBUTIONS](https://github.com/minio/docs/tree/master/CONTRIBUTING.md) for more information on contributing content to the MinIO Documentation project.
