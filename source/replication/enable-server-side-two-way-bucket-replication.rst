@@ -65,7 +65,7 @@ Replication Requires Versioning
 MinIO relies on the immutability protections provided by versioning to
 synchronize objects between the source and replication target.
 
-Use the :mc-cmd:`mc version suspend` command to enable versioning on 
+Use the :mc-cmd:`mc version enable` command to enable versioning on
 *both* the source and destination bucket before starting this procedure:
 
 .. code-block:: shell
