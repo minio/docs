@@ -139,10 +139,10 @@ rst_prolog = """
 .. |podman| replace:: `Podman <https://podman.io/>`__
 .. |kes-stable| replace:: 0.16.1
 
-.. |minio-tag| replace:: `RELEASE.2022-03-03T21-21-16Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-03-03T21-21-16Z>`__
-.. |minio-latest| replace:: RELEASE.2022-03-03T21-21-16Z
-.. |minio-rpm| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio-20220303212116.0.0.x86_64.rpm
-.. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio_20220303212116.0.0_amd64.deb
+.. |minio-tag| replace:: `RELEASE.2022-03-11T23-57-45Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-03-11T23-57-45Z>`__
+.. |minio-latest| replace:: RELEASE.2022-03-11T23-57-45Z
+.. |minio-rpm| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio-20220311235745.0.0.x86_64.rpm
+.. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio_20220311235745.0.0_amd64.deb
 .. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`
 
 """
