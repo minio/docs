@@ -41,6 +41,8 @@ sync-minio-version:
 	@sed -i "s|DEBURL|${DEB}|g" source/conf.py
 	@sed -i "s|RPMURL|${RPM}|g" source/conf.py
 
+	@git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"
+
 sync-java-docs:
 	@echo "Retrieving Java docs from github.com/minio/minio-java"
 	@$(eval LATEST = $(shell wget -q https://api.github.com/repos/minio/minio-java/releases/latest -O - | jq -r '.tag_name'))
