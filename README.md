@@ -3,11 +3,13 @@
 # Build Instructions
 
 MinIO uses [Sphinx](https://www.sphinx-doc.org/en/master/index.html) to generate
-static HTML pages using ReSTructured Text.
+static HTML pages using ReSTructured Text (rST).
 
 ## Prerequisites
 
 - Python 3.10.X. 
+
+- Sphinx 4.3.2
 
 - NodeJS 14.5.0 or later.
 
@@ -15,10 +17,9 @@ static HTML pages using ReSTructured Text.
 
 - Access to https://github.com/minio/docs
 
-All instructions below are intended for Linux systems. Windows builds may work
-using the following instructions as general guidance.
-
 ## Build Process
+
+### Linux
 
 1. Run `git checkout https://github.com/minio/docs` and `cd docs` to move into
    the working directory.
@@ -31,6 +32,44 @@ using the following instructions as general guidance.
 4. Run `make stage`
 
 5. Open your browser to http://localhost:8000 to view the staged output.
+
+### Windows
+
+Prereq:
+
+- Checkout the MinIO docs repository using your preferred `git` method
+  
+  `git checkout https://github.com/minio/docs`
+
+All instructions use PowerShell running as an administrator.
+
+1. Set policies
+   
+   `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+2. Navigate to the folder with the cloned docs
+3. Start virtual environment
+   
+   `python -m venv venv`
+4. Activate virtual environment
+   
+   `.\venv\Scripts\Activate.ps1`
+5. Install docs requirements
+   
+   `pip install -r requirements.txt`
+6. (optional) Delete the Build directory
+   
+   `Remove-Item build\`
+7. Generate CSS from SCSS files
+   
+   `npm run build`
+8. Build the docs
+   
+   `sphinx-build -M html source\ build\master -n`
+9.  Start the http server
+    
+    `python -m http.server --directory build\master\html`
+10. View the staged output in a browser by going to `localhost:8000`
+
 
 This project is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
 
