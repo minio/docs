@@ -308,8 +308,8 @@ both remote clusters:
 .. code-block:: shell
    :class: copyable
 
-   mc alias set AlphaReplication HOSTNAME AlphaReplicationAdmin LongRandomSecretKey
-   mc alias set BakerReplication HOSTNAME BakerReplicationUser LongRandomSecretKey
+   mc alias set AlphaReplication HOSTNAME alphaReplicationAdmin LongRandomSecretKey
+   mc alias set BakerReplication HOSTNAME bakerReplicationRemoteUser LongRandomSecretKey
 
 3) Create a Replication Target for the Destination Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -323,7 +323,7 @@ bucket.
    :class: copyable
 
    mc admin bucket remote add AlphaReplication/SOURCEBUCKET \
-      https://bakerReplicationRemoteUser:LongRandomSecretKey@HOSTNAME/DESTINATIONBUCKET
+      https://bakerReplicationRemoteUser:LongRandomSecretKey@HOSTNAME/DESTINATIONBUCKET \
       --service "replication"
       [--sync]
 

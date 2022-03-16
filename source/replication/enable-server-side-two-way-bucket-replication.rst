@@ -341,8 +341,8 @@ both remote clusters:
 .. code-block:: shell
    :class: copyable
 
-   mc alias set AlphaReplication HOSTNAME AlphaReplicationAdmin LongRandomSecretKey
-   mc alias set BakerReplication HOSTNAME BakerReplicationAdmin LongRandomSecretKey
+   mc alias set AlphaReplication HOSTNAME alphaReplicationAdmin LongRandomSecretKey
+   mc alias set BakerReplication HOSTNAME bakerReplicationAdmin LongRandomSecretKey
 
 3) Create a Replication Target for Each Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -394,7 +394,7 @@ B\) Create a Replication Target for Baker -> Alpha
 
       mc admin bucket remote add BakerReplication/SOURCEBUCKET \
          https://AlphaReplicationRemoteUser:LongRandomSecretKey@HOSTNAME/DESTINATIONBUCKET \
-         --service "replication: \
+         --service "replication" \
          [--sync]
 
    - Replace ``SOURCEBUCKET`` with the name of the source bucket on the 
