@@ -202,7 +202,7 @@ Parameters
    *Optional* Removes all :ref:`non-current <minio-bucket-versioning-delete>`
    object versions from the specified :mc-cmd:`~mc rm ALIAS`.
 
-   This option has on effect on buckets without 
+   This option has no effect on buckets without 
    :ref:`versioning <minio-bucket-versioning>` enabled.
 
 .. mc-cmd:: --older-than
