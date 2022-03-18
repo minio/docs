@@ -7,13 +7,15 @@ static HTML pages using ReSTructured Text (rST).
 
 ## Prerequisites
 
-- Python 3.10.X. 
+- Python 3.10.X and pip
 
 - Sphinx 4.3.2
 
-- NodeJS 14.5.0 or later.
+- NodeJS 14.5.0 or later and npm
 
-- `git` or a git-compatible client.
+- gulp.js
+
+- `git` or a git-compatible client
 
 - Access to https://github.com/minio/docs
 
@@ -32,6 +34,24 @@ static HTML pages using ReSTructured Text (rST).
 4. Run `make stage`
 
 5. Open your browser to http://localhost:8000 to view the staged output.
+
+### MacOS
+
+1. Run `git checkout https://github.com/minio/docs` and `cd docs` to move into
+   the working directory.
+
+2. Create a new virtual environment `python3 -m venv venv`. Activate it using
+   `source venv/bin/activate`.
+
+3. Run `pip install -r requirements.txt` to setup the Python environment.
+
+4. Run `npm install`
+
+5. Run `npm run build`
+
+6. Run `make stage`
+
+7. Open your browser to http://localhost:8000 to view the staged output.
 
 ### Windows
 
