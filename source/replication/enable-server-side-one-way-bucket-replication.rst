@@ -324,7 +324,7 @@ bucket.
 
    mc admin bucket remote add AlphaReplication/SOURCEBUCKET \
       https://bakerReplicationRemoteUser:LongRandomSecretKey@HOSTNAME/DESTINATIONBUCKET \
-      --service "replication"
+      --service "replication" \
       [--sync]
 
 - Replace ``SOURCEBUCKET`` with the name of the source bucket on the 

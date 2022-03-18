@@ -404,7 +404,7 @@ the remote as a target:
 
    mc replicate add ALIAS-Replication/BUCKET \
       --remote-bucket 'arn:minio:replication::<UUID>:BUCKET' \
-      --replicate "delete,delete-marker,existing-objects"
+      --replicate "delete,delete-marker,existing-objects" \
       --priority 1
 
 - Replace ``BUCKET`` with the name of the bucket on which you are
