@@ -157,6 +157,7 @@ without validating their usage do so at their own risk.
    :hidden:
 
    /introduction/minio-overview
+   /quickstart/quickstart
    /installation/deployment-and-management
    /security/iam-overview
    /security/encryption-overview
