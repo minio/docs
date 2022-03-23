@@ -6,6 +6,8 @@ Publish Events to Kafka
 
 .. default-domain:: minio
 
+.. |ARN| replace:: ``arn:minio:sqs::primary:kafka``
+
 .. contents:: Table of Contents
    :local:
    :depth: 1
@@ -179,6 +181,11 @@ Kafka target similar to the following:
 
 You must specify the ARN resource when configuring bucket notifications with
 the associated Kafka deployment as a target.
+
+.. include:: /includes/common-bucket-notifications.rst
+   :start-after: start-bucket-notification-find-arn
+   :end-before: end-bucket-notification-find-arn
+
 
 3) Configure Bucket Notifications using the Kafka Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

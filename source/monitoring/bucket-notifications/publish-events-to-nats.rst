@@ -6,6 +6,8 @@ Publish Events to NATS
 
 .. default-domain:: minio
 
+.. |ARN| replace:: ``arn:minio:sqs::primary:nats``
+
 .. contents:: Table of Contents
    :local:
    :depth: 1
@@ -171,6 +173,10 @@ target similar to the following:
 
 You must specify the ARN resource when configuring bucket notifications with
 the associated NATS deployment as a target.
+
+.. include:: /includes/common-bucket-notifications.rst
+   :start-after: start-bucket-notification-find-arn
+   :end-before: end-bucket-notification-find-arn
 
 3) Configure Bucket Notifications using the NATS Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -6,6 +6,8 @@ Publish Events to MQTT
 
 .. default-domain:: minio
 
+.. |ARN| replace:: ``arn:minio:sqs::primary:mqtt``
+
 .. contents:: Table of Contents
    :local:
    :depth: 1
@@ -185,7 +187,11 @@ target similar to the following:
 You must specify the ARN resource when configuring bucket notifications with
 the associated MQTT deployment as a target.
 
-3) Configure Bucket Notifications using the MQTT Endpoint as a Target
+.. include:: /includes/common-bucket-notifications.rst
+   :start-after: start-bucket-notification-find-arn
+   :end-before: end-bucket-notification-find-arn
+
+1) Configure Bucket Notifications using the MQTT Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the :mc-cmd:`mc event add` command to add a new bucket notification 
