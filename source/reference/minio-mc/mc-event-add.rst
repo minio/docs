@@ -191,7 +191,7 @@ corresponding :ref:`S3 events <minio-bucket-notifications-event-types>`:
    :widths: 30 70
    :width: 100%
 
-   * - Supported Vluae
+   * - Supported Value
      - Corresponding S3 Events
 
    * - ``put``

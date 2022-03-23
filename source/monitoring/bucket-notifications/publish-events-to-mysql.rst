@@ -6,6 +6,8 @@ Publish Events to MySQL
 
 .. default-domain:: minio
 
+.. |ARN| replace:: ``arn:minio:sqs::primary:mysql``
+
 .. contents:: Table of Contents
    :local:
    :depth: 1
@@ -172,6 +174,10 @@ target similar to the following:
 You must specify the ARN resource when configuring bucket notifications with
 the associated MySQL deployment as a target.
 
+.. include:: /includes/common-bucket-notifications.rst
+   :start-after: start-bucket-notification-find-arn
+   :end-before: end-bucket-notification-find-arn
+
 3) Configure Bucket Notifications using the MySQL Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -317,7 +323,7 @@ target similar to the following:
 
    SQS ARNs: arn:minio:sqs::primary:mysql
 
-3) Validate the Changes
+4) Validate the Changes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on a bucket which has an event configuration using the updated

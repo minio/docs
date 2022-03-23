@@ -6,6 +6,8 @@ Publish Events to PostgreSQL
 
 .. default-domain:: minio
 
+.. |ARN| replace:: ``arn:minio:sqs::primary:postgresql``
+
 .. contents:: Table of Contents
    :local:
    :depth: 1
@@ -175,6 +177,10 @@ target similar to the following:
 You must specify the ARN resource when configuring bucket notifications with
 the associated PostgreSQL deployment as a target.
 
+.. include:: /includes/common-bucket-notifications.rst
+   :start-after: start-bucket-notification-find-arn
+   :end-before: end-bucket-notification-find-arn
+
 3) Configure Bucket Notifications using the PostgreSQL Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -188,8 +194,7 @@ event with the configured PostgreSQL service as a target:
      --event EVENTS
 
 - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment.
-- Replace ``BUCKET`` with the name of the bucket in which to configure the 
-  event.
+- Replace ``BUCKET`` with the name of the bucket in which to configure the ßevent.
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which MinIO triggers notifications.
 
@@ -322,7 +327,7 @@ target similar to the following:
 
    SQS ARNs: arn:minio:sqs::primary:postgresql
 
-3) Validate the Changes
+4) Validate the Changes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on a bucket which has an event configuration using the updated

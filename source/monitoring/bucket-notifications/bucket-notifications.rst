@@ -10,9 +10,8 @@ Bucket Notifications
    :local:
    :depth: 2
 
-MinIO bucket notifications allow administrators to send notifications to 
-supported external services on certain object or bucket events. MinIO 
-supports bucket and object-level S3 events similar to the 
+MinIO bucket notifications allow administrators to send notifications to supported external services on certain object or bucket events. 
+MinIO supports bucket and object-level S3 events similar to the 
 :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`.
 
 Supported Notification Targets
@@ -35,8 +34,7 @@ MinIO supports publishing event notifications to the following targets:
        See :ref:`minio-bucket-notifications-publish-amqp` for a tutorial.
 
    * - :guilabel:`MQTT`
-     - Publish notifications to an `MQTT <https://www.mqtt.org/>`__  
-       service.
+     - Publish notifications to an `MQTT <https://www.mqtt.org/>`__ service.
 
        See :ref:`minio-bucket-notifications-publish-mqtt` for a tutorial.
 
@@ -50,13 +48,10 @@ MinIO supports publishing event notifications to the following targets:
 
        See :ref:`minio-bucket-notifications-publish-nsq` for a tutorial
 
-
    * - :guilabel:`Elasticsearch`
-     - Publish notifications to a `Elasticsearch <https://www.elastic.co/>`__ 
-       service.
+     - Publish notifications to a `Elasticsearch <https://www.elastic.co/>`__ service.
 
-       See :ref:`minio-bucket-notifications-publish-elasticsearch` for a
-       tutorial.
+       See :ref:`minio-bucket-notifications-publish-elasticsearch` for a tutorial.
 
    * - :guilabel:`Kafka`
      - Publish notifications to a `Kafka <https://kafka.apache.org/>`__ service.
@@ -69,8 +64,7 @@ MinIO supports publishing event notifications to the following targets:
        See :ref:`minio-bucket-notifications-publish-mysql` for a tutorial.
 
    * - :guilabel:`PostgreSQL`
-     - Publish notifications to a `PostgreSQL <https://www.postgresql.org/>`__
-       service.
+     - Publish notifications to a `PostgreSQL <https://www.postgresql.org/>`__ service.
 
        See :ref:`minio-bucket-notifications-publish-postgresql` for a tutorial.
 
@@ -91,9 +85,8 @@ MinIO supports publishing event notifications to the following targets:
 Supported S3 Event Types
 ------------------------
 
-MinIO bucket notifications are compatible with 
-:s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`. This 
-section lists all supported events.
+MinIO bucket notifications are compatible with :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`. 
+This section lists all supported events.
 
 Object Events
 ~~~~~~~~~~~~~
@@ -132,8 +125,7 @@ Specify the wildcard ``*`` character to select all events related to a prefix:
 Replication Events
 ~~~~~~~~~~~~~~~~~~
 
-MinIO supports triggering notifications on the following S3 replication 
-events:
+MinIO supports triggering notifications on the following S3 replication events:
 
 .. data:: s3:Replication:OperationCompletedReplication
 .. data:: s3:Replication:OperationFailedReplication
@@ -148,8 +140,7 @@ Specify the wildcard ``*`` character to select all ``s3:Replication`` events:
 ILM Transition Events
 ~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports triggering notifications on the following S3 ILM transition
-events:
+MinIO supports triggering notifications on the following S3 ILM transition events:
 
 .. data:: s3:ObjectRestore:Post
 .. data:: s3:ObjectRestore:Completed
@@ -170,8 +161,7 @@ Global Events
 ~~~~~~~~~~~~~
 
 MinIO supports triggering notifications on the following global events. 
-You can only listen to these events through the :legacy:`ListenNotification 
-<golang-client-api-reference.html#ListenNotification>` API:
+You can only listen to these events through the :legacy:`ListenNotification <golang-client-api-reference.html#ListenNotification>` API:
 
 .. data:: s3:BucketCreated
 .. data:: s3:BucketRemoved
