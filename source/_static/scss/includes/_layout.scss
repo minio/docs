@@ -43,3 +43,20 @@
     top: 0;
     overflow: scroll;
 }
+
+// Keep only the main content when the page is loaded inside an iframe.
+// Currently we load certain pages inside iframes for PathFactory analytics.
+.inside-iframe {
+    .header,
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        height: 100vh;
+    }
+
+    .content__main {
+        padding-left: $content-padding;
+    }
+}
