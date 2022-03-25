@@ -1,4 +1,11 @@
 window.addEventListener("DOMContentLoaded", (event) => {
+   // Detect parent iframe.
+   // This is required to hide the navigation links when viewed via PathFactory for analytics purposes
+   if (window.location !== window.parent.location) {
+      document.body.classList.add('inside-iframe');
+   }
+   
+   // Table of contents
 	var topic = document.getElementById("table-of-contents");
 	if (topic != null) {
 		document
