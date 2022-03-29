@@ -19,9 +19,9 @@ Select the card corresponding to the platform on which you want to deploy MinIO.
 
       Linux image to go here
 
-   .. grid-item-card:: OSX
+   .. grid-item-card:: MacOS
       :link-type: ref
-      :link: quickstart-osx
+      :link: quickstart-macos
 
       OSX image to go here
 
@@ -55,7 +55,7 @@ Select the card corresponding to the platform on which you want to deploy MinIO.
    
    /quickstart/linux
    /quickstart/container
-   /quickstart/osx
+   /quickstart/macos
    /quickstart/windows
    /quickstart/k8s
    /quickstart/k8s-openshift
