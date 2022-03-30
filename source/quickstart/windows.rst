@@ -8,10 +8,10 @@ Quickstart for Windows
 
 .. |OS| replace:: Windows
 
-Use the procedures on this page to deploy MinIO in :guilabel:`Standalone Mode` on a single local |OS| harddrive as a single MinIO server process (what we call "filesystem mode") with a :ref:`subset of S3 features <minio-installation-comparison>`.
-The MinIO server provides an S3 access layer to the drive or volume with no :ref:`erasure coding <minio-erasure-coding>` or associated features.
+This procedure deploys a :ref:`Standalone <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and it's S3-compatible API layer. 
 
-Use :guilabel:`Standalone Mode` for early development and evaluation environments.
+Standalone deployments (also called "filesystem mode") support a :ref:`subset of MinIO features <minio-installation-comparison>` where redundancy or availability are dependent entirely on the underlying drive or volume.
+
 For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
 
 Prerequisites
@@ -46,7 +46,7 @@ Procedure
    .. code-block::
       :class: copyable
 
-      .\minio.exe server C:\minio
+      .\minio.exe server C:\minio --console-address :9090
 
    The :mc:`minio server` process prints its output to the system console, similar to the following:
 
@@ -56,7 +56,7 @@ Procedure
       RootUser: minioadmin
       RootPass: minioadmin
 
-      Console: http://192.0.2.10:9001 http://127.0.0.1:9001
+      Console: http://192.0.2.10:9090 http://127.0.0.1:9090
       RootUser: minioadmin
       RootPass: minioadmin
 
@@ -73,7 +73,7 @@ Procedure
 #. Connect your Browser to the MinIO Server
 
    Access the :ref:`minio-console` by going to a browser (such as Microsoft Edge) and going to ``http://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
-   For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
+   For example, :guilabel:`Console: http://192.0.2.10:9090 http://127.0.0.1:9090` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 
@@ -111,7 +111,7 @@ Procedure
 
       \path\to\mc.exe --help
       
-   Use :mc-cmd:`mc.exe alias set` to quickly authenticate and connect to the MinIO deployment.
+   Use :mc-cmd:`mc.exe alias set <mc alias set>` to quickly authenticate and connect to the MinIO deployment.
 
    .. code-block:: shell
       :class: copyable
@@ -119,7 +119,7 @@ Procedure
       mc.exe alias set local http://127.0.0.1:9000 minioadmin minioadmin
       mc.exe admin info local
 
-   The :mc-cmd:`mc.exe alias set` takes four arguments:
+   The :mc-cmd:`mc.exe alias set <mc alias set>` takes four arguments:
 
    - The name of the alias
    - The hostname or IP address and port of the MinIO server

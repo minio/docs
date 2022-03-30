@@ -18,20 +18,12 @@ MinIO supports two deployment modes: :guilabel:`Standalone` and
 :guilabel:`Distributed`:
 
 Standalone Deployments
-   A single MinIO server with a single storage volume or folder. Standalone
-   deployments are best suited for evaluation and initial development of
-   applications using MinIO for object storage, *or* for providing an S3 access
-   layer to single storage volume. Standalone deployments do not provide access
-   to the full set of MinIO's advanced S3 features and functionality.
+   A single MinIO server with a single storage volume or folder. Standalone deployments are best suited for evaluation and initial development of applications using MinIO for object storage, *or* for providing an S3 access layer to single storage volume. Standalone deployments do not provide access to the full set of MinIO's advanced S3 features and functionality - specifically those dependent on :ref:`Erasure Coding <minio-erasure-coding>`.
 
 Distributed Deployments
-   One or more MinIO servers with *at least* four total storage volumes across
-   all servers. Distributed deployments are best for production environments and
-   workloads and support all of MinIO's core and advanced S3 features and
-   functionality.
+   One or more MinIO servers with *at least* four total storage volumes across all servers. Distributed deployments are best for production environments and workloads and support all of MinIO's core and advanced S3 features and functionality.
 
-   MinIO recommends a baseline topology of 4 nodes with 4 drives each 
-   for production environments.
+   MinIO recommends a baseline topology of 4 nodes with 4 drives each for production environments.
 
 .. _minio-installation-comparison:
 

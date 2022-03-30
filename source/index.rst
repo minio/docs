@@ -41,94 +41,68 @@ for complete documentation on the available :mc:`mc` commands.
 Quickstart
 ----------
 
-The following steps deploys MinIO in filesystem mode with a single folder or
-disk on the local host. This deployment is best used for initial evaluation of
-MinIO S3-compatible object storage. Filesystem mode does not support features
-such as versioning and replication.
+Select the card corresponding to the platform on which you want to deploy MinIO to display instructions for deploying a :ref:`Standalone <minio-installation-comparison>` MinIO server appropriate for early development and evaluation environments.
 
-1\) Create a Data Folder
-   Create a folder on the local drive for MinIO to use for object storage
-   operations. For example:
+.. grid:: 3
+   :gutter: 3
 
-   .. code-block:: shell
-      :class: copyable
-
-      mkdir /mnt/data
-      sudo chmod -R 775 /mnt/data
+   .. grid-item-card:: Linux
+      :link-type: ref
+      :link: quickstart-linux
       
-2\) Download MinIO Server and Commandline Tools
-   Visit `https://min.io/downloads <https://min.io/downloads?ref=docs>`__ and
-   following the instructions for your host operating system to download and
-   configure the :mc:`minio` and :mc:`mc` binaries.  Consider adding the
-   ``minio`` and ``mc`` binaries to the operating system PATH for simplified
-   operations.
+      .. image:: /images/logos/linux.svg
+         :width: 100px
+         :height: 100px
+         :alt: Linux Quickstart
+         :align: center
+         :class: noshadow
 
-   Follow the instructions on the download site to start the :mc:`minio server`
-   process. For example, the following command starts the
-   :mc:`minio server` using the created directory:
+   .. grid-item-card:: MacOS
+      :link-type: ref
+      :link: quickstart-macos
+      
+      .. image:: /images/logos/macos.svg
+         :width: 100px
+         :height: 100px
+         :alt: MacOS Quickstart
+         :align: center
+         :class: noshadow
 
-   .. code-block:: shell
-      :class: copyable
+   .. grid-item-card:: Windows
+      :link-type: ref
+      :link: quickstart-windows
+      
+      .. image:: /images/logos/windows.svg
+         :width: 100px
+         :height: 100px
+         :alt: Windows Quickstart
+         :align: center
+         :class: noshadow
 
-      export MINIO_ROOT_USER=myminioaccesskey
-      export MINIO_ROOT_PASSWORD=myminiosecretkey
+   .. grid-item-card:: Kubernetes (Generic)
+      :link-type: ref
+      :link: quickstart-kubernetes
+      
+      .. image:: /images/logos/kubernetes.svg
+         :width: 100px
+         :height: 100px
+         :alt: Kubernetes Quickstart
+         :align: center
+         :class: noshadow
 
-      minio server /mnt/data
+   .. grid-item-card:: Docker / Podman
+      :link-type: ref
+      :link: quickstart-container
+      
+      .. image:: /images/logos/docker.svg
+         :width: 100px
+         :height: 100px
+         :alt: Docker Quickstart
+         :align: center
+         :class: noshadow
+      
 
-   .. list-table::
-      :stub-columns: 1
-      :widths: 30 60
-      :width: 100%
-
-      * - :envvar:`MINIO_ROOT_USER`
-        - The :ref:`root user <minio-users-root>` access key. Replace the
-          sample value with a long, random, and unique string.
-
-      * - :envvar:`MINIO_ROOT_PASSWORD`
-        - The :ref:`root user <minio-users-root>` secret key. Replace the
-          sample value with a long, random, and unique string.
-
-   The output resembles the following:
-
-   .. code-block:: shell
-
-      API: http://127.0.0.1:9000      
-      RootUser: minioadmin
-      RootPass: minioadmin
-      Region:   us-east-1
-      Console: http://127.0.0.1:64518 
-      RootUser: minioadmin
-      RootPass: minioadmin
-      Command-line: https://docs.min.io/docs/minio-client-quickstart-guide
-         $ mc alias set myminio http://127.0.0.1:9000 minioadmin minioadmin
-      Documentation: https://docs.min.io
-
-   Applications should use one of the addresses listed in the :guilabel:`API`
-   key for connecting to and performing operations on the MinIO Tenant. 
-   For early development and application, applications can authenticate
-   using the :guilabel:`RootUser` and :guilabel:`RootPass` credentials.
-   For long-term development and production, create dedicated users. 
-   See :doc:`/security/iam-overview` for more information.
-
-   You can also use the :mc:`mc` commandline tool to perform operations on the
-   MinIO server. Use :mc:`mc alias set` to update the ``myminio`` alias with
-   the access key and secret key set on the MinIO server.
-
-3\) Open MinIO Console
-   Open your browser and http://127.0.0.1:9000 to open the 
-   :ref:`MinIO Console <minio-console>` login page.
-   
-   Log in with the :guilabel:`Root User` and :guilabel:`Root Pass` from the
-   previous step.
-   
-   .. image:: /images/minio-console-dashboard.png
-      :width: 600px
-      :alt: MinIO Console Dashboard displaying Monitoring Data
-      :align: center
-
-   You can use the MinIO Console for general administration tasks like
-   Identity and Access Management, Metrics and Log Monitoring, or 
-   Server Configuration. See :ref:`minio-console` for more information.
+:subscript:`All trademarks or logos displayed on this page are the property of their respective owners, and constitute neither an endorsement nor a recommendation of those organizations. In addition, such use of trademarks or links to the web sites of third-party organizations is not intended to imply, directly or indirectly, that those organizations endorse or have any affiliation with MinIO.`
 
 Licensing
 ---------

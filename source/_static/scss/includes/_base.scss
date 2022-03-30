@@ -199,8 +199,12 @@ button.toggle-button {
 }
 
 .content__main {
-    img {
+    a img {
         box-shadow: 0px 0px 5px lightgray;
+    }
+
+    a.noshadow img {
+        box-shadow: none;
     }
 }
 

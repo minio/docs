@@ -6,15 +6,19 @@ Quickstart for Containers
 
 .. default-domain:: minio
 
-This page deploys a standalone MinIO deployment as a as a container with an attached persistent volume for use with early development and evaluation environments.
+.. |OS| replace:: Docker or Podman
+
+This procedure deploys a :ref:`Standalone <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and it's S3-compatible API layer. 
+
+Standalone deployments (also called "filesystem mode") support a :ref:`subset of MinIO features <minio-installation-comparison>` where redundancy or availability are dependent entirely on the underlying drive or volume.
 
 For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
 
 Prerequisites
 -------------
 
-- `Podman <https://podman.io/getting-started/installation.html>`_ or `Docker <https://docs.docker.com/get-docker/>`_ installed
-- Read, write, and delete access to the folder or drive used for the persistent volume
+- `Podman <https://podman.io/getting-started/installation.html>`_ or `Docker <https://docs.docker.com/get-docker/>`_ installed.
+- Read, write, and delete access to the folder or drive used for the persistent volume.
 
 Procedure
 ---------
@@ -38,11 +42,11 @@ Procedure
 
                podman run \
                   -p 9000:9000 \
-                  -p 9001:9001 \
+                  -p 9090:9090 \
                   -v ~/minio/data:/data \
                   -e "MINIO_ROOT_USER=ROOTNAME`" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
-                  quay.io/minio/minio server /data --console-address ":9001"
+                  quay.io/minio/minio server /data --console-address ":9090"
    
             The example above works this way:
    
@@ -63,11 +67,11 @@ Procedure
    
                podman run \
                   -p 9000:9000 \
-                  -p 9001:9001 \
+                  -p 9090:9090 \
                   -v D:\data:/data \
                   -e "MINIO_ROOT_USER=ROOTNAME`" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
-                  quay.io/minio/minio server /data --console-address ":9001"
+                  quay.io/minio/minio server /data --console-address ":9090"
    
             The example above works this way:
    
@@ -94,12 +98,12 @@ Procedure
    
                docker run \
                   -p 9000:9000 \
-                  -p 9001:9001 \
+                  -p 9090:9090 \
                   --name minio \
                   -v ~/minio/data:/data \
                   -e "MINIO_ROOT_USER=ROOTNAME`" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
-                  quay.io/minio/minio server /data --console-address ":9001"
+                  quay.io/minio/minio server /data --console-address ":9090"
          
             The example above works this way:
    
@@ -121,12 +125,12 @@ Procedure
    
                docker run \
                   -p 9000:9000 \
-                  -p 9001:9001 \
+                  -p 9090:9090 \
                   --name minio1 \
                   -v D:\data:/data \
                   -e "MINIO_ROOT_USER=ROOTUSER" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
-                  quay.io/minio/minio server /data --console-address ":9001"
+                  quay.io/minio/minio server /data --console-address ":9090"
                
             The example above works this way:
    
@@ -153,13 +157,13 @@ Procedure
    
                docker run \
                   -p 9000:9000 \
-                  -p 9001:9001 \
+                  -p 9090:9090 \
                   --user $(id -u):$(id -g) \
                   --name minio1 \
                   -e "MINIO_ROOT_USER=ROOTUSER" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
                   -v ${HOME}/minio/data:/data \
-                  quay.io/minio/minio server /data --console-address ":9001"
+                  quay.io/minio/minio server /data --console-address ":9090"
          
             The example above works this way:
    
@@ -186,13 +190,13 @@ Procedure
    
                docker run \
                   -p 9000:9000 \
-                  -p 9001:9001 \
+                  -p 9090:9090 \
                   --name minio1 \
                   --security-opt "credentialspec=file://path/to/file.json"
                   -e "MINIO_ROOT_USER=ROOTUSER" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
                   -v D:\data:/data \
-                  quay.io/minio/minio server /data --console-address ":9001"
+                  quay.io/minio/minio server /data --console-address ":9090"
    
             The example above works this way:
    
@@ -210,7 +214,7 @@ Procedure
 #. Connect your Browser to the MinIO Server
 
    Access the :ref:`minio-console` by going to a browser and going to ``http://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
-   For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
+   For example, :guilabel:`Console: http://192.0.2.10:9090 http://127.0.0.1:9090` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 
@@ -277,36 +281,36 @@ Procedure
       
       .. tab-set::
       
-         .. tab-item:: Binary
-      
-            .. grid:: 2
-
-               .. grid-item-card:: Apple Silicon
-           
-                  .. code-block:: shell
-                     :class: copyable
-
-                     curl -O https://dl.min.io/client/mc/release/darwin-arm64/mc
-                     chmod +x mc
-                     sudo mv mc /usr/local/bin/mc
-
-               .. grid-item-card:: Intel
-                        
-                  .. code-block:: shell
-                     :class: copyable
-
-                     curl -O https://dl.min.io/client/mc/release/darwin-amd64/mc
-                     chmod +x mc
-                     sudo mv mc /usr/local/bin/mc
-
          .. tab-item:: Homebrew
       
-            Run the following commands to install the latest stable MinIO Client package using `Homebrew <https://brew.sh>`_.
+            Run the following command to install the latest stable MinIO Client package using `Homebrew <https://brew.sh>`_.
       
             .. code-block:: shell
                :class: copyable
       
                brew install minio/stable/mc
+
+         .. tab-item:: Binary (arm64)
+      
+            Run the following commands to install the latest stable MinIO Client package using a binary package for Apple chips.
+
+            .. code-block:: shell
+               :class: copyable
+
+               curl -O https://dl.min.io/client/mc/release/darwin-arm64/mc
+               chmod +x mc
+               sudo mv mc /usr/local/bin/mc
+
+         .. tab-item:: Binary (amd64)
+                       
+            Run the following commands to install the latest stable MinIO Client package using a binary package for Intel chips.
+
+            .. code-block:: shell
+               :class: copyable
+
+               curl -O https://dl.min.io/client/mc/release/darwin-amd64/mc
+               chmod +x mc
+               sudo mv mc /usr/local/bin/mc
       
       Use :mc-cmd:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
       

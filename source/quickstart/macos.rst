@@ -8,10 +8,10 @@ Quickstart for Mac OSX
 
 .. |OS| replace:: MacOS
 
-Use the procedures on this page to deploy MinIO in :guilabel:`Standalone Mode` on a single local |OS| harddrive as a single MinIO server process (what we call "filesystem mode") with a :ref:`subset of S3 features<minio-installation-comparison>`.
-The MinIO server provides an S3 access layer to the drive or volume with no :ref:`erasure coding <minio-erasure-coding>` or associated features.
+This procedure deploys a :ref:`Standalone <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and it's S3-compatible API layer. 
 
-Use :guilabel:`Standalone Mode` for early development and evaluation environments.
+Standalone deployments (also called "filesystem mode") support a :ref:`subset of MinIO features <minio-installation-comparison>` where redundancy or availability are dependent entirely on the underlying drive or volume.
+
 For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
 
 Prerequisites
@@ -27,28 +27,6 @@ Procedure
 
    .. tab-set::
    
-      .. tab-item:: Binary
-         
-         Open a Terminal, then use the following commands to download the standalone MinIO server for MacOS and make it executable.
-
-         .. grid:: 2
-
-            .. grid-item-card:: Apple Silicon
-
-               .. code-block:: shell
-                  :class: copyable
-
-                  curl -O https://dl.min.io/server/minio/release/darwin-arm64/minio
-                  chmod +x minio   
-                 
-            .. grid-item-card:: Intel
-            
-               .. code-block:: shell
-                  :class: copyable
-
-                  curl -O https://dl.min.io/server/minio/release/darwin-amd64/minio
-                  chmod +x minio
-
       .. tab-item:: Homebrew
 
          Open a Terminal and run the following command to install the latest stable MinIO package using `Homebrew <https://brew.sh>`_.
@@ -68,6 +46,26 @@ Procedure
                brew uninstall minio
                brew install minio/stable/minio
 
+      .. tab-item:: Binary - arm64
+         
+         Open a Terminal, then use the following commands to download the standalone MinIO server for MacOS and make it executable.
+
+            .. code-block:: shell
+               :class: copyable
+
+               curl -O https://dl.min.io/server/minio/release/darwin-arm64/minio
+               chmod +x minio   
+
+      .. tab-item:: Binary - amd64
+         
+         Open a Terminal, then use the following commands to download the standalone MinIO server for MacOS and make it executable.
+
+            .. code-block:: shell
+               :class: copyable
+
+               curl -O https://dl.min.io/server/minio/release/darwin-amd64/minio
+               chmod +x minio
+ 
 #. Launch the :mc:`minio server`
 
    From the Terminal, use this command to start a local MinIO instance in the ``~/data`` folder.
@@ -76,7 +74,7 @@ Procedure
    .. code-block:: shell
       :class: copyable
 
-      ~/minio server ~/data
+      ~/minio server ~/data --console-address :9090
 
    If you installed with Homebrew, do not include the ``~/`` at the beginning of the command.
 
@@ -88,7 +86,7 @@ Procedure
       RootUser: minioadmin
       RootPass: minioadmin
 
-      Console: http://192.0.2.10:9001 http://127.0.0.1:9001
+      Console: http://192.0.2.10:9090 http://127.0.0.1:9090
       RootUser: minioadmin
       RootPass: minioadmin
 
@@ -102,7 +100,7 @@ Procedure
 #. Connect your Browser to the MinIO Server
 
    Access the :ref:`minio-console` by going to a browser (such as Safari) and going to ``https://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
-   For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
+   For example, :guilabel:`Console: http://192.0.2.10:9090 http://127.0.0.1:9090` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 
@@ -130,36 +128,6 @@ Procedure
 
    .. tab-set::
 
-      .. tab-item:: Binary
-
-         Download the standalone MinIO server for MacOS and make it executable.
-
-         .. grid:: 2
-
-            .. grid-item-card:: Apple Silicon
-           
-               .. code-block:: shell
-                  :class: copyable
-
-                  curl -O https://dl.min.io/client/mc/release/darwin-arm64/mc
-                  chmod +x mc
-                  sudo mv mc /usr/local/bin/mc
-   
-            .. grid-item-card:: Intel
-                        
-               .. code-block:: shell
-                  :class: copyable
-
-                  curl -O https://dl.min.io/client/mc/release/darwin-amd64/mc
-                  chmod +x mc
-                  sudo mv mc /usr/local/bin/mc
-
-         To use the command, run 
-         
-         .. code-block:: shell
-            
-            mc {command} {flag}
-
       .. tab-item:: Homebrew
 
          Run the following commands to install the latest stable MinIO Client package using `Homebrew <https://brew.sh>`_.
@@ -175,6 +143,40 @@ Procedure
             
             mc {command} {flag}
 
+      .. tab-item:: Binary (arm64)
+
+         Download the standalone MinIO server for MacOS and make it executable.
+           
+         .. code-block:: shell
+            :class: copyable
+
+            curl -O https://dl.min.io/client/mc/release/darwin-arm64/mc
+            chmod +x mc
+            sudo mv mc /usr/local/bin/mc
+   
+         To use the command, run 
+         
+         .. code-block:: shell
+            
+            mc {command} {flag}
+
+      .. tab-item:: Binary (amd64)
+
+         Download the standalone MinIO server for MacOS and make it executable.     
+
+         .. code-block:: shell
+            :class: copyable
+
+            curl -O https://dl.min.io/client/mc/release/darwin-amd64/mc
+            chmod +x mc
+            sudo mv mc /usr/local/bin/mc
+
+         To use the command, run 
+         
+         .. code-block:: shell
+            
+            mc {command} {flag}
+            
    Use :mc-cmd:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
 
    .. code-block:: shell
