@@ -21,6 +21,7 @@
       The ARN you need is the value of that key that matches the ``<IDENTIFIER>`` you specified.
       
       For example, |ARN|.
+
    **Use jq to parse the JSON for the value**
     
    #. `Install jq <https://stedolan.github.io/jq/>`_
