@@ -146,9 +146,12 @@ class MinioMCObject(ObjectDescription):
         signode += addnodes.desc_addname(str(prefix) + "." + command_name + ".")
 
         if (alias):
-            signode += addnodes.desc_name(name + ", " + alias, name + ", " + alias)
-        else:
-            signode += addnodes.desc_name(name,name)
+            name = name + ", " + alias
+        
+        if ('fullpath' in self.options):
+            name = command_name + " " + name
+
+        signode += addnodes.desc_name(name,name)
 
        
         return fullname, prefix
