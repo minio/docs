@@ -62,11 +62,7 @@ service accounts have the same or fewer permissions as the parents,
 administrators can focus on managing the top-level parent users without
 micro-managing generated service accounts.
 
-Service accounts creation and management is only available through the
-:minio-git:`MinIO Console <console>`. After logging into the Console, click
-:guilabel:`Account` from the left navigation to view all service accounts
-associated to the authenticated user. Click :guilabel:`Create Service Account`
-to create new service accounts.
+You can create service accounts using either the :ref:`MinIO Console <minio-console>` *or* by using the :mc-cmd:`mc admin user svcacct add` command.
 
 .. admonition:: Service Accounts are for Programmatic Access
    :class: dropdown, note

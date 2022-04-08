@@ -80,12 +80,7 @@ MinIO provides an example Go application
 :minio-git:`web-identity.go <minio/blob/master/docs/sts/web-identity.go>` that
 handles the full login flow.
 
-As an alternative to implementing this application flow, application owners can
-log into the :minio-git:`MinIO Console <console>` using their external
-user credentials and create :ref:`service accounts <minio-idp-service-account>`
-for their applications. Service accounts are long-lived credentials which
-inherit their privileges from the parent user. The parent user can further
-restrict those privileges while creating the service account. 
+OIDC users can alternatively create :ref:`service accounts <minio-idp-service-account>` associated to their AD/LDAP user. Service accounts are long-lived credentials which inherit their privileges from the parent user. The parent user can further restrict those privileges while creating the service account. To create a new service account, log into the :ref:`MinIO Console <minio-console>` using the OIDC-managed user credentials. From the :guilabel:`Identity` section of the left navigation, select :guilabel:`Service Accounts` followed by the :guilabel:`Create service account +` button.
 
 .. _minio-external-identity-management-openid-access-control:
 
