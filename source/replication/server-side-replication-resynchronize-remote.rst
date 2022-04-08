@@ -11,24 +11,18 @@ Resynchronize Bucket from Remote Replica
    :local:
    :depth: 1
 
-The procedure on this page resynchronizes the contents of a MinIO
-bucket using a healthy replication remote. Resynchronization supports
-recovery after partial or total loss of data on a MinIO deployment in a 
-replica configuration.
+The procedure on this page resynchronizes the contents of a MinIO bucket using a healthy replication remote. Resynchronization supports recovery after partial or total loss of data on a MinIO deployment in a replica configuration.
 
-For example, consider a MinIO active-active replication configuration similar
-to the following:
+For example, consider a MinIO active-active replication configuration similar to the following:
 
 .. image:: /images/replication/active-active-twoway-replication.svg
    :width: 600px
    :alt: Active-Active Replication synchronizes data between two remote deployments.
    :align: center
 
-Resynchronization allows using the healthy data on one of the participating
-MinIO deployments as the source for rebuilding the other deployment.
+Resynchronization allows using the healthy data on one of the participating MinIO deployments as the source for rebuilding the other deployment.
 
-Resynchronization is a per-bucket process. You must repeat resynchronization
-for each bucket on the remote which suffered partial or total data loss.
+Resynchronization is a per-bucket process. You must repeat resynchronization for each bucket on the remote which suffered partial or total data loss.
 
 .. admonition:: Professional Support during BC/DR Operations
    :class: important
@@ -45,13 +39,9 @@ Requirements
 MinIO Deployments Must Be Online
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Resynchronization requires both the source and remote deployments be online and
-able to accept read and write operations. The source *must* have 
-complete network connectivity to the remote.
+Resynchronization requires both the source and target deployments be online and able to accept read and write operations. The source *must* have complete network connectivity to the remote.
 
-The remote deployment may be "unhealthy" in that it has suffered partial or
-total data loss. Resynchronization addresses the data loss as long as both
-source and destination maintain connectivity.
+The remote deployment may be "unhealthy" in that it has suffered partial or total data loss. Resynchronization addresses the data loss as long as both source and destination maintain connectivity.
 
 Resynchronization Requires Existing Replication Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,22 +85,15 @@ Considerations
 Resynchronization Requires Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Resynchronization is a background processes that continually checks objects in
-the source MinIO bucket and copies them to the remote as-needed. The time
-required for replication to complete may vary depending on the number and size
-of objects, the throughput to the remote MinIO deployment, and the load on the
-source MinIO deployment. Total time for completion is generally not predictable
-due to these variables.
+Resynchronization is a background processes that continually checks objects in the source MinIO bucket and copies them to the remote as-needed. The time required for replication to complete may vary depending on the number and size of objects, the throughput to the remote MinIO deployment, and the load on the source MinIO deployment. Total time for completion is generally not predictable due to these variables.
 
-MinIO recommends configuring load balancers or proxies to direct traffic only
-to the healthy cluster until synchronization completes. The following commands
-can provide insight into the resynchronization status:
+MinIO recommends configuring load balancers or proxies to direct traffic only to the healthy cluster until synchronization completes. The following commands can provide insight into the resynchronization status:
 
-- :mc-cmd:`mc replicate status` on the source and remote to track total 
-  replicated data.
+- :mc-cmd:`mc replicate resync status` on the source to track the resynchronization progress.
 
-- Run ``mc ls -r --versions ALIAS/BUCKET | wc -l`` against both source and
-  remote to validate the total number of objects and object versions on each.
+- :mc-cmd:`mc replicate status` on the source and remote to track normal replication data.
+
+- Run ``mc ls -r --versions ALIAS/BUCKET | wc -l`` against both source and remote to validate the total number of objects and object versions on each.
 
 Resynchronize Objects after Data Loss
 -------------------------------------
@@ -162,8 +145,7 @@ Run the :mc-cmd:`mc replicate resync start` command to begin the resynchronizati
 - Replace the ``BUCKET`` with the name of the bucket on the healthy ``SOURCE`` MinIO
   deployment.
 
-The command returns a resynchronization job ID indicating that the process has
-begun.
+The command returns a resynchronization job ID indicating that the process has begun.
 
 3) Monitor Resynchronization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
