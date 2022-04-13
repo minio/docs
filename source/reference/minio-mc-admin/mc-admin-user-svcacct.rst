@@ -1,3 +1,5 @@
+.. _minio-mc-admin-user-svcacct:
+
 =========================
 ``mc admin user svcacct``
 =========================

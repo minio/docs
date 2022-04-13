@@ -1,3 +1,5 @@
+.. _minio-mc-admin-config:
+
 ===================
 ``mc admin config``
 ===================

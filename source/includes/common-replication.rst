@@ -95,3 +95,33 @@ Bucket replication requires specific permissions on the source and destination d
 See :mc:`mc admin user`, :mc:`mc admin user svcacct`, and :mc:`mc admin policy` for more complete documentation on adding users, service accounts, and policies to a MinIO deployment.
 
 .. end-replication-required-permissions
+
+.. start-mc-admin-replicate-what-replicates
+
+Each MinIO deployment ("peer site") synchronizes the following changes across the other peer sites:
+
+- Creation, modification, and deletion of buckets and objects, including
+
+  - Bucket and Object Configurations
+  - :ref:`Policies <minio-policy>`
+  - :mc-cmd:`mc tag set`
+  - :ref:`Locks <minio-object-locking>`, including retention and legal hold configurations
+  - :ref:`Encryption settings <minio-encryption-overview>`
+
+- Creation and deletion of IAM users, groups, policies, and policy mappings to users or groups (for LDAP users or groups)
+- Creation of Security Token Service (STS) credentials for session tokens verifiable from the local ``root`` credentials
+- Creation and deletion of :ref:`service accounts <minio-mc-admin-user-svcacct>` (except those owned by the ``root`` user)
+
+Site replication enables :ref:`bucket versioning <minio-bucket-versioning>` for all new and existing buckets on all replicated sites.
+
+.. end-mc-admin-replicate-what-replicates
+
+.. start-mc-admin-replicate-what-does-not-replicate
+
+MinIO deployments in a site replication configuration do *not* replicate the creation or modification of the following items:
+
+- :ref:`Bucket notifications <minio-bucket-notifications>`
+- :ref:`Lifecycle management (ILM) configurations <minio-lifecycle-management>`
+- :ref:`Site configuration settings <minio-mc-admin-config>`
+
+.. end-mc-admin-replicate-what-does-not-replicate
