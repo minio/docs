@@ -1,3 +1,5 @@
+.. _minio-encryption-overview:
+
 ===========================
 Data and Network Encryption
 ===========================

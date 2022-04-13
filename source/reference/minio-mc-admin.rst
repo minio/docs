@@ -90,6 +90,11 @@ The following table lists :mc-cmd:`mc admin` commands:
           :start-after: start-mc-admin-prometheus-desc
           :end-before: end-mc-admin-prometheus-desc
 
+   * - :mc:`mc admin replicate`
+     - .. include:: /reference/minio-mc-admin/mc-admin-replicate.rst
+          :start-after: start-mc-admin-replicate-desc
+          :end-before: end-mc-admin-replicate-desc
+
    * - :mc:`mc admin service`
      - .. include:: /reference/minio-mc-admin/mc-admin-service.rst
           :start-after: start-mc-admin-service-desc
