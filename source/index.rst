@@ -137,7 +137,8 @@ without validating their usage do so at their own risk.
    /security/encryption-overview
    Object Retention </object-retention/minio-object-retention>
    /lifecycle-management/lifecycle-management-overview
-   /replication/replication-overview
+   /replication/bucket-replication-overview
+   /replication/site-replication-overview
    /monitoring/monitoring-overview
    /reference/minio-mc
    /reference/minio-mc-admin
