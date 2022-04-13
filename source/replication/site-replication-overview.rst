@@ -5,6 +5,12 @@
 Site Replication Overview
 =========================
 
+.. default-domain:: minio
+
+.. contents:: Table of Contents
+   :local:
+   :depth: 1
+
 Site replication allows multiple, independent MinIO sites or clusters to be configured as replicas.
 When configured this way, we refer to the replica sites as either peer sites or sites.
 
@@ -25,7 +31,7 @@ Enabling site replication on a siet of sites, the following changes apply to the
   - :ref:`Policies <minio-policy>`
   - Tags (for example, see :mc-cmd:`mc tag set`)
   - :ref:`Object-Lock <minio-object-locking>` configurations (including retention and legal hold configurations)
-  - Encryption configuration
+  - :ref:`Encryption configuration <minio-encryption-overview>`
 
 Site replication enables bucket versioning for all new and existing buckets on all replicated sites.
 
@@ -51,7 +57,7 @@ Prerequisites
 - All sites must have the same deployment credentials (for example, ``MINIO_ROOT_USER``, ``MINIO_ROOT_PASSWORD``)
 - Once configured, a site cannot be removed
 - All sites must use the same external IDP(s), if any
-- For SSE-S3 or SSE-KMS encryption via KMS, all sites must have access to a central KMS deployment. 
+- For :ref:`SSE-S3 <minio-encryption-sse-s3>` or :ref:`SSE-KMS <minio-encryption-sse-kms>` encryption via KMS, all sites must have access to a central KMS deployment. 
   This can be achieved via a central KES server or multiple KES servers (say one per site) connected via a central KMS (Vault) server.
 
 
