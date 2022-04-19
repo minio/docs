@@ -24,7 +24,7 @@ Enabling site replication on a siet of sites, the following changes apply to the
 
 - Creation and deletion of buckets and objects
 - Creation and deletion of IAM users, groups, policies, and policy mappings to users or groups
-- Creation of Secruity Token Service (STS) credentials
+- Creation of Security Token Service (STS) credentials
 - Creation and deletion of service accounts (except those owned by the ``root`` user)
 - Changes to bucket features, such as
   
