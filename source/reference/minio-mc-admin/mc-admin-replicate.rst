@@ -62,6 +62,19 @@ The :mc:`mc admin replicate` command has the following subcommands:
 Syntax
 ------
 
+Flags
+-----
+
+.. code-block:: shell
+
+   --config-dir value, -C value  path to configuration folder (default: "/Users/<user>/.mc")
+   --quiet, -q                   disable progress bar display
+   --no-color                    disable color theme
+   --json                        enable JSON lines formatted output
+   --debug                       enable debug output
+   --insecure                    disable SSL certificate verification
+   --help, -h                    show help
+
 
 
 Global Flags
