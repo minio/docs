@@ -14,10 +14,21 @@
       gtag('config', 'UA-56860620-1');
    </script>
 
-  {{ super() }}
-
+   <!-- Crazy egg analytics script -->
    <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0088/9671.js" async="async"></script>
 
+   <!-- Lucky Orange analytics script -->
+   <script type='text/javascript'>
+      window.__lo_site_id = 226538;
+      (function() {
+         var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+         wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+      }
+      )();
+   </script>
+
+   {{ super() }}
 {% endblock %}
 
 {# Override content block #}
@@ -106,6 +117,7 @@
          <div id=localtoc></div>
       </div>
       <div class="content__main">
+         <!--
          {% block alertbar -%}
             <div class="admonition important">
                <span class="alert-message">
@@ -119,6 +131,7 @@
                </span>
             </div>
          {% endblock %}
+         -->
          {% block body %} {% endblock %}
          <div class="footer">
             <div>
