@@ -157,7 +157,7 @@ Parameters
 
    Mirror object(s) newer than the specified number of days.  
    Specify a string in ``#d#hh#mm#ss`` format. 
-   For example: ``--older-than 1d2hh3mm4ss``.
+   For example: ``--newer-than 1d2hh3mm4ss``.
 
 .. mc-cmd:: --older-than
    
@@ -175,7 +175,7 @@ Parameters
 
    For example, consider an active ``mc mirror --overwrite`` synchronizing content from Source to Destination.
 
-   If an object on Source changes, ``my mirror --overwrite`` synchronizes and overwrites any matching file on Destination.
+   If an object on Source changes, ``mc mirror --overwrite`` synchronizes and overwrites any matching file on Destination.
 
    Without ``--overwrite``, if an object already exists on the Destination, the mirror process fails to synchronize that object.
    ``mc mirror`` logs an error and continues to synchronize other objects.
@@ -271,7 +271,7 @@ Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --watch` to continuously mirror fil
 .. code-block::
    :class: copyable
 
-   mc mirror FILEPATH ALIAS/PATH
+   mc mirror --watch FILEPATH ALIAS/PATH
 
 - Replace :mc-cmd:`FILEPATH <mc mirror SOURCE>` with the full file path to the directory to mirror.
 
