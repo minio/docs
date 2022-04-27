@@ -1,6 +1,5 @@
 .. _minio-site-replication-overview:
 
-
 =========================
 Site replication overview
 =========================
@@ -78,6 +77,11 @@ After enabling site replication, identity and access management (IAM) settings s
 
 #. Policy mapping for `Short Token Service (STS) users <https://docs.min.io/docs/minio-sts-quickstart-guide.html>`
 
+Site healing
+------------
+
+With site replication enabled, bucket metadata and IAM entries can heal from whichever peer site has the most updated entry.
+
 
 Prerequisites
 -------------
@@ -119,7 +123,7 @@ Configure site replication
             :alt: MinIO Console menu with the Settings heading expanded to show Site Repilication
             :align: center
       
-      #. Select **Add Sites +**
+      #. Select :guilabel:`Add Sites +``
 
          .. image:: /images/minio-console/console-settings-site-replication-add.png
             :width: 600px
@@ -205,7 +209,7 @@ The site to add must already be deployed, and it must be empty (no buckets or ob
             :alt: MinIO Console Site Replication with three sites listed
             :align: center
       
-      #. Select **Add Sites +**
+      #. Select :guilabel:`Add Sites +`
 
          .. image:: /images/minio-console/console-settings-site-replication-add.png
             :width: 600px
@@ -224,7 +228,7 @@ The site to add must already be deployed, and it must be empty (no buckets or ob
 
          To add additional sites beyond two, select the ``+`` button to the side of the last Site entry.
 
-      #. Click **Save**
+      #. Click :guilabel:`Save`
 
    .. tab-item:: Command line
 
@@ -288,7 +292,7 @@ When this occurs, update the site's endpoint in the site replication's configura
 
       #. Select **Settings**, then **Site Replication**
       
-      #. Select the pencil Edit icon to the side of the site to update
+      #. Select the pencil **Edit** icon to the side of the site to update
 
          .. image:: /images/minio-console/console-site-replication-edit-button.png
             :width: 600px
@@ -313,12 +317,17 @@ When this occurs, update the site's endpoint in the site replication's configura
          .. code-block:: shell
 
             mc admin replicate info <ALIAS>
+         
       
       #. Update the site's endpoint with :mc-cmd:`mc admin replicate edit`
       
          .. code-block:: shell
 
             mc admin replicate edit ALIAS --deployment-id [DEPLOYMENT-ID] --endpoint [NEW-ENDPOINT]
+
+         Replace [DEPLOYMENT-ID] with the deployment ID of the site to update.
+         
+         Replace [NEW-ENDPOINT] with the new endpoint for the site.
 
 Remove a Site from replication
 ------------------------------
@@ -357,11 +366,97 @@ When decomissioning a peer site, you must remove it from the site replication co
 
          mc admin replicate remove <ALIAS> --all --force
 
-      The ``-all`` flag removes the site from all participating sites.
+      The ``-all`` flag removes the site as a peer from all participating sites.
 
-      The ``--force`` flag removes the site from the site configuration configuration
+      The ``--force`` flag is required to removes the site from the site replication configuration.
 
 Review replication status
 -------------------------
 
-To do
+MinIO provides information on replication across the sites.
+Information is available in a summary view or for specific, inlcuding users, groups, policies, or buckets.
+
+The summary information includes the number of **Synced** and **Failed** items for each category.
+
+.. tab-set::
+
+   .. tab-item:: Console
+
+      #. In a browser, access the Console for one of the replicated sites
+
+         For example, ``https://<addressforsite>:9000``
+
+      #. Select **Settings**, then **Site Replication**
+      
+      #. Select :guilabel:`Replication Status`
+
+         .. image:: /images/minio-console/console-settings-site-replication-status-summary.png
+            :width: 600px
+            :alt: MinIO Console's Replication status from all Sites screen
+            :align: center
+
+      #. `(Optional)` View the replication status for a specific item
+         
+         Select the type of item to view in the :guilabel:`View Replication Status for a:` dropdown
+
+         Specify the name of the specific Bucket, Group, Policy, or User to view
+
+         .. image:: /images/minio-console/console-settings-site-replication-status-item.png
+            :width: 600px
+            :alt: Example of replication status for a particular bucket item
+            :align: center
+      
+      #. `(Optional)` Update the information by clicking :guilabel:`Refresh`
+
+   .. tab-item:: Command line
+
+      Use :mc-cmd:`mc admin replicate status`
+
+      .. code-block:: shell
+
+         mc admin replicate status <ALIAS> --<flag> <value>
+
+      For example:
+
+      - ``mc admin replicate status minio3 --bucket images``
+
+        Displays the replication status for the ``images`` bucket on the ``minio3`` site.
+        
+        Example output:
+
+        .. code-block::
+ 
+           ●  Bucket config replication summary for: images
+ 
+           Bucket          | MINIO2          | MINIO3          | MINIO4         
+           Tags            |                 |                 |                
+           Policy          |                 |                 |                
+           Quota           |                 |                 |                
+           Retention       |                 |                 |                
+           Encryption      |                 |                 |                
+           Replication     | ✔               | ✔               | ✔        
+
+      - ``mc admin replicate status minio3 --all``
+
+        Displays the replication status summary for all replication sites of which ``minio3`` is part. 
+
+        Example output:
+
+        .. code-block::
+
+           Bucket replication status:
+           ●  1/1 Buckets in sync
+          
+           Policy replication status:
+           ●  5/5 Policies in sync
+          
+           User replication status:
+           ●  1/1 Users in sync
+          
+           Group replication status:
+           ●  0/2 Groups in sync
+          
+           Group           | MINIO2          | MINIO3          | MINIO4         
+           ittechs         | ✗  in-sync      |                 | ✗  in-sync    
+           managers        | ✗  in-sync      |                 | ✗  in-sync    
+       
