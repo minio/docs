@@ -255,9 +255,9 @@ open the :ref:`MinIO Console <minio-console>` login page. For example,
 Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`
 from the previous step.
 
-.. image:: /images/minio-console-dashboard.png
+.. image:: /images/minio-console/console-login.png
    :width: 600px
-   :alt: MinIO Console Dashboard displaying Monitoring Data
+   :alt: MinIO Console Login Page
    :align: center
 
 You can use the MinIO Console for general administration tasks like

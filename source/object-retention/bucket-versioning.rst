@@ -219,23 +219,21 @@ enable versioning on only a prefix or subset of objects in a bucket.
 
    .. tab-item:: MinIO Console
 
-      Select the :guilabel:`Buckets` section of the MinIO Console to access
-      bucket creation and management functions. Select the bucket row from the
-      list of buckets. You can use the :octicon:`search` :guilabel:`Search` bar
-      to filter the list. 
+      Select the :guilabel:`Buckets` section of the MinIO Console to access bucket creation and management functions. You can use the :octicon:`search` :guilabel:`Search` bar to filter the list. 
       
       .. image:: /images/minio-console/console-bucket.png
          :width: 600px
          :alt: MinIO Console Bucket Management
          :align: center
-      
-      From the Bucket view, click the :guilabel:`Versioning`
-      field to enable versioning on the bucket.
 
-      .. image:: /images/minio-console/console-bucket-overview.png
+      Each bucket row has a :guilabel:`Manage` button that opens the management view for that bucket. 
+
+      .. image:: /images/minio-console/console-bucket-manage.png
          :width: 600px
-         :alt: MinIO Console Bucket minio-lifecycle-management
+         :alt: MinIO Console Bucket Management
          :align: center
+
+      Toggle the :guilabel:`Versioning` field to enable versioning on the bucket.
 
       The MinIO Console also supports enabling versioning as part of bucket
       creation. See :ref:`minio-console-admin-buckets` for more information on
@@ -243,7 +241,7 @@ enable versioning on only a prefix or subset of objects in a bucket.
 
    .. tab-item:: MinIO CLI
 
-      Use the :mc-cmd:`mc version suspend` command to enable versioning on an 
+      Use the :mc-cmd:`mc version enable` command to enable versioning on an 
       existing bucket:
 
       .. code-block:: shell
@@ -271,24 +269,21 @@ MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
 
    .. tab-item:: MinIO Console
 
-      Select the :guilabel:`Buckets` section of the MinIO Console to access 
-      bucket creation and management functions. 
-      
-      Select the bucket row from the list of buckets. You can use the
-      :octicon:`search` :guilabel:`Search` bar to filter the list. 
+      Select the :guilabel:`Buckets` section of the MinIO Console to access bucket creation and management functions. You can use the :octicon:`search` :guilabel:`Search` bar to filter the list. 
       
       .. image:: /images/minio-console/console-bucket.png
          :width: 600px
          :alt: MinIO Console Bucket Management
          :align: center
-      
-      From the :guilabel:`Bucket` view, click the :guilabel:`Versioning` field 
-      to disable versioning on the bucket.
 
-      .. image:: /images/minio-console/console-bucket-overview.png
+      Each bucket row has a :guilabel:`Manage` button that opens the management view for that bucket.
+
+      .. image:: /images/minio-console/console-bucket-manage.png
          :width: 600px
-         :alt: MinIO Console Bucket minio-lifecycle-management
+         :alt: MinIO Console Bucket Management
          :align: center
+
+      Select the :guilabel:`Versioning` field and follow the instructions to suspend versioning in the bucket.
 
       See :ref:`minio-console-admin-buckets` for more information on bucket
       management using the MinIO Console.
@@ -310,10 +305,7 @@ MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
         :mc:`target bucket <mc version ALIAS>` on which to disable
         versioning.
 
-Objects created while versioning is suspended are assigned a 
-``null`` :ref:`version ID <minio-bucket-versioning-id>`. Any mutations to an
-object while versioning is suspended results in overwriting that 
-``null`` versioned object. MinIO does not remove or otherwise alter 
-existing versioned objects as part of suspending versioning. Clients can 
-continue interacting with any existing object versions in the bucket.
-
+Objects created while versioning is suspended are assigned a ``null`` :ref:`version ID <minio-bucket-versioning-id>`. 
+Any mutations to an object while versioning is suspended result in overwriting that ``null`` versioned object. 
+MinIO does not remove or otherwise alter existing versioned objects as part of suspending versioning. 
+Clients can continue interacting with any existing object versions in the bucket.

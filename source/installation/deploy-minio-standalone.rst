@@ -167,7 +167,7 @@ container and the :ref:`MinIO Console <minio-console>` port. For example,
 Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`
 from the previous step.
 
-.. image:: /images/minio-console-dashboard.png
+.. image:: /images//minio-console/minio-console.png
    :width: 600px
    :alt: MinIO Console Dashboard displaying Monitoring Data
    :align: center
@@ -353,7 +353,7 @@ container and the :ref:`MinIO Console <minio-console>` port. For example,
 Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`
 from the previous step.
 
-.. image:: /images/minio-console-dashboard.png
+.. image:: /images//minio-console/minio-console.png
    :width: 600px
    :alt: MinIO Console Dashboard displaying Monitoring Data
    :align: center
