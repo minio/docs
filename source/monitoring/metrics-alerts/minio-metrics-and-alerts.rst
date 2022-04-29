@@ -99,9 +99,9 @@ Visualizing Metrics
 The MinIO Console uses the metrics collected by Prometheus to populate the
 Dashboard metrics:
 
-.. image:: /images/minio-console-dashboard.png
+.. image:: /images/minio-console/console-metrics.png
    :width: 600px
-   :alt: MinIO Console Dashboard displaying Monitoring Data
+   :alt: MinIO Console displaying Prometheus-backed Monitoring Data
    :align: center
 
 Set the :envvar:`MINIO_PROMETHEUS_URL` environment variable to the URL of the

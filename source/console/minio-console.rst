@@ -14,9 +14,9 @@ MinIO Console
 The MinIO Console is a rich graphical user interface that provides similar
 functionality to the :mc:`mc` command line tool.
 
-.. image:: /images/minio-console/console-dashboard.png
+.. image:: /images/minio-console/minio-console.png
    :width: 600px
-   :alt: MinIO Console Dashboard displaying Monitoring Data
+   :alt: MinIO Console Landing Page provides a view of Buckets on the deployment
    :align: center
 
 You can use the MinIO Console for administration tasks like Identity and 
@@ -131,316 +131,395 @@ routing rules may require setting a static MinIO Console port. For example,
 load balancers, reverse proxies, or Kubernetes ingress may by default block
 or exhibit unexpected behavior with the the dynamic redirection behavior.
 
-Dashboard
----------
+.. _minio-console-admin-buckets:
 
-.. image:: /images/minio-console/console-dashboard.png
-   :width: 600px
-   :alt: MinIO Console Dashboard displaying Monitoring Data
-   :align: center
-
-The Console :guilabel:`Dashboard` section displays metrics for the MinIO
-deployment. This view requires configuring a Prometheus service to scrape the
-deployment metrics. See :ref:`minio-metrics-collect-using-prometheus` for
-complete instructions.
-
-User: Object Browser
---------------------
+Buckets
+-------
 
 .. image:: /images/minio-console/console-object-browser.png
    :width: 600px
    :alt: MinIO Console Object Browser
    :align: center
 
-The Console :guilabel:`Object Browser` section displays all buckets and objects
-to which the authenticated user has :ref:`access <minio-policy>`.
+The Console :guilabel:`Object Browser` section displays all buckets and objects to which the authenticated user has :ref:`access <minio-policy>`.
 
 Use the :guilabel:`Search` bar to search for specific buckets or objects.
 Select the row for the bucket or object to browse. 
 
-Selecting an object provides information on that object, including the option to
-download or delete that object.
+Select :guilabel:`Create Bucket` to create a new bucket on the deployment.
 
-Selecting a bucket provides the option to upload new objects to the bucket.
+Each bucket has :guilabel:`Manage` and :guilabel:`Browse` buttons.
 
-You can create a new bucket from the :guilabel:`All Buckets` view by
-selecting :guilabel:`+ Create Bucket`.
+- Select :guilabel:`Manage` to open the management interface for the bucket:
 
-User: Service Accounts
-----------------------
+   The :guilabel:`Summary` view displays a summary of the bucket's configuration.
 
-.. image:: /images/minio-console/console-service-accounts.png
-   :width: 600px
-   :alt: MinIO Console Service Accounts
-   :align: center
+   The :guilabel:`Events` view supports configuring :ref:`notification events <minio-bucket-notifications>` using a configured notification target.
 
-The :guilabel:`Accounts` section displays all :ref:`minio-idp-service-account`
-associated to the authenticated user. Service accounts support providing
-applications authentication credentials which inherit permissions from the
-"parent" user. 
+   The :guilabel:`Replication` view supports creating and managing :ref:`Server Side Bucket Replication Rules <minio-bucket-replication-serverside>`.
 
-You can create new service accounts by seelcting 
-:guilabel:`+ Create Service Account`. You can specify an inline 
-:ref:`policy <minio-policy>` to further restrict the permissions of the new
-service account.
+   The :guilabel:`Lifecycle` view supports creating and managing :ref:`Object Lifecycle Management Rules <minio-lifecycle-management>` for the bucket.
 
-.. image:: /images/minio-console/console-service-accounts-create.png
-   :width: 600px
-   :alt: MinIO Console Service Account Create
-   :align: center
+   The :guilabel:`Access Audit` view displays all :ref:`policies <minio-policy>` and :ref:`users <minio-users>` with access to that bucket.
 
-The Console only displays the service account credentials *once*. You cannot
-change or retrieve the credentials later. To rotate credentials for an 
-application, create a new service account and delete the old one once the 
-application updates to using the new credentials.
+   The :guilabel:`Access Rules` view supports creating and managing anonymous bucket policies to attach to the bucket or bucket prefix.
+   Anonymous rules allow clients to access the bucket or prefix without explicitly authenticating with user credentials.
 
-.. _minio-console-admin-buckets:
+- Select :guilabel:`Browse` to view the contents of the bucket. 
+  You can view and download individual objects, upload new objects, or use the :guilabel:`Rewind` function to view only those :ref:`versions <minio-bucket-versioning>` of an object which existed at the selected timestamp.
 
-Admin: Buckets
---------------
+Identity
+--------
 
-.. image:: /images/minio-console/console-bucket.png
-   :width: 600px
-   :alt: MinIO Console Bucket Management
-   :align: center
+The :guilabel:`Identity` section provides a management interface for :ref:`MinIO-Managed users <minio-users>`.
 
-The :guilabel:`Buckets` section displays all buckets to which the authenticated
-user has access. 
+The section contains the following subsections.
+Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
-.. image:: /images/minio-console/console-bucket-create-bucket.png
-   :width: 600px
-   :alt: MinIO Console Create Bucket
-   :align: center
+.. tab-set::
 
-You can create new buckets by selecting :guilabel:`+ Create Bucket`.
+   .. tab-item:: Users
 
-You can select a bucket to view more specific details for that bucket:
+      .. image:: /images/minio-console/console-users.png
+         :width: 600px
+         :alt: MinIO Console Manage Users
+         :align: center
 
-.. image:: /images/minio-console/console-bucket-overview.png
-   :width: 600px
-   :alt: MinIO Console Bucket Management
-   :align: center
+      The :guilabel:`Users` section displays all MinIO-managed  :ref:`users <minio-users>` on the deployment.
 
-- The :guilabel:`Summary` tab displays a summary of the bucket configuration.
+      This section is not visible for deployments using an external identity manager such as Active Directory or an OIDC-compatible provider.
 
-- The :guilabel:`Events` tab supports configuring 
-  :ref:`notification events <minio-bucket-notifications>` using a configured
-  notification target.
+      - Select :guilabel:`Create User` to create a new MinIO-managed user. 
+        
+        You can assign :ref:`groups <minio-groups>` and :ref:`policies <minio-policy>` to the user during creation.
 
-- The :guilabel:`Replication` tab supports creating and managing 
-  :ref:`Server Side Bucket Replication Rules
-  <minio-bucket-replication-serverside>`. See
-  :ref:`minio-bucket-replication-serverside-oneway` for more information on the
-  requirements and process for enabling server-side bucket replication.
+      - Select a user's row to view details for that user.
+        
+        You can view and modify the user's assigned :ref:`groups <minio-groups>` and :ref:`policies <minio-policy>`.
+        
+        You can also view and manage any :ref:`Service Accounts <minio-idp-service-account>` associated to the user.
 
-  You can activate a similar modal by selecting :guilabel:`+ Set Replication` 
-  from the :guilabel:`Buckets` view with a bucket checkbox activated.
+   .. tab-item:: Groups
 
-- The :guilabel:`Lifecycle` tab supports creating and managing 
-  :ref:`Object Lifecycle Management Rules <minio-lifecycle-management>` for
-  the bucket.
+      .. image:: /images/minio-console/console-groups.png
+         :width: 600px
+         :alt: MinIO Console Manage Groups
+         :align: center
 
-- The :guilabel:`Access Audit` tab provides a view of all 
-  :ref:`policies <minio-policy>` and :ref:`users <minio-users>` with access
-  to that bucket.
+      The :guilabel:`Groups` section displays all :ref:`groups <minio-groups>` on the MinIO deployment. 
 
-Admin: Users
-------------
+      This section is not visible for deployments using an external identity manager such as Active Directory or an OIDC-compatible provider.
 
-.. image:: /images/minio-console/console-users.png
-   :width: 600px
-   :alt: MinIO Console Manage Users
-   :align: center
+      - Select :guilabel:`Create Group` to create a new MinIO Group. 
+        
+        You can assign new users to the group during creation.
 
-The :guilabel:`Users` section displays all MinIO-managed 
-:ref:`users <minio-users>` on the deployment. This tab or its contents may
-not be visible if the authenticated user does not have the 
-:ref:`required administrative permissions <minio-policy-mc-admin-actions>`
+        You can assign policies to the group after creation.
 
-Select :guilabel:`+ Create User` to create a new MinIO user. You can assign 
-:ref:`groups <minio-groups>` to the user during creation.
+      - Select the group row to open the details for that group.
 
-.. image:: /images/minio-console/console-users-create.png
-   :width: 600px
-   :alt: MinIO Console Create Users
-   :align: center
+        You can modify the group membership from the :guilabel:`Members` view.
+        
+        You can modify the group's assigned policies from the :guilabel:`Policies` view.
 
-Select a user's row to view details for that user.
+      Changing a user's group membership modifies the policies that user inherits. See :ref:`minio-access-management` for more information.
 
-.. image:: /images/minio-console/console-users-details.png
-   :width: 600px
-   :alt: MinIO Console User Details
-   :align: center
+   .. tab-item:: Service Accounts
 
-- The :guilabel:`Groups` tab displays all groups in which the user has 
-  membership. You can add or remove assigned groups from this tab.
+      .. image:: /images/minio-console/console-service-accounts.png
+         :width: 600px
+         :alt: MinIO Console Service Accounts
+         :align: center
 
-- The :guilabel:`Service Accounts` tab displays all 
-  :ref:`service accounts <minio-idp-service-account>` for the user.
+      The :guilabel:`Accounts` section displays all :ref:`minio-idp-service-account` associated to the authenticated user. 
 
-- The :guilabel:`Policies` tab displays all :ref:`policies <minio-policy>`
-  attached to the user. You can add or remove assigned policies from this tab.
+      Service accounts support providing applications authentication credentials which inherit permissions from the "parent" user.
 
-Admin: Groups
--------------
+      For deployments using an external identity manager such as Active Directory or an OIDC-compatible provider, service accounts provide a way for users to create long-lived credentials.
 
-.. image:: /images/minio-console/console-groups.png
-   :width: 600px
-   :alt: MinIO Console Manage Groups
-   :align: center
+      - You can select the service account row to view its custom policy, if one exists.
 
-The :guilabel:`Groups` section displays all :ref:`groups <minio-groups>` on the
-MinIO deployment. This tab or its contents may
-not be visible if the authenticated user does not have the 
-:ref:`required administrative permissions <minio-policy-mc-admin-actions>`
+        You can create or modify the policy from this screen.
+        Service account policies cannot exceed the permissions granted to the parent user.
 
-Select :guilabel:`+ Create Group` to create a new MinIO Group. You can assign
-new users to the group during creation.
+      - You can create a new service account by selecting the :guilabel:`Create service account` button.
 
-.. image:: /images/minio-console/console-groups-create-group.png
-   :width: 600px
-   :alt: MinIO Console Create Group
-   :align: center
+        The Console auto-generates an access key and password for the account.
+        You can override these values as necessary.
 
-Select a group's row to view the user assignment for that group.
+        You can set a custom policy for the service account that further restricts the permissions granted to the account.
 
-.. image:: /images/minio-console/console-groups-assign.png
-   :width: 600px
-   :alt: MinIO Console Assign Users to Group
-   :align: center
+      The Console only displays the service account credentials *once*. You cannot
+      change or retrieve the credentials later. To rotate credentials for an 
+      application, create a new service account and delete the old one once the 
+      application updates to using the new credentials.
 
-Changing a user's group membership modifies the policies that user inherits.
-See :ref:`minio-access-management` for more information.
-
-Admin: IAM Policies
--------------------
+Access
+------
 
 .. image:: /images/minio-console/console-iam.png
    :width: 600px
    :alt: MinIO Console Manage IAM Policies
    :align: center
 
-The :guilabel:`IAM Policies` section displays all :ref:`policies <minio-policy>`
-on the MinIO deployment. This tab or its contents may
-not be visible if the authenticated user does not have the 
-:ref:`required administrative permissions <minio-policy-mc-admin-actions>`
+The :guilabel:`IAM Policies` section displays all :ref:`policies <minio-policy>` on the MinIO deployment. 
 
-Select :guilabel:`+ Create Policy` to create a new MinIO Policy.
+This tab or its contents may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
-.. image:: /images/minio-console/console-iam-create.png
+- Select :guilabel:`+ Create Policy` to create a new MinIO Policy.
+
+- Select the policy row to manage the policy details.
+
+  The :guilabel:`Summary` view displays a summary of the policy.
+
+  The :guilabel:`Users` view displays all users assigned to the policy.
+
+  The :guilabel:`Groups` view displays all groups assigned to the policy.
+
+  The :guilabel:`Raw Policy` view displays the raw JSON policy.
+
+Use the :guilabel:`Identity: Users` and :guilabel:`Identity: Groups` views to assign a created policy to users and groups, respectively.
+
+Monitoring
+----------
+
+The :guilabel:`Monitoring` section provides an interface for monitoring the MinIO deployment.
+
+The section contains the following subsections,
+Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
+
+.. tab-set::
+
+   .. tab-item:: Metrics
+
+      .. image:: /images/minio-console/console-metrics.png
+         :width: 600px
+         :alt: MinIO Console Metrics displaying detailed data using Prometheus
+         :align: center
+
+      The Console :guilabel:`Dashboard` section displays metrics for the MinIO deployment. 
+      
+      The Console depends on a :ref:`configured Prometheus service <minio-metrics-collect-using-prometheus>` to generate the detailed metrics shown above.
+
+      The default metrics view provides a high-level overview of the deployment status, including the uptime and availability of individual servers and drives.
+
+      .. image:: /images/minio-console/console-metrics-simple.png
+         :width: 600px
+         :alt: MinIO Console Metrics displaying simplified data
+         :align: center
+
+      This view requires configuring a Prometheus service to scrape the deployment metrics. 
+      See :ref:`minio-metrics-collect-using-prometheus` for complete instructions.
+
+   .. tab-item:: Logs
+
+      .. image:: /images/minio-console/console-logs.png
+         :width: 600px
+         :alt: MinIO Console Logs displaying a list of server logs
+         :align: center
+
+      The Console :guilabel:`Logs` section displays :ref:`server logs <minio-logging>` generated by the MinIO Deployment.
+
+      - Use the :guilabel:`Nodes` dropdown to filter logs to a subset of server nodes in the MinIO deployment.
+
+      - Use the :guilabel:`Log Types` dropdown to filter logs to a subset of log types.
+
+      - Use the :guilabel:`Filter` to apply text filters to the log results
+
+      Select the :guilabel:`Start Logs` button to begin collecting logs using the selected filters and settings.
+
+   .. tab-item:: Audit
+
+      The Audit Log section provides an interface for viewing :ref:`audit logs <minio-logging>` collected by a configured PostgreSQL service.
+
+      The Audit Logging feature is configured and enabled automatically for MinIO deployments created using the :docs-k8s:`MinIO Kubernetes Operator <>`.
+
+   .. tab-item:: Trace
+
+      .. image:: /images/minio-console/console-trace.png
+         :width: 600px
+         :alt: MinIO Console Trace
+         :align: center
+
+      The :guilabel:`Trace` section provides HTTP trace functionality for a bucket or buckets on the deployment. 
+      This section provides similar functionality to :mc:`mc admin trace`.
+
+      You can modify the trace to show only specific trace calls.
+      The default is to show only :guilabel:`S3` related HTTP traces.
+      
+      Select :guilabel:`Filters` to open additional filters to apply to trace output, such as restricting the :guilabel:`Path` on which the trace applies to a specific bucket or bucket prefix.
+
+   .. tab-item:: Watch
+
+      .. image:: /images/minio-console/console-watch.png
+         :width: 600px
+         :alt: MinIO Console Watch
+         :align: center
+
+      The :guilabel:`Watch` section displays S3 events as they occur on the selected bucket. 
+      This section provides similar functionality to :mc:`mc watch`.
+
+   .. tab-item:: Drives
+
+      .. image:: /images/minio-console/console-drives.png
+         :width: 600px
+         :alt: MinIO Console Drive Health Status
+         :align: center
+
+      The :guilabel:`Drives` section displays the healing status for a bucket. 
+      MinIO automatically heals objects and drives when it detects problems, such as drive-level corruption or a replacement drive.
+
+      .. important::
+
+         MinIO does not recommend performing manual healing unless explicitly directed by support. 
+
+Support
+-------
+
+The :guilabel:`Support` section provides an interface for generating health and performance reports.
+You can also register your deployment with |subnet| to allow upload of health reports directly through the MinIO Console.
+
+This section contains the following subsections.
+Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
+
+.. tab-set::
+
+   .. tab-item:: Register
+
+      .. image:: /images/minio-console/console-register.png
+         :width: 600px
+         :alt: MinIO Console - SUBNET Registration login form
+         :align: center
+
+      The :guilabel:`Register` section provides a login form to connect your MinIO deployment to |subnet|.
+
+      After registration, you can upload your deployment health reports directly to SUBNET for reference by MinIO Engineering.
+   .. tab-item:: Health
+
+      .. image:: /images/minio-console/console-health.png
+         :width: 600px
+         :alt: MinIO Console - Health Diagnostics
+         :align: center
+
+      The :guilabel:`Health` section provides an interface for running a health diagnostic for the MinIO Deployment.
+      
+      The resulting health report is intended for use by MinIO Engineering via |subnet| and may contain internal or private data points such as hostnames.
+      Exercise caution before sending a health report to a third party or posting the health report in a public forum.
+
+   .. tab-item:: Performance
+
+      .. image:: /images/minio-console/console-performance.png
+         :width: 600px
+         :alt: MinIO Console - Performance Tests
+         :align: center
+
+      The :guilabel:`Performance` section provides an interface for running a performance test of the deployment.
+      The resulting test can provide a general guideline of deployment performance under S3 ``GET`` and ``PUT`` requests.
+
+      For more complete performance testing, consider using a combination of load-testing using your staging application environments and the MinIO :minio-git:`WARP <warp>` tool.
+
+   .. tab-item:: Profile
+
+      .. image:: /images/minio-console/console-profile.png
+         :width: 600px
+         :alt: MinIO Console - Profile Tests
+         :align: center
+
+      The :guilabel:`Profile` section provides an interface for running system profiling of the deployment.
+      The results can provide insight into the MinIO server process running on a given node.
+
+      The resulting report is intended for use by MinIO Engineering via |subnet|.
+      Independent or third-party use of these profiles for diagnostics and remediation is done at your own risk.
+
+   .. tab-item:: Inspect
+
+      .. image:: /images/minio-console/console-inspect.png
+         :width: 600px
+         :alt: MinIO Console - Inspect an Object
+         :align: center
+
+      The :guilabel:`Inspect` section provides an interface for capturing the erasure-coded metadata associated to an object or objects.
+      MinIO Engineering may request this output as part of diagnostics in |subnet|.
+
+
+      The resulting object may be read using MinIO's :minio-git:`debugging tool <minio/tree/master/docs/debugging#decoding-metadata>`. 
+      Independent or third-party use of the output for diagnostics or remediation is done at your own risk.
+      You can optionally encrypt the object such that it can only be read if the generated encryption key is included as part of the debugging toolchain.
+
+
+License
+-------
+
+The :guilabel:`License` section displays information on the licensing status of the MinIO deployment.
+
+For deployments not registered via |subnet|, the Console displays a table comparison of MinIO License and Support plans:
+
+.. image:: /images/minio-console/console-license.png
    :width: 600px
-   :alt: MinIO Console Create New Policy
+   :alt: MinIO Console - License Plans
    :align: center
 
-Select a policy's row to view the details for that policy, including 
-:ref:`user <minio-users>` and :ref:`group <minio-groups>` assignments:
+MinIO is Open Source software under the :minio-git:`GNU AGPLv3 license <mc/blob/master/LICENSE>`.
+Applications using MinIO should follow local laws and regulations around licensing to ensure compliance with the AGPLv3 license, which may include open sourcing the application stack.
 
-.. image:: /images/minio-console/console-iam-details.png
-   :width: 600px
-   :alt: MinIO Console View Policy Details
-   :align: center
+Proprietary application stacks can register for either the SUBNET :guilabel:`Standard` or :guilabel:`Enterprise` License and Support plan to use MinIO under a commercial license.
 
-- The :guilabel:`Details` tab displays the JSON document of the policy.
+Settings
+--------
 
-- The :guilabel:`Users` tab displays all users assigned the policy.
+The :guilabel:`Configuration` section displays information on MinIO server configuration settings.
 
-- The :guilabel:`Groups` tab displays all groups assigned the policy.
+This section contains the following subsections.
+Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
-Admin: Settings
----------------
+.. tab-set::
 
-.. image:: /images/minio-console/console-settings.png
-   :width: 600px
-   :alt: MinIO Console Settings
-   :align: center
+   .. tab-item:: Configuration
 
-The :guilabel:`Settings` displays 
-:ref:`configuration settings <minio-server-configuration-settings>` for all
-MinIO Servers in the deployment. This tab or its contents may
-not be visible if the authenticated user does not have the 
-:ref:`required administrative permissions <minio-policy-mc-admin-actions>`
+      .. image:: /images/minio-console/console-settings-configuration.png
+         :width: 600px
+         :alt: MinIO Console Settings - Configuration View
+         :align: center
 
-The :guilabel:`Lambda Notifications` tab displays all configured 
-:ref:`bucket notification targets <minio-bucket-notifications>` for the 
-deployment. These targets support configuring bucket notification events.
+      The :guilabel:`Configuration` subsection provides an interface for viewing and retrieving :ref:`configuration settings <minio-server-configuration-settings>` for all MinIO Servers in the deployment. 
 
-.. image:: /images/minio-console/console-settings-lambda.png
-   :width: 600px
-   :alt: MinIO Console Settings Lambda Notifications
-   :align: center
+      The interface functionality mimics that of using :mc-cmd:`mc admin config get` or :mc-cmd:`mc admin config set`
 
-The :guilabel:`Tiers` tab displays all configured 
-:ref:`remote tiers <minio-lifecycle-management-tiering>` on the deployment.
-These tiers support transition lifecycle management rules.
+      Some configuration settings may require restarting the MinIO deployment to apply changes.
 
-.. image:: /images/minio-console/console-settings-tiers.png
-   :width: 600px
-   :alt: MinIO Console Settings Tiering
-   :align: center
+   .. tab-item:: Notifications
 
-Tools: Watch
-------------
+      .. image:: /images/minio-console/console-settings-notifications.png
+         :width: 600px
+         :alt: MinIO Console Settings - Notifications View
+         :align: center
+         
+      The :guilabel:`Notifications` subsection provides an interface for adding and managing :ref:`bucket notification targets <minio-bucket-notifications>`.
 
-.. image:: /images/minio-console/console-watch.png
-   :width: 600px
-   :alt: MinIO Console Watch
-   :align: center
+      Select the :guilabel:`Add Notification Target +` button to add a new target to the deployment.
 
-The :guilabel:`Watch` section displays S3 events as they occur on the selected
-bucket. This section provides similar functionality to :mc:`mc watch`.
+      You can select an existing notification target from the list to view its details.
 
-This tab or its contents may
-not be visible if the authenticated user does not have the 
-:ref:`required administrative permissions <minio-policy-mc-admin-actions>`
+   .. tab-item:: Tiers
 
-Tools: Trace
-------------
+      .. image:: /images/minio-console/console-settings-tiers.png
+         :width: 600px
+         :alt: MinIO Console Settings - Tiering
+         :align: center
 
-.. image:: /images/minio-console/console-trace.png
-   :width: 600px
-   :alt: MinIO Console Trace
-   :align: center
+      The :guilabel:`Tiers` subsection provides an interface for adding and managing :ref:`remote tiers <minio-lifecycle-management-tiering>` to support lifecycle management transition rules.
 
-The :guilabel:`Trace` section provides HTTP trace functionality for a bucket
-or buckets on the deployment. This section provides similar functionality to
-:mc:`mc admin trace`.
+      Select the :guilabel:`Create Tier +` button to add a new tier to the deployment.
 
-This tab or its contents may
-not be visible if the authenticated user does not have the 
-:ref:`required administrative permissions <minio-policy-mc-admin-actions>`
+      You can select an existing tier from the list to view its details.
 
-Tools: Heal
------------
+   .. tab-item:: Site Replication
 
-.. image:: /images/minio-console/console-heal.png
-   :width: 600px
-   :alt: MinIO Console Healing
-   :align: center
+      .. image:: /images/minio-console/console-settings-site-replication.png
+         :width: 600px
+         :alt: MinIO Console Settings - Site Replication
+         :align: center
 
-The :guilabel:`Heal` section displays the healing status for a bucket. 
-MinIO automatically heals objects and drives when it detects problems, such
-as drive-level corruption or a replacement drive.
+      The :guilabel:`Site Replication` subsection provides an interface for adding and managing the site replication configuration for the deployment.
 
-MinIO does not recommend performing manual healing unless explicitly directed
-by support. 
-
-This tab or its contents may
-not be visible if the authenticated user does not have the 
-:ref:`required administrative permissions <minio-policy-mc-admin-actions>`
-
-Tools: Diagnostics
-------------------
-
-.. image:: /images/minio-console/console-diagnostics.png
-   :width: 600px
-   :alt: MinIO Console Diagnostics
-   :align: center
-
-The :guilabel:`Diagnostic` section provides an interface for generating a 
-diagnostic report for supporting `MinIO SUBNET 
-<https://min.io/pricing?ref-docs>`__ support tickets.
-
-The Diagnostic file contains configuration information about the deployment
-and may therefore include private or confidential information about your
-infrastructure. Do **not** share this information outside of
-MinIO SUBNET. 
+      Configuring site replication requires that only a single site have existing buckets or objects (if any).

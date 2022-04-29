@@ -205,18 +205,18 @@ the MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
          :align: center
 
       Click the :guilabel:`Create Bucket` button to open the bucket creation
-      model. Toggle the :guilabel:`Object Locking` selector to enable object
+      modal. Toggle the :guilabel:`Object Locking` selector to enable object
       locking on the bucket.
 
-      .. image:: /images/minio-console/console-bucket-create-bucket.png
+      .. image:: /images/minio-console/console-bucket-create-bucket-with-locking.png
          :width: 600px
-         :alt: MinIO Console Bucket creation
+         :alt: MinIO Console Bucket Management
          :align: center
 
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use The command command with the :mc-cmd:`~mc mb --with-lock`
+      Use the :mc-cmd:`mc mb` command with the :mc-cmd:`~mc mb --with-lock`
       option to create a bucket with object locking enabled:
 
       .. code-block:: shell
@@ -246,47 +246,35 @@ preferred SDK.
    .. tab-item:: MinIO Console
       :sync: console
 
-      Select the :guilabel:`Buckets` section of the MinIO Console to access
-      bucket creation and management functions. Select the bucket row from the
-      list of buckets. You can use the :octicon:`search` :guilabel:`Search` bar
-      to filter the list. 
+      Select the :guilabel:`Buckets` section of the MinIO Console to access bucket creation and management functions. You can use the :octicon:`search` :guilabel:`Search` bar to filter the list. 
       
       .. image:: /images/minio-console/console-bucket.png
          :width: 600px
          :alt: MinIO Console Bucket Management
          :align: center
 
-      From the :guilabel:`Bucket` view, look for the
-      :guilabel:`Retention` section and click :guilabel:`Enabled`. This section
-      is only visible if the bucket was created with object locking enabled.
+      Each bucket row has a :guilabel:`Manage` button that opens the management view for that bucket.
 
-      .. image:: /images/minio-console/console-bucket-overview.png
+      .. image:: /images/minio-console/console-bucket-manage.png
          :width: 600px
          :alt: MinIO Console Bucket Management
          :align: center
 
-      From the :guilabel:`Set Retention Configuration` modal, set the 
-      desired bucket default retention settings.
+      From the :guilabel:`Retention` section, select :guilabel:`Enabled`.
+      This section is only visible for buckets created with object locking enabled.
 
-      .. image:: /images/minio-console/console-bucket-locking-compliance.png
-         :width: 400px
-         :alt: MinIO Console Bucket Default Retention
-         :align: center
+      From the :guilabel:`Set Retention Configuration` modal, set the desired bucket default retention settings.
 
-      - For :guilabel:`Retention Mode`, select either 
-        :ref:`COMPLIANCE <minio-object-locking-compliance>` or 
-        :ref:`GOVERNANCE <minio-object-locking-governance>`.
+      - For :guilabel:`Retention Mode`, select either :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>`.
 
-      - For :guilabel:`Duration`, select the retention duration units of 
-        :guilabel:`Days` or :guilabel:`Years`.
+      - For :guilabel:`Duration`, select the retention duration units of :guilabel:`Days` or :guilabel:`Years`.
 
-      - For :guilabel:`Retention Validity`, set the duration of time for which
-        MinIO holds objects under the specified retention mode for the bucket.
+      - For :guilabel:`Retention Validity`, set the duration of time for which MinIO holds objects under the specified retention mode for the bucket.
 
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use The command command with the
+      Use the :mc-cmd:`mc retention set` command with the
       :mc-cmd:`--recursive <mc retention set --recursive>` and
       :mc-cmd:`--default <mc retention set --default>` options to set the
       default retention mode for a bucket:
@@ -312,41 +300,39 @@ preferred SDK.
 Enable Legal Hold Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can enable or disable indefinite Legal Hold retention for an object using
-the MinIO Console, the MinIO :mc:`mc` CLI, or using an S3-compatible SDK. 
-You can place a legal hold on an object already held under a 
-:ref:`COMPLIANCE <minio-object-locking-compliance>` or 
-:ref:`GOVERNANCE <minio-object-locking-governance>` lock. The object remains
-WORM locked until the retention lock expires *and* the legal hold is lifted.
+You can enable or disable indefinite Legal Hold retention for an object using the MinIO Console, the MinIO :mc:`mc` CLI, or using an S3-compatible SDK. 
+
+You can place a legal hold on an object already held under a :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>` lock. 
+The object remains WORM locked under the legal hold even when the retention lock expires. 
+You or another user with the necessary permissions must explicitly lift the legal hold to remove the WORM lock.
 
 .. tab-set::
 
    .. tab-item:: MinIO Console
       :sync: console
 
-      Select the :guilabel:`Object Browser` section of the MinIO Console. Select
-      the bucket row from the list of buckets. You can use the :octicon:`search`
-      :guilabel:`Search` bar to filter the list. 
-      
-      .. image:: /images/minio-console/console-object-browser-locking.png
+      Select the :guilabel:`Buckets` section of the MinIO Console to access bucket creation and management functions. 
+      You can use the :octicon:`search` :guilabel:`Search` bar to filter the list. 
+
+      .. image:: /images/minio-console/console-bucket.png
          :width: 600px
          :alt: MinIO Console Bucket Management
          :align: center
 
-      Browse to the object and select it to open the object details view. 
-      Click the :octicon:`pencil` icon on the :guilabel:`Legal Hold` row to
-      toggle the Legal Hold status of the object.
+      Each bucket row has a :guilabel:`Manage` button that opens the management view for that bucket.
 
-      .. image:: /images/minio-console/console-object-browser-object-details.png
+      .. image:: /images/minio-console/console-object-browser.png
          :width: 600px
-         :alt: MinIO Console Bucket Default Retention
+         :alt: MinIO Console Bucket Object Browser
          :align: center
+
+      Browse to the object and select it to open the object details view. 
+      Select the :guilabel:`Legal Hold` button to toggle the Legal Hold status of the object.
 
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use The command command to enable or disable the legal
-      hold on an object.
+      Use the :guilabel:`mc legalhold set` command to toggle the legal hold status on an object.
 
       .. code-block:: shell
          :class: copyable
@@ -438,13 +424,9 @@ An object under Legal Hold is protected from write operations by *all*
 users, including the :ref:`MinIO root <minio-users-root>` user. 
 
 Legal Holds are indefinite and enforce complete immutability for locked objects.
-Only privileged users with the :policy-action:`s3:PutObjectLegalHold` can set or
-lift the Legal Hold.
+Only privileged users with the :policy-action:`s3:PutObjectLegalHold` permission can set or lift the Legal Hold.
 
-Legal holds are complementary to both :ref:`minio-object-locking-governance` and
-:ref:`minio-object-locking-compliance` retention settings. An object held under
-both legal hold *and* a ``GOVERNANCE/COMPLIANCE`` retention rule remains WORM
-locked until the legal hold is lifed *and* the rule expires.
+Legal holds are complementary to both :ref:`minio-object-locking-governance` and :ref:`minio-object-locking-compliance` retention settings. 
+An object held under both legal hold *and* a ``GOVERNANCE/COMPLIANCE`` retention rule remains WORM locked until the legal hold is lifted *and* the rule expires.
 
-For ``GOVERNANCE`` locked objects, the legal hold prevents mutating the object
-*even if* the user has the necessary privileges to bypass retention.
+For ``GOVERNANCE`` locked objects, the legal hold prevents mutating the object *even if* the user has the necessary privileges to bypass retention.

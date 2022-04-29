@@ -80,7 +80,7 @@ Procedure
    Log in to the Console with the ``RootUser`` and ``RootPass`` user credentials displayed in the output.
    These default to ``minioadmin | minioadmin``.
 
-   .. image:: /images/minio-console-login.png
+   .. image:: /images/minio-console/console-login.png
       :width: 600px
       :alt: MinIO Console displaying login screen
       :align: center
@@ -88,7 +88,7 @@ Procedure
    You can use the MinIO Console for general administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration. 
    Each MinIO server includes its own embedded MinIO Console.
 
-   .. image:: /images/minio-console-buckets.png
+   .. image:: /images/minio-console/minio-console.png
       :width: 600px
       :alt: MinIO Console displaying bucket start screen
       :align: center

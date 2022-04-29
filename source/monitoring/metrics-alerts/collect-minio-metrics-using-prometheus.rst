@@ -163,9 +163,9 @@ changes.
 The MinIO Console uses the metrics collected by the ``minio-job`` scraping
 job to populate the Dashboard metrics:
 
-.. image:: /images/minio-console-dashboard.png
+.. image:: /images/minio-console/console-metrics.png
    :width: 600px
-   :alt: MinIO Console Dashboard displaying Monitoring Data
+   :alt: MinIO Console displaying Prometheus-backed Monitoring Data
    :align: center
 
 MinIO also publishes a `Grafana Dashboard
