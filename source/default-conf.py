@@ -144,5 +144,6 @@ rst_prolog = """
 .. |minio-rpm| replace:: RPMURL
 .. |minio-deb| replace:: DEBURL
 .. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__
+.. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
 
 """
