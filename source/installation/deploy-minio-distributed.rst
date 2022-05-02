@@ -498,4 +498,53 @@ host:
 
    * - More than 1 Pebibyte (Pi)
      - 128GiB
-       
+
+.. _minio-requests-per-node:
+
+Requests Per Node
+~~~~~~~~~~~~~~~~~
+
+You can calculate the maximum number of concurrent requests per host with this formula:
+
+   :math:`totalRam / ramPerRequest`
+
+To calculate the amount of RAM used for each request, use this formula:
+
+   :math:`((2MiB + 128KiB) * driveCount) + (2 * 10MiB) + (2 * 1 MiB)`
+
+   10MiB is the default erasure block size v1.
+   1 MiB is the default erasure block size v2.
+
+The following table lists the maximum concurrent requests on a node based on the number of host drives and the *free* system RAM:
+
+.. list-table::
+   :header-rows: 1
+   :width: 100%
+
+   * - Number of Drives
+     - 32 GiB of RAM
+     - 64 GiB of RAM
+     - 128 GiB of RAM
+     - 256 GiB of RAM
+     - 512 GiB of RAM
+
+   * - 4 Drives
+     - 1,074 
+     - 2,149 
+     - 4,297 
+     - 8,595 
+     - 17,190 
+
+   * - 8 Drives
+     - 840 
+     - 1,680 
+     - 3,361 
+     - 6,722 
+     - 13,443 
+
+   * - 16 Drives
+     - 585 
+     - 1,170 
+     - 2.341 
+     - 4,681 
+     - 9,362 

@@ -311,6 +311,14 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-stat-desc
           :end-before: end-mc-stat-desc
 
+   * - | :mc:`mc support diagnostics`
+       | :mc:`mc support inspect`
+       | :mc:`mc support perf`
+       | :mc:`mc support profile`
+       | :mc:`mc support register`
+     - The MinIO Client ``mc support`` commands provides tools for analyzing deployment health or performance and for running diagnostics.
+       You can also register your deployment with |SUBNET| and upload generated health reports for further analysis by MinIO engineering.
+
    * - | :mc:`mc tag set`
        | :mc:`mc tag remove`
        | :mc:`mc tag list`
@@ -481,6 +489,11 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-share-list
    /reference/minio-mc/mc-sql
    /reference/minio-mc/mc-stat
+   /reference/minio-mc/mc-support-diagnostics
+   /reference/minio-mc/mc-support-inspect
+   /reference/minio-mc/mc-support-perf
+   /reference/minio-mc/mc-support-profile
+   /reference/minio-mc/mc-support-register
    /reference/minio-mc/mc-tag-set
    /reference/minio-mc/mc-tag-list
    /reference/minio-mc/mc-tag-remove

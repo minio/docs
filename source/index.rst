@@ -139,6 +139,7 @@ without validating their usage do so at their own risk.
    /lifecycle-management/lifecycle-management-overview
    /replication/replication-overview
    /monitoring/monitoring-overview
+   /support/support-overview
    /reference/minio-mc
    /reference/minio-mc-admin
    /reference/minio-server/minio-server
