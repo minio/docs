@@ -710,6 +710,22 @@ services:
 
    Allows listing user policies
 
+.. policy-action:: admin:CreateServiceAccount
+
+   Allows creating MinIO Service Account
+
+.. policy-action:: admin:UpdateServiceAccount
+
+   Allows updating MinIO Service Account
+
+.. policy-action:: admin:RemoveServiceAccount
+
+   Allows deleting MinIO Service Account
+
+.. policy-action:: admin:ListServiceAccounts
+
+   Allows listing MinIO Service Account
+
 .. policy-action:: admin:SetBucketQuota
 
    Allows setting bucket quota
