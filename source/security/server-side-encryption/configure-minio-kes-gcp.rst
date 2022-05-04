@@ -193,7 +193,7 @@ the configuration file.
   :ref:`GCP Service Account <minio-sse-gcp-prereq-gcp>`
   KES should use when accessing the Secrets Manager service.
 
-1) Start KES
+5) Start KES
 ~~~~~~~~~~~~
 
 .. include:: /includes/common-minio-kes.rst
