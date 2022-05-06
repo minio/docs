@@ -77,7 +77,7 @@ extlinks = {
     'docs-k8s'        : ('https://docs.min.io/minio/k8s/%s',''),
     'prometheus-docs' : ('https://prometheus.io/docs/%s',''),
     'podman-docs'     : ('https://docs.podman.io/en/latest/%s',''),
-    'podman-git'      : ('https://github.com/containers/podman/%s','')
+    'podman-git'      : ('https://github.com/containers/podman/%s',''),
 
 }
 
@@ -103,7 +103,7 @@ exclude_patterns = ['includes/*', '*-template.rst']
 
 if tags.has("linux"):
     excludes = [
-        'operations/install-deploy-manage/deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/minio-k8s-deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
         'operations/install-deploy-manage/expand-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-tenant.rst',
@@ -126,7 +126,7 @@ if tags.has("linux"):
     ]
 elif tags.has("macos"):
     excludes = [
-        'operations/install-deploy-manage/deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/minio-k8s-deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
         'operations/install-deploy-manage/expand-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-tenant.rst',
@@ -149,7 +149,7 @@ elif tags.has("macos"):
     ]
 elif tags.has("windows"):
     excludes = [
-        'operations/install-deploy-manage/deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/minio-k8s-deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
         'operations/install-deploy-manage/expand-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-tenant.rst',
@@ -179,19 +179,13 @@ elif tags.has("k8s"):
         'operations/install-deploy-manage/expand-minio-deployment.rst',
         'operations/install-deploy-manage/decommission-server-pool.rst',
         'operations/manage-existing-deployments.rst',
+        'reference/minio-server*'
 
     ]
 else:
     excludes = []
 
 exclude_patterns.extend(excludes)
-
-# This should suppress myst warnings, but it doesn't seem to work.
-
-intersphinx_mapping = {
-    'k8s'      : ('https://docs.min.io/minio/k8s/', None),
-    'baremetal': ('https://docs.min.io/minio/baremetal', None),
-}
 
 # Copy-Button Customization
 
@@ -245,14 +239,20 @@ html_title = 'MinIO Object Storage for ' + platform.capitalize()
 
 sphinx_tabs_disable_css_loading = True
 
+# -- Intersphinx --
+
+# k8s is temporary until integrating the references here
+
+intersphinx_mapping = {
+    'baremetal': ('https://docs.min.io/minio/baremetal/', None),
+}
+
 rst_prolog = """
 
 .. |podman| replace:: `Podman <https://podman.io/>`__
 
 .. |kes-tag| replace:: `KESLATEST <https://github.com/minio/kes/releases/tag/KESLATEST>`__
 .. |kes-stable| replace:: KESLATEST
-.. |operator-version-stable| replace:: OPERATOR
-
 .. |minio-tag| replace:: `MINIOLATEST <https://github.com/minio/minio/releases/tag/MINIOLATEST>`__
 .. |minio-latest| replace:: MINIOLATEST
 .. |minio-rpm| replace:: RPMURL
@@ -262,6 +262,7 @@ rst_prolog = """
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
 .. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`
 .. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`
+.. |operator-version-stable| replace:: OPERATOR
 
 
 """

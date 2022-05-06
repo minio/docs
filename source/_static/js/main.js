@@ -69,7 +69,7 @@ function renderPersonas() {
 
    for (i=0; i<list.length; i++) {
       let page_title = list[i].childNodes[0].innerHTML;
-      if (page_title === "Install and Deploy MinIO" || page_title === "Install the MinIO Operator") {
+      if (page_title === "Install and Deploy MinIO" || page_title === "Deploy the MinIO Operator") {
          list[i].insertAdjacentElement('beforebegin',operationPersona);
       }
       else if (page_title === "MinIO Console") {

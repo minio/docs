@@ -10,16 +10,32 @@ Deploy and Manage MinIO Tenants
    :local:
    :depth: 1
 
-STUB - to be filled in
+The MinIO Kubernetes Operator supports deploying and managing MinIO Tenants onto your Kubernetes cluster through either the Operator Console web interface or the MinIO Kubernetes Plugin.
 
-.. Following link is for K8s only
-.. _deploy-minio-distributed-prereqs-storage:
+The following tutorials provide steps for tenant management via the Operator Console and MinIO Kubernetes Plugin:
 
-Tenant Requirements
--------------------
+.. list-table::
+   :stub-columns: 1
+   :widths: 40 60
+   :width: 100%
 
-STUB - to be filled in
+   * - :ref:`minio-k8s-deploy-minio-tenant`
+     - Deploy a new MinIO Tenant onto the Kubernetes cluster.
 
+   * - :ref:`minio-k8s-modify-minio-tenant`
+     - Modify the configuration or topology settings of a MinIO Tenant.
+
+   * - :ref:`minio-k8s-upgrade-minio-tenant`
+     - Upgrade the MinIO Server version used by a MinIO Tenant.
+
+   * - :ref:`minio-k8s-expand-minio-tenant`
+     - Increase the available storage capacity of an existing MinIO Tenant.
+
+   * - :ref:`minio-k8s-delete-minio-tenant`
+     - Delete an existing MinIO Tenant.
+
+   * - :ref:`minio-site-replication-overview`
+     - Configure two or more MinIO Tenants as peers for MinIO Site Replication
 
 .. toctree::
    :titlesonly:
