@@ -57,6 +57,7 @@ macos:
 
 k8s:
 	@cp source/default-conf.py source/conf.py
+	@make sync-operator-version
 	@make sync-minio-version
 	@make sync-kes-version
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
@@ -67,9 +68,7 @@ sync-operator-version:
 	$(shell wget -O /tmp/downloads-operator.json https://api.github.com/repos/minio/operator/releases/latest)
 	$(eval OPERATOR = $(shell cat /tmp/downloads-operator.json | jq '.tag_name[1:]'))
 
-	@echo "Replacing variables"
-
-	@cp source/default-conf.py source/conf.py
+	@echo "Updating Operator to ${OPERATOR}"
 
 	@case "${kname}" in \
 	"Darwin") \
@@ -102,8 +101,6 @@ sync-minio-version:
 	@$(eval RPM = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download'))
 	@$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
 
-	@cp source/default-conf.py source/conf.py
-
 	@$(eval kname = $(shell uname -s))
 
 	@case "${kname}" in \
@@ -118,6 +115,13 @@ sync-minio-version:
 		sed -i "s|RPMURL|${RPM}|g" source/conf.py; \
 		;; \
 	esac
+
+	@if [ "$(shell git diff --name-only | grep 'conf.py')" == "" ]; then \
+		echo "MinIO Server Version already latest"; \
+	else \
+		echo "New MinIO Server Version available ${MINIO}" ; \
+		#git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"; \
+	fi
 
 sync-java-docs:
 	@echo "Retrieving Java docs from github.com/minio/minio-java"

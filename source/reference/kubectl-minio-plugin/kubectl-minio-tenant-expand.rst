@@ -128,4 +128,4 @@ The command supports the following flags:
 
    MinIO strongly recommends creating a Storage Class that corresponds to locally-attached volumes on the host machines on which the Tenant deploys. 
    This ensures each pod can use locally-attached storage for maximum performance and throughput. 
-   See the :ref:`Deploy MinIO Tenant <deploy-minio-tenant>` tutorial for guidance on creating Storage Classes for supporting the MinIO Tenant.
+   See the :ref:`Deploy MinIO Tenant <minio-k8s-deploy-minio-tenant>` tutorial for guidance on creating Storage Classes for supporting the MinIO Tenant.

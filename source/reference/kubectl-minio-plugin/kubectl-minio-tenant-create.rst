@@ -23,7 +23,7 @@ Description
 .. start-kubectl-minio-tenant-create-desc
 
 :mc-cmd:`kubectl minio tenant create` adds a new MinIO tenant and associated resources to a Kubernetes cluster. 
-The :ref:`Operator Console <minio-operator-console>` provides a rich user interface for :ref:`deploying and managing MinIO Tenants <deploy-minio-tenant>`.
+The :ref:`Operator Console <minio-operator-console>` provides a rich user interface for :ref:`deploying and managing MinIO Tenants <minio-k8s-deploy-minio-tenant>`.
 
 :mc-cmd:`~kubectl minio tenant create` always uses the latest stable version of the  :github:`MinIO Server <minio/releases>` and :github:`MinIO Console <console/releases>`.
 
@@ -186,6 +186,6 @@ The command supports the following flags:
 
    MinIO strongly recommends creating a Storage Class that corresponds to locally-attached volumes on the host machines on which the Tenant deploys. 
    This ensures each pod can use locally-attached storage for maximum performance and throughput. 
-   See the :ref:`Deploy MinIO Tenant <deploy-minio-tenant>` tutorial for guidance on creating Storage Classes for supporting the MinIO Tenant.
+   See the :ref:`Deploy MinIO Tenant <minio-k8s-deploy-minio-tenant>` tutorial for guidance on creating Storage Classes for supporting the MinIO Tenant.
 
    Defaults to ``default``.

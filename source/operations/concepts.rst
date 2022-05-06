@@ -71,12 +71,12 @@ Deployment Architecture
 .. _minio-intro-server-pool:
 
 :ref:`Server Pool <minio-intro-server-pool>`
-   A set of MinIO :mc-cmd:`minio server` nodes which pool their drives and
+   A set of MinIO :mc:`minio server` nodes which pool their drives and
    resources for supporting object storage/retrieval requests. Server pools
    support horizontal expansion for MinIO deployments.
    
    The :mc-cmd:`~minio server HOSTNAME` argument passed to the
-   :mc-cmd:`minio server` command represents a Server Pool:
+   :mc:`minio server` command represents a Server Pool:
 
    .. code-block:: shell
 
@@ -89,7 +89,7 @@ Deployment Architecture
    MinIO requires starting each :mc:`minio server` in the set with the same
    startup command to enable awareness of all set peers.
 
-   See :mc-cmd:`minio server` for complete syntax and usage.
+   See :mc:`minio server` for complete syntax and usage.
 
    MinIO calculates the size and number of Erasure Sets in the Server Pool based
    on the total number of drives in the set *and* the number of :mc:`minio`
@@ -100,7 +100,7 @@ Deployment Architecture
 :ref:`Cluster <minio-intro-cluster>`
    The whole MinIO deployment consisting of one or more Server Pools. Each
    :mc-cmd:`~minio server HOSTNAME` argument passed to the 
-   :mc-cmd:`minio server` command represents one Server Pool:
+   :mc:`minio server` command represents one Server Pool:
 
    .. code-block:: shell
 

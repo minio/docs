@@ -31,9 +31,16 @@ static HTML pages using ReSTructured Text (rST).
 
 3. Run `pip install -r requirements.txt` to setup the Python environment.
 
-4. Run `make stage`
+4. Run `make` to see the available build targets:
+   
+   - `make linux`   
+   - `make macos`
+   - `make windows`
+   - `make k8s`   
 
-5. Open your browser to http://localhost:8000 to view the staged output.
+5. Use `python -m http.server --directory build/GIT_BRANCH/<PLATFORM>/html`
+   
+   Open your browser to http://localhost:8000 to view the staged output.
 
 ### MacOS
 
@@ -49,11 +56,22 @@ static HTML pages using ReSTructured Text (rST).
 
 5. Run `npm run build`
 
-6. Run `make stage`
+6. Run `make` to see the available build targets:
+   
+   - `make linux`   
+   - `make macos`
+   - `make windows`
+   - `make k8s`  
 
-7. Open your browser to http://localhost:8000 to view the staged output.
+7. Use `python -m http.server --directory build/GIT_BRANCH/<PLATFORM>/html`
+   
+   Open your browser to http://localhost:8000 to view the staged output.
 
 ### Windows
+
+Note: The MinIO Docs builder is designed around the Makefile.
+Windows users may have issues in build output.
+Consider running Sphinx in a virtual machine or Windows Subsystem for Linux.
 
 Prereq:
 
@@ -84,12 +102,22 @@ All instructions use PowerShell running as an administrator.
    `npm run build`
 8. Build the docs
    
-   `sphinx-build -M html source\ build\master -n`
+   `sphinx-build -M html source\ build\GITBRANCH\TAG\ -n -t TAG`
+
+   Replace `TAG` with one of the following supported values:
+
+   - `k8s`
+   - `linux`
+   - `macos`
+   - `windows`
+
 9.  Start the http server
     
-    `python -m http.server --directory build\master\html`
+    `python -m http.server --directory build\GITBRANCH\TAG\html`
 10. View the staged output in a browser by going to `localhost:8000`
 
+License
+-------
 
 This project is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
 

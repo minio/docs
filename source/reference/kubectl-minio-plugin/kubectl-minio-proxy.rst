@@ -19,7 +19,7 @@ Description
 .. start-kubectl-minio-proxy-desc
 
 :mc-cmd:`kubectl minio proxy` creates a temporary proxy to forward traffic from the local host machine to the MinIO Operator Console. 
-The :ref:`Operator Console <minio-operator-console>` provides a rich user interface for :ref:`deploying and managing MinIO Tenants <deploy-minio-tenant>`.
+The :ref:`Operator Console <minio-operator-console>` provides a rich user interface for :ref:`deploying and managing MinIO Tenants <minio-k8s-deploy-minio-tenant>`.
 
 This command is an alternative to configuring `Ingress <https://kubernetes.io/docs/concepts/services-networking/ingress/>`__ to grant access to the Operator Console pods.
 
