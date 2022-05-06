@@ -445,7 +445,7 @@ Metrics and Logging
 ~~~~~~~~~~~~~~~~~~~
 
 These environment variables control behavior related to MinIO metrics and
-logging. See :doc:`/monitoring/monitoring-overview` for more information.
+logging. See :ref:`minio-metrics-and-alerts` for more information.
 
 .. envvar:: MINIO_PROMETHEUS_AUTH_TYPE
 
@@ -607,7 +607,7 @@ Bucket Notifications
 ~~~~~~~~~~~~~~~~~~~~
 
 These environment variables configure notification targets for use with
-:doc:`MinIO Bucket Notifications </monitoring/bucket-notifications/bucket-notifications>`:
+:ref:`MinIO Bucket Notifications <minio-bucket-notifications>`:
 
 - :ref:`minio-server-envvar-bucket-notification-amqp`
 - :ref:`minio-server-envvar-bucket-notification-mqtt`
@@ -625,8 +625,7 @@ AMQP Service for Bucket Notifications
 +++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an AMQP
-service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-amqp` for a tutorial on
 using these environment variables.
 
@@ -785,8 +784,7 @@ MQTT Service for Bucket Notifications
 +++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an MQTT
-service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-mqtt` for a tutorial on
 using these environment variables.
 
@@ -921,8 +919,7 @@ Elasticsearch Service for Bucket Notifications
 ++++++++++++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an
-Elasticsearch service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+Elasticsearch service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-elasticsearch` for a tutorial on using
 these environment variables.
 
@@ -1062,8 +1059,7 @@ NSQ Service for Bucket Notifications
 ++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an
-NSQ service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+NSQ service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-nsq` for a tutorial on using
 these environment variables.
 
@@ -1182,8 +1178,7 @@ Redis Service for Bucket Notifications
 ++++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an
-Redis service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+Redis service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-redis` for a tutorial on using
 these environment variables.
 
@@ -1315,8 +1310,7 @@ NATS Service for Bucket Notifications
 +++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an NATS
-service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-nats` for a tutorial on
 using these environment variables.
 
@@ -1567,8 +1561,7 @@ PostgreSQL Service for Bucket Notifications
 +++++++++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an POSTGRESQL
-service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-postgresql` for a tutorial on
 using these environment variables.
 
@@ -1706,8 +1699,7 @@ MySQL Service for Bucket Notifications
 ++++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an MYSQL
-service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-mysql` for a tutorial on
 using these environment variables.
 
@@ -1846,8 +1838,7 @@ Kafka Service for Bucket Notifications
 ++++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an
-Kafka service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+Kafka service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-kafka` for a tutorial on using
 these environment variables.
 
@@ -2059,8 +2050,7 @@ Webhook Service for Bucket Notifications
 ++++++++++++++++++++++++++++++++++++++++
 
 The following section documents environment variables for configuring an
-Webhook service as a target for :doc:`MinIO Bucket Notifications
-</monitoring/bucket-notifications/bucket-notifications>`. See
+Webhook service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-webhook` for a tutorial on using
 these environment variables.
 

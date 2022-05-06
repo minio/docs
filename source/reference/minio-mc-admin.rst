@@ -1,6 +1,6 @@
-==========================
-MinIO Admin (``mc admin``)
-==========================
+==================
+MinIO Admin Client
+==================
 
 .. default-domain:: minio
 

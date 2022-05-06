@@ -91,15 +91,25 @@ aside.sidebar {
 .docs {
     margin-right: -0.65rem;
 
+
     ul {
         list-style: none;
         padding: 0;
         margin: 0.5rem 0 0.5rem 0;
         font-size: .90rem;
 
+        & > span.persona {
+            font-weight: bold;
+            border-bottom-style: solid;
+            border-width: 2px;
+            display: block;
+            padding-bottom: 1rem;
+
+        }
+
         & > li {
 
-            margin: 0.5rem 0 0.5rem 0;
+            margin: 0.5rem 0 0.5rem 0.5rem;
 
             & > a {
                 &, & > code {

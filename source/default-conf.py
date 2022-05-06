@@ -22,9 +22,16 @@ sys.path.append(os.path.abspath('../sphinxext'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'MinIO Baremetal Documentation'
+# We assume a single tag, since we control the builder
+
+platform = list(tags.tags.keys())[0]
+
+if (platform =="k8s"):
+    platform = "Kubernetes"
+
+project = 'MinIO Documentation for ' + platform
 copyright = '2020-Present, MinIO, Inc. '
-author = 'Ravind Kumar'
+author = 'MinIO Documentation Team'
 
 # The full version, including alpha/beta/rc tags
 release = '0.1'
@@ -74,13 +81,73 @@ extlinks = {
 
 }
 
+suppress_warnings = [
+    'toc.excluded',
+    'myst.ref',
+    'myst.header',
+    'myst'
+]
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['includes/*.rst', 'includes/imports/*', '*-template.rst']
+#
+# We can safely ignore everything in `includes`
+
+exclude_patterns = ['includes/*', '*-template.rst']
+
+# template for adding custom exclude paths if necessary for a given tag
+
+if tags.has("linux"):
+    excludes = [
+        'operations/install-deploy-manage/deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/modify-minio-tenant.rst',
+        'operations/install-deploy-manage/expand-minio-tenant.rst',
+        'operations/install-deploy-manage/upgrade-minio-tenant.rst',
+        'operations/install-deploy-manage/upgrade-minio-operator.rst',
+        'operations/install-deploy-manage/delete-minio-tenant.rst',
+        'operations/deploy-manage-tenants.rst',
+    ]
+elif tags.has("macos"):
+    excludes = [
+        'operations/install-deploy-manage/deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/modify-minio-tenant.rst',
+        'operations/install-deploy-manage/expand-minio-tenant.rst',
+        'operations/install-deploy-manage/upgrade-minio-tenant.rst',
+        'operations/install-deploy-manage/upgrade-minio-operator.rst',
+        'operations/install-deploy-manage/delete-minio-tenant.rst',
+        'operations/deploy-manage-tenants.rst',
+    ]
+elif tags.has("windows"):
+    excludes = [
+        'operations/install-deploy-manage/deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/modify-minio-tenant.rst',
+        'operations/install-deploy-manage/expand-minio-tenant.rst',
+        'operations/install-deploy-manage/upgrade-minio-tenant.rst',
+        'operations/install-deploy-manage/upgrade-minio-operator.rst',
+        'operations/install-deploy-manage/delete-minio-tenant.rst',
+        'operations/deploy-manage-tenants.rst',
+    ]
+elif tags.has("k8s"):
+    excludes = [
+        'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst',
+        'operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst',
+        'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst',
+        'operations/install-deploy-manage/upgrade-minio-deployment.rst',
+        'operations/install-deploy-manage/expand-minio-deployment.rst',
+        'operations/install-deploy-manage/decommission-server-pool.rst',
+        'operations/manage-existing-deployments.rst',
+
+    ]
+else:
+    excludes = []
+
+exclude_patterns.extend(excludes)
+
+# This should suppress myst warnings, but it doesn't seem to work.
 
 # Copy-Button Customization
 
@@ -113,7 +180,7 @@ html_theme_options = {
     'show_relbars': 'false'
 }
 
-html_short_title = "MinIO Object Storage for Baremetal Infrastructure"
+html_short_title = "MinIO Object Storage for " + platform.capitalize()
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -128,7 +195,7 @@ html_extra_path = [ 'extra']
 
 html_permalinks_icon = "<img class='anchor' src=https://docs.min.io/minio/baremetal/_static/img/anchor-link.svg />"
 
-html_title = 'MinIO Baremetal Documentation'
+html_title = 'MinIO Object Storage for ' + platform.capitalize()
 
 # -- Options for Sphinx Tabs -------------------------------------------------
 
@@ -137,7 +204,9 @@ sphinx_tabs_disable_css_loading = True
 rst_prolog = """
 
 .. |podman| replace:: `Podman <https://podman.io/>`__
-.. |kes-stable| replace:: 0.16.1
+
+.. |kes-tag| replace:: `KESLATEST <https://github.com/minio/kes/releases/tag/KESLATEST>`__
+.. |kes-stable| replace:: KESLATEST
 
 .. |minio-tag| replace:: `MINIOLATEST <https://github.com/minio/minio/releases/tag/MINIOLATEST>`__
 .. |minio-latest| replace:: MINIOLATEST

@@ -36,4 +36,50 @@ window.addEventListener("DOMContentLoaded", (event) => {
 		target === 'sidebar' ? $('body').removeClass('nav-active') : $('body').removeClass('sidebar-active');
 		$('body').toggleClass(target + '-active');
 	});
+
+   renderPersonas();
+
+
 });
+
+function renderPersonas() {
+   // This inserts the personas into the left-hand nav
+
+   let operationPersona = document.createElement("span");
+   operationPersona.innerHTML = "Operations";
+   operationPersona.id = "operationsPersona";
+   operationPersona.className = "persona";
+
+   let administrationPersona = document.createElement("span");
+   administrationPersona.innerHTML = "Administration";
+   administrationPersona.id = "administrationPersona";
+   administrationPersona.className = "persona";
+
+   let developerPersona = document.createElement("span");
+   developerPersona.innerHTML = "Developers";
+   developerPersona.id = "developerPersona";
+   developerPersona.className = "persona";
+
+   let referencePersona = document.createElement("span");
+   referencePersona.innerHTML = "Reference";
+   referencePersona.id = "referencePersona";
+   referencePersona.className = "persona";
+
+   list = document.getElementsByClassName("toctree-l1");
+
+   for (i=0; i<list.length; i++) {
+      let page_title = list[i].childNodes[0].innerHTML;
+      if (page_title === "Install and Deploy MinIO" || page_title === "Install the MinIO Operator") {
+         list[i].insertAdjacentElement('beforebegin',operationPersona);
+      }
+      else if (page_title === "MinIO Console") {
+         list[i].insertAdjacentElement('beforebegin',administrationPersona);
+      }
+      else if (page_title === "Software Development Kits (SDK)") {
+         list[i].insertAdjacentElement('beforebegin',developerPersona);
+      }
+      else if (page_title === "MinIO Client") {
+         list[i].insertAdjacentElement('beforebegin',referencePersona);
+      }
+   }
+}

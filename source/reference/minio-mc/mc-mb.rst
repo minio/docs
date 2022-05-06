@@ -92,9 +92,7 @@ Parameters
    
 
    Enables :ref:`object locking <minio-object-locking>` on the specified 
-   bucket. Has no effect if the specified ``ALIAS`` is a 
-   :ref:`standalone <minio-installation-comparison>` MinIO deployments *or* 
-   a filesystem directory.
+   bucket.
 
    .. important::
 

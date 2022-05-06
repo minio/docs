@@ -1,8 +1,8 @@
 .. _minio-client:
 
-=====================
-MinIO Client (``mc``)
-=====================
+============
+MinIO Client
+============
 
 .. default-domain:: minio
 

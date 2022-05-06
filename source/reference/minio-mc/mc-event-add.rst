@@ -80,7 +80,7 @@ Parameters
 
    The MinIO server outputs an ARN for each configured 
    notification target at server startup. See 
-   :doc:`/monitoring/bucket-notifications/bucket-notifications` for more
+   :ref:`Bucket Notifications <minio-bucket-notifications>` for more
    information.
 
 .. mc-cmd:: --event
