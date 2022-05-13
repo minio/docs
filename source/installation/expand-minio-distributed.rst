@@ -24,10 +24,6 @@ available storage capacity of the cluster while maintaining the overall
 own failure domain, where the loss of one or more disks or nodes in that pool
 does not effect the availability of other pools in the deployment.
 
-MinIO does not rebalance objects across the new server pools. MinIO
-prefers new write operations to the pool with the most free
-storage, which is typically the newly added pool. 
-
 The procedure on this page expands an existing 
 :ref:`distributed <deploy-minio-distributed>` MinIO deployment with an
 additional server pool. 
@@ -135,6 +131,34 @@ erasure parity settings.
 
 Considerations
 --------------
+
+Writing Files
+~~~~~~~~~~~~~
+
+MinIO does not rebalance objects across the new server pools. 
+Instead, MinIO performs new write operations to the pool with the most free
+storage weighted by the amount of free space on the pool divided by the free space across all available pools.
+
+The formula to determine the probability of a write operation on a particular pool is
+
+:math:`FreeSpaceOnPoolA / FreeSpaceOnAllPools`
+
+Consider a situation where a group of two pools has a total of 10 TiB of free space distributed as:
+
+- Pool A has 3 TiB of free space
+- Pool B has 2 TiB of free space
+- Pool C has 5 TiB of free space
+
+MinIO calculates the probability of a write operation to each of the pools as:
+
+- Pool A: 30% chance (:math:`3TiB / 10TiB`)
+- Pool B: 20% chance (:math:`2TiB / 10TiB`)
+- Pool C: 50% chance (:math:`5TiB / 10TiB`)
+
+In addition to the free space calculation, if a write option (with parity) would bring a disk
+usage above 99% or a known free inode count below 1000, MinIO does not write to the pool.
+
+Likewise, MinIO does not write to pools in a decommissioning process.
 
 Homogeneous Node Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
