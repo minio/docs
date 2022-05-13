@@ -39,7 +39,7 @@ objects.
 
    .. tab-item:: SYNTAX
 
-      The command command has the following syntax:
+      The :mc:`mc diff` command has the following syntax:
 
       .. code-block:: shell
          :class: copyable

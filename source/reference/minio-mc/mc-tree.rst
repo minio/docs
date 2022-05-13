@@ -68,7 +68,7 @@ Parameters
 
       mc tree myminio/mybucket
 
-   You can specify multiple targets to The command command. For
+   You can specify multiple targets to the :mc:`mc tree` command. For
    example:
 
    .. code-block:: shell

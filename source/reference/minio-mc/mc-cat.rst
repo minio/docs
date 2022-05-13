@@ -45,7 +45,7 @@ display the contents of the specified file or object to ``STDOUT``.
 
    .. tab-item:: SYNTAX
 
-      The command command has the following syntax:
+      The :mc:`mc cat` command has the following syntax:
 
       .. code-block:: shell
          :class: copyable
