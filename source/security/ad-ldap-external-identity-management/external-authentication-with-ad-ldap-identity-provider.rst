@@ -217,8 +217,6 @@ group-inherited policies cannot access any resource on the MinIO deployment.
 
 MinIO provides :ref:`built-in policies <minio-policy-built-in>` for basic access
 control. You can create new policies using the :mc:`mc admin policy` command.
-You can create new groups using the :mc:`mc admin group` command and assign
-policies to that group using :mc-cmd:`mc admin policy set`.
 
 .. _minio-external-identity-management-ad-ldap-access-control-group-lookup:
 
