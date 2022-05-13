@@ -44,7 +44,7 @@ similar results to the ``cp`` commandline tool.
 
    .. tab-item:: SYNTAX
 
-      The command command has the following syntax:
+      The :mc:`mc cp` command has the following syntax:
 
       .. code-block:: shell
          :class: copyable

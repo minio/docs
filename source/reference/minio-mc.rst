@@ -154,7 +154,7 @@ The following table lists :mc-cmd:`mc` commands:
    * - | :mc:`mc alias set`
        | :mc:`mc alias remove`
        | :mc:`mc alias list`
-     - The command command provides a convenient interface for
+     - The ``mc alias`` commands provide a convenient interface for
        managing the list of S3-compatible hosts that :mc-cmd:`mc` can connect to
        and run operations against.
 
