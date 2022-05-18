@@ -205,6 +205,15 @@ Support for running MinIO in distributed mode on Windows hosts is
 **experimental**. Contact MinIO at hello@min.io if your infrastructure requires
 deployment onto Windows hosts.
 
+Pre-Existing Data
+~~~~~~~~~~~~~~~~~
+
+When starting a new MinIO server, the storage devices may have existing data.
+MinIO adds this data as buckets and objects in the MinIO deployment.
+
+Once you start the MinIO server, all interactions with the data must be done through the S3 API.
+Use the :ref:`MinIO Client <minio-client>`, the :ref:`MinIO Console <minio-console>`, or one of the MinIO :ref:`Software Development Kits <minio-drivers>` to work with the buckets and objects.
+
 .. _deploy-minio-distributed-baremetal:
 
 Deploy Distributed MinIO

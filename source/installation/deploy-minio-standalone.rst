@@ -40,6 +40,17 @@ deployments are best suited for evaluation and initial development environments.
    For deployments that *require* using network-attached storage, use
    NFSv4 for best results.
 
+Pre-Existing Data
+~~~~~~~~~~~~~~~~~
+
+When starting a new MinIO server, the storage devices may have existing data.
+MinIO adds this data as buckets and objects in the MinIO deployment.
+
+Once you start the MinIO server, all interactions with the data must be done through the S3 API.
+Use the :ref:`MinIO Client <minio-client>`, the :ref:`MinIO Console <minio-console>`, or one of the MinIO :ref:`Software Development Kits <minio-drivers>` to work with the buckets and objects.
+
+For example, if you navigate to the storage device through a file explorer program and change the data on the device directly, MinIO may not pick up the changes as long as the server is running.
+
 1) Download and Run MinIO Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -114,6 +114,22 @@ hello@min.io for additional support and guidance. You can build MinIO from
 for your platform and architecture combo. MinIO generally does not recommend
 source-based installations in production environments.
 
+.. _minio-preexisting-data::
+
+Pre-Existing Data
+-----------------
+
+When deploying a new MinIO server instance, you can choose a storage location that contains existing data.
+MinIO adds the existing data as buckets and objects as part of starting the server.
+
+Once you start the server, MinIO does not support manipulating the data directly on the storage location outside of the S3 API.
+
+For example, you cannot navigate to the storage location using a file explorer program and add or remove files.
+If you do manipulate the data outside of the S3 API, you cannot expect MinIO to recognize the changes.
+
+Instead, use the :ref:`MinIO Client <minio-client>`, the :ref:`MinIO Console <minio-console>`, or one of the MinIO :ref:`Software Development Kits <minio-drivers>` to work with the buckets and objects instead.
+
+
 .. toctree::
    :titlesonly:
    :hidden:
