@@ -85,6 +85,11 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-kms-key-desc
           :end-before: end-mc-admin-kms-key-desc
 
+   * - :mc-cmd:`mc admin logs`
+     - .. include:: /reference/minio-mc-admin/mc-admin-logs.rst
+          :start-after: start-mc-admin-logs-desc
+          :end-before: end-mc-admin-logs-desc
+
    * - :mc-cmd:`mc admin obd`
      - .. include:: /reference/minio-mc-admin/mc-admin-obd.rst
           :start-after: start-mc-admin-obd-desc

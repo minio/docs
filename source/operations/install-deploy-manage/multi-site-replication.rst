@@ -83,6 +83,11 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
    Failed or pending replications requeue automatically when performing any ``GET`` or ``HEAD`` API method. 
    For example, using :mc:`mc stat`, :mc:`mc cat`, or :mc:`mc ls` commands after a site comes back online prompts healing to requeue.
 
+.. versionchanged:: RELEASE.2022-12-02T23-48-47Z
+
+   If one site loses data for any reason, resynchronize the data from another healthy site with :mc:`mc admin replicate resync`.
+   This launches an active process that resynchronizes the data without waiting for the passive MinIO scanner to recognize the missing data.
+
 Prerequisites
 -------------
 

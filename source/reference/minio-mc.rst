@@ -338,13 +338,16 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-stat-desc
           :end-before: end-mc-stat-desc
 
-   * - | :mc:`mc support diag`
+   * - | :mc:`mc support callhome`
+       | :mc:`mc support diag`
        | :mc:`mc support inspect`
        | :mc:`mc support perf`
        | :mc:`mc support profile`
+       | :mc:`mc support proxy`
        | :mc:`mc support top`
      - The MinIO Client ``mc support`` commands provides tools for analyzing deployment health or performance and for running diagnostics.
        You can also upload generated health reports for further analysis by MinIO engineering.
+       The ``mc support`` commands require an active |SUBNET| registration.
 
    * - | :mc:`mc tag set`
        | :mc:`mc tag remove`
@@ -538,14 +541,12 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-share-list
    /reference/minio-mc/mc-sql
    /reference/minio-mc/mc-stat
+   /reference/minio-mc/mc-support-callhome
    /reference/minio-mc/mc-support-diag
    /reference/minio-mc/mc-support-inspect
-   /reference/minio-mc/mc-support-logs-disable
-   /reference/minio-mc/mc-support-logs-enable
-   /reference/minio-mc/mc-support-logs-show
-   /reference/minio-mc/mc-support-logs-status
    /reference/minio-mc/mc-support-perf
    /reference/minio-mc/mc-support-profile
+   /reference/minio-mc/mc-support-proxy
    /reference/minio-mc/mc-support-top
    /reference/minio-mc/mc-tag-set
    /reference/minio-mc/mc-tag-list
