@@ -114,7 +114,7 @@ hello@min.io for additional support and guidance. You can build MinIO from
 for your platform and architecture combo. MinIO generally does not recommend
 source-based installations in production environments.
 
-.. _minio-preexisting-data::
+.. _minio-preexisting-data:
 
 Pre-Existing Data
 -----------------
