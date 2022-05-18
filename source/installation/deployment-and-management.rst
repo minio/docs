@@ -114,6 +114,38 @@ hello@min.io for additional support and guidance. You can build MinIO from
 for your platform and architecture combo. MinIO generally does not recommend
 source-based installations in production environments.
 
+.. _minio-preexisting-data:
+
+Pre-Existing Data
+-----------------
+
+Standalone Deployments
+~~~~~~~~~~~~~~~~~~~~~~
+
+When deploying a new MinIO server instance, you can choose a storage location that contains existing data only for standlone deployments.
+For standalone deployments, MinIO adds the existing data as buckets and objects as part of starting the server.
+
+.. important::
+   
+   Files at the root of the starting path do not display in MinIO.
+   Existing data must be in folders in the starting path.
+   Top level folders become MinIO buckets.
+
+Distributed Deployments
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Once you start a standalone server, you can create or delete buckets and objects either with :ref:`MinIO Console <minio-console>`, the :ref:`mc client <minio-client>`, or directly in the file system.
+
+For a distributed MinIO deployment, the starting path must be empty.
+
+Once you start a distributed server, MinIO does not support manipulating the data directly on the storage location outside of the S3 API.
+Manipulating files directly on the storage locations can result in data corruption or data loss.
+
+For example, you cannot navigate to the storage location using a file explorer program and add or remove files.
+
+Instead, use the :ref:`MinIO Client <minio-client>`, the :ref:`MinIO Console <minio-console>`, or one of the MinIO :ref:`Software Development Kits <minio-drivers>` to work with the buckets and objects for distributed deployments.
+
+
 .. toctree::
    :titlesonly:
    :hidden:

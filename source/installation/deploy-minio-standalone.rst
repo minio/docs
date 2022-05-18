@@ -19,6 +19,37 @@ For extended development or production environments, *or* to access
 in :guilabel:`Distributed Mode`. See :ref:`deploy-minio-distributed` for more
 information.
 
+Pre-Existing Data
+-----------------
+
+When starting a new standalone MinIO server, the storage path may have existing data already grouped into directories.
+MinIO displays this data as buckets and objects in the MinIO deployment.
+
+- Top-level folders at the starting path become MinIO buckets.
+- Files in folders within the starting path become objects within the MinIO buckets.
+- Files in the top-level starting path do not display in MinIO.
+
+Consider a starting path with the following structure:
+
+.. code-block:: 
+   
+   /data
+      file.txt
+      /foo
+         file2.txt
+      /bar
+         file3.txt
+
+When you deploy the server with a starting path of ``/data``, MinIO displays the data as follows:
+
+- Two buckets, ``foo`` and ``bar``
+- ``file2.txt`` displays in the ``foo`` bucket 
+- ``file3.txt`` displays in the ``bar`` bucket
+- ``file.txt`` does not display in MinIO anywhere, but remains available through the file system
+
+On a standalone deployment with a single drive, you can manage buckets and objects with the :ref:`Console <minio-console>`, :ref:`command line client <minio-client>`, or create and delete files and folders directly in the starting path folders.
+
+
 .. _deploy-minio-standalone:
 
 Deploy Standalone MinIO on Baremetal
@@ -39,6 +70,7 @@ deployments are best suited for evaluation and initial development environments.
 
    For deployments that *require* using network-attached storage, use
    NFSv4 for best results.
+
 
 1) Download and Run MinIO Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
