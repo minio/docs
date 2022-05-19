@@ -126,10 +126,12 @@ provider for instructions on configuring user claims.
 
 MinIO provides :ref:`built-in policies <minio-policy-built-in>` for basic access
 control. You can create new policies using the :mc:`mc admin policy` command, or
-by using the MinIO Console. MinIO does not support assigning :ref:`groups
-<minio-groups>` to an :abbr:`OIDC (OpenID Connect)` managed identity. Specify
-any and all policies to attach to the user as part of its :abbr:`JWT (JWT)`
-policy claim.
+by using the MinIO Console. 
+
+MinIO does not support using MinIO :ref:`groups <minio-groups>` with :abbr:`OIDC (OpenID Connect)`. 
+Instead, an :abbr:`OIDC (OpenID Connect)` administrator can use the configured OIDC claim to list multiple, comma-separated MinIO :ref:`policies <minio-policy>` to assign to the user.
+The OIDC administrator can create a type of "group" assignment managed entirely within :abbr:`OIDC (OpenID Connect)`.
+For example, ``'policy[,policy]'``.
 
 .. toctree::
    :titlesonly:
