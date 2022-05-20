@@ -30,8 +30,8 @@ standalone MinIO Console using the instructions in the
 You can explore the Console using https://play.min.io:9443. Log in with
 the following credentials:
 
-- Access Key: ``Q3AM3UQ867SPQQA43P2F``
-- Secret Key: ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``
+- Username: ``Q3AM3UQ867SPQQA43P2F``
+- Password: ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``
 
 The Play Console connects to the MinIO Play deployment at https://play.min.io.
 You can also access this deployment using :mc:`mc` and using the ``play``
