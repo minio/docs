@@ -37,9 +37,9 @@ sync-minio-version:
 
 	@cp source/default-conf.py source/conf.py
 
-	@sed -i "s|MINIOLATEST|${MINIO}|g" source/conf.py
-	@sed -i "s|DEBURL|${DEB}|g" source/conf.py
-	@sed -i "s|RPMURL|${RPM}|g" source/conf.py
+	@sed -i "" "s|MINIOLATEST|${MINIO}|g" source/conf.py
+	@sed -i "" "s|DEBURL|${DEB}|g" source/conf.py
+	@sed -i "" "s|RPMURL|${RPM}|g" source/conf.py
 
 	@git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"
 
