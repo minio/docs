@@ -18,7 +18,7 @@ recommends using RPM or DEB installation routes.
          :class: copyable
          :substitutions:
 
-         wget |minio-rpm| -O minio.deb
+         wget |minio-rpm| -O minio.rpm
          sudo dnf install minio.rpm
 
    .. tab-item:: DEB (Debian/Ubuntu)
