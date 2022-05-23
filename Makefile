@@ -33,15 +33,28 @@ sync-minio-version:
 	$(eval RPM = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download'))
 	$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
 
-	@echo "Replacing Variables"
-
 	@cp source/default-conf.py source/conf.py
 
-	@sed -i "" "s|MINIOLATEST|${MINIO}|g" source/conf.py
-	@sed -i "" "s|DEBURL|${DEB}|g" source/conf.py
-	@sed -i "" "s|RPMURL|${RPM}|g" source/conf.py
+	@kname=$(uname -s)
+	@case "${kname}" in \
+	Darwin) \
+		sed -i "" "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
+		sed -i "" "s|DEBURL|${DEB}|g" source/conf.py; \
+		sed -i "" "s|RPMURL|${RPM}|g" source/conf.py; \
+		;; \
+	*) \
+		sed -i "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
+		sed -i "s|DEBURL|${DEB}|g" source/conf.py; \
+		sed -i "s|RPMURL|${RPM}|g" source/conf.py; \
+		;; \
+	esac
 
-	@git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"
+	@if [ "$(shell git diff --name-only | grep 'conf.py')" == "" ]; then \
+		echo "MinIO Server Version already latest"; \
+	else \
+		echo "New MinIO Server Version available" ; \
+		git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"; \
+	fi
 
 sync-java-docs:
 	@echo "Retrieving Java docs from github.com/minio/minio-java"
