@@ -24,8 +24,10 @@ Pre-Existing Data
 
 When starting a new standalone MinIO server, the storage path may have existing data already grouped into directories.
 MinIO displays this data as buckets and objects in the MinIO deployment.
-Files at the root of the storage path do not display in MinIO. 
-To see them in MinIO, move the file(s) into a folder that becomes a MinIO bucket before deploying the server.
+
+- Top-level folders at the starting path become MinIO buckets.
+- Files in folders within the starting path become objects within the MinIO buckets.
+- Files in the top-level starting path do not display in MinIO.
 
 Consider a starting path with the following structure:
 
@@ -38,15 +40,15 @@ Consider a starting path with the following structure:
       /bar
          file3.txt
 
-When you deploy the server with a starting path of ``/data``, MinIO creates two buckets: ``foo`` and ``bar``.
-``file2.txt`` displays in the ``foo`` bucket and ``file3.txt`` displays in the ``bar`` bucket.
+When you deploy the server with a starting path of ``/data``, MinIO displays the data as follows:
 
-``file.txt`` does not display in MinIO anywhere.
+- Two buckets, ``foo`` and ``bar``
+- ``file2.txt`` displays in the ``foo`` bucket 
+- ``file3.txt`` displays in the ``bar`` bucket
+- ``file.txt`` does not display in MinIO anywhere, but remains available through the file system
 
-On a standalone deployment with a single drive, you can create and delete files directly in the starting path folders.
-Top-level folders become MinIO buckets.
-Files in folders within the starting path become objects within the MinIO buckets.
-Files in the top-level starting path do not display in MinIO.
+On a standalone deployment with a single drive, you can manage buckets and objects with the :ref:`Console <minio-console>`, :ref:`command line client <minio-client>`, or create and delete files and folders directly in the starting path folders.
+
 
 .. _deploy-minio-standalone:
 
