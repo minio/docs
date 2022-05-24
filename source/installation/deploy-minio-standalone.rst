@@ -19,6 +19,35 @@ For extended development or production environments, *or* to access
 in :guilabel:`Distributed Mode`. See :ref:`deploy-minio-distributed` for more
 information.
 
+Pre-Existing Data
+-----------------
+
+When starting a new standalone MinIO server, the storage path may have existing data already grouped into directories.
+MinIO displays this data as buckets and objects in the MinIO deployment.
+Files at the root of the storage path do not display in MinIO. 
+To see them in MinIO, move the file(s) into a folder that becomes a MinIO bucket before deploying the server.
+
+Consider a starting path with the following structure:
+
+.. code-block:: 
+   
+   /data
+      file.txt
+      /foo
+         file2.txt
+      /bar
+         file3.txt
+
+When you deploy the server with a starting path of ``/data``, MinIO creates two buckets: ``foo`` and ``bar``.
+``file2.txt`` displays in the ``foo`` bucket and ``file3.txt`` displays in the ``bar`` bucket.
+
+``file.txt`` does not display in MinIO anywhere.
+
+On a standalone deployment with a single drive, you can create and delete files directly in the starting path folders.
+Top-level folders become MinIO buckets.
+Files in folders within the starting path become objects within the MinIO buckets.
+Files in the top-level starting path do not display in MinIO.
+
 .. _deploy-minio-standalone:
 
 Deploy Standalone MinIO on Baremetal
@@ -40,16 +69,6 @@ deployments are best suited for evaluation and initial development environments.
    For deployments that *require* using network-attached storage, use
    NFSv4 for best results.
 
-Pre-Existing Data
-~~~~~~~~~~~~~~~~~
-
-When starting a new MinIO server, the storage devices may have existing data.
-MinIO adds this data as buckets and objects in the MinIO deployment.
-
-Once you start the MinIO server, all interactions with the data must be done through the S3 API.
-Use the :ref:`MinIO Client <minio-client>`, the :ref:`MinIO Console <minio-console>`, or one of the MinIO :ref:`Software Development Kits <minio-drivers>` to work with the buckets and objects.
-
-For example, if you navigate to the storage device through a file explorer program and change the data on the device directly, MinIO may not pick up the changes as long as the server is running.
 
 1) Download and Run MinIO Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

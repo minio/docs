@@ -208,11 +208,14 @@ deployment onto Windows hosts.
 Pre-Existing Data
 ~~~~~~~~~~~~~~~~~
 
-When starting a new MinIO server, the storage devices may have existing data.
-MinIO adds this data as buckets and objects in the MinIO deployment.
+When starting a new MinIO server in a distributed environment, the storage devices must not have existing data.
 
 Once you start the MinIO server, all interactions with the data must be done through the S3 API.
 Use the :ref:`MinIO Client <minio-client>`, the :ref:`MinIO Console <minio-console>`, or one of the MinIO :ref:`Software Development Kits <minio-drivers>` to work with the buckets and objects.
+
+.. warning:: 
+   
+   Modifying files on the backend drives can result in data corruption or data loss.
 
 .. _deploy-minio-distributed-baremetal:
 
