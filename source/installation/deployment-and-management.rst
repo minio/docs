@@ -18,18 +18,23 @@ of operating systems and architectures.
 
 MinIO supports three deployment topologies: 
 
-Single-Node Single-Drive
+Single-Node Single-Drive (SNSD)
   A single MinIO server with a single storage volume or folder. 
   |SNSD| deployments are best suited for evaluation and initial development of applications using MinIO for object storage.
-  This topology is also known as :guilabel:`Standalone Mode`.
+  This topology was previously referred to as :guilabel:`Standalone Mode`.
 
-  Starting with :minio-release:`RELEASE.2022-06-02T02-11-04Z`, |SNSD| deployments implement a zero-parity erasure coding backend and includes support for erasure-coding dependent features.
-  This new feature is incompatible with the older filesystem-style behavior where MinIO acted as a simple S3 API layer while allowing POSIX-style access to managed files.
+  Starting with :minio-release:`RELEASE.2022-06-02T02-11-04Z`, |SNSD| deployments implement a zero-parity erasure coding backend and include support for the following erasure-coding dependent features:
 
-Single-Node Multi-Drive
-  A single MinIO server with four or more storage volumes. |SNMD| deployments provide drive-level reliability and failover only and are best suited for early development or small-scale storage with minimal uptime requirements.
+  - Versioning
+  - Object Locking / Retention
 
-Multi-Node Multi-Drive
+  This topology is incompatible with the older filesystem-style behavior where MinIO acted as a simple S3 API layer while allowing POSIX-style access to managed files.
+
+Single-Node Multi-Drive (SNMD)
+  A single MinIO server with four or more storage volumes. 
+  |SNMD| deployments provide drive-level reliability and failover only.
+
+Multi-Node Multi-Drive (MNMD or "Distributed")
   Multiple MinIO servers with at least four drives across all servers. 
   The distributed |MNMD| topology supports production-grade object storage with drive and node-level availability and resiliency.
 
@@ -126,7 +131,7 @@ Instead, use the :ref:`MinIO Client <minio-client>`, the :ref:`MinIO Console <mi
 
    /installation/deploy-minio-distributed
    /installation/expand-minio-distributed
-   /installation/deploy-minio-standalone
+   /installation/deploy-minio-single-node-single-drive
    /installation/upgrade-minio
    /installation/restore-minio
    /installation/decommission-pool
