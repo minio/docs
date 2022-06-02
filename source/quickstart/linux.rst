@@ -8,7 +8,7 @@ Quickstart for Linux
 
 .. |OS| replace:: Linux
 
-This procedure deploys a :ref:`Standalone <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and it's S3-compatible API layer. 
+This procedure deploys a :ref:`Standalone <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 
 
 For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
 

@@ -1,6 +1,6 @@
-=====================================
-Deploy Single-Node Single-Drive MinIO
-=====================================
+========================================
+Deploy MinIO as Single-Node Single-Drive
+========================================
 
 .. default-domain:: minio
 
@@ -27,19 +27,17 @@ Use an earlier version of MinIO to retain the legacy filesystem-access behavior.
 .. admonition:: MinIO Avoids Root Disks
    :class: important
 
-   MinIO by default avoids using the root OS disk as part of startup and returns an error if the specifid path is part of the root disk.
+   By default MinIO returns an error if the specified path is part of the root or OS drive.
 
-   You can specify the environment variable ``MINIO_CI_CD=1`` to allow using root disks.
-
-   This variable is intended primarily for CI/CD environments or local testing/evaluation.
-   MinIO does not support usage outside of those specific use cases.
+   Specify the environment variable ``MINIO_CI_CD=1`` to direct MinIO to use the root disk in CI/CD environments or for local testing and evaluation.
+   MinIO does not support usage of this environment variable outside of these use cases.
 
 .. _deploy-minio-standalone:
 
-Deploy Single-Node Single-Drive MinIO on Baremetal
---------------------------------------------------
+Deploy Single-Node Single-Drive MinIO
+-------------------------------------
 
-The following procedure deploys MinIO consisting of a single MinIO server and a single drive or storage volume. Standalone deployments are best suited for evaluation and initial development environments.
+The following procedure deploys MinIO consisting of a single MinIO server and a single drive or storage volume.
 
 .. admonition:: Network File System Volumes Break Consistency Guarantees
    :class: note
@@ -196,12 +194,10 @@ operations against the MinIO server.
 
 .. _deploy-minio-standalone-container:
 
-Deploy Standalone MinIO in a Container
---------------------------------------
+Deploy Containerized Single-Node Single-Drive MinIO
+---------------------------------------------------
 
 The following procedure deploys a single MinIO container with a single drive.
-Standalone deployments are best suited for evaluation and initial development
-environments.
 
 The procedure uses `Podman <https://podman.io/>`__ for running the MinIO
 container in rootfull mode. Configuring for rootless mode is out of scope for
