@@ -10,8 +10,6 @@ Quickstart for Linux
 
 This procedure deploys a :ref:`Standalone <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and it's S3-compatible API layer. 
 
-Standalone deployments (also called "filesystem mode") support a :ref:`subset of MinIO features <minio-installation-comparison>` where redundancy or availability are dependent entirely on the underlying drive or volume.
-
 For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
 
 Prerequisites

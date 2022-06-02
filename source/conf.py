@@ -145,5 +145,8 @@ rst_prolog = """
 .. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio_20220519182059.0.0_amd64.deb
 .. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
+.. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
+.. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`
+.. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`
 
 """

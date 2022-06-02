@@ -11,11 +11,10 @@ Recover after Hardware Failure
    :local:
    :depth: 1
 
-Distributed MinIO deployments rely on :ref:`Erasure Coding
-<minio-erasure-coding>` to provide built-in tolerance for multiple disk or node
-failures. Depending on the deployment topology and the selected erasure code
-parity, MinIO can tolerate the loss of up to half the drives or nodes in the
-deployment while maintaining read access ("read quorum") to objects. 
+MinIO deployments rely on :ref:`Erasure Coding <minio-erasure-coding>` to provide built-in tolerance for multiple disk or node failures. 
+Depending on the deployment topology and the selected erasure code parity, MinIO can tolerate the loss of up to half the drives or nodes in the deployment while maintaining read access ("read quorum") to objects. 
+
+:ref:`Single-Node Single-Drive <minio-installation-comparison>` deployments are zero-parity and depend on the underlying storage volume to provide recovery. Ensure the storage volume has the necessary resiliency settings and defer to the tools or software associated to that volume for recovery.
 
 The following table lists the typical types of failure in a MinIO deployment
 and links to procedures for recovering from each:

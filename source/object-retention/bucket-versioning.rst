@@ -206,11 +206,6 @@ Tutorials
 Enable Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
-
-   Versioning requires :ref:`erasure coding <minio-erasure-coding>` and is only
-   available on :ref:`distributed MinIO deployments <deploy-minio-distributed>`.
-
 You can enable versioning using the MinIO Console, the MinIO :mc:`mc` CLI, or
 using an S3-compatible SDK. Versioning is a bucket-scoped feature. You cannot
 enable versioning on only a prefix or subset of objects in a bucket.
