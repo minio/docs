@@ -145,5 +145,9 @@ rst_prolog = """
 .. |minio-deb| replace:: DEBURL
 .. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
+.. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
+.. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`
+.. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`
+
 
 """
