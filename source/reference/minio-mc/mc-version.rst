@@ -154,18 +154,6 @@ object locking on a bucket or an object in that bucket automatically
 enables versioning for the bucket. See 
 :mc:`mc retention` for more information on configuring object locking.
 
-Bucket Versioning Requires Distributed MinIO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO bucket versioning is available only on 
-:ref:`distributed MinIO deployments <deploy-minio-distributed>`. Specifically,
-Bucket versioning requires that the MinIO deployment supports 
-:ref:`erasure coding <minio-erasure-coding>` (4+ drives). Standalone 
-MinIO deployments (1 drive) cannot support bucket versioning.
-
-See the linked :ref:`comparison table <minio-installation-comparison>` for
-a complete list of features available only with distributed MinIO deployments.
-
 Bucket Versioning with Existing Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
