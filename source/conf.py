@@ -139,10 +139,10 @@ rst_prolog = """
 .. |podman| replace:: `Podman <https://podman.io/>`__
 .. |kes-stable| replace:: 0.16.1
 
-.. |minio-tag| replace:: `RELEASE.2022-06-02T16-16-26Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-06-02T16-16-26Z>`__
-.. |minio-latest| replace:: RELEASE.2022-06-02T16-16-26Z
-.. |minio-rpm| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio-20220602161626.0.0.x86_64.rpm
-.. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio_20220602161626.0.0_amd64.deb
+.. |minio-tag| replace:: `RELEASE.2022-06-03T01-40-53Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-06-03T01-40-53Z>`__
+.. |minio-latest| replace:: RELEASE.2022-06-03T01-40-53Z
+.. |minio-rpm| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio-20220603014053.0.0.x86_64.rpm
+.. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio_20220603014053.0.0_amd64.deb
 .. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
