@@ -101,7 +101,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc admin bucket add SOURCE DESTINATION --service "replication" [FLAGS]
+      mc admin bucket remote add SOURCE DESTINATION --service "replication" [FLAGS]
 
    The command accepts the following arguments:
 
@@ -116,7 +116,7 @@ Syntax
       .. code-block:: shell
          :class: copyable
 
-         mc admin bucket add play/mybucket
+         mc admin bucket remote add play/mybucket
 
    .. mc-cmd:: DESTINATION
 
@@ -188,7 +188,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc admin bucket ls SOURCE --service "replication"
+      mc admin bucket remote ls SOURCE --service "replication"
 
    The command accepts the following arguments:
 
@@ -201,7 +201,7 @@ Syntax
       .. code-block:: shell
          :class: copyable
 
-         mc admin bucket ls play/mybucket
+         mc admin bucket remote ls play/mybucket
 
    .. mc-cmd:: --service
       
@@ -220,7 +220,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc admin bucket rm SOURCE --arn ARN
+      mc admin bucket remote rm SOURCE --arn ARN
 
    The command accepts the following arguments:
 
@@ -236,7 +236,7 @@ Syntax
       .. code-block:: shell
          :class: copyable
 
-         mc admin bucket remove play/mybucket
+         mc admin bucket remote rm play/mybucket
 
    .. mc-cmd:: ARN
       
