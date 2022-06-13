@@ -35,9 +35,7 @@ defaults to 4 parity blocks per object with tolerance for the loss of 4 drives
 per erasure set. For more complete information on selecting erasure code parity,
 see :ref:`minio-ec-parity`.
 
-Erasure coding requires a minimum of 4 drives is only available with 
-:ref:`distributed <minio-installation-comparison>` MinIO deployments. Erasure
-coding is a core requirement for the following MinIO features:
+Erasure coding is a core requirement for the following MinIO features:
 
 - :ref:`Object Versioning <minio-bucket-versioning>`
 - :ref:`Server-Side Replication <minio-bucket-replication>`
@@ -53,7 +51,8 @@ Zero-Parity Deployments
 
 Starting with :minio-release:`RELEASE.2022-06-02T02-11-04Z`, MinIO supports a Single-Node Single-Drive (SNSD) topology with a zero-parity erasure coding backend. 
 
-Zero-parity deployments necessarily depend on the underlying storage for resiliency and availability. Erasure Coding protections and behavior do not apply to |SNSD| deployments.
+Erasure Coding protections do not apply to the zero-parity backend of |SNSD| deployments.
+Zero-parity deployments depend on the underlying storage for resiliency and availability.
 
 .. _minio-ec-erasure-set:
 
