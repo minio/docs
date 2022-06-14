@@ -10,8 +10,6 @@
 
 .. mc:: mc support diagnostics
 
-.. mc:: mc support diag
-
 Description
 -----------
 
@@ -31,7 +29,7 @@ Requests that exceed this limit on a given host return a ``503`` error after ~10
 Use the :mc-cmd:`mc support diagnostics` command to trigger the diagnostic test.
 For clusters registered with SUBNET, the command uploads the results as part of SUBNET Health reports. 
 
-For airgapped or firewalled environments, or other environments that prevent direct network access from the deployment, you can save the report locally with the :mc-cmd:`~mc support diag --airgap` flag.
+For airgapped or firewalled environments, or other environments that prevent direct network access from the deployment, you can save the report locally with the :mc-cmd:`~mc support diagnostics --airgap` flag.
 After saving, you can then upload the results of the test to SUBNET manually.
 
 .. include:: /includes/common-mc-support.rst

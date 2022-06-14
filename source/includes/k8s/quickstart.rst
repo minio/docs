@@ -8,7 +8,7 @@ Quickstart for Kubernetes
 
 .. |OS| replace:: Kubernetes
 
-This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 
+This procedure deploys a Single-Node Single-Drive MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 
 
 Use the :ref:`MinIO Opreator <minio-operator-installation>` to deploy and manage production-ready MinIO tenants on Kubernetes.
 

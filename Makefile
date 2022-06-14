@@ -62,11 +62,38 @@ k8s:
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
+sync-operator-version:
+	@echo "Retrieving latest Operator version"
+	$(shell wget -O /tmp/downloads-operator.json https://api.github.com/repos/minio/operator/releases/latest)
+	$(eval OPERATOR = $(shell cat /tmp/downloads-operator.json | jq '.tag_name[1:]'))
+
+	@echo "Replacing variables"
+
+	@cp source/default-conf.py source/conf.py
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|OPERATOR|${OPERATOR}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|OPERATOR|${OPERATOR}|g" source/conf.py; \
+		;; \
+	esac
+
 sync-kes-version:
 	@echo "Retrieving latest stable KES version"
 	@$(eval KES = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/kes/releases/latest | sed "s/https:\/\/github.com\/minio\/kes\/releases\/tag\///"))
 
-	@sed -i "s|KESLATEST|${KES}|g" source/conf.py
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|KESLATEST|${KES}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|KESLATEST|${KES}|g" source/conf.py; \
+		;; \
+	esac
 
 sync-minio-version:
 	@echo "Retrieving current MinIO version"
@@ -77,9 +104,10 @@ sync-minio-version:
 
 	@cp source/default-conf.py source/conf.py
 
-	@kname=$(uname -s)
+	@$(eval kname = $(shell uname -s))
+
 	@case "${kname}" in \
-	Darwin) \
+	"Darwin") \
 		sed -i "" "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
 		sed -i "" "s|DEBURL|${DEB}|g" source/conf.py; \
 		sed -i "" "s|RPMURL|${RPM}|g" source/conf.py; \
@@ -90,13 +118,6 @@ sync-minio-version:
 		sed -i "s|RPMURL|${RPM}|g" source/conf.py; \
 		;; \
 	esac
-
-	@if [ "$(shell git diff --name-only | grep 'conf.py')" == "" ]; then \
-		echo "MinIO Server Version already latest"; \
-	else \
-		echo "New MinIO Server Version available ${MINIO}" ; \
-		#git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"; \
-	fi
 
 sync-java-docs:
 	@echo "Retrieving Java docs from github.com/minio/minio-java"
