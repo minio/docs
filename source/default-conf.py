@@ -110,6 +110,19 @@ if tags.has("linux"):
         'operations/install-deploy-manage/upgrade-minio-operator.rst',
         'operations/install-deploy-manage/delete-minio-tenant.rst',
         'operations/deploy-manage-tenants.rst',
+        'reference/kubectl-minio-plugin.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-init.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-proxy.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-create.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-delete.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-expand.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-info.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-list.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-report.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-upgrade.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("macos"):
     excludes = [
@@ -120,6 +133,19 @@ elif tags.has("macos"):
         'operations/install-deploy-manage/upgrade-minio-operator.rst',
         'operations/install-deploy-manage/delete-minio-tenant.rst',
         'operations/deploy-manage-tenants.rst',
+        'reference/kubectl-minio-plugin.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-init.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-proxy.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-create.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-delete.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-expand.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-info.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-list.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-report.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-upgrade.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("windows"):
     excludes = [
@@ -130,6 +156,19 @@ elif tags.has("windows"):
         'operations/install-deploy-manage/upgrade-minio-operator.rst',
         'operations/install-deploy-manage/delete-minio-tenant.rst',
         'operations/deploy-manage-tenants.rst',
+        'reference/kubectl-minio-plugin.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-init.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-proxy.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-create.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-delete.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-expand.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-info.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-list.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-report.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-upgrade.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("k8s"):
     excludes = [
@@ -148,6 +187,11 @@ else:
 exclude_patterns.extend(excludes)
 
 # This should suppress myst warnings, but it doesn't seem to work.
+
+intersphinx_mapping = {
+    'k8s'      : ('https://docs.min.io/minio/k8s/', None),
+    'baremetal': ('https://docs.min.io/minio/baremetal', None),
+}
 
 # Copy-Button Customization
 
@@ -207,6 +251,7 @@ rst_prolog = """
 
 .. |kes-tag| replace:: `KESLATEST <https://github.com/minio/kes/releases/tag/KESLATEST>`__
 .. |kes-stable| replace:: KESLATEST
+.. |operator-version-stable| replace:: OPERATOR
 
 .. |minio-tag| replace:: `MINIOLATEST <https://github.com/minio/minio/releases/tag/MINIOLATEST>`__
 .. |minio-latest| replace:: MINIOLATEST

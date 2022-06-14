@@ -104,6 +104,7 @@ without validating their usage do so at their own risk.
       /reference/minio-mc
       /reference/minio-mc-admin
       /reference/minio-server/minio-server
+      /reference/kubectl-minio-plugin
 
 .. cond:: linux or macos or windows
 

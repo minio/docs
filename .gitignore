@@ -11,3 +11,4 @@ objects.inv
 output.log
 .DS_Store
 source/conf.py
+package-lock.json
