@@ -123,7 +123,7 @@ the example command above may differ from the output in your terminal:
 
    Alternatively, you can generate x.509 TLS certificates signed by a known
    and trusted CA and pass those certificates to MinIO Tenants. 
-   See :ref:`minio-tls-user-generated` for more complete documentation.
+   See :ref:`minio-tls` for more complete documentation.
 
 Procedure
 ---------
