@@ -488,7 +488,7 @@ for use by based on the total network bandwidth supported by the host:
    * - 100GbE
      - 64 vCPU per pod.
 
-
+.. _minio-k8s-production-considerations-memory:
 
 Memory Allocation
 ~~~~~~~~~~~~~~~~~

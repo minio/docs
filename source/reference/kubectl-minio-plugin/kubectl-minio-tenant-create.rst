@@ -101,7 +101,7 @@ The command supports the following flags:
    Total raw capacity of the MinIO tenant, such as 16Ti.
    Include a string that is a number and a standard storage capacity unit.
 
-   The total capacity of the MinIO tenant. :mc:`kubectl minio` divides the capacity by the number of :mc-cmd:`~kubectl minio tenant create --volumes` to determine the       amount of ``resources.requests.storage`` to set for each Persistent Volume Claim (``PVC``).
+   The total capacity of the MinIO tenant. :mc:`kubectl minio` divides the capacity by the number of :mc-cmd:`~kubectl minio tenant create --volumes` to determine the amount of ``resources.requests.storage`` to set for each Persistent Volume Claim (``PVC``).
 
    If no Persistent Volumes (``PV``) can satisfy the requested storage, :mc:`kubectl minio tenant create` hangs and waits until the required storage exists.
 
@@ -123,7 +123,7 @@ The command supports the following flags:
 
    - The command :mc:`kubectl minio` divides the :mc-cmd:`~kubectl minio tenant create --capacity` by the number of volumes to determine the amount of ``resources.requests.storage`` to set for each ``PVC``.
 
-   - :mc:`kubectl minio` determines the number of ``PVC`` to associate to each ``minio`` server by dividing :mc-cmd:`~kubectl minio tenant create --volumes` by         :mc-cmd:`~kubectl minio tenant create --servers`.
+   - :mc:`kubectl minio` determines the number of ``PVC`` to associate to each ``minio`` server by dividing :mc-cmd:`~kubectl minio tenant create --volumes` by :mc-cmd:`~kubectl minio tenant create --servers`.
 
    The command generates each ``PVC`` with Pod-specific selectors, such that each Pod only uses ``PV`` that are locally-attached to the node running that Pod.
 

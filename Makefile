@@ -68,6 +68,8 @@ sync-operator-version:
 	$(shell wget -O /tmp/downloads-operator.json https://api.github.com/repos/minio/operator/releases/latest)
 	$(eval OPERATOR = $(shell cat /tmp/downloads-operator.json | jq '.tag_name[1:]'))
 
+	@$(eval kname = $(shell uname -s))
+
 	@echo "Updating Operator to ${OPERATOR}"
 
 	@case "${kname}" in \
@@ -116,12 +118,12 @@ sync-minio-version:
 		;; \
 	esac
 
-	@if [ "$(shell git diff --name-only | grep 'conf.py')" == "" ]; then \
-		echo "MinIO Server Version already latest"; \
-	else \
-		echo "New MinIO Server Version available ${MINIO}" ; \
-		#git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"; \
-	fi
+#	@if [ "$(shell git diff --name-only | grep 'conf.py')" == "" ]; then \
+#		echo "MinIO Server Version already latest"; \
+#	else \
+#		echo "New MinIO Server Version available ${MINIO}" ; \
+#		#git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"; \
+#	fi
 
 sync-java-docs:
 	@echo "Retrieving Java docs from github.com/minio/minio-java"
