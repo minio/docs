@@ -35,7 +35,7 @@ See :ref:`minio-mc-commands` for a list of supported commands.
    licensed Free and Open Source (FOSS) software. 
 
    Applications integrating :program:`mc` may trigger AGPLv3 compliance
-   requirements. `MinIO Commericla Licensing <https://min.io/pricing>`__
+   requirements. `MinIO Commericial Licensing <https://min.io/pricing>`__
    is the best option for applications which trigger AGPLv3 obligations where
    open-sourcing the application is not an option.   
 
