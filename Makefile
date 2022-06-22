@@ -124,14 +124,6 @@ sync-minio-version:
 		;; \
 	esac
 
-#	@if [ "$(shell git diff --name-only | grep 'conf.py')" == "" ]; then \
-#		echo "MinIO Server Version already latest"; \
-#	else \
-#		echo "New MinIO Server Version available ${MINIO}" ; \
-#		#git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"; \
-#	fi
-
-
 sync-cpp-docs:
 # C++ repo does not have any releases yet.
 	@echo "Retrieving C++ docs from github.com/minio/minio-js"

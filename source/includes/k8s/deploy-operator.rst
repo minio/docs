@@ -57,24 +57,22 @@ the MinIO Operator or Plugin v4.0.0 or later.
 
 This procedure assumes that your local host machine has both the correct version of ``kubectl`` for your Kubernetes cluster *and* the necessary access to that cluster to create new resources.
 
+.. _minio-k8s-deploy-operator-tls:
+
 Kubernetes TLS Certificate API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The MinIO Operator automatically generates TLS Certificate Signing Requests
-(CSR) and uses the Kubernetes ``certificates.k8s.io`` 
-:kube-docs:`TLS certificate management API 
-<tasks/tls/managing-tls-in-a-cluster/>` to create signed TLS certificates.
+The MinIO Operator automatically generates TLS Certificate Signing Requests (CSR) and uses the Kubernetes ``certificates.k8s.io`` :kube-docs:`TLS certificate management API <tasks/tls/managing-tls-in-a-cluster/>` to create signed TLS certificates.
 
-The MinIO Operator therefore *requires* that the Kubernetes 
-``kube-controller-manager`` configuration include the following 
-:kube-docs:`configuration settings 
-<reference/command-line-tools-reference/kube-controller-manager/#options>`:
+The MinIO Operator therefore *requires* that the Kubernetes ``kube-controller-manager`` configuration include the following :kube-docs:`configuration settings <reference/command-line-tools-reference/kube-controller-manager/#options>`:
 
-- ``--cluster-signing-key-file`` - Specify the PEM-encoded RSA or ECDSA private
-  key used to sign cluster-scoped certificates.
+- ``--cluster-signing-key-file`` - Specify the PEM-encoded RSA or ECDSA private key used to sign cluster-scoped certificates.
 
-- ``--cluster-signing-cert-file`` - Specify the PEM-encoded x.509 Certificate
-  Authority certificate used to issue cluster-scoped certificates.
+- ``--cluster-signing-cert-file`` - Specify the PEM-encoded x.509 Certificate Authority certificate used to issue cluster-scoped certificates.
+
+The Kubernetes TLS API uses the CA signature algorithm for generating new TLS certificate.
+MinIO recommends ECDSA (e.g. `NIST P-256 curve <https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf>`__) or EdDSA (e.g. :rfc:`Curve25519 <7748>`) TLS private keys/certificates due to their lower computation requirements compared to RSA.
+See :ref:`minio-TLS-supported-cipher-suites` for a complete list of supported TLS Cipher Suites.
 
 The Operator cannot complete initialization if the Kubernetes cluster is 
 not configured to respond to a generated CSR. Certain Kubernetes 

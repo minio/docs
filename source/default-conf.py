@@ -103,12 +103,13 @@ exclude_patterns = ['includes/*', '*-template.rst']
 
 if tags.has("linux"):
     excludes = [
-        'operations/install-deploy-manage/minio-k8s-deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
         'operations/install-deploy-manage/expand-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-operator.rst',
         'operations/install-deploy-manage/delete-minio-tenant.rst',
+        'operations/install-deploy-manage/minio-operator-console.rst',
         'operations/deploy-manage-tenants.rst',
         'reference/kubectl-minio-plugin.rst',
         'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
@@ -126,12 +127,13 @@ if tags.has("linux"):
     ]
 elif tags.has("macos"):
     excludes = [
-        'operations/install-deploy-manage/minio-k8s-deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
         'operations/install-deploy-manage/expand-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-operator.rst',
         'operations/install-deploy-manage/delete-minio-tenant.rst',
+        'operations/install-deploy-manage/minio-operator-console.rst',
         'operations/deploy-manage-tenants.rst',
         'reference/kubectl-minio-plugin.rst',
         'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
@@ -149,12 +151,13 @@ elif tags.has("macos"):
     ]
 elif tags.has("windows"):
     excludes = [
-        'operations/install-deploy-manage/minio-k8s-deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
         'operations/install-deploy-manage/expand-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-tenant.rst',
         'operations/install-deploy-manage/upgrade-minio-operator.rst',
         'operations/install-deploy-manage/delete-minio-tenant.rst',
+        'operations/install-deploy-manage/minio-operator-console.rst',
         'operations/deploy-manage-tenants.rst',
         'reference/kubectl-minio-plugin.rst',
         'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',

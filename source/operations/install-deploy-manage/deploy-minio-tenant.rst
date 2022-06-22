@@ -381,6 +381,8 @@ This includes configuring an external IDP such as :ref:`OpenID <minio-external-i
 
 .. _create-tenant-security-section:
 
+.. _minio-k8s-deploy-minio-tenant-security:
+
 7) The :guilabel:`Security` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
