@@ -264,5 +264,15 @@ rst_prolog = """
 .. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`
 .. |operator-version-stable| replace:: OPERATOR
 
+.. |cpp-sdk-version| replace:: CPPVERSION
+.. |dotnet-sdk-version| replace:: DOTNETVERSION
+.. |go-sdk-version| replace:: GOVERSION
+.. |haskell-sdk-version| replace:: HASKELLVERSION
+.. |java-jar-url| replace:: JAVAURL
+.. |java-sdk-version| replace:: JAVAVERSION
+.. |javascript-sdk-version| replace:: JAVASCRIPTVERSION
+.. |python-sdk-version| replace:: PYTHONVERSION
+.. |rust-sdk-version| replace:: RUSTVERSION
+
 
 """

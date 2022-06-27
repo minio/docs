@@ -38,6 +38,7 @@ linux:
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
+	@make sync-sdks
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
@@ -45,6 +46,7 @@ windows:
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
+	@make sync-sdks
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
@@ -52,6 +54,7 @@ macos:
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
+	@make sync-sdks
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
@@ -60,6 +63,7 @@ k8s:
 	@make sync-operator-version
 	@make sync-minio-version
 	@make sync-kes-version
+	@make sync-sdks
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
@@ -71,6 +75,8 @@ sync-operator-version:
 	@$(eval kname = $(shell uname -s))
 
 	@echo "Updating Operator to ${OPERATOR}"
+
+	@$(eval kname = $(shell uname -s))
 
 	@case "${kname}" in \
 	"Darwin") \
@@ -125,42 +131,180 @@ sync-minio-version:
 #		#git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"; \
 #	fi
 
-sync-java-docs:
-	@echo "Retrieving Java docs from github.com/minio/minio-java"
-	@$(eval LATEST = $(shell wget -q https://api.github.com/repos/minio/minio-java/releases/latest -O - | jq -r '.tag_name'))
-	@echo "Latest stable is ${LATEST}"
-	$(shell wget -q -O source/developers/java/API.md https://raw.githubusercontent.com/minio/minio-java/${LATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/java/quickstart.md https://raw.githubusercontent.com/minio/minio-java/${LATEST}/README.md)
 
-sync-python-docs:
-	@echo "Retrieving Python docs from github.com/minio/minio-py"
-	@$(eval LATEST = $(shell wget -q https://api.github.com/repos/minio/minio-py/releases/latest -O - | jq -r '.tag_name'))
-	@echo "Latest stable is ${LATEST}"
-	$(shell wget -q -O source/developers/python/API.md https://raw.githubusercontent.com/minio/minio-py/${LATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/python/quickstart.md https://raw.githubusercontent.com/minio/minio-py/${LATEST}/README.md)
+sync-cpp-docs:
+# C++ repo does not have any releases yet.
+	@echo "Retrieving C++ docs from github.com/minio/minio-js"
+	@$(eval CPPLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-cpp/releases/latest -O - | jq -r '.tag_name'))
+	@echo "Latest stable is ${CPPLATEST}"
+	$(shell wget -q -O source/developers/cpp/API.md https://raw.githubusercontent.com/minio/minio-cpp/${CPPLATEST}/docs/API.md)
+	$(shell wget -q -O source/developers/cpp/quickstart.md https://raw.githubusercontent.com/minio/minio-cpp/${CPPLATEST}/README.md)
+
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|CPPVERSION|${CPPLATEST}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|CPPVERSION|${CPPLATEST}|g" source/conf.py; \
+		;; \
+	esac
+
+sync-dotnet-docs:
+	@echo "Retrieving .NET docs from github.com/minio/minio-dotnet"
+	@$(eval DOTNETLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-dotnet/releases/latest -O - | jq -r '.tag_name'))
+	@echo "Latest stable is ${DOTNETLATEST}"
+	$(shell wget -q -O source/developers/dotnet/API.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/Docs/API.md)
+#	$(shell wget -q -O source/developers/dotnet/quickstart.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/README.md)
+
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|DOTNETVERSION|${DOTNETLATEST}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|DOTNETVERSION|${DOTNETLATEST}|g" source/conf.py; \
+		;; \
+	esac
 
 sync-go-docs:
 	@echo "Retrieving Go docs from github.com/minio/minio-go"
-	@$(eval LATEST = $(shell wget -q https://api.github.com/repos/minio/minio-go/releases/latest -O - | jq -r '.tag_name'))
-	@echo "Latest stable is ${LATEST}"
-	$(shell wget -q -O source/developers/go/API.md https://raw.githubusercontent.com/minio/minio-go/${LATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/go/quickstart.md https://raw.githubusercontent.com/minio/minio-go/${LATEST}/README.md)
+	@$(eval GOLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-go/releases/latest -O - | jq -r '.tag_name'))
+	@echo "Latest stable is ${GOLATEST}"
+	$(shell wget -q -O source/developers/go/API.md https://raw.githubusercontent.com/minio/minio-go/${GOLATEST}/docs/API.md)
+	$(shell wget -q -O source/developers/go/quickstart.md https://raw.githubusercontent.com/minio/minio-go/${GOLATEST}/README.md)
 
-sync-dotnet-docs:
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|GOVERSION|${GOLATEST}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|GOVERSION|${GOLATEST}|g" source/conf.py; \
+		;; \
+	esac
+
+sync-haskell-docs:
+	@echo "Retrieving Haskell docs from github.com/minio/minio-hs"
+	@$(eval HASKELLLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-hs/releases/latest -O - | jq -r '.tag_name'))
+	@echo "Latest stable is ${HASKELLLATEST}"
+	$(shell wget -q -O source/developers/haskell/API.md https://raw.githubusercontent.com/minio/minio-hs/${HASKELLLATEST}/docs/API.md)
+	$(shell wget -q -O source/developers/haskell/quickstart.md https://raw.githubusercontent.com/minio/minio-hs/${HASKELLLATEST}/README.md)
+
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|HASKELLVERSION|${HASKELLLATEST}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|HASKELLVERSION|${HASKELLLATEST}|g" source/conf.py; \
+		;; \
+	esac
+
+sync-java-docs:
+	@echo "Retrieving Java docs from github.com/minio/minio-java"
+	@$(eval JAVALATEST = $(shell wget -q https://api.github.com/repos/minio/minio-java/releases/latest -O - | jq -r '.tag_name'))
+	@echo "Latest stable is ${JAVALATEST}"
+	$(shell wget -q -O source/developers/java/API.md https://raw.githubusercontent.com/minio/minio-java/${JAVALATEST}/docs/API.md)
+	$(shell wget -q -O source/developers/java/quickstart.md https://raw.githubusercontent.com/minio/minio-java/${JAVALATEST}/README.md)
+	@$(eval JAVAJARURL = https://repo1.maven.org/maven2/io/minio/minio/${JAVALATEST}/)
+
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|JAVAVERSION|${JAVALATEST}|g" source/conf.py;\
+		sed -i "" "s|JAVAURL|${JAVAJARURL}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|JAVAVERSION|${JAVALATEST}|g" source/conf.py; \
+		sed -i "s|JAVAURL|${JAVAJARURL}|g" source/conf.py;\
+		;; \
+	esac
+
+sync-javascript-docs:
+	@echo "Retrieving JavaScript docs from github.com/minio/minio-js"
+	@$(eval JAVASCRIPTLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-js/releases/latest -O - | jq -r '.tag_name'))
+	@echo "Latest stable is ${JAVASCRIPTLATEST}"
+	$(shell wget -q -O source/developers/haskell/API.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/docs/API.md)
+	$(shell wget -q -O source/developers/haskell/quickstart.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/README.md)
+
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|JAVASCRIPTVERSION|${JAVASCRIPTLATEST}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|JAVASCRIPTVERSION|${JAVASCRIPTLATEST}|g" source/conf.py; \
+		;; \
+	esac
+
+sync-python-docs:
 	@echo "Retrieving Python docs from github.com/minio/minio-py"
-	@$(eval LATEST = $(shell wget -q https://api.github.com/repos/minio/minio-dotnet/releases/latest -O - | jq -r '.tag_name'))
-	@echo "Latest stable is ${LATEST}"
-	$(shell wget -q -O source/developers/dotnet/API.md https://raw.githubusercontent.com/minio/minio-dotnet/${LATEST}/Docs/API.md)
-	$(shell wget -q -O source/developers/dotnet/quickstart.md https://raw.githubusercontent.com/minio/minio-dotnet/${LATEST}/README.md)
+	@$(eval PYTHONLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-py/releases/latest -O - | jq -r '.tag_name'))
+	@echo "Latest stable is ${PYTHONLATEST}"
+	$(shell wget -q -O source/developers/python/API.md https://raw.githubusercontent.com/minio/minio-py/${PYTHONLATEST}/docs/API.md)
+	$(shell wget -q -O source/developers/python/quickstart.md https://raw.githubusercontent.com/minio/minio-py/${PYTHONLATEST}/README.md)
+
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|PYTHONVERSION|${PYTHONLATEST}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|PYTHONVERSION|${PYTHONLATEST}|g" source/conf.py; \
+		;; \
+	esac
+
+sync-rust-docs:
+# Rust repo does not have any releases yet.
+	@echo "Retrieving Rust docs from github.com/minio/minio-js"
+	@$(eval RUSTLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-rs/releases/latest -O - | jq -r '.tag_name'))
+	@echo "Latest stable is ${RUSTLATEST}"
+#	$(shell wget -q -O source/developers/rust/API.md https://raw.githubusercontent.com/minio/minio-rs/${RUSTLATEST}/docs/API.md)
+	$(shell wget -q -O source/developers/rust/quickstart.md https://raw.githubusercontent.com/minio/minio-rs/${RUSTLATEST}/README.md)
+
+	@$(eval kname = $(shell uname -s))
+
+	@case "${kname}" in \
+	"Darwin") \
+		sed -i "" "s|RUSTVERSION|${RUSTLATEST}|g" source/conf.py;\
+		;; \
+	*) \
+		sed -i "s|RUSTVERSION|${RUSTLATEST}|g" source/conf.py; \
+		;; \
+	esac
+
+sync-sdks:
+# C++ and Rust repos do not have any releases yet.
+#	@make sync-cpp-docs
+	@make sync-dotnet-docs
+	@make sync-go-docs
+	@make sync-haskell-docs
+	@make sync-java-docs
+	@make sync-javascript-docs
+	@make sync-python-docs
+#	@make sync-rust-docs
 
 sync-deps:
+# C++ and Rust repos do not have any releases yet.
 	@echo "Synchronizing all external dependencies"
 	@make sync-minio-version
 	@make sync-kes-version
-	@make sync-java-docs
-	@make sync-python-docs
-	@make sync-go-docs
+#	@make sync-cpp-docs
 	@make sync-dotnet-docs
+	@make sync-go-docs
+	@make sync-haskell-docs
+	@make sync-java-docs
+	@make sync-javascript-docs
+	@make sync-python-docs
+#	@make sync-rust-docs
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
