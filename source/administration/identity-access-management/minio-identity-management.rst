@@ -35,7 +35,7 @@ user's authorized actions and resources *or* assign the user to :ref:`groups
 :ref:`minio-access-management` for more information.
 
 .. admonition:: External Identity Management
-   :class: dropdown, note
+   :class: note
 
    MinIO supports external management of identities using either an
    OpenID Connect (OIDC) or Active Directory/LDAP IDentity Provider (IDP).

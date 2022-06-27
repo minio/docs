@@ -11,7 +11,7 @@ Decommission a Server Pool
    :depth: 1
 
 Starting with :minio-release:`RELEASE.2022-01-25T19-56-04Z`, MinIO supports
-decommissioning and removing a :ref:`server pools <minio-intro-server-pool>`
+decommissioning and removing a :ref:`server pool <minio-intro-server-pool>`
 from a deployment. Decommissioning is designed for removing an older server pool
 whose hardware is no longer sufficient or performant compared to the pools in
 the deployment. MinIO automatically migrates data from the decommissioned pool
@@ -89,12 +89,13 @@ this procedure.
 Deployment Must Have Sufficient Storage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The decommissioning process migrates objects from the target pool to other
-pools in the deployment. The total available storage on the deployment
-*must* exceed the total storage of the decommissioned pool.
+The decommissioning process migrates objects from the target pool to other pools in the deployment. 
+The total available storage on the deployment *must* exceed the total storage of the decommissioned pool.
 
-For example, consider a deployment with the following distribution of
-used and free storage:
+Use the `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ to determine the usable storage capacity.
+Then reduce that by the size of the objects already on the deployment.
+
+For example, consider a deployment with the following distribution of used and free storage:
 
 .. list-table::
    :stub-columns: 1
@@ -113,9 +114,8 @@ used and free storage:
      - 100TB Used
      - 200TB Total
 
-Decommissioning Pool 1 requires distributing the 100TB of used storage
-across the remaining pools. Pool 2 and Pool 3 each have 100TB of unused
-storage space and can safely absorb the data stored on Pool 1. 
+Decommissioning Pool 1 requires distributing the 100TB of used storage across the remaining pools. 
+Pool 2 and Pool 3 each have 100TB of unused storage space and can safely absorb the data stored on Pool 1. 
 
 However, if Pool 1 were full (e.g. 200TB of used space), decommissioning would
 completely fill the remaining pools and potentially prevent any further write
