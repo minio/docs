@@ -104,7 +104,8 @@ without validating their usage do so at their own risk.
       /reference/minio-mc
       /reference/minio-mc-admin
       /reference/kubectl-minio-plugin
-
+      /glossary
+      
 .. cond:: linux or macos or windows
 
    .. toctree::
@@ -132,3 +133,4 @@ without validating their usage do so at their own risk.
       /reference/minio-mc
       /reference/minio-mc-admin
       /reference/minio-server/minio-server
+      /glossary
