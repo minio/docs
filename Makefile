@@ -29,8 +29,8 @@ clean:
 sync-minio-version:
 	@echo "Retrieving current MinIO version"
 	$(shell wget -O /tmp/downloads-minio.json https://min.io/assets/downloads-minio.json)
-	$(eval DEB = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download'))
-	$(eval RPM = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download'))
+	$(eval DEB = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
+	$(eval RPM = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
 	$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
 
 	@cp source/default-conf.py source/conf.py
@@ -48,13 +48,6 @@ sync-minio-version:
 		sed -i "s|RPMURL|${RPM}|g" source/conf.py; \
 		;; \
 	esac
-
-	@if [ "$(shell git diff --name-only | grep 'conf.py')" == "" ]; then \
-		echo "MinIO Server Version already latest"; \
-	else \
-		echo "New MinIO Server Version available" ; \
-		git add source/conf.py && git commit -m "Updating MinIO server to ${MINIO}"; \
-	fi
 
 sync-java-docs:
 	@echo "Retrieving Java docs from github.com/minio/minio-java"
