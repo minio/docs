@@ -206,7 +206,7 @@ Glossary
      For more detailed logging information, see :term:`audit logs`.
 
    server pool
-     A set of :mc:`minio server` nodes which combine their drives and resources to support object storage and retrieval requests.
+     A set of `minio server` nodes which combine their drives and resources to support object storage and retrieval requests.
 
    service account
      A MinIO deployment or tenant user account with limited account typically used with API calls.
