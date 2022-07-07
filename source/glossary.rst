@@ -200,13 +200,13 @@ Glossary
      These types of certificates do not expire or require periodic review, and they cannot be revoked.
 
    server logs
-     Records the :mc:`minio server` operations logged to the system console.
+     Records the ``minio server`` operations logged to the system console.
      :ref:`Server logs <minio-logging>` support general monitoring and troubleshooting of operations.
 
      For more detailed logging information, see :term:`audit logs`.
 
    server pool
-     A set of `minio server` nodes which combine their drives and resources to support object storage and retrieval requests.
+     A set of ``minio server`` nodes which combine their drives and resources to support object storage and retrieval requests.
 
    service account
      A MinIO deployment or tenant user account with limited account typically used with API calls.
