@@ -451,6 +451,26 @@ Node Metrics
 
    Uptime for MinIO process per node in seconds.
 
+.. metric:: minio_node_scanner_bucket_scans_finished
+
+   Total number of bucket scans finished since server start.
+
+.. metric:: minio_node_scanner_bucket_scans_started
+
+   Total number of bucket scans started since server start.
+
+.. metric:: minio_node_scanner_directories_scanned
+
+   Total number of directories scanned since server start.
+
+.. metric:: minio_node_scanner_objects_scanned
+
+   Total number of unique objects scanned since server start.
+
+.. metric:: minio_node_scanner_versions_scanned
+
+   Total number of object versions scanned since server start.
+
 .. metric:: minio_node_syscall_read_total
 
    Total read SysCalls to the kernel. ``/proc/[pid]/io syscr``
