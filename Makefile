@@ -35,7 +35,7 @@ sync-minio-version:
 
 	@cp source/default-conf.py source/conf.py
 
-	@kname=$(uname -s)
+	@$(eval kname = $(shell uname -s))
 	@case "${kname}" in \
 	Darwin) \
 		sed -i "" "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
@@ -82,12 +82,15 @@ sync-deps:
 	@make sync-dotnet-docs
 
 stage:
-	@make clean && make html
+	@make clean 
+	@make sync-minio-version
+	@make html
 	python -m http.server --directory $(BUILDDIR)/$(GITDIR)/html
 	
 publish:
 	@make clean
-	make html
+	@make sync-minio-version
+	@make html
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

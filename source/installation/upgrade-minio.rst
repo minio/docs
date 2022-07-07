@@ -178,7 +178,7 @@ cannot use :mc-cmd:`mc admin update` to retrieve the binary over the network.
    .. code-block:: shell
       :class: copyable
 
-      mc admin service ALIAS
+      mc admin service restart ALIAS
 
    Replace ``ALIAS`` with the :ref:`alias <alias>` for the target deployment.
 

@@ -117,10 +117,15 @@
          <div id=localtoc></div>
       </div>
       <div class="content__main">
-         <!--
+
+         
+         {% block body %} {% endblock %}
+
          {% block alertbar -%}
-            <div class="admonition important">
+            <div class="admonition note">
                <span class="alert-message">
+                  <p>This site uses cookies to improve the site experience. By continuing, you are providing consent to the use of these cookies. Please visit our <a href="https://www.min.io/privacy-policy">privacy policy</a> for more information.</p>
+                  <!--
                   <p>Welcome to the upcoming version of the MinIO Documentation!
                      The content on this page is under active development and 
                      may change at any time.
@@ -128,11 +133,11 @@
                      <a href="https://docs.min.io"> legacy documentation</a>.
                      Thank you for your patience.
                   </p>
+                  -->
                </span>
             </div>
          {% endblock %}
-         -->
-         {% block body %} {% endblock %}
+
          <div class="footer">
             <div>
                <p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
