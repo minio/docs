@@ -132,10 +132,10 @@ sync-kes-version:
 
 sync-minio-version:
 	@echo "Retrieving current MinIO version"
-	@$(shell wget -qO /tmp/downloads-minio.json https://min.io/assets/downloads-minio.json)
-	@$(eval DEB = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download'))
-	@$(eval RPM = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download'))
-	@$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
+	$(shell wget -O /tmp/downloads-minio.json https://min.io/assets/downloads-minio.json)
+	$(eval DEB = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
+	$(eval RPM = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
+	$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
 
 	@$(eval kname = $(shell uname -s))
 
