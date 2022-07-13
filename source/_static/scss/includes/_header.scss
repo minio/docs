@@ -142,7 +142,7 @@
 				border-width: 0 6px 4px;
 				border-color: transparent transparent #fff;
 				position: absolute;
-				bottom: -2px;
+				bottom: 0;
 				transition: opacity 200ms;
 				z-index: 2;
 			}
@@ -245,7 +245,7 @@
 		transform: translateX(calc(-50% + 3rem));
 		position: absolute;
 		left: 0;
-		top: 2.65rem;
+		top: 100%;
 		opacity: 0;
 		transition: opacity 200ms;
 		pointer-events: none;
