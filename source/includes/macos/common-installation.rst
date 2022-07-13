@@ -23,23 +23,25 @@
 
       .. tab-item:: Binary - arm64
          
-         Open a Terminal, then use the following commands to download the standalone MinIO server for MacOS and make it executable.
+         Open a Terminal, then use the following commands to download the latest stable MinIO binary, set it to executable, and install it to the system ``$PATH``:
 
             .. code-block:: shell
                :class: copyable
 
                curl -O https://dl.min.io/server/minio/release/darwin-arm64/minio
-               chmod +x minio   
+               chmod +x minio
+               sudo mv ./minio /usr/local/bin/
 
       .. tab-item:: Binary - amd64
          
-         Open a Terminal, then use the following commands to download the standalone MinIO server for MacOS and make it executable.
+         Open a Terminal, then use the following commands to download the latest stable MinIO binary, set it to executable, and install it to the system ``$PATH``:
 
             .. code-block:: shell
                :class: copyable
 
                curl -O https://dl.min.io/server/minio/release/darwin-amd64/minio
                chmod +x minio
+               sudo mv ./minio /usr/local/bin/
 
 .. end-install-minio-binary-desc
 
@@ -51,27 +53,25 @@ If desired, you can replace ``~/data`` with another location to which the user h
 .. code-block:: shell
    :class: copyable
 
-   ~/.minio server ~/data --console-address :9090
-
-If you installed with Homebrew, do not include the ``~/`` at the beginning of the command.
-
-The :mc:`minio server` process prints its output to the system console, similar to the following:
+   export MINIO_CONFIG_ENV_FILE=/etc/default/minio
+   minio server --console-address :9090
 
 .. code-block:: shell
 
-   API: http://192.0.2.10:9000  http://127.0.0.1:9000
-   RootUser: minioadmin
-   RootPass: minioadmin
-
-   Console: http://192.0.2.10:9090 http://127.0.0.1:9090
-   RootUser: minioadmin
-   RootPass: minioadmin
+   Status:         1 Online, 0 Offline. 
+   API: http://192.168.2.100:9000  http://127.0.0.1:9000       
+   RootUser: myminioadmin 
+   RootPass: minio-secret-key-change-me 
+   Console: http://192.168.2.100:9090 http://127.0.0.1:9090    
+   RootUser: myminioadmin 
+   RootPass: minio-secret-key-change-me 
 
    Command-line: https://docs.min.io/docs/minio-client-quickstart-guide
-      $ mc alias set myminio http://192.0.2.10:9000 minioadmin minioadmin
+      $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
 
    Documentation: https://docs.min.io
 
-   WARNING: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables.
+The ``API`` block lists the network interfaces and port on which clients can access the MinIO S3 API.
+The ``Console`` block lists the network interfaces and port on which clients can access the MinIO Web Console.
 
 .. end-run-minio-binary-desc

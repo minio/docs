@@ -63,7 +63,6 @@ The following example uses the ``~/minio-data`` folder:
    mkdir ~/minio-data
    minio server ~/minio-data --console-address ":9090"
 
-
 The :mc:`minio server` process prints its output to the system console, similar
 to the following:
 

@@ -193,6 +193,21 @@ Environment Variables
 The :mc:`minio server` processes uses the following
 environment variables during startup to set configuration settings.
 
+Core Configuration
+~~~~~~~~~~~~~~~~~~
+
+.. envvar:: MINIO_VOLUMES
+
+   The directories or drives the :mc:`minio server` process uses as the
+   storage backend.
+
+   Functionally equivalent to setting :mc-cmd:`minio server DIRECTORIES`.
+   Use this value when configuring MinIO to run using an environment file.
+
+.. envvar:: MINIO_CONFIG_ENV_FILE
+
+   Specifies the full path to the file the MinIO server process uses for loading environment variables.
+
 Root Credentials
 ~~~~~~~~~~~~~~~~
 

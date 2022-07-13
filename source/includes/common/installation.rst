@@ -14,30 +14,31 @@ MinIO is a software-defined high performance distributed object storage server.
 You can run MinIO on consumer or enterprise-grade hardware and a variety
 of operating systems and architectures.
 
-MinIO supports three deployment modes: 
+MinIO supports three deployment topologies: 
 
-Standalone Single-Drive
-   A single MinIO server with a single storage volume or folder, also referred to as "Filesystem Mode".
-   Standalone single deployments are best suited for evaluation and initial development of applications using MinIO for object storage, *or* for providing an S3 access layer to single storage volume.
-   
-   Standalone deployments do not provide access to the full set of MinIO's advanced S3 features and functionality - specifically those dependent on :ref:`Erasure Coding <minio-erasure-coding>`.
+Single-Node Single-Drive (SNSD or "Standalone")
+  A single MinIO server with a single storage volume or folder. 
+  |SNSD| deployment provides failover protections. Drive-level reliability and failover depends on the underlying storage volume.
 
-Standalone Multi-Drive
-   A single MinIO server with *at least* four storage volumes or folders.
-   A standalone multi-drive deployment supports and enables :ref:`erasure coding <minio-erasure-coding>` and its dependent features.
+  |SNSD| deployments are best suited for evaluation and initial development of applications using MinIO for object storage.
 
-   Standalone multi-drive deployments can only provide drive-level availability and performance scaling.
-   Use standalone multi-drive deployments for small-scale environments which do not require high availability or scalable performance characteristics.
+  |SNSD| deployments implement a zero-parity erasure coding backend and include support for the following erasure-coding dependent features:
 
-Distributed Deployments
-   One or more MinIO servers with *at least* four total storage volumes across all servers.
-   A distributed deployment supports and enables :ref:`erasure coding <minio-erasure-coding>` and its dependent features.
+  - :ref:`Versioning <minio-bucket-versioning>`
+  - :ref:`Object Locking / Retention <minio-object-retention>`
 
-   Distributed deployments provide drive and server-level availability and performance scaling.
-   Distributed deployments are best for production environments and workloads.
+Single-Node Multi-Drive (SNMD or "Standalone Multi-Drive")
+  A single MinIO server with four or more storage volumes. 
+  |SNMD| deployments provide drive-level reliability and failover only.
 
-   MinIO recommends a baseline topology of 4 nodes with 4 drives each for production environments.
-   This topology provides continuity with the loss of up to one server *or* four drives across all servers.
+Multi-Node Multi-Drive (MNMD or "Distributed")
+  Multiple MinIO servers with at least four drives across all servers. 
+  The distributed |MNMD| topology supports production-grade object storage with drive and node-level availability and resiliency.
+
+  For tutorials on deploying or expanding a distributed MinIO deployment, see:
+
+  - :ref:`deploy-minio-distributed`
+  - :ref:`expand-minio-distributed`
 
 .. _minio-installation-comparison:
 
@@ -48,9 +49,9 @@ The following table compares the key functional differences between MinIO deploy
    :width: 100%
 
    * - 
-     - :guilabel:`Standalone Single-Drive`
-     - :guilabel:`Standalone Multi-Drive`
-     - :guilabel:`Distributed`
+     - :guilabel:`Single-Node Single-Drive`
+     - :guilabel:`Single-Node Multi-Drive`
+     - :guilabel:`Multi-Node Multi-Drive`
 
    * - Site-to-Site Replication
      - Client-Side via :mc:`mc mirror`
