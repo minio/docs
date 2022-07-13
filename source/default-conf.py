@@ -173,6 +173,32 @@ elif tags.has("windows"):
         'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
         'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
+elif tags.has("container"):
+    excludes = [
+        'operations/install-deploy-manage/deploy-minio-tenant.rst',
+        'operations/install-deploy-manage/modify-minio-tenant.rst',
+        'operations/install-deploy-manage/expand-minio-tenant.rst',
+        'operations/install-deploy-manage/upgrade-minio-tenant.rst',
+        'operations/install-deploy-manage/upgrade-minio-operator.rst',
+        'operations/install-deploy-manage/delete-minio-tenant.rst',
+        'operations/install-deploy-manage/minio-operator-console.rst',
+        'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst',
+        'operations/install-deploy-manage/multi-site-replication.rst',
+        'operations/deploy-manage-tenants.rst',
+        'reference/kubectl-minio-plugin.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-init.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-proxy.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-create.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-delete.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-expand.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-info.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-list.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-report.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant-upgrade.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
+        'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
+    ]
 elif tags.has("k8s"):
     excludes = [
         'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst',

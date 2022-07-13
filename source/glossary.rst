@@ -76,7 +76,7 @@ Glossary
 
    disk encryption
      The conversion of all of the contents written to a disk to values that cannot be easily deciphered by an unauthorized entity.
-     Disk encryption can be used in conjuntion with other encryption technologies to create a robust data security system.
+     Disk encryption can be used in conjunction with other encryption technologies to create a robust data security system.
 
    encryption at rest
      A method of encryption that stores an object in an encrypted state.
@@ -96,7 +96,7 @@ Glossary
 
    erasure set
      A group of drives within MinIO that support :term:`erasure coding`. 
-     MinIO divides the number of drives in a deployment's server pool into groups of 4 to 16 drives that make up each _erasure set_.
+     MinIO divides the number of drives in a deployment's server pool into groups of 4 to 16 drives that make up each *erasure set*.
      When writing objects, :term:`data` and :term:`parity` blocks write randomly to the drives in the erasure set.
 
    hashing
@@ -138,7 +138,7 @@ Glossary
      A rule that prevents removal or deletion of an object until an authorized agent removes the rule or it expires.
 
    monitoring
-     The act of reviewing the status, activity, and availility of a MinIO cluster, deployment, tenant, or server.
+     The act of reviewing the status, activity, and availability of a MinIO cluster, deployment, tenant, or server.
      MinIO provides the following tools: 
 
      - `Prometheus <https://prometheus.io/>`__ compatible metrics and alerts

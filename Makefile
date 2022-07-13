@@ -3,7 +3,7 @@
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
-SPHINXOPTS    ?= -n -j "auto"
+SPHINXOPTS    ?= -n -j "auto" -w "build.log"
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
@@ -35,35 +35,63 @@ stage-%:
 	@echo "Visit http://localhost:8000 to view the staged output"
 
 linux:
+ifeq ($(BUILD_DEPENDENCIES),FALSE)
+	@echo "Skipping Dependencies"
+else
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
 	@make sync-sdks
+endif
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
 windows:
+ifeq ($(BUILD_DEPENDENCIES),FALSE)
+	@echo "Skipping Dependencies"
+else
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
 	@make sync-sdks
+endif
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
 macos:
+ifeq ($(BUILD_DEPENDENCIES),FALSE)
+	@echo "Skipping Dependencies"
+else
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
 	@make sync-sdks
+endif
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
 k8s:
+ifeq ($(BUILD_DEPENDENCIES),FALSE)
+	@echo "Skipping Dependencies"
+else
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
 	@make sync-minio-version
 	@make sync-kes-version
 	@make sync-sdks
+endif
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
+	@npm run build
+
+container:
+ifeq ($(BUILD_DEPENDENCIES),FALSE)
+	@echo "Skipping Dependencies"
+else
+	@cp source/default-conf.py source/conf.py
+	@make sync-minio-version
+	@make sync-kes-version
+	@make sync-sdks
+endif
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
 
@@ -302,6 +330,6 @@ sync-deps:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@echo -e "Specify one of the following supported build outputs"
-	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s"
+	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s\n- make container"
 	@echo -e "Clean targets with 'make clean-<target>'"
 	@echo -e "Clean all targets with `make clean-all`"

@@ -10,7 +10,7 @@ MinIO High Performance Object Storage
 
 MinIO is a high performance object storage solution that provides an Amazon Web Services S3-compatible API and supports all core S3 features.
 
-MinIO is built to anywhere - public or private cloud, baremetal infrastructure, orchestrated environments, and edge infrastructure. 
+MinIO is built to deploy anywhere - public or private cloud, baremetal infrastructure, orchestrated environments, and edge infrastructure. 
 
 .. cond:: linux
 
@@ -27,6 +27,10 @@ MinIO is built to anywhere - public or private cloud, baremetal infrastructure, 
 .. cond:: k8s
 
    This site documents Operations, Administration, and Development of MinIO deployments on Kubernetes platform.
+
+.. cond:: container
+
+   This site documents Operations, Administration, and Development of MinIO deployments on Containers.
 
 This documentation targets the latest stable version of MinIO: |minio-tag|.
 
@@ -53,6 +57,10 @@ and non-protected.
 .. cond:: k8s
 
    .. include:: /includes/k8s/quickstart.rst
+
+.. cond:: container
+
+   .. include:: /includes/container/quickstart.rst
 
 
 Licensing
@@ -105,8 +113,8 @@ without validating their usage do so at their own risk.
       /reference/minio-mc-admin
       /reference/kubectl-minio-plugin
       /glossary
-      
-.. cond:: linux or macos or windows
+
+.. cond:: linux or macos or windows or container
 
    .. toctree::
       :titlesonly:
