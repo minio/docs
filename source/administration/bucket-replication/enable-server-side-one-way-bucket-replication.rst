@@ -11,18 +11,21 @@ Enable One-Way Server-Side Bucket Replication
    :depth: 1
 
 
-The procedure on this page creates a new bucket replication rule for one-way synchronization of objects between MinIO buckets.
+The procedure on this page creates a new bucket replication rule for one-way synchronization of objects from one MinIO bucket to another MinIO bucket.
+The buckets can be on the same MinIO deployment or on separate MinIO deployments.
 
 .. image:: /images/replication/active-passive-oneway-replication.svg
    :width: 450px
    :alt: Active-Passive Replication synchronizes data from a source MinIO cluster to a remote MinIO cluster.
    :align: center
 
-- To configure replication between arbitrary S3-compatible services, use :mc-cmd:`mc mirror`.
 
-- To configure two-way "active-active" replication between MinIO clusters, see :ref:`minio-bucket-replication-serverside-twoway`.
-
+- To configure two-way "active-active" replication between MinIO buckets, see :ref:`minio-bucket-replication-serverside-twoway`.
 - To configure multi-site "active-active" replication between MinIO clusters, see :ref:`minio-bucket-replication-serverside-multi`
+
+.. note::
+
+   To configure replication between arbitrary S3-compatible services (not necessarily MinIO), use :mc-cmd:`mc mirror`.
 
 .. seealso::
 
@@ -82,18 +85,21 @@ Replication of Existing Objects
 
 MinIO supports automatically replicating existing objects in a bucket.
 
-MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. This procedure includes the required flags for enabling replication of existing objects.
+MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. 
+This procedure includes the required flags for enabling replication of existing objects.
 
 Replication of Delete Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports replicating S3 ``DELETE`` operations onto the target bucket. Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
+MinIO supports replicating S3 ``DELETE`` operations onto the target bucket. 
+Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
 
 - For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
 
 - For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
 
-MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. This procedure includes the required flags for enabling replication of delete operations and delete markers.
+MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. 
+This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
 MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`.
 
@@ -109,14 +115,17 @@ This procedure documents one-way replication to a single remote MinIO deployment
 Procedure
 ---------
 
-This procedure uses the :ref:`aliases <alias>` ``SOURCE`` and ``REMOTE`` to reference each MinIO deployment being configured for replication. Replace these values with the appropriate alias for your target MinIO deployments.
+This procedure uses the :ref:`aliases <alias>` ``SOURCE`` and ``REMOTE`` to reference each MinIO deployment being configured for replication. 
+Replace these values with the appropriate alias for your target MinIO deployments.
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-oneway-permissions>`.
 
 1) Create the Replication Remote Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target for the destination cluster. MinIO supports *one* remote target per destination bucket. You cannot create multiple remote targets for the same destination bucket.
+Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target for the destination cluster. 
+MinIO supports *one* remote target per destination bucket. 
+You cannot create multiple remote targets for the same destination bucket.
 
 .. code-block:: shell
    :class: copyable
@@ -132,7 +141,9 @@ Use the :mc-cmd:`mc admin bucket remote add` command to create a replication tar
 
 - Replace ``BUCKET`` with the name of the bucket on the ``REMOTE`` deployment to use as the replication destination.
 
-- Include the :mc-cmd:`~mc admin bucket remote add --sync` option to enable synchronous replication. Omit the option to use the default of asynchronous replication.  See the reference documentation for :mc-cmd:`mc admin bucket remote add` for more information on synchronous vs asynchronous replication before using this parameter.
+- Include the :mc-cmd:`~mc admin bucket remote add --sync` option to enable synchronous replication. 
+  Omit the option to use the default of asynchronous replication.  
+  See the reference documentation for :mc-cmd:`mc admin bucket remote add` for more information on synchronous vs asynchronous replication before using this parameter.
 
 The command returns an ARN similar to the following:
 

@@ -139,97 +139,98 @@ This procedure covers active-active replication between *two* MinIO sites. You c
 Procedure
 ---------
 
-This procedure uses the :ref:`aliases <alias>` ``ALPHA`` and ``BAKER`` to reference each MinIO deployment being configured for replication. Replace these values with the appropriate alias for your target MinIO deployments.
+This procecure creates two-way, active-active replication between two MinIO deployments.
 
-This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`.
+This procedure assumes you have already defined an alias for each deployment as a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`.
 
 1) Create the Replication Remote Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target for the each deployment. MinIO supports *one* remote target per destination bucket. You cannot create multiple remote targets for the same destination bucket.
+Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target from each deployment to the appropriate bucket on the destination deployment. 
+MinIO supports *one* remote target for an origin bucket to destination bucket combination. 
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin bucket remote add ALPHA/BUCKET \
-      https://ReplicationRemoteUser:LongRandomSecretKey@HOSTNAME/BUCKET \
+   mc admin bucket remote add ALIAS/BUCKET         \
+      https://RemoteUser:Password@HOSTNAME/BUCKETDESTINATION  \
       --service "replication"
 
-- Replace ``BUCKET`` with the name of the bucket on the ``ALPHA`` deployment to use as the replication source. Replace ``ALPHA`` with the :ref:`alias <alias>` of the MinIO deployment on which you are configuring replication.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment that acts as the origin for the replication.
+- Replace ``BUCKET`` with the name of the bucket to replicate from on the origin deployment.
+- Replacete ``RemoteUser`` with the user name that has the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`
+- Replace ``Password`` with the secret key for the ``RemoteUser``.
+- Replace ``HOSTNAME`` with the URL of the destination deployment.
+- Replace ``BUCKETDESTINATION`` with the name of the bucket to replicate to on the destination deployment.
 
-- Replace ``HOSTNAME`` with the URL of the ``BAKER`` deployment.
-
-- Replace ``BUCKET`` with the name of the bucket on the ``REMOTE`` deployment to use as the replication destination.
-
-The command returns an ARN similar to the following:
+The command returns an :abbr:`ARN <Amazon Resource Name>` similar to the following:
 
 .. code-block:: shell
 
    Role ARN = 'arn:minio:replication::<UUID>:BUCKET'
 
-Copy the ARN string for use in the next step, noting the MinIO deployment on which it was created.
+Copy the ARN to use in the next step, noting the MinIO deployment.
 
-Repeat this step on the second MinIO deployment, replacing the ``ALPHA`` alias with the ``BAKER`` alias and the ``HOSTNAME`` with the URL of the ``ALPHA`` deployment.
+Repeat this step on the second MinIO deployment, reversing the origin and destination.
 
-You should have two ARNs at the conclusion of this step - one created on ``ALPHA/BUCKET`` pointing at ``BAKER/BUCKET``, and one created on ``BAKER/BUCKET`` pointing at ``ALPHA/BUCKET``. Use the :mc-cmd:`mc admin bucket remote ls` command to verify the created replication remote targets before proceeding.
+You should have two ARNs at the conclusion of this step that point from each deployment to the other deployment's bucket. 
+Use :mc-cmd:`mc admin bucket remote ls` to verify the remote targets before proceeding.
 
-2) Create a New Bucket Replication Rule
+1) Create a New Bucket Replication Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc replicate add` command to add the new server-side
-replication rule to the each MinIO deployment. 
+Use the :mc-cmd:`mc replicate add` command to add a new replication rule to each MinIO deployment. 
 
 .. code-block:: shell
    :class: copyable
 
-   mc replicate add ALPHA/BUCKET \
-      --remote-bucket 'arn:minio:replication::<UUID>:BUCKET' \
+   mc replicate add ALIAS/BUCKET \
+      --remote-bucket 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
       --replicate "delete,delete-marker,existing-objects"
 
-- Replace ``BUCKET`` with the name of the bucket on the ``ALPHA`` deployment to use as the replication source. Replace ``ALPHA`` with the :ref:`alias <alias>` of the MinIO deployment on which you are configuring replication. The name *must* match the bucket specified when creating the remote target in the previous step.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of the origin MinIO deployment.  
+  The name *must* match the bucket specified when creating the remote target in the previous step.
 
-- Replace the ``--remote-bucket`` value with the ARN returned in the previous step. Ensure you specify the ARN created on the ``ALPHA`` deployment. You can use :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured on the deployment.
+- Replace ``BUCKET`` with the name of the bucket to replicate from on the origin deployment. 
+
+- Replace the ``--remote-bucket`` value with the ARN for the destination bucket determined in the first step. 
+  Ensure you specify the ARN created on the origin deployment. 
+  You can use :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured on the deployment.
 
 - The ``--replicate "delete,delete-marker,existing-objects"`` flag enables the following replication features:
   
   - :ref:`Replication of Deletes <minio-replication-behavior-delete>` 
   - :ref:`Replication of existing Objects <minio-replication-behavior-existing-objects>`
   
-  See :mc-cmd:`mc replicate add --replicate` for more complete documentation. Omit these fields to disable replication of delete operations or replication of existing objects respectively.
+  See :mc-cmd:`mc replicate add --replicate` for more complete documentation. 
+  Omit any field to disable replication of that component.
 
 Specify any other supported optional arguments for :mc-cmd:`mc replicate add`.
 
-Repeat this step on the second MinIO deployment, replacing the ``ALPHA`` alias with the ``BAKER`` alias and the ``HOSTNAME`` with the URL of the ``ALPHA`` deployment.
+Repeat this step on the other MinIO deployment.
+Change the alias for the different origin.
+Change the ARN to the ARN generated on the second deployment for the desired bucket.
 
-You should have two replication rules configured at the conclusion of this step - one created on ``ALPHA/BUCKET`` and one created on ``BAKER/BUCKET``. Use the :mc-cmd:`mc replicate ls` command to verify the created replication rules.
+You should have two replication rules configured at the conclusion of this step - one created on each deployment that points to the bucket on the other deployment.
+Use the :mc-cmd:`mc replicate ls` command to verify the created replication rules.
 
-3) Validate the Replication Configuration
+1) Validate the Replication Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc cp` to copy a new object to the ``ALPHA/BUCKET``  bucket. 
+Use :mc-cmd:`mc cp` to copy a new object to the replicated bucket on one of the deployments. 
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/foo.txt ALPHA/BUCKET
+   mc cp ~/foo.txt ALIAS/BUCKET
 
 Use :mc-cmd:`mc ls` to verify the object exists on the destination bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ls BAKER/BUCKET
+   mc ls ALIAS/BUCKET
 
-Repeat this test by copying a new object to the ``Baker`` source bucket.
+Repeat this test by copying another object to the second deployment and verifying the object replicates to the first deployment.
 
-.. code-block:: shell
-   :class: copyable
-
-   mc cp ~/otherfoo.txt BAKER/BUCKET
-
-Use :mc-cmd:`mc ls` to verify the object exists on the destination bucket:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc ls ALPHA/BUCKET
+Once both objects exist on both deployments, you have successfully set up two-way, active-active replication between MinIO buckets.
