@@ -192,13 +192,14 @@ Manager:
    # This example assumes that the associated AWS account has the necessary
    # access key and secret key
    keystore:
-     secretsmanager:
-       endpoint: secretsmanager.REGION.amazonaws # use the Secrets Manager endpoint for your region
-       region: REGION # e.g. us-east-1
-       kmskey: "" # Optional. The root AWS KMS key to use for cryptographic operations. Formerly described as the "Customer Master Key".
-       credentials:
-         accesskey: "${AWSACCESSKEY}" # AWS Access Key
-         secretkey: "${AWSSECRETKEY}" # AWS Secret Key
+     aws:
+       secretsmanager:
+         endpoint: secretsmanager.REGION.amazonaws.com # use the Secrets Manager endpoint for your region
+         region: REGION # e.g. us-east-1
+         kmskey: "" # Optional. The root AWS KMS key to use for cryptographic operations. Formerly described as the "Customer Master Key".
+         credentials:
+           accesskey: "${AWSACCESSKEY}" # AWS Access Key
+           secretkey: "${AWSSECRETKEY}" # AWS Secret Key
 
 
 Save the configuration file as ``~/kes/config/kes-config.yaml``. Any field with
