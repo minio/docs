@@ -39,12 +39,18 @@ Multi-Site Active-Active replication configurations can span multiple racks, dat
 Requirements
 ------------
 
-Install and Configure ``mc`` with Access to Both Clusters.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Access to All Clusters
+~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on both the source and destination MinIO cluster. Install :mc:`mc` on a machine with network access to both source and destination deployments. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+You must have access to all clusters to set up multi-site active-active bucket replication.
 
-Use the :mc:`mc alias` command to create an alias for both MinIO deployments. Alias creation requires specifying an access key for a user on the cluster. This user **must** have permission to create and manage users and policies on the cluster. Specifically, ensure the user has *at minimum*:
+You can access the deployments by logging in to the :ref:`MinIO Console <minio-console>` for each deployment or by installing :mc:`mc` and using the command line.
+
+If using the command line, use the :mc:`mc alias` command to create an alias for each MinIO cluster. 
+Alias creation requires specifying an access key for a user on the cluster. 
+This user **must** have permission to create and manage users and policies on the cluster. 
+
+Specifically, ensure the user has *at minimum*:
 
 - :policy-action:`admin:CreateUser`
 - :policy-action:`admin:ListUsers`
@@ -52,8 +58,6 @@ Use the :mc:`mc alias` command to create an alias for both MinIO deployments. Al
 - :policy-action:`admin:CreatePolicy`
 - :policy-action:`admin:GetPolicy`
 - :policy-action:`admin:AttachUserOrGroupPolicy`
-
-.. _minio-bucket-replication-serverside-multi-permissions:
 
 Required Permissions
 ~~~~~~~~~~~~~~~~~~~~

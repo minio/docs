@@ -34,62 +34,71 @@ Copy the ARN to use in the next step, noting the MinIO deployment.
 #. Select :guilabel:`Add Replication Rule +`
 #. Complete the requested information:
    
-   Priority
-     Enter a number value to indicate the order in which to process replication rules for the bucket.
-     `1` indicates the highest importance.
+   .. list-table::
+      :header-rows: 1
+      :widths: 25 75
+      :width: 100%
+
+      * - Field
+        - Description
+
+      * - Priority
+        - Enter a number value to indicate the order in which to process replication rules for the bucket.
+          `1` indicates the highest importance.
    
-   Target URL
-     The URL of the deployment to replicate data to.
+      * - Target URL
+        - The URL of the deployment to replicate data to.
 
-   Use TLS
-     Leave the toggle in the :guilabel:`ON` position if the destination deployment uses TLS.
-     Otherwise, move the toggle to the :guilabel:`OFF` position.
+      * - Use TLS
+        - Leave the toggle in the :guilabel:`ON` position if the destination deployment uses TLS.
+          Otherwise, move the toggle to the :guilabel:`OFF` position.
 
-   Access Key
-     The user name to use on the destination deployment.
-     The user must have write access to the bucket to replicate to.
+      * - Access Key
+        - The user name to use on the destination deployment.
+          The user must have write access to the bucket to replicate to.
 
-   Secret Key 
-     The password for the provided **Access Key**.
+      * - Secret Key 
+        - The password for the provided **Access Key**.
 
-   Target Bucket
-     The bucket at the destination to write the data to.
-     The target bucket may have the same name as the origin bucket, depending on the destination bucket location.
+      * - Target Bucket
+        - The bucket at the destination to write the data to.
+          The target bucket may have the same name as the origin bucket, depending on the destination bucket location.
 
-   Region
-     The AWS resource region location of the destination deployment.
+      * - Region
+        - The AWS resource region location of the destination deployment.
 
-   Replication mode
-     Leave the default selection of **Asynchronous** to allow MinIO to replicate data after the write operation completes on the origin ment.
-     Select **Synchronous** to attempt to complete the replication of the object during its write operation.
-     While synchronous replication may result in more reliable synchronization between the origin and destination buckets, it may also se the time of each write operation.
+      * - Replication mode
+        - Leave the default selection of **Asynchronous** to allow MinIO to replicate data after the write operation completes on the origin ment.
+          Select **Synchronous** to attempt to complete the replication of the object during its write operation.
+       
+          While synchronous replication may result in more reliable synchronization between the origin and destination buckets, it may also increase the time of each write operation.
 
-   Bandwidth
-     Specify the maximum amount of bandwidth the replication process can use while replicating data.
-     Enter a number and select a data unit.
+      * - Bandwidth
+        - Specify the maximum amount of bandwidth the replication process can use while replicating data.
+          Enter a number and select a data unit.
 
-   Health Check Duration
-     The maximum length of time in seconds MinIO should spend verifying the health of the replicated data on the destination bucket.
+      * - Health Check Duration
+        - The maximum length of time in seconds MinIO should spend verifying the health of the replicated data on the destination bucket.
 
-   Storage Class
-     The class of storage to use on the destination deployment for the replicated data.
-     Valid values are either ``STANDARD`` or ``REDUCED_REDUNDANCY``.
+      * - Storage Class
+        - The class of storage to use on the destination deployment for the replicated data.
+          Valid values are either ``STANDARD`` or ``REDUCED_REDUNDANCY``.
 
-   Object Filters
-     Limit which objects to replicate from the bucket by :term:`Prefix` or **tags**.
-     If you enter multiple tags, the objects must match all tag values.
+      * - Object Filters
+        - Limit which objects to replicate from the bucket by :term:`Prefix` or **tags**.
+          If you enter multiple tags, the objects must match all tag values.
 
-   Metadata Sync
-     Leave selected to also replicate the object's metadata file.
-     Otherwise, move the toggle to the :guilabel:`Off` position.
+      * - Metadata Sync
+        - Leave selected to also replicate the object's metadata file.
+          Otherwise, move the toggle to the :guilabel:`Off` position.
 
-   Delete Markers
-     Leave selected to also replicate MinIO's indication that an object has been deleted and should also be marked deleted at the ation bucket.
-     Otherwise, move the toggle to the :guilabel:`Off` position to prevent marking the object as deleted in the destination bucket.
+      * - Delete Markers
+        - Leave selected to also replicate MinIO's indication that an object has been deleted and should also be marked deleted at the ation bucket.
+          Otherwise, move the toggle to the :guilabel:`Off` position to prevent marking the object as deleted in the destination bucket.
 
-   Deletes
-     Leave selected to allow replication of the deletion of versions of an object.
-     Otherwise, move the toggle to the :guilabel:`Off` position to not replicate deletion of object versions.
+      * - Deletes
+        - Leave selected to allow replication of the deletion of versions of an object.
+          Otherwise, move the toggle to the :guilabel:`Off` position to not replicate deletion of object versions.
 
 #. Select :guilabel:`Save` to finish adding the replication rule
 
