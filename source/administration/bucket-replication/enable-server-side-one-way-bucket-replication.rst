@@ -120,78 +120,54 @@ Replace these values with the appropriate alias for your target MinIO deployment
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-oneway-permissions>`.
 
-1) Create the Replication Remote Target
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Create a Replication Remote Target
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target for the destination cluster. 
-MinIO supports *one* remote target per destination bucket. 
-You cannot create multiple remote targets for the same destination bucket.
+.. tab-set:: 
 
-.. code-block:: shell
-   :class: copyable
+   .. tab-item:: Console
 
-   mc admin bucket remote add SOURCE/BUCKET \
-      https://ReplicationRemoteUser:LongRandomSecretKey@HOSTNAME/BUCKET \
-      --service "replication"
-      [--sync]
+      The MinIO Console automatically creates a remote target when generating a replication rule.
+      Proceed to the next step.
 
-- Replace ``BUCKET`` with the name of the bucket on the ``SOURCE`` deployment to use as the replication source. Replace ``SOURCE`` with the :ref:`alias <alias>` of the MinIO deployment on which you are configuring replication.
+   .. tab-item:: Command Line
 
-- Replace ``HOSTNAME`` with the URL of the ``REMOTE`` cluster.
+      .. include:: /includes/common/bucket-replication.rst
+         :start-after: start-create-replication-remote-targets-cli
+         :end-before: end-create-replication-remote-targets-cli
 
-- Replace ``BUCKET`` with the name of the bucket on the ``REMOTE`` deployment to use as the replication destination.
-
-- Include the :mc-cmd:`~mc admin bucket remote add --sync` option to enable synchronous replication. 
-  Omit the option to use the default of asynchronous replication.  
-  See the reference documentation for :mc-cmd:`mc admin bucket remote add` for more information on synchronous vs asynchronous replication before using this parameter.
-
-The command returns an ARN similar to the following:
-
-.. code-block:: shell
-
-   Role ARN = 'arn:minio:replication::<UUID>:BUCKET'
-
-Copy the ARN string for use in the next step.
 
 2) Create a New Bucket Replication Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc replicate add` command to add the new server-side
-replication rule to the source MinIO cluster. 
+.. tab-set:: 
 
-.. code-block:: shell
-   :class: copyable
+   .. tab-item:: Console
 
-   mc replicate add SOURCE/BUCKET \
-      --remote-bucket 'arn:minio:replication::<UUID>:BUCKET' \
-      --replicate "delete,delete-marker,existing-objects"
+      .. include:: /includes/common/bucket-replication.rst
+         :start-after: start-create-bucket-replication-rule-console
+         :end-before: end-create-bucket-replication-rule-console
 
-- Replace ``BUCKET`` with the name of the bucket on the ``SOURCE`` deployment to use as the replication source. Replace ``SOURCE`` with the :ref:`alias <alias>` of the MinIO deployment on which you are configuring replication. The name *must* match the bucket specified when creating the remote target in the previous step.
+   .. tab-item:: Command Line
 
-- Replace the ``--remote-bucket`` value with the ARN returned in the previous step. Ensure you specify the ARN created on the ``SOURCE`` deployment. You can use :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured on the deployment.
+      .. include:: /includes/common/bucket-replication.rst
+         :start-after: start-create-bucket-replication-rule-cli
+         :end-before: end-create-bucket-replication-rule-cli
 
-- The ``--replicate "delete,delete-marker,existing-objects"`` flag enables the following replication features:
-  
-  - :ref:`Replication of Deletes <minio-replication-behavior-delete>` 
-  - :ref:`Replication of existing Objects <minio-replication-behavior-existing-objects>`
-  
-  See :mc-cmd:`mc replicate add --replicate` for more complete documentation. Omit these fields to disable replication of delete operations or replication of existing objects respectively.
-
-Specify any other supported optional arguments for :mc-cmd:`mc replicate add`.
 
 3) Validate the Replication Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc cp` to copy a new object to the source bucket. 
+.. tab-set:: 
 
-.. code-block:: shell
-   :class: copyable
+   .. tab-item:: Console
 
-   mc cp ~/foo.txt SOURCE/BUCKET
+      .. include:: /includes/common/bucket-replication.rst
+         :start-after: start-validate-bucket-replication-console
+         :end-before: end-validate-bucket-replication-console
 
-Use :mc-cmd:`mc ls` to verify the object exists on the destination bucket:
+   .. tab-item:: Command Line
 
-.. code-block:: shell
-   :class: copyable
-
-   mc ls TARGET/BUCKET
+      .. include:: /includes/common/bucket-replication.rst
+         :start-after: start-validate-bucket-replication-cli
+         :end-before: end-validate-bucket-replication-cli

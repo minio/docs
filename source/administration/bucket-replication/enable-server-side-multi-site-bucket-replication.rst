@@ -134,97 +134,86 @@ This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alia
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-multi-permissions>`.
 
-1) Create the Replication Remote Target
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Create Replication Remote Targets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target for the each deployment. MinIO supports *one* remote target per destination bucket. You cannot create multiple remote targets for the same destination bucket.
+.. tab-set:: 
 
-.. code-block:: shell
-   :class: copyable
+   .. tab-item:: Console
 
-   mc admin bucket remote add ALIAS/BUCKET \
-      https://ReplicationRemoteUser:LongRandomSecretKey@HOSTNAME/BUCKET \
-      --service "replication"
+      The MinIO Console automatically creates a remote target when generating a replication rule.
+      Proceed to the next step.
 
-- Replace ``BUCKET`` with the name of the bucket on the ``ALIAS`` deployment to use as the replication source. Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment on which you are configuring replication.
+   .. tab-item:: Command Line
 
-- Replace ``HOSTNAME`` with the URL of the  remote MinIO deployment.
+      .. include:: /includes/common/bucket-replication.rst
+         :start-after: start-create-replication-remote-targets-cli
+         :end-before: end-create-replication-remote-targets-cli
 
-- Replace ``BUCKET`` with the name of the bucket on the remote deployment to use as the replication destination.
+      Repeat these instructions for each remote MinIO deployment participating in the multi-site replication configuration. 
 
-The command returns an ARN similar to the following:
+      For example, a multi-site replication configuration consisting of three MinIO deployments ``minio1``, ``minio2``, and ``minio3`` requires repeating this step twice on each deployment. Specifically:
 
-.. code-block:: shell
+      - The ``minio1`` deployment requires defining separate remote targets for ``minio2`` and for ``minio3``. 
 
-   Role ARN = 'arn:minio:replication::<UUID>:BUCKET'
+      - The ``minio2`` deployment requires defining separate remote targets for ``minio1`` and for ``minio3``.
 
-Copy the ARN string for use in the next step, noting the MinIO deployment on which it was created.
+      - The ``minio3`` deployment requires defining separate remote targets for ``minio1`` and for ``minio2``.
 
-Repeat these commands for each remote MinIO deployment participating in the multi-site replication configuration. For example, a multi-site replication configuration consisting of MinIO deployments ``Alpha``, ``Baker``, and ``Charlie`` would require repeating this step on each deployment for each remote. Specifically:
+      More than three deployments requires additional remote targets on each deployment to create the required targets for each origin and destination bucket compination.
 
-- The ``Alpha`` deployment would perform this step once for
-  ``Baker`` and once for ``Charlie``. 
+      Record the ARN generated for each remote and note which origin-destination bucket combination you generated the ARN for.
 
-- The ``Baker`` deployment would perform this step once for ``Alpha`` and 
-  once for ``Charlie``.
+2) Create New Bucket Replication Rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- The ``Charlie`` deployment would perform this step once for ``Baker`` and
-  once for ``Alpha``.
+.. tab-set:: 
 
-2) Create a New Bucket Replication Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. tab-item:: Console
 
-Use the :mc-cmd:`mc replicate add` command to add the new server-side
-replication rule to the each MinIO deployment. 
+      .. include:: /includes/common/bucket-replication.rst
+         :start-after: start-create-bucket-replication-rule-console
+         :end-before: end-create-bucket-replication-rule-console
 
-.. code-block:: shell
-   :class: copyable
+      Repeat the above steps to create a rule from this deployment to each of the other target deployments.
 
-   mc replicate add ALIAS/BUCKET \
-      --remote-bucket 'arn:minio:replication::<UUID>:BUCKET' \
-      --replicate "delete,delete-marker,existing-objects"
+      Then, repeat the above steps on each of the other deployments in the multi-site setup so that each deployment has a separate replication rule for all of the other deployments.
 
-- Replace ``BUCKET`` with the name of the bucket on the ``ALIAS`` deployment to use as the replication source. Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment on which you are configuring replication.
+   .. tab-item:: Command Line
 
-- Replace the ``--remote-bucket`` value with the ARN returned in the previous step. Ensure you specify the ARN created on the ``ALIAS`` deployment. You can use :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured on the deployment.
+      .. include:: /includes/common/bucket-replication.rst
+         :start-after: start-create-bucket-replication-rule-cli
+         :end-before: end-create-bucket-replication-rule-cli
 
-- The ``--replicate "delete,delete-marker,existing-objects"`` flag enables the following replication features:
-  
-  - :ref:`Replication of Deletes <minio-replication-behavior-delete>` 
-  - :ref:`Replication of existing Objects <minio-replication-behavior-existing-objects>`
-  
-  See :mc-cmd:`mc replicate add --replicate` for more complete documentation. Omit these fields to disable replication of delete operations or replication of existing objects respectively.
+      Repeat these commands for each remote MinIO deployment participating in the multi-site replication configuration. For example, a multi-site replication configuration consisting of MinIO deployments ``minio1``, ``minio2``, and ``minio3`` would require repeating this step on each deployment for each remote. 
+         
+      Specifically, in this scenario, perform this step twice on each deployment:
 
-Specify any other supported optional arguments for :mc-cmd:`mc replicate add`.
+      - On the ``minio1`` deployment, once for a rule for ``minio2`` and again for a separate rule for ``minio3``. 
 
-Repeat these commands for each remote MinIO deployment participating in the multi-site replication configuration. For example, a multi-site replication configuration consisting of MinIO deployments ``Alpha``, ``Baker``, and ``Charlie`` would require repeating this step on each deployment for each remote. Specifically:
+      - On the ``minio2`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio3``.
 
-- The ``Alpha`` deployment would perform this step once for
-  ``Baker`` and once for ``Charlie``. 
-
-- The ``Baker`` deployment would perform this step once for ``Alpha`` and 
-  once for ``Charlie``.
-
-- The ``Charlie`` deployment would perform this step once for ``Baker`` and
-  once for ``Alpha``.
+      - On the ``minio3`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio2``.
 
 3) Validate the Replication Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc cp` to copy a new object the bucket on any of the deployments:
+.. tab-set:: 
 
-.. code-block:: shell
-   :class: copyable
+   .. tab-item:: Console
 
-   mc cp ~/foo.txt ALIAS/BUCKET
+      .. include:: /includes/common/installation.rst
+         :start-after: start-validate-bucket-replication-console
+         :end-before: end-validate-bucket-replication-console
 
-Use :mc-cmd:`mc ls` to verify the object exists on each remote deployment:
+      Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
 
-.. code-block:: shell
-   :class: copyable
+   .. tab-item:: Command Line
 
-   mc ls REMOTE/BUCKET
+      .. include:: /includes/common/installation.rst
+         :start-after: start-validate-bucket-replication-cli
+         :end-before: end-validate-bucket-replication-cli
 
-Repeat this test on each of the deployments by copying a new unique file and checking the other deployments for that file.
+      Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
 
-You can also use :mc-cmd:`mc stat` to check the file to check the current :ref:`replication stage <minio-replication-process>` of the object.
+      You can also use :mc-cmd:`mc stat` to check the file to check the current :ref:`replication stage <minio-replication-process>` of the object.
