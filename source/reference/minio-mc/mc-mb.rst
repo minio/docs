@@ -74,7 +74,7 @@ Parameters
 
    .. code-block:: none
 
-      mc ls ~/mydata/object.txt
+      mc mb ~/mydata/mydir
 
 .. mc-cmd:: --ignore-existing, p
    
