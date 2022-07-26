@@ -39,16 +39,20 @@ Multi-Site Active-Active replication configurations can span multiple racks, dat
 Requirements
 ------------
 
+You must meet all of the basic requirements for bucket replication described in :ref:`Bucket Replication Requirements <minio-bucket-replication-requirements>`.
+
+In addition, to create multi-site bucket replication set up, you must meet the following additional requirements:
+
 Access to All Clusters
 ~~~~~~~~~~~~~~~~~~~~~~
 
-You must have access to all clusters to set up multi-site active-active bucket replication.
+You must have network access and log in credentials with correct permissions to all deployments to set up multi-site active-active bucket replication.
 
 You can access the deployments by logging in to the :ref:`MinIO Console <minio-console>` for each deployment or by installing :mc:`mc` and using the command line.
 
-If using the command line, use the :mc:`mc alias` command to create an alias for each MinIO cluster. 
-Alias creation requires specifying an access key for a user on the cluster. 
-This user **must** have permission to create and manage users and policies on the cluster. 
+If using the command line, use the :mc:`mc alias` command to create an alias for each MinIO deployment. 
+Alias creation requires specifying an access key for a user on the deployment. 
+This user **must** have permission to create and manage users and policies on the deployment. 
 
 Specifically, ensure the user has *at minimum*:
 
@@ -59,40 +63,6 @@ Specifically, ensure the user has *at minimum*:
 - :policy-action:`admin:GetPolicy`
 - :policy-action:`admin:AttachUserOrGroupPolicy`
 
-Required Permissions
-~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-required-permissions
-   :end-before: end-replication-required-permissions
-
-Replication Requires Matching Object Encryption Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-encrypted-objects
-   :end-before: end-replication-encrypted-objects
-
-Replication Requires MinIO Deployments
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-minio-only
-   :end-before: end-replication-minio-only
-
-Replication Requires Versioning
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-requires-versioning
-   :end-before: end-replication-requires-versioning
-
-Replication Requires Matching Object Locking State
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-requires-object-locking
-   :end-before: end-replication-requires-object-locking
 
 Considerations
 --------------

@@ -25,30 +25,28 @@ The procedure on this page creates a new bucket replication rule for two-way "ac
 
 This tutorial covers configuring Active-Active replication between two MinIO clusters. For a tutorial on multi-site replication between three or more MinIO clusters, see :ref:`minio-bucket-replication-serverside-multi`.
 
-.. seealso::
-
-   - Use the :mc-cmd:`mc replicate edit` command to modify an existing
-     replication rule.
-
-   - Use the :mc-cmd:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
-
-   - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication rule.
 
 .. _minio-bucket-replication-serverside-twoway-requirements:
 
 Requirements
 ------------
 
+You must meet all of the basic requirements for bucket replication described in :ref:`Bucket Replication Requirements <minio-bucket-replication-requirements>`.
+
+In addition, to set up active-active bucket replication, you must meet the following additional requirements:
+
+.. _minio-bucket-replication-serverside-twoway-permissions:
+
 Access to Both Clusters
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-You must have access to both clusters to set up active-active bucket replication.
+You must have network access and login credentials with required permissions to both deployment to set up active-active bucket replication.
 
-You can access the deployments by loggin in to the :ref:`MinIO Console <minio-console>` for each deployment or by installing :mc:`mc` and using the command line.
+You can access the deployments by logging in to the :ref:`MinIO Console <minio-console>` for each deployment or by installing :mc:`mc` and using the command line.
 
-If using the command line, use the :mc:`mc alias` command to create an alias for both MinIO clusters. 
-Alias creation requires specifying an access key for a user on the cluster. 
-This user **must** have permission to create and manage users and policies on the cluster. 
+If using the command line, use the :mc:`mc alias` command to create an alias for both MinIO deployments. 
+Alias creation requires specifying an access key for a user on the deployment. 
+This user **must** have permission to create and manage users and policies on the deployment. 
 
 Specifically, ensure the user has *at minimum*:
 
@@ -59,42 +57,6 @@ Specifically, ensure the user has *at minimum*:
 - :policy-action:`admin:GetPolicy`
 - :policy-action:`admin:AttachUserOrGroupPolicy`
 
-.. _minio-bucket-replication-serverside-twoway-permissions:
-
-Required Permissions
-~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-required-permissions
-   :end-before: end-replication-required-permissions
-
-Replication Requires Matching Object Encryption Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-encrypted-objects
-   :end-before: end-replication-encrypted-objects
-
-Replication Requires MinIO Deployments
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-minio-only
-   :end-before: end-replication-minio-only
-
-Replication Requires Versioning
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-requires-versioning
-   :end-before: end-replication-requires-versioning
-
-Replication Requires Matching Object Locking State
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-requires-object-locking
-   :end-before: end-replication-requires-object-locking
 
 Considerations
 --------------
@@ -219,3 +181,12 @@ This procedure assumes you have already defined an alias for each deployment as 
 Repeat this test by copying another object to the second deployment and verifying the object replicates to the first deployment.
 
 Once both objects exist on both deployments, you have successfully set up two-way, active-active replication between MinIO buckets.
+
+.. seealso::
+
+   - Use the :mc-cmd:`mc replicate edit` command to modify an existing
+     replication rule.
+
+   - Use the :mc-cmd:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
+
+   - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication rule.

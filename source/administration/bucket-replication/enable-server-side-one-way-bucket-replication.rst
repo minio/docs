@@ -15,70 +15,31 @@ The procedure on this page creates a new bucket replication rule for one-way syn
 The buckets can be on the same MinIO deployment or on separate MinIO deployments.
 
 .. image:: /images/replication/active-passive-oneway-replication.svg
-   :width: 450px
-   :alt: Active-Passive Replication synchronizes data from a source MinIO cluster to a remote MinIO cluster.
+   :width: 600px
+   :alt: Active-Passive Replication synchronizes data from a source MinIO deployment to a remote MinIO deployment.
    :align: center
 
 
 - To configure two-way "active-active" replication between MinIO buckets, see :ref:`minio-bucket-replication-serverside-twoway`.
-- To configure multi-site "active-active" replication between MinIO clusters, see :ref:`minio-bucket-replication-serverside-multi`
+- To configure multi-site "active-active" replication between MinIO deployments, see :ref:`minio-bucket-replication-serverside-multi`
 
 .. note::
 
    To configure replication between arbitrary S3-compatible services (not necessarily MinIO), use :mc-cmd:`mc mirror`.
 
-.. seealso::
-
-   - Use the :mc-cmd:`mc replicate edit` command to modify an existing replication rule.
-
-   - Use the :mc-cmd:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
-
-   - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication rule.
-
-.. _minio-bucket-replication-serverside-oneway-requirements:
 
 Requirements
 ------------
 
-.. _minio-bucket-replication-serverside-oneway-permissions:
+To complete the steps on this page, you must meet all of the requirements, including having the appropriate permissions.
 
-Required Permissions
-~~~~~~~~~~~~~~~~~~~~
+For more details, see the :ref:`Bucket Replication Requirements <minio-bucket-replication-requirements>` page.
 
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-required-permissions
-   :end-before: end-replication-required-permissions
-
-Replication Requires Matching Object Encryption Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-encrypted-objects
-   :end-before: end-replication-encrypted-objects
-
-Replication Requires MinIO Deployments
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-minio-only
-   :end-before: end-replication-minio-only
-
-Replication Requires Versioning
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-requires-versioning
-   :end-before: end-replication-requires-versioning
-
-Replication Requires Matching Object Locking State
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-requires-object-locking
-   :end-before: end-replication-requires-object-locking
 
 Considerations
 --------------
+
+Click to expand any of the following:
 
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,9 +69,11 @@ See :ref:`minio-replication-behavior-delete` for more complete documentation.
 Multi-Site Replication
 ~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports configuring multiple remote targets per bucket or bucket prefix. For example, you can configure a bucket to replicate data to two or more remote MinIO deployments, where one deployment is a 1:1 copy (replication of all operations including deletions) and another is a full historical record (replication of only non-destructive write operations).
+MinIO supports configuring multiple remote targets per bucket or bucket prefix. 
+For example, you can configure a bucket to replicate data to two or more remote MinIO deployments, where one deployment is a 1:1 copy (replication of all operations including deletions) and another is a full historical record (replication of only non-destructive write operations).
 
-This procedure documents one-way replication to a single remote MinIO deployment. You can repeat this tutorial for multiple remote targets for a single bucket.
+This procedure documents one-way replication to a single remote MinIO deployment. 
+You can repeat this tutorial to replicate a single bucket to multiple remote targets.
 
 Procedure
 ---------
@@ -171,3 +134,11 @@ This procedure assumes each alias corresponds to a user with the :ref:`necessary
       .. include:: /includes/common/bucket-replication.rst
          :start-after: start-validate-bucket-replication-cli
          :end-before: end-validate-bucket-replication-cli
+
+.. seealso::
+
+   - Use the :mc-cmd:`mc replicate edit` command to modify an existing replication rule.
+
+   - Use the :mc-cmd:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
+
+   - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication rule.

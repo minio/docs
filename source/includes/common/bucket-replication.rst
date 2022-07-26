@@ -1,12 +1,13 @@
 .. start-create-replication-remote-targets-cli
 
 Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target from each deployment to the appropriate bucket on the destination deployment. 
-MinIO supports *one* remote target for an origin bucket to destination bucket combination. 
+A bucket may have multiple remote targets to different target buckets.
+No two targets can resolve from one bucket to the same remote bucket. 
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin bucket remote add ALIAS/BUCKET         \
+   mc admin bucket remote add ALIAS/BUCKET                    \
       https://RemoteUser:Password@HOSTNAME/BUCKETDESTINATION  \
       --service "replication"
 
@@ -29,8 +30,21 @@ Copy the ARN to use in the next step, noting the MinIO deployment.
 
 .. start-create-bucket-replication-rule-console
 
+#. Log in to the MinIO Console for the deployment
 #. Select the :guilabel:`Manage` button for the bucket to replicate
+
+   .. image:: /images/minio-console/console-bucket.png
+      :width: 600px
+      :alt: After a successful log in, the MinIO Console shows a list of buckets with options to manage or explore each bucket.
+      :align: center
+
 #. Select the :guilabel:`Replication` section
+
+   .. image:: /images/minio-console/console-iam.png
+      :width: 600px
+      :alt: After selecting a bucket to manage, MinIO shows summary information about the bucket as well as a navigation list of pages for adjusting the bucket configuration.
+      :align: center
+
 #. Select :guilabel:`Add Replication Rule +`
 #. Complete the requested information:
    
