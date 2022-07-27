@@ -15,7 +15,7 @@ The procedure on this page creates a new bucket replication rule for one-way syn
 The buckets can be on the same MinIO deployment or on separate MinIO deployments.
 
 .. image:: /images/replication/active-passive-oneway-replication.svg
-   :width: 600px
+   :width: 800px
    :alt: Active-Passive Replication synchronizes data from a source MinIO deployment to a remote MinIO deployment.
    :align: center
 

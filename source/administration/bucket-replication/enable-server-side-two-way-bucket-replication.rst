@@ -13,7 +13,7 @@ Enable Two-Way Server-Side Bucket Replication
 The procedure on this page creates a new bucket replication rule for two-way "active-active" synchronization of objects between MinIO buckets.
 
 .. image:: /images/replication/active-active-twoway-replication.svg
-   :width: 600px
+   :width: 800px
    :alt: Active-Active Replication synchronizes data between two remote clusters.
    :align: center
 
