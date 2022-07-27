@@ -1,4 +1,4 @@
-.. _minio-bucket-replication-requirements
+.. _minio-bucket-replication-requirements:
 
 =========================================
 Requirements to Set Up Bucket Replication

@@ -8,7 +8,7 @@ Enable Multi-Site Server-Side Bucket Replication
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 
 The procedure on this page configures automatic server-side bucket replication between multiple MinIO deployments. Multi-Site Active-Active replication builds on the :ref:`minio-bucket-replication-serverside-twoway` procedure with additional considerations required to ensure predictable replication behavior across all sites.
@@ -67,127 +67,125 @@ Specifically, ensure the user has *at minimum*:
 Considerations
 --------------
 
-Use Consistent Replication Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Click to expand any of the following:
 
-MinIO supports customizing the replication configuration to enable or disable the following replication behaviors:
+.. dropdown:: Use Consistent Replication Settings
+   :icon: fold-down
 
-- Replication of delete operations
-- Replication of delete markers
-- Replication of existing objects
-- Replication of metadata-only changes
+   MinIO supports customizing the replication configuration to enable or disable the following replication behaviors:
 
-When configuring replication rules for a bucket, ensure that all MinIO deployments participating in multi-site replication use the *same* replication behaviors to ensure consistent and predictable synchronization of objects.
+   - Replication of delete operations
+   - Replication of delete markers
+   - Replication of existing objects
+   - Replication of metadata-only changes
 
-Replication of Existing Objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   When configuring replication rules for a bucket, ensure that all MinIO deployments participating in multi-site replication use the *same* replication behaviors to ensure consistent and predictable synchronization of objects.
 
-MinIO supports automatically replicating existing objects in a bucket.
+.. dropdown:: Replication of Existing Objects
+   :icon: fold-down
 
-MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. This procedure includes the required flags for enabling replication of existing objects.
+   MinIO supports automatically replicating existing objects in a bucket.
 
-Replication of Delete Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. 
+   This procedure includes the required flags for enabling replication of existing objects.
 
-MinIO supports replicating delete operations onto the target bucket. Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
+.. dropdown:: Replication of Delete Operations
+   :icon: fold-down
 
-- For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
+   MinIO supports replicating delete operations onto the target bucket. 
+   Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
 
-- For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
+   - For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
 
-MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. This procedure includes the required flags for enabling replication of delete operations and delete markers.
+   - For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
 
-MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. Configure matching expiration rules for the bucket on all replication sites to ensure consistent application of object expiration.
+   MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. 
+   This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
-Procedure
+   MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
+   Configure matching expiration rules for the bucket on all replication sites to ensure consistent application of object expiration.
+
+Procedure 
 ---------
 
 This procedure requires repeating steps for each MinIO deployment participating in the multi-site replication configuration. Depending on the number of deployments, this procedure may require significant time and care in implementation. MinIO recommends reading through the procedure *before* attempting to implement the documented steps.
+
+MinIO Console
+~~~~~~~~~~~~~
+
+1) Create the replication rules
++++++++++++++++++++++++++++++++
+
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-bucket-replication-rule-console
+   :end-before: end-create-bucket-replication-rule-console
+
+Repeat the above steps to create a rule from this deployment to each of the other target deployments.
+
+Then, repeat the above steps on each of the other deployments in the multi-site setup so that each deployment has a separate replication rule for all of the other deployments.
+
+2) Validate the Replication Configuration
++++++++++++++++++++++++++++++++++++++++++
+
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-validate-bucket-replication-console
+   :end-before: end-validate-bucket-replication-console
+
+Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
+
+Command Line (:mc:`mc`)
+~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each MinIO deployment being configured for replication. Replace these values with the appropriate alias for each MinIO deployment.
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-multi-permissions>`.
 
 1) Create Replication Remote Targets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-replication-remote-targets-cli
+   :end-before: end-create-replication-remote-targets-cli
 
-   .. tab-item:: Console
+Repeat these instructions for each remote MinIO deployment participating in the multi-site replication configuration. 
 
-      The MinIO Console automatically creates a remote target when generating a replication rule.
-      Proceed to the next step.
+For example, a multi-site replication configuration consisting of three MinIO deployments ``minio1``, ``minio2``, and ``minio3`` requires repeating this step twice on each deployment. Specifically:
 
-   .. tab-item:: Command Line
+- The ``minio1`` deployment requires defining separate remote targets for ``minio2`` and for ``minio3``. 
 
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-replication-remote-targets-cli
-         :end-before: end-create-replication-remote-targets-cli
+- The ``minio2`` deployment requires defining separate remote targets for ``minio1`` and for ``minio3``.
 
-      Repeat these instructions for each remote MinIO deployment participating in the multi-site replication configuration. 
+- The ``minio3`` deployment requires defining separate remote targets for ``minio1`` and for ``minio2``.
 
-      For example, a multi-site replication configuration consisting of three MinIO deployments ``minio1``, ``minio2``, and ``minio3`` requires repeating this step twice on each deployment. Specifically:
+More than three deployments requires additional remote targets on each deployment to create the required targets for each origin and destination bucket compination.
 
-      - The ``minio1`` deployment requires defining separate remote targets for ``minio2`` and for ``minio3``. 
-
-      - The ``minio2`` deployment requires defining separate remote targets for ``minio1`` and for ``minio3``.
-
-      - The ``minio3`` deployment requires defining separate remote targets for ``minio1`` and for ``minio2``.
-
-      More than three deployments requires additional remote targets on each deployment to create the required targets for each origin and destination bucket compination.
-
-      Record the ARN generated for each remote and note which origin-destination bucket combination you generated the ARN for.
+Record the ARN generated for each remote and note which origin-destination bucket combination you generated the ARN for.
 
 2) Create New Bucket Replication Rules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-bucket-replication-rule-cli
+   :end-before: end-create-bucket-replication-rule-cli
 
-   .. tab-item:: Console
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-bucket-replication-rule-console
-         :end-before: end-create-bucket-replication-rule-console
-
-      Repeat the above steps to create a rule from this deployment to each of the other target deployments.
-
-      Then, repeat the above steps on each of the other deployments in the multi-site setup so that each deployment has a separate replication rule for all of the other deployments.
-
-   .. tab-item:: Command Line
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-bucket-replication-rule-cli
-         :end-before: end-create-bucket-replication-rule-cli
-
-      Repeat these commands for each remote MinIO deployment participating in the multi-site replication configuration. For example, a multi-site replication configuration consisting of MinIO deployments ``minio1``, ``minio2``, and ``minio3`` would require repeating this step on each deployment for each remote. 
+Repeat these commands for each remote MinIO deployment participating in the multi-site replication configuration. 
+For example, a multi-site replication configuration consisting of MinIO deployments ``minio1``, ``minio2``, and ``minio3`` would require repeating this step on each deployment for each remote. 
          
-      Specifically, in this scenario, perform this step twice on each deployment:
+Specifically, in this scenario, perform this step twice on each deployment:
 
-      - On the ``minio1`` deployment, once for a rule for ``minio2`` and again for a separate rule for ``minio3``. 
+- On the ``minio1`` deployment, once for a rule for ``minio2`` and again for a separate rule for ``minio3``. 
 
-      - On the ``minio2`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio3``.
+- On the ``minio2`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio3``.
 
-      - On the ``minio3`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio2``.
+- On the ``minio3`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio2``.
 
 3) Validate the Replication Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-validate-bucket-replication-cli
+   :end-before: end-validate-bucket-replication-cli
 
-   .. tab-item:: Console
+Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
 
-      .. include:: /includes/common/installation.rst
-         :start-after: start-validate-bucket-replication-console
-         :end-before: end-validate-bucket-replication-console
-
-      Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
-
-   .. tab-item:: Command Line
-
-      .. include:: /includes/common/installation.rst
-         :start-after: start-validate-bucket-replication-cli
-         :end-before: end-validate-bucket-replication-cli
-
-      Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
-
-      You can also use :mc-cmd:`mc stat` to check the file to check the current :ref:`replication stage <minio-replication-process>` of the object.
+You can also use :mc-cmd:`mc stat` to check the file to check the current :ref:`replication stage <minio-replication-process>` of the object.

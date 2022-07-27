@@ -8,7 +8,7 @@ Enable Two-Way Server-Side Bucket Replication
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 The procedure on this page creates a new bucket replication rule for two-way "active-active" synchronization of objects between MinIO buckets.
 
@@ -61,122 +61,118 @@ Specifically, ensure the user has *at minimum*:
 Considerations
 --------------
 
-Use Consistent Replication Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. dropdown:: Use Consistent Replication Settings
+   :icon: fold-down
 
-MinIO supports customizing the replication configuration to enable or disable
-the following replication behaviors:
+   MinIO supports customizing the replication configuration to enable or disable the following replication behaviors:
 
-- Replication of delete operations
-- Replication of delete markers
-- Replication of existing objects
-- Replication of metadata-only changes
+   - Replication of delete operations
+   - Replication of delete markers
+   - Replication of existing objects
+   - Replication of metadata-only changes
 
-When configuring replication rules for a bucket, ensure that both MinIO deployments participating in active-active replication use the *same* replication behaviors to ensure consistent and predictable synchronization of objects.
+   When configuring replication rules for a bucket, ensure that both MinIO deployments participating in active-active replication use the *same* replication behaviors to ensure consistent and predictable synchronization of objects.
 
-Replication of Existing Objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. dropdown:: Replication of Existing Objects
+   :icon: fold-down
 
-MinIO supports automatically replicating existing objects in a bucket.
+   MinIO supports automatically replicating existing objects in a bucket.
 
-MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. This procedure includes the required flags for enabling replication of existing objects.
+   MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. 
+   This procedure includes the required flags for enabling replication of existing objects.
 
-Replication of Delete Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. dropdown:: Replication of Delete Operations
+   :icon: fold-down
 
-MinIO supports replicating delete operations onto the target bucket. Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
+   MinIO supports replicating delete operations onto the target bucket. 
+   Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
 
-- For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
+   - For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
 
-- For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
+   - For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
 
-MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. This procedure includes the required flags for enabling replication of delete operations and delete markers.
+   MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. 
+   This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
-MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. Configure matching expiration rules on both the source and destination bucket to ensure consistent application of object expiration.
+   MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
+   Configure matching expiration rules on both the source and destination bucket to ensure consistent application of object expiration.
 
-See :ref:`minio-replication-behavior-delete` for more complete documentation.
+   See :ref:`minio-replication-behavior-delete` for more complete documentation.
 
-Multi-Site Replication
-~~~~~~~~~~~~~~~~~~~~~~
+.. dropdown:: Multi-Site Replication
+   :icon: fold-down
 
-MinIO supports configuring multiple remote targets per bucket or bucket prefix. This enables configuring multi-site active-active replication between MinIO deployments.
+   MinIO supports configuring multiple remote targets per bucket or bucket prefix. 
+   This enables configuring multi-site active-active replication between MinIO deployments.
 
-This procedure covers active-active replication between *two* MinIO sites. You can repeat this procedure for each "pair" of MinIO deployments in the replication mesh. For a dedicated tutorial, see :ref:`minio-bucket-replication-serverside-multi`.
+   This procedure covers active-active replication between *two* MinIO sites. 
+   You can repeat this procedure for each "pair" of MinIO deployments in the replication mesh. For a dedicated tutorial, see :ref:`minio-bucket-replication-serverside-multi`.
 
 Procedure
 ---------
+
+MinIO Console
+~~~~~~~~~~~~~
+
+1) Create a New Bucket Replication Rule on Each Deployment
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-bucket-replication-rule-console
+   :end-before: end-create-bucket-replication-rule-console
+
+Repeat the above steps to create a rule in the other direction.
+      
+#. Go to the Console for the destination deployment used above.
+#. Create a replication rule from the second deployment back to the first deployment.
+   The first deployment becomes the target deployment for the rule on the second deployment.
+
+2) Validate the Replication Configuration
++++++++++++++++++++++++++++++++++++++++++
+
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-validate-bucket-replication-console
+   :end-before: end-validate-bucket-replication-console
+
+Command Line (:mc:`mc`)
+~~~~~~~~~~~~~~~~~~~~~~~
 
 This procecure creates two-way, active-active replication between two MinIO deployments.
 
 This procedure assumes you have already defined an alias for each deployment as a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`.
 
 1) Create Replication Remote Targets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-replication-remote-targets-cli
+   :end-before: end-create-replication-remote-targets-cli
 
-   .. tab-item:: Console
+Repeat this step on the second MinIO deployment, reversing the origin and destination.
 
-      The MinIO Console automatically creates a remote target when generating a replication rule.
-      Proceed to the next step.
-
-   .. tab-item:: Command Line
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-replication-remote-targets-cli
-         :end-before: end-create-replication-remote-targets-cli
-
-      Repeat this step on the second MinIO deployment, reversing the origin and destination.
-
-      You should have two ARNs at the conclusion of this step that point from each deployment to the other deployment's bucket. 
-      Use :mc-cmd:`mc admin bucket remote ls` to verify the remote targets before proceeding.
+You should have two ARNs at the conclusion of this step that point from each deployment to the other deployment's bucket. 
+Use :mc-cmd:`mc admin bucket remote ls` to verify the remote targets before proceeding.
 
 2) Create a New Bucket Replication Rule on Each Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-bucket-replication-rule-cli
+   :end-before: end-create-bucket-replication-rule-cli
 
-   .. tab-item:: Console
+Repeat this step on the other MinIO deployment.
+Change the alias for the different origin.
+Change the ARN to the ARN generated on the second deployment for the desired bucket.
 
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-bucket-replication-rule-console
-         :end-before: end-create-bucket-replication-rule-console
-
-      Repeat the above steps to create a rule in the other direction.
-      
-      #. Go to the Console for the destination deployment used above.
-      #. Create a replication rule from the second deployment back to the first deployment.
-         The first deployment becomes the target deployment for the rule on the second deployment.
-
-   .. tab-item:: Command Line
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-bucket-replication-rule-cli
-         :end-before: end-create-bucket-replication-rule-cli
-
-      Repeat this step on the other MinIO deployment.
-      Change the alias for the different origin.
-      Change the ARN to the ARN generated on the second deployment for the desired bucket.
-
-      You should have two replication rules configured at the conclusion of this step - one created on each deployment that points to the bucket on the other deployment.
-      Use the :mc-cmd:`mc replicate ls` command to verify the created replication rules.
+You should have two replication rules configured at the conclusion of this step - one created on each deployment that points to the bucket on the other deployment.
+Use the :mc-cmd:`mc replicate ls` command to verify the created replication rules.
 
 3) Validate the Replication Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
-
-   .. tab-item:: Console
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-validate-bucket-replication-console
-         :end-before: end-validate-bucket-replication-console
-
-   .. tab-item:: Command Line
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-validate-bucket-replication-cli
-         :end-before: end-validate-bucket-replication-cli
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-validate-bucket-replication-cli
+   :end-before: end-validate-bucket-replication-cli
 
 Repeat this test by copying another object to the second deployment and verifying the object replicates to the first deployment.
 

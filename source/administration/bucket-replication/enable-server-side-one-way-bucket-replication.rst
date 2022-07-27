@@ -8,7 +8,7 @@ Enable One-Way Server-Side Bucket Replication
 
 .. contents:: Table of Contents
    :local:
-   :depth: 1
+   :depth: 2
 
 
 The procedure on this page creates a new bucket replication rule for one-way synchronization of objects from one MinIO bucket to another MinIO bucket.
@@ -41,42 +41,62 @@ Considerations
 
 Click to expand any of the following:
 
-Replication of Existing Objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. dropdown:: Replication of Existing Objects
+   :icon: fold-down
 
-MinIO supports automatically replicating existing objects in a bucket.
+   MinIO supports automatically replicating existing objects in a bucket.
 
-MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. 
-This procedure includes the required flags for enabling replication of existing objects.
+   MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. 
+   This procedure includes the required flags for enabling replication of existing objects.
 
-Replication of Delete Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. dropdown:: Replication of Delete Operations
+   :icon: fold-down
 
-MinIO supports replicating S3 ``DELETE`` operations onto the target bucket. 
-Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
+   MinIO supports replicating S3 ``DELETE`` operations onto the target bucket. 
+   Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
 
-- For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
+   - For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
 
-- For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
+   - For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
 
-MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. 
-This procedure includes the required flags for enabling replication of delete operations and delete markers.
+   MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. 
+   This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
-MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`.
+   MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`.
 
-See :ref:`minio-replication-behavior-delete` for more complete documentation.
+   See :ref:`minio-replication-behavior-delete` for more complete documentation.
 
-Multi-Site Replication
-~~~~~~~~~~~~~~~~~~~~~~
+.. dropdown:: Multi-Site Replication
+   :icon: fold-down
 
-MinIO supports configuring multiple remote targets per bucket or bucket prefix. 
-For example, you can configure a bucket to replicate data to two or more remote MinIO deployments, where one deployment is a 1:1 copy (replication of all operations including deletions) and another is a full historical record (replication of only non-destructive write operations).
+   MinIO supports configuring multiple remote targets per bucket or bucket prefix. 
+   For example, you can configure a bucket to replicate data to two or more remote MinIO deployments, where one deployment is a 1:1 copy (replication of all operations including deletions) and another is a full historical record (replication of only non-destructive write operations).
 
-This procedure documents one-way replication to a single remote MinIO deployment. 
-You can repeat this tutorial to replicate a single bucket to multiple remote targets.
+   This procedure documents one-way replication to a single remote MinIO deployment. 
+   You can repeat this tutorial to replicate a single bucket to multiple remote targets.
 
 Procedure
 ---------
+
+MinIO Console
+~~~~~~~~~~~~~
+
+1) Create a New Bucket Replication Rule
++++++++++++++++++++++++++++++++++++++++
+
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-bucket-replication-rule-console
+   :end-before: end-create-bucket-replication-rule-console
+
+2) Validate the Replication Configuration
++++++++++++++++++++++++++++++++++++++++++
+
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-validate-bucket-replication-console
+   :end-before: end-validate-bucket-replication-console
+
+Command Line (:mc:`mc`)
+~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure uses the :ref:`aliases <alias>` ``SOURCE`` and ``REMOTE`` to reference each MinIO deployment being configured for replication. 
 Replace these values with the appropriate alias for your target MinIO deployments.
@@ -84,56 +104,27 @@ Replace these values with the appropriate alias for your target MinIO deployment
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-oneway-permissions>`.
 
 1) Create a Replication Remote Target
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
-
-   .. tab-item:: Console
-
-      The MinIO Console automatically creates a remote target when generating a replication rule.
-      Proceed to the next step.
-
-   .. tab-item:: Command Line
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-replication-remote-targets-cli
-         :end-before: end-create-replication-remote-targets-cli
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-replication-remote-targets-cli
+   :end-before: end-create-replication-remote-targets-cli
 
 
 2) Create a New Bucket Replication Rule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
-
-   .. tab-item:: Console
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-bucket-replication-rule-console
-         :end-before: end-create-bucket-replication-rule-console
-
-   .. tab-item:: Command Line
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-create-bucket-replication-rule-cli
-         :end-before: end-create-bucket-replication-rule-cli
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-create-bucket-replication-rule-cli
+   :end-before: end-create-bucket-replication-rule-cli
 
 
 3) Validate the Replication Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++++++++++++++++++
 
-.. tab-set:: 
-
-   .. tab-item:: Console
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-validate-bucket-replication-console
-         :end-before: end-validate-bucket-replication-console
-
-   .. tab-item:: Command Line
-
-      .. include:: /includes/common/bucket-replication.rst
-         :start-after: start-validate-bucket-replication-cli
-         :end-before: end-validate-bucket-replication-cli
+.. include:: /includes/common/bucket-replication.rst
+   :start-after: start-validate-bucket-replication-cli
+   :end-before: end-validate-bucket-replication-cli
 
 .. seealso::
 
