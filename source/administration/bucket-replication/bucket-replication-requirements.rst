@@ -12,19 +12,19 @@ Requirements to Set Up Bucket Replication
 
 .. _minio-bucket-replication-serverside-oneway-permissions:
 
-Bucket replication uses rules to duplicate content from one MinIO bucket to another MinIO bucket.
+Bucket replication uses rules to synchronize the contents of a bucket on one MinIO deployment to a bucket on a remote MinIO deployment.
 
 Replication can be done in any of the following ways:
 
 - :ref:`Active-Passive <minio-bucket-replication-serverside-oneway>`
-  The affected contents of a bucket duplicate to another bucket in a one-way direction.
-  Changes to affected contents on the remote bucket do **not** apply the objects on the origin bucket. 
-- `Active-Active <minio-bucket-replication-serverside-twoway>`
-  Changes to the affected contents of either bucket duplicate to the other bucket in a two-way direction.
-- `Multi-Site Active-Active <><minio-bucket-replication-serverside-multi>`
-  Changes to the affected contents on any bucket set up for bucket replication affect all of the other buckets.
+  Eligible objects replicate from the source bucket to the remote bucket.
+  Any changes on the remote bucket do not replicate back.
+- :ref:`Active-Active <minio-bucket-replication-serverside-twoway>`
+  Changes to eligible objects of either bucket replicate to the other bucket in a two-way direction.
+- :ref:`Multi-Site Active-Active <minio-bucket-replication-serverside-multi>`
+  Changes to eligible objects on any bucket set up for bucket replication replicte to all of the other buckets.
 
-This page explains the prerequisites that must be met before you can set up any of these types of bucket replication.
+Ensure you meet the following prerequisites before you set up any of these replication configurations.
 
 Permissions
 -----------

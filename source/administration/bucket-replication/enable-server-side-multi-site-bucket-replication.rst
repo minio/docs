@@ -110,42 +110,60 @@ Procedure
 
 This procedure requires repeating steps for each MinIO deployment participating in the multi-site replication configuration. Depending on the number of deployments, this procedure may require significant time and care in implementation. MinIO recommends reading through the procedure *before* attempting to implement the documented steps.
 
-MinIO Console
-~~~~~~~~~~~~~
+- :ref:`<minio-bucket-replication-multi-site-minio-console-procedure>`
+   - :ref:`<minio-bucket-replication-multi-site-minio-console-create-replication-rules>` 
+   - :ref:`<minio-bucket-replication-multi-site-minio-console-validate-replication-config>`
+- :ref:`<minio-bucket-replication-multi-site-minio-cli-procedure>`
+   - :ref:`<minio-bucket-replication-multi-site-minio-cli-create-remote-targets>`
+   - :ref:`<minio-bucket-replication-multi-site-minio-cli-create-replication-rules>`
+   - :ref:`<minio-bucket-replication-multi-site-minio-cli-verify-replication-config>` 
+
+.. _minio-bucket-replication-multi-site-minio-console-procedure:
+
+Configure Multi-Site Bucket Replication Using the MinIO Console
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _minio-bucket-replication-multi-site-minio-console-create-replication-rules:
 
 1) Create the replication rules
 +++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-bucket-replication-rule-console
-   :end-before: end-create-bucket-replication-rule-console
+   :start-after: start-create-bucket-replication-rule-console-desc
+   :end-before: end-create-bucket-replication-rule-console-desc
 
 Repeat the above steps to create a rule from this deployment to each of the other target deployments.
 
 Then, repeat the above steps on each of the other deployments in the multi-site setup so that each deployment has a separate replication rule for all of the other deployments.
 
+.. _minio-bucket-replication-multi-site-minio-console-validate-replication-config:
+
 2) Validate the Replication Configuration
 +++++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-validate-bucket-replication-console
-   :end-before: end-validate-bucket-replication-console
+   :start-after: start-validate-bucket-replication-console-desc
+   :end-before: end-validate-bucket-replication-console-desc
 
 Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
 
-Command Line (:mc:`mc`)
-~~~~~~~~~~~~~~~~~~~~~~~
+.. _minio-bucket-replication-multi-site-minio-cli-procedure:
+
+Configure Multi-Site Bucket Replication Using the Command Line (:mc:`mc`)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each MinIO deployment being configured for replication. Replace these values with the appropriate alias for each MinIO deployment.
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-multi-permissions>`.
 
+.. _minio-bucket-replication-multi-site-minio-cli-create-remote-targets:
+
 1) Create Replication Remote Targets
 ++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-replication-remote-targets-cli
-   :end-before: end-create-replication-remote-targets-cli
+   :start-after: start-create-replication-remote-targets-cli-desc
+   :end-before: end-create-replication-remote-targets-cli-desc
 
 Repeat these instructions for each remote MinIO deployment participating in the multi-site replication configuration. 
 
@@ -161,12 +179,14 @@ More than three deployments requires additional remote targets on each deploymen
 
 Record the ARN generated for each remote and note which origin-destination bucket combination you generated the ARN for.
 
+.. _minio-bucket-replication-multi-site-minio-cli-create-replication-rules:
+
 2) Create New Bucket Replication Rules
 ++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-bucket-replication-rule-cli
-   :end-before: end-create-bucket-replication-rule-cli
+   :start-after: start-create-bucket-replication-rule-cli-desc
+   :end-before: end-create-bucket-replication-rule-cli-desc
 
 Repeat these commands for each remote MinIO deployment participating in the multi-site replication configuration. 
 For example, a multi-site replication configuration consisting of MinIO deployments ``minio1``, ``minio2``, and ``minio3`` would require repeating this step on each deployment for each remote. 
@@ -179,12 +199,14 @@ Specifically, in this scenario, perform this step twice on each deployment:
 
 - On the ``minio3`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio2``.
 
+.. _minio-bucket-replication-multi-site-minio-cli-verify-replication-config:
+
 3) Validate the Replication Configuration
 +++++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-validate-bucket-replication-cli
-   :end-before: end-validate-bucket-replication-cli
+   :start-after: start-validate-bucket-replication-cli-desc
+   :end-before: end-validate-bucket-replication-cli-desc
 
 Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
 

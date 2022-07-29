@@ -1,4 +1,4 @@
-.. start-create-replication-remote-targets-cli
+.. start-create-replication-remote-targets-cli-desc
 
 Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target from each deployment to the appropriate bucket on the destination deployment. 
 A bucket may have multiple remote targets to different target buckets.
@@ -26,9 +26,9 @@ The command returns an :abbr:`ARN <Amazon Resource Name>` similar to the followi
 
 Copy the ARN to use in the next step, noting the MinIO deployment.
 
-.. end-create-replication-remote-targets-cli
+.. end-create-replication-remote-targets-cli-desc
 
-.. start-create-bucket-replication-rule-console
+.. start-create-bucket-replication-rule-console-desc
 
 #. Log in to the MinIO Console for the deployment
 #. Select the :guilabel:`Manage` button for the bucket to replicate
@@ -116,10 +116,10 @@ Copy the ARN to use in the next step, noting the MinIO deployment.
 
 #. Select :guilabel:`Save` to finish adding the replication rule
 
-.. end-create-bucket-replication-rule-console
+.. end-create-bucket-replication-rule-console-desc
 
 
-.. start-create-bucket-replication-rule-cli
+.. start-create-bucket-replication-rule-cli-desc
 
 Use the :mc-cmd:`mc replicate add` command to add a new replication rule to each MinIO deployment. 
 
@@ -149,9 +149,9 @@ Use the :mc-cmd:`mc replicate add` command to add a new replication rule to each
 
 Specify any other supported optional arguments for :mc-cmd:`mc replicate add`.
 
-.. end-create-bucket-replication-rule-cli
+.. end-create-bucket-replication-rule-cli-desc
 
-.. start-validate-bucket-replication-console
+.. start-validate-bucket-replication-console-desc
 
 #. Go to the :guilabel:`Buckets` section of the MinIO Console
 #. Select the :guilabel:`Browse` button for the bucket you added replication to
@@ -160,7 +160,7 @@ Specify any other supported optional arguments for :mc-cmd:`mc replicate add`.
 #. Use the interface to add a new object to the bucket
 #. Go to the other deployment's console and select the destination bucket defined in the replication
 
-.. end-validate-bucket-replication-console
+.. end-validate-bucket-replication-console-desc
 
 .. start-validate-bucket-replication-cli
 

@@ -31,7 +31,9 @@ The buckets can be on the same MinIO deployment or on separate MinIO deployments
 Requirements
 ------------
 
-To complete the steps on this page, you must meet all of the requirements, including having the appropriate permissions.
+
+Replication requires all participating clusters meet the :ref:`following requirements <minio-bucket-replication-requirements>`. 
+This procedure assumes you have reviewed and validated those requirements.
 
 For more details, see the :ref:`Bucket Replication Requirements <minio-bucket-replication-requirements>` page.
 
@@ -78,53 +80,73 @@ Click to expand any of the following:
 Procedure
 ---------
 
-MinIO Console
-~~~~~~~~~~~~~
+- :ref:`<minio-bucket-replication-one-way-minio-console-procedure>`
+   - :ref:`<minio-bucket-replication-one-way-minio-console-create-replication-rules>` 
+   - :ref:`<minio-bucket-replication-one-way-minio-console-validate-replication-config>`
+- :ref:`<minio-bucket-replication-one-way-minio-cli-procedure>`
+   - :ref:`<minio-bucket-replication-one-way-minio-cli-create-remote-targets>`
+   - :ref:`<minio-bucket-replication-one-way-minio-cli-create-replication-rules>`
+   - :ref:`<minio-bucket-replication-one-way-minio-cli-verify-replication-config>` 
+
+.. _minio-bucket-replication-one-way-minio-console-procedure:
+
+Configure One-Way Bucket Replication Using the MinIO Console
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _minio-bucket-replication-one-way-minio-console-create-replication-rules:
 
 1) Create a New Bucket Replication Rule
 +++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-bucket-replication-rule-console
-   :end-before: end-create-bucket-replication-rule-console
+   :start-after: start-create-bucket-replication-rule-console-desc
+   :end-before: end-create-bucket-replication-rule-console-desc
+
+.. _minio-bucket-replication-one-way-minio-console-validate-replication-config:
 
 2) Validate the Replication Configuration
 +++++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-validate-bucket-replication-console
-   :end-before: end-validate-bucket-replication-console
+   :start-after: start-validate-bucket-replication-console-desc
+   :end-before: end-validate-bucket-replication-console-desc
 
-Command Line (:mc:`mc`)
-~~~~~~~~~~~~~~~~~~~~~~~
+.. _minio-bucket-replication-one-way-minio-cli-procedure:
+
+Configure One-Way Bucket Replication Using the Command Line (:mc:`mc`)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure uses the :ref:`aliases <alias>` ``SOURCE`` and ``REMOTE`` to reference each MinIO deployment being configured for replication. 
 Replace these values with the appropriate alias for your target MinIO deployments.
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-oneway-permissions>`.
 
+.. _minio-bucket-replication-one-way-minio-cli-create-remote-targets:
+
 1) Create a Replication Remote Target
 +++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-replication-remote-targets-cli
-   :end-before: end-create-replication-remote-targets-cli
+   :start-after: start-create-replication-remote-targets-cli-desc
+   :end-before: end-create-replication-remote-targets-cli-desc
 
+.. _minio-bucket-replication-one-way-minio-cli-create-replication-rules:
 
 2) Create a New Bucket Replication Rule
 +++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-bucket-replication-rule-cli
-   :end-before: end-create-bucket-replication-rule-cli
+   :start-after: start-create-bucket-replication-rule-cli-desc
+   :end-before: end-create-bucket-replication-rule-cli-desc
 
+.. _minio-bucket-replication-one-way-minio-cli-verify-replication-config:
 
 3) Validate the Replication Configuration
 +++++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
-   :start-after: start-validate-bucket-replication-cli
-   :end-before: end-validate-bucket-replication-cli
+   :start-after: start-validate-bucket-replication-cli-desc
+   :end-before: end-validate-bucket-replication-cli-desc
 
 .. seealso::
 
