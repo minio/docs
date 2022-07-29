@@ -26,36 +26,36 @@ Replication can be done in any of the following ways:
 
 Ensure you meet the following prerequisites before you set up any of these replication configurations.
 
-Permissions
------------
+Permissions Required for Setting Up Bucket Replication
+------------------------------------------------------
 
 .. include:: /includes/common-replication.rst
    :start-after: start-replication-required-permissions
    :end-before: end-replication-required-permissions
 
-Matching Object Encryption Settings
------------------------------------
+Matching Object Encryption Settings for Bucket Replication
+----------------------------------------------------------
 
 .. include:: /includes/common-replication.rst
    :start-after: start-replication-encrypted-objects
    :end-before: end-replication-encrypted-objects
 
-MinIO Deployments
------------------
+Bucket Replication Requires MinIO Deployments
+---------------------------------------------
 
 .. include:: /includes/common-replication.rst
    :start-after: start-replication-minio-only
    :end-before: end-replication-minio-only
 
-Versioning
-----------
+Versioning Objects for Bucket Replication
+-----------------------------------------
 
 .. include:: /includes/common-replication.rst
    :start-after: start-replication-requires-versioning
    :end-before: end-replication-requires-versioning
 
-Matching Object Locking State
------------------------------
+Matching Object Locking State With Bucket Replication
+-----------------------------------------------------
 
 .. include:: /includes/common-replication.rst
    :start-after: start-replication-requires-object-locking

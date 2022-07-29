@@ -30,23 +30,23 @@ Copy the ARN to use in the next step, noting the MinIO deployment.
 
 .. start-create-bucket-replication-rule-console-desc
 
-#. Log in to the MinIO Console for the deployment
-#. Select the :guilabel:`Manage` button for the bucket to replicate
+A) Log in to the MinIO Console for the deployment
+B) Select the :guilabel:`Manage` button for the bucket to replicate
 
    .. image:: /images/minio-console/console-bucket.png
       :width: 600px
       :alt: After a successful log in, the MinIO Console shows a list of buckets with options to manage or explore each bucket.
       :align: center
 
-#. Select the :guilabel:`Replication` section
+C) Select the :guilabel:`Replication` section
 
    .. image:: /images/minio-console/console-iam.png
       :width: 600px
       :alt: After selecting a bucket to manage, MinIO shows summary information about the bucket as well as a navigation list of pages for adjusting the bucket configuration.
       :align: center
 
-#. Select :guilabel:`Add Replication Rule +`
-#. Complete the requested information:
+D) Select :guilabel:`Add Replication Rule +`
+E) Complete the requested information:
    
    .. list-table::
       :header-rows: 1
@@ -114,7 +114,7 @@ Copy the ARN to use in the next step, noting the MinIO deployment.
         - Leave selected to allow replication of the deletion of versions of an object.
           Otherwise, move the toggle to the :guilabel:`Off` position to not replicate deletion of object versions.
 
-#. Select :guilabel:`Save` to finish adding the replication rule
+F) Select :guilabel:`Save` to finish adding the replication rule
 
 .. end-create-bucket-replication-rule-console-desc
 
@@ -153,16 +153,27 @@ Specify any other supported optional arguments for :mc-cmd:`mc replicate add`.
 
 .. start-validate-bucket-replication-console-desc
 
-#. Go to the :guilabel:`Buckets` section of the MinIO Console
-#. Select the :guilabel:`Browse` button for the bucket you added replication to
-#. Select the :guilabel:`Upload` button to add a new object to the bucket
-#. Select :guilabel:`Upload File`
-#. Use the interface to add a new object to the bucket
-#. Go to the other deployment's console and select the destination bucket defined in the replication
+A) Go to the :guilabel:`Buckets` section of the MinIO Console
+   
+   .. image:: /images/minio-console/console-bucket.png
+      :width: 600px
+      :alt: The default screen when logging into the MinIO Console. The screen shows a list of the buckets available in the Deployment with options to Manage or Browse the bucket contents.
+      :align: center
+
+B) Select the :guilabel:`Browse` button for the bucket you added replication to
+
+   .. image:: /images/minio-console/console-object-browser.png
+      :width: 600px
+      :alt: The contents of a bucket display after selecting to Browse the MinIO bucket. Options including to Rewind, Refresh, or Upload contents.
+      
+C) Select the :guilabel:`Upload` button to add a new object to the bucket
+D) Select :guilabel:`Upload File`
+E) Use the interface to add a new object to the bucket
+F) Go to the other deployment's console and select the destination bucket defined in the replication
 
 .. end-validate-bucket-replication-console-desc
 
-.. start-validate-bucket-replication-cli
+.. start-validate-bucket-replication-cli-desc
 
 Use :mc-cmd:`mc cp` to copy a new object to the replicated bucket on one of the deployments. 
 
@@ -178,4 +189,4 @@ Use :mc-cmd:`mc ls` to verify the object exists on the destination bucket:
 
    mc ls ALIAS/BUCKET
 
-.. end-validate-bucket-replication-cli
+.. end-validate-bucket-replication-cli-desc

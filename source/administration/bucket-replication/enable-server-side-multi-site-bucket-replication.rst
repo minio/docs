@@ -110,13 +110,13 @@ Procedure
 
 This procedure requires repeating steps for each MinIO deployment participating in the multi-site replication configuration. Depending on the number of deployments, this procedure may require significant time and care in implementation. MinIO recommends reading through the procedure *before* attempting to implement the documented steps.
 
-- :ref:`<minio-bucket-replication-multi-site-minio-console-procedure>`
-   - :ref:`<minio-bucket-replication-multi-site-minio-console-create-replication-rules>` 
-   - :ref:`<minio-bucket-replication-multi-site-minio-console-validate-replication-config>`
-- :ref:`<minio-bucket-replication-multi-site-minio-cli-procedure>`
-   - :ref:`<minio-bucket-replication-multi-site-minio-cli-create-remote-targets>`
-   - :ref:`<minio-bucket-replication-multi-site-minio-cli-create-replication-rules>`
-   - :ref:`<minio-bucket-replication-multi-site-minio-cli-verify-replication-config>` 
+- :ref:`Configure Multi-Site Bucket Replication Using the MinIO Console <minio-bucket-replication-multi-site-minio-console-procedure>`
+   - :ref:`Create the Replication Rules <minio-bucket-replication-multi-site-minio-console-create-replication-rules>` 
+   - :ref:`Validate the Replication Configuration <minio-bucket-replication-multi-site-minio-console-validate-replication-config>`
+- :ref:`Configure Multi-Site Bucket Replication Using the Command Line <minio-bucket-replication-multi-site-minio-cli-procedure>`
+   - :ref:`Create Replication Remote Targets <minio-bucket-replication-multi-site-minio-cli-create-remote-targets>`
+   - :ref:`Create New Bucket Replication Rules <minio-bucket-replication-multi-site-minio-cli-create-replication-rules>`
+   - :ref:`Validate the Replication Configuration <minio-bucket-replication-multi-site-minio-cli-verify-replication-config>` 
 
 .. _minio-bucket-replication-multi-site-minio-console-procedure:
 
@@ -125,7 +125,7 @@ Configure Multi-Site Bucket Replication Using the MinIO Console
 
 .. _minio-bucket-replication-multi-site-minio-console-create-replication-rules:
 
-1) Create the replication rules
+1) Create the Replication Rules
 +++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst

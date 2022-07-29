@@ -111,13 +111,13 @@ Considerations
 Procedure
 ---------
 
-- :ref:`<minio-bucket-replication-two-way-minio-console-procedure>`
-   - :ref:`<minio-bucket-replication-two-way-minio-console-create-replication-rules>` 
-   - :ref:`<minio-bucket-replication-two-way-minio-console-validate-replication-config>`
-- :ref:`<minio-bucket-replication-two-way-minio-cli-procedure>`
-   - :ref:`<minio-bucket-replication-two-way-minio-cli-create-remote-targets>`
-   - :ref:`<minio-bucket-replication-two-way-minio-cli-create-replication-rules>`
-   - :ref:`<minio-bucket-replication-two-way-minio-cli-verify-replication-config>` 
+- :ref:`Configure Two-Way Bucket Replication Using the MinIO Console <minio-bucket-replication-two-way-minio-console-procedure>`
+   - :ref:`Create a New Bucket Replication Rule on Each Deployment <minio-bucket-replication-two-way-minio-console-create-replication-rules>` 
+   - :ref:`Validate the Replication Configuration <minio-bucket-replication-two-way-minio-console-validate-replication-config>`
+- :ref:`Configure Two-Way Bucket Replication Using the Command Line <minio-bucket-replication-two-way-minio-cli-procedure>`
+   - :ref:`Create Replication Remote Targets <minio-bucket-replication-two-way-minio-cli-create-remote-targets>`
+   - :ref:`Create a New Bucket Replication Rule on Each Deployment <minio-bucket-replication-two-way-minio-cli-create-replication-rules>`
+   - :ref:`Validate the Replication Configuration <minio-bucket-replication-two-way-minio-cli-verify-replication-config>` 
 
 .. _minio-bucket-replication-two-way-minio-console-procedure:
 
@@ -135,8 +135,8 @@ Configure Two-Way Bucket Replication Using the MinIO Console
 
 Repeat the above steps to create a rule in the other direction.
       
-#. Go to the Console for the destination deployment used above.
-#. Create a replication rule from the second deployment back to the first deployment.
+A) Go to the Console for the destination deployment used above.
+B) Create a replication rule from the second deployment back to the first deployment.
    The first deployment becomes the target deployment for the rule on the second deployment.
 
 .. _minio-bucket-replication-two-way-minio-console-validate-replication-config:

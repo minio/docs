@@ -80,13 +80,13 @@ Click to expand any of the following:
 Procedure
 ---------
 
-- :ref:`<minio-bucket-replication-one-way-minio-console-procedure>`
-   - :ref:`<minio-bucket-replication-one-way-minio-console-create-replication-rules>` 
-   - :ref:`<minio-bucket-replication-one-way-minio-console-validate-replication-config>`
-- :ref:`<minio-bucket-replication-one-way-minio-cli-procedure>`
-   - :ref:`<minio-bucket-replication-one-way-minio-cli-create-remote-targets>`
-   - :ref:`<minio-bucket-replication-one-way-minio-cli-create-replication-rules>`
-   - :ref:`<minio-bucket-replication-one-way-minio-cli-verify-replication-config>` 
+- :ref:`Configure One-Way Bucket Replication Using the MinIO Console <minio-bucket-replication-one-way-minio-console-procedure>`
+   - :ref:`Create a New Bucket Replication Rule <minio-bucket-replication-one-way-minio-console-create-replication-rules>` 
+   - :ref:`Validate the Replication Configuration <minio-bucket-replication-one-way-minio-console-validate-replication-config>`
+- :ref:`Configure One-Way Bucket Replication Using the Command Line <minio-bucket-replication-one-way-minio-cli-procedure>`
+   - :ref:`Create a Replication Remote Target <minio-bucket-replication-one-way-minio-cli-create-remote-targets>`
+   - :ref:`Create a New Bucket Replication Rule <minio-bucket-replication-one-way-minio-cli-create-replication-rules>`
+   - :ref:`Validate the Replication Configuration <minio-bucket-replication-one-way-minio-cli-verify-replication-config>` 
 
 .. _minio-bucket-replication-one-way-minio-console-procedure:
 
