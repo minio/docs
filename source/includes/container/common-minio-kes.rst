@@ -24,7 +24,7 @@ Use the following commands to create the following resources:
      -e KES_SERVER=https://127.0.0.1:7373            \
      -e KES_CLIENT_KEY=/certs/kes-server.key         \
      -e KES_CLIENT_CERT=/certs/kes-server.cert       \
-     quay.io/minio/kes:v|kes-stable| server          \
+     quay.io/minio/kes:|kes-stable| server          \
        --mlock --auth                                \
        --config=/etc/default/kes-server-config.yaml  \
 
@@ -64,14 +64,14 @@ For production environments, use certificates signed by a trusted Certificate Au
 
     podman run --rm                                    \
       -v ~/minio-kes-vault/certs:/certs                \
-      quay.io/minio/kes:v|kes-stable| identity new     \
+      quay.io/minio/kes:|kes-stable| identity new     \
         --key  /certs/kes-server.key                   \
         --cert /certs/kes-server.cert                  \
         kes-server
 
     podman run --rm                                    \
       -v ~/minio-kes-vault/certs:/certs                \
-      quay.io/minio/kes:v|kes-stable| identity new     \
+      quay.io/minio/kes:|kes-stable| identity new     \
         --key  /certs/minio-kes.key                    \
         --cert /certs/minio-kes.cert                   \
         minio-server
@@ -166,7 +166,7 @@ All commands assume starting the container in "Rootfull" mode.
    -e KES_CLIENT_CERT=/certs/minio-kes.cert \
    -e VAULTAPPID="vault-app-id" \
    -e VAULTAPPSECRET="vault-app-secret"
-   kes:v|kes-stable| server \
+   kes:|kes-stable| server \
       --mlock \
       --config=/etc/default/kes-server-config.yaml \
       --auth=off
@@ -197,12 +197,13 @@ the MinIO backend.
 
 .. code-block:: shell
    :class: copyable
+   :substitutions:
 
    sudo podman run --rm \
      -e KES_SERVER=https://127.0.0.1:7373 \
      -e KES_CLIENT_KEY=~/minio-kes-vault/certs/minio-kes.key \
      -e KES_CLIENT_CERT=~/minio-kes-vault/certs/minio-kes.cert \
-     kes:v|kes-stable| key create -k my-new-encryption-key
+     kes:|kes-stable| key create -k my-new-encryption-key
 
 You can specify any key name as appropriate for your use case, such as a bucket-specific key ``minio-mydata-key``.
 
