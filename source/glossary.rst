@@ -184,7 +184,7 @@ Glossary
 
    replication
    mirror
-     The duplication of a :ref:`bucket <minio-bucket-replication>` or entire :ref:`site <minio-site-replication-overview>` to another location.
+     The replication of a :ref:`bucket <minio-bucket-replication>` or entire :ref:`site <minio-site-replication-overview>` to another location.
 
    scanner 
    MinIO Scanner

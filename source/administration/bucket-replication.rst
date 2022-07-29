@@ -314,6 +314,7 @@ The replication process generally has one of the following flows:
    :hidden:
    :titlesonly:
 
+   /administration/bucket-replication/bucket-replication-requirements
    /administration/bucket-replication/enable-server-side-one-way-bucket-replication
    /administration/bucket-replication/enable-server-side-two-way-bucket-replication
    /administration/bucket-replication/enable-server-side-multi-site-bucket-replication
