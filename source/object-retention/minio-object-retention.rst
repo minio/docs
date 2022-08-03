@@ -18,9 +18,6 @@ the full history of that object. MinIO also supports
 objects to ensure complete immutability for a specified duration *or* until the
 lock is explicitly lifted.
 
-Both versioning and object locking features are available only with
-:ref:`distributed MinIO deployments <minio-installation-comparison>`. 
-
 .. card:: Bucket Versioning
    :link: minio-bucket-versioning
    :link-type: ref

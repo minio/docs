@@ -78,7 +78,7 @@ Parameters
 
    *Required* 
    
-   The full path to the object for which to retreive
+   The full path to the object for which to retrieve
    the object lock configuration. Specify the :ref:`alias <alias>` of a
    configured S3-compatible service as the prefix to the ``ALIAS`` bucket
    path. For example:
