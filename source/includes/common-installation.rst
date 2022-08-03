@@ -1,3 +1,115 @@
+.. start-install-minio-binary-desc
+
+The following tabs provide examples of installing MinIO onto 64-bit Linux
+operating systems using RPM, DEB, or binary. The RPM and DEB packages
+automatically install MinIO to the necessary system paths and create a
+``systemd`` service file for running MinIO automatically. MinIO strongly
+recommends using RPM or DEB installation routes.
+
+.. tab-set::
+
+   .. tab-item:: RPM (RHEL)
+      :sync: rpm
+
+      Use the following commands to download the latest stable MinIO RPM and
+      install it.
+
+      .. code-block:: shell
+         :class: copyable
+         :substitutions:
+
+         wget |minio-rpm| -O minio.rpm
+         sudo dnf install minio.rpm
+
+   .. tab-item:: DEB (Debian/Ubuntu)
+      :sync: deb
+
+      Use the following commands to download the latest stable MinIO DEB and
+      install it:
+
+      .. code-block:: shell
+         :class: copyable
+         :substitutions:
+
+         wget |minio-deb| -O minio.deb
+         sudo dpkg -i minio.deb
+
+   .. tab-item:: Binary
+      :sync: binary
+
+      Use the following commands to download the latest stable MinIO binary and
+      install it to the system ``$PATH``:
+
+      .. code-block:: shell
+         :class: copyable
+
+         wget https://dl.min.io/server/minio/release/linux-amd64/minio
+         chmod +x minio
+         sudo mv minio /usr/local/bin/
+
+.. end-install-minio-binary-desc
+
+.. start-upgrade-minio-binary-desc
+
+The following tabs provide examples of updating MinIO onto 64-bit Linux operating systems using RPM, DEB, or binary executable.
+
+For infrastructure managed by tools such as Ansible or Terraform, defer to your internal procedures for updating packages or binaries across multiple managed hosts.
+
+.. tab-set::
+
+   .. tab-item:: RPM (RHEL)
+      :sync: rpm
+
+      Use the following commands to download the latest stable MinIO RPM and
+      update the existing installation.
+
+      .. code-block:: shell
+         :class: copyable
+         :substitutions:
+
+         curl |minio-rpm| --output minio.rpm
+         sudo dnf update minio.rpm
+
+   .. tab-item:: DEB (Debian/Ubuntu)
+      :sync: deb
+
+      Use the following commands to download the latest stable MinIO DEB and
+      upgrade the existing installation:
+
+      .. code-block:: shell
+         :class: copyable
+         :substitutions:
+
+         curl |minio-deb| --output minio.deb
+         sudo dpkg -i minio.deb
+
+   .. tab-item:: Binary
+      :sync: binary
+
+      Use the following commands to download the latest stable MinIO binary and
+      overwrite the existing binary:
+
+      .. code-block:: shell
+         :class: copyable
+
+         curl https://dl.min.io/server/minio/release/linux-amd64/minio
+         chmod +x minio
+         sudo mv minio /usr/local/bin/
+
+      Replace ``/usr/local/bin`` with the location of the existing MinIO binary. 
+      Run ``which minio`` to identify the path if not already known.
+
+You can validate the upgrade by computing the ``SHA256`` checksum of each binary and ensuring the checksum matches across all hosts:
+
+.. code-block:: shell
+   :class: copyable
+
+   shasum -a 256 /usr/local/bin/minio
+
+The output of :mc-cmd:`minio --version <minio server>` should also match across all hosts.
+
+.. end-upgrade-minio-binary-desc
+
 .. start-install-minio-tls-desc
 
 MinIO enables :ref:`Transport Layer Security (TLS) <minio-tls>` 1.2+ 
