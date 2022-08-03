@@ -51,8 +51,9 @@ recommends using RPM or DEB installation routes.
 
 .. start-upgrade-minio-binary-desc
 
-The following tabs provide examples of updating MinIO onto 64-bit Linux
-operating systems using RPM, DEB, or binary:
+The following tabs provide examples of updating MinIO onto 64-bit Linux operating systems using RPM, DEB, or binary executable.
+
+For infrastructure managed by tools such as Ansible or Terraform, defer to your internal procedures for updating packages or binaries across multiple managed hosts.
 
 .. tab-set::
 
@@ -66,7 +67,7 @@ operating systems using RPM, DEB, or binary:
          :class: copyable
          :substitutions:
 
-         wget |minio-rpm| -O minio.deb
+         curl |minio-rpm| --output minio.rpm
          sudo dnf update minio.rpm
 
    .. tab-item:: DEB (Debian/Ubuntu)
@@ -79,7 +80,7 @@ operating systems using RPM, DEB, or binary:
          :class: copyable
          :substitutions:
 
-         wget |minio-deb| -O minio.deb
+         curl |minio-deb| --output minio.deb
          sudo dpkg -i minio.deb
 
    .. tab-item:: Binary
@@ -91,12 +92,21 @@ operating systems using RPM, DEB, or binary:
       .. code-block:: shell
          :class: copyable
 
-         wget https://dl.min.io/server/minio/release/linux-amd64/minio
+         curl https://dl.min.io/server/minio/release/linux-amd64/minio
          chmod +x minio
          sudo mv minio /usr/local/bin/
 
-      Replace ``/usr/local/bin`` with the location of the existing MinIO
-      binary. Run ``which minio`` to identify the path if not already known.
+      Replace ``/usr/local/bin`` with the location of the existing MinIO binary. 
+      Run ``which minio`` to identify the path if not already known.
+
+You can validate the upgrade by computing the ``SHA256`` checksum of each binary and ensuring the checksum matches across all hosts:
+
+.. code-block:: shell
+   :class: copyable
+
+   shasum -a 256 /usr/local/bin/minio
+
+The output of :mc-cmd:`minio --version <minio server>` should also match across all hosts.
 
 .. end-upgrade-minio-binary-desc
 
