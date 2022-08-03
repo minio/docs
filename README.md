@@ -23,7 +23,7 @@ static HTML pages using ReSTructured Text (rST).
 
 ### Linux
 
-1. Run `git checkout https://github.com/minio/docs` and `cd docs` to move into
+1. Run `git clone https://github.com/minio/docs` and `cd docs` to move into
    the working directory.
 
 2. Create a new virtual environment `python3 -m venv venv`. Activate it using
@@ -37,7 +37,7 @@ static HTML pages using ReSTructured Text (rST).
 
 ### MacOS
 
-1. Run `git checkout https://github.com/minio/docs` and `cd docs` to move into
+1. Run `git clone https://github.com/minio/docs` and `cd docs` to move into
    the working directory.
 
 2. Create a new virtual environment `python3 -m venv venv`. Activate it using
@@ -59,7 +59,7 @@ Prereq:
 
 - Checkout the MinIO docs repository using your preferred `git` method
   
-  `git checkout https://github.com/minio/docs`
+  `git clone https://github.com/minio/docs`
 
 All instructions use PowerShell running as an administrator.
 
