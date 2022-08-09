@@ -1,27 +1,16 @@
-// Toggle icons
-$toggleIcons: (
-    docs: 'docs.svg',
-    menu: 'menu.svg',
-    close: 'close-circle.svg',
-    toc: 'toc.svg'
-);
-
-@each $name, $icon in $toggleIcons {
-    .toggle-icon--#{$name} {
-        background-image: url(../img/icons/#{$icon});
-    }
-}
-
+// ----------------------
 // Custom scrollbar
+// ----------------------
 .scrollbar {
   scrollbar-color: transparent transparent;
   scrollbar-width: thin;
+  
 
   &:hover {
-    scrollbar-color: $scrollbar-bg transparent;
+    scrollbar-color: var(--scrollbar-bg) transparent;
 
     &::-webkit-scrollbar-thumb {
-      background-color: $scrollbar-bg;
+      background-color: var(--scrollbar-bg);
     }
   }
 
@@ -40,7 +29,189 @@ $toggleIcons: (
     background-clip: content-box;
 
     &:hover {
-      background-color: $scrollbar-hover-bg;
+      background-color: var(--scrollbar-hover-bg);
     }
   }
+}
+
+
+// ----------------------
+// Buttons icons
+// ----------------------
+.icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 0;
+  flex-shrink: 0;
+
+  &:not(.icon--switch) {
+    & > svg {
+      fill: var(--text-muted-color);
+    }
+
+    &:hover {
+      background-color: var(--theme-light-bg);
+    }
+  }
+}
+
+.icon--switch {
+  display: grid;
+  place-items: center;
+  position: relative;
+
+  & > img,
+  & > svg {
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 300ms, opacity 300ms;
+    position: absolute;
+
+    &:last-child:not(:only-child) {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+
+  &.active {
+    & > svg,
+    & > img {
+      &:first-child {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      &:last-child {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+// ----------------------
+// Cookie banner
+// ----------------------
+#cookie {
+  background-color: #E0EDF3;
+  padding: 0.5rem 0;
+  color: $black;
+  font-size: 0.75rem;
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  &:not(.show) {
+    display: none;
+  }
+
+  strong {
+    font-weight: $font-weight-medium;
+    margin-right: 0.2rem;
+  }
+
+  a {
+    color: #006DA0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  & > .container {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.cookie__text {
+  flex: 1;
+}
+
+#cookie__btn {
+  background-color: #101D32;
+  border-radius: $border-radius;
+  display: inline-block;
+  color: $white;
+  padding: 0 0.75rem 0.1rem;
+  line-height: 1;
+  cursor: pointer;
+  height: 1.65rem;
+  border: 0;
+  flex-shrink: 0;
+  margin-left: 1rem;
+
+  &:hover {
+    background-color: #050a13;
+  }
+}
+
+
+// -----------------------------
+// Read mode utility classes
+// -----------------------------
+:root {
+  &:not(.read-mode) {
+    .visible-rm {
+      display: none;
+    }
+  }
+
+  &:not(.dark-mode) {
+    .hidden-lm {
+      display: none;
+    }
+  }
+
+  &.dark-mode {
+    .hidden-dm {
+      display: none;
+    }
+  }
+
+  &.read-mode {
+    .hidden-rm {
+      display: none;
+    }
+  }
+}
+
+
+// ----------------------
+// SD cards
+// ----------------------
+.sd-container-fluid {
+  --sd-gutter-x: 0;
+}
+
+.sd-card {
+  --sd-color-shadow: none;
+  --sd-color-card-border: var(--theme-light-bg);
+  --sd-color-card-border-hover: var(--theme-light-hover-bg);
+}
+
+.sd-card-hover {
+  &:hover {
+    transform: scale(1);
+  }
+}
+
+.sd-card-body {
+  padding: 1.5rem;
+
+  img {
+    border: 0;
+  }
+}
+
+.sd-card-title {
+  line-height: 100%;
+  margin: -0.2rem 0 1rem;
 }

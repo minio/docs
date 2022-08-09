@@ -1,0 +1,37 @@
+div.footer {
+    all: revert;
+    background-color: var(--footer-bg);
+    width: 100%;
+    margin: 0;
+    
+
+    &, a {
+        color: $white;
+    }
+
+    a {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+.footer__credit {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1.5rem 0;
+    font-size: $font-size-sm;
+}
+
+.footer__license {
+    display: flex;
+    align-items: center;
+}

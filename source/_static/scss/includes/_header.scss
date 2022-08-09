@@ -1,444 +1,155 @@
-// Using CSS variables to match the parent site's nav configs.
-:root {
-	--nav-text-color: #{$black};
-	--nav-item-border-color: #{$black};
-	--nav-item-arrow: #{$nav-arrow-icon};
-	--nav-toggle-hover-border-color: #{$black};
-	--nav-bg-gray: #{$nav-sub-hover-bg};
-	--header-bg: #{$white};
-	--nav-top-border-color: #{$gray-200};
-}
-
 .header {
-    height: $header-height;
-    background-color: $header-bg;
-    box-shadow: 0 0 0.75rem rgba($black, 0.1);
-    width: 100%;
-    z-index: $z-index-header;
-    flex-shrink: 0;
-	padding: 0 $content-padding;
-
-	@include breakpoint-max(breakpoints(lg)) {
-		height: $header-height-mobile;
-		display: flex;
-		align-items: center;
-		padding: 0 $content-padding-mobile;
-	}
-}
-
-.logo {
-	display: flex;
-	align-items: center;
-
-	@include breakpoint-min(breakpoints(lg)) {
-		position: absolute;
-		left: 1.3rem;
-		top: 0;
-		z-index: 1;
-	}
-}
-
-.logo__link {
-	margin-left: 0.5rem;
-}
-
-.nav {
-	z-index: 1;
-	transition: opacity 300ms, transform 300ms;
-	font-size: $font-size-md;
-
-	@include breakpoint-max(breakpoints(lg)) {
-		height: 100vh;
-		width: $nav-mobile-width;
-		position: fixed;
-		right: 0;
-		top: 0;
-		flex-direction: column;
-		transform: translate3d($nav-mobile-width, 0, 0);
-		opacity: 0;
-		box-shadow: $nav-mobile-box-shadow;
-		overflow-y: auto;
-		background-color: $nav-mobile-bg;
-	}
-
-    & > .toggle-icon {
-        @include breakpoint-min(breakpoints(lg)) {
-            display: none;
-        }
-    }
-}
-
-.nav__top,
-.nav__bottom {
-	@include breakpoint-min(breakpoints(lg)) {
-		display: flex;
-		margin: 0.25rem 0;
-	}
-
-	align-items: center;
+	background-color: var(--header-bg);
+	box-shadow: 0 0 0.75rem rgba($black, 0.1);
+	width: 100%;
 	position: relative;
-	gap: 2rem;
-	justify-content: flex-end;
-}
-
-.nav__top {
-	border-bottom: 1px solid var(--nav-top-border-color);
+	z-index: $z-index-header;
 	
-	@include breakpoint-max(breakpoints(lg)) {
-		border-bottom: 1px solid $gray-100;
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
+	& > .container {
+		position: relative;
 	}
 
-	.nav__link {
+	&.inactive {
+		display: none;
+	}
+}
+
+.header__top {
+	align-items: center;
+	gap: 0.5rem;
+	border-bottom: 1px solid var(--nav-top-border-color);
+	display: flex;
+	padding: 0.4rem 0;
+	height: 3rem;
+
+	.nav {
 		font-size: $font-size-sm;
+		margin: 0 -1rem 0 auto !important;
 	}
 }
 
-.nav-active {
-	@include breakpoint-max(breakpoints(lg)) {
-		z-index: 1000; //FIXME
-
-		.nav {
-			transform: translate3d(0, 0, 0);
-			opacity: 1;
-			z-index: $nav-active-z-index;
-		}
+.header__logo {
+	& > svg {
+		width: 6.25rem;
+		fill: var(--logo-fill-color);
 	}
 }
 
-.nav__item {
-	&:hover {
-		.nav__dropdown,
-		& ~ .nav__dropdown--product {
-			opacity: 1;
-			pointer-events: auto;
-		}
+.header__title {
+	line-height: 100%;
+    font-weight: 500;
+    color: var(--header-headings-color);
+	margin-left: 0.5rem;
+    font-size: $font-size-sm;
+	padding-bottom: 0.1rem;
+}
 
-		.nav__link--dropdown {
-			& > span {
-				&:before {
-					opacity: 0;
-				}
+.header__actions {
+	flex-shrink: 0;
+	white-space: nowrap;
+	display: flex;
+	gap: 0.5rem;
+	margin-left: auto;
+
+	.icon {
+		&:not(.icon--switch) {
+			& > svg {
+				fill: var(--header-text-color);
+			}
+
+			&:hover {
+				background-color: var(--header-actions-icon-alt-hover-bg);
 			}
 		}
 	}
 
-	@include breakpoint-min(breakpoints(lg)) {
-		.nav__link {
-			padding-right: 1.25rem;
-			background: var(--nav-item-arrow) no-repeat top 20px right 0.25rem;
-
-			&:after {
-				opacity: 0;
-				pointer-events: none;
-				box-sizing: border-box;
-				left: 50%;
-				margin-left: -3px;
-				content: "";
-				width: 0;
-				height: 0;
-				border-style: solid;
-				border-width: 0 6px 4px;
-				border-color: transparent transparent #fff;
-				position: absolute;
-				bottom: -2px;
-				transition: opacity 200ms;
-				z-index: 2;
-			}
-		}
+	.icon--switch {
+		transition: background-color 500ms, border-color 500ms;
+		background-color: var(--header-actions-icon-bg);
+		border-color: var(--header-actions-icon-border-color);
 
 		&:hover {
-			.nav__link {
-				&:after {
-					opacity: 1;
-				}
-			}
-		}
-	}	
-}
-
-.nav__link {
-	position: relative;
-
-	&,
-	&:hover {
-		color: var(--nav-text-color);
-	}
-
-	@include breakpoint-min(breakpoints(lg)) {
-		padding: 0.5rem 0 0.6rem;
-		cursor: pointer;
-
-		& > span {
-			position: relative;
-
-			&:before {
-				height: 1px;
-				width: 100%;
-				background-color: var(--nav-item-border-color);
-				position: absolute;
-				bottom: -4px;
-				left: 0;
-				content: "";
-				transform: translateY(5px);
-				opacity: 0;
-				transition: opacity 300ms, transform 300ms;
-			}
+			background-color: var(--header-actions-icon-hover-bg);
 		}
 
-		&:not(.nav__link--dropdown) {
-			&:hover {
-				& > span {
-					&:before {
-						transform: translateY(0);
-						opacity: 1;
+		& > svg {
+			stroke: var(--header-actions-icon-stroke);
+			stroke-width: var(--header-actions-icon-stroke-width);
+
+			&:last-child {
+				& > path {
+					&:last-child {
+						fill: var(--header-actions-icon-path-fill);
 					}
 				}
 			}
 		}
 	}
+}
 
-	@include breakpoint-max(breakpoints(lg)) {
-		font-weight: $font-weight-medium;
-		color: $black;
-
-		& > span { 
-			display: block;
-			padding: 0.5rem 1.5rem;
-		}
+#read-mode-toggle {
+	@include breakpoint-max(breakpoints(xl)) {
+		display: none;
 	}
 }
 
-.nav__link--active {
-	& > span {
-		&:before {
-			opacity: 1;
-			transform: translateY(0);
+:root {
+	&:not(.read-mode) {
+		.header__actions {
+			position: absolute;
+			bottom: 2rem;
+			right: var(--content-padding);
 		}
-	}
-}
 
-.nav__link--download {
-	border: 1px solid $theme-red;
-	transition: background-color 300ms, color 300ms;
-	border-radius: $border-radius;
-	padding: 0.2rem 0.95rem 0.3rem;
-	margin-left: auto;
+		.header__hero {
+			text-align: center;
+			padding: 3rem 0 2rem;
 
-	&:hover {
-		background-color: $theme-red;
-		color: $white;
-	}
-
-	@include breakpoint-max(breakpoints(lg)) {
-		margin: 1.5rem;
-		text-align: center;
-		padding: 0.5rem 1rem;
-		display: block;
-	}
-}
-
-.nav__dropdown {
-	@include breakpoint-min(breakpoints(lg)) {
-		width: 365px;
-		transform: translateX(calc(-50% + 3rem));
-		position: absolute;
-		left: 0;
-		top: 2.65rem;
-		opacity: 0;
-		transition: opacity 200ms;
-		pointer-events: none;
-		border-radius: $border-radius-lg;
-		overflow: hidden;
-		box-shadow: 0 0.0625rem 1.25rem rgba($black, 0.13);
-		background-color: $white;
-		z-index: 1;
-
-		.nav__dropdown__inner {
-			padding: 1.5rem;
-			max-height: calc(100vh - 5rem);
-			overflow-y: auto;
-			border-radius: $border-radius-lg;	
+			& > h2 {
+				font-size: 3rem;
+				font-weight: $font-weight-bold;
+				color: var(--header-headings-color);
+				margin: 0 0 2rem;
+			}
 		}
 	}
 
-	@include breakpoint-max(breakpoints(lg)) {
-		.nav__dropdown__inner {
-			background-color: var(--nav-bg-gray);
-			padding: 0.5rem 0.8rem;
-			margin-bottom: 1rem;
-		}
-	}
-}
-
-.nav__dropdown--product {
-	@include breakpoint-min(breakpoints(lg)) {
-		&:hover {
-			opacity: 1;
-			pointer-events: auto;
+	&.read-mode {
+		.header__top {
+			border: 0;
 		}
 
-		max-width: 1200px;
-		width: 100%;
-		transform: translateX(0);
-		left: 0;
-
-        .nav__dropdown__inner {
-            padding: 2.5rem 2.25rem;
-        }
-	}
-}
-
-.nav__sub {
-	padding: 0.6rem 0.75rem;
-	font-weight: $font-weight-medium;
-	color: $black;
-	border-radius: $border-radius;
-
-	@include breakpoint-max(breakpoints(lg)) {
-		font-size: 0.85rem;
-		font-weight: normal;
-	}
-
-	&,
-	& > small {
-		display: block;
-	}
-
-	& > small {
-		color: #4b4b4b;
-		font-weight: normal;
-		font-size: 0.8rem;
-		opacity: 0.75;
-		margin-top: 0.25rem;
-
-		@include breakpoint-max(breakpoints(lg)) {
-			display: none;
-		}
-	}
-
-	&:hover {
-		background-color: var(--nav-bg-gray);
-		color: $black;
-	}
-}
-
-.nav__feature {
-	@include breakpoint-min(breakpoints(lg)) {
-		display: flex;
-	}
-}
-
-.nav__column {
-	@include breakpoint-min(breakpoints(lg)) {
-		padding: 0 1rem;
-
-		&:not(:last-child) {
-			flex: 1;
+		.header__logo {
+			& > svg {
+				width: 5rem;
+			}
 		}
 
-		&:last-child {
-			& > .nav__sub {
-				margin-top: 1rem;
+		.header__hero {
+			position: absolute;
+			right: 0;
+			width: 100%;
+			height: $search-height;
+			padding: 0 var(--content-padding);
+			top: 3.3rem;
+			
+			& > h2 {
+				display: none;
+			}
+
+			@include breakpoint-min(breakpoints(xl)) {
+				max-width: 31.5rem;
+				
+			}
+
+			@include breakpoint-max(breakpoints(lg)) {
+				top: 10rem
+			}
+
+			&:not(.active) {
+				display: none;
 			}
 		}
 	}
 }
 
-.nav__column__title {
-	text-transform: uppercase;
-	font-size: 0.6rem;
-	padding-left: 0.75rem;
-	margin-bottom: 0.5rem;
-	line-height: 100%;
-
-	@include breakpoint-max(breakpoints(lg)) {
-		margin-top: 1rem;
-	}
-
-	
-}
-
-.nav__lead {
-	&,
-	&:hover {
-		color: $black;
-	}
-
-	display: flex;
-	align-items: center;
-
-	& > img {
-		width: 30px;
-		flex-shrink: 0;
-		margin-right: 0.75rem;
-
-		@include breakpoint-max(breakpoints(lg)) {
-			display: none;
-		}
-	}
-}
-
-.nav__jump {
-	@include breakpoint-min(breakpoints(lg)) {
-		padding-left: 2.6rem;
-		margin-top: -0.2rem;
-
-		& > a {
-			&,
-			&:hover {
-				color: $black;
-			}
-
-			&:hover {
-				text-decoration: underline;
-			}
-
-			font-weight: normal;
-			display: block;
-			font-size: 0.8rem;
-			margin-top: 0.5rem;
-		}
-	}
-
-	@include breakpoint-max(breakpoints(lg)) {
-		display: none;
-	}
-}
-
-.nav__separator {
-	border-left: 1px solid $gray-100;
-	margin: 0 1rem;
-
-	@include breakpoint-max(breakpoints(lg)) {
-		display: none;
-	}
-}
-
-.toggle-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    cursor: pointer;
-    border-radius: $border-radius;
-    transition: background-color 300ms;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    &:hover {
-        background-color: $toggle-icon-hover-bg;
-    }
-}
-
-[data-toggle="nav"] {
-	margin-left: auto;
-
-	@include breakpoint-min(breakpoints(lg)) { 
-		display: none;
-	}
-}

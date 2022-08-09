@@ -16,3 +16,44 @@
         @content;
     }
 }
+
+@mixin breakpoint-between($lower, $upper) {
+	@media (min-width: $lower) and (max-width: ($upper - 1)) {
+		@content;
+	}
+}
+
+// Hide Scrollbars
+@mixin hide-scrollbars {
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    
+    &::-webkit-scrollbar {
+        display: none;
+        width: 0;
+    }
+}
+
+// Dark/Light Theme
+@mixin theme-switch($map) {
+	:root {
+		&:not(.dark-mode) {
+			@each $property, $value in $map {
+				$light: nth($value, 1);
+				$dark: nth($value, 2);
+	
+				#{$property}: #{$light};
+			}
+		}
+
+		&.dark-mode {
+			@each $property, $value in $map {
+				$light: nth($value, 1);
+				$dark: nth($value, 2);
+	
+				#{$property}: #{$dark};
+			}
+		}
+	}
+	
+}

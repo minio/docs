@@ -1,43 +1,191 @@
-#localtoc {
-    font-size: 0.8rem;
+#table-of-contents {
+    display: none;
 }
 
-#table-of-contents {
-    background: none;
-    border-style: none;
-    padding: $content-padding $content-padding $content-padding - 0.6rem $content-padding;
-    margin: 0;
+.content__toc {
+    position: sticky;
+    top: 0;
 
     @include breakpoint-min(breakpoints(lg)) {
-        width: 13rem;
+        flex-shrink: 0;
+        order: 2;
+        width: 14rem;
+        height: 100vh;
+        padding: var(--content-padding) var(--content-padding) var(--content-padding) 0;
+        overflow-y: auto;
+
+        .icon {
+            display: none;
+        }
     }
 
-
-    .topic-title {
-        margin: 0;
-        font-weight: $font-weight-medium;
-        color: $black;
+    @include breakpoint-max(breakpoints(lg)) {
+        display: flex;
+        align-items: center;
+        padding: var(--content-padding);
+        background-color: var(--body-bg);
+        z-index: $z-index-header - 2;
     }
 
-    ul {
-        list-style: none;
-        margin: 10px 0px 10px 0px;
+    .icon {
+        height: 2.7rem;
+        width: 2.7rem;
+        padding: 0.75rem;
+        border: 1px solid var(--theme-light-bg);
+        cursor: pointer;
+    }
 
-        & > {
-            li {
-                list-style: none;
-                margin: 10px 0px 10px 0px;
-
-                & > p a.reference {
-                    text-decoration: none;
-                    border-bottom: none;
-                    color: $docs-item-main-color;
-                }
-
-                & > ul {
-                        margin: 10px 0px 10px 10px;
+    &.active {
+        & > .content__toc__inner {
+            & > ul {
+                display: block;
+            }
+    
+            h3 > a {
+                border-radius: $border-radius $border-radius 0 0;
+    
+                &:after {
+                    transform: rotate(180deg);
                 }
             }
         }
+    }
 }
+
+.content__toc__inner {
+    @include breakpoint-max(breakpoints(lg)) {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        margin: 0 0.75rem;
+
+        & > h3 {
+            flex: 1;
+        }
+    }
+
+    h3 {
+        margin: 0;
+        line-height: 1;
+
+        & > a {
+            font-size: 1rem;
+            color: var(--headings-color);
+            font-size: 0;
+
+            &:before {
+                content: "Contents";
+                font-size: 1rem;
+            }
+
+            @include breakpoint-max(breakpoints(lg)) {
+                padding: 0.85rem;
+                background-color: var(--theme-light-bg);
+                border-radius: $border-radius;
+                display: block;
+                position: relative;
+
+                &:after {
+                    content: "";
+                    height: 1rem;
+                    width: 1rem;
+                    position: absolute;
+                    right: 1.25rem;
+                    top: 0.9rem;
+                    background: var(--toc-caret-icon) no-repeat center;
+                    background-size: 1rem;
+                    transform-origin: center;
+                }
+            }
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: $font-size-sm;
+
+        ul ul {
+            margin-left: 1rem;
+        }
+    }
+
+    & > ul {
+        @include breakpoint-min(breakpoints(lg)) {
+            position: relative;
+            padding-left: 1rem;
+            margin-top: 1rem;
+        
+            &:before {
+                content: "";
+                width: 2px;
+                height: calc(100% - 0.8rem);
+                position: absolute;
+                left: 0;
+                top: 0.5rem;
+                background-color: var(--theme-light-bg);
+            }
+        }
+
+        @include breakpoint-max(breakpoints(lg)) {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            width: 100%;
+            background-color: var(--theme-light-bg);
+            display: none;
+            border-radius: 0 0 $border-radius $border-radius;
+            z-index: 1;
+            border-top: 1px solid var(--theme-light-hover-bg);
+            padding: 0.65rem 1rem 1rem;
+            max-height: 12rem;
+            overflow-y: auto;
+        }
+
+        & > li {
+            & > a {
+                font-size: 0;
+
+                &:before {
+                    content: "Introduction";
+                    font-size: $font-size-sm;
+                    transition: color 300ms;
+                }
+            }
+
+            a {
+                display: block;
+                color: var(--text-muted-color);
+                code {
+                    display: none;
+                }
+
+                &:hover {
+                    color: var(--text-color);
+                }
+            }
+
+            & > ul {
+                & > li {
+                    a {
+                        transition: color 300ms;
+                        margin: 0.25rem 0;
+                        position: relative;
+
+                        &:before {
+                            content: "";
+                            width: 2px;
+                            height: calc(100% - 0.8rem);
+                            position: absolute;
+                            left: 0;
+                            top: 0.5rem;
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
