@@ -9,8 +9,7 @@ As part of this procedure, you will:
 
 - Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
 
-For production environments, MinIO recommends using Linux hosts. 
-See the MinIO on Linux documentation for configuring MinIO with KES and Hashicorp Vault.
+For production baremetal environments, deploy MinIO onto Linux hosts and follow the corresponding documentation for this procedure.
 
 For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with Hashicorp Vault.
 
@@ -35,31 +34,34 @@ Deploy or Ensure Access to a Hashicorp Vault Service
 Deploy or Ensure Access to a MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/common/common-minio-kes.rst
-   :start-after: start-kes-new-existing-minio-deployment
-   :end-before: end-kes-new-existing-minio-deployment
+.. include:: /includes/windows/common-minio-kes.rst
+   :start-after: start-kes-new-existing-minio-deployment-desc
+   :end-before: end-kes-new-existing-minio-deployment-desc
 
 Deploy MinIO and KES to Enable Server-Side Encryption with Hashicorp Vault
 --------------------------------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
-.. code-block:: shell
+.. code-block:: powershell
    :class: copyable
 
-   mkdir -P ~/minio-kes-vault/certs ~/minio-kes-vault/minio ~/minio-kes-vault/config
+   New-Item -Path "C:\minio-kes-vault" -ItemType "directory"
+   New-Item -Path "C:\minio-kes-vault\certs" -ItemType "directory"
+   New-Item -Path "C:\minio-kes-vault\minio" -ItemType "directory"
+   New-Item -Path "C:\minio-kes-vault\config" -ItemType "directory"
 
-1) Download KES and Create the Service File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Download KES for Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/macos/common-minio-kes.rst
+.. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-download-desc
    :end-before: end-kes-download-desc
 
 2) Generate TLS Certificates for KES and MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/common/common-minio-kes.rst
+.. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-generate-kes-certs-desc
    :end-before: end-kes-generate-kes-certs-desc
 
@@ -72,7 +74,7 @@ a. Create the KES Configuration File
       :start-after: start-kes-configuration-hashicorp-vault-desc
       :end-before: end-kes-configuration-hashicorp-vault-desc
 
-   Save the configuration file as ``~/minio-kes-vault/config/kes-config.yaml``. 
+   Save the configuration file as ``C:\minio-kes-vault\config\kes-config.yaml``. 
 
    - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
 
@@ -81,7 +83,7 @@ a. Create the KES Configuration File
       .. code-block:: shell
          :class: copyable
 
-         kes tool identity of ~/minio-kes-vault/certs/minio-kes.cert
+         kes tool identity of C:\minio-kes-vault\certs\minio-kes.cert
 
    - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
 
@@ -102,20 +104,20 @@ The MinIO deployment requires access to KES as part of its startup.
 
 a. Start the KES Server
 
-   .. include:: /includes/macos/common-minio-kes.rst
+   .. include:: /includes/windows/common-minio-kes.rst
       :start-after: start-kes-start-server-desc
       :end-before: end-kes-start-server-desc
 
 b. Start the MinIO Server
 
-   .. include:: /includes/macos/common-minio-kes.rst
+   .. include:: /includes/windows/common-minio-kes.rst
       :start-after: start-kes-minio-start-server-desc
       :end-before: end-kes-minio-start-server-desc
 
 5) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/common/common-minio-kes.rst
+.. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 

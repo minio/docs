@@ -1,7 +1,7 @@
-.. start-kes-configuration-hashicorp-vault
+.. start-kes-configuration-hashicorp-vault-desc
 
-|KES| uses a YAML-formatted configuration file. The following example YAML
-specifies the minimum required fields for enabling |SSE| using Hashicorp Vault:
+|KES| uses a YAML-formatted configuration file. 
+The following YAML provides the minimum required fields for using Hashicorp Vault as the root |KMS| and is intended for use in this tutorial.
 
 .. code-block:: shell
    :class: copyable
@@ -19,20 +19,18 @@ specifies the minimum required fields for enabling |SSE| using Hashicorp Vault:
      key:  ~/minio-kes-vault/certs/kes-server.key
      cert: ~/minio-kes-vault/certs/kes-server.cert
 
-   # Create a policy named 'minio' that grants access to the 
-   # /create, /generate, and /decrypt KES APIs for any key name
-   # KES uses mTLS to grant access to this policy, where only the client 
-   # whose TLS certificate hash matches one of the "identities" can
-   # use this policy. Specify the hash of the MinIO server TLS certificate
-   # hash here.
+   # Sets access policies for KES
+   # The `minio` policy grants access to the listed APIs.
    policy:
      minio:
        allow:
-       - /v1/key/create/*
-       - /v1/key/generate/*
+       - /v1/key/create/*   # You can replace these wildcard '*' with a string prefix to restrict key names
+       - /v1/key/generate/* # e.g. '/minio-'
        - /v1/key/decrypt/*
        identities:
        - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes tool identity of minio-kes.cert'
+                                # In production environments, each client connecting to KES must
+                                # Have their TLS hash listed under at least one `policy`.
 
    # Specify the connection information for the Vault server.
    # The endpoint should be resolvable from the host.
@@ -49,47 +47,57 @@ specifies the minimum required fields for enabling |SSE| using Hashicorp Vault:
          ping: 10s
        # Required if Vault uses certificates signed by an unknown CA,
        # e.g. self-signed or internal (non-globally trusted).  
+       # Replace this value with the full path to the Vault CA certificate.
        tls:
-         ca: vault-tls.cert 
+         ca: vault-tls-CA.cert 
 
-.. end-kes-configuration-hashicorp-vault
+.. end-kes-configuration-hashicorp-vault-desc
 
-.. start-kes-prereq-hashicorp-vault
+.. start-kes-prereq-hashicorp-vault-desc
 
 This procedure assumes an existing `Hashicorp Vault <https://www.vaultproject.io/>`__ installation accessible from the local host.
 The Vault `Quick Start <https://learn.hashicorp.com/tutorials/vault/getting-started-install>`__ provides a sufficient foundation for the purposes of this procedure.
 Defer to the `Vault Documentation <https://learn.hashicorp.com/vault>`__ for guidance on deployment and configuration.
 
-MinIO requires the following Vault settings or configurations:
+MinIO |KES| supports both the V1 and V2 Vault engines.
+Select the corresponding tab to the engine used by your Vault deployment for instructions on configuring the necessary permissions:
 
-- Enable the Vault K/V engine. 
-  KES version 0.15.0 and later support both the v1 and v2 engines. 
+.. tab-set::
 
-- For K/V v1, create an access policy ``kes-policy.hcl`` with a configuration similar to the following:
-   
-  .. code-block:: shell
-     :class: copyable
+   .. tab-item:: Vault Engine V1
 
-     path "kv/*" {
-          capabilities = [ "create", "read", "delete" ]
-     }
+      Create an access policy ``kes-policy.hcl`` with a configuration similar to the following:
+         
+      .. code-block:: shell
+         :class: copyable
 
-  Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``.
-  
-- For K/V v2, create an access policy ``kes-policy.hcl`` with a configuration similar to the following:
+         path "kv/*" {
+               capabilities = [ "create", "read", "delete" ]
+         }
 
-  .. code-block:: shell
-     :class: copyable
+      Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``.
 
-     path "kv/data/*" {
-          capabilities = [ "create", "read"]
+   .. tab-item:: Vault Engine V2
 
-     path "kv/metadata/*" {
-          capabilities = [ "list", "delete"]
-    
-  Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``
+      Create an access policy ``kes-policy.hcl`` with a configuration similar to the following:
 
-- Enable Vault AppRole authentication, create an AppRole ID, bind it to the necessary policy, and request both roleID and secret ID. 
+      .. code-block:: shell
+         :class: copyable
+
+         path "kv/data/*" {
+               capabilities = [ "create", "read"]
+
+         path "kv/metadata/*" {
+               capabilities = [ "list", "delete"]
+         
+      Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``
+
+MinIO requires using AppRole authentication for secure communication with the Vault server.
+The following commands:
+
+- Create an App Role ID for |KES|
+- Binds that role to the created KES policy
+- Requests a RoleID and SecretID
 
   .. code-block:: shell
      :class: copyable
@@ -99,4 +107,7 @@ MinIO requires the following Vault settings or configurations:
      vault read     auth/approle/role/kes-role/role-id
      vault write -f auth/approle/role/kes-role/secret-id
 
-.. end-kes-prereq-hashicorp-vault
+You must specify both RoleID and SecretID as part of this procedure.
+
+.. end-kes-prereq-hashicorp-vault-desc
+

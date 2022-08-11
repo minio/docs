@@ -113,6 +113,6 @@ The instructions include examples for both quay.io and DockerHub:
 This procedure assumes you have a working `Podman <https://podman.io/getting-started/installation.html>`_ installation configured to run in "Rootfull" mode.
 
 "Rootless" modes may not provide sufficient permissions to run KES with the necessary security settings.
-See the relevant "rootless" documentation for :podman-git:`Podman <blob/main/docs/tutorials/rootless_tutorial.md>` for more information.
+See the relevant :podman-git:`"rootless" documentation <blob/main/docs/tutorials/rootless_tutorial.md>` for more information.
 
 .. end-common-prereq-container-management-interface

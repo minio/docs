@@ -13,27 +13,26 @@ You can use the guidance in this tutorial for deploying MinIO with |SSE| enabled
 
 For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with Hashicorp Vault.
 
+.. important::
+
+   .. include:: /includes/common/common-minio-kes.rst
+      :start-after: start-kes-encrypted-backend-desc
+      :end-before: end-kes-encrypted-backend-desc
+
 Prerequisites
 -------------
 
 .. _minio-sse-vault-prereq-vault:
 
-Hashicorp Vault
-~~~~~~~~~~~~~~~
+Deploy or Ensure Access to a Hashicorp Vault Service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes-hashicorp.rst
-   :start-after: start-kes-prereq-hashicorp-vault
-   :end-before: end-kes-prereq-hashicorp-vault
+   :start-after: start-kes-prereq-hashicorp-vault-desc
+   :end-before: end-kes-prereq-hashicorp-vault-desc
 
-Network Encryption (TLS)
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common/common-minio-kes.rst
-   :start-after: start-kes-network-encryption-desc
-   :end-before: end-kes-network-encryption-desc
-
-Container Management Interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Install Podman or a Similar Container Management Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-deploy.rst
    :start-after: start-common-prereq-container-management-interface
@@ -66,8 +65,8 @@ For Windows hosts, substitute the paths with Windows-style paths, e.g. ``C:\mini
 a. Create the KES Configuration File
 
    .. include:: /includes/common/common-minio-kes-hashicorp.rst
-      :start-after: start-kes-configuration-hashicorp-vault
-      :end-before: end-kes-configuration-hashicorp-vault
+      :start-after: start-kes-configuration-hashicorp-vault-desc
+      :end-before: end-kes-configuration-hashicorp-vault-desc
 
    Save the configuration file as ``~/minio-kes-vault/config/kes-config.yaml``. 
 

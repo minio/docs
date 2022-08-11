@@ -7,7 +7,7 @@ The command downloads the |kes-stable| binary for that architecture, sets it to 
 
 .. tab-set::
    
-   .. tab-item:: ARM64 (Apple M1)
+   .. tab-item:: ARM64 (Apple Silicon)
 
       .. code-block:: shell
          :class: copyable

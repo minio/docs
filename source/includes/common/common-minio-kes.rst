@@ -6,17 +6,34 @@
    - /source/security/server-side-encryption/configure-minio-kes-azure.rst
    - /source/security/server-side-encryption/configure-minio-kes-gcp.rst
 
-.. start-kes-network-encryption-desc
+.. start-kes-encrypted-backend-desc
 
-MinIO |KES-git| relies on mutual TLS (mTLS) for authentication and
-authorization. Enabling |SSE| therefore *requires* that the MinIO server, |KES|,
-and the root |KMS| enforce TLS.
+Enabling |SSE| on a MinIO deployment automatically encrypts the backend data for that deployment using the default encryption key.
 
-The instructions on this page include creation of TLS certificates for
-supporting mTLS between MinIO and the KES instance. These certificates are
-appropriate for early development and evaluation environments **only**.
+MinIO *requires* access to KES *and* the root KMS to decrypt the backend and start normally.
+You cannot disable KES later or "undo" the |SSE| configuration at a later point.
 
-For instructions on enabling TLS on the MinIO server, see :ref:`minio-tls`.
+.. end-kes-encrypted-backend-desc
+
+.. start-kes-new-existing-minio-deployment-desc
+
+This procedure provides instructions for modifying the startup environment variables of a MinIO deployment to enable |SSE| via KES and the root KMS.
+
+For instructions on new production deployments, see the :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` tutorial.
+For instructions on new local or evaluation deployments, see the :ref:`Single-Node Single-Drive <minio-snsd>` tutorial.
+
+When creating the environment file for the deployment, pause and switch back to this tutorial to include the necessary environment variables to support |SSE|.
+
+For existing MinIO Deployments, you can modify the existing environment file and restart the deployment as instructed during this procedure.
+
+.. end-kes-new-existing-minio-deployment-desc
+
+.. start-kes-generate-kes-certs-desc
+
+The following commands create two TLS certificates that expire within 30 days of creation:
+
+- A TLS certificate for KES to secure communications between it and the Vault deployment
+- A TLS certificate for MinIO to perform mTLS authentication to KES.
 
 .. admonition:: Use Caution in Production Environments
    :class: important
@@ -28,40 +45,6 @@ For instructions on enabling TLS on the MinIO server, see :ref:`minio-tls`.
    generation and management. A complete guide to creating valid certificates
    (e.g. well-formed, current, and trusted) is beyond the scope of this
    procedure.
-
-.. end-kes-network-encryption-desc
-
-.. start-kes-encrypted-backend-desc
-
-Enabling |SSE| on a MinIO deployment automatically encrypts the backend data for that deployment using the default encryption key.
-
-MinIO *requires* access to KES *and* the root KMS to decrypt the backend and start normally.
-You cannot disable KES later or "undo" the |SSE| configuration at a later point.
-
-.. end-kes-encrypted-backend-desc
-
-.. start-kes-new-existing-minio-deployment
-
-This procedure provides instructions for modifying the startup environment variables of a MinIO deployment to enable |SSE| via KES and the root KMS.
-
-For instructions on new production deployments, reference the :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` tutorial.
-For instructions on new local or evaluation deployments, reference the :ref:`Single-Node Single-Drive <minio-snsd>` tutorial.
-
-When creating the environment file for the deployment, pause and switch back to this tutorial to include the necessary environment variables to support |SSE|.
-
-For existing MinIO Deployments, you can modify the existing environment file and restart the deployment as instructed during this procedure.
-
-.. end-kes-new-existing-minio-deployment
-
-.. start-kes-generate-kes-certs-desc
-
-The following commands creates two TLS certificates that expire within 30 days of creation:
-
-- A TLS certificate for KES to secure communications between it and the Vault deployment
-- A TLS certificate for MinIO to perform mTLS authentication to KES.
-
-For production environments, use certificates signed by a trusted Certificate Authority (CA). 
-**DO NOT** use certificates generated using these instructions in production environments.
 
 .. code-block:: shell
    :class: copyable
@@ -78,18 +61,14 @@ For production environments, use certificates signed by a trusted Certificate Au
      --ip   "127.0.0.1"                             \
      --dns  localhost
 
-These commands outputs the keys to the ``~/minio-kes-vault/certs`` directory on the host operating system.
+These commands output the keys to the ``~/minio-kes-vault/certs`` directory on the host operating system.
 
 The ``--ip`` and ``--dns`` parameters set the IP and DNS ``SubjectAlternativeName`` for the certificate.
 The above example assumes that all components (Vault, MinIO, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
 You can specify additional IP or Hostnames based on the network configuration of your local host.
 
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. See the `Hashicorp Server Configuration Documentation <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
-
-Clients may need to add the ``kes-server.cert`` as a trusted CA to successfully validate the KES certificates and establish a TLS-secured connection.
+Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` certificate as a trusted Certificate Authority. See the `Hashicorp Server Configuration Documentation <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
 Defer to the client documentation for instructions on trusting a third-party CA.
-
-The ``minio-kes`` certificates are used only for mTLS between the MinIO deployment and the KES server, and do not otherwise enable TLS for other connections to the MinIO deployment.
 
 .. end-kes-generate-kes-certs-desc
 
@@ -99,29 +78,30 @@ The first command allows |KES| to use the `mlock <http://man7.org/linux/man-page
 ``mlock`` ensures the OS does not write in-memory data to disk (swap memory) and mitigates the risk of cryptographic operations being written to unsecured disk at any time.
 
 The second command starts the KES server in the foreground using the configuration file created in the last step. 
-The ``--auth=off`` disables strict validation of client TLS certificates and is required if either the MinIO client or the root KMS server uses self-signed certificates.
+The ``--auth=off`` disables strict validation of client TLS certificates.
+Using self-signed certificates for either the MinIO client or the root KMS server requires specifing this option.
 
 .. code-block:: shell
    :class: copyable
 
    sudo setcap cap_ipc_lock=+ep $(readlink -f $(which kes))
 
-   kes server --mlock                            \
-               --config=~/kes/config/server-config.yaml  \
+   kes server --mlock                                                \
+               --config=~/minio-kes-vault/config/server-config.yaml  \
                --auth=off
 
 |KES| listens on port ``7373`` by default. 
 You can monitor the server logs from the terminal session. 
-If you run |KES| without tying it to the current shell session (e.g. with ``nohup``), use that methods associated logging system (e.g. ``nohup.txt``).
+If you run |KES| without tying it to the current shell session (e.g. with ``nohup``), use that method's associated logging system (e.g. ``nohup.txt``).
 
 .. end-kes-run-server-desc
 
 .. start-kes-generate-key-desc
 
 MinIO requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
-Use ``kes key create`` *or* :mc:`mc admin kms key create` to create a new |EK| for use with |SSE|.
+Use ``kes key create`` *or* :mc:`mc admin kms key create` to add a new |EK| for use with |SSE|.
 
-The following command uses the ``kes key create`` command to create a new External Key (EK) stored on the root KMS server for use with encrypting the MinIO backend.
+The following command uses the ``kes key create`` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the MinIO backend.
 
 .. code-block:: shell
    :class: copyable
@@ -137,7 +117,7 @@ The following command uses the ``kes key create`` command to create a new Extern
 .. start-kes-configuration-minio-desc
 
 Add the following lines to the MinIO Environment file on each MinIO host.
-See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd` for complete descriptions of a base MinIO environment file.
+See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd` for more detailed descriptions of a base MinIO environment file.
 
 This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server.cert`` certificates are accessible at the specified location:
 
@@ -147,23 +127,28 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
    # Add these environment variables to the existing environment file
 
    MINIO_KMS_KES_ENDPOINT=https://HOSTNAME:7373
-   MINIO_KMS_KES_CERT_FILE=~/minio-kes.cert
-   MINIO_KMS_KES_KEY_FILE=~/minio-kes.key
-   MINIO_KMS_KES_CAPATH=~/server.cert
+   MINIO_KMS_KES_CERT_FILE=~/minio-kes-vault/certs/minio-kes.cert
+   MINIO_KMS_KES_KEY_FILE=~/minio-kes-vault/certs/minio-kes.key
+   MINIO_KMS_KES_CAPATH=~/minio-kes-vault/certs/kes-server.cert
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
    minio server [ARGUMENTS]
 
-- Replace ``HOSTNAME`` with the IP address or the hostname for the host machine running the KES server or pod started in the previous step. 
+Replace ``HOSTNAME`` with the IP address or hostname of the KES server.
+If the MinIO server host machines cannot resolve or reach the specified ``HOSTNAME``, the deployment may return errors or fail to start.
 
-  For distributed KES deployments, use the address of the load balancer or reverse proxy responsible for managing connections to the KES hosts.
+- If using a single KES server host, specify the IP or hostname of that host
+- If using multiple KES server hosts, specify the load balancer or reverse proxy managing connections to those hosts.
 
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 
 - Encrypting the MinIO backend (IAM, configuration, etc.)
-- Performing :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not 
+- Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not 
   include a specific |EK|.
-- Performing :ref:`SSE-S3 <minio-encryption-sse-s3>`.
+- Encrypting objects using :ref:`SSE-S3 <minio-encryption-sse-s3>`.
+
+The ``minio-kes`` certificates enable mTLS between the MinIO deployment and the KES server *only*.
+They do not otherwise enable TLS for other client connections to MinIO.
 
 .. end-kes-configuration-minio-desc
 
@@ -176,6 +161,7 @@ You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-
    .. tab-item:: MinIO Console
 
       Open the MinIO Console by navigating to http://127.0.0.1:9090 in your preferred browser and logging in with the root credentials specified to the MinIO container.
+      If you deployed MinIO using a different Console listen port, substitute ``9090`` with that port value.
 
       Once logged in, create a new Bucket and name it to your preference.
       Select the Gear :octicon:`gear` icon to open the management view.
@@ -212,16 +198,11 @@ You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-
 .. -----------------------------------------------------------------------------
 
 .. The following sections are common descriptors associated to the KES 
-   configuration. These are used in the following pages:
-
-   - /source/security/server-side-encryption/configure-minio-kes-hashicorp.rst
-   - /source/security/server-side-encryption/configure-minio-kes-aws.rst
-   - /source/security/server-side-encryption/configure-minio-kes-azure.rst
-   - /source/security/server-side-encryption/configure-minio-kes-gcp.rst
+   configuration.
 
 .. start-kes-conf-address-desc
 
-The network address and port on which the KES server listens to on startup.
+The network address and port the KES server listens to on startup.
 Defaults to port ``7373`` on all host network interfaces.
 
 .. end-kes-conf-address-desc
@@ -229,40 +210,37 @@ Defaults to port ``7373`` on all host network interfaces.
 
 .. start-kes-conf-root-desc
 
-The identity for the KES superuser (root) identity. Clients connecting
-with a TLS certificate whose hash (``kes tool identity of client.cert``) 
-matches this value have access to all KES API operations.
+The identity for the KES superuser (``root``) identity. 
+Clients connecting with a TLS certificate whose hash (``kes tool identity of client.cert``) matches this value have access to all KES API operations.
 
-You can specify ``'disabled'`` to disable this identity and limit access 
-based on the ``policy`` configuration. 
+Specify ``disabled`` to remove the root identity and rely only on the ``policy`` configuration for controlling identity and access management to KES. 
 
 .. end-kes-conf-root-desc
 
 
 .. start-kes-conf-tls-desc
 
-The TLS private key and certificate used by KES for establishing 
-TLS-secured communications. Specify the full path to both the private ``.key``
-and public ``.cert`` to the ``key`` and ``cert`` fields respectively.
+The TLS private key and certificate used by KES for establishing TLS-secured communications. 
+Specify the full path for both the private ``.key`` and public ``.cert`` to the ``key`` and ``cert`` fields, respectively.
 
 .. end-kes-conf-tls-desc
 
 .. start-kes-conf-policy-desc
 
-Specify one or more 
-:minio-git:`policies <kes/wiki/Configuration#policy-configuration>` to
-control access to the KES server.
+Specify one or more :minio-git:`policies <kes/wiki/Configuration#policy-configuration>` to control access to the KES server.
 
-MinIO |SSE| requires access to only the following KES cryptographic APIs:
+MinIO |SSE| requires access to the following KES cryptographic APIs:
 
 - ``/v1/key/create/*``
 - ``/v1/key/generate/*``
 - ``/v1/key/decrypt/*``
 
+Specifying additional keys does not expand MinIO |SSE| functionality and may violate security best practices around providing unnecessary client access to cryptographic key operations.
+
 You can restrict the range of key names MinIO can create as part of performing
-|SSE| by specifying a prefix to replace the ``*``. For example, 
+|SSE| by specifying a prefix before the ``*``. For example, 
 ``minio-sse-*`` only grants access to create, generate, or decrypt keys using
-that prefix.
+the ``minio-sse-`` prefix.
 
 |KES| uses mTLS to authorize connecting clients by comparing the 
 hash of the TLS certificate against the ``identities`` of each configured

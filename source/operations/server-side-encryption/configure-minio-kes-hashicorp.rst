@@ -34,6 +34,14 @@ The root KMS provides stateful and secured storage of External Keys (EK) while |
 
    .. include:: /includes/macos/steps-configure-minio-kes-hashicorp.rst
 
+.. cond:: k8s
+
+   .. include:: /includes/k8s/steps-configure-minio-kes-hashicorp.rst
+
+.. cond:: windows
+
+   .. include:: /includes/windows/steps-configure-minio-kes-hashicorp.rst
+
 
 Configuration Reference for Hashicorp Vault
 -------------------------------------------
