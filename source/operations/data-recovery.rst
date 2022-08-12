@@ -57,7 +57,7 @@ write errors.
    `log in <https://subnet.min.io/>`__ and create a new issue related to drive, node, or site failures. 
    Coordination with MinIO Engineering via SUBNET can ensure successful recovery operations of production MinIO deployments, including root-cause analysis, and health diagnostics.
 
-   Community users can seek support on the `MinIO Community Slack <https://minio.slack.com>`__. 
+   Community users can seek support on the `MinIO Community Slack <https://slack.min.io>`__. 
    Community Support is best-effort only and has no SLAs around responsiveness.
 
 .. toctree::

@@ -15,7 +15,7 @@ These checklists may not meet the precise requirements of your unique deployment
 |subnet| users can `log in <https://subnet.min.io/?ref=docs>`__ and create a new issue for pre-production deployment reviews. 
 Coordination with MinIO Engineering via SUBNET ensures end-to-end support for performant and reliable deployments.
 
-Community users can seek support on the `MinIO Community Slack <https://minio.slack.com>`__. 
+Community users can seek support on the `MinIO Community Slack <https://slack.min.io>`__. 
 Community Support is best-effort only and has no SLAs around responsiveness.
 
 .. toctree::

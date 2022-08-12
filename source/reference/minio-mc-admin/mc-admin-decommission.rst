@@ -47,7 +47,7 @@ decommissioning a server pool.
    diagnostics.
 
    Community users can seek support on the `MinIO Community Slack
-   <https://minio.slack.com>`__. Community Support is best-effort only and has
+   <https://slack.min.io>`__. Community Support is best-effort only and has
    no SLAs around responsiveness.
 
 .. code-block:: shell
