@@ -51,7 +51,7 @@ recommends using RPM or DEB installation routes.
 
 .. start-upgrade-minio-binary-desc
 
-The following tabs provide examples of updating MinIO onto 64-bit Linux operating systems using RPM, DEB, or binary.
+The following tabs provide examples of updating MinIO onto 64-bit Linux operating systems using RPM, DEB, or binary executable.
 
 For infrastructure managed by tools such as Ansible or Terraform, defer to your internal procedures for updating packages or binaries across multiple managed hosts.
 

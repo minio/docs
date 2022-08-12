@@ -15,15 +15,15 @@ MinIO uses an update-then-restart methodology for upgrading a deployment to a ne
 1. Update the MinIO binary on all hosts with the newer release.
 2. Restart the deployment using :mc-cmd:`mc admin service restart`.
 
-This procedure does **not** require taking downtime and is non-disruptive to ongoing operations.
+This procedure does not require taking downtime and is non-disruptive to ongoing operations.
 
-This page documents methods for upgrading using the update-than-restart method for both ``systemctl`` and user-managed MinIO deployments.
+This page documents methods for upgrading using the update-then-restart method for both ``systemctl`` and user-managed MinIO deployments.
 Deployments using Ansible, Terraform, or other management tools can use the procedures here as guidance for implementation within the existing automation framework.
 
 .. admonition:: Test Upgrades In a Lower Environment
    :class: important
 
-   Your unique deployment topology, workload patterns, or overall environment **requires** testing of any MinIO upgrades in a lower environment (Dev/QA/Staging) *before* applying those upgrades to Production deployments, or any other environment containing critical data.
+   Your unique deployment topology, workload patterns, or overall environment requires testing of any MinIO upgrades in a lower environment (Dev/QA/Staging) *before* applying those upgrades to Production deployments, or any other environment containing critical data.
    Performing "blind" updates to production environments is done at your own risk.
 
    For MinIO deployments that are significantly behind latest stable (6+ months), consider using |SUBNET| for additional support and guidance during the upgrade procedure.
@@ -63,13 +63,13 @@ Update ``systemctl``-Managed MinIO Deployments
 
 Use these steps to upgrade a MinIO deployment where the MinIO server process is managed by ``systemctl``, such as those created using the MinIO :ref:`DEB/RPM packages <deploy-minio-distributed-baremetal>`.
 
-1. **Update the MinIO Binary on Each Node**
+1. Update the MinIO Binary on Each Node
 
    .. include:: /includes/common-installation.rst
       :start-after: start-upgrade-minio-binary-desc
       :end-before: end-upgrade-minio-binary-desc
 
-2. **Restart the Deployment**
+2. Restart the Deployment
 
    Run the :mc-cmd:`mc admin service restart` command to restart all MinIO server processes in the deployment simultaneously.
    
@@ -82,11 +82,11 @@ Use these steps to upgrade a MinIO deployment where the MinIO server process is 
 
    Replace :ref:`alias <alias>` of the MinIO deployment to restart.
 
-3. **Validate the Upgrade**
+3. Validate the Upgrade
 
    Use the :mc-cmd:`mc admin info` command to check that all MinIO servers are online, operational, and reflect the installed MinIO version.
 
-4. **Update MinIO Client**
+4. Update MinIO Client
 
    You should upgrade your :mc:`mc` binary to match or closely follow the MinIO server release. 
    You can use the :mc:`mc update` command to update the binary to the latest stable release:
