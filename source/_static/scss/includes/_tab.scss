@@ -1,0 +1,17 @@
+.sd-tab-set {
+    --sd-color-tabs-label-inactive: var(--text-muted-color);
+    --sd-color-tabs-label-hover: var(--text-color);
+    --sd-color-tabs-label-active: var(--headings-color);
+    --sd-color-tabs-underline-active: var(--tab-active-border-color);
+    --sd-color-tabs-overline: var(--tab-border-color);
+    --sd-color-tabs-underline: transparent;
+    --sd-color-tabs-underline-hover: transparent;
+
+    & > label {
+        padding: 0.5rem 0;
+        margin-right: 2rem;
+        opacity: 1;
+        font-weight: $font-weight-medium;
+        transition: border 300ms, color 300ms, opacity 300ms;
+    }
+}

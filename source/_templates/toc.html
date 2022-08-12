@@ -1,0 +1,17 @@
+<div class="content__toc scrollbar">
+    <button data-aside-toggle="doc" class="icon" type="button">
+        {%- include "icons/menu.html" %}
+        TOC Menu
+     </button>
+
+    <div class="content__toc__inner">
+        {%- block sidebartoc %}
+            {%- include "localtoc.html" %}
+        {%- endblock %}
+    </div>
+
+    <button class="icon search-toggle" type="button">
+       {%- include "icons/search.html" %}
+       Search
+    </button>
+ </div>

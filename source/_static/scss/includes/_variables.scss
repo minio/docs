@@ -1,30 +1,22 @@
 // Colors
 $white: #ffffff;
 $black: #000000;
-$theme-red: #C72C48;
-$theme-red-light: rgba($theme-red, 0.5);
-$theme-red-lighter: rgba($theme-red, 0.25);
-$theme-hover-bg: rgb(245, 245, 245);
+$theme-red: #c72e49;
 
-// Gray
-$gray-100: #F7F7F7;
-$gray-200: #dedede;
-$gray-300: #c6c6c6;
-$gray-400: #adadad;
-$gray-500: #949494;
+// Gray shades light
+$light-100: #F5F5F5;
+$light-200: #EFF0F1;
+$light-300: #E8EAEC;
+$light-400: #E1E3E6;
+$light-500: #D9DDE2;
 
-// Overrides for sphinx-design
-// https://sphinx-design.readthedocs.io/en/alabaster-theme/css_variables.html
-
-:root {
-   --sd-color-tabs-label-active: #{$theme-red};
-   --sd-color-tabs-label-inactive: #{$theme-red-light};
-   --sd-color-tabs-overline: #{$theme-red-light};
-   --sd-color-tabs-underline: #{$theme-red-lighter};
-   --sd-color-tabs-underline-active: #{$theme-red-lighter};
-   --sd-color-tabs-underline-hover: #{$theme-red-light};
-   --sd-color-tabs-label-hover: #{$theme-red-light};
-}
+// Gray shades dark
+$dark-0: #19202A;
+$dark-100: #212936;
+$dark-200: #273140;
+$dark-300: #2E394A;
+$dark-400: #59667A;
+$dark-500: #8A93A4;
 
 // Breakpoints
 $breakpoints: (
@@ -32,110 +24,61 @@ $breakpoints: (
   sm: 576px,
   md: 768px,
   lg: 992px,
-  xl: 1200px
+  xl: 1280px
 );
 
-
 // z-index
-$z-index-header: 10;
-
+$z-index-header: 11;
 
 // Body
 $font-family-base: 'Mark', sans-serif;
 $font-family-headings: 'Mark', sans-serif;
+$font-family-mono: Courier New, Courier ,monospace;
 $root-font-size: 16px;
 $body-font-size: 1rem;
-$body-line-height: 1.5;
-$body-color: #4b4b4b;
-$body-bg: #F9F9F9;
-
+$body-line-height: 1.6;
 
 // Text
-$text-color: #4b4b4b;
-$text-hover-color: darken($text-color, 20%);
-$text-muted-color: #727272;
-
+$text-dark-color: #A2ADC0;
+$headings-dark-color: #E3EEEF;
 
 // Font size
-$font-size-xs: 0.6875rem;
 $font-size-sm: 0.8125rem;
 $font-size-md: 0.9375rem;
 
-
 // Layout
-$container-width: 95%;
-$content-bg: $white;
-$content-padding: 1.75rem; 
-$content-padding-mobile: 1.25rem; 
+$container-width: 1400px;
+
+:root {
+  --content-padding: 1.75rem;
+
+  @include breakpoint-max(breakpoints(lg)) {
+    --content-padding: 1.25rem;
+  }
+}
 
 
 // Font weight
 $font-weight-normal: 400;
 $font-weight-medium: 500;
-
-
-// Links
-$link-color: #0045ec;
-$link-hover-color: #0036b9;
-
+$font-weight-bold: 700;
 
 // Header
-$header-height: 5.65rem;
-$header-height-mobile: 4.5rem;
-$header-bg: $white;
-$logo-height: 1.05rem;
-
+$header-light-bg: #031733;
 
 // Sidebar
-$sidebar-width: 19rem;
-$sidebar-bg: #F9F9F9;
-
+$sidebar-width: 18rem;
 
 // Border Radius
 $border-radius: 0.1875rem;
+$border-radius-sm: 0.125rem;
 $border-radius-lg: 0.3125rem;
 
-
 // Search
-$search-border-color: #F0F0F0;
-$search-focus-border-color: darken($search-border-color, 15%);
 $search-height: 2.65rem;
-$search-color: #555555;
-$search-icon: url(../img/icons/search.svg);
-$search-bg: $white;
 
-
-// Docs
-$docs-item-main-color: #1C1C1C;
-$docs-item-main-hover-color: $black;
-$docs-item-main-active-color: $theme-red;
-$docs-item-sub-color: #494949;
-$docs-item-sub-hover-color: darken($docs-item-sub-color, 30%);
-$docs-item-sub-active-color: $docs-item-sub-hover-color;
-$docs-item-admonition-warning-body: #FFF2F2;
-$docs-item-admonition-important-body: #FFF9E6;
-$docs-item-admonition-note-body: #EDF9FF;
-$docs-item-admonition-warning-border: #E54253;
-$docs-item-admonition-important-border: #EDBC39;
-$docs-item-admonition-note-border: #2592EF;
-$docs-item-table-border: #e6e6e6;
-
-
-// Toggle icon
-$toggle-icon-hover-bg: rgba($theme-red, 0.075);
-
-
-// Nav
-$nav-link-color: $body-color;
-$nav-border-color: #4b4b4b;
+// Nav - FIXME
 $nav-sub-hover-bg: #f8f8f8;
 $nav-mobile-bg: $white;
 $nav-mobile-width: 300px;
-$nav-mobile-box-shadow: 0 0 10px rgba($black, 0.1);
 $nav-active-z-index: 100;
-$nav-arrow-icon: url(../img/icons/nav-arrow.svg);
-
-
-// Scrollbar
-$scrollbar-bg: #dddddd;
-$scrollbar-hover-bg: #cecece;

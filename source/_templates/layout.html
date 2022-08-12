@@ -1,7 +1,6 @@
 {# Import the theme's layout. #}
 {% extends "!layout.html" %}
 
-
 {# Custom CSS overrides #}
 
 {% block extrahead %}
@@ -60,9 +59,6 @@
             {%- endfor %}
          {%- else %}
             {#- old style sidebars: using blocks -- should be deprecated #}
-            {%- block sidebartoc %}
-               {%- include "localtoc.html" %}
-            {%- endblock %}
 
             {%- block sidebarrel %}
                {%- include "relations.html" %}
@@ -85,63 +81,40 @@
 {%- endmacro %}
 
 {%- block header %}
-   <header class="header">
-      <div class="logo">
-         <i class="toggle-icon toggle-icon--docs" data-toggle="sidebar"></i>
-         <a class="logo__link" href="https://min.io">
-            <img
-               width="85"
-               src="{{ pathto('_static/img/docs-logo.svg',1) }}"
-               alt="Logo"
-            />
-         </a>
-      </div>
-      
-
-      {%- include "top-navigation.html" %}
-   </header>
+   {%- include "header.html" %}
 {%- endblock %}
 
 {%- block content %}
-   <section class="content scrollbar">
-      <aside class="sidebar scrollbar">
-         <i class="toggle-icon toggle-icon--close" data-toggle="sidebar"></i>
+   <section class="content">
+      {%- include "content-navigation.html" %}
 
-         <h3 class="sidebar__title">
-            <a href="{{ pathto('index') }}">{{ shorttitle}} </a>
-         </h3>
-         
-         {{ miniosidebar() }}
-      </aside>
-      <div class="content__aside">
-         <div id=localtoc></div>
-      </div>
-      <div class="content__main">
-         <!--
-         {% block alertbar -%}
-            <div class="admonition important">
-               <span class="alert-message">
-                  <p>Welcome to the upcoming version of the MinIO Documentation!
-                     The content on this page is under active development and 
-                     may change at any time.
-                     If you can't find what you're looking for, check our
-                     <a href="https://docs.min.io"> legacy documentation</a>.
-                     Thank you for your patience.
-                  </p>
-               </span>
+      <div class="container">
+         <div class="content__inner">
+            <div class="sidebar scrollbar">
+               <div class="hide-aside visible-rm">
+                  <button type="button" class="icon">
+                      {%- include "icons/close.html" %}
+                      Close Doc Navigation
+                  </button>
+               </div>
+
+               <a class="sidebar__title" href="{{ pathto('index') }}">{{ shorttitle}}</a>
+               
+               {{ miniosidebar() }}
             </div>
-         {% endblock %}
-         -->
-         {% block body %} {% endblock %}
-         <div class="footer">
-            <div>
-               <p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. &copy;{{ copyright }}</p>
-               <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a></p>
+
+            {%- include "toc.html" %}
+
+            <div class="content__main">
+               {% block body %} {% endblock %}
             </div>
          </div>
       </div>
-   </div>
+
+      {%- include "footer.html" %}
+   </section>
 {%- endblock %}
 
 {%- block footer %}
+   {%- include "cookie.html" %}
 {%- endblock %}

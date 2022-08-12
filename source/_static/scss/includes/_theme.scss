@@ -1,0 +1,122 @@
+// CSS custom properties for dark/light themes.
+// Each property contains 2 values: first is for light theme, second is for dark theme.
+$theme-properties: (
+    // Body
+    --body-bg: $white $dark-0,
+
+    // Text
+    --link-color: #006DA0 #85B3EE,
+    --link-hover-color: #015378 #99c0f4,
+    --text-color: $black $text-dark-color,
+    --text-muted-color: #4B4B4B #697995,
+    --headings-color: $black #E3EEEF,
+
+    // Theme
+    --theme-light-bg: $light-300 $dark-200,
+    --theme-light-hover-bg: $light-500 $dark-300,
+
+    // Header
+    --header-bg: $header-light-bg $dark-0,
+    --logo-fill-color: $theme-red $white,
+    --header-actions-icon-bg: $white $dark-0,
+    --header-actions-icon-border-color: transparent $dark-500,
+    --header-actions-icon-stroke: $black $dark-500,
+    --header-actions-icon-stroke-width: 1.5 1.25,
+    --header-actions-icon-path-fill: $header-light-bg $dark-500,
+    --header-actions-icon-hover-bg: $light-500 $dark-200,
+    --header-actions-icon-alt-hover-bg: rgba($white, 0.1) $dark-200,
+    --header-headings-color: $white $headings-dark-color,
+    --header-link-border-color: $light-300 $dark-200,
+    --header-link-bg: $white $dark-0,
+    --header-link-icon: url("../img/icons/anchor.svg") url("../img/icons/anchor-dark.svg"),
+    --header-text-color: $white $text-dark-color,
+
+    // Content
+    --content-nav-bg: $light-100 $dark-100,
+    --content-nav-active-border-color: $black $dark-500,
+    --content-nav-sub-bg: $white $dark-500,
+    --content-nav-sub-color: $black $dark-0,
+    --content-nav-sub-active-border-color: $theme-red $dark-0,
+    --content-nav-sub-hover-color: $theme-red $dark-300,
+    --content-nav-sub-active-color: $theme-red $dark-0,
+    --content-nav-icon-filter: none (invert(100%) sepia(12%) saturate(777%) hue-rotate(181deg) brightness(100%) contrast(85%)),
+
+    // Search
+    --search-bg: $white $dark-100,
+    --search-border-color: $light-400 $dark-400,
+    --search-focus-border-color: $light-500 $dark-500,
+    --search-placeholder-color: #7e7e7e $text-dark-color,
+    --search-color: $black $text-dark-color,
+    --search-icon: url(../img/icons/search.svg) url(../img/icons/search-dark.svg),
+    --search-focus-shadow: rgba($white, 0.15) #1b232f,
+
+    // Sidebar
+    --sidebar-bg: $light-100 $dark-100,
+    --sidebar-hide-bg: $light-500 $dark-400,
+    --sidebar-hide-hover-bg: #c2c9d1 $dark-500,
+
+    // Docs nav
+    --docs-nav-active-color: $theme-red $headings-dark-color,
+    --docs-nav-group-border-color: $light-300 $dark-500,
+
+    // Scrollbar
+    --scrollbar-bg: #e5e5e5 #2e3747,
+    --scrollbar-hover-bg: #dddddd #364052,
+
+    // Table
+    --table-border-color: $light-300 $dark-200,
+
+    // Code
+    --code-bg: $light-300 $dark-500,
+    --code-hover-bg: $light-400 #9fa8b9,
+    --code-color: $black $dark-0,
+    --code-link-color: #006DA0 #12243c,
+    --code-link-bg: #cde4ff #71a7ed,
+
+    // Tab
+    --tab-active-border-color: $theme-red $dark-500,
+    --tab-border-color: $light-300 $dark-200,
+
+    // TOC
+    --toc-caret-icon: url("../img/icons/chevron-down.svg") url("../img/icons/chevron-down-dark.svg"),
+
+    // Mainmenu
+    --nav-bg: $white $dark-100,
+    --nav-text-color: $white $text-dark-color,
+    --nav-item-border-color: $white $dark-500,
+    --nav-item-arrow: url(../img/icons/nav-arrow.svg) url(../img/icons/nav-arrow-dark.svg),
+    --nav-toggle-hover-border-color: $white $dark-500,
+    --nav-top-border-color: rgba(255, 255, 255, 0.2) $dark-200,
+    --nav-dropdown-bg: $white $dark-100,
+    --nav-download-border-color: $theme-red $dark-500,
+    --nav-download-hover-bg: $theme-red $dark-200,
+
+    // Footer
+    --footer-bg: #1D1D1D #151c24,
+
+    // Icon
+    --icon-sidebar-toggle-hover-bg: rgba($white, 0.1) $dark-200,
+    --icon-search-toggle-hover-bg: darken($light-100, 5%) $dark-300,
+
+    // Alerts
+    --alert-important-bg: #fff9e6 rgba(39, 38, 21, 0.75),
+    --alert-important-border-color: #ffe79a #3e320d,
+    --alert-important-color: #9a7500 #b28e1b,
+    --alert-important-code-bg: #f2e7c4 #322d1b,
+    --alert-important-link-decoration-color: #d9cda7 #433c23,
+
+    --alert-note-bg: #eaf2fd rgba(21, 35, 55, 0.75),
+    --alert-note-border-color: #cfe3ff #172c4b,
+    --alert-note-color: #1467c2 #4291e8,
+    --alert-note-code-bg: #cedff8 #1b3150,
+    --alert-note-link-decoration-color: #99bff3 #1f3c67,
+
+    --alert-warning-bg: #fff4f5 rgba(42, 9, 12, 0.5),
+    --alert-warning-border-color: #f2d1d5 #401317,
+    --alert-warning-color: #b2404b #bb4a55,
+    --alert-warning-code-bg: #f3dfe1 #3d1014,
+    --alert-warning-link-decoration-color: #e3c3c6 #54141a,
+);
+
+// Activate dark/light themes
+@include theme-switch($theme-properties);

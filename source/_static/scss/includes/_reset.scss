@@ -1,0 +1,269 @@
+// ----------------------
+// Links
+// ----------------------
+a {
+    color: var(--link-color);
+
+    &:hover {
+        color: var(--link-hover-color);
+    }
+
+
+    &, &:hover {
+        text-decoration: none;
+    }
+
+    & > img.anchor {
+       box-shadow: none;
+       height: 1rem; 
+    }
+
+    &.reference {
+        &, &:hover {
+            border-bottom: none;
+        }
+    }
+}
+
+
+// ----------------------
+// Headings
+// ----------------------
+h1 {
+    margin-top: -0.15rem;
+    margin-bottom: 1rem;
+}
+
+h2, h3, h4, h5, h6 {
+    margin: 2rem 0 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    line-height: 1.2;
+
+    &, 
+    & > a,
+    code {
+        color: var(--headings-color);
+        font-size: inherit;
+    }
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 1rem; }
+
+.content__main {
+    // Setting extra padding and margin to make room for anchors.
+    h1, h2, h3, h4, h5 {
+        padding-left: 1.5rem;
+        margin-left: -1.5rem;
+    }
+}
+
+a.headerlink {
+    position: absolute;
+    left: -1rem;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid var(--header-link-border-color);
+    background-color: var(--header-link-bg);
+    z-index: 11;
+    border-radius: $border-radius;
+    font-size: 0;
+
+    &, &:hover {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: var(--header-link-icon);
+    }
+
+    &:hover {
+        background-color: var(--header-link-border-color);
+    }
+
+    @include breakpoint-max(breakpoints(lg)) {
+        display: none;
+    }
+}
+
+
+// ----------------------
+// Code
+// ----------------------
+tt.xref, code.xref,
+code,
+pre,
+div.highlight {
+    font-family: $font-family-mono;
+    font-weight: $font-weight-bold;
+    background-color: var(--code-bg);
+    color: var(--code-color);
+    border-radius: $border-radius;
+    font-size: $font-size-md;
+}
+
+tt.xref, code.xref,
+code {
+    padding: 0.1rem 0.35rem;
+    line-height: 100%;
+    border: 0;
+}
+
+a {
+    code.xref,
+    code {
+        color: var(--code-link-color);
+        background-color: var(--code-link-bg);
+        transition: opacity 300ms;
+    }
+
+    &:hover {
+        code {
+            background-color: var(--code-link-bg);
+            opacity: 0.8;
+        }
+    }
+}
+
+.highlight {
+    pre {
+        background-color: transparent;
+    }
+
+    .w {
+        text-decoration: none;
+    }
+}
+
+pre {
+    border-radius: $border-radius;
+    padding: 1.25rem 1.5rem;
+}
+
+dl pre, 
+blockquote pre, 
+li pre {
+    padding-left: 1.5rem;
+}
+
+
+// ----------------------
+// Image
+// ----------------------
+[data-lightbox] {
+    img {
+        padding: 0.25rem;
+        border: 1px solid var(--theme-light-bg);
+        border-radius: $border-radius;
+    }
+
+    &:hover {
+        img {
+            border-color: var(--theme-light-hover-bg);
+        }
+    }
+}
+
+// ----------------------
+// Table
+// ----------------------
+table.docutils {
+    box-shadow: none;
+    margin: 1rem 0 2rem;
+
+    td,
+    th {
+        border-color: var(--table-border-color);
+        padding: 0.75rem 1rem;
+        line-height: 1.5;
+        vertical-align: top;
+        text-align: left;
+    }
+
+    th {
+        font-weight: $font-weight-medium;
+        color: var(--headings-color);
+        font-size: $font-size-sm;
+    }
+
+    caption {
+        font-size: $font-size-sm;
+        font-style: italic;
+        margin-bottom: 0.5rem;
+        opacity: 0.5;
+    }
+}
+
+
+// ----------------------
+// Form
+// ----------------------
+form {
+    margin: 0;
+}
+
+input,
+textarea {
+    font-family: $font-family-base;
+}
+
+
+// ----------------------
+// Media
+// ----------------------
+video {
+    display: block;
+}
+
+
+// ----------------------
+// List
+// ----------------------
+dl {
+    margin-bottom: 1rem;
+
+    dt {
+        margin: 1.5rem 0 0.5rem;
+        font-weight: $font-weight-medium;
+        color: var(--headings-color);
+    }
+
+    dd {
+        margin: 0;
+    }
+}
+
+ul, ol {
+    margin-left: 1rem;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+
+// ----------------------
+// Misc
+// ----------------------
+abbr, acronym {
+    border-bottom: none;
+    text-underline-offset: 0.15rem;
+}
+
+.guilabel,
+.menuselection {
+    font-family: inherit;
+}
+
+dt:target,
+span.highlighted {
+    background-color: transparent;
+}
