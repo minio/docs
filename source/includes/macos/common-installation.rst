@@ -29,7 +29,7 @@
                :class: copyable
 
                curl -O https://dl.min.io/server/minio/release/darwin-arm64/minio
-               chmod +x minio
+               chmod +x ./minio
                sudo mv ./minio /usr/local/bin/
 
       .. tab-item:: Binary - amd64
@@ -40,7 +40,7 @@
                :class: copyable
 
                curl -O https://dl.min.io/server/minio/release/darwin-amd64/minio
-               chmod +x minio
+               chmod +x ./minio
                sudo mv ./minio /usr/local/bin/
 
 .. end-install-minio-binary-desc

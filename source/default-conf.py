@@ -78,6 +78,7 @@ extlinks = {
     'prometheus-docs' : ('https://prometheus.io/docs/%s',''),
     'podman-docs'     : ('https://docs.podman.io/en/latest/%s',''),
     'podman-git'      : ('https://github.com/containers/podman/%s',''),
+    'docker-docs'     : ('https://docs.docker.com/%s', ''),
 
 }
 

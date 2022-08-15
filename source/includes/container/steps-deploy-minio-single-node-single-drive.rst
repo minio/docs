@@ -28,7 +28,7 @@ Select the container management interface of your choice for the relevant comman
 
          podman run -dt                                  \
            -p 9000:9000 -p 9090:9090                     \
-           -v PATH:/data/minio                           \
+           -v PATH:/mnt/data                             \
            -v /etc/default/minio:/etc/config.env         \
            -e "MINIO_CONFIG_ENV_FILE=/etc/config.env"    \
            --name "minio_local"                          \
@@ -45,7 +45,7 @@ Select the container management interface of your choice for the relevant comman
 
          docker run -dt                                  \
            -p 9000:9000 -p 9090:9090                     \
-           -v PATH:/data/minio                           \
+           -v PATH:/mnt/data                             \
            -v /etc/default/minio:/etc/config.env         \
            -e "MINIO_CONFIG_ENV_FILE=/etc/config.env"    \
            --name "minio_local"                          \

@@ -107,3 +107,12 @@ The instructions include examples for both quay.io and DockerHub:
       If your local host firewall permits external access to the MinIO S3 API port, other hosts on the same network can access the MinIO deployment using the IP or hostname for your local host.
 
 .. end-common-deploy-connect-to-minio-service
+
+.. start-common-prereq-container-management-interface
+
+This procedure assumes you have a working `Podman <https://podman.io/getting-started/installation.html>`_ installation configured to run in "Rootfull" mode.
+
+"Rootless" modes may not provide sufficient permissions to run KES with the necessary security settings.
+See the relevant :podman-git:`"rootless" documentation <blob/main/docs/tutorials/rootless_tutorial.md>` for more information.
+
+.. end-common-prereq-container-management-interface

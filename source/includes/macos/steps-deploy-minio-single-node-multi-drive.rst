@@ -20,7 +20,7 @@ You must keep the shell or terminal session open to keep the process running.
 
 .. include:: /includes/macos/common-installation.rst
    :start-after: start-run-minio-binary-desc
-   :end-before: start-run-minio-binary-desc
+   :end-before: end-run-minio-binary-desc
 
 4) Connect to the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

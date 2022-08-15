@@ -23,16 +23,16 @@ Procedure
 
 #. **Install the MinIO Server**
 
-.. include:: /includes/macos/common-installation.rst
-   :start-after: start-install-minio-binary-desc
-   :end-before: end-install-minio-binary-desc
+   .. include:: /includes/macos/common-installation.rst
+      :start-after: start-install-minio-binary-desc
+      :end-before: end-install-minio-binary-desc
 
  
 #. **Launch the MinIO Server**
 
-.. include:: /includes/macos/common-installation.rst
-   :start-after: start-run-minio-binary-desc
-   :end-before: end-run-minio-binary-desc
+   .. include:: /includes/macos/common-installation.rst
+      :start-after: start-run-minio-binary-desc
+      :end-before: end-run-minio-binary-desc
 
 #. **Connect your Browser to the MinIO Server**
 

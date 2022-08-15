@@ -32,19 +32,6 @@ For instructions on enabling TLS on the MinIO server, see :ref:`minio-tls`.
 
 .. end-kes-network-encryption-desc
 
-.. start-kes-podman-desc
-
-The procedures on this page use the |podman| daemonless container engine for
-running OCI containers. Podman is a drop-in replacement for Docker.
-
-This procedure assues running Podman in
-:podman-git:`"rootless" <blob/main/docs/tutorials/rootless_tutorial.md>`. 
-Defer to the Podman documentation for installing and configuring Podman to 
-run in rootless mode.
-
-
-.. end-kes-podman-desc
-
 .. start-kes-download-desc
 
 You can download the KES binary for running in baremetal environments,
