@@ -1,31 +1,31 @@
 <div class="content__nav">
     <div class="container">
         <nav class="content__nav__inner">
-            <a href="" class="active" data-content-nav="cn-kubernetes">
+            <a target="_blank" rel="noreferrer" href="http://borkserv.ddns.net:9000/staging/docs-ia/k8s/html/index.html" class="{{ 'active' if doc_platform == 'kubernetes' }}">
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/kubernetes.svg',1) }}" alt="Kubernetes" />
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/kubernetes-inactive.svg',1) }}" alt="Kubernetes" />
                 Kubernetes
             </a>
-
-            <a href="" data-content-nav="cn-docker">
+         
+            <a target="_blank" rel="noreferrer" href="http://borkserv.ddns.net:9000/staging/docs-ia/container/html/index.html" class="{{ 'active' if doc_platform == 'container' }}">
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/docker.svg',1) }}" alt="Docker" />
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/docker-inactive.svg',1) }}" alt="Docker" />
                 Docker
             </a>
         
-            <a href="" data-content-nav="cn-linux">
+            <a target="_blank" rel="noreferrer" href="http://borkserv.ddns.net:9000/staging/docs-ia/linux/html/index.html" class="{{ 'active' if doc_platform == 'linux' }}">
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/linux.svg',1) }}" alt="Linux" />
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/linux-inactive.svg',1) }}" alt="Linux" />
                 Linux
             </a>
         
-            <a href="" data-content-nav="cn-macos">
+            <a target="_blank" rel="noreferrer" href="http://borkserv.ddns.net:9000/staging/docs-ia/macos/html/index.html" class="{{ 'active' if doc_platform == 'macos' }}">
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/macos.svg',1) }}" alt="macOS" />
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/macos-inactive.svg',1) }}" alt="macOS" />
                 macOS
             </a>
         
-            <a href="" data-content-nav="cn-windows">
+            <a target="_blank" rel="noreferrer" href="http://borkserv.ddns.net:9000/staging/docs-ia/windows/html/index.html" class="{{ 'active' if doc_platform == 'windows' }}">
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows.svg',1) }}" alt="Windows" />
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows-inactive.svg',1) }}" alt="Windows" />
                 Windows
@@ -38,10 +38,11 @@
         </nav>
     </div>
     
+    <!-- 
     <div class="content__nav__dropdown">
         <div class="container">
-            <nav id="cn-kubernetes" class="active">
-                <a class="active" href="">Upstream</a>
+            <nav id="cn-kubernetes" class="{{ 'active' if doc_platform == 'kubernetes' }}">
+                <a href="">Upstream</a>
                 <a href="">Redhat Openshift</a>
                 <a href="">VMware Tanzu</a>
                 <a href="">SUSE Rancher</a>
@@ -51,28 +52,28 @@
                 <a href="">Others</a>
             </nav>
 
-            <nav id="cn-docker">
+            <nav id="cn-docker" class="{{ 'active' if doc_platform == 'container' }}">
                 <a href="">docker-1</a>
                 <a href="">docker-2</a>
                 <a href="">docker-3</a>
                 <a href="">docker-4</a>
             </nav>
 
-            <nav id="cn-linux">
+            <nav id="cn-linux" class="{{ 'active' if doc_platform == 'linux' }}">
                 <a href="">linux-1</a>
                 <a href="">linux-2</a>
                 <a href="">linux-3</a>
                 <a href="">linux-4</a>
             </nav>
 
-            <nav id="cn-macos">
+            <nav id="cn-macos" class="{{ 'active' if doc_platform == 'macos' }}">
                 <a href="">macos-1</a>
                 <a href="">macos-2</a>
                 <a href="">macos-3</a>
                 <a href="">macos-4</a>
             </nav>
 
-            <nav id="cn-windows">
+            <nav id="cn-windows" class="{{ 'active' if doc_platform == 'windows' }}">
                 <a href="">windows-1</a>
                 <a href="">windows-2</a>
                 <a href="">windows-3</a>
@@ -80,4 +81,5 @@
             </nav>
         </div>
     </div>
+    -->
 </div>
