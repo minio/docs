@@ -3,10 +3,9 @@ div.footer {
     background-color: var(--footer-bg);
     width: 100%;
     margin: 0;
-    
 
     &, a {
-        color: $white;
+        color: var(--footer-color);
     }
 
     a {
