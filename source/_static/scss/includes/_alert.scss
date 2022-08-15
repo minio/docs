@@ -42,7 +42,8 @@ div.admonition {
             background-color: var(--alert-#{$variant}-bg);
 
             code,
-            div.highlight pre {
+            .copybtn,
+            .highlight pre {
                 background-color: var(--alert-#{$variant}-code-bg);
                 color: var(--alert-#{$variant}-color);
             }

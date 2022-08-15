@@ -262,6 +262,10 @@ html_extra_path = [ 'extra']
 
 html_title = 'MinIO Object Storage for ' + platform.capitalize()
 
+html_context = {
+    'doc_platform': platform.lower()
+}
+
 # -- Options for Sphinx Tabs -------------------------------------------------
 
 sphinx_tabs_disable_css_loading = True

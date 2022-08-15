@@ -157,10 +157,11 @@
 		.nav__link {
 			padding: 0.5rem 0 0.6rem;
 			cursor: pointer;
-
-			&,
+			color: var(--nav-text-color);
+			transition: color 300ms;
+			
 			&:hover {
-				color: var(--nav-text-color);
+				color: $white;
 			}
 	
 			& > span {

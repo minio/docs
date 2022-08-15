@@ -215,3 +215,50 @@
   line-height: 100%;
   margin: -0.2rem 0 1rem;
 }
+
+
+// -----------------------------
+// Copy button
+// -----------------------------
+button.copybtn {
+  border-radius: $border-radius-sm;
+  top: 0.1;
+  right: 0rem;
+  border: 0;
+  background-color: transparent;
+  width: auto;
+  font-family: $font-family-base;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent !important;
+
+    &:after {
+      opacity: 1;
+    }
+  }
+
+  & > img {
+    display: none;
+  }
+
+  &:after {
+    all: revert;
+    transform: none !important;
+    transition-delay: 0ms !important;
+    transition: opacity 300ms;
+    opacity: 0.75;
+    content: "Copy";
+  }
+
+  &.success {
+    &:after {
+      content: "Copied";
+    }
+  }
+}
