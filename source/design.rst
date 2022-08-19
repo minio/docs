@@ -198,6 +198,10 @@ Grids
 Header 1
 --------
 
+.. cond:: linux
+
+   .. include:: /includes/common/common-design.rst
+
 This is content under a level 1 header. The header includes an 
 anchor tag for linking. The table of contents for this page is 
 configured to display up to 2 header levels. The header title should
