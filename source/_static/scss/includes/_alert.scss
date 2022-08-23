@@ -29,6 +29,10 @@ div.admonition {
 
     code {
         color: currentColor;
+
+        &.xref {
+            border: 0;
+        }
     }
 
     .highlight {
