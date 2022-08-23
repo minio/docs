@@ -208,6 +208,31 @@ table.docutils {
 }
 
 
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1rem 0 2rem;
+    border-left: 1px solid var(--table-border-color);
+    border-right: 1px solid var(--table-border-color);
+
+    table {
+        margin: 0;
+
+        tr {
+            td, th {
+                &:first-child {
+                    border-left-color: transparent;
+                }
+
+                &:last-child {
+                    border-right-color: transparent;
+                }
+            }
+        }
+    }
+}
+
+
 // ----------------------
 // Form
 // ----------------------
