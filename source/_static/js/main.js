@@ -334,4 +334,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
       }
     }
   })();
+
+
+  // --------------------------------------------------
+  // Responsive tables
+  // --------------------------------------------------
+  (function () {
+    const tableEls = document.querySelectorAll("table");
+    if(tableEls.length > 0) {
+      tableEls.forEach((item) => {
+        var tableWrapper = document.createElement("div");
+        tableWrapper.classList.add("table-responsive");
+        item.insertAdjacentElement("beforebegin", tableWrapper);
+        tableWrapper.appendChild(item);
+      });
+    }
+  })();
 });
