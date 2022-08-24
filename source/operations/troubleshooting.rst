@@ -13,7 +13,7 @@ Overview
 
 MinIO users have two options for support.
 
-#. Community support from the `public Slack channel <https://minio.slack.com>`_.
+#. Community support from the `public Slack channel <https://slack.min.io>`_.
    
    Community support is best-effort only and has no :abbr:`SLA (Service Level Agreement)` or :abbr:`SLO (Service Level Objective)`.
 #. The MinIO Subscription Network, |subnet-short|, provides either 24 hour or 1 hour :abbr:`SLA (Service Level Agreement)` depending on subscription level.

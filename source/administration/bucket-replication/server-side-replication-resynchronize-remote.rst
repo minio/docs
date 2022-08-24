@@ -29,7 +29,7 @@ Resynchronization is a per-bucket process. You must repeat resynchronization for
 
    `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__ users can `log in <https://subnet.min.io/>`__ and create a new issue related to resynchronization. Coordination with MinIO Engineering via SUBNET can ensure successful resynchronization and restoration of normal operations, including performance testing and health diagnostics.
 
-   Community users can seek support on the `MinIO Community Slack <https://minio.slack.com>`__. Community Support is best-effort only and has no SLAs around responsiveness.
+   Community users can seek support on the `MinIO Community Slack <https://slack.min.io>`__. Community Support is best-effort only and has no SLAs around responsiveness.
 
 .. _minio-bucket-replication-serverside-resynchronize-requirements:
 

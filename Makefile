@@ -43,8 +43,8 @@ else
 	@make sync-kes-version
 	@make sync-sdks
 endif
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 windows:
 ifeq ($(BUILD_DEPENDENCIES),FALSE)
@@ -55,8 +55,8 @@ else
 	@make sync-kes-version
 	@make sync-sdks
 endif
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 macos:
 ifeq ($(BUILD_DEPENDENCIES),FALSE)
@@ -67,8 +67,8 @@ else
 	@make sync-kes-version
 	@make sync-sdks
 endif
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 k8s:
 ifeq ($(BUILD_DEPENDENCIES),FALSE)
@@ -80,8 +80,8 @@ else
 	@make sync-kes-version
 	@make sync-sdks
 endif
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 container:
 ifeq ($(BUILD_DEPENDENCIES),FALSE)
@@ -92,8 +92,8 @@ else
 	@make sync-kes-version
 	@make sync-sdks
 endif
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 sync-operator-version:
 	@echo "Retrieving latest Operator version"
@@ -250,8 +250,8 @@ sync-javascript-docs:
 	@echo "Retrieving JavaScript docs from github.com/minio/minio-js"
 	@$(eval JAVASCRIPTLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-js/releases/latest -O - | jq -r '.tag_name'))
 	@echo "Latest stable is ${JAVASCRIPTLATEST}"
-	$(shell wget -q -O source/developers/haskell/API.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/haskell/quickstart.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/README.md)
+	$(shell wget -q -O source/developers/javascript/API.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/docs/API.md)
+	$(shell wget -q -O source/developers/javascript/quickstart.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/README.md)
 
 	@$(eval kname = $(shell uname -s))
 
