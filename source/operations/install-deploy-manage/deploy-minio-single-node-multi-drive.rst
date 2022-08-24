@@ -15,7 +15,7 @@ This topology provides increased drive-level reliability and failover protection
 
 .. cond:: linux or macos or windows
 
-   For production environments, MinIO strongly recommends deploying  with the :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` topology.
+   For production environments, MinIO strongly recommends deploying with the :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` topology.
 
 .. cond:: container
 

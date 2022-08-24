@@ -8,126 +8,178 @@ Core Operational Concepts
    :local:
    :depth: 2
 
-The following core concepts are fundamental to operation of MinIO deployments, including but not limited to installation and management of MinIO.
+What are the components of a MinIO Deployment?
+----------------------------------------------
 
-What Is Object Storage?
------------------------
+A MinIO deployment consists of a set of storage and compute resources running one or more :mc:`minio server` nodes that together act as a single object storage repository. 
 
-.. _objects:
+A standalone instance of MinIO consists of a single Server Pool with a single :mc:`minio server` node. 
+Standalone instances are best suited for initial development and evaluation. 
 
-An :ref:`object <objects>` is binary data, sometimes referred to as a Binary
-Large OBject (BLOB). Blobs can be images, audio files, spreadsheets, or even
-binary executable code. Object Storage platforms like MinIO provide dedicated
-tools and capabilities for storing, retrieving, and searching for blobs. 
+A MinIO deployment can run directly on a physical device in a ``bare metal`` or non-virtualized infrastructure.
+Or, MinIO might run within a virtual machine on a cloud service, such as using Docker, Podman, or Kubernetes.
+MinIO can run locally, on a private cloud, or in any of the many public clouds available on the market.
 
-.. _buckets:
+The specific way you design, architect, and build your system is called the system's ``topology``.
 
-MinIO Object Storage uses :ref:`buckets <buckets>` to organize objects. 
-A bucket is similar to a folder or directory in a filesystem, where each
-bucket can hold an arbitrary number of objects. MinIO buckets provide the 
-same functionality as AWS S3 buckets. 
+What system topologies does MinIO support?
+------------------------------------------
 
-For example, consider an application that hosts a web blog. The application
-needs to store a variety of blobs, including rich multimedia like videos and
-images. The structure of objects on the MinIO server might look similar to the
-following:
+MinIO can deploy to three types of topologies:
 
-.. code-block:: text
+#. :ref:`Single Node Single Drive <minio-snsd>`, one MinIO server with a single drive or folder for data
 
-   / #root
-   /images/
-      2020-01-02-MinIO-Diagram.png
-      2020-01-03-MinIO-Advanced-Deployment.png
-      MinIO-Logo.png
-   /videos/
-      2020-01-04-MinIO-Interview.mp4
-   /articles/
-      /john.doe/
-         2020-01-02-MinIO-Object-Storage.md
-         2020-01-02-MinIO-Object-Storage-comments.json
-      /jane.doe/
-         2020-01-03-MinIO-Advanced-Deployment.png
-         2020-01-02-MinIO-Advanced-Deployment-comments.json
-         2020-01-04-MinIO-Interview.md
+   For example, testing on a local PC using a folder on the computer's hard drive. 
+#. :ref:`Single Node Multi Drive <minio-snmd>`, one MinIO server with multiple mounted drives or folders for data
 
-MinIO supports multiple levels of nested directories and objects to support 
-even the most dynamic object storage workloads.
+   For example, a single container with two or more mounted volumes.
+#. :ref:`Multi Node Multi Drive <minio-mnmd>`, multiple MinIO servers with multiple mounted drives or volumes for data
 
-Deployment Architecture
------------------------
+   For example, a production deployment using Kubernetes to manage and deploy pods with multiple persistent volume claims. 
 
-:ref:`Erasure Set <minio-ec-erasure-set>`
-   A set of disks that supports MinIO :ref:`Erasure Coding
-   <minio-erasure-coding>`. Erasure Coding provides high availability,
-   reliability, and redundancy of data stored on a MinIO deployment.
 
-   MinIO divides objects into chunks and evenly distributes them among each
-   drive in the Erasure Set. MinIO can continue seamlessly serving read and
-   write requests despite the loss of any single drive. At the highest
-   redundancy levels, MinIO can serve read requests with minimal performance
-   impact despite the loss of up to half (``N/2``) of the total drives in the
-   deployment.
+How does a distributed MinIO deployment work?
+---------------------------------------------
+
+A distributed deployment makes use of the resources of more than one physical or virtual machine's compute and storage resources.
+In modern situations, this often means running MinIO in a private or public cloud environment, such as with Amazon Web Services, the Google Cloud Platform, Microsoft's Azure platform, or many others.
 
 .. _minio-intro-server-pool:
 
-:ref:`Server Pool <minio-intro-server-pool>`
-   A set of MinIO :mc:`minio server` nodes which pool their drives and
-   resources for supporting object storage/retrieval requests. Server pools
-   support horizontal expansion for MinIO deployments.
+How does MinIO manage multiple virtual or physical servers?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While testing MinIO may only involve a single drive on a single computer, most production MinIO deployments use multiple compute and storage devices to create a high availability environment.
+A server pool a set of :mc:`minio server` nodes that pool their drives and resources to support object storage write and retrieval requests.
+
+MinIO supports adding one or more server pools to existing MinIO deployments for horizontal expansion.
+When MinIO has multiple server pools available, an individual object always writes to the same server pool.
+If one server pool goes down, objects on other pools remain accessible.
    
-   The :mc-cmd:`~minio server HOSTNAME` argument passed to the
-   :mc:`minio server` command represents a Server Pool:
+The :mc-cmd:`~minio server HOSTNAME` argument passed to the :mc:`minio server` command represents a Server Pool:
 
-   .. code-block:: shell
+Consider the following example startup command, which creates a single Server Pool with 4 :mc:`minio server` nodes of 4 drives each for a total of 16 drives. 
 
-      minio server https://minio{1...4}.example.net/mnt/disk{1...4}
+.. code-block:: shell
+
+   minio server https://minio{1...4}.example.net/mnt/disk{1...4}
                    
-                   |                    Server Pool                |
+                |                    Server Pool                |
 
-   The above example describes a single Server Pool with
-   4 :mc:`minio server` nodes and 4 drives each for a total of 16 drives. 
-   MinIO requires starting each :mc:`minio server` in the set with the same
-   startup command to enable awareness of all set peers.
+Starting server pools in the same :mc:`minio server` startup command enables awareness of all server pool peers.
 
-   See :mc:`minio server` for complete syntax and usage.
-
-   MinIO calculates the size and number of Erasure Sets in the Server Pool based
-   on the total number of drives in the set *and* the number of :mc:`minio`
-   servers in the set. See :ref:`minio-ec-erasure-set` for more information.
+See :mc:`minio server` for complete syntax and usage.
 
 .. _minio-intro-cluster:
 
-:ref:`Cluster <minio-intro-cluster>`
-   The whole MinIO deployment consisting of one or more Server Pools. Each
-   :mc-cmd:`~minio server HOSTNAME` argument passed to the 
-   :mc:`minio server` command represents one Server Pool:
+How does MinIO link multiple server pools into a single MinIO cluster?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   .. code-block:: shell
+A cluster refers to an entire MinIO deployment consisting of one or more Server Pools. 
 
-      minio server https://minio{1...4}.example.net/mnt/disk{1...4} \
-                   https://minio{5...8}.example.net/mnt/disk{1...4}
+Consider the command below that creates a cluster consisting of two Server Pools, each with 4 :mc:`minio server` nodes and 4 drives per node for a total of 32 drives. 
+
+.. code-block:: shell
+
+   minio server https://minio{1...4}.example.net/mnt/disk{1...4} \
+                https://minio{5...8}.example.net/mnt/disk{1...4}
                    
-                   |                    Server Pool                |
+                |                    Server Pool                |
    
-   The above example describes two Server Pools, each consisting of 4
-   :mc:`minio server` nodes with 4 drives each for a total of 32 drives. MinIO 
-   always stores each unique object and all versions of that object on the 
-   same Server Pool.
+Within a cluster, MinIO always stores each unique object and all versions of that object on the same Server Pool.
 
-   Server Pool expansion is a function of Horizontal Scaling, where each new set
-   expands the cluster storage and compute resources. Server Pool expansion
-   is not intended to support migrating existing sets to newer hardware. 
+MinIO strongly recommends production clusters consist of a *minimum* of 4 :mc:`minio server` nodes in a Server Pool for proper high availability and durability guarantees.
 
-   MinIO Standalone clusters consist of a single Server Pool with a single
-   :mc:`minio server` node. Standalone clusters are best suited for initial
-   development and evaluation. MinIO strongly recommends production
-   clusters consist of a *minimum* of 4 :mc:`minio server` nodes in a 
-   Server Pool.
+Can I change the size of an existing MinIO deployment?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Erasure Coding
---------------
+You can move objects from an existing server pool on to other server pools on the deployment to reduce the size of a deployment by decommissioning a server pool.
+Likewise, you can add on a new server pool to an existing deployment to expand the total size of a deployment with a horizontal expansion.
 
-High-level blurb on Erasure Coding
+When the time comes to retire or replace a server pool, :ref:`decommissioning <minio-decommissioning>` is the process of draining the objects of a pool to other active pools on the deployment.
+MinIO rewrites objects from the decommissioned pool and does not allow additional writes to the pool while it is in decommissioning.
+   
+Once started, decommissioning cannot be stopped.
+
+In a distributed MinIO deployment, you can upgrade the total available size of a :ref:`deployment <expand-minio-distributed>` or :ref:`cluster <minio-k8s-expand-minio-tenant>` by adding one or more additional server pools.
+The addition of a server pool is an expansion.
+
+How do I manage one or more MinIO instances or clusters?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are several options to manage your MinIO deployments and clusters:
+
+- Use the command line with :mc-cmd:`mc` and :mc-cmd:`mc admin`
+- The :ref:`MinIO Console <minio-console>` graphical user interface for individual instances
+- In Kubernetes, with the :ref:`MinIO Operator Console <minio-operator-console>`
+
+
+How does MinIO provide availability, redundancy, and reliability?
+-----------------------------------------------------------------
+
+MinIO Uses :ref:`Erasure Coding <minio-erasure-coding>` for Data Redundancy and Reliability
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO Erasure Coding is a data redundancy and availability feature that allows MinIO deployments with multiple drives to automatically reconstruct objects on-the-fly despite the loss of multiple drives or nodes in the cluster. 
+Erasure Coding provides object-level healing with significantly less overhead than adjacent technologies such as RAID or replication.
+
+
+MinIO Implements Bit Rot Healing to Protect Data At Rest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Bit rot is the random, silent corruption to data that can happen on any storage device.
+Bit rot corruption is not prompted by any activity from a user, nor does the system's operating system alone have awareness of the corruption to notify a user or administrator about a change to the data.
+
+Some common reasons for bit rot include:
+     
+- ageing drives
+- current spikes
+- bugs in disk firmware
+- phantom writes
+- misdirected reads/writes
+- driver errors
+- accidental overwrites
+
+MinIO uses a hashing algorithm to confirm the integrity of an object.
+If an object becomes corrupted by bit rot, MinIO can automatically heals the object depending on the system topology and availability.
+
+MinIO Distributes Data Across :ref:`Erasure Sets <minio-ec-erasure-set>` for High Availability and Resiliency
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+An erasure set is a group of multiple drives that supports MinIO :ref:`Erasure Coding <minio-erasure-coding>`. 
+Erasure Coding provides high availability, reliability, and redundancy of data stored on a MinIO deployment.
+
+MinIO divides objects into chunks — called `shards` — and evenly distributes them among each drive in the Erasure Set. 
+MinIO can continue seamlessly serving read and write requests despite the loss of any single drive. 
+At the highest redundancy levels, MinIO can serve read requests with minimal performance impact despite the loss of up to half (:math:`N / 2`) of the total drives in the deployment.
+
+MinIO calculates the size and number of Erasure Sets in a Server Pool based on the total number of drives in the set *and* the number of :mc:`minio` servers in the set. See :ref:`minio-ec-erasure-set` for more information.
+
+MinIO Automatically Heals Corrupt or Missing Data On-the-fly
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Healing is MinIO's ability to restore data after some event causes data loss.
+Data loss can come from bit rot, drive loss, or node loss.
+
+:ref:`Erasure coding <minio-erasure-coding>` provides continued read and write access if an object has been partially lost.
+
+MinIO Writes Data Protection at the Object Level with Parity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A MinIO deployment with multiple drives divides the available drives into data drives and parity drives.
+MinIO Erasure Coding adds additional hashing information about the contents of an object to the parity drives when writing an object.
+MinIO uses the parity information to confirm the integrity of an object and, if necessary, to restore a lost, missing, or corrupted object shard on a given disk or set of disks.
+
+MinIO can tolerate losing up to the total number of drives equal to the number of parity devices available in the erasure set while still providing full access to an object.
+
+Deliver Read and Write Functions with Quorum 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A minimum number of drives that must be available to perform a task.
+MinIO has one quorum for reading data and a separate quorum for writing data.
+
+Typically, MinIO requires a higher number of available drives to maintain the ability to write objects than what is required to read objects.
+
 
 .. toctree::
    :titlesonly:

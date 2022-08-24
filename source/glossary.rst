@@ -24,22 +24,13 @@ Glossary
      
      See also: :term:`server logs`.
 
-   bitrot 
+   bit rot 
      Data corruption that occurrs without the user’s knowledge. 
-     Some common reasons for bitrot include:
      
-     - ageing drives
-     - current spikes
-     - bugs in disk firmware
-     - phantom writes
-     - misdirected reads/writes
-     - driver errors
-     - accidental overwrites
-     
-     MinIO combats bitrot with :term:`hashing` and :term:`erasure coding`.
+     MinIO combats bit rot with :term:`hashing` and :term:`erasure coding`.
 
-   bitrot healing
-     Objects corrupted due to bitrot automatically restore to a healed state at time of read.
+   bit rot healing
+     Objects corrupted due to bit rot automatically restore to a healed state at time of read.
      MinIO captures and heals corrupted objects on the fly with its :term:`hashing` implementation.
 
    bucket
@@ -103,7 +94,7 @@ Glossary
      The use of an algorithm to create a unique, fixed-length string (a `value`) to identify a piece of data.
    
    healing
-     Restoration of data from partial loss due to bitrot, drive failure, or site failure.
+     Restoration of data from partial loss due to bit rot, drive failure, or site failure.
 
    health diagnostics
      A suite of MinIO :ref:`API endpoints <minio-healthcheck-api>` available to check whether a server is
@@ -192,7 +183,7 @@ Glossary
      
      - lifecycle management rules requiring object transition
      - bucket or site replication status
-     - object :term:`bitrot` and healing
+     - object :term:`bit rot` and healing
 
    self signed certificates
      A self-signed certificate is one created by, issued by, and signed by the company or developer responsible for the content the certificate secures.
@@ -263,3 +254,7 @@ Glossary
    webhook
      A :ref:`webhook <minio-bucket-notifications-publish-webhook>` is a method for altering the behavior of a web page or web application with a custom callback.
      The format is typically :abbr:`JSON (JavaScript Object Notation)` sent as an HTTP POST request.
+
+   WORM
+     Write Once Read Many (WORM) is a data retention methodology that functions as part of object locking.
+     Many requests can retrieve can view a WORM-locked object (``read many``), but no write requests can change the object (``write once``).

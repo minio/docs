@@ -22,7 +22,7 @@ corrupted and heals those objects.
 
 :mc:`mc admin heal` is resource intensive and typically not required even
 after disk failures or corruption events. Instead, MinIO automatically heals
-objects damaged by silent bitrot corruption, disk failure, or other issues on
+objects damaged by silent bit rot corruption, disk failure, or other issues on
 POST/GET. MinIO also performs periodic background object healing.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only

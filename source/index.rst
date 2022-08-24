@@ -107,6 +107,7 @@ without validating their usage do so at their own risk.
       /administration/identity-access-management
       /administration/server-side-encryption
       /administration/bucket-replication
+      /administration/concepts
       /developers/minio-drivers
       /developers/security-token-service
       /reference/minio-mc
@@ -136,6 +137,7 @@ without validating their usage do so at their own risk.
       /administration/identity-access-management
       /administration/server-side-encryption
       /administration/bucket-replication
+      /administration/concepts
       /developers/minio-drivers
       /developers/security-token-service
       /reference/minio-mc
