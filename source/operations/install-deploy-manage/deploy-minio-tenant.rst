@@ -416,9 +416,9 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
 8) The :guilabel:`Encryption` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption <minio-sse>` settings for the MinIO Tenant. 
+The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption (SSE) <minio-sse>` settings for the MinIO Tenant. 
 
-Enabling SSE also deploys a MinIO :minio-git:`KES <kes>` service in the Tenant to faciliate SSE operations.
+Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods in the Tenant to facilitate SSE operations.
 
 .. list-table::
    :header-rows: 1

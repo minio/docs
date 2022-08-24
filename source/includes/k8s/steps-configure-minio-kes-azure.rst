@@ -1,4 +1,4 @@
-Deploy MinIO Tenant with Server-Side Encryption using Hashicorp Vault
+Deploy MinIO Tenant with Server-Side Encryption using Azure Key Vault
 ---------------------------------------------------------------------
 
 1) Access the Operator Console
@@ -37,10 +37,10 @@ Click the :guilabel:`+ Create Tenant` to start creating a MinIO Tenant.
 
 Reference the :ref:`Deploy a MinIO Tenant <minio-k8s-deploy-minio-tenant>` procedure for complete documentation of other Tenant settings.
 
-To enable |SSE| with Hashicorp Vault during Tenant deployment, select the :guilabel:`Encryption` section and toggle the switch to :guilabel:`Enabled`. 
-You can then select the :guilabel:`Vault` Radio button to :guilabel:`Vault` to display the Vault configuration settings.
+To enable |SSE| with |rootkms-short| during Tenant deployment, select the :guilabel:`Encryption` section and toggle the switch to :guilabel:`Enabled`. 
+You can then select the :guilabel:`Azure` Radio button to display the |rootkms-short| configuration settings.
 
-.. image:: /images/k8s/operator-create-tenant-encryption.png
+.. image:: /images/k8s/operator-create-tenant-encryption-azure.png
    :align: center
    :width: 70%
    :class: no-scaled-link
@@ -59,25 +59,18 @@ The following table provides general guidance for those fields:
 
    * - Endpoint
 
-     - The hostname or IP address for the Vault service (``https://vault.example.net:8200``) to use for |SSE|.
+     - The hostname or IP address for the |rootkms-short| service to use for |SSE|.
        
        The MinIO Tenant |KES| pods *must* have network access to the specified endpoint. 
-       
-       For Vault services deployed in the *same* Kubernetes cluster as the MinIO Tenant, you can specify either the service's cluster IP *or* its :kube-docs:`DNS hostname <concepts/services-networking/dns-pod-service/>`.
 
-       For Vault services external to the Kubernetes cluster, you can specify that external hostname to the MinIO Tenant.
-       This assumes that your Kubernetes network configuration supports routing internal traffic to external networks like the public internet.
+   * - | Tenant ID
+       | Client ID
+       | Client Secret
 
-   * - | AppRole ID
-       | AppRole Secret
+     - Specify the |rootkms-short| credentials the MinIO Tenant should use when authenticating to the service.
+       Review the :ref:`Azure Prerequisites <minio-sse-azure-prereq-azure>` for instructions on generating these values.
 
-     - Specify the Vault AppRole ID and AppRole Secret MinIO should use when authenticating to the Vault service.
-       Review the :ref:`Vault Prerequisites <minio-sse-vault-prereq-vault>` for instructions on generating these values.
-
-       MinIO defaults to using the `KV Version 1 <https://www.vaultproject.io/docs/secrets/kv>`__ engine.
-       You can specify ``v2`` to enable the KV Version 2 engine.
-
-Once you have completed the Vault configuration, you can finish any remaining sections of :ref:`Tenant Deployment <minio-k8s-deploy-minio-tenant>`.
+Once you have completed the |rootkms-short| configuration, you can finish any remaining sections of :ref:`Tenant Deployment <minio-k8s-deploy-minio-tenant>`.
 
 3) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

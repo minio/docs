@@ -1,4 +1,4 @@
-(Podman) Deploy MinIO and KES with Server-Side Encryption using Hashicorp Key Vault
+(Podman) Deploy MinIO and KES with Server-Side Encryption using AWS Secrets Manager
 -----------------------------------------------------------------------------------
 
 Prior to starting these steps, create the following folders:
@@ -37,9 +37,9 @@ a. Create the KES Configuration File
 
       nano |kesconfigpath|/kes-config.yaml
 
-   .. include:: /includes/common/common-minio-kes-hashicorp.rst
-      :start-after: start-kes-configuration-hashicorp-vault-desc
-      :end-before: end-kes-configuration-hashicorp-vault-desc
+   .. include:: /includes/common/common-minio-kes-aws.rst
+      :start-after: start-kes-configuration-aws-desc
+      :end-before: end-kes-configuration-aws-desc
 
    - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
 
@@ -53,9 +53,22 @@ a. Create the KES Configuration File
             -v |kescertpath|/certs:/certs                                \
             kes:|kes-stable| tool identity of /certs/minio-kes.cert
 
-   - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
+   - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
 
-   - Replace the ``VAULTAPPID`` and ``VAULTAPPSECRET`` with the appropriate :ref:`Vault AppRole credentials <minio-sse-vault-prereq-vault>`.
+      The following command computes the necessary hash:
+
+      .. code-block:: shell
+         :class: copyable
+         :substitutions:
+
+         podman run --rm                                             \
+            -v |kescertpath|/certs:/certs                                \
+            kes:|kes-stable| tool identity of /certs/minio-kes.cert
+
+   - Replace the ``REGION`` with the appropriate region for AWS Secrets Manager.
+     The value **must** match for both ``endpoint`` and ``region``.
+
+   - Set ``AWSACCESSKEY`` and ``AWSSECRETKEY`` to the appropriate :ref:`AWS Credentials <minio-sse-aws-prereq-aws>`.
 
 b. Create the MinIO Environment File
 

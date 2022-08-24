@@ -76,7 +76,7 @@ supported external Key Management Services (KMS):
 - :ref:`Azure Key Vault <minio-sse-azure>`
 - :ref:`Hashicorp KeyVault <minio-sse-vault>`
 
-.. include:: /includes/common-minio-kes.rst
+.. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-play-sandbox-warning
    :end-before: end-kes-play-sandbox-warning
 

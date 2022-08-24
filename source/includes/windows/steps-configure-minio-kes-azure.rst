@@ -1,32 +1,29 @@
-Deploy MinIO and KES with Server-Side Encryption using Hashicorp Vault
+Deploy MinIO and KES with Server-Side Encryption using Azure Key Vault
 ----------------------------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
-.. code-block:: shell
+.. code-block:: powershell
    :class: copyable
    :substitutions:
 
-   mkdir -P |kescertpath|
-   mkdir -P |kesconfigpath|
-   mkdir -P |miniodatapath|
+   New-Item -Path "|kescertpath|" -ItemType "directory"
+   New-Item -Path "|kesconfigpath|" -ItemType "directory"
+   New-Item -Path "|miniodatapath|" -ItemType "directory"
 
-1) Download the KES Binary
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Download KES for Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/macos/common-minio-kes.rst
+.. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-download-desc
    :end-before: end-kes-download-desc
 
 2) Generate TLS Certificates for KES and MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/common/common-minio-kes.rst
+.. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-generate-kes-certs-desc
    :end-before: end-kes-generate-kes-certs-desc
-
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. See the `Hashicorp Vault Configuration Docs <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
-Defer to the client documentation for instructions on trusting a third-party CA.
 
 3) Create the KES and MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,16 +31,16 @@ Defer to the client documentation for instructions on trusting a third-party CA.
 a. Create the KES Configuration File
 
    Create the configuration file using your preferred text editor.
-   The following example uses ``nano``:
+   The following example uses the Windows Notepad program:
 
-   .. code-block:: shell
+   .. code-block:: powershell
       :substitutions:
 
-      nano |kesconfigpath|/kes-config.yaml
+      notepad |kesconfigpath|\kes-config.yaml
 
-   .. include:: /includes/common/common-minio-kes-hashicorp.rst
-      :start-after: start-kes-configuration-hashicorp-vault-desc
-      :end-before: end-kes-configuration-hashicorp-vault-desc
+   .. include:: /includes/common/common-minio-kes-azure.rst
+      :start-after: start-kes-configuration-azure-desc
+      :end-before: end-kes-configuration-azure-desc
 
    - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
 
@@ -53,23 +50,24 @@ a. Create the KES Configuration File
          :class: copyable
          :substitutions:
 
-         kes tool identity of |miniocertpath|/minio-kes.cert
+         kes.exe tool identity of |miniocertpath|/minio-kes.cert
 
-   - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
+   - Replace the ``endpoint`` with the URL for the Keyvault instance.
 
-   - Replace the ``VAULTAPPID`` and ``VAULTAPPSECRET`` with the appropriate :ref:`Vault AppRole credentials <minio-sse-vault-prereq-vault>`.
+   - Set ``TENANTID``, ``CLIENTID``, and ``CLIENTSECRET`` to match the credentials for a project user with the :ref:`required permissions <minio-sse-azure-prereq-azure>`.
+
 
 b. Create the MinIO Environment File
 
    Create the environment file using your preferred text editor.
-   The following example uses ``nano``:
+   The following example uses the Windows Notepad program:
 
-   .. code-block:: shell
+   .. code-block:: powershell
       :substitutions:
 
-      nano |minioconfigpath|/minio
+      notepad |minioconfigpath|\minio
 
-   .. include:: /includes/common/common-minio-kes.rst
+   .. include:: /includes/windows/common-minio-kes.rst
       :start-after: start-kes-configuration-minio-desc
       :end-before: end-kes-configuration-minio-desc
 
@@ -81,24 +79,20 @@ The MinIO deployment requires access to KES as part of its startup.
 
 a. Start the KES Server
 
-   .. include:: /includes/common/common-minio-kes.rst
+   .. include:: /includes/windows/common-minio-kes.rst
       :start-after: start-kes-start-server-desc
       :end-before: end-kes-start-server-desc
 
 b. Start the MinIO Server
 
-   .. include:: /includes/common/common-minio-kes.rst
+   .. include:: /includes/windows/common-minio-kes.rst
       :start-after: start-kes-minio-start-server-desc
       :end-before: end-kes-minio-start-server-desc
-
-Foreground processes depend on the shell or terminal in which they run.
-Exiting or terminating the shell/terminal instance also kills the attached process.
-Defer to your operating system best practices for running processes in the background.
 
 5) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/common/common-minio-kes.rst
+.. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
