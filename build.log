@@ -1,0 +1,4 @@
+[91m/Users/darylwhite/git/baremetal/source/developers/dotnet/API.md:3001: WARNING: Could not lex literal_block as "cs". Highlighting skipped.[39;49;00m
+[91msource/developers/dotnet/quickstart.md:179: WARNING: 'myst' reference target not found: /Minio.Examples/Cases/GetBucketNotification.cs[39;49;00m
+[91msource/developers/dotnet/quickstart.md:180: WARNING: 'myst' reference target not found: /Minio.Examples/Cases/SetBucketNotification.cs[39;49;00m
+[91msource/developers/dotnet/quickstart.md:181: WARNING: 'myst' reference target not found: /Minio.Examples/Cases/RemoveAllBucketNotifications.cs[39;49;00m
