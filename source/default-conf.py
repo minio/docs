@@ -47,7 +47,6 @@ extensions = [
     'minio',
     'cond',
     'sphinx_copybutton',
-    'sphinx_markdown_tables',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinx_togglebutton',
@@ -84,9 +83,8 @@ extlinks = {
 
 suppress_warnings = [
     'toc.excluded',
-    'myst.ref',
     'myst.header',
-    'myst'
+    'ref.myst'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
