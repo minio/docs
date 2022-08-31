@@ -4,13 +4,15 @@
 Global Command Line Flags
 =========================
 
-You can add the following optional flags to any :mc-cmd:`mc` command.
 
 .. default-domain:: minio
+.. mc:: mc
 
 .. contents:: Table of Contents
    :local:
    :depth: 2
+
+You can add the following optional flags to any :mc-cmd:`mc` command.
 
 .. mc-cmd:: --debug
    :optional:
