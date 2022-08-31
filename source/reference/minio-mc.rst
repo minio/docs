@@ -433,6 +433,11 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
 
    Displays the current version of :mc-cmd:`mc`. 
 
+.. mc-cmd:: --help
+   :optional:
+
+   Displays a summary of command usage on the terminal.
+
 .. toctree::
    :titlesonly:
    :hidden:
