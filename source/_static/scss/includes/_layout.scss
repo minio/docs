@@ -7,20 +7,7 @@
 .content__main {
     flex: 1;
     min-width: 0;
-    align-self: flex-start;
     padding: var(--content-padding);
-}
-
-.sidebar-active {
-    .content__main {
-        padding-left: var(--content-padding);
-    }
-}
-
-.content__right {
-    position: sticky;
-    top: 0;
-    overflow: scroll;
 }
 
 .container { 

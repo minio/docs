@@ -79,6 +79,7 @@ $theme-properties: (
 
     // TOC
     --toc-caret-icon: url("../img/icons/chevron-down.svg") url("../img/icons/chevron-down-dark.svg"),
+    --toc-dropdown-bg: $light-100 $dark-100,
 
     // Mainmenu
     --nav-bg: $white $dark-100,
