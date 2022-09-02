@@ -362,7 +362,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     if(tableEls.length > 0) {
       tableEls.forEach((item) => {
         var tableWrapper = document.createElement("div");
-        tableWrapper.classList.add("table-responsive");
+        tableWrapper.classList.add("table-responsive", "scrollbar");
         item.insertAdjacentElement("beforebegin", tableWrapper);
         tableWrapper.appendChild(item);
       });
