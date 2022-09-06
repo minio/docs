@@ -1,5 +1,5 @@
-Deploy MinIO and KES with Server-Side Encryption using Hashicorp Vault
-----------------------------------------------------------------------
+Deploy MinIO and KES with Server-Side Encryption using Hashicorp Vault for Local Development
+--------------------------------------------------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
@@ -9,12 +9,14 @@ Prior to starting these steps, create the following folders:
 
    mkdir -P |kescertpath|
    mkdir -P |kesconfigpath|
+   mkdir -P |miniocertpath|
+   mkdir -P |minioconfigpath|
    mkdir -P |miniodatapath|
 
-1) Download the KES Binary
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Download the KES Server Binary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/macos/common-minio-kes.rst
+.. include:: /includes/linux/common-minio-kes.rst
    :start-after: start-kes-download-desc
    :end-before: end-kes-download-desc
 
@@ -25,7 +27,8 @@ Prior to starting these steps, create the following folders:
    :start-after: start-kes-generate-kes-certs-desc
    :end-before: end-kes-generate-kes-certs-desc
 
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. See the `Hashicorp Vault Configuration Docs <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
+Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` certificate as a trusted Certificate Authority. 
+See the `Hashicorp Server Configuration Documentation <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
 Defer to the client documentation for instructions on trusting a third-party CA.
 
 3) Create the KES and MinIO Configurations
@@ -61,7 +64,7 @@ a. Create the KES Configuration File
 
 b. Create the MinIO Environment File
 
-   Create the environment file using your preferred text editor.
+   Create or modify the environment file for the MinIO deployment using your preferred text editor.
    The following example uses ``nano``:
 
    .. code-block:: shell

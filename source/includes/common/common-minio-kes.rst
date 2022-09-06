@@ -1,10 +1,5 @@
-.. The following sections are common installation instructions for the KES
-   server. These are used in the following pages:
-
-   - /source/security/server-side-encryption/configure-minio-kes-hashicorp.rst
-   - /source/security/server-side-encryption/configure-minio-kes-aws.rst
-   - /source/security/server-side-encryption/configure-minio-kes-azure.rst
-   - /source/security/server-side-encryption/configure-minio-kes-gcp.rst
+.. The following sections are common among all KES-related tutorials
+.. Use the /includes/<platform>/common-minio-kes.rst file for platform-specific overrides.
 
 .. start-kes-encrypted-backend-desc
 
@@ -48,53 +43,68 @@ The following commands create two TLS certificates that expire within 30 days of
 
 .. code-block:: shell
    :class: copyable
+   :substitutions:
 
-   kes tool identity new                             \
-     --key  ~/minio-kes-vault/certs/kes-server.key   \
-     --cert ~/minio-kes-vault/certs/kes-server.cert  \
-     --ip   "127.0.0.1"                              \
+   # These commands output keys to |kescertpath|
+   # and |miniocertpath| respectively
+
+   kes tool identity new  \
+     --key  |kescertpath|/kes-server.key  \
+     --cert |kescertpath|/kes-server.cert  \
+     --ip   "127.0.0.1"  \
      --dns  localhost
 
-   kes tool identity new                            \
-     --key  ~/minio-kes-vault/certs/minio-kes.key   \
-     --cert ~/minio-kes-vault/certs/minio-kes.cert  \
-     --ip   "127.0.0.1"                             \
+   kes tool identity new  \
+     --key  |miniocertpath|/minio-kes.key  \
+     --cert |miniocertpath|/minio-kes.cert  \
+     --ip   "127.0.0.1"  \
      --dns  localhost
-
-These commands output the keys to the ``~/minio-kes-vault/certs`` directory on the host operating system.
 
 The ``--ip`` and ``--dns`` parameters set the IP and DNS ``SubjectAlternativeName`` for the certificate.
 The above example assumes that all components (Vault, MinIO, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
 You can specify additional IP or Hostnames based on the network configuration of your local host.
 
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` certificate as a trusted Certificate Authority. See the `Hashicorp Server Configuration Documentation <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
-Defer to the client documentation for instructions on trusting a third-party CA.
-
 .. end-kes-generate-kes-certs-desc
 
-.. start-kes-run-server-desc
+.. start-kes-minio-start-server-desc
 
-The first command allows |KES| to use the `mlock <http://man7.org/linux/man-pages/man2/mlock.2.html>`__ system call without running as root. 
-``mlock`` ensures the OS does not write in-memory data to disk (swap memory) and mitigates the risk of cryptographic operations being written to unsecured disk at any time.
+Run the following command in a terminal or shell to start the MinIO server as a foreground process.
 
-The second command starts the KES server in the foreground using the configuration file created in the last step. 
-The ``--auth=off`` disables strict validation of client TLS certificates.
-Using self-signed certificates for either the MinIO client or the root KMS server requires specifing this option.
+.. code-block:: shell
+   :class: copyable
+   :substitutions:
+
+   export MINIO_CONFIG_ENV_FILE=|minioconfigpath|/minio
+   minio server --console-address :9090
+
+.. end-kes-minio-start-server-desc
+
+.. start-kes-start-server-desc
+
+Run the following commands in a terminal or shell to start the KES server as a foreground process:
 
 .. code-block:: shell
    :class: copyable
 
    sudo setcap cap_ipc_lock=+ep $(readlink -f $(which kes))
 
-   kes server --mlock                                                \
-               --config=~/minio-kes-vault/config/server-config.yaml  \
+   kes server --mlock  \
+               --config=|kesconfigpath|kes-config.yaml  \
                --auth=off
+
+The first command allows |KES| to use the `mlock <http://man7.org/linux/man-pages/man2/mlock.2.html>`__ system call without running as root. 
+``mlock`` ensures the OS does not write in-memory data to disk (swap memory) and mitigates the risk of cryptographic operations being written to unsecured disk at any time.
+
+The second command starts the KES server in the foreground using the configuration file created in the last step. 
+The ``--auth=off`` disables strict validation of client TLS certificates.
+Using self-signed certificates for either the MinIO client or the root KMS server requires specifying this option.
 
 |KES| listens on port ``7373`` by default. 
 You can monitor the server logs from the terminal session. 
 If you run |KES| without tying it to the current shell session (e.g. with ``nohup``), use that method's associated logging system (e.g. ``nohup.txt``).
 
-.. end-kes-run-server-desc
+
+.. end-kes-start-server-desc
 
 .. start-kes-generate-key-desc
 
@@ -105,10 +115,11 @@ The following command uses the ``kes key create`` command to add a new External 
 
 .. code-block:: shell
    :class: copyable
+   :substitutions:
 
    export KES_SERVER=https://127.0.0.1:7373
-   export KES_CLIENT_KEY=~/minio-kes-vault/minio-kes.key
-   export KES_CLIENT_CERT=~/minio-kes-vault/minio-kes.cert
+   export KES_CLIENT_KEY=|miniocertpath|/minio-kes.key
+   export KES_CLIENT_CERT=|miniocertpath|/minio-kes.cert
 
    kes key create -k encrypted-bucket-key
 
@@ -123,13 +134,14 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
 
 .. code-block:: shell
    :class: copyable
+   :substitutions:
 
    # Add these environment variables to the existing environment file
 
    MINIO_KMS_KES_ENDPOINT=https://HOSTNAME:7373
-   MINIO_KMS_KES_CERT_FILE=~/minio-kes-vault/certs/minio-kes.cert
-   MINIO_KMS_KES_KEY_FILE=~/minio-kes-vault/certs/minio-kes.key
-   MINIO_KMS_KES_CAPATH=~/minio-kes-vault/certs/kes-server.cert
+   MINIO_KMS_KES_CERT_FILE=|miniocertpath|/minio-kes.cert
+   MINIO_KMS_KES_KEY_FILE=|miniocertpath|/minio-kes.key
+   MINIO_KMS_KES_CAPATH=|miniocertpath|/kes-server.cert
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
    minio server [ARGUMENTS]

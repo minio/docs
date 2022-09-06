@@ -1,4 +1,4 @@
-(Podman) Deploy MinIO and KES with Server-Side Encryption using Hashicorp Key Vault
+(Podman) Deploy MinIO and KES with Server-Side Encryption using GCP Secrets Manager
 -----------------------------------------------------------------------------------
 
 Prior to starting these steps, create the following folders:

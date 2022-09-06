@@ -18,20 +18,21 @@ The following commands creates two TLS certificates that expire within 30 days o
 
 .. code-block:: powershell
    :class: copyable
+   :substitutions:
 
-   C:\kes.exe tool identity new                       \
-     --key  C:\minio-kes-vault\certs\kes-server.key   \
-     --cert C:\minio-kes-vault\certs\kes-server.cert  \
-     --ip   "127.0.0.1"                               \
+   # These commands output the certificates to |kescertpath|
+
+   C:\kes.exe tool identity new  \  
+     --key  |kescertpath|  \  kes-server.key  \  
+     --cert |kescertpath|  \  kes-server.cert  \  
+     --ip   "127.0.0.1"  \  
      --dns  localhost
 
-   C:\kes tool identity new                          \
-     --key  C:\minio-kes-vault\certs\minio-kes.key   \
-     --cert C:\minio-kes-vault\certs\minio-kes.cert  \
-     --ip   "127.0.0.1"                              \
+   C:\kes.exe tool identity new  \  
+     --key  |miniocertpath|  \  minio-kes.key  \  
+     --cert |miniocertpath|  \  minio-kes.cert  \  
+     --ip   "127.0.0.1"  \  
      --dns  localhost
-
-These commands output the keys to the ``C:\minio-kes-vault\certs`` directory on the host operating system.
 
 The ``--ip`` and ``--dns`` parameters set the IP and DNS ``SubjectAlternativeName`` for the certificate.
 The above example assumes that all components (Vault, MinIO, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
@@ -51,7 +52,7 @@ The following PowerShell command downloads the latest Windows-compatible binary 
    :class: copyable
    :substitutions:
 
-   Invoke-WebRequest -Uri "https://github.com/minio/kes/releases/download/v|kes-stable|/kes-linux-windows-amd64.exe" -OutFile "C:\kes.exe"
+   Invoke-WebRequest -Uri "https://github.com/minio/kes/releases/download/|kes-stable|/kes-linux-windows-amd64.exe" -OutFile "C:\kes.exe"
 
    C:\kes.exe --version
 
@@ -63,8 +64,9 @@ Run the following command in a terminal or shell to start the KES server as a fo
 
 .. code-block:: powershell
    :class: copyable
+   :substitutions:
 
-   C:\kes.exe server --auth --config=C:\minio-kes-vault\config\kes-server-config.yaml
+   C:\kes.exe server --auth --config=|kesconfigpath|  \  config  \  kes-config.yaml
 
 Defer to the documentation for your MacOS Operating System version for instructions on running a process in the background.
 
@@ -76,9 +78,10 @@ Run the following command in a terminal or shell to start the MinIO server as a 
 
 .. code-block:: powershell
    :class: copyable
+   :substitutions:
 
-   export MINIO_CONFIG_ENV_FILE=C:\minio-kes-vault\config\minio
-   C:\minio.exe server --console-address :9090
+   export MINIO_CONFIG_ENV_FILE=|minioconfigpath|  \  config  \  minio
+   C:  \  minio.exe server --console-address :9090
 
 .. end-kes-minio-start-server-desc
 
@@ -91,10 +94,11 @@ The following command uses the ``kes key create`` command to create a new Extern
 
 .. code-block:: powershell
    :class: copyable
+   :substitutions:
 
    export KES_SERVER=https://127.0.0.1:7373
-   export KES_CLIENT_KEY=C:\minio-kes-vault\certs\minio-kes.key
-   export KES_CLIENT_CERT=C:\minio-kes-vault\certs\minio-kes.cert
+   export KES_CLIENT_KEY=|miniocertpath|  \  minio-kes.key
+   export KES_CLIENT_CERT=|miniocertpath|  \  minio-kes.cert
 
    C:\kes.exe key create -k encrypted-bucket-key
 
@@ -118,24 +122,19 @@ See the tutorials for :ref:`minio-snsd` for more detailed descriptions of a base
 
 This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server.cert`` certificates are accessible at the specified location:
 
-.. code-block:: shell
+.. code-block:: powershell
    :class: copyable
+   :substitutions:
 
    # Add these environment variables to the existing environment file
 
-   MINIO_KMS_KES_ENDPOINT=https://HOSTNAME:7373
-   MINIO_KMS_KES_CERT_FILE=C:\minio-kes-vault\certs\minio-kes.cert
-   MINIO_KMS_KES_KEY_FILE=C:\minio-kes-vault\certs\minio-kes.key
-   MINIO_KMS_KES_CAPATH=C:\minio-kes-vault\certs\kes-server.cert
+   MINIO_KMS_KES_ENDPOINT=https://127.0.0.1:7373
+   MINIO_KMS_KES_CERT_FILE=|miniocertpath|  \  minio-kes.cert
+   MINIO_KMS_KES_KEY_FILE=|miniocertpath|  \  minio-kes.key
+   MINIO_KMS_KES_CAPATH=|miniocertpath|  \  kes-server.cert
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
-   minio server [ARGUMENTS]
-
-Replace ``HOSTNAME`` with the IP address or hostname of the KES server.
-If the MinIO server host machines cannot resolve or reach the specified ``HOSTNAME``, the deployment may return errors or fail to start.
-
-- If using a single KES server host, specify the IP or hostname of that host
-- If using multiple KES server hosts, specify the load balancer or reverse proxy managing connections to those hosts.
+   minio.exe server [ARGUMENTS]
 
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 

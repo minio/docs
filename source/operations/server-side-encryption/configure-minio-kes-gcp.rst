@@ -10,11 +10,14 @@ Server-Side Object Encryption with GCP Secret Manager Root KMS
    :local:
    :depth: 1
 
-.. |EK|      replace:: :abbr:`EK (External Key)`
-.. |SSE|     replace:: :abbr:`SSE (Server-Side Encryption)`
-.. |KMS|     replace:: :abbr:`KMS (Key Management System)`
-.. |KES-git| replace:: :minio-git:`Key Encryption Service (KES) <kes>`
-.. |KES|     replace:: :abbr:`KES (Key Encryption Service)`
+.. |EK|            replace:: :abbr:`EK (External Key)`
+.. |SSE|           replace:: :abbr:`SSE (Server-Side Encryption)`
+.. |KMS|           replace:: :abbr:`KMS (Key Management System)`
+.. |KES-git|       replace:: :minio-git:`Key Encryption Service (KES) <kes>`
+.. |KES|           replace:: :abbr:`KES (Key Encryption Service)`
+.. |rootkms|       replace:: `Google Cloud Platform Secret Manager
+  <https://cloud.google.com/secret-manager/>`__
+.. |rootkms-short| replace:: GCP Secret Manager
 
 MinIO Server-Side Encryption (SSE) protects objects as part of write operations,
 allowing clients to take advantage of server processing power to secure objects
@@ -27,20 +30,93 @@ operations at scale. The root KMS provides stateful and secured storage of
 External Keys (EK) while |KES| is stateless and derives additional cryptographic
 keys from the root-managed |EK|. 
 
-This procedure does the following:
+.. Conditionals to handle the slight divergences in procedures between platforms.
 
-- Configure |KES| to use  
-  `Google Cloud Platform Secret Manager
-  <https://cloud.google.com/secret-manager/>`__ as the root |KMS|.
+.. cond:: linux
 
-- Configure MinIO to use the |KES| instance for supporting |SSE|.
-  
-- Configure automatic bucket-default 
-  :ref:`SSE-KMS <minio-encryption-sse-kms>` and 
-  :ref:`SSE-S3 <minio-encryption-sse-s3>`.
+   This procedure provides guidance for deploying and configuring KES at scale for a supporting |SSE| on a production MinIO deployment.
+   You can also use this procedure for deploying to local environments for testing and evaluation.
+
+   As part of this procedure, you will:
+
+   #. Deploy one or more |KES| servers configured to use |rootkms| as the root |KMS|.
+      You may optionally deploy a load balancer for managing connections to those KES servers.
+
+   #. Create a new |EK| on |rootkms-short| for use with |SSE|.
+
+   #. Create or modify a MinIO deployment with support for |SSE| using |KES|.
+      Defer to the :ref:`Deploy Distributed MinIO <minio-mnmd>` tutorial for guidance on production-ready MinIO deployments.
+
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`
+
+   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with |rootkms-short|.
+
+.. cond:: macos or windows
+
+   This procedure assumes a single local host machine running the MinIO and KES processes.
+   As part of this procedure, you will:
+
+   #. Deploy a |KES| server configured to use |rootkms-short| as the root |KMS|.
+
+   #. Create a new |EK| on |rootkms-short| for use with |SSE|.
+
+   #. Deploy a MinIO server in :ref:`Single-Node Single-Drive mode <minio-snsd>` configured to use the |KES| container for supporting |SSE|.
+
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
+
+   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with |rootkms-short|.
+
+   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and |rootkms-short|.
+
+.. cond:: container
+
+   This procedure assumes a single host machine running the MinIO and KES containers.
+   As part of this procedure, you will:
+
+   #. Deploy a |KES| container configured to use |rootkms-short| as the root |KMS|.
+
+   #. Create a new |EK| on Vault for use with |SSE|.
+
+   #. Deploy a MinIO Server container in :ref:`Single-Node Single-Drive mode <minio-snsd>` configured to use the |KES| container for supporting |SSE|.
+
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
+
+   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with |rootkms-short|.
+
+   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and |rootkms-short|.
+
+.. cond:: k8s
+
+   This procedure assumes you have access to a Kubernetes cluster with an active MinIO Operator installation.
+   As part of this procedure, you will:
+
+   #. Use the MinIO Operator Console to create or manage a MinIO Tenant.
+   #. Access the :guilabel:`Encryption` settings for that tenant and configure |SSE| using |rootkms-short|.
+   #. Create a new |EK| on |rootkms-short| for use with |SSE|.
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
+
+   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and |rootkms-short|.
+
+.. important::
+
+   .. include:: /includes/common/common-minio-kes.rst
+      :start-after: start-kes-encrypted-backend-desc
+      :end-before: end-kes-encrypted-backend-desc
 
 Prerequisites
 -------------
+
+.. cond:: k8s
+
+   MinIO Kubernetes Operator and Plugin
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   The procedures on this page *requires* a valid installation of the MinIO
+   Kubernetes Operator and assumes the local host has a matching installation of
+   the MinIO Kubernetes Operator. This procedure assumes the latest stable Operator
+   and Plugin version |operator-version-stable|.
+
+   See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 
 .. _minio-sse-gcp-prereq-gcp:
 
@@ -52,6 +128,10 @@ This procedure assumes familiarity with
 The `Secret Manager Quickstart
 <https://cloud.google.com/secret-manager/docs/quickstart>`__
 provides a sufficient foundation for the purposes of this procedure.
+
+.. cond:: k8s
+
+   This procedure assumes your Kubernetes cluster configuration allows for cluster-internal pods and services to resolve and connect to endpoints outside the cluster, such as the public internet.
 
 MinIO specifically requires the following GCP settings or
 configurations:
@@ -75,187 +155,79 @@ configurations:
   including private keys. Copy these credentials to a safe and secure location
   for use with this procedure.
 
-Network Encryption (TLS)
-~~~~~~~~~~~~~~~~~~~~~~~~
+.. cond:: linux or macos or windows
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-network-encryption-desc
-   :end-before: end-kes-network-encryption-desc
+   Deploy or Ensure Access to a MinIO Deployment
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Podman Container Manager
-~~~~~~~~~~~~~~~~~~~~~~~~
+   .. include:: /includes/common/common-minio-kes.rst
+      :start-after: start-kes-new-existing-minio-deployment-desc
+      :end-before: end-kes-new-existing-minio-deployment-desc
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-podman-desc
-   :end-before: end-kes-podman-desc
+.. cond:: container
 
-Enable MinIO Server-Side Encryption with GCP Secret Manager Root KMS
---------------------------------------------------------------------
+   Install Podman or a Similar Container Management Interface
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following steps deploy |KES-git| configured to use an existing AWS KMS and
-Secrets Manager deployment as the root KMS for supporting |SSE|. These steps
-assume the AWS components meet the :ref:`prerequisites
-<minio-sse-gcp-prereq-gcp>`.
-
-Prior to starting these steps, create the following folders:
-
-.. code-block:: shell
-   :class: copyable
-
-   mkdir -P ~/kes/certs ~/kes/config
-
-1) Download the MinIO Key Encryption Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-download-desc
-   :end-before: end-kes-download-desc
-
-2) Generate the TLS Private and Public Key for KES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-generate-kes-certs-desc
-   :end-before: end-kes-generate-kes-certs-desc
-
-3) Generate the TLS Private and Public Key for MinIO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-generate-minio-certs-desc
-   :end-before: end-kes-generate-minio-certs-desc
-
-4) Create the KES Configuration File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-|KES| uses a YAML-formatted configuration file. The following example YAML
-specifies the minimum required fields for enabling |SSE| using AWS Secrets
-Manager:
-
-.. code-block:: shell
-   :class: copyable
-
-   address: 0.0.0.0:7373
-
-   # Disable the root identity, as we do not need that level of access for
-   # supporting SSE operations.
-   root: disabled
-
-   # Specify the TLS keys generated in the previous step here
-   # For production environments, use keys signed by a known and trusted
-   # Certificate Authority (CA).
-   tls:
-     key:  /data/certs/server.key
-     cert: /data/certs/server.cert
-
-   # Create a policy named 'minio' that grants access to the 
-   # /create, /generate, and /decrypt KES APIs for any key name
-   # KES uses mTLS to grant access to this policy, where only the client 
-   # whose TLS certificate hash matches one of the "identities" can
-   # use this policy. Specify the hash of the MinIO server TLS certificate
-   # hash here.
-   policy:
-     minio:
-       allow:
-       - /v1/key/create/*
-       - /v1/key/generate/*
-       - /v1/key/decrypt/*
-       identities:
-       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes tool identity of minio-kes.cert'
-
-   # Specify the connection information for the  Secrets Manager endpoint.
-   # The endpoint should be resolvable from the host.
-   # This example assumes that the associated GCP account has the necessary
-   # access key and secret key
-   keystore:
-     gcp:
-       secretmanager:
-         project_id: "${GCPPROJECTID}" # The GCP Project to use
-         credentials:
-           client_email: "${GCPCLIENTEMAIL}" # The client email for your GCP Credentials
-           client_id: "${GCPCLIENTID}" # The Client ID for your GCP Credentials
-           private_key_id: "${GCPPRIVATEKEYID}" # the private key ID for your GCP credentials
-           private_key: "${GCPPRIVATEKEY}" # The content of your GCP Private Key
-       
-Save the configuration file as ``~/kes/config/kes-config.yaml``. Any field with
-value ``${VARIABLE}`` uses the environment variable with matching name as the
-value. You can use this functionality to set credentials without writing them to
-the configuration file.
-
-- Set ``MINIO_IDENTITY_HASH`` to the output of 
-  ``kes tool identity of minio-kes.cert``.
-
-- Set ``GCPPROJECTID`` to the GCP project for the Secrets Manager instance 
-  KES should use.
-
-- Set ``GCPCLIENTEMAIL``, ``GCPCLIENTID``, ``GCPPRIVATEKEYID``, and
-  ``GCPPRIVATEKEY`` to the credentials associated to the 
-  :ref:`GCP Service Account <minio-sse-gcp-prereq-gcp>`
-  KES should use when accessing the Secrets Manager service.
-
-5) Start KES
-~~~~~~~~~~~~
-
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-run-server-desc
-   :end-before: end-kes-run-server-desc
-
-6) Generate a Cryptographic Key
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. include:: /includes/container/common-deploy.rst
+      :start-after: start-common-prereq-container-management-interface
+      :end-before: end-common-prereq-container-management-interface
 
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-generate-key-desc
-   :end-before: end-kes-generate-key-desc
+.. The included file has the correct header structure.
+   There are slight divergences between platforms so this ends up being easier compared to cascading conditionals to handle little nitty-gritty differences.
 
-7) Configure MinIO to connect to KES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. |namespace| replace:: minio-kes-gcp
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-configure-minio-desc
-   :end-before: end-kes-configure-minio-desc
+.. cond:: container
 
-8) Enable Automatic Server-Side Encryption
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. |kescertpath|        replace:: ~/minio-kes-gcp/certs
+   .. |kesconfigpath|      replace:: ~/minio-kes-gcp/config
+   .. |kesconfigcertpath|  replace:: /certs/
+   .. |miniocertpath|      replace:: ~/minio-kes-gcp/certs
+   .. |minioconfigpath|    replace:: ~/minio-kes-gcp/config
+   .. |miniodatapath|      replace:: ~/minio-kes-gcp/minio
 
-.. tab-set::
+   .. include:: /includes/container/steps-configure-minio-kes-gcp.rst
 
-   .. tab-item:: SSE-KMS
+.. cond:: linux
 
-      The following command enables SSE-KMS on all objects written to the
-      specified bucket:
+   .. |kescertpath|        replace:: /opt/kes/certs
+   .. |kesconfigpath|      replace:: /opt/kes/config
+   .. |kesconfigcertpath|  replace:: /opt/kes/certs/
+   .. |miniocertpath|      replace:: /opt/minio/certs
+   .. |minioconfigpath|    replace:: /opt/minio/config
+   .. |miniodatapath|      replace:: ~/minio
 
-      .. code-block:: shell
-         :class: copyable
+   .. include:: /includes/linux/steps-configure-minio-kes-gcp-quick.rst
 
-         mc mb ALIAS/encryptedbucket
-         mc encrypt set SSE-KMS encrypted-bucket-key ALIAS/encryptedbucket
+   .. include:: /includes/linux/steps-configure-minio-kes-gcp.rst
 
-      Replace ``ALIAS`` with the :mc:`alias <mc alias>` of the MinIO
-      deployment configured in the previous step.
+.. cond:: macos
 
-      Write a file to the bucket using :mc:`mc cp` or any S3-compatible
-      SDK with a ``PutObject`` function. You can then run :mc:`mc stat` 
-      on the file to confirm the associated encryption metadata.
+   .. |kescertpath|        replace:: ~/minio-kes-gcp/certs
+   .. |kesconfigpath|      replace:: ~/minio-kes-gcp/config/
+   .. |kesconfigcertpath|  replace:: ~/minio-kes-gcp/certs
+   .. |miniocertpath|      replace:: ~/minio-kes-gcp/certs
+   .. |minioconfigpath|    replace:: ~/minio-kes-gcp/config
+   .. |miniodatapath|      replace:: ~/minio-kes-gcp/minio
 
-   .. tab-item:: SSE-S3
+   .. include:: /includes/macos/steps-configure-minio-kes-gcp.rst
 
-      The following command enables SSE-S3 on all objects written to the
-      specified bucket. MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` 
-      key for performing |SSE|.
+.. cond:: k8s
 
-      .. code-block:: shell
-         :class: copyable
+   .. include:: /includes/k8s/steps-configure-minio-kes-gcp.rst
 
-         mc mb ALIAS/encryptedbucket
-         mc encrypt set SSE-S3 ALIAS/encryptedbucket
+.. cond:: windows
 
-      Replace ``ALIAS`` with the :mc:`alias <mc alias>` of the MinIO
-      deployment configured in the previous step.
+   .. |kescertpath|        replace:: C:\\minio-kes-gcp\\certs
+   .. |kesconfigpath|      replace:: C:\\minio-kes-gcp\\config
+   .. |kesconfigcertpath|  replace:: C:\\minio-kes-gcp\\certs\\
+   .. |miniocertpath|      replace:: C:\\minio-kes-gcp\\certs
+   .. |minioconfigpath|    replace:: C:\\minio-kes-gcp\\config
+   .. |miniodatapath|      replace:: C:\\minio-kes-gcp\\minio
 
-      Write a file to the bucket using :mc:`mc cp` or any S3-compatible
-      SDK with a ``PutObject`` function. You can then run :mc:`mc stat` 
-      on the file to confirm the associated encryption metadata.
+   .. include:: /includes/windows/steps-configure-minio-kes-gcp.rst
 
 Configuration Reference for GCP Secret Manager Root KMS
 -------------------------------------------------------
@@ -319,27 +291,27 @@ using GCP Secrets Manager as the root Key Management Service
            - Description
 
          * - ``address``
-           - .. include:: /includes/common-minio-kes.rst
+           - .. include:: /includes/common/common-minio-kes.rst
                 :start-after: start-kes-conf-address-desc
                 :end-before: end-kes-conf-address-desc
 
          * - ``root``
-           - .. include:: /includes/common-minio-kes.rst
+           - .. include:: /includes/common/common-minio-kes.rst
                 :start-after: start-kes-conf-root-desc
                 :end-before: end-kes-conf-root-desc
 
          * - ``tls``
-           - .. include:: /includes/common-minio-kes.rst
+           - .. include:: /includes/common/common-minio-kes.rst
                 :start-after: start-kes-conf-tls-desc
                 :end-before: end-kes-conf-tls-desc
 
          * - ``policy``
-           - .. include:: /includes/common-minio-kes.rst
+           - .. include:: /includes/common/common-minio-kes.rst
                 :start-after: start-kes-conf-policy-desc
                 :end-before: end-kes-conf-policy-desc
 
          *  - ``keys``
-            - .. include:: /includes/common-minio-kes.rst
+            - .. include:: /includes/common/common-minio-kes.rst
                  :start-after: start-kes-conf-keys-desc
                  :end-before: end-kes-conf-keys-desc
 

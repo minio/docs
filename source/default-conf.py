@@ -47,7 +47,6 @@ extensions = [
     'minio',
     'cond',
     'sphinx_copybutton',
-    'sphinx_markdown_tables',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinx_togglebutton',
@@ -247,7 +246,7 @@ html_theme_options = {
     'show_relbars': 'false'
 }
 
-html_short_title = "MinIO Object Storage for " + platform.capitalize()
+html_short_title = "MinIO Object Storage for " + ("MacOS" if platform == "macos" else platform.capitalize())
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -260,7 +259,7 @@ html_js_files = ['js/main.js']
 
 html_extra_path = [ 'extra']
 
-html_title = 'MinIO Object Storage for ' + platform.capitalize()
+html_title = 'MinIO Object Storage for ' + ("MacOS" if platform == "macos" else platform.capitalize())
 
 html_context = {
     'doc_platform': platform.lower()

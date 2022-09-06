@@ -1,8 +1,8 @@
 .. _minio-sse-aws:
 
-===============================================
-Server-Side Object Encryption with AWS Root KMS
-===============================================
+===============================================================
+Server-Side Object Encryption with AWS Secrets Manager Root KMS
+===============================================================
 
 .. default-domain:: minio
 
@@ -10,59 +10,124 @@ Server-Side Object Encryption with AWS Root KMS
    :local:
    :depth: 1
 
-.. |EK|      replace:: :abbr:`EK (External Key)`
-.. |SSE|     replace:: :abbr:`SSE (Server-Side Encryption)`
-.. |KMS|     replace:: :abbr:`KMS (Key Management System)`
-.. |KES-git| replace:: :minio-git:`Key Encryption Service (KES) <kes>`
-.. |KES|     replace:: :abbr:`KES (Key Encryption Service)`
+.. |EK|            replace:: :abbr:`EK (External Key)`
+.. |SSE|           replace:: :abbr:`SSE (Server-Side Encryption)`
+.. |KMS|           replace:: :abbr:`KMS (Key Management System)`
+.. |KES-git|       replace:: :minio-git:`Key Encryption Service (KES) <kes>`
+.. |KES|           replace:: :abbr:`KES (Key Encryption Service)`
+.. |rootkms|       replace:: `AWS Secrets Manager <https://aws.amazon.com/secrets-manager/>`__
+.. |rootkms-short| replace:: AWS Secrets Manager
 
-MinIO Server-Side Encryption (SSE) protects objects as part of write operations,
-allowing clients to take advantage of server processing power to secure objects
-at the storage layer (encryption-at-rest). SSE also provides key functionality
-to regulatory and compliance requirements around secure locking and erasure.
+MinIO Server-Side Encryption (SSE) protects objects as part of write operations, allowing clients to take advantage of server processing power to secure objects at the storage layer (encryption-at-rest). 
+SSE also provides key functionality to regulatory and compliance requirements around secure locking and erasure.
 
-MinIO SSE uses |KES-git| and an
-external root Key Management Service (KMS) for performing secured cryptographic
-operations at scale. The root KMS provides stateful and secured storage of 
-External Keys (EK) while |KES| is stateless and derives additional cryptographic
-keys from the root-managed |EK|. 
+MinIO SSE uses |KES-git| and an external root Key Management Service (KMS) for performing secured cryptographic operations at scale. 
+The root KMS provides stateful and secured storage of External Keys (EK) while |KES| is stateless and derives additional cryptographic keys from the root-managed |EK|. 
 
-This procedure does the following:
+.. Conditionals to handle the slight divergences in procedures between platforms.
 
-- Configure |KES| to use  
-  `AWS Secrets Manager <https://aws.amazon.com/secrets-manager/>`__ as the root 
-  |KMS|.
+.. cond:: linux
 
-- Configure MinIO to use the |KES| instance for supporting |SSE|.
-  
-- Configure automatic bucket-default 
-  :ref:`SSE-KMS <minio-encryption-sse-kms>` and 
-  :ref:`SSE-S3 <minio-encryption-sse-s3>`.
+   This procedure provides guidance for deploying and configuring KES at scale for a supporting |SSE| on a production MinIO deployment, with |rootkms| as the external root |KMS|.
+   You can also use this procedure for deploying to local environments for testing and evaluation.
+
+   As part of this procedure, you will:
+
+   #. Deploy one or more |KES| servers configured to use |rootkms| as the root |KMS|.
+      You may optionally deploy a load balancer for managing connections to those KES servers.
+
+   #. Create a new |EK| on |rootkms-short| for use with |SSE|.
+
+   #. Create or modify a MinIO deployment with support for |SSE| using |KES|.
+      Defer to the :ref:`Deploy Distributed MinIO <minio-mnmd>` tutorial for guidance on production-ready MinIO deployments.
+
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`
+
+   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with |rootkms-short|.
+
+.. cond:: macos or windows
+
+   This procedure assumes a single local host machine running the MinIO and KES processes, with |rootkms| as the external root |KMS|..
+   As part of this procedure, you will:
+
+   #. Deploy a |KES| server configured to use |rootkms| as the root |KMS|.
+
+   #. Create a new |EK| on Vault for use with |SSE|.
+
+   #. Deploy a MinIO server in :ref:`Single-Node Single-Drive mode <minio-snsd>` configured to use the |KES| container for supporting |SSE|.
+
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
+
+   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with |rootkms-short|.
+
+   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and |rootkms-short|.
+
+.. cond:: container
+
+   This procedure assumes a single host machine running the MinIO and KES containers, with |rootkms| as the external root |KMS|..
+   As part of this procedure, you will:
+
+   #. Deploy a |KES| container configured to use |rootkms| as the root |KMS|.
+
+   #. Create a new |EK| on Vault for use with |SSE|.
+
+   #. Deploy a MinIO Server container in :ref:`Single-Node Single-Drive mode <minio-snsd>` configured to use the |KES| container for supporting |SSE|.
+
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
+
+   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with |rootkms-short|.
+
+   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and |rootkms-short|.
+
+.. cond:: k8s
+
+   This procedure assumes you have access to a Kubernetes cluster with an active MinIO Operator installation, with a cluster-accessible |rootkms| service as the external root |KMS|.
+   As part of this procedure, you will:
+
+   #. Use the MinIO Operator Console to create or manage a MinIO Tenant.
+   #. Access the :guilabel:`Encryption` settings for that tenant and configure |SSE| using |rootkms| as the root |KMS|.
+   #. Create a new |EK| on Vault for use with |SSE|.
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
+
+   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and |rootkms-short|.
+
+.. important::
+
+   .. include:: /includes/common/common-minio-kes.rst
+      :start-after: start-kes-encrypted-backend-desc
+      :end-before: end-kes-encrypted-backend-desc
 
 Prerequisites
 -------------
 
+.. cond:: k8s
+
+   MinIO Kubernetes Operator and Plugin
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   The procedures on this page *requires* a valid installation of the MinIO Kubernetes Operator and assumes the local host has a matching installation of the MinIO Kubernetes Operator. 
+   This procedure assumes the latest stable Operator and Plugin version |operator-version-stable|.
+
+   See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
+
 .. _minio-sse-aws-prereq-aws:
 
-AWS Key Management Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ensure Access to the AWS Secrets Manager and Key Management Service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure assumes familiarity with 
-`AWS Key Management Service <https://aws.amazon.com/kms/>`__ and
-`AWS Secrets Manager <https://aws.amazon.com/secrets-manager/>`__. 
-The `Getting Started with AWS Key Management Service
-<https://aws.amazon.com/kms/getting-started/>`__
-provides a sufficient foundation for the purposes of this procedure.
+This procedure assumes access to and familiarity with |rootkms| and `|rootkms-short| <https://aws.amazon.com/kms/>`__.
 
-MinIO specifically requires the following AWS settings or
-configurations:
+.. cond:: k8s
 
-- A new AWS 
-  :aws-docs:`Programmatic Access <IAM/latest/UserGuide/id_users_create.html>`
-  user  with corresponding access key and secret key.
+   This procedure assumes your Kubernetes cluster configuration allows for cluster-internal pods and services to resolve and connect to endpoints outside of the cluster, such as the public internet.
+   
 
-- A policy that grants the created user access to AWS Secrets Manager and 
-  AWS KMS. The following policy grants the minimum necessary permissions:
+MinIO specifically requires the following AWS settings or configurations:
+
+- A new AWS :aws-docs:`Programmatic Access <IAM/latest/UserGuide/id_users_create.html>` user  with corresponding access key and secret key.
+
+- A policy that grants the created user access to AWS Secrets Manager and |rootkms-short|. 
+  The following policy grants the minimum necessary permissions:
 
   .. code-block:: json
      :class: copyable
@@ -99,186 +164,80 @@ configurations:
   ``AWSKeyManagementServicePowerUser`` canned roles that meet and exceed the
   minimum required permissions.
 
-Network Encryption (TLS)
-~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-network-encryption-desc
-   :end-before: end-kes-network-encryption-desc
+.. cond:: linux or macos or windows
 
-Podman Container Manager
-~~~~~~~~~~~~~~~~~~~~~~~~
+   Deploy or Ensure Access to a MinIO Deployment
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-podman-desc
-   :end-before: end-kes-podman-desc
+   .. include:: /includes/common/common-minio-kes.rst
+      :start-after: start-kes-new-existing-minio-deployment-desc
+      :end-before: end-kes-new-existing-minio-deployment-desc
 
-Enable MinIO Server-Side Encryption with AWS Root KMS
------------------------------------------------------
+.. cond:: container
 
-The following steps deploy |KES-git| configured to use an existing AWS KMS and
-Secrets Manager deployment as the root KMS for supporting |SSE|. These steps
-assume the AWS components meet the :ref:`prerequisites
-<minio-sse-aws-prereq-aws>`.
+   Install Podman or a Similar Container Management Interface
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Prior to starting these steps, create the following folders:
+   .. include:: /includes/container/common-deploy.rst
+      :start-after: start-common-prereq-container-management-interface
+      :end-before: end-common-prereq-container-management-interface
 
-.. code-block:: shell
-   :class: copyable
+.. The included file has the correct header structure.
+   There are slight divergences between platforms so this ends up being easier compared to cascading conditionals to handle little nitty-gritty differences.
 
-   mkdir -P ~/kes/certs ~/kes/config
+.. |namespace| replace:: minio-kes-aws
 
-1) Download the MinIO Key Encryption Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. cond:: k8s
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-download-desc
-   :end-before: end-kes-download-desc
+   .. include:: /includes/k8s/steps-configure-minio-kes-aws.rst
 
-2) Generate the TLS Private and Public Key for KES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. cond:: container
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-generate-kes-certs-desc
-   :end-before: end-kes-generate-kes-certs-desc
+   .. |kescertpath|        replace:: ~/minio-kes-aws/certs
+   .. |kesconfigpath|      replace:: ~/minio-kes-aws/config
+   .. |kesconfigcertpath|  replace:: /certs/
+   .. |miniocertpath|      replace:: ~/minio-kes-aws/certs
+   .. |minioconfigpath|    replace:: ~/minio-kes-aws/config
+   .. |miniodatapath|      replace:: ~/minio-kes-aws/minio
 
-3) Generate the TLS Private and Public Key for MinIO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. include:: /includes/container/steps-configure-minio-kes-aws.rst
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-generate-minio-certs-desc
-   :end-before: end-kes-generate-minio-certs-desc
+.. cond:: linux
 
-4) Create the KES Configuration File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-|KES| uses a YAML-formatted configuration file. The following example YAML
-specifies the minimum required fields for enabling |SSE| using AWS Secrets
-Manager:
-
-.. code-block:: shell
-   :class: copyable
-
-   address: 0.0.0.0:7373
-
-   # Disable the root identity, as we do not need that level of access for
-   # supporting SSE operations.
-   root: disabled
-
-   # Specify the TLS keys generated in the previous step here
-   # For production environments, use keys signed by a known and trusted
-   # Certificate Authority (CA).
-   tls:
-     key:  /data/certs/server.key
-     cert: /data/certs/server.cert
-
-   # Create a policy named 'minio' that grants access to the 
-   # /create, /generate, and /decrypt KES APIs for any key name
-   # KES uses mTLS to grant access to this policy, where only the client 
-   # whose TLS certificate hash matches one of the "identities" can
-   # use this policy. Specify the hash of the MinIO server TLS certificate
-   # hash here.
-   policy:
-     minio:
-       allow:
-       - /v1/key/create/*
-       - /v1/key/generate/*
-       - /v1/key/decrypt/*
-       identities:
-       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes tool identity of minio-kes.cert'
-
-   # Specify the connection information for the KMS and Secrets Manager endpoint.
-   # The endpoint should be resolvable from the host.
-   # This example assumes that the associated AWS account has the necessary
-   # access key and secret key
-   keystore:
-     aws:
-       secretsmanager:
-         endpoint: secretsmanager.REGION.amazonaws.com # use the Secrets Manager endpoint for your region
-         region: REGION # e.g. us-east-1
-         kmskey: "" # Optional. The root AWS KMS key to use for cryptographic operations. Formerly described as the "Customer Master Key".
-         credentials:
-           accesskey: "${AWSACCESSKEY}" # AWS Access Key
-           secretkey: "${AWSSECRETKEY}" # AWS Secret Key
+   .. |kescertpath|        replace:: /opt/kes/certs
+   .. |kesconfigpath|      replace:: /opt/kes/config
+   .. |kesconfigcertpath|  replace:: /opt/kes/certs/
+   .. |miniocertpath|      replace:: /opt/minio/certs
+   .. |minioconfigpath|    replace:: /opt/minio/config
+   .. |miniodatapath|      replace:: ~/minio
 
 
-Save the configuration file as ``~/kes/config/kes-config.yaml``. Any field with
-value ``${VARIABLE}`` uses the environment variable with matching name as the
-value. You can use this functionality to set credentials without writing them to
-the configuration file.
+   .. include:: /includes/linux/steps-configure-minio-kes-aws-quick.rst
 
-- Set ``MINIO_IDENTITY_HASH`` to the output of 
-  ``kes tool identity of minio-kes.cert``.
+   .. include:: /includes/linux/steps-configure-minio-kes-aws.rst
 
-- Replace the ``REGION`` with the appropriate region for AWS Secrets Manager.
-  The value **must** match for both ``endpoint`` and ``region``.
+.. cond:: macos
 
-- Set ``AWSACCESSKEY`` and ``AWSSECRETKEY`` to the appropriate
-  :ref:`AWS Credentials <minio-sse-aws-prereq-aws>`.
+   .. |kescertpath|        replace:: ~/minio-kes-aws/certs
+   .. |kesconfigpath|      replace:: ~/minio-kes-aws/config
+   .. |kesconfigcertpath|  replace:: ~/minio-kes-aws/certs/
+   .. |miniocertpath|      replace:: ~/minio-kes-aws/certs
+   .. |minioconfigpath|    replace:: ~/minio-kes-aws/config
+   .. |miniodatapath|      replace:: ~/minio-kes-aws/minio
 
-5) Start KES
-~~~~~~~~~~~~
+   .. include:: /includes/macos/steps-configure-minio-kes-aws.rst
 
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-run-server-desc
-   :end-before: end-kes-run-server-desc
+.. cond:: windows
 
-6) Generate a Cryptographic Key
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. |kescertpath|        replace:: C:\\minio-kes-aws\\certs
+   .. |kesconfigpath|      replace:: C:\\minio-kes-aws\\config
+   .. |kesconfigcertpath|  replace:: C:\\minio-kes-aws\\certs\\
+   .. |miniocertpath|      replace:: C:\\minio-kes-aws\\certs
+   .. |minioconfigpath|    replace:: C:\\minio-kes-aws\\config
+   .. |miniodatapath|      replace:: C:\\minio-kes-aws\\minio
 
-
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-generate-key-desc
-   :end-before: end-kes-generate-key-desc
-
-7) Configure MinIO to connect to KES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-minio-kes.rst
-   :start-after: start-kes-configure-minio-desc
-   :end-before: end-kes-configure-minio-desc
-
-8) Enable Automatic Server-Side Encryption
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. tab-set::
-
-   .. tab-item:: SSE-KMS
-
-      The following command enables SSE-KMS on all objects written to the
-      specified bucket:
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc mb ALIAS/encryptedbucket
-         mc encrypt set SSE-KMS encrypted-bucket-key ALIAS/encryptedbucket
-
-      Replace ``ALIAS`` with the :mc:`alias <mc alias>` of the MinIO
-      deployment configured in the previous step.
-
-      Write a file to the bucket using :mc:`mc cp` or any S3-compatible
-      SDK with a ``PutObject`` function. You can then run :mc:`mc stat` 
-      on the file to confirm the associated encryption metadata.
-
-   .. tab-item:: SSE-S3
-
-      The following command enables SSE-S3 on all objects written to the
-      specified bucket. MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` 
-      key for performing |SSE|.
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc mb ALIAS/encryptedbucket
-         mc encrypt set SSE-S3 ALIAS/encryptedbucket
-
-      Replace ``ALIAS`` with the :mc:`alias <mc alias>` of the MinIO
-      deployment configured in the previous step.
-
-      Write a file to the bucket using :mc:`mc cp` or any S3-compatible
-      SDK with a ``PutObject`` function. You can then run :mc:`mc stat` 
-      on the file to confirm the associated encryption metadata.
+   .. include:: /includes/windows/steps-configure-minio-kes-aws.rst
 
 Configuration Reference for AWS Root KMS
 ----------------------------------------
@@ -341,31 +300,31 @@ using AWS Secrets Manager and AWS KMS as the root Key Management Service
            - Description
 
          * - ``address``
-           - .. include:: /includes/common-minio-kes.rst
+           - .. include:: /includes/common/common-minio-kes.rst
                 :start-after: start-kes-conf-address-desc
                 :end-before: end-kes-conf-address-desc
 
          * - ``root``
-           - .. include:: /includes/common-minio-kes.rst
+           - .. include:: /includes/common/common-minio-kes.rst
                 :start-after: start-kes-conf-root-desc
                 :end-before: end-kes-conf-root-desc
 
          * - ``tls``
-           - .. include:: /includes/common-minio-kes.rst
+           - .. include:: /includes/common/common-minio-kes.rst
                 :start-after: start-kes-conf-tls-desc
                 :end-before: end-kes-conf-tls-desc
 
          * - ``policy``
-           - .. include:: /includes/common-minio-kes.rst
+           - .. include:: /includes/common/common-minio-kes.rst
                 :start-after: start-kes-conf-policy-desc
                 :end-before: end-kes-conf-policy-desc
 
          *  - ``keys``
-            - .. include:: /includes/common-minio-kes.rst
+            - .. include:: /includes/common/common-minio-kes.rst
                  :start-after: start-kes-conf-keys-desc
                  :end-before: end-kes-conf-keys-desc
 
-         * - ``keystore.secretsmanager``
+         * - ``keystore.aws.secretsmanager``
            - The configuration for the AWS Secrets Manager and AWS KMS. 
 
              - ``endpoint`` - The endpoint for the Secrets Manager service,

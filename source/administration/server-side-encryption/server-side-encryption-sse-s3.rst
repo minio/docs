@@ -73,7 +73,7 @@ supported external Key Management Services (KMS):
 - :ref:`Hashicorp KeyVault <minio-sse-vault>`
 - Thales CipherTrust (formerly Gemalto KeySecure)
 
-.. include:: /includes/common-minio-kes.rst
+.. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-play-sandbox-warning
    :end-before: end-kes-play-sandbox-warning
 

@@ -1,5 +1,5 @@
-(Podman) Deploy MinIO and KES with Server-Side Encryption using Hashicorp Key Vault
------------------------------------------------------------------------------------
+(Podman) Deploy MinIO and KES with Server-Side Encryption using Azure Key Vault
+-------------------------------------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
@@ -21,9 +21,6 @@ For Windows hosts, substitute the paths with Windows-style paths, e.g. ``C:\mini
    :start-after: start-kes-generate-kes-certs-desc
    :end-before: end-kes-generate-kes-certs-desc
 
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. See the `Hashicorp Vault Configuration Docs <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
-Defer to the client documentation for instructions on trusting a third-party CA.
-
 2) Create the KES and MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -37,9 +34,9 @@ a. Create the KES Configuration File
 
       nano |kesconfigpath|/kes-config.yaml
 
-   .. include:: /includes/common/common-minio-kes-hashicorp.rst
-      :start-after: start-kes-configuration-hashicorp-vault-desc
-      :end-before: end-kes-configuration-hashicorp-vault-desc
+   .. include:: /includes/common/common-minio-kes-azure.rst
+      :start-after: start-kes-configuration-azure-desc
+      :end-before: end-kes-configuration-azure-desc
 
    - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
 
@@ -53,9 +50,9 @@ a. Create the KES Configuration File
             -v |kescertpath|/certs:/certs                                \
             kes:|kes-stable| tool identity of /certs/minio-kes.cert
 
-   - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
+   - Replace the ``endpoint`` with the URL for the Keyvault instance.
 
-   - Replace the ``VAULTAPPID`` and ``VAULTAPPSECRET`` with the appropriate :ref:`Vault AppRole credentials <minio-sse-vault-prereq-vault>`.
+   - Set ``TENANTID``, ``CLIENTID``, and ``CLIENTSECRET`` to match the credentials for a project user with the :ref:`required permissions <minio-sse-azure-prereq-azure>`.
 
 b. Create the MinIO Environment File
 

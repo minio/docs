@@ -56,8 +56,7 @@ supports the following encryption strategies:
       SSE-S3 and SSE-C and is recommended over the other supported encryption
       methods.
 
-      For a tutorial on enabling SSE-KMS in a local (non-production) MinIO
-      Deployment, see :ref:`minio-encryption-sse-kms-quickstart`.
+      For a tutorial on enabling SSE-KMS in a local (non-production) MinIO Deployment, see :ref:`minio-encryption-sse-kms-quickstart`.
 
    .. tab-item:: SSE-S3
       :sync: sse-s3
@@ -69,8 +68,7 @@ supports the following encryption strategies:
       For buckets without automatic SSE-S3 encryption, clients can request
       SSE encryption as part of the write operation instead.
 
-      For a tutorial on enabling SSE-s3 in a local (non-production) MinIO
-      Deployment, see :ref:`minio-encryption-sse-s3-quickstart`.
+      For a tutorial on enabling SSE-s3 in a local (non-production) MinIO Deployment, see :ref:`minio-encryption-sse-s3-quickstart`.
 
    .. tab-item:: SSE-C
       :sync: sse-c

@@ -1,5 +1,5 @@
-Deploy MinIO and KES with Server-Side Encryption using Hashicorp Vault
-----------------------------------------------------------------------
+Deploy MinIO and KES with Server-Side Encryption using GCP Secrets Manager
+--------------------------------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
@@ -25,9 +25,6 @@ Prior to starting these steps, create the following folders:
    :start-after: start-kes-generate-kes-certs-desc
    :end-before: end-kes-generate-kes-certs-desc
 
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. See the `Hashicorp Vault Configuration Docs <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
-Defer to the client documentation for instructions on trusting a third-party CA.
-
 3) Create the KES and MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -41,9 +38,9 @@ a. Create the KES Configuration File
 
       notepad |kesconfigpath|\kes-config.yaml
 
-   .. include:: /includes/common/common-minio-kes-hashicorp.rst
-      :start-after: start-kes-configuration-hashicorp-vault-desc
-      :end-before: end-kes-configuration-hashicorp-vault-desc
+   .. include:: /includes/common/common-minio-kes-gcp.rst
+      :start-after: start-kes-configuration-gcp-desc
+      :end-before: end-kes-configuration-gcp-desc
 
    - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
 
@@ -55,11 +52,9 @@ a. Create the KES Configuration File
 
          kes.exe tool identity of |miniocertpath|/minio-kes.cert
 
-   - Replace the ``REGION`` with the appropriate region for AWS Secrets Manager.
-     The value **must** match for both ``endpoint`` and ``region``.
+   - Set ``GCPPROJECTID`` to the GCP project for the Secrets Manager instance KES should use.
 
-   - Set ``AWSACCESSKEY`` and ``AWSSECRETKEY`` to the appropriate :ref:`AWS Credentials <minio-sse-aws-prereq-aws>`.
-
+   - Set ``GCPCLIENTEMAIL``, ``GCPCLIENTID``, ``GCPPRIVATEKEYID``, and ``GCPPRIVATEKEY`` to the credentials associated to the :ref:`GCP Service Account <minio-sse-gcp-prereq-gcp>` KES should use when accessing the Secrets Manager service.
 
 b. Create the MinIO Environment File
 
