@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", (event) => {
-  const tocMenuEl = document.querySelector(".content__toc__inner > ul");
+  const tocMenuEl = document.querySelector("#table-of-contents > ul.simple");
   var readModeLs = localStorage.getItem("read-mode");
   
   // --------------------------------------------------
@@ -8,6 +8,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
   function isMac() {
     return navigator.platform.toUpperCase().indexOf('MAC') >= 0;
   }
+
+
+  // --------------------------------------------------
+  // Detect parent iframe.
+  // This is required to hide the navigation links when viewed via PathFactory for analytics purposes
+  // --------------------------------------------------
+  (function () {
+    if (window.location !== window.parent.location) {
+      document.body.classList.add("inside-iframe");
+    }
+  })();
 
 
   // --------------------------------------------------
@@ -92,17 +103,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
   // --------------------------------------------------
-  // Detect parent iframe.
-  // This is required to hide the navigation links when viewed via PathFactory for analytics purposes
-  // --------------------------------------------------
-  (function () {
-    if (window.location !== window.parent.location) {
-      document.body.classList.add("inside-iframe");
-    }
-  })();
-
-
-  // --------------------------------------------------
   // Get meta key based on the OS
   // --------------------------------------------------
   (function () {
@@ -116,6 +116,34 @@ window.addEventListener("DOMContentLoaded", (event) => {
         metaKeyEl.classList.add("ctrl");
         metaKeyEl.innerHTML = "Ctrl";
       }
+    }
+  })();
+
+
+  // --------------------------------------------------
+  // TOC
+  // --------------------------------------------------
+  (function () {
+    // Move the TOC to the right side of the page
+    const tocOriginalEl = document.getElementById("table-of-contents");
+    const tocTargetEl = document.getElementById("content-toc");
+    const tocAsideEL = document.querySelector(".content__toc");
+
+    if (tocOriginalEl) {
+      tocTargetEl.parentNode.replaceChild(tocOriginalEl, tocTargetEl);
+    }
+    else {
+      tocAsideEL.style.display = "none";
+    }
+
+    
+    // Treat the TOC as a dropdown in mobile
+    const tocToggleEl = document.querySelector(".topic-title");
+    if(tocToggleEl) {
+      tocToggleEl.addEventListener("click", (event) => {
+        event.preventDefault();
+        tocMenuEl.closest(".content__toc").classList.toggle("active");
+      });
     }
   })();
 
@@ -211,6 +239,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
     function hideAside() {
       document.querySelector(".aside-backdrop").remove();
       document.documentElement.classList.remove("doc-active", "nav-active");
+
+      // Hide opened toc menu on mobile
+      if(tocMenuEl) {
+        tocMenuEl.closest(".content__toc").classList.remove("active");
+      }
     }
 
     asideToggleEls.forEach((item) => {
@@ -242,21 +275,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         hideAside();
       });
     });
-  })();
-
-  
-  // --------------------------------------------------
-  // TOC in mobile
-  // --------------------------------------------------
-  (function () {
-    const tocToggleEl = document.querySelector(".content__toc__inner > h3 > a");
-
-    if(tocToggleEl) {
-      tocToggleEl.addEventListener("click", (event) => {
-        event.preventDefault();
-        tocMenuEl.closest(".content__toc").classList.toggle("active");
-      });
-    }
   })();
 
 
@@ -344,7 +362,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     if(tableEls.length > 0) {
       tableEls.forEach((item) => {
         var tableWrapper = document.createElement("div");
-        tableWrapper.classList.add("table-responsive");
+        tableWrapper.classList.add("table-responsive", "scrollbar");
         item.insertAdjacentElement("beforebegin", tableWrapper);
         tableWrapper.appendChild(item);
       });

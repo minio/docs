@@ -209,16 +209,32 @@ table.docutils {
 
 
 .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     margin: 1rem 0 2rem;
-    border-left: 1px solid var(--table-border-color);
-    border-right: 1px solid var(--table-border-color);
+    border: 1px solid var(--table-border-color);
+
+    &.scrollbar {
+        overflow-x: auto;
+        overflow-x: overlay;
+        -webkit-overflow-scrolling: touch;
+
+    }
 
     table {
         margin: 0;
 
         tr {
+            &:first-child {
+                th {
+                    border-top-color: transparent;
+                }
+            }
+
+            &:last-child {
+                td {
+                    border-bottom-color: transparent;
+                }
+            }
+
             td, th {
                 &:first-child {
                     border-left-color: transparent;

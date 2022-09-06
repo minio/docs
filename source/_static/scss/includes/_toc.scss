@@ -1,5 +1,5 @@
-#table-of-contents {
-    display: none;
+div.topic {
+    all: revert;
 }
 
 .content__toc {
@@ -21,6 +21,7 @@
 
     @include breakpoint-max(breakpoints(lg)) {
         display: flex;
+        gap: 0.75rem;
         align-items: center;
         padding: var(--content-padding);
         background-color: var(--body-bg);
@@ -28,20 +29,24 @@
     }
 
     .icon {
-        height: 2.7rem;
-        width: 2.7rem;
-        padding: 0.75rem;
+        height: 2.5rem;
+        width: 2.5rem;
+        padding: 0.7rem;
         border: 1px solid var(--theme-light-bg);
         cursor: pointer;
+
+        &:last-child {
+            margin-left: auto;
+        }
     }
 
     &.active {
-        & > .content__toc__inner {
-            & > ul {
+        #table-of-contents {
+            & > ul { 
                 display: block;
             }
-    
-            h3 > a {
+        
+            .topic-title {
                 border-radius: $border-radius $border-radius 0 0;
     
                 &:after {
@@ -52,63 +57,47 @@
     }
 }
 
-.content__toc__inner {
-    @include breakpoint-max(breakpoints(lg)) {
-        position: relative;
-        display: flex;
-        align-items: center;
-        flex: 1;
-        margin: 0 0.75rem;
+#table-of-contents {
+    flex: 1;
+    position: relative;
 
-        & > h3 {
-            flex: 1;
-        }
-    }
-
-    h3 {
+    .topic-title {
+        color: var(--headings-color);
         margin: 0;
         line-height: 1;
 
-        & > a {
-            font-size: 1rem;
-            color: var(--headings-color);
-            font-size: 0;
+        @include breakpoint-max(breakpoints(lg)) {
+            padding: 0.85rem 1rem;
+            background-color: var(--theme-light-bg);
+            border-radius: $border-radius;
+            display: block;
+            position: relative;
+            font-size: $font-size-sm;
+            cursor: pointer;
 
-            &:before {
-                content: "Contents";
-                font-size: 1rem;
-            }
-
-            @include breakpoint-max(breakpoints(lg)) {
-                padding: 0.85rem;
-                background-color: var(--theme-light-bg);
-                border-radius: $border-radius;
-                display: block;
-                position: relative;
-
-                &:after {
-                    content: "";
-                    height: 1rem;
-                    width: 1rem;
-                    position: absolute;
-                    right: 1.25rem;
-                    top: 0.9rem;
-                    background: var(--toc-caret-icon) no-repeat center;
-                    background-size: 1rem;
-                    transform-origin: center;
-                }
+            &:after {
+                content: "";
+                height: 1rem;
+                width: 1rem;
+                position: absolute;
+                right: 1rem;
+                top: 0.8rem;
+                background: var(--toc-caret-icon) no-repeat center;
+                background-size: 0.8rem;
+                transform-origin: center;
             }
         }
     }
 
     ul {
-        margin: 0;
-        padding: 0;
         list-style: none;
+        padding: 0;
+        margin: 0;
         font-size: $font-size-sm;
+        color: var(--text-muted-color);
 
-        ul ul {
-            margin-left: 1rem;
+        ul {
+            margin-left: 0.75rem;
         }
     }
 
@@ -134,57 +123,26 @@
             left: 0;
             top: 100%;
             width: 100%;
-            background-color: var(--theme-light-bg);
+            background-color: var(--toc-dropdown-bg);
             display: none;
             border-radius: 0 0 $border-radius $border-radius;
             z-index: 1;
-            border-top: 1px solid var(--theme-light-hover-bg);
             padding: 0.65rem 1rem 1rem;
             max-height: 12rem;
             overflow-y: auto;
         }
 
-        & > li {
-            & > a {
-                font-size: 0;
+        a {
+            display: block;
+            color: var(--text-muted-color);
+            padding: 0.15rem 0;
 
-                &:before {
-                    content: "Introduction";
-                    font-size: $font-size-sm;
-                    transition: color 300ms;
-                }
+            code {
+                display: none;
             }
 
-            a {
-                display: block;
-                color: var(--text-muted-color);
-                code {
-                    display: none;
-                }
-
-                &:hover {
-                    color: var(--text-color);
-                }
-            }
-
-            & > ul {
-                & > li {
-                    a {
-                        transition: color 300ms;
-                        margin: 0.25rem 0;
-                        position: relative;
-
-                        &:before {
-                            content: "";
-                            width: 2px;
-                            height: calc(100% - 0.8rem);
-                            position: absolute;
-                            left: 0;
-                            top: 0.5rem;
-                            
-                        }
-                    }
-                }
+            &:hover {
+                color: var(--text-color);
             }
         }
     }
