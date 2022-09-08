@@ -47,11 +47,10 @@ extensions = [
     'minio',
     'cond',
     'sphinx_copybutton',
-    'sphinx_markdown_tables',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinx_togglebutton',
-    'sphinx-sitemap',
+    'sphinx_sitemap',
     'sphinxcontrib.images',
     'myst_parser',
     'sphinx_design',
@@ -267,7 +266,8 @@ html_css_files = ['css/main.min.css', 'custom.css']
 
 html_js_files = ['js/main.js']
 
-html_extra_path = [ 'extra', 'https://www.min.io/robots.txt']
+# Add https://www.min.io/robots.txt to html_extra_path list once available.
+html_extra_path = [ 'extra']
 
 html_title = 'MinIO Object Storage for ' + platform.capitalize()
 
