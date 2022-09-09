@@ -34,7 +34,7 @@ copyright = '2020-Present, MinIO, Inc. '
 author = 'MinIO Documentation Team'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -105,7 +105,7 @@ exclude_patterns = ['includes/*', '*-template.rst']
 # The sitemaps are combined in a sitemapindex.xml file at the root level.
 
 if tags.has("linux"):
-    html_baseurl = 'https://www.min.io/docs/linux/'
+    html_baseurl = 'https://www.min.io/docs/minio/linux/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
@@ -130,7 +130,7 @@ if tags.has("linux"):
         'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("macos"):
-    html_baseurl = 'https://www.min.io/docs/macos/'
+    html_baseurl = 'https://www.min.io/docs/minio/macos/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
@@ -156,7 +156,7 @@ elif tags.has("macos"):
     ]
 elif tags.has("windows"):
     # html_baseurl is used for generating the sitemap.xml for each platform. These are combined in a sitemapindex.xml.
-    html_baseurl = 'https://www.min.io/docs/windows/'
+    html_baseurl = 'https://www.min.io/docs/minio/windows/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
@@ -181,7 +181,7 @@ elif tags.has("windows"):
         'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("container"):
-    html_baseurl = 'https://www.min.io/docs/containers/'
+    html_baseurl = 'https://www.min.io/docs/minio/container/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
@@ -208,7 +208,7 @@ elif tags.has("container"):
         'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("k8s"):
-    html_baseurl = 'https://www.min.io/docs/kubernetes/'
+    html_baseurl = 'https://www.min.io/docs/minio/kubernetes/upstream/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst',
         'operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst',
@@ -284,7 +284,7 @@ sphinx_tabs_disable_css_loading = True
 # k8s is temporary until integrating the references here
 
 intersphinx_mapping = {
-    'baremetal': ('https://docs.min.io/minio/baremetal/', None),
+    'baremetal': ('https://www.min.io/docs/minio/', None),
 }
 
 rst_prolog = """

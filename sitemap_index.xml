@@ -2,18 +2,18 @@
 
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <sitemap>
-      <loc>https://www.min.io/docs/linux/sitemap.xml</loc>
+      <loc>https://www.min.io/docs/minio/linux/sitemap.xml</loc>
    </sitemap>
    <sitemap>
-      <loc>https://www.min.io/docs/windows/sitemap.xml</loc>
+      <loc>https://www.min.io/docs/minio/windows/sitemap.xml</loc>
    </sitemap>
    <sitemap>
-      <loc>https://www.min.io/docs/macos/sitemap.xml</loc>
+      <loc>https://www.min.io/docs/minio/macos/sitemap.xml</loc>
    </sitemap>
    <sitemap>
-      <loc>https://www.min.io/docs/kubernetes/sitemap.xml</loc>
+      <loc>https://www.min.io/docs/minio/kubernetes/upstream/sitemap.xml</loc>
    </sitemap>
    <sitemap>
-      <loc>https://www.min.io/docs/containers/sitemap.xml</loc>
+      <loc>https://www.min.io/docs/minio/container/sitemap.xml</loc>
    </sitemap>
 </sitemapindex>
