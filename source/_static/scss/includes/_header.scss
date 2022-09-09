@@ -131,7 +131,7 @@
 			width: 100%;
 			height: $search-height;
 			padding: 0 var(--content-padding);
-			top: 3.3rem;
+			top: 3.25rem;
 			
 			& > h2 {
 				display: none;
@@ -143,7 +143,7 @@
 			}
 
 			@include breakpoint-max(breakpoints(lg)) {
-				top: 7.2rem
+				top: 7rem
 			}
 
 			&:not(.active) {

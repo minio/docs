@@ -32,6 +32,10 @@
 				background-image: var(--search-icon);
 				padding-left: 2.25rem;
 			}
+
+			&:focus-within {
+				box-shadow: 0 0 0 0.3rem var(--search-focus-shadow);
+			}
 		}
 	}
 }
@@ -46,9 +50,9 @@
 	border: 1px solid transparent;
 	align-items: center;
 	padding: 0 0.3rem;
-	background-position: center left 1rem;
+	background-position: top 0.825rem left 1rem;
 	background-repeat: no-repeat;
-	transition: box-shadow 200ms;
+	transition: box-shadow 200ms, border-color 200ms;
 
 	@include breakpoint-min(breakpoints(xl)) {
 		max-width: 31.5rem;
@@ -84,10 +88,6 @@
 			}
 		}
 	}
-
-	&:focus-within {
-		box-shadow: 0 0 0 0.3rem var(--search-focus-shadow);
-	}
 }
 
 .search__text {
@@ -98,7 +98,7 @@
     color: var(--search-color);
     font-size: 0.85rem;
     width: 100%;
-    padding: 0 0.5rem 0.15rem 0.25rem;
+    padding: 0 0.5rem 0 0.25rem;
 
 	&::placeholder {
 		color: var(--search-placeholder-color);

@@ -43,9 +43,9 @@ $theme-properties: (
 
     // Search
     --search-bg: $white $dark-100,
-    --search-border-color: $light-400 $dark-400,
-    --search-focus-border-color: $light-500 $dark-500,
-    --search-placeholder-color: #7e7e7e $text-dark-color,
+    --search-border-color: $light-300 $dark-300,
+    --search-focus-border-color: $light-400 $dark-400,
+    --search-placeholder-color: #7e7e7e #697995,
     --search-color: $black $text-dark-color,
     --search-icon: url(../img/icons/search.svg) url(../img/icons/search-dark.svg),
     --search-focus-shadow: rgba($white, 0.15) #1b232f,
@@ -57,7 +57,7 @@ $theme-properties: (
 
     // Docs nav
     --docs-nav-active-color: $theme-red $headings-dark-color,
-    --docs-nav-group-border-color: $light-300 $dark-500,
+    --docs-nav-group-border-color: $light-300 $dark-300,
 
     // Scrollbar
     --scrollbar-bg: #e5e5e5 #2e3747,

@@ -6,6 +6,8 @@ var $ = require ('gulp-load-plugins') ();
 var connect = require('gulp-connect');
 var sass = require('gulp-sass')(require('sass'));
 
+var branchDir = 'master';
+
 var paths = {
     scss: {
         dir: 'source/_static/scss',
@@ -16,15 +18,15 @@ var paths = {
         dir: 'source/_static/css',
         main: 'source/_static/scss/main.css',
         files: 'source/_static/scss/**/*.css',
-        dist: 'build/master/html/_static/css'
+        dist: `build/${branchDir}/html/_static/css`
     },
     js: {
         dir: 'source/_static/js',
         main: 'source/_static/js/main.js',
         files: 'source/_static/js/**/*.js',
-        dist: 'build/master/html/_static/js',
+        dist: `build/${branchDir}/html/_static/js`,
     },
-    dist: 'build/master/html'
+    dist: `build/${branchDir}/html`
 }
 
 // Compile SCSS

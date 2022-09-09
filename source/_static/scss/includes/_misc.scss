@@ -48,6 +48,7 @@
   cursor: pointer;
   font-size: 0;
   flex-shrink: 0;
+  padding: 0 0.3rem;
 
   &:not(.icon--switch) {
     & > svg {
