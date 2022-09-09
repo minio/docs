@@ -26,7 +26,7 @@ and destination buckets.
 Client-side Bucket Replication
   Use The command process to synchronize objects between buckets
   within the same S3-compatible cluster *or* between two independent
-  S3-compatible clusters. Client-side replication using :mc-cmd:`mc mirror`
+  S3-compatible clusters. Client-side replication using :mc:`mc mirror`
   supports MinIO-to-S3 and similar replication configurations.
 
 .. admonition:: Bucket vs Site Replication
@@ -84,8 +84,8 @@ Resynchronization (Disaster Recovery)
 
 Resynchronization primarily supports recovery after partial or total loss of the
 data on a MinIO deployment using a healthy deployment in the replica
-configuration. Use the :mc-cmd:`mc replicate resync` command completely
-resynchronize the remote target (:mc-cmd:`mc admin bucket remote`) using the
+configuration. Use the :mc:`mc replicate resync` command completely
+resynchronize the remote target (:mc:`mc admin bucket remote`) using the
 specified source bucket. 
 
 The resynchronization process checks all objects in the source bucket against
@@ -99,7 +99,7 @@ MinIO skips synchronizing those objects whose remote copy exactly match the
 source, including object metadata. MinIO otherwise does not prioritize or modify
 the queue with regards to the existing contents of the target.
 
-:mc-cmd:`mc replicate resync` operates at the bucket level and does
+:mc:`mc replicate resync` operates at the bucket level and does
 *not* support prefix-level granularity. Initiating resynchronization on a large
 bucket may result in a significant increase in replication-related load
 and traffic. Use this command with caution and only when necessary.

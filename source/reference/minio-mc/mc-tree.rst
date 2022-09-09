@@ -10,7 +10,7 @@
 
 .. mc:: mc tree
 
-.. |command| replace:: :mc-cmd:`mc tree`
+.. |command| replace:: :mc:`mc tree`
 .. |rewind| replace:: :mc-cmd:`~mc tree --rewind`
 .. |alias| replace:: :mc-cmd:`~mc tree ALIAS`
 

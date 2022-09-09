@@ -82,7 +82,7 @@ Parameters
 .. mc-cmd:: --id
    
 
-   *Required* The unique ID of the rule. Use :mc-cmd:`mc ilm ls` to list bucket
+   *Required* The unique ID of the rule. Use :mc:`mc ilm ls` to list bucket
    rules and retrieve the ``id`` for the rule you want to modify.
 
 .. mc-cmd:: --expiry-days
@@ -173,7 +173,7 @@ Parameters
    *Optional* The remote storage tier to which MinIO 
    :ref:`transitions noncurrent objects versions
    <minio-lifecycle-management-tiering>`. Specify a remote storage tier created
-   by :mc-cmd:`mc admin tier`.
+   by :mc:`mc admin tier`.
 
    MinIO does *not* automatically migrate objects from the previously
    specified remote tier to the new remote tier. MinIO continues to
@@ -214,7 +214,7 @@ Parameters
 
    *Optional* The remote storage tier to which MinIO 
    :ref:`transition objects <minio-lifecycle-management-tiering>`. Specify a
-   remote storage tier created by :mc-cmd:`mc admin tier`. 
+   remote storage tier created by :mc:`mc admin tier`. 
 
    Required if specifying :mc-cmd:`~mc ilm edit --transition-days`.
 
@@ -235,7 +235,7 @@ Examples
 Modify an Existing Lifecycle Management Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc ilm edit` with :mc-cmd:`~mc ilm edit --id` to modify
+Use :mc:`mc ilm edit` with :mc-cmd:`~mc ilm edit --id` to modify
 an existing object expiration rule:
 
 .. code-block:: shell

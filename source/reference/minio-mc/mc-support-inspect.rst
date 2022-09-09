@@ -13,7 +13,7 @@
 Description
 -----------
 
-The :mc-cmd:`mc support inspect` command collects the data and metadata associated to objects at the specified path.
+The :mc:`mc support inspect` command collects the data and metadata associated to objects at the specified path.
 MinIO assembles this data from each backend drive storing an :ref:`erasure shard <minio-erasure-coding>` for each specified object.
 
 The command produces a zip file that includes all matching files with their respective *host+drive+path*. 
@@ -25,7 +25,7 @@ Exercise caution before sending a report to a third party or posting the report 
 
 .. important::
    
-   :mc-cmd:`mc support inspect` requires a MinIO deployment server from October 2021 or later. 
+   :mc:`mc support inspect` requires a MinIO deployment server from October 2021 or later. 
 
 .. include:: /includes/common-mc-support.rst
    :start-after: start-minio-only

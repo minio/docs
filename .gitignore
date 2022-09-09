@@ -13,3 +13,4 @@ output.log
 source/conf.py
 package-lock.json
 build.log
+*.inv

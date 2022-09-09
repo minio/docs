@@ -12,7 +12,7 @@
 
 .. mc:: mc cp
 
-.. |command| replace:: :mc-cmd:`mc cp`
+.. |command| replace:: :mc:`mc cp`
 .. |rewind| replace:: :mc-cmd:`~mc cp --rewind`
 .. |versionid| replace:: :mc-cmd:`~mc cp --version-id`
 .. |alias| replace:: :mc-cmd:`~mc cp SOURCE`
@@ -89,7 +89,7 @@ Parameters
       mc cp play/mybucket/object.txt ~/mydata/object.txt
 
    Specify multiple ``SOURCE`` paths to copy multiple objects to the 
-   specified :mc-cmd:`~mc cp TARGET`. :mc-cmd:`mc cp` treats the 
+   specified :mc-cmd:`~mc cp TARGET`. :mc:`mc cp` treats the 
    *last* specified alias or filesystem path as the ``TARGET``. For example:
 
    .. code-block:: none
@@ -292,7 +292,7 @@ Examples
 Copy Object to S3
 ~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc cp` to copy an object to an S3-compatible host:
+Use :mc:`mc cp` to copy an object to an S3-compatible host:
 
 .. tab-set::
 
@@ -355,7 +355,7 @@ S3-compatible host:
         of a configured S3-compatible host.
 
       - Replace :mc-cmd:`PATH <mc cp TARGET>` with the path to the object on 
-        the S3-compatible host. :mc-cmd:`mc cp` uses the ``SOURCE`` filenames
+        the S3-compatible host. :mc:`mc cp` uses the ``SOURCE`` filenames
         when creating the objects on the target host.
 
    .. tab-item:: S3 to S3
@@ -375,7 +375,7 @@ S3-compatible host:
         :mc:`alias <mc alias>` of a target S3-compatible host.
 
       - Replace :mc-cmd:`TGTPATH <mc cp TARGET>` with the path to the 
-        object on the target S3-compatible host. :mc-cmd:`mc cp` uses the
+        object on the target S3-compatible host. :mc:`mc cp` uses the
         ``SRCPATH`` object names when creating objects on the target
         host.
 

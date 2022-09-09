@@ -192,7 +192,7 @@ The example above uses the following arguments:
 4) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc ilm ls` command to review the configured transition
+Use the :mc:`mc ilm ls` command to review the configured transition
 rules:
 
 .. code-block:: shell

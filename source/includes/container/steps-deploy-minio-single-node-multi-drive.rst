@@ -116,7 +116,7 @@ The following table describes each line of the command and provides additional c
 
    * - ``minio server --console-address ":9090"``
      - Starts the MinIO server using the ``minio:minio`` image pulled from an earlier step.
-       The :mc:`minio server --console-address ":9090" <minio server --console-address>` option directs the server to set a static port for the MinIO Console Web Interface.
+       The :mc-cmd:`minio server --console-address ":9090" <minio server --console-address>` option directs the server to set a static port for the MinIO Console Web Interface.
        This option is *required* for containerized environments.
 
        If you modify this value, ensure you set the proper port mapping using the ``-p`` flag to Podman/Docker to ensure traffic forwarding between the local host and the container.

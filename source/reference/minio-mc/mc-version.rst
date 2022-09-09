@@ -98,7 +98,7 @@ Examples
 Enable Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc version suspend` to enable versioning on a bucket:
+Use :mc:`mc version suspend` to enable versioning on a bucket:
 
 .. code-block:: shell
    :class: copyable
@@ -114,7 +114,7 @@ Use :mc-cmd:`mc version suspend` to enable versioning on a bucket:
 Disable Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc version suspend` to suspend versioning on a bucket:
+Use :mc:`mc version suspend` to suspend versioning on a bucket:
 
 .. code-block:: shell
    :class: copyable
@@ -130,7 +130,7 @@ Use :mc-cmd:`mc version suspend` to suspend versioning on a bucket:
 Get Bucket Versioning Status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc version info` to enable versioning on a bucket:
+Use :mc:`mc version info` to enable versioning on a bucket:
 
 .. code-block:: shell
    :class: copyable

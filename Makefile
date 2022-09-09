@@ -31,66 +31,89 @@ stage-%:
 	python -m http.server --directory $(BUILDDIR)/$(GITDIR)/$*/html/
 	@echo "Visit http://localhost:8000 to view the staged output"
 
+# Platform build commands
+# All platforms follow the same general pattern:
+#   - Rebuild source/conf.py
+#   - Synchronize relevant versions
+#   - If built with make SYNC_SDK=TRUE <platform>, synchronize SDK content from github
+#   - Compile SCSS
+#   - Build docs via Sphinx
+
 linux:
-ifeq ($(BUILD_DEPENDENCIES),FALSE)
-	@echo "Skipping Dependencies"
-else
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
+ifeq ($(SYNC_SDK),TRUE)
+	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
+	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
 	@make sync-sdks
+else
+	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
 endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 windows:
-ifeq ($(BUILD_DEPENDENCIES),FALSE)
-	@echo "Skipping Dependencies"
-else
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
+ifeq ($(SYNC_SDK),TRUE)
+	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
+	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
 	@make sync-sdks
+else
+	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
 endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 macos:
-ifeq ($(BUILD_DEPENDENCIES),FALSE)
-	@echo "Skipping Dependencies"
-else
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
+ifeq ($(SYNC_SDK),TRUE)
+	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
+	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
 	@make sync-sdks
+else
+	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
 endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 k8s:
-ifeq ($(BUILD_DEPENDENCIES),FALSE)
-	@echo "Skipping Dependencies"
-else
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
 	@make sync-minio-version
 	@make sync-kes-version
+ifeq ($(SYNC_SDK),TRUE)
+	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
+	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
 	@make sync-sdks
+else
+	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
 endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
 container:
-ifeq ($(BUILD_DEPENDENCIES),FALSE)
-	@echo "Skipping Dependencies"
-else
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
+ifeq ($(SYNC_SDK),TRUE)
+	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
+	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
 	@make sync-sdks
+else
+	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
 endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
+
+# Synchronization targets
+# Note that the @case statements are required to account for differences between Linux and MacOS binaries
+# Specifically, MacOS does not use GNU utils, so syntax is slightly different for things like sed
+# Annoying but necessary
 
 sync-operator-version:
 	@echo "Retrieving latest Operator version"
@@ -294,6 +317,8 @@ sync-rust-docs:
 		;; \
 	esac
 
+# This results in a lot of API operations to GitHub. You might hit request limits if you aren't careful.
+
 sync-sdks:
 # C++ and Rust repos do not have any releases yet.
 #	@make sync-cpp-docs
@@ -304,6 +329,8 @@ sync-sdks:
 	@make sync-javascript-docs
 	@make sync-python-docs
 #	@make sync-rust-docs
+
+# Can probably safely remove this at some point
 
 sync-deps:
 # C++ and Rust repos do not have any releases yet.

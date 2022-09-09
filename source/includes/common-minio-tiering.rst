@@ -1,6 +1,6 @@
 .. start-create-transition-rule-desc
 
-Use the :mc-cmd:`mc ilm add` command to create a new transition rule
+Use the :mc:`mc ilm add` command to create a new transition rule
 for the bucket. The following example configures transition after the
 specified number of calendar days:
 

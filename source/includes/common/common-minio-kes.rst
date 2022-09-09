@@ -109,7 +109,7 @@ If you run |KES| without tying it to the current shell session (e.g. with ``nohu
 .. start-kes-generate-key-desc
 
 MinIO requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
-Use ``kes key create`` *or* :mc:`mc admin kms key create` to add a new |EK| for use with |SSE|.
+Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
 
 The following command uses the ``kes key create`` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the MinIO backend.
 

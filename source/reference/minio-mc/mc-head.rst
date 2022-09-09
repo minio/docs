@@ -13,7 +13,7 @@
 .. mc::  mc head
 
 
-.. |command| replace:: :mc-cmd:`mc head`
+.. |command| replace:: :mc:`mc head`
 .. |rewind| replace:: :mc-cmd:`~mc head --rewind`
 .. |versionid| replace:: :mc-cmd:`~mc head --version-id`
 .. |alias| replace:: :mc-cmd:`~mc head ALIAS`
@@ -143,7 +143,7 @@ Examples
 View Partial Contents of an Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc head` to return the first 10 lines of an object:
+Use :mc:`mc head` to return the first 10 lines of an object:
 
 .. code-block:: shell
    :class: copyable

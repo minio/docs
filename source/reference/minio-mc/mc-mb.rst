@@ -79,7 +79,7 @@ Parameters
 .. mc-cmd:: --ignore-existing, p
    
 
-   Directs :mc-cmd:`mc mb` to do nothing if the bucket or directory already
+   Directs :mc:`mc mb` to do nothing if the bucket or directory already
    exists.
 
 .. mc-cmd:: --region

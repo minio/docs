@@ -17,7 +17,7 @@ The procedure on this page creates a new bucket replication rule for two-way "ac
    :alt: Active-Active Replication synchronizes data between two remote clusters.
    :align: center
 
-- To configure replication between arbitrary S3-compatible services, use :mc-cmd:`mc mirror`.
+- To configure replication between arbitrary S3-compatible services, use :mc:`mc mirror`.
 
 - To configure one-way "active-passive" replication between MinIO clusters, see :ref:`minio-bucket-replication-serverside-oneway`.
   
@@ -185,7 +185,7 @@ Change the alias for the different origin.
 Change the ARN to the ARN generated on the second deployment for the desired bucket.
 
 You should have two replication rules configured at the conclusion of this step - one created on each deployment that points to the bucket on the other deployment.
-Use the :mc-cmd:`mc replicate ls` command to verify the created replication rules.
+Use the :mc:`mc replicate ls` command to verify the created replication rules.
 
 .. _minio-bucket-replication-two-way-minio-cli-verify-replication-config:
 
@@ -202,9 +202,9 @@ Once both objects exist on both deployments, you have successfully set up two-wa
 
 .. seealso::
 
-   - Use the :mc-cmd:`mc replicate edit` command to modify an existing
+   - Use the :mc:`mc replicate edit` command to modify an existing
      replication rule.
 
-   - Use the :mc-cmd:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
+   - Use the :mc:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
 
-   - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication rule.
+   - Use the :mc:`mc replicate rm` command to remove an existing replication rule.

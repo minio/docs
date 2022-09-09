@@ -63,7 +63,7 @@ the tab that corresponds to the host machine operating system or environment:
    security best practices for your operating system for inputting sensitive
    information on the command line.
 
-Use the :mc-cmd:`mc alias set` command to add an Amazon S3-compatible service
+Use the :mc:`mc alias set` command to add an Amazon S3-compatible service
 to the :mc-cmd:`mc` :ref:`configuration <mc-configuration>`.
 
 .. code-block:: shell
@@ -297,7 +297,7 @@ The following table lists :mc-cmd:`mc` commands:
    * - | :mc:`mc share download`
        | :mc:`mc share upload`
        | :mc:`mc share list`
-     - The :mc-cmd:`mc share download` and :mc-cmd:`mc share upload`
+     - The :mc:`mc share download` and :mc:`mc share upload`
        commands generate presigned URLs for downloading and uploading
        objects to a MinIO bucket.
      
@@ -348,7 +348,7 @@ The following table lists :mc-cmd:`mc` commands:
      
 
 :mc-cmd:`mc` also includes an administration extension for managing MinIO
-deployments. See :mc-cmd:`mc admin` for more complete documentation.
+deployments. See :mc:`mc admin` for more complete documentation.
 
 .. _mc-configuration:
 

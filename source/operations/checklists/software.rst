@@ -40,7 +40,19 @@ MinIO Pre-requisites
 MinIO Install
 -------------
 
-See the :ref:`Multi Node Multi Drive deployment guide <deploy-minio-distributed>` and the :ref:`Minio Tenant deployment guide <minio-k8s-deploy-minio-tenant>`.
+Install the MinIO server binary across all nodes, ensuring that each node uses the same version of that binary.
+
+.. cond:: linux
+
+   See the :ref:`Multi Node Multi Drive deployment guide <minio-mnmd>` for more information.
+
+.. cond:: container or macos or windows
+
+   See the :ref:`Single Node Single Drive deployment guide <minio-snsd>` for more information.
+
+.. cond:: k8s
+
+   See the :ref:`Deploy MinIO Operator <minio-operator-installation>` and :ref:`Minio Tenant deployment guide <minio-k8s-deploy-minio-tenant>` for more information.
 
 
 Post Install Tasks

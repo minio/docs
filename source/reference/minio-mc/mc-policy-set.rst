@@ -112,7 +112,7 @@ Examples
 Set Anonymous Policy for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc policy set` to set the anonymous policy for a 
+Use :mc:`mc policy set` to set the anonymous policy for a 
 bucket:
 
 .. code-block:: shell

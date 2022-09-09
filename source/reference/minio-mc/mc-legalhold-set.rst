@@ -13,7 +13,7 @@
 .. mc:: mc legalhold
 .. mc:: mc legalhold set
 
-.. |command| replace:: :mc-cmd:`mc legalhold set`
+.. |command| replace:: :mc:`mc legalhold set`
 .. |rewind| replace:: :mc-cmd:`~mc legalhold set --rewind`
 .. |versionid| replace:: :mc-cmd:`~mc legalhold set --version-id`
 .. |alias| replace:: :mc-cmd:`~mc legalhold set ALIAS`
@@ -105,7 +105,7 @@ Global Flags
 Examples
 --------
 
-Use :mc-cmd:`mc legalhold set` to enable legal hold on objects:
+Use :mc:`mc legalhold set` to enable legal hold on objects:
 
 .. code-block:: shell
    :class: copyable

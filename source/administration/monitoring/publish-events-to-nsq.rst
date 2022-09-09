@@ -161,7 +161,7 @@ You must specify the ARN resource when configuring bucket notifications with the
 3) Configure Bucket Notifications using the NSQ Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc event add` command to add a new bucket notification event with the configured NSQ service as a target:
+Use the :mc:`mc event add` command to add a new bucket notification event with the configured NSQ service as a target:
 
 .. code-block:: shell
    :class: copyable
@@ -174,7 +174,7 @@ Use the :mc-cmd:`mc event add` command to add a new bucket notification event wi
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which MinIO triggers notifications.
 
-Use :mc-cmd:`mc event list` to view all configured bucket events for a given notification target:
+Use :mc:`mc event list` to view all configured bucket events for a given notification target:
 
 .. code-block:: shell
    :class: copyable
@@ -187,7 +187,7 @@ Use :mc-cmd:`mc event list` to view all configured bucket events for a given not
 Perform an action on the bucket for which you configured the new event and check the NSQ service for the notification data. 
 The action required depends on which :mc-cmd:`events <mc event add --event>` were specified when configuring the bucket notification.
 
-For example, if the bucket notification configuration includes the ``s3:ObjectCreated:Put`` event, you can use the :mc-cmd:`mc cp` command to create a new object in the bucket and trigger a notification.
+For example, if the bucket notification configuration includes the ``s3:ObjectCreated:Put`` event, you can use the :mc:`mc cp` command to create a new object in the bucket and trigger a notification.
 
 .. code-block:: shell
    :class: copyable
@@ -280,7 +280,7 @@ The :mc:`minio server` process prints a line on startup for each configured NSQ 
 Perform an action on a bucket which has an event configuration using the updated NSQ service endpoint and check the NSQ service for the notification data. 
 The action required depends on which :mc-cmd:`events <mc event add --event>` were specified when configuring the bucket notification.
 
-For example, if the bucket notification configuration includes the ``s3:ObjectCreated:Put`` event, you can use the :mc-cmd:`mc cp` command to create a new object in the bucket and trigger a notification.
+For example, if the bucket notification configuration includes the ``s3:ObjectCreated:Put`` event, you can use the :mc:`mc cp` command to create a new object in the bucket and trigger a notification.
 
 .. code-block:: shell
    :class: copyable

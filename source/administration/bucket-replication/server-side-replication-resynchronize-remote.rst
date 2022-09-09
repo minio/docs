@@ -49,7 +49,7 @@ Resynchronization Requires Existing Replication Configuration
 Resynchronization requires the healthy source deployment have an existing replication configuration for the unhealthy target bucket. Additionally, resynchronization only applies to those replication rules created with the :ref:`existing object replication <minio-replication-behavior-existing-objects>` option. 
 
 - Use :mc-cmd:`mc admin bucket remote ls` to review the configured remote targets on the healthy source bucket.
-- Use :mc-cmd:`mc replicate ls` to review the configured replication rules on the healthy source bucket.
+- Use :mc:`mc replicate ls` to review the configured replication rules on the healthy source bucket.
 
 Replication Requires Matching Object Encryption Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,7 +91,7 @@ MinIO recommends configuring load balancers or proxies to direct traffic only to
 
 - :mc-cmd:`mc replicate resync status` on the source to track the resynchronization progress.
 
-- :mc-cmd:`mc replicate status` on the source and remote to track normal replication data.
+- :mc:`mc replicate status` on the source and remote to track normal replication data.
 
 - Run ``mc ls -r --versions ALIAS/BUCKET | wc -l`` against both source and remote to validate the total number of objects and object versions on each.
 
@@ -177,6 +177,6 @@ process completes.
 
 - If the ``TARGET`` bucket damage extends to replication rules, you must recreate those rules to match the previous replication configuration. See :ref:`minio-bucket-replication-serverside-twoway` for additional guidance.
 
-- Perform basic validation that all buckets in the replication configuration show similar results for commands such as :mc-cmd:`mc ls` and :mc-cmd:`mc stat`. 
+- Perform basic validation that all buckets in the replication configuration show similar results for commands such as :mc:`mc ls` and :mc:`mc stat`. 
 
 - After restoring any replication rules and verifying replication between sites, you can configure the reverse proxy, load balancer, or other network control plane managing connections to resume sending traffic to the resynchronized deployment.

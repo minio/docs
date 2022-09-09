@@ -152,7 +152,7 @@ Configure Site Replication
          To add additional sites beyond two, select the ``+`` button to the side of one of the Site entries.
          To remove a site previously added, select the ``-`` button to the side of the site.
 
-         Site replication adds a :mc-cmd:`~mc admin user svcacct` under the ``root`` user to perform replication activities.
+         Site replication adds a :mc:`~mc admin user svcacct` under the ``root`` user to perform replication activities.
 
       #. Select **Save**
    
@@ -178,7 +178,7 @@ Configure Site Replication
       
          For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
          
-         Use :mc-cmd:`mc alias set`
+         Use :mc:`mc alias set`
       
          .. code-block:: shell
       
@@ -300,11 +300,11 @@ The new site must meet the following requirements:
 
       #. Configure an alias for each site
 
-         To check the existing aliases, use :mc-cmd:`mc alias list`.
+         To check the existing aliases, use :mc:`mc alias list`.
       
          For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
          
-         Use :mc-cmd:`mc alias set`
+         Use :mc:`mc alias set`
       
          .. code-block:: shell
       

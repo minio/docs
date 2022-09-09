@@ -15,7 +15,7 @@
 
 .. replacements for mc retention set
 
-.. |command| replace:: :mc-cmd:`mc retention set`
+.. |command| replace:: :mc:`mc retention set`
 .. |rewind| replace:: :mc-cmd:`~mc retention set --rewind`
 .. |versionid| replace:: :mc-cmd:`~mc retention set --version-id`
 .. |alias| replace:: :mc-cmd:`~mc retention set ALIAS`
@@ -126,7 +126,7 @@ Parameters
      :mc-cmd:`~mc retention set --recursive` to apply the object lock
      settings to the bucket contents.
 
-   - :mc-cmd:`mc retention set` by default applies to only the latest object
+   - :mc:`mc retention set` by default applies to only the latest object
      version. Use :mc-cmd:`~mc retention set --version-id` or
      :mc-cmd:`~mc retention set --versions` to apply the object lock
      settings to a specific version or to all versions of the object
@@ -146,10 +146,10 @@ Parameters
    :mc-cmd:`~mc retention set ALIAS` using the
    :mc-cmd:`~mc retention set MODE` and :mc-cmd:`~mc retention set VALIDITY`. 
    Any objects created in the bucket inherit the default object lock settings
-   unless explicitly overriden using :mc-cmd:`mc retention set`.
+   unless explicitly overriden using :mc:`mc retention set`.
    
    If specifying :mc-cmd:`~mc retention set --default`, 
-   :mc-cmd:`mc retention set` ignores all other flags.
+   :mc:`mc retention set` ignores all other flags.
 
 .. mc-cmd:: --recursive
    :optional:
@@ -207,7 +207,7 @@ Examples
 Set Default Bucket Retention Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc retention set` with the
+Use :mc:`mc retention set` with the
 :mc-cmd:`~mc retention set --recursive` and
 :mc-cmd:`~mc retention set --default` to set the default bucket
 retention settings.
@@ -241,7 +241,7 @@ Set Object Lock Configuration for Versioned Object
 
    .. tab-item:: Specific Version
 
-      Use :mc-cmd:`mc retention set` with
+      Use :mc:`mc retention set` with
       :mc-cmd:`~mc retention set --version-id` to apply the retention
       settings to a specific object version:
 
@@ -269,7 +269,7 @@ Set Object Lock Configuration for Versioned Object
 
    .. tab-item:: All Versions
 
-      Use :mc-cmd:`mc retention set` with
+      Use :mc:`mc retention set` with
       :mc-cmd:`~mc retention set --versions` to apply the retention
       settings to a specific object version:
 
@@ -343,7 +343,7 @@ legal hold remains locked *even if* the retention period expires. Setting,
 modifying, or clearing retention settings for an object under legal hold has no
 effect until the legal hold either expires or is explicitly disabled.
 
-For more information on object legal holds, see :mc-cmd:`mc legalhold`.
+For more information on object legal holds, see :mc:`mc legalhold`.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

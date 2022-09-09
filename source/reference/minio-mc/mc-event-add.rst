@@ -183,7 +183,7 @@ Behavior
 Supported Bucket Events
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The following table lists the supported :mc-cmd:`mc event add` values and their
+The following table lists the supported :mc:`mc event add` values and their
 corresponding :ref:`S3 events <minio-bucket-notifications-event-types>`:
 
 .. list-table::

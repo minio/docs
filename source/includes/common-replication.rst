@@ -19,7 +19,7 @@ MinIO does *not* support replicating client-side encrypted objects (SSE-C).
 MinIO server-side replication only works between MinIO deployments. 
 Both the source and destination deployments *must* run MinIO. 
 
-To configure replication between arbitrary S3-compatible services, use :mc-cmd:`mc mirror`.
+To configure replication between arbitrary S3-compatible services, use :mc:`mc mirror`.
 
 .. end-replication-minio-only
 
@@ -115,7 +115,7 @@ Each MinIO deployment ("peer site") synchronizes the following changes across th
 
   - Bucket and Object Configurations
   - :ref:`Policies <minio-policy>`
-  - :mc-cmd:`mc tag set`
+  - :mc:`mc tag set`
   - :ref:`Locks <minio-object-locking>`, including retention and legal hold configurations
   - :ref:`Encryption settings <minio-encryption-overview>`
 

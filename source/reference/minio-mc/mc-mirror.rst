@@ -88,7 +88,7 @@ Parameters
 
       mc mirror [FLAGS] ~/data/ myminio/mybucket
 
-   If specifying a directory, :mc-cmd:`mc mirror` synchronizes all files in the directory.
+   If specifying a directory, :mc:`mc mirror` synchronizes all files in the directory.
 
 .. mc-cmd:: TARGET
 

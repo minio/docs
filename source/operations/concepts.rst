@@ -30,13 +30,20 @@ MinIO can deploy to three types of topologies:
 #. :ref:`Single Node Single Drive <minio-snsd>`, one MinIO server with a single drive or folder for data
 
    For example, testing on a local PC using a folder on the computer's hard drive. 
+
 #. :ref:`Single Node Multi Drive <minio-snmd>`, one MinIO server with multiple mounted drives or folders for data
 
    For example, a single container with two or more mounted volumes.
+
 #. :ref:`Multi Node Multi Drive <minio-mnmd>`, multiple MinIO servers with multiple mounted drives or volumes for data
 
-   For example, a production deployment using Kubernetes to manage and deploy pods with multiple persistent volume claims. 
+   .. cond:: linux
 
+      For example, a production deployment using Ansible, Terraform, or manual processes  
+
+   .. cond:: k8s
+
+      For example, a production deployment using Kubernetes to manage and deploy pods and their associated persistent volume claims.
 
 How does a distributed MinIO deployment work?
 ---------------------------------------------
@@ -93,23 +100,29 @@ MinIO strongly recommends production clusters consist of a *minimum* of 4 :mc:`m
 Can I change the size of an existing MinIO deployment?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can move objects from an existing server pool on to other server pools on the deployment to reduce the size of a deployment by decommissioning a server pool.
-Likewise, you can add on a new server pool to an existing deployment to expand the total size of a deployment with a horizontal expansion.
+MinIO :ref:`distributed deployments <minio-mnmd>` support expansion and decommissioning as functions to increase or decrease the available storage.
 
-When the time comes to retire or replace a server pool, :ref:`decommissioning <minio-decommissioning>` is the process of draining the objects of a pool to other active pools on the deployment.
-MinIO rewrites objects from the decommissioned pool and does not allow additional writes to the pool while it is in decommissioning.
-   
+Expansion consists of adding one or more :ref:`server pools <minio-intro-server-pool>` to an existing deployment.
+Each server pool consists of dedicated nodes and storage that contribute to the overall capacity of the deployment.
+
+.. cond:: linux
+
+   See :ref:`Expand a MinIO deployment <expand-minio-distributed>` for more information
+
+.. cond:: k8s
+
+   See :ref:`Expand a MinIO Tenant <minio-k8s-expand-minio-tenant>` for more information.
+
+For deployments which have multiple server pools, you can :ref:`decommission <minio-decommissioning>` the older pools and migrate that data to the newer pools in the deployment.
 Once started, decommissioning cannot be stopped.
-
-In a distributed MinIO deployment, you can upgrade the total available size of a :ref:`deployment <expand-minio-distributed>` or :ref:`cluster <minio-k8s-expand-minio-tenant>` by adding one or more additional server pools.
-The addition of a server pool is an expansion.
+MinIO intends decommissioning for use with removing older pools with aged hardware, and not as an operation performed regularly within any deployment.
 
 How do I manage one or more MinIO instances or clusters?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are several options to manage your MinIO deployments and clusters:
 
-- Use the command line with :mc-cmd:`mc` and :mc-cmd:`mc admin`
+- Use the command line with :mc:`mc` and :mc:`mc admin`
 - The :ref:`MinIO Console <minio-console>` graphical user interface for individual instances
 - In Kubernetes, with the :ref:`MinIO Operator Console <minio-operator-console>`
 

@@ -10,7 +10,7 @@
 
 .. mc:: mc rm
 
-.. |command| replace:: :mc-cmd:`mc rm`
+.. |command| replace:: :mc:`mc rm`
 .. |rewind| replace:: :mc-cmd:`~mc rm --rewind`
 .. |versions| replace:: :mc-cmd:`~mc rm --versions`
 .. |versionid| replace:: :mc-cmd:`~mc rm --version-id`
@@ -131,7 +131,7 @@ Parameters
    specifies the root (all buckets) on the MinIO deployment.
 
    When combined with :mc-cmd:`~mc rm --versions`, this flag
-   directs :mc-cmd:`mc rm` to permanently remove all objects *and* versions from
+   directs :mc:`mc rm` to permanently remove all objects *and* versions from
    the ``ALIAS`` target.
 
    Consider first running the command with the :mc-cmd:`~mc rm --fake` to

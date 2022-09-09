@@ -74,7 +74,7 @@ Examples
 Import Existing Replication Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate import` to import bucket replication rules:
+Use :mc:`mc replicate import` to import bucket replication rules:
 
 .. code-block:: shell
    :class: copyable
@@ -93,7 +93,7 @@ Behavior
 Importing Configuration Overrides Existing Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc replicate import` replaces the current bucket replication
+:mc:`mc replicate import` replaces the current bucket replication
 rules with those defined in the imported JSON configuration.
 
 S3 Compatibility

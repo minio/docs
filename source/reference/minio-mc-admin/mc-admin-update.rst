@@ -46,7 +46,7 @@ procedures.
 Examples
 --------
 
-Use :mc:`mc admin update` to update each :mc:`minio` server process in the
+Use :mc-cmd:`mc admin update` to update each :mc:`minio` server process in the
 MinIO deployment:
 
 .. code-block:: shell
@@ -77,7 +77,7 @@ Syntax
    deployment, :mc-cmd:`mc admin update` updates *all* MinIO servers
    in the deployment at the same time. 
 
-   Use :mc-cmd:`mc alias list` to review the configured aliases and their
+   Use :mc:`mc alias list` to review the configured aliases and their
    corresponding MinIO deployment endpoints.
 
 .. mc-cmd:: MIRROR_URL

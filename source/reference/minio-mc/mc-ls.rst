@@ -12,7 +12,7 @@
 
 .. Replacement substitutions
 
-.. |command| replace:: :mc-cmd:`mc ls`
+.. |command| replace:: :mc:`mc ls`
 .. |rewind| replace:: :mc-cmd:`~mc ls --rewind`
 .. |versions| replace:: :mc-cmd:`~mc ls --versions`
 .. |alias| replace:: :mc-cmd:`~mc ls ALIAS`

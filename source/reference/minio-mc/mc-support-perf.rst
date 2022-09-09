@@ -13,13 +13,13 @@
 Description
 -----------
 
-Use the :mc-cmd:`mc support perf` command to review the performance of the S3 API (read/write), network IO, and storage (drive read/write).
+Use the :mc:`mc support perf` command to review the performance of the S3 API (read/write), network IO, and storage (drive read/write).
 
 The resulting tests can provide general guidance of deployment performance under S3 ``GET`` and ``PUT`` requests and identify any potential bottlenecks.
 
 For more complete performance testing, consider using a combination of load-testing using your staging application environments and the MinIO `WARP <https://github.com/minio/warp>`_ S3 benchmarking tool.
    
-:mc-cmd:`mc support perf` has three subcommands
+:mc:`mc support perf` has three subcommands
 
 #. :mc-cmd:`~mc support perf drive`
 

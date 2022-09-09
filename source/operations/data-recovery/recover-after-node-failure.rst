@@ -70,13 +70,13 @@ in the deployment.
 ------------------------------------
 
 Start the MinIO server process on the node and monitor the process output
-using :mc-cmd:`mc admin console` or by monitoring the MinIO service logs
+using :mc:`mc admin console` or by monitoring the MinIO service logs
 using ``journalctl -u minio`` for ``systemd`` managed installations.
 
 The server output should indicate that it has detected the other nodes
 in the deployment and begun healing operations.
 
-Use :mc-cmd:`mc admin heal` to monitor overall healing status on the
+Use :mc:`mc admin heal` to monitor overall healing status on the
 deployment. MinIO aggressively heals the node to ensure rapid recovery
 from the degraded state.
 

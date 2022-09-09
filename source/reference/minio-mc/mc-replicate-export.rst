@@ -74,7 +74,7 @@ Examples
 Export Existing Replication Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate export` to export bucket replication rules:
+Use :mc:`mc replicate export` to export bucket replication rules:
 
 .. code-block:: shell
    :class: copyable

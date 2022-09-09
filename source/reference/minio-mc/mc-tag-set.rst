@@ -13,7 +13,7 @@
 .. mc:: mc tag
 .. mc:: mc tag set
 
-.. |command| replace:: :mc-cmd:`mc tag set`
+.. |command| replace:: :mc:`mc tag set`
 .. |rewind| replace:: :mc-cmd:`~mc tag set --rewind`
 .. |versions| replace:: :mc-cmd:`~mc tag set --versions`
 .. |versionid| replace:: :mc-cmd:`~mc tag set --version-id`
@@ -128,7 +128,7 @@ Examples
 Apply Tags to a Bucket or Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc tag set` to apply tags to a bucket or object:
+Use :mc:`mc tag set` to apply tags to a bucket or object:
 
 .. code-block:: shell
    :class: copyable

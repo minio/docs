@@ -13,7 +13,7 @@
 Description
 -----------
 
-The :mc-cmd:`mc support profile` command runs a system profile for your deployment.
+The :mc:`mc support profile` command runs a system profile for your deployment.
 The results of the profile can provide insight into the MinIO server process running on a given node.
 
 The resulting report is intended for use by MinIO Engineering.
@@ -64,7 +64,7 @@ The profile runs for 10 minutes (600 seconds).
 Syntax
 ------
       
-The :mc-cmd:`mc support profile` command has the following syntax:
+The :mc:`mc support profile` command has the following syntax:
 
 .. code-block:: shell
 

@@ -121,7 +121,7 @@ F) Select :guilabel:`Save` to finish adding the replication rule
 
 .. start-create-bucket-replication-rule-cli-desc
 
-Use the :mc-cmd:`mc replicate add` command to add a new replication rule to each MinIO deployment. 
+Use the :mc:`mc replicate add` command to add a new replication rule to each MinIO deployment. 
 
 .. code-block:: shell
    :class: copyable
@@ -147,7 +147,7 @@ Use the :mc-cmd:`mc replicate add` command to add a new replication rule to each
   See :mc-cmd:`mc replicate add --replicate` for more complete documentation. 
   Omit any field to disable replication of that component.
 
-Specify any other supported optional arguments for :mc-cmd:`mc replicate add`.
+Specify any other supported optional arguments for :mc:`mc replicate add`.
 
 .. end-create-bucket-replication-rule-cli-desc
 
@@ -175,14 +175,14 @@ F) Go to the other deployment's console and select the destination bucket define
 
 .. start-validate-bucket-replication-cli-desc
 
-Use :mc-cmd:`mc cp` to copy a new object to the replicated bucket on one of the deployments. 
+Use :mc:`mc cp` to copy a new object to the replicated bucket on one of the deployments. 
 
 .. code-block:: shell
    :class: copyable
 
    mc cp ~/foo.txt ALIAS/BUCKET
 
-Use :mc-cmd:`mc ls` to verify the object exists on the destination bucket:
+Use :mc:`mc ls` to verify the object exists on the destination bucket:
 
 .. code-block:: shell
    :class: copyable

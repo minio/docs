@@ -89,7 +89,7 @@ The root KMS provides stateful and secured storage of External Keys (EK) while |
    #. Create a new |EK| on Vault for use with |SSE|.
    #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
 
-   For productoin baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and Hashicorp Vault.
+   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and Hashicorp Vault.
 
 .. important::
 
@@ -105,10 +105,9 @@ Prerequisites
    MinIO Kubernetes Operator and Plugin
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   The procedures on this page *requires* a valid installation of the MinIO
-   Kubernetes Operator and assumes the local host has a matching installation of
-   the MinIO Kubernetes Operator. This procedure assumes the latest stable Operator
-   and Plugin version |operator-version-stable|.
+   .. include:: /includes/k8s/common-operator.rst
+      :start-after: start-requires-operator-plugin
+      :end-before: end-requires-operator-plugin
 
    See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 

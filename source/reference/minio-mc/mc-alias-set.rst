@@ -15,7 +15,7 @@
 .. mc:: mc alias
 .. mc:: mc alias set
 
-.. |command| replace:: :mc-cmd:`mc alias set`
+.. |command| replace:: :mc:`mc alias set`
 
 Syntax
 ------
@@ -46,7 +46,7 @@ The :mc:`mc alias set` command adds or updates an alias to the local
 
    .. tab-item:: SYNTAX
 
-      The :mc-cmd:`mc alias set` command has the following syntax:
+      The :mc:`mc alias set` command has the following syntax:
 
       .. code-block:: shell
          :class: copyable
@@ -103,7 +103,7 @@ Parameters
 
       AWS Signature V2 is considered
       `deprecated <https://aws.amazon.com/blogs/aws/amazon-s3-update-sigv2-deprecation-period-extended-modified/>`__
-      by AWS. :mc-cmd:`mc alias set` includes this option only for S3 buckets
+      by AWS. :mc:`mc alias set` includes this option only for S3 buckets
       or services still reliant on the Signature V2.
       
       Use ``S3v4`` unless explicitly required by the S3-compatible service.
@@ -135,7 +135,7 @@ Examples
 Add or Update an Alias for a MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc alias set` to add an S3-compatible service for use with
+Use :mc:`mc alias set` to add an S3-compatible service for use with
 :program:`mc`:
 
 .. tab-set::
@@ -153,7 +153,7 @@ Use :mc-cmd:`mc alias set` to add an S3-compatible service for use with
          mc alias set myminio https://minio.example.net miniouser miniopassword
 
       If the ``myminio`` alias already exists, the 
-      :mc-cmd:`mc alias set` command overwrites that alias with the specified
+      :mc:`mc alias set` command overwrites that alias with the specified
       arguments.
 
    .. tab-item:: Syntax
@@ -186,7 +186,7 @@ S3 Compatibility
 Required Credentials and Access Control
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc alias set` requires specifying an access key and corresponding
+:mc:`mc alias set` requires specifying an access key and corresponding
 secret key for the S3-compatible host. :program:`mc` functionality is limited
 based on the policies associated to the specified credentials. For example, if
 the specified credentials do not have read/write access to a specific bucket,

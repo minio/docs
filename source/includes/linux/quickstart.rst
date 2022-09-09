@@ -103,7 +103,7 @@ Procedure
       chmod +x mc
       sudo mv mc /usr/local/bin/mc
 
-   Use :mc-cmd:`mc alias set` to create a new alias associated to your local deployment.
+   Use :mc:`mc alias set` to create a new alias associated to your local deployment.
    You can run :mc-cmd:`mc` commands against this alias:
 
    .. code-block:: shell
@@ -112,7 +112,7 @@ Procedure
       mc alias set local http://127.0.0.1:9000 minioadmin minioadmin
       mc admin info local
 
-   The :mc-cmd:`mc alias set` takes four arguments:
+   The :mc:`mc alias set` takes four arguments:
 
    - The name of the alias
    - The hostname or IP address and port of the MinIO server

@@ -4,7 +4,8 @@ This procedure assumes an existing `Hashicorp Vault <https://www.vaultproject.io
 
 - For Vault deployments within the same Kubernetes cluster as the MinIO Tenant, you can use Kubernetes service names to allow the MinIO Tenant to establish connectivity to the Vault service.
 
-- For Vault deployments external to the Kubernetes cluster, you must configure Ingress or a similar network control plane component to allow the MinIO Tenant to establish connectivity to Vault.
+- For Vault deployments external to the Kubernetes cluster, you must ensure the cluster supports routing communications between Kubernetes services and pods and the external network.
+  This may require configuration or deployment of additional Kubernetes network components and/or enabling access to the public internet.
 
 Defer to the `Vault Documentation <https://learn.hashicorp.com/vault>`__ for guidance on deployment and configuration.
 
@@ -80,7 +81,7 @@ You can use either the MinIO Tenant Console or the MinIO :mc:`mc` CLI to enable 
 .. start-kes-generate-key-desc
 
 MinIO requires that the |EK| for a given bucket or object exist on the root KMS *before* performing |SSE| operations using that key.
-You can use the :mc:`mc admin kms key create` command against the MinIO Tenant.
+You can use the :mc-cmd:`mc admin kms key create` command against the MinIO Tenant.
 
 You must ensure your local host can access the MinIO Tenant pods and services before using :mc:`mc` to manage the Tenant.
 You can manually :ref:`port forward <create-tenant-operator-forward-ports>` the ``minio`` service for temporary access via the local host.

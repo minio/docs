@@ -26,7 +26,7 @@ specified MinIO bucket to a remote :ref:`replication
 
 This command *requires* first configuring the remote bucket target using the
 :mc-cmd:`mc admin bucket remote add` command. You must specify the resulting
-remote ARN as part of running :mc-cmd:`mc replicate resync`.
+remote ARN as part of running :mc:`mc replicate resync`.
 
 This command supports rebuilding a MinIO deployment using an active-active
 replication remote as the "backup" source. See the following tutorials
@@ -89,7 +89,7 @@ Parameters
    :mc-cmd:`--remote-bucket <mc replicate resync --remote-bucket>` as the 
    remote target.
 
-   Mutually exclusive with :mc-cmd:`mc replicate resync status`.
+   Mutually exclusive with :mc:`mc replicate resync status`.
 
 .. mc-cmd:: status
    :required:
@@ -118,7 +118,7 @@ Parameters
    Specify a duration in days where MinIO only resynchronizes
    objects older than the specified duration.
 
-   Only valid with :mc-cmd:`mc replicate resync start`.
+   Only valid with :mc:`mc replicate resync start`.
 
 Global Flags
 ~~~~~~~~~~~~
@@ -133,7 +133,7 @@ Examples
 Resynchronize Remote Replication Target from Source Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following :mc-cmd:`mc replicate resync` command resynchronizes all objects
+The following :mc:`mc replicate resync` command resynchronizes all objects
 on the specified source bucket to the remote target regardless of their
 replication status:
 

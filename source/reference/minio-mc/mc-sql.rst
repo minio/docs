@@ -235,7 +235,7 @@ information on CSV formatting fields.
 For ``.json`` file types, use :mc-cmd:`mc sql --json-input` to specify
 the JSON data format.
 
-For ``.parquet`` file types, :mc-cmd:`mc sql` automatically interprets the
+For ``.parquet`` file types, :mc:`mc sql` automatically interprets the
 data format.
 
 .. _mc-sql-csv-format:

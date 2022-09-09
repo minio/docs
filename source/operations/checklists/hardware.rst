@@ -21,10 +21,13 @@ When selecting hardware for your MinIO implementation, take into account the fol
 - Average retention time of data in years
 - Number of sites to be deployed
 
-Hardware Requirements
----------------------
+.. _deploy-minio-distributed-recommendations:
 
-The following checklist provides a minimum hardware specification for production MinIO deployments. 
+Production Hardware Requirements
+--------------------------------
+
+The following checklist provides a minimum hardware specification for production MinIO deployments.
+MinIO takes full advantage of the modern hardware improvements such as AVX-512 SIMD acceleration, 100GbE networking, and NVMe SSDs, when available.
 While MinIO can run on commodity or "budget" hardware, we strongly recommend using this table as guidance for best results in production environments.
 
 .. note:: 
@@ -38,47 +41,222 @@ While MinIO can run on commodity or "budget" hardware, we strongly recommend usi
    :width: 100%
 
    * - :octicon:`circle`
-     - | Sufficient CPU cores to achieve performance goals for hashing (for example, for healing) and encryption
-       | MinIO recommends Dual Intel® Xeon® Scalable Gold CPUs (minimum 8 cores per socket) or any CPU with AVX512 instructions
+     - Sufficient CPU cores to achieve performance goals for hashing (for example, for healing) and encryption
+       
+       MinIO recommends Dual Intel® Xeon® Scalable Gold CPUs (minimum 8 cores per socket) or any CPU with AVX512 instructions
 
    * - :octicon:`circle`
-     - | Sufficient RAM to achieve performance goals based on the number of drives and anticipated concurrent requests (see the :ref:`formula and reference table <minio-requests-per-node>`)
-       | Refer to the information on :ref:`memory allocation <minio-k8s-production-considerations-memory>` for recommended RAM amounts 
+     - Sufficient RAM to achieve performance goals based on the number of drives and anticipated concurrent requests (see the :ref:`formula and reference table <minio-hardware-checklist-memory>`).
+
+       MinIO recommends a minimum of 128GB of memory per node for best performance.
 
    * - :octicon:`circle`
-     - | Four nodes or servers
-       | For containers or Kubernetes in virtualized environments, MinIO requires four distinct physical nodes.
+     - Minimum of four nodes dedicated to object storage.
+
+       For containers or Kubernetes in virtualized environments, MinIO requires four distinct physical nodes.
+       Colocating multiple high-performance softwares on the same nodes can result in resource contention and reduced overall performance.
 
    * - :octicon:`circle`
-     - | SATA/SAS drives for capacity and NVMe SSDs for high-performance
-       | MinIO recommends a minimum of 8 drives per server
+     - | SATA/SAS drives for balanced capacity-to-performance
+       | NVMe SSDs for high-performance.
+       | MinIO recommends a minimum of 8 drives per server.
+       
+       Use the same type of drive (NVMe, SSD, or HDD) with the same capacity across all nodes in the deployment.
 
    * - :octicon:`circle`
-     - | 25GbE network for capacity 
-       | 100GbE Network interface cards for high performance
+     - | 25GbE Network as a baseline 
+       | 100GbE Network for high performance
 
 .. important:: 
 
    The following areas have the greatest impact on MinIO performance, listed in order of importance:
 
-   - Network infrastructure (insufficient or limited throughput)
-   - Storage controller (old firmware; limited throughput)
-   - Storage (old firmware; slow, aged, or failing drives)
+   .. list-table:: 
+      :stub-columns: 1
+      :widths: auto
+      :width: 100%
 
-   Prioritize upgrading these areas before focusing on compute-related performance constraints.
+      * - Network Infrastructure
+        - Insufficient or limited throughput constrains performance
+      
+      * - Storage Controller
+        - Old firmware, limited throughput, or failing hardware constrains performance and affects reliability
+
+      * - Storage (Drive)
+        - Old firmware, or slow/aging/failing hardware constrains performance and affects reliability
+
+   Prioritize securing the necessary components for each of these areas before focusing on other hardware resources, such as compute-related constraints.
+
+Minimum Nodes per Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. cond:: k8s
+
+   MinIO requires a *minimum* of 4 worker nodes per MinIO Tenant with 4 drives per node.
+   Each drive must consist of a Persistent Volume associated to a storage resource.
+
+.. cond:: linux or container or macos or windows
+
+   MinIO recommends a *minimum* of 4 host servers per deployment with 4 locally attached drives per server.
+
+The "4x4" topology provides a baseline of performance with tolerance for the loss of up to 4 drives *or* one node while maintaining read and write operations.
+You can increase the :ref:`erasure code parity <minio-erasure-coding>` of the deployment to improve resiliency at the cost of available storage.
+
+The minimum recommendation reflects MinIO's experience with assisting enterprise customers in deploying on a variety of IT infrastructures while maintaining the desired SLA/SLO. 
+While MinIO may run on less than the minimum recommended topology, any potential cost savings come at the risk of decreased reliability.
+
+Networking
+~~~~~~~~~~
+
+MinIO recommends high speed networking to support the maximum possible throughput of the attached storage (aggregated drives, storage controllers, and PCIe busses). The following table provides a general guideline for the maximum storage throughput supported by a given physical or virtual network interface.
+This table assumes all network infrastructure components, such as routers, switches, and physical cabling, also supports the NIC bandwidth.
+
+.. list-table::
+   :widths: auto
+   :width: 100%
+
+   * - NIC Bandwidth (Gbps)
+     - Estimated Aggregated Storage Throughput (GBps)
+
+   * - 10GbE
+     - 1.25GBps
+
+   * - 25GbE
+     - 3.125GBps
+
+   * - 50GbE
+     - 6.25GBps
+
+   * - 100GbE
+     - 12.5GBps
+
+Networking has the greatest impact on MinIO performance, where low per-host bandwidth artificially constrains the potential performance of the storage.
+The following examples of network throughput constraints assume spinning disks with ~100MB/S sustained I/O
+
+- 1GbE network link can support up to 125MB/s, or one spinning disk
+- 10GbE network can support approximately 1.25GB/s, potentially supporting 10-12 spinning disk
+- 25GbE network can support approximately 3.125GB/s, potentially supporting ~30 disks
+
+The recommended minimum MinIO cluster of 4 nodes with 4 drives each (16 total disks) requires a 25GbE network to support the total potential aggregate throughput.
+
+
+.. _minio-hardware-checklist-memory:
+
+Memory
+~~~~~~
+
+Memory primarily constrains the number of concurrent simultaneous connections per node.
+
+You can calculate the maximum number of concurrent requests per node with this formula:
+
+   :math:`totalRam / ramPerRequest`
+
+To calculate the amount of RAM used for each request, use this formula:
+
+   :math:`((2MiB + 128KiB) * driveCount) + (2 * 10MiB) + (2 * 1 MiB)`
+
+   10MiB is the default erasure block size v1.
+   1 MiB is the default erasure block size v2.
+
+The following table lists the maximum concurrent requests on a node based on the number of host drives and the *free* system RAM:
+
+.. list-table::
+   :header-rows: 1
+   :width: 100%
+
+   * - Number of Drives
+     - 32 GiB of RAM
+     - 64 GiB of RAM
+     - 128 GiB of RAM
+     - 256 GiB of RAM
+     - 512 GiB of RAM
+
+   * - 4 Drives
+     - 1,074 
+     - 2,149 
+     - 4,297 
+     - 8,595 
+     - 17,190 
+
+   * - 8 Drives
+     - 840 
+     - 1,680 
+     - 3,361 
+     - 6,722 
+     - 13,443 
+
+   * - 16 Drives
+     - 585 
+     - 1,170 
+     - 2.341 
+     - 4,681 
+     - 9,362 
+
+The following table provides general guidelines for allocating memory for use by MinIO based on the total amount of local storage on the node:
+
+.. list-table::
+   :header-rows: 1
+   :width: 100%
+   :widths: 40 60
+
+   * - Total Host Storage
+     - Recommended Host Memory
+
+   * - Up to 1 Tebibyte (Ti)
+     - 8GiB
+
+   * - Up to 10 Tebibyte (Ti)
+     - 16GiB
+
+   * - Up to 100 Tebibyte (Ti)
+     - 32GiB
    
-   For example:
+   * - Up to 1 Pebibyte (Pi)
+     - 64GiB
 
-   The following examples of network throughput constraints assume spinning disks with ~100MB/S sustained I/O
+   * - More than 1 Pebibyte (Pi)
+     - 128GiB
 
-   - 1GbE network link can support up to 125MB/s, or one spinning disk
-   - 10GbE network can support approximately 1.25GB/s, potentially supporting 10-12 spinning disk
-   - 25GbE network can support approximately 3.125GB/s, potentially supporting ~30 disks
+Storage
+~~~~~~~
 
-   The recommended minimum MinIO cluster of 4 nodes with 4 drives each (16 total disks) requires a 25GbE network to support the total potential aggregate throughput.
-   For best performance, have a minimum of eight drives per node.
+MinIO recommends selecting the type of drive based on your performance objectives.
+The following table highlights the general use case for each drive type based on cost and performance:
 
-   MinIO takes full advantage of the modern hardware improvements such as AVX-512 SIMD acceleration, 100GbE networking, and NVMe SSDs, when available.
+NVMe/SSD - Hot Tier
+HDD - Warm
+
+.. list-table::
+   :header-rows: 1
+   :widths: auto
+   :width: 100%
+
+   * - Type
+     - Cost
+     - Performance
+     - Tier
+
+   * - NVMe
+     - High
+     - High
+     - Hot
+
+   * - SSD
+     - Balanced
+     - Balanced
+     - Hot/Warm
+
+   * - HDD
+     - Low
+     - Low
+     - Cold/Archival
+
+Use the same type of disk (NVME, SSD, HDD) with the same capacity across all nodes in a MinIO deployment.
+MinIO does not distinguish drive types when using the underlying storage and does not benefit from mixed storage types.
+
+Use the same capacity of disk across all nodes in the MinIO :ref:`server pool <minio-intro-server-pool>`. 
+MinIO limits the maximum usable size per disk to the smallest size in the deployment.
+For example, if a deployment has 15 10TB disks and 1 1TB disk, MinIO limits the per-disk capacity to 1TB.
 
 Recommended Hardware Tests
 --------------------------
@@ -94,7 +272,7 @@ If you have access to :ref:`SUBNET <minio-docs-subnet>`, you can upload the resu
 
    mc support diag ALIAS --airgap
 
-Replace ALIAS with the :mc-cmd:`~mc alias` defined for the deployment.
+Replace ALIAS with the :mc:`~mc alias` defined for the deployment.
 
 MinIO Support Diagnostic Tools
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

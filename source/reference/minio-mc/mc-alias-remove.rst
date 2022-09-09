@@ -36,7 +36,7 @@ The :mc:`mc alias remove` removes an existing alias from the local
 
    .. tab-item:: SYNTAX
 
-      The :mc-cmd:`mc alias remove` command has the following syntax:
+      The :mc:`mc alias remove` command has the following syntax:
 
       .. code-block:: shell
          :class: copyable
@@ -67,7 +67,7 @@ Examples
 Remove an Alias from the ``mc`` Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc alias remove` to remove an existing alias from the
+Use :mc:`mc alias remove` to remove an existing alias from the
 :program:`mc` configuration:
 
 .. tab-set::

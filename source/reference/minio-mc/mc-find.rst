@@ -84,7 +84,7 @@ Parameters
       mc find ~/mydata/
 
    Issuing :mc-cmd:`mc find ALIAS` with no other arguments returns a list of
-   *all* objects or files at the specified path, similar to :mc-cmd:`mc ls`.
+   *all* objects or files at the specified path, similar to :mc:`mc ls`.
 
 .. mc-cmd:: --exec
    

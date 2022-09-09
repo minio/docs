@@ -39,7 +39,7 @@ to each alias.
 
    .. tab-item:: SYNTAX
 
-      The :mc-cmd:`mc alias list` command has the following syntax:
+      The :mc:`mc alias list` command has the following syntax:
 
       .. code-block:: shell
 
@@ -73,7 +73,7 @@ List All Configured Aliases
 
    .. tab-item:: Example
 
-      The following :mc-cmd:`mc alias list` command lists all configured aliases
+      The following :mc:`mc alias list` command lists all configured aliases
       in the local :program:`mc` configuration. 
 
       .. code-block:: shell
@@ -95,7 +95,7 @@ List a Specific Alias
 
    .. tab-item:: Example
 
-      The following :mc-cmd:`mc alias list` command lists the details of a 
+      The following :mc:`mc alias list` command lists the details of a 
       specific alias in the local :program:`mc` configuration.
 
       .. code-block:: shell

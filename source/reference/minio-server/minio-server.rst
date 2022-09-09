@@ -43,7 +43,7 @@ Configuration Settings
 The :mc:`minio server` process stores its configuration in the storage
 backend :mc-cmd:`directory <minio server DIRECTORIES>`. You can modify
 configuration options using the
-:mc-cmd:`mc admin config` command.
+:mc:`mc admin config` command.
 
 Syntax
 ~~~~~~~

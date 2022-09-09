@@ -84,7 +84,7 @@ Examples
 Get Anonymous Policy for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc policy get` to get the anonymous policy for a 
+Use :mc:`mc policy get` to get the anonymous policy for a 
 bucket:
 
 .. code-block:: shell

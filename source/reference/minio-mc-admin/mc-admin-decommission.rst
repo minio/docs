@@ -17,7 +17,7 @@ Syntax
 
 .. start-mc-admin-decommission-desc
 
-The :mc:`mc admin decommission` command starts the decommissioning process for a
+The :mc-cmd:`mc admin decommission` command starts the decommissioning process for a
 MinIO :ref:`server pools <minio-intro-server-pool>`. Decommissioning is designed
 for removing an older server pool whose hardware is no longer sufficient or
 performant compared to the pools in the deployment. MinIO automatically migrates

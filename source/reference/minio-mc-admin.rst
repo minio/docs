@@ -14,9 +14,9 @@ The MinIO Client :mc-cmd:`mc` command line tool provides The command
 command for performing administrative tasks on your MinIO deployments.
 
 While :mc-cmd:`mc` supports any S3-compatible service, 
-:mc-cmd:`mc admin` *only* supports MinIO deployments.
+:mc:`mc admin` *only* supports MinIO deployments.
 
-:mc-cmd:`mc admin` has the following syntax:
+:mc:`mc admin` has the following syntax:
 
 .. code-block:: shell
 
@@ -25,7 +25,7 @@ While :mc-cmd:`mc` supports any S3-compatible service,
 Command Quick reference
 -----------------------
 
-The following table lists :mc-cmd:`mc admin` commands:
+The following table lists :mc:`mc admin` commands:
 
 .. list-table::
    :header-rows: 1
@@ -35,17 +35,22 @@ The following table lists :mc-cmd:`mc admin` commands:
    * - Command
      - Description
 
-   * - :mc:`mc admin bucket remote`
+   * - :mc-cmd:`mc admin bucket remote`
      - .. include:: /reference/minio-mc-admin/mc-admin-bucket-remote.rst
           :start-after: start-mc-admin-bucket-remote-desc
           :end-before: end-mc-admin-bucket-remote-desc
 
-   * - :mc:`mc admin bucket quota`
+   * - :mc-cmd:`mc admin bucket quota`
      - .. include:: /reference/minio-mc-admin/mc-admin-bucket-quota.rst
           :start-after: start-mc-admin-bucket-quota-desc
           :end-before: end-mc-admin-bucket-quota-desc
 
-   * - :mc:`mc admin decommission`
+   * - :mc-cmd:`mc admin console`
+     - .. include:: /reference/minio-mc-admin/mc-admin-console.rst
+          :start-after: start-mc-admin-console-desc
+          :end-before: end-mc-admin-console-desc
+
+   * - :mc-cmd:`mc admin decommission`
      - .. include:: /reference/minio-mc-admin/mc-admin-decommission.rst
           :start-after: start-mc-admin-decommission-desc
           :end-before: end-mc-admin-decommission-desc
@@ -55,22 +60,22 @@ The following table lists :mc-cmd:`mc admin` commands:
           :start-after: start-mc-admin-group-desc
           :end-before: end-mc-admin-group-desc
 
-   * - :mc:`mc admin heal`
+   * - :mc-cmd:`mc admin heal`
      - .. include:: /reference/minio-mc-admin/mc-admin-heal.rst
           :start-after: start-mc-admin-heal-desc
           :end-before: end-mc-admin-heal-desc
 
-   * - :mc:`mc admin info`
+   * - :mc-cmd:`mc admin info`
      - .. include:: /reference/minio-mc-admin/mc-admin-info.rst
           :start-after: start-mc-admin-info-desc
           :end-before: end-mc-admin-info-desc
 
-   * - :mc:`mc admin kms key`
+   * - :mc-cmd:`mc admin kms key`
      - .. include:: /reference/minio-mc-admin/mc-admin-kms-key.rst
           :start-after: start-mc-admin-kms-key-desc
           :end-before: end-mc-admin-kms-key-desc
 
-   * - :mc:`mc admin obd`
+   * - :mc-cmd:`mc admin obd`
      - .. include:: /reference/minio-mc-admin/mc-admin-obd.rst
           :start-after: start-mc-admin-obd-desc
           :end-before: end-mc-admin-obd-desc
@@ -80,27 +85,27 @@ The following table lists :mc-cmd:`mc admin` commands:
           :start-after: start-mc-admin-policy-desc
           :end-before: end-mc-admin-policy-desc
 
-   * - :mc:`mc admin profile`
+   * - :mc-cmd:`mc admin profile`
      - .. include:: /reference/minio-mc-admin/mc-admin-profile.rst
           :start-after: start-mc-admin-profile-desc
           :end-before: end-mc-admin-profile-desc
 
-   * - :mc:`mc admin prometheus`
+   * - :mc-cmd:`mc admin prometheus`
      - .. include:: /reference/minio-mc-admin/mc-admin-prometheus.rst
           :start-after: start-mc-admin-prometheus-desc
           :end-before: end-mc-admin-prometheus-desc
 
-   * - :mc:`mc admin replicate`
+   * - :mc-cmd:`mc admin replicate`
      - .. include:: /reference/minio-mc-admin/mc-admin-replicate.rst
           :start-after: start-mc-admin-replicate-desc
           :end-before: end-mc-admin-replicate-desc
 
-   * - :mc:`mc admin service`
+   * - :mc-cmd:`mc admin service`
      - .. include:: /reference/minio-mc-admin/mc-admin-service.rst
           :start-after: start-mc-admin-service-desc
           :end-before: end-mc-admin-service-desc
 
-   * - :mc:`mc admin speedtest`
+   * - :mc-cmd:`mc admin speedtest`
      - .. include:: /reference/minio-mc-admin/mc-admin-speedtest.rst
           :start-after: start-mc-admin-speedtest-desc
           :end-before: end-mc-admin-speedtest-desc
@@ -110,17 +115,17 @@ The following table lists :mc-cmd:`mc admin` commands:
           :start-after: start-mc-admin-tier-desc
           :end-before: end-mc-admin-tier-desc
 
-   * - :mc:`mc admin top`
+   * - :mc-cmd:`mc admin top`
      - .. include:: /reference/minio-mc-admin/mc-admin-top.rst
           :start-after: start-mc-admin-top-desc
           :end-before: end-mc-admin-top-desc
 
-   * - :mc:`mc admin trace`
+   * - :mc-cmd:`mc admin trace`
      - .. include:: /reference/minio-mc-admin/mc-admin-trace.rst
           :start-after: start-mc-admin-trace-desc
           :end-before: end-mc-admin-trace-desc
 
-   * - :mc:`mc admin update`
+   * - :mc-cmd:`mc admin update`
      - .. include:: /reference/minio-mc-admin/mc-admin-update.rst
           :start-after: start-mc-admin-update-desc
           :end-before: end-mc-admin-update-desc
@@ -130,7 +135,7 @@ The following table lists :mc-cmd:`mc admin` commands:
           :start-after: start-mc-admin-user-desc
           :end-before: end-mc-admin-user-desc
 
-   * - :mc:`mc admin user`
+   * - :mc:`mc admin user svcacct`
      - .. include:: /reference/minio-mc-admin/mc-admin-user-svcacct.rst
           :start-after: start-mc-admin-user-svcacct-desc
           :end-before: end-mc-admin-user-svcacct-desc
@@ -156,7 +161,7 @@ Ensure that the host machine has :mc:`mc`
    security best practices for your operating system for inputting sensitive
    information on the command line.
 
-Use the :mc-cmd:`mc alias set` command to add the
+Use the :mc:`mc alias set` command to add the
 deployment to the :program:`mc` configuration.
 
 .. code-block:: shell
@@ -181,7 +186,7 @@ the newly added MinIO deployment:
 Global Options
 --------------
 
-:mc-cmd:`mc admin` supports the same global options as 
+:mc:`mc admin` supports the same global options as 
 :mc-cmd:`mc`. See :ref:`minio-mc-global-options`.
 
 .. toctree::

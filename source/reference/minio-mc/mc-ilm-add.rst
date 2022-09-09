@@ -167,7 +167,7 @@ Parameters
 
    *Required* The remote storage tier to which MinIO 
    :ref:`transition objects <minio-lifecycle-management-tiering>`.
-   Specify a remote storage tier created by :mc-cmd:`mc admin tier`. 
+   Specify a remote storage tier created by :mc:`mc admin tier`. 
 
    Required if specifying :mc-cmd:`~mc ilm add --transition-days`.
 
@@ -225,7 +225,7 @@ Parameters
    *Optional* The remote storage tier to which MinIO 
    :ref:`transitions noncurrent objects versions
    <minio-lifecycle-management-tiering>`. Specify a remote storage tier created
-   by :mc-cmd:`mc admin tier`.
+   by :mc:`mc admin tier`.
 
 
 Global Flags
@@ -241,7 +241,7 @@ Examples
 Expire Bucket Contents After Number of Days
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc ilm add` with :mc-cmd:`~mc ilm add --expiry-days` to
+Use :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --expiry-days` to
 expire bucket contents a number of days after object creation:
 
 .. code-block:: shell
@@ -276,7 +276,7 @@ Expiry vs Transition
 MinIO supports specifying both expiry and transition rules in the same
 bucket or bucket prefix. MinIO can execute an expiration rule on an object
 regardless of its transition status. Use
-:mc-cmd:`mc ilm ls` to review the currently configured object lifecycle
+:mc:`mc ilm ls` to review the currently configured object lifecycle
 management rules for any potential interactions between expiry and transition
 rules.
 

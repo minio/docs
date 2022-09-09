@@ -1,6 +1,12 @@
 .. The following label handles links from content to distributed MinIO in K8s context
 .. _deploy-minio-distributed:
 
+.. Redirect all references to tenant topologies here
+
+.. _minio-snsd:
+.. _minio-snmd:
+.. _minio-mnmd:
+
 .. _minio-k8s-deploy-minio-tenant:
 
 =====================
@@ -20,6 +26,9 @@ This procedure documents deploying a MinIO Tenant using the MinIO Operator Conso
    :width: 70%
    :class: no-scaled-link
    :alt: MinIO Operator Console
+
+The MinIO Operator supports only the Distributed (Multi-Node Multi-Drive) MinIO topology.
+You can use basic Kubernetes YAML resource definitions to deploy Single-Node Single-Drive and Single-Node Multi-Drive topologies for local testing and evaluation as necessary.
 
 The Operator Console provides a rich user interface for deploying and managing MinIO Tenants on Kubernetes infrastructure. 
 Installing the MinIO :ref:`Kubernetes Operator <deploy-operator-kubernetes>` automatically installs and configures the Operator Console.
@@ -228,7 +237,7 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
 
    * - :guilabel:`Memory per Node [Gi]`
      - Specify the total amount of memory (RAM) to allocate per MinIO server pod. 
-       See :ref:`minio-k8s-production-considerations-memory` for guidance on setting this value.
+       See :ref:`minio-hardware-checklist-memory` for guidance on setting this value.
 
        The Kubernetes cluster *must* have worker nodes with sufficient free RAM to match the pod request.
 
@@ -374,7 +383,7 @@ This includes configuring an external IDP such as :ref:`OpenID <minio-external-i
      - Configure additional internal MinIO users for the Operator to create as part of deploying the Tenant.
 
    * - :guilabel:`OpenID`
-     - Configure an OpenID Connect-compatible servce as an external Identity Provider (e.g. Keycloak, Okta, Google, Facebook, Dex) to manage MinIO users. 
+     - Configure an OpenID Connect-compatible service as an external Identity Provider (e.g. Keycloak, Okta, Google, Facebook, Dex) to manage MinIO users. 
 
    * - :guilabel:`Active Directory`
      - Configure an Active Directory or OpenLDAP service as the external Identity Provider to manage MinIO users.

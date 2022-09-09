@@ -91,7 +91,7 @@ Include any other environment variables as required for your local deployment.
       You can access the MinIO deployment over a Terminal or Shell using the :ref:`MinIO Client <minio-client>` (:mc:`mc`).
       See :ref:`MinIO Client Installation Quickstart <mc-install>` for instructions on installing :mc:`mc`.
 
-      Create a new :mc-cmd:`alias <mc alias set>` corresponding to the MinIO deployment. 
+      Create a new :mc:`alias <mc alias set>` corresponding to the MinIO deployment. 
       Specify any of the hostnames or IP addresses from the MinIO Server ``API`` block, such as http://localhost:9000.
 
       .. code-block:: shell

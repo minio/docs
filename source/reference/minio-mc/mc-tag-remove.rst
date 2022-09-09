@@ -12,7 +12,7 @@
 
 .. mc:: mc tag remove
 
-.. |command| replace:: :mc-cmd:`mc tag remove`
+.. |command| replace:: :mc:`mc tag remove`
 .. |rewind| replace:: :mc-cmd:`~mc tag remove --rewind`
 .. |versions| replace:: :mc-cmd:`~mc tag remove --versions`
 .. |versionid| replace:: :mc-cmd:`~mc tag remove --version-id`
@@ -114,7 +114,7 @@ Examples
 Remove Tags from a Bucket or Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc tag remove` to remove tags from a bucket or object:
+Use :mc:`mc tag remove` to remove tags from a bucket or object:
 
 .. code-block:: shell
    :class: copyable

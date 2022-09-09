@@ -25,7 +25,7 @@ The buckets can be on the same MinIO deployment or on separate MinIO deployments
 
 .. note::
 
-   To configure replication between arbitrary S3-compatible services (not necessarily MinIO), use :mc-cmd:`mc mirror`.
+   To configure replication between arbitrary S3-compatible services (not necessarily MinIO), use :mc:`mc mirror`.
 
 
 Requirements
@@ -150,8 +150,8 @@ This procedure assumes each alias corresponds to a user with the :ref:`necessary
 
 .. seealso::
 
-   - Use the :mc-cmd:`mc replicate edit` command to modify an existing replication rule.
+   - Use the :mc:`mc replicate edit` command to modify an existing replication rule.
 
-   - Use the :mc-cmd:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
+   - Use the :mc:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
 
-   - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication rule.
+   - Use the :mc:`mc replicate rm` command to remove an existing replication rule.
