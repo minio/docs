@@ -27,35 +27,39 @@ Hardware Requirements
 The following checklist provides a minimum hardware specification for production MinIO deployments. 
 While MinIO can run on commodity or "budget" hardware, we strongly recommend using this table as guidance for best results in production environments.
 
-.. note:: 
+.. cond:: k8s
 
-   See our `Reference Hardware <https://min.io/product/reference-hardware?ref-docs>`__ page for a curated selection of servers and storage components from our hardware partners.
+.. cond:: linux or container or macos or windows
 
-   MinIO does not provide hosted services or hardware sales.
+   .. note:: 
 
-.. list-table::
-   :widths: auto
-   :width: 100%
+      See our `Reference Hardware <https://min.io/product/reference-hardware?ref-docs>`__ page for a curated selection of servers and storage components from our hardware partners.
 
-   * - :octicon:`circle`
-     - | Sufficient CPU cores to achieve performance goals for hashing (for example, for healing) and encryption
-       | MinIO recommends Dual Intel® Xeon® Scalable Gold CPUs (minimum 8 cores per socket) or any CPU with AVX512 instructions
+      MinIO does not provide hosted services or hardware sales.
 
-   * - :octicon:`circle`
-     - | Sufficient RAM to achieve performance goals based on the number of drives and anticipated concurrent requests (see the :ref:`formula and reference table <minio-requests-per-node>`)
-       | Refer to the information on :ref:`memory allocation <minio-k8s-production-considerations-memory>` for recommended RAM amounts 
+   .. list-table::
+      :widths: auto
+      :width: 100%
 
-   * - :octicon:`circle`
-     - | Four nodes or servers
-       | For containers or Kubernetes in virtualized environments, MinIO requires four distinct physical nodes.
+      * - :octicon:`circle`
+      - | Sufficient CPU cores to achieve performance goals for hashing (for example, for healing) and encryption
+         | MinIO recommends Dual Intel® Xeon® Scalable Gold CPUs (minimum 8 cores per socket) or any CPU with AVX512 instructions
 
-   * - :octicon:`circle`
-     - | SATA/SAS drives for capacity and NVMe SSDs for high-performance
-       | MinIO recommends a minimum of 8 drives per server
+      * - :octicon:`circle`
+      - | Sufficient RAM to achieve performance goals based on the number of drives and anticipated concurrent requests (see the :ref:`formula and reference table <minio-requests-per-node>`)
+         | Refer to the information on :ref:`memory allocation <minio-k8s-production-considerations-memory>` for recommended RAM amounts 
 
-   * - :octicon:`circle`
-     - | 25GbE network for capacity 
-       | 100GbE Network interface cards for high performance
+      * - :octicon:`circle`
+      - | Four nodes or servers
+         | For containers or Kubernetes in virtualized environments, MinIO requires four distinct physical nodes.
+
+      * - :octicon:`circle`
+      - | SATA/SAS drives for capacity and NVMe SSDs for high-performance
+         | MinIO recommends a minimum of 8 drives per server
+
+      * - :octicon:`circle`
+      - | 25GbE network for capacity 
+         | 100GbE Network interface cards for high performance
 
 .. important:: 
 
@@ -79,6 +83,16 @@ While MinIO can run on commodity or "budget" hardware, we strongly recommend usi
    For best performance, have a minimum of eight drives per node.
 
    MinIO takes full advantage of the modern hardware improvements such as AVX-512 SIMD acceleration, 100GbE networking, and NVMe SSDs, when available.
+
+Networking
+~~~~~~~~~~
+
+Memory
+~~~~~~
+
+Storage
+~~~~~~~
+
 
 Recommended Hardware Tests
 --------------------------

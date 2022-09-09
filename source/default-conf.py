@@ -84,9 +84,8 @@ extlinks = {
 
 suppress_warnings = [
     'toc.excluded',
-    'ref.myst',
     'myst.header',
-    'myst'
+    'ref.myst'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
