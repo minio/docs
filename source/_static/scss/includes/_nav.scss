@@ -420,12 +420,16 @@
 	align-items: center;
     flex: 1;
 
+	@include breakpoint-max(breakpoints(lg)) {
+		gap: 1.75rem;
+	}
+
     & > a {
         color: var(--text-muted-color);
         font-weight: $font-weight-medium;
         display: flex;
         align-items: center;
-        padding: 0.69rem 0;
+        padding: 0.85rem 0 0.7rem;
         border-bottom: 2px solid transparent;
         transition: color 300ms;
 
