@@ -34,7 +34,7 @@ copyright = '2020-Present, MinIO, Inc. '
 author = 'MinIO Documentation Team'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -50,6 +50,7 @@ extensions = [
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinx_togglebutton',
+    'sphinx_sitemap',
     'sphinxcontrib.images',
     'myst_parser',
     'sphinx_design',
@@ -83,7 +84,7 @@ extlinks = {
 
 suppress_warnings = [
     'toc.excluded',
-    'myst.ref',
+    'ref.myst',
     'myst.header',
     'myst'
 ]
@@ -100,8 +101,11 @@ templates_path = ['_templates']
 exclude_patterns = ['includes/*', '*-template.rst']
 
 # template for adding custom exclude paths if necessary for a given tag
+# html_baseurl is used by sphinx_sitemap extension to generate a sitemap.xml for each platform.
+# The sitemaps are combined in a sitemapindex.xml file at the root level.
 
 if tags.has("linux"):
+    html_baseurl = 'https://www.min.io/docs/minio/linux/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
@@ -126,6 +130,7 @@ if tags.has("linux"):
         'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("macos"):
+    html_baseurl = 'https://www.min.io/docs/minio/macos/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
@@ -150,6 +155,8 @@ elif tags.has("macos"):
         'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("windows"):
+    # html_baseurl is used for generating the sitemap.xml for each platform. These are combined in a sitemapindex.xml.
+    html_baseurl = 'https://www.min.io/docs/minio/windows/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
@@ -174,6 +181,7 @@ elif tags.has("windows"):
         'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("container"):
+    html_baseurl = 'https://www.min.io/docs/minio/container/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-tenant.rst',
         'operations/install-deploy-manage/modify-minio-tenant.rst',
@@ -200,6 +208,7 @@ elif tags.has("container"):
         'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
     ]
 elif tags.has("k8s"):
+    html_baseurl = 'https://www.min.io/docs/minio/kubernetes/upstream/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst',
         'operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst',
@@ -257,6 +266,7 @@ html_css_files = ['css/main.min.css', 'custom.css']
 
 html_js_files = ['js/main.js']
 
+# Add https://www.min.io/robots.txt to html_extra_path list once available.
 html_extra_path = [ 'extra']
 
 html_title = 'MinIO Object Storage for ' + ("MacOS" if platform == "macos" else platform.capitalize())
@@ -274,7 +284,7 @@ sphinx_tabs_disable_css_loading = True
 # k8s is temporary until integrating the references here
 
 intersphinx_mapping = {
-    'baremetal': ('https://docs.min.io/minio/baremetal/', None),
+    'baremetal': ('https://www.min.io/docs/minio/', None),
 }
 
 rst_prolog = """

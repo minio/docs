@@ -1,4 +1,5 @@
 {%- if pagename != "search" and builder != "singlehtml" %}
+
 <form class="search" action="{{ pathto('search') }}" method="get" role="search">
    <div class="search__inner">
       <button id="search-close" class="icon visible-rm" type="button">
@@ -8,7 +9,7 @@
          Hide Search
       </button>
 
-      <input type="text" class="search__text" id="docs-search" name="q" aria-labelledby="searchlabel" placeholder="Search Documentation" />
+      <input type="text" class="search__text" id="algolia" name="q" aria-labelledby="searchlabel" placeholder="Search Documentation" />
       
       <kbd class="hidden-rm">
          <span id="search-meta-key"></span>

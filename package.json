@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/minio/docs.git"
   },
-  "author": "Ravind Kumar",
+  "author": "MinIO Documentation Team",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/minio/docs/issues"
