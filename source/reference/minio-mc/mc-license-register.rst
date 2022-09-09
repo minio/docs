@@ -1,5 +1,5 @@
 =======================
-``mc support register``
+``mc license register``
 =======================
 
 .. default-domain:: minio
@@ -9,39 +9,48 @@
    :depth: 1
 
 .. mc:: mc support register
+.. mc:: mc license register
+
+.. note::
+
+   .. versionchanged:: RELEASE.2022-07-15T09-20-55Z
+
+   ``mc license register`` replaces the ``mc support register`` command.
 
 Description
 -----------
 
-The :mc:`mc support register` command connects your deployment with your |SUBNET| account.
+The :mc-cmd:`mc license register` command connects your deployment with your |SUBNET| account.
 
-After registration, upload deployment health reports directly to SUBNET using :mc:`mc support diagnostics` command.
+After registration, you can upload deployment health reports directly to SUBNET using the :mc-cmd:`mc support diag` command.
 
 
 Examples
 --------
 
-Register a Deployment Using the Cluster's Name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Register a Deployment Using the Deployment's Name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Register the MinIO deployment at alias ``minio1`` on SUBNET, using ``minio1`` as the cluster name:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc support register minio1
-
-Register a Deployment with a Different Cluster Name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Register a MinIO deployment at alias ``minio2`` on SUBNET, using ``second-cluster`` as the name:
+Register the MinIO deployment at alias ``minio1`` on SUBNET, using ``minio1`` as the deployment name:
 
 .. code-block:: shell
    :class: copyable
 
-   mc support register minio2 --name second-cluster
+   mc license register minio1
 
-.. _minio-support-register-airgap:
+If not already registered, a prompt asks for SUBNET credentials for the deployment.
+
+Register a Deployment with a Different Deployment Name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Register a MinIO deployment at alias ``minio2`` on SUBNET, using ``second-deployment`` as the name:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc license register minio2 --name second-deployment
+
+.. _minio-license-register-airgap:
 
 Register a Deployment Without Direct Internet Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,7 +60,7 @@ Register a MinIO deployment at alias ``minio3`` on SUBNET that does not have dir
 .. code-block:: shell
    :class: copyable
 
-   mc support register minio3 --airgap
+   mc license register minio3 --airgap
 
 #. Run the command to return a registration token
 #. Copy the registration token
@@ -71,7 +80,7 @@ The command has the following syntax:
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] support register       \
+   mc [GLOBALFLAGS] license register       \
                             ALIAS          \
                             [--name value] \
                             [--airgap]
@@ -87,16 +96,16 @@ Parameters
 .. mc-cmd:: --name
    :optional:
 
-   Specify a name other than the alias to associate to the MinIO cluster in SUBNET.
+   Specify a name other than the alias to associate to the MinIO deployment in SUBNET.
 
-   Use ``--name <value>`` replacing ``<value>`` with the name you want to use for the cluster on SUBNET.
+   Use ``--name <value>`` replacing ``<value>`` with the name you want to use for the deployment on SUBNET.
    
 .. mc-cmd:: --airgap
    :optional:
 
    Use in environments without network access to SUBNET (for example, airgapped, firewalled, or similar configuration).
 
-   For instructions, see the :ref:`airgap example <minio-support-register-airgap>`.
+   For instructions, see the :ref:`airgap example <minio-license-register-airgap>`.
 
 
 Global Flags

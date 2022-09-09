@@ -1,6 +1,6 @@
-==========================
-``mc support diagnostics``
-==========================
+===================
+``mc support diag``
+===================
 
 .. default-domain:: minio
 
@@ -8,12 +8,12 @@
    :local:
    :depth: 1
 
-.. mc:: mc support diagnostics
+.. mc:: mc support diag
 
 Description
 -----------
 
-The :mc:`mc support diagnostics` command generates a health report for a MinIO deployment.
+The :mc-cmd:`mc support diag` command generates a health report for a MinIO deployment.
 For deployments registered with the MinIO subscription network (|subnet-short|), the command can automatically upload the health report for analysis.
 
 The resulting health report is intended for use by MinIO Engineering via SUBNET and may contain internal or private data points.
@@ -26,10 +26,10 @@ During the test, MinIO freezes all S3 calls and queues read or write operations 
 The queue is limited based on the supported maximum concurrent :ref:`requests per host <minio-hardware-checklist-memory>`.
 Requests that exceed this limit on a given host return a ``503`` error after ~10 seconds.
 
-Use the :mc:`mc support diagnostics` command to trigger the diagnostic test.
+Use the :mc-cmd:`mc support diag` command to trigger the diagnostic test.
 For clusters registered with SUBNET, the command uploads the results as part of SUBNET Health reports. 
 
-For airgapped or firewalled environments, or other environments that prevent direct network access from the deployment, you can save the report locally with the :mc-cmd:`~mc support diagnostics --airgap` flag.
+For airgapped or firewalled environments, or other environments that prevent direct network access from the deployment, you can save the report locally with the :mc-cmd:`~mc support diag --airgap` flag.
 After saving, you can then upload the results of the test to SUBNET manually.
 
 .. include:: /includes/common-mc-support.rst
@@ -73,7 +73,7 @@ Generate health data for a MinIO cluster and automatically for a MinIO cluster a
 
    mc support diag minio1
 
-The automatic upload of data only occurs for deployments registered with SUBNET using :mc:`mc support register`.
+The automatic upload of data only occurs for deployments registered with SUBNET using :mc-cmd:`mc license register`.
 
 .. _minio-support-diagnostics-airgap:
 
