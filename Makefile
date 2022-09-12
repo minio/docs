@@ -8,7 +8,6 @@ SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
 GITDIR        = $(shell git rev-parse --abbrev-ref HEAD)
-DEB			  = $(curl https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download')
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -97,9 +96,7 @@ endif
 
 sync-operator-version:
 	@echo "Retrieving latest Operator version"
-	$(shell wget -O /tmp/downloads-operator.json https://api.github.com/repos/minio/operator/releases/latest)
-	$(eval OPERATOR = $(shell cat /tmp/downloads-operator.json | jq '.tag_name[1:]'))
-
+	@$(eval OPERATOR = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/operator/releases/latest | sed "s/https:\/\/github.com\/minio\/operator\/releases\/tag\///"))
 	@$(eval kname = $(shell uname -s))
 
 	@echo "Updating Operator to ${OPERATOR}"
@@ -118,7 +115,6 @@ sync-operator-version:
 sync-kes-version:
 	@echo "Retrieving latest stable KES version"
 	@$(eval KES = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/kes/releases/latest | sed "s/https:\/\/github.com\/minio\/kes\/releases\/tag\///"))
-
 	@$(eval kname = $(shell uname -s))
 
 	@case "${kname}" in \
@@ -132,9 +128,8 @@ sync-kes-version:
 
 sync-minio-version:
 	@echo "Retrieving current MinIO version"
-	$(shell wget -O /tmp/downloads-minio.json https://min.io/assets/downloads-minio.json)
-	$(eval DEB = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
-	$(eval RPM = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
+	$(eval DEB = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
+	$(eval RPM = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
 	$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
 
 	@$(eval kname = $(shell uname -s))
@@ -155,7 +150,7 @@ sync-minio-version:
 sync-cpp-docs:
 # C++ repo does not have any releases yet.
 	@echo "Retrieving C++ docs from github.com/minio/minio-js"
-	@$(eval CPPLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-cpp/releases/latest -O - | jq -r '.tag_name'))
+	@$(eval CPPLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-cpp/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-cpp\/releases\/tag\///"))
 	@echo "Latest stable is ${CPPLATEST}"
 	$(shell wget -q -O source/developers/cpp/API.md https://raw.githubusercontent.com/minio/minio-cpp/${CPPLATEST}/docs/API.md)
 	$(shell wget -q -O source/developers/cpp/quickstart.md https://raw.githubusercontent.com/minio/minio-cpp/${CPPLATEST}/README.md)
@@ -173,7 +168,7 @@ sync-cpp-docs:
 
 sync-dotnet-docs:
 	@echo "Retrieving .NET docs from github.com/minio/minio-dotnet"
-	@$(eval DOTNETLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-dotnet/releases/latest -O - | jq -r '.tag_name'))
+	@$(eval DOTNETLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-dotnet/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-dotnet\/releases\/tag\///"))
 	@echo "Latest stable is ${DOTNETLATEST}"
 	$(shell wget -q -O source/developers/dotnet/API.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/Docs/API.md)
 #	$(shell wget -q -O source/developers/dotnet/quickstart.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/README.md)
@@ -191,7 +186,7 @@ sync-dotnet-docs:
 
 sync-go-docs:
 	@echo "Retrieving Go docs from github.com/minio/minio-go"
-	@$(eval GOLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-go/releases/latest -O - | jq -r '.tag_name'))
+	@$(eval GOLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-go/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-go\/releases\/tag\///"))
 	@echo "Latest stable is ${GOLATEST}"
 	$(shell wget -q -O source/developers/go/API.md https://raw.githubusercontent.com/minio/minio-go/${GOLATEST}/docs/API.md)
 	$(shell wget -q -O source/developers/go/quickstart.md https://raw.githubusercontent.com/minio/minio-go/${GOLATEST}/README.md)
@@ -209,7 +204,7 @@ sync-go-docs:
 
 sync-haskell-docs:
 	@echo "Retrieving Haskell docs from github.com/minio/minio-hs"
-	@$(eval HASKELLLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-hs/releases/latest -O - | jq -r '.tag_name'))
+	@$(eval HASKELLLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-hs/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-hs\/releases\/tag\///"))
 	@echo "Latest stable is ${HASKELLLATEST}"
 	$(shell wget -q -O source/developers/haskell/API.md https://raw.githubusercontent.com/minio/minio-hs/${HASKELLLATEST}/docs/API.md)
 	$(shell wget -q -O source/developers/haskell/quickstart.md https://raw.githubusercontent.com/minio/minio-hs/${HASKELLLATEST}/README.md)
@@ -227,7 +222,7 @@ sync-haskell-docs:
 
 sync-java-docs:
 	@echo "Retrieving Java docs from github.com/minio/minio-java"
-	@$(eval JAVALATEST = $(shell wget -q https://api.github.com/repos/minio/minio-java/releases/latest -O - | jq -r '.tag_name'))
+	@$(eval JAVALATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-java/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-java\/releases\/tag\///"))
 	@echo "Latest stable is ${JAVALATEST}"
 	$(shell wget -q -O source/developers/java/API.md https://raw.githubusercontent.com/minio/minio-java/${JAVALATEST}/docs/API.md)
 	$(shell wget -q -O source/developers/java/quickstart.md https://raw.githubusercontent.com/minio/minio-java/${JAVALATEST}/README.md)
@@ -248,7 +243,7 @@ sync-java-docs:
 
 sync-javascript-docs:
 	@echo "Retrieving JavaScript docs from github.com/minio/minio-js"
-	@$(eval JAVASCRIPTLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-js/releases/latest -O - | jq -r '.tag_name'))
+	@$(eval JAVASCRIPTLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-js/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-js\/releases\/tag\///"))
 	@echo "Latest stable is ${JAVASCRIPTLATEST}"
 	$(shell wget -q -O source/developers/javascript/API.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/docs/API.md)
 	$(shell wget -q -O source/developers/javascript/quickstart.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/README.md)
@@ -266,7 +261,7 @@ sync-javascript-docs:
 
 sync-python-docs:
 	@echo "Retrieving Python docs from github.com/minio/minio-py"
-	@$(eval PYTHONLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-py/releases/latest -O - | jq -r '.tag_name'))
+	@$(eval PYTHONLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-py/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-py\/releases\/tag\///"))
 	@echo "Latest stable is ${PYTHONLATEST}"
 	$(shell wget -q -O source/developers/python/API.md https://raw.githubusercontent.com/minio/minio-py/${PYTHONLATEST}/docs/API.md)
 	$(shell wget -q -O source/developers/python/quickstart.md https://raw.githubusercontent.com/minio/minio-py/${PYTHONLATEST}/README.md)
@@ -285,7 +280,7 @@ sync-python-docs:
 sync-rust-docs:
 # Rust repo does not have any releases yet.
 	@echo "Retrieving Rust docs from github.com/minio/minio-js"
-	@$(eval RUSTLATEST = $(shell wget -q https://api.github.com/repos/minio/minio-rs/releases/latest -O - | jq -r '.tag_name'))
+	@$(eval RUSTLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-rust/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-rust\/releases\/tag\///"))
 	@echo "Latest stable is ${RUSTLATEST}"
 #	$(shell wget -q -O source/developers/rust/API.md https://raw.githubusercontent.com/minio/minio-rs/${RUSTLATEST}/docs/API.md)
 	$(shell wget -q -O source/developers/rust/quickstart.md https://raw.githubusercontent.com/minio/minio-rs/${RUSTLATEST}/README.md)
