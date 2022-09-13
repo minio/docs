@@ -122,7 +122,7 @@ Use the :mc-cmd:`mc admin tier add` command to add a new remote storage tier:
 .. code-block:: shell
    :class: copyable
 
-   mc admin tier add --azure TARGET TIER_NAME \
+   mc admin tier add azure TARGET TIER_NAME \
       --endpoint https://HOSTNAME
       --bucket BUCKET \
       --prefix PREFIX
