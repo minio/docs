@@ -121,7 +121,7 @@ service as the remote storage tier:
 .. code-block:: shell
    :class: copyable
 
-   mc admin tier add --gcs TARGET TIER_NAME \
+   mc admin tier add gcs TARGET TIER_NAME \
       --endpoint https://HOSTNAME \
       --bucket BUCKET \
       --prefix PREFIX \

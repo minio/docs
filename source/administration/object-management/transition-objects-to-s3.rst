@@ -130,7 +130,7 @@ new remote storage tier:
 .. code-block:: shell
    :class: copyable
 
-   mc admin tier add --s3 TARGET TIER_NAME \
+   mc admin tier add s3 TARGET TIER_NAME \
       --endpoint https://HOSTNAME \
       --bucket BUCKET \
       --prefix PREFIX
