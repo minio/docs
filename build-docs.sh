@@ -1,13 +1,14 @@
 #!/bin/bash
 
 branch=$(git branch --show-current)
+export NVM_DIR="/home/minio/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm use stable
+
+export PATH=${PATH}:${HOME}/.local/bin
 
 make clean-all
-make k8s
-make linux
-make container
-make windows
-make macos
+make all
 
 sudo mkdir -p /var/www/docs/minio/windows
 sudo mkdir -p /var/www/docs/minio/macos
