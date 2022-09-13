@@ -15,8 +15,9 @@ help:
 
 .PHONY: help Makefile
 
-# dry-run build command to double check output build dirs
+all: linux windows macos container kubernetes
 
+# dry-run build command to double check output build dirs
 dryrun:
 	@echo "$(SPHINXBUILD) -M $@ '$(SOURCEDIR)' '$(BUILDDIR)/$(GITDIR)' $(SPHINXOPTS) $(O)"
 
