@@ -3,7 +3,7 @@
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
-SPHINXOPTS    ?= -n -j "auto" -w "build.log"
+SPHINXOPTS    ?= -n -j auto -w "build.log"
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
@@ -15,18 +15,15 @@ help:
 
 .PHONY: help Makefile
 
-all: linux windows macos container kubernetes
-
 # dry-run build command to double check output build dirs
 dryrun:
 	@echo "$(SPHINXBUILD) -M $@ '$(SOURCEDIR)' '$(BUILDDIR)/$(GITDIR)' $(SPHINXOPTS) $(O)"
 
-clean-all:
+clean:
 	@echo "Cleaning $(BUILDDIR)/$(GITDIR)"
 	@rm -rf $(BUILDDIR)/$(GITDIR)
 
 clean-%:
-
 	@echo "Cleaning $(BUILDDIR)/$(GITDIR)/$*"
 	@rm -rf $(BUILDDIR)/$(GITDIR)/$*
 
@@ -328,4 +325,4 @@ sync-deps:
 	@echo -e "Specify one of the following supported build outputs"
 	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s\n- make container"
 	@echo -e "Clean targets with 'make clean-<target>'"
-	@echo -e "Clean all targets with `make clean-all`"
+	@echo -e "Clean all targets with `make clean`"

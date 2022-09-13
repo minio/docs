@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 branch=$(git branch --show-current)
 export NVM_DIR="/home/minio/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -7,11 +9,8 @@ nvm use stable
 
 export PATH=${PATH}:${HOME}/.local/bin
 
-make clean-all
-make all
-
-sudo mkdir -p /var/www/docs/minio/windows
-sudo mkdir -p /var/www/docs/minio/macos
+make clean
+make linux windows macos container k8s
 
 sudo rm -rf /var/www/docs/minio/kubernetes/upstream
 sudo mkdir -p /var/www/docs/minio/kubernetes/upstream
@@ -28,7 +27,6 @@ sudo cp -vr build/${branch}/linux/html/* /var/www/docs/minio/linux/
 sudo rm -rf /var/www/docs/minio/macos
 sudo mkdir -p /var/www/docs/minio/macos
 sudo cp -vr build/${branch}/macos/html/* /var/www/docs/minio/macos/
-
 
 sudo rm -rf /var/www/docs/minio/windows
 sudo mkdir -p /var/www/docs/minio/windows
