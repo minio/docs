@@ -124,32 +124,6 @@
 				width: 5rem;
 			}
 		}
-
-		.header__hero {
-			position: absolute;
-			right: 0;
-			width: 100%;
-			height: $search-height;
-			padding: 0 var(--content-padding);
-			top: 3.25rem;
-			
-			& > h2 {
-				display: none;
-			}
-
-			@include breakpoint-min(breakpoints(xl)) {
-				max-width: 31.5rem;
-				
-			}
-
-			@include breakpoint-max(breakpoints(lg)) {
-				top: 7rem
-			}
-
-			&:not(.active) {
-				display: none;
-			}
-		}
 	}
 }
 

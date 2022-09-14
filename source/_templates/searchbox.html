@@ -1,22 +1,5 @@
 {%- if pagename != "search" and builder != "singlehtml" %}
-
-<form class="search" action="{{ pathto('search') }}" method="get" role="search">
-   <div class="search__inner">
-      <button id="search-close" class="icon visible-rm" type="button">
-         <svg width="13" height="10" viewBox="0 0 12 10">
-            <path d="M1.707 4.137H11.5c.277 0 .5.23.5.516 0 .137-.051.27-.145.363s-.223.152-.355.152H1.707l3.148 3.254a.53.53 0 0 1 0 .73c-.098.102-.223.152-.355.152s-.258-.051-.355-.152l-4-4.133c-.195-.203-.195-.531 0-.734l4-4.133A.5.5 0 0 1 4.5 0a.5.5 0 0 1 .355.152.53.53 0 0 1 0 .73zm0 0" fill-rule="evenodd"/>
-         </svg>
-         Hide Search
-      </button>
-
-      <input type="text" class="search__text" id="algolia" name="q" aria-labelledby="searchlabel" placeholder="Search Documentation" />
-      
-      <kbd class="hidden-rm">
-         <span id="search-meta-key"></span>
-         <span>+</span>
-         <span>/</span>
-      </kbd>
-   </div>
-
-</form>
+   <form class="search" action="{{ pathto('search') }}" method="get" role="search">
+      <input type="text" class="search__text" name="q" aria-labelledby="searchlabel" placeholder="Search Documentation" />
+   </form>
 {%- endif %}
