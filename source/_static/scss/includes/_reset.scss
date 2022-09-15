@@ -39,7 +39,6 @@ h2, h3, h4, h5, h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    position: relative;
     line-height: 1.2;
 
     &, 
@@ -47,6 +46,7 @@ h1, h2, h3, h4, h5, h6 {
     code {
         color: var(--headings-color);
         font-size: inherit;
+        padding: 0;
     }
 }
 
@@ -57,12 +57,10 @@ h4 { font-size: 1rem; }
 h5 { font-size: 1rem; }
 h6 { font-size: 1rem; }
 
-.content__main {
-    // Setting extra padding and margin to make room for anchors.
-    h1, h2, h3, h4, h5 {
-        padding-left: 1.5rem;
-        margin-left: -1.5rem;
-    }
+*.headerlink-wrapper {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-left: -1.5rem;
 }
 
 a.headerlink {
@@ -117,20 +115,23 @@ code {
     border: 0;
 }
 
-a {
-    code.xref,
-    code {
-        color: var(--code-link-color);
-        background-color: var(--code-link-bg);
-        transition: opacity 300ms;
-    }
-
-    &:hover {
+.content__main {
+    a {
+        code.xref,
         code {
+            color: var(--code-link-color);
             background-color: var(--code-link-bg);
-            opacity: 0.8;
+            transition: opacity 300ms;
+        }
+    
+        &:hover {
+            code {
+                background-color: var(--code-link-bg);
+                opacity: 0.8;
+            }
         }
     }
+    
 }
 
 .highlight {
