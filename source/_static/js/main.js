@@ -368,4 +368,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     }
   })();
+
+  
+  // --------------------------------------------------
+  // Headerlink wrappers
+  // --------------------------------------------------
+  (function () {
+    const headerlinkEls = document.querySelectorAll(".headerlink");
+    if(headerlinkEls.length > 0) {
+      headerlinkEls.forEach((item) => {
+        var parent = item.parentNode;
+        parent.classList.add("headerlink-wrapper");
+      });
+    }
+  })();
 });

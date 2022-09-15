@@ -72,17 +72,37 @@ div.sidebar {
                 &:hover {
                     color: var(--text-color);
                 }
+
+                code {
+                    background-color: var(--theme-light-bg);
+                    color: var(--text-color);
+                    font-size: $font-size-sm;
+                    margin: -0.5rem 0;
+                    transition: background-color 300ms, color 300ms;
+                    padding: 0.2rem 0.45rem;
+                    border-radius: $border-radius;
+    
+                    &:hover {
+                        background-color: var(--theme-light-hover-bg);
+                        opacity: 1;
+                    }
+                }
             }
 
             &.current > a,
             & > a.current {
                 font-weight: $font-weight-medium;
                 color: var(--docs-nav-active-color);
+
+                code {
+                    color: var(--docs-nav-active-color);
+                    background-color: var(--docs-nav-active-code-bg);
+                }
             }
         }
 
         ul {
-            margin-left: 1rem;
+            margin: 0 0 0 1rem;
         }
     }
 }
