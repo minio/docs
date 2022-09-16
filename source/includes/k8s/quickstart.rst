@@ -144,7 +144,7 @@ Procedure
 
 #. **(Optional) Connect the MinIO Client**
 
-   If your local machine has :mc:`mc` :ref:`installed <mc-install>`, use the :mc-cmd:`mc alias set` command to authenticate and connect to the MinIO deployment:
+   If your local machine has :mc:`mc` :ref:`installed <mc-install>`, use the :mc:`mc alias set` command to authenticate and connect to the MinIO deployment:
 
    .. code-block:: shell
       :class: copyable

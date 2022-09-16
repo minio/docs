@@ -106,7 +106,7 @@ bucket:
 Remove Anonymous Policy for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc policy set` to clear the anonymous policy for a 
+Use :mc:`mc policy set` to clear the anonymous policy for a 
 bucket:
 
 .. code-block:: shell

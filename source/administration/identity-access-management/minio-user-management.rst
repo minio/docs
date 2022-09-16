@@ -130,7 +130,7 @@ MinIO deployment:
    mc admin user add ALIAS ACCESSKEY SECRETKEY
 
 - Replace :mc-cmd:`ALIAS <mc admin user add TARGET>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+  :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`ACCESSKEY <mc admin user add ACCESSKEY>` with the 
   access key for the user. MinIO allows retrieving the access key after
@@ -167,7 +167,7 @@ MinIO deployment:
    mc admin user remove ALIAS USERNAME
 
 - Replace :mc-cmd:`ALIAS <mc admin user remove TARGET>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+  :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the name of
   the user to remove.

@@ -35,8 +35,6 @@ Click the :guilabel:`+ Create Tenant` to start creating a MinIO Tenant.
 2) Complete the :guilabel:`Encryption` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Reference the :ref:`Deploy a MinIO Tenant <minio-k8s-deploy-minio-tenant>` procedure for complete documentation of other Tenant settings.
-
 To enable |SSE| with AWS Key Management Service during Tenant deployment, select the :guilabel:`Encryption` section and toggle the switch to :guilabel:`Enabled`. 
 You can then change the :guilabel:`Vault` Radio button to :guilabel:`AWS` to display the configuration settings.
 

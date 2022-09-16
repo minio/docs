@@ -87,7 +87,7 @@ Examples
 List Anonymous Policies for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc policy links` to links the anonymous policies for a 
+Use :mc:`mc policy links` to links the anonymous policies for a 
 bucket:
 
 .. code-block:: shell

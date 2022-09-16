@@ -62,7 +62,7 @@ transition lifecycle management rules on any bucket in the cluster:.
 Expire Objects after Number of Days
 -----------------------------------
 
-Use :mc-cmd:`mc ilm add` with :mc-cmd:`~mc ilm add --expiry-days` to
+Use :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --expiry-days` to
 expire bucket contents a number of days after object creation:
 
 .. code-block:: shell
@@ -83,7 +83,7 @@ expire bucket contents a number of days after object creation:
 Expire Versioned Objects
 ------------------------
 
-Use :mc-cmd:`mc ilm add` to expiring noncurrent object versions and object
+Use :mc:`mc ilm add` to expiring noncurrent object versions and object
 delete markers: 
 
 - To expire noncurrent object versions after a specific duration in days,

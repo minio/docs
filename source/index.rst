@@ -108,12 +108,7 @@ without validating their usage do so at their own risk.
       /administration/server-side-encryption
       /administration/bucket-replication
       /administration/concepts
-      /developers/minio-drivers
-      /developers/security-token-service
-      /reference/minio-mc
-      /reference/minio-mc-admin
-      /reference/kubectl-minio-plugin
-      /glossary
+
 
 .. cond:: linux or macos or windows or container
 
@@ -138,9 +133,40 @@ without validating their usage do so at their own risk.
       /administration/server-side-encryption
       /administration/bucket-replication
       /administration/concepts
+
+.. cond:: k8s or container or macos or windows
+
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html>
+      Security Token Service (STS) <https://min.io/docs/minio/linux/developers/security-token-service.html>
+      MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html>
+      MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html>
+
+.. cond:: linux
+
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
       /developers/minio-drivers
       /developers/security-token-service
       /reference/minio-mc
       /reference/minio-mc-admin
       /reference/minio-server/minio-server
-      /glossary
+
+.. cond:: k8s
+
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      /reference/kubectl-minio-plugin
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+
+   /glossary

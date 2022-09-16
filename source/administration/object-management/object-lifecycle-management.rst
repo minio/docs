@@ -41,7 +41,7 @@ clusters in private or public cloud infrastructure to low-cost private or public
 cloud storage solutions. MinIO manages retrieving tiered objects on-the-fly
 without any additional application-side logic. 
 
-Use the :mc-cmd:`mc admin tier` command to create a remote target for tiering
+Use the :mc:`mc admin tier` command to create a remote target for tiering
 data to a supported Cloud Service Provider object storage. You can then use the
 :mc-cmd:`mc ilm add --transition-days` command to transition objects to the
 remote tier after a specified number of calendar days.

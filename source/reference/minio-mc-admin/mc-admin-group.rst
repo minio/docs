@@ -15,7 +15,7 @@ Description
 
 .. start-mc-admin-group-desc
 
-The :mc-cmd:`mc admin group` command manages groups on a MinIO deployment.
+The :mc:`mc admin group` command manages groups on a MinIO deployment.
 
 .. end-mc-admin-group-desc
 

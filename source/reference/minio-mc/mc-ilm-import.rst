@@ -115,7 +115,7 @@ Behavior
 Importing Configuration Overrides Existing Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc ilm import` replaces the current bucket lifecycle management
+:mc:`mc ilm import` replaces the current bucket lifecycle management
 rules with those defined in the imported JSON configuration.
 
 S3 Compatibility

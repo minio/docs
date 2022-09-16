@@ -36,7 +36,7 @@ only decrypt an object if it can access both the KMS *and* the |EK| used to
 encrypt that object.
 
 You can enable bucket-default SSE-KMS encryption using the 
-:mc-cmd:`mc encrypt set` command:
+:mc:`mc encrypt set` command:
 
 .. code-block:: shell
    :class: copyable
@@ -46,7 +46,7 @@ You can enable bucket-default SSE-KMS encryption using the
 - Replace ``EXTERNALKEY`` with the name of the |EK| to use for encrypting
   objects in the bucket.
 
-- Replace ``play/mybucket`` with the :mc-cmd:`alias <mc alias>` and bucket 
+- Replace ``play/mybucket`` with the :mc:`alias <mc alias>` and bucket 
   on which you want to enable automatic SSE-KMS encryption.
 
 MinIO SSE-KMS is functionally compatible with AWS S3 
@@ -210,7 +210,7 @@ restart.
 4) Configure Automatic Bucket Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc encrypt set` command to enable automatic SSE-KMS protection
+Use the :mc:`mc encrypt set` command to enable automatic SSE-KMS protection
 of all objects written to a specific bucket.
 
 .. code-block:: shell

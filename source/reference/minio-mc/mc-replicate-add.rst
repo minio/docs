@@ -30,7 +30,7 @@ objects.
 
 This command *requires* first configuring the remote bucket target using the
 :mc-cmd:`mc admin bucket remote add` command. You must specify the resulting
-remote ARN as part of running :mc-cmd:`mc replicate add`.
+remote ARN as part of running :mc:`mc replicate add`.
 
 .. tab-set::
 
@@ -102,7 +102,7 @@ Parameters
 
    *Optional* Creates the replication rule in the "disabled" state. MinIO does
    not begin replicating objects using the rule until it is enabled using
-   :mc-cmd:`mc replicate edit`.
+   :mc:`mc replicate edit`.
 
    Objects created while replication is disabled are not
    immediately eligible for replication after enabling the rule.
@@ -177,7 +177,7 @@ Examples
 Configure Bucket Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following :mc-cmd:`mc replicate add` command creates a replication
+The following :mc:`mc replicate add` command creates a replication
 configuration that synchronizes all new objects, existing objects, delete
 operations, and delete markers to the remote target:
 
@@ -204,7 +204,7 @@ operations, and delete markers to the remote target:
 Configure Bucket Replication for Historical Data Record
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following :mc-cmd:`mc replicate add` command creates a new bucket
+The following :mc:`mc replicate add` command creates a new bucket
 replication configuration that synchronizes all new and existing objects
 to the remote target:
 
@@ -241,7 +241,7 @@ MinIO server-side replication only works between MinIO deployments. Both the
 source and destination deployments *must* run MinIO. 
 
 To configure replication between arbitrary S3-compatible services,
-use :mc-cmd:`mc mirror`.
+use :mc:`mc mirror`.
 
 Enable Versioning on Source and Destination Buckets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -249,7 +249,7 @@ Enable Versioning on Source and Destination Buckets
 MinIO relies on the immutability protections provided by versioning to
 synchronize objects between the source and replication target.
 
-Use the :mc-cmd:`mc version suspend` command to enable versioning on 
+Use the :mc:`mc version suspend` command to enable versioning on 
 *both* the source and destination bucket before starting this procedure:
 
 .. code-block:: shell

@@ -184,7 +184,7 @@ the associated PostgreSQL deployment as a target.
 3) Configure Bucket Notifications using the PostgreSQL Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc event add` command to add a new bucket notification 
+Use the :mc:`mc event add` command to add a new bucket notification 
 event with the configured PostgreSQL service as a target:
 
 .. code-block:: shell
@@ -198,7 +198,7 @@ event with the configured PostgreSQL service as a target:
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which MinIO triggers notifications.
 
-Use :mc-cmd:`mc event list` to view all configured bucket events for 
+Use :mc:`mc event list` to view all configured bucket events for 
 a given notification target:
 
 .. code-block:: shell
@@ -216,7 +216,7 @@ when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc-cmd:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`mc cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
@@ -337,7 +337,7 @@ specified when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc-cmd:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`mc cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell

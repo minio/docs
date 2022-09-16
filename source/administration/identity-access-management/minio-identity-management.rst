@@ -19,7 +19,7 @@ key (password). Clients must authenticate their identity by specifying both
 a valid access key (username) and the corresponding secret key (password) of
 an existing MinIO user.
 
-Administrators use the :mc-cmd:`mc admin user` command to create and manage
+Administrators use the :mc:`mc admin user` command to create and manage
 MinIO users. The :minio-git:`MinIO Console <console>` provides a graphical
 interface for creating users.
 

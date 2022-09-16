@@ -35,14 +35,14 @@ Key Management System (KMS). You must specify the |EK| using the
 MinIO server. MinIO uses the same EK for *all* SSE-S3 cryptographic operations.
 
 You can enable bucket-default SSE-S3 encryption using the 
-:mc-cmd:`mc encrypt set` command:
+:mc:`mc encrypt set` command:
 
 .. code-block:: shell
    :class: copyable
 
    mc encrypt set sse-s3 play/mybucket
 
-- Replace ``play/mybucket`` with the :mc-cmd:`alias <mc alias>` and bucket 
+- Replace ``play/mybucket`` with the :mc:`alias <mc alias>` and bucket 
   on which you want to enable automatic SSE-KMS encryption.
 
 MinIO SSE-S3 is functionally compatible with AWS S3 
@@ -210,7 +210,7 @@ restart.
 
 You can skip this step if you intend to use only client-driven SSE-S3.
 
-Use the :mc-cmd:`mc encrypt set` command to enable automatic SSE-S3 protection
+Use the :mc:`mc encrypt set` command to enable automatic SSE-S3 protection
 of all objects written to a specific bucket.
 
 .. code-block:: shell

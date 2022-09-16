@@ -76,7 +76,7 @@ Examples
 Configure a Hard Quota on a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc admin bucket quota` with the
+Use :mc-cmd:`mc admin bucket quota` with the
 :mc-cmd:`~mc admin bucket quota --hard` flag to specify a hard quota 
 on a bucket. Hard quotas prevent the bucket size from growing past the specified
 limit.
@@ -97,7 +97,7 @@ limit.
 Retrieve Bucket Quota Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc admin bucket quota` to retrieve the current quota configuration
+Use :mc-cmd:`mc admin bucket quota` to retrieve the current quota configuration
 for a bucket:
 
 .. code-block:: shell
@@ -112,7 +112,7 @@ retrieve the quota.
 Clear Configured Bucket Quota
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc admin bucket quota` with the
+Use :mc-cmd:`mc admin bucket quota` with the
 :mc-cmd:`~mc admin bucket quota --clear` flag to clear all quotas from
 a bucket.
 

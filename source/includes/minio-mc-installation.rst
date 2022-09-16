@@ -76,6 +76,6 @@
          make
 
       To update a source-based installation, use ``go get -u``. 
-      :mc-cmd:`mc update` does not support source-based installations.
+      :mc:`mc update` does not support source-based installations.
 
 

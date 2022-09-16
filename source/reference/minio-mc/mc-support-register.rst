@@ -13,9 +13,9 @@
 Description
 -----------
 
-The :mc-cmd:`mc support register` command connects your deployment with your |SUBNET| account.
+The :mc:`mc support register` command connects your deployment with your |SUBNET| account.
 
-After registration, upload deployment health reports directly to SUBNET using :mc-cmd:`mc support diagnostics` command.
+After registration, upload deployment health reports directly to SUBNET using :mc:`mc support diagnostics` command.
 
 
 Examples

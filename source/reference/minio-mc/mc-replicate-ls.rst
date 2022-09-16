@@ -73,7 +73,7 @@ Parameters
    - ``enabled`` - Show only enabled replication rules.
    - ``disabled`` - Show only disabled replication rules.
 
-   If omitted, :mc-cmd:`mc replicate ls` defaults to showing all replication
+   If omitted, :mc:`mc replicate ls` defaults to showing all replication
    rules.
 
 Global Flags
@@ -89,7 +89,7 @@ Examples
 List Existing Replication Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate ls` to list bucket replication rules:
+Use :mc:`mc replicate ls` to list bucket replication rules:
 
 .. code-block:: shell
    :class: copyable

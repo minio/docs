@@ -101,7 +101,7 @@ Examples
 Remove a Replication Rule from a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate rm` to remote a bucket replication rule:
+Use :mc:`mc replicate rm` to remote a bucket replication rule:
 
 .. code-block:: shell
    :class: copyable
@@ -109,7 +109,7 @@ Use :mc-cmd:`mc replicate rm` to remote a bucket replication rule:
    mc replicate rm --id "ID" ALIAS/PATH
 
 - Replace :mc-cmd:`ID <mc replicate rm --id>` with the unique ID of the
-  replication rule to remove. Use :mc-cmd:`mc replicate ls` to list all
+  replication rule to remove. Use :mc:`mc replicate ls` to list all
   replication rules for the bucket.
 
 - Replace :mc-cmd:`ALIAS <mc replicate rm ALIAS>` with the 
@@ -121,7 +121,7 @@ Use :mc-cmd:`mc replicate rm` to remote a bucket replication rule:
 Remove All Replication Rules from a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate rm` to list bucket replication rules:
+Use :mc:`mc replicate rm` to list bucket replication rules:
 
 .. code-block:: shell
    :class: copyable
@@ -143,7 +143,7 @@ Removing Replication Rules Does Not Affect Replicated Objects
 Removing one or all replication rule for a bucket does *not* 
 remove any objects already replicated under those rule(s).
 
-Use The command or :mc-cmd:`mc rb` commands to remove replicated
+Use The command or :mc:`mc rb` commands to remove replicated
 objects on the remote target. You can identify replicated objects using
 the ``X-Amz-Replication-Status`` metadata field where the value is
 ``REPLICA``. Buckets which contain objects from multiple replication sources

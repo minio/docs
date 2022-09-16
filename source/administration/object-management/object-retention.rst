@@ -217,7 +217,7 @@ the MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use the :mc-cmd:`mc mb` command with the :mc-cmd:`~mc mb --with-lock`
+      Use the :mc:`mc mb` command with the :mc-cmd:`~mc mb --with-lock`
       option to create a bucket with object locking enabled:
 
       .. code-block:: shell
@@ -229,7 +229,7 @@ the MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
         MinIO deployment.
 
       - Replace ``BUCKET`` with the 
-        :mc:`name <mc version ALIAS>` of the bucket to create.
+        :mc-cmd:`name <mc version ALIAS>` of the bucket to create.
 
 Configure Bucket-Default Object Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -275,7 +275,7 @@ preferred SDK.
    .. tab-item:: MinIO CLI
       :sync: cli
 
-      Use the :mc-cmd:`mc retention set` command with the
+      Use the :mc:`mc retention set` command with the
       :mc-cmd:`--recursive <mc retention set --recursive>` and
       :mc-cmd:`--default <mc retention set --default>` options to set the
       default retention mode for a bucket:

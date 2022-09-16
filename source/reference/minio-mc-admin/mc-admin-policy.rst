@@ -15,7 +15,7 @@ Description
 
 .. start-mc-admin-policy-desc
 
-The :mc-cmd:`mc admin policy` command manages policies for use with MinIO
+The :mc:`mc admin policy` command manages policies for use with MinIO
 Policy-Based Access Control (PBAC). MinIO PBAC uses IAM-compatible policy JSON
 documents to define rules for accessing resources on a MinIO server.
 

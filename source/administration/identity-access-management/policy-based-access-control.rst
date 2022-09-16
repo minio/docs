@@ -25,7 +25,7 @@ behavior. The MinIO documentation makes a best-effort to cover IAM-specific
 behavior and functionality. Consider deferring to the :iam-docs:`IAM
 documentation <>` for more complete documentation on AWS IAM-specific topics.
 
-The :mc-cmd:`mc admin policy` command supports creation and management of
+The :mc:`mc admin policy` command supports creation and management of
 policies on the MinIO deployment. See the command reference for examples of
 usage.
 
@@ -58,10 +58,10 @@ MinIO provides the following built-in policies for assigning to
    For example, this policy specifically supports GET operations on objects at a
    specific path (e.g. ``GET play/mybucket/object.file``), such as:
 
-   - :mc-cmd:`mc cp`
-   - :mc-cmd:`mc stat`
-   - :mc-cmd:`mc head`
-   - :mc-cmd:`mc cat`
+   - :mc:`mc cp`
+   - :mc:`mc stat`
+   - :mc:`mc head`
+   - :mc:`mc cat`
 
    The exclusion of listing permissions is intentional, as typical use cases
    do not intend for a "read-only" role to have complete discoverability
@@ -124,7 +124,7 @@ as that user:
 
    * - ``Admin``
      - :policy-action:`admin:*`
-     - All :mc-cmd:`mc admin` commands.
+     - All :mc:`mc admin` commands.
 
 Each user can access only those resources and operations which are *explicitly*
 granted by the built-in role. MinIO denies access to any other resource or
@@ -574,7 +574,7 @@ actions:
 -------------------------------
 
 MinIO supports the following actions for use with defining policies
-for :mc-cmd:`mc admin` operations. These actions are *only* valid for
+for :mc:`mc admin` operations. These actions are *only* valid for
 MinIO deployments and are *not* intended for use with other S3-compatible
 services:
 
@@ -745,12 +745,12 @@ services:
 .. policy-action:: admin:SetTier
 
    Allows creating and modifying remote storage tiers using the 
-   :mc-cmd:`mc admin tier` command.
+   :mc:`mc admin tier` command.
 
 .. policy-action:: admin:ListTier
 
    Allows listing configured remote storage tiers using the
-   :mc-cmd:`mc admin tier` command.
+   :mc:`mc admin tier` command.
 
 .. policy-action:: admin:BandwidthMonitor
 
@@ -765,7 +765,7 @@ services:
 ----------------------------------
 
 MinIO supports the following conditions for use with defining policies for
-:mc-cmd:`mc admin` :ref:`actions <minio-policy-mc-admin-actions>`.
+:mc:`mc admin` :ref:`actions <minio-policy-mc-admin-actions>`.
 
 - ``aws:Referer``
 - ``aws:SourceIp``

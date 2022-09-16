@@ -75,7 +75,7 @@ Examples
 Display Replication Status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate status` to show bucket replication status:
+Use :mc:`mc replicate status` to show bucket replication status:
 
 .. code-block:: shell
    :class: copyable

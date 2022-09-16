@@ -90,7 +90,7 @@ The instructions include examples for both quay.io and DockerHub:
       You can access the MinIO deployment over a Terminal or Shell using the :ref:`MinIO Client <minio-client>` (:mc:`mc`).
       See :ref:`MinIO Client Installation Quickstart <mc-install>` for instructions on installing :mc:`mc`.
 
-      Create a new :mc-cmd:`alias <mc alias set>` corresponding to the MinIO deployment. 
+      Create a new :mc:`alias <mc alias set>` corresponding to the MinIO deployment. 
       Use a hostname or IP address for your local machine along with the S3 API port ``9000`` to access the MinIO deployment.
       Any traffic to that port on the local host redirects to the container.
 

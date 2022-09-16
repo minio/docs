@@ -114,7 +114,7 @@ Procedure
             
             mc {command} {flag}
             
-   Use :mc-cmd:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
+   Use :mc:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
 
    .. code-block:: shell
       :class: copyable
@@ -122,7 +122,7 @@ Procedure
       mc alias set local http://127.0.0.1:9000 minioadmin minioadmin
       mc admin info local
 
-   The :mc-cmd:`mc alias set` takes four arguments:
+   The :mc:`mc alias set` takes four arguments:
 
    - The name of the alias
    - The hostname or IP address and port of the MinIO server

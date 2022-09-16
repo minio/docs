@@ -17,7 +17,7 @@ Description
 
 .. start-mc-admin-replicate-desc
 
-The :mc:`mc admin replicate` command creates and manages :ref:`site replication <minio-site-replication-overview>` for a set of MinIO peer sites.
+The :mc-cmd:`mc admin replicate` command creates and manages :ref:`site replication <minio-site-replication-overview>` for a set of MinIO peer sites.
 
 Site replication mimics an active-active bucket replication, but for multiple MinIO deployments.
 Wherever a change occurs to IAM settings, buckets, or objects across the set of sites, the change replicates across all sites in the site replication group.
@@ -26,7 +26,7 @@ Wherever a change occurs to IAM settings, buckets, or objects across the set of 
 
 Where :ref:`bucket replication <minio-bucket-replication>` manages the mirroring of particular buckets or objects from one location to another within a deployment or across deployments, site replication continuously mirrors an entire MinIO site to other sites.
 
-:mc:`mc admin replicate` only supports site replication for :ref:`distributed deployments <deploy-minio-distributed>` when configuring site replication.
+:mc-cmd:`mc admin replicate` only supports site replication for :ref:`distributed deployments <deploy-minio-distributed>` when configuring site replication.
 
 Only one deployment can have any data when initiating a new site replication configuration.
 
@@ -40,7 +40,7 @@ Site replication enforces :ref:`bucket versioning <minio-bucket-versioning>` on 
       :end-before: end-minio-only
 
 
-The :mc:`mc admin replicate` command has the following subcommands:
+The :mc-cmd:`mc admin replicate` command has the following subcommands:
 
 .. list-table::
    :header-rows: 1

@@ -10,7 +10,7 @@
 
 .. mc:: mc retention clear
 
-.. |command| replace:: :mc-cmd:`mc retention clear`
+.. |command| replace:: :mc:`mc retention clear`
 .. |rewind| replace:: :mc-cmd:`~mc retention clear --rewind`
 .. |versionid| replace:: :mc-cmd:`~mc retention clear --version-id`
 .. |versions| replace:: :mc-cmd:`~mc retention clear --versions`
@@ -86,7 +86,7 @@ Parameters
       settings to the bucket contents.
 
    - If the ``ALIAS`` bucket has versioning enabled,
-      :mc-cmd:`mc retention clear` by default applies to only the latest
+      :mc:`mc retention clear` by default applies to only the latest
       object version. Use :mc-cmd:`~mc retention clear --version-id` or
       :mc-cmd:`~mc retention clear --versions` to clear the object lock
       settings for a specific version or for all versions of the object.
@@ -98,7 +98,7 @@ Parameters
    to :mc-cmd:`~mc retention clear ALIAS`.
    
    If specifying :mc-cmd:`~mc retention clear --default`, 
-   :mc-cmd:`mc retention clear` ignores all other flags.
+   :mc:`mc retention clear` ignores all other flags.
 
 .. mc-cmd:: --recursive, r
    
@@ -171,7 +171,7 @@ Clear Object Lock Settings for an Object or Object(s)
 
    .. tab-item:: Multiple Objects
 
-      Use :mc-cmd:`mc retention clear` with
+      Use :mc:`mc retention clear` with
       :mc-cmd:`~mc retention clear --recursive` to clear the retention
       settings from all objects in a bucket:
 

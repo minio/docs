@@ -10,7 +10,7 @@
 
 .. mc:: mc retention info
 
-.. |command| replace:: :mc-cmd:`mc retention info`
+.. |command| replace:: :mc:`mc retention info`
 .. |rewind| replace:: :mc-cmd:`~mc retention info --rewind`
 .. |versionid| replace:: :mc-cmd:`~mc retention info --version-id`
 .. |alias| replace:: :mc-cmd:`~mc retention info ALIAS`
@@ -92,7 +92,7 @@ Parameters
       lock settings for all objects in the bucket or bucket prefix.
 
    - If the ``ALIAS`` bucket has versioning enabled, 
-      :mc-cmd:`mc retention info` by default applies to only the latest object
+      :mc:`mc retention info` by default applies to only the latest object
       version. Use :mc-cmd:`~mc retention info --version-id` or
       :mc-cmd:`~mc retention info --versions` to return the object lock
       settings for a specific version or for all versions of the object.
@@ -105,7 +105,7 @@ Parameters
    to :mc-cmd:`~mc retention info ALIAS`.
 
    If specifying :mc-cmd:`~mc retention info --default`, 
-   :mc-cmd:`mc retention info` ignores all other flags.
+   :mc:`mc retention info` ignores all other flags.
 
 .. mc-cmd:: --recursive, r
    
@@ -177,7 +177,7 @@ Retrieve Object Lock Settings for an Object or Object(s)
 
    .. tab-item:: Multiple Objects
 
-      Use :mc-cmd:`mc retention info` with
+      Use :mc:`mc retention info` with
       :mc-cmd:`~mc retention info --recursive` to retrieve the retention
       settings for all objects in a bucket:
 
@@ -199,7 +199,7 @@ Retrieve Object Lock Settings for an Object or Object(s)
 Retrieve Default Object Lock Settings for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc retention info` with 
+Use :mc:`mc retention info` with 
 :mc-cmd:`~mc retention info --default` to retrieve the default 
 object lock settings for a bucket:
 

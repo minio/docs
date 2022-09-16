@@ -253,8 +253,8 @@ Procedure
          chmod +x mc
          sudo mv mc /usr/local/bin/mc
    
-      Use :mc-cmd:`mc alias set` to create a new alias associated to your local deployment.
-      You can run :mc-cmd:`mc` commands against this alias:
+      Use :mc:`mc alias set` to create a new alias associated to your local deployment.
+      You can run :mc:`mc` commands against this alias:
 
       .. code-block:: shell
          :class: copyable
@@ -264,7 +264,7 @@ Procedure
 
       Replace ``{MINIO_ROOT_USER}`` and ``{MINIO_ROOT_PASSWORD}`` with the credentials you defined for the container with the ``-e`` flags.
       
-      The :mc-cmd:`mc alias set` takes four arguments:
+      The :mc:`mc alias set` takes four arguments:
    
       - The name of the alias
       - The hostname or IP address and port of the MinIO server
@@ -310,7 +310,7 @@ Procedure
                chmod +x mc
                sudo mv mc /usr/local/bin/mc
       
-      Use :mc-cmd:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
+      Use :mc:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
       
       .. code-block:: shell
          :class: copyable
@@ -320,7 +320,7 @@ Procedure
       
       Replace ``{MINIO_ROOT_USER}`` and ``{MINIO_ROOT_PASSWORD}`` with the credentials you defined for the container with the ``-e`` flags.
 
-      The :mc-cmd:`mc alias set` takes four arguments:
+      The :mc:`mc alias set` takes four arguments:
    
       - The name of the alias
       - The hostname or IP address and port of the MinIO server
@@ -343,7 +343,7 @@ Procedure
    
          \path\to\mc.exe --help
          
-      Use :mc-cmd:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
+      Use :mc:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
    
       .. code-block:: shell
          :class: copyable
@@ -353,7 +353,7 @@ Procedure
    
       Replace ``{MINIO_ROOT_USER}`` and ``{MINIO_ROOT_PASSWORD}`` with the credentials you defined for the container with the ``-e`` flags.
       
-      The :mc-cmd:`mc alias set` takes four arguments:
+      The :mc:`mc alias set` takes four arguments:
    
       - The name of the alias
       - The hostname or IP address and port of the MinIO server

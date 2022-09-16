@@ -84,7 +84,7 @@ Parameters
    
 
    *Required* Specify the unique ID for a configured replication rule. 
-   Use the :mc-cmd:`mc replicate ls` command to list the replication rules
+   Use the :mc:`mc replicate ls` command to list the replication rules
    for a bucket.
 
 .. mc-cmd:: --priority
@@ -183,7 +183,7 @@ Examples
 Modify an Existing Replication Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate edit` to modify an existing replication rule.
+Use :mc:`mc replicate edit` to modify an existing replication rule.
 
 .. code-block:: shell
    :class: copyable
@@ -199,7 +199,7 @@ Use :mc-cmd:`mc replicate edit` to modify an existing replication rule.
   bucket or bucket prefix on which the rule exists.
 
 - Replace :mc-cmd:`ID <mc replicate edit --id>` with the unique identifier for the
-  rule to modify. Use :mc-cmd:`mc replicate ls` to retrieve the list of 
+  rule to modify. Use :mc:`mc replicate ls` to retrieve the list of 
   replication rules on the bucket and their corresponding identifiers.
 
 .. note::
@@ -212,7 +212,7 @@ Use :mc-cmd:`mc replicate edit` to modify an existing replication rule.
 Disable or Enable an Existing Replication Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate edit` with the
+Use :mc:`mc replicate edit` with the
 :mc-cmd:`~mc replicate edit --state` flag to disable or enable a 
 replication rule.
 
@@ -230,7 +230,7 @@ replication rule.
   bucket or bucket prefix on which the rule exists.
 
 - Replace :mc-cmd:`ID <mc replicate edit --id>` with the unique identifier for the
-  rule to modify. Use :mc-cmd:`mc replicate ls` to retrieve the list of 
+  rule to modify. Use :mc:`mc replicate ls` to retrieve the list of 
   replication rules on the bucket and their corresponding identifiers.
 
 - Specify either ``"disabled"`` or ``"enabled"`` to the 

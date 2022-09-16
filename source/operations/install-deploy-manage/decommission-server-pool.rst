@@ -170,7 +170,7 @@ Decommission a Server Pool
 1) Review the MinIO Deployment Topology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :mc-cmd:`mc admin decommission` command returns a list of all
+The :mc:`mc admin decommission` command returns a list of all
 pools in the MinIO deployment:
 
 .. code-block:: shell
@@ -280,7 +280,7 @@ the next step once decommissioning is completed.
 
 If :guilabel:`Status` reads as failed, you can re-run the
 :mc-cmd:`mc admin decommission start` command to resume the process. 
-For persistent failures, use :mc-cmd:`mc admin console` or review
+For persistent failures, use :mc:`mc admin console` or review
 the ``systemd`` logs (e.g. ``journalctl -u minio``) to identify more specific
 errors.
 
@@ -340,5 +340,5 @@ to restart the MinIO service:
    :start-after: start-nondisruptive-upgrade-desc
    :end-before: end-nondisruptive-upgrade-desc
 
-Once the deployment is online, use :mc-cmd:`mc admin info` to confirm the
+Once the deployment is online, use :mc:`mc admin info` to confirm the
 uptime of all remaining servers in the deployment.

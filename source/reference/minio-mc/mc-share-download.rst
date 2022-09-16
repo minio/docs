@@ -10,7 +10,7 @@
 
 .. mc:: mc share download
 
-.. |command| replace:: :mc-cmd:`mc share download`
+.. |command| replace:: :mc:`mc share download`
 .. |versionid| replace:: :mc-cmd:`~mc share download --version-id`
 .. |alias| replace:: :mc-cmd:`~mc share download ALIAS`
 
@@ -134,7 +134,7 @@ Generate a URL to Download Object(s)
 
    .. tab-item:: Get Specific Object
 
-      Use :mc-cmd:`mc share download` to generate a URL that supports
+      Use :mc:`mc share download` to generate a URL that supports
       ``GET`` requests for an object:
 
       .. code-block:: shell
@@ -154,7 +154,7 @@ Generate a URL to Download Object(s)
 
    .. tab-item:: Get Object(s) in a Bucket
 
-      Use :mc-cmd:`mc share download` with the 
+      Use :mc:`mc share download` with the 
       :mc-cmd:`~mc share download --recursive` option to generate a URL for
       each object in a bucket. Each URL supports ``GET`` requests for its
       associated object:

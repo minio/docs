@@ -34,7 +34,7 @@ Add a New Replication Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc admin bucket remote add` to create a new replication target 
-ARN for use with :mc-cmd:`mc replicate add`:
+ARN for use with :mc:`mc replicate add`:
 
 .. code-block:: shell
    :class: copyable

@@ -14,7 +14,7 @@
 
 .. Replacement substitutions
 
-.. |command| replace:: :mc-cmd:`mc cat`
+.. |command| replace:: :mc:`mc cat`
 .. |rewind| replace:: :mc-cmd:`~mc cat --rewind`
 .. |versionid| replace:: :mc-cmd:`~mc cat --version-id`
 .. |alias| replace:: :mc-cmd:`~mc cat ALIAS`
@@ -134,7 +134,7 @@ Examples
 View an S3 Object
 ~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc cat` to return the object:
+Use :mc:`mc cat` to return the object:
 
 .. code-block:: shell
    :class: copyable

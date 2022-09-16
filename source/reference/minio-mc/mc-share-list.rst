@@ -16,7 +16,7 @@ Syntax
 .. start-mc-share-upload-desc
 
 The :mc:`mc share list` command displays any unexpired presigned URLs generated
-by :mc-cmd:`mc share upload` or :mc-cmd:`mc share download`
+by :mc:`mc share upload` or :mc:`mc share download`
 
 .. end-mc-share-upload-desc
 
@@ -62,13 +62,13 @@ Parameters
 
    *Required* Lists all unexpired presigned download (``GET``) URLs.
 
-   Mutually exclusive with :mc-cmd:`mc share list upload`
+   Mutually exclusive with :mc:`mc share list upload`
 
 .. mc-cmd:: upload
 
    *Required* Lists all unexpired presigned upload (``PUT``) URLs.
 
-   Mutually exclusive with :mc-cmd:`mc share list download`
+   Mutually exclusive with :mc:`mc share list download`
 
 .. mc-cmd:: ALIAS
 
@@ -94,7 +94,7 @@ List Generated Download and Upload URLs
 
    .. tab-item:: List Active Download Presigned URLs
 
-      Use :mc-cmd:`mc share list download` to generate a URL
+      Use :mc:`mc share list download` to generate a URL
       that supports ``POST`` requests for uploading a file to a specific object
       location on an S3-compatible host:
 
@@ -108,7 +108,7 @@ List Generated Download and Upload URLs
 
    .. tab-item:: List Active Upload Presigned URLs
 
-      Use :mc-cmd:`mc share list upload` to generate a URL that
+      Use :mc:`mc share list upload` to generate a URL that
       supports ``POST`` requests for uploading a file to a specific object
       location on an S3-compatible host:
 

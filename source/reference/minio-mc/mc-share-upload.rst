@@ -127,7 +127,7 @@ Generate a URL to Upload Object(s)
 
    .. tab-item:: Upload Single Object
 
-      Use :mc-cmd:`mc share upload` to generate a URL that supports
+      Use :mc:`mc share upload` to generate a URL that supports
       ``POST`` requests for uploading a file to a specific object location
       on a MinIO deployment:
 
@@ -148,7 +148,7 @@ Generate a URL to Upload Object(s)
 
    .. tab-item:: Upload Multiple Objects
 
-      Use :mc-cmd:`mc share upload` with the
+      Use :mc:`mc share upload` with the
       :mc-cmd:`~mc share upload --recursive` and
       :mc-cmd:`~mc share upload --expire` options to generate a temporary URL
       that supports ``POST`` requests for uploading files to a bucket on a MinIO

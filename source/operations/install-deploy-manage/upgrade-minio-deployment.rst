@@ -84,7 +84,7 @@ Use these steps to upgrade a MinIO deployment where the MinIO server process is 
 
 3. Validate the Upgrade
 
-   Use the :mc-cmd:`mc admin info` command to check that all MinIO servers are online, operational, and reflect the installed MinIO version.
+   Use the :mc:`mc admin info` command to check that all MinIO servers are online, operational, and reflect the installed MinIO version.
 
 4. Update MinIO Client
 
@@ -104,7 +104,7 @@ Update Non-System Managed MinIO Deployments
 Use these steps to upgrade a MinIO deployment where the MinIO server process is managed outside of the system (``systemd``, ``systemctl``), such as by a user, an automated script, or some other process management tool.
 This procedure only works for systems where the user running the MinIO process has write permissions for the path to the MinIO binary.
 
-The :mc-cmd:`mc admin update` command updates all MinIO server binaries in the target MinIO deployment before restarting all nodes simultaneously.
+The :mc:`mc admin update` command updates all MinIO server binaries in the target MinIO deployment before restarting all nodes simultaneously.
 The restart process typically completes within a few seconds and is *non-disruptive* to ongoing operations.
 
 - For deployments managed using ``systemctl``, see

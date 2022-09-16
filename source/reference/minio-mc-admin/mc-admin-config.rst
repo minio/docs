@@ -17,7 +17,7 @@ Description
 
 .. start-mc-admin-config-desc
 
-The :mc-cmd:`mc admin config` command manages configuration settings for the
+The :mc:`mc admin config` command manages configuration settings for the
 :mc:`minio` server.
 
 .. end-mc-admin-bucket-remote-desc

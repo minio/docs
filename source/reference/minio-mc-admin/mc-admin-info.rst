@@ -15,8 +15,8 @@ Description
 
 .. start-mc-admin-info-desc
 
-The :mc:`mc admin info` command displays information on a MinIO server.
-For distributed MinIO deployments, :mc:`mc admin info` displays information
+The :mc-cmd:`mc admin info` command displays information on a MinIO server.
+For distributed MinIO deployments, :mc-cmd:`mc admin info` displays information
 for each MinIO server in the deployment.
 
 .. end-mc-admin-info-desc

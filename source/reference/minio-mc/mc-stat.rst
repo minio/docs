@@ -10,7 +10,7 @@
 
 .. mc:: mc stat
 
-.. |command| replace:: :mc-cmd:`mc stat`
+.. |command| replace:: :mc:`mc stat`
 .. |rewind| replace:: :mc-cmd:`~mc stat --rewind`
 .. |versions| replace:: :mc-cmd:`~mc stat --versions`
 .. |versionid| replace:: :mc-cmd:`~mc stat --version-id`

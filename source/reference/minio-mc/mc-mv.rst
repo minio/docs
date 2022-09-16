@@ -83,7 +83,7 @@ Parameters
       mc mv ~/mydata/object.txt play/mybucket/object.txt
    
    Specify multiple ``SOURCE`` paths to move multiple objects to the
-   specified :mc-cmd:`~mc mv TARGET`. :mc-cmd:`mc rm` treats the
+   specified :mc-cmd:`~mc mv TARGET`. :mc:`mc rm` treats the
    *last* specified alias or filesystem path as the ``TARGET``. For example:
 
    .. code-block:: shell
@@ -121,8 +121,8 @@ Parameters
    The ``TARGET`` object name can differ from the ``SOURCE`` to 
    "rename" the object as part of the move operation. 
 
-   If running :mc-cmd:`mc mv` with the :mc-cmd:`~mc mv --recursive` option, 
-   :mc-cmd:`mc mv` treats the ``TARGET`` as the bucket prefix for all
+   If running :mc:`mc mv` with the :mc-cmd:`~mc mv --recursive` option, 
+   :mc:`mc mv` treats the ``TARGET`` as the bucket prefix for all
    objects at the ``SOURCE``. 
 
 .. mc-cmd:: --attr
@@ -355,7 +355,7 @@ move operation from the point of failure.
 MinIO Trims Empty Prefixes on Object Removal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |command| replace:: :mc-cmd:`mc mv`
+.. |command| replace:: :mc:`mc mv`
 
 .. include:: /includes/common-admonitions.rst
    :start-after: start-remove-api-trims-prefixes

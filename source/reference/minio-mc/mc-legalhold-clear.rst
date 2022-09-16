@@ -12,7 +12,7 @@
 
 .. mc:: mc legalhold clear
 
-.. |command| replace:: :mc-cmd:`mc legalhold clear`
+.. |command| replace:: :mc:`mc legalhold clear`
 .. |rewind| replace:: :mc-cmd:`~mc legalhold clear --rewind`
 .. |versionid| replace:: :mc-cmd:`~mc legalhold clear --version-id`
 .. |alias| replace:: :mc-cmd:`~mc legalhold clear ALIAS`
@@ -107,7 +107,7 @@ Examples
 Retrieve the Legal Hold Status Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc legalhold clear` to retrieve the legal hold status of an object.
+Use :mc:`mc legalhold clear` to retrieve the legal hold status of an object.
 Include :mc-cmd:`~mc legalhold clear --recursive` to return the legal hold
 status of the contents of a bucket:
 

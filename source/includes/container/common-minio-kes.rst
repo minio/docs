@@ -125,7 +125,7 @@ KES automatically creates this key if it does not already exist on the root KMS.
 
 MinIO requires that the |EK| exist on the root KMS *before* performing
 |SSE| operations using that key. Use ``kes key create`` *or*
-:mc:`mc admin kms key create` to create a new |EK| for use with |SSE|.
+:mc-cmd:`mc admin kms key create` to create a new |EK| for use with |SSE|.
 
 The following command uses the ``kes key create`` command to add a new
 External Key (EK) stored on the root KMS server for use with encrypting

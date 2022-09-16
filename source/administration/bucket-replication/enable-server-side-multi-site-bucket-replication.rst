@@ -18,7 +18,7 @@ The procedure on this page configures automatic server-side bucket replication b
    :alt: Active-Active Replication synchronizes data between multiple remote deployments.
    :align: center
 
-- To configure replication between arbitrary S3-compatible services, use :mc-cmd:`mc mirror`.
+- To configure replication between arbitrary S3-compatible services, use :mc:`mc mirror`.
 
 - To configure one-way "active-active" replication between two MinIO deployments, see :ref:`minio-bucket-replication-serverside-twoway`.
 
@@ -28,11 +28,11 @@ Multi-Site Active-Active replication configurations can span multiple racks, dat
 
 .. seealso::
 
-   - Use the :mc-cmd:`mc replicate edit` command to modify an existing replication rule.
+   - Use the :mc:`mc replicate edit` command to modify an existing replication rule.
 
-   - Use the :mc-cmd:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
+   - Use the :mc:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
 
-   - Use the :mc-cmd:`mc replicate rm` command to remove an existing replication rule.
+   - Use the :mc:`mc replicate rm` command to remove an existing replication rule.
 
 .. _minio-bucket-replication-serverside-multi-requirements:
 
@@ -154,7 +154,7 @@ Configure Multi-Site Bucket Replication Using the Command Line (:mc:`mc`)
 
 This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each MinIO deployment being configured for replication. Replace these values with the appropriate alias for each MinIO deployment.
 
-This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-multi-permissions>`.
+This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-requirements>`.
 
 .. _minio-bucket-replication-multi-site-minio-cli-create-remote-targets:
 
@@ -210,4 +210,4 @@ Specifically, in this scenario, perform this step twice on each deployment:
 
 Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
 
-You can also use :mc-cmd:`mc stat` to check the file to check the current :ref:`replication stage <minio-replication-process>` of the object.
+You can also use :mc:`mc stat` to check the file to check the current :ref:`replication stage <minio-replication-process>` of the object.

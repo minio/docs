@@ -12,7 +12,7 @@
 
 .. mc:: mc tag list
 
-.. |command| replace:: :mc-cmd:`mc tag list`
+.. |command| replace:: :mc:`mc tag list`
 .. |rewind| replace:: :mc-cmd:`~mc tag list --rewind`
 .. |versions| replace:: :mc-cmd:`~mc tag list --versions`
 .. |versionid| replace:: :mc-cmd:`~mc tag list --version-id`
@@ -115,7 +115,7 @@ Examples
 List Tags for a Bucket or Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc tag list` to list tags for a bucket or object:
+Use :mc:`mc tag list` to list tags for a bucket or object:
 
 .. code-block:: shell
    :class: copyable

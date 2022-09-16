@@ -65,9 +65,9 @@ Parameters
 .. mc-cmd:: all
 
    *Required* Removes all rules in the bucket. Mutually exclusive with
-   :mc-cmd:`mc ilm rm id`.
+   :mc:`mc ilm rm id`.
 
-   Mutually exclusive with :mc-cmd:`mc ilm rm id`
+   Mutually exclusive with :mc:`mc ilm rm id`
 
    Requires including :mc-cmd:`~mc ilm rm force`.
 
@@ -77,10 +77,10 @@ Parameters
 
 .. mc-cmd:: id
 
-   *Required* The unique ID of the rule. Use :mc-cmd:`mc ilm ls` to list bucket
+   *Required* The unique ID of the rule. Use :mc:`mc ilm ls` to list bucket
    rules and retrieve the ``id`` for the rule you want to remove.
 
-   Mutually exclusive with :mc-cmd:`mc ilm rm all`
+   Mutually exclusive with :mc:`mc ilm rm all`
 
 Global Flags
 ~~~~~~~~~~~~
@@ -95,7 +95,7 @@ Examples
 Remove a Bucket Lifecycle Management Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc ilm rm` to remove a bucket lifecycle management rule:
+Use :mc:`mc ilm rm` to remove a bucket lifecycle management rule:
 
 .. code-block:: shell
    :class: copyable

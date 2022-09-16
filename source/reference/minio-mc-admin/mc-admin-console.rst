@@ -15,7 +15,7 @@ Description
 
 .. start-mc-admin-console-desc
 
-The :mc-cmd:`mc admin console` command returns server log entries for each
+The :mc:`mc admin console` command returns server log entries for each
 MinIO server in the deployment.
 
 .. end-mc-admin-console-desc
@@ -31,14 +31,14 @@ MinIO server in the deployment.
 Syntax
 ------
 
-:mc-cmd:`mc admin console` has the following syntax:
+:mc:`mc admin console` has the following syntax:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin console [FLAGS] TARGET NODENAME
 
-:mc-cmd:`mc admin console` supports the following:
+:mc:`mc admin console` supports the following:
 
 .. mc-cmd:: TARGET
 

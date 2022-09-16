@@ -36,7 +36,7 @@ rules on a MinIO bucket.
 
    .. tab-item:: SYNTAX
 
-      The :mc-cmd:`mc ilm ls` command has the following syntax:
+      The :mc:`mc ilm ls` command has the following syntax:
 
       .. code-block:: shell
          :class: copyable
@@ -65,7 +65,7 @@ Parameters
 .. mc-cmd:: --expiry
    
 
-   *Optional* :mc-cmd:`mc ilm ls` returns only fields related to lifecycle rule
+   *Optional* :mc:`mc ilm ls` returns only fields related to lifecycle rule
    expiration.
 
    Mutually exclusive with :mc-cmd:`~mc ilm ls --transition`.
@@ -73,7 +73,7 @@ Parameters
 .. mc-cmd:: --transition
    
 
-   *Optional* :mc-cmd:`mc ilm ls` returns only fields related to lifecycle rule
+   *Optional* :mc:`mc ilm ls` returns only fields related to lifecycle rule
    transition.
 
    Mutually exclusive with :mc-cmd:`~mc ilm ls --expiry`.
@@ -92,7 +92,7 @@ Examples
 List Bucket Lifecycle Management Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc ilm ls` to list a bucket's lifecycle management rules:
+Use :mc:`mc ilm ls` to list a bucket's lifecycle management rules:
 
 .. code-block:: shell
    :class: copyable

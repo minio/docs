@@ -31,7 +31,7 @@ request against each MinIO server in a deployment.
 Example
 -------
 
-Use :mc:`mc admin trace` to perform an HTTP trace of each MinIO server in
+Use :mc-cmd:`mc admin trace` to perform an HTTP trace of each MinIO server in
 the deployment:
 
 .. code-block:: shell

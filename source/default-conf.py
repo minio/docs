@@ -84,9 +84,8 @@ extlinks = {
 
 suppress_warnings = [
     'toc.excluded',
-    'ref.myst',
     'myst.header',
-    'myst'
+    'ref.myst'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -140,19 +139,10 @@ elif tags.has("macos"):
         'operations/install-deploy-manage/delete-minio-tenant.rst',
         'operations/install-deploy-manage/minio-operator-console.rst',
         'operations/deploy-manage-tenants.rst',
-        'reference/kubectl-minio-plugin.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-init.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-proxy.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-create.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-delete.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-expand.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-info.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-list.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-report.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-upgrade.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
+        'reference/kubectl-minio-plugin*',
+        'reference/minio-server*',
+        'reference/minio-mc*',
+        'developers/*'
     ]
 elif tags.has("windows"):
     # html_baseurl is used for generating the sitemap.xml for each platform. These are combined in a sitemapindex.xml.
@@ -166,19 +156,10 @@ elif tags.has("windows"):
         'operations/install-deploy-manage/delete-minio-tenant.rst',
         'operations/install-deploy-manage/minio-operator-console.rst',
         'operations/deploy-manage-tenants.rst',
-        'reference/kubectl-minio-plugin.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-init.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-proxy.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-create.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-delete.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-expand.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-info.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-list.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-report.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-upgrade.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
+        'reference/kubectl-minio-plugin*',
+        'reference/minio-server*',
+        'reference/minio-mc*',
+        'developers/*'
     ]
 elif tags.has("container"):
     html_baseurl = 'https://min.io/docs/minio/container/'
@@ -193,19 +174,10 @@ elif tags.has("container"):
         'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst',
         'operations/install-deploy-manage/multi-site-replication.rst',
         'operations/deploy-manage-tenants.rst',
-        'reference/kubectl-minio-plugin.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-init.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-proxy.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-create.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-delete.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-expand.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-info.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-list.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-report.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-upgrade.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
+        'reference/kubectl-minio-plugin*',
+        'reference/minio-server*',
+        'reference/minio-mc*',
+        'developers/*'
     ]
 elif tags.has("k8s"):
     html_baseurl = 'https://min.io/docs/minio/kubernetes/upstream/'
@@ -217,7 +189,9 @@ elif tags.has("k8s"):
         'operations/install-deploy-manage/expand-minio-deployment.rst',
         'operations/install-deploy-manage/decommission-server-pool.rst',
         'operations/manage-existing-deployments.rst',
-        'reference/minio-server*'
+        'reference/minio-server*',
+        'reference/minio-mc*',
+        'developers/*'
 
     ]
 else:
@@ -287,8 +261,8 @@ sphinx_tabs_disable_css_loading = True
 # k8s is temporary until integrating the references here
 
 intersphinx_mapping = {
-    'linux': ('https://www.min.io/docs/minio/linux/', None),
-    'kubernetes': ('https://www.min.io/docs/minio/kubernetes/upstream/', None),
+    'linux'      : ('https://min.io/docs/minio/linux/', None),
+    'kubernetes' : ('https://min.io/docs/minio/kubernetes/upstream/',None) 
 }
 
 rst_prolog = """
