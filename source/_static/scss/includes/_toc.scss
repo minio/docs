@@ -65,6 +65,7 @@ div.topic {
         color: var(--headings-color);
         margin: 0;
         line-height: 1;
+        font-size: $font-size-md;
 
         @include breakpoint-max(breakpoints(lg)) {
             padding: 0.85rem 1rem;

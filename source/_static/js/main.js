@@ -1,14 +1,6 @@
 window.addEventListener("DOMContentLoaded", (event) => {
   const tocMenuEl = document.querySelector("#table-of-contents > ul.simple");
   var readModeLs = localStorage.getItem("read-mode");
-  
-  // --------------------------------------------------
-  // Detect macOS
-  // --------------------------------------------------
-  function isMac() {
-    return navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-  }
-
 
   // --------------------------------------------------
   // Detect parent iframe.
@@ -103,24 +95,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
   // --------------------------------------------------
-  // Get meta key based on the OS
-  // --------------------------------------------------
-  (function () {
-    const metaKeyEl = document.getElementById("search-meta-key");
-    
-    if(metaKeyEl) {
-      if(isMac()) {
-        metaKeyEl.innerHTML = "⌘";
-      }
-      else {
-        metaKeyEl.classList.add("ctrl");
-        metaKeyEl.innerHTML = "Ctrl";
-      }
-    }
-  })();
-
-
-  // --------------------------------------------------
   // TOC
   // --------------------------------------------------
   (function () {
@@ -135,7 +109,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     else {
       tocAsideEL.style.display = "none";
     }
-
     
     // Treat the TOC as a dropdown in mobile
     const tocToggleEl = document.querySelector(".topic-title");
@@ -185,45 +158,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         nav.classList.add("active");
       });
     });
-  })();
-
-
-  // --------------------------------------------------
-  // Search
-  // --------------------------------------------------
-  (function () {
-    const searchToggleEl = document.querySelectorAll(".search-toggle");
-    const searchParentEl = document.querySelector(".header__hero");
-    const searchInputEl = document.querySelector(".search__text");
-    const searchCloseEl = document.getElementById("search-close");
-    const searchDocEL = document.getElementById("search-documentation")
-
-    if(searchInputEl) {
-      // Open
-      searchToggleEl.forEach((item) => {
-        item.addEventListener("click", (event) => {
-          // Hide opened toc menu on mobile
-          if(tocMenuEl) {
-            tocMenuEl.closest(".content__toc").classList.remove("active");
-          }
-
-          // Toggle search
-          searchParentEl.classList.add("active");
-          searchInputEl.focus();
-        });
-      });
-
-      // Close
-      searchCloseEl.addEventListener("click", (event) => {
-        searchParentEl.classList.remove("active");
-        searchInputEl.value = "";
-      });
-    }
-
-    // Add ID to search result page
-    if(searchDocEL) {
-      document.documentElement.classList.add("search-doc");
-    }
   })();
 
   
@@ -291,26 +225,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     });
   })();
-
-
-  // --------------------------------------------------
-  // Focus search input on key combination
-  // --------------------------------------------------
-  (function () {
-    const root = document.documentElement;
-
-    document.addEventListener("keydown", (event) => {
-      if(!root.classList.contains("read-mode")) {
-        const searchInputEl = document.querySelector(".search__text");
-        var metaKey = isMac() ? event.metaKey : event.ctrlKey
-
-        if (metaKey && event.key === "/") {
-          searchInputEl.focus();
-          window.scrollTo(0, 0);
-        }
-      }
-    });
-  })();
   
 
   // --------------------------------------------------
@@ -369,7 +283,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   })();
 
-  
+
   // --------------------------------------------------
   // Headerlink wrappers
   // --------------------------------------------------
@@ -379,6 +293,35 @@ window.addEventListener("DOMContentLoaded", (event) => {
       headerlinkEls.forEach((item) => {
         var parent = item.parentNode;
         parent.classList.add("headerlink-wrapper");
+      });
+    }
+  })();
+
+  // --------------------------------------------------
+  // Search
+  // --------------------------------------------------
+  (function () {
+    const docSearchEl = document.getElementById("docsearch");
+
+    if(docSearchEl) {
+      // Init Docsearch
+      docsearch({
+        container: '#docsearch',
+        appId: 'E1CSOK3UC2',
+        indexName: 'minio',
+        apiKey: '6bc246d81fd3b79f51cf88f0b2481bac',
+        placeholder: 'Search Documentation',
+      });
+
+      // Trigger Docsearch modal on custom button clicks
+      const searchToggleEls = document.querySelectorAll(".search-toggle");
+      const docSearchBtn = document.querySelector(".DocSearch-Button");
+
+      searchToggleEls.forEach(item => {
+        item.addEventListener("click", (event) => {
+          event.preventDefault();
+          docSearchBtn.click();
+        });
       });
     }
   })();

@@ -41,15 +41,6 @@ $theme-properties: (
     --content-nav-sub-active-color: $theme-red $dark-0,
     --content-nav-icon-filter: none (invert(100%) sepia(12%) saturate(777%) hue-rotate(181deg) brightness(100%) contrast(85%)),
 
-    // Search
-    --search-bg: $white $dark-100,
-    --search-border-color: $light-300 $dark-300,
-    --search-focus-border-color: $light-400 $dark-400,
-    --search-placeholder-color: #7e7e7e #697995,
-    --search-color: $black $text-dark-color,
-    --search-icon: url(../img/icons/search.svg) url(../img/icons/search-dark.svg),
-    --search-focus-shadow: rgba($white, 0.15) #1b232f,
-
     // Sidebar
     --sidebar-bg: $light-100 $dark-100,
     --sidebar-hide-bg: $light-500 $dark-400,
@@ -119,6 +110,14 @@ $theme-properties: (
     --alert-warning-color: #b2404b #bb4a55,
     --alert-warning-code-bg: #f3dfe1 #3d1014,
     --alert-warning-link-decoration-color: #e3c3c6 #54141a,
+
+    // Doc Search
+    --docsearch-modal-background: rgba($white, 0.85) rgba($dark-100, 0.6),
+    --docsearch-container-background: rgba($black, 0.25) rgba(16, 21, 28, 0.851),
+    --ds-highlight-color: rgba(120, 133, 152, 0.125) rgba(16, 21, 28, 0.3),
+    --ds-search-bg: $white $dark-100,
+    --ds-search-placeholder-color: #7e7e7e #697995,
+    --ds-search-focus-shadow: rgba($white, 0.15) #1b232f,
 );
 
 // Activate dark/light themes
