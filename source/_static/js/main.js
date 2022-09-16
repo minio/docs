@@ -302,6 +302,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // --------------------------------------------------
   (function () {
     const docSearchEl = document.getElementById("docsearch");
+    const platform = document.head.querySelector('meta[name="docsearch:platform"]').content
 
     if(docSearchEl) {
       // Init Docsearch
@@ -311,6 +312,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
         indexName: 'minio',
         apiKey: '6bc246d81fd3b79f51cf88f0b2481bac',
         placeholder: 'Search Documentation',
+        searchParameters: {
+          facetFilters: ['platform:' + platform]
+        }
       });
 
       // Trigger Docsearch modal on custom button clicks
