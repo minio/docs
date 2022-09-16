@@ -1,0 +1,344 @@
+# Top level redirects from NuDocs 1 to NuDocs 2
+# =============================================
+
+location /minio/baremetal/introduction/minio-overview.html {
+     return 301 https://min.io/docs/minio/linux/operations/concepts.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/concepts/erasure-coding.html {
+     return 301 https://min.io/docs/minio/linux/operations/concepts/erasure-coding.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/quickstart/linux.html {
+     return 301 https://min.io/docs/minio/linux/operations/index.html?ref=docs-redirect;
+}
+
+
+# Deploy/Manage Redirects from NuDocs 1 to NuDocs 2
+# =================================================
+
+location /minio/baremetal/installation/deployment-and-management.html {
+     return 301 https://min.io/docs/minio/linux/operations/installation.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/installation/deploy-minio-distributed.html {
+     return 301 https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/installation/deploy-minio-single-node-single-drive.html {
+     return 301 https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-single-node-single-drive.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/installation/expand-minio-distributed.html {
+     return 301 https://min.io/docs/minio/linux/operations/install-deploy-manage/expand-minio-deployment.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/installation/upgrade-minio.html {
+     return 301 https://min.io/docs/minio/linux/operations/install-deploy-manage/upgrade-minio-deployment.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/installation/restore-minio.html {
+     return 301 https://min.io/docs/minio/linux/operations/data-recovery.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/installation/decommission-pool.html {
+     return 301 https://min.io/docs/minio/linux/operations/install-deploy-manage/decommission-server-pool.html?ref=docs-redirect;
+}       
+
+
+# Security Redirects from NuDocs 1 to NuDocs 2
+# ============================================
+
+location /minio/baremetal/security/IAM/identity-access-management.html {
+     return 301 https://min.io/docs/minio/linux/administration/identity-access-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/security-overview.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/encryption/encryption-key-management.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/minio-identity-management/basic-authentication-with-minio-identity-provider.html {
+     return 301 https://min.io/docs/minio/linux/administration/identity-access-management/minio-identity-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/minio-identity-management/user-management.html {
+     return 301 https://min.io/docs/minio/linux/administration/identity-access-management/minio-user-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/minio-identity-management/group-management.html {
+     return 301 https://min.io/docs/minio/linux/administration/identity-access-management/minio-group-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/minio-identity-management/policy-based-access-control.html {
+     return 301 https://min.io/docs/minio/linux/administration/identity-access-management/policy-based-access-control.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/openid-external-identity-management/external-authentication-with-openid-identity-provider.html {
+     return 301 https://min.io/docs/minio/linux/administration/identity-access-management/oidc-access-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/openid-external-identity-management/configure-openid-external-identity-management.html {
+     return 301 https://min.io/docs/minio/linux/operations/external-iam/configure-openid-external-identity-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/openid-external-identity-management/AssumeRoleWithWebIdentity.html {
+     return 301 https://min.io/docs/minio/linux/developers/security-token-service/AssumeRoleWithWebIdentity.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/ad-ldap-external-identity-management/external-authentication-with-ad-ldap-identity-provider.html {
+     return 301 https://min.io/docs/minio/linux/administration/identity-access-management/ad-ldap-access-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/ad-ldap-external-identity-management/configure-openid-external-identity-management.html {
+     return 301 https://min.io/docs/minio/linux/operations/external-iam/configure-ad-ldap-external-identity-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/ad-ldap-external-identity-management/AssumeRoleWithWebIdentity.html {
+     return 301 https://min.io/docs/minio/linux/developers/security-token-service/AssumeRoleWithLDAPIdentity.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/encryption-overview.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/server-side-encryption/minio-server-side-encryption.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/server-side-encryption/configure-minio-kes-hashicorp.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption/configure-minio-kes-hashicorp.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/server-side-encryption/configure-minio-kes-aws.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption/configure-minio-kes-aws.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/server-side-encryption/configure-minio-kes-gcp.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption/configure-minio-kes-gcp.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/server-side-encryption/configure-minio-kes-azure.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption/configure-minio-kes-azure.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/server-side-encryption/server-side-encryption-sse-kms.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption/server-side-encryption-sse-kms.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/server-side-encryption/server-side-encryption-sse-s3.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption/server-side-encryption-sse-s3.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/server-side-encryption/server-side-encryption-sse-c.html {
+     return 301 https://min.io/docs/minio/linux/operations/server-side-encryption/server-side-encryption-sse-c.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/security/network-encryption/minio-tls.html {
+     return 301 https://min.io/docs/minio/linux/operations/network-encryption.html?ref=docs-redirect;
+}
+
+# Object Management Redirects from NuDocs 1 to NuDocs 2
+# =====================================================
+
+location /minio/baremetal/object-retention/minio-object-retention.html {
+     return 301 https://min.io/docs/minio/linux/administration/object-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/object-retention/bucket-versioning.html {
+     return 301 https://min.io/docs/minio/linux/administration/object-management/object-versioning.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/object-retention/minio-object-locking.html {
+     return 301 https://min.io/docs/minio/linux/administration/object-management/object-retention.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/lifecycle-management/lifecycle-management-overview.html {
+     return 301 https://min.io/docs/minio/linux/administration/object-management/object-lifecycle-management.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/lifecycle-management/transition-objects-to-s3.html {
+     return 301 https://min.io/docs/minio/linux/administration/object-management/transition-objects-to-s3.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/lifecycle-management/transition-objects-to-gcs.html {
+     return 301 https://min.io/docs/minio/linux/administration/object-management/transition-objects-to-gcs.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/lifecycle-management/transition-objects-to-azure.html {
+     return 301 https://min.io/docs/minio/linux/administration/object-management/transition-objects-to-azure.html?ref=docs-redirect;
+}
+
+# Replication Redirects from NuDocs 1 to NuDocs 2
+# ===============================================
+
+location /minio/baremetal/lifecycle-management/create-lifecycle-management-expiration-rule.html {
+     return 301 https://min.io/docs/minio/linux/administration/object-management/create-lifecycle-management-expiration-rule.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/replication/replication-overview.html {
+     return 301 https://min.io/docs/minio/linux/administration/bucket-replication.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/bucket-replication-overview.html {
+     return 301 https://min.io/docs/minio/linux/administration/bucket-replication.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/replication/enable-server-side-one-way-bucket-replication.html {
+     return 301 https://min.io/docs/minio/linux/administration/bucket-replication/enable-server-side-one-way-bucket-replication.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/replication/enable-server-side-two-way-bucket-replication.html {
+     return 301 https://min.io/docs/minio/linux/administration/bucket-replication/enable-server-side-two-way-bucket-replication.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/replication/enable-server-side-multi-site-bucket-replication.html {
+     return 301 https://min.io/docs/minio/linux/administration/bucket-replication/enable-server-side-multi-site-bucket-replication.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/replication/server-side-replication-resynchronize-remote.html {
+     return 301 https://min.io/docs/minio/linux/administration/bucket-replication/server-side-replication-resynchronize-remote.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/replication/site-replication-overview.html {
+     return 301 https://min.io/docs/minio/linux/operations/install-deploy-manage/multi-site-replication.html?ref=docs-redirect;
+}
+
+# Monitoring Redirects from NuDocs 1 to NuDocs 2
+# ==============================================
+
+location /minio/baremetal/monitoring/monitoring-overview.html {
+     return 301 https://min.io/docs/minio/linux/operations/monitoring.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/metrics-alerts/minio-metrics-and-alerts.html {
+     return 301 https://min.io/docs/minio/linux/operations/monitoring.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/metrics-alerts/collect-minio-metrics-using-prometheus.html {
+     return 301 https://min.io/docs/minio/linux/operations/monitoring/collect-minio-metrics-using-prometheus.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/logging/minio-logging.html { 
+     return 301 https://min.io/docs/minio/linux/monitoring/minio-logging.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/healthcheck-probe.html {
+     return 301 https://min.io/docs/minio/linux/operations/monitoring/healthcheck-probe.html?ref=docs-redirect;
+}
+
+# Bucket Notification Redirects from NuDocs 1 to NuDocs 2
+# =======================================================
+
+location /minio/baremetal/monitoring/bucket-notifications/bucket-notifications.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/bucket-notifications.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-amqp.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-amqp.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-mqtt.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-mqtt.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-nats.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-nats.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-nsq.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-nsq.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-elasticsearch.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-elasticsearch.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-kafka.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-kafka.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-mysql.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-mysql.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-postgresql.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-postgresql.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-redis.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-redis.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-webhook.html {
+     return 301 https://min.io/docs/minio/linux/administration/monitoring/publish-events-to-webhook.html?ref=docs-redirect;
+}
+
+
+
+
+# Reference Redirects from NuDocs 1 to NuDocs 2
+# =============================================
+
+
+location /minio/baremetal/reference/minio-mc.html {
+     return 301 https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/reference/minio-mc/ {
+     rewrite /minio/baremetal/reference/minio-mc/(.*) https://min.io/docs/minio/linux/reference/minio-mc/$1 permanent;
+}
+
+location /minio/baremetal/reference/minio-mc-admin.html {
+     return 301 https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/reference/minio-mc-admin/ {
+     rewrite /minio/baremetal/reference/minio-mc-admin/(.*) https://min.io/docs/minio/linux/reference/minio-mc-admin/$1 permanent;
+}
+
+location /minio/baremetal/reference/minio-server.html {
+     return 301 https://min.io/docs/minio/linux/reference/minio-server.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/console/minio-console.html {
+     return 301 https://min.io/docs/minio/linux/administration/minio-console.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/sdk/minio-drivers.html {
+     return 301 https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/sdk/java/minio-java.html {
+     return 301 https://min.io/docs/minio/linux/developers/java/minio-java.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/sdk/python/minio-python.html {
+     return 301 https://min.io/docs/minio/linux/developers/python/minio-python.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/sdk/go/minio-go.html {
+     return 301 https://min.io/docs/minio/linux/developers/go/minio-go.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/sdk/dotnet/minio-dotnet.html {
+     return 301 https://min.io/docs/minio/linux/developers/dotnet/minio-dotnet.html?ref=docs-redirect;
+}
+
+# Miscellaneous Redirects from NuDocs 1 to NuDocs 2
+# =================================================
+
+location /minio/baremetal/support/support-overview.html {
+     return 301 https://min.io/docs/minio/linux/operations/troubleshooting.html?ref=docs-redirect;
+}
+
+location /minio/baremetal/support/encrypting-files.html {
+     return 301 https://min.io/docs/minio/linux/operations/troubleshooting/encrypting-files.html?ref=docs-redirect;
+}
+
+location /minio/baremetal {
+     return 301 https://min.io/docs/minio/linux/index.html?ref=docs-redirect;
+}

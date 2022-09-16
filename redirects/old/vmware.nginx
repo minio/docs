@@ -1,0 +1,3 @@
+location /minio/vsphere {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/index.html?ref=docs-redirect;
+}

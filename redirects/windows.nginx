@@ -1,0 +1,3 @@
+location /minio/baremetal/quickstart/windows.html {
+     return 301 https://min.io/minio/docs/windows/index.html?ref=docs-redirect;
+}

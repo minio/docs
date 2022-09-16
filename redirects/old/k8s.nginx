@@ -1,0 +1,70 @@
+# This file contains all redirects for the Kubernetes Documentation for MinIO
+# This includes redirecting links from legacy docs and the Docs V1 projects
+
+# Use this as a template
+#  location <path> {
+#       return 301 https://min.io/docs/minio/kubernetes/upstream/<filepath>.html?ref=docs-redirect;
+#  }
+
+
+location /minio/baremetal/quickstart/k8s.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/operations/index.html?ref=docs-redirect;
+}
+
+location /minio/k8s/deployment/deploy-minio-operator.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/operations/installation.html?ref=docs-redirect;
+}
+
+
+location /minio/k8s/tenant-management/deploy-minio-tenant.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html?ref=docs-redirect;
+}
+
+location /minio/k8s/core-concepts/core-concepts.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/operations/concepts.html?ref=docs-redirect;
+}
+
+location /minio/k8s/tenant-management/manage-minio-tenant.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/operations/deploy-manage-tenants.html?ref=docs-redirect;
+}
+
+location /minio/k8s/tutorials/user-management.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management/minio-user-management.html?ref=docs-redirect;
+}
+
+location /minio/k8s/tutorials/group-management.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management/minio-group-management.html?ref=docs-redirect;
+}
+
+location /minio/k8s/tutorials/policy-management.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management/policy-based-access-control.html?ref=docs-redirect;
+}
+
+location /minio/k8s/reference/production-recommendations.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/operations/checklists.html?ref=docs-redirect;
+}
+
+location /minio/k8s/operator-console/operator-console.html {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/minio-operator-console.html?ref=docs-redirect;
+}
+
+
+# OpenShift Specific 
+# Will need to change these when we have dedicated OS platform docs
+# -----------------------------------------------------------------
+
+location /minio/k8s/openshift/deploy-minio-on-openshift.html {
+     return 302 https://min.io/docs/minio/kubernetes/upstream/operations/installation.html?ref=docs-redirect;
+}
+
+location /minio/k8s/openshift/deploy-minio-tenant.html {
+     return 302 https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html?ref=docs-redirect;
+}
+
+# -----------------------------------------------------------------
+
+# This one *must* be last in the order so as to not override other specific pages
+
+location /minio/k8s {
+     return 301 https://min.io/docs/minio/kubernetes/upstream/index.html?ref=docs-redirect;
+}
