@@ -248,6 +248,8 @@ html_extra_path = [ 'extra']
 
 html_title = 'MinIO Object Storage for ' + ("MacOS" if platform == "macos" else platform.capitalize())
 
+html_permalinks_icon = ''
+
 html_context = {
     'doc_platform': platform.lower()
 }
