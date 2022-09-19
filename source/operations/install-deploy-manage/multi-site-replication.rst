@@ -104,8 +104,22 @@ For :ref:`SSE-S3 <minio-encryption-sse-s3>` or :ref:`SSE-KMS <minio-encryption-s
 
 You can achieve this with a central KES server or multiple KES servers (say one per site) connected via a central supported :ref:`key vault server <minio-sse>`.
 
+Switch to Site Replication from Bucket Replication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:ref:`Bucket replication <minio-bucket-replication>` and multi-site replication are mutually exclusive.
+You cannot use both replication methods on the same deployments.
+
+If you previously set up bucket replication and wish to now use site replication, you must first delete all of the bucket replication rules on the deployment that has data when initializing site replication.
+Use :mc-cmd:`mc replicate rm` on the command line or the MinIO Console to remove bucket replication rules.
+
+Only one site can have data when setting up site replication.
+All other sites must be empty.
+
 Tutorials
 ---------
+
+.. _minio-configure-site-replication:
 
 Configure Site Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -129,7 +143,7 @@ Configure Site Replication
 
          .. image:: /images/minio-console/console-settings-site-replication.png
             :width: 400px
-            :alt: MinIO Console menu with the Settings heading expanded to show Site Repilication
+            :alt: MinIO Console menu with the Settings heading expanded to show Site Replication
             :align: center
       
       #. Select :guilabel:`Add Sites +`
@@ -241,6 +255,8 @@ Configure Site Replication
          For more on reviewing site replication, see the :ref:`Site Replication Status tutorial <minio-site-replication-status-tutorial>`.
 
 
+.. _minio-expand-site-replication:
+
 Expand Site Replication
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -259,7 +275,7 @@ The new site must meet the following requirements:
 
       #. Deploy a new, empty MinIO site
 
-      #. In a browser, access the Console for one of the exisitng replicated sites
+      #. In a browser, access the Console for one of the existing replicated sites
 
          For example, ``https://<addressforsite>:9000``
 
@@ -324,7 +340,7 @@ The new site must meet the following requirements:
 
          List all existing replicated sites first, then list the new site(s) to add.
          In this example, ``minio1``, ``minio2``, and ``minio3`` are already configured for replication.
-         The command adds minio4 and minio5 as new sites to add to the replication.
+         The command adds ``minio4`` and ``minio5`` as new sites to add to the replication.
          ``minio4`` and ``minio5`` must be empty.
       
          .. code-block:: shell
