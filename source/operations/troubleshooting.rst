@@ -151,13 +151,20 @@ For clusters with an airgap, firewall, or otherwise blocked from SUBNET directly
 #. Select :guilabel:`Diagnostics`
 #. Drag and drop the ``.gzip`` file(s) or browse to the file location to upload
 
-
 Encrypting Data
 ~~~~~~~~~~~~~~~
 
 Data from the Inspect tool in :ref:`Console <minio-console>` or the :mc:`mc support inspect` command can be encrypted.
 For more details about encrypting or decrypting such files, see :ref:`Encrypting Files <minio-support-encryption>`.
 
+Logs
+----
+
+Use the subcommands for ``mc support logs`` to :mc-cmd:`~mc support logs enable` or :mc-cmd:`~mc support logs disable` the submission of MinIO logs to SUBNET.
+You can also use :mc-cmd:`mc support logs status` to check if a log submission is in progress.
+
+Use :mc-cmd:`mc support logs show` command to display logs from the command line.
+Use the parameter flags for the :mc-cmd:`mc support logs show` command to limit the displayed logs by type or quantity.
 
 .. toctree::
    :titlesonly:

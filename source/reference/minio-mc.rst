@@ -503,6 +503,10 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-stat
    /reference/minio-mc/mc-support-diag
    /reference/minio-mc/mc-support-inspect
+   /reference/minio-mc/mc-support-logs-disable
+   /reference/minio-mc/mc-support-logs-enable
+   /reference/minio-mc/mc-support-logs-show
+   /reference/minio-mc/mc-support-logs-status
    /reference/minio-mc/mc-support-perf
    /reference/minio-mc/mc-support-profile
    /reference/minio-mc/mc-tag-set
