@@ -112,12 +112,13 @@ $theme-properties: (
     --alert-warning-link-decoration-color: #e3c3c6 #54141a,
 
     // Doc Search
-    --docsearch-modal-background: rgba($white, 0.85) rgba($dark-100, 0.6),
+    --docsearch-modal-background: #d8dcdf #1c232d,
     --docsearch-container-background: rgba($black, 0.25) rgba(16, 21, 28, 0.851),
     --ds-highlight-color: rgba(120, 133, 152, 0.125) rgba(16, 21, 28, 0.3),
     --ds-search-bg: $white $dark-100,
     --ds-search-placeholder-color: #7e7e7e #697995,
     --ds-search-focus-shadow: rgba($white, 0.15) #1b232f,
+    --ds-scrollbar-bg: #bcc4cb #151b24,
 );
 
 // Activate dark/light themes
