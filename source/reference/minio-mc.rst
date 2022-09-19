@@ -35,7 +35,7 @@ See :ref:`minio-mc-commands` for a list of supported commands.
    licensed Free and Open Source (FOSS) software. 
 
    Applications integrating :program:`mc` may trigger AGPLv3 compliance
-   requirements. `MinIO Commericial Licensing <https://min.io/pricing>`__
+   requirements. `MinIO Commercial Licensing <https://min.io/pricing>`__
    is the best option for applications which trigger AGPLv3 obligations where
    open-sourcing the application is not an option.   
 
@@ -224,6 +224,11 @@ The following table lists :mc-cmd:`mc` commands:
        the :ref:`Object Legal Hold (WORM) <minio-object-locking-legalhold>`
        settings for object(s).
 
+   * - | :mc:`mc license register` 
+       | :mc:`mc license info`
+       | :mc:`mc license update` 
+     - The ``mc license`` command registers clusters with |SUBNET|, displays information about the cluster's current license, or updates the license key for a cluster.
+
    * - :mc:`mc ls`
      - .. include:: /reference/minio-mc/mc-ls.rst
           :start-after: start-mc-ls-desc
@@ -311,13 +316,12 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-stat-desc
           :end-before: end-mc-stat-desc
 
-   * - | :mc:`mc support diagnostics`
+   * - | :mc:`mc support diag`
        | :mc:`mc support inspect`
        | :mc:`mc support perf`
        | :mc:`mc support profile`
-       | :mc:`mc support register`
      - The MinIO Client ``mc support`` commands provides tools for analyzing deployment health or performance and for running diagnostics.
-       You can also register your deployment with |SUBNET| and upload generated health reports for further analysis by MinIO engineering.
+       You can also upload generated health reports for further analysis by MinIO engineering.
 
    * - | :mc:`mc tag set`
        | :mc:`mc tag remove`
@@ -466,6 +470,9 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-legalhold-set
    /reference/minio-mc/mc-legalhold-info
    /reference/minio-mc/mc-legalhold-clear
+   /reference/minio-mc/mc-license-info
+   /reference/minio-mc/mc-license-register
+   /reference/minio-mc/mc-license-update
    /reference/minio-mc/mc-ls
    /reference/minio-mc/mc-mb
    /reference/minio-mc/mc-mirror
@@ -494,11 +501,10 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-share-list
    /reference/minio-mc/mc-sql
    /reference/minio-mc/mc-stat
-   /reference/minio-mc/mc-support-diagnostics
+   /reference/minio-mc/mc-support-diag
    /reference/minio-mc/mc-support-inspect
    /reference/minio-mc/mc-support-perf
    /reference/minio-mc/mc-support-profile
-   /reference/minio-mc/mc-support-register
    /reference/minio-mc/mc-tag-set
    /reference/minio-mc/mc-tag-list
    /reference/minio-mc/mc-tag-remove

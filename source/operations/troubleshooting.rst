@@ -69,9 +69,9 @@ Registering Your MinIO Deployment with SUBNET
 
       You can register for SUBNET from the command line.
 
-      Refer to :mc:`mc support register` for instructions.
+      Refer to :mc-cmd:`mc license register` for instructions.
 
-      For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-support-register-airgap>` of the :mc:`mc support register` documentation.
+      For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-license-register-airgap>` of the :mc-cmd:`mc license register` documentation.
 
 
 SUBNET Issues
@@ -89,7 +89,7 @@ Use the search bar to locate an existing issue or add a new issue.
    :alt: MinIO SUBNET with the Issues section displaying a list of an organization's issues
    :align: center
 
-Select an existing issue from the list to expand the converation or add a response.
+Select an existing issue from the list to expand the conversation or add a response.
 
 .. image:: /images/subnet/issue-expanded.png
    :width: 600px
@@ -115,7 +115,7 @@ Deployment Health
 ~~~~~~~~~~~~~~~~~
 
 The deployment's details include a summary of the deployment's configuration and the number of checks run and failed.
-You can select :guilabel:`Upload` to add diagnostic health data obtained from the :mc:`mc support diagnostics` command or the MinIO Console's Support > Health page.
+You can select :guilabel:`Upload` to add diagnostic health data obtained from the :mc-cmd:`mc support diag` command or the MinIO Console's Support > Health page.
 
 If you need support from MinIO Engineering, you can create a :guilabel:`New Issue` for the deployment.
 
@@ -145,7 +145,7 @@ If you registered the cluster with SUBNET, Performance and Inspection files can 
 
 For clusters with an airgap, firewall, or otherwise blocked from SUBNET directly, you can manually upload files to SUBNET after logging in.
 
-#. Generate the file(s) to upload from the command line with :mc:`mc support diagnostics` or :mc:`mc support inspect`
+#. Generate the file(s) to upload from the command line with :mc-cmd:`mc support diag` or :mc-cmd:`mc support inspect`
 #. Sign in to `SUBNET <https://subnet.min.io>`_
 #. Select :guilabel:`Deployments`
 #. Select :guilabel:`Diagnostics`

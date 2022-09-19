@@ -316,7 +316,7 @@ Run all three tests with default options.
 Operating System Diagnostic Tools
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you cannot run the :mc:`mc support diagnostics` or the results show unexpected results, you can use the operating system's default tools.
+If you cannot run the :mc:`mc support diag` or the results show unexpected results, you can use the operating system's default tools.
 
 Test each drive independently on all servers to ensure they are identical in performance.
 Use the results of these OS-level tools to verify the capabilities of your storage hardware.
