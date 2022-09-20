@@ -20,7 +20,7 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
 
    This site documents Operations, Administration, and Development of MinIO deployments on Windows platforms.
 
-.. cond:: osx
+.. cond:: macos
 
    This site documents Operations, Administration, and Development of MinIO deployments on Mac OSX platforms.
 
@@ -32,7 +32,13 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
 
    This site documents Operations, Administration, and Development of MinIO deployments on Containers.
 
-This documentation targets the latest stable version of MinIO: |minio-tag|.
+.. cond:: k8s
+
+   This documentation targets the latest stable version of the MinIO Operator: |operator-version-stable|
+
+.. cond:: linux or container or macos or windows
+
+   This documentation targets the latest stable version of MinIO: |minio-tag|.
 
 MinIO is released under dual license `GNU Affero General Public License v3.0 
 <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__. 
