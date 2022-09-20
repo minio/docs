@@ -69,9 +69,9 @@ Registering Your MinIO Deployment with SUBNET
 
       You can register for SUBNET from the command line.
 
-      Refer to :mc-cmd:`mc license register` for instructions.
+      Refer to :mc:`mc license register` for instructions.
 
-      For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-license-register-airgap>` of the :mc-cmd:`mc license register` documentation.
+      For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-license-register-airgap>` of the :mc:`mc license register` documentation.
 
 
 SUBNET Issues
@@ -115,7 +115,7 @@ Deployment Health
 ~~~~~~~~~~~~~~~~~
 
 The deployment's details include a summary of the deployment's configuration and the number of checks run and failed.
-You can select :guilabel:`Upload` to add diagnostic health data obtained from the :mc-cmd:`mc support diag` command or the MinIO Console's Support > Health page.
+You can select :guilabel:`Upload` to add diagnostic health data obtained from the :mc:`mc support diag` command or the MinIO Console's Support > Health page.
 
 If you need support from MinIO Engineering, you can create a :guilabel:`New Issue` for the deployment.
 
@@ -145,7 +145,7 @@ If you registered the cluster with SUBNET, Performance and Inspection files can 
 
 For clusters with an airgap, firewall, or otherwise blocked from SUBNET directly, you can manually upload files to SUBNET after logging in.
 
-#. Generate the file(s) to upload from the command line with :mc-cmd:`mc support diag` or :mc-cmd:`mc support inspect`
+#. Generate the file(s) to upload from the command line with :mc:`mc support diag` or :mc:`mc support inspect`
 #. Sign in to `SUBNET <https://subnet.min.io>`_
 #. Select :guilabel:`Deployments`
 #. Select :guilabel:`Diagnostics`
@@ -160,11 +160,11 @@ For more details about encrypting or decrypting such files, see :ref:`Encrypting
 Logs
 ----
 
-Use the subcommands for ``mc support logs`` to :mc-cmd:`~mc support logs enable` or :mc-cmd:`~mc support logs disable` the submission of MinIO logs to SUBNET.
-You can also use :mc-cmd:`mc support logs status` to check if a log submission is in progress.
+Use the subcommands for ``mc support logs`` to :mc:`~mc support logs enable` or :mc:`~mc support logs disable` the submission of MinIO logs to SUBNET.
+You can also use :mc:`mc support logs status` to check if a log submission is in progress.
 
-Use :mc-cmd:`mc support logs show` command to display logs from the command line.
-Use the parameter flags for the :mc-cmd:`mc support logs show` command to limit the displayed logs by type or quantity.
+Use :mc:`mc support logs show` command to display logs from the command line.
+Use the parameter flags for the :mc:`mc support logs show` command to limit the displayed logs by type or quantity.
 
 .. toctree::
    :titlesonly:

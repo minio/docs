@@ -21,7 +21,7 @@ Site recovery depends on the replication option you use for the site.
      - Total restoration of IAM configurations, bucket configurations, and data from the healthy peer site(s)
    * - Bucket Replication
      - Data restoration of objects and metadata from a healthy remote location for each bucket configured for replication
-   * - :mc-cmd:`mc mirror`
+   * - :mc:`mc mirror`
      - Data restoration of objects only from a healthy remote location with no versioning
 
 Site Replication
@@ -49,7 +49,7 @@ If you are switching from using bucket replication to using site replication, yo
 Active Bucket Replication Resynchronization
 -------------------------------------------
 
-For scenarios where :ref:`bucket replication <minio-bucket-replication>` was in place prior to the failure, you can use :mc-cmd:`mc replicate resync` to restore data to a new site.
+For scenarios where :ref:`bucket replication <minio-bucket-replication>` was in place prior to the failure, you can use :mc:`mc replicate resync` to restore data to a new site.
 Create a new site to replace the failed deployment, then synchronize the data from an existing, healthy, bucket replication-enabled deployment to the new site.
 
 1. Deploy a new MinIO site
@@ -68,7 +68,7 @@ Passive Bucket Replication Resynchronization
 As a passive process, bucket replication may not perform as quickly as desired for a site recovery scenario.
 
 Using bucket replication relies on the standard replication scanner queue, which does not take priority over other processes.
-For recovery procedures with stricter SLA/SLO, use the active bucket replication process with :mc-cmd:`mc replicate resync` command as described above.
+For recovery procedures with stricter SLA/SLO, use the active bucket replication process with :mc:`mc replicate resync` command as described above.
 
 Bucket replication rules copy the object, its version ID, versions, and other metadata to the target bucket.
 MinIO can restore the object with all of these attributes to a new MinIO site if bucket replication had already been in use prior to the site loss.
@@ -91,10 +91,10 @@ MinIO's mirroring copies an object from any S3 compatible storage system.
 Mirroring only copies the latest version of each object and does not include versioning metadata, regardless of the source.
 You cannot restore those attributes with this method.
 
-Use :mc-cmd:`mc mirror` in situations where you need to restore only the latest version of an object. 
+Use :mc:`mc mirror` in situations where you need to restore only the latest version of an object. 
 Use bucket replication or site replication where those methods were already in use if you are copying from another MinIO deployment and wish to restore the object's version history and version metadata.
 
 1. Deploy a new MinIO site
 2. Set up IAM and users as needed
 3. Create buckets on the new site
-4. Use the :mc-cmd:`mc cp` CLI command to copy the contents from the mirror location to the new MinIO site
+4. Use the :mc:`mc cp` CLI command to copy the contents from the mirror location to the new MinIO site

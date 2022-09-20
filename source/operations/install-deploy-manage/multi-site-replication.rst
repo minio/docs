@@ -111,7 +111,7 @@ Switch to Site Replication from Bucket Replication
 You cannot use both replication methods on the same deployments.
 
 If you previously set up bucket replication and wish to now use site replication, you must first delete all of the bucket replication rules on the deployment that has data when initializing site replication.
-Use :mc-cmd:`mc replicate rm` on the command line or the MinIO Console to remove bucket replication rules.
+Use :mc:`mc replicate rm` on the command line or the MinIO Console to remove bucket replication rules.
 
 Only one site can have data when setting up site replication.
 All other sites must be empty.

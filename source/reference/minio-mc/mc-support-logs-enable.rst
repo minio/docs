@@ -27,7 +27,7 @@ Use the :mc-cmd:`mc support logs enable` command to allow real-time MinIO logs t
 
    By default, MinIO does not scrub the logs uploaded to SUBNET.
 
-   To hide sensitive information in the logs, start the server with the :mc-cmd:`~mc server --anonymous` flag.
+   To hide sensitive information in the logs, start the server with the :mc-cmd:`~minio server --anonymous` flag.
    MinIO employs an aggressive scrubbing algorithm which may produce logs with reduced visibility into the deployment.
    MinIO Engineering may later request unredacted logs if required for ongoing support cases.
 
