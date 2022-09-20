@@ -18,15 +18,6 @@
 	position: relative;
 }
 
-.nav__link--active {
-	& > span {
-		&:before {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-}
-
 .nav__link--download {
 	border: 1px solid var(--nav-download-border-color);
 	transition: background-color 300ms, color 300ms;
@@ -178,6 +169,15 @@
 					transform: translateY(5px);
 					opacity: 0;
 					transition: opacity 300ms, transform 300ms;
+				}
+			}
+
+			&.nav__link--active {
+				& > span {
+					&:before {
+						opacity: 1;
+						transform: translateY(0);
+					}
 				}
 			}
 	
