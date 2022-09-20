@@ -142,7 +142,8 @@ elif tags.has("macos"):
         'reference/kubectl-minio-plugin*',
         'reference/minio-server*',
         'reference/minio-mc*',
-        'developers/*'
+        'developers/*',
+        'integrations/*'
     ]
 elif tags.has("windows"):
     # html_baseurl is used for generating the sitemap.xml for each platform. These are combined in a sitemapindex.xml.
@@ -159,7 +160,8 @@ elif tags.has("windows"):
         'reference/kubectl-minio-plugin*',
         'reference/minio-server*',
         'reference/minio-mc*',
-        'developers/*'
+        'developers/*',
+        'integrations/*'
     ]
 elif tags.has("container"):
     html_baseurl = 'https://min.io/docs/minio/container/'
@@ -177,7 +179,8 @@ elif tags.has("container"):
         'reference/kubectl-minio-plugin*',
         'reference/minio-server*',
         'reference/minio-mc*',
-        'developers/*'
+        'developers/*',
+        'integrations/*'
     ]
 elif tags.has("k8s"):
     html_baseurl = 'https://min.io/docs/minio/kubernetes/upstream/'
@@ -191,7 +194,8 @@ elif tags.has("k8s"):
         'operations/manage-existing-deployments.rst',
         'reference/minio-server*',
         'reference/minio-mc*',
-        'developers/*'
+        'developers/*',
+        'integrations/*'
 
     ]
 else:

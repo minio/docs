@@ -1,0 +1,3 @@
+location /minio/baremetal/quickstart/macos.html {
+     return 301 https://min.io/docs/minio/macos/index.html?ref=docs-redirect;
+}

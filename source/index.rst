@@ -35,7 +35,7 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
 This documentation targets the latest stable version of MinIO: |minio-tag|.
 
 MinIO is released under `GNU Affero General Public License v3.0 
-<https://www.gnu.org/licenses/agpl-3.0.en.html>`__. 
+<https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__. 
 
 You can get started exploring MinIO features using our ``play`` server at
 https://play.min.io. ``play`` is a *public* MinIO cluster running the latest
@@ -140,10 +140,11 @@ without validating their usage do so at their own risk.
       :titlesonly:
       :hidden:
 
-      Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html>
-      Security Token Service (STS) <https://min.io/docs/minio/linux/developers/security-token-service.html>
-      MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html>
-      MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html>
+      Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs>
+      Security Token Service (STS) <https://min.io/docs/minio/linux/developers/security-token-service.html?ref=docs>
+      MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
+      MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
+      Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
 
 .. cond:: linux
 
@@ -156,6 +157,7 @@ without validating their usage do so at their own risk.
       /reference/minio-mc
       /reference/minio-mc-admin
       /reference/minio-server/minio-server
+      /integrations/integrations
 
 .. cond:: k8s
 
