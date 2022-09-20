@@ -57,13 +57,6 @@ windows:
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
-ifeq ($(SYNC_SDK),TRUE)
-	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
-	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
-	@make sync-sdks
-else
-	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
-endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
@@ -71,13 +64,6 @@ macos:
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
-ifeq ($(SYNC_SDK),TRUE)
-	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
-	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
-	@make sync-sdks
-else
-	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
-endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
@@ -86,13 +72,6 @@ k8s:
 	@make sync-operator-version
 	@make sync-minio-version
 	@make sync-kes-version
-ifeq ($(SYNC_SDK),TRUE)
-	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
-	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
-	@make sync-sdks
-else
-	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
-endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
@@ -100,13 +79,6 @@ container:
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
-ifeq ($(SYNC_SDK),TRUE)
-	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
-	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
-	@make sync-sdks
-else
-	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
-endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 

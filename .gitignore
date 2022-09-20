@@ -13,4 +13,10 @@ output.log
 source/conf.py
 package-lock.json
 build.log
+source/developers/go/*.md
+source/developers/dotnet/*.md
+source/developers/haskell/*.md
+source/developers/java/*.md
+source/developers/javascript/*.md
+source/developers/python/*.md
 *.inv
