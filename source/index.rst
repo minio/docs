@@ -24,9 +24,13 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
 
    This site documents Operations, Administration, and Development of MinIO deployments on Mac OSX platforms.
 
-.. cond:: k8s
+.. cond:: k8s and not openshift
 
    This site documents Operations, Administration, and Development of MinIO deployments on Kubernetes platform.
+
+.. cond:: openshift
+
+   This site documents Operations, Administration, and Development of MinIO deployments on OpenShift 4.7+ through the :openshift-docs:`Red Hat® OpenShift® Container Platform 4.7+ <welcome/index.html>`.
 
 .. cond:: container
 

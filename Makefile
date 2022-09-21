@@ -73,6 +73,14 @@ k8s:
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 
+openshift:
+	@cp source/default-conf.py source/conf.py
+	@make sync-operator-version
+	@make sync-minio-version
+	@make sync-kes-version
+	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
+
 container:
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
@@ -152,6 +160,6 @@ sync-deps:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@echo -e "Specify one of the following supported build outputs"
-	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s\n- make container"
+	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s\n- make openshift\n- make container"
 	@echo -e "Clean targets with 'make clean-<target>'"
 	@echo -e "Clean all targets with `make clean`"

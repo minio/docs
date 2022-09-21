@@ -19,7 +19,13 @@ Deploy a MinIO Tenant
    :local:
    :depth: 1
 
-This procedure documents deploying a MinIO Tenant using the MinIO Operator Console.
+.. cond:: openshift
+
+   This procedure documents deploying a MinIO Tenant through OpenShift 4.7+ using the OpenShift Web Console and the MinIO Kubernetes Operator.
+
+.. cond:: k8s and not openshift
+
+   This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using the MinIO Operator Console.
 
 .. image:: /images/k8s/operator-dashboard.png
    :align: center
@@ -51,18 +57,72 @@ and Plugin version |operator-version-stable|.
 
 See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 
-.. include:: /includes/k8s/install-minio-kubectl-plugin.rst
+.. cond:: k8s and not openshift
 
-Kubernetes Version 1.19.0
-~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
 
-Starting with v4.0.0, the MinIO Operator requires Kubernetes 1.19.0 and later.
-The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must have the same
-version of 1.19.0+.
+.. cond:: openshift
 
-This procedure assumes the host machine has ``kubectl`` installed and 
-configured with access to the target Kubernetes cluster. The host machine 
-*must* have access to a web browser application.
+   .. include:: /includes/openshift/install-minio-kubectl-plugin.rst
+
+.. cond:: k8s and not openshift
+
+   Kubernetes Version 1.19.0
+   ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Starting with v4.0.0, the MinIO Operator requires Kubernetes 1.19.0 and later.
+   The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must have the same version of 1.19.0+.
+
+   This procedure assumes the host machine has ``kubectl`` installed and configured with access to the target Kubernetes cluster. 
+   The host machine *must* have access to a web browser application.
+
+.. cond:: openshift
+
+   OpenShift 4.7+ and ``oc`` CLI Tool
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   This procedure assumes installation of the MinIO Operator using the OpenShift 4.7+ and the OpenShift OperatorHub.
+
+   This procedure assumes your local machine has the OpenShift ``oc`` CLI tool installed and configured for access to the OpenShift Cluster.
+   :openshift-docs:`Download and Install <cli_reference/openshift_cli/getting-started-cli.html>` the OpenShift :abbr:`CLI (command-line interface)` ``oc`` for use in this procedure.
+
+   See :ref:`deploy-operator-openshift` for more complete instructions.
+
+.. cond:: openshift
+
+   Check Security Context Constraints
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   The MinIO Operator deploys pods using the following default :kube-docs:`Security Context <tasks/configure-pod-container/security-context/>` per pod:
+
+   .. code-block:: yaml
+      :class: copyable
+
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+
+   Certain OpenShift :openshift-docs:`Security Context Constraints </authentication/managing-security-context-constraints.html>` limit the allowed UID or GID for a pod such that MinIO cannot deploy the Tenant successfully. 
+   Ensure that the Project in which the Operator deploys the Tenant has sufficient SCC settings that allow the default pod security context. 
+   You can alternatively modify the tenant security context settings during deployment.
+
+   The following command returns the optimal value for the securityContext: 
+
+   .. code-block:: shell
+      :class: copyable
+
+      oc get namespace <namespace> \
+      -o=jsonpath='{.metadata.annotations.openshift\.io/sa\.scc\.supplemental-groups}{"\n"}'
+
+   The command returns output similar to the following:
+   
+   .. code-block:: shell
+
+      1056560000/10000
+
+   Take note of this value before the slash for use in this procedure.
 
 Locally Attached Drives
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,8 +179,8 @@ volume and a supporting
       Ensure all Persistent Volumes provisioned to support the MinIO Tenant 
       use this storage class.
 
-Procedure (MinIO Operator Console)
-----------------------------------
+Deploy a Tenant using the MinIO Operator Console
+------------------------------------------------
 
 To deploy a tenant from the MinIO Operator Console, complete the following steps in order:
 
@@ -151,12 +211,23 @@ To deploy a tenant from the MinIO Operator Console, complete the following steps
 1) Access the MinIO Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`kubectl minio proxy` command to temporarily forward traffic between the local host machine and the MinIO Operator Console:
+.. cond:: k8s and not openshift
 
-.. code-block:: shell
-   :class: copyable
+   Use the :mc-cmd:`kubectl minio proxy` command to temporarily forward traffic between the local host machine and the MinIO Operator Console:
 
-   kubectl minio proxy
+   .. code-block:: shell
+      :class: copyable
+
+      kubectl minio proxy
+
+.. cond:: openshift
+
+   Use the :mc-cmd:`oc minio proxy <kubectl minio proxy>` command to temporarily forward traffic between the local host machine and the MinIO Operator Console:
+
+   .. code-block:: shell
+      :class: copyable
+
+      oc minio proxy
 
 The command returns output similar to the following:
 
@@ -281,6 +352,12 @@ The :guilabel:`Configure` section displays optional configuration settings for t
 
        You can modify the Security Context to direct MinIO to run using a different User, Group, or FsGroup ID. 
        You can also direct MinIO to not run as the Root user.
+
+       .. cond:: openshift
+
+          .. important::
+
+             If your OpenShift cluster enforces :openshift-docs:`Security Context Constraints </authentication/managing-security-context-constraints.html>` , ensure you set the Tenant constraints appropriately such that pods can start and run normally.
 
    * - :guilabel:`Override Log Search Defaults`
      - The MinIO Operator deploys a Log Search service (SQL Database and Log Search API) to support Audit Log search in the MinIO Tenant Console.
@@ -487,12 +564,24 @@ Each tab provides additional details or configuration options for the MinIO Tena
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The MinIO Operator creates services for the MinIO Tenant. 
-Use the ``kubectl get svc -n NAMESPACE`` command to review the deployed services:
 
-.. code-block:: shell
-   :class: copyable
+.. cond:: openshift
 
-   kubectl get svc -n minio-tenant-1
+   Use the ``oc get svc -n TENANT-PROJECT`` command to review the deployed services:
+
+   .. code-block:: shell
+      :class: copyable
+
+      oc get svc -n minio-tenant-1
+
+.. cond:: k8s and not openshift 
+
+   Use the ``kubectl get svc -n NAMESPACE`` command to review the deployed services:
+
+   .. code-block:: shell
+      :class: copyable
+
+      kubectl get svc -n minio-tenant-1
 
 .. code-block:: shell
 
@@ -518,312 +607,66 @@ Applications deployed inside the cluster can access the services using the ``CLU
 Applications external to the Kubernetes cluster can access the services using the ``EXTERNAL-IP``. 
 This value is only populated for Kubernetes clusters configured for Ingress or a similar network access service. 
 Kubernetes provides multiple options for configuring external access to services. 
-See the Kubernetes documentation on 
-:kube-docs:`Publishing Services (ServiceTypes) <concepts/services-networking/service/#publishing-services-service-types>` 
-and :kube-docs:`Ingress <concepts/services-networking/ingress/>` 
-for more complete information on configuring external access to services.
+
+.. cond:: k8s and not openshift
+
+   See the Kubernetes documentation on :kube-docs:`Publishing Services (ServiceTypes) <concepts/services-networking/service/#publishing-services-service-types>` and :kube-docs:`Ingress <concepts/services-networking/ingress/>` for more complete information on configuring external access to services.
+
+.. cond:: openshift
+
+   See the OpenShift documentation on :openshift-docs:`Route or Ingress <networking/understanding-networking.html#nw-ne-comparing-ingress-route_understanding-networking>` for more complete information on configuring external access to services.
 
 .. _create-tenant-operator-forward-ports:
 
 11) Forward Ports
 ~~~~~~~~~~~~~~~~~
 
-You can temporarily expose each service using the ``kubectl port-forward`` utility. 
-Run the following examples to forward traffic from the local host running ``kubectl`` to the services running inside the Kubernetes cluster.
+.. cond:: k8s and not openshift
 
-.. tab-set::
+   You can temporarily expose each service using the ``kubectl port-forward`` utility.
+   Run the following examples to forward traffic from the local host running ``kubectl`` to the services running inside the Kubernetes cluster.
 
-   .. tab-item:: MinIO Tenant
+   .. tab-set::
 
-      .. code-block:: shell
-         :class: copyable
+      .. tab-item:: MinIO Tenant
 
-         kubectl port-forward service/minio 443:443
+         .. code-block:: shell
+            :class: copyable
 
-   .. tab-item:: MinIO Console
-   
-      .. code-block:: shell
-         :class: copyable
+            kubectl port-forward service/minio 443:443
 
-         kubectl port-forward service/minio-tenant-1-console 9443:9443
-
-.. _minio-k8s-deploy-minio-tenant-commandline:
-
-Procedure (Command Line)
-------------------------
-
-The :mc:`kubectl minio tenant create` command supports creating a MinIO Tenant in your Kubernetes cluster.
-The command *requires* that the cluster have a functional MinIO Operator installation.
-
-To deploy a tenant from the command line, complete the following steps:
-
-:ref:`create-tenant-cli-determine-settings-required-options`
-
-:ref:`create-tenant-cli-determine-additional-options`
-
-:ref:`create-tenant-cli-enter-command`
-
-:ref:`create-tenant-cli-record-access-info`
-
-:ref:`create-tenant-cli-access-tenant-console`
-
-:ref:`create-tenant-cli-forward-ports`
-
-.. _create-tenant-cli-determine-settings-required-options:
-
-1) Determine Values for Required Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The :mc:`kubectl minio tenant create` command requires several configuration settings.
-Determine the values for all required settings.
-
-.. tab-set::
-   
-   .. tab-item:: Required Settings
-
-      The command requires values for each of the items in this table.
-
-      .. list-table::
-         :header-rows: 1
-         :widths: 25 75
-         :width: 100%
-
-         * - Setting
-           - Description
-
-         * - :mc:`~kubectl minio tenant create TENANT_NAME`
-           - The name to use for the new tenant.
-
-         * - :mc:`~kubectl minio tenant create --capacity`
-           - The total raw storage size for the Tenant across all volumes. 
-             Specify both the total storage size *and* the :guilabel:`Unit` of that storage. 
-             All storage units are in SI values, e.g. :math:`Gi = GiB = 1024^3` bytes.
-     
-             For example, 16 Ti for 16 Tebibytes.
-
-         * - :mc:`~kubectl minio tenant create --servers`
-           - The total number of MinIO server pods to deploy in the Tenant.
-    
-             The Operator by default uses pod anti-affinity, such that the Kubernetes cluster *must* have at least one worker node per MinIO server pod.
-
-         * - :mc:`~kubectl minio tenant create --volumes`
-           - The total number of storage volumes (Persistent Volume Claims).
-             The Operator generates an equal number of PVC *plus one* for supporting logging. 
-       
-             The total number of persistent volume claims (``PVC``) per server is determined by dividing the number of volumes by the number of servers.
-             The storage available for each ``PVC`` is determined by dividing the capacity by the number of volumes. 
-
-             The generated claims have pod selectors so that claims are only made for volumes attached to node running the pod.
-
-             If the number of volumes exceeds the numnber of persistent volumes available on the cluster, ``MinIO`` hangs until the number of persistent volumes are available.
-  
-         * - :mc:`~kubectl minio tenant create --namespace`
-           - Each MinIO tenant requires its own ``namespace``.
-
-             Specify a namespace with the :mc:`~kubectl minio tenant create --namespace` flag.
-             If not specified, the MinIO Operator to uses ``minio``.
-
-             The namespace must already exist in the Kubernetes cluster.
-             Run ``kubectl create ns <new_namespace>`` to add one.
-
-         * - :mc:`~kubectl minio tenant create --storage-class`
-           - Specify the storage class to use.
-
-             New MinIO tenants use the ``default`` storage class.
-             To specify a different storage class, add the :mc:`~kubectl minio tenant create --storage-class` flag.
-
-             The specified :mc-cmd:`~kubectl minio tenant create --storage-class` *must* match the ``storage-class`` of the Persistent Volumes (``PVs``) to which the ``PVCs`` should bind.
-
-             MinIO strongly recommends creating a Storage Class that corresponds to locally-attached volumes on the host machines on which the Tenant deploys. 
-             This ensures each pod can use locally-attached storage for maximum performance and throughput. 
-
-   .. tab-item:: Example
-
-      For example, the following command creates a new tenant with the following settings:
-
-      Name
-        ``miniotenant``
+      .. tab-item:: MinIO Console
       
-      Capacity
-        16 Tebibytes
+         .. code-block:: shell
+            :class: copyable
+
+            kubectl port-forward service/minio-tenant-1-console 9443:9443
+
+.. cond:: openshift
+
+   You can temporarily expose each service using the ``oc port-forward`` utility.
+   Run the following examples to forward traffic from the local host running ``oc`` to the services running inside the Kubernetes cluster.
+
+   .. tab-set::
+
+      .. tab-item:: MinIO Tenant
+
+         .. code-block:: shell
+            :class: copyable
+
+            oc port-forward service/minio 443:443
+
+      .. tab-item:: MinIO Console
       
-      Servers
-        4
+         .. code-block:: shell
+            :class: copyable
 
-      Volumes
-        16
+            oc port-forward service/minio-tenant-1-console 9443:9443
 
-      Namespace
-        ``minio``
+.. cond:: openshift
 
-      Storage Class
-        ``warm``
-  
-      .. code-block:: shell
-         :class: copyable
+   .. include:: /includes/openshift/steps-deploy-minio-tenant.rst
 
-         kubectl minio tenant create miniotenant          \
-                                     --capacity 16Ti      \
-                                     --servers 4          \
-                                     --volumes 16         \
-                                     --namespace minio    \
-                                     --storage-class warm
+.. cond:: k8s and not openshift
 
-
-.. _create-tenant-cli-determine-additional-options:
-
-2) Determine Values for Optional Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can further customize your tenant by including any or all of the following *optional* flags when running the :mc:`kubectl minio tenant create` command:
-
-.. list-table:: 
-   :header-rows: 1
-   :widths: 25 75
-   :width: 100%
-
-   * - Setting
-     - Description
-
-   * - :mc:`~kubectl minio tenant create --image`
-     - Customize the ``minio`` image to use.
-  
-       By default, the Operator uses the release image available at the time of the Operator's release.
-       To specify a different MinIO version for the tenant, such as the latest available, use the :mc:`~kubectl minio tenant create --image` flag.
-
-       See the `MinIO Quay <https://quay.io/repository/minio/minio>`__ or the `MinIO DockerHub <https://hub.docker.com/r/minio/minio/tags>`__ repositories for a list of valid tags.
-
-   * - :mc:`~kubectl minio tenant create --image-pull-secret`
-     - If using a custom container registry, specify the secret to use when pulling the ``minio`` image.
-
-       Use :mc:`~kubectl minio tenant create --image-pull-secret` to specify the secret.
-
-   * - :mc:`~kubectl minio tenant create --kes-config`
-     - Configure a :minio-git:`Key Encrption Service (KES) <kes>`
-
-       Use the :mc:`~kubectl minio tenant create --kes-config` flag to specify the name of the secret to use for KES Key Management Service (KMS) setup.
-
-       Enabling Server Side Encryption (SSE) also deploys a MinIO :minio-git:`KES <kes>` service in the Tenant to faciliate SSE operations.
-  
-       For more, see the `Github documentation <https://github.com/minio/kes/wiki>`__.
-
-.. note:: Generate a YAML File for Further Customizations
-
-   The MinIO Operator installs a `Custom Resource Definition (CRD) <https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/>`__ to describe tenants.
-   Advanced users can generate a YAML file from the command line and customize the tenant based on the CRD.
-
-   Do a dry run of a tenant creation process to generate a YAML file using the :mc:`~kubectl minio tenant create --output` flag.
-
-   When using this flag, the operator does **not** create the tenant.
-   Modify the generated YAML file as desired, then use ``kubectl apply -f <FILE>`` to manually create the MinIO tenant using the file.
-
-.. _create-tenant-cli-enter-command:
-
-3) Run the Command with Required and Optional Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-At the command line, enter the full command with all *Required* and any *Optional* flags.
-
-Consider a tenant we want to create:
-
-Tenant Name
-  ``minio1``
-
-Capacity
-  16 Tebibytes
-
-Servers
-  4
-
-Volumes
-  16 (four per node)
-
-Namespace
-  ``miniotenantspace``
-
-MinIO Image
-  Latest version, |minio-latest|
-
-Key ecnryption file
-  ``minio-secret``
-
-Storage class
-  ``warm``
-
-.. code-block:: shell
-   :substitutions:
-
-   kubectl minio tenant create                                \
-                        minio1                                \
-                        --capacity 16Ti                       \
-                        --servers 4                           \
-                        --volumes 16                          \
-                        --namespace miniotenantspace          \
-                        --image |minio-latest|  \
-                        --kes-config minio-kes-secret         \
-                        --storage-class warm
-
-.. _create-tenant-cli-record-access-info:
-
-4) Record the Access Credentials
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-When generating the tenant, the MinIO Operator displays the access credentials to use for the tenant.
-
-.. important::
-   
-   This is the only time the credentials display.
-   Copy the credentials to a secure location.
-   MinIO does not show these credentials again.
-
-In addition to access credentials, the output shows the service name and service ports to use for accessing the tenant.
-
-.. _create-tenant-cli-access-tenant-console:
-
-5) Access the Tenant's MinIO Console
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To access the :ref:`MinIO Console <minio-console>` for the tenant, forward the tenant's port.
-
-- If necessary, run ``kubectl get svc -n <namespace>`` to retrieve the tenant's port number.
-- Run the following to forward the tenant's port and access it from a browser:
-
-  .. code-block:: shell
-     :class: copyable
-
-     kubectl port-forward svc/<tenant-name>-console -n <tenant-namespace> <localport>:<tenantport>
-
-  - Replace ``<tenant-name>`` with the name of your tenant.
-  - Replace ``<tenant-namespace>`` with the namespace the tenant exists in.
-  - Replace ``<localport>`` with the port number to use on your local machine to access the tenant's MinIO Console.
-  - Replace ``<tenantport>`` with the port number the MinIO Operator assigned to the tenant.
-
-- Go to ``https://127.0.0.1:<localport>`` to Access the tenant's MinIO Console.
-
-  Replace ``<localport>`` with the port number you used when forwarding the tenant's port.
-
-- Login with the username and password shown in the tenant creation output and recorded in step 4 above.
-
-.. _create-tenant-cli-forward-ports:
-
-6) Forward Ports
-~~~~~~~~~~~~~~~~
-
-You can temporarily expose each service using the ``kubectl port-forward`` utility. 
-Run the following examples to forward traffic from the local host running ``kubectl`` to the services running inside the Kubernetes cluster.
-
-.. tab-set::
-
-   .. tab-item:: MinIO Tenant
-
-      .. code-block:: shell
-         :class: copyable
-
-         kubectl port-forward service/minio 443:443
-
-   .. tab-item:: MinIO Console
-   
-      .. code-block:: shell
-         :class: copyable
-
-         kubectl port-forward service/minio-tenant-1-console 9443:9443
+   .. include:: /includes/k8s/steps-deploy-tenant-cli.rst

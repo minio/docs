@@ -10,12 +10,16 @@ nvm use stable
 export PATH=${PATH}:${HOME}/.local/bin
 
 make clean
-SYNC_SDK=TRUE make linux
-make windows macos container k8s
+make SYNC_SDK=TRUE linux
+make windows macos container k8s openshift
 
 sudo rm -rf /var/www/docs/minio/kubernetes/upstream
 sudo mkdir -p /var/www/docs/minio/kubernetes/upstream
 sudo cp -vr build/${branch}/k8s/html/* /var/www/docs/minio/kubernetes/upstream/
+
+sudo rm -rf /var/www/docs/minio/kubernetes/openshift
+sudo mkdir -p /var/www/docs/minio/kubernetes/openshift
+sudo cp -vr build/${branch}/openshift/html/* /var/www/docs/minio/kubernetes/openshift/
 
 sudo rm -rf /var/ww/docs/minio/container
 sudo mkdir -p /var/www/docs/minio/container
