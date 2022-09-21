@@ -164,7 +164,7 @@ sync-dotnet-docs:
 	@$(eval DOTNETLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-dotnet/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-dotnet\/releases\/tag\///"))
 	@echo "Latest stable is ${DOTNETLATEST}"
 	$(shell wget -q -O source/developers/dotnet/API.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/Docs/API.md)
-#	$(shell wget -q -O source/developers/dotnet/quickstart.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/README.md)
+	$(shell wget -q -O source/developers/dotnet/quickstart.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/README.md)
 
 	@$(eval kname = $(shell uname -s))
 
