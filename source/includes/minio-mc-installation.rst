@@ -71,11 +71,8 @@
       .. code-block:: shell
          :class: copyable
 
-         go get -d github.com/minio/mc
-         cd ${GOPATH}/src/github.com/minio/mc
-         make
+         go install github.com/minio/mc@latest
 
-      To update a source-based installation, use ``go get -u``. 
       :mc:`mc update` does not support source-based installations.
 
 
