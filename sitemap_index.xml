@@ -2,6 +2,9 @@
 
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <sitemap>
+      <loc>https://www.min.io/sitemap.xml</loc>
+   </sitemap>
+   <sitemap>
       <loc>https://www.min.io/docs/minio/linux/sitemap.xml</loc>
    </sitemap>
    <sitemap>
