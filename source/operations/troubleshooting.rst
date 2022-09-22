@@ -115,7 +115,7 @@ Deployment Health
 ~~~~~~~~~~~~~~~~~
 
 The deployment's details include a summary of the deployment's configuration and the number of checks run and failed.
-You can select :guilabel:`Upload` to add diagnostic health data obtained from the :mc:`mc support diag` command or the MinIO Console's Support > Health page.
+You can select :guilabel:`Upload` to add diagnostic health data obtained from the :mc:`mc support diag` command or the MinIO Console's :guilabel:`Support > Health` page.
 
 If you need support from MinIO Engineering, you can create a :guilabel:`New Issue` for the deployment.
 

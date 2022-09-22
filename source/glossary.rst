@@ -233,7 +233,7 @@ Glossary
      See also: :term:`SSE-KMS`, :term:`SSE-C`, :term:`encryption at rest`, :term:`network encryption`.
    
    SUBNET
-     `MinIO's Subscription Network <|SUBNET|>`__ tracks support tickets and provides 24 hour direct-to-engineer access for subscribed accounts.
+     `MinIO's Subscription Network <https://min.io/pricing?jmp=docs>`__ tracks support tickets and provides 24 hour direct-to-engineer access for subscribed accounts.
 
    tenant
    tenants
