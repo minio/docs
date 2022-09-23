@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       tocTargetEl.parentNode.replaceChild(tocOriginalEl, tocTargetEl);
     }
     else {
-      tocAsideEL.style.display = "none";
+      tocAsideEL.classList.add("content__toc--empty");
     }
     
     // Treat the TOC as a dropdown in mobile
