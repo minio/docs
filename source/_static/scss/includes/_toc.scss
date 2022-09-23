@@ -57,6 +57,12 @@ div.topic {
     }
 }
 
+.content__toc--empty {
+    @include breakpoint-min(breakpoints(lg)) {
+        display: none;
+    }
+}
+
 #table-of-contents {
     flex: 1;
     position: relative;
