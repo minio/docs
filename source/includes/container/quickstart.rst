@@ -38,6 +38,8 @@ Procedure
             .. code-block:: shell
                :class: copyable
 
+               mkdir -p ~/minio/data
+
                podman run \
                   -p 9000:9000 \
                   -p 9090:9090 \
@@ -66,7 +68,7 @@ Procedure
                podman run \
                   -p 9000:9000 \
                   -p 9090:9090 \
-                  -v D:\data:/data \
+                  -v D:\minio\data:/data \
                   -e "MINIO_ROOT_USER=ROOTNAME" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
                   quay.io/minio/minio server /data --console-address ":9090"
@@ -76,7 +78,7 @@ Procedure
             - ``podman run`` starts the container.
             - ``-p`` binds a local port to a container port.
             - ``-v`` sets a file path as a persistent volume location for the container to use.
-              When MinIO writes data to ``/data``, that data mirrors to the local path ``D:\data``, allowing it to persist between container restarts.
+              When MinIO writes data to ``/data``, that data mirrors to the local path ``D:\minio\data``, allowing it to persist between container restarts.
               You can set any file path to which the user has read, write, and delete permissions to use.
             - ``-e`` sets the environment variables :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD`, respectively.
               These set the :ref:`root user credentials <minio-users-root>`.
@@ -125,7 +127,7 @@ Procedure
                   -p 9000:9000 \
                   -p 9090:9090 \
                   --name minio1 \
-                  -v D:\data:/data \
+                  -v D:\minio\data:/data \
                   -e "MINIO_ROOT_USER=ROOTUSER" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
                   quay.io/minio/minio server /data --console-address ":9090"
@@ -135,8 +137,8 @@ Procedure
             - ``docker run`` starts the MinIO container.
             - ``-p`` binds a local port to a container port.
             - ``-v`` sets a file path as a persistent volume location for the container to use.
-              When MinIO writes data to ``/data``, that data mirrors to the local path ``D:\data``, allowing it to persist between container restarts.
-              You can replace ``D:\data`` with another local file location to which the user has read, write, and delete access.
+              When MinIO writes data to ``/data``, that data mirrors to the local path ``D:\minio\data``, allowing it to persist between container restarts.
+              You can replace ``D:\minio\data`` with another local file location to which the user has read, write, and delete access.
             - ``-e`` sets the environment variables :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD`, respectively.
               These set the :ref:`root user credentials <minio-users-root>`.
               Change the example values to use for your container.
@@ -151,7 +153,7 @@ Procedure
             .. code-block:: shell
                :class: copyable
    
-               mkdir -p ${HOME}/data
+               mkdir -p ${HOME}/minio/data
    
                docker run \
                   -p 9000:9000 \
