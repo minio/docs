@@ -4,13 +4,12 @@
 div.sidebar {
     width: $sidebar-width;
     position: sticky;
-    left: 0;
     top: 0;
     background-color: var(--sidebar-bg);
     transition: opacity 400ms, transform 300ms;
     padding: var(--content-padding);
     overflow-y: auto;
-    height: 100vh;
+    height: calc(100vh - 6.0625rem); // 6.0625rem = header height
     z-index: $z-index-header - 2;
     margin: 0;
     border: none;

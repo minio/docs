@@ -49,15 +49,6 @@ $font-size-md: 0.9375rem;
 // Layout
 $container-width: 1400px;
 
-:root {
-  --content-padding: 1.75rem;
-
-  @include breakpoint-max(breakpoints(lg)) {
-    --content-padding: 1.25rem;
-  }
-}
-
-
 // Font weight
 $font-weight-normal: 400;
 $font-weight-medium: 500;

@@ -10,7 +10,7 @@ div.topic {
         flex-shrink: 0;
         order: 2;
         width: 14rem;
-        height: 100vh;
+        height: calc(100vh - 6.0625rem); // 6.0625rem = header height
         padding: var(--content-padding) var(--content-padding) var(--content-padding) 0;
         overflow-y: auto;
 

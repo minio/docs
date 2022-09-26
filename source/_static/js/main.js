@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", (event) => {
   const tocMenuEl = document.querySelector("#table-of-contents > ul.simple");
+  const root = document.documentElement;
   var readModeLs = localStorage.getItem("read-mode");
 
   // --------------------------------------------------
@@ -12,6 +13,30 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   })();
 
+  // --------------------------------------------------
+  // Dynamic sidebar scroll on read-mode.
+	// This'll allow the sidebar to display all content,
+	// without scrolling the body. 
+  // --------------------------------------------------
+  const sidebarEl = document.querySelector(".sidebar");
+  const headerEl = document.querySelector(".header");
+
+  function setSidebarHeight() {
+    if(!root.classList.contains("read-mode")) {
+      var headerViewHeight = headerEl.clientHeight - root.scrollTop;
+      var sidebarHeight = headerViewHeight > 0 ? `calc(100vh - ${headerViewHeight}px)` : "100vh";
+
+      sidebarEl.style.setProperty("height", sidebarHeight);
+    }
+    else {
+      sidebarEl.style.removeProperty("height");
+    }
+  }
+
+  setSidebarHeight();
+  document.addEventListener("scroll", (e) => {
+    setSidebarHeight();
+  });
 
   // --------------------------------------------------
   // Read mode
@@ -34,6 +59,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     readModeEl.addEventListener("click", (event) => {
       document.documentElement.classList.toggle("read-mode");
 
+			// Re-calculate sidebar height
+      setSidebarHeight();
+
       if (document.documentElement.classList.contains("read-mode")) {
         localStorage.setItem("read-mode", "true");
       } else {
@@ -55,6 +83,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
           document.documentElement.classList.remove("read-mode");
         }
       }
+
+			// Re-calculate sidebar height
+			setSidebarHeight();
     }
 
     var resizeTimer;
@@ -149,10 +180,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
         var target = nav.getAttribute("data-content-nav");
 
         document
-          .querySelector(".content__nav__inner a.active")
+          .querySelector(".platform-nav__inner a.active")
           .classList.remove("active");
         document
-          .querySelector(".content__nav__dropdown nav.active")
+          .querySelector(".platform-nav__dropdown nav.active")
           .classList.remove("active");
         document.getElementById(target).classList.add("active");
         nav.classList.add("active");

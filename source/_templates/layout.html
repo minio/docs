@@ -105,32 +105,28 @@
 
 {%- block content %}
    <section class="content">
-      {%- include "content-navigation.html" %}
-
       <div class="container">
-         <div class="content__inner">
-            <div class="sidebar scrollbar">
-               <div class="hide-aside visible-rm">
-                  <button type="button" class="icon">
-                      {%- include "icons/close.html" %}
-                      Close Doc Navigation
-                  </button>
-               </div>
-
-               <a class="sidebar__title" href="{{ pathto('index') }}">{{ shorttitle}}</a>
-               
-               {{ miniosidebar() }}
+         <div class="sidebar scrollbar">
+            <div class="hide-aside visible-rm">
+               <button type="button" class="icon">
+                     {%- include "icons/close.html" %}
+                     Close Doc Navigation
+               </button>
             </div>
 
-            {%- include "toc.html" %}
+            <a class="sidebar__title" href="{{ pathto('index') }}">{{ shorttitle}}</a>
+            
+            {{ miniosidebar() }}
+         </div>
 
-            <div class="content__main">
-               {% block body %} {% endblock %}
-            </div>
+         {%- include "toc.html" %}
+
+         <div class="content__main">
+            {% block body %} {% endblock %}
+
+            {%- include "footer.html" %}
          </div>
       </div>
-
-      {%- include "footer.html" %}
    </section>
 {%- endblock %}
 

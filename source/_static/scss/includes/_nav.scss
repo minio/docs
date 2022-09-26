@@ -374,7 +374,7 @@
 // ----------------------
 // Content nav
 // ----------------------
-.content__nav {
+.platform-nav {
 	background-color: var(--content-nav-bg);
 	font-size: $font-size-md;
     z-index: 10;
@@ -395,7 +395,7 @@
 
 :root {
     &:not(.dark-mode):not(.read-mode) {
-        .content__nav__inner {
+        .platform-nav__inner {
             & > a.active {
                 & > img {
                     &:first-child {
@@ -411,7 +411,7 @@
     }
 }
 
-.content__nav__inner {
+.platform-nav__inner {
 	margin: 0;
     padding: 0;
     display: flex;
@@ -429,7 +429,7 @@
         font-weight: $font-weight-medium;
         display: flex;
         align-items: center;
-        padding: 0.85rem 0 0.7rem;
+        padding: 0.75rem 0 0.7rem;
         border-bottom: 2px solid transparent;
         transition: color 300ms;
 
@@ -472,7 +472,7 @@
     }
 };
 
-.content__nav__dropdown {
+.platform-nav__dropdown {
     z-index: 1;
     background-color: var(--content-nav-sub-bg);
     font-size: $font-size-sm;
@@ -512,8 +512,8 @@
     }
 }
 
-.content__nav,
-.content__nav__dropdown {
+.platform-nav,
+.platform-nav__dropdown {
 	position: relative;
 
 	&:after {
