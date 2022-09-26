@@ -69,7 +69,7 @@ Bucket replication requires specific permissions on the source and destination d
       .. code-block:: shell
          :class: copyable
 
-         wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationAdminPolicy.json | \
+         wget -O - https://min.io/docs/minio/linux/examples/ReplicationAdminPolicy.json | \
          mc admin policy add TARGET ReplicationAdminPolicy /dev/stdin
          mc admin user add TARGET ReplicationAdmin LongRandomSecretKey
          mc admin policy set TARGET ReplicationAdminPolicy user=ReplicationAdmin
@@ -96,7 +96,7 @@ Bucket replication requires specific permissions on the source and destination d
       .. code-block:: shell
          :class: copyable
 
-         wget -O - https://docs.min.io/minio/baremetal/examples/ReplicationRemoteUserPolicy.json | \
+         wget -O - https://min.io/docs/minio/linux/examples/ReplicationRemoteUserPolicy.json | \
          mc admin policy add TARGET ReplicationRemoteUserPolicy /dev/stdin
          mc admin user add TARGET ReplicationRemoteUser LongRandomSecretKey
          mc admin policy set TARGET ReplicationRemoteUserPolicy user=ReplicationRemoteUser

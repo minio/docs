@@ -73,8 +73,6 @@ extlinks = {
     'iam-docs'        : ('https://docs.aws.amazon.com/IAM/latest/UserGuide/%s',''),
     'minio-release'   : ('https://github.com/minio/minio/releases/tag/%s',''),
     'mc-release'      : ('https://github.com/minio/mc/releases/tag/%s',''),
-    'legacy'          : ('https://docs.min.io/docs/%s',''),
-    'docs-k8s'        : ('https://docs.min.io/minio/k8s/%s',''),
     'prometheus-docs' : ('https://prometheus.io/docs/%s',''),
     'podman-docs'     : ('https://docs.podman.io/en/latest/%s',''),
     'podman-git'      : ('https://github.com/containers/podman/%s',''),

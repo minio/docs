@@ -332,7 +332,7 @@ Some subsections may not be visible if the authenticated user does not have the 
 
       The Audit Log section provides an interface for viewing :ref:`audit logs <minio-logging>` collected by a configured PostgreSQL service.
 
-      The Audit Logging feature is configured and enabled automatically for MinIO deployments created using the :docs-k8s:`MinIO Kubernetes Operator <>`.
+      The Audit Logging feature is configured and enabled automatically for MinIO deployments created using the :ref:`MinIO Operator Console <minio-operator-console>`.
 
    .. tab-item:: Trace
 

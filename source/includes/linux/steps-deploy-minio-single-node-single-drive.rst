@@ -40,10 +40,10 @@ The ``journalctl`` output should resemble the following:
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
 
-   Command-line: https://docs.min.io/docs/minio-client-quickstart-guide
+   Command-line: https://min.io/docs/minio/linux/reference/minio-mc.html
       $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
 
-   Documentation: https://docs.min.io
+   Documentation: https://min.io/docs/minio/linux/index.html
 
 The ``API`` block lists the network interfaces and port on which clients can access the MinIO S3 API.
 The ``Console`` block lists the network interfaces and port on which clients can access the MinIO Web Console.

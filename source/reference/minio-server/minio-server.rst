@@ -24,7 +24,7 @@ For examples of deploying :mc:`minio server` on a bare metal environment,
 see :ref:`minio-installation`.
 
 For examples of deploying :mc:`minio server` on a Kubernetes environment,
-see :docs-k8s:`Kubernetes documentation <>`.
+see :ref:`Deploying a MinIO Tenant <minio-k8s-deploy-minio-tenant>`.
 
 .. admonition:: AGPLv3
    :class: note

@@ -2,7 +2,7 @@
 
 Using pre-signed URLs, a client can upload files directly to an S3-compatible cloud storage server (S3) without exposing the S3 credentials to the user. 
 
-This guide describes how to use the [`presignedPutObject`](https://docs.min.io/docs/javascript-client-api-reference#presignedPutObject) API from the [MinIO JavaScript Library](https://github.com/minio/minio-js) to generate a pre-signed URL. This is demonstrated through a JavaScript example in which an Express Node.js server exposes an endpoint to generate a pre-signed URL and a client-side web application uploads a file to MinIO Server using that URL.
+This guide describes how to use the [`presignedPutObject`](https://min.io/docs/minio/linux/developers/javascript/API.html#presignedPutObject) API from the [MinIO JavaScript Library](https://github.com/minio/minio-js) to generate a pre-signed URL. This is demonstrated through a JavaScript example in which an Express Node.js server exposes an endpoint to generate a pre-signed URL and a client-side web application uploads a file to MinIO Server using that URL.
 
 1. [Create the Server](#createserver) 
 2. [Create the Client-side Web Application](#createclient)
@@ -27,7 +27,7 @@ var client = new Minio.Client({
 
 // Instantiate an `express` server and expose an endpoint called `/presignedUrl` as a `GET` request that
 // accepts a filename through a query parameter called `name`. For the implementation of this endpoint,
-// invoke [`presignedPutObject`](https://docs.min.io/docs/javascript-client-api-reference#presignedPutObject) 
+// invoke [`presignedPutObject`](https://min.io/docs/minio/linux/developers/javascript/API.html#presignedPutObjectt) 
 // on the `Minio.Client` instance to generate a pre-signed URL, and return that URL in the response:
 
 // express is a small HTTP server wrapper, but this works with any HTTP server
