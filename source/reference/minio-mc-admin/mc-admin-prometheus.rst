@@ -20,10 +20,8 @@ use with `Prometheus <https://prometheus.io/>`__.
 
 .. end-mc-admin-prometheus-desc
 
-For more complete documentation on using MinIO with Prometheus, see our
-legacy documentation site 
-:legacy:`How to monitor MinIO server with Prometheus 
-<how-to-monitor-minio-using-prometheus.html>`
+For more complete documentation on using MinIO with Prometheus, see :ref:`How to monitor MinIO server with Prometheus 
+<minio-metrics-collect-using-prometheus>`
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note

@@ -58,10 +58,10 @@ Procedure
       RootUser: minioadmin
       RootPass: minioadmin
 
-      Command-line: https://docs.min.io/docs/minio-client-quickstart-guide
+      Command-line: https://min.io/docs/minio/linux/reference/minio-mc.html
          $ mc alias set myminio http://192.0.2.10:9000 minioadmin minioadmin
 
-      Documentation: https://docs.min.io
+      Documentation: https://min.io/docs/minio/linux/index.html
 
       WARNING: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables.
    

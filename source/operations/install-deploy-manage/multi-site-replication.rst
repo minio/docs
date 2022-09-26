@@ -53,14 +53,14 @@ After enabling site replication, identity and access management (IAM) settings s
          Service accounts for ``root`` do not sync.
 
       #. Policy mapping for synced user accounts
-      #. Policy mapping for `Security Token Service (STS) users <https://docs.min.io/docs/minio-sts-quickstart-guide.html>`__
+      #. Policy mapping for :ref:`Security Token Service (STS) users <minio-security-token-service>`__
 
    .. tab-item:: OIDC
 
       #. Policies
       #. Service accounts associated to OIDC accounts with a valid :ref:`MinIO Policy <minio-policy>`. ``root`` service accounts do not sync.
       #. Policy mapping for synced user accounts
-      #. Policy mapping for `Security Token Service (STS) users <https://docs.min.io/docs/minio-sts-quickstart-guide.html>`__
+      #. Policy mapping for :ref:`Security Token Service (STS) users <minio-security-token-service>`__
 
    .. tab-item:: LDAP
 
@@ -68,7 +68,7 @@ After enabling site replication, identity and access management (IAM) settings s
       #. Groups
       #. Service accounts associated to LDAP accounts with a valid :ref:`MinIO Policy <minio-policy>`. ``root`` service accounts do not sync.
       #. Policy mapping for synced user accounts
-      #. Policy mapping for `Security Token Service (STS) users <https://docs.min.io/docs/minio-sts-quickstart-guide.html>`__
+      #. Policy mapping for :ref:`Security Token Service (STS) users <minio-security-token-service>`__
 
 After the initial synchronization of data across peer sites, MinIO continually replicates and synchronizes :ref:`replicable data <minio-site-replication-what-replicates>` among all sites as they occur on any site.
 

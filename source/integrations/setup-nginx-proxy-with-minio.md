@@ -6,7 +6,7 @@ In this recipe we will learn how to set up Nginx proxy with MinIO Server.
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](https://docs.min.io/docs/minio-quickstart-guide).
+Install MinIO Server from [here](https://min.io/docs/minio/linux/reference/minio-mc.html).
 
 ## 2. Installation
 
