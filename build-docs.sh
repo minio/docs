@@ -10,9 +10,8 @@ nvm use stable
 export PATH=${PATH}:${HOME}/.local/bin
 
 make clean
-make SYNC_SDK=TRUE linux
+SYNC_SDK=TRUE make linux
 make windows macos container k8s
-#make linux windows macos container k8s
 
 sudo rm -rf /var/www/docs/minio/kubernetes/upstream
 sudo mkdir -p /var/www/docs/minio/kubernetes/upstream
