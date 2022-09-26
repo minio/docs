@@ -44,8 +44,6 @@ linux:
 	@make sync-minio-version
 	@make sync-kes-version
 ifeq ($(SYNC_SDK),TRUE)
-	@echo "Synchronizing SDK content. Performing this operation too frequently may result in Github limiting API access"
-	@echo "Omit SYNC_SDK=TRUE to prevent SDK synchronization"
 	@make sync-sdks
 else
 	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
@@ -140,183 +138,15 @@ sync-minio-version:
 		;; \
 	esac
 
-sync-cpp-docs:
-# C++ repo does not have any releases yet.
-	@echo "Retrieving C++ docs from github.com/minio/minio-js"
-	@$(eval CPPLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-cpp/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-cpp\/releases\/tag\///"))
-	@echo "Latest stable is ${CPPLATEST}"
-	$(shell wget -q -O source/developers/cpp/API.md https://raw.githubusercontent.com/minio/minio-cpp/${CPPLATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/cpp/quickstart.md https://raw.githubusercontent.com/minio/minio-cpp/${CPPLATEST}/README.md)
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|CPPVERSION|${CPPLATEST}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|CPPVERSION|${CPPLATEST}|g" source/conf.py; \
-		;; \
-	esac
-
-sync-dotnet-docs:
-	@echo "Retrieving .NET docs from github.com/minio/minio-dotnet"
-	@$(eval DOTNETLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-dotnet/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-dotnet\/releases\/tag\///"))
-	@echo "Latest stable is ${DOTNETLATEST}"
-	$(shell wget -q -O source/developers/dotnet/API.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/Docs/API.md)
-	$(shell wget -q -O source/developers/dotnet/quickstart.md https://raw.githubusercontent.com/minio/minio-dotnet/${DOTNETLATEST}/README.md)
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|DOTNETVERSION|${DOTNETLATEST}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|DOTNETVERSION|${DOTNETLATEST}|g" source/conf.py; \
-		;; \
-	esac
-
-sync-go-docs:
-	@echo "Retrieving Go docs from github.com/minio/minio-go"
-	@$(eval GOLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-go/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-go\/releases\/tag\///"))
-	@echo "Latest stable is ${GOLATEST}"
-	$(shell wget -q -O source/developers/go/API.md https://raw.githubusercontent.com/minio/minio-go/${GOLATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/go/quickstart.md https://raw.githubusercontent.com/minio/minio-go/${GOLATEST}/README.md)
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|GOVERSION|${GOLATEST}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|GOVERSION|${GOLATEST}|g" source/conf.py; \
-		;; \
-	esac
-
-sync-haskell-docs:
-	@echo "Retrieving Haskell docs from github.com/minio/minio-hs"
-	@$(eval HASKELLLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-hs/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-hs\/releases\/tag\///"))
-	@echo "Latest stable is ${HASKELLLATEST}"
-	$(shell wget -q -O source/developers/haskell/API.md https://raw.githubusercontent.com/minio/minio-hs/${HASKELLLATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/haskell/quickstart.md https://raw.githubusercontent.com/minio/minio-hs/${HASKELLLATEST}/README.md)
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|HASKELLVERSION|${HASKELLLATEST}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|HASKELLVERSION|${HASKELLLATEST}|g" source/conf.py; \
-		;; \
-	esac
-
-sync-java-docs:
-	@echo "Retrieving Java docs from github.com/minio/minio-java"
-	@$(eval JAVALATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-java/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-java\/releases\/tag\///"))
-	@echo "Latest stable is ${JAVALATEST}"
-	$(shell wget -q -O source/developers/java/API.md https://raw.githubusercontent.com/minio/minio-java/${JAVALATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/java/quickstart.md https://raw.githubusercontent.com/minio/minio-java/${JAVALATEST}/README.md)
-	@$(eval JAVAJARURL = https://repo1.maven.org/maven2/io/minio/minio/${JAVALATEST}/)
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|JAVAVERSION|${JAVALATEST}|g" source/conf.py;\
-		sed -i "" "s|JAVAURL|${JAVAJARURL}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|JAVAVERSION|${JAVALATEST}|g" source/conf.py; \
-		sed -i "s|JAVAURL|${JAVAJARURL}|g" source/conf.py;\
-		;; \
-	esac
-
-sync-javascript-docs:
-	@echo "Retrieving JavaScript docs from github.com/minio/minio-js"
-	@$(eval JAVASCRIPTLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-js/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-js\/releases\/tag\///"))
-	@echo "Latest stable is ${JAVASCRIPTLATEST}"
-	$(shell wget -q -O source/developers/javascript/API.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/javascript/quickstart.md https://raw.githubusercontent.com/minio/minio-js/${JAVASCRIPTLATEST}/README.md)
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|JAVASCRIPTVERSION|${JAVASCRIPTLATEST}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|JAVASCRIPTVERSION|${JAVASCRIPTLATEST}|g" source/conf.py; \
-		;; \
-	esac
-
-sync-python-docs:
-	@echo "Retrieving Python docs from github.com/minio/minio-py"
-	@$(eval PYTHONLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-py/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-py\/releases\/tag\///"))
-	@echo "Latest stable is ${PYTHONLATEST}"
-	$(shell wget -q -O source/developers/python/API.md https://raw.githubusercontent.com/minio/minio-py/${PYTHONLATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/python/quickstart.md https://raw.githubusercontent.com/minio/minio-py/${PYTHONLATEST}/README.md)
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|PYTHONVERSION|${PYTHONLATEST}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|PYTHONVERSION|${PYTHONLATEST}|g" source/conf.py; \
-		;; \
-	esac
-
-sync-rust-docs:
-# Rust repo does not have any releases yet.
-	@echo "Retrieving Rust docs from github.com/minio/minio-js"
-	@$(eval RUSTLATEST = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio-rust/releases/latest | sed "s/https:\/\/github.com\/minio\/minio-rust\/releases\/tag\///"))
-	@echo "Latest stable is ${RUSTLATEST}"
-#	$(shell wget -q -O source/developers/rust/API.md https://raw.githubusercontent.com/minio/minio-rs/${RUSTLATEST}/docs/API.md)
-	$(shell wget -q -O source/developers/rust/quickstart.md https://raw.githubusercontent.com/minio/minio-rs/${RUSTLATEST}/README.md)
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|RUSTVERSION|${RUSTLATEST}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|RUSTVERSION|${RUSTLATEST}|g" source/conf.py; \
-		;; \
-	esac
-
-# This results in a lot of API operations to GitHub. You might hit request limits if you aren't careful.
-
 sync-sdks:
-# C++ and Rust repos do not have any releases yet.
-#	@make sync-cpp-docs
-	@make sync-dotnet-docs
-	@make sync-go-docs
-	@make sync-haskell-docs
-	@make sync-java-docs
-	@make sync-javascript-docs
-	@make sync-python-docs
-#	@make sync-rust-docs
+	@(./sync-docs.sh)
 
 # Can probably safely remove this at some point
-
 sync-deps:
 # C++ and Rust repos do not have any releases yet.
 	@echo "Synchronizing all external dependencies"
 	@make sync-minio-version
 	@make sync-kes-version
-#	@make sync-cpp-docs
-	@make sync-dotnet-docs
-	@make sync-go-docs
-	@make sync-haskell-docs
-	@make sync-java-docs
-	@make sync-javascript-docs
-	@make sync-python-docs
-#	@make sync-rust-docs
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
