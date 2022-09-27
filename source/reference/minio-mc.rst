@@ -248,6 +248,11 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /reference/minio-mc/mc-mv.rst
           :start-after: start-mc-mv-desc
           :end-before: end-mc-mv-desc
+
+   * - :mc:`mc pipe`
+     - .. include:: /reference/minio-mc/mc-pipe.rst
+          :start-after: start-mc-pipe-desc
+          :end-before: end-mc-pipe-desc  
      
    * - | :mc:`mc policy set`
        | :mc:`mc policy set-json`
@@ -292,7 +297,6 @@ The following table lists :mc-cmd:`mc` commands:
        :ref:`active-active replication configurations
        <minio-bucket-replication-serverside-twoway>` and
        :ref:`resynchronization <minio-replication-behavior-resync>`.
-       
      
    * - :mc:`mc rm`
      - .. include:: /reference/minio-mc/mc-rm.rst
@@ -320,6 +324,7 @@ The following table lists :mc-cmd:`mc` commands:
        | :mc:`mc support inspect`
        | :mc:`mc support perf`
        | :mc:`mc support profile`
+       | :mc:`mc support top`
      - The MinIO Client ``mc support`` commands provides tools for analyzing deployment health or performance and for running diagnostics.
        You can also upload generated health reports for further analysis by MinIO engineering.
 
@@ -335,6 +340,11 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-tree-desc
           :end-before: end-mc-tree-desc
      
+   * - :mc:`mc undo`
+     - .. include:: /reference/minio-mc/mc-undo.rst
+          :start-after: start-mc-undo-desc
+          :end-before: end-mc-undo-desc
+
    * - :mc:`mc update`
      - .. include:: /reference/minio-mc/mc-update.rst
           :start-after: start-mc-update-desc
@@ -477,6 +487,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-mb
    /reference/minio-mc/mc-mirror
    /reference/minio-mc/mc-mv
+   /reference/minio-mc/mc-pipe
    /reference/minio-mc/mc-policy-set
    /reference/minio-mc/mc-policy-get
    /reference/minio-mc/mc-policy-list
@@ -509,10 +520,12 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-support-logs-status
    /reference/minio-mc/mc-support-perf
    /reference/minio-mc/mc-support-profile
+   /reference/minio-mc/mc-support-top
    /reference/minio-mc/mc-tag-set
    /reference/minio-mc/mc-tag-list
    /reference/minio-mc/mc-tag-remove
    /reference/minio-mc/mc-tree
+   /reference/minio-mc/mc-undo
    /reference/minio-mc/mc-update
    /reference/minio-mc/mc-version
    /reference/minio-mc/mc-watch

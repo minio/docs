@@ -30,6 +30,11 @@ the source can MinIO *or* a local filesystem.
 You can also use :mc:`mc cp` against the local filesystem to produce
 similar results to the ``cp`` commandline tool.
 
+.. note::
+
+   :mc:`mc cp` only copies the latest version or the specified version of an object without any version information or modification date.
+   To copy all versions, version information, and related metadata, use :mc:`mc replicate add` or :mc:`mc admin replicate`.
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE
@@ -261,14 +266,14 @@ Parameters
    :mc-cmd:`~mc cp TARGET`. 
          
    See :aws-docs:`AmazonS3/latest/dev/storage-class-intro.html` for
-   more information on S3 storage classses.
+   more information on S3 storage classes.
 
 .. mc-cmd:: --tags
    
 
    *Optional* Applies one or more tags to the copied objects.
 
-   Specify an ampersand-seperated list of key-value pairs as 
+   Specify an ampersand-separated list of key-value pairs as 
    ``KEY1=VALUE1&KEY2=VALUE2``, where each pair represents one tag to
    assign to the objects.
 

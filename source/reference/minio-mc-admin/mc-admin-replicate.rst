@@ -31,6 +31,7 @@ Where :ref:`bucket replication <minio-bucket-replication>` manages the mirroring
 Only one deployment can have any data when initiating a new site replication configuration.
 
 Site replication enforces :ref:`bucket versioning <minio-bucket-versioning>` on all buckets, including existing buckets and any buckets added after initiating site replication.
+Site replication fully synchronizes versioned objects, compared to :mc:`mc mirror` which operates only on the latest version of an object
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note

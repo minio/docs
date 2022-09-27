@@ -46,6 +46,7 @@ similar results to the ``mv`` commandline tool.
          mc [GLOBALFLAGS] mv         \
          [--attr "string"]           \
          [--continue]                \
+         [--disable-multipart]       \
          [--encrypt "string"]        \
          [--encrypt-key "string"]    \
          [--newer-than "string"]     \
@@ -97,6 +98,7 @@ Parameters
    directory or bucket.
 
 .. mc-cmd:: TARGET
+   :required:
 
    *Required* The full path to the bucket to which the command moves the
    object(s) at the specified :mc-cmd:`~mc mv SOURCE`. Specify the 
@@ -136,6 +138,20 @@ Parameters
    
 
    *Optional* Create or resume a move session. 
+
+.. mc-cmd:: --disable-multipart
+   
+
+   *Optional* Disables the multipart upload feature.
+
+   Multipart upload breaks an object into a set of separate parts.
+   Each part uploads individually and in any order.
+   If any individual part upload fails, MinIO retries that part without affecting the other parts.
+   After upload completes, the parts combine to restore the original object.
+
+   MinIO recommends using multipart upload for any object larger than 100 MB.
+   For more information on multipart upload, refer to the :s3-docs:`Amazon S3 documentation <mpuoverview.html>`
+
 
 .. mc-cmd:: --encrypt
    
