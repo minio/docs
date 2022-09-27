@@ -13,6 +13,15 @@ html {
     font-size: $root-font-size;
     scroll-behavior: smooth;
     scroll-padding: 1rem;
+
+    @include breakpoint-min(breakpoints(lg)) { 
+        &.read-mode {
+            body {
+                height: 100vh;
+                overflow: hidden;
+            }
+        }
+    }
 }
 
 body {
@@ -23,4 +32,6 @@ body {
     color: var(--text-color);
     font-weight: $font-weight-normal;
     background-color: var(--body-bg);
+    display: flex;
+    flex-direction: column;
 }

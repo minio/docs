@@ -45,15 +45,17 @@ $theme-properties: (
     --sidebar-bg: $light-100 $dark-100,
     --sidebar-hide-bg: $light-500 $dark-400,
     --sidebar-hide-hover-bg: #c2c9d1 $dark-500,
+    --sidebar-scrollbar-bg: darken($light-100, 8%) lighten($dark-100, 5%),
+    --sidebar-scrollbar-hover-bg: darken($light-100, 12%) lighten($dark-100, 7%),
 
     // Docs nav
     --docs-nav-active-color: $theme-red $headings-dark-color,
-    --docs-nav-active-code-bg: #efdde0 #2E394A,
+    --docs-nav-active-code-bg: #efdde0 $dark-0,
     --docs-nav-group-border-color: $light-300 $dark-300,
 
     // Scrollbar
-    --scrollbar-bg: #e5e5e5 #2e3747,
-    --scrollbar-hover-bg: #dddddd #364052,
+    --scrollbar-bg: $light-500 $dark-200,
+    --scrollbar-hover-bg: darken($light-500, 5%) $dark-300,
 
     // Table
     --table-border-color: $light-300 $dark-200,
@@ -64,6 +66,8 @@ $theme-properties: (
     --code-color: $black $dark-0,
     --code-link-color: #006DA0 #12243c,
     --code-link-bg: #cde4ff #71a7ed,
+    --pre-scrollbar-bg: darken($light-300, 8%) darken($dark-500, 10%),
+    --pre-scrollbar-hover-bg: darken($light-300, 12%) darken($dark-500, 14%),
 
     // Tab
     --tab-active-border-color: $theme-red $dark-500,
@@ -83,10 +87,6 @@ $theme-properties: (
     --nav-dropdown-bg: $white $dark-100,
     --nav-download-border-color: $theme-red $dark-500,
     --nav-download-hover-bg: $theme-red $dark-200,
-
-    // Footer
-    --footer-bg: #1D1D1D #151c24,
-    --footer-color: $white $text-dark-color,
 
     // Icon
     --icon-sidebar-toggle-hover-bg: rgba($white, 0.1) $dark-200,
@@ -112,7 +112,7 @@ $theme-properties: (
     --alert-warning-link-decoration-color: #e3c3c6 #54141a,
 
     // Doc Search
-    --docsearch-modal-background: #d8dcdf #1c232d,
+    --docsearch-modal-background: #edf1f3 #1c232d,
     --docsearch-container-background: rgba($black, 0.25) rgba(16, 21, 28, 0.851),
     --ds-highlight-color: rgba(120, 133, 152, 0.125) rgba(16, 21, 28, 0.3),
     --ds-search-bg: $white $dark-100,

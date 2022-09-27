@@ -1,11 +1,15 @@
 div.footer {
     all: revert;
-    background-color: var(--footer-bg);
     width: 100%;
-    margin: 0;
-
+    margin: 3rem 0 0 0;
+    font-size: $font-size-sm;
+    opacity: 0.75;
+    text-align: center;
+    border-top: 1px solid var(--theme-light-bg);
+    padding-top: 1.15rem;
+    
     &, a {
-        color: var(--footer-color);
+        color: var(--text-muted-color);
     }
 
     a {
@@ -17,20 +21,4 @@ div.footer {
     p {
         margin: 0;
     }
-}
-
-.footer__credit {
-    justify-content: center;
-    text-align: center;
-    display: flex;
-    gap: 0.2rem;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 1.5rem 0;
-    font-size: $font-size-sm;
-}
-
-.footer__license {
-    display: flex;
-    align-items: center;
 }

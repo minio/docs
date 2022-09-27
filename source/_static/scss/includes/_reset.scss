@@ -100,6 +100,9 @@ tt.xref, code.xref,
 code,
 pre,
 div.highlight {
+    --scrollbar-bg: var(--pre-scrollbar-bg);
+    --scrollbar-hover-bg: var(--pre-scrollbar-hover-bg);
+
     font-family: $font-family-mono;
     font-weight: $font-weight-bold;
     background-color: var(--code-bg);
@@ -289,7 +292,7 @@ dl {
 }
 
 ul, ol {
-    margin-left: 1rem;
+    margin-left: 1.25rem;
 }
 
 ul {

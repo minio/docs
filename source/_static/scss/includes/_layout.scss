@@ -1,6 +1,19 @@
-.content__inner {
+
+:root {
+    --content-padding: 1.75rem;
+  
+    @include breakpoint-max(breakpoints(lg)) {
+      --content-padding: 1.25rem;
+    }
+}
+
+.content {
+    flex: 1;
+
     @include breakpoint-min(breakpoints(lg)) {
-		display: flex;
+		& > .container {
+            display: flex;
+        }
 	}
 }
 
@@ -25,8 +38,12 @@
 
     &.read-mode {
         .content {
+            @include breakpoint-min(breakpoints(lg)) { 
+                overflow: auto;
+            }
+
             & > .container {
-                padding: 0;
+                padding-inline: 0;
             }
         }
     }
