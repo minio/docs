@@ -20,6 +20,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // --------------------------------------------------
   const sidebarEl = document.querySelector(".sidebar");
   const headerEl = document.querySelector(".header");
+  const activeDocEl = document.querySelector(".docs a.current");
 
   function setSidebarHeight() {
     if(!root.classList.contains("read-mode")) {
@@ -32,8 +33,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
       sidebarEl.style.removeProperty("height");
     }
   }
+  
+  setTimeout(() => {
+    setSidebarHeight();
+    
+    // Scroll sidebar to active doc items
+    if(activeDocEl && activeDocEl.offsetTop > 400) {
+      sidebarEl.scrollTop = activeDocEl.offsetTop - 40;
+    }
+    
+    // Make the sidebar is scrollable.
+    sidebarEl.classList.remove("inactive");
+  }, 100);
 
-  setSidebarHeight();
   document.addEventListener("scroll", (e) => {
     setSidebarHeight();
   });
@@ -357,6 +369,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
           event.preventDefault();
           docSearchBtn.click();
         });
+      });
+    }
+  })();
+
+  // --------------------------------------------------
+  // Custom scrollbars for `pre` code blocks
+  // --------------------------------------------------
+  (function () {
+    const preEls = document.querySelectorAll(".highlight pre");
+    if(preEls.length > 0) {
+      preEls.forEach((item) => {
+        item.classList.add("scrollbar");
       });
     }
   })();

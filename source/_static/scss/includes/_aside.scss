@@ -2,6 +2,9 @@
 // Sidebar
 // ----------------------
 div.sidebar {
+    --scrollbar-bg: var(--sidebar-scrollbar-bg);
+    --scrollbar-hover-bg: var(--sidebar-scrollbar-hover-bg);
+
     width: $sidebar-width;
     position: sticky;
     top: 0;
@@ -13,6 +16,13 @@ div.sidebar {
     z-index: $z-index-header - 2;
     margin: 0;
     border: none;
+    
+    // Sidebar is set to hidden by default and later shown with JS.
+    // This prevents the scrollbar-flicker due to
+    // some other related JS functions that are bind with sidebar scroll.
+    &.inactive {
+        overflow: hidden;
+    }
 
     @include breakpoint-min(breakpoints(lg)) {
         .hide-aside {

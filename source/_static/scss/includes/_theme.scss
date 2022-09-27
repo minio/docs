@@ -45,15 +45,17 @@ $theme-properties: (
     --sidebar-bg: $light-100 $dark-100,
     --sidebar-hide-bg: $light-500 $dark-400,
     --sidebar-hide-hover-bg: #c2c9d1 $dark-500,
+    --sidebar-scrollbar-bg: darken($light-100, 8%) lighten($dark-100, 5%),
+    --sidebar-scrollbar-hover-bg: darken($light-100, 12%) lighten($dark-100, 7%),
 
     // Docs nav
     --docs-nav-active-color: $theme-red $headings-dark-color,
-    --docs-nav-active-code-bg: #efdde0 #2E394A,
+    --docs-nav-active-code-bg: #efdde0 $dark-0,
     --docs-nav-group-border-color: $light-300 $dark-300,
 
     // Scrollbar
-    --scrollbar-bg: #d2d6d9 #2e3747,
-    --scrollbar-hover-bg: #dddddd #364052,
+    --scrollbar-bg: $light-500 $dark-200,
+    --scrollbar-hover-bg: darken($light-500, 5%) $dark-300,
 
     // Table
     --table-border-color: $light-300 $dark-200,
@@ -64,6 +66,8 @@ $theme-properties: (
     --code-color: $black $dark-0,
     --code-link-color: #006DA0 #12243c,
     --code-link-bg: #cde4ff #71a7ed,
+    --pre-scrollbar-bg: darken($light-300, 8%) darken($dark-500, 10%),
+    --pre-scrollbar-hover-bg: darken($light-300, 12%) darken($dark-500, 14%),
 
     // Tab
     --tab-active-border-color: $theme-red $dark-500,
