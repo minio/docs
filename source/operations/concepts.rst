@@ -126,6 +126,15 @@ There are several options to manage your MinIO deployments and clusters:
 - The :ref:`MinIO Console <minio-console>` graphical user interface for individual instances
 - In Kubernetes, with the :ref:`MinIO Operator Console <minio-operator-console>`
 
+How do I upload objects to MinIO?
+---------------------------------
+
+You can use any S3-compatible SDK to upload objects to a MinIO deployment.
+Each SDK performs the equivalent of a PUT operation which transmits the object to MinIO for storage.
+
+MinIO also implements support for :s3-docs:`multipart uploads <mpuoverview.html>`, where clients can split an object into multiple parts for better throughput and reliability of transmission.
+MinIO reassembles these parts until it has a completed object, then stores that object at the specified path.
+
 How does MinIO provide availability, redundancy, and reliability?
 -----------------------------------------------------------------
 

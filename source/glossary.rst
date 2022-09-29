@@ -150,6 +150,15 @@ Glossary
      A system :term:`topology` that uses more than one server and more than one drive per server to host a MinIO instance.
      MinIO recommends Kubernetes for distributed deployments.
 
+   multipart upload
+     Multipart upload is a client-initiated :s3-docs:`S3 function <mpuoverview.html>` that splits a single object into multiple parts for moving from one location to another.
+     The client uploads each part independently to MinIO, and MinIO manages reconstructing those received parts into the original object. 
+
+     Multipart uploads provide benefits such as improved throughput and resiliency to network errors. 
+     Use multipart uploads for objects greater than 100MB in actual or estimated size for best results.
+     
+     See :s3-docs:`Amazon AWS documentation <mpuoverview.html>` for more details.
+
    network encryption
      A method of securing data during transit from one location to another, such as server-server or client-server.
      MinIO supports :ref:`Transport Layer Security (TLS) <minio-tls>`, version 1.2 and later, for both incoming and outgoing traffic.
