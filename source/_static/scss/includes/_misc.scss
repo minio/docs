@@ -2,9 +2,15 @@
 // Custom scrollbar
 // ----------------------
 .scrollbar {
-  scrollbar-color: var(--scrollbar-bg) transparent;
   scrollbar-width: thin;
   
+  &:not(.scrollbar--hover) {
+    scrollbar-color: var(--scrollbar-bg) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-bg);
+    }
+  } 
 
   &:hover {
     scrollbar-color: var(--scrollbar-hover-bg) transparent;
@@ -24,7 +30,6 @@
   }
   
   &::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-bg);
     border-radius: 1rem;
     border: 3px solid transparent;
     background-clip: content-box;
@@ -33,6 +38,10 @@
       background-color: var(--scrollbar-hover-bg);
     }
   }
+}
+
+.scrollbar--hover {
+  scrollbar-color: transparent transparent;
 }
 
 
