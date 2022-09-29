@@ -26,8 +26,9 @@ sys.path.append(os.path.abspath('../sphinxext'))
 
 platform = list(tags.tags.keys())[0]
 
-if (platform =="k8s"):
+if (platform == "k8s"):
     platform = "Kubernetes"
+
 
 project = 'MinIO Documentation for ' + platform
 copyright = '2020-Present, MinIO, Inc. '
@@ -77,6 +78,7 @@ extlinks = {
     'podman-docs'     : ('https://docs.podman.io/en/latest/%s',''),
     'podman-git'      : ('https://github.com/containers/podman/%s',''),
     'docker-docs'     : ('https://docs.docker.com/%s', ''),
+    'openshift-docs'  : ('https://docs.openshift.com/container-platform/4.11/%s', ''),
 
 }
 
@@ -231,8 +233,6 @@ html_theme_options = {
     'show_relbars': 'false'
 }
 
-html_short_title = "MinIO Object Storage for " + ("MacOS" if platform == "macos" else platform.capitalize())
-
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -248,7 +248,17 @@ html_js_files = [
 # Add https://www.min.io/robots.txt to html_extra_path list once available.
 html_extra_path = [ 'extra']
 
-html_title = 'MinIO Object Storage for ' + ("MacOS" if platform == "macos" else platform.capitalize())
+platform_fmt = ""
+
+if platform == "macos":
+   platform_fmt = "MacOS"
+elif platform == "openshift":
+   platform_fmt = "OpenShift"
+else:
+   platform_fmt = platform.capitalize()
+
+html_title = 'MinIO Object Storage for ' + platform_fmt
+html_short_title = 'MinIO Object Storage for ' + platform_fmt
 
 html_permalinks_icon = ''
 

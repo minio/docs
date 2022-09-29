@@ -6,6 +6,10 @@
 
    .. include:: /includes/container/installation.rst
 
-.. cond:: k8s
+.. cond:: openshift
+
+   .. include:: /includes/openshift/deploy-minio-on-openshift.rst
+
+.. cond:: k8s and not openshift
 
    .. include:: /includes/k8s/deploy-operator.rst
