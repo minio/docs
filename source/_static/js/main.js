@@ -21,16 +21,26 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const sidebarEl = document.querySelector(".sidebar");
   const headerEl = document.querySelector(".header");
   const activeDocEl = document.querySelector(".docs a.current");
+  const tocEl = document.querySelector(".content__toc");
 
-  function setSidebarHeight() {
+  function setSidebarHeight() { //TODO: Clean this up
+    var headerViewHeight = headerEl.clientHeight - root.scrollTop;
+    var sidebarHeight = headerViewHeight > 0 ? `calc(100vh - ${headerViewHeight}px)` : "100vh";
+    var sidebarReadModeHeight = window.innerWidth > 991 ? sidebarHeight : "100vh";
+      
     if(!root.classList.contains("read-mode")) {
-      var headerViewHeight = headerEl.clientHeight - root.scrollTop;
-      var sidebarHeight = headerViewHeight > 0 ? `calc(100vh - ${headerViewHeight}px)` : "100vh";
-
       sidebarEl.style.setProperty("height", sidebarHeight);
+      tocEl.style.setProperty("height", sidebarHeight);
     }
     else {
-      sidebarEl.style.removeProperty("height");
+      sidebarEl.style.setProperty("height", sidebarReadModeHeight);
+      
+      if(window.innerWidth > 991) {
+        tocEl.style.setProperty("height", sidebarReadModeHeight);
+      }
+      else {
+        tocEl.style.removeProperty("height");
+      }
     }
   }
   
