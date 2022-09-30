@@ -34,7 +34,7 @@ Manager:
        - /v1/key/generate/*
        - /v1/key/decrypt/*
        identities:
-       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes tool identity of minio-kes.cert'
+       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes identity of minio-kes.cert'
 
    # Specify the connection information for the  Secrets Manager endpoint.
    # The endpoint should be resolvable from the host.

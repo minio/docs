@@ -56,10 +56,10 @@ a. Create the KES Configuration File
          :class: copyable
          :substitutions:
 
-         kes tool identity of |miniocertpath|/minio-kes.cert
+         kes identity of |miniocertpath|/minio-kes.cert
 
    - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
-
+   - Set the ``vault.engine`` and ``vault.version`` to the appropriate values for the Vault K/V Engine configuration
    - Replace the ``VAULTAPPID`` and ``VAULTAPPSECRET`` with the appropriate :ref:`Vault AppRole credentials <minio-sse-vault-prereq-vault>`.
 
 b. Create the MinIO Environment File

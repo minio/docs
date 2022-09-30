@@ -155,15 +155,18 @@ Select the corresponding tab to the engine used by your Vault deployment for ins
 
          path "kv/data/*" {
                capabilities = [ "create", "read"]
+         }
 
          path "kv/metadata/*" {
                capabilities = [ "list", "delete"]
+         }
          
       Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``
 
 MinIO requires using AppRole authentication for secure communication with the Vault server.
 The following commands:
 
+- Enable AppRole Authentication
 - Create an App Role ID for |KES|
 - Binds that role to the created KES policy
 - Requests a RoleID and SecretID
@@ -171,6 +174,7 @@ The following commands:
   .. code-block:: shell
      :class: copyable
 
+     vault auth enable approle
      vault write    auth/approle/role/kes-role token_num_uses=0 secret_id_num_uses=0 period=5m
      vault write    auth/approle/role/kes-role policies=kes-policy
      vault read     auth/approle/role/kes-role/role-id

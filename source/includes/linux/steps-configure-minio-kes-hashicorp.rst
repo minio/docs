@@ -48,7 +48,7 @@ a. Create the KES Configuration File
    .. code-block:: shell
       :substitutions:
 
-      nano /etc/kes/config.yaml
+      nano /opt/kes/config.yaml
 
    .. include:: /includes/common/common-minio-kes-hashicorp.rst
       :start-after: start-kes-configuration-hashicorp-vault-desc
@@ -62,7 +62,7 @@ a. Create the KES Configuration File
          :class: copyable
          :substitutions:
 
-         kes tool identity of |miniocertpath|/minio-kes.cert
+         kes identity of |miniocertpath|/minio-kes.cert
 
    - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
 

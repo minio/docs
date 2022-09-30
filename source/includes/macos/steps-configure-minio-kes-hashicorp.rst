@@ -53,7 +53,7 @@ a. Create the KES Configuration File
          :class: copyable
          :substitutions:
 
-         kes tool identity of |miniocertpath|/minio-kes.cert
+         kes identity of |miniocertpath|/minio-kes.cert
 
    - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
 

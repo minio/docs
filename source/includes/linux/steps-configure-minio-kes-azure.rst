@@ -58,7 +58,7 @@ a. Create the KES Configuration File
          :class: copyable
          :substitutions:
 
-         kes tool identity of |miniocertpath|/minio-kes.cert
+         kes identity of |miniocertpath|/minio-kes.cert
 
    - Replace the ``endpoint`` with the URL for the Keyvault instance.
 

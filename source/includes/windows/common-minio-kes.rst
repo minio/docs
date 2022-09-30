@@ -22,16 +22,16 @@ The following commands creates two TLS certificates that expire within 30 days o
 
    # These commands output the certificates to |kescertpath|
 
-   C:\kes.exe tool identity new  \  
-     --key  |kescertpath|  \  kes-server.key  \  
-     --cert |kescertpath|  \  kes-server.cert  \  
-     --ip   "127.0.0.1"  \  
+   C:\kes.exe identity new \  
+     --key  |kescertpath|\kes-server.key \  
+     --cert |kescertpath|\kes-server.cert \  
+     --ip   "127.0.0.1" \  
      --dns  localhost
 
-   C:\kes.exe tool identity new  \  
-     --key  |miniocertpath|  \  minio-kes.key  \  
-     --cert |miniocertpath|  \  minio-kes.cert  \  
-     --ip   "127.0.0.1"  \  
+   C:\kes.exe identity new \  
+     --key  |miniocertpath|\minio-kes.key \  
+     --cert |miniocertpath|\minio-kes.cert \  
+     --ip   "127.0.0.1" \  
      --dns  localhost
 
 The ``--ip`` and ``--dns`` parameters set the IP and DNS ``SubjectAlternativeName`` for the certificate.
@@ -66,7 +66,7 @@ Run the following command in a terminal or shell to start the KES server as a fo
    :class: copyable
    :substitutions:
 
-   C:\kes.exe server --auth --config=|kesconfigpath|  \  config  \  kes-config.yaml
+   C:\kes.exe server --auth --config=|kesconfigpath|\config\kes-config.yaml
 
 Defer to the documentation for your MacOS Operating System version for instructions on running a process in the background.
 
@@ -80,8 +80,8 @@ Run the following command in a terminal or shell to start the MinIO server as a 
    :class: copyable
    :substitutions:
 
-   export MINIO_CONFIG_ENV_FILE=|minioconfigpath|  \  config  \  minio
-   C:  \  minio.exe server --console-address :9090
+   export MINIO_CONFIG_ENV_FILE=|minioconfigpath|\config\minio
+   C:\minio.exe server --console-address :9090
 
 .. end-kes-minio-start-server-desc
 
@@ -97,8 +97,8 @@ The following command uses the ``kes key create`` command to create a new Extern
    :substitutions:
 
    export KES_SERVER=https://127.0.0.1:7373
-   export KES_CLIENT_KEY=|miniocertpath|  \  minio-kes.key
-   export KES_CLIENT_CERT=|miniocertpath|  \  minio-kes.cert
+   export KES_CLIENT_KEY=|miniocertpath|\minio-kes.key
+   export KES_CLIENT_CERT=|miniocertpath|\minio-kes.cert
 
    C:\kes.exe key create -k encrypted-bucket-key
 
@@ -129,9 +129,9 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
    # Add these environment variables to the existing environment file
 
    MINIO_KMS_KES_ENDPOINT=https://127.0.0.1:7373
-   MINIO_KMS_KES_CERT_FILE=|miniocertpath|  \  minio-kes.cert
-   MINIO_KMS_KES_KEY_FILE=|miniocertpath|  \  minio-kes.key
-   MINIO_KMS_KES_CAPATH=|miniocertpath|  \  kes-server.cert
+   MINIO_KMS_KES_CERT_FILE=|miniocertpath|\minio-kes.cert
+   MINIO_KMS_KES_KEY_FILE=|miniocertpath|\minio-kes.key
+   MINIO_KMS_KES_CAPATH=|miniocertpath|\kes-server.cert
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
    minio.exe server [ARGUMENTS]

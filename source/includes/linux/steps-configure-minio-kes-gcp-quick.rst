@@ -52,7 +52,7 @@ a. Create the KES Configuration File
          :class: copyable
          :substitutions:
 
-         kes tool identity of |miniocertpath|/minio-kes.cert
+         kes identity of |miniocertpath|/minio-kes.cert
 
    - Set ``GCPPROJECTID`` to the GCP project for the Secrets Manager instance KES should use.
 
