@@ -15,7 +15,7 @@ Install Nginx from [here](http://nginx.org/en/download.html).
 ## 3. Configuration
 
 ### Proxy all requests
-Add the following content as a file ``/etc/nginx/sites-enabled``, e.g. ``/etc/nginx/sites-enables/minio``  and also remove the existing ``default`` file in same directory.
+Add the following content as a file ``/etc/nginx/sites-enabled``, e.g. ``/etc/nginx/sites-enabled/minio``  and also remove the existing ``default`` file in same directory.
 
 ```sh
 server {
