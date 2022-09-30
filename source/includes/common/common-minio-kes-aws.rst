@@ -34,7 +34,7 @@ Manager:
        - /v1/key/generate/*
        - /v1/key/decrypt/*
        identities:
-       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes tool identity of minio-kes.cert'
+       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes identity of minio-kes.cert'
 
                                 # In production environments, each client connecting to KES must
                                 # Have their TLS hash listed under at least one `policy`.
@@ -92,7 +92,7 @@ Manager:
        - /v1/key/generate/*
        - /v1/key/decrypt/*
        identities:
-       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes tool identity of minio-kes.cert'
+       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes identity of minio-kes.cert'
 
    # Specify the connection information for the KMS and Secrets Manager endpoint.
    # The endpoint should be resolvable from the host.
@@ -115,7 +115,7 @@ value. You can use this functionality to set credentials without writing them to
 the configuration file.
 
 - Set ``MINIO_IDENTITY_HASH`` to the output of 
-  ``kes tool identity of minio-kes.cert``.
+  ``kes identity of minio-kes.cert``.
 
 - Replace the ``REGION`` with the appropriate region for AWS Secrets Manager.
   The value **must** match for both ``endpoint`` and ``region``.

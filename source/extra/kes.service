@@ -8,11 +8,13 @@ AssertFileIsExecutable=/usr/local/bin/kes
 [Service]
 WorkingDirectory=/etc/kes/
 
+AmbientCapabilities=CAP_IPC_LOCK
+
 User=kes
 Group=kes
 ProtectProc=invisible
 
-ExecStart=/usr/local/bin/kes server --config=/etc/kes/config.yaml
+ExecStart=/usr/local/bin/kes server --config=/opt/kes/config.yaml --mlock
 
 # Let systemd restart this service always
 Restart=always

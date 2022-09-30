@@ -9,9 +9,10 @@ The following YAML provides the minimum required fields for using Hashicorp Vaul
 
    address: 0.0.0.0:7373
 
-   # Disable the root identity, as we do not need that level of access for
+   # Disable the root administrator identity, as we do not need that level of access for
    # supporting SSE operations.
-   root: disabled
+   admin: 
+     identity: disabled
 
    # Specify the TLS keys generated in the previous step here
    # For production environments, use keys signed by a known and trusted
@@ -29,7 +30,7 @@ The following YAML provides the minimum required fields for using Hashicorp Vaul
        - /v1/key/generate/* # e.g. '/minio-'
        - /v1/key/decrypt/*
        identities:
-       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes tool identity of minio-kes.cert'
+       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes identity of minio-kes.cert'
                                 # In production environments, each client connecting to KES must
                                 # Have their TLS hash listed under at least one `policy`.
 
@@ -40,6 +41,8 @@ The following YAML provides the minimum required fields for using Hashicorp Vaul
    keystore:
      vault:
        endpoint: https://HOSTNAME:8200
+       engine: "/path/to/engine" # Replace with the path to the K/V Engine
+       version: "v1|v2" # Specify v1 or v2 depending on the version of the K/V Engine
        approle:
          id: "VAULTAPPID"     # Hashicorp Vault AppRole ID
          secret: "VAULTAPPSECRET" # Hashicorp Vault AppRole Secret ID

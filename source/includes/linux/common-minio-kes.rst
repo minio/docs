@@ -31,7 +31,7 @@ Create the ``/etc/systemd/system/kes.service`` file on all KES hosts:
 
 You may need to run ``systemctl daemon-reload`` to load the new service file into ``systemctl``.
 
-The ``kes.service`` file runs as the ``kes-user`` User and Group by default.
+The ``kes.service`` file runs as the ``kes`` User and Group by default.
 You can create the user and group using the ``useradd`` and ``groupadd`` commands.
 The following example creates the user and group.
 These commands typically require root (``sudo``) permissions.
@@ -39,17 +39,16 @@ These commands typically require root (``sudo``) permissions.
 .. code-block:: shell
    :class: copyable
 
-   groupadd -r kes-user
-   useradd -M -r -g kes-user kes-user
+   groupadd -r kes
+   useradd -M -r -g kes kes
 
-The ``kes-user`` user and group must have read access to all files used by the KES service:
+The ``kes`` user and group must have read access to all files used by the KES service:
 
 .. code-block:: shell
    :class: copyable
    :substitutions:
 
-   chown -R kes-user:kes-user /opt/kes
-   chown -R kes-user:kes-user /etc/kes
+   chown -R kes:kes /opt/kes
 
 .. end-kes-service-file-desc
 
@@ -107,10 +106,10 @@ This procedure assumes a structure similar to the following:
      -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/kes-server.cert
 
      # For the KES Hosts
-     -rw-r--r-- 1 kes-user:kes-user |kescertpath|/kes-server.cert
-     -rw-r--r-- 1 kes-user:kes-user |kescertpath|/kes-server.key
+     -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.cert
+     -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.key
 
-If the KES certificates are self-signed *or* signed by Certificate Authority (CA) that is *not* globally trusted, you **must** add the CA certificate to the |miniocertpath|/certs directory such that each MinIO server can properly validate the KES certificates.
+If the KES certificates are self-signed *or* signed by Certificate Authority (CA) that is *not* globally trusted, you **must** add the CA certificate to the |miniocertpath| directory such that each MinIO server can properly validate the KES certificates.
 
 .. end-kes-generate-kes-certs-prod-desc
 

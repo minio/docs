@@ -50,7 +50,7 @@ a. Create the KES Configuration File
          :class: copyable
          :substitutions:
 
-         kes tool identity of |miniocertpath|/minio-kes.cert
+         kes identity of |miniocertpath|/minio-kes.cert
 
    - Replace the ``REGION`` with the appropriate region for AWS Secrets Manager.
      The value **must** match for both ``endpoint`` and ``region``.

@@ -48,13 +48,13 @@ The following commands create two TLS certificates that expire within 30 days of
    # These commands output keys to |kescertpath|
    # and |miniocertpath| respectively
 
-   kes tool identity new  \
+   kes identity new  \
      --key  |kescertpath|/kes-server.key  \
      --cert |kescertpath|/kes-server.cert  \
      --ip   "127.0.0.1"  \
      --dns  localhost
 
-   kes tool identity new  \
+   kes identity new  \
      --key  |miniocertpath|/minio-kes.key  \
      --cert |miniocertpath|/minio-kes.cert  \
      --ip   "127.0.0.1"  \
@@ -85,6 +85,7 @@ Run the following commands in a terminal or shell to start the KES server as a f
 
 .. code-block:: shell
    :class: copyable
+   :substitutions:
 
    sudo setcap cap_ipc_lock=+ep $(readlink -f $(which kes))
 
@@ -223,7 +224,7 @@ Defaults to port ``7373`` on all host network interfaces.
 .. start-kes-conf-root-desc
 
 The identity for the KES superuser (``root``) identity. 
-Clients connecting with a TLS certificate whose hash (``kes tool identity of client.cert``) matches this value have access to all KES API operations.
+Clients connecting with a TLS certificate whose hash (``kes identity of client.cert``) matches this value have access to all KES API operations.
 
 Specify ``disabled`` to remove the root identity and rely only on the ``policy`` configuration for controlling identity and access management to KES. 
 
@@ -256,7 +257,7 @@ the ``minio-sse-`` prefix.
 
 |KES| uses mTLS to authorize connecting clients by comparing the 
 hash of the TLS certificate against the ``identities`` of each configured
-policy. Use the ``kes tool identity of`` command to compute the identity of the
+policy. Use the ``kes identity of`` command to compute the identity of the
 MinIO mTLS certificate and add it to the ``policy.<NAME>.identities`` array
 to associate MinIO to the ``<NAME>`` policy. 
 
