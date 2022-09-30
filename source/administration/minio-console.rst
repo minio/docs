@@ -152,6 +152,8 @@ Each bucket has :guilabel:`Manage` and :guilabel:`Browse` buttons.
 
 - Select :guilabel:`Manage` to open the management interface for the bucket:
 
+   Some management features may not be available if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
+
    The :guilabel:`Summary` view displays a summary of the bucket's configuration.
 
    The :guilabel:`Events` view supports configuring :ref:`notification events <minio-bucket-notifications>` using a configured notification target.
@@ -285,7 +287,7 @@ Monitoring
 
 The :guilabel:`Monitoring` section provides an interface for monitoring the MinIO deployment.
 
-The section contains the following subsections,
+The section contains the following subsections:
 Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
 .. tab-set::

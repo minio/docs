@@ -348,10 +348,11 @@ The :guilabel:`Configure` section displays optional configuration settings for t
 
    * - :guilabel:`Override Tenant Defaults`
      - The MinIO Operator sets the Kubernetes Security Context for pods to a default of ``1000`` for User, Group, and FsGroup. 
-       MinIO runs the pod using the ``root`` user.
+       The FSGroupChangePolicy defaults to ``Always``. 
+       MinIO does not run the pod using the ``root`` user.
 
-       You can modify the Security Context to direct MinIO to run using a different User, Group, or FsGroup ID. 
-       You can also direct MinIO to not run as the Root user.
+       You can modify the Security Context to direct MinIO to run using a different User, Group,FsGroup ID, and FSGroupChangePolicy. 
+       You can also direct MinIO to run as the Root user.
 
        .. cond:: openshift
 
@@ -377,7 +378,7 @@ The :guilabel:`Configure` section displays optional configuration settings for t
 
 .. _create-tenant-images-section:
 
-4) The :guilabel:`Images` Section
+1) The :guilabel:`Images` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :guilabel:`Images` section displays container image settings used by the MinIO Tenant.

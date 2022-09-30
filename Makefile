@@ -95,7 +95,7 @@ container:
 
 sync-operator-version:
 	@echo "Retrieving latest Operator version"
-	@$(eval OPERATOR = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/operator/releases/latest | sed "s/https:\/\/github.com\/minio\/operator\/releases\/tag\///"))
+	@$(eval OPERATOR = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/operator/releases/latest | sed "s/https:\/\/github.com\/minio\/operator\/releases\/tag\///" | sed "s/v//"))
 	@$(eval kname = $(shell uname -s))
 
 	@echo "Updating Operator to ${OPERATOR}"
