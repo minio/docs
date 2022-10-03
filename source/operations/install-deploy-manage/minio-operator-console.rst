@@ -63,22 +63,33 @@ The Operator Console automatically detects any MinIO Tenants
 deployed on the cluster, whether provisioned through the Operator Console 
 or through the :ref:`MinIO Kubernetes Plugin <minio-k8s-deploy-minio-tenant-commandline>`.
 
-For each listed tenant, select :guilabel:`MANAGE` to open an in-browser
-view of that tenant's MinIO Console. You can use this view to directly manage
-the tenant through the Operator UI.
+Select a listed tenant to open an in-browser view of that tenant's MinIO Console. 
+You can use this view to directly manage, modify, expand, upgrade, and delete the tenant through the Operator UI.
 
-.. image:: /images/k8s/operator-manage-tenant.png
+Tenant Registration
+-------------------
+
+.. versionchanged:: 0.19.5
+
+   You can register your MinIO tenants with your |SUBNET| account using the Operator Console.
+
+.. image:: /images/k8s/operator-console-register.png
    :align: center
    :width: 70%
    :class: no-scaled-link
-   :alt: MinIO Operator Tenant Console
+   :alt: MinIO Operator Console Register Screen
 
-Select :guilabel:`VIEW` to view the Tenant details and configurations. 
-You can modify, expand, upgrade, and delete the Tenant from this view.
+#. Select the :guilabel:`Register` tab
+#. Enter the :guilabel:`API Key` 
+   
+   You can obtain the key from |SUBNET| through the Console by selecting :guilabel:`Get from SUBNET`.
 
-.. image:: /images/k8s/operator-tenant-view.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: MinIO Operator Tenant View
+Review Your MinIO License
+-------------------------
 
+To review which license you are using and the features available through different license options, select the :guilabel:`License` tab.
+
+MinIO supports two licenses: `AGPLv3 Open Source <https://opensource.org/licenses/AGPL-3.0>`__ or a `MinIO Commercial License <https://min.io/pricing?ref=docs>`__.
+Subscribers to |SUBNET| use MinIO under a commercial license.
+
+You can also :guilabel:`Subscribe` from the License screen.
