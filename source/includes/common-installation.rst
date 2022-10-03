@@ -67,7 +67,7 @@ For infrastructure managed by tools such as Ansible or Terraform, defer to your 
          :class: copyable
          :substitutions:
 
-         curl |minio-rpm| --output minio.rpm
+         curl |minio-rpm| -O minio.rpm
          sudo dnf update minio.rpm
 
    .. tab-item:: DEB (Debian/Ubuntu)
@@ -80,7 +80,7 @@ For infrastructure managed by tools such as Ansible or Terraform, defer to your 
          :class: copyable
          :substitutions:
 
-         curl |minio-deb| --output minio.deb
+         curl |minio-deb| -O minio.deb
          sudo dpkg -i minio.deb
 
    .. tab-item:: Binary
