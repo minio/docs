@@ -126,7 +126,6 @@ There are several options to manage your MinIO deployments and clusters:
 - The :ref:`MinIO Console <minio-console>` graphical user interface for individual instances
 - In Kubernetes, with the :ref:`MinIO Operator Console <minio-operator-console>`
 
-
 How does MinIO provide availability, redundancy, and reliability?
 -----------------------------------------------------------------
 

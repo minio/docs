@@ -270,6 +270,12 @@ You can set custom text for the note title:
 
    This is a `link <https://min.io>`__ to an external page. 
 
+To note a version change:
+
+.. versionchanged:: RELEASE.2022-07-15T09-20-55Z
+
+   ``mc license register`` replaces the ``mc support register`` command.
+
 Important Admonition
 ~~~~~~~~~~~~~~~~~~~~
 

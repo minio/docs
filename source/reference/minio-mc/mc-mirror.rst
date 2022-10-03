@@ -20,6 +20,12 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
 
 .. end-mc-mirror-desc
 
+.. note::
+   
+   :mc:`mc mirror` only synchronizes the current object without any version information or metadata.
+   To synchronize an object's version history and metadata, consider using :mc:`mc replicate` or :mc:`mc admin replicate`.
+
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE
@@ -92,7 +98,7 @@ Parameters
 
 .. mc-cmd:: TARGET
 
-   *REQUIRED* The full path to bucket in which :mc:`mc mirror` copies synchronized SOURCE objects. Specify the ``TARGET`` as ``ALIAS/PATH``, where:
+   *REQUIRED* The full path to bucket to which :mc:`mc mirror` synchronizes SOURCE objects. Specify the ``TARGET`` as ``ALIAS/PATH``, where:
 
    - ``ALIAS`` is the :mc:`alias <mc alias>` of a configured S3-compatible host, *and*
 
@@ -113,7 +119,7 @@ Parameters
 .. mc-cmd:: --disable-multipart
    
 
-   Disables multipart upload for the copy session.
+   Disables multipart upload for the synchronization session.
 
 .. mc-cmd:: --encrypt-key
    
@@ -202,7 +208,7 @@ Parameters
    For example, objects A, B, and C exist on Source.
    Objects C, D, and E exist on Target.
 
-   When running ``mc mirror --remove``, objects A and B copy to Target and objects D and E are removed from Target.
+   When running ``mc mirror --remove``, objects A and B synchronize to Target and objects D and E are removed from Target.
    Since an object C already exists on both, nothing moves from Source to Target. 
 
    After the action, only objects A, B, and C exist on both the Source and the Target.
