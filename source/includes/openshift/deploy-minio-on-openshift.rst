@@ -189,8 +189,10 @@ The Operator Console still requires using the generated JWT token for access, wh
 After deploying the MinIO Operator, you can create a new MinIO Tenant.
 To deploy a MinIO Tenant using OpenShift, see :ref:`deploy-minio-tenant-redhat-openshift`.
 
-.. toctree::
-   :titlesonly:
-   :hidden:
+.. uncomment this block when upgrade operator procedure is complete
 
-   /operations/install-deploy-manage/upgrade-minio-operator
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      /operations/install-deploy-manage/upgrade-minio-operator
