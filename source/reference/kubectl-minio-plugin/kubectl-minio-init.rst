@@ -18,7 +18,8 @@ Description
 
 .. start-kubectl-minio-init-desc
 
-The :mc:`kubectl minio init` command initializes the MinIO Operator. 
+The :mc:`kubectl minio init` command initializes the MinIO Operator.
+You can also use this command to upgrade an existing Operator installation to the version of the plugin.
 :mc:`kubectl minio init` requires the operator for core functionality.
 
 .. end-kubectl-minio-init-desc
