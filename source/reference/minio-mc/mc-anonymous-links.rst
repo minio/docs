@@ -1,8 +1,8 @@
 .. _minio-mc-policy-links:
 
-===================
+======================
 ``mc anonymous links``
-===================
+======================
 
 .. default-domain:: minio
 

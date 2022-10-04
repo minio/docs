@@ -1,8 +1,8 @@
 .. _minio-mc-policy-set-json:
 
-======================
+=========================
 ``mc anonymous set-json``
-======================
+=========================
 
 .. default-domain:: minio
 

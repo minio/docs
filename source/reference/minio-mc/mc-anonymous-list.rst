@@ -1,8 +1,8 @@
 .. _minio-mc-policy-list:
 
-==================
+=====================
 ``mc anonymous list``
-==================
+=====================
 
 .. default-domain:: minio
 

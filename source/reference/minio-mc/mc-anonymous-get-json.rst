@@ -1,8 +1,8 @@
 .. _minio-mc-policy-get-json:
 
-======================
+=========================
 ``mc anonymous get-json``
-======================
+=========================
 
 .. default-domain:: minio
 

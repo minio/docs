@@ -1,8 +1,8 @@
 .. _minio-mc-policy-set:
 
-=================
+====================
 ``mc anonymous set``
-=================
+====================
 
 .. default-domain:: minio
 
