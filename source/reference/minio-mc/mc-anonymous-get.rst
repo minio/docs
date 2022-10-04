@@ -1,8 +1,8 @@
-.. _minio-mc-policy-get-json:
+.. _minio-mc-policy-get:
 
-======================
-``mc policy get-json``
-======================
+====================
+``mc anonymous get``
+====================
 
 .. default-domain:: minio
 
@@ -10,33 +10,36 @@
    :local:
    :depth: 2
 
-.. mc:: mc policy get-json
+.. mc:: mc anonymous get
 
 Syntax
 ------
 
-.. start-mc-policy-get-json-desc
+.. start-mc-policy-get-desc
 
-The :mc:`mc policy get-json` command gets anonymous (i.e. unauthenticated or
+The :mc:`mc anonymous get` command gets the anonymous (i.e. unauthenticated or
 public) access :ref:`policies <minio-policy>` for a bucket. 
 
-.. end-mc-policy-get-json-desc
+.. end-mc-policy-get-desc
 
 Buckets with anonymous policies allow clients to access the bucket contents
 and perform actions consistent with the specified policy without 
 :ref:`authentication <minio-authentication-and-identity-management>`.
 
+To get the :s3-docs:`JSON policy <using-iam-policies>` assigned to the bucket,
+use the :mc-cmd:`mc anonymous get-json` command.
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command retrieves the JSON-formatted anonymous 
-      policy for the ``mydata`` bucket on the ``myminio`` MinIO deployment:
+      The following command retrieves the anonymous access policy for the
+      ``mydata`` bucket on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc policy get-json myminio/mydata
+         mc anonymous get myminio/mydata
 
    .. tab-item:: SYNTAX
 
@@ -45,19 +48,20 @@ and perform actions consistent with the specified policy without
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] get-json ALIAS
+         mc [GLOBALFLAGS] policy get ALIAS
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
+
 
 Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
 
-   *Required* The full path to the bucket or bucket prefix for which to get the
-   anonymous bucket policy.
+   *Required* The full path to the bucket or bucket prefix for which the
+   command retrieves the anonymous bucket policy.
    
    Specify the :ref:`alias <alias>` of the MinIO or other
    S3-compatible service *and* the full path to the bucket or bucket
@@ -65,7 +69,7 @@ Parameters
 
    .. code-block:: shell
             
-      mc get-json public play/mybucket
+      mc get public play/mybucket
 
 Global Flags
 ~~~~~~~~~~~~
@@ -80,18 +84,18 @@ Examples
 Get Anonymous Policy for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc policy get-json` to get the anonymous policy for a 
+Use :mc:`mc anonymous get` to get the anonymous policy for a 
 bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc policy get-json ALIAS/PATH
+   mc anonymous get ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc policy get-json ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc anonymous get ALIAS>` with the 
   :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc policy get-json ALIAS>` with the destination bucket.
+- Replace :mc-cmd:`PATH <mc anonymous get ALIAS>` with the destination bucket.
 
 Behavior
 --------

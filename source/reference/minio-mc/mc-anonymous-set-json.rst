@@ -1,8 +1,8 @@
 .. _minio-mc-policy-set-json:
 
-======================
-``mc policy set-json``
-======================
+=========================
+``mc anonymous set-json``
+=========================
 
 .. default-domain:: minio
 
@@ -10,14 +10,14 @@
    :local:
    :depth: 2
 
-.. mc:: mc policy set-json
+.. mc:: mc anonymous set-json
 
 Syntax
 ------
 
 .. start-mc-policy-set-json-desc
 
-The :mc:`mc policy set-json` command sets anonymous (i.e. unauthenticated or
+The :mc:`mc anonymous set-json` command sets anonymous (i.e. unauthenticated or
 public) access :ref:`policies <minio-policy>` for a bucket using using an IAM
 :s3-docs:`JSON policy document <using-iam-policies>`. 
 
@@ -37,7 +37,7 @@ and perform actions consistent with the specified policy without
       .. code-block:: shell
          :class: copyable
 
-         mc policy set-json ~/mydata-anonymous.json myminio/mydata
+         mc anonymous set-json ~/mydata-anonymous.json myminio/mydata
 
    .. tab-item:: SYNTAX
 
@@ -64,7 +64,7 @@ Parameters
 .. mc-cmd:: ALIAS
 
    *Required* The full path to the bucket or bucket prefix to which the
-   command applies the specified :mc-cmd:`~mc policy set-json POLICY`. 
+   command applies the specified :mc-cmd:`~mc anonymous set-json POLICY`. 
    
    Specify the :ref:`alias <alias>` of the MinIO or other
    S3-compatible service *and* the full path to the bucket or bucket
@@ -87,37 +87,37 @@ Examples
 Set Anonymous Policy for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc policy set-json` to set the anonymous policy for a 
+Use :mc-cmd:`mc anonymous set-json` to set the anonymous policy for a 
 bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc policy set-json POLICY ALIAS/PATH
+   mc anonymous set-json POLICY ALIAS/PATH
 
-- Replace :mc-cmd:`POLICY <mc policy set-json POLICY>` with a supported
-  :mc-cmd:`POLICY <mc policy set-json POLICY>`.
+- Replace :mc-cmd:`POLICY <mc anonymous set-json POLICY>` with a supported
+  :mc-cmd:`POLICY <mc anonymous set-json POLICY>`.
 
-- Replace :mc-cmd:`ALIAS <mc policy set-json ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc anonymous set-json ALIAS>` with the 
   :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc policy set-json ALIAS>` with the destination bucket.
+- Replace :mc-cmd:`PATH <mc anonymous set-json ALIAS>` with the destination bucket.
 
 Remove Anonymous Policy for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc policy set` to clear the anonymous policy for a 
+Use :mc:`mc anonymous set` to clear the anonymous policy for a 
 bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc policy set none ALIAS/PATH
+   mc anonymous set none ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc policy set ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc anonymous set ALIAS>` with the 
   :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc policy set ALIAS>` with the destination bucket.
+- Replace :mc-cmd:`PATH <mc anonymous set ALIAS>` with the destination bucket.
 
 Behavior
 --------

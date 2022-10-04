@@ -254,14 +254,14 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-pipe-desc
           :end-before: end-mc-pipe-desc  
      
-   * - | :mc:`mc policy set`
-       | :mc:`mc policy set-json`
-       | :mc:`mc policy get`
-       | :mc:`mc policy get-json`
-       | :mc:`mc policy list`
-       | :mc:`mc policy links`
+   * - | :mc:`mc anonymous set`
+       | :mc:`mc anonymous set-json`
+       | :mc:`mc anonymous get`
+       | :mc:`mc anonymous get-json`
+       | :mc:`mc anonymous list`
+       | :mc:`mc anonymous links`
 
-     - The :mc:`mc policy` command supports setting or removing anonymous
+     - The :mc:`mc anonymous` command supports setting or removing anonymous
        :ref:`policies <minio-policy>` to a bucket and its contents. Buckets with
        anonymous policies allow public access where clients can perform any
        action granted by the policy without :ref:`authentication
@@ -459,6 +459,12 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-alias-set
    /reference/minio-mc/mc-alias-list
    /reference/minio-mc/mc-alias-remove
+   /reference/minio-mc/mc-anonymous-set
+   /reference/minio-mc/mc-anonymous-get
+   /reference/minio-mc/mc-anonymous-list
+   /reference/minio-mc/mc-anonymous-links
+   /reference/minio-mc/mc-anonymous-get-json
+   /reference/minio-mc/mc-anonymous-set-json
    /reference/minio-mc/mc-cat
    /reference/minio-mc/mc-cp
    /reference/minio-mc/mc-diff
@@ -488,12 +494,6 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-mirror
    /reference/minio-mc/mc-mv
    /reference/minio-mc/mc-pipe
-   /reference/minio-mc/mc-policy-set
-   /reference/minio-mc/mc-policy-get
-   /reference/minio-mc/mc-policy-list
-   /reference/minio-mc/mc-policy-links
-   /reference/minio-mc/mc-policy-get-json
-   /reference/minio-mc/mc-policy-set-json
    /reference/minio-mc/mc-rb
    /reference/minio-mc/mc-replicate-add
    /reference/minio-mc/mc-replicate-edit

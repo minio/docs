@@ -1,8 +1,8 @@
-.. _minio-mc-policy-links:
+.. _minio-mc-policy-list:
 
-===================
-``mc policy links``
-===================
+=====================
+``mc anonymous list``
+=====================
 
 .. default-domain:: minio
 
@@ -10,17 +10,17 @@
    :local:
    :depth: 2
 
-.. mc:: mc policy links
+.. mc:: mc anonymous list
 
 Syntax
 ------
 
-.. start-mc-policy-links-desc
+.. start-mc-policy-list-desc
 
-The :mc:`mc policy links` retrieves the HTTP URL for anonymous (i.e.
-unauthenticated or public) access to a bucket. 
+The :mc:`mc anonymous list` retrieves all anonymous (i.e. unauthenticated or
+public) access policies for a bucket. 
 
-.. end-mc-policy-links-desc
+.. end-mc-policy-list-desc
 
 Buckets with anonymous policies allow clients to access the bucket contents
 and perform actions consistent with the specified policy without 
@@ -30,13 +30,13 @@ and perform actions consistent with the specified policy without
 
    .. tab-item:: EXAMPLE
 
-      The following command retrieves HTTP URLs for the ``mydata`` bucket
-      on the ``myminio`` MinIO deployment:
+      The following command lists all anonymous access policies for the
+      ``mydata`` bucket on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc policy links --recursive myminio/mydata
+         mc anonymous list myminio/mydata
 
    .. tab-item:: SYNTAX
 
@@ -45,13 +45,12 @@ and perform actions consistent with the specified policy without
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] policy links   \
-                          [--recursive]  \
-                          ALIAS
+         mc [GLOBALFLAGS] ALIAS
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
+
 
 Parameters
 ~~~~~~~~~~
@@ -67,12 +66,7 @@ Parameters
 
    .. code-block:: shell
             
-      mc links public [FLAGS] play/mybucket
-
-.. mc-cmd:: --recursive
-   
-
-   *Optional* Retrieve the HTTP links recursively.
+      mc list public play/mybucket
 
 Global Flags
 ~~~~~~~~~~~~
@@ -87,18 +81,18 @@ Examples
 List Anonymous Policies for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc policy links` to links the anonymous policies for a 
+Use :mc:`mc anonymous list` to list the anonymous policies for a 
 bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc policy links ALIAS/PATH
+   mc anonymous list ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc policy get ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc anonymous get ALIAS>` with the 
   :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc policy get ALIAS>` with the destination bucket.
+- Replace :mc-cmd:`PATH <mc anonymous get ALIAS>` with the destination bucket.
 
 Behavior
 --------
