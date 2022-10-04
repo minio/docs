@@ -1,8 +1,8 @@
 .. _minio-mc-policy-get:
 
-=================
+====================
 ``mc anonymous get``
-=================
+====================
 
 .. default-domain:: minio
 

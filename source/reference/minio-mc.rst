@@ -459,6 +459,12 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-alias-set
    /reference/minio-mc/mc-alias-list
    /reference/minio-mc/mc-alias-remove
+   /reference/minio-mc/mc-anonymous-set
+   /reference/minio-mc/mc-anonymous-get
+   /reference/minio-mc/mc-anonymous-list
+   /reference/minio-mc/mc-anonymous-links
+   /reference/minio-mc/mc-anonymous-get-json
+   /reference/minio-mc/mc-anonymous-set-json
    /reference/minio-mc/mc-cat
    /reference/minio-mc/mc-cp
    /reference/minio-mc/mc-diff
@@ -488,12 +494,6 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-mirror
    /reference/minio-mc/mc-mv
    /reference/minio-mc/mc-pipe
-   /reference/minio-mc/mc-policy-set
-   /reference/minio-mc/mc-policy-get
-   /reference/minio-mc/mc-policy-list
-   /reference/minio-mc/mc-policy-links
-   /reference/minio-mc/mc-policy-get-json
-   /reference/minio-mc/mc-policy-set-json
    /reference/minio-mc/mc-rb
    /reference/minio-mc/mc-replicate-add
    /reference/minio-mc/mc-replicate-edit
