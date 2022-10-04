@@ -254,14 +254,14 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-pipe-desc
           :end-before: end-mc-pipe-desc  
      
-   * - | :mc:`mc policy set`
-       | :mc:`mc policy set-json`
-       | :mc:`mc policy get`
-       | :mc:`mc policy get-json`
-       | :mc:`mc policy list`
-       | :mc:`mc policy links`
+   * - | :mc:`mc anonymous set`
+       | :mc:`mc anonymous set-json`
+       | :mc:`mc anonymous get`
+       | :mc:`mc anonymous get-json`
+       | :mc:`mc anonymous list`
+       | :mc:`mc anonymous links`
 
-     - The :mc:`mc policy` command supports setting or removing anonymous
+     - The :mc:`mc anonymous` command supports setting or removing anonymous
        :ref:`policies <minio-policy>` to a bucket and its contents. Buckets with
        anonymous policies allow public access where clients can perform any
        action granted by the policy without :ref:`authentication

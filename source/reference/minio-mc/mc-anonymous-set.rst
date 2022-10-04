@@ -1,7 +1,7 @@
 .. _minio-mc-policy-set:
 
 =================
-``mc policy set``
+``mc anonymous set``
 =================
 
 .. default-domain:: minio
@@ -10,15 +10,15 @@
    :local:
    :depth: 2
 
-.. mc:: mc policy
-.. mc:: mc policy set
+.. mc:: mc anonymous
+.. mc:: mc anonymous set
 
 Syntax
 ------
 
 .. start-mc-policy-set-desc
 
-The :mc:`mc policy set` command sets anonymous (i.e. unauthenticated or public)
+The :mc:`mc anonymous set` command sets anonymous (i.e. unauthenticated or public)
 access :ref:`policies <minio-policy>` for a bucket. 
 
 .. end-mc-policy-set-desc
@@ -29,7 +29,7 @@ and perform actions consistent with the specified policy without
 
 To set anonymous bucket policies using an IAM 
 :s3-docs:`JSON policy <using-iam-policies>`, use the
-:mc-cmd:`mc policy set-json` command.
+:mc-cmd:`mc anonymous set-json` command.
 
 .. tab-set::
 
@@ -41,9 +41,9 @@ To set anonymous bucket policies using an IAM
       .. code-block:: shell
          :class: copyable
 
-         mc policy set upload myminio/uploads
-         mc policy set download myminio/downloads
-         mc policy set public myminio/public
+         mc anonymous set upload myminio/uploads
+         mc anonymous set download myminio/downloads
+         mc anonymous set public myminio/public
 
       Applications can perform the following operations without authentication:
 
@@ -80,7 +80,7 @@ Parameters
 .. mc-cmd:: ALIAS
 
    *Required* The full path to the bucket or bucket prefix to which the
-   command applies the specified :mc-cmd:`~mc policy set PERMISSION`. 
+   command applies the specified :mc-cmd:`~mc anonymous set PERMISSION`. 
    
    Specify the :ref:`alias <alias>` of the MinIO or other
    S3-compatible service *and* the full path to the bucket or bucket
@@ -112,21 +112,21 @@ Examples
 Set Anonymous Policy for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc policy set` to set the anonymous policy for a 
+Use :mc:`mc anonymous set` to set the anonymous policy for a 
 bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc policy set POLICY ALIAS/PATH
+   mc anonymous set POLICY ALIAS/PATH
 
-- Replace :mc-cmd:`POLICY <mc policy set PERMISSION>` with a supported
-  :mc-cmd:`permission <mc policy set PERMISSION>`.
+- Replace :mc-cmd:`POLICY <mc anonymous set PERMISSION>` with a supported
+  :mc-cmd:`permission <mc anonymous set PERMISSION>`.
 
-- Replace :mc-cmd:`ALIAS <mc policy set ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc anonymous set ALIAS>` with the 
   :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc policy set ALIAS>` with the destination bucket.
+- Replace :mc-cmd:`PATH <mc anonymous set ALIAS>` with the destination bucket.
 
 Behavior
 --------

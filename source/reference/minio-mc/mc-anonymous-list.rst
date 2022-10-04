@@ -1,7 +1,7 @@
 .. _minio-mc-policy-list:
 
 ==================
-``mc policy list``
+``mc anonymous list``
 ==================
 
 .. default-domain:: minio
@@ -10,14 +10,14 @@
    :local:
    :depth: 2
 
-.. mc:: mc policy list
+.. mc:: mc anonymous list
 
 Syntax
 ------
 
 .. start-mc-policy-list-desc
 
-The :mc:`mc policy list` retrieves all anonymous (i.e. unauthenticated or
+The :mc:`mc anonymous list` retrieves all anonymous (i.e. unauthenticated or
 public) access policies for a bucket. 
 
 .. end-mc-policy-list-desc
@@ -36,7 +36,7 @@ and perform actions consistent with the specified policy without
       .. code-block:: shell
          :class: copyable
 
-         mc policy list myminio/mydata
+         mc anonymous list myminio/mydata
 
    .. tab-item:: SYNTAX
 
@@ -81,18 +81,18 @@ Examples
 List Anonymous Policies for Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc policy list` to list the anonymous policies for a 
+Use :mc:`mc anonymous list` to list the anonymous policies for a 
 bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc policy list ALIAS/PATH
+   mc anonymous list ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc policy get ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc anonymous get ALIAS>` with the 
   :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc policy get ALIAS>` with the destination bucket.
+- Replace :mc-cmd:`PATH <mc anonymous get ALIAS>` with the destination bucket.
 
 Behavior
 --------
