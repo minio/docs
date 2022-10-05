@@ -24,7 +24,7 @@ and destination buckets.
   remote replication target.
 
 Client-side Bucket Replication
-  Use The command process to synchronize objects between buckets
+  Use the command process to synchronize objects between buckets
   within the same S3-compatible cluster *or* between two independent
   S3-compatible clusters. Client-side replication using :mc:`mc mirror`
   supports MinIO-to-S3 and similar replication configurations.
@@ -75,7 +75,6 @@ replication while adding the following MinIO-only features:
   buckets.
 
 - Multi-Site replication of objects between three or more MinIO deployments
-  (New in :minio-release:`RELEASE.2021-09-23T04-46-24Z`).
 
 .. _minio-replication-behavior-resync:
 
@@ -271,6 +270,11 @@ MinIO uses a replication queuing system with multiple concurrent replication
 workers operating on that queue. MinIO continuously works to replicate and
 remove objects from the queue while scanning for new unreplicated objects to
 add to the queue. 
+
+.. versionchanged:: RELEASE.2022-08-11T04-37-28Z
+
+   Failed or pending replications requeue automatically when performing a list or any ``GET`` or ``HEAD`` API method. 
+   For example, using :mc:`mc stat`, :mc:`mc cat`,  or :mc-cmd:`mc ls` after a remote location comes back online requeues replication.
 
 MinIO sets the ``X-Amz-Replication-Status`` metadata field according to the
 replication state of the object:

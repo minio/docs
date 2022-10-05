@@ -78,6 +78,10 @@ Site Healing
 
 Any MinIO deployment in the site replication configuration can resynchronize damaged :ref:`replica-eligible data <minio-site-replication-what-replicates>` from the peer with the most updated ("latest") version of that data.
 
+.. versionchanged:: RELEASE.2022-08-11T04-37-28Z
+
+   Failed or pending replications requeue automatically when performing any ``GET`` or ``HEAD`` API method. 
+   For example, using :mc:`mc stat`, :mc:`mc cat`, or :mc:`mc ls` commands after a site comes back online prompts healing to requeue.
 
 Prerequisites
 -------------

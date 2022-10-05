@@ -18,6 +18,10 @@ Glossary
      
      See also: :term:`active-active`.
 
+   alias
+     A locally defined reference to a MinIO Deployment used in most command line interface operations.
+     See :mc-cmd:`mc alias set`.
+
    audit logs
      Granular descriptions of each operation on a MinIO deployment.
      :ref:`Audit logs <minio-logging>` support security standards and regulations which require detailed tracking of operations.

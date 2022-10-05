@@ -55,7 +55,7 @@ Parameters
 .. mc-cmd:: TARGET
    :required:
 
-   The full path to the :ref:`alias <mc-alias-set>` or prefix where the command should run.
+   The full path to the :ref:`alias <minio-mc-alias>` or prefix where the command should run.
 
 .. mc-cmd:: --attr
    :optional:
