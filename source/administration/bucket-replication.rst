@@ -75,7 +75,6 @@ replication while adding the following MinIO-only features:
   buckets.
 
 - Multi-Site replication of objects between three or more MinIO deployments
-  (Available since :minio-release:`RELEASE.2021-09-23T04-46-24Z`).
 
 .. _minio-replication-behavior-resync:
 
@@ -275,7 +274,7 @@ add to the queue.
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
 
    Failed or pending replications requeue automatically when performing a list or any ``GET`` or ``HEAD`` API method. 
-   For example, when using :mc:`mc stat`, :mc:`mc cat`,  or :mc-cmd:`mc ls` commands.
+   For example, using :mc:`mc stat`, :mc:`mc cat`,  or :mc-cmd:`mc ls` after a remote location comes back online requeues replication.
 
 MinIO sets the ``X-Amz-Replication-Status`` metadata field according to the
 replication state of the object:
