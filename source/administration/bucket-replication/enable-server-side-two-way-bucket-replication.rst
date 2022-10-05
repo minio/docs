@@ -153,7 +153,7 @@ B) Create a replication rule from the second deployment back to the first deploy
 Configure Two-Way Bucket Replication Using the Command Line (:mc:`mc`)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procecure creates two-way, active-active replication between two MinIO deployments.
+This procedure creates two-way, active-active replication between two MinIO deployments.
 
 This procedure assumes you have already defined an alias for each deployment as a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`.
 

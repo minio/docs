@@ -39,7 +39,7 @@ ARN for use with :mc:`mc replicate add`:
 .. code-block:: shell
    :class: copyable
 
-   mc admin bucket remote add SOURCE/BUCKET SOURCE/BUCKET
+   mc admin bucket remote add SOURCE/BUCKET DESTINATION/BUCKET
 
 - Replace :mc-cmd:`SOURCE <mc admin bucket remote add SOURCE>` with the
   :mc-cmd:`alias <mc alias>` of the MinIO deployment to use as the replication
@@ -72,6 +72,8 @@ bucket:
 
 Removing the target halts all in-progress 
 :mc-cmd:`bucket replication <mc replicate>` to the target.
+
+.. _minio-retrieve-remote-bucket-targets:
 
 Retrieve Configured Replication Targets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

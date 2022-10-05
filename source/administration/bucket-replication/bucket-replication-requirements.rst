@@ -22,7 +22,7 @@ Replication can be done in any of the following ways:
 - :ref:`Active-Active <minio-bucket-replication-serverside-twoway>`
   Changes to eligible objects of either bucket replicate to the other bucket in a two-way direction.
 - :ref:`Multi-Site Active-Active <minio-bucket-replication-serverside-multi>`
-  Changes to eligible objects on any bucket set up for bucket replication replicte to all of the other buckets.
+  Changes to eligible objects on any bucket set up for bucket replication replicate to all of the other buckets.
 
 Ensure you meet the following prerequisites before you set up any of these replication configurations.
 
