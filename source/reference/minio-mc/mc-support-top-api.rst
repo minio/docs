@@ -23,7 +23,7 @@ The :mc:`mc support top api` command summarizes the real-time API events on a Mi
 
    .. tab-item:: EXAMPLE
 
-      The following command udisplays the current in-progress S3 API calls on the :term:`alias` ``myminio``.
+      The following command displays the current in-progress S3 API calls on the :term:`alias` ``myminio``.
 
       .. code-block:: shell
          :class: copyable
@@ -55,7 +55,7 @@ Parameters
    :required:
 
    The full path to the alias, prefix, or object where the command should run.
-   The path must include at least an :ref:`ALIAS <mc-alias-set>`.
+   The path must include at least an :ref:`ALIAS <minio-mc-alias>`.
 
 .. mc-cmd:: --name
    :optional:

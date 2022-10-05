@@ -57,7 +57,7 @@ Parameters
    :required:
 
    The full path to the object or prefix where the command should run.
-   The path must include the :ref:`ALIAS <mc-alias-set>`, bucket, and prefix or object name.
+   The path must include the :ref:`ALIAS <minio-mc-alias>`, bucket, and prefix or object name.
 
 .. mc-cmd:: --last
    :optional:

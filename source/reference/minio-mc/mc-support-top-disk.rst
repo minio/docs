@@ -23,7 +23,7 @@ The :mc:`mc support top disk` command displays current disk statistics.
 
    .. tab-item:: EXAMPLE
 
-      The following command udisplays the current in-progress S3 API calls on the :term:`alias` ``myminio``.
+      The following command displays the current in-progress S3 API calls on the :term:`alias` ``myminio``.
 
       .. code-block:: shell
          :class: copyable
@@ -51,7 +51,7 @@ Parameters
 .. mc-cmd:: TARGET
    :required:
 
-   The full path to the :ref:`alias <mc-alias-set>` or :term:`prefix` where the command should run.
+   The full path to the :ref:`alias <minio-mc-alias>` or :term:`prefix` where the command should run.
 
 .. mc-cmd:: --count, -c
    :optional:
