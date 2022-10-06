@@ -49,7 +49,11 @@ Registering Your MinIO Deployment with SUBNET
       #. Go to your MinIO cluster's URL, then sign in
       #. Select the :guilabel:`Support` option
       #. Select :guilabel:`Register`
-      #. Enter your :guilabel:`Email` address and a unique :guilabel:`Password`, then select :guilabel:`Register`
+      #. Select the tab with the method to use to register:
+
+         - :guilabel:`Credentials` tab to use your MinIO SUBNET username and password
+         - :guilabel:`API Key` tab to input an API key you already have or obtain one directly from SUBNET
+         - :guilabel:`Airgap` tab for a token and instructions to register a deployment that does not have direct connection to the Internet and/or SUBNET
 
    .. tab-item:: Console Airgapped
 
