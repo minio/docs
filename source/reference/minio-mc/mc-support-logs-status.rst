@@ -10,6 +10,10 @@
 
 .. mc:: mc support logs status
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Description
 -----------
 
@@ -18,10 +22,6 @@ Use the :mc-cmd:`mc support logs status` command to output whether the specified
 .. include:: /includes/common-mc-support.rst
    :start-after: start-support-logs-opt-in
    :end-before: end-support-logs-opt-in
-
-.. include:: /includes/common-mc-support.rst
-   :start-after: start-minio-only
-   :end-before: end-minio-only
 
 Example
 -------

@@ -10,6 +10,10 @@
 
 .. mc:: mc support inspect
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Description
 -----------
 
@@ -26,10 +30,6 @@ Exercise caution before sending a report to a third party or posting the report 
 .. important::
    
    :mc:`mc support inspect` requires a MinIO deployment server from October 2021 or later. 
-
-.. include:: /includes/common-mc-support.rst
-   :start-after: start-minio-only
-   :end-before: end-minio-only
 
 Wildcards
 ---------

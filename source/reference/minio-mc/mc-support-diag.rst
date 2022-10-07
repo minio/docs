@@ -10,6 +10,10 @@
 
 .. mc:: mc support diag
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Description
 -----------
 
@@ -32,9 +36,6 @@ For clusters registered with SUBNET, the command uploads the results as part of 
 For airgapped or firewalled environments, or other environments that prevent direct network access from the deployment, you can save the report locally with the :mc-cmd:`~mc support diag --airgap` flag.
 After saving, you can then upload the results of the test to SUBNET manually.
 
-.. include:: /includes/common-mc-support.rst
-   :start-after: start-minio-only
-   :end-before: end-minio-only
 
 Sample Output
 ~~~~~~~~~~~~~
