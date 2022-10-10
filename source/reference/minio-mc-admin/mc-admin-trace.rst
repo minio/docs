@@ -15,9 +15,7 @@ Description
 
 .. start-mc-admin-trace-desc
 
-The :mc-cmd:`mc admin trace` command displays the results of an
-`HTTP TRACE <https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/TRACE>`__
-request against each MinIO server in a deployment.
+The :mc-cmd:`mc admin trace` command displays API operations occurring on the target MinIO deployment.
 
 .. end-mc-admin-trace-desc
 
@@ -31,8 +29,7 @@ request against each MinIO server in a deployment.
 Example
 -------
 
-Use :mc-cmd:`mc admin trace` to perform an HTTP trace of each MinIO server in
-the deployment:
+Use :mc-cmd:`mc admin trace` to monitor API operations on a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
@@ -56,8 +53,7 @@ Syntax
 
 .. mc-cmd:: TARGET
 
-   Specify the :mc:`alias <mc alias>` of a configured MinIO deployment
-   against which the command issues ``HTTP TRACE`` requests.
+   Specify the :mc:`alias <mc alias>` of a configured MinIO deployment for which to monitor API operations.
 
 .. mc-cmd:: --all, a
    
@@ -68,9 +64,9 @@ Syntax
 .. mc-cmd:: --verbose
    
 
-   Returns verbose ``HTTP TRACE`` output.
+   Returns verbose output.
 
 .. mc-cmd:: --errors, e
    
 
-   Returns failed ``HTTP TRACE`` requests only.
+   Returns failed API operations only.

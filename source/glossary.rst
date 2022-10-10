@@ -2,6 +2,8 @@
 Glossary
 ========
 
+.. default-domain:: minio
+
 .. glossary::
    :sorted:
 
@@ -20,7 +22,7 @@ Glossary
 
    alias
      A locally defined reference to a MinIO Deployment used in most command line interface operations.
-     See :mc-cmd:`mc alias set`.
+     See :mc:`mc alias set`.
 
    audit logs
      Granular descriptions of each operation on a MinIO deployment.
@@ -29,7 +31,7 @@ Glossary
      See also: :term:`server logs`.
 
    bit rot 
-     Data corruption that occurrs without the user’s knowledge. 
+     Data corruption that occurs without the user’s knowledge. 
      
      MinIO combats bit rot with :term:`hashing` and :term:`erasure coding`.
 
