@@ -233,7 +233,7 @@ Some subsections may not be visible if the authenticated user does not have the 
          :alt: MinIO Console Service Accounts
          :align: center
 
-      The :guilabel:`Accounts` section displays all :ref:`minio-idp-service-account` associated to the authenticated user. 
+      The :guilabel:`Service Accounts` section displays all :ref:`minio-idp-service-account` associated to the authenticated user. 
 
       Service accounts support providing applications authentication credentials which inherit permissions from the "parent" user.
 
@@ -256,31 +256,32 @@ Some subsections may not be visible if the authenticated user does not have the 
       application, create a new service account and delete the old one once the 
       application updates to using the new credentials.
 
-Access
-------
+   .. tab-item:: Policies
 
-.. image:: /images/minio-console/console-iam.png
-   :width: 600px
-   :alt: MinIO Console Manage IAM Policies
-   :align: center
+      The :guilabel:`Policies` section displays all :ref:`policies <minio-policy>` on the MinIO deployment. 
+      The Policies section allows you to create, modify, or delete policies.
 
-The :guilabel:`IAM Policies` section displays all :ref:`policies <minio-policy>` on the MinIO deployment. 
+      :ref:`Policies <minio-policy>` define the authorized actions and resources to which an authenticated user has access.
+      Each policy describes one or more actions a user, group of users, or service account can perform or conditions they must meet.
 
-This tab or its contents may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
+      The policies are JSON formatted text files compatible with Amazon AWS Identity and Access Management policy syntax, structure, and behavior.
+      Refer to :ref:`Policy Based Action Control <minio-policy>` for details on managing access in MinIO with policies.
 
-- Select :guilabel:`+ Create Policy` to create a new MinIO Policy.
+      This section or its contents may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
-- Select the policy row to manage the policy details.
+      - Select :guilabel:`+ Create Policy` to create a new MinIO Policy.
 
-  The :guilabel:`Summary` view displays a summary of the policy.
+      - Select the policy row to manage the policy details.
 
-  The :guilabel:`Users` view displays all users assigned to the policy.
+        The :guilabel:`Summary` view displays a summary of the policy.
 
-  The :guilabel:`Groups` view displays all groups assigned to the policy.
+        The :guilabel:`Users` view displays all users assigned to the policy.
 
-  The :guilabel:`Raw Policy` view displays the raw JSON policy.
+        The :guilabel:`Groups` view displays all groups assigned to the policy.
 
-Use the :guilabel:`Identity: Users` and :guilabel:`Identity: Groups` views to assign a created policy to users and groups, respectively.
+        The :guilabel:`Raw Policy` view displays the raw JSON policy.
+
+      Use the :guilabel:`Users` and :guilabel:`Groups` views to assign a created policy to users and groups, respectively.
 
 Monitoring
 ----------
@@ -311,6 +312,7 @@ Some subsections may not be visible if the authenticated user does not have the 
          :align: center
 
       This view requires configuring a Prometheus service to scrape the deployment metrics. 
+      You can download these metrics as a ``.png`` image or ``.csv`` file.
       See :ref:`minio-metrics-collect-using-prometheus` for complete instructions.
 
    .. tab-item:: Logs
@@ -374,6 +376,66 @@ Some subsections may not be visible if the authenticated user does not have the 
       .. important::
 
          MinIO does not recommend performing manual healing unless explicitly directed by support. 
+
+Notifications
+-------------
+
+The :guilabel:`Notifications` section provides an interface to view, add, or remove :ref:`Bucket Notification <minio-bucket-notifications>` targets.
+
+You can use this screen configure MinIO to push notification events to the one or more target destinations, including Redis, MySQL, Kafka, PostgreSQL, AMQP, MQTT, Elastic Search, NATS, NSQ, or a Webhook.
+
+Select the :guilabel:`Add Notification Target +` button to add a new target to the deployment.
+
+You can select an existing notification target from the list to view its details or delete the target.
+
+.. image:: /images/minio-console/console-add-notification-target.png
+   :width: 600px
+   :alt: The MinIO Console's Notification screen after selecting add new target that shows the types of destination targets users can add.
+   :align: center
+
+Tiers
+-----
+
+.. image:: /images/minio-console/console-settings-tiers.png
+   :width: 600px
+   :alt: MinIO Console Settings - Tiering
+   :align: center
+
+The :guilabel:`Tiers` section provides an interface for adding and managing :ref:`remote tiers <minio-lifecycle-management-tiering>` to support lifecycle management transition rules.
+
+Select the :guilabel:`Create Tier +` button to add a new tier to the deployment.
+Choose to add a MinIO, Google Cloud Storage, AWS S3, or Azure tier type.
+
+You can select an existing tier from the list to view its details.
+
+Site Replication
+----------------
+
+.. image:: /images/minio-console/console-settings-site-replication.png
+   :width: 600px
+   :alt: MinIO Console Settings - Site Replication
+   :align: center
+
+The :guilabel:`Site Replication` section provides an interface for adding and managing the site replication configuration for the deployment.
+
+Configuring site replication requires that only a single site have existing buckets or objects (if any).
+
+Configuration
+-------------
+This section contains the following subsections.
+Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
+
+.. image:: /images/minio-console/console-settings-configuration.png
+   :width: 600px
+   :alt: MinIO Console Settings - Configuration View
+   :align: center
+
+The :guilabel:`Configuration` section provides an interface for viewing and retrieving :ref:`configuration settings <minio-server-configuration-settings>` for all MinIO Servers in the deployment. 
+
+The interface functionality mimics that of using :mc-cmd:`mc admin config get` or :mc-cmd:`mc admin config set`.
+Refer to those commands for details on how to define the many options.
+
+Some configuration settings may require restarting the MinIO deployment to apply changes.
 
 Support
 -------
@@ -448,7 +510,6 @@ Some subsections may not be visible if the authenticated user does not have the 
       Independent or third-party use of the output for diagnostics or remediation is done at your own risk.
       You can optionally encrypt the object such that it can only be read if the generated encryption key is included as part of the debugging toolchain.
 
-
 License
 -------
 
@@ -466,62 +527,7 @@ Applications using MinIO should follow local laws and regulations around licensi
 
 Proprietary application stacks can register for either the SUBNET :guilabel:`Standard` or :guilabel:`Enterprise` License and Support plan to use MinIO under a commercial license.
 
-Settings
---------
+Documentation
+-------------
 
-The :guilabel:`Configuration` section displays information on MinIO server configuration settings.
-
-This section contains the following subsections.
-Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
-
-.. tab-set::
-
-   .. tab-item:: Configuration
-
-      .. image:: /images/minio-console/console-settings-configuration.png
-         :width: 600px
-         :alt: MinIO Console Settings - Configuration View
-         :align: center
-
-      The :guilabel:`Configuration` subsection provides an interface for viewing and retrieving :ref:`configuration settings <minio-server-configuration-settings>` for all MinIO Servers in the deployment. 
-
-      The interface functionality mimics that of using :mc-cmd:`mc admin config get` or :mc-cmd:`mc admin config set`
-
-      Some configuration settings may require restarting the MinIO deployment to apply changes.
-
-   .. tab-item:: Notifications
-
-      .. image:: /images/minio-console/console-settings-notifications.png
-         :width: 600px
-         :alt: MinIO Console Settings - Notifications View
-         :align: center
-         
-      The :guilabel:`Notifications` subsection provides an interface for adding and managing :ref:`bucket notification targets <minio-bucket-notifications>`.
-
-      Select the :guilabel:`Add Notification Target +` button to add a new target to the deployment.
-
-      You can select an existing notification target from the list to view its details.
-
-   .. tab-item:: Tiers
-
-      .. image:: /images/minio-console/console-settings-tiers.png
-         :width: 600px
-         :alt: MinIO Console Settings - Tiering
-         :align: center
-
-      The :guilabel:`Tiers` subsection provides an interface for adding and managing :ref:`remote tiers <minio-lifecycle-management-tiering>` to support lifecycle management transition rules.
-
-      Select the :guilabel:`Create Tier +` button to add a new tier to the deployment.
-
-      You can select an existing tier from the list to view its details.
-
-   .. tab-item:: Site Replication
-
-      .. image:: /images/minio-console/console-settings-site-replication.png
-         :width: 600px
-         :alt: MinIO Console Settings - Site Replication
-         :align: center
-
-      The :guilabel:`Site Replication` subsection provides an interface for adding and managing the site replication configuration for the deployment.
-
-      Configuring site replication requires that only a single site have existing buckets or objects (if any).
+The :guilabel:`Documentation` tab opens this documentation site in a separate browser window or tab.

@@ -13,7 +13,7 @@ Publish Events to MySQL
    :depth: 1
 
 MinIO supports publishing :ref:`bucket notification
-<minio-bucket-notifications>` events to a My`MySQL <https://www.mysql.com/>`__
+<minio-bucket-notifications>` events to a `MySQL <https://www.mysql.com/>`__
 service endpoint. MinIO supports MySQL 5.7.8 and later *only*.
 
 Add a MySQL Endpoint to a MinIO Deployment

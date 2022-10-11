@@ -50,7 +50,7 @@ Procedure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO by default requires authentication for requests made to the metrics
-endpoints. While step is not required for MinIO deployments started with 
+endpoints. While this step is not required for MinIO deployments started with 
 :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` set to ``"public"``, you can still use the
 command output for retrieving a Prometheus ``scrape_configs`` entry.
 
@@ -142,42 +142,35 @@ The following query examples return metrics collected by Prometheus:
 See :ref:`minio-metrics-and-alerts-available-metrics` for a complete
 list of published metrics.
 
+.. _minio-console-metrics:
+
 4) Visualize Collected Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :minio-git:`MinIO Console <console>` supports visualizing collected metrics
-from Prometheus. Specify the URL of the Prometheus service to the
-:envvar:`MINIO_PROMETHEUS_URL` environment variable to each MinIO server
-in the deployment:
+The :minio-git:`MinIO Console <console>` supports visualizing collected metrics from Prometheus. 
+Specify the URL of the Prometheus service to the :envvar:`MINIO_PROMETHEUS_URL` environment variable to each MinIO server in the deployment:
 
 .. code-block:: shell
    :class: copyable
 
    export MINIO_PROMETHEUS_URL="https://prometheus.example.net"
 
-If you set a custom ``job_name`` for the Prometheus scraping job, you must also
-set :envvar:`MINIO_PROMETHEUS_JOB_ID` to match that job name.
+If you set a custom ``job_name`` for the Prometheus scraping job, you must also set :envvar:`MINIO_PROMETHEUS_JOB_ID` to match that job name.
 
-Restart the deployment using :mc-cmd:`mc admin service restart` to apply the
-changes.
+Restart the deployment using :mc-cmd:`mc admin service restart` to apply the changes.
 
-The MinIO Console uses the metrics collected by the ``minio-job`` scraping
-job to populate the Dashboard metrics:
+The MinIO Console uses the metrics collected by the ``minio-job`` scraping job to populate the Dashboard metrics available from :guilabel:`Monitoring > Metrics`.
+You can download the metrics from the MinIO Console as either a ``.png`` image or a ``.csv`` file.
 
 .. image:: /images/minio-console/console-metrics.png
    :width: 600px
    :alt: MinIO Console Dashboard displaying Monitoring Data
    :align: center
 
-MinIO also publishes a `Grafana Dashboard
-<https://grafana.com/grafana/dashboards/13502>`_ for visualizing collected
-metrics. For more complete documentation on configuring a Prometheus data source
-for Grafana, see :prometheus-docs:`Grafana Support for Prometheus
-<visualization/grafana/>`.
+MinIO also publishes a `Grafana Dashboard <https://grafana.com/grafana/dashboards/13502>`_ for visualizing collected metrics. 
+For more complete documentation on configuring a Prometheus data source for Grafana, see :prometheus-docs:`Grafana Support for Prometheus <visualization/grafana/>`.
 
-Prometheus includes a :prometheus-docs:`graphing interface
-<prometheus/latest/getting_started/#using-the-graphing-interface>` for
-visualizing collected metrics. 
+Prometheus includes a :prometheus-docs:`graphing interface <prometheus/latest/getting_started/#using-the-graphing-interface>` for visualizing collected metrics. 
 
 .. _minio-metrics-and-alerts-endpoints:
 
