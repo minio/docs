@@ -299,7 +299,6 @@ ul {
     list-style-type: disc;
 }
 
-
 // ----------------------
 // Misc
 // ----------------------
@@ -316,4 +315,16 @@ abbr, acronym {
 dt:target,
 span.highlighted {
     background-color: transparent;
+}
+
+// ----------------------
+// Container - Procedure
+// ----------------------
+
+.container.procedure {
+   padding: 0px;
+
+   ol li p:first-of-type {
+      font-weight: bold;
+   }
 }

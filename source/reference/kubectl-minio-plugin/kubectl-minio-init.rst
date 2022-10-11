@@ -18,11 +18,12 @@ Description
 
 .. start-kubectl-minio-init-desc
 
-The :mc:`kubectl minio init` command initializes the MinIO Operator.
-You can also use this command to upgrade an existing Operator installation to the version of the plugin.
-:mc:`kubectl minio init` requires the operator for core functionality.
+The :mc:`kubectl minio init` command initialize the MinIO Operator.
 
 .. end-kubectl-minio-init-desc
+
+If the Kubernetes cluster has an existing MinIO Operator installation, this command upgrades the Operator to match the MinIO plugin version.
+For more information on upgrading the MinIO Operator, see :ref:`minio-k8s-upgrade-minio-operator`.
 
 Syntax
 ------
@@ -31,17 +32,12 @@ Syntax
 
    .. tab-item:: EXAMPLE
 
-      The following command initializes a new MinIO Operator deployment using operator v4.4.22, on the ``minio-operator`` namespace, using the cluster domain of ``cluster.local`` and watching the default namespace.:
+      The following command initializes a new MinIO Operator deployment running |operator-version-stable|.
 
       .. code-block:: shell
          :class: copyable
 
-         kubectl minio init                      \
-             --image=minio/operator:v4.4.22      \
-             --namespace=minio-operator          \
-             --cluster-domain=cluster.local      \
-             --namespace-to-watch=default        \
-             --image-pull-secret=  
+         kubectl minio init
 
    .. tab-item:: SYNTAX
 

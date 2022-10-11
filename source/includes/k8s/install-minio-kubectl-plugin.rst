@@ -36,7 +36,7 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
          :substitutions:
          :class: copyable
 
-         curl https://github.com/minio/operator/releases/download/|operator-version-stable|/kubectl-minio_|operator-version-stable|_linux_amd64 -o kubectl-minio
+         curl https://github.com/minio/operator/releases/download/v|operator-version-stable|/kubectl-minio_|operator-version-stable|_linux_amd64 -o kubectl-minio
          chmod +x kubectl-minio
          mv kubectl-minio /usr/local/bin/
 
