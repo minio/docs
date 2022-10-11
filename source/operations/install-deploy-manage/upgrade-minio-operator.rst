@@ -235,36 +235,36 @@ This procedure assumes that:
       image: "minio/minio:$(LATEST-VERSION)"
       ...
       zones:
-         - servers: 4
-            name: "zone-0"
-            volumesPerServer: 4
-            volumeClaimTemplate:
+        - servers: 4
+          name: "zone-0"
+          volumesPerServer: 4
+          volumeClaimTemplate:
             metadata:
-               name: data
+              name: data
             spec:
-               accessModes:
-                  - ReadWriteOnce
-               resources:
-                  requests:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
                   storage: 1Ti
-            securityContext:
+          securityContext:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
             fsGroup: 0
       - servers: 4
-            name: "zone-1"
-            volumesPerServer: 4
-            volumeClaimTemplate:
+          name: "zone-1"
+          volumesPerServer: 4
+          volumeClaimTemplate:
             metadata:
-               name: data
+              name: data
             spec:
-               accessModes:
-                  - ReadWriteOnce
-               resources:
-                  requests:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
                   storage: 1Ti
-            securityContext:
+          securityContext:
             runAsUser: 0
             runAsGroup: 0
             runAsNonRoot: false
