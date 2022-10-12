@@ -244,7 +244,7 @@ There is no direct upgrade path from a 3.X.X series installation to |operator-ve
 
          kubectl get tenants <TENANT-NAME> -n <TENANT-NAMESPACE> -o yaml
 
-      - Ensure each ``tenant.spec.zones`` element has a ``names`` field set to the name for that zone.
+      - Ensure each ``tenant.spec.zones`` element has a ``name`` field set to the name for that zone.
         Each zone must have a unique name for that Tenant, such as ``zone-0`` and ``zone-1`` for the first and second zones respectively.
 
       - Ensure each ``tenant.spec.zones`` has an explicit ``securityContext`` describing the permission set with which pods run in the cluster.
