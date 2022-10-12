@@ -216,10 +216,8 @@ Operator Console.
 You can deploy a new :ref:`MinIO Tenant <minio-k8s-deploy-minio-tenant>` from
 the Operator Dashboard.
 
-.. uncomment this block when upgrade operator procedure is complete
+.. toctree::
+   :titlesonly:
+   :hidden:
 
-   .. toctree::
-      :titlesonly:
-      :hidden:
-
-      /operations/install-deploy-manage/upgrade-minio-operator
+   /operations/install-deploy-manage/upgrade-minio-operator
