@@ -36,15 +36,15 @@ The following table lists the upgrade paths from previous versions of the MinIO 
 
 .. _minio-k8s-upgrade-minio-operator-procedure:
 
-Upgrade MinIO Operator 4.2.3 and Later
---------------------------------------
+Upgrade MinIO Operator 4.2.3 and Later to |operator-version-stable|
+-------------------------------------------------------------------
 
 .. admonition:: Prerequisites
    :class: note
 
    This procedure requires the following:
 
-   - You have an existing MinIO Operator deployment running 4.4.x or later
+   - You have an existing MinIO Operator deployment running 4.2.3 or later
    - Your Kubernetes cluster runs 1.19.0 or later
    - Your local host has ``kubectl`` installed and configured with access to the Kubernetes cluster
 
