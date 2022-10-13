@@ -101,9 +101,10 @@ The command has the following syntax:
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] support diag       \
-                            ALIAS      \
-                            [--airgap] 
+   mc [GLOBALFLAGS] support diag                \
+                            ALIAS               \
+                            [--airgap]          \
+                            [--api-key string]
 
 
 Parameters
@@ -123,6 +124,16 @@ Parameters
    You must manually upload the report to SUBNET.
    
    For instructions, see the :ref:`airgap example <minio-support-diagnostics-airgap>`.
+
+   If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
+
+
+.. mc-cmd:: --api-key
+   :optional:
+
+   Takes the account's API key value from SUBNET.
+   
+   This value is only required for airgapped environments where MinIO has not already stored the API key for the deployment.
 
 Global Flags
 ~~~~~~~~~~~~

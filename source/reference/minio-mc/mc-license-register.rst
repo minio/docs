@@ -107,6 +107,9 @@ Parameters
 
    For instructions, see the :ref:`airgap example <minio-license-register-airgap>`.
 
+   If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
+
+
 
 Global Flags
 ~~~~~~~~~~~~

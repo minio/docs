@@ -36,7 +36,7 @@ rule on a MinIO bucket.
          
          mc ilm edit --id "c79nu2p4b0t6qko19rgg" --expired-object-delete-marker mydata/myminio
 
-         mc ilm edit --id "c79n19dn10dnab109fg1" --transition-days 30 --storage-class "COLDTIER"
+         mc ilm edit --id "c79n19dn10dnab109fg1" --transition-days 30 --tier "COLDTIER"
          
       The command modifies the specified rules as follows:
 
@@ -55,10 +55,13 @@ rule on a MinIO bucket.
 
          mc [GLOBALFLAGS] ilm edit \
                           --id "string"                                                                                        \
+                          [--prefix "string"]                                                                                  \
+                          [--enable]                                                                                           \
+                          [--disable]                                                                                          \
                           [--expiry-days "string" | --expired-object-delete-marker]                                            \
-                          [--transition-days "string"] --storage-class "string"                                                \
+                          [--transition-days "string"] --tier "string"                                                \
                           [--noncurrentversion-expiration-days "string"]                                                       \
-                          [--noncurrentversion-transition-days "string" --noncurrentversion-transition-storage-class "string"] \
+                          [--noncurrentversion-transition-days "string" --noncurrentversion-tier "string"] \
                           [--tags]                                                                                             \
                           ALIAS
 
@@ -70,8 +73,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
-   
-   *Required* The :ref:`alias <alias>` and full path to the bucket on the MinIO
+   :required:
+
+   The :ref:`alias <alias>` and full path to the bucket on the MinIO
    deployment to which to modify the object lifecycle management rule. For
    example:
 
@@ -80,15 +84,39 @@ Parameters
       mc ilm edit myminio/mydata
 
 .. mc-cmd:: --id
-   
+   :required:
 
-   *Required* The unique ID of the rule. Use :mc:`mc ilm ls` to list bucket
+   The unique ID of the rule. Use :mc:`mc ilm ls` to list bucket
    rules and retrieve the ``id`` for the rule you want to modify.
 
-.. mc-cmd:: --expiry-days
-   
+.. mc-cmd:: --disable
+   :optional:
 
-   *Optional* The number of days to retain an object after being created. MinIO
+   Stop using the rule, but retain the rule for future use.
+   Objects do not transition or expire when a rule is disabled.
+
+.. mc-cmd:: --enable
+   :optional:
+
+   Use a rule to transition or expire objects.
+
+.. mc-cmd:: --prefix
+   :optional:
+   
+   Restrict the management rule to a specific bucket prefix.
+   
+   For example:
+
+   .. code-block:: none
+
+      mc ilm edit --prefix "meetingnotes/" myminio/mydata/ --expiry-days "90"
+
+   The command modifies a rule that expires objects in the ``mydata`` bucket of the ``myminio`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
+
+.. mc-cmd:: --expiry-days
+   :optional:
+
+   The number of days to retain an object after being created. MinIO
    marks the object for deletion after the specified number of days pass.
 
    Exercise caution when using this option, as its behavior can result in
@@ -114,9 +142,9 @@ Parameters
    - :mc-cmd:`~mc ilm edit --expired-object-delete-marker`
 
 .. mc-cmd:: --expired-object-delete-marker
-   
+   :optional:
 
-   *Optional* Specify this option to direct MinIO to remove delete markers for
+   Specify this option to direct MinIO to remove delete markers for
    objects with no remaining object versions. Specifically, the delete marker is
    the *only* remaining "version" of the given object.
 
@@ -131,9 +159,9 @@ Parameters
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
 .. mc-cmd:: --noncurrentversion-expiration-days
-   
+   :optional:
 
-   *Optional* The number of days to retain an object version after becoming
+   The number of days to retain an object version after becoming
    *non-current* (i.e. a different version of that object is now the `HEAD`).
    MinIO marks noncurrent object versions for deletion after the specified
    number of days pass.
@@ -147,17 +175,17 @@ Parameters
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
 .. mc-cmd:: --noncurrentversion-transition-days
-   
+   :optional:
 
-   *Optional* The number of days an object has been non-current (i.e. replaced
+   The number of days an object has been non-current (i.e. replaced
    by a newer version of that same object) after which MinIO marks the object
    version as eligible for transition. MinIO transitions the object to the
    configured remote storage tier specified to the 
-   :mc-cmd:`~mc ilm edit --storage-class` once the system host datetime
+   :mc-cmd:`~mc ilm edit --tier` once the system host datetime
    passes that calendar date.
 
    This option has no effect on non-versioned buckets. Requires specifying
-   :mc-cmd:`~mc ilm edit --noncurrentversion-transition-storage-class`.
+   :mc-cmd:`~mc ilm edit --noncurrentversion-tier`.
 
    This option has the same behavior as the 
    S3 ``NoncurrentVersionTransition`` action.
@@ -167,10 +195,10 @@ Parameters
    limited system resources may delay application of lifecycle management
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
-.. mc-cmd:: --noncurrentversion-transition-storage-class
-   
+.. mc-cmd:: --noncurrentversion-tier
+   :optional:
 
-   *Optional* The remote storage tier to which MinIO 
+   The remote storage tier to which MinIO 
    :ref:`transitions noncurrent objects versions
    <minio-lifecycle-management-tiering>`. Specify a remote storage tier created
    by :mc:`mc admin tier`.
@@ -179,10 +207,26 @@ Parameters
    specified remote tier to the new remote tier. MinIO continues to
    route requests for objects stored on the old remote tier.
 
-.. mc-cmd:: --tags
-   
+.. mc-cmd:: --newer-noncurrentversions-expiration
+   :optional:
 
-   *Optional* One or more ampersand ``&``-delimited key-value pairs describing
+   The number of non-current versions of an object to retain before applying expiration.
+   Older non-current versions beyond the specified number expire.
+   
+   By default, MinIO does not retain any non-current versions when an expiration rule applies.
+
+.. mc-cmd:: --newer-noncurrentversions-transition
+   :optional:
+
+   The number of non-current versions of an object to keep on the current storage tier.
+   Older non-current versions beyond the specified number transition to the specified tier.
+
+   By default, MinIO transitions all non-current versions when a transition rule applies.
+
+.. mc-cmd:: --tags
+   :optional:
+
+   One or more ampersand ``&``-delimited key-value pairs describing
    the object tags to which to apply the lifecycle configuration rule.
 
    This option is mutually exclusive with the following option:
@@ -190,29 +234,29 @@ Parameters
    - :mc-cmd:`~mc ilm edit --expired-object-delete-marker`
 
 .. mc-cmd:: --transition-days
+   :optional:
    
-
-   *Optional* The number of calendar days from object creation after which MinIO
+   The number of calendar days from object creation after which MinIO
    marks an object as eligible for transition. MinIO transitions the object to
    the configured remote storage tier specified to the 
-   :mc-cmd:`~mc ilm edit --storage-class`. 
+   :mc-cmd:`~mc ilm edit --tier`. 
 
    For versioned buckets, the transition rule applies only to the *current*
    object version. Use the 
    :mc-cmd:`~mc ilm edit --noncurrentversion-transition-days` option
    to apply transition behavior to noncurrent object versions.
 
-   Requires specifying :mc-cmd:`~mc ilm edit --storage-class`.
+   Requires specifying :mc-cmd:`~mc ilm edit --tier`.
 
    MinIO uses a scanner process to check objects against all configured
    lifecycle management rules. Slow scanning due to high IO workloads or
    limited system resources may delay application of lifecycle management
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
 
-.. mc-cmd:: --storage-class
-   
+.. mc-cmd:: --tier
+   :optional:
 
-   *Optional* The remote storage tier to which MinIO 
+   The remote storage tier to which MinIO 
    :ref:`transition objects <minio-lifecycle-management-tiering>`. Specify a
    remote storage tier created by :mc:`mc admin tier`. 
 
@@ -251,11 +295,27 @@ an existing object expiration rule:
 
 - Replace ``RULEID`` with the unique ID of the object lifecycle management
   rule.
+  Use :mc:`mc ilm ls` to find the ``RULEID``.
 
 - Specify any additional flags to add or modify the lifecycle management
   rule. For example, specify
   :mc-cmd:`~mc ilm edit --transition-days` to override the existing 
   transition days value for the rule.
+
+Disable a Lifecycle Management Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc ilm edit` with :mc-cmd:`~mc ilm edit --disable` to stop using an existing management rule.
+
+.. code-block:: shell
+   :class: copyable
+   
+   mc ilm edit --id "RULEID" --disable myminio/mybucket
+
+- Replace ``RULEID`` with the unique ID of the object lifecycle management rule.
+  Use :mc:`mc ilm ls` to find the ``RULEID``.
+- Replace ``myminio`` with the ALIAS of the deployment where the rule exists.
+- Replace ``mybucket`` with the bucket for the rule.
 
 Behavior
 --------
