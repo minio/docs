@@ -80,6 +80,12 @@ You can use either the MinIO Tenant Console or the MinIO :mc:`mc` CLI to enable 
 
 .. start-kes-generate-key-desc
 
+.. admonition:: Unseal Vault Before Creating Key
+   :class: important
+
+   You must unseal the backing Vault instance before creating new encryption keys.
+   See the Vault documentation on `Seal/Unseal <https://www.vaultproject.io/docs/concepts/seal>`__ for more information.
+
 MinIO requires that the |EK| for a given bucket or object exist on the root KMS *before* performing |SSE| operations using that key.
 You can use the :mc-cmd:`mc admin kms key create` command against the MinIO Tenant.
 

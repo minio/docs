@@ -30,7 +30,7 @@ The following YAML provides the minimum required fields for using Hashicorp Vaul
        - /v1/key/generate/* # e.g. '/minio-'
        - /v1/key/decrypt/*
        identities:
-       - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes identity of minio-kes.cert'
+       - MINIO_IDENTITY_HASH # Replace with the output of 'kes identity of minio-kes.cert'
                                 # In production environments, each client connecting to KES must
                                 # Have their TLS hash listed under at least one `policy`.
 
@@ -65,4 +65,3 @@ The Vault `Quick Start <https://learn.hashicorp.com/tutorials/vault/getting-star
 Defer to the `Vault Documentation <https://learn.hashicorp.com/vault>`__ for guidance on deployment and configuration.
 
 .. end-kes-prereq-hashicorp-vault-desc
-

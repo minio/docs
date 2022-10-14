@@ -48,13 +48,13 @@ The following commands create two TLS certificates that expire within 30 days of
    # These commands output keys to |kescertpath|
    # and |miniocertpath| respectively
 
-   kes identity new  \
+   kes identity new kes_server \
      --key  |kescertpath|/kes-server.key  \
      --cert |kescertpath|/kes-server.cert  \
      --ip   "127.0.0.1"  \
      --dns  localhost
 
-   kes identity new  \
+   kes identity new minio_server \
      --key  |miniocertpath|/minio-kes.key  \
      --cert |miniocertpath|/minio-kes.cert  \
      --ip   "127.0.0.1"  \
@@ -89,12 +89,13 @@ Run the following commands in a terminal or shell to start the KES server as a f
 
    sudo setcap cap_ipc_lock=+ep $(readlink -f $(which kes))
 
-   kes server --mlock  \
-               --config=|kesconfigpath|kes-config.yaml  \
-               --auth=off
+   kes server --auth=off --config=|kesconfigpath|/kes-config.yaml
+               
 
 The first command allows |KES| to use the `mlock <http://man7.org/linux/man-pages/man2/mlock.2.html>`__ system call without running as root. 
 ``mlock`` ensures the OS does not write in-memory data to disk (swap memory) and mitigates the risk of cryptographic operations being written to unsecured disk at any time.
+KES 0.21.0 and later automatically detect and enable ``mlock`` if supported by the host OS. 
+Versions 0.20.0 and earlier required specifying the ``--mlock`` argument to KES.
 
 The second command starts the KES server in the foreground using the configuration file created in the last step. 
 The ``--auth=off`` disables strict validation of client TLS certificates.
@@ -108,6 +109,12 @@ If you run |KES| without tying it to the current shell session (e.g. with ``nohu
 .. end-kes-start-server-desc
 
 .. start-kes-generate-key-desc
+
+.. admonition:: Unseal Vault Before Creating Key
+   :class: important
+
+   You must unseal the backing Vault instance before creating new encryption keys.
+   See the Vault documentation on `Seal/Unseal <https://www.vaultproject.io/docs/concepts/seal>`__ for more information.
 
 MinIO requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
 Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
@@ -142,10 +149,12 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
    MINIO_KMS_KES_ENDPOINT=https://HOSTNAME:7373
    MINIO_KMS_KES_CERT_FILE=|miniocertpath|/minio-kes.cert
    MINIO_KMS_KES_KEY_FILE=|miniocertpath|/minio-kes.key
-   MINIO_KMS_KES_CAPATH=|miniocertpath|/kes-server.cert
-   MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
-   minio server [ARGUMENTS]
+   # Allows validation of the KES Server Certificate (Self-Signed or Third-Party CA)
+   MINIO_KMS_KES_CAPATH=|kescertpath|/kes-server.cert
+
+   # Sets the default KMS key for the backend and SSE-KMS/SSE-S3 Operations)
+   MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
 Replace ``HOSTNAME`` with the IP address or hostname of the KES server.
 If the MinIO server host machines cannot resolve or reach the specified ``HOSTNAME``, the deployment may return errors or fail to start.

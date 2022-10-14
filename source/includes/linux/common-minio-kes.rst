@@ -11,7 +11,7 @@ The following example code downloads the latest Linux AMD64-compatible binary an
    :class: copyable
    :substitutions:
 
-   wget https://github.com/minio/kes/releases/download/|kes-stable|/kes-linux-amd64 -O /tmp/kes
+   curl --retry 10 https://github.com/minio/kes/releases/download/|kes-stable|/kes-linux-amd64 -o /tmp/kes
    chmod +x /tmp/kes
    sudo mv /tmp/kes /usr/local/bin
 
@@ -112,45 +112,6 @@ This procedure assumes a structure similar to the following:
 If the KES certificates are self-signed *or* signed by Certificate Authority (CA) that is *not* globally trusted, you **must** add the CA certificate to the |miniocertpath| directory such that each MinIO server can properly validate the KES certificates.
 
 .. end-kes-generate-kes-certs-prod-desc
-
-.. start-kes-configuration-minio-desc
-
-Add the following lines to the MinIO Environment file on each MinIO host.
-See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd` for more detailed descriptions of a base MinIO environment file.
-
-This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server.cert`` certificates are accessible at the specified location:
-
-.. code-block:: shell
-   :class: copyable
-   :substitutions:
-
-   # Add these environment variables to the existing environment file
-
-   MINIO_KMS_KES_ENDPOINT=https://HOSTNAME:7373
-   MINIO_KMS_KES_CERT_FILE=|miniocertpath|/minio-kes.cert
-   MINIO_KMS_KES_KEY_FILE=|miniocertpath|/minio-kes.key
-   MINIO_KMS_KES_CAPATH=|kescertpath|/kes-server.cert
-   MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
-
-   minio server [ARGUMENTS]
-
-Replace ``HOSTNAME`` with the IP address or hostname of the KES server.
-If the MinIO server host machines cannot resolve or reach the specified ``HOSTNAME``, the deployment may return errors or fail to start.
-
-- If using a single KES server host, specify the IP or hostname of that host
-- If using multiple KES server hosts, specify the load balancer or reverse proxy managing connections to those hosts.
-
-MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
-
-- Encrypting the MinIO backend (IAM, configuration, etc.)
-- Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not 
-  include a specific |EK|.
-- Encrypting objects using :ref:`SSE-S3 <minio-encryption-sse-s3>`.
-
-The ``minio-kes`` certificates enable mTLS between the MinIO deployment and the KES server *only*.
-They do not otherwise enable TLS for other client connections to MinIO.
-
-.. end-kes-configuration-minio-desc
 
 .. start-kes-generate-key-desc
 
