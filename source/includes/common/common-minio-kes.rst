@@ -110,12 +110,6 @@ If you run |KES| without tying it to the current shell session (e.g. with ``nohu
 
 .. start-kes-generate-key-desc
 
-.. admonition:: Unseal Vault Before Creating Key
-   :class: important
-
-   You must unseal the backing Vault instance before creating new encryption keys.
-   See the Vault documentation on `Seal/Unseal <https://www.vaultproject.io/docs/concepts/seal>`__ for more information.
-
 MinIO requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
 Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
 
@@ -138,8 +132,6 @@ The following command uses the ``kes key create`` command to add a new External 
 Add the following lines to the MinIO Environment file on each MinIO host.
 See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd` for more detailed descriptions of a base MinIO environment file.
 
-This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server.cert`` certificates are accessible at the specified location:
-
 .. code-block:: shell
    :class: copyable
    :substitutions:
@@ -151,6 +143,7 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
    MINIO_KMS_KES_KEY_FILE=|miniocertpath|/minio-kes.key
 
    # Allows validation of the KES Server Certificate (Self-Signed or Third-Party CA)
+   # Change this path to the location of the KES CA Path
    MINIO_KMS_KES_CAPATH=|kescertpath|/kes-server.cert
 
    # Sets the default KMS key for the backend and SSE-KMS/SSE-S3 Operations)
@@ -160,7 +153,7 @@ Replace ``HOSTNAME`` with the IP address or hostname of the KES server.
 If the MinIO server host machines cannot resolve or reach the specified ``HOSTNAME``, the deployment may return errors or fail to start.
 
 - If using a single KES server host, specify the IP or hostname of that host
-- If using multiple KES server hosts, specify the load balancer or reverse proxy managing connections to those hosts.
+- If using multiple KES server hosts, specify a comma-separated list of IPs or hostnames of each host
 
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 

@@ -72,7 +72,7 @@ b. Configure the MinIO Environment File
    MinIO defaults to expecting this file at ``/etc/default/minio``.
    If you modified your deployment to use a different location for the environment file, modify the file at that location.
 
-   .. include:: /includes/linux/common-minio-kes.rst
+   .. include:: /includes/common/common-minio-kes.rst
       :start-after: start-kes-configuration-minio-desc
       :end-before: end-kes-configuration-minio-desc
 
@@ -99,7 +99,7 @@ b. Start the MinIO Server
 5) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/linux/common-minio-kes.rst
+.. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 

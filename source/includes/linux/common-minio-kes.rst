@@ -18,7 +18,8 @@ The following example code downloads the latest Linux AMD64-compatible binary an
    kes --version
 
 For distributed KES topologies, repeat this step and all following KES-specific instructions for each host on which you want to deploy KES.
-MinIO strongly recommends configuring a load balancer with a "Least Connections" configuration to manage connections to distributed KES hosts.
+MinIO uses a round-robin approach by default for routing connections to multiple configured KES servers.
+For more granular controls, deploy a dedicated load balancer to manage connections to distributed KES hosts.
 
 .. end-kes-download-desc
 
@@ -92,24 +93,36 @@ Depending on your Vault configuration, you may also need to create a dedicated s
 Defer to your organizations best practices around generating production-ready TLS certificates.
 
 Place the certificates and corresponding private keys an appropriate directory such that the MinIO and KES service users can access and read their contents.
-This procedure assumes a structure similar to the following:
+The following example structure uses the folder hierarchy suggested in the beginning of this procedure:
 
-  .. code-block:: shell
-     :substitutions:
+.. tab-set::
 
-     # For the MinIO Hosts
-     -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/minio-kes.cert
-     -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/minio-kes.key
+   .. tab-item:: KES Hosts
 
-     # If KES certs are self-signed or use a non-global CA
-     # Include the CA certs as well
-     -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/kes-server.cert
+      .. code-block:: shell
+         :substitutions:
 
-     # For the KES Hosts
-     -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.cert
-     -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.key
+         -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.cert
+         -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.key
 
-If the KES certificates are self-signed *or* signed by Certificate Authority (CA) that is *not* globally trusted, you **must** add the CA certificate to the |miniocertpath| directory such that each MinIO server can properly validate the KES certificates.
+         # If the Vault certs are self-signed or use a non-global CA
+         # Include those CA certs as well
+
+         -rw-r--r-- 1 kes:kes |kescertpath|/vault-CA.cert
+
+   .. tab-item:: MinIO Hosts
+
+      .. code-block:: shell
+         :substitutions:
+
+         -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/minio-kes.cert
+         -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/minio-kes.key
+
+         # If KES certs are self-signed or use a non-global CA
+         # Include the CA certs as well
+         -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/kes-server.cert
+
+The general strategy for cert management is to ensure that each process (MinIO, KES, and Vault) have their own mTLS certificates *and* the Certificate Authority (CA) used to sign each client certificate.
 
 .. end-kes-generate-kes-certs-prod-desc
 

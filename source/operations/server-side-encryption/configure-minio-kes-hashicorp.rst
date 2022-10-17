@@ -314,6 +314,10 @@ using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|:
          keystore:
            vault:
              endpoint: https://vault.example.net:8200
+             engine: "kv"
+             version: "v1"
+             namespace: "minio"
+             prefix: "keys"
              approle:
                id: ${KES_APPROLE_ID}
                secret: ${KES_APPROLE_SECRET}
@@ -321,6 +325,8 @@ using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|:
              status:
                ping: 10s
              tls:
+               key: "kes-mtls.key"
+               cert: "kes-mtls.cert"
                ca: vault-tls.cert
 
    .. tab-item:: Reference
@@ -362,15 +368,24 @@ using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|:
            - The configuration for the Hashicorp Vault keystore. The following
              fields are *required*:
 
-             - ``endpoint`` - The hostname for the vault server(s). The 
-               hostname *must* be resolvable by the KES server host.
+             - ``endpoint`` - The hostname for the vault server(s). 
+               The hostname *must* be resolvable by the KES server host.
 
-             - ``approle`` - The `AppRole 
-               <https://www.vaultproject.io/docs/auth/approle>`__ used by 
-               KES for performing authenticated operations against Vault.
+             - ``engine`` - The path to the K/V engine to use.
+               Defaults to ``kv``
 
-               The specified AppRole must have the
-               appropriate :ref:`permissions <minio-sse-vault-prereq-vault>`
+             - ``version`` - The version of the K/V engine to use.
+               
+               Specify either ``v1`` or ``v2``. 
+               Defaults to ``v1``.
+
+             - ``namespace`` - The Vault namespace to use for secret storage.
+
+             - ``prefix`` - The prefix to use for secret storage.
+
+             - ``approle`` - The `AppRole <https://www.vaultproject.io/docs/auth/approle>`__ used by KES for performing authenticated operations against Vault.
+
+               The specified AppRole must have the appropriate :ref:`permissions <minio-sse-vault-prereq-vault>`
 
              - ``tls.ca`` - The Certificate Authority used to sign the 
                Vault TLS certificates. Typically required if the Vault
