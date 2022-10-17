@@ -182,7 +182,7 @@ elif tags.has("container"):
         'developers/*',
         'integrations/*'
     ]
-elif tags.has("k8s"):
+elif tags.has("k8s") and not tags.has("openshift"):
     html_baseurl = 'https://min.io/docs/minio/kubernetes/upstream/'
     excludes = [
         'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst',
@@ -196,7 +196,21 @@ elif tags.has("k8s"):
         'reference/minio-mc*',
         'developers/*',
         'integrations/*'
-
+    ]
+elif tags.has("openshift"):
+    html_baseurl = 'https://min.io/docs/minio/kubernetes/openshift/'
+    excludes = [
+        'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst',
+        'operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst',
+        'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst',
+        'operations/install-deploy-manage/upgrade-minio-deployment.rst',
+        'operations/install-deploy-manage/expand-minio-deployment.rst',
+        'operations/install-deploy-manage/decommission-server-pool.rst',
+        'operations/manage-existing-deployments.rst',
+        'reference/minio-server*',
+        'reference/minio-mc*',
+        'developers/*',
+        'integrations/*'
     ]
 else:
     excludes = []
