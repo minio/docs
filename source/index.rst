@@ -72,7 +72,7 @@ and non-protected.
 
    .. include:: /includes/container/quickstart.rst
 
-.. cond:: k8s
+.. cond:: k8s or openshift
 
    .. toctree::
       :titlesonly:
@@ -121,7 +121,7 @@ and non-protected.
       /administration/bucket-replication
       /administration/concepts
 
-.. cond:: k8s or container or macos or windows
+.. cond:: k8s or openshift or container or macos or windows
 
    .. toctree::
       :titlesonly:
@@ -146,7 +146,7 @@ and non-protected.
       /reference/minio-server/minio-server
       /integrations/integrations
 
-.. cond:: k8s
+.. cond:: k8s or openshift
 
    .. toctree::
       :titlesonly:
