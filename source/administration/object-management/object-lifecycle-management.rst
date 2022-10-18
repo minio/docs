@@ -70,7 +70,7 @@ default applies the transition operation to the *current* object version.
 
 To transition noncurrent object versions, specify the 
 :mc-cmd:`~mc ilm add --noncurrentversion-transition-days` and
-:mc-cmd:`~mc ilm add --noncurrentversion-transition-storage-class` options
+:mc-cmd:`~mc ilm add --noncurrentversion-tier` options
 when creating the transition rule. 
 
 .. _minio-lifecycle-management-expiration:

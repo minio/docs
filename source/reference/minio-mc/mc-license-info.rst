@@ -67,7 +67,7 @@ Parameters
 .. mc-cmd:: --airgap
    :optional:
 
-   Use in environments where the client machine running the :ref:`minio client <minio client>` does not have network access to SUBNET (for example, airgapped, firewalled, or similar configuration) to display instructions for how to register the deployment with SUBNET.
+   Use in environments where the client machine running the :ref:`minio client <minio-client>` does not have network access to SUBNET (for example, airgapped, firewalled, or similar configuration) to display instructions for how to register the deployment with SUBNET.
    
    If the deployment is airgapped, but the local device has network access, you do not need to use the ``--airgap`` flag.
 
