@@ -25,7 +25,7 @@ The commands in this section create the following resources:
      -e KES_CLIENT_KEY=/certs/kes-server.key  \
      -e KES_CLIENT_CERT=/certs/kes-server.cert  \
      quay.io/minio/kes:|kes-stable| server  \
-       --mlock --auth  \
+       --auth  \
        --config=/etc/default/kes-config.yaml  \
 
    sudo podman run -dt  \
@@ -73,14 +73,14 @@ The following commands create two TLS certificates that expire within 30 days of
 
     podman run --rm  \
       -v |kescertpath|:/certs  \
-      quay.io/minio/kes:|kes-stable| identity new  \
+      quay.io/minio/kes:|kes-stable| identity new  kes_server \
         --key  /certs/kes-server.key  \
         --cert /certs/kes-server.cert  \
         kes-server
 
     podman run --rm  \
       -v |miniocertpath|:/certs  \
-      quay.io/minio/kes:|kes-stable| identity new  \
+      quay.io/minio/kes:|kes-stable| identity new minio_server \
         --key  /certs/minio-kes.key  \
         --cert /certs/minio-kes.cert  \
         minio-server
@@ -122,6 +122,12 @@ KES automatically creates this key if it does not already exist on the root KMS.
 .. end-kes-configuration-minio-desc
 
 .. start-kes-generate-key-desc
+
+.. admonition:: Unseal Vault Before Creating Key
+   :class: important
+
+   You must unseal the backing Vault instance before creating new encryption keys.
+   See the Vault documentation on `Seal/Unseal <https://www.vaultproject.io/docs/concepts/seal>`__ for more information.
 
 MinIO requires that the |EK| exist on the root KMS *before* performing
 |SSE| operations using that key. Use ``kes key create`` *or*

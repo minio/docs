@@ -14,7 +14,7 @@ User=kes
 Group=kes
 ProtectProc=invisible
 
-ExecStart=/usr/local/bin/kes server --config=/opt/kes/config.yaml --mlock
+ExecStart=/usr/local/bin/kes server --config=/opt/kes/config.yaml
 
 # Let systemd restart this service always
 Restart=always

@@ -128,59 +128,73 @@ Deploy or Ensure Access to a Hashicorp Vault Service
       :start-after: start-kes-prereq-hashicorp-vault-desc
       :end-before: end-kes-prereq-hashicorp-vault-desc
 
-MinIO |KES| supports both the V1 and V2 Vault engines.
-Select the corresponding tab to the engine used by your Vault deployment for instructions on configuring the necessary permissions:
+MinIO |KES| supports either the V1 or V2 Vault `K/V engines <https://www.vaultproject.io/docs/secrets/kv>`__.
 
-.. tab-set::
+MinIO KES requires using AppRole authentication to the Vault server. 
+You must create an AppRole, assign it a policy that the necessary permissions, and retrieve the AppRole ID and Secret for use in configuring KES.
 
-   .. tab-item:: Vault Engine V1
+You can use the following steps to enable AppRole authentication and create the necessary policies to support core KES functionality against Vault:
 
-      Create an access policy ``kes-policy.hcl`` with a configuration similar to the following:
-         
-      .. code-block:: shell
-         :class: copyable
+1. Enable AppRole Authentication
 
-         path "kv/*" {
-               capabilities = [ "create", "read", "delete" ]
-         }
+   .. code-block:: shell
+      :class: copyable
 
-      Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``.
+      vault auth enable approle
 
-   .. tab-item:: Vault Engine V2
+#. Create a Policy for KES
 
-      Create an access policy ``kes-policy.hcl`` with a configuration similar to the following:
+   Create a `policy with necessary capabilities <https://www.vaultproject.io/docs/concepts/policies#capabilities>`__ for KES to use when accessing Vault.
+   Select the tab corresponding to the KV engine used for storing KES secrets:
+ 
+   .. tab-set::
 
-      .. code-block:: shell
-         :class: copyable
+      .. tab-item:: Vault Engine V1
 
-         path "kv/data/*" {
-               capabilities = [ "create", "read"]
-         }
+         Create an access policy ``kes-policy.hcl`` with a configuration similar to the following:
+            
+         .. code-block:: shell
+            :class: copyable
 
-         path "kv/metadata/*" {
-               capabilities = [ "list", "delete"]
-         }
-         
-      Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``
+            path "kv/*" {
+                  capabilities = [ "create", "read", "delete" ]
+            }
 
-MinIO requires using AppRole authentication for secure communication with the Vault server.
-The following commands:
+         Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``.
 
-- Enable AppRole Authentication
-- Create an App Role ID for |KES|
-- Binds that role to the created KES policy
-- Requests a RoleID and SecretID
+      .. tab-item:: Vault Engine V2
 
-  .. code-block:: shell
-     :class: copyable
+         Create an access policy ``kes-policy.hcl`` with a configuration similar to the following:
 
-     vault auth enable approle
-     vault write    auth/approle/role/kes-role token_num_uses=0 secret_id_num_uses=0 period=5m
-     vault write    auth/approle/role/kes-role policies=kes-policy
-     vault read     auth/approle/role/kes-role/role-id
-     vault write -f auth/approle/role/kes-role/secret-id
+         .. code-block:: shell
+            :class: copyable
 
-You must specify both RoleID and SecretID as part of this procedure.
+            path "kv/data/*" {
+                  capabilities = [ "create", "read"]
+            }
+
+            path "kv/metadata/*" {
+                  capabilities = [ "list", "delete"]
+            }
+            
+         Write the policy to Vault using ``vault policy write kes-policy kes-policy.hcl``
+
+#. Create an AppRole for KES and assign it the created policy
+
+   .. code-block:: shell
+      :class: copyable
+
+      vault write    auth/approle/role/kes-role token_num_uses=0 secret_id_num_uses=0 period=5m
+      vault write    auth/approle/role/kes-role policies=kes-policy
+
+#. Retrieve the AppRole ID and Secret
+
+   .. code-block:: shell
+      :class: copyable
+
+      vault read     auth/approle/role/kes-role/role-id
+      vault write -f auth/approle/role/kes-role/secret-id
+
 
 .. cond:: linux or macos or windows
 
@@ -232,7 +246,7 @@ You must specify both RoleID and SecretID as part of this procedure.
 .. cond:: macos
 
    .. |kescertpath|        replace:: ~/minio-kes-vault/certs
-   .. |kesconfigpath|      replace:: ~/minio-kes-vault/config/
+   .. |kesconfigpath|      replace:: ~/minio-kes-vault/config
    .. |kesconfigcertpath|  replace:: ~/minio-kes-vault/certs
    .. |miniocertpath|      replace:: ~/minio-kes-vault/certs
    .. |minioconfigpath|    replace:: ~/minio-kes-vault/config
@@ -300,6 +314,10 @@ using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|:
          keystore:
            vault:
              endpoint: https://vault.example.net:8200
+             engine: "kv"
+             version: "v1"
+             namespace: "minio"
+             prefix: "keys"
              approle:
                id: ${KES_APPROLE_ID}
                secret: ${KES_APPROLE_SECRET}
@@ -307,6 +325,8 @@ using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|:
              status:
                ping: 10s
              tls:
+               key: "kes-mtls.key"
+               cert: "kes-mtls.cert"
                ca: vault-tls.cert
 
    .. tab-item:: Reference
@@ -348,15 +368,24 @@ using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|:
            - The configuration for the Hashicorp Vault keystore. The following
              fields are *required*:
 
-             - ``endpoint`` - The hostname for the vault server(s). The 
-               hostname *must* be resolvable by the KES server host.
+             - ``endpoint`` - The hostname for the vault server(s). 
+               The hostname *must* be resolvable by the KES server host.
 
-             - ``approle`` - The `AppRole 
-               <https://www.vaultproject.io/docs/auth/approle>`__ used by 
-               KES for performing authenticated operations against Vault.
+             - ``engine`` - The path to the K/V engine to use.
+               Defaults to ``kv``
 
-               The specified AppRole must have the
-               appropriate :ref:`permissions <minio-sse-vault-prereq-vault>`
+             - ``version`` - The version of the K/V engine to use.
+               
+               Specify either ``v1`` or ``v2``. 
+               Defaults to ``v1``.
+
+             - ``namespace`` - The Vault namespace to use for secret storage.
+
+             - ``prefix`` - The prefix to use for secret storage.
+
+             - ``approle`` - The `AppRole <https://www.vaultproject.io/docs/auth/approle>`__ used by KES for performing authenticated operations against Vault.
+
+               The specified AppRole must have the appropriate :ref:`permissions <minio-sse-vault-prereq-vault>`
 
              - ``tls.ca`` - The Certificate Authority used to sign the 
                Vault TLS certificates. Typically required if the Vault

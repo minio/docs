@@ -134,8 +134,6 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
    MINIO_KMS_KES_CAPATH=|miniocertpath|\kes-server.cert
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
-   minio.exe server [ARGUMENTS]
-
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 
 - Encrypting the MinIO backend (IAM, configuration, etc.)
