@@ -47,6 +47,7 @@ similar results to the ``mkdir -p`` commandline tool.
                           [--ignore-existing]  \
                           [--region "string"]  \
                           [--with-lock]        \
+                          [--with-versioning]  \
                           ALIAS
 
       .. include:: /includes/common-minio-mc.rst
@@ -58,9 +59,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The MinIO or other S3-compatible service on which to create the
-   new bucket.
+   The MinIO or other S3-compatible service on which to create the new bucket.
 
    For creating a bucket on MinIO, specify the
    :ref:`alias <alias>` and the name of the bucket. For example:
@@ -77,22 +78,23 @@ Parameters
       mc mb ~/mydata/mydir
 
 .. mc-cmd:: --ignore-existing, p
-   
+   :optional:
 
-   Directs :mc:`mc mb` to do nothing if the bucket or directory already
-   exists.
+   Directs :mc:`mc mb` to do nothing if the bucket or directory already exists.
 
 .. mc-cmd:: --region
-   
+   :optional:
 
-   The region in which to create the specified bucket. Has no effect if the
-   specified :mc-cmd:`~mc mb ALIAS` is a filesystem directory.
+   The region in which to create the specified bucket. 
+   Has no effect if the specified :mc-cmd:`~mc mb ALIAS` is a filesystem directory.
+
+   If not specified, default value is ``us-east-1``.
 
 .. mc-cmd:: --with-lock, l
-   
+   :optional:
 
-   Enables :ref:`object locking <minio-object-locking>` on the specified 
-   bucket.
+   Enables :ref:`object locking <minio-object-locking>` on the specified bucket.
+   Object locking requires, and therefore implies, enabling object versioning.
 
    .. important::
 
@@ -100,6 +102,14 @@ Parameters
       Buckets created without object locking cannot use
       :ref:`Bucket Lifecycle Management <minio-lifecycle-management>` or
       :ref:`Bucket Object Locking <minio-object-locking>` functionality.
+
+.. mc-cmd:: --with-versioning
+   :optional:
+
+   Enables :ref:`object versioning <minio-bucket-versioning>` on the new bucket.
+
+   Versioning is required for :ref:`bucket replication <minio-bucket-replication>` or :ref:`site replication <minio-site-replication-overview>`.
+   Versioning does not imply or require object locking.
 
 Global Flags
 ~~~~~~~~~~~~
@@ -111,22 +121,44 @@ Global Flags
 Examples
 --------
 
-Create Bucket
-~~~~~~~~~~~~~
+Create Bucket with Object Locking
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc mb` to create a bucket on an S3-compatible host. The 
-:mc-cmd:`~mc mb --with-lock` option creates the bucket with locking
-enabled:
+Use :mc:`mc mb` to create a bucket on an S3-compatible host. 
+The :mc-cmd:`~mc mb --with-lock` option creates the bucket with locking enabled:
 
 .. code-block:: shell
    :class: copyable
 
    mc mb --with-lock ALIAS/BUCKET
 
-- Replace :mc-cmd:`ALIAS <mc mb ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc mb ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
 
 - Replace :mc-cmd:`BUCKET <mc mb ALIAS>` with the bucket to create.
+
+Create a New Bucket in a Specific Region
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc mb` to create a bucket on an S3-compatible host.
+The :mc-cmd:`~mc mb --region` option creates the bucket in a desired region.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc mb --region --region=us-west-2 myminio/mynewbucket
+
+The above command creates a new bucket, ``mynewbucket`` on the ``myminio`` bucket within the ``us-west-2`` region.
+
+Create a New Bucket with Versioning Enabled
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+   :class: copyable
+
+   mc mb --with-versioning myminio/myversionedbucket
+
+The above command creates a new bucket, ``myversionedbucket``, on the ``myminio`` alias.
+The new bucket enables :ref:`object versioning <minio-bucket-versioning>` for all objects in the bucket.
 
 Behavior
 --------

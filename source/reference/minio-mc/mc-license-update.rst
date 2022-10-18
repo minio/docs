@@ -56,6 +56,7 @@ Parameters
 
    Use in environments without network access to SUBNET (for example, airgapped, firewalled, or similar configuration).
 
+   If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
 
 Global Flags
 ~~~~~~~~~~~~

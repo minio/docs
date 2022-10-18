@@ -262,6 +262,11 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-mv-desc
           :end-before: end-mc-mv-desc
 
+   * - :mc:`mc od`
+     - .. include:: /reference/minio-mc/mc-od.rst
+          :start-after: start-mc-od-desc
+          :end-before: end-mc-od-desc
+
    * - :mc:`mc pipe`
      - .. include:: /reference/minio-mc/mc-pipe.rst
           :start-after: start-mc-pipe-desc
@@ -494,6 +499,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-mb
    /reference/minio-mc/mc-mirror
    /reference/minio-mc/mc-mv
+   /reference/minio-mc/mc-od
    /reference/minio-mc/mc-pipe
    /reference/minio-mc/mc-rb
    /reference/minio-mc/mc-replicate-add
