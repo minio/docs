@@ -1,5 +1,5 @@
 =====================
-Prometheus Monitoring
+Monitoring and Alerts
 =====================
 
 .. default-domain:: minio
@@ -12,22 +12,27 @@ Metrics and Alerts
 ------------------
 
 MinIO provides point-in-time metrics on cluster status and operations.
-MinIO publishes collected metrics data using Prometheus-compatible data structures. 
+The :ref:`MinIO Console <minio-console-metrics>` provides a graphical display of these metrics.
 
-For alerts, time-series metric data, or additional metrics, MinIO can leverage `Prometheus <https://prometheus.io/>`__.
-Prometheus is an Open Source systems and service monitoring system which supports analyzing and alerting based on collected metrics.
-The Prometheus ecosystem includes multiple :prometheus-docs:`integrations <operating/integrations/>`, allowing wide latitude in processing and storing collected metrics.
+For historical metrics and analytics, MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <data_model/>`.
+You can use any scraping tool which supports that data model to pull metrics data from MinIO for further analysis and alerting.
 
-- MinIO publishes Prometheus-compatible scraping endpoints for cluster and node-level metrics. 
-  Any Prometheus-compatible scraping software can ingest and process MinIO metrics for analysis, visualization, and alerting.
-  See :ref:`minio-metrics-and-alerts-endpoints` for more information.
+The following table lists tutorials for integrating MinIO metrics with select third-party monitoring software.
 
-- For alerts, use Prometheus :prometheus-docs:`Alerting Rules  <prometheus/latest/configuration/alerting_rules/>` and the
-  :prometheus-docs:`Alert Manager <alerting/latest/overview/>` to trigger alerts based on collected metrics. 
-  See :ref:`minio-metrics-and-alerts-alerting` for more information.
+.. list-table::
+   :stub-columns: 1
+   :widths: 30 70
+   :width: 100%
 
-When configured, the :ref:`MinIO Console <minio-console-metrics>` shows some metrics in the :guilabel:`Monitoring > Metrics` page.
-You can download these metrics as either ``.png`` images or ``.csv`` files.
+   * - :ref:`minio-metrics-collect-using-prometheus`
+     - Configure Prometheus to Monitor and Alert for a MinIO deployment
+
+       Configure MinIO to query the Prometheus deployment to enable historical metrics via the MinIO Console
+
+   * - :ref:`minio-metrics-influxdb`
+     - Configure InfluxDB to Monitor and Alert for a MinIO deployment.
+
+Other metrics and analytics software suites which support the Prometheus data model may work regardless of their inclusion on the above list.
 
 Logging
 -------
@@ -58,6 +63,6 @@ See :ref:`minio-healthcheck-api` for more information.
    :titlesonly:
    :hidden:
 
-   /operations/monitoring/collect-minio-metrics-using-prometheus
+   /operations/monitoring/metrics-and-alerts
    /operations/monitoring/minio-logging
    /operations/monitoring/healthcheck-probe
