@@ -65,24 +65,25 @@ This procedure assumes an existing `Hashicorp Vault <https://www.vaultproject.io
 The Vault `Quick Start <https://learn.hashicorp.com/tutorials/vault/getting-started-install>`__ provides a sufficient foundation for the purposes of this procedure.
 Defer to the `Vault Documentation <https://learn.hashicorp.com/vault>`__ for guidance on deployment and configuration.
 
-.. admonition:: KMS Key Creation Requires Unsealed Vault
+.. admonition:: KES Operations Require Unsealed Vault
    :class: important
 
-   KES requires unsealing the Vault instance for creating new External Keys (EK) for supporting SSE operations.
-   A sealed Vault blocks key creation operations and results in errors on both KES and the KES client (MinIO).
+   You must unseal the Vault instance to allow any cryptographic operations, including key creation and retrieval.
+   KES returns an error if the configured Vault service is sealed.
 
-   You can safely seal the Vault after KES completes any key creation operations.
+   If you restart or otherwise seal the Vault instance, KES cannot perform any cryptographic operations against the Vault.
+   You must unseal the Vault to ensure normal operations.
+
    See the Vault documentation on `Seal/Unseal <https://www.vaultproject.io/docs/concepts/seal>`__ for more information.
 
 .. end-kes-prereq-hashicorp-vault-desc
 
 .. start-kes-vault-seal-unseal-desc
 
-.. admonition:: KMS Key Creation Requires Unsealed Vault
+.. admonition:: KES Operations Requires Unsealed Vault
    :class: important
 
-   You must unseal the backing Vault instance to allow KES to create new External Keys (EK) for supporting SSE operations.
-   This step requires an unsealed Vault to complete successfully.
+   You must unseal the Vault instance to allow normal cryptographic operations, including key creation or retrieval.
    See the Vault documentation on `Seal/Unseal <https://www.vaultproject.io/docs/concepts/seal>`__ for more information.
 
 .. end-kes-vault-seal-unseal-desc
