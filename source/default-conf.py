@@ -79,6 +79,7 @@ extlinks = {
     'podman-git'      : ('https://github.com/containers/podman/%s',''),
     'docker-docs'     : ('https://docs.docker.com/%s', ''),
     'openshift-docs'  : ('https://docs.openshift.com/container-platform/4.11/%s', ''),
+    'influxdb-docs'   : ('https://docs.influxdata.com/influxdb/v2.4/%s',''),
 
 }
 
