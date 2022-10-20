@@ -48,7 +48,20 @@
        <div class="header__hero hidden-rm">
           <h2>Documentation</h2>
           
-          <div id="docsearch"></div>
+          <button class="search-btn search-toggle" type="button">
+            {%- include "icons/search.html" %}
+            Search Documentation
+          </button>
+       </div>
+
+       <div id="search-modal">
+         <div class="search-modal__inner">
+            <div id="searchbox"></div>
+            <div id="clear-refinements"></div>
+            <div id="brand-list"></div>
+            <div id="hits"></div>
+            <div id="pagination"></div>
+         </div>
        </div>
     </div>
 

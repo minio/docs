@@ -8,7 +8,7 @@ $theme-properties: (
     --link-color: #006DA0 #85B3EE,
     --link-hover-color: #015378 #99c0f4,
     --text-color: $black $text-dark-color,
-    --text-muted-color: #4B4B4B #697995,
+    --text-muted-color: #5c5c5c #697995,
     --headings-color: $black #E3EEEF,
 
     // Theme
@@ -119,6 +119,14 @@ $theme-properties: (
     --ds-search-placeholder-color: #7e7e7e #697995,
     --ds-search-focus-shadow: rgba($white, 0.15) #1b232f,
     --ds-scrollbar-bg: #bcc4cb #151b24,
+
+    --search-btn-hover-shadow: rgba($white, 0.15) #1b232f,
+    --is-hit-icon-color: $black $light-500,
+    --is-search-bg: $white $dark-100,
+    --is-no-result-icon: url(../img/icons/no-result-light.svg) url(../img/icons/no-result-dark.svg),
+    --is-search-icon: url(../img/icons/search-light.svg) url(../img/icons/search-dark.svg),
+    --is-refine-list-border-color: $light-400 $dark-300,
+    
 );
 
 // Activate dark/light themes

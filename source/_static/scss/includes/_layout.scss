@@ -5,6 +5,14 @@
     @include breakpoint-max(breakpoints(lg)) {
       --content-padding: 1.25rem;
     }
+
+    &.search-active {
+        &,
+        body,
+        .content {
+            overflow: hidden;
+        }
+    }
 }
 
 .content {
