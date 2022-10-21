@@ -375,6 +375,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // --------------------------------------------------
   const searchToggleEl = document.querySelectorAll(".search-toggle");
   const searchModalEl = document.getElementById("search-modal");
+  const activePlatform = document.getElementsByTagName('meta')['docsearch:platform'].getAttribute('content');
 
   const icons = {
     h1: `<svg width="14" height="9">
@@ -423,6 +424,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
     const search = instantsearch({
       indexName: 'minio',
       searchClient,
+      initialUiState: {
+        minio: {
+          refinementList: {
+            platform: [activePlatform],
+          },
+        }
+      }
     });
     
     search.addWidgets([
@@ -447,8 +455,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
           item:function(data) {
             var returnString;
             var docUrl;
-
-            console.log(data);
   
             if(data.hierarchy.lvl1 && data._highlightResult.hierarchy.lvl1.matchLevel === "full") {
               docUrl = data.url_without_anchor;
