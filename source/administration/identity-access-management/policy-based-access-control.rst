@@ -761,6 +761,18 @@ services:
    Allows access to MinIO :ref:`metrics <minio-metrics-and-alerts-endpoints>`. 
    Only required if MinIO requires authentication for scraping metrics.
 
+.. policy-action:: admin:ListBatchJobs
+
+   Allows access to list the active batch jobs.
+
+.. policy-action:: admin:DescribeBatchJobs
+
+   Allows access to the see the definition details of a running batch job.
+
+.. policy-action:: admin:StartBatchJob
+
+   Allows user to begin a batch job run.
+
 ``mc admin`` Policy Condition Keys
 ----------------------------------
 
