@@ -73,7 +73,6 @@ Bucket replication requires specific permissions on the source and destination d
          mc admin policy add TARGET ReplicationAdminPolicy /dev/stdin
          mc admin user add TARGET ReplicationAdmin LongRandomSecretKey
          mc admin policy set TARGET ReplicationAdminPolicy user=ReplicationAdmin
-
       MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`service account <minio-idp-service-account>` for bucket replication.
 
    .. tab-item:: Replication Remote User
@@ -136,3 +135,11 @@ MinIO deployments in a site replication configuration do *not* replicate the cre
 - :ref:`Site configuration settings <minio-mc-admin-config>`
 
 .. end-mc-admin-replicate-what-does-not-replicate
+
+.. start-mc-admin-replicate-load-balancing
+
+When replicating to multi-node sites, use the URL or IP address of the site's load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
+
+Using a single node for configuring site replication creates a single point of failure, where that node being offline results in replication failure.
+
+.. end-mc-admin-replicate-load-balancing

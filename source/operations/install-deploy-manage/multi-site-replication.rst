@@ -110,9 +110,9 @@ You can achieve this with a central KES server or multiple KES servers (say one 
 Load Balancers Installed on Each Multi-Node Site
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When replication to multi-node sites, use the URL or IP address of the site's load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
-
-For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
+.. include:: /includes/common-replication.rst
+   :start-after: start-mc-admin-replicate-load-balancing
+   :end-before: end-mc-admin-replicate-load-balancing
 
 Switch to Site Replication from Bucket Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -137,6 +137,7 @@ Configure Site Replication
 .. tab-set::
 
    .. tab-item:: Console
+      :sync: gui
 
       #. :ref:`Deploy <deploy-minio-distributed>` two or more separate MinIO sites, using the same Identity Provider for each site
 
@@ -147,7 +148,7 @@ Configure Site Replication
 
          For example, ``https://<addressforsite>:9000``
          
-         Replace ``<addressforsite>`` with the IP address or URL for the MinIO deployment.
+         Replace ``<addressforsite>`` with the hostname or IP address of the load balancer, reverse proxy, or similar control plane that manages connections to the MinIO deployment.
 
       #. Select **Settings**, then **Site Replication**
 
@@ -171,10 +172,11 @@ Configure Site Replication
 
          :Site Name: A name or other identifying text to associate to the site.
 
-         :Endpoint: `(required)` The URL or IP address and port to use to access the site.
-         
-         For multi-node sites, use the URL or IP address of the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment for the ``Endpoint``.
-         For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
+         :Endpoint: `(required)` The hostname or IP of the load balancer managing connections to the site.
+
+         .. include:: /includes/common-replication.rst
+            :start-after: start-mc-admin-replicate-load-balancing
+            :end-before: end-mc-admin-replicate-load-balancing
 
          To add additional sites beyond two, select the ``+`` button to the side of one of the Site entries.
          To remove a site previously added, select the ``-`` button to the side of the site.
@@ -191,6 +193,7 @@ Configure Site Replication
 
 
    .. tab-item:: Command Line
+      :sync: cli
 
       The following steps create a new site replication configuration for three :ref:`distributed deployments <deploy-minio-distributed>`.
       One of the sites contains :ref:`replicable data <minio-site-replication-what-replicates>`.
@@ -203,12 +206,13 @@ Configure Site Replication
 
       #. Configure an alias for each site
 
-         For multi-node deployments, configure the alias to point to the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
-         In such environments, setting the alias to a specific node creates risk of a single point of failure for replication.
+         .. include:: /includes/common-replication.rst
+            :start-after: start-mc-admin-replicate-load-balancing
+            :end-before: end-mc-admin-replicate-load-balancing
       
          For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
          
-         Use :mc:`mc alias set`
+         Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the site.
       
          .. code-block:: shell
       
@@ -288,6 +292,7 @@ The new site must meet the following requirements:
 .. tab-set::
 
    .. tab-item:: Console
+      :sync: gui
 
       #. Deploy a new, empty MinIO site
 
@@ -317,16 +322,18 @@ The new site must meet the following requirements:
 
          :Site Name: An alias to use for the site name.
 
-         :Endpoint: `(required)` The URL or IP address and port to use to access the site.
+         :Endpoint: `(required)` The hostname or IP of the load balancer managing connections to the site.
          
-         For multi-node sites, use the URL or IP address of the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment for the ``Endpoint``.
-         For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
+         .. include:: /includes/common-replication.rst
+            :start-after: start-mc-admin-replicate-load-balancing
+            :end-before: end-mc-admin-replicate-load-balancing
 
          To add additional sites beyond two, select the ``+`` button to the side of the last Site entry.
 
       #. Select :guilabel:`Save`
 
    .. tab-item:: Command Line
+      :sync: cli
 
       #. Deploy three or more separate MinIO sites, using the same external IDP
 
@@ -335,14 +342,15 @@ The new site must meet the following requirements:
 
       #. Configure an alias for each site
 
-         For multi-node deployments, configure the alias to point to the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
-         In such environments, setting the alias to a specific node creates risk of a single point of failure for replication.
+         .. include:: /includes/common-replication.rst
+            :start-after: start-mc-admin-replicate-load-balancing
+            :end-before: end-mc-admin-replicate-load-balancing
 
          To check the existing aliases, use :mc:`mc alias list`.
       
          For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
          
-         Use :mc:`mc alias set`
+         Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the site.
       
          .. code-block:: shell
       
@@ -383,6 +391,7 @@ If a peer site changes its hostname, you can modify the replication configuratio
 .. tab-set::
 
    .. tab-item:: Console
+      :sync: gui
 
       #. In a browser, access the Console for one of the replicated sites
 
@@ -401,8 +410,9 @@ If a peer site changes its hostname, you can modify the replication configuratio
 
          :New Endpoint: `(required)` The new endpoint address and port to use.
 
-         For multi-node sites, use the URL or IP address of the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
-         For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
+         .. include:: /includes/common-replication.rst
+            :start-after: start-mc-admin-replicate-load-balancing
+            :end-before: end-mc-admin-replicate-load-balancing
 
          .. image:: /images/minio-console/console-settings-site-replication-edit-endpoint.png
             :width: 600px
@@ -412,6 +422,7 @@ If a peer site changes its hostname, you can modify the replication configuratio
       #. Select **Update**
 
    .. tab-item:: Command Line
+      :sync: cli
 
       #. Obtain the site's Deployment ID with :mc-cmd:`mc admin replicate info`
 
@@ -429,8 +440,10 @@ If a peer site changes its hostname, you can modify the replication configuratio
          Replace [DEPLOYMENT-ID] with the deployment ID of the site to update.
          
          Replace [NEW-ENDPOINT] with the new endpoint for the site.
-         For multi-node sites, use the URL or IP address of the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
-         For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
+
+         .. include:: /includes/common-replication.rst
+            :start-after: start-mc-admin-replicate-load-balancing
+            :end-before: end-mc-admin-replicate-load-balancing
 
 Remove a Site from Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -441,6 +454,7 @@ You can re-add the site at a later date, but you must first completely wipe buck
 .. tab-set::
 
    .. tab-item:: Console
+      :sync: gui
 
       #. In a browser, access the Console for one of the replicated sites
 
@@ -463,6 +477,7 @@ You can re-add the site at a later date, but you must first completely wipe buck
             :align: center
 
    .. tab-item:: Command Line
+      :sync: cli
 
       Use :mc-cmd:`mc admin replicate remove`
 
@@ -486,6 +501,7 @@ The summary information includes the number of **Synced** and **Failed** items f
 .. tab-set::
 
    .. tab-item:: Console
+      :sync: gui
 
       #. In a browser, access the Console for one of the replicated sites
 
@@ -514,6 +530,7 @@ The summary information includes the number of **Synced** and **Failed** items f
       #. `(Optional)` Update the information by selecting :guilabel:`Refresh`
 
    .. tab-item:: Command Line
+      :sync: cli
 
       Use :mc-cmd:`mc admin replicate status`
 
