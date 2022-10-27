@@ -82,6 +82,27 @@ MinIO uses the ExecutableBooks
 
          mc admin info ALIAS
 
+You can keep tabs in sync. For example, if you have several procedures on a page that have Console and CLI tabs.
+Use the `:sync: key1` option on teach `tab-item`.
+When someone selects a tab for one or the other, all of the other tabs available on the page with the same key change to that tab, too.
+
+.. tab-set::
+
+   .. tab-item:: Console
+      :sync: gui
+
+      This is plain text content
+
+   .. tab-item:: Command Line
+      :sync: cli
+
+      This is plain text content with code:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc admin info ALIAS
+
 Cards
 ~~~~~
 
