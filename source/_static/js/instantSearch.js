@@ -184,7 +184,7 @@ window.addEventListener("DOMContentLoaded", () => {
           else if (
             data.hierarchy.lvl1 &&
             data._snippetResult &&
-            data._snippetResult.content.matchLevel === "full"
+            data._snippetResult.content.matchLevel === "full" || data._snippetResult.content.matchLevel === "partial"
           ) {
             docUrl = data.url;
             returnString = `
@@ -193,9 +193,9 @@ window.addEventListener("DOMContentLoaded", () => {
                   </i>
                   <div class="search__hits__title">${data._snippetResult.content.value}</div>
                   <div class="search__hits__label">
-                    ${data.hierarchy.lvl1}
-                    ${icons.chevron}
-                    ${data.hierarchy.lvl2}
+                    <span>${data.hierarchy.lvl1}</span>
+                    ${data.hierarchy.lvl2 ? `${icons.chevron}` + `<span>${data.hierarchy.lvl2}</span>` : ""}
+                    ${data.hierarchy.lvl3 ? `${icons.chevron}` + `<span>${data.hierarchy.lvl3}</span>` : ""}
                   </div>
                 `;
           } else {
