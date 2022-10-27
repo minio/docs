@@ -94,6 +94,13 @@ window.addEventListener("DOMContentLoaded", () => {
           searchModalEl.classList.add("search--focused");
         } else {
           searchModalEl.classList.remove("search--focused");
+
+          // Reset filters
+          const filtersClearEl = document.querySelector("#search-clear .search-clear__btn");
+          const activeFilterEl = document.querySelector(".search__filters__checkbox[value='" + activePlatform + "']");
+
+          filtersClearEl.click();
+          activeFilterEl.click();
         }
 
         search(query);
@@ -115,6 +122,12 @@ window.addEventListener("DOMContentLoaded", () => {
         labelText: "search__filters__label",
         checkbox: "search__filters__checkbox",
         count: "search__filters__count",
+      },
+    }),
+    instantsearch.widgets.clearRefinements({
+      container: '#search-clear',
+      cssClasses: {
+        button: "search-clear__btn",
       },
     }),
     instantsearch.widgets.hits({
