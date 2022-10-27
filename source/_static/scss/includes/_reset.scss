@@ -319,6 +319,15 @@ abbr, acronym {
     font-family: inherit;
 }
 
+.guilabel {
+    font-weight: bolder;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    background: var(--theme-light-bg);
+    border-radius: 999px;
+    padding: 0rem .5rem 0rem .5rem;
+}
+
 dt:target,
 span.highlighted {
     background-color: transparent;
