@@ -94,7 +94,6 @@ The other sites must be empty of buckets and objects.
 
 After configuring site replication, any data on the first deployment replicates to the other sites.
 
-
 All Sites Must Use the Same IDP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -107,6 +106,13 @@ Access to the Same Encryption Service
 For :ref:`SSE-S3 <minio-encryption-sse-s3>` or :ref:`SSE-KMS <minio-encryption-sse-kms>` encryption via Key Management Service (KMS), all sites must have access to a central KMS deployment. 
 
 You can achieve this with a central KES server or multiple KES servers (say one per site) connected via a central supported :ref:`key vault server <minio-sse>`.
+
+Load Balancers Installed on Each Multi-Node Site
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When replication to multi-node sites, use the URL or IP address of the site's load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
+
+For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
 
 Switch to Site Replication from Bucket Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -166,6 +172,9 @@ Configure Site Replication
          :Site Name: A name or other identifying text to associate to the site.
 
          :Endpoint: `(required)` The URL or IP address and port to use to access the site.
+         
+         For multi-node sites, use the URL or IP address of the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment for the ``Endpoint``.
+         For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
 
          To add additional sites beyond two, select the ``+`` button to the side of one of the Site entries.
          To remove a site previously added, select the ``-`` button to the side of the site.
@@ -193,6 +202,9 @@ Configure Site Replication
          Start with empty sites *or* have no more than one site with any :ref:`replicable data <minio-site-replication-what-replicates>`.
 
       #. Configure an alias for each site
+
+         For multi-node deployments, configure the alias to point to the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
+         In such environments, setting the alias to a specific node creates risk of a single point of failure for replication.
       
          For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
          
@@ -306,6 +318,9 @@ The new site must meet the following requirements:
          :Site Name: An alias to use for the site name.
 
          :Endpoint: `(required)` The URL or IP address and port to use to access the site.
+         
+         For multi-node sites, use the URL or IP address of the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment for the ``Endpoint``.
+         For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
 
          To add additional sites beyond two, select the ``+`` button to the side of the last Site entry.
 
@@ -319,6 +334,9 @@ The new site must meet the following requirements:
          The other sites must be empty.
 
       #. Configure an alias for each site
+
+         For multi-node deployments, configure the alias to point to the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
+         In such environments, setting the alias to a specific node creates risk of a single point of failure for replication.
 
          To check the existing aliases, use :mc:`mc alias list`.
       
@@ -383,6 +401,9 @@ If a peer site changes its hostname, you can modify the replication configuratio
 
          :New Endpoint: `(required)` The new endpoint address and port to use.
 
+         For multi-node sites, use the URL or IP address of the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
+         For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
+
          .. image:: /images/minio-console/console-settings-site-replication-edit-endpoint.png
             :width: 600px
             :alt: Example of the MinIO Console's Edit Replication Endpoint screen
@@ -408,6 +429,8 @@ If a peer site changes its hostname, you can modify the replication configuratio
          Replace [DEPLOYMENT-ID] with the deployment ID of the site to update.
          
          Replace [NEW-ENDPOINT] with the new endpoint for the site.
+         For multi-node sites, use the URL or IP address of the load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
+         For such environments, pointing to a specific node within the deployment creates a single point of failure risk for replication.
 
 Remove a Site from Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
