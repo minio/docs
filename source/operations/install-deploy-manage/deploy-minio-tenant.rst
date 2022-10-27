@@ -124,20 +124,15 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 
    Take note of this value before the slash for use in this procedure.
 
-Storage as Persistent Volumes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Persistent Volumes
+~~~~~~~~~~~~~~~~~~
 
-MinIO automatically generates :kube-docs:`Persistent Volume Claims (PVC) <concepts/storage/persistent-volumes/#persistentvolumeclaims>` as part of deploying a MinIO Tenant. 
-The Operator generates one PVC for each volume in the tenant *plus* two PVC to support collecting Tenant Metrics and logs. 
-For example, deploying a Tenant with 16 volumes requires 18 (16 + 2) ``PV``.
-
-MinIO can use any Kubernetes Persistent Volume that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
+MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
 MinIO's consistency guarantees require the exclusive storage access that ``ReadWriteOnce`` provides.
-Defer to the documentation for your preferred Persistent Volume provider or plugin as to whether it supports the ``ReadWriteOnce`` access mode.
 
-For Kubernetes clusters where worker nodes have Direct Attached Storage, MinIO strongly recommends using the :minio-git:`DirectPV CSI driver>`. 
+For Kubernetes clusters where nodes have Direct Attached Storage, MinIO strongly recommends using the `DirectPV CSI driver <https://min.io/directpv?ref=docs>`__. 
 DirectPV provides a distributed persistent volume manager that can discover, format, mount, schedule, and monitor drives across Kubernetes nodes.
-DirectPV addresses the limitations of manually provisioning and monitoring ``local`` or ``hostPath`` Persistent Volumes.
+DirectPV addresses the limitations of manually provisioning and monitoring :kube-docs:`local persistent volumes <concepts/storage/volumes/#local>`.
 
 Deploy a Tenant using the MinIO Operator Console
 ------------------------------------------------
