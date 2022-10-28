@@ -27,8 +27,8 @@ To configure replication between arbitrary S3-compatible services, use :mc:`mc m
 
 MinIO relies on the immutability protections provided by :ref:`versioning <minio-bucket-versioning>` to support replication and resynchronization.
 
-Use :mc-cmd:`mc version info` to validate the versioning status of both the sourece and remote buckets. 
-se the :mc-cmd:`mc version enable` command to enable versioning as necessary.
+Use :mc-cmd:`mc version info` to validate the versioning status of both the source and remote buckets. 
+Use the :mc-cmd:`mc version enable` command to enable versioning as necessary.
 
 .. end-replication-requires-versioning
 
@@ -73,6 +73,7 @@ Bucket replication requires specific permissions on the source and destination d
          mc admin policy add TARGET ReplicationAdminPolicy /dev/stdin
          mc admin user add TARGET ReplicationAdmin LongRandomSecretKey
          mc admin policy set TARGET ReplicationAdminPolicy user=ReplicationAdmin
+
       MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`service account <minio-idp-service-account>` for bucket replication.
 
    .. tab-item:: Replication Remote User
