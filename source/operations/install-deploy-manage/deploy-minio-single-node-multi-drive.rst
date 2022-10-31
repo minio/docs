@@ -11,11 +11,11 @@ Deploy MinIO: Single-Node Multi-Drive
    :depth: 2
 
 The procedures on this page cover deploying MinIO in a Single-Node Multi-Drive (SNMD) configuration.
-This topology provides increased drive-level reliability and failover protection as compared to :ref:`Single-Node Single-Drive (SNSD) deployments <minio-snsd>`.
+|MNMD| deployments provide drive-level reliability and failover/recovery with node-level performance and scaling constraints.
 
 .. cond:: linux or macos or windows
 
-   For production environments, MinIO strongly recommends deploying with the :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` topology.
+   For production environments, MinIO strongly recommends deploying with the :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` topology for enterprise-grade performance, availability, and scalability.
 
 .. cond:: container
 

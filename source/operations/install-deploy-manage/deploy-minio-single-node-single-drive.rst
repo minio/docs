@@ -11,7 +11,7 @@ Deploy MinIO: Single-Node Single-Drive
    :depth: 2
 
 The procedures on this page cover deploying MinIO in a Single-Node Single-Drive (SNSD) configuration for early development and evaluation.
-This mode was previously called :guilabel:`Standalone Mode` or 'filesystem' mode.
+|SNSD| deployments provide no added reliability or availability beyond what the underlying storage volume implements (RAID, LVM, ZFS, etc.).
 
 Starting with :minio-release:`RELEASE.2022-06-02T02-11-04Z`, MinIO implements a zero-parity erasure coded backend for single-node single-drive deployments.
 This feature allows access to :ref:`erasure coding dependent features <minio-erasure-coding>` without the requirement of multiple drives.
@@ -27,6 +27,13 @@ See the documentation on :ref:`SNSD behavior with pre-existing data <minio-snsd-
 
    For extended development or production environments, deploy MinIO in a :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` topology
 
+.. important::
+
+   :minio-release:`RELEASE.2022-10-29T06-21-33Z` fully removes the deprecated Gateway/Filesystem backends.
+   MinIO returns an error if it starts up and detects existing Filesystem backend files.
+
+   To migrate from an FS-backend deployment, use :mc:`mc mirror` or :mc:`mc cp` to copy your data over to a new MinIO |SNSD| deployment.
+   You should also recreate any necessary users, groups, policies, and bucket configurations on the |SNSD| deployment.
 
 .. _minio-snsd-pre-existing-data:
 
@@ -51,11 +58,13 @@ The following table lists the possible storage volume states and MinIO behavior:
    * - Existing |SNSD| zero-parity objects and MinIO backend data
      - MinIO resumes in |SNSD| mode
 
-   * - Existing filesystem folders, files, and MinIO backend data
-     - MinIO resumes in the legacy filesystem ("Standalone") mode with no erasure-coding features
-
    * - Existing filesystem folders, files, but **no** MinIO backend data
      - MinIO returns an error and does not start
+
+   * - Existing filesystem folders, files, and legacy "FS-mode" backend data
+     - MinIO returns an error and does not start
+
+       .. versionchanged:: RELEASE.2022-10-29T06-21-33Z
 
 .. _deploy-minio-standalone:
 
