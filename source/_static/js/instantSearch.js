@@ -147,6 +147,14 @@ window.addEventListener("DOMContentLoaded", () => {
         item: function (data) {
           var returnString;
           var docUrl;
+          var refinedLenth = search.renderState.minio.refinementList.platform.items.filter(x => x.isRefined).length;
+
+          if (refinedLenth !== 1) {
+            searchModalEl.classList.add("search--show-platform");
+          }
+          else {
+            searchModalEl.classList.remove("search--show-platform");
+          }
 
           // If the query is a full-match of a lvl1 title,
           // display only the h1.
@@ -160,6 +168,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     ${icons.h1}
                   </i>
                   <div class="search__hits__title">${data._highlightResult.hierarchy.lvl1.value}</div>
+                  <div class="search__hits__platform">${data.platform}</div>
                 `;
           }
           // If the query is a full-match of a lvl2 title,
@@ -174,7 +183,10 @@ window.addEventListener("DOMContentLoaded", () => {
                     ${icons.h2}
                   </i>
                   <div class="search__hits__title">${data._highlightResult.hierarchy.lvl2.value}</div>
-                  <div class="search__hits__label">${data.hierarchy.lvl1}</div>
+                  <div class="search__hits__label">
+                    <div class="search__hits__platform">${data.platform}</div>
+                    ${data.hierarchy.lvl1}
+                  </div>
                 `;
           }
           // If the query is a full-match of a lvl3 title,
@@ -189,7 +201,10 @@ window.addEventListener("DOMContentLoaded", () => {
                     ${icons.h3}
                   </i>
                   <div class="search__hits__title">${data._highlightResult.hierarchy.lvl3.value}</div>
-                  <div class="search__hits__label">${data.hierarchy.lvl1}</div>
+                  <div class="search__hits__label">
+                    <div class="search__hits__platform">${data.platform}</div>
+                    ${data.hierarchy.lvl1}
+                  </div>
                 `;
           }
           // If the query is a full-match of any content,
@@ -206,6 +221,7 @@ window.addEventListener("DOMContentLoaded", () => {
                   </i>
                   <div class="search__hits__title">${data._snippetResult.content.value}</div>
                   <div class="search__hits__label">
+                    <div class="search__hits__platform">${data.platform}</div>
                     <span>${data.hierarchy.lvl1}</span>
                     ${data.hierarchy.lvl2 ? `${icons.chevron}` + `<span>${data.hierarchy.lvl2}</span>` : ""}
                     ${data.hierarchy.lvl3 ? `${icons.chevron}` + `<span>${data.hierarchy.lvl3}</span>` : ""}
@@ -215,7 +231,9 @@ window.addEventListener("DOMContentLoaded", () => {
             return false;
           }
 
-          return `<a target="_blank" href="${docUrl}">${returnString}</a>`;
+          return `<a target="_blank" href="${docUrl}">
+                    ${returnString}
+                  </a>`;
         },
       },
     }),
