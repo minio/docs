@@ -29,7 +29,7 @@ See the documentation on :ref:`SNSD behavior with pre-existing data <minio-snsd-
 
 .. important::
 
-   :minio-release:`RELEASE.2022-10-29T06-21-33Z` fully removes the deprecated Gateway/Filesystem backends.
+   :minio-release:`RELEASE.2022-10-29T06-21-33Z` fully removes the `deprecated Gateway/Filesystem <https://blog.min.io/deprecation-of-the-minio-gateway/>`__ backends.
    MinIO returns an error if it starts up and detects existing Filesystem backend files.
 
    To migrate from an FS-backend deployment, use :mc:`mc mirror` or :mc:`mc cp` to copy your data over to a new MinIO |SNSD| deployment.

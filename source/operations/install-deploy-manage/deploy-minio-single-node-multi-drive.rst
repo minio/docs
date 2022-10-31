@@ -11,7 +11,7 @@ Deploy MinIO: Single-Node Multi-Drive
    :depth: 2
 
 The procedures on this page cover deploying MinIO in a Single-Node Multi-Drive (SNMD) configuration.
-|MNMD| deployments provide drive-level reliability and failover/recovery with node-level performance and scaling constraints.
+|SNMD| deployments provide drive-level reliability and failover/recovery with performance and scaling limitations imposed by the single node.
 
 .. cond:: linux or macos or windows
 
