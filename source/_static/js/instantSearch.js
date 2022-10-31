@@ -212,7 +212,7 @@ window.addEventListener("DOMContentLoaded", () => {
           else if (
             data.hierarchy.lvl1 &&
             data._snippetResult &&
-            data._snippetResult.content.matchLevel === "full" || data._snippetResult.content.matchLevel === "partial"
+            data._snippetResult.content.matchLevel !== "none"
           ) {
             docUrl = data.url;
             returnString = `
