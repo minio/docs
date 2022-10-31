@@ -11,33 +11,11 @@ Deploy MinIO: Multi-Node Multi-Drive
    :local:
    :depth: 1
 
-Overview
---------
+The procedures on this page cover deploying MinIO in a Multi-Node Multi-Drive (MNMD) or "Distributed" configuration.
+|MNMD| deployments provide enterprise-grade performance, availability, and scalability and are the recommended topology for all production workloads.
 
-A distributed MinIO deployment consists of 4 or more drives/volumes managed by
-one or more :mc:`minio server` process, where the processes manage pooling the
-compute and storage resources into a single aggregated object storage resource.
-Each MinIO server has a complete picture of the distributed topology, such that
-an application can connect to any node in the deployment and perform S3
-operations.
-
-Distributed deployments implicitly enable :ref:`erasure coding
-<minio-erasure-coding>`, MinIO's data redundancy and availability feature that
-allows deployments to automatically reconstruct objects on-the-fly despite the
-loss of multiple drives or nodes in the cluster. Erasure coding provides
-object-level healing with less overhead than adjacent technologies such as RAID
-or replication. 
-
-Depending on the configured :ref:`erasure code parity <minio-ec-parity>`, a
-distributed deployment with ``m`` servers and ``n`` disks per server can
-continue serving read and write operations with only ``m/2`` servers or
-``m*n/2`` drives online and accessible.
-
-Distributed deployments also support the following features:
-
-- :ref:`Server-Side Object Replication <minio-bucket-replication-serverside>`
-- :ref:`Write-Once Read-Many Locking  <minio-bucket-locking>`
-- :ref:`Object Versioning <minio-bucket-versioning>`
+|MNMD| deployments support :ref:`erasure coding <minio-ec-parity>` configurations which tolerate the loss of up to half the nodes or drives in the deployment while continuing to serve read operations.
+Use the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator?ref=docs>`__ when planning and designing your MinIO deployment to explore the effect of erasure code settings on your intended topology.
 
 .. _deploy-minio-distributed-prereqs:
 
