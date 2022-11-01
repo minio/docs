@@ -218,6 +218,10 @@ else:
 
 exclude_patterns.extend(excludes)
 
+# MyST Parser Customization
+myst_gfm_only = True
+myst_heading_anchors = 2
+
 # Copy-Button Customization
 
 copybutton_selector = "div.copyable pre"
