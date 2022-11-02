@@ -9,6 +9,8 @@ nvm use stable
 
 export PATH=${PATH}:${HOME}/.local/bin
 
+pip install -r requirements.txt
+
 make clean
 make SYNC_SDK=TRUE linux
 make windows macos container k8s openshift
