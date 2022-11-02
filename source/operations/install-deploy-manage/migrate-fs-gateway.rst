@@ -174,7 +174,7 @@ Procedure
       mc mirror --preserve --watch SOURCE/BUCKET TARGET/BUCKET
 
    - Replace ``SOURCE/BUCKET`` with the alias and a bucket for the existing standalone deployment.
-   - Replace ``TARGET`` with the alias and corresponding bucket for the new deployment.
+   - Replace ``TARGET/BUCKET`` with the alias and corresponding bucket for the new deployment.
 
 #. After the initial mirror process completes, convert standalone deployment to be read only
 
