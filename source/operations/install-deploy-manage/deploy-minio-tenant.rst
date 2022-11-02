@@ -124,60 +124,15 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 
    Take note of this value before the slash for use in this procedure.
 
-Locally Attached Drives
-~~~~~~~~~~~~~~~~~~~~~~~
+Persistent Volumes
+~~~~~~~~~~~~~~~~~~
 
-MinIO *strongly recommends* using locally attached drives on each node intended
-to support the MinIO Tenant. MinIO’s strict read-after-write and
-list-after-write consistency model requires local disk filesystems (xfs, ext4,
-etc.). MinIO also shows best performance with locally-attached drives.
+MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
+MinIO's consistency guarantees require the exclusive storage access that ``ReadWriteOnce`` provides.
 
-MinIO automatically generates :kube-docs:`Persistent Volume Claims (PVC)
-<concepts/storage/persistent-volumes/#persistentvolumeclaims>` as part of
-deploying a MinIO Tenant. The Operator generates one PVC for each volume in the
-tenant *plus* two PVC to support collecting Tenant Metrics and logs. For
-example, deploying a Tenant with 16 volumes requires 18 (16 + 2) ``PV``.
-
-This procedure uses the MinIO :minio-git:`DirectPV <directpv>` driver to
-automatically provision Persistent Volumes from locally attached drives to
-support the generated PVC. See the :minio-git:`DirectPV Documentation
-<directpv/blob/master/README.md>` for installation and configuration
-instructions.
-
-For clusters which cannot deploy MinIO DirectPV, 
-:kube-docs:`Local Persistent Volumes <concepts/storage/volumes/#local>`.
-
-The following tabs provide example YAML objects for a local persistent 
-volume and a supporting 
-:kube-docs:`StorageClass <concepts/storage/storage-classes/>`:
-
-.. tab-set::
-   
-   .. tab-item:: Local Persistent Volume
-
-      The following YAML describes a :kube-docs:`Local Persistent Volume
-      <concepts/storage/volumes/#local>`:
-
-      .. include:: /includes/k8s/deploy-tenant-requirements.rst
-         :start-after: start-local-persistent-volume
-         :end-before: end-local-persistent-volume
-
-      Replace values in brackets ``<VALUE>`` with the appropriate 
-      value for the local drive.
-
-   .. tab-item:: Storage Class
-
-      The following YAML describes a 
-      :kube-docs:`StorageClass <concepts/storage/storage-classes/>` that 
-      meets the requirements for a MinIO Tenant:
-
-      .. include:: /includes/k8s/deploy-tenant-requirements.rst
-         :start-after: start-storage-class
-         :end-before: end-storage-class
-
-      The storage class *must* have ``volumeBindingMode: WaitForFirstConsumer``.
-      Ensure all Persistent Volumes provisioned to support the MinIO Tenant 
-      use this storage class.
+For Kubernetes clusters where nodes have Direct Attached Storage, MinIO strongly recommends using the `DirectPV CSI driver <https://min.io/directpv?ref=docs>`__. 
+DirectPV provides a distributed persistent volume manager that can discover, format, mount, schedule, and monitor drives across Kubernetes nodes.
+DirectPV addresses the limitations of manually provisioning and monitoring :kube-docs:`local persistent volumes <concepts/storage/volumes/#local>`.
 
 Deploy a Tenant using the MinIO Operator Console
 ------------------------------------------------
@@ -277,10 +232,9 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
        The Operator supports at most *one* MinIO Tenant per namespace.
 
    * - :guilabel:`Storage Class`
-     - Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant. 
+     - Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
 
-       This procedure assumes using the :minio-git:`DirectPV <directpv>` storage class ``directpv-min-io``. 
-       See the :minio-git:`DirectPV Documentation <directpv/blob/master/README.md>` for installation and configuration instructions.
+       Ensure the specified storage class has sufficient available Persistent Volume resources to match each generated Persistent Volume Claim.
 
    * - :guilabel:`Number of Servers`
      - The total number of MinIO server pods to deploy in the Tenant.

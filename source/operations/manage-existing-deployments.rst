@@ -28,3 +28,4 @@ Decommission
    /operations/install-deploy-manage/expand-minio-deployment
    /operations/install-deploy-manage/upgrade-minio-deployment
    /operations/install-deploy-manage/decommission-server-pool
+   /operations/install-deploy-manage/migrate-fs-gateway

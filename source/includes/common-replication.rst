@@ -27,8 +27,8 @@ To configure replication between arbitrary S3-compatible services, use :mc:`mc m
 
 MinIO relies on the immutability protections provided by :ref:`versioning <minio-bucket-versioning>` to support replication and resynchronization.
 
-Use :mc-cmd:`mc version info` to validate the versioning status of both the sourece and remote buckets. 
-se the :mc-cmd:`mc version enable` command to enable versioning as necessary.
+Use :mc-cmd:`mc version info` to validate the versioning status of both the source and remote buckets. 
+Use the :mc-cmd:`mc version enable` command to enable versioning as necessary.
 
 .. end-replication-requires-versioning
 
@@ -136,3 +136,11 @@ MinIO deployments in a site replication configuration do *not* replicate the cre
 - :ref:`Site configuration settings <minio-mc-admin-config>`
 
 .. end-mc-admin-replicate-what-does-not-replicate
+
+.. start-mc-admin-replicate-load-balancing
+
+When replicating to multi-node sites, use the URL or IP address of the site's load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
+
+Using a single node for configuring site replication creates a single point of failure, where that node being offline results in replication failure.
+
+.. end-mc-admin-replicate-load-balancing

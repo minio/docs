@@ -283,6 +283,8 @@ Some subsections may not be visible if the authenticated user does not have the 
 
       Use the :guilabel:`Users` and :guilabel:`Groups` views to assign a created policy to users and groups, respectively.
 
+.. _minio-console-monitoring:
+
 Monitoring
 ----------
 
@@ -295,25 +297,23 @@ Some subsections may not be visible if the authenticated user does not have the 
 
    .. tab-item:: Metrics
 
-      .. image:: /images/minio-console/console-metrics.png
+      .. image:: /images/minio-console/console-metrics-simple.png
          :width: 600px
-         :alt: MinIO Console Metrics displaying detailed data using Prometheus
+         :alt: MinIO Console Metrics displaying point-in-time data
          :align: center
 
       The Console :guilabel:`Dashboard` section displays metrics for the MinIO deployment. 
-      
-      The Console depends on a :ref:`configured Prometheus service <minio-metrics-collect-using-prometheus>` to generate the detailed metrics shown above.
+      The default view provides a high-level overview of the deployment status, including the uptime and availability of individual servers and drives.
 
-      The default metrics view provides a high-level overview of the deployment status, including the uptime and availability of individual servers and drives.
+      The Console also supports displaying time-series and historical data by querying a :prometheus-docs:`Prometheus <prometheus/latest/getting_started/>` service configured to scrape data from the MinIO deployment. 
+      Specifically, the MinIO Console uses :prometheus-docs:`Prometheus query API <prometheus/latest/querying/api/>` to retrieve stored metrics data and display historical metrics:
 
-      .. image:: /images/minio-console/console-metrics-simple.png
+      .. image:: /images/minio-console/console-metrics.png
          :width: 600px
          :alt: MinIO Console Metrics displaying simplified data
          :align: center
 
-      This view requires configuring a Prometheus service to scrape the deployment metrics. 
-      You can download these metrics as a ``.png`` image or ``.csv`` file.
-      See :ref:`minio-metrics-collect-using-prometheus` for complete instructions.
+      See :ref:`minio-console-metrics` for more information on the historical metric visualization.
 
    .. tab-item:: Logs
 

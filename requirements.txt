@@ -8,3 +8,5 @@ sphinx-sitemap == 2.2.0
 sphinx-togglebutton === 0.3.2
 sphinxcontrib-images === 0.9.4
 myst-parser === 0.18.0
+linkify === 1.4
+linkify-it-py === 2.0.0

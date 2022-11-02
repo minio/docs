@@ -14,69 +14,29 @@ MinIO is a software-defined high performance distributed object storage server.
 You can run MinIO on consumer or enterprise-grade hardware and a variety
 of operating systems and architectures.
 
-MinIO supports three deployment topologies: 
-
-Single-Node Single-Drive (SNSD or "Standalone")
-  A single MinIO server with a single storage volume or folder. 
-  |SNSD| deployment provides failover protections. Drive-level reliability and failover depends on the underlying storage volume.
-
-  |SNSD| deployments are best suited for evaluation and initial development of applications using MinIO for object storage.
-
-  |SNSD| deployments implement a zero-parity erasure coding backend and include support for the following erasure-coding dependent features:
-
-  - :ref:`Versioning <minio-bucket-versioning>`
-  - :ref:`Object Locking / Retention <minio-object-retention>`
-
-Single-Node Multi-Drive (SNMD or "Standalone Multi-Drive")
-  A single MinIO server with four or more storage volumes. 
-  |SNMD| deployments provide drive-level reliability and failover only.
-
-Multi-Node Multi-Drive (MNMD or "Distributed")
-  Multiple MinIO servers with at least four drives across all servers. 
-  The distributed |MNMD| topology supports production-grade object storage with drive and node-level availability and resiliency.
-
-  For tutorials on deploying or expanding a distributed MinIO deployment, see:
-
-  - :ref:`deploy-minio-distributed`
-  - :ref:`expand-minio-distributed`
+All MinIO deployments implement :ref:`Erasure Coding <minio-erasure-coding>` backends.
+You can deploy MinIO using one of the following topologies: 
 
 .. _minio-installation-comparison:
 
-The following table compares the key functional differences between MinIO deployments:
+:ref:`Single-Node Single-Drive <minio-snsd>` (SNSD or "Standalone")
+  Local development and evaluation with no/limited reliability
 
-.. list-table::
-   :header-rows: 1
-   :width: 100%
+:ref:`Single-Node Multi-Drive <minio-snmd>` (MNMD or "Standalone Multi-Drive")
+  Workloads with lower performance, scale, and capacity requirements
 
-   * - 
-     - :guilabel:`Single-Node Single-Drive`
-     - :guilabel:`Single-Node Multi-Drive`
-     - :guilabel:`Multi-Node Multi-Drive`
+  Drive-level reliability with configurable tolerance for loss of up to 1/2 all drives
 
-   * - Site-to-Site Replication
-     - Client-Side via :mc:`mc mirror`
-     - :ref:`Server-Side Replication <minio-bucket-replication>`
-     - :ref:`Server-Side Replication <minio-bucket-replication>`
+  Evaluation of multi-drive topologies and failover behavior.
 
-   * - Versioning
-     - No
-     - :ref:`Object Versioning <minio-bucket-versioning>`
-     - :ref:`Object Versioning <minio-bucket-versioning>`
+:ref:`Multi-Node Multi-Drive <minio-mnmd>` (MNMD or "Distributed")
+  Enterprise-grade high-performance object storage
 
-   * - Retention
-     - No
-     - :ref:`Write-Once Read-Many Locking <minio-bucket-locking>`
-     - :ref:`Write-Once Read-Many Locking <minio-bucket-locking>`
-
-   * - High Availability / Redundancy
-     - Drive Level Only (RAID and similar)
-     - Drive Level only with :ref:`Erasure Coding <minio-erasure-coding>`
-     - Drive and Server-Level with :ref:`Erasure Coding <minio-erasure-coding>`
-
-   * - Scaling
-     - No
-     - :ref:`Server Pool Expansion <expand-minio-distributed>`
-     - :ref:`Server Pool Expansion <expand-minio-distributed>`.
+  Multi Node/Drive level reliability with configurable tolerance for loss of up to 1/2 all nodes/drives
+       
+  Primary storage for AI/ML, Distributed Query, Analytics, and other Data Lake components
+       
+  Scalable for Petabyte+ workloads - both storage capacity and performance
 
 Site Replication
 ----------------

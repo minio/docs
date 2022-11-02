@@ -79,6 +79,7 @@ extlinks = {
     'podman-git'      : ('https://github.com/containers/podman/%s',''),
     'docker-docs'     : ('https://docs.docker.com/%s', ''),
     'openshift-docs'  : ('https://docs.openshift.com/container-platform/4.11/%s', ''),
+    'influxdb-docs'   : ('https://docs.influxdata.com/influxdb/v2.4/%s',''),
 
 }
 
@@ -216,6 +217,10 @@ else:
     excludes = []
 
 exclude_patterns.extend(excludes)
+
+# MyST Parser Customization
+myst_gfm_only = True
+myst_heading_anchors = 2
 
 # Copy-Button Customization
 
