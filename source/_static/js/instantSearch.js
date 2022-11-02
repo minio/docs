@@ -87,12 +87,12 @@ window.addEventListener("DOMContentLoaded", () => {
       autofocus: true,
       showReset: false,
       showSubmit: false,
-      showLoadingIndicator: false,
       placeholder: "Search Documentation",
       cssClasses: {
         input: "search__input",
         reset: "search__reset",
         form: "search__form",
+        loadingIndicator: "search__loading",
       },
       queryHook(query, search) {
         if (query !== "") {

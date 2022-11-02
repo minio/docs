@@ -391,3 +391,18 @@
 	font-size: $font-size-xs;
 	color: var(--text-muted-color);
 }
+
+.search__loading {
+	position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+	background-color: var(--is-search-bg);
+
+	svg {
+		stroke-width: 2px;
+
+		circle {
+			stroke: var(--is-loader-circle-stroke);
+		}
+	}
+}

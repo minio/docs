@@ -120,7 +120,8 @@ $theme-properties: (
     --is-search-bg: $white $dark-100,
     --is-search-icon: url(../img/icons/search-light.svg) url(../img/icons/search-dark.svg),
     --is-refine-list-border-color: $light-400 $dark-300,
-    --is-hit-platform-border-color: #c5cad0 $dark-300
+    --is-hit-platform-border-color: #c5cad0 $dark-300,
+    --is-loader-circle-stroke: #c2c8d1 $dark-300,
 );
 
 // Activate dark/light themes
