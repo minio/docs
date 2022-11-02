@@ -46,7 +46,7 @@ gulp.task('handleStyle', function() {
 
 // Minify and move JS
 gulp.task('handleJs', function() {
-    return gulp.src (paths.js.main)
+    return gulp.src (paths.js.files)
         .pipe($.terser())
         .pipe(gulp.dest (paths.js.dist))
         .pipe(connect.reload());

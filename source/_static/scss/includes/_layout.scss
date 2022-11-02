@@ -5,6 +5,14 @@
     @include breakpoint-max(breakpoints(lg)) {
       --content-padding: 1.25rem;
     }
+
+    &.locked {
+        &,
+        body,
+        .content {
+            overflow: hidden;
+        }
+    }
 }
 
 .content {

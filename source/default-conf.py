@@ -260,8 +260,10 @@ html_static_path = ['_static']
 html_css_files = ['css/main.min.css', 'custom.css']
 
 html_js_files = [
-    ('https://cdn.jsdelivr.net/npm/@docsearch/js@3', {'defer': 'defer'}),
+    ('https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js', {'defer': 'defer'}),
+    ('https://cdn.jsdelivr.net/npm/instantsearch.js@4', {'defer': 'defer'}),
     ('js/main.js', {'defer': 'defer'}),
+    ('js/instantSearch.js', {'defer': 'defer'}),
 ]
 
 # Add https://www.min.io/robots.txt to html_extra_path list once available.

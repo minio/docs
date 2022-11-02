@@ -35,7 +35,7 @@
 	}
 }
 
-.header__title {
+.header__top__title {
 	line-height: 100%;
     font-weight: 500;
     color: var(--header-headings-color);
@@ -50,6 +50,7 @@
 	display: flex;
 	gap: 0.5rem;
 	margin-left: auto;
+	z-index: 1;
 
 	.icon {
 		&:not(.icon--switch) {
@@ -87,6 +88,13 @@
 	}
 }
 
+.header__title {
+	font-size: 2.5rem;
+	text-align: center;
+	color: $white;
+	margin: 3rem 1rem 0;
+}
+
 #read-mode-toggle {
 	@include breakpoint-max(breakpoints(xl)) {
 		display: none;
@@ -97,20 +105,8 @@
 	&:not(.read-mode) {
 		.header__actions {
 			position: absolute;
-			bottom: 2rem;
+			bottom: 2.5rem;
 			right: var(--content-padding);
-		}
-
-		.header__hero {
-			text-align: center;
-			padding: 3rem 0 2rem;
-
-			& > h2 {
-				font-size: 2.5rem;
-				font-weight: $font-weight-bold;
-				color: var(--header-headings-color);
-				margin: 0 0 0.75rem;
-			}
 		}
 	}
 

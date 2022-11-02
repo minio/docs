@@ -8,7 +8,7 @@ $theme-properties: (
     --link-color: #006DA0 #85B3EE,
     --link-hover-color: #015378 #99c0f4,
     --text-color: $black $text-dark-color,
-    --text-muted-color: #4B4B4B #697995,
+    --text-muted-color: #5c5c5c #697995,
     --headings-color: $black #E3EEEF,
 
     // Theme
@@ -111,14 +111,17 @@ $theme-properties: (
     --alert-warning-code-bg: #f3dfe1 #3d1014,
     --alert-warning-link-decoration-color: #e3c3c6 #54141a,
 
-    // Doc Search
-    --docsearch-modal-background: #edf1f3 #1c232d,
-    --docsearch-container-background: rgba($black, 0.25) rgba(16, 21, 28, 0.851),
-    --ds-highlight-color: rgba(120, 133, 152, 0.125) rgba(16, 21, 28, 0.3),
-    --ds-search-bg: $white $dark-100,
-    --ds-search-placeholder-color: #7e7e7e #697995,
-    --ds-search-focus-shadow: rgba($white, 0.15) #1b232f,
-    --ds-scrollbar-bg: #bcc4cb #151b24,
+    // Search
+    --is-dropdown-bg: #edf1f3 #1c232d,
+    --is-container-background: rgba($black, 0.25) rgba(16, 21, 28, 0.851),
+    --is-highlight-color: rgba(120, 133, 152, 0.125) rgba(16, 21, 28, 0.3),
+    --is-search-focus-shadow: rgba($white, 0.15) #1b232f,
+    --is-hit-icon-color: $black $light-500,
+    --is-search-bg: $white $dark-100,
+    --is-search-icon: url(../img/icons/search-light.svg) url(../img/icons/search-dark.svg),
+    --is-refine-list-border-color: $light-400 $dark-300,
+    --is-hit-platform-border-color: #c5cad0 $dark-300,
+    --is-loader-circle-stroke: #c2c8d1 $dark-300,
 );
 
 // Activate dark/light themes

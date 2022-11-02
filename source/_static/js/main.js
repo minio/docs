@@ -351,39 +351,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   })();
 
   // --------------------------------------------------
-  // Search
-  // --------------------------------------------------
-  (function () {
-    const docSearchEl = document.getElementById("docsearch");
-    const platform = document.head.querySelector('meta[name="docsearch:platform"]').content
-
-    if(docSearchEl) {
-      // Init Docsearch
-      docsearch({
-        container: '#docsearch',
-        appId: 'E1CSOK3UC2',
-        indexName: 'minio',
-        apiKey: '6bc246d81fd3b79f51cf88f0b2481bac',
-        placeholder: 'Search Documentation',
-        searchParameters: {
-          facetFilters: ['platform:' + platform]
-        }
-      });
-
-      // Trigger Docsearch modal on custom button clicks
-      const searchToggleEls = document.querySelectorAll(".search-toggle");
-      const docSearchBtn = document.querySelector(".DocSearch-Button");
-
-      searchToggleEls.forEach(item => {
-        item.addEventListener("click", (event) => {
-          event.preventDefault();
-          docSearchBtn.click();
-        });
-      });
-    }
-  })();
-
-  // --------------------------------------------------
   // Custom scrollbars for `pre` code blocks
   // --------------------------------------------------
   (function () {
