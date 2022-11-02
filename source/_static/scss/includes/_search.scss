@@ -47,6 +47,10 @@
 		.search__input {
 			height: 3.1rem;
 		}
+
+		.search__meta-key {
+			display: none;
+		}
 	}
 }
 
@@ -72,6 +76,10 @@
 	.search__form {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;		
+	}
+
+	.search__meta-key {
+		opacity: 0;
 	}
 }
 
@@ -369,4 +377,17 @@
 	z-index: -1;
 	opacity: 0;
 	pointer-events: none;
+}
+
+.search__meta-key {
+	font-style: normal;
+	position: absolute;
+	top: 1rem;
+	right: 0.9rem;
+	pointer-events: none;
+	opacity: 100;
+	transition: opacity 300ms;
+	line-height: 1;
+	font-size: $font-size-xs;
+	color: var(--text-muted-color);
 }

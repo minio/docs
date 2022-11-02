@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
   const searchToggleEl = document.querySelectorAll(".search-toggle");
   const searchModalEl = document.getElementById("search");
-	const root = document.documentElement;
+  const root = document.documentElement;
 
   // Get the current doc platform
   const activePlatform = document
@@ -29,6 +29,11 @@ window.addEventListener("DOMContentLoaded", () => {
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>`,
   };
+
+  // Detect macOS
+  function isMac() {
+    return navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+  }
 
   // Algolia credintials
   const algoliaClient = algoliasearch(
@@ -91,18 +96,31 @@ window.addEventListener("DOMContentLoaded", () => {
       },
       queryHook(query, search) {
         if (query !== "") {
+          // Make search modal active
           searchModalEl.classList.add("search--focused");
+
+          // Clear the filters and select the active platform
+          setTimeout(() => {
+            const activeFilterEl = document.querySelector(".search__filters__checkbox[value='" + activePlatform + "']");
+            
+            if (activeFilterEl && !activeFilterEl.checked) {
+              activeFilterEl.click();
+            }
+          }, 50);
         } else {
+          // Make search modal inactive
           searchModalEl.classList.remove("search--focused");
 
-          // Reset filters
-          const filtersClearEl = document.querySelector("#search-clear .search-clear__btn");
-          const activeFilterEl = document.querySelector(".search__filters__checkbox[value='" + activePlatform + "']");
-
-          filtersClearEl.click();
-          activeFilterEl.click();
+          // Clear the filters
+          clearRefinements();
         }
+        
+        // Clear the filters on x click
+        document.querySelector(".search__reset").addEventListener("click", () => {
+          clearRefinements();
+        });
 
+        // Fire the search
         search(query);
       },
     }),
@@ -125,7 +143,7 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     }),
     instantsearch.widgets.clearRefinements({
-      container: '#search-clear',
+      container: "#search-clear",
       cssClasses: {
         button: "search-clear__btn",
       },
@@ -147,12 +165,14 @@ window.addEventListener("DOMContentLoaded", () => {
         item: function (data) {
           var returnString;
           var docUrl;
-          var refinedLenth = search.renderState.minio.refinementList.platform.items.filter(x => x.isRefined).length;
+          var refinedLenth =
+            search.renderState.minio.refinementList.platform.items.filter(
+              (x) => x.isRefined
+            ).length;
 
           if (refinedLenth !== 1) {
             searchModalEl.classList.add("search--show-platform");
-          }
-          else {
+          } else {
             searchModalEl.classList.remove("search--show-platform");
           }
 
@@ -219,12 +239,24 @@ window.addEventListener("DOMContentLoaded", () => {
                   <i class="search__hits__icon">
                     ${icons.content}
                   </i>
-                  <div class="search__hits__title">${data._snippetResult.content.value}</div>
+                  <div class="search__hits__title">${
+                    data._snippetResult.content.value
+                  }</div>
                   <div class="search__hits__label">
                     <div class="search__hits__platform">${data.platform}</div>
                     <span>${data.hierarchy.lvl1}</span>
-                    ${data.hierarchy.lvl2 ? `${icons.chevron}` + `<span>${data.hierarchy.lvl2}</span>` : ""}
-                    ${data.hierarchy.lvl3 ? `${icons.chevron}` + `<span>${data.hierarchy.lvl3}</span>` : ""}
+                    ${
+                      data.hierarchy.lvl2
+                        ? `${icons.chevron}` +
+                          `<span>${data.hierarchy.lvl2}</span>`
+                        : ""
+                    }
+                    ${
+                      data.hierarchy.lvl3
+                        ? `${icons.chevron}` +
+                          `<span>${data.hierarchy.lvl3}</span>`
+                        : ""
+                    }
                   </div>
                 `;
           } else {
@@ -239,10 +271,22 @@ window.addEventListener("DOMContentLoaded", () => {
     }),
   ]);
 
-	// Function to close and reset the search modal	
-  function closeSearchModal() {
+  // Function to clear search field and filters
+  function clearRefinements() {
+    const filtersClearEl = document.querySelector("#search-clear .search-clear__btn");
+    filtersClearEl?.click();
+
     root.classList.remove("locked");
     searchModalEl.classList.remove("search--active", "search--focused");
+  }
+
+  // Function to close and reset the search modal
+  function closeSearchModal() {
+    const searchResetEl = document.querySelector(".search__reset");
+    
+    setTimeout(() => {
+      searchResetEl.click();
+    });
   }
 
   // Toggle search modal on read-mode and mobile
@@ -258,28 +302,55 @@ window.addEventListener("DOMContentLoaded", () => {
         const instaSearchInputEl = document.querySelector(".search__input");
         instaSearchInputEl.focus();
       });
-
-      const searchResetEl = document.querySelector(".search__reset");
-      searchResetEl.addEventListener("click", () => {
-        closeSearchModal();
-      });
     });
   });
 
-	// Close the search on esc key press
+  // Keyboard events
   document.addEventListener(
     "keydown",
     (e) => {
-      if (
-        e.key === "Escape" &&
-        searchModalEl.classList.contains("search--active")
-      ) {
+      // Close the search on esc key press
+      if (e.key === "Escape") {
         closeSearchModal();
+      }
+
+      // Focus the search input on "Meta + K" key press
+      const searchInputEl = document.querySelector(".search__input");
+      var metaKey = isMac() ? e.metaKey : e.ctrlKey;
+      if (metaKey && e.key === "k") {
+        if (root.classList.contains("read-mode")) {
+          searchModalEl.classList.add("search--active");
+          searchInputEl.focus();
+        }
+
+        searchInputEl.focus();
+        window.scrollTo(0, 0);
       }
     },
     false
   );
 
-	// Start the search
+  // Start the search
   search.start();
+
+  // --------------------------------------------------
+  // Trigger search on keyboard shortcut
+  // meta + k
+  // --------------------------------------------------
+  const searchEl = document.getElementById("search-box");
+
+  if (searchEl) {
+    const metaKeyEl = document.createElement("i");
+    metaKeyEl.classList.add("search__meta-key");
+
+    if (isMac) {
+      metaKeyEl.classList.add("macos");
+      metaKeyEl.innerHTML = "⌘K";
+    } else {
+      metaKeyEl.classList.add("non-macos");
+      metaKeyEl.innerHTML = "Ctrl K";
+    }
+
+    searchEl.appendChild(metaKeyEl);
+  }
 });
