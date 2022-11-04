@@ -47,6 +47,16 @@ Syntax
    Gets a :ref:`configuration key <minio-server-configuration-settings>` on the
    MinIO deployment.
 
+.. mc-cmd:: export
+   :fullpath:
+
+   Exports any configuration settings created using `mc admin config set`.
+
+.. mc-cmd:: import
+   :fullpath:
+
+   Imports configuration settings exported using `mc admin config export`.
+   
 .. _minio-server-configuration-settings:
 
 Configuration Settings
