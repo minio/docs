@@ -32,21 +32,19 @@ This document outlines the steps required to successfully launch and migrate to 
    Standalone/file system mode continues to work on any release up to and including `RELEASE.2022-10-24T18-35-07Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-10-24T18-35-07Z>`__.
    To continue using a standalone deployment, install that MinIO release or any `earlier release <https://github.com/minio/minio/releases>`__.
 
-   Do not upgrade to any release later than ``RELEASE.2022-10-24T18-35-07Z``.
+
 
 Procedure
 ---------
 
-#. Retrieve the existing deployment's **environment variables**
+.. note:: 
+   
+   You can set MinIO configuration settings in environment variables and using :mc-cmd:`mc admin config set <mc admin config>`.
+   Depending on your current deployment setup, you may need to retrieve the values for both.
 
-   Use the :mc-cmd:`mc admin config` export command to retrieve the environment variables defined on the existing standalone MinIO deployment.
+   The procedure does not cover this, as there are many options you may define and multiple ways for retrieving the information.
 
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin config export ALIAS > config.txt
-
-   Replace ``ALIAS`` with the alias used for the existing standalone deployment you are retrieving values from.
+   For example, use ``env | grep MINIO_`` and check the contents of ``/etc/default/minio``.
 
 #. Create a new Single-Node Single-Drive MinIO deployment
 
@@ -59,7 +57,7 @@ Procedure
    Set the port to a custom point different than the existing standalone deployment.
 
 #. Add an alias for the new deployment with :mc:`mc alias set`
- 
+
    .. code-block:: shell
       :class: copyable
       
@@ -67,6 +65,17 @@ Procedure
 
    - Replace PATH with the IP address or hostname and port for the new deployment.
    - Replace ``ACCESSKEY`` and ``SECRETKEY`` with the credentials you used when creating the new deployment.
+
+#. Export the existing deployment's **configurations**
+
+   Use the :mc-cmd:`mc admin config export <mc admin config>` export command to retrieve the configurations defined for the existing standalone MinIO deployment.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config export ALIAS > config.txt
+
+   Replace ``ALIAS`` with the alias used for the existing standalone deployment you are retrieving values from. 
 
 #. Import **configurations** from existing standalone deployment to new deployment
 
@@ -86,17 +95,43 @@ Procedure
    
    - Replace ``ALIAS`` with the alias for the new deployment.
    
-#. Duplicate **buckets** from existing standalone deployment to new deployment
+#. Export **bucket metadata** from existing standalone deployment
 
-   Use :mc-cmd:`mc ls` with the ``--json`` flag to retrieve a list of the buckets that exist on the standalone deployment.
-   Use the list to recreate the buckets on the new deployment.
+   The following command exports bucket metadata from the existing deployment to a ``.zip`` file.
+
+   The data includes:
+
+   - bucket targets
+   - lifecycle rules
+   - notifications
+   - quotas
+   - locks
+   - versioning
+
+   The export includes the bucket metadata only.
+   No objects export from the existing deployment with this command.
 
    .. code-block:: shell
       :class: copyable
 
-      mc ls ALIAS --json
+      mc admin cluster bucket export ALIAS
 
-   - Replace ``ALIAS`` with the alias for the existing standalone deployment.
+   - Replace ``ALIAS`` with the alias for your existing deployment.
+
+   This command creates a ``cluster-metadata.zip`` file with metadata for each bucket.
+
+#. Import **bucket metadata** to the new deployment
+
+   The following command reads the contents of the exported bucket ``.zip`` file and creates buckets on the new deployment with the same configurations.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin cluster bucket import ALIAS cluster-metadata.zip
+
+   - Replace ``ALIAS`` with the alias for the new deployment.
+
+   The command creates buckets on the new deployment with the same configurations as provided by the metadata in the .zip file from the existing deployment.
 
 #. *(Optional)* Duplicate **tiers** from existing standalone deployment to new deployment
 
@@ -111,60 +146,38 @@ Procedure
    
    Use the list to recreate the tiers on the new deployment.
 
-#. Duplicate **policies** from existing standalone deployment to new deployment
+#. Export **IAM settings** from the existing standalone deployment to new deployment
 
-   Use :mc-cmd:`mc admin policy list` with the ``--json`` flag  to retrieve a list of policies that exist on the standalone deployment.
-   
-   .. code-block:: shell
-      :class: copyable
+   If you are using an external identity and access management provider, recreate those settings in the new deployment along with all associated policies.
 
-      mc admin policy list ALIAS --json
+   Use the following command to export IAM settings from the existing deployment.
+   This command exports:
 
-   - Replace ``ALIAS`` with the alias for the existing standalone deployment.
-
-   Use the list to recreate the policies on the new deployment.
-
-#. Duplicate **groups** from existing standalone deployment to new deployment
-
-   Use :mc-cmd:`mc admin group list` with the ``--json`` flag to retrieve a list of groups that exist on the standalone deployment.
+   - Groups and group mappings
+   - STS users and STS user mappings
+   - Policies
+   - Users and user mappings
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin group list ALIAS --json
+      mc admin cluster iam export ALIAS
 
-   - Replace ``ALIAS`` with the alias for the existing standalone deployment.
+   - Replace ``ALIAS`` with the alias for your existing deployment.
 
-   Use the list to recreate the groups on the new deployment.
+   This command creates a ``ALIAS-iam-info.zip`` file with IAM data.
 
-#. Duplicate **users** from existing standalone deployment to new deployment
+#. Import the **IAM settings** to the new deployment:
 
-   Use :mc-cmd:`mc admin user list` with the ``--json`` flag to retrieve a list of users with access key, policy name, and status.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin user list ALIAS --json
-
-   - Replace ``ALIAS`` with the alias for the existing standalone deployment.
-
-   Use the list to recreate the users on the new deployment.
-
-   Note: You will need to define each user's ``SECRETKEY`` on the new deployment.
-   Make note of the ``SECRETKEY`` for each user to let them know their new credentials.
-
-#. Duplicate **service accounts** from existing standalone deployment to new deployment
-
-   Use :mc-cmd:`mc admin user svcacct list` with the ``--json`` flag to list existing service accounts on the standalone deployment.
+   Use the exported file to create the IAM setting on the new deployment.
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin user svcacct list ALIAS --json
+      mc admin cluster iam import ALIAS alias-iam-info.zip
 
-   - Replace ``ALIAS`` with the alias for the existing standalone deployment.
-
-   Use the list to recreate the service accounts on the new deployment.
+   - Replace ``ALIAS`` with the alias for the new deployment.
+   - Replace the name of the zip file with the name for the existing deployment's file.
 
 #. Use :mc:`mc mirror` with the :mc-cmd:`~mc mirror --preserve` and :mc-cmd:`~mc mirror --watch` flags on the standalone deployment to move objects to the new |SNSD| deployment
 
@@ -176,28 +189,14 @@ Procedure
    - Replace ``SOURCE/BUCKET`` with the alias and a bucket for the existing standalone deployment.
    - Replace ``TARGET/BUCKET`` with the alias and corresponding bucket for the new deployment.
 
-#. After the initial mirror process completes, convert standalone deployment to be read only
+#. Stop writes to the standalone deployment from any S3 or POSIX client
 
-   One options for doing this is to remove policies that provide write permissions from users or groups with :mc:`mc admin policy`'s ``unset`` command.
+#. Wait for ``mc mirror`` to complete for all buckets for any remaining operations
 
-   .. code-block:: shell
+#. Stop the server for both deployments
 
-      mc admin policy unset ALIAS POLICYNAME [user=USERNAME | group=GROUPNAME]
+#. Restart the new MinIO deployment with the ports used for the previous standalone deployment
 
-   - Replace ``ALIAS`` with the alias for the existing standalone deployment 
-   - Replace ``POLICYNAME`` with the name of a policy on the existing standalone deployment.
-   - Replace either ``USERNAME`` or ``GROUPNAME`` with either the user or group assigned the policy.
-
-   Use care to not remove permissions for the user running the ``mc mirror`` command.
-
-#. Wait for ``mc mirror`` to complete for all buckets for any remaining operations.
-
-#. Stop the server for both deployments.
-
-#. Restart the new MinIO deployment with the ports used for the previous standalone deployment.
-
-   Refer to step four in the deploy |SNSD| :ref:`documentation <deploy-minio-standalone>`.   
-
-#. Confirm the new deployment works as expected.
-
-   Verify that users and service accounts have access to the buckets and objects as usual.
+   Refer to step four in the deploy |SNSD| :ref:`documentation <deploy-minio-standalone>`.
+   
+   Ensure you apply all environment variables and runtime configuration settings, and validate the behavior.

@@ -29,9 +29,6 @@ The :mc:`mc admin config` command manages configuration settings for the
       :start-after: start-minio-only
       :end-before: end-minio-only
 
-Examples
---------
-
 Syntax
 ------
 
@@ -44,8 +41,17 @@ Syntax
 .. mc-cmd:: get
    :fullpath:
 
-   Gets a :ref:`configuration key <minio-server-configuration-settings>` on the
-   MinIO deployment.
+   Gets a :ref:`configuration key <minio-server-configuration-settings>` on the MinIO deployment.
+
+.. mc-cmd:: export
+   :fullpath:
+
+   Exports any configuration settings created using `mc admin config set`.
+
+.. mc-cmd:: import
+   :fullpath:
+
+   Imports configuration settings exported using `mc admin config export`.
 
 .. _minio-server-configuration-settings:
 
