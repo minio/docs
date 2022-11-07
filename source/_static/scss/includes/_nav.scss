@@ -461,6 +461,7 @@
 
     .search-toggle {
         margin-left: auto;
+		margin-right: -0.5rem;
 		position: relative;
 		z-index: 2;
         
@@ -523,5 +524,32 @@
 		z-index: 1;
 		height: 100%;
 		pointer-events: none;
+	}
+}
+
+.search-toggle--keyboard {
+	height: 2.5rem;
+	width: 2.5rem;
+	padding: 0.2rem;
+	text-align: center;
+	line-height: 1;
+
+	.search-meta-key {
+		font-size: 0.6rem;
+		display: block;
+		border: 1px solid var(--is-meta-key-border-color);
+		border-radius: $border-radius-sm;
+		padding: 0.1rem 0.2rem;
+		margin: 0.15rem auto 0;
+		font-style: normal;
+		width: fit-content;
+		color: var(--text-muted-color);
+		transition: background-color 200ms;
+	}
+
+	&:hover {
+		.search-meta-key {
+			background-color: var(--is-search-bg);
+		}
 	}
 }

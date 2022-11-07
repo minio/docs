@@ -30,6 +30,15 @@ window.addEventListener("DOMContentLoaded", () => {
                 </svg>`,
   };
 
+  // Template for empty search results
+  function noResultTemplate(query) {
+    return `<div class="search__empty">
+              ${icons.noResult}</br>
+              No results have been found for <span>${query}</span>.</br>
+              Please rephrase your query!
+            </div>`;
+  }
+
   // Detect macOS
   function isMac() {
     return navigator.platform.toUpperCase().indexOf("MAC") >= 0;
@@ -101,24 +110,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
           // Clear the filters and select the active platform
           setTimeout(() => {
-            const activeFilterEl = document.querySelector(".search__filters__checkbox[value='" + activePlatform + "']");
-            
+            const activeFilterEl = document.querySelector(
+              ".search__filters__checkbox[value='" + activePlatform + "']"
+            );
+
             if (activeFilterEl && !activeFilterEl.checked) {
               activeFilterEl.click();
             }
           }, 50);
         } else {
-          // Make search modal inactive
-          searchModalEl.classList.remove("search--focused");
-
           // Clear the filters
           clearRefinements();
         }
-        
+
         // Clear the filters on x click
-        document.querySelector(".search__reset").addEventListener("click", () => {
-          clearRefinements();
-        });
+        document
+          .querySelector(".search__reset")
+          .addEventListener("click", () => {
+            clearRefinements("btn");
+          });
 
         // Fire the search
         search(query);
@@ -157,11 +167,9 @@ window.addEventListener("DOMContentLoaded", () => {
         item: "search__hits__item",
       },
       templates: {
-        empty: `<div>
-                      ${icons.noResult}</br>
-                      No results have been found for <span>{{ query }}</span>.</br>
-                      Please rephrase your query!
-                    </div>`,
+        empty: function (data) {
+          return data.query !== "" ? noResultTemplate(data.query) : "";
+        },
         item: function (data) {
           var returnString;
           var docUrl;
@@ -272,18 +280,30 @@ window.addEventListener("DOMContentLoaded", () => {
   ]);
 
   // Function to clear search field and filters
-  function clearRefinements() {
-    const filtersClearEl = document.querySelector("#search-clear .search-clear__btn");
+  function clearRefinements(trigger) {
+    const filtersClearEl = document.querySelector(
+      "#search-clear .search-clear__btn"
+    );
     filtersClearEl?.click();
 
-    root.classList.remove("locked");
-    searchModalEl.classList.remove("search--active", "search--focused");
+    const removeClasses = function () {
+      root.classList.remove("locked");
+      searchModalEl.classList.remove("search--active", "search--focused");
+    };
+
+    if (trigger === "btn") {
+      removeClasses();
+    } else {
+      if (!root.classList.contains("read-mode")) {
+        removeClasses();
+      }
+    }
   }
 
   // Function to close and reset the search modal
   function closeSearchModal() {
     const searchResetEl = document.querySelector(".search__reset");
-    
+
     setTimeout(() => {
       searchResetEl.click();
     });
@@ -338,19 +358,13 @@ window.addEventListener("DOMContentLoaded", () => {
   // meta + k
   // --------------------------------------------------
   const searchEl = document.getElementById("search-box");
+  const searchToggleBtnEl = document.querySelector(".search-toggle--keyboard");
 
   if (searchEl) {
-    const metaKeyEl = document.createElement("i");
-    metaKeyEl.classList.add("search__meta-key");
+    var metaKey = isMac() ? "⌘K" : "Ctrl+K";
 
-    if (isMac) {
-      metaKeyEl.classList.add("macos");
-      metaKeyEl.innerHTML = "⌘K";
-    } else {
-      metaKeyEl.classList.add("non-macos");
-      metaKeyEl.innerHTML = "Ctrl K";
-    }
-
-    searchEl.appendChild(metaKeyEl);
+    [searchEl, searchToggleBtnEl].forEach((item) => {
+      item.insertAdjacentHTML("beforeend", `<i class="search-meta-key">${metaKey}</i>`);
+    });
   }
 });
