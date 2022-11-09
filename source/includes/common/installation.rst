@@ -43,7 +43,7 @@ Site Replication
 
 Site replication expands the features of bucket replication to include IAM, security tokens, service accounts, and bucket features the same across all sites.
 
-:ref:`Site replication <minio-site-replication-overview>` links multiple MinIO deployments together and keeps the buckets, objects, and Identify and Access Management (IAM) settings in sync across all connected sites.
+:ref:`Site replication <minio-site-replication-overview>` links multiple MinIO deployments together and keeps the buckets, objects, and Identity and Access Management (IAM) settings in sync across all connected sites.
 
 .. include:: /includes/common-replication.rst
    :start-after: start-mc-admin-replicate-what-replicates
