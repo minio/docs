@@ -22,7 +22,7 @@ You can deploy MinIO using one of the following topologies:
 :ref:`Single-Node Single-Drive <minio-snsd>` (SNSD or "Standalone")
   Local development and evaluation with no/limited reliability
 
-:ref:`Single-Node Multi-Drive <minio-snmd>` (MNMD or "Standalone Multi-Drive")
+:ref:`Single-Node Multi-Drive <minio-snmd>` (SNMD or "Standalone Multi-Drive")
   Workloads with lower performance, scale, and capacity requirements
 
   Drive-level reliability with configurable tolerance for loss of up to 1/2 all drives
