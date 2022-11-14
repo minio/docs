@@ -174,6 +174,16 @@ The following table lists :mc-cmd:`mc` commands:
        action granted by the policy without :ref:`authentication
        <minio-authentication-and-identity-management>`.
      
+   * - | :mc:`mc batch generate`
+       | :mc:`mc batch start`
+       | :mc:`mc batch list`
+       | :mc:`mc batch status`
+       | :mc:`mc batch describe`
+     - The ``mc batch`` commands allow you to run one or more job tasks on a MinIO deployment.
+       Specify the jobs to run in a YAML-formatted file you can start generating with :mc:`mc batch generate`. 
+       Use :mc:`mc batch start` to when you are ready to begin the job(s) defined in the file.
+       Display current jobs with :mc:`mc batch list`, see current status with :mc:`mc batch status`, and output the full definition for a current job with :mc:`mc batch describe`.
+
    * - :mc:`mc cat`
      - .. include:: /reference/minio-mc/mc-cat.rst
           :start-after: start-mc-cat-desc
@@ -471,6 +481,11 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-anonymous-links
    /reference/minio-mc/mc-anonymous-get-json
    /reference/minio-mc/mc-anonymous-set-json
+   /reference/minio-mc/mc-batch-describe
+   /reference/minio-mc/mc-batch-generate
+   /reference/minio-mc/mc-batch-list
+   /reference/minio-mc/mc-batch-start
+   /reference/minio-mc/mc-batch-status
    /reference/minio-mc/mc-cat
    /reference/minio-mc/mc-cp
    /reference/minio-mc/mc-diff

@@ -94,6 +94,7 @@ and non-protected.
       /administration/identity-access-management
       /administration/server-side-encryption
       /administration/bucket-replication
+      /administration/batch-framework
       /administration/concepts
 
 
@@ -119,6 +120,7 @@ and non-protected.
       /administration/identity-access-management
       /administration/server-side-encryption
       /administration/bucket-replication
+      /administration/batch-framework
       /administration/concepts
 
 .. cond:: k8s or openshift or container or macos or windows
