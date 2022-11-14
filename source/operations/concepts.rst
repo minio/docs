@@ -126,6 +126,27 @@ There are several options to manage your MinIO deployments and clusters:
 - The :ref:`MinIO Console <minio-console>` graphical user interface for individual instances
 - In Kubernetes, with the :ref:`MinIO Operator Console <minio-operator-console>`
 
+.. _minio-rebalance:
+
+How do I manage object distribution across a MinIO deployment?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO optimizes storage of objects across available pools by writing new objects (that is, objects with no existing versions) to the server pool with the most free space compared total amount of free space on all available server pools.
+MinIO does not perform the costly action of rebalancing objects from older pools to newer pools.
+Instead, new objects typically route to the new pool as it has the most free space.
+As that pool fills, new write operations eventually balance out across all pools in the deployment.
+For more information on write preference calculation logic, see :ref:`Writing Files <minio-writing-files>` below.
+
+Rebalancing data across all pools after an expansion is an expensive operation that requires scanning the entire deployment and moving objects between pools.
+This may take a long time to complete depending on the amount of data to move.
+
+Starting with MinIO Client version RELEASE.2022-11-07T23-47-39Z, you can manually initiate a rebalancing operation across all server pools using :mc:`mc admin rebalance`. 
+
+Rebalancing does not block ongoing operations and runs in parallel to all other I/O. 
+This can result in reduced performance of regular operations. 
+Consider scheduling rebalancing operations during non-peak periods to avoid impacting production workloads. 
+You can start and stop rebalancing at any time
+
 How do I upload objects to MinIO?
 ---------------------------------
 

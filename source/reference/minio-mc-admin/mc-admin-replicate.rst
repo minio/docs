@@ -85,7 +85,7 @@ Syntax
 
             mc admin replicate add minio1 minio2 minio3
 
-         The following command explands an existing site replication that includes peer site ``minio1`` to an additional peer site, ``minio5``.
+         The following command expands an existing site replication that includes peer site ``minio1`` to an additional peer site, ``minio5``.
          ``minio5`` contains no data.
 
          .. code-block:: shell

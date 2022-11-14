@@ -28,9 +28,9 @@ Multi-Site Active-Active replication configurations can span multiple racks, dat
 
 .. seealso::
 
-   - Use the :mc:`mc replicate edit` command to modify an existing replication rule.
+   - Use the :mc:`mc replicate update` command to modify an existing replication rule.
 
-   - Use the :mc:`mc replicate edit` command with the :mc-cmd:`--state "disable" <mc replicate edit --state>` flag to disable an existing replication rule.
+   - Use the :mc:`mc replicate update` command with the :mc-cmd:`--state "disable" <mc replicate update --state>` flag to disable an existing replication rule.
 
    - Use the :mc:`mc replicate rm` command to remove an existing replication rule.
 
@@ -86,7 +86,7 @@ Click to expand any of the following:
 
    MinIO supports automatically replicating existing objects in a bucket.
 
-   MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate` and including the ``existing-objects`` replication feature flag. 
+   MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
    This procedure includes the required flags for enabling replication of existing objects.
 
 .. dropdown:: Replication of Delete Operations
@@ -99,7 +99,7 @@ Click to expand any of the following:
 
    - For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
 
-   MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate edit --replicate`. 
+   MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate`. 
    This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
    MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 

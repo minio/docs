@@ -104,14 +104,14 @@ Parameters
 
    *Optional* Creates the replication rule in the "disabled" state. MinIO does
    not begin replicating objects using the rule until it is enabled using
-   :mc:`mc replicate edit`.
+   :mc:`mc replicate update`.
 
    Objects created while replication is disabled are not
    immediately eligible for replication after enabling the rule.
    You must explicitly enable replication of existing
    objects by including ``"existing-objects"`` to the list of
    replication features specified to 
-   :mc-cmd:`mc replicate edit --replicate`. See
+   :mc-cmd:`mc replicate update --replicate`. See
    :ref:`minio-replication-behavior-existing-objects` for more
    information.
 
@@ -371,7 +371,7 @@ metadata-only update to an object with the ``REPLICA`` status, MinIO marks the
 object as ``PENDING`` and eligible for replication.
 
 To disable metadata synchronization, use the 
-:mc-cmd:`mc replicate edit --replicate` command and omit 
+:mc-cmd:`mc replicate update --replicate` command and omit 
 ``replica-metadata-sync`` from the replication feature list. 
 
 Replication of Delete Operations

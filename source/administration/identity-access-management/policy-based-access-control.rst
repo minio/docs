@@ -772,6 +772,10 @@ services:
 .. policy-action:: admin:StartBatchJob
 
    Allows user to begin a batch job run.
+   
+.. policy-action:: admin:Rebalance
+
+   Allows access to start, query, or stop a rebalancing of objects across pools with varying free storage space.
 
 ``mc admin`` Policy Condition Keys
 ----------------------------------
