@@ -60,9 +60,10 @@ Procedure
    .. code-block:: shell
       :class: copyable
       
-      mc alias set PATH ACCESSKEY SECRETKEY
+      mc alias set NEWALIAS PATH ACCESSKEY SECRETKEY
 
-   - Replace PATH with the IP address or hostname and port for the new deployment.
+   - Replace ``NEWALIAS`` with the alias to create for the deployment.
+   - Replace ``PATH`` with the IP address or hostname and port for the new deployment.
    - Replace ``ACCESSKEY`` and ``SECRETKEY`` with the credentials you used when creating the new deployment.
 
 #. Export the existing deployment's **configurations**
