@@ -116,7 +116,7 @@ The command accepts the following arguments:
    .. important::
 
       MinIO recommends locally-attached drives, where the
-      :mc-cmd:`~minio server DIRECTORIES` path points to each disk on the
+      :mc-cmd:`~minio server DIRECTORIES` path points to each drive on the
       host machine. MinIO recommends *against* using network-attached
       storage, as network latency reduces performance of those drives
       compared to locally-attached storage.

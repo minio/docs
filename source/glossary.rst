@@ -87,7 +87,7 @@ Glossary
      The object may or may not be encrypted on the origin or destination storage devices.
    
    erasure coding
-     A technology that splits :term:`objects` into multiple shards and writes the shards to multiple, separate disks.
+     A technology that splits :term:`objects` into multiple shards and writes the shards to multiple, separate drives.
      
      Depending on the :term:`topology` used, erasure coding allows for loss of drives or nodes within a MinIO deployment without losing read or write access.
 
@@ -121,7 +121,7 @@ Glossary
      Optionally, MinIO users can authenticate with credentials from a 3rd party identify provider (IDP), including either OpenID or LDAP providers.
 
    JBOD 
-     Initialism for "Just A Bunch of Disks".
+     Initialism for "Just A Bunch of Drives".
      JBOD is a storage device enclosure that holds many hard drives.
      These drives can combine into one logical drive unit.
      

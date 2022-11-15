@@ -8,6 +8,7 @@
    :local:
    :depth: 1
 
+.. mc:: mc support
 .. mc:: mc support diag
 
 Description

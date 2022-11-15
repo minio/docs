@@ -83,7 +83,7 @@ Versioning and Storage Capacity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO does not perform incremental or differential-type versioning. For
-mutation-heavy workloads, this may result in substantial disk usage by
+mutation-heavy workloads, this may result in substantial drive usage by
 older or aged object versions.
 
 For example, consider a 1GB object containing log data. An application

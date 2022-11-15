@@ -54,7 +54,7 @@ Alternatively, you can configure MinIO to authenticate with one of several exter
 How does MinIO secure data?
 ---------------------------
 
-MinIO supports methods that encode objects while on disk (encryption-at-rest) and during transition from one location to another (encryption-in-transit, or "in flight").
+MinIO supports methods that encode objects while on drive (encryption-at-rest) and during transition from one location to another (encryption-in-transit, or "in flight").
 When enabled, MinIO utilizes :ref:`server-side encryption <minio-encryption-overview>` to write objects in an encrypted state.
 To retrieve and read an encrypted object, the user must have appropriate access privileges and also provide the object's decryption key.
 

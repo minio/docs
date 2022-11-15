@@ -25,7 +25,7 @@ to regulatory and compliance requirements around secure locking and erasure.
 
 The procedure on this page configures and enables Server-Side Encryption
 with Client-Managed Keys (SSE-C). MinIO SSE-C supports client-driven
-encryption of objects *before* writing the object to disk. Clients must
+encryption of objects *before* writing the object to the drive. Clients must
 specify the correct key to decrypt objects for read operations.
 
 MinIO SSE-C is functionally compatible with Amazon

@@ -39,7 +39,7 @@ Local JBOD Storage with Sequential Mounts
    :class: note
 
    MinIO's strict **read-after-write** and **list-after-write** consistency
-   model requires local disk filesystems.
+   model requires local drive filesystems.
 
    MinIO cannot provide consistency guarantees if the underlying storage
    volumes are NFS or a similar network-attached storage volume. 

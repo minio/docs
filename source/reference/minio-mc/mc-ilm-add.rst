@@ -32,13 +32,13 @@ The command supports adding both :ref:`Transition (Tiering) <minio-lifecycle-man
       .. code-block:: shell
          :class: copyable
 
-         mc ilm add --expiry-days 90 --noncurrentversion-expiry-days 30  mydata/myminio
+         mc ilm add --expire-days 90 --noncurrent-expire-days 30  mydata/myminio
          
-         mc ilm add --expired-object-delete-marker mydata/myminio
+         mc ilm add --expire-delete-marker mydata/myminio
 
          mc ilm add --transition-days 30 --tier "COLDTIER" mydata/myminio
          
-         mc ilm add --noncurrentversion-transition-days 7 --noncurrent-version-transition-tier "COLDTIER" 
+         mc ilm add --noncurrent-transition-days 7 --noncurrent-transition-tier "COLDTIER" 
 
       The configured rules have the following effect:
 
@@ -55,18 +55,18 @@ The command supports adding both :ref:`Transition (Tiering) <minio-lifecycle-man
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] ilm add                                             \
-                          --expiry-days "integer"                             \
-                          [--prefix string]                                   \
-                          [--tags string]                                            \
-                          [--transition-days "string"]                       \
-                          [--tier "string"]                                   \
-                          [--expired-object-delete-marker]                    \
-                          [--noncurrentversion-expiration-days "integer"]     \
-                          [--noncurrentversion-transition-days "integer"]     \
-                          [--noncurrentversion-tier "string"]                 \
-                          [--newer-noncurrentversions-expiration "integer"]   \
-                          [--newer-noncurrentversions-transition "integer"]   \
+         mc [GLOBALFLAGS] ilm add                                    \
+                          [--prefix string]                          \
+                          [--tags string]                            \
+                          --expire-days "integer"                    \
+                          [--expire-delete-marker]                   \
+                          [--transition-days "string"]               \
+                          [--transition-tier "string"]               \
+                          [--noncurrent-expire-days "integer"]       \
+                          [--noncurrent-expire-newer "integer"]      \
+                          [--noncurrent-transition-days "integer"]   \
+                          [--noncurrent-transition-newer "integer"]  \
+                          [--noncurrent-transition-tier "string"]    \
                           ALIAS
 
       .. include:: /includes/common-minio-mc.rst
@@ -100,7 +100,16 @@ Parameters
 
    The command creates a rule that expires objects in the ``mydata`` bucket of the ``myminio`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
 
-.. mc-cmd:: --expiry-days
+.. mc-cmd:: --tags
+   :optional:
+
+   One or more ampersand ``&``-delimited key-value pairs describing the object tags to use for filtering objects to which the lifecycle configuration rule applies.
+
+   This option is mutually exclusive with the following option:
+
+   - :mc-cmd:`~mc ilm add --expire-delete-marker`
+
+.. mc-cmd:: --expire-days
    :required:   
 
    The number of days to retain an object after being created. 
@@ -108,7 +117,7 @@ Parameters
    Specify the number of days as an integer, e.g. ``30`` for 30 days.
 
    For versioned buckets, the expiry rule applies only to the *current* object version. 
-   Use the :mc-cmd:`~mc ilm add --noncurrentversion-expiration-days` option to apply expiration behavior to noncurrent object versions.
+   Use the :mc-cmd:`~mc ilm add --noncurrent-expire-days` option to apply expiration behavior to noncurrent object versions.
 
    MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
@@ -116,11 +125,11 @@ Parameters
 
    Mutually exclusive with the following options:
 
-   - :mc-cmd:`~mc ilm add --expired-object-delete-marker`
+   - :mc-cmd:`~mc ilm add --expire-delete-marker`
 
    For more complete documentation on object expiration, see :ref:`minio-lifecycle-management-expiration`.
 
-.. mc-cmd:: --expired-object-delete-marker
+.. mc-cmd:: --expire-delete-marker
    :optional:
 
    Specify this option to direct MinIO to remove delete markers for objects with no remaining object versions. 
@@ -129,7 +138,7 @@ Parameters
    This option is mutually exclusive with the following option:
    
    - :mc-cmd:`~mc ilm add --tags`
-   - :mc-cmd:`~mc ilm add --expiry-days`
+   - :mc-cmd:`~mc ilm add --expire-days`
 
    MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
@@ -142,13 +151,13 @@ Parameters
    :optional:
    
    The number of calendar days from object creation after which MinIO marks an object as eligible for transition. 
-   MinIO transitions the object to the configured remote tier specified to the :mc-cmd:`~mc ilm add --tier`. 
+   MinIO transitions the object to the configured remote tier specified to the :mc-cmd:`~mc ilm add --transition-tier`. 
    Specify the number of days as an integer, e.g. ``30`` for 30 days.
 
    For versioned buckets, the transition rule applies only to the *current* object version. 
-   Use the :mc-cmd:`~mc ilm add --noncurrentversion-transition-days` option to apply transition behavior to noncurrent object versions.
+   Use the :mc-cmd:`~mc ilm add --noncurrent-transition-days` option to apply transition behavior to noncurrent object versions.
 
-   Requires specifying :mc-cmd:`~mc ilm add --tier`.
+   Requires specifying :mc-cmd:`~mc ilm add --transition-tier`.
 
    MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
@@ -156,7 +165,7 @@ Parameters
 
    For more complete documentation on object transition, see :ref:`minio-lifecycle-management-tiering`.
 
-.. mc-cmd:: --tier
+.. mc-cmd:: --transition-tier
    :optional:
 
    The remote tier to which MinIO :ref:`transition objects <minio-lifecycle-management-tiering>`.
@@ -164,16 +173,7 @@ Parameters
 
    Required if specifying :mc-cmd:`~mc ilm add --transition-days`.
 
-.. mc-cmd:: --tags
-   :optional:
-
-   One or more ampersand ``&``-delimited key-value pairs describing the object tags to use for filtering objects to which the lifecycle configuration rule applies.
-
-   This option is mutually exclusive with the following option:
-
-   - :mc-cmd:`~mc ilm add --expired-object-delete-marker`
-
-.. mc-cmd:: --noncurrentversion-expiration-days
+.. mc-cmd:: --noncurrent-expire-days
    :optional:
 
    The number of days to retain an object version after becoming *non-current* (i.e. a different version of that object is now the `HEAD`).
@@ -185,14 +185,14 @@ Parameters
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
-.. mc-cmd:: --noncurrentversion-transition-days
+.. mc-cmd:: --noncurrent-transition-days
    :optional:
 
-   The number of days an object has been non-current (i.e. replaced by a newer version of that same object) after which MinIO marks the object   version as eligible for transition. 
-   MinIO transitions the object to the configured remote tier specified to the :mc-cmd:`~mc ilm add --tier` once the system host datetime passes that calendar date.
+   The number of days an object has been non-current (i.e. replaced by a newer version of that same object) after which MinIO marks the object version as eligible for transition. 
+   MinIO transitions the object to the configured remote tier specified to the :mc-cmd:`~mc ilm add --transition-tier` once the system host datetime passes that calendar date.
 
    This option has no effect on non-versioned buckets. 
-   Requires specifying :mc-cmd:`~mc ilm add --noncurrentversion-tier`.
+   Requires specifying :mc-cmd:`~mc ilm add --noncurrent-transition-tier`.
 
    This option has the same behavior as the S3 ``NoncurrentVersionTransition`` action.
 
@@ -200,13 +200,13 @@ Parameters
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
-.. mc-cmd:: --noncurrentversion-tier
+.. mc-cmd:: --noncurrent-transition-tier
    :optional:
 
    The remote tier to which MinIO :ref:`transitions noncurrent objects versions <minio-lifecycle-management-tiering>`. 
    Specify a remote tier created by :mc:`mc admin tier`.
 
-.. mc-cmd:: --newer-noncurrentversions-expiration
+.. mc-cmd:: --noncurrent-expire-newer
    :optional:
 
    The maximum number of non-current object versions to retain, ordered from newest to oldest.
@@ -214,7 +214,7 @@ Parameters
    Use this flag to retain a certain number of past versions of a file in a first in, first out fashion.
    After retaining the maximum number of non-current versions, MinIO marks any remaining older non-current object versions as eligible for expiration.
    
-   The following table lists a number of object versions and their expiration eligibility based on ``--newer-noncurrentversions-expiration 3``:
+   The following table lists a number of object versions and their expiration eligibility based on ``--noncurrent-expire-newer 3``:
 
    .. list-table::
       :widths: 50 50
@@ -244,7 +244,7 @@ Parameters
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
    
-.. mc-cmd:: --newer-noncurrentversions-transition
+.. mc-cmd:: --noncurrent-transition-newer
    :optional:
    
    The maximum number of non-current object versions to retain on the current tier.
@@ -254,7 +254,7 @@ Parameters
 
    If not specified, all non-current object versions transition to the different tier.
 
-   The following table lists a number of object versions and their transition eligibility based on ``--newer-noncurrentversions-transition 3``:
+   The following table lists a number of object versions and their transition eligibility based on ``--noncurrent-transition-newer 3``:
 
    .. list-table::
       :widths: 50 50

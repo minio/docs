@@ -21,7 +21,7 @@ MinIO supports expanding an existing distributed deployment by adding a new
 :ref:`Server Pool <minio-intro-server-pool>`. Each Pool expands the total
 available storage capacity of the cluster while maintaining the overall
 :ref:`availability <minio-erasure-coding>` of the cluster. Each Pool is its
-own failure domain, where the loss of one or more disks or nodes in that pool
+own failure domain, where the loss of one or more drives or nodes in that pool
 does not effect the availability of other pools in the deployment.
 
 The procedure on this page expands an existing 
@@ -103,7 +103,7 @@ Local JBOD Storage with Sequential Mounts
    :class: note
 
    MinIO's strict **read-after-write** and **list-after-write** consistency
-   model requires local disk filesystems (``xfs``, ``ext4``, etc.).
+   model requires local drive filesystems (``xfs``, ``ext4``, etc.).
 
    MinIO cannot provide consistency guarantees if the underlying storage
    volumes are NFS or a similar network-attached storage volume. 
@@ -155,7 +155,7 @@ MinIO calculates the probability of a write operation to each of the pools as:
 - Pool B: 20% chance (:math:`2TiB / 10TiB`)
 - Pool C: 50% chance (:math:`5TiB / 10TiB`)
 
-In addition to the free space calculation, if a write option (with parity) would bring a disk
+In addition to the free space calculation, if a write option (with parity) would bring a drive
 usage above 99% or a known free inode count below 1000, MinIO does not write to the pool.
 
 Likewise, MinIO does not write to pools in a decommissioning process.
@@ -315,7 +315,7 @@ The following examples assumes that:
      minio7.example.com   minio11.example.com
      minio8.example.com   minio12.example.com
 
-- All hosts have eight locally-attached disks with sequential mount-points:
+- All hosts have eight locally-attached drives with sequential mount-points:
 
   .. code-block:: shell
      

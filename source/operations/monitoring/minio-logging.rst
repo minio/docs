@@ -233,7 +233,7 @@ MinIO audit logs resemble the following JSON document:
   - The :ref:`erasure set <minio-ec-erasure-set>` on which the object
     operation was performed.
 
-  - The list of disks in the erasure set which participated in the
+  - The list of drives in the erasure set which participated in the
     object operation.
 
 .. code-block:: json

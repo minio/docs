@@ -193,10 +193,10 @@ Bit Rot Protection
 
 .. TODO- ReWrite w/ more detail.
 
-Silent data corruption or bit rot is a serious problem faced by disk drives resulting in data getting corrupted without the user’s knowledge. 
-The corruption of data occurs when the electrical charge on a portion of the disk disperses or changes with no notification to or input from the user.
+Silent data corruption or bit rot is a serious problem faced by data drives resulting in data getting corrupted without the user’s knowledge. 
+The corruption of data occurs when the electrical charge on a portion of the drive disperses or changes with no notification to or input from the user.
 Many events can lead to such a silent corruption of stored data.
-For example, ageing drives, current spikes, bugs in disk firmware, phantom writes, misdirected reads/writes, driver errors, accidental overwrites, or a random cosmic ray can each lead to a bit change.
+For example, ageing drives, current spikes, bugs in drive firmware, phantom writes, misdirected reads/writes, driver errors, accidental overwrites, or a random cosmic ray can each lead to a bit change.
 Whatever the cause, the result is the same - compromised data.
 
 MinIO’s optimized implementation of the :minio-git:`HighwayHash algorithm <highwayhash/blob/master/README.md>` ensures that it captures and heals corrupted objects on the fly. 

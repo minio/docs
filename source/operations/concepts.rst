@@ -155,7 +155,7 @@ Some common reasons for bit rot include:
      
 - ageing drives
 - current spikes
-- bugs in disk firmware
+- bugs in drive firmware
 - phantom writes
 - misdirected reads/writes
 - driver errors
@@ -189,7 +189,7 @@ MinIO Writes Data Protection at the Object Level with Parity
 
 A MinIO deployment with multiple drives divides the available drives into data drives and parity drives.
 MinIO Erasure Coding adds additional hashing information about the contents of an object to the parity drives when writing an object.
-MinIO uses the parity information to confirm the integrity of an object and, if necessary, to restore a lost, missing, or corrupted object shard on a given disk or set of disks.
+MinIO uses the parity information to confirm the integrity of an object and, if necessary, to restore a lost, missing, or corrupted object shard on a given drive or set of drives.
 
 MinIO can tolerate losing up to the total number of drives equal to the number of parity devices available in the erasure set while still providing full access to an object.
 

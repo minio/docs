@@ -110,6 +110,7 @@ Measure the read/write speed of the drives in a cluster.
                    [--filesize]           \
                    [--blocksize]          \
                    [--serial]             \
+                   [--airgap]             \
                    ALIAS
 
 .. mc-cmd:: object
@@ -124,12 +125,13 @@ Measure the S3 peformance of reading and writing objects in a cluster.
                    [--size]               \
                    [--concurrent]         \
                    [--verbose, -v]        \
+                   [--airgap]             \
                    ALIAS  
             
 .. mc-cmd:: net
    :fullpath:
 
-Measure the network throughput of all nodes in a cluster.
+   Measure the network throughput of all nodes in a cluster.
 
 .. code-block:: shell
 
@@ -137,6 +139,7 @@ Measure the network throughput of all nodes in a cluster.
                    [--concurrent]      \
                    [--verbose, -v]     \
                    [--serial]          \
+                   [--airgap]          \
                    ALIAS
 
 Parameters
@@ -153,9 +156,16 @@ Parameters
 
    Use ``--duration <value>`` where ``<value>`` is a number and a unit of ``s`` for seconds, ``m`` for minutes.
 
-.. mc-cmd:: --size
+.. mc-cmd:: --airgap
    :optional:
 
+   Use in environments without network access to SUBNET (for example, airgapped, firewalled, or similar configuration).
+
+   If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
+
+.. mc-cmd:: --size
+   :optional:
+   
    Applies to the :mc-cmd:`~mc support perf object` command.
 
    Specify the size of the object to use for upload and download performance test.

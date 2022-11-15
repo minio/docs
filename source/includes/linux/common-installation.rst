@@ -206,8 +206,8 @@ require root (``sudo``) permissions.
    useradd -M -r -g minio-user minio-user
    chown minio-user:minio-user /mnt/disk1 /mnt/disk2 /mnt/disk3 /mnt/disk4
 
-The specified disk paths are provided as an example. Change them to match
-the path to those disks intended for use by MinIO.
+The specified drive paths are provided as an example. Change them to match
+the path to those drives intended for use by MinIO.
 
 Alternatively, change the ``User`` and ``Group`` values to another user and
 group on the system host with the necessary access and permissions.
