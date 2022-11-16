@@ -23,7 +23,7 @@ Administrators use the :mc:`mc admin user` command to create and manage
 MinIO users. The :minio-git:`MinIO Console <console>` provides a graphical
 interface for creating users.
 
-MinIO also supports creating :ref:`service accounts
+MinIO also supports creating :ref:`access keyss
 <minio-idp-service-account>`. Service accounts are child identities of an
 authenticated parent user and inherit their permissions from the parent. 
 
@@ -45,7 +45,7 @@ user's authorized actions and resources *or* assign the user to :ref:`groups
    - :ref:`minio-external-identity-management-ad-ldap`
 
    Enabling external identity management disables the MinIO internal IDP, with
-   the exception of creating :ref:`service accounts
+   the exception of creating :ref:`access keyss
    <minio-idp-service-account>`.
 
 .. toctree::

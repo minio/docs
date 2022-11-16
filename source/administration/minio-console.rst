@@ -171,6 +171,41 @@ Each bucket has :guilabel:`Manage` and :guilabel:`Browse` buttons.
 - Select :guilabel:`Browse` to view the contents of the bucket. 
   You can view and download individual objects, upload new objects, or use the :guilabel:`Rewind` function to view only those :ref:`versions <minio-bucket-versioning>` of an object which existed at the selected timestamp.
 
+.. _minio-console-user-access-keys:
+
+Access Keys
+-----------
+
+.. image:: /images/minio-console/console-access-keys.png
+   :width: 600px
+   :alt: MinIO Console Access Keys
+   :align: center
+
+The :guilabel:`Access Keys` section displays all :ref:`minio-id-access-keys` associated to the authenticated user. 
+
+Access Keys support providing applications authentication credentials which inherit permissions from the "parent" user.
+
+For deployments using an external identity manager such as Active Directory or an OIDC-compatible provider, access keys provide a way for users to create long-lived credentials.
+
+- You can select the access key row to view its custom policy, if one exists.
+
+   You can create or modify the policy from this screen.
+   Access key policies cannot exceed the permissions granted to the parent user.
+
+- You can create a new access key by selecting :guilabel:`Create access key`.
+
+   The Console auto-generates an access key and password.
+   You can select the eye :octicon:`eye` icon on the password field to reveal the value.
+   You can override these values as needed.
+
+   You can set a custom policy for the access key that further restricts the permissions granted to users authenticating with that key.
+   Select :guilabel:`Restrict beyond user policy` to open the policy editor and modify as necessary.
+
+   Ensure you have saved the access key password to a secure location before selecting :guilabel:`Create` to create the access key.
+   You cannot retrieve or reset the password value after creating the access key.
+
+   To rotate credentials for an application, create a new access key and delete the old one once the application updates to using the new credentials.
+
 Identity
 --------
 
@@ -227,43 +262,18 @@ Some subsections may not be visible if the authenticated user does not have the 
 
       Changing a user's group membership modifies the policies that user inherits. See :ref:`minio-access-management` for more information.
 
-   .. tab-item:: Service Accounts
-
-      .. image:: /images/minio-console/console-service-accounts.png
-         :width: 600px
-         :alt: MinIO Console Service Accounts
-         :align: center
-
-      The :guilabel:`Service Accounts` section displays all :ref:`minio-idp-service-account` associated to the authenticated user. 
-
-      Service accounts support providing applications authentication credentials which inherit permissions from the "parent" user.
-
-      For deployments using an external identity manager such as Active Directory or an OIDC-compatible provider, service accounts provide a way for users to create long-lived credentials.
-
-      - You can select the service account row to view its custom policy, if one exists.
-
-        You can create or modify the policy from this screen.
-        Service account policies cannot exceed the permissions granted to the parent user.
-
-      - You can create a new service account by selecting the :guilabel:`Create service account` button.
-
-        The Console auto-generates an access key and password for the account.
-        You can override these values as necessary.
-
-        You can set a custom policy for the service account that further restricts the permissions granted to the account.
-
-      The Console only displays the service account credentials *once*. You cannot
-      change or retrieve the credentials later. To rotate credentials for an 
-      application, create a new service account and delete the old one once the 
-      application updates to using the new credentials.
-
    .. tab-item:: Policies
+
+      .. image:: /images/minio-console/console-policies.png
+         :width: 600px
+         :alt: MinIO Console Manage Policies
+         :align: center
 
       The :guilabel:`Policies` section displays all :ref:`policies <minio-policy>` on the MinIO deployment. 
       The Policies section allows you to create, modify, or delete policies.
 
       :ref:`Policies <minio-policy>` define the authorized actions and resources to which an authenticated user has access.
-      Each policy describes one or more actions a user, group of users, or service account can perform or conditions they must meet.
+      Each policy describes one or more actions a user, group of users, or access key can perform or conditions they must meet.
 
       The policies are JSON formatted text files compatible with Amazon AWS Identity and Access Management policy syntax, structure, and behavior.
       Refer to :ref:`Policy Based Action Control <minio-policy>` for details on managing access in MinIO with policies.
@@ -442,23 +452,15 @@ Support
 -------
 
 The :guilabel:`Support` section provides an interface for generating health and performance reports.
-You can also register your deployment with |subnet| to allow upload of health reports directly through the MinIO Console.
+Support functionality requires registering your deployment with |subnet|. 
+Unregistered deployments display a :guilabel:`Register Your Cluster` button to register with your |subnet| account.
+See the :guilabel:`License` section in the Console or visit the `MinIO SUBNET <https://min.io/pricing?jmp=docs>` website for more information on registration.
 
 This section contains the following subsections.
 Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
 .. tab-set::
 
-   .. tab-item:: Register
-
-      .. image:: /images/minio-console/console-register.png
-         :width: 600px
-         :alt: MinIO Console - SUBNET Registration login form
-         :align: center
-
-      The :guilabel:`Register` section provides a login form to connect your MinIO deployment to |subnet|.
-
-      After registration, you can upload your deployment health reports directly to SUBNET for reference by MinIO Engineering.
    .. tab-item:: Health
 
       .. image:: /images/minio-console/console-health.png
@@ -522,6 +524,8 @@ For deployments not registered via |subnet|, the Console displays a table compar
    :width: 600px
    :alt: MinIO Console - License Plans
    :align: center
+
+Existing customers can register the deployment with their |subnet| account by clicking :guilabel:`Register this cluster` in the top-right corner of the screen.
 
 MinIO is Open Source software under the :minio-git:`GNU AGPLv3 license <mc/blob/master/LICENSE>`.
 Applications using MinIO should follow local laws and regulations around licensing to ensure compliance with the AGPLv3 license, which may include open sourcing the application stack.

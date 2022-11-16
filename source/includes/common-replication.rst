@@ -74,7 +74,7 @@ Bucket replication requires specific permissions on the source and destination d
          mc admin user add TARGET ReplicationAdmin LongRandomSecretKey
          mc admin policy set TARGET ReplicationAdminPolicy user=ReplicationAdmin
 
-      MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`service account <minio-idp-service-account>` for bucket replication.
+      MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`access keys <minio-idp-service-account>` for bucket replication.
 
    .. tab-item:: Replication Remote User
 
@@ -101,9 +101,9 @@ Bucket replication requires specific permissions on the source and destination d
          mc admin user add TARGET ReplicationRemoteUser LongRandomSecretKey
          mc admin policy set TARGET ReplicationRemoteUserPolicy user=ReplicationRemoteUser
 
-      MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`service account <minio-idp-service-account>` for bucket replication.
+      MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`access keys <minio-idp-service-account>` for bucket replication.
 
-See :mc:`mc admin user`, :mc:`mc admin user svcacct`, and :mc:`mc admin policy` for more complete documentation on adding users, service accounts, and policies to a MinIO deployment.
+See :mc:`mc admin user`, :mc:`mc admin user svcacct`, and :mc:`mc admin policy` for more complete documentation on adding users, access keyss, and policies to a MinIO deployment.
 
 .. end-replication-required-permissions
 
@@ -121,7 +121,7 @@ Each MinIO deployment ("peer site") synchronizes the following changes across th
 
 - Creation and deletion of IAM users, groups, policies, and policy mappings to users or groups (for LDAP users or groups)
 - Creation of Security Token Service (STS) credentials for session tokens verifiable from the local ``root`` credentials
-- Creation and deletion of :ref:`service accounts <minio-mc-admin-user-svcacct>` (except those owned by the ``root`` user)
+- Creation and deletion of :ref:`access keyss <minio-mc-admin-user-svcacct>` (except those owned by the ``root`` user)
 
 Site replication enables :ref:`bucket versioning <minio-bucket-versioning>` for all new and existing buckets on all replicated sites.
 
