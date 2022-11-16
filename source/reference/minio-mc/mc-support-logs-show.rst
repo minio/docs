@@ -10,15 +10,15 @@
 
 .. mc:: mc support logs show
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Description
 -----------
 
 Use the :mc-cmd:`mc support logs show` command to display MinIO server logs.
    
-.. include:: /includes/common-mc-support.rst
-   :start-after: start-minio-only
-   :end-before: end-minio-only
-
 Examples
 --------
 
