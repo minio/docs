@@ -14,20 +14,15 @@ MinIO supports server-side and client-side replication of objects between source
 and destination buckets.
 
 :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`
-  Configure per-bucket rules for automatically synchronizing objects between
-  buckets within the same MinIO cluster *or* between two independent MinIO
-  Clusters. MinIO applies rules as part of object write operations 
-  (e.g. ``PUT``) and automatically synchronizes new objects *and* object
-  mutations, such as new object versions or changes to object metadata.
+  Configure per-bucket rules for automatically synchronizing objects between MinIO deployments.
+  The deployment where you configure the bucket replication rule acts as the "source" while the configured remote deployment acts as the "target".
+  MinIO applies rules as part of object write operations (e.g. ``PUT``) and automatically synchronizes new objects *and* object mutations, such as new object versions or changes to object metadata.
   
-  MinIO server-side bucket replication only supports MinIO clusters for the
-  remote replication target.
+  MinIO server-side bucket replication only supports MinIO clusters for the remote replication target.
 
 Client-side Bucket Replication
-  Use the command process to synchronize objects between buckets
-  within the same S3-compatible cluster *or* between two independent
-  S3-compatible clusters. Client-side replication using :mc:`mc mirror`
-  supports MinIO-to-S3 and similar replication configurations.
+  Use the command process to synchronize objects between buckets within the same S3-compatible cluster *or* between two independent S3-compatible clusters. 
+  Client-side replication using :mc:`mc mirror` supports MinIO-to-S3 and similar replication configurations.
 
 .. admonition:: Bucket vs Site Replication
    :class: note
@@ -49,30 +44,20 @@ Client-side Bucket Replication
 Server-Side Bucket Replication
 ------------------------------
 
-MinIO server-side bucket replication is an automatic bucket-level configuration
-that synchronizes objects between a source and destination bucket. MinIO
-server-side replication *requires* the source and destination bucket be two separate MinIO
-clusters.
+MinIO server-side bucket replication is an automatic bucket-level configuration that synchronizes objects between a source and destination bucket. 
+MinIO server-side replication *requires* the source and destination bucket be two separate MinIO clusters.
 
-For each write operation to the bucket, MinIO checks all configured replication
-rules for the bucket and applies the matching rule with highest configured
-priority. MinIO synchronizes new objects *and* object mutations, such as 
-new object versions or changes to object metadata. This includes
-metadata operations such as enabling or modifying object locking or
-retention settings.
+For each write operation to the bucket, MinIO checks all configured replication rules for the bucket and applies the matching rule with highest configured priority. 
+MinIO synchronizes new objects *and* object mutations, such as new object versions or changes to object metadata. 
+This includes metadata operations such as enabling or modifying object locking or retention settings.
 
-MinIO server-side bucket replication is functionally similar to Amazon S3
-replication while adding the following MinIO-only features:
+MinIO server-side bucket replication is functionally similar to Amazon S3 replication while adding the following MinIO-only features:
 
-- Source and destination bucket names can match, supporting site-to-site
-  use cases such as Splunk or Veeam BC/DR. 
+- Source and destination bucket names can match, supporting site-to-site use cases such as Splunk or Veeam BC/DR. 
 
-- Simplified implementation than S3 bucket replication configuration, removing
-  the need to configure settings like AccessControlTranslation, Metrics, and 
-  SourceSelectionCriteria.
+- Simplified implementation than S3 bucket replication configuration, removing the need to configure settings like AccessControlTranslation, Metrics, and SourceSelectionCriteria.
 
-- Active-Active (Two-Way) replication of objects between source and destination
-  buckets.
+- Active-Active (Two-Way) replication of objects between source and destination buckets.
 
 - Multi-Site replication of objects between three or more MinIO deployments
 
