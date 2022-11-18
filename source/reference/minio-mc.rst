@@ -249,8 +249,10 @@ The following table lists :mc-cmd:`mc` commands:
 
    * - | :mc:`mc license register` 
        | :mc:`mc license info`
-       | :mc:`mc license update` 
-     - The ``mc license`` command registers clusters with |SUBNET|, displays information about the cluster's current license, or updates the license key for a cluster.
+       | :mc:`mc license update`
+       | :mc:`mc license unregister` 
+     - The ``mc license`` commands work with cluster registration for |SUBNET|. 
+       Use the commands to register a deployment, unregister a deployment, display information about the cluster's current license, or update the license key for a cluster.
 
    * - :mc:`mc ls`
      - .. include:: /reference/minio-mc/mc-ls.rst
@@ -509,6 +511,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-legalhold-clear
    /reference/minio-mc/mc-license-info
    /reference/minio-mc/mc-license-register
+   /reference/minio-mc/mc-license-unregister
    /reference/minio-mc/mc-license-update
    /reference/minio-mc/mc-ls
    /reference/minio-mc/mc-mb

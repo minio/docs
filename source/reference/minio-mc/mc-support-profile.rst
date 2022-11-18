@@ -68,10 +68,11 @@ The :mc:`mc support profile` command has the following syntax:
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] support profile    \
-                            COMMAND    \
-                            [--type]   \
-                            [--duration]
+   mc [GLOBALFLAGS] support profile       \
+                            COMMAND       \
+                            [--type]      \
+                            [--airgap]    \
+                            [--duration]  \
                             ALIAS 
 
 Parameters
@@ -105,6 +106,13 @@ Parameters
    - ``goroutines``
    
    If not specified, the command collects data for CPU, memory, block, mutex, threads, and goroutines.
+
+.. mc-cmd:: --airgap
+   :optional:
+
+   Use in environments without network access to SUBNET (for example, airgapped, firewalled, or similar configuration).
+
+   If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
 
 .. mc-cmd:: ALIAS
    :required:

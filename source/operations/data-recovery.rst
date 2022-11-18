@@ -11,7 +11,7 @@ Recover after Hardware Failure
    :depth: 1
 
 Distributed MinIO deployments rely on :ref:`Erasure Coding
-<minio-erasure-coding>` to provide built-in tolerance for multiple disk or node
+<minio-erasure-coding>` to provide built-in tolerance for multiple drive or node
 failures. Depending on the deployment topology and the selected erasure code
 parity, MinIO can tolerate the loss of up to half the drives or nodes in the
 deployment while maintaining read access ("read quorum") to objects. 
@@ -43,7 +43,7 @@ allow for a more reasonable replacement timeframe, while "critical" failure
 rates (multiple drives or nodes) may require a faster response.
 
 For nodes with one or more drives that are either partially failed or operating
-in a degraded state (increasing disk errors, SMART warnings, timeouts in MinIO
+in a degraded state (increasing drive errors, SMART warnings, timeouts in MinIO
 logs, etc.), you can safely unmount the drive *if* the cluster has sufficient
 remaining healthy drives to maintain
 :ref:`read and write quorum <minio-ec-parity>`. Missing drives are less

@@ -182,11 +182,11 @@ arrays with XFS-formatted disks for best performance.
 
 Ensure all server drives for which you intend MinIO to use are of the same type (NVMe, SSD, or HDD) with identical capacity (e.g. ``12`` TB).
 MinIO does not distinguish drive types and does not benefit from mixed storage types. 
-Additionally. MinIO limits the size used per disk to the smallest drive in the deployment. 
-For example, if the deployment has 15 10TB disks and 1 1TB disk, MinIO limits the per-disk capacity to 1TB.
+Additionally. MinIO limits the size used per drive to the smallest drive in the deployment. 
+For example, if the deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
 
-MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential series of disks when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 
-MinIO also requires that the ordering of physical disks remain constant across restarts, such that a given mount point always points to the same formatted disk. 
+MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential series of drives when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 
+MinIO also requires that the ordering of physical drives remain constant across restarts, such that a given mount point always points to the same formatted drive. 
 MinIO therefore **strongly recommends** using ``/etc/fstab`` or a similar file-based mount configuration to ensure that drive ordering cannot change after a reboot.
 For example:
 
@@ -205,8 +205,8 @@ For example:
      LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
      LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
 
-You can then specify the entire range of disks using the expansion notation ``/mnt/disk{1...4}``. 
-If you want to use a specific subfolder on each disk, specify it as ``/mnt/disk{1...4}/minio``.
+You can then specify the entire range of drives using the expansion notation ``/mnt/disk{1...4}``. 
+If you want to use a specific subfolder on each drive, specify it as ``/mnt/disk{1...4}/minio``.
 
 MinIO **does not** support arbitrary migration of a drive with existing MinIO data to a new mount position, whether intentional or as the result of OS-level behavior.
 
@@ -230,15 +230,15 @@ arrays with XFS-formatted disks for best performance.
 Ensure all nodes in the |deployment| use the same type (NVMe, SSD, or HDD)  of
 drive with identical capacity (e.g. ``N`` TB) . MinIO does not distinguish drive
 types and does not benefit from mixed storage types. Additionally. MinIO limits
-the size used per disk to the smallest drive in the deployment. For example, if
-the deployment has 15 10TB disks and 1 1TB disk, MinIO limits the per-disk
+the size used per drive to the smallest drive in the deployment. For example, if
+the deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive
 capacity to 1TB.
 
 MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential
-series of disks when creating the new |deployment|, where all nodes in the
+series of drives when creating the new |deployment|, where all nodes in the
 |deployment| have an identical set of mounted drives. MinIO also
-requires that the ordering of physical disks remain constant across restarts,
-such that a given mount point always points to the same formatted disk. MinIO
+requires that the ordering of physical drives remain constant across restarts,
+such that a given mount point always points to the same formatted drive. MinIO
 therefore **strongly recommends** using ``/etc/fstab`` or a similar file-based
 mount configuration to ensure that drive ordering cannot change after a reboot.
 For example:
@@ -258,8 +258,8 @@ For example:
      LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
      LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
 
-You can then specify the entire range of disks using the expansion notation
-``/mnt/disk{1...4}``. If you want to use a specific subfolder on each disk,
+You can then specify the entire range of drives using the expansion notation
+``/mnt/disk{1...4}``. If you want to use a specific subfolder on each drive,
 specify it as ``/mnt/disk{1...4}/minio``.
 
 MinIO **does not** support arbitrary migration of a drive with existing MinIO

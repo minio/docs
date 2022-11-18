@@ -290,7 +290,7 @@ The table below describes each stage of the encryption process:
 
    * - Encrypt the Object
      - MinIO uses the |OEK| to encrypt the object *prior* to storing the
-       object to disk. MinIO then encrypts the |OEK| with the |KEK|. 
+       object to a drive. MinIO then encrypts the |OEK| with the |KEK|. 
 
        MinIO stores the encrypted representation of the |OEK| and |DEK| as part
        of the metadata.

@@ -54,7 +54,7 @@ the failed drive.
 
 .. code-block:: shell
 
-   mkfs.xfs /dev/sdb -L DISK1
+   mkfs.xfs /dev/sdb -L DRIVE1
 
 MinIO **strongly recommends** using label-based mounting to ensure consistent
 drive order that persists through system restarts.
@@ -63,13 +63,13 @@ drive order that persists through system restarts.
 ------------------------------
 
 Review the ``/etc/fstab`` file and update as needed such that the entry for
-the failed disk points to the newly formatted replacement.
+the failed drive points to the newly formatted replacement.
 
-- If using label-based disk assignment, ensure that each label points to the
-  correct newly formatted disk.
+- If using label-based drive assignment, ensure that each label points to the
+  correct newly formatted drive.
 
-- If using UUID-based disk assignment, update the UUID for each point based on
-  the newly formatted disk. You can use ``lsblk`` to view disk UUIDs.
+- If using UUID-based drive assignment, update the UUID for each point based on
+  the newly formatted drive. You can use ``lsblk`` to view drive UUIDs.
 
 For example, consider 
 
@@ -78,14 +78,14 @@ For example, consider
    $ cat /etc/fstab
 
      # <file system>  <mount point>  <type>  <options>         <dump>  <pass>
-     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime  0       2
-     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime  0       2
-     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
-     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
+     LABEL=DRIVE1     /mnt/drive1    xfs     defaults,noatime  0       2
+     LABEL=DRIVE2     /mnt/drive2    xfs     defaults,noatime  0       2
+     LABEL=DRIVE3     /mnt/drive3    xfs     defaults,noatime  0       2
+     LABEL=DRIVE4     /mnt/drive4    xfs     defaults,noatime  0       2
 
 Given the previous example command, no changes are required to 
-``fstab`` since the replacement disk at ``/mnt/disk1`` uses the same
-label ``DISK1`` as the failed disk.
+``fstab`` since the replacement drive at ``/mnt/drive1`` uses the same
+label ``DRIVE1`` as the failed drive.
 
 4) Remount the Replaced Drive(s)
 --------------------------------

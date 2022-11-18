@@ -18,7 +18,7 @@ a randomly generated initialization vector, and a context consisting of values
 like the bucket and object name.
 
 MinIO generates the KEK at the time of each cryptographic encryption or
-decryption operation and *never* stores the KEK to disk.
+decryption operation and *never* stores the KEK to a drive.
 
 .. end-sse-kek
 
@@ -26,7 +26,7 @@ decryption operation and *never* stores the KEK to disk.
 
 MinIO generates a random 256-bit unique Object Encryption Key (OEK) and uses
 that key to encrypt the object. MinIO never stores the plaintext representation
-of the OEK on disk. The plaintext OEK resides in RAM during cryptographic
+of the OEK on a drive. The plaintext OEK resides in RAM during cryptographic
 operations.
 
 .. end-sse-oek

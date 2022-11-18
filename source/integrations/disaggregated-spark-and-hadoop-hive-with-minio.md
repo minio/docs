@@ -52,8 +52,8 @@ mapreduce.job.reduce.slowstart.completedmaps=0.99 # 99% map, then reduce
 mapreduce.reduce.shuffle.input.buffer.percent=0.9 # Min % buffer in RAM
 mapreduce.reduce.shuffle.merge.percent=0.9 # Minimum % merges in RAM
 mapreduce.reduce.speculative=false # Disable speculation for reducing
-mapreduce.task.io.sort.factor=999 # Threshold before writing to disk
-mapreduce.task.sort.spill.percent=0.9 # Minimum % before spilling to disk
+mapreduce.task.io.sort.factor=999 # Threshold before writing to drive
+mapreduce.task.sort.spill.percent=0.9 # Minimum % before spilling to drive
 ```
 
 S3A is the connector to use S3 and other S3-compatible object stores such as MinIO. MapReduce workloads typically interact with object stores in the same way they do with HDFS. These workloads rely on HDFS atomic rename functionality to complete writing data to the datastore. Object storage operations are atomic by nature and they do not require/implement rename API. The default S3A committer emulates renames through copy and delete APIs. This interaction pattern causes significant loss of performance because of the write amplification. _Netflix_, for example, developed two new staging committers - the Directory staging committer and the Partitioned staging committer - to take full advantage of native object storage operations. These committers do not require rename operation. The two staging committers were evaluated, along with another new addition called the Magic committer for benchmarking.
@@ -83,7 +83,7 @@ fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem
 fs.s3a.committer.threads=2048 # Number of threads writing to MinIO
 fs.s3a.connection.maximum=8192 # Maximum number of concurrent conns
 fs.s3a.fast.upload.active.blocks=2048 # Number of parallel uploads
-fs.s3a.fast.upload.buffer=disk # Use disk as the buffer for uploads
+fs.s3a.fast.upload.buffer=disk # Use drive as the buffer for uploads
 fs.s3a.fast.upload=true # Turn on fast upload mode
 fs.s3a.max.total.tasks=2048 # Maximum number of parallel tasks
 fs.s3a.multipart.size=512M # Size of each multipart chunk

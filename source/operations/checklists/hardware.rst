@@ -251,12 +251,12 @@ HDD - Warm
      - Low
      - Cold/Archival
 
-Use the same type of disk (NVME, SSD, HDD) with the same capacity across all nodes in a MinIO deployment.
+Use the same type of drive (NVME, SSD, HDD) with the same capacity across all nodes in a MinIO deployment.
 MinIO does not distinguish drive types when using the underlying storage and does not benefit from mixed storage types.
 
-Use the same capacity of disk across all nodes in the MinIO :ref:`server pool <minio-intro-server-pool>`. 
-MinIO limits the maximum usable size per disk to the smallest size in the deployment.
-For example, if a deployment has 15 10TB disks and 1 1TB disk, MinIO limits the per-disk capacity to 1TB.
+Use the same capacity of drive across all nodes in the MinIO :ref:`server pool <minio-intro-server-pool>`. 
+MinIO limits the maximum usable size per drive to the smallest size in the deployment.
+For example, if a deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
 
 Recommended Hardware Tests
 --------------------------
@@ -324,7 +324,7 @@ Record the results for later reference.
 
 #. Test the drive's performance during write operations
 
-   This tests checks a drive's ability to write new data (uncached) to disk by creating a specified number of blocks at up to a certain number of bytes at a time to mimic how a drive would function with writing uncached data. 
+   This tests checks a drive's ability to write new data (uncached) to the drive by creating a specified number of blocks at up to a certain number of bytes at a time to mimic how a drive would function with writing uncached data. 
    This allows you to see the actual drive performance with consistent file I/O.
    
    .. code-block::
@@ -332,7 +332,7 @@ Record the results for later reference.
 
       dd if=/dev/zero of=/mnt/driveN/testfile bs=128k count=80000 oflag=direct conv=fdatasync > dd-write-drive1.txt
 
-   Replace ``driveN`` with the path for the disk you are testing.
+   Replace ``driveN`` with the path for the drive you are testing.
 
    .. list-table::
       :widths: auto
@@ -364,7 +364,7 @@ Record the results for later reference.
 
       dd if=/mnt/driveN/testfile of=/dev/null bs=128k iflag=direct > dd-read-drive1.txt
 
-   Replace ``driveN`` with the path for the disk you are testing.
+   Replace ``driveN`` with the path for the drive you are testing.
 
    .. list-table::
       :widths: auto
@@ -429,6 +429,6 @@ Document the performance numbers for each server in your deployment.
    * - ``-I``     
      - Direct-IO modern
    * - ``-t N``   
-     - Number of threads (:math:`numberOfDisks * 16`)
+     - Number of threads (:math:`numberOfDrives * 16`)
    * - ``-F <>``  
-     - list of files (the above command tests with 16 files per disk)  
+     - list of files (the above command tests with 16 files per drive)  

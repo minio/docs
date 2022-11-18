@@ -93,7 +93,7 @@ Run the following commands in a terminal or shell to start the KES server as a f
                
 
 The first command allows |KES| to use the `mlock <http://man7.org/linux/man-pages/man2/mlock.2.html>`__ system call without running as root. 
-``mlock`` ensures the OS does not write in-memory data to disk (swap memory) and mitigates the risk of cryptographic operations being written to unsecured disk at any time.
+``mlock`` ensures the OS does not write in-memory data to a drive (swap memory) and mitigates the risk of cryptographic operations being written to unsecured drive at any time.
 KES 0.21.0 and later automatically detect and enable ``mlock`` if supported by the host OS. 
 Versions 0.20.0 and earlier required specifying the ``--mlock`` argument to KES.
 

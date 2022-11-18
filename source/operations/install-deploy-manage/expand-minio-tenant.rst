@@ -38,7 +38,7 @@ Locally Attached Drives
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO *strongly recommends* using locally attached drives on each node intended to support the new tenant pool to ensure optimal performance.
-MinIO’s strict read-after-write and list-after-write consistency model requires local disk filesystems (xfs, ext4, etc.). 
+MinIO’s strict read-after-write and list-after-write consistency model requires local drive filesystems (xfs, ext4, etc.). 
 
 MinIO automatically generates :kube-docs:`Persistent Volume Claims (PVC) <concepts/storage/persistent-volumes/#persistentvolumeclaims>` as part of deploying a MinIO Tenant. 
 The Operator generates one PVC for each volume in the new pool.

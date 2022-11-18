@@ -195,20 +195,20 @@ Lifecycle Management Metrics
 
    Total number of active :ref:`object expiration <minio-lifecycle-management-expiration>` tasks
 
-Node and Disk Health Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Node and Drive Health Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. metric:: minio_cluster_disk_online_total
 
-   The total number of disks online
+   The total number of drives online
 
 .. metric:: minio_cluster_disk_offline_total
 
-   The total number of disks offline
+   The total number of drives offline
 
 .. metric:: minio_cluster_disk_total
 
-   The total number of disks
+   The total number of drives
 
 .. metric:: minio_cluster_nodes_offline_total
 

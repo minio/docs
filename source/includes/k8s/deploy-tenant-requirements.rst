@@ -17,7 +17,7 @@
       persistentVolumeReclaimPolicy: Retain
       storage-class: <STORAGE-CLASS>
       local:
-         path: <PATH-TO-DISK>
+         path: <PATH-TO-DRIVE>
       nodeAffinity:
          required:
             nodeSelectorTerms:

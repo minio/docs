@@ -123,7 +123,7 @@ and browser access on the MinIO Console port ``:9001``.
 .. code-block:: shell
    :class: copyable
 
-   minio server https://minio-{1...4}.example.net/mnt/disk-{1...4} \
+   minio server https://minio-{1...4}.example.net/mnt/drive-{1...4} \
          --console-address ":9001"
 
 Deployments behind network routing components which require static ports for 

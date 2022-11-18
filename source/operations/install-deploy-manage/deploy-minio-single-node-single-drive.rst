@@ -77,7 +77,7 @@ The following procedure deploys MinIO consisting of a single MinIO server and a 
    :class: note
 
    MinIO's strict **read-after-write** and **list-after-write** consistency
-   model requires local disk filesystems (``xfs``, ``ext4``, etc.).
+   model requires local drive filesystems (``xfs``, ``ext4``, etc.).
 
    MinIO cannot provide consistency guarantees if the underlying storage
    volumes are NFS or a similar network-attached storage volume. 

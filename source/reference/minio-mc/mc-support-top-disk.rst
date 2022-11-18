@@ -15,7 +15,7 @@ Syntax
 
 .. start-mc-support-top-disk-desc
 
-The :mc:`mc support top disk` command displays current disk statistics.
+The :mc:`mc support top disk` command displays current drive statistics.
 
 .. end-mc-support-top-disk-desc
 
@@ -56,9 +56,9 @@ Parameters
 .. mc-cmd:: --count, -c
    :optional:
 
-   Display statistics for up to the entered number of disks.
+   Display statistics for up to the entered number of drives.
 
-   If no entry is made, the command returns statistics for up to 10 disks.
+   If no entry is made, the command returns statistics for up to 10 drives.
 
 Global Flags
 ~~~~~~~~~~~~

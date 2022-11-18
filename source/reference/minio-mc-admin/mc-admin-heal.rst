@@ -21,8 +21,8 @@ corrupted and heals those objects.
 .. end-mc-admin-heal-desc
 
 :mc-cmd:`mc admin heal` is resource intensive and typically not required even
-after disk failures or corruption events. Instead, MinIO automatically heals
-objects damaged by silent bit rot corruption, disk failure, or other issues on
+after drive failures or corruption events. Instead, MinIO automatically heals
+objects damaged by silent bit rot corruption, drive failure, or other issues on
 POST/GET. MinIO also performs periodic background object healing.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
