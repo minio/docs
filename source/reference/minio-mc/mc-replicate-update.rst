@@ -1,8 +1,9 @@
 .. _minio-mc-replicate-edit:
+.. _minio-mc-replicate-update:
 
-=====================
-``mc replicate edit``
-=====================
+=======================
+``mc replicate update``
+=======================
 
 .. default-domain:: minio
 
@@ -11,20 +12,25 @@
    :depth: 2
 
 .. mc:: mc replicate edit
+.. mc:: mc replicate update
+
+.. versionchanged:: RELEASE.2022-11-07T23-47-39Z
+
+   ``mc replicate update`` replaces the ``mc replicate edit`` command.
 
 Syntax
 ------
 
-.. start-mc-replicate-edit-desc
+.. start-mc-replicate-update-desc
 
-The :mc:`mc replicate edit` command modifies an existing 
+The :mc:`mc replicate update` command modifies an existing 
 :ref:`bucket replication rule <minio-bucket-replication-serverside>`.
 
-.. end-mc-replicate-edit-desc
+.. end-mc-replicate-update-desc
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] replicate edit FLAGS [FLAGS] ARGUMENTS [ARGUMENTS]
+   mc [GLOBALFLAGS] replicate update FLAGS [FLAGS] ARGUMENTS [ARGUMENTS]
 
 .. tab-set::
 
@@ -36,7 +42,7 @@ The :mc:`mc replicate edit` command modifies an existing
       .. code-block:: shell
          :class: copyable
 
-         mc replicate edit --id "c76um9h4b0t1ijr36mug"           \
+         mc replicate update --id "c76um9h4b0t1ijr36mug"           \
             --replicate "delete,delete-marker,existing-objects"  \
             myminio/mydata
 
@@ -51,7 +57,7 @@ The :mc:`mc replicate edit` command modifies an existing
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] replicate edit                \
+         mc [GLOBALFLAGS] replicate update              \
                           --id "string"                 \
                           [--remote-bucket "string"]    \
                           [--disable]                   \
@@ -78,38 +84,38 @@ Parameters
 
    .. code-block:: none
 
-      mc replicate edit --id "c75nrap4b0talo3ipthg" [FLAGS]
+      mc replicate update --id "c75nrap4b0talo3ipthg" [FLAGS]
 
 .. mc-cmd:: --id
+   :required:
    
-
-   *Required* Specify the unique ID for a configured replication rule. 
+   Specify the unique ID for a configured replication rule. 
    Use the :mc:`mc replicate ls` command to list the replication rules
    for a bucket.
 
 .. mc-cmd:: --priority
-   
+   :optional:
 
-   *Optional* Specify the integer priority of the replication rule. The value
-   *must* be unique among all other rules on the source bucket. Higher values
-   imply a *higher* priority than all other rules.
+   Specify the integer priority of the replication rule. 
+   The value *must* be unique among all other rules on the source bucket. 
+   Higher values imply a *higher* priority than all other rules.
 
 .. mc-cmd:: --remote-bucket
-   
+   :optional:
 
-    *Optional* Specify the ARN for the destination deployment and bucket. You
-    can retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
+   Specify the ARN for the destination deployment and bucket. 
+   You can retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
     
-    - Use the :mc-cmd:`mc admin bucket remote ls` to retrieve a list of 
-      ARNs for the bucket on the destination deployment.
+   - Use the :mc-cmd:`mc admin bucket remote ls` to retrieve a list of 
+     ARNs for the bucket on the destination deployment.
 
-    - Use the :mc-cmd:`mc admin bucket remote add` to create a replication ARN
+   - Use the :mc-cmd:`mc admin bucket remote add` to create a replication ARN
       for the bucket on the destination deployment. 
 
 .. mc-cmd:: --replicate
-   
+   :optional:
 
-   *Optional* Specify a comma-separated list of the following values to enable
+   Specify a comma-separated list of the following values to enable
    extended replication features:
 
    - ``delete`` - Directs MinIO to replicate DELETE operations to the
@@ -135,9 +141,9 @@ Parameters
      information.
 
 .. mc-cmd:: --state
-   
+   :optional:
 
-   *Optional* Enables or disables the replication rule. Specify one of the
+   Enables or disables the replication rule. Specify one of the
    following values:
 
    - ``"enable"`` - Enables the replication rule.
@@ -148,24 +154,24 @@ Parameters
    for replication after enabling the rule. You must explicitly enable
    replication of existing objects by including ``"existing-objects"`` to the
    list of replication features specified to 
-   :mc-cmd:`mc replicate edit --replicate`. See
+   :mc-cmd:`mc replicate update --replicate`. See
    :ref:`minio-replication-behavior-existing-objects` for more information.
 
 .. mc-cmd:: --storage-class
-   
+   :optional:
 
-   *Optional*  Specify the MinIO :ref:`storage class <minio-ec-storage-class>`
+   Specify the MinIO :ref:`storage class <minio-ec-storage-class>`
    to apply to replicated objects. 
 
 .. mc-cmd:: --tags
-   
+   :optional:
 
-   *Optional* Specify one or more ampersand ``&`` separated key-value pair tags
+   Specify one or more ampersand ``&`` separated key-value pair tags
    which MinIO uses for filtering objects to replicate. For example:
 
    .. code-block:: shell
 
-      mc replicate edit --id "ID" --tags "TAG1=VALUE&TAG2=VALUE&TAG3=VALUE"
+      mc replicate update --id "ID" --tags "TAG1=VALUE&TAG2=VALUE&TAG3=VALUE"
 
    MinIO applies the replication rule to any object whose tag set
    contains the specified replication tags.
@@ -183,58 +189,58 @@ Examples
 Modify an Existing Replication Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc replicate edit` to modify an existing replication rule.
+Use :mc:`mc replicate update` to modify an existing replication rule.
 
 .. code-block:: shell
    :class: copyable
 
-   mc replicate edit ALIAS/PATH \
-      --id ID \
+   mc replicate update ALIAS/PATH \
+      --id ID                     \
       [--FLAGS]
 
-- Replace :mc-cmd:`ALIAS <mc replicate edit ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc replicate edit ALIAS>` with the path to the 
+- Replace :mc-cmd:`PATH <mc replicate update ALIAS>` with the path to the 
   bucket or bucket prefix on which the rule exists.
 
-- Replace :mc-cmd:`ID <mc replicate edit --id>` with the unique identifier for the
+- Replace :mc-cmd:`ID <mc replicate update --id>` with the unique identifier for the
   rule to modify. Use :mc:`mc replicate ls` to retrieve the list of 
   replication rules on the bucket and their corresponding identifiers.
 
 .. note::
 
    Modifying a replication configuration rule does not effect already replicated
-   objects. For example, modifying the :mc-cmd:`~mc replicate edit --tags`
+   objects. For example, modifying the :mc-cmd:`~mc replicate update --tags`
    filter does not result in the removal of replicated objects which do not
    meet the filter.
 
 Disable or Enable an Existing Replication Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc replicate edit` with the
-:mc-cmd:`~mc replicate edit --state` flag to disable or enable a 
+Use :mc:`mc replicate update` with the
+:mc-cmd:`~mc replicate update --state` flag to disable or enable a 
 replication rule.
 
 .. code-block:: shell
    :class: copyable
 
-   mc replicate edit ALIAS/PATH \
+   mc replicate update ALIAS/PATH \
       --id ID \
       --state "disabled"|"enabled"
 
-- Replace :mc-cmd:`ALIAS <mc replicate edit ALIAS>` with the 
+- Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc replicate edit ALIAS>` with the path to the 
+- Replace :mc-cmd:`PATH <mc replicate update ALIAS>` with the path to the 
   bucket or bucket prefix on which the rule exists.
 
-- Replace :mc-cmd:`ID <mc replicate edit --id>` with the unique identifier for the
+- Replace :mc-cmd:`ID <mc replicate update --id>` with the unique identifier for the
   rule to modify. Use :mc:`mc replicate ls` to retrieve the list of 
   replication rules on the bucket and their corresponding identifiers.
 
 - Specify either ``"disabled"`` or ``"enabled"`` to the 
-  :mc-cmd:`~mc replicate edit --state` flag to disable or enable the replication
+  :mc-cmd:`~mc replicate update --state` flag to disable or enable the replication
   rule.
 
 .. note::

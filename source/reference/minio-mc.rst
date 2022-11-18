@@ -299,13 +299,13 @@ The following table lists :mc-cmd:`mc` commands:
 
    * - | :mc:`mc replicate add`
        | :mc:`mc replicate diff`
-       | :mc:`mc replicate edit`
        | :mc:`mc replicate export`
        | :mc:`mc replicate import`
        | :mc:`mc replicate ls`
        | :mc:`mc replicate resync`
        | :mc:`mc replicate rm`
        | :mc:`mc replicate status`
+       | :mc:`mc replicate update`
 
      - The :mc:`mc replicate <mc replicate add>` command configures and
        manages the :ref:`Server-Side Bucket Replication
@@ -519,8 +519,8 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-rb
    /reference/minio-mc/mc-replicate-add
    /reference/minio-mc/mc-replicate-diff
-   /reference/minio-mc/mc-replicate-edit
    /reference/minio-mc/mc-replicate-ls
+   /reference/minio-mc/mc-replicate-update
    /reference/minio-mc/mc-replicate-resync
    /reference/minio-mc/mc-replicate-rm
    /reference/minio-mc/mc-replicate-status

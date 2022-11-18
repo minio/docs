@@ -1932,6 +1932,8 @@ using these environment variables.
       This configuration setting corresponds with the 
       :envvar:`MINIO_NOTIFY_WEBHOOK_COMMENT` environment variable.
 
+.. _minio-ldap-config-settings:
+
 Active Directory / LDAP Identity Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2123,6 +2125,8 @@ configuration settings.
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_COMMENT` environment variable.   
+
+.. _minio-open-id-config-settings:
 
 OpenID Identity Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

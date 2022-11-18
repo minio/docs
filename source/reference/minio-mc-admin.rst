@@ -65,6 +65,16 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-heal-desc
           :end-before: end-mc-admin-heal-desc
 
+   * - :mc-cmd:`mc admin idp ldap`
+     - .. include:: /reference/minio-mc-admin/mc-admin-heal.rst
+          :start-after: start-mc-admin-idp-ldap-desc
+          :end-before: end-mc-admin-idp-ldap-desc
+  
+   * - :mc-cmd:`mc admin idp openid`
+     - .. include:: /reference/minio-mc-admin/mc-admin-heal.rst
+          :start-after: start-mc-admin-idp-openid-desc
+          :end-before: end-mc-admin-idp-openid-desc
+
    * - :mc-cmd:`mc admin info`
      - .. include:: /reference/minio-mc-admin/mc-admin-info.rst
           :start-after: start-mc-admin-info-desc
@@ -94,6 +104,11 @@ The following table lists :mc:`mc admin` commands:
      - .. include:: /reference/minio-mc-admin/mc-admin-prometheus.rst
           :start-after: start-mc-admin-prometheus-desc
           :end-before: end-mc-admin-prometheus-desc
+
+   * - :mc-cmd:`mc admin rebalance`
+     - .. include:: /reference/minio-mc-admin/mc-admin-rebalance.rst
+          :start-after: start-mc-admin-rebalance-desc
+          :end-before: end-mc-admin-rebalance-desc
 
    * - :mc-cmd:`mc admin replicate`
      - .. include:: /reference/minio-mc-admin/mc-admin-replicate.rst
@@ -186,8 +201,8 @@ the newly added MinIO deployment:
 Global Options
 --------------
 
-:mc:`mc admin` supports the same global options as 
-:mc-cmd:`mc`. See :ref:`minio-mc-global-options`.
+:mc:`mc admin` supports the same global options as :mc-cmd:`mc`. 
+See :ref:`minio-mc-global-options`.
 
 .. toctree::
    :titlesonly:

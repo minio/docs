@@ -196,7 +196,7 @@ or modifying a replication rule:
 
 - For existing replication rules, add ``"existing-objects"`` to the list of
   existing replication features using 
-  :mc-cmd:`mc replicate edit --replicate`. You must specify *all* desired
+  :mc-cmd:`mc replicate update --replicate`. You must specify *all* desired
   replication features when editing the replication rule. 
 
 Enabling existing object replication does not increase the priority of objects

@@ -28,6 +28,7 @@ The procedure on this page expands an existing
 :ref:`distributed <deploy-minio-distributed>` MinIO deployment with an
 additional server pool. 
 
+
 .. _expand-minio-distributed-prereqs:
 
 Prerequisites
@@ -132,10 +133,12 @@ erasure parity settings.
 Considerations
 --------------
 
+.. _minio-writing-files:
+
 Writing Files
 ~~~~~~~~~~~~~
 
-MinIO does not rebalance objects across the new server pools. 
+MinIO does not automatically rebalance objects across the new server pools. 
 Instead, MinIO performs new write operations to the pool with the most free
 storage weighted by the amount of free space on the pool divided by the free space across all available pools.
 
@@ -157,6 +160,9 @@ MinIO calculates the probability of a write operation to each of the pools as:
 
 In addition to the free space calculation, if a write option (with parity) would bring a disk
 usage above 99% or a known free inode count below 1000, MinIO does not write to the pool.
+
+If desired, you can manually initiate a rebalance procedure with :mc:`mc admin rebalance`.
+For more about how rebalancing works, see :ref:`managing objects across a deployment <minio-rebalance>`.
 
 Likewise, MinIO does not write to pools in a decommissioning process.
 
