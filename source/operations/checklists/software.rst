@@ -1,3 +1,5 @@
+.. _minio-software-checklists:
+
 ==================
 Software Checklist
 ==================

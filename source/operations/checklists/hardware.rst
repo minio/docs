@@ -1,3 +1,5 @@
+.. _minio-hardware-checklist:
+
 ==================
 Hardware Checklist
 ==================
@@ -20,6 +22,7 @@ When selecting hardware for your MinIO implementation, take into account the fol
 - Number of objects by average object size
 - Average retention time of data in years
 - Number of sites to be deployed
+- Number of expected buckets
 
 .. _deploy-minio-distributed-recommendations:
 
