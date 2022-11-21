@@ -69,8 +69,8 @@ on :ref:`versioned buckets <minio-bucket-versioning>`. Specifically, MinIO by
 default applies the transition operation to the *current* object version. 
 
 To transition noncurrent object versions, specify the 
-:mc-cmd:`~mc ilm add --noncurrentversion-transition-days` and
-:mc-cmd:`~mc ilm add --noncurrentversion-tier` options
+:mc-cmd:`~mc ilm add --noncurrent-transition-days` and
+:mc-cmd:`~mc ilm add --noncurrent-transition-tier` options
 when creating the transition rule. 
 
 .. _minio-lifecycle-management-expiration:
@@ -85,7 +85,7 @@ older than 365 days.
 
 .. todo: Diagram of MinIO Expiration
 
-Use :mc-cmd:`mc ilm add --expiry-days` to expire objects after a specified
+Use :mc-cmd:`mc ilm add --expire-days` to expire objects after a specified
 number of calendar days.
 
 For buckets with :ref:`replication <minio-bucket-replication>` configured, MinIO
@@ -104,14 +104,14 @@ specific default behaviors for versioned buckets:
   creating a ``DeleteMarker`` as is normal with versioned delete.
 
   To expire noncurrent object versions, specify the 
-  :mc-cmd:`~mc ilm add --noncurrentversion-expiration-days` option
+  :mc-cmd:`~mc ilm add --noncurrent-expire-days` option
   when creating the expiration rule. 
 
 - MinIO does not expire ``DeleteMarkers`` *even if* no other versions of 
   that object exist.
 
   To expire delete markers when there are no remaining versions for that
-  object, specify the :mc-cmd:`~mc ilm add --expired-object-delete-marker`
+  object, specify the :mc-cmd:`~mc ilm add --expire-delete-marker`
   option when creating the expiration rule.
 
 .. _minio-lifecycle-management-scanner:
