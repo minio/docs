@@ -155,6 +155,8 @@ To deploy a tenant from the MinIO Operator Console, complete the following steps
 
 :ref:`create-tenant-encryption-section`
 
+:ref:`minio-tenant-audit-logging-settings`
+
 :ref:`create-tenant-deploy-view-tenant`
 
 :ref:`create-tenant-connect-tenant`
@@ -292,15 +294,22 @@ The :guilabel:`Configure` section displays optional configuration settings for t
    * - Field
      - Description
 
-   * - :guilabel:`Expose Services`
-     - The MinIO Operator by default directs the MinIO Tenant services to request an externally accessible IP address from the Kubernetes cluster Load Balancer if one is available.
+   * - :guilabel:`Expose MinIO Service`
+     - The MinIO Operator by default directs the MinIO Tenant services to request an externally accessible IP address from the Kubernetes cluster Load Balancer if one is available to access the tenant.
 
-       Most public cloud Kubernetes infrastructures include a global Load Balancer which meets this requirements. 
+       Most public cloud Kubernetes infrastructures include a global Load Balancer which meets this requirement. 
        Other Kubernetes distributions *may* include a load balancer that can respond to these requests.
 
-       You can direct the Tenant to not make this request by toggling the option to :guilabel:`Off` for the MinIO Service and Console Service.
+   * - :guilabel:`Expose Console Service`
+     - Select whether the Tenant should request an IP address from the Load Balancer to access the Tenant's Console. 
 
-   * - :guilabel:`Override Tenant Defaults`
+       Most public cloud Kubernetes infrastructures include a global Load Balancer which meets this requirement. 
+       Other Kubernetes distributions *may* include a load balancer that can respond to these requests.
+
+   * - :guilabel:`Set Custom Domains`
+     - Toggle on to customize the domains allowed to access the tenant's console and other tenant services.
+
+   * - :guilabel:`Security Context`
      - The MinIO Operator sets the Kubernetes Security Context for pods to a default of ``1000`` for User, Group, and FsGroup. 
        The FSGroupChangePolicy defaults to ``Always``. 
        MinIO does not run the pod using the ``root`` user.
@@ -314,25 +323,13 @@ The :guilabel:`Configure` section displays optional configuration settings for t
 
              If your OpenShift cluster enforces :openshift-docs:`Security Context Constraints </authentication/managing-security-context-constraints.html>` , ensure you set the Tenant constraints appropriately such that pods can start and run normally.
 
-   * - :guilabel:`Override Log Search Defaults`
-     - The MinIO Operator deploys a Log Search service (SQL Database and Log Search API) to support Audit Log search in the MinIO Tenant Console.
+   * - :guilabel:`Additional Environment Variables`
+     - Enter any additional the key:value pairs to use as environment variables for the tenant.
 
-       You can modify the Security Context to run the associated pod commands using a different User, Group, or FsGroup ID. 
-       You can also direct the pod to not run commands as the Root user.
-
-       You can also modify the storage class and requested capacity associated to the PVC generated to support the Log Search service.
-
-   * - :guilabel:`Override Prometheus Search Defaults`
-     - The MinIO Operator deploys a Prometheus service to support detailed metrics in the MinIO Tenant Console.
-
-       You can modify the Security Context to run the associated pod commands using a different User, Group, or FsGroup ID. 
-       You can also direct the pod to not run commands as the Root user.
-
-       You can also modify the storage class and requested capacity associated to the PVC generated to support the Prometheus service.
 
 .. _create-tenant-images-section:
 
-1) The :guilabel:`Images` Section
+4) The :guilabel:`Images` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :guilabel:`Images` section displays container image settings used by the MinIO Tenant.
@@ -485,10 +482,45 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
      - Configure `Azure Key Vault <https://azure.microsoft.com/en-us/services/key-vault/#product-overview>`__  as the external KMS for storing root encryption keys. 
        See :ref:`minio-sse-azure` for guidance on the displayed fields.       
 
+.. _minio-tenant-audit-logging-settings:
+
+9) Audit Log Settings
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%
+
+   * - Field
+     - Description
+
+   * - Log Search Storage Class
+     - Select the storage class and requested capacity associated to the PVC generated to support audit logging.
+
+   * - Storage Size
+     - Specify the amount of size of storage to make available for audit logging.
+
+   * - :guilabel:`SecurityContext for LogSearch`
+     - The MinIO Operator deploys a Log Search service (SQL Database and Log Search API) to support Audit Log search in the MinIO Tenant Console.
+
+       You can modify the Security Context to run the associated pod commands using a different User, Group, FsGroup, or FSGroupChangePolicy. 
+       You can also direct the pod to not run commands as the Root user.
+
+       
+
+   * - :guilabel:`SecurityContext for PostgreSQL`
+     - The MinIO Operator deploys a PostgreSQL database to support logging services.
+
+       You can modify the Security Context to run the associated pod commands using a different User, Group, FsGroup, or FSGroupChangePolicy. 
+       You can also direct the pod to not run commands as the Root user.
+
+       You can also modify the storage class and requested capacity associated to the PVC generated to support the Prometheus service.
+
 .. _create-tenant-deploy-view-tenant:
 
-9) Deploy and View the Tenant
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+10) Deploy and View the Tenant
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Select :guilabel:`Create` at any time to begin the deployment process. 
 The MinIO Operator displays the root user credentials *once* as part of deploying the Tenant. 
@@ -515,7 +547,7 @@ Each tab provides additional details or configuration options for the MinIO Tena
 
 .. _create-tenant-connect-tenant:
 
-10) Connect to the Tenant
+11) Connect to the Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The MinIO Operator creates services for the MinIO Tenant. 
@@ -573,7 +605,7 @@ Kubernetes provides multiple options for configuring external access to services
 
 .. _create-tenant-operator-forward-ports:
 
-11) Forward Ports
+12) Forward Ports
 ~~~~~~~~~~~~~~~~~
 
 .. cond:: k8s and not openshift

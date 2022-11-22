@@ -72,6 +72,7 @@ Syntax
 
          kubectl minio tenant create                  \
                               TENANT_NAME             \
+                              [--interactive]         \
                               --capacity              \
                               --servers               \
                               --volumes               \
@@ -81,6 +82,7 @@ Syntax
                               [--kes-config]          \
                               [--namespace]           \
                               [--output]              \
+                              [--pool]                \
                               [--storage-class] 
 
 
@@ -88,6 +90,23 @@ Flags
 -----
 
 The command supports the following flags:
+
+.. mc-cmd:: --interactive
+   :optional:
+
+   Offers command line prompts to request the information required to set up a new tenant.
+   This command is mutually exclusive of the other flags when creating a new tenant.
+
+   When added, prompts ask for input for the following values:
+
+   - Tenant name
+   - Total servers
+   - Total volumes
+   - Namespace
+   - Capacity
+   - Disable TLS
+   - Disable audit logs
+   - Disable prometheus
 
 .. mc-cmd:: TENANT_NAME
    :required:
@@ -175,6 +194,11 @@ The command supports the following flags:
       
    :mc-cmd:`~kubectl minio tenant create --output` does **not** create the MinIO Tenant. 
    Use ``kubectl apply -f <FILE>`` to manually create the MinIO tenant using the generated file.
+
+.. mc-cmd:: --pool
+   :optional:
+
+   Assign a name for the pool added for the tenant.
 
 .. mc-cmd:: --storage-class
    :optional:
