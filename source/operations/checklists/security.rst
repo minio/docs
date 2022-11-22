@@ -1,3 +1,5 @@
+.. _minio-security-checklist:
+
 ==================
 Security Checklist
 ==================

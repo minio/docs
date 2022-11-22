@@ -18,6 +18,13 @@ Coordination with MinIO Engineering via SUBNET ensures end-to-end support for pe
 Community users can seek support on the `MinIO Community Slack <https://slack.min.io>`__. 
 Community Support is best-effort only and has no SLAs around responsiveness.
 
+Checklists:
+
+- :ref:`Hardware checklists <minio-hardware-checklist>`
+- :ref:`Security Checklist <minio-security-checklist>`
+- :ref:`Software Checklist <minio-software-checklists>`
+- :ref:`Thresholds and Limits <minio-server-limits>`
+
 .. toctree::
    :titlesonly:
    :hidden:
