@@ -147,7 +147,7 @@ Use the :guilabel:`Search` bar to search for specific buckets or objects.
 Select the row for the bucket or object to browse. 
 
 Select :guilabel:`Create Bucket` to create a new bucket on the deployment.
-The S3 API allows for a maximum of 500,000 buckets per deployment.
+MinIO recommends no more than 500,000 buckets per deployment.
 
 Each bucket has :guilabel:`Manage` and :guilabel:`Browse` buttons.
 
