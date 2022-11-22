@@ -62,13 +62,13 @@ transition lifecycle management rules on any bucket in the cluster:.
 Expire Objects after Number of Days
 -----------------------------------
 
-Use :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --expiry-days` to
+Use :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --expire-days` to
 expire bucket contents a number of days after object creation:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm add ALIAS/PATH --expiry-days "DAYS" 
+   mc ilm add ALIAS/PATH --expire-days "DAYS" 
 
 - Replace :mc-cmd:`ALIAS <mc ilm add ALIAS>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
@@ -76,7 +76,7 @@ expire bucket contents a number of days after object creation:
 - Replace :mc-cmd:`PATH <mc ilm add ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
-- Replace :mc-cmd:`DAYS <mc ilm add --expiry-days>` with the number of days after
+- Replace :mc-cmd:`DAYS <mc ilm add --expire-days>` with the number of days after
   which to expire the object. For example, specify ``30`` to expire the
   object 30 days after creation.
 
@@ -87,17 +87,17 @@ Use :mc:`mc ilm add` to expiring noncurrent object versions and object
 delete markers: 
 
 - To expire noncurrent object versions after a specific duration in days,
-  include :mc-cmd:`~mc ilm add --noncurrentversion-expiration-days`.
+  include :mc-cmd:`~mc ilm add --noncurrent-expire-days`.
 
 - To expire delete markers for objects with no remaining versions, 
-  include :mc-cmd:`~mc ilm add --expired-object-delete-marker`.
+  include :mc-cmd:`~mc ilm add --expire-delete-marker`.
 
 .. code-block:: shell
    :class: copyable
 
    mc ilm add ALIAS/PATH \ 
-      --noncurrentversion-expiration-days NONCURRENT_DAYS \
-      --expired-object-delete-marker
+      --noncurrent-expire-days NONCURRENT_DAYS \
+      --expire-delete-marker
 
 - Replace :mc-cmd:`ALIAS <mc ilm add ALIAS>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
@@ -106,7 +106,7 @@ delete markers:
   S3-compatible host.
 
 - Replace :mc-cmd:`NONCURRENT_DAYS 
-  <mc ilm add --noncurrentversion-expiration-days>` with the number of days after
+  <mc ilm add --noncurrent-expire-days>` with the number of days after
   which to expire noncurrent object versions. For example, specify ``30d`` to
   expire a version after it has been noncurrent for at least 30 days.
 

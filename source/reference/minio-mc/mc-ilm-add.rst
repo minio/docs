@@ -96,7 +96,7 @@ Parameters
 
    .. code-block:: none
 
-      mc ilm add --prefix "meetingnotes/" myminio/mydata/ --expiry-days "90"
+      mc ilm add --prefix "meetingnotes/" myminio/mydata/ --expire-days "90"
 
    The command creates a rule that expires objects in the ``mydata`` bucket of the ``myminio`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
 
@@ -298,30 +298,30 @@ Examples
 Expire All Bucket Contents After Number of Days
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --expiry-days` to mark bucket contents for expiration after a number of days pass from the object's creation:
+Use :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --expire-days` to mark bucket contents for expiration after a number of days pass from the object's creation:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm add ALIAS/PATH --expiry-days "DAYS" 
+   mc ilm add ALIAS/PATH --expire-days "DAYS" 
 
 - Replace :mc-cmd:`ALIAS <mc ilm add ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
 
 - Replace :mc-cmd:`PATH <mc ilm add ALIAS>` with the path to the bucket on the S3-compatible host.
 
-- Replace :mc-cmd:`DATE <mc ilm add --expiry-days>` with the number of days after which to expire the object. 
+- Replace :mc-cmd:`DATE <mc ilm add --expire-days>` with the number of days after which to expire the object. 
   For example, specify ``30`` to expire the object 30 days after creation.
 
 Transition Non-Current Object Versions at a Prefix to a Different Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --prefix` and :mc-cmd:`~mc ilm add --tier` to transition older non-current versions of an object to a different storage tier.
+Use the :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --prefix` and :mc-cmd:`~mc ilm add --transition-tier` to transition older non-current versions of an object to a different storage tier.
 
 .. code-block:: shell
    :class: copyable
 
    mc ilm add --prefix "doc/" --transition-days "90" --tier "MINIOTIER-1"                  \
-          --noncurrentversion-transition-days "45" --noncurrentversion-tier "MINIOTIER-2"  \
+          --noncurrent-transition-days "45" --noncurrent-transition-tier "MINIOTIER-2"  \
           myminio/mybucket/
 
 This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``myminio`` deployment.
@@ -333,12 +333,12 @@ This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` 
 Expire All Objects at a Prefix, Retain Current Object Versions Longer Than Non-Current Object Versions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm add` command with :mc-cmd:`~mc ilm add --prefix`, :mc-cmd:`~mc ilm add --expiry-days`, and :mc-cmd:`~mc ilm add --noncurrentversion-expiration-days` to expire current and non-current versions of an object at different times.
+Use the :mc:`mc ilm add` command with :mc-cmd:`~mc ilm add --prefix`, :mc-cmd:`~mc ilm add --expire-days`, and :mc-cmd:`~mc ilm add --noncurrent-expire-days` to expire current and non-current versions of an object at different times.
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm add --prefix "doc/" --expiry-days "300" --noncurrentversion-expiration-days "100" myminio/mybucket/
+   mc ilm add --prefix "doc/" --expire-days "300" --noncurrent-expire-days "100" myminio/mybucket/
 
 This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``myminio`` deployment.
 

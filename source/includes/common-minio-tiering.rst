@@ -8,10 +8,10 @@ specified number of calendar days:
    :class: copyable
 
    mc ilm add ALIAS/BUCKET \
-   --tier TIERNAME \
+   --transition-tier TIERNAME \
    --transition-days DAYS \
-   --noncurrentversion-transition-days NONCURRENT_DAYS
-   --noncurrentversion-tier TIERNAME
+   --noncurrent-transition-days NONCURRENT_DAYS
+   --noncurrent-transition-tier TIERNAME
 
 The example above specifies the following arguments:
 
@@ -31,20 +31,20 @@ The example above specifies the following arguments:
      - Specify the full path to the bucket for which you are
        creating the lifecycle management rule.
 
-   * - :mc-cmd:`TIERNAME <mc ilm add --tier>`
+   * - :mc-cmd:`TIERNAME <mc ilm add --transition-tier>`
      - The remote storage tier to which MinIO transitions objects. 
        Specify the remote storage tier name created in the previous step.
 
        If you want to transition noncurrent object versions to a distinct
        remote tier, specify a different tier name for 
-       :mc-cmd:`~mc ilm add --noncurrentversion-tier`.
+       :mc-cmd:`~mc ilm add --noncurrent-transition-tier`.
 
    * - :mc-cmd:`DAYS <mc ilm add --transition-days>`
      - The number of calendar days after which MinIO marks an object as 
        eligible for transition. Specify the number of days as an integer,
        e.g. ``30`` for 30 days.
 
-   * - :mc-cmd:`NONCURRENT_DAYS <mc ilm add --noncurrentversion-transition-days>`
+   * - :mc-cmd:`NONCURRENT_DAYS <mc ilm add --noncurrent-transition-days>`
      - The number of calendar days after which MinIO marks a noncurrent
        object version as eligible for transition. MinIO specifically measures
        the time since an object *became* non-current instead of the object

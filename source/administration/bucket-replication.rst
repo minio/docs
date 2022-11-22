@@ -256,6 +256,9 @@ workers operating on that queue. MinIO continuously works to replicate and
 remove objects from the queue while scanning for new unreplicated objects to
 add to the queue. 
 
+MinIO queues failed replication operations and retries those operations until replication succeeds.
+This helps keep replication up-to-date without relying on the MinIO scanner to notice unreplicated object versions.
+
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
 
    Failed or pending replications requeue automatically when performing a list or any ``GET`` or ``HEAD`` API method. 
