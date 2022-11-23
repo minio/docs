@@ -7,6 +7,10 @@ Glossary
 .. glossary::
    :sorted:
 
+   access keys
+     A MinIO deployment or tenant user account with limited account typically used with API calls.
+     Access Keys were previously referred to as "Service Accounts"
+
    active-active
      A method of :term:`replication` that provides bidirectional mirroring of data.
      With active-active configuration, changing the data at at any storage location also changes the data at the other storage location(s).
@@ -215,7 +219,9 @@ Glossary
      A set of ``minio server`` nodes which combine their drives and resources to support object storage and retrieval requests.
 
    service account
+     Renamed to :term:`access keys`.
      A MinIO deployment or tenant user account with limited account typically used with API calls.
+
 
    single-node multi-drive
    SNMD

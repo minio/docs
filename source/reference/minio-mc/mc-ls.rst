@@ -42,6 +42,17 @@ results as the ``ls`` command.
 
          mc ls --recursive --versions myminio/mydata
 
+      The output resembles the following::
+
+      .. code-block:: shell
+
+         [2022-11-08 11:30:24 PST]    52MB  STANDARD log-data.csv
+         [2022-11-09 12:20:18 PST]    120MB WARM videos/event-2022-11-09.mp4
+
+      - ``STANDARD`` marks objects stored on the MinIO deployment
+      - ``WARM`` marks objects stored on the remote tier with matching name
+      - ``videos/`` indicates the prefix for the object
+
    .. tab-item:: SYNTAX
 
       The command has the following syntax:

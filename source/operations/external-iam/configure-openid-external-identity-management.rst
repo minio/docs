@@ -19,7 +19,7 @@ The procedure on this page provides instructions for:
 .. cond:: k8s
 
    - Configuring a MinIO Tenant to use an external OIDC provider.
-   - Accessing the Tenant Console using AD/LDAP Credentials.
+   - Accessing the Tenant Console using OIDC Credentials.
    - Using the MinIO ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API to generate temporary credentials for use by applications.
 
 .. cond:: linux or container or macos or windows
@@ -66,7 +66,7 @@ An OpenID user with no assigned policy has no permission to access any action or
 
    This procedure assumes your Kubernetes cluster has sufficient resources to  :ref:`deploy a new MinIO Tenant <minio-k8s-deploy-minio-tenant>`.
 
-   You can also use this procedure as guidance for modifying an existing MinIO Tenant to enable AD/LDAP Identity Management.
+   You can also use this procedure as guidance for modifying an existing MinIO Tenant to enable OIDC Identity Management.
 
 .. cond:: linux or container or macos or windows
 
@@ -215,8 +215,8 @@ An OpenID user with no assigned policy has no permission to access any action or
    user is :ref:`authorized 
    <minio-external-identity-management-openid-access-control>`. 
 
-   You can also create :ref:`service accounts <minio-idp-service-account>` for
-   supporting applications which must perform operations on MinIO. Service accounts
+   You can also create :ref:`access keys <minio-idp-service-account>` for
+   supporting applications which must perform operations on MinIO. Access Keys
    are long-lived credentials which inherit their privileges from the parent user.
    The parent user can further restrict those privileges while creating the service
    account. 

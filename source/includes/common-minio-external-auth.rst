@@ -143,7 +143,7 @@ Specify the Distinguished Name (DN) for an AD/LDAP account MinIO uses when
 querying the AD/LDAP server. Enables :ref:`Lookup-Bind
 <minio-external-identity-management-ad-ldap-lookup-bind>` authentication to the AD/LDAP server.
 
-The DN account should be a read-only service account with sufficient
+The DN account should be a read-only access keys with sufficient
 privileges to support querying performing user and group lookups.
 
 .. end-minio-ad-ldap-lookup-bind-dn

@@ -55,7 +55,7 @@ Instructions on configuring AD/LDAP are out of scope for this procedure.
    - For AD/LDAP deployments external to the Kubernetes cluster, you must ensure the cluster supports routing communications between Kubernetes services and pods and the external network.
      This may require configuration or deployment of additional Kubernetes network components and/or enabling access to the public internet.
 
-MinIO requires a read-only service account with which it :ref:`binds <minio-external-identity-management-ad-ldap-lookup-bind>` to perform authenticated user and group queries.
+MinIO requires a read-only access keys with which it :ref:`binds <minio-external-identity-management-ad-ldap-lookup-bind>` to perform authenticated user and group queries.
 
 Ensure each AD/LDAP user and group intended for use with MinIO has a corresponding :ref:`policy <minio-external-identity-management-ad-ldap-access-control>` on the MinIO deployment. 
 An AD/LDAP user with no assigned policy *and* with membership in groups with no assigned policy has no permission to access any action or resource on the MinIO cluster.
@@ -222,8 +222,8 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
    user is :ref:`authorized 
    <minio-external-identity-management-ad-ldap-access-control>`. 
 
-   You can also create :ref:`service accounts <minio-idp-service-account>` for
-   supporting applications which must perform operations on MinIO. Service accounts
+   You can also create :ref:`access keys <minio-idp-service-account>` for
+   supporting applications which must perform operations on MinIO. Access Keys
    are long-lived credentials which inherit their privileges from the parent user.
    The parent user can further restrict those privileges while creating the service
    account. 

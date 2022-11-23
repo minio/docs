@@ -66,12 +66,12 @@ The following table lists :mc:`mc admin` commands:
           :end-before: end-mc-admin-heal-desc
 
    * - :mc-cmd:`mc admin idp ldap`
-     - .. include:: /reference/minio-mc-admin/mc-admin-heal.rst
+     - .. include:: /reference/minio-mc-admin/mc-admin-idp-ldap.rst
           :start-after: start-mc-admin-idp-ldap-desc
           :end-before: end-mc-admin-idp-ldap-desc
   
    * - :mc-cmd:`mc admin idp openid`
-     - .. include:: /reference/minio-mc-admin/mc-admin-heal.rst
+     - .. include:: /reference/minio-mc-admin/mc-admin-idp-openid.rst
           :start-after: start-mc-admin-idp-openid-desc
           :end-before: end-mc-admin-idp-openid-desc
 

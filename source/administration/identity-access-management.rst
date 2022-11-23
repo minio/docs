@@ -51,8 +51,6 @@ Once authenticated, MinIO either allows or rejects the client request depending
 on whether or not the authenticated identity is *authorized* to perform the
 operation on the specified resource.
 
-Enabling external identity management disables the MinIO internal IDP, with the exception of the creating :ref:`service accounts <minio-idp-service-account>`.
-
 .. _minio-access-management:
 
 Access Management

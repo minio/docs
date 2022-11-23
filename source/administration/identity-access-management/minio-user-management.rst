@@ -39,36 +39,30 @@ For more information, see:
 - :ref:`minio-external-identity-management-ad-ldap`
 
 Enabling external identity management disables the MinIO internal IDP, with
-the exception of creating :ref:`service accounts
+the exception of creating :ref:`access keys
 <minio-idp-service-account>`.
 
 .. _minio-idp-service-account:
+.. _minio-id-access-keys:
 
-Service Accounts
-----------------
+Access Keys
+-----------
 
-MinIO service accounts are child identities of an authenticated MinIO user,
-including :ref:`externally managed identities
-<minio-authentication-and-identity-management>`. Each service account inherits
-its privileges based on the :ref:`policies <minio-policy>` attached to it's
-parent user *or* those groups in which the parent user has membership. Service
-accounts also support an optional inline policy which further restricts access
-to a subset of actions and resources available to the parent user.
+MinIO Access Keys (formerly "Service Accounts") are child identities of an authenticated MinIO user, including :ref:`externally managed identities <minio-authentication-and-identity-management>`. 
+Each access key inherits its privileges based on the :ref:`policies <minio-policy>` attached to it's parent user *or* those groups in which the parent user has membership. 
+Access keys also support an optional inline policy which further restricts access to a subset of actions and resources available to the parent user.
 
-A MinIO user can generate any number of service accounts. This allows
-application owners to generate arbitrary service accounts for their applications
-without requiring action from the MinIO administrators. Since the generated
-service accounts have the same or fewer permissions as the parents,
-administrators can focus on managing the top-level parent users without
-micro-managing generated service accounts.
+A MinIO user can generate any number of access keys. 
+This allows application owners to generate arbitrary access keys for their applications without requiring action from the MinIO administrators. 
+Since the generated access keys have the same or fewer permissions as the parents, administrators can focus on managing the top-level parent users without micro-managing generated access keys.
 
-You can create service accounts using either the :ref:`MinIO Console <minio-console>` *or* by using the :mc-cmd:`mc admin user svcacct add` command.
+You can create access keys using either the :ref:`MinIO Console <minio-console-user-access-keys>` *or* by using the :mc-cmd:`mc admin user svcacct add` command.
 
-.. admonition:: Service Accounts are for Programmatic Access
+.. admonition:: Access Keys are for Programmatic Access
    :class: dropdown, note
 
-   Service Accounts support programmatic access by applications. You cannot
-   use a Service Account to log into the MinIO Console.
+   Access Keys support programmatic access by applications. 
+   You cannot use an access key to log into the MinIO Console.
 
 .. _minio-users-root:
 
