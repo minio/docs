@@ -33,7 +33,7 @@ Client-side Bucket Replication
 
      You can configure bucket replication at any time, and the remote MinIO deployments may have pre-existing data on the replication target buckets.
 
-   - Site Replication extends bucket replication to include :ref:`IAM <minio-authentication-and-identity-management>`, security tokens, access keyss, and bucket-level configurations.
+   - Site Replication extends bucket replication to include :ref:`IAM <minio-authentication-and-identity-management>`, security tokens, access keys, and bucket-level configurations.
 
      Site replication is typically configured when initially deploying the MinIO peer sites.
      Only one site can hold any bucket or objects at the time of initial configuration.

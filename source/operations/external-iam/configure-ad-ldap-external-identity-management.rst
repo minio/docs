@@ -222,7 +222,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
    user is :ref:`authorized 
    <minio-external-identity-management-ad-ldap-access-control>`. 
 
-   You can also create :ref:`access keyss <minio-idp-service-account>` for
+   You can also create :ref:`access keys <minio-idp-service-account>` for
    supporting applications which must perform operations on MinIO. Service accounts
    are long-lived credentials which inherit their privileges from the parent user.
    The parent user can further restrict those privileges while creating the service

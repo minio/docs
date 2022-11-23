@@ -53,7 +53,7 @@ MinIO provides an example Go application
 :minio-git:`ldap.go <minio/blob/master/docs/sts/ldap.go>` that handles the
 full login flow. 
 
-AD/LDAP users can alternatively create :ref:`access keyss <minio-idp-service-account>` associated to their AD/LDAP user Distinguished Name. Service accounts are long-lived credentials which inherit their privileges from the parent user. The parent user can further restrict those privileges while creating the access keys. Use either of the following methods to create a new access keys
+AD/LDAP users can alternatively create :ref:`access keys <minio-idp-service-account>` associated to their AD/LDAP user Distinguished Name. Service accounts are long-lived credentials which inherit their privileges from the parent user. The parent user can further restrict those privileges while creating the access keys. Use either of the following methods to create a new access keys
 
 - Log into the :ref:`MinIO Console <minio-console>` using the AD/LDAP-managed user credentials. From the :guilabel:`Identity` section of the left navigation, select :guilabel:`Service Accounts` followed by the :guilabel:`Create access keys +` button.
 

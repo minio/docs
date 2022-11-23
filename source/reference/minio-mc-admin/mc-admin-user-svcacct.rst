@@ -23,9 +23,9 @@ The :mc:`mc admin user svcacct` command creates and manages :ref:`Service Accoun
 
 Each access keys is linked to a :ref:`user identity <minio-authentication-and-identity-management>` and inherits the :ref:`policies <minio-policy>` attached to it's parent user *or* those groups in which the parent user has membership. Service accounts also support an optional inline policy which further restricts access to a subset of actions and resources available to the parent user.
 
-:mc:`mc admin user svcacct` only supports creating access keyss for :ref:`MinIO-managed <minio-users>` and :ref:`Active Directory/LDAP-managed <minio-external-identity-management-ad-ldap>` accounts. 
+:mc:`mc admin user svcacct` only supports creating access keys for :ref:`MinIO-managed <minio-users>` and :ref:`Active Directory/LDAP-managed <minio-external-identity-management-ad-ldap>` accounts. 
 
-To create access keyss for :ref:`OpenID Connect-managed users <minio-external-identity-management-openid>`, log into the :ref:`MinIO Console <minio-console>` and generate the access keys through the UI.
+To create access keys for :ref:`OpenID Connect-managed users <minio-external-identity-management-openid>`, log into the :ref:`MinIO Console <minio-console>` and generate the access keys through the UI.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -47,7 +47,7 @@ The :mc:`mc admin user svcacct` command has the following subcommands:
      - Adds a new access keys to an existing MinIO or AD/LDAP user
 
    * - :mc-cmd:`mc admin user svcacct list`
-     - Lists the existing access keyss associated to a MinIO or AD/LDAP user.
+     - Lists the existing access keys associated to a MinIO or AD/LDAP user.
 
    * - :mc-cmd:`mc admin user svcacct remove`
      - Removes a access keys from a MinIO or AD/LDAP user.
@@ -113,7 +113,7 @@ Syntax
 
       - For :ref:`MinIO-managed users <minio-users>`, specify the access key for the user.
       - For :ref:`Active Directory/LDAP users <minio-external-identity-management-ad-ldap>`, specify the Distinguished Name of the user.
-      - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to generate access keyss.
+      - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to generate access keys.
 
    .. mc-cmd:: --access-key
       :optional:
@@ -136,13 +136,13 @@ Syntax
    :fullpath:
    :alias: ls
 
-   Lists all access keyss associated to the specified user.
+   Lists all access keys associated to the specified user.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following command lists all access keyss associated to an existing MinIO user:
+         The following command lists all access keys associated to an existing MinIO user:
 
          .. code-block:: shell
             :class: copyable
@@ -172,7 +172,7 @@ Syntax
 
       - For :ref:`MinIO-managed users <minio-users>`, specify the access key for the user.
       - For :ref:`Active Directory/LDAP users <minio-external-identity-management-ad-ldap>`, specify the Distinguished Name of the user.
-      - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to list access keyss.
+      - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to list access keys.
 
 .. mc-cmd:: remove
    :fullpath:
@@ -313,7 +313,7 @@ Syntax
 .. mc-cmd:: enable
    :fullpath:
 
-   Enables a access keys for the specified user. Applications can only authenticate using enabled access keyss.
+   Enables a access keys for the specified user. Applications can only authenticate using enabled access keys.
 
    .. tab-set::
 
@@ -350,7 +350,7 @@ Syntax
 .. mc-cmd:: disable
    :fullpath:
 
-   Disables a access keys for the specified user. Applications can only authenticate using enabled access keyss. 
+   Disables a access keys for the specified user. Applications can only authenticate using enabled access keys. 
 
    .. tab-set::
 

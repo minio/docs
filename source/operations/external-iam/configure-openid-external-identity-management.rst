@@ -215,7 +215,7 @@ An OpenID user with no assigned policy has no permission to access any action or
    user is :ref:`authorized 
    <minio-external-identity-management-openid-access-control>`. 
 
-   You can also create :ref:`access keyss <minio-idp-service-account>` for
+   You can also create :ref:`access keys <minio-idp-service-account>` for
    supporting applications which must perform operations on MinIO. Service accounts
    are long-lived credentials which inherit their privileges from the parent user.
    The parent user can further restrict those privileges while creating the service

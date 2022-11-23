@@ -58,7 +58,7 @@ After enabling site replication, identity and access management (IAM) settings s
    .. tab-item:: OIDC
 
       #. Policies
-      #. Service accounts associated to OIDC accounts with a valid :ref:`MinIO Policy <minio-policy>`. ``root`` access keyss do not sync.
+      #. Service accounts associated to OIDC accounts with a valid :ref:`MinIO Policy <minio-policy>`. ``root`` access keys do not sync.
       #. Policy mapping for synced user accounts
       #. Policy mapping for :ref:`Security Token Service (STS) users <minio-security-token-service>`
 
@@ -66,7 +66,7 @@ After enabling site replication, identity and access management (IAM) settings s
 
       #. Policies
       #. Groups
-      #. Service accounts associated to LDAP accounts with a valid :ref:`MinIO Policy <minio-policy>`. ``root`` access keyss do not sync.
+      #. Service accounts associated to LDAP accounts with a valid :ref:`MinIO Policy <minio-policy>`. ``root`` access keys do not sync.
       #. Policy mapping for synced user accounts
       #. Policy mapping for :ref:`Security Token Service (STS) users <minio-security-token-service>`
 

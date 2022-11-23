@@ -41,7 +41,7 @@ You can deploy MinIO using one of the following topologies:
 Site Replication
 ----------------
 
-Site replication expands the features of bucket replication to include IAM, security tokens, access keyss, and bucket features the same across all sites.
+Site replication expands the features of bucket replication to include IAM, security tokens, access keys, and bucket features the same across all sites.
 
 :ref:`Site replication <minio-site-replication-overview>` links multiple MinIO deployments together and keeps the buckets, objects, and Identity and Access Management (IAM) settings in sync across all connected sites.
 
