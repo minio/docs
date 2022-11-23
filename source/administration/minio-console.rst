@@ -235,7 +235,7 @@ Some subsections may not be visible if the authenticated user does not have the 
         
         You can view and modify the user's assigned :ref:`groups <minio-groups>` and :ref:`policies <minio-policy>`.
         
-        You can also view and manage any :ref:`Service Accounts <minio-idp-service-account>` associated to the user.
+        You can also view and manage any :ref:`Access Keys <minio-idp-service-account>` associated to the user.
 
    .. tab-item:: Groups
 

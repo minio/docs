@@ -17,7 +17,7 @@ Description
 
 .. start-mc-admin-user-svcacct-desc
 
-The :mc:`mc admin user svcacct` command creates and manages :ref:`Service Accounts <minio-idp-service-account>` on a MinIO deployment.
+The :mc:`mc admin user svcacct` command creates and manages :ref:`Access Keys <minio-idp-service-account>` on a MinIO deployment.
 
 .. end-mc-admin-user-svcacct-desc
 

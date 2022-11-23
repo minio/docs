@@ -59,7 +59,15 @@ MinIO provides an example Go application
 :minio-git:`web-identity.go <minio/blob/master/docs/sts/web-identity.go>` that
 handles the full login flow.
 
-OIDC users can alternatively create :ref:`access keys <minio-idp-service-account>` associated to their AD/LDAP user. Service accounts are long-lived credentials which inherit their privileges from the parent user. The parent user can further restrict those privileges while creating the access keys. To create a new access keys, log into the :ref:`MinIO Console <minio-console>` using the OIDC-managed user credentials. From the :guilabel:`Identity` section of the left navigation, select :guilabel:`Service Accounts` followed by the :guilabel:`Create access keys +` button.
+OIDC users can alternatively create :ref:`access keys <minio-idp-service-account>`. 
+Access Keys are long-lived credentials which inherit their privileges from the parent user. 
+The parent user can further restrict those privileges while creating the access keys. 
+Use either of the following methods to create a new access keys:
+
+- Log into the :ref:`MinIO Console <minio-console>` using the OIDC-managed user credentials. From the :guilabel:`Identity` section of the left navigation, select :guilabel:`Access Keys` followed by the :guilabel:`Create access keys +` button.
+
+- Use the :mc-cmd:`mc admin user svcacct add` command to create the access keys.
+  Specify the user Distinguished Name as the username to which to associate the access keys.
 
 Identifying the JWT Claim Value
 -------------------------------
