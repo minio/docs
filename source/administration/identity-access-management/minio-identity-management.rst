@@ -24,7 +24,7 @@ MinIO users. The :minio-git:`MinIO Console <console>` provides a graphical
 interface for creating users.
 
 MinIO also supports creating :ref:`access keys
-<minio-idp-service-account>`. Service accounts are child identities of an
+<minio-idp-service-account>`. Access Keys are child identities of an
 authenticated parent user and inherit their permissions from the parent. 
 
 MinIO by default denies access to all actions or resources not explicitly

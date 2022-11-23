@@ -126,7 +126,7 @@ Enter the user's OIDC credentials and log in to access the Console.
 Once logged in, you can perform any action for which the authenticated user is :ref:`authorized <minio-external-identity-management-openid-access-control>`. 
 
 You can also create :ref:`access keys <minio-idp-service-account>` for supporting applications which must perform operations on MinIO. 
-Service accounts are long-lived credentials which inherit their privileges from the parent user.
+Access Keys are long-lived credentials which inherit their privileges from the parent user.
 The parent user can further restrict those privileges while creating the access keys. 
 
 5) Generate S3-Compatible Temporary Credentials using OIDC Credentials

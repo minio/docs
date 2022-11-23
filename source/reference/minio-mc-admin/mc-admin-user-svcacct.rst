@@ -21,7 +21,7 @@ The :mc:`mc admin user svcacct` command creates and manages :ref:`Access Keys <m
 
 .. end-mc-admin-user-svcacct-desc
 
-Each access keys is linked to a :ref:`user identity <minio-authentication-and-identity-management>` and inherits the :ref:`policies <minio-policy>` attached to it's parent user *or* those groups in which the parent user has membership. Service accounts also support an optional inline policy which further restricts access to a subset of actions and resources available to the parent user.
+Each access keys is linked to a :ref:`user identity <minio-authentication-and-identity-management>` and inherits the :ref:`policies <minio-policy>` attached to it's parent user *or* those groups in which the parent user has membership. Access Keys also support an optional inline policy which further restricts access to a subset of actions and resources available to the parent user.
 
 :mc:`mc admin user svcacct` only supports creating access keys for :ref:`MinIO-managed <minio-users>` and :ref:`Active Directory/LDAP-managed <minio-external-identity-management-ad-ldap>` accounts. 
 
@@ -120,7 +120,7 @@ Syntax
 
       The access key to associate with the new access keys. Omit to direct MinIO to autogenerate the access key for the new access keys.
 
-      Service account names *must* be unique across all users.
+      Access Key names *must* be unique across all users.
 
    .. mc-cmd:: --secret-key
       :optional:
