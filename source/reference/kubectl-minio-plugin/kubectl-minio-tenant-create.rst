@@ -72,6 +72,7 @@ Syntax
 
          kubectl minio tenant create                  \
                               TENANT_NAME             \
+                              [--interactive]         \
                               --capacity              \
                               --servers               \
                               --volumes               \
@@ -88,6 +89,23 @@ Flags
 -----
 
 The command supports the following flags:
+
+.. mc-cmd:: --interactive
+   :optional:
+
+   Offers command line prompts to request the information required to set up a new tenant.
+   Use this instead of the remaining flags when creating a new tenant.
+
+   When added, prompts ask for input for the following values:
+
+   - Tenant name
+   - Total servers
+   - Total volumes
+   - Namespace
+   - Capacity
+   - Disable TLS
+   - Disable audit logs
+   - Disable prometheus
 
 .. mc-cmd:: TENANT_NAME
    :required:
