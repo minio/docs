@@ -66,13 +66,14 @@ You can configure a new MySQL service endpoint using either environment variable
       .. code-block:: shell
          :class: copyable
 
-         set MINIO_NOTIFY_MYSQL_DSN_STRING_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_MYSQL_TABLE_<IDENTIFIER>="<ENDPOINT>"
-         set MINIO_NOTIFY_MYSQL_FORMAT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MYSQL_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MYSQL_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MYSQL_COMMENT_<IDENTIFIER>="<string>"
+         set MINIO_NOTIFY_MYSQL_ENABLE_<IDENTIFIER>="on"
+         set MINIO_NOTIFY_MYSQL_DSN_STRING_<IDENTIFIER>="user:password@tcp(hostname:port)/database"
+         set MINIO_NOTIFY_MYSQL_TABLE_<IDENTIFIER>="minio-events"
+         set MINIO_NOTIFY_MYSQL_FORMAT_<IDENTIFIER>="namespace|access"
+         set MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
+         set MINIO_NOTIFY_MYSQL_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
+         set MINIO_NOTIFY_MYSQL_QUEUE_LIMIT_<IDENTIFIER>="100000"
+         set MINIO_NOTIFY_MYSQL_COMMENT_<IDENTIFIER>="MySQL Event Notification Logging for MinIO"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         MySQL service endpoint. Use the same ``<IDENTIFIER>`` value for all 
