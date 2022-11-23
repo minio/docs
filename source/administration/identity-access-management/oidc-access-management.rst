@@ -62,7 +62,7 @@ handles the full login flow.
 OIDC users can alternatively create :ref:`access keys <minio-idp-service-account>`. 
 Access Keys are long-lived credentials which inherit their privileges from the parent user. 
 The parent user can further restrict those privileges while creating the access keys. 
-To create a new access keys, log into the :ref:`MinIO Console <minio-console>` using the OIDC-managed user credentials. 
+To create a new access key, log into the :ref:`MinIO Console <minio-console>` using the OIDC-managed user credentials. 
 From the :guilabel:`Identity` section of the left navigation, select :guilabel:`Access Keys` followed by the :guilabel:`Create access keys +` button.
 
 Identifying the JWT Claim Value
