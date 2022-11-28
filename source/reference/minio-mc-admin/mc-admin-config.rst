@@ -1295,7 +1295,7 @@ service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`
 :ref:`minio-bucket-notifications-publish-postgresql` for a tutorial on 
 using these environment variables.
 
-.. mc-conf:: notify_postgresql
+.. mc-conf:: notify_postgres
 
    The top-level configuration key for defining an PostgreSQL service endpoint for use
    with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
@@ -1303,9 +1303,9 @@ using these environment variables.
    Use :mc-cmd:`mc admin config set` to set or update an PostgreSQL service endpoint. 
    The following arguments are *required* for each target: 
    
-   - :mc-conf:`~notify_postgresql.connection_string`
-   - :mc-conf:`~notify_postgresql.table`
-   - :mc-conf:`~notify_postgresql.format`
+   - :mc-conf:`~notify_postgres.connection_string`
+   - :mc-conf:`~notify_postgres.table`
+   - :mc-conf:`~notify_postgres.format`
 
    Specify additional optional arguments as a whitespace (``" "``)-delimited 
    list.
@@ -1313,7 +1313,7 @@ using these environment variables.
    .. code-block:: shell
       :class: copyable
 
-      mc admin config set notify_postgresql \ 
+      mc admin config set notify_postgres \ 
         connection_string="host=postgresql.example.com port=5432..."
         table="minioevents" \
         format="namespace" \
@@ -1325,19 +1325,19 @@ using these environment variables.
 
    .. code-block:: shell
 
-      mc admin config set notify_postgresql:primary \ 
+      mc admin config set notify_postgres:primary \ 
          connection_string="host=postgresql.example.com port=5432..."
          table="minioevents" \
          format="namespace" \
          [ARGUMENT=VALUE ...]
 
-      mc admin config set notify_postgresql:secondary \
+      mc admin config set notify_postgres:secondary \
          connection_string="host=postgresql.example.com port=5432..."
          table="minioevents" \
          format="namespace" \
          [ARGUMENT=VALUE ...]
 
-   The :mc-conf:`notify_postgresql` configuration key supports the following 
+   The :mc-conf:`notify_postgres` configuration key supports the following 
    arguments:
 
    .. mc-conf:: connection_string
@@ -1350,7 +1350,7 @@ using these environment variables.
          :end-before: end-minio-notify-postgresql-connection-string
       
       This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRESQL_CONNECTION_STRING` environment
+      :envvar:`MINIO_NOTIFY_POSTGRES_CONNECTION_STRING` environment
       variable.
 
    .. mc-conf:: table
@@ -1363,7 +1363,7 @@ using these environment variables.
          :end-before: end-minio-notify-postgresql-table
       
       This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRESQL_TABLE` environment
+      :envvar:`MINIO_NOTIFY_POSTGRES_TABLE` environment
       variable.
 
    .. mc-conf:: format
@@ -1376,7 +1376,7 @@ using these environment variables.
          :end-before: end-minio-notify-postgresql-format
       
       This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRESQL_FORMAT` environment
+      :envvar:`MINIO_NOTIFY_POSTGRES_FORMAT` environment
       variable.
 
    .. mc-conf:: max_open_connections
@@ -1389,7 +1389,7 @@ using these environment variables.
          :end-before: end-minio-notify-postgresql-max-open-connections
       
       This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRESQL_MAX_OPEN_CONNECTIONS` environment
+      :envvar:`MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS` environment
       variable.
 
 
@@ -1403,7 +1403,7 @@ using these environment variables.
          :end-before: end-minio-notify-postgresql-queue-dir
 
       This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRESQL_QUEUE_DIR` environment variable.
+      :envvar:`MINIO_NOTIFY_POSTGRES_QUEUE_DIR` environment variable.
       
    .. mc-conf:: queue_limit
       :delimiter: " "
@@ -1416,7 +1416,7 @@ using these environment variables.
          :end-before: end-minio-notify-postgresql-queue-limit
 
       This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRESQL_QUEUE_LIMIT` environment variable.
+      :envvar:`MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT` environment variable.
 
       
    .. mc-conf:: comment
@@ -1429,7 +1429,7 @@ using these environment variables.
          :end-before: end-minio-notify-postgresql-comment
 
       This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRESQL_COMMENT` environment variable.
+      :envvar:`MINIO_NOTIFY_POSTGRES_COMMENT` environment variable.
 
 .. _minio-server-config-bucket-notification-mysql:
 

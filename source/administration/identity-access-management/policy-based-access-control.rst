@@ -712,19 +712,19 @@ services:
 
 .. policy-action:: admin:CreateServiceAccount
 
-   Allows creating MinIO Service Account
+   Allows creating MinIO Access Key
 
 .. policy-action:: admin:UpdateServiceAccount
 
-   Allows updating MinIO Service Account
+   Allows updating MinIO Access Key
 
 .. policy-action:: admin:RemoveServiceAccount
 
-   Allows deleting MinIO Service Account
+   Allows deleting MinIO Access Key
 
 .. policy-action:: admin:ListServiceAccounts
 
-   Allows listing MinIO Service Account
+   Allows listing MinIO Access Key
 
 .. policy-action:: admin:SetBucketQuota
 

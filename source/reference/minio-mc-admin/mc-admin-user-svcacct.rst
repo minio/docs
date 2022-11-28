@@ -17,15 +17,15 @@ Description
 
 .. start-mc-admin-user-svcacct-desc
 
-The :mc:`mc admin user svcacct` command creates and manages :ref:`Service Accounts <minio-idp-service-account>` on a MinIO deployment.
+The :mc:`mc admin user svcacct` command creates and manages :ref:`Access Keys <minio-idp-service-account>` on a MinIO deployment.
 
 .. end-mc-admin-user-svcacct-desc
 
-Each service account is linked to a :ref:`user identity <minio-authentication-and-identity-management>` and inherits the :ref:`policies <minio-policy>` attached to it's parent user *or* those groups in which the parent user has membership. Service accounts also support an optional inline policy which further restricts access to a subset of actions and resources available to the parent user.
+Each access keys is linked to a :ref:`user identity <minio-authentication-and-identity-management>` and inherits the :ref:`policies <minio-policy>` attached to it's parent user *or* those groups in which the parent user has membership. Each access key also supports an optional inline policy which further restricts access to a subset of actions and resources available to the parent user.
 
-:mc:`mc admin user svcacct` only supports creating service accounts for :ref:`MinIO-managed <minio-users>` and :ref:`Active Directory/LDAP-managed <minio-external-identity-management-ad-ldap>` accounts. 
+:mc:`mc admin user svcacct` only supports creating access keys for :ref:`MinIO-managed <minio-users>` and :ref:`Active Directory/LDAP-managed <minio-external-identity-management-ad-ldap>` accounts. 
 
-To create service accounts for :ref:`OpenID Connect-managed users <minio-external-identity-management-openid>`, log into the :ref:`MinIO Console <minio-console>` and generate the service account through the UI.
+To create access keys for :ref:`OpenID Connect-managed users <minio-external-identity-management-openid>`, log into the :ref:`MinIO Console <minio-console>` and generate the access keys through the UI.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -44,25 +44,25 @@ The :mc:`mc admin user svcacct` command has the following subcommands:
      - Description
 
    * - :mc-cmd:`mc admin user svcacct add`
-     - Adds a new service account to an existing MinIO or AD/LDAP user
+     - Adds a new access keys to an existing MinIO or AD/LDAP user
 
    * - :mc-cmd:`mc admin user svcacct list`
-     - Lists the existing service accounts associated to a MinIO or AD/LDAP user.
+     - Lists the existing access keys associated to a MinIO or AD/LDAP user.
 
    * - :mc-cmd:`mc admin user svcacct remove`
-     - Removes a service account from a MinIO or AD/LDAP user.
+     - Removes a access keys from a MinIO or AD/LDAP user.
 
    * - :mc-cmd:`mc admin user svcacct info`
-     - Returns detailed information on a service account.
+     - Returns detailed information on a access keys.
 
    * - :mc-cmd:`mc admin user svcacct edit`
-     - Modifies the secret key or inline policy associated with a service account.
+     - Modifies the secret key or inline policy associated with a access keys.
 
    * - :mc-cmd:`mc admin user svcacct enable`
-     - Enables a service account.
+     - Enables a access keys.
 
    * - :mc-cmd:`mc admin user svcacct disable`
-     - Disables a service account.
+     - Disables a access keys.
 
 Syntax
 ------
@@ -70,13 +70,13 @@ Syntax
 .. mc-cmd:: add
    :fullpath:
 
-   Adds a new service account associated to the specified user.
+   Adds a new access keys associated to the specified user.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following command creates a new service account associated to an existing MinIO user:
+         The following command creates a new access keys associated to an existing MinIO user:
 
          .. code-block:: shell
             :class: copyable
@@ -109,40 +109,40 @@ Syntax
    .. mc-cmd:: USER
       :required:
 
-      The name of the user to which MinIO adds the new service account.
+      The name of the user to which MinIO adds the new access keys.
 
       - For :ref:`MinIO-managed users <minio-users>`, specify the access key for the user.
       - For :ref:`Active Directory/LDAP users <minio-external-identity-management-ad-ldap>`, specify the Distinguished Name of the user.
-      - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to generate service accounts.
+      - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to generate access keys.
 
    .. mc-cmd:: --access-key
       :optional:
 
-      The access key to associate with the new service account. Omit to direct MinIO to autogenerate the access key for the new service account.
+      The access key to associate with the new access keys. Omit to direct MinIO to autogenerate the access key for the new access keys.
 
-      Service account names *must* be unique across all users.
+      Access Key names *must* be unique across all users.
 
    .. mc-cmd:: --secret-key
       :optional:
 
-      The secret key to associate with the new service account. Omit to direct MinIO to autogenerate the secret key for the new service account.
+      The secret key to associate with the new access keys. Omit to direct MinIO to autogenerate the secret key for the new access keys.
 
    .. mc-cmd:: --policy
       :optional:
 
-      The path to a :ref:`policy document <minio-policy>` to attach to the new service account. The attached policy cannot grant access to any action or resource not explicitly allowed by the parent user's policies.
+      The path to a :ref:`policy document <minio-policy>` to attach to the new access keys. The attached policy cannot grant access to any action or resource not explicitly allowed by the parent user's policies.
 
 .. mc-cmd:: list
    :fullpath:
    :alias: ls
 
-   Lists all service accounts associated to the specified user.
+   Lists all access keys associated to the specified user.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following command lists all service accounts associated to an existing MinIO user:
+         The following command lists all access keys associated to an existing MinIO user:
 
          .. code-block:: shell
             :class: copyable
@@ -168,23 +168,23 @@ Syntax
    .. mc-cmd:: USER
       :required:
 
-      The name of the user to which MinIO adds the new service account.
+      The name of the user to which MinIO adds the new access keys.
 
       - For :ref:`MinIO-managed users <minio-users>`, specify the access key for the user.
       - For :ref:`Active Directory/LDAP users <minio-external-identity-management-ad-ldap>`, specify the Distinguished Name of the user.
-      - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to list service accounts.
+      - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to list access keys.
 
 .. mc-cmd:: remove
    :fullpath:
    :alias: rm
 
-   Removes a service account associated to the specified user. Applications can no longer authenticate using that service account after removal.
+   Removes a access keys associated to the specified user. Applications can no longer authenticate using that access keys after removal.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following command removes the specified service account:
+         The following command removes the specified access keys:
 
          .. code-block:: shell
             :class: copyable
@@ -210,18 +210,18 @@ Syntax
    .. mc-cmd:: SERVICEACCOUNT
       :required:
 
-      The access key for the service account to remove.
+      The access key for the access keys to remove.
 
 .. mc-cmd:: info
    :fullpath:
 
-   Returns a description of a service account associated to the specified user. The description includes the parent user of the specified service account, its status, and whether the service account has an assigned inline policy.
+   Returns a description of a access keys associated to the specified user. The description includes the parent user of the specified access keys, its status, and whether the access keys has an assigned inline policy.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following command returns detailed information on the specified service account:
+         The following command returns detailed information on the specified access keys:
 
          .. code-block:: shell
             :class: copyable
@@ -248,24 +248,24 @@ Syntax
    .. mc-cmd:: SERVICEACCOUNT
       :required:
 
-      The access key for the service account to remove.
+      The access key for the access keys to remove.
 
    .. mc-cmd:: --policy
       :optional:
 
-      Returns the policy attached to the service account in JSON format. The output is ``null`` if the service account has no attached policy.
+      Returns the policy attached to the access keys in JSON format. The output is ``null`` if the access keys has no attached policy.
 
 .. mc-cmd:: edit
    :fullpath:
    :alias: set
 
-   Modifies the configuration of a service account associated to the specified user.
+   Modifies the configuration of a access keys associated to the specified user.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following command modifies the specified service account:
+         The following command modifies the specified access keys:
 
          .. code-block:: shell
             :class: copyable
@@ -296,30 +296,30 @@ Syntax
    .. mc-cmd:: SERVICEACCOUNT
       :required:
 
-      The access key for the service account to modify.
+      The access key for the access keys to modify.
 
    .. mc-cmd:: --secret-key
       :optional:
 
-      The secret key to associate with the new service account. Overwrites the previous secret key. Applications using the service account *must* update to use the new credentials to continue performing operations.
+      The secret key to associate with the new access keys. Overwrites the previous secret key. Applications using the access keys *must* update to use the new credentials to continue performing operations.
 
    .. mc-cmd:: --policy
       :optional:
 
-      The path to a :ref:`policy document <minio-policy>` to attach to the new service account. The attached policy cannot grant access to any action or resource not explicitly allowed by the parent user's policies.
+      The path to a :ref:`policy document <minio-policy>` to attach to the new access keys. The attached policy cannot grant access to any action or resource not explicitly allowed by the parent user's policies.
 
       The new policy overwrites any previously attached policy.
 
 .. mc-cmd:: enable
    :fullpath:
 
-   Enables a service account for the specified user. Applications can only authenticate using enabled service accounts.
+   Enables a access keys for the specified user. Applications can only authenticate using enabled access keys.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following command enables the specified service account:
+         The following command enables the specified access keys:
 
          .. code-block:: shell
             :class: copyable
@@ -345,18 +345,18 @@ Syntax
    .. mc-cmd:: SERVICEACCOUNT
       :required:
 
-      The access key for the service account to enable.
+      The access key for the access keys to enable.
 
 .. mc-cmd:: disable
    :fullpath:
 
-   Disables a service account for the specified user. Applications can only authenticate using enabled service accounts. 
+   Disables a access keys for the specified user. Applications can only authenticate using enabled access keys. 
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following command disables the specified service account:
+         The following command disables the specified access keys:
 
          .. code-block:: shell
             :class: copyable
@@ -382,7 +382,7 @@ Syntax
    .. mc-cmd:: SERVICEACCOUNT
       :required:
 
-      The access key for the service account to disable.
+      The access key for the access keys to disable.
 
 Global Flags
 ~~~~~~~~~~~~

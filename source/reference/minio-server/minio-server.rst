@@ -1575,7 +1575,7 @@ an NATS service endpoint with ID of ``PRIMARY``.
 PostgreSQL Service for Bucket Notifications
 +++++++++++++++++++++++++++++++++++++++++++
 
-The following section documents environment variables for configuring an POSTGRESQL
+The following section documents environment variables for configuring an POSTGRES
 service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
 :ref:`minio-bucket-notifications-publish-postgresql` for a tutorial on
 using these environment variables.
@@ -1588,21 +1588,21 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 .. code-block:: shell
    :class: copyable
 
-   set MINIO_NOTIFY_POSTGRESQL_ENABLE_PRIMARY="on"
-   set MINIO_NOTIFY_POSTGRESQL_CONNECTION_STRING_PRIMARY="host=postgresql-endpoint.example.net port=4222..."
-   set MINIO_NOTIFY_POSTGRESQL_TABLE_PRIMARY="minioevents"
-   set MINIO_NOTIFY_POSTGRESQL_FORMAT_PRIMARY="namespace"
+   set MINIO_NOTIFY_POSTGRES_ENABLE_PRIMARY="on"
+   set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_PRIMARY="host=postgresql-endpoint.example.net port=4222..."
+   set MINIO_NOTIFY_POSTGRES_TABLE_PRIMARY="minioevents"
+   set MINIO_NOTIFY_POSTGRES_FORMAT_PRIMARY="namespace"
 
-   set MINIO_NOTIFY_POSTGRESQL_ENABLE_SECONDARY="on"
-   set MINIO_NOTIFY_POSTGRESQL_CONNECTION_STRING_SECONDARY="host=postgresql-endpoint.example.net port=4222..."
-   set MINIO_NOTIFY_POSTGRESQL_TABLE_SECONDARY="minioevents"
-   set MINIO_NOTIFY_POSTGRESQL_FORMAT_SECONDARY="namespace"
+   set MINIO_NOTIFY_POSTGRES_ENABLE_SECONDARY="on"
+   set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_SECONDARY="host=postgresql-endpoint.example.net port=4222..."
+   set MINIO_NOTIFY_POSTGRES_TABLE_SECONDARY="minioevents"
+   set MINIO_NOTIFY_POSTGRES_FORMAT_SECONDARY="namespace"
 
-For example, :envvar:`MINIO_NOTIFY_POSTGRESQL_ENABLE_PRIMARY
-<MINIO_NOTIFY_POSTGRESQL_ENABLE>` indicates the environment variable is
+For example, :envvar:`MINIO_NOTIFY_POSTGRES_ENABLE_PRIMARY
+<MINIO_NOTIFY_POSTGRES_ENABLE>` indicates the environment variable is
 associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
 
-.. envvar:: MINIO_NOTIFY_POSTGRESQL_ENABLE
+.. envvar:: MINIO_NOTIFY_POSTGRES_ENABLE
 
    *Required*
 
@@ -1613,14 +1613,14 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
    Requires specifying the following additional environment variables if set
    to ``on``:
 
-   - :envvar:`MINIO_NOTIFY_POSTGRESQL_CONNECTION_STRING`
-   - :envvar:`MINIO_NOTIFY_POSTGRESQL_TABLE`
-   - :envvar:`MINIO_NOTIFY_POSTGRESQL_FORMAT`
+   - :envvar:`MINIO_NOTIFY_POSTGRES_CONNECTION_STRING`
+   - :envvar:`MINIO_NOTIFY_POSTGRES_TABLE`
+   - :envvar:`MINIO_NOTIFY_POSTGRES_FORMAT`
 
    This environment variable corresponds with the
-   :mc-conf:`notify_postgresql <notify_postgresql>` configuration setting.
+   :mc-conf:`notify_postgres <notify_postgres>` configuration setting.
 
-.. envvar:: MINIO_NOTIFY_POSTGRESQL_CONNECTION_STRING
+.. envvar:: MINIO_NOTIFY_POSTGRES_CONNECTION_STRING
 
    *Required*
 
@@ -1629,11 +1629,11 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :end-before: end-minio-notify-postgresql-connection-string
 
    This environment variable corresponds with the
-   :mc-conf:`notify_postgresql connection_string <notify_postgresql.connection_string>`
+   :mc-conf:`notify_postgres connection_string <notify_postgres.connection_string>`
    configuration setting.
 
 
-.. envvar:: MINIO_NOTIFY_POSTGRESQL_TABLE
+.. envvar:: MINIO_NOTIFY_POSTGRES_TABLE
 
    *Required*
 
@@ -1642,11 +1642,11 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :end-before: end-minio-notify-postgresql-table
 
    This environment variable corresponds with the
-   :mc-conf:`notify_postgresql table <notify_postgresql.table>`
+   :mc-conf:`notify_postgres table <notify_postgres.table>`
    configuration setting.
 
 
-.. envvar:: MINIO_NOTIFY_POSTGRESQL_FORMAT
+.. envvar:: MINIO_NOTIFY_POSTGRES_FORMAT
 
    *Required*
 
@@ -1655,11 +1655,11 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :end-before: end-minio-notify-postgresql-format
 
    This environment variable corresponds with the
-   :mc-conf:`notify_postgresql format <notify_postgresql.format>`
+   :mc-conf:`notify_postgres format <notify_postgres.format>`
    configuration setting.
 
 
-.. envvar:: MINIO_NOTIFY_POSTGRESQL_MAX_OPEN_CONNECTIONS
+.. envvar:: MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS
 
    *Optional*
 
@@ -1668,11 +1668,11 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :end-before: end-minio-notify-postgresql-max-open-connections
 
    This environment variable corresponds with the
-   :mc-conf:`notify_postgresql max_open_connections
-   <notify_postgresql.max_open_connections>`
+   :mc-conf:`notify_postgres max_open_connections
+   <notify_postgres.max_open_connections>`
    configuration setting.
 
-.. envvar:: MINIO_NOTIFY_POSTGRESQL_QUEUE_DIR
+.. envvar:: MINIO_NOTIFY_POSTGRES_QUEUE_DIR
 
    *Optional*
 
@@ -1681,10 +1681,10 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :end-before: end-minio-notify-postgresql-queue-dir
 
    This environment variable corresponds with the
-   :mc-conf:`notify_postgresql queue_dir <notify_postgresql.queue_dir>`
+   :mc-conf:`notify_postgres queue_dir <notify_postgres.queue_dir>`
    configuration setting.
 
-.. envvar:: MINIO_NOTIFY_POSTGRESQL_QUEUE_LIMIT
+.. envvar:: MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT
 
    *Optional*
 
@@ -1693,10 +1693,10 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :end-before: end-minio-notify-postgresql-queue-limit
 
    This environment variable corresponds with the
-   :mc-conf:`notify_postgresql queue_limit <notify_postgresql.queue_limit>`
+   :mc-conf:`notify_postgres queue_limit <notify_postgres.queue_limit>`
    configuration setting.
 
-.. envvar:: MINIO_NOTIFY_POSTGRESQL_COMMENT
+.. envvar:: MINIO_NOTIFY_POSTGRES_COMMENT
 
    *Optional*
 
@@ -1705,7 +1705,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :end-before: end-minio-notify-postgresql-comment
 
    This environment variable corresponds with the
-   :mc-conf:`notify_postgresql comment <notify_postgresql.comment>`
+   :mc-conf:`notify_postgres comment <notify_postgres.comment>`
    configuration setting.
 
 .. _minio-server-envvar-bucket-notification-mysql:

@@ -61,20 +61,21 @@ variables *or* by setting runtime configuration settings.
       related to configuring a PostgreSQL service endpoint. The minimum
       *required* variables are:
       
-      - :envvar:`MINIO_NOTIFY_POSTGRESQL_CONNECTION_STRING` 
-      - :envvar:`MINIO_NOTIFY_POSTGRESQL_TABLE`
-      - :envvar:`MINIO_NOTIFY_POSTGRESQL_FORMAT`
+      - :envvar:`MINIO_NOTIFY_POSTGRES_CONNECTION_STRING` 
+      - :envvar:`MINIO_NOTIFY_POSTGRES_TABLE`
+      - :envvar:`MINIO_NOTIFY_POSTGRES_FORMAT`
 
       .. code-block:: shell
          :class: copyable
 
-         set MINIO_NOTIFY_CONNECTION_STRING_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_TABLE_<IDENTIFIER>="ENDPOINT"
-         set MINIO_NOTIFY_FORMAT_<IDENTIFIER>=""
-         set MINIO_NOTIFY_MAX_OPEN_CONNECTIONS_<IDENTIFIER>=""
-         set MINIO_NOTIFY_QUEUE_DIR_<IDENTIFIER>=""
-         set MINIO_NOTIFY_QUEUE_LIMIT_<IDENTIFIER>=""
-         set MINIO_NOTIFY_COMMENT_<IDENTIFIER>=""
+         set MINIO_NOTIFY_POSTGRES_ENABLE_<IDENTIFIER>="on"
+         set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_<IDENTIFIER>="host=postgresql-endpoint.example.net port=4222"
+         set MINIO_NOTIFY_POSTGRES_TABLE_<IDENTIFIER>="minioevents"
+         set MINIO_NOTIFY_POSTGRES_FORMAT_<IDENTIFIER>="namespace|access"
+         set MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
+         set MINIO_NOTIFY_POSTGRES_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
+         set MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT_<IDENTIFIER>="100000"
+         set MINIO_NOTIFY_POSTGRES_COMMENT_<IDENTIFIER>="PostgreSQL Notification Event Logging for MinIO"
 
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
@@ -85,7 +86,7 @@ variables *or* by setting runtime configuration settings.
         If the specified ``<IDENTIFIER>`` matches an existing PostgreSQL service
         endpoint on the MinIO deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_postgresql <mc admin config get>` to
+        :mc-cmd:`mc admin config get notify_postgres <mc admin config get>` to
         review the currently configured PostgreSQL endpoints on the MinIO deployment.
 
       - Replace ``<ENDPOINT>`` with the |postgresql-uri-reference|
@@ -105,22 +106,22 @@ variables *or* by setting runtime configuration settings.
 
       MinIO supports adding or updating PostgreSQL endpoints on a running 
       :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
-      and the :mc-conf:`notify_postgresql` configuration key. You must restart the 
+      and the :mc-conf:`notify_postgres` configuration key. You must restart the 
       :mc:`minio server` process to apply any new or updated configuration
       settings.
 
       The following example code sets *all*  settings related to configuring an
       PostgreSQL service endpoint. The minimum *required* setting are: 
       
-      - :mc-conf:`notify_postgresql connection_string 
-        <notify_postgresql.connection_string>`
-      - :mc-conf:`notify_postgresql table <notify_postgresql.table>`
-      - :mc-conf:`notify_postgresql format <notify_postgresql.format>`
+      - :mc-conf:`notify_postgres connection_string 
+        <notify_postgres.connection_string>`
+      - :mc-conf:`notify_postgres table <notify_postgres.table>`
+      - :mc-conf:`notify_postgres format <notify_postgres.format>`
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ notify_postgresql:IDENTIFIER \
+         mc admin config set ALIAS/ notify_postgres:IDENTIFIER \
             connection_string="ENDPOINT" \
             table="<string>" \
             format="<string>" \
@@ -136,7 +137,7 @@ variables *or* by setting runtime configuration settings.
         If the specified ``IDENTIFIER`` matches an existing PostgreSQL service
         endpoint on the MinIO deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_postgresql <mc admin config get>` to
+        :mc-cmd:`mc admin config get notify_postgres <mc admin config get>` to
         review the currently configured PostgreSQL endpoints on the MinIO deployment.
 
       - Replace ``<ENDPOINT>`` with the `PostgreSQL URI connection string 
@@ -255,7 +256,7 @@ configured PostgreSQL service endpoints in the deployment:
 .. code-block:: shell
    :class: copyable
 
-   mc admin config get ALIAS/ notify_postgresql
+   mc admin config get ALIAS/ notify_postgres
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment.
 
@@ -263,14 +264,14 @@ The command output resembles the following:
 
 .. code-block:: shell
 
-   notify_postgresql:primary queue_dir="" connection_string="postgresql://" queue_limit="0"  table="" format="namespace"
-   notify_postgresql:secondary queue_dir="" connection_string="" queue_limit="0"  table="" format="namespace"
+   notify_postgres:primary queue_dir="" connection_string="postgresql://" queue_limit="0"  table="" format="namespace"
+   notify_postgres:secondary queue_dir="" connection_string="" queue_limit="0"  table="" format="namespace"
 
-The :mc-conf:`notify_postgresql` key is the top-level configuration key for an
+The :mc-conf:`notify_postgres` key is the top-level configuration key for an
 :ref:`minio-server-config-bucket-notification-postgresql`. The
-:mc-conf:`connection_string <notify_postgresql.connection_string>` key specifies
-the PostgreSQL service endpoint for the given `notify_postgresql` key. The
-``notify_postgresql:<IDENTIFIER>`` suffix describes the unique identifier for
+:mc-conf:`connection_string <notify_postgres.connection_string>` key specifies
+the PostgreSQL service endpoint for the given `notify_postgres` key. The
+``notify_postgres:<IDENTIFIER>`` suffix describes the unique identifier for
 that PostgreSQL service endpoint.
 
 Note the identifier for the PostgreSQL service endpoint you want to update for
@@ -285,7 +286,7 @@ for the PostgreSQL service endpoint:
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS/ notify_postgresql:IDENTIFIER \
+   mc admin config set ALIAS/ notify_postgres:IDENTIFIER \
       connection_string="ENDPOINT" \
       table="<string>" \
       format="<string>" \
@@ -297,10 +298,10 @@ for the PostgreSQL service endpoint:
 The following configuration settings are the *minimum* required for a 
 PostgreSQL service endpoint:
 
-- :mc-conf:`notify_postgresql connection_string 
-  <notify_postgresql.connection_string>`
-- :mc-conf:`notify_postgresql table <notify_postgresql.table>`
-- :mc-conf:`notify_postgresql format <notify_postgresql.format>`
+- :mc-conf:`notify_postgres connection_string 
+  <notify_postgres.connection_string>`
+- :mc-conf:`notify_postgres table <notify_postgres.table>`
+- :mc-conf:`notify_postgres format <notify_postgres.format>`
 
 All other configuration settings are *optional*. See
 :ref:`minio-server-config-bucket-notification-postgresql` for a complete list of

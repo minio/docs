@@ -138,6 +138,8 @@ These metrics are only populated for MinIO clusters with
    Total number of replication operations failed for a given bucket.
    You can identify the bucket using the ``{ bucket="STRING" }`` label.
 
+.. _minio-metrics-and-alerts-capacity:
+
 Capacity Metrics
 ~~~~~~~~~~~~~~~~
 
@@ -171,6 +173,8 @@ Capacity Metrics
 
    Total storage used on a specific drive for a node in a MinIO deployment. 
    You can identify the drive and node using the ``{ disk="/path/to/disk",server="STRING"}`` labels respectively.
+
+.. _minio-metrics-and-alerts-lifecycle-management:
 
 Lifecycle Management Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -239,6 +243,31 @@ Node and Drive Health Metrics
 
    Time elapsed (in nano seconds) since last self healing activity. This is set
    to -1 until initial self heal
+
+Notification Queue Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. metric:: minio_audit_target_queue_length
+
+   Total number of unsent audit messages in the queue.
+
+.. metric:: minio_audit_total_messages
+
+   Total number of audit messages sent since last server start.
+
+.. metric:: minio_audit_failed_messages
+
+   Total number of audit messages which failed to send since last server start.
+
+.. metric:: minio_notify_current_send_in_progress
+
+   Total number of notification messages in progress to configured targets.
+
+.. metric:: minio_notify_target_queue_length
+
+   Total number of unsent notification messages in the queue.
+
+.. _minio-metrics-and-alerts-scanner:
 
 Scanner Metrics
 ~~~~~~~~~~~~~~~

@@ -151,7 +151,7 @@ configurations:
 
   The ``Secret manager Admin`` role meets the minimum required permissions.
 
-  GCP should return a set of credentials associated to the new service account,
+  GCP should return a set of credentials associated to the new access keys,
   including private keys. Copy these credentials to a safe and secure location
   for use with this procedure.
 
