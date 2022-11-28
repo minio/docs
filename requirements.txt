@@ -10,3 +10,4 @@ sphinxcontrib-images === 0.9.4
 myst-parser === 0.18.0
 linkify === 1.4
 linkify-it-py === 2.0.0
+pyyaml === 6.0

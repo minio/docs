@@ -32,13 +32,25 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
 
    This site documents Operations, Administration, and Development of MinIO deployments on Mac OSX platforms.
 
-.. cond:: k8s and not openshift
+.. cond:: k8s and not (openshift or eks or gke)
 
    This site documents Operations, Administration, and Development of MinIO deployments on Kubernetes platform.
 
 .. cond:: openshift
 
    This site documents Operations, Administration, and Development of MinIO deployments on OpenShift 4.7+ through the :openshift-docs:`Red Hat® OpenShift® Container Platform 4.7+ <welcome/index.html>`.
+
+.. cond:: eks
+
+   This site documents Operations, Administration, and Development of MinIO deployments on `Amazon Elastic Kubernetes Service <https://aws.amazon.com/eks/>`__.
+
+.. cond:: gke
+
+   This site documents Operations, Administration, and Development of MinIO deployments on `Google Kubernetes Engine <https://cloud.google.com/kubernetes-engine>`__.
+
+.. cond:: aks
+
+   This site documents Operations, Administration, and Development of MinIO deployments on `Azure Kubernetes Engine <https://azure.microsoft.com/en-us/products/kubernetes-service/#overview>`__.
 
 .. cond:: container
 
@@ -53,12 +65,19 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
    This documentation targets the latest stable version of MinIO: |minio-tag|.
 
 MinIO is released under dual license `GNU Affero General Public License v3.0 
-<https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__. 
+<https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
 
-You can get started exploring MinIO features using our ``play`` server at
-https://play.min.io. ``play`` is a *public* MinIO cluster running the latest
-stable MinIO server. Any file uploaded to ``play`` should be considered public
-and non-protected.
+.. cond:: eks
+
+   Deploying MinIO through the :minio-web:`AWS Marketplace <product/multicloud-elastic-kubernetes-service>` includes the commercial license and access to |SUBNET|.
+
+.. cond:: gke
+
+   Deploying MinIO through the :minio-web:`GKE Marketplace <product/multicloud-google-kubernetes-service>` includes the commercial license and access to |SUBNET|.
+
+You can get started exploring MinIO features using our ``play`` server at https://play.min.io. 
+``play`` is a *public* MinIO cluster running the latest stable MinIO server. 
+Any file uploaded to ``play`` should be considered public and non-protected.
 
 .. cond:: linux
 
@@ -80,7 +99,7 @@ and non-protected.
 
    .. include:: /includes/container/quickstart.rst
 
-.. cond:: k8s or openshift
+.. cond:: k8s
 
    .. toctree::
       :titlesonly:
@@ -131,7 +150,7 @@ and non-protected.
       /administration/batch-framework
       /administration/concepts
 
-.. cond:: k8s or openshift or container or macos or windows
+.. cond:: not linux
 
    .. toctree::
       :titlesonly:
@@ -156,7 +175,7 @@ and non-protected.
       /reference/minio-server/minio-server
       /integrations/integrations
 
-.. cond:: k8s or openshift
+.. cond:: k8s
 
    .. toctree::
       :titlesonly:

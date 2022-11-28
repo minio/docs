@@ -96,7 +96,7 @@ This procedure assumes a *total loss* of one or more peer sites versus replicati
    Use the following commands to track the replication status:
 
    - :mc-cmd:`mc admin replicate status` - provides overall status and progress of replication
-   - :mc-cmd:`mc replicate status` - provides bucket-level and global replication status
+   - :mc:`mc replicate status` - provides bucket-level and global replication status
 
 Active Bucket Replication Resynchronization
 -------------------------------------------

@@ -106,7 +106,7 @@ You can repeat this procedure for each bucket that requires resynchronization. Y
 1) List the Configured Replication Targets on the Healthy Source
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run the :mc-cmd:`mc replicate ls` command to list the configured remote targets on the healthy ``SOURCE`` deployment for the ``BUCKET`` that requires resynchronization.
+Run the :mc:`mc replicate ls` command to list the configured remote targets on the healthy ``SOURCE`` deployment for the ``BUCKET`` that requires resynchronization.
 
 .. code-block:: shell
    :class: copyable
