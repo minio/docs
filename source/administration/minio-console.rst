@@ -11,34 +11,40 @@ MinIO Console
    :depth: 2
 
 
-The MinIO Console is a rich graphical user interface that provides similar
-functionality to the :mc:`mc` command line tool.
+The MinIO Console is a rich graphical user interface that provides similar functionality to the :mc:`mc` command line tool.
 
 .. image:: /images/minio-console/minio-console.png
    :width: 600px
    :alt: MinIO Console Landing Page provides a view of Buckets on the deployment
    :align: center
 
-You can use the MinIO Console for administration tasks like Identity and 
-Access Management, Metrics and Log Monitoring, or Server Configuration.
+You can use the MinIO Console for administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration.
 
-The MinIO Console is embedded as part of the MinIO Server binary starting 
-with :minio-release:`RELEASE.2021-07-08T01-15-01Z`. You can also deploy a 
-standalone MinIO Console using the instructions in the 
-:minio-git:`github repository <console>`.
+The MinIO Console is embedded as part of the MinIO Server. 
+You can also deploy a standalone MinIO Console using the instructions in the :minio-git:`github repository <console>`.
 
-You can explore the Console using https://play.min.io:9443. Log in with
-the following credentials:
+Logging into the MinIO Console depends on how you configured identity management for the deployment.
 
-- Username: ``Q3AM3UQ867SPQQA43P2F``
-- Password: ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``
+- When using the built-in MinIO identity management solution, the sign-in screen displays a standard login screen.
+  Enter your Username and Password to log in to the MinIO Console.
+- If loggin in with a third party application and :ref:`MinIO's Security Token Service (STS) <minio-security-token-service>`, select :guilabel:`Use STS` and enter the Username, Secret, and Token.
+- If the deployment uses a single OpenID or Active Directory/LDAP identity provider solution, select the provider's button to proceed to the login screen.
+- If the deployment has multiple OpenID and/or Active Directory/LDAP identify management providers configured, the MinIO Console's sign-in screen provides a dropdown list of providers.
+  Select the provider you wish to use to log in to the MinIO Console, then enter the credentials.
 
-The Play Console connects to the MinIO Play deployment at https://play.min.io.
-You can also access this deployment using :mc:`mc` and using the ``play``
-alias.
+.. admonition:: Try out the Console using MinIO's Play testing environment
+   :class: note
 
-This page documents the high level configuration settings and features of the 
-MinIO Console.
+   You can explore the Console using https://play.min.io:9443. 
+   Log in with the following credentials:
+
+   - Username: ``Q3AM3UQ867SPQQA43P2F``
+   - Password: ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``
+
+   The Play Console connects to the MinIO Play deployment at https://play.min.io.
+   You can also access this deployment using :mc:`mc` and using the ``play`` alias.
+
+This page documents the high level configuration settings and features of the MinIO Console.
 
 Configuration
 -------------
@@ -147,6 +153,11 @@ Use the :guilabel:`Search` bar to search for specific buckets or objects.
 Select the row for the bucket or object to browse. 
 
 Select :guilabel:`Create Bucket` to create a new bucket on the deployment.
+MinIO validates bucket names.
+To see the rules for bucket names, select :guilabel:`View Bucket Naming Rules`.
+
+While creating a bucket, you can enable :ref:`versioning <minio-bucket-versioning>`, :ref:`object locking <minio-object-locking>`, bucket size (quota) limits, and :ref:`retention rules <minio-object-locking-retention-modes>` (which require versioning).
+
 MinIO recommends no more than 500,000 buckets per deployment.
 
 Each bucket has :guilabel:`Manage` and :guilabel:`Browse` buttons.
@@ -433,8 +444,8 @@ The :guilabel:`Site Replication` section provides an interface for adding and ma
 
 Configuring site replication requires that only a single site have existing buckets or objects (if any).
 
-Configuration
--------------
+Settings
+--------
 This section contains the following subsections.
 Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
@@ -443,7 +454,7 @@ Some subsections may not be visible if the authenticated user does not have the 
    :alt: MinIO Console Settings - Configuration View
    :align: center
 
-The :guilabel:`Configuration` section provides an interface for viewing and retrieving :ref:`configuration settings <minio-server-configuration-settings>` for all MinIO Servers in the deployment. 
+The :guilabel:`Settings` section provides an interface for viewing and retrieving :ref:`configuration settings <minio-server-configuration-settings>` for all MinIO Servers in the deployment. 
 
 The interface functionality mimics that of using :mc-cmd:`mc admin config get` or :mc-cmd:`mc admin config set`.
 Refer to those commands for details on how to define the many options.

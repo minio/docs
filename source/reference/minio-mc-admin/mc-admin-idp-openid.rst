@@ -69,6 +69,8 @@ Syntax
 
    Create a new set of configurations for an OpenID provider.
 
+   You can run the command multiple times to set up multiple OpenID providers.
+
    .. tab-set::
 
       .. tab-item:: EXAMPLE

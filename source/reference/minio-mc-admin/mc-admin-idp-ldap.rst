@@ -73,6 +73,8 @@ Syntax
 
    Create a new set of configurations for an AD/LDAP provider.
 
+   You can run the command multiple times to set up multiple Active Directory or LDAP providers.
+
    .. tab-set::
 
       .. tab-item:: EXAMPLE
