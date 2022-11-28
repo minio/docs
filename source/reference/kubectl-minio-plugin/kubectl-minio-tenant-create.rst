@@ -82,6 +82,7 @@ Syntax
                               [--kes-config]          \
                               [--namespace]           \
                               [--output]              \
+                              [--pool]                \
                               [--storage-class] 
 
 
@@ -94,7 +95,7 @@ The command supports the following flags:
    :optional:
 
    Offers command line prompts to request the information required to set up a new tenant.
-   Use this instead of the remaining flags when creating a new tenant.
+   This command is mutually exclusive of the other flags when creating a new tenant.
 
    When added, prompts ask for input for the following values:
 
@@ -193,6 +194,11 @@ The command supports the following flags:
       
    :mc-cmd:`~kubectl minio tenant create --output` does **not** create the MinIO Tenant. 
    Use ``kubectl apply -f <FILE>`` to manually create the MinIO tenant using the generated file.
+
+.. mc-cmd:: --pool
+   :optional:
+
+   Assign a name for the pool added for the tenant.
 
 .. mc-cmd:: --storage-class
    :optional:

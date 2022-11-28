@@ -61,6 +61,7 @@ Syntax
                               --volumes         \
                               --namespace       \
                               [--output]        \
+                              [--pool]          \
                               [--storage-class]
 
 Flags
@@ -119,6 +120,11 @@ The command supports the following flags:
 
    :mc-cmd:`~kubectl minio tenant expand --output` does **not** create the new MinIO Tenant Pool. 
    Use ``kubectl apply -f <FILE>`` to manually create the MinIO tenant using the generated file.
+
+.. mc-cmd:: --pool
+   :optional:
+
+   The name to assign to the pool created for this expansion.
 
 .. mc-cmd:: --storage-class
    :optional:

@@ -164,15 +164,21 @@ Configure Site Replication
             :alt: MinIO Console's Add Sites for Replication screen
             :align: center
 
-      #. Complete the requested information for the site:
+      #. Complete the requested information:
 
-         :Access Key: `(required)` The user name for ``root`` to use for signing in to the site.
+         This Site:
 
-         :Secret Key: `(required)` The password for ``root`` to use for signing in to the site.
+           - :Site Name: A name or other identifying text to associate to the site.
+           - :Endpoint: `(required)` The hostname or IP of the load balancer managing connections to the site.
+           - :Access Key: `(required)` The user name for ``root`` to use for signing in to the site.
+           - :Secret Key: `(required)` The password for ``root`` to use for signing in to the site.
 
-         :Site Name: A name or other identifying text to associate to the site.
+         Peer Sites:
 
-         :Endpoint: `(required)` The hostname or IP of the load balancer managing connections to the site.
+           - :Site Name: A name or other identifying text to associate to the site.
+           - :Endpoint: `(required)` The hostname or IP of the load balancer managing connections to the site.
+           - :Access Key: `(required)` The user name for ``root`` for the peer site to use for signing in to the site.
+           - :Secret Key: `(required)` The password for ``root`` for the peer site to use for signing in to the site.
 
          .. include:: /includes/common-replication.rst
             :start-after: start-mc-admin-replicate-load-balancing
@@ -181,7 +187,7 @@ Configure Site Replication
          To add additional sites beyond two, select the ``+`` button to the side of one of the Site entries.
          To remove a site previously added, select the ``-`` button to the side of the site.
 
-         Site replication adds a :mc:`~mc admin user svcacct` under the ``root`` user to perform replication activities.
+         Site replication adds a :mc:`~mc admin user svcacct` under the ``root`` user of each site to perform replication activities.
 
       #. Select **Save**
    

@@ -417,7 +417,9 @@ The :guilabel:`Tiers` section provides an interface for adding and managing :ref
 Select the :guilabel:`Create Tier +` button to add a new tier to the deployment.
 Choose to add a MinIO, Google Cloud Storage, AWS S3, or Azure tier type.
 
-You can select an existing tier from the list to view its details.
+Existing tiers display with details of their configuration and an icon showing their current online or offline status.
+
+You can select an existing tier from the list to view its details or make changes.
 
 Site Replication
 ----------------
