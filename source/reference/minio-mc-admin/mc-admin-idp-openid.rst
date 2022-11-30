@@ -211,7 +211,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp openid update myminio test_config                                                              
+            mc admin idp openid info myminio test_config
                                     
       .. tab-item:: SYNTAX
 
@@ -220,7 +220,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc [GLOBALFLAGS] admin idp openid update     \
+            mc [GLOBALFLAGS] admin idp openid info     \
                                               ALIAS      \
                                               [CFG_NAME]
 

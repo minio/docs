@@ -218,7 +218,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp ldap update myminio test_config                                                              
+            mc admin idp ldap info myminio test_config
                                     
       .. tab-item:: SYNTAX
 
@@ -227,7 +227,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc [GLOBALFLAGS] admin idp ldap update     \
+            mc [GLOBALFLAGS] admin idp ldap info     \
                                             ALIAS      \
                                             [CFG_NAME]
 
