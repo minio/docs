@@ -71,6 +71,9 @@ Syntax
 
    You can run the command multiple times to set up multiple OpenID providers.
 
+   When adding multiple OpenID providers, only one can be a JWT Claim-based provider.
+   All others must be role-based providers.
+
    .. tab-set::
 
       .. tab-item:: EXAMPLE

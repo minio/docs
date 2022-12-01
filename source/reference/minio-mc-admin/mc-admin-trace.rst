@@ -56,7 +56,7 @@ Use :mc-cmd:`mc admin trace` to monitor API operations that return a service una
 See Console Trace for a Path
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin trace` to monitory activity for a specific path:
+Use :mc-cmd:`mc admin trace` to monitor activity for a specific path:
 
 .. code-block:: shell
    :class: copyable

@@ -58,6 +58,9 @@ The :mc-cmd:`mc admin idp ldap` command has the following subcommands:
    * - :mc-cmd:`mc admin idp ldap disable`
      - Disables an AD/LDAP server configuration.
 
+   * - :mc-cmd:`mc admin idp ldap policy entities`
+     - List policy association entities
+
 Configuration Parameters
 ------------------------
 
@@ -301,11 +304,10 @@ Syntax
          - Replace ``CFG_NAME`` with a unique string for this configuration.
            If not specified, the command disables the default configuration values.
 
-
-
 Global Flags
 ------------
 
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-globals
    :end-before: end-minio-mc-globals
+
