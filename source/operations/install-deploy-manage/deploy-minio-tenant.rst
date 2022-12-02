@@ -443,15 +443,15 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
        The MinIO Tenant uses the generated certificates for enabling and establishing TLS connections.
 
    * - :guilabel:`Custom Certificates`
-     - Specify one or more custom TLS certificates for use by the MinIO Tenant.
+     - When enabled, you can upload custom TLS certificates for MinIO to use for server and client credentials.
        
        MinIO supports Server Name Indication (SNI) such that the Tenant can select the appropriate TLS certificate based on the request hostname and the certificate Subject Alternative Name.
 
-       MinIO also supports specifying Certificate Authority certificates for validating client certificates minted by that CA.
+       MinIO also supports uploading Certificate Authority certificates for validating client certificates minted by that CA.
 
 .. _create-tenant-encryption-section:
 
-8) The :guilabel:`Encryption` Section
+1) The :guilabel:`Encryption` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption (SSE) <minio-sse>` settings for the MinIO Tenant. 
