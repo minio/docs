@@ -271,7 +271,7 @@ window.addEventListener("DOMContentLoaded", () => {
             return false;
           }
 
-          return `<a target="_blank" href="${docUrl}">
+          return `<a href="${docUrl}">
                     ${returnString}
                   </a>`;
         },
@@ -331,7 +331,10 @@ window.addEventListener("DOMContentLoaded", () => {
     (e) => {
       // Close the search on esc key press
       if (e.key === "Escape") {
-        closeSearchModal();
+        if(searchModalEl.classList.contains("search--focused") 
+        || searchModalEl.classList.contains("search--active")) {
+          closeSearchModal();
+        }
       }
 
       // Focus the search input on "Meta + K" key press

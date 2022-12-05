@@ -361,4 +361,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     }
   })();
+
+  // --------------------------------------------------
+  // Handle internal and external links
+  // --------------------------------------------------
+  (function () {
+    const links = document.querySelectorAll(".content__main a.external");
+    if(links.length > 0) {
+      links.forEach((item) => {
+        item.setAttribute("target", "_blank");
+        item.setAttribute("rel", "noopener");
+        item.setAttribute("rel", "noreferrer");
+      });
+    }
+  })();
 });
