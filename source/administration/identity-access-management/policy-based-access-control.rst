@@ -13,21 +13,25 @@ Access Management
 Overview
 --------
 
-MinIO uses Policy-Based Access Control (PBAC) to define the authorized actions
-and resources to which an authenticated user has access. Each policy describes
-one or more :ref:`actions <minio-policy-actions>` and :ref:`conditions
-<minio-policy-conditions>` that outline the permissions of a 
-:ref:`user <minio-users>` or :ref:`group <minio-groups>` of
-users. 
+MinIO uses Policy-Based Access Control (PBAC) to define the authorized actions and resources to which an authenticated user has access. 
+Each policy describes one or more :ref:`actions <minio-policy-actions>` and :ref:`conditions <minio-policy-conditions>` that outline the permissions of a :ref:`user <minio-users>` or :ref:`group <minio-groups>` of users.
 
-MinIO PBAC is built for compatibility with AWS IAM policy syntax, structure, and
-behavior. The MinIO documentation makes a best-effort to cover IAM-specific
-behavior and functionality. Consider deferring to the :iam-docs:`IAM
-documentation <>` for more complete documentation on AWS IAM-specific topics.
+MinIO PBAC is built for compatibility with AWS IAM policy syntax, structure, and behavior. 
+The MinIO documentation makes a best-effort to cover IAM-specific behavior and functionality. 
+Consider deferring to the :iam-docs:`IAM documentation <>` for more complete documentation on AWS IAM-specific topics.
 
-The :mc:`mc admin policy` command supports creation and management of
-policies on the MinIO deployment. See the command reference for examples of
-usage.
+The :mc:`mc admin policy` command supports creation and management of policies on the MinIO deployment. 
+See the command reference for examples of usage.
+
+Tag-Based Policy Conditions
+---------------------------
+
+.. versionchanged:: RELEASE.2022-10-02T19-29-29Z
+
+   Policies can use conditions to limit a user's access only to objects with a specific tag.
+
+   MinIO supports :s3-docs:`tag-based conditionals <tagging-and-policies.html>` for policies for :ref:`selected actions <minio-selected-conditional-actions>`.
+   Use the ``s3:ExistingObjectTag/<key>`` in the ``Condition`` statement of the policy.
 
 .. _minio-policy-built-in:
 
@@ -262,6 +266,10 @@ subsections document actions for more advanced S3 operations:
 
    Controls access to the :s3-api:`GetObjectTagging <API_GetObjectTagging.html>`
    S3 API operation.
+
+.. policy-action:: s3:DeleteObjectTagging
+
+   Controls access to the :s3-api:`DeleteObjectTagging <API_DeleteObjectTagging.html>` S3 API operation.
 
 Bucket Configuration
 ~~~~~~~~~~~~~~~~~~~~
@@ -517,6 +525,15 @@ MinIO supports the following condition keys for all supported
 - ``aws:username``
 - ``x-amz-content-sha256``
 
+.. warning:: 
+
+   The ``aws:Referer``, ``aws:SourceIp``, and ``aws.UserAgent`` keys may be easily spoofed and therefore pose a potential security risk.
+   MinIO recommends only using these condition keys to *deny* access as a secondary security measure.
+   
+   **Never** use these three keys to grant access by themselves.
+
+.. _minio-selected-conditional-actions:
+
 The following table lists additional supported condition keys for specific
 actions:
 
@@ -531,6 +548,7 @@ actions:
    * - :policy-action:`s3:GetObject`
      - | ``x-amz-server-side-encryption``
        | ``x-amz-server-side-encryption-customer-algorithm``
+       | ``s3:ExistingObjectTag/<key>``
 
    * - :policy-action:`s3:ListBucket`
      - | ``prefix``
@@ -546,6 +564,7 @@ actions:
        | ``object-lock-retain-until-date``
        | ``object-lock-mode``
        | ``object-lock-legal-hold``
+       | ``s3:ExistingObjectTag/<key>``
 
    * - :policy-action:`s3:PutObjectRetention`
      - | ``x-amz-object-lock-remaining-retention-days``
@@ -564,9 +583,15 @@ actions:
    * - :policy-action:`s3:GetObjectVersion`
      - ``versionid``
 
-
    * - :policy-action:`s3:DeleteObjectVersion`
      - ``versionid``
+
+   * - :policy-action:`s3:PutObjectTagging`
+     - ``s3:ExistingObjectTag/<key>``
+
+   * - :policy-action:`s3:DeleteObjectTagging`
+     - ``s3:ExistingObjectTag/<key>``
+
 
 .. _minio-policy-mc-admin-actions:
 
