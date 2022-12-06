@@ -36,7 +36,7 @@ The command supports adding both :ref:`Transition (Tiering) <minio-lifecycle-man
          
          mc ilm add --expire-delete-marker mydata/myminio
 
-         mc ilm add --transition-days 30 --tier "COLDTIER" mydata/myminio
+         mc ilm add --transition-days 30 --transition-tier "COLDTIER" mydata/myminio
          
          mc ilm add --noncurrent-transition-days 7 --noncurrent-transition-tier "COLDTIER" 
 
@@ -90,7 +90,7 @@ Parameters
 .. mc-cmd:: --prefix
    :optional:
    
-   Restrict the management rule to a specific bucket prefix.
+   Restrict the management rule to a specific object prefix.
    
    For example:
 
@@ -320,7 +320,7 @@ Use the :mc:`mc ilm add` with :mc-cmd:`~mc ilm add --prefix` and :mc-cmd:`~mc il
 .. code-block:: shell
    :class: copyable
 
-   mc ilm add --prefix "doc/" --transition-days "90" --tier "MINIOTIER-1"                  \
+   mc ilm add --prefix "doc/" --transition-days "90" --trasition-tier "MINIOTIER-1"                  \
           --noncurrent-transition-days "45" --noncurrent-transition-tier "MINIOTIER-2"  \
           myminio/mybucket/
 

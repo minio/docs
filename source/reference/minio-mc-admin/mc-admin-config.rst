@@ -38,24 +38,47 @@ Syntax
 .. mc-cmd:: set
    :fullpath:
 
-   Sets a :ref:`configuration key <minio-server-configuration-settings>` on the 
-   MinIO deployment.
+   Sets a :ref:`configuration key <minio-server-configuration-settings>` on the MinIO deployment.
+   Configurations defined by environment variables override configurations defined by this command.
+
+   For distributed deployments, use to modify existing endpoints.
+
+   Endpoints using the http protocol can be either the hostname or IP address, and they may use either ``http`` or ``https``.
 
 .. mc-cmd:: get
    :fullpath:
 
-   Gets a :ref:`configuration key <minio-server-configuration-settings>` on the
-   MinIO deployment.
+   Gets a :ref:`configuration key <minio-server-configuration-settings>` on the MinIO deployment created using `mc admin config set`.
 
 .. mc-cmd:: export
    :fullpath:
 
    Exports any configuration settings created using `mc admin config set`.
 
+.. mc-cmd:: history
+   :fullpath:
+
+   Lists the history of changes made to configuration keys by `mc admin config`.
+
+   Configurations defined by environment variables do not show.
+
 .. mc-cmd:: import
    :fullpath:
 
    Imports configuration settings exported using `mc admin config export`.
+
+.. mc-cmd:: reset
+   :fullpath:
+
+   Resets config to defaults.
+   Configurations defined in environment variables are not affected.
+
+.. mc-cmd:: restore
+   :fullpath:
+
+   Roll back changes to configuration keys to a previous point in history.
+
+   Does not affect configurations defined by environment variables.
    
 .. _minio-server-configuration-settings:
 

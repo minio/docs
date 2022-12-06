@@ -93,4 +93,4 @@ Syntax
 .. mc-cmd:: --remove
    
 
-   Removes dangling objects in the healing process. 
+   Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
