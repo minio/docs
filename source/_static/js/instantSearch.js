@@ -123,13 +123,6 @@ window.addEventListener("DOMContentLoaded", () => {
           clearRefinements();
         }
 
-        // Clear the filters on x click
-        document
-          .querySelector(".search__reset")
-          .addEventListener("click", () => {
-            clearRefinements("btn");
-          });
-
         // Fire the search
         search(query);
       },
@@ -271,7 +264,7 @@ window.addEventListener("DOMContentLoaded", () => {
             return false;
           }
 
-          return `<a target="_blank" href="${docUrl}">
+          return `<a target="_blank" rel="noreferrer noopener" href="${docUrl}">
                     ${returnString}
                   </a>`;
         },
@@ -325,13 +318,31 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Clear the filters on x click
+  document.addEventListener("click", (e) => {
+    if(e.target.classList.contains("search__reset")) {
+      clearRefinements("btn");
+    }
+  }, false);
+
+  // Close the search modal on outside click
+  document.addEventListener("pointerdown", function (e) {
+    if (e.target.id === "search") {
+      closeSearchModal();
+    }
+  })
+  
+
   // Keyboard events
   document.addEventListener(
     "keydown",
     (e) => {
       // Close the search on esc key press
       if (e.key === "Escape") {
-        closeSearchModal();
+        if(searchModalEl.classList.contains("search--focused") 
+        || searchModalEl.classList.contains("search--active")) {
+          closeSearchModal();
+        }
       }
 
       // Focus the search input on "Meta + K" key press

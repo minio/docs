@@ -155,6 +155,7 @@
 	& > svg {
 		width: 0.5rem;
 		fill: var(--text-color);
+		pointer-events: none;
 	}
 }
 
@@ -277,6 +278,7 @@
 	align-items: center;
 	line-height: 1;
 	margin-top: 0.35rem;
+	min-height: 1rem;
 
 	.search__hits__platform {
 		margin-top: 0;
