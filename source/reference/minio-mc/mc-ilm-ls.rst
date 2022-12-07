@@ -17,10 +17,44 @@ Syntax
 
 .. start-mc-ilm-ls-desc
 
-The :mc:`mc ilm ls` command lists all configured object lifecycle management 
-rules on a MinIO bucket.
+The :mc:`mc ilm ls` command summrizes all configured object lifecycle management 
+rules on a MinIO bucket in a tabular format.
 
 .. end-mc-ilm-ls-desc
+
+The output of the command might resemble the following:
+
+.. code-block:: shell
+
+   ┌───────────────────────────────────────────────────────────────────────────────┐
+   │ Transition for latest version (Transition)                                    │
+   ├────────┬─────────┬────────┬─────────────────────┬──────────────┬──────────────┤
+   │ ID     │ STATUS  │ PREFIX │ TAGS                │ DAYS TO TIER │ TIER         │
+   ├────────┼─────────┼────────┼─────────────────────┼──────────────┼──────────────┤
+   │ rule-1 │ Enabled │ doc/   │ key1=val1&key2=val2 │            0 │ WARM-MINIO-1 │
+   └────────┴─────────┴────────┴─────────────────────┴──────────────┴──────────────┘
+   ┌────────────────────────────────────────────────────────────────┐
+   │ Transition for older versions (NoncurrentVersionTransition)    │
+   ├────────┬─────────┬────────┬──────┬──────────────┬──────────────┤
+   │ ID     │ STATUS  │ PREFIX │ TAGS │ DAYS TO TIER │ TIER         │
+   ├────────┼─────────┼────────┼──────┼──────────────┼──────────────┤
+   │ rule-2 │ Enabled │ logs/  │ -    │           10 │ WARM-MINIO-1 │
+   └────────┴─────────┴────────┴──────┴──────────────┴──────────────┘
+   ┌────────────────────────────────────────────────────────────────────────────────────────┐
+   │ Expiration for latest version (Expiration)                                             │
+   ├────────┬─────────┬────────┬─────────────────────┬────────────────┬─────────────────────┤
+   │ ID     │ STATUS  │ PREFIX │ TAGS                │ DAYS TO EXPIRE │ EXPIRE DELETEMARKER │
+   ├────────┼─────────┼────────┼─────────────────────┼────────────────┼─────────────────────┤
+   │ rule-1 │ Enabled │ doc/   │ key1=val1&key2=val2 │             30 │ false               │
+   └────────┴─────────┴────────┴─────────────────────┴────────────────┴─────────────────────┘
+   ┌──────────────────────────────────────────────────────────────────────────────────┐
+   │ Expiration for older versions (NoncurrentVersionExpiration)                      │
+   ├────────┬─────────┬────────┬─────────────────────┬────────────────┬───────────────┤
+   │ ID     │ STATUS  │ PREFIX │ TAGS                │ DAYS TO EXPIRE │ KEEP VERSIONS │
+   ├────────┼─────────┼────────┼─────────────────────┼────────────────┼───────────────┤
+   │ rule-1 │ Enabled │ doc/   │ key1=val1&key2=val2 │             15 │             0 │
+   │ rule-2 │ Enabled │ logs/  │ -                   │              1 │             3 │
+   └────────┴─────────┴────────┴─────────────────────┴────────────────┴───────────────┘
 
 .. tab-set::
 
@@ -52,8 +86,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
    
-   *Required* The :ref:`alias <alias>` and full path to the bucket on the MinIO
+   The :ref:`alias <alias>` and full path to the bucket on the MinIO
    deployment for which to list the object lifecycle management rules. For
    example:
 
@@ -63,18 +98,17 @@ Parameters
 
 
 .. mc-cmd:: --expiry
+   :optional:
    
 
-   *Optional* :mc:`mc ilm ls` returns only fields related to lifecycle rule
-   expiration.
+   :mc:`mc ilm ls` returns only fields related to lifecycle rule expiration.
 
    Mutually exclusive with :mc-cmd:`~mc ilm ls --transition`.
 
 .. mc-cmd:: --transition
-   
+   :optional:
 
-   *Optional* :mc:`mc ilm ls` returns only fields related to lifecycle rule
-   transition.
+   :mc:`mc ilm ls` returns only fields related to lifecycle rule transition.
 
    Mutually exclusive with :mc-cmd:`~mc ilm ls --expiry`.
 
