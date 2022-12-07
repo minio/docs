@@ -10,7 +10,7 @@ Monitoring and Alerting using Prometheus
    :local:
    :depth: 1
 
-MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <data_model/>`.
+MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
 The procedure on this page documents the following:
 
 - Configuring a Prometheus service to scrape and display metrics from a MinIO deployment
@@ -21,7 +21,7 @@ The procedure on this page documents the following:
 
    This procedure requires the following:
 
-   - An existing Prometheus deployment with backing :prometheus-docs:`Alert Manager <alerting/latest/overview/>`
+   - An existing :prometheus-docs:`Prometheus deployment <prometheus/latest/installation/>` with backing :prometheus-docs:`Alert Manager <alerting/latest/overview/>`
 
    - An existing MinIO deployment with network access to the Prometheus deployment
 
