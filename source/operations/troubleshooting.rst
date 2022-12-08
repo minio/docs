@@ -164,11 +164,12 @@ For more details about encrypting or decrypting such files, see :ref:`Encrypting
 Logs
 ----
 
-Use the subcommands for ``mc support logs`` to :mc:`~mc support logs enable` or :mc:`~mc support logs disable` the submission of MinIO logs to SUBNET.
-You can also use :mc:`mc support logs status` to check if a log submission is in progress.
+Use :mc:`mc support callhome enable` to start automatically uploading deployment logs to SUBNET for analysis.
+Use :mc:`mc support callhome status` to check the status of log upload.
+You can disable upload at any time using :mc:`mc support callhome disable`.
 
-Use :mc:`mc support logs show` command to display logs from the command line.
-Use the parameter flags for the :mc:`mc support logs show` command to limit the displayed logs by type or quantity.
+Use :mc:`mc admin logs` command to display logs from the command line.
+The command supports type and quantity filters for further limiting logs output.
 
 .. toctree::
    :titlesonly:

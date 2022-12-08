@@ -62,6 +62,9 @@ The :mc-cmd:`mc admin replicate` command has the following subcommands:
    * - :mc-cmd:`mc admin replicate remove`
      - Removes an entire site replication configuration or one or more peer sites from participating in site replication.
 
+   * - :mc-cmd:`mc admin replicate resync`
+     - Resynchronizes content from one site to a second site if the second site has lost data.
+
    * - :mc-cmd:`mc admin replicate status`
      - Displays the status for :ref:`replicable data <minio-site-replication-what-replicates>` across participating sites.
 
@@ -364,6 +367,65 @@ Syntax
 
       Display the replication status of a specific user by including the user name after the flag.
 
+.. mc-cmd:: resync
+   :fullpath:
+
+   Resynchronizes data from one site in the replication configuration to a second site in the replication configuration in the event of lost data.
+
+   .. tab-set::
+      
+      .. tab-item:: EXAMPLES
+         
+         The following command starts a resynchronization process to restore ``minio2`` from ``minio1``
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin replicate resync start minio1 minio2
+
+         The following command shows the status of a resynchronization currently in progress.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin replicate resync status minio1 minio2
+
+         The following command stops a resynchronization that is in progress.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin replicate resync cancel minio1 minio2
+
+      .. tab-item:: SYNTAX
+         
+         .. code-block:: shell
+            
+            mc [GLOBALFLAGS] admin replicate resync start|status|cancel ALIAS1 ALIAS2   
+
+         - Replace ``ALIAS1`` with the alias for the site that has the data to restore.
+         - Replace ``ALIAS2`` with the alias for the site that needs resynched data.
+
+   .. mc-cmd:: start
+
+      Launches a new resynchronization process from one site with data to a second site that needs synchronization.
+
+   .. mc-cmd:: status
+
+      Shows the status of an existing resynchronization process between two sites configured for site replication.
+
+   .. mc-cmd:: cancel
+
+      Ends a resynchronization process currently in progress between two sites configured for site replication.
+
+   .. mc-cmd:: alias1
+
+      The :ref:`alias <alias>` of an active MinIO deployment in the site replication configuration with the data you want to resync to another site.
+
+   .. mc-cmd:: alias2
+
+      The :ref:`alias <alias>` of an active MinIO deployment in the site replication configuration that needs data resynced from another site.
+   
 
 Global Flags
 ------------

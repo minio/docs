@@ -11,6 +11,6 @@
 .. start-support-logs-opt-in
 
 The uploading feature remains disabled by default until explicitly enabled for a deployment on an opt-in only basis.
-If enabled, you can disable the feature at any time with :mc-cmd:`mc support logs disable`.
+If enabled, you can disable the feature at any time with :mc-cmd:`mc support callhome disable`.
 
 .. end-support-logs-opt-in
