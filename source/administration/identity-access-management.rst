@@ -20,7 +20,7 @@ Authentication
 Authorization
   The process of restricting the actions and resources the authenticated client can perform on the deployment. 
   MinIO uses Policy-Based Access Control (PBAC), where each policy describes one or more rules that outline the permissions of a user or group of users. 
-  MinIO supports S3-specific:ref:`actions <minio-policy-actions>` and :ref:`conditions <minio-policy-conditions>` when creating policies. 
+  MinIO supports S3-specific :ref:`actions <minio-policy-actions>` and :ref:`conditions <minio-policy-conditions>` when creating policies. 
   By default, MinIO *denies* access to actions or resources not explicitly referenced in a user's assigned or inherited policies.
 
 Identity Management

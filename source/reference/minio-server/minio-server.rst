@@ -373,6 +373,7 @@ MinIO Console:
 Key Management Service and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 .. envvar:: MINIO_KMS_KES_ENDPOINT
 
    The endpoint for the MinIO Key Encryption Service (KES) process to use
@@ -418,6 +419,14 @@ Key Management Service and Encryption
 
    - The encryption key for Server-Side Encryption with
      :ref:`SSE-S3 <minio-encryption-sse-s3>`.
+
+.. envvar:: MINIO_KMS_KES_ENCLAVE
+
+   Use this optional environment variable to define the name of a KES enclave.
+   A KES enclave provides an isolated space for its associated keys separate from other enclaves on a stateful KES server.
+
+   If not set, MinIO does not send enclave information.
+   For a stateful KES server, this results in using the default enclave.
 
 .. _minio-server-envvar-storage-class:
 
