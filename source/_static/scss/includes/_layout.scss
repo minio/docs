@@ -48,6 +48,8 @@
         .content {
             @include breakpoint-min(breakpoints(lg)) { 
                 overflow: auto;
+                scroll-behavior: smooth;
+                scroll-padding: 2rem;
             }
 
             & > .container {

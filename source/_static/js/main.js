@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   })();
 
   // --------------------------------------------------
-  // Dynamic sidebar scroll on read-mode.
+  // Dynamic sidebar scroll on non read-mode.
 	// This'll allow the sidebar to display all content,
 	// without scrolling the body. 
   // --------------------------------------------------
@@ -54,12 +54,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
     
     // Make the sidebar is scrollable.
     sidebarEl.classList.remove("inactive");
+
+    // Scroll to hash
+    var hash = window.location.hash;
+    if (hash) {
+      var el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView();
+      }
+    }
   }, 100);
 
   document.addEventListener("scroll", (e) => {
     setSidebarHeight();
   });
-
+ 
   // --------------------------------------------------
   // Read mode
   // --------------------------------------------------
