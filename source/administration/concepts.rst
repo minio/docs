@@ -103,6 +103,16 @@ MinIO automatically generates two folders in the ``articles`` bucket based on th
          2022-01-02-MinIO-Advanced-Deployment-comments.json
          2022-01-04-MinIO-Interview.md
 
+MinIO itself does not limit the number of objects that any specific prefix can contain.
+However, hardware and network conditions may show performance impacts with large prefixes.
+
+- Deployments with modest or budget-focused hardware should architect their workloads to target 10,000 objects per prefix as a baseline. 
+  Increase this target based on benchmarking and monitoring of real world workloads up to what the hardware can meaningfully handle. 
+- Deployments with high-performance or enterprise-grade :ref:`hardware <deploy-minio-distributed-recommendations>` can typically handle prefixes with millions of objects or more.
+
+|SUBNET| Enterprise accounts can utilize yearly architecture reviews as part of the deployment and maintenance strategy to ensure long-term performance and success of your MinIO-dependent projects.
+
+For a deeper discussion on the benefits of limiting prefix contents, see the article on :s3-docs:`optimizing S3 performance <optimizing-performance.html>`.
 
 How can I backup and restore objects on MinIO?
 ----------------------------------------------
