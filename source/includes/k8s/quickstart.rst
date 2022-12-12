@@ -108,7 +108,7 @@ Procedure
    .. code-block:: shell
       :class: copyable
 
-      kubectl port-forward pod/minio 9000 9090
+      kubectl port-forward pod/minio 9000 9090 -n minio-dev
    
    The command forwards the pod ports ``9000`` and ``9090`` to the matching port on the local machine while active in the shell.
    The ``kubectl port-forward`` command only functions while active in the shell session.
