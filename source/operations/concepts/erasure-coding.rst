@@ -42,24 +42,17 @@ Zero-parity deployments depend on the underlying storage for resiliency and avai
 Erasure Sets
 ------------
 
-An *Erasure Set* is a set of drives in a MinIO deployment that support Erasure Coding. 
-MinIO evenly distributes object data and parity blocks among the drives in the Erasure Set. 
-MinIO randomly and uniformly distributes the data and parity blocks across drives in the erasure set with *no overlap*. 
-Each unique object has no more than one data or parity block per drive in the set.
+An *Erasure Set* is a group of drives onto which MinIO writes erasure coded objects.
+MinIO randomly and uniformly distributes the data and parity blocks of a given object across the erasure set drives, where a given drive has no more than one block of either type per object (no overlap).
+ 
+MinIO automatically calculates the number and size of Erasure Sets ("stripe size") based on the total number of nodes and drives in the :ref:`Server Pool <minio-intro-server-pool>`, where the minimum stripe size is 2 and the maximum stripe size is 16.
+All erasure sets in a given pool have the same stripe size, and MinIO never modifies nor allows modification of stripe size after initial configuration.
+The algorithm for selecting stripe size takes into account the total number of nodes in the deployment, such that the selected stripe allows for uniform distribution of erasure set drives across all nodes in the pool.
 
-MinIO calculates the number and size of *Erasure Sets* by dividing the total number of drives in the :ref:`Server Pool <minio-intro-server-pool>` into sets consisting of between 4 and 16 drives each. 
-
-For clusters, pools, or deployments with more than 16 drives, MinIO divides the drives into multiple erasure sets of the same number of drives.
-For this reason, the total number of drives in a deployment must be divisible evenly by a number between 4 and 16.
-
-For example, 20 drives are divided into two erasure sets of 10 drives each.
-28 drives are divided into 2 erasure sets of 14 drives each.
-40 drives are divided into 4 erasure sets of 10 drives each.
-
-Because numbers such as 17, 19, or 34 cannot be evenly divided by any number between 2 and 16, you cannot have a deployment with such a number of drives.
-Add or remove drives to return to an allowable number of drives.
-
-Use the MinIO `Erasure Coding Calculator <https://min.io/product/erasure-code-calculator>`__ to determine the optimal erasure set size for your preferred MinIO topology.
+Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-parity>` of the deployment.
+Use the MinIO `Erasure Coding Calculator <https://min.io/product/erasure-code-calculator>`__ to explore the possible erasure set size and distributions for your planned topology.
+MinIO strongly recommends architecture reviews via |SUBNET| as part of your provisioning and deployment process to ensure long term success and stability.
+As a general guide, plan your topologies to have an even number of nodes and drives where both the nodes and drives have a common denominator of 16.
 
 .. _minio-ec-parity:
 

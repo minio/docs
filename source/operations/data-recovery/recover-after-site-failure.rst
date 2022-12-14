@@ -32,12 +32,20 @@ If a peer site fails, such as due to a major disaster or long power outage, you 
 
 The following procedure can restore data in scenarios where :ref:`site replication <minio-site-replication-overview>` was active prior to the site loss.
 
-1. Deploy a new MinIO site using the same ``root`` credentials as used on other deployments in the site replication configuration
+1. Remove the failed site from the MinIO site replication configuration using the :mc-cmd:`mc admin replicate remove` command. 
+   For example, the following command removes a failed site with :ref:`alias <alias>` ``siteB`` from a site replication configuration that includes healthy site with alias ``siteA``:
 
-   You can use the original hardware, if still available, but you must first wipe any remaining data before creating the new site.
-2. Configure the new site with the same Identity Provider (IDp) as the other site(s)
-3. :ref:`Expand the existing site replication <minio-expand-site-replication>` by adding the newly deployed site
-4. Remove the lost site from the site replication configuration
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin replicate remove siteA siteB --force
+
+2. Deploy a new MinIO site using the same ``root`` credentials as used on other deployments in the site replication configuration
+
+   You can use the original hardware from the failed site, if still available and functional, but you must first wipe any remaining data before creating the new site.
+   Ensure you have fully remediated any issues that resulted in the original failure state prior to reusing the hardware.
+3. Configure the new site with the same Identity Provider (IDp) as the other site(s)
+4. :ref:`Expand the existing site replication <minio-expand-site-replication>` by adding the newly deployed site
 
 Site replication healing automatically adds IAM settings, buckets, bucket configurations, and objects from the existing site(s) to the new site with no further action required.
 

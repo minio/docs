@@ -182,17 +182,16 @@ policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
       ]
    }
 
-- For the ``Statement.Action`` array, specify one or more 
-  :ref:`supported S3 API operations <minio-policy-actions>`. MinIO deployments
-  supports a subset of AWS S3 API operations.
+- For the ``Statement.Action`` array, specify one or more :ref:`supported S3 API operations <minio-policy-actions>`. 
 
-- For the ``Statement.Resource`` key, you can replace the ``*`` with 
-  the specific bucket to which the policy statement should apply. 
-  Using ``*`` applies the statement to all resources on the MinIO deployment.
+- For the ``Statement.Resource`` key, specify the bucket or bucket prefix to which to restrict the policy.
+  You can use ``*`` and ``?`` wildcard characters as per the :s3-docs:`S3 Resource Spec <s3-arn-format.html>`.
 
-- For the ``Statement.Condition`` key, you can specify one or more 
-  :ref:`supported Conditions <minio-policy-conditions>`. MinIO
-  deployments supports a subset of AWS S3 conditions.
+  The ``*`` wildcard may result in unintended application of a policy to multiple buckets or prefixes based on the pattern match.
+  For example, ``arn:aws:s3:::data*`` would match the buckets ``data``, ``data_private``, and ``data_internal``.
+  Specifying only ``*`` as the resource key applies the policy to all buckets and prefixes on the deployment.
+
+- For the ``Statement.Condition`` key, you can specify one or more :ref:`supported Conditions <minio-policy-conditions>`.
 
 .. _minio-policy-actions:
 
