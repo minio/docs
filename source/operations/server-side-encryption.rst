@@ -29,8 +29,8 @@ MinIO supports the following |KMS| as the central key store:
 - :ref:`AWS SecretsManager <minio-sse-aws>`
 - :ref:`Google Cloud SecretManager <minio-sse-gcp>`
 - :ref:`Azure Key Vault <minio-sse-azure>`
-- Fortanix SDKMS (docs to come)
-- Thales Digital Identity and Security (formerly Gemalto) (docs to come)
+- :minio-git:`Fortanix SDKMS <kes/wiki/Fortanix-SDKMS>`
+- :minio-git:`Thales Digital Identity and Security (formerly Gemalto) <kes/wiki/Gemalto-KeySecure>`
 
 MinIO SSE requires enabling :ref:`minio-tls`. 
 
