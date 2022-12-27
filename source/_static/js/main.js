@@ -193,6 +193,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
       asideElements.push(extVideoLinks)
+
+      // Need to force-add extlinks, they don't seem to get added as-is for some reason
+
+      const extVideoItems = document.querySelectorAll(".extlinks-video a");
+      extVideoItems.forEach(item => {
+         item.setAttribute("target","_blank");
+         item.setAttribute("rel", "noopener");
+         item.setAttribute("rel", "noreferrer");
+      });
     }
 
     // Sets the empty CSS class if nothing on the page goes in the sidebar

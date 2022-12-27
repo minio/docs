@@ -28,6 +28,12 @@ div.topic {
         z-index: $z-index-header - 2;
     }
 
+    @include breakpoint-max(breakpoints(sm)) {
+      .extlinks-video {
+         display: none;
+      }
+    }
+
     .extlinks-video {
         ul {
            padding: 0;
