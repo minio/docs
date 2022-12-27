@@ -157,19 +157,61 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
   // --------------------------------------------------
-  // TOC
+  // TOC, External Links
   // --------------------------------------------------
   (function () {
-    // Move the TOC to the right side of the page
-    const tocOriginalEl = document.getElementById("table-of-contents");
-    const tocTargetEl = document.getElementById("content-toc");
-    const tocAsideEL = document.querySelector(".content__toc");
+    // Move the TOC, External Links, etc. to the right side of the page
+    const extVideoLinks = document.querySelector(".extlinks-video")
 
-    if (tocOriginalEl) {
-      tocTargetEl.parentNode.replaceChild(tocOriginalEl, tocTargetEl);
+    const tocPreferredEl = document.getElementById("table-of-contents");
+    const tocLegacyEl = document.getElementById("content-toc");
+
+    // This is the target element for the "aside" or right nav bar
+    const tocAsideEl = document.querySelector(".content__toc");
+
+    // Don't need this element so remove it
+    tocLegacyEl.remove();
+
+    // Build an array of elements to add, in order
+    // Then iterate the array and append it, one by one, to the aside
+    const asideElements = new Array();
+
+    if (tocPreferredEl) {
+      asideElements.push(tocPreferredEl);
+    }
+    if (extVideoLinks) {
+      // Minor cleanups to the CSS classes
+      extVideoLinks.classList.remove("docutils", "container")
+      extVideoLinks.classList.add("topic")
+
+      // Inject the header text
+
+      const extVideoLinkHeader = document.createElement("div");
+      extVideoLinkHeader.classList.add("extVideoLink-header");
+      extVideoLinkHeader.innerHTML += "<p>Recommended Videos</p>";
+      extVideoLinks.prepend(extVideoLinkHeader);
+
+
+      asideElements.push(extVideoLinks)
+
+      // Need to force-add extlinks, they don't seem to get added as-is for some reason
+
+      const extVideoItems = document.querySelectorAll(".extlinks-video a");
+      extVideoItems.forEach(item => {
+         item.setAttribute("target","_blank");
+         item.setAttribute("rel", "noopener");
+         item.setAttribute("rel", "noreferrer");
+      });
+    }
+
+    // Sets the empty CSS class if nothing on the page goes in the sidebar
+    if (asideElements.length == 0) {
+      tocAsideEl.classList.add("content__toc--empty");
     }
     else {
-      tocAsideEL.classList.add("content__toc--empty");
+      for (i = 0; i < asideElements.length; i++) {
+         tocAsideEl.appendChild(asideElements[i]);
+       }
     }
     
     // Treat the TOC as a dropdown in mobile
