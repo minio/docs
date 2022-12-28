@@ -46,6 +46,11 @@ MinIO provides container images at the following repositories:
 - https://hub.docker.com/r/minio/minio
 - https://quay.io/repository/minio/minio?tab=info
 
+.. versionchanged:: RELEASE.2022-12-02T19-19-22Z
+
+   These images include the :ref:`MinIO Client <minio-client>` command line tool built in for container-level debugging.
+   However, to regularly interact with a container MinIO install, :ref:`install the MinIO Client <mc-install>` on your computer and define an :mc-cmd:`mc alias set <alias>` to the container instead.
+
 Use of MinIO images from any other repository, host, or organization is at your own risk.
 
 The :ref:`Single-Node Single-Drive <minio-snsd>` and :ref:`Single-Node Multi-Drive <minio-snmd>` tutorials provide instructions for the `Docker <https://www.docker.com/>`__ and :podman-docs:`Podman <>` container managers.

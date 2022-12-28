@@ -79,6 +79,14 @@ Glossary
      The conversion of all of the contents written to a disk to values that cannot be easily deciphered by an unauthorized entity.
      Disk encryption can be used in conjunction with other encryption technologies to create a robust data security system.
 
+   enclave
+     A description of an isolated area within a stateful Key Encryption Service (KES) server.
+     A KES server may have one enclave or multiple enclaves.
+     Each enclave within a KES server holds separate keys, policies, and administration identity.
+     An enclave cannot see or make use of any other enclave on the server.
+
+     For example, you might use multiple enclaves to hold completely separate key stores for multiple MinIO tenants within a single stateful KES server.
+
    encryption at rest
      A method of encryption that stores an object in an encrypted state.
      The object remains encrypted while not moving from one location to another.

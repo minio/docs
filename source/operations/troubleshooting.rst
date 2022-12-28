@@ -57,17 +57,19 @@ Registering Your MinIO Deployment with SUBNET
 
    .. tab-item:: Console Airgapped
 
-      You can register MinIO deployments for SUBNET even if they exists an airgap, firewall, or otherwise no direct Internet access.
+      Use the steps below to register MinIO deployments that do not have direct Internet access.
+      For example, deployments that exist with an airgap, behind a firewall, or in other environments with no direct Internet access.
       From the Console:
 
       #. Go to your MinIO cluster's URL, then sign in
-      #. Select the :guilabel:`Support` option
-      #. Select :guilabel:`Register`
-      #. Select the :guilabel:`Offline Activation` link at the bottom of the screen
-      #. Copy the registration token for your cluster from item 1
-      #. Go to https://subnet.min.io/cluster/register and enter the registration token when prompted
-      #. Copy the generated API key and paste it in item 3 of the **Offline Registration** window in the MinIO Console
-      #. Select :guilabel:`Register`
+      #. Select the :guilabel:`Support` tab, then select :guilabel:`Health`
+      #. Select :guilabel:`Register your Cluster`
+      #. Select the :guilabel:`Airgap` tab
+      #. Copy the provided link, which includes a token value for the deployment
+      #. Paste the link into a web browser on a device with access to the Internet
+      #. After successful registration, copy the provided API key
+      #. In the MinIO Console, select the :guilabel:`API Key` tab
+      #. Paste the copied API key from SUBNET into the :guilabel:`API Key` field, then select :guilabel:`Register`
 
    .. tab-item:: Command Line
 
