@@ -28,6 +28,37 @@ div.topic {
         z-index: $z-index-header - 2;
     }
 
+    @include breakpoint-max(breakpoints(sm)) {
+      .extlinks-video {
+         display: none;
+      }
+    }
+
+    .extlinks-video {
+        ul {
+           padding: 0;
+           margin: .25rem 0 0 1rem;
+           font-size: $font-size-sm;
+           color: var(--text-muted-color);
+  
+           ul {
+                 margin-left: 0.75rem;
+           }
+        }
+      border-bottom: 1px $dark-500 solid;
+      padding: .5rem 0 .5rem 0;
+    }
+
+    .extVideoLink-header {
+      & > p {
+         color: var(--headings-color);
+         margin: 0;
+         line-height: 1;
+         font-size: $font-size-md;
+         font-weight: bold;
+      }
+    }
+
     .icon {
         height: 2.5rem;
         width: 2.5rem;
@@ -66,6 +97,8 @@ div.topic {
 #table-of-contents {
     flex: 1;
     position: relative;
+    border-bottom: 1px $dark-500 solid;
+    padding: .5rem 0 .5rem 0;
 
     .topic-title {
         color: var(--headings-color);

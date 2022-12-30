@@ -89,7 +89,7 @@ The command has the following syntax:
 
    mc [GLOBALFLAGS] support inspect       \
                             [--legacy]   \
-                            ALIAS
+                            TARGET
 
 Parameters
 ~~~~~~~~~~
@@ -99,10 +99,11 @@ Parameters
 
    Use the older method of exporting inspection data, which does not encrypt data by default.
    
-.. mc-cmd:: ALIAS
+.. mc-cmd:: TARGET
    :required:
 
-   The :ref:`alias <alias>` of the MinIO deployment.
+   The path to the location or object to inspect.
+   The path should include the `alias <alias>` of the MinIO deployment and, if needed, the prefix and/or object name.
 
 
 Global Flags
