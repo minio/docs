@@ -16,43 +16,11 @@
          class="docs"
          role="navigation"
       >
-         {%- block sidebarlogo %}
-            {%- if logo %}
-               <p class="logo">
-                  <a href="{{ pathto(master_doc)|e }}">
-                     <img
-                        class="logo"
-                        src="{{ pathto('_static/' + logo, 1)|e }}"
-                        alt="Logo"
-                     />
-                  </a>
-               </p>
-            {%- endif %}
-         {%- endblock %}
-
          {%- if sidebars != None %}
             {#- new style sidebar: explicitly include/exclude templates #}
             {%- for sidebartemplate in sidebars %}
                {%- include sidebartemplate %}
             {%- endfor %}
-         {%- else %}
-            {#- old style sidebars: using blocks -- should be deprecated #}
-
-            {%- block sidebarrel %}
-               {%- include "relations.html" %}
-            {%- endblock %}
-
-            {%- block sidebarsourcelink %}
-               {%- include "sourcelink.html" %}
-            {%- endblock %}
-
-            {%- if customsidebar %}
-               {%- include customsidebar %}
-            {%- endif %}
-
-            {%- block sidebarsearch %}
-               {%- include "searchbox.html" %}
-            {%- endblock %}
          {%- endif %}
       </nav>
    {%- endif %}
@@ -80,12 +48,21 @@
 
          {%- include "toc.html" %}
 
-         <div class="content__main">
-            {% block body %} {% endblock %}
-
-            {%- if pagename != "search-results" %}
-               {%- include "footer.html" %}
-            {%- endif %}
+         <div class="content__main" id="search-documentation">
+            {% block body %} 
+               <div id="search">
+                  <div class="search__inner">
+                     <div id="search-box"></div>
+                     
+                     <div class="search__dropdown">
+                        <div id="search-filters"></div>
+                        <div id="search-clear"></div>
+                        <div id="search-results"></div>
+                        <div id="search-powered-by"></div>
+                     </div>
+                  </div>
+            </div>
+           {% endblock %}
          </div>
       </div>
    </section>

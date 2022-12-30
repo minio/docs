@@ -30,11 +30,13 @@
                 <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows-inactive.svg',1) }}" alt="Windows" />
                 Windows
             </a>
-
-            <button type="button" class="icon search-toggle search-toggle--keyboard visible-rm">
-                {%- include "icons/search.html" %}
-                Search
-            </button>
+            
+            {%- if pagename != "search" %}
+                <button type="button" class="icon search-toggle search-toggle--keyboard visible-rm">
+                    {%- include "icons/search.html" %}
+                    Search
+                </button>
+            {%- endif %}
         </nav>
     </div>
 

@@ -47,6 +47,7 @@
 
        <h2 class="header__title hidden-rm">Documentation</h2>
 
+       {%- if pagename != "search" %}
        <div id="search">
          <div class="search__inner">
             <div id="search-box"></div>
@@ -59,6 +60,7 @@
             </div>
          </div>
        </div>
+      {%- endif %}
     </div>
 
     {%- include "platform-navigation.html" %}

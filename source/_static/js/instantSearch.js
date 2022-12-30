@@ -8,6 +8,25 @@ window.addEventListener("DOMContentLoaded", () => {
     .getElementsByTagName("meta")
     ["docsearch:platform"].getAttribute("content");
 
+  // Set search page title
+  // TODO: Do the right way
+  const pageName = document
+    .getElementsByTagName("meta")
+    ["pagename"].getAttribute("content");
+
+  if (pageName === "search") {
+    document.title = "Search " + document.title;
+  }
+
+  // --------------------------------------------------
+  // Synchronize Search results with browser URL
+  // --------------------------------------------------
+  const searchParams = location.search.indexOf("%5D=") >= 0;
+
+  if (searchParams) {
+    searchModalEl.classList.add("search--active", "search--focused");
+  }
+  
   // SVG Icons
   const icons = {
     h1: `<svg width="14" height="9">
@@ -80,6 +99,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const search = instantsearch({
     indexName: "minio",
     searchClient,
+    routing: true,
     initialUiState: {
       minio: {
         refinementList: {
@@ -166,16 +186,6 @@ window.addEventListener("DOMContentLoaded", () => {
         item: function (data) {
           var returnString;
           var docUrl;
-          var refinedLenth =
-            search.renderState.minio.refinementList.platform.items.filter(
-              (x) => x.isRefined
-            ).length;
-
-          if (refinedLenth !== 1) {
-            searchModalEl.classList.add("search--show-platform");
-          } else {
-            searchModalEl.classList.remove("search--show-platform");
-          }
 
           // If the query is a full-match of a lvl1 title,
           // display only the h1.
@@ -188,8 +198,10 @@ window.addEventListener("DOMContentLoaded", () => {
                   <i class="search__hits__icon">
                     ${icons.h1}
                   </i>
-                  <div class="search__hits__title">${data._highlightResult.hierarchy.lvl1.value}</div>
-                  <div class="search__hits__platform">${data.platform}</div>
+                  <div class="search__hits__text">
+                    <div class="search__hits__title">${data._highlightResult.hierarchy.lvl1.value}</div>
+                    <div class="search__hits__platform">${data.platform}</div>
+                  </div>
                 `;
           }
           // If the query is a full-match of a lvl2 title,
@@ -203,10 +215,12 @@ window.addEventListener("DOMContentLoaded", () => {
                   <i class="search__hits__icon">
                     ${icons.h2}
                   </i>
-                  <div class="search__hits__title">${data._highlightResult.hierarchy.lvl2.value}</div>
-                  <div class="search__hits__label">
-                    <div class="search__hits__platform">${data.platform}</div>
-                    ${data.hierarchy.lvl1}
+                  <div class="search__hits__text">
+                    <div class="search__hits__title">${data._highlightResult.hierarchy.lvl2.value}</div>
+                    <div class="search__hits__label">
+                      <div class="search__hits__platform">${data.platform}</div>
+                      ${data.hierarchy.lvl1}
+                    </div>
                   </div>
                 `;
           }
@@ -221,10 +235,12 @@ window.addEventListener("DOMContentLoaded", () => {
                   <i class="search__hits__icon">
                     ${icons.h3}
                   </i>
-                  <div class="search__hits__title">${data._highlightResult.hierarchy.lvl3.value}</div>
-                  <div class="search__hits__label">
-                    <div class="search__hits__platform">${data.platform}</div>
-                    ${data.hierarchy.lvl1}
+                  <div class="search__hits__text">
+                    <div class="search__hits__title">${data._highlightResult.hierarchy.lvl3.value}</div>
+                    <div class="search__hits__label">
+                      <div class="search__hits__platform">${data.platform}</div>
+                      ${data.hierarchy.lvl1}
+                    </div>
                   </div>
                 `;
           }
@@ -240,31 +256,31 @@ window.addEventListener("DOMContentLoaded", () => {
                   <i class="search__hits__icon">
                     ${icons.content}
                   </i>
-                  <div class="search__hits__title">${
-                    data._snippetResult.content.value
-                  }</div>
-                  <div class="search__hits__label">
-                    <div class="search__hits__platform">${data.platform}</div>
-                    <span>${data.hierarchy.lvl1}</span>
-                    ${
-                      data.hierarchy.lvl2
-                        ? `${icons.chevron}` +
-                          `<span>${data.hierarchy.lvl2}</span>`
-                        : ""
-                    }
-                    ${
-                      data.hierarchy.lvl3
-                        ? `${icons.chevron}` +
-                          `<span>${data.hierarchy.lvl3}</span>`
-                        : ""
-                    }
+                  <div class="search__hits__text">
+                    <div class="search__hits__title">${
+                      data._snippetResult.content.value
+                    }</div>
+                    <div class="search__hits__label">
+                      <div class="search__hits__platform">${data.platform}</div>
+                      ${data.hierarchy.lvl1}
+                      ${
+                        data.hierarchy.lvl2
+                          ? `${icons.chevron}` + `${data.hierarchy.lvl2}`
+                          : ""
+                      }
+                      ${
+                        data.hierarchy.lvl3
+                          ? `${icons.chevron}` + `${data.hierarchy.lvl3}`
+                          : ""
+                      }
+                    </div>
                   </div>
                 `;
           } else {
             return false;
           }
 
-          return `<a target="_blank" rel="noreferrer noopener" href="${docUrl}">
+          return `<a href="${docUrl}">
                     ${returnString}
                   </a>`;
         },
@@ -319,19 +335,22 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // Clear the filters on x click
-  document.addEventListener("click", (e) => {
-    if(e.target.classList.contains("search__reset")) {
-      clearRefinements("btn");
-    }
-  }, false);
+  document.addEventListener(
+    "click",
+    (e) => {
+      if (e.target.classList.contains("search__reset")) {
+        clearRefinements("btn");
+      }
+    },
+    false
+  );
 
   // Close the search modal on outside click
   document.addEventListener("pointerdown", function (e) {
     if (e.target.id === "search") {
       closeSearchModal();
     }
-  })
-  
+  });
 
   // Keyboard events
   document.addEventListener(
@@ -339,14 +358,37 @@ window.addEventListener("DOMContentLoaded", () => {
     (e) => {
       // Close the search on esc key press
       if (e.key === "Escape") {
-        if(searchModalEl.classList.contains("search--focused") 
-        || searchModalEl.classList.contains("search--active")) {
+        if (
+          searchModalEl.classList.contains("search--focused") ||
+          searchModalEl.classList.contains("search--active")
+        ) {
           closeSearchModal();
         }
       }
 
+      // Navigate to search results page on enter key press
+      if (e.key === "Enter") {
+        const searchInputEl = document.querySelector(".search__input");
+        if (searchInputEl.value && document.activeElement === searchInputEl) {
+          var platform = "";
+          var environment = location.hostname === "localhost" || location.hostname === "127.0.0.1" ? "dev" : "prod";
+          var pathname = environment === "dev" ? "/search.html" : `/docs/minio/${platform}search.html`;
+
+          if (activePlatform === "kubernetes") {
+            platform = "kubernetes/upstream";
+          } else if (activePlatform === "openshift") {
+            platform = "kubernetes/openshift";
+          } else {
+            platform = activePlatform;
+          }
+
+          setTimeout(() => {
+            window.location.pathname = pathname;
+          }, 500);
+        }
+      }
+
       // Focus the search input on "Meta + K" key press
-      const searchInputEl = document.querySelector(".search__input");
       var metaKey = isMac() ? e.metaKey : e.ctrlKey;
       if (metaKey && e.key === "k") {
         if (root.classList.contains("read-mode")) {
@@ -371,11 +413,14 @@ window.addEventListener("DOMContentLoaded", () => {
   const searchEl = document.getElementById("search-box");
   const searchToggleBtnEl = document.querySelector(".search-toggle--keyboard");
 
-  if (searchEl) {
+  if (searchEl && searchToggleBtnEl) {
     var metaKey = isMac() ? "⌘K" : "Ctrl+K";
 
     [searchEl, searchToggleBtnEl].forEach((item) => {
-      item.insertAdjacentHTML("beforeend", `<i class="search-meta-key">${metaKey}</i>`);
+      item.insertAdjacentHTML(
+        "beforeend",
+        `<i class="search-meta-key">${metaKey}</i>`
+      );
     });
   }
 });
