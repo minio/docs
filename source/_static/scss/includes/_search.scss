@@ -438,6 +438,10 @@
 
 	.search__form {
 		border: 1px solid var(--is-search-border-color);
+
+		&:focus-within {
+			box-shadow: 0 0 0 3px var(--is-search-focus-box-shadow);
+		}
 	}
 
 	#search-powered-by {
