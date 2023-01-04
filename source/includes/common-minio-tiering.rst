@@ -1,13 +1,13 @@
 .. start-create-transition-rule-desc
 
-Use the :mc:`mc ilm add` command to create a new transition rule
+Use the :mc:`mc ilm rule add` command to create a new transition rule
 for the bucket. The following example configures transition after the
 specified number of calendar days:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm add ALIAS/BUCKET \
+   mc ilm rule add ALIAS/BUCKET \
    --transition-tier TIERNAME \
    --transition-days DAYS \
    --noncurrent-transition-days NONCURRENT_DAYS
@@ -23,28 +23,28 @@ The example above specifies the following arguments:
    * - Argument
      - Description
 
-   * - :mc-cmd:`ALIAS <mc ilm add ALIAS>`
+   * - :mc-cmd:`ALIAS <mc ilm rule add ALIAS>`
      - Specify the :mc:`alias <mc alias>` of the MinIO deployment for which
        you are creating the lifecycle management rule.
 
-   * - :mc-cmd:`BUCKET <mc ilm add ALIAS>`
+   * - :mc-cmd:`BUCKET <mc ilm rule add ALIAS>`
      - Specify the full path to the bucket for which you are
        creating the lifecycle management rule.
 
-   * - :mc-cmd:`TIERNAME <mc ilm add --transition-tier>`
+   * - :mc-cmd:`TIERNAME <mc ilm rule add --transition-tier>`
      - The remote storage tier to which MinIO transitions objects. 
        Specify the remote storage tier name created in the previous step.
 
        If you want to transition noncurrent object versions to a distinct
        remote tier, specify a different tier name for 
-       :mc-cmd:`~mc ilm add --noncurrent-transition-tier`.
+       :mc-cmd:`~mc ilm rule add --noncurrent-transition-tier`.
 
-   * - :mc-cmd:`DAYS <mc ilm add --transition-days>`
+   * - :mc-cmd:`DAYS <mc ilm rule add --transition-days>`
      - The number of calendar days after which MinIO marks an object as 
        eligible for transition. Specify the number of days as an integer,
        e.g. ``30`` for 30 days.
 
-   * - :mc-cmd:`NONCURRENT_DAYS <mc ilm add --noncurrent-transition-days>`
+   * - :mc-cmd:`NONCURRENT_DAYS <mc ilm rule add --noncurrent-transition-days>`
      - The number of calendar days after which MinIO marks a noncurrent
        object version as eligible for transition. MinIO specifically measures
        the time since an object *became* non-current instead of the object

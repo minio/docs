@@ -53,6 +53,7 @@ deployment. You can also use the command to search for files on a filesystem.
                           [--print "string"]      \
                           [--regex "string"]      \
                           [--smaller "string"]    \
+                          [--versions]            \
                           [--watch]               \
                           ALIAS
 
@@ -65,19 +66,17 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
-
-   *Required* 
+   :required:
    
-   For objects on  MinIO or an S3-compatible host, specify the  
-   :ref:`alias <alias>` and the full path to search
-   (e.g. bucket and prefixes). For example:
+   For objects on  MinIO or an S3-compatible host, specify the :ref:`alias <alias>` and the full path to search (e.g. bucket and prefixes). 
+   For example:
 
    .. code-block:: none
 
       mc find play/mydata/
 
-   For objects on a filesyste, specify the full path to search. For 
-   example:
+   For objects on a filesyste, specify the full path to search. 
+   For example:
 
    .. code-block:: shell
 
@@ -87,76 +86,79 @@ Parameters
    *all* objects or files at the specified path, similar to :mc:`mc ls`.
 
 .. mc-cmd:: --exec
+   :optional:
    
-   
-   *Optional* Spawns an external process for each object returned by 
-   :mc:`mc find`. Supports :ref:`substitution formatting
-   <mc-find-substitution-format>` of the output.
+   Spawns an external process for each object returned by :mc:`mc find`. 
+   Supports :ref:`substitution formatting <mc-find-substitution-format>` of the output.
 
 .. mc-cmd:: --ignore
-   
+   :optional:
 
-   *Optional* Exclude objects whose names match the specified wildcard pattern.
-
+   Exclude objects whose names match the specified wildcard pattern.
 
 .. mc-cmd:: --larger
-   
+   :optional:
 
-   *Optional* Match all objects larger than the specified size in 
-   :ref:`units <mc-find-units>`.
+   Match all objects larger than the specified size in :ref:`units <mc-find-units>`.
 
 .. mc-cmd:: --maxdepth
-   
+   :optional:
 
-   *Optional* Limits directory navigation to the specified depth.
+   Limits directory navigation to the specified depth.
 
 .. mc-cmd:: --name
-   
+   :optional:
 
-   *Optional* Return objects whose names match the specified wildcard pattern.
+   Return objects whose names match the specified wildcard pattern.
 
 .. mc-cmd:: --newer-than
-   
+   :optional:
 
-   *Optional* Mirror object(s) newer than the specified number of days.  Specify
-   a string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``
+   Mirror object(s) newer than the specified number of days.  
+   Specify a string in ``#d#hh#mm#ss`` format. 
+   For example: ``--older-than 1d2hh3mm4ss``
 
 .. mc-cmd:: --older-than
-   
+   :optional:
 
-   *Optional* Mirror object(s) older than the specified time limit. Specify a
-   string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``
+   Mirror object(s) older than the specified time limit. Specify a
+   string in ``#d#hh#mm#ss`` format. 
+   For example: ``--older-than 1d2hh3mm4ss``
       
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --path
-   
+   :optional:
 
-   *Optional* Return the contents of directories whose names match the specified
-   wildcard pattern.
+   Return the contents of directories whose names match the specified wildcard pattern.
 
 .. mc-cmd:: --print
-   
+   :optional:
 
-   *Optional* Prints results to ``STDOUT``.  Supports 
-   :ref:`substitution formatting <mc-find-substitution-format>` of the output.
+   Prints results to ``STDOUT``.  
+   Supports :ref:`substitution formatting <mc-find-substitution-format>` of the output.
 
 .. mc-cmd:: --regex
-   
+   :optional:
 
-   *Optional* Returns objects or the contents of directories whose names match
+   Returns objects or the contents of directories whose names match
    the specified PCRE regex pattern.
 
 .. mc-cmd:: --smaller
-   
+   :optional:
 
-   *Optional* Match all objects smaller than the specifized size in 
+   Match all objects smaller than the specifized size in 
    :ref:`units <mc-find-units>`.
 
-.. mc-cmd:: --watch
-   
+.. mc-cmd:: --versions
+   :optional:
 
-   *Optional* Continuously monitor the :mc-cmd:`~mc find ALIAS` and return any
+   Include all object versions in the results.
+
+.. mc-cmd:: --watch
+   :optional:
+
+   Continuously monitor the :mc-cmd:`~mc find ALIAS` and return any
    new objects which match the specified criteria.
 
 Global Flags

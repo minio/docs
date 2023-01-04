@@ -83,7 +83,7 @@ Parameters
 
 .. mc-cmd:: ALIAS
 
-   *Required* The :ref:`alias <alias>` of a MinIO deplyment and the full path to
+   *Required* The :ref:`alias <alias>` of a MinIO deployment and the full path to
    the object to remove. For example:
 
    .. code-block:: shell
@@ -148,7 +148,7 @@ Parameters
    
 
    *Optional* The encryption key to use for performing Server-Side Encryption
-   with Client Keys (SSE-C). Specify comma seperated key-value pairs as
+   with Client Keys (SSE-C). Specify comma separated key-value pairs as
    ``KEY=VALUE,...``.
    
    - For ``KEY``, specify the S3-compatible service 

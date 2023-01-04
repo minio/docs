@@ -227,18 +227,12 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-head-desc
           :end-before: end-mc-head-desc
      
-   * - | :mc:`mc ilm add`
-       | :mc:`mc ilm ls`
-       | :mc:`mc ilm edit`
-       | :mc:`mc ilm rm`
-       | :mc:`mc ilm export`
-       | :mc:`mc ilm import`
-     - The ``mc ilm`` command supports managing
-       :ref:`object lifecycle management rules <minio-lifecycle-management>`
-       on a MinIO deployment. 
+   * - | :mc:`mc ilm tier`
+       | :mc:`mc ilm rule`
+       | :mc:`mc ilm restore`
+     - The ``mc ilm`` commands manage :ref:`object lifecycle management rules <minio-lifecycle-management>` on a MinIO deployment. 
 
-       Use this command to set both :ref:`minio-lifecycle-management-tiering` 
-       and :ref:`minio-lifecycle-management-expiration` rules on a bucket.
+       Use these command to create tiers, create :ref:`tiering <minio-lifecycle-management-tiering>` rules, and manage :ref:`expiration <minio-lifecycle-management-expiration>` rules for objects on a bucket.
      
    * - | :mc:`mc legalhold set`
        | :mc:`mc legalhold info`
@@ -283,6 +277,13 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /reference/minio-mc/mc-pipe.rst
           :start-after: start-mc-pipe-desc
           :end-before: end-mc-pipe-desc  
+
+   * - | :mc:`mc quota set`
+       | :mc:`mc quota info`
+       | :mc:`mc quota clear`
+
+     - The ``mc quota`` commands configure, display, or remove a hard quota limit on a bucket. 
+       When a bucket with a quota configured reaches the specified limit, MinIO rejects further ``PUT`` requests for the bucket. 
      
    * - :mc:`mc rb`
      - .. include:: /reference/minio-mc/mc-rb.rst
@@ -449,6 +450,52 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
 
       mc --JSON ls play 
 
+.. mc-cmd:: --limit-download
+   :optional:
+
+   Limit client-side download rates to no more than a specified rate in KiB/s, MiB/s, or GiB/s.
+   This affects only the download to the local device running the MinIO Client.
+   Valid units include: 
+   
+   - ``B`` for bytes
+   - ``K`` for kilobytes
+   - ``G`` for gigabytes
+   - ``T`` for terabytes
+   - ``Ki`` for kibibytes
+   - ``Gi`` for gibibytes
+   - ``Ti`` for tebibytes
+
+   For example, to limit download rates to no more than 1 GiB/s, use the following:
+
+   .. code-block::
+
+      --limit-download 1G
+
+   If not specified, MinIO uses an unlimited download rate.
+
+.. mc-cmd:: --limit-upload
+   :optional:
+
+   Limit client-side upload rates to no more than the specified rate in KiB/s, MiB/s, or GiB/s.
+   This affects only the upload from the local device running the MinIO Client.
+   Valid units include: 
+   
+   - ``B`` for bytes
+   - ``K`` for kilobytes
+   - ``G`` for gigabytes
+   - ``T`` for terabytes
+   - ``Ki`` for kibibytes
+   - ``Gi`` for gibibytes
+   - ``Ti`` for tebibytes
+
+   For example, to limit upload rates to no more than 1 GiB/s, use the following:
+
+   .. code-block::
+
+      --limit-upload 1G
+
+   If not specified, MinIO uses an unlimited upload rate.
+
 .. option:: --no-color
 
    Disables the built-in color theme for console output. Useful for dumb
@@ -502,13 +549,9 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-event-remove
    /reference/minio-mc/mc-find
    /reference/minio-mc/mc-head
-   /reference/minio-mc/mc-ilm-add
-   /reference/minio-mc/mc-ilm-edit
-   /reference/minio-mc/mc-ilm-ls
    /reference/minio-mc/mc-ilm-restore
-   /reference/minio-mc/mc-ilm-rm
-   /reference/minio-mc/mc-ilm-export
-   /reference/minio-mc/mc-ilm-import
+   /reference/minio-mc/mc-ilm-rule
+   /reference/minio-mc/mc-ilm-tier
    /reference/minio-mc/mc-legalhold-set
    /reference/minio-mc/mc-legalhold-info
    /reference/minio-mc/mc-legalhold-clear
@@ -522,6 +565,9 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-mv
    /reference/minio-mc/mc-od
    /reference/minio-mc/mc-pipe
+   /reference/minio-mc/mc-quota-clear
+   /reference/minio-mc/mc-quota-info
+   /reference/minio-mc/mc-quota-set
    /reference/minio-mc/mc-rb
    /reference/minio-mc/mc-replicate-add
    /reference/minio-mc/mc-replicate-diff
@@ -556,3 +602,4 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-update
    /reference/minio-mc/mc-version
    /reference/minio-mc/mc-watch
+   /reference/minio-mc-deprecated

@@ -12,6 +12,11 @@
 
 .. mc:: mc ilm rm
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   ``mc ilm rm`` replaced by :mc-cmd:`mc ilm rule rm`
+
+
 Syntax
 ------
 
@@ -77,7 +82,7 @@ Parameters
 
 .. mc-cmd:: id
 
-   *Required* The unique ID of the rule. Use :mc:`mc ilm ls` to list bucket
+   *Required* The unique ID of the rule. Use :mc:`mc ilm rule ls` to list bucket
    rules and retrieve the ``id`` for the rule you want to remove.
 
    Mutually exclusive with :mc:`mc ilm rm all`

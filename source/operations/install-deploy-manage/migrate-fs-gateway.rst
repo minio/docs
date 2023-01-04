@@ -135,12 +135,12 @@ Procedure
 
 #. *(Optional)* Duplicate **tiers** from existing standalone deployment to new deployment
 
-   Use :mc-cmd:`mc admin tier ls` with the ``--json`` flag to retrieve a list of the tiers that exist on the standalone deployment.
+   Use :mc-cmd:`mc ilm tier ls` with the ``--json`` flag to retrieve a list of the tiers that exist on the standalone deployment.
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin tier ls ALIAS --json
+      mc ilm tier ls ALIAS --json
 
    - Replace ``ALIAS`` with the alias for the existing standalone deployment.
    

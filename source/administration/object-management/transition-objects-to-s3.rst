@@ -124,20 +124,20 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin tier add` command to add an Amazon S3 service as the
+Use the :mc-cmd:`mc ilm tier add` command to add an Amazon S3 service as the
 new remote storage tier:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin tier add s3 TARGET TIER_NAME \
-      --endpoint https://HOSTNAME \
-      --bucket BUCKET \
-      --prefix PREFIX
-      --access-key ACCESS_KEY \
-      --secret-key SECRET_KEY \
-      --region REGION \
-      --storage-class STORAGE_CLASS
+   mc ilm tier add s3 TARGET TIER_NAME  \
+      --endpoint https://HOSTNAME       \
+      --access-key ACCESS_KEY           \
+      --secret-key SECRET_KEY           \
+      --bucket BUCKET                   \
+      --prefix PREFIX                   \
+      --storage-class STORAGE_CLASS     \
+      --region REGION 
 
 The example above uses the following arguments:
 
@@ -149,23 +149,33 @@ The example above uses the following arguments:
    * - Argument
      - Description
    
-   * - :mc-cmd:`TARGET <mc admin tier add TARGET>`
+   * - :mc-cmd:`TARGET <mc ilm tier add TARGET>`
      - The :mc:`alias <mc alias>` of the MinIO deployment on which to configure
        the S3 remote tier.
    
-   * - :mc-cmd:`TIER_NAME <mc admin tier add TIER_NAME>`
+   * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
      - The name to associate with the new S3 remote storage tier. Specify the
        name in all-caps, e.g. ``S3_TIER``. This value is required in the next
        step.
 
-   * - :mc-cmd:`HOSTNAME <mc admin tier add --endpoint>`
+   * - :mc-cmd:`HOSTNAME <mc ilm tier add --endpoint>`
      - The URL endpoint for the S3 storage backend.
 
-   * - :mc-cmd:`BUCKET <mc admin tier add --bucket>`
+   * - :mc-cmd:`ACCESS_KEY <mc ilm tier add --access-key>`
+     - The S3 access key MinIO uses to access the bucket. The
+       access key *must* correspond to an IAM user with the 
+       required 
+       :ref:`permissions 
+       <minio-lifecycle-management-transition-to-s3-permissions-remote>`.
+
+   * - :mc-cmd:`SECRET_KEY <mc ilm tier add --secret-key>`
+     - The corresponding secret key for the specified ``ACCESS_KEY``.
+
+   * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
      - The name of the bucket on the S3 storage backend to which MinIO
        transitions objects.
 
-   * - :mc-cmd:`PREFIX <mc admin tier add --prefix>`
+   * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
      - The optional bucket prefix within which MinIO transitions objects.
 
        MinIO stores all transitioned objects in the specified ``BUCKET`` under a
@@ -178,26 +188,16 @@ The example above uses the following arguments:
        source MinIO deployment to faciliate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`ACCESS_KEY <mc admin tier add --access-key>`
-     - The S3 access key MinIO uses to access the bucket. The
-       access key *must* correspond to an IAM user with the 
-       required 
-       :ref:`permissions 
-       <minio-lifecycle-management-transition-to-s3-permissions-remote>`.
-
-   * - :mc-cmd:`SECRET_KEY <mc admin tier add --secret-key>`
-     - The corresponding secret key for the specified ``ACCESS_KEY``.
-
-   * - :mc-cmd:`REGION <mc admin tier add --region>`
-     - The AWS S3 region of the specified ``BUCKET``. You can safely omit this
-       option if the ``HOSTNAME`` includes the region.
-
-   * - :mc-cmd:`STORAGE_CLASS <mc admin tier add --storage-class>`
+   * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
      - The S3 storage class to which MinIO transitions objects. Specify
        one of the following supported storage classes:
 
        - ``STANDARD``
        - ``REDUCED``
+
+   * - :mc-cmd:`REGION <mc ilm tier add --region>`
+     - The AWS S3 region of the specified ``BUCKET``. You can safely omit this
+       option if the ``HOSTNAME`` includes the region.
 
 3) Create and Apply the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -210,16 +210,16 @@ The example above uses the following arguments:
 4) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm ls` command to review the configured transition
+Use the :mc:`mc ilm rule ls` command to review the configured transition
 rules:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm ls ALIAS/PATH --transition
+   mc ilm rule ls ALIAS/PATH --transition
 
-- Replace :mc-cmd:`ALIAS <mc ilm ls ALIAS>` with the :mc:`alias <mc alias>`
+- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>`
   of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc ilm ls ALIAS>` with the name of the bucket for
+- Replace :mc-cmd:`PATH <mc ilm rule ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

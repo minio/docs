@@ -12,6 +12,11 @@
 
 .. mc:: mc ilm edit
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   ``mc ilm edit`` replaced by :mc-cmd:`mc ilm rule edit`
+
+
 Syntax
 ------
 
@@ -86,7 +91,7 @@ Parameters
 .. mc-cmd:: --id
    :required:
 
-   The unique ID of the rule. Use :mc:`mc ilm ls` to list bucket
+   The unique ID of the rule. Use :mc:`mc ilm rule ls` to list bucket
    rules and retrieve the ``id`` for the rule you want to modify.
 
 .. mc-cmd:: --disable
@@ -295,7 +300,7 @@ an existing object expiration rule:
 
 - Replace ``RULEID`` with the unique ID of the object lifecycle management
   rule.
-  Use :mc:`mc ilm ls` to find the ``RULEID``.
+  Use :mc:`mc ilm rule ls` to find the ``RULEID``.
 
 - Specify any additional flags to add or modify the lifecycle management
   rule. For example, specify
@@ -313,7 +318,7 @@ Use :mc:`mc ilm edit` with :mc-cmd:`~mc ilm edit --disable` to stop using an exi
    mc ilm edit --id "RULEID" --disable myminio/mybucket
 
 - Replace ``RULEID`` with the unique ID of the object lifecycle management rule.
-  Use :mc:`mc ilm ls` to find the ``RULEID``.
+  Use :mc:`mc ilm rule ls` to find the ``RULEID``.
 - Replace ``myminio`` with the ALIAS of the deployment where the rule exists.
 - Replace ``mybucket`` with the bucket for the rule.
 

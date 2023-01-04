@@ -40,11 +40,6 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-bucket-remote-desc
           :end-before: end-mc-admin-bucket-remote-desc
 
-   * - :mc-cmd:`mc admin bucket quota`
-     - .. include:: /reference/minio-mc-admin/mc-admin-bucket-quota.rst
-          :start-after: start-mc-admin-bucket-quota-desc
-          :end-before: end-mc-admin-bucket-quota-desc
-
    * - :mc-cmd:`mc admin console`
      - .. include:: /reference/minio-mc-admin/mc-admin-console.rst
           :start-after: start-mc-admin-console-desc
@@ -129,11 +124,6 @@ The following table lists :mc:`mc admin` commands:
      - .. include:: /reference/minio-mc-admin/mc-admin-speedtest.rst
           :start-after: start-mc-admin-speedtest-desc
           :end-before: end-mc-admin-speedtest-desc
-
-   * - :mc:`mc admin tier`
-     - .. include:: /reference/minio-mc-admin/mc-admin-tier.rst
-          :start-after: start-mc-admin-tier-desc
-          :end-before: end-mc-admin-tier-desc
 
    * - :mc-cmd:`mc admin top`
      - .. include:: /reference/minio-mc-admin/mc-admin-top.rst

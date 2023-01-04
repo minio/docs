@@ -35,8 +35,8 @@ MinIO supports any of the following remote tier targets:
 MinIO object transition supports use cases like moving aged data from MinIO clusters in private or public cloud infrastructure to low-cost private or public cloud storage solutions. 
 MinIO manages retrieving tiered objects on-the-fly without any additional application-side logic. 
 
-Use the :mc:`mc admin tier` command to create a remote target for tiering data that target. 
-You can then use the :mc-cmd:`mc ilm add --transition-days` command to transition objects to that tier after a specified number of calendar days.
+Use the :mc:`mc ilm tier add` command to create a remote target for tiering data to that target. 
+You can then use the :mc-cmd:`mc ilm rule add --transition-days` command to transition objects to that tier after a specified number of calendar days.
 
 .. versionadded:: RELEASE.2022-11-10T18-20-21Z
 
@@ -72,7 +72,7 @@ Versioned Buckets
 MinIO adopts :s3-docs:`S3 behavior <intro-lifecycle-rules.html#intro-lifecycle-rules-actions>` for transition rules on :ref:`versioned buckets <minio-bucket-versioning>`. 
 Specifically, MinIO by default applies the transition operation to the *current* object version. 
 
-To transition noncurrent object versions, specify the :mc-cmd:`~mc ilm add --noncurrent-transition-days` and :mc-cmd:`~mc ilm add --noncurrent-transition-tier` options when creating the transition rule. 
+To transition noncurrent object versions, specify the :mc-cmd:`~mc ilm rule add --noncurrent-transition-days` and :mc-cmd:`~mc ilm rule add --noncurrent-transition-tier` options when creating the transition rule. 
 
 .. _minio-lifecycle-management-expiration:
 
@@ -85,7 +85,7 @@ For example, you can create a lifecycle management rule to expire any object old
 
 .. todo: Diagram of MinIO Expiration
 
-Use :mc-cmd:`mc ilm add --expire-days` to expire objects after a specified number of calendar days.
+Use :mc-cmd:`mc ilm rule add --expire-days` to expire objects after a specified number of calendar days.
 
 For buckets with :ref:`replication <minio-bucket-replication>` configured, MinIO does not replicate objects deleted by a lifecycle management expiration rule.
 See :ref:`minio-replication-behavior-delete` for more information.
@@ -98,11 +98,11 @@ MinIO has two specific default behaviors for versioned buckets:
 
 - MinIO applies the expiration option to only the *current* object version by creating a ``DeleteMarker`` as is normal with versioned delete.
 
-  To expire noncurrent object versions, specify the :mc-cmd:`~mc ilm add --noncurrent-expire-days` option when creating the expiration rule. 
+  To expire noncurrent object versions, specify the :mc-cmd:`~mc ilm rule add --noncurrent-expire-days` option when creating the expiration rule. 
 
 - MinIO does not expire ``DeleteMarkers`` *even if* no other versions of that object exist.
 
-  To expire delete markers when there are no remaining versions for that object, specify the :mc-cmd:`~mc ilm add --expire-delete-marker` option when creating the expiration rule.
+  To expire delete markers when there are no remaining versions for that object, specify the :mc-cmd:`~mc ilm rule add --expire-delete-marker` option when creating the expiration rule.
 
 .. _minio-lifecycle-management-scanner:
 
