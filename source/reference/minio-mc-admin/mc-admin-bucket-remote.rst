@@ -10,6 +10,13 @@
 
 .. mc:: mc admin bucket remote
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   - ``mc admin bucket remote add`` replaced by :mc-cmd:`mc replicate add`
+   - ``mc admin bucket remote update`` replaced by :mc-cmd:`mc replicate update`
+   - ``mc admin bucket remote rm`` replaced by :mc-cmd:`mc replicate rm`
+   - ``mc admin bucket remote ls`` replaced by :mc-cmd:`mc replicate ls`
+
 Description
 -----------
 
@@ -96,6 +103,10 @@ Syntax
 
 .. mc-cmd:: add
    :fullpath:
+
+   .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+      - ``mc admin bucket remote add`` replaced by :mc-cmd:`mc replicate add`
 
    Adds a remote target to a bucket on a MinIO deployment. The
    command has the following syntax:
@@ -184,6 +195,10 @@ Syntax
 .. mc-cmd:: ls
    :fullpath:
 
+   .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+      - ``mc admin bucket remote ls`` replaced by :mc-cmd:`mc replicate ls`
+
    Lists all remote targets associated to a bucket on the MinIO deployment. The
    command has the following syntax:
 
@@ -216,6 +231,10 @@ Syntax
 .. mc-cmd:: rm
    :fullpath:
 
+   .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+      - ``mc admin bucket remote rm`` replaced by :mc-cmd:`mc replicate rm`
+   
    Removes a remote target for a bucket on the MinIO deployment. The
    command has the following syntax:
 
@@ -241,7 +260,7 @@ Syntax
          mc admin bucket remote rm play/mybucket
 
    .. mc-cmd:: ARN
-      
+     
 
       *Required*
 

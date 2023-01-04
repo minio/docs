@@ -12,6 +12,10 @@
 
 .. mc:: mc replicate ls
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
+
+   ``mc replicate ls`` replaces the ``mc admin bucket remote ls`` command.
+
 Syntax
 ------
 

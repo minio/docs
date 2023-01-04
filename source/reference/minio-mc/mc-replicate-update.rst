@@ -14,6 +14,12 @@
 .. mc:: mc replicate edit
 .. mc:: mc replicate update
 
+
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
+
+   ``mc replicate update`` replaces the ``mc admin bucket remote update`` command.
+
+
 .. versionchanged:: RELEASE.2022-11-07T23-47-39Z
 
    ``mc replicate update`` replaces the ``mc replicate edit`` command.
@@ -58,15 +64,20 @@ The :mc:`mc replicate update` command modifies an existing
          :class: copyable
 
          mc [GLOBALFLAGS] replicate update              \
-                          --id "string"                 \
-                          [--remote-bucket "string"]    \
-                          [--disable]                   \
-                          [--id "string"]               \
-                          [--replicate "string"]        \
-                          [--state "string"]            \
-                          [--storage-class "string"]    \
-                          [--tags "string"]             \
-                          [--priority int]              \
+                          --remote-bucket string          \
+                          [--bandwidth "string"]            \
+                          [--healthcheck-seconds integer]   \
+                          [--id "string"]                   \
+                          [--limit-upload "string"]         \
+                          [--limit-download "string"]       \
+                          [--path "string"]                 \
+                          [--priority int]                  \
+                          [--proxy]
+                          [--replicate "string"]            \
+                          [--state string]
+                          [--storage-class "string"]        \
+                          [--sync string]                          \
+                          [--tags "string"]                 \
                           ALIAS
 
       .. include:: /includes/common-minio-mc.rst
@@ -77,10 +88,10 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* the :ref:`alias <alias>` of the MinIO deployment and full path to
-   the bucket or bucket prefix on which to modify the replication rule. For
-   example:
+   The :ref:`alias <alias>` of the MinIO deployment and full path to the bucket or bucket prefix on which to modify the replication rule. 
+   For example:
 
    .. code-block:: none
 
@@ -90,8 +101,93 @@ Parameters
    :required:
    
    Specify the unique ID for a configured replication rule. 
-   Use the :mc:`mc replicate ls` command to list the replication rules
-   for a bucket.
+   Use the :mc:`mc replicate ls` command to list the replication rules for a bucket.
+
+.. mc-cmd:: --bandwidth
+   :optional:
+
+   Limit bandwidth rates to no more than the specified rate in KiB/s, MiB/s, or GiB/s.
+   Valid units include: 
+   
+   - ``B`` for bytes
+   - ``K`` for kilobytes
+   - ``G`` for gigabytes
+   - ``T`` for terabytes
+   - ``Ki`` for kibibytes
+   - ``Gi`` for gibibytes
+   - ``Ti`` for tebibytes
+
+   For example, to limit bandwidth rates to no more than 1 GiB/s, use the following:
+
+   .. code-block::
+
+      --limit-upload 1Gi
+
+   If not specified, MinIO does not limit the bandwidth rate.
+
+.. mc-cmd:: --healthcheck-seconds
+   :optional:
+
+   The length of time in seconds between checks on the health of the remote bucket.
+
+   If not specified, MinIO uses an interval of 60 seconds.
+
+.. mc-cmd:: --limit-download
+   :optional:
+
+   Limit download rates to no more than a specified rate in KiB/s, MiB/s, or GiB/s.
+   Valid units include: 
+   
+   - ``B`` for bytes
+   - ``K`` for kilobytes
+   - ``G`` for gigabytes
+   - ``T`` for terabytes
+   - ``Ki`` for kibibytes
+   - ``Gi`` for gibibytes
+   - ``Ti`` for tebibytes
+
+   For example, to limit download rates to no more than 1 GiB/s, use the following:
+
+   .. code-block::
+
+      --limit-download 1G
+
+   If not specified, MinIO uses an unlimited download rate.
+
+.. mc-cmd:: --limit-upload
+   :optional:
+
+   Limit upload rates to no more than the specified rate in KiB/s, MiB/s, or GiB/s.
+   Valid units include: 
+   
+   - ``B`` for bytes
+   - ``K`` for kilobytes
+   - ``G`` for gigabytes
+   - ``T`` for terabytes
+   - ``Ki`` for kibibytes
+   - ``Gi`` for gibibytes
+   - ``Ti`` for tebibytes
+
+   For example, to limit upload rates to no more than 1 GiB/s, use the following:
+
+   .. code-block::
+
+      --limit-upload 1G
+
+   If not specified, MinIO uses an unlimited upload rate.
+
+.. mc-cmd:: --path
+   :optional:
+
+   Enable path-style lookup support for the remote bucket.
+
+   Valid values include:
+
+   - ``on`` - use a path lookup to find the remote bucket
+   - ``off`` - use a resource locator style (such as a domain or IP address) lookup to find the remote bucket
+   - ``auto`` - ask MinIO to identify the correct type of lookup to use to find the remote bucket
+
+   When not defined, MinIO uses the ``auto`` value.
 
 .. mc-cmd:: --priority
    :optional:
@@ -100,74 +196,80 @@ Parameters
    The value *must* be unique among all other rules on the source bucket. 
    Higher values imply a *higher* priority than all other rules.
 
+.. mc-cmd:: --proxy
+   :optional:
+
+   When defining active-active replication between buckets, do not proxy.
+
+   Valid values include:
+
+   - ``enable`` - Enable proxying in active-active replication.
+   - ``disable`` - Disable proxying in active-active replication.
+
+   By default, MinIO defaults to ``enable``.
+
+
 .. mc-cmd:: --remote-bucket
    :optional:
 
-   Specify the ARN for the destination deployment and bucket. 
-   You can retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
-    
-   - Use the :mc-cmd:`mc admin bucket remote ls` to retrieve a list of 
-     ARNs for the bucket on the destination deployment.
+   Specify the credentials, destination deployment, and bucket of the remote location.
+   Value may be either location based (IP or URL) or path based.
 
-   - Use the :mc-cmd:`mc admin bucket remote add` to create a replication ARN
-      for the bucket on the destination deployment. 
+   For example, a URL based target might look like the following:
+
+   .. code-block::
+
+      https://user:secret@myminio.cloudprovider.tld:9090/bucket
 
 .. mc-cmd:: --replicate
    :optional:
 
-   Specify a comma-separated list of the following values to enable
-   extended replication features:
+   Specify a comma-separated list of the following values to enable extended replication features:
 
-   - ``delete`` - Directs MinIO to replicate DELETE operations to the
-     destination bucket.
+   - ``delete`` - Directs MinIO to replicate DELETE operations to the destination bucket.
 
-   - ``delete-marker`` - Directs MinIO to replicate delete markers to the 
-     destination bucket. 
+   - ``delete-marker`` - Directs MinIO to replicate delete markers to the destination bucket. 
 
-   - ``replica-metadata-sync`` - Directs MinIO to synchronize metadata-only
-     changes on a replicated object back to the source. This feature only
-     effects :ref:`two-way active-active
-     <minio-bucket-replication-serverside-twoway>` replication
-     configurations.
+   - ``replica-metadata-sync`` - Directs MinIO to synchronize metadata-only changes on a replicated object back to the source. 
+     This feature only effects :ref:`two-way active-active <minio-bucket-replication-serverside-twoway>` replication configurations.
 
-     Omitting this value directs MinIO to stop replicating metadata-only
-     changes back to the source. 
+     Omitting this value directs MinIO to stop replicating metadata-only changes back to the source. 
 
-   - ``existing-objects`` - Directs MinIO to replicate objects created
-     prior to configuring or enabling replication. MinIO by default does
-     *not* synchronize existing objects to the remote target.
+   - ``existing-objects`` - Directs MinIO to replicate objects created prior to configuring or enabling replication. 
+     MinIO by default does *not* synchronize existing objects to the remote target.
 
-     See :ref:`minio-replication-behavior-existing-objects` for more
-     information.
+     See :ref:`minio-replication-behavior-existing-objects` for more information.
 
 .. mc-cmd:: --state
    :optional:
 
-   Enables or disables the replication rule. Specify one of the
-   following values:
+   Enables or disables the replication rule. 
+   Specify one of the following values:
 
    - ``"enable"`` - Enables the replication rule.
-
    - ``"disable"`` - Disables the replication rule. 
 
-   Objects created while replication is disabled are not immediately eligible
-   for replication after enabling the rule. You must explicitly enable
-   replication of existing objects by including ``"existing-objects"`` to the
-   list of replication features specified to 
-   :mc-cmd:`mc replicate update --replicate`. See
-   :ref:`minio-replication-behavior-existing-objects` for more information.
+   Objects created while replication is disabled are not immediately eligible for replication after enabling the rule. 
+   You must explicitly enable replication of existing objects by including ``"existing-objects"`` to the list of replication features specified to :mc-cmd:`mc replicate update --replicate`. 
+   
+   See :ref:`minio-replication-behavior-existing-objects` for more information.
 
 .. mc-cmd:: --storage-class
    :optional:
 
-   Specify the MinIO :ref:`storage class <minio-ec-storage-class>`
-   to apply to replicated objects. 
+   Specify the MinIO :ref:`storage class <minio-ec-storage-class>` to apply to replicated objects. 
+
+.. mc-cmd:: --sync
+   :optional:
+
+   Enable synchronous replication for this remote target.
+
+   By default, MinIO uses asynchronous replication.
 
 .. mc-cmd:: --tags
    :optional:
 
-   Specify one or more ampersand ``&`` separated key-value pair tags
-   which MinIO uses for filtering objects to replicate. For example:
+   Specify one or more ampersand ``&`` separated key-value pair tags which MinIO uses for filtering objects to replicate. For example:
 
    .. code-block:: shell
 
@@ -198,29 +300,42 @@ Use :mc:`mc replicate update` to modify an existing replication rule.
       --id ID                     \
       [--FLAGS]
 
-- Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the 
-  :mc:`alias <mc alias>` of the MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc replicate update ALIAS>` with the path to the 
-  bucket or bucket prefix on which the rule exists.
+- Replace :mc-cmd:`PATH <mc replicate update ALIAS>` with the path to the bucket or bucket prefix on which the rule exists.
 
-- Replace :mc-cmd:`ID <mc replicate update --id>` with the unique identifier for the
-  rule to modify. Use :mc:`mc replicate ls` to retrieve the list of 
-  replication rules on the bucket and their corresponding identifiers.
+- Replace :mc-cmd:`ID <mc replicate update --id>` with the unique identifier for the rule to modify. 
+  Use :mc:`mc replicate ls` to retrieve the list of replication rules on the bucket and their corresponding identifiers.
 
 .. note::
 
-   Modifying a replication configuration rule does not effect already replicated
-   objects. For example, modifying the :mc-cmd:`~mc replicate update --tags`
-   filter does not result in the removal of replicated objects which do not
-   meet the filter.
+   Modifying a replication configuration rule does not affect already replicated objects. 
+   For example, modifying the :mc-cmd:`~mc replicate update --tags` filter does not result in the removal of replicated objects which do not meet the filter.
+
+
+Update the Credentials for an Existing Replication Rule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc replicate update` to modify an existing replication rule.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc replicate update ALIAS/PATH \
+      --id ID                     \
+      --remote-bucket https://user:secret@minio.mycloud.tld:9090/mybucket
+
+- Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+
+- Replace :mc-cmd:`PATH <mc replicate update ALIAS>` with the path to the bucket or bucket prefix on which the rule exists.
+
+- Replace :mc-cmd:`ID <mc replicate update --remote-bucket>` with the updated credentials, path, and bucket.
+
 
 Disable or Enable an Existing Replication Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc replicate update` with the
-:mc-cmd:`~mc replicate update --state` flag to disable or enable a 
-replication rule.
+Use :mc:`mc replicate update` with the :mc-cmd:`~mc replicate update --state` flag to disable or enable a replication rule.
 
 .. code-block:: shell
    :class: copyable
@@ -229,29 +344,20 @@ replication rule.
       --id ID \
       --state "disabled"|"enabled"
 
-- Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the 
-  :mc:`alias <mc alias>` of the MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc replicate update ALIAS>` with the path to the 
-  bucket or bucket prefix on which the rule exists.
+- Replace :mc-cmd:`PATH <mc replicate update ALIAS>` with the path to the bucket or bucket prefix on which the rule exists.
 
-- Replace :mc-cmd:`ID <mc replicate update --id>` with the unique identifier for the
-  rule to modify. Use :mc:`mc replicate ls` to retrieve the list of 
-  replication rules on the bucket and their corresponding identifiers.
+- Replace :mc-cmd:`ID <mc replicate update --id>` with the unique identifier for the rule to modify. 
+  Use :mc:`mc replicate ls` to retrieve the list of replication rules on the bucket and their corresponding identifiers.
 
-- Specify either ``"disabled"`` or ``"enabled"`` to the 
-  :mc-cmd:`~mc replicate update --state` flag to disable or enable the replication
-  rule.
+- Specify either ``"disabled"`` or ``"enabled"`` to the :mc-cmd:`~mc replicate update --state` flag to disable or enable the replication rule.
 
 .. note::
 
-   MinIO requires enabling :ref:`existing object replication 
-   <minio-replication-behavior-existing-objects>` to synchronize objects
-   written or removed after disabling a replication rule. 
+   MinIO requires enabling :ref:`existing object replication <minio-replication-behavior-existing-objects>` to synchronize objects written or removed after disabling a replication rule. 
 
-   For rules *without* existing object replication, MinIO synchronizes only
-   those write or delete operations issued while the replication rule is
-   *enabled*.
+   For rules *without* existing object replication, MinIO synchronizes only those write or delete operations issued while the replication rule is *enabled*.
 
 Behavior
 --------
@@ -259,10 +365,8 @@ Behavior
 Required Permissions
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO strongly recommends creating users specifically for supporting 
-bucket replication operations. See 
-:mc:`mc admin user` and :mc:`mc admin policy` for more complete
-documentation on adding users and policies to a MinIO deployment.
+MinIO strongly recommends creating users specifically for supporting bucket replication operations. 
+See :mc:`mc admin user` and :mc:`mc admin policy` for more complete documentation on adding users and policies to a MinIO deployment.
 
 .. tab-set::
 
