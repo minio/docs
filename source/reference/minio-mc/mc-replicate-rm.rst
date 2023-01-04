@@ -12,6 +12,11 @@
 
 .. mc:: mc replicate rm
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
+
+   ``mc replicate rm`` replaces the ``mc admin bucket remote rm`` command.
+   Removing the replication automatically removes the underlying remote target.
+
 Syntax
 ------
 

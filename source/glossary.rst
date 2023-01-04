@@ -200,7 +200,8 @@ Glossary
        Increase this target based on benchmarking and monitoring of real world workloads up to what the hardware can meaningfully handle. 
      - Deployments with high-performance or enterprise-grade :ref:`hardware <deploy-minio-distributed-recommendations>` can typically handle prefixes with millions of objects or more.
 
-|SUBNET| Enterprise accounts can utilize yearly architecture reviews as part of the deployment and maintenance strategy to ensure long-term performance and success of your MinIO-dependent projects.
+    |SUBNET| Enterprise accounts can utilize yearly architecture reviews as part of the deployment and maintenance strategy to ensure long-term performance and success of your MinIO-dependent projects.
+    
    RAID
      Initialism for "Redundant Array of Independent Disks".
      The technology merges multiple separate physical disks into a single storage unit or array.
