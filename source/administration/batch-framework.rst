@@ -45,7 +45,7 @@ MinIO Batch CLI
 ---------------
 
 - Install the :ref:`MinIO Client <minio-client>`
-- Define an :mc-cmd:`alias <mc alias set>` for the MinIO deployment
+- Define an :mc:`alias <mc alias set>` for the MinIO deployment
 
 The :mc:`mc batch` commands include
 
@@ -100,7 +100,7 @@ The advantages of Batch Replication over :mc:`mc mirror` include:
 Sample YAML Description File for a ``replicate`` Job Type
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Create a basic ``replicate`` job definition file you can edit with :mc-cmd:`mc batch generate`.
+Create a basic ``replicate`` job definition file you can edit with :mc:`mc batch generate`.
 
 .. code-block:: yaml
 

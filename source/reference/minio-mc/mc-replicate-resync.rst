@@ -103,14 +103,10 @@ Parameters
 .. mc-cmd:: --remote-bucket
    :required:
 
-   Specify the ARN for the destination deployment and bucket. You
-   can retrieve the ARN using :mc-cmd:`mc admin bucket remote`:
-    
-   - Use the :mc-cmd:`mc admin bucket remote ls` to retrieve a list of 
-     ARNs for the bucket on the destination deployment.
-
-   - Use the :mc-cmd:`mc admin bucket remote add` to create a replication ARN
-     for the bucket on the destination deployment.
+   Specify the ARN for the destination deployment and bucket. 
+   
+   You can retrieve the ARN using :mc-cmd:`mc replicate ls` with the ``--json`` option.
+   The ``rule.Destination.Bucket`` field contains the ARN for any given replication rule.
 
 .. mc-cmd:: older-than
    :optional:

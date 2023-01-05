@@ -121,18 +121,16 @@ Replace these values with the appropriate alias for your target MinIO deployment
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-oneway-permissions>`.
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   :mc:`mc replicate add` automatically creates the necessary replication targets, removing the need for using the deprecated ``mc admin remote bucket add`` command.
+   This procedure only documents the procedure as of that release.
+
 .. _minio-bucket-replication-one-way-minio-cli-create-remote-targets:
-
-1) Create a Replication Remote Target
-+++++++++++++++++++++++++++++++++++++
-
-.. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-replication-remote-targets-cli-desc
-   :end-before: end-create-replication-remote-targets-cli-desc
 
 .. _minio-bucket-replication-one-way-minio-cli-create-replication-rules:
 
-2) Create a New Bucket Replication Rule
+1) Create a New Bucket Replication Rule
 +++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
@@ -141,7 +139,7 @@ This procedure assumes each alias corresponds to a user with the :ref:`necessary
 
 .. _minio-bucket-replication-one-way-minio-cli-verify-replication-config:
 
-3) Validate the Replication Configuration
+2) Validate the Replication Configuration
 +++++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst

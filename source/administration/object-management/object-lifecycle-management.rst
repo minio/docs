@@ -40,7 +40,7 @@ You can then use the :mc-cmd:`mc ilm add --transition-days` command to transitio
 
 .. versionadded:: RELEASE.2022-11-10T18-20-21Z
 
-You can verify the tiering status of an object using :mc-cmd:`mc ls` against the bucket or bucket prefix.
+You can verify the tiering status of an object using :mc:`mc ls` against the bucket or bucket prefix.
 The output includes the storage tier of each object:
 
 .. code-block:: shell

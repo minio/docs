@@ -39,7 +39,7 @@ Procedure
 
 .. note:: 
    
-   You can set MinIO configuration settings in environment variables and using :mc-cmd:`mc admin config set <mc admin config>`.
+   You can set MinIO configuration settings in environment variables and using :mc-cmd:`mc admin config set <mc admin config set>`.
    Depending on your current deployment setup, you may need to retrieve the values for both.
 
    This procedure does not cover migrating environment variables due to the variety of configuration methods.
@@ -68,7 +68,7 @@ Procedure
 
 #. Export the existing deployment's **configurations**
 
-   Use the :mc-cmd:`mc admin config export <mc admin config>` export command to retrieve the configurations defined for the existing standalone MinIO deployment.
+   Use the :mc-cmd:`mc admin config export <mc admin config export>` export command to retrieve the configurations defined for the existing standalone MinIO deployment.
 
    .. code-block:: shell
       :class: copyable

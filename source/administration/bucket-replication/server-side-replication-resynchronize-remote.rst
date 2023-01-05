@@ -48,8 +48,7 @@ Resynchronization Requires Existing Replication Configuration
 
 Resynchronization requires the healthy source deployment have an existing replication configuration for the unhealthy target bucket. Additionally, resynchronization only applies to those replication rules created with the :ref:`existing object replication <minio-replication-behavior-existing-objects>` option. 
 
-- Use :mc-cmd:`mc admin bucket remote ls` to review the configured remote targets on the healthy source bucket.
-- Use :mc:`mc replicate ls` to review the configured replication rules on the healthy source bucket.
+Use :mc:`mc replicate ls` to review the configured replication rules and targets for the healthy source bucket.
 
 Replication Requires Matching Object Encryption Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,12 +106,12 @@ You can repeat this procedure for each bucket that requires resynchronization. Y
 1) List the Configured Replication Targets on the Healthy Source
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run the :mc-cmd:`mc admin bucket remote ls` command to list the configured remote targets on the healthy ``SOURCE`` deployment for the ``BUCKET`` that requires resynchronization.
+Run the :mc-cmd:`mc replicate ls` command to list the configured remote targets on the healthy ``SOURCE`` deployment for the ``BUCKET`` that requires resynchronization.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin bucket remote ls SOURCE/BUCKET
+   mc replicate ls SOURCE/BUCKET --json
 
 - Replace ``SOURCE`` with the :ref:`alias <alias>` of the source MinIO deployment.
 
@@ -121,12 +120,43 @@ Run the :mc-cmd:`mc admin bucket remote ls` command to list the configured remot
 The output resembles the following:
 
 .. code-block:: shell
+   :emphasize-lines: 16
 
-   Remote URL                        Source->Target ARN                                   SYNC      PROXY
-   https://minio-2.example.net:9000  data  ->data   arn:minio:replication::UUID:BUCKET              proxy
+   {
+      "op": "",
+      "status": "success",
+      "url": "",
+      "rule": {
+         "ID": "cer1tuk9a3p5j68crk60",
+         "Status": "Enabled",
+         "Priority": 0,
+         "DeleteMarkerReplication": {
+            "Status": "Enabled"
+         },
+         "DeleteReplication": {
+            "Status": "Enabled"
+         },
+         "Destination": {
+            "Bucket": "arn:minio:replication::UUID:BUCKET"
+         },
+         "Filter": {
+            "And": {},
+            "Tag": {}
+         },
+         "SourceSelectionCriteria": {
+            "ReplicaModifications": {
+               "Status": "Enabled"
+            }
+         },
+         "ExistingObjectReplication": {
+            "Status": "Enabled"
+         }
+      }
+   }
 
-
-Identify the ARN associated to the ``BUCKET`` on the unhealthy ``TARGET`` MinIO deployment for use in the next step.
+Each document in the output represents one configured replication rule.
+The ``Destination.Bucket`` field specifies the ARN for a given rule on the bucket.
+Identify the correct ARN for the Bucket from which you want to resynchronize objects.
 
 2) Start the Resynchronization Procedure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
