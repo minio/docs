@@ -1,33 +1,3 @@
-.. start-create-replication-remote-targets-cli-desc
-
-Use the :mc-cmd:`mc admin bucket remote add` command to create a replication target from each deployment to the appropriate bucket on the destination deployment. 
-A bucket may have multiple remote targets to different target buckets.
-No two targets can resolve from one bucket to the same remote bucket. 
-
-.. code-block:: shell
-   :class: copyable
-
-   mc admin bucket remote add ALIAS/BUCKET                    \
-      https://RemoteUser:Password@HOSTNAME/BUCKETDESTINATION  \
-      --service "replication"
-
-- Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment that acts as the origin for the replication.
-- Replace ``BUCKET`` with the name of the bucket to replicate from on the origin deployment.
-- Replacete ``RemoteUser`` with the user name that has the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`
-- Replace ``Password`` with the secret key for the ``RemoteUser``.
-- Replace ``HOSTNAME`` with the URL of the destination deployment.
-- Replace ``BUCKETDESTINATION`` with the name of the bucket to replicate to on the destination deployment.
-
-The command returns an :abbr:`ARN <Amazon Resource Name>` similar to the following:
-
-.. code-block:: shell
-
-   Role ARN = 'arn:minio:replication::<UUID>:BUCKET'
-
-Copy the ARN to use in the next step, noting the MinIO deployment.
-
-.. end-create-replication-remote-targets-cli-desc
-
 .. start-create-bucket-replication-rule-console-desc
 
 A) Log in to the MinIO Console for the deployment
@@ -107,7 +77,7 @@ E) Complete the requested information:
           Otherwise, move the toggle to the :guilabel:`Off` position.
 
       * - Delete Markers
-        - Leave selected to also replicate MinIO's indication that an object has been deleted and should also be marked deleted at the ation bucket.
+        - Leave selected to also replicate MinIO's indication that an object has been deleted and should also be marked deleted at the action bucket.
           Otherwise, move the toggle to the :guilabel:`Off` position to prevent marking the object as deleted in the destination bucket.
 
       * - Deletes
@@ -121,13 +91,13 @@ F) Select :guilabel:`Save` to finish adding the replication rule
 
 .. start-create-bucket-replication-rule-cli-desc
 
-Use the :mc:`mc replicate add` command to add a new replication rule to each MinIO deployment. 
+Use the :mc:`mc replicate add` command to add a new replication rule to each MinIO deployment.
 
 .. code-block:: shell
    :class: copyable
 
    mc replicate add ALIAS/BUCKET \
-      --remote-bucket 'arn:minio:replication::<UUID>:DESTINATIONBUCKET' \
+      --remote-bucket 'https://USER:PASSWORD@HOSTNAME:PORT/BUCKET' \
       --replicate "delete,delete-marker,existing-objects"
 
 - Replace ``ALIAS`` with the :ref:`alias <alias>` of the origin MinIO deployment.  
@@ -135,9 +105,12 @@ Use the :mc:`mc replicate add` command to add a new replication rule to each Min
 
 - Replace ``BUCKET`` with the name of the bucket to replicate from on the origin deployment. 
 
-- Replace the ``--remote-bucket`` value with the ARN for the destination bucket determined in the first step. 
-  Ensure you specify the ARN created on the origin deployment. 
-  You can use :mc-cmd:`mc admin bucket remote ls` to list all remote ARNs configured on the deployment.
+- Replace the ``--remote-bucket`` to specify the remote MinIO deployment and bucket to which the ``ALIAS/BUCKET`` replicates.
+
+  The ``USER:PASSWORD`` must correspond to a user on the remote deployment with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`.
+
+  The ``HOSTNAME:PORT`` must resolve to a reachable MinIO instance on the remote deployment.
+  The ``BUCKET`` must exist and otherwise meet all other :ref:`replication requirements <minio-bucket-replication-requirements>`.
 
 - The ``--replicate "delete,delete-marker,existing-objects"`` flag enables the following replication features:
   

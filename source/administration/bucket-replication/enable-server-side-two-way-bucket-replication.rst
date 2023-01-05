@@ -157,23 +157,16 @@ This procedure creates two-way, active-active replication between two MinIO depl
 
 This procedure assumes you have already defined an alias for each deployment as a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`.
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   :mc:`mc replicate add` automatically creates the necessary replication targets, removing the need for using the deprecated ``mc admin remote bucket add`` command.
+   This procedure only documents the procedure as of that release.
+
 .. _minio-bucket-replication-two-way-minio-cli-create-remote-targets:
-
-1) Create Replication Remote Targets
-++++++++++++++++++++++++++++++++++++
-
-.. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-replication-remote-targets-cli-desc
-   :end-before: end-create-replication-remote-targets-cli-desc
-
-Repeat this step on the second MinIO deployment, reversing the origin and destination.
-
-You should have two ARNs at the conclusion of this step that point from each deployment to the other deployment's bucket. 
-Use :mc-cmd:`mc admin bucket remote ls` to verify the remote targets before proceeding.
 
 .. _minio-bucket-replication-two-way-minio-cli-create-replication-rules:
 
-2) Create a New Bucket Replication Rule on Each Deployment
+1) Create a New Bucket Replication Rule on Each Deployment
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
@@ -181,15 +174,14 @@ Use :mc-cmd:`mc admin bucket remote ls` to verify the remote targets before proc
    :end-before: end-create-bucket-replication-rule-cli-desc
 
 Repeat this step on the other MinIO deployment.
-Change the alias for the different origin.
-Change the ARN to the ARN generated on the second deployment for the desired bucket.
+Change the ``ALIAS`` and ``--remote-bucket`` values to correspond to the first deployment.
 
 You should have two replication rules configured at the conclusion of this step - one created on each deployment that points to the bucket on the other deployment.
 Use the :mc:`mc replicate ls` command to verify the created replication rules.
 
 .. _minio-bucket-replication-two-way-minio-cli-verify-replication-config:
 
-3) Validate the Replication Configuration
+2) Validate the Replication Configuration
 +++++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst

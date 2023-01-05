@@ -152,36 +152,21 @@ Repeat this test on each deployment by copying a new unique file and checking th
 Configure Multi-Site Bucket Replication Using the Command Line (:mc:`mc`)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each MinIO deployment being configured for replication. Replace these values with the appropriate alias for each MinIO deployment.
+This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each MinIO deployment being configured for replication. 
+Replace these values with the appropriate alias for each MinIO deployment.
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-requirements>`.
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   :mc:`mc replicate add` automatically creates the necessary replication targets, removing the need for using the deprecated ``mc admin remote bucket add`` command.
+   This procedure only documents the procedure as of that release.
+
 .. _minio-bucket-replication-multi-site-minio-cli-create-remote-targets:
-
-1) Create Replication Remote Targets
-++++++++++++++++++++++++++++++++++++
-
-.. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-replication-remote-targets-cli-desc
-   :end-before: end-create-replication-remote-targets-cli-desc
-
-Repeat these instructions for each remote MinIO deployment participating in the multi-site replication configuration. 
-
-For example, a multi-site replication configuration consisting of three MinIO deployments ``minio1``, ``minio2``, and ``minio3`` requires repeating this step twice on each deployment. Specifically:
-
-- The ``minio1`` deployment requires defining separate remote targets for ``minio2`` and for ``minio3``. 
-
-- The ``minio2`` deployment requires defining separate remote targets for ``minio1`` and for ``minio3``.
-
-- The ``minio3`` deployment requires defining separate remote targets for ``minio1`` and for ``minio2``.
-
-More than three deployments requires additional remote targets on each deployment to create the required targets for each origin and destination bucket compination.
-
-Record the ARN generated for each remote and note which origin-destination bucket combination you generated the ARN for.
 
 .. _minio-bucket-replication-multi-site-minio-cli-create-replication-rules:
 
-2) Create New Bucket Replication Rules
+1) Create New Bucket Replication Rules
 ++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst
@@ -201,7 +186,7 @@ Specifically, in this scenario, perform this step twice on each deployment:
 
 .. _minio-bucket-replication-multi-site-minio-cli-verify-replication-config:
 
-3) Validate the Replication Configuration
+2) Validate the Replication Configuration
 +++++++++++++++++++++++++++++++++++++++++
 
 .. include:: /includes/common/bucket-replication.rst

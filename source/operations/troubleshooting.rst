@@ -166,9 +166,9 @@ For more details about encrypting or decrypting such files, see :ref:`Encrypting
 Logs
 ----
 
-Use :mc:`mc support callhome enable` to start automatically uploading deployment logs to SUBNET for analysis.
-Use :mc:`mc support callhome status` to check the status of log upload.
-You can disable upload at any time using :mc:`mc support callhome disable`.
+Use :mc-cmd:`mc support callhome enable` to start automatically uploading deployment logs to SUBNET for analysis.
+Use :mc-cmd:`mc support callhome status` to check the status of log upload.
+You can disable upload at any time using :mc-cmd:`mc support callhome disable`.
 
 Use :mc:`mc admin logs` command to display logs from the command line.
 The command supports type and quantity filters for further limiting logs output.
