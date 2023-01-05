@@ -346,12 +346,10 @@ The new site must meet the following requirements:
    .. tab-item:: Command Line
       :sync: cli
 
-      #. Deploy three or more separate MinIO sites, using the same external IDP
+      #. Deploy the new MinIO peer site(s) following the stated requirements.
 
-         Only one site can have any buckets or objects on it.
-         The other sites must be empty.
 
-      #. Configure an alias for each site
+      #. Configure an alias for the new site
 
          .. include:: /includes/common-replication.rst
             :start-after: start-mc-admin-replicate-load-balancing
@@ -359,34 +357,28 @@ The new site must meet the following requirements:
 
          To check the existing aliases, use :mc:`mc alias list`.
       
-         For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
-         
-         Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the site.
+         Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the new site(s).
       
          .. code-block:: shell
       
-            mc alias set minio1 https://minio1.example.com:9000 adminuser adminpassword
-            mc alias set minio2 https://minio2.example.com:9000 adminuser adminpassword
-            mc alias set minio3 https://minio3.example.com:9000 adminuser adminpassword
+            mc alias set minio4 https://minio4.example.com:9000 adminuser adminpassword
       
          or define environment variables
       
          .. code-block:: shell
          
-            export MC_HOST_minio1=https://adminuser:adminpassword@minio1.example.com
-            export MC_HOST_minio2=https://adminuser:adminpassword@minio2.example.com
-            export MC_HOST_minio3=https://adminuser:adminpassword@minio3.example.com
+            export MC_HOST_minio4=https://adminuser:adminpassword@minio4.example.com
       
       #. Add site replication configuration
 
-         List all existing replicated sites first, then list the new site(s) to add.
-         In this example, ``minio1``, ``minio2``, and ``minio3`` are already configured for replication.
-         The command adds ``minio4`` and ``minio5`` as new sites to add to the replication.
-         ``minio4`` and ``minio5`` must be empty.
+         Use the :mc-cmd:`mc admin replicate add` command to expand the site replication configuration with the new peer site.
+         Specify the alias of any existing healthy peer site as the first parameter and the alias of the new site as the second parameter.
+
+         For example, the following command adds the new peer site ``minio4`` to an existing site replication configuration on ``minio1``.
       
          .. code-block:: shell
          
-            mc admin replicate add minio1 minio2 minio3 minio4 minio5
+            mc admin replicate add minio1 minio4
       
       #. Query the site replication configuration to verify
       
@@ -494,9 +486,7 @@ You can re-add the site at a later date, but you must first completely wipe buck
 
       .. code-block:: shell
 
-         mc admin replicate remove <ALIAS> --all --force
-
-      The ``-all`` flag removes the site as a peer from all participating sites.
+         mc admin replicate remove <ALIAS> --force
 
       The ``--force`` flag is required to removes the site from the site replication configuration.
 
