@@ -48,50 +48,48 @@ The following procedure can restore data in scenarios where :ref:`site replicati
 This procedure assumes a *total loss* of one or more peer sites versus replication lag or delays due to latency or transient deployment downtime.
 
 1. Remove the failed site from the MinIO site replication configuration using the :mc-cmd:`mc admin replicate remove` command with the ``--force`` option. 
-
-   For example, consider a site replication configuration with three peer sites: ``alpha``, ``baker``, and ``charlie``.
-   The ``baker`` peer suffers an unrecoverable hardware failure and requires removal from the site replication configuration.
    
-   The following command would remove the ``baker`` site from the replication configuration of the remaining peer sites:
+   The following command force-removes an unhealthy peer site from the replication configuration:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin replicate remove alpha baker --force
+      mc admin replicate remove HEALTHY_PEER UNHEALTHY_PEER --force
 
-   Specify the :ref:`alias <alias>` of any healthy site in the replication configuration as the first argument, and the alias of the unhealthy site as the second parameter.
+   - Replace ``HEALTHY_PEER`` with the :ref:`alias <alias>` of any healthy peer in the replication configuration
 
-   The command returns once the replication configuration updates.
+   - Replace ``UNHEALTHY_PEER`` with the alias of the unhealthy peer site
+
+   All healthy peers in the site replication configuration update to remove the unhealthy peer automatically.
    You can use the :mc-cmd:`mc admin replicate info` command to verify the new site replication configuration.
-
-   .. warning::
-
-      The :mc-cmd:`mc admin replicate remove` command can only operate on the online or healthy nodes in the site replication configuration.
-      The removed offline MinIO deployment retains its original replication configuration, such that if the deployment resumes normal operations it would continue replication operations to the remaining peer sites.
-      This behavior does not apply to normal removal of an online peer site.
-
-      Take precautions to ensure the site remains offline until any repairs, decommissioning, or other related maintenance tasks complete.
-      If you plan to re-use the hardware for the site replication configuration, you **must** completely wipe the drives for the deployment before re-initializing MinIO and adding the site back to the replication configuration.
 
 2. Deploy a new MinIO site following the :ref:`site replication requirements <minio-expand-site-replication>`.
 
-   Following from the previous example, assume that the ``baker`` deployment's underlying hardware required repairs and is now fully operational.
-   After clearing all previous data from the deployment (e.g. formatting drives), validate that the deployment comes online and functions normally. 
+   Do not upload any data or otherwise configure the deployment beyond the stated requirements.
+   Validate that the new MinIO deployment functions normally and has bidirectional connectivity to the other peer sites.
 
-   Do not upload any data or otherwise configure this deployment.
+   .. warning::
+
+      The :mc-cmd:`mc admin replicate remove --force` command only operates on the online or healthy nodes in the site replication configuration.
+      The removed offline MinIO deployment retains its original replication configuration, such that if the deployment resumes normal operations it would continue replication operations to its configured peer sites.
+
+      If you plan to re-use the hardware for the site replication configuration, you **must** completely wipe the drives for the deployment before re-initializing MinIO and adding the site back to the replication configuration.
 
 3. :ref:`Add the replacement peer site <minio-expand-site-replication>` to the replication configuration.
-
-   Following from the previous example, the following command adds the ``baker`` site back to the replication configuration for peer sites ``alpha`` and ``charlie``.
 
    Use the :mc-cmd:`mc admin replicate add` command to update the replication configuration with the new site:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin replicate add alpha baker
+      mc admin replicate add HEALTHY_PEER NEW_PEER
 
-   You can specify the :ref:`alias <alias>` of any healthy peer site as the first parameter to the command.
+   - Replace ``HEALTHY_PEER`` with the :ref:`alias <alias>` of any healthy peer in the replication configuration
+
+   - Replace ``NEW_PEER`` with the alias of the new peer
+
+   All healthy peers in the site replication configuration update for the new peer automatically.
+   You can use the :mc-cmd:`mc admin replicate info` command to verify the new site replication configuration.
 
 4. Validate the replication status.
 

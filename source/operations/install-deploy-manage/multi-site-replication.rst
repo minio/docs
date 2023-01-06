@@ -486,9 +486,15 @@ You can re-add the site at a later date, but you must first completely wipe buck
 
       .. code-block:: shell
 
-         mc admin replicate remove <ALIAS> --force
+         mc admin replicate remove ALIAS PEER_TO_REMOVE --force
 
-      The ``--force`` flag is required to removes the site from the site replication configuration.
+      - Replace ``ALIAS`` with the :ref:`alias <ref>` of any peer site in the replication configuration.
+
+      - Replace ``PEER_TO_REMOVE`` with the alias of the peer site to remove.
+
+      All healthy peers in the site replication configuration update to remove the specified peer automatically.
+
+      MinIO requires the ``--force`` flag to remove the peer from the site replication configuration.
 
 .. _minio-site-replication-status-tutorial:
 
