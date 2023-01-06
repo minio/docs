@@ -39,7 +39,7 @@ Restore an Unhealthy Peer to Site Replication
    The :minio-release:`RELEASE.2023-01-02T09-40-09Z` MinIO server release includes important fixes for removing a downed site in replication configurations containing three or more peer sites.
 
    For deployments configured for site replication, plan to :ref:`test and upgrade <minio-upgrade>` all peer sites to the specified release.
-   In the even of a site failure, you can update the remaining healthy sites to the specified version and use this procedure.
+   In the event of a site failure, you can update the remaining healthy sites to the specified version and use this procedure.
 
 :ref:`Site replication <minio-site-replication-overview>` keeps two or more MinIO deployments in sync with IAM policies, buckets, bucket configurations, objects, and object metadata.
 If a peer site fails, such as due to a major disaster or long power outage, you can use the remaining healthy site(s) to restore the :ref:`replicable data <minio-site-replication-what-replicates>`.
