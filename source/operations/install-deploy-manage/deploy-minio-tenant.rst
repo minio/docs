@@ -149,7 +149,7 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
    MinIO strongly recommends selecting EBS-optimized instances with *at least* 25Gbps Network bandwidth as a baseline for performance.
 
    For more complete information on the available EC2 and EBS resources, see `EC2 Instance Types <https://aws.amazon.com/ec2/instance-types/>`__ and `EBS Volume Types <https://aws.amazon.com/ebs/volume-types/>`__.
-   |subnet| or customers should reach out to MinIO engineering as part of architecture planning for assistance in selecting the optimal instance and volume types for the target workload and performance goals.
+   |subnet| customers should reach out to MinIO engineering as part of architecture planning for assistance in selecting the optimal instance and volume types for the target workload and performance goals.
 
 .. cond:: aks
 

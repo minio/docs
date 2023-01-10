@@ -16,64 +16,64 @@ MinIO High Performance Object Storage
    
    - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
 
-MinIO is a high performance object storage solution that provides an Amazon Web Services S3-compatible API and supports all core S3 features.
-
-MinIO is built to deploy anywhere - public or private cloud, baremetal infrastructure, orchestrated environments, and edge infrastructure. 
+MinIO is a high performance object storage solution that provides an Amazon Web Services S3-compatible API and supports all core S3 features. 
+MinIO is built to deploy anywhere - public or private cloud, baremetal infrastructure, orchestrated environments, and edge infrastructure.
 
 .. cond:: linux
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Linux platforms.
+   This site documents Operations, Administration, and Development of MinIO deployments on Linux platforms for the latest stable version of MinIO: |minio-tag|.
 
 .. cond:: windows
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Windows platforms.
+   This site documents Operations, Administration, and Development of MinIO deployments on Windows platforms for the latest stable version of MinIO: |minio-tag|.
 
 .. cond:: macos
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Mac OSX platforms.
-
-.. cond:: k8s and not (openshift or eks or gke)
-
-   This site documents Operations, Administration, and Development of MinIO deployments on Kubernetes platform.
-
-.. cond:: openshift
-
-   This site documents Operations, Administration, and Development of MinIO deployments on OpenShift 4.7+ through the :openshift-docs:`Red Hat® OpenShift® Container Platform 4.7+ <welcome/index.html>`.
-
-.. cond:: eks
-
-   This site documents Operations, Administration, and Development of MinIO deployments on `Amazon Elastic Kubernetes Service <https://aws.amazon.com/eks/>`__.
-
-.. cond:: gke
-
-   This site documents Operations, Administration, and Development of MinIO deployments on `Google Kubernetes Engine <https://cloud.google.com/kubernetes-engine>`__.
-
-.. cond:: aks
-
-   This site documents Operations, Administration, and Development of MinIO deployments on `Azure Kubernetes Engine <https://azure.microsoft.com/en-us/products/kubernetes-service/#overview>`__.
+   This site documents Operations, Administration, and Development of MinIO deployments on Mac OSX platforms for the latest stable version of MinIO: |minio-tag|.
 
 .. cond:: container
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Containers.
+   This site documents Operations, Administration, and Development of MinIO deployments on Containers for the latest stable version of MinIO: |minio-tag|.
 
-.. cond:: k8s
+.. cond:: k8s and not (openshift or eks or gke or aks)
 
-   This documentation targets the latest stable version of the MinIO Operator: |operator-version-stable|
+   This site documents Operations, Administration, and Development of MinIO deployments on Kubernetes platform for the latest stable version of the MinIO Operator: |operator-version-stable|.
 
-.. cond:: linux or container or macos or windows
+.. cond:: openshift
 
-   This documentation targets the latest stable version of MinIO: |minio-tag|.
-
-MinIO is released under dual license `GNU Affero General Public License v3.0 
-<https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
+   This site documents Operations, Administration, and Development of MinIO deployments on OpenShift 4.7+ through the :openshift-docs:`Red Hat® OpenShift® Container Platform 4.7+ <welcome/index.html>` for the latest stable version of the MinIO Operator: |operator-version-stable|.
 
 .. cond:: eks
 
-   Deploying MinIO through the :minio-web:`AWS Marketplace <product/multicloud-elastic-kubernetes-service>` includes the commercial license and access to |SUBNET|.
+   This site documents Operations, Administration, and Development of MinIO deployments on `Amazon Elastic Kubernetes Service <https://aws.amazon.com/eks/>`__ for the latest stable version of the MinIO Operator: |operator-version-stable|.
 
 .. cond:: gke
 
-   Deploying MinIO through the :minio-web:`GKE Marketplace <product/multicloud-google-kubernetes-service>` includes the commercial license and access to |SUBNET|.
+   This site documents Operations, Administration, and Development of MinIO deployments on `Google Kubernetes Engine <https://cloud.google.com/kubernetes-engine>`__ for the latest stable version of the MinIO Operator: |operator-version-stable|.
+
+.. cond:: aks
+
+   This site documents Operations, Administration, and Development of MinIO deployments on `Azure Kubernetes Engine <https://azure.microsoft.com/en-us/products/kubernetes-service/#overview>`__ for the latest stable version of the MinIO Operator: |operator-version-stable|.
+
+.. cond:: not (eks or aks or gke)
+
+   MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
+   Deployments registered through |SUBNET| use the commercial license and include access to 24/7 MinIO support.
+
+.. cond:: eks
+
+   MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
+   Deploying MinIO through the :minio-web:`AWS Marketplace <product/multicloud-elastic-kubernetes-service>` includes the commercial license and access to 24/7 MinIO support through |SUBNET|.
+
+.. cond:: gke
+
+   MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
+   Deploying MinIO through the :minio-web:`GKE Marketplace <product/multicloud-google-kubernetes-service>` includes the commercial license and access to 24/7 MinIO support through |SUBNET|.
+
+.. cond:: aks
+
+   MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
+   Deploying MinIO through the :minio-web:`AKS Marketplace <product/multicloud-azure-kubernetes-service>` includes the commercial license and access to 24/7 MinIO support through  |SUBNET|.
 
 You can get started exploring MinIO features using our ``play`` server at https://play.min.io. 
 ``play`` is a *public* MinIO cluster running the latest stable MinIO server. 

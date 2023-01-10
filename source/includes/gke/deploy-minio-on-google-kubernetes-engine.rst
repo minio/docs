@@ -13,7 +13,7 @@ Deploy MinIO Operator on Google Kubernetes Engine
 Overview
 --------
 
-`Google  Kubernetes Engine <https://cloud.google.com/kubernetes-engine?ref=minio-docs>` (GKE) offers a highly automated secure and fully managed Kubernetes platform.
+`Google  Kubernetes Engine <https://cloud.google.com/kubernetes-engine?ref=minio-docs>`__ (GKE) offers a highly automated secure and fully managed Kubernetes platform.
 The MinIO Kubernetes Operator supports deploying MinIO Tenants onto GKE infrastructure using the MinIO Operator Console, the :mc:`kubectl minio` CLI tool, or `kustomize <https://kustomize.io/>`__ for :minio-git:`YAML-defined deployments <operator/tree/master/examples/kustomization>`.
 
 :minio-web:`Through the GKE Marketplace <product/multicloud-google-kubernetes-service>`
@@ -27,8 +27,8 @@ Using the MinIO ``kubectl`` Plugin
 This page documents deploying the MinIO Operator through the CLI using the ``kubectl minio`` plugin.
 For instructions on deploying the MinIO Operator through the GKE Marketplace, see :minio-web:`Deploy MinIO through GKE <product/multicloud-google-kubernetes-service/deploy>`
 
-This documentation assumes familiarity with all referenced Kubernetes and Elastic Kubernetes Service concepts, utilities, and procedures. 
-While this documentation *may* provide guidance for configuring or deploying Kubernetes-related or Elastic Kubernetes Service-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
+This documentation assumes familiarity with all referenced Kubernetes and Google Kubernetes Engine concepts, utilities, and procedures. 
+While this documentation *may* provide guidance for configuring or deploying Kubernetes-related or Google Kubernetes Engine-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
 Prerequisites
 -------------

@@ -27,8 +27,8 @@ Using the MinIO ``kubectl`` Plugin
 This page documents deploying the MinIO Operator through the CLI using the ``kubectl minio`` plugin.
 For instructions on deploying the MinIO Operator through the AKS Marketplace, see :minio-web:`Deploy MinIO through AKS <multicloud-azure-kubernetes-service/deploy>`
 
-This documentation assumes familiarity with all referenced Kubernetes and Elastic Kubernetes Service concepts, utilities, and procedures. 
-While this documentation *may* provide guidance for configuring or deploying Kubernetes-related or Elastic Kubernetes Service-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
+This documentation assumes familiarity with all referenced Kubernetes and Azure Kubernetes Service concepts, utilities, and procedures. 
+While this documentation *may* provide guidance for configuring or deploying Kubernetes-related or Azure Kubernetes Service-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
 Prerequisites
 -------------
@@ -39,7 +39,7 @@ Existing AKS Cluster
 This procedure assumes an existing :abbr:`AKS (Azure Kubernetes Service)` cluster onto which you can deploy the MinIO Operator.
 
 The Operator by default deploys pods and services with two replicas each and pod anti-affinity.
-The GKE cluster should therefore have at least two nodes available for scheduling Operator pods and services.
+The AKS cluster should therefore have at least two nodes available for scheduling Operator pods and services.
 While these nodes *may* be the same nodes intended for use by MinIO Tenants, co-locating Operator and Tenant pods may increase the risk of service interruptions due to the loss of any one node.
 
 ``kubectl`` Access to the GKE Cluster
