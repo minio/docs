@@ -65,7 +65,7 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 
    .. include:: /includes/openshift/install-minio-kubectl-plugin.rst
 
-.. cond:: k8s and not openshift
+.. cond:: k8s and not (openshift or eks or gke or aks)
 
    Kubernetes Version 1.19.0
    ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -124,15 +124,75 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 
    Take note of this value before the slash for use in this procedure.
 
+.. cond:: gke
+
+   GKE Cluster with Compute Engine Nodes
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   This procedure assumes an existing :abbr:`GKE (Google Kubernetes Engine)` cluster with a MinIO Operator installation and *at least* four Compute Engine nodes.
+   The Compute Engine nodes should have matching machine types and configurations to ensure predictable performance with MinIO.
+
+   MinIO provides :ref:`hardware guidelines <deploy-minio-distributed-recommendations>` for selecting the appropriate Compute Engine instance class and size.
+   MinIO strongly recommends selecting instances with support for local SSDs and *at least* 25Gbps egress bandwidth as a baseline for performance.
+
+   For more complete information on the available Compute Engine and Persistent Storage resources, see :gcp-docs:`Machine families resources and comparison guide <general-purpose-machines>` and :gcp-docs:`Persistent disks <disks>`.
+
+.. cond:: eks
+
+   EKS Cluster with EBS-Optimized EC2 Nodes
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   This procedure assumes an existing :abbr:`EKS (Elastic Kubernetes Service)` cluster with *at least* four EC2 nodes.
+   The EC2 nodes should have matching machine types and configurations to ensure predictable performance with MinIO.
+
+   MinIO provides :ref:`hardware guidelines <deploy-minio-distributed-recommendations>` for selecting the appropriate EC2 instance class and size.
+   MinIO strongly recommends selecting EBS-optimized instances with *at least* 25Gbps Network bandwidth as a baseline for performance.
+
+   For more complete information on the available EC2 and EBS resources, see `EC2 Instance Types <https://aws.amazon.com/ec2/instance-types/>`__ and `EBS Volume Types <https://aws.amazon.com/ebs/volume-types/>`__.
+   |subnet| customers should reach out to MinIO engineering as part of architecture planning for assistance in selecting the optimal instance and volume types for the target workload and performance goals.
+
+.. cond:: aks
+
+   AKS Cluster with Azure Virtual Machines
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   This procedure assumes an existing :abbr:`AKS (Azure Kubernetes Service)` cluster with *at least* four Azure virtual machines (VM).
+   The Azure VMs should have matching machine types and configurations to ensure predictable performance with MinIO.
+
+   MinIO provides :ref:`hardware guidelines <deploy-minio-distributed-recommendations>` for selecting the appropriate EC2 instance class and size.
+   MinIO strongly recommends selecting VM instances with support for Premium SSDs and *at least* 25Gbps Network bandwidth as a baseline for performance.
+
+   For more complete information on Azure Virtual Machine types and Storage resources, see :azure-docs:`Sizes for virtual machines in Azure <virtual-machines/sizes>` and :azure-docs:`Azure managed disk types <virtual-machines/disks-types>`
+
 Persistent Volumes
 ~~~~~~~~~~~~~~~~~~
 
-MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
-MinIO's consistency guarantees require the exclusive storage access that ``ReadWriteOnce`` provides.
+.. cond:: not eks
 
-For Kubernetes clusters where nodes have Direct Attached Storage, MinIO strongly recommends using the `DirectPV CSI driver <https://min.io/directpv?ref=docs>`__. 
-DirectPV provides a distributed persistent volume manager that can discover, format, mount, schedule, and monitor drives across Kubernetes nodes.
-DirectPV addresses the limitations of manually provisioning and monitoring :kube-docs:`local persistent volumes <concepts/storage/volumes/#local>`.
+   MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
+   MinIO's consistency guarantees require the exclusive storage access that ``ReadWriteOnce`` provides.
+
+   For Kubernetes clusters where nodes have Direct Attached Storage, MinIO strongly recommends using the `DirectPV CSI driver <https://min.io/directpv?ref=docs>`__. 
+   DirectPV provides a distributed persistent volume manager that can discover, format, mount, schedule, and monitor drives across Kubernetes nodes.
+   DirectPV addresses the limitations of manually provisioning and monitoring :kube-docs:`local persistent volumes <concepts/storage/volumes/#local>`.
+
+.. cond:: eks
+
+   MinIO Tenants on EKS must use the :github:`EBS CSI Driver <kubernetes-sigs/aws-ebs-csi-driver>` to provision the necessary underlying persistent volumes.
+   MinIO strongly recommends using SSD-backed EBS volumes for best performance.
+   For more information on EBS resources, see `EBS Volume Types <https://aws.amazon.com/ebs/volume-types/>`__.
+
+.. cond:: gke
+
+   MinIO Tenants on GKE should use the :gke-docs:`Compute Engine Persistent Disk CSI Driver <how-to/persistent-volumes/gce-pd-csi-driver>` to provision the necessary underlying persistent volumes.
+   MinIO strongly recommends SSD-backed disk types for best performance.
+   For more information on GKE disk types, see :gcp-docs:`Persistent Disks <disks>`.
+
+.. cond:: aks
+
+   MinIO Tenants on AKS should use the :azure-docs:`Azure Disks CSI driver <azure-disk-csi>` to provision the necessary underlying persistent volumes.
+   MinIO strongly recommends SSD-backed disk types for best performance.
+   For more information on AKS disk types, see :azure-docs:`Azure disk types <virtual-machines/disk-types>`.
 
 Deploy a Tenant using the MinIO Operator Console
 ------------------------------------------------
@@ -234,12 +294,49 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
        The Operator supports at most *one* MinIO Tenant per namespace.
 
    * - :guilabel:`Storage Class`
-     - Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
+     - .. cond:: not eks
+     
+          Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
 
-       Ensure the specified storage class has sufficient available Persistent Volume resources to match each generated Persistent Volume Claim.
+          Ensure the specified storage class has sufficient available Persistent Volume resources to match each generated Persistent Volume Claim.
+
+       .. cond:: eks
+
+          Specify the EBS volume type to use for this tenant.
+          The following list is populated based on the AWS EBS CSI driver list of supported :github:`EBS volume types <kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/parameters.md>`:
+
+          - ``gp3`` (General Purpose SSD)
+          - ``gp2`` (General Purpose SSD)
+          - ``io2`` (Provisioned IOPS SSD)
+          - ``io1`` (Provisioned IOPS SSD)
+          - ``st1`` (Throughput Optimized HDD)
+          - ``sc1`` (Cold Storage HDD)
+
+       .. cond:: gke
+
+          Specify the GKE persistent disk type to use for this tenant.
+          The :gke-docs:`GKE CSI Driver <how-to/persistent-volumes/gce-pd-csi-driver>` provides the following storage classes by default:
+
+          - ``standard-rwo`` (Balanced Persistent SSD)
+          - ``premium-rwo`` (Performance Persistent SSD)
+
+          You can create additional StorageClasses to represent other supported persistent disk types.
+          See :gke-docs:`Create a Storage Class <how-to/persistent-volumes/gce-pd-csi-driver#create_a_storageclass>` for more information.
+
+       .. cond:: aks
+
+          Specify the AKS persistent disk type to use for this tenant.
+          The :aks-docs:`AKS CSI Driver <azure-disk-csi>` provides the following storage classes by default:
+
+          - ``managed-csi`` (Standard SSD)
+          - ``managed-csi-premium`` (Premium SSD)
+
+          You can create additional Storage Classes to represent other supported persistent disk types.
+          See :aks-docs:`Create a custom storage class <https://learn.microsoft.com/en-us/azure/aks/azure-disk-csi#create-a-custom-storage-class>` for more information.
 
    * - :guilabel:`Number of Servers`
      - The total number of MinIO server pods to deploy in the Tenant.
+       The Operator enforces a minimum of four server pods per tenant.
        
        The Operator by default uses pod anti-affinity, such that the Kubernetes cluster *must* have at least one worker node per MinIO server pod. 
        Use the :guilabel:`Pod Placement` pane to modify the pod scheduling settings for the Tenant.
@@ -249,8 +346,22 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
 
        The Operator displays the :guilabel:`Total Volumes` under the :guilabel:`Resource Allocation` section. 
        The Operator generates an equal number of PVC *plus two* for supporting Tenant services (Metrics and Log Search).
+
+       .. cond:: not eks
        
-       The specified :guilabel:`Storage Class` *must* correspond to a set of Persistent Volumes sufficient in number to match each generated PVC.
+          The specified :guilabel:`Storage Class` *must* correspond to a set of Persistent Volumes sufficient in number to match each generated PVC.
+
+       .. cond:: eks
+
+          For deployments using the EBS CSI driver, the Operator provisions Persistent Volume Claims which result in the creation of EBS volumes of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
+
+       .. cond:: gke
+
+          For deployments using the GKE CSI driver, the Operator provisions Persistent Volume Claims which result in the creation of GCP Disks of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
+
+       .. cond:: aks
+
+          For deployments using the AKS CSI Driver, the Operator provisions Persistent Volume Claims which result in the creation of Azure Disks of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
 
    * - :guilabel:`Total Size`
      - The total raw storage size for the Tenant. 
@@ -297,14 +408,30 @@ The :guilabel:`Configure` section displays optional configuration settings for t
    * - :guilabel:`Expose MinIO Service`
      - The MinIO Operator by default directs the MinIO Tenant services to request an externally accessible IP address from the Kubernetes cluster Load Balancer if one is available to access the tenant.
 
-       Most public cloud Kubernetes infrastructures include a global Load Balancer which meets this requirement. 
-       Other Kubernetes distributions *may* include a load balancer that can respond to these requests.
+       .. cond:: eks
+
+          If your EKS cluster includes the :aws-docs:`AWS Load Balancer Controller add-on <eks/latest/userguide/aws-load-balancer-controller.html>`, enabling this setting directs the load balancer to assign an address to the Tenant services.
+
+          Other load balancers *may* function similarly depending on their configuration.
+
+       .. cond:: not eks
+
+       Your Kubernetes distributions *may* include a load balancer that can respond to these requests.
+       Installation and configuration of load balancers is out of the scope of this documentation.
 
    * - :guilabel:`Expose Console Service`
      - Select whether the Tenant should request an IP address from the Load Balancer to access the Tenant's Console. 
 
-       Most public cloud Kubernetes infrastructures include a global Load Balancer which meets this requirement. 
-       Other Kubernetes distributions *may* include a load balancer that can respond to these requests.
+       .. cond:: eks
+
+          If your EKS cluster includes the :aws-docs:`AWS Load Balancer Controller add-on <eks/latest/userguide/aws-load-balancer-controller.html>`, enabling this setting directs the load balancer to assign an address to the Tenant services.
+
+          Other load balancers *may* function similarly depending on their configuration.
+
+       .. cond:: not eks
+
+       Your Kubernetes distributions *may* include a load balancer that can respond to these requests.
+       Installation and configuration of load balancers is out of the scope of this documentation.
 
    * - :guilabel:`Set Custom Domains`
      - Toggle on to customize the domains allowed to access the tenant's console and other tenant services.
@@ -451,7 +578,7 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
 
 .. _create-tenant-encryption-section:
 
-1) The :guilabel:`Encryption` Section
+8) The :guilabel:`Encryption` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption (SSE) <minio-sse>` settings for the MinIO Tenant. 
@@ -654,6 +781,6 @@ Kubernetes provides multiple options for configuring external access to services
 
    .. include:: /includes/openshift/steps-deploy-minio-tenant.rst
 
-.. cond:: k8s and not openshift
+.. cond:: k8s and not (openshift or eks)
 
    .. include:: /includes/k8s/steps-deploy-tenant-cli.rst

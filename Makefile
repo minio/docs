@@ -40,6 +40,9 @@ stage-%:
 #   - Build docs via Sphinx
 
 linux:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
@@ -50,43 +53,100 @@ else
 endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
 
 windows:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
 
 macos:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
 
 k8s:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
 	@make sync-minio-version
 	@make sync-kes-version
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
 
 openshift:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
 	@make sync-minio-version
 	@make sync-kes-version
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
+
+eks:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
+	@cp source/default-conf.py source/conf.py
+	@make sync-operator-version
+	@make sync-minio-version
+	@make sync-kes-version
+	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
+
+gke:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
+	@cp source/default-conf.py source/conf.py
+	@make sync-operator-version
+	@make sync-minio-version
+	@make sync-kes-version
+	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
+
+aks:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
+	@cp source/default-conf.py source/conf.py
+	@make sync-operator-version
+	@make sync-minio-version
+	@make sync-kes-version
+	@npm run build
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
 
 container:
+	@echo "--------------------------------------"
+	@echo "Building for $@ Platform"
+	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-minio-version
 	@make sync-kes-version
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
+	@echo -e "Building $@ Complete\n--------------------------------------\n"
 
 # Synchronization targets
 # Note that the @case statements are required to account for differences between Linux and MacOS binaries
@@ -159,7 +219,9 @@ sync-deps:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
+	@echo -e "----------------------------------------"
 	@echo -e "Specify one of the following supported build outputs"
-	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s\n- make openshift\n- make container"
+	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s\n- make openshift\n- make eks\n- make gke\n- make aks\n- make container"
 	@echo -e "Clean targets with 'make clean-<target>'"
-	@echo -e "Clean all targets with `make clean`"
+	@echo -e "Clean all targets with 'make clean'"
+	@echo -e "----------------------------------------"

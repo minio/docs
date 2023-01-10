@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import yaml
 
 # The current working dir seems to be /source, so we have to pop up a level
 sys.path.append(os.path.abspath('../sphinxext'))
@@ -19,20 +20,6 @@ sys.path.append(os.path.abspath('../sphinxext'))
 
 # sys.path.insert(0, os.path.abspath('.'))
 
-
-# -- Project information -----------------------------------------------------
-
-# We assume a single tag, since we control the builder
-
-platform = list(tags.tags.keys())[0]
-
-if (platform == "k8s"):
-    platform = "Kubernetes"
-
-
-project = 'MinIO Documentation for ' + platform
-copyright = '2020-Present, MinIO, Inc. '
-author = 'MinIO Documentation Team'
 
 # The full version, including alpha/beta/rc tags
 release = '0.2'
@@ -80,6 +67,13 @@ extlinks = {
     'docker-docs'     : ('https://docs.docker.com/%s', ''),
     'openshift-docs'  : ('https://docs.openshift.com/container-platform/4.11/%s', ''),
     'influxdb-docs'   : ('https://docs.influxdata.com/influxdb/v2.4/%s',''),
+    'eks-docs'        : ('https://docs.aws.amazon.com/eks/latest/userguide/%s',''),
+    'minio-web'       : ('https://min.io/%s?ref=docs',''),
+    'minio-docs'      : ('https://min.io/docs/%s?ref=docs-internal',''),
+    'gke-docs'        : ('https://cloud.google.com/kubernetes-engine/docs/%s',''),
+    'gcp-docs'        : ('https://cloud.google.com/compute/docs/%s',''),
+    'aks-docs'        : ('https://learn.microsoft.com/en-us/azure/aks/%s',''),
+    'azure-docs'      : ('https://learn.microsoft.com/en-us/azure/%s',''),
 
 }
 
@@ -104,117 +98,80 @@ exclude_patterns = ['includes/*', '*-template.rst']
 # html_baseurl is used by sphinx_sitemap extension to generate a sitemap.xml for each platform.
 # The sitemaps are combined in a sitemapindex.xml file at the root level.
 
+excludes = []
+
 if tags.has("linux"):
     html_baseurl = 'https://min.io/docs/minio/linux/'
-    excludes = [
-        'operations/install-deploy-manage/deploy-minio-tenant.rst',
-        'operations/install-deploy-manage/modify-minio-tenant.rst',
-        'operations/install-deploy-manage/expand-minio-tenant.rst',
-        'operations/install-deploy-manage/upgrade-minio-tenant.rst',
-        'operations/install-deploy-manage/upgrade-minio-operator.rst',
-        'operations/install-deploy-manage/delete-minio-tenant.rst',
-        'operations/install-deploy-manage/minio-operator-console.rst',
-        'operations/deploy-manage-tenants.rst',
-        'reference/kubectl-minio-plugin.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-delete.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-init.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-proxy.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-create.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-delete.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-expand.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-info.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-list.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-report.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant-upgrade.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-tenant.rst',
-        'reference/kubectl-minio-plugin/kubectl-minio-version.rst',
-    ]
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'linux':
+            excludes = i['excludes']
+            break
+
 elif tags.has("macos"):
     html_baseurl = 'https://min.io/docs/minio/macos/'
-    excludes = [
-        'operations/install-deploy-manage/deploy-minio-tenant.rst',
-        'operations/install-deploy-manage/modify-minio-tenant.rst',
-        'operations/install-deploy-manage/expand-minio-tenant.rst',
-        'operations/install-deploy-manage/upgrade-minio-tenant.rst',
-        'operations/install-deploy-manage/upgrade-minio-operator.rst',
-        'operations/install-deploy-manage/delete-minio-tenant.rst',
-        'operations/install-deploy-manage/minio-operator-console.rst',
-        'operations/deploy-manage-tenants.rst',
-        'reference/kubectl-minio-plugin*',
-        'reference/minio-server*',
-        'reference/minio-mc*',
-        'developers/*',
-        'integrations/*'
-    ]
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'macos':
+            excludes = i['excludes']
+            break
+
 elif tags.has("windows"):
     # html_baseurl is used for generating the sitemap.xml for each platform. These are combined in a sitemapindex.xml.
     html_baseurl = 'https://min.io/docs/minio/windows/'
-    excludes = [
-        'operations/install-deploy-manage/deploy-minio-tenant.rst',
-        'operations/install-deploy-manage/modify-minio-tenant.rst',
-        'operations/install-deploy-manage/expand-minio-tenant.rst',
-        'operations/install-deploy-manage/upgrade-minio-tenant.rst',
-        'operations/install-deploy-manage/upgrade-minio-operator.rst',
-        'operations/install-deploy-manage/delete-minio-tenant.rst',
-        'operations/install-deploy-manage/minio-operator-console.rst',
-        'operations/deploy-manage-tenants.rst',
-        'reference/kubectl-minio-plugin*',
-        'reference/minio-server*',
-        'reference/minio-mc*',
-        'developers/*',
-        'integrations/*'
-    ]
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'windows':
+            excludes = i['excludes']
+            break
+
 elif tags.has("container"):
     html_baseurl = 'https://min.io/docs/minio/container/'
-    excludes = [
-        'operations/install-deploy-manage/deploy-minio-tenant.rst',
-        'operations/install-deploy-manage/modify-minio-tenant.rst',
-        'operations/install-deploy-manage/expand-minio-tenant.rst',
-        'operations/install-deploy-manage/upgrade-minio-tenant.rst',
-        'operations/install-deploy-manage/upgrade-minio-operator.rst',
-        'operations/install-deploy-manage/delete-minio-tenant.rst',
-        'operations/install-deploy-manage/minio-operator-console.rst',
-        'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst',
-        'operations/install-deploy-manage/multi-site-replication.rst',
-        'operations/deploy-manage-tenants.rst',
-        'reference/kubectl-minio-plugin*',
-        'reference/minio-server*',
-        'reference/minio-mc*',
-        'developers/*',
-        'integrations/*'
-    ]
-elif tags.has("k8s") and not tags.has("openshift"):
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'container':
+            excludes = i['excludes']
+            break
+
+elif tags.has("k8s") and not (tags.has("openshift") or tags.has("eks") or tags.has("gks") or tags.has("aks")):
     html_baseurl = 'https://min.io/docs/minio/kubernetes/upstream/'
-    excludes = [
-        'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst',
-        'operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst',
-        'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst',
-        'operations/install-deploy-manage/upgrade-minio-deployment.rst',
-        'operations/install-deploy-manage/expand-minio-deployment.rst',
-        'operations/install-deploy-manage/decommission-server-pool.rst',
-        'operations/manage-existing-deployments.rst',
-        'reference/minio-server*',
-        'reference/minio-mc*',
-        'developers/*',
-        'integrations/*'
-    ]
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'k8s':
+            excludes = i['excludes']
+            break
+
 elif tags.has("openshift"):
     html_baseurl = 'https://min.io/docs/minio/kubernetes/openshift/'
-    excludes = [
-        'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst',
-        'operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst',
-        'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst',
-        'operations/install-deploy-manage/upgrade-minio-deployment.rst',
-        'operations/install-deploy-manage/expand-minio-deployment.rst',
-        'operations/install-deploy-manage/decommission-server-pool.rst',
-        'operations/manage-existing-deployments.rst',
-        'reference/minio-server*',
-        'reference/minio-mc*',
-        'developers/*',
-        'integrations/*'
-    ]
-else:
-    excludes = []
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'openshift':
+            excludes = i['excludes']
+            break
+
+elif tags.has("eks"):
+    html_baseurl = 'https://min.io/docs/minio/kubernetes/eks/'
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'eks':
+            excludes = i['excludes']
+            break
+
+elif tags.has("gke"):
+    html_baseurl = 'https://min.io/docs/minio/kubernetes/gke/'
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'gke':
+            excludes = i['excludes']
+            break
+
+elif tags.has("aks"):
+    html_baseurl = 'https://min.io/docs/minio/kubernetes/aks/'
+    with open('url-excludes.yaml','r') as f:
+      for i in (yaml.safe_load_all(f)):
+         if i['tag'] == 'aks':
+            excludes = i['excludes']
+            break
 
 exclude_patterns.extend(excludes)
 
@@ -269,15 +226,32 @@ html_js_files = [
 # Add https://www.min.io/robots.txt to html_extra_path list once available.
 html_extra_path = [ 'extra']
 
+# -- Project information -----------------------------------------------------
+
+# We assume a single tag, since we control the builder
+
+platform = list(tags.tags.keys())[0]
+
 platform_fmt = ""
 
-if platform == "macos":
+if platform == "k8s":
+   platform_fmt = "Kubernetes"
+elif platform == "macos":
    platform_fmt = "MacOS"
 elif platform == "openshift":
    platform_fmt = "OpenShift"
+elif platform == "eks":
+   platform_fmt = "Elastic Kubernetes Service"
+elif platform == "gke":
+   platform_fmt = "Google Kubernetes Engine"
+elif platform == "aks":
+   platform_fmt = "Azure Kubernetes Service"
 else:
    platform_fmt = platform.capitalize()
 
+project = 'MinIO Documentation for ' + platform_fmt
+copyright = '2020-Present, MinIO, Inc. '
+author = 'MinIO Documentation Team'
 html_title = 'MinIO Object Storage for ' + platform_fmt
 html_short_title = 'MinIO Object Storage for ' + platform_fmt
 

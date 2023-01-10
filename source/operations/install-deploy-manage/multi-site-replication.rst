@@ -488,7 +488,7 @@ You can re-add the site at a later date, but you must first completely wipe buck
 
          mc admin replicate remove ALIAS PEER_TO_REMOVE --force
 
-      - Replace ``ALIAS`` with the :ref:`alias <ref>` of any peer site in the replication configuration.
+      - Replace ``ALIAS`` with the :ref:`alias <alias>` of any peer site in the replication configuration.
 
       - Replace ``PEER_TO_REMOVE`` with the alias of the peer site to remove.
 
