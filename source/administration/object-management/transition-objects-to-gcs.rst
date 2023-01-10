@@ -115,18 +115,16 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin tier add` command to add a new Google Cloud Storage
+Use the :mc-cmd:`mc ilm tier add` command to add a new Google Cloud Storage
 service as the remote storage tier:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin tier add gcs TARGET TIER_NAME \
-      --endpoint https://HOSTNAME \
+   mc ilm tier add gcs TARGET TIER_NAME \
       --bucket BUCKET \
       --prefix PREFIX \
-      --credentials-file CREDENTIALS \
-      --region REGION
+      --credentials-file CREDENTIALS
 
 The example above uses the following arguments:
 
@@ -138,24 +136,28 @@ The example above uses the following arguments:
    * - Argument
      - Description
 
-   * - :mc-cmd:`TARGET <mc admin tier add TARGET>`
+   * - :mc-cmd:`TARGET <mc ilm tier add TARGET>`
      - The :mc:`alias <mc alias>` of the MinIO deployment on which to configure
        the :abbr:`GCS (Google Cloud Storage)` remote tier.
    
-   * - :mc-cmd:`TIER_NAME <mc admin tier add TIER_NAME>`
+   * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
      - The name to associate with the new :abbr:`GCS (Google Cloud Storage)` 
        remote storage tier. Specify the name in all-caps, e.g. ``GCS_TIER``.
        This value is required in the next step.
 
-   * - :mc-cmd:`HOSTNAME <mc admin tier add --endpoint>`
-     - The URL endpoint for the :abbr:`GCS (Google Cloud Storage)` storage
-       backend.
+   * - :mc-cmd:`CREDENTIALS <mc ilm tier add --credentials-file>`
+     - The `credential file
+       <https://cloud.google.com/docs/authentication/getting-started>`__ for a
+       user on the remote GCS tier. The specified user credentials *must*
+       correspond to a GCS user with the required
+       :ref:`permissions 
+       <minio-lifecycle-management-transition-to-gcs-permissions-remote>`.
 
-   * - :mc-cmd:`BUCKET <mc admin tier add --bucket>`
+   * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
      - The name of the bucket on the :abbr:`GCS (Google Cloud Storage)` storage
        backend to which MinIO transitions objects.
 
-   * - :mc-cmd:`PREFIX <mc admin tier add --prefix>`
+   * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
      - The optional bucket prefix within which MinIO transitions objects.
 
        MinIO stores all transitioned objects in the specified ``BUCKET`` under a
@@ -168,18 +170,6 @@ The example above uses the following arguments:
        source MinIO deployment to faciliate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`CREDENTIALS <mc admin tier add --credentials-file>`
-     - The `credential file
-       <https://cloud.google.com/docs/authentication/getting-started>`__ for a
-       user on the remote GCS tier. The specified user credentials *must*
-       correspond to a GCS user with the required
-       :ref:`permissions 
-       <minio-lifecycle-management-transition-to-gcs-permissions-remote>`.
-
-   * - :mc-cmd:`REGION <mc admin tier add --region>`
-     - The :abbr:`GCS (Google Cloud Storage)` region of the specified
-       ``BUCKET``. You can safely omit this
-       option if the ``HOSTNAME`` includes the region.
 
 3) Create and Apply the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -192,16 +182,16 @@ The example above uses the following arguments:
 4) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm ls` command to review the configured transition
+Use the :mc:`mc ilm rule ls` command to review the configured transition
 rules:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm ls ALIAS/PATH --transition
+   mc ilm rule ls ALIAS/PATH --transition
 
-- Replace :mc-cmd:`ALIAS <mc ilm ls ALIAS>` with the :mc:`alias <mc alias>`
+- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>`
   of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc ilm ls ALIAS>` with the name of the bucket for
+- Replace :mc-cmd:`PATH <mc ilm rule ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

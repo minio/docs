@@ -769,12 +769,12 @@ services:
 .. policy-action:: admin:SetTier
 
    Allows creating and modifying remote storage tiers using the 
-   :mc:`mc admin tier` command.
+   :mc:`mc ilm tier` commands.
 
 .. policy-action:: admin:ListTier
 
    Allows listing configured remote storage tiers using the
-   :mc:`mc admin tier` command.
+   :mc:`mc ilm tier` commands.
 
 .. policy-action:: admin:BandwidthMonitor
 

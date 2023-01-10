@@ -10,6 +10,10 @@
 
 .. mc:: mc admin tier
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   ``mc admin tier`` replaced by :mc-cmd:`mc ilm tier`.
+
 Description
 -----------
 

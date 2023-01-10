@@ -12,6 +12,11 @@
 
 .. mc:: mc ilm ls
 
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   ``mc ilm ls`` replaced by :mc-cmd:`mc ilm rule ls`
+
+
 Syntax
 ------
 

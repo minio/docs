@@ -15,9 +15,8 @@ Description
 
 .. start-mc-admin-update-desc
 
-The :mc-cmd:`mc admin update` command updates all MinIO servers in the
-deployment. The command also supports using a private mirror server for
-environments where the deployment does not have public internet access.
+The :mc-cmd:`mc admin update` command updates all MinIO servers in the deployment. 
+The command also supports using a private mirror server for environments where the deployment does not have public internet access.
 
 .. end-mc-admin-update-desc
 
@@ -35,27 +34,25 @@ Considerations
 Updates are Non-Disruptive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc admin update` updates the binary and restarts all MinIO servers in
-the deployment simultaneously. MinIO operations are atomic and strictly
-consistent and as such the restart process is non-disruptive to applications.
+:mc-cmd:`mc admin update` updates the binary and restarts all MinIO servers in the deployment simultaneously. 
+MinIO operations are atomic and strictly consistent and as such the restart process is non-disruptive to applications.
 
-MinIO strongly recommends only performing simultaneous upgrade-and-restart
-procedures. Do not perform "rolling" (e.g one node at a time) upgrade 
-procedures.
+MinIO strongly recommends only performing simultaneous upgrade-and-restart procedures. 
+Do not perform "rolling" (that is, one node at a time) upgrade procedures.
 
 Examples
 --------
 
-Use :mc-cmd:`mc admin update` to update each :mc:`minio` server process in the
-MinIO deployment:
+Use :mc-cmd:`mc admin update` to update each :mc:`minio` server process in the MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin update ALIAS
 
-Replace :mc-cmd:`ALIAS <mc admin update ALIAS>` with the 
-:mc-cmd:`alias <mc alias>` of the MinIO deployment.
+Replace :mc-cmd:`ALIAS <mc admin update ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
+After running the command, answer yes to the prompt to confirm and process the update.
 
 Syntax
 ------
@@ -73,15 +70,11 @@ Syntax
 
    The :mc-cmd:`alias <mc alias>` of the MinIO deployment to update. 
 
-   If the specified ``ALIAS`` corresponds to a distributed MinIO
-   deployment, :mc-cmd:`mc admin update` updates *all* MinIO servers
-   in the deployment at the same time. 
+   If the specified ``ALIAS`` corresponds to a distributed MinIO deployment, :mc-cmd:`mc admin update` updates *all* MinIO servers in the deployment at the same time. 
 
-   Use :mc:`mc alias list` to review the configured aliases and their
-   corresponding MinIO deployment endpoints.
+   Use :mc:`mc alias list` to review the configured aliases and their corresponding MinIO deployment endpoints.
 
 .. mc-cmd:: MIRROR_URL
    
-   The mirror URL of the ``minio`` server binary to use for updating MinIO
-   servers in the :mc-cmd:`~mc admin update ALIAS` deployment.
+   The mirror URL of the ``minio`` server binary to use for updating MinIO servers in the :mc-cmd:`~mc admin update ALIAS` deployment.
 

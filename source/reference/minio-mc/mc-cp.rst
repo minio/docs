@@ -71,6 +71,7 @@ similar results to the ``cp`` commandline tool.
                           [--storage-class "string"]                                \
                           [--tags "string"]                                         \
                           [--version-id "string"]                                   \
+                          [--zip]                                                   \
                           SOURCE [SOURCE ...]                                       \
                           TARGET
 
@@ -82,41 +83,39 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: SOURCE
+   :required:
 
-   *Required* The object or objects to copy. 
+   The object or objects to copy. 
 
-   For copying an object from MinIO,
-   specify the :ref:`alias <alias>` and the full path to that 
-   object (e.g. bucket and path to object). For example:
+   For copying an object from MinIO, specify the :ref:`alias <alias>` and the full path to that object (e.g. bucket and path to object). 
+   For example:
 
    .. code-block:: none
 
       mc cp play/mybucket/object.txt ~/mydata/object.txt
 
-   Specify multiple ``SOURCE`` paths to copy multiple objects to the 
-   specified :mc-cmd:`~mc cp TARGET`. :mc:`mc cp` treats the 
-   *last* specified alias or filesystem path as the ``TARGET``. For example:
+   Specify multiple ``SOURCE`` paths to copy multiple objects to the specified :mc-cmd:`~mc cp TARGET`. 
+   :mc:`mc cp` treats the *last* specified alias or filesystem path as the ``TARGET``. 
+   For example:
 
    .. code-block:: none
 
       mc cp ~/data/object.txt myminio/mydata/object.txt play/mydata/object.txt
 
-   For copying an object from a local filesystem, specify the full
-   path to that object. For example:
+   For copying an object from a local filesystem, specify the full path to that object. 
+   For example:
 
    .. code-block:: none
 
       mc cp ~/mydata/object.txt play/mybucket/object.txt
    
-   If you specify a directory or bucket to :mc-cmd:`~mc cp SOURCE`, you must
-   also specify :mc-cmd:`~mc cp --recursive` to recursively copy the
-   contents of that directory or bucket. If you omit the ``--recursive``
-   argument, :mc:`~mc cp` only copies objects in the top level of the specified
-   directory or bucket.
+   If you specify a directory or bucket to :mc-cmd:`~mc cp SOURCE`, you must also specify :mc-cmd:`~mc cp --recursive` to recursively copy the contents of that directory or bucket. 
+   If you omit the ``--recursive`` argument, :mc:`~mc cp` only copies objects in the top level of the specified directory or bucket.
 
 .. mc-cmd:: TARGET
+   :required:
 
-   *Required* The full path to which :mc:`mc cp` copies the object.
+   The full path to which :mc:`mc cp` copies the object.
 
    For copying an object to MinIO,
    specify the :mc:`alias <mc alias>` and the full path to that object
@@ -135,45 +134,40 @@ Parameters
       mc cp play/mybucket/object.txt ~/mydata/object.txt
 
 .. mc-cmd:: --attr
-   
+   :optional:
 
-   *Optional* Add custom metadata for the object. Specify key-value pairs as
-   ``KEY=VALUE\;``. For example, ``--attr
-   key1=value1\;key2=value2\;key3=value3``.
+   Add custom metadata for the object. 
+   Specify key-value pairs as ``KEY=VALUE\;``. 
+   For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
 
 .. mc-cmd:: --continue, c
-   
+   :optional:
 
-   *Optional* Create or resume a copy session. 
+   Create or resume a copy session. 
 
 .. mc-cmd:: --disable-multipart
-   
+   :optional:
 
-   *Optional* Disables multipart upload for the copy session.
+   Disables multipart upload for the copy session.
 
 .. mc-cmd:: --encrypt
-   
+   :optional:
 
-   *Optional* Encrypt or decrypt objects using 
-   :ref:`server-side encryption <minio-sse>` with
-   server-managed keys. Specify key-value pairs as ``KEY=VALUE``.
+   Encrypt or decrypt objects using :ref:`server-side encryption <minio-sse>` with server-managed keys. 
+   Specify key-value pairs as ``KEY=VALUE``.
    
    - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
+   - Each ``VALUE`` represents the data key to use for encrypting object(s).
 
-   Enclose the entire list of key-value pairs passed to
-   :mc-cmd:`~mc cp --encrypt` in double-quotes ``"``.
+   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc cp --encrypt` in double-quotes ``"``.
 
-   :mc-cmd:`~mc cp --encrypt` can use the ``MC_ENCRYPT`` environment
-   variable for retrieving a list of encryption key-value pairs as an
-   alternative to specifying them on the command line.
+   :mc-cmd:`~mc cp --encrypt` can use the ``MC_ENCRYPT`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --encrypt-key
-   
+   :optional:
 
-   *Optional* Encrypt or decrypt objects using server-side encryption with
-   client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
+   Encrypt or decrypt objects using server-side encryption with client-specified keys. 
+   Specify key-value pairs as ``KEY=VALUE``.
    
    - Each ``KEY`` represents a bucket or object. 
    - Each ``VALUE`` represents the data key to use for encrypting 
@@ -187,64 +181,60 @@ Parameters
    as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --legal-hold
-   
+   :optional:
 
-   *Optional* Enables indefinite :ref:`Legal Hold 
-   <minio-object-locking-legalhold>` object locking on the copied objects.
+   Enables indefinite :ref:`Legal Hold <minio-object-locking-legalhold>` object locking on the copied objects.
 
    Specify ``on``.
 
-.. mc-cmd:: md5
-   
+.. mc-cmd:: --md5
+   :optional:
 
-   *Optional* Forces all uploads to calculate MD5 checksums. 
+   Forces all uploads to calculate MD5 checksums. 
 
 .. mc-cmd:: --newer-than
-   
+   :optional:
 
-   *Optional* Remove object(s) newer than the specified number of days.  Specify
-   a string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``
+   Remove object(s) newer than the specified number of days.  
+   Specify a string in ``#d#hh#mm#ss`` format. 
+   For example: ``--older-than 1d2hh3mm4ss``
 
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --older-than
-   
+   :optional:
 
-   *Optional* Remove object(s) older than the specified time limit. Specify a
-   string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``
+   Remove object(s) older than the specified time limit. 
+   Specify a string in ``#d#hh#mm#ss`` format. 
+   For example: ``--older-than 1d2hh3mm4ss``
       
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --preserve, a
-   
+   :optional:
 
-   *Optional* Preserve file system attributes and bucket policy rules of the
-   :mc-cmd:`~mc cp SOURCE` directories, buckets, and objects on the 
-   :mc-cmd:`~mc cp TARGET` bucket(s).
+   Preserve file system attributes and bucket policy rules of the :mc-cmd:`~mc cp SOURCE` directories, buckets, and objects on the :mc-cmd:`~mc cp TARGET` bucket(s).
 
 
 .. mc-cmd:: --recursive, r
+   :optional:
    
-   
-   *Optional* Recursively copy the contents of each bucket or directory
-   :mc-cmd:`~mc cp SOURCE` to the :mc-cmd:`~mc cp TARGET` bucket.
+   Recursively copy the contents of each bucket or directory :mc-cmd:`~mc cp SOURCE` to the :mc-cmd:`~mc cp TARGET` bucket.
 
 .. mc-cmd:: --retention-duration
-   
+   :optional:
 
-   *Optional* The duration of the :ref:`WORM retention mode 
-   <minio-object-locking-retention-modes>` to apply to the copied object(s).
+   The duration of the :ref:`WORM retention mode <minio-object-locking-retention-modes>` to apply to the copied object(s).
 
-   Specify the duration as a string in
-   ``#d#hh#mm#ss`` format. For example: ``--retention-duration "1d2hh3mm4ss"``.
+   Specify the duration as a string in ``#d#hh#mm#ss`` format. 
+   For example: ``--retention-duration "1d2hh3mm4ss"``.
 
    Requires specifying :mc-cmd:`~mc cp --retention-mode`.
 
 .. mc-cmd:: --retention-mode
-   
+   :optional:
 
-   *Optional* enables :ref:`object locking mode
-   <minio-object-locking-retention-modes>` on the copied object(s).
+   Enables :ref:`object locking mode <minio-object-locking-retention-modes>` on the copied object(s).
    Supports the following values:
 
    - ``GOVERNANCE``
@@ -260,18 +250,17 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: storage-class, sc
-   
+   :optional:
 
-   *Optional* Set the storage class for the new object(s) on the 
-   :mc-cmd:`~mc cp TARGET`. 
+   Set the storage class for the new object(s) on the :mc-cmd:`~mc cp TARGET`. 
          
    See :aws-docs:`AmazonS3/latest/dev/storage-class-intro.html` for
    more information on S3 storage classes.
 
 .. mc-cmd:: --tags
-   
+   :optional:
 
-   *Optional* Applies one or more tags to the copied objects.
+   Applies one or more tags to the copied objects.
 
    Specify an ampersand-separated list of key-value pairs as 
    ``KEY1=VALUE1&KEY2=VALUE2``, where each pair represents one tag to
@@ -283,6 +272,12 @@ Parameters
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
       :end-before: end-version-id-desc
+
+.. mc-cmd:: --zip
+   :optional:
+
+   During copy, extract files from a `.zip` archive.
+   Only functional when the source archive file exists on a MinIO deployment.
 
 Global Flags
 ~~~~~~~~~~~~
