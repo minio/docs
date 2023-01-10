@@ -13,11 +13,23 @@ pip install -r requirements.txt
 
 make clean
 make SYNC_SDK=TRUE linux
-make windows macos container k8s openshift
+make windows macos container k8s openshift eks aks gke
 
 sudo rm -rf /var/www/docs/minio/kubernetes/upstream
 sudo mkdir -p /var/www/docs/minio/kubernetes/upstream
 sudo cp -vr build/${branch}/k8s/html/* /var/www/docs/minio/kubernetes/upstream/
+
+sudo rm -rf /var/www/docs/minio/kubernetes/eks
+sudo mkdir -p /var/www/docs/minio/kubernetes/eks
+sudo cp -vr build/${branch}/eks/html/* /var/www/docs/minio/kubernetes/eks/
+
+sudo rm -rf /var/www/docs/minio/kubernetes/gke
+sudo mkdir -p /var/www/docs/minio/kubernetes/gke
+sudo cp -vr build/${branch}/gke/html/* /var/www/docs/minio/kubernetes/gke/
+
+sudo rm -rf /var/www/docs/minio/kubernetes/aks
+sudo mkdir -p /var/www/docs/minio/kubernetes/aks
+sudo cp -vr build/${branch}/aks/html/* /var/www/docs/minio/kubernetes/aks/
 
 sudo rm -rf /var/www/docs/minio/kubernetes/openshift
 sudo mkdir -p /var/www/docs/minio/kubernetes/openshift

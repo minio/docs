@@ -115,7 +115,7 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc ilm tier add` command to add a new Google Cloud Storage
+Use the :mc:`mc ilm tier add` command to add a new Google Cloud Storage
 service as the remote storage tier:
 
 .. code-block:: shell

@@ -65,7 +65,7 @@ Table of Deprecated Admin Commands
      - Version of Change
 
    * - ``mc admin tier add``
-     - :mc-cmd:`mc ilm tier add`
+     - :mc:`mc ilm tier add`
      - mc RELEASE.2022-12-24T15-21-38Z
 
    * - ``mc admin tier edit``
@@ -73,7 +73,7 @@ Table of Deprecated Admin Commands
      - mc RELEASE.2022-12-24T15-21-38Z
 
    * - ``mc admin tier ls``
-     - :mc-cmd:`mc ilm tier ls`
+     - :mc:`mc ilm tier ls`
      - mc RELEASE.2022-12-24T15-21-38Z
 
    * - ``mc admin bucket remote add``

@@ -19,7 +19,7 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
       If you want to update the MinIO plugin with Krew, use the following command:
 
       .. code-block:: shell
-         :class copyable
+         :class: copyable
 
          kubectl krew upgrade minio
 

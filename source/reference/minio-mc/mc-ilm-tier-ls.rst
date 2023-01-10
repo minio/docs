@@ -14,7 +14,7 @@
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
 
-   :mc-cmd:`mc ilm tier ls` replaces ``mc admin tier ls``.
+   :mc:`mc ilm tier ls` replaces ``mc admin tier ls``.
 
 Description
 -----------

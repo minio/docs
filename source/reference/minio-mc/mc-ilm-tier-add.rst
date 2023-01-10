@@ -14,7 +14,7 @@
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
 
-   :mc-cmd:`mc ilm tier add` replaces ``mc admin tier add``.
+   :mc:`mc ilm tier add` replaces ``mc admin tier add``.
 
 Description
 -----------

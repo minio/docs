@@ -124,7 +124,7 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc ilm tier add` command to add an Amazon S3 service as the
+Use the :mc:`mc ilm tier add` command to add an Amazon S3 service as the
 new remote storage tier:
 
 .. code-block:: shell

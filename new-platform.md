@@ -22,11 +22,15 @@ When launching docs for a new `$program` or `$platform`, the following steps mus
    
    - Use an existing `elif` section as a template to follow.
    - This allows you to exclude files that are not necessary from the build.
+   - Use the `url-excludes.yaml` file to specify URLs to exclude from that platforms build
 
 3. Update `build-docs.sh` in this repo to automatically build the docs for the web server on each merge to the `main` branch
 
    - Add the platform or program to the second `make` line.
    - Create the commands to clear and add the path to the new docs using an existing section as a template.
+   - Kubernetes platforms should go under `/docs/kubernetes/$platform`   
+   - You can test by running locally (might need `sudo sh ./build-docs.sh`).
+     You can then use `python -m http.server --directory /var/www/docs/minio/` and testing URLs
 
 4. Update the doc main nav bar (`/source/_templates/content-navigation.html`) to include the `$program` and/or `$platform`
 

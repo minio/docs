@@ -35,6 +35,7 @@ excludes:
 - 'reference/kubectl-minio-plugin*'
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
+- 'reference/deprecated/*'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -51,6 +52,7 @@ excludes:
 - 'reference/kubectl-minio-plugin*'
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
+- 'reference/deprecated/*'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -69,6 +71,7 @@ excludes:
 - 'reference/kubectl-minio-plugin*'
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
+- 'reference/deprecated/*'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -84,6 +87,7 @@ excludes:
 - 'operations/manage-existing-deployments.rst'
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
+- 'reference/deprecated/*'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -99,6 +103,7 @@ excludes:
 - 'operations/manage-existing-deployments.rst'
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
+- 'reference/deprecated/*'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -114,6 +119,7 @@ excludes:
 - 'operations/manage-existing-deployments.rst'
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
+- 'reference/deprecated/*'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -129,6 +135,7 @@ excludes:
 - 'operations/manage-existing-deployments.rst'
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
+- 'reference/deprecated/*'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -144,5 +151,6 @@ excludes:
 - 'operations/manage-existing-deployments.rst'
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
+- 'reference/deprecated/*'
 - 'developers/*'
 - 'integrations/*'
