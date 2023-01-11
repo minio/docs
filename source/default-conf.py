@@ -72,6 +72,7 @@ extlinks = {
     'minio-docs'      : ('https://min.io/docs/%s?ref=docs-internal',''),
     'gke-docs'        : ('https://cloud.google.com/kubernetes-engine/docs/%s',''),
     'gcp-docs'        : ('https://cloud.google.com/compute/docs/%s',''),
+    'gcs-docs'        : ('https://cloud.google.com/storage/docs/%s',''),
     'aks-docs'        : ('https://learn.microsoft.com/en-us/azure/aks/%s',''),
     'azure-docs'      : ('https://learn.microsoft.com/en-us/azure/%s',''),
 

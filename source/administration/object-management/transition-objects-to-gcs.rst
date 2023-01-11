@@ -75,6 +75,14 @@ Refer to the `GCS IAM permissions
 documentation for more complete guidance on configuring the required
 permissions.
 
+Remote Bucket Must Exist
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create the remote GCS bucket *prior* to configuring lifecycle management tiers or rules using that bucket as the target.
+
+If you set a default GCS :gcp-docs:`storage class <storage-classes>`, MinIO uses that default *if* you do not specify a :mc-cmd:`storage class <mc ilm tier add --storage-class>` when defining the remote tier.
+Ensure you document the settings of both your GCS bucket and MinIO tiering configuration to avoid any potential confusion, misconfiguration, or other unexpected outcomes.
+
 Considerations
 --------------
 

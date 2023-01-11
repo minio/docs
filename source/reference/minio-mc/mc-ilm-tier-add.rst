@@ -225,6 +225,8 @@ The command accepts the following arguments:
 
    The bucket on the remote tier to which MinIO transitions objects.
 
+   For ``azure`` remote tiers, this value corresponds to the :azure-docs:`Container name <storage/blobs/storage-blobs-introduction#containers>`
+
 .. mc-cmd:: --prefix
    :optional:
 
@@ -235,16 +237,37 @@ The command accepts the following arguments:
 .. mc-cmd:: --storage-class
    :optional:
 
-   The AWS storage class to use for objects transitioned by MinIO. 
-   MinIO supports only the following storage classes:
+   The storage class to apply to objects transitioned by MinIO to the remote bucket.
+   The specified storage class varies depending on the ``TIER_TYPE``.
+   MinIO object transition *requires* the remote storage class to support immediate retrieval (e.g. no rehydration or manual intervention required).
+   
+   Select the tab corresponding to the ``TIER_TYPE`` to view the recommended storage classes:
 
-   - ``STANDARD``
-   - ``REDUCED_REDUNDANCY``
+   .. tab-set::
 
-   Defaults to ``STANDARD`` if omitted. 
+      .. tab-item:: minio
 
-   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``s3`` or ``minio``.
-   This option has no effect for any other value of ``TIER_TYPE``.
+         - ``STANDARD`` *Recommended*
+         - ``REDUCED``
+
+      .. tab-item:: s3
+
+         - ``STANDARD``
+         - ``STANDARD_IA``
+         - ``ONEZONE_IA``
+
+      .. tab-item:: gcs
+
+         - ``STANDARD``
+         - ``NEARLINE``
+         - ``COLDLINE``
+
+      .. tab-item:: azure 
+         
+         - ``Hot``
+         - ``Cool``
+
+   If omitted, objects use the default storage class defined for the remote bucket.
 
 .. mc-cmd:: --region
    :optional:

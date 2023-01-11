@@ -26,7 +26,7 @@ Object Transition ("Tiering")
 MinIO supports creating object transition lifecycle management rules, where MinIO can automatically move an object to a remote storage "tier". 
 MinIO supports any of the following remote tier targets:
 
-- :ref:`MinIO or other S3-compatible storage <minio-lifecycle-management-transition-to-s3>`
+- :ref:`MinIO <minio-lifecycle-management-transition-to-minio>`
 - :ref:`Amazon S3 <minio-lifecycle-management-transition-to-s3>`
 - :ref:`Google Cloud Storage <minio-lifecycle-management-transition-to-gcs>`
 - :ref:`Microsoft Azure Blob Storage 
@@ -126,6 +126,7 @@ Consider regularly checking cluster metrics, capacity, and resource usage to ens
 .. toctree::
    :hidden:
 
+   /administration/object-management/transition-objects-to-minio.rst
    /administration/object-management/transition-objects-to-s3.rst
    /administration/object-management/transition-objects-to-gcs.rst
    /administration/object-management/transition-objects-to-azure.rst
