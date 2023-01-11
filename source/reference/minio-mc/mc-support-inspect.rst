@@ -22,6 +22,10 @@ MinIO assembles this data from each backend drive storing an :ref:`erasure shard
 
 The command produces an encrypted zip file that includes all matching files with their respective *host+drive+path*. 
 
+.. versionchanged:: RELEASE.2022-12-12T19-27-27Z
+   
+   When writing the zip archive, MinIO also encrypts the zip index of file names included in the archive.
+
 The resulting report is intended for use by MinIO Engineering via |SUBNET| and may contain internal or private data points associated to the object.
 Exercise caution before sending a report to a third party or posting the report in a public forum.
 

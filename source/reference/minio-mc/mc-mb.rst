@@ -163,6 +163,12 @@ The new bucket enables :ref:`object versioning <minio-bucket-versioning>` for al
 Behavior
 --------
 
+Bucket Limits Per Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO does not limit the number of buckets you can create on a deployment.
+However, MinIO recommends no more than 500,000 buckets per deployment as a general guideline.
+
 Bucket Limits for Non-MinIO S3 Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
