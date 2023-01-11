@@ -10,7 +10,7 @@ Transition Objects to Remote MinIO Deployment
    :local:
    :depth: 2
 
-The procedure on this page creates a new object lifecycle management rule that transitions objects from a bucket on a primary MinIO deployment to a bucket remote MinIO deployment.
+The procedure on this page creates a new object lifecycle management rule that transitions objects from a bucket on a primary MinIO deployment to a bucket on a remote MinIO deployment.
 This procedure supports cost-management strategies such as tiering objects from a "hot" MinIO deployment using NVMe storage to a "warm" MinIO deployment using SSD .
 
 .. todo: diagram
