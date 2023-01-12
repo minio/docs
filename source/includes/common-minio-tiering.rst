@@ -111,9 +111,11 @@ This tutorial includes the necessary syntax for setting this prefix.
 
 .. start-transition-data-loss-desc
 
-MinIO creates metadata for each transitioned object that identifies its location
-on the remote storage. This metadata is required for accessing the object, such
-that applications cannot access a transition object independent of MinIO.
+MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
+MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
+
+MinIO creates metadata for each transitioned object that identifies its location on the remote storage. 
+Applications cannot trivially identify and access a transitioned object independent of MinIO.
 Availability of the transitioned data therefore depends on the same core
 protections that :ref:`erasure coding <minio-erasure-coding>` and distributed
 deployment topologies provide for all objects on the MinIO deployment. Using

@@ -68,12 +68,24 @@ Required Azure Permissions
 Object transition lifecycle management rules require additional permissions on
 the remote storage tier. Specifically, MinIO requires the 
 :abbr:`Azure (Microsoft Azure)` credentials provide read, write, list, and
-delete permissions for the remote bucket.
+delete permissions for the remote storage account and container.
 
 Refer to the `Azure RBAC
 <https://docs.microsoft.com/en-us/azure/role-based-access-control/>`__
 documentation for more complete guidance on configuring the required
 permissions.
+
+Remote Storage Account and Container Must Exist
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create the remote :azure-docs:`Azure storage account <storage/common/storage-account-overview>` and container *prior* to configuring lifecycle management tiers or rules using that resource as the target.
+When :azure-docs:`creating the Azure storage account <storage/common/storage-account-create>`, ensure the storage account corresponds to either Standard or Premium blob storage with the locally redundant storage (LRS) redundancy option.
+The Azure Go SDK API used by MinIO does not support any other redundancy options.
+
+If you set a Storage Account :azure-docs:`default access tier <storage/blobs/access-tiers-online-manage>`, MinIO uses that default *if* you do not specify a :mc-cmd:`storage class <mc ilm tier add --storage-class>` when defining the remote tier.
+Ensure you document the settings of both your Azure storage account and MinIO tiering configuration to avoid any potential confusion, misconfiguration, or other unexpected outcomes.
+
+For more information on Azure storage accounts, see :azure-docs:`Storage accounts <storage/common/storage-account-overview#types-of-storage-accounts>`.
 
 Considerations
 --------------
@@ -125,8 +137,9 @@ Use the :mc:`mc ilm tier add` command to add a new remote storage tier:
    mc ilm tier add azure TARGET TIER_NAME \
       --account-name ACCOUNT \
       --account-key KEY \
-      --bucket BUCKET \
-      --prefix PREFIX
+      --bucket CONTAINER \
+      --prefix PREFIX \
+      --storage-class STORAGE_CLASS
 
 
 The example above uses the following arguments:
@@ -148,12 +161,25 @@ The example above uses the following arguments:
        remote storage tier. Specify the name in all-caps, e.g. ``AZURE_TIER``.
        This value is required in the next step.
 
-   * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
-     - The name of the bucket on the :abbr:`Azure (Microsoft Azure)` storage
+   * - :mc-cmd:`ACCOUNT <mc ilm tier add --account-name>`
+     - The :azure-docs:`Storage Account <storage/common/storage-account-overview>` to use as the remote storage resource.
+
+       You cannot change this account name after creating the tier.
+
+   * - :mc-cmd:`KEY <mc ilm tier add --account-key>`
+     - The corresponding shared account key for the specified ``ACCOUNT``.
+
+       The account key must have an assigned Azure policy with the required :ref:`permissions
+       <minio-lifecycle-management-transition-to-azure-permissions-remote>`.
+
+       See :azure-docs:`Managing storage account access keys <storage/common/storage-account-keys-manage>` for more information.
+
+   * - :mc-cmd:`CONTAINER <mc ilm tier add --bucket>`
+     - The name of the container on the :abbr:`Azure (Microsoft Azure)` storage
        backend to which MinIO transitions objects.
 
    * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
-     - The optional bucket prefix within which MinIO transitions objects.
+     - The optional container prefix within which MinIO transitions objects.
 
        MinIO stores all transitioned objects in the specified ``BUCKET`` under a
        unique per-deployment prefix value. Omit this argument to use only that
@@ -162,20 +188,21 @@ The example above uses the following arguments:
        MinIO recommends specifying this optional prefix for remote storage tiers
        which contain other data, including transitioned objects from other MinIO
        deployments. This prefix should provide a clear reference back to the
-       source MinIO deployment to faciliate ease of operations related to
+       source MinIO deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`ACCOUNT <mc ilm tier add --account-name>`
-     - The account name MinIO uses to access the bucket. The account name
-       *must* correspond to an :abbr:`Azure (Microsoft Azure)` user with the
-       required :ref:`permissions
-       <minio-lifecycle-management-transition-to-azure-permissions-remote>`.
+   * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
+     - The Azure access tier MinIO applies to objects transitioned to the Azure container.
 
-       You cannot change this account name after creating the tier.
+       MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
+       MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
 
-   * - :mc-cmd:`KEY <mc ilm tier add --account-key>`
-     - The corresponding key for the specified ``ACCOUNT``.
+       The following Azure access tiers meet MinIO's requirements as a remote tier:
 
+       - ``Hot``
+       - ``Cool``
+
+       For more information, see :azure-docs:`Hot, cool, and archive access tiers for blob data <storage/blobs/access-tiers-overview.html>`.
 
 3) Create and Apply the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

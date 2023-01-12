@@ -1,8 +1,8 @@
-.. _minio-lifecycle-management-transition-to-s3:
+.. _minio-lifecycle-management-transition-to-minio:
 
-===================================
-Transition Objects from MinIO to S3
-===================================
+=============================================
+Transition Objects to Remote MinIO Deployment
+=============================================
 
 .. default-domain:: minio
 
@@ -10,11 +10,8 @@ Transition Objects from MinIO to S3
    :local:
    :depth: 2
 
-The procedure on this page creates a new object lifecycle management rule that
-transition objects from a MinIO bucket to a remote storage tier on the Amazon
-Web Services S3 storage backend *or* an S3-compatible service. This procedure
-supports use cases such as tiering objects to low-cost or archival storage after
-a certain time period or calendar date.
+The procedure on this page creates a new object lifecycle management rule that transitions objects from a bucket on a primary MinIO deployment to a bucket on a remote MinIO deployment.
+This procedure supports cost-management strategies such as tiering objects from a "hot" MinIO deployment using NVMe storage to a "warm" MinIO deployment using SSD.
 
 .. todo: diagram
 
@@ -32,13 +29,13 @@ instructions on downloading and installing ``mc``.
 Use the :mc:`mc alias` command to create an alias for the source MinIO cluster.
 Alias creation requires specifying an access key for a user on the source and
 destination clusters. The specified users must have :ref:`permissions
-<minio-lifecycle-management-transition-to-s3-permissions>` for configuring and
+<minio-lifecycle-management-transition-to-minio-permissions>` for configuring and
 applying transition operations.
 
-.. _minio-lifecycle-management-transition-to-s3-permissions:
+.. _minio-lifecycle-management-transition-to-minio-permissions:
 
-Required MinIO Permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required Source MinIO Permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.
@@ -54,23 +51,23 @@ management rules:
 - :policy-action:`admin:ListTier`
 
 For example, the following policy provides permission for configuring object
-transition lifecycle management rules on any bucket in the cluster:.
+transition lifecycle management rules on any bucket in the cluster:
 
 .. literalinclude:: /extra/examples/LifecycleManagementAdmin.json
    :language: json
    :class: copyable
 
-.. _minio-lifecycle-management-transition-to-s3-permissions-remote:
+.. _minio-lifecycle-management-transition-to-minio-permissions-remote:
 
-Required S3 Permissions
-~~~~~~~~~~~~~~~~~~~~~~~
+Required Remote MinIO Permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Object transition lifecycle management rules require additional permissions
 on the remote storage tier. Specifically, MinIO requires the remote
 tier credentials provide read, write, list, and delete permissions for the
 remote bucket.
 
-For example, the following policy provides the necessary permission
+For example, the following policy on the remote MinIO deployment provides the necessary permission
 for transitioning objects into and out of the remote tier:
 
 .. literalinclude:: /extra/examples/LifecycleManagementUser.json
@@ -79,15 +76,14 @@ for transitioning objects into and out of the remote tier:
 
 Modify the ``Resource`` for the bucket into which MinIO tiers objects.
 
-Refer to the :aws-docs:`Amazon S3 Permissions 
-<service-authorization/latest/reference/list_amazons3.html#amazons3-actions-as-permissions>` 
-documentation for more complete guidance on configuring the required
-permissions.
+Refer to the :ref:`minio-policy` documentation for more complete guidance on configuring the required permissions.
 
 Remote Bucket Must Exist
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create the remote S3 bucket *prior* to configuring lifecycle management tiers or rules using that bucket as the target.
+Create the remote bucket *prior* to configuring lifecycle management tiers or rules using that bucket as the target.
+
+If the remote bucket contains existing data, use the :mc-cmd:`prefix <mc ilm tier add --prefix>` feature to isolate transitioned objects from any other objects on that bucket.
 
 Considerations
 --------------
@@ -120,7 +116,7 @@ Procedure
 1) Configure User Accounts and Policies for Lifecycle Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |permissions| replace:: :ref:`permissions <minio-lifecycle-management-transition-to-s3-permissions>`
+.. |permissions| replace:: :ref:`permissions <minio-lifecycle-management-transition-to-minio-permissions>`
 
 .. include:: /includes/common-minio-tiering.rst
    :start-after: start-create-transition-user-desc
@@ -129,13 +125,13 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm tier add` command to add an Amazon S3 service as the
+Use the :mc:`mc ilm tier add` command to add the remote MinIO deployment as the
 new remote storage tier:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm tier add s3 TARGET TIER_NAME  \
+   mc ilm tier add minio TARGET TIER_NAME  \
       --endpoint https://HOSTNAME       \
       --access-key ACCESS_KEY           \
       --secret-key SECRET_KEY           \
@@ -154,30 +150,30 @@ The example above uses the following arguments:
    * - Argument
      - Description
    
-   * - :mc-cmd:`TARGET <mc ilm tier add TARGET>`
+   * - :mc-cmd:`ALIAS <mc ilm tier add TARGET>`
      - The :mc:`alias <mc alias>` of the MinIO deployment on which to configure
-       the S3 remote tier.
+       the MinIO remote tier.
    
    * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
-     - The name to associate with the new S3 remote storage tier. Specify the
-       name in all-caps, e.g. ``S3_TIER``. This value is required in the next
+     - The name to associate with the new MinIO remote storage tier. Specify the
+       name in all-caps, e.g. ``MINIO_WARM_TIER``. This value is required in the next
        step.
 
    * - :mc-cmd:`HOSTNAME <mc ilm tier add --endpoint>`
-     - The URL endpoint for the S3 storage backend.
+     - The URL endpoint for the MinIO storage backend.
 
    * - :mc-cmd:`ACCESS_KEY <mc ilm tier add --access-key>`
-     - The S3 access key MinIO uses to access the bucket. The
+     - The access key MinIO uses to access the bucket. The
        access key *must* correspond to an IAM user with the 
        required 
        :ref:`permissions 
-       <minio-lifecycle-management-transition-to-s3-permissions-remote>`.
+       <minio-lifecycle-management-transition-to-minio-permissions-remote>`.
 
    * - :mc-cmd:`SECRET_KEY <mc ilm tier add --secret-key>`
      - The corresponding secret key for the specified ``ACCESS_KEY``.
 
    * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
-     - The name of the bucket on the S3 storage backend to which MinIO
+     - The name of the bucket on the remote MinIO deployment to which the ``SOURCE``
        transitions objects.
 
    * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
@@ -190,29 +186,21 @@ The example above uses the following arguments:
        MinIO recommends specifying this optional prefix for remote storage tiers
        which contain other data, including transitioned objects from other MinIO
        deployments. This prefix should provide a clear reference back to the
-       source MinIO deployment to faciliate ease of operations related to
+       source MinIO deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
    * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
-     - The S3 storage class to which MinIO transitions objects. 
+     - The :ref:`Erasure Coding storage class <minio-ec-storage-class>` MinIO applies to objects transitions to the remote MinIO bucket. 
+       Specify one of the following supported storage classes:
 
-       MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
-       MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
-
-       The following S3 storage classes meet MinIO's requirements as a remote tier:
-
-       - ``STANDARD``
-       - ``STANDARD_IA``
-       - ``STANDARD_ONEZONE``
-
-       Omit this value to use the default storage class for the bucket.
-       Specifying this value overrides the bucket storage class.
-
-       For more information, see :s3-docs:`Using Amazon S3 storage classes <storage-class-intro.html>`.
+       - ``STANDARD`` *Recommended*
+       - ``REDUCED``
 
    * - :mc-cmd:`REGION <mc ilm tier add --region>`
-     - The AWS S3 region of the specified ``BUCKET``. You can safely omit this
-       option if the ``HOSTNAME`` includes the region.
+     - The MinIO region of the specified ``BUCKET``.
+
+       MinIO deployments typically do not require setting a region as part of setup.
+       Only include this option if you explicitly set the ``MINIO_SITE_REGION`` configuration setting for the deployment.
 
 3) Create and Apply the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

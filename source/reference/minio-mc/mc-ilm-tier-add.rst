@@ -194,19 +194,20 @@ The command accepts the following arguments:
 .. mc-cmd:: --account-name
    :optional:
 
-   The account name for a user on the remote Azure tier. 
-   The user must have permission to perform read/write/list/delete operations on the remote bucket or bucket prefix.
-      
+   The :azure-docs:`Storage Account <storage/common/storage-account-overview>` to use as the remote storage resource.
+
    Required if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure``. 
    This option has no effect for any other value of ``TIER_TYPE``.
 
-   MinIO does *not* support changing the account name associated to an Azure remote tier. 
-   Azure storage backends are tied to the account, such that changing the account would change the storage backend and prevent access to any objects transitioned to the original account/backend.
+   MinIO does *not* support changing the storage account name associated to an Azure remote tier. 
+   Azure storage backends are tied to the storage account, such that changing this value would change the storage backend and prevent access to any objects transitioned to the original account/backend.
 
 .. mc-cmd:: --account-key
    :optional:
 
-   The account key for the :mc-cmd:`~mc ilm tier add --account-name` associated to the remote Azure tier.
+   The corresponding shared account key for the :mc-cmd:`~mc ilm tier add --account-name` associated to the remote Azure tier.
+
+   The account key must have an assigned Azure policy with the required :ref:`permissions <minio-lifecycle-management-transition-to-azure-permissions-remote>`.
 
    Required if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure``. 
    This option has no effect for any other value of ``TIER_TYPE``.
@@ -225,6 +226,8 @@ The command accepts the following arguments:
 
    The bucket on the remote tier to which MinIO transitions objects.
 
+   For ``azure`` remote tiers, this value corresponds to the :azure-docs:`Container name <storage/blobs/storage-blobs-introduction#containers>`
+
 .. mc-cmd:: --prefix
    :optional:
 
@@ -235,16 +238,47 @@ The command accepts the following arguments:
 .. mc-cmd:: --storage-class
    :optional:
 
-   The AWS storage class to use for objects transitioned by MinIO. 
-   MinIO supports only the following storage classes:
+   The storage class ("access tier" for Microsoft Azure) MinIO applies to objects transitioned to the remote bucket.
 
-   - ``STANDARD``
-   - ``REDUCED_REDUNDANCY``
+   The storage class to apply to objects transitioned by MinIO to the remote bucket.
+   MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
+   MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
+   
+   Select the tab corresponding to the ``TIER_TYPE`` for a list of supported values for each tier:
 
-   Defaults to ``STANDARD`` if omitted. 
+   .. tab-set::
 
-   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``s3`` or ``minio``.
-   This option has no effect for any other value of ``TIER_TYPE``.
+      .. tab-item:: minio
+
+         - ``STANDARD`` *Recommended*
+         - ``REDUCED``
+
+         For more information, see :ref:`Erasure Coding storage class <minio-ec-storage-class>`.
+
+      .. tab-item:: s3
+
+         - ``STANDARD``
+         - ``STANDARD_IA``
+         - ``ONEZONE_IA``
+
+         For more information, see :s3-docs:`Using Amazon S3 storage classes <storage-class-intro.html>`.
+
+      .. tab-item:: gcs
+
+         - ``STANDARD``
+         - ``NEARLINE``
+         - ``COLDLINE``
+
+         For more information, see :gcs-docs:`GCS storage class <storage-classes>`.
+
+      .. tab-item:: azure 
+         
+         - ``Hot``
+         - ``Cool``
+
+         For more information, see :azure-docs:`Hot, cool, and archive access tiers for blob data <storage/blobs/access-tiers-overview.html>`.
+
+   If omitted, objects use the default storage class defined for the remote bucket.
 
 .. mc-cmd:: --region
    :optional:
