@@ -158,7 +158,8 @@ To see the rules for bucket names, select :guilabel:`View Bucket Naming Rules`.
 
 While creating a bucket, you can enable :ref:`versioning <minio-bucket-versioning>`, :ref:`object locking <minio-object-locking>`, bucket size (quota) limits, and :ref:`retention rules <minio-object-locking-retention-modes>` (which require versioning).
 
-MinIO recommends no more than 500,000 buckets per deployment.
+MinIO does not limit the total number of buckets allowed on a deployment.
+However, MinIO recommends no more than 500,000 buckets per deployment as a general guideline.
 
 Each bucket has :guilabel:`Manage` and :guilabel:`Browse` buttons.
 

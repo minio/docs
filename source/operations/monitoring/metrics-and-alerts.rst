@@ -113,6 +113,10 @@ These metrics are only populated for MinIO clusters with
    Total number of bytes that failed at least once to replicate for a given bucket.
    You can identify the bucket using the ``{ bucket="STRING" }`` label
 
+.. metric:: minio_bucket_replication_latency
+
+   Replication latency in milliseconds.
+
 .. metric:: minio_bucket_replication_pending_bytes
 
    Total number of bytes pending to replicate for a given bucket.
@@ -164,7 +168,7 @@ Capacity Metrics
    Total storage available on a specific drive for a node in the MinIO deployment.
    You can identify the drive and node using the ``{ disk="/path/to/disk",server="STRING"}`` labels respectively.
 
-.. metric:: minio_node_disk_total_bytes
+.. metric:: minio_node_disk_total_bytes 
 
    Total storage on a specific drive for a node in the MinIO deployment. 
    You can identify the drive and node using the ``{ disk="/path/to/disk",server="STRING"}`` labels respectively.
@@ -183,7 +187,6 @@ Lifecycle Management Metrics
 
    Total number of bytes transitioned using :ref:`tiering/transition lifecycle management rules <minio-lifecycle-management-tiering>`
 
-
 .. metric:: minio_cluster_ilm_transitioned_objects
 
    Total number of objects transitioned using :ref:`tiering/transition lifecycle management rules <minio-lifecycle-management-tiering>`
@@ -196,6 +199,10 @@ Lifecycle Management Metrics
 
    Total number of pending :ref:`object transition <minio-lifecycle-management-tiering>` tasks
 
+.. metric:: minio_node_ilm_transition_active_tasks
+   
+   Number of active ILM transition tasks
+
 .. metric:: minio_node_ilm_expiry_pending_tasks
 
    Total number of pending :ref:`object expiration <minio-lifecycle-management-expiration>` tasks
@@ -203,6 +210,10 @@ Lifecycle Management Metrics
 .. metric:: minio_node_ilm_expiry_active_tasks
 
    Total number of active :ref:`object expiration <minio-lifecycle-management-expiration>` tasks
+
+.. metric:: minio_node_ilm_versions_scanned
+   
+   Total number of object versions checked for ilm actions since server start
 
 Node and Drive Health Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -227,7 +238,27 @@ Node and Drive Health Metrics
 
    Total number of MinIO nodes online.
 
-.. metric:: minio_heal_objects_error_total
+.. metric:: minio_node_disk_free_inodes
+   
+   Total free inodes.
+
+.. metric:: minio_node_disk_latency_us
+   
+   Average last minute latency in µs for drive API storage operations. 
+
+.. metric:: minio_node_disk_offline_total
+   
+   Total drives offline. 
+
+.. metric:: minio_node_disk_online_total
+   
+   Total drives online.
+
+.. metric:: minio_node_disk_total
+   
+   Total drives.
+
+.. metric:: minio_heal_objects_errors_total
 
    Objects for which healing failed in current self healing run
 
@@ -300,6 +331,11 @@ Scanner Metrics
 
    Total number of write SysCalls to the kernel. ``/proc/[pid]/io syscw``
 
+.. metric:: minio_usage_last_activity_nano_seconds
+   
+   Time elapsed since last scan activity. 
+   This is set to ``0`` until first scan cycle.
+
 S3 Metrics
 ~~~~~~~~~~
 
@@ -313,6 +349,14 @@ S3 Metrics
    Total number of bytes of S3 traffic received per bucket.
    You can identify the bucket using the ``{ bucket="STRING" }`` label.
 
+.. metric:: minio_s3_requests_incoming_total
+   
+   Volatile number of total incoming S3 requests.
+
+.. metric:: minio_s3_requests_canceled_total
+   
+   Total number S3 requests that were canceled from the client while processing.
+
 .. metric:: minio_s3_requests_inflight_total
 
    Total number of S3 requests currently in flight.
@@ -320,6 +364,26 @@ S3 Metrics
 .. metric:: minio_s3_requests_total
 
    Total number of S3 requests.
+
+.. metric:: minio_s3_requests_rejected_auth_total
+   
+   Total number S3 requests rejected for auth failure.
+
+.. metric:: minio_s3_requests_rejected_header_total
+   
+   Total number S3 requests rejected for invalid header.
+
+.. metric:: minio_s3_requests_rejected_invalid_total
+   
+   Total number S3 invalid requests.
+   
+.. metric:: minio_s3_requests_rejected_timestamp_total
+   
+   Total number S3 requests rejected for invalid timestamp.
+
+.. metric:: minio_s3_requests_waiting_total
+   
+   Number of S3 requests in the waiting queue.
 
 .. metric:: minio_s3_time_ttfb_seconds_distribution
 
@@ -345,6 +409,27 @@ S3 Metrics
 
    Total number of S3 requests with 5xx errors.
 
+IAM Metrics
+~~~~~~~~~~~
+
+.. metric:: minio_node_iam_last_sync_duration_millis
+   
+   Last successful IAM data sync duration in milliseconds. 
+
+.. metric:: minio_node_iam_since_last_sync_millis
+   
+   Time (in milliseconds) since last successful IAM data sync. 
+   
+   This value starts at zero and only increments after the the first sync after server start. 
+
+.. metric:: minio_node_iam_sync_failures
+   
+   Number of failed IAM data syncs since server start. 
+
+.. metric:: minio_node_iam_sync_successes
+   
+   Number of successful IAM data syncs since server start. 
+
 Internal Metrics
 ~~~~~~~~~~~~~~~~
 
@@ -355,6 +440,18 @@ Internal Metrics
 .. metric:: minio_inter_node_traffic_sent_bytes
 
    Total number of bytes sent to the other peer nodes.
+
+.. metric:: minio_inter_node_traffic_dial_avg_time
+
+   Average time of internodes TCP dial calls.
+
+.. metric:: minio_inter_node_traffic_dial_errors
+
+   Total number of internode TCP dial timeouts and errors.
+
+.. metric:: minio_inter_node_traffic_errors_total
+
+   Total number of failed internode calls.
 
 .. metric:: minio_node_file_descriptor_limit_total
 
@@ -384,6 +481,29 @@ Internal Metrics
    Total bytes written by the process to the underlying storage system, 
    ``/proc/[pid]/io write_bytes``
 
+Key Management System (KMS) Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. metric:: minio_cluster_kms_online
+   
+   Reports whether the KMS is online (1) or offline (0).
+
+.. metric:: minio_cluster_kms_request_error
+   
+   Number of KMS requests that failed due to some error. (HTTP 4xx status code).
+
+.. metric:: minio_cluster_kms_request_failure
+   
+   Number of KMS requests that failed due to some internal failure. (HTTP 5xx status code).
+
+.. metric:: minio_cluster_kms_request_success
+   
+   Number of KMS requests that succeeded.
+
+.. metric:: minio_cluster_kms_uptime
+   
+   The time the KMS has been up and running in seconds.
+
 Software and Process Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -395,6 +515,10 @@ Software and Process Metrics
 
    MinIO Release tag for the server
 
+.. metric:: minio_node_go_routine_total
+
+   Total number of go routines running.
+
 .. metric:: minio_node_process_starttime_seconds
 
    Start time for MinIO process per node, time in seconds since Unix epoch.
@@ -402,6 +526,14 @@ Software and Process Metrics
 .. metric:: minio_node_process_uptime_seconds
 
    Uptime for MinIO process per node in seconds.
+
+.. metric:: minio_node_process_cpu_total_seconds
+   
+   Total user and system CPU time spent in seconds.
+   
+.. metric:: minio_node_process_resident_memory_bytes
+   
+   Resident memory size in bytes.
 
 .. toctree::
    :titlesonly:

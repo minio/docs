@@ -94,6 +94,7 @@ The command accepts the following arguments:
    information on Server Pools, see :ref:`Server Pool <minio-intro-server-pool>`.
 
 .. mc-cmd:: DIRECTORIES
+   :required:
 
    The directories or drives the :mc:`minio server` process uses as the
    storage backend.
@@ -132,9 +133,9 @@ The command accepts the following arguments:
 
 
 .. mc-cmd:: --address
-   
+   :optional:
 
-   *Optional* Binds the :mc:`minio <minio server>` server process to a
+   Binds the :mc:`minio <minio server>` server process to a
    specific network address and port number. Specify the address and port as
    ``ADDRESS:PORT``, where ``ADDRESS`` is an IP address or hostname and
    ``PORT`` is a valid and open port on the host system.
@@ -143,13 +144,27 @@ The command accepts the following arguments:
    on the host machine, specify ``:PORT`` where ``PORT`` is a valid
    and open port on the host.
 
+   .. versionchanged:: RELEASE.2023-01-02T09-40-09Z
+   
+      You can configure your hosts file to have MinIO only listen on specific IPs.
+      For example, if the machine's `/etc/hosts` file contains the following:
+
+      .. code-block:: shell
+
+         127.0.1.1       minioip
+         127.0.1.2       minioip
+
+      A command like the following would listen for API calls on port ``9000`` on both configured IP addresses.
+
+      .. code-block:: shell
+
+         minio server --address "minioip:9000" ~/miniodirectory
+
    If omitted, :mc:`minio <minio server>` binds to port ``9000`` on all
    configured IP addresses or hostnames on the host machine.
 
 .. mc-cmd:: --console-address
-   
-
-   *Optional*
+   :optional:
 
    Specifies a static port for the embedded MinIO Console.
 
@@ -157,9 +172,9 @@ The command accepts the following arguments:
    MinIO server outputs the port to the system log.
 
 .. mc-cmd:: --certs-dir, -S
-   
+   :optional:
 
-   *Optional* Specifies the path to the folder containing certificates the
+   Specifies the path to the folder containing certificates the
    :mc:`minio` process uses for configuring TLS/SSL connectivity.
 
    Omit to use the default directory paths:
@@ -170,20 +185,19 @@ The command accepts the following arguments:
    See :ref:`minio-TLS` for more information on TLS/SSL connectivity.
 
 .. mc-cmd:: --quiet
-   
+   :optional:
 
-   *Optional* Disables startup information.
+   Disables startup information.
 
 .. mc-cmd:: --anonymous
-   
+   :optional:
 
-   *Optional* Hides sensitive information from logging.
+   Hides sensitive information from logging.
 
 .. mc-cmd:: --json
-   
+   :optional:
 
-   *Optional* Outputs server logs and startup information in ``JSON``
-   format.
+   Outputs server logs and startup information in ``JSON`` format.
 
 .. _minio-server-environment-variables:
 
