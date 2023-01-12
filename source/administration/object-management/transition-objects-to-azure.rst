@@ -193,13 +193,16 @@ The example above uses the following arguments:
 
    * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
      - The Azure access tier MinIO applies to objects transitioned to the Azure container.
-       MinIO *requires* the remote Azure access tier implement immediate object retrieval with no rehydration or manual intervention required.
-       MinIO recommends one of the following Azure archive tiers:
+
+       MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
+       MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
+
+       The following Azure access tiers meet MinIO's requirements as a remote tier:
 
        - ``Hot``
        - ``Cool``
 
-       See :azure-docs:`Hot, cool, and archive access tiers for blob data <storage/blobs/access-tiers-overview.html>`
+       For more information, see :azure-docs:`Hot, cool, and archive access tiers for blob data <storage/blobs/access-tiers-overview.html>`.
 
 3) Create and Apply the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

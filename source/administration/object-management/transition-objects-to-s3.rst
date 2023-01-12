@@ -195,8 +195,11 @@ The example above uses the following arguments:
 
    * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
      - The S3 storage class to which MinIO transitions objects. 
-       MinIO *requires* the remote storage class implement immediate object retrieval with no rehydration or manual intervention required.
-       MinIO recommends one of the following S3 storage classes:
+
+       MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
+       MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
+
+       The following S3 storage classes meet MinIO's requirements as a remote tier:
 
        - ``STANDARD``
        - ``STANDARD_IA``
@@ -205,7 +208,7 @@ The example above uses the following arguments:
        Omit this value to use the default storage class for the bucket.
        Specifying this value overrides the bucket storage class.
 
-       See :s3-docs:`Using Amazon S3 storage classes <storage-class-intro.html>`
+       For more information, see :s3-docs:`Using Amazon S3 storage classes <storage-class-intro.html>`.
 
    * - :mc-cmd:`REGION <mc ilm tier add --region>`
      - The AWS S3 region of the specified ``BUCKET``. You can safely omit this

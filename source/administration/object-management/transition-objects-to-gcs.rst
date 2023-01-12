@@ -180,9 +180,12 @@ The example above uses the following arguments:
        <minio-lifecycle-management-transition-to-gcs-permissions-remote>`.
 
    * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
-     - The GCS storage class MinIO applies to objects transitioned to the GCS bucket.
-       MinIO *requires* the remote GCS storage class implement immediate object retrieval with no rehydration or manual intervention required.
-       MinIO recommends on of the following GCS storage classes:
+     - The :abbr:`GCS (Google Cloud Storage)` storage class MinIO applies to objects transitioned to the GCS bucket.
+
+       MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
+       MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
+
+       The following GCS storage classes meet MinIO's requirements as a remote tier:
 
        - ``STANDARD``
        - ``NEARLINE``

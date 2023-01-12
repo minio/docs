@@ -238,11 +238,13 @@ The command accepts the following arguments:
 .. mc-cmd:: --storage-class
    :optional:
 
+   The storage class ("access tier" for Microsoft Azure) MinIO applies to objects transitioned to the remote bucket.
+
    The storage class to apply to objects transitioned by MinIO to the remote bucket.
-   The specified storage class varies depending on the ``TIER_TYPE``.
-   MinIO object transition *requires* the remote storage class to support immediate retrieval (e.g. no rehydration or manual intervention required).
+   MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
+   MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
    
-   Select the tab corresponding to the ``TIER_TYPE`` to view the recommended storage classes:
+   Select the tab corresponding to the ``TIER_TYPE`` for a list of supported values for each tier:
 
    .. tab-set::
 
@@ -251,11 +253,15 @@ The command accepts the following arguments:
          - ``STANDARD`` *Recommended*
          - ``REDUCED``
 
+         For more information, see :ref:`Erasure Coding storage class <minio-ec-storage-class>`.
+
       .. tab-item:: s3
 
          - ``STANDARD``
          - ``STANDARD_IA``
          - ``ONEZONE_IA``
+
+         For more information, see :s3-docs:`Using Amazon S3 storage classes <storage-class-intro.html>`.
 
       .. tab-item:: gcs
 
@@ -263,10 +269,14 @@ The command accepts the following arguments:
          - ``NEARLINE``
          - ``COLDLINE``
 
+         For more information, see :gcs-docs:`GCS storage class <storage-classes>`.
+
       .. tab-item:: azure 
          
          - ``Hot``
          - ``Cool``
+
+         For more information, see :azure-docs:`Hot, cool, and archive access tiers for blob data <storage/blobs/access-tiers-overview.html>`.
 
    If omitted, objects use the default storage class defined for the remote bucket.
 

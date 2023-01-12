@@ -11,7 +11,7 @@ Transition Objects to Remote MinIO Deployment
    :depth: 2
 
 The procedure on this page creates a new object lifecycle management rule that transitions objects from a bucket on a primary MinIO deployment to a bucket on a remote MinIO deployment.
-This procedure supports cost-management strategies such as tiering objects from a "hot" MinIO deployment using NVMe storage to a "warm" MinIO deployment using SSD .
+This procedure supports cost-management strategies such as tiering objects from a "hot" MinIO deployment using NVMe storage to a "warm" MinIO deployment using SSD.
 
 .. todo: diagram
 
@@ -67,7 +67,7 @@ on the remote storage tier. Specifically, MinIO requires the remote
 tier credentials provide read, write, list, and delete permissions for the
 remote bucket.
 
-For example, the following policy provides the necessary permission
+For example, the following policy on the remote MinIO deployment provides the necessary permission
 for transitioning objects into and out of the remote tier:
 
 .. literalinclude:: /extra/examples/LifecycleManagementUser.json
