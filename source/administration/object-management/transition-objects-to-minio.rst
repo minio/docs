@@ -190,10 +190,10 @@ The example above uses the following arguments:
        diagnostics, maintenance, or disaster recovery.
 
    * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
-     - The MinIO storage class to which MinIO transitions objects. Specify
-       one of the following supported storage classes:
+     - The :ref:`Erasure Coding storage class <minio-ec-storage-class>` MinIO applies to objects transitions to the remote MinIO bucket. 
+       Specify one of the following supported storage classes:
 
-       - ``STANDARD``
+       - ``STANDARD`` *Recommended*
        - ``REDUCED``
 
    * - :mc-cmd:`REGION <mc ilm tier add --region>`

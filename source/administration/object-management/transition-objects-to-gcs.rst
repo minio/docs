@@ -80,7 +80,7 @@ Remote Bucket Must Exist
 
 Create the remote GCS bucket *prior* to configuring lifecycle management tiers or rules using that bucket as the target.
 
-If you set a default GCS :gcp-docs:`storage class <storage-classes>`, MinIO uses that default *if* you do not specify a :mc-cmd:`storage class <mc ilm tier add --storage-class>` when defining the remote tier.
+If you set a default GCS :gcs-docs:`storage class <storage-classes>`, MinIO uses that default *if* you do not specify a :mc-cmd:`storage class <mc ilm tier add --storage-class>` when defining the remote tier.
 Ensure you document the settings of both your GCS bucket and MinIO tiering configuration to avoid any potential confusion, misconfiguration, or other unexpected outcomes.
 
 Considerations
@@ -132,7 +132,8 @@ service as the remote storage tier:
    mc ilm tier add gcs TARGET TIER_NAME \
       --bucket BUCKET \
       --prefix PREFIX \
-      --credentials-file CREDENTIALS
+      --credentials-file CREDENTIALS \
+      --storage-class STORAGE_CLASS
 
 The example above uses the following arguments:
 
@@ -153,14 +154,6 @@ The example above uses the following arguments:
        remote storage tier. Specify the name in all-caps, e.g. ``GCS_TIER``.
        This value is required in the next step.
 
-   * - :mc-cmd:`CREDENTIALS <mc ilm tier add --credentials-file>`
-     - The `credential file
-       <https://cloud.google.com/docs/authentication/getting-started>`__ for a
-       user on the remote GCS tier. The specified user credentials *must*
-       correspond to a GCS user with the required
-       :ref:`permissions 
-       <minio-lifecycle-management-transition-to-gcs-permissions-remote>`.
-
    * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
      - The name of the bucket on the :abbr:`GCS (Google Cloud Storage)` storage
        backend to which MinIO transitions objects.
@@ -175,8 +168,27 @@ The example above uses the following arguments:
        MinIO recommends specifying this optional prefix for remote storage tiers
        which contain other data, including transitioned objects from other MinIO
        deployments. This prefix should provide a clear reference back to the
-       source MinIO deployment to faciliate ease of operations related to
+       source MinIO deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
+
+   * - :mc-cmd:`CREDENTIALS <mc ilm tier add --credentials-file>`
+     - The `credential file
+       <https://cloud.google.com/docs/authentication/getting-started>`__ for a
+       user on the remote GCS tier. The specified user credentials *must*
+       correspond to a GCS user with the required
+       :ref:`permissions 
+       <minio-lifecycle-management-transition-to-gcs-permissions-remote>`.
+
+   * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
+     - The GCS storage class MinIO applies to objects transitioned to the GCS bucket.
+       MinIO *requires* the remote GCS storage class implement immediate object retrieval with no rehydration or manual intervention required.
+       MinIO recommends on of the following GCS storage classes:
+
+       - ``STANDARD``
+       - ``NEARLINE``
+       - ``COLDLINE``
+
+       For more information, see :gcs-docs:`GCS storage class <storage-classes>`.
 
 
 3) Create and Apply the Transition Rule

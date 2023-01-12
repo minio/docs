@@ -194,19 +194,20 @@ The command accepts the following arguments:
 .. mc-cmd:: --account-name
    :optional:
 
-   The account name for a user on the remote Azure tier. 
-   The user must have permission to perform read/write/list/delete operations on the remote bucket or bucket prefix.
-      
+   The :azure-docs:`Storage Account <storage/common/storage-account-overview>` to use as the remote storage resource.
+
    Required if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure``. 
    This option has no effect for any other value of ``TIER_TYPE``.
 
-   MinIO does *not* support changing the account name associated to an Azure remote tier. 
-   Azure storage backends are tied to the account, such that changing the account would change the storage backend and prevent access to any objects transitioned to the original account/backend.
+   MinIO does *not* support changing the storage account name associated to an Azure remote tier. 
+   Azure storage backends are tied to the storage account, such that changing this value would change the storage backend and prevent access to any objects transitioned to the original account/backend.
 
 .. mc-cmd:: --account-key
    :optional:
 
-   The account key for the :mc-cmd:`~mc ilm tier add --account-name` associated to the remote Azure tier.
+   The corresponding shared account key for the :mc-cmd:`~mc ilm tier add --account-name` associated to the remote Azure tier.
+
+   The account key must have an assigned Azure policy with the required :ref:`permissions <minio-lifecycle-management-transition-to-azure-permissions-remote>`.
 
    Required if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure``. 
    This option has no effect for any other value of ``TIER_TYPE``.
