@@ -18,11 +18,6 @@ the deployment. MinIO automatically migrates data from the decommissioned pool
 to the remaining pools in the deployment based on the ratio of free space
 available in each pool.
 
-When upgrading an older set of hardware, add the new hardware before decommissioning the old hardware.
-See :ref:`Expand a Distributed Deployment <expand-minio-distributed>` for details.
-
-Adding the new hardware first allows the decommissioning process to drain content into the new hardware.
-
 During the decommissioning process, MinIO routes read operations (e.g. ``GET``,
 ``LIST``, ``HEAD``) normally. MinIO routes write operations (e.g. ``PUT``,
 versioned ``DELETE``) to the remaining "active" pools in the deployment.
@@ -57,16 +52,6 @@ a :ref:`distributed <deploy-minio-distributed>` MinIO deployment with
 
 Prerequisites
 -------------
-
-Add New hardware
-~~~~~~~~~~~~~~~~
-
-Adding new hardware is not required.
-However, if you intend to replace the old hardware, add the new hardware first.
-
-This allows MinIO to take advantage and use the resources available on the new hardware when draining the old pool.
-
-See :ref:`Expand a Distributed Deployment <expand-minio-distributed>` for details.
 
 Networking and Firewalls
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -146,6 +131,18 @@ has a tiering configuration.
 
 Considerations
 --------------
+
+Replacing a Server Pool
+~~~~~~~~~~~~~~~~~~~~~~~
+
+For hardware upgrade cycles where you replace old pool hardware with a new pool, you should :ref:`add the new pool through expansion <expand-minio-distributed>` before starting the decommissioning of the old pool.
+Adding the new pool first allows the decommission process to transfer objects in a balanced way across all available pools, both existing and new.
+
+Complete any planned :ref:`hardware expansion <expand-minio-distributed>` prior to decommissioning older hardware pools.
+
+Decommissioning requires that a cluster's topology remain stable throughout the pool draining process.
+Do **not** attempt to perform expansion and decommission changes in a single step.
+
 
 Decommissioning Ignores Delete Markers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
