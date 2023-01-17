@@ -19,8 +19,8 @@ Prerequisites
 MinIO Kubernetes Operator and Plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedures on this page *requires* a valid installation of the MinIO Kubernetes Operator and assumes the local host has a matching installation of the MinIO Kubernetes Operator.
-This procedure assumes the latest stable Operator and Plugin version |operator-version-stable|.
+This procedure on this page *requires* a valid installation of the MinIO Kubernetes Operator and assumes the local host has a matching installation of the MinIO Kubernetes Operator.
+This procedure assumes the latest stable Operator and Plugin version, |operator-version-stable|.
 
 See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 

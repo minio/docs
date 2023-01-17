@@ -132,6 +132,18 @@ has a tiering configuration.
 Considerations
 --------------
 
+Replacing a Server Pool
+~~~~~~~~~~~~~~~~~~~~~~~
+
+For hardware upgrade cycles where you replace old pool hardware with a new pool, you should :ref:`add the new pool through expansion <expand-minio-distributed>` before starting the decommissioning of the old pool.
+Adding the new pool first allows the decommission process to transfer objects in a balanced way across all available pools, both existing and new.
+
+Complete any planned :ref:`hardware expansion <expand-minio-distributed>` prior to decommissioning older hardware pools.
+
+Decommissioning requires that a cluster's topology remain stable throughout the pool draining process.
+Do **not** attempt to perform expansion and decommission changes in a single step.
+
+
 Decommissioning Ignores Delete Markers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
