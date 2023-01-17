@@ -6,46 +6,106 @@ automatically install MinIO to the necessary system paths and create a
 ``systemd`` service file for running MinIO automatically. MinIO strongly
 recommends using RPM or DEB installation routes.
 
-.. tab-set::
 
-   .. tab-item:: RPM (RHEL)
-      :sync: rpm
+.. dropdown:: amd64 (Intel or AMD 64-bit processors)
+   :open:
 
-      Use the following commands to download the latest stable MinIO RPM and
-      install it.
+   Use one of the following options to download the MinIO server installation file for a machine running Linux on an Intel or AMD 64-bit processor.
 
-      .. code-block:: shell
-         :class: copyable
-         :substitutions:
+   .. tab-set::
+   
+      .. tab-item:: RPM (RHEL)
+         :sync: rpm
+   
+         Use the following commands to download the latest stable MinIO RPM and
+         install it.
+   
+         .. code-block:: shell
+            :class: copyable
+            :substitutions:
+   
+            wget |minio-rpm| -O minio.rpm
+            sudo dnf install minio.rpm
+   
+      .. tab-item:: DEB (Debian/Ubuntu)
+         :sync: deb
+   
+         Use the following commands to download the latest stable MinIO DEB and
+         install it:
+   
+         .. code-block:: shell
+            :class: copyable
+            :substitutions:
+   
+            wget |minio-deb| -O minio.deb
+            sudo dpkg -i minio.deb
+   
+      .. tab-item:: Binary
+         :sync: binary
+   
+         Use the following commands to download the latest stable MinIO binary and
+         install it to the system ``$PATH``:
+   
+         .. code-block:: shell
+            :class: copyable
+   
+            wget https://dl.min.io/server/minio/release/linux-amd64/minio
+            chmod +x minio
+            sudo mv minio /usr/local/bin/
 
-         wget |minio-rpm| -O minio.rpm
-         sudo dnf install minio.rpm
+.. dropdown:: arm64 (Apple M1/M2 or other ARM 64-bit processors)
+   
+   Use one of the following options to download the MinIO server installation file for a machine running Linux on an ARM 64-bit processor, such as the Apple M1 or M2.
 
-   .. tab-item:: DEB (Debian/Ubuntu)
-      :sync: deb
+   .. tab-set::
+   
+      .. tab-item:: RPM (RHEL)
+         :sync: rpm
+   
+         Use the following commands to download the latest stable MinIO RPM and
+         install it.
+   
+         .. code-block:: shell
+            :class: copyable
+            :substitutions:
+   
+            wget |minio-rpmarm64| -O minio.rpm
+            sudo dnf install minio.rpm
+   
+      .. tab-item:: DEB (Debian/Ubuntu)
+         :sync: deb
+   
+         Use the following commands to download the latest stable MinIO DEB and
+         install it:
+   
+         .. code-block:: shell
+            :class: copyable
+            :substitutions:
+   
+            wget |minio-debarm64| -O minio.deb
+            sudo dpkg -i minio.deb
+   
+      .. tab-item:: Binary
+         :sync: binary
+   
+         Use the following commands to download the latest stable MinIO binary and
+         install it to the system ``$PATH``:
+   
+         .. code-block:: shell
+            :class: copyable
+   
+            wget https://dl.min.io/server/minio/release/linux-arm64/minio
+            chmod +x minio
+            MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password ./minio server /mnt/data --console-address ":9001"
 
-      Use the following commands to download the latest stable MinIO DEB and
-      install it:
+.. dropdown:: Other Architectures
 
-      .. code-block:: shell
-         :class: copyable
-         :substitutions:
+   MinIO also supports additional architectures:
 
-         wget |minio-deb| -O minio.deb
-         sudo dpkg -i minio.deb
+   - ppc64le
+   - s390x
 
-   .. tab-item:: Binary
-      :sync: binary
-
-      Use the following commands to download the latest stable MinIO binary and
-      install it to the system ``$PATH``:
-
-      .. code-block:: shell
-         :class: copyable
-
-         wget https://dl.min.io/server/minio/release/linux-amd64/minio
-         chmod +x minio
-         sudo mv minio /usr/local/bin/
+   For instructions to download the binary, RPM, or DEB files for those architectures, see the `MinIO download page <https://min.io/download#/linux?ref=docs-install>`__.
 
 .. end-install-minio-binary-desc
 

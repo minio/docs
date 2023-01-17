@@ -285,6 +285,8 @@ rst_prolog = """
 .. |minio-latest| replace:: MINIOLATEST
 .. |minio-rpm| replace:: RPMURL
 .. |minio-deb| replace:: DEBURL
+.. |minio-rpmarm64| replace:: RPMARM64URL
+.. |minio-debarm64| replace:: DEBARM64URL
 .. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
