@@ -64,6 +64,14 @@ Table of Deprecated Admin Commands
      - Replacement Command
      - Version of Change
 
+   * - ``mc admin replicate edit``
+     - :mc:`mc admin replicate update`
+     - mc RELEASE.2023-01-11T03-14-16Z
+
+   * - ``mc admin replicate remove``
+     - :mc:`mc admin replicate rm`
+     - mc RELEASE.2023-01-11T03-14-16Z
+
    * - ``mc admin tier add``
      - :mc:`mc ilm tier add`
      - mc RELEASE.2022-12-24T15-21-38Z
@@ -95,6 +103,8 @@ Table of Deprecated Admin Commands
    * - ``mc admin bucket quota``
      - :mc-cmd:`mc quota clear`, :mc-cmd:`mc quota info`, :mc-cmd:`mc quota set`
      - mc RELEASE.2022-12-13T00-23-28Z
+
+
 
 
 

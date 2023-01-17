@@ -123,6 +123,7 @@ Syntax
    Valid call types include:
 
    - ``batch-replication``
+   - ``bootstrap``
    - ``decommission``
    - ``healing``
    - ``internal``
@@ -130,6 +131,7 @@ Syntax
    - ``rebalance``
    - ``replication-resync``
    - ``s3``
+   - ``scanner``
    - ``storage``
 
    If not specified, MinIO returns call types of ``s3``.

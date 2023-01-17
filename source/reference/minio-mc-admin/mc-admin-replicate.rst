@@ -12,6 +12,11 @@
 
 .. mc:: mc admin replicate
 
+.. versionchanged:: RELEASE.2023-01-11T03-14-16Z
+
+   - ``mc admin replicate edit`` renamed to :mc-cmd:`mc admin replicate update`
+   - ``mc admin replicate remove`` renamed to :mc-cmd:`mc admin replicate rm`
+
 Description
 -----------
 
@@ -53,20 +58,20 @@ The :mc-cmd:`mc admin replicate` command has the following subcommands:
    * - :mc-cmd:`mc admin replicate add`
      - Create a new site replication configuration or expand an existing configuration.
 
-   * - :mc-cmd:`mc admin replicate edit`
-     - Edits the endpoint of the specified peer site in the site replication configuration.
-
    * - :mc-cmd:`mc admin replicate info`
      - Returns information about site replication configuration.
-
-   * - :mc-cmd:`mc admin replicate remove`
-     - Removes an entire site replication configuration or one or more peer sites from participating in site replication.
 
    * - :mc-cmd:`mc admin replicate resync`
      - Resynchronizes content from one site to a second site if the second site has lost data.
 
+   * - :mc-cmd:`mc admin replicate rm`
+     - Removes an entire site replication configuration or one or more peer sites from participating in site replication.
+
    * - :mc-cmd:`mc admin replicate status`
      - Displays the status for :ref:`replicable data <minio-site-replication-what-replicates>` across participating sites.
+
+   * - :mc-cmd:`mc admin replicate update`
+     - Modify the endpoint of the specified peer site in the site replication configuration.
 
 Syntax
 ------
@@ -122,10 +127,14 @@ Syntax
       The deployments to add must be empty.
 
 
-.. mc-cmd:: edit
+.. mc-cmd:: update
    :fullpath:
 
    Modifies the endpoint used for an existing peer site participating in site replication.
+
+   .. versionchanged:: RELEASE.2023-01-11T03-14-16Z
+
+      ``mc admin replicate edit`` renamed to ``mc admin replicate update``.
 
    .. tab-set::
 
@@ -134,7 +143,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc admin replicate edit                                                   \
+            mc admin replicate update                                                   \
                                minio2                                                 \
                                --deployment-id c1758167-4426-454f-9aae-5c3dfdf6df64   \
                                --endpoint https://minio2:9000
@@ -145,7 +154,7 @@ Syntax
 
          .. code-block:: shell
 
-            mc [GLOBALFLAGS] admin replicate edit                       \
+            mc [GLOBALFLAGS] admin replicate update                       \
                                         ALIAS                           \
                                         --deployment-id [deploymentID]  \
                                         --endpoint [newEndpoint]
@@ -167,8 +176,12 @@ Syntax
       
       The new endpoint or URL to associate with the peer site.
 
-.. mc-cmd:: remove
+.. mc-cmd:: rm
    :fullpath:
+
+   .. versionchanged:: RELEASE.2023-01-11T03-14-16Z
+
+      The ``mc admin replicate remove`` subcommand renamed to ``mc admin replicate rm``.
 
    Removes one or more sites from a site replication configuration.
 
@@ -184,9 +197,9 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc admin replicate remove   \
-                               minio2   \
-                               --all    \
+            mc admin replicate rm      \
+                               minio2  \
+                               --all   \
                                --force
 
          Remove the sites with alias names ``minio5`` and ``minio6`` from an existing site replication configuration that includes `minio2`
@@ -194,11 +207,11 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc admin replicate remove   \
-                               minio2   \
-                               minio5    \
-                               minio6    \
-                               --force  \
+            mc admin replicate rm      \
+                               minio2  \
+                               minio5  \
+                               minio6  \
+                               --force
         
       .. tab-item:: SYNTAX
          
@@ -206,11 +219,11 @@ Syntax
 
          .. code-block:: shell
             
-            mc [GLOBALFLAGS] admin remove       \
-                                   TARGET       \
-                                   ALIAS1       \
-                                   [ALIAS2...]  \
-                                   --all        \
+            mc [GLOBALFLAGS] admin rm          \
+                                   TARGET      \
+                                   ALIAS1      \
+                                   [ALIAS2...] \
+                                   --all       \
                                    --force
 
    .. mc-cmd:: TARGET

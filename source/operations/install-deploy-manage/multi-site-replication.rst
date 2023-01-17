@@ -434,11 +434,11 @@ If a peer site changes its hostname, you can modify the replication configuratio
             mc admin replicate info <ALIAS>
          
       
-      #. Update the site's endpoint with :mc-cmd:`mc admin replicate edit`
+      #. Update the site's endpoint with :mc-cmd:`mc admin replicate update`
       
          .. code-block:: shell
 
-            mc admin replicate edit ALIAS --deployment-id [DEPLOYMENT-ID] --endpoint [NEW-ENDPOINT]
+            mc admin replicate update ALIAS --deployment-id [DEPLOYMENT-ID] --endpoint [NEW-ENDPOINT]
 
          Replace [DEPLOYMENT-ID] with the deployment ID of the site to update.
          
@@ -482,11 +482,11 @@ You can re-add the site at a later date, but you must first completely wipe buck
    .. tab-item:: Command Line
       :sync: cli
 
-      Use :mc-cmd:`mc admin replicate remove`
+      Use :mc-cmd:`mc admin replicate rm`
 
       .. code-block:: shell
 
-         mc admin replicate remove ALIAS PEER_TO_REMOVE --force
+         mc admin replicate rm ALIAS PEER_TO_REMOVE --force
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of any peer site in the replication configuration.
 
