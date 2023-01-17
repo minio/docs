@@ -20,6 +20,9 @@ The command also supports using a private mirror server for environments where t
 
 .. end-mc-admin-update-desc
 
+After running the command, a prompt displays to confirm the update.
+Type ``y`` and ``[ENTER]`` to confirm and proceed with the update.
+
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
 
@@ -62,7 +65,9 @@ Syntax
 .. code-block:: shell
    :class: copyable
 
-   mc admin update ALIAS [MIRROR_URL]
+   mc admin update ALIAS         \
+                   [MIRROR_URL]  \
+                   [--yes]             
 
 :mc-cmd:`mc admin update` supports the following arguments:
 
@@ -78,3 +83,7 @@ Syntax
    
    The mirror URL of the ``minio`` server binary to use for updating MinIO servers in the :mc-cmd:`~mc admin update ALIAS` deployment.
 
+.. mc-cmd:: --yes, -y
+   :optional:
+
+   Pass this flag to confirm the update and bypass the confirmation prompt.

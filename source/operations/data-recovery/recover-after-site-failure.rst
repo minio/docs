@@ -47,14 +47,14 @@ If a peer site fails, such as due to a major disaster or long power outage, you 
 The following procedure can restore data in scenarios where :ref:`site replication <minio-site-replication-overview>` was active prior to the site loss.
 This procedure assumes a *total loss* of one or more peer sites versus replication lag or delays due to latency or transient deployment downtime.
 
-1. Remove the failed site from the MinIO site replication configuration using the :mc-cmd:`mc admin replicate remove` command with the ``--force`` option. 
+1. Remove the failed site from the MinIO site replication configuration using the :mc-cmd:`mc admin replicate rm` command with the ``--force`` option. 
    
    The following command force-removes an unhealthy peer site from the replication configuration:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin replicate remove HEALTHY_PEER UNHEALTHY_PEER --force
+      mc admin replicate rm HEALTHY_PEER UNHEALTHY_PEER --force
 
    - Replace ``HEALTHY_PEER`` with the :ref:`alias <alias>` of any healthy peer in the replication configuration
 
@@ -70,7 +70,7 @@ This procedure assumes a *total loss* of one or more peer sites versus replicati
 
    .. warning::
 
-      The :mc-cmd:`mc admin replicate remove --force` command only operates on the online or healthy nodes in the site replication configuration.
+      The :mc-cmd:`mc admin replicate rm --force` command only operates on the online or healthy nodes in the site replication configuration.
       The removed offline MinIO deployment retains its original replication configuration, such that if the deployment resumes normal operations it would continue replication operations to its configured peer sites.
 
       If you plan to re-use the hardware for the site replication configuration, you **must** completely wipe the drives for the deployment before re-initializing MinIO and adding the site back to the replication configuration.

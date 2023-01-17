@@ -33,9 +33,9 @@ The command has the following syntax:
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] license update                 \
-                            ALIAS                  \
-                            LICENSE-FILE-WITH-PATH \
+   mc [GLOBALFLAGS] license update                   \
+                            ALIAS                    \
+                            [LICENSE-FILE-WITH-PATH] \
                             [--airgap]
 
 Parameters
@@ -47,9 +47,11 @@ Parameters
    The :ref:`alias <alias>` of the MinIO deployment.
 
 .. mc-cmd:: LICENSE-FILE-WITH-PATH
-   :required:
+   :optional:
 
    The path (relative to the current working directory) and file name of the key to use to update the deployment's license.
+
+   If not passed with the command, MinIO checks the license file on SUBNET and automatically updates it.
    
 .. mc-cmd:: --airgap
    :optional:

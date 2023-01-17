@@ -482,11 +482,11 @@ You can re-add the site at a later date, but you must first completely wipe buck
    .. tab-item:: Command Line
       :sync: cli
 
-      Use :mc-cmd:`mc admin replicate remove`
+      Use :mc-cmd:`mc admin replicate rm`
 
       .. code-block:: shell
 
-         mc admin replicate remove ALIAS PEER_TO_REMOVE --force
+         mc admin replicate rm ALIAS PEER_TO_REMOVE --force
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of any peer site in the replication configuration.
 

@@ -306,6 +306,12 @@ Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --watch` to continuously mirror obj
 Behavior
 --------
 
+Mirror Continues on Failed Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If an object of the same name exists on the target, MinIO outputs an error for the duplicate object.
+``mc mirror`` continues to mirror other objects from the source to the destination after the error.
+
 MinIO Trims Empty Prefixes on Object Removal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
