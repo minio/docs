@@ -189,6 +189,8 @@ sync-minio-version:
 	@echo "Retrieving current MinIO version"
 	$(eval DEB = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
 	$(eval RPM = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
+	$(eval DEBARM64 = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".arm64.DEB.download' | sed "s|linux-arm64|linux-arm64/archive|g"))
+	$(eval RPMARM64 = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".arm64.RPM.download' | sed "s|linux-arm64|linux-arm64/archive|g"))
 	$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
 
 	@$(eval kname = $(shell uname -s))
@@ -198,11 +200,15 @@ sync-minio-version:
 		sed -i "" "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
 		sed -i "" "s|DEBURL|${DEB}|g" source/conf.py; \
 		sed -i "" "s|RPMURL|${RPM}|g" source/conf.py; \
+		sed -i "" "s|DEBARM64URL|${DEBARM64}|g" source/conf.py; \
+		sed -i "" "s|RPMARM64URL|${RPMARM64}|g" source/conf.py; \
 		;; \
 	*) \
 		sed -i "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
 		sed -i "s|DEBURL|${DEB}|g" source/conf.py; \
 		sed -i "s|RPMURL|${RPM}|g" source/conf.py; \
+		sed -i "s|DEBARM64URL|${DEBARM64}|g" source/conf.py; \
+		sed -i "s|RPMARM64URL|${RPMARM64}|g" source/conf.py; \
 		;; \
 	esac
 
