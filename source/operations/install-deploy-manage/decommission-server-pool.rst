@@ -18,6 +18,11 @@ the deployment. MinIO automatically migrates data from the decommissioned pool
 to the remaining pools in the deployment based on the ratio of free space
 available in each pool.
 
+When upgrading an older set of hardware, add the new hardware before decommissioning the old hardware.
+See :ref:`Expand a Distributed Deployment <expand-minio-distributed>` for details.
+
+Adding the new hardware first allows the decommissioning process to drain content into the new hardware.
+
 During the decommissioning process, MinIO routes read operations (e.g. ``GET``,
 ``LIST``, ``HEAD``) normally. MinIO routes write operations (e.g. ``PUT``,
 versioned ``DELETE``) to the remaining "active" pools in the deployment.
@@ -52,6 +57,16 @@ a :ref:`distributed <deploy-minio-distributed>` MinIO deployment with
 
 Prerequisites
 -------------
+
+Add New hardware
+~~~~~~~~~~~~~~~~
+
+Adding new hardware is not required.
+However, if you intend to replace the old hardware, add the new hardware first.
+
+This allows MinIO to take advantage and use the resources available on the new hardware when draining the old pool.
+
+See :ref:`Expand a Distributed Deployment <expand-minio-distributed>` for details.
 
 Networking and Firewalls
 ~~~~~~~~~~~~~~~~~~~~~~~~

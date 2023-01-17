@@ -256,6 +256,8 @@ those appropriate for your deployment.
 Review the :ref:`expand-minio-distributed-prereqs` before starting this
 procedure.
 
+Complete any planned hardware expansion prior to :ref:`decommissioning older hardware pools <minio-decommissioning>`.
+
 1) Install the MinIO Binary on Each Node in the New Server Pool
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
