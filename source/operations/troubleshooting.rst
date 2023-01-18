@@ -79,6 +79,18 @@ Registering Your MinIO Deployment with SUBNET
 
       For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-license-register-airgap>` of the :mc:`mc license register` documentation.
 
+.. _minio-subnet-license-file-download:
+
+Download License File
+~~~~~~~~~~~~~~~~~~~~~
+
+Download the license file from SUBNET on a machine with access to the Internet.
+   
+#. Log in to |SUBNET|
+#. Go to the :guilabel:`Deployments` tab
+#. Select the deployment from the list
+#. Select the :guilabel:`License` number near the top of the page to display the :guilabel:`Cluster License Key`
+#. Select :guilabel:`Download`
 
 SUBNET Issues
 -------------

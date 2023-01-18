@@ -15,6 +15,12 @@ Description
 
 Use the :mc-cmd:`mc license update` command to replace a license key for a deployment.
 
+.. versionchanged:: RELEASE.2023-01-18T04-36-38Z
+
+   For deployments registered for |SUBNET|, MinIO automatically checks for and updates the license every month.
+
+If not passed with the command, MinIO checks the license file on SUBNET and automatically updates it.
+
 Examples
 --------
 
@@ -51,7 +57,7 @@ Parameters
 
    The path (relative to the current working directory) and file name of the key to use to update the deployment's license.
 
-   If not passed with the command, MinIO checks the license file on SUBNET and automatically updates it.
+   See the :ref:`troubleshooting page <minio-subnet-license-file-download>` for instructions on downloading the license file.
    
 .. mc-cmd:: --airgap
    :optional:

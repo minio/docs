@@ -11,11 +11,6 @@
 .. mc:: mc support register
 .. mc:: mc license register
 
-.. note::
-
-   .. versionchanged:: RELEASE.2022-07-15T09-20-55Z
-
-   ``mc license register`` replaces the ``mc support register`` command.
 
 Description
 -----------
@@ -72,7 +67,6 @@ Register a MinIO deployment at alias ``minio3`` on SUBNET that does not have dir
 #. Copy the API token that displays
 #. Back in the terminal, paste or enter the API token to complete the registration process
 
-
 Syntax
 ------
       
@@ -110,10 +104,21 @@ Parameters
    If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
 
 
-
 Global Flags
 ~~~~~~~~~~~~
 
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-globals
    :end-before: end-minio-mc-globals
+
+Behavior
+--------
+
+Automatic License Updates
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: RELEASE.2023-01-18T04-36-38Z
+
+Once registered for |SUBNET|, MinIO automatically checks for and updates the license every month.
+
+In airgapped or other environments where the server does not have direct access to the internet, use :mc-cmd:`mc license update` with the path to the file to update the registration.
