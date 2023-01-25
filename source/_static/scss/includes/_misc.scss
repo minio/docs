@@ -206,6 +206,8 @@
   --sd-color-shadow: none;
   --sd-color-card-border: var(--theme-light-bg);
   --sd-color-card-border-hover: var(--theme-light-hover-bg);
+  
+  font-size: $font-size-sm;
 }
 
 .sd-card-hover {
@@ -215,7 +217,7 @@
 }
 
 .sd-card-body {
-  padding: 1.5rem;
+  padding: 1.35rem;
 
   img {
     border: 0;
@@ -223,10 +225,14 @@
 }
 
 .sd-card-title {
-  line-height: 100%;
-  margin: -0.2rem 0 1rem;
+  margin-bottom: 1rem;
+  color: var(--headings-color);
 }
 
+[data-lightbox] img {
+  padding: 0;
+  margin-bottom: 1rem;
+}
 
 // -----------------------------
 // Copy button
@@ -271,5 +277,84 @@ button.copybtn {
     &:after {
       content: "Copied";
     }
+  }
+}
+
+// -----------------------------
+// Carousel
+// -----------------------------
+.sd-cards-carousel {
+  border-radius: $border-radius;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+
+  @include hide-scrollbars();
+
+  &.sd-card-cols-1 {
+    & > .sd-card {
+      width: 100%;
+    }
+  }
+
+  &.sd-card-cols-2 {
+    & > .sd-card {
+      width: 50%;
+    }
+  }
+
+  &.sd-card-cols-3 {
+    & > .sd-card {
+      width: 33.333%;
+    }
+  }
+
+  &[class*=sd-card-cols] > .sd-card {
+    --sd-color-card-border: none
+    border-radius: 0;
+    margin: 0;
+    padding: 0.25rem;
+
+    .sd-card-body {
+      border: 1px solid var(--table-border-color);
+      border-radius: $border-radius;
+    }
+  }
+}
+
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel-arrow {
+  background-color: var(--body-bg);
+  border: 1px solid var(--table-border-color);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: background-color 300ms, opacity 200ms;
+  color: var(--headings-color);
+
+  &:hover {
+    background-color: var(--content-nav-bg);
+  }
+
+  &.inactive {
+    opacity: 0;
+  }
+
+  &.carousel-arrow--left {
+    left: -1rem;
+  }
+
+  &.carousel-arrow--right {
+    right: -1rem;
+    transform: rotate(180deg) translateY(50%);
   }
 }
