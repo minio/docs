@@ -113,7 +113,7 @@ Configure One-Way Bucket Replication Using the MinIO Console
 
 .. _minio-bucket-replication-one-way-minio-cli-procedure:
 
-Configure One-Way Bucket Replication Using the Command Line (:mc:`mc`)
+Configure One-Way Bucket Replication Using the Command Line ``mc``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure uses the :ref:`aliases <alias>` ``SOURCE`` and ``REMOTE`` to reference each MinIO deployment being configured for replication. 

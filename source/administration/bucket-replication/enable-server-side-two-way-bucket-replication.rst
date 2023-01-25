@@ -150,7 +150,7 @@ B) Create a replication rule from the second deployment back to the first deploy
 
 .. _minio-bucket-replication-two-way-minio-cli-procedure:
 
-Configure Two-Way Bucket Replication Using the Command Line (:mc:`mc`)
+Configure Two-Way Bucket Replication Using the Command Line ``mc``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure creates two-way, active-active replication between two MinIO deployments.

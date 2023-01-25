@@ -149,7 +149,7 @@ Repeat this test on each deployment by copying a new unique file and checking th
 
 .. _minio-bucket-replication-multi-site-minio-cli-procedure:
 
-Configure Multi-Site Bucket Replication Using the Command Line (:mc:`mc`)
+Configure Multi-Site Bucket Replication Using the Command Line ``mc``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each MinIO deployment being configured for replication. 
