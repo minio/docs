@@ -29,14 +29,6 @@ For more complete information on selecting erasure code parity, see :ref:`minio-
 
 Use the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator?ref=docs>`__ when planning and designing your MinIO deployment to explore the effect of erasure code settings on your intended topology.
 
-Zero-Parity Deployments
------------------------
-
-Starting with :minio-release:`RELEASE.2022-06-02T02-11-04Z`, MinIO supports a Single-Node Single-Drive (SNSD) topology with a zero-parity erasure coding backend. 
-
-Erasure Coding protections do not apply to the zero-parity backend of |SNSD| deployments.
-Zero-parity deployments depend on the underlying storage for resiliency and availability.
-
 .. _minio-ec-erasure-set:
 
 Erasure Sets
