@@ -426,4 +426,70 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     }
   })();
+
+  // --------------------------------------------------
+  // Carousel
+  // --------------------------------------------------
+  (function () {
+    const carousels = document.querySelectorAll(".sd-cards-carousel");
+    var scrollLength = 1000;
+
+    const arrowIcon = `<svg width="13" height="10" viewBox="0 0 12 10">
+                    <path d="M1.707 4.137H11.5c.277 0 .5.23.5.516 0 .137-.051.27-.145.363s-.223.152-.355.152H1.707l3.148 3.254a.53.53 0 0 1 0 .73c-.098.102-.223.152-.355.152s-.258-.051-.355-.152l-4-4.133c-.195-.203-.195-.531 0-.734l4-4.133A.5.5 0 0 1 4.5 0a.5.5 0 0 1 .355.152.53.53 0 0 1 0 .73zm0 0" fill-rule="evenodd" fill="currentColor" />
+                  </svg>`;
+
+    function toggleArrows(elem, arrowLeft, arrowRight) {
+      var scrollWidth = elem.scrollWidth;
+      var scrollLeft = elem.scrollLeft + elem.clientWidth;
+
+      // Set the scroll length based on the window width
+      window.innerWidth < 1400 ? scrollLength = 500 : scrollLength = 1000;
+
+      scrollWidth - scrollLeft <= 1
+        ? arrowRight.classList.add("inactive")
+        : arrowRight.classList.remove("inactive");
+      scrollLeft === elem.clientWidth
+        ? arrowLeft.classList.add("inactive")
+        : arrowLeft.classList.remove("inactive");
+    }
+
+    if(carousels.length > 0) {
+      carousels.forEach((item) => {
+        // Get the amount of columns
+        const colsAmount = item.className.match(/(^|\s)sd-card-cols-(\w+)/g).pop().split('-').pop();
+
+        // Wrap the carousel in a div
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("carousel-wrapper");
+        item.insertAdjacentElement("beforebegin", wrapper);
+
+        // Create the arrows
+        const arrowLeft = document.createElement("button");
+        arrowLeft.classList.add("carousel-arrow", "carousel-arrow--left");
+        arrowLeft.innerHTML = arrowIcon;
+        arrowLeft.onclick = function() {
+          item.scrollLeft -= scrollLength/colsAmount;
+        }
+
+        const arrowRight = document.createElement("button");
+        arrowRight.classList.add("carousel-arrow", "carousel-arrow--right");
+        arrowRight.innerHTML = arrowIcon;
+        arrowRight.onclick = function() {
+          item.scrollLeft += scrollLength/colsAmount;
+        }
+        
+        wrapper.insertAdjacentElement("afterbegin", arrowLeft);
+        wrapper.insertAdjacentElement("beforeend", arrowRight);
+
+        // Move the carousel into the wrapper
+        wrapper.appendChild(item);
+
+        // Toggle arrows on manual scroll
+        item.addEventListener("scroll", () => {
+          toggleArrows(item, arrowLeft, arrowRight);
+        });
+        toggleArrows(item, arrowLeft, arrowRight);
+      });
+    }
+  })();
 });
