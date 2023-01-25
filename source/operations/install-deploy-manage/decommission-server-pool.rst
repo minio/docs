@@ -167,6 +167,20 @@ nodes in the deployment at around the same time.
    :start-after: start-nondisruptive-upgrade-desc
    :end-before: end-nondisruptive-upgrade-desc
 
+Behavior
+--------
+
+Final Listing Check
+~~~~~~~~~~~~~~~~~~~
+
+At the end of the decommission process, MinIO checks for a list of items on the pool.
+If the list returns empty, MinIO marks the decommission as successfully completed.
+If any objects return, MinIO returns an error that the decommission process failed.
+
+If the decommission fails, customers should open a |SUBNET| issue for further assistance before retrying the decommission. 
+Community users without a SUBNET subscription can retry the decommission process or seek additional support through the `MinIO Community Slack <https://slack.min.io/>`__.
+MinIO provides Community Support at best-effort only and provides no :abbr:`SLA <Service Level Agreement>` around responsiveness.
+
 .. _minio-decommissioning-server-pool:
 
 Decommission a Server Pool
