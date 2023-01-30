@@ -13,8 +13,12 @@
 Description
 -----------
 
+.. start-mc-support-profile-desc
+
 The :mc:`mc support profile` command runs a system profile for your deployment.
 The results of the profile can provide insight into the MinIO server process running on a given node.
+
+.. end-mc-support-profile-desc
 
 The resulting report is intended for use by MinIO Engineering.
 You can upload the report to |subnet|.

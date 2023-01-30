@@ -1,4 +1,5 @@
 .. _minio-mc-policy-set:
+.. _minio-mc-anonymous-set:
 
 ====================
 ``mc anonymous set``
@@ -10,18 +11,17 @@
    :local:
    :depth: 2
 
-.. mc:: mc anonymous
 .. mc:: mc anonymous set
 
 Syntax
 ------
 
-.. start-mc-policy-set-desc
+.. start-mc-anonymous-set-desc
 
 The :mc:`mc anonymous set` command sets anonymous (i.e. unauthenticated or public)
 access :ref:`policies <minio-policy>` for a bucket. 
 
-.. end-mc-policy-set-desc
+.. end-mc-anonymous-set-desc
 
 Buckets with anonymous policies allow clients to access the bucket contents
 and perform actions consistent with the specified policy without 

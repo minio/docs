@@ -13,8 +13,12 @@
 Description
 -----------
 
+.. start-mc-license-info-desc
+
 The :mc-cmd:`mc license info` command displays information about the MinIO deployment's license status.
 Specifically, whether the deployment uses the AGPLv3 Open Source license of the `MinIO Commercial License <https://min.io/product/subnet?ref=docs>`__.
+
+.. end-mc-license-info-desc
 
 You must register your deployment with MinIO |SUBNET| to activate your commercial license.
 

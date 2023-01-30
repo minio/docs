@@ -13,7 +13,11 @@
 Description
 -----------
 
+.. start-mc-license-update-desc
+
 Use the :mc-cmd:`mc license update` command to replace a license key for a deployment.
+
+.. end-mc-license-update-desc
 
 .. versionchanged:: RELEASE.2023-01-18T04-36-38Z
 

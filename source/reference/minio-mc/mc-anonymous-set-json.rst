@@ -15,13 +15,13 @@
 Syntax
 ------
 
-.. start-mc-policy-set-json-desc
+.. start-mc-anonymous-set-json-desc
 
 The :mc:`mc anonymous set-json` command sets anonymous (i.e. unauthenticated or
 public) access :ref:`policies <minio-policy>` for a bucket using using an IAM
 :s3-docs:`JSON policy document <using-iam-policies>`. 
 
-.. end-mc-policy-set-json-desc
+.. end-mc-anonymous-set-json-desc
 
 Buckets with anonymous policies allow clients to access the bucket contents
 and perform actions consistent with the specified policy without 

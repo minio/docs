@@ -15,12 +15,12 @@
 Syntax
 ------
 
-.. start-mc-policy-links-desc
+.. start-mc-anonymous-links-desc
 
 The :mc:`mc anonymous links` retrieves the HTTP URL for anonymous (i.e.
 unauthenticated or public) access to a bucket. 
 
-.. end-mc-policy-links-desc
+.. end-mc-anonymous-links-desc
 
 Buckets with anonymous policies allow clients to access the bucket contents
 and perform actions consistent with the specified policy without 

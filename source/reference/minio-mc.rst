@@ -151,38 +151,20 @@ The following table lists :mc-cmd:`mc` commands:
    * - Command
      - Description
 
-   * - | :mc:`mc alias set`
-       | :mc:`mc alias remove`
-       | :mc:`mc alias list`
-     - The ``mc alias`` commands provide a convenient interface for
-       managing the list of S3-compatible hosts that :mc-cmd:`mc` can connect to
-       and run operations against.
-
-       :mc-cmd:`mc` commands that operate on S3-compatible services *require*
-       specifying an alias for that service.
+   * - :mc:`mc alias`
+     - .. include:: /reference/minio-mc/mc-alias.rst
+          :start-after: start-mc-alias-desc
+          :end-before: end-mc-alias-desc
      
-   * - | :mc:`mc anonymous set`
-       | :mc:`mc anonymous set-json`
-       | :mc:`mc anonymous get`
-       | :mc:`mc anonymous get-json`
-       | :mc:`mc anonymous list`
-       | :mc:`mc anonymous links`
-
-     - The :mc:`mc anonymous` command supports setting or removing anonymous
-       :ref:`policies <minio-policy>` to a bucket and its contents. Buckets with
-       anonymous policies allow public access where clients can perform any
-       action granted by the policy without :ref:`authentication
-       <minio-authentication-and-identity-management>`.
+   * - :mc:`mc anonymous`
+     - .. include:: /reference/minio-mc/mc-anonymous.rst
+          :start-after: start-mc-anonymous-desc
+          :end-before: end-mc-anonymous-desc
      
-   * - | :mc:`mc batch generate`
-       | :mc:`mc batch start`
-       | :mc:`mc batch list`
-       | :mc:`mc batch status`
-       | :mc:`mc batch describe`
-     - The ``mc batch`` commands allow you to run one or more job tasks on a MinIO deployment.
-       Specify the jobs to run in a YAML-formatted file you can start generating with :mc:`mc batch generate`. 
-       Use :mc:`mc batch start` to when you are ready to begin the job(s) defined in the file.
-       Display current jobs with :mc:`mc batch list`, see current status with :mc:`mc batch status`, and output the full definition for a current job with :mc:`mc batch describe`.
+   * - :mc:`mc batch`
+     - .. include:: /reference/minio-mc/mc-batch.rst
+          :start-after: start-mc-batch-desc
+          :end-before: end-mc-batch-desc
 
    * - :mc:`mc cat`
      - .. include:: /reference/minio-mc/mc-cat.rst
@@ -199,23 +181,15 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-diff-desc
           :end-before: end-mc-diff-desc
      
-   * - | :mc:`mc encrypt set`
-       | :mc:`mc encrypt info`
-       | :mc:`mc encrypt clear`
-     - The ``mc encrypt`` command sets, updates, or disables the default bucket
-       Server-Side Encryption (SSE) mode. MinIO automatically encrypts objects
-       using the specified SSE mode.
+   * - :mc:`mc encrypt`
+     - .. include:: /reference/minio-mc/mc-encrypt.rst
+          :start-after: start-mc-encrypt-desc
+          :end-before: end-mc-encrypt-desc
      
-   * - | :mc:`mc event add`
-       | :mc:`mc event remove`
-       | :mc:`mc event list`
-     - The ``mc event`` command supports adding, removing, and listing
-       the bucket event notifications.
-
-       MinIO automatically sends triggered events to the configured notification
-       targets. MinIO supports notification targets like AMQP (RabbitMQ), Redis,
-       ElasticSearch, NATS and PostgreSQL. See :ref:`MinIO Bucket Notifications
-       <minio-bucket-notifications>` for more information.
+   * - :mc:`mc event`
+     - .. include:: /reference/minio-mc/mc-event.rst
+          :start-after: start-mc-event-desc
+          :end-before: end-mc-event-desc
      
    * - :mc:`mc find`
      - .. include:: /reference/minio-mc/mc-find.rst
@@ -227,26 +201,20 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-head-desc
           :end-before: end-mc-head-desc
      
-   * - | :mc:`mc ilm tier`
-       | :mc:`mc ilm rule`
-       | :mc:`mc ilm restore`
-     - The ``mc ilm`` commands manage :ref:`object lifecycle management rules <minio-lifecycle-management>` on a MinIO deployment. 
-
-       Use these command to create tiers, create :ref:`tiering <minio-lifecycle-management-tiering>` rules, and manage :ref:`expiration <minio-lifecycle-management-expiration>` rules for objects on a bucket.
+   * - :mc:`mc ilm`
+     - .. include:: /reference/minio-mc/mc-ilm.rst
+          :start-after: start-mc-ilm-desc
+          :end-before: end-mc-ilm-desc
      
-   * - | :mc:`mc legalhold set`
-       | :mc:`mc legalhold info`
-       | :mc:`mc legalhold clear`
-     - The ``mc legalhold`` command sets, removes, or retrieves 
-       the :ref:`Object Legal Hold (WORM) <minio-object-locking-legalhold>`
-       settings for object(s).
+   * - :mc:`mc legalhold`
+     - .. include:: /reference/minio-mc/mc-legalhold.rst
+          :start-after: start-mc-legalhold-desc
+          :end-before: end-mc-legalhold-desc
 
-   * - | :mc:`mc license register` 
-       | :mc:`mc license info`
-       | :mc:`mc license update`
-       | :mc:`mc license unregister` 
-     - The ``mc license`` commands work with cluster registration for |SUBNET|. 
-       Use the commands to register a deployment, unregister a deployment, display information about the cluster's current license, or update the license key for a cluster.
+   * - :mc:`mc license`
+     - .. include:: /reference/minio-mc/mc-license.rst
+          :start-after: start-mc-license-desc
+          :end-before: end-mc-license-desc
 
    * - :mc:`mc ls`
      - .. include:: /reference/minio-mc/mc-ls.rst
@@ -278,56 +246,35 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-pipe-desc
           :end-before: end-mc-pipe-desc  
 
-   * - | :mc:`mc quota set`
-       | :mc:`mc quota info`
-       | :mc:`mc quota clear`
-
-     - The ``mc quota`` commands configure, display, or remove a hard quota limit on a bucket. 
-       When a bucket with a quota configured reaches the specified limit, MinIO rejects further ``PUT`` requests for the bucket. 
+   * - :mc:`mc quota`
+     - .. include:: /reference/minio-mc/mc-quota.rst
+          :start-after: start-mc-quota-desc
+          :end-before: end-mc-quota-desc  
      
    * - :mc:`mc rb`
      - .. include:: /reference/minio-mc/mc-rb.rst
           :start-after: start-mc-rb-desc
           :end-before: end-mc-rb-desc
      
-   * - | :mc:`mc retention set`
-       | :mc:`mc retention info`
-       | :mc:`mc retention clear`
-
-     - The :mc:`mc retention` command configures the 
-       :ref:`Write-Once Read-Many (WORM) locking <minio-object-locking>`
-       settings for an object or object(s) in a bucket. You can also set the
-       default object lock settings for a bucket, where all objects without
-       explicit object lock settings inherit the bucket default.
-
-   * - | :mc:`mc replicate add`
-       | :mc:`mc replicate diff`
-       | :mc:`mc replicate export`
-       | :mc:`mc replicate import`
-       | :mc:`mc replicate ls`
-       | :mc:`mc replicate resync`
-       | :mc:`mc replicate rm`
-       | :mc:`mc replicate status`
-       | :mc:`mc replicate update`
-
-     - The :mc:`mc replicate <mc replicate add>` command configures and
-       manages the :ref:`Server-Side Bucket Replication
-       <minio-bucket-replication-serverside>` for a MinIO deployment, including
-       :ref:`active-active replication configurations
-       <minio-bucket-replication-serverside-twoway>` and
-       :ref:`resynchronization <minio-replication-behavior-resync>`.
+   * - :mc:`mc replicate`
+     - .. include:: /reference/minio-mc/mc-replicate.rst
+          :start-after: start-mc-replicate-desc
+          :end-before: end-mc-replicate-desc
      
+   * - :mc:`mc retention`
+     - .. include:: /reference/minio-mc/mc-retention.rst
+          :start-after: start-mc-retention-desc
+          :end-before: end-mc-retention-desc
+
    * - :mc:`mc rm`
      - .. include:: /reference/minio-mc/mc-rm.rst
           :start-after: start-mc-rm-desc
           :end-before: end-mc-rm-desc
      
-   * - | :mc:`mc share download`
-       | :mc:`mc share upload`
-       | :mc:`mc share list`
-     - The :mc:`mc share download` and :mc:`mc share upload`
-       commands generate presigned URLs for downloading and uploading
-       objects to a MinIO bucket.
+   * - :mc:`mc share`
+     - .. include:: /reference/minio-mc/mc-share.rst
+          :start-after: start-mc-share-desc
+          :end-before: end-mc-share-desc
      
    * - :mc:`mc sql`
      - .. include:: /reference/minio-mc/mc-sql.rst
@@ -339,23 +286,15 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-stat-desc
           :end-before: end-mc-stat-desc
 
-   * - | :mc:`mc support callhome`
-       | :mc:`mc support diag`
-       | :mc:`mc support inspect`
-       | :mc:`mc support perf`
-       | :mc:`mc support profile`
-       | :mc:`mc support proxy`
-       | :mc:`mc support top`
-     - The MinIO Client ``mc support`` commands provides tools for analyzing deployment health or performance and for running diagnostics.
-       You can also upload generated health reports for further analysis by MinIO engineering.
-       The ``mc support`` commands require an active |SUBNET| registration.
+   * - :mc:`mc support`
+     - .. include:: /reference/minio-mc/mc-support.rst
+          :start-after: start-mc-support-desc
+          :end-before: end-mc-support-desc
 
-   * - | :mc:`mc tag set`
-       | :mc:`mc tag remove`
-       | :mc:`mc tag list`
-
-     - The :mc:`mc tag` command adds, removes, and lists tags associated to
-       a bucket or object.
+   * - :mc:`mc tag`
+     - .. include:: /reference/minio-mc/mc-tag.rst
+          :start-after: start-mc-tag-desc
+          :end-before: end-mc-tag-desc
      
    * - :mc:`mc tree`
      - .. include:: /reference/minio-mc/mc-tree.rst
@@ -524,82 +463,37 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    :titlesonly:
    :hidden:
    
-   /reference/minio-mc/mc-alias-set
-   /reference/minio-mc/mc-alias-list
-   /reference/minio-mc/mc-alias-remove
-   /reference/minio-mc/mc-anonymous-set
-   /reference/minio-mc/mc-anonymous-get
-   /reference/minio-mc/mc-anonymous-list
-   /reference/minio-mc/mc-anonymous-links
-   /reference/minio-mc/mc-anonymous-get-json
-   /reference/minio-mc/mc-anonymous-set-json
-   /reference/minio-mc/mc-batch-describe
-   /reference/minio-mc/mc-batch-generate
-   /reference/minio-mc/mc-batch-list
-   /reference/minio-mc/mc-batch-start
-   /reference/minio-mc/mc-batch-status
+   /reference/minio-mc/mc-alias
+   /reference/minio-mc/mc-anonymous
+   /reference/minio-mc/mc-batch
    /reference/minio-mc/mc-cat
    /reference/minio-mc/mc-cp
    /reference/minio-mc/mc-diff
-   /reference/minio-mc/mc-encrypt-set
-   /reference/minio-mc/mc-encrypt-info
-   /reference/minio-mc/mc-encrypt-clear
-   /reference/minio-mc/mc-event-add
-   /reference/minio-mc/mc-event-list
-   /reference/minio-mc/mc-event-remove
+   /reference/minio-mc/mc-encrypt
+   /reference/minio-mc/mc-event
    /reference/minio-mc/mc-find
    /reference/minio-mc/mc-head
-   /reference/minio-mc/mc-ilm-restore
-   /reference/minio-mc/mc-ilm-rule
-   /reference/minio-mc/mc-ilm-tier
-   /reference/minio-mc/mc-legalhold-set
-   /reference/minio-mc/mc-legalhold-info
-   /reference/minio-mc/mc-legalhold-clear
-   /reference/minio-mc/mc-license-info
-   /reference/minio-mc/mc-license-register
-   /reference/minio-mc/mc-license-unregister
-   /reference/minio-mc/mc-license-update
+   /reference/minio-mc/mc-ilm
+   /reference/minio-mc/mc-legalhold
+   /reference/minio-mc/mc-license
    /reference/minio-mc/mc-ls
    /reference/minio-mc/mc-mb
    /reference/minio-mc/mc-mirror
    /reference/minio-mc/mc-mv
    /reference/minio-mc/mc-od
    /reference/minio-mc/mc-pipe
-   /reference/minio-mc/mc-quota-clear
-   /reference/minio-mc/mc-quota-info
-   /reference/minio-mc/mc-quota-set
+   /reference/minio-mc/mc-quota
    /reference/minio-mc/mc-rb
-   /reference/minio-mc/mc-replicate-add
-   /reference/minio-mc/mc-replicate-diff
-   /reference/minio-mc/mc-replicate-ls
-   /reference/minio-mc/mc-replicate-update
-   /reference/minio-mc/mc-replicate-resync
-   /reference/minio-mc/mc-replicate-rm
-   /reference/minio-mc/mc-replicate-status
-   /reference/minio-mc/mc-replicate-export
-   /reference/minio-mc/mc-replicate-import
-   /reference/minio-mc/mc-retention-set
-   /reference/minio-mc/mc-retention-info
-   /reference/minio-mc/mc-retention-clear
+   /reference/minio-mc/mc-replicate
+   /reference/minio-mc/mc-retention
    /reference/minio-mc/mc-rm
-   /reference/minio-mc/mc-share-download
-   /reference/minio-mc/mc-share-upload
-   /reference/minio-mc/mc-share-list
+   /reference/minio-mc/mc-share
    /reference/minio-mc/mc-sql
    /reference/minio-mc/mc-stat
-   /reference/minio-mc/mc-support-callhome
-   /reference/minio-mc/mc-support-diag
-   /reference/minio-mc/mc-support-inspect
-   /reference/minio-mc/mc-support-perf
-   /reference/minio-mc/mc-support-profile
-   /reference/minio-mc/mc-support-proxy
-   /reference/minio-mc/mc-support-top
-   /reference/minio-mc/mc-tag-set
-   /reference/minio-mc/mc-tag-list
-   /reference/minio-mc/mc-tag-remove
+   /reference/minio-mc/mc-support
+   /reference/minio-mc/mc-tag
    /reference/minio-mc/mc-tree
    /reference/minio-mc/mc-undo
    /reference/minio-mc/mc-update
    /reference/minio-mc/mc-version
    /reference/minio-mc/mc-watch
-   /reference/minio-mc-deprecated

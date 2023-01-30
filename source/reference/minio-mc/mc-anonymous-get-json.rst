@@ -15,12 +15,12 @@
 Syntax
 ------
 
-.. start-mc-policy-get-json-desc
+.. start-mc-anonymous-get-json-desc
 
 The :mc:`mc anonymous get-json` command gets anonymous (i.e. unauthenticated or
 public) access :ref:`policies <minio-policy>` for a bucket. 
 
-.. end-mc-policy-get-json-desc
+.. end-mc-anonymous-get-json-desc
 
 Buckets with anonymous policies allow clients to access the bucket contents
 and perform actions consistent with the specified policy without 

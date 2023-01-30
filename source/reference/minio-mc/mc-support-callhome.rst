@@ -17,7 +17,12 @@
 Description
 -----------
 
+.. start-mc-support-callhome-desc
+
 The :mc-cmd:`mc support callhome` command allows the enabling or disabling of reports from a deployment to |SUBNET|.
+
+.. end-mc-support-callhome-desc
+
 All ``mc support`` commands require an active SUBNET subscription.
 
 When enabled, MinIO can send logs to SUBNET in real time, diagnostics every 24 hours, or both.

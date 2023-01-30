@@ -10,7 +10,6 @@
    :local:
    :depth: 2
 
-.. mc:: mc replicate
 .. mc:: mc replicate add
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z 

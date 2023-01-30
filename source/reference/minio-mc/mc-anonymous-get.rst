@@ -15,12 +15,12 @@
 Syntax
 ------
 
-.. start-mc-policy-get-desc
+.. start-mc-anonymous-get-desc
 
 The :mc:`mc anonymous get` command gets the anonymous (i.e. unauthenticated or
 public) access :ref:`policies <minio-policy>` for a bucket. 
 
-.. end-mc-policy-get-desc
+.. end-mc-anonymous-get-desc
 
 Buckets with anonymous policies allow clients to access the bucket contents
 and perform actions consistent with the specified policy without 

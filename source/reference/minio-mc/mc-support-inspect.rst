@@ -17,7 +17,12 @@
 Description
 -----------
 
+.. start-mc-support-inspect-desc
+
 The :mc:`mc support inspect` command collects the data and metadata associated to objects at the specified path.
+
+.. end-mc-support-inspect-desc
+
 MinIO assembles this data from each backend drive storing an :ref:`erasure shard <minio-erasure-coding>` for each specified object.
 
 The command produces an encrypted zip file that includes all matching files with their respective *host+drive+path*.

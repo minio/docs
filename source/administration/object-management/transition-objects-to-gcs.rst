@@ -29,7 +29,7 @@ Install :mc:`mc` on a machine with network access to both source and destination
 clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
 instructions on downloading and installing ``mc``.
 
-Use the :mc:`mc alias` command to create an alias for the source MinIO cluster.
+Use the :mc:`mc alias set` command to create an alias for the source MinIO cluster.
 Alias creation requires specifying an access key for a user on the source and
 destination clusters. The specified users must have :ref:`permissions
 <minio-lifecycle-management-transition-to-gcs-permissions>` for configuring and

@@ -50,7 +50,7 @@ You must have network access and log in credentials with correct permissions to 
 
 You can access the deployments by logging in to the :ref:`MinIO Console <minio-console>` for each deployment or by installing :mc:`mc` and using the command line.
 
-If using the command line, use the :mc:`mc alias` command to create an alias for each MinIO deployment. 
+If using the command line, use the :mc:`mc alias set` command to create an alias for each MinIO deployment. 
 Alias creation requires specifying an access key for a user on the deployment. 
 This user **must** have permission to create and manage users and policies on the deployment. 
 

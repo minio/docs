@@ -19,14 +19,14 @@
 Syntax
 ------
 
-.. start-mc-retention-desc
+.. start-mc-retention-clear-desc
 
 The :mc:`mc retention clear` command removes the 
 :ref:`Write-Once Read-Many (WORM) locking <minio-object-locking>` settings for
 an object or object(s) in a bucket. You can also remove the default object lock
 settings for a bucket.
 
-.. end-mc-retention-desc
+.. end-mc-retention-clear-desc
 
 To change the retention status of an object under 
 :ref:`legal hold <minio-object-locking-legalhold>`, use 

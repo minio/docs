@@ -8,7 +8,6 @@
    :local:
    :depth: 1
 
-.. mc:: mc support
 .. mc:: mc support diag
 
 .. include:: /includes/common-mc-support.rst
@@ -18,7 +17,12 @@
 Description
 -----------
 
+.. start-mc-support-diag-desc
+
 The :mc-cmd:`mc support diag` command generates a health report for a MinIO deployment.
+
+.. end-mc-support-diag-desc
+
 For deployments registered with the MinIO subscription network (|subnet-short|), the command can automatically upload the health report for analysis.
 
 The resulting health report is intended for use by MinIO Engineering via SUBNET and may contain internal or private data points.

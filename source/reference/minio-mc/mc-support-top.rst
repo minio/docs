@@ -24,9 +24,11 @@ Description
 The :mc:`mc support top` command returns statistics for distributed
 MinIO deployments, similar to the output of the ``top`` command in a shell. 
 
-:mc:`mc support top` is not supported on single-node single-drive MinIO deployments.
-
 .. end-mc-support-top-desc
+
+.. note::
+
+   :mc:`mc support top` is not supported on single-node single-drive MinIO deployments.
 
 :mc-cmd:`mc support top` has the following subcommands:
 

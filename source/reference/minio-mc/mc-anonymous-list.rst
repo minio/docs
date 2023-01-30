@@ -15,12 +15,12 @@
 Syntax
 ------
 
-.. start-mc-policy-list-desc
+.. start-mc-anonymous-list-desc
 
 The :mc:`mc anonymous list` retrieves all anonymous (i.e. unauthenticated or
 public) access policies for a bucket. 
 
-.. end-mc-policy-list-desc
+.. end-mc-anonymous-list-desc
 
 Buckets with anonymous policies allow clients to access the bucket contents
 and perform actions consistent with the specified policy without 
