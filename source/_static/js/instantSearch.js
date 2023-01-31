@@ -379,8 +379,8 @@ window.addEventListener("DOMContentLoaded", () => {
             platform = "kubernetes/openshift";
           } else if (activePlatform === "eks") {
             platform = "kubernetes/eks";
-          } else if (activePlatform === "gks") {
-            platform = "kubernetes/gks";
+          } else if (activePlatform === "gke") {
+            platform = "kubernetes/gke";
           } else if (activePlatform === "aks") {
             platform = "kubernetes/aks";
           } else {
