@@ -373,10 +373,16 @@ window.addEventListener("DOMContentLoaded", () => {
           var platform = "";
           var environment = location.hostname === "localhost" || location.hostname === "127.0.0.1" ? "dev" : "prod";
 
-          if (activePlatform === "kubernetes") {
+          if (activePlatform === "k8s") {
             platform = "kubernetes/upstream";
           } else if (activePlatform === "openshift") {
             platform = "kubernetes/openshift";
+          } else if (activePlatform === "eks") {
+            platform = "kubernetes/eks";
+          } else if (activePlatform === "gks") {
+            platform = "kubernetes/gks";
+          } else if (activePlatform === "aks") {
+            platform = "kubernetes/aks";
           } else {
             platform = activePlatform;
           }
