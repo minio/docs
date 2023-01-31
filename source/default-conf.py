@@ -134,7 +134,7 @@ elif tags.has("container"):
             excludes = i['excludes']
             break
 
-elif tags.has("k8s") and not (tags.has("openshift") or tags.has("eks") or tags.has("gks") or tags.has("aks")):
+elif tags.has("k8s") and not (tags.has("openshift") or tags.has("eks") or tags.has("gke") or tags.has("aks")):
     html_baseurl = 'https://min.io/docs/minio/kubernetes/upstream/'
     with open('url-excludes.yaml','r') as f:
       for i in (yaml.safe_load_all(f)):
