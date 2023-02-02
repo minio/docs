@@ -10,7 +10,6 @@
    :local:
    :depth: 2
 
-.. mc:: mc retention
 .. mc:: mc retention set
 
 .. replacements for mc retention set
@@ -24,7 +23,7 @@
 Syntax
 ------
 
-.. start-mc-retention-desc
+.. start-mc-retention-set-desc
 
 The :mc:`mc retention set` command configures the
 :ref:`Write-Once Read-Many (WORM) locking <minio-object-locking>` settings for
@@ -32,10 +31,10 @@ an object or object(s) in a bucket. You can also set the default object lock
 settings for a bucket, where all objects without explicit object lock settings
 inherit the bucket default.
 
-.. end-mc-retention-desc
+.. end-mc-retention-set-desc
 
 To lock an object under :ref:`legal hold <minio-object-locking-legalhold>`, 
-use :mc:`mc legalhold`.
+use :mc:`mc legalhold set`.
 
 :mc:`mc retention set` *requires* that the specified bucket has object locking
 enabled. You can **only** enable object locking at bucket creation. See

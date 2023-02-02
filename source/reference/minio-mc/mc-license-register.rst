@@ -15,7 +15,11 @@
 Description
 -----------
 
+.. start-mc-license-register-desc
+
 The :mc-cmd:`mc license register` command connects your deployment with your |SUBNET| account.
+
+.. end-mc-license-register-desc
 
 After registration, you can upload deployment health reports directly to SUBNET using the :mc-cmd:`mc support diag` command.
 

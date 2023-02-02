@@ -10,7 +10,6 @@
    :local:
    :depth: 2
 
-.. mc:: mc tag
 .. mc:: mc tag set
 
 .. |command| replace:: :mc:`mc tag set`
@@ -66,8 +65,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The :ref:`alias <alias>` for a MinIO deployment and the
+   The :ref:`alias <alias>` for a MinIO deployment and the
    full path to the object on which to apply the tag (e.g. bucket and path to
    object). For example:
 
@@ -76,8 +76,9 @@ Parameters
       mc tag set myminio/mybucket/object.txt
 
 .. mc-cmd:: TAGS
+   :required:
 
-   *Required* An ampersand-seperated (``&``) list of key-value pairs
+   An ampersand-seperated (``&``) list of key-value pairs
    (``KEY=VALUE``), where each pair represents one tag to assign to the object.
    For example:
 

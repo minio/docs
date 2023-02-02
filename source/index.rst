@@ -172,6 +172,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       /developers/security-token-service
       /reference/minio-mc
       /reference/minio-mc-admin
+      /reference/minio-mc-deprecated
       /reference/minio-server/minio-server
       /integrations/integrations
 

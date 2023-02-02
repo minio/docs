@@ -13,8 +13,11 @@
 Description
 -----------
 
+.. start-mc-support-proxy-desc
+
 Use the :mc-cmd:`mc support proxy` command to configure a proxy to use to communicate with |SUBNET|.
 
+.. end-mc-support-proxy-desc
 
 Examples
 --------

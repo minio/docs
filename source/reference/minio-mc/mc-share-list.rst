@@ -13,12 +13,12 @@
 Syntax
 -----------
 
-.. start-mc-share-upload-desc
+.. start-mc-share-list-desc
 
 The :mc:`mc share list` command displays any unexpired presigned URLs generated
 by :mc:`mc share upload` or :mc:`mc share download`
 
-.. end-mc-share-upload-desc
+.. end-mc-share-list-desc
 
 Applications can perform a ``PUT`` to retrieve the object from the URL. 
 

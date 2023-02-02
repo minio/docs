@@ -10,8 +10,6 @@
    :local:
    :depth: 2
 
-.. mc:: mc batch
-
 .. mc:: mc batch generate
 
 .. versionchanged:: MinIO RELEASE.2022-10-08T20-11-00Z or later

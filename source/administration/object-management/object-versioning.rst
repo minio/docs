@@ -243,7 +243,7 @@ enable versioning on only a prefix or subset of objects in a bucket.
       Toggle the :guilabel:`Versioning` field to enable versioning on the bucket.
 
       The MinIO Console also supports enabling versioning as part of bucket
-      creation. See :ref:`minio-console-admin-buckets` for more information on
+      creation. See :ref:`minio-console-buckets` for more information on
       bucket management using the MinIO Console.
 
    .. tab-item:: MinIO CLI
@@ -292,7 +292,7 @@ MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
 
       Select the :guilabel:`Versioning` field and follow the instructions to suspend versioning in the bucket.
 
-      See :ref:`minio-console-admin-buckets` for more information on bucket
+      See :ref:`minio-console-buckets` for more information on bucket
       management using the MinIO Console.
 
    .. tab-item:: MinIO CLI

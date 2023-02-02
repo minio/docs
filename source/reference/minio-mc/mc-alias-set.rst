@@ -12,7 +12,6 @@
    :local:
    :depth: 2
 
-.. mc:: mc alias
 .. mc:: mc alias set
 
 .. |command| replace:: :mc:`mc alias set`

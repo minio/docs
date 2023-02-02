@@ -10,7 +10,6 @@
    :local:
    :depth: 2
 
-.. mc:: mc legalhold
 .. mc:: mc legalhold set
 
 .. |command| replace:: :mc:`mc legalhold set`

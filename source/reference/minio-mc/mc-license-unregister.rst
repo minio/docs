@@ -14,9 +14,15 @@
 Description
 -----------
 
+.. start-mc-license-unregister-desc
+
 The :mc-cmd:`mc license unregister` command disconnects your deployment from your |SUBNET| account.
 
-After unregistering, you can no longer use the :mc:`mc support` commands.
+.. end-mc-license-unregister-desc
+
+.. important::
+
+   After unregistering, you can no longer use the :mc:`mc support` commands.
 
 
 Examples
