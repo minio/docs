@@ -143,6 +143,13 @@ Command Quick Reference
 
 The following table lists :mc-cmd:`mc` commands:
 
+.. note:: 
+
+   The MinIO Client also includes an administration extension for managing MinIO deployments. 
+   See :mc:`mc admin` for more complete documentation.
+
+   The below table does not include those commands.
+
 .. list-table::
    :header-rows: 1
    :widths: 30 70
@@ -151,17 +158,28 @@ The following table lists :mc-cmd:`mc` commands:
    * - Command
      - Description
 
-   * - :mc:`mc alias`
+   * - | :mc:`mc alias list`
+       | :mc:`mc alias remove`
+       | :mc:`mc alias set`
      - .. include:: /reference/minio-mc/mc-alias.rst
           :start-after: start-mc-alias-desc
           :end-before: end-mc-alias-desc
      
-   * - :mc:`mc anonymous`
+   * - | :mc:`mc anonymous get`
+       | :mc:`mc anonymous get-json`
+       | :mc:`mc anonymous links`
+       | :mc:`mc anonymous list`
+       | :mc:`mc anonymous set`
+       | :mc:`mc anonymous set-json`
      - .. include:: /reference/minio-mc/mc-anonymous.rst
           :start-after: start-mc-anonymous-desc
           :end-before: end-mc-anonymous-desc
      
-   * - :mc:`mc batch`
+   * - | :mc:`mc batch describe`
+       | :mc:`mc batch generate`
+       | :mc:`mc batch list`
+       | :mc:`mc batch start`
+       | :mc:`mc batch status`
      - .. include:: /reference/minio-mc/mc-batch.rst
           :start-after: start-mc-batch-desc
           :end-before: end-mc-batch-desc
@@ -181,12 +199,16 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-diff-desc
           :end-before: end-mc-diff-desc
      
-   * - :mc:`mc encrypt`
+   * - | :mc:`mc encrypt clear`
+       | :mc:`mc encrypt info`
+       | :mc:`mc encrypt set`
      - .. include:: /reference/minio-mc/mc-encrypt.rst
           :start-after: start-mc-encrypt-desc
           :end-before: end-mc-encrypt-desc
      
-   * - :mc:`mc event`
+   * - | :mc:`mc event add`
+       | :mc:`mc event list`
+       | :mc:`mc event remove`
      - .. include:: /reference/minio-mc/mc-event.rst
           :start-after: start-mc-event-desc
           :end-before: end-mc-event-desc
@@ -201,17 +223,34 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-head-desc
           :end-before: end-mc-head-desc
      
-   * - :mc:`mc ilm`
+   * - | :mc:`mc ilm restore`
+       | :mc:`mc ilm rule add`
+       | :mc:`mc ilm rule edit`
+       | :mc:`mc ilm rule export`
+       | :mc:`mc ilm rule import`
+       | :mc:`mc ilm rule ls`
+       | :mc:`mc ilm rule rm`
+       | :mc:`mc ilm tier add`
+       | :mc:`mc ilm tier check`
+       | :mc:`mc ilm tier info`
+       | :mc:`mc ilm tier ls`
+       | :mc:`mc ilm tier rm`
+       | :mc:`mc ilm tier update`
      - .. include:: /reference/minio-mc/mc-ilm.rst
           :start-after: start-mc-ilm-desc
           :end-before: end-mc-ilm-desc
      
-   * - :mc:`mc legalhold`
+   * - | :mc:`mc legalhold clear`
+       | :mc:`mc legalhold info`
+       | :mc:`mc legalhold set`
      - .. include:: /reference/minio-mc/mc-legalhold.rst
           :start-after: start-mc-legalhold-desc
           :end-before: end-mc-legalhold-desc
 
-   * - :mc:`mc license`
+   * - | :mc:`mc license info`
+       | :mc:`mc license register`
+       | :mc:`mc license unregister`
+       | :mc:`mc license update`
      - .. include:: /reference/minio-mc/mc-license.rst
           :start-after: start-mc-license-desc
           :end-before: end-mc-license-desc
@@ -246,7 +285,9 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-pipe-desc
           :end-before: end-mc-pipe-desc  
 
-   * - :mc:`mc quota`
+   * - | :mc:`mc quota clear`
+       | :mc:`mc quota info`
+       | :mc:`mc quota set`
      - .. include:: /reference/minio-mc/mc-quota.rst
           :start-after: start-mc-quota-desc
           :end-before: end-mc-quota-desc  
@@ -256,12 +297,22 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-rb-desc
           :end-before: end-mc-rb-desc
      
-   * - :mc:`mc replicate`
+   * - | :mc:`mc replicate add`
+       | :mc:`mc replicate diff`
+       | :mc:`mc replicate export`
+       | :mc:`mc replicate import`
+       | :mc:`mc replicate ls`
+       | :mc:`mc replicate resync`
+       | :mc:`mc replicate rm`
+       | :mc:`mc replicate status`
+       | :mc:`mc replicate update`
      - .. include:: /reference/minio-mc/mc-replicate.rst
           :start-after: start-mc-replicate-desc
           :end-before: end-mc-replicate-desc
      
-   * - :mc:`mc retention`
+   * - | :mc:`mc retention clear`
+       | :mc:`mc retention info`
+       | :mc:`mc retention set`
      - .. include:: /reference/minio-mc/mc-retention.rst
           :start-after: start-mc-retention-desc
           :end-before: end-mc-retention-desc
@@ -271,7 +322,9 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-rm-desc
           :end-before: end-mc-rm-desc
      
-   * - :mc:`mc share`
+   * - | :mc:`mc share download`
+       | :mc:`mc share list`
+       | :mc:`mc share upload`
      - .. include:: /reference/minio-mc/mc-share.rst
           :start-after: start-mc-share-desc
           :end-before: end-mc-share-desc
@@ -286,12 +339,22 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-stat-desc
           :end-before: end-mc-stat-desc
 
-   * - :mc:`mc support`
+   * - | :mc:`mc support callhome`
+       | :mc:`mc support diag`
+       | :mc:`mc support inspect`
+       | :mc:`mc support perf`
+       | :mc:`mc support profile`
+       | :mc:`mc support proxy`
+       | :mc:`mc support top api`
+       | :mc:`mc support top disk`
+       | :mc:`mc support top locks`
      - .. include:: /reference/minio-mc/mc-support.rst
           :start-after: start-mc-support-desc
           :end-before: end-mc-support-desc
 
-   * - :mc:`mc tag`
+   * - | :mc:`mc tag list`
+       | :mc:`mc tag remove`
+       | :mc:`mc tag set`
      - .. include:: /reference/minio-mc/mc-tag.rst
           :start-after: start-mc-tag-desc
           :end-before: end-mc-tag-desc
@@ -320,10 +383,6 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /reference/minio-mc/mc-watch.rst
           :start-after: start-mc-watch-desc
           :end-before: end-mc-watch-desc
-     
-
-:mc-cmd:`mc` also includes an administration extension for managing MinIO
-deployments. See :mc:`mc admin` for more complete documentation.
 
 .. _mc-configuration:
 
