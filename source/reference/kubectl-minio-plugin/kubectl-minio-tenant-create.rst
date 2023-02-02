@@ -70,20 +70,24 @@ Syntax
 
       .. code-block:: shell
 
-         kubectl minio tenant create                  \
-                              TENANT_NAME             \
-                              [--interactive]         \
-                              --capacity              \
-                              --servers               \
-                              --volumes               \
-                              [--enable-host-sharing] \
-                              [--image]               \
-                              [--image-pull-secret]   \
-                              [--kes-config]          \
-                              [--namespace]           \
-                              [--output]              \
-                              [--pool]                \
-                              [--storage-class] 
+         kubectl minio tenant create                      \
+                              TENANT_NAME                 \                          
+                              [--interactive]             \
+                              [--disable-tls]             \
+                              [--enable-audit-logs]       \
+                              [--enable-prometheus]       \
+                              [--expose-console-service]  \
+                              [--expose-minio-service]    \
+                              [--image]                   \
+                              [--image-pull-secret]       \
+                              [--kes-config]              \
+                              [--namespace]               \
+                              [--output]                  \
+                              [--pool]                    \
+                              [--storage-class]           \
+                              --capacity                  \
+                              --servers                   \
+                              --volumes                   \
 
 
 Flags
@@ -148,15 +152,93 @@ The command supports the following flags:
 
    If the specified number of volumes exceeds the number of unbound ``PV`` available on the cluster, :mc:`kubectl minio tenant create` hangs and waits until the required ``PV`` exist.
 
-.. mc-cmd:: --enable-host-sharing
+.. mc-cmd:: --disable-tls
    :optional:
 
-   .. important::
-   
-      To be used in testing environments only.
-      This flag is **not** supported in production environments.
-   
-   Disable pod anti-affinity to allow co-location of pods on a single node.
+   Disables automatic TLS certificate provisioning on the Tenant.
+
+.. mc-cmd:: --enable-audit-logs
+   :optional:
+
+   .. include:: /includes/common/common-k8s-deprecation-audit-prometheus.rst
+      :start-after: start-deprecate-audit-logs
+      :end-before: end-deprecate-audit-logs
+
+   Defaults to ``true``.
+
+   Deploys the MinIO Tenant with a PostgreSQL Pod which, combined with an additional auto-deployed service, enables Audit Logging in the Tenant Console.
+
+   You can control the configuration of the PostgreSQL pod using the following optional parameters:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 40 60
+      :width: 80%
+
+      * - Option
+        - Description
+
+      * - ``--audit-logs-disk-space <int>``
+        - Specify the amount of storage to provision for the PostgreSQL pod.
+          The Operator provisions a PVC requesting the specified amount of storage in gigabytes.
+
+          Defaults to ``5``
+
+          If no Persistent Volume can meet the PVC request, the pod fails to deploy.
+
+      * - ``--audit-logs-pg-image``
+        - Specify the Docker image to use for deploying the PostgreSQL pod.
+
+      * - ``--audit-logs-storage-class``
+        - Specify the storage class to assign to the generated PVC for the PostgreSQL Pod.
+
+   Specify ``false`` to deploy the Tenant without the PostgreSQL and Audit Logging Console feature.
+
+.. mc-cmd:: --enable-prometheus
+   :optional:
+
+   .. include:: /includes/common/common-k8s-deprecation-audit-prometheus.rst
+      :start-after: start-deprecate-prometheus
+      :end-before: end-deprecate-prometheus
+
+   Defaults to ``true``.
+
+   Deploys the MinIO Tenant with a Prometheus pod which enables the :ref:`MinIO Console Metrics <minio-console-monitoring>` view.
+
+   You can control the configuration of the Prometheus pod using the following optional parameters:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 40 60
+      :width: 80%
+
+      * - Option
+        - Description
+
+      * - ``--prometheus-disk-space <int>``
+        - Specify the amount of storage to provision for the Prometheus pod.
+          The Operator provisions a PVC requesting the specified amount of storage in gigabytes.
+
+          Defaults to ``5``.
+
+      * - ``--prometheus-image``
+        - Specify the Docker image to use for deploying the Prometheus pod.
+
+      * - ``--prometheus-storage-class``
+        - Specify the storage class to assign to the generated PVC for the Prometheus pod.
+
+
+.. mc-cmd:: --expose-console-service
+   :optional:
+
+   Directs the Operator to configure the MinIO Tenant Console service with the :kube-docs:`LoadBalancer <concepts/services-networking/service/#loadbalancer>` networking type. 
+   For Kubernetes clusters configured with a global load balancer, this option allows the Console to request an external IP address automatically.
+
+.. mc-cmd:: --expose-minio-service
+   :optional:
+
+   Directs the Operator to configure the MinIO API service with the :kube-docs:`LoadBalancer <concepts/services-networking/service/#loadbalancer>` networking type. 
+   For Kubernetes clusters configured with a global load balancer, this option allows the Console to request an external IP address automatically.
 
 .. mc-cmd:: --image
    :optional:
