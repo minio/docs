@@ -39,7 +39,8 @@ The command has the following syntax:
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] license unregister ALIAS
+   mc [GLOBALFLAGS] license unregister ALIAS       \
+                                       [--airgap]
 
 Parameters
 ~~~~~~~~~~
@@ -48,6 +49,14 @@ Parameters
    :required:
 
    The :ref:`alias <alias>` of the MinIO deployment.
+
+.. mc-cmd:: --airgap
+   :optional:
+
+   .. versionadded:: RELEASE.2023-01-28T20-29-38Z
+
+   Removes registration info from the deployment without also unregistering from SUBNET.
+   Use in environments without direct access to the Internet.
 
 
 Global Flags

@@ -98,7 +98,8 @@ Syntax
                                         [--access-key]  \
                                         [--secret-key]  \
                                         [--policy]      \
-                                        ALIAS
+                                        [--commment]    \
+                                        ALIAS           \
                                         USER
 
    .. mc-cmd:: ALIAS
@@ -131,6 +132,14 @@ Syntax
       :optional:
 
       The path to a :ref:`policy document <minio-policy>` to attach to the new access keys. The attached policy cannot grant access to any action or resource not explicitly allowed by the parent user's policies.
+
+   .. mc-cmd:: --comment
+      :optional:
+
+      .. versionadded:: RELEASE.2023-01-28T20-29-38Z
+
+      Add a note to the service account.
+      For example, you might specify the reason the service account exists.
 
 .. mc-cmd:: list
    :fullpath:

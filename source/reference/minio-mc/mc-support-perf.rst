@@ -77,7 +77,7 @@ The command does not specify the blocksize, so the default of 4MiB is used.
 Test Drive Speed Measurements with Custom Specifications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run drive read/write performance measurements on a cluster with alias ``minio1`` specificying a blocksize of 64KiB and data read/written from each drive of 2GiB.
+Run drive read/write performance measurements on a cluster with alias ``minio1`` specifying a blocksize of 64KiB and data read/written from each drive of 2GiB.
 
 .. code-block:: shell
    :class: copyable
@@ -100,61 +100,49 @@ Syntax
 .. mc-cmd:: drive
    :fullpath:
 
-Measure the read/write speed of the drives in a cluster.
+   Measure the read/write speed of the drives in a cluster.
 
-.. code-block:: shell
+   .. code-block:: shell
                
-   mc [GLOBAL FLAGS] support perf drive   \
-                   [--concurrent]         \
-                   [--verbose, -v]        \
-                   [--filesize]           \
-                   [--blocksize]          \
-                   [--serial]             \
-                   [--airgap]             \
-                   ALIAS
+      mc [GLOBAL FLAGS] support perf drive   \
+                      [--concurrent]         \
+                      [--verbose, -v]        \
+                      [--filesize]           \
+                      [--blocksize]          \
+                      [--serial]             \
+                      [--airgap]             \
+                      ALIAS
 
 .. mc-cmd:: object
    :fullpath:
 
-Measure the S3 peformance of reading and writing objects in a cluster.
+   Measure the S3 performance of reading and writing objects in a cluster.
 
-.. code-block:: shell
+   .. code-block:: shell
                
-   mc [GLOBAL FLAGS] support perf object  \
-                   [--duration]           \
-                   [--size]               \
-                   [--concurrent]         \
-                   [--verbose, -v]        \
-                   [--airgap]             \
-                   ALIAS  
+      mc [GLOBAL FLAGS] support perf object  \
+                      [--size]               \
+                      [--concurrent]         \
+                      [--verbose, -v]        \
+                      [--airgap]             \
+                      ALIAS  
             
 .. mc-cmd:: net
    :fullpath:
 
    Measure the network throughput of all nodes in a cluster.
 
-.. code-block:: shell
+   .. code-block:: shell
 
-   mc [GLOBAL FLAGS] support perf net  \
-                   [--concurrent]      \
-                   [--verbose, -v]     \
-                   [--serial]          \
-                   [--airgap]          \
-                   ALIAS
+      mc [GLOBAL FLAGS] support perf net  \
+                      [--concurrent]      \
+                      [--verbose, -v]     \
+                      [--serial]          \
+                      [--airgap]          \
+                      ALIAS
 
 Parameters
 ~~~~~~~~~~
-
-.. mc-cmd:: --duration
-   :optional:
-
-   Applies to the :mc-cmd:`~mc support perf object` command.
-
-   Specify the duration for the performance tests to run.
-
-   If not specified, the default value is ``10s``.
-
-   Use ``--duration <value>`` where ``<value>`` is a number and a unit of ``s`` for seconds, ``m`` for minutes.
 
 .. mc-cmd:: --airgap
    :optional:

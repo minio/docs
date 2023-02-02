@@ -50,6 +50,7 @@ tier, while the temporary copy becomes ``HEAD`` for that object.
                           [--recursive]    \
                           [--vid "string"] \
                           [--versions]     \
+                          [--encrypt-key]  \
                           ALIAS
 
       .. include:: /includes/common-minio-mc.rst
@@ -61,39 +62,46 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The MinIO :ref:`alias <alias>`, bucket, and path to the
-   archived object to restore.
+   The MinIO :ref:`alias <alias>`, bucket, and path to the archived object to restore.
 
    .. code-block:: shell
 
       mc ilm restore myminio/mybucket/object.txt
 
-
 .. mc-cmd:: --days                     
-   
+   :optional:
 
-   *Optional* The number of days after which MinIO expires the restored copy
-   of the archived object.
-
+   The number of days after which MinIO expires the restored copy of the archived object.
 
 .. mc-cmd:: --recursive, r                  
-   
+   :optional:
 
-   *Optional* Restores all objects under the specified prefix.
-
+   Restores all objects under the specified prefix.
 
 .. mc-cmd:: --versions                       
-   
+   :optional:
 
-   *Optional* Restores all versions of the object on the remote tier.
-
+   Restores all versions of the object on the remote tier.
 
 .. mc-cmd:: --version-id, vid  
+   :optional:
+
+   Restores the specified version of the object on the remote tier.
+
+.. mc-cmd:: --encrypt-key
+   :optional:
+
+   .. versionadded:: RELEASE.2023-01-28T20-29-38Z
+
+   Encrypt or decrypt objects using server-side encryption with client-specified keys. 
+   Specify key-value pairs as ``KEY=VALUE``.
    
+   - Each ``KEY`` represents a bucket or object. 
+   - Each ``VALUE`` represents the data key to use for encrypting object(s).
 
-   *Optional* Restores the specified version of the object on the remote tier.
-
+   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc ilm restore --encrypt-key` in double quotes ``"``.
 
 Global Flags
 ~~~~~~~~~~~~
