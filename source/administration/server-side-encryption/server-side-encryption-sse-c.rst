@@ -158,8 +158,7 @@ arguments for enabling SSE-S3 encryption:
    :class: copyable
 
    mc cp SOURCE/BUCKET/mydata.json TARGET/BUCKET/mydata.json  \
-      --encrypt-key "SOURCE/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo=" \
-      --encrypt-key "TARGET/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo="
+   --encrypt-key "SOURCE/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo=,TARGET/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo="
 
 - Replace :mc-cmd:`SOURCE/BUCKET <mc encrypt set ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment from which you are reading the
