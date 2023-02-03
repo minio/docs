@@ -67,23 +67,79 @@ The output resembles the following:
 4) Open the Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run the :mc:`kubectl minio proxy` command to temporarily forward traffic from
-the :ref:`MinIO Operator Console <minio-operator-console>` service to your 
-local machine:
+.. versionchanged:: Operator 4.5.8
 
-.. code-block:: shell
-   :class: copyable
+   The MinIO Operator Console implements websockets instead of http connections.
+   This protocol provides better performance at the cost of reduced compatibility with Kubernetes port forwarding behavior.
 
-   kubectl minio proxy
+   Users who encounter timeouts when using port forwarding should select from the tabbed list to view alternatives for connecting to the Operator Console
 
-The command output includes a JWT token you must use to log into the
-Operator Console. 
+.. tab-set::
 
-.. image:: /images/k8s/operator-dashboard.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: MinIO Operator Console
+   .. tab-item:: Port Forwarding
 
-You can deploy a new :ref:`MinIO Tenant <minio-k8s-deploy-minio-tenant>` from
-the Operator Dashboard.
+      Run the :mc:`kubectl minio proxy` command to temporarily forward traffic from
+      the :ref:`MinIO Operator Console <minio-operator-console>` service to your 
+      local machine:
+
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl minio proxy
+
+      The command output includes a JWT token you must use to log into the
+      Operator Console. 
+
+      .. image:: /images/k8s/operator-dashboard.png
+         :align: center
+         :width: 70%
+         :class: no-scaled-link
+         :alt: MinIO Operator Console
+
+      You can deploy a new :ref:`MinIO Tenant <minio-k8s-deploy-minio-tenant>` from
+      the Operator Dashboard.
+
+   .. tab-item:: Node Ports
+
+      Use the following command to identify the :kube-docs:`NodePorts <concepts/services-networking/service/#type-nodeport>` configured for the Operator Console.
+      If your local host does not have the ``jq`` utility installed, you can run the first command and locate the ``spec.ports`` section of the output.
+
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl get svc/console -n minio-operator -o json | jq -r '.spec.ports'
+
+      The output resembles the following:
+
+      .. code-block:: json
+
+         [
+            {
+               "name": "http",
+               "nodePort": 31055,
+               "port": 9090,
+               "protocol": "TCP",
+               "targetPort": 9090
+            },
+            {
+               "name": "https",
+               "nodePort": 31388,
+               "port": 9443,
+               "protocol": "TCP",
+               "targetPort": 9443
+            }
+         ]
+
+      Use the ``http`` or ``https`` port depending on whether you deployed the Operator with Console TLS enabled via :mc-cmd:`kubectl minio init --console-tls`.
+
+      Append the ``nodePort`` value to the externally-accessible IP address of a worker node in your Kubernetes cluster.
+
+      Use the following command to retrieve the JWT token necessary for logging into the Operator Console:
+
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl get secret/console-sa-secret -n minio-operator -o json | jq -r '.data.token' | base64 -d
+
+      
+

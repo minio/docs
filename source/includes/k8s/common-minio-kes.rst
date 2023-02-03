@@ -19,17 +19,9 @@ You can use either the MinIO Tenant Console or the MinIO :mc:`mc` CLI to enable 
 
    .. tab-item:: MinIO Tenant Console
 
-      You can manually :ref:`port forward <create-tenant-operator-forward-ports>` the MinIO Tenant Console service to your local host machine for simplified access:
-
-      .. code-block:: shell
-         :class: copyable
-
-         # Replace 'minio-tenant' with the name of the MinIO Tenant
-         # Replace '-n minio' with the namespace of the MinIO Tenant
-
-         kubectl port-forward svc/minio-tenant-console 9443:9443 -n minio
-
-      Open the MinIO Console by navigating to http://127.0.0.1:9443 in your preferred browser and logging in with the root credentials for the deployment.
+      Connect to the :ref:`MinIO Tenant Console service <create-tenant-connect-tenant>` and log in.
+      For clients internal to the Kubernetes cluster, you can specify the :kube-docs:`service DNS name <concepts/services-networking/dns-pod-service/#a-aaaa-records>`.
+      For clients external to the Kubernetes cluster, specify the hostname of the service exposed by Ingress, Load Balancer, or similar Kubernetes network control component.
 
       Once logged in, create a new Bucket and name it to your preference.
       Select the Gear :octicon:`gear` icon to open the management view.
@@ -44,34 +36,18 @@ You can use either the MinIO Tenant Console or the MinIO :mc:`mc` CLI to enable 
 
    .. tab-item:: MinIO CLI
 
-      You can manually :ref:`port forward <create-tenant-operator-forward-ports>` the ``minio`` service for temporary access via the local host.
-
-      Run this command in a separate Terminal or Shell:
-
-      .. code-block:: shell
-         :class: copyable
-
-         # Replace '-n minio' with the namespace of the MinIO deployment
-         # If you deployed the Tenant without TLS you may need to change the port range
-         
-         # You can validate the ports in use by running
-         #  kubectl get svc/minio -n minio
-
-         kubectl port forward svc/minio 443:443 -n minio
-
-      The following commands in a new Terminal or Shell window:
-      
-      - Create a new :ref:`alias <alias>` for the MinIO deployment
-      - Create a new bucket for storing encrypted data
-      - Enable SSE-KMS encryption on that bucket
+      Use the :ref:`MinIO API Service <create-tenant-connect-tenant>` to create a new :ref:`alias <alias>` for the MinIO deployment.
+      You can then use the :mc:`mc encrypt set` command to enable SSE-KMS encryption for a bucket:
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set k8s https://127.0.0.1:443 ROOTUSER ROOTPASSWORD
+         mc alias set k8s https://minio.minio-tenant-1.svc.cluster-domain.example:443 ROOTUSER ROOTPASSWORD
 
          mc mb k8s/encryptedbucket
          mc encrypt set SSE-KMS encrypted-bucket-key k8s/encryptedbucket
+
+      For clients external to the Kubernetes cluster, specify the hostname of the service exposed by Ingress, Load Balancer, or similar Kubernetes network control component.
 
       Write a file to the bucket using :mc:`mc cp` or any S3-compatible SDK with a ``PutObject`` function. 
       You can then run :mc:`mc stat` on the file to confirm the associated encryption metadata.
@@ -90,7 +66,8 @@ MinIO requires that the |EK| for a given bucket or object exist on the root KMS 
 You can use the :mc-cmd:`mc admin kms key create` command against the MinIO Tenant.
 
 You must ensure your local host can access the MinIO Tenant pods and services before using :mc:`mc` to manage the Tenant.
-You can manually :ref:`port forward <create-tenant-operator-forward-ports>` the ``minio`` service for temporary access via the local host.
+For hosts internal to the Kubernetes cluster, you can use the :kube-docs:`service DNS name <concepts/services-networking/dns-pod-service/#a-aaaa-records>`.
+For hosts external to the Kubernetes cluster, specify the hostname of the service exposed by Ingress, Load Balancer, or similar Kubernetes network control component.
 
 Run this command in a separate Terminal or Shell:
 

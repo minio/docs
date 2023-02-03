@@ -223,8 +223,6 @@ To deploy a tenant from the MinIO Operator Console, complete the following steps
 
 :ref:`create-tenant-connect-tenant`
 
-:ref:`create-tenant-operator-forward-ports`
-
 .. _create-tenant-access-minio-operator-console:
 
 1) Access the MinIO Operator Console
@@ -762,53 +760,6 @@ Kubernetes provides multiple options for configuring external access to services
 .. cond:: openshift
 
    See the OpenShift documentation on :openshift-docs:`Route or Ingress <networking/understanding-networking.html#nw-ne-comparing-ingress-route_understanding-networking>` for more complete information on configuring external access to services.
-
-.. _create-tenant-operator-forward-ports:
-
-13) Forward Ports
-~~~~~~~~~~~~~~~~~
-
-.. cond:: k8s and not openshift
-
-   You can temporarily expose each service using the ``kubectl port-forward`` utility.
-   Run the following examples to forward traffic from the local host running ``kubectl`` to the services running inside the Kubernetes cluster.
-
-   .. tab-set::
-
-      .. tab-item:: MinIO Tenant
-
-         .. code-block:: shell
-            :class: copyable
-
-            kubectl port-forward service/minio 443:443
-
-      .. tab-item:: MinIO Console
-      
-         .. code-block:: shell
-            :class: copyable
-
-            kubectl port-forward service/minio-tenant-1-console 9443:9443
-
-.. cond:: openshift
-
-   You can temporarily expose each service using the ``oc port-forward`` utility.
-   Run the following examples to forward traffic from the local host running ``oc`` to the services running inside the Kubernetes cluster.
-
-   .. tab-set::
-
-      .. tab-item:: MinIO Tenant
-
-         .. code-block:: shell
-            :class: copyable
-
-            oc port-forward service/minio 443:443
-
-      .. tab-item:: MinIO Console
-      
-         .. code-block:: shell
-            :class: copyable
-
-            oc port-forward service/minio-tenant-1-console 9443:9443
 
 .. cond:: openshift
 

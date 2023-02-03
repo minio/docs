@@ -168,17 +168,8 @@ Console.
 .. start-local-jbod-single-node-desc
 
 MinIO strongly recommends direct-attached :abbr:`JBOD (Just a Bunch of Disks)`
-arrays with XFS-formatted disks for best performance.  
-
-- Direct-Attached Storage (DAS) has significant performance and consistency
-  advantages over networked storage (NAS, SAN, NFS). 
-
-- Deployments using non-XFS filesystems (ext4, btrfs, zfs) tend to have
-  lower performance while exhibiting unexpected or undesired behavior.  
-
-- RAID or similar technologies do not provide additional resilience or
-  availability benefits when used with distributed MinIO deployments, and
-  typically reduce system performance.
+arrays with XFS-formatted disks for best performance.
+Using any other type of backing storage (SAN/NAS, ext4, RAID, LVM) typically results in a reduction in performance, reliability, predictability, and consistency.
 
 Ensure all server drives for which you intend MinIO to use are of the same type (NVMe, SSD, or HDD) with identical capacity (e.g. ``12`` TB).
 MinIO does not distinguish drive types and does not benefit from mixed storage types. 
