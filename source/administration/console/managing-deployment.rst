@@ -57,9 +57,8 @@ Audit
 
 .. important::
 
-   The MinIO Tenant Console Audit Log feature is scheduled for deprecation and removal in an upcoming release.
-
-   You can instead use any webhook-capable database or logging service to capture :ref:`audit logs <minio-logging-publish-audit-logs>` from the Tenant.
+   MinIO plans to deprecate the Tenant Console Audit Log feature and remove it in an upcoming release.
+   As an alternative, use any webhook-capable database or logging service to capture :ref:`audit logs <minio-logging-publish-audit-logs>` from the Tenant.
 
 The Audit Log section provides an interface for viewing :ref:`audit logs <minio-logging>` collected by a configured PostgreSQL service.
 

@@ -632,19 +632,19 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
      - Select the storage class and requested capacity associated to the PVC generated to support audit logging.
 
    * - Storage Size
-     - Specify the amount of size of storage to make available for audit logging.
+     - Specify the size of storage to make available for audit logging.
 
    * - :guilabel:`SecurityContext for LogSearch`
      - The MinIO Operator deploys a Log Search service (SQL Database and Log Search API) to support Audit Log search in the MinIO Tenant Console.
 
-       You can modify the Security Context to run the associated pod commands using a different User, Group, FsGroup, or FSGroupChangePolicy. 
-       You can also direct the pod to not run commands as the Root user.
+       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
+       You can also direct the pod to not run commands as the ``Root`` user.
 
    * - :guilabel:`SecurityContext for PostgreSQL`
      - The MinIO Operator deploys a PostgreSQL database to support logging services.
 
-       You can modify the Security Context to run the associated pod commands using a different User, Group, FsGroup, or FSGroupChangePolicy. 
-       You can also direct the pod to not run commands as the Root user.
+       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
+       You can also direct the pod to not run commands as the ``Root`` user.
 
        You can also modify the storage class and requested capacity associated to the PVC generated to support the Prometheus service.
 
@@ -669,13 +669,13 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
      - Select the storage class and requested capacity associated to the PVC generated to support Prometheus.
 
    * - Storage Size
-     - Specify the amount of size of storage to make available for Prometheus.
+     - Specify the size of storage to make available for Prometheus.
 
    * - :guilabel:`SecurityContext`
-     - The MinIO Operator assigns this Security Context for the Prometheus pod
+     - The MinIO Operator assigns this Security Context for the Prometheus pod.
 
-       You can modify the Security Context to run the associated pod commands using a different User, Group, FsGroup, or FSGroupChangePolicy. 
-       You can also direct the pod to not run commands as the Root user.
+       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
+       You can also direct the pod to not run commands as the ``Root`` user.
 
 .. _create-tenant-deploy-view-tenant:
 
