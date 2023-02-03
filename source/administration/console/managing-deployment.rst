@@ -55,6 +55,11 @@ Select the :guilabel:`Start Logs` button to begin collecting logs using the sele
 Audit
 ~~~~~
 
+.. important::
+
+   MinIO plans to deprecate the Tenant Console Audit Log feature and remove it in an upcoming release.
+   As an alternative, use any webhook-capable database or logging service to capture :ref:`audit logs <minio-logging-publish-audit-logs>` from the Tenant.
+
 The Audit Log section provides an interface for viewing :ref:`audit logs <minio-logging>` collected by a configured PostgreSQL service.
 
 The Audit Logging feature is configured and enabled automatically for MinIO deployments created using the :ref:`MinIO Operator Console <minio-operator-console>`.
@@ -108,6 +113,21 @@ Site Replication
 The :guilabel:`Site Replication` section provides an interface for adding and managing the :ref:`site replication <minio-site-replication-overview>` configuration for the deployment.
 
 Configuring site replication requires that only a single site have existing buckets or objects (if any).
+
+.. _minio-console-encryption:
+
+Encryption
+----------
+
+The :guilabel:`Encryption` setting provides an interface for listing, creating, and deleting keys for use with :ref:`MinIO Server-Side Encryption <minio-sse>`.
+
+You can use keys created or listed in this view for object encryption operations, including setting a :ref:`bucket-level default key <minio-console-buckets>`.
+
+.. important::
+
+   Deleting a key prevents MinIO from decrypting any objects protected with that key.
+   If no backups of that key exist, deleting a key renders objects permanently unreadable.
+   See :ref:`minio-encryption-sse-secure-erasure-locking` for more information.
 
 .. _minio-console-settings:
 

@@ -49,6 +49,8 @@ Example actions the user may be able to perform include:
 
 .. _minio-console-buckets:
 
+.. _minio-console-admin-buckets:
+
 Buckets
 -------
 
@@ -86,7 +88,7 @@ When managing a bucket, your access settings may allow you to view or change any
 
 - The :guilabel:`Summary` section displays a summary of the bucket's configuration.
 
-  Use this section to view and modify the bucket's policy, encryption, quota, and tags.
+  Use this section to view and modify the bucket's access policy, encryption, quota, and tags.
 
 - Configure alerts in the :guilabel:`Events` section to trigger :ref:`notification events <minio-bucket-notifications>` when a user uploads, accesses, or deletes matching objects.
 

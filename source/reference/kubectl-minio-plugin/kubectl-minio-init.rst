@@ -49,6 +49,7 @@ Syntax
          kubectl minio init                      \
                        [--cluster-domain]        \
                        [--console-image]         \
+                       [--console-tls]           \
                        [--default-console-image] \
                        [--default-kes-image]     \
                        [--default-minio-image]   \
@@ -83,6 +84,15 @@ The command supports the following flags:
 
    The image to use when deploying the :minio-git:`MinIO Console <console>` in Operator mode, where administrators can create and manage MinIO tenants using a Graphical User Interface.
    Defaults to ``minio/console:v0.17.3``.
+
+.. mc-cmd:: --console-tls
+   :optional:
+
+   .. versionadded:: 4.5.6
+
+   Enables TLS for the Operator Console.
+
+   Disabled by default.
 
 .. mc-cmd:: --default-console-image
    :optional:

@@ -217,6 +217,8 @@ To deploy a tenant from the MinIO Operator Console, complete the following steps
 
 :ref:`minio-tenant-audit-logging-settings`
 
+:ref:`minio-tenant-monitoring-settings`
+
 :ref:`create-tenant-deploy-view-tenant`
 
 :ref:`create-tenant-connect-tenant`
@@ -614,6 +616,10 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
 9) Audit Log Settings
 ~~~~~~~~~~~~~~~~~~~~~~
 
+.. include:: /includes/common/common-k8s-deprecation-audit-prometheus.rst
+   :start-after: start-deprecate-audit-logs
+   :end-before: end-deprecate-audit-logs
+
 .. list-table::
    :header-rows: 1
    :widths: 30 70
@@ -626,27 +632,54 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
      - Select the storage class and requested capacity associated to the PVC generated to support audit logging.
 
    * - Storage Size
-     - Specify the amount of size of storage to make available for audit logging.
+     - Specify the size of storage to make available for audit logging.
 
    * - :guilabel:`SecurityContext for LogSearch`
      - The MinIO Operator deploys a Log Search service (SQL Database and Log Search API) to support Audit Log search in the MinIO Tenant Console.
 
-       You can modify the Security Context to run the associated pod commands using a different User, Group, FsGroup, or FSGroupChangePolicy. 
-       You can also direct the pod to not run commands as the Root user.
-
-       
+       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
+       You can also direct the pod to not run commands as the ``Root`` user.
 
    * - :guilabel:`SecurityContext for PostgreSQL`
      - The MinIO Operator deploys a PostgreSQL database to support logging services.
 
-       You can modify the Security Context to run the associated pod commands using a different User, Group, FsGroup, or FSGroupChangePolicy. 
-       You can also direct the pod to not run commands as the Root user.
+       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
+       You can also direct the pod to not run commands as the ``Root`` user.
 
        You can also modify the storage class and requested capacity associated to the PVC generated to support the Prometheus service.
 
+.. _minio-tenant-monitoring-settings:
+
+10) Monitoring Settings
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common/common-k8s-deprecation-audit-prometheus.rst
+   :start-after: start-deprecate-prometheus
+   :end-before: end-deprecate-prometheus
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%
+
+   * - Field
+     - Description
+
+   * - Storage Class
+     - Select the storage class and requested capacity associated to the PVC generated to support Prometheus.
+
+   * - Storage Size
+     - Specify the size of storage to make available for Prometheus.
+
+   * - :guilabel:`SecurityContext`
+     - The MinIO Operator assigns this Security Context for the Prometheus pod.
+
+       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
+       You can also direct the pod to not run commands as the ``Root`` user.
+
 .. _create-tenant-deploy-view-tenant:
 
-10) Deploy and View the Tenant
+11) Deploy and View the Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Select :guilabel:`Create` at any time to begin the deployment process. 
@@ -674,7 +707,7 @@ Each tab provides additional details or configuration options for the MinIO Tena
 
 .. _create-tenant-connect-tenant:
 
-11) Connect to the Tenant
+12) Connect to the Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The MinIO Operator creates services for the MinIO Tenant. 
@@ -732,7 +765,7 @@ Kubernetes provides multiple options for configuring external access to services
 
 .. _create-tenant-operator-forward-ports:
 
-12) Forward Ports
+13) Forward Ports
 ~~~~~~~~~~~~~~~~~
 
 .. cond:: k8s and not openshift

@@ -27,15 +27,6 @@ The procedure on this page documents the following:
 
    - An :mc:`mc` installation on your local host configured to :ref:`access <alias>` the MinIO deployment
 
-.. cond:: k8s
-
-   The MinIO Operator supports deploying a :ref:`per-tenant Prometheus instance <create-tenant-configure-section>` configured to support metrics and visualizations.
-   This includes automatically configuring the Tenant to enable the :ref:`Tenant Console historical metric view <minio-console-metrics>`.
-
-   You can still use this procedure to configure an external Prometheus service for supporting monitoring and alerting for a MinIO Tenant.
-   You must configure all necessary network control components, such as Ingress or a Load Balancer, to facilitate access between the Tenant and the Prometheus service.
-   This procedure assumes your local host machine can access the Tenant via :mc:`mc`.
-
 Configure Prometheus to Collect and Alert using MinIO Metrics
 -------------------------------------------------------------
 
@@ -75,6 +66,12 @@ The command returns output similar to the following:
 - Set the ``targets`` array with a hostname that resolves to the MinIO deployment.
 
   This can be any single node, or a load balancer/proxy which handles connections to the MinIO nodes.
+
+  .. cond:: k8s
+
+     For Prometheus deployments in the same cluster as the MinIO Tenant, you can specify the service DNS name for the ``minio`` service.
+
+     For Prometheus deployments external to the cluster, you must specify an ingress or load balancer endpoint configured to route connections to and from the MinIO Tenant.
 
 2) Restart Prometheus with the Updated Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
