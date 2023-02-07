@@ -72,6 +72,10 @@ Table of Deprecated Admin Commands
      - :mc:`mc admin replicate rm`
      - mc RELEASE.2023-01-11T03-14-16Z
 
+   * - ``mc admin speedtest``
+     - :mc:`mc support perf`
+     - mc RELEASE.2022-07-24T02-25-13Z
+
    * - ``mc admin tier add``
      - :mc:`mc ilm tier add`
      - mc RELEASE.2022-12-24T15-21-38Z

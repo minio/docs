@@ -8,7 +8,11 @@
    :local:
    :depth: 2
 
-.. mc:: mc admin speedtest
+.. versionchanged:: RELEASE.2022-07-24T02-25-13Z
+
+.. important:: 
+
+   The ``mc admin speedtest`` function has moved to the :mc:`mc support perf` command.
 
 Description
 -----------

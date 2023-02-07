@@ -8,7 +8,12 @@
    :local:
    :depth: 1
 
+.. mc:: mc admin speedtest
 .. mc:: mc support perf
+
+.. versionchanged:: RELEASE.2022-07-24T02-25-13Z
+
+   ``mc support perf`` replaces the ``mc admin speedtest`` command.
 
 Description
 -----------
