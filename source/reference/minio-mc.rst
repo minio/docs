@@ -280,6 +280,11 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-od-desc
           :end-before: end-mc-od-desc
 
+   * - :mc:`mc ping`
+     - .. include:: /reference/minio-mc/mc-ping.rst
+          :start-after: start-mc-ping-desc
+          :end-before: end-mc-ping-desc  
+
    * - :mc:`mc pipe`
      - .. include:: /reference/minio-mc/mc-pipe.rst
           :start-after: start-mc-pipe-desc
@@ -540,6 +545,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-mirror
    /reference/minio-mc/mc-mv
    /reference/minio-mc/mc-od
+   /reference/minio-mc/mc-ping
    /reference/minio-mc/mc-pipe
    /reference/minio-mc/mc-quota
    /reference/minio-mc/mc-rb
