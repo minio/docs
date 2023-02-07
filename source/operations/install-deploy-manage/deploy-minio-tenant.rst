@@ -228,33 +228,7 @@ To deploy a tenant from the MinIO Operator Console, complete the following steps
 1) Access the MinIO Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. cond:: k8s and not openshift
-
-   Use the :mc-cmd:`kubectl minio proxy` command to temporarily forward traffic between the local host machine and the MinIO Operator Console:
-
-   .. code-block:: shell
-      :class: copyable
-
-      kubectl minio proxy
-
-.. cond:: openshift
-
-   Use the :mc-cmd:`oc minio proxy <kubectl minio proxy>` command to temporarily forward traffic between the local host machine and the MinIO Operator Console:
-
-   .. code-block:: shell
-      :class: copyable
-
-      oc minio proxy
-
-The command returns output similar to the following:
-
-.. code-block:: shell
-
-   Starting port forward of the Console UI.
-
-   To connect open a browser and go to http://localhost:9090
-
-   Current JWT to login: TOKEN
+.. include:: /includes/common/common-k8s-connect-operator-console.rst
 
 Open your browser to the specified URL and enter the JWT Token into the login page. 
 You should see the :guilabel:`Tenants` page:

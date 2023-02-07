@@ -153,20 +153,7 @@ You can find the MinIO Operator Interface from the :guilabel:`Operators` left-ha
 
 The MinIO Operator includes the Operator Console, a browser-based management interface for managed MinIO tenants.
 
-You can temporarily port-forward the Operator Console to your local host machine using the ``oc minio port-forward`` command:
-
-.. code-block:: shell
-   :class: copyable
-
-   oc minio port-forward
-
-The command returns a JWT token and a URL you can open in your browser.
-
-.. image:: /images/k8s/operator-dashboard.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: Operator Dashboard
+.. include:: /includes/common/common-k8s-connect-operator-console.rst
 
 You can create a permanent routing rule by creating a :openshift-docs:`Route or Ingress <networking/understanding-networking.html#nw-ne-comparing-ingress-route_understanding-networking>` to allow access from external clients, such as your local computer browser. 
 

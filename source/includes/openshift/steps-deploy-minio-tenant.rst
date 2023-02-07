@@ -93,25 +93,3 @@ See the Kubernetes documentation on
 :kube-docs:`Publishing Services (ServiceTypes) <concepts/services-networking/service/#publishing-services-service-types>` 
 and :kube-docs:`Ingress <concepts/services-networking/ingress/>` 
 for more complete information on configuring external access to services.
-
-4) Forward Ports
-~~~~~~~~~~~~~~~~
-
-You can temporarily expose each service using the ``oc port-forward`` utility. 
-Run the following examples to forward traffic from the local host running ``oc`` to the services running inside the Kubernetes cluster.
-
-.. tab-set::
-
-   .. tab-item:: MinIO Tenant
-
-      .. code-block:: shell
-         :class: copyable
-
-         oc port-forward service/minio 443:443
-
-   .. tab-item:: MinIO Console
-   
-      .. code-block:: shell
-         :class: copyable
-
-         oc port-forward service/minio-tenant-1-console 9443:9443
