@@ -28,7 +28,7 @@ The :mc:`mc ping` command performs a liveness check on a specified target.
       .. code-block:: shell
          :class: copyable
 
-         mc ping play -c 5
+         mc ping play --count 5
 
       The command pings the deployment at the :mc:`~mc alias` ``play`` for five cycles.
       The output resembles the following:
@@ -67,14 +67,14 @@ Parameters
 
    The full path to the :ref:`alias <minio-mc-alias>` or prefix where the command should run.
 
-.. mc-cmd:: --count, -c
+.. mc-cmd:: --count
    :optional:
 
    Specify the number of times to perform the check.
 
    If not specified, the liveness check performs continuously until stopped.
 
-.. mc-cmd:: --error-count, -e
+.. mc-cmd:: --error-count
    :optional:
    
    Specify a number of errors to receive before exiting.
@@ -86,14 +86,14 @@ Parameters
 
       mc ping TARGET -e 5
 
-.. mc-cmd:: --interval, -i
+.. mc-cmd:: --interval
    :optional:
 
    The length of time in seconds to wait between requests.
 
    By default, the command waits 1 second between requests.
 
-.. mc-cmd:: --distributed, -a
+.. mc-cmd:: --distributed
    :optional:
 
    Send requests to all servers in the MinIO cluster.
