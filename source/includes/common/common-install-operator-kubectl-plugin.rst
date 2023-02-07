@@ -67,23 +67,7 @@ The output resembles the following:
 4) Open the Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run the :mc:`kubectl minio proxy` command to temporarily forward traffic from
-the :ref:`MinIO Operator Console <minio-operator-console>` service to your 
-local machine:
+.. include:: /includes/common/common-k8s-connect-operator-console.rst
 
-.. code-block:: shell
-   :class: copyable
+      
 
-   kubectl minio proxy
-
-The command output includes a JWT token you must use to log into the
-Operator Console. 
-
-.. image:: /images/k8s/operator-dashboard.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: MinIO Operator Console
-
-You can deploy a new :ref:`MinIO Tenant <minio-k8s-deploy-minio-tenant>` from
-the Operator Dashboard.

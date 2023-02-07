@@ -108,12 +108,7 @@ This procedure upgrades the MinIO Operator from any 4.2.3 or later release to |o
 
       You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
 
-      Use :mc-cmd:`kubectl minio proxy` to access the Operator Console and confirm the status of managed Tenants:
-
-      .. code-block:: shell
-         :class: copyable
-
-         kubectl minio proxy
+      .. include:: /includes/common/common-k8s-connect-operator-console.rst
 
 .. _minio-k8s-upgrade-minio-operator-4.2.2-procedure:
 

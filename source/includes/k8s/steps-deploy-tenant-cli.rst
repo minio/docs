@@ -18,8 +18,6 @@ To deploy a tenant from the command line, complete the following steps:
 
 :ref:`create-tenant-cli-access-tenant-console`
 
-:ref:`create-tenant-cli-forward-ports`
-
 .. _create-tenant-cli-determine-settings-required-options:
 
 1) Determine Values for Required Settings
@@ -234,47 +232,55 @@ In addition to access credentials, the output shows the service name and service
 5) Access the Tenant's MinIO Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To access the :ref:`MinIO Console <minio-console>` for the tenant, forward the tenant's port.
+The MinIO Operator creates services for the MinIO Tenant. 
 
-- If necessary, run ``kubectl get svc -n <namespace>`` to retrieve the tenant's port number.
-- Run the following to forward the tenant's port and access it from a browser:
+.. cond:: openshift
 
-  .. code-block:: shell
-     :class: copyable
+   Use the ``oc get svc -n TENANT-PROJECT`` command to review the deployed services:
 
-     kubectl port-forward svc/<tenant-name>-console -n <tenant-namespace> <localport>:<tenantport>
+   .. code-block:: shell
+      :class: copyable
 
-  - Replace ``<tenant-name>`` with the name of your tenant.
-  - Replace ``<tenant-namespace>`` with the namespace the tenant exists in.
-  - Replace ``<localport>`` with the port number to use on your local machine to access the tenant's MinIO Console.
-  - Replace ``<tenantport>`` with the port number the MinIO Operator assigned to the tenant.
+      oc get svc -n minio-tenant-1
 
-- Go to ``https://127.0.0.1:<localport>`` to Access the tenant's MinIO Console.
+.. cond:: k8s and not openshift 
 
-  Replace ``<localport>`` with the port number you used when forwarding the tenant's port.
+   Use the ``kubectl get svc -n NAMESPACE`` command to review the deployed services:
 
-- Login with the username and password shown in the tenant creation output and recorded in step 4 above.
+   .. code-block:: shell
+      :class: copyable
 
-.. _create-tenant-cli-forward-ports:
+      kubectl get svc -n minio-tenant-1
 
-6) Forward Ports
-~~~~~~~~~~~~~~~~
+.. code-block:: shell
 
-You can temporarily expose each service using the ``kubectl port-forward`` utility. 
-Run the following examples to forward traffic from the local host running ``kubectl`` to the services running inside the Kubernetes cluster.
+   NAME                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+   minio                              LoadBalancer   10.97.114.60     <pending>     443:30979/TCP    2d3h
+   minio-tenant-1-console             LoadBalancer   10.106.103.247   <pending>     9443:32095/TCP   2d3h
+   minio-tenant-1-hl                  ClusterIP      None             <none>        9000/TCP         2d3h
+   minio-tenant-1-log-hl-svc          ClusterIP      None             <none>        5432/TCP         2d3h
+   minio-tenant-1-log-search-api      ClusterIP      10.103.5.235     <none>        8080/TCP         2d3h
+   minio-tenant-1-prometheus-hl-svc   ClusterIP      None             <none>        9090/TCP         7h39m
 
-.. tab-set::
+- The ``minio`` service corresponds to the MinIO Tenant service. 
+  Applications should use this service for performing operations against the MinIO Tenant.
+ 
+- The ``*-console`` service corresponds to the :minio-git:`MinIO Console <console>`. 
+  Administrators should use this service for accessing the MinIO Console and performing administrative operations on the MinIO Tenant.
 
-   .. tab-item:: MinIO Tenant
+The remaining services support Tenant operations and are not intended for consumption by users or administrators.
+ 
+By default each service is visible only within the Kubernetes cluster. 
+Applications deployed inside the cluster can access the services using the ``CLUSTER-IP``. 
 
-      .. code-block:: shell
-         :class: copyable
+Applications external to the Kubernetes cluster can access the services using the ``EXTERNAL-IP``. 
+This value is only populated for Kubernetes clusters configured for Ingress or a similar network access service. 
+Kubernetes provides multiple options for configuring external access to services. 
 
-         kubectl port-forward service/minio 443:443
+.. cond:: k8s and not openshift
 
-   .. tab-item:: MinIO Console
-   
-      .. code-block:: shell
-         :class: copyable
+   See the Kubernetes documentation on :kube-docs:`Publishing Services (ServiceTypes) <concepts/services-networking/service/#publishing-services-service-types>` and :kube-docs:`Ingress <concepts/services-networking/ingress/>` for more complete information on configuring external access to services.
 
-         kubectl port-forward service/minio-tenant-1-console 9443:9443
+.. cond:: openshift
+
+   See the OpenShift documentation on :openshift-docs:`Route or Ingress <networking/understanding-networking.html#nw-ne-comparing-ingress-route_understanding-networking>` for more complete information on configuring external access to services.
