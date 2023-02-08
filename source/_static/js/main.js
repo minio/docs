@@ -181,19 +181,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
     if (extVideoLinks) {
       // Minor cleanups to the CSS classes
-      extVideoLinks.classList.remove("docutils", "container")
-      extVideoLinks.classList.add("topic")
+      extVideoLinks.classList.remove("docutils", "container");
 
       // Inject the header text
-
-      const extVideoLinkHeader = document.createElement("div");
-      extVideoLinkHeader.classList.add("extVideoLink-header");
-      extVideoLinkHeader.innerHTML += "<p>Recommended Videos</p>";
+      const extVideoLinkHeader = document.createElement("p");
+      extVideoLinkHeader.classList.add("topic-title");
+      extVideoLinkHeader.innerText = "Recommended Videos";
       extVideoLinks.prepend(extVideoLinkHeader);
 
-
       asideElements.push(extVideoLinks)
-
       // Need to force-add extlinks, they don't seem to get added as-is for some reason
 
       const extVideoItems = document.querySelectorAll(".extlinks-video a");

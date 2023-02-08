@@ -111,6 +111,9 @@ $theme-properties: (
     --alert-warning-code-bg: #f3dfe1 #3d1014,
     --alert-warning-link-decoration-color: #e3c3c6 #54141a,
 
+    // Recommended videos
+    --recommended-videos-marker: url("../img/icons/play.svg") url("../img/icons/play-dark.svg"),
+
     // Search
     --is-dropdown-bg: #edf1f3 #1c232d,
     --is-container-background: rgba($black, 0.25) rgba(16, 21, 28, 0.851),
