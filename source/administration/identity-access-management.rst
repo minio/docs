@@ -43,6 +43,9 @@ MinIO supports both internal and external identity management:
      - Supports managing identities through an OpenID Connect (OIDC) compatible
        service.
 
+   * - :ref:`MinIO Authentation Plugin <minio-external-identity-management-plugin>`
+     - Supports a custom external identity manager using the MinIO Authentication Plugin extension.
+
    * - :ref:`Active Directory / LDAP 
        <minio-external-identity-management-ad-ldap>` 
      - Supports managing identities through an Active Directory or LDAP service.
@@ -138,4 +141,5 @@ JSON syntax.
    /administration/identity-access-management/minio-identity-management
    /administration/identity-access-management/oidc-access-management
    /administration/identity-access-management/ad-ldap-access-management
+   /administration/identity-access-management/pluggable-authentication.rst
    /administration/identity-access-management/policy-based-access-control

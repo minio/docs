@@ -13,11 +13,11 @@
 Syntax
 ------
 
-.. start-mc-pipe-desc
+.. start-mc-ping-desc
 
 The :mc:`mc ping` command performs a liveness check on a specified target.
 
-.. end-mc-pipe-desc
+.. end-mc-ping-desc
 
 .. tab-set::
 

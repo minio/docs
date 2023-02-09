@@ -23,26 +23,12 @@ installs and configures the Operator Console.
 
 This page summarizes the functions available with the MinIO Operator Console.
 
-Use the :mc-cmd:`kubectl minio proxy` command to temporarily forward 
-traffic between the local host machine and the MinIO Operator Console:
+.. _minio-operator-console-connect:
 
-.. code-block:: shell
-   :class: copyable
+Connect to the Operator Console
+-------------------------------
 
-   kubectl minio proxy
-
-The command returns output similar to the following:
-
-.. code-block:: shell
-
-   Starting port forward of the Console UI.
-
-   To connect open a browser and go to http://localhost:9090
-
-   Current JWT to login: TOKEN
-
-Open your browser to the specified URL and enter the JWT Token into the 
-login page.
+.. include:: /includes/common/common-k8s-connect-operator-console.rst
 
 Tenant Management
 -----------------

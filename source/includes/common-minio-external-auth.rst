@@ -56,6 +56,12 @@ Defaults to ``policy``.
 
 .. end-minio-openid-claim-name
 
+.. start-minio-openid-display-name
+
+Specify the user-facing name the MinIO Console displays on the login screen.
+
+.. end-minio-openid-display-name
+
 .. start-minio-openid-claim-prefix
 
 Specify the 
@@ -74,32 +80,69 @@ Defaults to those scopes advertised in the discovery document.
 
 .. start-minio-openid-redirect-uri
 
-Specify the redirect URI the MinIO Console uses when authenticating against the
-configured provider. Include the console port and ``/oauth_callback`` 
-as part of the URL:
+.. important::
+
+   This parameter is **deprecated** and will be removed in a future release.
+   Use :envvar:`MINIO_BROWSER_REDIRECT_URL` instead.
+
+The MinIO Console defaults to using the hostname of the node making the authentication request. 
+For MinIO deployments behind a load balancer or reverse proxy, specify this field to ensure the OIDC provider returns the authentication response to the correct MinIO Console URL.
+Include the Console hostname, port, and ``/oauth_callback``:
 
 .. code-block:: shell
 
    http://minio.example.net:consoleport/oauth_callback
 
-MinIO defaults to using the hostname of the node making the authentication
-request. MinIO deployments behind a load balancer or reverse proxy *may* 
-need to specify this field to ensure the OIDC provider returns the 
-authentication response to the correct URL.
+Ensure you start the MinIO Server with the :mc-cmd:`~minio server --console-address` option to set a static Console listen port.
+The default behavior with that option omitted is to select a random port number at startup.
 
-The specified URI *must* match one of the approved
-redirect / callback URIs on the provider. See the OpenID `Authentication Request 
-<https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest>`__ for
-more information.
-
-.. note::
-
-   The embedded MinIO Console by default uses a random port number selected at
-   server startup. Start the MinIO server process with the
-   :mc-cmd:`~minio server --console-address` option to specify a static
-   port number.
+The specified URI *must* match one of the approved redirect / callback URIs on the provider. 
+See the OpenID `Authentication Request <https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest>`__ for more information.
 
 .. end-minio-openid-redirect-uri
+
+.. start-minio-openid-redirect-uri-dynamic
+
+The MinIO Console defaults to using the hostname of the node making the authentication request as part of the redirect URI provided to the OIDC provider.
+For MinIO deployments behind a load balancer using a round-robin protocol, this may result in the load balancer returning the response to a different MinIO Node than the originating client.
+
+Specify this option as ``true`` to direct the MinIO Console to use the ``Host`` header of the originating request to construct the redirect URI passed to the OIDC provider.
+
+.. end-minio-openid-redirect-uri-dynamic
+
+.. start-minio-openid-claim-userinfo
+
+Specify the OpenID User info API endpoint for the OIDC service.
+For example, ``https://oidc-endpoint:port/realms/REALM/protocol/openid-connect/userinfo``
+
+Some OIDC providers do not provide group information as part of the JWT response after authentication.
+Specify this URL to direct MinIO to make an additional API call to construct the complete JWT token.
+
+.. end-minio-openid-claim-userinfo
+
+.. start-minio-openid-vendor
+
+Specify the OIDC Vendor to enable specific supported behaviors for that vendor.
+
+Supports the following value:
+
+- ``keycloak``
+
+.. end-minio-openid-vendor
+
+.. start-minio-openid-keycloak-realm
+
+Specify the Keycloak Realm to use as part of Keycloak Admin API Operations, such as ``main``.
+
+.. end-minio-openid-keycloak-realm
+
+.. start-minio-openid-keycloak-admin-url
+
+Specify the Keycloak Admin API URL. 
+MinIO can use this URL if configured to periodically validate authenticated Keycloak users as active/existing.
+For example, ``https://keycloak-endpoint:port/admin/``.
+
+.. end-minio-openid-keycloak-admin-url
 
 .. start-minio-openid-comment
 
@@ -272,3 +315,38 @@ Defaults to ``off``
 Specify a comment to associate to the AD/LDAP configuration.
 
 .. end-minio-ad-ldap-comment
+
+.. start-minio-identity-management-plugin-url
+
+The webhook endpoint for the external identity management service (``https://authservice.example.net:8080/auth``).
+
+.. end-minio-identity-management-plugin-url
+
+.. start-minio-identity-management-auth-token
+
+An authentication token to present to the configured webhook endpoint.
+
+Specify a supported HTTP `Authentication scheme <https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes>`__ as a string value, such as ``"Bearer TOKEN"``.
+MinIO sends the token using the HTTP `Authorization <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization>`__ header.
+
+.. end-minio-identity-management-auth-token
+
+.. start-minio-identity-management-role-policy
+
+Specify a comma separated list of MinIO :ref:`policies <minio-policy>` to assign to authenticated users.
+
+.. end-minio-identity-management-role-policy
+
+.. start-minio-identity-management-role-id
+
+Specify a unique ID MinIO uses to generate an ARN for this identity manager.
+
+If omitted, MinIO automatically generates the ID and prints the full ARN to the server log.
+
+.. end-minio-identity-management-role-id
+
+.. start-minio-identity-management-comment
+
+Specify a comment to associate to the identity configuration.
+
+.. end-minio-identity-management-comment
