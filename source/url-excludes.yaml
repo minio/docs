@@ -41,6 +41,16 @@ excludes:
 ---
 tag: windows
 excludes:
+- 'operations/installation.rst'
+- 'operations/install-deploy-manage/expand-minio-deployment.rst'
+- 'operations/install-deploy-manage/upgrade-minio-deployment.rst'
+- 'operations/install-deploy-manage/decommission-server-pool.rst'
+- 'operations/install-deploy-manage/migrate-fs-gateway.rst'
+- 'operations/manage-existing-deployments.rst'
+- 'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst'
+- 'operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst'
+- 'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst'
+- 'operations/install-deploy-manage/multi-site-replication.rst'
 - 'operations/install-deploy-manage/deploy-minio-tenant.rst'
 - 'operations/install-deploy-manage/modify-minio-tenant.rst'
 - 'operations/install-deploy-manage/expand-minio-tenant.rst'
