@@ -46,6 +46,11 @@ You can deploy MinIO using one of the following topologies:
        
   Scalable for Petabyte+ workloads - both storage capacity and performance
 
+.. cond:: macos
+
+   Use MacOS-based MinIO deployments for early development and evaluation.
+   MinIO strongly recommends Linux (RHEL, Ubuntu) for long-term development and production environments.
+
 Site Replication
 ----------------
 
@@ -72,11 +77,11 @@ Not everything replicates across sites.
 Platform Support
 ----------------
 
-MinIO provides builds of the MinIO server (:mc:`minio`) and the
-MinIO :abbr:`CLI (Command Line Interface)` (:mc:`mc`) for the following
-platforms. 
-
 .. cond:: linux
+
+   MinIO provides builds of the MinIO server (:mc:`minio`) and the
+   MinIO :abbr:`CLI (Command Line Interface)` (:mc:`mc`) for the following
+   platforms. 
 
    - Red Hat Enterprise Linux 8.5+ (including all binary-compatible RHEL alternatives)
    - Ubuntu 18.04+
@@ -92,12 +97,6 @@ platforms.
 
    MinIO recommends non-EOL macOS versions (10.14+).
 
-.. cond:: windows
-
-   MinIO recommends non-EOL Windows versions (Windows 10, Windows Server 2016+). 
-   Support for running :ref:`distributed MinIO deployments <deploy-minio-distributed>` is *experimental* on Windows OS.
-
-
 For unlisted platforms or architectures, please reach out to MinIO at 
 hello@min.io for additional support and guidance. You can build MinIO from
 :minio-git:`source <minio/#install-from-source>` and 
@@ -106,11 +105,13 @@ hello@min.io for additional support and guidance. You can build MinIO from
 for your platform and architecture combo. MinIO generally does not recommend
 source-based installations in production environments.
 
-.. toctree::
-   :titlesonly:
-   :hidden:
+.. cond:: linux or macos
 
-   /operations/install-deploy-manage/deploy-minio-single-node-single-drive
-   /operations/install-deploy-manage/deploy-minio-single-node-multi-drive
-   /operations/install-deploy-manage/deploy-minio-multi-node-multi-drive
-   /operations/install-deploy-manage/multi-site-replication
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      /operations/install-deploy-manage/deploy-minio-single-node-single-drive
+      /operations/install-deploy-manage/deploy-minio-single-node-multi-drive
+      /operations/install-deploy-manage/deploy-minio-multi-node-multi-drive
+      /operations/install-deploy-manage/multi-site-replication

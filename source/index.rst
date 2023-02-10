@@ -124,8 +124,30 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       /administration/batch-framework
       /administration/concepts
 
+.. cond:: windows
 
-.. cond:: linux or macos or windows or container
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      /operations/concepts
+      /operations/monitoring
+      /operations/external-iam
+      /operations/server-side-encryption
+      /operations/network-encryption
+      /operations/checklists
+      /operations/data-recovery
+      /operations/troubleshooting
+      /administration/minio-console
+      /administration/object-management
+      /administration/monitoring
+      /administration/identity-access-management
+      /administration/server-side-encryption
+      /administration/bucket-replication
+      /administration/batch-framework
+      /administration/concepts
+
+.. cond:: linux or macos or container
 
    .. toctree::
       :titlesonly:

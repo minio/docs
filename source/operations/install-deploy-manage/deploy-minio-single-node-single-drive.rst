@@ -95,4 +95,8 @@ The following procedure deploys MinIO consisting of a single MinIO server and a 
 
 .. cond:: container
 
-  .. include:: /includes/container/steps-deploy-minio-single-node-single-drive.rst
+   .. include:: /includes/container/steps-deploy-minio-single-node-single-drive.rst
+
+.. cond:: windows
+
+   .. include:: /includes/windows/steps-deploy-minio-single-node-single-drive.rst

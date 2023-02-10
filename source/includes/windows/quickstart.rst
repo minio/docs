@@ -10,7 +10,17 @@ Quickstart for Windows
 
 This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 
 
-For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
+.. note::
+
+   MinIO has limited support for multi-drive Windows deployments due to behaviors and limitations of the NTFS filesystem.
+
+   This documentation only covers Single-Node Single-Drive deployment topologies on Windows.
+   Use Linux hosts for deploying Single-Node Multi-Drive or Multi-Node Multi-Drive MinIO topologies.
+
+Use Windows-based MinIO deployments for early development and evaluation.
+MinIO strongly recommends Linux (RHEL, Ubuntu) systems for long-term development and production environments.
+
+MinIO supports non-EOL Windows versions (Windows 10, Windows Server 2016+). 
 
 Prerequisites
 -------------
@@ -132,4 +142,3 @@ Next Steps
 - :ref:`Connect your applications to MinIO <minio-drivers>`
 - :ref:`Configure Object Retention <minio-object-retention>`
 - :ref:`Configure Security <minio-authentication-and-identity-management>`
-- :ref:`Deploy MinIO for Production Environments <deploy-minio-distributed>`
