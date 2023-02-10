@@ -15,7 +15,7 @@ This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comp
    MinIO has limited support for multi-drive Windows deployments due to behaviors and limitations of the NTFS filesystem.
 
    This documentation only covers Single-Node Single-Drive deployment topologies on Windows.
-   Use Linux hosts for deploying Single-Node Multi-Drive or Multi-Node Multi-Drive MinIO topologies.
+   Use :minio-docs:`Linux hosts <minio/linux/operations/installation.html>` for deploying Single-Node Multi-Drive or Multi-Node Multi-Drive MinIO topologies.
 
 Use Windows-based MinIO deployments for early development and evaluation.
 MinIO strongly recommends Linux (RHEL, Ubuntu) systems for long-term development and production environments.
@@ -80,8 +80,8 @@ Procedure
 
 #. Connect your Browser to the MinIO Server
 
-   Access the :ref:`minio-console` by going to a browser (such as Microsoft Edge) and going to ``http://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
-   For example, :guilabel:`Console: http://192.0.2.10:9090 http://127.0.0.1:9090` in the example output indicates two possible addresses to use for connecting to the Console.
+   Access the :ref:`minio-console` by going to a browser (such as Microsoft Edge) and going to ``http://127.0.0.1:9090`` or one of the Console addresses specified in the :mc:`minio server` command's output.
+   For example, ``Console: http://192.0.2.10:9090 http://127.0.0.1:9090`` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 
