@@ -237,29 +237,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
   })();
 
-
-  // --------------------------------------------------
-  // Content Nav
-  // --------------------------------------------------
-  (function () {
-    const contentNav = document.querySelectorAll("[data-content-nav]");
-    contentNav.forEach((nav) => {
-      nav.addEventListener("click", (event) => {
-        event.preventDefault();
-        var target = nav.getAttribute("data-content-nav");
-
-        document
-          .querySelector(".platform-nav__inner a.active")
-          .classList.remove("active");
-        document
-          .querySelector(".platform-nav__dropdown nav.active")
-          .classList.remove("active");
-        document.getElementById(target).classList.add("active");
-        nav.classList.add("active");
-      });
-    });
-  })();
-
   
   // --------------------------------------------------
   // Asides: Sidebar and Nav
@@ -424,23 +401,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
   })();
 
   // --------------------------------------------------
-  // Carousel
+  // Arrows for cards and platforms navs
   // --------------------------------------------------
   (function () {
-    const carousels = document.querySelectorAll(".sd-cards-carousel");
-    var scrollLength = 1000;
-
-    const arrowIcon = `<svg width="13" height="10" viewBox="0 0 12 10">
-                    <path d="M1.707 4.137H11.5c.277 0 .5.23.5.516 0 .137-.051.27-.145.363s-.223.152-.355.152H1.707l3.148 3.254a.53.53 0 0 1 0 .73c-.098.102-.223.152-.355.152s-.258-.051-.355-.152l-4-4.133c-.195-.203-.195-.531 0-.734l4-4.133A.5.5 0 0 1 4.5 0a.5.5 0 0 1 .355.152.53.53 0 0 1 0 .73zm0 0" fill-rule="evenodd" fill="currentColor" />
-                  </svg>`;
-
-    function toggleArrows(elem, arrowLeft, arrowRight) {
+    function toggleArrows(elem, arrowLeft, arrowRight, callback) {
       var scrollWidth = elem.scrollWidth;
       var scrollLeft = elem.scrollLeft + elem.clientWidth;
-
-      // Set the scroll length based on the window width
-      window.innerWidth < 1400 ? scrollLength = 500 : scrollLength = 1000;
-
+      
+      if (callback) {
+        callback();
+      }
+  
       scrollWidth - scrollLeft <= 1
         ? arrowRight.classList.add("inactive")
         : arrowRight.classList.remove("inactive");
@@ -449,8 +420,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
         : arrowLeft.classList.remove("inactive");
     }
 
-    if(carousels.length > 0) {
-      carousels.forEach((item) => {
+    // --------------------------------------------------
+    // Cards
+    // --------------------------------------------------
+    const cards = document.querySelectorAll(".sd-cards-carousel");
+    var scrollLength = 1000;
+    const cardsArrowIcon = `<svg width="13" height="10" viewBox="0 0 12 10">
+                        <path d="M1.707 4.137H11.5c.277 0 .5.23.5.516 0 .137-.051.27-.145.363s-.223.152-.355.152H1.707l3.148 3.254a.53.53 0 0 1 0 .73c-.098.102-.223.152-.355.152s-.258-.051-.355-.152l-4-4.133c-.195-.203-.195-.531 0-.734l4-4.133A.5.5 0 0 1 4.5 0a.5.5 0 0 1 .355.152.53.53 0 0 1 0 .73zm0 0" fill-rule="evenodd" fill="currentColor" />
+                      </svg>`;
+
+    // Set the scroll length based on the window width
+    function setScrollLength() {
+      window.innerWidth < 1400 ? scrollLength = 500 : scrollLength = 1000;
+    }
+
+    if(cards.length > 0) {
+      cards.forEach((item) => {
         // Get the amount of columns
         const colsAmount = item.className.match(/(^|\s)sd-card-cols-(\w+)/g).pop().split('-').pop();
 
@@ -462,14 +447,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
         // Create the arrows
         const arrowLeft = document.createElement("button");
         arrowLeft.classList.add("carousel-arrow", "carousel-arrow--left");
-        arrowLeft.innerHTML = arrowIcon;
+        arrowLeft.innerHTML = cardsArrowIcon;
         arrowLeft.onclick = function() {
           item.scrollLeft -= scrollLength/colsAmount;
         }
 
         const arrowRight = document.createElement("button");
         arrowRight.classList.add("carousel-arrow", "carousel-arrow--right");
-        arrowRight.innerHTML = arrowIcon;
+        arrowRight.innerHTML = cardsArrowIcon;
         arrowRight.onclick = function() {
           item.scrollLeft += scrollLength/colsAmount;
         }
@@ -482,9 +467,58 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
         // Toggle arrows on manual scroll
         item.addEventListener("scroll", () => {
-          toggleArrows(item, arrowLeft, arrowRight);
+          toggleArrows(item, arrowLeft, arrowRight, setScrollLength);
         });
-        toggleArrows(item, arrowLeft, arrowRight);
+        toggleArrows(item, arrowLeft, arrowRight, setScrollLength);
+      });
+    }
+
+    // --------------------------------------------------
+    // Platform navs
+    // --------------------------------------------------
+    const platformNavs = document.querySelectorAll(".platform-nav nav");
+    const platformNavArrowIcon =  `<svg width="25" height="25" viewbox="0 0 48 48">
+                                    <path d="M17.7 34.9q-.4-.5-.425-1.1-.025-.6.425-1.05l8.8-8.8-8.85-8.85q-.4-.4-.375-1.075.025-.675.425-1.075.5-.5 1.075-.475.575.025 1.025.475l9.95 9.95q.25.25.35.5.1.25.1.55 0 .3-.1.55-.1.25-.35.5l-9.9 9.9q-.45.45-1.05.425-.6-.025-1.1-.425Z" />
+                                  </svg>`;
+    function sc(el) {
+      if (el.scrollWidth > el.clientWidth) {
+        el.parentNode.classList.add("scrollable");
+      }
+      else {
+        el.parentNode.classList.remove("scrollable");
+      }
+    }
+
+    if(platformNavs.length > 0) {
+      platformNavs.forEach((item) => {
+        const arrowLeft = document.createElement("button");
+        arrowLeft.type = "button";
+        arrowLeft.innerHTML = platformNavArrowIcon;
+        arrowLeft.setAttribute("data-nav-dir", "left");
+        arrowLeft.onclick = function() {
+          item.scrollLeft -= 200;
+        }
+  
+        const arrowRight = document.createElement("button");
+        arrowRight.type = "button";
+        arrowRight.innerHTML = platformNavArrowIcon;
+        arrowRight.setAttribute("data-nav-dir", "right");
+        arrowRight.onclick = function() {
+          item.scrollLeft += 200;
+        }
+  
+        item.insertAdjacentElement("beforebegin", arrowLeft);
+        item.insertAdjacentElement("afterend", arrowRight);
+  
+        item.addEventListener("scroll", () => {
+          toggleArrows(item, arrowLeft, arrowRight, sc(item));
+        });
+
+        window.addEventListener("resize", () => {
+          toggleArrows(item, arrowLeft, arrowRight, sc(item));
+        });
+  
+        toggleArrows(item, arrowLeft, arrowRight, sc(item));
       });
     }
   })();

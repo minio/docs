@@ -1,54 +1,57 @@
 <div class="platform-nav">
-    <div class="container">
-        <nav class="platform-nav__inner">
-            <a rel="noreferrer" href="/docs/minio/kubernetes/upstream/index.html" class="{{ 'active' if doc_platform == 'k8s' }}">
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/kubernetes.svg',1) }}" alt="Kubernetes" />
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/kubernetes-inactive.svg',1) }}" alt="Kubernetes" />
-                Kubernetes
-            </a>
-         
-            <a rel="noreferrer" href="/docs/minio/container/index.html" class="{{ 'active' if doc_platform == 'container' }}">
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/docker.svg',1) }}" alt="Docker" />
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/docker-inactive.svg',1) }}" alt="Docker" />
-                Docker
-            </a>
-        
-            <a rel="noreferrer" href="/docs/minio/linux/index.html" class="{{ 'active' if doc_platform == 'linux' }}">
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/linux.svg',1) }}" alt="Linux" />
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/linux-inactive.svg',1) }}" alt="Linux" />
-                Linux
-            </a>
-        
-            <a rel="noreferrer" href="/docs/minio/macos/index.html" class="{{ 'active' if doc_platform == 'macos' }}">
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/macos.svg',1) }}" alt="macOS" />
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/macos-inactive.svg',1) }}" alt="macOS" />
-                macOS
-            </a>
-        
-            <a rel="noreferrer" href="/docs/minio/windows/index.html" class="{{ 'active' if doc_platform == 'windows' }}">
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows.svg',1) }}" alt="Windows" />
-                <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows-inactive.svg',1) }}" alt="Windows" />
-                Windows
-            </a>
+    <div class="platform-nav__main">
+        <div class="container">
+            <nav>
+                <a rel="noreferrer" href="/docs/minio/kubernetes/upstream/index.html" class="{{ 'active' if doc_platform == 'k8s' }}">
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/kubernetes.svg',1) }}" alt="Kubernetes" />
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/kubernetes-inactive.svg',1) }}" alt="Kubernetes" />
+                    Kubernetes
+                </a>
+                
+                <a rel="noreferrer" href="/docs/minio/container/index.html" class="{{ 'active' if doc_platform == 'container' }}">
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/docker.svg',1) }}" alt="Docker" />
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/docker-inactive.svg',1) }}" alt="Docker" />
+                    Docker
+                </a>
             
-            {%- if pagename != "search" %}
-                <button type="button" class="icon search-toggle search-toggle--keyboard visible-rm">
-                    {%- include "icons/search.html" %}
-                    Search
-                </button>
-            {%- endif %}
-        </nav>
+                <a rel="noreferrer" href="/docs/minio/linux/index.html" class="{{ 'active' if doc_platform == 'linux' }}">
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/linux.svg',1) }}" alt="Linux" />
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/linux-inactive.svg',1) }}" alt="Linux" />
+                    Linux
+                </a>
+            
+                <a rel="noreferrer" href="/docs/minio/macos/index.html" class="{{ 'active' if doc_platform == 'macos' }}">
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/macos.svg',1) }}" alt="macOS" />
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/macos-inactive.svg',1) }}" alt="macOS" />
+                    macOS
+                </a>
+            
+                <a rel="noreferrer" href="/docs/minio/windows/index.html" class="{{ 'active' if doc_platform == 'windows' }}">
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows.svg',1) }}" alt="Windows" />
+                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows-inactive.svg',1) }}" alt="Windows" />
+                    Windows
+                </a>
+            </nav>
+        </div>
+        {%- if pagename != "search" %}
+        <button type="button" class="icon search-toggle search-toggle--keyboard visible-rm">
+            {%- include "icons/search.html" %}
+            Search
+        </button>
+    {%- endif %}
     </div>
 
-    <div class="platform-nav__dropdown">
-      <div class="container">
-         <nav id="cn-kubernetes" class="{{ 'active' if doc_platform == 'k8s' or doc_platform == 'openshift' or doc_platform == 'eks' or doc_platform == 'gke' or doc_platform == 'aks' }}">
-            <a rel="noreferrer" href="/docs/minio/kubernetes/upstream/index.html" class="{{ 'active' if doc_platform == 'k8s' }}">Upstream</a>
-            <a rel="noreferrer" href="/docs/minio/kubernetes/openshift/index.html" class="{{ 'active' if doc_platform == 'openshift' }}">Redhat Openshift</a>
-            <a rel="noreferrer" href="/docs/minio/kubernetes/eks/index.html" class="{{ 'active' if doc_platform == 'eks' }}">Amazon Elastic Kubernetes Service</a>
-            <a rel="noreferrer" href="/docs/minio/kubernetes/gke/index.html" class="{{ 'active' if doc_platform == 'gke' }}">Google Kubernetes Engine</a>
-            <a rel="noreferrer" href="/docs/minio/kubernetes/aks/index.html" class="{{ 'active' if doc_platform == 'aks' }}">Azure Kubernetes Service</a>
-          </nav>
-      </div>
-    </div>
+    {%- if doc_platform == 'k8s' or doc_platform == 'openshift' or doc_platform == 'eks' or doc_platform == 'gke' or doc_platform == 'aks' -%}
+        <div class="platform-nav__sub">
+            <div class="container">
+                <nav>
+                    <a rel="noreferrer" href="/docs/minio/kubernetes/upstream/index.html" class="{{ 'active' if doc_platform == 'k8s' }}">Upstream</a>
+                    <a rel="noreferrer" href="/docs/minio/kubernetes/openshift/index.html" class="{{ 'active' if doc_platform == 'openshift' }}">Redhat Openshift</a>
+                    <a rel="noreferrer" href="/docs/minio/kubernetes/eks/index.html" class="{{ 'active' if doc_platform == 'eks' }}">Amazon Elastic Kubernetes Service</a>
+                    <a rel="noreferrer" href="/docs/minio/kubernetes/gke/index.html" class="{{ 'active' if doc_platform == 'gke' }}">Google Kubernetes Engine</a>
+                    <a rel="noreferrer" href="/docs/minio/kubernetes/aks/index.html" class="{{ 'active' if doc_platform == 'aks' }}">Azure Kubernetes Service</a>
+                </nav>
+            </div>
+        </div>
+    {%- endif -%}
 </div>
