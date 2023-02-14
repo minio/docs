@@ -12,7 +12,8 @@ MinIO Client
 
 .. container:: extlinks-video
 
-   - `Introduction to the MinIO Client (MC) Commands <https://www.youtube.com/watch?v=pukQgDdXfqA>`
+   - `Introduction to the MinIO Client (MC) Commands <https://www.youtube.com/watch?v=pukQgDdXfqA>`__
+   - `Installing and Running MinIO on Linux <https://www.youtube.com/watch?v=74usXkZpNt8&list=PLFOIsHSSYIK1BnzVY66pCL-iJ30Ht9t1o>`__
 
 .. mc:: mc
 
