@@ -4,10 +4,9 @@
 
       .. note::
          
-         Starting with Operator 4.5.8, the MinIO Operator Console implements websockets for improved performance.
-         This protocol may exhibit unpredictable behavior with Kubernetes port-forwarding, especially during the login sequence.
-
-         Users who encounter timeouts when using port forwarding should select from the remaining tabs to view alternatives for connecting to the Operator Console.
+         Some Kubernetes deployments may experience issues with timeouts during port-forwarding operations with the Operator Console.
+         Use one of the methods in the other tabs on this section as a work-around.
+         See https://github.com/kubernetes/kubectl/issues/1368 for more information.
 
       Run the :mc:`kubectl minio proxy` command to temporarily forward traffic from
       the :ref:`MinIO Operator Console <minio-operator-console>` service to your 
