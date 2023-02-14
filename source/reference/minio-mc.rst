@@ -10,6 +10,10 @@ MinIO Client
    :local:
    :depth: 1
 
+.. container:: extlinks-video
+
+   - `Introduction to the MinIO Client (MC) Commands <https://www.youtube.com/watch?v=pukQgDdXfqA>`
+
 .. mc:: mc
 
 The MinIO Client :mc-cmd:`mc` command line tool provides a modern alternative
