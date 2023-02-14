@@ -40,6 +40,7 @@ $theme-properties: (
     --content-nav-sub-hover-color: $theme-red $dark-300,
     --content-nav-sub-active-color: $theme-red $dark-0,
     --content-nav-icon-filter: none (invert(100%) sepia(12%) saturate(777%) hue-rotate(181deg) brightness(100%) contrast(85%)),
+    --content-nav-arrow-color: $black #697995,
 
     // Sidebar
     --sidebar-bg: $light-100 $dark-100,
@@ -110,6 +111,9 @@ $theme-properties: (
     --alert-warning-color: #b2404b #bb4a55,
     --alert-warning-code-bg: #f3dfe1 #3d1014,
     --alert-warning-link-decoration-color: #e3c3c6 #54141a,
+
+    // Recommended videos
+    --recommended-videos-marker: url("../img/icons/play.svg") url("../img/icons/play-dark.svg"),
 
     // Search
     --is-dropdown-bg: #edf1f3 #1c232d,
