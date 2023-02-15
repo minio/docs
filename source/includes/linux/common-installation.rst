@@ -296,6 +296,12 @@ MinIO may log an increased number of non-critical warnings while the
 server processes connect and synchronize. These warnings are typically 
 transient and should resolve as the deployment comes online.
 
+.. versionchanged:: RELEASE.2023-02-09T05-16-53Z
+
+   MinIO starts if it detects enough drives to meet the :ref:`write quorum <minio-ec-parity>` for the deployment.
+      
+   If any drives remain offline after starting MinIO, check and cure any issues blocking their functionality before starting production workloads.
+
 .. end-install-minio-start-service-desc
 
 .. start-install-minio-restart-service-desc
