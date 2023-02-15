@@ -298,8 +298,9 @@ transient and should resolve as the deployment comes online.
 
 .. versionchanged:: RELEASE.2023-02-09T05-16-53Z
 
-   Some drives may be offline when you start MinIO.
-   Enough drives must be online at start to achieve :ref:`write quorum <minio-ec-parity>` for the deployment.
+   MinIO starts if it detects enough drives to meet the :ref:`write quorum <minio-ec-parity>` for the deployment.
+      
+   If any drives remain offline after starting MinIO, check and cure any issues blocking their functionality before starting production workloads.
 
 .. end-install-minio-start-service-desc
 
