@@ -12,10 +12,10 @@ This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comp
 
 .. note::
 
-   MinIO has limited support for multi-drive Windows deployments due to behaviors and limitations of the NTFS filesystem.
+   This documentation only covers Single-Node Single-Drive deployments.
+   Due to NTFS behaviors and limitations, MinIO does not recommend multi-node multi-drive deployments on Windows hosts.
 
-   This documentation only covers Single-Node Single-Drive deployment topologies on Windows.
-   Use :minio-docs:`Linux hosts <minio/linux/operations/installation.html>` for deploying Single-Node Multi-Drive or Multi-Node Multi-Drive MinIO topologies.
+   Use :minio-docs:`Linux hosts <minio/linux/operations/installation.html>` or :minio-docs:`Kubernetes <minio/kubernetes/upstream/index.html>` for deploying production-ready distributed MinIO deployments.
 
 Use Windows-based MinIO deployments for early development and evaluation.
 MinIO strongly recommends Linux (RHEL, Ubuntu) systems for long-term development and production environments.
