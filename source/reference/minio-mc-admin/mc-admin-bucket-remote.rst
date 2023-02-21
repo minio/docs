@@ -19,7 +19,7 @@
 
 .. versionchanged:: RELEASE.2023-02-16T19-20-11Z
 
-   - ``mc admin bucket remote bandwitdh`` replaced by :mc-cmd:`mc replicate status`
+   - ``mc admin bucket remote bandwidth`` replaced by :mc-cmd:`mc replicate status`
     
      Replication related statistics are moving to the ``mc replicate status`` command.
 
