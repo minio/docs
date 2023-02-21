@@ -17,6 +17,12 @@
    - ``mc admin bucket remote rm`` replaced by :mc-cmd:`mc replicate rm`
    - ``mc admin bucket remote ls`` replaced by :mc-cmd:`mc replicate ls`
 
+.. versionchanged:: RELEASE.2023-02-16T19-20-11Z
+
+   - ``mc admin bucket remote bandwitdh`` replaced by :mc-cmd:`mc replicate status`
+    
+     Replication related statistics are moving to the ``mc replicate status`` command.
+
 Description
 -----------
 

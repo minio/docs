@@ -2469,3 +2469,12 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
    This environment variable corresponds with the 
    :mc-conf:`identity_openid comment 
    <identity_openid.comment>` setting.
+
+Batch Replication
+~~~~~~~~~~~~~~~~~
+
+.. envvar:: MINIO_BATCH_REPLICATION_WORKERS
+
+  *Optional*
+
+  Enable parallel workers by specifying the maximum number of processes to use when performing the batch application job.
