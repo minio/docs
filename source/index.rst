@@ -1,7 +1,3 @@
-=====================================
-MinIO High Performance Object Storage
-=====================================
-
 .. default-domain:: minio
 
 .. contents:: Table of Contents
@@ -16,7 +12,7 @@ MinIO High Performance Object Storage
    
    - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
 
-MinIO is a high performance object storage solution that provides an Amazon Web Services S3-compatible API and supports all core S3 features. 
+MinIO is an object storage solution that provides an Amazon Web Services S3-compatible API and supports all core S3 features. 
 MinIO is built to deploy anywhere - public or private cloud, baremetal infrastructure, orchestrated environments, and edge infrastructure.
 
 .. cond:: linux

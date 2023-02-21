@@ -1,8 +1,8 @@
 .. _quickstart-linux:
 
-====================
-Quickstart for Linux
-====================
+===========================
+Quickstart: MinIO for Linux
+===========================
 
 .. default-domain:: minio
 
