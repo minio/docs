@@ -97,6 +97,10 @@ The advantages of Batch Replication over :mc:`mc mirror` include:
 - The job provides for retry attempts in event that objects do not replicate
 - Batch jobs are one-time, curated processes allowing for fine control replication
 
+.. versionchanged:: RELEASE.2023-02-17T17-52-43Z
+
+   Run batch replication with multiple workers in parallel by specifying the :envvar:`MINIO_BATCH_REPLICATION_WORKERS` environment variable.
+
 Sample YAML Description File for a ``replicate`` Job Type
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
