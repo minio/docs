@@ -424,6 +424,9 @@ The :guilabel:`Configure` section displays optional configuration settings for t
 
              If your OpenShift cluster enforces :openshift-docs:`Security Context Constraints </authentication/managing-security-context-constraints.html>` , ensure you set the Tenant constraints appropriately such that pods can start and run normally.
 
+   * - :guilabel:`Custom Runtime Configurations`
+     - Toggle on to customize the :kube-docs:`Runtime Class <concepts/containers/runtime-class/>` for the tenant to use. 
+
    * - :guilabel:`Additional Environment Variables`
      - Enter any additional the key:value pairs to use as environment variables for the tenant.
 
@@ -550,9 +553,21 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
 
        MinIO also supports uploading Certificate Authority certificates for validating client certificates minted by that CA.
 
+.. versionadded:: Console 0.23.1
+
+   A message displays under the certificate with the date of expiration and length of time until expiration.
+
+   The message adjusts depending on the length of time to expiration:
+   
+   - More than 30 days, the message text displays in gray.
+   - Within 30 days, the message text changes to orange.
+   - Within 10 days, the message text changes to red.
+   - Within 24 hours, the message displays as an hour and minute countdown in red text.
+   - After expiration, the message displays as ``EXPIRED``.
+
 .. _create-tenant-encryption-section:
 
-8) The :guilabel:`Encryption` Section
+1) The :guilabel:`Encryption` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption (SSE) <minio-sse>` settings for the MinIO Tenant. 
@@ -592,6 +607,10 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
    :start-after: start-deprecate-audit-logs
    :end-before: end-deprecate-audit-logs
 
+.. versionchanged:: Console 0.23.1
+
+   New tenants have Audit Logs :guilabel:`Disabled` by default.
+
 .. list-table::
    :header-rows: 1
    :widths: 30 70
@@ -628,6 +647,10 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
 .. include:: /includes/common/common-k8s-deprecation-audit-prometheus.rst
    :start-after: start-deprecate-prometheus
    :end-before: end-deprecate-prometheus
+
+.. versionchanged:: Console 0.23.1
+
+   New tenants have monitoring :guilabel:`Disabled` by default.
 
 .. list-table::
    :header-rows: 1
