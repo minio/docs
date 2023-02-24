@@ -18,10 +18,30 @@ The procedures on this page use the :ref:`MinIO Operator Console <minio-operator
    :class: no-scaled-link
    :alt: MinIO Operator Tenant Console
 
+Certificate Management
+----------------------
+
+The Security section provides tools for adding and managing certificates for the tenant.
+
+Review Certificate expiration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: Console 0.23.1
+
+A message displays under the certificate with the date of expiration and length of time until expiration.
+
+The message adjusts depending on the length of time to expiration:
+   
+- More than 30 days, the message text displays in gray.
+- Within 30 days, the message text changes to orange.
+- Within 10 days, the message text changes to red.
+- Within 24 hours, the message displays as an hour and minute countdown in red text.
+- After expiration, the message displays as ``EXPIRED``.
+
 .. _minio-k8s-modify-minio-tenant-security:
 
 Modify Tenant TLS Configuration
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The MinIO Operator Console supports adding and removing TLS certificates from a MinIO Tenant.
 
@@ -49,11 +69,22 @@ Add Trusted Certificate Authorities
 
    If the MinIO Tenant cannot match an incoming client's TLS certificate issuer against either the container OS's trust store *or* an explicitly attached CA, MinIO rejects the connection as invalid.
 
+
+Manage Tenant Pools
+-------------------
+
+Specify Runtime Class
+~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: Console 0.23.1
+
+When adding a new pool or modifying an existing pool for a tenant, you can specify the :kube-docs:`Runtime Class Name <concepts/containers/runtime-class/>` for pools to use.
+
 .. Following link is intended for K8s only
 .. _minio-decommissioning:
 
 Decommission a Tenant Server Pool
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO Operator 4.4.13 and later support decommissioning a server pool in a Tenant.
 Specifically, you can follow the :minio-docs:`Decommission a Server pool <linux/operations/install-deploy-manage/decommission-server-pool.html>` procedure to remove the pool from the tenant, then edit the tenant YAML to drop the pool from the StatefulSet.

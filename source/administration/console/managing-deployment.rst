@@ -94,14 +94,18 @@ MinIO automatically heals objects and drives when it detects problems, such as d
 
 .. _minio-console-notifications:
 
-Notifications
--------------
+Events
+------
 
-The :guilabel:`Notifications` section provides an interface to view, add, or remove :ref:`Bucket Notification <minio-bucket-notifications>` targets.
+.. versionchanged:: Console 0.23.1
+
+   Notifications section renamed to Events.
+
+The :guilabel:`Events` section provides an interface to view, add, or remove :ref:`Event Notification <minio-bucket-notifications>` targets.
 
 You can use this screen configure MinIO to push notification events to the one or more target destinations, including Redis, MySQL, Kafka, PostgreSQL, AMQP, MQTT, Elastic Search, NATS, NSQ, or a Webhook.
 
-Select the :guilabel:`Add Notification Target +` button to add a new target to the deployment.
+Select the :guilabel:`Add Event Destination +` button to add a new event target to the deployment.
 
 You can select an existing notification target from the list to view its details or delete the target.
 
