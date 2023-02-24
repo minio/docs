@@ -1,8 +1,8 @@
 .. _quickstart-macos:
 
-=======================
-Quickstart for Mac OSX
-=======================
+=============================
+Quickstart: MinIO for Mac OSX
+=============================
 
 .. default-domain:: minio
 
