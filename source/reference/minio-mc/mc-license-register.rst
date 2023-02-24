@@ -62,7 +62,7 @@ Register a MinIO deployment at alias ``minio3`` on SUBNET that does not have dir
    mc license register minio3 --airgap
 
 #. Run the command to return a registration link with token
-#. Go to the copied registration link in a web browser and sign in to SUBNET, if necessary
+#. Open the copied registration link in a web browser and sign in to SUBNET
 #. Select the :guilabel:`?` button to the right of the :guilabel:`License` number for the deployment
 #. In the popup, select the download link and save the key to a path you have access to
 #. In the command line, run the following command
