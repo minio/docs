@@ -61,15 +61,18 @@ Register a MinIO deployment at alias ``minio3`` on SUBNET that does not have dir
 
    mc license register minio3 --airgap
 
-#. Run the command to return a registration token
-#. Copy the registration token
-#. In a web browser, go to https://subnet.min.io and log in with your |SUBNET| credentials
-#. Select the  :guilabel:`Register` button
-#. Select :guilabel:`No` for the question :guilabel:`"Is the cluster connected to the internet?"`
-#. Paste the copied token into the box for :guilabel:`Register using MinIO Client Utility`
-#. Select :guilabel:`Register`
-#. Copy the API token that displays
-#. Back in the terminal, paste or enter the API token to complete the registration process
+#. Run the command to return a registration link with token
+#. Open the copied registration link in a web browser and sign in to SUBNET
+#. Select the :guilabel:`?` button to the right of the :guilabel:`License` number for the deployment
+#. In the popup, select the download link and save the key to a path you have access to
+#. In the command line, run the following command
+   
+   .. code-block:: shell
+      :class: copyable
+
+      mc license update minio3 <path-to-file>
+
+   Replace ``<path-to-file>`` with the path to the file you downloaded from SUBNET.
 
 Syntax
 ------
