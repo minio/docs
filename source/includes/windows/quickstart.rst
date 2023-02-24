@@ -1,8 +1,8 @@
 .. _quickstart-windows:
 
-======================
-Quickstart for Windows
-======================
+=============================
+Quickstart: MinIO for Windows
+=============================
 
 .. default-domain:: minio
 

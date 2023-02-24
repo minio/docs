@@ -277,6 +277,8 @@ intersphinx_mapping = {
 
 rst_prolog = """
 
+.. |platform| replace:: %s
+
 .. |podman| replace:: `Podman <https://podman.io/>`__
 
 .. |kes-tag| replace:: `KESLATEST <https://github.com/minio/kes/releases/tag/KESLATEST>`__
@@ -305,4 +307,4 @@ rst_prolog = """
 .. |rust-sdk-version| replace:: RUSTVERSION
 
 
-"""
+""" % platform_fmt
