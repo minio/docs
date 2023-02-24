@@ -1,8 +1,8 @@
 .. _quickstart-kubernetes:
 
-=================================
-Quickstart - MinIO for Kubernetes
-=================================
+================================
+Quickstart: MinIO for Kubernetes
+================================
 
 .. default-domain:: minio
 
