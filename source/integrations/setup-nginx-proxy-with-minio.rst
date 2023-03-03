@@ -1,5 +1,7 @@
+.. _integrations-nginx-proxy:
+
 ======================================
-Configure Nginx Proxy for MinIO Server
+Configure NGINX Proxy for MinIO Server
 ======================================
 
 .. default-domain:: minio
@@ -8,11 +10,11 @@ Configure Nginx Proxy for MinIO Server
    :local:
    :depth: 2
 
-The following documentation covers the minimum settings required to configure Nginx to proxy requests to MinIO.
+The following documentation covers the minimum settings required to configure NGINX to proxy requests to MinIO.
 
 This documentation assumes the following:
 
-- An existing `Nginx <http://nginx.org/en/download.html>`__ deployment
+- An existing `NGINX <http://nginx.org/en/download.html>`__ deployment
 - An existing :ref:`MinIO <minio-installation>` deployment
 - A DNS hostname which uniquely identifies the MinIO deployment
 
@@ -35,7 +37,7 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
       The following location blocks provide a template for further customization in your unique environment:
 
-      .. code-block:: shell
+      .. code-block:: nginx
          :class: copyable
 
          upstream minio {
@@ -51,12 +53,12 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
             listen  [::]:80;
             server_name  minio.example.net;
 
-            # To allow special characters in headers
+            # Allow special characters in headers
             ignore_invalid_headers off;
             # Allow any size file to be uploaded.
             # Set to a value such as 1000m; to restrict file size to a specific value
             client_max_body_size 0;
-            # To disable buffering
+            # Disable buffering
             proxy_buffering off;
             proxy_request_buffering off;
 
@@ -98,9 +100,11 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
             }
          }
 
+      The S3 API signature calculation algorithm does *not* support proxy schemes where you host either the MinIO Server API or Console GUI on a subpath, such as ``example.net/s3/`` or ``example.net/console/``.
+
    .. tab-item:: Subdomain
 
-      Create or configure a unique subdomain for both the MinIO Server S3 API and MinIO Console Web GUI.
+      Create or configure separate, unique subdomains for the MinIO Server S3 API and for the MinIO Console Web GUI.
 
       For example, given the root domain of ``example.net``:
 
@@ -110,7 +114,7 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
       The following location blocks provide a template for further customization in your unique environment:
 
-      .. code-block:: shell
+      .. code-block:: nginx
          :class: copyable
 
          upstream minio {
@@ -126,12 +130,12 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
             listen  [::]:80;
             server_name  minio.example.net;
 
-            # To allow special characters in headers
+            # Allow special characters in headers
             ignore_invalid_headers off;
             # Allow any size file to be uploaded.
             # Set to a value such as 1000m; to restrict file size to a specific value
             client_max_body_size 0;
-            # To disable buffering
+            # Disable buffering
             proxy_buffering off;
             proxy_request_buffering off;
 
@@ -157,12 +161,12 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
             listen  [::]:80;
             server_name  console.example.net;
 
-            # To allow special characters in headers
+            # Allow special characters in headers
             ignore_invalid_headers off;
             # Allow any size file to be uploaded.
             # Set to a value such as 1000m; to restrict file size to a specific value
             client_max_body_size 0;
-            # To disable buffering
+            # Disable buffering
             proxy_buffering off;
             proxy_request_buffering off;
 
@@ -189,5 +193,5 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
             }
          }
 
-The S3 API signature calculation algorithm does *not* support proxy schemes where you host either the MinIO Server API or Console GUI on a subpath, e.g. ``example.net/s3/`` or ``example.net/s3/console``.
+      The S3 API signature calculation algorithm does *not* support proxy schemes where you host either the MinIO Server API or Console GUI on a subpath, such as ``minio.example.net/s3/`` or ``console.example.net/gui``.
 

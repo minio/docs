@@ -68,6 +68,7 @@ The following load balancers are known to work well with MinIO:
 
 Configuring firewalls or load balancers to support MinIO is out of scope for
 this procedure.
+The :ref:`integrations-nginx-proxy` reference provides a baseline configuration for using NGINX as a reverse proxy with basic load balancing configured.
 
 Sequential Hostnames
 ~~~~~~~~~~~~~~~~~~~~
