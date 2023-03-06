@@ -110,4 +110,4 @@ S3 Compatibility
 Permissions
 -----------
 
-You must have the :policy:`admin:DescribeBatchJobs` permission to describe jobs on the deployment. 
+You must have the :policy-action:`admin:DescribeBatchJobs` permission to describe jobs on the deployment. 

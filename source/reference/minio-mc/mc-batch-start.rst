@@ -65,7 +65,6 @@ Parameters
    :required:
    
    The :ref:`alias <alias>` on which to start the batch job.
-   You must have the :policy:`admin:StartBatchJob` permission on the deployment to start jobs. 
    
    For example:
 
@@ -121,4 +120,4 @@ S3 Compatibility
 Permissions
 -----------
 
-You must have the :policy:`admin:StartBatchJob` permission on the deployment to start jobs. 
+You must have the :policy-action:`admin:StartBatchJob` permission on the deployment to start jobs. 

@@ -105,4 +105,4 @@ S3 Compatibility
 Permissions
 -----------
 
-You must have the :policy:`admin:ListBatchJobs` permission to list jobs on the deployment. 
+You must have the :policy-action:`admin:ListBatchJobs` permission to list jobs on the deployment. 
