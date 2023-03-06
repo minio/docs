@@ -20,6 +20,6 @@ All provided guides assume familiarity with the third-party integration software
    /integrations/using-minio-with-veeam.md
    /integrations/disaggregated-spark-and-hadoop-hive-with-minio.md
    /integrations/aws-cli-with-minio.md
-   /integrations/setup-nginx-proxy-with-minio.md
+   /integrations/setup-nginx-proxy-with-minio
    /integrations/presigned-put-upload-via-browser.md
    /integrations/generate-lets-encrypt-certificate-using-certbot-for-minio.md
