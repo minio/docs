@@ -64,15 +64,14 @@ Parameters
 .. mc-cmd:: TARGET
    :required:
    
-   The :ref:`alias <alias>` and bucket on the MinIO deployment to which to add the object lifecycle management rule. 
+   The :ref:`alias <alias>` on which to start the batch job.
+   You must have the :policy:`admin:StartBatchJob` permission on the deployment to start jobs. 
    
    For example:
 
    .. code-block:: none
 
-      mc batch start myminio/mydata replicate.yaml
-
-   You can use just an alias without specifying a bucket to perform the job at the deployment's root.
+      mc batch start myminio replicate.yaml
 
 .. mc-cmd:: JOBFILE
    :required:
@@ -117,3 +116,9 @@ S3 Compatibility
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-s3-compatibility
    :end-before: end-minio-mc-s3-compatibility
+
+
+Permissions
+-----------
+
+You must have the :policy:`admin:StartBatchJob` permission on the deployment to start jobs. 

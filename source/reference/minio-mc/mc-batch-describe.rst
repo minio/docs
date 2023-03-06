@@ -106,3 +106,8 @@ S3 Compatibility
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-s3-compatibility
    :end-before: end-minio-mc-s3-compatibility
+
+Permissions
+-----------
+
+You must have the :policy:`admin:DescribeBatchJobs` permission to describe jobs on the deployment. 
