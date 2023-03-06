@@ -84,7 +84,7 @@ Job Types
 ``replicate``
 ~~~~~~~~~~~~~
 
-The ``replicate`` job type performs a single-run push replication of objects from the local MinIO deployment to another location.
+Use the ``replicate`` job type to create a batch job that replicates objects from the local MinIO deployment to another MinIO location.
 The definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
 
 For example, you can use a batch job to perform a one-time replication sync of objects from ``minio-alpha/invoices/`` to ``minio-baker/invoices``.
@@ -105,54 +105,5 @@ Sample YAML Description File for a ``replicate`` Job Type
 
 Create a basic ``replicate`` job definition file you can edit with :mc:`mc batch generate`.
 
-.. code-block:: yaml
-
-   replicate:
-     apiVersion: v1
-     # source of the objects to be replicated
-     source:
-       type: TYPE # valid values are "minio"
-   	 bucket: BUCKET
-	    prefix: PREFIX
-	    # endpoint: ENDPOINT
-	    # credentials:
-       #   accessKey: ACCESS-KEY
-       #   secretKey: SECRET-KEY
-       #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
-
-     # target where the objects must be replicated
-     target:
-	    type: TYPE # valid values are "minio"
-	    bucket: BUCKET
-	    prefix: PREFIX
-	    # endpoint: ENDPOINT
-	    # credentials:
-       #   accessKey: ACCESS-KEY
-       #   secretKey: SECRET-KEY
-       #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
-
-     # optional flags based filtering criteria
-     # for all source objects
-     flags:
-	    filter:
-	      newerThan: "7d" # match objects newer than this value (e.g. 7d10h31s)
-	      olderThan: "7d" # match objects older than this value (e.g. 7d10h31s)
-	      createdAfter: "date" # match objects created after "date"
-	      createdBefore: "date" # match objects created before "date"
-
-	      # tags:
-      	#   - key: "name"
-      	#     value: "pick*" # match objects with tag 'name', with all values starting with 'pick'
-
-      	## NOTE: metadata filter not supported when "source" is non MinIO.
-	      # metadata:
-      	#   - key: "content-type"
-      	#     value: "image/*" # match objects with 'content-type', with all values starting with 'image/'
-
-	    notify:
-	      endpoint: "https://notify.endpoint" # notification endpoint to receive job status events
-	      token: "Bearer xxxxx" # optional authentication token for the notification endpoint
-
-	    retry:
-	      attempts: 10 # number of retries for the job before giving up
-	      delay: "500ms" # least amount of delay between each retry
+.. literalinclude:: /includes/code/replicate.yaml
+   :language: yaml
