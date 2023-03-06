@@ -81,8 +81,8 @@ You can use MinIO's :ref:`Policy Based Access Control <minio-policy>` and the :r
 Job Types
 ---------
 
-``replicate``
-~~~~~~~~~~~~~
+Replicate
+~~~~~~~~~
 
 Use the ``replicate`` job type to create a batch job that replicates objects from the local MinIO deployment to another MinIO location.
 The definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
