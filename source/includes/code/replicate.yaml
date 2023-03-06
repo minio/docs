@@ -1,0 +1,49 @@
+replicate:
+  apiVersion: v1
+  # source of the objects to be replicated
+  source:
+    type: TYPE # valid values are "s3"
+    bucket: BUCKET
+    prefix: PREFIX
+    # endpoint: ENDPOINT
+    # credentials:
+    #   accessKey: ACCESS-KEY
+    #   secretKey: SECRET-KEY
+    #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
+
+  # target where the objects must be replicated
+  target:
+    type: TYPE # valid values are "s3"
+    bucket: BUCKET
+    prefix: PREFIX
+    # endpoint: ENDPOINT
+    # credentials:
+    #   accessKey: ACCESS-KEY
+    #   secretKey: SECRET-KEY
+    #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
+
+  # optional flags based filtering criteria
+  # for all source objects
+  flags:
+    filter:
+      newerThan: "7d" # match objects newer than this value (e.g. 7d10h31s)
+      olderThan: "7d" # match objects older than this value (e.g. 7d10h31s)
+      createdAfter: "date" # match objects created after "date"
+      createdBefore: "date" # match objects created before "date"
+
+      # tags:
+      #   - key: "name"
+      #     value: "pick*" # match objects with tag 'name', with all values starting with 'pick'
+
+      ## NOTE: metadata filter not supported when "source" is non MinIO.
+      # metadata:
+      #   - key: "content-type"
+      #     value: "image/*" # match objects with 'content-type', with all values starting with 'image/'
+
+  notify:
+    endpoint: "https://notify.endpoint" # notification endpoint to receive job status events
+    token: "Bearer xxxxx" # optional authentication token for the notification endpoint
+
+  retry:
+    attempts: 10 # number of retries for the job before giving up
+    delay: "500ms" # least amount of delay between each retry

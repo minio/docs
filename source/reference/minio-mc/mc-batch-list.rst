@@ -55,7 +55,7 @@ Parameters
 .. mc-cmd:: TARGET
    :required:
    
-   The :ref:`alias <alias>` and bucket on the MinIO deployment to which to add the object lifecycle management rule. 
+   The :ref:`alias <alias>` of the deployment for which you want to list jobs in progress. 
    
 .. mc-cmd:: --type
    :optional:
@@ -75,7 +75,7 @@ Example
 List all ``replicate`` type batch jobs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command starts the batch of job(s) defined in the file ``replication.yaml`` on the deployment at :mc:`alias <mc alias>` ``myminio``:
+The following command lists the ``replicate``` type job(s) on the deployment at :mc:`alias <mc alias>` ``myminio``:
 
 .. code-block:: shell
    :class: copyable
@@ -101,3 +101,8 @@ S3 Compatibility
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-s3-compatibility
    :end-before: end-minio-mc-s3-compatibility
+
+Permissions
+-----------
+
+You must have the :policy-action:`admin:ListBatchJobs` permission to list jobs on the deployment. 

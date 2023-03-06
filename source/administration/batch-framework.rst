@@ -20,8 +20,7 @@ Overview
 The MinIO Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
 The batch jobs run directly on the MinIO deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`MinIO Client <minio-client>`.
 
-A batch file can define any number of job tasks.
-MinIO does not limit on the number of job tasks that you can define in a batch file.
+A batch file defines one job task.
 
 Once started, MinIO starts processing the job.
 Time to completion depends on the resources available to the deployment.
@@ -82,10 +81,10 @@ You can use MinIO's :ref:`Policy Based Access Control <minio-policy>` and the :r
 Job Types
 ---------
 
-``replicate``
-~~~~~~~~~~~~~
+Replicate
+~~~~~~~~~
 
-The ``replicate`` job type performs a single-run replication of objects from one MinIO deployment to another.
+Use the ``replicate`` job type to create a batch job that replicates objects from the local MinIO deployment to another MinIO location.
 The definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
 
 For example, you can use a batch job to perform a one-time replication sync of objects from ``minio-alpha/invoices/`` to ``minio-baker/invoices``.
@@ -106,57 +105,5 @@ Sample YAML Description File for a ``replicate`` Job Type
 
 Create a basic ``replicate`` job definition file you can edit with :mc:`mc batch generate`.
 
-.. code-block:: yaml
-
-   replicate:
-     apiVersion: v1
-     # source of the objects to be replicated
-     source:
-         type: TYPE # valid values are "s3"
-   	   bucket: BUCKET
-	      prefix: PREFIX
-	      # NOTE: if source is remote then target must be "local"
-	      # endpoint: ENDPOINT
-	      # credentials:
-         #   accessKey: ACCESS-KEY
-         #   secretKey: SECRET-KEY
-         #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
-
-     # target where the objects must be replicated
-     target:
-	      type: TYPE # valid values are "s3"
-	      bucket: BUCKET
-	      prefix: PREFIX
-	      # NOTE: if target is remote then source must be "local"
-	      # endpoint: ENDPOINT
-	      # credentials:
-         #   accessKey: ACCESS-KEY
-         #   secretKey: SECRET-KEY
-         #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
-
-     # optional flags based filtering criteria
-     # for all source objects
-     flags:
-	      filter:
-	         newerThan: "7d" # match objects newer than this value (e.g. 7d10h31s)
-	         olderThan: "7d" # match objects older than this value (e.g. 7d10h31s)
-	         createdAfter: "date" # match objects created after "date"
-	         createdBefore: "date" # match objects created before "date"
-
-      	   ## NOTE: tags are not supported when "source" is remote.
-	         # tags:
-      	   #   - key: "name"
-      	   #     value: "pick*" # match objects with tag 'name', with all values starting with 'pick'
-
-      	   ## NOTE: metadata filter not supported when "source" is non MinIO.
-	         # metadata:
-      	   #   - key: "content-type"
-      	   #     value: "image/*" # match objects with 'content-type', with all values starting with 'image/'
-
-	      notify:
-	         endpoint: "https://notify.endpoint" # notification endpoint to receive job status events
-	         token: "Bearer xxxxx" # optional authentication token for the notification endpoint
-
-	      retry:
-	         attempts: 10 # number of retries for the job before giving up
-	         delay: "500ms" # least amount of delay between each retry
+.. literalinclude:: /includes/code/replicate.yaml
+   :language: yaml

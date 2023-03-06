@@ -24,9 +24,7 @@ The :mc:`mc batch generate` command creates a basic YAML-formatted template file
 .. end-mc-batch-generate-desc
 
 After MinIO creates the file, open it in your preferred text editor tool to further customize.
-
-- You can add multiple job task definitions to a batch file.
-- MinIO imposes no limit to the number of job task definitions per batch file.
+You can define one job task definition per batch file.
 
 See :ref:`job types <minio-batch-job-types>` for the supported jobs you can generate.
 
@@ -62,15 +60,14 @@ Parameters
 .. mc-cmd:: TARGET
    :required:
    
-   The :ref:`alias <alias>` and bucket on the MinIO deployment to which to add the object lifecycle management rule. 
+   The :ref:`alias <alias>` used to generate the YAML template file.
+   The specified ``alias`` does not restrict the deployment(s) where you can use the generated file.
    
    For example:
 
    .. code-block:: none
 
-      mc batch generate myminio/mydata replicate
-
-   You can use just an alias without specifying a bucket to perform the job at the deployment's root.
+      mc batch generate myminio replicate
 
 .. mc-cmd:: JOBTYPE
    :required:
@@ -98,12 +95,9 @@ The following command generates a YAML blueprint for a replicate type batch job 
 .. code-block:: shell
    :class: copyable
 
-   mc batch generate alias/<bucket> replicate
+   mc batch generate alias replicate > replicate.yaml
 
-- Replace ``alias`` with the :mc:`alias <mc alias>` and (optionally) bucket of the MinIO deployment that is the source of the replication job.
-
-- Replace ``<bucket>`` with the bucket on the alias where the batch should run.
-  The bucket can be left blank to perform the action on the alias deployment's root location.
+- Replace ``alias`` with the :mc:`alias <mc alias>` to use to generate the yaml file.
 
 - Replace ``replicate`` with the type of job to generate a yaml file for.
  
@@ -134,7 +128,7 @@ MinIO may add more job types in the future.
 ``replicate``
 ~~~~~~~~~~~~~
 
-Use the ``replicate`` job type to create a batch job that performs replicates objects between two MinIO deployments.
+Use the ``replicate`` job type to create a batch job that replicates objects from the local MinIO deployment to another MinIO location.
 
 The YAML **must** define the source and target deployments.
 Optionally, the YAML can also define flags to filter which objects replicate, send notifications for the job, or define retry attempts for the job.
@@ -148,7 +142,7 @@ For the **source deployment**
      :width: 100%
 
      * - ``type:``
-       - Must be ``s3``.
+       - Must be ``minio``.
      * - ``bucket:`` 
        - The bucket on the deployment.
 
@@ -162,8 +156,7 @@ For the **source deployment**
        - The prefix on the object(s) that should replicate.
 
      * - ``endpoint:`` 
-       - | Location of the source deployment.
-         | If the location is not remote, use ``local``.
+       - | Location of the source deployment, must be ``local``.
 
      * - ``credentials:`` 
        - The ``accesskey:`` and ``secretKey:`` or the ``sessionToken:`` that grants access to the object(s).
@@ -177,7 +170,7 @@ For the **target deployment**
      :width: 100%
 
      * - ``type:`` 
-       - Must be ``s3``.
+       - Must be ``minio``.
      * - ``bucket:`` 
        - The bucket on the deployment.
 
@@ -250,58 +243,5 @@ For each retry, you can also define how long to wait between attempts.
 Sample YAML
 +++++++++++
 
-.. code-block:: yaml
-
-   replicate:
-     apiVersion: v1
-     # source of the objects to be replicated
-     source:
-         type: TYPE # valid values are "s3"
-   	   bucket: BUCKET
-	      prefix: PREFIX
-	      # NOTE: if source is remote then target must be "local"
-	      # endpoint: ENDPOINT
-	      # credentials:
-         #   accessKey: ACCESS-KEY
-         #   secretKey: SECRET-KEY
-         #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
-
-     # target where the objects must be replicated
-     target:
-	      type: TYPE # valid values are "s3"
-	      bucket: BUCKET
-	      prefix: PREFIX
-	      # NOTE: if target is remote then source must be "local"
-	      # endpoint: ENDPOINT
-	      # credentials:
-         #   accessKey: ACCESS-KEY
-         #   secretKey: SECRET-KEY
-         #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
-
-     # optional flags based filtering criteria
-     # for all source objects
-     flags:
-	      filter:
-	         newerThan: "7d" # match objects newer than this value (e.g. 7d10h31s)
-	         olderThan: "7d" # match objects older than this value (e.g. 7d10h31s)
-	         createdAfter: "date" # match objects created after "date"
-	         createdBefore: "date" # match objects created before "date"
-
-      	   ## NOTE: tags are not supported when "source" is remote.
-	         # tags:
-      	   #   - key: "name"
-      	   #     value: "pick*" # match objects with tag 'name', with all values starting with 'pick'
-
-      	   ## NOTE: metadata filter not supported when "source" is non MinIO.
-	         # metadata:
-      	   #   - key: "content-type"
-      	   #     value: "image/*" # match objects with 'content-type', with all values starting with 'image/'
-
-	      notify:
-	         endpoint: "https://notify.endpoint" # notification endpoint to receive job status events
-	         token: "Bearer xxxxx" # optional authentication token for the notification endpoint
-
-	      retry:
-	         attempts: 10 # number of retries for the job before giving up
-	         delay: "500ms" # least amount of delay between each retry
-            
+.. literalinclude:: /includes/code/replicate.yaml
+   :language: yaml

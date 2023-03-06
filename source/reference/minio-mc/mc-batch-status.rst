@@ -55,7 +55,7 @@ Parameters
 .. mc-cmd:: TARGET
    :required:
    
-   The :ref:`alias <alias>` and bucket on the MinIO deployment to which to add the object lifecycle management rule. 
+   The :ref:`alias <alias>` for which to display batch job statuses. 
 
 .. mc-cmd:: JOBID
    :optional:
