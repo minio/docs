@@ -26,7 +26,7 @@ infrastructure:
   <concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions>`
   to support describing MinIO tenants as a Kubernetes :kube-docs:`object
   <concepts/overview/working-with-objects/kubernetes-objects/>`. See the MinIO
-  Operator :minio-git:`CRD Reference <operator/blob/master/docs/crd.adoc>` for
+  Operator :minio-git:`CRD Reference <operator/blob/master/docs/tenant_crd.adoc>` for
   complete documentation on the MinIO CRD.
 
 - The MinIO Kubernetes Plugin brings native support for deploying and managing

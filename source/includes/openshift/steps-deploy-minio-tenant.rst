@@ -31,7 +31,7 @@ The :guilabel:`Form View` provides a user interface for configuring the new MinI
 - Ensure the :guilabel:`Console -> Console Secret -> Name` is set to the name of the MinIO Console Kubernetes Secret created as part of the prerequisites.
 
 You can also use the YAML view to perform more granular configuration of the MinIO Tenant. 
-Refer to the :minio-git:`MinIO Custom Resource Definition Documentation <operator/blob/master/docs/crd.adoc>` for guidance on setting specific fields. 
+Refer to the :minio-git:`MinIO Custom Resource Definition Documentation <operator/blob/master/docs/tenant_crd.adoc>` for guidance on setting specific fields. 
 MinIO also publishes examples for additional guidance in creating custom Tenant YAML objects. 
 Note that the OperatorHub YAML view supports creating only the MinIO Tenant object. 
 Do not specify any other objects as part of the YAML input.
