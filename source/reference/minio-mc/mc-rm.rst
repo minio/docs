@@ -323,7 +323,7 @@ incomplete upload files for an object.
 .. code-block:: shell
    :class: copyable
 
-   mc rm --recursive --force ALIAS/PATH
+   mc rm --incomplete --recursive --force ALIAS/PATH
 
 - Replace :mc-cmd:`ALIAS <mc rm ALIAS>` with the :mc:`alias <mc alias>` of
   a configured S3-compatible service.
