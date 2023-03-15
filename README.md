@@ -51,6 +51,26 @@ make linux k8s container
 python -m http.server --directory build/YOUR_BRANCH/<PLATFORM>/html
 ```
 
+### Stage
+
+The `make stage-PLATFORM` command uses the `mc` utility to copy the contents of the current git branch build output for the specified `PLATFORM` to a configured MinIO or S3-compatible bucket.
+
+For the command to work, you must have a configured `mc` alias `docs-staging` with general read/write (`s3:*`) permissions on the `staging` bucket.
+The `staging` bucket should have public or anonymous access enabled.
+
+For example:
+
+```
+make stage-linux
+```
+
+Does the following:
+
+1. Check that the `build/GITDIR/linux` folder exists
+2. Copies the contents of `build/GITDIR/linux/html/*` to `docs-staging/staging/GITDIR/linux`
+
+The command does not have any further error checking, such as whether `mc` is installed or if the necessary alias is configured correctly. 
+
 # License
 
 This project is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode). See [CONTRIBUTING.md](https://github.com/minio/docs/tree/master/CONTRIBUTING.md) guide for more information on contributing to the MinIO Documentation project.
