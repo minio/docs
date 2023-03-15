@@ -6,10 +6,12 @@ MinIO uses [Sphinx](https://www.sphinx-doc.org/en/master/index.html) to generate
 
 ### Prerequisites
 
-- Any GNU/Linux Operating System.
+- Any GNU/Linux Operating System, or macOS 12.3 or later.
 - python 3.10.x and python-pip
+- python3.10-venv
 - sphinx 4.3.2
 - nodejs 14.5.0 or later
+- npm 16.19.1 or later
 - `git` or a git-compatible client
 
 ### Build
@@ -34,13 +36,16 @@ python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt && npm install && npm run build
 ```
 
-4. Build all targets at once:
+4. Build your desired platform targets.
 
 ```
-make all
+make linux
+```
+```
+make linux k8s container
 ```
 
-5. View the generated documentation visit http://localhost:8000:
+5. View the generated documentation at http://localhost:8000.
 
 ```
 python -m http.server --directory build/YOUR_BRANCH/<PLATFORM>/html
