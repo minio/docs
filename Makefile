@@ -34,6 +34,21 @@ stage-%:
 		exit 1; \
 	fi
 
+	@if [ ! $(shell command -v mc) ]; then \
+	   echo "mc not found on this host, exiting" ; \
+		exit 1; \
+	fi
+
+	@if [ $(shell mc alias list --json docs-staging | jq '.status') = "error" ]; then \
+		echo "doc-staging alias not found on for host mc configuration, exiting" ; \
+		exit 1; \
+	fi
+
+	@if [ $(shell mc stat --json docs-staging/staging | jq '.status') = "error" ]; then \
+		echo "docs-staging/staging bucket not found, exiting" ; \
+		exit 1; \
+	fi
+
 	@echo "Copying contents of $(BUILDDIR)/$(GITDIR)/$*/html/* to docs-staging/staging/$(GITDIR)/$*/"
 	@mc cp -r $(BUILDDIR)/$(GITDIR)/$*/html/* docs-staging/staging/$(GITDIR)/$*/
 	@echo "Copy complete, visit $(STAGINGURL)/$(GITDIR)/$*/index.html"
