@@ -36,10 +36,13 @@ python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt && npm install && npm run build
 ```
 
-4. Build your desired platform target.
+4. Build your desired platform targets.
 
 ```
 make linux
+```
+```
+make linux k8s container
 ```
 
 5. View the generated documentation at http://localhost:8000.
