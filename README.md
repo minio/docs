@@ -34,13 +34,13 @@ python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt && npm install && npm run build
 ```
 
-4. Build all targets at once:
+4. Build your desired platform target.
 
 ```
-make all
+make k8s
 ```
 
-5. View the generated documentation visit http://localhost:8000:
+5. View the generated documentation at http://localhost:8000.
 
 ```
 python -m http.server --directory build/YOUR_BRANCH/<PLATFORM>/html
