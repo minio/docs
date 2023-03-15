@@ -11,7 +11,7 @@ MinIO uses [Sphinx](https://www.sphinx-doc.org/en/master/index.html) to generate
 - python3.10-venv
 - sphinx 4.3.2
 - nodejs 14.5.0 or later
-- npm
+- npm 16.19.1 or later
 - `git` or a git-compatible client
 
 ### Build
