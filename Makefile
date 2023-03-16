@@ -8,6 +8,7 @@ SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
 GITDIR        = $(shell git rev-parse --abbrev-ref HEAD)
+STAGINGURL    = http://192.241.195.202:9000/staging
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -28,8 +29,33 @@ clean-%:
 	@rm -rf $(BUILDDIR)/$(GITDIR)/$*
 
 stage-%:
-	python -m http.server --directory $(BUILDDIR)/$(GITDIR)/$*/html/
-	@echo "Visit http://localhost:8000 to view the staged output"
+	@if [ ! -d "$(BUILDDIR)/$(GITDIR)/$*" ]; then \
+		echo "$* build not found in $(BUILDDIR)/$(GITDIR)"; \
+		exit 1; \
+	fi
+
+	@if [ ! $(shell command -v mc) ]; then \
+	   echo "mc not found on this host, exiting" ; \
+		exit 1; \
+	fi
+
+	@if [ $(shell mc alias list --json docs-staging | jq '.status') = "error" ]; then \
+		echo "doc-staging alias not found on for host mc configuration, exiting" ; \
+		exit 1; \
+	fi
+
+	@if [ $(shell mc stat --json docs-staging/staging | jq '.status') = "error" ]; then \
+		echo "docs-staging/staging bucket not found, exiting" ; \
+		exit 1; \
+	fi
+
+	@echo "Copying contents of $(BUILDDIR)/$(GITDIR)/$*/html/* to docs-staging/staging/$(GITDIR)/$*/"
+	@mc cp -r $(BUILDDIR)/$(GITDIR)/$*/html/* docs-staging/staging/$(GITDIR)/$*/
+	@echo "Copy complete, visit $(STAGINGURL)/$(GITDIR)/$*/index.html"
+
+# Commenting out the older method
+# python -m http.server --directory $(BUILDDIR)/$(GITDIR)/$*/html/
+# @echo "Visit http://localhost:8000 to view the staged output"
 
 # Platform build commands
 # All platforms follow the same general pattern:
