@@ -185,6 +185,71 @@ You can disable upload at any time using :mc-cmd:`mc support callhome disable`.
 Use :mc:`mc admin logs` command to display logs from the command line.
 The command supports type and quantity filters for further limiting logs output.
 
+Upgrades and Version Support
+----------------------------
+
+MinIO releases versions of its software as often as needed to introduce features, improve performance, address security concerns, or fix bugs. 
+These releases can occur very frequently, and vary by product.
+
+Always test upgrades in a development environment before upgrading on a production deployment.
+
+Version Support
+~~~~~~~~~~~~~~~
+
+Version support varies by the `license <https://min.io/pricing?ref=docs>`_ used for the deployment.
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%  
+
+   * - License
+     - Support length 
+
+   * - AGPLv3
+     - Most recent release
+
+   * - MinIO Standard
+     - 1 year long term support of any release
+
+   * - MinIO Enterprise
+     - 5 year long term support of any release, SUBNET support for upgrade guidance and recommendations
+
+Version Updates
+~~~~~~~~~~~~~~~
+
+MinIO recommends always installing the most recent release to obtain the latest features, security enhancements, and performance improvements.
+We recognize that such a frequent release schedule may make this impractical for some organizations.
+In such cases, we recommend using MinIO and other product releases that are no older than six months.
+
+From time to time, we may backport some trivial changes to older releases to best support licensed customers.
+Non-trivial, feature, and security enhancements require updating to the most recent release.
+
+Version Alignment
+~~~~~~~~~~~~~~~~~
+
+As the various MinIO products release separately on their own schedules, we recommend the following version alignment practices:
+
+MinIO
+   Update to the latest release or a release no older than six months.
+
+MinIO Client
+   Update to the `mc` release that occurs immediately after the MinIO release, within one or two weeks.
+
+MinIO Operator
+   Use a MinIO version no earlier than the latest at the time of the Operator release.
+   The MinIO version latest at time of release can be found in the quay.io link in the example tenant kustomization yaml file for the Operator release.
+
+   - 4.5.5: MinIO RELEASE.2022-12-07T00-56-37Z or later
+   - 4.5.6: MinIO RELEASE.2023-01-02T09-40-09Z or later
+   - 4.5.7: MinIO RELEASE.2023-01-12T02-06-16Z or later
+   - 4.5.8: MinIO RELEASE.2023-01-12T02-06-16Z or later
+
+   When creating a new tenant, the Operator uses either the latest available MinIO release image or the image you specify when creating the tenant.
+   
+   :ref:`Upgrading the Operator <minio-k8s-upgrade-minio-operator>` does **not** automatically upgrade existing tenants.
+   :ref:`Upgrade existing tenant <minio-k8s-upgrade-minio-tenant>` MinIO versions separately.
+
 .. toctree::
    :titlesonly:
    :hidden:
