@@ -37,7 +37,8 @@ Example actions the user may be able to perform include:
 - Rewind to a previous version
 - Create prefixes
 - View deleted objects
-- Download
+- Upload objects
+- Download objects
 - Share
 - Preview
 - Manage legal holds
@@ -46,6 +47,11 @@ Example actions the user may be able to perform include:
 - Inspect
 - Display versions
 - Delete
+
+.. versionadded:: Console v0.24.0
+
+   View the status of uploading or downloading objects with the object manager button available on the top right corner of many Console screens.
+   If you have not uploaded or downloaded any objects during the current session, the button does not appear.
 
 .. _minio-console-buckets:
 
