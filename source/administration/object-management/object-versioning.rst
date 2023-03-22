@@ -266,6 +266,105 @@ enable versioning on only a prefix or subset of objects in a bucket.
 Objects created prior to enabling versioning have a 
 ``null`` :ref:`version ID <minio-bucket-versioning-id>`.
 
+
+Exclude a Prefix From Versioning
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can exclude certain prefixes from versioning using the MinIO :mc:`mc` CLI.
+This is useful for Spark/Hadoop workloads or others that initially create objects
+with temporary prefixes.
+
+- Use the :mc-cmd:`mc version enable` command with the ``--excluded-prefixes``
+  option:
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc version enable --excluded-prefixes ALIAS/BUCKET "prefix1, prefix2"
+
+  - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
+    MinIO deployment.
+
+  - Replace ``BUCKET`` with the 
+    :mc-cmd:`target bucket <mc version ALIAS>` for which the prefixes should
+    be excluded from versioning.
+
+Something about wildcards and globbing
+    
+You can exclude up to 10 prefixes for each bucket. To add or remove excluded prefixes,
+repeat your ``mc version enable`` command with an updated list. The new list of
+prefixes replaces the previous one.
+
+To view the currently excluded prefixes, use the :mc-cmd:`mc version enable`
+command with the ``--json`` option. The ``ExcludedPrefixes`` property contains a list
+of excluded prefixes:
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc version enable --excluded-prefixes ALIAS/BUCKET --json
+
+  .. code-block:: shell
+
+     $ mc version info local/test-bucket --json
+     {
+      "Op": "info",
+      "status": "success",
+      "url": "local/test-bucket",
+      "versioning": {
+       "status": "Enabled",
+       "MFADelete": "",
+       "ExcludedPrefixes": [
+        "TempPrefix-"
+       ]
+      }
+     }
+
+
+Exclude Folders from Versioning
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can exclude folders from versioning using the MinIO :mc:`mc` CLI.
+
+- Use the :mc-cmd:`mc version enable` command with the ``--exclude-folders``
+  option to exclude objects with names ending in `/` from versioning:
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc version enable --exclude-folders ALIAS/BUCKET
+
+  - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured
+    MinIO deployment.
+
+  - Replace ``BUCKET`` with the
+    :mc-cmd:`target bucket <mc version ALIAS>` for which the folders should
+    be excluded from versioning.
+
+To check whether folders are versioned for a bucket, use the :mc-cmd:`mc version enable`
+command with the ``--json`` option. If the ``ExcludeFolders`` property is ``true``,
+folders in that bucket are not versioned.
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc version enable --excluded-prefixes ALIAS/BUCKET --json
+
+  .. code-block:: shell
+
+     $ mc version info local/test-bucket --json
+     {
+      "Op": "info",
+      "status": "success",
+      "url": "local/test-bucket",
+      "versioning": {
+       "status": "Enabled",
+       "MFADelete": "",
+       "ExcludeFolders": true
+      }
+     }
+
+
 Suspend Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
