@@ -16,7 +16,7 @@ MinIO users have two options for support.
 #. Community support from the `public Slack channel <https://slack.min.io>`_.
    
    Community support is best-effort only and has no :abbr:`SLA (Service Level Agreement)` or :abbr:`SLO (Service Level Objective)`.
-#. The MinIO Subscription Network, |subnet-short|, provides either 24 hour or 1 hour :abbr:`SLA (Service Level Agreement)` depending on subscription level.
+#. The MinIO Subscription Network, |subnet-short|, provides either 48 hour or 1 hour :abbr:`SLA (Service Level Agreement)` depending on subscription level.
    
    For current licensing levels and pricing, refer to the |SUBNET| page.
 
@@ -25,12 +25,12 @@ MinIO users have two options for support.
 SUBNET
 ------
 
-SUBNET delivers 24/7/365 Direct-to-engineer support through a MinIO-built portal that blends the best of Slack and Zendesk.
+SUBNET delivers 24/7/365 Direct-to-engineer support through a MinIO-built portal that blends the chat features of common communication tools with the support features of standard support platforms.
 
 Features of SUBNET include:
 
 - Security and architecture reviews (depending on :abbr:`SLA (Service Level Agreement)`)
-- Access to Panic Button (depending on :abbr:`SLA (Service Level Agreement)`)
+- Access to Panic Button, which provides immediate response to critical issues (depending on :abbr:`SLA (Service Level Agreement)`)
 - Secure communication channel to exchange logs and software binaries
 - Unlimited seats for your team
 - Unlimited issues
