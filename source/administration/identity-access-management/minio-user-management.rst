@@ -59,7 +59,7 @@ Since the generated access keys have the same or fewer permissions as the parent
 You can create access keys using either the :ref:`MinIO Console <minio-console-user-access-keys>` *or* by using the :mc-cmd:`mc admin user svcacct add` command.
 Identities created by these methods do not expire until you remove the access key or the parent account.
 
-You can also create :ref:`security token service <minio-sts-assumerolewithcustomtoken>` accounts :ref:`programmatically <minio-sts-assumerolewithcustomtoken>`.
+You can also create :ref:`security token service <minio-security-token-service>` accounts programmatically with the ``AssumeRole`` STS API endpoint.
 STS tokens default to expire in 1 hour, but you set expiration for up to 7 days from creation.
 
 .. admonition:: Access Keys are for Programmatic Access
