@@ -188,13 +188,13 @@ The command supports type and quantity filters for further limiting logs output.
 Upgrades and Version Support
 ----------------------------
 
-MinIO releases versions of its software as often as needed to introduce features, improve performance, address security concerns, or fix bugs. 
+MinIO regularly releases updates to introduce features, improve performance, address security concerns, or fix bugs. 
 These releases can occur very frequently, and vary by product.
 
-Always test upgrades in a development environment before upgrading on a production deployment.
+Always test software releases in a development environment before upgrading on a production deployment.
 
-Version Support
-~~~~~~~~~~~~~~~
+Active Support Periods
+~~~~~~~~~~~~~~~~~~~~~~
 
 Version support varies by the `license <https://min.io/pricing?ref=docs>`_ used for the deployment.
 
@@ -215,15 +215,12 @@ Version support varies by the `license <https://min.io/pricing?ref=docs>`_ used 
    * - MinIO Enterprise
      - 5 year long term support of any release, SUBNET support for upgrade guidance and recommendations
 
-Version Updates
-~~~~~~~~~~~~~~~
+Recommended Upgrade Schedule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO recommends always installing the most recent release to obtain the latest features, security enhancements, and performance improvements.
 We recognize that such a frequent release schedule may make this impractical for some organizations.
 In such cases, we recommend using MinIO and other product releases that are no older than six months.
-
-From time to time, we may backport some trivial changes to older releases to best support licensed customers.
-Non-trivial, feature, and security enhancements require updating to the most recent release.
 
 Version Alignment
 ~~~~~~~~~~~~~~~~~
