@@ -50,7 +50,7 @@ Example actions the user may be able to perform include:
 
 .. versionadded:: Console v0.24.0
 
-   View the status of uploading or downloading objects with the object manager button available on the top right corner of many Console screens.
+   View the status of uploading or downloading objects with the object manager button available on the top right corner of the Console.
    If you have not uploaded or downloaded any objects during the current session, the button does not appear.
 
 .. _minio-console-buckets:

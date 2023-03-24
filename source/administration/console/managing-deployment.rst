@@ -155,7 +155,7 @@ This section contains the following subsections.
 .. versionadded:: Console v0.24.0
 
    Environment variable configuration settings override any customizations added in the MinIO Console.
-   When environment variables control an option, hover the mouse cursor over a configuration field to show a tooltip message that specifies which environment variable overrides the configuration.
+   Hover your mouse cover over a configuration field to display a tooltip that indicates whether an environment variable controls the setting.
 
 Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
