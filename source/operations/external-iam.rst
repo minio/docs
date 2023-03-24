@@ -10,14 +10,18 @@ External Identity Management
    :local:
    :depth: 2
 
-MinIO supports offloading identity management onto one of the following supported IDentity Providers (IDP):
+MinIO supports multiple external identity managers through the following IDentity Providers (IDP):
 
-- :ref:`OpenID Connect <minio-external-iam-oidc>`
+- :ref:`OpenID Connect-Compatible <minio-external-iam-oidc>`
 - :ref:`Active Directory / LDAP <minio-external-iam-ad-ldap>`
 
+The following tutorials provide specific guidance for select IDP software:
 
-The external :abbr:`IDP (IDentity Provider)` must have *at least* one configured user identity with the required :ref:`policy claims <minio-external-identity-management-ad-ldap-access-control>`. 
-If no such user exists, the MinIO server is effectively inaccessible outside of using the :ref:`root <minio-users-root>` user.
+- :ref:`Configure MinIO Authentication with KeyCloak <minio-authenticate-using-keycloak>`
+
+Users can authenticate against MinIO using their externally managed credentials and the related :ref:`minio-security-token-service` API.
+Once authenticated, MinIO attempts to associate the user with one or more configured :ref:`policies <minio-policy>`.
+A user with no associated policies has no permissions on the MinIO deployment.
 
 .. _minio-external-iam-oidc:
 

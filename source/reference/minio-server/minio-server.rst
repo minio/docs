@@ -2433,6 +2433,14 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
    :mc-conf:`identity_openid claim_prefix 
    <identity_openid.claim_prefix>` setting.
 
+.. envvar:: MINIO_IDENTITY_OPENID_DISPLAY_NAME
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-display-name
+      :end-before: end-minio-openid-display-name
+
 .. envvar:: MINIO_IDENTITY_OPENID_SCOPES
 
    *Optional*
@@ -2456,7 +2464,61 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
    This environment variable corresponds with the 
    :mc-conf:`identity_openid scopes 
    <identity_openid.redirect_uri>` setting.
+
+.. envvar:: MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-redirect-uri-dynamic
+      :end-before: end-minio-openid-redirect-uri-dynamic
+
+   This environment variable corresponds with the :mc-conf:`identity_openid redirect_uri_dynamic <identity_openid.redirect_uri_dynamic>` setting.
    
+.. envvar:: MINIO_IDENTITY_OPENID_CLAIM_USERINFO
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-claim-userinfo
+      :end-before: end-minio-openid-claim-userinfo
+
+   This environment variable corresponds with the :mc-conf:`identity_openid claim_userinfo <identity_openid.claim_userinfo>` setting.
+
+.. envvar:: MINIO_IDENTITY_OPENID_VENDOR
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-vendor
+      :end-before: end-minio-openid-vendor
+
+   This environment variable corresponds with the :mc-conf:`identity_openid vendor <identity_openid.vendor>` setting.
+
+.. envvar:: MINIO_IDENTITY_OPENID_KEYCLOAK_REALM
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-keycloak-realm
+      :end-before: end-minio-openid-keycloak-realm
+
+   This environment variable corresponds with the :mc-conf:`identity_openid keycloak_realm <identity_openid.keycloak_realm>` setting.
+
+   Requires :envvar:`MINIO_IDENTITY_OPENID_VENDOR` set to ``keycloak``.
+
+.. envvar:: MINIO_IDENTITY_OPENID_KEYCLOAK_ADMIN_URL
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-keycloak-admin-url
+      :end-before: end-minio-openid-keycloak-admin-url
+
+   This environment variable corresponds with the :mc-conf:`identity_openid keycloak_admin_url <identity_openid.keycloak_admin_url>` setting.
+
+   Requires :envvar:`MINIO_IDENTITY_OPENID_VENDOR` set to ``keycloak``.
+
 
 .. envvar:: MINIO_IDENTITY_OPENID_COMMENT
 
@@ -2469,6 +2531,51 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
    This environment variable corresponds with the 
    :mc-conf:`identity_openid comment 
    <identity_openid.comment>` setting.
+
+.. _minio-server-envvar-external-identity-management-plugin:
+
+MinIO Identity Management Plugin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. envvar:: MINIO_IDENTITY_PLUGIN_URL
+   
+   *Required*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-identity-management-plugin-url
+      :end-before: end-minio-identity-management-plugin-url
+
+.. envvar:: MINIO_IDENTITY_PLUGIN_ROLE_POLICY
+
+   *Required*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-identity-management-role-policy
+      :end-before: end-minio-identity-management-role-policy
+
+.. envvar:: MINIO_IDENTITY_PLUGIN_TOKEN
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-identity-management-auth-token
+      :end-before: end-minio-identity-management-auth-token
+
+.. envvar:: MINIO_IDENTITY_PLUGIN_ROLE_ID
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-identity-management-role-id
+      :end-before: end-minio-identity-management-role-id
+
+.. envvar:: MINIO_IDENTITY_PLUGIN_COMMENT
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-identity-management-comment
+      :end-before: end-minio-identity-management-comment
 
 Batch Replication
 ~~~~~~~~~~~~~~~~~

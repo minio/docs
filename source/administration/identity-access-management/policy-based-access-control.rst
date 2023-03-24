@@ -816,3 +816,128 @@ MinIO supports the following conditions for use with defining policies for
 
 For complete information on any listed condition key, see the :iam-docs:`IAM
 Condition Element Documentation <reference_policies_elements_condition.html>`
+
+Policy Variables
+----------------
+
+MinIO supports using policy variables for automatically substituting context from the authenticated user and/or the operation into the user's assigned policy or policies.
+Use the ``${POLICYVARIABLE}`` format to specify the variable to the policy as part of the ``Condition`` or ``Resource`` definition.
+MinIO policy variables function similarly to :iam-docs:`AWS IAM policy elements: Variables and tags <reference_policies_variables.html>`.
+
+Each MinIO :ref:`identity provider <minio-authentication-and-identity-management>` supports its own set of policy variables:
+
+- :ref:`minio-policy-variables-internal`
+- :ref:`minio-policy-variables-oidc`
+- :ref:`minio-policy-variables-ad-ldap`
+
+.. _minio-policy-variables-internal:
+
+MinIO Policy Variables
+~~~~~~~~~~~~~~~~~~~~~~
+
+The following table contains a list of recommended policy variables for use in authorizing :ref:`MinIO-managed users <minio-internal-idp>`:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+   :width: 100%
+
+   * - Variable
+     - Description
+
+   * - :iam-docs:`aws:referrer <reference_policies_condition-keys.html#condition-keys-referer>`
+     - The referrer in the HTTP header for the authenticated API call.
+
+   * - :iam-docs:`aws:SourceIp <reference_policies_condition-keys.html#condition-keys-sourceip>`
+     - The source IP in the HTTP header for the authenticated API call.
+
+   * - :iam-docs:`aws:username <reference_policies_condition-keys.html#condition-keys-username>`
+     - The name of the user associated with the authenticated API call.
+
+For example, the following policy uses variables to substitute the authenticated user's username as part of the ``Resource`` field such that the user can only access those prefixes which match their username:
+
+.. code-block:: json
+
+   {
+   "Version": "2012-10-17",
+   "Statement": [
+         {
+            "Action": ["s3:ListBucket"],
+            "Effect": "Allow",
+            "Resource": ["arn:aws:s3:::mybucket"],
+            "Condition": {"StringLike": {"s3:prefix": ["${aws:username}/*"]}}
+         },
+         {
+            "Action": [
+            "s3:GetObject",
+            "s3:PutObject"
+            ],
+            "Effect": "Allow",
+            "Resource": ["arn:aws:s3:::mybucket/${aws:username}/*"]
+         }
+      ]
+   }
+
+MinIO replaces the ``${aws:username}`` variable in the ``Resource`` field with the username.
+MinIO then evaluates the policy and grants or revokes access to the requested API and resource.
+
+.. _minio-policy-variables-oidc:
+
+OpenID Policy Variables
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common/common-minio-oidc.rst
+   :start-after: start-minio-oidc-policy-variables
+   :end-before: end-minio-oidc-policy-variables
+
+.. _minio-policy-variables-ad-ldap:
+
+Active Directory / LDAP Policy Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following table contains a list of supported policy variables for use in authorizing :ref:`AD/LDAP users <minio-external-identity-management-ad-ldap>`:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+   :width: 100%
+
+   * - Variable
+     - Description
+
+   * - ``ldap:username``
+     - The simple username (``name``) for the authenticated user.
+         This is distinct from the user's DistinguishedName or CommonName.
+
+   * - ``ldap:user``
+     - The Distinguished Name used by the authenticated user.
+
+   * - ``ldap:groups``
+     - The Group Distinguished Name for the authenticated user.
+
+For example, the following policy uses variables to substitute the authenticated user's ``name`` as part of the ``Resource`` field such that the user can only access those prefixes which match their name:
+
+.. code-block:: json
+
+   {
+   "Version": "2012-10-17",
+   "Statement": [
+         {
+            "Action": ["s3:ListBucket"],
+            "Effect": "Allow",
+            "Resource": ["arn:aws:s3:::mybucket"],
+            "Condition": {"StringLike": {"s3:prefix": ["${ldap:username}/*"]}}
+         },
+         {
+            "Action": [
+            "s3:GetObject",
+            "s3:PutObject"
+            ],
+            "Effect": "Allow",
+            "Resource": ["arn:aws:s3:::mybucket/${ldap:username}/*"]
+         }
+      ]
+   }
+
+MinIO replaces the ``${ldap:username}`` variable in the ``Resource`` field with the value of the authenticated user's ``name``.
+MinIO then evaluates the policy and grants or revokes access to the requested API and resource.

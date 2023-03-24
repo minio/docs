@@ -2213,6 +2213,8 @@ configuration settings.
    .. mc-conf:: claim_name
       :delimiter: " "
 
+      *Optional*
+
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-openid-claim-name
          :end-before: end-minio-openid-claim-name
@@ -2223,13 +2225,24 @@ configuration settings.
    .. mc-conf:: claim_prefix
       :delimiter: " "
 
+      *Optional*
+
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-openid-claim-prefix
          :end-before: end-minio-openid-claim-prefix
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_OPENID_CLAIM_PREFIX` environment variable.
-      
+
+   .. mc-conf:: display_name
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-display-name
+         :end-before: end-minio-openid-display-name
+
    .. mc-conf:: scopes
       :delimiter: " "
 
@@ -2245,13 +2258,72 @@ configuration settings.
 
       *Optional*
 
-
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-openid-redirect-uri
          :end-before: end-minio-openid-redirect-uri
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_OPENID_REDIRECT_URI` environment variable.
+
+   .. mc-conf:: redirect_uri_dynamic
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-redirect-uri-dynamic
+         :end-before: end-minio-openid-redirect-uri-dynamic
+
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC` environment variable.
+
+   .. mc-conf:: claim_userinfo
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-claim-userinfo
+         :end-before: end-minio-openid-claim-userinfo
+
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_CLAIM_USERINFO` environment variable.
+
+   .. mc-conf:: vendor
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-vendor
+         :end-before: end-minio-openid-vendor
+
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_VENDOR` environment variable.
+
+   .. mc-conf:: keycloak_realm
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-keycloak-realm
+         :end-before: end-minio-openid-keycloak-realm
+
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_KEYCLOAK_REALM` environment variable.
+
+      Requires :mc-conf:`identity_openid.vendor` set to ``keycloak``.
+
+   .. mc-conf:: keycloak_admin_url
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-keycloak-admin-url
+         :end-before: end-minio-openid-keycloak-admin-url
+
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_KEYCLOAK_ADMIN_URL` environment variable.
+
+      Requires :mc-conf:`identity_openid.vendor` set to ``keycloak``.
+
 
    .. mc-conf:: comment
       :delimiter: " "
@@ -2262,4 +2334,76 @@ configuration settings.
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_OPENID_COMMENT` environment variable.
-      
+
+.. _minio-identity-management-plugin-settings:
+
+Identity Management Plugin
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following section documents settings for enabling external identity management using the MinIO Identity Management Plugin.
+See :ref:`minio-external-identity-management-plugin` for a tutorial on using these configuration settings.
+
+.. mc-conf:: identity_plugin
+
+   The top-level configuration key for enabling :ref:`minio-external-identity-management-plugin`.
+
+   Use :mc-cmd:`mc admin config set` to set or update the configuration.
+   The :mc-conf:`~identity_plugin.url` and :mc-conf:`~identity_plugin.role_policy` arguments are *required*.
+   Specify additional optional arguments as a whitespace (``" "``)-delimited list.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config set identity_plugin \
+        url="https://external-auth.example.net:8080/auth" \
+        role_policy="consoleAdmin" \
+        [ARGUMENT=VALUE] ... \
+
+   The :mc-conf:`identity_plugin` configuration key supports the following arguments:
+
+   .. mc-conf:: url
+      :delimiter: " "
+   
+      *Required*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-identity-management-plugin-url
+         :end-before: end-minio-identity-management-plugin-url
+
+
+   .. mc-conf:: role_policy
+      :delimiter: " "
+
+      *Required*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-identity-management-role-policy
+         :end-before: end-minio-identity-management-role-policy
+
+   .. mc-conf:: token
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-identity-management-auth-token
+         :end-before: end-minio-identity-management-auth-token
+
+   .. mc-conf:: role_id
+      :delimiter: " "
+      :debug:
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-identity-management-role-id
+         :end-before: end-minio-identity-management-role-id
+
+   .. mc-conf:: comment
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-identity-management-comment
+         :end-before: end-minio-identity-management-comment

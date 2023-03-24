@@ -78,7 +78,6 @@ MinIO uses the specified user Claim to identify one or more policies to attach t
 If the Claim is empty or specifies policies which do not exist on the deployment, the authenticated user has no permissions on the Tenant.
 
 The following example assumes an existing :ref:`alias <alias>` configured for the MinIO Tenant.
-See the :ref:`Deploy MinIO Tenant: Forward Ports <create-tenant-cli-forward-ports>` procedure for a basic example of granting network access to the MinIO tenant from your local host machine.
 
 Consider the following example policy that grants general S3 API access on only the ``data`` bucket:
 

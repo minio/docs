@@ -83,4 +83,9 @@ Creating Policies to Match Claims
 
 Use either the MinIO Console *or* the :mc:`mc admin policy` command to create policies that match one or more claim values.
 
-.. todo - instructions
+OIDC Policy Variables
+---------------------
+
+.. include:: /includes/common/common-minio-oidc.rst
+   :start-after: start-minio-oidc-policy-variables
+   :end-before: end-minio-oidc-policy-variables

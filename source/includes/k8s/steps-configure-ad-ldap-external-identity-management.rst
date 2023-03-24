@@ -80,7 +80,6 @@ MinIO by default assigns no :ref:`policies <minio-policy>` to AD/LDAP users or g
 You must explicitly assign MinIO policies to a given user or group Distinguished Name (DN) to grant that user or group access to the MinIO deployment.
 
 The following example assumes an existing :ref:`alias <alias>` configured for the MinIO Tenant.
-See the :ref:`Deploy MinIO Tenant: Forward Ports <create-tenant-cli-forward-ports>` procedure for a basic example of granting network access to the MinIO tenant from your local host machine.
 
 Use the :mc-cmd:`mc admin policy set` command to assign a user or group DN to an existing MinIO Policy:
 
