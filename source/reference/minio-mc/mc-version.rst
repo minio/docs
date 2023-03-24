@@ -60,10 +60,15 @@ Parameters
    Mutually exclusive with :mc-cmd:`~mc version suspend` and
    :mc-cmd:`~mc version info`
 
-   .. mc-cmd:: enable --excluded-prefixes
-      :optional:
+.. mc-cmd:: --exclude-folders
+   :optional:
 
-      something
+   something
+
+.. mc-cmd:: --excluded-prefixes
+   :optional:
+
+   something
 	   
 .. mc-cmd:: suspend
 

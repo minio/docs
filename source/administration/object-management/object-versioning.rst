@@ -270,7 +270,7 @@ Objects created prior to enabling versioning have a
 Exclude a Prefix From Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can exclude certain prefixes from versioning using the :ref:`MinIO Client <minio-client>`.
+You can exclude certain :ref:`prefixes <minio-admin-concepts-organize-objects>` from versioning using the :ref:`MinIO Client <minio-client>`.
 This is useful for Spark/Hadoop workloads or others that initially create objects with temporary prefixes. 
 
 .. admonition:: Object locking
@@ -278,15 +278,7 @@ This is useful for Spark/Hadoop workloads or others that initially create object
 
    Buckets with :ref:`object locking enabled <minio-object-locking>` require versioning and do not support excluding prefixes.
 
-Testing links:
-
-:mc-cmd:`~mc mb --with-lock`
-
-:mc-cmd:`~mc version enable`
-
-:mc-cmd:`~mc version enable --excluded-prefixes`
-   
-- Use :mc-cmd:`mc version enable` with the :mc-cmd:`~mc version enable --excluded-prefixes` option:
+- Use :mc-cmd:`mc version enable` with the :mc-cmd:`~mc version --excluded-prefixes` option:
 
   .. code-block:: shell
      :class: copyable
@@ -295,23 +287,23 @@ Testing links:
 
   - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-  - Replace ``BUCKET`` with the :mc-cmd:`target bucket <mc version ALIAS>` for which the :ref:`prefixes <minio-admin-concepts-organize-objects>` should be excluded from versioning.
+  - Replace ``BUCKET`` with the :mc-cmd:`target bucket <mc version ALIAS>` you want to exclude :ref:`prefixes <minio-admin-concepts-organize-objects>` for.
 
 Something about wildcards and globbing
-    
+
 You can exclude up to 10 prefixes for each bucket.
-To add or remove excluded prefixes, repeat the ``mc version enable`` command with an updated list.
+To add or remove prefixes, repeat the :mc-cmd:`mc version enable` command with an updated list.
 The new list of prefixes replaces the previous one.
 
-To view the currently excluded prefixes, use :mc-cmd:`mc version enable` with the :mc-cmd:`~mc version enable --JSON` option.
-The ``ExcludedPrefixes`` property contains a list of excluded prefixes:
+To view the currently excluded prefixes, use :mc-cmd:`mc version enable` with the :mc-cmd:`~mc version enable --JSON` option:
+
 
   .. code-block:: shell
      :class: copyable
 
      mc version enable --excluded-prefixes ALIAS/BUCKET --json
 
-The command output resembles the following:
+The command output resembles the following, with the list of excluded prefixes in the ``ExcludedPrefixes`` property:
 
 .. code-block:: shell
 
@@ -329,7 +321,7 @@ The command output resembles the following:
       }
      }
 
-To disable prefix exclusion and resume versioning all prefixes, repeat the ``mc version enable`` command without ``--excluded-prefixes``:
+To disable prefix exclusion and resume versioning all prefixes, repeat the :mc-cmd:`mc version enable` command without :mc-cmd:`~mc version --excluded-prefixes`:
 
   .. code-block:: shell
      :class: copyable
@@ -340,14 +332,14 @@ To disable prefix exclusion and resume versioning all prefixes, repeat the ``mc 
 Exclude Folders from Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can exclude folders from versioning using the MinIO :mc:`mc` CLI.
+You can exclude folders from versioning using the :ref:`MinIO Client <minio-client>`.
 
 .. admonition:: Object locking
    :class: note
 
    Buckets with :ref:`object locking enabled <minio-object-locking>` require versioning and do not support excluding folders.
 
-- Use the :mc-cmd:`mc version enable` command with the ``--exclude-folders`` option to exclude objects with names ending in `/` from versioning:
+- Use :mc-cmd:`mc version enable` with the :mc-cmd:`~mc version --excluded-prefixes` option to exclude objects with names ending in `/` from versioning:
 
   .. code-block:: shell
      :class: copyable
@@ -382,7 +374,7 @@ The command output resembles the following:
       }
      }
 
-To disable folder exclusion and resume versioning all folders, repeat the ``mc version enable`` command without ``--exclude-folders``:
+To disable folder exclusion and resume versioning all folders, repeat the :mc-cmd:`mc version enable` command without :mc-cmd:`~mc version --exclude-folders`:
 
   .. code-block:: shell
      :class: copyable
