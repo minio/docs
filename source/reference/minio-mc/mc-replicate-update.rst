@@ -342,7 +342,7 @@ Use :mc:`mc replicate update` with the :mc-cmd:`~mc replicate update --state` fl
 
    mc replicate update ALIAS/PATH \
       --id ID \
-      --state "disabled"|"enabled"
+      --state "disable"|"enable"
 
 - Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
@@ -351,7 +351,7 @@ Use :mc:`mc replicate update` with the :mc-cmd:`~mc replicate update --state` fl
 - Replace :mc-cmd:`ID <mc replicate update --id>` with the unique identifier for the rule to modify. 
   Use :mc:`mc replicate ls` to retrieve the list of replication rules on the bucket and their corresponding identifiers.
 
-- Specify either ``"disabled"`` or ``"enabled"`` to the :mc-cmd:`~mc replicate update --state` flag to disable or enable the replication rule.
+- Specify either ``"disable"`` or ``"enable"`` to the :mc-cmd:`~mc replicate update --state` flag to disable or enable the replication rule.
 
 .. note::
 
