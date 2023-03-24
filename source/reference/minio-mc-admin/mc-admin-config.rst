@@ -2391,7 +2391,6 @@ See :ref:`minio-external-identity-management-plugin` for a tutorial on using the
 
    .. mc-conf:: role_id
       :delimiter: " "
-      :debug:
 
       *Optional*
 
