@@ -37,11 +37,11 @@ The command supports adding both :ref:`Transition (Tiering) <minio-lifecycle-man
       .. code-block:: shell
          :class: copyable
 
-         mc ilm rule add --expire-days 90 --noncurrent-expire-days 30  mydata/myminio
+         mc ilm rule add --expire-days 90 --noncurrent-expire-days 30  myminio/mydata
          
-         mc ilm rule add --expire-delete-marker mydata/myminio
+         mc ilm rule add --expire-delete-marker myminio/mydata
 
-         mc ilm rule add --transition-days 30 --transition-tier "COLDTIER" mydata/myminio
+         mc ilm rule add --transition-days 30 --transition-tier "COLDTIER" myminio/mydata
          
          mc ilm rule add --noncurrent-transition-days 7 --noncurrent-transition-tier "COLDTIER" 
 
@@ -101,7 +101,7 @@ Parameters
 
    .. code-block:: none
 
-      mc ilm rule add --prefix "meetingnotes/" myminio/mydata/ --expire-days "90"
+      mc ilm rule add --prefix "meetingnotes/" myminio/mydata --expire-days "90"
 
    The command creates a rule that expires objects in the ``mydata`` bucket of the ``myminio`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
 
@@ -327,7 +327,7 @@ Use the :mc:`mc ilm rule add` with :mc-cmd:`~mc ilm rule add --prefix` and :mc-c
 
    mc ilm rule add --prefix "doc/" --transition-days "90" --trasition-tier "MINIOTIER-1"  \
           --noncurrent-transition-days "45" --noncurrent-transition-tier "MINIOTIER-2"    \
-          myminio/mybucket/
+          myminio/mybucket
 
 This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``myminio`` deployment.
 
@@ -343,7 +343,7 @@ Use the :mc:`mc ilm rule add` command with :mc-cmd:`~mc ilm rule add --prefix`, 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule add --prefix "doc/" --expire-days "300" --noncurrent-expire-days "100" myminio/mybucket/
+   mc ilm rule add --prefix "doc/" --expire-days "300" --noncurrent-expire-days "100" myminio/mybucket
 
 This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``myminio`` deployment.
 
