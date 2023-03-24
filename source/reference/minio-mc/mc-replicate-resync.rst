@@ -25,7 +25,7 @@ specified MinIO bucket to a remote :ref:`replication
 .. end-mc-replicate-resync-desc
 
 This command *requires* first configuring the remote bucket target using the
-:mc-cmd:`mc admin bucket remote add` command. You must specify the resulting
+:mc-cmd:`mc replicate add` command. You must specify the resulting
 remote ARN as part of running :mc:`mc replicate resync`.
 
 This command supports rebuilding a MinIO deployment using an active-active
@@ -142,7 +142,7 @@ replication status:
   full bucket path for which to create the replication configuration.
 
 - Replace the :mc-cmd:`~mc replicate add --remote-bucket` value with the 
-  ARN of the remote target. Use :mc-cmd:`mc admin bucket remote ls` to list
+  ARN of the remote target. Use :mc-cmd:`mc replicate ls` to list
   all configured remote replication targets.
 
 Behavior
