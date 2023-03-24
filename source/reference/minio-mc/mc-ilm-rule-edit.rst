@@ -36,9 +36,9 @@ rule on a MinIO bucket.
       .. code-block:: shell
          :class: copyable
 
-         mc ilm rule edit --id "c79ntj94b0t6rukh6lr0" --expiry-days 90  mydata/myminio
+         mc ilm rule edit --id "c79ntj94b0t6rukh6lr0" --expiry-days 90  myminio/mydata
          
-         mc ilm rule edit --id "c79nu2p4b0t6qko19rgg" --expired-object-delete-marker mydata/myminio
+         mc ilm rule edit --id "c79nu2p4b0t6qko19rgg" --expired-object-delete-marker myminio/mydata
 
          mc ilm rule edit --id "c79n19dn10dnab109fg1" --transition-days 30 --tier "COLDTIER"
          
@@ -116,7 +116,7 @@ Parameters
 
    .. code-block:: none
 
-      mc ilm rule edit --prefix "meetingnotes/" myminio/mydata/ --expire-days "90"
+      mc ilm rule edit --prefix "meetingnotes/" myminio/mydata --expire-days "90"
 
    The command modifies a rule that expires objects in the ``mydata`` bucket of the ``myminio`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
 
