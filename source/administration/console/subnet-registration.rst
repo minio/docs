@@ -39,7 +39,7 @@ Applications using MinIO — or any other OSS-licensed code — without validati
 Support
 -------
 
-Proprietary application stacks that register for a commerical license choose engineering support under either the :guilabel:`Standard` or :guilabel:`Enterprise` License and Support plans.
+Proprietary application stacks that register for a commercial license choose engineering support under either the :guilabel:`Standard` or :guilabel:`Enterprise` License and Support plans.
 Both support plans share the same commercial license to MinIO.
 
 The :guilabel:`Support` section provides an interface for generating health and performance reports.
@@ -83,3 +83,21 @@ MinIO Engineering may request this output as part of diagnostics in |subnet|.
 The resulting object may be read using MinIO's :minio-git:`debugging tool <minio/tree/master/docs/debugging#decoding-metadata>`. 
 Independent or third-party use of the output for diagnostics or remediation is done at your own risk.
 You can optionally encrypt the object such that it can only be read if the generated encryption key is included as part of the debugging toolchain.
+
+Call Home
+---------
+
+.. versionadded:: Console v0.24.0
+
+Call Home is an optional feature where a deployment registered for |SUBNET| can automatically send daily health diagnostic reports or real-time error logs to SUBNET.
+Having these reports equips engineering support with a record of diagnostics, logs, or both when responding to support requests.
+
+MinIO installs with Call Home options disabled by default.
+
+.. important:: 
+
+   Call Home requires an active SUBNET subscription.
+
+Use the :guilabel:`Call Home` section to enable or disable uploading either once-per-day health diagnostic reports or real-time error logs to SUBNET.
+The health reports and real-time logs are separate functions you can enable or disable separately.
+You can enable both diagnostics and logs at the same time, if desired.
