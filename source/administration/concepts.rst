@@ -67,6 +67,8 @@ Once authenticated, TLS provides the cipher to encrypt and then decrypt the tran
 
 MinIO supports several methods of :ref:`Server-Side Encryption <minio-encryption-overview>`.
 
+.. _minio-admin-concepts-organize-objects:
+
 Can I organize objects in a folder structure within buckets?
 ------------------------------------------------------------
 

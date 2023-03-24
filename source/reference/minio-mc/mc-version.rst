@@ -60,6 +60,11 @@ Parameters
    Mutually exclusive with :mc-cmd:`~mc version suspend` and
    :mc-cmd:`~mc version info`
 
+   .. mc-cmd:: enable --excluded-prefixes
+      :optional:
+
+      something
+	   
 .. mc-cmd:: suspend
 
    Disables versioning on the MinIO bucket specified to
