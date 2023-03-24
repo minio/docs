@@ -57,6 +57,10 @@ This allows application owners to generate arbitrary access keys for their appli
 Since the generated access keys have the same or fewer permissions as the parents, administrators can focus on managing the top-level parent users without micro-managing generated access keys.
 
 You can create access keys using either the :ref:`MinIO Console <minio-console-user-access-keys>` *or* by using the :mc-cmd:`mc admin user svcacct add` command.
+Identities created by these methods do not expire until you remove the access key or the parent account.
+
+You can also create :ref:`security token service <minio-sts-assumerolewithcustomtoken>` accounts :ref:`programmatically <minio-sts-assumerolewithcustomtoken>`.
+STS tokens default to expire in 1 hour, but you can set these tokens to last for any duration up to 7 days.
 
 .. admonition:: Access Keys are for Programmatic Access
    :class: dropdown, note

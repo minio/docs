@@ -430,6 +430,37 @@ IAM Metrics
    
    Number of successful IAM data syncs since server start. 
 
+IAM Plugin Metrics
+~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+   The metrics in this section require that you have configured the :ref:`MinIO External Identity Management Plugin <minio-external-identity-management-plugin>`.
+
+.. metric:: minio_node_iam_plugin_authn_service_last_succ_seconds
+
+   Time (in seconds) since last successful request to the external IDP service.
+   
+.. metric:: minio_node_iam_plugin_authn_service_last_fail_seconds
+
+   Time (in seconds) since last failed request to the external IDP service.
+
+.. metric:: minio_node_iam_plugin_authn_service_total_requests_minute
+
+   Total request counts to the external IDP service in the last full minute.
+
+.. metric:: minio_node_iam_plugin_authn_service_failed_requests_minute
+
+   Count of the failed requests to the external IDP service in the last full minute.
+
+.. metric:: minio_node_iam_plugin_authn_service_succ_avg_rtt_ms_minute
+
+   Average round trip time (RTT) of successful requests to the IDP service in the last full minute.
+
+.. metric:: minio_node_iam_plugin_authn_service_succ_max_rtt_ms_minute
+
+   Maximum round trip time (RTT) of successful requests to the IDP service in the last full minute.
+
 Internal Metrics
 ~~~~~~~~~~~~~~~~
 
