@@ -60,7 +60,7 @@ You can create access keys using either the :ref:`MinIO Console <minio-console-u
 Identities created by these methods do not expire until you remove the access key or the parent account.
 
 You can also create :ref:`security token service <minio-sts-assumerolewithcustomtoken>` accounts :ref:`programmatically <minio-sts-assumerolewithcustomtoken>`.
-STS tokens default to expire in 1 hour, but you can set these tokens to last for any duration up to 7 days.
+STS tokens default to expire in 1 hour, but you set expiration for up to 7 days from creation.
 
 .. admonition:: Access Keys are for Programmatic Access
    :class: dropdown, note

@@ -447,7 +447,7 @@ IAM Plugin Metrics
 
 .. metric:: minio_node_iam_plugin_authn_service_total_requests_minute
 
-   Total request counts to the external IDP service in the last full minute.
+   Total requests count to the external IDP service in the last full minute.
 
 .. metric:: minio_node_iam_plugin_authn_service_failed_requests_minute
 
