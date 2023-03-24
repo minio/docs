@@ -346,12 +346,12 @@ Enable Versioning on Source and Destination Buckets
 
 MinIO relies on the immutability protections provided by versioning to synchronize objects between the source and replication target.
 
-Use the :mc:`mc version suspend` command to enable versioning on *both* the source and destination bucket before starting this procedure:
+Use the :mc:`mc version enable` command to enable versioning on *both* the source and destination bucket before starting this procedure:
 
 .. code-block:: shell
    :class: copyable
 
-   mc version ALIAS/PATH
+   mc version enable ALIAS/PATH
 
 - Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
