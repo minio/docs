@@ -63,13 +63,15 @@ Parameters
 .. mc-cmd:: --exclude-folders
    :optional:
 
-   something
+   Use with :mc-cmd:`mc version enable` to disable versioning on all folders (objects whose name ends with ``/``) in the specified bucket.
 
 .. mc-cmd:: --excluded-prefixes
    :optional:
 
-   something
-	   
+   Use with :mc-cmd:`mc version enable` to disable versioning on objects matching a list of prefixes, up to 10.
+   The list of prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``*prefix*``.
+   To match objects by prefix only, use ``prefix/*``.
+
 .. mc-cmd:: suspend
 
    Disables versioning on the MinIO bucket specified to
@@ -88,7 +90,9 @@ Parameters
 
 .. mc-cmd:: ALIAS
 
-   *Required* The :ref:`alias <alias>` of a MinIO deployment and the full path
+   *Required*
+
+   The :ref:`alias <alias>` of a MinIO deployment and the full path
    to the bucket for which to set the versioning configuration. For example:
 
    .. code-block:: shell
