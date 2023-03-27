@@ -220,7 +220,7 @@ Recommended Upgrade Schedule
 
 MinIO recommends always installing the most recent release to obtain the latest features, security enhancements, and performance improvements.
 We recognize that such a frequent release schedule may make this impractical for some organizations.
-In such cases, we recommend using MinIO and other product releases that are no older than six months.
+In such cases, we recommend using MinIO and our related product releases that are no older than six months.
 
 Version Alignment
 ~~~~~~~~~~~~~~~~~
