@@ -16,7 +16,7 @@ MinIO users have two options for support.
 #. Community support from the `public Slack channel <https://slack.min.io>`_.
    
    Community support is best-effort only and has no :abbr:`SLA (Service Level Agreement)` or :abbr:`SLO (Service Level Objective)`.
-#. The MinIO Subscription Network, |subnet-short|, provides either 24 hour or 1 hour :abbr:`SLA (Service Level Agreement)` depending on subscription level.
+#. The MinIO Subscription Network, |subnet-short|, provides either 48 hour or 1 hour :abbr:`SLA (Service Level Agreement)` depending on subscription level.
    
    For current licensing levels and pricing, refer to the |SUBNET| page.
 
@@ -25,12 +25,12 @@ MinIO users have two options for support.
 SUBNET
 ------
 
-SUBNET delivers 24/7/365 Direct-to-engineer support through a MinIO-built portal that blends the best of Slack and Zendesk.
+SUBNET delivers 24/7/365 Direct-to-engineer support through a MinIO-built portal that blends the chat features of common communication tools with the support features of standard support platforms.
 
 Features of SUBNET include:
 
 - Security and architecture reviews (depending on :abbr:`SLA (Service Level Agreement)`)
-- Access to Panic Button (depending on :abbr:`SLA (Service Level Agreement)`)
+- Access to Panic Button, which provides immediate response to critical issues (depending on :abbr:`SLA (Service Level Agreement)`)
 - Secure communication channel to exchange logs and software binaries
 - Unlimited seats for your team
 - Unlimited issues
@@ -184,6 +184,68 @@ You can disable upload at any time using :mc-cmd:`mc support callhome disable`.
 
 Use :mc:`mc admin logs` command to display logs from the command line.
 The command supports type and quantity filters for further limiting logs output.
+
+Upgrades and Version Support
+----------------------------
+
+MinIO regularly releases updates to introduce features, improve performance, address security concerns, or fix bugs. 
+These releases can occur very frequently, and vary by product.
+
+Always test software releases in a development environment before upgrading on a production deployment.
+
+Active Support Periods
+~~~~~~~~~~~~~~~~~~~~~~
+
+Version support varies by the `license <https://min.io/pricing?ref=docs>`_ used for the deployment.
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%  
+
+   * - License
+     - Support length 
+
+   * - AGPLv3
+     - Most recent release
+
+   * - MinIO Standard
+     - 1 year long term support of any release
+
+   * - MinIO Enterprise
+     - 5 year long term support of any release, SUBNET support for upgrade guidance and recommendations
+
+Recommended Upgrade Schedule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO recommends always installing the most recent release to obtain the latest features, security enhancements, and performance improvements.
+We recognize that such a frequent release schedule may make this impractical for some organizations.
+In such cases, we recommend using MinIO and our related product releases that are no older than six months.
+
+Version Alignment
+~~~~~~~~~~~~~~~~~
+
+As the various MinIO products release separately on their own schedules, we recommend the following version alignment practices:
+
+MinIO
+   Update to the latest release or a release no older than six months.
+
+MinIO Client
+   Update to the `mc` release that occurs immediately after the MinIO release, within one or two weeks.
+
+MinIO Operator
+   Use a MinIO version no earlier than the latest at the time of the Operator release.
+   The MinIO version latest at time of release can be found in the quay.io link in the example tenant kustomization yaml file for the Operator release.
+
+   - 4.5.5: MinIO RELEASE.2022-12-07T00-56-37Z or later
+   - 4.5.6: MinIO RELEASE.2023-01-02T09-40-09Z or later
+   - 4.5.7: MinIO RELEASE.2023-01-12T02-06-16Z or later
+   - 4.5.8: MinIO RELEASE.2023-01-12T02-06-16Z or later
+
+   When creating a new tenant, the Operator uses either the latest available MinIO release image or the image you specify when creating the tenant.
+   
+   :ref:`Upgrading the Operator <minio-k8s-upgrade-minio-operator>` does **not** automatically upgrade existing tenants.
+   :ref:`Upgrade existing tenant <minio-k8s-upgrade-minio-tenant>` MinIO versions separately.
 
 .. toctree::
    :titlesonly:
