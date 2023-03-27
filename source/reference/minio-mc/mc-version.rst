@@ -72,6 +72,13 @@ Parameters
    The list of prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``*prefix*``.
    To match objects by prefix only, use ``prefix/*``.
 
+   For example, the following command excludes any objects containing ``_test`` or ``_temp`` in their prefix or name from versioning:
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc version enable --excluded-prefixes "_test, _temp" local/my-bucket
+
 .. mc-cmd:: suspend
 
    Disables versioning on the MinIO bucket specified to
