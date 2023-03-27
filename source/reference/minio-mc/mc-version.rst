@@ -52,7 +52,18 @@ The :mc:`mc version` command enables, suspends, and retrieves the
 Parameters
 ~~~~~~~~~~
 
+.. mc-cmd:: ALIAS
+   :required:
+
+   The :ref:`alias <alias>` of a MinIO deployment and the full path
+   to the bucket for which to set the versioning configuration. For example:
+
+   .. code-block:: shell
+
+      mc version enable myminio/mybucket
+
 .. mc-cmd:: enable
+   :optional:
 
    Enables versioning on the MinIO bucket specified to
    :mc-cmd:`ALIAS <mc version ALIAS>`.
@@ -74,20 +85,13 @@ Parameters
 
    For example, the following command excludes any objects containing ``_test`` or ``_temp`` in their prefix or name from versioning:
 
-  .. code-block:: shell
-     :class: copyable
+   .. code-block:: shell
+      :class: copyable
 
-     mc version enable --excluded-prefixes "_test, _temp" local/my-bucket
-
-.. mc-cmd:: suspend
-
-   Disables versioning on the MinIO bucket specified to
-   :mc-cmd:`ALIAS <mc version ALIAS>`.
-
-   Mutually exclusive with :mc-cmd:`~mc version suspend` and
-   :mc-cmd:`~mc version info`
+      mc version enable --excluded-prefixes "_test, _temp" local/my-bucket
 
 .. mc-cmd:: info
+   :optional:
 
    Returns the versioning configuration for the MinIO bucket specified to
    :mc-cmd:`ALIAS <mc version ALIAS>`.
@@ -95,16 +99,14 @@ Parameters
    Mutually exclusive with :mc-cmd:`~mc version suspend` and
    :mc-cmd:`~mc version info`
 
-.. mc-cmd:: ALIAS
+.. mc-cmd:: suspend
+   :optional:
 
-   *Required*
+   Disables versioning on the MinIO bucket specified to
+   :mc-cmd:`ALIAS <mc version ALIAS>`.
 
-   The :ref:`alias <alias>` of a MinIO deployment and the full path
-   to the bucket for which to set the versioning configuration. For example:
-
-   .. code-block:: shell
-
-      mc version enable myminio/mybucket
+   Mutually exclusive with :mc-cmd:`~mc version suspend` and
+   :mc-cmd:`~mc version info`
 
 Global Flags
 ~~~~~~~~~~~~
