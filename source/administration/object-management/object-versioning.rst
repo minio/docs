@@ -307,7 +307,7 @@ To view the currently excluded prefixes, use :mc-cmd:`mc version enable` with th
   .. code-block:: shell
      :class: copyable
 
-     mc version enable --excluded-prefixes ALIAS/BUCKET --json
+     mc version info ALIAS/BUCKET --json
 
 The command output resembles the following, with the list of excluded prefixes in the ``ExcludedPrefixes`` property:
 
