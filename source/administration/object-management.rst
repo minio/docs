@@ -10,9 +10,9 @@ Object Management
 
 .. _objects:
 
-An :ref:`object <objects>` is binary data, sometimes referred to as a Binary Large OBject (BLOB). 
-Blobs can be images, audio files, spreadsheets, or even binary executable code. 
-Object Storage platforms like MinIO provide dedicated tools and capabilities for storing, retrieving, and searching for blobs. 
+An :ref:`object <objects>` is binary data, such as images, audio files, spreadsheets, or even binary executable code. 
+The term "Binary Large Object" or "blob" is sometimes associated to object storage, although blobs can be anywhere from a few bytes to several terabytes in size.
+Object Storage platforms like MinIO provide dedicated tools and capabilities for storing, listing, and retrieving objects using a standard S3-compatible API. 
 
 .. _buckets:
 
@@ -40,23 +40,25 @@ following:
          2020-01-02-MinIO-Advanced-Deployment-comments.json
          2020-01-04-MinIO-Interview.md
 
-With the example structure, an administrator would create the ``/images``, ``/videos`` and ``articles`` buckets.
-Client applications would write objects to those buckets using the full "path" to that object, including all intermediate :term:`prefixes <prefix>`.
+With the example structure, an administrator would create the ``/images``, ``/videos`` and ``/articles`` buckets.
+Client applications write objects to those buckets using the full "path" to that object, including all intermediate :term:`prefixes <prefix>`.
 
 MinIO supports multiple levels of nested directories and objects using prefixes to support even the most dynamic object storage workloads.
+MinIO automatically infers the intermediate prefixes, such as ``/articles/john.doe`` from the full object path using ``/`` as a delimiter. 
+Clients and administrators should not create these prefixes manually.
+
 Neither clients nor administrators would manually create the intermediate prefixes, as MinIO automatically infers them from the object name.
 
 Object Organization and Planning
 --------------------------------
 
-Administrators typically control the creation and configuration of buckets, though client applications may have access to the necessary APIs depending on their configured :ref:`policies <minio-policy>`
+Administrators typically control the creation and configuration of buckets.
 Client applications can then use :ref:`S3-compatible SDKs <minio-drivers>` to create, list, retrieve, and delete objects on the MinIO deployment.
-Depending on the combination of policy restrictions in place, client operations drive the organization of data within a given bucket or prefix without requiring administrators to create any indexes or schemas in advance.
+Client's therefore drive the overall hierarchy of data within a given bucket or prefix, where Administrators can exercise control using :ref:`policies <minio-policy>` to grant or deny access to an action or resource.
 
 MinIO has no hard :ref:`thresholds <minio-server-limits>` on the number of buckets, objects, or prefixes on a given deployment.
-However, the relative performance of the hardware and networking underlying the MinIO deployment may create a practical limit to the number of objects in a given prefix or bucket.
-For example, a deployment using slower spinning disks on a 10GbE network is unlikely to exhibit good listing performance on a bucket or prefix with tens of millions of objects.
-Generally speaking, very flat hierarchies of data tend to exacerbate existing performance limitations of the hardware/network infrastructure.
+The relative performance of the hardware and networking underlying the MinIO deployment may create a practical limit to the number of objects in a given prefix or bucket.
+Specifically, hardware using slower drives or network infrastructures tend to exhibit poor performance in buckets or prefixes with a flat hierarchy of objects.
 
 Consider the following points as general guidance for client applications workload patterns:
 
@@ -77,17 +79,40 @@ MinIO supports keeping multiple "versions" of an object in a single bucket.
    :alt: Object with Multiple Versions
    :align: center
 
-For buckets with versioning disabled or suspended, creating an object at a given namespace (``BUCKET/PREFIX/OBJECT.EXT``) overwrites the object permanently.
-Delete operations remove the object with no possibility of recovery ("hard delete").
+The specific client behavior on write, list, get, or delete operations on a bucket depends on the versioning state of that bucket:
 
-For buckets with versioning enabled, write operations on an existing object create a new version of that object using the write payload. 
-Delete operations produce a 0-byte "Delete Marker" as the latest version of the object ("soft delete").
+.. list-table::
+   :stub-columns: 1
+   :header-rows: 1
+   :widths: 20 40 40
+   :width: 100%
 
-Client GET, HEAD, or LIST requests against a versioned object by default return only the latest object version.
-MinIO omits objects with a Delete Marker from the response, such that the client effectively interprets the object as "deleted."
+   * - Operation
+     - Versioning Enabled
+     - Versioning Disabled | Suspended
 
-Clients can make an explicit request to include versioning data to return a list of all object versions, including delete markers.
-Clients can also delete specific object versions to restore a previous version, including the deletion of a "Delete Marker" to "restore" an object.
+   * - ``PUT`` (Write)
+     - Create a new full version of the object as the "latest" and assign a unique version ID
+     - Create the object with overwrite on namespace match.
+
+   * - ``GET`` (Read)
+     - Retrieve the latest version of the object by default
+
+       Supports retrieving a specific object by version ID.
+     - Retrieve the object
+
+   * - ``LIST`` (Read)
+     - Retrieve the latest version of objects at the specified bucket or prefix
+
+       Supports retrieving all objects with their associated version ID.
+     - Retrieve all objects at the specified bucket or prefix
+
+   * - ``DELETE`` (Write)
+     - Creates a 0-byte "Delete Marker" for the object as "latest" (soft delete)
+
+       Supports deleting a specific object by version ID (hard delete).
+       You cannot undo hard-delete operations.
+     - Deletes the object
 
 See :ref:`minio-bucket-versioning` for more complete documentation.
 
@@ -105,10 +130,10 @@ MinIO supports both :ref:`duration based object retention <minio-object-locking-
 Delete operations against a WORM-locked object depend on the specific operation:
 
 - Delete operations which do not specify a version ID result in the creation of a "Delete Marker"
-- Delete operations which specify the version ID of a locked object result in an locking error
+- Delete operations which specify the version ID of a locked object result in a WORM locking error
 
-You *must* enable object locking during bucket creation.
-Enabling bucket creation also enables :ref:`versioning <minio-bucket-versioning>`.
+You can only enable object locking when first creating a bucket.
+Enabling bucket locking also enables :ref:`versioning <minio-bucket-versioning>`.
 
 MinIO Object Locking provides key data retention compliance and meets SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per `Cohasset Associates <https://min.io/cohasset?ref=docs>`__.
 
@@ -122,11 +147,11 @@ For object transition, MinIO automatically moves the object to a configured remo
 For object expiry, MinIO automatically deletes the object.
 
 MinIO applies lifecycle management rules on :ref:`versioned and unversioned buckets <minio-bucket-versioning>` using the same behavior as normal client operations.
-You can specify transition or lifecycle rules that handle either or both the latest object versions and prior object versions.
+You can specify transition or lifecycle rules that handle the latest object versions, non-current object versions, or both.
 
 MinIO lifecycle management is built for behavior and syntax compatibility with :s3-docs:`AWS S3 Lifecycle Management <object-lifecycle-mgmt.html>`. 
-For example, you can export S3 lifecycle management rules and import them into MinIO or vice-versa. 
-MinIO uses JSON to describe lifecycle management rules, and conversion to or from XML may be required. 
+MinIO uses JSON to describe lifecycle management rules.
+Conversion to or from XML may be required for importing rules created on S3 or similar compatible platforms. 
 
 See :ref:`minio-lifecycle-management` for more complete documentation.
 
