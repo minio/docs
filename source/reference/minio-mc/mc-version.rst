@@ -80,7 +80,7 @@ Parameters
    :optional:
 
    Use with :mc-cmd:`mc version enable` to disable versioning on objects matching a list of prefixes, up to 10.
-   The list of prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``*prefix*``.
+   The list of prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``prefix*``.
    To match objects by prefix only, use ``prefix/*``.
 
    For example, the following command excludes any objects containing ``_test`` or ``_temp`` in their prefix or name from versioning:
