@@ -288,7 +288,7 @@ This is useful for Spark/Hadoop workloads or others that initially create object
 
   - Replace ``BUCKET`` with the name of the :s3-docs:`bucket <UsingBucket.html>` you want to exclude :ref:`prefixes <minio-admin-concepts-organize-objects>` for.
 
-The list of :mc-cmd:`~mc version --excluded-prefixes` prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``*prefix*``.
+The list of :mc-cmd:`~mc version --excluded-prefixes` prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``prefix*``.
 To match objects by prefix only, use ``prefix/*``.
 
 For example, the following command excludes any objects containing ``_test`` or ``_temp`` in their prefix or name from versioning:
