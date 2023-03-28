@@ -345,7 +345,7 @@ You can exclude folders from versioning using the :ref:`MinIO Client <minio-clie
 
    Buckets with :ref:`object locking enabled <minio-object-locking>` require versioning and do not support excluding folders.
 
-- Use :mc-cmd:`mc version enable` with the :mc-cmd:`~mc version --excluded-prefixes` option to exclude objects with names ending in ``/`` from versioning:
+- Use :mc-cmd:`mc version enable` with the :mc-cmd:`~mc version --exclude-folders` option to exclude objects with names ending in ``/`` from versioning:
 
   .. code-block:: shell
      :class: copyable
