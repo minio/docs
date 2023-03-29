@@ -423,7 +423,7 @@ You can use the ``--config-dir``
 Certificates
 ------------
 
-The MinIO Client stores certificates and CAs for deployments with :ref:`server side encryption <minio-sse>` to the following paths:
+The MinIO Client stores certificates and CAs for deployments to the following paths:
 
 Linux, MacOS, and other Unix-like systems:
 
@@ -439,12 +439,12 @@ Windows systems:
    C:\Users\[username]\mc\certs\ # certificates
    C:\Users\[username]\mc\certs\CAs\ # Certificate Authorities
 
-When creating a new :ref:`alias <minio-mc-alias>`, the MinIO Client prompts the user whether to accept the deployment's certificates.
-If you decide to trust the certificate, the MinIO Client adds the certificate to the above paths.
+When creating a new :ref:`alias <minio-mc-alias>`, the MinIO Client fetches the peer certificate, computes the public key fingerprint, and asks the user whether to accept the deployment's certificate.
+If you decide to trust the certificate, the MinIO Client adds the certificate to the certificate authority path listed above.
 
 .. note::
 
-   In testing environments, you can bypass the certificate check for selected mc commands by passing the ``--insecure`` flag.
+   In testing environments, you can bypass the certificate check for selected MinIO Client commands by passing the ``--insecure`` flag.
 
 .. _minio-mc-global-options:
 

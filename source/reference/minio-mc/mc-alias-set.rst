@@ -200,12 +200,12 @@ For more complete documentation on S3 Access Control, see
 For all other S3-compatible services, defer to the documentation for that
 service.
 
-Server-Side Encryption
-~~~~~~~~~~~~~~~~~~~~~~
+Certificates
+~~~~~~~~~~~~
 
-For deployments with :ref:`server side encryption <minio-sse>` enabled, the MinIO Client asks the user whether to trust the certificates for the deployment when creating the alias.
+The MinIO Client fetches the peer certificate, computes the public key fingerprint, and asks the user whether to accept the deployment's certificate.
 
-If trusted, the MinIO Client automatically adds the certificate and certificate authority to:
+If trusted, the MinIO Client automatically adds the certificate authority to:
 
--  ``~/.mc/certs/`` on Linux and other Unix-like systems.
--  ``C:\Users\[username]\mc\certs`` on Windows systems.
+-  ``~/.mc/certs/CAs/`` on Linux and other Unix-like systems.
+-  ``C:\Users\[username]\mc\certs\CAs\`` on Windows systems.
