@@ -16,7 +16,7 @@
 
 .. |command| replace:: :mc:`mc du`
 .. |rewind| replace:: :mc-cmd:`~mc du --rewind`
-.. |versionid| replace:: :mc-cmd:`~mc du --version-id`
+.. |versions| replace:: :mc-cmd:`~mc du --versions`
 .. |alias| replace:: :mc-cmd:`~mc du ALIAS`
 
 Syntax
@@ -24,10 +24,8 @@ Syntax
 
 .. start-mc-du-desc
 
-The :mc:`mc du` command concatenates the contents of a file or
-object to another file or object. You can also use the command to
-display the contents of the specified file or object to ``STDOUT``. 
-:mc:`~mc du` has similar functionality to ``cat``. 
+The :mc:`mc du` command summarizes the disk usage of buckets and folders. 
+You can also use :mc:`~mc du` against the local filesystem to produce similar results as the ``du`` command. 
 
 .. end-mc-du-desc
 
@@ -35,13 +33,18 @@ display the contents of the specified file or object to ``STDOUT``.
 
    .. tab-item:: EXAMPLE
 
-      The following command concatenates the contents of an object on a 
-      MinIO deployment to ``STDOUT``:
+      The following command prints the disk usage of the ``mybucket`` bucket on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc du play/mybucket/myobject.txt
+         mc du play/mybucket
+
+      The output resembles the following:
+      
+      .. code-block:: shell
+
+         825KiB	3 objects        mybucket
 
    .. tab-item:: SYNTAX
 
@@ -50,10 +53,12 @@ display the contents of the specified file or object to ``STDOUT``.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] cat             \
-                          [--rewind]      \
-                          [--version-id]  \
+         mc [GLOBALFLAGS] du              \
+                          [--depth]       \
                           [--encrypt-key] \
+                          [--recursive]   \
+                          [--rewind]      \
+                          [--versions]    \
                           ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
@@ -61,65 +66,71 @@ display the contents of the specified file or object to ``STDOUT``.
          :end-before: end-minio-syntax
 
 
-You can also use :mc:`mc du` against a local filesystem to produce similar
-results to the ``cat`` commandline tool:
-
 Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
-
-   *Required* The :ref:`alias <alias>` of a MinIO deployment and the full
-   path to the object. For example:
-
-   .. code-block:: shell
-
-      mc du myminio/mybucket/myobject.txt
-
-   You can specify multiple objects on the same or different MinIO
-   deployment. For example:
+   :required:
+   
+   The :ref:`alias <alias>` of a MinIO deployment and the full path to the folder. For example:
 
    .. code-block:: shell
 
-      mc du myminio/mybucket/object.txt myminio/myotherbucket/object.txt
+      mc du myminio/mybucket
 
-   For an object on a local filesystem, specify the full path to that
-   object. For example:
+   You can specify multiple buckets and folders on the same or different MinIO deployment. For example:
 
    .. code-block:: shell
 
-      mc du ~/data/object.txt
+      mc du myminio/mybucket myminio/myotherbucket/myfolder
+
+   For a folder on a local filesystem, specify the full path to that folder. For example:
+
+   .. code-block:: shell
+
+      mc du ~/data/images
+
+.. mc-cmd:: --depth, d
+   :optional:
+
+   Print the total for all folders N or fewer levels below the path specified in the command. Default is 0, for the specified path only.
+
+.. mc-cmd:: --encrypt-key
+   :optional:
+
+   Encrypt or decrypt objects using server-side encryption with client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
+
+   - Each ``KEY`` represents a bucket or object.
+   - Each ``VALUE`` represents the data key to use for encrypting
+      object(s).
+
+   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc cat --encrypt-key` in double quotes ``"``.
+
+   :mc-cmd:`~mc cat --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
+
+.. mc-cmd:: --recursive, r
+   :optional:
+
+   Recursively print the total for each bucket or child folder.
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: --version-id, vid
-   
+   Use :mc-cmd:`~mc du --rewind` and :mc-cmd:`~mc du --versions` together to show the disk usage for those object versions which existed at a specific point in time.
+
+.. mc-cmd:: --versions
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
-      :start-after: start-version-id-desc
-      :end-before: end-version-id-desc
+      :start-after: start-versions-desc
+      :end-before: end-versions-desc
 
-.. mc-cmd:: --encrypt-key
-   
+   Use :mc-cmd:`~mc du --versions` and :mc-cmd:`~mc du --rewind` together to show the disk usage for those object versions which existed at a specific point in time.
 
-   Encrypt or decrypt objects using server-side encryption with
-   client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
-
-   Enclose the entire list of key-value pairs passed to 
-   :mc-cmd:`~mc du --encrypt-key` in double quotes ``"``.
-
-   :mc-cmd:`~mc du --encrypt-key` can use the ``MC_ENCRYPT_KEY``
-   environment variable for retrieving a list of encryption key-value pairs
-   as an alternative to specifying them on the command line.
 
 Global Flags
 ~~~~~~~~~~~~
@@ -131,69 +142,55 @@ Global Flags
 Examples
 --------
 
-View an S3 Object
-~~~~~~~~~~~~~~~~~
+View the Disk Usage for a Bucket or Folder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc du` to return the object:
+Use :mc:`mc du` to print a summary of the disk usage for a bucket or folder:
 
 .. code-block:: shell
    :class: copyable
 
    mc du ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc du ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc du ALIAS>` with the  :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the object on the
-  S3-compatible host.
+- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the bucket or folder on the S3-compatible host.
 
-View an S3 Object at a Point-In-Time
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+View the Disk Usage at a Point-In-Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc du --rewind` to return the object at a specific
-point-in-time in the past:
+Use :mc-cmd:`mc du --rewind` to print a summary of disk usage at a specific point-in-time in the past:
 
 .. code-block:: shell
    :class: copyable
 
-   mc du ALIAS/PATH --rewind DURATION
+   mc du --rewind DURATION ALIAS/PATH
+
+- Replace :mc-cmd:`DURATION <mc du --rewind>` with the desired point-in-time in the past. For example, specify ``30d`` to show the disk usage 30 days prior to the current date.
 
 - Replace :mc-cmd:`ALIAS <mc du ALIAS>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the object on the
-  S3-compatible host.
-
-- Replace :mc-cmd:`DURATION <mc du --rewind>` with the point-in-time in the past
-  at which the command returns the object. For example, specify ``30d`` to
-  return the version of the object 30 days prior to the current date.
+- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the bucket or folder on the S3-compatible host.
 
 .. include:: /includes/facts-versioning.rst
    :start-after: start-versioning-admonition
    :end-before: end-versioning-admonition
 
-View an S3 Object with Specific Version
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+View the Disk Usage Recursively
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc du --version-id` to return a specific version of the 
-object:
+Use :mc-cmd:`mc du --recursive` to print a summary for each folder recursively:
 
 .. code-block:: shell
+   :class: copyable
 
-   mc du ALIAS/PATH --version-id VERSION
+   mc du --recursive ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc du ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc du ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the object on the
-  S3-compatible host.
+- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the bucket or folder on the S3-compatible host.
 
-- Replace :mc-cmd:`VERSION <mc du --version-id>` with the specific version of the
-  object to return.
-
-.. include:: /includes/facts-versioning.rst
-   :start-after: start-versioning-admonition
-   :end-before: end-versioning-admonition
 
 Behavior
 --------

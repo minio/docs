@@ -116,7 +116,7 @@ Parameters
    as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc

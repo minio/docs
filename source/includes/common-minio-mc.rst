@@ -30,7 +30,7 @@ This command supports only global flags
 .. start-minio-mc-s3-compatibility
 
 The :program:`mc` commandline tool is built for compatibility with the AWS S3
-API and is tested MinIO and AWS S3 for expected functionality and behavior.
+API and is tested with MinIO and AWS S3 for expected functionality and behavior.
 
 MinIO provides no guarantees for other S3-compatible services, as their S3 API
 implementation is unknown and therefore unsupported. While :program:`mc`

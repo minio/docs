@@ -42,7 +42,7 @@ results as the ``ls`` command.
 
          mc ls --recursive --versions myminio/mydata
 
-      The output resembles the following::
+      The output resembles the following:
 
       .. code-block:: shell
 
@@ -116,7 +116,7 @@ Parameters
    :mc-cmd:`~mc ls ALIAS`.
 
 .. mc-cmd:: --rewind
-   
+   :optional:
    
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
@@ -127,7 +127,7 @@ Parameters
    versions which existed at a specific point in time.
 
 .. mc-cmd:: --versions
-   
+   :optional:   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc

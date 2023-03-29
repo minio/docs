@@ -81,7 +81,7 @@ Parameters
    :mc-cmd:`~mc legalhold clear ALIAS` bucket or bucket prefix.
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
