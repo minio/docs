@@ -104,9 +104,9 @@ Parameters
    - Each ``VALUE`` represents the data key to use for encrypting
       object(s).
 
-   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc cat --encrypt-key` in double quotes ``"``.
+   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc du --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd:`~mc cat --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
+   :mc-cmd:`~mc du --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --recursive, r
    :optional:
