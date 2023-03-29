@@ -101,8 +101,7 @@ Parameters
    Encrypt or decrypt objects using server-side encryption with client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
 
    - Each ``KEY`` represents a bucket or object.
-   - Each ``VALUE`` represents the data key to use for encrypting
-      object(s).
+   - Each ``VALUE`` represents the data key to use for encrypting object(s).
 
    Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc du --encrypt-key` in double quotes ``"``.
 
