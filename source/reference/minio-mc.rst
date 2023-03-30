@@ -418,6 +418,34 @@ The following list describes each possible file path location in the order
 
 You can use the ``--config-dir``
 
+.. _minio-mc-certificates:
+
+Certificates
+------------
+
+The MinIO Client stores certificates and CAs for deployments to the following paths:
+
+Linux, MacOS, and other Unix-like systems:
+
+.. code-block:: shell
+
+   ~/.mc/certs/ # certificates
+   ~/.mc/certs/CAs/ # Certificate Authorities
+
+Windows systems:
+
+.. code-block:: shell
+
+   C:\Users\[username]\mc\certs\ # certificates
+   C:\Users\[username]\mc\certs\CAs\ # Certificate Authorities
+
+When creating a new :ref:`alias <minio-mc-alias>`, the MinIO Client fetches the peer certificate, computes the public key fingerprint, and asks the user whether to accept the deployment's certificate.
+If you decide to trust the certificate, the MinIO Client adds the certificate to the certificate authority path listed above.
+
+.. note::
+
+   In testing environments, you can bypass the certificate check for selected MinIO Client commands by passing the ``--insecure`` flag.
+
 .. _minio-mc-global-options:
 
 Global Options
