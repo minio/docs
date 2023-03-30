@@ -90,6 +90,8 @@ Parameters
 
       mc du ~/data/images
 
+   The time required for :mc:`mc du` to complete depends on the size of the target buckets and folders. A large bucket may take some time to generate a disk usage summary.
+   
 .. mc-cmd:: --depth, d
    :optional:
 
@@ -151,9 +153,9 @@ Use :mc:`mc du` to print a summary of the disk usage for a bucket or folder:
 
    mc du ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc du ALIAS>` with the  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace ``ALIAS`` with the  :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the bucket or folder on the S3-compatible host.
+- Replace ``PATH`` with the path to the bucket or folder on the S3-compatible host.
 
 View the Disk Usage at a Point-In-Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -165,12 +167,11 @@ Use :mc-cmd:`mc du --rewind` to print a summary of disk usage at a specific poin
 
    mc du --rewind DURATION ALIAS/PATH
 
-- Replace :mc-cmd:`DURATION <mc du --rewind>` with the desired point-in-time in the past. For example, specify ``30d`` to show the disk usage 30 days prior to the current date.
+- Replace ``DURATION`` with the desired point-in-time in the past. For example, specify ``30d`` to show the disk usage 30 days prior to the current date.
 
-- Replace :mc-cmd:`ALIAS <mc du ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the bucket or folder on the S3-compatible host.
+- Replace ``PATH`` with the path to the bucket or folder on the S3-compatible host.
 
 .. include:: /includes/facts-versioning.rst
    :start-after: start-versioning-admonition
@@ -186,9 +187,9 @@ Use :mc-cmd:`mc du --recursive` to print a summary for each folder recursively:
 
    mc du --recursive ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc du ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc du ALIAS>` with the path to the bucket or folder on the S3-compatible host.
+- Replace ``PATH`` with the path to the bucket or folder on the S3-compatible host.
 
 
 Behavior
