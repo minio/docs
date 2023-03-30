@@ -72,14 +72,14 @@ Parameters
       mc tag remove myminio/mybucket/object.txt
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --versions
-   
+   :optional:   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc

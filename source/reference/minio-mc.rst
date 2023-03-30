@@ -203,6 +203,11 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /reference/minio-mc/mc-diff.rst
           :start-after: start-mc-diff-desc
           :end-before: end-mc-diff-desc
+
+   * - :mc:`mc du`
+     - .. include:: /reference/minio-mc/mc-du.rst
+          :start-after: start-mc-du-desc
+          :end-before: end-mc-du-desc
      
    * - | :mc:`mc encrypt clear`
        | :mc:`mc encrypt info`
@@ -566,6 +571,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-cat
    /reference/minio-mc/mc-cp
    /reference/minio-mc/mc-diff
+   /reference/minio-mc/mc-du
    /reference/minio-mc/mc-encrypt
    /reference/minio-mc/mc-event
    /reference/minio-mc/mc-find

@@ -87,14 +87,14 @@ Parameters
       mc tag set myminio/mybucket/object.txt "key1=value1&key2=value2"
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --versions
-   
+   :optional:   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc

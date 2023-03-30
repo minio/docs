@@ -243,7 +243,7 @@ Parameters
    Requires specifying :mc-cmd:`~mc cp --retention-duration`.
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc

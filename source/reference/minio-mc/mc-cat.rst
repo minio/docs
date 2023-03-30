@@ -91,7 +91,7 @@ Parameters
       mc cat ~/data/object.txt
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc

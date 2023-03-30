@@ -1,6 +1,6 @@
 .. start-rewind-desc
 
-*Optional* Directs |command| to operate only on the object version(s) that
+Directs |command| to operate only on the object version(s) that
 existed at specified point-in-time.
 
 - To rewind to a specific date in the past, specify the date as an
@@ -17,7 +17,7 @@ that supports :ref:`minio-bucket-versioning`. For MinIO deployments, use
 
 .. start-versions-desc
 
-*Optional* Directs |command| to operate on all object versions that exist in the
+Directs |command| to operate on all object versions that exist in the
 bucket.
 
 |versions| requires that the specified |alias| be an S3-compatible service

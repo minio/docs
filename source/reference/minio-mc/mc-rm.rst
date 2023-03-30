@@ -235,7 +235,7 @@ Parameters
    Mutually exclusive with :mc-cmd:`mc rm --version-id`
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
@@ -247,7 +247,7 @@ Parameters
    *Optional* Read object names or buckets from ``STDIN``.
 
 .. mc-cmd:: --versions
-   
+   :optional:   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc

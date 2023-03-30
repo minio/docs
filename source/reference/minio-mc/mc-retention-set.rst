@@ -160,7 +160,7 @@ Parameters
    Mutually exclusive with :mc-cmd:`~mc retention set --version-id`.
 
 .. mc-cmd:: --rewind
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
@@ -182,7 +182,7 @@ Parameters
    - :mc-cmd:`~mc retention set --recursive`
 
 .. mc-cmd:: --versions
-   
+   :optional:   
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-versions-desc
