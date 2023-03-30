@@ -14,6 +14,11 @@ Prior to starting these steps, create the following folders if they do not alrea
 1) Download KES and Create the Service File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. important::
+
+   Starting with :minio-release:`RELEASE.2023-02-17T17-52-43Z`, MinIO requires expanded KES permissions for functionality.
+   The example configuration in this section contains all required permissions.
+
 a. Download KES
 
    .. include:: /includes/linux/common-minio-kes.rst

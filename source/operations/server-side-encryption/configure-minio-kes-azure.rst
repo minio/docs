@@ -228,16 +228,20 @@ The following section describes each of the |KES-git| configuration settings for
 using Azure Key Vault as the root Key Management Service
 (KMS) for |SSE|:
 
+.. important::
+
+   Starting with :minio-release:`RELEASE.2023-02-17T17-52-43Z`, MinIO requires expanded KES permissions for functionality.
+   The example configuration in this section contains all required permissions.
+
 .. tab-set::
 
    .. tab-item:: YAML Overview
 
-      The following YAML describes the minimum required fields for configuring
-      Azure Key Vault as an external KMS for supporting |SSE|. 
+      Any field with value ``${VARIABLE}`` uses the environment variable with matching name as the value. 
+      You can use this functionality to set credentials without writing them to the configuration file.
 
-      Any field with value ``${VARIABLE}`` uses the environment variable 
-      with matching name as the value. You can use this functionality to set
-      credentials without writing them to the configuration file.
+      The YAML assumes a minimal set of permissions for the MinIO deployment accessing KES.
+      As an alternative, you can omit the ``policy.minio-server`` section and instead set the ``${MINIO_IDENTITY}`` hash as the ``${ROOT_IDENTITY}``.
 
       .. code-block:: yaml
 
@@ -254,6 +258,9 @@ using Azure Key Vault as the root Key Management Service
                - /v1/key/create/*
                - /v1/key/generate/*
                - /v1/key/decrypt/*
+               - /v1/key/list*
+               - /v1/status
+               - /v1/metrics
              identities:
              - ${MINIO_IDENTITY}
 
