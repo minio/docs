@@ -20,6 +20,12 @@ Along with the deprecation announcement, MinIO also announced that the feature w
 As of :minio-release:`RELEASE.2022-10-29T06-21-33Z`, the MinIO Gateway and the related filesystem mode code have been removed.
 Deployments still using the `standalone` or `filesystem` MinIO modes that upgrade to :minio-release:`RELEASE.2022-10-29T06-21-33Z` or later receive an error when attempting to start MinIO.
 
+.. cond:: linux
+
+   .. note::
+
+      For deployments running in a container, see the `Container - Migrate from Gateway or Filesystem Mode <https://min.io/docs/minio/container/operations/install-deploy-manage/migrate-fs-gateway.html>`__ tutorial instead.
+
 Overview
 --------
 
