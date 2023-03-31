@@ -22,7 +22,9 @@ Deployments still using the `standalone` or `filesystem` MinIO modes that upgrad
 
 .. cond:: linux
 
-   For deployments running in a container, see the `Container - Migrate from Gateway or Filesystem Mode <https://min.io/docs/minio/container/operations/install-deploy-manage/migrate-fs-gateway.html>`__ tutorial instead.
+   .. note::
+
+      For deployments running in a container, see the `Container - Migrate from Gateway or Filesystem Mode <https://min.io/docs/minio/container/operations/install-deploy-manage/migrate-fs-gateway.html>`__ tutorial instead.
 
 Overview
 --------
