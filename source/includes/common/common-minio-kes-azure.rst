@@ -31,12 +31,15 @@ Manager:
    policy:
      minio:
        allow:
-       - /v1/key/create/*
-       - /v1/key/generate/*
+       - /v1/key/create/*   # You can replace these wildcard '*' with a string prefix to restrict key names
+       - /v1/key/generate/* # e.g. '/minio-'
        - /v1/key/decrypt/*
-       - /v1/key/list*
+       - /v1/key/bulk/decrypt
+       - /v1/key/list
        - /v1/status
        - /v1/metrics
+       - /v1/log/audit
+       - /v1/log/error
        identities:
        - ${MINIO_IDENTITY_HASH} # Replace with the output of 'kes identity of minio-kes.cert'
 

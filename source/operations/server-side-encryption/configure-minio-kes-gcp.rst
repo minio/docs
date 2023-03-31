@@ -243,7 +243,7 @@ The following section describes each of the |KES-git| configuration settings for
 
    .. tab-item:: YAML Overview
 
-      Any field with value ``${VARIABLE}`` uses the environment variable with matching name as the value. 
+      Fields with ``${<STRING>}`` use the environment variable matching the ``<STRING>`` value. 
       You can use this functionality to set credentials without writing them to the configuration file.
 
       The YAML assumes a minimal set of permissions for the MinIO deployment accessing KES.
@@ -261,12 +261,15 @@ The following section describes each of the |KES-git| configuration settings for
          policy:
            minio-server:
              allow:
-               - /v1/key/create/*
-               - /v1/key/generate/*
-               - /v1/key/decrypt/*
-               - /v1/key/list*
-               - /v1/status
-               - /v1/metrics
+             - /v1/key/create/*
+             - /v1/key/generate/*
+             - /v1/key/decrypt/*
+             - /v1/key/bulk/decrypt
+             - /v1/key/list
+             - /v1/status
+             - /v1/metrics
+             - /v1/log/audit
+             - /v1/log/error
              identities:
              - ${MINIO_IDENTITY}
 
