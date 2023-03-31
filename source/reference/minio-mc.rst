@@ -259,7 +259,6 @@ The following table lists :mc-cmd:`mc` commands:
 
    * - | :mc:`mc license info`
        | :mc:`mc license register`
-       | :mc:`mc license unregister`
        | :mc:`mc license update`
      - .. include:: /reference/minio-mc/mc-license.rst
           :start-after: start-mc-license-desc
