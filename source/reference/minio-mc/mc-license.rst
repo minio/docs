@@ -44,11 +44,6 @@ Subcommands
           :start-after: start-mc-license-register-desc
           :end-before: end-mc-license-register-desc
 
-   * - :mc:`~mc license unregister`
-     - .. include:: /reference/minio-mc/mc-license-unregister.rst
-          :start-after: start-mc-license-unregister-desc
-          :end-before: end-mc-license-unregister-desc
-
    * - :mc:`~mc license update`
      - .. include:: /reference/minio-mc/mc-license-update.rst
           :start-after: start-mc-license-update-desc
@@ -60,5 +55,4 @@ Subcommands
    
    /reference/minio-mc/mc-license-info
    /reference/minio-mc/mc-license-register
-   /reference/minio-mc/mc-license-unregister
    /reference/minio-mc/mc-license-update
