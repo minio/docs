@@ -1984,6 +1984,7 @@ configuration settings.
       :class: copyable
 
       mc admin config set identity_ldap \
+         enabled="true"
          server_addr="https://ad-ldap.example.net/" \
          lookup_bind_dn="cn=miniolookupuser,dc=example,dc=net" \
          lookup_bind_dn_password="userpassword" \
@@ -1996,26 +1997,14 @@ configuration settings.
    .. mc-conf:: server_addr
       :delimiter: " "
 
-   *Required*
-
-   .. include:: /includes/common-minio-external-auth.rst
-      :start-after: start-minio-ad-ldap-server-addr
-      :end-before: end-minio-ad-ldap-server-addr
-
-   This environment configuration setting with the 
-   :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR` environment variable.
-
-   .. mc-conf:: sts_expiry
-      :delimiter: " "
-
-      *Optional*
+      *Required*
 
       .. include:: /includes/common-minio-external-auth.rst
-         :start-after: start-minio-ad-ldap-sts-expiry
-         :end-before: end-minio-ad-ldap-sts-expiry
+         :start-after: start-minio-ad-ldap-server-addr
+         :end-before: end-minio-ad-ldap-server-addr
 
       This environment configuration setting with the 
-      :envvar:`MINIO_IDENTITY_LDAP_STS_EXPIRY` environment variable.
+      :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR` environment variable.
 
    .. mc-conf:: lookup_bind_dn
       :delimiter: " "
@@ -2064,6 +2053,29 @@ configuration settings.
          
       This environment variable configuration setting the 
       :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER` environment variable.
+
+   .. mc-conf:: enabled
+      :delimiter: " "
+
+      *Optional*
+
+      Set to ``false`` to disable the AD/LDAP configuration.
+
+      Applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider if set to ``false``.
+
+      Defaults to ``true`` or "enabled".
+
+   .. mc-conf:: sts_expiry
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-sts-expiry
+         :end-before: end-minio-ad-ldap-sts-expiry
+
+      This environment configuration setting with the 
+      :envvar:`MINIO_IDENTITY_LDAP_STS_EXPIRY` environment variable.
 
    .. mc-conf:: username_format
       :delimiter: " "
@@ -2190,8 +2202,21 @@ configuration settings.
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_OPENID_CONFIG_URL` environment variable.
 
+   .. mc-conf:: enabled
+      :delimiter: " "
+
+      *Optional*
+
+      Set to ``false`` to disable the OpenID configuration.
+
+      Applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider if set to ``false``.
+
+      Defaults to ``true`` or "enabled".
+
    .. mc-conf:: client_id
       :delimiter: " "
+
+      *Optional*
 
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-openid-client-id
@@ -2202,6 +2227,8 @@ configuration settings.
 
    .. mc-conf:: client_secret
       :delimiter: " "
+
+      *Optional*
 
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-openid-client-secret
@@ -2379,6 +2406,17 @@ See :ref:`minio-external-identity-management-plugin` for a tutorial on using the
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-identity-management-role-policy
          :end-before: end-minio-identity-management-role-policy
+
+   .. mc-conf:: enabled
+      :delimiter: " "
+
+      *Optional*
+
+      Set to ``false`` to disable the identity provider configuration.
+
+      Applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider if set to ``false``.
+
+      Defaults to ``true`` or "enabled".
 
    .. mc-conf:: token
       :delimiter: " "
