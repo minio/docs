@@ -66,6 +66,11 @@ Defer to the client documentation for instructions on trusting a third-party CA.
 3) Create the KES and MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. important::
+
+   Starting with :minio-release:`RELEASE.2023-02-17T17-52-43Z`, MinIO requires expanded KES permissions for functionality.
+   The example configuration in this section contains all required permissions.
+
 .. container:: procedure
 
    a. Create the KES Configuration File

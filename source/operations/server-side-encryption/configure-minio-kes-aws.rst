@@ -16,7 +16,7 @@ Server-Side Object Encryption with AWS Secrets Manager Root KMS
 .. |KES-git|       replace:: :minio-git:`Key Encryption Service (KES) <kes>`
 .. |KES|           replace:: :abbr:`KES (Key Encryption Service)`
 .. |rootkms|       replace:: `AWS Secrets Manager <https://aws.amazon.com/secrets-manager/>`__
-.. |rootkms-short| replace:: AWS Secrets Manager
+.. |rootkms-short| replace:: `AWS Key Management Service <https://aws.amazon.com/kms/>`__
 
 MinIO Server-Side Encryption (SSE) protects objects as part of write operations, allowing clients to take advantage of server processing power to secure objects at the storage layer (encryption-at-rest). 
 SSE also provides key functionality to regulatory and compliance requirements around secure locking and erasure.
@@ -115,7 +115,7 @@ Prerequisites
 Ensure Access to the AWS Secrets Manager and Key Management Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure assumes access to and familiarity with |rootkms| and `|rootkms-short| <https://aws.amazon.com/kms/>`__.
+This procedure assumes access to and familiarity with |rootkms| and |rootkms-short|.
 
 .. cond:: k8s
 
@@ -242,20 +242,22 @@ MinIO specifically requires the following AWS settings or configurations:
 Configuration Reference for AWS Root KMS
 ----------------------------------------
 
-The following section describes each of the |KES-git| configuration settings for
-using AWS Secrets Manager and AWS KMS as the root Key Management Service
-(KMS) for |SSE|:
+The following section describes each of the |KES-git| configuration settings for using AWS Secrets Manager and AWS Key Management System as the root :abbr:`KMS (Key Management System)` for |SSE|:
+
+.. important::
+
+   Starting with :minio-release:`RELEASE.2023-02-17T17-52-43Z`, MinIO requires expanded KES permissions for functionality.
+   The example configuration in this section contains all required permissions.
 
 .. tab-set::
 
    .. tab-item:: YAML Overview
 
-      The following YAML describes the minimum required fields for configuring
-      AWS Secrets Manager as an external KMS for supporting |SSE|. 
+      Fields with ``${<STRING>}`` use the environment variable matching the ``<STRING>`` value. 
+      You can use this functionality to set credentials without writing them to the configuration file.
 
-      Any field with value ``${VARIABLE}`` uses the environment variable 
-      with matching name as the value. You can use this functionality to set
-      credentials without writing them to the configuration file.
+      The YAML assumes a minimal set of permissions for the MinIO deployment accessing KES.
+      As an alternative, you can omit the ``policy.minio-server`` section and instead set the ``${MINIO_IDENTITY}`` hash as the ``${ROOT_IDENTITY}``.
 
       .. code-block:: yaml
 
@@ -269,9 +271,15 @@ using AWS Secrets Manager and AWS KMS as the root Key Management Service
          policy:
            minio-server:
              allow:
-               - /v1/key/create/*
-               - /v1/key/generate/*
-               - /v1/key/decrypt/*
+             - /v1/key/create/*
+             - /v1/key/generate/*
+             - /v1/key/decrypt/*
+             - /v1/key/bulk/decrypt
+             - /v1/key/list
+             - /v1/status
+             - /v1/metrics
+             - /v1/log/audit
+             - /v1/log/error
              identities:
              - ${MINIO_IDENTITY}
          

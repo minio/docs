@@ -274,19 +274,24 @@ You can use the following steps to enable AppRole authentication and create the 
 Configuration Reference for Hashicorp Vault
 -------------------------------------------
 
-The following section describes each of the |KES-git| configuration settings for
-using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|:
+The following section describes each of the |KES-git| configuration settings for using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|.
+
+.. important::
+
+   Starting with :minio-release:`RELEASE.2023-02-17T17-52-43Z`, MinIO requires expanded KES permissions for functionality.
+   The example configuration in this section contains all required permissions.
 
 .. tab-set::
 
    .. tab-item:: YAML Overview
 
-      The following YAML describes the minimum required fields for configuring
-      Hashicorp Vault as an external KMS for supporting |SSE|. 
+      The following YAML describes the minimum required fields for configuring Hashicorp Vault as an external KMS for supporting |SSE|. 
 
-      Any field with value ``${VARIABLE}`` uses the environment variable 
-      with matching name as the value. You can use this functionality to set
-      credentials without writing them to the configuration file.
+      Fields with ``${<STRING>}`` use the environment variable matching the ``<STRING>`` value. 
+      You can use this functionality to set credentials without writing them to the configuration file.
+
+      The YAML assumes a minimal set of permissions for the MinIO deployment accessing KES.
+      As an alternative, you can omit the ``policy.minio-server`` section and instead set the ``${MINIO_IDENTITY}`` hash as the ``${ROOT_IDENTITY}``.
 
       .. code-block:: yaml
 
@@ -300,9 +305,15 @@ using Hashicorp Vault as the root Key Management Service (KMS) for |SSE|:
          policy:
            minio-server:
              allow:
-               - /v1/key/create/*
-               - /v1/key/generate/*
-               - /v1/key/decrypt/*
+             - /v1/key/create/*
+             - /v1/key/generate/*
+             - /v1/key/decrypt/*
+             - /v1/key/bulk/decrypt
+             - /v1/key/list
+             - /v1/status
+             - /v1/metrics
+             - /v1/log/audit
+             - /v1/log/error
              identities:
              - ${MINIO_IDENTITY}
 
