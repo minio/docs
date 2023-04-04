@@ -32,7 +32,7 @@ results to the ``rm`` commandline tool.
 .. important::
 
    :mc:`mc rm` supports removing multiple objects *or* files in a single
-   command. Consider using the :mc-cmd:`~mc rm --fake`
+   command. Consider using the :mc-cmd:`~mc rm --dry-run`
    option to validate that the operation targets only the desired objects/files.
 
 .. tab-set::
@@ -57,7 +57,7 @@ results to the ``rm`` commandline tool.
          mc [GLOBALFLAGS] rm  \
                           [--bypass]               \
                           [--dangerous]            \
-                          [--fake]                 \
+                          [--dry-run]              \
                           [--force]*               \
                           [--incomplete]           \
                           [--newer-than "string"]  \
@@ -82,8 +82,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
-
-   *Required* The :ref:`alias <alias>` of a MinIO deployment and the full path to
+   :required:
+   
+   The :ref:`alias <alias>` of a MinIO deployment and the full path to
    the object to remove. For example:
 
    .. code-block:: shell
@@ -108,7 +109,7 @@ Parameters
       mc rm --recursive --force play/mybucket/myprefix/
 
    Consider first running the command with the
-   :mc-cmd:`~mc rm --fake` flag to validate the scope of the
+   :mc-cmd:`~mc rm --dry-run` flag to validate the scope of the
    recursive delete operation.
 
    For removing a file from a local filesystem, specify the full path to that
@@ -119,22 +120,22 @@ Parameters
       mc rm ~/data/myoldobject.txt
 
 .. mc-cmd:: --bypass
+   :optional:
    
-   
-   *Optional* Allows removing an object held under 
+   Allows removing an object held under 
    :ref:`GOVERNANCE <minio-object-locking-governance>` object locking. 
 
 .. mc-cmd:: --dangerous
+   :optional:
    
-   
-   *Optional* Allows running :mc:`mc rm` when the :mc-cmd:`~mc rm ALIAS`
+   Allows running :mc:`mc rm` when the :mc-cmd:`~mc rm ALIAS`
    specifies the root (all buckets) on the MinIO deployment.
 
    When combined with :mc-cmd:`~mc rm --versions`, this flag
    directs :mc:`mc rm` to permanently remove all objects *and* versions from
    the ``ALIAS`` target.
 
-   Consider first running the command with the :mc-cmd:`~mc rm --fake` to
+   Consider first running the command with the :mc-cmd:`~mc rm --dry-run` to
    validate the scope of the site-wide delete operation.
 
    .. warning::
@@ -144,10 +145,16 @@ Parameters
       possible due diligence in ensuring the command applies to only the desired
       ``ALIAS`` targets prior to execution.
 
-.. mc-cmd:: --encrypt-key
-   
+.. mc-cmd:: --dry-run
+   :optional:
 
-   *Optional* The encryption key to use for performing Server-Side Encryption
+   Outputs the results of a command without actually removing any files.
+   Use this flag to test that your command configuration removes only the objects you wish to remove.
+
+.. mc-cmd:: --encrypt-key
+   :optional:
+
+   The encryption key to use for performing Server-Side Encryption
    with Client Keys (SSE-C). Specify comma separated key-value pairs as
    ``KEY=VALUE,...``.
    
@@ -163,61 +170,53 @@ Parameters
    environment variable for populating the list of encryption key-value
    pairs as an alternative to specifying them on the command line.
 
-.. mc-cmd:: --fake
-   
-
-   *Optional* Perform a fake remove operation. Use this operation to perform 
-   validate that the :mc:`mc rm` operation will only
-   remove the desired objects or buckets.
-
 .. mc-cmd:: --force
-   
+   :optional:
 
-   *Optional* Allows running :mc:`mc rm` with any of the following arguments:
+   Allows running :mc:`mc rm` with any of the following arguments:
    
    - :mc-cmd:`~mc rm --recursive`
    - :mc-cmd:`~mc rm --versions`
    - :mc-cmd:`~mc rm --stdin`
 
 .. mc-cmd:: --incomplete, I
-   
+   :optional:
 
-   *Optional* Remove incomplete uploads for the specified object.
+   Remove incomplete uploads for the specified object.
 
    If any :mc-cmd:`~mc rm ALIAS` specifies a bucket, 
    you **must** also specify :mc-cmd:`~mc rm --recursive`
    and :mc-cmd:`~mc rm --force`.
 
 .. mc-cmd:: --newer-than
-   
+   :optional:
 
-   *Optional* Remove object(s) newer than the specified number of days. Specify
+   Remove object(s) newer than the specified number of days. Specify
    a string in ``#d#hh#mm#ss`` format. For example: ``--newer-than 1d2hh3mm4ss``
 
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --non-current
-   
+   :optional:
 
-   *Optional* Removes all :ref:`non-current <minio-bucket-versioning-delete>`
+   Removes all :ref:`non-current <minio-bucket-versioning-delete>`
    object versions from the specified :mc-cmd:`~mc rm ALIAS`.
 
    This option has no effect on buckets without 
    :ref:`versioning <minio-bucket-versioning>` enabled.
 
 .. mc-cmd:: --older-than
-   
+   :optional:
 
-   *Optional* Remove object(s) older than the specified time limit. Specify a
+   Remove object(s) older than the specified time limit. Specify a
    string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``.
-
       
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --recursive, r
+   :optional:
    
-   
-   *Optional* Recursively remove the contents of each :mc-cmd:`~mc rm ALIAS`
+   Recursively remove the contents of each :mc-cmd:`~mc rm ALIAS`
    bucket or bucket prefix.
 
    If specifying :mc-cmd:`~mc rm --recursive`, you **must** also
@@ -229,7 +228,7 @@ Parameters
    all objects *and* object versions from the bucket.
 
    Consider first running the command with the 
-   :mc-cmd:`~mc rm --fake` flag to validate the scope of the
+   :mc-cmd:`~mc rm --dry-run` flag to validate the scope of the
    recursive delete operation.
 
    Mutually exclusive with :mc-cmd:`mc rm --version-id`
@@ -242,9 +241,9 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --stdin
-   
+   :optional:   
 
-   *Optional* Read object names or buckets from ``STDIN``.
+   Read object names or buckets from ``STDIN``.
 
 .. mc-cmd:: --versions
    :optional:   
@@ -258,7 +257,7 @@ Parameters
    versions which existed at a specific point in time.
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
@@ -403,6 +402,10 @@ object.
 - To remove all non-current versions of an object from a bucket, use
   :mc-cmd:`mc rm --non-current`
 
+.. versionchanged:: mc RELEASE.2023-03-20T17-17-53Z
+
+   The output shows the modification time of versioned files.
+   When using ``--dry-run``, this can be helpful to determine that you select the correct object(s) for removal.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

@@ -64,6 +64,22 @@ Table of Deprecated Admin Commands
      - Replacement Command
      - Version of Change
 
+   * - ``mc admin policy add``
+     - :mc-cmd:`mc admin policy create`
+     - mc RELEASE.2023-03-20T17-17-53Z 
+
+   * - ``mc admin policy set``
+     - :mc-cmd:`mc admin policy attach`
+     - mc RELEASE.2023-03-20T17-17-53Z 
+
+   * - ``mc admin policy unset``
+     - :mc-cmd:`mc admin policy detach`
+     - mc RELEASE.2023-03-20T17-17-53Z 
+
+   * - ``mc admin policy update``
+     - :mc-cmd:`mc admin policy attach` or :mc-cmd:`mc admin policy detach`
+     - mc RELEASE.2023-03-20T17-17-53Z 
+
    * - ``mc admin replicate edit``
      - :mc:`mc admin replicate update`
      - mc RELEASE.2023-01-11T03-14-16Z
@@ -107,6 +123,7 @@ Table of Deprecated Admin Commands
    * - ``mc admin bucket quota``
      - :mc-cmd:`mc quota clear`, :mc-cmd:`mc quota info`, :mc-cmd:`mc quota set`
      - mc RELEASE.2022-12-13T00-23-28Z
+
 
 .. toctree::
    :titlesonly:
