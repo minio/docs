@@ -45,8 +45,7 @@ Newly created users have *no* policies by default and therefore cannot perform
 any operations on the MinIO deployment. To configure a user's assigned policies,
 you can do either or both of the following:
 
-- Use :mc-cmd:`mc admin policy set` to associate one or more policies to
-  the user.
+- Use :mc-cmd:`mc admin policy attach` to associate one or more policies to the user.
 
 - Use :mc-cmd:`mc admin group add` to associate the user to the group. Users
   inherit any policies assigned to the group.

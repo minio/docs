@@ -142,7 +142,7 @@ Specify a unique, random, and long string for both the ``ACCESSKEY`` and
 ``SECRETKEY``. Your organization may have specific internal or regulatory
 requirements around generating values for use with access or secret keys. 
 
-After creating the user, use :mc-cmd:`mc admin policy set` to associate a
+After creating the user, use :mc-cmd:`mc admin policy attach` to associate a
 :ref:`MinIO Policy Based Access Control <minio-policy>` to the new user. 
 The following command assigns the built-in :userpolicy:`readwrite` policy:
 
