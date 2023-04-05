@@ -23,3 +23,4 @@ All provided guides assume familiarity with the third-party integration software
    /integrations/setup-nginx-proxy-with-minio
    /integrations/presigned-put-upload-via-browser.md
    /integrations/generate-lets-encrypt-certificate-using-certbot-for-minio.md
+   /integrations/transform-data-with-object-lambda.rst

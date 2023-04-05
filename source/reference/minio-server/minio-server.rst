@@ -2198,6 +2198,28 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    :mc-conf:`notify_webhook comment <notify_webhook.comment>`
    configuration setting.
 
+.. _minio-server-envvar-object-lambda-webhook:
+
+Object Lambda
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following section documents environment variables for configuring MinIO to
+publish :mc:`minio server` logs to an HTTP webhook endpoint. See
+:ref:`minio-logging-publish-server-logs` for more complete documentation and
+tutorials on using these environment variables.
+
+You can specify multiple webhook endpoints as Lambda targets by appending
+a unique identifier ``_FUNCTIONNAME`` for each Object Lambda function.
+For example, the following command set two distinct Object Lambda webhook endpoints:
+
+.. code-block:: shell
+   :class: copyable
+
+   export MINIO_LAMBDA_WEBHOOK_ENABLE_myfunction="on"
+   export MINIO_LAMBDA_WEBHOOK_ENDPOINT_myfunction="http://webhook-1.example.net
+   export MINIO_LAMBDA_WEBHOOK_ENABLE_yourfunction="on"
+   export MINIO_LAMBDA_WEBHOOK_ENDPOINT_yourfunction="http://webhook-2.example.net
+
 .. _minio-server-envvar-external-identity-management-ad-ldap:
 
 Active Directory / LDAP Identity Management
