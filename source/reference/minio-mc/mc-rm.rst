@@ -405,7 +405,7 @@ object.
 .. versionchanged:: mc RELEASE.2023-03-20T17-17-53Z
 
    The output shows the modification time of versioned files.
-   When using ``--dry-run``, this can be helpful to determine that you select the correct object(s) for removal.
+   When used with ``--dry-run``, this can help confirm that you selected the correct object(s) for removal.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

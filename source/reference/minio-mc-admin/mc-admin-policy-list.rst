@@ -15,7 +15,7 @@ Syntax
 
 .. start-mc-admin-policy-list-desc
 
-Lists all policies on the target MinIO deployment.. 
+Lists all policies on the target MinIO deployment.
 
 .. end-mc-admin-policy-list-desc
 

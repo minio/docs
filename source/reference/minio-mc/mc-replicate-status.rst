@@ -140,7 +140,7 @@ Removed and Re-added ARNs
 
 .. versionchanged:: mc RELEASE.2023-03-20T17-17-53Z
 
-ARNs no longer part of replication configurations do not display with the standard output of this command.
+The standard output of this command does not display ARNs previously removed from a replication configuration.
 
 To list all ARNs, including ARNs no longer part of the replication, use the ``--json`` flag.
 The ``json`` output continues to show data replicated under old ARNs.
