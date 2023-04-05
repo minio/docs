@@ -24,6 +24,8 @@ You can also upload generated health reports for further analysis by MinIO engin
 .. important::
 
    The ``mc support`` commands require an active |SUBNET| registration.
+   
+   :mc-cmd:`mc support proxy set` and :mc-cmd:`mc support proxy remove` are exceptions, as you may need to set up a proxy to complete the deployment registration.
 
 
 Subcommands

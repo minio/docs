@@ -52,9 +52,9 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
          mc [GLOBALFLAGS] mirror                           \
                           [--attr "string"]                \
                           [--disable-multipart]            \
+                          [--dry-run]                      \
                           [--encrypt-key "string"]         \
                           [--exclude "string"]             \
-                          [--fake]                         \
                           [--md5]                          \
                           [--monitoring-address "string"]  \
                           [--newer-than "string"]          \
@@ -141,10 +141,11 @@ Parameters
 
    Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified object name pattern.
 
-.. mc-cmd:: --fake
+.. mc-cmd:: --dry-run
    
 
-   Perform a fake mirror operation. Use this operation to perform validate that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
+   Perform a mock mirror operation. 
+   Use this operation to test that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
 
 .. mc-cmd:: md5
    
