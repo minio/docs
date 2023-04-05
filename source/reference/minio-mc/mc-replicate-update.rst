@@ -388,9 +388,9 @@ See :mc:`mc admin user` and :mc:`mc admin policy` for more complete documentatio
         source deployment. You can restrict the user policy to specific buckets
         as-needed.
 
-      Use the :mc-cmd:`mc admin policy add` to add this policy to each
+      Use the :mc-cmd:`mc admin policy create` to add this policy to each
       deployment acting as a replication source. Use :mc-cmd:`mc admin user add`
-      to create a user on the deployment and :mc-cmd:`mc admin policy set`
+      to create a user on the deployment and :mc-cmd:`mc admin policy attach`
       to associate the policy to that new user.
 
    .. tab-item:: Replication Remote User
@@ -415,9 +415,9 @@ See :mc:`mc admin user` and :mc:`mc admin policy` for more complete documentatio
         buckets as an element in the ``Resource`` array similar to 
         ``"arn:aws:s3:::bucketName/*"``.
 
-      Use the :mc-cmd:`mc admin policy add` to add this policy to each
+      Use the :mc-cmd:`mc admin policy create` to add this policy to each
       deployment acting as a replication target. Use :mc-cmd:`mc admin user add`
-      to create a user on the deployment and :mc-cmd:`mc admin policy set`
+      to create a user on the deployment and :mc-cmd:`mc admin policy attach`
       to associate the policy to that new user.
 
 S3 Compatibility

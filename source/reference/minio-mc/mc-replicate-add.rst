@@ -379,8 +379,8 @@ See :mc:`mc admin user` and :mc:`mc admin policy` for more complete documentatio
         The ``"arn:aws:s3:::*`` resource applies the replication permissions to *any* bucket on the source deployment. 
         You can restrict the user policy to specific buckets as-needed.
 
-      Use the :mc-cmd:`mc admin policy add` to add this policy to each deployment acting as a replication source. 
-      Use :mc-cmd:`mc admin user add` to create a user on the deployment and :mc-cmd:`mc admin policy set` to associate the policy to that new user.
+      Use the :mc-cmd:`mc admin policy create` to add this policy to each deployment acting as a replication source. 
+      Use :mc-cmd:`mc admin user add` to create a user on the deployment and :mc-cmd:`mc admin policy attach` to associate the policy to that new user.
 
    .. tab-item:: Replication Remote User
 
@@ -396,8 +396,8 @@ See :mc:`mc admin user` and :mc:`mc admin policy` for more complete documentatio
       - The ``"EnableReplicatingDataIntoBucket"`` statement grants permission for a remote target to synchronize data into *any* bucket in the MinIO deployment. 
         To restrict the policy to specific buckets, specify those buckets as an element in the ``Resource`` array similar to ``"arn:aws:s3:::bucketName/*"``.
 
-      Use the :mc-cmd:`mc admin policy add` to add this policy to each deployment acting as a replication target. 
-      Use :mc-cmd:`mc admin user add` to create a user on the deployment and :mc-cmd:`mc admin policy set` to associate the policy to that new user.
+      Use the :mc-cmd:`mc admin policy create` to add this policy to each deployment acting as a replication target. 
+      Use :mc-cmd:`mc admin user add` to create a user on the deployment and :mc-cmd:`mc admin policy attach` to associate the policy to that new user.
 
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
