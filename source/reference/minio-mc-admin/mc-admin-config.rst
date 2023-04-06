@@ -1984,7 +1984,7 @@ configuration settings.
       :class: copyable
 
       mc admin config set identity_ldap \
-         enabled="true"
+         enabled="true" \
          server_addr="https://ad-ldap.example.net/" \
          lookup_bind_dn="cn=miniolookupuser,dc=example,dc=net" \
          lookup_bind_dn_password="userpassword" \
@@ -2003,7 +2003,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-server-addr
          :end-before: end-minio-ad-ldap-server-addr
 
-      This environment configuration setting with the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR` environment variable.
 
    .. mc-conf:: lookup_bind_dn
@@ -2015,7 +2015,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-lookup-bind-dn
          :end-before: end-minio-ad-ldap-lookup-bind-dn
 
-      This environment configuration setting with the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN` environment variable.
 
    .. mc-conf:: lookup_bind_password
@@ -2027,7 +2027,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-lookup-bind-password
          :end-before: end-minio-ad-ldap-lookup-bind-password
          
-      This environment variable configuration setting the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD` environment variable.
 
    .. mc-conf:: user_dn_search_base_dn
@@ -2039,7 +2039,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-user-dn-search-base-dn
          :end-before: end-minio-ad-ldap-user-dn-search-base-dn
          
-      This environment variable configuration setting the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN` environment variable.
 
    .. mc-conf:: user_dn_search_filter
@@ -2051,7 +2051,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-user-dn-search-filter
          :end-before: end-minio-ad-ldap-user-dn-search-filter
          
-      This environment variable configuration setting the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER` environment variable.
 
    .. mc-conf:: enabled
@@ -2061,7 +2061,7 @@ configuration settings.
 
       Set to ``false`` to disable the AD/LDAP configuration.
 
-      Applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider if set to ``false``.
+      If ``false``, applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider.
 
       Defaults to ``true`` or "enabled".
 
@@ -2074,7 +2074,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-sts-expiry
          :end-before: end-minio-ad-ldap-sts-expiry
 
-      This environment configuration setting with the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_STS_EXPIRY` environment variable.
 
    .. mc-conf:: username_format
@@ -2086,7 +2086,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-username-format
          :end-before: end-minio-ad-ldap-username-format
 
-      This environment configuration setting with the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_USERNAME_FORMAT` environment variable.
 
    .. mc-conf:: group_search_filter
@@ -2098,7 +2098,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-group-search-filter
          :end-before: end-minio-ad-ldap-group-search-filter
          
-      This environment variable configuration setting the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER` environment variable.
 
    .. mc-conf:: group_search_base_dn
@@ -2110,7 +2110,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-group-search-base-dn
          :end-before: end-minio-ad-ldap-group-search-base-dn
          
-      This environment variable configuration setting the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN` environment variable.
 
    .. mc-conf:: tls_skip_verify
@@ -2122,7 +2122,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-tls-skip-verify
          :end-before: end-minio-ad-ldap-tls-skip-verify
 
-      This environment configuration setting with the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY` environment variable.
 
    .. mc-conf:: server_insecure
@@ -2134,7 +2134,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-server-insecure
          :end-before: end-minio-ad-ldap-server-insecure
 
-      This environment configuration setting with the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_SERVER_INSECURE` environment variable.
 
    .. mc-conf:: server_starttls
@@ -2146,7 +2146,7 @@ configuration settings.
          :start-after: start-minio-ad-ldap-server-starttls
          :end-before: end-minio-ad-ldap-server-starttls
 
-      This environment configuration setting with the 
+      This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_SERVER_STARTTLS` environment variable.
 
    .. mc-conf:: comment

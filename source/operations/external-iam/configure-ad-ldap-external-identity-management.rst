@@ -13,7 +13,7 @@ Configure MinIO for Authentication using Active Directory / LDAP
 Overview
 --------
 
-MinIO supports using an Active Directory / LDAP Connect for external management of user identities. 
+MinIO supports configuring a single Active Directory / LDAP Connect for external management of user identities. 
 The procedure on this page provides instructions for:
 
 .. cond:: k8s
