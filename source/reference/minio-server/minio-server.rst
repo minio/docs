@@ -528,11 +528,11 @@ server logs webhook endpoints:
 
    export MINIO_LOGGER_WEBHOOK_ENABLE_PRIMARY="on"
    export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_PRIMARY="TOKEN"
-   export MINIO_LOGGER_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net
+   export MINIO_LOGGER_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net"
 
    export MINIO_LOGGER_WEBHOOK_ENABLE_SECONDARY="on"
    export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_SECONDARY="TOKEN"
-   export MINIO_LOGGER_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-2.example.net
+   export MINIO_LOGGER_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-2.example.net"
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_ENABLE
 
@@ -581,13 +581,13 @@ audit log webhook endpoints:
 
    export MINIO_AUDIT_WEBHOOK_ENABLE_PRIMARY="on"
    export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_PRIMARY="TOKEN"
-   export MINIO_AUDIT_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net
+   export MINIO_AUDIT_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net"
    export MINIO_AUDIT_WEBHOOK_CLIENT_CERT_SECONDARY="/tmp/cert.pem"
    export MINIO_AUDIT_WEBHOOK_CLIENT_KEY_SECONDARY="/tmp/key.pem"
 
    export MINIO_AUDIT_WEBHOOK_ENABLE_SECONDARY="on"
    export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_SECONDARY="TOKEN"
-   export MINIO_AUDIT_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-1.example.net
+   export MINIO_AUDIT_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-1.example.net"
    export MINIO_AUDIT_WEBHOOK_CLIENT_CERT_SECONDARY="/tmp/cert.pem"
    export MINIO_AUDIT_WEBHOOK_CLIENT_KEY_SECONDARY="/tmp/key.pem"
 
@@ -2204,8 +2204,8 @@ Object Lambda
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following section documents environment variables for configuring MinIO to
-publish :mc:`minio server` logs to an HTTP webhook endpoint. See
-:ref:`minio-logging-publish-server-logs` for more complete documentation and
+publish data to an HTTP webhook endpoint for an Object Lambda function. See
+:ref:`developers-object-lambda` for more complete documentation and
 tutorials on using these environment variables.
 
 You can specify multiple webhook endpoints as Lambda targets by appending
@@ -2216,9 +2216,20 @@ For example, the following command set two distinct Object Lambda webhook endpoi
    :class: copyable
 
    export MINIO_LAMBDA_WEBHOOK_ENABLE_myfunction="on"
-   export MINIO_LAMBDA_WEBHOOK_ENDPOINT_myfunction="http://webhook-1.example.net
+   export MINIO_LAMBDA_WEBHOOK_ENDPOINT_myfunction="http://webhook-1.example.net"
    export MINIO_LAMBDA_WEBHOOK_ENABLE_yourfunction="on"
-   export MINIO_LAMBDA_WEBHOOK_ENDPOINT_yourfunction="http://webhook-2.example.net
+   export MINIO_LAMBDA_WEBHOOK_ENDPOINT_yourfunction="http://webhook-2.example.net"
+
+.. envvar:: MINIO_LAMBDA_WEBHOOK_ENABLE
+
+   Specify ``"on"`` to enable publishing :mc:`minio server` logs to the Object Lambda
+   webhook endpoint for the specified function.
+
+   Requires specifying :envvar:`MINIO_LAMBDA_WEBHOOK_ENDPOINT`.
+
+.. envvar:: MINIO_LAMBDA_WEBHOOK_ENDPOINT
+
+   The HTTP endpoint of the webhook for the specified function.
 
 .. _minio-server-envvar-external-identity-management-ad-ldap:
 
