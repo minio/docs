@@ -12,10 +12,10 @@ Install and Deploy MinIO
 
 .. container:: extlinks-video
 
-   - `Installing and Running MinIO on Docker: Docker Compose Overview <https://youtu.be/FtJA3TmjaJQ?ref=docs>`__
-   - `Installing and Running MinIO on Docker: Docker Compose Lab: <https://youtu.be/tRlEctAwkk8?ref=docs>`__
-   - `Installing and Running MinIO on Docker: Overview <https://youtu.be/mg9NRR6Js1s?ref=docs>`__
-   - `Installing and Running MinIO on Docker: Installation Lab <https://youtu.be/Z0FtabDUPtU?ref=docs>`__
+   - `Installing and Running MinIO: Overview <https://youtu.be/mg9NRR6Js1s?ref=docs>`__
+   - `Installing and Running MinIO: Installation Lab <https://youtu.be/Z0FtabDUPtU?ref=docs>`__
+   - `Installing and Running MinIO: Docker Compose Overview <https://youtu.be/FtJA3TmjaJQ?ref=docs>`__
+   - `Installing and Running MinIO: Docker Compose Lab: <https://youtu.be/tRlEctAwkk8?ref=docs>`__
 
 MinIO is a software-defined high performance distributed object storage server.
 You can run MinIO on consumer or enterprise-grade hardware and a variety of operating systems and architectures.
