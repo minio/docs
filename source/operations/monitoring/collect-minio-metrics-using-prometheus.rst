@@ -10,6 +10,11 @@ Monitoring and Alerting using Prometheus
    :local:
    :depth: 1
 
+.. container:: extlinks-video
+
+   - `Monitoring with MinIO and Prometheus: Overview <https://youtu.be/A3vCDaFWNNs?ref=docs>`__
+   - `Monitoring with MinIO and Prometheus: Lab <https://youtu.be/Oix9iXndSUY?ref=docs>`__
+
 MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
 The procedure on this page documents the following:
 
