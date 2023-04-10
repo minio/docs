@@ -121,14 +121,13 @@ or exhibit unexpected behavior with the the dynamic redirection behavior.
 Logging In
 ----------
 
-Logging into the MinIO Console depends on how you configured identity management for the deployment.
+.. versionchanged:: RELEASE.2023-03-09T23-16-13Z
 
-- When using the built-in MinIO identity management solution, the sign-in screen displays a standard login screen.
-  Enter your Username and Password to log in to the MinIO Console.
-- If logging in with a third party application and :ref:`MinIO's Security Token Service (STS) <minio-security-token-service>`, select :guilabel:`Use STS` and enter the Username, Secret, and Token.
-- If the deployment uses a single OpenID or Active Directory/LDAP identity provider solution, select the provider's button to proceed to the login screen.
-- If the deployment has multiple OpenID and/or Active Directory/LDAP identify management providers configured, the MinIO Console's sign-in screen provides a dropdown list of providers.
-  Select the provider you wish to use to log in to the MinIO Console, then enter the credentials.
+The MinIO Console displays a login screen for unauthenticated users.
+The Console defaults to providing a username and password prompt for a :ref:`MinIO-managed user <minio-internal-idp>`.
+
+For deployments configured with multiple :ref:`identity managers <minio-authentication-and-identity-management>`, select the :guilabel:`Other Authentication Methods` dropdown to select one of the other configured identity providers.
+You can also log in using credentials generated using a :ref:`Security Token Service (STS) <minio-security-token-service>` API.
 
 .. admonition:: Try out the Console using MinIO's Play testing environment
    :class: note

@@ -46,9 +46,6 @@ The :mc-cmd:`mc admin idp ldap` command has the following subcommands:
    * - :mc-cmd:`mc admin idp ldap remove`
      - Remove an AD/LDAP IDP server configuration from a deployment.
 
-   * - :mc-cmd:`mc admin idp ldap list`
-     - Outputs a list of the existing AD/LDAP server configurations for a deployment.
-
    * - :mc-cmd:`mc admin idp ldap info`
      - Displays details for a specific AD/LDAP server configuration.
 
@@ -74,22 +71,20 @@ Syntax
 
 .. mc-cmd:: add
 
-   Create a new set of configurations for an AD/LDAP provider.
-
-   You can run the command multiple times to set up multiple Active Directory or LDAP providers.
+   Create a new configuration for an AD/LDAP provider.
+   MinIO supports no more than *one* (1) AD/LDAP provider per deployment.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following example creates the configuration settings for the ``myminio`` deployment as defined in a new ``test-config`` setup for LDAP integration.
+         The following example sets the AD/LDAP configuration settings for the ``myminio`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
              mc admin idp ldap add                                               \
-                  myminio                                                        \
-                  test-config                                                    \                                                        
+                  myminio                                                        \                                              
                   server_addr=myldapserver:636                                   \                                                       
                   lookup_bind_dn=cn=admin,dc=min,dc=io                           \                                               
                   lookup_bind_password=somesecret                                \                                                    
@@ -107,13 +102,10 @@ Syntax
 
             mc [GLOBALFLAGS] admin idp ldap add          \
                                        ALIAS             \
-                                       [CFG_NAME]        \
                                        [CFG_PARAM1]      \
                                        [CFG_PARAM2]...
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
-         - Replace ``CFG_NAME`` with a unique string for this configuration.
-           If not specified, the command creates default configuration values.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to create for AD/LDAP integration.
          - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-ldap-config-settings>` key-value pairs in the format of ``PARAMETER="value"``.
 
 .. mc-cmd:: update
@@ -124,14 +116,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example changes two of the configuration settings for the ``myminio`` deployment as defined in the ``test-config`` setup for LDAP integration.
+         The following example changes two of the AD/LDAP configuration settings for the ``myminio`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp ldap update                                \
                               myminio                               \
-                              test_config                           \
                               lookup_bind_dn=cn=admin,dc=min,dc=io  \
                               lookup_bind_password=somesecret                                                              
                                     
@@ -144,29 +135,26 @@ Syntax
 
             mc [GLOBALFLAGS] admin idp ldap update           \
                                             ALIAS            \
-                                            [CFG_NAME]       \
                                             [CFG_PARAM1]     \
                                             [CFG_PARAM2]...
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
-         - Replace ``CFG_NAME`` with a unique string for this configuration.
-           If not specified, the command updates the default configuration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to update for AD/LDAP integration.
          - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-ldap-config-settings>` key-value pairs to update in the format of ``PARAMETER="value"``.
 
 .. mc-cmd:: remove
 
-   Remove an existing set of configurations for an AD/LDAP provider.
+   Remove the existing configuration for an AD/LDAP provider.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following example removes the ``test-config`` settings for the ``myminio`` deployment.
+         The following example removes the AD/LDAP provider settings for the ``myminio`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp ldap remove myminio test_config                                                              
+            mc admin idp ldap remove myminio                                                             
                                     
       .. tab-item:: SYNTAX
 
@@ -176,54 +164,25 @@ Syntax
             :class: copyable
 
             mc [GLOBALFLAGS] admin idp ldap remove     \
-                                            ALIAS      \
-                                            [CFG_NAME]
+                                            ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
-         - Replace ``CFG_NAME`` with a unique string for this configuration.
-           If not specified, the command removes the default configurations. 
-
-.. mc-cmd:: list
-
-   Outputs a list of existing configuration sets for AD/LDAP providers.
-
-   .. tab-set::
-
-      .. tab-item:: EXAMPLE
-
-         The following example outputs a list of all AD/LDAP configuration sets defined for the ``myminio`` deployment.
-
-         .. code-block:: shell
-            :class: copyable
-
-            mc admin idp ldap list myminio                                                            
-                                    
-      .. tab-item:: SYNTAX
-
-         The command has the following syntax:
-
-         .. code-block:: shell
-            :class: copyable
-
-            mc [GLOBALFLAGS] admin idp ldap list ALIAS
-
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to list AD/LDAP integration for.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to remove the AD/LDAP integration.
 
 
 .. mc-cmd:: info
 
-   Outputs the set of values defined for an existing set of server configurations for an AD/LDAP provider.
+   Outputs the current configuration for an AD/LDAP provider on a specified MinIO deployment.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following example outputs the configuration settings defined for the ``test_config`` set of AD/LDAP settings on the ``myminio`` deployment.
+         The following example outputs the AD/LDAP configuration settings on the ``myminio`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp ldap info myminio test_config
+            mc admin idp ldap info myminio
                                     
       .. tab-item:: SYNTAX
 
@@ -233,29 +192,25 @@ Syntax
             :class: copyable
 
             mc [GLOBALFLAGS] admin idp ldap info     \
-                                            ALIAS      \
-                                            [CFG_NAME]
+                                            ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
-         - Replace ``CFG_NAME`` with a unique string for this configuration.
-           If not specified, the information displays for the default server configuration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to retrieve info on the AD/LDAP integration.
 
 .. mc-cmd:: enable
 
-   Begin using an existing set of configurations for an AD/LDAP provider.
+   Enables the currently configured AD/LDAP provider.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following example enables the server configurations defined as ``test_config`` on the ``myminio`` deployment.
+         The following example enables the AD/LDAP configuration on the ``myminio`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp ldap enable       \
-                              myminio      \
-                              test_config
+                              myminio
 
       .. tab-item:: SYNTAX
 
@@ -265,29 +220,25 @@ Syntax
             :class: copyable
 
             mc [GLOBALFLAGS] admin idp ldap enable     \
-                                            ALIAS      \
-                                            [CFG_NAME]
+                                            ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
-         - Replace ``CFG_NAME`` with a unique string for this configuration.
-           If not specified, the command enables the default configuration values.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to enable the AD/LDAP integration.
 
 .. mc-cmd:: disable
 
-   Stop using a set of configurations for an AD/LDAP provider.
+   Disables the currently configured AD/LDAP provider.
 
    .. tab-set::
 
       .. tab-item:: EXAMPLE
 
-         The following example disables the server configurations defined as ``test_config`` on the ``myminio`` deployment.
+         The following example disables the AD/LDAP configurations on the ``myminio`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp ldap disable      \
-                              myminio      \
-                              test_config
+                              myminio
 
       .. tab-item:: SYNTAX
 
@@ -297,12 +248,9 @@ Syntax
             :class: copyable
 
             mc [GLOBALFLAGS] admin idp ldap disable       \
-                                            ALIAS         \
-                                            [CFG_NAME]
+                                            ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
-         - Replace ``CFG_NAME`` with a unique string for this configuration.
-           If not specified, the command disables the default configuration values.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to disable the AD/LDAP integration.
 
 Global Flags
 ------------
