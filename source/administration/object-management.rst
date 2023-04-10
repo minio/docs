@@ -8,6 +8,13 @@ Object Management
    :local:
    :depth: 1
 
+.. container:: extlinks-video
+
+   - `Versioning overview <https//youtu.be/XGOiwV6Cbuk?ref=docs>`__
+   - `Object locking and retention overview <https//youtu.be/Hk9Z-sltUu8?ref=docs>`__
+   - `MinIO Object Lifecycle Management Part I <https://youtu.be/Exg2KsfzHzI?ref=docs>`__
+   - `MinIO Object Lifecycle Management Part II <https://youtu.be/5fz3rE3wjGg?ref=docs>`__
+
 .. _objects:
 
 An :ref:`object <objects>` is binary data, such as images, audio files, spreadsheets, or even binary executable code. 

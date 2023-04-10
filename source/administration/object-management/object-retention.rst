@@ -11,6 +11,11 @@ MinIO Object Locking
    :local:
    :depth: 2
 
+.. container:: extlinks-video
+
+   - `Object locking and retention overview <https//youtu.be/Hk9Z-sltUu8?ref=docs>`__
+   - `Object locking and retention lab <https//youtu.be/thNus-DL1u4?ref=docs>`__
+
 Overview
 --------
 
