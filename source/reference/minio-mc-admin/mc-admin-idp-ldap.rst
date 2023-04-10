@@ -221,6 +221,7 @@ Syntax
 
             mc [GLOBALFLAGS] admin idp ldap enable     \
                                             ALIAS
+
          - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to enable the AD/LDAP integration.
 
 .. mc-cmd:: disable
