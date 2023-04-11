@@ -172,19 +172,53 @@ Call Home
 ---------
 
 Call Home functionality automates the collection and uploading of diagnostic data or error logs to SUBNET.
-You much have an active SUBNET registration for the deployment to use Call Home.
+You must have an active SUBNET registration for the deployment and the deployment must be able to access the Internet to use Call Home.
 
-When enabled, Call Home can send one or both of:
+.. important:: 
 
-- error logs to SUBNET in real time
+   Call Home does not work for airgapped deployments.
+
+When enabled, Call Home can upload one or both of:
+
+- error logs in real time
 - a new diagnostic report every 24 hours
-
-The diagnostic report upload happens every 24 hours from the time you enable Call Home.
-If needed, you can adjust the frequency of the diagnostic reports and uploads.
 
 Once uploaded, you can view the diagnostic report results or logs through SUBNET as described above, but without the need to manually upload the data yourself.
 Making these records automatically available in SUBNET allows for easy access to manage the health of your deployment.
 If you submit an issue for support help from the MinIO engineers, the engineers have immediate access to the errors and/or logs you have uploaded.
+
+Diagnostic Report
++++++++++++++++++
+
+The diagnostic report upload happens every 24 hours from the time you enable Call Home.
+
+.. important::
+
+   The diagnostic report does **not** collect or upload any personally identifiable information.
+
+The report includes information such as:
+
+- System settings, services, and configurations that might impact performance
+- TLS certificate status, validity, expiration, and algorithm type information
+- CPU core count and information
+- Drive count, status, size, and available space
+- Cluster size server count
+- File system type
+- Memory size and type
+- OS symmetry and Linux kernel version
+- Internode latency
+- NTP synchronization
+- Available resources
+- MinIO version
+
+Error Logs
+++++++++++
+
+When the MinIO Server encounters an error, it writes it to a log.
+These logs can upload in realtime to SUBNET, where you or MinIO engineers can view the errors.
+
+Enabling or Disabling Call Home
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Call Home is **disabled** by default.
 You can :mc-cmd:`~mc support callhome enable` and :mc-cmd:`~mc support callhome disable` Call Home functionality at any time using the MinIO Client's :mc-cmd:`mc support callhome` commands.

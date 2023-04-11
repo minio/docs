@@ -29,16 +29,14 @@ The :mc:`mc replicate add` command creates a new :ref:`server-side replication
 
 .. end-mc-replicate-add-desc
 
+The remote bucket **must** be on a MinIO deployment running the same version of MinIO as the local deployment.
+
 .. note::
 
    Where :mc:`mc mirror` only synchronizes the current version of an object, ``mc replicate`` synchronizes all versions, version information, and metadata for the objects.
 
 The MinIO deployment automatically begins synchronizing new objects to the remote MinIO deployment after creating the rule. 
 You can optionally configure synchronization of existing objects, delete operations, and fully-deleted objects.
-
-This command *requires* first configuring the remote bucket target using the
-:mc-cmd:`mc admin bucket remote add` command. You must specify the resulting
-remote ARN as part of running :mc:`mc replicate add`.
 
 .. tab-set::
 
