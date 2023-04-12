@@ -145,6 +145,43 @@ HTTP Webhook Log Target
       This setting corresponds to the
       :envvar:`MINIO_LOGGER_WEBHOOK_AUTH_TOKEN` environment variable.
 
+   .. mc-conf:: client_cert
+
+      *Optional*
+
+      The path to the mTLS certificate to use for authenticating to the webhook logger.
+
+      This setting corresponds to the :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_CERT` environment variable.
+
+   .. mc-conf:: client_key
+
+      *Optional*
+
+      The path to the mTLS certificate key to use to authenticate with the webhook logger service.
+
+      This setting corresponds to the :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_KEY` environment variable.
+
+   .. mc-conf:: proxy
+
+      .. versionadded:: MinIO RELEASE.2023-02-22T18-23-45Z 
+
+      *Optional*
+
+      Define a proxy to use for the webhook logger when communicating from MinIO to external webhooks.
+
+      This setting corresponds to the
+      :envvar:`MINIO_LOGGER_WEBHOOK_PROXY` environment variable.
+
+   .. mc-conf:: queue_size
+
+      *Optional*
+
+      An integer value to use for the queue size for logger webhook targets.
+
+      This setting corresponds to the
+      :envvar:`MINIO_LOGGER_WEBHOOK_QUEUE_SIZE` environment variable.
+
+
 .. _minio-server-config-logging-audit:
 
 HTTP Webhook Audit Log Target
