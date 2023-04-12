@@ -186,13 +186,10 @@ Decommissioning a Server with Tiering Enabled
 
 .. versionchanged:: RELEASE.2023-03-20T20-16-18Z
 
-For deployments with tiering enabled and active in one or more buckets, decommissioning proceeds as expected.
-Objects subject to tiering rules move to an active pool as expected.
+For deployments with tiering enabled and active, decommissioning moves the object references to a new active pool.
+Applications can continue issuing GET requests against those objects where MinIO handles transparently retrieving them from the remote tier.
 
-.. note:: 
-
-   For older versions, active tiering prevents decommissioning from starting. 
-   Upgrade to RELEASE.2023-03-20T20-16-18Z or later to decommission pools where tiering is active.
+In older MinIO versions, tiering configurations prevent decommissioning. 
 
 .. _minio-decommissioning-server-pool:
 
