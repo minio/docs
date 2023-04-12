@@ -59,6 +59,9 @@ Registering Your MinIO Deployment with SUBNET
 
       Use the steps below to register MinIO deployments that do not have direct Internet access.
       For example, deployments that exist with an airgap, behind a firewall, or in other environments with no direct Internet access.
+
+
+      
       From the Console:
 
       #. Go to your MinIO cluster's URL, then sign in
@@ -78,6 +81,9 @@ Registering Your MinIO Deployment with SUBNET
       Refer to :mc:`mc license register` for instructions.
 
       For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-license-register-airgap>` of the :mc:`mc license register` documentation.
+
+      The process to register a deployment for SUBNET with an airgap works with MinIO Client version ``RELEASE.2022-07-29T19-17-16Z`` or later.
+      Earlier versions of the MinIO Client cannot register an airgapped deployment.
 
 .. _minio-subnet-license-file-download:
 

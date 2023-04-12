@@ -14,6 +14,33 @@
    :start-after: start-minio-only
    :end-before: end-minio-only
 
+Command History
+---------------
+
+The command used to create the diagnostic report has changed over time.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30 30
+   :width: 100%
+
+   * - MinIO Client Release
+     - Command
+     - Notes
+
+   * - RELEASE.2020-10-03T02-54-56Z
+     - ``mc admin health``
+     - First available
+
+   * - RELEASE.2020-11-17T00-39-14Z 
+     - ``mc admin subnet health``
+     - Command made a SUBNET subcommand
+
+   * - RELEASE.2020-10-03T02-54-56Z
+     - ``mc support diag``
+     - Command moved to ``mc support``
+
+
 Description
 -----------
 
@@ -23,7 +50,7 @@ The :mc-cmd:`mc support diag` command generates a health report for a MinIO depl
 
 .. end-mc-support-diag-desc
 
-For deployments registered with the MinIO subscription network (|subnet-short|), the command can automatically upload the health report for analysis.
+For deployments registered with the MinIO subscription network (|subnet-short|), the command can automatically upload the health report for analysis if you enable :mc-cmd:`~mc support callhome`.
 
 The resulting health report is intended for use by MinIO Engineering via SUBNET and may contain internal or private data points.
 Exercise caution before sending a health report to a third party or posting the health report in a public forum.
