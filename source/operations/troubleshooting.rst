@@ -59,8 +59,6 @@ Registering Your MinIO Deployment with SUBNET
 
       Use the steps below to register MinIO deployments that do not have direct Internet access.
       For example, deployments that exist with an airgap, behind a firewall, or in other environments with no direct Internet access.
-
-
       
       From the Console:
 
@@ -82,7 +80,7 @@ Registering Your MinIO Deployment with SUBNET
 
       For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-license-register-airgap>` of the :mc:`mc license register` documentation.
 
-      The process to register a deployment for SUBNET with an airgap works with MinIO Client version ``RELEASE.2022-07-29T19-17-16Z`` or later.
+      The airgap registration process works with MinIO Client version ``RELEASE.2022-07-29T19-17-16Z`` or later.
       Earlier versions of the MinIO Client cannot register an airgapped deployment.
 
 .. _minio-subnet-license-file-download:
@@ -177,10 +175,12 @@ Optionally, use :ref:`Call Home <minio-troubleshooting-call-home>` to start auto
 Call Home
 ---------
 
-.. versionadded:: ``minio`` RELEASE.2022-11-17T23-20-09Z and ``mc`` RELEASE.2022-12-02T23-48-47Z
+.. versionadded:: 
+   
+   minio RELEASE.2022-11-17T23-20-09Z and mc RELEASE.2022-12-02T23-48-47Z
 
 MinIO's opt-in Call Home service automates the collection and uploading of diagnostic data or error logs to SUBNET.
-Call Home requires the cluster have both an active SUBNET registration and reliable access to the internet.
+Call Home requires the cluster to have both an active SUBNET registration and reliable access to the internet.
 
 .. important:: 
 

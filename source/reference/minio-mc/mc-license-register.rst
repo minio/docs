@@ -84,7 +84,7 @@ Register a MinIO deployment at alias ``minio3`` on SUBNET that does not have dir
 
 .. versionchanged:: mc RELEASE.2022-07-29T19-17-16Z
 
-   The current airgap registration process works with MinIO Client version ``RELEASE.2022-07-29T19-17-16Z`` or later.
+   The airgap registration process works with MinIO Client version ``RELEASE.2022-07-29T19-17-16Z`` or later.
    Earlier versions of the MinIO Client cannot register an airgapped deployment.
 
 .. code-block:: shell
