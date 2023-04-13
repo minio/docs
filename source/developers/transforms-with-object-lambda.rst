@@ -1,7 +1,7 @@
 .. _developers-object-lambda:
 
 =================================
-Transform Data with Object Lambda
+Transforms with Object Lambda
 =================================
 
 .. default-domain:: minio
@@ -19,7 +19,6 @@ This documentation assumes the following:
 - Working Python (3.8+) and Golang (??) development environments
 - :doc:`The MinIO Go SDK </developers/go/minio-go>` installed
   
--------
 Example
 -------
 
@@ -29,7 +28,8 @@ This example creates a Lambda handler in Python, invokes it from a Go function, 
 Create a Lambda Handler
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The sample handler, written in Python, retrieves the target object using a `presigned URL <https://min.io/docs/minio/linux/developers/go/API.html#presigned-operations>`__. It then transforms the object's contents and returns the new text to the caller.
+The sample handler, written in Python, retrieves the target object using a `presigned URL <https://min.io/docs/minio/linux/developers/go/API.html#presigned-operations>`__.
+The handler then transforms the object's contents and returns the new text to the caller.
 It uses `the Flask web framework <https://flask.palletsprojects.com/en/2.2.x/>`__ and Python 3.8+. 
 
 The following command installs Flask and other needed dependancies:
@@ -42,9 +42,23 @@ The following command installs Flask and other needed dependancies:
 The handler uses information from the MinIO event context to get the original object, along with the tokens needed to validate the response when the transformed object is returned.
 In the example below, ``object_context`` contains several values from the ``getObjectContext`` property of the JSON request payload:
 
-* ``inputS3Url`` is a presigned URL for the original object. A `presigned URL <https://min.io/docs/minio/linux/developers/go/API.html#presigned-operations>`__ allows the function to access an object without the MinIO credentials usually required. 
-* ``outputRoute`` and ``outputToken`` are tokens added to the response headers to validate the response and return it to the correct user.
+.. list-table:: Object Context Variables
+   :widths: 25 75
+   :header-rows: 1
 
+   * - Variable
+     - Description
+
+   * - ``inputS3Url``
+     - Presigned URL for the original object.
+       A `presigned URL <https://min.io/docs/minio/linux/developers/go/API.html#presigned-operations>`__ allows the function to access an object without the MinIO credentials usually required.
+
+   * - ``outputRoute``
+     - description
+
+   * - ``outputToken``
+     - description
+       
 The handler calls string ``upper()`` to convert the text to all uppercase letters.
 It then sends the results back to MinIO, which returns it to the caller.
 The original object is not changed.
@@ -101,7 +115,7 @@ See the :doc:`The MinIO Python SDK </developers/python/minio-py>` for more about
 Start the Handler
 +++++++++++++++++
 
-To test the handler in your local development environment, start it with the following command:
+Use the following command to start the handler:
 
 .. code-block:: shell
    :class: copyable
@@ -183,7 +197,7 @@ Then invoke the handler, in this case from a test function written in Go.
 
       func main() {
          s3Client, err := minio.New("localhost:9000", &minio.Options{
-            Creds:  credentials.NewStaticV4("minioadmin", "minioadmin", ""),
+            Creds:  credentials.NewStaticV4("my_admin_user", "my_admin_password", ""),
             Secure: false,
          })
          if err != nil {
@@ -200,9 +214,11 @@ Then invoke the handler, in this case from a test function written in Go.
             log.Fatalln(err)
          }
          fmt.Println(presignedURL)
-      }
+      }      
 
-   To retrieve the transformed object, execute the Go code with ``curl``:
+      Replace `my_admin_user` and `my_admin_password` with root credentials for a MinIO deployment, and `myfunction` with the same function name set in the `MINIO_LAMBDA_WEBHOOK_ENABLE` environment variable.
+
+      To retrieve the transformed object, execute the Go code with ``curl``:
 
    .. code-block:: shell
       :class: copyable
