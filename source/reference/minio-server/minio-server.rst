@@ -240,7 +240,7 @@ Root Credentials
 
 .. envvar:: MINIO_ROOT_PASSWORD
 
-   The access key for the :ref:`root <minio-users-root>` user.
+   The secret key for the :ref:`root <minio-users-root>` user.
 
    .. warning::
 
