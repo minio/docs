@@ -528,11 +528,11 @@ server logs webhook endpoints:
 
    export MINIO_LOGGER_WEBHOOK_ENABLE_PRIMARY="on"
    export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_PRIMARY="TOKEN"
-   export MINIO_LOGGER_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net
+   export MINIO_LOGGER_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net"
 
    export MINIO_LOGGER_WEBHOOK_ENABLE_SECONDARY="on"
    export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_SECONDARY="TOKEN"
-   export MINIO_LOGGER_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-2.example.net
+   export MINIO_LOGGER_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-2.example.net"
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_ENABLE
 
@@ -560,6 +560,46 @@ server logs webhook endpoints:
 
    This variable corresponds to the :mc-conf:`logger_webhook auth_token
    <logger_webhook.auth_token>` configuration setting.
+
+.. envvar:: MINIO_LOGGER_WEBHOOK_CLIENT_CERT
+
+   *Optional*
+
+   The path to the mTLS certificate to use for authenticating to the webhook logger.
+
+   Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_KEY`.
+
+   This variable corresponds to the :mc-conf:`logger_webhook client_cert 
+   <logger_webhook.client_cert>` configuration setting.
+
+.. envvar:: MINIO_LOGGER_WEBHOOK_CLIENT_KEY
+
+   *Optional*
+
+   The path to the mTLS certificate key to use to authenticate with the webhook logger service.
+
+   Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_CERT`.
+
+   This variable corresponds to the :mc-conf:`logger_webhook client_key 
+   <logger_webhook.client_key>` configuration setting.
+
+.. envvar:: MINIO_LOGGER_WEBHOOK_PROXY
+
+   *Optional*
+
+   Define a proxy to use for the webhook logger when communicating from MinIO to external webhooks.
+
+   This variable corresponds to the :mc-conf:`logger_webhook proxy 
+   <logger_webhook.proxy>` configuration setting.
+
+.. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_SIZE
+
+   *Optional*
+
+   An integer value to use for the queue size for logger webhook targets.
+
+   This variable corresponds to the :mc-conf:`logger_webhook queue_size 
+   <logger_webhook.queue_size>` configuration setting.
 
 .. _minio-sever-envvar-logging-audit:
 
