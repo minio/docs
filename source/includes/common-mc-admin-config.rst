@@ -845,12 +845,34 @@ MinIO supports the following mechanisms:
 
 .. start-minio-notify-kafka-tls-client-auth
 
-Specify the client authentication policy of the Kafka broker(s). See
-`ClientAuthType <https://golang.org/pkg/crypto/tls/#ClientAuthType>`__ for 
-more information on possible values for this field.
+Specify the client authentication type of the Kafka broker(s).
+The following table lists the supported values and their mappings
 
-.. https://pkg.go.dev/crypto/tls#ClientAuthType ?
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+   :width: 100%
 
+   * - Value
+     - Authentication Type
+
+   * - 0
+     - ``NoClientCert``
+
+   * - 1
+     - ``RequestClientCert``
+
+   * - 2
+     - ``RequireAnyClientCert``
+
+   * - 3
+     - ``VerifyClientCertIfGiven``
+
+   * - 4
+     - ``RequireAndVerifyClientCert``
+
+
+See `ClientAuthType <https://golang.org/pkg/crypto/tls/#ClientAuthType>`__ for more information on each client auth type.
 .. end-minio-notify-kafka-tls-client-auth
 
 .. start-minio-notify-kafka-sasl-root
