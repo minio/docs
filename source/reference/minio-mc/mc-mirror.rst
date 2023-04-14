@@ -55,6 +55,8 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
                           [--dry-run]                      \
                           [--encrypt-key "string"]         \
                           [--exclude "string"]             \
+                          [--limit-download string]        \
+                          [--limit-upload string]          \
                           [--md5]                          \
                           [--monitoring-address "string"]  \
                           [--newer-than "string"]          \
@@ -146,6 +148,10 @@ Parameters
 
    Perform a mock mirror operation. 
    Use this operation to test that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
+
+.. include:: /includes/linux/minio-client.rst
+   :start-after: start-mc-limit-flags-desc
+   :end-before: end-mc-limit-flags-desc
 
 .. mc-cmd:: md5
    
