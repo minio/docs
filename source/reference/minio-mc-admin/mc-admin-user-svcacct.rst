@@ -87,7 +87,7 @@ Syntax
                --policy "/path/to/policy.json"              \
                myminio myuser
 
-         The command returns an output of the access key and secret key for the new account.
+         The command returns the access key and secret key for the new account.
 
       .. tab-item:: SYNTAX
 
@@ -226,7 +226,7 @@ Syntax
 .. mc-cmd:: info
    :fullpath:
 
-   Returns a description of a specified access keys. 
+   Returns a description of the specified access key. 
    The description output includes the following details, as available:
    
    - Access Key
