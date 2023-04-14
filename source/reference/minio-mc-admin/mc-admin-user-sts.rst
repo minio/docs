@@ -42,7 +42,7 @@ The :mc:`mc admin user sts` command has the following subcommands:
      - Description
 
    * - :mc-cmd:`mc admin user sts info`
-     - Retrieves information on the specified STS credential, including the parent user who generated the credentials and it's attached policies.
+     - Retrieves information on the specified STS credential, including the parent user who generated the credentials, attached policies, and expiration.
 
 Syntax
 ------
@@ -50,7 +50,7 @@ Syntax
 .. mc-cmd:: info
    :fullpath:
 
-   Retrieves information on the specified STS credential, such as the parent user who generated the credentials.
+   Retrieves information on the specified STS credential, such as the parent user who generated the credentials, associated policies, and expiration.
 
    .. tab-set::
 

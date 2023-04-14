@@ -87,6 +87,8 @@ Syntax
                --policy "/path/to/policy.json"              \
                myminio myuser
 
+         The command returns an output of the access key and secret key for the new account.
+
       .. tab-item:: SYNTAX
 
          The command has the following syntax:
@@ -98,7 +100,7 @@ Syntax
                                         [--access-key]  \
                                         [--secret-key]  \
                                         [--policy]      \
-                                        [--commment]    \
+                                        [--comment]    \
                                         ALIAS           \
                                         USER
 
@@ -224,7 +226,15 @@ Syntax
 .. mc-cmd:: info
    :fullpath:
 
-   Returns a description of a access keys associated to the specified user. The description includes the parent user of the specified access keys, its status, and whether the access keys has an assigned inline policy.
+   Returns a description of a specified access keys. 
+   The description output includes the following details, as available:
+   
+   - Access Key
+   - Parent user of the specified access key
+   - Access key status (``on`` or ``off``)
+   - Policy or policies
+   - Comment
+   - Expiration
 
    .. tab-set::
 
