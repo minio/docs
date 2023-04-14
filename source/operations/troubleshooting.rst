@@ -175,9 +175,8 @@ Optionally, use :ref:`Call Home <minio-troubleshooting-call-home>` to start auto
 Call Home
 ---------
 
-.. versionadded:: 
-   
-   minio RELEASE.2022-11-17T23-20-09Z and mc RELEASE.2022-12-02T23-48-47Z
+.. versionadded:: minio RELEASE.2022-11-17T23-20-09Z
+   and mc RELEASE.2022-12-02T23-48-47Z
 
 MinIO's opt-in Call Home service automates the collection and uploading of diagnostic data or error logs to SUBNET.
 Call Home requires the cluster to have both an active SUBNET registration and reliable access to the internet.
@@ -196,7 +195,7 @@ Making these records automatically available in SUBNET simplifies visibility int
 If you submit an issue for support help from the MinIO engineers, the engineers have immediate access to the errors and/or logs you have uploaded.
 
 Diagnostic Report
-+++++++++++++++++
+~~~~~~~~~~~~~~~~~
 
 The diagnostic report upload happens every 24 hours from the time you enable Call Home.
 If you restart all nodes on the deployment after enabling Call Home, the upload happens every 24 hours from the deployment restart.
@@ -221,7 +220,7 @@ The report includes information such as:
 - MinIO version
 
 Error Logs
-++++++++++
+~~~~~~~~~~
 
 When the MinIO Server encounters an error, it writes it to a log.
 These logs can upload in real time to SUBNET, where you or MinIO engineers can view the errors.
