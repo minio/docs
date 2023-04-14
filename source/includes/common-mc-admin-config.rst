@@ -846,7 +846,7 @@ MinIO supports the following mechanisms:
 .. start-minio-notify-kafka-tls-client-auth
 
 Specify the client authentication type of the Kafka broker(s).
-The following table lists the supported values and their mapping:
+The following table lists the supported values and their mappings
 
 .. list-table::
    :header-rows: 1
