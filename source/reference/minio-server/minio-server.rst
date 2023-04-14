@@ -2219,14 +2219,13 @@ For example, the following command sets two distinct Object Lambda webhook endpo
 
 .. envvar:: MINIO_LAMBDA_WEBHOOK_ENABLE
 
-   Specify ``"on"`` to enable publishing :mc:`minio server` logs to the Object Lambda
-   webhook endpoint for the specified function.
+   Specify ``"on"`` to enable the Object Lambda webhook endpoint for a handler function.
 
    Requires specifying :envvar:`MINIO_LAMBDA_WEBHOOK_ENDPOINT`.
 
 .. envvar:: MINIO_LAMBDA_WEBHOOK_ENDPOINT
 
-   The HTTP endpoint of the webhook for the specified function.
+   The HTTP endpoint of the webhook for the handler function.
 
 .. _minio-server-envvar-external-identity-management-ad-ldap:
 
