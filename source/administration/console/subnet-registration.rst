@@ -53,9 +53,12 @@ Health
 ~~~~~~
 
 The :guilabel:`Health` section provides an interface for running a health diagnostic for the MinIO Deployment.
+For clusters connected to the Internet, the report uploads automatically to SUBNET.
       
 The resulting health report is intended for use by MinIO Engineering via |subnet| and may contain internal or private data points such as hostnames.
 Exercise caution before sending a health report to a third party or posting the health report in a public forum.
+
+If desired, you can download the latest report from the page.
 
 Performance
 ~~~~~~~~~~~

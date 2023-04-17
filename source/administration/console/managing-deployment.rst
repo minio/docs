@@ -150,7 +150,8 @@ This section contains the following subsections.
 - Scanner
 - Etcd
 - Logger Webhook
-- Audit Webhook
+- Audit :ref:`Webhook <minio-bucket-notifications-publish-webhook>`
+- Audit :ref:`Kafka <minio-bucket-notifications-publish-kafka>`
 
 .. versionadded:: Console v0.24.0
 
