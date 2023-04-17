@@ -1,0 +1,35 @@
+keyrotate:
+  apiVersion: v1
+  bucket: bucket
+  prefix: 
+  encryption:
+    type: sse-kms # valid values are sse-s3 and sse-kms
+    
+    # following encryption values only valid for sse-kms type
+    key: my-new-keys2 # valid only for sse-kms
+    context: <new-kms-key-context> # valid only for sse-kms
+
+  # optional flags based filtering criteria
+  flags:
+    filter:
+      newerThan: "84h" # match objects newer than this value (e.g. 7d10h31s)
+      olderThan: "80h" # match objects older than this value (e.g. 7d10h31s)
+      createdAfter: "2023-03-02T15:04:05Z07:00" # match objects created after "date"
+      createdBefore: "2023-03-02T15:04:05Z07:00" # match objects created before "date"
+      tags:
+        - key: "name"
+          value: "pick*" # match objects with tag 'name', with all values starting with 'pick'
+      metadata:
+        - key: "content-type"
+          value: "image/*" # match objects with 'content-type', with all values starting with 'image/'
+      kmskey: "key-id" # match objects with KMS key-id (applicable only for sse-kms)
+  
+  # optional entries to add notifications for the job
+  notify:
+    endpoint: "https://notify.endpoint" # notification endpoint to receive job status events
+    token: "Bearer xxxxx" # optional authentication token for the notification endpoint
+  
+  # optional entries to add retry attempts if the job is interrupted
+  retry:
+    attempts: 10 # number of retries for the job before giving up
+    delay: "500ms" # least amount of delay between each retry

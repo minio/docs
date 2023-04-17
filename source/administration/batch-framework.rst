@@ -40,6 +40,9 @@ The MinIO Batch Framework supports the following job types:
    * - ``replicate``
      - Perform a one-time replication procedure from one MinIO location to another MinIO location.
 
+   * - ``keyrotate``
+     - Perform a one-time process to cycle the :ref:`sse-s3 or sse-kms <minio-sse-data-encryption>` cryptographic keys on objects.
+
 MinIO Batch CLI
 ---------------
 
@@ -84,8 +87,13 @@ Job Types
 Replicate
 ~~~~~~~~~
 
-Use the ``replicate`` job type to create a batch job that replicates objects from the local MinIO deployment to another MinIO location.
+Use the ``replicate`` job type to create a batch job that replicates objects from one MinIO deployment to another MinIO location.
+At least one of the deployment locations, either the source or the target, must be ``local``.
 The definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
+
+.. vershionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
+
+   You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
 
 For example, you can use a batch job to perform a one-time replication sync of objects from ``minio-alpha/invoices/`` to ``minio-baker/invoices``.
 
@@ -104,6 +112,24 @@ Sample YAML Description File for a ``replicate`` Job Type
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Create a basic ``replicate`` job definition file you can edit with :mc:`mc batch generate`.
+
+.. literalinclude:: /includes/code/replicate.yaml
+   :language: yaml
+
+Key Rotate
+~~~~~~~~~~
+
+.. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z
+
+Use the ``keyrotate`` job type to create a batch job that cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects.
+
+The YAML configuration allows you to use optional filters to rotate the keys for a specific set of objects by creation date, tags, metadata, or kms key.
+You can also define retry attempts or set a notification endpoint and token.
+
+Sample YAML Description File for a ``keyrotate`` Job Type
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Create a basic ``keyrotate`` job definition file you can edit with :mc:`mc batch generate`.
 
 .. literalinclude:: /includes/code/replicate.yaml
    :language: yaml

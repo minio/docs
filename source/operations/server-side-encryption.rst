@@ -1,3 +1,5 @@
+.. _minio-sse-data-encryption:
+
 =====================
 Data Encryption (SSE)
 =====================

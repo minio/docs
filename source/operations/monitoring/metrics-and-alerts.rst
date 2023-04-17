@@ -571,6 +571,21 @@ Software and Process Metrics
    
    Resident memory size in bytes.
 
+Lock Metrics
+~~~~~~~~~~~~
+
+.. metric:: minio_locks_total
+
+   Total number of current locks on the peer.
+
+.. metric:: minio_locks_write_total
+
+   Number of current WRITE locks on the peer.
+
+.. metric:: minio_locks_read_total
+
+   Number of current READ locks on the peer.
+
 .. toctree::
    :titlesonly:
    :hidden:
