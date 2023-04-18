@@ -4,8 +4,8 @@ The following tabs provide examples of installing MinIO onto 64-bit Linux
 operating systems using RPM, DEB, or binary. The RPM and DEB packages
 automatically install MinIO to the necessary system paths and create a
 ``systemd`` service file for running MinIO automatically. MinIO strongly
-recommends using RPM or DEB installation routes.
-
+recommends using RPM or DEB installation routes. To update deployments
+managed using ``systemd``, see :ref:`minio-upgrade-systemctl`.
 
 .. dropdown:: amd64 (Intel or AMD 64-bit processors)
    :open:
@@ -274,6 +274,8 @@ group on the system host with the necessary access and permissions.
 
 MinIO publishes additional startup script examples on 
 :minio-git:`github.com/minio/minio-service <minio-service>`.
+
+To update deployments managed using ``systemctl``, see :ref:`minio-upgrade-systemctl`.
 
 .. end-install-minio-systemd-desc
 

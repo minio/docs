@@ -42,9 +42,10 @@ commands *may* work as documented, any such usage is at your own risk.
 
 - Brackets ``[]`` indicate optional parameters. 
 - Parameters sharing a line are mutually dependent.
-- Parameters seperated using the pipe ``|`` operator are mutually exclusive.
+- Parameters separated using the pipe ``|`` operator are mutually exclusive.
 
 Copy the example to a text editor and modify as-needed before running the
 command in the terminal/shell.
+You may need to use ``sudo`` if your user does not have write permissions for the path where ``mc`` is installed.
 
 .. end-minio-syntax
