@@ -18,7 +18,7 @@ In February 2022, MinIO announced the `deprecation of the MinIO Gateway <https:/
 Along with the deprecation announcement, MinIO also announced that the feature would be removed in six months time.
 
 As of :minio-release:`RELEASE.2022-10-29T06-21-33Z`, the MinIO Gateway and the related filesystem mode code have been removed.
-Deployments still using the `standalone` or `filesystem` MinIO modes that upgrade to :minio-release:`RELEASE.2022-10-29T06-21-33Z` or later receive an error when attempting to start MinIO.
+Deployments still using the `standalone` or `filesystem` MinIO modes that upgrade to MinIO Server :minio-release:`RELEASE.2022-10-29T06-21-33Z` or later receive an error when attempting to start MinIO.
 
 .. cond:: linux
 
@@ -35,8 +35,8 @@ This document outlines the steps required to successfully launch and migrate to 
 
 .. important:: 
 
-   Standalone/file system mode continues to work on any release up to and including `RELEASE.2022-10-24T18-35-07Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-10-24T18-35-07Z>`__.
-   To continue using a standalone deployment, install that MinIO release or any `earlier release <https://github.com/minio/minio/releases>`__.
+   Standalone/file system mode continues to work on any release up to and including MinIO Server `RELEASE.2022-10-24T18-35-07Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-10-24T18-35-07Z>`__.
+   To continue using a standalone deployment, install that MinIO Server release with MinIO Client `RELEASE.2022-10-29T10-09-23Z <https://github.com/minio/mc/releases/tag/RELEASE.2022-10-29T10-09-23Z>`__ or any `earlier release <https://github.com/minio/minio/releases>`__ with its corresponding MinIO Client. Note that the version of the MinIO Client should be newer and as close as possible to the version of the MinIO server.
 
 
 
@@ -61,47 +61,51 @@ Procedure
 
    Set the port to a custom point different than the existing standalone deployment.
 
-#. Add an alias for the new deployment with :mc:`mc alias set`
+#. Add an alias for the new deployment with :mc:`mc alias set` with the new MinIO Client from the previous step
 
    .. code-block:: shell
       :class: copyable
       
       mc alias set NEWALIAS PATH ACCESSKEY SECRETKEY
 
+   - Use the new MinIO Client.
    - Replace ``NEWALIAS`` with the alias to create for the deployment.
    - Replace ``PATH`` with the IP address or hostname and port for the new deployment.
    - Replace ``ACCESSKEY`` and ``SECRETKEY`` with the credentials you used when creating the new deployment.
 
 #. Export the existing deployment's **configurations**
 
-   Use the :mc-cmd:`mc admin config export <mc admin config export>` export command to retrieve the configurations defined for the existing standalone MinIO deployment.
+   Use the :mc-cmd:`mc admin config export <mc admin config export>` export command with the existing MinIO Client to retrieve the configurations defined for the existing standalone MinIO deployment.
 
    .. code-block:: shell
       :class: copyable
 
       mc admin config export ALIAS > config.txt
 
-   Replace ``ALIAS`` with the alias used for the existing standalone deployment you are retrieving values from. 
+   - Use the existing MinIO Client.
+   - Replace ``ALIAS`` with the alias used for the existing standalone deployment you are retrieving values from. 
 
-#. Import **configurations** from existing standalone deployment to new deployment
+#. Import **configurations** from existing standalone deployment to new deployment with the new MinIO Client
 
    .. code-block:: shell
       :class: copyable
 
       mc admin config import ALIAS < config.txt
 
+   - Use the new MinIO Client.
    - Replace ``ALIAS`` with the alias for the new deployment.
 
-#. Restart the server for the new deployment
+#. Restart the server for the new deployment with the new MinIO Client
 
    .. code-block:: shell
       :class: copyable
 
       mc admin service restart ALIAS
    
+   - Use the new MinIO Client.
    - Replace ``ALIAS`` with the alias for the new deployment.
    
-#. Export **bucket metadata** from existing standalone deployment
+#. Export **bucket metadata** from existing standalone deployment with the existing MinIO Client
 
    The following command exports bucket metadata from the existing deployment to a ``.zip`` file.
 
@@ -122,11 +126,12 @@ Procedure
 
       mc admin cluster bucket export ALIAS
 
+   - Use the existing MinIO Client.
    - Replace ``ALIAS`` with the alias for your existing deployment.
 
    This command creates a ``cluster-metadata.zip`` file with metadata for each bucket.
 
-#. Import **bucket metadata** to the new deployment
+#. Import **bucket metadata** to the new deployment with the new MinIO Client
 
    The following command reads the contents of the exported bucket ``.zip`` file and creates buckets on the new deployment with the same configurations.
 
@@ -135,11 +140,12 @@ Procedure
 
       mc admin cluster bucket import ALIAS cluster-metadata.zip
 
+   - Use the new MinIO Client.
    - Replace ``ALIAS`` with the alias for the new deployment.
 
    The command creates buckets on the new deployment with the same configurations as provided by the metadata in the .zip file from the existing deployment.
 
-#. *(Optional)* Duplicate **tiers** from existing standalone deployment to new deployment
+#. *(Optional)* Duplicate **tiers** from existing standalone deployment to new deployment with the existing MinIO Client
 
    Use :mc:`mc ilm tier ls` with the ``--json`` flag to retrieve a list of the tiers that exist on the standalone deployment.
 
@@ -148,11 +154,12 @@ Procedure
 
       mc ilm tier ls ALIAS --json
 
+   - Use the existing MinIO Client.
    - Replace ``ALIAS`` with the alias for the existing standalone deployment.
    
    Use the list to recreate the tiers on the new deployment.
 
-#. Export **IAM settings** from the existing standalone deployment to new deployment
+#. Export **IAM settings** from the existing standalone deployment to new deployment with the existing MinIO Client
 
    If you are using an external identity and access management provider, recreate those settings in the new deployment along with all associated policies.
 
@@ -169,11 +176,12 @@ Procedure
 
       mc admin cluster iam export ALIAS
 
+   - Use the existing MinIO Client.
    - Replace ``ALIAS`` with the alias for your existing deployment.
 
    This command creates a ``ALIAS-iam-info.zip`` file with IAM data.
 
-#. Import the **IAM settings** to the new deployment:
+#. Import the **IAM settings** to the new deployment with the new MinIO Client:
 
    Use the exported file to create the IAM setting on the new deployment.
 
@@ -182,16 +190,18 @@ Procedure
 
       mc admin cluster iam import ALIAS alias-iam-info.zip
 
+   - Use the new MinIO Client.
    - Replace ``ALIAS`` with the alias for the new deployment.
    - Replace the name of the zip file with the name for the existing deployment's file.
 
-#. Use :mc:`mc mirror` with the :mc-cmd:`~mc mirror --preserve` and :mc-cmd:`~mc mirror --watch` flags on the standalone deployment to move objects to the new |SNSD| deployment
+#. Use :mc:`mc mirror` with the :mc-cmd:`~mc mirror --preserve` and :mc-cmd:`~mc mirror --watch` flags on the standalone deployment to move objects to the new |SNSD| deployment with the existing MinIO Client
 
    .. code-block:: shell
       :class: copyable
 
       mc mirror --preserve --watch SOURCE/BUCKET TARGET/BUCKET
 
+   - Use the existing MinIO Client.
    - Replace ``SOURCE/BUCKET`` with the alias and a bucket for the existing standalone deployment.
    - Replace ``TARGET/BUCKET`` with the alias and corresponding bucket for the new deployment.
 

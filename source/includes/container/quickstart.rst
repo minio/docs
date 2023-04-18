@@ -6,6 +6,14 @@ Quickstart for Containers
 
 .. default-domain:: minio
 
+.. container:: extlinks-video
+
+   - `Installing and Running MinIO on Docker: Overview <https://youtu.be/mg9NRR6Js1s?ref=docs>`__
+   - `Installing and Running MinIO on Docker: Installation Lab <https://youtu.be/Z0FtabDUPtU?ref=docs>`__
+   - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
+   
+   - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
+
 .. |OS| replace:: Docker or Podman
 
 This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 

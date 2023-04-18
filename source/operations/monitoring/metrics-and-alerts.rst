@@ -87,6 +87,11 @@ Object and Bucket Metrics
    Distribution of object sizes in a given bucket.
    You can identify the bucket using the ``{ bucket="STRING" }`` label.
 
+.. metric:: minio_bucket_objects_version_distribution
+
+   Distribution of number of versions per object in a given bucket.
+   You can identify the bucket using the ``{ bucket="STRING" }`` label.
+
 .. metric:: minio_bucket_usage_object_total
 
    Total number of objects in a given bucket.

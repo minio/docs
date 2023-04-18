@@ -59,6 +59,7 @@ Registering Your MinIO Deployment with SUBNET
 
       Use the steps below to register MinIO deployments that do not have direct Internet access.
       For example, deployments that exist with an airgap, behind a firewall, or in other environments with no direct Internet access.
+      
       From the Console:
 
       #. Go to your MinIO cluster's URL, then sign in
@@ -78,6 +79,9 @@ Registering Your MinIO Deployment with SUBNET
       Refer to :mc:`mc license register` for instructions.
 
       For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-license-register-airgap>` of the :mc:`mc license register` documentation.
+
+      The airgap registration process works with MinIO Client version ``RELEASE.2022-07-29T19-17-16Z`` or later.
+      Earlier versions of the MinIO Client cannot register an airgapped deployment.
 
 .. _minio-subnet-license-file-download:
 
@@ -135,6 +139,8 @@ Deployment Health
 The deployment's details include a summary of the deployment's configuration and the number of checks run and failed.
 You can select :guilabel:`Upload` to add diagnostic health data obtained from the :mc:`mc support diag` command or the MinIO Console's :guilabel:`Support > Health` page.
 
+You can also use the :ref:`Call Home <minio-troubleshooting-call-home>` functionality to automatically run and upload a diagnostic health report.
+
 If you need support from MinIO Engineering, you can create a :guilabel:`New Issue` for the deployment.
 
 .. image:: /images/subnet/SUBNET-deployment-health-summary.png
@@ -156,6 +162,79 @@ You can scroll vertically through the output for the selected check.
    :alt: MinIO SUBNET's health report for a deployment showing a failed Health Report with details expanded
    :align: center
 
+Logs
+----
+
+Use :mc:`mc admin logs` command to display logs from the command line.
+The command supports type and quantity filters for further limiting logs output.
+
+Optionally, use :ref:`Call Home <minio-troubleshooting-call-home>` to start automatically uploading real time error logs to SUBNET for analysis.
+
+.. _minio-troubleshooting-call-home:
+
+Call Home
+---------
+
+.. versionadded:: minio RELEASE.2022-11-17T23-20-09Z
+   and mc RELEASE.2022-12-02T23-48-47Z
+
+MinIO's opt-in Call Home service automates the collection and uploading of diagnostic data or error logs to SUBNET.
+Call Home requires the cluster to have both an active SUBNET registration and reliable access to the internet.
+
+.. important:: 
+
+   Call Home does not work for airgapped deployments.
+
+When enabled, Call Home can upload one or both of:
+
+- error logs in real time
+- a new diagnostic report every 24 hours
+
+Once uploaded, you can view the diagnostic report results or logs through SUBNET as described above, but without the need to manually upload the data yourself.
+Making these records automatically available in SUBNET simplifies visibility into cluster health and functionality.
+If you submit an issue for support help from the MinIO engineers, the engineers have immediate access to the errors and/or logs you have uploaded.
+
+Diagnostic Report
+~~~~~~~~~~~~~~~~~
+
+The diagnostic report upload happens every 24 hours from the time you enable Call Home.
+If you restart all nodes on the deployment after enabling Call Home, the upload happens every 24 hours from the deployment restart.
+
+.. important::
+
+   The diagnostic report does **not** collect or upload any personally identifiable information.
+
+The report includes information such as:
+
+- System settings, services, and configurations that might impact performance
+- TLS certificate status, validity, expiration, and algorithm type information
+- CPU core count and information
+- Drive count, status, size, and available space
+- Cluster size server count
+- File system type
+- Memory size and type
+- OS symmetry and Linux kernel version
+- Internode latency
+- NTP synchronization
+- Available resources
+- MinIO version
+
+Error Logs
+~~~~~~~~~~
+
+When the MinIO Server encounters an error, it writes it to a log.
+These logs can upload in real time to SUBNET, where you or MinIO engineers can view the errors.
+
+Enabling or Disabling Call Home
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Call Home is **disabled** by default.
+You can :mc-cmd:`~mc support callhome enable` and :mc-cmd:`~mc support callhome disable` Call Home functionality at any time using the MinIO Client's :mc-cmd:`mc support callhome` commands.
+The command and its subcommands allow you to enable Call Home uploads for only the diagnostics, only the error logs, or both.
+Refer to the documentation on the commands for more details.
+
+Use :mc-cmd:`mc support callhome status` to check the status of an upload.
+
 Uploading Data to SUBNET
 ------------------------
 
@@ -174,16 +253,6 @@ Encrypting Data
 
 Data from the Inspect tool in :ref:`Console <minio-console>` or the :mc:`mc support inspect` command can be encrypted.
 For more details about encrypting or decrypting such files, see :ref:`Encrypting Files <minio-support-encryption>`.
-
-Logs
-----
-
-Use :mc-cmd:`mc support callhome enable` to start automatically uploading deployment logs to SUBNET for analysis.
-Use :mc-cmd:`mc support callhome status` to check the status of log upload.
-You can disable upload at any time using :mc-cmd:`mc support callhome disable`.
-
-Use :mc:`mc admin logs` command to display logs from the command line.
-The command supports type and quantity filters for further limiting logs output.
 
 Upgrades and Version Support
 ----------------------------

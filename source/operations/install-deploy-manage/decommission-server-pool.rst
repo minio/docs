@@ -181,6 +181,16 @@ If the decommission fails, customers should open a |SUBNET| issue for further as
 Community users without a SUBNET subscription can retry the decommission process or seek additional support through the `MinIO Community Slack <https://slack.min.io/>`__.
 MinIO provides Community Support at best-effort only and provides no :abbr:`SLA <Service Level Agreement>` around responsiveness.
 
+Decommissioning a Server with Tiering Enabled
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionchanged:: RELEASE.2023-03-20T20-16-18Z
+
+For deployments with tiering enabled and active, decommissioning moves the object references to a new active pool.
+Applications can continue issuing GET requests against those objects where MinIO handles transparently retrieving them from the remote tier.
+
+In older MinIO versions, tiering configurations prevent decommissioning. 
+
 .. _minio-decommissioning-server-pool:
 
 Decommission a Server Pool

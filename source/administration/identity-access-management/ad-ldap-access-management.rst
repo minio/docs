@@ -10,8 +10,7 @@ Active Directory / LDAP Access Management
    :local:
    :depth: 2
 
-MinIO supports using an Active Directory or LDAP (AD/LDAP) service for external
-management of user identities.
+MinIO supports configuring a single Active Directory or LDAP (AD/LDAP) service for external management of user identities.
 
 For identities managed by the external AD/LDAP provider, MinIO uses the user's Distinguished Name and attempts to map it against an existing :ref:`policy <minio-policy>`.
 

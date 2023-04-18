@@ -145,6 +145,11 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-user-svcacct-desc
           :end-before: end-mc-admin-user-svcacct-desc
 
+   * - :mc:`mc admin user sts`
+     - .. include:: /reference/minio-mc-admin/mc-admin-user-sts.rst
+          :start-after: start-mc-admin-user-sts-desc
+          :end-before: end-mc-admin-user-sts-desc
+
 .. _mc-admin-install:
 
 Installation
@@ -199,4 +204,27 @@ See :ref:`minio-mc-global-options`.
    :hidden:
    :glob:
 
-   /reference/minio-mc-admin/*
+   /reference/minio-mc-admin/mc-admin-bucket-remote.rst
+   /reference/minio-mc-admin/mc-admin-config
+   /reference/minio-mc-admin/mc-admin-console
+   /reference/minio-mc-admin/mc-admin-decommission
+   /reference/minio-mc-admin/mc-admin-group
+   /reference/minio-mc-admin/mc-admin-heal
+   /reference/minio-mc-admin/mc-admin-idp-ldap
+   /reference/minio-mc-admin/mc-admin-idp-ldap-policy
+   /reference/minio-mc-admin/mc-admin-idp-openid
+   /reference/minio-mc-admin/mc-admin-info
+   /reference/minio-mc-admin/mc-admin-kms-key
+   /reference/minio-mc-admin/mc-admin-logs
+   /reference/minio-mc-admin/mc-admin-obd
+   /reference/minio-mc-admin/mc-admin-policy
+   /reference/minio-mc-admin/mc-admin-profile
+   /reference/minio-mc-admin/mc-admin-prometheus
+   /reference/minio-mc-admin/mc-admin-rebalance
+   /reference/minio-mc-admin/mc-admin-replicate
+   /reference/minio-mc-admin/mc-admin-service
+   /reference/minio-mc-admin/mc-admin-top
+   /reference/minio-mc-admin/mc-admin-trace
+   /reference/minio-mc-admin/mc-admin-update
+   /reference/minio-mc-admin/mc-admin-user
+   /reference/minio-mc-admin/mc-admin-user-svcacct

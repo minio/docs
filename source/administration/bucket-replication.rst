@@ -18,7 +18,7 @@ and destination buckets.
   The deployment where you configure the bucket replication rule acts as the "source" while the configured remote deployment acts as the "target".
   MinIO applies rules as part of object write operations (e.g. ``PUT``) and automatically synchronizes new objects *and* object mutations, such as new object versions or changes to object metadata.
   
-  MinIO server-side bucket replication only supports MinIO clusters for the remote replication target.
+  MinIO server-side bucket replication only supports a MinIO cluster on an identical release for the remote replication target.
 
 Client-side Bucket Replication
   Use the command process to synchronize objects between buckets within the same S3-compatible cluster *or* between two independent S3-compatible clusters. 

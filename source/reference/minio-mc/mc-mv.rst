@@ -49,6 +49,8 @@ similar results to the ``mv`` commandline tool.
          [--disable-multipart]       \
          [--encrypt "string"]        \
          [--encrypt-key "string"]    \
+         [--limit-download string]   \
+         [--limit-upload string]     \
          [--newer-than "string"]     \
          [--older-than "string"]     \
          [--preserve]                \
@@ -65,8 +67,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: SOURCE
+   :required:
 
-   *Required* The object or objects to move. 
+  The object or objects to move. 
    
    For moving an object from a MinIO bucket, specify the :ref:`alias <alias>`
    and the full path to the object(s) (e.g. bucket and path to objects). For
@@ -100,7 +103,7 @@ Parameters
 .. mc-cmd:: TARGET
    :required:
 
-   *Required* The full path to the bucket to which the command moves the
+   The full path to the bucket to which the command moves the
    object(s) at the specified :mc-cmd:`~mc mv SOURCE`. Specify the 
    :ref:`alias <alias>` of a configured S3 service as the prefix to the 
    :mc-cmd:`~mc mv TARGET` path. 
@@ -128,21 +131,20 @@ Parameters
    objects at the ``SOURCE``. 
 
 .. mc-cmd:: --attr
-   
+   :optional:
 
-   *Optional* Add custom metadata for the object. Specify key-value pairs as 
-   ``KEY=VALUE\;``. For example, 
-   ``--attr key1=value1\;key2=value2\;key3=value3``.
+   Add custom metadata for the object. Specify key-value pairs as ``KEY=VALUE\;``. 
+   For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
 
 .. mc-cmd:: --continue, c
-   
+   :optional:
 
-   *Optional* Create or resume a move session. 
+   Create or resume a move session. 
 
 .. mc-cmd:: --disable-multipart
-   
+   :optional:
 
-   *Optional* Disables the multipart upload feature.
+   Disables the multipart upload feature.
 
    Multipart upload breaks an object into a set of separate parts.
    Each part uploads individually and in any order.
@@ -152,11 +154,10 @@ Parameters
    MinIO recommends using multipart upload for any object larger than 100 MB.
    For more information on multipart upload, refer to the :s3-docs:`Amazon S3 documentation <mpuoverview.html>`
 
-
 .. mc-cmd:: --encrypt
-   
+   :optional:
 
-   *Optional* Encrypt or decrypt objects using server-side encryption with
+   Encrypt or decrypt objects using server-side encryption with
    server-managed keys. Specify key-value pairs as ``KEY=VALUE``.
    
    - Each ``KEY`` represents a bucket or object. 
@@ -171,9 +172,9 @@ Parameters
    alternative to specifying them on the command line.
 
 .. mc-cmd:: --encrypt-key
-   
+   :optional:
 
-   *Optional* Encrypt or decrypt objects using server-side encryption with
+   Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
    
    - Each ``KEY`` represents a bucket or object. 
@@ -187,40 +188,44 @@ Parameters
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
-.. mc-cmd:: --newer-than
-   
+.. include:: /includes/linux/minio-client.rst
+   :start-after: start-mc-limit-flags-desc
+   :end-before: end-mc-limit-flags-desc
 
-   *Optional* Remove object(s) newer than the specified number of days.  Specify
+.. mc-cmd:: --newer-than
+   :optional:
+
+   Remove object(s) newer than the specified number of days.  Specify
    a string in ``##d#hh#mm#ss`` format. For example: 
    ``--newer-than 1d2hh3mm4ss``.
 
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --older-than
-   
+   :optional:
 
-   *Optional* Remove object(s) older than the specified time limit. Specify a
+   Remove object(s) older than the specified time limit. Specify a
    string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``.
       
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --preserve, a
-   
+   :optional:
 
-   *Optional* Preserve file system attributes and bucket policy rules of the
+   Preserve file system attributes and bucket policy rules of the
    :mc-cmd:`~mc mv SOURCE` directories, buckets, and objects on the 
    :mc-cmd:`~mc mv TARGET` bucket(s).
 
 .. mc-cmd:: --recursive, r
+   :optional:
    
-   
-   *Optional* Recursively move the contents of each bucket or directory
+   Recursively move the contents of each bucket or directory
    :mc-cmd:`~mc mv SOURCE` to the :mc-cmd:`~mc mv TARGET` bucket.
 
-.. mc-cmd:: storage-class, sc
-   
+.. mc-cmd:: --storage-class, sc
+   :optional:
 
-   *Optional* Set the storage class for the new object(s) on the 
+   Set the storage class for the new object(s) on the 
    :mc-cmd:`~mc mv TARGET`. 
          
    See the Amazon documentation on

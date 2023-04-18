@@ -46,7 +46,7 @@ includes their explicitly assigned policies *and* any policies inherited
 via group membership.
 
 Newly created groups have *no* policies by default. To configure a group's
-assigned policies, use the :mc-cmd:`mc admin policy set` command.
+assigned policies, use the :mc-cmd:`mc admin policy attach` command.
 
 For more information on MinIO users and groups, see
 :ref:`minio-users` and :ref:`minio-groups`. For 

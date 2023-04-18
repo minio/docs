@@ -8,6 +8,11 @@ Monitoring and Alerts
    :local:
    :depth: 1
 
+.. container:: extlinks-video
+
+   - `Monitoring with MinIO and Prometheus: Overview <https://youtu.be/A3vCDaFWNNs?ref=docs>`__
+   - `Monitoring with MinIO and Prometheus: Lab <https://youtu.be/Oix9iXndSUY?ref=docs>`__
+
 Metrics and Alerts
 ------------------
 
