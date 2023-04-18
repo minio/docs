@@ -2243,7 +2243,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 Object Lambda
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following section documents environment variables for configuring MinIO to publish data to an HTTP webhook endpoint for an Object Lambda function.
+The following section documents environment variables for configuring MinIO to publish data to an HTTP webhook endpoint and trigger an Object Lambda function.
 See :ref:`developers-object-lambda` for more complete documentation and tutorials on using these environment variables.
 
 You can specify multiple webhook endpoints as Lambda targets by appending a unique identifier ``_FUNCTIONNAME`` for each Object Lambda function.
