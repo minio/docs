@@ -97,7 +97,7 @@ MinIO provides the following built-in policies for assigning to
    location without requiring any listing. 
    Equivalent to the :policy-action:`s3:PutObject` action.
 
-Use :mc-cmd:`mc admin policy set` to associate a policy to a 
+Use :mc-cmd:`mc admin policy attach` to associate a policy to a 
 user or group on a MinIO deployment.
 
 For example, consider the following table of users. Each user is assigned

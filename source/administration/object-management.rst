@@ -8,6 +8,13 @@ Object Management
    :local:
    :depth: 1
 
+.. container:: extlinks-video
+
+   - `Versioning overview <https//youtu.be/XGOiwV6Cbuk?ref=docs>`__
+   - `Object locking and retention overview <https//youtu.be/Hk9Z-sltUu8?ref=docs>`__
+   - `MinIO Object Lifecycle Management Part I <https://youtu.be/Exg2KsfzHzI?ref=docs>`__
+   - `MinIO Object Lifecycle Management Part II <https://youtu.be/5fz3rE3wjGg?ref=docs>`__
+
 .. _objects:
 
 An :ref:`object <objects>` is binary data, such as images, audio files, spreadsheets, or even binary executable code. 
@@ -54,6 +61,11 @@ Object Organization and Planning
 Administrators typically control the creation and configuration of buckets.
 Client applications can then use :ref:`S3-compatible SDKs <minio-drivers>` to create, list, retrieve, and delete objects on the MinIO deployment.
 Clients therefore drive the overall hierarchy of data within a given bucket or prefix, where Administrators can exercise control using :ref:`policies <minio-policy>` to grant or deny access to an action or resource.
+
+.. cond:: windows
+
+   Unlike filenames on a Windows system, object names in MinIO cannot have a ``\`` character.
+   Use ``/`` as a delimiter in object names to have MinIO automatically create a folder structure using :term:`prefixes`.
 
 MinIO has no hard :ref:`thresholds <minio-server-limits>` on the number of buckets, objects, or prefixes on a given deployment.
 The relative performance of the hardware and networking underlying the MinIO deployment may create a practical limit to the number of objects in a given prefix or bucket.

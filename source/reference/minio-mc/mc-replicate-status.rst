@@ -131,3 +131,19 @@ Use :mc:`mc replicate status` to show bucket replication status:
 - Replace :mc-cmd:`ALIAS <mc replicate status ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`PATH <mc replicate status ALIAS>` with the path to the bucket or bucket prefix.
+
+Behavior
+--------
+
+Removed and Re-added ARNs
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionchanged:: mc RELEASE.2023-03-20T17-17-53Z
+
+The standard output of this command does not display ARNs previously removed from a replication configuration.
+
+To list all ARNs, including ARNs no longer part of the replication, use the ``--json`` flag.
+The ``json`` output continues to show data replicated under old ARNs.
+This may be valuable if an ARN was removed and re-added for the same bucket.
+
+New ARNs do **not** cause re-replication of previously synced objects.

@@ -61,6 +61,8 @@ similar results to the ``cp`` commandline tool.
                           [--encrypt "string"]                                      \
                           [--encrypt-key]                                           \
                           [--legal-hold "on"]                                       \
+                          [--limit-download string]                                 \
+                          [--limit-upload string]                                   \
                           [--md5]                                                   \
                           [--newer-than "string"]                                   \
                           [--older-than "string"]                                   \
@@ -186,6 +188,10 @@ Parameters
    Enables indefinite :ref:`Legal Hold <minio-object-locking-legalhold>` object locking on the copied objects.
 
    Specify ``on``.
+
+.. include:: /includes/linux/minio-client.rst
+   :start-after: start-mc-limit-flags-desc
+   :end-before: end-mc-limit-flags-desc
 
 .. mc-cmd:: --md5
    :optional:

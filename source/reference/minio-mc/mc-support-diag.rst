@@ -14,6 +14,33 @@
    :start-after: start-minio-only
    :end-before: end-minio-only
 
+Command History
+---------------
+
+The command used to create the diagnostic report has changed over time.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30 30
+   :width: 100%
+
+   * - MinIO Client Release
+     - Command
+     - Notes
+
+   * - RELEASE.2020-10-03T02-54-56Z
+     - ``mc admin health``
+     - First available
+
+   * - RELEASE.2020-11-17T00-39-14Z 
+     - ``mc admin subnet health``
+     - Command made a SUBNET subcommand
+
+   * - RELEASE.2022-02-13T23-26-13Z
+     - ``mc support diag``
+     - Command moved to ``mc support``
+
+
 Description
 -----------
 
@@ -23,17 +50,13 @@ The :mc-cmd:`mc support diag` command generates a health report for a MinIO depl
 
 .. end-mc-support-diag-desc
 
-For deployments registered with the MinIO subscription network (|subnet-short|), the command can automatically upload the health report for analysis.
+For deployments registered with the MinIO subscription network (|subnet-short|), the command generates and uploads the health report for analysis.
+Optionally, automate generating and uploading the report every 24 hours by enabling :mc-cmd:`~mc support callhome`.
 
 The resulting health report is intended for use by MinIO Engineering via SUBNET and may contain internal or private data points.
 Exercise caution before sending a health report to a third party or posting the health report in a public forum.
 
 MinIO recommends that you run the health diagnostics when first provisioning the cluster and again at any failure scenario.
-
-This diagnostic test runs as a one-shot test and can run for as long as 5 minutes.
-During the test, MinIO freezes all S3 calls and queues read or write operations until the test completes.
-The queue is limited based on the supported maximum concurrent :ref:`requests per host <minio-hardware-checklist-memory>`.
-Requests that exceed this limit on a given host return a ``503`` error after ~10 seconds.
 
 Use the :mc-cmd:`mc support diag` command to trigger the diagnostic test.
 For clusters registered with SUBNET, the command uploads the results as part of SUBNET Health reports. 

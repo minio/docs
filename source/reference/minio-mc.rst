@@ -490,52 +490,6 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
 
       mc --JSON ls play 
 
-.. mc-cmd:: --limit-download
-   :optional:
-
-   Limit client-side download rates to no more than a specified rate in KiB/s, MiB/s, or GiB/s.
-   This affects only the download to the local device running the MinIO Client.
-   Valid units include: 
-   
-   - ``B`` for bytes
-   - ``K`` for kilobytes
-   - ``G`` for gigabytes
-   - ``T`` for terabytes
-   - ``Ki`` for kibibytes
-   - ``Gi`` for gibibytes
-   - ``Ti`` for tebibytes
-
-   For example, to limit download rates to no more than 1 GiB/s, use the following:
-
-   .. code-block::
-
-      --limit-download 1G
-
-   If not specified, MinIO uses an unlimited download rate.
-
-.. mc-cmd:: --limit-upload
-   :optional:
-
-   Limit client-side upload rates to no more than the specified rate in KiB/s, MiB/s, or GiB/s.
-   This affects only the upload from the local device running the MinIO Client.
-   Valid units include: 
-   
-   - ``B`` for bytes
-   - ``K`` for kilobytes
-   - ``G`` for gigabytes
-   - ``T`` for terabytes
-   - ``Ki`` for kibibytes
-   - ``Gi`` for gibibytes
-   - ``Ti`` for tebibytes
-
-   For example, to limit upload rates to no more than 1 GiB/s, use the following:
-
-   .. code-block::
-
-      --limit-upload 1G
-
-   If not specified, MinIO uses an unlimited upload rate.
-
 .. option:: --no-color
 
    Disables the built-in color theme for console output. Useful for dumb

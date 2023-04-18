@@ -11,6 +11,32 @@
 .. mc:: mc support register
 .. mc:: mc license register
 
+Command History
+---------------
+
+The command used to register a deployment with SUBNET has changed over time.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30 30
+   :width: 100%
+
+   * - MinIO Client Release
+     - Command
+     - Notes
+
+   * - RELEASE.2021-11-05T10-05-06Z
+     - ``mc admin subnet register``
+     - First available
+
+   * - RELEASE.2022-02-13T23-26-13Z 
+     - ``mc support register``
+     - Command moved to an ``mc support`` function
+
+   * - RELEASE.2022-07-15T09-20-55Z
+     - ``mc license register``
+     - Command moved to an ``mc license`` function
+
 
 Description
 -----------
@@ -55,6 +81,11 @@ Register a Deployment Without Direct Internet Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Register a MinIO deployment at alias ``minio3`` on SUBNET that does not have direct Internet access due to a firewall, airgap, or the like.
+
+.. versionchanged:: mc RELEASE.2022-07-29T19-17-16Z
+
+   The airgap registration process works with MinIO Client version ``RELEASE.2022-07-29T19-17-16Z`` or later.
+   Earlier versions of the MinIO Client cannot register an airgapped deployment.
 
 .. code-block:: shell
    :class: copyable

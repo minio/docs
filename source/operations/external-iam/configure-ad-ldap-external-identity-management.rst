@@ -13,7 +13,8 @@ Configure MinIO for Authentication using Active Directory / LDAP
 Overview
 --------
 
-MinIO supports using an Active Directory / LDAP Connect for external management of user identities. 
+MinIO supports configuring a single Active Directory / LDAP Connect for external management of user identities.
+
 The procedure on this page provides instructions for:
 
 .. cond:: k8s
@@ -265,3 +266,14 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
    MinIO.
 
    See the :ref:`minio-sts-assumerolewithldapidentity` for reference documentation.
+
+
+Disable a Configured Active Directory / LDAP Connection
+-------------------------------------------------------
+
+.. versionadded:: RELEASE.2023-03-20T20-16-18Z
+
+You can enable and disable the configured AD/LDAP connection as needed.
+
+Use :mc-cmd:`mc admin idp ldap disable` to deactivate a configured connection.
+Use :mc-cmd:`mc admin idp ldap enable` to activate a previously configured connection.
