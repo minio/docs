@@ -107,6 +107,12 @@ Object and Bucket Metrics
    Total bucket quota size in bytes.
    You can identify the bucket using the ``{ bucket="STRING" }`` label.
 
+.. metric:: minio_bucket_usage_version_total
+
+   Total number of object versions contained in a bucket.
+   You can identify the bucket using the ``{ bucket="STRING" }`` label.
+
+
 Replication Metrics
 ~~~~~~~~~~~~~~~~~~~
 
