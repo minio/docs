@@ -621,13 +621,13 @@ audit log webhook endpoints:
 
    export MINIO_AUDIT_WEBHOOK_ENABLE_PRIMARY="on"
    export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_PRIMARY="TOKEN"
-   export MINIO_AUDIT_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net
+   export MINIO_AUDIT_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net"
    export MINIO_AUDIT_WEBHOOK_CLIENT_CERT_SECONDARY="/tmp/cert.pem"
    export MINIO_AUDIT_WEBHOOK_CLIENT_KEY_SECONDARY="/tmp/key.pem"
 
    export MINIO_AUDIT_WEBHOOK_ENABLE_SECONDARY="on"
    export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_SECONDARY="TOKEN"
-   export MINIO_AUDIT_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-1.example.net
+   export MINIO_AUDIT_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-1.example.net"
    export MINIO_AUDIT_WEBHOOK_CLIENT_CERT_SECONDARY="/tmp/cert.pem"
    export MINIO_AUDIT_WEBHOOK_CLIENT_KEY_SECONDARY="/tmp/key.pem"
 
@@ -2237,6 +2237,35 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    This environment variable corresponds with the
    :mc-conf:`notify_webhook comment <notify_webhook.comment>`
    configuration setting.
+
+.. _minio-server-envvar-object-lambda-webhook:
+
+Object Lambda
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following section documents environment variables for configuring MinIO to publish data to an HTTP webhook endpoint and trigger an Object Lambda function.
+See :ref:`developers-object-lambda` for more complete documentation and tutorials on using these environment variables.
+
+You can specify multiple webhook endpoints as Lambda targets by appending a unique identifier ``_FUNCTIONNAME`` for each Object Lambda function.
+For example, the following command sets two distinct Object Lambda webhook endpoints:
+
+.. code-block:: shell
+   :class: copyable
+
+   export MINIO_LAMBDA_WEBHOOK_ENABLE_myfunction="on"
+   export MINIO_LAMBDA_WEBHOOK_ENDPOINT_myfunction="http://webhook-1.example.net"
+   export MINIO_LAMBDA_WEBHOOK_ENABLE_yourfunction="on"
+   export MINIO_LAMBDA_WEBHOOK_ENDPOINT_yourfunction="http://webhook-2.example.net"
+
+.. envvar:: MINIO_LAMBDA_WEBHOOK_ENABLE
+
+   Specify ``"on"`` to enable the Object Lambda webhook endpoint for a handler function.
+
+   Requires specifying :envvar:`MINIO_LAMBDA_WEBHOOK_ENDPOINT`.
+
+.. envvar:: MINIO_LAMBDA_WEBHOOK_ENDPOINT
+
+   The HTTP endpoint of the webhook for the handler function.
 
 .. _minio-server-envvar-external-identity-management-ad-ldap:
 
