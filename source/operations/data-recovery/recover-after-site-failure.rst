@@ -65,8 +65,9 @@ This procedure assumes a *total loss* of one or more peer sites versus replicati
 
 2. Deploy a new MinIO site following the :ref:`site replication requirements <minio-expand-site-replication>`.
 
-   Do not upload any data or otherwise configure the deployment beyond the stated requirements.
-   Validate that the new MinIO deployment functions normally and has bidirectional connectivity to the other peer sites.
+   - Do not upload any data or otherwise configure the deployment beyond the stated requirements.
+   - Validate that the new MinIO deployment functions normally and has bidirectional connectivity to the other peer sites.
+   - Ensure the new site has the matching server version as the existing peer sites
 
    .. warning::
 
