@@ -222,7 +222,7 @@ Parameters
    Recursively move the contents of each bucket or directory
    :mc-cmd:`~mc mv SOURCE` to the :mc-cmd:`~mc mv TARGET` bucket.
 
-.. mc-cmd:: --storage-class, sc
+.. mc-cmd:: --storage-class
    :optional:
 
    Set the storage class for the new object(s) on the 
@@ -313,7 +313,7 @@ Move Bucket Between S3-Compatible Services
 Move File to S3-Compatible Host with Specific Storage Class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc mv` with the :mc-cmd:`~mc mv storage-class` option to set
+Use :mc:`mc mv` with the :mc-cmd:`~mc mv --storage-class` option to set
 the storage class on the destination S3-compatible host.
 
 .. code-block:: shell
@@ -321,7 +321,7 @@ the storage class on the destination S3-compatible host.
 
    mc mv --storage-class CLASS FILEPATH ALIAS/PATH
 
-- Replace :mc-cmd:`CLASS <mc mv storage-class>` with the storage class to 
+- Replace :mc-cmd:`CLASS <mc mv --storage-class>` with the storage class to 
   associate to the files.
 
 - Replace :mc-cmd:`FILEPATH <mc mv SOURCE>` with the full file path to the

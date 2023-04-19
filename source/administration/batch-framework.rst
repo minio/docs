@@ -91,7 +91,7 @@ Use the ``replicate`` job type to create a batch job that replicates objects fro
 At least one of the deployment locations, either the source or the target, must be ``local``.
 The definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
 
-.. vershionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
+.. versionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
 
    You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
 

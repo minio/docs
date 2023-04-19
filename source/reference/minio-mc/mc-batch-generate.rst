@@ -138,7 +138,7 @@ The YAML **must** define the source and target deployments.
 If the _source_ deployment is remote, then the _target_ deployment **must** be ``local``.
 Optionally, the YAML can also define flags to filter which objects replicate, send notifications for the job, or define retry attempts for the job.
 
-.. vershionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
+.. versionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
 
    You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
 
@@ -260,7 +260,7 @@ Sample YAML
 ``keyrotate``
 ~~~~~~~~~~~~~
 
-.. vershionadded:: MinIO RELEASE.2023-04-07T05-28-58Z 
+.. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z 
 
 Use the ``keyrotate`` job type to create a batch job that cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects.
 
