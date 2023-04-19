@@ -1,11 +1,10 @@
 1) Download the MinIO Server
 ----------------------------
 
-The following tabs provide examples of installing MinIO onto 64-bit Linux
-operating systems using RPM, DEB, or binary. The RPM and DEB packages
-automatically install MinIO to the necessary system paths and create a
-``systemd`` service file for running MinIO automatically. MinIO strongly
-recommends using RPM or DEB installation routes.
+The following tabs provide examples of installing MinIO onto 64-bit Linux operating systems using RPM, DEB, or binary.
+The RPM and DEB packages automatically install MinIO to the necessary system paths and create a ``minio`` service for ``systemctl``.
+MinIO strongly recommends using the RPM or DEB installation routes.
+To update deployments managed using ``systemctl``, see :ref:`minio-upgrade-systemctl`.
 
 .. tab-set::
 
