@@ -45,7 +45,7 @@ Server-Side Bucket Replication
 ------------------------------
 
 MinIO server-side bucket replication is an automatic bucket-level configuration that synchronizes objects between a source and destination bucket. 
-MinIO server-side replication *requires* the source and destination bucket be two separate MinIO clusters running the same MinIO server version.
+MinIO server-side replication *requires* the source and destination bucket be two separate MinIO clusters running the same MinIO Server version.
 
 For each write operation to the bucket, MinIO checks all configured replication rules for the bucket and applies the matching rule with highest configured priority. 
 MinIO synchronizes new objects *and* object mutations, such as new object versions or changes to object metadata. 

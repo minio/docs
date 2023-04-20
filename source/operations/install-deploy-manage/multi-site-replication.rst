@@ -109,7 +109,7 @@ All Sites Must use the Same MinIO Server Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All sites must have a matching and consistent MinIO Server version. 
-Configuring replication between sites with mismatched MinIO servers may result in unexpected or undesired replication behavior.
+Configuring replication between sites with mismatched MinIO Server versions may result in unexpected or undesired replication behavior.
 
 You should also ensure the :mc:`mc` version used to configure replication closely matches the server version.
 
