@@ -95,7 +95,8 @@ The definition file can limit the replication by bucket, prefix, and/or filters 
 
    You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
 
-For example, you can use a batch job to perform a one-time replication sync of objects from ``minio-alpha/invoices/`` to ``minio-baker/invoices``.
+For example, you can use a batch job to perform a one-time replication sync to push objects from a bucket on a local deployment at ``minio-local/invoices/`` to a bucket on a remote deployment at ``minio-remote/invoices``.
+You can also pull objects from the remote deployment at ``minio-remote/invoices`` to the local deployment at ``minio-local/invoices``.
 
 The advantages of Batch Replication over :mc:`mc mirror` include:
 
@@ -123,7 +124,7 @@ Key Rotate
 
 Use the ``keyrotate`` job type to create a batch job that cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects.
 
-The YAML configuration allows you to use optional filters to rotate the keys for a specific set of objects by creation date, tags, metadata, or kms key.
+The YAML configuration supports filters to restrict key rotation to  a specific set of objects by creation date, tags, metadata, or kms key.
 You can also define retry attempts or set a notification endpoint and token.
 
 Sample YAML Description File for a ``keyrotate`` Job Type

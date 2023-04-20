@@ -328,7 +328,7 @@ For **notifications**
 
 For **retry attempts**
 
-If something interrupts the job, you can define how many attempts to retry the job batch.
+If something interrupts the job, you can define a maximum number of retry attempts.
 For each retry, you can also define how long to wait between attempts.
 
 .. list-table::
@@ -338,7 +338,7 @@ For each retry, you can also define how long to wait between attempts.
    * - ``attempts:`` 
      - Number of tries to complete the batch job before giving up.
    * - ``delay:`` 
-     - The least amount of time to wait between each attempt.
+     - The amount of time to wait between each attempt.
 
 
 Sample YAML

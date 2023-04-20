@@ -5,7 +5,8 @@ keyrotate:
   encryption:
     type: sse-kms # valid values are sse-s3 and sse-kms
     
-    # following encryption values only valid for sse-kms type
+    # The following encryption values only valid for sse-kms type.
+    # For sse-s3 key types, MinIO uses the key provided by the MINIO_KMS_KES_KEY_FILE environment variable.
     key: my-new-keys2 # valid only for sse-kms
     context: <new-kms-key-context> # valid only for sse-kms
 
