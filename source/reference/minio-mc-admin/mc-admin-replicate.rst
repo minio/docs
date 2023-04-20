@@ -80,8 +80,9 @@ Syntax
    :fullpath:
 
    Create or expand a site replication configuration.
-   New configurations use asynchronous site replication.
-   To enable synchronous replication for an existing configuration, see :mc-cmd:`~mc admin replicate update --sync`.
+   The configuration uses asynchronous site replication by default, as MinIO recommends.
+
+   If your circumstances require synchronous site replication, complete the configuration, then use :mc-cmd:`mc admin replicate update --sync`.
 
    .. tab-set::
 
@@ -183,7 +184,7 @@ Syntax
 
       Enable or disable synchronous site replication.
       Available values are ``enable`` and ``disable``.
-      The default is ``disable`` to use asynchronous site replication. 
+      If not defined, MInIO uses asynchronous site replication.
 
 .. mc-cmd:: rm
    :fullpath:
