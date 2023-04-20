@@ -105,6 +105,14 @@ All Sites Must Use the Same IDP
 All sites must use the same :ref:`Identity Provider <minio-authentication-and-identity-management>`.
 Site replication supports the included MinIO IDP, OIDC, or LDAP.
 
+All Sites Must use the Same MinIO Server Version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All sites must have a matching and consistent MinIO Server version. 
+Configuring replication between sites with mismatched MinIO Server versions may result in unexpected or undesired replication behavior.
+
+You should also ensure the :mc:`mc` version used to configure replication closely matches the server version.
+
 Access to the Same Encryption Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
