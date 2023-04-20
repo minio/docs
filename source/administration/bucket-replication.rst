@@ -219,21 +219,9 @@ without the overhead of contacting technical support.
 Synchronous vs Asynchronous Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports specifying either asynchronous (default) or synchronous
-replication for a given remote target.
-
-With the default asynchronous replication, MinIO completes the originating
-``PUT`` operation *before* placing the object into a :ref:`replication queue
-<minio-replication-process>`. The originating client may therefore see a 
-successful ``PUT`` operation *before* the object is replicated. While
-this may result in stale or missing objects on the remote, it mitigates
-the risk of slow write operations due to replication load.
-  
-With synchronous replication, MinIO attempts to replicate the object *prior* to
-completing the originating ``PUT`` operation. MinIO returns a successful ``PUT``
-operation whether or not the replication attempts succeeds. While this may
-result in more reliable synchronization between the source and remote target,
-it may also increase the time of each write operation due to replication load.
+.. include:: /includes/common-replication.rst
+   :start-after: start-replication-sync-vs-async
+   :end-before: end-replication-sync-vs-async
 
 You must explicitly enable synchronous replication when configuring the remote
 target target using the :mc-cmd:`mc admin bucket remote add` command with the
