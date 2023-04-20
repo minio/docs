@@ -107,6 +107,20 @@ See :mc:`mc admin user`, :mc:`mc admin user svcacct`, and :mc:`mc admin policy` 
 
 .. end-replication-required-permissions
 
+.. start-replication-sync-vs-async
+
+MinIO supports specifying either asynchronous (default) or synchronous replication for a given remote target.
+
+With asynchronous replication, MinIO completes the originating ``PUT`` operation *before* placing the object into a :ref:`replication queue <minio-replication-process>`.
+The originating client may therefore see a successful ``PUT`` operation *before* the object is replicated.
+While this may result in stale or missing objects on the remote, it mitigates the risk of slow write operations due to replication load.
+
+With synchronous replication, MinIO attempts to replicate the object *prior* to completing the originating ``PUT`` operation.
+MinIO returns a successful ``PUT`` operation whether or not the replication attempt succeeds.
+This reduces the risk of slow write operations at a possible cost of stale or missing objects on the remote location.
+
+.. end-replication-sync-vs-async
+
 .. start-mc-admin-replicate-what-replicates
 
 Each MinIO deployment ("peer site") synchronizes the following changes across the other peer sites:

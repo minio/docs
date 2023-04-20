@@ -139,6 +139,16 @@ Use :mc:`mc replicate rm` on the command line or the MinIO Console to remove buc
 Only one site can have data when setting up site replication.
 All other sites must be empty.
 
+Synchronous vs Asynchronous Replication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-replication.rst
+   :start-after: start-replication-sync-vs-async
+   :end-before: end-replication-sync-vs-async
+
+MinIO strongly recommends using the default asynchronous site replication.
+To configure synchronous site replication use :mc-cmd:`mc admin replicate update` with the :mc-cmd:`~mc admin replicate update --sync` option.
+
 Tutorials
 ---------
 

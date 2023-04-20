@@ -80,6 +80,9 @@ Syntax
    :fullpath:
 
    Create or expand a site replication configuration.
+   The configuration uses asynchronous site replication by default, as MinIO recommends.
+
+   If your circumstances require synchronous site replication, complete the configuration, then use :mc-cmd:`mc admin replicate update --sync`.
 
    .. tab-set::
 
@@ -175,6 +178,13 @@ Syntax
       :required:
       
       The new endpoint or URL to associate with the peer site.
+
+   .. mc-cmd:: --sync
+      :optional:
+
+      Enable or disable synchronous site replication.
+      Available values are ``enable`` and ``disable``.
+      If not defined, MInIO uses asynchronous site replication.
 
 .. mc-cmd:: rm
    :fullpath:
@@ -306,7 +316,7 @@ Syntax
                                 minio1          \
                                 --bucket images
 
-         Display the site repliction status for the setting for a user, ``janedoe``, across sites for a site replication configuration that contains the site ``minio1``.
+         Display the site replication status for the setting for a user, ``janedoe``, across sites for a site replication configuration that contains the site ``minio1``.
 
          .. code-block:: shell
 
@@ -348,7 +358,7 @@ Syntax
    .. mc-cmd:: --bucket
       :optional:
      
-      Display the replciation status of a specific buckt by inlcuding the bucket name after the flag.
+      Display the replication status of a specific bucket by including the bucket name after the flag.
 
    .. mc-cmd:: --groups
       :optional:
