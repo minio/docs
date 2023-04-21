@@ -22,6 +22,7 @@ The command also supports using a private mirror server for environments where t
 
 After running the command, a prompt displays to confirm the update.
 Type ``y`` and ``[ENTER]`` to confirm and proceed with the update.
+You may need to use ``sudo`` if your user does not have write permissions for the path where ``mc`` is installed.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
