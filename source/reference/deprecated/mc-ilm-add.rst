@@ -36,11 +36,11 @@ The command supports adding both :ref:`Transition (Tiering) <minio-lifecycle-man
       .. code-block:: shell
          :class: copyable
 
-         mc ilm add --expire-days 90 --noncurrent-expire-days 30  mydata/myminio
+         mc ilm add --expire-days 90 --noncurrent-expire-days 30 myminio/mydata
          
-         mc ilm add --expire-delete-marker mydata/myminio
+         mc ilm add --expire-delete-marker myminio/mydata
 
-         mc ilm add --transition-days 30 --transition-tier "COLDTIER" mydata/myminio
+         mc ilm add --transition-days 30 --transition-tier "COLDTIER" myminio/mydata
          
          mc ilm add --noncurrent-transition-days 7 --noncurrent-transition-tier "COLDTIER" 
 
