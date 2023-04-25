@@ -37,11 +37,11 @@ rules.
       .. code-block:: shell
          :class: copyable
 
-         mc ilm add --expiry-days 90 --noncurrentversion-expiry-days 30  mydata/myminio
+         mc ilm add --expiry-days 90 --noncurrentversion-expiry-days 30  myminio/mydata
          
-         mc ilm add --expired-object-delete-marker mydata/myminio
+         mc ilm add --expired-object-delete-marker myminio/mydata
 
-         mc ilm add --transition-days 30 --storage-class "COLDTIER" mydata/myminio
+         mc ilm add --transition-days 30 --storage-class "COLDTIER" myminio/mydata
          
          mc ilm add --noncurrentversion-transition-days 7 --noncurrent-version-transition-storage-class "COLDTIER" 
 
