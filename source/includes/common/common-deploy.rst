@@ -26,7 +26,7 @@ The following example provides a starting environment file:
 
    # Uncomment the following line and replace the value with the correct hostname for the local machine.
 
-   #MINIO_SERVER_URL="http://minio.example.net"
+   #MINIO_SERVER_URL="http://minio.example.net:9000"
 
 Include any other environment variables as required for your local deployment.
 
