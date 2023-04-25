@@ -24,7 +24,7 @@ The following example provides a starting environment file:
    # MINIO_SERVER_URL sets the hostname of the local machine for use with the MinIO Server
    # MinIO assumes your network control plane can correctly resolve this hostname to the local machine
 
-   # Uncomment the following line and replace the value with the correct hostname for the local machine.
+Uncomment the following line and replace the value with the correct hostname for the local machine and port for the MinIO server (9000 by default).
 
    #MINIO_SERVER_URL="http://minio.example.net:9000"
 
