@@ -32,7 +32,7 @@ The :mc:`mc admin user sts` command operates on credentials generated using a :r
       :start-after: start-minio-only
       :end-before: end-minio-only
 
-The :mc:`mc admin user sts` command has the following subcommands:
+The :mc:`mc admin user sts` command has the following subcommand:
 
 .. list-table::
    :header-rows: 1
@@ -41,49 +41,7 @@ The :mc:`mc admin user sts` command has the following subcommands:
    * - Subcommand
      - Description
 
-   * - :mc-cmd:`mc admin user sts info`
-     - Retrieves information on the specified STS credential, including the parent user who generated the credentials, associated policies, and expiration.
-
-Syntax
-------
-
-.. mc-cmd:: info
-   :fullpath:
-
-   Retrieves information on the specified STS credential, such as the parent user who generated the credentials, associated policies, and expiration.
-
-   .. tab-set::
-
-      .. tab-item:: EXAMPLE
-
-         The following command retrieves information on the STS credentials with specified access key:
-
-         .. code-block:: shell
-            :class: copyable
-
-            mc admin user sts info myminio/ "J123C4ZXEQN8RK6ND35I"
-
-      .. tab-item:: SYNTAX
-
-         .. code-block:: shell
-            :class: copyable
-
-            mc [GLOBALFLAGS] admin user sts info \
-               [--policy]                        \
-               ALIAS                             \
-               STSACCESSKEY
-
-   .. mc-cmd:: ALIAS
-      :required:
-
-      The :ref:`alias <alias>` of the MinIO deployment for which the STS credentials were generated.
-
-   .. mc-cmd:: STSACCESSKEY
-      :required:
-
-      The access key for the STS credentials.
-
-   .. mc-cmd:: --policy
-      :optional:
-
-      Prints the policy attached to the specified STS credentials in JSON format.
+   * - :mc:`~mc admin user sts info`
+     - .. include:: /reference/minio-mc-admin/mc-admin-user-sts-info.rst
+          :start-after: start-mc-admin-sts-info-desc
+          :end-before: end-mc-admin-sts-info-desc

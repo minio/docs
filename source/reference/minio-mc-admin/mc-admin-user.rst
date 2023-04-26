@@ -73,6 +73,11 @@ Subcommands
           :start-after: start-mc-admin-user-remove-desc
           :end-before: end-mc-admin-user-remove-desc
 
+   * - :mc:`~mc admin user sts`
+     - .. include:: /reference/minio-mc-admin/mc-admin-user-sts.rst
+          :start-after: start-mc-admin-user-sts-desc
+          :end-before: end-mc-admin-user-sts-desc
+
    * - :mc:`~mc admin user svcacct`
      - .. include:: /reference/minio-mc-admin/mc-admin-user-svcacct.rst
           :start-after: start-mc-admin-user-svcacct-desc
@@ -88,4 +93,5 @@ Subcommands
    /reference/minio-mc-admin/mc-admin-user-info
    /reference/minio-mc-admin/mc-admin-user-list
    /reference/minio-mc-admin/mc-admin-user-remove
+   /reference/minio-mc-admin/mc-admin-user-sts
    /reference/minio-mc-admin/mc-admin-user-svcacct
