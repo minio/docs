@@ -1,0 +1,122 @@
+.. _minio-mc-admin-svcacct-add:
+
+=============================
+``mc admin user svcacct add``
+=============================
+
+.. default-domain:: minio
+
+.. contents:: Table of Contents
+   :local:
+   :depth: 2
+
+.. mc:: mc admin user svcacct add
+
+
+Syntax
+------
+
+.. start-mc-admin-svcacct-add-desc
+
+The :mc-cmd:`mc admin user svcacct add` command adds a new access key to an existing MinIO or AD/LDAP user.
+
+.. end-mc-admin-svcacct-add-desc
+
+.. tab-set::
+
+   .. tab-item:: EXAMPLE
+
+      The following command creates a new access key associated to an existing MinIO user:
+
+      .. code-block:: shell                                                                 
+         :class: copyable
+
+         mc admin user svcacct add                       \
+            --access-key "myuserserviceaccount"          \                                  
+            --secret-key "myuserserviceaccountpassword"  \
+            --policy "/path/to/policy.json"              \
+            myminio myuser                                                                  
+                                                                                   
+      The command returns the access key and secret key for the new account.
+
+   .. tab-item:: SYNTAX
+
+      The command has the following syntax:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc [GLOBALFLAGS] admin user svcacct add     \
+                                     [--access-key]  \
+                                     [--secret-key]  \
+                                     [--policy]      \
+                                     [--comment]     \
+                                     ALIAS           \
+                                     USER
+					
+      .. include:: /includes/common-minio-mc.rst
+         :start-after: start-minio-syntax
+         :end-before: end-minio-syntax
+
+
+Parameters
+~~~~~~~~~~
+
+.. mc-cmd:: ALIAS
+   :required:
+
+   The :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
+.. mc-cmd:: USER
+   :required:
+
+   The name of the user to which MinIO adds the new access key.
+
+   - For :ref:`MinIO-managed users <minio-users>`, specify the access key for the user.
+   - For :ref:`Active Directory/LDAP users <minio-external-identity-management-ad-ldap>`, specify the Distinguished Name of the user.
+   - For :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>` to generate access keys.
+
+.. mc-cmd:: --access-key
+   :optional:
+
+   A string to use as the access key for this account. Omit to let MinIO autogenerate a random value.
+
+   Access Key names *must* be unique across all users.
+
+.. mc-cmd:: --comment
+   :optional:
+
+   .. versionadded:: RELEASE.2023-01-28T20-29-38Z
+
+   Add a note to the service account.
+   For example, you might specify the reason the service account exists.
+
+.. mc-cmd:: --policy
+   :optional:
+
+   The path to a :ref:`policy document <minio-policy>` to attach to the new access key.
+   The attached policy cannot grant access to any action or resource not explicitly allowed by the parent user's policies.
+
+.. mc-cmd:: --secret-key
+   :optional:
+
+   The secret key to associate with the new account. Omit to let MinIO autogenerate a random value.
+
+
+Global Flags
+~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-globals
+   :end-before: end-minio-mc-globals
+
+
+Behavior
+--------
+
+S3 Compatibility
+~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-s3-compatibility
+   :end-before: end-minio-mc-s3-compatibility

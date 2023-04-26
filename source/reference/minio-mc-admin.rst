@@ -227,4 +227,4 @@ See :ref:`minio-mc-global-options`.
    /reference/minio-mc-admin/mc-admin-trace
    /reference/minio-mc-admin/mc-admin-update
    /reference/minio-mc-admin/mc-admin-user
-   /reference/minio-mc-admin/mc-admin-user-svcacct
+ 
