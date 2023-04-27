@@ -140,16 +140,6 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-user-desc
           :end-before: end-mc-admin-user-desc
 
-   * - :mc:`mc admin user svcacct`
-     - .. include:: /reference/minio-mc-admin/mc-admin-user-svcacct.rst
-          :start-after: start-mc-admin-user-svcacct-desc
-          :end-before: end-mc-admin-user-svcacct-desc
-
-   * - :mc:`mc admin user sts`
-     - .. include:: /reference/minio-mc-admin/mc-admin-user-sts.rst
-          :start-after: start-mc-admin-user-sts-desc
-          :end-before: end-mc-admin-user-sts-desc
-
 .. _mc-admin-install:
 
 Installation

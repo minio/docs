@@ -22,6 +22,15 @@ The :mc-cmd:`mc admin user sts info` command retrieves information on the specif
 
 .. end-mc-admin-sts-info-desc
 
+:abbr:`STS (Security Token Service)` credentials provide temporary access to the MinIO deployment.
+
+.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+   :class: note
+
+   .. include:: /includes/facts-mc-admin.rst
+      :start-after: start-minio-only
+      :end-before: end-minio-only
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE

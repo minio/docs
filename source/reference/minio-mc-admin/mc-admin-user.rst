@@ -15,7 +15,7 @@ Description
 
 .. start-mc-admin-user-desc
 
-The :mc:`mc admin user` command manages users on a MinIO deployment.
+The :mc:`mc admin user` command and its subcommands manage users on a MinIO deployment.
 Clients *must* authenticate to the MinIO deployment with the access key and secret key associated to a user on the deployment.
 MinIO users constitute a key component in MinIO Identity and Access Management.
 
@@ -73,10 +73,10 @@ Subcommands
           :start-after: start-mc-admin-user-remove-desc
           :end-before: end-mc-admin-user-remove-desc
 
-   * - :mc:`~mc admin user sts`
-     - .. include:: /reference/minio-mc-admin/mc-admin-user-sts.rst
-          :start-after: start-mc-admin-user-sts-desc
-          :end-before: end-mc-admin-user-sts-desc
+   * - :mc:`~mc admin user sts info`
+     - .. include:: /reference/minio-mc-admin/mc-admin-user-sts-info.rst
+          :start-after: start-mc-admin-sts-info-desc
+          :end-before: end-mc-admin-sts-info-desc
 
    * - :mc:`~mc admin user svcacct`
      - .. include:: /reference/minio-mc-admin/mc-admin-user-svcacct.rst
@@ -93,5 +93,5 @@ Subcommands
    /reference/minio-mc-admin/mc-admin-user-info
    /reference/minio-mc-admin/mc-admin-user-list
    /reference/minio-mc-admin/mc-admin-user-remove
-   /reference/minio-mc-admin/mc-admin-user-sts
+   /reference/minio-mc-admin/mc-admin-user-sts-info
    /reference/minio-mc-admin/mc-admin-user-svcacct
