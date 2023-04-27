@@ -60,8 +60,11 @@ While testing MinIO may only involve a single drive on a single computer, most p
 A server pool a set of :mc:`minio server` nodes that pool their drives and resources to support object storage write and retrieval requests.
 
 MinIO supports adding one or more server pools to existing MinIO deployments for horizontal expansion.
-When MinIO has multiple server pools available, an individual object always writes to the same server pool.
-If one server pool goes down, objects on other pools remain accessible.
+When MinIO has multiple server pools available, an individual object always writes to the same erasure set in the same server pool.
+
+If one server pool goes down, MinIO halts I/O to all pools until the cluster resumes normal operations. 
+You must restore the pool to working operation to resume I/O to the deployment.
+Objects written to other pools remain safe on disk while you perform repair operations.
    
 The :mc-cmd:`~minio server HOSTNAME` argument passed to the :mc:`minio server` command represents a Server Pool:
 
@@ -93,7 +96,7 @@ Consider the command below that creates a cluster consisting of two Server Pools
                    
                 |                    Server Pool                |
    
-Within a cluster, MinIO always stores each unique object and all versions of that object on the same Server Pool.
+Each server pool has one or more :ref:`erasure sets <minio-ec-erasure-set>` depending on the number of drives and nodes in the pool.
 
 MinIO strongly recommends production clusters consist of a *minimum* of 4 :mc:`minio server` nodes in a Server Pool for proper high availability and durability guarantees.
 

@@ -13,7 +13,7 @@ Erasure Coding
 MinIO Erasure Coding is a data redundancy and availability feature that allows MinIO deployments to automatically reconstruct objects on-the-fly despite the loss of multiple drives or nodes in the cluster. 
 Erasure Coding provides object-level healing with significantly less overhead than adjacent technologies such as RAID or replication. 
 
-MinIO splits each new object into data and parity blocks, where parity blocks support reconstruction of missing or corrupted data blocks. 
+MinIO shards each new object into data and parity blocks, where parity blocks support reconstruction of missing or corrupted data blocks. 
 MinIO writes these blocks to a single :ref:`erasure set <minio-ec-erasure-set>` in the deployment.
 Since erasure set drives are striped across the server pool, a given node contains only a portion of data or parity blocks for each object.
 MinIO can therefore tolerate the loss of multiple drives or nodes in the deployment depending on the configured parity and deployment topology.
@@ -57,6 +57,9 @@ For a given erasure set of size ``M``, MinIO splits objects into ``N`` parity bl
 MinIO uses the ``EC:N`` notation to refer to the number of parity blocks (``N``) in the deployment. 
 MinIO defaults to ``EC:4`` or 4 parity blocks per object. 
 MinIO uses the same ``EC:N`` value for all erasure sets and :ref:`server pools <minio-intro-server-pool>` in the deployment.
+
+.. _minio-read-quorum:
+.. _minio-write-quorum:
 
 MinIO can tolerate the loss of up to ``N`` drives per erasure set and continue performing read and write operations ("quorum"). 
 If ``N`` is equal to exactly 1/2 the drives in the erasure set, MinIO write quorum requires :math:`N + 1` drives to avoid data inconsistency ("split-brain").

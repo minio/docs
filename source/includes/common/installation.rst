@@ -10,6 +10,10 @@ Install and Deploy MinIO
    :local:
    :depth: 1
 
+.. meta::
+   :description: MinIO Deployment Topologies and Installation Instructions
+   :keywords: MinIO, Deploy, Topology, Distributed, Replication, Install
+
 .. container:: extlinks-video
 
    - `Installing and Running MinIO on Linux <https://www.youtube.com/watch?v=74usXkZpNt8&list=PLFOIsHSSYIK1BnzVY66pCL-iJ30Ht9t1o>`__

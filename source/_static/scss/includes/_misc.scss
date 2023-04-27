@@ -358,3 +358,22 @@ button.copybtn {
     transform: rotate(180deg) translateY(50%);
   }
 }
+
+// ----------------------------------
+// Cleaning up captions for figures
+// ----------------------------------
+
+figure {
+   box-shadow: 0px 0px 10px 5px lightgrey;
+   margin-bottom: 2.5rem;
+}
+
+figcaption {
+
+   border-top: lightgrey solid 1px;
+
+   & span.caption-text {
+      font-size: small;
+      font-weight: bold;
+   }
+}
