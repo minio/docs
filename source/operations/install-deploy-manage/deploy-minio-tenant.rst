@@ -567,7 +567,7 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
 
 .. _create-tenant-encryption-section:
 
-1) The :guilabel:`Encryption` Section
+8) The :guilabel:`Encryption` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption (SSE) <minio-sse>` settings for the MinIO Tenant. 
@@ -607,7 +607,7 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
    :start-after: start-deprecate-audit-logs
    :end-before: end-deprecate-audit-logs
 
-.. versionchanged:: Console 0.23.1
+.. versionchanged:: Console 0.23.1 and Operator 5.0.0
 
    New tenants have Audit Logs :guilabel:`Disabled` by default.
 
@@ -648,7 +648,7 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
    :start-after: start-deprecate-prometheus
    :end-before: end-deprecate-prometheus
 
-.. versionchanged:: Console 0.23.1
+.. versionchanged:: Console 0.23.1 and Operator 5.0.0
 
    New tenants have monitoring :guilabel:`Disabled` by default.
 

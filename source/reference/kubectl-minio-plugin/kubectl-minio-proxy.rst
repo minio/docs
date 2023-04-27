@@ -29,6 +29,12 @@ This command is an alternative to configuring `Ingress <https://kubernetes.io/do
    :start-after: start-kubectl-minio-requires-operator-desc
    :end-before: end-kubectl-minio-requires-operator-desc
 
+.. cond:: openshift
+
+   .. versionchanged:: Operator 5.0.0
+
+      The ``kubectl minio proxy`` command now supports retrieving the JWT for use with OpenShift deployments.
+
 Syntax
 ------
 
@@ -69,4 +75,11 @@ The command supports the following flags:
    :optional:
 
    The namespace for which to access the operator.
-   Defaults to ``minio-operator``.
+
+   .. cond:: not openshift
+   
+      Defaults to ``minio-operator``.
+
+   .. cond:: openshift
+
+      Defaults to ``openshift-operators``.

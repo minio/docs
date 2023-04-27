@@ -25,8 +25,11 @@ The following table lists the upgrade paths from previous versions of the MinIO 
    * - Current Version
      - Supported Upgrade Target
 
-   * - 4.2.3 and Later
-     - |operator-version-stable|
+   * - 4.5.8 or later
+     - |operator-version-stable| 
+
+   * - 4.2.3 to 4.5.7
+     - 4.5.8
    
    * - 4.0.0 through 4.2.2
      - 4.2.3
@@ -36,7 +39,7 @@ The following table lists the upgrade paths from previous versions of the MinIO 
 
 .. _minio-k8s-upgrade-minio-operator-procedure:
 
-Upgrade MinIO Operator 4.2.3 and Later to |operator-version-stable|
+Upgrade MinIO Operator 4.5.8 and Later to |operator-version-stable|
 -------------------------------------------------------------------
 
 .. admonition:: Prerequisites
@@ -44,7 +47,139 @@ Upgrade MinIO Operator 4.2.3 and Later to |operator-version-stable|
 
    This procedure requires the following:
 
-   - You have an existing MinIO Operator deployment running 4.2.3 or later
+   - You have an existing MinIO Operator deployment running 4.5.8 or later
+   - Your Kubernetes cluster runs 1.19.0 or later
+   - Your local host has ``kubectl`` installed and configured with access to the Kubernetes cluster
+
+This procedure upgrades the MinIO Operator from any 4.5.8 or later release to |operator-version-stable|.
+
+Breaking changes
+~~~~~~~~~~~~~~~~
+
+The following changes apply for Operator v5.0.0 or later:
+
+- The Operator's Graphical User Interface now comes bundled with the same container as the Operator.
+- The ``.spec.s3`` field is replaced by the ``.spec.features`` field.
+- The ``.spec.credsSecret`` field is replaced by the ``.spec.configuration`` field.
+
+  This secret should hold all the environment variables for the MinIO deployment that contain sensitive information and should not show in ``.spec.env``.
+- Both the **Log Search API** (``.spec.log``) and **Prometheus** (``.spec.prometheus``) deployments have been removed.
+  However, existing deployments are left running as standalone deployments / statefulsets with no connection to the Tenant CR.
+  If the Tenant CR is deleted, this does not cascade to the log or Prometheus deployments.
+
+  .. important::
+
+     MinIO recommends that you create a yaml file to manage these deployments going forward.
+
+.. container:: procedure
+
+   1. Back up deployments
+
+      .. code-block:: shell
+         :class: copyable
+
+         export TENANT_NAME=myminio
+         export NAMESPACE=mynamespace
+         kubectl -n $NAMESPACE get secret $TENANT_NAME-log-secret -o yaml > $TENANT_NAME-log-secret.yaml
+         kubectl -n $NAMESPACE get cm $TENANT_NAME-prometheus-config-map -o yaml > $TENANT_NAME-prometheus-config-map.yaml
+         kubectl -n $NAMESPACE get sts $TENANT_NAME-prometheus -o yaml > $TENANT_NAME-prometheus.yaml
+         kubectl -n $NAMESPACE get sts $TENANT_NAME-log -o yaml > $TENANT_NAME-log.yaml
+         kubectl -n $NAMESPACE get deployment $TENANT_NAME-log-search-api -o yaml > $TENANT_NAME-log-search-api.yaml
+         kubectl -n $NAMESPACE get svc $TENANT_NAME-log-hl-svc -o yaml > $TENANT_NAME-log-hl-svc.yaml
+         kubectl -n $NAMESPACE get svc $TENANT_NAME-log-search-api -o yaml > $TENANT_NAME-log-search-api.yaml
+         kubectl -n $NAMESPACE get svc $TENANT_NAME-prometheus-hl-svc -o yaml > $TENANT_NAME-prometheus-hl-svc.yaml
+
+      - Replace ``myminio`` with the name of the tenant you are upgrading.
+      - Replace ``mynamespace`` with the namespace for the tenant you are upgrading.
+
+   2. Remove ``.metadata.ownerReferences`` for all backed up files
+
+   3. *(Optional)* To continue using Log Search API and Prometheus, add the following variables to ``.spec.env``
+
+      .. code-block:: shell
+         :class: copyable
+
+          - name: MINIO_LOG_QUERY_AUTH_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: MINIO_LOG_QUERY_AUTH_TOKEN
+                name: <TENANT_NAME>-log-secret
+          - name: MINIO_LOG_QUERY_URL
+            value: http://<TENANT_NAME>-log-search-api:8080
+          - name: MINIO_PROMETHEUS_JOB_ID
+            value: minio-job
+          - name: MINIO_PROMETHEUS_URL
+            value: http://<TENANT_NAME>-prometheus-hl-svc:9090
+
+      - Replace ``<TENANT_NAME>`` with the name of your tenant.
+
+   4. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+
+      Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+
+      Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
+
+      See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+
+   5. Verify the existing Operator installation.
+
+      Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
+      
+      If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
+
+      You can verify the currently installed Operator version by retrieving the object specification for an operator pod in the namespace.
+      The following example uses the ``jq`` tool to filter the necessary information from ``kubectl``:
+
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
+
+      The output resembles the following:
+
+      .. code-block:: json
+         :emphasize-lines: 8-10
+
+         {
+            "env": [
+               {
+                  "name": "CLUSTER_DOMAIN",
+                  "value": "cluster.local"
+               }
+            ],
+            "image": "minio/operator:v4.5.8",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "minio-operator"
+         }
+
+   6. Download the Latest Stable Version of the MinIO Kubernetes Plugin
+
+      .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
+
+   7. Run the initialization command to upgrade the Operator
+
+      Use the :mc-cmd:`kubectl minio init` command to upgrade the existing MinIO Operator installation
+
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl minio init
+
+   8. Validate the Operator upgrade
+
+      You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
+
+      .. include:: /includes/common/common-k8s-connect-operator-console.rst
+
+Upgrade MinIO Operator 4.2.3 through 4.5.7 to 4.5.8
+---------------------------------------------------
+
+.. admonition:: Prerequisites
+   :class: note
+
+   This procedure requires the following:
+
+   - You have an existing MinIO Operator deployment running 4.2.3 through 4.5.7
    - Your Kubernetes cluster runs 1.19.0 or later
    - Your local host has ``kubectl`` installed and configured with access to the Kubernetes cluster
 
