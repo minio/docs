@@ -13,7 +13,7 @@
 Description
 -----------
 
-.. start-mc-admin-user-desc                                                                    
+.. start-mc-admin-user-desc
 
 The :mc:`mc admin user` command manages users on a MinIO deployment.
 Clients *must* authenticate to the MinIO deployment with the access key and secret key associated to a user on the deployment.

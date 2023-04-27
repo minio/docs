@@ -43,8 +43,8 @@ Use :mc-cmd:`mc admin user info` to retrieve detailed user information, includin
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] admin user list  \
-                          ALIAS
+         mc [GLOBALFLAGS] admin user list   \
+                                     ALIAS
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -74,14 +74,22 @@ Example
 List Available Users
 ~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user list` to list all users on an S3-compatible host:
+Use :mc-cmd:`mc admin user list` to list all users on a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin user list ALIAS
 
-- Replace :mc-cmd:`ALIAS <mc admin user list ALIAS>` with the :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc admin user list ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
+The output resembles the following:
+
+.. code-block:: shell
+
+   enabled    devadmin              readwrite
+   enabled    devtest               readonly
+   enabled    newuser
 
 
 Behavior

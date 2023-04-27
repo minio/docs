@@ -22,6 +22,11 @@ The :mc-cmd:`mc admin user svcacct add` command adds a new access key to an exis
 
 .. end-mc-admin-svcacct-add-desc
 
+.. admonition:: Access keys for OpenID Connect users
+   :class: note
+
+   To generate service account access keys for :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>`.
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE
@@ -46,13 +51,13 @@ The :mc-cmd:`mc admin user svcacct add` command adds a new access key to an exis
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] admin user svcacct add     \
-                                     [--access-key]  \
-                                     [--secret-key]  \
-                                     [--policy]      \
-                                     [--comment]     \
-                                     ALIAS           \
-                                     USER
+         mc [GLOBALFLAGS] admin user svcacct add             \
+                                             [--access-key]  \
+                                             [--secret-key]  \
+                                             [--policy]      \
+                                             [--comment]     \
+                                             ALIAS           \
+                                             USER
 					
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -70,7 +75,7 @@ Parameters
 .. mc-cmd:: USER
    :required:
 
-   The name of the user to which MinIO adds the new access key.
+   The username of the user to which MinIO adds the new access key.
 
    - For :ref:`MinIO-managed users <minio-users>`, specify the access key for the user.
    - For :ref:`Active Directory/LDAP users <minio-external-identity-management-ad-ldap>`, specify the Distinguished Name of the user.

@@ -29,12 +29,12 @@ Users created using :mc-cmd:`mc admin user add` are enabled by default.
 
    .. tab-item:: EXAMPLE
 
-      The following command enables user ``username`` on the ``myminio`` MinIO deployment:
+      The following command enables user ``myuser`` on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin user enable myminio username
+         mc admin user enable myminio myuser
 
    .. tab-item:: SYNTAX
 
@@ -43,9 +43,9 @@ Users created using :mc-cmd:`mc admin user add` are enabled by default.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] admin user enable  \
-                          ALIAS              \
-			  USERNAME
+         mc [GLOBALFLAGS] admin user enable    \
+                                     ALIAS     \
+	                             USERNAME
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -58,12 +58,12 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :mc:`alias <mc alias>` of a configured MinIO deployment on which the command enables the specified user.
+   The :mc:`alias <mc alias>` of the MinIO deployment with the user to enable.
 
 .. mc-cmd:: USERNAME
    :required:
 
-   The name of the user to enable.
+   The username of the user to enable.
 
 
 Global Flags
@@ -80,16 +80,16 @@ Example
 Enable a User
 ~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user enable` to enable a user on an S3-compatible host.
+Use :mc-cmd:`mc admin user enable` to enable a user on a MinIO deployment.
 
 .. code-block:: shell
    :class: copyable
 
    mc admin user enable ALIAS USERNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin user enable ALIAS>` with the :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc admin user enable ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`USERNAME <mc admin user enable USERNAME>` with the name of the user to enable.
+- Replace :mc-cmd:`USERNAME <mc admin user enable USERNAME>` with the username of the user to enable.
 
 
 Behavior

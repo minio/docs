@@ -25,12 +25,12 @@ The :mc:`mc admin user remove` command removes a user on the target MinIO deploy
 
    .. tab-item:: EXAMPLE
 
-      The following command removes user ``username`` on the ``myminio`` MinIO deployment:
+      The following command removes user ``myuser`` on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin user remove myminio username
+         mc admin user remove myminio myuser
 
    .. tab-item:: SYNTAX
 
@@ -41,9 +41,9 @@ The :mc:`mc admin user remove` command removes a user on the target MinIO deploy
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] admin user remove  \
-                          ALIAS              \
-			  USERNAME
+         mc [GLOBALFLAGS] admin user remove    \
+                                     ALIAS     \
+				     USERNAME
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -56,12 +56,12 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :mc:`alias <mc alias>` of a configured MinIO deployment on which the command removes the specified user.
+   The :mc:`alias <mc alias>` of the configured MinIO deployment with the user to remove.
 
 .. mc-cmd:: USERNAME
    :required:
 
-   The name of the user to remove.
+   The username of the user to remove.
 
 Global Flags
 ~~~~~~~~~~~~
@@ -76,16 +76,16 @@ Example
 Remove a User
 ~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user remove` to remove a user from an S3-compatible host:
+Use :mc-cmd:`mc admin user remove` to remove a user from a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin user remove ALIAS USERNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin user remove TARGET>` with the :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc admin user remove TARGET>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the name of the user to remove.
+- Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the username of the user to remove.
 
 Behavior
 --------

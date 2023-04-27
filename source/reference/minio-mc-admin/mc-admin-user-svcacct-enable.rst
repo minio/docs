@@ -40,9 +40,9 @@ The :mc-cmd:`mc admin user svcacct enable` command enables an existing access ke
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin user svcacct enable  \  
-                                     ALIAS           \  
-                                     SERVICEACCOUNT 
+         mc [GLOBALFLAGS] admin user svcacct enable          \  
+                                             ALIAS           \  
+                                             SERVICEACCOUNT 
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -60,7 +60,7 @@ Parameters
 .. mc-cmd:: SERVICEACCOUNT
    :required:
 
-   The access key to enable.
+   The service account access key to enable.
 
 
 Global Flags

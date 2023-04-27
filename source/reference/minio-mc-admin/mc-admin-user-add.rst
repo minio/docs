@@ -26,7 +26,7 @@ The :mc:`mc admin user add` command adds a new user to the target MinIO deployme
 
    .. tab-item:: EXAMPLE
 
-      The following command creates a new user for the ``myminio`` MinIO deployment:
+      The following command creates a new user ``newuser`` on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -40,10 +40,10 @@ The :mc:`mc admin user add` command adds a new user to the target MinIO deployme
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] admin user add  \
-                          ALIAS           \
-                          ACCESSKEY       \
-                          SECRETKEY
+         mc [GLOBALFLAGS] admin user add        \
+                                     ALIAS      \
+                                     ACCESSKEY  \
+                                     SECRETKEY
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -61,7 +61,7 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment on which the command creates the new user.
+   The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment on which to create the new user.
 
 .. mc-cmd:: SECRETKEY
    :required:
@@ -87,17 +87,16 @@ Example
 Create a New User
 ~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user add` to create a user on an S3-compatible host:
+Use :mc-cmd:`mc admin user add` to create a user on a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
       mc admin user add ALIAS ACCESSKEY SECRETKEY
 
-- Replace :mc-cmd:`ALIAS <mc admin user add ALIAS>` with the :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc admin user add ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`ACCESSKEY <mc admin user add ACCESSKEY>` with the access key for the user.
-  MinIO allows retrieving the access key after user creation through the :mc-cmd:`mc admin user info` command.
 
 - Replace :mc-cmd:`SECRETKEY <mc admin user add SECRETKEY>` with the secret key for the user.
   MinIO *does not* provide any method for retrieving the secret key once set.
@@ -117,8 +116,8 @@ To configure a user's assigned policies, you can do either or both of the follow
 
 - Use :mc-cmd:`mc admin policy attach` to associate one or more policies to the user.
 
-- Use :mc-cmd:`mc admin group add` to associate the user to the group. Users
-  inherit any policies assigned to the group.
+- Use :mc-cmd:`mc admin group add` to associate the user to the group.
+  Users inherit any policies assigned to the group.
 
 For more information on MinIO users and groups, see :ref:`minio-users` and :ref:`minio-groups`.
 For more information on MinIO policies, see :ref:`MinIO Policy Based Access Control <minio-policy>`.

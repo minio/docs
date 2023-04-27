@@ -26,12 +26,12 @@ The :mc:`mc admin user info` command returns detailed information of a user on t
 
    .. tab-item:: EXAMPLE
 
-      The following command returns details of user ``username`` on the ``myminio`` MinIO deployment:
+      The following command returns details of user ``myuser`` on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin user info myminio username
+         mc admin user info myminio myuser
 
    .. tab-item:: SYNTAX
 
@@ -40,9 +40,9 @@ The :mc:`mc admin user info` command returns detailed information of a user on t
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] admin user info  \
-                          ALIAS            \
-			  USERNAME
+         mc [GLOBALFLAGS] admin user info      \
+                                     ALIAS     \
+	                             USERNAME
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -55,11 +55,11 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from which the command retrieves the specified user information.
+   The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment to retrieve user information from.
 
 .. mc-cmd:: USERNAME
 
-   The name of the user whose information the command retrieves.
+   The username to retrieve information for.
 
 
 Global Flags
@@ -76,16 +76,25 @@ Example
 View User Details
 ~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user info` to view detailed user information on an S3-compatible host:
+Use :mc-cmd:`mc admin user info` to view detailed user information for a user on a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin user info ALIAS USERNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin user info ALIAS>` with the :mc-cmd:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc admin user info ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`USERNAME <mc admin user info USERNAME>` with the name of the user.
+- Replace :mc-cmd:`USERNAME <mc admin user info USERNAME>` with the username of the user to display information for.
+
+The output resembles the following:
+
+.. code-block:: shell
+
+   AccessKey: myuser
+   Status: enabled
+   PolicyName: readwrite
+   MemberOf:
 
 
 Behavior

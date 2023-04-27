@@ -26,12 +26,12 @@ The :mc-cmd:`mc admin user svcacct list` command lists all access keys associate
 
    .. tab-item:: EXAMPLE
 
-      The following command lists all access keys associated to an existing MinIO user:  
+      The following command lists all access keys associated to the user with username ``admin1``:
 
       .. code-block:: shell  
          :class: copyable 
 
-         mc admin user svcacct list myminio myuser
+         mc admin user svcacct list myminio admin1
 
    .. tab-item:: SYNTAX
 
@@ -40,9 +40,9 @@ The :mc-cmd:`mc admin user svcacct list` command lists all access keys associate
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin user svcacct list  \ 
-                                     ALIAS         \ 
-                                     USER
+         mc [GLOBALFLAGS] admin user svcacct list   \ 
+                                             ALIAS  \ 
+                                             USER
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -60,7 +60,7 @@ Parameters
 .. mc-cmd:: USER
    :required:
 
-   The name of the user for which MinIO lists the access keys.
+   The username of the user to display access keys for.
 
 
 Global Flags

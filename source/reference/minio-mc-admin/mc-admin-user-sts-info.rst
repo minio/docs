@@ -40,10 +40,10 @@ The :mc-cmd:`mc admin user sts info` command retrieves information on the specif
       .. code-block:: shell  
          :class: copyable 
 
-         mc [GLOBALFLAGS] admin user sts info      \
-                                     [--policy]    \
-                                     ALIAS         \
-                                     STSACCESSKEY 
+         mc [GLOBALFLAGS] admin user sts info          \
+                                         [--policy]    \
+                                         ALIAS         \
+                                         STSACCESSKEY
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax

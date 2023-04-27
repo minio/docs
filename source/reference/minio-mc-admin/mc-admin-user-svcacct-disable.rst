@@ -40,9 +40,9 @@ The :mc-cmd:`mc admin user svcacct disable` command disables an existing access 
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin user svcacct disable  \  
-                                     ALIAS           \  
-                                     SERVICEACCOUNT 
+         mc [GLOBALFLAGS] admin user svcacct disable         \  
+                                             ALIAS           \  
+                                             SERVICEACCOUNT 
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -60,7 +60,7 @@ Parameters
 .. mc-cmd:: SERVICEACCOUNT
    :required:
 
-   The access key to disable.
+   The service account access key to disable.
 
 
 Global Flags

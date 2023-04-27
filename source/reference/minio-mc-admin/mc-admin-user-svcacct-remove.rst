@@ -18,7 +18,7 @@ Syntax
 
 .. start-mc-admin-svcacct-remove-desc
 
-The :mc-cmd:`mc admin user svcacct remove` command removes an access key associated to the specified user.
+The :mc-cmd:`mc admin user svcacct remove` command removes an access key associated to a user on the deployment.
 
 .. end-mc-admin-svcacct-remove-desc
    
@@ -28,7 +28,7 @@ Applications can no longer authenticate using that access key after removal.
 
    .. tab-item:: EXAMPLE
 
-      The following command removes the specified access keys:
+      The following command removes the specified access key:
   
       .. code-block:: shell  
          :class: copyable 
@@ -42,9 +42,9 @@ Applications can no longer authenticate using that access key after removal.
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin user svcacct remove  \ 
-                                     ALIAS           \ 
-                                     SERVICEACCOUNT
+         mc [GLOBALFLAGS] admin user svcacct remove          \ 
+                                             ALIAS           \ 
+                                             SERVICEACCOUNT
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -62,7 +62,7 @@ Parameters
 .. mc-cmd:: SERVICEACCOUNT
    :required:
 
-   The service account for the command to remove.
+   The service account access key to remove.
 
 
 Global Flags
