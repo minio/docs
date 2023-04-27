@@ -78,3 +78,17 @@ The :mc:`mc admin user svcacct` command has the following subcommands:
      - .. include:: /reference/minio-mc-admin/mc-admin-user-svcacct-remove.rst
           :start-after: start-mc-admin-svcacct-remove-desc
           :end-before: end-mc-admin-svcacct-remove-desc
+
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+
+   /reference/minio-mc-admin/mc-admin-user-svcacct-add
+   /reference/minio-mc-admin/mc-admin-user-svcacct-disable
+   /reference/minio-mc-admin/mc-admin-user-svcacct-edit
+   /reference/minio-mc-admin/mc-admin-user-svcacct-enable
+   /reference/minio-mc-admin/mc-admin-user-svcacct-info
+   /reference/minio-mc-admin/mc-admin-user-svcacct-list
+   /reference/minio-mc-admin/mc-admin-user-svcacct-remove
+

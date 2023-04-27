@@ -45,3 +45,10 @@ The :mc:`mc admin user sts` command has the following subcommand:
      - .. include:: /reference/minio-mc-admin/mc-admin-user-sts-info.rst
           :start-after: start-mc-admin-sts-info-desc
           :end-before: end-mc-admin-sts-info-desc
+
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+
+   /reference/minio-mc-admin/mc-admin-user-sts-info
