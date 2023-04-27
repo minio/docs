@@ -28,13 +28,6 @@ Each access key also supports an optional inline policy which further restricts 
 
 To create access keys for :ref:`OpenID Connect-managed users <minio-external-identity-management-openid>`, log into the :ref:`MinIO Console <minio-console>` and generate the access keys through the UI.
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
-   :class: note
-
-   .. include:: /includes/facts-mc-admin.rst
-      :start-after: start-minio-only
-      :end-before: end-minio-only
-
 The :mc:`mc admin user svcacct` command has the following subcommands:
 
 .. list-table::
