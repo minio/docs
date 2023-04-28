@@ -18,7 +18,7 @@ Syntax
 
 .. start-mc-admin-sts-info-desc
 
-The :mc-cmd:`mc admin user sts info` command retrieves information on the specified STS credential, such as the parent user who generated the credentials, associated policies, and expiration.
+The :mc-cmd:`mc admin user sts info` command retrieves information on the specified STS credential, such as the parent :ref:`MinIO user <minio-internal-idp>` who generated the credentials, associated policies, and expiration.
 
 .. end-mc-admin-sts-info-desc
 

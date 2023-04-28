@@ -18,13 +18,15 @@ Syntax
 
 .. start-mc-admin-user-disable-desc
 
-The :mc:`mc admin user disable` command disables a user on the target MinIO deployment.
+The :mc:`mc admin user disable` command disables a :ref:`MinIO user <minio-internal-idp>` on the target MinIO deployment.
 
 .. end-mc-admin-user-disable-desc
 
 Clients cannot use the user credentials to authenticate to the MinIO deployment.
 Disabling a user does *not* remove that user from the deployment.
 Use :mc-cmd:`mc admin user enable` to enable a disabled user on a MinIO deployment.
+
+To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
 
 .. tab-set::
 

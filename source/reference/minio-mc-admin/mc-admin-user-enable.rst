@@ -18,12 +18,14 @@ Syntax
 
 .. start-mc-admin-user-enable-desc
 
-The :mc:`mc admin user enable` command enables a user on the target MinIO deployment.
+The :mc:`mc admin user enable` command enables a :ref:`MinIO user <minio-internal-idp>` on the target MinIO deployment.
 
 .. end-mc-admin-user-enable-desc
 
 Clients can only use enabled users to authenticate to the MinIO deployment.
 Users created using :mc-cmd:`mc admin user add` are enabled by default.
+
+To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
 
 .. tab-set::
 

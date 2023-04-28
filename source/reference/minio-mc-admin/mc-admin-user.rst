@@ -15,7 +15,7 @@ Description
 
 .. start-mc-admin-user-desc
 
-The :mc:`mc admin user` command and its subcommands manage users who authenticate to a MinIO deployment using the built-in :ref:`MinIO Internal IDentity Provider <minio-internal-idp>` (IDP).
+The :mc:`mc admin user` command and its subcommands manage :ref:`MinIO users <minio-internal-idp>`.
 
 .. end-mc-admin-user-desc
 

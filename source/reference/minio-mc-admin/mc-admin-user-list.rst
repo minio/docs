@@ -18,12 +18,14 @@ Syntax
 
 .. start-mc-admin-user-list-desc
 
-The :mc:`mc admin user list` command lists all users on the target MinIO deployment.
+The :mc:`mc admin user list` command lists all :ref:`MinIO users <minio-internal-idp>` on the target MinIO deployment.
 
 .. end-mc-admin-user-list-desc
 
 :mc-cmd:`mc admin user list` does *not* return the access key or secret key associated to a user.
 Use :mc-cmd:`mc admin user info` to retrieve detailed user information, including the user access key.
+
+To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
 
 .. tab-set::
 

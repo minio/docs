@@ -18,9 +18,11 @@ Syntax
 
 .. start-mc-admin-user-add-desc
 
-The :mc:`mc admin user add` command adds a new user to the target MinIO deployment.
+The :mc:`mc admin user add` command adds a new :ref:`MinIO user <minio-internal-idp>` to the target MinIO deployment.
 
 .. end-mc-admin-user-add-desc
+
+To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
 
 .. tab-set::
 
