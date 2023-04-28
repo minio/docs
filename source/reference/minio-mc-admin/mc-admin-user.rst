@@ -73,7 +73,7 @@ Subcommands
           :start-after: start-mc-admin-user-remove-desc
           :end-before: end-mc-admin-user-remove-desc
 
-   * - :mc:`~mc admin user sts info`
+   * - :mc-cmd:`sts info <mc admin user sts info>`
      - .. include:: /reference/minio-mc-admin/mc-admin-user-sts-info.rst
           :start-after: start-mc-admin-sts-info-desc
           :end-before: end-mc-admin-sts-info-desc
