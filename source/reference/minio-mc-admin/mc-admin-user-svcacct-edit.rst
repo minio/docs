@@ -26,7 +26,7 @@ The :mc-cmd:`mc admin user svcacct edit` command modifies the configuration of a
 
    .. tab-item:: EXAMPLE
 
-      The following command applies a new policy and secret key the ``myuserserviceaccount`` access key on the ``myminio`` deployment:
+      The following command applies a new policy and secret key to the ``myuserserviceaccount`` access key on the ``myminio`` deployment:
 
       .. code-block:: shell  
          :class: copyable 
