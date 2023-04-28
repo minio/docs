@@ -93,7 +93,7 @@ Environment Variables
 ---------------------
 
 The :ref:`MinIO Operator <minio-operator-installation>` uses the following environment variables during startup to set configuration settings.
-
+Configure these variables on the machine running the kubectl plugin.
 
 .. envvar:: MINIO_OPERATOR_CERTIFICATES_VERSION
 
@@ -101,14 +101,14 @@ The :ref:`MinIO Operator <minio-operator-installation>` uses the following envir
 
    Valid values are ``v1`` or ``v1beta1``.
 
-   When not specified, the default is the API the Kubernetes provides.
+   When not specified, the default is the API Kubernetes provides.
 
 .. envvar:: MINIO_OPERATOR_RUNTIME
 
    Specify the type of runtime to use.
 
    Valid values are ``EKS``, ``Rancher``, or ``OpenShift``.
-   Leave blank if none of the value options apply.
+   Leave blank if none of the options apply.
 
    When set as ``EKS``, the :envvar:`MINIO_OPERATOR_CSR_SIGNER_NAME` must be ``beta.eks.amazonaws.com/app-serving``.
 
@@ -122,7 +122,7 @@ The :ref:`MinIO Operator <minio-operator-installation>` uses the following envir
    
    *Optional*
 
-   The password Operator should use to use to decrypt the private key in the TLS certificate for Operator.
+   The password Operator should use to decrypt the private key in the TLS certificate for Operator.
 
 .. envvar:: MINIO_OPERATOR_DEPLOYMENT_NAME
 

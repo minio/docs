@@ -43,7 +43,7 @@ The MinIO Operator Console supports deploying, managing, and monitoring MinIO Te
 
 You can :ref:`deploy a MinIO Tenant <minio-k8s-deploy-minio-tenant>` through the Operator Console.
 
-The Operator Console automatically detects any MinIO Tenants deployed on the cluster, whether provisioned through the Operator Console or through the :ref:`MinIO Kubernetes Plugin <minio-k8s-deploy-minio-tenant-commandline>`.
+The Operator Console automatically detects MinIO Tenants deployed on the cluster when provisioned through the Operator Console, the :ref:`MinIO Kubernetes Plugin <minio-k8s-deploy-minio-tenant-commandline>`, Helm, or Kustomize.
 
 Select a listed tenant to open an in-browser view of that tenant's MinIO Console. 
 You can use this view to directly manage, modify, expand, upgrade, and delete the tenant through the Operator UI.
@@ -56,12 +56,12 @@ You can use this view to directly manage, modify, expand, upgrade, and delete th
    The ZIP archive contains status, events, and log information for each pool on the deployment.
    The archive also includes a summary yaml file describing the deployment.
 
-   If subscribed, you can upload this file to :ref:`SUBNET <minio-docs-subnet>` for analysis by MinIO Engineers.
+   |subnet| users can upload this file for analysis by MinIO Engineers.
 
 Tenant Registration
 -------------------
 
-You can register your MinIO tenants with your |SUBNET| account using the Operator Console.
+|subnet| users relying on the commercial license should register your MinIO tenants to your SUBNET account, which can be done through the Operator Console.
 
 .. image:: /images/k8s/operator-console-register.png
    :align: center
