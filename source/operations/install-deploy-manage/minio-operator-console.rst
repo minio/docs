@@ -33,8 +33,7 @@ Connect to the Operator Console
 Tenant Management
 -----------------
 
-The MinIO Operator Console supports deploying, managing, and monitoring 
-MinIO Tenants on the Kubernetes cluster.
+The MinIO Operator Console supports deploying, managing, and monitoring MinIO Tenants on the Kubernetes cluster.
 
 .. image:: /images/k8s/operator-dashboard.png
    :align: center
@@ -42,22 +41,27 @@ MinIO Tenants on the Kubernetes cluster.
    :class: no-scaled-link
    :alt: MinIO Operator Console
 
-You can :ref:`deploy a MinIO Tenant <minio-k8s-deploy-minio-tenant>` through the 
-Operator Console.
+You can :ref:`deploy a MinIO Tenant <minio-k8s-deploy-minio-tenant>` through the Operator Console.
 
-The Operator Console automatically detects any MinIO Tenants 
-deployed on the cluster, whether provisioned through the Operator Console 
-or through the :ref:`MinIO Kubernetes Plugin <minio-k8s-deploy-minio-tenant-commandline>`.
+The Operator Console automatically detects MinIO Tenants deployed on the cluster when provisioned through the Operator Console, the :ref:`MinIO Kubernetes Plugin <minio-k8s-deploy-minio-tenant-commandline>`, Helm, or Kustomize.
 
 Select a listed tenant to open an in-browser view of that tenant's MinIO Console. 
 You can use this view to directly manage, modify, expand, upgrade, and delete the tenant through the Operator UI.
 
+.. versionadded:: Operator 5.0.0
+
+   You can download a Log Report for a tenant from the Pods summary screen.
+
+   The report downloads as ``<tenant-name>-report.zip``.
+   The ZIP archive contains status, events, and log information for each pool on the deployment.
+   The archive also includes a summary yaml file describing the deployment.
+
+   |subnet| users can upload this file for analysis by MinIO Engineers.
+
 Tenant Registration
 -------------------
 
-.. versionchanged:: 0.19.5
-
-   You can register your MinIO tenants with your |SUBNET| account using the Operator Console.
+|subnet| users relying on the commercial license should register your MinIO tenants to your SUBNET account, which can be done through the Operator Console.
 
 .. image:: /images/k8s/operator-console-register.png
    :align: center

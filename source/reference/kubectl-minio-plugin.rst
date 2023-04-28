@@ -89,6 +89,71 @@ Subcommands
 - :mc:`~kubectl minio delete`
 - :mc:`~kubectl minio version`
 
+Environment Variables
+---------------------
+
+The :ref:`MinIO Operator <minio-operator-installation>` uses the following environment variables during startup to set configuration settings.
+Configure these variables on the machine running the kubectl plugin.
+
+.. envvar:: MINIO_OPERATOR_CERTIFICATES_VERSION
+
+   Specifies the certificate API version to use.
+
+   Valid values are ``v1`` or ``v1beta1``.
+
+   When not specified, the default is the API Kubernetes provides.
+
+.. envvar:: MINIO_OPERATOR_RUNTIME
+
+   Specify the type of runtime to use.
+
+   Valid values are ``EKS``, ``Rancher``, or ``OpenShift``.
+   Leave blank if none of the options apply.
+
+   When set as ``EKS``, the :envvar:`MINIO_OPERATOR_CSR_SIGNER_NAME` must be ``beta.eks.amazonaws.com/app-serving``.
+
+.. envvar:: MINIO_OPERATOR_CSR_SIGNER_NAME
+
+   Override the default signer for certificate signing requests (CSRs).
+
+   When not specified, the default value is ``kubernetes.io/kubelet-serving``.
+
+.. envvar:: OPERATOR_CERT_PASSWD
+   
+   *Optional*
+
+   The password Operator should use to decrypt the private key in the TLS certificate for Operator.
+
+.. envvar:: MINIO_OPERATOR_DEPLOYMENT_NAME
+
+   Specifies the namespace to create and use for Operator
+
+   When not specified, the default value is ``minio-operator``.
+
+.. envvar:: OPERATOR_STS_ENABLED
+
+   Toggle STS Service ``on`` or ``off``.
+
+   When not specified, the default value is ``off``.
+
+.. envvar:: MINIO_CONSOLE_DEPLOYMENT_NAME
+
+   The name to use for the Operator Console.
+
+   When not specified, the default value is ``operator``.
+
+.. envvar:: OPERATOR_CONSOLE_TLS_ENABLE
+
+   Toggle Console TLS service ``on`` or ``off``.
+
+   When not specified, the default value is ``off``.
+
+.. envvar:: WATCHED_NAMESPACE
+
+   A comma-separated list of the namespace(s) Operator should watch for tenants.
+   
+   When not specified, the default value is ``""`` to watch all namespaces.
+
 .. toctree::
    :titlesonly:
    :hidden:
