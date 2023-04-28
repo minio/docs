@@ -107,27 +107,27 @@ The following steps back up the existing yaml files, perform some clean up, and 
    .. code-block:: shell
       :class: copyable
 
-      kubectl edit tenant/MYTENANT -n MYTENANTNAMESPACE
+      kubectl edit tenants <TENANT-NAME> -n <TENANT-NAMESPACE>
 
-   - Replace ``MYTENANT`` with the name of the tenant to modify.
-   - Replace ``MYTENANTNAMESPACE`` with the namespace of the tenant you are modifying.
+   - Replace ``<TENANT-NAME>`` with the name of the tenant to modify.
+   - Replace ``<TENANT-NAMESPACE>`` with the namespace of the tenant you are modifying.
 
    Add the following values under ``.spec.env`` in the file:
 
    .. code-block:: yaml
       :class: copyable
 
-       - name: MINIO_LOG_QUERY_AUTH_TOKEN
-         valueFrom:
-           secretKeyRef:
-             key: MINIO_LOG_QUERY_AUTH_TOKEN
-             name: <TENANT_NAME>-log-secret
-       - name: MINIO_LOG_QUERY_URL
-         value: http://<TENANT_NAME>-log-search-api:8080
-       - name: MINIO_PROMETHEUS_JOB_ID
-         value: minio-job
-       - name: MINIO_PROMETHEUS_URL
-         value: http://<TENANT_NAME>-prometheus-hl-svc:9090
+      - name: MINIO_LOG_QUERY_AUTH_TOKEN
+        valueFrom:
+          secretKeyRef:
+            key: MINIO_LOG_QUERY_AUTH_TOKEN
+            name: <TENANT_NAME>-log-secret
+      - name: MINIO_LOG_QUERY_URL
+        value: http://<TENANT_NAME>-log-search-api:8080
+      - name: MINIO_PROMETHEUS_JOB_ID
+        value: minio-job
+      - name: MINIO_PROMETHEUS_URL
+        value: http://<TENANT_NAME>-prometheus-hl-svc:9090
 
    - Replace ``<TENANT_NAME>`` in the ``name`` or ``value`` lines with the name of your tenant.
 
@@ -150,12 +150,14 @@ Upgrade Operator to |operator-version-stable|
 
    .. code-block:: shell
       :class: copyable
+
       kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
    
    The output resembles the following:
    
    .. code-block:: json
       :emphasize-lines: 8-10
+
       {
          "env": [
             {
@@ -178,6 +180,7 @@ Upgrade Operator to |operator-version-stable|
 
    .. code-block:: shell
       :class: copyable
+
       kubectl minio init
 
 5. Validate the Operator upgrade
@@ -295,6 +298,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
 
    .. code-block:: shell
       :class: copyable
+
       kubectl get tenants <TENANT-NAME> -n <TENANT-NAMESPACE> -o yaml
    
    If the ``spec.pools.securityContext`` field does not exist for a Tenant, the tenant pods likely run as root.
@@ -303,8 +307,9 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
    However, Tenants running pods as root may fail to start due to the security context mismatch.
    You can set an explicit Security Context that allows pods to run as root for those Tenants:
 
-   .. code-block:: shell
+   .. code-block:: yaml
       :class: copyable
+
       securityContext:
         runAsUser: 0
         runAsGroup: 0
@@ -314,6 +319,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
    You can use the following command to edit the tenant and apply the changes:
 
    .. code-block:: shell
+
       kubectl edit tenants <TENANT-NAME> -n <TENANT-NAMESPACE>
       # Modify the securityContext as needed
 
@@ -328,6 +334,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
 
    .. code-block:: shell
       :class: copyable
+
       wget https://github.com/minio/operator/releases/download/v4.2.3/kubectl-minio_4.2.3_linux_amd64 -o kubectl-minio_4.2.3
       chmod +x kubectl-minio_4.2.3
       ./kubectl-minio_4.2.3 init
@@ -340,6 +347,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
 
    .. code-block:: shell
       :class: copyable
+
       kubectl get all -n minio-operator
       kubectl get pods -l "v1.min.io/tenant" --all-namespaces
 
@@ -392,6 +400,7 @@ There is no direct upgrade path from a 3.X.X series installation to |operator-ve
    The following example tenant YAML fragment sets the specified fields:
 
    .. code-block:: yaml
+      
       image: "minio/minio:$(LATEST-VERSION)"
       ...
       zones:
