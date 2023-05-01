@@ -61,7 +61,7 @@ You can use this view to directly manage, modify, expand, upgrade, and delete th
    The ZIP archive contains status, events, and log information for each pool on the deployment.
    The archive also includes a summary yaml file describing the deployment.
 
-   |subnet| users can upload this file for analysis by MinIO Engineers.
+   |subnet| users relying on the commercial license should register the MinIO tenants to their SUBNET account, which can be done through the Operator Console.
 
 Tenant Registration
 -------------------
