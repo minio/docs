@@ -85,7 +85,7 @@ div.sidebar {
                 code {
                     background-color: var(--theme-light-bg);
                     color: var(--text-color);
-                    font-size: $font-size-sm;
+                    font-size: $font-size-xs;
                     margin: -0.5rem 0;
                     transition: background-color 300ms, color 300ms;
                     padding: 0.2rem 0.45rem;
@@ -111,7 +111,7 @@ div.sidebar {
         }
 
         ul {
-            margin: 0 0 0 1rem;
+            margin: 0 0 0 0.5rem;
         }
     }
 }
