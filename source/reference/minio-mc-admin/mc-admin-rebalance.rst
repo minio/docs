@@ -28,7 +28,7 @@ Rebalancing redistributes objects across all pools in the deployment.
 .. end-mc-admin-rebalance-desc
 
 MinIO does not automatically rebalance objects when adding a new server pool.
-Instead, MinIO ref:`writes new objects <minio-writing-files>` to the pool with relatively more free space compared to the other available pools on the deployment.
+Instead, MinIO :ref:`writes new objects <minio-writing-files>` to the pool with relatively more free space compared to the other available pools on the deployment.
 Triggering a manual rebalancing procedure prompts MinIO to scan the entire deployment and move objects as necessary to achieve a similar available free space across all pools.
 
 This is an expensive and time consuming operation.

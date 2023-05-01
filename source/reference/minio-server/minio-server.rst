@@ -222,6 +222,11 @@ Core Configuration
 
    Specifies the full path to the file the MinIO server process uses for loading environment variables.
 
+.. envvar:: MINIO_ILM_EXPIRY_WORKERS
+
+   Specifies the number of workers to make available to expire objects configured with ILM rules for expiration.
+   When not set, MinIO defaults to using up to half of the available processing cores available.
+
 Root Credentials
 ~~~~~~~~~~~~~~~~
 

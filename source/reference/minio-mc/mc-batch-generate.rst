@@ -74,7 +74,7 @@ Parameters
    
    The type of job to generate a YAML document for.
    
-   Currently, :mc:`mc batch` only supports the ``replicate`` job type.
+   Currently, :mc:`mc batch` supports the ``replicate`` and ``keyrotate`` job types.
 
 
 Global Flags
@@ -101,7 +101,7 @@ The following command generates a YAML blueprint for a replicate type batch job 
 
 - Replace ``replicate`` with the type of job to generate a yaml file for.
  
-  At the time of release, :mc:``mc batch`` only supports the ``replicate`` job type. 
+  :mc:``mc batch`` supports the ``replicate`` and ``keyrotate`` job types. 
 
 
 S3 Compatibility
@@ -123,7 +123,11 @@ Job Types
   Replicate objects between two MinIO deployments.
   Provides similar functionality to :ref:`bucket replication <minio-bucket-replication>` as a batch job rather than continual scanning function.
 
-MinIO may add more job types in the future.
+- ``keyrotate``
+
+  .. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z 
+  
+  Rotate the sse-s3 or sse-kms keys for objects at rest on a MinIO deployment.
 
 ``replicate``
 ~~~~~~~~~~~~~
@@ -131,7 +135,12 @@ MinIO may add more job types in the future.
 Use the ``replicate`` job type to create a batch job that replicates objects from the local MinIO deployment to another MinIO location.
 
 The YAML **must** define the source and target deployments.
+If the _source_ deployment is remote, then the _target_ deployment **must** be ``local``.
 Optionally, the YAML can also define flags to filter which objects replicate, send notifications for the job, or define retry attempts for the job.
+
+.. versionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
+
+   You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
 
 For the **source deployment**
 
@@ -156,7 +165,8 @@ For the **source deployment**
        - The prefix on the object(s) that should replicate.
 
      * - ``endpoint:`` 
-       - | Location of the source deployment, must be ``local``.
+       - | Location of the source deployment.
+         | If the location is not remote, use ``local``.
 
      * - ``credentials:`` 
        - The ``accesskey:`` and ``secretKey:`` or the ``sessionToken:`` that grants access to the object(s).
@@ -186,6 +196,7 @@ For the **target deployment**
      * - ``endpoint:`` 
        - | The location of the source deployment.
          | If the location is not remote, use ``local``.
+         | If the location of the source is remote, the source for target **must** be ``local``. 
 
      * - ``credentials:`` 
        - The ``accesskey`` and ``secretKey`` or the ``sessionToken`` that grants access to the object(s).
@@ -244,4 +255,94 @@ Sample YAML
 +++++++++++
 
 .. literalinclude:: /includes/code/replicate.yaml
+   :language: yaml
+
+``keyrotate``
+~~~~~~~~~~~~~
+
+.. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z 
+
+Use the ``keyrotate`` job type to create a batch job that cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects.
+
+Required information
+++++++++++++++++++++
+
+  .. list-table::
+     :widths: 25 75
+     :width: 100%
+
+     * - ``type:`` 
+       - Either ``sse-s3`` or ``sse-kms``.
+     * - ``key:`` 
+       - Only for use with the ``sse-kms`` type. 
+         The key to use to unseal the key vault.
+     * - ``context:``
+       - Only for use with the ``sse-kms`` type.
+         The context within which to perform actions. 
+
+   
+Optional information
+++++++++++++++++++++
+
+For **flag based filters**
+
+.. list-table::
+   :widths: 25 75
+   :width: 100%
+
+   * - ``newerThan:`` 
+     - A string representing a length of time in ``#d#h#s`` format.
+       
+       Keys rotate only for objects newer than the specified length of time.
+       For example, ``7d``, ``24h``, ``5d12h30s`` are valid strings.
+   * - ``olderThan:`` 
+     - A string representing a length of time in ``#d#h#s`` format.
+       
+       Keys rotate only for objects older than the specified length of time.
+   * - ``createdAfter:`` 
+     - A date in ``YYYY-MM-DD`` format.
+  
+       Keys rotate only for objects created after the date.
+   * - ``createdBefore:`` 
+     - A date in ``YYYY-MM-DD`` format.
+       
+       Keys rotate only for objects created prior to the date.
+   * - ``tags:``
+     - Rotate keys only for objects with tags that match the specified ``key:`` and ``value:``.  
+   * - ``metadtaa:``
+     - Rotate keys only for objects with metadata that match the specified ``key:`` and ``value:``.  
+   * - ``kmskey:``
+     - Rotate keys only for objects with a KMS key-id that match the specified value.  
+       This is only applicable for the ``sse-kms`` type. 
+
+For **notifications**
+
+.. list-table::
+   :widths: 25 75
+   :width: 100%
+
+   * - ``endpoint:`` 
+     - The predefined endpoint to send events for notifications.
+   * - ``token:`` 
+     - An optional :abbr:`JWT <JSON Web Token>` to access the ``endpoint``.
+
+For **retry attempts**
+
+If something interrupts the job, you can define a maximum number of retry attempts.
+For each retry, you can also define how long to wait between attempts.
+
+.. list-table::
+   :widths: 25 75
+   :width: 100%
+
+   * - ``attempts:`` 
+     - Number of tries to complete the batch job before giving up.
+   * - ``delay:`` 
+     - The amount of time to wait between each attempt.
+
+
+Sample YAML
++++++++++++
+
+.. literalinclude:: /includes/code/keyrotate.yaml
    :language: yaml
