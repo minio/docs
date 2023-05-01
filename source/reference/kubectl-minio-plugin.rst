@@ -93,7 +93,30 @@ Environment Variables
 ---------------------
 
 The :ref:`MinIO Operator <minio-operator-installation>` uses the following environment variables during startup to set configuration settings.
-Configure these variables on the machine running the kubectl plugin.
+Configure these variables in the ``minio-operator`` container.
+
+Setting Environment Variables in Kubernetes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To set these environment variables, modify the operator container's yaml at ``.spec.env`` or use the following ``kubectl`` command syntax:
+
+.. code-block:: shell
+   :class: copyable
+
+   kubectl set env -n minio-operator deployment/minio-operator <ENV_VARIABLE>=<value> ... <ENV_VARIABLE2>=<value2>
+
+Replace:
+
+- ``minio-operator`` with the namespace for your Operator, if not using the default value.
+- ``deployment/minio-operator`` with the deployment for your Operator, if not the default value.
+  (This is not common.)
+- ``<ENV_VARIABLE>`` with the environment variable to set or modify.
+- ``<value>`` with the value to use for the environment variable.
+
+You can set or modify multiple environment variables by separating each ``VARIABLE=value`` pair with a space.
+
+Available MinIO Operator Environment Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. envvar:: MINIO_OPERATOR_CERTIFICATES_VERSION
 
@@ -126,7 +149,7 @@ Configure these variables on the machine running the kubectl plugin.
 
 .. envvar:: MINIO_OPERATOR_DEPLOYMENT_NAME
 
-   Specifies the namespace to create and use for Operator
+   Specifies the namespace to create and use for Operator.
 
    When not specified, the default value is ``minio-operator``.
 

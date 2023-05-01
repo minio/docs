@@ -19,12 +19,12 @@ The MinIO Kubernetes Operator supports deploying MinIO Tenants onto private and 
 
 The following procedure installs the latest stable version (|operator-version-stable|) of the MinIO Operator and MinIO Plugin on Kubernetes infrastructure:
 
-- The MinIO Operator installs a :kube-docs:`Custom Resource Document (CRD) <concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions>` to support describing MinIO tenants as a Kubernetes :kube-docs:`object <concepts/overview/working-with-objects/kubernetes-objects/>`. 
+- The MinIO Operator installs a :kube-docs:`Custom Resource Definition (CRD) <concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions>` to support describing MinIO tenants as a Kubernetes :kube-docs:`object <concepts/overview/working-with-objects/kubernetes-objects/>`. 
   See the MinIO Operator :minio-git:`CRD Reference <operator/blob/master/docs/tenant_crd.adoc>` for complete documentation on the MinIO CRD.
 
 - The MinIO Kubernetes Plugin brings native support for deploying and managing MinIO tenants on a Kubernetes cluster using the :mc:`kubectl minio` command. 
 
-This documentation assumes familiarity with all referenced Kubernetes concepts, utilities, and procedures. 
+This documentation assumes familiarity with referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
 MinIO Operator Components
@@ -42,7 +42,7 @@ Within that namespace, the Operator generates the pods required by the tenant co
 Each pod runs three containers:
 
 - MinIO Container that runs all of the standard MinIO functions, equivalent to basic MinIO installation on baremetal.
-  This container stores and retrieves objects in the provide mount points (persistent volumes). 
+  This container stores and retrieves objects in the provided mount points (persistent volumes). 
 
 - InitContainer that only exists during the launch of the pod to manage configuration secrets during startup.
   Once startup completes, this container terminates. 
@@ -102,10 +102,10 @@ The Kubernetes TLS API uses the CA signature algorithm for generating new TLS ce
 MinIO recommends ECDSA (e.g. `NIST P-256 curve <https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf>`__) or EdDSA (e.g. :rfc:`Curve25519 <7748>`) TLS private keys/certificates due to their lower computation requirements compared to RSA.
 See :ref:`minio-TLS-supported-cipher-suites` for a complete list of supported TLS Cipher Suites.
 
-The Operator cannot complete initialization if the Kubernetes cluster is not configured to respond to a generated CSR. 
-Certain Kubernetes providers do not specify these configuration values by default. 
+If the Kubernetes cluster is not configured to respond to a generated :abbr:`CSR (Certificate Signing Request)`, the Operator cannot complete initialization. 
+Some Kubernetes providers do not specify these configuration values by default. 
 
-To verify whether the ``kube-controller-manager`` has the required settings, use the following command:
+To check whether the ``kube-controller-manager`` specifies the cluster signing key and certificate files, use the following command:
 
 .. code-block:: shell
    :class: copyable
@@ -113,7 +113,7 @@ To verify whether the ``kube-controller-manager`` has the required settings, use
    kubectl get pod kube-controller-manager-$CLUSTERNAME-control-plane \ 
      -n kube-system -o yaml
 
-- Replace ``$CLUSTERNAME`` with the name of the Kubernetes cluster:
+- Replace ``$CLUSTERNAME`` with the name of the Kubernetes cluster.
 
 Confirm that the output contains the highlighted lines. 
 The output of the example command above may differ from the output in your terminal:
@@ -141,7 +141,7 @@ The output of the example command above may differ from the output in your termi
    The MinIO Operator automatically generates TLS certificates for all MinIO Tenant pods using the specified Certificate Authority (CA).
    Clients external to the Kubernetes cluster must trust the Kubernetes cluster CA to connect to the MinIO Operator or MinIO Tenants. 
 
-   Clients which cannot trust the Kubernetes cluster CA can try disabling TLS validation for connections to the MinIO Operator or a MinIO Tenant. 
+   Clients which cannot trust the Kubernetes cluster CA can disable TLS validation for connections to the MinIO Operator or a MinIO Tenant. 
 
    Alternatively, you can generate x.509 TLS certificates signed by a known and trusted CA and pass those certificates to MinIO Tenants. 
    See :ref:`minio-tls` for more complete documentation.
