@@ -164,7 +164,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       /administration/batch-framework
       /administration/concepts
 
-.. cond:: not linux
+.. cond:: not (linux or k8s)
 
    .. toctree::
       :titlesonly:
@@ -185,6 +185,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
 
       /developers/minio-drivers
       /developers/security-token-service
+      /developers/sts-for-operator
       /developers/transforms-with-object-lambda
       /reference/minio-mc
       /reference/minio-mc-admin
@@ -198,6 +199,11 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       :titlesonly:
       :hidden:
 
+      Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs>
+      Object Lambda <https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html?ref=docs>
+      MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
+      MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
+      Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
       /reference/kubectl-minio-plugin
 
 .. toctree::

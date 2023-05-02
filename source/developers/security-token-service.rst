@@ -14,6 +14,9 @@ The MinIO Security Token Service (STS) APIs allow applications to generate tempo
 
 The STS API is *required* for MinIO deployments configured to use external identity managers, as the API allows conversion of the external IDP credentials into AWS Signature v4-compatible credentials.
 
+STS API Endpoints
+-----------------
+
 MinIO supports the following STS API endpoints:
 
 .. list-table::
@@ -35,6 +38,7 @@ MinIO supports the following STS API endpoints:
    * - :ref:`AssumeRoleWithCustomToken <minio-sts-assumerolewithcustomtoken>`
      - MinIO Identity Plugin
      - Generates a token for use with an external identity provider and the :ref:`MinIO Identity Plugin <minio-external-identity-management-plugin>`.
+ 
 
 .. toctree::
    :titlesonly:
