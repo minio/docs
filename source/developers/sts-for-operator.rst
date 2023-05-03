@@ -24,7 +24,7 @@ Security Token Service (STS) for MinIO Operator
 How STS Authorization Works in Kubernetes
 -----------------------------------------
 
-An application can use an ``AssumeRole`` call to send a request for temporary credentials to the MinIO Operator.
+An application can use an ``AssumeRoleWithWebIdentity`` call to send a request for temporary credentials to the MinIO Operator.
 The Operator checks the validity of the request, retrieves policies for the application, obtains credentials from the tenant, and then passes the credentials back the application.
 The application uses the issued credentials to work with the object storage on the tenant.
 
@@ -75,9 +75,9 @@ Procedure
 
       kubectl apply -k path/to/yaml/file.yaml
 
-5. Use an SDK that supports the ``AssumeRole`` like behavior to send a call from your application to the deployment
+5. Use an SDK that supports the ``AssumeRoleWithWebIdentity`` like behavior to send a call from your application to the deployment
 
-   Some SDKs that support ``AssumeRole`` include:
+   Some SDKs that support ``AssumeRoleRoleWithWebIdentity`` include:
 
    - :ref:`Golang <go-sdk>`
    - :ref:`Java <java-sdk>`
