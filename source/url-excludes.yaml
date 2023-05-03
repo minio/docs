@@ -98,7 +98,17 @@ excludes:
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
 - 'reference/deprecated/*'
-- 'developers/*'
+- 'reference/deprecated/*'
+- 'developers/dotnet/*'
+- 'developers/go/*'
+- 'developers/haskell/*'
+- 'developers/java/*'
+- 'developers/javascript/*'
+- 'developers/python/*'
+- 'developers/security-token-service/*'
+- 'developers/minio-drivers.rst'
+- 'developers/security-token-service.rst'
+- 'developers/transforms-with-object-lambda.rst'
 - 'integrations/*'
 ---
 tag: openshift

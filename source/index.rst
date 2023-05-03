@@ -185,7 +185,6 @@ Any file uploaded to ``play`` should be considered public and non-protected.
 
       /developers/minio-drivers
       /developers/security-token-service
-      /developers/sts-for-operator
       /developers/transforms-with-object-lambda
       /reference/minio-mc
       /reference/minio-mc-admin
@@ -200,6 +199,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       :hidden:
 
       Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs>
+      /developers/sts-for-operator
       Object Lambda <https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html?ref=docs>
       MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
       MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
