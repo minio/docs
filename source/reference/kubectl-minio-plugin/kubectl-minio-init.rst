@@ -83,7 +83,7 @@ The command supports the following flags:
    :optional:
 
    The image to use when deploying the :minio-git:`MinIO Console <console>` in Operator mode, where administrators can create and manage MinIO tenants using a Graphical User Interface.
-   Defaults to ``minio/console:v0.17.3``.
+   Defaults to the `version bundled in variable DefaultOperatorImage for the matching Operator release <https://github.com/minio/operator/blob/master/kubectl-minio/cmd/helpers/constants.go>`__.
 
 .. mc-cmd:: --console-tls
    :optional:
@@ -94,23 +94,17 @@ The command supports the following flags:
 
    Disabled by default.
 
-.. mc-cmd:: --default-console-image
-   :optional:
-
-   The default :minio-git:`MinIO Console <console>` image to use when creating a new MinIO tenant. 
-   Defaults to ``minio/console:v0.17.3``.
-
 .. mc-cmd:: --default-kes-image
    :optional:
 
    The default :minio-git:`kes <kes>` image to use when creating a new MinIO tenant. 
-   Defaults to ``minio/kes:v0.18.0``.
+   Defaults to the `version bundled in variable DefaultKESImage for the matching Operator release <https://github.com/minio/operator/blob/master/kubectl-minio/cmd/helpers/constants.go>`__.
 
 .. mc-cmd:: --default-minio-image
    :optional:
 
    The default :minio-git:`minio <minio>` image to use when creating a new MinIO tenant. 
-   Defaults to ``minio/minio:RELEASE.2022-05-26T05-48-41Z``.
+   Defaults to the `version bundled in variable DefaultTenantImage for the matching Operator release <https://github.com/minio/operator/blob/master/kubectl-minio/cmd/helpers/constants.go>`__.
 
 .. mc-cmd:: --image
    :optional:
@@ -123,7 +117,7 @@ The command supports the following flags:
 
    Secret key for use with pulling the :mc-cmd:`~kubectl minio init --image`.
 
-   The MinIO-hosted ``minio/k8s-operator`` image is *not* password protected.
+   The MinIO-hosted ``minio/operator`` image is *not* password protected.
    This option is only required for non-MinIO image sources which are password protected.
 
 .. mc-cmd:: --namespace
@@ -155,3 +149,10 @@ The command supports the following flags:
 
    The namespace into which to deploy Prometheus.
    Defaults to ``PROMETHEUS_NAMESPACE``
+
+.. mc-cmd:: --sts
+   :optional:
+
+   Enable Operator sts (v1alpha1)
+
+   .. versionadded:: 5.0.0
