@@ -32,10 +32,14 @@ Benefits of STS for MinIO Operator include:
    MinIO Operator launches with STS *disabled* by default.
    To use STS with the Operator, you must first explicitly enable it.
 
+   The procedure on this page includes instructions to enable the STS API in the MinIO Operator.
+
 How STS Authorization Works in Kubernetes
 -----------------------------------------
 
-An application can use an ``AssumeRoleWithWebIdentity`` call to send a request for temporary credentials to the MinIO Operator.
+An application can use an ``AssumeRoleWithWebIdentity`` call including a Service Account's :abbr:`JWT (JSON Web Token)` to send a request for temporary credentials to the MinIO Operator.
+The JWT is typically mounted in the deployment from a well known location on the deployment, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
+
 The Operator checks the validity of the request, retrieves policies for the application, obtains credentials from the tenant, and then passes the credentials back the application.
 The application uses the issued credentials to work with the object storage on the tenant.
 
@@ -46,10 +50,10 @@ The application uses the issued credentials to work with the object storage on t
 
 The complete process includes the following steps:
 
-1. An application sends an API request to the MinIO Operator containing the name of the application and a service account to use.
+1. An application sends an API request to the MinIO Operator containing the tenant namespace and a service account to use.
 2. The MinIO Operator uses the Kubernetes API to check that the JSON Web Token (JWT) associated with the :ref:`service account <minio-operator-sts-service-account>` in the application's request is valid.
 3. The Kubernetes API returns the results of its validity check.
-4. The MinIO Operator checks for a :ref:`Policy Binding <minio-operator-sts-policy-binding>` that matches the application.
+4. The MinIO Operator checks for :ref:`Policy Bindings <minio-operator-sts-policy-binding>` that matches the application.
 5. The PolicyBinding CRD returns the policy or policies that match the request, if any.
 6. The MinIO Operator sends the combined policy information for the application to the MinIO Tenant.
 7. The tenant creates temporary credentials matching the policy or policies for the request and returns those to the MinIO Operator.
@@ -81,28 +85,37 @@ Procedure
      You can find the deployment value by running ``kubectl get deployments -n <namespace>``, where you replace ``<namespace>`` with the namespace for the MinIO Operator.
      Your MinIO Operator namespace is typically ``minio-operator``, though this value can change during install.
 
-2. Ensure an appropriate :ref:`policy <minio-policy>` exists on the MinIO Tenant for the application to use
+2. Ensure an appropriate :ref:`policy <minio-policy>` or policies exist on the MinIO Tenant for the application to use for the application
 
-3. Create a yaml document to add necessary resources: 
+   The next step uses a YAML document to map one or more existing tenant policies to a service account through a custom resource called a ``PolicyBinding``.
+
+3. Create YAML resources for the Service Account and Policy Binding: 
 
    - The :ref:`Service Account <minio-operator-sts-service-account>` in the MinIO Tenant for the application to use.
 
      For more on service accounts in Kubernetes, see the :kube-docs:`Kubernetes documentation <reference/access-authn-authz/service-accounts-admin/>`.
-   - Create a :ref:`Policy Binding <minio-operator-sts-policy-binding>` linking the application to the MinIO Tenant's policy.
+   - Create a :ref:`Policy Binding <minio-operator-sts-policy-binding>` in the target tenant's namespace that link the application to one or more of the MinIO Tenant's policies.
 
-5. Apply the yaml file to create the resources on the deployment
+4. Apply the YAML file to create the resources on the deployment
    
    .. code-block:: shell
       :class: copyable
 
       kubectl apply -k path/to/yaml/file.yaml
 
-6. Use an SDK that supports the ``AssumeRoleWithWebIdentity`` like behavior to send a call from your application to the deployment
+5. Use an SDK that supports the ``AssumeRoleWithWebIdentity`` like behavior to send a call from your application to the deployment
 
    The STS API expects a JWT for the service account to exist in the Kubernetes environment.
-   This is typically in a well known location on the deployment, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
+   This is typically mounted from a well known location on pods in the Kubernetes cluster, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
+   
+   Alternatively, you can define the token path as an environment variable:
 
-   Some SDKs that support ``AssumeRoleRoleWithWebIdentity`` include:
+   .. code-block:: shell
+      :class: copyable
+
+      AWS_WEB_IDENTITY_TOKEN_FILE=/var/run/secrets/kubernetes.io/serviceaccount/token
+
+   The following MinIO SDKs support ``AssumeRoleRoleWithWebIdentity``:
 
    - :ref:`Golang <go-sdk>`
    - :ref:`Java <java-sdk>`
@@ -121,7 +134,7 @@ Service Account
 ~~~~~~~~~~~~~~~
 
 A Service Account is a :kube-docs:`Kubernetes resource type <reference/access-authn-authz/service-accounts-admin/>` that allows an external application to interact with the Kubernetes deployment.
-When linked to a pod, such as through a deployment's ``.spec.spec.serviceAccountName`` field, Kubernetes stores a :abbr:`JWT (JSON Web Token)` for the service account in a well-known location, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
+When linked to a pod, such as through a deployment's ``.spec.spec.serviceAccountName`` field, Kubernetes mounts a :abbr:`JWT (JSON Web Token)` for the service account from a well-known location, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
 
 The following yaml creates a service account called ``stsclient-sa`` for the ``sts-client`` namespace.
 
@@ -131,8 +144,8 @@ The following yaml creates a service account called ``stsclient-sa`` for the ``s
    apiVersion: v1
    kind: ServiceAccount
    metadata:
-     namespace: sts-client
-     name: stsclient-sa
+     namespace: sts-client # The namespace to add the service account to. Usually a tenant, but can be any namespace in the deployment.
+     name: stsclient-sa # The name to use for the service account.
 
 .. _minio-operator-sts-policy-binding:
 
@@ -141,10 +154,12 @@ Policy Binding
 
 A ``PolicyBinding`` is a MinIO-specific custom resource type for Kubernetes that links an ``application`` to a set of policies.
 
+Create Policy Bindings in the namespace of the tenant they are for.
+
 For the purposes of the MinIO Operator, an application is any requesting resource that identifies with a specific service account and tenant namespace.
 The ``PolicyBinding`` resource links the application to one or more policies for the tenant on that namespace.
 
-The below yaml creates a ``PolicyBinding`` that links an application using the service account ``stsclient-sa`` for the tenant in the namespace ``sts-client`` to the policy ``test-bucket-rw``.
+The below yaml creates a ``PolicyBinding`` that links an application using the service account ``stsclient-sa`` that exists in the namespace ``sts-client`` to the policy ``test-bucket-rw`` in the target tenant located in the namespace ``minio-tenant-1``.
 The policies granted in the yaml definition **must** already exist on the MinIO Tenant.
 
 .. code-block:: yaml
@@ -154,13 +169,14 @@ The policies granted in the yaml definition **must** already exist on the MinIO 
    kind: PolicyBinding
    metadata:
      name: binding-1
-     namespace: minio-tenant-1
+     namespace: minio-tenant-1 # The namespace of the tenant this binding is for
    spec:
      application:
-       namespace: sts-client
-       serviceaccount: stsclient-sa
+       namespace: sts-client # The namespace that contains the service account for the application
+       serviceaccount: stsclient-sa # The service account to use for the application
      policies:
-       - test-bucket-rw
+       - test-bucket-rw # A policy that already exists in the tenant
+       # - test-bucket-policy-2 # Add as many policies as needed
 
 Reference
 ---------
