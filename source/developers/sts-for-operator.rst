@@ -37,8 +37,9 @@ Benefits of STS for MinIO Operator include:
 How STS Authorization Works in Kubernetes
 -----------------------------------------
 
-An application can use an ``AssumeRoleWithWebIdentity`` call including a Service Account's :abbr:`JWT (JSON Web Token)` to send a request for temporary credentials to the MinIO Operator.
-The JWT is typically mounted in the deployment from a well known location on the deployment, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
+An application can use an ``AssumeRoleWithWebIdentity`` call including a :kube-docs:`Kubernetes Service Account's <reference/access-authn-authz/service-accounts-admin/>` :abbr:`JWT (JSON Web Token)` to send a request for temporary credentials to the MinIO Operator.
+When linked to a pod, such as through a deployment's ``.spec.spec.serviceAccountName`` field, Kubernetes mounts a :abbr:`JWT (JSON Web Token)` for the service account from a well-known location, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
+The Pod can access those service accounts from that location.
 
 The Operator checks the validity of the request, retrieves policies for the application, obtains credentials from the tenant, and then passes the credentials back the application.
 The application uses the issued credentials to work with the object storage on the tenant.
@@ -50,7 +51,7 @@ The application uses the issued credentials to work with the object storage on t
 
 The complete process includes the following steps:
 
-1. An application sends an API request to the MinIO Operator containing the tenant namespace and a service account to use.
+1. An application sends an ``AssumeRoleWithWebidentity`` :ref:`API request <minio-sts-assumerolewithwebidentity>` to the MinIO Operator containing the tenant namespace and a service account to use.
 2. The MinIO Operator uses the Kubernetes API to check that the JSON Web Token (JWT) associated with the :ref:`service account <minio-operator-sts-service-account>` in the application's request is valid.
 3. The Kubernetes API returns the results of its validity check.
 4. The MinIO Operator checks for :ref:`Policy Bindings <minio-operator-sts-policy-binding>` that matches the application.
@@ -91,10 +92,10 @@ Procedure
 
 3. Create YAML resources for the Service Account and Policy Binding: 
 
-   - The :ref:`Service Account <minio-operator-sts-service-account>` in the MinIO Tenant for the application to use.
+   - Create the :ref:`Service Account <minio-operator-sts-service-account>` in the MinIO Tenant for the application to use.
 
      For more on service accounts in Kubernetes, see the :kube-docs:`Kubernetes documentation <reference/access-authn-authz/service-accounts-admin/>`.
-   - Create a :ref:`Policy Binding <minio-operator-sts-policy-binding>` in the target tenant's namespace that link the application to one or more of the MinIO Tenant's policies.
+   - Create a :ref:`Policy Binding <minio-operator-sts-policy-binding>` in the target tenant's namespace that links the application to one or more of the MinIO Tenant's policies.
 
 4. Apply the YAML file to create the resources on the deployment
    
@@ -106,7 +107,7 @@ Procedure
 5. Use an SDK that supports the ``AssumeRoleWithWebIdentity`` like behavior to send a call from your application to the deployment
 
    The STS API expects a JWT for the service account to exist in the Kubernetes environment.
-   This is typically mounted from a well known location on pods in the Kubernetes cluster, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
+   When linked to a pod, such as through a deployment's ``.spec.spec.serviceAccountName`` field, Kubernetes mounts a :abbr:`JWT (JSON Web Token)` for the service account from a well-known location, such as ``/var/run/secrets/kubernetes.io/serviceaccount/token``.
    
    Alternatively, you can define the token path as an environment variable:
 
