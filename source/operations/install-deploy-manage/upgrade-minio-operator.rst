@@ -65,7 +65,7 @@ The following changes apply for Operator v5.0.0 or later:
   This change impacts the Tenant :abbr:`CRD <CustomResourceDefinition>` and only impacts users editing a tenant YAML directly, such as through Helm or Kustomize.
 - Both the **Log Search API** (``.spec.log``) and **Prometheus** (``.spec.prometheus``) deployments have been removed.
   However, existing deployments are left running as standalone deployments / statefulsets with no connection to the Tenant CR.
-  If the Tenant CRD is deleted, this does not cascade to the log or Prometheus deployments.
+  Deleting the Tenant :abbr:`CRD (Custom Resource Definition)` does **not** cascade to the log or Prometheus deployments.
 
   .. important::
 
@@ -170,7 +170,7 @@ Upgrade Operator to |operator-version-stable|
          "name": "minio-operator"
       }
 
-3. Download the Latest Stable Version of the MinIO Kubernetes Plugin
+3. Download the latest stable version of the MinIO Kubernetes Plugin
 
    .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
 
