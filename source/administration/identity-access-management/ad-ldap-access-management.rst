@@ -59,7 +59,7 @@ Use either of the following methods to create a new access keys:
 
 - Log into the :ref:`MinIO Console <minio-console>` using the AD/LDAP-managed user credentials. From the :guilabel:`Identity` section of the left navigation, select :guilabel:`Access Keys` followed by the :guilabel:`Create access keys +` button.
 
-- Use the :mc-cmd:`mc admin user svcacct add` command to create the access keys. Specify the user Distinguished Name as the username to which to associate the access keys.
+- Use the :mc:`mc admin user svcacct add` command to create the access keys. Specify the user Distinguished Name as the username to which to associate the access keys.
 
 
 Mapping Policies to User DN

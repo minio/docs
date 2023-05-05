@@ -18,9 +18,11 @@ Syntax
 
 .. start-mc-admin-svcacct-info-desc
 
-The :mc-cmd:`mc admin user svcacct info` command returns a description of the specified access key.
+The :mc-cmd:`mc admin user svcacct info` command returns a description of the specified :ref:`access key <minio-id-access-keys>`.
 
 .. end-mc-admin-svcacct-info-desc
+
+"Access Keys" have equivalent functionality to and replace the concept of "Service Accounts" in MinIO.
 
 The description output includes the following details, as available:
 
@@ -42,7 +44,7 @@ Use :mc-cmd:`~mc admin user svcacct info --policy` to view the attached policies
       .. code-block:: shell  
          :class: copyable 
   
-         mc admin user svcacct info myminio myuserserviceaccount 
+         mc admin user svcacct info myminio myuseraccesskey 
 
    .. tab-item:: SYNTAX
 
@@ -54,7 +56,7 @@ Use :mc-cmd:`~mc admin user svcacct info --policy` to view the attached policies
          mc [GLOBALFLAGS] admin user svcacct info           \  
                                              [--policy]     \  
                                              ALIAS          \  
-                                             SERVICEACCOUNT
+                                             ACCESSKEY
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -69,10 +71,15 @@ Parameters
 
    The :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
-.. mc-cmd:: SERVICEACCOUNT
+.. mc-cmd:: ACCESSKEY
    :required:
 
    The service account access key to display.
+
+.. mc-cmd:: --policy
+   :optional:
+
+   Displays policies attached to the specified service account.
 
 
 Global Flags
@@ -93,11 +100,11 @@ Use :mc-cmd:`mc admin user svcacct info` to display details of a service account
 .. code-block:: shell
    :class: copyable
 
-      mc admin user svcacct info ALIAS SERVICEACCOUNT
+      mc admin user svcacct info ALIAS ACCESSKEY
 
 - Replace :mc-cmd:`ALIAS <mc admin user add ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`SERVICEACCOUNT <mc admin user svcacct info SERVICEACCOUNT>` with the service account access key.
+- Replace :mc-cmd:`ACCESSKEY <mc admin user svcacct info ACCESSKEY>` with the service account access key.
 
 
 The output resembles the following:
@@ -120,11 +127,11 @@ Use :mc-cmd:`mc admin user svcacct info` to display the policies attached to ser
 .. code-block:: shell
    :class: copyable
 
-      mc admin user svcacct info --policy ALIAS SERVICEACCOUNT
+      mc admin user svcacct info --policy ALIAS ACCESSKEY
 
 - Replace :mc-cmd:`ALIAS <mc admin user add ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`SERVICEACCOUNT <mc admin user svcacct info SERVICEACCOUNT>` with the service account access key.
+- Replace :mc-cmd:`ACCESSKEY <mc admin user svcacct info ACCESSKEY>` with the service account access key.
 
 The output resembles the following:
 

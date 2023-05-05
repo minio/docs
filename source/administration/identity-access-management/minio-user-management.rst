@@ -56,7 +56,7 @@ A MinIO user can generate any number of access keys.
 This allows application owners to generate arbitrary access keys for their applications without requiring action from the MinIO administrators. 
 Since the generated access keys have the same or fewer permissions as the parents, administrators can focus on managing the top-level parent users without micro-managing generated access keys.
 
-You can create access keys using either the :ref:`MinIO Console <minio-console-user-access-keys>` *or* by using the :mc-cmd:`mc admin user svcacct add` command.
+You can create access keys using either the :ref:`MinIO Console <minio-console-user-access-keys>` *or* by using the :mc:`mc admin user svcacct add` command.
 Identities created by these methods do not expire until you remove the access key or the parent account.
 
 You can also create :ref:`security token service <minio-security-token-service>` accounts programmatically with the ``AssumeRole`` STS API endpoint.
@@ -119,7 +119,7 @@ User Management
 Create a User
 ~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin user add` command to create a new user on the
+Use the :mc:`mc admin user add` command to create a new user on the
 MinIO deployment:
 
 .. code-block:: shell
@@ -127,12 +127,12 @@ MinIO deployment:
 
    mc admin user add ALIAS ACCESSKEY SECRETKEY
 
-- Replace :mc-cmd:`ALIAS <mc admin user add TARGET>` with the
+- Replace :mc-cmd:`ALIAS <mc admin user add ALIAS>` with the
   :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`ACCESSKEY <mc admin user add ACCESSKEY>` with the 
   access key for the user. MinIO allows retrieving the access key after
-  user creation through the :mc-cmd:`mc admin user info` command.
+  user creation through the :mc:`mc admin user info` command.
 
 - Replace :mc-cmd:`SECRETKEY <mc admin user add SECRETKEY>` with the
   secret key for the user. MinIO *does not* provide any method for retrieving
@@ -142,7 +142,7 @@ Specify a unique, random, and long string for both the ``ACCESSKEY`` and
 ``SECRETKEY``. Your organization may have specific internal or regulatory
 requirements around generating values for use with access or secret keys. 
 
-After creating the user, use :mc-cmd:`mc admin policy attach` to associate a
+After creating the user, use :mc:`mc admin policy attach` to associate a
 :ref:`MinIO Policy Based Access Control <minio-policy>` to the new user. 
 The following command assigns the built-in :userpolicy:`readwrite` policy:
 
@@ -156,7 +156,7 @@ Replace ``USERNAME`` with the ``ACCESSKEY`` created in the previous step.
 Delete a User
 ~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin user remove` command to remove a user on a 
+Use the :mc:`mc admin user remove` command to remove a user on a 
 MinIO deployment:
 
 .. code-block:: shell
@@ -164,7 +164,7 @@ MinIO deployment:
 
    mc admin user remove ALIAS USERNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin user remove TARGET>` with the
+- Replace :mc-cmd:`ALIAS <mc admin user remove ALIAS>` with the
   :mc:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the name of

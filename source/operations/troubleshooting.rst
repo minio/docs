@@ -229,7 +229,7 @@ Enabling or Disabling Call Home
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Call Home is **disabled** by default.
-You can :mc-cmd:`~mc support callhome enable` and :mc-cmd:`~mc support callhome disable` Call Home functionality at any time using the MinIO Client's :mc-cmd:`mc support callhome` commands.
+You can :mc-cmd:`~mc support callhome enable` and :mc-cmd:`~mc support callhome disable` Call Home functionality at any time using the MinIO Client's :mc:`mc support callhome` commands.
 The command and its subcommands allow you to enable Call Home uploads for only the diagnostics, only the error logs, or both.
 Refer to the documentation on the commands for more details.
 

@@ -12,7 +12,6 @@ from docutils import nodes
 from docutils.nodes import Element, Node
 from docutils.parsers.rst import Directive, directives
 from sphinx.util.docutils import SphinxDirective
-from docutils.utils import SafeString
 from sphinx.util.nodes import nested_parse_with_titles, set_source_info, Node
 from typing import TYPE_CHECKING, Any, Dict, List, cast
 
@@ -33,7 +32,7 @@ class Cond(Directive):
         try:
             result = config._raw_config['tags'].eval_condition(self.arguments[0])
         except ValueError as err:
-            raise self.severe(u'Error parsing conditional parsing expression: {}'.format(SafeString(str(err))))
+            raise self.severe(u'Error parsing conditional parsing expression: {}'.format(str(err)))
 
         if result:
             node = nodes.Element()
@@ -58,7 +57,7 @@ class CondPlus(SphinxDirective):
         try:
             result = config._raw_config['tags'].eval_condition(self.arguments[0])
         except ValueError as err:
-            raise self.severe(u'Error parsing conditional parsing expression: {}'.format(SafeString(str(err))))
+            raise self.severe(u'Error parsing conditional parsing expression: {}'.format(str(err)))
 
         if not result:
              # early exit if we know there's no match
