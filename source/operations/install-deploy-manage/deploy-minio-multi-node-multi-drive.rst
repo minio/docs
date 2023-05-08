@@ -103,6 +103,15 @@ Local JBOD Storage with Sequential Mounts
    For deployments that *require* using network-attached storage, use
    NFSv4 for best results.
 
+Time Synchronization
+~~~~~~~~~~~~~~~~~~~~
+
+Multi-node systems must maintain synchronized time and date, as reads and writes happen across nodes.
+Make sure all nodes sync to the same time server regularly.
+Operating systems vary for methods used to synchronize time and date, such as with ``ntp``, ``timedatectl``, or ``timesyncd``.
+
+Check the documentation for your operating system for how to set up and maintain accurate time syncs across your nodes.
+
 Considerations
 --------------
 

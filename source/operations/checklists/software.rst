@@ -22,6 +22,11 @@ MinIO Pre-requisites
    * - :octicon:`circle`
      - Servers running a Linux operating system with a 5.x+ kernel, such as Red Hat Enterprise Linux (RHEL) 9 or Ubuntu LTS 20.04+
 
+   * - :opticon:`circle`
+     - A method to synchronize time servers across nodes, such as with ``ntp``, ``timedatectl`` or ``timesyncd``.
+       The method to use varies by operating system.
+       Check with your operating system's documentation for how to synchronize time with a time server.
+
    * - :octicon:`circle` 
      - System administrator access to the remote servers
 
@@ -63,7 +68,6 @@ Post Install Tasks
 .. list-table::
    :widths: auto
    :width: 100%
-
 
    * - :octicon:`circle` 
      - (optional) Create an :mc:`mc alias` for each server with :mc:`mc alias set` from your local machine for command line access to work with the MinIO deployment from a local machine
