@@ -106,11 +106,11 @@ Local JBOD Storage with Sequential Mounts
 Time Synchronization
 ~~~~~~~~~~~~~~~~~~~~
 
-Multi-node systems must maintain synchronized time and date, as reads and writes happen across nodes.
+Multi-node systems must maintain synchronized time and date to maintain stable internode operations and interactions.
 Make sure all nodes sync to the same time server regularly.
 Operating systems vary for methods used to synchronize time and date, such as with ``ntp``, ``timedatectl``, or ``timesyncd``.
 
-Check the documentation for your operating system for how to set up and maintain accurate time syncs across your nodes.
+Check the documentation for your operating system for how to set up and maintain accurate and identical system clock times across nodes.
 
 Considerations
 --------------
