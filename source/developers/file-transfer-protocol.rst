@@ -26,19 +26,22 @@ Supported Protocols
 
 When enabled, MinIO supports FTP access over the following protocols:
 
-SSH File Transfer Protocol (``SFTP``)
+- SSH File Transfer Protocol (``SFTP``)
+
   SFTP is defined by the Internet Engineering Task Force (IETF) as an extension of SSH 2.0.
-  SFTP allows file transfer over SSH for use with :ref:`Transport Layer Security (TLS) <<minio-tls>`>` and virtual private network (VPN) applications.
+  SFTP allows file transfer over SSH for use with :ref:`Transport Layer Security (TLS) <minio-tls>` and virtual private network (VPN) applications.
 
   Your FTP client must support SFTP.
 
-File Transfer Protocol over SSL/TLS (``FTPS``)
+- File Transfer Protocol over SSL/TLS (``FTPS``)
+  
   ``FTPS`` allows for encrypted FTP communication with TLS certificates over the standard FTP communication channel.
   ``FTPS`` should not be confused with ``SFTP``, as ``FTPS`` does not communicate over a Secure Shell (``SSH``).
 
   Your FTP client must support FTPS.
 
-File Transfer Protocol (``FTP``)
+- File Transfer Protocol (``FTP``)
+  
   Unencrypted file transfer.
 
   MinIO does **not** recommend using unencrypted FTP for file transfer.
@@ -213,7 +216,7 @@ Connect to an SFTP Server
 
 The following example connects to an SSH FTP server, lists the contents of a bucket named ``runner``, and downloads an object.
 
-.. code-block:: shell
+.. code-block:: text
 
    > sftp -P 8022 minioadmin@localhost
    minioadmin@localhost's password:
