@@ -180,11 +180,12 @@ The command accepts the following arguments:
    Valid keys:
 
    - ``address``, which takes a single port to use for the server, typically ``8021``
-   - ``passive-port-range``, which restricts the range of potential ports the system assigns to FTP
-   - ``tls-private-key``, which takes the path to the user's private key for accessing the MinIO deployment by TLS
-   - ``tls-public-cert``, which takes the path to the certificate for accessing the MinIO deployment by TLS
+   - _(Optional)_ ``passive-port-range``, which restricts the range of potential ports the server can use to transfer data, such as when tight firewall rules limit the port the FTP server can request for the connection
+   - _(Optional)_ ``tls-private-key``, which takes the path to the user's private key for accessing the MinIO deployment by TLS
+   - _(Optional)_ ``tls-public-cert``, which takes the path to the certificate for accessing the MinIO deployment by TLS
 
-   MinIO uses the server's certificate chain automatically if TLS is already enabled.
+   For MinIO deployments with TLS enabled, omit ``tls-private-key`` and ``tls-public-key`` to direct MinIO to use the default TLS keys for the MinIO deployment. 
+   See :ref:`minio-tls` for more information.
    You only need to specify a certificate and private key to terminate certificates with a different domain for your FTP server.
 
    For example:

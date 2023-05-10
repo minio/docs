@@ -19,7 +19,12 @@ File Transfer Protocol (FTP/SFTP)
 Overview
 --------
 
-You can use the File Transfer Protocol (FTP) or Secure File Transfer Protocol (SFTP) to interact with the objects on a MinIO deployment.
+You can use the File Transfer Protocol (``FTP``) to interact with the objects on a MinIO deployment.
+
+You must specifically enable FTP or SFTP when starting the server.
+Enabling either server type does not affect other MinIO features.
+
+This page uses the abbreviation ``FTP`` throughout, but you can use any of the supported FTP protocols described below.
 
 Supported Protocols
 ~~~~~~~~~~~~~~~~~~~
@@ -51,38 +56,14 @@ Supported Commands
 
 When enabled, MinIO supports the following ``ftp`` operations:
 
-.. list-table::
-   :header-rows: 1
-   :widths: 40 60
-   :width: 60%
+- ``get``
+- ``put``
+- ``ls``
+- ``mkdir``
+- ``rmdir``
+- ``delete``
 
-   * - FTP Client Commands
-     - Supported for MinIO
-
-   * - ``get``
-     - supported
-
-   * - ``put``
-     - supported
-
-   * - ``ls``
-     - supported
-
-   * - ``mkdir``
-     - supported
-
-   * - ``rmdir``
-     - supported
-
-   * - ``delete``
-     - supported
-
-   * - ``append``
-     - not supported
-
-   * - ``rename``
-     - not supported
-
+MinIO does not support either ``append`` or ``rename`` operations.
 
 Considerations
 --------------
@@ -90,45 +71,37 @@ Considerations
 Versioning
 ~~~~~~~~~~
 
-``FTP`` and ``SFTP`` are not version-aware protocols.
+You cannot use ``FTP`` to read specific :ref:`object versions <minio-bucket-versioning>` other than the latest version.
 
-- If you use ``FTP`` or ``SFTP`` to get or list objects from a versioned bucket, only the latest version returns.
-- If you ``put`` an object on a versioned bucket with ``FTP`` or ``SFTP`` with the same name as an existing object, MinIO transparently creates a new version of the object, but FTP cannot be aware of this versioning work.
+- For read operations, MinIO only returns the latest version of the requested object(s) to the ftp client.
+- For write operations, MinIO applies normal versioning behavior for matching object names.
 
-To retrieve or work with any version of an object other than the latest version, you cannot use ``FTP`` or ``SFTP``.
 Use an S3 API Client, such as the :ref:`MinIO Client <minio-client>`.
 
 Authentication and Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Authentication to the MinIO deployment through the FTP protocols uses the same identity providers as regular access.
-The following user accounts can access buckets and objects through FTP protocols:
+``FTP`` access requires the same authentication as any other S3 client.
+MinIO supports the following authentication providers:
 
 - :ref:`MinIO IDP <minio-internal-idp>` users and their service accounts
 - :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` users and their service accounts
 - :ref:`OpenID/OIDC <minio-external-identity-management-openid>` service accounts
 
-Rotating credentials **cannot** access buckets or objects over FTP.
-To use rotating credentials to authenticate, you must use S3 API client or port.
+:ref:`STS <minio-security-token-service>` credentials **cannot** access buckets or objects over FTP.
+To use STS credentials to authenticate, you must use an S3 API client or port.
 
 Authenticated users can access buckets and objects based on the :ref:`policies <minio-policy>` assigned to the user or parent user account.
 
 The FTP protocol does not require any of the ``admin:*`` `permissions <minio-policy-mc-admin-actions>`.
 The FTP protocols do not support any of the MinIO admin actions.
 
-Other MinIO Features
-~~~~~~~~~~~~~~~~~~~~
-
-The FTP protocol presents an additional means of accessing objects.
-The underlying MinIO service continues to work as expected otherwise.
-
-Other MinIO features, such as :ref:`server-side bucket replication <minio-bucket-replication-serverside>`, :ref:`site replication <minio-site-replication-overview>`, or :ref:`server-side encryption <minio-sse>`, continue to work as is.
-
 Prerequisites
 -------------
 
 - MinIO RELEASE.2023-04-20T17-56-55Z or later.
 - Enable an FTP or SFTP port for the server.
+- A port to use for the FTP commands and a range of ports to allow the FTP server to request to use for the data transfer.
 
 Procedure
 ---------
@@ -138,12 +111,15 @@ Procedure
    .. code-block:: shell
       :class: copyable
 
-      minio server http://server{1...4}/disk{1...4}                               \
-      --ftp="address=:8021" --ftp="passive-port-range=30000-40000"                \
-      --sftp="address=:8022" --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa" \
+      minio server http://server{1...4}/disk{1...4}        \
+      --ftp="address=:8021"                                \
+      --ftp="passive-port-range=30000-40000"               \
+      --sftp="address=:8022"                               \
+      --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa" \
       ...
     
    See the :mc-cmd:`minio server --ftp` and :mc-cmd:`minio server --sftp` for details on using these flags to start the MinIO service.
+   To connect to the an ftp port with TLS (``FTPS``), pass the ``tls-private-key`` and ``tls-public-cert`` keys and values, as well, unless using the MinIO default TLS keys.
 
    The output of the command should returns a response that includes something like the following:
 
@@ -167,7 +143,7 @@ The examples here use the ``ftp`` CLI client on a Linux system.
 Connect to an FTP Server
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example Connect to a server using ``minio`` credentials to list contents in a bucket named ``runner``
+The following example connect to a server using ``minio`` credentials to list contents in a bucket named ``runner``
 
 .. code-block:: shell
 
@@ -187,15 +163,37 @@ The following example Connect to a server using ``minio`` credentials to list co
    drwxrwxrwx 1 nobody nobody            0 Jan  1 00:00 testdir/
    ...
 
+Allow MinIO to Connect to an FTP Server over TLS (``FTPS``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following example starts MinIO with ``FTPS`` enabled.
+
+.. code-block:: shell
+   :class: copyable
+
+   minio server http://server{1...4}/disk{1...4} \
+   --ftp="address=:8021"                         \
+   --ftp="passive-port-range=30000-40000"        \
+   --ftp="tls-private-key=path/to/private.key"   \
+   --ftp="tls-public-cert=path/to/public.crt"    \
+   ...
+
 Download an Object
 ~~~~~~~~~~~~~~~~~~
 
-The example continues an ftp session already in progress.
-First, we list items in a bucket, then we download the contents of the bucket.
+This example lists items in a bucket, then downloads the contents of the bucket.
 
 .. code-block:: shell
 
-   ftp> ls runner/chunkdocs/metadata
+   > ftp localhost -P 8021
+   Connected to localhost.
+   220 Welcome to MinIO FTP Server
+   Name (localhost:user): minioadmin
+   331 User name ok, password required
+   Password:
+   230 Password ok, continue
+   Remote system type is UNIX.
+   Using binary mode to transfer files.ftp> ls runner/chunkdocs/metadata
    229 Entering Extended Passive Mode (|||44269|)
    150 Opening ASCII mode data connection for file list
    -rwxrwxrwx 1 nobody nobody           45 Apr  1 06:13 chunkdocs/metadata
@@ -216,10 +214,10 @@ Connect to an SFTP Server
 
 The following example connects to an SSH FTP server, lists the contents of a bucket named ``runner``, and downloads an object.
 
-.. code-block:: text
+.. code-block:: shell
 
-   > sftp -P 8022 minioadmin@localhost
-   minioadmin@localhost's password:
+   > sftp -P 8022 minio@localhost
+   minio@localhost's password:
    Connected to localhost.
    sftp> ls runner/
    chunkdocs  testdir
