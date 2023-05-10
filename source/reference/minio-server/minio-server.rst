@@ -171,6 +171,54 @@ The command accepts the following arguments:
    Omit to direct MinIO to generate a dynamic port at server startup. The
    MinIO server outputs the port to the system log.
 
+.. mc-cmd:: --ftp
+   :optional:
+   
+   Enable and configure an File Transfer Protocol (``FTP``) or File Transfer Protocol over SSL/TLS (``FTPS``) server.
+   Use multiple times to specify an address port or a passive port range of addresses as key-value pairs.
+
+   Valid keys:
+
+   - ``address``, which takes a single port to use for the server, typically ``8021``
+   - ``passive-port-range``, which restricts the range of potential ports the system assigns to FTP
+   - ``tls-private-key``, which takes the path to the user's private key for accessing the MinIO deployment by TLS
+   - ``tls-public-cert``, which takes the path to the certificate for accessing the MinIO deployment by TLS
+
+   MinIO uses the server's certificate chain automatically if TLS is already enabled.
+   You only need to specify a certificate and private key to terminate certificates with a different domain for your FTP server.
+
+   For example:
+
+   .. code-block:: shell
+      :class: copyable
+
+      minio server http://server{1...4}/disk{1...4} \
+      --ftp="address=:8021"                         \
+      --ftp="passive-port-range=30000-40000"        \
+      --ftp="tls-private-key=path/to/private.key"   \
+      --ftp="tls-public-cert=path/to/public.crt"    \
+      ...
+
+.. mc-cmd:: --sftp
+   :optional:
+
+   Enable and configure a SSH File Transfer Protocol (``SFTP``) server.
+   Use multiple times to specify an address port and the path to the ssh private key to use as key-value pairs.
+
+   Valid keys:
+
+   - ``address``, which takes a single port to use for the server, typically ``8022``
+   - ``ssh-private-key``, which takes the path to the user's private key file
+
+   For example:
+
+   .. code-block:: shell
+      :class: copyable
+
+      minio server http://server{1...4}/disk{1...4}                               \
+      --sftp="address=:8022" --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa" \
+      ...
+
 .. mc-cmd:: --certs-dir, -S
    :optional:
 
