@@ -221,7 +221,7 @@ You can validate the functionality by using the Admin REST API with the MinIO cl
 
 MinIO supports multiple methods for configuring Keycloak Admin API Support:
 
-- Using a terminal/shell and the :mc-cmd:`mc admin idp openid` command
+- Using a terminal/shell and the :mc:`mc admin idp openid` command
 - Using environment variables set prior to starting MinIO
 
 .. tab-set::

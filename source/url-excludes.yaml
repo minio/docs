@@ -8,6 +8,7 @@ excludes:
 - 'operations/install-deploy-manage/delete-minio-tenant.rst'
 - 'operations/install-deploy-manage/minio-operator-console.rst'
 - 'operations/deploy-manage-tenants.rst'
+- 'developers/sts-for-operator.rst'
 - 'reference/kubectl-minio-plugin.rst'
 - 'reference/kubectl-minio-plugin/kubectl-minio-delete.rst'
 - 'reference/kubectl-minio-plugin/kubectl-minio-init.rst'

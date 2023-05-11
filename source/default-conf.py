@@ -51,36 +51,37 @@ extensions = [
 # Helpful for sites we tend to make lots of references to.
 
 extlinks = {
-    'kube-docs'       : ('https://kubernetes.io/docs/%s', ''),
-    'minio-git'       : ('https://github.com/minio/%s',''),
-    'github'          : ('https://github.com/%s',''),
-    'kube-api'        : ('https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/%s',''),
-    'aws-docs'        : ('https://docs.aws.amazon.com/%s',''),
-    's3-docs'         : ('https://docs.aws.amazon.com/AmazonS3/latest/userguide/%s',''),
-    's3-api'          : ('https://docs.aws.amazon.com/AmazonS3/latest/API/%s',''),
-    'iam-docs'        : ('https://docs.aws.amazon.com/IAM/latest/UserGuide/%s',''),
-    'minio-release'   : ('https://github.com/minio/minio/releases/tag/%s',''),
-    'mc-release'      : ('https://github.com/minio/mc/releases/tag/%s',''),
-    'prometheus-docs' : ('https://prometheus.io/docs/%s',''),
-    'podman-docs'     : ('https://docs.podman.io/en/latest/%s',''),
-    'podman-git'      : ('https://github.com/containers/podman/%s',''),
-    'docker-docs'     : ('https://docs.docker.com/%s', ''),
-    'openshift-docs'  : ('https://docs.openshift.com/container-platform/4.11/%s', ''),
-    'influxdb-docs'   : ('https://docs.influxdata.com/influxdb/v2.4/%s',''),
-    'eks-docs'        : ('https://docs.aws.amazon.com/eks/latest/userguide/%s',''),
-    'minio-web'       : ('https://min.io/%s?ref=docs',''),
-    'minio-docs'      : ('https://min.io/docs/%s?ref=docs-internal',''),
-    'gke-docs'        : ('https://cloud.google.com/kubernetes-engine/docs/%s',''),
-    'gcp-docs'        : ('https://cloud.google.com/compute/docs/%s',''),
-    'gcs-docs'        : ('https://cloud.google.com/storage/docs/%s',''),
-    'aks-docs'        : ('https://learn.microsoft.com/en-us/azure/aks/%s',''),
-    'azure-docs'      : ('https://learn.microsoft.com/en-us/azure/%s',''),
+    'kube-docs'       : ('https://kubernetes.io/docs/%s', None),
+    'minio-git'       : ('https://github.com/minio/%s', None),
+    'github'          : ('https://github.com/%s', None),
+    'kube-api'        : ('https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/%s', None),
+    'aws-docs'        : ('https://docs.aws.amazon.com/%s', None),
+    's3-docs'         : ('https://docs.aws.amazon.com/AmazonS3/latest/userguide/%s', None),
+    's3-api'          : ('https://docs.aws.amazon.com/AmazonS3/latest/API/%s', None),
+    'iam-docs'        : ('https://docs.aws.amazon.com/IAM/latest/UserGuide/%s', None),
+    'minio-release'   : ('https://github.com/minio/minio/releases/tag/%s', None),
+    'mc-release'      : ('https://github.com/minio/mc/releases/tag/%s', None),
+    'prometheus-docs' : ('https://prometheus.io/docs/%s', None),
+    'podman-docs'     : ('https://docs.podman.io/en/latest/%s', None),
+    'podman-git'      : ('https://github.com/containers/podman/%s', None),
+    'docker-docs'     : ('https://docs.docker.com/%s', None),
+    'openshift-docs'  : ('https://docs.openshift.com/container-platform/4.11/%s', None),
+    'influxdb-docs'   : ('https://docs.influxdata.com/influxdb/v2.4/%s', None),
+    'eks-docs'        : ('https://docs.aws.amazon.com/eks/latest/userguide/%s', None),
+    'minio-web'       : ('https://min.io/%s?ref=docs', None),
+    'minio-docs'      : ('https://min.io/docs/%s?ref=docs-internal', None),
+    'gke-docs'        : ('https://cloud.google.com/kubernetes-engine/docs/%s', None),
+    'gcp-docs'        : ('https://cloud.google.com/compute/docs/%s', None),
+    'gcs-docs'        : ('https://cloud.google.com/storage/docs/%s', None),
+    'aks-docs'        : ('https://learn.microsoft.com/en-us/azure/aks/%s', None),
+    'azure-docs'      : ('https://learn.microsoft.com/en-us/azure/%s', None),
 
 }
 
 suppress_warnings = [
     'toc.excluded',
     'myst.header',
+    'myst.xref_missing',
     'ref.myst'
 ]
 
@@ -98,6 +99,8 @@ exclude_patterns = ['includes/*', '*-template.rst']
 # template for adding custom exclude paths if necessary for a given tag
 # html_baseurl is used by sphinx_sitemap extension to generate a sitemap.xml for each platform.
 # The sitemaps are combined in a sitemapindex.xml file at the root level.
+
+sitemap_url_scheme = "{link}"
 
 excludes = []
 
@@ -177,8 +180,10 @@ elif tags.has("aks"):
 exclude_patterns.extend(excludes)
 
 # MyST Parser Customization
-myst_gfm_only = True
+#myst_gfm_only = True
 myst_heading_anchors = 2
+myst_all_links_external=False
+myst_url_schemes={'http': None, 'https': None, 'mailto': None, 'ftp': None}
 
 # Copy-Button Customization
 

@@ -89,7 +89,7 @@ Use :mc-cmd:`mc admin user disable` to disable a user on a MinIO deployment.
 
    mc admin user disable ALIAS USERNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin user disable TARGET>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc admin user disable ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
 - Replace :mc-cmd:`USERNAME <mc admin user disable USERNAME>` with the username of the user to disable.
 

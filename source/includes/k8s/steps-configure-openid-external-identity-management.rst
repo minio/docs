@@ -100,7 +100,7 @@ Consider the following example policy that grants general S3 API access on only 
       ]
    }
 
-Use the :mc-cmd:`mc admin policy add` command to create a policy for use by an OIDC user:
+Use the :mc:`mc admin policy attach` command to create a policy for use by an OIDC user:
 
 .. code-block:: shell
    :class: copyable

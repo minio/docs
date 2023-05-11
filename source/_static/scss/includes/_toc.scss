@@ -73,6 +73,7 @@ div.topic {
 #table-of-contents {
     flex: 1;
     position: relative;
+    border: none;
 
     .topic-title {
         @include breakpoint-max(breakpoints(lg)) {

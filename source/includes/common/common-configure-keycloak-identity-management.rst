@@ -266,7 +266,7 @@ Select :guilabel:`Save` to apply the configuration.
 .. start-configure-keycloak-minio-cli
 
 
-You can use the :mc:`mc admin idp openid add` command to create a new configuration for the Keycloak service.
+You can use the :mc-cmd:`mc admin idp openid add` command to create a new configuration for the Keycloak service.
 The command takes all supported :ref:`OpenID Configuration Settings <minio-open-id-config-settings>`:
 
 .. code-block:: shell
