@@ -25,16 +25,16 @@ This page provides an overview of MinIO's availability and resiliency design and
    Community Support is best-effort only and has no SLAs around responsiveness.
 
 MinIO implements :ref:`erasure coding <minio-erasure-coding>` as the core component in providing availability and resiliency during drive or node-level failure events.
-   MinIO shards each object into data and :ref:`parity <minio-ec-parity>` blocks and distributes those blocks across a single :ref:`erasure set <minio-ec-erasure-set>`.
+   MinIO partitions each object into data and :ref:`parity <minio-ec-parity>` shards and distributes those shards across a single :ref:`erasure set <minio-ec-erasure-set>`.
 
    .. figure:: /images/availability/availability-erasure-sharding.svg
       :figwidth: 100%
       :align: center
-      :alt: Diagram of erasure coded object sharded into 12 data blocks and 4 parity blocks
+      :alt: Diagram of erasure coded object partitioned into 12 (twelve) data shards and 4 (four) parity shards
 
-      This simple one-node deployment has 16 drives in one erasure set.
-      Assuming default :ref:`parity <minio-ec-parity>` of ``EC:4``, MinIO shards the object into 4 parity blocks and 12 data blocks.
-      MinIO distributes these blocks evenly across each drive in the erasure set.
+      This small one-node deployment has 16 drives in one erasure set.
+      Assuming default :ref:`parity <minio-ec-parity>` of ``EC:4``, MinIO shards the object into 4 (four) parity shards and 12 (twelve) data shards.
+      MinIO distributes these shards evenly across each drive in the erasure set.
 
 MinIO uses a deterministic algorithm to select the erasure set for a given object.
    For each unique object namespace ``BUCKET/PREFIX/[PREFIX/...]/OBJECT.EXTENSION``, MinIO always selects the same erasure set for read/write operations.
@@ -54,16 +54,16 @@ MinIO requires :ref:`read and write quorum <minio-read-quorum>` to perform read 
    .. figure:: /images/availability/availability-erasure-sharding-degraded.svg
       :figwidth: 100%
       :align: center
-      :alt: Diagram of degraded erasure set, where two parity blocks replace two data blocks
+      :alt: Diagram of degraded erasure set, where two parity shards replace two data shards
 
       This node has two failed drives.
-      MinIO uses parity blocks to replace the lost data blocks automatically and serves the reconstructed object to the requesting client.
+      MinIO uses parity shards to replace the lost data shards automatically and serves the reconstructed object to the requesting client.
 
-   With the default parity of ``EC:4``, the deployment can tolerate the loss of 4 drives per erasure set and still serve read operations.
+   With the default parity of ``EC:4``, the deployment can tolerate the loss of 4 (four) drives per erasure set and still serve read operations.
 
 Write quorum depends on the configured parity and the size of the erasure set.
-   If parity is less than 1/2 the number of erasure set drives, write quorum equals parity and functions similarly to read quorum.
-   MinIO automatically "upgrades" the parity of objects written to a degraded erasure set to ensure that object can meet the same SLA as objects in healthy erasure sets.
+   If parity is less than 1/2 (half) the number of erasure set drives, write quorum equals parity and functions similarly to read quorum.
+   MinIO automatically "upgrades" the parity of objects written to a degraded erasure set to ensure that object can meet the same :abbr:`SLA (Service Level Agreement)` as objects in healthy erasure sets.
 
    .. figure:: /images/availability/availability-erasure-sharding-degraded-write.svg
       :figwidth: 100%
@@ -74,9 +74,9 @@ Write quorum depends on the configured parity and the size of the erasure set.
       MinIO writes the object with an upgraded parity of ``EC:6`` to ensure this object meets the same SLA as other objects.
 
    With the default parity of ``EC:4``, the deployment can tolerate the loss of 4 drives per erasure set and still serve write operations.
-   MinIO can perform "parity upgrade" up to 1/2 the drives in the erasure set.
+   MinIO can perform "parity upgrade" up to /2 the drives in the erasure set.
 
-If parity equals 1/2 the number of erasure set drives, write quorum equals parity + 1 to avoid data inconsistency due to "split brain" scenarios.
+If parity equals 1/2 (half) the number of erasure set drives, write quorum equals parity + 1 (one) to avoid data inconsistency due to "split brain" scenarios.
    For example, if exactly half the drives in the erasure set become isolated due to a network fault, MinIO would consider quorum lost as it cannot establish a N+1 group of drives for the write operation.
 
    .. figure:: /images/availability/availability-erasure-sharding-split-brain.svg
@@ -101,7 +101,7 @@ An erasure set which loses more drives than the configured parity has suffered d
       MinIO cannot recover any data stored on this erasure set.
 
 MinIO further mitigates the risk of erasure set failure by "striping" erasure set drives across each node in the pool.
-   MinIO automatically calculates the optimal erasure set size based on the number of nodes and drives.
+   MinIO automatically calculates the optimal erasure set size based on the number of nodes and drives, where the maximum set size is 16 (sixteen).
    It then selects one drive per node going across the pool for each erasure set, circling around if the erasure set stripe size is greater than the number of nodes.
    This topology improves resiliency to the loss of a single node, or even a storage controller on that node.
 
@@ -119,7 +119,7 @@ MinIO further mitigates the risk of erasure set failure by "striping" erasure se
    While losing one node would technically result in the loss of 8 drives, each erasure set would only lose one drive each.
    This maintains quorum despite the node downtime.
 
-Each erasure set is independent of all others in it's same pool.
+Each erasure set is independent of all others in the same pool.
    If one erasure set becomes completely degraded, MinIO can still perform read/write operations on other erasure sets.
 
    .. figure:: /images/availability/availability-erasure-set-failure.svg
@@ -134,7 +134,7 @@ Each erasure set is independent of all others in it's same pool.
    You must use :ref:`Site <minio-site-replication-overview>` or :ref:`Bucket <minio-bucket-replication>` replication to create a :abbr:`BC/DR (Business Continuity / Disaster Recovery)`-ready remote deployment for restoring lost data.
 
 For multi-pool MinIO deployments, each pool requires at least one erasure set maintaining read/write quorum to continue performing operations.
-   If one pool loses all erasure sets, MinIO can no longer determine whether whether a given read/write operation would have routed to that pool.
+   If one pool loses all erasure sets, MinIO can no longer determine whether a given read/write operation would have routed to that pool.
    MinIO therefore stops all I/O to the deployment, even if other pools remain operational.
 
    .. figure:: /images/availability/availability-pool-failure.svg
@@ -144,9 +144,13 @@ For multi-pool MinIO deployments, each pool requires at least one erasure set ma
 
       One pool in this deployment has completely failed.
       MinIO can no longer determine which pool or erasure set to route I/O to.
-      Since continuing operations could result in consistency or collision if the degraded pool were to return to stable, MinIO halts all I/O on the deployment.
+      Continued operations could produce an inconsistent state where an object and/or it's versions reside in different erasure sets.
+      MinIO therefore halts all :abbr:`I/O (Input/Output)` in the deployment until the pool recovers.
 
-   Administrators should restore the pool to normal operations, even if it requires formatting and replacing disks, to restore access to the deployment.
+   To restore access to the deployment, administrators must restore the pool to normal operations.
+   This may require formatting disks, replacing hardware, or replacing nodes depending on the severity of the failure.
+   See :ref:`minio-restore-hardware-failure` for more complete documentation.
+
    Use replicated remotes to restore the lost data to the deployment.
    All data stored on the healthy pools remain safe on disk.
 

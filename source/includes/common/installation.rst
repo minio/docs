@@ -12,7 +12,7 @@ Install and Deploy MinIO
 
 .. meta::
    :description: MinIO Deployment Topologies and Installation Instructions
-   :keywords: MinIO, Deploy, Topology, Distributed, Replication, Install
+   :keywords: MinIO, Deploy, Architecture, Topology, Distributed, Replication, Install
 
 .. container:: extlinks-video
 

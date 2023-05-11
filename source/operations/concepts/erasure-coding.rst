@@ -13,9 +13,9 @@ Erasure Coding
 MinIO Erasure Coding is a data redundancy and availability feature that allows MinIO deployments to automatically reconstruct objects on-the-fly despite the loss of multiple drives or nodes in the cluster. 
 Erasure Coding provides object-level healing with significantly less overhead than adjacent technologies such as RAID or replication. 
 
-MinIO shards each new object into data and parity blocks, where parity blocks support reconstruction of missing or corrupted data blocks. 
-MinIO writes these blocks to a single :ref:`erasure set <minio-ec-erasure-set>` in the deployment.
-Since erasure set drives are striped across the server pool, a given node contains only a portion of data or parity blocks for each object.
+MinIO partitions each new object into data and parity shards, where parity shards support reconstruction of missing or corrupted data shards. 
+MinIO writes these shards to a single :ref:`erasure set <minio-ec-erasure-set>` in the deployment.
+Since erasure set drives are striped across the server pool, a given node contains only a portion of data or parity shards for each object.
 MinIO can therefore tolerate the loss of multiple drives or nodes in the deployment depending on the configured parity and deployment topology.
 
 .. image:: /images/erasure-code.jpg
@@ -24,7 +24,7 @@ MinIO can therefore tolerate the loss of multiple drives or nodes in the deploym
    :align: center
 
 At maximum parity, MinIO can tolerate the loss of up to half the drives per erasure set (:math:`(N / 2) - 1`) and still perform read and write operations. 
-MinIO defaults to 4 parity blocks per object with tolerance for the loss of 4 drives per erasure set. 
+MinIO defaults to 4 parity shards per object with tolerance for the loss of 4 drives per erasure set. 
 For more complete information on selecting erasure code parity, see :ref:`minio-ec-parity`.
 
 Use the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator?ref=docs>`__ when planning and designing your MinIO deployment to explore the effect of erasure code settings on your intended topology.
@@ -35,7 +35,7 @@ Erasure Sets
 ------------
 
 An *Erasure Set* is a group of drives onto which MinIO writes erasure coded objects.
-MinIO randomly and uniformly distributes the data and parity blocks of a given object across the erasure set drives, where a given drive has no more than one block of either type per object (no overlap).
+MinIO randomly and uniformly distributes the data and parity shards of a given object across the erasure set drives, where a given drive has no more than one block of either type per object (no overlap).
  
 MinIO automatically calculates the number and size of Erasure Sets ("stripe size") based on the total number of nodes and drives in the :ref:`Server Pool <minio-intro-server-pool>`, where the minimum stripe size is 2 and the maximum stripe size is 16.
 All erasure sets in a given pool have the same stripe size, and MinIO never modifies nor allows modification of stripe size after initial configuration.
@@ -51,11 +51,11 @@ As a general guide, plan your topologies to have an even number of nodes and dri
 Erasure Code Parity (``EC:N``)
 ------------------------------
 
-MinIO uses a Reed-Solomon algorithm to split objects into data and parity blocks based on the :ref:`Erasure Set <minio-ec-erasure-set>` size in the deployment.
-For a given erasure set of size ``M``, MinIO splits objects into ``N`` parity blocks and ``M-N`` data blocks. 
+MinIO uses a Reed-Solomon algorithm to split objects into data and parity shards based on the :ref:`Erasure Set <minio-ec-erasure-set>` size in the deployment.
+For a given erasure set of size ``M``, MinIO splits objects into ``N`` parity shards and ``M-N`` data shards. 
 
-MinIO uses the ``EC:N`` notation to refer to the number of parity blocks (``N``) in the deployment. 
-MinIO defaults to ``EC:4`` or 4 parity blocks per object. 
+MinIO uses the ``EC:N`` notation to refer to the number of parity shards (``N``) in the deployment. 
+MinIO defaults to ``EC:4`` or 4 parity shards per object. 
 MinIO uses the same ``EC:N`` value for all erasure sets and :ref:`server pools <minio-intro-server-pool>` in the deployment.
 
 .. _minio-read-quorum:

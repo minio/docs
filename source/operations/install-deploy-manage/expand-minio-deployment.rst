@@ -14,10 +14,10 @@ MinIO supports expanding an existing distributed deployment by adding a new :ref
 Each Pool expands the total available storage capacity of the cluster.
 
 Expansion does not provide Business Continuity/Disaster Recovery (BC/DR)-grade protections.
-While each pools is an independent set of servers with distinct :ref:`erasure sets <minio-ec-erasure-set>` for availability, the complete loss of one pool results in MinIO stopping I/O for all pools in the deployment.
+While each pool is an independent set of servers with distinct :ref:`erasure sets <minio-ec-erasure-set>` for availability, the complete loss of one pool results in MinIO stopping I/O for all pools in the deployment.
 Similarly, an erasure set which loses quorum in one pool represents data loss of objects stored in that set, regardless of the number of other erasure sets or pools.
 
-Use :ref:`site replication <minio-site-replication-overview>` to provide BC-DR grade failover and recovery support for your single or multi-pool MinIO deployments.
+To provide BC-DR grade failover and recovery support for your single or multi-pool MinIO deployments, use :ref:`site replication <minio-site-replication-overview>`.
 
 The procedure on this page expands an existing :ref:`distributed <deploy-minio-distributed>` MinIO deployment with an additional server pool. 
 

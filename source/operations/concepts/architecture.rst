@@ -17,7 +17,7 @@ Deployment Architecture
 This page provides an overview of MinIO deployment architectures from a production perspective.
 For information on specific hardware or software configurations, see:
 
-- :ref:`Hardware checklists <minio-hardware-checklist>`
+- :ref:`Hardware Checklist <minio-hardware-checklist>`
 - :ref:`Security Checklist <minio-security-checklist>`
 - :ref:`Software Checklist <minio-software-checklists>`
 - :ref:`Thresholds and Limits <minio-server-limits>`
@@ -37,21 +37,21 @@ A production MinIO deployment consists of at least 4 MinIO hosts with homogeneou
 
 MinIO provides best performance when using direct-attached storage (DAS), such as NVMe or SSD drives attached to a PCI-E controller board on the host machine. 
    Storage controllers should present XFS-formatted drives in "Just a Bunch of Drives" (JBOD) configurations with no RAID, pooling, or other hardware/software resiliency layers.
-   Caching layers, either at the drive or the controller layer, also typically lead to unpredictable performance as I/O spikes and falls as the cache fills and clears. 
+   MinIO recommends against caching, either at the drive or the controller layer. 
+   Either type of caching can cause :abbr:`I/O (Input / Output)` spikes as the cache fills and clears, resulting in unpredictable performance. 
 
    .. figure:: /images/architecture/architecture-one-node-DAS.svg
       :figwidth: 100%
       :alt: MinIO Server diagram of Direct-Attached Storage via SAS to a PCI-E Storage Controller
       :align: center
 
-      Each SSD connects via SAS to a PCI-E-attached storage controller operating in HBA mode
+      Each SSD connects by SAS to a PCI-E-attached storage controller operating in HBA mode
 
 MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-erasure-set>`. 
-   Erasure sets provide the foundation component of MinIO availability and resiliency. 
+   Erasure sets are the foundational component of MinIO :ref:`availability and resiliency <minio_availability-resiliency>`. 
    MinIO stripes erasure sets across the nodes in the pool to maintain even distribution of erasure set drives.
    MinIO then shards objects into data and parity blocks based on the deployment :ref:`parity <minio-ec-parity>` and distributes them across an erasure set.
 
-   Erasure sets provide the foundation component of MinIO :ref:`availability and resiliency <minio_availability-resiliency>`.
    For a more complete discussion of MinIO redundancy and healing, see :ref:`minio-erasure-coding`.
 
    .. figure:: /images/architecture/architecture-erasure-set-shard.svg
@@ -59,7 +59,7 @@ MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-
       :alt: Diagram of object being sharded into 4 data and 4 parity blocks, distributed across 8 drives
       :align: center
 
-      MinIO shards the object into 4 data and 4 parity blocks, distributing them across the drives in the erasure set. 
+      With the default parity of ``EC:4``, MinIO shards the object into 4 data and 4 parity blocks, distributing them across the drives in the erasure set. 
 
 MinIO uses a deterministic algorithm to select the erasure set for a given object.
    For each unique object namespace ``BUCKET/PREFIX/[PREFIX/...]/OBJECT.EXTENSION``, MinIO always selects the same erasure set for read/write operations.
@@ -73,7 +73,7 @@ MinIO uses a deterministic algorithm to select the erasure set for a given objec
       MinIO reconstructs objects from data or parity shards transparently before returning the object to the requesting client.
 
 Each MinIO server has a complete picture of the distributed topology, such that an application can connect and direct operations against any node in the deployment.
-   The MinIO node automatically handles routing internal requests to other nodes in the deployment *and* returning the final response to the client.
+   The MinIO responding node automatically handles routing internal requests to other nodes in the deployment *and* returning the final response to the client.
 
    Applications typically should not manage those connections, as any changes to the deployment topology would require application updates.
    Production environments should instead deploy a load balancer or similar network control plane component to manage connections to the MinIO deployment.
@@ -85,14 +85,14 @@ Each MinIO server has a complete picture of the distributed topology, such that 
       :align: center
 
       The load balancer routes the request to any node in the deployment.
-      The node which receives the requests handles any internode requests thereafter.
+      The receiving node handles any internode requests thereafter.
 
 You can expand a MinIO deployment's available storage through :ref:`pool expansion <expand-minio-distributed>`.
    Each pool consists of an independent group of nodes with their own erasure sets.
    MinIO must query each pool to determine the correct erasure set to which it directs read and write operations, such that each additional pool adds increased internode traffic per call.
    The pool which contains the correct erasure set then responds to the operation, remaining entirely transparent to the application.
 
-   If you modify the MinIO topology through pool expansion, you can update your applications by modifying the load balancer to include the new nodes.
+   If you modify the MinIO topology through pool expansion, you can update your applications by modifying the load balancer to include the new pool's nodes.
    This ensures even distribution of requests across all pools, while applications continue using the single load balancer URL for MinIO operations.
 
    .. figure:: /images/architecture/architecture-load-balancer-multi-pool.svg
@@ -101,11 +101,11 @@ You can expand a MinIO deployment's available storage through :ref:`pool expansi
       :align: center
 
       The PUT request requires checking each pool for the correct erasure set.
-      Once identified, MinIO shards the object and distributes the data and parity across the set.
+      Once identified, MinIO partitions the object and distributes the data and parity shards across the appropriate set.
 
 Client applications can use any S3-compatible SDK or library to interact with the MinIO deployment.
-   MinIO publishes it's own :ref:`drivers <minio-drivers>` specifically intended for use with S3-compatible deployments.
-   Regardless of the driver, the S3 API uses HTTP methods like GET and POST for all operations.
+   MinIO publishes its own :ref:`drivers <minio-drivers>` specifically intended for use with S3-compatible deployments.
+   Regardless of the driver, the S3 API uses HTTP methods like ``GET`` and ``POST`` for all operations.
    Neither MinIO nor S3 implements proprietary wire protocols or other low-level interfaces for normal operations.
 
    .. figure:: /images/architecture/architecture-multiple-clients.svg
@@ -118,13 +118,13 @@ Client applications can use any S3-compatible SDK or library to interact with th
    AWS signature calculation uses the client-provided headers, such that any modification to those headers by load balancers, proxies, security programs, or other components can result in signature mismatch errors.
    Ensure any such intermediate components support pass-through of unaltered headers from client to server.
 
-   The complexity of signature calculation typically makes interfacing via CURL or similar REST clients difficult or impractical. 
+   The complexity of signature calculation typically makes interfacing via ``curl`` or similar REST clients difficult or impractical. 
    MinIO recommends using S3-compatible drivers which perform the signature calculation automatically as part of operations.
 
 Replicated MinIO Deployments
 ----------------------------
 
-MinIO :ref:`site replication <minio-site-replication-overview>` provides support synchronizing distinct independent deployments.
+MinIO :ref:`site replication <minio-site-replication-overview>` provides support for synchronizing distinct independent deployments.
    You can deploy peer sites in different racks, datacenters, or geographic regions to support functions like :abbr:`BC/DR (Business Continuity / Disaster Recovery)` or geo-local read/write performance in a globally distributed MinIO object store.
 
    .. figure:: /images/architecture/architecture-multi-site.svg
@@ -148,14 +148,14 @@ Each peer site consists of an independent set of MinIO hosts, ideally having mat
 
 Replication performance primarily depends on the network latency between each peer site.
    With geographically distributed peer sites, high latency between sites can result in significant replication lag.
-   This can compound with workloads that are near or at the deployment's overall performance capacity, as the replication process itself requires 
+   This can compound with workloads that are near or at the deployment's overall performance capacity, as the replication process itself requires sufficient free :abbr:`I/O (Input / Output)` to synchronize objects.
 
    .. figure:: /images/architecture/architecture-multi-site-latency.svg
       :figwidth: 100%
       :alt: Diagram of a multi-site deployment with latency between sites
 
-      In this peer configuration, the latency between Site A and it's peer sites is 100ms.
-      The earliest point in time in which the object fully synchronizes to all sites is at least 110ms.
+      In this peer configuration, the latency between Site A and its peer sites is 100ms.
+      The soonest the object fully synchronizes to all sites is at least 110ms.
 
 Deploying a global load balancer or similar network appliance with support for site-to-site failover protocols is critical to the functionality of multi-site deployments.
    The load balancer should support a health probe/check setting to detect the failure of one site and automatically redirect applications to any remaining healthy peer.
@@ -168,8 +168,7 @@ Deploying a global load balancer or similar network appliance with support for s
       The load balancer automatically routes requests to the remaining healthy peer site.
 
    The load balancer should meet the same requirements as single-site deployments regarding connection balancing and header preservation.
-   Once all data synchronizes, you can restore normal connectivity to that site.
-   Depending on the amount of replication lag, latency between sites, and overall workload IO, you may need to temporarily stop write operations to allow the sites to completely catch up.tions to other sites in the deployment.
+   MinIO replication handles transient failures by queuing objects for replication.
 
 MinIO replication can automatically heal a site that has partial data loss due to transient or sustained downtime. 
    If a peer site completely fails, you can remove that site from the configuration entirely.
@@ -186,4 +185,4 @@ MinIO replication can automatically heal a site that has partial data loss due t
       MinIO automatically works through the replication queue to catch the site back up.
 
    Once all data synchronizes, you can restore normal connectivity to that site.
-   Depending on the amount of replication lag, latency between sites and overall workload IO, you may need to temporarily stop write operations to allow the sites to completely catch up.
+   Depending on the amount of replication lag, latency between sites and overall workload :abbr:`I/O (Input / Output)`, you may need to temporarily stop write operations to allow the sites to completely catch up.
