@@ -17,8 +17,8 @@ Syntax
 
 .. start-mc-find-desc
 
-The :mc:`mc find` command supports searching for objects on a MinIO
-deployment. You can also use the command to search for files on a filesystem. 
+The :mc:`mc find` command supports searching for objects on a MinIO deployment. 
+You can also use the command to search for files on a filesystem. 
 
 .. end-mc-find-desc
 
@@ -46,6 +46,7 @@ deployment. You can also use the command to search for files on a filesystem.
                           [--ignore "string"]     \
                           [--larger "string"]     \
                           [--maxdepth "string"]   \
+                          [--metadata "string"]   \
                           [--name "string"]       \
                           [--newer-than "string"] \
                           [--older-than "string"] \
@@ -53,6 +54,7 @@ deployment. You can also use the command to search for files on a filesystem.
                           [--print "string"]      \
                           [--regex "string"]      \
                           [--smaller "string"]    \
+                          [--tags "string"]`      \
                           [--versions]            \
                           [--watch]               \
                           ALIAS
@@ -106,6 +108,22 @@ Parameters
 
    Limits directory navigation to the specified depth.
 
+.. mc-cmd:: --metadata
+   :optional:
+
+   .. versionadded:: mc RELEASE.2023-04-12T02-21-51Z
+
+   **For use with MinIO deployments only.**
+
+   Match files with metadata that matches a specified ``key=value``.
+   Use the format ``--metadata="KEY=value"``.
+
+   You can pass a key with an empty value.
+   In that case, ``mc find`` matches objects that do not have the metadata key or where the metadata key's value is empty.
+
+   You can use the flag multiple times to match files for additional metadata keys.
+   To return, an object must have matching values for all metadata keys.
+
 .. mc-cmd:: --name
    :optional:
 
@@ -144,10 +162,26 @@ Parameters
    Returns objects or the contents of directories whose names match
    the specified PCRE regex pattern.
 
+.. mc-cmd:: --tags
+   :optional:
+
+   .. versionadded:: mc RELEASE.2023-04-12T02-21-51Z
+
+   **For use with MinIO deployments only.**
+
+   Match files with a tag that matches a specified `RE2 RegEx pattern <https://github.com/google/re2/wiki/Syntax>`__.
+   Use the format ``--tag="KEY=regexValue"``.
+
+   You can pass a key with an empty value.
+   In that case, ``mc find`` matches objects that do not have the metadata key or where the metadata key's value is empty.
+
+   You can use the flag multiple times to match files for additional tags.
+   To return, an object must have matching values for all tags.
+
 .. mc-cmd:: --smaller
    :optional:
 
-   Match all objects smaller than the specifized size in 
+   Match all objects smaller than the specified size in 
    :ref:`units <mc-find-units>`.
 
 .. mc-cmd:: --versions
@@ -187,7 +221,7 @@ Find a Specific Object in a Bucket
 
 - Replace :mc-cmd:`NAME <mc find --name>` with the object.
 
-Find Objects with File Extention in Bucket
+Find Objects with File Extension in Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: shell
@@ -220,8 +254,7 @@ output of :mc:`mc find` to an S3-compatible host.
 - Replace :mc-cmd:`FILEPATH <mc find ALIAS>` with the full file path to the
   directory to search.
 
-- Replace :mc-cmd:`EXTENSION <mc find --name>` with the file extention of the 
-  object.
+- Replace :mc-cmd:`EXTENSION <mc find --name>` with the file extension of the object.
 
 - Replace :mc-cmd:`ALIAS <mc find ALIAS>` with the 
   :mc:`alias <mc alias>` of the S3-compatible host.
@@ -236,6 +269,50 @@ include the :mc-cmd:`~mc find --watch` argument:
    :class: copyable
 
    mc find --watch FILEPATH --name "*.EXTENSION" --exec "mc cp {} ALIAS/PATH"
+
+Find Objects with a Matching Tag
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note:: 
+   
+   Tag matching is only available for use on MinIO deployments.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc find --tags="key=v*" ALIAS/BUCKET/
+
+- Replace ``key`` with the name of a tag key to match.
+ 
+- Replace ``v*`` with the RE2 Regular Expression to evaluate against.
+
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of the MinIO deployment.
+
+- Replace ``BUCKET`` with the bucket or prefix to search.
+
+You can add additional ``--tags="key=RegExpression"`` flags to match.
+Matching objects must match all included tags.
+
+Find Objects with Matching Metadata
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note:: 
+   
+   Metadata matching is only available for use on MinIO deployments.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc find --json --metadata="content-type=text/csv" ALIAS/BUCKET/
+
+- Replace ``content-type=text/csv`` with the a key-value pair of the metadata field and value to match.
+ 
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of the MinIO deployment.
+
+- Replace ``BUCKET`` with the bucket or prefix to search.
+
+You can add additional ``--tags="metadata=value"`` flags to match.
+Matching objects must match all included metadata fields.
 
 Behavior
 --------

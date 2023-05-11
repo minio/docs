@@ -129,7 +129,6 @@ Syntax
       Then include one or more additional :ref:`aliases <alias>` to add to the existing site replication.
       The deployments to add must be empty.
 
-
 .. mc-cmd:: update
    :fullpath:
 
@@ -157,10 +156,11 @@ Syntax
 
          .. code-block:: shell
 
-            mc [GLOBALFLAGS] admin replicate update                       \
+            mc [GLOBALFLAGS] admin replicate update                     \
                                         ALIAS                           \
                                         --deployment-id [deploymentID]  \
-                                        --endpoint [newEndpoint]
+                                        --endpoint [newEndpoint]        \
+                                        --sync ["enable" | "disable"]
     
    .. mc-cmd:: ALIAS
       :required:
