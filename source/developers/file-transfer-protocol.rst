@@ -182,7 +182,7 @@ The following example starts MinIO with ``FTPS`` enabled.
 .. note:: 
 
    Omit ``tls-private-key`` and ``tls-public-cert`` to use the MinIO default TLS keys for ``FTPS``.
-   For more information on using TLS with MinIO, see :ref:`<minio-tls>`.
+   For more information, see the :ref:`TLS on MinIO documentation <minio-tls>`.
 
 Download an Object over FTP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
