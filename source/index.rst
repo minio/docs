@@ -173,6 +173,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs>
       Security Token Service (STS) <https://min.io/docs/minio/linux/developers/security-token-service.html?ref=docs>
       Object Lambda <https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html?ref=docs>
+      File Transfer Protocol <https://min.io/docs/minio/linux/developers/file-transfer-protocol.html?ref=docs>
       MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
       MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
       Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
@@ -186,6 +187,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       /developers/minio-drivers
       /developers/security-token-service
       /developers/transforms-with-object-lambda
+      /developers/file-transfer-protocol
       /reference/minio-mc
       /reference/minio-mc-admin
       /reference/minio-mc-deprecated
@@ -201,6 +203,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs>
       /developers/sts-for-operator
       Object Lambda <https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html?ref=docs>
+      File Transfer Protocol <https://min.io/docs/minio/linux/developers/file-transfer-protocol.html?ref=docs>
       MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
       MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
       Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>

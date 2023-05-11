@@ -171,6 +171,62 @@ The command accepts the following arguments:
    Omit to direct MinIO to generate a dynamic port at server startup. The
    MinIO server outputs the port to the system log.
 
+.. mc-cmd:: --ftp
+   :optional:
+   
+   Enable and configure a File Transfer Protocol (``FTP``) or File Transfer Protocol over SSL/TLS (``FTPS``) server.
+   Use this flag multiple times to specify an address port, a passive port range of addresses, or a TLS certificate and key as key-value pairs.
+
+   Valid keys:
+
+   - ``address``, which takes a single port to use for the server, typically ``8021``
+   
+   - _(Optional)_ ``passive-port-range``, which restricts the range of potential ports the server can use to transfer data, such as when tight firewall rules limit the port the FTP server can request for the connection
+   
+   - _(Optional)_ ``tls-private-key``, which takes the path to the user's private key for accessing the MinIO deployment by TLS
+     
+     Use with ``tls-public-cert``.
+   
+   - _(Optional)_ ``tls-public-cert``, which takes the path to the certificate for accessing the MinIO deployment by TLS
+     
+     Use with ``tls-private-key``.
+
+   For MinIO deployments with TLS enabled, omit ``tls-private-key`` and ``tls-public-key`` to direct MinIO to use the default TLS keys for the MinIO deployment. 
+   See :ref:`minio-tls` for more information.
+   You only need to specify a certificate and private key to a different set of TLS certificate and key than the MinIO default (for example, to use a different domain).
+
+   For example:
+
+   .. code-block:: shell
+      :class: copyable
+
+      minio server http://server{1...4}/disk{1...4} \
+      --ftp="address=:8021"                         \
+      --ftp="passive-port-range=30000-40000"        \
+      --ftp="tls-private-key=path/to/private.key"   \
+      --ftp="tls-public-cert=path/to/public.crt"    \
+      ...
+
+.. mc-cmd:: --sftp
+   :optional:
+
+   Enable and configure a SSH File Transfer Protocol (``SFTP``) server.
+   Use multiple times to specify an address port and the path to the ssh private key to use as key-value pairs.
+
+   Valid keys:
+
+   - ``address``, which takes a single port to use for the server, typically ``8022``
+   - ``ssh-private-key``, which takes the path to the user's private key file
+
+   For example:
+
+   .. code-block:: shell
+      :class: copyable
+
+      minio server http://server{1...4}/disk{1...4}                               \
+      --sftp="address=:8022" --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa" \
+      ...
+
 .. mc-cmd:: --certs-dir, -S
    :optional:
 
