@@ -174,19 +174,26 @@ The command accepts the following arguments:
 .. mc-cmd:: --ftp
    :optional:
    
-   Enable and configure an File Transfer Protocol (``FTP``) or File Transfer Protocol over SSL/TLS (``FTPS``) server.
-   Use multiple times to specify an address port or a passive port range of addresses as key-value pairs.
+   Enable and configure a File Transfer Protocol (``FTP``) or File Transfer Protocol over SSL/TLS (``FTPS``) server.
+   Use this flag multiple times to specify an address port, a passive port range of addresses, or a TLS certificate and key as key-value pairs.
 
    Valid keys:
 
    - ``address``, which takes a single port to use for the server, typically ``8021``
+   
    - _(Optional)_ ``passive-port-range``, which restricts the range of potential ports the server can use to transfer data, such as when tight firewall rules limit the port the FTP server can request for the connection
+   
    - _(Optional)_ ``tls-private-key``, which takes the path to the user's private key for accessing the MinIO deployment by TLS
+     
+     Use with ``tls-public-cert``.
+   
    - _(Optional)_ ``tls-public-cert``, which takes the path to the certificate for accessing the MinIO deployment by TLS
+     
+     Use with ``tls-private-key``.
 
    For MinIO deployments with TLS enabled, omit ``tls-private-key`` and ``tls-public-key`` to direct MinIO to use the default TLS keys for the MinIO deployment. 
    See :ref:`minio-tls` for more information.
-   You only need to specify a certificate and private key to terminate certificates with a different domain for your FTP server.
+   You only need to specify a certificate and private key to a different set of TLS certificate and key than the MinIO default (for example, to use a different domain).
 
    For example:
 

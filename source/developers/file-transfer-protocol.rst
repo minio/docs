@@ -121,14 +121,15 @@ Procedure
    See the :mc-cmd:`minio server --ftp` and :mc-cmd:`minio server --sftp` for details on using these flags to start the MinIO service.
    To connect to the an ftp port with TLS (``FTPS``), pass the ``tls-private-key`` and ``tls-public-cert`` keys and values, as well, unless using the MinIO default TLS keys.
 
-   The output of the command should returns a response that includes something like the following:
+   The output of the command should return a response that resembles the following:
 
    .. code-block:: shell
 
       MinIO FTP Server listening on :8021
       MinIO SFTP Server listening on :8022
 
-2. Use your preferred ftp client to connect to the MinIO deployment with the user whose policies you want to use to access buckets and objects.
+2. Use your preferred ftp client to connect to the MinIO deployment.
+   You must connect as a user whose :ref:`policies <minio-policy>` allow access to the desired buckets and objects.
 
    The specifics of connecting to the MinIO deployment depend on your FTP client.
    Refer to the documentation for your client.
@@ -140,17 +141,17 @@ Examples
 
 The examples here use the ``ftp`` CLI client on a Linux system.
 
-Connect to an FTP Server
-~~~~~~~~~~~~~~~~~~~~~~~~
+Connect to MinIO Using FTP
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example connect to a server using ``minio`` credentials to list contents in a bucket named ``runner``
+The following example connects to a server using ``minio`` credentials to list contents in a bucket named ``runner``
 
 .. code-block:: shell
 
    > ftp localhost -P 8021
    Connected to localhost.
    220 Welcome to MinIO FTP Server
-   Name (localhost:user): minioadmin
+   Name (localhost:user): minio
    331 User name ok, password required
    Password:
    230 Password ok, continue
@@ -163,8 +164,8 @@ The following example connect to a server using ``minio`` credentials to list co
    drwxrwxrwx 1 nobody nobody            0 Jan  1 00:00 testdir/
    ...
 
-Allow MinIO to Connect to an FTP Server over TLS (``FTPS``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Start MinIO with FTP over TLS (``FTPS``) Enabled
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example starts MinIO with ``FTPS`` enabled.
 
@@ -178,8 +179,13 @@ The following example starts MinIO with ``FTPS`` enabled.
    --ftp="tls-public-cert=path/to/public.crt"    \
    ...
 
-Download an Object
-~~~~~~~~~~~~~~~~~~
+.. note:: 
+
+   Omit ``tls-private-key`` and ``tls-public-cert`` to use the MinIO default TLS keys for ``FTPS``.
+   For more information on using TLS with MinIO, see :ref:`<minio-tls>`.
+
+Download an Object over FTP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This example lists items in a bucket, then downloads the contents of the bucket.
 
@@ -188,7 +194,7 @@ This example lists items in a bucket, then downloads the contents of the bucket.
    > ftp localhost -P 8021
    Connected to localhost.
    220 Welcome to MinIO FTP Server
-   Name (localhost:user): minioadmin
+   Name (localhost:user): minio
    331 User name ok, password required
    Password:
    230 Password ok, continue
@@ -209,8 +215,8 @@ This example lists items in a bucket, then downloads the contents of the bucket.
    45 bytes received in 00:00 (3.55 KiB/s)
    ...
 
-Connect to an SFTP Server
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Connect to MinIO Using SFTP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example connects to an SSH FTP server, lists the contents of a bucket named ``runner``, and downloads an object.
 
