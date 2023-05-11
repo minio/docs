@@ -410,6 +410,11 @@ S3 Metrics
 
 .. metric:: minio_s3_requests_errors_total
 
+   .. versionchanged:: MinIO RELEASE.2023-04-28T18-11-17Z 
+
+      This metric has been removed.
+      Use ``minio_s3_requests_4xx_errors_total`` and ``minio_s3_requests_5xx_errors_total`` instead.
+
    Total number of S3 requests with 4xx and 5xx errors.
 
 .. metric:: minio_s3_requests_4xx_errors_total
@@ -490,6 +495,10 @@ Internal Metrics
 .. metric:: minio_inter_node_traffic_dial_errors
 
    Total number of internode TCP dial timeouts and errors.
+
+   .. versionadded:: MinIO RELEASE.2023-04-28T18-11-17Z 
+
+      This metric is available on the MinIO Dashboard if :ref:`Prometheus <minio-metrics-collect-using-prometheus>` and Grafana are enabled.
 
 .. metric:: minio_inter_node_traffic_errors_total
 
