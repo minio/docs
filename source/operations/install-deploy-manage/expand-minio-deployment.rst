@@ -10,24 +10,16 @@ Expand a Distributed MinIO Deployment
    :local:
    :depth: 1
 
-A distributed MinIO deployment consists of 4 or more drives/volumes managed by
-one or more :mc:`minio server` process, where the processes manage pooling the
-compute and storage resources into a single aggregated object storage resource.
-Each MinIO server has a complete picture of the distributed topology, such that
-an application can connect to any node in the deployment and perform S3
-operations.
+MinIO supports expanding an existing distributed deployment by adding a new :ref:`Server Pool <minio-intro-server-pool>`. 
+Each Pool expands the total available storage capacity of the cluster.
 
-MinIO supports expanding an existing distributed deployment by adding a new
-:ref:`Server Pool <minio-intro-server-pool>`. Each Pool expands the total
-available storage capacity of the cluster while maintaining the overall
-:ref:`availability <minio-erasure-coding>` of the cluster. Each Pool is its
-own failure domain, where the loss of one or more drives or nodes in that pool
-does not effect the availability of other pools in the deployment.
+Expansion does not provide Business Continuity/Disaster Recovery (BC/DR)-grade protections.
+While each pool is an independent set of servers with distinct :ref:`erasure sets <minio-ec-erasure-set>` for availability, the complete loss of one pool results in MinIO stopping I/O for all pools in the deployment.
+Similarly, an erasure set which loses quorum in one pool represents data loss of objects stored in that set, regardless of the number of other erasure sets or pools.
 
-The procedure on this page expands an existing 
-:ref:`distributed <deploy-minio-distributed>` MinIO deployment with an
-additional server pool. 
+To provide BC-DR grade failover and recovery support for your single or multi-pool MinIO deployments, use :ref:`site replication <minio-site-replication-overview>`.
 
+The procedure on this page expands an existing :ref:`distributed <deploy-minio-distributed>` MinIO deployment with an additional server pool. 
 
 .. _expand-minio-distributed-prereqs:
 

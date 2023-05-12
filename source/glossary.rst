@@ -239,6 +239,12 @@ Glossary
      Renamed to :term:`access keys`.
      A MinIO deployment or tenant user account with limited account typically used with API calls.
 
+   shard
+   shards
+     A portion of an object after being :term:`erasure coded <erasure coding>` by MinIO.
+     Each "shard" represents either data or parity for MinIO to use for reconstructing objects on read requests.
+
+     For more detailed information, see :ref:`minio-erasure-coding`.
 
    single-node multi-drive
    SNMD
