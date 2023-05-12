@@ -22,7 +22,7 @@ MinIO Pre-requisites
    * - :octicon:`circle`
      - Servers running a Linux operating system with a 5.x+ kernel, such as Red Hat Enterprise Linux (RHEL) 9 or Ubuntu LTS 20.04+
 
-   * - :opticon:`circle`
+   * - :octicon:`circle`
      - A method to synchronize time servers across nodes, such as with ``ntp``, ``timedatectl`` or ``timesyncd``.
        The method to use varies by operating system.
        Check with your operating system's documentation for how to synchronize time with a time server.

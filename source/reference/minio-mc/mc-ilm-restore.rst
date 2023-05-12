@@ -26,6 +26,11 @@ Use this command to allow applications to access a tiered object through the
 MinIO deployment (e.g. "hot tier"). The archived object remains on the remote
 tier, while the temporary copy becomes ``HEAD`` for that object.
 
+.. versionadded:: mc RELEASE.2023-04-12T02-21-51Z
+
+   Use :mc:`mc stat` to display whether a restored object reads from the local temporary copy or the remote tier.
+   Restored objects read from the local copy show a status of ``Ongoing : true``.
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE
