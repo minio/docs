@@ -77,7 +77,7 @@ Parameters
 
       mc find play/mydata/
 
-   For objects on a filesyste, specify the full path to search. 
+   For objects on a filesystem, specify the full path to search.
    For example:
 
    .. code-block:: shell
@@ -115,13 +115,13 @@ Parameters
 
    **For use with MinIO deployments only.**
 
-   Match files with metadata that matches a specified ``key=value``.
+   Return objects with metadata that matches a specified ``key=value``.
    Use the format ``--metadata="KEY=value"``.
 
    You can pass a key with an empty value.
    In that case, ``mc find`` matches objects that do not have the metadata key or where the metadata key's value is empty.
 
-   You can use the flag multiple times to match files for additional metadata keys.
+   You can use the flag multiple times to match objects for additional metadata keys.
    To return, an object must have matching values for all metadata keys.
 
 .. mc-cmd:: --name
@@ -169,13 +169,13 @@ Parameters
 
    **For use with MinIO deployments only.**
 
-   Match files with a tag that matches a specified `RE2 RegEx pattern <https://github.com/google/re2/wiki/Syntax>`__.
+   Return objects with a tag that matches a specified `RE2 RegEx pattern <https://github.com/google/re2/wiki/Syntax>`__.
    Use the format ``--tag="KEY=regexValue"``.
 
    You can pass a key with an empty value.
    In that case, ``mc find`` matches objects that do not have the metadata key or where the metadata key's value is empty.
 
-   You can use the flag multiple times to match files for additional tags.
+   You can use the flag multiple times to match objects for additional tags.
    To return, an object must have matching values for all tags.
 
 .. mc-cmd:: --smaller
@@ -235,8 +235,7 @@ Find Objects with File Extension in Bucket
 - Replace :mc-cmd:`PATH <mc find ALIAS>` with the path to a bucket on the
   S3-compatible host.
 
-- Replace :mc-cmd:`EXTENSION <mc find --name>` with the file extention of the 
-  object.
+- Replace :mc-cmd:`EXTENSION <mc find --name>` with the file extension of the object.
 
 Find All Matching Files and Copy To S3 Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -344,7 +343,7 @@ specified size value:
      - GB (Gigabyte, 1000 Megabytes)
 
    * - ``t``
-     - TB (Terrabyte, 1000 Gigabytes)
+     - TB (Terabyte, 1000 Gigabytes)
 
    * - ``ki``
      - KiB (Kibibyte, 1024 Bites)
