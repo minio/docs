@@ -56,7 +56,7 @@ MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-
 
    .. figure:: /images/architecture/architecture-erasure-set-shard.svg
       :figwidth: 100%
-      :alt: Diagram of object being sharded into 4 data and 4 parity blocks, distributed across 8 drives
+      :alt: Diagram of object being sharded into four data and four parity blocks, distributed across eight drives
       :align: center
 
       With the default parity of ``EC:4``, MinIO shards the object into 4 data and 4 parity blocks, distributing them across the drives in the erasure set. 
@@ -81,7 +81,7 @@ Each MinIO server has a complete picture of the distributed topology, such that 
 
    .. figure:: /images/architecture/architecture-load-balancer-8-node.svg
       :figwidth: 100%
-      :alt: Diagram of an 8-node MinIO deployment behind a load balancer
+      :alt: Diagram of an eight node MinIO deployment behind a load balancer
       :align: center
 
       The load balancer routes the request to any node in the deployment.

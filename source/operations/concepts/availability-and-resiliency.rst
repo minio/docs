@@ -30,7 +30,7 @@ MinIO implements :ref:`erasure coding <minio-erasure-coding>` as the core compon
    .. figure:: /images/availability/availability-erasure-sharding.svg
       :figwidth: 100%
       :align: center
-      :alt: Diagram of erasure coded object partitioned into 12 (twelve) data shards and 4 (four) parity shards
+      :alt: Diagram of erasure coded object partitioned into twelve data shards and four parity shards
 
       This small one-node deployment has 16 drives in one erasure set.
       Assuming default :ref:`parity <minio-ec-parity>` of ``EC:4``, MinIO shards the object into 4 (four) parity shards and 12 (twelve) data shards.
@@ -108,7 +108,7 @@ MinIO further mitigates the risk of erasure set failure by "striping" erasure se
    .. figure:: /images/availability/availability-erasure-sharding-striped.svg
       :figwidth: 100%
       :align: center
-      :alt: Diagram of a 16 node x 8 drive per node cluster, consisting of 8 16-drive erasure sets striped evenly across each node.
+      :alt: Diagram of a sixteen node by eight drive per node cluster, consisting of eight sixteen drive erasure sets striped evenly across each node.
 
       In this 16 x 8 deployment, MinIO would calculate 8 erasure sets of 16 drives each.
       It allocates one drive per node across the available nodes to fill each erasure set.
