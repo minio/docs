@@ -51,7 +51,8 @@ For guidance on connecting ``kubectl`` to AKS, see :aks-docs:`Install kubectl an
 Procedure
 ---------
 
-.. include:: /includes/common/common-install-operator-kubectl-plugin.rst
+.. include:: /includes/common/common-install-operator-kubectl-plugin-install-init.rst
+.. include:: /includes/common/common-install-operator-kubectl-plugin-validate-open-console.rst
 
 .. toctree::
    :titlesonly:
