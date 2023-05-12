@@ -312,6 +312,15 @@ Root Credentials
       MinIO strongly recommends specifying a unique, long, and random
       :envvar:`MINIO_ROOT_PASSWORD` value for all environments.
 
+.. envvar:: MINIO_API_ROOT_ACCESS
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-root-api-access
+      :end-before: end-minio-root-api-access
+
+   This variable corresponds to the :mc-conf:`api root_access <api.root_access>` configuration setting.
+   You can use this variable to temporarily override the configuration setting and re-enable root access to the deployment.
+
 .. envvar:: MINIO_ACCESS_KEY
 
    .. deprecated:: RELEASE.2021-04-22T15-44-28Z
@@ -410,18 +419,14 @@ MinIO Console:
 
    Specify ``off`` to disable the embedded MinIO Console.
 
-.. envvar:: MINIO_SERVER_URL
+.. envvar:: MINIO_BROWSER_LOGIN_ANIMATION
 
    *Optional*
 
-   Specify the URL hostname the MinIO Console should use for connecting to the
-   MinIO Server.
+   .. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
 
-   This variable may be necessary if the MinIO Server TLS certificates do 
-   not contain any IP Subject Alternative Names (SAN). Specifically, the
-   Console uses the MinIO Server IP address by default. If the Server TLS does
-   not contain that IP address, then the Console cannot validate the TLS
-   connection.
+   Specify ``off`` to disable the animated login screen for the MinIO Console. 
+   Defaults to ``on``.
 
 .. envvar:: MINIO_BROWSER_REDIRECT_URL
 
@@ -444,6 +449,15 @@ MinIO Console:
    request. Set this variable to ``https://console.minio.example.net`` to ensure
    the external identity provider has a reachable URL to which to send the
    authentication response.
+
+.. envvar:: MINIO_SERVER_URL
+
+   *Optional*
+
+   Specify the Fully Qualified Domain Name (FQDN) the MinIO Console should use for connecting to the MinIO Server.
+
+   This variable is typically only necessary when the MinIO Server TLS certificates do not contain an IP Subject Alternative Name (SAN) for the MinIO Server.
+   Since the Console uses the MinIO Server IP by default, the Console may fail to connect due to the TLS certificate not having the necessary IP listed as a SAN.
 
 Key Management Service and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -521,6 +535,16 @@ refers to the specific storage tier on which to store a given object.
    ``EC:N`` notation to refer to the number of parity blocks (``N``).
    This environment variable only applies to deployments with
    :ref:`Erasure Coding <minio-erasure-coding>` enabled.
+
+   The minimum value at startup is ``0``.
+   0 parity setups have no erasure coding protections and rely entirely on the storage controller or resource for availability / resiliency. 
+
+   The maximum value is 1/2 the erasure set stripe size.
+   For example, a deployment with erasure set stripe size of 16 has a maximum standard parity of 8.
+
+   You can change the Standard parity after startup to a value between ``1`` and :math:`\tfrac{1}{2}\ (ERASURE_SET_SIZE)`.
+   MinIO only applies the changed parity to newly written objects.
+   Existing objects retain the parity value in place at the time of their creation.
 
    Defaults to ``4``.
 

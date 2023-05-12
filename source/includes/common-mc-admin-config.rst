@@ -1007,3 +1007,18 @@ Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 Specify a comment to associate with the Webhook configuration.
 
 .. end-minio-notify-webhook-comment
+
+.. Root API Access
+
+.. start-minio-root-api-access
+
+.. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
+
+Specify ``on`` to enable and ``off`` to disable the :ref:`root <minio-users-root>` user account.
+Disabling the root service account also disables all service accounts associated with root, excluding those used by site replication.
+Defaults to ``on``.
+
+Ensure you have at least one other admin user, such as one with the :userpolicy:`consoleAdmin` policy, before disabling the root account.
+If you do not have another admin user, disabling the root account locks administrative access to the deployment.
+
+.. end-minio-root-api-access

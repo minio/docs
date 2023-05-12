@@ -87,11 +87,16 @@ Job Types
 Replicate
 ~~~~~~~~~
 
-Use the ``replicate`` job type to create a batch job that replicates objects from one MinIO deployment to another MinIO location.
+Use the ``replicate`` job type to create a batch job that replicates objects from one MinIO deployment to another MinIO target.
+
+.. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
+
+   ``replicate`` batch jobs also support :mc:`mc mirror`-like behavior when presented an S3-compatible source or target.
+
 At least one of the deployment locations, either the source or the target, must be ``local``.
 The definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
 
-.. versionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
+.. versionchanged:: MinIO Server RELEASE.2023-04-07T05-28-58Z
 
    You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
 
@@ -104,8 +109,9 @@ The advantages of Batch Replication over :mc:`mc mirror` include:
 - A user only needs access to starting a batch job with no other permissions, as the job runs entirely server side on the cluster
 - The job provides for retry attempts in event that objects do not replicate
 - Batch jobs are one-time, curated processes allowing for fine control replication
+- (MinIO to MinIO only) The replication process copies object versions from source to target
 
-.. versionchanged:: RELEASE.2023-02-17T17-52-43Z
+.. versionchanged:: MinIO Server RELEASE.2023-02-17T17-52-43Z
 
    Run batch replication with multiple workers in parallel by specifying the :envvar:`MINIO_BATCH_REPLICATION_WORKERS` environment variable.
 

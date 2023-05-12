@@ -63,7 +63,15 @@ explicitly choose to list, retrieve, or remove a specific object version.
 
 :ref:`Deleting <minio-bucket-versioning-delete>` an object results in a special
 ``DeleteMarker`` tombstone that marks an object as deleted while retaining
-all previous versions of that object.
+all previous versions of that object.   
+
+.. versionchanged:: MinIO Server RELEASE.2023-05-04T21-44-30Z
+
+   MinIO does not create versions for creation, mutation, or deletion of explicit directory objects ("prefixes").
+   Objects created within that explicit directory object retain normal versioning behavior.
+
+MinIO implicitly determines prefixes from object paths.
+Explicit prefix creation typically only occurs with Spark and similar workloads which apply legacy POSIX/HDFS directory creation behavior within the S3 context.
 
 Versioning is Per-Namespace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
