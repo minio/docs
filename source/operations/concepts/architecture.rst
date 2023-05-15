@@ -35,7 +35,7 @@ A production MinIO deployment consists of at least 4 MinIO hosts with homogeneou
 
       Each MinIO host in this pool has matching compute, storage, and network configurations
 
-MinIO provides best performance when using direct-attached storage (DAS), such as NVMe or SSD drives attached to a PCI-E controller board on the host machine. 
+MinIO provides best performance when using locally-attached storage, such as NVMe or SSD drives attached to a PCI-E controller board on the host machine. 
    Storage controllers should present XFS-formatted drives in "Just a Bunch of Drives" (JBOD) configurations with no RAID, pooling, or other hardware/software resiliency layers.
    MinIO recommends against caching, either at the drive or the controller layer. 
    Either type of caching can cause :abbr:`I/O (Input / Output)` spikes as the cache fills and clears, resulting in unpredictable performance. 
@@ -49,8 +49,8 @@ MinIO provides best performance when using direct-attached storage (DAS), such a
 
 MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-erasure-set>`. 
    Erasure sets are the foundational component of MinIO :ref:`availability and resiliency <minio_availability-resiliency>`. 
-   MinIO stripes erasure sets across the nodes in the pool to maintain even distribution of erasure set drives.
-   MinIO then shards objects into data and parity blocks based on the deployment :ref:`parity <minio-ec-parity>` and distributes them across an erasure set.
+   MinIO stripes erasure sets symmetrically across the nodes in the pool to maintain even distribution of erasure set drives.
+   MinIO then partitions objects into data and parity shards based on the deployment :ref:`parity <minio-ec-parity>` and distributes them across an erasure set.
 
    For a more complete discussion of MinIO redundancy and healing, see :ref:`minio-erasure-coding`.
 
@@ -61,7 +61,7 @@ MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-
 
       With the default parity of ``EC:4``, MinIO shards the object into 4 data and 4 parity blocks, distributing them across the drives in the erasure set. 
 
-MinIO uses a deterministic algorithm to select the erasure set for a given object.
+MinIO uses a deterministic hashing algorithm based on object name and path to select the erasure set for a given object.
    For each unique object namespace ``BUCKET/PREFIX/[PREFIX/...]/OBJECT.EXTENSION``, MinIO always selects the same erasure set for read/write operations.
    MinIO handles all routing within pools and erasure sets, making the select/read/write process entirely transparent to applications.
 
@@ -93,6 +93,7 @@ You can expand a MinIO deployment's available storage through :ref:`pool expansi
    The pool which contains the correct erasure set then responds to the operation, remaining entirely transparent to the application.
 
    If you modify the MinIO topology through pool expansion, you can update your applications by modifying the load balancer to include the new pool's nodes.
+   Applications can continue using the load balancer address for the MinIO deployment without any updates or modifications.
    This ensures even distribution of requests across all pools, while applications continue using the single load balancer URL for MinIO operations.
 
    .. figure:: /images/architecture/architecture-load-balancer-multi-pool.svg
@@ -104,9 +105,7 @@ You can expand a MinIO deployment's available storage through :ref:`pool expansi
       Once identified, MinIO partitions the object and distributes the data and parity shards across the appropriate set.
 
 Client applications can use any S3-compatible SDK or library to interact with the MinIO deployment.
-   MinIO publishes its own :ref:`drivers <minio-drivers>` specifically intended for use with S3-compatible deployments.
-   Regardless of the driver, the S3 API uses HTTP methods like ``GET`` and ``POST`` for all operations.
-   Neither MinIO nor S3 implements proprietary wire protocols or other low-level interfaces for normal operations.
+   MinIO publishes its own :ref:`SDK <minio-drivers>` specifically intended for use with S3-compatible deployments.
 
    .. figure:: /images/architecture/architecture-multiple-clients.svg
       :figwidth: 100%
@@ -115,11 +114,12 @@ Client applications can use any S3-compatible SDK or library to interact with th
       Clients using a variety of S3-compatible SDKs can perform operations against the same MinIO deployment.
 
    MinIO uses a strict implementation of the S3 API, including requiring clients to sign all operations using AWS :s3-api:`Signature V4 <sig-v4-authenticating-requests.html>` or the legacy Signature V2.
-   AWS signature calculation uses the client-provided headers, such that any modification to those headers by load balancers, proxies, security programs, or other components can result in signature mismatch errors.
+   AWS signature calculation uses the client-provided headers, such that any modification to those headers by load balancers, proxies, security programs, or other components will result in signature mismatch errors and request failure.
    Ensure any such intermediate components support pass-through of unaltered headers from client to server.
 
-   The complexity of signature calculation typically makes interfacing via ``curl`` or similar REST clients difficult or impractical. 
-   MinIO recommends using S3-compatible drivers which perform the signature calculation automatically as part of operations.
+   While the S3 API uses HTTP methods like ``GET`` and ``POST`` for all operations, applications typically use an SDK for S3 operations.
+   In particular, the complexity of signature calculation typically makes interfacing via ``curl`` or similar REST clients impractical. 
+   MinIO recommends using S3-compatible SDKs or libraries which perform the signature calculation automatically as part of operations.
 
 Replicated MinIO Deployments
 ----------------------------
@@ -170,12 +170,12 @@ Deploying a global load balancer or similar network appliance with support for s
    The load balancer should meet the same requirements as single-site deployments regarding connection balancing and header preservation.
    MinIO replication handles transient failures by queuing objects for replication.
 
-MinIO replication can automatically heal a site that has partial data loss due to transient or sustained downtime. 
+MinIO replication can automatically heal a site that has partial or total data loss due to transient or sustained downtime. 
    If a peer site completely fails, you can remove that site from the configuration entirely.
    The load balancer configuration should also remove that site to avoid routing client requests to the offline site.
 
    You can then restore the peer site, either after repairing the original hardware or replacing it entirely, by adding it back to the site replication configuration.
-   MinIO automatically begins resynchronizing content.
+   MinIO automatically begins resynchronizing existing data while continuously replicating new data.
 
    .. figure:: /images/architecture/architecture-load-balancer-multi-site-healing.svg
       :figwidth: 100%

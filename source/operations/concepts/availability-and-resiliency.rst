@@ -63,7 +63,9 @@ MinIO requires :ref:`read and write quorum <minio-read-quorum>` to perform read 
 
 Write quorum depends on the configured parity and the size of the erasure set.
    If parity is less than 1/2 (half) the number of erasure set drives, write quorum equals parity and functions similarly to read quorum.
-   MinIO automatically "upgrades" the parity of objects written to a degraded erasure set to ensure that object can meet the same :abbr:`SLA (Service Level Agreement)` as objects in healthy erasure sets.
+
+   MinIO automatically increases the parity of objects written to a degraded erasure set to ensure that object can meet the same :abbr:`SLA (Service Level Agreement)` as objects in healthy erasure sets.
+   The parity upgrade behavior provides an additional layer of risk mitigation, but cannot replace the long-term solution of repairing or replacing damaged drives to bring the erasure set back to full healthy status.
 
    .. figure:: /images/availability/availability-erasure-sharding-degraded-write.svg
       :figwidth: 100%
@@ -74,7 +76,6 @@ Write quorum depends on the configured parity and the size of the erasure set.
       MinIO writes the object with an upgraded parity of ``EC:6`` to ensure this object meets the same SLA as other objects.
 
    With the default parity of ``EC:4``, the deployment can tolerate the loss of 4 drives per erasure set and still serve write operations.
-   MinIO can perform "parity upgrade" up to /2 the drives in the erasure set.
 
 If parity equals 1/2 (half) the number of erasure set drives, write quorum equals parity + 1 (one) to avoid data inconsistency due to "split brain" scenarios.
    For example, if exactly half the drives in the erasure set become isolated due to a network fault, MinIO would consider quorum lost as it cannot establish a N+1 group of drives for the write operation.
@@ -88,7 +89,7 @@ If parity equals 1/2 (half) the number of erasure set drives, write quorum equal
       If parity is ``EC:8``, this erasure set cannot meet write quorum and MinIO rejects write operations to that set.
       Since the erasure set still maintains read quorum, read operations to existing objects can still succeed.
 
-An erasure set which loses more drives than the configured parity has suffered data loss. 
+An erasure set which permanently loses more drives than the configured parity has suffered data loss. 
    For maximum parity configurations, the erasure set goes into "read only" mode if drive loss equals parity.
    For the maximum erasure set size of 16 and maximum parity of 8, this would require the loss of 9 drives for data loss to occur.
 
@@ -100,10 +101,12 @@ An erasure set which loses more drives than the configured parity has suffered d
       This erasure set has lost more drives than the configured parity of ``EC:4`` and has therefore lost both read and write quorum.
       MinIO cannot recover any data stored on this erasure set.
 
-MinIO further mitigates the risk of erasure set failure by "striping" erasure set drives across each node in the pool.
+   Transient or temporary drive failures, such as due to a failed storage controller or connecting hardware, may recover back to normal operational status within the erasure set.
+
+MinIO further mitigates the risk of erasure set failure by "striping" erasure set drives symmetrically across each node in the pool.
    MinIO automatically calculates the optimal erasure set size based on the number of nodes and drives, where the maximum set size is 16 (sixteen).
    It then selects one drive per node going across the pool for each erasure set, circling around if the erasure set stripe size is greater than the number of nodes.
-   This topology improves resiliency to the loss of a single node, or even a storage controller on that node.
+   This topology provides resiliency to the loss of a single node, or even a storage controller on that node.
 
    .. figure:: /images/availability/availability-erasure-sharding-striped.svg
       :figwidth: 100%
@@ -130,7 +133,8 @@ Each erasure set is independent of all others in the same pool.
       One pool has a degraded erasure set.
       While MinIO can no longer serve read/write operations to that erasure set, it can continue to serve operations on healthy erasure sets in that pool.
 
-   Since erasure sets are independent, you cannot restore data to a completely degraded erasure set using other erasure sets.
+   However, the lost data may still impact workloads which rely on the assumption of 100% data availability.
+   Furthermore, each erasure set is fully independent of the other such that you cannot restore data to a completely degraded erasure set using other erasure sets.
    You must use :ref:`Site <minio-site-replication-overview>` or :ref:`Bucket <minio-bucket-replication>` replication to create a :abbr:`BC/DR (Business Continuity / Disaster Recovery)`-ready remote deployment for restoring lost data.
 
 For multi-pool MinIO deployments, each pool requires at least one erasure set maintaining read/write quorum to continue performing operations.

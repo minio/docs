@@ -15,6 +15,9 @@ Erasure Coding provides object-level healing with significantly less overhead th
 
 MinIO partitions each new object into data and parity shards, where parity shards support reconstruction of missing or corrupted data shards. 
 MinIO writes these shards to a single :ref:`erasure set <minio-ec-erasure-set>` in the deployment.
+MinIO can use either data or parity shards to reconstruct an object, as long as the erasure set has :ref:`read quorum <minio-read-quorum>`.
+For example, MinIO can use parity shards local to the node receiving a request instead of specifically filtering only those nodes or drives containing data shards.
+
 Since erasure set drives are striped across the server pool, a given node contains only a portion of data or parity shards for each object.
 MinIO can therefore tolerate the loss of multiple drives or nodes in the deployment depending on the configured parity and deployment topology.
 
