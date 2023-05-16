@@ -98,6 +98,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       :hidden:
 
       /operations/installation
+      /operations/install-deploy-manage/upgrade-minio-operator
       /operations/deploy-manage-tenants
       /operations/concepts
       /operations/monitoring
