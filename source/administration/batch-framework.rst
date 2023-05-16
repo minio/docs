@@ -132,5 +132,5 @@ Sample YAML Description File for a ``keyrotate`` Job Type
 
 Create a basic ``keyrotate`` job definition file you can edit with :mc:`mc batch generate`.
 
-.. literalinclude:: /includes/code/replicate.yaml
+.. literalinclude:: /includes/code/keyrotate.yaml
    :language: yaml
