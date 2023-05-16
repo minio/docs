@@ -46,7 +46,7 @@ While MinIO can run on commodity or "budget" hardware, we strongly recommend usi
    * - :octicon:`circle`
      - Sufficient CPU cores to achieve performance goals for hashing (for example, for healing) and encryption
        
-       MinIO recommends Dual Intel® Xeon® Scalable Gold CPUs (minimum 8 cores per socket) or any CPU with AVX512 instructions
+       MinIO recommends Dual Intel® Xeon® Scalable Gold CPUs (minimum 16 cores per socket) or any CPU with AVX512 instructions
 
    * - :octicon:`circle`
      - Sufficient RAM to achieve performance goals based on the number of drives and anticipated concurrent requests (see the :ref:`formula and reference table <minio-hardware-checklist-memory>`).
