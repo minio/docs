@@ -286,6 +286,18 @@ Node and Drive Health Metrics
    Time elapsed (in nano seconds) since last self healing activity. This is set
    to -1 until initial self heal
 
+.. metric:: minio_node_storage_class_standard_parity
+
+   The configured value of :envvar:`MINIO_STORAGE_CLASS_STANDARD`.
+
+   Use this to alert for changes to the Standard :ref:`erasure parity <minio-erasure-coding>`.
+
+.. metric:: minio_node_storage_class_rrs_parity
+
+   The configured value of :envvar:`MINIO_STORAGE_CLASS_RRS`.
+
+   Use this to alert for changes to the Reduced :ref:`erasure parity <minio-erasure-coding>`.
+
 Notification Queue Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

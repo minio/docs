@@ -88,6 +88,24 @@ Configuration Settings
 The following configuration settings define runtime behavior of the 
 MinIO :mc:`server <minio server>` process:
 
+Root User Account
+~~~~~~~~~~~~~~~~~
+
+.. mc-conf:: api
+
+   The top-level configuration key for modifying API-related operations.
+
+   .. mc-conf:: root_access
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-root-api-access
+         :end-before: end-minio-root-api-access
+
+      This configuration setting corresponds with the :envvar:`MINIO_API_ROOT_ACCESS` environment variable.
+      To reset after an unintentional lock, set :envvar:`MINIO_API_ROOT_ACCESS` ``on`` to override this setting and temporarily re-enable the root account.
+      You can then change this setting to ``on`` *or* make the necessary user/policy changes to ensure normal administrative access through other non-root accounts.
+
+
 .. _minio-server-config-logging-logs:
 
 HTTP Webhook Log Target
