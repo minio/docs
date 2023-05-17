@@ -33,7 +33,7 @@ The proxy URL in the example is ``http://my.proxy``.
  
    mc support proxy set minio1 http://my.proxy
 
-Remove the Proxy URL Congifugred for a Deployment
+Remove the Proxy URL Configured for a Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following command removes the URL configured as the proxy for the alias ``minio1``.
