@@ -39,6 +39,34 @@ div.admonition {
         background-color: transparent;
     }
 
+    &.toggle {
+        .admonition-title {
+            padding: 1.5rem 2.5rem 1.5rem 1.5rem;
+            margin: -1.5rem;
+            
+            &:active,
+            &:focus,
+            &:hover {
+                box-shadow: none;
+            }
+        }
+
+        &.toggle-hidden {
+            .admonition-title {
+                margin-bottom: 0;
+            }
+        }
+
+        .toggle-button {
+            top: 1.35rem;
+            right: 1rem;
+
+            &:before {
+                content: "";
+            }
+        }
+    }
+
     @each $variant in $alert-variants {
         &.#{$variant} {
             border-color: var(--alert-#{$variant}-border-color);
@@ -50,6 +78,18 @@ div.admonition {
             .highlight pre {
                 background-color: var(--alert-#{$variant}-code-bg);
                 color: var(--alert-#{$variant}-color);
+            }
+
+            &.toggle {
+                &:hover {
+                    border-color: var(--alert-#{$variant}-link-decoration-color);
+                }
+            }
+
+            .toggle-button {
+                svg {
+                    stroke: var(--alert-#{$variant}-color);
+                }
             }
 
             a {
