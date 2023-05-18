@@ -4,7 +4,7 @@ div.admonition {
     border-radius: $border-radius;
     border: 0;
     border: 1px solid transparent;
-    padding: 1.5rem;
+    padding: 1.25rem;
     font-size: $font-size-md;
     background-color: var(--theme-light-bg);
     color: var(--headings-color);
@@ -13,7 +13,7 @@ div.admonition {
         font-family: inherit;
         font-size: $font-size-md;
         font-weight: $font-weight-bold;
-        line-height: 100%;
+        line-height: 1.4;
         display: block;
     }
 
@@ -39,6 +39,34 @@ div.admonition {
         background-color: transparent;
     }
 
+    &.toggle {
+        .admonition-title {
+            padding: 1.25rem 2.5rem 1.25rem 1.25rem;
+            margin: -1.25rem;
+            
+            &:active,
+            &:focus,
+            &:hover {
+                box-shadow: none;
+            }
+        }
+
+        &.toggle-hidden {
+            .admonition-title {
+                margin-bottom: 0;
+            }
+        }
+
+        .toggle-button {
+            top: 1.25rem;
+            right: 1rem;
+
+            &:before {
+                content: "";
+            }
+        }
+    }
+
     @each $variant in $alert-variants {
         &.#{$variant} {
             border-color: var(--alert-#{$variant}-border-color);
@@ -50,6 +78,18 @@ div.admonition {
             .highlight pre {
                 background-color: var(--alert-#{$variant}-code-bg);
                 color: var(--alert-#{$variant}-color);
+            }
+
+            &.toggle {
+                &:hover {
+                    border-color: var(--alert-#{$variant}-link-decoration-color);
+                }
+            }
+
+            .toggle-button {
+                svg {
+                    stroke: var(--alert-#{$variant}-color);
+                }
             }
 
             a {
