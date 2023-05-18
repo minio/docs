@@ -4,7 +4,7 @@ div.admonition {
     border-radius: $border-radius;
     border: 0;
     border: 1px solid transparent;
-    padding: 1.5rem;
+    padding: 1.25rem;
     font-size: $font-size-md;
     background-color: var(--theme-light-bg);
     color: var(--headings-color);
@@ -13,7 +13,7 @@ div.admonition {
         font-family: inherit;
         font-size: $font-size-md;
         font-weight: $font-weight-bold;
-        line-height: 100%;
+        line-height: 1.4;
         display: block;
     }
 
@@ -41,8 +41,8 @@ div.admonition {
 
     &.toggle {
         .admonition-title {
-            padding: 1.5rem 2.5rem 1.5rem 1.5rem;
-            margin: -1.5rem;
+            padding: 1.25rem 2.5rem 1.25rem 1.25rem;
+            margin: -1.25rem;
             
             &:active,
             &:focus,
@@ -58,7 +58,7 @@ div.admonition {
         }
 
         .toggle-button {
-            top: 1.35rem;
+            top: 1.25rem;
             right: 1rem;
 
             &:before {
