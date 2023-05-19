@@ -10,6 +10,7 @@
    :local:
    :depth: 2
 
+.. mc:: mc ilm remove
 .. mc:: mc ilm rm
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
@@ -26,6 +27,8 @@ The :mc:`mc ilm rm` command removes an object lifecycle management rule from a
 MinIO Bucket.
 
 .. end-mc-ilm-rm-desc
+
+The :mc:`mc ilm remove` alias has equivalent functionality to :mc:`mc ilm rm`.
 
 .. tab-set::
 

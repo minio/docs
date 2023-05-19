@@ -1,8 +1,8 @@
 .. _minio-mc-admin-svcacct-list:
 
-==============================
-``mc admin user svcacct list``
-==============================
+============================
+``mc admin user svcacct ls``
+============================
 
 .. default-domain:: minio
 
@@ -11,6 +11,7 @@
    :depth: 2
 
 .. mc:: mc admin user svcacct list
+.. mc:: mc admin user svcacct ls
 
 
 Syntax
@@ -18,9 +19,11 @@ Syntax
 
 .. start-mc-admin-svcacct-list-desc
 
-The :mc-cmd:`mc admin user svcacct list` command lists all access keys associated to the specified user.
+The :mc:`mc admin user svcacct ls` command lists all access keys associated to the specified user.
 
 .. end-mc-admin-svcacct-list-desc
+
+The alias :mc:`mc admin user svcacct list` has equivalent functionality to :mc:`mc admin user svcacct ls`.
 
 .. tab-set::
 
@@ -31,7 +34,7 @@ The :mc-cmd:`mc admin user svcacct list` command lists all access keys associate
       .. code-block:: shell  
          :class: copyable 
 
-         mc admin user svcacct list myminio admin1
+         mc admin user svcacct ls myminio admin1
 
    .. tab-item:: SYNTAX
 
@@ -40,7 +43,7 @@ The :mc-cmd:`mc admin user svcacct list` command lists all access keys associate
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin user svcacct list   \ 
+         mc [GLOBALFLAGS] admin user svcacct ls   \ 
                                              ALIAS  \ 
                                              USER
 

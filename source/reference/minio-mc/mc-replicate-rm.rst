@@ -10,6 +10,7 @@
    :local:
    :depth: 2
 
+.. mc:: mc replicate remove
 .. mc:: mc replicate rm
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
@@ -27,6 +28,8 @@ The :mc:`mc replicate rm` command removes a
 MinIO bucket.
 
 .. end-mc-replicate-rm-desc
+
+The :mc:`mc replicate remove` alias has equivalent functionality to :mc:`mc replicate rm`.
 
 .. code-block:: shell
 

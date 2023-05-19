@@ -40,6 +40,16 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-bucket-remote-desc
           :end-before: end-mc-admin-bucket-remote-desc
 
+   * - :mc:`mc admin cluster bucket`
+     - .. include:: /reference/minio-mc-admin/mc-admin-cluster-bucket.rst
+          :start-after: start-mc-admin-cluster-bucket-desc
+          :end-before: end-mc-admin-cluster-bucket-desc
+
+   * - :mc:`mc admin cluster iam`
+     - .. include:: /reference/minio-mc-admin/mc-admin-cluster-iam.rst
+          :start-after: start-mc-admin-cluster-iam-desc
+          :end-before: end-mc-admin-cluster-iam-desc
+
    * - :mc-cmd:`mc admin console`
      - .. include:: /reference/minio-mc-admin/mc-admin-console.rst
           :start-after: start-mc-admin-console-desc
@@ -194,7 +204,9 @@ See :ref:`minio-mc-global-options`.
    :hidden:
    :glob:
 
-   /reference/minio-mc-admin/mc-admin-bucket-remote.rst
+   /reference/minio-mc-admin/mc-admin-bucket-remote
+   /reference/minio-mc-admin/mc-admin-cluster-bucket
+   /reference/minio-mc-admin/mc-admin-cluster-iam
    /reference/minio-mc-admin/mc-admin-config
    /reference/minio-mc-admin/mc-admin-console
    /reference/minio-mc-admin/mc-admin-decommission

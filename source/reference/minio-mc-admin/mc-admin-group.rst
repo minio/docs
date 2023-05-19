@@ -92,15 +92,15 @@ Use :mc-cmd:`mc admin group add` to create a new group to an S3-compatible host:
 List Available Groups
 ~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin group list` to list list all groups on an S3-compatible
+Use :mc-cmd:`mc admin group ls` to list list all groups on an S3-compatible
 host:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin group list ALIAS
+   mc admin group ls ALIAS
 
-- Replace :mc-cmd:`ALIAS <mc admin group list TARGET>` with the 
+- Replace :mc-cmd:`ALIAS <mc admin group ls TARGET>` with the 
   :mc-cmd:`alias <mc alias>` of the S3-compatible host.
 
 
@@ -124,18 +124,18 @@ S3-compatible host:
 Remove a Group
 ~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin group remove` to remove a group from an S3-compatible
+Use :mc-cmd:`mc admin group rm` to remove a group from an S3-compatible
 host:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin group remove ALIAS GROUPNAME
+   mc admin group rm ALIAS GROUPNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin group remove TARGET>` with the 
+- Replace :mc-cmd:`ALIAS <mc admin group rm TARGET>` with the 
   :mc-cmd:`alias <mc alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`GROUPNAME <mc admin group remove GROUPNAME>` with the
+- Replace :mc-cmd:`GROUPNAME <mc admin group rm GROUPNAME>` with the
   name of the group.
 
 Disable a Group
@@ -183,10 +183,10 @@ Quick Reference
 :mc-cmd:`mc admin group info TARGET GROUPNAME <mc admin group info>`
    Returns detailed information for a group on the MinIO deployment.
 
-:mc-cmd:`mc admin group list TARGET <mc admin group list>`
+:mc-cmd:`mc admin group ls TARGET <mc admin group ls>`
    Returns a list of all groups on the MinIO deployment.
 
-:mc-cmd:`mc admin group remove TARGET GROUPNAME <mc admin group remove>`
+:mc-cmd:`mc admin group rm TARGET GROUPNAME <mc admin group rm>`
    Removes a group on the MinIO deployment.
 
 :mc-cmd:`mc admin group enable TARGET GROUPNAME <mc admin group enable>`
@@ -221,7 +221,7 @@ Syntax
    .. mc-cmd:: GROUPNAME
 
       The name of the group. The command creates the group if it does not 
-      already exist. Use :mc-cmd:`mc admin group list` to review the existing
+      already exist. Use :mc-cmd:`mc admin group ls` to review the existing
       groups on a deployment.
 
    .. mc-cmd:: MEMBERS
@@ -229,7 +229,7 @@ Syntax
       The name of the user to add to the group.
       
       The user *must* exist on the :mc-cmd:`~mc admin group add TARGET` MinIO
-      deployment. Use :mc-cmd:`mc admin user list` to review the available
+      deployment. Use :mc-cmd:`mc admin user ls` to review the available
       users on the deployment. 
 
 .. mc-cmd:: info
@@ -256,7 +256,7 @@ Syntax
 
       The name of the group.
 
-.. mc-cmd:: list
+.. mc-cmd:: ls, list
    :fullpath:
 
    List all groups on the target MinIO deployment. The command has the
@@ -265,7 +265,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc admin group list TARGET
+      mc admin group ls TARGET
 
    The command accepts the following arguments:
 
@@ -274,19 +274,19 @@ Syntax
       The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from
       which to retrieve groups.
 
-.. mc-cmd:: remove
+.. mc-cmd:: rm, remove
    :fullpath:
 
    Removes a group on the target MinIO deployment. Removing a group does *not*
    remove any users with membership in the group. Use 
-   :mc-cmd:`mc admin user remove` to remove users from a group. 
+   :mc-cmd:`mc admin user rm` to remove users from a group. 
    
    The command has the following syntax:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin group remove TARGET GROUPNAME
+      mc admin group rm TARGET GROUPNAME
 
    The command accepts the following arguments:
 

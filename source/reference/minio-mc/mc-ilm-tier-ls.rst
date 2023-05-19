@@ -10,6 +10,7 @@
    :local:
    :depth: 2
 
+.. mc:: mc ilm tier list
 .. mc:: mc ilm tier ls
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
@@ -24,6 +25,8 @@ Description
 The :mc:`mc ilm tier ls` command shows the remote tiers configured on a deployment. 
 
 .. end-mc-ilm-tier-ls-desc
+
+The :mc:`mc ilm tier list` alias has equivalent functionality to :mc:`mc ilm tier ls`.
 
 Syntax
 ------

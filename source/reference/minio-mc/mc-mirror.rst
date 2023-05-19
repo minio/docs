@@ -153,7 +153,7 @@ Parameters
    :start-after: start-mc-limit-flags-desc
    :end-before: end-mc-limit-flags-desc
 
-.. mc-cmd:: md5
+.. mc-cmd:: --md5
    
 
    Forces all uploads to calculate MD5 checksums. 
@@ -222,6 +222,12 @@ Parameters
 
    ``mc mirror --remove`` does not verify that the contents of object C are the same on both Source and Target, only that an object called `C` exists on both.
    To ensure objects on the Source and Target match both names `and` content, use  :mc-cmd:`~mc mirror --overwrite` or :mc-cmd:`~mc mirror --watch`.
+
+   .. versionchanged:: RELEASE.2023-05-04T18-10-16Z
+
+      ``mc mirror --remove`` returns an error if the target path is a local filesystem directory that does not exist.
+
+      In prior versions, specifying ``/path/to/directory`` would result in the removal of the ``/path/to`` folder if ``directory`` did not exist.
 
 .. mc-cmd:: storage-class, sc
    

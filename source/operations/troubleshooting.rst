@@ -40,6 +40,9 @@ For more information, see details at the |SUBNET| page.
 Registering Your MinIO Deployment with SUBNET
 ---------------------------------------------
 
+Starting with :minio-release:`RELEASE.2023-04-07T05-28-58Z`, the Console prompts you to restart the deployment after registering with SUBNET.
+You can restart through the Console by selecting :guilabel:`Restart` in the top banner or by using :mc-cmd:`mc admin service restart`. 
+ 
 .. tab-set::
 
    .. tab-item:: Console

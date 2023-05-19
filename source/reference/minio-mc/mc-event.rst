@@ -43,12 +43,12 @@ Subcommands
           :start-after: start-mc-event-add-desc
           :end-before: end-mc-event-add-desc
 
-   * - :mc:`~mc event list`
+   * - :mc:`~mc event ls`
      - .. include:: /reference/minio-mc/mc-event-list.rst
           :start-after: start-mc-event-list-desc
           :end-before: end-mc-event-list-desc
 
-   * - :mc:`~mc event remove`
+   * - :mc:`~mc event rm`
      - .. include:: /reference/minio-mc/mc-event-remove.rst
           :start-after: start-mc-event-remove-desc
           :end-before: end-mc-event-remove-desc

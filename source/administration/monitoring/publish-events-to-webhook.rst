@@ -177,13 +177,13 @@ event with the configured Webhook service as a target:
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which MinIO triggers notifications.
 
-Use :mc:`mc event list` to view all configured bucket events for 
+Use :mc:`mc event ls` to view all configured bucket events for 
 a given notification target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event list ALIAS/BUCKET arn:minio:sqs::primary:webhook
+   mc event ls ALIAS/BUCKET arn:minio:sqs::primary:webhook
 
 4) Validate the Configured Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

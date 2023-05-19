@@ -217,8 +217,8 @@ The following table lists :mc-cmd:`mc` commands:
           :end-before: end-mc-encrypt-desc
      
    * - | :mc:`mc event add`
-       | :mc:`mc event list`
-       | :mc:`mc event remove`
+       | :mc:`mc event ls`
+       | :mc:`mc event rm`
      - .. include:: /reference/minio-mc/mc-event.rst
           :start-after: start-mc-event-desc
           :end-before: end-mc-event-desc

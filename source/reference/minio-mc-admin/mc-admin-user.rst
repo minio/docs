@@ -69,12 +69,12 @@ Subcommands
           :start-after: start-mc-admin-user-info-desc
           :end-before: end-mc-admin-user-info-desc
 
-   * - :mc:`~mc admin user list`
+   * - :mc:`~mc admin user ls`
      - .. include:: /reference/minio-mc-admin/mc-admin-user-list.rst
           :start-after: start-mc-admin-user-list-desc
           :end-before: end-mc-admin-user-list-desc
 
-   * - :mc:`~mc admin user remove`
+   * - :mc:`~mc admin user rm`
      - .. include:: /reference/minio-mc-admin/mc-admin-user-remove.rst
           :start-after: start-mc-admin-user-remove-desc
           :end-before: end-mc-admin-user-remove-desc

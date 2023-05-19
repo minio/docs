@@ -156,16 +156,16 @@ Replace ``USERNAME`` with the ``ACCESSKEY`` created in the previous step.
 Delete a User
 ~~~~~~~~~~~~~
 
-Use the :mc:`mc admin user remove` command to remove a user on a 
+Use the :mc:`mc admin user rm` command to remove a user on a 
 MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin user remove ALIAS USERNAME
+   mc admin user rm ALIAS USERNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin user remove ALIAS>` with the
+- Replace :mc-cmd:`ALIAS <mc admin user rm ALIAS>` with the
   :mc:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the name of
+- Replace :mc-cmd:`USERNAME <mc admin user rm USERNAME>` with the name of
   the user to remove.

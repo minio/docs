@@ -205,36 +205,11 @@ Syntax
 
       - ``mc admin bucket remote ls`` replaced by :mc-cmd:`mc replicate ls`
 
-   Lists all remote targets associated to a bucket on the MinIO deployment. The
-   command has the following syntax:
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin bucket remote ls SOURCE --service "replication"
-
-   The command accepts the following arguments:
-
-   .. mc-cmd:: SOURCE
-
-      The full path to the bucket for which the command returns the configured
-      remote targets. Specify the :mc-cmd:`alias <mc alias>` of a configured
-      MinIO deployment as the prefix to the bucket path. For example:
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc admin bucket remote ls play/mybucket
-
-   .. mc-cmd:: --service
-      
-
-      *Required*
-
-      Specify ``"replication"``.
+   Lists all remote targets associated to a bucket on the MinIO deployment.
+   Use ``mc admin bucket remote ls --help`` for usage syntax.
 
 
-.. mc-cmd:: rm
+.. mc-cmd:: rm, remove
    :fullpath:
 
    .. versionchanged:: RELEASE.2022-12-24T15-21-38Z

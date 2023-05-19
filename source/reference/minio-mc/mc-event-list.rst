@@ -1,8 +1,8 @@
 .. _minio-mc-event-list:
 
-=================
-``mc event list``
-=================
+===============
+``mc event ls``
+===============
 
 .. default-domain:: minio
 
@@ -11,16 +11,19 @@
    :depth: 2
 
 .. mc:: mc event list
+.. mc:: mc event ls
 
 Syntax
 ------
 
 .. start-mc-event-list-desc
 
-The :mc:`mc event list` command lists all event notification triggers for a
+The :mc:`mc event ls` command lists all event notification triggers for a
 bucket.
 
 .. end-mc-event-list-desc
+
+The alias :mc:`mc event list` has equivalent functionality to :mc:`mc event ls`.
 
 .. tab-set::
 
@@ -33,7 +36,7 @@ bucket.
       .. code-block:: shell
          :class: copyable
 
-         mc event list myminio myminio/mydata arn:aws:sqs::primary:target
+         mc event ls myminio myminio/mydata arn:aws:sqs::primary:target
 
    .. tab-item:: SYNTAX
 
@@ -100,14 +103,14 @@ List Event Notifications on a Bucket
       .. code-block:: shell
          :class: copyable
 
-         mc event list myminio/mydata
+         mc event ls myminio/mydata
 
    .. tab-item:: Syntax
 
       .. code-block:: shell
          :class: copyable
 
-         mc event list ALIAS ARN
+         mc event ls ALIAS ARN
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO 
         deployment on which to add the bucket notification event. For example:

@@ -79,6 +79,21 @@ This endpoint supports the following query parameters:
 
        Specify ``2011-06-15``.
 
+   * - ``DurationSeconds``
+     - integer
+     - *Optional*
+     
+       Specify the number of seconds after which the temporary credentials
+       expire. Defaults to ``3600``.
+       
+       - The minimum value is ``900`` or 15 minutes.
+       - The maximum value is ``604800`` or 7 days.
+
+       If ``DurationSeconds`` is omitted, MinIO checks the JWT token for an
+       ``exp`` claim before using the default duration. See
+       `RFC 7519 4.1.4: Expiration Time Claim 
+       <https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.4>`__ 
+       for more information on JSON web token expiration.
 
    * - ``Policy``
      - string

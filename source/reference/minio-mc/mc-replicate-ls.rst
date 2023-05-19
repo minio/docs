@@ -10,6 +10,7 @@
    :local:
    :depth: 2
 
+.. mc:: mc replicate list
 .. mc:: mc replicate ls
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
@@ -26,6 +27,8 @@ The :mc:`mc replicate ls` command lists all
 MinIO bucket.
 
 .. end-mc-replicate-ls-desc
+
+The :mc:`mc replicate list` alias has equivalent functionality to :mc:`mc replicate ls`.
 
 .. tab-set::
 
