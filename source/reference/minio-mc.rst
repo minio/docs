@@ -366,8 +366,8 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-support-desc
           :end-before: end-mc-support-desc
 
-   * - | :mc:`mc tag ls`
-       | :mc:`mc tag rm`
+   * - | :mc:`mc tag list`
+       | :mc:`mc tag remove`
        | :mc:`mc tag set`
      - .. include:: /reference/minio-mc/mc-tag.rst
           :start-after: start-mc-tag-desc
