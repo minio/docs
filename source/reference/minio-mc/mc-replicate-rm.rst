@@ -29,7 +29,7 @@ MinIO bucket.
 
 .. end-mc-replicate-rm-desc
 
-The :mc:`mc replicate remove` alias has equivalent functionality to :mc:`mc replicate rm`.
+The :mc:`mc replicate remove` command has equivalent functionality to :mc:`mc replicate rm`.
 
 .. code-block:: shell
 

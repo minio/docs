@@ -23,7 +23,7 @@ bucket.
 
 .. end-mc-event-remove-desc
 
-The :mc:`mc event remove` alias has equivalent functionality to :mc:`mc event rm`.
+The :mc:`mc event remove` command has equivalent functionality to :mc:`mc event rm`.
 
 .. tab-set::
 

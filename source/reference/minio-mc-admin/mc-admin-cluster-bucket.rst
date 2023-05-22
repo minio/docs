@@ -24,6 +24,7 @@ The :mc:`mc admin cluster bucket` command and its subcommands provide tools for 
 .. end-mc-admin-cluster-bucket-desc
 
 This metadata includes configurations related to features like :ref:`lifecycle management rules <minio-lifecycle-management>`.
+You can use this metadata as a snapshot of the bucket configuration for restoration later, such as part of :abbr:`BC/DR (Business Continuity / Disaster Recovery)` or backup/restore operations.
 
 You can use this command on individual buckets *or* on all buckets in a MinIO deployment.
 For automatic synchronization of all buckets in a deployment to a remote site, use :ref:`site replication <minio-site-replication-overview>`.

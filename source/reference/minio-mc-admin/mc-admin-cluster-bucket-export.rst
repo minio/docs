@@ -24,7 +24,7 @@ The command always saves the output as ``cluster-metadata.zip``.
 
 If you specify only the deployment as the target, this command backs up all bucket metadata on the target deployment.
 
-. tab-set::
+.. tab-set::
 
    .. tab-item:: EXAMPLE
 
@@ -43,7 +43,7 @@ If you specify only the deployment as the target, this command backs up all buck
          :class: copyable 
   
          mc [GLOBALFLAGS] admin cluster bucket export  \
-                                             ALIAS[/BUCKET] \
+                                             ALIAS[/BUCKET]
                                              
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax

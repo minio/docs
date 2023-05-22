@@ -337,7 +337,7 @@ The following table lists :mc-cmd:`mc` commands:
           :end-before: end-mc-rm-desc
      
    * - | :mc:`mc share download`
-       | :mc:`mc share list`
+       | :mc:`mc share ls`
        | :mc:`mc share upload`
      - .. include:: /reference/minio-mc/mc-share.rst
           :start-after: start-mc-share-desc
@@ -366,8 +366,8 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-support-desc
           :end-before: end-mc-support-desc
 
-   * - | :mc:`mc tag list`
-       | :mc:`mc tag remove`
+   * - | :mc:`mc tag ls`
+       | :mc:`mc tag rm`
        | :mc:`mc tag set`
      - .. include:: /reference/minio-mc/mc-tag.rst
           :start-after: start-mc-tag-desc

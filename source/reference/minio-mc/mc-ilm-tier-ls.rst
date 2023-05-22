@@ -26,7 +26,7 @@ The :mc:`mc ilm tier ls` command shows the remote tiers configured on a deployme
 
 .. end-mc-ilm-tier-ls-desc
 
-The :mc:`mc ilm tier list` alias has equivalent functionality to :mc:`mc ilm tier ls`.
+The :mc:`mc ilm tier list` command has equivalent functionality to :mc:`mc ilm tier ls`.
 
 Syntax
 ------

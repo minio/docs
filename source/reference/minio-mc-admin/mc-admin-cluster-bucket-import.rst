@@ -23,11 +23,11 @@ You can use this command to manually restore the metadata to the specified bucke
 
 If you specify only the deployment as the target, this command applies the metadata objects to all matching buckets on the target.
 
-. tab-set::
+.. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command imports the specified metadata onto the ``myminio`` deployment.
+      The following command imports the specified metadata to the ``myminio`` deployment.
   
       .. code-block:: shell  
          :class: copyable 
@@ -61,7 +61,9 @@ Parameters
 .. mc-cmd:: METADATA.ZIP
    :required:
 
-   The path to the metadata file created by :mc:`mc admin cluster bucket export`.
+   The path to the metadata file to import.
+   
+   Use the :mc:`mc admin cluster bucket export` to export bucket metadata for use with this command.
 
 .. mc-cmd:: BUCKET
    :optional:

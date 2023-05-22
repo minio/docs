@@ -28,7 +28,7 @@ MinIO bucket.
 
 .. end-mc-replicate-ls-desc
 
-The :mc:`mc replicate list` alias has equivalent functionality to :mc:`mc replicate ls`.
+The :mc:`mc replicate list` command has equivalent functionality to :mc:`mc replicate ls`.
 
 .. tab-set::
 

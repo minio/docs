@@ -28,7 +28,7 @@ MinIO Bucket.
 
 .. end-mc-ilm-rm-desc
 
-The :mc:`mc ilm remove` alias has equivalent functionality to :mc:`mc ilm rm`.
+The :mc:`mc ilm remove` command has equivalent functionality to :mc:`mc ilm rm`.
 
 .. tab-set::
 

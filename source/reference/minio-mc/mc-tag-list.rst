@@ -77,7 +77,7 @@ Parameters
 
    .. versionadded:: RELEASE.2023-05-04T18-10-16Z
 
-   Recursively lists the tags for all objects at the specified :mc:`ALIAS <mc tag list ALIAS>`.
+   Recursively lists the tags for all objects at the path specified to :mc:`ALIAS <mc tag list ALIAS>`.
 
 .. mc-cmd:: --rewind
    :optional:

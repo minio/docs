@@ -20,7 +20,7 @@ Removes an IAM policy from the target MinIO deployment.
 
 .. end-mc-admin-policy-remove-desc
 
-The :mc:`mc admin policy remove` alias has equivalent functionality to :mc:`mc admin policy rm`.
+The :mc:`mc admin policy remove` command has equivalent functionality to :mc:`mc admin policy rm`.
 
 .. tab-set::
 

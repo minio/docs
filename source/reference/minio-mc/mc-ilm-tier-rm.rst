@@ -22,7 +22,7 @@ The :mc:`mc ilm tier rm` command removes an remote tier that has not been used t
 
 .. end-mc-ilm-tier-rm-desc
 
-The :mc:`mc ilm tier remove` alias has equivalent functionality to :mc:`mc ilm tier rm`
+The :mc:`mc ilm tier remove` command has equivalent functionality to :mc:`mc ilm tier rm`
 
 .. note:: 
 

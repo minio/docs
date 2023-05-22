@@ -21,7 +21,7 @@ by :mc:`mc share upload` or :mc:`mc share download`
 
 .. end-mc-share-list-desc
 
-The :mc:`mc share list` alias has equivalent functionality to :mc:`mc share ls`.
+The :mc:`mc share list` command has equivalent functionality to :mc:`mc share ls`.
 
 Applications can perform a ``PUT`` to retrieve the object from the URL. 
 

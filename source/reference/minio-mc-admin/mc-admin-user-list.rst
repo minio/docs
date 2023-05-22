@@ -23,7 +23,7 @@ The :mc:`mc admin user ls` command lists all :ref:`MinIO users <minio-internal-i
 
 .. end-mc-admin-user-list-desc
 
-The :mc:`mc admin user list` alias has equivalent functionality to :mc:`mc admin user ls`.
+The :mc:`mc admin user list` command has equivalent functionality to :mc:`mc admin user ls`.
 
 :mc-cmd:`mc admin user ls` does *not* return the access key or secret key associated to a user.
 Use :mc-cmd:`mc admin user info` to retrieve detailed user information, including the user access key.

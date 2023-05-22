@@ -21,7 +21,7 @@ The :mc:`mc admin cluster iam export` command exports :ref:`IAM <minio-authentic
 
 The command saves the output as ``ALIAS-iam-metadata.zip``, where ``ALIAS`` is the :mc:`alias <mc admin cluster iam export ALIAS>` of the MinIO deployment.
 
-. tab-set::
+.. tab-set::
 
    .. tab-item:: EXAMPLE
 
@@ -39,8 +39,7 @@ The command saves the output as ``ALIAS-iam-metadata.zip``, where ``ALIAS`` is t
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin cluster iam export  \
-                                            ALIAS
+         mc [GLOBALFLAGS] admin cluster iam export ALIAS
                                              
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -55,13 +54,7 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :ref:`alias <alias>` of the MinIO deployment.
-
-.. mc-cmd:: BUCKET
-   :optional:
-
-   The iam from which the command exports the IAM metadata.
-
+   The :ref:`alias <alias>` of the MinIO deployment to export IAM metadata for.
 
 Global Flags
 ~~~~~~~~~~~~

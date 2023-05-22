@@ -22,7 +22,7 @@ The :mc:`mc admin user rm` command removes a :ref:`MinIO user <minio-internal-id
 
 .. end-mc-admin-user-remove-desc
 
-The :mc:`mc admin user remove` alias has equivalent functionality to :mc:`mc admin user rm`.
+The :mc:`mc admin user remove` command has equivalent functionality to :mc:`mc admin user rm`.
 
 To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
 

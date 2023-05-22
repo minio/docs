@@ -26,7 +26,7 @@ The :mc:`mc ilm rule ls` command summarizes all configured object lifecycle mana
 
 .. end-mc-ilm-rule-ls-desc
 
-The :mc:`mc ilm rule list` alias has equivalent functionality to :mc:`mc ilm rule ls`.
+The :mc:`mc ilm rule list` command has equivalent functionality to :mc:`mc ilm rule ls`.
 
 .. tab-set::
 

@@ -91,7 +91,7 @@ Parameters
 
    .. versionadded:: RELEASE.2023-05-04T18-10-16Z
 
-   Recursively applies the tag to all objects at the specified :mc:`ALIAS <mc tag set ALIAS>`.
+   Recursively applies the tag to all objects at the path specified to :mc:`ALIAS <mc tag set ALIAS>`.
 
 .. mc-cmd:: --rewind
    :optional:

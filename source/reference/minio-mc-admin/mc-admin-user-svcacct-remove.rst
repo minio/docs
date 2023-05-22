@@ -23,7 +23,7 @@ The :mc:`mc admin user svcacct rm` command removes an access key associated to a
 
 .. end-mc-admin-svcacct-remove-desc
 
-The :mc:`mc admin user svcacct remove` alias has equivalent functionality to :mc:`mc admin user svcacct rm`.
+The :mc:`mc admin user svcacct remove` command has equivalent functionality to :mc:`mc admin user svcacct rm`.
    
 Applications can no longer authenticate using that access key after removal.
    

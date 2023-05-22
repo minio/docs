@@ -21,7 +21,7 @@ The :mc:`mc admin cluster iam import` command imports :ref:`IAM <minio-authentic
 
 You can use this command to manually restore IAM metadata settings for a MinIO deployment.
 
-. tab-set::
+.. tab-set::
 
    .. tab-item:: EXAMPLE
 
@@ -61,7 +61,9 @@ Parameters
 .. mc-cmd:: IAM-METADATA.ZIP
    :required:
 
-   The path to the metadata file created by :mc:`mc admin cluster iam export`.
+   The path to the IAM metadata file to import.
+   
+   Use the :mc:`mc admin cluster iam export` to export IAM metadata for use with this command.
 
 Global Flags
 ~~~~~~~~~~~~

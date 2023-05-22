@@ -20,7 +20,7 @@ Lists all policies on the target MinIO deployment.
 
 .. end-mc-admin-policy-list-desc
 
-The :mc:`mc admin policy list` alias has equivalent functionality to :mc:`mc admin policy ls`.
+The :mc:`mc admin policy list` command has equivalent functionality to :mc:`mc admin policy ls`.
 
 .. tab-set::
 
