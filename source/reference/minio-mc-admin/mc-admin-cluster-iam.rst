@@ -19,7 +19,7 @@ Description
 
 .. start-mc-admin-cluster-iam-desc
 
-The :mc:`mc admin cluster iam` command and its subcommands provide tools for manually importing and exporting MinIO :ref:`IAM <minio-authentication-and-identity-management>` metadata.
+The :mc:`mc admin cluster iam` command and its subcommands provide tools for manually importing and exporting MinIO :ref:`identity and access management (IAM) <minio-authentication-and-identity-management>` metadata.
 
 .. end-mc-admin-cluster-iam-desc
 

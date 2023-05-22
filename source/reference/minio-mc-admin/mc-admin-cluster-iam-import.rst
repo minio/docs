@@ -47,8 +47,8 @@ You can use this command to manually restore IAM metadata settings for a MinIO d
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-Starting with :mc-release:`RELEASE.2023-05-04T18-10-16Z`, :mc:`mc admin cluster iam import` adds support for aliases ending with a trailing slash ``ALIAS/``.
-Prior to this release, the command would fail when provided a trailing slash.
+Starting with :mc-release:`RELEASE.2023-05-04T18-10-16Z`, :mc:`mc admin cluster iam import` adds support for aliases ending with a trailing forward slash ``ALIAS/``.
+Prior to this release, the command would fail when provided a trailing forward slash.
 
 Parameters
 ~~~~~~~~~~

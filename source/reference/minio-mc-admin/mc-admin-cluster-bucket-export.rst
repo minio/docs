@@ -61,7 +61,7 @@ Parameters
 .. mc-cmd:: BUCKET
    :optional:
 
-   The bucket from which the command exports metadata.
+   The bucket to export metadata for.
 
 
 Global Flags

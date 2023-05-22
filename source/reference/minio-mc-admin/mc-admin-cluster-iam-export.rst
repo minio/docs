@@ -19,13 +19,13 @@ The :mc:`mc admin cluster iam export` command exports :ref:`IAM <minio-authentic
 
 .. end-mc-admin-cluster-iam-export-desc
 
-The command always saves the output as ``ALIAS-iam-metadata.zip``, where ``ALIAS`` is the :mc:`alias <mc admin cluster iam export ALIAS>` of the MinIO deployment.
+The command saves the output as ``ALIAS-iam-metadata.zip``, where ``ALIAS`` is the :mc:`alias <mc admin cluster iam export ALIAS>` of the MinIO deployment.
 
 . tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command exports all iam metadata for the ``myminio`` deployment.
+      The following command exports all IAM metadata for the ``myminio`` deployment.
   
       .. code-block:: shell  
          :class: copyable 
@@ -40,14 +40,14 @@ The command always saves the output as ``ALIAS-iam-metadata.zip``, where ``ALIAS
          :class: copyable 
   
          mc [GLOBALFLAGS] admin cluster iam export  \
-                                            ALIAS[/BUCKET] \
+                                            ALIAS
                                              
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-Starting with :mc-release:`RELEASE.2023-05-04T18-10-16Z`, :mc:`mc admin cluster iam export` adds support for aliases ending with a trailing slash ``ALIAS/``.
-Prior to this release, the command would fail when provided a trailing slash.
+Starting with :mc-release:`RELEASE.2023-05-04T18-10-16Z`, :mc:`mc admin cluster iam export` adds support for aliases ending with a trailing forward slash ``ALIAS/``.
+Prior to this release, the command would fail when provided a trailing forward slash.
 
 Parameters
 ~~~~~~~~~~

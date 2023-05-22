@@ -66,7 +66,7 @@ Parameters
 .. mc-cmd:: BUCKET
    :optional:
 
-   The bucket onto which the command applies the imported metadata.
+   The bucket to apply the imported metadata to.
 
 
 Global Flags
