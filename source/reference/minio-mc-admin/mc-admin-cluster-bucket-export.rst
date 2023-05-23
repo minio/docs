@@ -43,7 +43,7 @@ If you specify only the deployment as the target, this command backs up all buck
          :class: copyable 
   
          mc [GLOBALFLAGS] admin cluster bucket export  \
-                                             ALIAS[/BUCKET]
+                                               ALIAS[/BUCKET]
                                              
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
