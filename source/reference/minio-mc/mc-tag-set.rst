@@ -86,6 +86,13 @@ Parameters
 
       mc tag set myminio/mybucket/object.txt "key1=value1&key2=value2"
 
+.. mc-cmd:: --recursive, r
+   :optional:
+
+   .. versionadded:: RELEASE.2023-05-04T18-10-16Z
+
+   Recursively applies the tag to all objects at the path specified to :mc:`ALIAS <mc tag set ALIAS>`.
+
 .. mc-cmd:: --rewind
    :optional:
 

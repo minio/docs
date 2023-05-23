@@ -146,7 +146,7 @@ Syntax
            If not specified, the command updates the default configuration.
          - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-open-id-config-settings>` key-value pairs to update in the format of ``PARAMETER="value"``.
 
-.. mc-cmd:: remove
+.. mc-cmd:: rm, remove
 
    Remove an existing set of configurations for an OpenID provider.
 
@@ -159,7 +159,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp openid remove myminio test_config                                                              
+            mc admin idp openid rm myminio test_config                                                              
                                     
       .. tab-item:: SYNTAX
 
@@ -168,7 +168,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc [GLOBALFLAGS] admin idp openid remove     \
+            mc [GLOBALFLAGS] admin idp openid rm     \
                                               ALIAS      \
                                               [CFG_NAME]
 
@@ -176,7 +176,7 @@ Syntax
          - Replace ``CFG_NAME`` with a unique string for this configuration.
            If not specified, the command removes the default configurations. 
 
-.. mc-cmd:: list
+.. mc-cmd:: ls, list
 
    Outputs a list of existing configuration sets for OpenID providers.
 
@@ -189,7 +189,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp openid list myminio                                                            
+            mc admin idp openid ls myminio                                                            
                                     
       .. tab-item:: SYNTAX
 
@@ -198,7 +198,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc [GLOBALFLAGS] admin idp openid list ALIAS
+            mc [GLOBALFLAGS] admin idp openid ls ALIAS
 
          - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to list OpenID integrations for.
 

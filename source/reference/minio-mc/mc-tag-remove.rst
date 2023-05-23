@@ -30,7 +30,7 @@ The :mc:`mc tag remove` command removes all tags from a bucket or object.
 .. tab-set::
 
    .. tab-item:: EXAMPLE
-
+ 
       The following command removes tags for the ``mydata`` bucket on the
       ``myminio`` MinIO deployment:
 
@@ -70,6 +70,13 @@ Parameters
    .. code-block:: none
 
       mc tag remove myminio/mybucket/object.txt
+
+.. mc-cmd:: --recursive, r
+   :optional:
+
+   .. versionadded:: RELEASE.2023-05-04T18-10-16Z
+
+   Recursively removes all tags from all objects at the specified :mc:`ALIAS <mc tag remove ALIAS>`.
 
 .. mc-cmd:: --rewind
    :optional:

@@ -43,7 +43,10 @@ The :mc-cmd:`mc admin idp ldap` command has the following subcommands:
    * - :mc-cmd:`mc admin idp ldap update`
      - Modify an existing AD/LDAP IDP server configuration.
 
-   * - :mc-cmd:`mc admin idp ldap remove`
+   * - :mc-cmd:`mc admin idp ldap ls`
+     - Lists AD/LDAP server configurations.
+
+   * - :mc-cmd:`mc admin idp ldap rm`
      - Remove an AD/LDAP IDP server configuration from a deployment.
 
    * - :mc-cmd:`mc admin idp ldap info`
@@ -141,7 +144,33 @@ Syntax
          - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to update for AD/LDAP integration.
          - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-ldap-config-settings>` key-value pairs to update in the format of ``PARAMETER="value"``.
 
-.. mc-cmd:: remove
+.. mc-cmd:: ls, list
+
+   Lists the existing set of configurations for an AD/LDAP provider.
+
+   .. tab-set::
+
+      .. tab-item:: EXAMPLE
+
+         The following example lists the AD/LDAP configuration settings for the ``myminio`` deployment.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin idp ldap ls myminio                   
+                                    
+      .. tab-item:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc [GLOBALFLAGS] admin idp ldap ls ALIAS
+
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to list the AD/LDAP integration.
+
+.. mc-cmd:: rm, remove
 
    Remove the existing configuration for an AD/LDAP provider.
 
@@ -154,7 +183,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp ldap remove myminio                                                             
+            mc admin idp ldap rm myminio                                                             
                                     
       .. tab-item:: SYNTAX
 
@@ -163,7 +192,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-            mc [GLOBALFLAGS] admin idp ldap remove     \
+            mc [GLOBALFLAGS] admin idp ldap rm     \
                                             ALIAS
 
          - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to remove the AD/LDAP integration.

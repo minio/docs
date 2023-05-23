@@ -1,8 +1,8 @@
 .. _minio-mc-admin-svcacct-remove:
 
-================================
-``mc admin user svcacct remove``
-================================
+============================
+``mc admin user svcacct rm``
+============================
 
 .. default-domain:: minio
 
@@ -11,6 +11,7 @@
    :depth: 2
 
 .. mc:: mc admin user svcacct remove
+.. mc:: mc admin user svcacct rm
 
 
 Syntax
@@ -18,9 +19,11 @@ Syntax
 
 .. start-mc-admin-svcacct-remove-desc
 
-The :mc-cmd:`mc admin user svcacct remove` command removes an access key associated to a user on the deployment.
+The :mc:`mc admin user svcacct rm` command removes an access key associated to a user on the deployment.
 
 .. end-mc-admin-svcacct-remove-desc
+
+The :mc:`mc admin user svcacct remove` command has equivalent functionality to :mc:`mc admin user svcacct rm`.
    
 Applications can no longer authenticate using that access key after removal.
    
@@ -33,7 +36,7 @@ Applications can no longer authenticate using that access key after removal.
       .. code-block:: shell  
          :class: copyable 
   
-         mc admin user svcacct remove myminio myuserserviceaccount  
+         mc admin user svcacct rm myminio myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 

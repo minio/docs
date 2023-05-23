@@ -10,6 +10,7 @@
    :local:
    :depth: 2
 
+.. mc:: mc ilm tier remove
 .. mc:: mc ilm tier rm
 
 Description
@@ -20,6 +21,8 @@ Description
 The :mc:`mc ilm tier rm` command removes an remote tier that has not been used to transition any objects. 
 
 .. end-mc-ilm-tier-rm-desc
+
+The :mc:`mc ilm tier remove` command has equivalent functionality to :mc:`mc ilm tier rm`
 
 .. note:: 
 

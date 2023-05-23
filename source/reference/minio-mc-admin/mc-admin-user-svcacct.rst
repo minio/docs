@@ -67,7 +67,7 @@ The :mc:`mc admin user svcacct` command has the following subcommands:
           :start-after: start-mc-admin-svcacct-list-desc
           :end-before: end-mc-admin-svcacct-list-desc
 
-   * - :mc:`~mc admin user svcacct remove`
+   * - :mc:`~mc admin user svcacct rm`
      - .. include:: /reference/minio-mc-admin/mc-admin-user-svcacct-remove.rst
           :start-after: start-mc-admin-svcacct-remove-desc
           :end-before: end-mc-admin-svcacct-remove-desc

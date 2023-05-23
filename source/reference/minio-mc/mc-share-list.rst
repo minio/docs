@@ -1,5 +1,5 @@
 ===================
-``mc share list``
+``mc share ls``
 ===================
 
 .. default-domain:: minio
@@ -9,16 +9,19 @@
    :depth: 2
 
 .. mc:: mc share list
+.. mc:: mc share ls
 
 Syntax
 -----------
 
 .. start-mc-share-list-desc
 
-The :mc:`mc share list` command displays any unexpired presigned URLs generated
+The :mc:`mc share ls` command displays any unexpired presigned URLs generated
 by :mc:`mc share upload` or :mc:`mc share download`
 
 .. end-mc-share-list-desc
+
+The :mc:`mc share list` command has equivalent functionality to :mc:`mc share ls`.
 
 Applications can perform a ``PUT`` to retrieve the object from the URL. 
 
@@ -37,8 +40,8 @@ documentation on :aws-docs:`Pre-Signed URLs
       .. code-block:: shell
          :class: copyable
 
-         mc share list upload myminio/mydata
-         mc share list download myminio/mydata
+         mc share ls upload myminio/mydata
+         mc share ls download myminio/mydata
 
    .. tab-item:: SYNTAX
 
@@ -62,13 +65,13 @@ Parameters
 
    *Required* Lists all unexpired presigned download (``GET``) URLs.
 
-   Mutually exclusive with :mc:`mc share list upload`
+   Mutually exclusive with :mc:`mc share ls upload`
 
 .. mc-cmd:: upload
 
    *Required* Lists all unexpired presigned upload (``PUT``) URLs.
 
-   Mutually exclusive with :mc:`mc share list download`
+   Mutually exclusive with :mc:`mc share ls download`
 
 .. mc-cmd:: ALIAS
 
@@ -94,28 +97,28 @@ List Generated Download and Upload URLs
 
    .. tab-item:: List Active Download Presigned URLs
 
-      Use :mc:`mc share list download` to generate a URL
+      Use :mc:`mc share ls download` to generate a URL
       that supports ``POST`` requests for uploading a file to a specific object
       location on an S3-compatible host:
 
       .. code-block:: shell
          :class: copyable
 
-         mc share list download ALIAS
+         mc share ls download ALIAS
 
-      - Replace :mc-cmd:`ALIAS <mc share list ALIAS>` with the 
+      - Replace :mc-cmd:`ALIAS <mc share ls ALIAS>` with the 
         :ref:`alias <alias>` of the MinIO deployment.
 
    .. tab-item:: List Active Upload Presigned URLs
 
-      Use :mc:`mc share list upload` to generate a URL that
+      Use :mc:`mc share ls upload` to generate a URL that
       supports ``POST`` requests for uploading a file to a specific object
       location on an S3-compatible host:
 
       .. code-block:: shell
          :class: copyable
 
-         mc share list upload ALIAS
+         mc share ls upload ALIAS
 
       - Replace :mc-cmd:`ALIAS <mc share upload ALIAS>` with the 
         :ref:`alias <alias>` of the MinIO deployment.

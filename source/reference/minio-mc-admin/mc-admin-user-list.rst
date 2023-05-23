@@ -1,8 +1,8 @@
 .. _minio-mc-admin-user-list:
 
-======================
-``mc admin user list``
-======================
+====================
+``mc admin user ls``
+====================
 
 .. default-domain:: minio
 
@@ -11,6 +11,7 @@
    :depth: 2
 
 .. mc:: mc admin user list
+.. mc:: mc admin user ls
 
 
 Syntax
@@ -18,11 +19,13 @@ Syntax
 
 .. start-mc-admin-user-list-desc
 
-The :mc:`mc admin user list` command lists all :ref:`MinIO users <minio-internal-idp>` on the target MinIO deployment.
+The :mc:`mc admin user ls` command lists all :ref:`MinIO users <minio-internal-idp>` on the target MinIO deployment.
 
 .. end-mc-admin-user-list-desc
 
-:mc-cmd:`mc admin user list` does *not* return the access key or secret key associated to a user.
+The :mc:`mc admin user list` command has equivalent functionality to :mc:`mc admin user ls`.
+
+:mc-cmd:`mc admin user ls` does *not* return the access key or secret key associated to a user.
 Use :mc-cmd:`mc admin user info` to retrieve detailed user information, including the user access key.
 
 To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
@@ -36,7 +39,7 @@ To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>`
       .. code-block:: shell
          :class: copyable
 
-         mc admin user list myminio
+         mc admin user ls myminio
 
    .. tab-item:: SYNTAX
 
@@ -76,14 +79,14 @@ Example
 List Available Users
 ~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user list` to list all users on a MinIO deployment:
+Use :mc-cmd:`mc admin user ls` to list all users on a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin user list ALIAS
+   mc admin user ls ALIAS
 
-- Replace :mc-cmd:`ALIAS <mc admin user list ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc admin user ls ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
 The output resembles the following:
 

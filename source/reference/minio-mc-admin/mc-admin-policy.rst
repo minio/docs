@@ -73,12 +73,12 @@ Subcommands
           :start-after: start-mc-admin-policy-info-desc
           :end-before: end-mc-admin-policy-info-desc
 
-   * - :mc:`~mc admin policy list`
+   * - :mc:`~mc admin policy ls`
      - .. include:: /reference/minio-mc-admin/mc-admin-policy-list.rst
           :start-after: start-mc-admin-policy-list-desc
           :end-before: end-mc-admin-policy-list-desc
 
-   * - :mc:`~mc admin policy remove`
+   * - :mc:`~mc admin policy rm`
      - .. include:: /reference/minio-mc-admin/mc-admin-policy-remove.rst
           :start-after: start-mc-admin-policy-remove-desc
           :end-before: end-mc-admin-policy-remove-desc

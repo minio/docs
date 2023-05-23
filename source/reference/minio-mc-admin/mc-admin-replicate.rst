@@ -186,7 +186,7 @@ Syntax
       Available values are ``enable`` and ``disable``.
       If not defined, MInIO uses asynchronous site replication.
 
-.. mc-cmd:: rm
+.. mc-cmd:: rm, remove
    :fullpath:
 
    .. versionchanged:: RELEASE.2023-01-11T03-14-16Z

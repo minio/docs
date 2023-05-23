@@ -174,12 +174,12 @@ Use the :mc:`mc event add` command to add a new bucket notification event with t
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which MinIO triggers notifications.
 
-Use :mc:`mc event list` to view all configured bucket events for a given notification target:
+Use :mc:`mc event ls` to view all configured bucket events for a given notification target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event list ALIAS/BUCKET arn:minio:sqs::primary:nsq
+   mc event ls ALIAS/BUCKET arn:minio:sqs::primary:nsq
 
 4) Validate the Configured Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

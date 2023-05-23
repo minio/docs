@@ -1,8 +1,8 @@
 .. _minio-mc-admin-user-remove:
 
-========================
-``mc admin user remove``
-========================
+=====================
+``mc admin user rm``
+=====================
 
 .. default-domain:: minio
 
@@ -11,15 +11,18 @@
    :depth: 2
 
 .. mc:: mc admin user remove
+.. mc:: mc admin user rm
 
 Syntax
 ------
 
 .. start-mc-admin-user-remove-desc
 
-The :mc:`mc admin user remove` command removes a :ref:`MinIO user <minio-internal-idp>` on the target MinIO deployment.
+The :mc:`mc admin user rm` command removes a :ref:`MinIO user <minio-internal-idp>` on the target MinIO deployment.
 
 .. end-mc-admin-user-remove-desc
+
+The :mc:`mc admin user remove` command has equivalent functionality to :mc:`mc admin user rm`.
 
 To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
 
@@ -32,7 +35,7 @@ To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>`
       .. code-block:: shell
          :class: copyable
 
-         mc admin user remove myminio myuser
+         mc admin user rm myminio myuser
 
    .. tab-item:: SYNTAX
 
@@ -78,16 +81,16 @@ Example
 Remove a User
 ~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user remove` to remove a user from a MinIO deployment:
+Use :mc-cmd:`mc admin user rm` to remove a user from a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin user remove ALIAS USERNAME
+   mc admin user rm ALIAS USERNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin user remove ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc admin user rm ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`USERNAME <mc admin user remove USERNAME>` with the username of the user to remove.
+- Replace :mc-cmd:`USERNAME <mc admin user rm USERNAME>` with the username of the user to remove.
 
 Behavior
 --------

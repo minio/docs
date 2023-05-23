@@ -1,6 +1,6 @@
-========================
-``mc admin policy list``
-========================
+======================
+``mc admin policy ls``
+======================
 
 .. default-domain:: minio
 
@@ -8,6 +8,7 @@
    :local:
    :depth: 2
 
+.. mc:: mc admin policy ls
 .. mc:: mc admin policy list
 
 Syntax
@@ -19,6 +20,7 @@ Lists all policies on the target MinIO deployment.
 
 .. end-mc-admin-policy-list-desc
 
+The :mc:`mc admin policy list` command has equivalent functionality to :mc:`mc admin policy ls`.
 
 .. tab-set::
 
@@ -29,7 +31,7 @@ Lists all policies on the target MinIO deployment.
       .. code-block:: shell
          :class: copyable
 
-         mc admin policy list play
+         mc admin policy ls play
 
    .. tab-item:: SYNTAX
 
@@ -38,7 +40,7 @@ Lists all policies on the target MinIO deployment.
       .. code-block:: shell
          :class: copyable
 
-         mc admin policy list TARGET
+         mc admin policy ls TARGET
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -48,7 +50,7 @@ Lists all policies on the target MinIO deployment.
 Parameters
 ~~~~~~~~~~
 
-The :mc-cmd:`mc admin policy list` command accepts the following arguments:
+The :mc-cmd:`mc admin policy ls` command accepts the following arguments:
 
 .. mc-cmd:: TARGET
    
@@ -69,7 +71,7 @@ List the policies that exist on the deployment at alias ``myminio``.
 .. code-block:: shell
    :class: copyable
 
-   mc admin policy list myminio
+   mc admin policy ls myminio
 
 Output
 ~~~~~~

@@ -1,6 +1,6 @@
-==========================
-``mc admin policy remove``
-==========================
+======================
+``mc admin policy rm``
+======================
 
 .. default-domain:: minio
 
@@ -9,6 +9,7 @@
    :depth: 2
 
 .. mc:: mc admin policy remove
+.. mc:: mc admin policy rm
 
 Syntax
 ------
@@ -19,6 +20,7 @@ Removes an IAM policy from the target MinIO deployment.
 
 .. end-mc-admin-policy-remove-desc
 
+The :mc:`mc admin policy remove` command has equivalent functionality to :mc:`mc admin policy rm`.
 
 .. tab-set::
 
@@ -29,7 +31,7 @@ Removes an IAM policy from the target MinIO deployment.
       .. code-block:: shell
          :class: copyable
 
-         mc admin policy remove myminio writeonly
+         mc admin policy rm myminio writeonly
 
    .. tab-item:: SYNTAX
 
@@ -38,7 +40,7 @@ Removes an IAM policy from the target MinIO deployment.
       .. code-block:: shell
          :class: copyable
 
-         mc admin policy remove TARGET POLICYNAME 
+         mc admin policy rm TARGET POLICYNAME 
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -48,7 +50,7 @@ Removes an IAM policy from the target MinIO deployment.
 Parameters
 ~~~~~~~~~~
 
-The :mc-cmd:`mc admin policy create` command accepts the following arguments:
+The :mc-cmd:`mc admin policy rm` command accepts the following arguments:
 
 .. mc-cmd:: TARGET
 
@@ -73,4 +75,4 @@ Remove a policy called ``listbuckets``.
 .. code-block:: shell
    :class: copyable
 
-   mc admin policy remove myminio listbuckets
+   mc admin policy rm myminio listbuckets

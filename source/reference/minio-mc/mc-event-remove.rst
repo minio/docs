@@ -1,8 +1,8 @@
 .. _minio-mc-event-remove:
 
-===================
-``mc event remove``
-===================
+===============
+``mc event rm``
+===============
 
 .. default-domain:: minio
 
@@ -11,16 +11,19 @@
    :depth: 2
 
 .. mc:: mc event remove
+.. mc:: mc event rm
 
 Syntax
 ------
 
 .. start-mc-event-remove-desc
 
-The :mc:`mc event remove` command removes event notification triggers on a
+The :mc:`mc event rm` command removes event notification triggers on a
 bucket.
 
 .. end-mc-event-remove-desc
+
+The :mc:`mc event remove` command has equivalent functionality to :mc:`mc event rm`.
 
 .. tab-set::
 
@@ -33,7 +36,7 @@ bucket.
       .. code-block:: shell
          :class: copyable
 
-         mc event remove myminio/mydata arn:aws:sqs::primary:target
+         mc event rm myminio/mydata arn:aws:sqs::primary:target
 
    .. tab-item:: SYNTAX
 
@@ -87,14 +90,14 @@ Parameters
    *Optional* The event(s) to remove. Specify multiple events using a comma
    ``,`` delimiter. See :ref:`mc-event-supported-events` for supported events.
 
-   Defaults to removing all events on the :mc-cmd:`~mc event remove ALIAS`
-   bucket with the :mc-cmd:`~mc event remove ARN` notification target.
+   Defaults to removing all events on the :mc-cmd:`~mc event rm ALIAS`
+   bucket with the :mc-cmd:`~mc event rm ARN` notification target.
 
 .. mc-cmd:: --force
    
    
-   *Optional* Removes all events on the :mc-cmd:`~mc event remove ALIAS` bucket
-   with the :mc-cmd:`~mc event remove ARN` notification target.
+   *Optional* Removes all events on the :mc-cmd:`~mc event rm ALIAS` bucket
+   with the :mc-cmd:`~mc event rm ARN` notification target.
 
 .. mc-cmd:: --prefix
    
@@ -102,8 +105,8 @@ Parameters
    *Optional* The bucket prefix in which the command removes bucket
    notifications.
 
-   For example, given a :mc-cmd:`~mc event remove ALIAS` of
-   ``play/mybucket`` and a :mc-cmd:`~mc event remove --prefix` of
+   For example, given a :mc-cmd:`~mc event rm ALIAS` of
+   ``play/mybucket`` and a :mc-cmd:`~mc event rm --prefix` of
    ``photos``, the command only removes bucket notifications in
    ``play/mybucket/photos``.
 
@@ -113,8 +116,8 @@ Parameters
    *Optional* The bucket suffix in which the command removes bucket
    notifications. 
 
-   For example, given a :mc-cmd:`~mc event remove ALIAS` of
-   ``play/mybucket`` and a :mc-cmd:`~mc event remove --suffix` of
+   For example, given a :mc-cmd:`~mc event rm ALIAS` of
+   ``play/mybucket`` and a :mc-cmd:`~mc event rm --suffix` of
    ``.jpg``, the command only removes bucket notifications in
    ``play/mybucket/*.jpg``.
 
@@ -142,14 +145,14 @@ Remove Event Notifications from a Bucket
       .. code-block:: shell
          :class: copyable
 
-         mc event remove myminio/mydata arn:minio:sqs::primary:webhook
+         mc event rm myminio/mydata arn:minio:sqs::primary:webhook
 
    .. tab-item:: Syntax
 
       .. code-block:: shell
          :class: copyable
 
-         mc event remove ALIAS ARN
+         mc event rm ALIAS ARN
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO 
         deployment on which to add the bucket notification event. For example:

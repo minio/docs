@@ -10,6 +10,7 @@
    :local:
    :depth: 2
 
+.. mc:: mc ilm rule list
 .. mc:: mc ilm rule ls
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
@@ -24,6 +25,8 @@ Syntax
 The :mc:`mc ilm rule ls` command summarizes all configured object lifecycle management rules on a MinIO bucket in a tabular format.
 
 .. end-mc-ilm-rule-ls-desc
+
+The :mc:`mc ilm rule list` command has equivalent functionality to :mc:`mc ilm rule ls`.
 
 .. tab-set::
 
