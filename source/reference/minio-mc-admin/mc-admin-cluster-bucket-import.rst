@@ -63,7 +63,7 @@ Parameters
 
    The path to the metadata file to import.
    
-   Use the :mc:`mc admin cluster bucket export` to export bucket metadata for use with this command.
+   Use :mc:`mc admin cluster bucket export` to export bucket metadata for use with this command.
 
 .. mc-cmd:: BUCKET
    :optional:
