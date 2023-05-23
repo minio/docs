@@ -19,7 +19,7 @@ A `Helm chart <https://helm.sh/docs/topics/charts/>`__ is a set of YAML files, t
 The following procedure uses a Helm Chart to install the :ref:`MinIO Kubernetes Operator <minio-operator-installation>` to a Kubernetes cluster.
 
 
-Prerequesites
+Prerequisites
 -------------
 
 To install the Operator with Helm you will need the following:
@@ -33,8 +33,7 @@ To install the Operator with Helm you will need the following:
 For more about Operator installation requirements, including TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
 
 This procedure assumes familiarity the with referenced Kubernetes concepts and utilities.
-While this documentation may provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kuber\
-netes Documentation <>`.
+While this documentation may provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
 
 Procedure
@@ -46,7 +45,7 @@ Install Operator
 
 #. Download the Helm charts
 
-   On your local host, download the Operator and tenant Helm charts to a convenient directory:
+   On your local host, download the Operator and Tenant Helm charts to a convenient directory:
 
    .. code-block:: shell
       :class: copyable
@@ -276,12 +275,12 @@ Install Operator
 Deploy a Tenant
 ~~~~~~~~~~~~~~~
 
-You can deploy a MinIO tenant using either the :ref:`Operator Console <minio-operator-console>` or Helm.
-To deploy a tenant with the Console, see :ref:`Deploy and Manage MinIO Tenants <minio-installation>`.
+You can deploy a MinIO Tenant using either the :ref:`Operator Console <minio-operator-console>` or Helm.
+To deploy a Tenant with the Console, see :ref:`Deploy and Manage MinIO Tenants <minio-installation>`.
 
-To deploy a tenant with Helm:
+To deploy a Tenant with Helm:
 
-#. The following Helm command creates a MinIO tenant:
+#. The following Helm command creates a MinIO Tenant:
 
    .. code-block:: shell
       :class: copyable
@@ -291,7 +290,7 @@ To deploy a tenant with Helm:
       --create-namespace \
       tenant-ns tenant-|operator-version-stable|.tgz
 
-#. Expose the tenant Console port
+#. Expose the Tenant Console port
 
    Use the ``kubectl port-forward`` command to temporarily forward traffic from the MinIO pod to the local machine:
 
@@ -312,5 +311,5 @@ To deploy a tenant with Helm:
 
 #. Login to the MinIO Console
 
-   Access the tenant :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9090``.
+   Access the Tenant :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9090``.
    Log in to the Console with the credentials ``myminio | minio123``.
