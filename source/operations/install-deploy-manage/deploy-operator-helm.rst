@@ -60,6 +60,7 @@ Install Operator
 
    .. code-block:: shell
       :class: copyable
+      :substitutions:
 
       helm install \
       --namespace minio-operator \
@@ -258,7 +259,7 @@ Install Operator
              kubernetes.io/service-account.name: console-sa
          type: kubernetes.io/service-account-token
 
-   #. ``kubectl apply`` the YAML files to apply the configuration to your deployment:
+   #. Apply the configuration to your deployment with ``kubectl apply``:
 
       .. code-block:: shell
          :class: copyable
@@ -284,6 +285,7 @@ To deploy a Tenant with Helm:
 
    .. code-block:: shell
       :class: copyable
+      :substitutions:
 
       helm install \
       --namespace tenant-ns \
@@ -311,5 +313,5 @@ To deploy a Tenant with Helm:
 
 #. Login to the MinIO Console
 
-   Access the Tenant :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9090``.
+   Access the Tenant's :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9090``.
    Log in to the Console with the credentials ``myminio | minio123``.
