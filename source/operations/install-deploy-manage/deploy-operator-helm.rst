@@ -26,8 +26,8 @@ To install the Operator with Helm you will need the following:
 
 * An existing cluster using Kubernetes 1.19.0 or later (1.21.0 or later recommended).
 * The ``kubectl`` CLI tool on your local host, the same version as the cluster.
-* `Helm <https://helm.sh/docs/intro/install/>`__ version xx or greater.
-* `yq <https://github.com/mikefarah/yq/#install>`__ version xx or greater.
+* `Helm <https://helm.sh/docs/intro/install/>`__ version 3.8 or greater.
+* `yq <https://github.com/mikefarah/yq/#install>`__ version 4.18.1 or greater.
 * Access to run ``kubectl`` commands on the cluster from your local host.
 
 For more about Operator installation requirements, including TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
@@ -54,6 +54,9 @@ Install Operator
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/operator-|operator-version-stable|.tgz
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/tenant-|operator-version-stable|.tgz
 
+   You can customize the charts to suit your needs, such as changing the MinIO root user credentials or Tenant name.
+   For more information, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
+  
 #. Deploy Operator
 
    The following Helm command deploys the MinIO Operator using the downloaded chart:
@@ -268,9 +271,104 @@ Install Operator
          kubectl apply -f operator.yaml
          kubectl apply -f console-secret.yaml
 
+#. To verify the installation, run the following command:
+
+   .. code-block:: shell
+      :class: copyable
+
+      kubectl get all --namespace minio-operator
+
+   If you initialized the Operator with a custom namespace, replace
+   ``minio-operator`` with that namespace.
+
+   The output resembles the following:
+
+   .. code-block:: shell
+
+      NAME                                  READY   STATUS    RESTARTS   AGE
+      pod/console-59b769c486-cv7zv          1/1     Running   0          81m
+      pod/minio-operator-7976b4df5b-rsskl   1/1     Running   0          81m
+
+      NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)             AGE
+      service/console    ClusterIP   10.105.218.94    <none>        9090/TCP,9443/TCP   81m
+      service/operator   ClusterIP   10.110.113.146   <none>        4222/TCP,4233/TCP   81m
+
+      NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+      deployment.apps/console          1/1     1            1           81m
+      deployment.apps/minio-operator   1/1     1            1           81m
+
+      NAME                                        DESIRED   CURRENT   READY   AGE
+      replicaset.apps/console-59b769c486          1         1         1       81m
+      replicaset.apps/minio-operator-7976b4df5b   1         1         1       81m
+
+	 
 #. Connect to the Operator Console
 
-   .. include:: /includes/common/common-install-operator-kubectl-validate-open-console.rst
+   To connect to the Console, first retrieve the JSON Web Token (JWT) for your deployment and then forward the Console port.
+
+   A. Retrieve the JWT
+
+      The Operator Console uses a JWT to authenticate and log in.
+      The following commands retrieve the token for your deployment:
+
+        .. code-block:: shell
+           :class: copyable
+
+           SA_TOKEN=$(kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode)
+           echo $SA_TOKEN
+
+   B. Forward the Operator Console port to allow access from another host. 
+
+      The following command temporarily forwards the Console to port 9090:
+
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl --namespace minio-operator port-forward svc/console 9090:9090
+
+      This command forwards the pod port ``9090`` to the matching port on the local machine while active in the shell.
+      The ``kubectl port-forward`` command only functions while active in the shell session.
+      Terminating the session closes the ports on the local machine.
+
+   C. Access the Console by navigating to ``http://localhost:9090`` in a browser and login with the JWT.
+      
+   .. note::
+      
+      Some Kubernetes deployments may experience issues with timeouts during port-forwarding operations with the Operator Console.
+      Select the :guilabel:`NodePorts` section to view instructions for alternative access.
+      You can alternatively configure your preferred Ingress to grant access to the Operator Console service.
+      See https://github.com/kubernetes/kubectl/issues/1368 for more information.
+
+.. dropdown:: NodePorts
+
+   Use the following command to identify the :kube-docs:`NodePorts <concepts/services-networking/service/#type-nodeport>` configured for the Operator Console.
+   If your local host does not have the ``jq`` utility installed, you can run the first command and locate the ``spec.ports`` section of the output.
+
+   .. code-block:: shell
+      :class: copyable
+
+      kubectl get svc/console -n minio-operator -o json | jq -r '.spec.ports'
+
+   The output resembles the following:
+
+   .. code-block:: json
+
+      [
+         {
+            "name": "http",
+            "nodePort": 31055,
+            "port": 9090,
+            "protocol": "TCP",
+            "targetPort": 9090
+         },
+         {
+            "name": "https",
+            "nodePort": 31388,
+            "port": 9443,
+            "protocol": "TCP",
+            "targetPort": 9443
+         }
+      ]
 
 
 Deploy a Tenant
@@ -299,12 +397,8 @@ To deploy a Tenant with Helm:
    .. code-block:: shell
       :class: copyable
 
-      kubectl port-forward pod/minio 9000 9090 -n minio-dev
+      kubectl --namespace tenant-ns port-forward svc/myminio-console 9443:9443
    
-   The command forwards the pod ports ``9000`` and ``9090`` to the matching port on the local machine while active in the shell.
-   The ``kubectl port-forward`` command only functions while active in the shell session.
-   Terminating the session closes the ports on the local machine.
-
    .. note::
       
       The following steps of this procedure assume an active ``kubectl port-forward`` command.
@@ -313,5 +407,5 @@ To deploy a Tenant with Helm:
 
 #. Login to the MinIO Console
 
-   Access the Tenant's :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9090``.
-   Log in to the Console with the credentials ``myminio | minio123``.
+   Access the Tenant's :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9443``.
+   Log in to the Console with the default credentials ``myminio | minio123``.
