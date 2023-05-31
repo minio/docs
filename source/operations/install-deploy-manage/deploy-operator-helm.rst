@@ -54,8 +54,9 @@ Install Operator
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/operator-|operator-version-stable|.tgz
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/tenant-|operator-version-stable|.tgz
 
-   You can customize the charts to suit your needs, such as changing the MinIO root user credentials or Tenant name.
-   For more information, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
+   Each chart contains a ``values.yaml`` file you can customize to suit your needs.
+   For example, you may wish to change the MinIO root user credentials or the Tenant name.   
+   For more information about the format of this file, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
   
 #. Deploy Operator
 
@@ -311,7 +312,7 @@ Install Operator
       The Operator Console uses a JWT to authenticate and log in.
       The following commands retrieve the token for your deployment:
 
-        .. code-block:: shell
+      .. code-block:: shell
            :class: copyable
 
            SA_TOKEN=$(kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode)
@@ -392,7 +393,7 @@ To deploy a Tenant with Helm:
 
 #. Expose the Tenant Console port
 
-   Use the ``kubectl port-forward`` command to temporarily forward traffic from the MinIO pod to the local machine:
+   Use ``kubectl port-forward`` to temporarily forward traffic from the MinIO pod to your local machine:
 
    .. code-block:: shell
       :class: copyable
@@ -401,11 +402,9 @@ To deploy a Tenant with Helm:
    
    .. note::
       
-      The following steps of this procedure assume an active ``kubectl port-forward`` command.
-
       To configure long term access to the pod, configure :kube-docs:`Ingress <concepts/services-networking/ingress/>` or similar network control components within Kubernetes to route traffic to and from the pod. Configuring Ingress is out of the scope for this documentation.
 
 #. Login to the MinIO Console
 
-   Access the Tenant's :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9443``.
+   Access the Tenant's :ref:`minio-console` by navigating to ``http://localhost:9443`` in a browser.
    Log in to the Console with the default credentials ``myminio | minio123``.
