@@ -84,17 +84,33 @@ Parameters
 .. mc-cmd:: --access-key
    :optional:
 
-   A string to use as the access key for this account. Omit to let MinIO autogenerate a random value.
+   A string to use as the access key for this account.
+   Omit to let MinIO autogenerate a random 20 character value.
 
    Access Key names *must* be unique across all users.
 
 .. mc-cmd:: --comment
    :optional:
 
-   .. versionadded:: RELEASE.2023-01-28T20-29-38Z
+   .. versionchanged:: RELEASE.2023-05-18T16-59-00Z
 
-   Add a note to the service account.
+   This option has been removed.
+   Use ``--description`` or ``--name`` instead.
+
+.. mc-cmd:: --description
+   :optional:
+
+   .. versionadded:: RELEASE.2023-05-18T16-59-00Z
+
+   Add a description for the service account.
    For example, you might specify the reason the service account exists.
+
+.. mc-cmd:: --name
+   :optional:
+
+   .. versionadded:: RELEASE.2023-05-18T16-59-00Z
+
+   Add a friendly name for the service account.
 
 .. mc-cmd:: --policy
    :optional:
@@ -105,7 +121,8 @@ Parameters
 .. mc-cmd:: --secret-key
    :optional:
 
-   The secret key to associate with the new account. Omit to let MinIO autogenerate a random value.
+   The secret key to associate with the new account.
+   Omit to let MinIO autogenerate a random 40 character value.
 
 
 Global Flags
