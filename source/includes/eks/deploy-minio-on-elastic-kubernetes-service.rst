@@ -57,6 +57,4 @@ You can use this policy as a baseline for manual Operator installations.
 Procedure
 ---------
 
-.. include:: /includes/common/common-install-operator-kubectl-plugin-install-init.rst
-.. include:: /includes/common/common-install-operator-kubectl-validate-open-console.rst
-
+.. include:: /includes/common/common-install-operator-kubectl-plugin.rst

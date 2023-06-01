@@ -200,8 +200,7 @@ Procedure
 The following steps deploy Operator using the MinIO Kubernetes Plugin.
 To install Operator using a Helm chart, see :ref:`Deploy Operator with Helm <minio-k8s-deploy-operator-helm>`.
 
-.. include:: /includes/common/common-install-operator-kubectl-plugin-install-init.rst
-.. include:: /includes/common/common-install-operator-kubectl-validate-open-console.rst
+.. include:: /includes/common/common-install-operator-kubectl-plugin.rst
 
 .. toctree::
    :titlesonly:
