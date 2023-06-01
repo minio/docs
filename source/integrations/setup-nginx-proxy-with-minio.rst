@@ -42,10 +42,18 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
          upstream minio {
             least_conn;
-            server minio-01.internal-domain.com;
-            server minio-02.internal-domain.com;
-            server minio-03.internal-domain.com;
-            server minio-04.internal-domain.com;
+            server minio-01.internal-domain.com:9000;
+            server minio-02.internal-domain.com:9000;
+            server minio-03.internal-domain.com:9000;
+            server minio-04.internal-domain.com:9000;
+         }
+
+         upstream console {
+            least_conn;
+            server minio-01.internal-domain.com:9001;
+            server minio-02.internal-domain.com:9001;
+            server minio-03.internal-domain.com:9001;
+            server minio-04.internal-domain.com:9001;
          }
 
          server {
@@ -74,10 +82,25 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
                proxy_set_header Connection "";
                chunked_transfer_encoding off;
 
-               proxy_pass https://minio:9000/; # This uses the upstream directive definition to load balance
+               proxy_pass https://minio/; # This uses the upstream directive definition to load balance
             }
+         }
 
-            location /minio {
+         server {
+            listen       81;
+            listen  [::]:81;
+            server_name  minio.example.net;
+
+            # Allow special characters in headers
+            ignore_invalid_headers off;
+            # Allow any size file to be uploaded.
+            # Set to a value such as 1000m; to restrict file size to a specific value
+            client_max_body_size 0;
+            # Disable buffering
+            proxy_buffering off;
+            proxy_request_buffering off;
+
+            location / {
                proxy_set_header Host $http_host;
                proxy_set_header X-Real-IP $remote_addr;
                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -96,9 +119,9 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
                
                chunked_transfer_encoding off;
 
-               proxy_pass https://minio:9001/; # This uses the upstream directive definition to load balance and assumes a static Console port of 9001
+               proxy_pass https://console/; # This uses the upstream directive definition to load balance and assumes a static Console port of 9001
             }
-         }
+        }
 
       The S3 API signature calculation algorithm does *not* support proxy schemes where you host either the MinIO Server API or Console GUI on a subpath, such as ``example.net/s3/`` or ``example.net/console/``.
 
