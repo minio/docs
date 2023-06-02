@@ -126,7 +126,7 @@ Parameters
    :optional:
 
    The secret key to associate with the new account.
-   Omit to let MinIO autogenerate a random 40 character value.
+   Omit to let MinIO autogenerate a random 40-character value.
 
 
 Global Flags
