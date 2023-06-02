@@ -80,7 +80,7 @@ Parameters
 
    .. versionadded:: RELEASE.2023-05-18T16-59-00Z
 
-   Add a friendly name for the service account.
+   Add a human-readable name for the service account.
 
 .. mc-cmd:: --policy
    :optional:
