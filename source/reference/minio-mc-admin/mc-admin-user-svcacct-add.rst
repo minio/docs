@@ -93,6 +93,10 @@ Parameters
    :optional:
 
    .. versionchanged:: RELEASE.2023-05-18T16-59-00Z
+      Replaced by :mc-cmd:`~mc admin user svcacct add --description` and :mc-cmd:`~mc admin user svcacct add --name`.
+      
+      Originally added in version RELEASE.2023-01-28T20-29-38Z.
+
 
    This option has been removed.
    Use ``--description`` or ``--name`` instead.
