@@ -67,6 +67,21 @@ Parameters
 
    The service account to modify.
 
+.. mc-cmd:: --description
+   :optional:
+
+   .. versionadded:: RELEASE.2023-05-18T16-59-00Z
+
+   Add a description for the service account.
+   For example, you might specify the reason the service account exists.
+
+.. mc-cmd:: --name
+   :optional:
+
+   .. versionadded:: RELEASE.2023-05-18T16-59-00Z
+
+   Add a human-readable name for the service account.
+
 .. mc-cmd:: --policy
    :optional:
 
