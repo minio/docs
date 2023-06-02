@@ -371,6 +371,10 @@ Install Operator
          }
       ]
 
+   Use the ``http`` or ``https`` port depending on whether you deployed the Operator with Console TLS enabled via :mc-cmd:`kubectl minio init --console-tls`.
+
+   Append the ``nodePort`` value to the externally-accessible IP address of a worker node in your Kubernetes cluster.
+
 
 Deploy a Tenant
 ~~~~~~~~~~~~~~~
