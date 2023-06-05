@@ -409,9 +409,39 @@ To deploy a Tenant with Helm:
    
    .. note::
       
-      To configure long term access to the pod, configure :kube-docs:`Ingress <concepts/services-networking/ingress/>` or similar network control components within Kubernetes to route traffic to and from the pod. Configuring Ingress is out of the scope for this documentation.
+      To configure long term access to the pod, configure :kube-docs:`Ingress <concepts/services-networking/ingress/>` or similar network control components within Kubernetes to route traffic to and from the pod.
+      Configuring Ingress is out of the scope for this documentation.
 
 #. Login to the MinIO Console
 
    Access the Tenant's :ref:`minio-console` by navigating to ``http://localhost:9443`` in a browser.
    Log in to the Console with the default credentials ``myminio | minio123``.
+
+#. Expose the Tenant MinIO port
+
+   To test the MinIO Client :mc-cmd:`mc` from your local machine, forward the MinIO port and create an alias.
+
+   * Forward the Tenant's MinIO port:
+
+     .. code-block:: shell
+        :class: copyable
+
+        kubectl port-forward svc/myminio-hl 9000 -n tenant-ns
+
+   * Create an alias for the Tenant service:
+
+     .. code-block:: shell
+	:class: copyable
+
+        mc alias set myminio https://localhost:9000 minio minio123 --insecure
+
+     This example uses the non-TLS ``myminio-hl`` service, which requires ``--insecure``.
+
+     If you have a TLS cert configured, omit ``--insecure`` and use ``svc/minio`` instead.
+
+   You can use :mc:`mc mb` to create a bucket on the Tenant:
+   
+     .. code-block:: shell
+        :class: copyable
+
+	mc mb myminio/mybucket --insecure
