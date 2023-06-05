@@ -52,9 +52,3 @@ Procedure
 ---------
 
 .. include:: /includes/common/common-install-operator-kubectl-plugin.rst
-
-.. toctree::
-   :titlesonly:
-   :hidden:
-
-   /operations/install-deploy-manage/upgrade-minio-operator

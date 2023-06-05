@@ -57,6 +57,8 @@ The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes t
    :alt: A diagram of the namespaces and pods used by or maintained by the MinIO Operator.
    :align: center
 
+.. _minio-operator-prerequisites:
+
 Prerequisites
 -------------
 
@@ -195,10 +197,14 @@ This procedure assumes you have an existing custom certificate.
 Procedure
 ---------
 
+The following steps deploy Operator using the MinIO Kubernetes Plugin.
+To install Operator using a Helm chart, see :ref:`Deploy Operator with Helm <minio-k8s-deploy-operator-helm>`.
+
 .. include:: /includes/common/common-install-operator-kubectl-plugin.rst
 
 .. toctree::
    :titlesonly:
    :hidden:
 
-   /operations/install-deploy-manage/upgrade-minio-operator
+   /operations/install-deploy-manage/deploy-operator-helm
+   
