@@ -52,11 +52,11 @@ Install Operator
       :substitutions:
 
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/operator-|operator-version-stable|.tgz
-      curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/tenant-|operator-version-stable|.tgz
+      curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/Tenant-|operator-version-stable|.tgz
 
    Each chart contains a ``values.yaml`` file you can customize to suit your needs.
-   For example, you may wish to change the MinIO root user credentials or the Tenant name.   
-   For more information about the format of this file, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
+   For example, you may wish to change the MinIO root user credentials or the Tenant name.
+   For more about customizations, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
   
 #. Deploy Operator
 
@@ -71,7 +71,7 @@ Install Operator
       --create-namespace \
       minio-operator operator-|operator-version-stable|.tgz
 
-#. Configure the MinIO deployment
+#. Configure Operator
 
    A. Create the YAML configuration files
    
@@ -384,16 +384,19 @@ To deploy a Tenant with the Console, see :ref:`Deploy and Manage MinIO Tenants <
 
 To deploy a Tenant with Helm:
 
-#. The following Helm command creates a MinIO Tenant:
+#. The following Helm command creates a MinIO Tenant using the standard chart:
 
    .. code-block:: shell
       :class: copyable
       :substitutions:
 
       helm install \
-      --namespace tenant-ns \
+      --namespace Tenant-ns \
       --create-namespace \
-      tenant-ns tenant-|operator-version-stable|.tgz
+      Tenant-ns Tenant-|operator-version-stable|.tgz
+
+   To deploy more than one Tenant, create a Helm chart with the details of the new Tenant and repeat the deployment steps.
+   Redeploying the same chart updates the previously deployed Tenant.
 
 #. Expose the Tenant Console port
 
@@ -402,7 +405,7 @@ To deploy a Tenant with Helm:
    .. code-block:: shell
       :class: copyable
 
-      kubectl --namespace tenant-ns port-forward svc/myminio-console 9443:9443
+      kubectl --namespace Tenant-ns port-forward svc/myminio-console 9443:9443
    
    .. note::
       
