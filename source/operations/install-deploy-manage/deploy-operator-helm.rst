@@ -435,7 +435,7 @@ To deploy a Tenant with Helm:
 
         mc alias set myminio https://localhost:9000 minio minio123 --insecure
 
-     This example uses the non-TLS ``myminio-hl`` service, which requires ``--insecure``.
+     This example uses the non-TLS ``myminio-hl`` service, which requires :std:option:`--insecure <mc.--insecure>`.
 
      If you have a TLS cert configured, omit ``--insecure`` and use ``svc/minio`` instead.
 
