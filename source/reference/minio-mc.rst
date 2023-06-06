@@ -245,17 +245,24 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-idp-ldap-desc
           :end-before: end-mc-idp-ldap-desc
 
-   * - | :mc:`mc idp openid add`
-       | :mc:`mc idp openid disable`
-       | :mc:`mc idp openid enable`
-       | :mc:`mc idp openid info`
-       | :mc:`mc idp openid ls`
-       | :mc:`mc idp openid policy`
-       | :mc:`mc idp openid rm`
-       | :mc:`mc idp openid update`
-     - .. include:: /reference/minio-mc/mc-idp-openid.rst
-          :start-after: start-mc-idp-openid-desc
-          :end-before: end-mc-idp-openid-desc
+   * - | :mc:`mc idp ldap add`
+       | :mc:`mc idp ldap disable`
+       | :mc:`mc idp ldap enable`
+       | :mc:`mc idp ldap info`
+       | :mc:`mc idp ldap ls`
+       | :mc:`mc idp ldap policy`
+       | :mc:`mc idp ldap rm`
+       | :mc:`mc idp ldap update`
+     - .. include:: /reference/minio-mc/mc-idp-ldap.rst
+          :start-after: start-mc-idp-ldap-desc
+          :end-before: end-mc-idp-ldap-desc
+
+   * - | :mc:`mc idp ldap policy attach`
+       | :mc:`mc idp ldap policy detach`
+       | :mc:`mc idp ldap policy entities`
+     - .. include:: /reference/minio-mc/mc-idp-ldap-policy.rst
+          :start-after: start-mc-idp-ldap-policy-desc
+          :end-before: end-mc-idp-ldap-policy-desc
 
    * - | :mc:`mc ilm restore`
        | :mc:`mc ilm rule add`
@@ -554,6 +561,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-find
    /reference/minio-mc/mc-head
    /reference/minio-mc/mc-idp-ldap
+   /reference/minio-mc/mc-idp-ldap-policy
    /reference/minio-mc/mc-idp-openid
    /reference/minio-mc/mc-ilm
    /reference/minio-mc/mc-legalhold

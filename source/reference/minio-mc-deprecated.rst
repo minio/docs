@@ -116,10 +116,6 @@ Table of Deprecated Admin Commands
      - :mc-cmd:`mc idp openid ls`
      - mc RELEASE.2023-05-26T23-31-54Z
 
-   * - ``mc admin idp openid policy``
-     - :mc-cmd:`mc idp openid policy`
-     - mc RELEASE.2023-05-26T23-31-54Z
-
    * - ``mc admin idp openid rm``
      - :mc-cmd:`mc idp openid rm`
      - mc RELEASE.2023-05-26T23-31-54Z
@@ -200,6 +196,7 @@ Table of Deprecated Admin Commands
    /reference/deprecated/mc-ilm-ls
    /reference/deprecated/mc-ilm-rm
    /reference/deprecated/mc-admin-idp-ldap
+   /reference/deprecated/mc-admin-idp-ldap-policy
    /reference/deprecated/mc-admin-idp-openid
    /reference/deprecated/mc-admin-tier
    /reference/deprecated/mc-admin-bucket-quota

@@ -202,7 +202,6 @@ See :ref:`minio-mc-global-options`.
    /reference/minio-mc-admin/mc-admin-decommission
    /reference/minio-mc-admin/mc-admin-group
    /reference/minio-mc-admin/mc-admin-heal
-   /reference/minio-mc-admin/mc-admin-idp-ldap-policy
    /reference/minio-mc-admin/mc-admin-info
    /reference/minio-mc-admin/mc-admin-kms-key
    /reference/minio-mc-admin/mc-admin-logs
