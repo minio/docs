@@ -12,6 +12,10 @@
 
 .. mc:: mc admin idp openid
 
+.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
+
+   ``mc admin idp openid`` and its subcommands have moved to  :mc-cmd:`mc idp openid`.
+
 Description
 -----------
 
@@ -39,10 +43,10 @@ The :mc-cmd:`mc admin idp openid` command has the following subcommands:
    * - :mc-cmd:`mc admin idp openid update`
      - Modify an existing OpenID IDP server configuration.
 
-   * - :mc-cmd:`mc admin idp openid remove`
+   * - :mc-cmd:`mc admin idp openid rm`
      - Remove an OpenID IDP server configuration from a deployment.
 
-   * - :mc-cmd:`mc admin idp openid list`
+   * - :mc-cmd:`mc admin idp openid ls`
      - Outputs a list of the existing OpenID server configurations for a deployment.
 
    * - :mc-cmd:`mc admin idp openid info`

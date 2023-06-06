@@ -70,11 +70,6 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-heal-desc
           :end-before: end-mc-admin-heal-desc
   
-   * - :mc-cmd:`mc admin idp openid`
-     - .. include:: /reference/minio-mc-admin/mc-admin-idp-openid.rst
-          :start-after: start-mc-admin-idp-openid-desc
-          :end-before: end-mc-admin-idp-openid-desc
-
    * - :mc-cmd:`mc admin info`
      - .. include:: /reference/minio-mc-admin/mc-admin-info.rst
           :start-after: start-mc-admin-info-desc
@@ -208,7 +203,6 @@ See :ref:`minio-mc-global-options`.
    /reference/minio-mc-admin/mc-admin-group
    /reference/minio-mc-admin/mc-admin-heal
    /reference/minio-mc-admin/mc-admin-idp-ldap-policy
-   /reference/minio-mc-admin/mc-admin-idp-openid
    /reference/minio-mc-admin/mc-admin-info
    /reference/minio-mc-admin/mc-admin-kms-key
    /reference/minio-mc-admin/mc-admin-logs
