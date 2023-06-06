@@ -233,6 +233,18 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-head-desc
           :end-before: end-mc-head-desc
      
+   * - | :mc:`mc idp ldap add`
+       | :mc:`mc idp ldap disable`
+       | :mc:`mc idp ldap enable`
+       | :mc:`mc idp ldap info`
+       | :mc:`mc idp ldap ls`
+       | :mc:`mc idp ldap policy`
+       | :mc:`mc idp ldap rm`
+       | :mc:`mc idp ldap update`
+     - .. include:: /reference/minio-mc/mc-idp-ldap.rst
+          :start-after: start-mc-idp-ldap-desc
+          :end-before: end-mc-idp-ldap-desc
+
    * - | :mc:`mc ilm restore`
        | :mc:`mc ilm rule add`
        | :mc:`mc ilm rule edit`
@@ -529,6 +541,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-event
    /reference/minio-mc/mc-find
    /reference/minio-mc/mc-head
+   /reference/minio-mc/mc-idp-ldap
    /reference/minio-mc/mc-ilm
    /reference/minio-mc/mc-legalhold
    /reference/minio-mc/mc-license

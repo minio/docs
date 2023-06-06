@@ -64,6 +64,38 @@ Table of Deprecated Admin Commands
      - Replacement Command
      - Version of Change
 
+   * - ``mc admin idp ldap add``
+     - :mc-cmd:`mc idp ldap add`
+     - mc RELEASE.2023-05-26T23-31-54Z
+
+   * - ``mc admin idp ldap disable``
+     - :mc-cmd:`mc idp ldap disable`
+     - mc RELEASE.2023-05-26T23-31-54Z
+
+   * - ``mc admin idp ldap enable``
+     - :mc-cmd:`mc idp ldap enable`
+     - mc RELEASE.2023-05-26T23-31-54Z
+
+   * - ``mc admin idp ldap info``
+     - :mc-cmd:`mc idp ldap info`
+     - mc RELEASE.2023-05-26T23-31-54Z
+
+   * - ``mc admin idp ldap ls``
+     - :mc-cmd:`mc idp ldap ls`
+     - mc RELEASE.2023-05-26T23-31-54Z
+
+   * - ``mc admin idp ldap policy``
+     - :mc-cmd:`mc idp ldap policy`
+     - mc RELEASE.2023-05-26T23-31-54Z
+
+   * - ``mc admin idp ldap rm``
+     - :mc-cmd:`mc idp ldap rm`
+     - mc RELEASE.2023-05-26T23-31-54Z
+
+   * - ``mc admin idp ldap update``
+     - :mc-cmd:`mc idp ldap update`
+     - mc RELEASE.2023-05-26T23-31-54Z
+
    * - ``mc admin policy add``
      - :mc-cmd:`mc admin policy create`
      - mc RELEASE.2023-03-20T17-17-53Z 
@@ -135,6 +167,7 @@ Table of Deprecated Admin Commands
    /reference/deprecated/mc-ilm-import
    /reference/deprecated/mc-ilm-ls
    /reference/deprecated/mc-ilm-rm
+   /reference/deprecated/mc-admin-idp-ldap
    /reference/deprecated/mc-admin-tier
    /reference/deprecated/mc-admin-bucket-quota
    /reference/deprecated/mc-admin-speedtest
