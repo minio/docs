@@ -419,7 +419,7 @@ To deploy a Tenant with Helm:
 
 #. Expose the Tenant MinIO port
 
-   To test the MinIO Client :mc-cmd:`mc` from your local machine, forward the MinIO port and create an alias.
+   To test the MinIO Client :mc:`mc` from your local machine, forward the MinIO port and create an alias.
 
    * Forward the Tenant's MinIO port:
 
