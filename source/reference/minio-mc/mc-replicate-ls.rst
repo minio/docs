@@ -61,8 +61,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* the :ref:`alias <alias>` of the MinIO deployment and full path to
+   The :ref:`alias <alias>` of the MinIO deployment and full path to
    the bucket or bucket prefix for which to list the replication rules. For
    example:
 
@@ -72,9 +73,9 @@ Parameters
 
 
 .. mc-cmd:: --status
-   
+   :optional:
 
-   *Optional*  Filter replication rules on the bucket based on their status.
+   Filter replication rules on the bucket based on their status.
    Specify one of the following values:
 
    - ``enabled`` - Show only enabled replication rules.

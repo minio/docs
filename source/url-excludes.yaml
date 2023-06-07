@@ -2,6 +2,7 @@ tag: linux
 excludes:
 - 'operations/install-deploy-manage/deploy-minio-tenant.rst'
 - 'operations/install-deploy-manage/modify-minio-tenant.rst'
+- 'operations/install-deploy-manage/deploy-operator-helm.rst'
 - 'operations/install-deploy-manage/expand-minio-tenant.rst'
 - 'operations/install-deploy-manage/upgrade-minio-tenant.rst'
 - 'operations/install-deploy-manage/upgrade-minio-operator.rst'
@@ -26,6 +27,7 @@ excludes:
 tag: macos
 excludes:
 - 'operations/install-deploy-manage/deploy-minio-tenant.rst'
+- 'operations/install-deploy-manage/deploy-operator-helm.rst'
 - 'operations/install-deploy-manage/modify-minio-tenant.rst'
 - 'operations/install-deploy-manage/expand-minio-tenant.rst'
 - 'operations/install-deploy-manage/upgrade-minio-tenant.rst'
@@ -51,6 +53,7 @@ excludes:
 - 'operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst'
 - 'operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst'
 - 'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst'
+- 'operations/install-deploy-manage/deploy-operator-helm.rst'
 - 'operations/install-deploy-manage/multi-site-replication.rst'
 - 'operations/install-deploy-manage/deploy-minio-tenant.rst'
 - 'operations/install-deploy-manage/modify-minio-tenant.rst'
@@ -70,6 +73,7 @@ excludes:
 tag: container
 excludes:
 - 'operations/install-deploy-manage/deploy-minio-tenant.rst'
+- 'operations/install-deploy-manage/deploy-operator-helm.rst'
 - 'operations/install-deploy-manage/modify-minio-tenant.rst'
 - 'operations/install-deploy-manage/expand-minio-tenant.rst'
 - 'operations/install-deploy-manage/upgrade-minio-tenant.rst'
