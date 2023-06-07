@@ -241,7 +241,7 @@ MinIO supports multiple methods for configuring Keycloak Admin API Support:
             keycloak_realm="REALM"
 
       - Replace ``KEYCLOAK_IDENTIFIER`` with the name of the configured Keycloak IDP.
-        You can use :mc-cmd:`mc admin idp openid list` to view all configured IDP configurations on the MinIO deployment
+        You can use :mc-cmd:`mc admin idp openid ls` to view all configured IDP configurations on the MinIO deployment
         
       - Specify the Keycloak admin URL in the :mc-conf:`keycloak_admin_url <identity_openid.keycloak_admin_url>` configuration setting
 

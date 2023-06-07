@@ -91,18 +91,16 @@ Removing the target halts all in-progress
 Retrieve Configured Replication Targets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin bucket remote ls` to list a bucket's configured
-replication targets:
+Use :mc-cmd:`mc replicate ls` to list a bucket's configured replication targets:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin bucket remote ls SOURCE/BUCKET
+   mc replicate ls ALIAS/PATH
 
-- Replace :mc-cmd:`SOURCE <mc admin bucket remote ls SOURCE>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO deployment being used as the
-  replication source. Replace ``BUCKET`` with the full path of the bucket from
-  which MinIO replicates objects.
+- Replace :mc-cmd:`ALIAS <mc replicate ls ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment being used as the
+  replication source. 
+  Replace ``PATH`` with the full path of the bucket from  which MinIO replicates objects.
 
 Syntax
 ------
