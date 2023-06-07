@@ -14,12 +14,14 @@
 
 .. versionadded:: RELEASE.2023-05-26T23-31-54Z
 
+   :mc-cmd:`mc idp ldap policy` and its subcommands replace ``mc admin idp ldap policy``.
+
 Description
 -----------
 
 .. start-mc-idp-ldap-policy-desc
 
-The :mc-cmd:`mc idp ldap policy` command allows you to view the mapping relationships between policies and the associated groups or users.
+The :mc-cmd:`mc idp ldap policy` commands allow you to view the mapping relationships between policies and the associated groups or users.
 
 .. end-mc-idp-ldap-policy-desc
 
@@ -47,7 +49,7 @@ Syntax
 
 .. mc-cmd:: attach
 
-   Attach one or more polices to entity.
+   Attach one or more polices to an entity.
 
    .. tab-set::
 

@@ -245,17 +245,16 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-idp-ldap-desc
           :end-before: end-mc-idp-ldap-desc
 
-   * - | :mc:`mc idp ldap add`
-       | :mc:`mc idp ldap disable`
-       | :mc:`mc idp ldap enable`
-       | :mc:`mc idp ldap info`
-       | :mc:`mc idp ldap ls`
-       | :mc:`mc idp ldap policy`
-       | :mc:`mc idp ldap rm`
-       | :mc:`mc idp ldap update`
-     - .. include:: /reference/minio-mc/mc-idp-ldap.rst
-          :start-after: start-mc-idp-ldap-desc
-          :end-before: end-mc-idp-ldap-desc
+   * - | :mc:`mc idp openid add`
+       | :mc:`mc idp openid disable`
+       | :mc:`mc idp openid enable`
+       | :mc:`mc idp openid info`
+       | :mc:`mc idp openid ls`
+       | :mc:`mc idp openid rm`
+       | :mc:`mc idp openid update`
+     - .. include:: /reference/minio-mc/mc-idp-openid.rst
+          :start-after: start-mc-idp-openid-desc
+          :end-before: end-mc-idp-openid-desc
 
    * - | :mc:`mc idp ldap policy attach`
        | :mc:`mc idp ldap policy detach`

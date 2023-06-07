@@ -14,6 +14,8 @@
 
 .. versionadded:: RELEASE.2023-05-26T23-31-54Z
 
+   :mc-cmd:`mc idp openid` and its subcommands replace ``mc admin idp openid``.
+
 Description
 -----------
 
@@ -25,6 +27,9 @@ The :mc-cmd:`mc idp openid` commands allow you to add, modify, review, list, rem
 
 Define configuration settings as an alternative to using environment variables when :ref:`setting up an OpenID connection <minio-external-identity-management-openid-configure>`.
 
+.. note::
+
+   MinIO :ref:`OpenID environment variables <minio-server-envvar-external-identity-management-openid>` override their corresponding configuration settings as modified or set by this command.
 
 The :mc-cmd:`mc idp openid` command has the following subcommands:
 

@@ -14,6 +14,8 @@
 
 .. versionadded:: RELEASE.2023-05-26T23-31-54Z
 
+   :mc-cmd:`mc idp ldap` and its subcommands replace ``mc admin idp ldap``.
+
 Description
 -----------
 
@@ -27,8 +29,7 @@ Define configuration settings as an alternative to using environment variables w
 
 .. note::
 
-   Configuration settings do **not** override settings configured as environment variables.
-
+   MinIO :ref:`AD/LDAP environment variables <minio-server-envvar-external-identity-management-ad-ldap>` override their corresponding configuration settings as modified or set by this command.
 
 The :mc-cmd:`mc idp ldap` command has the following subcommands:
 
@@ -60,8 +61,8 @@ The :mc-cmd:`mc idp ldap` command has the following subcommands:
    * - :mc-cmd:`mc idp ldap disable`
      - Disables an AD/LDAP server configuration.
 
-   * - :mc-cmd:`mc idp ldap policy entities`
-     - List policy association entities
+   * - :mc-cmd:`mc idp ldap policy` subcommands
+     - Manage AD/LDAP policies and entity mappings.
 
 Configuration Parameters
 ------------------------
