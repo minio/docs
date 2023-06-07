@@ -26,7 +26,7 @@ Clients cannot use the user credentials to authenticate to the MinIO deployment.
 Disabling a user does *not* remove that user from the deployment.
 Use :mc-cmd:`mc admin user enable` to enable a disabled user on a MinIO deployment.
 
-To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
 
 .. tab-set::
 

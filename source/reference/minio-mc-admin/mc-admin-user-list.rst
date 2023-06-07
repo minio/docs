@@ -28,7 +28,7 @@ The :mc:`mc admin user list` command has equivalent functionality to :mc:`mc adm
 :mc-cmd:`mc admin user ls` does *not* return the access key or secret key associated to a user.
 Use :mc-cmd:`mc admin user info` to retrieve detailed user information, including the user access key.
 
-To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
 
 .. tab-set::
 

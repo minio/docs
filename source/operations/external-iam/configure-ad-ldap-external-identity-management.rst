@@ -275,5 +275,5 @@ Disable a Configured Active Directory / LDAP Connection
 
 You can enable and disable the configured AD/LDAP connection as needed.
 
-Use :mc-cmd:`mc admin idp ldap disable` to deactivate a configured connection.
-Use :mc-cmd:`mc admin idp ldap enable` to activate a previously configured connection.
+Use :mc-cmd:`mc idp ldap disable` to deactivate a configured connection.
+Use :mc-cmd:`mc idp ldap enable` to activate a previously configured connection.
