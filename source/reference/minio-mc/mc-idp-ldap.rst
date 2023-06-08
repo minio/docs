@@ -21,7 +21,7 @@ Description
 
 .. start-mc-idp-ldap-desc
 
-The :mc-cmd:`mc idp ldap` commands allow you to add, modify, review, list, remove, enable, and disable server configurations to 3rd party :ref:`Active Directory or LDAP Identity and Access Management (IAM) integrations <minio-external-identity-management-ad-ldap>`.
+The :mc-cmd:`mc idp ldap` commands allow you to manage configurations to 3rd party :ref:`Active Directory or LDAP Identity and Access Management (IAM) integrations <minio-external-identity-management-ad-ldap>`.
 
 .. end-mc-idp-ldap-desc
 
