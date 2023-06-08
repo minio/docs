@@ -21,7 +21,7 @@ Description
 
 .. start-mc-idp-openid-desc
 
-The :mc-cmd:`mc idp openid` commands allow you to add, modify, review, list, remove, enable, and disable server configurations to 3rd party :ref:`OpenID Identity and Access Management (IAM) integrations <minio-external-identity-management-openid>`.
+The :mc-cmd:`mc idp openid` commands allow you to manage configurations to 3rd party :ref:`OpenID Identity and Access Management (IAM) integrations <minio-external-identity-management-openid>`.
 
 .. end-mc-idp-openid-desc
 
