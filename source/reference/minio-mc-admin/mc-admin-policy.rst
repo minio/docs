@@ -33,7 +33,7 @@ MinIO PBAC uses IAM-compatible policy JSON documents to define rules for accessi
 
 .. end-mc-admin-policy-desc
 
-For complete documentation on MinIO PBAC, including policy document JSON structure and syntax, see :ref:`minio-policy`.
+For complete documentation on MinIO PBAC, including policy document JSON structure and syntax, see :ref:`minio-policy`. To manage policies for deployments that use LDAP authentication, see :mc:`mc idp ldap policy`.
 
 Subcommands
 -----------
