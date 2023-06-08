@@ -189,7 +189,7 @@ Download an Object over FTP
 
 This example lists items in a bucket, then downloads the contents of the bucket.
 
-.. code-block:: shell
+.. code-block:: console
 
    > ftp localhost -P 8021
    Connected to localhost.
@@ -220,7 +220,7 @@ Connect to MinIO Using SFTP
 
 The following example connects to an SSH FTP server, lists the contents of a bucket named ``runner``, and downloads an object.
 
-.. code-block:: shell
+.. code-block:: console
 
    > sftp -P 8022 minio@localhost
    minio@localhost's password:
