@@ -21,7 +21,8 @@ Description
 
 .. start-mc-idp-ldap-policy-desc
 
-The :mc-cmd:`mc idp ldap policy` commands allow you to view the mapping relationships between policies and the associated groups or users.
+The :mc-cmd:`mc idp ldap policy` commands allow you to view the mapping relationships between policies and the associated groups or users. The :mc-cmd:`mc idp ldap policy` commands are only supported against MinIO deployments.
+
 
 .. end-mc-idp-ldap-policy-desc
 

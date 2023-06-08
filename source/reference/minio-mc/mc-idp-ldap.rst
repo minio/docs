@@ -25,7 +25,7 @@ The :mc-cmd:`mc idp ldap` commands allow you to add, modify, review, list, remov
 
 .. end-mc-idp-ldap-desc
 
-Define configuration settings as an alternative to using environment variables when :ref:`setting up an AD/LDAP connection <minio-authenticate-using-ad-ldap-generic>`.
+Define configuration settings as an alternative to using environment variables when :ref:`setting up an AD/LDAP connection <minio-authenticate-using-ad-ldap-generic>`. The :mc-cmd:`mc idp ldap` commands are only supported against MinIO deployments.
 
 .. note::
 

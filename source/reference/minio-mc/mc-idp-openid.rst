@@ -25,7 +25,8 @@ The :mc-cmd:`mc idp openid` commands allow you to add, modify, review, list, rem
 
 .. end-mc-idp-openid-desc
 
-Define configuration settings as an alternative to using environment variables when :ref:`setting up an OpenID connection <minio-external-identity-management-openid-configure>`.
+Define configuration settings as an alternative to using environment variables when :ref:`setting up an OpenID connection <minio-external-identity-management-openid-configure>`. The :mc-cmd:`mc idp openid` commands are only supported against MinIO deployments.
+
 
 .. note::
 

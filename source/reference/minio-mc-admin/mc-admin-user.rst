@@ -27,13 +27,10 @@ To manage users who authenticate using a 3rd party IDP, use the command for the 
 - For AD/LDAP, use :mc:`mc idp ldap`
 - For OpenID Connect (OIDC) compatible providers, use :mc:`mc idp openid`
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc idp`` commands on MinIO Deployments Only
    :class: note
 
-   .. include:: /includes/facts-mc-admin.rst
-      :start-after: start-minio-only
-      :end-before: end-minio-only
-
+   :mc:`mc idp ldap` and :mc:`mc idp openid` and their subcommands are only supported against MinIO deployments.
 
 
 Subcommands
