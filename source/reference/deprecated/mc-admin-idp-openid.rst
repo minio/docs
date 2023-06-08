@@ -12,6 +12,10 @@
 
 .. mc:: mc admin idp openid
 
+.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
+
+   ``mc admin idp openid`` and its subcommands have moved to  :mc-cmd:`mc idp openid`.
+
 Description
 -----------
 

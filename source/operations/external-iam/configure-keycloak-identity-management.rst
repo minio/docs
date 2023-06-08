@@ -221,27 +221,27 @@ You can validate the functionality by using the Admin REST API with the MinIO cl
 
 MinIO supports multiple methods for configuring Keycloak Admin API Support:
 
-- Using a terminal/shell and the :mc:`mc admin idp openid` command
+- Using a terminal/shell and the :mc:`mc idp openid` command
 - Using environment variables set prior to starting MinIO
 
 .. tab-set::
 
    .. tab-item:: CLI
 
-      You can use the :mc-cmd:`mc admin idp openid update` command to modify the configuration settings for an existing Keycloak service.
+      You can use the :mc-cmd:`mc idp openid update` command to modify the configuration settings for an existing Keycloak service.
       You can alternatively include the following configuration settings when setting up Keycloak for the first time.
       The command takes all supported :ref:`OpenID Configuration Settings <minio-open-id-config-settings>`:
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin idp openid update ALIAS KEYCLOAK_IDENTIFIER \
+         mc idp openid update ALIAS KEYCLOAK_IDENTIFIER \
             vendor="keycloak" \
             keycloak_admin_url="https://keycloak-url:port/admin"
             keycloak_realm="REALM"
 
       - Replace ``KEYCLOAK_IDENTIFIER`` with the name of the configured Keycloak IDP.
-        You can use :mc-cmd:`mc admin idp openid ls` to view all configured IDP configurations on the MinIO deployment
+        You can use :mc-cmd:`mc idp openid ls` to view all configured IDP configurations on the MinIO deployment
         
       - Specify the Keycloak admin URL in the :mc-conf:`keycloak_admin_url <identity_openid.keycloak_admin_url>` configuration setting
 

@@ -1,0 +1,293 @@
+.. _minio-mc-idp-ldap:
+
+===============
+``mc idp ldap``
+===============
+
+.. default-domain:: minio
+
+.. contents:: Table of Contents
+   :local:
+   :depth: 2
+
+.. mc:: mc idp ldap
+
+.. versionadded:: RELEASE.2023-05-26T23-31-54Z
+
+   :mc-cmd:`mc idp ldap` and its subcommands replace ``mc admin idp ldap``.
+
+Description
+-----------
+
+.. start-mc-idp-ldap-desc
+
+The :mc-cmd:`mc idp ldap` commands allow you to manage configurations to 3rd party :ref:`Active Directory or LDAP Identity and Access Management (IAM) integrations <minio-external-identity-management-ad-ldap>`.
+
+.. end-mc-idp-ldap-desc
+
+Define configuration settings as an alternative to using environment variables when :ref:`setting up an AD/LDAP connection <minio-authenticate-using-ad-ldap-generic>`. The :mc-cmd:`mc idp ldap` commands are only supported against MinIO deployments.
+
+.. note::
+
+   MinIO :ref:`AD/LDAP environment variables <minio-server-envvar-external-identity-management-ad-ldap>` override their corresponding configuration settings as modified or set by this command.
+
+The :mc-cmd:`mc idp ldap` command has the following subcommands:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Subcommand
+     - Description
+
+   * - :mc-cmd:`mc idp ldap add`
+     - Create an AD/LDAP IDP server configuration.
+
+   * - :mc-cmd:`mc idp ldap update`
+     - Modify an existing AD/LDAP IDP server configuration.
+
+   * - :mc-cmd:`mc idp ldap ls`
+     - Lists AD/LDAP server configurations.
+
+   * - :mc-cmd:`mc idp ldap rm`
+     - Remove an AD/LDAP IDP server configuration from a deployment.
+
+   * - :mc-cmd:`mc idp ldap info`
+     - Displays details for a specific AD/LDAP server configuration.
+
+   * - :mc-cmd:`mc idp ldap enable`
+     - Enables an AD/LDAP server configuration.
+
+   * - :mc-cmd:`mc idp ldap disable`
+     - Disables an AD/LDAP server configuration.
+
+   * - :mc-cmd:`mc idp ldap policy` subcommands
+     - Manage AD/LDAP policies and entity mappings.
+
+Configuration Parameters
+------------------------
+
+The :mc-cmd:`mc idp ldap` subcommands support configuration parameters.
+The parameters define the server's interaction with the Active Directory or LDAP IAM provider.
+
+For a more detailed explanation of the configuration parameters, refer to the :ref:`config setting documentation <minio-ldap-config-settings>`.
+
+Syntax
+------
+
+.. mc-cmd:: add
+
+   Create a new configuration for an AD/LDAP provider.
+   MinIO supports no more than *one* (1) AD/LDAP provider per deployment.
+
+   .. tab-set::
+
+      .. tab-item:: EXAMPLE
+
+         The following example sets the AD/LDAP configuration settings for the ``myminio`` deployment.
+
+         .. code-block:: shell
+            :class: copyable
+
+             mc idp ldap add                                                            \
+                         myminio                                                        \
+                         server_addr=myldapserver:636                                   \
+                         lookup_bind_dn=cn=admin,dc=min,dc=io                           \
+                         lookup_bind_password=somesecret                                \
+                         user_dn_search_base_dn=dc=min,dc=io                            \
+                         user_dn_search_filter="(uid=%s)"                               \
+                         group_search_base_dn=ou=swengg,dc=min,dc=io                    \
+                         group_search_filter="(&(objectclass=groupofnames)(member=%d))"
+
+      .. tab-item:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc [GLOBALFLAGS] idp ldap add               \
+                                      ALIAS             \
+                                      [CFG_PARAM1]      \
+                                      [CFG_PARAM2]...
+
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to create for AD/LDAP integration.
+         - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-ldap-config-settings>` key-value pairs in the format of ``PARAMETER="value"``.
+
+.. mc-cmd:: update
+
+   Modify an existing set of configurations for an AD/LDAP provider.
+
+   .. tab-set::
+
+      .. tab-item:: EXAMPLE
+
+         The following example changes two of the AD/LDAP configuration settings for the ``myminio`` deployment.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc idp ldap update                                \
+                        myminio                               \
+                        lookup_bind_dn=cn=admin,dc=min,dc=io  \
+                        lookup_bind_password=somesecret
+
+      .. tab-item:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc [GLOBALFLAGS] idp ldap update           \
+                                      ALIAS            \
+                                      [CFG_PARAM1]     \
+                                      [CFG_PARAM2]...
+
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to update for AD/LDAP integration.
+         - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-ldap-config-settings>` key-value pairs to update in the format of ``PARAMETER="value"``.
+
+.. mc-cmd:: ls, list
+
+   Lists the existing set of configurations for an AD/LDAP provider.
+
+   .. tab-set::
+
+      .. tab-item:: EXAMPLE
+
+         The following example lists the AD/LDAP configuration settings for the ``myminio`` deployment.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc idp ldap ls myminio
+
+      .. tab-item:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc [GLOBALFLAGS] idp ldap ls ALIAS
+
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to list the AD/LDAP integration.
+
+.. mc-cmd:: rm, remove
+
+   Remove the existing configuration for an AD/LDAP provider.
+
+   .. tab-set::
+
+      .. tab-item:: EXAMPLE
+
+         The following example removes the AD/LDAP provider settings for the ``myminio`` deployment.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc idp ldap rm myminio
+
+      .. tab-item:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc [GLOBALFLAGS] idp ldap rm     \
+                                      ALIAS
+
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to remove the AD/LDAP integration.
+
+
+.. mc-cmd:: info
+
+   Outputs the current configuration for an AD/LDAP provider on a specified MinIO deployment.
+
+   .. tab-set::
+
+      .. tab-item:: EXAMPLE
+
+         The following example outputs the AD/LDAP configuration settings on the ``myminio`` deployment.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc idp ldap info myminio
+
+      .. tab-item:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc [GLOBALFLAGS] idp ldap info   \
+                                      ALIAS
+
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to retrieve info on the AD/LDAP integration.
+
+.. mc-cmd:: enable
+
+   Enables the currently configured AD/LDAP provider.
+
+   .. tab-set::
+
+      .. tab-item:: EXAMPLE
+
+         The following example enables the AD/LDAP configuration on the ``myminio`` deployment.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc idp ldap enable   \
+                        myminio
+
+      .. tab-item:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc [GLOBALFLAGS] idp ldap enable  \
+                                      ALIAS
+
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to enable the AD/LDAP integration.
+
+.. mc-cmd:: disable
+
+   Disables the currently configured AD/LDAP provider.
+
+   .. tab-set::
+
+      .. tab-item:: EXAMPLE
+
+         The following example disables the AD/LDAP configurations on the ``myminio`` deployment.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc idp ldap disable  \
+                        myminio
+
+      .. tab-item:: SYNTAX
+
+         The command has the following syntax:
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc [GLOBALFLAGS] idp ldap disable  \
+                                      ALIAS
+
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to disable the AD/LDAP integration.
+
+Global Flags
+------------
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-globals
+   :end-before: end-minio-mc-globals
+

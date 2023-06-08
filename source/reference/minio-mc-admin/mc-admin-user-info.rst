@@ -22,7 +22,7 @@ The :mc:`mc admin user info` command returns detailed information of a :ref:`Min
 
 .. end-mc-admin-user-info-desc
 
-To manage external Identity Provider users, see :mc:`OIDC <mc admin idp openid>` or :mc:`AD/LDAP <mc admin idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
 
 .. tab-set::
 

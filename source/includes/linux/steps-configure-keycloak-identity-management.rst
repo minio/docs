@@ -38,7 +38,7 @@ Set the value to any :ref:`policy <minio-policy>` on the MinIO deployment.
 MinIO supports multiple methods for configuring Keycloak authentication:
 
 - Using the MinIO Console
-- Using a terminal/shell and the :mc:`mc admin idp openid` command
+- Using a terminal/shell and the :mc:`mc idp openid` command
 - Using environment variables set prior to starting MinIO
 
 .. tab-set::

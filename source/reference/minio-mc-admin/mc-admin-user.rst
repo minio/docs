@@ -22,18 +22,15 @@ The :mc:`mc admin user` command and its subcommands manage :ref:`MinIO users <mi
 Clients *must* authenticate to the MinIO deployment with the access key and secret key associated to a user on the deployment.
 MinIO users constitute a key component in MinIO Identity and Access Management.
 
-To manage users who authenticate using a 3rd party IDP, use the :mc:`mc admin` commands for the appropriate provider:
+To manage users who authenticate using a 3rd party IDP, use the command for the appropriate provider:
 
-- For AD/LDAP, use :mc:`mc admin idp ldap`
-- For OpenID Connect (OIDC) compatible providers, use :mc:`mc admin idp openid`
+- For AD/LDAP, use :mc:`mc idp ldap`
+- For OpenID Connect (OIDC) compatible providers, use :mc:`mc idp openid`
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc idp`` commands on MinIO Deployments Only
    :class: note
 
-   .. include:: /includes/facts-mc-admin.rst
-      :start-after: start-minio-only
-      :end-before: end-minio-only
-
+   :mc:`mc idp ldap` and :mc:`mc idp openid` and their subcommands are only supported against MinIO deployments.
 
 
 Subcommands
