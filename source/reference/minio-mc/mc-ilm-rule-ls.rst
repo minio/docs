@@ -17,6 +17,10 @@
 
    ``mc ilm rule ls`` replaces ``mc ilm ls``.
 
+.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
+
+   ``mc ilm rule ls --JSON`` output includes the policy modification time in ``updateAt``.
+   
 Syntax
 ------
 
@@ -137,10 +141,48 @@ Use :mc:`mc ilm rule ls` to list a bucket's lifecycle management rules:
 
    mc ilm rule ls ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
 
 - Replace ``PATH`` with the path to the bucket on the S3-compatible host.
+
+Show Policy Modification Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc ilm rule ls` with :std:option:`--JSON <mc.--JSON>` to show the time the policy for a bucket was last updated.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ilm rule ls ALIAS/PATH --JSON
+
+- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace ``PATH`` with the path to the bucket on the S3-compatible host.
+
+The ``updateAt`` property in the JSON output contains the date and time the policy was updated.
+
+The output resembles the following:
+
+.. code-block:: shell
+
+   {
+    "status": "success",
+    "target": "myminio/mybucket",
+    "config": {
+     "Rules": [
+      {
+       "Expiration": {
+        "Days": 30
+       },
+       "ID": "ci1o2mg0sko6f1r3krv0",
+       "Status": "Enabled"
+      }
+     ]
+    },
+    "updatedAt": "2023-06-09T19:45:30Z"
+   }
+
+
 
 Required Permissions
 --------------------
