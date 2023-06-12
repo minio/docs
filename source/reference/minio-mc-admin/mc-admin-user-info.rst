@@ -12,10 +12,6 @@
 
 .. mc:: mc admin user info
 
-.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
-
-   ``mc admin user info --JSON`` output includes policies inherited from a user's group memberships in ``memberOf``.
-
 Syntax
 ------
 
@@ -74,6 +70,9 @@ Global Flags
    :start-after: start-minio-mc-globals
    :end-before: end-minio-mc-globals
 
+.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
+
+   ``mc admin user info --JSON`` output includes policies inherited from a user's group memberships in ``memberOf``.
 
 Examples
 --------
