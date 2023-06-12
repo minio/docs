@@ -103,7 +103,7 @@ The output resembles the following:
 View Policies from Group Membership
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user info` with :std:option:`--JSON <mc.--JSON>` to view the policies inherited from a user's group memberships:
+Use :mc-cmd:`mc admin user info` with :std:option:`--JSON <mc.--JSON>` to view the policies inherited from a user's :ref:`group memberships <minio-groups>`:
 
 .. code-block:: shell
    :class: copyable
