@@ -12,7 +12,6 @@
 
 .. mc:: mc admin user info
 
-
 Syntax
 ------
 
@@ -71,9 +70,12 @@ Global Flags
    :start-after: start-minio-mc-globals
    :end-before: end-minio-mc-globals
 
+.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
 
-Example
--------
+   ``mc admin user info --JSON`` output includes policies inherited from a user's group memberships in ``memberOf``.
+
+Examples
+--------
 
 View User Details
 ~~~~~~~~~~~~~~~~~
@@ -97,6 +99,39 @@ The output resembles the following:
    Status: enabled
    PolicyName: readwrite
    MemberOf:
+
+View Policies from Group Membership
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin user info` with :std:option:`--JSON <mc.--JSON>` to view the policies inherited from a user's :ref:`group memberships <minio-groups>`:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin user info ALIAS USERNAME --JSON
+
+- Replace :mc-cmd:`ALIAS <mc admin user info ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
+- Replace :mc-cmd:`USERNAME <mc admin user info USERNAME>` with the username of the user to display information for.
+
+The ``memberOf`` property in the output contains a list of groups the user is a member of, with the policies attached to each group.
+The output resembles the following:
+
+.. code-block:: shell
+
+   {
+    "status": "success",
+    "accessKey": "myuser",
+    "userStatus": "enabled",
+    "memberOf": [
+     {
+      "name": "testingGroup",
+      "policies": [
+       "testingGroupPolicy"
+      ]
+     }
+    ]
+   }
 
 
 Behavior
