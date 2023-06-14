@@ -151,7 +151,8 @@ Performing a ``DELETE`` operation on a versioned object creates a 0-byte ``Delet
 For objects where the latest version is a ``DeleteMarker``, clients must specify versioning flags or identifiers to perform ``GET/HEAD/LIST/DELETE`` operations on a prior version of that object.
 The default server behavior omits ``DeleteMarker`` objects from consideration for unversioned operations.
 
-MinIO relies on :ref:`Lifecycle Management expiration rules <minio-lifecycle-management-expiration>` for automatic cleanup *or* manual cleanup using versioned ``DELETE`` operations for removing non-current versioned objects and ``DeleteMarker`` objects.
+MinIO  can utilize :ref:`Lifecycle Management expiration rules <minio-lifecycle-management-expiration>` to automatically remove versioned objects permanently.
+Otherwise, use manual ``DELETE`` operations to permanently remove non-current versioned objects or ``DeleteMarker`` objects.
 
 .. admonition:: MinIO Implements Idempotent Delete Markers
    :class: note
