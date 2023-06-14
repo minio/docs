@@ -613,6 +613,7 @@ Lock Metrics
 
    Number of current READ locks on the peer.
 
+.. _minio-metrics-and-alerts-webhook:
 
 Webhook Metrics
 ~~~~~~~~~~~~~~~
@@ -623,7 +624,7 @@ Webhook Metrics
 
 .. metric:: minio_cluster_webhook_online
 
-   State of the webhook endpoint: ``1`` if online, or ``0`` if not online.
+   Reports whether the webhook endpoint is online (1) or offline (0). 
 
 .. metric:: minio_cluster_webhook_queue_length
 

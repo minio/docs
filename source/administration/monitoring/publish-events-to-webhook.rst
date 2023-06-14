@@ -1,4 +1,4 @@
-.. _minio-bucket-notifications-publish-webhook:
+-1;95;0c.. _minio-bucket-notifications-publish-webhook:
 
 =========================
 Publish Events to Webhook
@@ -311,3 +311,9 @@ a notification.
    :class: copyable
 
    mc cp ~/data/new-object.txt ALIAS/BUCKET
+
+Webhook Metrics
+---------------
+
+MinIO publishes several :ref:`metrics <minio-metrics-and-alerts>` for monitoring webhook endpoints.
+See :ref:`minio-metrics-and-alerts-webhook` for a list of available metrics.
