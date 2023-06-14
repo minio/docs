@@ -1,4 +1,4 @@
--1;95;0c.. _minio-bucket-notifications-publish-webhook:
+.. _minio-bucket-notifications-publish-webhook:
 
 =========================
 Publish Events to Webhook
