@@ -61,7 +61,7 @@ explicitly choose to list, retrieve, or remove a specific object version.
          :alt: Object with Multiple Versions
          :align: center
 
-:ref:`Delete operations <minio-bucket-versioning-delete>` which do *not* specify the unique object version ID result in creating a 0-byte ``DeleteMarker`` for that object.
+:ref:`Delete operations <minio-bucket-versioning-delete>` which do *not* specify the unique object version ID create a 0-byte ``DeleteMarker`` for that object.
 
 .. versionchanged:: MinIO Server RELEASE.2023-05-04T21-44-30Z
 
@@ -149,7 +149,7 @@ Versioned Delete Operations
 
 Performing a ``DELETE`` operation on a versioned object creates a 0-byte ``DeleteMarker`` as the latest version of that object.
 For objects where the latest version is a ``DeleteMarker``, clients must specify versioning flags or identifiers to ``GET/HEAD/LIST/DELETE`` operations to work on any previous version of that object.
-The default server behavior is to omit ``DeleteMarker`` objects from consideration for unversioned operations.
+The default server behavior omits ``DeleteMarker`` objects from consideration for unversioned operations.
 
 MinIO relies on :ref:`Lifecycle Management expiration rules <minio-lifecycle-management-expiration>` for automatic cleanup *or* versioned delete operations for manual cleanup of non-current versioned objects and ``DeleteMarker`` objects.
 
