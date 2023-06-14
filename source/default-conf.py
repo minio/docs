@@ -264,7 +264,24 @@ html_short_title = 'MinIO Object Storage for ' + platform_fmt
 html_permalinks_icon = ''
 
 html_context = {
-    'doc_platform': platform.lower()
+    'doc_platform': platform.lower(),
+    'docs': [
+         # The first item has to be the current docs site #
+         {
+            'name': 'MinIO Documentation',
+            'current': True
+         },
+         {
+            'name': 'KES Documentation',
+            'url': 'https://min.io/docs/kes',
+            'external': True
+         },
+         {
+            'name': 'DirectPV Documentation',
+            'url': '',
+            'external': True
+         },
+    ]
 }
 
 # -- Options for Sphinx Tabs -------------------------------------------------
