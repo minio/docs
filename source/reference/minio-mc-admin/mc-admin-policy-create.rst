@@ -94,7 +94,7 @@ The :mc-cmd:`mc admin policy create` command accepts the following arguments:
 .. mc-cmd:: POLICYPATH
 
    The file path of the policy to add. 
-   The file *must* be a JSON-formatted file with :iam-docs:`IAM-compatible syntax <reference_policies.html>` and a maximum size of 2048 characters.
+   The file *must* be a JSON-formatted file with :iam-docs:`IAM-compatible syntax <reference_policies.html>` and no more than 2048 characters.
 
 Global Flags
 ~~~~~~~~~~~~
