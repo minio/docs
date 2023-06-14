@@ -623,7 +623,7 @@ Webhook Metrics
 
 .. metric:: minio_cluster_webhook_online
 
-   State of the webhook endpoint: `1` if online, or `0` if not online.
+   State of the webhook endpoint: ``1`` if online, or ``0`` if not online.
 
 .. metric:: minio_cluster_webhook_queue_length
 
