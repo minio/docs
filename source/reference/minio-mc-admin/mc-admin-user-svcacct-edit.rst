@@ -85,7 +85,7 @@ Parameters
 .. mc-cmd:: --policy
    :optional:
 
-   The path to a :ref:`policy document <minio-policy>` to attach to the new access key.
+   The path to a :ref:`policy document <minio-policy>` to attach to the new access key, with a maximum size of 2048 characters.
    The attached policy cannot grant access to any action or resource not explicitly allowed by the parent user's policies.
 
    The new policy overwrites any previously attached policy.

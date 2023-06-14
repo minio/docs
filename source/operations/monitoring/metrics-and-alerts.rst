@@ -613,6 +613,27 @@ Lock Metrics
 
    Number of current READ locks on the peer.
 
+.. _minio-metrics-and-alerts-webhook:
+
+Webhook Metrics
+~~~~~~~~~~~~~~~
+
+.. metric:: minio_cluster_webhook_failed_messages
+
+   Number of messages that failed to send.
+
+.. metric:: minio_cluster_webhook_online
+
+   Reports whether the webhook endpoint is online (1) or offline (0). 
+
+.. metric:: minio_cluster_webhook_queue_length
+
+   Number of messages in the webhook queue.
+
+.. metric:: minio_cluster_webhook_total_messages
+
+   Number of messages sent to this webhook endpoint.
+
 .. toctree::
    :titlesonly:
    :hidden:

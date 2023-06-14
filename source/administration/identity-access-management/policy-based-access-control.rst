@@ -159,7 +159,8 @@ MinIO policy documents use the same schema as
 The following sample document provides a template for creating custom
 policies for use with a MinIO deployment. For more complete documentation on IAM
 policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
-<IAM/latest/UserGuide/reference_policies_elements.html>`. 
+<IAM/latest/UserGuide/reference_policies_elements.html>`.
+The maximum size for a policy document is 2048 characters.
 
 .. code-block:: javascript
    :class: copyable
