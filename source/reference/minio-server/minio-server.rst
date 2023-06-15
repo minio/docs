@@ -677,6 +677,18 @@ server logs webhook endpoints:
    This variable corresponds to the :mc-conf:`logger_webhook proxy 
    <logger_webhook.proxy>` configuration setting.
 
+.. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_DIR
+
+   .. versionadded:: RELEASE.2023-05-18T00-05-36Z
+
+   *Optional*
+
+   Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/home/events``.
+
+   MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+
+   This variable corresponds to the :mc-conf:`logger_webhook queue_dir <logger_webhook.queue_dir>` configuration setting.
+
 .. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_SIZE
 
    *Optional*
@@ -765,6 +777,40 @@ audit log webhook endpoints:
 
    This variable corresponds to the :mc-conf:`audit_webhook client_key
    <audit_webhook.client_key>` configuration setting.
+
+.. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_DIR
+
+   .. versionadded:: RELEASE.2023-05-18T00-05-36Z
+
+   *Optional*
+
+   Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/home/events``.
+
+   MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+
+   This variable corresponds to the :mc-conf:`audit_webhook queue_dir <audit_webhook.queue_dir>` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_QUEUE_DIR
+
+   .. versionadded:: RELEASE.2023-05-18T00-05-36Z
+	    
+   *Optional*
+
+   Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/home/events``.
+
+   MinIO stores undelivered events in the specified store while the Kafka service is offline and replays the stored events when connectivity resumes.
+
+   This variable corresponds to the :mc-conf:`audit_webhook kafka_queue_dir <audit_webhook.kafka_queue_dir>` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_QUEUE_SIZE
+
+   .. versionadded:: RELEASE.2023-05-18T00-05-36Z
+
+   *Optional*
+
+   An integer value to use for the queue size for audit Kafka targets.
+
+   This variable corresponds to the :mc-conf:`audit_webhook kafka_queue_dir <audit_webhook.kafka_queue_dir>` configuration setting.
 
 Bucket Notifications
 ~~~~~~~~~~~~~~~~~~~~
