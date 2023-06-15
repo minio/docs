@@ -96,7 +96,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the AMQP
-service is offline and replays the directory when connectivity resumes.
+service is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-amqp-queue-dir
 
@@ -205,7 +205,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the MQTT 
-server/broker is offline and replays the directory when connectivity resumes.
+server/broker is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-mqtt-queue-dir
 
@@ -302,7 +302,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the Elasticsearch 
-service is offline and replays the directory when connectivity resumes.
+service is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-elasticsearch-queue-dir
 
@@ -360,7 +360,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the NSQ 
-server/broker is offline and replays the directory when connectivity resumes.
+server/broker is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-nsq-queue-dir
 
@@ -439,7 +439,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the Redis 
-server/broker is offline and replays the directory when connectivity resumes.
+server/broker is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-redis-queue-dir
 
@@ -584,7 +584,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the NATS 
-server/broker is offline and replays the directory when connectivity resumes.
+server/broker is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-nats-queue-dir
 
@@ -672,7 +672,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the PostgreSQL 
-server/broker is offline and replays the directory when connectivity resumes.
+server/broker is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-postgresql-queue-dir
 
@@ -771,7 +771,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the MySQL 
-server/broker is offline and replays the directory when connectivity resumes.
+server/broker is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-mysql-queue-dir
 
@@ -926,7 +926,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the Kafka 
-server/broker is offline and replays the directory when connectivity resumes.
+server/broker is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-kafka-queue-dir
 
@@ -992,7 +992,7 @@ Specify the directory path to enable MinIO's persistent event store for
 undelivered messages, such as ``/home/events``.
 
 MinIO stores undelivered events in the specified store while the webhook
-service is offline and replays the directory when connectivity resumes.
+service is offline and replays the stored events when connectivity resumes.
 
 .. end-minio-notify-webhook-queue-dir
 
