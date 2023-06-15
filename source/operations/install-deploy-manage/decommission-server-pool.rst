@@ -258,7 +258,7 @@ The example command begins decommissioning the matching server pool on the
 ``myminio`` deployment.
 
 During the decommissioning process, MinIO continues routing read operations
-(``GET``, ``LIST``, ``HEAD``) operations to the pool for those objects not
+(``GET``, ``LIST``, ``HEAD``) to the pool for those objects not
 yet migrated. MinIO routes all new write operations (``PUT``) to the
 remaining pools in the deployment.
 
@@ -316,7 +316,7 @@ errors.
 4) Remove the Decommissioned Pool from the Deployment Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once decommissioning completes, you can safely remove the pool from the
+As each pool completes decommissioning, you can safely remove it from the
 deployment configuration. Modify the startup command for each remaining MinIO
 server in the deployment and remove the decommissioned pool.
 
