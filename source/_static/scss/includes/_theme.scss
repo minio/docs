@@ -12,14 +12,14 @@ $theme-properties: (
     --headings-color: $black #E3EEEF,
 
     // Theme
-    --theme-light-bg: $light-300 $dark-200,
-    --theme-light-hover-bg: $light-500 $dark-300,
+    --theme-light-bg: $light-200 $dark-200,
+    --theme-light-hover-bg: $light-300 $dark-300,
 
     // Header
     --header-bg: $header-light-bg $dark-0,
     --logo-fill-color: $theme-red $white,
     --header-actions-icon-bg: $white $dark-0,
-    --header-actions-icon-border-color: transparent $dark-500,
+    --header-actions-icon-border-color: transparent $dark-300,
     --header-actions-icon-stroke: $black $dark-500,
     --header-actions-icon-stroke-width: 1.5 1.25,
     --header-actions-icon-path-fill: $header-light-bg $dark-500,
@@ -129,6 +129,10 @@ $theme-properties: (
     --is-meta-key-border-color: #c5cad0 $dark-400,
     --is-search-border-color: $light-500 $dark-300,
     --is-search-focus-box-shadow: rgba($light-500, 0.35) rgba($dark-100, 0.75),
+
+    // Docs menu
+    --docs-menu-border-color: $light-300 $dark-300,
+    --docs-menu-bg: $white transparent,
 );
 
 // Activate dark/light themes

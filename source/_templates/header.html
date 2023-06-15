@@ -8,16 +8,16 @@
           </a>
           
           <div class="header__docs">
-            <div class="header__docs__current">{{ docs[0].name }}</div>
+            <div class="header__docs__current">
+							{{ docs[0].name }}
+						
+							{%- include "icons/chevron-down.html" %}
+						</div>
             <nav class="header__docs__menu">
                {% for doc in docs %}
                   {% set current_name = doc.name if doc.current == True %}
                   <a target="{% if doc.external == True %}_blank{% endif %}" class="{% if doc.current == True %}current{% endif %}" href="{{ doc.url }}">                  
                      {{ doc.name }}
-                     
-                     {% if doc.external == True %}
-                        {%- include "icons/external-link.html" %}
-                     {% endif %}
                   </a>
                {% endfor %}
             </nav>
@@ -36,24 +36,15 @@
             </button>
 
             <button id="dark-mode-toggle" type="button" class="icon icon--switch">
-               <img src="{{ pathto('_static/img/icons/dark-mode.svg',1) }}" alt="Dark Mode" />
-               <img src="{{ pathto('_static/img/icons/dark-mode-active.svg',1) }}" alt="Dark Mode" />
-               Dark Mode
+								{%- include "icons/moon.html" %}
+								{%- include "icons/sun.html" %}
+               	Dark Mode
             </button>
 
             <button id="read-mode-toggle" type="button" class="icon icon--switch">
-               <svg width="18" height="16" fill="none">
-                  <path d="M9 1.842v11.789"/>
-                  <path d="M9 2.167C5.608.151 2.486 1.18 1.177 2.044 1.063 2.119 1 2.25 1 2.389v11.516c0 .371.434.58.738.379 2.625-1.733 5.701-.89 7.126.043a.22.22 0 0 0 .262-.016c2.455-2.06 5.484-.918 7.194.1a.45.45 0 0 0 .679-.385V2.404c0-.147-.073-.286-.196-.362C13.659.103 10.306 1.304 9 2.167z"/>
-               </svg>
-            
-               <svg width="18" height="16" fill="none" fill-rule="evenodd">
-                  <path d="M9 1.842v11.789"/>
-                  <path d="M9 2.167C5.608.151 2.486 1.18 1.177 2.044 1.063 2.119 1 2.25 1 2.389v11.516c0 .371.434.58.738.379 2.625-1.733 5.701-.89 7.126.043a.22.22 0 0 0 .262-.016c2.455-2.06 5.484-.918 7.194.1a.45.45 0 0 0 .679-.385V2.404c0-.147-.073-.286-.196-.362C13.659.103 10.306 1.304 9 2.167z"/>
-                  <path d="M1.178 2.038C3.557.609 6.203.65 9.117 2.161l.001 11.835c-2.633-1.367-5.279-1.367-7.94 0-.08.041-.08-3.944 0-11.957z"/>
-               </svg>
-
-               Reading Mode
+								{%- include "icons/book.html" %}
+								{%- include "icons/book-active.html" %}
+               	Reading Mode
             </button>
           </div>
        </div>

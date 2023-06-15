@@ -74,6 +74,8 @@ div.topic {
     flex: 1;
     position: relative;
     border: none;
+    padding: 0;
+    margin: 0.25rem 0;
 
     .topic-title {
         @include breakpoint-max(breakpoints(lg)) {
