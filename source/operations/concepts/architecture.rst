@@ -134,18 +134,6 @@ MinIO :ref:`site replication <minio-site-replication-overview>` provides support
       A MinIO multi-site deployment with three peers.
       Write operations on one peer replicate to all other peers in the configuration automatically.
 
-Each peer site consists of an independent set of MinIO hosts, ideally having matching pool configurations.
-   The architecture of each peer site should closely match to ensure consistent performance and behavior between sites.
-   All peer sites must use the same primary identity provider, and during initial configuration only one peer site can have any data.
-
-   .. figure:: /images/architecture/architecture-multi-site-setup.svg
-      :figwidth: 100%
-      :alt: Diagram of a multi-site deployment during initial setup
-
-      The initial setup of a MinIO multi-site deployment.
-      The first peer site replicates all required information to other peers in the configuration.
-      Adding new peers uses the same sequence for synchronizing data.
-
 Replication performance primarily depends on the network latency between each peer site.
    With geographically distributed peer sites, high latency between sites can result in significant replication lag.
    This can compound with workloads that are near or at the deployment's overall performance capacity, as the replication process itself requires sufficient free :abbr:`I/O (Input / Output)` to synchronize objects.
@@ -162,27 +150,10 @@ Deploying a global load balancer or similar network appliance with support for s
 
    .. figure:: /images/architecture/architecture-load-balancer-multi-site.svg
       :figwidth: 100%
-      :alt: Diagram of a multi-site deployment with a failed site
+      :alt: Diagram of a site replication deployment with two sites
 
-      One of the peer sites has failed completely.
-      The load balancer automatically routes requests to the remaining healthy peer site.
+      The Load Balancer automatically routes client requests using configured logic (geo-local, latency, etc.).
+      Data written to one site automatically replicates to the other peer site.
 
    The load balancer should meet the same requirements as single-site deployments regarding connection balancing and header preservation.
    MinIO replication handles transient failures by queuing objects for replication.
-
-MinIO replication can automatically heal a site that has partial or total data loss due to transient or sustained downtime. 
-   If a peer site completely fails, you can remove that site from the configuration entirely.
-   The load balancer configuration should also remove that site to avoid routing client requests to the offline site.
-
-   You can then restore the peer site, either after repairing the original hardware or replacing it entirely, by adding it back to the site replication configuration.
-   MinIO automatically begins resynchronizing existing data while continuously replicating new data.
-
-   .. figure:: /images/architecture/architecture-load-balancer-multi-site-healing.svg
-      :figwidth: 100%
-      :alt: Diagram of a multi-site deployment with a healing site
-
-      The peer site has recovered and reestablished connectivity with its healthy peers.
-      MinIO automatically works through the replication queue to catch the site back up.
-
-   Once all data synchronizes, you can restore normal connectivity to that site.
-   Depending on the amount of replication lag, latency between sites and overall workload :abbr:`I/O (Input / Output)`, you may need to temporarily stop write operations to allow the sites to completely catch up.
