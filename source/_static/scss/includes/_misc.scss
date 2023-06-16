@@ -49,8 +49,8 @@
 // Buttons icons
 // ----------------------
 .icon {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid transparent;
   border-radius: $border-radius;
   background-color: transparent;
@@ -79,11 +79,9 @@
   & > svg {
     transform: scale(1);
     opacity: 1;
-    transition: transform 300ms, opacity 300ms;
     position: absolute;
 
     &:last-child:not(:only-child) {
-      transform: scale(0);
       opacity: 0;
     }
   }
@@ -92,12 +90,10 @@
     & > svg,
     & > img {
       &:first-child {
-        transform: scale(0);
         opacity: 0;
       }
 
       &:last-child {
-        transform: scale(1);
         opacity: 1;
       }
     }
