@@ -196,7 +196,8 @@ HTTP Webhook Log Target
 
       *Optional*
 
-      Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/home/events``.
+      Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
+      The MinIO process must have read, write, and list access on the specified directory.
 
       MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
 
@@ -209,8 +210,6 @@ HTTP Webhook Log Target
 
       An integer value to use for the queue size for logger webhook targets.
       The default is ``100000`` events.
-
-      Requires specifying :mc-conf:`~logger_webhook.queue_dir`.
 
       This setting corresponds to the
       :envvar:`MINIO_LOGGER_WEBHOOK_QUEUE_SIZE` environment variable.
@@ -301,36 +300,21 @@ HTTP Webhook Audit Log Target
 
       *Optional*
 
-      Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/home/events``.
+      Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
+      The MinIO process must have read, write, and list access on the specified directory.
 
       MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
 
       This setting corresponds to the :envvar:`MINIO_AUDIT_WEBHOOK_QUEUE_DIR` environment variable.
 
-   .. mc-conf:: kafka_queue_dir
-
-      .. versionadded:: RELEASE.2023-05-18T00-05-36Z
+   .. mc-conf:: queue_size
 
       *Optional*
 
-      Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/home/events``.
-
-      MinIO stores undelivered events in the specified store while the Kafka service is offline and replays the stored events when connectivity resumes.
-
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_DIR` environment variable.
-
-   .. mc-conf:: kafka_queue_size
-
-      .. versionadded:: RELEASE.2023-05-18T00-05-36Z
-
-      *Optional*
-
-      An integer value to use for the queue size for Kafka targets.
+      An integer value to use for the queue size for webhook targets.
       The default is ``100000`` events.
 
-      Requires specifying :mc-conf:`~audit_webhook.kafka_queue_dir`.
-
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_SIZE` environment variable.
+      This setting corresponds to the :envvar:`MINIO_AUDIT_WEBHOOK_QUEUE_SIZE` environment variable.
 
 .. _minio-server-config-bucket-notification-amqp:
 
