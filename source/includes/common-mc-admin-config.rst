@@ -93,7 +93,7 @@ Specify ``2`` to set the delivery mode to persistent queue.
 .. start-minio-notify-amqp-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the AMQP
 service is offline and replays the stored events when connectivity resumes.
@@ -202,7 +202,7 @@ supports the following units of time measurement:
 .. start-minio-notify-mqtt-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the MQTT 
 server/broker is offline and replays the stored events when connectivity resumes.
@@ -299,7 +299,7 @@ Specify the maximum limit for undelivered messages. Defaults to ``100000``.
 .. start-minio-notify-elasticsearch-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the Elasticsearch 
 service is offline and replays the stored events when connectivity resumes.
@@ -357,7 +357,7 @@ Enables or disables TLS verification of the NSQ service broker TLS certificates.
 .. start-minio-notify-nsq-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the NSQ 
 server/broker is offline and replays the stored events when connectivity resumes.
@@ -436,7 +436,7 @@ Specify the password for the Redis server.
 .. start-minio-notify-redis-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the Redis 
 server/broker is offline and replays the stored events when connectivity resumes.
@@ -581,7 +581,7 @@ authentication to the NATS service endpoint.
 .. start-minio-notify-nats-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the NATS 
 server/broker is offline and replays the stored events when connectivity resumes.
@@ -669,7 +669,7 @@ Defaults to ``2``.
 .. start-minio-notify-postgresql-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the PostgreSQL 
 server/broker is offline and replays the stored events when connectivity resumes.
@@ -768,7 +768,7 @@ Defaults to ``2``.
 .. start-minio-notify-mysql-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the MySQL 
 server/broker is offline and replays the stored events when connectivity resumes.
@@ -923,7 +923,7 @@ more information on this field's behavior.
 .. start-minio-notify-kafka-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the Kafka 
 server/broker is offline and replays the stored events when connectivity resumes.
@@ -989,7 +989,7 @@ mTLS authentication to the webhook service.
 .. start-minio-notify-webhook-queue-dir
 
 Specify the directory path to enable MinIO's persistent event store for
-undelivered messages, such as ``/home/events``.
+undelivered messages, such as ``/opt/minio/events``.
 
 MinIO stores undelivered events in the specified store while the webhook
 service is offline and replays the stored events when connectivity resumes.
