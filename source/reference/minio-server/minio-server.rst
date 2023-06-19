@@ -677,6 +677,19 @@ server logs webhook endpoints:
    This variable corresponds to the :mc-conf:`logger_webhook proxy 
    <logger_webhook.proxy>` configuration setting.
 
+.. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_DIR
+
+   .. versionadded:: RELEASE.2023-05-18T00-05-36Z
+
+   *Optional*
+
+   Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
+   The MinIO process must have read, write, and list access on the specified directory.
+
+   MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+
+   This variable corresponds to the :mc-conf:`logger_webhook queue_dir <logger_webhook.queue_dir>` configuration setting.
+
 .. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_SIZE
 
    *Optional*
@@ -765,6 +778,27 @@ audit log webhook endpoints:
 
    This variable corresponds to the :mc-conf:`audit_webhook client_key
    <audit_webhook.client_key>` configuration setting.
+
+.. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_DIR
+
+   .. versionadded:: RELEASE.2023-05-18T00-05-36Z
+
+   *Optional*
+
+   Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
+   The MinIO process must have read, write, and list access on the specified directory.
+
+   MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+
+   This variable corresponds to the :mc-conf:`audit_webhook queue_dir <audit_webhook.queue_dir>` configuration setting.
+
+.. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_SIZE
+
+   *Optional*
+
+   An integer value to use for the queue size for audit webhook targets.
+
+   This variable corresponds to the :mc-conf:`audit_webhook queue_size <audit_webhook.queue_size>` configuration setting.
 
 Bucket Notifications
 ~~~~~~~~~~~~~~~~~~~~
