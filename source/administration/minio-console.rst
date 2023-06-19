@@ -52,9 +52,8 @@ the MinIO Console:
        configuring Prometheus to collect metrics from MinIO.
 
    * - :envvar:`MINIO_SERVER_URL`
-     - The URL hostname the MinIO Console uses for connecting to the MinIO 
-       Server. The hostname *must* be resolveable and reachable for the
-       Console to function correctly.
+     - The URL hostname the MinIO Console uses for connecting to the MinIO Server. 
+       For the Console to function correctly, the MinIO server URL *must* be the full domain name of the host, resolveable, and reachable.
 
        The MinIO Console connects to the MinIO Server using an IP 
        address by default. For example, when the MinIO Server starts up, 
