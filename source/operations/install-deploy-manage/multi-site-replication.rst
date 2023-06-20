@@ -105,6 +105,8 @@ For example:
 For ``GET/HEAD`` requests that do *not* include a unique version ID, the proxy request returns the *latest* version of that object on the peer site.
 This may result in retrieval of a non-current version of an object, such as if the responding peer site is also experiencing replication lag.
 
+MinIO does not proxy ``LIST``, ``DELETE``, and ``PUT`` operations.
+
 Prerequisites
 -------------
 

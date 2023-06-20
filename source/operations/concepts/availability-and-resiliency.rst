@@ -187,7 +187,7 @@ MinIO replication can automatically heal a site that has partial or total data l
    If a peer site completely fails, you can remove that site from the configuration entirely.
    The load balancer configuration should also remove that site to avoid routing client requests to the offline site.
 
-   You can then restore the peer site, either after repairing the original hardware or replacing it entirely, by adding it back to the site replication configuration.
+   You can then restore the peer site, either after repairing the original hardware or replacing it entirely, by :ref:`adding it back to the site replication configuration <minio-expand-site-replication>`.
    MinIO automatically begins resynchronizing existing data while continuously replicating new data.
 
 Sites can continue processing operations during resynchronization by proxying ``GET/HEAD`` requests to healthy peer sites
