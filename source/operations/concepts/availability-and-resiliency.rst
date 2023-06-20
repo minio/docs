@@ -24,6 +24,9 @@ This page provides an overview of MinIO's availability and resiliency design and
    Community users can seek support on the `MinIO Community Slack <https://slack.min.io>`__. 
    Community Support is best-effort only and has no SLAs around responsiveness.
 
+Distributed MinIO Deployments
+-----------------------------
+
 MinIO implements :ref:`erasure coding <minio-erasure-coding>` as the core component in providing availability and resiliency during drive or node-level failure events.
    MinIO partitions each object into data and :ref:`parity <minio-ec-parity>` shards and distributes those shards across a single :ref:`erasure set <minio-ec-erasure-set>`.
 
@@ -157,5 +160,49 @@ For multi-pool MinIO deployments, each pool requires at least one erasure set ma
 
    Use replicated remotes to restore the lost data to the deployment.
    All data stored on the healthy pools remain safe on disk.
+
+Replicated MinIO Deployments
+----------------------------
+
+MinIO implements :ref:`site replication <minio-site-replication-overview>` as the primary measure for ensuring Business Continuity and Disaster Recovery (BC/DR) in the case of both small and large scale data loss in a MinIO deployment.
+   .. figure:: /images/availability/availability-multi-site-setup.svg
+      :figwidth: 100%
+      :alt: Diagram of a multi-site deployment during initial setup
+
+      Each peer site is deployed to an independent datacenter to provide protection from large-scale failure or disaster.
+      If one datacenter goes completely offline, clients can fail over to the other site.
+
+MinIO replication can automatically heal a site that has partial or total data loss due to transient or sustained downtime. 
+   .. figure:: /images/availability/availability-multi-site-healing.svg
+      :figwidth: 100%
+      :alt: Diagram of a multi-site deployment while healing
+
+      Datacenter 2 was down and Site B requires resynchronization.
+      The Load Balancer handles routing operations to Site A in Datacenter 1.
+      Site A continuously replicates data to Site B.
+
+   Once all data synchronizes, you can restore normal connectivity to that site.
+   Depending on the amount of replication lag, latency between sites and overall workload :abbr:`I/O (Input / Output)`, you may need to temporarily stop write operations to allow the sites to completely catch up.
+
+   If a peer site completely fails, you can remove that site from the configuration entirely.
+   The load balancer configuration should also remove that site to avoid routing client requests to the offline site.
+
+   You can then restore the peer site, either after repairing the original hardware or replacing it entirely, by :ref:`adding it back to the site replication configuration <minio-expand-site-replication>`.
+   MinIO automatically begins resynchronizing existing data while continuously replicating new data.
+
+Sites can continue processing operations during resynchronization by proxying ``GET/HEAD`` requests to healthy peer sites
+   .. figure:: /images/availability/availability-multi-site-proxy.svg
+      :figwidth: 100%
+      :alt: Diagram of a multi-site deployment while healing
+
+      Site B does not have the requested object, possibly due to replication lag.
+      It proxies the ``GET`` request to Site A.
+      Site A returns the object, which Site B then returns to the requesting client.
+
+   The client receives the results from first peer site to return *any* version of the requested object.
+
+   ``PUT`` and ``DELETE`` operations synchronize using the regular replication process.
+   ``LIST`` operations do not proxy and require clients to issue them exclusively against healthy peers.
+
 
 

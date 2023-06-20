@@ -88,6 +88,25 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
    If one site loses data for any reason, resynchronize the data from another healthy site with :mc-cmd:`mc admin replicate resync`.
    This launches an active process that resynchronizes the data without waiting for the passive MinIO scanner to recognize the missing data.
 
+Proxy to Other Sites
+~~~~~~~~~~~~~~~~~~~~
+
+MinIO peer sites can proxy ``GET/HEAD`` requests for an object to other peers to check if it exists.
+This allows a site that is healing or lagging behind other peers to still return an object persisted to other sites.
+
+For example:
+
+1. A client issues ``GET("data/invoices/january.xls")`` to ``Site1``
+2. ``Site1`` cannot locate the object
+3. ``Site1`` proxies the request to ``Site2``
+4. ``Site2`` returns the latest version of the requested object
+5. ``Site1`` returns the proxied object to the client
+
+For ``GET/HEAD`` requests that do *not* include a unique version ID, the proxy request returns the *latest* version of that object on the peer site.
+This may result in retrieval of a non-current version of an object, such as if the responding peer site is also experiencing replication lag.
+
+MinIO does not proxy ``LIST``, ``DELETE``, and ``PUT`` operations.
+
 Prerequisites
 -------------
 
