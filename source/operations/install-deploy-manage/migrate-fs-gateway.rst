@@ -72,10 +72,14 @@ Procedure
    - Replace ``PATH`` with the IP address or hostname and port for the new deployment.
    - Replace ``ACCESSKEY`` and ``SECRETKEY`` with the credentials you used when creating the new deployment.
 
-   If you are migrating a `filesystem` deployment, continue to the next step.
-   For `standalone` deployments, skip to :ref:`migrate bucket contents <minio-gateway-migrate-bucket-contents>`.
+#. Standalone deployments: migrate environment variables
 
-#. Filestem Mode Deployments: Export the existing deployment's **configurations**.
+   Copy the :ref:`environment variables <minio-server-environment-variables>` from the existing deployment's ``/etc/default/minio`` file to the same file in the new deployment.
+   You may omit any ``MINIO_CACHE_*`` and ``MINIO_GATEWAY_SSE`` environment variables, as these are no longer used.
+
+   To continue migrating a `standalone` deployment, skip to :ref:`migrate bucket contents <minio-gateway-migrate-bucket-contents>`.
+
+#. Filesystem Mode Deployments: Export the existing deployment's **configurations**.
 
    Use the :mc-cmd:`mc admin config export <mc admin config export>` export command with the existing MinIO Client to retrieve the configurations defined for the existing standalone MinIO deployment.
 
