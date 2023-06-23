@@ -283,10 +283,13 @@ Exclude a Prefix From Versioning
 You can exclude certain :ref:`prefixes <minio-admin-concepts-organize-objects>` from versioning using the :ref:`MinIO Client <minio-client>`.
 This is useful for Spark/Hadoop workloads or others that initially create objects with temporary prefixes. 
 
-.. admonition:: Object locking
+.. admonition:: Replication and Object Locking Require Versioning
    :class: note
 
-   Buckets with :ref:`object locking enabled <minio-object-locking>` require versioning and do not support excluding prefixes.
+   MinIO requires versioning to support :term:`replication`.
+   Objects in excluded prefixes do not replicate to any peer site or remote site.
+
+   MinIO does not support excluding prefixes from versioning on buckets with :ref:`object locking enabled <minio-object-locking>`.
 
 - Use :mc-cmd:`mc version enable` with the :mc-cmd:`~mc version --excluded-prefixes` option:
 
@@ -350,6 +353,14 @@ Exclude Folders from Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can exclude folders from versioning using the :ref:`MinIO Client <minio-client>`.
+
+.. admonition:: Replication and Object Locking Require Versioning
+   :class: note
+
+   MinIO requires versioning to support :term:`replication`.
+   Objects in excluded folders do not replicate to any peer site or remote site.
+
+   MinIO does not support excluding folders from versioning on buckets with :ref:`object locking enabled <minio-object-locking>`.
 
 .. admonition:: Object locking
    :class: note

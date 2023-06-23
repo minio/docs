@@ -121,6 +121,8 @@ Client applications can use any S3-compatible SDK or library to interact with th
    In particular, the complexity of signature calculation typically makes interfacing via ``curl`` or similar REST clients impractical. 
    MinIO recommends using S3-compatible SDKs or libraries which perform the signature calculation automatically as part of operations.
 
+.. _minio-deployment-architecture-replicated:
+
 Replicated MinIO Deployments
 ----------------------------
 

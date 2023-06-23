@@ -12,9 +12,20 @@ Site Replication Overview
 
 Site replication configures multiple independent MinIO deployments as a cluster of replicas called peer sites.
 
+   .. figure:: /images/architecture/architecture-load-balancer-multi-site.svg
+      :figwidth: 100%
+      :alt: Diagram of a site replication deployment with two sites
+
+      A site replication deployment with two peer sites.
+      A load balancer manages routing operations to either of the two sites
+      Data written to one site automatically replicates to the other peer site.
+
 Site replication assumes the use of either the included MinIO identity provider (IDP) *or* an external IDP.
 All configured deployments must use the same IDP.
 Deployments using an external IDP must use the same configuration across sites.
+
+For more information on site replication architecture and deployment concepts, see :ref:`Deployment Architecture: Replicated MinIO Deployments <minio-deployment-architecture-replicated>`.
+
 
 Overview
 --------
@@ -72,7 +83,6 @@ After enabling site replication, identity and access management (IAM) settings s
 
 After the initial synchronization of data across peer sites, MinIO continually replicates and synchronizes :ref:`replicable data <minio-site-replication-what-replicates>` among all sites as they occur on any site.
 
-
 Site Healing
 ~~~~~~~~~~~~
 
@@ -87,6 +97,16 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
 
    If one site loses data for any reason, resynchronize the data from another healthy site with :mc-cmd:`mc admin replicate resync`.
    This launches an active process that resynchronizes the data without waiting for the passive MinIO scanner to recognize the missing data.
+
+Synchronous vs Asynchronous Replication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-replication.rst
+   :start-after: start-replication-sync-vs-async
+   :end-before: end-replication-sync-vs-async
+
+MinIO strongly recommends using the default asynchronous site replication.
+To configure synchronous site replication use :mc-cmd:`mc admin replicate update` with the :mc-cmd:`~mc admin replicate update --sync` option.
 
 Proxy to Other Sites
 ~~~~~~~~~~~~~~~~~~~~
@@ -139,6 +159,14 @@ For :ref:`SSE-S3 <minio-encryption-sse-s3>` or :ref:`SSE-KMS <minio-encryption-s
 
 You can achieve this with a central KES server or multiple KES servers (say one per site) connected via a central supported :ref:`key vault server <minio-sse>`.
 
+Replication Requires Versioning
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Site replication *requires* :ref:`minio-bucket-versioning` and enables it for all created buckets automatically.
+You cannot disable versioning in site replication deployments
+
+If you exclude a prefix or folder from versioning within a bucket, MinIO cannot replicate objects within that folder or prefix.
+
 Load Balancers Installed on Each Multi-Node Site
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -157,16 +185,6 @@ Use :mc:`mc replicate rm` on the command line or the MinIO Console to remove buc
 
 Only one site can have data when setting up site replication.
 All other sites must be empty.
-
-Synchronous vs Asynchronous Replication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-replication.rst
-   :start-after: start-replication-sync-vs-async
-   :end-before: end-replication-sync-vs-async
-
-MinIO strongly recommends using the default asynchronous site replication.
-To configure synchronous site replication use :mc-cmd:`mc admin replicate update` with the :mc-cmd:`~mc admin replicate update --sync` option.
 
 Tutorials
 ---------
