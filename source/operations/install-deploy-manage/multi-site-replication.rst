@@ -17,7 +17,7 @@ Site replication configures multiple independent MinIO deployments as a cluster 
       :alt: Diagram of a site replication deployment with two sites
 
       A site replication deployment with two peer sites.
-      A load balancer manages routing operations to either of the two sites
+      A load balancer manages routing operations to either of the two sites.
       Data written to one site automatically replicates to the other peer site.
 
 Site replication assumes the use of either the included MinIO identity provider (IDP) *or* an external IDP.
@@ -106,6 +106,7 @@ Synchronous vs Asynchronous Replication
    :end-before: end-replication-sync-vs-async
 
 MinIO strongly recommends using the default asynchronous site replication.
+Synchronous site replication performance depends strongly on latency between sites, where higher latency can result in lower PUT performance and replication lag.
 To configure synchronous site replication use :mc-cmd:`mc admin replicate update` with the :mc-cmd:`~mc admin replicate update --sync` option.
 
 Proxy to Other Sites
@@ -163,9 +164,9 @@ Replication Requires Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Site replication *requires* :ref:`minio-bucket-versioning` and enables it for all created buckets automatically.
-You cannot disable versioning in site replication deployments
+You cannot disable versioning in site replication deployments.
 
-If you exclude a prefix or folder from versioning within a bucket, MinIO cannot replicate objects within that folder or prefix.
+MinIO cannot replicate objects in prefixes in the bucket that you excluded from versioning.
 
 Load Balancers Installed on Each Multi-Node Site
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
