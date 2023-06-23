@@ -47,8 +47,8 @@ Bucket Replication Requires MinIO Deployments
    :start-after: start-replication-minio-only
    :end-before: end-replication-minio-only
 
-Versioning Objects for Bucket Replication
------------------------------------------
+Replication Requires Versioning
+-------------------------------
 
 .. include:: /includes/common-replication.rst
    :start-after: start-replication-requires-versioning

@@ -30,6 +30,8 @@ MinIO relies on the immutability protections provided by :ref:`versioning <minio
 Use :mc-cmd:`mc version info` to validate the versioning status of both the source and remote buckets. 
 Use the :mc-cmd:`mc version enable` command to enable versioning as necessary.
 
+If you exclude a prefix or folder from versioning within the source bucket, MinIO cannot replicate objects within that folder or prefix.
+
 .. end-replication-requires-versioning
 
 .. start-replication-requires-object-locking
