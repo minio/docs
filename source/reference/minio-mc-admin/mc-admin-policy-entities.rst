@@ -19,6 +19,13 @@ List the entities associated with a policy, user, or group on a target MinIO dep
 
 .. end-mc-admin-policy-entities-desc
 
+.. versionchanged:: RELEASE.2023-05-27T05-56-19Z
+
+   This command only returns :ref:`minio-managed users and groups <minio-users>`.
+
+To list entities associated with an Active Directory or LDAP (AD/LDAP) configuration, use :mc-cmd:`mc idp ldap policy entities`.
+
+
 For example, you can list all of the users and groups attached to a policy or list all of the policies attached to a specific user or group.
 
 .. tab-set::

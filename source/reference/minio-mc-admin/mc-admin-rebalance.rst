@@ -160,3 +160,15 @@ Global Flags
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-globals
    :end-before: end-minio-mc-globals
+
+Behavior
+--------
+
+Rebalancing Ignores Expired Objects and Trailing ``DeleteMarker``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Starting with :minio-release:`RELEASE.2023-06-23T20-26-00Z`, rebalancing ignores object versions which have expired based on the configured :ref:`lifecycle rules <minio-lifecycle-management-expiration>` for the parent bucket.
+Rebalancing also ignores objects where the only remaining version is a ``DeleteMarker``.
+
+MinIO relies on the :ref:`scanner <minio-lifecycle-management-scanner>` to capture and remove those expired objects or trailing ``DeleteMarker`` objects.
+

@@ -6,6 +6,7 @@ replicate:
     bucket: BUCKET
     prefix: PREFIX
     # endpoint: ENDPOINT
+    # path: "on|off|auto"
     # credentials:
     #   accessKey: ACCESS-KEY
     #   secretKey: SECRET-KEY
@@ -17,6 +18,7 @@ replicate:
     bucket: BUCKET
     prefix: PREFIX
     # endpoint: ENDPOINT
+    # path: "on|off|auto"
     # credentials:
     #   accessKey: ACCESS-KEY
     #   secretKey: SECRET-KEY

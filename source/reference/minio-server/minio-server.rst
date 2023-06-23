@@ -864,6 +864,10 @@ an AMQP service endpoint with ID of ``PRIMARY``.
    This variable corresponds to the :mc-conf:`notify_amqp url <notify_amqp.url>`
    configuration setting.
 
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
+
 .. envvar:: MINIO_NOTIFY_AMQP_EXCHANGE
 
    .. include:: /includes/common-mc-admin-config.rst
@@ -1023,6 +1027,10 @@ an MQTT service endpoint with ID of ``PRIMARY``.
    This variable corresponds to the
    :mc-conf:`notify_mqtt broker <notify_mqtt.broker>` configuration setting.
 
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
+
 .. envvar:: MINIO_NOTIFY_MQTT_TOPIC
 
    *Required*
@@ -1167,6 +1175,10 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    :mc-conf:`notify_elasticsearch url <notify_elasticsearch.url>`
    configuration setting.
 
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
+
 .. envvar:: MINIO_NOTIFY_ELASTICSEARCH_INDEX
 
    *Required*
@@ -1296,6 +1308,10 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    This variable corresponds to the
    :mc-conf:`notify_nsq nsqd_address <notify_nsq.nsqd_address>`
    configuration setting.
+
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
 
 .. envvar:: MINIO_NOTIFY_NSQ_TOPIC
 
@@ -1428,6 +1444,10 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    :mc-conf:`notify_redis address <notify_redis.address>`
    configuration setting.
 
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
+
 .. envvar:: MINIO_NOTIFY_REDIS_KEY
 
    *Required*
@@ -1552,6 +1572,10 @@ an NATS service endpoint with ID of ``PRIMARY``.
 
    This environment variable corresponds with the
    :mc-conf:`notify_nats address <notify_nats.address>` configuration setting.
+
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
 
 .. envvar:: MINIO_NOTIFY_NATS_SUBJECT
 
@@ -1814,6 +1838,9 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
    :mc-conf:`notify_postgres connection_string <notify_postgres.connection_string>`
    configuration setting.
 
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
 
 .. envvar:: MINIO_NOTIFY_POSTGRES_TABLE
 
@@ -1952,6 +1979,9 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
    :mc-conf:`notify_mysql dsn_string <notify_mysql.dsn_string>`
    configuration setting.
 
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
 
 .. envvar:: MINIO_NOTIFY_MYSQL_TABLE
 
@@ -2072,6 +2102,10 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    This environment variable corresponds to the
    :mc-conf:`notify_kafka brokers <notify_kafka.brokers>`
    configuration setting.
+
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
 
 .. envvar:: MINIO_NOTIFY_KAFKA_TOPIC
 
@@ -2284,6 +2318,10 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    This environment variable corresponds with the
    :mc-conf:`notify_webhook endpoint <notify_webhook.endpoint>`
    configuration setting.
+
+   .. include:: /includes/linux/minio-server.rst
+      :start-after: start-notify-target-online-desc
+      :end-before: end-notify-target-online-desc
 
 .. envvar:: MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN
 

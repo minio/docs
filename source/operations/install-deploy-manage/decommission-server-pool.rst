@@ -167,6 +167,16 @@ nodes in the deployment at around the same time.
    :start-after: start-nondisruptive-upgrade-desc
    :end-before: end-nondisruptive-upgrade-desc
 
+Decommissioning Ignores Expired Objects and Trailing ``DeleteMarker``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Starting with :minio-release:`RELEASE.2023-05-27T05-56-19Z`, decommissioning ignores objects where the only remaining version is a ``DeleteMarker``.
+
+Starting with :minio-release:`minio-lifecycle-management-scanner`, decommissioning also ignores object versions which have expired based on configured :ref:`lifecycle rules <minio-lifecycle-management-expiration>` for the parent bucket.
+
+Once the decommissioning process completes, you can safely shut down that pool.
+Since the only remaining data was scheduled for deletion *or* was only a ``DeleteMarker``, you can safely clear or destroy those drives as per your company's internal procedures.
+
 Behavior
 --------
 
