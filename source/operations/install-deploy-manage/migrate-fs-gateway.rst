@@ -192,20 +192,6 @@ Procedure
             - Replace ``ALIAS`` with the alias for the new deployment.
             - Replace the name of the zip file with the name for the existing deployment's file.
 
-#. *(Optional)* Duplicate **tiers** from existing standalone deployment to new deployment with the existing MinIO Client.
-
-   Use :mc:`mc ilm tier ls` with the ``--json`` flag to retrieve a list of the tiers that exist on the standalone deployment.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc ilm tier ls ALIAS --json
-
-   - Use the existing MinIO Client.
-   - Replace ``ALIAS`` with the alias for the existing standalone deployment.
-
-   Use the list to recreate the tiers on the new deployment.
-
 #. Migrate bucket contents with :mc:`mc mirror`.
 
    Use :mc:`mc mirror` with the :mc-cmd:`~mc mirror --preserve` and :mc-cmd:`~mc mirror --watch` flags on the standalone deployment to move objects to the new |SNSD| deployment with the existing MinIO Client
