@@ -24,9 +24,6 @@ Description
 The :mc-cmd:`mc admin top` command returns statistics for distributed
 MinIO deployments, similar to the output of the ``top`` command. 
 
-:mc-cmd:`mc admin top` is not supported on standalone MinIO deployments
-or MinIO Gateway deployments.
-
 .. end-mc-admin-top-desc
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
@@ -59,7 +56,6 @@ Syntax
       the command retrieves statistics.
 
       The alias *must* correspond to a distributed (multi-node) MinIO deployment.
-      The command returns an error for standalone MinIO deployments or MinIO
-      Gateway deployments.
-
+      The command returns an error for :term:`single-node single-drive` deployments.
+      
 
