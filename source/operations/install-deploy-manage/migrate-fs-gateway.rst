@@ -58,7 +58,8 @@ Procedure
    If the existing standalone system points to the root of the drive, you must use a separate drive for the new deployment.
 
    If both old and new deployments are on the same host:
-
+   
+   - Install the new deployment to a different path from the existing deployment.
    - Set the new deployment's Console and API ports to different ports than the existing deployment.
 
      The following commandline options set the ports at startup:
@@ -71,7 +72,11 @@ Procedure
      - Duplicate the existing ``/etc/default/minio`` environment file with a unique name.
      - In the new deployment's service file, update ``EnvironmentFile`` to reference the new environment file.
 
-#. Add an alias for the deployment created in the previous step using :mc:`mc alias set` and the updated MinIO Client.
+   The steps below use the :mc-cmd:`mc` command line tool from both deployments.
+   *Existing MinIO Client* is :mc-cmd:`mc` from the old deployment.
+   *New MinIO Client* is :mc-cmd:`mc` from the new deployment.
+
+#. Add an alias for the deployment created in the previous step using :mc:`mc alias set` and the new MinIO Client.
 
    .. code-block:: shell
       :class: copyable
@@ -101,7 +106,7 @@ Procedure
 	 If you use :mc-cmd:`mc admin config set <mc admin config set>` for configuration settings, duplicate the existing settings for the new deployment using the new MinIO Client.
 
       .. tab-item:: Filesystem mode
-
+	 
          a. Export the existing deployment's **configurations**.
 
             Use the :mc-cmd:`mc admin config export <mc admin config export>` export command with the existing MinIO Client to retrieve the configurations defined for the existing standalone MinIO deployment.
@@ -137,7 +142,7 @@ Procedure
             - Use the new MinIO Client.
             - Replace ``ALIAS`` with the alias for the new deployment.
 
-         d. Export **bucket metadata** from existing standalone deployment with the existing MinIO Client.
+         d. Export **bucket metadata** from the existing standalone deployment with the existing MinIO Client.
 
             The following command exports bucket metadata from the existing deployment to a ``.zip`` file.
 
@@ -151,7 +156,7 @@ Procedure
             - versioning
 
             The export includes the bucket metadata only.
-            No objects export from the existing deployment with this command.
+            This command does not export objects from the existing deployment.
 
             .. code-block:: shell
                :class: copyable
@@ -232,7 +237,6 @@ Procedure
 #. Stop the server for both deployments.
 
 #. Restart the new MinIO deployment with the ports used for the previous standalone deployment.
-
-   Refer to step four in the deploy |SNSD| :ref:`documentation <deploy-minio-standalone>`.
+   For more about starting the MinIO service, refer to step four in the deploy |SNSD| :ref:`documentation <deploy-minio-standalone>`.
    
-   Ensure you apply all environment variables and runtime configuration settings, and validate the behavior.
+   Ensure you apply all environment variables and runtime configuration settings and validate the behavior of the new deployment.
