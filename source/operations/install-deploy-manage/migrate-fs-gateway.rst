@@ -29,7 +29,7 @@ Deployments still using the `standalone` or `filesystem` MinIO modes that upgrad
 Overview
 --------
 
-To upgrade to a :minio-release:`RELEASE.2022-10-29T06-21-33Z` or later, those who were using the `standalone` or `filesystem` deployment modes must create a new :ref:`Single-Node Single-Drive <minio-snsd>` deployment and migrate settings and content to the new deployment.
+To upgrade to the :minio-release:`RELEASE.2022-10-29T06-21-33Z` or later release, those who were using the `standalone` or `filesystem` deployment modes must create a new :ref:`Single-Node Single-Drive <minio-snsd>` deployment and migrate settings and content to the new deployment.
 
 This document outlines the steps required to successfully launch and migrate to a new deployment.
 
@@ -60,7 +60,7 @@ Procedure
 
    Set the port to a custom point different than the existing standalone deployment.
 
-#. Add an alias for the new deployment with :mc:`mc alias set` with the new MinIO Client from the previous step.
+#. Add an alias for the deployment created in the previous step using :mc:`mc alias set` and the updated MinIO Client.
 
    .. code-block:: shell
       :class: copyable
@@ -74,11 +74,15 @@ Procedure
 
 #. Migrate settings according to the type of deployment:
 
+   - The MinIO Gateway is a stateless proxy service that provides S3 API compatibility for an array of backend storage systems.
+
+   - Filesystem mode deployments provide an S3 access layer for a single MinIO server process and single storage volume.
+
    .. tab-set::
 
       .. tab-item:: Gateway
 
-         a. Migrate environment variables
+         Migrate environment variables:
 
             Copy the :ref:`environment variables <minio-server-environment-variables>` from the existing deployment's ``/etc/default/minio`` file to the same file in the new deployment.
             You may omit any ``MINIO_CACHE_*`` and ``MINIO_GATEWAY_SSE`` environment variables, as these are no longer used.
