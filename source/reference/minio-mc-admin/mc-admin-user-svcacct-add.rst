@@ -109,6 +109,22 @@ Parameters
    Add a description for the service account.
    For example, you might specify the reason the service account exists.
 
+.. mc-cmd:: --expiry
+   :optional:
+
+   .. versionadded:: RELEASE.2023-05-30T22-41-38Z
+
+   Set an expiration date for the service account.
+   The date must be in the future, you may not set an expiration date that has already passed.
+
+   Allowed date and time formats:
+
+   - ``2023-06-24``
+   - ``2023-06-24T10:00``
+   - ``2023-06-24T10:00:00``
+   - ``2023-06-24T10:00:00Z``
+   - ``2023-06-24T10:00:00-07:00``
+
 .. mc-cmd:: --name
    :optional:
 
