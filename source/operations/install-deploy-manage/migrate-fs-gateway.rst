@@ -106,10 +106,15 @@ Procedure
 	 If you use :mc-cmd:`mc admin config set <mc admin config set>` for configuration settings, duplicate the existing settings for the new deployment using the new MinIO Client.
 
       .. tab-item:: Filesystem mode
-	 
+
+         .. note::
+
+            The following Filesystem mode steps presume the existing MinIO Client supports the needed export commands.
+	    If it does not, recreate users, policies, lifecycle rules, and buckets manually on the new deployment using the new MinIO Client.
+
          a. Export the existing deployment's **configurations**.
 
-            Use the :mc-cmd:`mc admin config export <mc admin config export>` export command with the existing MinIO Client to retrieve the configurations defined for the existing standalone MinIO deployment.
+            Use the :mc-cmd:`mc admin config export <mc admin config export>` command with the existing MinIO Client to retrieve the configurations defined for the existing standalone MinIO deployment.
 
             .. code-block:: shell
                :class: copyable
