@@ -95,11 +95,10 @@ Procedure
 
          Migrate configuration settings:
 
-	 If your deployment uses :ref:`environment variables <minio-server-environment-variables>` for configuration settings, copy the environment variables from the existing deployment's ``/etc/default/minio` file to the same file in the new deployment.
+	 If your deployment uses :ref:`environment variables <minio-server-environment-variables>` for configuration settings, copy the environment variables from the existing deployment's ``/etc/default/minio`` file to the same file in the new deployment.
          You may omit any ``MINIO_CACHE_*`` and ``MINIO_GATEWAY_SSE`` environment variables, as these are no longer used.                                                               
 
-	 If you use :mc-cmd:`mc admin config set <mc admin config set>` for configuration settings, duplicate the existing settings for the new deployment.
-         You can examine runtime settings using ``env | grep MINIO_`` or, for deployments using MinIO's systemd service, check the contents of ``/etc/default/minio``.
+	 If you use :mc-cmd:`mc admin config set <mc admin config set>` for configuration settings, duplicate the existing settings for the new deployment using the new MinIO Client.
 
       .. tab-item:: Filesystem mode
 
