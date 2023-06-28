@@ -278,7 +278,7 @@ Glossary
 
    standalone deployment
      A :term:`single-node single-drive` (SNSD) MinIO deployment.
-     This term previously referred to the deprecated :ref:`Gateway and Filesystem Mode <minio-gateway-migration>` deployment types.
+     This term previously referred to the deprecated :ref:`Gateway or Filesystem Mode <minio-gateway-migration>` deployment types.
 
    SUBNET
      `MinIO's Subscription Network <https://min.io/pricing?jmp=docs>`__ tracks support tickets and provides 24 hour direct-to-engineer access for subscribed accounts.

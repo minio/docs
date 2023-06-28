@@ -47,7 +47,6 @@ Procedure
    You can set MinIO configuration settings in environment variables and using :mc-cmd:`mc admin config set <mc admin config set>`.
    Depending on your current deployment setup, you may need to retrieve the values for both.
 
-   This procedure does not cover migrating environment variables due to the variety of configuration methods.
    You can examine any runtime settings using ``env | grep MINIO_`` or, for deployments using MinIO's systemd service, check the contents of ``/etc/default/minio``.
 
 #. Create a new Single-Node Single-Drive MinIO deployment.
@@ -58,7 +57,19 @@ Procedure
    A new folder on the same drive can work for the new deployment as long as the existing deployment is not on the root of a drive.
    If the existing standalone system points to the root of the drive, you must use a separate drive for the new deployment.
 
-   Set the port to a custom point different than the existing standalone deployment.
+   If both old and new deployments are on the same host:
+
+   - Set the new deployment's Console and API ports to different ports than the existing deployment.
+
+     The following commandline options set the ports at startup:
+
+     - :mc-cmd:`~minio server --address` to set the API port.
+     - :mc-cmd:`~minio server --console-address` to set the Console port.
+
+   - For deployments managed by ``systemd``:
+
+     - Duplicate the existing ``/etc/default/minio`` environment file with a unique name.
+     - In the new deployment's service file, update ``EnvironmentFile`` to reference the new environment file.
 
 #. Add an alias for the deployment created in the previous step using :mc:`mc alias set` and the updated MinIO Client.
 
@@ -82,10 +93,13 @@ Procedure
 
       .. tab-item:: Gateway
 
-         Migrate environment variables:
+         Migrate configuration settings:
 
-            Copy the :ref:`environment variables <minio-server-environment-variables>` from the existing deployment's ``/etc/default/minio`` file to the same file in the new deployment.
-            You may omit any ``MINIO_CACHE_*`` and ``MINIO_GATEWAY_SSE`` environment variables, as these are no longer used.
+	 If your deployment uses :ref:`environment variables <minio-server-environment-variables>` for configuration settings, copy the environment variables from the existing deployment's ``/etc/default/minio` file to the same file in the new deployment.
+         You may omit any ``MINIO_CACHE_*`` and ``MINIO_GATEWAY_SSE`` environment variables, as these are no longer used.                                                               
+
+	 If you use :mc-cmd:`mc admin config set <mc admin config set>` for configuration settings, duplicate the existing settings for the new deployment.
+         You can examine runtime settings using ``env | grep MINIO_`` or, for deployments using MinIO's systemd service, check the contents of ``/etc/default/minio``.
 
       .. tab-item:: Filesystem mode
 
@@ -101,7 +115,7 @@ Procedure
             - Use the existing MinIO Client.
             - Replace ``ALIAS`` with the alias used for the existing standalone deployment you are retrieving values from. 
 
-         b. Import **configurations** from existing standalone deployment to new deployment with the new MinIO Client.
+         b. Import **configurations** from the existing standalone deployment to the new deployment with the new MinIO Client.
 
             .. code-block:: shell
                :class: copyable
@@ -110,6 +124,9 @@ Procedure
 
             - Use the new MinIO Client.
             - Replace ``ALIAS`` with the alias for the new deployment.
+
+	    If :mc:`~mc admin config import` reports an error for a configuration key, comment it out with ``#`` at the beginning of the relevant line and try again.
+            When you are finished migrating the deployment, verify the current syntax for the target MinIO Server version and set any needed keys manually using :mc:`mc admin config set`.
 
          c. Restart the server for the new deployment with the new MinIO Client.
 
@@ -120,7 +137,7 @@ Procedure
    
             - Use the new MinIO Client.
             - Replace ``ALIAS`` with the alias for the new deployment.
-   
+
          d. Export **bucket metadata** from existing standalone deployment with the existing MinIO Client.
 
             The following command exports bucket metadata from the existing deployment to a ``.zip`` file.
