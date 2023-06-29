@@ -38,6 +38,9 @@ This document outlines the steps required to successfully launch and migrate to 
    Standalone/file system mode continues to work on any release up to and including MinIO Server `RELEASE.2022-10-24T18-35-07Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-10-24T18-35-07Z>`__.
    To continue using a standalone deployment, install that MinIO Server release with MinIO Client `RELEASE.2022-10-29T10-09-23Z <https://github.com/minio/mc/releases/tag/RELEASE.2022-10-29T10-09-23Z>`__ or any `earlier release <https://github.com/minio/minio/releases>`__ with its corresponding MinIO Client. Note that the version of the MinIO Client should be newer and as close as possible to the version of the MinIO server.
 
+   Filesystem mode deployments must be on at least `RELEASE.2022-06-25T15-50-16Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-06-25T15-50-16Z>`__  to use the MinIO Client import and export commands.
+   Filesystem mode deployments up to and including `RELEASE.2022-06-20T23-13-45Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-06-20T23-13-45Z>`__ can be migrated by manually recreating users, policies, buckets, and other resources on the new deployment.
+
 
 Procedure
 ---------
@@ -48,6 +51,20 @@ Procedure
    Depending on your current deployment setup, you may need to retrieve the values for both.
 
    You can examine any runtime settings using ``env | grep MINIO_`` or, for deployments using MinIO's systemd service, check the contents of ``/etc/default/minio``.
+
+#. For filesystem mode deployments:
+
+   If needed, upgrade the existing deployment.
+
+   The oldest acceptable versions are:
+
+   - MinIO `RELEASE.2022-06-25T15-50-16Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-06-25T15-50-16Z>`__
+   - MinIO Client `RELEASE.2022-06-26T18-51-48Z <https://github.com/minio/mc/releases/tag/RELEASE.2022-06-26T18-51-48Z>`__
+
+   The newest acceptable versions are:
+
+   - MinIO `RELEASE.2022-10-24T18-35-07Z <https://github.com/minio/minio/releases/tag/RELEASE.2022-10-24T18-35-07Z>`__
+   - MinIO Client `RELEASE.2022-10-29T10-09-23Z <https://github.com/minio/mc/releases/tag/RELEASE.2022-10-29T10-09-23Z>`__
 
 #. Create a new Single-Node Single-Drive MinIO deployment.
 
