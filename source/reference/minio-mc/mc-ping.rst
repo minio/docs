@@ -86,6 +86,13 @@ Parameters
 
       mc ping TARGET -e 5
 
+.. mc-cmd:: --exit
+   :optional:
+
+   .. versionadded:: RELEASE.2023-05-30T22-41-38Z
+      
+   Exit after the first successful check.
+
 .. mc-cmd:: --interval
    :optional:
 
