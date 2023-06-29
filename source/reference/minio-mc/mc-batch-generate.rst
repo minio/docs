@@ -166,7 +166,18 @@ For the **source deployment**
 
      * - ``endpoint:`` 
        - | Location of the source deployment.
-         | If the location is not remote, use ``local``.
+         |
+         | If the source is the :ref:`alias <alias>`` specified to the command, you can omit this and the ``credentials`` fields.
+         | If the source is "local", the target *must* specify the remote deployment with ``endpoint`` and ``credentials``.
+
+     * - ``path:``
+       - | Directs MinIO to use Path or Virtual Style (DNS) lookup of the bucket.
+         | 
+         | - Specify ``on`` for Path style
+         | - Specify ``off`` for Virtual style
+         | - Specify ``auto`` to let MinIO determine the correct lookup style.
+         |
+         | Defaults to ``auto``.
 
      * - ``credentials:`` 
        - The ``accesskey:`` and ``secretKey:`` or the ``sessionToken:`` that grants access to the object(s).
@@ -194,9 +205,11 @@ For the **target deployment**
        - The prefix on the object(s) to replicate.
 
      * - ``endpoint:`` 
-       - | The location of the source deployment.
-         | If the location is not remote, use ``local``.
-         | If the location of the source is remote, the source for target **must** be ``local``. 
+       - | The location of the target deployment.
+         |
+         | If the target is the :ref:`alias <alias>`` specified to the command, you can omit this and the ``credentials`` fields.
+         | If the target is "local", the source *must* specify the remote deployment with ``endpoint`` and ``credentials``.
+
 
      * - ``credentials:`` 
        - The ``accesskey`` and ``secretKey`` or the ``sessionToken`` that grants access to the object(s).

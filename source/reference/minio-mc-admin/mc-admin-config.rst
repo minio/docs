@@ -370,6 +370,10 @@ using these environment variables.
       This key corresponds to the :envvar:`MINIO_NOTIFY_AMQP_URL` environment
       variable. 
 
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
+
    .. mc-conf:: exchange 
       :delimiter: " "
 
@@ -588,6 +592,10 @@ using these configuration settings.
       This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_BROKER`
       environment variable.
 
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
+
    .. mc-conf:: topic
       :delimiter: " "
 
@@ -757,6 +765,10 @@ these configuration settings.
       This field corresponds to the
       :envvar:`MINIO_NOTIFY_ELASTICSEARCH_URL` environment variable.
 
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
+
    .. mc-conf:: index
       :delimiter: " "
 
@@ -908,6 +920,10 @@ using these configuration settings.
       This configuration setting corresponds to the 
       :envvar:`MINIO_NOTIFY_NSQ_NSQD_ADDRESS` environment variable.
       
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
+
    .. mc-conf:: topic
       :delimiter: " "
 
@@ -1052,8 +1068,12 @@ using these configuration settings.
          :start-after: start-minio-notify-redis-address
          :end-before: end-minio-notify-redis-address
 
-   This configuration setting corresponds to the 
-   :envvar:`MINIO_NOTIFY_REDIS_ADDRESS` environment variable.
+      This configuration setting corresponds to the 
+      :envvar:`MINIO_NOTIFY_REDIS_ADDRESS` environment variable.
+
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
 
    .. mc-conf:: key
       :delimiter: " "
@@ -1190,6 +1210,10 @@ using these environment variables.
 
       This configuration setting corresponds with the environment variable
       :envvar:`MINIO_NOTIFY_NATS_ADDRESS`.
+
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
 
    .. mc-conf:: subject
       :delimiter: " "
@@ -1466,6 +1490,10 @@ using these environment variables.
       :envvar:`MINIO_NOTIFY_POSTGRES_CONNECTION_STRING` environment
       variable.
 
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
+
    .. mc-conf:: table
       :delimiter: " "
       
@@ -1612,6 +1640,10 @@ using these environment variables.
       :envvar:`MINIO_NOTIFY_MYSQL_DSN_STRING` environment
       variable.
 
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
+
    .. mc-conf:: table
       :delimiter: " "
       
@@ -1745,6 +1777,10 @@ using these environment variables.
 
       This configuration setting corresponds to the
       :envvar:`MINIO_NOTIFY_KAFKA_BROKERS` environment variable.
+
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
 
    .. mc-conf:: topic
       :delimiter: " "
@@ -1972,6 +2008,10 @@ using these environment variables.
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_NOTIFY_WEBHOOK_ENDPOINT` environment variable.
+
+      .. include:: /includes/linux/minio-server.rst
+         :start-after: start-notify-target-online-desc
+         :end-before: end-notify-target-online-desc
 
    .. mc-conf:: auth_token
       :delimiter: " "

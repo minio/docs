@@ -15,10 +15,13 @@ Syntax
 
 .. start-mc-admin-policy-attach-desc
 
-Attaches one or more IAM policies to either a user or a group. 
+Attaches one or more IAM policies to either a :ref:`MinIO-managed user or a group <minio-users>`. 
 
 .. end-mc-admin-policy-attach-desc
 
+.. versionchanged:: RELEASE.2023-05-27T05-56-19Z
+
+   To successfully attach a policy, the referenced user or group must exist.
 
 Exactly one :mc-cmd:`~mc admin policy attach --user` or one :mc-cmd:`~mc admin policy attach --group` is required.
 
