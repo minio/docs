@@ -135,7 +135,7 @@ Back Up Cluster Settings First
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the :mc:`mc admin cluster bucket export` and :mc:`mc admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to configuring Site Replication.
-You can use these snapshots to restore configurations that may be overwritten during the initial sync process.
+You can use these snapshots to restore bucket/IAM settings in the event of misconfiguration during site replication configuration.
 
 One Site with Data at Setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
