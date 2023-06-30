@@ -167,7 +167,7 @@ For the **source deployment**
      * - ``endpoint:`` 
        - | Location of the source deployment.
          |
-         | If the source is the :ref:`alias <alias>`` specified to the command, you can omit this and the ``credentials`` fields.
+         | If the source is the :ref:`alias <alias>` specified to the command, you can omit this and the ``credentials`` fields.
          | If the source is "local", the target *must* specify the remote deployment with ``endpoint`` and ``credentials``.
 
      * - ``path:``
@@ -207,7 +207,7 @@ For the **target deployment**
      * - ``endpoint:`` 
        - | The location of the target deployment.
          |
-         | If the target is the :ref:`alias <alias>`` specified to the command, you can omit this and the ``credentials`` fields.
+         | If the target is the :ref:`alias <alias>` specified to the command, you can omit this and the ``credentials`` fields.
          | If the target is "local", the source *must* specify the remote deployment with ``endpoint`` and ``credentials``.
 
 

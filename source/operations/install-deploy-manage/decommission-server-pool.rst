@@ -136,15 +136,6 @@ Complete any planned :ref:`hardware expansion <expand-minio-distributed>` prior 
 Decommissioning requires that a cluster's topology remain stable throughout the pool draining process.
 Do **not** attempt to perform expansion and decommission changes in a single step.
 
-
-Decommissioning Ignores Delete Markers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO does *not* migrate objects whose only remaining version is a 
-:ref:`delete markers <minio-bucket-versioning-delete>`. This avoids creating
-empty metadata on the remaining server pools for objects already considered
-fully deleted.
-
 Decommissioning is Resumable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -171,6 +162,7 @@ Decommissioning Ignores Expired Objects and Trailing ``DeleteMarker``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting with :minio-release:`RELEASE.2023-05-27T05-56-19Z`, decommissioning ignores objects where the only remaining version is a ``DeleteMarker``.
+This avoids creating empty metadata on the remaining server pool(s) for objects that are effectively fully deleted.
 
 Starting with :minio-release:`minio-lifecycle-management-scanner`, decommissioning also ignores object versions which have expired based on the configured :ref:`lifecycle rules <minio-lifecycle-management-expiration>` for the parent bucket.
 

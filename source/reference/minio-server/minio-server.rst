@@ -592,6 +592,7 @@ documentation.
 
 - :ref:`minio-sever-envvar-logging-regular`
 - :ref:`minio-sever-envvar-logging-audit`
+- :ref:`minio-sever-envvar-logging-audit-kafka`
 
 .. _minio-sever-envvar-logging-regular:
 
@@ -701,8 +702,8 @@ server logs webhook endpoints:
 
 .. _minio-sever-envvar-logging-audit:
 
-Audit Logs
-++++++++++
+Webhook Audit Logs
+++++++++++++++++++
 
 The following section documents environment variables for configuring MinIO to
 publish audit logs to an HTTP webhook endpoint. See
@@ -799,6 +800,146 @@ audit log webhook endpoints:
    An integer value to use for the queue size for audit webhook targets.
 
    This variable corresponds to the :mc-conf:`audit_webhook queue_size <audit_webhook.queue_size>` configuration setting.
+
+.. _minio-sever-envvar-logging-audit-kafka:
+
+Kafka Audit Logs
+++++++++++++++++
+
+The following section documents environment variables for configuring MinIO to publish audit logs to a Kafka broker.
+
+.. envvar:: MINIO_AUDIT_KAFKA_ENABLE
+   :required:
+
+   Set to ``"on"`` to enable the target.
+
+   Set to ``"off"`` to disable the target.
+
+.. envvar:: MINIO_AUDIT_KAFKA_BROKERS
+   :required:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-brokers-desc
+      :end-before: end-minio-kafka-audit-logging-brokers-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.brokers` configuration setting.
+    
+.. envvar:: MINIO_AUDIT_KAFKA_TOPIC
+   :required:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-topic-desc
+      :end-before: end-minio-kafka-audit-logging-topic-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.topic` configuration setting.
+    
+.. envvar:: MINIO_AUDIT_KAFKA_TLS  
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-tls-desc
+      :end-before: end-minio-kafka-audit-logging-tls-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.tls` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_TLS_SKIP_VERIFY
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-tls-skip-verify-desc
+      :end-before: end-minio-kafka-audit-logging-tls-skip-verify-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.tls_skip_verify` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_SASL
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-sasl-desc
+      :end-before: end-minio-kafka-audit-logging-sasl-desc
+
+   Requires specifying :envvar:`MINIO_AUDIT_KAFKA_SASL_USERNAME` and :envvar:`MINIO_AUDIT_KAFKA_SASL_PASSWORD`.
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.sasl` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_SASL_USERNAME
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-sasl-username-desc
+      :end-before: end-minio-kafka-audit-logging-sasl-username-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.sasl_username` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_SASL_PASSWORD
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-sasl-password-desc
+      :end-before: end-minio-kafka-audit-logging-sasl-password-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.sasl_password` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_SASL_MECHANISM
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-sasl-mechanism-desc
+      :end-before: end-minio-kafka-audit-logging-sasl-mechanism-desc
+
+   .. important::
+
+      The ``PLAIN`` authentication mechanism sends credentials in plain text over the network.
+      Use :envvar:`MINIO_AUDIT_KAFKA_TLS` to enable TLS connectivity to the Kafka brokers and ensure secure transmission of SASL credentials.
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.sasl_mechanism` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_TLS_CLIENT_AUTH
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-tls-client-auth-desc
+      :end-before: end-minio-kafka-audit-logging-tls-client-auth-desc
+
+   Requires specifying :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT` and :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY`.
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.tls_client_auth` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-client-tls-cert-desc
+      :end-before: end-minio-kafka-audit-logging-client-tls-cert-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.client_tls_cert` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-client-tls-key-desc
+      :end-before: end-minio-kafka-audit-logging-client-tls-key-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.client_tls_key` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_VERSION
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-version-desc
+      :end-before: end-minio-kafka-audit-logging-version-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.version` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_COMMENT
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-comment-desc
+      :end-before: end-minio-kafka-audit-logging-comment-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.comment` configuration setting.
 
 Bucket Notifications
 ~~~~~~~~~~~~~~~~~~~~
