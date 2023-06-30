@@ -1030,7 +1030,10 @@ If you do not have another admin user, disabling the root account locks administ
 
 A comma-separated list of Kafka broker addresses:
 
-``brokers="https://kafka-1.example.net:9092,https://kafka-2.example.net:9092"``
+
+.. code-block:: shell
+
+   brokers="https://kafka-1.example.net:9092,https://kafka-2.example.net:9092"
 
 At least one broker must be online and reachable by the MinIO server to initialize and send audit log events.
 MinIO checks each specified broker in order of specification.
