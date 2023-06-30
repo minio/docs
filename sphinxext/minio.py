@@ -268,6 +268,8 @@ class MinioObject(ObjectDescription):
         'noindexentry': directives.flag,
         'noprefix': directives.flag,
         'delimiter': directives.unchanged,
+        'optional': directives.flag,
+        'required': directives.flag,
     }
 
     def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
@@ -385,6 +387,13 @@ class MinioObject(ObjectDescription):
             if self.allow_nesting:
                 objects = self.env.ref_context.setdefault('minio:objects', [])
                 objects.append(prefix)
+
+    def transform_content(self, contentnode: addnodes.desc_content) -> None:
+        if ('optional' in self.options):
+            contentnode.children = [emphasis(None,Text("Optional"))] + contentnode.children
+        elif ('required' in self.options):
+            contentnode.children = [emphasis(None,Text("Required"))] + contentnode.children
+        pass
 
     def after_content(self) -> None:
         """Handle object de-nesting after content

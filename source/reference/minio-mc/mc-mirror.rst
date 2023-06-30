@@ -149,6 +149,8 @@ Parameters
    Perform a mock mirror operation. 
    Use this operation to test that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
 
+.. --limit-download and --limit-upload included here
+
 .. include:: /includes/linux/minio-client.rst
    :start-after: start-mc-limit-flags-desc
    :end-before: end-mc-limit-flags-desc

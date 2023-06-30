@@ -1022,3 +1022,101 @@ Ensure you have at least one other admin user, such as one with the :userpolicy:
 If you do not have another admin user, disabling the root account locks administrative access to the deployment.
 
 .. end-minio-root-api-access
+
+
+.. kafka audit settings
+
+.. start-minio-kafka-audit-logging-brokers-desc
+
+A comma-separated list of Kafka broker addresses:
+
+``brokers="https://kafka-1.example.net:9092,https://kafka-2.example.net:9092"``
+
+At least one broker must be online and reachable by the MinIO server to initialize and send audit log events.
+MinIO checks each specified broker in order of specification.
+
+.. end-minio-kafka-audit-logging-brokers-desc
+
+.. start-minio-kafka-audit-logging-topic-desc
+
+The name of the Kafka topic to associate to MinIO audit log events.
+
+.. end-minio-kafka-audit-logging-topic-desc
+
+.. start-minio-kafka-audit-logging-tls-desc
+
+Set to ``"on"`` to enable TLS connectivity to the specified Kafka brokers.
+
+Defaults to ``"off"``.
+
+.. end-minio-kafka-audit-logging-tls-desc
+
+.. start-minio-kafka-audit-logging-tls-skip-verify-desc
+
+Set to ``"on"`` to direct MinIO to skip verification of the Kafka broker TLS certificates.
+
+You can use this option for enabling connectivity to Kafka brokers using TLS certificates signed by unknown parties, such as self-signed or corporate-internal Certificate Authorities (CA).
+
+MinIO by default uses the system trust store *and* the contents of the MinIO :ref:`CA directory <minio-tls>` for verifying remote client TLS certificates.
+
+Defaults to ``"off"`` for strict verification of TLS certificates.
+
+.. end-minio-kafka-audit-logging-tls-skip-verify-desc
+
+.. start-minio-kafka-audit-logging-tls-client-auth-desc
+
+Set to ``"on"`` to direct MinIO to use mTLS to authenticate against the Kafka brokers.
+
+.. end-minio-kafka-audit-logging-tls-client-auth-desc
+
+.. start-minio-kafka-audit-logging-client-tls-cert-desc
+
+The path to the TLS client certificate to use for mTLS authentication.
+
+.. end-minio-kafka-audit-logging-client-tls-cert-desc
+
+.. start-minio-kafka-audit-logging-client-tls-key-desc
+
+The path to the TLS client private key to use for mTLS authentication.
+
+.. end-minio-kafka-audit-logging-client-tls-key-desc
+
+.. start-minio-kafka-audit-logging-sasl-desc
+
+Set to ``"on"`` to direct MinIO to use SASL to authenticate against the Kafka brokers.
+
+.. end-minio-kafka-audit-logging-sasl-desc
+
+.. start-minio-kafka-audit-logging-sasl-username-desc
+
+The SASL username MinIO uses for authentication against the Kafka brokers.
+
+.. end-minio-kafka-audit-logging-sasl-username-desc
+
+.. start-minio-kafka-audit-logging-sasl-password-desc
+
+The SASL password MinIO uses for authentication against the Kafka brokers.
+
+.. end-minio-kafka-audit-logging-sasl-password-desc
+
+.. start-minio-kafka-audit-logging-sasl-mechanism-desc
+
+The SASL mechanism MinIO uses for authentication against the Kafka brokers.
+
+Defaults to ``plain``.
+
+.. end-minio-kafka-audit-logging-sasl-mechanism-desc
+
+.. start-minio-kafka-audit-logging-version-desc
+
+The version of the Kafka broker MinIO expects at the specified endpoints.
+
+MinIO returns an error if the Kakfa broker verison does not match those specified to this setting.
+
+.. end-minio-kafka-audit-logging-version-desc
+
+.. start-minio-kafka-audit-logging-comment-desc
+
+A comment to associate with the configuration.
+
+.. end-minio-kafka-audit-logging-comment-desc

@@ -9,9 +9,11 @@
    
    - ``B`` for bytes
    - ``K`` for kilobytes
+   - ``M`` for megabytes
    - ``G`` for gigabytes
    - ``T`` for terabytes
    - ``Ki`` for kibibytes
+   - ``Mi`` for mibibytes
    - ``Gi`` for gibibytes
    - ``Ti`` for tebibytes
 
@@ -32,9 +34,11 @@
    
    - ``B`` for bytes
    - ``K`` for kilobytes
+   - ``M`` for megabytes
    - ``G`` for gigabytes
    - ``T`` for terabytes
    - ``Ki`` for kibibytes
+   - ``Mi`` for mibibytes
    - ``Gi`` for gibibytes
    - ``Ti`` for tebibytes
 
