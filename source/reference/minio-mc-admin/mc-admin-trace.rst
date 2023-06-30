@@ -125,6 +125,7 @@ Syntax
    - ``batch-replication``
    - ``bootstrap``
    - ``decommission``
+   - ``ftp``
    - ``healing``
    - ``internal``
    - ``os``
