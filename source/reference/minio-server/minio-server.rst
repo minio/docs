@@ -592,6 +592,7 @@ documentation.
 
 - :ref:`minio-sever-envvar-logging-regular`
 - :ref:`minio-sever-envvar-logging-audit`
+- :ref:`minio-sever-envvar-logging-audit-kafka`
 
 .. _minio-sever-envvar-logging-regular:
 
