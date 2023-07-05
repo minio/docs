@@ -87,9 +87,8 @@ to the :mc-cmd:`mc` :ref:`configuration <mc-configuration>`.
 - Replace ``ACCESS_KEY`` and ``SECRET_KEY`` with the access and secret 
   keys for a user on the S3 service. 
 
-Replace each argument with the required values. Specifying only the 
-``mc config host add`` command starts an input prompt for entering the
-required values.
+Replace each argument with the required values.
+If you omit the ``ACCESS_KEY`` and ``SECRET_KEY``, the command prompts you to enter those values in the CLI.
 
 Each of the following tabs contains a provider-specific example:
 
