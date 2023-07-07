@@ -1128,16 +1128,75 @@ A comment to associate with the configuration.
 .. end-minio-data-compression-desc                                                           
 
 .. start-minio-data-compression-allow_encryption-desc
+
+Set to ``on`` to encrypt objects after compressing them.
+Defaults to ``off``.
+
+.. admonition:: Encrypting compressed objects may compromise security
+   :class: warning
+
+   MinIO strongly recommends against encrypting compressed objects.
+   If you require encryption, carefully evaluate the risk of potentially leaking information about the contents of encrypted objects.
+	   
 .. end-minio-data-compression-allow_encryption-desc
 
 .. start-minio-data-compression-comment-desc
+
+Specify a comment to associate with the data compression configuration.
+   
 .. end-minio-data-compression-comment-desc
 
 .. start-minio-data-compression-enable-desc
+
+Set to ``on`` to enable data compression for new objects.
+Defaults to ``off``.
+
+Enabling or disabling data compression does not change existing objects.
+
 .. end-minio-data-compression-enable-desc
 
 .. start-minio-data-compression-extensions-desc
+
+Comma-separated list of the file extensions to compress.
+Defaults to ``.txt,.log,.csv,.json,.tar,.xml,.bin``.
+
+.. admonition:: Uncompressable files
+   :class: note
+
+   MinIO will *not* compress the following types of files, even if specified in an ``extensions`` setting:
+
+   * GZIP
+   * BZIP2
+   * WinRAR
+   * ZIP
+   * 7-Zip
+   * LZMA
+   * MP4
+   * MKV media
+   * MOV
+     
+   These uncompressable files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
+
 .. end-minio-data-compression-extensions-desc
 
 .. start-minio-data-compression-mime_types-desc
+
+Comma-separated list of the MIME types to compress.
+Defaults to ``text/*, application/json, application/xml, binary/octet-stream``.
+
+.. admonition:: Uncompressable files
+   :class: note
+
+   MinIO will *not* compress the following types of files, even if specified in a ``mime_types`` setting:
+
+   * video/*
+   * audio/*
+   * application/zip
+   * application/x-gzip
+   * application/x-bz2
+   * application/x-compress
+   * application/x-xz
+
+   These uncompressable files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
+
 .. end-minio-data-compression-mime_types-desc

@@ -2764,8 +2764,8 @@ See :ref:`minio-data-compression` for a tutorial on using these configuration se
       *Optional*
 
       .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-data-compression-desc
-         :end-before: end-minio-data-compression-desc
+         :start-after: start-minio-data-compression-allow_encryption-desc
+         :end-before: end-minio-data-compression-allow_encryption-desc
 
    .. mc-conf:: comment
       :delimiter: " "
