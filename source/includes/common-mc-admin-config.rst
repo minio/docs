@@ -1136,5 +1136,8 @@ A comment to associate with the configuration.
 .. start-minio-data-compression-enable-desc
 .. end-minio-data-compression-enable-desc
 
+.. start-minio-data-compression-extensions-desc
+.. end-minio-data-compression-extensions-desc
+
 .. start-minio-data-compression-mime_types-desc
 .. end-minio-data-compression-mime_types-desc
