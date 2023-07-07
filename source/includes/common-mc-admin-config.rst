@@ -1123,3 +1123,18 @@ MinIO returns an error if the Kakfa broker verison does not match those specifie
 A comment to associate with the configuration.
 
 .. end-minio-kafka-audit-logging-comment-desc
+
+.. start-minio-data-compression-desc
+.. end-minio-data-compression-desc                                                           
+
+.. start-minio-data-compression-allow_encryption-desc
+.. end-minio-data-compression-allow_encryption-desc
+
+.. start-minio-data-compression-comment-desc
+.. end-minio-data-compression-comment-desc
+
+.. start-minio-data-compression-enable-desc
+.. end-minio-data-compression-enable-desc
+
+.. start-minio-data-compression-mime_types-desc
+.. end-minio-data-compression-mime_types-desc
