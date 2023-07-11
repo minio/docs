@@ -30,17 +30,12 @@ Production Hardware Recommendations
 -----------------------------------
 
 The following checklist follows MinIO's `Recommended Configuration <https://min.io/product/reference-hardware?ref-docs>`__ for production deployments.
+The provided guidance is intended as a baseline and cannot replace |subnet| Performance Diagnostics, Architecture Reviews, and direct-to-engineering support.
 
-MinIO takes full advantage of the modern hardware improvements such as AVX-512 SIMD acceleration, 100GbE networking, and NVMe SSDs, when available.
-While MinIO can run on commodity or "budget" hardware, we strongly recommend using this table as guidance for best results in production environments.
-
-|subnet| Enterprise includes architecture reviews for more curated and customized deployment guidance and support.
-
-.. note:: 
+.. admonition:: MinIO does not provide hosted services or hardware sales
+   :class: important
 
    See our `Reference Hardware <https://min.io/product/reference-hardware#hardware?ref-docs>`__ page for a curated selection of servers and storage components from our hardware partners.
-
-   MinIO does not provide hosted services or hardware sales.
 
 .. list-table::
    :widths: auto
@@ -49,7 +44,7 @@ While MinIO can run on commodity or "budget" hardware, we strongly recommend usi
    * - :octicon:`circle`
      - Sufficient CPU cores to achieve performance goals for hashing (for example, for healing) and encryption
        
-       MinIO recommends Single Socket Intel® Xeon® Scalable Gold CPUs (minimum 16 cores per socket)
+       MinIO recommends Single Socket Intel® Xeon® Scalable Gold CPUs (minimum 16 cores per socket).
 
    * - :octicon:`circle`
      - Sufficient RAM to achieve performance goals based on the number of drives and anticipated concurrent requests (see the :ref:`formula and reference table <minio-hardware-checklist-memory>`).
@@ -59,20 +54,20 @@ While MinIO can run on commodity or "budget" hardware, we strongly recommend usi
    * - :octicon:`circle`
      - .. cond:: k8s
 
-         MinIO requires a *minimum* of 4 worker nodes per MinIO Tenant
+          MinIO requires a *minimum* of 4 worker nodes per MinIO Tenant.
 
-         MinIO strongly recommends four distinct worker nodes dedicated to servicing the MinIO Tenant.
-         Colocating multiple high-performance softwares on the same nodes can result in resource contention and reduced overall performance for all softwares.
+          MinIO strongly recommends allocating worker nodes dedicated to servicing the MinIO Tenant.
+          Colocating multiple high-performance services on the same nodes can result in resource contention and reduced overall performance.
 
-      .. cond:: linux or container or macos or windows
+       .. cond:: linux or container or macos or windows
 
-         MinIO recommends a *minimum* of 4 host servers for a distributed deployment to provide a baseline of availability and resiliency for production environments.
+          MinIO recommends a *minimum* of 4 host servers per distributed deployment.
+
+          MinIO strongly recommends hardware dedicated to servicing the MinIO Tenant.
+          Colocating multiple high-performance services on the same servers can result in resource contention and reduced overall performance.
 
    * - :octicon:`circle`
-     - | SATA/SAS drives for balanced capacity-to-performance
-       | NVMe SSDs for high-performance.
-       
-       .. cond:: k8s
+     - .. cond:: k8s
 
           MinIO recommends a minimum of 4 Persistent Volumes per MinIO Server pod.
           For better performance and storage efficiency, use 8 or more PV per server.
@@ -81,7 +76,7 @@ While MinIO can run on commodity or "budget" hardware, we strongly recommend usi
 
           MinIO recommends a minimum of 4 locally attached drives per MinIO Server.
           For better performance and storage efficiency, use 8 or more drives per server.
-       
+
        Use the same type of drive (NVMe, SSD, or HDD) with the same capacity across all nodes in the deployment.
 
    * - :octicon:`circle`
@@ -109,7 +104,7 @@ While MinIO can run on commodity or "budget" hardware, we strongly recommend usi
    Prioritize securing the necessary components for each of these areas before focusing on other hardware resources, such as compute-related constraints.
 
 The minimum recommendations above reflect MinIO's experience with assisting enterprise customers in deploying on a variety of IT infrastructures while maintaining the desired SLA/SLO. 
-While MinIO may run on less than the minimum recommended topology, any potential cost savings come at the risk of decreased reliability.
+While MinIO may run on less than the minimum recommended topology, any potential cost savings come at the risk of decreased reliability, performance, or overall functionality.
 
 Networking
 ~~~~~~~~~~
@@ -141,10 +136,7 @@ The following examples of network throughput constraints assume spinning disks w
 
 - 1GbE network link can support up to 125MB/s, or one spinning disk
 - 10GbE network can support approximately 1.25GB/s, potentially supporting 10-12 spinning disk
-- 25GbE network can support approximately 3.125GB/s, potentially supporting ~30 disks
-
-The recommended minimum MinIO cluster of 4 nodes with 4 drives each (16 total disks) requires a 25GbE network to support the total potential aggregate throughput.
-
+- 25GbE network can support approximately 3.125GB/s, potentially supporting ~30 spinning disks
 
 .. _minio-hardware-checklist-memory:
 
