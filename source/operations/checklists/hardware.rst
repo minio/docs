@@ -135,7 +135,7 @@ Networking has the greatest impact on MinIO performance, where low per-host band
 The following examples of network throughput constraints assume spinning disks with ~100MB/S sustained I/O
 
 - 1GbE network link can support up to 125MB/s, or one spinning disk
-- 10GbE network can support approximately 1.25GB/s, potentially supporting 10-12 spinning disk
+- 10GbE network can support approximately 1.25GB/s, potentially supporting 10-12 spinning disks
 - 25GbE network can support approximately 3.125GB/s, potentially supporting ~30 spinning disks
 
 .. _minio-hardware-checklist-memory:
