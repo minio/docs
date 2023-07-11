@@ -1158,45 +1158,110 @@ Enabling or disabling data compression does not change existing objects.
 .. start-minio-data-compression-extensions-desc
 
 Comma-separated list of the file extensions to compress.
+Setting a new list of file extensions replaces the previously configured list.
 Defaults to ``.txt,.log,.csv,.json,.tar,.xml,.bin``.
 
 .. admonition:: Uncompressable files
    :class: note
 
-   MinIO will *not* compress the following types of files, even if specified in an ``extensions`` setting:
+   MinIO will *not* compress the following types of files, even if specified in an :mc-conf:`~compression.extensions` argument:
 
-   * GZIP
-   * BZIP2
-   * WinRAR
-   * ZIP
-   * 7-Zip
-   * LZMA
-   * MP4
-   * MKV media
-   * MOV
+   .. list-table:: Uncompressable File Extensions
+      
+      * - File Format
+	- File Extensions
+
+      * - GZIP
+	- ``.gz``
+	  
+      * - BZIP2
+	- ``.bz2``
+
+      * - WinRAR
+	- ``.rar``
+	
+      * - ZIP
+	- ``.zip``
+	
+      * - 7-Zip
+	- ``.7z``
+	  
+      * - Lempel–Ziv–Markov chain algorithm (LZMA)
+	- ``.xz``
+	  
+      * - MPEG-4 Part 14 (MP4)
+	- ``.mp4``, ``.m4a``, ``.m4p``, ``.m4b``, ``.m4r``, ``.m4v``
+
+      * - Matroska (MKV)
+	- ``.mkv``, ``mk3d``, ``.mka``
+
+      * - QuickTime File Format (QTFF)
+	- ``.mov``, ``.qt``
      
-   These uncompressable files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
+   These files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
 
 .. end-minio-data-compression-extensions-desc
 
 .. start-minio-data-compression-mime_types-desc
 
 Comma-separated list of the MIME types to compress.
+Setting	a new list of types replaces the previously configured list.
 Defaults to ``text/*, application/json, application/xml, binary/octet-stream``.
 
 .. admonition:: Uncompressable files
    :class: note
 
-   MinIO will *not* compress the following types of files, even if specified in a ``mime_types`` setting:
+   MinIO will *not* compress the following types of files, even if specified in a :mc-conf:`~compression.mime_types` argument:
 
-   * video/*
-   * audio/*
-   * application/zip
-   * application/x-gzip
-   * application/x-bz2
-   * application/x-compress
-   * application/x-xz
+   .. list-table:: Uncompressable File Types
 
+      * - File format
+	- Media Type (MIME type)
+
+      * - Video
+	- ``video/*``
+
+      * - Audio
+	- ``audio/*``
+
+      * - ZIP application
+	- ``application/zip``
+
+      * - GZIP application
+	- ``application/x-gzip``
+
+      * - BZIP2 application
+	- ``application/x-bz2``
+
+      * - Lempel–Ziv–Welch (LZW) application
+	- ``application/x-compress``
+
+      * - LZMA application
+	- ``application/x-xz``
+
+
+   +------------------------+----------------------------+
+   | File Format            | Media (MIME) Type          |
+   +========================+============================+
+   | Audio                  | ``audio/*``                |
+   +------------------------+----------------------------+
+   | Video                  | ``video/*``                |
+   +------------------------+----------------------------+
+
+   +------------------------+----------------------------+
+   | Compressed Applications                             |
+   +========================+============================+
+   | ZIP                    | ``application/zip``        |
+   +------------------------+----------------------------+
+   | GZIP                   | ``application/x-gzip``     |
+   +------------------------+----------------------------+
+   | BZIP2                  | ``application/x-bz2``      |
+   +------------------------+----------------------------+
+   | Lempel–Ziv–Welch (LZW) | ``application/x-compress`` |
+   +------------------------+----------------------------+
+   | LZMA                   | ``application/x-xz``       |
+   +------------------------+----------------------------+
+	  
    These uncompressable files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
 
 .. end-minio-data-compression-mime_types-desc

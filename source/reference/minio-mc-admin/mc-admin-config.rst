@@ -2753,7 +2753,7 @@ See :ref:`minio-data-compression` for a tutorial on using these configuration se
    .. code-block:: shell
       :class: copyable
 
-      mc admin config set compression \
+      mc admin config set compression           \
                           [ARGUMENT=VALUE] ...  \
 
    The :mc-conf:`compression` configuration key supports the following arguments:
