@@ -63,7 +63,7 @@ Tutorials
 Enable Data Compression
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-To enable data compression, use :mc-cmd:`mc admin config set` to toggle the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``on``.
+To enable data compression, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``on``.
 
 The following enables compression for new objects of the default types:
 
@@ -88,7 +88,7 @@ To view the current compression settings:
 Disable Data Compression
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-To disable data compression, use :mc-cmd:`mc admin config set` to toggle the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``off``:
+To disable data compression, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``off``:
 
 The following disables data compression for new objects:
 
