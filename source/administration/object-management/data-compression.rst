@@ -15,7 +15,7 @@ Overview
 --------
 
 MinIO Server supports compressing objects to reduce disk usage.
-Objects are compressed before they are written to disk and uncompressed when read, making the compresson process transparent to client applications and services.
+Objects are compressed before they are written to disk and uncompressed when read, making the compression process transparent to client applications and services.
 
 Depending on the type of data, compression may also increase overall throughput.
 Write throughput for compressible data is generally 500MB per second or greater per available CPU.
@@ -65,7 +65,7 @@ Enable Data Compression
 
 To enable data compression, use :mc-cmd:`mc admin config set` to toggle the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``on``.
 
-The following enables compresson for new objects of the default types:
+The following enables compression for new objects of the default types:
 
 .. code-block:: shell
    :class: copyable

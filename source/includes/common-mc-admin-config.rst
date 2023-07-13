@@ -1124,9 +1124,6 @@ A comment to associate with the configuration.
 
 .. end-minio-kafka-audit-logging-comment-desc
 
-.. start-minio-data-compression-desc
-.. end-minio-data-compression-desc                                                           
-
 .. start-minio-data-compression-allow_encryption-desc
 
 Set to ``on`` to encrypt objects after compressing them.
@@ -1213,7 +1210,7 @@ Defaults to ``text/*, application/json, application/xml, binary/octet-stream``.
 
    MinIO will *not* compress the following types of files, even if specified in a :mc-conf:`~compression.mime_types` argument:
 
-   .. list-table:: Incompressable File Types
+   .. list-table:: Incompressible File Types
 
       * - File format
 	- Media Type (MIME type)
@@ -1262,6 +1259,6 @@ Defaults to ``text/*, application/json, application/xml, binary/octet-stream``.
    | LZMA                   | ``application/x-xz``       |
    +------------------------+----------------------------+
 	  
-   These incompressable files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
+   These incompressible files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
 
 .. end-minio-data-compression-mime_types-desc
