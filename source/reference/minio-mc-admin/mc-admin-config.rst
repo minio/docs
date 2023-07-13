@@ -2741,7 +2741,7 @@ Data Compression
 ~~~~~~~~~~~~~~~~
 
 The following section documents settings for enabling data compression for objects.
-See :ref:`minio-data-compression` for a tutorial on using these configuration settings.
+See :ref:`minio-data-compression` for tutorials on using these configuration settings.
 
 .. mc-conf:: compression
 
@@ -2767,6 +2767,8 @@ See :ref:`minio-data-compression` for a tutorial on using these configuration se
          :start-after: start-minio-data-compression-allow_encryption-desc
          :end-before: end-minio-data-compression-allow_encryption-desc
 
+      This configuration setting corresponds with the :envvar:`MINIO_COMPRESSION_ALLOW_ENCRYPTION` environment variable.
+
    .. mc-conf:: comment
       :delimiter: " "
 
@@ -2785,6 +2787,8 @@ See :ref:`minio-data-compression` for a tutorial on using these configuration se
          :start-after: start-minio-data-compression-enable-desc
          :end-before: end-minio-data-compression-enable-desc
 
+      This configuration setting corresponds with the :envvar:`MINIO_COMPRESSION_ENABLE` environment variable.
+
    .. mc-conf:: extensions
       :delimiter: " "
 
@@ -2794,6 +2798,8 @@ See :ref:`minio-data-compression` for a tutorial on using these configuration se
          :start-after: start-minio-data-compression-extensions-desc
          :end-before: end-minio-data-compression-extensions-desc
 
+      This configuration setting corresponds with the :envvar:`MINIO_COMPRESSION_EXTENSIONS` environment variable.
+
    .. mc-conf:: mime_types
       :delimiter: " "
 
@@ -2802,3 +2808,5 @@ See :ref:`minio-data-compression` for a tutorial on using these configuration se
       .. include:: /includes/common-mc-admin-config.rst
          :start-after: start-minio-data-compression-mime_types-desc
          :end-before: end-minio-data-compression-mime_types-desc
+
+      This configuration setting corresponds with the :envvar:`MINIO_COMPRESSION_MIME_TYPES` environment variable.

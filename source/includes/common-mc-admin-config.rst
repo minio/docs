@@ -1161,12 +1161,12 @@ Comma-separated list of the file extensions to compress.
 Setting a new list of file extensions replaces the previously configured list.
 Defaults to ``.txt,.log,.csv,.json,.tar,.xml,.bin``.
 
-.. admonition:: Uncompressable files
+.. admonition:: Incompressable files
    :class: note
 
    MinIO will *not* compress the following types of files, even if specified in an :mc-conf:`~compression.extensions` argument:
 
-   .. list-table:: Uncompressable File Extensions
+   .. list-table:: Incompressable File Extensions
       
       * - File Format
 	- File Extensions
@@ -1208,12 +1208,12 @@ Comma-separated list of the MIME types to compress.
 Setting	a new list of types replaces the previously configured list.
 Defaults to ``text/*, application/json, application/xml, binary/octet-stream``.
 
-.. admonition:: Uncompressable files
+.. admonition:: Incompressable files
    :class: note
 
    MinIO will *not* compress the following types of files, even if specified in a :mc-conf:`~compression.mime_types` argument:
 
-   .. list-table:: Uncompressable File Types
+   .. list-table:: Incompressable File Types
 
       * - File format
 	- Media Type (MIME type)
@@ -1262,6 +1262,6 @@ Defaults to ``text/*, application/json, application/xml, binary/octet-stream``.
    | LZMA                   | ``application/x-xz``       |
    +------------------------+----------------------------+
 	  
-   These uncompressable files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
+   These incompressable files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
 
 .. end-minio-data-compression-mime_types-desc
