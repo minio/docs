@@ -15,14 +15,27 @@ Overview
 --------
 
 MinIO Server supports compressing objects to reduce disk usage.
-Objects are compressed before they are written to disk and uncompressed when read, making the compression process transparent to client applications and services.
+Objects are compressed on PUT before writing to disk, and uncompressed on GET before they are sent to the client. This makes the compression process transparent to client applications and services.
 
 Depending on the type of data, compression may also increase overall throughput.
-Write throughput for compressible data is generally 500MB per second or greater per available CPU.
-Decompression is typically at least 1 GB per second.
+Write throughput for a production deployment is generally 500MB per second or greater per available CPU.
+Decompression is approximately 1 GB per second or greater.
 
-Data compression is a global option, configured settings apply to all buckets in a deployment.
-You can control which objects are compressed by specifying the desired file extensions and media types.
+For best results, review MinIO's :ref:`recommended hardware configuration <deploy-minio-distributed-recommendations>` or use |subnet| to work directly with engineers for analyzing compression performance.
+
+.. _minio-data-compression-default-types:
+
+Default File Types
+~~~~~~~~~~~~~~~~~~
+
+Data compression is a global option, the configured settings apply to all buckets in a deployment.
+By default, MinIO compresses the following types of data:
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-data-compression-default-desc
+   :end-before: end-minio-data-compression-default-desc
+
+You can control which objects are compressed by specifying the desired file extensions and `media (MIME) types <https://en.wikipedia.org/wiki/Media_type>`__.
 
 .. admonition:: Existing objects are not modified
    :class: note
@@ -30,30 +43,28 @@ You can control which objects are compressed by specifying the desired file exte
    Enabling, disabling, or updating a deployment's compression settings does not modify existing objects.
    New objects are compressed according to the settings in effect at the time they are created.
 
+.. _minio-data-compression-excluded-types:
 
-Incompressible Data
+Excluded File Types
 ~~~~~~~~~~~~~~~~~~~
 
-Some types of objects cannot be effectively compressed, such as video or already compressed data.
+Some data cannot be effectively compressed, such as video or already compressed data.
 MinIO does not compress common incompressible file types, even if they are specified in the compression configuration.
 
 Objects of these types are never compressed:
 
-File extensions
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-data-compression-default-excluded-desc
+   :end-before: end-minio-data-compression-default-excluded-desc
 
-- ``gz``, ``bz2``, ``rar``, ``zip``, ``7z``, ``xz``, ``mp4``, ``mkv``, ``mov``
 
-Media types
-- ``video/*``, ``audio/*``, ``application/zip``, ``application/x-gzip``, ``application/x-bz2``, ``application/x-compress``, ``application/x-xz``
-
-	
 Data Compression and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports encrypting compressed objects but recommends against encryption for most deployments.
-An important concern is a 3rd party may be able to learn details of an object's contents by comparing the uncompressed and compressed file sizes.
-
+MinIO supports encrypting compressed objects but recommends against combining compression and encryption for most deployments.
 Before enabling encryption for compressed objects, carefully consider the security needs of your environment.
+
+See `Transparent Data Compression on MinIO <https://blog.min.io/transparent-data-compression/>`__ for more about combining compression and encryption.
 |subnet| users can `log in <https://subnet.min.io/?ref=docs>`__ and engage with our engineering and security teams to review encryption options.
 
 
@@ -65,7 +76,7 @@ Enable Data Compression
 
 To enable data compression, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``on``.
 
-The following enables compression for new objects of the default types:
+The following enables compression for new objects of the :ref:`default types <minio-data-compression-default-types>`:
 
 .. code-block:: shell
    :class: copyable
@@ -110,23 +121,23 @@ Configure the objects to compress by specifying the desired file extensions and 
 
 By default, MinIO compresses the following extensions and types:
 
-* File extensions: ``.txt``, ``.log``, ``.csv``, ``.json``, ``.tar``, ``.xml``, ``.bin``
-* Media types: ``text/*``, ``application/json``, ``application/xml``, ``binary/octet-stream``
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-data-compression-default-desc
+   :end-before: end-minio-data-compression-default-desc
 
 .. admonition:: Default excluded extensions and types are never compressed
    :class: note
 
    Some objects cannot be efficiently compressed.
    MinIO will not attempt to compress these objects, even if they are specified in :mc-conf:`~compression.extensions` or :mc-conf:`~compression.mime_types` arguments.
+   See :ref:`minio-data-compression-excluded-types` for a list of excluded types.
 
 The sections below describe how to configure compression for the desired file extensions and media types.
 
 Compress All Compressible Objects
 +++++++++++++++++++++++++++++++++
 
-To compress all objects except the default excluded ones, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.extensions` and :mc-conf:`~compression.mime_types` options to empty lists.
-
-The following compresses all objects, except the default incompressible objects:
+To compress all objects except the :ref:`default excluded types <minio-data-compression-excluded-types>`, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.extensions` and :mc-conf:`~compression.mime_types` options to empty lists:
 
 .. code-block:: shell
    :class: copyable
@@ -139,7 +150,7 @@ The following compresses all objects, except the default incompressible objects:
 Compress Objects by File Extension
 ++++++++++++++++++++++++++++++++++
 
-To compress objects with certain file extensions, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.extensions` option to a list of the desired file extensions.
+To compress objects with certain file extensions, use :mc-cmd:`mc admin config set` to set the desired file extensions in an :mc-conf:`~compression.extensions` argument.
 
 The following command compresses files with the extensions ``.bin`` and ``.txt``:
 
@@ -153,7 +164,7 @@ The following command compresses files with the extensions ``.bin`` and ``.txt``
 The new list of file extensions replaces the previous list.
 To add or remove an extension, repeat the :mc-conf:`~compression.extensions` command with the complete list of extensions to compress.
 
-The following command adds ``.pdf`` to the list of file extensions from the previous example:
+The following adds ``.pdf`` to the list of file extensions from the previous example:
 
 .. code-block:: shell
    :class: copyable
@@ -166,14 +177,14 @@ The following command adds ``.pdf`` to the list of file extensions from the prev
 Compress Objects by Media Type
 ++++++++++++++++++++++++++++++
 
-To compress objects of certain types, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.mime_types` option to a list of the desired types.
+To compress objects of certain media types, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.mime_types` option to a list of the desired types.
 
-The following example compresses files of types ``application/json`` and ``image/png``:
+The following example compresses files of types ``application/json`` and ``image/bmp``:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression mime_types="application/json, image/png"
+   mc admin config set ALIAS compression mime_types="application/json, image/bmp"
 
 - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
@@ -186,6 +197,6 @@ The following command adds all text subtypes to the list from the previous examp
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression mime_types="application/json, image/png, text/*"
+   mc admin config set ALIAS compression mime_types="application/json, image/bmp, text/*"
 
 - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.

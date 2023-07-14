@@ -1134,13 +1134,13 @@ Defaults to ``off``.
 
    MinIO strongly recommends against encrypting compressed objects.
    If you require encryption, carefully evaluate the risk of potentially leaking information about the contents of encrypted objects.
-	   
+
 .. end-minio-data-compression-allow_encryption-desc
 
 .. start-minio-data-compression-comment-desc
 
 Specify a comment to associate with the data compression configuration.
-   
+
 .. end-minio-data-compression-comment-desc
 
 .. start-minio-data-compression-enable-desc
@@ -1156,46 +1156,14 @@ Enabling or disabling data compression does not change existing objects.
 
 Comma-separated list of the file extensions to compress.
 Setting a new list of file extensions replaces the previously configured list.
-Defaults to ``.txt,.log,.csv,.json,.tar,.xml,.bin``.
+Defaults to ``".txt, .log, .csv, .json, .tar, .xml, .bin"``.
 
-.. admonition:: Incompressable files
+.. admonition:: Default excluded files
    :class: note
 
-   MinIO will *not* compress the following types of files, even if specified in an :mc-conf:`~compression.extensions` argument:
-
-   .. list-table:: Incompressable File Extensions
-      
-      * - File Format
-	- File Extensions
-
-      * - GZIP
-	- ``.gz``
-	  
-      * - BZIP2
-	- ``.bz2``
-
-      * - WinRAR
-	- ``.rar``
-	
-      * - ZIP
-	- ``.zip``
-	
-      * - 7-Zip
-	- ``.7z``
-	  
-      * - Lempel–Ziv–Markov chain algorithm (LZMA)
-	- ``.xz``
-	  
-      * - MPEG-4 Part 14 (MP4)
-	- ``.mp4``, ``.m4a``, ``.m4p``, ``.m4b``, ``.m4r``, ``.m4v``
-
-      * - Matroska (MKV)
-	- ``.mkv``, ``mk3d``, ``.mka``
-
-      * - QuickTime File Format (QTFF)
-	- ``.mov``, ``.qt``
-     
-   These files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
+   Some types of files cannot be significantly reduced in size.
+   MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.extensions` argument.
+   See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
 
 .. end-minio-data-compression-extensions-desc
 
@@ -1203,62 +1171,89 @@ Defaults to ``.txt,.log,.csv,.json,.tar,.xml,.bin``.
 
 Comma-separated list of the MIME types to compress.
 Setting	a new list of types replaces the previously configured list.
-Defaults to ``text/*, application/json, application/xml, binary/octet-stream``.
+Defaults to ``"text/*, application/json, application/xml, binary/octet-stream"``.
 
-.. admonition:: Incompressable files
+.. admonition:: Default excluded files
    :class: note
 
-   MinIO will *not* compress the following types of files, even if specified in a :mc-conf:`~compression.mime_types` argument:
-
-   .. list-table:: Incompressible File Types
-
-      * - File format
-	- Media Type (MIME type)
-
-      * - Video
-	- ``video/*``
-
-      * - Audio
-	- ``audio/*``
-
-      * - ZIP application
-	- ``application/zip``
-
-      * - GZIP application
-	- ``application/x-gzip``
-
-      * - BZIP2 application
-	- ``application/x-bz2``
-
-      * - Lempel–Ziv–Welch (LZW) application
-	- ``application/x-compress``
-
-      * - LZMA application
-	- ``application/x-xz``
-
-
-   +------------------------+----------------------------+
-   | File Format            | Media (MIME) Type          |
-   +========================+============================+
-   | Audio                  | ``audio/*``                |
-   +------------------------+----------------------------+
-   | Video                  | ``video/*``                |
-   +------------------------+----------------------------+
-
-   +------------------------+----------------------------+
-   | Compressed Applications                             |
-   +========================+============================+
-   | ZIP                    | ``application/zip``        |
-   +------------------------+----------------------------+
-   | GZIP                   | ``application/x-gzip``     |
-   +------------------------+----------------------------+
-   | BZIP2                  | ``application/x-bz2``      |
-   +------------------------+----------------------------+
-   | Lempel–Ziv–Welch (LZW) | ``application/x-compress`` |
-   +------------------------+----------------------------+
-   | LZMA                   | ``application/x-xz``       |
-   +------------------------+----------------------------+
-	  
-   These incompressible files cannot be significantly reduced in size, therefore MinIO will not attempt to compress them.
+   Some	types of files cannot be significantly reduced in size.
+   MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.mime_types` argument.
+   See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
 
 .. end-minio-data-compression-mime_types-desc
+
+.. start-minio-data-compression-default-excluded-desc
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 30 40
+   :width: 100%
+
+   * - Object Type
+     - File Extension
+     - Media (MIME) Type
+
+   * - Audio
+     -
+     - ``audio/*``
+
+   * - Video
+     - | ``*.mp4``
+       | ``*.mkv``
+       | ``*.mov``
+     - ``video/*``
+
+   * - Image
+     - | ``*.jpg``
+       | ``*.png``
+       | ``*.gif``
+     - ``application/x-compress`` (LZW)
+
+   * - 7ZIP Compressed
+     - ``*.7z``
+     -
+
+   * - BZIP2 Compressed
+     - ``*.bz2``
+     - ``application/x-bz2``
+
+   * - GZIP Compressed
+     - ``*.gz``
+     - ``application/x-gzip``
+
+   * - RAR Compressed
+     - ``*.rar``
+     -
+
+   * - LZMA Compressed
+     - ``*.xz``
+     - ``application/x-xz``
+
+   * - ZIP Compressed
+     - ``*.zip``
+     - | ``application/zip``
+       | ``application-x-zip-compressed``
+
+.. end-minio-data-compression-default-excluded-desc
+
+.. start-minio-data-compression-default-desc
+
++-----------------+--------------------------+
+| File Extensions | Media (MIME) Types       |
++=================+==========================+
+| ``.txt``        | ``text/*``               |
+|                 |                          |
+| ``.log``        | ``application/json``     |
+|                 |                          |
+| ``.csv``        | ``application/xml``      |
+|                 |                          |
+| ``.json``       | ``binary/octet-stream``  |
+|                 |                          |
+| ``.tar``        |                          |
+|                 |                          |
+| ``.xml``        |                          |
+|                 |                          |
+| ``.bin``        |                          |
++-----------------+--------------------------+
+
+.. end-minio-data-compression-default-desc
