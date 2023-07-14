@@ -15,8 +15,7 @@ Description
 
 .. start-mc-version-desc
 
-The :mc:`mc version` command enables, suspends, and retrieves the 
-:ref:`versioning <minio-bucket-versioning>` status for a MinIO bucket.
+The :mc:`mc version` command enables, suspends, and retrieves the :ref:`versioning <minio-bucket-versioning>` status for a MinIO bucket.
 
 .. end-mc-version-desc
 
@@ -24,8 +23,7 @@ The :mc:`mc version` command enables, suspends, and retrieves the
 
    .. tab-item:: EXAMPLE
 
-      The following command enables, suspends, and retrieves versioning
-      status for the ``mydata`` bucket on the ``myminio`` MinIO deployment:
+      The following command enables, suspends, and retrieves versioning status for the ``mydata`` bucket on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -55,8 +53,7 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :ref:`alias <alias>` of a MinIO deployment and the full path
-   to the bucket for which to set the versioning configuration. For example:
+   The :ref:`alias <alias>` of a MinIO deployment and the full path to the bucket for which to set the versioning configuration. For example:
 
    .. code-block:: shell
 
@@ -65,11 +62,9 @@ Parameters
 .. mc-cmd:: enable
    :optional:
 
-   Enables versioning on the MinIO bucket specified to
-   :mc-cmd:`ALIAS <mc version ALIAS>`.
+   Enables versioning on the MinIO bucket specified to :mc-cmd:`ALIAS <mc version ALIAS>`.
 
-   Mutually exclusive with :mc-cmd:`~mc version suspend` and
-   :mc-cmd:`~mc version info`
+   Mutually exclusive with :mc-cmd:`~mc version suspend` and :mc-cmd:`~mc version info`
 
 .. mc-cmd:: --exclude-folders
    :optional:
@@ -93,20 +88,16 @@ Parameters
 .. mc-cmd:: info
    :optional:
 
-   Returns the versioning status for the MinIO bucket specified to
-   :mc-cmd:`ALIAS <mc version ALIAS>`.
+   Returns the versioning status for the MinIO bucket specified to :mc-cmd:`ALIAS <mc version ALIAS>`.
 
-   Mutually exclusive with :mc-cmd:`~mc version suspend` and
-   :mc-cmd:`~mc version enable`
+   Mutually exclusive with :mc-cmd:`~mc version suspend` and :mc-cmd:`~mc version enable`
 
 .. mc-cmd:: suspend
    :optional:
 
-   Disables versioning on the MinIO bucket specified to
-   :mc-cmd:`ALIAS <mc version ALIAS>`.
+   Disables versioning on the MinIO bucket specified to :mc-cmd:`ALIAS <mc version ALIAS>`.
 
-   Mutually exclusive with :mc-cmd:`~mc version enable` and
-   :mc-cmd:`~mc version info`
+   Mutually exclusive with :mc-cmd:`~mc version enable` and :mc-cmd:`~mc version info`
 
 Global Flags
 ~~~~~~~~~~~~
@@ -128,11 +119,9 @@ Use :mc:`mc version enable` to enable versioning on a bucket:
 
    mc version enable ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the
-  :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which
-  to enable versioning.
+- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to enable versioning.
 
 Disable Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -144,11 +133,9 @@ Use :mc:`mc version suspend` to suspend versioning on a bucket:
 
    mc version suspend ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the
-  :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which
-  to suspend versioning.
+- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to suspend versioning.
 
 Get Bucket Versioning Status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -160,11 +147,9 @@ Use :mc:`mc version info` to retrieve the versioning status for a bucket:
 
    mc version info ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the
-  :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which
-  to retrieve the versioning status.
+- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to retrieve the versioning status.
 
 Behavior
 --------
@@ -172,22 +157,17 @@ Behavior
 Object Locking Enables Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-While bucket versioning is disabled by default, configuring
-object locking on a bucket or an object in that bucket automatically
-enables versioning for the bucket. See 
-:mc:`mc retention` for more information on configuring object locking.
+While bucket versioning is disabled by default, configuring object locking on a bucket or an object in that bucket automatically enables versioning for the bucket.
+See :mc:`mc retention` for more information on configuring object locking.
 
 Bucket Versioning with Existing Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Enabling bucket versioning on a bucket with existing data immediately applies
-a versioning ID to any unversioned object.
+Enabling bucket versioning on a bucket with existing data immediately applies a versioning ID to any unversioned object.
 
-Disabling bucket versioning on a bucket with existing versioned data does
-*not* remove any versioned objects. Applications can continue to access
-versioned data after disabling bucket versioning. Use 
-:mc-cmd:`mc rm --versions ALIAS/BUCKET/OBJECT <mc rm --versions>` to delete an 
-object *and* all its versions.
+Disabling bucket versioning on a bucket with existing versioned data does *not* remove any versioned objects.
+Applications can continue to access versioned data after disabling bucket versioning.
+Use :mc-cmd:`mc rm --versions ALIAS/BUCKET/OBJECT <mc rm --versions>` to delete an object *and* all its versions.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~
