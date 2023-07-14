@@ -46,6 +46,12 @@ The procedures on this page decommission and remove one or more server pools fro
 Prerequisites
 -------------
 
+Back Up Cluster Settings First
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the :mc:`mc admin cluster bucket export` and :mc:`mc admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to starting decommissioning.
+You can use these snapshots to restore bucket/IAM settings to recover from user or process errors as necessary.
+
 Networking and Firewalls
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

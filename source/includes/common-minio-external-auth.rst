@@ -106,7 +106,8 @@ See the OpenID `Authentication Request <https://openid.net/specs/openid-connect-
 The MinIO Console defaults to using the hostname of the node making the authentication request as part of the redirect URI provided to the OIDC provider.
 For MinIO deployments behind a load balancer using a round-robin protocol, this may result in the load balancer returning the response to a different MinIO Node than the originating client.
 
-Specify this option as ``true`` to direct the MinIO Console to use the ``Host`` header of the originating request to construct the redirect URI passed to the OIDC provider.
+Specify this option as ``on`` to direct the MinIO Console to use the ``Host`` header of the originating request to construct the redirect URI passed to the OIDC provider.
+Defaults to ``off``.
 
 .. end-minio-openid-redirect-uri-dynamic
 
