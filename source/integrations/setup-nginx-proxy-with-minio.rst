@@ -33,19 +33,27 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
       
       - Proxy requests to the root ``https://minio.example.net`` to the MinIO Server listening on ``https://minio.local:9000``.
 
-      - Proxy requests to the subpath ``https://minio.example.net/minio`` to the MinIO Console listening on ``https://minio.local:9001``.
+      - Proxy requests to the subpath ``https://minio.example.net/minio/ui`` to the MinIO Console listening on ``https://minio.local:9090``.
 
       The following location blocks provide a template for further customization in your unique environment:
 
       .. code-block:: nginx
          :class: copyable
 
-         upstream minio {
+         upstream minio_s3 {
             least_conn;
-            server minio-01.internal-domain.com;
-            server minio-02.internal-domain.com;
-            server minio-03.internal-domain.com;
-            server minio-04.internal-domain.com;
+            server minio-01.internal-domain.com:9000;
+            server minio-02.internal-domain.com:9000;
+            server minio-03.internal-domain.com:9000;
+            server minio-04.internal-domain.com:9000;
+         }
+
+         upstream minio_console {
+            least_conn;
+            server minio-01.internal-domain.com:9090;
+            server minio-02.internal-domain.com:9090;
+            server minio-03.internal-domain.com:9090;
+            server minio-04.internal-domain.com:9090;
          }
 
          server {
@@ -74,10 +82,11 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
                proxy_set_header Connection "";
                chunked_transfer_encoding off;
 
-               proxy_pass https://minio:9000/; # This uses the upstream directive definition to load balance
+               proxy_pass https://minio_s3; # This uses the upstream directive definition to load balance
             }
 
-            location /minio {
+            location /minio/ui {
+               rewrite ^/minio/ui/(.*) /$1 break;
                proxy_set_header Host $http_host;
                proxy_set_header X-Real-IP $remote_addr;
                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -96,11 +105,16 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
                
                chunked_transfer_encoding off;
 
-               proxy_pass https://minio:9001/; # This uses the upstream directive definition to load balance and assumes a static Console port of 9001
+               proxy_pass https://minio_console; # This uses the upstream directive definition to load balance
             }
          }
 
-      The S3 API signature calculation algorithm does *not* support proxy schemes where you host either the MinIO Server API or Console GUI on a subpath, such as ``example.net/s3/`` or ``example.net/console/``.
+      The S3 API signature calculation algorithm does *not* support proxy schemes where you host the MinIO Server API such as ``example.net/s3/``.
+
+      You must also set the following environment variables for the MinIO deployment:
+
+      - Set :envvar:`MINIO_SERVER_URL` to the proxy host FQDN of the MinIO Server (``https://minio.example.net``)
+      - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the MinIO Console (``https://example.net/minio/ui``)
 
    .. tab-item:: Subdomain
 
@@ -110,19 +124,27 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
       - Proxy request to the subdomain ``minio.example.net`` to the MinIO Server listening on ``https://minio.local:9000``
 
-      - Proxy requests to the subdomain ``console.example.net`` to the MinIO Console listening on ``https://minio.local:9001``
+      - Proxy requests to the subdomain ``console.example.net`` to the MinIO Console listening on ``https://minio.local:9090``
 
       The following location blocks provide a template for further customization in your unique environment:
 
       .. code-block:: nginx
          :class: copyable
 
-         upstream minio {
+         upstream minio_s3 {
             least_conn;
-            server minio-01.internal-domain.com;
-            server minio-02.internal-domain.com;
-            server minio-03.internal-domain.com;
-            server minio-04.internal-domain.com;
+            server minio-01.internal-domain.com:9000;
+            server minio-02.internal-domain.com:9000;
+            server minio-03.internal-domain.com:9000;
+            server minio-04.internal-domain.com:9000;
+         }
+
+         upstream minio_console {
+            least_conn;
+            server minio-01.internal-domain.com:9090;
+            server minio-02.internal-domain.com:9090;
+            server minio-03.internal-domain.com:9090;
+            server minio-04.internal-domain.com:9090;
          }
 
          server {
@@ -151,7 +173,7 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
                proxy_set_header Connection "";
                chunked_transfer_encoding off;
 
-               proxy_pass http://minio:9000/; # This uses the upstream directive definition to load balance
+               proxy_pass http://minio_s3; # This uses the upstream directive definition to load balance
             }
          }
 
@@ -189,9 +211,13 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
                
                chunked_transfer_encoding off;
 
-               proxy_pass http://minio:9001/; # This uses the upstream directive definition to load balance and assumes a static Console port of 9001
+               proxy_pass http://minio_console/; # This uses the upstream directive definition to load balance
             }
          }
 
-      The S3 API signature calculation algorithm does *not* support proxy schemes where you host either the MinIO Server API or Console GUI on a subpath, such as ``minio.example.net/s3/`` or ``console.example.net/gui``.
+      The S3 API signature calculation algorithm does *not* support proxy schemes where you host the MinIO Server API on a subpath, such as ``minio.example.net/s3/``.
 
+      You must also set the following environment variables for the MinIO deployment:
+
+      - Set :envvar:`MINIO_SERVER_URL` to the proxy host FQDN of the MinIO Server (``https://minio.example.net``)
+      - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the MinIO Console (``https://console.example.net/``)
