@@ -61,7 +61,7 @@ Objects of these types are never compressed:
 Data Compression and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports encrypting compressed objects but recommends against combining compression and encryption for most deployments.
+MinIO supports encrypting compressed objects but recommends against combining compression and encryption without a prior risk assessment.
 Before enabling encryption for compressed objects, carefully consider the security needs of your environment.
 
 See `Transparent Data Compression on MinIO <https://blog.min.io/transparent-data-compression/>`__ for more about combining compression and encryption.
