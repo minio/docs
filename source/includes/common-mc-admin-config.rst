@@ -1123,3 +1123,137 @@ MinIO returns an error if the Kakfa broker verison does not match those specifie
 A comment to associate with the configuration.
 
 .. end-minio-kafka-audit-logging-comment-desc
+
+.. start-minio-data-compression-allow_encryption-desc
+
+Set to ``on`` to encrypt objects after compressing them.
+Defaults to ``off``.
+
+.. admonition:: Encrypting compressed objects may compromise security
+   :class: warning
+
+   MinIO strongly recommends against encrypting compressed objects.
+   If you require encryption, carefully evaluate the risk of potentially leaking information about the contents of encrypted objects.
+
+.. end-minio-data-compression-allow_encryption-desc
+
+.. start-minio-data-compression-comment-desc
+
+Specify a comment to associate with the data compression configuration.
+
+.. end-minio-data-compression-comment-desc
+
+.. start-minio-data-compression-enable-desc
+
+Set to ``on`` to enable data compression for new objects.
+Defaults to ``off``.
+
+Enabling or disabling data compression does not change existing objects.
+
+.. end-minio-data-compression-enable-desc
+
+.. start-minio-data-compression-extensions-desc
+
+Comma-separated list of the file extensions to compress.
+Setting a new list of file extensions replaces the previously configured list.
+Defaults to ``".txt, .log, .csv, .json, .tar, .xml, .bin"``.
+
+.. admonition:: Default excluded files
+   :class: note
+
+   Some types of files cannot be significantly reduced in size.
+   MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.extensions` argument.
+   See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
+
+.. end-minio-data-compression-extensions-desc
+
+.. start-minio-data-compression-mime_types-desc
+
+Comma-separated list of the MIME types to compress.
+Setting	a new list of types replaces the previously configured list.
+Defaults to ``"text/*, application/json, application/xml, binary/octet-stream"``.
+
+.. admonition:: Default excluded files
+   :class: note
+
+   Some	types of files cannot be significantly reduced in size.
+   MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.mime_types` argument.
+   See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
+
+.. end-minio-data-compression-mime_types-desc
+
+.. start-minio-data-compression-default-excluded-desc
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 30 40
+   :width: 100%
+
+   * - Object Type
+     - File Extension
+     - Media (MIME) Type
+
+   * - Audio
+     -
+     - ``audio/*``
+
+   * - Video
+     - | ``*.mp4``
+       | ``*.mkv``
+       | ``*.mov``
+     - ``video/*``
+
+   * - Image
+     - | ``*.jpg``
+       | ``*.png``
+       | ``*.gif``
+     - ``application/x-compress`` (LZW)
+
+   * - 7ZIP Compressed
+     - ``*.7z``
+     -
+
+   * - BZIP2 Compressed
+     - ``*.bz2``
+     - ``application/x-bz2``
+
+   * - GZIP Compressed
+     - ``*.gz``
+     - ``application/x-gzip``
+
+   * - RAR Compressed
+     - ``*.rar``
+     -
+
+   * - LZMA Compressed
+     - ``*.xz``
+     - ``application/x-xz``
+
+   * - ZIP Compressed
+     - ``*.zip``
+     - | ``application/zip``
+       | ``application-x-zip-compressed``
+
+.. end-minio-data-compression-default-excluded-desc
+
+.. start-minio-data-compression-default-desc
+
++-----------------+--------------------------+
+| File Extensions | Media (MIME) Types       |
++=================+==========================+
+| ``.txt``        | ``text/*``               |
+|                 |                          |
+| ``.log``        | ``application/json``     |
+|                 |                          |
+| ``.csv``        | ``application/xml``      |
+|                 |                          |
+| ``.json``       | ``binary/octet-stream``  |
+|                 |                          |
+| ``.tar``        |                          |
+|                 |                          |
+| ``.xml``        |                          |
+|                 |                          |
+| ``.bin``        |                          |
++-----------------+--------------------------+
+
+.. end-minio-data-compression-default-desc

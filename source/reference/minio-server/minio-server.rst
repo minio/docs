@@ -2952,3 +2952,50 @@ Batch Replication
   *Optional*
 
   Enable parallel workers by specifying the maximum number of processes to use when performing the batch application job.
+
+Data Compression
+~~~~~~~~~~~~~~~~
+
+The following section documents settings for enabling data compression for objects.
+See :ref:`minio-data-compression` for tutorials on using these configuration settings.
+
+.. envvar:: MINIO_COMPRESSION_ALLOW_ENCRYPTION
+
+   *Optional*
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-data-compression-allow_encryption-desc
+      :end-before: end-minio-data-compression-allow_encryption-desc
+
+   This environment variable corresponds with the :mc-conf:`compression allow_encryption <compression.allow_encryption>` setting.
+
+.. envvar:: MINIO_COMPRESSION_ENABLE
+
+   *Optional*
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-data-compression-enable-desc
+      :end-before: end-minio-data-compression-enable-desc
+
+   This environment variable corresponds with the :mc-conf:`compression enable <compression.enable>` setting.
+
+.. envvar:: MINIO_COMPRESSION_EXTENSIONS
+
+   *Optional*
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-data-compression-extensions-desc
+      :end-before: end-minio-data-compression-extensions-desc
+
+   This environment variable corresponds with the :mc-conf:`compression extensions <compression.extensions>` setting.
+
+.. envvar:: MINIO_COMPRESSION_MIME_TYPES
+
+   *Optional*
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-data-compression-mime_types-desc
+      :end-before: end-minio-data-compression-mime_types-desc
+
+   This environment variable corresponds with the :mc-conf:`compression mime_types <compression.mime_types>` setting.
+

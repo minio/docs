@@ -2735,3 +2735,98 @@ See :ref:`minio-external-identity-management-plugin` for a tutorial on using the
       .. include:: /includes/common-minio-external-auth.rst
          :start-after: start-minio-identity-management-comment
          :end-before: end-minio-identity-management-comment
+
+
+Data Compression
+~~~~~~~~~~~~~~~~
+
+The following section documents settings for enabling data compression for objects.
+See :ref:`minio-data-compression` for tutorials on using these configuration settings.
+
+.. mc-conf:: compression
+
+   The top-level configuration key for enabling :ref:`minio-data-compression`.
+
+   Use :mc-cmd:`mc admin config set` to set or update the configuration.
+   Specify optional arguments as a whitespace (``" "``)-delimited list.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin config set compression           \
+                          [ARGUMENT=VALUE] ...  \
+
+   The following types of data are compressed by default:
+
+   +-----------------+--------------------------+
+   | File Extensions | Media (MIME) Types       |
+   +=================+==========================+
+   | ``.txt``        | ``text/*``               |
+   |                 |                          |
+   | ``.log``        | ``application/json``     |
+   |                 |                          |
+   | ``.csv``        | ``application/xml``      |
+   |                 |                          |
+   | ``.json``       | ``binary/octet-stream``  |
+   |                 |                          |
+   | ``.tar``        |                          |
+   |                 |                          |
+   | ``.xml``        |                          |
+   |                 |                          |
+   | ``.bin``        |                          |
+   +-----------------+--------------------------+
+
+   The :mc-conf:`compression` configuration key supports the following arguments:
+
+   .. mc-conf:: allow_encryption
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-data-compression-allow_encryption-desc
+         :end-before: end-minio-data-compression-allow_encryption-desc
+
+      This configuration setting corresponds with the :envvar:`MINIO_COMPRESSION_ALLOW_ENCRYPTION` environment variable.
+
+   .. mc-conf:: comment
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-data-compression-comment-desc
+         :end-before: end-minio-data-compression-comment-desc
+
+   .. mc-conf:: enable
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-data-compression-enable-desc
+         :end-before: end-minio-data-compression-enable-desc
+
+      This configuration setting corresponds with the :envvar:`MINIO_COMPRESSION_ENABLE` environment variable.
+
+   .. mc-conf:: extensions
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-data-compression-extensions-desc
+         :end-before: end-minio-data-compression-extensions-desc
+
+      This configuration setting corresponds with the :envvar:`MINIO_COMPRESSION_EXTENSIONS` environment variable.
+
+   .. mc-conf:: mime_types
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-data-compression-mime_types-desc
+         :end-before: end-minio-data-compression-mime_types-desc
+
+      This configuration setting corresponds with the :envvar:`MINIO_COMPRESSION_MIME_TYPES` environment variable.
