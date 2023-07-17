@@ -18,7 +18,7 @@ MinIO Server supports compressing objects to reduce disk usage.
 Objects are compressed on PUT before writing to disk, and uncompressed on GET before they are sent to the client. This makes the compression process transparent to client applications and services.
 
 Depending on the type of data, compression may also increase overall throughput.
-Write throughput for a production deployment is generally 500MB per second or greater per available CPU.
+Write throughput for a production deployment is generally 500MB per second or greater per available CPU core in the system.
 Decompression is approximately 1 GB per second or greater for each CPU core.
 
 For best results, review MinIO's :ref:`recommended hardware configuration <deploy-minio-distributed-recommendations>` or use |subnet| to work directly with engineers for analyzing compression performance.
