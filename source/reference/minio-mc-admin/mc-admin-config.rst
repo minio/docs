@@ -2756,7 +2756,6 @@ See :ref:`minio-data-compression` for tutorials on using these configuration set
       mc admin config set compression           \
                           [ARGUMENT=VALUE] ...  \
 
-
    Enabling data compression compresses the following types of data by default:
 
    .. include:: /includes/common-mc-admin-config.rst
