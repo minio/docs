@@ -29,7 +29,7 @@ Default File Types
 ~~~~~~~~~~~~~~~~~~
 
 Data compression is a global option, the configured settings apply to all buckets in a deployment.
-By default, MinIO compresses the following types of data:
+Enabling data compression compresses the following types of data by default:
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-data-compression-default-desc
@@ -119,7 +119,7 @@ Configure Which Objects to Compress
 
 Configure the objects to compress by specifying the desired file extensions and media types in :mc-conf:`~compression.extensions` or :mc-conf:`~compression.mime_types` arguments.
 
-By default, MinIO compresses the following extensions and types:
+The default data compression configuration compresses the following types of data:
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-data-compression-default-desc
@@ -192,7 +192,7 @@ The new list of media types replaces the previous list.
 To add or remove a type, repeat the :mc-conf:`~compression.mime_types` command with the complete list of types to compress.
 
 You can use ``*`` to specify all subtypes of a single media type.
-The following command adds all text subtypes to the list from the previous example:
+The following command adds all ``text`` subtypes to the list from the previous example:
 
 .. code-block:: shell
    :class: copyable
