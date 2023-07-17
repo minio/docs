@@ -2756,25 +2756,12 @@ See :ref:`minio-data-compression` for tutorials on using these configuration set
       mc admin config set compression           \
                           [ARGUMENT=VALUE] ...  \
 
-   The following types of data are compressed by default:
 
-   +-----------------+--------------------------+
-   | File Extensions | Media (MIME) Types       |
-   +=================+==========================+
-   | ``.txt``        | ``text/*``               |
-   |                 |                          |
-   | ``.log``        | ``application/json``     |
-   |                 |                          |
-   | ``.csv``        | ``application/xml``      |
-   |                 |                          |
-   | ``.json``       | ``binary/octet-stream``  |
-   |                 |                          |
-   | ``.tar``        |                          |
-   |                 |                          |
-   | ``.xml``        |                          |
-   |                 |                          |
-   | ``.bin``        |                          |
-   +-----------------+--------------------------+
+   Enabling data compression compresses the following types of data by default:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-data-compression-default-desc
+      :end-before: end-minio-data-compression-default-desc
 
    The :mc-conf:`compression` configuration key supports the following arguments:
 
