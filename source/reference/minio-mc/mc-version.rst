@@ -15,141 +15,35 @@ Description
 
 .. start-mc-version-desc
 
-The :mc:`mc version` command enables, suspends, and retrieves the :ref:`versioning <minio-bucket-versioning>` status for a MinIO bucket.
+The :mc:`mc version` commands enable, disable, and retrieve the :ref:`versioning <minio-bucket-versioning>` status for a MinIO bucket.
 
 .. end-mc-version-desc
 
-.. tab-set::
+:mc:`mc version` includes the following subcommands:
 
-   .. tab-item:: EXAMPLE
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%
 
-      The following command enables, suspends, and retrieves versioning status for the ``mydata`` bucket on the ``myminio`` MinIO deployment:
+   * - Subcommand
+     - Description
 
-      .. code-block:: shell
-         :class: copyable
+   * - :mc:`~mc version enable`
+     - .. include:: /reference/minio-mc/mc-version-enable.rst
+          :start-after: start-mc-version-enable-desc
+          :end-before: end-mc-version-enable-desc
 
-         mc version enable myminio/mydata
-         mc version suspend myminio/mydata
-         mc version info myminio/mydata
+   * - :mc:`~mc version info`
+     - .. include:: /reference/minio-mc/mc-version-info.rst
+          :start-after: start-mc-version-info-desc
+          :end-before: end-mc-version-info-desc
 
-   .. tab-item:: SYNTAX
+   * - :mc:`~mc version suspend`
+     - .. include:: /reference/minio-mc/mc-version-suspend.rst
+          :start-after: start-mc-version-suspend-desc
+          :end-before: end-mc-version-suspend-desc
 
-      The command has the following syntax:
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc [GLOBALFLAGS] version                    \
-                          [enable | suspend | info]  \
-                          ALIAS
-
-      .. include:: /includes/common-minio-mc.rst
-         :start-after: start-minio-syntax
-         :end-before: end-minio-syntax
-
-Parameters
-~~~~~~~~~~
-
-.. mc-cmd:: ALIAS
-   :required:
-
-   The :ref:`alias <alias>` of a MinIO deployment and the full path to the bucket for which to set the versioning configuration. For example:
-
-   .. code-block:: shell
-
-      mc version enable myminio/mybucket
-
-.. mc-cmd:: enable
-   :optional:
-
-   Enables versioning on the MinIO bucket specified to :mc-cmd:`ALIAS <mc version ALIAS>`.
-
-   Mutually exclusive with :mc-cmd:`~mc version suspend` and :mc-cmd:`~mc version info`
-
-.. mc-cmd:: --exclude-folders
-   :optional:
-
-   Use with :mc-cmd:`mc version enable` to disable versioning on all folders (objects whose name ends with ``/``) in the specified bucket.
-
-.. mc-cmd:: --excluded-prefixes
-   :optional:
-
-   Use with :mc-cmd:`mc version enable` to disable versioning on objects matching a list of prefixes, up to 10.
-   The list of prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``prefix*``.
-   To match objects by prefix only, use ``prefix/*``.
-
-   For example, the following command excludes any objects containing ``_test`` or ``_temp`` in their prefix or name from versioning:
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc version enable --excluded-prefixes "_test, _temp" local/my-bucket
-
-.. mc-cmd:: info
-   :optional:
-
-   Returns the versioning status for the MinIO bucket specified to :mc-cmd:`ALIAS <mc version ALIAS>`.
-
-   Mutually exclusive with :mc-cmd:`~mc version suspend` and :mc-cmd:`~mc version enable`
-
-.. mc-cmd:: suspend
-   :optional:
-
-   Disables versioning on the MinIO bucket specified to :mc-cmd:`ALIAS <mc version ALIAS>`.
-
-   Mutually exclusive with :mc-cmd:`~mc version enable` and :mc-cmd:`~mc version info`
-
-Global Flags
-~~~~~~~~~~~~
-
-.. include:: /includes/common-minio-mc.rst
-   :start-after: start-minio-mc-json-globals
-   :end-before: end-minio-mc-json-globals
-
-Examples
---------
-
-Enable Bucket Versioning
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Use :mc:`mc version enable` to enable versioning on a bucket:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc version enable ALIAS/PATH
-
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
-
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to enable versioning.
-
-Disable Bucket Versioning
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Use :mc:`mc version suspend` to suspend versioning on a bucket:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc version suspend ALIAS/PATH
-
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
-
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to suspend versioning.
-
-Get Bucket Versioning Status
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Use :mc:`mc version info` to retrieve the versioning status for a bucket:
-
-.. code-block:: shell
-   :class: copyable
-
-   mc version info ALIAS/PATH
-
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
-
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to retrieve the versioning status.
 
 Behavior
 --------
@@ -175,3 +69,11 @@ S3 Compatibility
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-s3-compatibility
    :end-before: end-minio-mc-s3-compatibility
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+
+   /reference/minio-mc/mc-version-enable
+   /reference/minio-mc/mc-version-info
+   /reference/minio-mc/mc-version-suspend
