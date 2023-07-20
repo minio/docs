@@ -417,7 +417,9 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-update-desc
           :end-before: end-mc-update-desc
      
-   * - :mc:`mc version`
+   * - | :mc:`mc version enable`
+       | :mc:`mc version info`
+       | :mc:`mc version suspend`
      - .. include:: /reference/minio-mc/mc-version.rst
           :start-after: start-mc-version-desc
           :end-before: end-mc-version-desc

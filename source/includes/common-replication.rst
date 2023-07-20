@@ -27,8 +27,8 @@ To configure replication between arbitrary S3-compatible services, use :mc:`mc m
 
 MinIO relies on the immutability protections provided by :ref:`versioning <minio-bucket-versioning>` to support replication and resynchronization.
 
-Use :mc-cmd:`mc version info` to validate the versioning status of both the source and remote buckets. 
-Use the :mc-cmd:`mc version enable` command to enable versioning as necessary.
+Use :mc:`mc version info` to validate the versioning status of both the source and remote buckets. 
+Use the :mc:`mc version enable` command to enable versioning as necessary.
 
 If you exclude a prefix or folder from versioning within the source bucket, MinIO cannot replicate objects within that folder or prefix.
 
