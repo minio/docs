@@ -477,6 +477,26 @@ Kafka Audit Log Target
 
       This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_COMMENT` environment variable.
 
+   .. mc-conf:: queue_dir
+      :optional:
+      :delimiter: " "
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-kafka-audit-logging-queue-dir-desc
+         :end-before: end-minio-kafka-audit-logging-queue-dir-desc
+
+      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_DIR` environment variable.
+
+   .. mc-conf::	queue_size
+      :optional:
+      :delimiter: " "
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-kafka-audit-logging-queue-size-desc
+         :end-before: end-minio-kafka-audit-logging-queue-size-desc
+
+      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_SIZE` environment variable.
+
 .. _minio-server-config-bucket-notification-amqp:
 
 AMQP Service for Bucket Notifications
