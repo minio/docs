@@ -170,7 +170,8 @@ Decommissioning Ignores Expired Objects and Trailing ``DeleteMarker``
 Starting with :minio-release:`RELEASE.2023-05-27T05-56-19Z`, decommissioning ignores objects where the only remaining version is a ``DeleteMarker``.
 This avoids creating empty metadata on the remaining server pool(s) for objects that are effectively fully deleted.
 
-Starting with :minio-release:`minio-lifecycle-management-scanner`, decommissioning also ignores object versions which have expired based on the configured :ref:`lifecycle rules <minio-lifecycle-management-expiration>` for the parent bucket.
+Starting with :minio-release:`RELEASE.2023-06-23T20-26-00Z`, decommissioning also ignores object versions which have expired based on the configured :ref:`lifecycle rules <minio-lifecycle-management-expiration>` for the parent bucket.
+Starting with :minio-release:`RELEASE.2023-06-29T05-12-28Z`, decommissioning logs ignored delete markers and expired objects.
 
 Once the decommissioning process completes, you can safely shut down that pool.
 Since the only remaining data was scheduled for deletion *or* was only a ``DeleteMarker``, you can safely clear or destroy those drives as per your internal procedures.
