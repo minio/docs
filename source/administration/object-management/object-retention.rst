@@ -234,7 +234,7 @@ the MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
         MinIO deployment.
 
       - Replace ``BUCKET`` with the 
-        :mc-cmd:`name <mc version ALIAS>` of the bucket to create.
+        :mc-cmd:`name <mc mb ALIAS>` of the bucket to create.
 
 Configure Bucket-Default Object Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

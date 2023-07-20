@@ -83,9 +83,9 @@ Use :mc:`mc version info` to retrieve the versioning status for a bucket:
 
    mc version info ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc version info ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to retrieve the versioning status.
+- Replace :mc-cmd:`PATH <mc version info ALIAS>` with the bucket on which to retrieve the versioning status.
 
 
 Behavior

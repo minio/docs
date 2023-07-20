@@ -89,9 +89,9 @@ Procedure
      - Duplicate the existing ``/etc/default/minio`` environment file with a unique name.
      - In the new deployment's service file, update ``EnvironmentFile`` to reference the new environment file.
 
-   The steps below use the :mc-cmd:`mc` command line tool from both deployments.
-   *Existing MinIO Client* is :mc-cmd:`mc` from the old deployment.
-   *New MinIO Client* is :mc-cmd:`mc` from the new deployment.
+   The steps below use the :mc:`mc` command line tool from both deployments.
+   *Existing MinIO Client* is :mc:`mc` from the old deployment.
+   *New MinIO Client* is :mc:`mc` from the new deployment.
 
 #. Add an alias for the deployment created in the previous step using :mc:`mc alias set` and the new MinIO Client.
 
@@ -151,8 +151,8 @@ Procedure
             - Use the new MinIO Client.
             - Replace ``ALIAS`` with the alias for the new deployment.
 
-	    If :mc:`~mc admin config import` reports an error for a configuration key, comment it out with ``#`` at the beginning of the relevant line and try again.
-            When you are finished migrating the deployment, verify the current syntax for the target MinIO Server version and set any needed keys manually using :mc:`mc admin config set`.
+	    If :mc-cmd:`~mc admin config import` reports an error for a configuration key, comment it out with ``#`` at the beginning of the relevant line and try again.
+            When you are finished migrating the deployment, verify the current syntax for the target MinIO Server version and set any needed keys manually using :mc-cmd:`mc admin config set`.
 
          c. Restart the server for the new deployment with the new MinIO Client.
 

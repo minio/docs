@@ -65,7 +65,7 @@ Clients therefore drive the overall hierarchy of data within a given bucket or p
 .. cond:: windows
 
    Unlike filenames on a Windows system, object names in MinIO cannot have a ``\`` character.
-   Use ``/`` as a delimiter in object names to have MinIO automatically create a folder structure using :term:`prefixes`.
+   Use ``/`` as a delimiter in object names to have MinIO automatically create a folder structure using :term:`prefixes <prefix>`.
 
 MinIO has no hard :ref:`thresholds <minio-server-limits>` on the number of buckets, objects, or prefixes on a given deployment.
 The relative performance of the hardware and networking underlying the MinIO deployment may create a practical limit to the number of objects in a given prefix or bucket.

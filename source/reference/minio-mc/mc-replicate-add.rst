@@ -351,9 +351,9 @@ Use the :mc:`mc version enable` command to enable versioning on *both* the sourc
 
    mc version enable ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc version enable ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to enable versioning.
+- Replace :mc-cmd:`PATH <mc version enable ALIAS>` with the bucket on which to enable versioning.
 
 Required Permissions
 ~~~~~~~~~~~~~~~~~~~~

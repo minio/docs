@@ -83,9 +83,9 @@ Use :mc:`mc version suspend` to disable versioning for a bucket:
 
    mc version suspend ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc version ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc version suspend ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-- Replace :mc-cmd:`PATH <mc version ALIAS>` with the bucket on which to disable versioning.
+- Replace :mc-cmd:`PATH <mc version suspend ALIAS>` with the bucket on which to disable versioning.
 
 
 Behavior
