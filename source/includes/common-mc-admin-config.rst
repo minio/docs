@@ -1124,6 +1124,22 @@ A comment to associate with the configuration.
 
 .. end-minio-kafka-audit-logging-comment-desc
 
+.. start-minio-kafka-audit-logging-queue-dir-desc
+
+Specify the directory path to enable MinIO's persistent event store for
+undelivered messages, such as ``/opt/minio/events``.
+
+MinIO stores undelivered events in the specified store while the Kafka
+service is offline and replays the stored events when connectivity resumes.
+
+.. end-minio-kafka-audit-logging-queue-dir-desc
+
+.. start-minio-kafka-audit-logging-queue-size-desc
+
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
+
+.. end-minio-kafka-audit-logging-queue-size-desc
+
 .. start-minio-data-compression-allow_encryption-desc
 
 Set to ``on`` to encrypt objects after compressing them.

@@ -941,6 +941,25 @@ The following section documents environment variables for configuring MinIO to p
 
    This environment variable corresponds to the :mc-conf:`audit_kafka.comment` configuration setting.
 
+.. envvar:: MINIO_AUDIT_KAFKA_QUEUE_DIR
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-queue-dir-desc
+      :end-before: end-minio-kafka-audit-logging-queue-dir-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.queue_dir` configuration setting.
+
+.. envvar:: MINIO_AUDIT_KAFKA_QUEUE_SIZE
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-kafka-audit-logging-queue-size-desc
+      :end-before: end-minio-kafka-audit-logging-queue-size-desc
+
+   This environment variable corresponds to the :mc-conf:`audit_kafka.queue_size` configuration setting.
+
+
 Bucket Notifications
 ~~~~~~~~~~~~~~~~~~~~
 
