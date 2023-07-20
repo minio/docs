@@ -278,7 +278,7 @@ Core Configuration
 
    Specifies the full path to the file the MinIO server process uses for loading environment variables.
    
-   For ``systemd``-managed file, setting this value to the environment file allows MinIO to reload changes to that file on using :mc-cmd:`mc admin service restart` to restart the deployment.
+   For ``systemd``-managed files, setting this value to the environment file allows MinIO to reload changes to that file on using :mc-cmd:`mc admin service restart` to restart the deployment.
 
 .. envvar:: MINIO_ILM_EXPIRY_WORKERS
 
@@ -290,9 +290,9 @@ Core Configuration
 
    Set to the Fully Qualified Domain Name (FQDN) MinIO accepts Bucket DNS (Virtual Host)-style requests on.
 
-   For example, setting ``MINIO_DOMAIN=minio.example.net`` would direct MinIO to accept an incoming connection request the ``data`` bucket at ``data.minio.example.net``.
+   For example, setting ``MINIO_DOMAIN=minio.example.net`` directs MinIO to accept an incoming connection request the ``data`` bucket at ``data.minio.example.net``.
 
-   The default behavior with this setting omitted is to accept only path-style requests as ``minio.example.net/data``.
+   If this setting is omitted, the default is to only accept path-style requests. For example, ``minio.example.net/data``.
 
 Root Credentials
 ~~~~~~~~~~~~~~~~
