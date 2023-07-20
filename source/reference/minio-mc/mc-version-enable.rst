@@ -22,8 +22,6 @@ The :mc:`mc version enable` command enables versioning on the specified bucket.
 
 .. end-mc-version-enable-desc
 
-Mutually exclusive with :mc-cmd:`~mc version suspend` and :mc-cmd:`~mc version info`.
-
 .. tab-set::
 
    .. tab-item:: EXAMPLE

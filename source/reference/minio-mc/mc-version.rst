@@ -19,6 +19,8 @@ The :mc:`mc version` commands enable, disable, and retrieve the :ref:`versioning
 
 .. end-mc-version-desc
 
+For more information about object versioning in MinIO, see :ref:`minio-bucket-versioning`.
+
 :mc:`mc version` includes the following subcommands:
 
 .. list-table::

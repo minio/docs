@@ -22,8 +22,6 @@ The :mc:`mc version suspend` command disables versioning on the specified bucket
 
 .. end-mc-version-suspend-desc
 
-Mutually exclusive with :mc-cmd:`~mc version info` and :mc-cmd:`~mc version enable`.
-
 .. tab-set::
 
    .. tab-item:: EXAMPLE

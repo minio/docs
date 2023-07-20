@@ -22,8 +22,6 @@ The :mc:`mc version info` command returns the versioning status for the specifie
 
 .. end-mc-version-info-desc
 
-Mutually exclusive with :mc-cmd:`~mc version suspend` and :mc-cmd:`~mc version enable`.
-
 .. tab-set::
 
    .. tab-item:: EXAMPLE
