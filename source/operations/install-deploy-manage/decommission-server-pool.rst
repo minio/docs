@@ -171,7 +171,7 @@ Starting with :minio-release:`RELEASE.2023-05-27T05-56-19Z`, decommissioning ign
 This avoids creating empty metadata on the remaining server pool(s) for objects that are effectively fully deleted.
 
 Starting with :minio-release:`RELEASE.2023-06-23T20-26-00Z`, decommissioning also ignores object versions which have expired based on the configured :ref:`lifecycle rules <minio-lifecycle-management-expiration>` for the parent bucket.
-Starting with :minio-release:`RELEASE.2023-06-29T05-12-28Z`, decommissioning logs ignored delete markers and expired objects.
+Starting with :minio-release:`RELEASE.2023-06-29T05-12-28Z`, you can monitor ignored delete markers and expired objects during the decommission process with :mc:`mc admin trace --call decommission <mc admin trace --call>`.
 
 Once the decommissioning process completes, you can safely shut down that pool.
 Since the only remaining data was scheduled for deletion *or* was only a ``DeleteMarker``, you can safely clear or destroy those drives as per your internal procedures.
@@ -188,7 +188,7 @@ If any objects return, MinIO returns an error that the decommission process fail
 
 If the decommission fails, customers should open a |SUBNET| issue for further assistance before retrying the decommission. 
 Community users without a SUBNET subscription can retry the decommission process or seek additional support through the `MinIO Community Slack <https://slack.min.io/>`__.
-MinIO provides Community Support at best-effort only and provides no :abbr:`SLA <Service Level Agreement>` around responsiveness.
+MinIO provides Community Support at best-effort only and provides no :abbr:`SLA (Service Level Agreement)` around responsiveness.
 
 Decommissioning a Server with Tiering Enabled
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
