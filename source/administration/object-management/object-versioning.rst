@@ -270,7 +270,7 @@ using an S3-compatible SDK.
         MinIO deployment.
 
       - Replace ``BUCKET`` with the 
-        :mc-cmd:`target bucket <mc mb ALIAS>` on which to enable
+        :mc-cmd:`target bucket <mc version enable ALIAS>` on which to enable
         versioning.
 
 Objects created prior to enabling versioning have a 
