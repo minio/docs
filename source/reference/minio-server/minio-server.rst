@@ -457,12 +457,13 @@ MinIO Console:
    *Optional*
 
    Specify the Fully Qualified Domain Name (FQDN) the MinIO Console must use for connecting to the MinIO Server.
+   The Console also uses this value for setting the root hostname when generating presigned URLs.
 
    This setting may be required if:
 
    - The MinIO Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN) *or*
 
-   - The preferred MinIO Server URL is controlled by a reverse proxy
+   - The Console must use a specific hostname to connect or reference the MinIO Server, e.g. due to a reverse proxy or similar configuration.
 
 Key Management Service and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
