@@ -277,11 +277,22 @@ Core Configuration
 .. envvar:: MINIO_CONFIG_ENV_FILE
 
    Specifies the full path to the file the MinIO server process uses for loading environment variables.
+   
+   For ``systemd``-managed files, setting this value to the environment file allows MinIO to reload changes to that file on using :mc-cmd:`mc admin service restart` to restart the deployment.
 
 .. envvar:: MINIO_ILM_EXPIRY_WORKERS
 
    Specifies the number of workers to make available to expire objects configured with ILM rules for expiration.
    When not set, MinIO defaults to using up to half of the available processing cores available.
+
+
+.. envvar:: MINIO_DOMAIN
+
+   Set to the Fully Qualified Domain Name (FQDN) MinIO accepts Bucket DNS (Virtual Host)-style requests on.
+
+   For example, setting ``MINIO_DOMAIN=minio.example.net`` directs MinIO to accept an incoming connection request the ``data`` bucket at ``data.minio.example.net``.
+
+   If this setting is omitted, the default is to only accept path-style requests. For example, ``minio.example.net/data``.
 
 Root Credentials
 ~~~~~~~~~~~~~~~~
@@ -432,32 +443,27 @@ MinIO Console:
 
    *Optional*
 
-   Specify the URL the MinIO Console provides as the redirect URL to the 
-   configured :ref:`external identity manager 
-   <minio-authentication-and-identity-management>`.
-
-   This variable may be necessary for MinIO deployments behind a reverse 
-   proxy, load balancer, or similar technology where the internal 
-   hostname or IP structure is not reachable from the external network. 
-
-   For example, consider a MinIO deployment behind a proxy where
-   ``https://minio.example.net`` redirects to the MinIO deployment on port 
-   ``:9000`` and ``https://console.minio.example.net`` redirects to the
-   MinIO Console on port ``:9001``. 
+   Specify the Fully Qualified Domain Name (FQDN) the MinIO Console listens for incoming connections on.
    
-   By default, the MinIO Console use its *internal* hostname as part of the
-   request. Set this variable to ``https://console.minio.example.net`` to ensure
-   the external identity provider has a reachable URL to which to send the
-   authentication response.
+   If you want to host the MinIO Console exclusively from a reverse-proxy service, you must specify the hostname managed by that service.
+   
+   For example, consider a reverse proxy configured to route ``https://example.net/minio/`` to the MinIO Console.
+   You must set this environment variable to match that hostname for the Console to both listen and respond to requests using that hostname.
+
+   If you omit this variable, the Console listens and responds to all IP addresses or hostnames associated to the host machine on which the MinIO Server runs.
 
 .. envvar:: MINIO_SERVER_URL
 
    *Optional*
 
-   Specify the Fully Qualified Domain Name (FQDN) the MinIO Console should use for connecting to the MinIO Server.
+   Specify the Fully Qualified Domain Name (FQDN) the MinIO Console must use for connecting to the MinIO Server.
+   The Console also uses this value for setting the root hostname when generating presigned URLs.
 
-   This variable is typically only necessary when the MinIO Server TLS certificates do not contain an IP Subject Alternative Name (SAN) for the MinIO Server.
-   Since the Console uses the MinIO Server IP by default, the Console may fail to connect due to the TLS certificate not having the necessary IP listed as a SAN.
+   This setting may be required if:
+
+   - The MinIO Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN) *or*
+
+   - The Console must use a specific hostname to connect or reference the MinIO Server, e.g. due to a reverse proxy or similar configuration.
 
 Key Management Service and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
