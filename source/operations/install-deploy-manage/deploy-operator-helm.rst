@@ -52,7 +52,7 @@ Install Operator
       :substitutions:
 
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/operator-|operator-version-stable|.tgz
-      curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/Tenant-|operator-version-stable|.tgz
+      curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/tenant-|operator-version-stable|.tgz
 
    Each chart contains a ``values.yaml`` file you can customize to suit your needs.
    For example, you may wish to change the MinIO root user credentials or the Tenant name.
