@@ -57,7 +57,7 @@ How does MinIO manage multiple virtual or physical servers?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While testing MinIO may only involve a single drive on a single computer, most production MinIO deployments use multiple compute and storage devices to create a high availability environment.
-A server pool a set of :mc:`minio server` nodes that pool their drives and resources to support object storage write and retrieval requests.
+A server pool is a set of :mc:`minio server` nodes that pool their drives and resources to support object storage write and retrieval requests.
 
 MinIO supports adding one or more server pools to existing MinIO deployments for horizontal expansion.
 When MinIO has multiple server pools available, an individual object always writes to the same erasure set in the same server pool.
