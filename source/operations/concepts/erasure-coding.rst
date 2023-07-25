@@ -14,7 +14,7 @@ Erasure Coding
    :keywords: erasure coding, healing, availability, resiliency
    :description: Information on MinIO Erasure Coding
 
-This page provides a simplified overview of MinIO's implementation of Erasure Coding.
+This page provides an overview of MinIO's implementation of Erasure Coding.
 For information on how MinIO uses Erasure Coding for availability in distributed deployments, see :ref:`minio_availability-resiliency`.
 
 .. note::
@@ -22,7 +22,7 @@ For information on how MinIO uses Erasure Coding for availability in distributed
    |subnet| provides 24/7 direct-to-engineering consultation during planning, implementation, and active stages of your production deployments.
    SUBNET customers should open an issue to have MinIO engineering review the architecture and deployment strategies against your goals to ensure long-term success of your workloads.
 
-   Any and all MinIO resources outside of |subnet| are intended as best-effort only with guarantees of responsiveness or success.
+   Any and all MinIO resources outside of |subnet| are intended as best-effort only with no guarantees of responsiveness or success.
    
 .. _minio-ec-basics:
 
@@ -69,7 +69,7 @@ MinIO can use any parity shard to reconstruct any data shard.
 
 MinIO requires a minimum of ``K`` Data *or* Parity shards to **read** the object.
    The value ``K`` constitutes the **read quorum** for the deployment.
-   Alternatively, the object can tolerate the loss of no more than ``M`` shards of any time while remaining readable.
+   Alternatively, the object can tolerate the loss of no more than ``M`` shards at any time while remaining readable.
 
    .. figure:: /images/erasure/erasure-coding-shard-read-quorum.svg
       :figwidth: 100%
@@ -96,21 +96,21 @@ MinIO similarly requires successful creation of at least ``K`` data shards to **
       This meets write quorum, but the loss of any further drives would result in write failure for newer objects.
 
    If Parity (``EC:M``) is exactly 1/2 the number of drives in the erasure set, **write quorum** is ``K+1``.
-   This extra shard prevents data inconsistency due to "split-brain"-types of failure states
+   This extra shard prevents data inconsistency due to `"split-brain" <https://en.wikipedia.org/wiki/Split-brain_(computing)>`__-types of failure states.
 
 .. _minio-ec-erasure-set:
 
 Erasure Set and Distribution
 ----------------------------
 
-An **Erasure Set** is a group of drives onto which MinIO can read or write erasure coded objects.
+An **Erasure Set** is a group of up to sixteen drives for which MinIO can read or write erasure coded objects.
    .. figure:: /images/erasure/erasure-coding-erasure-set.svg
       :figwidth: 100%
       :align: center
       :alt: Diagram of erasure set covering 4 nodes and 16 drives
 
       The above example deployment consists of 4 nodes with 4 drives each.
-      MinIO initializes with a single erasure set consisting of 16 drives.
+      MinIO initializes with a single erasure set consisting of all 16 drives across all four nodes.
 
 Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-parity>` of the deployment.
    .. figure:: /images/erasure/erasure-coding-possible-parity.svg
@@ -121,12 +121,12 @@ Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-par
       The above example deployment has an erasure set of 16 drives. 
       This can support parity between ``EC:0`` and 1/2 the erasure set drives, or ``EC:8``.
 
-   Deployments with a small number of nodes or drives can supported a limited number of parity drives, to a maximum of 1/2 the stripe size.
+   Deployments with a small number of nodes or drives can support a limited number of parity drives, up to a maximum of 1/2 the number of drives in the set.
 
    Erasure Sets have a minimum size of 2 and a maximum size of 16.
 
 MinIO automatically calculates the number and size of erasure sets when initializing a :ref:`server pool <minio-intro-server-pool>`.
-The stripe size for a pool is **immutable** after it's initial setup.
+You cannot change the set size for a pool after its initial setup.
 
 Use the MinIO `Erasure Coding Calculator <https://min.io/product/erasure-code-calculator>`__ to explore the possible erasure set size and distributions for your planned topology.
 Where possible, use an even number of nodes and drives per node to simplify topology planning and conceptualization of drive/erasure-set distribution.
