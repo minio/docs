@@ -182,7 +182,7 @@ The MinIO server uses the following cryptographic primitive implementations:
      - HMAC-SHA-256 
 
    * - :ref:`AEAD <minio-encryption-sse-content-encryption>` 
-     - ``ChaCha20Poly-1305`` by default. 
+     - ``ChaCha20-Poly1305`` by default. 
      
        ``AES-256-GCM`` for x86-64 CPUs with the AES-NI extension.
 
