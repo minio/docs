@@ -1,4 +1,4 @@
-.. _minio_availability-resiliency:
+.. _minio-availability-resiliency:
 
 ===========================
 Availability and Resiliency

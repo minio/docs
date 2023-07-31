@@ -14,8 +14,12 @@ Erasure Coding
    :keywords: erasure coding, healing, availability, resiliency
    :description: Information on MinIO Erasure Coding
 
-This page provides an overview of MinIO's implementation of Erasure Coding.
-For information on how MinIO uses Erasure Coding for availability in distributed deployments, see :ref:`minio_availability-resiliency`.
+MinIO implements Erasure Coding as a core component in providing data redundancy and availability.
+This page provides simplified overview of MinIO Erasure Coding.
+
+- For information on how MinIO uses Erasure Coding for availability in distributed deployments, see :ref:`minio-availability-resiliency`.
+
+- For information on MinIO deployment architectures, see :ref:`minio-architecture`.
 
 .. note::
 
@@ -23,87 +27,18 @@ For information on how MinIO uses Erasure Coding for availability in distributed
    SUBNET customers should open an issue to have MinIO engineering review the architecture and deployment strategies against your goals to ensure long-term success of your workloads.
 
    Any and all MinIO resources outside of |subnet| are intended as best-effort only with no guarantees of responsiveness or success.
-   
+
 .. _minio-ec-basics:
+.. _minio-ec-erasure-set:
 
 Erasure Coding Basics
 ---------------------
 
    .. note::
       
-      The diagrams in this section present a simplified view of MinIO erasure coding operations and are not intended to represent the complexities of MinIO's full erasure coding implementation.
+      The diagrams and content in this section present a simplified view of MinIO erasure coding operations and are not intended to represent the complexities of MinIO's full erasure coding implementation.
 
-MinIO implements Erasure Coding as a core component in providing data redundancy and availability.
-   Erasure Coding involves partitioning an object into **data** and **parity** shards.
-
-   .. figure:: /images/erasure/erasure-coding-shard.svg
-      :figwidth: 100%
-      :align: center
-      :alt: Diagram of an object being sharded using MinIO's Reed-Solomon Erasure Coding algorithm.
-
-      A client writes an object to MinIO.
-      MinIO automatically partitions the object into data and parity shards.
-
-An object's :term:`Parity` dictates how many parity shards MinIO creates for an object.
-   MinIO uses the :term:`erasure set size <erasure set>` and configured parity for the deployment to determine the number of parity and data shards to create for each object, where:
-
-   :math:`N (ERASURE\ SET\ SIZE) = K (DATA) + M (PARITY)`
-
-   .. figure:: /images/erasure/erasure-coding-shard-ec6.svg
-      :figwidth: 100%
-      :align: center
-      :alt: Diagram of an object written with EC:6 to an erasure set with 16 drives
-
-   This deployment has an erasure set size of ``16`` and a parity of ``EC:6``. 
-   Based on the formula, MinIO creates ``10`` data shards and ``6`` parity shards for each object.
-
-MinIO can use any parity shard to reconstruct any data shard.
-   .. figure:: /images/erasure/erasure-coding-shard-reconstruction.svg
-      :figwidth: 100%
-      :align: center
-      :alt: Diagram of MinIO using parity shards to reconstruct data shards
-
-      An object has lost two data shards.
-      MinIO uses any two of the available parity shards to reconstruct the data shards.
-      Even a single remaining parity shard would be sufficient to reconstruct both missing data shards.
-
-MinIO requires a minimum of ``K`` Data *or* Parity shards to **read** the object.
-   The value ``K`` constitutes the **read quorum** for the deployment.
-   Alternatively, the object can tolerate the loss of no more than ``M`` shards at any time while remaining readable.
-
-   .. figure:: /images/erasure/erasure-coding-shard-read-quorum.svg
-      :figwidth: 100%
-      :align: center
-      :alt: Diagram of an object maintaining read quorum with only 10 total shards remaining
-
-      An object has 10 data shards and 6 parity shards for a total of 16 shards.
-      It has lost 3 data and 3 parity shards for a total of 6 shards lost and 10 remaining.
-      The loss of any further shards would result in losing read quorum.
-
-   An object that has lost read quorum is effectively "lost" and may be recovered through other means such as :ref:`replication resynchronization <minio-bucket-replication-resynchronize>`.
-
-MinIO similarly requires successful creation of at least ``K`` data shards to **write** the object.
-   The value ``K`` constitutes the **write quorum** for the deployment.
-   A deployment could lose write quorum due to having insufficient online drives, insufficient drive space, or network issues between nodes.
-
-   .. figure:: /images/erasure/erasure-coding-shard-write-quorum.svg
-      :figwidth: 100%
-      :align: center
-      :alt: Diagram of an object maintaining write quorum with only 10 shards remaining.
-
-      MinIO creates 16 shards for an object with parity of ``EC:6``.
-      Due to drive errors, only 10 drives remain online for MinIO to use for write operations.
-      This meets write quorum, but the loss of any further drives would result in write failure for newer objects.
-
-   If Parity (``EC:M``) is exactly 1/2 the number of drives in the erasure set, **write quorum** is ``K+1``.
-   This extra shard prevents data inconsistency due to `"split-brain" <https://en.wikipedia.org/wiki/Split-brain_(computing)>`__-types of failure states.
-
-.. _minio-ec-erasure-set:
-
-Erasure Set and Distribution
-----------------------------
-
-An **Erasure Set** is a group of up to sixteen drives for which MinIO can read or write erasure coded objects.
+MinIO groups drives in each :term:`server pool` into one or more **Erasure Sets** of the same size.
    .. figure:: /images/erasure/erasure-coding-erasure-set.svg
       :figwidth: 100%
       :align: center
@@ -112,7 +47,17 @@ An **Erasure Set** is a group of up to sixteen drives for which MinIO can read o
       The above example deployment consists of 4 nodes with 4 drives each.
       MinIO initializes with a single erasure set consisting of all 16 drives across all four nodes.
 
-Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-parity>` of the deployment.
+   MinIO determines the optimal number and size of erasure sets when initializing a :term:`server pool`.
+   You cannot modify these settings after this initial setup.
+
+For each write operation, MinIO partitions the object into **data** and **parity** shards.
+   Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-parity>` of the deployment.
+   The formula for determining the number of data and parity shards to generate is:
+
+   .. code-block:: shell
+
+      N (ERASURE SET SIZE) = K (DATA) + M (PARITY)
+
    .. figure:: /images/erasure/erasure-coding-possible-parity.svg
       :figwidth: 100%
       :align: center
@@ -121,12 +66,68 @@ Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-par
       The above example deployment has an erasure set of 16 drives. 
       This can support parity between ``EC:0`` and 1/2 the erasure set drives, or ``EC:8``.
 
-   Deployments with a small number of nodes or drives can support a limited number of parity drives, up to a maximum of 1/2 the number of drives in the set.
+You can set the parity value between 0 and 1/2 the Erasure Set size.
+   .. figure:: /images/erasure/erasure-coding-erasure-set-shard-distribution.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of an object being sharded using MinIO's Reed-Solomon Erasure Coding algorithm.
 
-   Erasure Sets have a minimum size of 2 and a maximum size of 16.
+      MinIO uses a Reed-Solomon erasure coding implementation and partitions the object for distribution across an erasure set.
+      The example deployment above has an erasure set size of 16 and a parity of ``EC:4``
 
-MinIO automatically calculates the number and size of erasure sets when initializing a :ref:`server pool <minio-intro-server-pool>`.
-You cannot change the set size for a pool after its initial setup.
+   Objects written with a given parity settings do not automatically update if you change the parity values later.
+
+MinIO requires a minimum of ``K`` shards of any type to **read** an object.
+   The value ``K`` here constitutes the **read quorum** for the deployment.
+   The erasure set must therefore have at least ``K`` healthy drives in the erasure set to support read operations.
+
+   .. figure:: /images/erasure/erasure-coding-shard-read-quorum.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of a 4-node 16-drive deployment with one node offline.
+
+      This deployment has one offline node, resulting in only 12 remaining healthy drives.
+      The object was written with ``EC:4`` with a read quorum of ``K=12``.
+      This object therefore maintains read quorum and MinIO can reconstruct it for read operations.
+
+   MinIO cannot reconstruct an object that has lost read quorum.
+   Such objects may be recovered through other means such as :ref:`replication resynchronization <minio-bucket-replication-resynchronize>`.
+
+MinIO requires a minimum of ``K`` erasure set drives to **write** an object.
+   The value ``K`` here constitutes the **write quorum** for the deployment.
+   The erasure set must therefore have at least ``K`` available drives online to support write operations.
+
+   .. figure:: /images/erasure/erasure-coding-shard-write-quorum.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of a 4-node 16-drive deployment where one node is offline.
+
+      This deployment has one offline node, resulting in only 12 remaining healthy drives.
+      A client writes an object with ``EC:4`` parity settings where the erasure set has a write quorum of ``K=12``.
+      This erasure set maintains write quorum and MinIO can use it for write operations.
+
+If Parity ``EC:M`` is exactly 1/2 the erasure set size, **write quorum** is ``K+1``
+   This prevents a split-brain type scenario, such as one where a network issue isolates exactly half the erasure set drives from the other.
+   
+   .. figure:: /images/erasure/erasure-coding-shard-split-brain.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of an erasure set with where Parity ``EC:M`` is 1/2 the set size
+
+      This deployment has two nodes offline due to a transient network failure.
+      A client writes an object with ``EC:8`` parity settings where the erasure set has a write quorum of ``K=9``.
+      This erasure set has lost write quorum and MinIO cannot use it for write operations.
+
+   The ``K+1`` logic ensures that a client could not potentially write the same object twice - once to each "half" of the erasure set.
+
+For an object maintaining **read quorum**, MinIO can use any data or parity shard to heal damaged shards.
+   .. figure:: /images/erasure/erasure-coding-shard-healing.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of MinIO using parity shards to heal lost data shards on a node.
+
+      An object with ``EC:4`` lost four data shards out of 12 due to drive failures.
+      Since the object has maintained **read quorum**, MinIO can heal those lost data shards using the available parity shards.
 
 Use the MinIO `Erasure Coding Calculator <https://min.io/product/erasure-code-calculator>`__ to explore the possible erasure set size and distributions for your planned topology.
 Where possible, use an even number of nodes and drives per node to simplify topology planning and conceptualization of drive/erasure-set distribution.
@@ -173,6 +174,10 @@ The following table lists the outcome of varying erasure code parity levels on a
 
 Bitrot Protection
 -----------------
+
+`Bit rot <https://en.wikipedia.org/wiki/Data_degradation>__` is silent data corruption from random changes at the storage media level.
+For data drives, it is typically the result of decay of the electrical charge or magnetic orientation that represents the data.
+Bit rot can cause subtle errors or corruption with no obvious cause and without warning.
 
 Silent data corruption or bit rot is a serious problem faced by data drives resulting in data getting corrupted without the user’s knowledge. 
 The corruption of data occurs when the electrical charge on a portion of the drive disperses or changes with no notification to or input from the user.

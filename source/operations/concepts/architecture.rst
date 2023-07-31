@@ -48,7 +48,7 @@ MinIO provides best performance when using locally-attached storage, such as NVM
       Each SSD connects by SAS to a PCI-E-attached storage controller operating in HBA mode
 
 MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-erasure-set>`. 
-   Erasure sets are the foundational component of MinIO :ref:`availability and resiliency <minio_availability-resiliency>`. 
+   Erasure sets are the foundational component of MinIO :ref:`availability and resiliency <minio-availability-resiliency>`. 
    MinIO stripes erasure sets symmetrically across the nodes in the pool to maintain even distribution of erasure set drives.
    MinIO then partitions objects into data and parity shards based on the deployment :ref:`parity <minio-ec-parity>` and distributes them across an erasure set.
 
