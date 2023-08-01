@@ -15,18 +15,15 @@ Erasure Coding
    :description: Information on MinIO Erasure Coding
 
 MinIO implements Erasure Coding as a core component in providing data redundancy and availability.
-This page provides simplified overview of MinIO Erasure Coding.
+This page provides an introduction to MinIO Erasure Coding.
 
-- For information on how MinIO uses Erasure Coding for availability in distributed deployments, see :ref:`minio-availability-resiliency`.
+See :ref:`minio-availability-resiliency` and :ref:`minio-architecture` for more information on how MinIO uses erasure coding in production deployments.
 
-- For information on MinIO deployment architectures, see :ref:`minio-architecture`.
-
-.. note::
+.. admonition:: MinIO SUBNET Support for Planning and Configuration of Erasure Coding
+   :class: note
 
    |subnet| provides 24/7 direct-to-engineering consultation during planning, implementation, and active stages of your production deployments.
    SUBNET customers should open an issue to have MinIO engineering review the architecture and deployment strategies against your goals to ensure long-term success of your workloads.
-
-   Any and all MinIO resources outside of |subnet| are intended as best-effort only with no guarantees of responsiveness or success.
 
 .. _minio-ec-basics:
 .. _minio-ec-erasure-set:
@@ -34,9 +31,9 @@ This page provides simplified overview of MinIO Erasure Coding.
 Erasure Coding Basics
 ---------------------
 
-   .. note::
-      
-      The diagrams and content in this section present a simplified view of MinIO erasure coding operations and are not intended to represent the complexities of MinIO's full erasure coding implementation.
+.. note::
+   
+   The diagrams and content in this section present a simplified view of MinIO erasure coding operations and are not intended to represent the complexities of MinIO's full erasure coding implementation.
 
 MinIO groups drives in each :term:`server pool` into one or more **Erasure Sets** of the same size.
    .. figure:: /images/erasure/erasure-coding-erasure-set.svg
@@ -177,13 +174,8 @@ Bitrot Protection
 
 `Bit rot <https://en.wikipedia.org/wiki/Data_degradation>__` is silent data corruption from random changes at the storage media level.
 For data drives, it is typically the result of decay of the electrical charge or magnetic orientation that represents the data.
-Bit rot can cause subtle errors or corruption with no obvious cause and without warning.
-
-Silent data corruption or bit rot is a serious problem faced by data drives resulting in data getting corrupted without the user’s knowledge. 
-The corruption of data occurs when the electrical charge on a portion of the drive disperses or changes with no notification to or input from the user.
-Many events can lead to such a silent corruption of stored data.
-For example, ageing drives, current spikes, bugs in drive firmware, phantom writes, misdirected reads/writes, driver errors, accidental overwrites, or a random cosmic ray can each lead to a bit change.
-Whatever the cause, the result is the same - compromised data.
+These sources can range from the small current spike during a power outage to a random cosmic ray resulting in flipped bits.
+The resulting "bit rot" can cause subtle errors or corruption on the data medium without triggering monitoring tools or hardware.
 
 MinIO’s optimized implementation of the :minio-git:`HighwayHash algorithm <highwayhash/blob/master/README.md>` ensures that it captures and heals corrupted objects on the fly. 
 Integrity is ensured from end to end by computing a hash on READ and verifying it on WRITE from the application, across the network, and to the memory or drive. 
