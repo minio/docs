@@ -209,6 +209,10 @@ Glossary
      
      See also: :term:`JBOD`.
 
+   read quorum
+     The minimum number of object shards necessary to reconstruct the full object for read operations.
+     See :ref `minio-ec-basics` for more information.
+
    replication
    mirror
      The replication of a :ref:`bucket <minio-bucket-replication>` or entire :ref:`site <minio-site-replication-overview>` to another location.
@@ -233,7 +237,10 @@ Glossary
      For more detailed logging information, see :term:`audit logs`.
 
    server pool
+   pool
      A set of ``minio server`` nodes which combine their drives and resources to support object storage and retrieval requests.
+    
+    For more information, see :ref:`minio-intro-server-pool`.
 
    service account
      Renamed to :term:`access keys`.
@@ -302,6 +309,10 @@ Glossary
    webhook
      A :ref:`webhook <minio-bucket-notifications-publish-webhook>` is a method for altering the behavior of a web page or web application with a custom callback.
      The format is typically :abbr:`JSON (JavaScript Object Notation)` sent as an HTTP POST request.
+
+   write quorum
+     The minimum number of object shards MinIO must successfully write to an :ref:`erasure set <minio-ec-erasure-set>` for write operations.
+     See :ref:`minio-ec-basics` for more information
 
    WORM
      Write Once Read Many (WORM) is a data retention methodology that functions as part of object locking.

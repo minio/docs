@@ -48,7 +48,7 @@ MinIO provides best performance when using locally-attached storage, such as NVM
       Each SSD connects by SAS to a PCI-E-attached storage controller operating in HBA mode
 
 MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-erasure-set>`. 
-   Erasure sets are the foundational component of MinIO :ref:`availability and resiliency <minio_availability-resiliency>`. 
+   Erasure sets are the foundational component of MinIO :ref:`availability and resiliency <minio-availability-resiliency>`. 
    MinIO stripes erasure sets symmetrically across the nodes in the pool to maintain even distribution of erasure set drives.
    MinIO then partitions objects into data and parity shards based on the deployment :ref:`parity <minio-ec-parity>` and distributes them across an erasure set.
 
@@ -56,10 +56,11 @@ MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-
 
    .. figure:: /images/architecture/architecture-erasure-set-shard.svg
       :figwidth: 100%
-      :alt: Diagram of object being sharded into four data and four parity blocks, distributed across eight drives
+      :alt: Diagram of object being sharded into eight data and eight parity blocks, distributed across sixteen drives
       :align: center
 
-      With the default parity of ``EC:4``, MinIO shards the object into 4 data and 4 parity blocks, distributing them across the drives in the erasure set. 
+      With the maximum parity of ``EC:8``, MinIO shards the object into 8 data and 8 parity blocks, distributing them across the drives in the erasure set.
+      All erasure sets in this pool have the same stripe size and shard distribution.
 
 MinIO uses a deterministic hashing algorithm based on object name and path to select the erasure set for a given object.
    For each unique object namespace ``BUCKET/PREFIX/[PREFIX/...]/OBJECT.EXTENSION``, MinIO always selects the same erasure set for read/write operations.

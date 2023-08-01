@@ -528,41 +528,62 @@ Key Management Service and Encryption
 Storage Class
 ~~~~~~~~~~~~~
 
-These environment variables configure the :ref:`parity <minio-ec-parity>`
-to use for objects written to the MinIO cluster.
+These environment variables configure the :ref:`parity <minio-ec-parity>` to use for objects written to the MinIO cluster.
 
-MinIO Storage Classes are distinct from AWS Storage Classes, where the latter
-refers to the specific storage tier on which to store a given object.
+MinIO Storage Classes are distinct from AWS Storage Classes, where the latter refers to the specific storage tier on which to store a given object.
 
 .. envvar:: MINIO_STORAGE_CLASS_STANDARD
 
-   The number of :ref:`parity blocks <minio-ec-parity>` to create for
-   objects with the standard (default) storage class. MinIO uses the
-   ``EC:N`` notation to refer to the number of parity blocks (``N``).
-   This environment variable only applies to deployments with
-   :ref:`Erasure Coding <minio-erasure-coding>` enabled.
+   The :ref:`parity level <minio-ec-parity>` for the deployment.
+   MinIO shards objects written with the default ``STANDARD`` storage class using this parity value.
 
-   The minimum value at startup is ``0``.
-   0 parity setups have no erasure coding protections and rely entirely on the storage controller or resource for availability / resiliency. 
+   MinIO references the ``x-amz-storage-class`` header in request metadata for determining which storage class to assign an object. 
+   The specific syntax or method for setting headers depends on your preferred method for interfacing with the MinIO server.
 
-   The maximum value is 1/2 the erasure set stripe size.
+   Specify the value using ``EC:M`` notation, where ``M`` refers to the number of parity blocks to create for the object.
+
+   The following table lists the default values based on the :ref:`erasure set size <minio-ec-erasure-set>` of the initial server pool in the deployment:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 70
+      :width: 100%
+
+      * - Erasure Set Size
+        - Default Parity (EC:N)
+
+      * - 4-5
+        - EC:2
+
+      * - 6 - 7
+        - EC:3
+
+      * - 8 - 16
+        - EC:4
+
+   The minimum supported value is ``0``, which indicates no erasure coding protections.
+   These deployments rely entirely on the storage controller or resource for availability / resiliency. 
+   
+   The maximum value depends on the erasure set size of the initial server pool in the deployment, where the upper bound is  :math:`\frac{\text{ERASURE_SET_SIZE}}{\text{2}}`.
    For example, a deployment with erasure set stripe size of 16 has a maximum standard parity of 8.
 
-   You can change the Standard parity after startup to a value between ``1`` and :math:`\tfrac{1}{2}\ (ERASURE_SET_SIZE)`.
+   You can change this value after startup to any value between ``0`` and the upper bound for the erasure set size.
    MinIO only applies the changed parity to newly written objects.
    Existing objects retain the parity value in place at the time of their creation.
 
-   Defaults to ``4``.
-
 .. envvar:: MINIO_STORAGE_CLASS_RRS
 
-   The number of :ref:`parity blocks <minio-ec-parity>` to create for objects
-   with the reduced redundancy storage class. MinIO uses the ``EC:N``
-   notation to refer to the number of parity blocks (``N``). This environment
-   variable only applies to deployments with :ref:`Erasure Coding
-   <minio-erasure-coding>` enabled.
+   The :ref:`parity level <minio-ec-parity>` for objects written with the ``REDUCED`` storage class.
 
-   Defaults to ``2``.
+   MinIO references the ``x-amz-storage-class`` header in request metadata for determining which storage class to assign an object. 
+   The specific syntax or method for setting headers depends on your preferred method for interfacing with the MinIO server.
+
+   Specify the value using ``EC:M`` notation, where ``M`` refers to the number of parity blocks to create for the object.
+
+   This value **must be** less than or equal to :envvar:`MINIO_STORAGE_CLASS_STANDARD`.
+
+   You cannot set this value for deployments with an erasure set size less than 5.
+   Defaults to ``EC:2``.
 
 .. envvar:: MINIO_STORAGE_CLASS_COMMENT
 

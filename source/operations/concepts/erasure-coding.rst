@@ -10,62 +10,129 @@ Erasure Coding
    :local:
    :depth: 2
 
-MinIO Erasure Coding is a data redundancy and availability feature that allows MinIO deployments to automatically reconstruct objects on-the-fly despite the loss of multiple drives or nodes in the cluster. 
-Erasure Coding provides object-level healing with significantly less overhead than adjacent technologies such as RAID or replication. 
+.. meta::
+   :keywords: erasure coding, healing, availability, resiliency
+   :description: Information on MinIO Erasure Coding
 
-MinIO partitions each new object into data and parity shards, where parity shards support reconstruction of missing or corrupted data shards. 
-MinIO writes these shards to a single :ref:`erasure set <minio-ec-erasure-set>` in the deployment.
-MinIO can use either data or parity shards to reconstruct an object, as long as the erasure set has :ref:`read quorum <minio-read-quorum>`.
-For example, MinIO can use parity shards local to the node receiving a request instead of specifically filtering only those nodes or drives containing data shards.
+MinIO implements Erasure Coding as a core component in providing data redundancy and availability.
+This page provides an introduction to MinIO Erasure Coding.
 
-Since erasure set drives are striped across the server pool, a given node contains only a portion of data or parity shards for each object.
-MinIO can therefore tolerate the loss of multiple drives or nodes in the deployment depending on the configured parity and deployment topology.
+See :ref:`minio-availability-resiliency` and :ref:`minio-architecture` for more information on how MinIO uses erasure coding in production deployments.
 
-.. image:: /images/erasure-code.jpg
-   :width: 600px
-   :alt: MinIO Erasure Coding example
-   :align: center
+.. admonition:: MinIO SUBNET Support for Planning and Configuration of Erasure Coding
+   :class: note
 
-At maximum parity, MinIO can tolerate the loss of up to half the drives per erasure set (:math:`(N / 2) - 1`) and still perform read and write operations. 
-MinIO defaults to 4 parity shards per object with tolerance for the loss of 4 drives per erasure set. 
-For more complete information on selecting erasure code parity, see :ref:`minio-ec-parity`.
+   |subnet| provides 24/7 direct-to-engineering consultation during planning, implementation, and active stages of your production deployments.
+   SUBNET customers should open an issue to have MinIO engineering review the architecture and deployment strategies against your goals to ensure long-term success of your workloads.
 
-Use the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator?ref=docs>`__ when planning and designing your MinIO deployment to explore the effect of erasure code settings on your intended topology.
-
+.. _minio-ec-basics:
 .. _minio-ec-erasure-set:
 
-Erasure Sets
-------------
+Erasure Coding Basics
+---------------------
 
-An *Erasure Set* is a group of drives onto which MinIO writes erasure coded objects.
-MinIO randomly and uniformly distributes the data and parity shards of a given object across the erasure set drives, where a given drive has no more than one block of either type per object (no overlap).
- 
-MinIO automatically calculates the number and size of Erasure Sets ("stripe size") based on the total number of nodes and drives in the :ref:`Server Pool <minio-intro-server-pool>`, where the minimum stripe size is 2 and the maximum stripe size is 16.
-All erasure sets in a given pool have the same stripe size, and MinIO never modifies nor allows modification of stripe size after initial configuration.
-The algorithm for selecting stripe size takes into account the total number of nodes in the deployment, such that the selected stripe allows for uniform distribution of erasure set drives across all nodes in the pool.
+.. note::
+   
+   The diagrams and content in this section present a simplified view of MinIO erasure coding operations and are not intended to represent the complexities of MinIO's full erasure coding implementation.
 
-Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-parity>` of the deployment.
+MinIO groups drives in each :term:`server pool` into one or more **Erasure Sets** of the same size.
+   .. figure:: /images/erasure/erasure-coding-erasure-set.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of erasure set covering 4 nodes and 16 drives
+
+      The above example deployment consists of 4 nodes with 4 drives each.
+      MinIO initializes with a single erasure set consisting of all 16 drives across all four nodes.
+
+   MinIO determines the optimal number and size of erasure sets when initializing a :term:`server pool`.
+   You cannot modify these settings after this initial setup.
+
+For each write operation, MinIO partitions the object into **data** and **parity** shards.
+   Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-parity>` of the deployment.
+   The formula for determining the number of data and parity shards to generate is:
+
+   .. code-block:: shell
+
+      N (ERASURE SET SIZE) = K (DATA) + M (PARITY)
+
+   .. figure:: /images/erasure/erasure-coding-possible-parity.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of possible erasure set parity settings
+
+      The above example deployment has an erasure set of 16 drives. 
+      This can support parity between ``EC:0`` and 1/2 the erasure set drives, or ``EC:8``.
+
+You can set the parity value between 0 and 1/2 the Erasure Set size.
+   .. figure:: /images/erasure/erasure-coding-erasure-set-shard-distribution.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of an object being sharded using MinIO's Reed-Solomon Erasure Coding algorithm.
+
+      MinIO uses a Reed-Solomon erasure coding implementation and partitions the object for distribution across an erasure set.
+      The example deployment above has an erasure set size of 16 and a parity of ``EC:4``
+
+   Objects written with a given parity settings do not automatically update if you change the parity values later.
+
+MinIO requires a minimum of ``K`` shards of any type to **read** an object.
+   The value ``K`` here constitutes the **read quorum** for the deployment.
+   The erasure set must therefore have at least ``K`` healthy drives in the erasure set to support read operations.
+
+   .. figure:: /images/erasure/erasure-coding-shard-read-quorum.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of a 4-node 16-drive deployment with one node offline.
+
+      This deployment has one offline node, resulting in only 12 remaining healthy drives.
+      The object was written with ``EC:4`` with a read quorum of ``K=12``.
+      This object therefore maintains read quorum and MinIO can reconstruct it for read operations.
+
+   MinIO cannot reconstruct an object that has lost read quorum.
+   Such objects may be recovered through other means such as :ref:`replication resynchronization <minio-bucket-replication-resynchronize>`.
+
+MinIO requires a minimum of ``K`` erasure set drives to **write** an object.
+   The value ``K`` here constitutes the **write quorum** for the deployment.
+   The erasure set must therefore have at least ``K`` available drives online to support write operations.
+
+   .. figure:: /images/erasure/erasure-coding-shard-write-quorum.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of a 4-node 16-drive deployment where one node is offline.
+
+      This deployment has one offline node, resulting in only 12 remaining healthy drives.
+      A client writes an object with ``EC:4`` parity settings where the erasure set has a write quorum of ``K=12``.
+      This erasure set maintains write quorum and MinIO can use it for write operations.
+
+If Parity ``EC:M`` is exactly 1/2 the erasure set size, **write quorum** is ``K+1``
+   This prevents a split-brain type scenario, such as one where a network issue isolates exactly half the erasure set drives from the other.
+   
+   .. figure:: /images/erasure/erasure-coding-shard-split-brain.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of an erasure set with where Parity ``EC:M`` is 1/2 the set size
+
+      This deployment has two nodes offline due to a transient network failure.
+      A client writes an object with ``EC:8`` parity settings where the erasure set has a write quorum of ``K=9``.
+      This erasure set has lost write quorum and MinIO cannot use it for write operations.
+
+   The ``K+1`` logic ensures that a client could not potentially write the same object twice - once to each "half" of the erasure set.
+
+For an object maintaining **read quorum**, MinIO can use any data or parity shard to heal damaged shards.
+   .. figure:: /images/erasure/erasure-coding-shard-healing.svg
+      :figwidth: 100%
+      :align: center
+      :alt: Diagram of MinIO using parity shards to heal lost data shards on a node.
+
+      An object with ``EC:4`` lost four data shards out of 12 due to drive failures.
+      Since the object has maintained **read quorum**, MinIO can heal those lost data shards using the available parity shards.
+
 Use the MinIO `Erasure Coding Calculator <https://min.io/product/erasure-code-calculator>`__ to explore the possible erasure set size and distributions for your planned topology.
-MinIO strongly recommends architecture reviews via |SUBNET| as part of your provisioning and deployment process to ensure long term success and stability.
-As a general guide, plan your topologies to have an even number of nodes and drives where both the nodes and drives have a common denominator of 16.
+Where possible, use an even number of nodes and drives per node to simplify topology planning and conceptualization of drive/erasure-set distribution.
 
 .. _minio-ec-parity:
 
-Erasure Code Parity (``EC:N``)
-------------------------------
-
-MinIO uses a Reed-Solomon algorithm to split objects into data and parity shards based on the :ref:`Erasure Set <minio-ec-erasure-set>` size in the deployment.
-For a given erasure set of size ``M``, MinIO splits objects into ``N`` parity shards and ``M-N`` data shards. 
-
-MinIO uses the ``EC:N`` notation to refer to the number of parity shards (``N``) in the deployment. 
-MinIO defaults to ``EC:4`` or 4 parity shards per object. 
-MinIO uses the same ``EC:N`` value for all erasure sets and :ref:`server pools <minio-intro-server-pool>` in the deployment.
-
-.. _minio-read-quorum:
-.. _minio-write-quorum:
-
-MinIO can tolerate the loss of up to ``N`` drives per erasure set and continue performing read and write operations ("quorum"). 
-If ``N`` is equal to exactly 1/2 the drives in the erasure set, MinIO write quorum requires :math:`N + 1` drives to avoid data inconsistency ("split-brain").
+Erasure Parity and Storage Efficiency
+-------------------------------------
 
 Setting the parity for a deployment is a balance between availability and total usable storage. 
 Higher parity values increase resiliency to drive or node failure at the cost of usable storage, while lower parity provides maximum storage with reduced tolerance for drive/node failures. 
@@ -102,93 +169,13 @@ The following table lists the outcome of varying erasure code parity levels on a
      - 8
      - 9
 
-.. _minio-ec-storage-class:
+Bitrot Protection
+-----------------
 
-Storage Classes
-~~~~~~~~~~~~~~~
-
-MinIO supports redundancy storage classes with Erasure Coding to allow applications to specify per-object :ref:`parity <minio-ec-parity>`. 
-Each storage class specifies a ``EC:N`` parity setting to apply to objects created with that class. 
-
-MinIO storage classes for erasure coding are *distinct* from Amazon Web Services :s3-docs:`storage classes <storage-class-intro.html>` used for tiering. 
-MinIO erasure coding storage classes define *parity settings per object*, while AWS storage classes define *storage tiers per object*. 
-
-.. note:: 
-   For transitioning objects between storage classes for tiering purposes in MinIO, refer to the documentation on :ref:`lifecycle management <minio-lifecycle-management-tiering>`.
-
-MinIO provides the following two storage classes:
-
-.. tab-set::
-
-   .. tab-item:: STANDARD
-
-      The ``STANDARD`` storage class is the default class for all objects.
-      MinIO sets the ``STANDARD`` parity based on the number of volumes in the Erasure Set:
-
-      .. list-table::
-         :header-rows: 1
-         :widths: 30 70
-         :width: 100%
-
-         * - Erasure Set Size
-           - Default Parity (EC:N)
-
-         * - 5 or Fewer 
-           - EC:2
-
-         * - 6 - 7
-           - EC:3
-
-         * - 8 or more 
-           - EC:4
-
-      You can override the default ``STANDARD`` parity using either:
-
-      - The :envvar:`MINIO_STORAGE_CLASS_STANDARD` environment variable, *or*
-      - The :mc:`mc admin config` command to modify the ``storage_class.standard`` configuration setting.
-
-      The maximum value is half of the total drives in the :ref:`Erasure Set <minio-ec-erasure-set>`. 
-      The minimum value is ``2``.
-
-      ``STANDARD`` parity *must* be greater than or equal to ``REDUCED_REDUNDANCY``. 
-      If ``REDUCED_REDUNDANCY`` is unset, ``STANDARD`` parity *must* be greater than 2.
-
-   .. tab-item:: REDUCED_REDUNDANCY
-
-      The ``REDUCED_REDUNDANCY`` storage class allows creating objects with lower parity than ``STANDARD``. 
-      ``REDUCED_REDUNDANCY`` requires *at least* 5 drives in the MinIO deployment. 
-      
-      MinIO sets the ``REDUCED_REDUNDANCY`` parity to ``EC:2`` by default.
-      You can override ``REDUCED_REDUNDANCY`` storage class parity using either:
-
-      - The :envvar:`MINIO_STORAGE_CLASS_RRS` environment variable, *or*
-      - The :mc:`mc admin config` command to modify the ``storage_class.rrs`` configuration setting.
-
-      ``REDUCED_REDUNDANCY`` parity *must* be less than or equal to ``STANDARD``.
-
-MinIO references the ``x-amz-storage-class`` header in request metadata for determining which storage class to assign an object. 
-The specific syntax or method for setting headers depends on your preferred method for interfacing with the MinIO server.
-
-- For the :mc:`mc` command line tool, certain commands include a specific option for setting the storage class. 
-  For example, the :mc:`mc cp` command has the :mc-cmd:`~mc cp storage-class` option for specifying the storage class to assign to the object being copied.
-
-- For MinIO SDKs, the ``S3Client`` object has specific methods for setting request headers. 
-  For example, the ``minio-go`` SDK ``S3Client.PutObject`` method takes a ``PutObjectOptions`` data structure as a parameter.
-  The ``PutObjectOptions`` data structure includes the ``StorageClass`` option for specifying the storage class to assign to the object being   created.
-
-
-.. _minio-ec-bitrot-protection:
-
-Bit Rot Protection
-------------------
-
-.. TODO- ReWrite w/ more detail.
-
-Silent data corruption or bit rot is a serious problem faced by data drives resulting in data getting corrupted without the user’s knowledge. 
-The corruption of data occurs when the electrical charge on a portion of the drive disperses or changes with no notification to or input from the user.
-Many events can lead to such a silent corruption of stored data.
-For example, ageing drives, current spikes, bugs in drive firmware, phantom writes, misdirected reads/writes, driver errors, accidental overwrites, or a random cosmic ray can each lead to a bit change.
-Whatever the cause, the result is the same - compromised data.
+`Bit rot <https://en.wikipedia.org/wiki/Data_degradation>__` is silent data corruption from random changes at the storage media level.
+For data drives, it is typically the result of decay of the electrical charge or magnetic orientation that represents the data.
+These sources can range from the small current spike during a power outage to a random cosmic ray resulting in flipped bits.
+The resulting "bit rot" can cause subtle errors or corruption on the data medium without triggering monitoring tools or hardware.
 
 MinIO’s optimized implementation of the :minio-git:`HighwayHash algorithm <highwayhash/blob/master/README.md>` ensures that it captures and heals corrupted objects on the fly. 
 Integrity is ensured from end to end by computing a hash on READ and verifying it on WRITE from the application, across the network, and to the memory or drive. 
