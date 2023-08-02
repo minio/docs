@@ -163,7 +163,7 @@ provider configuration.
 
 Specify the hostname for the Active Directory / LDAP server. For example:
 
-``https://ldapserver.com:636``
+``ldapserver.com:636``
 
 .. end-minio-ad-ldap-server-addr
 
