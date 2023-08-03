@@ -77,11 +77,11 @@ For example, consider
 
    $ cat /etc/fstab
 
-     # <file system>  <mount point>  <type>  <options>         <dump>  <pass>
-     LABEL=DRIVE1     /mnt/drive1    xfs     defaults,noatime  0       2
-     LABEL=DRIVE2     /mnt/drive2    xfs     defaults,noatime  0       2
-     LABEL=DRIVE3     /mnt/drive3    xfs     defaults,noatime  0       2
-     LABEL=DRIVE4     /mnt/drive4    xfs     defaults,noatime  0       2
+     # <file system>  <mount point>  <type>  <options>                <dump>  <pass>
+     LABEL=DRIVE1     /mnt/drive1    xfs     defaults,noatime,nofail  0       2
+     LABEL=DRIVE2     /mnt/drive2    xfs     defaults,noatime,nofail  0       2
+     LABEL=DRIVE3     /mnt/drive3    xfs     defaults,noatime,nofail  0       2
+     LABEL=DRIVE4     /mnt/drive4    xfs     defaults,noatime,nofail  0       2
 
 Given the previous example command, no changes are required to 
 ``fstab`` since the replacement drive at ``/mnt/drive1`` uses the same

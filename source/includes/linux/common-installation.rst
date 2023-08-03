@@ -209,7 +209,7 @@ operating systems using RPM, DEB, or binary:
 
 The ``.deb`` or ``.rpm`` packages install the following 
 `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to 
-``/etc/systemd/system/minio.service``. For binary installations, create this
+``/lib/systemd/system/minio.service``. For binary installations, create this
 file manually on all MinIO hosts:
 
 .. code-block:: shell

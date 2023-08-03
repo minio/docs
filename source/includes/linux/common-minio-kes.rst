@@ -25,7 +25,7 @@ For more granular controls, deploy a dedicated load balancer to manage connectio
 
 .. start-kes-service-file-desc
 
-Create the ``/etc/systemd/system/kes.service`` file on all KES hosts:
+Create the ``/lib/systemd/system/kes.service`` file on all KES hosts:
 
 .. literalinclude:: /extra/kes.service
    :language: shell

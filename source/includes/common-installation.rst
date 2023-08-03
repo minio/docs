@@ -189,11 +189,11 @@ For example:
 
    $ nano /etc/fstab
 
-     # <file system>  <mount point>  <type>  <options>         <dump>  <pass>
-     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime  0       2
-     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime  0       2
-     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
-     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
+     # <file system>  <mount point>  <type>  <options>                <dump>  <pass>
+     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime,nofail  0       2
+     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime,nofail  0       2
+     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime,nofail  0       2
+     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime,nofail  0       2
 
 You can then specify the entire range of drives using the expansion notation ``/mnt/disk{1...4}``. 
 If you want to use a specific subfolder on each drive, specify it as ``/mnt/disk{1...4}/minio``.
