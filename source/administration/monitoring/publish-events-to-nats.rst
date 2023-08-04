@@ -12,16 +12,21 @@ Publish Events to NATS
    :local:
    :depth: 1
 
-MinIO supports publishing :ref:`bucket notification
-<minio-bucket-notifications>` events to a 
-`NATS <https://nats.io/>`__ service endpoint.
+MinIO supports publishing :ref:`bucket notification <minio-bucket-notifications>` events to a `NATS <https://nats.io/>`__ service endpoint.
+
+.. admonition:: NATS Streaming Deprecated
+   :class: important
+
+   NATS Streaming is deprecated.
+   Migrate to `JetStream <https://docs.nats.io/nats-concepts/jetstream>`__ instead. 
+
+   The related MinIO configuration options and environment variables are deprecated. 
+
 
 Add a NATS Endpoint to a MinIO Deployment
 -----------------------------------------
 
-The following procedure adds a new NATS service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
-deployment.
+The following procedure adds a new NATS service endpoint for supporting :ref:`bucket notifications <minio-bucket-notifications>` in a MinIO deployment.
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -35,25 +40,17 @@ See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 1) Add the NATS Endpoint to MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can configure a new NATS service endpoint using either environment variables
-*or* by setting runtime configuration settings.
+You can configure a new NATS service endpoint using either environment variables *or* by setting runtime configuration settings.
 
 .. tab-set::
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the NATS service endpoint and associated
-      configuration settings using 
-      :ref:`environment variables 
-      <minio-server-envvar-bucket-notification-nats>`. The 
-      :mc:`minio server` process applies the specified settings on its 
-      next startup.
+      MinIO supports specifying the NATS service endpoint and associated configuration settings using :ref:`environment variables <minio-server-envvar-bucket-notification-nats>`. 
+      The :mc:`minio server` process applies the specified settings on its next startup.
       
-      The following example code sets *all*  environment variables
-      related to configuring an NATS service endpoint. The minimum
-      *required* variables are
-      :envvar:`MINIO_NOTIFY_NATS_ADDRESS` and 
-      :envvar:`MINIO_NOTIFY_NATS_SUBJECT`:
+      The following example code sets *all*  environment variables related to configuring an NATS service endpoint. 
+      The minimum *required* variables are :envvar:`MINIO_NOTIFY_NATS_ADDRESS` and :envvar:`MINIO_NOTIFY_NATS_SUBJECT`:
 
       .. code-block:: shell
          :class: copyable
@@ -67,34 +64,25 @@ You can configure a new NATS service endpoint using either environment variables
          set MINIO_NOTIFY_NATS_TLS_<IDENTIFIER>="<string>"
          set MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
          set MINIO_NOTIFY_NATS_PING_INTERVAL_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_STREAMING_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_STREAMING_ASYNC_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID_<IDENTIFIER>="<string>"
+         set MINIO_NOTIFY_NATS_QUEUE_DIR_<IDENTIFIER>="<string>"
+         set MINIO_NOTIFY_NATS_QUEUE_LIMIT_<IDENTIFIER>="<string>"
          set MINIO_NOTIFY_NATS_CERT_AUTHORITY_<IDENTIFIER>="<string>"
          set MINIO_NOTIFY_NATS_CLIENT_CERT_<IDENTIFIER>="<string>"
          set MINIO_NOTIFY_NATS_CLIENT_KEY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_QUEUE_LIMIT_<IDENTIFIER>="<string>"
          set MINIO_NOTIFY_NATS_COMMENT_<IDENTIFIER>="<string>"
+         set MINIO_NOTIFY_NATS_JETSTREAM_<IDENTIFIER>="<string>"
 
-      - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
-        NATS service endpoint. Use the same ``<IDENTIFIER>`` value for all 
-        environment variables related to the new target service endpoint.
+      - Replace ``<IDENTIFIER>`` with a unique descriptive string for the NATS service endpoint. 
+        Use the same ``<IDENTIFIER>`` value for all environment variables related to the new target service endpoint.
         The following examples assume an identifier of ``PRIMARY``.
 
-        If the specified ``<IDENTIFIER>`` matches an existing NATS service
-        endpoint on the MinIO deployment, the new settings *override* 
-        any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_nats <mc admin config get>` to
-        review the currently configured NATS endpoints on the MinIO deployment.
+        If the specified ``<IDENTIFIER>`` matches an existing NATS service endpoint on the MinIO deployment, the new settings *override* any existing settings for that endpoint. 
+        Use :mc-cmd:`mc admin config get notify_nats <mc admin config get>` to review the currently configured NATS endpoints on the MinIO deployment.
 
       - Replace ``<ENDPOINT>`` with the URL of the NATS service endpoint.
         For example: ``htpps://nats-endpoint.example.com:4222``
 
-      See :ref:`NATS Service for Bucket Notifications
-      <minio-server-envvar-bucket-notification-nats>` for complete documentation
-      on each environment variable.
+      See :ref:`NATS Service for Bucket Notifications <minio-server-envvar-bucket-notification-nats>` for complete documentation on each environment variable.
 
    .. tab-item:: Configuration Settings
 
@@ -118,13 +106,10 @@ You can configure a new NATS service endpoint using either environment variables
             username="<string>" \
             password="<string>" \
             token="<string>" \
+            nats_jetstream="<string>" \
             tls="<string>" \
             tls_skip_verify="<string>" \
             ping_interval="<string>" \
-            streaming="<string>" \
-            streaming_async="<string>" \
-            streaming_max_pub_acks_in_flight="<string>" \
-            streaming_cluster_id="<string>" \
             cert_authority="<string>" \
             client_cert="<string>" \
             client_key="<string>" \
@@ -133,24 +118,18 @@ You can configure a new NATS service endpoint using either environment variables
             comment="<string>"
 
 
-      - Replace ``IDENTIFIER`` with a unique descriptive string for the
-        NATS service endpoint. The following examples in this procedure
-        assume an identifier of ``PRIMARY``.
+      - Replace ``IDENTIFIER`` with a unique descriptive string for the NATS service endpoint. 
+        The following examples in this procedure assume an identifier of ``PRIMARY``.
 
-        If the specified ``IDENTIFIER`` matches an existing NATS service
-        endpoint on the MinIO deployment, the new settings *override* 
-        any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_nats <mc admin config get>` to
-        review the currently configured NATS endpoints on the MinIO deployment.
+        If the specified ``IDENTIFIER`` matches an existing NATS service endpoint on the MinIO deployment, the new settings *override* any existing settings for that endpoint. 
+        Use :mc-cmd:`mc admin config get notify_nats <mc admin config get>` to review the currently configured NATS endpoints on the MinIO deployment.
 
       - Replace ``ENDPOINT`` with the URL of the NATS service endpoint.
         For example: ``htpps://nats-endpoint.example.com:4222``.
 
-      See :ref:`NATS Bucket Notification Configuration Settings
-      <minio-server-config-bucket-notification-nats>` for complete 
-      documentation on each setting.
+      See :ref:`NATS Bucket Notification Configuration Settings <minio-server-config-bucket-notification-nats>` for complete       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 
@@ -242,8 +221,7 @@ See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 1) List Configured NATS Endpoints In The Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config get` command to list the currently
-configured NATS service endpoints in the deployment:
+Use the :mc-cmd:`mc admin config get` command to list the currently configured NATS service endpoints in the deployment:
 
 .. code-block:: shell
    :class: copyable
@@ -256,23 +234,19 @@ The command output resembles the following:
 
 .. code-block:: shell
 
-   notify_nats:primary password="yoursecret" streaming_max_pub_acks_in_flight="10" subject="" address="nats-endpoint.example.com:4222"  token="" username="yourusername" ping_interval="0" queue_limit="0" tls="off" tls_skip_verify="off" streaming_async="on" queue_dir="" streaming_cluster_id="test-cluster" streaming_enable="on"
-   notify_nats:secondary password="yoursecret" streaming_max_pub_acks_in_flight="10" subject="" address="nats-endpoint.example.com:4222"  token="" username="yourusername" ping_interval="0" queue_limit="0" tls="off" tls_skip_verify="off" streaming_async="on" queue_dir="" streaming_cluster_id="test-cluster" streaming_enable="on"
+   notify_nats:primary password="yoursecret" subject="" address="nats-endpoint.example.com:4222"  token="" username="yourusername" ping_interval="0" queue_limit="0" tls="off" tls_skip_verify="off" queue_dir="" streaming_enable="on" nats_jetstream="on"
+   notify_nats:secondary password="yoursecret" subject="" address="nats-endpoint.example.com:4222"  token="" username="yourusername" ping_interval="0" queue_limit="0" tls="off" tls_skip_verify="off" queue_dir="" streaming_enable="on" nats_jetstream="on"
 
-The :mc-conf:`notify_nats` key is the top-level configuration key for an
-:ref:`minio-server-config-bucket-notification-nats`. The 
-:mc-conf:`address <notify_nats.address>` key specifies the NATS service endpoint 
-for the given ``notify_nats`` key. The ``notify_nats:<IDENTIFIER>`` suffix 
-describes the unique identifier for that NATS service endpoint.
+The :mc-conf:`notify_nats` key is the top-level configuration key for an :ref:`minio-server-config-bucket-notification-nats`. 
+The :mc-conf:`address <notify_nats.address>` key specifies the NATS service endpoint for the given ``notify_nats`` key. 
+The ``notify_nats:<IDENTIFIER>`` suffix describes the unique identifier for that NATS service endpoint.
 
-Note the identifier for the NATS service endpoint you want to update for
-the next step. 
+Note the identifier for the NATS service endpoint you want to update for the next step. 
 
 2) Update the NATS Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config set` command to set the new configuration
-for the NATS service endpoint:
+Use the :mc-cmd:`mc admin config set` command to set the new configuration for the NATS service endpoint:
 
 .. code-block:: shell
    :class: copyable
@@ -286,10 +260,7 @@ for the NATS service endpoint:
       tls="<string>" \
       tls_skip_verify="<string>" \
       ping_interval="<string>" \
-      streaming="<string>" \
-      streaming_async="<string>" \
-      streaming_max_pub_acks_in_flight="<string>" \
-      streaming_cluster_id="<string>" \
+      nats_jetstream="<string>" \
       cert_authority="<string>" \
       client_cert="<string>" \
       client_key="<string>" \
@@ -297,10 +268,9 @@ for the NATS service endpoint:
       queue_limit="<string>" \
       comment="<string>"
 
-The :mc-conf:`notify_nats address <notify_nats.address>` configuration setting
-is the *minimum* required for an NATS service endpoint. All other configuration
-settings are *optional*. See :ref:`minio-server-config-bucket-notification-nats`
-for a complete list of NATS configuration settings.
+The :mc-conf:`notify_nats address <notify_nats.address>` configuration setting is the *minimum* required for an NATS service endpoint. 
+All other configuration settings are *optional*. 
+See :ref:`minio-server-config-bucket-notification-nats` for a complete list of NATS configuration settings.
 
 3) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -313,28 +283,21 @@ Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
    mc admin service restart ALIAS
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
-restart.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
-The :mc:`minio server` process prints a line on startup for each configured NATS
-target similar to the following:
+The :mc:`minio server` process prints a line on startup for each configured NATS target similar to the following:
 
 .. code-block:: shell
 
    SQS ARNs: arn:minio:sqs::primary:nats
 
-3) Validate the Changes
+4) Validate the Changes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Perform an action on a bucket which has an event configuration using the updated
-NATS service endpoint and check the NATS service for the notification data. The
-action required depends on which :mc-cmd:`events <mc event add --event>` were
-specified when configuring the bucket notification.
+Perform an action on a bucket which has an event configuration using the updated NATS service endpoint and check the NATS service for the notification data. 
+The action required depends on which :mc-cmd:`events <mc event add --event>` were specified when configuring the bucket notification.
 
-For example, if the bucket notification configuration includes the 
-``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
-a notification.
+For example, if the bucket notification configuration includes the ``s3:ObjectCreated:Put`` event, you can use the :mc:`mc cp` command to create a new object in the bucket and trigger a notification.
 
 .. code-block:: shell
    :class: copyable
