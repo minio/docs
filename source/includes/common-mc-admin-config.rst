@@ -533,9 +533,16 @@ MinIO supports the following time units:
 
 .. start-minio-notify-nats-streaming
 
-Specify ``on`` to enable streaming events to the NATS service endpoint.
+Specify ``on`` to enable JetStream support for streaming events to a NATS JetStream service endpoint.
 
 .. end-minio-notify-nats-streaming
+
+.. start-minio-notify-nats-jetstream
+
+Specify ``on`` to enable asynchronous publishing of events to the NATS service endpoint.
+
+.. end-minio-notify-nats-jetstream
+
 
 .. start-minio-notify-nats-streaming-async
 

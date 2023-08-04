@@ -998,6 +998,7 @@ These environment variables configure notification targets for use with
 - :ref:`minio-server-envvar-bucket-notification-elasticsearch`
 - :ref:`minio-server-envvar-bucket-notification-nsq`
 - :ref:`minio-server-envvar-bucket-notification-redis`
+- :ref:`minio-server-envvar-bucket-notification-nats`
 - :ref:`minio-server-envvar-bucket-notification-postgresql`
 - :ref:`minio-server-envvar-bucket-notification-mysql`
 - :ref:`minio-server-envvar-bucket-notification-kafka`
@@ -1713,30 +1714,30 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 NATS Service for Bucket Notifications
 +++++++++++++++++++++++++++++++++++++
 
-The following section documents environment variables for configuring an NATS
-service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
-:ref:`minio-bucket-notifications-publish-nats` for a tutorial on
-using these environment variables.
+.. admonition:: NATS Streaming Deprecated
+   :class: important
 
-You can specify multiple NATS service endpoints by appending a unique identifier
-``_ID`` for each set of related NATS environment variables:
-the top level key. For example, the following commands set two distinct NATS
-service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
+   NATS Streaming is deprecated.
+   Migrate to `JetStream <https://docs.nats.io/nats-concepts/jetstream>`__ instead. 
+
+   The related MinIO configuration options and environment variables are deprecated. 
+
+The following section documents environment variables for configuring an NATS service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. 
+See :ref:`minio-bucket-notifications-publish-nats` for a tutorial on using these environment variables.
+
+You can specify multiple NATS service endpoints by appending a unique identifier ``_ID`` for each set of related NATS environment variables no to the top level key. 
+For example, the following commands set two distinct NATS service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 
 .. code-block:: shell
    :class: copyable
 
    set MINIO_NOTIFY_NATS_ENABLE_PRIMARY="on"
    set MINIO_NOTIFY_NATS_ADDRESS_PRIMARY="https://nats-endpoint.example.net:4222"
-   set MINIO_NOTIFY_NATS_SUBJECT="minioevents"
 
    set MINIO_NOTIFY_NATS_ENABLE_SECONDARY="on"
    set MINIO_NOTIFY_NATS_ADDRESS_SECONDARY="https://nats-endpoint.example.net:4222"
-   set MINIO_NOTIFY_NATS_SUBJECT="minioevents"
 
-For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY
-<MINIO_NOTIFY_NATS_ENABLE>` indicates the environment variable is associated to
-an NATS service endpoint with ID of ``PRIMARY``.
+For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE>` indicates the environment variable is associated to an NATS service endpoint with ID of ``PRIMARY``.
 
 .. envvar:: MINIO_NOTIFY_NATS_ENABLE
 
@@ -1843,7 +1844,19 @@ an NATS service endpoint with ID of ``PRIMARY``.
    :mc-conf:`notify_nats ping_interval <notify_nats.ping_interval>`
    configuration setting.
 
+.. envvar:: MINIO_NOTIFY_NATS_JETSTREAM
+
+   *Optional*
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-notify-nats-jetstream
+      :end-before: end-minio-notify-nats-jetstream
+
+   This environment variable corresponds with the :mc-conf:`notify_nats jetstream <notify_nats.jetstream>` configuration setting.
+
 .. envvar:: MINIO_NOTIFY_NATS_STREAMING
+
+   *Deprecated*
 
    *Optional*
 
@@ -1857,6 +1870,8 @@ an NATS service endpoint with ID of ``PRIMARY``.
 
 .. envvar:: MINIO_NOTIFY_NATS_STREAMING_ASYNC
 
+   *Deprecated*
+
    *Optional*
 
    .. include:: /includes/common-mc-admin-config.rst
@@ -1869,6 +1884,8 @@ an NATS service endpoint with ID of ``PRIMARY``.
 
 .. envvar:: MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT
 
+   *Deprecated*
+
    *Optional*
 
    .. include:: /includes/common-mc-admin-config.rst
@@ -1880,6 +1897,8 @@ an NATS service endpoint with ID of ``PRIMARY``.
    <notify_nats.streaming_max_pub_acks_in_flight>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID
+
+   *Deprecated*
 
    *Optional*
 
