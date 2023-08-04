@@ -2272,9 +2272,18 @@ Active Directory / LDAP Identity Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following section documents settings for enabling external identity 
-management using an Active Directory or LDAP service. See 
-:ref:`minio-external-identity-management-ad-ldap` for a tutorial on using these 
-configuration settings.
+management using an Active Directory or LDAP service.
+
+.. admonition:: :mc:`mc idp ldap` commands are preferred
+   :class: note
+
+   .. versionadded:: RELEASE.2023-05-26T23-31-54Z
+
+      MinIO recommends using the :mc:`mc idp ldap` commands for LDAP management operations.
+      These newer commands offer better validation and additional features.
+      See :ref:`minio-external-identity-management-ad-ldap` for a tutorial on using :mc:`mc idp ldap`.
+
+      :mc-conf:`identity_ldap` configuration key remains available for existing scripts and other tools.
 
 .. mc-conf:: identity_ldap
 

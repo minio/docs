@@ -145,6 +145,8 @@ Configuring an external IDP enables Single-Sign On workflows, where applications
 Use the the screens in this section to view, add, or edit OIDC configurations for the deployment.
 MinIO supports any number of active OIDC configurations.
 
+.. _minio-console-admin-identity-ldap:
+
 LDAP
 ~~~~
 
