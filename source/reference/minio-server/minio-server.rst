@@ -998,6 +998,7 @@ These environment variables configure notification targets for use with
 - :ref:`minio-server-envvar-bucket-notification-elasticsearch`
 - :ref:`minio-server-envvar-bucket-notification-nsq`
 - :ref:`minio-server-envvar-bucket-notification-redis`
+- :ref:`minio-server-envvar-bucket-notification-nats`
 - :ref:`minio-server-envvar-bucket-notification-postgresql`
 - :ref:`minio-server-envvar-bucket-notification-mysql`
 - :ref:`minio-server-envvar-bucket-notification-kafka`
