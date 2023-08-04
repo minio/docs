@@ -896,7 +896,7 @@ MinIO supports the following conditions for use with defining policies for
 - ``aws:CurrentTime``
 - ``aws:EpochTime``
 
-For complete information on any listed condition key, see the 
+For complete information on any listed condition key, see the :iam-docs:`IAM Condition Element Documentation <reference_policies_elements_condition.html>`.
 
 Policy Variables
 ----------------
