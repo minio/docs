@@ -524,6 +524,7 @@ Key Management Service and Encryption
    For a stateful KES server, this results in using the default enclave.
 
 .. _minio-server-envvar-storage-class:
+.. _minio-ec-storage-class:
 
 Storage Class
 ~~~~~~~~~~~~~

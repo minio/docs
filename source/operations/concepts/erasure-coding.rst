@@ -27,6 +27,7 @@ See :ref:`minio-availability-resiliency` and :ref:`minio-architecture` for more 
 
 .. _minio-ec-basics:
 .. _minio-ec-erasure-set:
+.. _minio-read-quorum:
 
 Erasure Coding Basics
 ---------------------
