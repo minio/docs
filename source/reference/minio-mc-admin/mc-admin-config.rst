@@ -1342,6 +1342,14 @@ service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`
 :ref:`minio-bucket-notifications-publish-nats` for a tutorial on 
 using these environment variables.
 
+.. admonition:: NATS Streaming Deprecated
+   :class: important
+
+   NATS Streaming is deprecated.
+   Migrate to `JetStream <https://docs.nats.io/nats-concepts/jetstream>`__ instead. 
+
+   The related MinIO configuration options and environment variables are deprecated. 
+
 .. mc-conf:: notify_nats
 
    The top-level configuration key for defining an NATS service endpoint for use
@@ -1480,8 +1488,21 @@ using these environment variables.
       This configuration setting corresponds with the environment variable
       :envvar:`MINIO_NOTIFY_NATS_PING_INTERVAL`.
 
+   .. mc-conf:: jetstream
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-notify-nats-jetstream
+         :end-before: end-minio-notify-nats-jetstream
+
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_JETSTREAM`.
+
    .. mc-conf:: streaming
       :delimiter: " "
+
+      *Deprecated*
 
       *Optional*
 
@@ -1495,6 +1516,8 @@ using these environment variables.
    .. mc-conf:: streaming_async
       :delimiter: " "
 
+      *Deprecated*
+ 
       *Optional*
 
       .. include:: /includes/common-mc-admin-config.rst
@@ -1507,6 +1530,8 @@ using these environment variables.
    .. mc-conf:: streaming_max_pub_acks_in_flight
       :delimiter: " "
 
+      *Deprecated*
+ 
       *Optional*
 
       .. include:: /includes/common-mc-admin-config.rst
@@ -1519,6 +1544,8 @@ using these environment variables.
    .. mc-conf:: streaming_cluster_id
       :delimiter: " "
 
+      *Deprecated*
+ 
       *Optional*
 
       .. include:: /includes/common-mc-admin-config.rst
