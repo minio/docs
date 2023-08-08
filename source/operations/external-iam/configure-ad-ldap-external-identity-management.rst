@@ -207,6 +207,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
       .. tab-item:: MinIO Console
 
          MinIO supports specifying the AD/LDAP provider settings using the :ref:`MinIO Console <minio-console>`.
+         For distributed deployments, configuring AD/LDAP from the Console applies the configuration to all nodes in the deployment.
 
 	 .. include:: /includes/common-minio-external-auth.rst
             :start-after: start-minio-ad-ldap-console-enable
@@ -216,7 +217,11 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    You must restart the MinIO deployment to apply the configuration changes.
-   Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+
+   If you configured AD/LDAP from the MinIO Console, no additional action is required.
+   The MinIO Console automatically restarts the deployment when the new AD/LDAP configuration is saved.
+
+   For MinIO Client and environment variable configuration, use the :mc-cmd:`mc admin service restart` command to restart the deployment:
 
    .. code-block:: shell
       :class: copyable
@@ -224,9 +229,6 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
       mc admin service restart ALIAS
 
    Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
-
-   If you configured AD/LDAP from the MinIO Console, no additional action is required.
-   The MinIO Console automatically restarts the deployment when the new AD/LDAP configuration is saved.
 
    3) Use the MinIO Console to Log In with AD/LDAP Credentials
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
