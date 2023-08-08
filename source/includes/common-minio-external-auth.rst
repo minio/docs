@@ -319,7 +319,7 @@ Specify a comment to associate to the AD/LDAP configuration.
 
 .. start-minio-ad-ldap-console-enable
 
-#. Log in to the MinIO Console as an admin user, either your root user or one with the ``consoleAdmin`` :ref:`policy <minio-policy>`.
+#. Log in to the MinIO Console as either the :ref:`root <minio-users-root>` user or a MinIO user with the  :userpolicy:`consoleAdmin` policy.
 #. In the :guilabel:`Identity` section, select :guilabel:`LDAP` and then :guilabel:`Edit Configuration` to configure an Active Directory or LDAP server.
    The minimum required settings are:
 
