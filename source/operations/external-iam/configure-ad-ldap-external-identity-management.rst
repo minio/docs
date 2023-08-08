@@ -122,7 +122,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 
    All methods require starting/restarting the MinIO deployment to apply changes.
 
-   The following tabs provide a quick reference of the three LDAP configuration methods:
+   The following tabs provide a quick reference for the available configuration methods:
 
    .. tab-set::
 
@@ -130,17 +130,16 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 
          MinIO supports specifying the AD/LDAP provider settings using :mc:`mc idp ldap` commands.
 
-	 Confirm this:
          For distributed deployments, the :mc:`mc idp ldap` command applies the configuration to all nodes in the deployment. 
 
          The following example code sets *all* configuration settings related to configuring an AD/LDAP provider for external identity management.
 	 The minimum *required* settings are:
 
-         - :mc-conf:`identity_ldap server_addr <identity_ldap.server_addr>`
-         - :mc-conf:`identity_ldap lookup_bind_dn <identity_ldap.lookup_bind_dn>`
-         - :mc-conf:`identity_ldap lookup_bind_password <identity_ldap.lookup_bind_password>`
-         - :mc-conf:`identity_ldap user_dn_search_base_dn <identity_ldap.user_dn_search_base_dn>`
-         - :mc-conf:`identity_ldap user_dn_search_filter <identity_ldap.user_dn_search_filter>`
+         - :mc-conf:`server_addr <identity_ldap.server_addr>`
+         - :mc-conf:`lookup_bind_dn <identity_ldap.lookup_bind_dn>`
+         - :mc-conf:`lookup_bind_password <identity_ldap.lookup_bind_password>`
+         - :mc-conf:`user_dn_search_base_dn <identity_ldap.user_dn_search_base_dn>`
+         - :mc-conf:`user_dn_search_filter <identity_ldap.user_dn_search_filter>`
 
         .. code-block:: shell
            :class: copyable
@@ -153,7 +152,13 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 	      user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"  \
 	      group_search_filter= "(&(objectClass=group)(member=%d))"             \
 	      group_search_base_dn="ou=MinIO Users,dc=example,dc=net"              \
-	      server_insecure=on
+              enabled="true"                                                       \
+              sts_expiry="1h"                                                      \
+              username_format="uid=%s,cn=miniousers,dc=myldapserver,dc=net,userPrincipalName=%s,cn=miniousers,dc=myldapserver,dc=net"                                            \
+              tls_skip_verify="off"                                                \
+              server_insecure=off                                                  \
+              server_starttls="off"                                                \
+	      comment="Test LDAP server"
 
         For more complete documentation on these settings, see :mc:`mc idp ldap`.
 
@@ -161,6 +166,8 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
            :class: note
 
            :mc:`mc idp ldap` offers additional features and improved validation over :mc-cmd:`mc admin config set` runtime configuration settings.
+           :mc:`mc idp ldap` supports the same settings as :mc:`mc admin config` and the :mc-conf:`identity_ldap` configuration key.
+
            The :mc-conf:`identity_ldap` configuration key remains available for existing scripts and tools.
 
       .. tab-item:: Environment Variables
@@ -199,8 +206,11 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 
       .. tab-item:: MinIO Console
 
-	 link to something about Console
-	 :ref:`minio-console-admin-identity-ldap`
+         MinIO supports specifying the AD/LDAP provider settings using the :ref:`MinIO Console <minio-console>`.
+
+	 .. include:: /includes/common-minio-external-auth.rst
+            :start-after: start-minio-ad-ldap-console-enable
+            :end-before: end-minio-ad-ldap-console-enable
 
    2) Restart the MinIO Deployment
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -214,6 +224,9 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
       mc admin service restart ALIAS
 
    Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
+
+   If you configured AD/LDAP from the MinIO Console, no additional action is required.
+   The MinIO Console automatically restarts the deployment when the new AD/LDAP configuration is saved.
 
    3) Use the MinIO Console to Log In with AD/LDAP Credentials
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -268,3 +281,5 @@ You can enable and disable the configured AD/LDAP connection as needed.
 
 Use :mc-cmd:`mc idp ldap disable` to deactivate a configured connection.
 Use :mc-cmd:`mc idp ldap enable` to activate a previously configured connection.
+
+You may also enable or disable AD/LDAP from the :ref:`MinIO Console <minio-console>`.

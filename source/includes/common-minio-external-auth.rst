@@ -317,6 +317,23 @@ Specify a comment to associate to the AD/LDAP configuration.
 
 .. end-minio-ad-ldap-comment
 
+.. start-minio-ad-ldap-console-enable
+
+#. Log in to the MinIO Console as an admin user, either your root user or one with the ``consoleAdmin`` :ref:`policy <minio-policy>`.
+#. In the :guilabel:`Identity` section, select :guilabel:`LDAP` and then :guilabel:`Edit Configuration` to configure an Active Directory or LDAP server.
+   The minimum required settings are:
+
+   - Server Address
+   - Lookup Bind DN
+   - Lookup Bind Password
+   - User DN Search Base
+   - User DN Search Filter
+
+   Not all configuration options are available in the MinIO Console.
+   For additional settings, use the MinIO Client or environment variables.
+
+.. end-minio-ad-ldap-console-enable
+
 .. start-minio-identity-management-plugin-url
 
 The webhook endpoint for the external identity management service (``https://authservice.example.net:8080/auth``).
@@ -351,3 +368,4 @@ If omitted, MinIO automatically generates the ID and prints the full ARN to the 
 Specify a comment to associate to the identity configuration.
 
 .. end-minio-identity-management-comment
+

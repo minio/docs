@@ -69,8 +69,8 @@ The :mc-cmd:`mc idp ldap` command has the following subcommands:
 Configuration Parameters
 ------------------------
 
-The :mc-cmd:`mc idp ldap` subcommands support configuration parameters.
-The parameters define the server's interaction with the Active Directory or LDAP IAM provider.
+The :mc-cmd:`mc idp ldap` subcommands support the same configuration parameters as the :mc-conf:`identity_ldap` configuration key.
+These parameters define the server's interaction with the Active Directory or LDAP IAM provider.
 
 For a more detailed explanation of the configuration parameters, refer to the :ref:`config setting documentation <minio-ldap-config-settings>`.
 
