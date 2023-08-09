@@ -213,7 +213,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 	 .. include:: /includes/common-minio-external-auth.rst
             :start-after: start-minio-ad-ldap-console-enable
             :end-before: end-minio-ad-ldap-console-enable
-
+			 
    2) Restart the MinIO Deployment
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -236,7 +236,6 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 
    The MinIO Console supports the full workflow of authenticating to the AD/LDAP provider, generating temporary credentials using the MinIO :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) endpoint, and logging the user into the MinIO deployment.
 
-   Starting in :minio-release:`RELEASE.2021-07-08T01-15-01Z`, the MinIO Console is embedded in the MinIO server.
    You can access the Console by opening the root URL for the MinIO cluster. For example, ``https://minio.example.net:9000``.
 
    Once logged in, you can perform any action for which the authenticated user is :ref:`authorized <minio-external-identity-management-ad-ldap-access-control>`.

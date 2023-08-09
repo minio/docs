@@ -330,8 +330,8 @@ Specify a comment to associate to the AD/LDAP configuration.
    - User DN Search Filter
 
    Not all configuration options are available in the MinIO Console.
-   For additional settings, use the MinIO Client or environment variables.
-
+   For additional settings, use :mc:`mc idp ldap` or :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
+ 
 .. end-minio-ad-ldap-console-enable
 
 .. start-minio-identity-management-plugin-url
