@@ -31,7 +31,7 @@ The procedure on this page provides instructions for:
    - Using the MinIO ``AssumeRoleWithLDAPIdentity`` Security Token Service (STS) API to generate temporary credentials for use by applications.
 
 This procedure is generic for AD/LDAP services.
-Defer to the documentation for the AD/LDAP provider of your choice for specific instructions or procedures on configuration of user identities.
+See the documentation for the AD/LDAP provider of your choice for specific instructions or procedures on configuration of user identities.
 
 
 Prerequisites
