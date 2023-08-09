@@ -207,11 +207,14 @@ operating systems using RPM, DEB, or binary:
 
 .. start-install-minio-systemd-desc
 
-The ``.deb`` or ``.rpm`` packages install the following 
-`systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to 
-``/lib/systemd/system/minio.service``. For binary installations, create this
-file manually on all MinIO hosts:
+The ``.deb`` or ``.rpm`` packages install the following `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to ``/usr/lib/systemd/system/minio.service``. 
+For binary installations, create this file manually on all MinIO hosts.
 
+.. note::
+   
+   ``systemd`` checks the ``/etc/systemd/...`` path before checking the ``/usr/lib/systemd/...`` path.
+   Make sure the file only exists at ``/usr/lib/systemd/system/minio.service`` path.
+    
 .. code-block:: shell
    :class: copyable
 
