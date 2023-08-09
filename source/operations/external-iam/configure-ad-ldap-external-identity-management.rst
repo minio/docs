@@ -175,7 +175,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
          MinIO supports specifying the AD/LDAP provider settings using :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
 	 The :mc:`minio server` process applies the specified settings on its next startup.
 	 For distributed deployments, specify these settings across all nodes in the deployment using the *same* values.
-	 Any differences between server configs between nodes will result in startup or configuration failures.
+	 Any differences in server configurations between nodes will result in startup or configuration failures.
 
          The following example code sets *all* environment variables related to configuring an AD/LDAP provider for external identity management. The minimum *required* variable are:
 
