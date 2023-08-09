@@ -117,7 +117,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
    Configure the AD/LDAP provider using one of the following:
 
    * MinIO Client
-   * environment variables
+   * Environment variables
    * MinIO Console
 
    All methods require starting/restarting the MinIO deployment to apply changes.
