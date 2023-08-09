@@ -251,7 +251,8 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
    MinIO requires clients authenticate using :s3-api:`AWS Signature Version 4 protocol <sig-v4-authenticating-requests.html>` with support for the deprecated Signature Version 2 protocol.
    Specifically, clients must present a valid access key and secret key to access any S3 or MinIO administrative API, such as ``PUT``, ``GET``, and ``DELETE`` operations.
 
-   Applications can generate temporary access credentials as-needed using the :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) API endpoint and AD/LDAP user credentials. MinIO provides an example Go application :minio-git:`ldap.go <minio/blob/master/docs/sts/ldap.go>` with an example of managing this workflow.
+   Applications can generate temporary access credentials as-needed using the :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) API endpoint and AD/LDAP user credentials. 
+   MinIO provides an example Go application :minio-git:`ldap.go <minio/blob/master/docs/sts/ldap.go>` that manages this workflow.
 
    .. code-block:: shell
 
