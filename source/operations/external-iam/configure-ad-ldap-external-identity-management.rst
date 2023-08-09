@@ -220,7 +220,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
    You must restart the MinIO deployment to apply the configuration changes.
 
    If you configured AD/LDAP from the MinIO Console, no additional action is required.
-   The MinIO Console automatically restarts the deployment when the new AD/LDAP configuration is saved.
+   The MinIO Console automatically restarts the deployment after saving the new AD/LDAP configuration.
 
    For MinIO Client and environment variable configuration, use the :mc-cmd:`mc admin service restart` command to restart the deployment:
 
