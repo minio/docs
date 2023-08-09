@@ -55,7 +55,7 @@ full login flow.
 AD/LDAP users can alternatively create :ref:`access keys <minio-idp-service-account>` associated to their AD/LDAP user Distinguished Name. 
 Access Keys are long-lived credentials which inherit their privileges from the parent user. 
 The parent user can further restrict those privileges while creating the access keys. 
-Use either of the following methods to create a new access keys:
+Use either of the following methods to create a new access key:
 
 - Log into the :ref:`MinIO Console <minio-console>` using the AD/LDAP-managed user credentials. From the :guilabel:`User` section of the left navigation, select :guilabel:`Access Keys` followed by the :guilabel:`Create access keys +` button.
 
