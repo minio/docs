@@ -18,7 +18,7 @@ MinIO publishes the following Software Development Kits (SDK):
 4. :ref:`Java <java-sdk>`
 5. :ref:`JavaScript <javascript-sdk>`
 6. :ref:`Python <python-sdk>`
-7. :ref: `C++ <cpp-sdk>`
+7. :ref:`C++ <cpp-sdk>`
 
 .. _cpp-sdk:
 
