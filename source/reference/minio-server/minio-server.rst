@@ -2653,18 +2653,6 @@ variables.
    :mc-conf:`identity_ldap server_addr 
    <identity_ldap.server_addr>` configuration setting.
 
-.. envvar:: MINIO_IDENTITY_LDAP_STS_EXPIRY
-
-   *Optional*
-
-   .. include:: /includes/common-minio-external-auth.rst
-      :start-after: start-minio-ad-ldap-sts-expiry
-      :end-before: end-minio-ad-ldap-sts-expiry
-
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap sts_expiry 
-   <identity_ldap.sts_expiry>` configuration setting.
-
 .. envvar:: MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN
 
    *Required*
@@ -2712,18 +2700,6 @@ variables.
    This environment variable corresponds with the 
    :mc-conf:`identity_ldap user_dn_search_filter 
    <identity_ldap.user_dn_search_filter>` configuration setting.
-
-.. envvar:: MINIO_IDENTITY_LDAP_USERNAME_FORMAT
-
-   *Optional*
-
-   .. include:: /includes/common-minio-external-auth.rst
-      :start-after: start-minio-ad-ldap-username-format
-      :end-before: end-minio-ad-ldap-username-format
-
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap username_format 
-   <identity_ldap.username_format>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER
 

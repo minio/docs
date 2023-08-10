@@ -69,30 +69,13 @@ management of user identities. Configuring an external IDentity Provider (IDP)
 enables Single-Sign On (SSO) workflows, where applications authenticate against
 the external IDP before accessing MinIO.
 
+.. _minio-external-identity-management-ad-ldap-lookup-bind:
+
 Querying the Active Directory / LDAP Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO queries the configured Active Directory / LDAP server to verify the
-credentials specified by the application and optionally return a list of groups
-in which the user has membership. MinIO supports two modes for performing
-these queries:
-
-- :ref:`minio-external-identity-management-ad-ldap-lookup-bind` - Use a special
-  read-only account for querying the LDAP server.
-
-- :ref:`minio-external-identity-management-ad-ldap-username-bind` - Use the 
-  credentials specified by the application to login to the LDAP server. 
-
-MinIO recommends using Lookup-Bind mode as the preferred method for verifying
-AD/LDAP credentials. Username-Bind mode is a legacy method retained
-for backwards compatibility only.
-
-.. _minio-external-identity-management-ad-ldap-lookup-bind:
-
-Lookup-Bind Mode
-++++++++++++++++
-
-In Lookup-Bind mode, MinIO uses a read-only AD/LDAP account with the minimum privileges required to authenticate to the AD/LDAP server and perform user and group lookups.
+MinIO queries the configured Active Directory / LDAP server to verify the credentials specified by the application and optionally return a list of groups in which the user has membership.
+This process, called Lookup-Bind mode, uses an AD/LDAP user with minimal permissions, only sufficient to authenticate with the AD/LDAP server for user and group lookups.
 
 .. cond:: linux or container or macos or windows
 
@@ -110,7 +93,7 @@ In Lookup-Bind mode, MinIO uses a read-only AD/LDAP account with the minimum pri
 
          See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
          reference documentation for more information on these variables. The
-         :ref:`minio-authenticate-using-openid-generic` tutorial includes complete
+         :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
          instructions on setting these values.
 
       .. tab-item:: Configuration Setting
@@ -122,50 +105,8 @@ In Lookup-Bind mode, MinIO uses a read-only AD/LDAP account with the minimum pri
 
          See the :mc-conf:`identity_ldap` reference documentation for more
          information on these settings. The
-         :ref:`minio-authenticate-using-openid-generic` tutorial includes complete
+         :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
          instructions on setting these variables.
-
-Lookup-Bind is incompatible and mutually exclusive with
-:ref:`minio-external-identity-management-ad-ldap-username-bind`.
-
-.. _minio-external-identity-management-ad-ldap-username-bind:
-
-Username-Bind Mode
-++++++++++++++++++
-
-In Username-Bind mode, MinIO uses the AD/LDAP credentials provided by the client attempting authentication to login to the AD/LDAP server and perform and group lookups.
-
-.. cond:: k8s
-
-   The MinIO Operator Console does not support enabling Username-Bind mode.
-   MinIO generally discourages using Username-Bind over :ref:`minio-external-identity-management-ad-ldap-lookup-bind`.
-
-.. cond:: linux or container or macos or windows
-
-   Username-Bind mode is preserved for compatibility only. 
-   MinIO recommends using :ref:`minio-external-identity-management-ad-ldap-lookup-bind` wherever possible.
-
-   The following tabs provide a reference of the environment variables and
-   configuration settings required for enabling Username-Bind mode.
-
-   .. tab-set::
-      
-      .. tab-item:: Environment Variable
-
-         - :envvar:`MINIO_IDENTITY_LDAP_USERNAME_FORMAT`
-
-         See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
-         reference documentation for more information on this variable.
-
-      .. tab-item:: Configuration Setting
-
-         - :mc-conf:`identity_ldap username_format <identity_ldap.username_format>`
-
-         See the :mc-conf:`identity_ldap` reference documentation for more
-         information on this setting.
-
-Username-bind is incompatible and mutually exclusive with
-:ref:`minio-external-identity-management-ad-ldap-lookup-bind`.
 
 .. _minio-external-identity-management-ad-ldap-access-control:
 

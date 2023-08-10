@@ -167,20 +167,6 @@ Specify the hostname for the Active Directory / LDAP server. For example:
 
 .. end-minio-ad-ldap-server-addr
 
-.. start-minio-ad-ldap-sts-expiry
-
-Specify the duration for which the credentials are valid as ``<int><unit>``.
-Valid time units are as follows:
-
-- ``s`` - seconds.
-- ``m`` - minutes.
-- ``h`` - hours.
-- ``d`` - days
-
-The default is ``1h`` or 1 hour.
-
-.. end-minio-ad-ldap-sts-expiry
-
 .. start-minio-ad-ldap-lookup-bind-dn
 
 Specify the Distinguished Name (DN) for an AD/LDAP account MinIO uses when
@@ -225,26 +211,6 @@ username into the search string. For example:
    (userPrincipalName=%s)
 
 .. end-minio-ad-ldap-user-dn-search-filter
-
-.. start-minio-ad-ldap-username-format
-
-Specify a comma-separated list of Distinguished Name templates used for
-querying the AD/LDAP server. MinIO attempts to login to the AD/LDAP server
-by applying the user credentials specified by the authenticating client to
-each DN template. 
-
-Use the ``%s`` substitution character to insert the client-specified username
-into the search string. For example:
-
-.. code-block:: shell
-   :class: copyable
-
-   uid=%s,cn=miniousers,dc=myldapserver,dc=net,userPrincipalName=%s,cn=miniousers,dc=myldapserver,dc=net
-
-MinIO uses the *first* DN template that results in successful login to
-perform a group lookup for that user. 
-
-.. end-minio-ad-ldap-username-format
 
 .. start-minio-ad-ldap-group-search-filter
 

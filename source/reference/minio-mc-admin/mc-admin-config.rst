@@ -2412,30 +2412,6 @@ management using an Active Directory or LDAP service.
 
       Defaults to ``true`` or "enabled".
 
-   .. mc-conf:: sts_expiry
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-minio-external-auth.rst
-         :start-after: start-minio-ad-ldap-sts-expiry
-         :end-before: end-minio-ad-ldap-sts-expiry
-
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_STS_EXPIRY` environment variable.
-
-   .. mc-conf:: username_format
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-minio-external-auth.rst
-         :start-after: start-minio-ad-ldap-username-format
-         :end-before: end-minio-ad-ldap-username-format
-
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_USERNAME_FORMAT` environment variable.
-
    .. mc-conf:: group_search_filter
       :delimiter: " "
 
