@@ -18,43 +18,38 @@ MinIO publishes the following Software Development Kits (SDK):
 4. :ref:`Java <java-sdk>`
 5. :ref:`JavaScript <javascript-sdk>`
 6. :ref:`Python <python-sdk>`
+7. :ref:`C++ <cpp-sdk>`
+
+.. _cpp-sdk:
+
+C++ (``minio-cpp``)
+-------------------
 
 
-..
-  C++ repo does not have any releases yet. Once released, unblock this section and add to toctree and numbered list.
-  
-  .. _cpp-sdk:
+Reference
+  `MinIO C++ SDK Reference <https://minio-cpp.min.io/>`__
 
-  C++ (``minio-cpp``)
-  -------------------
+Install
+  - ``vcpkg``
 
-  Latest Version
-    |cpp-sdk-version|
+    .. code-block:: shell
+       :class: copyable
 
-  Reference
-    :doc:`MinIO C++ SDK Reference </developers/cpp/minio-cpp>`
+       vcpkg install minio-cpp
 
-  Install
-    - ``vcpkg``
+  - Source
              
-      .. code-block:: shell
-         :class: copyable
+    .. code-block:: shell
+       :class: copyable
 
-         vcpkg install minio-cpp
-
-    - Source
-             
-      .. code-block:: shell
-         :class: copyable
-
-         git clone https://github.com/minio/minio-cpp
-         cd minio-cpp
-         wget --quiet -O vcpkg-master.zip https://github.com/microsoft/vcpkg/archive/refs/heads/master.zip
-         unzip -qq vcpkg-master.zip
-         ./vcpkg-master/bootstrap-vcpkg.sh
-         ./vcpkg-master/vcpkg integrate install
-         cmake -B ./build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg-master/scripts/buildsystems/vcpkg.cmake
-         cmake --build ./build --config Debug  
+       git clone https://github.com/minio/minio-cpp
+       cd minio-cpp
+       wget --quiet -O vcpkg-master.zip https://github.com/microsoft/vcpkg/archive/refs/heads/master.zip
+       unzip -qq vcpkg-master.zip
+       ./vcpkg-master/bootstrap-vcpkg.sh
+       ./vcpkg-master/vcpkg integrate install
+       cmake -B ./build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg-master/scripts/buildsystems/vcpkg.cmake
+       cmake --build ./build --config Debug
 
 .. _dotnet-sdk:
 
