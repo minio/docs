@@ -113,17 +113,12 @@ If you run |KES| without tying it to the current shell session (e.g. with ``nohu
 MinIO requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
 Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
 
-The following command uses the ``kes key create`` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the MinIO backend.
+The following command uses the :mc-cmd:`mc admin kms key create` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the MinIO backend.
 
 .. code-block:: shell
    :class: copyable
-   :substitutions:
 
-   export KES_SERVER=https://127.0.0.1:7373
-   export KES_CLIENT_KEY=|miniocertpath|/minio-kes.key
-   export KES_CLIENT_CERT=|miniocertpath|/minio-kes.cert
-
-   kes key create -k encrypted-bucket-key
+   mc admin kms key create ALIAS KEYNAME
 
 .. end-kes-generate-key-desc
 
@@ -139,8 +134,7 @@ See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd`
    # Add these environment variables to the existing environment file
 
    MINIO_KMS_KES_ENDPOINT=https://HOSTNAME:7373
-   MINIO_KMS_KES_CERT_FILE=|miniocertpath|/minio-kes.cert
-   MINIO_KMS_KES_KEY_FILE=|miniocertpath|/minio-kes.key
+   MINIO_KMS_KES_API_KEY="kes:v1:ACTpAsNoaGf2Ow9o5gU8OmcaG6Af/VcZ1Mt7ysuKoBjv"
 
    # Allows validation of the KES Server Certificate (Self-Signed or Third-Party CA)
    # Change this path to the location of the KES CA Path
@@ -150,7 +144,7 @@ See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd`
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
    # Optional, defines the name for the KES server enclave to use.
-   MINIO_KMS_KES_ENCLAVE=<name>
+   # MINIO_KMS_KES_ENCLAVE=<name>
 
 Replace ``HOSTNAME`` with the IP address or hostname of the KES server.
 If the MinIO server host machines cannot resolve or reach the specified ``HOSTNAME``, the deployment may return errors or fail to start.
@@ -168,13 +162,10 @@ MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptograp
 MinIO uses the :envvar:`MINIO_KMS_KES_ENCLAVE` key to define the name of the KES enclave to use.
 
 - Replace ``<name>`` with the name of the :term:`enclave` to use.
-- If not defined, MinIO does not send any enclave information.
+  If not defined, MinIO does not send any enclave information.
   This may result in using the default enclave for stateful KES servers.
 
   A KES :term:`enclave` provides an isolated space for its associated keys separate from other enclaves on a stateful KES server.
-
-The ``minio-kes`` certificates enable mTLS between the MinIO deployment and the KES server *only*.
-They do not otherwise enable TLS for other client connections to MinIO.
 
 .. end-kes-configuration-minio-desc
 

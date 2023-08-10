@@ -18,18 +18,11 @@ Server-Side Object Encryption with Hashicorp Vault Root KMS
 .. |rootkms|       replace:: `Hashicorp Vault <https://vaultproject.io/>`__
 .. |rootkms-short| replace:: Vault
 
-MinIO Server-Side Encryption (SSE) protects objects as part of write operations, allowing clients to take advantage of server processing power to secure objects at the storage layer (encryption-at-rest). 
-SSE also provides key functionality to regulatory and compliance requirements around secure locking and erasure.
-
-MinIO SSE uses |KES-git| and an external root Key Management Service (KMS) for performing secured cryptographic operations at scale. 
-The root KMS provides stateful and secured storage of External Keys (EK) while |KES| is stateless and derives additional cryptographic keys from the root-managed |EK|. 
-
 .. Conditionals to handle the slight divergences in procedures between platforms.
 
 .. cond:: linux
 
-   This procedure provides guidance for deploying and configuring KES at scale for a supporting |SSE| on a production MinIO deployment.
-   You can also use this procedure for deploying to local environments for testing and evaluation.
+   This procedure provides guidance for deploying MinIO configured to use KES and enable :ref:`Server Side Encryption <minio-sse-data-encryption>`.
 
    As part of this procedure, you will:
 
@@ -42,8 +35,6 @@ The root KMS provides stateful and secured storage of External Keys (EK) while |
       Defer to the :ref:`Deploy Distributed MinIO <minio-mnmd>` tutorial for guidance on production-ready MinIO deployments.
 
    #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`
-
-   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with Hashicorp Vault.
 
 .. cond:: macos or windows
 
@@ -239,8 +230,6 @@ You can use the following steps to enable AppRole authentication and create the 
    .. |minioconfigpath|    replace:: /opt/minio/config
    .. |miniodatapath|      replace:: ~/minio
 
-   .. include:: /includes/linux/steps-configure-minio-kes-hashicorp-quick.rst
-
    .. include:: /includes/linux/steps-configure-minio-kes-hashicorp.rst
 
 .. cond:: macos
@@ -296,7 +285,8 @@ The following section describes each of the |KES-git| configuration settings for
       .. code-block:: yaml
 
          address: 0.0.0.0:7373
-         root: ${ROOT_IDENTITY}
+         admin: 
+           identity: ${ROOT_IDENTITY}
 
          tls:
            key: kes-server.key
@@ -309,7 +299,7 @@ The following section describes each of the |KES-git| configuration settings for
              - /v1/key/generate/*
              - /v1/key/decrypt/*
              - /v1/key/bulk/decrypt
-             - /v1/key/list
+             - /v1/key/list/*
              - /v1/status
              - /v1/metrics
              - /v1/log/audit

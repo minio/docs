@@ -16,11 +16,16 @@ You must modify this YAML to reflect your deployment environment.
      identity: disabled
 
    # Specify the TLS keys generated in the previous step here
-   # For production environments, use keys signed by a known and trusted
-   # Certificate Authority (CA).
+   # For production environments, use keys signed by a known and trusted Certificate Authority (CA).
    tls:
      key:  |kesconfigcertpath|kes-server.key
      cert: |kesconfigcertpath|kes-server.cert
+
+     # Specify the path to CAs used by KES for validating client certificates
+     # This can alternatively be a single CA
+     # KES uses these CAs in addition to the system trust store for validating client certificates.
+
+     ca: |kesconfigcertpath|CAs/
 
    # Sets access policies for KES
    # The `minio` policy grants access to the listed APIs.
@@ -31,15 +36,13 @@ You must modify this YAML to reflect your deployment environment.
        - /v1/key/generate/* # e.g. '/minio-'
        - /v1/key/decrypt/*
        - /v1/key/bulk/decrypt
-       - /v1/key/list
+       - /v1/key/list/*
        - /v1/status
        - /v1/metrics
        - /v1/log/audit
        - /v1/log/error
        identities:
-       - MINIO_IDENTITY_HASH # Replace with the output of 'kes identity of minio-kes.cert'
-                                # In production environments, each client connecting to KES must
-                                # Have their TLS hash listed under at least one `policy`.
+       - MINIO_API_KEY_HASH # Replace with the hash output returned from kes identity new 
 
    # Specify the connection information for the Vault server.
    # The endpoint should be resolvable from the host.

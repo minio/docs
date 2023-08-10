@@ -75,7 +75,7 @@ extlinks = {
     'gcs-docs'        : ('https://cloud.google.com/storage/docs/%s', None),
     'aks-docs'        : ('https://learn.microsoft.com/en-us/azure/aks/%s', None),
     'azure-docs'      : ('https://learn.microsoft.com/en-us/azure/%s', None),
-
+    'kes-docs'        : ('https://min.io/docs/kes/%s', None),
 }
 
 suppress_warnings = [

@@ -25,7 +25,7 @@ For more granular controls, deploy a dedicated load balancer to manage connectio
 
 .. start-kes-service-file-desc
 
-Create the ``/etc/systemd/system/kes.service`` file on all KES hosts:
+Create the ``/lib/systemd/system/kes.service`` file on all KES hosts:
 
 .. literalinclude:: /extra/kes.service
    :language: shell
@@ -88,41 +88,26 @@ For existing MinIO deployments, run the following command on each MinIO host to 
 
 .. start-kes-generate-kes-certs-prod-desc
 
-Enabling connectivity between MinIO and KES requires at minimum one TLS certificate for performing mutual TLS (mTLS) authentication.
+KES requires TLS connectivity for all client connections, including those originating from MinIO.
+See :ref:`minio-tls` for more information on enabling TLS for the MinIO deployment.
+
 Depending on your Vault configuration, you may also need to create a dedicated set of TLS certificates for KES to connect and authenticate to Vault.
+
 Defer to your organizations best practices around generating production-ready TLS certificates.
 
-Place the certificates and corresponding private keys an appropriate directory such that the MinIO and KES service users can access and read their contents.
-The following example structure uses the folder hierarchy suggested in the beginning of this procedure:
+Place the certificates and corresponding private keys a directory the KES service user can access and read their contents.
+For example:
 
-.. tab-set::
+.. code-block:: shell
+   :substitutions:
 
-   .. tab-item:: KES Hosts
+   -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.cert
+   -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.key
 
-      .. code-block:: shell
-         :substitutions:
+   # If the Vault certs are self-signed or use a non-global CA
+   # Include those CA certs as well
 
-         -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.cert
-         -rw-r--r-- 1 kes:kes |kescertpath|/kes-server.key
-
-         # If the Vault certs are self-signed or use a non-global CA
-         # Include those CA certs as well
-
-         -rw-r--r-- 1 kes:kes |kescertpath|/vault-CA.cert
-
-   .. tab-item:: MinIO Hosts
-
-      .. code-block:: shell
-         :substitutions:
-
-         -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/minio-kes.cert
-         -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/minio-kes.key
-
-         # If KES certs are self-signed or use a non-global CA
-         # Include the CA certs as well
-         -rw-r--r-- 1 minio-user:minio-user |miniocertpath|/kes-server.cert
-
-The general strategy for cert management is to ensure that each process (MinIO, KES, and Vault) have their own mTLS certificates *and* the Certificate Authority (CA) used to sign each client certificate.
+   -rw-r--r-- 1 kes:kes |kescertpath|/vault-CA.cert
 
 .. end-kes-generate-kes-certs-prod-desc
 
@@ -135,12 +120,7 @@ The following command uses the ``kes key create`` command to add a new External 
 
 .. code-block:: shell
    :class: copyable
-   :substitutions:
 
-   export KES_SERVER=https://127.0.0.1:7373
-   export KES_CLIENT_KEY=|miniocertpath|/minio-kes.key
-   export KES_CLIENT_CERT=|miniocertpath|/minio-kes.cert
-
-   kes key create -k encrypted-bucket-key
+   mc admin kms key create ALIAS KEYNAME
 
 .. end-kes-generate-key-desc

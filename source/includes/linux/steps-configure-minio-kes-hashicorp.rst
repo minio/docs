@@ -1,5 +1,5 @@
-Enable Server-Side Encryption using Hashicorp Vault in Production Environments
-------------------------------------------------------------------------------
+Procedure
+---------
 
 This procedure provides instructions for configuring and enabling Server-Side Encryption using Hashicorp Vault in production environments. 
 Specifically, this procedure assumes the following:
@@ -7,33 +7,6 @@ Specifically, this procedure assumes the following:
 - An existing production-grade Vault deployment
 - One or more hosts for deploying KES
 - One or more hosts for a new or existing MinIO deployment
-
-.. admonition:: Set Up Folder Hierarchy
-   :class: note
-
-   Create the following folders on the KES and MinIO host machines if they do not already exist:
-
-   .. tab-set::
-
-      .. tab-item:: KES Hosts
-
-         .. code-block:: shell
-            :class: copyable
-            :substitutions:
-
-            mkdir -P |kescertpath|
-            mkdir -P |kesconfigpath|
-
-      .. tab-item:: MinIO Hosts
-
-         .. code-block:: shell
-            :class: copyable
-            :substitutions:
-
-            mkdir -P |miniocertpath|
-
-   This procedure uses these paths in the following steps. 
-   If you use different paths, make the necessary modifications for each step to reflect those changes
 
 1) Download KES and Create the Service File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,8 +25,8 @@ Specifically, this procedure assumes the following:
          :start-after: start-kes-service-file-desc
          :end-before: end-kes-service-file-desc
 
-2) Generate TLS Certificates for KES and MinIO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2) Generate TLS Certificates for KES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/linux/common-minio-kes.rst
    :start-after: start-kes-generate-kes-certs-prod-desc
@@ -63,7 +36,21 @@ Depending on your Vault configuration, you may also need to specify the CA used 
 See the `Hashicorp Vault Configuration Docs <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
 Defer to the client documentation for instructions on trusting a third-party CA.
 
-3) Create the KES and MinIO Configurations
+3) Generate a KES API Key for use by MinIO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Starting with KES version :minio-git:`2023-02-15T14-54-37Z <kes/releases/tag/2023-02-15T14-54-37Z>`, you can generate an API key to use for authenticating to the KES server.
+
+Use the :kes-docs:`kes identity new <cli/kes-identity/new>` command to generate a new API key for use by the MinIO Server:
+
+.. code-block:: shell
+   :class: copyable
+
+   kes identity new
+
+The output includes both the API Key for use with MinIO and the Identity hash for use with the :kes-docs:`KES Policy configuration <tutorials/configuration/#policy-configuration>`.
+
+4) Create the KES and MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. important::
@@ -87,15 +74,14 @@ Defer to the client documentation for instructions on trusting a third-party CA.
          :start-after: start-kes-configuration-hashicorp-vault-desc
          :end-before: end-kes-configuration-hashicorp-vault-desc
 
-      - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
+      - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the API Key generated in the previous step.
 
-        The following command computes the necessary hash:
+        The following command recomputes the necessary hash from the API key:
 
         .. code-block:: shell
            :class: copyable
-           :substitutions:
 
-           kes identity of |miniocertpath|/minio-kes.cert
+           kes identity of kes:v1:KEY/KEY
 
       - Replace the ``keystore.vault.endpoint`` with the hostname of the Vault server(s).
 
@@ -107,16 +93,16 @@ Defer to the client documentation for instructions on trusting a third-party CA.
 
    b. Configure the MinIO Environment File
 
-      Modify the MinIO Server environment file for all hosts in the target deployment to include the following environment variables.
-
-      MinIO defaults to expecting this file at ``/etc/default/minio``.
-      If you modified your deployment to use a different location for the environment file, modify the file at that location.
+      Create or modify the MinIO Server environment file for all hosts in the target deployment to include the following environment variables:
 
       .. include:: /includes/common/common-minio-kes.rst
          :start-after: start-kes-configuration-minio-desc
          :end-before: end-kes-configuration-minio-desc
 
-4) Start KES and MinIO
+      MinIO defaults to expecting this file at ``/etc/default/minio``.
+      If you modified your deployment to use a different location for the environment file, modify the file at that location.
+
+5) Start KES and MinIO
 ~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes-hashicorp.rst
