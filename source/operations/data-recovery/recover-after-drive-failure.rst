@@ -77,17 +77,23 @@ For example, consider
 
    $ cat /etc/fstab
 
-     # <file system>  <mount point>  <type>  <options>                <dump>  <pass>
-     LABEL=DRIVE1     /mnt/drive1    xfs     defaults,noatime,nofail  0       2
-     LABEL=DRIVE2     /mnt/drive2    xfs     defaults,noatime,nofail  0       2
-     LABEL=DRIVE3     /mnt/drive3    xfs     defaults,noatime,nofail  0       2
-     LABEL=DRIVE4     /mnt/drive4    xfs     defaults,noatime,nofail  0       2
+     # <file system>  <mount point>  <type>  <options>         <dump>  <pass>
+     LABEL=DRIVE1     /mnt/drive1    xfs     defaults,noatime  0       2
+     LABEL=DRIVE2     /mnt/drive2    xfs     defaults,noatime  0       2
+     LABEL=DRIVE3     /mnt/drive3    xfs     defaults,noatime  0       2
+     LABEL=DRIVE4     /mnt/drive4    xfs     defaults,noatime  0       2
+
+.. note:: 
+
+   For certain cloud environments (Amazon i3, for example), MinIO recommends also setting the ``nofail`` option in ``/etc/fstab``.
+   Cloud instances that do not configure this option may become inaccessible.
+   Setting ``nofail`` in these situations allows continued access to the instance to allow you to rectify the mount points.
 
 Given the previous example command, no changes are required to 
 ``fstab`` since the replacement drive at ``/mnt/drive1`` uses the same
 label ``DRIVE1`` as the failed drive.
 
-4) Remount the Replaced Drive(s)
+1) Remount the Replaced Drive(s)
 --------------------------------
 
 Use ``mount -a`` to remount the drives unmounted at the beginning of this

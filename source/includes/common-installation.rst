@@ -189,11 +189,18 @@ For example:
 
    $ nano /etc/fstab
 
-     # <file system>  <mount point>  <type>  <options>                <dump>  <pass>
-     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime,nofail  0       2
-     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime,nofail  0       2
-     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime,nofail  0       2
-     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime,nofail  0       2
+     # <file system>  <mount point>  <type>  <options>         <dump>  <pass>
+     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime  0       2
+     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime  0       2
+     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
+     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
+
+.. note:: 
+
+   For certain cloud environments (Amazon i3, for example), MinIO recommends also setting the ``nofail`` option in ``/etc/fstab``.
+   Cloud instances that do not configure this option may become inaccessible.
+   Setting ``nofail`` in these situations allows continued access to the instance to allow you to rectify the mount points.
+
 
 You can then specify the entire range of drives using the expansion notation ``/mnt/disk{1...4}``. 
 If you want to use a specific subfolder on each drive, specify it as ``/mnt/disk{1...4}/minio``.
@@ -242,11 +249,11 @@ For example:
 
    $ nano /etc/fstab
 
-     # <file system>  <mount point>  <type>  <options>                <dump>  <pass>
-     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime,nofail  0       2
-     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime,nofail  0       2
-     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime,nofail  0       2
-     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime.nofail  0       2
+     # <file system>  <mount point>  <type>  <options>         <dump>  <pass>
+     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime  0       2
+     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime  0       2
+     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
+     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
 
 You can then specify the entire range of drives using the expansion notation
 ``/mnt/disk{1...4}``. If you want to use a specific subfolder on each drive,
@@ -255,6 +262,12 @@ specify it as ``/mnt/disk{1...4}/minio``.
 MinIO **does not** support arbitrary migration of a drive with existing MinIO
 data to a new mount position, whether intentional or as the result of OS-level
 behavior.
+
+.. note:: 
+
+   For certain cloud environments (Amazon i3, for example), MinIO recommends also setting the ``nofail`` option in ``/etc/fstab``.
+   Cloud instances that do not configure this option may become inaccessible.
+   Setting ``nofail`` in these situations allows continued access to the instance to allow you to rectify the mount points.
 
 .. end-local-jbod-desc
 
