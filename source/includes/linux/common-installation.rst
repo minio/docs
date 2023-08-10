@@ -212,8 +212,10 @@ For binary installations, create this file manually on all MinIO hosts.
 
 .. note::
    
-   ``systemd`` checks the ``/etc/systemd/...`` path before checking the ``/usr/lib/systemd/...`` path.
-   Make sure the file only exists at ``/usr/lib/systemd/system/minio.service`` path.
+   ``systemd`` checks the ``/etc/systemd/...`` path before checking the ``/usr/lib/systemd/...`` path and uses the first file it finds.
+   To avoid conflicting or unexpected configuration options, check that the file only exists at the ``/usr/lib/systemd/system/minio.service`` path.
+
+   Refer to the `man page for systemd.unit <https://www.man7.org/linux/man-pages/man5/systemd.unit.5.html>`__ for details on the file path search order.
     
 .. code-block:: shell
    :class: copyable

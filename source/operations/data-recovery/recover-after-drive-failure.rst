@@ -85,9 +85,12 @@ For example, consider
 
 .. note:: 
 
-   For certain cloud environments (Amazon i3, for example), MinIO recommends also setting the ``nofail`` option in ``/etc/fstab``.
-   Cloud instances that do not configure this option may become inaccessible.
-   Setting ``nofail`` in these situations allows continued access to the instance to allow you to rectify the mount points.
+   Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
+   For example, an AWS ECS instances with mounted persistent EBS volumes may fail to boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
+
+   You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
+   
+   You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both MinIO an the OS from responding to those errors in a normal fashion.
 
 Given the previous example command, no changes are required to 
 ``fstab`` since the replacement drive at ``/mnt/drive1`` uses the same
