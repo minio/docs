@@ -277,6 +277,47 @@ Defaults to ``off``
 
 .. end-minio-ad-ldap-server-starttls
 
+.. start-minio-ad-ldap-srv_record_name
+
+Specify the appropriate value to enable MinIO to select an AD/LDAP server using a `DNS SRV record <https://ldap.com/dns-srv-records-for-ldap>`__ request.
+
+When enabled, MinIO selects an AD/LDAP server by:
+
+- Constructing the target SRV record name following standard naming conventions.
+- Requesting a list of available AD/LDAP servers.
+- Choosing an appropriate target based on priority and weight.
+
+The configuration examples below presume the AD/LDAP server address is set to ``example.com`` and the SRV record protocol is ``_tcp``.
+
+For SRV record names beginning with ``_ldap``, specify ``ldap``.
+The constructed DNS SRV record name resembles the following:
+
+.. code-block:: shell
+
+   _ldap._tcp.example.com
+
+For SRV record names with beginning with ``_ldaps``, specify ``ldaps``.
+The constructed	DNS SRV	record name resembles the following:
+
+.. code-block:: shell
+
+   _ldaps._tcp.example.com
+
+If your DNS SRV record name uses alternate service or protocol names, specify ``on`` and provide the full record name as your LDAP server address.
+Example: ``_ldapserver._specialtcp.example.com``
+
+For more about DNS SRV records, see `DNS SRV Records for LDAP <https://ldap.com/dns-srv-records-for-ldap>`__.
+ 
+.. admonition:: Server address for DNS SRV record configurations
+   :class: important
+
+   The specified server name **must not** include a port number.
+   This is different from a standard AD/LDAP configuration, where the port number is required.
+
+   See :mc-conf:`~identity_ldap.server_addr` or :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR` for more about configuring an AD/LDAP server address.
+
+.. end-minio-ad-ldap-srv_record_name
+
 .. start-minio-ad-ldap-comment
 
 Specify a comment to associate to the AD/LDAP configuration.

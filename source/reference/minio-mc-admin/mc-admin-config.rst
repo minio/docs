@@ -2308,7 +2308,7 @@ management using an Active Directory or LDAP service.
 
       MinIO recommends using the :mc:`mc idp ldap` commands for LDAP management operations.
       These commands offer better validation and additional features, while providing the same settings as the :mc-conf:`identity_ldap` configuration key.
-      See :ref:`minio-external-identity-management-ad-ldap` for a tutorial on using :mc:`mc idp ldap`.
+      See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using :mc:`mc idp ldap`.
 
       The :mc-conf:`identity_ldap` configuration key remains available for existing scripts and other tools.
 
@@ -2471,6 +2471,18 @@ management using an Active Directory or LDAP service.
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_SERVER_STARTTLS` environment variable.
+
+   .. mc-conf:: srv_record_name
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-srv_record_name
+         :end-before: end-minio-ad-ldap-srv_record_name
+
+      This configuration setting corresponds with the
+      :envvar:`MINIO_IDENTITY_LDAP_SRV_RECORD_NAME` environment variable.
 
    .. mc-conf:: comment
       :delimiter: " "

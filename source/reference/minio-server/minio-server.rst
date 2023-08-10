@@ -2638,7 +2638,7 @@ Active Directory / LDAP Identity Management
 
 The following section documents environment variables for enabling
 external identity management using an Active Directory or LDAP service.
-See :ref:`minio-external-identity-management-ad-ldap` for a tutorial on using these
+See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using these
 variables.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SERVER_ADDR
@@ -2760,6 +2760,17 @@ variables.
    This environment variable corresponds with the 
    :mc-conf:`identity_ldap server_starttls 
    <identity_ldap.server_starttls>` configuration setting.
+
+.. envvar:: MINIO_IDENTITY_LDAP_SRV_RECORD_NAME
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-ad-ldap-srv_record_name
+      :end-before: end-minio-ad-ldap-srv_record_name
+
+   This environment variable corresponds with the
+   :mc-conf:`identity_ldap srv_record_name <identity_ldap.srv_record_name>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_LDAP_COMMENT
 
