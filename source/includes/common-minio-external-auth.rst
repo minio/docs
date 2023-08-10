@@ -163,7 +163,7 @@ provider configuration.
 
 Specify the hostname for the Active Directory / LDAP server. For example:
 
-``https://ldapserver.com:636``
+``ldapserver.com:636``
 
 .. end-minio-ad-ldap-server-addr
 
@@ -317,6 +317,23 @@ Specify a comment to associate to the AD/LDAP configuration.
 
 .. end-minio-ad-ldap-comment
 
+.. start-minio-ad-ldap-console-enable
+
+#. Log in to the MinIO Console as either the :ref:`root <minio-users-root>` user or a MinIO user with the  :userpolicy:`consoleAdmin` policy.
+#. In the :guilabel:`Identity` section, select :guilabel:`LDAP` and then :guilabel:`Edit Configuration` to configure an Active Directory or LDAP server.
+   The minimum required settings are:
+
+   - Server Address
+   - Lookup Bind DN
+   - Lookup Bind Password
+   - User DN Search Base
+   - User DN Search Filter
+
+   Not all configuration options are available in the MinIO Console.
+   For additional settings, use :mc:`mc idp ldap` or :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
+ 
+.. end-minio-ad-ldap-console-enable
+
 .. start-minio-identity-management-plugin-url
 
 The webhook endpoint for the external identity management service (``https://authservice.example.net:8080/auth``).
@@ -351,3 +368,4 @@ If omitted, MinIO automatically generates the ID and prints the full ARN to the 
 Specify a comment to associate to the identity configuration.
 
 .. end-minio-identity-management-comment
+

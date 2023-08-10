@@ -2299,9 +2299,18 @@ Active Directory / LDAP Identity Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following section documents settings for enabling external identity 
-management using an Active Directory or LDAP service. See 
-:ref:`minio-external-identity-management-ad-ldap` for a tutorial on using these 
-configuration settings.
+management using an Active Directory or LDAP service.
+
+.. admonition:: :mc:`mc idp ldap` commands are preferred
+   :class: note
+
+   .. versionadded:: RELEASE.2023-05-26T23-31-54Z
+
+      MinIO recommends using the :mc:`mc idp ldap` commands for LDAP management operations.
+      These commands offer better validation and additional features, while providing the same settings as the :mc-conf:`identity_ldap` configuration key.
+      See :ref:`minio-external-identity-management-ad-ldap` for a tutorial on using :mc:`mc idp ldap`.
+
+      The :mc-conf:`identity_ldap` configuration key remains available for existing scripts and other tools.
 
 .. mc-conf:: identity_ldap
 
@@ -2309,7 +2318,7 @@ configuration settings.
    :ref:`external identity management using Active Directory or LDAP 
    <minio-external-identity-management-ad-ldap>`.
 
-   Use the :mc-cmd:`mc admin config set` to set or update the 
+   Use the :mc-cmd:`mc admin config set` command to set or update the 
    AD/LDAP configuration. The following arguments are *required*:
 
    - :mc-conf:`~identity_ldap.server_addr`
@@ -2323,7 +2332,7 @@ configuration settings.
 
       mc admin config set identity_ldap \
          enabled="true" \
-         server_addr="https://ad-ldap.example.net/" \
+         server_addr="ad-ldap.example.net/" \
          lookup_bind_dn="cn=miniolookupuser,dc=example,dc=net" \
          lookup_bind_dn_password="userpassword" \
          user_dn_search_base_dn="dc=example,dc=net" \
