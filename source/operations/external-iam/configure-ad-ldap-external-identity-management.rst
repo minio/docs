@@ -193,7 +193,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
             export MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER="(&(objectCategory=user)(sAMAccountName=%s))"
             export MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD="xxxxxxxxx"
             export MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER="(&(objectClass=group)(member=%d))"
-            export MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN="ou=MinIO Users,dc=example,dc=net
+            export MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN="ou=MinIO Users,dc=example,dc=net"
             export MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY="off"
             export MINIO_IDENTITY_LDAP_SERVER_INSECURE="off"
             export MINIO_IDENTITY_LDAP_SERVER_STARTTLS="off"
