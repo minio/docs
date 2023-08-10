@@ -2475,6 +2475,8 @@ management using an Active Directory or LDAP service.
    .. mc-conf:: srv_record_name
       :delimiter: " "
 
+      .. versionadded:: RELEASE.2022-12-12T19-27-27Z
+
       *Optional*
 
       .. include:: /includes/common-minio-external-auth.rst

@@ -2763,6 +2763,8 @@ variables.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SRV_RECORD_NAME
 
+   .. versionadded:: RELEASE.2022-12-12T19-27-27Z
+
    *Optional*
 
    .. include:: /includes/common-minio-external-auth.rst
