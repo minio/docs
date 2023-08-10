@@ -25,8 +25,6 @@ MinIO publishes the following Software Development Kits (SDK):
 C++ (``minio-cpp``)
 -------------------
 
-Latest Version
-  |cpp-sdk-version|
 
 Reference
   `MinIO C++ SDK Reference <https://minio-cpp.min.io/>`__
