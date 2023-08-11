@@ -81,13 +81,13 @@ You must explicitly assign MinIO policies to a given user or group Distinguished
 
 The following example assumes an existing :ref:`alias <alias>` configured for the MinIO Tenant.
 
-Use the :mc:`mc admin policy attach` command to assign a user or group DN to an existing MinIO Policy:
+Use the :mc-cmd:`mc idp ldap policy attach` command to assign a user or group DN to an existing MinIO Policy:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin policy attach minio-tenant POLICY user='uid=primary,cn=applications,dc=domain,dc=com'
-   mc admin policy attach minio-tenant POLICY group='cn=applications,ou=groups,dc=domain,dc=com'
+   mc idp ldap policy attach minio-tenant POLICY user='uid=primary,cn=applications,dc=domain,dc=com'
+   mc idp ldap policy attach minio-tenant POLICY group='cn=applications,ou=groups,dc=domain,dc=com'
 
 Replace ``POLICY`` with the name of the MinIO policy to assign to the user or group DN.
 

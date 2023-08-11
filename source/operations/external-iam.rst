@@ -117,7 +117,7 @@ MinIO uses :ref:`Policy Based Access Control (PBAC) <minio-access-management>` t
 When using an Active Directory/LDAP server for identity management (authentication), MinIO maintains control over access (authorization) through PBAC. 
 
 When a user successfully authenticates to MinIO using their AD/LDAP credentials, MinIO searches for all :ref:`policies <minio-policy>` which are explicitly associated to that user's Distinguished Name (DN). 
-Specifically, the policy must be assigned to a user with a matching DN using the :mc:`mc admin policy attach` command. 
+Specifically, the policy must be assigned to a user with a matching DN using the :mc-cmd:`mc idp ldap policy attach` command. 
 
 MinIO also supports querying for the user's AD/LDAP group membership. 
 MinIO attempts to match existing policies to the DN for each of the user's groups. 
@@ -127,7 +127,7 @@ See :ref:`minio-external-identity-management-ad-ldap-access-control-group-lookup
 MinIO uses deny-by-default behavior where a user with no explicitly assigned or group-inherited policies cannot access any resource on the MinIO deployment.
 
 MinIO provides :ref:`built-in policies <minio-policy-built-in>` for basic access control.
-You can create new policies using the :mc:`mc admin policy` command.
+You can create new policies using the :mc:`mc admin policy create` command.
 
 .. _minio-external-identity-management-ad-ldap-access-control-group-lookup:
 

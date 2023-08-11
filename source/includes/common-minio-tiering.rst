@@ -74,9 +74,9 @@ secret key as per your organizations best practices for password generation.
    :class: copyable
 
    wget -O - https://min.io/docs/minio/linux/examples/LifecycleManagementAdmin.json | \
-   mc admin policy add Alpha LifecycleAdminPolicy /dev/stdin
-   mc admin user add Alpha alphaLifecycleAdmin LongRandomSecretKey
-   mc admin policy set Alpha LifecycleAdminPolicy user=alphaLifecycleAdmin
+   mc admin policy create Alpha LifecycleAdminPolicy /dev/stdin
+   mc admin user create Alpha alphaLifecycleAdmin LongRandomSecretKey
+   mc admin policy attach Alpha LifecycleAdminPolicy --user=alphaLifecycleAdmin
 
 This example assumes that the specified
 aliases have the necessary permissions for creating policies and users
