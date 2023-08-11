@@ -93,9 +93,9 @@ See :ref:`minio-tls` for more information on enabling TLS for the MinIO deployme
 
 Depending on your Vault configuration, you may also need to create a dedicated set of TLS certificates for KES to connect and authenticate to Vault.
 
-Defer to your organizations best practices around generating production-ready TLS certificates.
+Defer to your organization's best practices around generating production-ready TLS certificates.
 
-Place the certificates and corresponding private keys a directory the KES service user can access and read their contents.
+Place the certificates and corresponding private keys in a directory that the KES service user has permissions to access and read the directory's contents.
 For example:
 
 .. code-block:: shell
