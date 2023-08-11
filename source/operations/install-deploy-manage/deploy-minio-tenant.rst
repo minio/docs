@@ -33,10 +33,13 @@ Deploy a MinIO Tenant
    :class: no-scaled-link
    :alt: MinIO Operator Console
 
-While MinIO Operator can supports Single-Node or Single-Drive configuration, MinIO cannot guarantee technical support for deployments using that configuration.
-MinIO only supports deployments following our production-ready guidelines where the Distributed MinIO Topology is preferred.
 
-You can use basic Kubernetes YAML resource definitions to deploy Single-Node Single-Drive and Single-Node Multi-Drive topologies for local testing and evaluation as necessary.
+The MinIO Operator Console is designed with deploying multi-node distributed MinIO Deployments.
+
+Deploying Single-Node topologies requires additional configurations not covered in this documentation.
+You can alternatively use a simple Kubernetes YAML object to describe a Single-Node topology for local testing and evaluation as necessary.
+
+MinIO does not recommend nor support single-node deployment topologies for production environments.
 
 The Operator Console provides a rich user interface for deploying and managing MinIO Tenants on Kubernetes infrastructure. 
 Installing the MinIO :ref:`Kubernetes Operator <deploy-operator-kubernetes>` automatically installs and configures the Operator Console.
