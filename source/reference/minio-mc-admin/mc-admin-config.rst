@@ -2308,7 +2308,7 @@ management using an Active Directory or LDAP service.
 
       MinIO recommends using the :mc:`mc idp ldap` commands for LDAP management operations.
       These commands offer better validation and additional features, while providing the same settings as the :mc-conf:`identity_ldap` configuration key.
-      See :ref:`minio-external-identity-management-ad-ldap` for a tutorial on using :mc:`mc idp ldap`.
+      See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using :mc:`mc idp ldap`.
 
       The :mc-conf:`identity_ldap` configuration key remains available for existing scripts and other tools.
 
@@ -2412,30 +2412,6 @@ management using an Active Directory or LDAP service.
 
       Defaults to ``true`` or "enabled".
 
-   .. mc-conf:: sts_expiry
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-minio-external-auth.rst
-         :start-after: start-minio-ad-ldap-sts-expiry
-         :end-before: end-minio-ad-ldap-sts-expiry
-
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_STS_EXPIRY` environment variable.
-
-   .. mc-conf:: username_format
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-minio-external-auth.rst
-         :start-after: start-minio-ad-ldap-username-format
-         :end-before: end-minio-ad-ldap-username-format
-
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_USERNAME_FORMAT` environment variable.
-
    .. mc-conf:: group_search_filter
       :delimiter: " "
 
@@ -2495,6 +2471,20 @@ management using an Active Directory or LDAP service.
 
       This configuration setting corresponds with the 
       :envvar:`MINIO_IDENTITY_LDAP_SERVER_STARTTLS` environment variable.
+
+   .. mc-conf:: srv_record_name
+      :delimiter: " "
+
+      .. versionadded:: RELEASE.2022-12-12T19-27-27Z
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-ad-ldap-srv_record_name
+         :end-before: end-minio-ad-ldap-srv_record_name
+
+      This configuration setting corresponds with the
+      :envvar:`MINIO_IDENTITY_LDAP_SRV_RECORD_NAME` environment variable.
 
    .. mc-conf:: comment
       :delimiter: " "

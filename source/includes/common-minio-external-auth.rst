@@ -167,20 +167,6 @@ Specify the hostname for the Active Directory / LDAP server. For example:
 
 .. end-minio-ad-ldap-server-addr
 
-.. start-minio-ad-ldap-sts-expiry
-
-Specify the duration for which the credentials are valid as ``<int><unit>``.
-Valid time units are as follows:
-
-- ``s`` - seconds.
-- ``m`` - minutes.
-- ``h`` - hours.
-- ``d`` - days
-
-The default is ``1h`` or 1 hour.
-
-.. end-minio-ad-ldap-sts-expiry
-
 .. start-minio-ad-ldap-lookup-bind-dn
 
 Specify the Distinguished Name (DN) for an AD/LDAP account MinIO uses when
@@ -225,26 +211,6 @@ username into the search string. For example:
    (userPrincipalName=%s)
 
 .. end-minio-ad-ldap-user-dn-search-filter
-
-.. start-minio-ad-ldap-username-format
-
-Specify a comma-separated list of Distinguished Name templates used for
-querying the AD/LDAP server. MinIO attempts to login to the AD/LDAP server
-by applying the user credentials specified by the authenticating client to
-each DN template. 
-
-Use the ``%s`` substitution character to insert the client-specified username
-into the search string. For example:
-
-.. code-block:: shell
-   :class: copyable
-
-   uid=%s,cn=miniousers,dc=myldapserver,dc=net,userPrincipalName=%s,cn=miniousers,dc=myldapserver,dc=net
-
-MinIO uses the *first* DN template that results in successful login to
-perform a group lookup for that user. 
-
-.. end-minio-ad-ldap-username-format
 
 .. start-minio-ad-ldap-group-search-filter
 
@@ -310,6 +276,47 @@ Specify ``on`` to enable
 Defaults to ``off``
 
 .. end-minio-ad-ldap-server-starttls
+
+.. start-minio-ad-ldap-srv_record_name
+
+Specify the appropriate value to enable MinIO to select an AD/LDAP server using a `DNS SRV record <https://ldap.com/dns-srv-records-for-ldap>`__ request.
+
+When enabled, MinIO selects an AD/LDAP server by:
+
+- Constructing the target SRV record name following standard naming conventions.
+- Requesting a list of available AD/LDAP servers.
+- Choosing an appropriate target based on priority and weight.
+
+The configuration examples below presume the AD/LDAP server address is set to ``example.com`` and the SRV record protocol is ``_tcp``.
+
+For SRV record names beginning with ``_ldap``, specify ``ldap``.
+The constructed DNS SRV record name resembles the following:
+
+.. code-block:: shell
+
+   _ldap._tcp.example.com
+
+For SRV record names with beginning with ``_ldaps``, specify ``ldaps``.
+The constructed	DNS SRV	record name resembles the following:
+
+.. code-block:: shell
+
+   _ldaps._tcp.example.com
+
+If your DNS SRV record name uses alternate service or protocol names, specify ``on`` and provide the full record name as your LDAP server address.
+Example: ``_ldapserver._specialtcp.example.com``
+
+For more about DNS SRV records, see `DNS SRV Records for LDAP <https://ldap.com/dns-srv-records-for-ldap>`__.
+ 
+.. admonition:: Server address for DNS SRV record configurations
+   :class: important
+
+   The specified server name **must not** include a port number.
+   This is different from a standard AD/LDAP configuration, where the port number is required.
+
+   See :mc-conf:`~identity_ldap.server_addr` or :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR` for more about configuring an AD/LDAP server address.
+
+.. end-minio-ad-ldap-srv_record_name
 
 .. start-minio-ad-ldap-comment
 

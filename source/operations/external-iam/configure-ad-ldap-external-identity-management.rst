@@ -153,12 +153,11 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 	      group_search_filter= "(&(objectClass=group)(member=%d))"             \
 	      group_search_base_dn="ou=MinIO Users,dc=example,dc=net"              \
               enabled="true"                                                       \
-              sts_expiry="1h"                                                      \
-              username_format="uid=%s,cn=miniousers,dc=myldapserver,dc=net,userPrincipalName=%s,cn=miniousers,dc=myldapserver,dc=net"                                            \
               tls_skip_verify="off"                                                \
               server_insecure=off                                                  \
               server_starttls="off"                                                \
-	      comment="Test LDAP server"
+              srv_record_name=""                                                   \
+              comment="Test LDAP server"
 
         For more complete documentation on these settings, see :mc:`mc idp ldap`.
 
@@ -195,13 +194,11 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
             export MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD="xxxxxxxxx"
             export MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER="(&(objectClass=group)(member=%d))"
             export MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN="ou=MinIO Users,dc=example,dc=net"
-
-            export MINIO_IDENTITY_LDAP_STS_EXPIRY="1h"
-            export MINIO_IDENTITY_LDAP_USERNAME_FORMAT="uid=%s,cn=miniousers,dc=myldapserver,dc=net,userPrincipalName=%s,cn=miniousers,dc=myldapserver,dc=net"
-	    export MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY="off"
-	    export MINIO_IDENTITY_LDAP_SERVER_INSECURE="off"
-	    export MINIO_IDENTITY_LDAP_SERVER_STARTTLS="off"
-	    export MINIO_IDENTITY_LDAP_COMMENT="LDAP test server"
+            export MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY="off"
+            export MINIO_IDENTITY_LDAP_SERVER_INSECURE="off"
+            export MINIO_IDENTITY_LDAP_SERVER_STARTTLS="off"
+            export MINIO_IDENTITY_LDAP_SRV_RECORD_NAME=""
+            export MINIO_IDENTITY_LDAP_COMMENT="LDAP test server"
 
          For complete documentation on these variables, see :ref:`minio-server-envvar-external-identity-management-ad-ldap`
 
@@ -213,7 +210,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 	 .. include:: /includes/common-minio-external-auth.rst
             :start-after: start-minio-ad-ldap-console-enable
             :end-before: end-minio-ad-ldap-console-enable
-			 
+
    2) Restart the MinIO Deployment
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

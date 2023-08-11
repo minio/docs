@@ -2638,7 +2638,7 @@ Active Directory / LDAP Identity Management
 
 The following section documents environment variables for enabling
 external identity management using an Active Directory or LDAP service.
-See :ref:`minio-external-identity-management-ad-ldap` for a tutorial on using these
+See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using these
 variables.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SERVER_ADDR
@@ -2652,18 +2652,6 @@ variables.
    This environment variable corresponds with the 
    :mc-conf:`identity_ldap server_addr 
    <identity_ldap.server_addr>` configuration setting.
-
-.. envvar:: MINIO_IDENTITY_LDAP_STS_EXPIRY
-
-   *Optional*
-
-   .. include:: /includes/common-minio-external-auth.rst
-      :start-after: start-minio-ad-ldap-sts-expiry
-      :end-before: end-minio-ad-ldap-sts-expiry
-
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap sts_expiry 
-   <identity_ldap.sts_expiry>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN
 
@@ -2712,18 +2700,6 @@ variables.
    This environment variable corresponds with the 
    :mc-conf:`identity_ldap user_dn_search_filter 
    <identity_ldap.user_dn_search_filter>` configuration setting.
-
-.. envvar:: MINIO_IDENTITY_LDAP_USERNAME_FORMAT
-
-   *Optional*
-
-   .. include:: /includes/common-minio-external-auth.rst
-      :start-after: start-minio-ad-ldap-username-format
-      :end-before: end-minio-ad-ldap-username-format
-
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap username_format 
-   <identity_ldap.username_format>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER
 
@@ -2784,6 +2760,19 @@ variables.
    This environment variable corresponds with the 
    :mc-conf:`identity_ldap server_starttls 
    <identity_ldap.server_starttls>` configuration setting.
+
+.. envvar:: MINIO_IDENTITY_LDAP_SRV_RECORD_NAME
+
+   .. versionadded:: RELEASE.2022-12-12T19-27-27Z
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-ad-ldap-srv_record_name
+      :end-before: end-minio-ad-ldap-srv_record_name
+
+   This environment variable corresponds with the
+   :mc-conf:`identity_ldap srv_record_name <identity_ldap.srv_record_name>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_LDAP_COMMENT
 
