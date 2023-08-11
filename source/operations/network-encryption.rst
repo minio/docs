@@ -283,6 +283,8 @@ MinIO supports the following TLS 1.2 and 1.3 cipher suites as supported by `Go <
       - ``TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256``
       - ``TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384``      
 
+.. _minio-TLS-third-party-ca:
+
 Third-Party Certificate Authorities
 -----------------------------------
 

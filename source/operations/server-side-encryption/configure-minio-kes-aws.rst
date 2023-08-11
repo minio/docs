@@ -275,7 +275,7 @@ The following section describes each of the |KES-git| configuration settings for
              - /v1/key/generate/*
              - /v1/key/decrypt/*
              - /v1/key/bulk/decrypt
-             - /v1/key/list
+             - /v1/key/list/*
              - /v1/status
              - /v1/metrics
              - /v1/log/audit
