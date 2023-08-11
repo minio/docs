@@ -86,8 +86,8 @@ Use the :mc-cmd:`mc idp ldap policy attach` command to assign a user or group DN
 .. code-block:: shell
    :class: copyable
 
-   mc idp ldap policy attach minio-tenant POLICY user='uid=primary,cn=applications,dc=domain,dc=com'
-   mc idp ldap policy attach minio-tenant POLICY group='cn=applications,ou=groups,dc=domain,dc=com'
+   mc idp ldap policy attach minio-tenant POLICY --user='uid=primary,cn=applications,dc=domain,dc=com'
+   mc idp ldap policy attach minio-tenant POLICY --group='cn=applications,ou=groups,dc=domain,dc=com'
 
 Replace ``POLICY`` with the name of the MinIO policy to assign to the user or group DN.
 
