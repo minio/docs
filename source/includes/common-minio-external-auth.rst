@@ -82,8 +82,8 @@ Defaults to those scopes advertised in the discovery document.
 
 .. important::
 
-   This parameter is **deprecated** and will be removed in a future release.
-   Use :envvar:`MINIO_BROWSER_REDIRECT_URL` instead.
+   This parameter was removed in :minio-release:`RELEASE.2023-02-27T18-10-45Z`.
+   Use the :envvar:`MINIO_BROWSER_REDIRECT_URL` :ref:`environment variable <minio-server-environment-variables>` instead.
 
 The MinIO Console defaults to using the hostname of the node making the authentication request. 
 For MinIO deployments behind a load balancer or reverse proxy, specify this field to ensure the OIDC provider returns the authentication response to the correct MinIO Console URL.
