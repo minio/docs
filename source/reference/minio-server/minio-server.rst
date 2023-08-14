@@ -2884,7 +2884,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :end-before: end-minio-openid-redirect-uri
 
    This environment variable corresponds with the 
-   :mc-conf:`identity_openid scopes 
+   :mc-conf:`identity_openid redirect_uri 
    <identity_openid.redirect_uri>` setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC
