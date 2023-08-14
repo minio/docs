@@ -195,6 +195,15 @@ For example:
      LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
      LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
 
+.. note:: 
+
+   Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
+   For example, an AWS ECS instances with mounted persistent EBS volumes may fail to boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
+
+   You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
+   
+   You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
+
 You can then specify the entire range of drives using the expansion notation ``/mnt/disk{1...4}``. 
 If you want to use a specific subfolder on each drive, specify it as ``/mnt/disk{1...4}/minio``.
 
@@ -255,6 +264,16 @@ specify it as ``/mnt/disk{1...4}/minio``.
 MinIO **does not** support arbitrary migration of a drive with existing MinIO
 data to a new mount position, whether intentional or as the result of OS-level
 behavior.
+
+.. note:: 
+
+   Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
+   For example, an AWS ECS instances with mounted persistent EBS volumes may fail to boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
+
+   You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
+   
+   You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
+
 
 .. end-local-jbod-desc
 

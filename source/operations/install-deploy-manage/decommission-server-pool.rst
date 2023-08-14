@@ -331,7 +331,7 @@ server in the deployment and remove the decommissioned pool.
 
 The ``.deb`` or ``.rpm`` packages install a 
 `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to 
-``/etc/systemd/system/minio.service``. For binary installations, this
+``/lib/systemd/system/minio.service``. For binary installations, this
 procedure assumes the file was created manually as per the 
 :ref:`deploy-minio-distributed` procedure.
 
@@ -521,7 +521,7 @@ For persistent failures, use :mc:`mc admin console` or review the ``systemd`` lo
 Once decommissioning completes, you can safely remove the pools from the deployment configuration. 
 Modify the startup command for each remaining MinIO server in the deployment and remove the decommissioned pool.
 
-The ``.deb`` or ``.rpm`` packages install a `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to ``/etc/systemd/system/minio.service``. 
+The ``.deb`` or ``.rpm`` packages install a `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to ``/lib/systemd/system/minio.service``. 
 For binary installations, this procedure assumes the file was created manually as per the :ref:`deploy-minio-distributed` procedure.
 
 The ``minio.service`` file uses an environment file located at ``/etc/default/minio`` for sourcing configuration settings, including the startup. 
