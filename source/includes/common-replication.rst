@@ -72,9 +72,9 @@ Bucket replication requires specific permissions on the source and destination d
          :class: copyable
 
          wget -O - https://min.io/docs/minio/linux/examples/ReplicationAdminPolicy.json | \
-         mc admin policy add TARGET ReplicationAdminPolicy /dev/stdin
-         mc admin user add TARGET ReplicationAdmin LongRandomSecretKey
-         mc admin policy set TARGET ReplicationAdminPolicy user=ReplicationAdmin
+         mc admin policy create TARGET ReplicationAdminPolicy /dev/stdin
+         mc admin user create TARGET ReplicationAdmin LongRandomSecretKey
+         mc admin policy attach TARGET ReplicationAdminPolicy --user=ReplicationAdmin
 
       MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`access keys <minio-idp-service-account>` for bucket replication.
 
@@ -99,9 +99,9 @@ Bucket replication requires specific permissions on the source and destination d
          :class: copyable
 
          wget -O - https://min.io/docs/minio/linux/examples/ReplicationRemoteUserPolicy.json | \
-         mc admin policy add TARGET ReplicationRemoteUserPolicy /dev/stdin
-         mc admin user add TARGET ReplicationRemoteUser LongRandomSecretKey
-         mc admin policy set TARGET ReplicationRemoteUserPolicy user=ReplicationRemoteUser
+         mc admin policy create TARGET ReplicationRemoteUserPolicy /dev/stdin
+         mc admin user create TARGET ReplicationRemoteUser LongRandomSecretKey
+         mc admin policy attach TARGET ReplicationRemoteUserPolicy --user=ReplicationRemoteUser
 
       MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`access keys <minio-idp-service-account>` for bucket replication.
 

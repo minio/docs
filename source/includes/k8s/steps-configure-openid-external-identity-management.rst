@@ -100,12 +100,12 @@ Consider the following example policy that grants general S3 API access on only 
       ]
    }
 
-Use the :mc:`mc admin policy attach` command to create a policy for use by an OIDC user:
+Use the :mc:`mc admin policy create` command to create a policy for use by an OIDC user:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin policy add minio-tenant datareadonly /path/to/datareadonly.json
+   mc admin policy create minio-tenant datareadonly /path/to/datareadonly.json
 
 MinIO attaches the ``datareadonly`` policy to any authenticated OIDC user with ``datareadonly`` included in the configured claim.
 

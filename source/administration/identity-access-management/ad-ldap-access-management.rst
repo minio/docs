@@ -70,8 +70,8 @@ Consider the following policy assignments:
 
 .. code-block:: shell
 
-   mc admin policy set --consoleAdmin user='cn=sisko,cn=users,dc=example,dc=com'
-   mc admin policy set --readwrite,diagnostics user='cn=dax,cn=users,dc=example,dc=com'
+   mc admin policy attach myminio consoleAdmin --user='cn=sisko,cn=users,dc=example,dc=com'
+   mc admin policy attach myminio readwrite,diagnostics --user='cn=dax,cn=users,dc=example,dc=com'
 
 - MinIO would assign an authenticated user with DN matching 
   ``cn=sisko,cn=users,dc=example,dc=com`` the :userpolicy:`consoleAdmin`
@@ -92,8 +92,8 @@ Consider the following policy assignments:
 
 .. code-block:: shell
 
-   mc admin policy set --consoleAdmin group='cn=ops,cn=groups,dc=example,dc=com'
-   mc admin policy set --diagnostics group='cn=engineering,cn=groups,dc=example,dc=com'
+   mc admin policy attach myminio consoleAdmin --group='cn=ops,cn=groups,dc=example,dc=com'
+   mc admin policy attach myminio diagnostics --group='cn=engineering,cn=groups,dc=example,dc=com'
 
 - MinIO would assign any authenticating user with membership in the
   ``cn=ops,cn=groups,dc=example,dc=com`` AD/LDAP group the

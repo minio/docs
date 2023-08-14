@@ -149,7 +149,7 @@ The following command assigns the built-in :userpolicy:`readwrite` policy:
 .. code-block:: shell
    :class: copyable
 
-   mc admin policy set ALIAS readwrite user=USERNAME
+   mc admin policy attach ALIAS readwrite --user=USERNAME
 
 Replace ``USERNAME`` with the ``ACCESSKEY`` created in the previous step.
 
