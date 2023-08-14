@@ -10,7 +10,9 @@ Configure NGINX Proxy for MinIO Server
    :local:
    :depth: 2
 
-The following documentation covers the minimum settings required to configure NGINX to proxy requests to MinIO.
+The following documentation provides a baseline for configuring NGINX to proxy requests to MinIO in a Linux environment.
+It is not intended as a comprehensive approach to NGINX, proxying, or reverse proxying in general.
+Modify the configuration as necessary for your infrastructure.
 
 This documentation assumes the following:
 
