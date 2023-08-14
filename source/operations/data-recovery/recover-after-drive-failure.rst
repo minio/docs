@@ -90,7 +90,7 @@ For example, consider
 
    You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
    
-   You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both MinIO an the OS from responding to those errors in a normal fashion.
+   You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
 
 Given the previous example command, no changes are required to 
 ``fstab`` since the replacement drive at ``/mnt/drive1`` uses the same
