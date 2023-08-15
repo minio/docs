@@ -44,7 +44,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
    .. tab-item:: MinIO Server
 
-      The following command scrapes metrics for the MinIO Server.
+      The following command scrapes metrics for the MinIO cluster.
 
       .. code-block:: shell
          :class: copyable
@@ -55,7 +55,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
    .. tab-item:: Nodes
 
-      The following command scrapes metrics for the MinIO Server.
+      The following command scrapes metrics for a nodes on the MinIO Server.
 
       .. code-block:: shell
          :class: copyable
@@ -66,7 +66,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
    .. tab-item:: Buckets
 
-      The following command scrapes metrics for the MinIO Server.
+      The following command scrapes metrics for buckets on the MinIO Server.
 
       .. code-block:: shell
          :class: copyable
@@ -113,7 +113,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
 
 .. tab-set::
 
-   .. tab-item:: Server metrics
+   .. tab-item:: Cluster metrics
 
       For server metrics:
       

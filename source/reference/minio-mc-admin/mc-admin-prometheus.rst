@@ -58,5 +58,5 @@ Syntax
 
       Valid values are ``cluster``, ``node``, or ``bucket``.
 
-      If not specified, the command returns cluster metrics.z
+      If not specified, the command returns cluster metrics.
 

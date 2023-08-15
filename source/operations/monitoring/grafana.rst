@@ -10,7 +10,7 @@ Monitor a MinIO Server with Grafana
    :local:
    :depth: 2
    
-[Grafana](https://grafana.com/) allows you to query, visualize, alert on and understand your metrics no matter where they are stored. 
+`Grafana <https://grafana.com/>`__ allows you to query, visualize, alert on and understand your metrics no matter where they are stored. 
 Create, explore, and share dashboards with your team and foster a data driven culture.
 
 Prerequisites
@@ -28,13 +28,15 @@ MinIO provides two official Grafana Dashboards you can download from the Grafana
 1. `MinIO Server metrics <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/minio-dashboard.json>`__
 2. `MinIO Bucket metrics <https://grafana.com/grafana/dashboards/19237-minio-bucket-dashboard//>`__
 
+To track changes to the Grafana dashboard, introspect the JSON files for the `server <https://github.com/minio/minio/blob/master/docs/metrics/prometheus/grafana/minio-dashboard.json>`__ or `bucket <https://github.com/minio/minio/blob/master/docs/metrics/prometheus/grafana/minio-bucket.json>`__ dashboards in the MinIO Server GitHub repository.
+
 MinIO Server Metrics Dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Visualize MinIO metrics with the official MinIO Grafana dashboard for the MinIO Server available on the `Grafana dashboard portal <https://grafana.com/grafana/dashboards/13502-minio-dashboard/>`__.
 
 MinIO provides a Grafana Dashboard for MinIO Server metrics.
-For specifics on the dashboard's configuration, see the `json file on GitHub <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/minio-dashboard.json>`__.
+For specifics on the dashboard's configuration, see the `JSON file on GitHub <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/minio-dashboard.json>`__.
 
 .. image:: /images/grafana-minio.png
    :width: 600px
@@ -46,7 +48,7 @@ MinIO Bucket Metrics Dashboard
 
 Visualize MinIO bucket metrics with the official MinIO Grafana dashboard for buckets available on the `Grafana dashboard portal <https://grafana.com/grafana/dashboards/19237-minio-bucket-dashboard//>`__.
 
-Bucket metrics can be viewed in the Grafana dashboard using the `bucket json file on GitHub <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/minio-bucket.json>`__.
+Bucket metrics can be viewed in the Grafana dashboard using the `bucket JSON file on GitHub <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/minio-bucket.json>`__.
 
 .. image:: /images/grafana-bucket.png
    :width: 600px
