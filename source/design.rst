@@ -535,5 +535,11 @@ for display. This is intentional (For now).
 
       These are nested and linked.
 
+Images
+------
 
+.. image:: /images/minio-console/minio-console.png
+   :width: 600px
+   :alt: MinIO Console Landing Page provides a view of the Object Browser for the authenticated user
+   :align: center
 

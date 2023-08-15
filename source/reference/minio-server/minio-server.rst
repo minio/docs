@@ -601,7 +601,7 @@ logging. See :ref:`minio-metrics-and-alerts` for more information.
 .. envvar:: MINIO_PROMETHEUS_AUTH_TYPE
 
    Specifies the authentication mode for the Prometheus
-   :ref:`scraping endpoints <minio-metrics-and-alerts-endpoints>`.
+   :ref:`scraping endpoints <minio-metrics-and-alerts>`.
 
    - ``jwt`` - *Default* MinIO requires that the scraping client specify a JWT
      token for authenticating requests. Use

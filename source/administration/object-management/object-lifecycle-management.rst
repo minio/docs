@@ -125,9 +125,7 @@ As the cluster or workload increases, scanner performance decreases as it yields
 
 Consider regularly checking cluster metrics, capacity, and resource usage to ensure the cluster hardware is scaling alongside cluster and workload growth:
 
-- :ref:`minio-metrics-and-alerts-capacity`
-- :ref:`minio-metrics-and-alerts-lifecycle-management`
-- :ref:`minio-metrics-and-alerts-scanner`
+- :ref:`minio-metrics-and-alerts`
 
 .. toctree::
    :hidden:

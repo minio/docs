@@ -38,7 +38,10 @@ MinIO Pre-requisites
      - Load balancer to handle routing of requests (for example, `NGINX <https://www.nginx.com/>`__)
 
    * - :octicon:`circle`
-     - :ref:`Prometheus / Grafana <minio-metrics-collect-using-prometheus>` setup for monitoring and metrics
+     - :ref:`Prometheus <minio-metrics-collect-using-prometheus>` setup for monitoring and metrics
+
+   * - :octicon:`circle`
+     - :ref:`Grafana configured <minio-grafana>` for dashboards 
 
    * - :octicon:`circle` 
      - (optional) :mc:`mc` installed on the local host system

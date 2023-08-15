@@ -94,7 +94,7 @@ Configure InfluxDB to Collect and Alert using MinIO Metrics
 
       Use the :influxdb-docs:`DataExplorer <query-data/execute-queries/data-explorer/>` to visualize the collected MinIO data.
 
-      For example, you can set a filter on :metric:`minio_cluster_capacity_usable_total_bytes` and :metric:`minio_cluster_capacity_usable_free_bytes` to compare the total usable against total free space on the MinIO deployment.
+      For example, you can set a filter on ``minio_cluster_capacity_usable_total_bytes`` and ``minio_cluster_capacity_usable_free_bytes`` to compare the total usable against total free space on the MinIO deployment.
 
    #. Configure a Check
 
@@ -105,13 +105,13 @@ Configure InfluxDB to Collect and Alert using MinIO Metrics
 
       - Create a :guilabel:`Threshold Check` named ``MINIO_NODE_DOWN``. 
       
-        Set the filter for the :metric:`minio_cluster_nodes_offline_total` key.
+        Set the filter for the ``minio_cluster_nodes_offline_total`` key.
         
         Set the :guilabel:`Thresholds` to :guilabel:`WARN` when the value is greater than :guilabel:`1`
 
       - Create a :guilabel:`Threshold Check` named ``MINIO_QUORUM_WARNING``.
 
-        Set the filter for the :metric:`minio_cluster_disk_offline_total` key.
+        Set the filter for the ``minio_cluster_disk_offline_total`` key.
 
         Set the :guilabel:`Thresholds` to :guilabel:`CRITICAL` when the value is one less than your configured :ref:`Erasure Code Parity <minio-erasure-coding>` setting.
 

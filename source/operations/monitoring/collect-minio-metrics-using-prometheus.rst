@@ -15,7 +15,7 @@ Monitoring and Alerting using Prometheus
    - `Monitoring with MinIO and Prometheus: Overview <https://youtu.be/A3vCDaFWNNs?ref=docs>`__
    - `Monitoring with MinIO and Prometheus: Lab <https://youtu.be/Oix9iXndSUY?ref=docs>`__
 
-MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
+MinIO publishes cluster, node, and bucket metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
 The procedure on this page documents the following:
 
 - Configuring a Prometheus service to scrape and display metrics from a MinIO deployment
@@ -40,12 +40,40 @@ Configure Prometheus to Collect and Alert using MinIO Metrics
 
 Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape configuration for use by Prometheus in making scraping requests:
 
-.. code-block:: shell
-   :class: copyable
+.. tab-set::
 
-   mc admin prometheus generate ALIAS
+   .. tab-item:: MinIO Server
 
-Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      The following command scrapes metrics for the MinIO Server.
+
+      .. code-block:: shell
+         :class: copyable
+      
+         mc admin prometheus generate ALIAS
+
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+
+   .. tab-item:: Nodes
+
+      The following command scrapes metrics for the MinIO Server.
+
+      .. code-block:: shell
+         :class: copyable
+      
+         mc admin prometheus generate ALIAS node
+
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+
+   .. tab-item:: Buckets
+
+      The following command scrapes metrics for the MinIO Server.
+
+      .. code-block:: shell
+         :class: copyable
+      
+         mc admin prometheus generate ALIAS bucket
+
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
 The command returns output similar to the following:
 
@@ -81,21 +109,44 @@ The command returns output similar to the following:
 2) Restart Prometheus with the Updated Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Append the ``scrape_configs`` job generated in the previous step to the configuration file:
+Append the desired ``scrape_configs`` job generated in the previous step to the configuration file:
 
-.. code-block:: yaml
-   :class: copyable
+.. tab-set::
 
-   global:
-      scrape_interval: 15s
-   
-   scrape_configs:
-      - job_name: minio-job
-        bearer_token: TOKEN
-        metrics_path: /minio/v2/metrics/cluster
-        scheme: https
-        static_configs:
-        - targets: [minio.example.net]
+   .. tab-item:: Server metrics
+
+      For server metrics:
+      
+      .. code-block:: yaml
+         :class: copyable
+      
+         global:
+            scrape_interval: 15s
+         
+         scrape_configs:
+            - job_name: minio-job
+              bearer_token: TOKEN
+              metrics_path: /minio/v2/metrics/cluster
+              scheme: https
+              static_configs:
+              - targets: [minio.example.net]
+
+   .. tab-item:: Bucket metrics:
+
+      .. code-block:: yaml
+         :class: copyable
+      
+         global:
+            scrape_interval: 15s
+         
+         scrape_configs:
+            - job_name: minio-job-bucket
+              bearer_token: TOKEN
+              metrics_path: /minio/v2/metrics/bucket
+              scheme: https
+              static_configs:
+              - targets: [minio.example.net]
+
 
 Start the Prometheus cluster using the configuration file:
 
@@ -122,9 +173,9 @@ The following query examples return metrics collected by Prometheus:
 
    minio_cluster_capacity_usable_free_bytes{job="minio-job"}[5m]
 
-See :ref:`minio-metrics-and-alerts-available-metrics` for a complete list of published metrics.
+See :ref:`minio-metrics-and-alerts` for information about metrics.
 
-4) Configure an Alert Rule using MinIO Metrics
+1) Configure an Alert Rule using MinIO Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must configure :prometheus-docs:`Alert Rules <prometheus/latest/configuration/alerting_rules/>` on the Prometheus deployment to trigger alerts based on collected MinIO metrics.
@@ -184,3 +235,9 @@ To enable historical data visualization in MinIO Console, set the following envi
 - Set :envvar:`MINIO_PROMETHEUS_JOB_ID` to the unique job ID assigned to the collected metrics
 
 Restart the MinIO deployment and visit the :ref:`Monitoring <minio-console-monitoring>` pane to see the historical data views.
+
+Dashboards
+----------
+
+MinIO provides Grafana Dashboards to display metrics collected by Prometheus.
+For more information, see :ref:`minio-grafana`
