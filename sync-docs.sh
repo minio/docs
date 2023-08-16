@@ -41,7 +41,6 @@ function main() {
 	esac
 	curl --retry 10 -Ls -o source/developers/${source_dir}/API.md https://raw.githubusercontent.com/minio/minio-${sdk}/${sdk_version}/${sdk_dir}/API.md
 	curl --retry 10 -Ls -o source/developers/${source_dir}/quickstart.md https://raw.githubusercontent.com/minio/minio-${sdk}/${sdk_version}/README.md
-    curl --retry 10 -Ls -o source/operations/monitoring/metrics.md https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/list.md
 
 	case ${sdk} in
 	    "dotnet")
