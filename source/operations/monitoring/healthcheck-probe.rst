@@ -35,8 +35,8 @@ the server, such as a transient network issue or potential downtime.
 
 The healthcheck probe alone cannot determine if a MinIO server is offline - only
 that the current host machine cannot reach the server. Consider configuring
-a Prometheus :ref:`alert <minio-metrics-and-alerts-alerting>` using the 
-:metric:`minio_cluster_nodes_offline_total` metric to detect whether one or
+a Prometheus :ref:`alert <minio-metrics-and-alerts>` using the 
+``minio_cluster_nodes_offline_total`` metric to detect whether one or
 more MinIO nodes are offline.
 
 Cluster Write Quorum
@@ -63,13 +63,13 @@ The healthcheck probe alone cannot determine if a MinIO server is offline or
 processing write operations normally - only whether enough MinIO servers are
 online to meet write quorum  requirements based on the configured 
 :ref:`erasure code parity <minio-ec-parity>`. Consider configuring a Prometheus
-:ref:`alert <minio-metrics-and-alerts-alerting>` using one of the following
+:ref:`alert <minio-metrics-and-alerts>` using one of the following
 metrics to detect potential issues or errors on the MinIO cluster:
 
-- :metric:`minio_cluster_nodes_offline_total` to alert if one or more
+- ``minio_cluster_nodes_offline_total`` to alert if one or more
   MinIO nodes are offline.
 
-- :metric:`minio_node_disk_free_bytes` to alert if the cluster is running
+- ``minio_node_disk_free_bytes`` to alert if the cluster is running
   low on free drive space.
 
 Cluster Read Quorum
@@ -96,8 +96,8 @@ The healthcheck probe alone cannot determine if a MinIO server is offline or
 processing read operations normally - only whether enough MinIO servers are
 online to meet read quorum requirements based on the configured 
 :ref:`erasure code parity <minio-ec-parity>`. Consider configuring a Prometheus
-:ref:`alert <minio-metrics-and-alerts-alerting>` using the
-:metric:`minio_cluster_nodes_offline_total` metric to detect whether one or more
+:ref:`alert <minio-metrics-and-alerts>` using the
+``minio_cluster_nodes_offline_total`` metric to detect whether one or more
 MinIO nodes are offline.
 
 Cluster Maintenance Check
@@ -125,6 +125,5 @@ The healthcheck probe alone cannot determine if a MinIO server is offline - only
 whether enough MinIO servers will be online after taking the node down for
 maintenance to meet read and write quorum requirements based on the configured
 :ref:`erasure code parity <minio-ec-parity>`. Consider configuring a Prometheus
-:ref:`alert <minio-metrics-and-alerts-alerting>` using the
-:metric:`minio_cluster_nodes_offline_total` metric to detect whether one or more
+:ref:`alert <minio-metrics-and-alerts>` using the ``minio_cluster_nodes_offline_total`` metric to detect whether one or more
 MinIO nodes are offline.

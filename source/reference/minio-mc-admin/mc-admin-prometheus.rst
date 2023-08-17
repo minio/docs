@@ -43,7 +43,7 @@ Syntax
    .. code-block:: shell
       :class: copyable
 
-      mc admin prometheus generate TARGET
+      mc admin prometheus generate TARGET TYPE
 
    The command accepts the following arguments:
 
@@ -51,4 +51,12 @@ Syntax
 
       The :mc:`alias <mc alias>` of a configured MinIO deployment for which
       the command generates a Prometheus-compatible configuration file.
+
+   .. mc-cmd:: TYPE
+
+      The type of metrics to scrape.
+
+      Valid values are ``cluster``, ``node``, or ``bucket``.
+
+      If not specified, the command returns cluster metrics.
 

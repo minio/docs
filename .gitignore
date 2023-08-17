@@ -19,4 +19,5 @@ source/developers/haskell/*.md
 source/developers/java/*.md
 source/developers/javascript/*.md
 source/developers/python/*.md
+source/operations/monitoring/*.md
 *.inv

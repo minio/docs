@@ -864,7 +864,7 @@ services:
 
 .. policy-action:: admin:Prometheus
 
-   Allows access to MinIO :ref:`metrics <minio-metrics-and-alerts-endpoints>`. 
+   Allows access to MinIO :ref:`metrics <minio-metrics-and-alerts>`. 
    Only required if MinIO requires authentication for scraping metrics.
 
 .. policy-action:: admin:ListBatchJobs

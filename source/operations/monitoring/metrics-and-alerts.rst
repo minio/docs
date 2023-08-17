@@ -68,571 +68,553 @@ Specifically, the MinIO Console uses :prometheus-docs:`Prometheus query API <pro
 - Set :envvar:`MINIO_PROMETHEUS_URL` to the URL of the Prometheus service
 - Set :envvar:`MINIO_PROMETHEUS_JOB_ID` to the unique job ID assigned to the collected metrics
 
-MinIO also publishes a `Grafana Dashboard <https://grafana.com/grafana/dashboards/13502>`_ for visualizing collected metrics. 
-For more complete documentation on configuring a Prometheus-compatible data source for Grafana, see :prometheus-docs:`Grafana Support for Prometheus <visualization/grafana/>`.
+MinIO Grafana Dashboard
+-----------------------
+
+MinIO also publishes two :ref:`Grafana Dashboards <minio-grafana>` for visualizing collected metrics. 
+For more complete documentation on configuring a Prometheus-compatible data source for Grafana, see the :prometheus-docs:`Prometheus documentation on Grafana Support <visualization/grafana/>`.
 
 .. _minio-metrics-and-alerts-available-metrics:
 
 Available Metrics
 -----------------
 
-MinIO publishes the following metrics, where each metric includes a label for
-the MinIO server which generated that metric.
+MinIO publishes a number of metrics at the cluster, node, or bucket levels.
+Each metric includes a label for the MinIO server which generated that metric.
 
-Object and Bucket Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~
+.. versionchanged:: MinIO RELEASE.2023-07-21T21-12-44Z
 
-.. metric:: minio_bucket_objects_size_distribution
+   Bucket metrics have moved to use their own, separate endpoint.
 
-   Distribution of object sizes in a given bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
+- :ref:`Cluster Metrics <minio_available_cluster_metrics>`
+- :ref:`Node Metrics <minio_available_node_metrics>`
+- :ref:`Bucket Metrics <minio_available_bucket_metrics>`
 
-.. metric:: minio_bucket_objects_version_distribution
+.. _minio_available_cluster_metrics:
 
-   Distribution of number of versions per object in a given bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-.. metric:: minio_bucket_usage_object_total
-
-   Total number of objects in a given bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-.. metric:: minio_bucket_usage_total_bytes
-
-   Total bucket size in bytes in a given bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-.. metric:: minio_bucket_quota_total_bytes
-
-   Total bucket quota size in bytes.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-.. metric:: minio_bucket_usage_version_total
-
-   Total number of object versions contained in a bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-
-Replication Metrics
-~~~~~~~~~~~~~~~~~~~
-
-These metrics are only populated for MinIO clusters with 
-:ref:`minio-bucket-replication-serverside` enabled.
-
-.. metric:: minio_bucket_replication_failed_bytes
-
-   Total number of bytes that failed at least once to replicate for a given bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label
-
-.. metric:: minio_bucket_replication_latency
-
-   Replication latency in milliseconds.
-
-.. metric:: minio_bucket_replication_pending_bytes
-
-   Total number of bytes pending to replicate for a given bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label
-
-.. metric:: minio_bucket_replication_received_bytes
-
-   Total number of bytes replicated to this bucket from another source bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-.. metric:: minio_bucket_replication_sent_bytes
-
-   Total number of bytes replicated to the target bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-.. metric:: minio_bucket_replication_pending_count
-
-   Total number of replication operations pending for a given bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-.. metric:: minio_bucket_replication_failed_count
-
-   Total number of replication operations failed for a given bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
-
-.. _minio-metrics-and-alerts-capacity:
-
-Capacity Metrics
-~~~~~~~~~~~~~~~~
-
-.. metric:: minio_cluster_capacity_raw_free_bytes
-
-   Total free capacity online in the cluster.
-
-.. metric:: minio_cluster_capacity_raw_total_bytes
-
-   Total capacity online in the cluster.
-
-.. metric:: minio_cluster_capacity_usable_free_bytes
-
-   Total free usable capacity online in the cluster.
-
-.. metric:: minio_cluster_capacity_usable_total_bytes
-
-   Total usable capacity online in the cluster.
-
-.. metric:: minio_node_disk_free_bytes
-
-   Total storage available on a specific drive for a node in the MinIO deployment.
-   You can identify the drive and node using the ``{ disk="/path/to/disk",server="STRING"}`` labels respectively.
-
-.. metric:: minio_node_disk_total_bytes 
-
-   Total storage on a specific drive for a node in the MinIO deployment. 
-   You can identify the drive and node using the ``{ disk="/path/to/disk",server="STRING"}`` labels respectively.
-
-.. metric:: minio_node_disk_used_bytes
-
-   Total storage used on a specific drive for a node in a MinIO deployment. 
-   You can identify the drive and node using the ``{ disk="/path/to/disk",server="STRING"}`` labels respectively.
-
-.. _minio-metrics-and-alerts-lifecycle-management:
-
-Lifecycle Management Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. metric:: minio_cluster_ilm_transitioned_bytes
-
-   Total number of bytes transitioned using :ref:`tiering/transition lifecycle management rules <minio-lifecycle-management-tiering>`
-
-.. metric:: minio_cluster_ilm_transitioned_objects
-
-   Total number of objects transitioned using :ref:`tiering/transition lifecycle management rules <minio-lifecycle-management-tiering>`
-
-.. metric:: minio_cluster_ilm_transitioned_versions
-
-   Total number of non-current object versions transitioned using :ref:`tiering/transition lifecycle management rules <minio-lifecycle-management-tiering>`
-
-.. metric:: minio_node_ilm_transition_pending_tasks
-
-   Total number of pending :ref:`object transition <minio-lifecycle-management-tiering>` tasks
-
-.. metric:: minio_node_ilm_transition_active_tasks
-   
-   Number of active ILM transition tasks
-
-.. metric:: minio_node_ilm_expiry_pending_tasks
-
-   Total number of pending :ref:`object expiration <minio-lifecycle-management-expiration>` tasks
-
-.. metric:: minio_node_ilm_expiry_active_tasks
-
-   Total number of active :ref:`object expiration <minio-lifecycle-management-expiration>` tasks
-
-.. metric:: minio_node_ilm_versions_scanned
-   
-   Total number of object versions checked for ilm actions since server start
-
-Node and Drive Health Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. metric:: minio_cluster_disk_online_total
-
-   The total number of drives online
-
-.. metric:: minio_cluster_disk_offline_total
-
-   The total number of drives offline
-
-.. metric:: minio_cluster_disk_total
-
-   The total number of drives
-
-.. metric:: minio_cluster_nodes_offline_total
-
-   Total number of MinIO nodes offline.
-
-.. metric:: minio_cluster_nodes_online_total
-
-   Total number of MinIO nodes online.
-
-.. metric:: minio_node_disk_free_inodes
-   
-   Total free inodes.
-
-.. metric:: minio_node_disk_latency_us
-   
-   Average last minute latency in µs for drive API storage operations. 
-
-.. metric:: minio_node_disk_offline_total
-   
-   Total drives offline. 
-
-.. metric:: minio_node_disk_online_total
-   
-   Total drives online.
-
-.. metric:: minio_node_disk_total
-   
-   Total drives.
-
-.. metric:: minio_heal_objects_errors_total
-
-   Objects for which healing failed in current self healing run
-
-.. metric:: minio_heal_objects_heal_total
-
-   Objects healed in current self healing run
-
-.. metric:: minio_heal_objects_total
-
-   Objects scanned in current self healing run
-
-.. metric:: minio_heal_time_last_activity_nano_seconds
-
-   Time elapsed (in nano seconds) since last self healing activity. This is set
-   to -1 until initial self heal
-
-.. metric:: minio_node_storage_class_standard_parity
-
-   The configured value of :envvar:`MINIO_STORAGE_CLASS_STANDARD`.
-
-   Use this to alert for changes to the Standard :ref:`erasure parity <minio-erasure-coding>`.
-
-.. metric:: minio_node_storage_class_rrs_parity
-
-   The configured value of :envvar:`MINIO_STORAGE_CLASS_RRS`.
-
-   Use this to alert for changes to the Reduced :ref:`erasure parity <minio-erasure-coding>`.
-
-Notification Queue Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. metric:: minio_audit_target_queue_length
-
-   Total number of unsent audit messages in the queue.
-
-.. metric:: minio_audit_total_messages
-
-   Total number of audit messages sent since last server start.
-
-.. metric:: minio_audit_failed_messages
-
-   Total number of audit messages which failed to send since last server start.
-
-.. metric:: minio_notify_current_send_in_progress
-
-   Total number of notification messages in progress to configured targets.
-
-.. metric:: minio_notify_target_queue_length
-
-   Total number of unsent notification messages in the queue.
-
-.. _minio-metrics-and-alerts-scanner:
-
-Scanner Metrics
+Cluster Metrics
 ~~~~~~~~~~~~~~~
 
-.. metric:: minio_node_scanner_bucket_scans_finished
+Each metric includes the following labels:
 
-   Total number of bucket scans finished since server start.
+- Server that generated the metric.
+- Server that calculated the metric.
 
-.. metric:: minio_node_scanner_bucket_scans_started
+These metrics can be obtained from any MinIO server once per collection.
 
-   Total number of bucket scans started since server start.
+Audit Metrics
++++++++++++++
 
-.. metric:: minio_node_scanner_directories_scanned
+``minio_audit_failed_messages``
+  Total number of messages that failed to send since start.
 
-   Total number of directories scanned since server start.
+``minio_audit_target_queue_length``
+  Number of unsent messages in queue for target.
 
-.. metric:: minio_node_scanner_objects_scanned
+``minio_audit_total_messages``
+  Total number of messages sent since start.
 
-   Total number of unique objects scanned since server start.
+Cluster Capacity Metrics
+++++++++++++++++++++++++
 
-.. metric:: minio_node_scanner_versions_scanned
+``minio_cluster_capacity_raw_free_bytes``
+  Total free capacity online in the cluster.
 
-   Total number of object versions scanned since server start.
+``minio_cluster_capacity_raw_total_bytes``
+  Total capacity online in the cluster.
 
-.. metric:: minio_node_syscall_read_total
+``minio_cluster_capacity_usable_free_bytes``
+  Total free usable capacity online in the cluster.
 
-   Total number of read SysCalls to the kernel. ``/proc/[pid]/io syscr``
+``minio_cluster_capacity_usable_total_bytes``
+  Total usable capacity online in the cluster.
 
-.. metric:: minio_node_syscall_write_total
+Cluster Usage Metrics
++++++++++++++++++++++
 
-   Total number of write SysCalls to the kernel. ``/proc/[pid]/io syscw``
+``minio_cluster_objects_size_distribution``
+  Distribution of object sizes across a cluster.
 
-.. metric:: minio_usage_last_activity_nano_seconds
-   
-   Time elapsed since last scan activity. 
-   This is set to ``0`` until first scan cycle.
+``minio_cluster_objects_version_distribution``
+  Distribution of object sizes across a cluster.
 
-S3 Metrics
-~~~~~~~~~~
+``minio_cluster_usage_object_total``
+  Total number of objects in a cluster.
 
-.. metric:: minio_bucket_traffic_sent_bytes
+``minio_cluster_usage_total_bytes``
+  Total cluster usage in bytes.
 
-   Total number of bytes of S3 traffic sent per bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
+``minio_cluster_usage_version_total``
+  Total number of versions (includes delete marker) in a cluster.
 
-.. metric:: minio_bucket_traffic_received_bytes
+``minio_cluster_usage_deletemarker_total``
+  Total number of delete markers in a cluster.
 
-   Total number of bytes of S3 traffic received per bucket.
-   You can identify the bucket using the ``{ bucket="STRING" }`` label.
+``minio_cluster_usage_total_bytes``
+  Total cluster usage in bytes.
 
-.. metric:: minio_s3_requests_incoming_total
-   
-   Volatile number of total incoming S3 requests.
+``minio_cluster_buckets_total``
+  Total number of buckets in the cluster.
 
-.. metric:: minio_s3_requests_canceled_total
-   
-   Total number S3 requests that were canceled from the client while processing.
+Drive Metrics
++++++++++++++
 
-.. metric:: minio_s3_requests_inflight_total
+``minio_cluster_disk_offline_total``
+  Total drives offline.
 
-   Total number of S3 requests currently in flight.
+``minio_cluster_disk_online_total``
+  Total drives online.
 
-.. metric:: minio_s3_requests_total
+``minio_cluster_disk_total``
+  Total drives.
 
-   Total number of S3 requests.
+ILM Metrics
++++++++++++
 
-.. metric:: minio_s3_requests_rejected_auth_total
-   
-   Total number S3 requests rejected for auth failure.
+``minio_cluster_ilm_transitioned_bytes``
+  Total bytes transitioned to a tier.
 
-.. metric:: minio_s3_requests_rejected_header_total
-   
-   Total number S3 requests rejected for invalid header.
+``minio_cluster_ilm_transitioned_objects``
+  Total number of objects transitioned to a tier.
 
-.. metric:: minio_s3_requests_rejected_invalid_total
-   
-   Total number S3 invalid requests.
-   
-.. metric:: minio_s3_requests_rejected_timestamp_total
-   
-   Total number S3 requests rejected for invalid timestamp.
+``minio_cluster_ilm_transitioned_versions``
+  Total number of versions transitioned to a tier.
 
-.. metric:: minio_s3_requests_waiting_total
-   
-   Number of S3 requests in the waiting queue.
+``minio_node_ilm_expiry_active_tasks``
+  Total number of active :ref:`object expiration <minio-lifecycle-management-expiration>` tasks.
 
-.. metric:: minio_s3_time_ttfb_seconds_distribution
 
-   Distribution of the time to first byte across API calls.
+Key Management Metrics
+++++++++++++++++++++++
 
-.. metric:: minio_s3_traffic_received_bytes
+``minio_cluster_kms_online``  
+  Reports whether the KMS is online (1) or offline (0).
 
-   Total number of S3 bytes received.
+``minio_cluster_kms_request_error``
+  Number of KMS requests that failed due to some error. 
+  (HTTP 4xx status code).
 
-.. metric:: minio_s3_traffic_sent_bytes
+``minio_cluster_kms_request_failure``
+  Number of KMS requests that failed due to some internal failure. 
+  (HTTP 5xx status code).
 
-   Total number of S3 bytes sent.
+``minio_cluster_kms_request_success``
+  Number of KMS requests that succeeded.
 
-.. metric:: minio_s3_requests_errors_total
+``minio_cluster_kms_uptime``
+  The time the KMS has been up and running in seconds.
 
-   .. versionchanged:: MinIO RELEASE.2023-04-28T18-11-17Z 
+Cluster Health Metrics
+++++++++++++++++++++++
 
-      This metric has been removed.
-      Use ``minio_s3_requests_4xx_errors_total`` and ``minio_s3_requests_5xx_errors_total`` instead.
+``minio_cluster_nodes_offline_total``
+  Total number of MinIO nodes offline.
 
-   Total number of S3 requests with 4xx and 5xx errors.
+``minio_cluster_nodes_online_total``
+  Total number of MinIO nodes online.
 
-.. metric:: minio_s3_requests_4xx_errors_total
+``minio_cluster_write_quorum``
+  Maximum write quorum across all pools and sets.
 
-   Total number of S3 requests with 4xx errors.
+``minio_cluster_health_status``
+  Get current cluster health status.
 
-.. metric:: minio_s3_requests_5xx_errors_total
+``minio_heal_objects_errors_total``
+  Objects for which healing failed in current self healing run.
 
-   Total number of S3 requests with 5xx errors.
+``minio_heal_objects_heal_total``
+  Objects healed in current self healing run.
 
-IAM Metrics
-~~~~~~~~~~~
+``minio_heal_objects_total``
+  Objects scanned in current self healing run.
 
-.. metric:: minio_node_iam_last_sync_duration_millis
-   
-   Last successful IAM data sync duration in milliseconds. 
+``minio_heal_time_last_activity_nano_seconds``
+  Time elapsed (in nano seconds) since last self healing activity.
 
-.. metric:: minio_node_iam_since_last_sync_millis
-   
-   Time (in milliseconds) since last successful IAM data sync. 
-   
-   This value starts at zero and only increments after the the first sync after server start. 
+``minio_minio_update_percent``
+  Total percentage cache usage.
 
-.. metric:: minio_node_iam_sync_failures
-   
-   Number of failed IAM data syncs since server start. 
+``minio_software_commit_info``
+  Git commit hash for the MinIO release.
 
-.. metric:: minio_node_iam_sync_successes
-   
-   Number of successful IAM data syncs since server start. 
+``minio_software_version_info``
+  MinIO Release tag for the server.
+
+``minio_usage_last_activity_nano_seconds``
+  Time elapsed (in nano seconds) since last scan activity.
+
+Inter Node Metrics
+++++++++++++++++++
+
+``minio_inter_node_traffic_dial_avg_time``
+  Average time of internodes TCP dial calls.
+
+``minio_inter_node_traffic_dial_errors``
+  Total number of internode TCP dial timeouts and errors.
+
+``minio_inter_node_traffic_errors_total``
+  Total number of failed internode calls.
+
+``minio_inter_node_traffic_received_bytes``
+  Total number of bytes received from other peer nodes.
+
+``minio_inter_node_traffic_sent_bytes``
+  Total number of bytes sent to the other peer nodes.
+
+S3 Request Metrics
+++++++++++++++++++
+
+``minio_s3_requests_4xx_errors_total``
+  Total number S3 requests with (4xx) errors.
+
+``minio_s3_requests_5xx_errors_total``
+  Total number S3 requests with (5xx) errors.
+
+``minio_s3_requests_canceled_total``
+  Total number S3 requests canceled by the client.
+
+``minio_s3_requests_errors_total``
+  Total number S3 requests with (4xx and 5xx) errors.
+
+``minio_s3_requests_incoming_total``
+  Volatile number of total incoming S3 requests.
+
+``minio_s3_requests_inflight_total``
+  Total number of S3 requests currently in flight.
+
+``minio_s3_requests_rejected_auth_total``
+  Total number S3 requests rejected for auth failure.
+
+``minio_s3_requests_rejected_header_total``
+  Total number S3 requests rejected for invalid header.
+
+``minio_s3_requests_rejected_invalid_total``
+  Total number S3 invalid requests.
+
+``minio_s3_requests_rejected_timestamp_total``
+  Total number S3 requests rejected for invalid timestamp.
+
+``minio_s3_requests_total``
+  Total number S3 requests.
+
+``minio_s3_requests_waiting_total``
+  Number of S3 requests in the waiting queue.
+
+``minio_s3_requests_ttfb_seconds_distribution``
+  Distribution of the time to first byte across API calls.
+
+``minio_s3_traffic_received_bytes``
+  Total number of s3 bytes received.
+
+``minio_s3_traffic_sent_bytes``
+  Total number of s3 bytes sent.
+
+Lock Metrics
+++++++++++++
+
+``minio_locks_total``
+  Total number of current locks on the peer.
+  
+``minio_locks_write_total``
+  Number of current WRITE locks on the peer.
+  
+``minio_locks_read_total``
+  Number of current READ locks on the peer.
+
+Webhook Metrics
++++++++++++++++
+
+``minio_cluster_webhook_failed_messages``
+  Number of messages that failed to send.
+  
+``minio_cluster_webhook_online``
+  Reports whether the webhook endpoint is online (1) or offline (0). 
+  
+``minio_cluster_webhook_queue_length``
+  Number of messages in the webhook queue.
+  
+``minio_cluster_webhook_total_messages``
+  Number of messages sent to this webhook endpoint.
+
+
+.. _minio_available_node_metrics:
+
+Node Metrics
+~~~~~~~~~~~~
+
+Each metric includes the following labels:
+
+- Server that generated the metric.
+- Server that calculated the metric.
+  
+These metrics can be obtained from any MinIO server once per collection.
+
+Drive Metrics
++++++++++++++
+
+``minio_node_disk_free_bytes``
+  Total storage available on a drive.
+
+``minio_node_disk_free_inodes``
+  Total free inodes.
+
+``minio_node_disk_latency_us``
+  Average last minute latency in µs for drive API storage operations.
+
+``minio_node_disk_offline_total``
+  Total drives offline.
+
+``minio_node_disk_online_total``
+  Total drives online.
+
+``minio_node_disk_total``
+  Total drives.
+
+``minio_node_disk_total_bytes``
+  Total storage on a drive.
+
+``minio_node_disk_used_bytes``
+  Total storage used on a drive.
+
+File Metrics
+++++++++++++
+
+``minio_node_file_descriptor_limit_total``
+  Limit on total number of open file descriptors for the MinIO Server process.
+
+``minio_node_file_descriptor_open_total``
+  Total number of open file descriptors by the MinIO Server process.
+
+Go Metrics
+++++++++++
+
+``minio_node_go_routine_total``
+  Total number of go routines running.
+
+Access Management (IAM) Metrics
++++++++++++++++++++++++++++++++
+
+``minio_node_iam_last_sync_duration_millis``
+  Last successful IAM data sync duration in milliseconds.
+
+``minio_node_iam_since_last_sync_millis``
+  Time (in milliseconds) since last successful IAM data sync.
+
+``minio_node_iam_sync_failures``
+  Number of failed IAM data syncs since server start.
+
+``minio_node_iam_sync_successes``
+  Number of successful IAM data syncs since server start.
+
+Lifecycle Management (ILM) Metrics
+++++++++++++++++++++++++++++++++++
+
+``minio_node_ilm_expiry_pending_tasks``
+  Number of pending ILM expiry tasks in the queue.
+
+``minio_node_ilm_transition_active_tasks``
+  Number of active ILM transition tasks.
+
+``minio_node_ilm_transition_pending_tasks``
+  Number of pending ILM transition tasks in the queue.
+
+``minio_node_ilm_versions_scanned``
+  Total number of object versions checked for ilm actions since server start.
+
+I/O Metrics
++++++++++++
+
+``minio_node_io_rchar_bytes``
+  Total bytes read by the process from the underlying storage system including cache, ``/proc/[pid]/io`` rchar.
+
+``minio_node_io_read_bytes``
+  Total bytes read by the process from the underlying storage system, ``/proc/[pid]/io`` read_bytes.
+
+``minio_node_io_wchar_bytes``
+  Total bytes written by the process to the underlying storage system including page cache, ``/proc/[pid]/io`` wchar.
+
+``minio_node_io_write_bytes``
+  Total bytes written by the process to the underlying storage system, ``/proc/[pid]/io`` write_bytes.
+
+Process Metrics
++++++++++++++++
+
+``minio_node_process_cpu_total_seconds``
+  Total user and system CPU time spent in seconds.
+
+``minio_node_process_resident_memory_bytes``
+  Resident memory size in bytes.
+
+``minio_node_process_starttime_seconds``
+  Start time for MinIO process per node, time in seconds since Unix epoc.
+
+``minio_node_process_uptime_seconds``
+  Uptime for MinIO process per node in seconds.
+
+Scanner Metrics
++++++++++++++++
+
+``minio_node_scanner_bucket_scans_finished``
+  Total number of bucket scans finished since server start.
+
+``minio_node_scanner_bucket_scans_started``
+  Total number of bucket scans started since server start.
+
+``minio_node_scanner_directories_scanned``
+  Total number of directories scanned since server start.
+
+``minio_node_scanner_objects_scanned``
+  Total number of unique objects scanned since server start.
+
+``minio_node_scanner_versions_scanned``
+  Total number of object versions scanned since server start.
+
+Read and Write Metrics
+++++++++++++++++++++++
+
+``minio_node_syscall_read_total``
+  Total read SysCalls to the kernel. 
+  ``/proc/[pid]/io`` syscr.
+
+``minio_node_syscall_write_total``
+  Total write SysCalls to the kernel. 
+  ``/proc/[pid]/io`` syscw.
+
+Notification Metrics
+++++++++++++++++++++
+
+``minio_notify_current_send_in_progress``
+  Number of concurrent async Send calls active to all targets.
+
+``minio_notify_target_queue_length``
+  Number of unsent notifications in queue for target.
 
 IAM Plugin Metrics
-~~~~~~~~~~~~~~~~~~
+++++++++++++++++++
+  
+.. note::
+  
+   The metrics in this section require that you have configured the :ref:`MinIO External Identity Management Plugin <minio-external-identity-management-plugin>`.
+  
+``minio_node_iam_plugin_authn_service_last_succ_seconds``
+  Time (in seconds) since last successful request to the external IDP service.
+     
+``minio_node_iam_plugin_authn_service_last_fail_seconds``
+  Time (in seconds) since last failed request to the external IDP service.
+  
+``minio_node_iam_plugin_authn_service_total_requests_minute``
+  Total requests count to the external IDP service in the last full minute.
+  
+``minio_node_iam_plugin_authn_service_failed_requests_minute``
+  Count of the failed requests to the external IDP service in the last full minute.
+  
+``minio_node_iam_plugin_authn_service_succ_avg_rtt_ms_minute``
+  Average round trip time (RTT) of successful requests to the IDP service in the last full minute.
+  
+``minio_node_iam_plugin_authn_service_succ_max_rtt_ms_minute``
+  Maximum round trip time (RTT) of successful requests to the IDP service in the last full minute.
+
+
+.. _minio_available_bucket_metrics:
+
+Bucket Metrics
+~~~~~~~~~~~~~~
+
+Each bucket metric includes the following labels:
+
+- The server that calculated the metric. 
+- The server that generated the metric. 
+- The bucket the metric is for.
+
+These metrics can be obtained from any MinIO server once per collection.
+
+Distribution Metrics
+++++++++++++++++++++
+
+``minio_bucket_objects_size_distribution``
+  Distribution of object sizes in the bucket, includes label for the bucket name.
+
+``minio_bucket_objects_version_distribution``
+  Distribution of object sizes in a bucket, by number of versions.
+
+``minio_bucket_quota_total_bytes``
+  Total bucket quota size in bytes.
+
+Replication Metrics
++++++++++++++++++++
 
 .. note::
 
-   The metrics in this section require that you have configured the :ref:`MinIO External Identity Management Plugin <minio-external-identity-management-plugin>`.
+   The metrics for bucket replication only populate for MinIO clusters with :ref:`minio-bucket-replication-serverside` enabled.
 
-.. metric:: minio_node_iam_plugin_authn_service_last_succ_seconds
+``minio_bucket_replication_failed_count``
+  Total number of objects which failed replication.
 
-   Time (in seconds) since last successful request to the external IDP service.
-   
-.. metric:: minio_node_iam_plugin_authn_service_last_fail_seconds
+``minio_bucket_replication_latency_ms`` 
+  Replication latency in milliseconds.
 
-   Time (in seconds) since last failed request to the external IDP service.
+``minio_bucket_replication_received_bytes``
+  Total number of bytes replicated to this bucket from another source bucket.
 
-.. metric:: minio_node_iam_plugin_authn_service_total_requests_minute
+``minio_bucket_replication_sent_bytes``
+  Total number of bytes replicated to the target bucket.
 
-   Total requests count to the external IDP service in the last full minute.
+``minio_bucket_replication_failed_bytes``
+   Total number of bytes that failed at least once to replicate for a given bucket.
+   You can identify the bucket using the ``{ bucket="STRING" }`` label.
 
-.. metric:: minio_node_iam_plugin_authn_service_failed_requests_minute
+``minio_bucket_replication_pending_bytes``
+  Total number of bytes pending to replicate for a given bucket.
+   You can identify the bucket using the ``{ bucket="STRING" }`` label.
 
-   Count of the failed requests to the external IDP service in the last full minute.
+``minio_bucket_replication_pending_count``
+  Total number of replication operations pending for a given bucket.
+  You can identify the bucket using the ``{ bucket="STRING" }`` label.
 
-.. metric:: minio_node_iam_plugin_authn_service_succ_avg_rtt_ms_minute
+Traffic Metrics
++++++++++++++++
 
-   Average round trip time (RTT) of successful requests to the IDP service in the last full minute.
+``minio_bucket_traffic_received_bytes``
+  Total number of S3 bytes received for this bucket.
 
-.. metric:: minio_node_iam_plugin_authn_service_succ_max_rtt_ms_minute
+``minio_bucket_traffic_sent_bytes``
+  Total number of S3 bytes sent for this bucket.
 
-   Maximum round trip time (RTT) of successful requests to the IDP service in the last full minute.
+Usage Metrics
++++++++++++++
 
-Internal Metrics
-~~~~~~~~~~~~~~~~
+``minio_bucket_usage_object_total``
+  Total number of objects.
 
-.. metric:: minio_inter_node_traffic_received_bytes
+``minio_bucket_usage_version_total``
+  Total number of versions (includes delete marker).
 
-   Total number of bytes received from other peer nodes.
+``minio_bucket_usage_deletemarker_total``
+  Total number of delete markers.
 
-.. metric:: minio_inter_node_traffic_sent_bytes
+``minio_bucket_usage_total_bytes``
+  Total bucket size in bytes.
 
-   Total number of bytes sent to the other peer nodes.
+Requests Metrics
+++++++++++++++++
 
-.. metric:: minio_inter_node_traffic_dial_avg_time
+``minio_bucket_requests_4xx_errors_total``
+  Total number of S3 requests with (4xx) errors on a bucket.
 
-   Average time of internodes TCP dial calls.
+``minio_bucket_requests_5xx_errors_total``
+  Total number of S3 requests with (5xx) errors on a bucket.
 
-.. metric:: minio_inter_node_traffic_dial_errors
+``minio_bucket_requests_inflight_total``
+  Total number of S3 requests currently in flight on a bucket.
 
-   Total number of internode TCP dial timeouts and errors.
+``minio_bucket_requests_total``
+  Total number of S3 requests on a bucket.
 
-   .. versionadded:: MinIO RELEASE.2023-04-28T18-11-17Z 
+``minio_bucket_requests_canceled_total``
+  Total number S3 requests canceled by the client.
 
-      This metric is available on the MinIO Dashboard if :ref:`Prometheus <minio-metrics-collect-using-prometheus>` and Grafana are enabled.
-
-.. metric:: minio_inter_node_traffic_errors_total
-
-   Total number of failed internode calls.
-
-.. metric:: minio_node_file_descriptor_limit_total
-
-   Limit on total number of open file descriptors for the MinIO Server process.
-
-.. metric:: minio_node_file_descriptor_open_total
-
-   Total number of open file descriptors by the MinIO Server process.
-
-.. metric:: minio_node_io_rchar_bytes
-
-   Total bytes read by the process from the underlying storage system including
-   cache, ``/proc/[pid]/io rchar``
-
-.. metric:: minio_node_io_read_bytes
-
-   Total bytes read by the process from the underlying storage system, 
-   ``/proc/[pid]/io read_bytes``
-
-.. metric:: minio_node_io_wchar_bytes
-
-   Total bytes written by the process to the underlying storage system including 
-   page cache, ``/proc/[pid]/io wchar``
-
-.. metric:: minio_node_io_write_bytes
-
-   Total bytes written by the process to the underlying storage system, 
-   ``/proc/[pid]/io write_bytes``
-
-Key Management System (KMS) Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. metric:: minio_cluster_kms_online
-   
-   Reports whether the KMS is online (1) or offline (0).
-
-.. metric:: minio_cluster_kms_request_error
-   
-   Number of KMS requests that failed due to some error. (HTTP 4xx status code).
-
-.. metric:: minio_cluster_kms_request_failure
-   
-   Number of KMS requests that failed due to some internal failure. (HTTP 5xx status code).
-
-.. metric:: minio_cluster_kms_request_success
-   
-   Number of KMS requests that succeeded.
-
-.. metric:: minio_cluster_kms_uptime
-   
-   The time the KMS has been up and running in seconds.
-
-Software and Process Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. metric:: minio_software_commit_info
-
-   Git commit hash for the MinIO release.
-
-.. metric:: minio_software_version_info
-
-   MinIO Release tag for the server
-
-.. metric:: minio_node_go_routine_total
-
-   Total number of go routines running.
-
-.. metric:: minio_node_process_starttime_seconds
-
-   Start time for MinIO process per node, time in seconds since Unix epoch.
-
-.. metric:: minio_node_process_uptime_seconds
-
-   Uptime for MinIO process per node in seconds.
-
-.. metric:: minio_node_process_cpu_total_seconds
-   
-   Total user and system CPU time spent in seconds.
-   
-.. metric:: minio_node_process_resident_memory_bytes
-   
-   Resident memory size in bytes.
-
-Lock Metrics
-~~~~~~~~~~~~
-
-.. metric:: minio_locks_total
-
-   Total number of current locks on the peer.
-
-.. metric:: minio_locks_write_total
-
-   Number of current WRITE locks on the peer.
-
-.. metric:: minio_locks_read_total
-
-   Number of current READ locks on the peer.
-
-.. _minio-metrics-and-alerts-webhook:
-
-Webhook Metrics
-~~~~~~~~~~~~~~~
-
-.. metric:: minio_cluster_webhook_failed_messages
-
-   Number of messages that failed to send.
-
-.. metric:: minio_cluster_webhook_online
-
-   Reports whether the webhook endpoint is online (1) or offline (0). 
-
-.. metric:: minio_cluster_webhook_queue_length
-
-   Number of messages in the webhook queue.
-
-.. metric:: minio_cluster_webhook_total_messages
-
-   Number of messages sent to this webhook endpoint.
+``minio_bucket_requests_ttfb_seconds_distribution``
+  Distribution of time to first byte across API calls per bucket.
 
 .. toctree::
    :titlesonly:
