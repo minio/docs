@@ -28,10 +28,10 @@ The :mc:`mc idp ldap enable` command enables the currently configured AD/LDAP pr
 
       The following example enables the AD/LDAP configurations on the ``myminio`` deployment.
 
-      .. code-block:: shell                                                                 
+      .. code-block:: shell
          :class: copyable
 
-         mc idp ldap enable  \                                                             
+         mc idp ldap enable   \
                      myminio
 
    .. tab-item:: SYNTAX
@@ -41,7 +41,7 @@ The :mc:`mc idp ldap enable` command enables the currently configured AD/LDAP pr
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] idp ldap disable  \
+         mc [GLOBALFLAGS] idp ldap enable  \
                                    ALIAS
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to enable the AD/LDAP integration.

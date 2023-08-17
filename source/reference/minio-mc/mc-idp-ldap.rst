@@ -45,26 +45,27 @@ The :mc-cmd:`mc idp ldap` command has the following subcommands:
    * - :mc-cmd:`mc idp ldap add`
      - Create an AD/LDAP IDP server configuration.
 
-   * - :mc-cmd:`mc idp ldap update`
-     - Modify an existing AD/LDAP IDP server configuration.
-
-   * - :mc-cmd:`mc idp ldap ls`
-     - Lists AD/LDAP server configurations.
-
-   * - :mc-cmd:`mc idp ldap rm`
-     - Remove an AD/LDAP IDP server configuration from a deployment.
-
-   * - :mc-cmd:`mc idp ldap info`
-     - Displays details for a specific AD/LDAP server configuration.
+   * - :mc-cmd:`mc idp ldap disable`
+     - Disables an AD/LDAP server configuration.
 
    * - :mc-cmd:`mc idp ldap enable`
      - Enables an AD/LDAP server configuration.
 
-   * - :mc-cmd:`mc idp ldap disable`
-     - Disables an AD/LDAP server configuration.
+   * - :mc-cmd:`mc idp ldap info`
+     - Displays details for a specific AD/LDAP server configuration.
+
+   * - :mc-cmd:`mc idp ldap ls`
+     - Lists AD/LDAP server configurations.
 
    * - :mc-cmd:`mc idp ldap policy` subcommands
      - Manage AD/LDAP policies and entity mappings.
+
+   * - :mc-cmd:`mc idp ldap rm`
+     - Remove an AD/LDAP IDP server configuration from a deployment.
+
+   * - :mc-cmd:`mc idp ldap update`
+     - Modify an existing AD/LDAP IDP server configuration.
+
 
 Configuration Parameters
 ------------------------

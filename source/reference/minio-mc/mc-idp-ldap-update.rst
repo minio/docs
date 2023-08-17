@@ -31,7 +31,7 @@ The :mc:`mc idp ldap update` command modifies an existing set of configurations 
       .. code-block:: shell
          :class: copyable
 
-         mc idp ldap update                                \
+         mc idp ldap update                                   \
                         myminio                               \
                         lookup_bind_dn=cn=admin,dc=min,dc=io  \
                         lookup_bind_password=somesecret
@@ -43,9 +43,9 @@ The :mc:`mc idp ldap update` command modifies an existing set of configurations 
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] idp ldap update               \
-                                   ALIAS             \
-                                   [CFG_PARAM1]      \
+         mc [GLOBALFLAGS] idp ldap update           \
+                                   ALIAS            \
+                                   [CFG_PARAM1]     \
                                    [CFG_PARAM2]...
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to update for AD/LDAP integration.

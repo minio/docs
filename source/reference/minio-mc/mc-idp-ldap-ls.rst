@@ -23,16 +23,18 @@ The :mc:`mc idp ldap ls` command lists the existing set of configurations for an
 
 .. end-mc-idp-ldap-ls-desc
 
+:mc:`mc idp ldap ls` is also known as :mc:`mc idp ldap list`.
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
       The following example lists the AD/LDAP configuration settings for the ``myminio`` deployment.
 
-      .. code-block:: shell                                                                 
+      .. code-block:: shell
          :class: copyable
 
-         mc idp ldap ls  \                                                             
+         mc idp ldap ls       \
                      myminio
 
    .. tab-item:: SYNTAX
@@ -42,7 +44,7 @@ The :mc:`mc idp ldap ls` command lists the existing set of configurations for an
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] idp ldap info  \
+         mc [GLOBALFLAGS] idp ldap ls     \
                                    ALIAS
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to list the AD/LDAP integration.

@@ -22,7 +22,7 @@ The :mc:`mc idp ldap add` command creates an AD/LDAP IDP server configuration.
 
 .. end-mc-idp-ldap-add-desc
 
-MinIO supports no more than one (1) AD/LDAP provider per deployment.
+MinIO supports no more than *one* (1) AD/LDAP provider per deployment.
 
 .. tab-set::
 

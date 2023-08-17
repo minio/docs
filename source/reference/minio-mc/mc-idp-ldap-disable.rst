@@ -28,10 +28,10 @@ The :mc:`mc idp ldap disable` command disables the currently configured AD/LDAP 
 
       The following example disables the AD/LDAP configurations on the ``myminio`` deployment.
 
-      .. code-block:: shell                                                                 
+      .. code-block:: shell
          :class: copyable
 
-         mc idp ldap disable  \                                                             
+         mc idp ldap disable  \
                      myminio
 
    .. tab-item:: SYNTAX

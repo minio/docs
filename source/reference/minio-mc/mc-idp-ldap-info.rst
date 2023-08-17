@@ -28,10 +28,10 @@ The :mc:`mc idp ldap info` command outputs the current configuration for an AD/L
 
       The following example outputs the AD/LDAP configuration settings on the ``myminio`` deployment.
 
-      .. code-block:: shell                                                                 
+      .. code-block:: shell
          :class: copyable
 
-         mc idp ldap info  \                                                             
+         mc idp ldap info     \
                      myminio
 
    .. tab-item:: SYNTAX
@@ -41,7 +41,7 @@ The :mc:`mc idp ldap info` command outputs the current configuration for an AD/L
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] idp ldap info  \
+         mc [GLOBALFLAGS] idp ldap info   \
                                    ALIAS
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to retrieve info on the AD/LDAP integration.

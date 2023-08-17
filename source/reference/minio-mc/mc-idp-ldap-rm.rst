@@ -23,16 +23,18 @@ The :mc:`mc idp ldap rm` command removes the existing configuration for an AD/LD
 
 .. end-mc-idp-ldap-rm-desc
 
+:mc:`mc idp ldap rm` is also known as :mc:`mc idp ldap remove`.
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
       The following example removes the AD/LDAP provider settings for the ``myminio`` deployment.
 
-      .. code-block:: shell                                                                 
+      .. code-block:: shell
          :class: copyable
 
-         mc idp ldap rm  \                                                             
+         mc idp ldap rm       \
                      myminio
 
    .. tab-item:: SYNTAX
@@ -42,7 +44,7 @@ The :mc:`mc idp ldap rm` command removes the existing configuration for an AD/LD
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] idp ldap info  \
+         mc [GLOBALFLAGS] idp ldap rm     \
                                    ALIAS
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to remove the AD/LDAP integration.
