@@ -10,7 +10,7 @@ Metrics and Alerts
 
 .. contents:: Table of Contents
    :local:
-   :depth: 2
+   :depth: 3
 
 MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
