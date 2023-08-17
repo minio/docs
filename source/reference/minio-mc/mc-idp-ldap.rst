@@ -67,23 +67,6 @@ The :mc-cmd:`mc idp ldap` command has the following subcommands:
      - Modify an existing AD/LDAP IDP server configuration.
 
 
-Configuration Parameters
-------------------------
-
-The :mc-cmd:`mc idp ldap` subcommands support the same configuration parameters as the :mc-conf:`identity_ldap` configuration key.
-These parameters define the server's interaction with the Active Directory or LDAP IAM provider.
-
-For a more detailed explanation of the configuration parameters, refer to the :ref:`config setting documentation <minio-ldap-config-settings>`.
-
-
-Global Flags
-------------
-
-.. include:: /includes/common-minio-mc.rst
-   :start-after: start-minio-mc-globals
-   :end-before: end-minio-mc-globals
-
-
 .. toctree::
    :titlesonly:
    :hidden:
