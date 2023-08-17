@@ -22,14 +22,6 @@ The :mc:`mc idp ldap update` command modifies an existing set of configurations 
 
 .. end-mc-idp-ldap-update-desc
 
-Configuration Parameters
-------------------------
-
-:mc-cmd:`mc idp ldap update` supports the same configuration parameters as the :mc-conf:`identity_ldap` configuration key.
-These parameters define the server's interaction with the Active Directory or LDAP IAM provider.
-
-For a more detailed explanation of the configuration parameters, refer to the :ref:`config setting documentation <minio-ldap-config-settings>`.
-
 .. tab-set::
 
    .. tab-item:: EXAMPLE
@@ -39,7 +31,7 @@ For a more detailed explanation of the configuration parameters, refer to the :r
       .. code-block:: shell
          :class: copyable
 
-         mc idp ldap update                                   \
+         mc idp ldap update                                \
                      myminio                               \
                      lookup_bind_dn=cn=admin,dc=min,dc=io  \
                      lookup_bind_password=somesecret
@@ -69,14 +61,18 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :ref:`alias <alias>` of the MinIO deployment on which to modify an AD/LDAP integration
+   The :ref:`alias <alias>` of the MinIO deployment on which to modify an AD/LDAP integration.
 
    For example:
 
    .. code-block:: none
 
-      mc idp ldap update myminio
+      mc idp ldap update myminio                               \
+                         lookup_bind_dn=cn=admin,dc=min,dc=io  \
 
+.. include:: /includes/common-minio-ad-ldap-params.rst
+   :start-after: start-minio-ad-ldap-params
+   :end-before: end-minio-ad-ldap-params
 
 
 Global Flags

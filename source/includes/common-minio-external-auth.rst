@@ -163,7 +163,10 @@ provider configuration.
 
 Specify the hostname for the Active Directory / LDAP server. For example:
 
-``ldapserver.com:636``
+.. code-block:: shell
+   :class: copyable
+
+   ldapserver.com:636
 
 .. end-minio-ad-ldap-server-addr
 
@@ -191,7 +194,10 @@ Specify the base Distinguished name (DN) MinIO uses when querying for
 user credentials matching those provided by an authenticating client.
 For example:
 
-``cn=miniousers,dc=myldapserver,dc=net``
+.. code-block:: shell
+   :class: copyable
+
+   cn=miniousers,dc=myldapserver,dc=net
 
 Supports :ref:`Lookup-Bind  <minio-external-identity-management-ad-ldap-lookup-bind>` mode.
 

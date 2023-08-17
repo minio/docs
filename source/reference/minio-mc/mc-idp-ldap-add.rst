@@ -24,14 +24,6 @@ The :mc:`mc idp ldap add` command creates an AD/LDAP IDP server configuration.
 
 MinIO supports no more than *one* (1) AD/LDAP provider per deployment.
 
-Configuration Parameters
-------------------------
-
-:mc-cmd:`mc idp ldap add` supports the same configuration parameters as the :mc-conf:`identity_ldap` configuration key.
-These parameters define the server's interaction with the Active Directory or LDAP IAM provider.
-
-For a more detailed explanation of the configuration parameters, refer to the :ref:`config setting documentation <minio-ldap-config-settings>`.
-
 .. tab-set::
 
    .. tab-item:: EXAMPLE
@@ -82,8 +74,16 @@ Parameters
 
    .. code-block:: none
 
-      mc idp ldap add myminio
+      mc idp ldap add myminio                               \
+                      server_addr=myldapserver:636          \
+                      lookup_bind_dn=cn=admin,dc=min,dc=io  \
+                      lookup_bind_password=somesecret       \
+                      user_dn_search_base_dn=dc=min,dc=io   \
+                      user_dn_search_filter="(uid=%s)"      \
 
+.. include:: /includes/common-minio-ad-ldap-params.rst
+   :start-after: start-minio-ad-ldap-params
+   :end-before: end-minio-ad-ldap-params
 
 
 Global Flags
