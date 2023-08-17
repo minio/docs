@@ -55,11 +55,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
    .. tab-item:: Nodes
 
-<<<<<<< HEAD
       The following command scrapes metrics for a node on the MinIO Server.
-=======
-      The following command scrapes metrics for a nodes on the MinIO Server.
->>>>>>> 456c852 (PR feedback)
 
       .. code-block:: shell
          :class: copyable
