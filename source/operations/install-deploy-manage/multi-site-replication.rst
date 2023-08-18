@@ -88,6 +88,11 @@ Site Healing
 
 Any MinIO deployment in the site replication configuration can resynchronize damaged :ref:`replica-eligible data <minio-site-replication-what-replicates>` from the peer with the most updated ("latest") version of that data.
 
+.. versionchanged:: RELEASE.2023-07-18T17-49-40Z
+
+   Site replication operations retry up to three (3) times.
+   Failed operations wait for the MinIO Scanner to identify the replication task again before requeueing for another three attempts.
+
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
 
    Failed or pending replications requeue automatically when performing any ``GET`` or ``HEAD`` API method. 

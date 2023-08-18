@@ -179,11 +179,7 @@ Replication of Existing Objects
 MinIO by default does not enable existing object replication. Objects
 created before replication was configured *or* while replication is
 disabled are not synchronized to the target deployment.
-Starting with :mc:`mc` :minio-git:`RELEASE.2021-06-13T17-48-22Z
-<mc/releases/tag/RELEASE.2021-06-13T17-48-22Z>` and :mc:`minio`
-:minio-git:`RELEASE.2021-06-07T21-40-51Z
-<minio/releases/tag/RELEASE.2021-06-07T21-40-51Z>`, MinIO supports enabling
-replication of existing objects in a bucket. 
+MinIO supports enabling replication of existing objects in a bucket. 
 
 Enabling existing object replication marks all objects or object prefixes that
 satisfy the replication rules as eligible for synchronization to the source
@@ -244,8 +240,12 @@ workers operating on that queue. MinIO continuously works to replicate and
 remove objects from the queue while scanning for new unreplicated objects to
 add to the queue. 
 
-MinIO queues failed replication operations and retries those operations until replication succeeds.
-This helps keep replication up-to-date without relying on the MinIO scanner to notice unreplicated object versions.
+
+.. versionchanged:: RELEASE.2022-07-18T17-49-40Z
+
+   MinIO queues failed replication operations and retries those operations up to three (3) times.
+   
+   Replication operations that fail more than three times wait for the scanner to identify the object for replication before trying again.
 
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
 
