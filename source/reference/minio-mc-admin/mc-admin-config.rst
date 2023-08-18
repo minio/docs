@@ -111,6 +111,8 @@ API Configuration
          :start-after: start-minio-api-sync-events
          :end-before: end-minio-api-sync-events
 
+      Corresponds with the :envvar:`MINIO_API_SYNC_EVENTS` environment variable.
+
 .. _minio-server-config-logging-logs:
 
 HTTP Webhook Log Target

@@ -1012,6 +1012,8 @@ These environment variables configure notification targets for use with
       :start-after: start-minio-api-sync-events
       :end-before: end-minio-api-sync-events
 
+   Corresponds with the :mc-conf:`~api.sync_events` configuration setting.
+
 .. _minio-server-envvar-bucket-notification-amqp:
 
 AMQP Service for Bucket Notifications
