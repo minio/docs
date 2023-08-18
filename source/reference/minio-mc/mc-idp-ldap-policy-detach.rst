@@ -52,7 +52,7 @@ The :mc:`mc idp ldap policy detach` command detaches one or more polices from an
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
       - Replace ``POLICYNAME`` with the policy to detach from the entity.
-        You may list multiple policies to detach to the entity.
+        You may list multiple policies to detach from the entity.
       - Use must use one of either the ``--user`` or ``--group`` flag.
         You may only use the flag once in the command.
         You cannot use both flags in the same command.
