@@ -18,6 +18,10 @@ Specify the client secret MinIO uses when authenticating user credentials
 against the :abbr:`OIDC (OpenID Connect)` compatible provider. This field
 may be optional depending on the provider.
 
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
 .. end-minio-openid-client-secret
 
 .. start-minio-openid-jwks-url
@@ -182,6 +186,10 @@ privileges to support querying performing user and group lookups.
 
 Specify the password for the :ref:`Lookup-Bind 
 <minio-external-identity-management-ad-ldap-lookup-bind>` user account.
+
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 .. end-minio-ad-ldap-lookup-bind-password
 

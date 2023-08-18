@@ -79,6 +79,23 @@ MinIO supports publishing event notifications to the following targets:
 
        See :ref:`minio-bucket-notifications-publish-webhook` for a tutorial.
 
+Asynchronous vs Synchronous Bucket Notifications
+------------------------------------------------
+
+MinIO by default performs asynchronous delivery of bucket notification events to configured remote targets.
+
+For each event, MinIO fires the event at the configured remote and does *not* wait for a response before continuing to the next event.
+This can result in lost events if the remote restarts or has a transient failure while the event is in transit or processing.
+
+.. versionadded:: RELEASE.2023-06-23T20-26-00Z
+
+   You can enable synchronous bucket notification behavior for *all* remote targets, where MinIO waits for the configured remote to confirm successful receipt before continuing to the next event.
+
+To enable synchronous bucket notifications for *all configured remote targets*, use either of the following settings:
+
+- Set the :envvar:`MINIO_API_SYNC_EVENTS` environment variable to ``on`` and restart the MinIO deployment.
+
+- Set the :mc-conf:`api.sync_events` configuration setting to ``on`` and restart the MinIO deployment.
 
 .. _minio-bucket-notifications-event-types:
 

@@ -108,6 +108,17 @@ To enable MinIO to call the handler, register the handler function as a webhook 
    Register an endpoint for a handler function.
    For multiple handlers, set this environment variable for each function endpoint.
 
+MinIO also supports the following environment variables for authenticated webhook endpoints:
+
+:envvar:`MINIO_LAMBDA_WEBHOOK_AUTH_TOKEN_functionanme <MINIO_LAMBDA_WEBHOOK_AUTH_TOKEN>`
+   Specify the opaque string or JWT authorization token for authenticating to the webhook.
+
+:envvar:`MINIO_LAMBDA_WEBHOOK_CLIENT_CERT_functionname <MINIO_LAMBDA_WEBHOOK_CLIENT_CERT>`
+   Specify the client certificate to use for mTLS authentication to the webhook.
+
+:envvar:`MINIO_LAMBDA_WEBHOOK_CLIENT_KEY_functionname <MINIO_LAMBDA_WEBHOOK_CLIENT_CERT>`
+   Specify the private key to use for mTLS authentication to the webhook.
+
 Restart MinIO to apply the changes.
 
 

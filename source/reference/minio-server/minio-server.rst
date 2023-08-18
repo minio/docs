@@ -1005,6 +1005,13 @@ These environment variables configure notification targets for use with
 - :ref:`minio-server-envvar-bucket-notification-kafka`
 - :ref:`minio-server-envvar-bucket-notification-webhook`
 
+.. envvar:: MINIO_API_SYNC_EVENTS
+   :optional:
+
+   .. include:: /includes/common-mc-admin-config.rst
+      :start-after: start-minio-api-sync-events
+      :end-before: end-minio-api-sync-events
+
 .. _minio-server-envvar-bucket-notification-amqp:
 
 AMQP Service for Bucket Notifications
@@ -2629,7 +2636,26 @@ For example, the following command sets two distinct Object Lambda webhook endpo
 
 .. envvar:: MINIO_LAMBDA_WEBHOOK_ENDPOINT
 
-   The HTTP endpoint of the webhook for the handler function.
+   The HTTP endpoint of the lambda webhook for the handler function.
+
+
+.. envvar:: MINIO_LAMBDA_WEBHOOK_AUTH_TOKEN
+
+   Specify the opaque string or JWT authorization token to use for authenticating to the lambda webhook service.
+
+   .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+      MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
+
+.. envvar:: MINIO_LAMBDA_WEBHOOK_CLIENT_CERT
+
+   Specify the path to the client certificate to use for performing mTLS authentication to the lambda webhook service.
+
+.. envvar:: MINIO_LAMBDA_WEBHOOK_CLIENT_KEY
+
+   Specify the path to the private key to use for performing mTLS authentication to the lambda webhook service.
+
 
 .. _minio-server-envvar-external-identity-management-ad-ldap:
 
