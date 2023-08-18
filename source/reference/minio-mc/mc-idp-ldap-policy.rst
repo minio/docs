@@ -21,11 +21,11 @@ Description
 
 .. start-mc-idp-ldap-policy-desc
 
-The :mc-cmd:`mc idp ldap policy` commands allow you to view the mapping relationships between policies and the associated groups or users. The :mc-cmd:`mc idp ldap policy` commands are only supported against MinIO deployments.
-
+The :mc-cmd:`mc idp ldap policy` commands show the mapping relationships between policies and the associated groups or users. 
 
 .. end-mc-idp-ldap-policy-desc
 
+The :mc-cmd:`mc idp ldap policy` commands are only supported against MinIO deployments.
 
 The :mc-cmd:`mc idp ldap policy` command has the following subcommands:
 
@@ -37,13 +37,19 @@ The :mc-cmd:`mc idp ldap policy` command has the following subcommands:
      - Description
 
    * - :mc-cmd:`mc idp ldap policy attach`
-     - Attach a policy to an entity
+     - .. include:: /reference/minio-mc/mc-idp-ldap-policy-attach.rst
+          :start-after: start-mc-idp-ldap-policy-attach-desc
+          :end-before: end-mc-idp-ldap-policy-attach-desc
 
    * - :mc-cmd:`mc idp ldap policy detach`
-     - Detach a policy from an entity
+     - .. include:: /reference/minio-mc/mc-idp-ldap-policy-detach.rst
+          :start-after: start-mc-idp-ldap-policy-detach-desc
+          :end-before: end-mc-idp-ldap-policy-detach-desc
 
    * - :mc-cmd:`mc idp ldap policy entities`
-     - List policy entity mappings
+     - .. include:: /reference/minio-mc/mc-idp-ldap-policy-entities.rst
+          :start-after: start-mc-idp-ldap-policy-entities-desc
+          :end-before: end-mc-idp-ldap-policy-entities-desc
 
 .. toctree::
    :titlesonly:

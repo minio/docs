@@ -43,28 +43,44 @@ The :mc-cmd:`mc idp ldap` command has the following subcommands:
      - Description
 
    * - :mc-cmd:`mc idp ldap add`
-     - Create an AD/LDAP IDP server configuration.
+     - .. include:: /reference/minio-mc/mc-idp-ldap-add.rst
+          :start-after: start-mc-idp-ldap-add-desc
+          :end-before: end-mc-idp-ldap-add-desc
 
    * - :mc-cmd:`mc idp ldap disable`
-     - Disable an AD/LDAP server configuration.
+     - .. include:: /reference/minio-mc/mc-idp-ldap-disable.rst
+          :start-after: start-mc-idp-ldap-disable-desc
+          :end-before: end-mc-idp-ldap-disable-desc
 
    * - :mc-cmd:`mc idp ldap enable`
-     - Enable an AD/LDAP server configuration.
+     - .. include:: /reference/minio-mc/mc-idp-ldap-enable.rst
+          :start-after: start-mc-idp-ldap-enable-desc
+          :end-before: end-mc-idp-ldap-enable-desc
 
    * - :mc-cmd:`mc idp ldap info`
-     - Display details for a specific AD/LDAP server configuration.
+     - .. include:: /reference/minio-mc/mc-idp-ldap-info.rst
+          :start-after: start-mc-idp-ldap-info-desc
+          :end-before: end-mc-idp-ldap-info-desc
 
    * - :mc-cmd:`mc idp ldap ls`
-     - List AD/LDAP server configurations.
+     - .. include:: /reference/minio-mc/mc-idp-ldap-ls.rst
+          :start-after: start-mc-idp-ldap-ls-desc
+          :end-before: end-mc-idp-ldap-ls-desc
 
    * - :mc-cmd:`mc idp ldap policy` subcommands
-     - Manage AD/LDAP policies and entity mappings.
+     - .. include:: /reference/minio-mc/mc-idp-ldap-policy.rst
+          :start-after: start-mc-idp-ldap-policy-desc
+          :end-before: end-mc-idp-ldap-policy-desc
 
    * - :mc-cmd:`mc idp ldap rm`
-     - Remove an AD/LDAP IDP server configuration from a deployment.
+     - .. include:: /reference/minio-mc/mc-idp-ldap-rm.rst
+          :start-after: start-mc-idp-ldap-rm-desc
+          :end-before: end-mc-idp-ldap-rm-desc
 
    * - :mc-cmd:`mc idp ldap update`
-     - Modify an existing AD/LDAP IDP server configuration.
+     - .. include:: /reference/minio-mc/mc-idp-ldap-update.rst
+          :start-after: start-mc-idp-ldap-update-desc
+          :end-before: end-mc-idp-ldap-update-desc
 
 
 .. toctree::
