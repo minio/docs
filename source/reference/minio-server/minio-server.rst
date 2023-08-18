@@ -2649,9 +2649,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-addr
       :end-before: end-minio-ad-ldap-server-addr
 
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap server_addr 
-   <identity_ldap.server_addr>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add server_addr` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN
 
@@ -2661,9 +2659,7 @@ variables.
       :start-after: start-minio-ad-ldap-lookup-bind-dn
       :end-before: end-minio-ad-ldap-lookup-bind-dn
 
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap lookup_bind_dn 
-   <identity_ldap.lookup_bind_dn>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add lookup_bind_dn` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD
 
@@ -2673,9 +2669,7 @@ variables.
       :start-after: start-minio-ad-ldap-lookup-bind-password
       :end-before: end-minio-ad-ldap-lookup-bind-password
       
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap lookup_bind_password 
-   <identity_ldap.lookup_bind_password>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add lookup_bind_password` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN
 
@@ -2685,9 +2679,7 @@ variables.
       :start-after: start-minio-ad-ldap-user-dn-search-base-dn
       :end-before: end-minio-ad-ldap-user-dn-search-base-dn
       
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap user_dn_search_base_dn 
-   <identity_ldap.user_dn_search_base_dn>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add user_dn_search_base_dn` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER
 
@@ -2697,9 +2689,7 @@ variables.
       :start-after: start-minio-ad-ldap-user-dn-search-filter
       :end-before: end-minio-ad-ldap-user-dn-search-filter
       
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap user_dn_search_filter 
-   <identity_ldap.user_dn_search_filter>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add user_dn_search_filter` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER
 
@@ -2709,9 +2699,7 @@ variables.
       :start-after: start-minio-ad-ldap-group-search-filter
       :end-before: end-minio-ad-ldap-group-search-filter
       
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap group_search_filter 
-   <identity_ldap.group_search_filter>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add group_search_filter` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN
 
@@ -2721,9 +2709,7 @@ variables.
       :start-after: start-minio-ad-ldap-group-search-base-dn
       :end-before: end-minio-ad-ldap-group-search-base-dn
       
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap group_search_base_dn 
-   <identity_ldap.group_search_base_dn>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add group_search_base_dn` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY
 
@@ -2733,9 +2719,7 @@ variables.
       :start-after: start-minio-ad-ldap-tls-skip-verify
       :end-before: end-minio-ad-ldap-tls-skip-verify
 
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap tls_skip_verify 
-   <identity_ldap.tls_skip_verify>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add tls_skip_verify` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SERVER_INSECURE
 
@@ -2745,9 +2729,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-insecure
       :end-before: end-minio-ad-ldap-server-insecure
 
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap server_insecure 
-   <identity_ldap.server_insecure>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add server_insecure` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SERVER_STARTTLS
 
@@ -2757,9 +2739,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-starttls
       :end-before: end-minio-ad-ldap-server-starttls
 
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap server_starttls 
-   <identity_ldap.server_starttls>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add server_starttls` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SRV_RECORD_NAME
 
@@ -2771,8 +2751,7 @@ variables.
       :start-after: start-minio-ad-ldap-srv_record_name
       :end-before: end-minio-ad-ldap-srv_record_name
 
-   This environment variable corresponds with the
-   :mc-conf:`identity_ldap srv_record_name <identity_ldap.srv_record_name>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add srv_record_name` command.
 
 .. envvar:: MINIO_IDENTITY_LDAP_COMMENT
 
@@ -2782,9 +2761,7 @@ variables.
       :start-after: start-minio-ad-ldap-comment
       :end-before: end-minio-ad-ldap-comment
 
-   This environment variable corresponds with the 
-   :mc-conf:`identity_ldap comment 
-   <identity_ldap.comment>` configuration setting.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add comment` command.
    
 .. _minio-server-envvar-external-identity-management-openid:
 

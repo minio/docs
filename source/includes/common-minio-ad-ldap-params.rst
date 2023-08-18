@@ -79,6 +79,15 @@
 
    This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN` environment variable.
 
+.. mc-cmd:: group_search_filter
+   :optional:
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-ad-ldap-group-search-filter
+      :end-before: end-minio-ad-ldap-group-search-filter
+
+   This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER` environment variable.
+
 .. mc-cmd:: server_insecure
    :optional:
 
