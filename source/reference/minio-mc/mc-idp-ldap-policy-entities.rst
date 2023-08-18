@@ -29,6 +29,7 @@ The :mc:`mc idp ldap policy entities` command displays a list of mappings for a 
       The following example lists all mappings for a specific policy, a set of groups, and a selection of users on the ``myminio`` deployment.
 
       Specifically, it lists:
+
       - Users mapped to the ``finteam-policy`` policy.
       - Policies assigned to the ``uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io`` user.
       - Policies assigned to the ``cn=projectb,ou=groups,ou=swengg,dc=min,dc=io`` group.
@@ -70,7 +71,7 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :ref:`alias <alias>` of the MinIO deployment with the entity for which to attach a policy.
+   The :ref:`alias <alias>` of the MinIO deployment for which to display the entity mappings.
 
    For example:
 

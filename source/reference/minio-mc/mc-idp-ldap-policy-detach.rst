@@ -26,7 +26,7 @@ The :mc:`mc idp ldap policy detach` command detaches one or more polices from an
 
    .. tab-item:: EXAMPLE
 
-      The following example detaches the policy, ``userpolicy``, from the user ``bobfisher`` on the ``myminio`` deployment.
+      The following example detaches the policy ``userpolicy`` from the user ``bobfisher`` on the ``myminio`` deployment.
 
       .. code-block:: shell
          :class: copyable
@@ -68,13 +68,15 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :ref:`alias <alias>` of the MinIO deployment with the entity for which to attach a policy.
+   The :ref:`alias <alias>` of the MinIO deployment with the entity from which to detach a policy.
 
    For example:
 
    .. code-block:: none
 
-      mc idp ldap policy detach myminio
+         mc idp ldap policy detach myminio                                                  \
+                                   userpolicy                                               \
+                                   --user='uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io'
 
 
 Example

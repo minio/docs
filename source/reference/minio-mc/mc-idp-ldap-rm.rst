@@ -59,7 +59,7 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :ref:`alias <alias>` of the MinIO deployment for which to output the current AD/LDAP configuration.
+   The :ref:`alias <alias>` of the MinIO deployment for which to remove the current AD/LDAP configuration.
 
    For example:
 

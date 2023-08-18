@@ -26,7 +26,7 @@ The :mc:`mc idp ldap policy attach` command attaches one or more polices to an e
 
    .. tab-item:: EXAMPLE
 
-         The following example attaches the policy, ``userpolicy``, to the user ``bobfisher`` on the ``myminio`` deployment:
+         The following example attaches the policy ``userpolicy`` to the user ``bobfisher`` on the ``myminio`` deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -68,13 +68,15 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :ref:`alias <alias>` of the MinIO deployment with the entity for which to attach a policy.
+   The :ref:`alias <alias>` of the MinIO deployment with the entity to which to attach a policy.
 
    For example:
 
    .. code-block:: none
 
-      mc idp ldap policy attach myminio
+         mc idp ldap policy attach myminio                                                  \
+                                   userpolicy                                               \
+                                   --user='uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io'
 
 
 Example

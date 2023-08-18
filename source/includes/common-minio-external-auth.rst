@@ -168,6 +168,12 @@ Specify the hostname for the Active Directory / LDAP server. For example:
 
    ldapserver.com:636
 
+.. admonition:: :mc-cmd:`~mc idp ldap add srv_record_name` automatically identifies the port
+   :class: note
+
+   If your AD/LDAP server uses :mc-cmd:`DNS SRV Records <mc idp ldap add srv_record_name>`, do *not* append the port number to your :mc-cmd:`~mc idp ldap add server_addr` value.
+   SRV requests automatically include port numbers when returning the list of available servers.
+   
 .. end-minio-ad-ldap-server-addr
 
 .. start-minio-ad-ldap-lookup-bind-dn
@@ -190,7 +196,7 @@ Specify the password for the :ref:`Lookup-Bind
 
 .. start-minio-ad-ldap-user-dn-search-base-dn
 
-Specify the base Distinguished name (DN) MinIO uses when querying for 
+Specify the base Distinguished Name (DN) MinIO uses when querying for 
 user credentials matching those provided by an authenticating client.
 For example:
 

@@ -46,16 +46,16 @@ The :mc-cmd:`mc idp ldap` command has the following subcommands:
      - Create an AD/LDAP IDP server configuration.
 
    * - :mc-cmd:`mc idp ldap disable`
-     - Disables an AD/LDAP server configuration.
+     - Disable an AD/LDAP server configuration.
 
    * - :mc-cmd:`mc idp ldap enable`
-     - Enables an AD/LDAP server configuration.
+     - Enable an AD/LDAP server configuration.
 
    * - :mc-cmd:`mc idp ldap info`
-     - Displays details for a specific AD/LDAP server configuration.
+     - Display details for a specific AD/LDAP server configuration.
 
    * - :mc-cmd:`mc idp ldap ls`
-     - Lists AD/LDAP server configurations.
+     - List AD/LDAP server configurations.
 
    * - :mc-cmd:`mc idp ldap policy` subcommands
      - Manage AD/LDAP policies and entity mappings.
