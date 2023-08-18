@@ -87,7 +87,7 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
                proxy_pass https://minio_s3; # This uses the upstream directive definition to load balance
             }
 
-            location /minio/ui {
+            location /minio/ui/ {
                rewrite ^/minio/ui/(.*) /$1 break;
                proxy_set_header Host $http_host;
                proxy_set_header X-Real-IP $remote_addr;
