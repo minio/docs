@@ -83,7 +83,7 @@ Parameters
 Example
 ~~~~~~~
 
-The following example attaches two policies, ``policy1`` and ``policy2``, to the ``projectb`` group on the ``myminio`` deployment:
+The following example lists the entities mapped to each of two policies, ``policy1`` and ``policy2`` and entities mapped to the ``projectb`` group on the ``myminio`` deployment:
 
 .. code-block:: shell
    :class: copyable
