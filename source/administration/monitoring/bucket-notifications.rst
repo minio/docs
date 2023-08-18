@@ -97,6 +97,13 @@ To enable synchronous bucket notifications for *all configured remote targets*, 
 
 - Set the :mc-conf:`api.sync_events` configuration setting to ``on`` and restart the MinIO deployment.
 
+.. important::
+
+   MinIO maintains a user-configurable queue of undelivered bucket notification events for each configured remote (``10000`` events by default).
+
+   Enabling synchronous bucket notification may result in increased queue usage if the remote notification target cannot keep up with the rate of sent events.
+   Once the queue fills, MinIO discards new events.
+
 .. _minio-bucket-notifications-event-types:
 
 Supported S3 Event Types
