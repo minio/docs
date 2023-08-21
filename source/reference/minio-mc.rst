@@ -341,7 +341,7 @@ The following table lists :mc-cmd:`mc` commands:
           :end-before: end-mc-rb-desc
      
    * - | :mc:`mc replicate add`
-       | :mc:`mc replicate diff`
+       | :mc:`mc replicate backlog`
        | :mc:`mc replicate export`
        | :mc:`mc replicate import`
        | :mc:`mc replicate ls`

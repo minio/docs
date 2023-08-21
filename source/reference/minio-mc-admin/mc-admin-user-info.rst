@@ -91,14 +91,25 @@ Use :mc-cmd:`mc admin user info` to view detailed user information for a user on
 
 - Replace :mc-cmd:`USERNAME <mc admin user info USERNAME>` with the username of the user to display information for.
 
-The output resembles the following:
+The output resembles the following when using the built-in MinIO Identity Provider:
 
 .. code-block:: shell
 
-   AccessKey: myuser
+   AccessKey: miniouser
    Status: enabled
-   PolicyName: readwrite
-   MemberOf:
+   PolicyName: 
+   MemberOf: []
+   Authentication: builtin (miniouser)
+
+For an third-party LDAP service integration integration, the output resembles the following:
+
+.. code-block:: shell
+
+   AccessKey: uid=dillon,ou=people,ou=swengg,dc=min,dc=io
+   Status: 
+   PolicyName: consoleAdmin
+   MemberOf: []
+   Authentication: ldap/localhost:1389 (uid=dillon,ou=people,ou=swengg,dc=min,dc=io)
 
 View Policies from Group Membership
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -129,6 +140,7 @@ The output resembles the following:
       "policies": [
        "testingGroupPolicy"
       ]
+    "authentication": builtin (myuser)
      }
     ]
    }

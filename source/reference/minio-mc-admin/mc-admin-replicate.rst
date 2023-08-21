@@ -82,7 +82,7 @@ Syntax
    Create or expand a site replication configuration.
    The configuration uses asynchronous site replication by default, as MinIO recommends.
 
-   If your circumstances require synchronous site replication, complete the configuration, then use :mc-cmd:`mc admin replicate update --sync`.
+   If your circumstances require synchronous site replication, complete the configuration, then use :mc-cmd:`mc admin replicate update --mode` with the ``sync`` option.
 
    .. tab-set::
 
@@ -160,7 +160,7 @@ Syntax
                                         ALIAS                           \
                                         --deployment-id [deploymentID]  \
                                         --endpoint [newEndpoint]        \
-                                        --sync ["enable" | "disable"]
+                                        --mode ["sync" | "async"]
     
    .. mc-cmd:: ALIAS
       :required:
@@ -179,8 +179,20 @@ Syntax
       
       The new endpoint or URL to associate with the peer site.
 
+   .. mc-cmd:: --mode
+      :optional:
+
+      Specify whether MinIO performs replication operations to the peer synchronously or asynchronously.
+      Available values are ``sync`` and ``async``.
+      If not defined, MInIO uses asynchronous site replication.
+
    .. mc-cmd:: --sync
       :optional:
+
+      .. important::
+
+         The ``--sync`` flag has been deprecated as of ``RELEASE.2023-07-07T05-25-51Z``.
+         Use :mc-cmd:`~mc admin replicate --mode` instead.
 
       Enable or disable synchronous site replication.
       Available values are ``enable`` and ``disable``.

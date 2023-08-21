@@ -1,7 +1,8 @@
 .. _minio-mc-replicate-diff:
+.. _minio-mc-replicate-backlog:
 
 =====================
-``mc replicate diff``
+``mc replicate backlog``
 =====================
 
 .. default-domain:: minio
@@ -11,15 +12,21 @@
    :depth: 2
 
 .. mc:: mc replicate diff
+.. mc:: mc replicate backlog
+
+.. versionchanged:: mc.RELEASE.2023-07-18T21-05-38Z
+
+   ``mc replicate diff`` has been renamed ``mc replicate backlog``.
+   No functionality has changed.
 
 Description
 -----------
 
-.. start-mc-replicate-diff-desc
+.. start-mc-replicate-backlog-desc
 
-The :mc:`mc replicate diff` shows a list of unreplicated new or deleted objects.
+The :mc:`mc replicate backlog` shows a list of unreplicated new or deleted objects.
 
-.. end-mc-replicate-diff-desc
+.. end-mc-replicate-backlog-desc
 
 You can list the replication status of objects for a particular remote target.
 To do so, you must have the ARN of the remote target.
@@ -38,7 +45,7 @@ Syntax
       .. code-block:: shell
          :class: copyable
 
-         mc replicate diff myminio/notes/teamorange/projects --arn arn:minio:replication::3bb8c736-4014-42c5-b3cb-d64e3ebaa75e:notes
+         mc replicate backlog myminio/notes/teamorange/projects --arn arn:minio:replication::3bb8c736-4014-42c5-b3cb-d64e3ebaa75e:notes
 
       If any new or deleted objects have not yet replicated, the command outputs something similar to the following:
 
@@ -57,8 +64,8 @@ Syntax
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] replicate diff   \
-                          [--arn "string"] \
+         mc [GLOBALFLAGS] replicate backlog   \
+                          [--arn "string"]    \
                           TARGET
 
       .. include:: /includes/common-minio-mc.rst
@@ -99,7 +106,7 @@ Display unreplicated ``PUT`` and ``DELETE`` actions for a prefix:
 .. code-block:: shell
    :class: copyable
 
-   mc replicate diff myminio/mybucket/path/to/prefix
+   mc replicate backlog myminio/mybucket/path/to/prefix
 
 - Replace ``myminio/mybucket`` with the :mc-cmd:`~mc replicate add ALIAS` and
   full bucket path for which to create the replication configuration.
@@ -116,12 +123,12 @@ If unreplicated objects exist, the output returns a list of the actions that cre
 View Unreplicated Objects at a Specific Remote Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following :mc:`mc replicate diff` command shows unreplicated objects at an alias/bucket/prefix path for a specific remote target:
+The following :mc:`mc replicate backlog` command shows unreplicated objects at an alias/bucket/prefix path for a specific remote target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc replicate diff myminio/mybucket/path/to/prefix --arn <remote-arn>
+   mc replicate backlog myminio/mybucket/path/to/prefix --arn <remote-arn>
 
 - Replace ``myminio/mybucket`` with the :mc-cmd:`~mc replicate add ALIAS` and
   full bucket path for which to show unreplicated objects.

@@ -26,7 +26,7 @@ Use the :mc:`mc support perf` command to review the performance of the S3 API (r
 The resulting tests can provide general guidance of deployment performance under S3 ``GET`` and ``PUT`` requests and identify any potential bottlenecks.
 For more complete performance testing, consider using a combination of load-testing using your staging application environments and the MinIO `WARP <https://github.com/minio/warp>`_ S3 benchmarking tool.
    
-:mc:`mc support perf` has three subcommands
+:mc:`mc support perf` has the following subcommands
 
 #. :mc-cmd:`~mc support perf drive`
 
@@ -43,6 +43,10 @@ For more complete performance testing, consider using a combination of load-test
 #. :mc-cmd:`~mc support perf client`
 
    Measure the network throughput to a client.
+
+#. :mc-cmd:`~mc support perf site-replication`
+ 
+   Measure the speed of site replication operations.
 
 .. include:: /includes/common-mc-support.rst
    :start-after: start-minio-only
@@ -105,6 +109,16 @@ Run a network throughput test on a cluster with alias ``minio1``.
 
    mc support perf net minio1
 
+Test Site Replication Speed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Run a test on the speed of site replication operations across peers for the peer at ``minio1``.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc support perf site-replication minio1
+
 Syntax
 ------
 
@@ -164,6 +178,19 @@ Syntax
                       [--verbose, -v]        \
                       [--airgap]             \
                       ALIAS
+
+.. mc-cmd:: site-replication
+   :fullpath:
+
+   Measure the network throughput of site replication operations between configured peers.
+
+   .. code-block:: shell
+
+      mc [GLOBAL FLAGS] support perf site-replication \
+                        --duration                    \
+                        [--verbose, -v]               \
+                        ALIAS
+
 
 Parameters
 ~~~~~~~~~~
