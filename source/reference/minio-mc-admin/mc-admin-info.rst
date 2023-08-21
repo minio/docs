@@ -51,10 +51,6 @@ Examples
 
    mc admin info play
 
-.. versionchanged:: RELEASE.2023-07-18T17-49-40Z
-
-   MinIO reports the number of delete markers on the deployment.
-
 Syntax
 ------
 
