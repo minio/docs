@@ -55,4 +55,4 @@ The command has the following syntax:
    /reference/minio-mc/mc-support-top-api
    /reference/minio-mc/mc-support-top-locks
    /reference/minio-mc/mc-support-top-disk
-   /reference/minio-md/mc-support-top-net
+   /reference/minio-mc/mc-support-top-net

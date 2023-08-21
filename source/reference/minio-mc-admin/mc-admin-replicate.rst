@@ -192,7 +192,7 @@ Syntax
       .. important::
 
          The ``--sync`` flag has been deprecated as of ``RELEASE.2023-07-07T05-25-51Z``.
-         Use :mc-cmd:`~mc admin replicate --mode` instead.
+         Use :mc-cmd:`~mc admin replicate update --mode` instead.
 
       Enable or disable synchronous site replication.
       Available values are ``enable`` and ``disable``.

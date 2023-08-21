@@ -1,9 +1,9 @@
 .. _minio-mc-replicate-diff:
 .. _minio-mc-replicate-backlog:
 
-=====================
+========================
 ``mc replicate backlog``
-=====================
+========================
 
 .. default-domain:: minio
 

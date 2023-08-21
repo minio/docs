@@ -87,7 +87,7 @@ Subcommands
    :hidden:
    
    /reference/minio-mc/mc-replicate-add
-   /reference/minio-mc/mc-replicate-diff
+   /reference/minio-mc/mc-replicate-backlog
    /reference/minio-mc/mc-replicate-ls
    /reference/minio-mc/mc-replicate-update
    /reference/minio-mc/mc-replicate-resync
