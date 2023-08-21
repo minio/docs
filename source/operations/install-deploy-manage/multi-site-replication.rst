@@ -91,7 +91,9 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
 .. versionchanged:: RELEASE.2023-07-18T17-49-40Z
 
    Site replication operations retry up to three (3) times.
-   Failed operations wait for the MinIO Scanner to identify the replication task again before requeueing for another three attempts.
+   
+   MinIO dequeues replication operations that fail to replicate after three attempts.
+   The scanner can pick up those affected objects at a later time and requeue them for replication.
 
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
 

@@ -21,10 +21,7 @@ for each MinIO server in the deployment.
 
 .. end-mc-admin-info-desc
 
-.. versionchanged:: RELEASE.2023-07-18T17-49-40Z
-
-   MinIO now reports the number of delete markers on the deployment.
-   
+  
 The output of the command resembles the following:
 
 .. code-block::
@@ -53,6 +50,10 @@ Examples
    :class: copyable
 
    mc admin info play
+
+.. versionchanged:: RELEASE.2023-07-18T17-49-40Z
+
+   MinIO reports the number of delete markers on the deployment.
 
 Syntax
 ------

@@ -245,8 +245,9 @@ add to the queue.
 
    MinIO queues failed replication operations and retries those operations up to three (3) times.
    
-   Replication operations that fail more than three times wait for the scanner to identify the object for replication before trying again.
-
+   MinIO dequeues replication operations that fail to replicate after three attempts.
+   The scanner can pick up those affected objects at a later time and requeue them for replication.
+  
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
 
    Failed or pending replications requeue automatically when performing a list or any ``GET`` or ``HEAD`` API method. 
