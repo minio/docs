@@ -155,7 +155,7 @@ Syntax
 .. mc-cmd:: client
    :fullpath:
 
-   Measure the network throughput from the server to a client.
+   Measure the network throughput from the local device running the MinIO Client to the server.
 
    .. code-block:: shell
 
