@@ -21,21 +21,22 @@ for each MinIO server in the deployment.
 
 .. end-mc-admin-info-desc
 
+  
 The output of the command resembles the following:
 
 .. code-block::
 
    ●  play.min.io
-      Uptime: 8 hours 
-      Version: 2023-04-15T14:34:02Z
+      Uptime: 14 hours 
+      Version: 2023-08-17T16:37:55Z
       Network: 1/1 OK 
       Drives: 4/4 OK 
       Pool: 1
-   
+
    Pools:
       1st, Erasure sets: 1, Drives per erasure set: 4
-   
-   11 GiB Used, 395 Buckets, 4,131 Objects, 676 Versions
+
+   4.3 GiB Used, 499 Buckets, 3,547 Objects, 554 Versions, 67 Delete Markers
    4 drives online, 0 drives offline
 
 Examples
