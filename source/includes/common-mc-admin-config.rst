@@ -161,6 +161,10 @@ server/broker.
 Specify the password for the MQTT username with which MinIO authenticates to the
 MQTT server/broker.
 
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
 .. end-minio-notify-mqtt-password
 
 
@@ -287,6 +291,10 @@ enforces authentication.
 
 The password for connecting to an Elasticsearch service endpoint which enforces
 authentication.
+
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 .. end-minio-notify-elasticsearch-password
 
@@ -430,6 +438,10 @@ supports the following values:
 
 Specify the password for the Redis server.
 
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
 .. end-minio-notify-redis-password
 
 
@@ -495,11 +507,19 @@ Specify the username for connecting to the NATS service endpoint.
 
 Specify the passport for connecting to the NATS service endpoint.
 
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
 .. end-minio-notify-nats-password
 
 .. start-minio-notify-nats-token
 
 Specify the token for connecting to the NATS service endpoint.
+
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 .. end-minio-notify-nats-token
 
@@ -837,6 +857,10 @@ to the Kafka broker(s).
 Specify the password for performing SASL/PLAIN or SASL/SCRAM authentication
 to the Kafka broker(s).
 
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
 .. end-minio-notify-kafka-sasl-password
 
 .. start-minio-notify-kafka-sasl-mechanism
@@ -976,6 +1000,10 @@ Specify the URL for the webhook service.
 
 Specify the opaque string or JWT authorization token to use for 
 authenticating to the webhook service.
+
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 .. end-minio-notify-webhook-auth-token
 
@@ -1280,3 +1308,13 @@ Defaults to ``"text/*, application/json, application/xml, binary/octet-stream"``
 +-----------------+--------------------------+
 
 .. end-minio-data-compression-default-desc
+
+.. start-minio-api-sync-events
+
+Enables synchronous :ref:`bucket notifications <minio-bucket-notifications>`.
+
+Specify ``on`` to direct MinIO to wait until the remote target returns success on receipt of an event before processing further events.
+
+Defaults to ``off``, or asynchronous bucket notifications where MinIO does not wait for the remote target to return success on receipt of an event.
+
+.. end-minio-api-sync-events
