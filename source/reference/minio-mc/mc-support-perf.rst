@@ -40,6 +40,10 @@ For more complete performance testing, consider using a combination of load-test
 
    Measure the network throughput of all nodes.
 
+#. :mc-cmd:`~mc support perf client`
+
+   Measure the network throughput to a client.
+
 .. include:: /includes/common-mc-support.rst
    :start-after: start-minio-only
    :end-before: end-minio-only
@@ -148,6 +152,19 @@ Syntax
                       [--airgap]          \
                       ALIAS
 
+.. mc-cmd:: client
+   :fullpath:
+
+   Measure the network throughput from the local device running the MinIO Client to the server.
+
+   .. code-block:: shell
+
+      mc [GLOBAL FLAGS] support perf client  \
+                      --duration             \
+                      [--verbose, -v]        \
+                      [--airgap]             \
+                      ALIAS
+
 Parameters
 ~~~~~~~~~~
 
@@ -220,9 +237,17 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   Applies to the :mc-cmd:`~mc support perf drive`, :mc-cmd:`~mc support perf object`, and :mc-cmd:`~mc support perf net` commands.
+   Applies to the :mc-cmd:`~mc support perf drive`, :mc-cmd:`~mc support perf object`, :mc-cmd:`~mc support perf net`, and :mc-cmd:`~mc support perf client` commands.
 
    The :ref:`alias <alias>` of the MinIO deployment.
+
+.. mc-cmd:: --duration
+   :required:
+
+   Applies to the :mc-cmd:`~mc support perf client` command.
+
+   Length of time in seconds to perform the test.
+   Time cannot be `0` or negative.
        
 
 Global Flags

@@ -10,7 +10,7 @@ Metrics and Alerts
 
 .. contents:: Table of Contents
    :local:
-   :depth: 2
+   :depth: 3
 
 MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
@@ -159,14 +159,14 @@ Cluster Usage Metrics
 Drive Metrics
 +++++++++++++
 
-``minio_cluster_disk_offline_total``
-  Total drives offline.
+``minio_cluster_drive_offline_total``
+  Total drives offline in this cluster.
 
-``minio_cluster_disk_online_total``
-  Total drives online.
+``minio_cluster_drive_online_total``
+  Total drives online in this cluster.
 
-``minio_cluster_disk_total``
-  Total drives.
+``minio_cluster_drive_total``
+  Total drives in this cluster.
 
 ILM Metrics
 +++++++++++
@@ -352,29 +352,35 @@ These metrics can be obtained from any MinIO server once per collection.
 Drive Metrics
 +++++++++++++
 
-``minio_node_disk_free_bytes``
-  Total storage available on a drive.
+``minio_node_drive_free_bytes``
+  Total storage available on a drive in this node.
 
-``minio_node_disk_free_inodes``
-  Total free inodes.
+``minio_node_drive_free_inodes``
+  Total free inodes in this node.
 
-``minio_node_disk_latency_us``
+``minio_node_drive_latency_us``
   Average last minute latency in µs for drive API storage operations.
 
-``minio_node_disk_offline_total``
-  Total drives offline.
+``minio_node_drive_offline_total``
+  Total drives offline in this node.
 
-``minio_node_disk_online_total``
-  Total drives online.
+``minio_node_drive_online_total``
+  Total drives online in this node.
 
-``minio_node_disk_total``
-  Total drives.
+``minio_node_drive_total``
+  Total drives in this node.
 
-``minio_node_disk_total_bytes``
-  Total storage on a drive.
+``minio_node_drive_total_bytes``
+  Total storage on a drive in this node.
 
-``minio_node_disk_used_bytes``
-  Total storage used on a drive.
+``minio_node_drive_used_bytes``
+  Total storage used on a drive in this node.
+
+``minio_node_drive_errors_timeout``
+  Total number of timeout errors since server start in this node.
+
+``minio_node_drive_errors_availability``
+  Total number of I/O errors, permission denied, and timeouts since server start in this node.
 
 File Metrics
 ++++++++++++

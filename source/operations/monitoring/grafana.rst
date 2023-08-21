@@ -32,6 +32,10 @@ To track changes to the Grafana dashboard, introspect the JSON files for the `se
 
 .. _minio-server-grafana-metrics:
 
+To track changes to the Grafana dashboard, introspect the JSON files for the `server <https://github.com/minio/minio/blob/master/docs/metrics/prometheus/grafana/minio-dashboard.json>`__ or `bucket <https://github.com/minio/minio/blob/master/docs/metrics/prometheus/grafana/minio-bucket.json>`__ dashboards in the MinIO Server GitHub repository.
+
+.. _minio-server-grafana-metrics:
+
 MinIO Server Metrics Dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
