@@ -82,7 +82,8 @@ Syntax
    Create or expand a site replication configuration.
    The configuration uses asynchronous site replication by default, as MinIO recommends.
 
-   If your circumstances require synchronous site replication, complete the configuration, then use :mc-cmd:`mc admin replicate update --mode` with the ``sync`` option.
+   To enable synchronous site replication, create the replication using this command *first*.
+   Then use :mc-cmd:`mc admin replicate update --mode sync <mc admin replicate update --mode>` to update the configuration.
 
    .. tab-set::
 
@@ -184,7 +185,8 @@ Syntax
 
       Specify whether MinIO performs replication operations to the peer synchronously or asynchronously.
       Available values are ``sync`` and ``async``.
-      If not defined, MInIO uses asynchronous site replication.
+      
+      Defaults to ``async``.
 
    .. mc-cmd:: --sync
       :optional:

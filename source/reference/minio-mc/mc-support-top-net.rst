@@ -10,6 +10,10 @@
 
 .. mc:: mc support top net
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Syntax
 ------
 
@@ -60,7 +64,7 @@ Parameters
 
    The interval in seconds between metric requests.
 
-   If no entry is made, the command requests metrics every second.
+   By default, the command requests metrics every second.
 
 Global Flags
 ~~~~~~~~~~~~

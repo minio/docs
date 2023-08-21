@@ -91,7 +91,7 @@ Use :mc-cmd:`mc admin user info` to view detailed user information for a user on
 
 - Replace :mc-cmd:`USERNAME <mc admin user info USERNAME>` with the username of the user to display information for.
 
-The output resembles the following when using the built-in MinIO Identity Provider:
+For the :ref:`MinIO internal IDentity Provider (IDP) <minio-internal-idp>`, the output resembles the following:
 
 .. code-block:: shell
 
@@ -101,7 +101,7 @@ The output resembles the following when using the built-in MinIO Identity Provid
    MemberOf: []
    Authentication: builtin (miniouser)
 
-For an third-party LDAP service integration integration, the output resembles the following:
+For a :ref:`third-party <minio-external-identity-management>` identity service such as LDAP, the output resembles the following:
 
 .. code-block:: shell
 

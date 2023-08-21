@@ -30,6 +30,10 @@ When enabled, MinIO can send logs to SUBNET in real time, diagnostics every 24 h
 MinIO disables this functionality by default, regardless of registration status.
 You must explicitly enable the ``callhome`` function to begin real time log upload.
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Syntax
 ------
 

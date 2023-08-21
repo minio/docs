@@ -14,6 +14,10 @@
 
    ``mc support perf`` replaces the ``mc admin speedtest`` command.
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Description
 -----------
 
@@ -112,7 +116,7 @@ Run a network throughput test on a cluster with alias ``minio1``.
 Test Site Replication Speed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run a test on the speed of site replication operations across peers for the peer at ``minio1``.
+Run a test on the speed of site replication operations from the ``minio1`` site to other configured peers.
 
 .. code-block:: shell
    :class: copyable
@@ -182,7 +186,7 @@ Syntax
 .. mc-cmd:: site-replication
    :fullpath:
 
-   Measure the network throughput of site replication operations between configured peers.
+   Measure the speed of site replication operations from the specified ``ALIAS`` to other configured peers.
 
    .. code-block:: shell
 
