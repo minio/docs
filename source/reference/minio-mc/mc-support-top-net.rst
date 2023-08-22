@@ -34,7 +34,7 @@ The :mc:`mc support top net` command displays realtime network metrics.
 
          mc support top net myminio/
 
-      The output returns information such as the server URL, interface, receive, transmit, and messages.
+      The output returns information such as the server URL, network interface, receive rate, transmit rate, and system messages.
 
    .. tab-item:: SYNTAX
 
