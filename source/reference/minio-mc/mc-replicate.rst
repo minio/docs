@@ -42,10 +42,10 @@ Subcommands
           :start-after: start-mc-replicate-add-desc
           :end-before: end-mc-replicate-add-desc
 
-   * - :mc:`~mc replicate diff`
-     - .. include:: /reference/minio-mc/mc-replicate-diff.rst
-          :start-after: start-mc-replicate-diff-desc
-          :end-before: end-mc-replicate-diff-desc
+   * - :mc:`~mc replicate backlog`
+     - .. include:: /reference/minio-mc/mc-replicate-backlog.rst
+          :start-after: start-mc-replicate-backlog-desc
+          :end-before: end-mc-replicate-backlog-desc
 
    * - :mc:`~mc replicate export`
      - .. include:: /reference/minio-mc/mc-replicate-export.rst
@@ -87,7 +87,7 @@ Subcommands
    :hidden:
    
    /reference/minio-mc/mc-replicate-add
-   /reference/minio-mc/mc-replicate-diff
+   /reference/minio-mc/mc-replicate-backlog
    /reference/minio-mc/mc-replicate-ls
    /reference/minio-mc/mc-replicate-update
    /reference/minio-mc/mc-replicate-resync

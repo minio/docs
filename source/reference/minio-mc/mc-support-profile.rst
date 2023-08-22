@@ -10,6 +10,10 @@
 
 .. mc:: mc support profile
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Description
 -----------
 

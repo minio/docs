@@ -1,5 +1,5 @@
 =======================
-``mc support top disk``
+``mc support top net``
 =======================
 
 .. default-domain:: minio
@@ -8,7 +8,7 @@
    :local:
    :depth: 2
 
-.. mc:: mc support top disk
+.. mc:: mc support top net
 
 .. include:: /includes/common-mc-support.rst
    :start-after: start-minio-only
@@ -17,22 +17,24 @@
 Syntax
 ------
 
-.. start-mc-support-top-disk-desc
+.. start-mc-support-top-net-desc
 
-The :mc:`mc support top disk` command displays current drive statistics.
+The :mc:`mc support top net` command displays realtime network metrics.
 
-.. end-mc-support-top-disk-desc
+.. end-mc-support-top-net-desc
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command displays the current in-progress S3 API calls on the :term:`alias` ``myminio``.
+      The following command displays the current realtime network metrics for the :term:`alias` ``myminio`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
-         mc support top disk myminio/
+         mc support top net myminio/
+
+      The output returns information such as the server URL, network interface, receive rate, transmit rate, and system messages.
 
    .. tab-item:: SYNTAX
 
@@ -41,8 +43,8 @@ The :mc:`mc support top disk` command displays current drive statistics.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] support top disk                     \
-                                      [--count, -c "integer"]  \
+         mc [GLOBALFLAGS] support top disk                \
+                                      [--interval value]  \
                                       TARGET
 
       .. include:: /includes/common-minio-mc.rst
@@ -57,12 +59,12 @@ Parameters
 
    The full path to the :ref:`alias <minio-mc-alias>` or :term:`prefix` where the command should run.
 
-.. mc-cmd:: --count, -c
+.. mc-cmd:: --interval
    :optional:
 
-   Display statistics for up to the entered number of drives.
+   The interval in seconds between metric requests.
 
-   If no entry is made, the command returns statistics for up to 10 drives.
+   By default, the command requests metrics every second.
 
 Global Flags
 ~~~~~~~~~~~~

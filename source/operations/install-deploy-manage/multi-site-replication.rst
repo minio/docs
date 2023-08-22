@@ -114,7 +114,7 @@ Synchronous vs Asynchronous Replication
 
 MinIO strongly recommends using the default asynchronous site replication.
 Synchronous site replication performance depends strongly on latency between sites, where higher latency can result in lower PUT performance and replication lag.
-To configure synchronous site replication use :mc-cmd:`mc admin replicate update` with the :mc-cmd:`~mc admin replicate update --sync` option.
+To configure synchronous site replication use :mc-cmd:`mc admin replicate update` with the :mc-cmd:`~mc admin replicate update --mode` option.
 
 Proxy to Other Sites
 ~~~~~~~~~~~~~~~~~~~~

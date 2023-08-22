@@ -16,6 +16,10 @@
 
    ``mc support top`` replaces the ``mc admin top`` command.
 
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
 Description
 -----------
 
@@ -35,6 +39,7 @@ MinIO deployments, similar to the output of the ``top`` command in a shell.
 - :mc-cmd:`~mc support top api`
 - :mc-cmd:`~mc support top locks`
 - :mc-cmd:`~mc support top disk`
+- :mc-cmd:`~mc support top net`
 
 Refer to the pages linked above for each subcommand for details.
 
@@ -54,3 +59,4 @@ The command has the following syntax:
    /reference/minio-mc/mc-support-top-api
    /reference/minio-mc/mc-support-top-locks
    /reference/minio-mc/mc-support-top-disk
+   /reference/minio-mc/mc-support-top-net
