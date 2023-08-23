@@ -111,7 +111,7 @@ API Configuration
          :start-after: start-minio-api-sync-events
          :end-before: end-minio-api-sync-events
 
-      Corresponds with the :envvar:`MINIO_API_SYNC_EVENTS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_API_SYNC_EVENTS` environment variable.
 
 .. _minio-server-config-logging-logs:
 
@@ -157,8 +157,7 @@ HTTP Webhook Log Target
 
       The HTTP endpoint of the webhook.
 
-      This setting corresponds to the
-      :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT` environment variable.
 
    .. mc-conf:: auth_token
 
@@ -167,8 +166,7 @@ HTTP Webhook Log Target
       The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
       Omit for webhooks which do not enforce authentication.
 
-      This setting corresponds to the
-      :envvar:`MINIO_LOGGER_WEBHOOK_AUTH_TOKEN` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_AUTH_TOKEN` environment variable.
 
    .. mc-conf:: client_cert
 
@@ -176,7 +174,7 @@ HTTP Webhook Log Target
 
       The path to the mTLS certificate to use for authenticating to the webhook logger.
 
-      This setting corresponds to the :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_CERT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_CERT` environment variable.
 
    .. mc-conf:: client_key
 
@@ -184,7 +182,7 @@ HTTP Webhook Log Target
 
       The path to the mTLS certificate key to use to authenticate with the webhook logger service.
 
-      This setting corresponds to the :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_KEY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_KEY` environment variable.
 
    .. mc-conf:: proxy
 
@@ -194,8 +192,7 @@ HTTP Webhook Log Target
 
       Define a proxy to use for the webhook logger when communicating from MinIO to external webhooks.
 
-      This setting corresponds to the
-      :envvar:`MINIO_LOGGER_WEBHOOK_PROXY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_PROXY` environment variable.
 
    .. mc-conf:: queue_dir
 
@@ -208,8 +205,7 @@ HTTP Webhook Log Target
 
       MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
 
-      This setting corresponds to the
-      :envvar:`MINIO_LOGGER_WEBHOOK_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_QUEUE_DIR` environment variable.
 
    .. mc-conf:: queue_size
 
@@ -218,8 +214,7 @@ HTTP Webhook Log Target
       An integer value to use for the queue size for logger webhook targets.
       The default is ``100000`` events.
 
-      This setting corresponds to the
-      :envvar:`MINIO_LOGGER_WEBHOOK_QUEUE_SIZE` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_QUEUE_SIZE` environment variable.
 
 .. _minio-server-config-logging-audit:
 
@@ -265,8 +260,7 @@ HTTP Webhook Audit Log Target
 
       The HTTP endpoint of the webhook.
 
-      This setting corresponds to the 
-      :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT` environment variable.
 
    .. mc-conf:: auth_token
       
@@ -275,8 +269,7 @@ HTTP Webhook Audit Log Target
       The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
       Omit for webhooks which do not enforce authentication.
 
-      This setting corresponds to the 
-      :envvar:`MINIO_AUDIT_WEBHOOK_AUTH_TOKEN` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_AUTH_TOKEN` environment variable.
 
    .. mc-conf:: client_cert
 
@@ -287,8 +280,7 @@ HTTP Webhook Audit Log Target
 
       Requires specifying :mc-conf:`~audit_webhook.client_key`.
 
-      This setting corresponds to the
-      :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_CERT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_CERT` environment variable.
 
    .. mc-conf:: client_key
 
@@ -299,7 +291,7 @@ HTTP Webhook Audit Log Target
 
       Requires specifying :mc-conf:`~audit_webhook.client_cert`.
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_KEY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_KEY` environment variable.
 
    .. mc-conf:: queue_dir
 
@@ -312,7 +304,7 @@ HTTP Webhook Audit Log Target
 
       MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_WEBHOOK_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_QUEUE_DIR` environment variable.
 
    .. mc-conf:: queue_size
 
@@ -321,7 +313,7 @@ HTTP Webhook Audit Log Target
       An integer value to use for the queue size for webhook targets.
       The default is ``100000`` events.
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_WEBHOOK_QUEUE_SIZE` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_QUEUE_SIZE` environment variable.
 
 .. _minio-server-config-logging-kafka-audit:
 
@@ -351,7 +343,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-brokers-desc
          :end-before: end-minio-kafka-audit-logging-brokers-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_BROKERS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_BROKERS` environment variable.
 
    .. mc-conf:: topic
       :required:
@@ -361,7 +353,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-topic-desc
          :end-before: end-minio-kafka-audit-logging-topic-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_TOPIC` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_TOPIC` environment variable.
 
    .. mc-conf:: tls
       :optional:
@@ -371,7 +363,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-tls-desc
          :end-before: end-minio-kafka-audit-logging-tls-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_TLS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_TLS` environment variable.
 
    .. mc-conf:: tls_skip_verify
       :optional:
@@ -381,7 +373,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-tls-skip-verify-desc
          :end-before: end-minio-kafka-audit-logging-tls-skip-verify-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_TLS_SKIP_VERIFY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_TLS_SKIP_VERIFY` environment variable.
 
    .. mc-conf:: tls_client_auth
       :optional:
@@ -393,7 +385,7 @@ Kafka Audit Log Target
 
       Requires specifying :mc-conf:`~audit_kafka.client_tls_cert` and :mc-conf:`~audit_kafka.client_tls_key`.
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_TLS_CLIENT_AUTH` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_TLS_CLIENT_AUTH` environment variable.
 
    .. mc-conf:: client_tls_cert
       :optional:
@@ -403,7 +395,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-client-tls-cert-desc
          :end-before: end-minio-kafka-audit-logging-client-tls-cert-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT` environment variable.
 
 
    .. mc-conf:: client_tls_key
@@ -414,7 +406,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-client-tls-key-desc
          :end-before: end-minio-kafka-audit-logging-client-tls-key-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY` environment variable.
 
    .. mc-conf:: sasl
       :optional:
@@ -426,7 +418,7 @@ Kafka Audit Log Target
 
       Requires specifying :mc-conf:`~audit_kafka.sasl_username` and :mc-conf:`~audit_kafka.sasl_password`.
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_SASL` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_SASL` environment variable.
 
 
    .. mc-conf:: sasl_username
@@ -437,7 +429,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-sasl-username-desc
          :end-before: end-minio-kafka-audit-logging-sasl-username-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_SASL_USERNAME` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_SASL_USERNAME` environment variable.
 
    .. mc-conf:: sasl_password
       :optional:
@@ -447,7 +439,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-sasl-password-desc
          :end-before: end-minio-kafka-audit-logging-sasl-password-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_SASL_PASSWORD` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_SASL_PASSWORD` environment variable.
 
    .. mc-conf:: sasl_mechanism
       :optional:
@@ -457,7 +449,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-sasl-mechanism-desc
          :end-before: end-minio-kafka-audit-logging-sasl-mechanism-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_SASL_MECHANISM` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_SASL_MECHANISM` environment variable.
 
       .. important::
 
@@ -472,7 +464,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-version-desc
          :end-before: end-minio-kafka-audit-logging-version-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_VERSION` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_VERSION` environment variable.
 
    .. mc-conf:: comment
       :optional:
@@ -482,7 +474,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-comment-desc
          :end-before: end-minio-kafka-audit-logging-comment-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_COMMENT` environment variable.
 
    .. mc-conf:: queue_dir
       :optional:
@@ -492,7 +484,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-queue-dir-desc
          :end-before: end-minio-kafka-audit-logging-queue-dir-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_DIR` environment variable.
 
    .. mc-conf::	queue_size
       :optional:
@@ -502,7 +494,7 @@ Kafka Audit Log Target
          :start-after: start-minio-kafka-audit-logging-queue-size-desc
          :end-before: end-minio-kafka-audit-logging-queue-size-desc
 
-      This setting corresponds to the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_SIZE` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_SIZE` environment variable.
 
 .. _minio-server-config-bucket-notification-amqp:
 
@@ -555,8 +547,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-url
          :end-before:  end-minio-notify-amqp-url
 
-      This key corresponds to the :envvar:`MINIO_NOTIFY_AMQP_URL` environment
-      variable. 
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_URL` environment variable. 
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -571,8 +562,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-exchange
          :end-before:  end-minio-notify-amqp-exchange
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_EXCHANGE`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_EXCHANGE` environment variable.
 
    .. mc-conf:: exchange_type 
       :delimiter: " "
@@ -583,8 +573,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-exchange-type
          :end-before:  end-minio-notify-amqp-exchange-type
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_EXCHANGE_TYPE`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_EXCHANGE_TYPE` environment variable.
 
    .. mc-conf:: routing_key 
       :delimiter: " "
@@ -595,8 +584,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-routing-key
          :end-before:  end-minio-notify-amqp-routing-key
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_ROUTING_KEY`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_ROUTING_KEY` environment variable.
 
    .. mc-conf:: mandatory 
       :delimiter: " "
@@ -607,8 +595,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-mandatory
          :end-before:  end-minio-notify-amqp-mandatory
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_MANDATORY`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_MANDATORY` environment variable.
 
    .. mc-conf:: durable 
       :delimiter: " "
@@ -619,8 +606,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-durable
          :end-before:  end-minio-notify-amqp-durable
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_DURABLE`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_DURABLE` environment variable.
 
    .. mc-conf:: no_wait 
       :delimiter: " "
@@ -631,8 +617,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-no-wait
          :end-before:  end-minio-notify-amqp-no-wait
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_NO_WAIT`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_NO_WAIT` environment variable.
 
    .. mc-conf:: internal 
       :delimiter: " "
@@ -643,8 +628,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-internal
          :end-before:  end-minio-notify-amqp-internal
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_INTERNAL`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_INTERNAL` environment variable.
 
    .. explanation is very unclear. Need to revisit this.
 
@@ -657,8 +641,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-auto-deleted
          :end-before:  end-minio-notify-amqp-auto-deleted
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_AUTO_DELETED`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_AUTO_DELETED` environment variable.
 
    .. mc-conf:: delivery_mode 
       :delimiter: " "
@@ -669,8 +652,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-delivery-mode
          :end-before:  end-minio-notify-amqp-delivery-mode
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_DELIVERY_MODE`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_DELIVERY_MODE` environment variable.
 
    .. mc-conf:: queue_dir 
       :delimiter: " "
@@ -681,8 +663,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-queue-dir
          :end-before:  end-minio-notify-amqp-queue-dir
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_QUEUE_DIR`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_QUEUE_DIR` environment variable.
 
    .. mc-conf:: queue_limit 
       :delimiter: " "
@@ -693,8 +674,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-queue-limit
          :end-before:  end-minio-notify-amqp-queue-limit
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_QUEUE_LIMIT`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_QUEUE_LIMIT` environment variable.
 
    .. mc-conf:: comment 
       :delimiter: " "
@@ -705,8 +685,7 @@ using these environment variables.
          :start-after: start-minio-notify-amqp-comment
          :end-before:  end-minio-notify-amqp-comment
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_AMQP_COMMENT`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_AMQP_COMMENT` environment variable.
 
 .. _minio-server-config-bucket-notification-mqtt:
 
@@ -777,8 +756,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-broker
          :end-before:  end-minio-notify-mqtt-broker
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_BROKER`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_BROKER` environment variable.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -793,8 +771,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-topic
          :end-before:  end-minio-notify-mqtt-topic
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_TOPIC`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_TOPIC` environment variable.
 
    .. mc-conf:: username
       :delimiter: " "
@@ -805,8 +782,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-username
          :end-before:  end-minio-notify-mqtt-username
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_TOPIC`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_TOPIC` environment variable.
 
    .. mc-conf:: password
       :delimiter: " "
@@ -817,8 +793,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-password
          :end-before:  end-minio-notify-mqtt-password
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_PASSWORD`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_PASSWORD` environment variable.
 
    .. mc-conf:: qos
       :delimiter: " "
@@ -829,8 +804,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-qos
          :end-before:  end-minio-notify-mqtt-qos
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_QOS`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_QOS` environment variable.
 
    .. mc-conf:: keep_alive_interval
       :delimiter: " "
@@ -841,8 +815,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-keep-alive-interval
          :end-before:  end-minio-notify-mqtt-keep-alive-interval
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL` environment variable.
 
    .. mc-conf:: reconnect_interval
       :delimiter: " "
@@ -853,8 +826,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-reconnect-interval
          :end-before:  end-minio-notify-mqtt-reconnect-interval
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL` environment variable.
 
    .. mc-conf:: queue_dir 
       :delimiter: " "
@@ -865,8 +837,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-queue-dir
          :end-before:  end-minio-notify-mqtt-queue-dir
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_QUEUE_DIR`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_QUEUE_DIR` environment variable.
 
    .. mc-conf:: queue_limit 
       :delimiter: " "
@@ -877,8 +848,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-queue-limit
          :end-before:  end-minio-notify-mqtt-queue-limit
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_QUEUE_LIMIT`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_QUEUE_LIMIT` environment variable.
 
    .. mc-conf:: comment 
       :delimiter: " "
@@ -889,8 +859,7 @@ using these configuration settings.
          :start-after: start-minio-notify-mqtt-comment
          :end-before:  end-minio-notify-mqtt-comment
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_MQTT_COMMENT`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_COMMENT` environment variable.
 
 .. _minio-server-config-bucket-notification-elasticsearch:
 
@@ -950,8 +919,7 @@ these configuration settings.
          :start-after: start-minio-notify-elasticsearch-url
          :end-before: end-minio-notify-elasticsearch-url
 
-      This field corresponds to the
-      :envvar:`MINIO_NOTIFY_ELASTICSEARCH_URL` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_URL` environment variable.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -966,8 +934,7 @@ these configuration settings.
          :start-after: start-minio-notify-elasticsearch-index
          :end-before: end-minio-notify-elasticsearch-index
 
-      This field corresponds to the
-      :envvar:`MINIO_NOTIFY_ELASTICSEARCH_INDEX` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_INDEX` environment variable.
 
    .. mc-conf:: format
       :delimiter: " "
@@ -978,8 +945,7 @@ these configuration settings.
          :start-after: start-minio-notify-elasticsearch-format
          :end-before: end-minio-notify-elasticsearch-format
 
-      This field corresponds to the
-      :envvar:`MINIO_NOTIFY_ELASTICSEARCH_FORMAT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_FORMAT` environment variable.
 
    .. mc-conf:: username
       :delimiter: " "
@@ -990,8 +956,7 @@ these configuration settings.
          :start-after: start-minio-notify-elasticsearch-username
          :end-before: end-minio-notify-elasticsearch-username
 
-      This field corresponds to the
-      :envvar:`MINIO_NOTIFY_ELASTICSEARCH_USERNAME` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_USERNAME` environment variable.
 
    .. mc-conf:: password
       :delimiter: " "
@@ -1002,9 +967,7 @@ these configuration settings.
          :start-after: start-minio-notify-elasticsearch-password
          :end-before: end-minio-notify-elasticsearch-password
 
-      This field corresponds to the
-      :envvar:`MINIO_NOTIFY_ELASTICSEARCH_PASSWORD` environment variable.
-
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_PASSWORD` environment variable.
 
    .. mc-conf:: queue_dir 
       :delimiter: " "
@@ -1015,8 +978,7 @@ these configuration settings.
          :start-after: start-minio-notify-elasticsearch-queue-dir
          :end-before:  end-minio-notify-elasticsearch-queue-dir
 
-      This field corresponds to the
-      :envvar:`MINIO_NOTIFY_ELASTICSEARCH_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_QUEUE_DIR` environment variable.
 
    .. mc-conf:: queue_limit 
       :delimiter: " "
@@ -1027,8 +989,7 @@ these configuration settings.
          :start-after: start-minio-notify-elasticsearch-queue-limit
          :end-before:  end-minio-notify-elasticsearch-queue-limit
 
-      This field corresponds to the
-      :envvar:`MINIO_NOTIFY_ELASTICSEARCH_QUEUE_LIMIT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_QUEUE_LIMIT` environment variable.
 
    .. mc-conf:: comment 
       :delimiter: " "
@@ -1039,8 +1000,7 @@ these configuration settings.
          :start-after: start-minio-notify-elasticsearch-comment
          :end-before:  end-minio-notify-elasticsearch-comment
 
-      This field corresponds to the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_COMMENT`
-      environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_ELASTICSEARCH_COMMENT` environment variable.
 
 
 .. _minio-server-config-bucket-notification-nsq:
@@ -1105,8 +1065,7 @@ using these configuration settings.
          :start-after: start-minio-notify-nsq-nsqd-address
          :end-before: end-minio-notify-nsq-nsqd-address
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NSQ_NSQD_ADDRESS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NSQ_NSQD_ADDRESS` environment variable.
       
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -1122,8 +1081,7 @@ using these configuration settings.
          :start-after: start-minio-notify-nsq-topic
          :end-before: end-minio-notify-nsq-topic
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NSQ_TOPIC` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NSQ_TOPIC` environment variable.
       
    .. mc-conf:: tls
       :delimiter: " "
@@ -1134,8 +1092,7 @@ using these configuration settings.
          :start-after: start-minio-notify-nsq-tls
          :end-before: end-minio-notify-nsq-tls
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NSQ_TLS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NSQ_TLS` environment variable.
       
       
    .. mc-conf:: tls_skip_verify
@@ -1147,8 +1104,7 @@ using these configuration settings.
          :start-after: start-minio-notify-nsq-tls-skip-verify
          :end-before: end-minio-notify-nsq-tls-skip-verify
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NSQ_TLS_SKIP_VERIFY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NSQ_TLS_SKIP_VERIFY` environment variable.
      
       
    .. mc-conf:: queue_dir
@@ -1160,8 +1116,7 @@ using these configuration settings.
          :start-after: start-minio-notify-nsq-queue-dir
          :end-before: end-minio-notify-nsq-queue-dir
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NSQ_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NSQ_QUEUE_DIR` environment variable.
       
       
    .. mc-conf:: queue_limit
@@ -1174,8 +1129,7 @@ using these configuration settings.
          :start-after: start-minio-notify-nsq-queue-limit
          :end-before: end-minio-notify-nsq-queue-limit
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NSQ_QUEUE_LIMIT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NSQ_QUEUE_LIMIT` environment variable.
 
       
    .. mc-conf:: comment
@@ -1187,8 +1141,7 @@ using these configuration settings.
          :start-after: start-minio-notify-nsq-comment
          :end-before: end-minio-notify-nsq-comment
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NSQ_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NSQ_COMMENT` environment variable.
 
 
 .. _minio-server-config-bucket-notification-redis:
@@ -1256,8 +1209,7 @@ using these configuration settings.
          :start-after: start-minio-notify-redis-address
          :end-before: end-minio-notify-redis-address
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_REDIS_ADDRESS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_REDIS_ADDRESS` environment variable.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -1272,8 +1224,7 @@ using these configuration settings.
          :start-after: start-minio-notify-redis-key
          :end-before: end-minio-notify-redis-key
 
-   This configuration setting corresponds to the 
-   :envvar:`MINIO_NOTIFY_REDIS_KEY` environment variable.
+   This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_REDIS_KEY` environment variable.
 
    .. mc-conf:: format
       :delimiter: " "
@@ -1284,8 +1235,7 @@ using these configuration settings.
          :start-after: start-minio-notify-redis-format
          :end-before: end-minio-notify-redis-format
 
-   This configuration setting corresponds to the 
-   :envvar:`MINIO_NOTIFY_REDIS_FORMAT` environment variable.
+   This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_REDIS_FORMAT` environment variable.
 
    .. mc-conf:: password
       :delimiter: " "
@@ -1296,8 +1246,7 @@ using these configuration settings.
          :start-after: start-minio-notify-redis-password
          :end-before: end-minio-notify-redis-password
 
-   This configuration setting corresponds to the 
-   :envvar:`MINIO_NOTIFY_REDIS_PASSWORD` environment variable.
+   This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_REDIS_PASSWORD` environment variable.
 
    .. mc-conf:: queue_dir
       :delimiter: " "
@@ -1308,8 +1257,7 @@ using these configuration settings.
          :start-after: start-minio-notify-redis-queue-dir
          :end-before: end-minio-notify-redis-queue-dir
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_REDIS_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_REDIS_QUEUE_DIR` environment variable.
       
    .. mc-conf:: queue_limit
       :delimiter: " "
@@ -1321,8 +1269,7 @@ using these configuration settings.
          :start-after: start-minio-notify-redis-queue-limit
          :end-before: end-minio-notify-redis-queue-limit
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_REDIS_QUEUE_LIMIT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_REDIS_QUEUE_LIMIT` environment variable.
 
       
    .. mc-conf:: comment
@@ -1334,8 +1281,7 @@ using these configuration settings.
          :start-after: start-minio-notify-redis-comment
          :end-before: end-minio-notify-redis-comment
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_REDIS_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_REDIS_COMMENT` environment variable.
 
 
 
@@ -1404,8 +1350,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-address
          :end-before: end-minio-notify-nats-address
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_ADDRESS`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_ADDRESS`.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -1420,8 +1365,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-subject
          :end-before: end-minio-notify-nats-subject
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_SUBJECT`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_SUBJECT`.
 
    .. mc-conf:: username
       :delimiter: " "
@@ -1432,8 +1376,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-username
          :end-before: end-minio-notify-nats-username
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_USERNAME`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_USERNAME`.
 
    .. mc-conf:: password
       :delimiter: " "
@@ -1444,8 +1387,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-password
          :end-before: end-minio-notify-nats-password
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_PASSWORD`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_PASSWORD`.
 
    .. mc-conf:: token
       :delimiter: " "
@@ -1456,8 +1398,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-token
          :end-before: end-minio-notify-nats-token
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_TOKEN`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_TOKEN`.
 
    .. mc-conf:: tls
       :delimiter: "
@@ -1468,8 +1409,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-tls
          :end-before: end-minio-notify-nats-tls
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_TLS`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_TLS`.
 
    .. mc-conf:: tls_skip_verify
       :delimiter: " "
@@ -1480,8 +1420,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-tls-skip-verify
          :end-before: end-minio-notify-nats-tls-skip-verify
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY`.
 
    .. mc-conf:: ping_interval
       :delimiter: " "
@@ -1492,8 +1431,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-ping-interval
          :end-before: end-minio-notify-nats-ping-interval
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_PING_INTERVAL`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_PING_INTERVAL`.
 
    .. mc-conf:: jetstream
       :delimiter: " "
@@ -1517,8 +1455,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-streaming
          :end-before: end-minio-notify-nats-streaming
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_STREAMING`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_STREAMING`.
 
    .. mc-conf:: streaming_async
       :delimiter: " "
@@ -1531,8 +1468,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-streaming-async
          :end-before: end-minio-notify-nats-streaming-async
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_STREAMING_ASYNC`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_STREAMING_ASYNC`.
 
    .. mc-conf:: streaming_max_pub_acks_in_flight
       :delimiter: " "
@@ -1545,8 +1481,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-streaming-max-pub-acks-in-flight
          :end-before: end-minio-notify-nats-streaming-max-pub-acks-in-flight
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT`.
 
    .. mc-conf:: streaming_cluster_id
       :delimiter: " "
@@ -1559,8 +1494,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-streaming-cluster-id
          :end-before: end-minio-notify-nats-streaming-cluster-id
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID`.
 
    .. mc-conf:: cert_authority
       :delimiter: " "
@@ -1571,8 +1505,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-cert-authority
          :end-before: end-minio-notify-nats-cert-authority
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_CERT_AUTHORITY`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_CERT_AUTHORITY`.
 
    .. mc-conf:: client_cert
       :delimiter: " "
@@ -1583,8 +1516,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-client-cert
          :end-before: end-minio-notify-nats-client-cert
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_CLIENT_CERT`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_CLIENT_CERT`.
 
    .. mc-conf:: client_key
       :delimiter: " "
@@ -1595,8 +1527,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-client-key
          :end-before: end-minio-notify-nats-client-key
 
-      This configuration setting corresponds with the environment variable
-      :envvar:`MINIO_NOTIFY_NATS_CLIENT_KEY`.
+      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_CLIENT_KEY`.
 
    
    .. mc-conf:: queue_dir
@@ -1608,8 +1539,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-queue-dir
          :end-before: end-minio-notify-nats-queue-dir
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NATS_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_QUEUE_DIR` environment variable.
       
    .. mc-conf:: queue_limit
       :delimiter: " "
@@ -1621,8 +1551,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-queue-limit
          :end-before: end-minio-notify-nats-queue-limit
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NATS_QUEUE_LIMIT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_QUEUE_LIMIT` environment variable.
 
       
    .. mc-conf:: comment
@@ -1634,8 +1563,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-comment
          :end-before: end-minio-notify-nats-comment
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_NATS_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_COMMENT` environment variable.
 
 .. _minio-server-config-bucket-notification-postgresql:
 
@@ -1701,9 +1629,7 @@ using these environment variables.
          :start-after: start-minio-notify-postgresql-connection-string
          :end-before: end-minio-notify-postgresql-connection-string
       
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRES_CONNECTION_STRING` environment
-      variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_POSTGRES_CONNECTION_STRING` environment variable.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -1718,9 +1644,7 @@ using these environment variables.
          :start-after: start-minio-notify-postgresql-table
          :end-before: end-minio-notify-postgresql-table
       
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRES_TABLE` environment
-      variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_POSTGRES_TABLE` environment variable.
 
    .. mc-conf:: format
       :delimiter: " "
@@ -1731,9 +1655,7 @@ using these environment variables.
          :start-after: start-minio-notify-postgresql-format
          :end-before: end-minio-notify-postgresql-format
       
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRES_FORMAT` environment
-      variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_POSTGRES_FORMAT` environment variable.
 
    .. mc-conf:: max_open_connections
       :delimiter: " "
@@ -1744,9 +1666,7 @@ using these environment variables.
          :start-after: start-minio-notify-postgresql-max-open-connections
          :end-before: end-minio-notify-postgresql-max-open-connections
       
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS` environment
-      variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS` environment variable.
 
 
    .. mc-conf:: queue_dir
@@ -1758,8 +1678,7 @@ using these environment variables.
          :start-after: start-minio-notify-postgresql-queue-dir
          :end-before: end-minio-notify-postgresql-queue-dir
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRES_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_POSTGRES_QUEUE_DIR` environment variable.
       
    .. mc-conf:: queue_limit
       :delimiter: " "
@@ -1771,8 +1690,7 @@ using these environment variables.
          :start-after: start-minio-notify-postgresql-queue-limit
          :end-before: end-minio-notify-postgresql-queue-limit
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT` environment variable.
 
       
    .. mc-conf:: comment
@@ -1784,8 +1702,7 @@ using these environment variables.
          :start-after: start-minio-notify-postgresql-comment
          :end-before: end-minio-notify-postgresql-comment
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_POSTGRES_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_POSTGRES_COMMENT` environment variable.
 
 .. _minio-server-config-bucket-notification-mysql:
 
@@ -1851,9 +1768,7 @@ using these environment variables.
          :start-after: start-minio-notify-mysql-connection-string
          :end-before: end-minio-notify-mysql-connection-string
       
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_MYSQL_DSN_STRING` environment
-      variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_DSN_STRING` environment variable.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -1868,9 +1783,7 @@ using these environment variables.
          :start-after: start-minio-notify-mysql-table
          :end-before: end-minio-notify-mysql-table
       
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_MYSQL_TABLE` environment
-      variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_TABLE` environment variable.
 
    .. mc-conf:: format
       :delimiter: " "
@@ -1881,9 +1794,7 @@ using these environment variables.
          :start-after: start-minio-notify-mysql-format
          :end-before: end-minio-notify-mysql-format
       
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_MYSQL_FORMAT` environment
-      variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_FORMAT` environment variable.
 
    .. mc-conf:: max_open_connections
       :delimiter: " "
@@ -1894,9 +1805,7 @@ using these environment variables.
          :start-after: start-minio-notify-mysql-max-open-connections
          :end-before: end-minio-notify-mysql-max-open-connections
       
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS` environment
-      variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS` environment variable.
 
 
    .. mc-conf:: queue_dir
@@ -1908,8 +1817,7 @@ using these environment variables.
          :start-after: start-minio-notify-mysql-queue-dir
          :end-before: end-minio-notify-mysql-queue-dir
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_MYSQL_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_QUEUE_DIR` environment variable.
       
    .. mc-conf:: queue_limit
       :delimiter: " "
@@ -1921,8 +1829,7 @@ using these environment variables.
          :start-after: start-minio-notify-mysql-queue-limit
          :end-before: end-minio-notify-mysql-queue-limit
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_MYSQL_QUEUE_LIMIT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_QUEUE_LIMIT` environment variable.
 
       
    .. mc-conf:: comment
@@ -1934,8 +1841,7 @@ using these environment variables.
          :start-after: start-minio-notify-mysql-comment
          :end-before: end-minio-notify-mysql-comment
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_MYSQL_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_COMMENT` environment variable.
 
 .. _minio-server-config-bucket-notification-kafka:
 
@@ -1990,8 +1896,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-brokers
          :end-before: end-minio-notify-kafka-brokers
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_BROKERS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_BROKERS` environment variable.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -2006,8 +1911,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-topic
          :end-before: end-minio-notify-kafka-topic
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_TOPIC` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_TOPIC` environment variable.
 
    .. mc-conf:: sasl
       :delimiter: " "
@@ -2018,8 +1922,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-sasl-root
          :end-before: end-minio-notify-kafka-sasl-root
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_SASL` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_SASL` environment variable.
 
    .. mc-conf:: sasl_username
       :delimiter: " "
@@ -2030,8 +1933,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-sasl-username
          :end-before: end-minio-notify-kafka-sasl-username
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_SASL_USERNAME` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_SASL_USERNAME` environment variable.
 
    .. mc-conf:: sasl_password
       :delimiter: " "
@@ -2042,8 +1944,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-sasl-password
          :end-before: end-minio-notify-kafka-sasl-password
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_SASL_PASSWORD` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_SASL_PASSWORD` environment variable.
 
    .. mc-conf:: sasl_mechanism
       :delimiter: " "
@@ -2054,8 +1955,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-sasl-mechanism
          :end-before: end-minio-notify-kafka-sasl-mechanism
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_SASL_MECHANISM` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_SASL_MECHANISM` environment variable.
 
    .. mc-conf:: tls_client_auth
       :delimiter: " "
@@ -2066,8 +1966,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-tls-client-auth
          :end-before: end-minio-notify-kafka-tls-client-auth
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH` environment variable.
 
    .. mc-conf:: tls
       :delimiter: " "
@@ -2078,8 +1977,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-tls-root
          :end-before: end-minio-notify-kafka-tls-root
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_TLS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_TLS` environment variable.
 
    .. mc-conf:: tls_skip_verify
       :delimiter: " "
@@ -2090,8 +1988,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-tls-skip-verify
          :end-before: end-minio-notify-kafka-tls-skip-verify
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_TLS_SKIP_VERIFY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_TLS_SKIP_VERIFY` environment variable.
 
    .. mc-conf:: client_tls_cert
       :delimiter: " "
@@ -2102,8 +1999,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-client-tls-cert
          :end-before: end-minio-notify-kafka-client-tls-cert
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_CLIENT_TLS_CERT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_CLIENT_TLS_CERT` environment variable.
 
    .. mc-conf:: client_tls_key
       :delimiter: " "
@@ -2114,8 +2010,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-client-tls-key
          :end-before: end-minio-notify-kafka-client-tls-key
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_CLIENT_TLS_KEY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_CLIENT_TLS_KEY` environment variable.
 
    .. mc-conf:: version
       :delimiter: " "
@@ -2126,8 +2021,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-version
          :end-before: end-minio-notify-kafka-version
 
-      This configuration setting corresponds to the
-      :envvar:`MINIO_NOTIFY_KAFKA_VERSION` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_VERSION` environment variable.
 
 
    .. mc-conf:: queue_dir
@@ -2139,8 +2033,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-queue-dir
          :end-before: end-minio-notify-kafka-queue-dir
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_KAFKA_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_QUEUE_DIR` environment variable.
       
    .. mc-conf:: queue_limit
       :delimiter: " "
@@ -2152,8 +2045,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-queue-limit
          :end-before: end-minio-notify-kafka-queue-limit
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_KAFKA_QUEUE_LIMIT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_QUEUE_LIMIT` environment variable.
 
       
    .. mc-conf:: comment
@@ -2165,8 +2057,7 @@ using these environment variables.
          :start-after: start-minio-notify-kafka-comment
          :end-before: end-minio-notify-kafka-comment
 
-      This configuration setting corresponds to the 
-      :envvar:`MINIO_NOTIFY_KAFKA_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_KAFKA_COMMENT` environment variable.
 
 .. _minio-server-config-bucket-notification-webhook:
 
@@ -2221,8 +2112,7 @@ using these environment variables.
          :start-after: start-minio-notify-webhook-endpoint
          :end-before: end-minio-notify-webhook-endpoint
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_NOTIFY_WEBHOOK_ENDPOINT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_WEBHOOK_ENDPOINT` environment variable.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -2237,8 +2127,7 @@ using these environment variables.
          :start-after: start-minio-notify-webhook-auth-token
          :end-before: end-minio-notify-webhook-auth-token
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN` environment variable.
 
    .. mc-conf:: queue_dir
       :delimiter: " "
@@ -2249,8 +2138,7 @@ using these environment variables.
          :start-after: start-minio-notify-webhook-queue-dir
          :end-before: end-minio-notify-webhook-queue-dir
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_NOTIFY_WEBHOOK_QUEUE_DIR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_WEBHOOK_QUEUE_DIR` environment variable.
 
    .. mc-conf:: queue_limit
       :delimiter: " "
@@ -2261,8 +2149,7 @@ using these environment variables.
          :start-after: start-minio-notify-webhook-queue-limit
          :end-before: end-minio-notify-webhook-queue-limit
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_NOTIFY_WEBHOOK_QUEUE_LIMIT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_WEBHOOK_QUEUE_LIMIT` environment variable.
 
    .. mc-conf:: client_cert
       :delimiter: " "
@@ -2273,8 +2160,7 @@ using these environment variables.
          :start-after: start-minio-notify-webhook-client-cert
          :end-before: end-minio-notify-webhook-client-cert
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_NOTIFY_WEBHOOK_CLIENT_CERT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_WEBHOOK_CLIENT_CERT` environment variable.
 
    .. mc-conf:: client_key
       :delimiter: " "
@@ -2285,8 +2171,7 @@ using these environment variables.
          :start-after: start-minio-notify-webhook-client-key
          :end-before: end-minio-notify-webhook-client-key
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_NOTIFY_WEBHOOK_CLIENT_KEY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_WEBHOOK_CLIENT_KEY` environment variable.
 
    .. mc-conf:: comment
       :delimiter: " "
@@ -2297,8 +2182,7 @@ using these environment variables.
          :start-after: start-minio-notify-webhook-comment
          :end-before: end-minio-notify-webhook-comment
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_NOTIFY_WEBHOOK_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_WEBHOOK_COMMENT` environment variable.
 
 .. _minio-ldap-config-settings:
 
@@ -2357,8 +2241,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-server-addr
          :end-before: end-minio-ad-ldap-server-addr
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR` environment variable.
 
    .. mc-conf:: lookup_bind_dn
       :delimiter: " "
@@ -2369,8 +2252,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-lookup-bind-dn
          :end-before: end-minio-ad-ldap-lookup-bind-dn
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN` environment variable.
 
    .. mc-conf:: lookup_bind_password
       :delimiter: " "
@@ -2381,8 +2263,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-lookup-bind-password
          :end-before: end-minio-ad-ldap-lookup-bind-password
          
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD` environment variable.
 
    .. mc-conf:: user_dn_search_base_dn
       :delimiter: " "
@@ -2393,8 +2274,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-user-dn-search-base-dn
          :end-before: end-minio-ad-ldap-user-dn-search-base-dn
          
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN` environment variable.
 
    .. mc-conf:: user_dn_search_filter
       :delimiter: " "
@@ -2405,8 +2285,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-user-dn-search-filter
          :end-before: end-minio-ad-ldap-user-dn-search-filter
          
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER` environment variable.
 
    .. mc-conf:: enabled
       :delimiter: " "
@@ -2428,8 +2307,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-group-search-filter
          :end-before: end-minio-ad-ldap-group-search-filter
          
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER` environment variable.
 
    .. mc-conf:: group_search_base_dn
       :delimiter: " "
@@ -2440,8 +2318,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-group-search-base-dn
          :end-before: end-minio-ad-ldap-group-search-base-dn
          
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN` environment variable.
 
    .. mc-conf:: tls_skip_verify
       :delimiter: " "
@@ -2452,8 +2329,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-tls-skip-verify
          :end-before: end-minio-ad-ldap-tls-skip-verify
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY` environment variable.
 
    .. mc-conf:: server_insecure
       :delimiter: " "
@@ -2464,8 +2340,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-server-insecure
          :end-before: end-minio-ad-ldap-server-insecure
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_SERVER_INSECURE` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_SERVER_INSECURE` environment variable.
 
    .. mc-conf:: server_starttls
       :delimiter: " "
@@ -2476,8 +2351,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-server-starttls
          :end-before: end-minio-ad-ldap-server-starttls
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_SERVER_STARTTLS` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_SERVER_STARTTLS` environment variable.
 
    .. mc-conf:: srv_record_name
       :delimiter: " "
@@ -2490,8 +2364,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-srv_record_name
          :end-before: end-minio-ad-ldap-srv_record_name
 
-      This configuration setting corresponds with the
-      :envvar:`MINIO_IDENTITY_LDAP_SRV_RECORD_NAME` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_SRV_RECORD_NAME` environment variable.
 
    .. mc-conf:: comment
       :delimiter: " "
@@ -2502,8 +2375,7 @@ management using an Active Directory or LDAP service.
          :start-after: start-minio-ad-ldap-comment
          :end-before: end-minio-ad-ldap-comment
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_LDAP_COMMENT` environment variable.   
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_LDAP_COMMENT` environment variable.   
 
 .. _minio-open-id-config-settings:
 
@@ -2543,8 +2415,7 @@ configuration settings.
          :start-after: start-minio-openid-config-url
          :end-before: end-minio-openid-config-url
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_OPENID_CONFIG_URL` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_CONFIG_URL` environment variable.
 
    .. mc-conf:: enabled
       :delimiter: " "
@@ -2566,8 +2437,7 @@ configuration settings.
          :start-after: start-minio-openid-client-id
          :end-before: end-minio-openid-client-id
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_OPENID_CLIENT_ID` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_CLIENT_ID` environment variable.
 
    .. mc-conf:: client_secret
       :delimiter: " "
@@ -2578,8 +2448,7 @@ configuration settings.
          :start-after: start-minio-openid-client-secret
          :end-before: end-minio-openid-client-secret
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_OPENID_CLIENT_SECRET` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_CLIENT_SECRET` environment variable.
       
    .. mc-conf:: claim_name
       :delimiter: " "
@@ -2590,8 +2459,7 @@ configuration settings.
          :start-after: start-minio-openid-claim-name
          :end-before: end-minio-openid-claim-name
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_OPENID_CLAIM_NAME` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_CLAIM_NAME` environment variable.
       
    .. mc-conf:: claim_prefix
       :delimiter: " "
@@ -2602,8 +2470,7 @@ configuration settings.
          :start-after: start-minio-openid-claim-prefix
          :end-before: end-minio-openid-claim-prefix
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_OPENID_CLAIM_PREFIX` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_CLAIM_PREFIX` environment variable.
 
    .. mc-conf:: display_name
       :delimiter: " "
@@ -2621,8 +2488,7 @@ configuration settings.
          :start-after: start-minio-openid-scopes
          :end-before: end-minio-openid-scopes
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_OPENID_SCOPES` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_SCOPES` environment variable.
       
    .. mc-conf:: redirect_uri
       :delimiter: " "
@@ -2633,8 +2499,7 @@ configuration settings.
          :start-after: start-minio-openid-redirect-uri
          :end-before: end-minio-openid-redirect-uri
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_OPENID_REDIRECT_URI` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_REDIRECT_URI` environment variable.
 
    .. mc-conf:: redirect_uri_dynamic
       :delimiter: " "
@@ -2703,8 +2568,7 @@ configuration settings.
          :start-after: start-minio-openid-comment
          :end-before: end-minio-openid-comment
 
-      This configuration setting corresponds with the 
-      :envvar:`MINIO_IDENTITY_OPENID_COMMENT` environment variable.
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_COMMENT` environment variable.
 
 .. _minio-identity-management-plugin-settings:
 
