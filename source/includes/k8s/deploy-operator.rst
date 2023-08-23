@@ -75,7 +75,7 @@ Starting with v5.0.0, MinIO *recommends* Kubernetes 1.21.0 or later for both the
 
 .. versionadded:: Operator 5.0.6
 
-For Kubernetes v1.25.0 and later, MinIO supports deploying in environments with the :kube-docs:`Pod Security admission (PSA) <concepts/security/pod-security-admission>` ``restricted`` policy enabled.
+For Kubernetes 1.25.0 and later, MinIO supports deploying in environments with the :kube-docs:`Pod Security admission (PSA) <concepts/security/pod-security-admission>` ``restricted`` policy enabled.
 
 
 ``kubectl`` Configuration
