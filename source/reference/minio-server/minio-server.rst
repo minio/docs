@@ -655,7 +655,7 @@ server logs webhook endpoints:
 
    Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT`.
 
-   This environment variable corresponds with setting the top-level :mc-conf:`logger_webhook` configuration setting.
+   This environment variable corresponds with the top-level :mc-conf:`logger_webhook` configuration setting.
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_ENDPOINT
 
@@ -757,7 +757,7 @@ audit log webhook endpoints:
 
    Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT`.
 
-   This environment variable corresponds with setting the top-level :mc-conf:`audit_webhook` configuration setting.
+   This environment variable corresponds with top-level :mc-conf:`audit_webhook` configuration setting.
 
 .. envvar:: MINIO_AUDIT_WEBHOOK_ENDPOINT
 
@@ -2487,7 +2487,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-addr
       :end-before: end-minio-ad-ldap-server-addr
 
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add server_addr` parameter.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add server_addr` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN
 
@@ -2497,7 +2497,7 @@ variables.
       :start-after: start-minio-ad-ldap-lookup-bind-dn
       :end-before: end-minio-ad-ldap-lookup-bind-dn
 
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add lookup_bind_dn` parameter.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add lookup_bind_dn` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD
 
@@ -2507,7 +2507,7 @@ variables.
       :start-after: start-minio-ad-ldap-lookup-bind-password
       :end-before: end-minio-ad-ldap-lookup-bind-password
       
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add lookup_bind_password` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add lookup_bind_password` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN
 
@@ -2517,7 +2517,7 @@ variables.
       :start-after: start-minio-ad-ldap-user-dn-search-base-dn
       :end-before: end-minio-ad-ldap-user-dn-search-base-dn
       
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add user_dn_search_base_dn` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add user_dn_search_base_dn` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER
 
@@ -2527,7 +2527,7 @@ variables.
       :start-after: start-minio-ad-ldap-user-dn-search-filter
       :end-before: end-minio-ad-ldap-user-dn-search-filter
       
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add user_dn_search_filter` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add user_dn_search_filter` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER
 
@@ -2537,7 +2537,7 @@ variables.
       :start-after: start-minio-ad-ldap-group-search-filter
       :end-before: end-minio-ad-ldap-group-search-filter
       
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add group_search_filter` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add group_search_filter` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN
 
@@ -2547,7 +2547,7 @@ variables.
       :start-after: start-minio-ad-ldap-group-search-base-dn
       :end-before: end-minio-ad-ldap-group-search-base-dn
       
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add group_search_base_dn` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add group_search_base_dn` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY
 
@@ -2557,7 +2557,7 @@ variables.
       :start-after: start-minio-ad-ldap-tls-skip-verify
       :end-before: end-minio-ad-ldap-tls-skip-verify
 
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add tls_skip_verify` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add tls_skip_verify` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SERVER_INSECURE
 
@@ -2567,7 +2567,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-insecure
       :end-before: end-minio-ad-ldap-server-insecure
 
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add server_insecure` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add server_insecure` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SERVER_STARTTLS
 
@@ -2577,7 +2577,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-starttls
       :end-before: end-minio-ad-ldap-server-starttls
 
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add server_starttls` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add server_starttls` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SRV_RECORD_NAME
 
@@ -2589,7 +2589,7 @@ variables.
       :start-after: start-minio-ad-ldap-srv_record_name
       :end-before: end-minio-ad-ldap-srv_record_name
 
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add srv_record_name` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add srv_record_name` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_COMMENT
 
@@ -2599,7 +2599,7 @@ variables.
       :start-after: start-minio-ad-ldap-comment
       :end-before: end-minio-ad-ldap-comment
 
-   This environment variable corresponds with :mc-cmd:`mc idp ldap add` with the :mc-cmd:`~mc idp ldap add comment` parameter.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add comment` parameter.
    
 .. _minio-server-envvar-external-identity-management-openid:
 

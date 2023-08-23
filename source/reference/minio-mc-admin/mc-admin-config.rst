@@ -1350,7 +1350,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-address
          :end-before: end-minio-notify-nats-address
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_ADDRESS`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_ADDRESS` environment variable.
 
       .. include:: /includes/linux/minio-server.rst
          :start-after: start-notify-target-online-desc
@@ -1365,7 +1365,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-subject
          :end-before: end-minio-notify-nats-subject
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_SUBJECT`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_SUBJECT` environment variable.
 
    .. mc-conf:: username
       :delimiter: " "
@@ -1376,7 +1376,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-username
          :end-before: end-minio-notify-nats-username
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_USERNAME`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_USERNAME` environment variable.
 
    .. mc-conf:: password
       :delimiter: " "
@@ -1387,7 +1387,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-password
          :end-before: end-minio-notify-nats-password
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_PASSWORD`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_PASSWORD` environment variable.
 
    .. mc-conf:: token
       :delimiter: " "
@@ -1398,7 +1398,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-token
          :end-before: end-minio-notify-nats-token
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_TOKEN`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_TOKEN` environment variable.
 
    .. mc-conf:: tls
       :delimiter: "
@@ -1409,7 +1409,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-tls
          :end-before: end-minio-notify-nats-tls
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_TLS`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_TLS` environment variable.
 
    .. mc-conf:: tls_skip_verify
       :delimiter: " "
@@ -1420,7 +1420,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-tls-skip-verify
          :end-before: end-minio-notify-nats-tls-skip-verify
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY` environment variable.
 
    .. mc-conf:: ping_interval
       :delimiter: " "
@@ -1431,7 +1431,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-ping-interval
          :end-before: end-minio-notify-nats-ping-interval
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_PING_INTERVAL`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_PING_INTERVAL` environment variable.
 
    .. mc-conf:: jetstream
       :delimiter: " "
@@ -1442,7 +1442,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-jetstream
          :end-before: end-minio-notify-nats-jetstream
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_JETSTREAM`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_JETSTREAM` environment variable.
 
    .. mc-conf:: streaming
       :delimiter: " "
@@ -1455,7 +1455,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-streaming
          :end-before: end-minio-notify-nats-streaming
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_STREAMING`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_STREAMING` environment variable.
 
    .. mc-conf:: streaming_async
       :delimiter: " "
@@ -1468,7 +1468,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-streaming-async
          :end-before: end-minio-notify-nats-streaming-async
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_STREAMING_ASYNC`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_STREAMING_ASYNC` environment variable.
 
    .. mc-conf:: streaming_max_pub_acks_in_flight
       :delimiter: " "
@@ -1481,7 +1481,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-streaming-max-pub-acks-in-flight
          :end-before: end-minio-notify-nats-streaming-max-pub-acks-in-flight
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT` environment variable.
 
    .. mc-conf:: streaming_cluster_id
       :delimiter: " "
@@ -1494,7 +1494,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-streaming-cluster-id
          :end-before: end-minio-notify-nats-streaming-cluster-id
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID` environment variable.
 
    .. mc-conf:: cert_authority
       :delimiter: " "
@@ -1505,7 +1505,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-cert-authority
          :end-before: end-minio-notify-nats-cert-authority
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_CERT_AUTHORITY`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_CERT_AUTHORITY` environment variable.
 
    .. mc-conf:: client_cert
       :delimiter: " "
@@ -1516,7 +1516,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-client-cert
          :end-before: end-minio-notify-nats-client-cert
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_CLIENT_CERT`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_CLIENT_CERT` environment variable.
 
    .. mc-conf:: client_key
       :delimiter: " "
@@ -1527,7 +1527,7 @@ using these environment variables.
          :start-after: start-minio-notify-nats-client-key
          :end-before: end-minio-notify-nats-client-key
 
-      This configuration setting corresponds with the environment variable :envvar:`MINIO_NOTIFY_NATS_CLIENT_KEY`.
+      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_CLIENT_KEY` environment variable.
 
    
    .. mc-conf:: queue_dir
