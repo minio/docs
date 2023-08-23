@@ -50,6 +50,8 @@ Each pod runs three containers:
 - SideCar container that monitors configuration secrets for the tenant and updates them as they change.
   This container also monitors for root credentials and creates an error if it does not find root credentials. 
 
+Starting with v5.0.6, the MinIO Operator supports custom :kube-docs:`init containers <concepts/workloads/pods/init-containers>` for additional pod initialization that may be required for your environment.
+
 The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes that store the objects.
 
 .. image:: /images/k8s/OperatorsComponent-Diagram.png
