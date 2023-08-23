@@ -81,7 +81,7 @@ You must explicitly assign MinIO policies to a given user or group Distinguished
 
 The following example assumes an existing :ref:`alias <alias>` configured for the MinIO Tenant.
 
-Use the :mc-cmd:`mc idp ldap policy attach` command to assign a user or group DN to an existing MinIO Policy:
+Use the :mc:`mc idp ldap policy attach` command to assign a user or group DN to an existing MinIO Policy:
 
 .. code-block:: shell
    :class: copyable
