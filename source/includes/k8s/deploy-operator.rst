@@ -73,6 +73,11 @@ You *must* upgrade your Kubernetes infrastructure to 1.19.0 or later to use the 
 
 Starting with v5.0.0, MinIO *recommends* Kubernetes 1.21.0 or later for both the infrastructure and the ``kubectl`` CLI tool.
 
+.. versionadded:: Operator 5.0.6
+
+For Kubernetes 1.25.0 and later, MinIO supports deploying in environments with the :kube-docs:`Pod Security admission (PSA) <concepts/security/pod-security-admission>` ``restricted`` policy enabled.
+
+
 ``kubectl`` Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
