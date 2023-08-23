@@ -329,7 +329,7 @@ Root Credentials
       :start-after: start-minio-root-api-access
       :end-before: end-minio-root-api-access
 
-   This variable corresponds to the :mc-conf:`api root_access <api.root_access>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`api root_access <api.root_access>` configuration setting.
    You can use this variable to temporarily override the configuration setting and re-enable root access to the deployment.
 
 .. envvar:: MINIO_ACCESS_KEY
@@ -401,7 +401,7 @@ MinIO Console:
    using the ``minio-job`` Prometheus scraping job.
 
    If you are using a standalone MinIO Console process, this variable
-   corresponds to ``CONSOLE_PROMETHEUS_URL``.
+   corresponds with ``CONSOLE_PROMETHEUS_URL``.
 
 .. envvar:: MINIO_PROMETHEUS_JOB_ID
 
@@ -413,7 +413,7 @@ MinIO Console:
    MinIO defaults to ``minio-job``.
 
    If you are using a standalone MinIO Console process, this variable
-   corresponds to ``CONSOLE_PROMETHEUS_JOB_ID``.
+   corresponds with ``CONSOLE_PROMETHEUS_JOB_ID``.
 
 .. envvar:: MINIO_LOG_QUERY_URL
 
@@ -655,15 +655,13 @@ server logs webhook endpoints:
 
    Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT`.
 
-   This variable corresponds to setting the top-level 
-   :mc-conf:`logger_webhook` configuration setting.
+   This environment variable corresponds with the top-level :mc-conf:`logger_webhook` configuration setting.
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_ENDPOINT
 
    The HTTP endpoint of the webhook. 
 
-   This variable corresponds to the :mc-conf:`logger_webhook endpoint 
-   <logger_webhook.endpoint>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`logger_webhook endpoint <logger_webhook.endpoint>` configuration setting.
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_AUTH_TOKEN
 
@@ -672,8 +670,7 @@ server logs webhook endpoints:
    The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
    Omit for webhooks which do not enforce authentication.
 
-   This variable corresponds to the :mc-conf:`logger_webhook auth_token
-   <logger_webhook.auth_token>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`logger_webhook auth_token <logger_webhook.auth_token>` configuration setting.
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_CLIENT_CERT
 
@@ -683,8 +680,7 @@ server logs webhook endpoints:
 
    Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_KEY`.
 
-   This variable corresponds to the :mc-conf:`logger_webhook client_cert 
-   <logger_webhook.client_cert>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`logger_webhook client_cert <logger_webhook.client_cert>` configuration setting.
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_CLIENT_KEY
 
@@ -694,8 +690,7 @@ server logs webhook endpoints:
 
    Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_CERT`.
 
-   This variable corresponds to the :mc-conf:`logger_webhook client_key 
-   <logger_webhook.client_key>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`logger_webhook client_key <logger_webhook.client_key>` configuration setting.
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_PROXY
 
@@ -703,8 +698,7 @@ server logs webhook endpoints:
 
    Define a proxy to use for the webhook logger when communicating from MinIO to external webhooks.
 
-   This variable corresponds to the :mc-conf:`logger_webhook proxy 
-   <logger_webhook.proxy>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`logger_webhook proxy <logger_webhook.proxy>` configuration setting.
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_DIR
 
@@ -717,7 +711,7 @@ server logs webhook endpoints:
 
    MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
 
-   This variable corresponds to the :mc-conf:`logger_webhook queue_dir <logger_webhook.queue_dir>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`logger_webhook queue_dir <logger_webhook.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_SIZE
 
@@ -725,8 +719,7 @@ server logs webhook endpoints:
 
    An integer value to use for the queue size for logger webhook targets.
 
-   This variable corresponds to the :mc-conf:`logger_webhook queue_size 
-   <logger_webhook.queue_size>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`logger_webhook queue_size <logger_webhook.queue_size>` configuration setting.
 
 .. _minio-sever-envvar-logging-audit:
 
@@ -764,15 +757,13 @@ audit log webhook endpoints:
 
    Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT`.
 
-   This variable corresponds to setting the top-level 
-   :mc-conf:`audit_webhook` configuration setting.
+   This environment variable corresponds with top-level :mc-conf:`audit_webhook` configuration setting.
 
 .. envvar:: MINIO_AUDIT_WEBHOOK_ENDPOINT
 
    The HTTP endpoint of the webhook. 
 
-   This variable corresponds to the :mc-conf:`audit_webhook endpoint 
-   <audit_webhook.endpoint>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_webhook endpoint <audit_webhook.endpoint>` configuration setting.
 
 .. envvar:: MINIO_AUDIT_WEBHOOK_AUTH_TOKEN
 
@@ -781,8 +772,7 @@ audit log webhook endpoints:
    The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
    Omit for webhooks which do not enforce authentication.
 
-   This variable corresponds to the :mc-conf:`audit_webhook auth_token
-   <audit_webhook.auth_token>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_webhook auth_token <audit_webhook.auth_token>` configuration setting.
 
 .. envvar:: MINIO_AUDIT_WEBHOOK_CLIENT_CERT
 
@@ -793,8 +783,7 @@ audit log webhook endpoints:
 
    Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_KEY`.
 
-   This variable corresponds to the :mc-conf:`audit_webhook client_cert
-   <audit_webhook.client_cert>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_webhook client_cert <audit_webhook.client_cert>` configuration setting.
 
 .. envvar:: MINIO_AUDIT_WEBHOOK_CLIENT_KEY
 
@@ -805,8 +794,7 @@ audit log webhook endpoints:
 
    Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_CERT`.
 
-   This variable corresponds to the :mc-conf:`audit_webhook client_key
-   <audit_webhook.client_key>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_webhook client_key <audit_webhook.client_key>` configuration setting.
 
 .. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_DIR
 
@@ -819,7 +807,7 @@ audit log webhook endpoints:
 
    MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
 
-   This variable corresponds to the :mc-conf:`audit_webhook queue_dir <audit_webhook.queue_dir>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_webhook queue_dir <audit_webhook.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_SIZE
 
@@ -827,7 +815,7 @@ audit log webhook endpoints:
 
    An integer value to use for the queue size for audit webhook targets.
 
-   This variable corresponds to the :mc-conf:`audit_webhook queue_size <audit_webhook.queue_size>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_webhook queue_size <audit_webhook.queue_size>` configuration setting.
 
 .. _minio-sever-envvar-logging-audit-kafka:
 
@@ -850,7 +838,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-brokers-desc
       :end-before: end-minio-kafka-audit-logging-brokers-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.brokers` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.brokers` configuration setting.
     
 .. envvar:: MINIO_AUDIT_KAFKA_TOPIC
    :required:
@@ -859,7 +847,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-topic-desc
       :end-before: end-minio-kafka-audit-logging-topic-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.topic` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.topic` configuration setting.
     
 .. envvar:: MINIO_AUDIT_KAFKA_TLS  
    :optional:
@@ -868,7 +856,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-tls-desc
       :end-before: end-minio-kafka-audit-logging-tls-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.tls` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.tls` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_TLS_SKIP_VERIFY
    :optional:
@@ -877,7 +865,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-tls-skip-verify-desc
       :end-before: end-minio-kafka-audit-logging-tls-skip-verify-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.tls_skip_verify` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.tls_skip_verify` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_SASL
    :optional:
@@ -888,7 +876,7 @@ The following section documents environment variables for configuring MinIO to p
 
    Requires specifying :envvar:`MINIO_AUDIT_KAFKA_SASL_USERNAME` and :envvar:`MINIO_AUDIT_KAFKA_SASL_PASSWORD`.
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.sasl` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.sasl` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_SASL_USERNAME
    :optional:
@@ -897,7 +885,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-sasl-username-desc
       :end-before: end-minio-kafka-audit-logging-sasl-username-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.sasl_username` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.sasl_username` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_SASL_PASSWORD
    :optional:
@@ -906,7 +894,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-sasl-password-desc
       :end-before: end-minio-kafka-audit-logging-sasl-password-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.sasl_password` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.sasl_password` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_SASL_MECHANISM
    :optional:
@@ -920,7 +908,7 @@ The following section documents environment variables for configuring MinIO to p
       The ``PLAIN`` authentication mechanism sends credentials in plain text over the network.
       Use :envvar:`MINIO_AUDIT_KAFKA_TLS` to enable TLS connectivity to the Kafka brokers and ensure secure transmission of SASL credentials.
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.sasl_mechanism` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.sasl_mechanism` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_TLS_CLIENT_AUTH
    :optional:
@@ -931,7 +919,7 @@ The following section documents environment variables for configuring MinIO to p
 
    Requires specifying :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT` and :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY`.
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.tls_client_auth` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.tls_client_auth` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT
    :optional:
@@ -940,7 +928,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-client-tls-cert-desc
       :end-before: end-minio-kafka-audit-logging-client-tls-cert-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.client_tls_cert` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.client_tls_cert` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY
    :optional:
@@ -949,7 +937,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-client-tls-key-desc
       :end-before: end-minio-kafka-audit-logging-client-tls-key-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.client_tls_key` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.client_tls_key` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_VERSION
    :optional:
@@ -958,7 +946,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-version-desc
       :end-before: end-minio-kafka-audit-logging-version-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.version` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.version` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_COMMENT
    :optional:
@@ -967,7 +955,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-comment-desc
       :end-before: end-minio-kafka-audit-logging-comment-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.comment` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.comment` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_QUEUE_DIR
    :optional:
@@ -976,7 +964,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-queue-dir-desc
       :end-before: end-minio-kafka-audit-logging-queue-dir-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.queue_dir` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.queue_dir` configuration setting.
 
 .. envvar:: MINIO_AUDIT_KAFKA_QUEUE_SIZE
    :optional:
@@ -985,7 +973,7 @@ The following section documents environment variables for configuring MinIO to p
       :start-after: start-minio-kafka-audit-logging-queue-size-desc
       :end-before: end-minio-kafka-audit-logging-queue-size-desc
 
-   This environment variable corresponds to the :mc-conf:`audit_kafka.queue_size` configuration setting.
+   This environment variable corresponds with the :mc-conf:`audit_kafka.queue_size` configuration setting.
 
 
 Bucket Notifications
@@ -1012,7 +1000,7 @@ These environment variables configure notification targets for use with
       :start-after: start-minio-api-sync-events
       :end-before: end-minio-api-sync-events
 
-   Corresponds with the :mc-conf:`~api.sync_events` configuration setting.
+   This environment variable corresponds with the :mc-conf:`~api.sync_events` configuration setting.
 
 .. _minio-server-envvar-bucket-notification-amqp:
 
@@ -1059,8 +1047,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
    This field is *required* if :envvar:`MINIO_NOTIFY_AMQP_ENABLE` is ``on``.
    All other AMQP-related variables are optional.
 
-   This variable corresponds to the :mc-conf:`notify_amqp url <notify_amqp.url>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp url <notify_amqp.url>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -1072,8 +1059,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-exchange
       :end-before:  end-minio-notify-amqp-exchange
 
-   This variable corresponds to the :mc-conf:`notify_amqp exchange
-   <notify_amqp.exchange>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp exchange <notify_amqp.exchange>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_EXCHANGE_TYPE
 
@@ -1081,8 +1067,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-exchange-type
       :end-before:  end-minio-notify-amqp-exchange-type
 
-   This variable corresponds to the :mc-conf:`notify_amqp exchange_type
-   <notify_amqp.exchange_type>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp exchange_type <notify_amqp.exchange_type>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_ROUTING_KEY
 
@@ -1090,8 +1075,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-routing-key
       :end-before:  end-minio-notify-amqp-routing-key
 
-   This variable corresponds to the :mc-conf:`notify_amqp routing_key
-   <notify_amqp.routing_key>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp routing_key <notify_amqp.routing_key>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_MANDATORY
 
@@ -1099,8 +1083,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-mandatory
       :end-before:  end-minio-notify-amqp-mandatory
 
-   This variable corresponds to the :mc-conf:`notify_amqp mandatory
-   <notify_amqp.mandatory>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp mandatory <notify_amqp.mandatory>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_DURABLE
 
@@ -1108,8 +1091,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-durable
       :end-before:  end-minio-notify-amqp-durable
 
-   This variable corresponds to the :mc-conf:`notify_amqp durable
-   <notify_amqp.durable>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp durable <notify_amqp.durable>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_NO_WAIT
 
@@ -1117,8 +1099,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-no-wait
       :end-before:  end-minio-notify-amqp-no-wait
 
-   This variable corresponds to the :mc-conf:`notify_amqp no_wait
-   <notify_amqp.no_wait>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp no_wait <notify_amqp.no_wait>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_INTERNAL
 
@@ -1126,8 +1107,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-internal
       :end-before:  end-minio-notify-amqp-internal
 
-   This variable corresponds to the :mc-conf:`notify_amqp internal
-   <notify_amqp.internal>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp internal <notify_amqp.internal>` configuration setting.
 
    .. explanation is very unclear. Need to revisit this.
 
@@ -1137,8 +1117,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-auto-deleted
       :end-before:  end-minio-notify-amqp-auto-deleted
 
-   This variable corresponds to the :mc-conf:`notify_amqp auto_deleted
-   <notify_amqp.auto_deleted>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp auto_deleted <notify_amqp.auto_deleted>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_DELIVERY_MODE
 
@@ -1146,8 +1125,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-delivery-mode
       :end-before:  end-minio-notify-amqp-delivery-mode
 
-   This variable corresponds to the :mc-conf:`notify_amqp delivery_mode
-   <notify_amqp.delivery_mode>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp delivery_mode <notify_amqp.delivery_mode>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_QUEUE_DIR
 
@@ -1155,8 +1133,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-queue-dir
       :end-before:  end-minio-notify-amqp-queue-dir
 
-   This variable corresponds to the :mc-conf:`notify_amqp queue_dir
-   <notify_amqp.queue_dir>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp queue_dir <notify_amqp.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_QUEUE_LIMIT
 
@@ -1165,8 +1142,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-queue-limit
       :end-before:  end-minio-notify-amqp-queue-limit
 
-   This variable corresponds to the :mc-conf:`notify_amqp queue_limit
-   <notify_amqp.queue_limit>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp queue_limit <notify_amqp.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_AMQP_COMMENT
 
@@ -1174,8 +1150,7 @@ an AMQP service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-amqp-comment
       :end-before:  end-minio-notify-amqp-comment
 
-   This variable corresponds to the :mc-conf:`notify_amqp comment
-   <notify_amqp.comment>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_amqp comment <notify_amqp.comment>` configuration setting.
 
 .. _minio-server-envvar-bucket-notification-mqtt:
 
@@ -1211,8 +1186,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-enable
       :end-before: end-minio-notify-mqtt-enable
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt <notify_mqtt>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt <notify_mqtt>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_BROKER
 
@@ -1222,8 +1196,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-broker
       :end-before: end-minio-notify-mqtt-broker
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt broker <notify_mqtt.broker>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt broker <notify_mqtt.broker>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -1237,8 +1210,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-topic
       :end-before: end-minio-notify-mqtt-topic
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt topic <notify_mqtt.topic>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt topic <notify_mqtt.topic>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_USERNAME
 
@@ -1248,8 +1220,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-username
       :end-before: end-minio-notify-mqtt-username
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt username <notify_mqtt.username>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt username <notify_mqtt.username>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_PASSWORD
 
@@ -1259,8 +1230,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-password
       :end-before: end-minio-notify-mqtt-password
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt password <notify_mqtt.password>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt password <notify_mqtt.password>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_QOS
 
@@ -1268,8 +1238,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-qos
       :end-before: end-minio-notify-mqtt-qos
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt qos <notify_mqtt.qos>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt qos <notify_mqtt.qos>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL
 
@@ -1277,8 +1246,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-keep-alive-interval
       :end-before: end-minio-notify-mqtt-keep-alive-interval
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt keep_alive_interval <notify_mqtt.keep_alive_interval>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt keep_alive_interval <notify_mqtt.keep_alive_interval>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL
 
@@ -1286,8 +1254,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-reconnect-interval
       :end-before: end-minio-notify-mqtt-reconnect-interval
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt reconnect_interval <notify_mqtt.reconnect_interval>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt reconnect_interval <notify_mqtt.reconnect_interval>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_QUEUE_DIR
 
@@ -1295,8 +1262,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-queue-dir
       :end-before: end-minio-notify-mqtt-queue-dir
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt queue_dir <notify_mqtt.queue_dir>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt queue_dir <notify_mqtt.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_QUEUE_LIMIT
 
@@ -1304,8 +1270,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-queue-limit
       :end-before: end-minio-notify-mqtt-queue-limit
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt queue_limit <notify_mqtt.queue_limit>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt queue_limit <notify_mqtt.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MQTT_COMMENT
 
@@ -1313,8 +1278,7 @@ an MQTT service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mqtt-comment
       :end-before: end-minio-notify-mqtt-comment
 
-   This variable corresponds to the
-   :mc-conf:`notify_mqtt comment <notify_mqtt.comment>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mqtt comment <notify_mqtt.comment>` configuration setting.
 
 .. _minio-server-envvar-bucket-notification-elasticsearch:
 
@@ -1358,8 +1322,7 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    - :envvar:`MINIO_NOTIFY_ELASTICSEARCH_INDEX`
    - :envvar:`MINIO_NOTIFY_ELASTICSEARCH_FORMAT`
 
-   This variable corresponds to the :mc-conf:`notify_elasticsearch`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_ELASTICSEARCH_URL
 
@@ -1369,9 +1332,7 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-elasticsearch-url
       :end-before:  end-minio-notify-elasticsearch-url
 
-   This variable corresponds to the
-   :mc-conf:`notify_elasticsearch url <notify_elasticsearch.url>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch url <notify_elasticsearch.url>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -1385,9 +1346,7 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-elasticsearch-index
       :end-before:  end-minio-notify-elasticsearch-index
 
-   This variable corresponds to the
-   :mc-conf:`notify_elasticsearch index <notify_elasticsearch.index>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch index <notify_elasticsearch.index>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_ELASTICSEARCH_FORMAT
 
@@ -1397,9 +1356,7 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-elasticsearch-format
       :end-before:  end-minio-notify-elasticsearch-format
 
-   This variable corresponds to the
-   :mc-conf:`notify_elasticsearch format <notify_elasticsearch.format>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch format <notify_elasticsearch.format>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_ELASTICSEARCH_USERNAME
 
@@ -1409,9 +1366,7 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-elasticsearch-username
       :end-before:  end-minio-notify-elasticsearch-username
 
-   This variable corresponds to the
-   :mc-conf:`notify_elasticsearch username <notify_elasticsearch.username>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch username <notify_elasticsearch.username>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_ELASTICSEARCH_PASSWORD
 
@@ -1421,9 +1376,8 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-elasticsearch-password
       :end-before:  end-minio-notify-elasticsearch-password
 
-   This variable corresponds to the
-   :mc-conf:`notify_elasticsearch password <notify_elasticsearch.password>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch password <notify_elasticsearch.password>` configuration setting.
+
 .. envvar:: MINIO_NOTIFY_ELASTICSEARCH_QUEUE_DIR
 
    *Optional*
@@ -1432,9 +1386,7 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-elasticsearch-queue-dir
       :end-before:  end-minio-notify-elasticsearch-queue-dir
 
-   This variable corresponds to the
-   :mc-conf:`notify_elasticsearch queue_dir <notify_elasticsearch.queue_dir>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch queue_dir <notify_elasticsearch.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_ELASTICSEARCH_QUEUE_LIMIT
 
@@ -1444,9 +1396,7 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-elasticsearch-queue-limit
       :end-before:  end-minio-notify-elasticsearch-queue-limit
 
-   This variable corresponds to the
-   :mc-conf:`notify_elasticsearch queue_limit <notify_elasticsearch.queue_limit>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch queue_limit <notify_elasticsearch.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_ELASTICSEARCH_COMMENT
 
@@ -1456,9 +1406,7 @@ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-elasticsearch-comment
       :end-before:  end-minio-notify-elasticsearch-comment
 
-   This variable corresponds to the
-   :mc-conf:`notify_elasticsearch comment <notify_elasticsearch.comment>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_elasticsearch comment <notify_elasticsearch.comment>` configuration setting.
 
 .. _minio-server-envvar-bucket-notification-nsq:
 
@@ -1492,8 +1440,7 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-nsq-enable
       :end-before: end-minio-notify-nsq-enable
 
-   This variable corresponds to the
-   :mc-conf:`notify_nsq <notify_nsq>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nsq <notify_nsq>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NSQ_NSQD_ADDRESS
 
@@ -1503,9 +1450,7 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-nsq-nsqd-address
       :end-before: end-minio-notify-nsq-nsqd-address
 
-   This variable corresponds to the
-   :mc-conf:`notify_nsq nsqd_address <notify_nsq.nsqd_address>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nsq nsqd_address <notify_nsq.nsqd_address>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -1519,9 +1464,7 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-nsq-topic
       :end-before: end-minio-notify-nsq-topic
 
-   This variable corresponds to the
-   :mc-conf:`notify_nsq topic <notify_nsq.topic>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nsq topic <notify_nsq.topic>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NSQ_TLS
 
@@ -1531,9 +1474,7 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-nsq-tls
       :end-before: end-minio-notify-nsq-tls
 
-   This variable corresponds to the
-   :mc-conf:`notify_nsq tls <notify_nsq.tls>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nsq tls <notify_nsq.tls>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NSQ_TLS_SKIP_VERIFY
 
@@ -1543,9 +1484,7 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-nsq-tls-skip-verify
       :end-before: end-minio-notify-nsq-tls-skip-verify
 
-   This variable corresponds to the
-   :mc-conf:`notify_nsq tls_skip_verify <notify_nsq.tls_skip_verify>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nsq tls_skip_verify <notify_nsq.tls_skip_verify>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NSQ_QUEUE_DIR
 
@@ -1555,9 +1494,7 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-nsq-queue-dir
       :end-before: end-minio-notify-nsq-queue-dir
 
-   This variable corresponds to the
-   :mc-conf:`notify_nsq queue_dir <notify_nsq.queue_dir>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nsq queue_dir <notify_nsq.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NSQ_QUEUE_LIMIT
 
@@ -1567,9 +1504,7 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-nsq-queue-limit
       :end-before: end-minio-notify-nsq-queue-limit
 
-   This variable corresponds to the
-   :mc-conf:`notify_nsq queue_limit <notify_nsq.queue_limit>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nsq queue_limit <notify_nsq.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NSQ_COMMENT
 
@@ -1579,9 +1514,7 @@ NSQ service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-nsq-comment
       :end-before: end-minio-notify-nsq-comment
 
-   This variable corresponds to the
-   :mc-conf:`notify_nsq comment <notify_nsq.comment>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nsq comment <notify_nsq.comment>` configuration setting.
 
 .. _minio-server-envvar-bucket-notification-redis:
 
@@ -1627,8 +1560,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
    - :envvar:`MINIO_NOTIFY_REDIS_KEY`
    - :envvar:`MINIO_NOTIFY_REDIS_FORMAT`
 
-   This variable corresponds to the
-   :mc-conf:`notify_redis <notify_redis>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_redis <notify_redis>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_REDIS_ADDRESS
 
@@ -1638,9 +1570,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-redis-address
       :end-before: end-minio-notify-redis-address
 
-   This variable corresponds to the
-   :mc-conf:`notify_redis address <notify_redis.address>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_redis address <notify_redis.address>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -1654,9 +1584,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-redis-key
       :end-before: end-minio-notify-redis-key
 
-   This variable corresponds to the
-   :mc-conf:`notify_redis key <notify_redis.key>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_redis key <notify_redis.key>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_REDIS_FORMAT
 
@@ -1666,9 +1594,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-redis-format
       :end-before: end-minio-notify-redis-format
 
-   This variable corresponds to the
-   :mc-conf:`notify_redis format <notify_redis.format>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_redis format <notify_redis.format>` configuration setting.
 
 
 .. envvar:: MINIO_NOTIFY_REDIS_PASSWORD
@@ -1679,9 +1605,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-redis-password
       :end-before: end-minio-notify-redis-password
 
-   This variable corresponds to the
-   :mc-conf:`notify_redis password <notify_redis.password>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_redis password <notify_redis.password>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_REDIS_QUEUE_DIR
 
@@ -1691,9 +1615,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-redis-queue-dir
       :end-before: end-minio-notify-redis-queue-dir
 
-   This variable corresponds to the
-   :mc-conf:`notify_redis queue_dir <notify_redis.queue_dir>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_redis queue_dir <notify_redis.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_REDIS_QUEUE_LIMIT
 
@@ -1703,9 +1625,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-redis-queue-limit
       :end-before: end-minio-notify-redis-queue-limit
 
-   This variable corresponds to the
-   :mc-conf:`notify_redis queue_limit <notify_redis.queue_limit>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_redis queue_limit <notify_redis.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_REDIS_COMMENT
 
@@ -1715,9 +1635,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-redis-comment
       :end-before: end-minio-notify-redis-comment
 
-   This variable corresponds to the
-   :mc-conf:`notify_redis comment <notify_redis.comment>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_redis comment <notify_redis.comment>` configuration setting.
 
 .. _minio-server-envvar-bucket-notification-nats:
 
@@ -1757,8 +1675,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-enable
       :end-before: end-minio-notify-nats-enable
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats <notify_nats>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats <notify_nats>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_ADDRESS
 
@@ -1768,8 +1685,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-address
       :end-before: end-minio-notify-nats-address
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats address <notify_nats.address>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats address <notify_nats.address>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -1783,8 +1699,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-subject
       :end-before: end-minio-notify-nats-subject
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats subject <notify_nats.subject>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats subject <notify_nats.subject>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_USERNAME
 
@@ -1794,8 +1709,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-username
       :end-before: end-minio-notify-nats-username
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats username <notify_nats.username>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats username <notify_nats.username>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_PASSWORD
 
@@ -1805,8 +1719,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-password
       :end-before: end-minio-notify-nats-password
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats password <notify_nats.password>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats password <notify_nats.password>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_TOKEN
 
@@ -1816,8 +1729,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-token
       :end-before: end-minio-notify-nats-token
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats token <notify_nats.token>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats token <notify_nats.token>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_TLS
 
@@ -1827,8 +1739,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-tls
       :end-before: end-minio-notify-nats-tls
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats tls <notify_nats.tls>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats tls <notify_nats.tls>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY
 
@@ -1838,9 +1749,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-tls-skip-verify
       :end-before: end-minio-notify-nats-tls-skip-verify
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats tls_skip_verify <notify_nats.tls_skip_verify>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats tls_skip_verify <notify_nats.tls_skip_verify>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_PING_INTERVAL
 
@@ -1850,9 +1759,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-ping-interval
       :end-before: end-minio-notify-nats-ping-interval
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats ping_interval <notify_nats.ping_interval>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats ping_interval <notify_nats.ping_interval>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_JETSTREAM
 
@@ -1874,9 +1781,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-streaming
       :end-before: end-minio-notify-nats-streaming
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats streaming <notify_nats.streaming>` configuration
-   setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats streaming <notify_nats.streaming>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_STREAMING_ASYNC
 
@@ -1888,9 +1793,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-streaming-async
       :end-before: end-minio-notify-nats-streaming-async
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats streaming_async <notify_nats.streaming_async>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats streaming_async <notify_nats.streaming_async>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT
 
@@ -1902,9 +1805,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-streaming-max-pub-acks-in-flight
       :end-before: end-minio-notify-nats-streaming-max-pub-acks-in-flight
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats streaming_max_pub_acks_in_flight
-   <notify_nats.streaming_max_pub_acks_in_flight>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats streaming_max_pub_acks_in_flight <notify_nats.streaming_max_pub_acks_in_flight>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID
 
@@ -1916,9 +1817,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-streaming-cluster-id
       :end-before: end-minio-notify-nats-streaming-cluster-id
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats streaming_cluster_id
-   <notify_nats.streaming_cluster_id>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats streaming_cluster_id <notify_nats.streaming_cluster_id>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_CERT_AUTHORITY
 
@@ -1928,9 +1827,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-cert-authority
       :end-before: end-minio-notify-nats-cert-authority
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats cert_authority <notify_nats.cert_authority>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats cert_authority <notify_nats.cert_authority>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_CLIENT_CERT
 
@@ -1940,9 +1837,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-client-cert
       :end-before: end-minio-notify-nats-client-cert
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats client_cert <notify_nats.client_cert>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats client_cert <notify_nats.client_cert>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_CLIENT_KEY
 
@@ -1952,9 +1847,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-client-key
       :end-before: end-minio-notify-nats-client-key
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats client_key <notify_nats.client_key>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats client_key <notify_nats.client_key>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_QUEUE_DIR
 
@@ -1964,9 +1857,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-queue-dir
       :end-before: end-minio-notify-nats-queue-dir
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats queue_dir <notify_nats.queue_dir>` configuration
-   setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats queue_dir <notify_nats.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_QUEUE_LIMIT
 
@@ -1976,9 +1867,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-queue-limit
       :end-before: end-minio-notify-nats-queue-limit
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats queue_limit <notify_nats.queue_limit>` configuration
-   setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats queue_limit <notify_nats.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_NATS_COMMENT
 
@@ -1988,8 +1877,7 @@ For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE
       :start-after: start-minio-notify-nats-comment
       :end-before: end-minio-notify-nats-comment
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_nats comment <notify_nats.comment>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_nats comment <notify_nats.comment>` configuration setting.
 
 
 .. _minio-server-envvar-bucket-notification-postgresql:
@@ -2039,8 +1927,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
    - :envvar:`MINIO_NOTIFY_POSTGRES_TABLE`
    - :envvar:`MINIO_NOTIFY_POSTGRES_FORMAT`
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_postgres <notify_postgres>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_postgres <notify_postgres>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_POSTGRES_CONNECTION_STRING
 
@@ -2050,9 +1937,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-postgresql-connection-string
       :end-before: end-minio-notify-postgresql-connection-string
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_postgres connection_string <notify_postgres.connection_string>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_postgres connection_string <notify_postgres.connection_string>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -2066,9 +1951,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-postgresql-table
       :end-before: end-minio-notify-postgresql-table
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_postgres table <notify_postgres.table>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_postgres table <notify_postgres.table>` configuration setting.
 
 
 .. envvar:: MINIO_NOTIFY_POSTGRES_FORMAT
@@ -2079,9 +1962,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-postgresql-format
       :end-before: end-minio-notify-postgresql-format
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_postgres format <notify_postgres.format>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_postgres format <notify_postgres.format>` configuration setting.
 
 
 .. envvar:: MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS
@@ -2092,10 +1973,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-postgresql-max-open-connections
       :end-before: end-minio-notify-postgresql-max-open-connections
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_postgres max_open_connections
-   <notify_postgres.max_open_connections>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_postgres max_open_connections <notify_postgres.max_open_connections>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_POSTGRES_QUEUE_DIR
 
@@ -2105,9 +1983,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-postgresql-queue-dir
       :end-before: end-minio-notify-postgresql-queue-dir
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_postgres queue_dir <notify_postgres.queue_dir>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_postgres queue_dir <notify_postgres.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT
 
@@ -2117,9 +1993,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-postgresql-queue-limit
       :end-before: end-minio-notify-postgresql-queue-limit
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_postgres queue_limit <notify_postgres.queue_limit>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_postgres queue_limit <notify_postgres.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_POSTGRES_COMMENT
 
@@ -2129,9 +2003,7 @@ associated to an PostgreSQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-postgresql-comment
       :end-before: end-minio-notify-postgresql-comment
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_postgres comment <notify_postgres.comment>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_postgres comment <notify_postgres.comment>` configuration setting.
 
 .. _minio-server-envvar-bucket-notification-mysql:
 
@@ -2180,8 +2052,7 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
    - :envvar:`MINIO_NOTIFY_MYSQL_TABLE`
    - :envvar:`MINIO_NOTIFY_MYSQL_FORMAT`
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_mysql <notify_mysql>` configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mysql <notify_mysql>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MYSQL_DSN_STRING
 
@@ -2191,9 +2062,7 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mysql-connection-string
       :end-before: end-minio-notify-mysql-connection-string
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_mysql dsn_string <notify_mysql.dsn_string>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mysql dsn_string <notify_mysql.dsn_string>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -2207,10 +2076,7 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mysql-table
       :end-before: end-minio-notify-mysql-table
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_mysql table <notify_mysql.table>`
-   configuration setting.
-
+   This environment variable corresponds with the :mc-conf:`notify_mysql table <notify_mysql.table>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MYSQL_FORMAT
 
@@ -2220,10 +2086,7 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mysql-format
       :end-before: end-minio-notify-mysql-format
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_mysql format <notify_mysql.format>`
-   configuration setting.
-
+   This environment variable corresponds with the :mc-conf:`notify_mysql format <notify_mysql.format>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS
 
@@ -2233,10 +2096,7 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mysql-max-open-connections
       :end-before: end-minio-notify-mysql-max-open-connections
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_mysql max_open_connections
-   <notify_mysql.max_open_connections>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mysql max_open_connections <notify_mysql.max_open_connections>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MYSQL_QUEUE_DIR
 
@@ -2246,9 +2106,7 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mysql-queue-dir
       :end-before: end-minio-notify-mysql-queue-dir
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_mysql queue_dir <notify_mysql.queue_dir>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mysql queue_dir <notify_mysql.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MYSQL_QUEUE_LIMIT
 
@@ -2258,9 +2116,7 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mysql-queue-limit
       :end-before: end-minio-notify-mysql-queue-limit
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_mysql queue_limit <notify_mysql.queue_limit>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mysql queue_limit <notify_mysql.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_MYSQL_COMMENT
 
@@ -2270,9 +2126,7 @@ associated to an MySQL service endpoint with ID of ``PRIMARY``.
       :start-after: start-minio-notify-mysql-comment
       :end-before: end-minio-notify-mysql-comment
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_mysql comment <notify_mysql.comment>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_mysql comment <notify_mysql.comment>` configuration setting.
 
 
 .. _minio-server-envvar-bucket-notification-kafka:
@@ -2315,9 +2169,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-brokers
       :end-before: end-minio-notify-kafka-brokers
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka brokers <notify_kafka.brokers>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka brokers <notify_kafka.brokers>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -2331,9 +2183,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-topic
       :end-before: end-minio-notify-kafka-topic
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka topic <notify_kafka.topic>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka topic <notify_kafka.topic>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_SASL
 
@@ -2343,9 +2193,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-sasl-root
       :end-before: end-minio-notify-kafka-sasl-root
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka sasl <notify_kafka.sasl>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka sasl <notify_kafka.sasl>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_SASL_USERNAME
 
@@ -2355,9 +2203,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-sasl-username
       :end-before: end-minio-notify-kafka-sasl-username
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka sasl_username <notify_kafka.sasl_username>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka sasl_username <notify_kafka.sasl_username>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_SASL_PASSWORD
 
@@ -2367,9 +2213,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-sasl-password
       :end-before: end-minio-notify-kafka-sasl-password
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka sasl_password <notify_kafka.sasl_password>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka sasl_password <notify_kafka.sasl_password>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_SASL_MECHANISM
 
@@ -2379,9 +2223,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-sasl-mechanism
       :end-before: end-minio-notify-kafka-sasl-mechanism
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka sasl_mechanism <notify_kafka.sasl_mechanism>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka sasl_mechanism <notify_kafka.sasl_mechanism>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH
 
@@ -2391,9 +2233,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-tls-client-auth
       :end-before: end-minio-notify-kafka-tls-client-auth
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka tls_client_auth <notify_kafka.tls_client_auth>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka tls_client_auth <notify_kafka.tls_client_auth>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_TLS
 
@@ -2403,9 +2243,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-tls-root
       :end-before: end-minio-notify-kafka-tls-root
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka tls <notify_kafka.tls>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka tls <notify_kafka.tls>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_TLS_SKIP_VERIFY
 
@@ -2415,9 +2253,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-tls-skip-verify
       :end-before: end-minio-notify-kafka-tls-skip-verify
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka tls_skip_verify <notify_kafka.tls_skip_verify>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka tls_skip_verify <notify_kafka.tls_skip_verify>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_CLIENT_TLS_CERT
 
@@ -2427,9 +2263,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-client-tls-cert
       :end-before: end-minio-notify-kafka-client-tls-cert
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka client_tls_cert <notify_kafka.client_tls_cert>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka client_tls_cert <notify_kafka.client_tls_cert>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_CLIENT_TLS_KEY
 
@@ -2439,9 +2273,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-client-tls-key
       :end-before: end-minio-notify-kafka-client-tls-key
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka client_tls_key <notify_kafka.client_tls_key>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka client_tls_key <notify_kafka.client_tls_key>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_VERSION
 
@@ -2451,9 +2283,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-version
       :end-before: end-minio-notify-kafka-version
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka version <notify_kafka.version>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka version <notify_kafka.version>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_QUEUE_DIR
 
@@ -2463,9 +2293,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-queue-dir
       :end-before: end-minio-notify-kafka-queue-dir
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka queue_dir <notify_kafka.queue_dir>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka queue_dir <notify_kafka.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_QUEUE_LIMIT
 
@@ -2475,9 +2303,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-queue-limit
       :end-before: end-minio-notify-kafka-queue-limit
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka queue_limit <notify_kafka.queue_limit>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka queue_limit <notify_kafka.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_KAFKA_COMMENT
 
@@ -2487,9 +2313,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: start-minio-notify-kafka-comment
       :end-before: end-minio-notify-kafka-comment
 
-   This environment variable corresponds to the
-   :mc-conf:`notify_kafka comment <notify_kafka.comment>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_kafka comment <notify_kafka.comment>` configuration setting.
 
 .. _minio-server-envvar-bucket-notification-webhook:
 
@@ -2531,9 +2355,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: minio-notify-webhook-endpoint
       :end-before: minio-notify-webhook-endpoint
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_webhook endpoint <notify_webhook.endpoint>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_webhook endpoint <notify_webhook.endpoint>` configuration setting.
 
    .. include:: /includes/linux/minio-server.rst
       :start-after: start-notify-target-online-desc
@@ -2547,9 +2369,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: minio-notify-webhook-auth-token
       :end-before: minio-notify-webhook-auth-token
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_webhook auth_token <notify_webhook.auth_token>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_webhook auth_token <notify_webhook.auth_token>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_WEBHOOK_QUEUE_DIR
 
@@ -2559,9 +2379,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: minio-notify-webhook-queue-dir
       :end-before: minio-notify-webhook-queue-dir
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_webhook queue_dir <notify_webhook.queue_dir>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_webhook queue_dir <notify_webhook.queue_dir>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_WEBHOOK_QUEUE_LIMIT
 
@@ -2571,9 +2389,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: minio-notify-webhook-queue-limit
       :end-before: minio-notify-webhook-queue-limit
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_webhook queue_limit <notify_webhook.queue_limit>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_webhook queue_limit <notify_webhook.queue_limit>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_WEBHOOK_CLIENT_CERT
 
@@ -2583,9 +2399,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: minio-notify-webhook-client-cert
       :end-before: minio-notify-webhook-client-cert
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_webhook client_cert <notify_webhook.client_cert>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_webhook client_cert <notify_webhook.client_cert>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_WEBHOOK_CLIENT_KEY
 
@@ -2595,9 +2409,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: minio-notify-webhook-client-key
       :end-before: minio-notify-webhook-client-key
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_webhook client_key <notify_webhook.client_key>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_webhook client_key <notify_webhook.client_key>` configuration setting.
 
 .. envvar:: MINIO_NOTIFY_WEBHOOK_COMMENT
 
@@ -2607,9 +2419,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
       :start-after: minio-notify-webhook-comment
       :end-before: minio-notify-webhook-comment
 
-   This environment variable corresponds with the
-   :mc-conf:`notify_webhook comment <notify_webhook.comment>`
-   configuration setting.
+   This environment variable corresponds with the :mc-conf:`notify_webhook comment <notify_webhook.comment>` configuration setting.
 
 .. _minio-server-envvar-object-lambda-webhook:
 
@@ -2677,7 +2487,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-addr
       :end-before: end-minio-ad-ldap-server-addr
 
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add server_addr` command.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add server_addr` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN
 
@@ -2687,7 +2497,7 @@ variables.
       :start-after: start-minio-ad-ldap-lookup-bind-dn
       :end-before: end-minio-ad-ldap-lookup-bind-dn
 
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add lookup_bind_dn` command.
+   This environment variable corresponds with the :mc-cmd:`mc idp ldap add lookup_bind_dn` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD
 
@@ -2697,7 +2507,7 @@ variables.
       :start-after: start-minio-ad-ldap-lookup-bind-password
       :end-before: end-minio-ad-ldap-lookup-bind-password
       
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add lookup_bind_password` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add lookup_bind_password` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN
 
@@ -2707,7 +2517,7 @@ variables.
       :start-after: start-minio-ad-ldap-user-dn-search-base-dn
       :end-before: end-minio-ad-ldap-user-dn-search-base-dn
       
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add user_dn_search_base_dn` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add user_dn_search_base_dn` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER
 
@@ -2717,7 +2527,7 @@ variables.
       :start-after: start-minio-ad-ldap-user-dn-search-filter
       :end-before: end-minio-ad-ldap-user-dn-search-filter
       
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add user_dn_search_filter` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add user_dn_search_filter` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER
 
@@ -2727,7 +2537,7 @@ variables.
       :start-after: start-minio-ad-ldap-group-search-filter
       :end-before: end-minio-ad-ldap-group-search-filter
       
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add group_search_filter` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add group_search_filter` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN
 
@@ -2737,7 +2547,7 @@ variables.
       :start-after: start-minio-ad-ldap-group-search-base-dn
       :end-before: end-minio-ad-ldap-group-search-base-dn
       
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add group_search_base_dn` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add group_search_base_dn` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY
 
@@ -2747,7 +2557,7 @@ variables.
       :start-after: start-minio-ad-ldap-tls-skip-verify
       :end-before: end-minio-ad-ldap-tls-skip-verify
 
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add tls_skip_verify` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add tls_skip_verify` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SERVER_INSECURE
 
@@ -2757,7 +2567,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-insecure
       :end-before: end-minio-ad-ldap-server-insecure
 
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add server_insecure` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add server_insecure` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SERVER_STARTTLS
 
@@ -2767,7 +2577,7 @@ variables.
       :start-after: start-minio-ad-ldap-server-starttls
       :end-before: end-minio-ad-ldap-server-starttls
 
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add server_starttls` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add server_starttls` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_SRV_RECORD_NAME
 
@@ -2779,7 +2589,7 @@ variables.
       :start-after: start-minio-ad-ldap-srv_record_name
       :end-before: end-minio-ad-ldap-srv_record_name
 
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add srv_record_name` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add srv_record_name` parameter.
 
 .. envvar:: MINIO_IDENTITY_LDAP_COMMENT
 
@@ -2789,7 +2599,7 @@ variables.
       :start-after: start-minio-ad-ldap-comment
       :end-before: end-minio-ad-ldap-comment
 
-   This environment variable corresponds with the :mc-cmd:`mc idp ldap add comment` command.
+   This environment variable corresponds with the :mc-cmd:`~mc idp ldap add comment` parameter.
    
 .. _minio-server-envvar-external-identity-management-openid:
 
@@ -2808,9 +2618,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-config-url
       :end-before: end-minio-openid-config-url
    
-   This environment variable corresponds with the 
-   :mc-conf:`identity_openid config_url 
-   <identity_openid.config_url>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid config_url <identity_openid.config_url>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_CLIENT_ID
 
@@ -2820,9 +2628,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-client-id
       :end-before: end-minio-openid-client-id
    
-   This environment variable corresponds with the 
-   :mc-conf:`identity_openid client_id 
-   <identity_openid.client_id>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid client_id <identity_openid.client_id>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_CLIENT_SECRET
 
@@ -2832,9 +2638,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-client-secret
       :end-before: end-minio-openid-client-secret
    
-   This environment variable corresponds with the 
-   :mc-conf:`identity_openid client_secret 
-   <identity_openid.client_secret>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid client_secret <identity_openid.client_secret>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_CLAIM_NAME
 
@@ -2844,9 +2648,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-claim-name
       :end-before: end-minio-openid-claim-name
    
-   This environment variable corresponds with the 
-   :mc-conf:`identity_openid claim_name 
-   <identity_openid.claim_name>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid claim_name <identity_openid.claim_name>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_CLAIM_PREFIX
 
@@ -2856,9 +2658,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-claim-prefix
       :end-before: end-minio-openid-claim-prefix
    
-   This environment variable corresponds with the 
-   :mc-conf:`identity_openid claim_prefix 
-   <identity_openid.claim_prefix>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid claim_prefix <identity_openid.claim_prefix>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_DISPLAY_NAME
 
@@ -2876,9 +2676,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-scopes
       :end-before: end-minio-openid-scopes
    
-   This environment variable corresponds with the 
-   :mc-conf:`identity_openid scopes 
-   <identity_openid.scopes>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid scopes <identity_openid.scopes>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_REDIRECT_URI
 
@@ -2888,9 +2686,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-redirect-uri
       :end-before: end-minio-openid-redirect-uri
 
-   This environment variable corresponds with the 
-   :mc-conf:`identity_openid redirect_uri 
-   <identity_openid.redirect_uri>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid redirect_uri <identity_openid.redirect_uri>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC
 
@@ -2900,7 +2696,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-redirect-uri-dynamic
       :end-before: end-minio-openid-redirect-uri-dynamic
 
-   This environment variable corresponds with the :mc-conf:`identity_openid redirect_uri_dynamic <identity_openid.redirect_uri_dynamic>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid redirect_uri_dynamic <identity_openid.redirect_uri_dynamic>` configuration setting.
    
 .. envvar:: MINIO_IDENTITY_OPENID_CLAIM_USERINFO
 
@@ -2910,7 +2706,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-claim-userinfo
       :end-before: end-minio-openid-claim-userinfo
 
-   This environment variable corresponds with the :mc-conf:`identity_openid claim_userinfo <identity_openid.claim_userinfo>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid claim_userinfo <identity_openid.claim_userinfo>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_VENDOR
 
@@ -2920,7 +2716,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-vendor
       :end-before: end-minio-openid-vendor
 
-   This environment variable corresponds with the :mc-conf:`identity_openid vendor <identity_openid.vendor>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid vendor <identity_openid.vendor>` configuration setting.
 
 .. envvar:: MINIO_IDENTITY_OPENID_KEYCLOAK_REALM
 
@@ -2930,7 +2726,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-keycloak-realm
       :end-before: end-minio-openid-keycloak-realm
 
-   This environment variable corresponds with the :mc-conf:`identity_openid keycloak_realm <identity_openid.keycloak_realm>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid keycloak_realm <identity_openid.keycloak_realm>` configuration setting.
 
    Requires :envvar:`MINIO_IDENTITY_OPENID_VENDOR` set to ``keycloak``.
 
@@ -2942,7 +2738,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-keycloak-admin-url
       :end-before: end-minio-openid-keycloak-admin-url
 
-   This environment variable corresponds with the :mc-conf:`identity_openid keycloak_admin_url <identity_openid.keycloak_admin_url>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid keycloak_admin_url <identity_openid.keycloak_admin_url>` configuration setting.
 
    Requires :envvar:`MINIO_IDENTITY_OPENID_VENDOR` set to ``keycloak``.
 
@@ -2955,9 +2751,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :start-after: start-minio-openid-comment
       :end-before: end-minio-openid-comment
    
-   This environment variable corresponds with the 
-   :mc-conf:`identity_openid comment 
-   <identity_openid.comment>` setting.
+   This environment variable corresponds with the :mc-conf:`identity_openid comment <identity_openid.comment>` configuration setting.
 
 .. _minio-server-envvar-external-identity-management-plugin:
 
@@ -3027,7 +2821,7 @@ See :ref:`minio-data-compression` for tutorials on using these configuration set
       :start-after: start-minio-data-compression-allow_encryption-desc
       :end-before: end-minio-data-compression-allow_encryption-desc
 
-   This environment variable corresponds with the :mc-conf:`compression allow_encryption <compression.allow_encryption>` setting.
+   This environment variable corresponds with the :mc-conf:`compression allow_encryption <compression.allow_encryption>` configuration setting.
 
 .. envvar:: MINIO_COMPRESSION_ENABLE
 
@@ -3037,7 +2831,7 @@ See :ref:`minio-data-compression` for tutorials on using these configuration set
       :start-after: start-minio-data-compression-enable-desc
       :end-before: end-minio-data-compression-enable-desc
 
-   This environment variable corresponds with the :mc-conf:`compression enable <compression.enable>` setting.
+   This environment variable corresponds with the :mc-conf:`compression enable <compression.enable>` configuration setting.
 
 .. envvar:: MINIO_COMPRESSION_EXTENSIONS
 
@@ -3047,7 +2841,7 @@ See :ref:`minio-data-compression` for tutorials on using these configuration set
       :start-after: start-minio-data-compression-extensions-desc
       :end-before: end-minio-data-compression-extensions-desc
 
-   This environment variable corresponds with the :mc-conf:`compression extensions <compression.extensions>` setting.
+   This environment variable corresponds with the :mc-conf:`compression extensions <compression.extensions>` configuration setting.
 
 .. envvar:: MINIO_COMPRESSION_MIME_TYPES
 
@@ -3057,5 +2851,5 @@ See :ref:`minio-data-compression` for tutorials on using these configuration set
       :start-after: start-minio-data-compression-mime_types-desc
       :end-before: end-minio-data-compression-mime_types-desc
 
-   This environment variable corresponds with the :mc-conf:`compression mime_types <compression.mime_types>` setting.
+   This environment variable corresponds with the :mc-conf:`compression mime_types <compression.mime_types>` configuration setting.
 
