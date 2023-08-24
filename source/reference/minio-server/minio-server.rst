@@ -452,6 +452,23 @@ MinIO Console:
 
    If you omit this variable, the Console listens and responds to all IP addresses or hostnames associated to the host machine on which the MinIO Server runs.
 
+.. envvar:: MINIO_BROWSER_SESSION_DURATION
+
+   *Optional*
+
+   .. versionadded:: MinIO Server RELEASE.2023-08-23T10-07-06Z
+
+   Specify the duration of a browser session for working with the MinIO Console.
+
+   MinIO supports the following units of time measurement:
+
+   - ``s`` - seconds, "60s"
+   - ``m`` - minutes, "60m"
+   - ``h`` - hours, "24h"
+   - ``d`` - days, "7d"
+
+   Defaults to ``12h``.
+
 .. envvar:: MINIO_SERVER_URL
 
    *Optional*
