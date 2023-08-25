@@ -79,7 +79,27 @@ The :mc:`mc batch` commands include
 Access to ``mc batch``
 ----------------------
 
-You can use MinIO's :ref:`Policy Based Access Control <minio-policy>` and the :ref:`administrative policy actions <minio-policy-mc-admin-actions>` to restrict who can start a batch job, retrieve a list of running jobs, or describe a running job.
+The batch function itself is a server process not limited by access keys or policies.
+Instead, use MinIO's :ref:`Policy Based Access Control <minio-policy>` and the :ref:`administrative policy actions <minio-policy-mc-admin-actions>` to restrict who can start a batch job, retrieve a list of running jobs, or describe a running job.
+
+MinIO provides the following admin policy actions to control access to Batch Replication functions:
+
+``admin:ListBatchJobs``
+  Grants the user the ability to see batch jobs currently in process.
+
+``admin:DescribeBatchJobs``
+  Grants the user the ability to see the definition details of batch job currently in process.
+
+``admin:StartBatchJob``
+  Grants the user the ability to start a batch job.
+  The job may be further restricted by the credentials the job uses to access either the source or target deployments.
+
+``admin:CancelBatchJob``
+  Allows the user to stop a batch job currently in progress.
+
+You can assign any of these actions to users independently or in any combination.
+
+The built-in ``ConsoleAdmin`` policy includes sufficient access to perform all of these types of batch job actions.
 
 Job Types
 ---------
@@ -88,6 +108,8 @@ Replicate
 ~~~~~~~~~
 
 Use the ``replicate`` job type to create a batch job that replicates objects from one MinIO deployment to another MinIO target.
+
+The access to objects and buckets for the replicate process may be restricted by the credentials you provide in the YAML for either the source or target destinations. 
 
 .. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
 
