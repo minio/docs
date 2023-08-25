@@ -104,6 +104,10 @@ The built-in ``ConsoleAdmin`` policy includes sufficient access to perform all o
 Job Types
 ---------
 
+.. note:: 
+
+   Depending on the job type, the success or failure of any batch job may be impacted by the credentials given in the batch job's YAML for the source or target deployments.
+
 Replicate
 ~~~~~~~~~
 
