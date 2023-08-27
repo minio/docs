@@ -79,10 +79,13 @@ The :mc:`mc batch` commands include
 Access to ``mc batch``
 ----------------------
 
-The batch function itself is a server process not limited by access keys or policies.
-Instead, use MinIO's :ref:`Policy Based Access Control <minio-policy>` and the :ref:`administrative policy actions <minio-policy-mc-admin-actions>` to restrict who can start a batch job, retrieve a list of running jobs, or describe a running job.
+A user's access keys and policies do not restrict the the buckets, prefixes, or objects the batch function can access or the types of actions the process can perform on any objects.
 
-MinIO provides the following admin policy actions to control access to Batch Replication functions:
+For some job types, the credentials passed to the batch job through the YAML file do restrict the objects that the job can access.
+However, any restrictions to the job are from the credentials in the YAML, not policies attached to the user who starts the job.
+
+Use MinIO's :ref:`Policy Based Access Control <minio-policy>` and the :ref:`administrative policy actions <minio-policy-mc-admin-actions>` to restrict who can perform various batch job functions.
+MinIO provides the following admin policy actions for Batch Jobs:
 
 ``admin:ListBatchJobs``
   Grants the user the ability to see batch jobs currently in process.
