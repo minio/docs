@@ -115,6 +115,22 @@ API Configuration
 
 .. _minio-server-config-logging-logs:
 
+Scanner
+~~~~~~~
+
+.. mc-conf:: scanner
+
+   Configuration settings that affect the scanner process.
+   MinIO utilizes the scanner for :ref:`bucket replication <minio-bucket-replication>`, :ref:`site replication <minio-site-replication-overview>`, and :ref:`lifecycle management <minio-lifecycle-management>` tasks.
+
+   .. mc-conf:: speed
+
+      This configuration setting corresponds with the :envvar:`MINIO_SCANNER_SPEED` environment variable.
+
+      .. include:: /includes/common/scanner.rst
+         :start-after: start-scanner-speed-values
+         :end-before: end-scanner-speed-values
+   
 HTTP Webhook Log Target
 ~~~~~~~~~~~~~~~~~~~~~~~
 

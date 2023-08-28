@@ -203,6 +203,10 @@ feature. The time required to fully synchronize a bucket depends on a number of
 factors, including but not limited to the current cluster replication load,
 overall cluster load, and the size of the namespace (all objects in the bucket).
 
+.. include:: /includes/common/scanner.rst
+   :start-after: start-scanner-speed-config
+   :end-before: end-scanner-speed-config
+
 If versioning was not previously enabled when configuring bucket replication, 
 existing objects have a ``versionid = null``. These objects do replicate.
 
