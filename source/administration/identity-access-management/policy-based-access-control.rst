@@ -878,6 +878,10 @@ services:
 .. policy-action:: admin:StartBatchJob
 
    Allows user to begin a batch job run.
+
+.. policy-action:: admin:CancelBatchJob
+
+   Allows user to stop a batch job currently in process.
    
 .. policy-action:: admin:Rebalance
 
