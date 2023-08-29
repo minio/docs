@@ -79,6 +79,33 @@ Enabling TLS
    You can place the generated ``public.crt`` and ``private.key`` into the ``/.minio/certs`` directory to enable TLS for the MinIO deployment.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
 
+.. cond:: container
+
+   Start the MinIO container with the :mc-cmd:`minio/minio:latest server --certs-dir <minio server --certs-dir>` parameter and specify the path to a directory in which MinIO searches for certificates.
+   You must mount a local host volume to that path when starting the container to ensure the MinIO Server can access the necessary certificates.
+
+   Place the TLS certificates for the default domain (e.g. ``minio.example.net``) in the specified directory, with the private key as ``private.key`` and public certificate as ``public.crt``.
+   For example:
+
+   .. code-block:: shell
+
+      /opts/certs
+        private.key
+        public.crt
+
+   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for enabling TLS for evaluating MinIO with TLS enabled.
+   For example, the following command generates a self-signed certificate with a set of IP and DNS SANs associated to the MinIO Server hosts:
+
+   .. code-block:: shell
+
+      certgen -host "localhost,minio-*.example.net"
+
+   You may need to start the container and set a ``--hostname`` that matches the TLS certificate DNS SAN.
+
+   Move the certificates to the path on your local host machine which mounts to the ``--certs-dir`` directory on the container.
+   When the MinIO container starts, the server searches the specified location for certificates and  uses them enable TLS.
+   Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
+
 .. cond:: macos
 
    The MinIO server searches the following directory for TLS keys and certificates:
@@ -189,6 +216,48 @@ Multiple Domain-Based TLS Certificates
 
    If the client-specified hostname or IP address does not match any of the configured TLS certificates, the connection typically fails with a certificate validation error.
 
+
+.. cond:: container
+
+   The MinIO server supports multiple TLS certificates, where the server uses `Server Name Indication (SNI) <https://en.wikipedia.org/wiki/Server_Name_Indication>`__ to identify which certificate to use when responding to a client request.
+   When a client connects using a specific hostname, MinIO uses :abbr:`SNI (Server Name Indication)` to select the appropriate TLS certificate for that hostname.
+
+   For example, consider a MinIO deployment reachable through the following hostnames:
+
+   - ``https://minio.example.net`` (default TLS certificates)
+   - ``https://s3.example.net``
+   - ``https://minio.internal-example.net``
+
+   Start the MinIO container with the :mc-cmd:`minio/minio:latest server --certs-dir <minio server --certs-dir>` parameter and specify the path to a directory in which MinIO searches for certificates.
+   You must mount a local host volume to that path when starting the container to ensure the MinIO Server can access the necessary certificates.
+
+   Place the TLS certificates for the default domain (e.g. ``minio.example.net``) in the specified directory, with the private key as ``private.key`` and public certificate as ``public.crt``.
+   For other hostnames, create a subfolder whose name matches the domain to improve human readability. 
+   Place the TLS private and public key for that domain in the subfolder.
+
+   For example:
+
+   .. code-block:: shell
+
+      /opts/certs
+        private.key
+        public.crt
+        s3-example.net/
+          private.key
+          public.crt
+        internal-example.net/
+          private.key
+          public.crt
+
+   When the MinIO container starts, the server searches the mounted location ``/opts/certs`` for certificates and  uses them enable TLS.
+   MinIO serves clients connecting to the container using a supported hostname with the associated certificates.
+   Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
+
+   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SAN), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
+   Using a TLS certificate per hostname better protects each individual hostname from discovery.
+
+   If the client-specified hostname or IP address does not match any of the configured TLS certificates, the connection typically fails with a certificate validation error.
+ 
 .. cond:: macos
 
    The MinIO server supports multiple TLS certificates, where the server uses `Server Name Indication (SNI) <https://en.wikipedia.org/wiki/Server_Name_Indication>`__ to identify which certificate to use when responding to a client request.
@@ -312,6 +381,26 @@ Third-Party Certificate Authorities
    Where ``${HOME}`` is the home directory of the user running the MinIO Server process.
 
    For deployments started with a custom TLS directory :mc-cmd:`minio server --certs-dir`, the server searches in the ``/CAs`` path at that specified directory.
+
+   Place the certificate file for each CA into the ``/CAs`` subdirectory. 
+   Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.
+   If the MinIO Server cannot match an incoming client's TLS certificate issuer against any of the available CAs, the server rejects the connection as invalid.
+
+.. cond:: container
+
+   Start the MinIO container with the :mc-cmd:`minio/minio:latest server --certs-dir <minio server --certs-dir>` parameter and specify the path to a directory in which MinIO searches for certificates.
+   You must mount a local host volume to that path when starting the container to ensure the MinIO Server can access the necessary certificates.
+
+   For deployments started with a custom TLS directory :mc-cmd:`minio server --certs-dir`, the server searches in the ``/CAs`` path at that specified directory.
+   For example:
+
+   .. code-block:: shell
+
+      /opts/certs
+        private.key
+        public.crt
+        /CAs
+          my-ca.crt
 
    Place the certificate file for each CA into the ``/CAs`` subdirectory. 
    Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.

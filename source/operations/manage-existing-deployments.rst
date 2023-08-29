@@ -21,11 +21,22 @@ Upgrade
 Decommission
    Drain data from an older storage pool in preparation for removing it from the deployment
 
-.. toctree::
-   :titlesonly:
-   :hidden:
+.. cond:: not (linux or k8s)
 
-   /operations/install-deploy-manage/expand-minio-deployment
-   /operations/install-deploy-manage/upgrade-minio-deployment
-   /operations/install-deploy-manage/decommission-server-pool
-   /operations/install-deploy-manage/migrate-fs-gateway
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      /operations/install-deploy-manage/upgrade-minio-deployment
+      /operations/install-deploy-manage/migrate-fs-gateway
+
+.. cond:: linux or k8s
+
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      /operations/install-deploy-manage/expand-minio-deployment
+      /operations/install-deploy-manage/upgrade-minio-deployment
+      /operations/install-deploy-manage/decommission-server-pool
+      /operations/install-deploy-manage/migrate-fs-gateway
