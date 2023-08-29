@@ -155,8 +155,10 @@ MinIO deployments in a site replication configuration do *not* replicate the cre
 
 .. start-mc-admin-replicate-load-balancing
 
-When replicating to multi-node sites, use the URL or IP address of the site's load balancer, reverse proxy, or similar network control plane component which automatically routes requests to nodes in the deployment.
+Specify the URL or IP address of the site's load balancer, reverse proxy, or similar network control plane component.
+Requests are automatically routed to nodes in the deployment.
 
-Using a single node for configuring site replication creates a single point of failure, where that node being offline results in replication failure.
+MinIO recommends against using a single node hostname for a peer site.
+This creates a single point of failure: if that node goes offline, replication fails.
 
 .. end-mc-admin-replicate-load-balancing

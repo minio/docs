@@ -185,8 +185,8 @@ You cannot disable versioning in site replication deployments.
 
 MinIO cannot replicate objects in prefixes in the bucket that you excluded from versioning.
 
-Load Balancers Installed on Each Multi-Node Site
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Load Balancers Installed on Each Site
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common-replication.rst
    :start-after: start-mc-admin-replicate-load-balancing
