@@ -294,6 +294,16 @@ Core Configuration
 
    If this setting is omitted, the default is to only accept path-style requests. For example, ``minio.example.net/data``.
 
+.. _minio-scanner-speed-options:
+
+.. envvar:: MINIO_SCANNER_SPEED
+
+   Manage the maximum wait period for the scanner when balancing MinIO read/write performance to scanner processes.
+   
+   .. include:: /includes/common/scanner.rst
+      :start-after: start-scanner-speed-values
+      :end-before: end-scanner-speed-values
+   
 Root Credentials
 ~~~~~~~~~~~~~~~~
 

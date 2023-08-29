@@ -105,6 +105,10 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
    If one site loses data for any reason, resynchronize the data from another healthy site with :mc-cmd:`mc admin replicate resync`.
    This launches an active process that resynchronizes the data without waiting for the passive MinIO scanner to recognize the missing data.
 
+.. include:: /includes/common/scanner.rst
+   :start-after: start-scanner-speed-config
+   :end-before: end-scanner-speed-config
+
 Synchronous vs Asynchronous Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
