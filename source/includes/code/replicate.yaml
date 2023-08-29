@@ -1,6 +1,7 @@
 replicate:
   apiVersion: v1
   # source of the objects to be replicated
+  # if source is not the local deployment for the command, provide the endpoint and credentials
   source:
     type: TYPE # valid values are "s3" or "minio"
     bucket: BUCKET
@@ -13,6 +14,7 @@ replicate:
     #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
 
   # target where the objects must be replicated
+  # if target is not the local deployment for the command, provide the endpoint and credentials
   target:
     type: TYPE # valid values are "s3" or "minio"
     bucket: BUCKET

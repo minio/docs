@@ -111,19 +111,23 @@ Job Types
 
    Depending on the job type, the success or failure of any batch job may be impacted by the credentials given in the batch job's YAML for the source or target deployments.
 
+.. _minio-batch-local:
+
+``Local`` Deployment
+~~~~~~~~~~~~~~~~~~~~
+
+You run a batch job against a particular deployment by passing an ``alias`` to the :mc:`mc batch` command.
+The deployment you specify in the command becomes the ``local`` deployment within the context of that batch job.
+
 Replicate
 ~~~~~~~~~
 
-Use the ``replicate`` job type to create a batch job that replicates objects from one MinIO deployment to another MinIO target.
+Use the ``replicate`` job type to create a batch job that replicates objects from one MinIO deployment (the ``source`` deployment) to another MinIO deployment (the ``target`` deployment).
+Either the ``source`` or the ``target`` **must** be the :ref:`local <minio-batch-local>` deployment.
+Starting with the MinIO Server ``RELEASE.2023-05-04T21-44-30Z``, the other deployment can be either another MinIO deployment or any S3-compatible location.
 
+The batch job definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
 The access to objects and buckets for the replicate process may be restricted by the credentials you provide in the YAML for either the source or target destinations. 
-
-.. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
-
-   ``replicate`` batch jobs also support :mc:`mc mirror`-like behavior when presented an S3-compatible source or target.
-
-At least one of the deployment locations, either the source or the target, must be ``local``.
-The definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
 
 .. versionchanged:: MinIO Server RELEASE.2023-04-07T05-28-58Z
 
@@ -148,6 +152,9 @@ Sample YAML Description File for a ``replicate`` Job Type
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Create a basic ``replicate`` job definition file you can edit with :mc:`mc batch generate`.
+
+For the :ref:`local <minio-batch-local>` deployment, do not specify the endpoint or credentials.
+Either delete or comment out those lines for the source or the target section, depending on which is the ``local``.
 
 .. literalinclude:: /includes/code/replicate.yaml
    :language: yaml
