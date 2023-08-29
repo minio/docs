@@ -127,7 +127,7 @@ Either the ``source`` or the ``target`` **must** be the :ref:`local <minio-batch
 Starting with the MinIO Server ``RELEASE.2023-05-04T21-44-30Z``, the other deployment can be either another MinIO deployment or any S3-compatible location.
 
 The batch job definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
-The access to objects and buckets for the replicate process may be restricted by the credentials you provide in the YAML for either the source or target destinations. 
+The access to objects and buckets for the replication process may be restricted by the credentials you provide in the YAML for either the source or target destinations. 
 
 .. versionchanged:: MinIO Server RELEASE.2023-04-07T05-28-58Z
 
