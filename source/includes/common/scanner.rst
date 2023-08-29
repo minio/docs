@@ -17,19 +17,27 @@ Valid values include:
    :width: 100%
    
    * - ``fastest``
-     - Removes wait time for scanner activity, maximizing scanner performance at the possible cost of some read or write performance.
+     - Removes scanner wait on read/write latency, allowing the scanner to operate at full-speed and IOPS consumption.
+       This setting may result in reduced read/write performance for IOPS-limited systems.
    
    * - ``fast``
-     - Adds a small wait time for scanner activity if MinIO notices a latency in read or write processes slight risk of some loss of read or write performance.
+     - Sets a short scanner wait time on read/write latency, allowing the scanner to operate at a higher speed and IOPS consumption.
+       This setting may result in reduced read and write performance.
    
    * - ``default``
-     - Adds a moderate wait time for scanner activity if MinIO notices a latency in any read or write processes.
-       Provides a standard balance of maintaining read/write performance with ongoing scanner activity. 
+     - Sets a moderate scanner wait time on read/write latency, allowing the scanner to operate at a balanced speed and IOPS consumption.
+       This setting seeks to maintain read/write performance while allowing ongoing scanner activity. 
    
    * - ``slow``
-     - Adds an additional delay to scanner processes if MinIO notices a latency in any read or write operation in order to prioritize read/write performance at a slight cost of scanner performance.
+     - Sets a medium scanner wait time on read/write latency, where the scanner operates at a reduced speed and IOPS consumption.
+       This setting allows better read/write performance while reducing scanner performance.
+
+       May impact scanner-dependent features, such as lifecycle management and replication.
 
    * - ``slowest``
-     - Adds the greatest delay to scanner processes if MinIO notices a latency of any read or write operation in order to prioritize read/write performance at a greater cost of scanner performance.
+     - Sets a large scanner wait time on read/write latency, where the scanner operates at a substantially lower speed and IOPS consumption.
+       This setting prioritizes read/write operations at the potential cost of scanner operations.
+
+       May impact scanner-dependent features, such as lifecycle management and replication.
 
 .. end-scanner-speed-values
