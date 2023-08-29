@@ -180,7 +180,8 @@ For the **source deployment**
          | Defaults to ``auto``.
 
      * - ``credentials:`` 
-       - The ``accesskey:`` and ``secretKey:`` or the ``sessionToken:`` that grants access to the object(s).
+       - | The ``accesskey:`` and ``secretKey:`` or the ``sessionToken:`` that grants access to the object(s).
+         | Only specify for the deployment that is not the :ref:`local <minio-batch-local>` deployment. 
 
 For the **target deployment**
 
