@@ -165,10 +165,12 @@ For the **source deployment**
        - The prefix on the object(s) that should replicate.
 
      * - ``endpoint:`` 
-       - | Location of the source deployment.
+       - | Location of the deployment to use for either the source or the target of a replication batch job. 
+         | For example, ``https://minio.example.net``. 
          |
-         | If the source is the :ref:`alias <alias>` specified to the command, you can omit this and the ``credentials`` fields.
-         | If the source is "local", the target *must* specify the remote deployment with ``endpoint`` and ``credentials``.
+         | If the deployment is the :ref:`alias` specified to the command, omit this field to direct MinIO to use that alias for the endpoint and credentials values. 
+         | Either the source deployment *or* the remote deployment *must* be the :ref:`"local" <minio-batch-local>` alias.
+         | The non-"local" deployment must specify the ``endpoint`` and ``credentials``.
 
      * - ``path:``
        - | Directs MinIO to use Path or Virtual Style (DNS) lookup of the bucket.
