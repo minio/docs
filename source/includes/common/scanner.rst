@@ -18,7 +18,7 @@ Valid values include:
    
    * - ``fastest``
      - Removes scanner wait on read/write latency, allowing the scanner to operate at full-speed and IOPS consumption.
-       This setting may result in reduced read/write performance for IOPS-limited systems.
+       This setting may result in reduced read and write performance.
    
    * - ``fast``
      - Sets a short scanner wait time on read/write latency, allowing the scanner to operate at a higher speed and IOPS consumption.
@@ -26,17 +26,17 @@ Valid values include:
    
    * - ``default``
      - Sets a moderate scanner wait time on read/write latency, allowing the scanner to operate at a balanced speed and IOPS consumption.
-       This setting seeks to maintain read/write performance while allowing ongoing scanner activity. 
+       This setting seeks to maintain read and write performance while allowing ongoing scanner activity. 
    
    * - ``slow``
      - Sets a medium scanner wait time on read/write latency, where the scanner operates at a reduced speed and IOPS consumption.
-       This setting allows better read/write performance while reducing scanner performance.
+       This setting allows better read and write performance while reducing scanner performance.
 
        May impact scanner-dependent features, such as lifecycle management and replication.
 
    * - ``slowest``
      - Sets a large scanner wait time on read/write latency, where the scanner operates at a substantially lower speed and IOPS consumption.
-       This setting prioritizes read/write operations at the potential cost of scanner operations.
+       This setting prioritizes read and write operations at the potential cost of scanner operations.
 
        May impact scanner-dependent features, such as lifecycle management and replication.
 
