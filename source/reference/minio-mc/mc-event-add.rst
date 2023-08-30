@@ -227,9 +227,11 @@ corresponding :ref:`S3 events <minio-bucket-notifications-event-types>`:
        | :data:`s3:ObjectRestore:Post`
        | :data:`s3:ObjectRestore:Completed`
 
-For more complete documentation on the listed S3 events, see 
-:s3-docs:`S3 Supported Event Types
-<NotificationHowTo.html#notification-how-to-event-types-and-destinations>`.
+   * - ``scanner``
+     - | :data:`s3:Scanner:ManyVersions`
+       | :data:`s3:Scanner:BigPrefix`
+
+For more complete documentation on the listed S3 events, see :s3-docs:`S3 Supported Event Types <NotificationHowTo.html#notification-how-to-event-types-and-destinations>`.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~
