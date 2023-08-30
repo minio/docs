@@ -27,6 +27,7 @@ Displays information on a MinIO Tenant, including but not limited to:
 - The total capacity of the Tenant
 - The version of MinIO server and MinIO Console running on the Tenant
 - The configuration of each Pool in the Tenant.
+- The root user credentials for the Tenant.
 
 .. end-kubectl-minio-tenant-info-desc
 
