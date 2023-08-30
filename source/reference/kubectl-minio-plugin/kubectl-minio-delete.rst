@@ -73,6 +73,8 @@ The command supports the following flags:
 
    Safety flag to confirm deletion of the MinIO Operator and all tenants with :mc-cmd:`~kubectl minio delete --force`.
 
+   This operation is irreversible.
+
 .. mc-cmd:: --force
    :optional:
 
