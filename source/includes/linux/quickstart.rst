@@ -129,6 +129,8 @@ Procedure
 
    The example above uses the :ref:`root user <minio-users-root>`.
 
+.. rst-class:: section-next-steps
+
 Next Steps
 ----------
 

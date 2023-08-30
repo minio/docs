@@ -137,6 +137,8 @@ Procedure
 
    For additional details about this command, see :ref:`alias`.
 
+.. rst-class:: section-next-steps
+   
 Next Steps
 ----------
 
