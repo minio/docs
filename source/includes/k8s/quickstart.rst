@@ -163,6 +163,8 @@ Procedure
    - The Access Key for a MinIO :ref:`user <minio-users>`
    - The Secret Key for a MinIO :ref:`user <minio-users>`
 
+.. rst-class:: section-next-steps
+   
 Next Steps
 ----------
 
