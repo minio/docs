@@ -55,7 +55,8 @@ Example actions the user may be able to perform include:
 
 .. versionchanged:: Console v0.35.0
 
-   If you select multiple objects to download, MinIO creates a ZIP archive of all objects before downloading.
+   If you select multiple objects to download, MinIO creates a ZIP archive of those objects for downloading.
+   You must unzip or uncompress this archive after downloading to access the files.
 
 .. _minio-console-buckets:
 
