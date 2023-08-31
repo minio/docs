@@ -24,6 +24,17 @@ may be optional depending on the provider.
 
 .. end-minio-openid-client-secret
 
+
+.. start-minio-openid-role-policy
+
+Specify a comma-separated list of :ref:`policy names <minio-policy>` to use for the request's ``RoleARN`` for all authentication requests for the provider.
+The specified policy or policies must already exist on the MinIO Server.
+
+When used, you must also specify the :ref:`RoleARN <minio-assumerolewithwebidentity-query-parameters>` in the authentication request.
+
+.. end-minio-openid-role-policy
+
+
 .. start-minio-openid-jwks-url
 
 Specify the URL for the JSON Web Key Set (JWKS) for MinIO to use when verifying

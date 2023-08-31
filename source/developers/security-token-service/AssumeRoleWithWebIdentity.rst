@@ -48,6 +48,8 @@ cluster:
    &DurationSeconds=86000
    &Policy={}
 
+.. _minio-assumerolewithwebidentity-query-parameters:
+
 Request Query Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -116,6 +118,16 @@ This endpoint supports the following query parameters:
 
        See :ref:`minio-access-management` for more information on MinIO
        authentication and authorization.
+
+   * - ``RoleARN``
+     - string
+     - *Optional*   
+
+       The role ARN to use for all user authentication requests.
+       If used, there must be a Role Policy defined for the provider by the ``role_policy`` configuration parameter or the ``MINIO_IDENTITY_OPENID_ROLE_POLICY`` environment variable.
+       Likewise, if you configure a Role Policy, you must also specify the ``RoleARN``.
+       
+       When used, all valid authorization requests assume the same set of permissions provided by the Role Policy.
 
 Response Elements
 -----------------

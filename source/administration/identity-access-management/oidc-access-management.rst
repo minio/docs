@@ -15,18 +15,64 @@ MinIO supports using an OpenID Connect (OIDC) compatible IDentity Provider (IDP)
 such as Okta, KeyCloak, Dex, Google, or Facebook for external management of user
 identities.
 
-For identities managed by the external OpenID Connect (OIDC) compatible provider, MinIO uses the `JSON Web Token claim <https://datatracker.ietf.org/doc/html/rfc7519#section-4>`__ returned as part of the OIDC authentication flow to identify the :ref:`policies <minio-policy>` to assign to the authenticated user.
+For identities managed by the external OpenID Connect (OIDC) compatible provider, MinIO can use either of two methods to assign policies to the authenticated user.
+
+1. Use the `JSON Web Token claim <https://datatracker.ietf.org/doc/html/rfc7519#section-4>`__ returned as part of the OIDC authentication flow to identify the :ref:`policies <minio-policy>` to assign to the authenticated user.
+2. Use the ``RoleARN`` specified in the authorization request to assign the policies attached to the provider's Role Policy.
+   
 
 MinIO by default denies access to all actions or resources not explicitly allowed by a user's assigned or inherited :ref:`policies <minio-policy>`. 
 Users managed by an OIDC provider must specify the necessary policies as part of the JWT claim. If the user JWT claim has no matching MinIO policies, that user has no permissions to access any action or resource on the MinIO deployment.
 
 The specific claim which MinIO looks for is configured as part of :ref:`deploying the cluster with OIDC identity management <minio-external-iam-oidc>`. This page focuses on creating MinIO policies to match the configured OIDC claims.
 
-Authentication and Authorization Flow
+Authentication and Authorization Flow 
 -------------------------------------
 
+A MinIO cluster can have any number of Role Policy based OpenID providers configured.
+
+A MinIO Cluster may only have **one** JWT Claim based OpenID provider configured.
+Other providers must be configured with the Role Policy method instead.
+
+Role Policy and RoleARN
+~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO recommends using the Role Policy method for authenticating with an OpenID provider.
+With a Role Policy, all registered users receive the same policy or policies for access.
+
+Use :ref:`OpenID Policy Variables <minio-policy-variables-oidc>` to manage what each individual user has access to.
+
+The login flow for an application using :abbr:`OIDC (OpenID Connect)` credentials with a Role Policy claim flow is as follows:
+
+1. Authenticate to the configured :abbr:`OIDC (OpenID Connect)` provider and redirect back to MinIO. 
+   
+   MinIO only supports the `OpenID Authorization Code Flow <https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth>`__. 
+   Authentication using Implicit Flow is not supported.
+
+2. Specify the ``RoleARN`` to the MinIO Security Token Service (STS) :ref:`minio-sts-assumerolewithwebidentity` API endpoint. 
+   
+   .. note::
+
+      MinIO assigns and displays a unique RoleARN to each configured OpenID provider at startup.
+
+   MinIO verifies the ``RoleARN`` and checks for a :ref:`role policy <minio-external-identity-management-openid-access-control>` specifying a list
+   of one or more :ref:`policies <minio-policy>` to assign to the authenticated user. 
+
+   Use either the :envvar:`MINIO_IDENTITY_OPENID_ROLE_POLICY` environment variable or the :mc-conf:`identity_openid role_policy <identity_openid.role_policy>` configuration setting to define the list of policies to use for the provider
+
+3. MinIO returns temporary credentials in the STS API response in the form of an access key, secret key, and session token. 
+   The credentials have permissions matching those policies specified in the Role Policy.
+   
+4. Applications use the temporary credentials returned by the STS endpoint to perform authenticated S3 operations on MinIO.
+
+
+JSON Web Token Claim
+~~~~~~~~~~~~~~~~~~~~
+
+Using JSON Web Tokens allows for individual assignment of policies at the increased cost of managing multiple policies for separate claims.
+
 The login flow for an application using :abbr:`OIDC (OpenID Connect)`
-credentials is as follows:
+credentials with a JSON Web Token Claim flow is as follows:
 
 1. Authenticate to the configured :abbr:`OIDC (OpenID Connect)`
    provider and retrieve a 
@@ -55,9 +101,7 @@ credentials is as follows:
 4. Applications use the temporary credentials returned by the STS endpoint to
    perform authenticated S3 operations on MinIO.
 
-MinIO provides an example Go application
-:minio-git:`web-identity.go <minio/blob/master/docs/sts/web-identity.go>` that
-handles the full login flow.
+MinIO provides an example Go application :minio-git:`web-identity.go <minio/blob/master/docs/sts/web-identity.go>` that handles the full login flow.
 
 OIDC users can alternatively create :ref:`access keys <minio-idp-service-account>`. 
 Access Keys are long-lived credentials which inherit their privileges from the parent user. 
@@ -66,7 +110,7 @@ To create a new access key, log into the :ref:`MinIO Console <minio-console>` us
 From the :guilabel:`Identity` section of the left navigation, select :guilabel:`Access Keys` followed by the :guilabel:`Create access keys +` button.
 
 Identifying the JWT Claim Value
--------------------------------
++++++++++++++++++++++++++++++++
 
 MinIO uses the JWT token returned as part of the OIDC authentication flow to identify the specific policies to assign to the authenticated user.
 

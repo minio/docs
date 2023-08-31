@@ -2466,6 +2466,17 @@ configuration settings.
 
       This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_CLIENT_SECRET` environment variable.
       
+   .. mc-conf:: role_policy
+      :delimiter: " "
+
+      *Optional*
+
+      .. include:: /includes/common-minio-external-auth.rst
+         :start-after: start-minio-openid-role-policy
+         :end-before: end-minio-openid-role-policy
+
+      This configuration setting corresponds with the :envvar:`MINIO_IDENTITY_OPENID_ROLE_POLICY` environment variable.
+   
    .. mc-conf:: claim_name
       :delimiter: " "
 
