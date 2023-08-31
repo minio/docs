@@ -173,7 +173,7 @@ The following table lists the outcome of varying erasure code parity levels on a
 Bitrot Protection
 -----------------
 
-`Bit rot <https://en.wikipedia.org/wiki/Data_degradation>__` is silent data corruption from random changes at the storage media level.
+`Bit rot <https://en.wikipedia.org/wiki/Data_degradation>`__ is silent data corruption from random changes at the storage media level.
 For data drives, it is typically the result of decay of the electrical charge or magnetic orientation that represents the data.
 These sources can range from the small current spike during a power outage to a random cosmic ray resulting in flipped bits.
 The resulting "bit rot" can cause subtle errors or corruption on the data medium without triggering monitoring tools or hardware.
