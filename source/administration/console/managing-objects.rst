@@ -53,6 +53,10 @@ Example actions the user may be able to perform include:
    View the status of uploading or downloading objects with the object manager button available on the top right corner of the Console.
    If you have not uploaded or downloaded any objects during the current session, the button does not appear.
 
+.. versionchanged:: Console v0.35.0
+
+   If you select multiple objects to download, MinIO creates a ZIP archive of all objects before downloading.
+
 .. _minio-console-buckets:
 
 .. _minio-console-admin-buckets:
@@ -74,6 +78,10 @@ MinIO does not limit the total number of buckets allowed on a deployment.
 However, MinIO recommends no more than 500,000 buckets per deployment as a general guideline.
 
 While creating a bucket, you can enable :ref:`versioning <minio-bucket-versioning>`, :ref:`object locking <minio-object-locking>`, bucket size (quota) limits, and :ref:`retention rules <minio-object-locking-retention-modes>` (which require versioning).
+
+.. versionchanged:: Console v0.35.0
+
+   If you enable versioning, you can specify prefixes to exclude from versioning.
 
 You **must** configure replication, locking, and versioning options at the time of bucket creation.
 You cannot change these settings for the bucket later.
