@@ -88,3 +88,23 @@ Syntax
 
       Omit this argument to return the default master key on the
       :mc-cmd:`~mc admin kms key status TARGET` deployment.
+
+.. mc-cmd:: list
+   :fullpath:
+
+   List all Key Management System (KMS) keys for a MinIO instance.
+
+   The command has the following syntax:
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin kms key list TARGET
+
+   The command accepts the following argument:
+
+   .. mc-cmd:: TARGET
+
+      Specify the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment.
+
+      The ``TARGET`` deployment **must** include a configured MinIO Key Encryption Service (KES) server.

@@ -183,6 +183,14 @@ Specify the wildcard ``*`` character to select all events related to a prefix:
 
    Selects all ``s3:ObjectRestore``\ -prefixed events.
 
+Scanner Events
+~~~~~~~~~~~~~~
+
+MinIO supports triggering notifications on the following S3 scanner transition events:
+
+.. data:: s3:Scanner:ManyVersions
+.. data:: s3:Scanner:BigPrefix
+
 Global Events
 ~~~~~~~~~~~~~
 
