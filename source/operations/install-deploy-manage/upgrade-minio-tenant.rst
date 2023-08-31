@@ -17,16 +17,28 @@ MinIO Kubernetes Operator and Plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedures on this page *requires* a valid installation of the MinIO Kubernetes Operator and assumes the local host has a matching installation of the MinIO Kubernetes Operator.
-This procedure assumes the latest stable Operator and Plugin version |operator-version-stable|.
+This procedure assumes the latest stable Operator and Plugin, version |operator-version-stable|.
 
 See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 
+Install the Plugin
+~~~~~~~~~~~~~~~~~~
+
 .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
+
 
 Procedure (CLI)
 ---------------
 
 This procedure documents upgrading pods running on a MinIO Tenant.
+
+.. important::
+
+   If you are upgrading the MinIO Operator, there may be additional changes to the tenant specs required.
+   Refer to the :ref:`MinIO Operator Upgrade <minio-k8s-upgrade-minio-operator>` for specifics on any changes necessary to the tenant spec.
+   The required changes vary based on the Operator version you are upgrading from and to.
+   
+   If required changes are not made to the tenant before upgrading the Operator, your tenant may not be accessible after the upgrade.
 
 1) Validate the Active MinIO Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
