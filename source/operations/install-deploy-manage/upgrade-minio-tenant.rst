@@ -22,125 +22,23 @@ This procedure assumes the latest stable Operator and Plugin, version |operator-
 See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 
 Install the Plugin
-++++++++++++++++++
+~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
 
-Upgrading from Operator v4.2.2
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you are upgrading from Operator v4.2.2, the following must also be true:
-
-- ``kubectl`` must have access to your Kubernetes cluster.
-- MinIO Operator v4.2.2 running on your cluster.
-
-Complete the following on your tenant(s) before beginning the upgrade:
-
-1. Update the MinIO ``image`` to the latest version in the tenant spec YAML.
-2. Ensure every pool in ``tenant.spec.pools`` explicitly sets a ``securityContext``.
-   If you have not changed this previously, your pods run as ``root`` and must be changed. 
-
-   A properly prepared pool configuration may resemble the following:
-
-   .. code-block:: yaml
-      :class: copyable
-
-      # Replace $(LATEST-VERSION) with the MinIO version to use for the tenant.
-      image: "minio/minio:$(LATEST-VERSION)"
-      ...
-      pools:
-        - servers: 4
-          name: "pool-0"
-          volumesPerServer: 4
-          volumeClaimTemplate:
-            metadata:
-              name: data
-            spec:
-              accessModes:
-                - ReadWriteOnce
-              resources:
-                requests:
-                  storage: 1Ti
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
-            fsGroup: 0
-
-   Use ``kubectl edit tenants TENANT-NAME -n NAMESPACE`` or modify the tenant YAML directly and apply the changes with ``kubectl apply -f tenant.yaml``.
-
-   .. important::
-
-      If you do not set the security context before upgrading, MinIO pods will not be able to perform read or write operations on existing volumes.
-
-Upgrading from Operator 3.x.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you are upgrading from Operator v3.x.x, the following must also be true:
-
-- ``kubectl`` must have access to your Kubernetes cluster.
-- MinIO Operator v3.x.x running on your cluster.
-
-Complete the following on your tenant(s) before beginning the upgrade:
-
-1. Update the MinIO ``image`` to the latest version in the tenant spec YAML.
-2. Ensure every ``zone`` in ``tenant.spec.zones`` explicitly sets a zone ``name``.
-3. Ensure every ``zone`` in ``tenant.spec.zones`` explicitly sets a ``securityContext``.
-
-A properly prepared ``zones`` configuration may resemble the following:
-
-.. code-block:: yaml
-   :class: copyable
-
-   # Replace $(LATEST-VERSION) with the MinIO version to use for the tenant.
-   image: "minio/minio:$(LATEST-VERSION)"
-   ...
-   zones:
-     - servers: 4
-       name: "zone-0"
-       volumesPerServer: 4
-       volumeClaimTemplate:
-         metadata:
-           name: data
-         spec:
-           accessModes:
-             - ReadWriteOnce
-           resources:
-             requests:
-               storage: 1Ti
-       securityContext:
-         runAsUser: 0
-         runAsGroup: 0
-         runAsNonRoot: false
-         fsGroup: 0
-   - servers: 4
-       name: "zone-1"
-       volumesPerServer: 4
-       volumeClaimTemplate:
-         metadata:
-           name: data
-         spec:
-           accessModes:
-             - ReadWriteOnce
-           resources:
-             requests:
-               storage: 1Ti
-       securityContext:
-         runAsUser: 0
-         runAsGroup: 0
-         runAsNonRoot: false
-         fsGroup: 0
-
-Use ``kubectl edit tenants TENANT-NAME -n NAMESPACE`` or modify the tenant YAML directly and apply the changes with ``kubectl apply -f tenant.yaml``.
-
-.. important:: 
-
-   Failing to apply the changes to the ``zones`` may result in persistent volume claims not provisioning or MinIO lacking access to perform ``read`` or ``write`` operations on the tenant.
 
 Procedure (CLI)
 ---------------
 
 This procedure documents upgrading pods running on a MinIO Tenant.
+
+.. important::
+
+   If you are upgrading the MinIO Operator, there may be additional changes to the tenant specs required.
+   Refer to the :ref:`MinIO Operator Upgrade <minio-k8s-upgrade-minio-operator>` for specifics on any changes necessary to the tenant spec.
+   The required changes vary based on the Operator version you are upgrading from and to.
+   
+   If required changes are not made to the tenant before upgrading the Operator, your tenant may not be accessible after the upgrade.
 
 1) Validate the Active MinIO Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
