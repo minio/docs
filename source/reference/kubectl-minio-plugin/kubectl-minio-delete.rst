@@ -52,8 +52,9 @@ Syntax
 
       .. code-block:: shell
 
-         kubectl minio delete       \
-                        --namespace  
+         kubectl minio delete                 \
+                        --namespace           \
+			[--force --dangerous]
 
 Flags
 -----
@@ -67,3 +68,17 @@ The command supports the following flags:
 
    Defaults to ``minio-operator``. 
 
+.. mc-cmd:: --dangerous
+   :optional:
+
+   Safety flag to confirm deletion of the MinIO Operator and all tenants with :mc-cmd:`~kubectl minio delete --force`.
+
+   This operation is irreversible.
+
+.. mc-cmd:: --force
+   :optional:
+
+   Deletes the MinIO Operator and all tenants without confirmation.
+   Requires the :mc-cmd:`~kubectl minio delete --dangerous` flag.
+
+   This operation is irreversible.
