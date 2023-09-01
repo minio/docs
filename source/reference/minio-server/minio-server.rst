@@ -2676,6 +2676,7 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :end-before: end-minio-openid-role-policy
    
    This environment variable corresponds with the :mc-conf:`identity_openid role_policy <identity_openid.role_policy>` configuration setting.
+   This variable is mutually exclusive with the :envvar:`MINIO_IDENTITY_OPENID_CLAIM_NAME` environment variable.
 
 .. envvar:: MINIO_IDENTITY_OPENID_CLAIM_NAME
 
@@ -2686,6 +2687,8 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :end-before: end-minio-openid-claim-name
    
    This environment variable corresponds with the :mc-conf:`identity_openid claim_name <identity_openid.claim_name>` configuration setting.
+   This variable is mutually exclusive with the :envvar:`MINIO_IDENTITY_OPENID_ROLE_POLICY` environment variable.
+
 
 .. envvar:: MINIO_IDENTITY_OPENID_CLAIM_PREFIX
 

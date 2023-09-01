@@ -30,7 +30,7 @@ may be optional depending on the provider.
 Specify a comma-separated list of :ref:`policy names <minio-policy>` to use for the request's ``RoleARN`` for all authentication requests for the provider.
 The specified policy or policies must already exist on the MinIO Server.
 
-When used, you must also specify the :ref:`RoleARN <minio-assumerolewithwebidentity-query-parameters>` in the authentication request.
+To use this OIDC configuration, you must specify the corresponding :ref:`RoleARN <minio-assumerolewithwebidentity-query-parameters>` in the STS request body.
 
 .. end-minio-openid-role-policy
 
