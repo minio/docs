@@ -2451,7 +2451,7 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 .. _minio-server-envvar-object-lambda-webhook:
 
 Object Lambda
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 The following section documents environment variables for configuring MinIO to publish data to an HTTP webhook endpoint and trigger an Object Lambda function.
 See :ref:`developers-object-lambda` for more complete documentation and tutorials on using these environment variables.
@@ -2667,6 +2667,17 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
    
    This environment variable corresponds with the :mc-conf:`identity_openid client_secret <identity_openid.client_secret>` configuration setting.
 
+.. envvar:: MINIO_IDENTITY_OPENID_ROLE_POLICY
+
+   *Optional*
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-openid-role-policy
+      :end-before: end-minio-openid-role-policy
+   
+   This environment variable corresponds with the :mc-conf:`identity_openid role_policy <identity_openid.role_policy>` configuration setting.
+   This variable is mutually exclusive with the :envvar:`MINIO_IDENTITY_OPENID_CLAIM_NAME` environment variable.
+
 .. envvar:: MINIO_IDENTITY_OPENID_CLAIM_NAME
 
    *Optional*
@@ -2676,6 +2687,8 @@ identity management using an OpenID Connect (OIDC)-compatible provider. See
       :end-before: end-minio-openid-claim-name
    
    This environment variable corresponds with the :mc-conf:`identity_openid claim_name <identity_openid.claim_name>` configuration setting.
+   This variable is mutually exclusive with the :envvar:`MINIO_IDENTITY_OPENID_ROLE_POLICY` environment variable.
+
 
 .. envvar:: MINIO_IDENTITY_OPENID_CLAIM_PREFIX
 

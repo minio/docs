@@ -48,6 +48,8 @@ cluster:
    &DurationSeconds=86000
    &Policy={}
 
+.. _minio-assumerolewithwebidentity-query-parameters:
+
 Request Query Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -116,6 +118,18 @@ This endpoint supports the following query parameters:
 
        See :ref:`minio-access-management` for more information on MinIO
        authentication and authorization.
+
+   * - ``RoleARN``
+     - string
+     - *Optional*   
+
+       The role Amazon Resource Number (ARN) to use for all user authentication requests.
+       If used, there must be a matching OIDC RolePolicy defined for the RoleARN's provider by the ``role_policy`` configuration parameter or the ``MINIO_IDENTITY_OPENID_ROLE_POLICY`` environment variable.
+       
+       When used, all valid authorization requests assume the same set of permissions provided by the RolePolicy.
+       You can use  :ref:`OpenID Policy Variables <minio-policy-variables-oidc>` to create policies that programmatically manage what each individual user has access to.
+
+       If you do not supply a RoleARN, MinIO attempts to authorize through a JWT-based claim.
 
 Response Elements
 -----------------
