@@ -195,7 +195,7 @@ Global Events
 ~~~~~~~~~~~~~
 
 MinIO supports triggering notifications on the following global events. 
-You can only listen to these events through the `ListenNotification <https://min.io/docs/minio/linux/developers/go/API.html#listennotification-context-context-context-prefix-suffix-string-events-string-chan-notification-info>` API:
+You can only listen to these events through the `ListenNotification <https://min.io/docs/minio/linux/developers/go/API.html#listennotification-context-context-context-prefix-suffix-string-events-string-chan-notification-info>`__ API:
 
 .. data:: s3:BucketCreated
 .. data:: s3:BucketRemoved
