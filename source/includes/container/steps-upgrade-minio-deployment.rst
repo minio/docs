@@ -22,7 +22,7 @@ Check Release Notes
 MinIO publishes :minio-git:`Release Notes <minio/releases>` for your reference as part of identifying the changes applied in each release.
 Review the associated release notes between your current MinIO version and the newer release so you have a complete view of any changes.
 
-Pay particular attention to any releases that are backwards incompatible.
+Pay particular attention to any releases that are *not* backwards compatible.
 You cannot trivially downgrade from any such release.
 
 Procedure
@@ -30,7 +30,7 @@ Procedure
 
 You can run the ``podman container inspect`` or ``docker inspect`` command to inspect the container and validate the current container image:
 
-.. code-block:: shell 
+.. code-block:: shell
    :class: copyable
 
    # For docker, use docker inspect
