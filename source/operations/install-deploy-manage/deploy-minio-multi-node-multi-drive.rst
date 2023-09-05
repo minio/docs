@@ -91,7 +91,7 @@ You can specify the entire range of hostnames using the expansion notation ``min
       198.0.2.43    minio-03.example.net
       198.51.100.12 minio-04.example.net
 
-   The above hosts configuration would support expansion notation of ``minio-0{1...4}.example.net``.
+   The above hosts configuration supports expansion notation of ``minio-0{1...4}.example.net``, mapping the sequential hostnames to the desired IP addresses.
 
 .. _deploy-minio-distributed-prereqs-storage:
 

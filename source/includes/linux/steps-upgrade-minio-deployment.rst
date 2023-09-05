@@ -20,7 +20,7 @@ MinIO operations are atomic and strictly consistent, such that applications usin
 This ensures upgrades are non-disruptive to ongoing operations.
 
 "Rolling" or serial "one-at-a-time" upgrade methods do not provide any advantage over the recommended "parallel" procedure, and can introduce unnecessary complexity to the upgrade procedure.
-For virtualized environments which *require* rolling updates, you should amend the recommend procedure as follows:
+For virtualized environments which *require* rolling updates, you should modify the recommended procedure as follows:
 
 1. Update the MinIO Binary in the virtual machine or container one at a time.
 2. Restart the MinIO deployment using :mc-cmd:`mc admin service restart`.
@@ -31,9 +31,9 @@ Check Release Notes
 ~~~~~~~~~~~~~~~~~~~
 
 MinIO publishes :minio-git:`Release Notes <minio/releases>` for your reference as part of identifying the changes applied in each release.
-Review the associated release notes between your current MinIO version and the newer release such that you have a complete view of any changes.
+Review the associated release notes between your current MinIO version and the newer release so you have a complete view of any changes.
 
-Pay particular attention to any releases that are backwards incompatible.
+Pay particular attention to any releases that are *not* backwards compatible.
 You cannot trivially downgrade from any such release.
 
 .. _minio-upgrade-systemctl:

@@ -20,7 +20,7 @@ Check Release Notes
 ~~~~~~~~~~~~~~~~~~~
 
 MinIO publishes :minio-git:`Release Notes <minio/releases>` for your reference as part of identifying the changes applied in each release.
-Review the associated release notes between your current MinIO version and the newer release such that you have a complete view of any changes.
+Review the associated release notes between your current MinIO version and the newer release so you have a complete view of any changes.
 
 Pay particular attention to any releases that are backwards incompatible.
 You cannot trivially downgrade from any such release.
@@ -36,7 +36,7 @@ You can run the ``podman container inspect`` or ``docker inspect`` command to in
    # For docker, use docker inspect
    podman container inspect --format='{{.Config.Image}}' CONTAINER_NAME
 
-If the output resembles the following, you created the container using the latest stable image tag:
+The following output indicates the container was created using the most recent stable image tag:
 
 .. code-block:: shell
 
@@ -44,7 +44,7 @@ If the output resembles the following, you created the container using the lates
 
 Use the :ref:`minio-upgrade-latest-tag` steps to upgrade your container.
 
-If the output resembles the following, you created the container using a specific image tag:
+The following output indicates the container was created using a specific image tag:
 
 .. code-block:: shell
 

@@ -102,8 +102,8 @@ Enabling TLS
 
    You may need to start the container and set a ``--hostname`` that matches the TLS certificate DNS SAN.
 
-   Move the certificates to the path on your local host machine which mounts to the ``--certs-dir`` directory on the container.
-   When the MinIO container starts, the server searches the specified location for certificates and  uses them enable TLS.
+   Move the certificates to the local host machine path that the container mounts to its ``--certs-dir`` path.
+   When the MinIO container starts, the server searches the specified location for certificates and uses them to enable TLS.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
 
 .. cond:: macos
@@ -254,7 +254,7 @@ Multiple Domain-Based TLS Certificates
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
 
    While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SAN), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
-   Using a TLS certificate per hostname better protects each individual hostname from discovery.
+   Using one TLS certificate per hostname better protects each individual hostname from discovery.
 
    If the client-specified hostname or IP address does not match any of the configured TLS certificates, the connection typically fails with a certificate validation error.
  
