@@ -61,24 +61,37 @@ The :ref:`integrations-nginx-proxy` reference provides a baseline configuration 
 Sequential Hostnames
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential
-series of MinIO hosts when creating a server pool. MinIO therefore *requires*
-using sequentially-numbered hostnames to represent each
-:mc:`minio server` process in the deployment. 
+MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential series of MinIO hosts when creating a server pool. 
+MinIO supports using either a sequential series of hostnames *or* IP addresses to represent each :mc:`minio server` process in the deployment.
+
+This procedure assumes use of sequential hostnames due to the lower overhead of management, especially in larger distributed clusters.
 
 Create the necessary DNS hostname mappings *prior* to starting this procedure.
-For example, the following hostnames would support a 4-node distributed
-deployment:
+For example, the following hostnames would support a 4-node distributed deployment:
 
-- ``minio1.example.com``
-- ``minio2.example.com``
-- ``minio3.example.com``
-- ``minio4.example.com``
+- ``minio-01.example.com``
+- ``minio-02.example.com``
+- ``minio-03.example.com``
+- ``minio-04.example.com``
 
-You can specify the entire range of hostnames using the expansion notation
-``minio{1...4}.example.com``.
+You can specify the entire range of hostnames using the expansion notation ``minio-0{1...4}.example.com``.
 
-Configuring DNS to support MinIO is out of scope for this procedure.
+.. dropdown:: Non-Sequential Hostnames or IP Addresses
+
+   MinIO does not support non-sequential hostnames or IP addresses for distributed deployments.
+   You can instead use ``/etc/hosts`` on each node to set a simple DNS scheme that supports expansion notation.
+   For example:
+
+   .. code-block:: shell
+
+      # /etc/hosts
+
+      198.0.2.10    minio-01.example.net
+      198.51.100.3  minio-02.example.net
+      198.0.2.43    minio-03.example.net
+      198.51.100.12 minio-04.example.net
+
+   The above hosts configuration supports expansion notation of ``minio-0{1...4}.example.net``, mapping the sequential hostnames to the desired IP addresses.
 
 .. _deploy-minio-distributed-prereqs-storage:
 

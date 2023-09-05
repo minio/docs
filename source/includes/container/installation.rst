@@ -41,7 +41,8 @@ Multi-Node Multi-Drive (MNMD or "Distributed")
   Multiple MinIO servers with at least four drives across all servers. 
   The distributed |MNMD| topology supports production-grade object storage with drive and node-level availability and resiliency.
 
-This documentation provides instructions for |SNSD| and |SNMD| for supporting local development and evaluation of MinIO on a single host machine. For |MNMD| deployments, use the MinIO Kubernetes Operator to deploy and manage MinIO tenants in a containerized and orchestrated environment.
+This documentation provides instructions for |SNSD| and |SNMD| for supporting local development and evaluation of MinIO on a single host machine **only**. 
+For |MNMD| deployments, use the MinIO Kubernetes Operator to deploy and manage MinIO tenants in a containerized and orchestrated environment.
 
 .. _minio-installation-platform-support:
 

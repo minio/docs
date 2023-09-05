@@ -82,6 +82,8 @@ excludes:
 - 'operations/install-deploy-manage/minio-operator-console.rst'
 - 'operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst'
 - 'operations/install-deploy-manage/multi-site-replication.rst'
+- 'operations/install-deploy-manage/decommission-server-pool.rst'
+- 'operations/install-deploy-manage/expand-minio-deployment.rst'
 - 'operations/deploy-manage-tenants.rst'
 - 'reference/kubectl-minio-plugin*'
 - 'reference/minio-server*'
