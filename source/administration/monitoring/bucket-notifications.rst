@@ -189,7 +189,12 @@ Scanner Events
 MinIO supports triggering notifications on the following S3 scanner transition events:
 
 .. data:: s3:Scanner:ManyVersions
+
+   Scanner finds objects with more than 1,000 versions.
+
 .. data:: s3:Scanner:BigPrefix
+
+   Scanner finds prefixes with more than 50,000 sub-folders.
 
 Global Events
 ~~~~~~~~~~~~~
