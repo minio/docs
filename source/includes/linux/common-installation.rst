@@ -312,6 +312,13 @@ transient and should resolve as the deployment comes online.
       
    If any drives remain offline after starting MinIO, check and cure any issues blocking their functionality before starting production workloads.
 
+By default the systemd unit is not enabled and so will not restart after a host reboot. To change this:
+
+.. code-block:: shell
+   :class: copyable
+
+   sudo systemctl enable minio.service
+
 .. end-install-minio-start-service-desc
 
 .. start-install-minio-restart-service-desc
