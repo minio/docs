@@ -78,7 +78,7 @@ To use STS credentials to authenticate, you must use an S3 API client or port.
 
 Authenticated users can access buckets and objects based on the :ref:`policies <minio-policy>` assigned to the user or parent user account.
 
-The FTP protocol does not require any of the ``admin:*`` `permissions <minio-policy-mc-admin-actions>`.
+The FTP protocol does not require any of the ``admin:*`` :ref:`permissions <minio-policy-mc-admin-actions>`.
 The FTP protocols do not support any of the MinIO admin actions.
 
 Prerequisites
