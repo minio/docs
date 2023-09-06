@@ -186,7 +186,9 @@ Persistent Volumes
 
    MinIO Tenants on EKS must use the :github:`EBS CSI Driver <kubernetes-sigs/aws-ebs-csi-driver>` to provision the necessary underlying persistent volumes.
    MinIO strongly recommends using SSD-backed EBS volumes for best performance.
+   MinIO strongly recommends using xfs for csi.storage.k8s.io/fstype parameter in StorageClass.parameters
    For more information on EBS resources, see `EBS Volume Types <https://aws.amazon.com/ebs/volume-types/>`__.
+   For more information on StorageClass Parameters, see `StorageClass Parameters <https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/parameters.md>`__.
 
 .. cond:: gke
 
