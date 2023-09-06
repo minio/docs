@@ -312,6 +312,14 @@ transient and should resolve as the deployment comes online.
       
    If any drives remain offline after starting MinIO, check and cure any issues blocking their functionality before starting production workloads.
 
+The MinIO service does not automatically start on host reboot.
+You must use ``systemctl enable minio.service`` to start the process as part of the host boot.
+
+.. code-block:: shell
+   :class: copyable
+
+   sudo systemctl enable minio.service
+
 .. end-install-minio-start-service-desc
 
 .. start-install-minio-restart-service-desc
