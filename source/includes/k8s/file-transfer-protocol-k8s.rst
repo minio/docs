@@ -87,10 +87,10 @@ Procedure
 
       .. tab-item:: Kubectl
 
-	 Use the following command to edit the Tenant YAML configuration:
+	 Use the following Kubectl command to edit the Tenant YAML configuration:
 
 	 .. code-block:: yaml
-			 
+
             kubectl edit tenants/my-tenant -n my-tenant-ns
 
 	 Replace ``my-tenant`` and ``my-tenant-ns`` with the desired Tenant and namespace.
@@ -136,21 +136,21 @@ The following example connects to an SSH FTP server, lists the contents of a buc
 .. code-block:: console
 
    sftp -P 8022 my-access-key@localhost
-   my-access-key@localhost's password: 
+   my-access-key@localhost's password:
    Connected to localhost.
    sftp> ls
-   test-bucket    
+   test-bucket
    sftp> ls test-bucket
    test-bucket/test-file.txt
    sftp> get test-bucket/test-file.txt
    Fetching /test-bucket/test-file.txt to test-file.txt
-   test-file.txt                    100%    6     1.3KB/s   00:00    
+   test-file.txt                    100%    6     1.3KB/s   00:00
 
 
 Check if SFTP is Enabled for a Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following ``kubectl get`` command displays the value of ``enableSFTP``, indicating whether SFTP is enabled:
+The following ``kubectl get`` command uses `yq <https://github.com/mikefarah/yq/#install>`__ to display the value of ``enableSFTP``, indicating whether SFTP is enabled:
 
 .. code-block:: console
    :class: copyable
@@ -158,7 +158,7 @@ The following ``kubectl get`` command displays the value of ``enableSFTP``, indi
    kubectl get tenants/my-tenant -n my-tenant-ns -o yaml | yq '.spec.features'
 
 Replace ``my-tenant`` and ``my-tenant-ns`` with the desired Tenant and namespace.
-   
+
 If SFTP is enabled, the output resembles the following:
 
 .. code-block:: console
