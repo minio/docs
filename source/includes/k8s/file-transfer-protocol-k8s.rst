@@ -3,7 +3,7 @@
 Overview
 --------
 
-You can use the SSH File Transfer Protocol (``SFTP``) to interact with the objects on a MinIO Operator tenant deployment.
+Starting with Operator 5.0.7 and :minio-release:`MinIO Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the SSH File Transfer Protocol (SFTP) to interact with the objects on a MinIO Operator Tenant deployment.
 
 SFTP is defined by the Internet Engineering Task Force (IETF) as an extension of SSH 2.0.
 It allows file transfer over SSH for use with :ref:`Transport Layer Security (TLS) <minio-tls>` and virtual private network (VPN) applications.
@@ -14,7 +14,7 @@ Enabling SFTP does not affect other MinIO features.
 Supported Commands
 ~~~~~~~~~~~~~~~~~~
 
-When enabled, MinIO supports the following ``sftp`` operations:
+When enabled, MinIO supports the following SFTP operations:
 
 - ``get``
 - ``put``
@@ -25,7 +25,7 @@ When enabled, MinIO supports the following ``sftp`` operations:
 
 MinIO does not support either ``append`` or ``rename`` operations.
 
-Operator only supports the SFTP file transfer protocol.
+MinIO Operator only supports the SFTP file transfer protocol.
 Other protocols, such as FTP, are not supported for accessing Tenants.
 
 
@@ -36,18 +36,18 @@ Considerations
 Versioning
 ~~~~~~~~~~
 
-SFTP clients cannot read specific :ref:`object versions <minio-bucket-versioning>` other than the latest version.
+SFTP clients can only operate on the :ref:`latest version <minio-bucket-versioning>` of an object.
+Specifically:
 
-- For read operations, MinIO only returns the latest version of the requested object(s) to the sftp client.
-- For write operations, MinIO applies normal versioning behavior for matching object names.
-
-Use an S3 API Client, such as the :ref:`MinIO Client <minio-client>`.
+- For read operations, MinIO only returns the latest version of the requested object(s) to the SFTP client.
+- For write operations, MinIO applies normal versioning behavior and creates a new object version at the specified namespace.
+  ``rm`` and ``rmdir`` operations create ``DeleteMarker`` objects.
 
 
 Authentication and Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``SFTP`` access requires the same authentication as any other S3 client.
+SFTP access requires the same authentication as any other S3 client.
 MinIO supports the following authentication providers:
 
 - :ref:`MinIO IDP <minio-internal-idp>` users and their service accounts
@@ -55,7 +55,6 @@ MinIO supports the following authentication providers:
 - :ref:`OpenID/OIDC <minio-external-identity-management-openid>` service accounts
 
 :ref:`STS <minio-security-token-service>` credentials **cannot** access buckets or objects over SFTP.
-To use STS credentials to authenticate, you must use an S3 API client or port.
 
 Authenticated users can access buckets and objects based on the :ref:`policies <minio-policy>` assigned to the user or parent user account.
 
@@ -80,7 +79,7 @@ Procedure
 
       .. tab-item:: Operator Console
 
-         - In the Operator Console, click on the tenant for which to enable SFTP.
+         - In the Operator Console, click on the Tenant for which to enable SFTP.
          - In the :guilabel:`Configuration` tab, toggle :guilabel:`SFTP` to :guilabel:`Enabled`.
          - Click :guilabel:`Save`.
          - Click :guilabel:`Restart` to restart MinIO and apply your changes.
@@ -112,9 +111,10 @@ Procedure
 
          Kubectl restarts MinIO to apply the change.
 
-         You may also set ``enableSFTP`` in your Helm chart or Kustomize configuration to enable SFTP for newly created Tenants.
+         You may also set ``enableSFTP`` in your `Helm chart <https://github.com/minio/operator/blob/8385948929bc95648d1be82d96f829c810519674/helm/tenant/values.yaml>`__ or `Kustomize configuration <https://github.com/minio/operator/blob/8385948929bc95648d1be82d96f829c810519674/examples/kustomization/base/tenant.yaml>`__ to enable SFTP for newly created Tenants.
+	 
 
-#. If needed, configure ingress or forwarding for the SFTP port according to your local policies.
+#. If needed, configure ingress for the SFTP port according to your local policies.
 
 #. Use your preferred SFTP client to connect to the MinIO deployment.
    You must connect as a user whose :ref:`policies <minio-policy>` allow access to the desired buckets and objects.
@@ -126,12 +126,12 @@ Procedure
 Examples
 --------
 
-The examples here use the ``sftp`` CLI client on a Linux system.
+The following examples use the `SFTP CLI client <https://linux.die.net/man/1/sftp>`__ on a Linux system.
 
 Connect to MinIO Using SFTP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example connects to an SSH FTP server, lists the contents of a bucket named ``test-bucket``, and downloads an object.
+The following example connects to an SFTP server, lists the contents of a bucket named ``test-bucket``, and downloads an object.
 
 .. code-block:: console
 

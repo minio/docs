@@ -3,43 +3,49 @@
 Overview
 --------
 
-You can use the File Transfer Protocol (``FTP``) to interact with the objects on a MinIO deployment.
+Starting with :minio-release:`MinIO Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the File Transfer Protocol (FTP) to interact with the objects on a MinIO deployment.
 
 You must specifically enable FTP or SFTP when starting the server.
 Enabling either server type does not affect other MinIO features.
 
-This page uses the abbreviation ``FTP`` throughout, but you can use any of the supported FTP protocols described below.
+This page uses the abbreviation FTP throughout, but you can use any of the supported FTP protocols described below.
 
 Supported Protocols
 ~~~~~~~~~~~~~~~~~~~
 
 When enabled, MinIO supports FTP access over the following protocols:
 
-- SSH File Transfer Protocol (``SFTP``)
+- SSH File Transfer Protocol (SFTP)
 
   SFTP is defined by the Internet Engineering Task Force (IETF) as an extension of SSH 2.0.
   SFTP allows file transfer over SSH for use with :ref:`Transport Layer Security (TLS) <minio-tls>` and virtual private network (VPN) applications.
 
   Your FTP client must support SFTP.
 
-- File Transfer Protocol over SSL/TLS (``FTPS``)
+- File Transfer Protocol over SSL/TLS (FTPS)
   
-  ``FTPS`` allows for encrypted FTP communication with TLS certificates over the standard FTP communication channel.
-  ``FTPS`` should not be confused with ``SFTP``, as ``FTPS`` does not communicate over a Secure Shell (``SSH``).
+  FTPS allows for encrypted FTP communication with TLS certificates over the standard FTP communication channel.
+  FTPS should not be confused with SFTP, as FTPS does not communicate over a Secure Shell (SSH).
 
   Your FTP client must support FTPS.
 
-- File Transfer Protocol (``FTP``)
+- File Transfer Protocol (FTP)
   
   Unencrypted file transfer.
 
   MinIO does **not** recommend using unencrypted FTP for file transfer.
 
+.. admonition:: MinIO Operator Tenants only support SFTP
+   :class: note
+
+   MinIO Tenants deployed with Operator only support SFTP.
+   For details, see `File Transfer Protocol for Tenants <https://min.io/docs/minio/k8s/developers/file-transfer-protocol.html?ref=docs>`__.
+
 
 Supported Commands
 ~~~~~~~~~~~~~~~~~~
 
-When enabled, MinIO supports the following ``ftp`` operations:
+When enabled, MinIO supports the following FTP operations:
 
 - ``get``
 - ``put``
@@ -56,17 +62,18 @@ Considerations
 Versioning
 ~~~~~~~~~~
 
-You cannot use ``FTP`` to read specific :ref:`object versions <minio-bucket-versioning>` other than the latest version.
+SFTP clients can only operate on the :ref:`latest version <minio-bucket-versioning>` of an object.
+Specifically:
 
-- For read operations, MinIO only returns the latest version of the requested object(s) to the ftp client.
-- For write operations, MinIO applies normal versioning behavior for matching object names.
+- For read operations, MinIO only returns the latest version of the requested object(s) to the FTP client.
+- For write operations, MinIO applies normal versioning behavior and creates a new object version at the specified namespace.
+  ``rm`` and ``rmdir`` operations create ``DeleteMarker`` objects.
 
-Use an S3 API Client, such as the :ref:`MinIO Client <minio-client>`.
 
 Authentication and Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``FTP`` access requires the same authentication as any other S3 client.
+FTP access requires the same authentication as any other S3 client.
 MinIO supports the following authentication providers:
 
 - :ref:`MinIO IDP <minio-internal-idp>` users and their service accounts
@@ -74,7 +81,6 @@ MinIO supports the following authentication providers:
 - :ref:`OpenID/OIDC <minio-external-identity-management-openid>` service accounts
 
 :ref:`STS <minio-security-token-service>` credentials **cannot** access buckets or objects over FTP.
-To use STS credentials to authenticate, you must use an S3 API client or port.
 
 Authenticated users can access buckets and objects based on the :ref:`policies <minio-policy>` assigned to the user or parent user account.
 
@@ -104,7 +110,7 @@ Procedure
       ...
     
    See the :mc-cmd:`minio server --ftp` and :mc-cmd:`minio server --sftp` for details on using these flags to start the MinIO service.
-   To connect to the an ftp port with TLS (``FTPS``), pass the ``tls-private-key`` and ``tls-public-cert`` keys and values, as well, unless using the MinIO default TLS keys.
+   To connect to the an FTP port with TLS (FTPS), pass the ``tls-private-key`` and ``tls-public-cert`` keys and values, as well, unless using the MinIO default TLS keys.
 
    The output of the command should return a response that resembles the following:
 
@@ -113,7 +119,7 @@ Procedure
       MinIO FTP Server listening on :8021
       MinIO SFTP Server listening on :8022
 
-2. Use your preferred ftp client to connect to the MinIO deployment.
+2. Use your preferred FTP client to connect to the MinIO deployment.
    You must connect as a user whose :ref:`policies <minio-policy>` allow access to the desired buckets and objects.
 
    The specifics of connecting to the MinIO deployment depend on your FTP client.
@@ -124,7 +130,8 @@ Procedure
 Examples
 --------
 
-The examples here use the ``ftp`` CLI client on a Linux system.
+The following examples use the `FTP CLI client <https://linux.die.net/man/1/ftp>`__ on a Linux system.
+
 
 Connect to MinIO Using FTP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -149,10 +156,10 @@ The following example connects to a server using ``minio`` credentials to list c
    drwxrwxrwx 1 nobody nobody            0 Jan  1 00:00 testdir/
    ...
 
-Start MinIO with FTP over TLS (``FTPS``) Enabled
+Start MinIO with FTP over TLS (FTPS) Enabled
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example starts MinIO with ``FTPS`` enabled.
+The following example starts MinIO with FTPS enabled.
 
 .. code-block:: shell
    :class: copyable
@@ -166,7 +173,7 @@ The following example starts MinIO with ``FTPS`` enabled.
 
 .. note:: 
 
-   Omit ``tls-private-key`` and ``tls-public-cert`` to use the MinIO default TLS keys for ``FTPS``.
+   Omit ``tls-private-key`` and ``tls-public-cert`` to use the MinIO default TLS keys for FTPS.
    For more information, see the :ref:`TLS on MinIO documentation <minio-tls>`.
 
 Download an Object over FTP
@@ -203,7 +210,7 @@ This example lists items in a bucket, then downloads the contents of the bucket.
 Connect to MinIO Using SFTP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example connects to an SSH FTP server, lists the contents of a bucket named ``runner``, and downloads an object.
+The following example connects to an SFTP server, lists the contents of a bucket named ``runner``, and downloads an object.
 
 .. code-block:: console
 
