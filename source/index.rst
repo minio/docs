@@ -204,7 +204,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs>
       /developers/sts-for-operator
       Object Lambda <https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html?ref=docs>
-      File Transfer Protocol <https://min.io/docs/minio/linux/developers/file-transfer-protocol.html?ref=docs>
+      /developers/file-transfer-protocol
       MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
       MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
       Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
