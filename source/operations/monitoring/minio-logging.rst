@@ -238,7 +238,7 @@ Audit Log Structure
 
 MinIO audit logs resemble the following JSON document:
 
-- The ``api.timeToFirstBite`` and ``api.timeToResponse`` fields are expressed
+- The ``api.timeToFirstByte`` and ``api.timeToResponse`` fields are expressed
   in nanoseconds.
 
 - For :ref:`erasure coded setups <minio-erasure-coding>` 
