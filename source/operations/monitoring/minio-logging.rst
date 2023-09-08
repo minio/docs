@@ -162,9 +162,26 @@ settings:
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
         webhook endpoint.
 
-      - Replace ``TOKEN`` with a JSON Web Token (JWT) to use for authenticating
-        to the webhook endpoints. Omit for endpoints which do not require
-        authentication.
+      - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint. 
+        Omit for endpoints which do not require authentication.
+
+        To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*. 
+        Depending on the endpoint, you may need to include additional information.
+
+        For example: for a Bearer token, prepend ``Bearer``:
+
+	.. code-block:: shell
+
+           set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+
+        Common types include:
+
+        - Bearer
+        - Basic Auth
+        - JSON Web Token (JWT)
+        - Password
+
+        Consult the documenation for the desired service for more details.
 
       - Replace ``cert.pem`` and ``cert.key`` with the public and private key
         of the x.509 TLS certificates to present to the HTTP webhook server.
