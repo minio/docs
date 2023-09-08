@@ -39,7 +39,7 @@ When enabled, MinIO supports FTP access over the following protocols:
    :class: note
 
    MinIO Tenants deployed with Operator only support SFTP.
-   For details, see `File Transfer Protocol for Tenants <https://min.io/docs/minio/k8s/developers/file-transfer-protocol.html?ref=docs>`__.
+   For details, see `File Transfer Protocol for Tenants <https://min.io/docs/minio/kubernetes/upstream/developers/file-transfer-protocol.html?ref=docs>`__.
 
 
 Supported Commands
