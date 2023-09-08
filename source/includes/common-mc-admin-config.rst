@@ -996,17 +996,6 @@ Specify the URL for the webhook service.
 
 .. end-minio-notify-webhook-endpoint
 
-.. start-minio-notify-webhook-auth-token
-
-Specify the opaque string or JWT authorization token to use for 
-authenticating to the webhook service.
-
-.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
-
-   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
-
-.. end-minio-notify-webhook-auth-token
-
 .. start-minio-notify-webhook-client-cert
 
 Specify the path to the client certificate to use for performing 
