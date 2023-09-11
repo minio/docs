@@ -74,17 +74,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // --------------------------------------------------
   (function () {
     const readModeEl = document.getElementById("read-mode-toggle");
-    const headerEl = document.querySelector(".header");
-    
-    // Check if the read mode in enabled in user's local storage
-    if (readModeLs === "true") {
-      document.documentElement.classList.add("read-mode");
-      readModeEl.classList.add("active");
-    }
-
-    // Make header visible after the page is loaded and read-mode is decided.
-    // This is to prevent the flickering of the header on page load.
-    headerEl.classList.remove("inactive");
     
     // Toggle read mode on icon click
     readModeEl.addEventListener("click", (event) => {
@@ -136,13 +125,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // --------------------------------------------------
   (function () {
     const darkModeEl = document.getElementById("dark-mode-toggle");
-    var darkModeLs = localStorage.getItem("dark-mode");
-
-    // Check if the dark mode in enabled in user's local storage
-    if (darkModeLs === "true") {
-      document.documentElement.classList.add("dark-mode");
-      darkModeEl.classList.add("active");
-    }
 
     darkModeEl.addEventListener("click", (event) => {
       document.documentElement.classList.toggle("dark-mode");
