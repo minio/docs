@@ -694,8 +694,28 @@ server logs webhook endpoints:
 
    *Optional*
 
-   The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
-   Omit for webhooks which do not enforce authentication.
+   An authentication token of the appropriate type for the endpoint.
+   Omit for endpoints which do not require authentication.
+
+   To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+   Depending on the endpoint, you may need to include additional information.
+
+   For example: for a Bearer token, prepend ``Bearer``:
+
+   .. code-block:: shell
+      :class: copyable
+
+      set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+
+   Modify the value according to the endpoint requirements.
+   A custom authentication format could resemble the following:
+
+   .. code-block:: shell
+      :class: copyable
+
+      set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+
+   Consult the documenation for the desired service for more details.
 
    This environment variable corresponds with the :mc-conf:`logger_webhook auth_token <logger_webhook.auth_token>` configuration setting.
 
@@ -796,8 +816,28 @@ audit log webhook endpoints:
 
    *Optional*
 
-   The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
-   Omit for webhooks which do not enforce authentication.
+   An authentication token of the appropriate type for the endpoint.
+   Omit for endpoints which do not require authentication.
+
+   To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+   Depending on the endpoint, you may need to include additional information.
+
+   For example: for a Bearer token, prepend ``Bearer``:
+
+   .. code-block:: shell
+      :class: copyable
+
+      set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+
+   Modify the value according to the endpoint requirements.
+   A custom authentication format could resemble the following:
+
+   .. code-block:: shell
+      :class: copyable
+
+      set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+
+   Consult the documenation for the desired service for more details.
 
    This environment variable corresponds with the :mc-conf:`audit_webhook auth_token <audit_webhook.auth_token>` configuration setting.
 
@@ -2392,9 +2432,28 @@ endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 
    *Required*
 
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: minio-notify-webhook-auth-token
-      :end-before: minio-notify-webhook-auth-token
+   An authentication token of the appropriate type for the endpoint.
+   Omit for endpoints which do not require authentication.
+
+   To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+   Depending on the endpoint, you may need to include additional information.
+
+   For example: for a Bearer token, prepend ``Bearer``:
+
+   .. code-block:: shell
+      :class: copyable
+
+      set MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+
+   Modify the value according to the endpoint requirements.
+   A custom authentication format could resemble the following:
+
+   .. code-block:: shell
+      :class: copyable
+
+      set MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+
+   Consult the documenation for the desired service for more details.
 
    This environment variable corresponds with the :mc-conf:`notify_webhook auth_token <notify_webhook.auth_token>` configuration setting.
 

@@ -75,9 +75,26 @@ runtime configuration settings.
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
         webhook endpoint.
 
-      - Replace ``TOKEN`` with a JSON Web Token (JWT) to use for authenticating
-        to the webhook endpoints. Omit for endpoints which do not require
-        authentication.
+      - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint.
+        Omit for endpoints which do not require authentication.
+
+        To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+        Depending on the endpoint, you may need to include additional information.
+
+        For example: for a Bearer token, prepend ``Bearer``:
+
+        .. code-block:: shell
+
+           set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+
+        Modify the value according to the endpoint requirements.
+        A custom authentication format could resemble the following:
+
+        .. code-block:: shell
+
+           set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+
+        Consult the documenation for the desired service for more details.
 
       Restart the MinIO server to apply the new configuration settings. You
       must specify the same environment variables and settings on 
@@ -97,8 +114,8 @@ runtime configuration settings.
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ logger_webhook:IDENTIFIER \
-            endpoint="https://webhook-1.example.net" \
+         mc admin config set ALIAS/ logger_webhook:IDENTIFIER  \
+            endpoint="https://webhook-1.example.net"           \
             auth_token="TOKEN" 
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the 
@@ -113,9 +130,32 @@ runtime configuration settings.
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
         webhook endpoint.
 
-      - Replace ``TOKEN`` with a JSON Web Token (JWT) to use for authenticating
-        to the webhook endpoints. Omit for endpoints which do not require
-        authentication.
+      - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint.
+        Omit for endpoints which do not require authentication.
+
+	To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+        Depending on the endpoint, you may need to include additional information.
+
+        For example: for a Bearer token, prepend ``Bearer``:
+
+        .. code-block:: shell
+           :class: copyable
+
+            mc admin config set ALIAS/ logger_webhook    \
+               endpoint="https://webhook-1.example.net"  \
+               auth_token="Bearer 1a2b3c4f5e"
+
+        Modify the value according to the endpoint requirements.
+        A custom authentication format could resemble the following:
+
+        .. code-block:: shell
+           :class: copyable
+
+           mc admin config set ALIAS/ logger_webhook    \
+              endpoint="https://webhook-1.example.net"  \
+              auth_token="ServiceXYZ 1a2b3c4f5e"
+
+        Consult the documenation for the desired service for more details.
 
 .. _minio-logging-publish-audit-logs:
 
@@ -162,9 +202,26 @@ settings:
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
         webhook endpoint.
 
-      - Replace ``TOKEN`` with a JSON Web Token (JWT) to use for authenticating
-        to the webhook endpoints. Omit for endpoints which do not require
-        authentication.
+      - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint. 
+        Omit for endpoints which do not require authentication.
+
+        To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*. 
+        Depending on the endpoint, you may need to include additional information.
+
+        For example: for a Bearer token, prepend ``Bearer``:
+
+        .. code-block:: shell
+
+           set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+
+        Modify the value according to the endpoint requirements.
+        A custom authentication format could resemble the following:
+
+        .. code-block:: shell
+
+           set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+
+        Consult the documenation for the desired service for more details.
 
       - Replace ``cert.pem`` and ``cert.key`` with the public and private key
         of the x.509 TLS certificates to present to the HTTP webhook server.
@@ -189,10 +246,10 @@ settings:
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ audit_webhook:IDENTIFIER \
-            endpoint="https://webhook-1.example.net" \
-            auth_token="TOKEN" \
-            client_cert="cert.pem" \
+         mc admin config set ALIAS/ audit_webhook:IDENTIFIER  \
+            endpoint="https://webhook-1.example.net"          \
+            auth_token="TOKEN"                                \
+            client_cert="cert.pem"                            \
             client_key="cert.key"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the 
@@ -207,9 +264,32 @@ settings:
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
         webhook endpoint.
 
-      - Replace ``TOKEN`` with a JSON Web Token (JWT) to use for authenticating
-        to the webhook endpoints. Omit for endpoints which do not require
-        authentication.
+      - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint.
+        Omit for endpoints which do not require authentication.
+
+        To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+        Depending on the endpoint, you may need to include additional information.
+
+        For example: for a Bearer token, prepend ``Bearer``:
+
+        .. code-block:: shell
+           :class: copyable
+
+            mc admin config set ALIAS/ audit_webhook     \
+               endpoint="https://webhook-1.example.net"  \
+               auth_token="Bearer 1a2b3c4f5e"
+
+        Modify the value according to the endpoint requirements.
+        A custom authentication format could resemble the following:
+
+        .. code-block:: shell
+           :class: copyable
+
+           mc admin config set ALIAS/ audit_webhook     \
+              endpoint="https://webhook-1.example.net"  \
+              auth_token="ServiceXYZ 1a2b3c4f5e"
+
+        Consult the documenation for the desired service for more details.
 
       - Replace ``cert.pem`` and ``cert.key`` with the public and private key
         of the x.509 TLS certificates to present to the HTTP webhook server.
@@ -221,7 +301,7 @@ Audit Log Structure
 
 MinIO audit logs resemble the following JSON document:
 
-- The ``api.timeToFirstBite`` and ``api.timeToResponse`` fields are expressed
+- The ``api.timeToFirstByte`` and ``api.timeToResponse`` fields are expressed
   in nanoseconds.
 
 - For :ref:`erasure coded setups <minio-erasure-coding>` 

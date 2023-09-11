@@ -179,8 +179,32 @@ HTTP Webhook Log Target
 
       *Optional*
 
-      The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
-      Omit for webhooks which do not enforce authentication.
+      An authentication token of the appropriate type for the endpoint.
+      Omit for endpoints which do not require authentication.
+
+      To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+      Depending on the endpoint, you may need to include additional information.
+
+      For example: for a Bearer token, prepend ``Bearer``:
+
+      .. code-block:: shell
+         :class: copyable
+
+            mc admin config set myminio logger_webhook   \
+               endpoint="https://webhook-1.example.net"  \
+               auth_token="Bearer 1a2b3c4f5e"
+
+      Modify the value according to the endpoint requirements.
+      A custom authentication format could resemble the following:
+
+      .. code-block:: shell
+         :class: copyable
+
+            mc admin config set myminio logger_webhook   \
+	       endpoint="https://webhook-1.example.net"  \
+               auth_token="ServiceXYZ 1a2b3c4f5e"
+
+      Consult the documenation for the desired service for more details.
 
       This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_AUTH_TOKEN` environment variable.
 
@@ -279,11 +303,35 @@ HTTP Webhook Audit Log Target
       This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT` environment variable.
 
    .. mc-conf:: auth_token
-      
+
       *Optional*
 
-      The JSON Web Token (JWT) to use for authenticating to the HTTP webhook.
-      Omit for webhooks which do not enforce authentication.
+      An authentication token of the appropriate type for the endpoint.
+      Omit for endpoints which do not require authentication.
+
+      To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+      Depending on the endpoint, you may need to include additional information.
+
+      For example: for a Bearer token, prepend ``Bearer``:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc admin config set myminio audit_webhook       \
+                  endpoint="http://webhook.example.net"  \
+                  auth_token="Bearer 1a2b3c4f5e"
+
+      Modify the value according to the endpoint requirements.
+      A command for a custom authentication format could resemble the following:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc admin config set myminio audit_webhook       \
+                  endpoint="http://webhook.example.net"  \
+                  auth_token="ServiceXYZ 1a2b3c4f5e"
+
+      Consult the documenation for the desired service for more details.
 
       This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_AUTH_TOKEN` environment variable.
 
@@ -2139,9 +2187,36 @@ using these environment variables.
 
       *Optional*
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-webhook-auth-token
-         :end-before: end-minio-notify-webhook-auth-token
+      An authentication token of the appropriate type for the endpoint.
+      Omit for endpoints which do not require authentication.
+
+      To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+      Depending on the endpoint, you may need to include additional information.
+
+      For example: for a Bearer token, prepend ``Bearer``:
+
+      .. code-block:: shell
+         :class: copyable
+
+            mc admin config set myminio notify_webhook   \
+	       endpoint="https://webhook-1.example.net"  \
+               auth_token="Bearer 1a2b3c4f5e"
+
+      Modify the value according to the endpoint requirements.
+      A custom authentication format could resemble the following:
+
+      .. code-block:: shell
+         :class: copyable
+
+            mc admin config set myminio notify_webhook   \
+               endpoint="https://webhook-1.example.net"  \
+               auth_token="ServiceXYZ 1a2b3c4f5e"
+
+      Consult the documenation for the desired service for more details.
+
+      .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+      MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
       This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN` environment variable.
 
