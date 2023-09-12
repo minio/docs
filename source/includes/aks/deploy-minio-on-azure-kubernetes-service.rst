@@ -42,10 +42,10 @@ The Operator by default deploys pods and services with two replicas each and pod
 The AKS cluster should therefore have at least two nodes available for scheduling Operator pods and services.
 While these nodes *may* be the same nodes intended for use by MinIO Tenants, co-locating Operator and Tenant pods may increase the risk of service interruptions due to the loss of any one node.
 
-``kubectl`` Access to the GKE Cluster
+``kubectl`` Access to the AKS Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensure your host machine has a ``kubectl`` installation compatible with the target GKE cluster.
+Ensure your host machine has a ``kubectl`` installation compatible with the target AKS cluster.
 For guidance on connecting ``kubectl`` to AKS, see :aks-docs:`Install kubectl and configure cluster access <tutorial-kubernetes-deploy-cluster?tabs=azure-cli#connect-to-cluster-using-kubectl>`.
 
 Procedure
