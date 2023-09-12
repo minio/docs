@@ -107,6 +107,7 @@ Parameters
    :optional:
 
    Enables :ref:`object versioning <minio-bucket-versioning>` on the new bucket.
+   When enabled, MinIO keeps up to 10,000 versions of each object.
 
    Versioning is required for :ref:`bucket replication <minio-bucket-replication>` or :ref:`site replication <minio-site-replication-overview>`.
    Versioning does not imply or require object locking.

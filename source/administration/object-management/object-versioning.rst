@@ -18,7 +18,7 @@ Bucket Versioning
 Overview
 --------
 
-MinIO supports keeping multiple "versions" of an object in a single bucket.
+MinIO supports keeping up to 10,000 "versions" of an object in a single bucket.
 Write operations which would normally overwrite an existing object instead
 result in the creation of a new versioned object. MinIO versioning protects from
 unintended overwrites and deletions while providing support for "undoing" a
@@ -29,6 +29,13 @@ For versioned buckets, any write operation that mutates an object results in a
 new version of that object with a unique version ID. MinIO marks the "latest"
 version of the object that clients retrieve by default. Clients can then
 explicitly choose to list, retrieve, or remove a specific object version. 
+
+.. versionchanged:: 2023-08-04T17-40-21Z
+
+   MinIO restricts object versioning to no more than 10,000 versions of each object.
+
+If an operation would create more than 10,000 versions of the object, the operation results in an error.
+:ref:`Delete one or more <minio-bucket-versioning-delete>` versions to create a new version of the object.
 
 .. card-carousel:: 1
 

@@ -84,7 +84,7 @@ For a deeper discussion on the benefits of limiting prefix contents, see the art
 Object Versioning
 ----------------- 
 
-MinIO supports keeping multiple "versions" of an object in a single bucket. 
+MinIO supports keeping up to 10,000 "versions" of an object in a single bucket. 
 
 .. image:: /images/retention/minio-versioning-multiple-versions.svg
    :alt: Object with Multiple Versions
