@@ -27,6 +27,7 @@ MinIO provides two official Grafana Dashboards you can download from the Grafana
 
 1. :ref:`MinIO Server metrics <minio-server-grafana-metrics>`
 2. :ref:`MinIO Bucket metrics <minio-buckets-grafana-metrics>`
+3. :ref:`MinIO Replication metrics <minio-replication-grafana-metrics>`
 
 To track changes to the Grafana dashboard, introspect the JSON files for the `server <https://github.com/minio/minio/blob/master/docs/metrics/prometheus/grafana/minio-dashboard.json>`__ or `bucket <https://github.com/minio/minio/blob/master/docs/metrics/prometheus/grafana/minio-bucket.json>`__ dashboards in the MinIO Server GitHub repository.
 
@@ -59,7 +60,7 @@ Bucket metrics can be viewed in the Grafana dashboard using the `bucket JSON fil
    :alt: A sample of the MinIO Grafana dashboard showing many different captured metrics for MinIO buckets.
    :align: center
 
-.. _minio-buckets-grafana-metrics:
+.. _minio-replication-grafana-metrics:
 
 MinIO Cluster Replication Metrics Dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
