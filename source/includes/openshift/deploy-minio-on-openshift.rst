@@ -136,7 +136,92 @@ The web console displays a widget for tracking the installation progress.
 
 Once installation completes, click :guilabel:`View Operator` to view the MinIO Operator page. 
 
-3) Open the MinIO Operator Interface
+3) Configure TLS Certificates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you have installed the MinIO Operator from Red Hat OperatorHub, the installation process also configures the :openshift-docs:`OpenShift Service CA Operator <security/certificate_types_descriptions/service-ca-certificates.html>`.
+This Operator manages the the TLS certificate required to access the MinIO Operator Console and Tenants.
+It automatically renews and rotates the certificate 13 months before expiration.
+No additional action is required.
+
+For Operator installations deployed from Red Hat Marketplace or other methods, configure the :openshift-docs:`Service CA certificates <security/certificate_types_descriptions/service-ca-certificates.html>` manually.
+See the instructions in the dropdown below for details.
+
+.. dropdown:: OpenShift Service CA Certificate configuration
+
+   To manually enable the ``service-ca`` Operator to manage TLS certificates:
+
+   #. Configure the following MinIO :ref:`environment variables <minio-server-environment-variables>`:
+
+      .. list-table::
+         :header-rows: 1
+
+         * - Environment Variable
+           - Value
+
+         * - :envvar:`MINIO_CONSOLE_TLS_ENABLE`
+           - ``on``
+
+         * - :envvar:`OPERATOR_STS_ENABLED`
+           - ``off``
+
+         * - :envvar:`MINIO_OPERATOR_RUNTIME`
+           - ``OpenShift``
+
+   #. Configure the following ``volumes`` and ``volumeMounts`` in ``something.yaml``:
+
+      - ``sts-tls``
+      - ``openshift-service-ca``
+      - ``openshift-csr-signer-ca``
+
+      The YAML configuration resembles the following:
+
+      .. code-block:: shell
+         :class: copyable
+
+         volumes:
+           - name: sts-tls
+             projected:
+               sources:
+                 - secret:
+                     name: sts-tls
+                     items:
+                       - key: tls.crt
+                         path: public.crt
+                       - key: tls.key
+                         path: private.key
+                     optional: true
+               defaultMode: 420
+           - name: openshift-service-ca
+             configMap:
+               name: openshift-service-ca.crt
+               items:
+                 - key: service-ca.crt
+                   path: service-ca.crt
+               defaultMode: 420
+               optional: true
+           - name: openshift-csr-signer-ca
+             projected:
+               sources:
+                 - secret:
+                     name: openshift-csr-signer-ca
+                     items:
+                       - key: tls.crt
+                         path: tls.crt
+                     optional: true
+               defaultMode: 420
+
+         imagePullPolicy: IfNotPresent
+         volumeMounts:
+           - name: openshift-service-ca
+             mountPath: /tmp/service-ca
+           - name: openshift-csr-signer-ca
+             mountPath: /tmp/csr-signer-ca
+           - name: sts-tls
+             mountPath: /tmp/sts
+
+
+4) Open the MinIO Operator Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can find the MinIO Operator Interface from the :guilabel:`Operators` left-hand navigation header.
@@ -148,7 +233,7 @@ You can find the MinIO Operator Interface from the :guilabel:`Operators` left-ha
 3. Select :guilabel:`MinIO Operators` from the list of installed operators. 
    The :guilabel:`Status` column must read :guilabel:`Success` to access the Operator interface.
 
-4) Access the Operator Console
+5) Access the Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The MinIO Operator includes the Operator Console, a browser-based management interface for managed MinIO tenants.
