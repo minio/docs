@@ -96,7 +96,7 @@ Given the previous example command, no changes are required to
 ``fstab`` since the replacement drive at ``/mnt/drive1`` uses the same
 label ``DRIVE1`` as the failed drive.
 
-1) Remount the Replaced Drive(s)
+4) Remount the Replaced Drive(s)
 --------------------------------
 
 Use ``mount -a`` to remount the drives unmounted at the beginning of this
