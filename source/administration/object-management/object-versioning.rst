@@ -174,7 +174,7 @@ Otherwise, use manual ``DELETE`` operations to permanently remove non-current ve
    .. versionchanged:: RELEASE.2022-08-22T23-53-06Z
 
    Standard S3 implementations can create multiple sequential delete markers for the same object when processing simple ``DeleteObject`` requests with no version identifier.
-   See the S3 docs for details on :s3-docs:`managing delete markers <ManagingDelMarkers.html#RemDelMarker>``
+   See the S3 docs for details on :s3-docs:`managing delete markers <ManagingDelMarkers.html#RemDelMarker>`.
 
    MinIO diverges from standard S3 implementation by avoiding this potential duplication of delete markers.
    When processing a ``Delete`` request with no version identifier, MinIO creates at most one Delete Marker for the specified object.
