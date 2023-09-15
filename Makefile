@@ -70,8 +70,7 @@ linux:
 	@echo "Building for $@ Platform"
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 ifeq ($(SYNC_SDK),TRUE)
 	@make sync-sdks
 else
@@ -86,8 +85,7 @@ windows:
 	@echo "Building for $@ Platform"
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -97,8 +95,7 @@ macos:
 	@echo "Building for $@ Platform"
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -109,8 +106,7 @@ k8s:
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -121,8 +117,7 @@ openshift:
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -133,8 +128,7 @@ eks:
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -145,8 +139,7 @@ gke:
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -157,8 +150,7 @@ aks:
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
 	@make sync-operator-version
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -168,8 +160,7 @@ container:
 	@echo "Building for $@ Platform"
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
-	@make sync-minio-version
-	@make sync-kes-version
+	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -211,6 +202,10 @@ sync-kes-version:
 		;; \
 	esac
 
+sync-minio-server-docs:
+	@echo "Retrieving select docs from github.com/minio/minio/docs"
+	@(./sync-minio-server-docs.sh)
+
 sync-minio-version:
 	@echo "Retrieving current MinIO version"
 	$(eval DEB = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
@@ -247,6 +242,7 @@ sync-deps:
 	@echo "Synchronizing all external dependencies"
 	@make sync-minio-version
 	@make sync-kes-version
+	@make sync-minio-server-docs
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
