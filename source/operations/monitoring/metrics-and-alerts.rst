@@ -28,7 +28,7 @@ MinIO provides scraping endpoints for the following metric groups:
 
          http://HOSTNAME:PORT/minio/v2/metrics/cluster
 
-      Replace the ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
       For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
 
 
@@ -36,14 +36,14 @@ MinIO provides scraping endpoints for the following metric groups:
 
       .. versionchanged:: RELEASE.2023-08-31T15-31-16Z
 
-      You can scrape :ref:`bucket-level metrics <minio_available-bucket-metrics>` using the following URL endpoint:
+      You can scrape :ref:`bucket-level metrics <minio-available-bucket-metrics>` using the following URL endpoint:
 
       .. code-block:: shell
          :class: copyable
 
          http://HOSTNAME:PORT/minio/v2/metrics/bucket
 
-      Replace the ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
       For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
 
 
