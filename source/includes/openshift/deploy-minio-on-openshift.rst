@@ -151,7 +151,7 @@ See the dropdowns below for details.
 
    To manually enable the ``service-ca`` Operator to manage TLS certificates:
 
-   #. Use the following command to edit the deployment:
+   #. Use the following :openshift-docs:`oc <cli_reference/openshift_cli/getting-started-cli.html>` command to edit the deployment:
 
       .. code-block:: shell
          :class: copyable
