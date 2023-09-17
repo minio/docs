@@ -51,7 +51,7 @@ The login flow for an application using :abbr:`OIDC (OpenID Connect)` credential
 
 1. Create an OIDC Configuration.
 2. Record the RoleARN assigned to the configuration either at time of creation or at MinIO start.
-   Use this RoleARN with the :ref:`AssumeRoleWithWebIdentity <minio-sts-assumerolewithwebidentit>` STS API.
+   Use this RoleARN with the :ref:`AssumeRoleWithWebIdentity <minio-sts-assumerolewithwebidentity>` STS API.
 3. Create a RolePolicy to use with the RoleARN.
    Use either the :envvar:`MINIO_IDENTITY_OPENID_ROLE_POLICY` environment variable or the :mc-conf:`identity_openid role_policy <identity_openid.role_policy>` configuration setting to define the list of policies to use for the provider
 4. Users select the configured OIDC provider when logging in to MinIO.

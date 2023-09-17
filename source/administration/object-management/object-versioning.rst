@@ -19,16 +19,28 @@ Overview
 --------
 
 MinIO supports keeping multiple "versions" of an object in a single bucket.
-Write operations which would normally overwrite an existing object instead
-result in the creation of a new versioned object. MinIO versioning protects from
-unintended overwrites and deletions while providing support for "undoing" a
-write operation. Bucket versioning is a prerequisite for configuring
-:ref:`object locking and retention rules <minio-object-locking>`.
 
-For versioned buckets, any write operation that mutates an object results in a
-new version of that object with a unique version ID. MinIO marks the "latest"
-version of the object that clients retrieve by default. Clients can then
-explicitly choose to list, retrieve, or remove a specific object version. 
+When enabled, versioning allows MinIO to keep multiple iterations of the same object.
+Write operations which would normally overwrite an existing object instead result in the creation of a new versioned object. 
+MinIO versioning protects from unintended overwrites and deletions while providing support for "undoing" a write operation. 
+Bucket versioning is a prerequisite for configuring :ref:`object locking and retention rules <minio-object-locking>`.
+
+For versioned buckets, a write operation that mutates an object results in a new version of that object with a unique version ID. 
+MinIO marks the "latest" version of the object that clients retrieve by default. 
+Clients can then explicitly choose to list, retrieve, or remove a specific object version. 
+
+.. versionchanged:: 2023-08-04T17-40-21Z
+
+   MinIO restricts object versioning to no more than 10,000 versions of each object.
+
+   If a write operation would exceed the 10,000 object version limit, MinIO blocks the operation and returns an error.
+   :ref:`Delete one or more <minio-bucket-versioning-delete>` versions to create a new version of the object.
+
+Read Operations on Versioned Objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Review each of the four images in this series to see how MinIO retrieves objects in a versioned bucket.
+Use the arrows on either side of the images to navigate from one to the next.
 
 .. card-carousel:: 1
 
@@ -55,13 +67,15 @@ explicitly choose to list, retrieve, or remove a specific object version.
          :alt: Object with Multiple Versions
          :align: center
 
+      A read operation request without a version ID returns the latest version of the object.
+
    .. card:: Retrieving a Specific Object Version
 
       .. image:: /images/retention/minio-versioning-retrieve-single-version.svg
          :alt: Object with Multiple Versions
          :align: center
 
-:ref:`Delete operations <minio-bucket-versioning-delete>` which do *not* specify the unique object version ID create a 0-byte ``DeleteMarker`` for that object.
+      Include the version ID to retrieve a specific version of an object during a read operation.
 
 .. versionchanged:: MinIO Server RELEASE.2023-05-04T21-44-30Z
 
@@ -151,7 +165,7 @@ Performing a ``DELETE`` operation on a versioned object creates a 0-byte ``Delet
 For objects where the latest version is a ``DeleteMarker``, clients must specify versioning flags or identifiers to perform ``GET/HEAD/LIST/DELETE`` operations on a prior version of that object.
 The default server behavior omits ``DeleteMarker`` objects from consideration for unversioned operations.
 
-MinIO  can utilize :ref:`Lifecycle Management expiration rules <minio-lifecycle-management-expiration>` to automatically remove versioned objects permanently.
+MinIO can utilize :ref:`Lifecycle Management expiration rules <minio-lifecycle-management-expiration>` to automatically remove versioned objects permanently.
 Otherwise, use manual ``DELETE`` operations to permanently remove non-current versioned objects or ``DeleteMarker`` objects.
 
 .. admonition:: MinIO Implements Idempotent Delete Markers
@@ -160,7 +174,7 @@ Otherwise, use manual ``DELETE`` operations to permanently remove non-current ve
    .. versionchanged:: RELEASE.2022-08-22T23-53-06Z
 
    Standard S3 implementations can create multiple sequential delete markers for the same object when processing simple ``DeleteObject`` requests with no version identifier.
-   See the S3 docs for details on :s3-docs:`managing delete markers <ManagingDelMarkers.html#RemDelMarker>``
+   See the S3 docs for details on :s3-docs:`managing delete markers <ManagingDelMarkers.html#RemDelMarker>`.
 
    MinIO diverges from standard S3 implementation by avoiding this potential duplication of delete markers.
    When processing a ``Delete`` request with no version identifier, MinIO creates at most one Delete Marker for the specified object.
