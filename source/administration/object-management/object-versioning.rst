@@ -20,7 +20,7 @@ Overview
 
 MinIO supports keeping multiple "versions" of an object in a single bucket.
 
-When enabled at the time you create a bucket, versioning allows MinIO to keep multiple iterations of the same object.
+When enabled, versioning allows MinIO to keep multiple iterations of the same object.
 Write operations which would normally overwrite an existing object instead result in the creation of a new versioned object. 
 MinIO versioning protects from unintended overwrites and deletions while providing support for "undoing" a write operation. 
 Bucket versioning is a prerequisite for configuring :ref:`object locking and retention rules <minio-object-locking>`.
