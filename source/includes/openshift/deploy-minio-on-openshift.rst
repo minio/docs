@@ -140,7 +140,7 @@ Once installation completes, click :guilabel:`View Operator` to view the MinIO O
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you have installed the MinIO Operator from Red Hat OperatorHub, the installation process also configures the :openshift-docs:`OpenShift Service CA Operator <security/certificate_types_descriptions/service-ca-certificates.html>`.
-This Operator manages the the TLS certificates required to access the MinIO Operator Console and Tenants.
+This Operator manages the TLS certificates required to access the MinIO Operator Console and Tenants.
 It automatically renews and rotates the certificates 13 months before expiration.
 No additional action is required.
 
