@@ -62,7 +62,7 @@ $theme-properties: (
     --table-border-color: $light-300 $dark-200,
 
     // Code
-    --code-bg: $light-300 $dark-500,
+    --code-bg: $light-300 lighten($dark-500, 17.5%),
     --code-hover-bg: $light-400 #9fa8b9,
     --code-color: $black $dark-0,
     --code-link-color: #006DA0 #12243c,
