@@ -60,6 +60,8 @@ The output includes the storage tier of each object:
 
 .. important::
 
+   MinIO Object Transition supports cost-saving strategies around moving older or aged data to cost-optimized remote storage tiers, such as cloud storage or high-density HDD storage.
+
    MinIO Object Transition does **not** provide backup and recovery functionality.
    You cannot use the remote tier as a recovery source in the event of data loss in MinIO.
 
