@@ -87,24 +87,25 @@ complete documentation on MinIO users and policies respectively.
 
 .. start-transition-bucket-access-desc
 
-MinIO *requires* exclusive access to the transitioned data on the remote storage
-tier. MinIO ignores any objects in the remote bucket or bucket prefix not
-explicitly managed by the MinIO deployment. Automatic transition and transparent
-object retrieval depend on the following assumptions:
+MinIO *requires* exclusive access to the transitioned data on the remote storage tier.
+Object metadata on the "hot" MinIO source is strongly linked to the object data on the "warm/cold" remote tier.
+MinIO cannot retrieve object data without access to the remote, nor can the remote be used to restore lost metadata on the source.
+
+All access to the transitioned objects *must* occur through MinIO via S3 API operations only.
+Manually modifying a transitioned object - whether the metadata on the "hot" MinIO tier *or* the object data on the remote "warm/cold" tier - may result in loss of that object data.
+
+MinIO ignores any objects in the remote bucket or bucket prefix not explicitly managed by the MinIO deployment. 
+Automatic transition and transparent object retrieval depend on the following assumptions:
 
 - No external mutation, migration, or deletion of objects on the remote storage. 
 - No lifecycle management rules (e.g. transition or expiration) on the remote 
   storage bucket.
 
-MinIO stores all transitioned objects in the remote storage bucket or resource
-under a unique per-deployment prefix value. This value is not intended to
-support identifying the source deployment from the backend. MinIO supports an
-additional optional human-readable prefix when configuring the remote target,
-which may facilitate operations related to diagnostics, maintenance, or disaster
-recovery. 
+MinIO stores all transitioned objects in the remote storage bucket or resource under a unique per-deployment prefix value. 
+This value is not intended to support identifying the source deployment from the backend. 
+MinIO supports an additional optional human-readable prefix when configuring the remote target, which may facilitate operations related to diagnostics, maintenance, or disaster recovery. 
 
-MinIO recommends specifying this optional prefix for remote storage tiers which
-contain other data, including transitioned objects from other MinIO deployments.
+MinIO recommends specifying this optional prefix for remote storage tiers which contain other data, including transitioned objects from other MinIO deployments.
 This tutorial includes the necessary syntax for setting this prefix.
 
 .. end-transition-bucket-access-desc

@@ -58,6 +58,13 @@ The output includes the storage tier of each object:
 - ``STANDARD`` marks objects stored on the MinIO deployment.
 - ``WARM`` marks objects stored on the remote tier with matching name.
 
+.. important::
+
+   MinIO Object Transition does **not** provide backup and recovery functionality.
+   You cannot use the remote tier as a recovery source in the event of data loss in MinIO.
+
+   Use either :ref:`site replication <minio-site-replication-overview>` or :ref:`bucket replication <minio-bucket-replication>` to support backup/recovery or :abbr:`BC/DR (Business Continuity / Disaster Recovery)` requirements.
+
 Exclusive Access to Remote Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
