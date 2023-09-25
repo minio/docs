@@ -104,6 +104,9 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
                proxy_http_version 1.1;
                proxy_set_header Upgrade $http_upgrade;
                proxy_set_header Connection "upgrade";
+               # Some environments may encounter CORS errors (Kubernetes + Nginx Ingress)
+               # Uncomment the following line to set the Origin request to an empty string
+               # proxy_set_header Origin '';
                
                chunked_transfer_encoding off;
 
