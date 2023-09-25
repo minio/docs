@@ -115,6 +115,11 @@ Parameters
    
    If not specified, the command collects data for CPU, memory, block, mutex, threads, and goroutines.
 
+   .. important::
+
+      Do not use the ``cpuio`` or ``trace`` data types unless directed to by MinIO Support.
+      These profiles require significant resources and may degrade cluster performance if used without guidance.
+
 .. mc-cmd:: --airgap
    :optional:
 
