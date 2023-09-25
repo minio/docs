@@ -95,7 +95,7 @@ Kubernetes TLS Certificate API
    The MinIO Operator manages TLS Certificate Signing Requests (CSR) using the Kubernetes ``certificates.k8s.io`` :kube-docs:`TLS certificate management API <tasks/tls/managing-tls-in-a-cluster/>` to create signed TLS certificates in the following circumstances:
    
    - When ``autoCert`` is enabled.
-   - For the MinIO Console when the :envvar:`OPERATOR_CONSOLE_TLS_ENABLE` environment variable is set to ``on``.
+   - For the MinIO Console when the :envvar:`MINIO_CONSOLE_TLS_ENABLE` environment variable is set to ``on``.
    - For :ref:`STS service <minio-security-token-service>` when :envvar:`OPERATOR_STS_ENABLED` environment variable is set to ``on``.
    - For retrieving the health of the cluster.
    

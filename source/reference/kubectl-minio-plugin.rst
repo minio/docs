@@ -165,7 +165,7 @@ Available MinIO Operator Environment Variables
 
    When not specified, the default value is ``operator``.
 
-.. envvar:: OPERATOR_CONSOLE_TLS_ENABLE
+.. envvar:: MINIO_CONSOLE_TLS_ENABLE
 
    Toggle Console TLS service ``on`` or ``off``.
 

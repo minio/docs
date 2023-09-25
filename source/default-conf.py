@@ -65,7 +65,7 @@ extlinks = {
     'podman-docs'     : ('https://docs.podman.io/en/latest/%s', None),
     'podman-git'      : ('https://github.com/containers/podman/%s', None),
     'docker-docs'     : ('https://docs.docker.com/%s', None),
-    'openshift-docs'  : ('https://docs.openshift.com/container-platform/4.11/%s', None),
+    'openshift-docs'  : ('https://docs.openshift.com/container-platform/4.13/%s', None),
     'influxdb-docs'   : ('https://docs.influxdata.com/influxdb/v2.4/%s', None),
     'eks-docs'        : ('https://docs.aws.amazon.com/eks/latest/userguide/%s', None),
     'minio-web'       : ('https://min.io/%s?ref=docs', None),
