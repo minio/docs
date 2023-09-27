@@ -94,7 +94,7 @@ To update deployments managed using ``systemctl``, see :ref:`minio-upgrade-syste
    
             wget https://dl.min.io/server/minio/release/linux-arm64/minio
             chmod +x minio
-            MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password ./minio server /mnt/data --console-address ":9001"
+            MINIO_ACCESS_KEY=admin MINIO_SECRET_KEY=password ./minio server /mnt/data --console-address ":9001"
 
 .. dropdown:: Other Architectures
 

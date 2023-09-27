@@ -9,13 +9,13 @@ The following example provides a starting environment file:
 .. code-block:: shell
    :class: copyable
 
-   # MINIO_ROOT_USER and MINIO_ROOT_PASSWORD sets the root account for the MinIO server.
+   # MINIO_ACCESS_KEY and MINIO_SECRET_KEY sets the root account for the MinIO server.
    # This user has unrestricted permissions to perform S3 and administrative API operations on any resource in the deployment.
    # Omit to use the default values 'minioadmin:minioadmin'.
    # MinIO recommends setting non-default values as a best practice, regardless of environment
 
-   MINIO_ROOT_USER=myminioadmin
-   MINIO_ROOT_PASSWORD=minio-secret-key-change-me
+   MINIO_ACCESS_KEY=myminioadmin
+   MINIO_SECRET_KEY=minio-secret-key-change-me
 
    # MINIO_VOLUMES sets the storage volume or path to use for the MinIO server.
 
@@ -43,13 +43,13 @@ The following example provides a starting environment file:
 .. code-block:: shell
    :class: copyable
 
-   # MINIO_ROOT_USER and MINIO_ROOT_PASSWORD sets the root account for the MinIO server.
+   # MINIO_ACCESS_KEY and MINIO_SECRET_KEY sets the root account for the MinIO server.
    # This user has unrestricted permissions to perform S3 and administrative API operations on any resource in the deployment.
    # Omit to use the default values 'minioadmin:minioadmin'.
    # MinIO recommends setting non-default values as a best practice, regardless of environment.
 
-   MINIO_ROOT_USER=myminioadmin
-   MINIO_ROOT_PASSWORD=minio-secret-key-change-me
+   MINIO_ACCESS_KEY=myminioadmin
+   MINIO_SECRET_KEY=minio-secret-key-change-me
 
    # MINIO_VOLUMES sets the storage volumes or paths to use for the MinIO server.
    # The specified path uses MinIO expansion notation to denote a sequential series of drives between 1 and 4, inclusive.
