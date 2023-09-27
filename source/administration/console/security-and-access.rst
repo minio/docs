@@ -24,7 +24,8 @@ You can use the MinIO Console to perform several of the identity and access mana
 Access Keys
 -----------
 
-The :guilabel:`Access Keys` section displays all :ref:`minio-id-access-keys` associated to the authenticated user. 
+The :guilabel:`Access Keys` or `Service Accounts` section displays all :ref:`minio-id-access-keys` associated to the authenticated user.
+The summary list of access keys that already exist for a particular user includes the access key, expiration, status, name, and description.
 
 Access Keys support providing applications authentication credentials which inherit permissions from the "parent" user.
 
