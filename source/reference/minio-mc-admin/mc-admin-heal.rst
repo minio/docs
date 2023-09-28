@@ -42,7 +42,7 @@ Syntax
 
    mc admin heal [FLAGS] TARGET
 
-:mc-cmd:`mc admin heal` supports the following arguments:
+:mc-cmd:`mc admin heal` supports the following argument:
 
 .. mc-cmd:: TARGET
 
@@ -60,37 +60,39 @@ Syntax
    If the ``TARGET`` bucket or bucket prefix has an active healing scan,
    the command returns the status of that scan.
 
-.. mc-cmd:: --scan
-   
+Deprecated Arguments
+++++++++++++++++++++
 
-   The type of scan to perform. Specify one of the following supported scan
-   modes:
+The following command flags have been deprecated and should only be used under guidance from MinIO Engineers in association with a SUBNET ticket.
 
-   - ``normal`` (default)
-   - ``deep``
+.. dropdown::
 
-.. mc-cmd:: --recursive, r
-   
+   :--scan: The type of scan to perform. Specify one of the following supported scan modes:
+     - ``normal`` (default)
+     - ``deep``
 
-   Recursively scans for objects in the specified bucket or bucket prefix.
+   :--recursive, r: Recursively scans for objects in the specified bucket or bucket prefix.
 
-.. mc-cmd:: --dry-run
-   
+   :--dry-run: Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, but does *not* perform any object healing.
 
-   Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, 
-   but does *not* perform any object healing.
+   :--force-start, f: Force starts the healing process.
 
-.. mc-cmd:: --force-start, f
-   
+   :--force-stop, s: Force stops the healing sequence.
 
-   Force starts the healing process.
+   :--remove: Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
 
-.. mc-cmd:: --force-stop, s
-   
+Colors
+------
 
-   Force stops the healing sequence.
+Originally, the healing mechanism output a table that used colors to attempt to differentiate the status of objects in healing.
+These colors lack much useful detail and have been deprecated in favor of :ref:`healing metrics available at the cluster level <minio-metrics-and-alerts-available-metrics>`.
 
-.. mc-cmd:: --remove
-   
+Originally, the colors conveyed the following intent:
 
-   Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
+:Green: *Healthy*, the object has all data and parity shards available as required to serve the object
+
+:Yellow: *Healing*, the object is still in the process of healing, and there are sufficient data or parity shards available to complete the healing
+
+:Red: *Unhealthy*, the object has lost one or more shards and requires healing
+
+:Grey: *Unrecoverable*, the object has lost too many data and/or parity shards and cannot be healed or recovered
