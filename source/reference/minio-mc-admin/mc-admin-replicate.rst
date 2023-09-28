@@ -338,6 +338,29 @@ Syntax
                                minio1         \
                                --user janedoe
 
+         The output of any of the above examples resembles the following:
+
+         .. code-block:: shell
+
+            Bucket replication status:
+            -  30/30 Buckets in sync
+            
+            Policy replication status:
+            -  5/5 Policies in sync
+            
+            User replication status:
+            -  3/3 Users in sync
+            
+            Group replication status:
+            No Groups present
+            
+            Object replication status:
+            Replication status since 1 day 
+            Summary:
+            Replicated:    0 objects (0 B)
+            Queued:        - 0 objects, (0 B) (avg: 0 objects, 0 B; max: 0 objects, 0 B)
+            Received:      0 objects (0 B)
+
       .. tab-item:: SYNTAX
          
          .. code-block:: shell
