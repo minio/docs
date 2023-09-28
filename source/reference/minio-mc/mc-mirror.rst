@@ -144,7 +144,7 @@ Parameters
 
    Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified object name pattern.
 
-.. mc-cmd:: --exclude
+.. mc-cmd:: --exclude-storageclass
    
 
    Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path from the specified storage class.
