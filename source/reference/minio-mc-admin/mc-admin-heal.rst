@@ -60,26 +60,40 @@ Syntax
    If the ``TARGET`` bucket or bucket prefix has an active healing scan,
    the command returns the status of that scan.
 
-Deprecated Arguments
+
 ++++++++++++++++++++
 
-The following command flags have been deprecated and should only be used under guidance from MinIO Engineers in association with a SUBNET ticket.
 
-.. dropdown::
+.. dropdown:: Deprecated Arguments
 
-   :--scan: The type of scan to perform. Specify one of the following supported scan modes:
-     - ``normal`` (default)
-     - ``deep``
+   The following command flags have been deprecated and should only be used under guidance from MinIO Engineers in association with a SUBNET ticket.
 
-   :--recursive, r: Recursively scans for objects in the specified bucket or bucket prefix.
+   - ``--scan`` 
+     
+     The type of scan to perform. Specify one of the following supported scan modes:
 
-   :--dry-run: Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, but does *not* perform any object healing.
+       - ``normal`` (default)
+       - ``deep``
 
-   :--force-start, f: Force starts the healing process.
+   - ``--recursive, r`` 
+     
+     Recursively scans for objects in the specified bucket or bucket prefix.
 
-   :--force-stop, s: Force stops the healing sequence.
+   - ``--dry-run`` 
+     
+     Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, but does *not* perform any object healing.
 
-   :--remove: Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
+   - ``--force-start, f`` 
+     
+     Force starts the healing process.
+
+   - ``--force-stop, s`` 
+     
+     Force stops the healing sequence.
+
+   - ``--remove`` 
+     
+     Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
 
 Colors
 ------
@@ -89,10 +103,19 @@ These colors lack much useful detail and have been deprecated in favor of :ref:`
 
 Originally, the colors conveyed the following intent:
 
-:Green: *Healthy*, the object has all data and parity shards available as required to serve the object
 
-:Yellow: *Healing*, the object is still in the process of healing, and there are sufficient data or parity shards available to complete the healing
+.. list-table::
+   :widths: 25 75
+   :width: 100%
 
-:Red: *Unhealthy*, the object has lost one or more shards and requires healing
+   * - **Green**
+     - *Healthy*, the object has all data and parity shards available as required to serve the object
+ 
+   * - **Yellow** 
+     - *Healing*, the object is still in the process of healing, and there are sufficient data or parity shards available to complete the healing
 
-:Grey: *Unrecoverable*, the object has lost too many data and/or parity shards and cannot be healed or recovered
+   * - **Red** 
+     - *Unhealthy*, the object has lost one or more shards and requires healing
+
+   * - **Grey** 
+     -  *Unrecoverable*, the object has lost too many data and/or parity shards and cannot be healed or recovered
