@@ -49,24 +49,25 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] mirror                           \
-                          [--attr "string"]                \
-                          [--disable-multipart]            \
-                          [--dry-run]                      \
-                          [--encrypt-key "string"]         \
-                          [--exclude "string"]             \
-                          [--limit-download string]        \
-                          [--limit-upload string]          \
-                          [--md5]                          \
-                          [--monitoring-address "string"]  \
-                          [--newer-than "string"]          \
-                          [--older-than "string"]          \
-                          [--preserve]                     \
-                          [--region "string"]              \
-                          [--remove]                       \
-                          [--storage-class "string"]       \
-                          [--watch]                        \
-                          SOURCE                           \ 
+         mc [GLOBALFLAGS] mirror                            \
+                          [--attr "string"]                 \
+                          [--disable-multipart]             \
+                          [--dry-run]                       \
+                          [--encrypt-key "string"]          \
+                          [--exclude "string"]              \
+                          [--exclude-storageclass "string"] \
+                          [--limit-download string]         \
+                          [--limit-upload string]           \
+                          [--md5]                           \
+                          [--monitoring-address "string"]   \
+                          [--newer-than "string"]           \
+                          [--older-than "string"]           \
+                          [--preserve]                      \
+                          [--region "string"]               \
+                          [--remove]                        \
+                          [--storage-class "string"]        \
+                          [--watch]                         \
+                          SOURCE                            \ 
                           TARGET
 
       .. include:: /includes/common-minio-mc.rst
@@ -142,6 +143,14 @@ Parameters
    
 
    Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified object name pattern.
+
+.. mc-cmd:: --exclude-storageclass
+   
+
+   Exclude object(s) on the :mc-cmd:`~mc mirror SOURCE` that have the specified storage class.
+   You can use this flag multiple times in a command to exclude objects from more than one storage class.
+
+   Use this to exclude objects with storage classes that require rehydration or restoration of objects, such as migrating from an AWS S3 bucket where some objects have the ``GLACIER`` or ``DEEP_ARCHIVE`` storage classes.
 
 .. mc-cmd:: --dry-run
    
@@ -303,7 +312,7 @@ Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --watch` to continuously mirror fil
 Continuously Mirror S3 Bucket to an S3-Compatible Host
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --watch` to continuously mirror objects in a bucket on one S3-compatible host to another S3-compatible host where objects added to or deleted from the bucket are added to or deleted from the host.f
+Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --watch` to continuously mirror objects in a bucket on one S3-compatible host to another S3-compatible host where objects added to or deleted from the bucket are added to or deleted from the host.
 
 .. code-block::
    :class: copyable
@@ -315,6 +324,25 @@ Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --watch` to continuously mirror obj
 - Replace :mc-cmd:`SRCPATH <mc mirror SOURCE>` with the bucket to mirror.
 
 - Replace :mc-cmd:`TGTALIAS <mc mirror TARGET>` with the :mc-cmd:`alias <mc alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`TGTPATH <mc mirror TARGET>` with the destination bucket.
+
+Mirror Objects from AWS S3 to MinIO Skipping Objects in GLACIER
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --exclude-storageclass` to mirror objects from AWS S3 to MinIO without mirroring objects in GLACIER or DEEP_ARCHIVE storage.
+
+.. code-block::
+   :class: copyable
+   
+   mc mirror --exclude-storageclass GLACIER  \
+      --exclude-storageclass DEEP_ARCHIVE SRCALIAS/SRCPATH TGALIAS/TGPATH
+
+- Replace :mc-cmd:`SRCALIAS <mc mirror SOURCE>` with the :mc-cmd:`alias <mc alias>` of a configured S3 host.
+
+- Replace :mc-cmd:`SRCPATH <mc mirror SOURCE>` with the bucket to mirror.
+
+- Replace :mc-cmd:`TGTALIAS <mc mirror TARGET>` with the :mc-cmd:`alias <mc alias>` of a configured S3 host.
 
 - Replace :mc-cmd:`TGTPATH <mc mirror TARGET>` with the destination bucket.
 

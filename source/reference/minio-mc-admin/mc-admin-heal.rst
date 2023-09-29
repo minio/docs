@@ -42,7 +42,7 @@ Syntax
 
    mc admin heal [FLAGS] TARGET
 
-:mc-cmd:`mc admin heal` supports the following arguments:
+:mc-cmd:`mc admin heal` supports the following argument:
 
 .. mc-cmd:: TARGET
 
@@ -60,37 +60,61 @@ Syntax
    If the ``TARGET`` bucket or bucket prefix has an active healing scan,
    the command returns the status of that scan.
 
-.. mc-cmd:: --scan
-   
 
-   The type of scan to perform. Specify one of the following supported scan
-   modes:
+++++++++++++++++++++
 
-   - ``normal`` (default)
-   - ``deep``
 
-.. mc-cmd:: --recursive, r
-   
+.. dropdown:: Deprecated Arguments
 
-   Recursively scans for objects in the specified bucket or bucket prefix.
+   The following command flags have been deprecated and should only be used under guidance from MinIO Engineers in association with a SUBNET ticket.
 
-.. mc-cmd:: --dry-run
-   
+   - ``--scan`` 
+     
+     The type of scan to perform. Specify one of the following supported scan modes:
 
-   Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, 
-   but does *not* perform any object healing.
+       - ``normal`` (default)
+       - ``deep``
 
-.. mc-cmd:: --force-start, f
-   
+   - ``--recursive, r`` 
+     
+     Recursively scans for objects in the specified bucket or bucket prefix.
 
-   Force starts the healing process.
+   - ``--dry-run`` 
+     
+     Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, but does *not* perform any object healing.
 
-.. mc-cmd:: --force-stop, s
-   
+   - ``--force-start, f`` 
+     
+     Force starts the healing process.
 
-   Force stops the healing sequence.
+   - ``--force-stop, s`` 
+     
+     Force stops the healing sequence.
 
-.. mc-cmd:: --remove
-   
+   - ``--remove`` 
+     
+     Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
 
-   Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
+Healing Output Color Key
+------------------------
+
+Originally, the healing mechanism output a table that used a Green-Yellow-Red-Gray color key to attempt to differentiate the status of objects in healing.
+These colors have been deprecated in favor of more detailed :ref:`healing metrics available at the cluster level <minio-metrics-and-alerts-available-metrics>`.
+
+The following table describes the intent of each of the deprecated color keys.
+
+.. list-table::
+   :widths: 25 75
+   :width: 100%
+
+   * - **Green**
+     - *Healthy*, the object has all data and parity shards available as required to serve the object
+ 
+   * - **Yellow** 
+     - *Healing*, the object is still in the process of healing, and there are sufficient data or parity shards available to complete the healing
+
+   * - **Red** 
+     - *Unhealthy*, the object has lost one or more shards and requires healing
+
+   * - **Grey** 
+     -  *Unrecoverable*, the object has lost too many data and/or parity shards and cannot be healed or recovered
