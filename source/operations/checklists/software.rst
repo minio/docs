@@ -27,6 +27,12 @@ MinIO Pre-requisites
        The method to use varies by operating system.
        Check with your operating system's documentation for how to synchronize time with a time server.
 
+   * - :octicon:`circle`
+     - Disable system services that index, scan, or audit the filesystem, system-level calls, or kernel-level calls (``mlocate``, ``auditd``). 
+       These services can reduce performance due to resource contention or interception of MinIO operations.
+
+       You can alternatively configure these services to ignore or exclude MinIO directories and processes.
+
    * - :octicon:`circle` 
      - System administrator access to the remote servers
 
@@ -38,7 +44,7 @@ MinIO Pre-requisites
      - Load balancer to handle routing of requests (for example, `NGINX <https://www.nginx.com/>`__)
 
    * - :octicon:`circle`
-     - :ref:`Prometheus <minio-metrics-collect-using-prometheus>` setup for monitoring and metrics
+     - :ref:`Prometheus <minio-metrics-collect-using-prometheus>` or a Prometheus-compatible setup for monitoring and metrics
 
    * - :octicon:`circle`
      - :ref:`Grafana configured <minio-grafana>` for dashboards 
