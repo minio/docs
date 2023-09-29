@@ -95,14 +95,13 @@ Syntax
      
      Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
 
-Colors
-------
+Healing Output Color Key
+------------------------
 
-Originally, the healing mechanism output a table that used colors to attempt to differentiate the status of objects in healing.
-These colors lack much useful detail and have been deprecated in favor of :ref:`healing metrics available at the cluster level <minio-metrics-and-alerts-available-metrics>`.
+Originally, the healing mechanism output a table that used a Green-Yellow-Red-Gray color key to attempt to differentiate the status of objects in healing.
+These colors have been deprecated in favor of more detailed :ref:`healing metrics available at the cluster level <minio-metrics-and-alerts-available-metrics>`.
 
-Originally, the colors conveyed the following intent:
-
+The following table describes the intent of each of the deprecated color keys.
 
 .. list-table::
    :widths: 25 75

@@ -147,10 +147,10 @@ Parameters
 .. mc-cmd:: --exclude-storageclass
    
 
-   Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path from the specified storage class.
+   Exclude object(s) on the :mc-cmd:`~mc mirror SOURCE` that have the specified storage class.
    You can use this flag multiple times in a command to exclude objects from more than one storage class.
 
-   Use this when migrating from AWS S3 to MinIO to exclude objects from ``GLACIER`` or ``DEEP_ARCHIVE`` storage.
+   Use this to exclude objects with storage classes that require rehydration or restoration of objects, such as migrating from an AWS S3 bucket where some objects have the ``GLACIER`` or ``DEEP_ARCHIVE`` storage classes.
 
 .. mc-cmd:: --dry-run
    
