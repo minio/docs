@@ -124,7 +124,9 @@ Replicate
 
 Use the ``replicate`` job type to create a batch job that replicates objects from one MinIO deployment (the ``source`` deployment) to another MinIO deployment (the ``target`` deployment).
 Either the ``source`` or the ``target`` **must** be the :ref:`local <minio-batch-local>` deployment.
-Starting with the MinIO Server ``RELEASE.2023-05-04T21-44-30Z``, the other deployment can be either another MinIO deployment or any S3-compatible location.
+
+Starting with the MinIO Server ``RELEASE.2023-05-04T21-44-30Z``, the other deployment can be either another MinIO deployment or any S3-compatible location using a realtime storage class.
+Use filtering options in the replication ``YAML`` file to exclude objects stored in locations that require rehydration or other restoration methods before serving the requested object.
 
 The batch job definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
 The access to objects and buckets for the replication process may be restricted by the credentials you provide in the YAML for either the source or target destinations. 
