@@ -27,10 +27,6 @@ Table of Deprecated Commands
      - Replacement Command
      - Version of Change
 
-   * - ``mc replicate diff``
-     - :mc-cmd:`mc replicate backlog`
-     - mc RELEASE.2023-07-18T21-05-38Z
-
    * - ``mc ilm add``
      - :mc-cmd:`mc ilm rule add`
      - mc RELEASE.2022-12-24T15-21-38Z
@@ -54,6 +50,10 @@ Table of Deprecated Commands
    * - ``mc ilm rm``
      - :mc-cmd:`mc ilm rule rm`
      - mc RELEASE.2022-12-24T15-21-38Z
+
+   * - ``mc replicate diff``
+     - :mc-cmd:`mc replicate backlog`
+     - mc RELEASE.2023-07-18T21-05-38Z
 
 
 Table of Deprecated Admin Commands
