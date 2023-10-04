@@ -70,6 +70,7 @@ Clients therefore drive the overall hierarchy of data within a given bucket or p
 MinIO has no hard :ref:`thresholds <minio-server-limits>` on the number of buckets, objects, or prefixes on a given deployment.
 The relative performance of the hardware and networking underlying the MinIO deployment may create a practical limit to the number of objects in a given prefix or bucket.
 Specifically, hardware using slower drives or network infrastructures tend to exhibit poor performance in buckets or prefixes with a flat hierarchy of objects.
+For other considerations, thresholds, or limitations to keep in mind, see :ref:`minio-server-limits`.
 
 Consider the following points as general guidance for client applications workload patterns:
 
