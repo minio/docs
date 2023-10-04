@@ -14,7 +14,7 @@
 
 .. versionchanged:: RELEASE.2023-05-26T23-31-54Z
 
-   ``mc admin idp ldap policy`` has moved to  :mc-cmd:`mc idp ldap policy`.
+   ``mc admin idp ldap policy`` and its subcommands replaced by :mc-cmd:`mc idp ldap policy`.
 
 Description
 -----------

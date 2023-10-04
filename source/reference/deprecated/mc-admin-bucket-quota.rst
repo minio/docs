@@ -12,7 +12,11 @@
 
 .. versionchanged:: RELEASE.2022-12-13T00-23-28Z
 
-   ``mc admin bucket quota`` replaced by :mc-cmd:`mc quota set`, :mc-cmd:`mc quota info`, and :mc-cmd:`mc quota clear`.
+   ``mc admin bucket quota`` replaced by:
+
+   - :mc-cmd:`mc quota set`
+   - :mc-cmd:`mc quota info`
+   - :mc-cmd:`mc quota clear`
 
 Description
 -----------

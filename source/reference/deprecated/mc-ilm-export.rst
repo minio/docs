@@ -14,7 +14,7 @@
 
 .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
 
-   ``mc ilm export`` replaced by :mc-cmd:`mc ilm rule export`
+   ``mc ilm export`` replaced by :mc-cmd:`mc ilm rule export`.
 
 
 Syntax

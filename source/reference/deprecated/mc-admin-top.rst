@@ -10,11 +10,9 @@
 
 .. mc:: mc admin top
 
-.. note::
+.. versionchanged:: RELEASE.2022-08-11T00-30-48Z
 
-   .. versionchanged:: RELEASE.2022-08-11T00-30-48Z
-
-   :mc-cmd:`mc support top` replaces the ``mc admin top`` command.
+   ``mc admin top`` replaced by :mc-cmd:`mc support top`.
 
 Description
 -----------
