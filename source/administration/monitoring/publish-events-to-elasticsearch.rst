@@ -16,9 +16,8 @@ MinIO supports publishing :ref:`bucket notification
 <minio-bucket-notifications>` events to an
 `Elasticsearch <https://www.elastic.co/>`__ service endpoint.
 
-MinIO relies on the :github:`olivere/elastic` v7 project for Elastic
-connectivity. The ``elastic/v7`` library specifically targets Elasticsearch
-v7.0 and is *not compatible with earlier Elasticsearch versions*.
+MinIO relies on the :github:`elastic/go-elasticsearch` v7 project for Elastic
+connectivity.
 
 Add a Elasticsearch Endpoint to a MinIO Deployment
 --------------------------------------------------
