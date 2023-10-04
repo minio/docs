@@ -425,6 +425,20 @@ MinIO Console:
    If you are using a standalone MinIO Console process, this variable
    corresponds with ``CONSOLE_PROMETHEUS_JOB_ID``.
 
+.. envvar:: MINIO_PROMETHEUS_AUTH_TOKEN
+
+   *Optional*
+
+   Specify the :prometheus-docs:`basic auth token <guides/basic-auth/>` the Console should use to connect to a Prometheus service.
+
+   For example, a basic auth token you might use could resemble the following:
+
+   .. code-block:: text
+
+      eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoibWluaW8iLCJleHAiOjQ4NTAwMzg0MDJ9.GZCKR3d0FH2TCvNHSd39HaVfSuQVVV0s8glICBDmhT51V6CQ_hw8gTYlKHJmcpR8aHkqiJwCqcYJhaMmqwe00XY
+
+   If you are using a standalone MinIO Console process, this variable corresponds with ``CONSOLE_PROMETHEUS_AUTH_TOKEN``.
+
 .. envvar:: MINIO_LOG_QUERY_URL
 
    *Optional*
@@ -448,6 +462,13 @@ MinIO Console:
 
    Specify ``off`` to disable the animated login screen for the MinIO Console. 
    Defaults to ``on``.
+
+.. envvar:: MINIO_BROWSER_REDIRECT
+
+   .. versionadded:: MinIO Server RELEASE.2023-09-16T01-01-47Z
+
+   Specify whether requests from a web browser automatically redirect to the Console address.
+   Defaults to ``true``.
 
 .. envvar:: MINIO_BROWSER_REDIRECT_URL
 
