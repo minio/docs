@@ -325,7 +325,7 @@ For **flag based filters**
        Keys rotate only for objects created prior to the date.
    * - ``tags:``
      - Rotate keys only for objects with tags that match the specified ``key:`` and ``value:``.  
-   * - ``metadtaa:``
+   * - ``metadata:``
      - Rotate keys only for objects with metadata that match the specified ``key:`` and ``value:``.  
    * - ``kmskey:``
      - Rotate keys only for objects with a KMS key-id that match the specified value.  
