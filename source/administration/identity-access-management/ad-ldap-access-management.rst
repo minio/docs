@@ -66,12 +66,15 @@ Use either of the following methods to create a new access key:
 Mapping Policies to User DN
 ---------------------------
 
-Consider the following policy assignments:
+The following commands use :mc-cmd:`mc idp ldap policy attach` to associate an existing MinIO :ref:`policy <minio-policy>` to an AD/LDAP User DN.
 
 .. code-block:: shell
 
-   mc admin policy attach myminio consoleAdmin --user='cn=sisko,cn=users,dc=example,dc=com'
-   mc admin policy attach myminio readwrite,diagnostics --user='cn=dax,cn=users,dc=example,dc=com'
+   mc idp ldap policy attach myminio consoleAdmin \ 
+     --user='cn=sisko,cn=users,dc=example,dc=com'
+   
+   mc idp ldap policy attach myminio readwrite,diagnostics \
+     --user='cn=dax,cn=users,dc=example,dc=com'
 
 - MinIO would assign an authenticated user with DN matching 
   ``cn=sisko,cn=users,dc=example,dc=com`` the :userpolicy:`consoleAdmin`
@@ -88,12 +91,15 @@ Consider the following policy assignments:
 Mapping Policies to Group DN
 ----------------------------
 
-Consider the following policy assignments:
+The following commands use :mc-cmd:`mc idp ldap policy attach` to associate an existing MinIO :ref:`policy <minio-policy>` to an AD/LDAP Group DN.
 
 .. code-block:: shell
 
-   mc admin policy attach myminio consoleAdmin --group='cn=ops,cn=groups,dc=example,dc=com'
-   mc admin policy attach myminio diagnostics --group='cn=engineering,cn=groups,dc=example,dc=com'
+   mc idp ldap policy attach myminio consoleAdmin \
+     --group='cn=ops,cn=groups,dc=example,dc=com'
+
+   mc idp ldap policy attach myminio diagnostics \
+     --group='cn=engineering,cn=groups,dc=example,dc=com'
 
 - MinIO would assign any authenticating user with membership in the
   ``cn=ops,cn=groups,dc=example,dc=com`` AD/LDAP group the

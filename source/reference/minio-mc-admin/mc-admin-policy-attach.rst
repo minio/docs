@@ -55,6 +55,13 @@ Exactly one :mc-cmd:`~mc admin policy attach --user` or one :mc-cmd:`~mc admin p
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
+.. important::
+
+   This command is intended for managing policy associations for :ref:`MinIO-managed <minio-users>` users only.
+
+   For attaching policies to OpenID-managed users, see :ref:`minio-external-identity-management-openid`.
+
+   For attaching policies to Active Directory/LDAP users or groups, use :mc-cmd:`mc idp ldap policy attach`.
 
 Parameters
 ~~~~~~~~~~
