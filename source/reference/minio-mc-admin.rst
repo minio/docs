@@ -120,11 +120,6 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-service-desc
           :end-before: end-mc-admin-service-desc
 
-   * - :mc-cmd:`mc admin top`
-     - .. include:: /reference/minio-mc-admin/mc-admin-top.rst
-          :start-after: start-mc-admin-top-desc
-          :end-before: end-mc-admin-top-desc
-
    * - :mc-cmd:`mc admin trace`
      - .. include:: /reference/minio-mc-admin/mc-admin-trace.rst
           :start-after: start-mc-admin-trace-desc
@@ -212,7 +207,6 @@ See :ref:`minio-mc-global-options`.
    /reference/minio-mc-admin/mc-admin-rebalance
    /reference/minio-mc-admin/mc-admin-replicate
    /reference/minio-mc-admin/mc-admin-service
-   /reference/minio-mc-admin/mc-admin-top
    /reference/minio-mc-admin/mc-admin-trace
    /reference/minio-mc-admin/mc-admin-update
    /reference/minio-mc-admin/mc-admin-user

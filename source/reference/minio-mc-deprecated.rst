@@ -27,10 +27,6 @@ Table of Deprecated Commands
      - Replacement Command
      - Version of Change
 
-   * - ``mc replicate diff``
-     - :mc-cmd:`mc replicate backlog`
-     - mc RELEASE.2023-07-18T21-05-38Z
-
    * - ``mc ilm add``
      - :mc-cmd:`mc ilm rule add`
      - mc RELEASE.2022-12-24T15-21-38Z
@@ -55,6 +51,10 @@ Table of Deprecated Commands
      - :mc-cmd:`mc ilm rule rm`
      - mc RELEASE.2022-12-24T15-21-38Z
 
+   * - ``mc replicate diff``
+     - :mc-cmd:`mc replicate backlog`
+     - mc RELEASE.2023-07-18T21-05-38Z
+
 
 Table of Deprecated Admin Commands
 ----------------------------------
@@ -67,6 +67,26 @@ Table of Deprecated Admin Commands
    * - Deprecated Command
      - Replacement Command
      - Version of Change
+
+   * - ``mc admin bucket remote add``
+     - :mc-cmd:`mc replicate add`
+     - mc RELEASE.2022-12-24T15-21-38Z
+
+   * - ``mc admin bucket remote ls``
+     - :mc-cmd:`mc replicate ls`
+     - mc RELEASE.2022-12-24T15-21-38Z
+
+   * - ``mc admin bucket remote rm``
+     - :mc-cmd:`mc replicate rm`
+     - mc RELEASE.2022-12-24T15-21-38Z
+
+   * - ``mc admin bucket remote update``
+     - :mc-cmd:`mc replicate update`
+     - mc RELEASE.2022-12-24T15-21-38Z
+
+   * - ``mc admin bucket quota``
+     - :mc-cmd:`mc quota clear`, :mc-cmd:`mc quota info`, :mc-cmd:`mc quota set`
+     - mc RELEASE.2022-12-13T00-23-28Z
 
    * - ``mc admin idp ldap add``
      - :mc-cmd:`mc idp ldap add`
@@ -168,26 +188,9 @@ Table of Deprecated Admin Commands
      - :mc:`mc ilm tier ls`
      - mc RELEASE.2022-12-24T15-21-38Z
 
-   * - ``mc admin bucket remote add``
-     - :mc-cmd:`mc replicate add`
-     - mc RELEASE.2022-12-24T15-21-38Z
-
-   * - ``mc admin bucket remote rm``
-     - :mc-cmd:`mc replicate rm`
-     - mc RELEASE.2022-12-24T15-21-38Z
-
-   * - ``mc admin bucket remote ls``
-     - :mc-cmd:`mc replicate ls`
-     - mc RELEASE.2022-12-24T15-21-38Z
-
-   * - ``mc admin bucket remote update``
-     - :mc-cmd:`mc replicate update`
-     - mc RELEASE.2022-12-24T15-21-38Z
-
-   * - ``mc admin bucket quota``
-     - :mc-cmd:`mc quota clear`, :mc-cmd:`mc quota info`, :mc-cmd:`mc quota set`
-     - mc RELEASE.2022-12-13T00-23-28Z
-
+   * - ``mc admin top``
+     - :mc:`mc support top`
+     - mc RELEASE.2022-08-11T00-30-48Z
 
 .. toctree::
    :titlesonly:
@@ -199,9 +202,10 @@ Table of Deprecated Admin Commands
    /reference/deprecated/mc-ilm-import
    /reference/deprecated/mc-ilm-ls
    /reference/deprecated/mc-ilm-rm
+   /reference/deprecated/mc-admin-bucket-quota
    /reference/deprecated/mc-admin-idp-ldap
    /reference/deprecated/mc-admin-idp-ldap-policy
    /reference/deprecated/mc-admin-idp-openid
-   /reference/deprecated/mc-admin-tier
-   /reference/deprecated/mc-admin-bucket-quota
    /reference/deprecated/mc-admin-speedtest
+   /reference/deprecated/mc-admin-tier
+   /reference/deprecated/mc-admin-top

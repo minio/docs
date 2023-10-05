@@ -12,9 +12,7 @@
 
 .. versionchanged:: RELEASE.2022-07-24T02-25-13Z
 
-.. important:: 
-
-   The ``mc admin speedtest`` function has moved to the :mc:`mc support perf` command.
+   ``mc admin speedtest`` replaced by :mc:`mc support perf`.
 
 Description
 -----------
