@@ -57,7 +57,7 @@ Exactly one :mc-cmd:`~mc admin policy attach --user` or one :mc-cmd:`~mc admin p
 
 .. important::
 
-   This command is intended for use managing policy associations for :ref:`MinIO-managed <minio-users>` users only.
+   This command is intended for managing policy associations for :ref:`MinIO-managed <minio-users>` users only.
 
    For attaching policies to OpenID-managed users, see :ref:`minio-external-identity-management-openid`.
 

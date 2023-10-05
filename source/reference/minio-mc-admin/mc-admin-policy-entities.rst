@@ -59,7 +59,7 @@ For example, you can list all of the users and groups attached to a policy or li
 
 .. important::
 
-   This command is intended for use managing policy associations for :ref:`MinIO-managed <minio-users>` users only.
+   This command is intended for managing policy associations for :ref:`MinIO-managed <minio-users>` users only.
 
    For managing policies to OpenID-managed users, see :ref:`minio-external-identity-management-openid`.
 
