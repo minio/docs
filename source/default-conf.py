@@ -196,10 +196,11 @@ images_config = {
    'override_image_directive' : True
 }
 
-# sphinx-reredirects
-# `.rst` assumed in the rules
+# sphinx-reredirects redirect rules
+# `.rst` for source assumed in the rules
+# `.html` for target must be included
 redirects = {
-    "reference/minio-mc-admin/mc-admin-top": "reference/deprecated/mc-admin-top"
+    "reference/minio-mc-admin/mc-admin-top": "../deprecated/mc-admin-top.html"
 }
 
 
