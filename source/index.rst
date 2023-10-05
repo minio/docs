@@ -209,6 +209,7 @@ Any file uploaded to ``play`` should be considered public and non-protected.
       MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
       Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
       /reference/kubectl-minio-plugin
+      /reference/operator-crd
 
 .. toctree::
    :titlesonly:
