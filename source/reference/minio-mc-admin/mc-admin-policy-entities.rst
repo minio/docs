@@ -57,6 +57,13 @@ For example, you can list all of the users and groups attached to a policy or li
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
+.. important::
+
+   This command is intended for use managing policy associations for :ref:`MinIO-managed <minio-users>` users only.
+
+   For managing policies to OpenID-managed users, see :ref:`minio-external-identity-management-openid`.
+
+   For viewing policies for Active Directory/LDAP users or groups, use :mc-cmd:`mc idp ldap policy entities`.
 
 Parameters
 ~~~~~~~~~~
