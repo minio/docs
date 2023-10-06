@@ -47,7 +47,7 @@ runtime configuration settings.
 
       MinIO supports specifying the :mc:`minio server` log HTTP webhook endpoint
       and associated configuration settings using :ref:`environment variables
-      <minio-sever-envvar-logging-regular>`.
+      <minio-server-envvar-logging-regular>`.
 
       The following example code sets *all* environment variables related to
       configuring a log HTTP webhook endpoint. The minimum *required* variables
@@ -172,7 +172,7 @@ settings:
 
       MinIO supports specifying the audit log HTTP webhook endpoint and
       associated configuration settings using :ref:`environment variables
-      <minio-sever-envvar-logging-audit>`.
+      <minio-server-envvar-logging-audit>`.
 
       The following example code sets *all* environment variables related to
       configuring a audit log HTTP webhook endpoint. The minimum *required*
