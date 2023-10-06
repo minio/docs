@@ -23,7 +23,6 @@ Checklists:
 - :ref:`Hardware Checklist <minio-hardware-checklist>`
 - :ref:`Security Checklist <minio-security-checklist>`
 - :ref:`Software Checklist <minio-software-checklists>`
-- :ref:`Thresholds and Limits <minio-server-limits>`
 
 .. toctree::
    :titlesonly:
