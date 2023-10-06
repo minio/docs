@@ -43,6 +43,7 @@ extensions = [
     'myst_parser',
     'sphinx_design',
     'sphinx.ext.intersphinx',
+    'sphinx_reredirects',
 ]
 
 # -- External Links
@@ -194,6 +195,14 @@ copybutton_selector = "div.copyable pre"
 images_config = { 
    'override_image_directive' : True
 }
+
+# sphinx-reredirects redirect rules
+# `.rst` for source assumed in the rules
+# `.html` for target must be included
+redirects = {
+    "reference/minio-mc-admin/mc-admin-top": "../deprecated/mc-admin-top.html"
+}
+
 
 # -- Options for HTML output -------------------------------------------------
 
