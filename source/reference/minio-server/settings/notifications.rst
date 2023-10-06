@@ -1,8 +1,8 @@
 .. _minio-server-envvar-notifications:
 
-==============================================
-Environment Variables for Bucket Notifications
-==============================================
+=================================
+Settings for Bucket Notifications
+=================================
 
 .. default-domain:: minio
 

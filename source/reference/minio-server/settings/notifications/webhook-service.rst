@@ -1,9 +1,9 @@
 .. _minio-server-envvar-bucket-notification-webhook-service:
 .. _minio-server-envvar-bucket-notification-webhook:
 
-============================================
-Settings for a Webhook Service Notifications
-============================================
+==========================================
+Settings for Webhook Service Notifications
+==========================================
 
 .. default-domain:: minio
 

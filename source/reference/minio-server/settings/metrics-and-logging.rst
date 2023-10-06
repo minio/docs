@@ -10,7 +10,7 @@ Environment Variables to Configure Metrics and Logging
    :local:
    :depth: 2
 
-These environment variables control behavior related to MinIO metrics and logging. 
+This page covers settings that control behavior related to MinIO metrics and logging. 
 See :ref:`minio-metrics-and-alerts` for more information.
 
 Prometheus Authentication
@@ -27,10 +27,8 @@ This environment variables controls how MinIO authenticates to Prometheus.
 
    - ``public`` MinIO does not require that scraping clients authenticate their requests.
 
-
-
-Environment Variables for Logging
----------------------------------
+Environment Variables
+---------------------
 
 These environment variables configure publishing regular :mc:`minio server` logs and audit logs to an HTTP webhook. 
 See :ref:`minio-logging` for more complete documentation.
@@ -424,8 +422,8 @@ The following section documents environment variables for configuring MinIO to p
    This environment variable corresponds with the :mc-conf:`audit_kafka.queue_size` configuration setting.
 
 
-Configuration Values for Logging
---------------------------------
+Configuration Values
+--------------------
 
 These environment variables configure publishing regular :mc:`minio server` logs and audit logs to an HTTP webhook. 
 See :ref:`minio-logging` for more complete documentation.
