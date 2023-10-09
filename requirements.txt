@@ -7,7 +7,7 @@ Sphinx-Substitution-Extensions == 2020.9.30.0
 sphinx-sitemap == 2.5.0
 sphinx-togglebutton === 0.3.2
 sphinxcontrib-images === 0.9.4
-sphinx_reredirect === 0.1.2
+sphinx_reredirects === 0.1.2
 myst-parser === 1.0.0
 linkify === 1.4
 linkify-it-py === 2.0.0
