@@ -371,3 +371,13 @@ figcaption {
       font-weight: bold;
    }
 }
+
+
+// ---------------------------------------
+// Fixing table issues from asciidoc -> md
+// ---------------------------------------
+
+table thead tr.header {
+   background-color: lightgray;
+   box-shadow: none;
+}

@@ -236,6 +236,9 @@ sync-minio-version:
 sync-sdks:
 	@(./sync-docs.sh)
 
+sync-operator-crd:
+	@(./sync-minio-operator-crd.sh)
+
 # Can probably safely remove this at some point
 sync-deps:
 # C++ and Rust repos do not have any releases yet.

@@ -9,7 +9,7 @@ MinIO uses [Sphinx](https://www.sphinx-doc.org/en/master/index.html) to generate
 - Any GNU/Linux Operating System, or macOS 12.3 or later.
 - python 3.10.x and python-pip
 - python3.10-venv
-- sphinx 4.3.2
+- sphinx 6.2.1
 - nodejs 14.5.0 or later
 - npm 16.19.1 or later
 - `git` or a git-compatible client
@@ -68,6 +68,27 @@ Does the following:
 
 1. Check that the `build/GITDIR/linux` folder exists
 2. Copies the contents of `build/GITDIR/linux/html/*` to `docs-staging/staging/GITDIR/linux`
+
+# Syncing Operator CRD Docs
+
+For importing the Operator CRD Docs specifically, you must have:
+
+- pandoc (latest stable)
+- asciidoc (latest stable)
+
+In addition to all other prerequisites.
+
+Run 
+
+```
+make sync-operator-crd
+```
+
+This downloads and converts the `tenant-crd.adoc` from the MinIO Operator github repository.
+It converts it to XML, then to markdown.
+Finally, it does some `sed` find/replace to tidy up the file for Sphinx ingest.
+
+You can run this when we have a new Operator release being documented, assuming there are changes to the CRD as part of that release.
 
 # License
 
