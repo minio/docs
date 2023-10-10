@@ -50,7 +50,6 @@ Syntax
                        [--cluster-domain]        \
                        [--console-image]         \
                        [--console-tls]           \
-                       [--default-console-image] \
                        [--default-kes-image]     \
                        [--default-minio-image]   \
                        [--image]                 \
