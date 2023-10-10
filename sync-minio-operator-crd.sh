@@ -9,9 +9,17 @@ function main() {
 
    # To make the include nicer, this strips out the top H1 and reorders all headers thereafter
 
-   sed -i 's%# API Reference%%g' source/includes/k8s/ext-tenant-crd.md
-   sed -i 's%minio.min.io/v2%Operator CRD v2 Reference%g' source/includes/k8s/ext-tenant-crd.md
-   sed -i 's%# % %g' source/includes/k8s/ext-tenant-crd.md
+   KNAME=$(uname -s)
+   case "${KNAME}" in
+   "Darwin")
+      sed -i '' 's%# API Reference%%g' source/includes/k8s/ext-tenant-crd.md
+      sed -i '' 's%minio.min.io/v2%Operator CRD v2 Reference%g' source/includes/k8s/ext-tenant-crd.md
+      sed -i '' 's%# % %g' source/includes/k8s/ext-tenant-crd.md;;
+   *)
+      sed -i 's%# API Reference%%g' source/includes/k8s/ext-tenant-crd.md
+      sed -i 's%minio.min.io/v2%Operator CRD v2 Reference%g' source/includes/k8s/ext-tenant-crd.md
+      sed -i 's%# % %g' source/includes/k8s/ext-tenant-crd.md;;
+   esac
 }
 
 main
