@@ -81,7 +81,7 @@ The command supports the following flags:
 .. mc-cmd:: --console-image
    :optional:
 
-   The image to use when deploying the :minio-git:`MinIO Console <console>` in Operator mode, where administrators can create and manage MinIO tenants using a Graphical User Interface.
+   The image to use when deploying the :minio-git:`Operator Console <operator>` in Operator mode, where administrators can create and manage MinIO tenants using a Graphical User Interface.
    Defaults to the `version bundled in variable DefaultOperatorImage for the matching Operator release <https://github.com/minio/operator/blob/master/kubectl-minio/cmd/helpers/constants.go>`__.
 
 .. mc-cmd:: --console-tls
