@@ -14,10 +14,12 @@ function main() {
    "Darwin")
       sed -i '' 's%# API Reference%%g' source/includes/k8s/ext-tenant-crd.md
       sed -i '' 's%minio.min.io/v2%Operator CRD v2 Reference%g' source/includes/k8s/ext-tenant-crd.md
+      sed -i '' 's%k8s-api-github-com-minio-operator-pkg-apis-minio-min-io-v2-%%g' source/includes/k8s/ext-tenant-crd.md
       sed -i '' 's%# % %g' source/includes/k8s/ext-tenant-crd.md;;
    *)
       sed -i 's%# API Reference%%g' source/includes/k8s/ext-tenant-crd.md
       sed -i 's%minio.min.io/v2%Operator CRD v2 Reference%g' source/includes/k8s/ext-tenant-crd.md
+      sed -i 's%k8s-api-github-com-minio-operator-pkg-apis-minio-min-io-v2-%%g' source/includes/k8s/ext-tenant-crd.md
       sed -i 's%# % %g' source/includes/k8s/ext-tenant-crd.md;;
    esac
 }
