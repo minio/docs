@@ -43,7 +43,6 @@ Additional environment variables include those to configure:
    :titlesonly:
    :hidden:
    
-   /reference/minio-server/settings/additional-settings
    /reference/minio-server/settings/console 
    /reference/minio-server/settings/core
    /reference/minio-server/settings/iam 
