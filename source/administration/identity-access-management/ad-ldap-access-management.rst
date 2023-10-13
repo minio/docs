@@ -66,7 +66,7 @@ Use either of the following methods to create a new access key:
 Mapping Policies to User DN
 ---------------------------
 
-The following commands use :mc-cmd:`mc idp ldap policy attach` to associate an existing MinIO :ref:`policy <minio-policy>` to an AD/LDAP User DN.
+The following commands use :mc:`mc idp ldap policy attach` to associate an existing MinIO :ref:`policy <minio-policy>` to an AD/LDAP User DN.
 
 .. code-block:: shell
 
@@ -91,7 +91,7 @@ The following commands use :mc-cmd:`mc idp ldap policy attach` to associate an e
 Mapping Policies to Group DN
 ----------------------------
 
-The following commands use :mc-cmd:`mc idp ldap policy attach` to associate an existing MinIO :ref:`policy <minio-policy>` to an AD/LDAP Group DN.
+The following commands use :mc:`mc idp ldap policy attach` to associate an existing MinIO :ref:`policy <minio-policy>` to an AD/LDAP Group DN.
 
 .. code-block:: shell
 

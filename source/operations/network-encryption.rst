@@ -15,7 +15,7 @@ MinIO supports Transport Layer Security (TLS) 1.2+ encryption of incoming and ou
 .. admonition:: SSL is Deprecated
    :class: note
 
-   TLS is the successor to Secure Socket Layer (SSL) encryption. 
+   TLS is the successor to Secure Socket Layer (SSL) encryption.
    SSL is fully `deprecated <https://tools.ietf.org/html/rfc7568>`__ as of June 30th, 2018.
 
 .. _minio-tls-user-generated:
@@ -30,8 +30,9 @@ Enabling TLS
    The TLS certificate generation process is as follows:
 
    - The Operator generates a Certificate Signing Request (CSR) associated to the Tenant.
-     The :abbr:`CSR (Certificate Signing Request)` includes the appropriate DNS SubjectAlternateNames (SAN) for the Tenant services and pods.
-     
+     The :abbr:`CSR (Certificate Signing Request)` includes the appropriate DNS Subject Alternate Names (SANs) for the Tenant services and pods.
+     If not using a wildcard SAN, the TLS certificate SAN **must** apply to the hostname for its parent node.
+
      The Operator then waits for :abbr:`CSR (Certificate Signing Request)` approval
 
    - The :abbr:`CSR (Certificate Signing Request)` waits pending approval.
@@ -49,15 +50,17 @@ Enabling TLS
 
 .. cond:: linux
 
-   The MinIO server searches the following directory for TLS keys and certificates:
+   By default, the MinIO server looks for the TLS keys and certificates for each node in the following directory:
 
    .. code-block:: shell
 
       ${HOME}/.minio/certs
 
    Where ``${HOME}`` is the home directory of the user running the MinIO Server process.
+   You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
 
-   For deployments started with a custom TLS directory :mc-cmd:`minio server --certs-dir`, use that directory instead of the defaults.
+   For deployments using :mc-cmd:`minio server --certs-dir` to set a custom TLS directory, use that directory instead of the default.
+   Also, if the user running the process does not have a home directory, you **must** specify a directory with ``--certs-dir``.
 
    Place the TLS certificates for the default domain (e.g. ``minio.example.net``) in the ``/certs`` directory, with the private key as ``private.key`` and public certificate as ``public.crt``.
 
@@ -69,15 +72,28 @@ Enabling TLS
         private.key
         public.crt
 
-   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for enabling TLS for evaluating MinIO with TLS enabled.
-   For example, the following command generates a self-signed certificate with a set of IP and DNS SANs associated to the MinIO Server hosts:
+   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for evaluating MinIO with TLS enabled.
+   For example, the following command generates a self-signed certificate with a set of IP and DNS Subject Alternate Names (SANs) associated to the MinIO Server hosts:
 
    .. code-block:: shell
 
       certgen -host "localhost,minio-*.example.net"
 
-   You can place the generated ``public.crt`` and ``private.key`` into the ``/.minio/certs`` directory to enable TLS for the MinIO deployment.
+   Place the generated ``public.crt`` and ``private.key`` into the ``/.minio/certs`` directory to enable TLS for the MinIO deployment.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
+
+   If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
+   You may also need to update URLs used by applications or clients.
+
+   Self-signed Certificates
+   ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   For self-signed and internally signed certs, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
+
+   .. code-block:: shell
+
+      ${HOME}/.minio/CAs
+        myCA.pem
 
 .. cond:: container
 
@@ -93,7 +109,7 @@ Enabling TLS
         private.key
         public.crt
 
-   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for enabling TLS for evaluating MinIO with TLS enabled.
+   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for evaluating MinIO with TLS enabled.
    For example, the following command generates a self-signed certificate with a set of IP and DNS SANs associated to the MinIO Server hosts:
 
    .. code-block:: shell
@@ -105,6 +121,19 @@ Enabling TLS
    Move the certificates to the local host machine path that the container mounts to its ``--certs-dir`` path.
    When the MinIO container starts, the server searches the specified location for certificates and uses them to enable TLS.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
+
+   If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
+   You may also need to update URLs used by applications or clients.
+
+   Self-signed Certificates
+   ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   For self-signed and internally signed certs, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
+
+   .. code-block:: shell
+
+      ${HOME}/.minio/CAs
+	myCA.pem
 
 .. cond:: macos
 
@@ -127,16 +156,30 @@ Enabling TLS
         public.crt
 
    Where ``${HOME}`` is the home directory of the user running the MinIO Server process.
+   You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
 
-   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for enabling TLS for evaluating MinIO with TLS enabled.
+   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for evaluating MinIO with TLS enabled.
    For example, the following command generates a self-signed certificate with a set of IP and DNS SANs associated to the MinIO Server hosts:
 
    .. code-block:: shell
 
       certgen -host "localhost,minio-*.example.net"
 
-   You can place the generated ``public.crt`` and ``private.key`` into the ``/.minio/certs`` directory to enable TLS for the MinIO deployment.
+   Place the generated ``public.crt`` and ``private.key`` into the ``/.minio/certs`` directory to enable TLS for the MinIO deployment.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
+
+   If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
+   You may also need to update URLs used by applications or clients.
+
+   Self-signed Certificates
+   ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   For self-signed and internally signed certs, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
+
+   .. code-block:: shell
+
+      ${HOME}/.minio/CAs
+        myCA.pem
 
 .. cond:: windows
 
@@ -144,7 +187,7 @@ Enabling TLS
 
    .. code-block:: shell
 
-      %%USERPROFILE%%\.minio\certs 
+      %%USERPROFILE%%\.minio\certs
 
    For deployments started with a custom TLS directory :mc-cmd:`minio server --certs-dir`, use that directory instead of the defaults.
 
@@ -153,22 +196,35 @@ Enabling TLS
    For example:
 
    .. code-block:: shell
-      
+
       %%USERPROFILE%%\.minio\certs
         private.key
         public.crt
 
    Where ``%%USERPROFILE%%`` is the location of the `User Profile folder <https://docs.microsoft.com/en-us/windows/deployment/usmt/usmt-recognized-environment-variables>`__ of the user running the MinIO Server process.
 
-   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for enabling TLS for evaluating MinIO with TLS enabled.
+   You can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates for evaluating MinIO with TLS enabled.
    For example, the following command generates a self-signed certificate with a set of IP and DNS SANs associated to the MinIO Server hosts:
 
    .. code-block:: shell
 
       certgen.exe -host "localhost,minio-*.example.net"
 
-   You can place the generated ``public.crt`` and ``private.key`` into the ``\.minio\certs`` directory to enable TLS for the MinIO deployment.
+   Place the generated ``public.crt`` and ``private.key`` into the ``\.minio\certs`` directory to enable TLS for the MinIO deployment.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
+
+   If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
+   You may also need to update URLs used by applications or clients.
+
+   Self-signed Certificates
+   ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   For self-signed and internally signed certs, place the appropriate CA certificate in a ``%%USERPROFILE%%\.minio\CAs`` directory:
+
+   .. code-block:: shell
+
+      %%USERPROFILE%%\.minio\certs
+        myCA.pem
 
 
 Multiple Domain-Based TLS Certificates
@@ -211,8 +267,9 @@ Multiple Domain-Based TLS Certificates
           private.key
           public.crt
 
-   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SAN), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
+   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SANs), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
    Using a TLS certificate per hostname better protects each individual hostname from discovery.
+   The individual TLS certificate SANs **must** apply to the hostname for their respective parent node.
 
    If the client-specified hostname or IP address does not match any of the configured TLS certificates, the connection typically fails with a certificate validation error.
 
@@ -253,11 +310,25 @@ Multiple Domain-Based TLS Certificates
    MinIO serves clients connecting to the container using a supported hostname with the associated certificates.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
 
-   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SAN), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
+   If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
+   You may also need to update URLs used by applications or clients.
+
+   Self-signed Certificates
+   ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   For self-signed and internally signed certs, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
+
+   .. code-block:: shell
+
+      ${HOME}/.minio/CAs
+        myCA.pem
+
+   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SANs), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
    Using one TLS certificate per hostname better protects each individual hostname from discovery.
+   The individual TLS certificate SANs **must** apply to the hostname for their respective parent node.
 
    If the client-specified hostname or IP address does not match any of the configured TLS certificates, the connection typically fails with a certificate validation error.
- 
+
 .. cond:: macos
 
    The MinIO server supports multiple TLS certificates, where the server uses `Server Name Indication (SNI) <https://en.wikipedia.org/wiki/Server_Name_Indication>`__ to identify which certificate to use when responding to a client request.
@@ -287,8 +358,9 @@ Multiple Domain-Based TLS Certificates
           private.key
           public.crt
 
-   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SAN), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
+   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SANs), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
    Using a TLS certificate per hostname better protects each individual hostname from discovery.
+   The individual TLS certificate SANs **must** apply to the hostname for their respective parent node.
 
    If the client-specified hostname or IP address does not match any of the configured TLS certificates, the connection typically fails with a certificate validation error.
 
@@ -321,8 +393,9 @@ Multiple Domain-Based TLS Certificates
           private.key
           public.crt
 
-   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SAN), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
+   While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SANs), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
    Using a TLS certificate per hostname better protects each individual hostname from discovery.
+   The individual TLS certificate SANs **must** apply to the hostname for their respective parent node.
 
    If the client-specified hostname or IP address does not match any of the configured TLS certificates, the connection typically fails with a certificate validation error.
 
@@ -341,16 +414,16 @@ MinIO supports the following TLS 1.2 and 1.3 cipher suites as supported by `Go <
 
       - ``TLS_CHACHA20_POLY1305_SHA256`` :octicon:`star-fill`
       - ``TLS_AES_128_GCM_SHA256``
-      - ``TLS_AES_256_GCM_SHA384`` 
+      - ``TLS_AES_256_GCM_SHA384``
 
    .. tab-item:: TLS 1.2
 
       - ``TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305`` :octicon:`star-fill`
       - ``TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`` :octicon:`star-fill`
       - ``TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`` :octicon:`star-fill`
-      - ``TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305`` 
+      - ``TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305``
       - ``TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256``
-      - ``TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384``      
+      - ``TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384``
 
 .. _minio-TLS-third-party-ca:
 
@@ -360,10 +433,10 @@ Third-Party Certificate Authorities
 .. cond:: k8s
 
    The MinIO Kubernetes Operator can automatically attach third-party Certificate Authorities when :ref:`deploying <minio-k8s-deploy-minio-tenant-security>` or :ref:`modifying <minio-k8s-modify-minio-tenant-security>` a MinIO Tenant.
-   
+
    You can add, update, or remove CAs from the tenant at any time.
    You must restart the MinIO Tenant for the changes to the configured CAs to apply.
-   
+
    The Operator places the specified CAs on each MinIO Server pod such that all pods have a consistent set of trusted CAs. 
 
    If the MinIO Server cannot match an incoming client's TLS certificate issuer against any of the available CAs, the server rejects the connection as invalid.
@@ -379,10 +452,11 @@ Third-Party Certificate Authorities
       ${HOME}/.minio/certs/CAs
 
    Where ``${HOME}`` is the home directory of the user running the MinIO Server process.
+   You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
 
    For deployments started with a custom TLS directory :mc-cmd:`minio server --certs-dir`, the server searches in the ``/CAs`` path at that specified directory.
 
-   Place the certificate file for each CA into the ``/CAs`` subdirectory. 
+   Place the certificate file for each CA into the ``/CAs`` subdirectory.
    Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.
    If the MinIO Server cannot match an incoming client's TLS certificate issuer against any of the available CAs, the server rejects the connection as invalid.
 
@@ -402,7 +476,7 @@ Third-Party Certificate Authorities
         /CAs
           my-ca.crt
 
-   Place the certificate file for each CA into the ``/CAs`` subdirectory. 
+   Place the certificate file for each CA into the ``/CAs`` subdirectory.
    Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.
    If the MinIO Server cannot match an incoming client's TLS certificate issuer against any of the available CAs, the server rejects the connection as invalid.
 
@@ -417,10 +491,11 @@ Third-Party Certificate Authorities
       ${HOME}/.minio/certs/CAs
 
    Where ``${HOME}`` is the home directory of the user running the MinIO Server process.
+   You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
 
    For deployments started with a custom TLS directory :mc-cmd:`minio server --certs-dir`, the server searches in the ``/certs/CAs`` path at that specified directory.
 
-   Place the certificate file for each CA into the ``/CAs`` subdirectory. 
+   Place the certificate file for each CA into the ``/CAs`` subdirectory.
    Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.
    If the MinIO Server cannot match an incoming client's TLS certificate issuer against any of the available CAs, the server rejects the connection as invalid.
 
@@ -438,6 +513,6 @@ Third-Party Certificate Authorities
 
    For deployments started with a custom TLS directory :mc-cmd:`minio server --certs-dir`, the server searches in the ``\CAs`` path at that specified directory.
 
-   Place the certificate file for each CA into the ``/CAs`` subdirectory. 
+   Place the certificate file for each CA into the ``/CAs`` subdirectory.
    Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.
    If the MinIO Server cannot match an incoming client's TLS certificate issuer against any of the available CAs, the server rejects the connection as invalid.
