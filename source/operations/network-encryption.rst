@@ -23,6 +23,17 @@ MinIO supports Transport Layer Security (TLS) 1.2+ encryption of incoming and ou
 Enabling TLS
 ------------
 
+.. cond:: not k8s
+
+   The sections below describe how to enable TLS for MinIO.
+   You may use TLS certificates from a well-known Certificate Authority, an internal or private CA, or self-signed certs.
+
+   Before beginning, note these important points:
+
+   - Configure TLS on each node.
+   - Ensure certs are readable by the user who runs the MinIO Server process.
+   - Update ``MINIO_VOLUMES`` and any needed services or apps to use an ``HTTPS`` URL.
+
 .. cond:: k8s
 
    For Kubernetes clusters with a valid :ref:`TLS Cluster Signing Certificate <minio-k8s-deploy-operator-tls>`,
@@ -31,7 +42,6 @@ Enabling TLS
 
    - The Operator generates a Certificate Signing Request (CSR) associated to the Tenant.
      The :abbr:`CSR (Certificate Signing Request)` includes the appropriate DNS Subject Alternate Names (SANs) for the Tenant services and pods.
-     If not using a wildcard SAN, the TLS certificate SAN **must** apply to the hostname for its parent node.
 
      The Operator then waits for :abbr:`CSR (Certificate Signing Request)` approval
 
@@ -47,6 +57,13 @@ Enabling TLS
    By default, Kubernetes places a certificate bundle on each pod at ``/var/run/secrets/kubernetes.io/serviceaccount/ca.crt``.
    This CA bundle should include the cluster or root CA used to sign the MinIO Tenant TLS certificates.
    Other applications deployed within the Kubernetes cluster can trust this cluster certificate to connect to a MinIO Tenant using the :kube-docs:`MinIO service DNS name <concepts/services-networking/dns-pod-service/>` (e.g. ``https://minio.minio-tenant-1.svc.cluster-domain.example:443``).
+
+   .. admonition:: Subject Alternative Name Certificates
+      :class: note
+
+      If you have a custom Subject Alternative Name (SAN) certificate that is *not* also a wildcard cert, the TLS certificate SAN **must** apply to the hostname for its parent node.
+      Without a wildcard, the SAN must match exactly to be able to connect to the tenant.
+
 
 .. cond:: linux
 
@@ -85,15 +102,6 @@ Enabling TLS
    If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
    You may also need to update URLs used by applications or clients.
 
-   Self-signed Certificates
-   ~~~~~~~~~~~~~~~~~~~~~~~~
-
-   For self-signed and internally signed certs, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
-
-   .. code-block:: shell
-
-      ${HOME}/.minio/CAs
-        myCA.pem
 
 .. cond:: container
 
@@ -125,15 +133,6 @@ Enabling TLS
    If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
    You may also need to update URLs used by applications or clients.
 
-   Self-signed Certificates
-   ~~~~~~~~~~~~~~~~~~~~~~~~
-
-   For self-signed and internally signed certs, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
-
-   .. code-block:: shell
-
-      ${HOME}/.minio/CAs
-	myCA.pem
 
 .. cond:: macos
 
@@ -171,15 +170,6 @@ Enabling TLS
    If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
    You may also need to update URLs used by applications or clients.
 
-   Self-signed Certificates
-   ~~~~~~~~~~~~~~~~~~~~~~~~
-
-   For self-signed and internally signed certs, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
-
-   .. code-block:: shell
-
-      ${HOME}/.minio/CAs
-        myCA.pem
 
 .. cond:: windows
 
@@ -215,16 +205,6 @@ Enabling TLS
 
    If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
    You may also need to update URLs used by applications or clients.
-
-   Self-signed Certificates
-   ~~~~~~~~~~~~~~~~~~~~~~~~
-
-   For self-signed and internally signed certs, place the appropriate CA certificate in a ``%%USERPROFILE%%\.minio\CAs`` directory:
-
-   .. code-block:: shell
-
-      %%USERPROFILE%%\.minio\certs
-        myCA.pem
 
 
 Multiple Domain-Based TLS Certificates
@@ -309,19 +289,6 @@ Multiple Domain-Based TLS Certificates
    When the MinIO container starts, the server searches the mounted location ``/opts/certs`` for certificates and  uses them enable TLS.
    MinIO serves clients connecting to the container using a supported hostname with the associated certificates.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
-
-   If you are reconfiguring an existing deployment that did not previously have TLS enabled, update ``MINIO_VOLUMES`` to specify ``https`` instead of ``http``.
-   You may also need to update URLs used by applications or clients.
-
-   Self-signed Certificates
-   ~~~~~~~~~~~~~~~~~~~~~~~~
-
-   For self-signed and internally signed certs, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
-
-   .. code-block:: shell
-
-      ${HOME}/.minio/CAs
-        myCA.pem
 
    While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SANs), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
    Using one TLS certificate per hostname better protects each individual hostname from discovery.
@@ -516,3 +483,19 @@ Third-Party Certificate Authorities
    Place the certificate file for each CA into the ``/CAs`` subdirectory.
    Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.
    If the MinIO Server cannot match an incoming client's TLS certificate issuer against any of the available CAs, the server rejects the connection as invalid.
+
+Self-signed, Internal, and Private Certificates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For certificates signed by a non-global Certificate Authority, place the appropriate CA certificate in a ``{HOME}/.minio/CAs`` directory:
+
+.. code-block:: shell
+
+   ${HOME}/.minio/CAs
+     myCA.crt
+
+For a self-signed certificate, the Certificate Authority is typically the private key used to sign the cert.
+
+For certificates signed by an internal, private, or other non-global Certificate Authority, use the same CA that signed the cert.
+A non-global CA must include the full chain of trust from the intermediate certificate to the root.
+
