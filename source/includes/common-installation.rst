@@ -120,7 +120,7 @@ user which runs the MinIO server process. The provided ``minio.service``
 file runs the process as ``minio-user``. The previous step includes instructions
 for creating this user with a home directory ``/home/minio-user``.
 
-- Place TLS certificates into ``/home/minio-user/.minio/certs``.
+- Place TLS certificates into ``/home/minio-user/.minio/certs`` on each host.
 
 - If *any* MinIO server or client uses certificates signed by an unknown
   Certificate Authority (self-signed or internal CA), you *must* place the CA
