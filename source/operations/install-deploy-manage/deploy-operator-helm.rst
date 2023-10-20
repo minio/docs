@@ -391,9 +391,9 @@ To deploy a Tenant with Helm:
       :substitutions:
 
       helm install \
-      --namespace Tenant-ns \
+      --namespace tenant-ns \
       --create-namespace \
-      Tenant-ns Tenant-|operator-version-stable|.tgz
+      tenant-ns tenant-|operator-version-stable|.tgz
 
    To deploy more than one Tenant, create a Helm chart with the details of the new Tenant and repeat the deployment steps.
    Redeploying the same chart updates the previously deployed Tenant.
@@ -405,7 +405,7 @@ To deploy a Tenant with Helm:
    .. code-block:: shell
       :class: copyable
 
-      kubectl --namespace Tenant-ns port-forward svc/myminio-console 9443:9443
+      kubectl --namespace tenant-ns port-forward svc/myminio-console 9443:9443
    
    .. note::
       
