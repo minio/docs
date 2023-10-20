@@ -56,7 +56,12 @@ Syntax
 
       The type of metrics to scrape.
 
-      Valid values are ``cluster``, ``node``, or ``bucket``.
+      Valid values are:
+
+      - ``bucket``
+      - ``cluster``
+      - ``node``
+      - ``resource``
 
       If not specified, the command returns cluster metrics.
 
