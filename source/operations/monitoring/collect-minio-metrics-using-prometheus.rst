@@ -127,6 +127,9 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
 
    .. tab-item:: Cluster
 
+      Cluster metrics also include node	metrics.
+      Adding a ``scrape_configs`` job for ``cluster`` covers both.
+
       .. code-block:: yaml
          :class: copyable
       
