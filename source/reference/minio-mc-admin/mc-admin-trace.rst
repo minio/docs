@@ -213,6 +213,11 @@ Syntax
 
    Returns calls matching the supplied request header.
 
+.. mc-cmd:: --request-query
+
+   Returns calls matching the supplied request query parameter.
+   This debug option should only be used at the direction of MinIO Support.
+
 .. mc-cmd:: --response-duration
 
    Trace calls with response duration greater than the specified value.
