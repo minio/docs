@@ -15,7 +15,7 @@ Monitoring and Alerting using Prometheus
    - `Monitoring with MinIO and Prometheus: Overview <https://youtu.be/A3vCDaFWNNs?ref=docs>`__
    - `Monitoring with MinIO and Prometheus: Lab <https://youtu.be/Oix9iXndSUY?ref=docs>`__
 
-MinIO publishes cluster, node, and bucket metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
+MinIO publishes cluster, node, bucket, and resource metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
 The procedure on this page documents the following:
 
 - Configuring a Prometheus service to scrape and display metrics from a MinIO deployment
@@ -75,6 +75,20 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
       Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
+
+   .. tab-item:: Resources
+
+      .. versionadded:: RELEASE.2023-10-07T15-07-38Z
+
+      The following command scrapes metrics for resources on the MinIO Server.
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc admin prometheus generate ALIAS resource
+
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+
 The command returns output similar to the following:
 
 .. code-block:: yaml
@@ -113,10 +127,11 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
 
 .. tab-set::
 
-   .. tab-item:: Cluster metrics
+   .. tab-item:: Cluster
 
-      For server metrics:
-      
+      Cluster metrics aggregate node-level metrics and, where appropriate, attach labels to metrics for the originating node.
+      If you are already collecting ``cluster`` metrics, you do not need to add an additional ``scrape_configs`` job for ``node``.
+
       .. code-block:: yaml
          :class: copyable
       
@@ -131,7 +146,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               static_configs:
               - targets: [minio.example.net]
 
-   .. tab-item:: Bucket metrics:
+   .. tab-item:: Bucket
 
       .. code-block:: yaml
          :class: copyable
@@ -147,6 +162,21 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               static_configs:
               - targets: [minio.example.net]
 
+   .. tab-item:: Resource
+
+      .. code-block:: yaml
+         :class: copyable
+
+         global:
+            scrape_interval: 15s
+
+         scrape_configs:
+            - job_name: minio-job-resource
+              bearer_token: TOKEN
+              metrics_path: /minio/v2/metrics/resource
+              scheme: https
+              static_configs:
+              - targets: [minio.example.net]
 
 Start the Prometheus cluster using the configuration file:
 

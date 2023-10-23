@@ -56,7 +56,16 @@ Syntax
 
       The type of metrics to scrape.
 
-      Valid values are ``cluster``, ``node``, or ``bucket``.
+      .. versionchanged:: RELEASE.2023-10-07T15-07-38Z
+
+         ``resource`` metrics added
+
+      Valid values are:
+
+      - ``bucket``
+      - ``cluster``
+      - ``node``
+      - ``resource``
 
       If not specified, the command returns cluster metrics.
-
+      Cluster metrics also include node metrics.
