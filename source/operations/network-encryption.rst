@@ -67,17 +67,36 @@ Enabling TLS
 
 .. cond:: linux
 
-   By default, the MinIO server looks for the TLS keys and certificates for each node in the following directory:
+   The MinIO Server searches for TLS keys and certificates for each node and uses those credentials for enabling TLS. 
+   The search location depends on your MinIO configuration:
 
-   .. code-block:: shell
+   .. tab-set::
 
-      ${HOME}/.minio/certs
+      .. tab-item:: Default Path
 
-   Where ``${HOME}`` is the home directory of the user running the MinIO Server process.
-   You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
+         By default, the MinIO server looks for the TLS keys and certificates for each node in the following directory:
 
-   For deployments using :mc-cmd:`minio server --certs-dir` to set a custom TLS directory, use that directory instead of the default.
-   Also, if the user running the process does not have a home directory, you **must** specify a directory with ``--certs-dir``.
+         .. code-block:: shell
+
+            ${HOME}/.minio/certs
+
+         Where ``${HOME}`` is the home directory of the user running the MinIO Server process.
+         You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
+
+         For ``systemd`` managed deployments this must correspond to the ``USER`` running the MinIO process.
+         If that user has no home directory, use the :guilabel:`Custom Path` option instead.
+
+      .. tab-item:: Custom Path
+
+         You can specify a path for the MinIO server to search for certificates using the :mc-cmd:`minio server --certs-dir` or ``-c`` parameter.
+
+         For example, the following command fragment directs the MinIO process to use the ``/opt/minio/certs`` directory for TLS certificates.
+
+         .. code-block:: shell
+
+            minio server --certs-dir /opt/minio/certs ...
+
+         The user running the MinIO service *must* have read and write permissions to this directory.
 
    Place the TLS certificates for the default domain (e.g. ``minio.example.net``) in the ``/certs`` directory, with the private key as ``private.key`` and public certificate as ``public.crt``.
 
@@ -85,7 +104,7 @@ Enabling TLS
 
    .. code-block:: shell
 
-      ${HOME}/.minio/certs
+      /path/to/certs
         private.key
         public.crt
 
@@ -96,12 +115,11 @@ Enabling TLS
 
       certgen -host "localhost,minio-*.example.net"
 
-   Place the generated ``public.crt`` and ``private.key`` into the ``/.minio/certs`` directory to enable TLS for the MinIO deployment.
+   Place the generated ``public.crt`` and ``private.key`` into the ``/path/to/certs`` directory to enable TLS for the MinIO deployment.
    Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
 
    If you are reconfiguring an existing deployment that did not previously have TLS enabled, update :envvar:`MINIO_VOLUMES` to specify ``https`` instead of ``http``.
    You may also need to update URLs used by applications or clients.
-
 
 .. cond:: container
 
@@ -229,23 +247,44 @@ Multiple Domain-Based TLS Certificates
    - ``https://s3.example.net``
    - ``https://minio.internal-example.net``
 
-   Create a subfolder in ``/certs`` for each additional domain for which MinIO should present TLS certificates. 
+
+   Place the certificates in the ``/certs`` folder, creating a subfolder in ``/certs`` for each additional domain for which MinIO should present TLS certificates.
    While MinIO has no requirements for folder names, consider creating subfolders whose name matches the domain to improve human readability. 
    Place the TLS private and public key for that domain in the subfolder.
+ 
+   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs-dir` or ``--S``).
 
-   For example:
+   .. tab-set::
 
-   .. code-block:: shell
+      .. tab-item:: Default Certificate Path
 
-      ${HOME}/.minio/certs
-        private.key
-        public.crt
-        s3-example.net/
-          private.key
-          public.crt
-        internal-example.net/
-          private.key
-          public.crt
+         .. code-block:: shell
+
+            ${HOME}/.minio/certs
+            private.key
+            public.crt
+            s3-example.net/
+               private.key
+               public.crt
+            internal-example.net/
+               private.key
+               public.crt
+
+      .. tab-item:: Custom Certificate Path
+
+         The following example assumes the MinIO Server was started with ``--certs dir | --c /opt/minio/certs``:
+
+         .. code-block:: shell
+
+            /opt/minio/certs
+            private.key
+            public.crt
+            s3-example.net/
+               private.key
+               public.crt
+            internal-example.net/
+               private.key
+               public.crt
 
    While you can have a single TLS certificate that covers all hostnames with multiple Subject Alternative Names (SANs), this would reveal the ``internal-example.net`` and ``s3-example.net`` hostnames to any client which inspects the server certificate.
    Using a TLS certificate per hostname better protects each individual hostname from discovery.
@@ -412,16 +451,24 @@ Third-Party Certificate Authorities
 
    The MinIO Server validates the TLS certificate presented by each connecting client against the host system's trusted root certificate store.
 
-   You can place additional trusted Certificate Authority files in the following directory:
+   Place the CA certificates in the ``/certs/CAs`` folder.
+   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs dir` or ``--S``)
 
-   .. code-block:: shell
+   .. tab-set::
 
-      ${HOME}/.minio/certs/CAs
+      .. tab-item:: Default Certificate Path
 
-   Where ``${HOME}`` is the home directory of the user running the MinIO Server process.
-   You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
+         .. code-block:: shell
 
-   For deployments started with a custom TLS directory :mc-cmd:`minio server --certs-dir`, the server searches in the ``/CAs`` path at that specified directory.
+            mv myCA.crt ${HOME}/certs/CAs
+
+      .. tab-item:: Custom Certificate Path
+
+         The following example assumes the MinIO Server was started with ``--certs dir | --c /opt/minio/certs``:
+
+         .. code-block:: shell
+
+            mv myCA.crt /opt/minio/certs/CAs/
 
    Place the certificate file for each CA into the ``/CAs`` subdirectory.
    Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.
@@ -468,7 +515,7 @@ Third-Party Certificate Authorities
 
 .. cond:: windows
 
-   The MinIO Server validates the TLS certificate presented by each connecting client against the host system's trusted root certificate store.
+   The MinIO Server validates t]he TLS certificate presented by each connecting client against the host system's trusted root certificate store.
 
    You can place additional trusted Certificate Authority files in the following directory:
 
@@ -484,48 +531,70 @@ Third-Party Certificate Authorities
    Ensure all hosts in the MinIO deployment have a consistent set of trusted CAs in that directory.
    If the MinIO Server cannot match an incoming client's TLS certificate issuer against any of the available CAs, the server rejects the connection as invalid.
 
-Self-signed, Internal, and Private Certificates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Certificates
+------------------------------------------------------------------------------------------
 
 .. cond:: not k8s
 
-   For certificates signed by a non-global Certificate Authority, place the appropriate `X.509 <https://en.wikipedia.org/wiki/X.509>`__ CA certificate in a ``{HOME}/.minio/CAs`` directory:
+   If using Certificates signed by a non-global or non-public Certificate Authority, *or* if using a global CA that requires the use of intermediate certificates, you must provide those CAs to the MinIO Server.
+   If the MinIO server does not have the necessary CAs, it may return warnings or errors related to TLS validation when connecting to other services.
 
-   .. code-block:: shell
+   Place the CA certificates in the ``/certs/CAs`` folder.
+   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs dir` or ``--c``)
 
-      ${HOME}/.minio/CAs
-        myCA.crt
+   .. tab-set::
+
+      .. tab-item:: Default Certificate Path
+
+         .. code-block:: shell
+
+            mv myCA.crt ${HOME}/certs/CAs
+
+      .. tab-item:: Custom Certificate Path
+
+         The following example assumes the MinIO Server was started with ``--certs dir | --c /opt/minio/certs``:
+
+         .. code-block:: shell
+
+            mv myCA.crt /opt/minio/certs/CAs/
 
    For a self-signed certificate, the Certificate Authority is typically the private key used to sign the cert.
 
    For certificates signed by an internal, private, or other non-global Certificate Authority, use the same CA that signed the cert.
    A non-global CA must include the full chain of trust from the intermediate certificate to the root.
 
-   If the provided file is not an X.509 cert, MinIO ignores the file and does not enable TLS.
+   If the provided file is not an X.509 certificate, MinIO ignores it and may return errors for validating certificates signed by that CA.
 
 .. cond:: k8s
 
-   To use certificates generated by a private Certificate Authority, configure MinIO Operator to trust the TLS connections to the tenants:
+   If deploying MinIO Tenants with certificates minted by a non-global or non-public Certificate Authority, *or* if using a global CA that requires the use of intermediate certificates, you must provide those CAs to the Operator to ensure it can trust those certificates.
 
-   #. Create a secret named ``operator-ca-tls`` in the ``minio-operator`` namespace if one does not already exist.
-   #. Add a ``ca.crt`` key to this secret with the public certificate for your internal CA.
-      If ``operator-ca-tls`` already contains external CAs, append the new CA to the existing secret.
-   #. Add the secret in an ``externalCaCertSecret`` property in the :ref:`Tenant YAML configuration <create-tenant-cli-determine-additional-options>`:
+   The Operator may log warnings related to TLS cert validation for Tenants deployed with untrusted certificates.
+
+   The following procedure attaches a secret containing the ``public.crt`` of the Certificate Authority to the MinIO Operator.
+   You can specify multiple CAs in a single certificate, as long as you maintain the ``BEGIN`` and ``END`` delimiters as-is.
+
+   1. Create the ``operator-ca-tls`` secret
+
+      The following creates a Kubernetes secret in the MinIO Operator namespace (``minio-operator``).
 
       .. code-block:: shell
+         :class: copyable
 
-	 spec:
-	   externalCaCertSecret:
-	   - name: operator-ca-tls
-	     type: kubernetes.io/tls
+         kubectl create secret generic operator-ca-tls \
+            --from-file=public.crt -n minio-operator
 
-   Once the secret is created, Operator creates a copy in each tenant namespace and mounts its certificates in the tenant pods at ``/tmp/certs/CAs/``.
-   
-   If the ``operator-ca-tls`` secret is updated, Operator replicates the new secret to the corresponding copies in the tenant namespaces.
-   Operator replicates changes in the following files:
+      The ``public.crt`` file must correspond to a valid TLS certificate containing one or more CA definitions.
 
-   - ``public.crt``
-   - ``tls.crt``
-   - ``ca.crt``
+   2. Restart the Operator
+
+      Once created, you must restart the Operator to load the new CAs:
+
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl rollout restart deployments.apps/minio-operator -n minio-operator
+
+
 
    

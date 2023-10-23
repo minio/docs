@@ -18,7 +18,6 @@ Helm is a tool for automating the deployment of applications to Kubernetes clust
 A `Helm chart <https://helm.sh/docs/topics/charts/>`__ is a set of YAML files, templates, and other files that define the deployment details.
 The following procedure uses a Helm Chart to install the :ref:`MinIO Kubernetes Operator <minio-operator-installation>` to a Kubernetes cluster.
 
-
 Prerequisites
 -------------
 
@@ -35,27 +34,172 @@ For more about Operator installation requirements, including supported Kubernete
 This procedure assumes familiarity the with referenced Kubernetes concepts and utilities.
 While this documentation may provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
+.. _minio-k8s-deploy-operator-helm-repo:
 
-Procedure
----------
+Install the MinIO Operator using Helm Charts
+--------------------------------------------
 
+The following procedure installs the Operator using the MinIO Operator Chart Repository.
+This method supports a simplified installation path compared to the :ref:`local chart installation <minio-k8s-deploy-operator-helm-local>`.
+You can modify the Operator deployment after installation.
 
-Install Operator
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. important::
+
+   Do not use ``kubectl krew`` or similar methods to update or manage the MinIO Operator installation.
+   If you use Helm charts to install the Operator, you must use Helm to manage that installation.
+
+#. Add the MinIO Operator Repo to Helm
+
+   MinIO maintains a Helm-compatible repository at https://operator.min.io.
+   Add this repository to Helm:
+
+   .. code-block:: shell
+      :class: copyable
+
+      helm repo add minio-operator https://operator.min.io
+
+   You can validate the repo contents using ``helm search``:
+
+   .. code-block:: shell
+      :class: copyable
+
+      helm search repo minio-operator
+
+   The response should resemble the following:
+
+   .. code-block:: shell
+      :class: copyable
+
+      NAME                            CHART VERSION   APP VERSION     DESCRIPTION                    
+      minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
+      minio-operator/operator         5.0.10          v5.0.10         A Helm chart for MinIO Operator
+      minio-operator/tenant           5.0.10          v5.0.10         A Helm chart for MinIO Operator
+
+   The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
+
+#. Install the Operator
+
+   Run the ``helm install`` command to install the Operator:
+
+   .. code-block:: shell
+      :class: copyable
+
+      helm install 
+        --namespace minio-operator \
+        --create-namespace \
+        operator minio-operator/operator
+      
+#. Verify the Operator installation
+
+   Check the contents of the specified namespace (``minio-operator``) to ensure all pods and services have started successfully.
+
+   .. code-block:: shell
+      :class: copyable
+
+      kubectl get all -n minio-operator
+
+   The response should resemble the following:
+
+   .. code-block:: shell
+
+      NAME                                  READY   STATUS    RESTARTS   AGE
+      pod/console-68d955874d-vxlzm          1/1     Running   0          25h
+      pod/minio-operator-699f797b8b-th5bk   1/1     Running   0          25h
+      pod/minio-operator-699f797b8b-nkrn9   1/1     Running   0          25h
+
+      NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+      service/console    ClusterIP   10.43.195.224   <none>        9090/TCP,9443/TCP   25h
+      service/operator   ClusterIP   10.43.44.204    <none>        4221/TCP            25h
+      service/sts        ClusterIP   10.43.70.4      <none>        4223/TCP            25h
+
+      NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+      deployment.apps/console          1/1     1            1           25h
+      deployment.apps/minio-operator   2/2     2            2           25h
+
+      NAME                                        DESIRED   CURRENT   READY   AGE
+      replicaset.apps/console-68d955874d          1         1         1       25h
+      replicaset.apps/minio-operator-699f797b8b   2         2         2       25h
+
+#. (Optional) Enable NodePort Access to the Console
+
+   You can enable :kube-docs:`Node Port <concepts/services-networking/service/#type-nodeport>` access to the ``service/console`` service to allow simplified access to the MinIO Operator.
+   You can skip this step if you intend to configure the Operator Console service to use a Kubernetes Load Balancer, ingress, or similar control plane component that enables external access.
+
+   Edit the ``service/console`` and set the ``spec.ports[0].nodePort`` and ``spec.type`` fields as follows:
+
+   .. code-block:: yaml
+      
+      spec:
+        ports:
+        - name: http
+          port: 9090
+          protocol: TCP
+          targetPort: 9090
+          nodePort: 39090
+      type: NodePort
+   
+   You can attempt to connect to the MinIO Operator Console by specifying port ``39090`` on any of the worker nodes in the deployment.
+
+#. Retrieve the Console Access Token
+
+   The MinIO Operator uses a Java Web Token (JWT) saved as a Kuberentes Secret for controlling access to the Operator Console.
+
+   Use the following command to retrieve the JWT for login.
+   You must have permission within the Kubernetes cluster to read secrets:
+
+   .. code-block:: shell
+      :class: copyable
+
+      kubectl get secret/console-sa-secret -n minio-operator -o json | jq -r ".data.token" | base64 -d -
+
+   The output should resemble the following:
+
+   .. code-block:: shell
+
+      eyJhbGciOiJSUzI1NiIsImtpZCI6IlRtV2x3Z1RILVREaThhQm9iemFfLW95NHFHT0ZZOHFBRjlZalBRcWZiSDgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJtaW5pby1vcGVyYXRvciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJjb25zb2xlLXNhLXNlY3JldCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJjb25zb2xlLXNhIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiY2M1ZjEwYzktYzU1ZC00MjNiLTgxM2MtNmU5ZDY2ZGI5NDYyIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Om1pbmlvLW9wZXJhdG9yOmNvbnNvbGUtc2EifQ.F-Pt5nU9xaugjRksWAOTShBW_eNTf8UwXvLfGxEK6l3_41NYsLgvTg5m0hYLUiYr6v2HwkEu0XzqTJbPoeSrFds8BOjeiCoP2Lmw4tRPo9tSXhAq-_elWt83YpJl-zjUpna5nVSWJWXKgj1Iga-9gw-Q63UygEcyTJ9_AwCNU9T0HdPzqccS9XrEUdsXFQxR9RwZY4TGC8K7cD9sc_OmfEiuyilRgyC_gFRvtCQfFv1DP0GKyjMGo2ffu-2Tq2U7zK5epWdqmNSvbIa0ZRoPlPedZ6nYY935lNgTIIW1oykRYrgwZZiv4CzfTH2gPswjtPc5ICtDDRUjYEhdTq3gtw
+
+   If the output includes a trailing ``%`` make sure to omit it from the result.
+   
+#. Log into the MinIO Operator Console
+
+   If you configured the ``svc/console`` service for access through ingress, a cluster load balancer, you can access the Console using the configured hostname and port.
+
+   If you configured the service for access through NodePorts, specify the hostname of any worker node in the cluster with that port as ``HOSTNAME:NODEPORT`` to access the Console.
+
+   Alternatively, you can use ``kubectl port forward`` to temporary forward ports for the Console:
+   
+   .. code-block:: shell
+      :class: copyable
+
+      kubectl port-forward svc/console -n minio-operator 9090:9090
+
+   You can then use ``http://localhost:9090`` to access the MinIO Operator Console.
+
+   Once you access the Console, use the Console JWT to log in.
+
+You can now :ref:`deploy and manage MinIO Tenants using the Operator Console <deploy-minio-distributed>`.
+
+You can also :ref:`deploy a tenant using Helm Charts <deploy-tenant-helm>`.
+
+.. _minio-k8s-deploy-operator-helm-local:
+
+Install the MinIO Operator using Local Helm Charts
+--------------------------------------------------
+
+The following procedure installs the Operator using a local copy of the Helm Charts.
+This method may support easier pre-configuration of the Operator compared to the :ref:`repo-based installation <minio-k8s-deploy-operator-helm-repo>`
 
 #. Download the Helm charts
 
-   On your local host, download the Operator and Tenant Helm charts to a convenient directory:
+   On your local host, download the Operator Helm charts to a convenient directory:
 
    .. code-block:: shell
       :class: copyable
       :substitutions:
 
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/operator-|operator-version-stable|.tgz
-      curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/tenant-|operator-version-stable|.tgz
 
-   Each chart contains a ``values.yaml`` file you can customize to suit your needs.
-   For example, you may wish to change the MinIO root user credentials or the Tenant name.
+   The chart contains a ``values.yaml`` file you can customize to suit your needs.
    For more about customizations, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
   
 #. Deploy Operator
@@ -375,73 +519,6 @@ Install Operator
 
    Append the ``nodePort`` value to the externally-accessible IP address of a worker node in your Kubernetes cluster.
 
+You can now :ref:`deploy and manage MinIO Tenants using the Operator Console <deploy-minio-distributed>`.
 
-Deploy a Tenant
-~~~~~~~~~~~~~~~
-
-You can deploy a MinIO Tenant using either the :ref:`Operator Console <minio-operator-console>` or Helm.
-To deploy a Tenant with the Console, see :ref:`Deploy and Manage MinIO Tenants <minio-installation>`.
-
-To deploy a Tenant with Helm:
-
-#. The following Helm command creates a MinIO Tenant using the standard chart:
-
-   .. code-block:: shell
-      :class: copyable
-      :substitutions:
-
-      helm install \
-      --namespace tenant-ns \
-      --create-namespace \
-      tenant-ns tenant-|operator-version-stable|.tgz
-
-   To deploy more than one Tenant, create a Helm chart with the details of the new Tenant and repeat the deployment steps.
-   Redeploying the same chart updates the previously deployed Tenant.
-
-#. Expose the Tenant Console port
-
-   Use ``kubectl port-forward`` to temporarily forward traffic from the MinIO pod to your local machine:
-
-   .. code-block:: shell
-      :class: copyable
-
-      kubectl --namespace tenant-ns port-forward svc/myminio-console 9443:9443
-   
-   .. note::
-      
-      To configure long term access to the pod, configure :kube-docs:`Ingress <concepts/services-networking/ingress/>` or similar network control components within Kubernetes to route traffic to and from the pod.
-      Configuring Ingress is out of the scope for this documentation.
-
-#. Login to the MinIO Console
-
-   Access the Tenant's :ref:`minio-console` by navigating to ``http://localhost:9443`` in a browser.
-   Log in to the Console with the default credentials ``myminio | minio123``.
-
-#. Expose the Tenant MinIO port
-
-   To test the MinIO Client :mc:`mc` from your local machine, forward the MinIO port and create an alias.
-
-   * Forward the Tenant's MinIO port:
-
-     .. code-block:: shell
-        :class: copyable
-
-        kubectl port-forward svc/myminio-hl 9000 -n tenant-ns
-
-   * Create an alias for the Tenant service:
-
-     .. code-block:: shell
-	:class: copyable
-
-        mc alias set myminio https://localhost:9000 minio minio123 --insecure
-
-     This example uses the non-TLS ``myminio-hl`` service, which requires :std:option:`--insecure <mc.--insecure>`.
-
-     If you have a TLS cert configured, omit ``--insecure`` and use ``svc/minio`` instead.
-
-   You can use :mc:`mc mb` to create a bucket on the Tenant:
-   
-     .. code-block:: shell
-        :class: copyable
-
-	mc mb myminio/mybucket --insecure
+You can also :ref:`deploy a tenant using Helm Charts <deploy-tenant-helm>`.

@@ -188,6 +188,9 @@ sync-operator-version:
 		;; \
 	esac
 
+	@echo "Updating Helm Charts"
+#	@$(shell curl --retry 10 -Ls -o source/includes/k8s/operator-values.yaml https://raw.githubusercontent.com/minio/operator/v${OPERATOR}/helm/operator/values.yaml)
+
 sync-kes-version:
 	@echo "Retrieving latest stable KES version"
 	@$(eval KES = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/kes/releases/latest | sed "s/https:\/\/github.com\/minio\/kes\/releases\/tag\///"))

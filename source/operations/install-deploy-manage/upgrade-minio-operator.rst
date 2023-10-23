@@ -134,59 +134,149 @@ The following steps back up the existing yaml files, perform some clean up, and 
 Upgrade Operator to |operator-version-stable|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
- 
-   Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
-   Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+.. tab-set::
 
-2. Verify the existing Operator installation.
-   Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
-   
-   If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
+   .. tab-item:: Upgrade using MinIO Kubernetes Plugin
 
-   You can verify the currently installed Operator version by retrieving the object specification for an operator pod in the namespace.
-   The following example uses the ``jq`` tool to filter the necessary information from ``kubectl``:
+      The following procedure upgrades the MinIO Operator using the :mc:`kubectl minio <kubectl minio init>` plugin.
 
-   .. code-block:: shell
-      :class: copyable
+      If you installed the Operator using :ref:`helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
 
-      kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
-   
-   The output resembles the following:
-   
-   .. code-block:: json
-      :emphasize-lines: 8-10
+      1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+      
+         Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+         Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
+         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
 
-      {
-         "env": [
+      2. Verify the existing Operator installation.
+         Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
+         
+         If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
+
+         You can verify the currently installed Operator version by retrieving the object specification for an operator pod in the namespace.
+         The following example uses the ``jq`` tool to filter the necessary information from ``kubectl``:
+
+         .. code-block:: shell
+            :class: copyable
+
+            kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
+         
+         The output resembles the following:
+         
+         .. code-block:: json
+            :emphasize-lines: 8-10
+            :substitutions:
+
             {
-               "name": "CLUSTER_DOMAIN",
-               "value": "cluster.local"
+               "env": [
+                  {
+                     "name": "CLUSTER_DOMAIN",
+                     "value": "cluster.local"
+                  }
+               ],
+               "image": "minio/operator:v|operator-version-stable|",
+               "imagePullPolicy": "IfNotPresent",
+               "name": "minio-operator"
             }
-         ],
-         "image": "minio/operator:v4.5.8",
-         "imagePullPolicy": "IfNotPresent",
-         "name": "minio-operator"
-      }
 
-3. Download the latest stable version of the MinIO Kubernetes Plugin
+      3. Download the latest stable version of the MinIO Kubernetes Plugin
 
-   .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
+         .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
 
-4. Run the initialization command to upgrade the Operator
+      4. Run the initialization command to upgrade the Operator
 
-   Use the :mc-cmd:`kubectl minio init` command to upgrade the existing MinIO Operator installation
+         Use the :mc-cmd:`kubectl minio init` command to upgrade the existing MinIO Operator installation:
 
-   .. code-block:: shell
-      :class: copyable
+         .. code-block:: shell
+            :class: copyable
 
-      kubectl minio init
+            kubectl minio init
 
-5. Validate the Operator upgrade
+      5. Validate the Operator upgrade
 
-   You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
-   .. include:: /includes/common/common-k8s-connect-operator-console.rst
+         You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
+         .. include:: /includes/common/common-k8s-connect-operator-console.rst
+
+   .. tab-item:: Upgrade using Helm
+
+      The following procedure upgrades an existing MinIO Operator Installation using Helm.
+
+      If you installed the Operator using :ref:`the MinIO Kubernetes Plugin <deploy-operator-kubernetes>`, use the :guilabel:`Upgrade using MinIO Kubernetes Plugin` instructions instead.
+
+      1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+      
+         Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+         Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
+         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+
+      #. Verify the existing Operator installation. 
+
+         Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
+         
+         If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
+
+         Use the ``helm list`` command to view the installed charts in the namespace:
+
+         .. code-block:: shell
+            :class: copyable
+
+            helm list -n minio-operator
+
+         The result should resemble the following:
+
+         .. code-block:: shell
+            :class: copyable
+
+            NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+            operator        minio-operator  1               2023-11-01 15:49:54.539724775 -0400 EDT deployed        operator-5.0.x v5.0.x   
+
+      #. Update the Operator Repository
+
+         Use ``helm repo update minio-operator`` to update the MinIO Operator repo.
+         If you set a different alias for the MinIO Operator repository, specify that to the command.
+         You can use ``helm repo list`` to review your installed repositories.
+
+         Use ``helm search`` to check the latest available chart version after updating the Operator Repo:
+
+         .. code-block:: shell
+            :class: copyable
+
+            helm search repo minio-operator
+
+         The response should resemble the following:
+
+         .. code-block:: shell
+            :class: copyable
+            :substitutions:
+
+            NAME                            CHART VERSION   APP VERSION     DESCRIPTION                    
+            minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
+            minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
+            minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
+
+         The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
+
+      #. Run ``helm upgrade``
+
+         Helm uses the latest chart to upgrade the MinIO Operator:
+
+         .. code-block:: shell
+            :class: copyable
+
+            helm upgrade -n minio-operator \
+              operator minio-operator/operator
+
+         If you installed the MinIO Operator to a different namespace, specify that to the ``-n`` argument.
+
+         If you used a different installation name from ``operator``, replace the value above with the installation name.
+
+         The command results should return success with a bump in the ``REVISION`` value.
+
+      #. Validate the Operator upgrade
+
+         You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
+         .. include:: /includes/common/common-k8s-connect-operator-console.rst
+
 
 Upgrade MinIO Operator 4.2.3 through 4.5.7 to 4.5.8
 ---------------------------------------------------
