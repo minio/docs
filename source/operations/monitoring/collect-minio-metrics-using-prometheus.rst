@@ -125,10 +125,8 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
 
 .. tab-set::
 
-   .. tab-item:: Cluster metrics
+   .. tab-item:: Cluster
 
-      For server metrics:
-      
       .. code-block:: yaml
          :class: copyable
       
@@ -143,7 +141,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               static_configs:
               - targets: [minio.example.net]
 
-   .. tab-item:: Bucket metrics
+   .. tab-item:: Bucket
 
       .. code-block:: yaml
          :class: copyable
@@ -159,7 +157,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               static_configs:
               - targets: [minio.example.net]
 
-   .. tab-item:: Resource metrics
+   .. tab-item:: Resource
 
       .. code-block:: yaml
          :class: copyable
