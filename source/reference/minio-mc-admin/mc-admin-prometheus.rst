@@ -56,6 +56,10 @@ Syntax
 
       The type of metrics to scrape.
 
+      .. versionchanged:: RELEASE.2023-10-07T15-07-38Z
+
+         ``resource`` metrics added
+
       Valid values are:
 
       - ``bucket``

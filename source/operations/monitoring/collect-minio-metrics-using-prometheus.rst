@@ -78,6 +78,8 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
    .. tab-item:: Resources
 
+      .. versionadded:: RELEASE.2023-10-07T15-07-38Z
+
       The following command scrapes metrics for resources on the MinIO Server.
 
       .. code-block:: shell
@@ -127,8 +129,8 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
 
    .. tab-item:: Cluster
 
-      Cluster metrics also include node	metrics.
-      Adding a ``scrape_configs`` job for ``cluster`` covers both.
+      Cluster metrics aggregate node-level metrics and, where appropriate, attach labels to metrics for the originating node.
+      If you are already collecting ``cluster`` metrics, you do not need to add an additional ``scrape_configs`` job for ``node``.
 
       .. code-block:: yaml
          :class: copyable
