@@ -64,4 +64,4 @@ Syntax
       - ``resource``
 
       If not specified, the command returns cluster metrics.
-
+      Cluster metrics also include node metrics.
