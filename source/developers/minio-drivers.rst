@@ -12,187 +12,46 @@ Software Development Kits (SDK)
 
 MinIO publishes the following Software Development Kits (SDK):
 
-1. :ref:`.NET <dotnet-sdk>`
-2. :ref:`Golang <go-sdk>`
-3. :ref:`Haskell <haskell-sdk>`
-4. :ref:`Java <java-sdk>`
-5. :ref:`JavaScript <javascript-sdk>`
-6. :ref:`Python <python-sdk>`
-7. :ref:`C++ <cpp-sdk>`
-
-.. _cpp-sdk:
-
-C++ (``minio-cpp``)
--------------------
-
-
-Reference
-  `MinIO C++ SDK Reference <https://minio-cpp.min.io/>`__
-
-Install
-  - ``vcpkg``
-
-    .. code-block:: shell
-       :class: copyable
-
-       vcpkg install minio-cpp
-
-  - Source
-             
-    .. code-block:: shell
-       :class: copyable
-
-       git clone https://github.com/minio/minio-cpp
-       cd minio-cpp
-       wget --quiet -O vcpkg-master.zip https://github.com/microsoft/vcpkg/archive/refs/heads/master.zip
-       unzip -qq vcpkg-master.zip
-       ./vcpkg-master/bootstrap-vcpkg.sh
-       ./vcpkg-master/vcpkg integrate install
-       cmake -B ./build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg-master/scripts/buildsystems/vcpkg.cmake
-       cmake --build ./build --config Debug
-
-.. _dotnet-sdk:
-
-.NET (``minio-dotnet``)
------------------------
-
-Latest Version
-  |dotnet-sdk-version|
-
-Reference
-  :doc:`MinIO .NET SDK Reference </developers/dotnet/minio-dotnet>`
-
-Download from NuGet
-  Run the following command in the NuGet Package Manager Console.
-
-  .. code-block:: shell
-     :class: copyable
-
-     PM> Install-Package Minio
+- :ref:`Go <go-sdk>`
+- :ref:`Python <python-sdk>`
+- :ref:`.NET <dotnet-sdk>`
+- :ref:`Java <java-sdk>`
+- :ref:`JavaScript <javascript-sdk>`
+- :ref:`C++ <cpp-sdk>`
+- :ref:`Haskell <haskell-sdk>`
 
 .. _go-sdk:
 
-Go (``minio-go``)
------------------
+Go
+--
 
-Latest Version
-  |go-sdk-version|
+GitHub: `minio/minio-go <https://github.com/minio/minio-go>`__
 
-Reference
-  :doc:`MinIO Go SDK Reference </developers/go/minio-go>`
+Latest Version: |go-sdk-version|
+
+Quickstart Guide: :doc:`/developers/go/minio-go`
 
 Download from GitHub
-  .. code-block:: go
+  .. code-block:: shell
      :class: copyable
 
-     go get github.com/minio/minio-go/v7
+     go install github.com/minio/minio-go/v7@latest
 
-.. _haskell-sdk:
-
-Haskell (``minio-hs``)
-----------------------
-
-Latest Version
-  |haskell-sdk-version|
-
-Reference
-  :doc:`MinIO Haskell SDK Reference </developers/haskell/minio-haskell>`
-  
-Install
-  Add ``minio-hs`` to your project's ``.cabal`` dependencies section.
-  
-  or
-
-  If you are using ``hpack``, add ``minio-hs`` to your ``package.yaml`` file.
-
-.. _java-sdk:
-
-Java (``minio-java``)
----------------------
-
-Latest version
-  |java-sdk-version|
-
-Reference
-  :ref:`MinIO Java SDK Reference <minio-java-quickstart>`
-    
-Install methods
-  - Maven
- 
-    .. code-block:: java
-       :class: copyable
-       :substitutions:
-
-       <dependency>
-           <groupId>io.minio</groupId>
-           <artifactId>minio</artifactId>
-           <version>|java-sdk-version|</version>
-       </dependency>
-
-  - Gradle
- 
-    .. code-block:: java
-       :class: copyable
-       :substitutions:
-
-       dependencies {
-           implementation("io.minio:minio:|java-sdk-version|")
-       } 
-
-  - JAR
- 
-    Download the latest JAR file for |java-sdk-version| of the SDK from |java-jar-url|.
-
-.. _javascript-sdk:
-
-JavaScript (``minio-js``)
--------------------------
-
-Latest Version
-  |javascript-sdk-version|
-
-Reference
-  :doc:`MinIO JavaScript SDK Reference </developers/javascript/minio-javascript>`
-
-Install
-  - NPM
-             
-    .. code-block:: shell
-       :class: copyable
-
-       npm install --save minio
-
-  - Source
-             
-    .. code-block:: shell
-       :class: copyable
-
-       git clone https://github.com/minio/minio-js
-       cd minio-js
-       npm install
-       npm install -g   
-
-  - TypeScript
-             
-    .. code-block:: shell
-       :class: copyable
-
-       npm install --save-dev @types/minio
 
 .. _python-sdk:
 
-Python (``minio-py``) 
----------------------
+Python
+------
 
-Latest Version
-  |python-sdk-version|
+GitHub: `minio/minio-py <https://github.com/minio/minio-py>`__
 
-Reference
-  :doc:`MinIO Python SDK Reference </developers/python/minio-py>`
- 
+Latest Version: |python-sdk-version|
+
+Quickstart Guide: :doc:`/developers/python/minio-py`
+
 Install Methods
   - pip
-    
+
     .. code-block:: shell
        :class: copyable
 
@@ -206,6 +65,155 @@ Install Methods
        git clone https://github.com/minio/minio-py
        cd minio-py
        python setup.py install
+
+
+.. _dotnet-sdk:
+
+.NET
+----
+
+GitHub: `minio/minio-dotnet <https://github.com/minio/minio-dotnet>`__
+
+Latest Version: |dotnet-sdk-version|
+
+Quickstart Guide: :doc:`/developers/dotnet/minio-dotnet`
+
+Download from NuGet
+  Run the following command in the NuGet Package Manager Console.
+
+  .. code-block:: shell
+     :class: copyable
+
+     PM> Install-Package Minio
+
+
+.. _java-sdk:
+
+Java
+----
+
+GitHub: `minio/minio-java <https://github.com/minio/minio-java>`__
+
+Latest version: |java-sdk-version|
+
+Reference: :ref:`minio-java-quickstart`
+
+Install methods
+  - Maven
+
+    .. code-block:: java
+       :class: copyable
+       :substitutions:
+
+       <dependency>
+           <groupId>io.minio</groupId>
+           <artifactId>minio</artifactId>
+           <version>|java-sdk-version|</version>
+       </dependency>
+
+  - Gradle
+
+    .. code-block:: java
+       :class: copyable
+       :substitutions:
+
+       dependencies {
+           implementation("io.minio:minio:|java-sdk-version|")
+       }
+
+  - JAR
+
+    Download the latest JAR file for |java-sdk-version| of the SDK from |java-jar-url|.
+
+
+.. _javascript-sdk:
+
+JavaScript
+----------
+
+GitHub: `minio/minio-js <https://github.com/minio/minio-js>`__
+
+Latest Version: |javascript-sdk-version|
+
+Quickstart Guide: :doc:`/developers/javascript/minio-javascript`
+
+Install
+  - NPM
+
+    .. code-block:: shell
+       :class: copyable
+
+       npm install --save minio
+
+  - Source
+
+    .. code-block:: shell
+       :class: copyable
+
+       git clone https://github.com/minio/minio-js
+       cd minio-js
+       npm install
+       npm install -g
+
+  - TypeScript
+
+    .. code-block:: shell
+       :class: copyable
+
+       npm install --save-dev @types/minio
+
+
+.. _cpp-sdk:
+
+C++
+---
+
+GitHub: `minio/minio-cpp <https://github.com/minio/minio-cpp>`__
+
+Latest version: |cpp-sdk-version|
+
+Reference: `MinIO C++ SDK Reference <https://minio-cpp.min.io/>`__
+
+Install
+  - ``vcpkg``
+
+    .. code-block:: shell
+       :class: copyable
+
+       vcpkg install minio-cpp
+
+  - Source
+
+    .. code-block:: shell
+       :class: copyable
+
+       git clone https://github.com/minio/minio-cpp
+       cd minio-cpp
+       wget --quiet -O vcpkg-master.zip https://github.com/microsoft/vcpkg/archive/refs/heads/master.zip
+       unzip -qq vcpkg-master.zip
+       ./vcpkg-master/bootstrap-vcpkg.sh
+       ./vcpkg-master/vcpkg integrate install
+       cmake -B ./build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg-master/scripts/buildsystems/vcpkg.cmake
+       cmake --build ./build --config Debug
+
+
+.. _haskell-sdk:
+
+Haskell
+-------
+
+GitHub: `minio/minio-hs <https://github.com/minio/minio-hs>`__
+
+Latest Version: |haskell-sdk-version|
+
+Quickstart Guide: :doc:`/developers/haskell/minio-haskell`
+
+Install
+  Add ``minio-hs`` to your project's ``.cabal`` dependencies section.
+
+  or
+
+  If you are using ``hpack``, add ``minio-hs`` to your ``package.yaml`` file.
 
 ..
   Rust SDK repo does not have any releases yet. Once released, unblock this section and add to toctree.
@@ -232,10 +240,10 @@ Install Methods
    :titlesonly:
    :hidden:
    :maxdepth: 1
-   
-   /developers/dotnet/minio-dotnet
+
    /developers/go/minio-go
-   /developers/haskell/minio-haskell
+   /developers/python/minio-py
+   /developers/dotnet/minio-dotnet
    /developers/java/minio-java
    /developers/javascript/minio-javascript
-   /developers/python/minio-py
+   /developers/haskell/minio-haskell
