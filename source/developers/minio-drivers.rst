@@ -14,8 +14,8 @@ MinIO publishes the following Software Development Kits (SDK):
 
 - :ref:`Go <go-sdk>`
 - :ref:`Python <python-sdk>`
-- :ref:`.NET <dotnet-sdk>`
 - :ref:`Java <java-sdk>`
+- :ref:`.NET <dotnet-sdk>`
 - :ref:`JavaScript <javascript-sdk>`
 - :ref:`C++ <cpp-sdk>`
 - :ref:`Haskell <haskell-sdk>`
@@ -67,26 +67,6 @@ Install Methods
        python setup.py install
 
 
-.. _dotnet-sdk:
-
-.NET
-----
-
-GitHub: `minio/minio-dotnet <https://github.com/minio/minio-dotnet>`__
-
-Latest Version: |dotnet-sdk-version|
-
-Quickstart Guide: :doc:`/developers/dotnet/minio-dotnet`
-
-Download from NuGet
-  Run the following command in the NuGet Package Manager Console.
-
-  .. code-block:: shell
-     :class: copyable
-
-     PM> Install-Package Minio
-
-
 .. _java-sdk:
 
 Java
@@ -124,6 +104,26 @@ Install methods
   - JAR
 
     Download the latest JAR file for |java-sdk-version| of the SDK from |java-jar-url|.
+
+
+.. _dotnet-sdk:
+
+.NET
+----
+
+GitHub: `minio/minio-dotnet <https://github.com/minio/minio-dotnet>`__
+
+Latest Version: |dotnet-sdk-version|
+
+Quickstart Guide: :doc:`/developers/dotnet/minio-dotnet`
+
+Download from NuGet
+  Run the following command in the NuGet Package Manager Console.
+
+  .. code-block:: shell
+     :class: copyable
+
+     PM> Install-Package Minio
 
 
 .. _javascript-sdk:
