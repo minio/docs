@@ -31,6 +31,8 @@ Latest Version: |go-sdk-version|
 
 Quickstart Guide: :doc:`/developers/go/minio-go`
 
+Reference: :doc:`/developers/go/API`
+
 Download from GitHub
   .. code-block:: shell
      :class: copyable
@@ -48,6 +50,8 @@ GitHub: `minio/minio-py <https://github.com/minio/minio-py>`__
 Latest Version: |python-sdk-version|
 
 Quickstart Guide: :doc:`/developers/python/minio-py`
+
+Reference: :doc:`/developers/python/API`
 
 Install Methods
   - pip
@@ -76,7 +80,9 @@ GitHub: `minio/minio-java <https://github.com/minio/minio-java>`__
 
 Latest version: |java-sdk-version|
 
-Reference: :ref:`minio-java-quickstart`
+Quickstart Guide: :ref:`minio-java-quickstart`
+
+Reference: :doc:`/developers/java/API`
 
 Install methods
   - Maven
@@ -117,6 +123,8 @@ Latest Version: |dotnet-sdk-version|
 
 Quickstart Guide: :doc:`/developers/dotnet/minio-dotnet`
 
+Reference: :doc:`/developers/dotnet/API`
+
 Download from NuGet
   Run the following command in the NuGet Package Manager Console.
 
@@ -136,6 +144,8 @@ GitHub: `minio/minio-js <https://github.com/minio/minio-js>`__
 Latest Version: |javascript-sdk-version|
 
 Quickstart Guide: :doc:`/developers/javascript/minio-javascript`
+
+Reference: :doc:`/developers/javascript/API`
 
 Install
   - NPM
