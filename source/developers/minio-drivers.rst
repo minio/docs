@@ -109,8 +109,7 @@ Install methods
 
   - JAR
 
-    Download the latest JAR file for |java-sdk-version| of the SDK from the `Sonatype Maven Central Repository <https://central.sonatype.com/artifact/io.minio/minio/versions>`__.
-
+    Download the latest JAR file for version |java-sdk-version| of the SDK from the `Sonatype Maven Central Repository <|java-jar-url|>`__.
 
 .. _dotnet-sdk:
 

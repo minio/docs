@@ -51,7 +51,8 @@ function main() {
 		;;
 	    "java")
 		replace JAVAVERSION ${sdk_version}
-		;;
+                replace JAVAURL https://repo1.maven.org/maven2/io/minio/minio/${sdk_version}/
+	        ;;
 	    "js")
 		replace JAVASCRIPTVERSION ${sdk_version}
 		;;
