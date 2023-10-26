@@ -1,8 +1,8 @@
 .. _minio-server-envvar-object-lambda-webhook:
 
-=============================================================
-Environment Variables for Webhook with Object Lambda Function
-=============================================================
+===============================
+Object Lambda Function Settings
+===============================
 
 .. default-domain:: minio
 
@@ -34,7 +34,6 @@ For example, the following command sets two distinct Object Lambda webhook endpo
 
    The HTTP endpoint of the lambda webhook for the handler function.
 
-
 .. envvar:: MINIO_LAMBDA_WEBHOOK_AUTH_TOKEN
 
    Specify the opaque string or JWT authorization token to use for authenticating to the lambda webhook service.
@@ -42,7 +41,6 @@ For example, the following command sets two distinct Object Lambda webhook endpo
    .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
       MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
-
 
 .. envvar:: MINIO_LAMBDA_WEBHOOK_CLIENT_CERT
 

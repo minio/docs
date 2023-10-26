@@ -25,7 +25,6 @@ Volumes
 .. tab-set::
 
    .. tab-item:: Environment Variable
-      :sync: envvar
 
       .. envvar:: MINIO_VOLUMES
 
@@ -34,20 +33,28 @@ Volumes
          Functionally equivalent to setting :mc-cmd:`minio server DIRECTORIES`.
          Use this value when configuring MinIO to run using an environment file.
 
+   .. tab-item:: Configuration Setting
+
+      This setting does not have a configuration variable setting.
+      Use the Environment Variable instead.
+
 Environment Variable File Path
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 .. tab-set::
 
    .. tab-item:: Environment Variable
-      :sync: envvar
 
       .. envvar:: MINIO_CONFIG_ENV_FILE
       
          Specifies the full path to the file the MinIO server process uses for loading environment variables.
          
          For ``systemd``-managed files, setting this value to the environment file allows MinIO to reload changes to that file on using :mc-cmd:`mc admin service restart` to restart the deployment.
+
+   .. tab-item:: Configuration Setting
+
+      This setting does not have a configuration variable setting.
+      Use the Environment Variable instead.
       
 Workers for Expiration
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -62,13 +69,18 @@ Workers for Expiration
          Specifies the number of workers to make available to expire objects configured with ILM rules for expiration.
          When not set, MinIO defaults to using up to half of the available processing cores available.
 
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      This setting does not have a configuration variable setting.
+      Use the Environment Variable instead.
+
 Domain
 ~~~~~~
 
 .. tab-set::
 
    .. tab-item:: Environment Variable
-      :sync: envvar
 
       .. envvar:: MINIO_DOMAIN
 
@@ -78,11 +90,15 @@ Domain
 
          If this setting is omitted, the default is to only accept path-style requests. For example, ``minio.example.net/data``.
 
+   .. tab-item:: Configuration Setting
+
+      This setting does not have a configuration variable setting.
+      Use the Environment Variable instead.
+
 Scanner Speed
 ~~~~~~~~~~~~~
 
 .. _minio-scanner-speed-options:
-
 
 .. tab-set::
 
@@ -91,19 +107,19 @@ Scanner Speed
 
       .. envvar:: MINIO_SCANNER_SPEED
 
-   .. tab-item:: Configuration Variable
+   .. tab-item:: Configuration Setting
       :sync: config
   
       .. mc-conf:: scanner speed
          :delimiter: " "
 
-   Manage the maximum wait period for the scanner when balancing MinIO read/write performance to scanner processes.
+Manage the maximum wait period for the scanner when balancing MinIO read/write performance to scanner processes.
    
-   .. include:: /includes/common/scanner.rst
-      :start-after: start-scanner-speed-values
-      :end-before: end-scanner-speed-values
+.. include:: /includes/common/scanner.rst
+   :start-after: start-scanner-speed-values
+   :end-before: end-scanner-speed-values
 
-   This configuration setting corresponds with the :envvar:`MINIO_SCANNER_SPEED` environment variable.
+This configuration setting corresponds with the :envvar:`MINIO_SCANNER_SPEED` environment variable.
 
 Batch Replication
 -----------------
@@ -111,13 +127,17 @@ Batch Replication
 .. tab-set::
 
    .. tab-item:: Environment Variable
-      :sync: envvar
 
       .. envvar:: MINIO_BATCH_REPLICATION_WORKERS
 
          *Optional*
 
          Enable parallel workers by specifying the maximum number of processes to use when performing the batch application job.
+
+   .. tab-item:: Configuration Setting
+
+      This setting does not have a configuration variable setting.
+      Use the Environment Variable instead.
 
 Data Compression
 ----------------
@@ -135,17 +155,17 @@ Allow Encryption
 
       .. envvar:: MINIO_COMPRESSION_ALLOW_ENCRYPTION
 
-   .. tab-item:: Configuration Variable
+   .. tab-item:: Configuration Setting
       :sync: config
   
       .. mc-conf:: compression allow_encryption
          :delimiter: " "
 
-   *Optional*
+*Optional*
 
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-data-compression-allow_encryption-desc
-      :end-before: end-minio-data-compression-allow_encryption-desc
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-data-compression-allow_encryption-desc
+   :end-before: end-minio-data-compression-allow_encryption-desc
 
 Enable Compression
 ~~~~~~~~~~~~~~~~~~
@@ -157,33 +177,38 @@ Enable Compression
 
       .. envvar:: MINIO_COMPRESSION_ENABLE
 
-   .. tab-item:: Configuration Variable
+   .. tab-item:: Configuration Setting
       :sync: config
   
       .. mc-conf:: compression enable
          :delimiter: " "
 
-   *Optional*
+*Optional*
 
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-data-compression-enable-desc
-      :end-before: end-minio-data-compression-enable-desc
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-data-compression-enable-desc
+   :end-before: end-minio-data-compression-enable-desc
 
 Comments
 ~~~~~~~~
 
 .. tab-set::
 
-   .. tab-item:: Configuration Variable
-      :sync: config
+   .. tab-item:: Environment Variable
+
+      This setting does not have an environment variable option.
+      Use the configuration variable instead.
+
+   .. tab-item:: Configuration Setting
+      :selected:
 
       .. envvar:: compression comment
 
-   *Optional*
+*Optional*
 
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-data-compression-comment-desc
-      :end-before: end-minio-data-compression-comment-desc
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-data-compression-comment-desc
+   :end-before: end-minio-data-compression-comment-desc
 
 Compression Extensions
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -195,17 +220,17 @@ Compression Extensions
 
       .. envvar:: MINIO_COMPRESSION_EXTENSIONS
 
-   .. tab-item:: Configuration Variable
+   .. tab-item:: Configuration Setting
       :sync: config
   
       .. mc-conf:: compression extensions
          :delimiter: " "
 
-   *Optional*
+*Optional*
 
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-data-compression-extensions-desc
-      :end-before: end-minio-data-compression-extensions-desc
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-data-compression-extensions-desc
+   :end-before: end-minio-data-compression-extensions-desc
 
 Compression MIME Types
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -223,8 +248,8 @@ Compression MIME Types
       .. mc-conf:: compression mime_types
          :delimiter: " "
 
-   *Optional*
+*Optional*
 
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-data-compression-mime_types-desc
-      :end-before: end-minio-data-compression-mime_types-desc
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-data-compression-mime_types-desc
+   :end-before: end-minio-data-compression-mime_types-desc

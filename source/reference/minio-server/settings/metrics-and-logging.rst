@@ -1,8 +1,8 @@
 .. _minio-server-envvar-metrics-logging:
 
-======================================================
-Environment Variables to Configure Metrics and Logging
-======================================================
+============================
+Metrics and Logging Settings
+============================
 
 .. default-domain:: minio
 
@@ -13,610 +13,463 @@ Environment Variables to Configure Metrics and Logging
 This page covers settings that control behavior related to MinIO metrics and logging. 
 See :ref:`minio-metrics-and-alerts` for more information.
 
-Prometheus Authentication
--------------------------
-
-This environment variables controls how MinIO authenticates to Prometheus.
-
-.. envvar:: MINIO_PROMETHEUS_AUTH_TYPE
-
-   Specifies the authentication mode for the Prometheus :ref:`scraping endpoints <minio-metrics-and-alerts>`.
-
-   - ``jwt`` - *Default* MinIO requires that the scraping client specify a JWT token for authenticating requests. 
-     Use :mc-cmd:`mc admin prometheus generate` to generate the necessary JWT bearer tokens.
-
-   - ``public`` MinIO does not require that scraping clients authenticate their requests.
-
-Environment Variables
----------------------
-
-These environment variables configure publishing regular :mc:`minio server` logs and audit logs to an HTTP webhook. 
+These settings configure publishing regular :mc:`minio server` logs and audit logs to an HTTP webhook. 
 See :ref:`minio-logging` for more complete documentation.
 
 - :ref:`minio-server-envvar-logging-regular`
 - :ref:`minio-server-envvar-logging-audit`
 - :ref:`minio-server-envvar-logging-audit-kafka`
 
-.. _minio-server-envvar-logging-regular:
+Prometheus Authentication
+-------------------------
+
+This setting controls how MinIO authenticates to Prometheus.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :selected:
+
+      .. envvar:: MINIO_PROMETHEUS_AUTH_TYPE
+
+   .. tab-item:: Configuration Setting
+
+      There is not a configuration setting option.
+      Use the environment variable instead.
+
+Specifies the authentication mode for the Prometheus :ref:`scraping endpoints <minio-metrics-and-alerts>`.
+
+- ``jwt`` - *Default* MinIO requires that the scraping client specify a JWT token for authenticating requests. 
+   Use :mc-cmd:`mc admin prometheus generate` to generate the necessary JWT bearer tokens.
+
+- ``public`` MinIO does not require that scraping clients authenticate their requests.
 
 Server Logs
-~~~~~~~~~~~
+-----------
 
-The following section documents environment variables for configuring MinIO to publish :mc:`minio server` logs to an HTTP webhook endpoint. 
-See :ref:`minio-logging-publish-server-logs` for more complete documentation and tutorials on using these environment variables.
-
-You can specify multiple webhook endpoints as log targets by appending a unique identifier ``_ID`` for each set of related logging environment variables. 
-For example, the following command set two distinct server logs webhook endpoints:
-
-.. code-block:: shell
-   :class: copyable
-
-   export MINIO_LOGGER_WEBHOOK_ENABLE_PRIMARY="on"
-   export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_PRIMARY="TOKEN"
-   export MINIO_LOGGER_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net"
-
-   export MINIO_LOGGER_WEBHOOK_ENABLE_SECONDARY="on"
-   export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_SECONDARY="TOKEN"
-   export MINIO_LOGGER_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-2.example.net"
-
-.. envvar:: MINIO_LOGGER_WEBHOOK_ENABLE
-
-   Specify ``"on"`` to enable publishing :mc:`minio server` logs to the HTTP webhook endpoint.
-
-   Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT`.
-
-   This environment variable corresponds with the top-level :mc-conf:`logger_webhook` configuration setting.
-
-.. envvar:: MINIO_LOGGER_WEBHOOK_ENDPOINT
-
-   The HTTP endpoint of the webhook. 
-
-   This environment variable corresponds with the :mc-conf:`logger_webhook endpoint <logger_webhook.endpoint>` configuration setting.
-
-.. envvar:: MINIO_LOGGER_WEBHOOK_AUTH_TOKEN
-
-   *Optional*
-
-   An authentication token of the appropriate type for the endpoint.
-   Omit for endpoints which do not require authentication.
-
-   To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
-   Depending on the endpoint, you may need to include additional information.
-
-   For example: for a Bearer token, prepend ``Bearer``:
-
-   .. code-block:: shell
-      :class: copyable
-
-      set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
-
-   Modify the value according to the endpoint requirements.
-   A custom authentication format could resemble the following:
-
-   .. code-block:: shell
-      :class: copyable
-
-      set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
-
-   Consult the documentation for the desired service for more details.
-
-   This environment variable corresponds with the :mc-conf:`logger_webhook auth_token <logger_webhook.auth_token>` configuration setting.
-
-.. envvar:: MINIO_LOGGER_WEBHOOK_CLIENT_CERT
-
-   *Optional*
-
-   The path to the mTLS certificate to use for authenticating to the webhook logger.
-
-   Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_KEY`.
-
-   This environment variable corresponds with the :mc-conf:`logger_webhook client_cert <logger_webhook.client_cert>` configuration setting.
-
-.. envvar:: MINIO_LOGGER_WEBHOOK_CLIENT_KEY
-
-   *Optional*
-
-   The path to the mTLS certificate key to use to authenticate with the webhook logger service.
-
-   Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_CERT`.
-
-   This environment variable corresponds with the :mc-conf:`logger_webhook client_key <logger_webhook.client_key>` configuration setting.
-
-.. envvar:: MINIO_LOGGER_WEBHOOK_PROXY
-
-   *Optional*
-
-   Define a proxy to use for the webhook logger when communicating from MinIO to external webhooks.
-
-   This environment variable corresponds with the :mc-conf:`logger_webhook proxy <logger_webhook.proxy>` configuration setting.
-
-.. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_DIR
-
-   .. versionadded:: RELEASE.2023-05-18T00-05-36Z
-
-   *Optional*
-
-   Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
-   The MinIO process must have read, write, and list access on the specified directory.
-
-   MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
-
-   This environment variable corresponds with the :mc-conf:`logger_webhook queue_dir <logger_webhook.queue_dir>` configuration setting.
-
-.. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_SIZE
-
-   *Optional*
-
-   An integer value to use for the queue size for logger webhook targets.
-
-   This environment variable corresponds with the :mc-conf:`logger_webhook queue_size <logger_webhook.queue_size>` configuration setting.
-
-.. _minio-server-envvar-logging-audit:
-
-Webhook Audit Logs
-~~~~~~~~~~~~~~~~~~
-
-The following section documents environment variables for configuring MinIO to publish audit logs to an HTTP webhook endpoint. 
-See :ref:`minio-logging-publish-audit-logs` for more complete documentation and tutorials on using these environment variables.
-
-You can specify multiple webhook endpoints as audit log targets by appending a unique identifier ``_ID`` for each set of related logging environment variables. 
-For example, the following command set two distinct audit log webhook endpoints:
-
-.. code-block:: shell
-   :class: copyable
-
-   export MINIO_AUDIT_WEBHOOK_ENABLE_PRIMARY="on"
-   export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_PRIMARY="TOKEN"
-   export MINIO_AUDIT_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net"
-   export MINIO_AUDIT_WEBHOOK_CLIENT_CERT_SECONDARY="/tmp/cert.pem"
-   export MINIO_AUDIT_WEBHOOK_CLIENT_KEY_SECONDARY="/tmp/key.pem"
-
-   export MINIO_AUDIT_WEBHOOK_ENABLE_SECONDARY="on"
-   export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_SECONDARY="TOKEN"
-   export MINIO_AUDIT_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-1.example.net"
-   export MINIO_AUDIT_WEBHOOK_CLIENT_CERT_SECONDARY="/tmp/cert.pem"
-   export MINIO_AUDIT_WEBHOOK_CLIENT_KEY_SECONDARY="/tmp/key.pem"
-
-.. envvar:: MINIO_AUDIT_WEBHOOK_ENABLE
-
-   Specify ``"on"`` to enable publishing audit logs to the HTTP webhook endpoint.
-
-   Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT`.
-
-   This environment variable corresponds with top-level :mc-conf:`audit_webhook` configuration setting.
-
-.. envvar:: MINIO_AUDIT_WEBHOOK_ENDPOINT
-
-   The HTTP endpoint of the webhook. 
-
-   This environment variable corresponds with the :mc-conf:`audit_webhook endpoint <audit_webhook.endpoint>` configuration setting.
-
-.. envvar:: MINIO_AUDIT_WEBHOOK_AUTH_TOKEN
-
-   *Optional*
-
-   An authentication token of the appropriate type for the endpoint.
-   Omit for endpoints which do not require authentication.
-
-   To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
-   Depending on the endpoint, you may need to include additional information.
-
-   For example: for a Bearer token, prepend ``Bearer``:
-
-   .. code-block:: shell
-      :class: copyable
-
-      set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
-
-   Modify the value according to the endpoint requirements.
-   A custom authentication format could resemble the following:
-
-   .. code-block:: shell
-      :class: copyable
-
-      set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
-
-   Consult the documenation for the desired service for more details.
-
-   This environment variable corresponds with the :mc-conf:`audit_webhook auth_token <audit_webhook.auth_token>` configuration setting.
-
-.. envvar:: MINIO_AUDIT_WEBHOOK_CLIENT_CERT
-
-   *Optional*
-
-   The x.509 client certificate to present to the HTTP webhook. 
-   Omit for webhooks which do not require clients to present a known TLS certificate.
-
-   Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_KEY`.
-
-   This environment variable corresponds with the :mc-conf:`audit_webhook client_cert <audit_webhook.client_cert>` configuration setting.
-
-.. envvar:: MINIO_AUDIT_WEBHOOK_CLIENT_KEY
-
-   *Optional*
-
-   The x.509 private key to present to the HTTP webhook. 
-   Omit for webhooks which do not require clients to present a known TLS certificate.
-
-   Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_CERT`.
-
-   This environment variable corresponds with the :mc-conf:`audit_webhook client_key <audit_webhook.client_key>` configuration setting.
-
-.. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_DIR
-
-   .. versionadded:: RELEASE.2023-05-18T00-05-36Z
-
-   *Optional*
-
-   Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
-   The MinIO process must have read, write, and list access on the specified directory.
-
-   MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
-
-   This environment variable corresponds with the :mc-conf:`audit_webhook queue_dir <audit_webhook.queue_dir>` configuration setting.
-
-.. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_SIZE
-
-   *Optional*
-
-   An integer value to use for the queue size for audit webhook targets.
-
-   This environment variable corresponds with the :mc-conf:`audit_webhook queue_size <audit_webhook.queue_size>` configuration setting.
-
-.. _minio-server-envvar-logging-audit-kafka:
-
-Kafka Audit Logs
-~~~~~~~~~~~~~~~~
-
-The following section documents environment variables for configuring MinIO to publish audit logs to a Kafka broker.
-
-.. envvar:: MINIO_AUDIT_KAFKA_ENABLE
-   :required:
-
-   Set to ``"on"`` to enable the target.
-
-   Set to ``"off"`` to disable the target.
-
-.. envvar:: MINIO_AUDIT_KAFKA_BROKERS
-   :required:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-brokers-desc
-      :end-before: end-minio-kafka-audit-logging-brokers-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.brokers` configuration setting.
-    
-.. envvar:: MINIO_AUDIT_KAFKA_TOPIC
-   :required:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-topic-desc
-      :end-before: end-minio-kafka-audit-logging-topic-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.topic` configuration setting.
-    
-.. envvar:: MINIO_AUDIT_KAFKA_TLS  
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-tls-desc
-      :end-before: end-minio-kafka-audit-logging-tls-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.tls` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_TLS_SKIP_VERIFY
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-tls-skip-verify-desc
-      :end-before: end-minio-kafka-audit-logging-tls-skip-verify-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.tls_skip_verify` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_SASL
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-sasl-desc
-      :end-before: end-minio-kafka-audit-logging-sasl-desc
-
-   Requires specifying :envvar:`MINIO_AUDIT_KAFKA_SASL_USERNAME` and :envvar:`MINIO_AUDIT_KAFKA_SASL_PASSWORD`.
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.sasl` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_SASL_USERNAME
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-sasl-username-desc
-      :end-before: end-minio-kafka-audit-logging-sasl-username-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.sasl_username` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_SASL_PASSWORD
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-sasl-password-desc
-      :end-before: end-minio-kafka-audit-logging-sasl-password-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.sasl_password` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_SASL_MECHANISM
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-sasl-mechanism-desc
-      :end-before: end-minio-kafka-audit-logging-sasl-mechanism-desc
-
-   .. important::
-
-      The ``PLAIN`` authentication mechanism sends credentials in plain text over the network.
-      Use :envvar:`MINIO_AUDIT_KAFKA_TLS` to enable TLS connectivity to the Kafka brokers and ensure secure transmission of SASL credentials.
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.sasl_mechanism` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_TLS_CLIENT_AUTH
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-tls-client-auth-desc
-      :end-before: end-minio-kafka-audit-logging-tls-client-auth-desc
-
-   Requires specifying :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT` and :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY`.
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.tls_client_auth` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-client-tls-cert-desc
-      :end-before: end-minio-kafka-audit-logging-client-tls-cert-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.client_tls_cert` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-client-tls-key-desc
-      :end-before: end-minio-kafka-audit-logging-client-tls-key-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.client_tls_key` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_VERSION
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-version-desc
-      :end-before: end-minio-kafka-audit-logging-version-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.version` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_COMMENT
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-comment-desc
-      :end-before: end-minio-kafka-audit-logging-comment-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.comment` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_QUEUE_DIR
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-queue-dir-desc
-      :end-before: end-minio-kafka-audit-logging-queue-dir-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.queue_dir` configuration setting.
-
-.. envvar:: MINIO_AUDIT_KAFKA_QUEUE_SIZE
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-kafka-audit-logging-queue-size-desc
-      :end-before: end-minio-kafka-audit-logging-queue-size-desc
-
-   This environment variable corresponds with the :mc-conf:`audit_kafka.queue_size` configuration setting.
-
-
-Configuration Values
---------------------
-
-These environment variables configure publishing regular :mc:`minio server` logs and audit logs to an HTTP webhook. 
-See :ref:`minio-logging` for more complete documentation.
-
-- :ref:`minio-server-config-logging-regular`
-- :ref:`minio-server-config-logging-audit`
-- :ref:`minio-server-config-logging-kafka-audit`
-
-
+.. _minio-server-envvar-logging-regular:
 .. _minio-server-config-logging-regular:
 
-HTTP Webhook Log Target
-~~~~~~~~~~~~~~~~~~~~~~~
+The following section documents settings for configuring MinIO to publish :mc:`minio server` logs to an HTTP webhook endpoint. 
+See :ref:`minio-logging-publish-server-logs` for more complete documentation and tutorials on using these settings.
 
-.. mc-conf:: logger_webhook
+Defining Multiple Endpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   The top-level configuration key for defining an HTTP webhook target for
-   publishing :ref:`MinIO logs <minio-logging>`. 
+You can specify multiple webhook endpoints as log targets by appending a unique identifier ``_ID`` for each set of related logging environment variables. 
+For example, the following settings define two distinct server logs webhook endpoints:
 
-   Use :mc-cmd:`mc admin config set` to set or update an HTTP webhook target.
-   Specify additional optional arguments as a whitespace (``" "``)-delimited 
-   list.
+.. tab-set::
 
-   .. code-block:: shell
-      :class: copyable
+   .. tab-item:: Environment Variables
+      :sync: envvar
+   
+      .. code-block:: shell
+         :class: copyable
+      
+         export MINIO_LOGGER_WEBHOOK_ENABLE_PRIMARY="on"
+         export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_PRIMARY="TOKEN"
+         export MINIO_LOGGER_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net"
+      
+         export MINIO_LOGGER_WEBHOOK_ENABLE_SECONDARY="on"
+         export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_SECONDARY="TOKEN"
+         export MINIO_LOGGER_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-2.example.net"
 
-      mc admin config set logger_webhook \
-         endpoint="http://webhook.example.net" [ARGUMENTS=VALUE ...]
-
-   You can specify multiple HTTP webhook targets by appending 
-   ``[:name]`` to the top-level key. For example, the following commands
-   set two distinct HTTP webhook targets as ``primary`` and ``secondary``
-   respectively:
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin config set logger_webhook:primary \
-         endpoint="http://webhook-01.example.net" [ARGUMENTS=VALUE ...]
-
-
-      mc admin config set logger_webhook:secondary \
-         endpoint="http://webhook-02.example.net" [ARGUMENTS=VALUE ...]
-
-   The :mc-conf:`logger_webhook` configuration key accepts the following 
-   arguments:
-
-   .. mc-conf:: endpoint
-
-      *Required*
-
-      The HTTP endpoint of the webhook.
-
-      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT` environment variable.
-
-   .. mc-conf:: auth_token
-
-      *Optional*
-
-      An authentication token of the appropriate type for the endpoint.
-      Omit for endpoints which do not require authentication.
-
-      To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
-      Depending on the endpoint, you may need to include additional information.
-
-      For example: for a Bearer token, prepend ``Bearer``:
+   .. tab-item:: Configuration Setting
+      :sync: config
 
       .. code-block:: shell
          :class: copyable
 
-            mc admin config set myminio logger_webhook   \
-               endpoint="https://webhook-1.example.net"  \
-               auth_token="Bearer 1a2b3c4f5e"
+         mc admin config set logger_webhook:primary \
+            endpoint="http://webhook-01.example.net" [ARGUMENTS=VALUE ...]
+
+         mc admin config set logger_webhook:secondary \
+            endpoint="http://webhook-02.example.net" [ARGUMENTS=VALUE ...]
+
+Settings
+~~~~~~~~
+
+Enable
+++++++
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :selected:
+
+      .. envvar:: MINIO_LOGGER_WEBHOOK_ENABLE
+
+      Specify ``"on"`` to enable publishing :mc:`minio server` logs to the HTTP webhook endpoint.
+      
+      Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT`.
+   
+   .. tab-item:: Configuration Setting
+
+      There is no configuration setting for this value.
+      Use the environment variable instead.
+
+
+Endpoint
+++++++++
+
+*Required*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_LOGGER_WEBHOOK_ENDPOINT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: logger_webhook endpoint
+         :delimiter: " "
+
+The HTTP endpoint of the webhook. 
+
+Auth Token
+++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_LOGGER_WEBHOOK_AUTH_TOKEN
+
+      An authentication token of the appropriate type for the endpoint.
+      Omit for endpoints which do not require authentication.
+   
+      To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+      Depending on the endpoint, you may need to include additional information.
+   
+      For example: for a Bearer token, prepend ``Bearer``:
+   
+      .. code-block:: shell
+         :class: copyable
+   
+         set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+   
+      Modify the value according to the endpoint requirements.
+      A custom authentication format could resemble the following:
+   
+      .. code-block:: shell
+         :class: copyable
+   
+         set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+   
+      Consult the documentation for the desired service for more details.
+   
+      This environment variable corresponds with the :mc-conf:`logger_webhook auth_token <logger_webhook.auth_token>` configuration setting.
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: logger_webhook auth_token
+         :delimiter: " "
+   
+         An authentication token of the appropriate type for the endpoint.
+         Omit for endpoints which do not require authentication.
+   
+         To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+         Depending on the endpoint, you may need to include additional information.
+   
+         For example: for a Bearer token, prepend ``Bearer``:
+   
+         .. code-block:: shell
+            :class: copyable
+   
+               mc admin config set myminio logger_webhook   \
+                  endpoint="https://webhook-1.example.net"  \
+                  auth_token="Bearer 1a2b3c4f5e"
+   
+         Modify the value according to the endpoint requirements.
+         A custom authentication format could resemble the following:
+   
+         .. code-block:: shell
+            :class: copyable
+   
+               mc admin config set myminio logger_webhook   \
+   	            endpoint="https://webhook-1.example.net"  \
+                  auth_token="ServiceXYZ 1a2b3c4f5e"
+   
+         Consult the documentation for the desired service for more details.
+
+Client Certificate
+++++++++++++++++++
+
+*Optional*
+
+Requires also setting the *Client Key*.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_LOGGER_WEBHOOK_CLIENT_CERT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: logger_webhook client_cert
+         :delimiter: " "
+
+The path to the mTLS certificate to use for authenticating to the webhook logger.
+   
+Client Key
+++++++++++
+
+*Optional*
+
+Required if you define the *Client Certificate*.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_LOGGER_WEBHOOK_CLIENT_KEY
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: logger_webhook client_key
+         :delimiter: " "
+
+The path to the mTLS certificate key to use to authenticate with the webhook logger service.
+
+Proxy
++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_LOGGER_WEBHOOK_PROXY
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: logger_webhook proxy
+         :delimiter: " "
+
+      .. versionadded:: MinIO RELEASE.2023-02-22T18-23-45Z 
+
+Define a proxy to use for the webhook logger when communicating from MinIO to external webhooks.
+
+Queue Directory
++++++++++++++++
+
+*Optional*
+
+.. versionadded:: RELEASE.2023-05-18T00-05-36Z
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_DIR
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: logger_webhook queue_dir
+         :delimiter: " "
+
+Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
+The MinIO process must have read, write, and list access on the specified directory.
+
+MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+ 
+Queue Size
+++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+      
+      .. envvar:: MINIO_LOGGER_WEBHOOK_QUEUE_SIZE
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: logger_webhook queue_size
+         :delimiter: " "
+
+An integer value to use for the queue size for logger webhook targets.
+
+.. _minio-server-envvar-logging-audit:
+.. _minio-server-config-logging-audit:
+
+Webhook Audit Logs
+------------------
+
+The following section documents environment variables for configuring MinIO to publish audit logs to an HTTP webhook endpoint. 
+See :ref:`minio-logging-publish-audit-logs` for more complete documentation and tutorials on using these environment variables.
+
+Multiple Targets
+~~~~~~~~~~~~~~~~
+
+You can specify multiple webhook endpoints as audit log targets by appending a unique identifier ``_ID`` for each set of related logging settings. 
+
+For example, the following command set two distinct audit log webhook endpoints:
+
+.. tab-set::
+
+   .. tab-item:: Environment Variables
+      :sync: envvar
+
+      .. code-block:: shell
+         :class: copyable
+      
+         export MINIO_AUDIT_WEBHOOK_ENABLE_PRIMARY="on"
+         export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_PRIMARY="TOKEN"
+         export MINIO_AUDIT_WEBHOOK_ENDPOINT_PRIMARY="http://webhook-1.example.net"
+         export MINIO_AUDIT_WEBHOOK_CLIENT_CERT_SECONDARY="/tmp/cert.pem"
+         export MINIO_AUDIT_WEBHOOK_CLIENT_KEY_SECONDARY="/tmp/key.pem"
+      
+         export MINIO_AUDIT_WEBHOOK_ENABLE_SECONDARY="on"
+         export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_SECONDARY="TOKEN"
+         export MINIO_AUDIT_WEBHOOK_ENDPOINT_SECONDARY="http://webhook-1.example.net"
+         export MINIO_AUDIT_WEBHOOK_CLIENT_CERT_SECONDARY="/tmp/cert.pem"
+         export MINIO_AUDIT_WEBHOOK_CLIENT_KEY_SECONDARY="/tmp/key.pem"
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_webhook
+      
+         The top-level configuration key for defining an HTTP webhook target for
+         publishing :ref:`MinIO audit logs <minio-logging>`. 
+      
+         Use :mc-cmd:`mc admin config set` to set or update an HTTP webhook target.
+         Specify additional optional arguments as a whitespace (``" "``)-delimited 
+         list.
+      
+         .. code-block:: shell
+            :class: copyable
+      
+            mc admin config set audit_webhook \
+               endpoint="http://webhook.example.net" [ARGUMENTS=VALUE ...]
+      
+         You can specify multiple HTTP webhook targets by appending 
+         ``[:name]`` to the top-level key. For example, the following commands
+         set two distinct HTTP webhook targets as ``primary`` and ``secondary``
+         respectively:
+      
+         .. code-block:: shell
+            :class: copyable
+      
+            mc admin config set audit_webhook:primary \
+               endpoint="http://webhook-01.example.net" [ARGUMENTS=VALUE ...]
+      
+      
+            mc admin config set audit_webhook:secondary \
+               endpoint="http://webhook-02.example.net" [ARGUMENTS=VALUE ...]
+
+Settings
+~~~~~~~~
+
+Enable
+++++++
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :selected:
+
+      .. envvar:: MINIO_AUDIT_WEBHOOK_ENABLE
+      
+         Specify ``"on"`` to enable publishing audit logs to the HTTP webhook endpoint.
+      
+         Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT`.
+      
+   .. tab-item:: Configuration Setting
+      :config:
+
+      Configure an audit webhook to enable it.
+      There is *not* a separate ``enable`` configuration setting.
+
+Endpoint
+++++++++
+
+*Required*
+
+.. tab-set:: 
+   
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_WEBHOOK_ENDPOINT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_webhook endpoint
+         :delimiter: " "
+
+The HTTP endpoint of the webhook.
+
+Auth Token
+++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_WEBHOOK_AUTH_TOKEN
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_webhook auth_token
+         :delimiter: " "
+
+An authentication token of the appropriate type for the endpoint.
+Omit for endpoints which do not require authentication.
+
+To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+Depending on the endpoint, you may need to include additional information.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      For example, for a Bearer token, prepend ``Bearer``:
+
+      .. code-block:: shell
+         :class: copyable
+
+         set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
 
       Modify the value according to the endpoint requirements.
+      
       A custom authentication format could resemble the following:
 
       .. code-block:: shell
          :class: copyable
 
-            mc admin config set myminio logger_webhook   \
-	       endpoint="https://webhook-1.example.net"  \
-               auth_token="ServiceXYZ 1a2b3c4f5e"
+         set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
 
-      Consult the documenation for the desired service for more details.
-
-      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_AUTH_TOKEN` environment variable.
-
-   .. mc-conf:: client_cert
-
-      *Optional*
-
-      The path to the mTLS certificate to use for authenticating to the webhook logger.
-
-      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_CERT` environment variable.
-
-   .. mc-conf:: client_key
-
-      *Optional*
-
-      The path to the mTLS certificate key to use to authenticate with the webhook logger service.
-
-      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_CLIENT_KEY` environment variable.
-
-   .. mc-conf:: proxy
-
-      .. versionadded:: MinIO RELEASE.2023-02-22T18-23-45Z 
-
-      *Optional*
-
-      Define a proxy to use for the webhook logger when communicating from MinIO to external webhooks.
-
-      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_PROXY` environment variable.
-
-   .. mc-conf:: queue_dir
-
-      .. versionadded:: RELEASE.2023-05-18T00-05-36Z
-
-      *Optional*
-
-      Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
-      The MinIO process must have read, write, and list access on the specified directory.
-
-      MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
-
-      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_QUEUE_DIR` environment variable.
-
-   .. mc-conf:: queue_size
-
-      *Optional*
-
-      An integer value to use for the queue size for logger webhook targets.
-      The default is ``100000`` events.
-
-      This configuration setting corresponds with the :envvar:`MINIO_LOGGER_WEBHOOK_QUEUE_SIZE` environment variable.
-
-.. _minio-server-config-logging-audit:
-
-HTTP Webhook Audit Log Target
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. mc-conf:: audit_webhook
-
-   The top-level configuration key for defining an HTTP webhook target for
-   publishing :ref:`MinIO audit logs <minio-logging>`. 
-
-   Use :mc-cmd:`mc admin config set` to set or update an HTTP webhook target.
-   Specify additional optional arguments as a whitespace (``" "``)-delimited 
-   list.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin config set audit_webhook \
-         endpoint="http://webhook.example.net" [ARGUMENTS=VALUE ...]
-
-   You can specify multiple HTTP webhook targets by appending 
-   ``[:name]`` to the top-level key. For example, the following commands
-   set two distinct HTTP webhook targets as ``primary`` and ``secondary``
-   respectively:
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin config set audit_webhook:primary \
-         endpoint="http://webhook-01.example.net" [ARGUMENTS=VALUE ...]
-
-
-      mc admin config set audit_webhook:secondary \
-         endpoint="http://webhook-02.example.net" [ARGUMENTS=VALUE ...]
-
-   The :mc-conf:`audit_webhook` configuration key accepts the following 
-   arguments:
-
-   .. mc-conf:: endpoint
-
-      *Required*
-
-      The HTTP endpoint of the webhook.
-
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT` environment variable.
-
-   .. mc-conf:: auth_token
-
-      *Optional*
-
-      An authentication token of the appropriate type for the endpoint.
-      Omit for endpoints which do not require authentication.
-
-      To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
-      Depending on the endpoint, you may need to include additional information.
-
-      For example: for a Bearer token, prepend ``Bearer``:
+   .. tab-item:: Configuration Setting
+      :sync: config
 
       .. code-block:: shell
          :class: copyable
@@ -626,6 +479,7 @@ HTTP Webhook Audit Log Target
                   auth_token="Bearer 1a2b3c4f5e"
 
       Modify the value according to the endpoint requirements.
+
       A command for a custom authentication format could resemble the following:
 
       .. code-block:: shell
@@ -635,58 +489,113 @@ HTTP Webhook Audit Log Target
                   endpoint="http://webhook.example.net"  \
                   auth_token="ServiceXYZ 1a2b3c4f5e"
 
-      Consult the documenation for the desired service for more details.
+Consult the documentation for the desired service for more details.
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_AUTH_TOKEN` environment variable.
+Client Certificate
+++++++++++++++++++
 
-   .. mc-conf:: client_cert
+*Optional*
 
-      *Optional*
+.. tab-set::
 
-      The x.509 client certificate to present to the HTTP webhook. Omit for
-      webhooks which do not require clients to present a known TLS certificate.
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      Requires specifying :mc-conf:`~audit_webhook.client_key`.
+      .. envvar:: MINIO_AUDIT_WEBHOOK_CLIENT_CERT
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_CERT` environment variable.
+      Requires also specifying :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_KEY`.
+   
+   .. tab-item::
+      :sync: config
 
-   .. mc-conf:: client_key
+      .. mc-conf:: audit_webhook client_cert
+         :delimiter: " "
 
-      *Optional*
+      Requires also specifying :mc-conf:`~audit_webhook.client_key`.
 
-      The x.509 private key to present to the HTTP webhook. Omit for
-      webhooks which do not require clients to present a known TLS certificate.
+The x.509 client certificate to present to the HTTP webhook. 
+Omit for webhooks which do not require clients to present a known TLS certificate.
+
+Client Key
+++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :envvar:
+
+      .. envvar:: MINIO_AUDIT_WEBHOOK_CLIENT_KEY
+
+      Requires also specifying :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_CERT`.
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_webhook client_key
+         :delimiter: " "
 
       Requires specifying :mc-conf:`~audit_webhook.client_cert`.
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_KEY` environment variable.
+The x.509 private key to present to the HTTP webhook. 
+Omit for webhooks which do not require clients to present a known TLS certificate.
 
-   .. mc-conf:: queue_dir
 
-      .. versionadded:: RELEASE.2023-05-18T00-05-36Z
+Queue Directory
++++++++++++++++
 
-      *Optional*
+*Optional*
 
-      Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
-      The MinIO process must have read, write, and list access on the specified directory.
+.. tab-set::
 
-      MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_QUEUE_DIR` environment variable.
+      .. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_DIR
 
-   .. mc-conf:: queue_size
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      *Optional*
+      .. mc-conf:: audit_webhook queue_dir
+         :delimiter: " "
 
-      An integer value to use for the queue size for webhook targets.
-      The default is ``100000`` events.
+.. versionadded:: RELEASE.2023-05-18T00-05-36Z
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_WEBHOOK_QUEUE_SIZE` environment variable.
+Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
+The MinIO process must have read, write, and list access on the specified directory.
 
+MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+
+Queue Size
+++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_WEBHOOK_QUEUE_SIZE
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_webhook queue_size
+         :delimiter: " "
+
+An integer value to use for the queue size for audit webhook targets.
+The default is ``100000`` events.
+
+.. _minio-server-envvar-logging-audit-kafka:
 .. _minio-server-config-logging-kafka-audit:
 
-Kafka Audit Log Target
-~~~~~~~~~~~~~~~~~~~~~~
+Kafka Audit Logs
+----------------
+
+The following section documents environment variables for configuring MinIO to publish audit logs to a Kafka broker.
+
 
 .. mc-conf:: audit_kafka
 
@@ -701,165 +610,384 @@ Kafka Audit Log Target
       mc admin config set audit_kafka \
          brokers="https://kafka-endpoint.example.net:9092" [ARGUMENTS=VALUE ...]
 
-   The :mc-conf:`audit_kafka` configuration key accepts the following arguments:
 
-   .. mc-conf:: brokers
-      :required:
-      :delimiter: " "
+Settings
+~~~~~~~~
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-brokers-desc
-         :end-before: end-minio-kafka-audit-logging-brokers-desc
+Enable
+++++++
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_BROKERS` environment variable.
+*Required*
 
-   .. mc-conf:: topic
-      :required:
-      :delimiter: " "
+.. tab-set::
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-topic-desc
-         :end-before: end-minio-kafka-audit-logging-topic-desc
+   .. tab-item:: Environment Variable
+      :selected:
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_TOPIC` environment variable.
+      .. envvar:: MINIO_AUDIT_KAFKA_ENABLE
+   
+      Set to ``"on"`` to enable the target.
 
-   .. mc-conf:: tls
-      :optional:
-      :delimiter: " "
+      Set to ``"off"`` to disable the target.
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-tls-desc
-         :end-before: end-minio-kafka-audit-logging-tls-desc
+   .. tab-item:: Configuration Setting
+      
+      There is not a configuration setting for this value.
+      Use the environment variable to disable a configured audit webhook target.
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_TLS` environment variable.
+Brokers
++++++++
 
-   .. mc-conf:: tls_skip_verify
-      :optional:
-      :delimiter: " "
+*Required*
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-tls-skip-verify-desc
-         :end-before: end-minio-kafka-audit-logging-tls-skip-verify-desc
+.. tab-set::
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_TLS_SKIP_VERIFY` environment variable.
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-   .. mc-conf:: tls_client_auth
-      :optional:
-      :delimiter: " "
+      .. envvar:: MINIO_AUDIT_KAFKA_BROKERS
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-tls-client-auth-desc
-         :end-before: end-minio-kafka-audit-logging-tls-client-auth-desc
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      Requires specifying :mc-conf:`~audit_kafka.client_tls_cert` and :mc-conf:`~audit_kafka.client_tls_key`.
+      .. mc-conf:: audit_kafka brokers
+         :delimiter: " "
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_TLS_CLIENT_AUTH` environment variable.
-
-   .. mc-conf:: client_tls_cert
-      :optional:
-      :delimiter: " "
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-client-tls-cert-desc
-         :end-before: end-minio-kafka-audit-logging-client-tls-cert-desc
-
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT` environment variable.
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-brokers-desc
+   :end-before: end-minio-kafka-audit-logging-brokers-desc
 
 
-   .. mc-conf:: client_tls_key
-      :optional:
-      :delimiter: " "
+Topic
++++++
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-client-tls-key-desc
-         :end-before: end-minio-kafka-audit-logging-client-tls-key-desc
+*Required*
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY` environment variable.
+.. tab-set::
 
-   .. mc-conf:: sasl
-      :optional:
-      :delimiter: " "
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-sasl-desc
-         :end-before: end-minio-kafka-audit-logging-sasl-desc
+      .. envvar:: MINIO_AUDIT_KAFKA_TOPIC
+   
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_kafka topic
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-topic-desc
+   :end-before: end-minio-kafka-audit-logging-topic-desc
+
+TLS
++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_TLS  
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_kafka tls
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-tls-desc
+   :end-before: end-minio-kafka-audit-logging-tls-desc
+
+TLS Skip Verify
++++++++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_TLS_SKIP_VERIFY
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_kafka tls_skip_verify
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-tls-skip-verify-desc
+   :end-before: end-minio-kafka-audit-logging-tls-skip-verify-desc
+
+SASL
+++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_SASL
+
+      Requires specifying :envvar:`MINIO_AUDIT_KAFKA_SASL_USERNAME` and :envvar:`MINIO_AUDIT_KAFKA_SASL_PASSWORD`.
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+   
+      .. mc-conf:: audit_kafka sasl
+         :delimiter: " "
 
       Requires specifying :mc-conf:`~audit_kafka.sasl_username` and :mc-conf:`~audit_kafka.sasl_password`.
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_SASL` environment variable.
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-sasl-desc
+   :end-before: end-minio-kafka-audit-logging-sasl-desc
 
+SASL Username
++++++++++++++
 
-   .. mc-conf:: sasl_username
-      :optional:
-      :delimiter: " "
+*Optional*
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-sasl-username-desc
-         :end-before: end-minio-kafka-audit-logging-sasl-username-desc
+.. tab-set::
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_SASL_USERNAME` environment variable.
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-   .. mc-conf:: sasl_password
-      :optional:
-      :delimiter: " "
+      .. envvar:: MINIO_AUDIT_KAFKA_SASL_USERNAME
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-sasl-password-desc
-         :end-before: end-minio-kafka-audit-logging-sasl-password-desc
+      Requires specifying :envvar:`MINIO_AUDIT_KAFKA_SASL` and :envvar:`MINIO_AUDIT_KAFKA_SASL_PASSWORD`.
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_SASL_PASSWORD` environment variable.
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-   .. mc-conf:: sasl_mechanism
-      :optional:
-      :delimiter: " "
+      .. mc-conf:: audit_kafka sasl_username
+         :delimiter: " "
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-sasl-mechanism-desc
-         :end-before: end-minio-kafka-audit-logging-sasl-mechanism-desc
+      Requires specifying :mc-conf:`~audit_kafka.sasl` and :mc-conf:`~audit_kafka.sasl_password`.
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_SASL_MECHANISM` environment variable.
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-sasl-username-desc
+   :end-before: end-minio-kafka-audit-logging-sasl-username-desc
+
+SASL Password
++++++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_SASL_PASSWORD
+
+      Requires specifying :envvar:`MINIO_AUDIT_KAFKA_SASL` and :envvar:`MINIO_AUDIT_KAFKA_SASL_USERNAME`.
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_kafka sasl_password
+         :delimiter: " "
+
+      Requires specifying :mc-conf:`~audit_kafka.sasl` and :mc-conf:`~audit_kafka.sasl_username`.
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-sasl-password-desc
+   :end-before: end-minio-kafka-audit-logging-sasl-password-desc
+
+SASL Mechanism
+++++++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_SASL_MECHANISM
+
+      .. important::
+
+         The ``PLAIN`` authentication mechanism sends credentials in plain text over the network.
+         Use :envvar:`MINIO_AUDIT_KAFKA_TLS` or to enable TLS connectivity to the Kafka brokers and ensure secure transmission of SASL credentials.
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_kafka sasl_mechanism
+         :delimiter: " "
 
       .. important::
 
          The ``PLAIN`` authentication mechanism sends credentials in plain text over the network.
          Use :mc-conf:`~audit_kafka.tls` to enable TLS connectivity to the Kafka brokers and ensure secure transmission of SASL credentials.
 
-   .. mc-conf:: version
-      :optional:
-      :delimiter: " "
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-sasl-mechanism-desc
+   :end-before: end-minio-kafka-audit-logging-sasl-mechanism-desc
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-version-desc
-         :end-before: end-minio-kafka-audit-logging-version-desc
+TLS  Client Auth
+++++++++++++++++
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_VERSION` environment variable.
+*Optional*
 
-   .. mc-conf:: comment
-      :optional:
-      :delimiter: " "
+.. tab-set::
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-comment-desc
-         :end-before: end-minio-kafka-audit-logging-comment-desc
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_COMMENT` environment variable.
+      .. envvar:: MINIO_AUDIT_KAFKA_TLS_CLIENT_AUTH
 
-   .. mc-conf:: queue_dir
-      :optional:
-      :delimiter: " "
+      Requires specifying :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT` and :envvar:`MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY`.
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-queue-dir-desc
-         :end-before: end-minio-kafka-audit-logging-queue-dir-desc
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_DIR` environment variable.
+      .. mc-conf:: audit_kafka tls_client_auth
+         :delimiter: " "
 
-   .. mc-conf::	queue_size
-      :optional:
-      :delimiter: " "
+      Requires specifying :mc-conf:`~audit_kafka.client_tls_cert` and :mc-conf:`~audit_kafka.client_tls_key`.
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-kafka-audit-logging-queue-size-desc
-         :end-before: end-minio-kafka-audit-logging-queue-size-desc
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-tls-client-auth-desc
+   :end-before: end-minio-kafka-audit-logging-tls-client-auth-desc
 
-      This configuration setting corresponds with the :envvar:`MINIO_AUDIT_KAFKA_QUEUE_SIZE` environment variable.
+Client TLS Certificate
+++++++++++++++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_CLIENT_TLS_CERT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_kafka client_tls_cert
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-client-tls-cert-desc
+   :end-before: end-minio-kafka-audit-logging-client-tls-cert-desc
+
+Client TLS Key
+++++++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_CLIENT_TLS_KEY
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+   
+      .. mc-conf:: audit_kafka client_tls_key
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-client-tls-key-desc
+   :end-before: end-minio-kafka-audit-logging-client-tls-key-desc
+
+Version
++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_VERSION
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_kafka version
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-version-desc
+   :end-before: end-minio-kafka-audit-logging-version-desc
+
+Comment
++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync:
+
+      .. envvar:: MINIO_AUDIT_KAFKA_COMMENT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+   
+      .. mc-conf:: audit_kafka comment
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-comment-desc
+   :end-before: end-minio-kafka-audit-logging-comment-desc
+
+Queue Directory
++++++++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_QUEUE_DIR
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_kafka queue_dir
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-queue-dir-desc
+   :end-before: end-minio-kafka-audit-logging-queue-dir-desc
+
+Queue Size
+++++++++++
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_KAFKA_QUEUE_SIZE
+
+   .. tab-item:: Configuration Setting
+      :sync:
+
+      .. mc-conf:: audit_kafka queue_size
+         :delimiter: " "
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-kafka-audit-logging-queue-size-desc
+   :end-before: end-minio-kafka-audit-logging-queue-size-desc

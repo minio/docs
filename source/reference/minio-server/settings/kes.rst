@@ -1,8 +1,8 @@
 .. _minio-server-envvar-kes:
 
-=============================================================
-Environment Variables to Configure the Key Encryption Service
-=============================================================
+===============================
+Key Encryption Service Settings
+===============================
 
 .. default-domain:: minio
 
@@ -11,6 +11,10 @@ Environment Variables to Configure the Key Encryption Service
    :depth: 2
 
 The following environment variables control behavior for the Key Encryption Service (KES) for managing encryption and keys.
+
+.. note::
+
+   These settings do not have configuration setting options for use with :mc:`mc admin config set`.
 
 .. envvar:: MINIO_KMS_KES_ENDPOINT
 
