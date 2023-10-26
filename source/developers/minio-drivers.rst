@@ -17,8 +17,8 @@ MinIO publishes the following Software Development Kits (SDK):
 - :ref:`Java <java-sdk>`
 - :ref:`.NET <dotnet-sdk>`
 - :ref:`JavaScript <javascript-sdk>`
-- :ref:`C++ <cpp-sdk>`
 - :ref:`Haskell <haskell-sdk>`
+- :ref:`C++ <cpp-sdk>`
 
 .. _go-sdk:
 
@@ -172,14 +172,31 @@ Install
        npm install --save-dev @types/minio
 
 
+.. _haskell-sdk:
+
+Haskell
+-------
+
+GitHub: `minio/minio-hs <https://github.com/minio/minio-hs>`__
+
+Latest Version: |haskell-sdk-version|
+
+Quickstart Guide: :doc:`/developers/haskell/minio-haskell`
+
+Install
+  Add ``minio-hs`` to your project's ``.cabal`` dependencies section.
+
+  or
+
+  If you are using ``hpack``, add ``minio-hs`` to your ``package.yaml`` file.
+
+
 .. _cpp-sdk:
 
 C++
 ---
 
 GitHub: `minio/minio-cpp <https://github.com/minio/minio-cpp>`__
-
-Latest version: |cpp-sdk-version|
 
 Reference: `MinIO C++ SDK Reference <https://minio-cpp.min.io/>`__
 
@@ -205,24 +222,6 @@ Install
        cmake -B ./build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg-master/scripts/buildsystems/vcpkg.cmake
        cmake --build ./build --config Debug
 
-
-.. _haskell-sdk:
-
-Haskell
--------
-
-GitHub: `minio/minio-hs <https://github.com/minio/minio-hs>`__
-
-Latest Version: |haskell-sdk-version|
-
-Quickstart Guide: :doc:`/developers/haskell/minio-haskell`
-
-Install
-  Add ``minio-hs`` to your project's ``.cabal`` dependencies section.
-
-  or
-
-  If you are using ``hpack``, add ``minio-hs`` to your ``package.yaml`` file.
 
 ..
   Rust SDK repo does not have any releases yet. Once released, unblock this section and add to toctree.
