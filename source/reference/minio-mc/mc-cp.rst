@@ -102,7 +102,7 @@ Parameters
 
    .. code-block:: none
 
-      mc cp ~/data/object.txt myminio/mydata/object.txt play/mydata/object.txt
+      mc cp ~/data/object.txt myminio/mydata/object.txt play/mydata/
 
    For copying an object from a local filesystem, specify the full path to that object. 
    For example:
