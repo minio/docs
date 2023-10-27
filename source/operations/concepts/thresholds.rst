@@ -138,4 +138,4 @@ For example, the following operations create a namespace conflicts
    PUT data/invoices/2024/january
    PUT data/invoices/2024/january/vendors.csv <- collides with existing object
 
-While GET or HEAD operations against those objects can succeed, MinIO would return an empty result set for LIST operations at the ``/invoices/2024/january`` path.
+While you can perform GET or HEAD operations against these objects, the name collision causes LIST operations to return an empty result set at the ``/invoices/2024/january`` path.
