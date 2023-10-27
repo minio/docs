@@ -10,7 +10,7 @@ Monitoring and Alerting using InfluxDB
    :local:
    :depth: 1
 
-MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <data_model/>`.
+MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 `InfluxDB <https://www.influxdata.com/?ref=minio>`__ supports scraping MinIO metrics data for monitoring and alerting.
 
 The procedure on this page documents the following:
