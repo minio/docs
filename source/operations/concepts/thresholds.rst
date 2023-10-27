@@ -122,18 +122,20 @@ MinIO recommends using LInux operating system with an XFS based filesystem for p
 Conflicting Objects
 ~~~~~~~~~~~~~~~~~~~
 
-Objects cannot have a conflicting object as its parent.
-Applications must assign non-conflicting, unique keys.
+Applications must assign non-conflicting, unique keys for all objects.
+This includes avoiding creating objects where the name can collide with that of a parent or sibling object.
+MinIO returns an empty set for LIST operations at the location of the collision.
 
-MinIO does not support a situation where an object's name is also the name of the prefix for a child object. 
-For the following example operations, the second PUT operation fails because of a naming conflict with the object created by the first.
-
-.. code-block::
-   
-   PUT <bucketname>/a/b/1.txt
-   PUT <bucketname>/a/b
+For example, the following operations create a namespace conflicts
 
 .. code-block::
    
-   PUT <bucketname>/a/b
-   PUT <bucketname>/a/b/1.txt
+   PUT data/invoices/2024/january/vendors.csv
+   PUT data/invoices/2024/january <- collides with existing object prefix
+
+.. code-block::
+
+   PUT data/invoices/2024/january
+   PUT data/invoices/2024/january/vendors.csv <- collides with existing object
+
+While you can perform GET or HEAD operations against these objects, the name collision causes LIST operations to return an empty result set at the ``/invoices/2024/january`` path.
