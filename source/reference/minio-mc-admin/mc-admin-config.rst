@@ -41,10 +41,6 @@ Syntax
    Sets a :ref:`configuration key <minio-server-configuration-settings>` on the MinIO deployment.
    Configurations defined by environment variables override configurations defined by this command.
 
-   For distributed deployments, use to modify existing endpoints.
-
-   Endpoints using the http protocol can be either the hostname or IP address, and they may use either ``http`` or ``https``.
-
 .. mc-cmd:: get
    :fullpath:
 
