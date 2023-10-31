@@ -12,9 +12,15 @@
 
 This page covers settings that control root access for the MinIO process. 
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-settings-defined
-   :end-before: end-minio-settings-defined
+You can define settings by defining 
+
+- an *environment variable* prior to starting or restarting the MinIO Server.
+- a *configuration setting* using :mc:`mc admin config set`.
+- a *configuration setting* using the :ref:`MinIO Console's <minio-console-settings>` :guilabel:`Administrator > Settings` pages.
+  
+If you define both an environment variable and the similar configuration setting, MinIO uses the environment variable value.
+
+Some settings can only be defined by either an environment variable or by a configuration setting.
 
 Root User
 ---------
@@ -81,9 +87,14 @@ Root Access
       .. mc-conf:: api root-access
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-root-api-access
-   :end-before: end-minio-root-api-access
+.. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
+
+Specify ``on`` to enable and ``off`` to disable the :ref:`root <minio-users-root>` user account.
+Disabling the root service account also disables all service accounts associated with root, excluding those used by site replication.
+Defaults to ``on``.
+
+Ensure you have at least one other admin user, such as one with the :userpolicy:`consoleAdmin` policy, before disabling the root account.
+If you do not have another admin user, disabling the root account locks administrative access to the deployment.
 
 You can use this variable to temporarily override the configuration setting and re-enable root access to the deployment.
 

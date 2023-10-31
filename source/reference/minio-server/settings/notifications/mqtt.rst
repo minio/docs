@@ -1,8 +1,9 @@
 .. _minio-server-envvar-bucket-notification-mqtt:
+.. _minio-server-config-bucket-notification-mqtt:
 
-===============================
-Settings for MQTT Notifications
-===============================
+==========================
+MQTT Notification Settings
+==========================
 
 .. default-domain:: minio
 
@@ -10,294 +11,323 @@ Settings for MQTT Notifications
    :local:
    :depth: 2
 
-This page documents settings for configuring an MQTT service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. 
+This page documents settings for configuring an MQTT service as a target for :ref:`Bucket Notifications <minio-bucket-notifications>`. 
 See :ref:`minio-bucket-notifications-publish-mqtt` for a tutorial on using these settings.
 
-Environment Variables
+Multiple MQTT Targets
 ---------------------
 
-You can specify multiple MQTT service endpoints by appending a unique identifier ``_ID`` for each set of related MQTT environment variables to the top level key. 
-For example, the following commands set two distinct MQTT service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
+You can specify multiple MQTT service endpoints by appending a unique identifier ``_ID`` for each set of related MQTT settings to the top level key. 
+For example, the following commands set two distinct MQTT service endpoints as ``PRIMARY`` and ``SECONDARY``, respectively:
 
-.. code-block:: shell
-   :class: copyable
-
-   set MINIO_NOTIFY_MQTT_ENABLE_PRIMARY="on"
-   set MINIO_NOTIFY_MQTT_BROKER_PRIMARY="tcp://user:password@mqtt-endpoint.example.net:1883"
-
-   set MINIO_NOTIFY_MQTT_ENABLE_SECONDARY="on"
-   set MINIO_NOTIFY_MQTT_BROKER_SECONDARY="tcp://user:password@mqtt-endpoint.example.net:1883"
-
-For example, :envvar:`MINIO_NOTIFY_MQTT_ENABLE_PRIMARY <MINIO_NOTIFY_MQTT_ENABLE>` indicates the environment variable is associated to an MQTT service endpoint with ID of ``PRIMARY``.
-
-.. envvar:: MINIO_NOTIFY_MQTT_ENABLE
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-enable
-      :end-before: end-minio-notify-mqtt-enable
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt <notify_mqtt>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_BROKER
-
-   *Required*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-broker
-      :end-before: end-minio-notify-mqtt-broker
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt broker <notify_mqtt.broker>` configuration setting.
-
-   .. include:: /includes/linux/minio-server.rst
-      :start-after: start-notify-target-online-desc
-      :end-before: end-notify-target-online-desc
-
-.. envvar:: MINIO_NOTIFY_MQTT_TOPIC
-
-   *Required*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-topic
-      :end-before: end-minio-notify-mqtt-topic
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt topic <notify_mqtt.topic>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_USERNAME
-
-   *Required if the MQTT server/broker enforces authentication/authorization*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-username
-      :end-before: end-minio-notify-mqtt-username
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt username <notify_mqtt.username>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_PASSWORD
-
-   *Required if the MQTT server/broker enforces authentication/authorization*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-password
-      :end-before: end-minio-notify-mqtt-password
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt password <notify_mqtt.password>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_QOS
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-qos
-      :end-before: end-minio-notify-mqtt-qos
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt qos <notify_mqtt.qos>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-keep-alive-interval
-      :end-before: end-minio-notify-mqtt-keep-alive-interval
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt keep_alive_interval <notify_mqtt.keep_alive_interval>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-reconnect-interval
-      :end-before: end-minio-notify-mqtt-reconnect-interval
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt reconnect_interval <notify_mqtt.reconnect_interval>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_QUEUE_DIR
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-queue-dir
-      :end-before: end-minio-notify-mqtt-queue-dir
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt queue_dir <notify_mqtt.queue_dir>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_QUEUE_LIMIT
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-queue-limit
-      :end-before: end-minio-notify-mqtt-queue-limit
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt queue_limit <notify_mqtt.queue_limit>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MQTT_COMMENT
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mqtt-comment
-      :end-before: end-minio-notify-mqtt-comment
-
-   This environment variable corresponds with the :mc-conf:`notify_mqtt comment <notify_mqtt.comment>` configuration setting.
-
-.. _minio-server-config-bucket-notification-mqtt:
-
-Configuration Values
---------------------
-
-The following section documents settings for configuring an MQTT server/broker as a publishing target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. 
-See :ref:`minio-bucket-notifications-publish-mqtt` for a tutorial on using these configuration settings.
-
-.. mc-conf:: notify_mqtt
-
-   The top-level configuration key for defining an MQTT server/broker endpoint
-   for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
-
-   Use :mc-cmd:`mc admin config set` to set or update an MQTT server/broker
-   endpoint. The following arguments are *required* for each endpoint: 
+.. tab-set:: 
    
-   - :mc-conf:`~notify_mqtt.broker`
-   - :mc-conf:`~notify_mqtt.topic`
-   - :mc-conf:`~notify_mqtt.username` *Optional if MQTT server/broker does not enforce authentication/authorization*
-   - :mc-conf:`~notify_mqtt.password` *Optional if MQTT server/broker does not enforce authentication/authorization*
+   .. tab-item:: Environment Variables
+      :sync: envvar
 
-   Specify additional optional arguments as a whitespace (``" "``)-delimited
-   list.
+      .. code-block:: shell
+         :class: copyable
+   
+         set MINIO_NOTIFY_MQTT_ENABLE_PRIMARY="on"
+         set MINIO_NOTIFY_MQTT_BROKER_PRIMARY="tcp://user:password@mqtt-endpoint.example.net:1883"
+   
+         set MINIO_NOTIFY_MQTT_ENABLE_SECONDARY="on"
+         set MINIO_NOTIFY_MQTT_BROKER_SECONDARY="tcp://user:password@mqtt-endpoint.example.net:1883"
 
-   .. code-block:: shell
-      :class: copyable
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      mc admin config set notify_mqtt \ 
-         broker="tcp://endpoint:port" \
-         topic="minio/bucket-name/events/" \
-         username="username" \
-         password="password" \
-         [ARGUMENT="VALUE"] ... \
+      .. code-block:: shell
 
-   You can specify multiple MQTT server/broker endpoints by appending
-   ``[:name]`` to the top level key. For example, the following commands set two
-   distinct MQTT service endpoints as ``primary`` and ``secondary``
-   respectively:
+         mc admin config set notify_mqtt:primary \ 
+            broker="tcp://endpoint:port" \
+            topic="minio/bucket-name/events/" \
+            username="username" \
+            password="password" \
+            [ARGUMENT="VALUE"] ... \
+   
+         mc admin config set notify_mqtt:secondary \
+            broker="tcp://endpoint:port" \
+            topic="minio/bucket-name/events/" \
+            username="username" \
+            password="password" \
+            [ARGUMENT="VALUE"] ... \
 
-   .. code-block:: shell
+With these settings, :envvar:`MINIO_NOTIFY_MQTT_ENABLE_PRIMARY <MINIO_NOTIFY_MQTT_ENABLE>` indicates the environment variable is associated to an MQTT service endpoint with an ID of ``PRIMARY``.
 
-      mc admin config set notify_mqtt:primary \ 
-         broker="tcp://endpoint:port" \
-         topic="minio/bucket-name/events/" \
-         username="username" \
-         password="password" \
-         [ARGUMENT="VALUE"] ... \
+Settings
+--------
 
-      mc admin config set notify_mqtt:secondary \
-         broker="tcp://endpoint:port" \
-         topic="minio/bucket-name/events/" \
-         username="username" \
-         password="password" \
-         [ARGUMENT="VALUE"] ... \
+Enable
+~~~~~~
 
-   The :mc-conf:`notify_mqtt` configuration key supports the following 
-   arguments:
+*Required*
 
-   .. mc-conf:: broker
-      :delimiter: " "
+.. tab-set:: 
+   
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      *Required*
+      .. envvar:: MINIO_NOTIFY_MQTT_ENABLE
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-broker
-         :end-before:  end-minio-notify-mqtt-broker
+      Specify ``on`` to enable publishing bucket notifications to an MQTT endpoint.
+      
+      Defaults to ``off``.
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_BROKER` environment variable.
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      .. include:: /includes/linux/minio-server.rst
-         :start-after: start-notify-target-online-desc
-         :end-before: end-notify-target-online-desc
+      .. mc-conf:: notify_mqtt
 
-   .. mc-conf:: topic
-      :delimiter: " "
+      The top-level configuration key for defining an MQTT server/broker endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+   
+      Use :mc-cmd:`mc admin config set` to set or update an MQTT server/broker endpoint. 
+      The following arguments are *required* for each endpoint: 
+      
+      - :mc-conf:`~notify_mqtt.broker`
+      - :mc-conf:`~notify_mqtt.topic`
+      - :mc-conf:`~notify_mqtt.username` *Optional if MQTT server/broker does not enforce authentication/authorization*
+      - :mc-conf:`~notify_mqtt.password` *Optional if MQTT server/broker does not enforce authentication/authorization*
 
-      *Required*
+      Specify additional optional arguments as a whitespace (``" "``)-delimited list.
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-topic
-         :end-before:  end-minio-notify-mqtt-topic
+      .. code-block:: shell
+         :class: copyable
+   
+         mc admin config set notify_mqtt \ 
+            broker="tcp://endpoint:port" \
+            topic="minio/bucket-name/events/" \
+            username="username" \
+            password="password" \
+            [ARGUMENT="VALUE"] ... \
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_TOPIC` environment variable.
+Broker
+~~~~~~
 
-   .. mc-conf:: username
-      :delimiter: " "
+*Required*
 
-      *Required if the MQTT server/broker enforces authentication/authorization*
+.. tab-set::
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-username
-         :end-before:  end-minio-notify-mqtt-username
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_TOPIC` environment variable.
+      .. envvar:: MINIO_NOTIFY_MQTT_BROKER
 
-   .. mc-conf:: password
-      :delimiter: " "
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      *Required if the MQTT server/broker enforces authentication/authorization*
+      .. mc-conf:: notify_mqtt broker
+         :delimiter: " "
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-password
-         :end-before:  end-minio-notify-mqtt-password
+Specify the MQTT server/broker endpoint. 
+MinIO supports TCP, TLS, or Websocket connections to the server/broker URL. 
+For example:
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_PASSWORD` environment variable.
+- ``tcp://mqtt.example.net:1883``
+- ``tls://mqtt.example.net:1883``
+- ``ws://mqtt.example.net:1883``
 
-   .. mc-conf:: qos
-      :delimiter: " "
+.. include:: /includes/linux/minio-server.rst
+   :start-after: start-notify-target-online-desc
+   :end-before: end-notify-target-online-desc
 
-      *Optional*
+Topic
+~~~~~
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-qos
-         :end-before:  end-minio-notify-mqtt-qos
+*Required*
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_QOS` environment variable.
+.. tab-set::
 
-   .. mc-conf:: keep_alive_interval
-      :delimiter: " "
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      *Optional*
+      .. envvar:: MINIO_NOTIFY_MQTT_TOPIC
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-keep-alive-interval
-         :end-before:  end-minio-notify-mqtt-keep-alive-interval
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL` environment variable.
+      .. mc-conf:: notify_mqtt topic
+         :delimiter: " "
 
-   .. mc-conf:: reconnect_interval
-      :delimiter: " "
+Specify the name of the MQTT topic to associate with events published by MinIO to the MQTT endpoint.
 
-      *Optional*
+Username
+~~~~~~~~
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-reconnect-interval
-         :end-before:  end-minio-notify-mqtt-reconnect-interval
+*Required if the MQTT server/broker enforces authentication/authorization*
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL` environment variable.
+.. tab-set::
 
-   .. mc-conf:: queue_dir 
-      :delimiter: " "
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      *Optional*
+      .. envvar:: MINIO_NOTIFY_MQTT_USERNAME
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-queue-dir
-         :end-before:  end-minio-notify-mqtt-queue-dir
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_QUEUE_DIR` environment variable.
+      .. mc-conf:: notify_mqtt username
+         :delimiter: " "
 
-   .. mc-conf:: queue_limit 
-      :delimiter: " "
+Specify the MQTT username MinIO should use to authenticate to the MQTT server/broker.
 
-      *Optional*
+Password
+~~~~~~~~
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-queue-limit
-         :end-before:  end-minio-notify-mqtt-queue-limit
+*Required if the MQTT server/broker enforces authentication/authorization*
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_QUEUE_LIMIT` environment variable.
+.. tab-set::
 
-   .. mc-conf:: comment 
-      :delimiter: " "
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      *Optional*
+      .. envvar:: MINIO_NOTIFY_MQTT_PASSWORD
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mqtt-comment
-         :end-before:  end-minio-notify-mqtt-comment
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MQTT_COMMENT` environment variable.
+      .. mc-conf:: notify_mqtt password
+         :delimiter: " "
+
+Specify the password for the MQTT username MinIO uses to authenticate to the MQTT server/broker.
+
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
+Quality of Service
+~~~~~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MQTT_QOS
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mqtt qos
+         :delimiter: " "
+
+Specify the Quality of Service priority for the published events. 
+
+Defaults to ``0``.
+
+Keep Alive Interval
+~~~~~~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mqtt keep_alive_interval
+         :delimiter: " "
+
+Specify the keep-alive interval for the MQTT connections. MinIO 
+supports the following units of time measurement:
+
+- ``s`` - seconds, "60s"
+- ``m`` - minutes, "60m"
+- ``h`` - hours, "24h"
+- ``d`` - days, "7d"
+
+Reconnect Interval
+~~~~~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mqtt reconnect_interval
+         :delimiter: " "
+
+Specify the reconnect interval for the MQTT connections. MinIO 
+supports the following units of time measurement:
+
+- ``s`` - seconds, "60s"
+- ``m`` - minutes, "60m"
+- ``h`` - hours, "24h"
+- ``d`` - days, "7d"
+
+Queue Directory
+~~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MQTT_QUEUE_DIR
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mqtt queue_dir 
+         :delimiter: " "
+
+Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+
+MinIO stores undelivered events in the specified store while the MQTT server/broker is offline and replays the stored events when connectivity resumes.
+
+Queue Limit
+~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MQTT_QUEUE_LIMIT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mqtt queue_limit 
+         :delimiter: " "
+
+Specify the maximum limit for undelivered messages. 
+Defaults to ``100000``.
+
+Comment
+~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MQTT_COMMENT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mqtt comment 
+         :delimiter: " "
+
+Specify a comment to associate with the MQTT configuration.

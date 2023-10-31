@@ -1,8 +1,9 @@
 .. _minio-server-envvar-bucket-notification-mysql:
+.. _minio-server-config-bucket-notification-mysql:
 
-================================
-Settings for MySQL Notifications
-================================
+===========================
+MySQL Notification Settings
+===========================
 
 .. default-domain:: minio
 
@@ -10,254 +11,268 @@ Settings for MySQL Notifications
    :local:
    :depth: 2
 
-This page documents settings for configuring an MYSQL service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. 
+This page documents settings for configuring a MYSQL service as a target for :ref:`Bucket Notifications <minio-bucket-notifications>`. 
 See :ref:`minio-bucket-notifications-publish-mysql` for a tutorial on using these settings.
 
-Environment Variables
----------------------
+Multiple MYSQL Targets
+----------------------
 
-You can specify multiple MySQL service endpoints by appending a unique identifier ``_ID`` for each set of related MySQL environment variables on to the top level key. 
-For example, the following commands set two distinct MySQL service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
+You can specify multiple MySQL service endpoints by appending a unique identifier ``_ID`` for each set of related MySQL settings on to the top level key. 
 
-.. code-block:: shell
-   :class: copyable
+Examples
+~~~~~~~~
 
-   set MINIO_NOTIFY_MYSQL_ENABLE_PRIMARY="on"
-   set MINIO_NOTIFY_MYSQL_DSN_STRING_PRIMARY="username:password@tcp(mysql.example.com:3306)/miniodb"
-   set MINIO_NOTIFY_MYSQL_TABLE_PRIMARY="minioevents"
-   set MINIO_NOTIFY_MYSQL_FORMAT_PRIMARY="namespace"
+The following commands set two distinct MySQL service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 
-   set MINIO_NOTIFY_MYSQL_ENABLE_SECONDARY="on"
-   set MINIO_NOTIFY_MYSQL_DSN_STRING_SECONDARY="username:password@tcp(mysql.example.com:3306)/miniodb"
-   set MINIO_NOTIFY_MYSQL_TABLE_SECONDARY="minioevents"
-   set MINIO_NOTIFY_MYSQL_FORMAT_SECONDARY="namespace"
+.. tab-set::
 
-For example, :envvar:`MINIO_NOTIFY_MYSQL_ENABLE_PRIMARY <MINIO_NOTIFY_MYSQL_ENABLE>` indicates the environment variable is associated to an MySQL service endpoint with ID of ``PRIMARY``.
+   .. tab-item:: Environment Variables
+      :sync: envvar
 
-.. envvar:: MINIO_NOTIFY_MYSQL_ENABLE
+      .. code-block:: shell
+         :class: copyable
+      
+         set MINIO_NOTIFY_MYSQL_ENABLE_PRIMARY="on"
+         set MINIO_NOTIFY_MYSQL_DSN_STRING_PRIMARY="username:password@tcp(mysql.example.com:3306)/miniodb"
+         set MINIO_NOTIFY_MYSQL_TABLE_PRIMARY="minioevents"
+         set MINIO_NOTIFY_MYSQL_FORMAT_PRIMARY="namespace"
+      
+         set MINIO_NOTIFY_MYSQL_ENABLE_SECONDARY="on"
+         set MINIO_NOTIFY_MYSQL_DSN_STRING_SECONDARY="username:password@tcp(mysql.example.com:3306)/miniodb"
+         set MINIO_NOTIFY_MYSQL_TABLE_SECONDARY="minioevents"
+         set MINIO_NOTIFY_MYSQL_FORMAT_SECONDARY="namespace"
 
-   *Required*
+      With these settings, :envvar:`MINIO_NOTIFY_MYSQL_ENABLE_PRIMARY <MINIO_NOTIFY_MYSQL_ENABLE>` indicates the environment variable is associated to a MySQL service endpoint with ID of ``PRIMARY``.
 
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mysql-enable
-      :end-before: end-minio-notify-mysql-enable
+   .. tab-item:: Configuration Settings
+      :sync: config
 
-   Requires specifying the following additional environment variables if set to ``on``:
+      .. code-block:: shell
 
-   - :envvar:`MINIO_NOTIFY_MYSQL_DSN_STRING`
-   - :envvar:`MINIO_NOTIFY_MYSQL_TABLE`
-   - :envvar:`MINIO_NOTIFY_MYSQL_FORMAT`
-
-   This environment variable corresponds with the :mc-conf:`notify_mysql <notify_mysql>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MYSQL_DSN_STRING
-
-   *Required*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mysql-connection-string
-      :end-before: end-minio-notify-mysql-connection-string
-
-   This environment variable corresponds with the :mc-conf:`notify_mysql dsn_string <notify_mysql.dsn_string>` configuration setting.
-
-   .. include:: /includes/linux/minio-server.rst
-      :start-after: start-notify-target-online-desc
-      :end-before: end-notify-target-online-desc
-
-.. envvar:: MINIO_NOTIFY_MYSQL_TABLE
-
-   *Required*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mysql-table
-      :end-before: end-minio-notify-mysql-table
-
-   This environment variable corresponds with the :mc-conf:`notify_mysql table <notify_mysql.table>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MYSQL_FORMAT
-
-   *Required*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mysql-format
-      :end-before: end-minio-notify-mysql-format
-
-   This environment variable corresponds with the :mc-conf:`notify_mysql format <notify_mysql.format>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mysql-max-open-connections
-      :end-before: end-minio-notify-mysql-max-open-connections
-
-   This environment variable corresponds with the :mc-conf:`notify_mysql max_open_connections <notify_mysql.max_open_connections>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MYSQL_QUEUE_DIR
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mysql-queue-dir
-      :end-before: end-minio-notify-mysql-queue-dir
-
-   This environment variable corresponds with the :mc-conf:`notify_mysql queue_dir <notify_mysql.queue_dir>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MYSQL_QUEUE_LIMIT
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mysql-queue-limit
-      :end-before: end-minio-notify-mysql-queue-limit
-
-   This environment variable corresponds with the :mc-conf:`notify_mysql queue_limit <notify_mysql.queue_limit>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_MYSQL_COMMENT
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-mysql-comment
-      :end-before: end-minio-notify-mysql-comment
-
-   This environment variable corresponds with the :mc-conf:`notify_mysql comment <notify_mysql.comment>` configuration setting.
-
-
-.. _minio-server-config-bucket-notification-mysql:
-
-Configuration Values
---------------------
-
-The following section documents settings for configuring an MySQL service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. 
-See :ref:`minio-bucket-notifications-publish-mysql` for a tutorial on using these environment variables.
-
-.. mc-conf:: notify_mysql
-
-   The top-level configuration key for defining an MySQL service endpoint for use
-   with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
-
-   Use :mc-cmd:`mc admin config set` to set or update an MySQL service endpoint. 
-   The following arguments are *required* for each target: 
+         mc admin config set notify_mysql:primary \ 
+            dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
+            table="minioevents" \
+            format="namespace" \
+            [ARGUMENT=VALUE ...]
    
-   - :mc-conf:`~notify_mysql.dsn_string`
-   - :mc-conf:`~notify_mysql.table`
-   - :mc-conf:`~notify_mysql.format`
+         mc admin config set notify_mysql:secondary \
+            dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
+            table="minioevents" \
+            format="namespace" \
+            [ARGUMENT=VALUE ...]
 
-   Specify additional optional arguments as a whitespace (``" "``)-delimited 
-   list.
+Settings
+--------
 
-   .. code-block:: shell
-      :class: copyable
+Enable
+~~~~~~
 
-      mc admin config set notify_mysql \ 
-        dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
-        table="minioevents" \
-        format="namespace" \
-        [ARGUMENT="VALUE"] ... \
+*Required*
 
-   You can specify multiple MySQL service endpoints by appending ``[:name]`` to
-   the top level key. For example, the following commands set two distinct MySQL
-   service endpoints as ``primary`` and ``secondary`` respectively:
+.. tab-set::
 
-   .. code-block:: shell
+   .. tab-item:: Environment Variables
+      :sync: envvar
 
-      mc admin config set notify_mysql:primary \ 
-         dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
-         table="minioevents" \
-         format="namespace" \
-         [ARGUMENT=VALUE ...]
+      .. envvar:: MINIO_NOTIFY_MYSQL_ENABLE
 
-      mc admin config set notify_mysql:secondary \
-         dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
-         table="minioevents" \
-         format="namespace" \
-         [ARGUMENT=VALUE ...]
+      Specify ``on`` to enable publishing bucket notifications to a MySQL service endpoint.
 
-   The :mc-conf:`notify_mysql` configuration key supports the following 
-   arguments:
+      Defaults to ``off``.
+   
+      Requires specifying the following additional environment variables if set to ``on``:
+   
+      - :envvar:`MINIO_NOTIFY_MYSQL_DSN_STRING`
+      - :envvar:`MINIO_NOTIFY_MYSQL_TABLE`
+      - :envvar:`MINIO_NOTIFY_MYSQL_FORMAT`
 
-   .. mc-conf:: dsn_string
-      :delimiter: " "
+   .. tab-item:: Configuration Settings
+      :sync: config
+
+      .. mc-conf:: notify_mysql
+   
+      The top-level configuration key for defining an MySQL service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+   
+      Use :mc-cmd:`mc admin config set` to set or update an MySQL service endpoint. 
+      The following arguments are *required* for each target: 
       
-      *Required*
+      - :mc-conf:`~notify_mysql.dsn_string`
+      - :mc-conf:`~notify_mysql.table`
+      - :mc-conf:`~notify_mysql.format`
+   
+      Specify additional optional arguments as a whitespace (``" "``)-delimited list.
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mysql-connection-string
-         :end-before: end-minio-notify-mysql-connection-string
+      .. code-block:: shell
+         :class: copyable
+   
+         mc admin config set notify_mysql \ 
+           dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
+           table="minioevents" \
+           format="namespace" \
+           [ARGUMENT="VALUE"] ... \
+
+
+Data Source Name (DSN) String
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Required*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
       
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_DSN_STRING` environment variable.
+      .. envvar:: MINIO_NOTIFY_MYSQL_DSN_STRING
 
-      .. include:: /includes/linux/minio-server.rst
-         :start-after: start-notify-target-online-desc
-         :end-before: end-notify-target-online-desc
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-   .. mc-conf:: table
-      :delimiter: " "
+      .. mc-conf:: notify_mysql dsn_string
+         :delimiter: " "
+
+Specify the data source name (DSN) of the MySQL service endpoint. MinIO expects the following format:
+
+``<user>:<password>@tcp(<host>:<port>)/<database>``
+ 
+For example:
+ 
+``"username:password@tcp(mysql.example.com:3306)/miniodb"``
       
-      *Required*
+.. include:: /includes/linux/minio-server.rst
+   :start-after: start-notify-target-online-desc
+   :end-before: end-notify-target-online-desc
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mysql-table
-         :end-before: end-minio-notify-mysql-table
+Table
+~~~~~
+
+*Required*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MYSQL_TABLE
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mysql table
+         :delimiter: " "
+
+Specify the name of the MySQL table to which MinIO publishes event notifications.
       
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_TABLE` environment variable.
+Format
+~~~~~~
 
-   .. mc-conf:: format
-      :delimiter: " "
+*Required*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MYSQL_FORMAT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mysql format
+         :delimiter: " "
       
-      *Required*
+Specify the format of event data written to the MySQL service endpoint.
+MinIO supports the following values:
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mysql-format
-         :end-before: end-minio-notify-mysql-format
+``namespace``
+   For each bucket event, MinIO creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
+   Additional updates to that object modify the existing table entry for that object. 
+   Similarly, deleting the object also deletes the corresponding table entry.
+   
+``access``
+   For each bucket event, MinIO creates a JSON document with the event details and appends it to the table with a MySQL-generated random ID. 
+   Additional updates to an object result in new index entries,    and existing entries remain unmodified.
       
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_FORMAT` environment variable.
+Max Open Connections
+~~~~~~~~~~~~~~~~~~~~
 
-   .. mc-conf:: max_open_connections
-      :delimiter: " "
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mysql max_open_connections
+         :delimiter: " "
+
+Specify the maximum number of open connections to the MySQL database.
+
+Defaults to ``2``.
       
-      *Optional*
+Queue Directory
+~~~~~~~~~~~~~~~
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mysql-max-open-connections
-         :end-before: end-minio-notify-mysql-max-open-connections
-      
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS` environment variable.
+*Optional*
 
 
-   .. mc-conf:: queue_dir
-      :delimiter: " "
+.. tab-set::
 
-      *Optional*
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mysql-queue-dir
-         :end-before: end-minio-notify-mysql-queue-dir
+      .. envvar:: MINIO_NOTIFY_MYSQL_QUEUE_DIR
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_QUEUE_DIR` environment variable.
-      
-   .. mc-conf:: queue_limit
-      :delimiter: " "
+   .. tab-item:: Configuration Setting
+      :sync: config
 
-      *Optional*
+      .. mc-conf:: notify_mysql queue_dir
+         :delimiter: " "
 
+Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mysql-queue-limit
-         :end-before: end-minio-notify-mysql-queue-limit
+MinIO stores undelivered events in the specified store while the MySQL server/broker is offline and replays the stored events when connectivity resumes.
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_QUEUE_LIMIT` environment variable.
+Queue Limit
+~~~~~~~~~~~
 
-      
-   .. mc-conf:: comment
-      :delimiter: " "
+*Optional*
 
-      *Optional*
+.. tab-set::
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-mysql-comment
-         :end-before: end-minio-notify-mysql-comment
+   .. tab-item:: Environment Variable
+      :sync: envvar
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_MYSQL_COMMENT` environment variable.
+      .. envvar:: MINIO_NOTIFY_MYSQL_QUEUE_LIMIT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mysql queue_limit
+         :delimiter: " "
+
+Specify the maximum limit for undelivered messages. Defaults to ``100000``.
+
+Comment
+~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_MYSQL_COMMENT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_mysql comment
+         :delimiter: " "
+
+Specify a comment to associate with the MySQL configuration.

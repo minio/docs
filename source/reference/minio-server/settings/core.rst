@@ -163,9 +163,14 @@ Allow Encryption
 
 *Optional*
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-data-compression-allow_encryption-desc
-   :end-before: end-minio-data-compression-allow_encryption-desc
+Set to ``on`` to encrypt objects after compressing them.
+Defaults to ``off``.
+
+.. admonition:: Encrypting compressed objects may compromise security
+   :class: warning
+
+   MinIO strongly recommends against encrypting compressed objects.
+   If you require encryption, carefully evaluate the risk of potentially leaking information about the contents of encrypted objects.
 
 Enable Compression
 ~~~~~~~~~~~~~~~~~~
@@ -185,9 +190,10 @@ Enable Compression
 
 *Optional*
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-data-compression-enable-desc
-   :end-before: end-minio-data-compression-enable-desc
+Set to ``on`` to enable data compression for new objects.
+Defaults to ``off``.
+
+Enabling or disabling data compression does not change existing objects.
 
 Comments
 ~~~~~~~~
@@ -206,9 +212,7 @@ Comments
 
 *Optional*
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-data-compression-comment-desc
-   :end-before: end-minio-data-compression-comment-desc
+Specify a comment to associate with the data compression configuration.
 
 Compression Extensions
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -228,9 +232,16 @@ Compression Extensions
 
 *Optional*
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-data-compression-extensions-desc
-   :end-before: end-minio-data-compression-extensions-desc
+Comma-separated list of the file extensions to compress.
+Setting a new list of file extensions replaces the previously configured list.
+Defaults to ``".txt, .log, .csv, .json, .tar, .xml, .bin"``.
+
+.. admonition:: Default excluded files
+   :class: note
+
+   Some types of files cannot be significantly reduced in size.
+   MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.extensions` argument.
+   See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
 
 Compression MIME Types
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -250,6 +261,13 @@ Compression MIME Types
 
 *Optional*
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-data-compression-mime_types-desc
-   :end-before: end-minio-data-compression-mime_types-desc
+Comma-separated list of the MIME types to compress.
+Setting	a new list of types replaces the previously configured list.
+Defaults to ``"text/*, application/json, application/xml, binary/octet-stream"``.
+
+.. admonition:: Default excluded files
+   :class: note
+
+   Some	types of files cannot be significantly reduced in size.
+   MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.mime_types` argument.
+   See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.

@@ -653,10 +653,14 @@ Brokers
       .. mc-conf:: audit_kafka brokers
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-brokers-desc
-   :end-before: end-minio-kafka-audit-logging-brokers-desc
+A comma-separated list of Kafka broker addresses:
 
+.. code-block:: shell
+
+   brokers="https://kafka-1.example.net:9092,https://kafka-2.example.net:9092"
+
+At least one broker must be online and reachable by the MinIO server to initialize and send audit log events.
+MinIO checks each specified broker in order of specification.
 
 Topic
 +++++
@@ -676,9 +680,7 @@ Topic
       .. mc-conf:: audit_kafka topic
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-topic-desc
-   :end-before: end-minio-kafka-audit-logging-topic-desc
+The name of the Kafka topic to associate to MinIO audit log events.
 
 TLS
 +++
@@ -698,9 +700,9 @@ TLS
       .. mc-conf:: audit_kafka tls
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-tls-desc
-   :end-before: end-minio-kafka-audit-logging-tls-desc
+Set to ``"on"`` to enable TLS connectivity to the specified Kafka brokers.
+
+Defaults to ``"off"``.
 
 TLS Skip Verify
 +++++++++++++++
@@ -720,9 +722,13 @@ TLS Skip Verify
       .. mc-conf:: audit_kafka tls_skip_verify
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-tls-skip-verify-desc
-   :end-before: end-minio-kafka-audit-logging-tls-skip-verify-desc
+Set to ``"on"`` to direct MinIO to skip verification of the Kafka broker TLS certificates.
+
+You can use this option for enabling connectivity to Kafka brokers using TLS certificates signed by unknown parties, such as self-signed or corporate-internal Certificate Authorities (CA).
+
+MinIO by default uses the system trust store *and* the contents of the MinIO :ref:`CA directory <minio-tls>` for verifying remote client TLS certificates.
+
+Defaults to ``"off"`` for strict verification of TLS certificates.
 
 SASL
 ++++
@@ -746,9 +752,7 @@ SASL
 
       Requires specifying :mc-conf:`~audit_kafka.sasl_username` and :mc-conf:`~audit_kafka.sasl_password`.
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-sasl-desc
-   :end-before: end-minio-kafka-audit-logging-sasl-desc
+Set to ``"on"`` to direct MinIO to use SASL to authenticate against the Kafka brokers.
 
 SASL Username
 +++++++++++++
@@ -772,9 +776,7 @@ SASL Username
 
       Requires specifying :mc-conf:`~audit_kafka.sasl` and :mc-conf:`~audit_kafka.sasl_password`.
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-sasl-username-desc
-   :end-before: end-minio-kafka-audit-logging-sasl-username-desc
+The SASL username MinIO uses for authentication against the Kafka brokers.
 
 SASL Password
 +++++++++++++
@@ -798,9 +800,7 @@ SASL Password
 
       Requires specifying :mc-conf:`~audit_kafka.sasl` and :mc-conf:`~audit_kafka.sasl_username`.
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-sasl-password-desc
-   :end-before: end-minio-kafka-audit-logging-sasl-password-desc
+The SASL password MinIO uses for authentication against the Kafka brokers.
 
 SASL Mechanism
 ++++++++++++++
@@ -830,9 +830,9 @@ SASL Mechanism
          The ``PLAIN`` authentication mechanism sends credentials in plain text over the network.
          Use :mc-conf:`~audit_kafka.tls` to enable TLS connectivity to the Kafka brokers and ensure secure transmission of SASL credentials.
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-sasl-mechanism-desc
-   :end-before: end-minio-kafka-audit-logging-sasl-mechanism-desc
+The SASL mechanism MinIO uses for authentication against the Kafka brokers.
+
+Defaults to ``plain``.
 
 TLS  Client Auth
 ++++++++++++++++
@@ -856,9 +856,7 @@ TLS  Client Auth
 
       Requires specifying :mc-conf:`~audit_kafka.client_tls_cert` and :mc-conf:`~audit_kafka.client_tls_key`.
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-tls-client-auth-desc
-   :end-before: end-minio-kafka-audit-logging-tls-client-auth-desc
+Set to ``"on"`` to direct MinIO to use mTLS to authenticate against the Kafka brokers.
 
 Client TLS Certificate
 ++++++++++++++++++++++
@@ -878,9 +876,7 @@ Client TLS Certificate
       .. mc-conf:: audit_kafka client_tls_cert
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-client-tls-cert-desc
-   :end-before: end-minio-kafka-audit-logging-client-tls-cert-desc
+The path to the TLS client certificate to use for mTLS authentication.
 
 Client TLS Key
 ++++++++++++++
@@ -900,9 +896,7 @@ Client TLS Key
       .. mc-conf:: audit_kafka client_tls_key
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-client-tls-key-desc
-   :end-before: end-minio-kafka-audit-logging-client-tls-key-desc
+The path to the TLS client private key to use for mTLS authentication.
 
 Version
 +++++++
@@ -922,9 +916,9 @@ Version
       .. mc-conf:: audit_kafka version
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-version-desc
-   :end-before: end-minio-kafka-audit-logging-version-desc
+The version of the Kafka broker MinIO expects at the specified endpoints.
+
+MinIO returns an error if the Kakfa broker version does not match those specified to this setting.
 
 Comment
 +++++++
@@ -944,9 +938,7 @@ Comment
       .. mc-conf:: audit_kafka comment
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-comment-desc
-   :end-before: end-minio-kafka-audit-logging-comment-desc
+A comment to associate with the configuration.
 
 Queue Directory
 +++++++++++++++
@@ -966,9 +958,9 @@ Queue Directory
       .. mc-conf:: audit_kafka queue_dir
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-queue-dir-desc
-   :end-before: end-minio-kafka-audit-logging-queue-dir-desc
+Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+
+MinIO stores undelivered events in the specified store while the Kafka service is offline and replays the stored events when connectivity resumes.
 
 Queue Size
 ++++++++++
@@ -988,6 +980,5 @@ Queue Size
       .. mc-conf:: audit_kafka queue_size
          :delimiter: " "
 
-.. include:: /includes/common-mc-admin-config.rst
-   :start-after: start-minio-kafka-audit-logging-queue-size-desc
-   :end-before: end-minio-kafka-audit-logging-queue-size-desc
+Specify the maximum limit for undelivered messages. 
+Defaults to ``100000``.

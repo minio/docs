@@ -16,14 +16,14 @@ The :mc:`minio server` process stores its configuration in the storage backend :
 
 .. _minio-server-configuration-options:
 
-Configuration Settings
-----------------------
+MinIO Settings
+--------------
 
-The configuration settings define runtime behavior of the MinIO :mc:`server <minio server>` process:
+MinIO settings define runtime behavior of the MinIO :mc:`server <minio server>` process:
 
-You can define many MinIO Server configurations in one of two ways:
+You can define many MinIO Server settings in one of two ways:
 
-1. Set :ref:`environment variables <minio-environment-variables>` in the host system prior to launching the server process.
+1. Set :ref:`environment variables <minio-environment-variables>` in the host system prior to launching or restarting the server process.
 2. Modify configuration options using the :mc:`mc admin config` command or the :guilabel:`Administrator > Settings` page of the :ref:`MinIO Console <minio-console>`.
 
 .. important::

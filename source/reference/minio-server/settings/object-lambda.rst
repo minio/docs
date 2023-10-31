@@ -24,6 +24,9 @@ For example, the following command sets two distinct Object Lambda webhook endpo
    export MINIO_LAMBDA_WEBHOOK_ENABLE_yourfunction="on"
    export MINIO_LAMBDA_WEBHOOK_ENDPOINT_yourfunction="http://webhook-2.example.net"
 
+Environment Variables
+---------------------
+
 .. envvar:: MINIO_LAMBDA_WEBHOOK_ENABLE
 
    Specify ``"on"`` to enable the Object Lambda webhook endpoint for a handler function.

@@ -12,30 +12,31 @@ Bucket Notifications Settings
 
 This page covers settings that control behavior related to :ref:`MinIO bucket notifications <minio-bucket-notifications>`. 
 
-Environment Variable
---------------------
-
-.. envvar:: MINIO_API_SYNC_EVENTS
-   :optional:
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-api-sync-events
-      :end-before: end-minio-api-sync-events
-
-   This environment variable corresponds with the :mc-conf:`~api.sync_events` configuration setting.
-
-Configuration Value
--------------------
-
 .. _minio-server-config-logging-logs:
 
-.. mc-conf:: sync_events
+Sync Events
+-----------
 
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-api-sync-events
-      :end-before: end-minio-api-sync-events
+*Optional*
 
-   This configuration setting corresponds with the :envvar:`MINIO_API_SYNC_EVENTS` environment variable.
+.. tab-set::
+
+   .. tab-item::Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_API_SYNC_EVENTS
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: sync_events         
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-api-sync-events
+   :end-before: end-minio-api-sync-events
+
+Supported Notification Targets
+------------------------------
 
 Notifications require a target to receive the events.
 MinIO supports a variety of possible targets.
@@ -52,7 +53,6 @@ Select the appropriate link below for the type of target you use for notificatio
 - :ref:`minio-server-envvar-bucket-notification-postgresql`
 - :ref:`minio-server-envvar-bucket-notification-redis`
 - :ref:`minio-server-envvar-bucket-notification-webhook`
-
 
 .. toctree::
    :titlesonly:

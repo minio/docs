@@ -1,8 +1,9 @@
 .. _minio-server-envvar-bucket-notification-nats:
+.. _minio-server-config-bucket-notification-nats:
 
-===============================
-Settings for NATS Notifications
-===============================
+==========================
+NATS Notification Settings
+==========================
 
 .. default-domain:: minio
 
@@ -18,514 +19,497 @@ Settings for NATS Notifications
 
    The related MinIO configuration options and environment variables are deprecated. 
 
-This page documents settings for configuring an NATS service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. 
+This page documents settings for configuring an NATS service as a target for :ref:`Bucket Notifications <minio-bucket-notifications>`. 
 See :ref:`minio-bucket-notifications-publish-nats` for a tutorial on using these settings.
 
-Environment Variables
+Multiple NATS Targets
 ---------------------
 
-You can specify multiple NATS service endpoints by appending a unique identifier ``_ID`` for each set of related NATS environment variables on to the top level key. 
+You can specify multiple NATS service endpoints by appending a unique identifier ``_ID`` for each set of related NATS settings on to the top level key. 
+
+Example
+~~~~~~~
+
 For example, the following commands set two distinct NATS service endpoints as ``PRIMARY`` and ``SECONDARY`` respectively:
 
-.. code-block:: shell
-   :class: copyable
+.. tab-set::
 
-   set MINIO_NOTIFY_NATS_ENABLE_PRIMARY="on"
-   set MINIO_NOTIFY_NATS_ADDRESS_PRIMARY="https://nats-endpoint.example.net:4222"
+   .. tab-item:: Environment Variables
+      :sync: envvar
 
-   set MINIO_NOTIFY_NATS_ENABLE_SECONDARY="on"
-   set MINIO_NOTIFY_NATS_ADDRESS_SECONDARY="https://nats-endpoint.example.net:4222"
+      .. code-block:: shell
+         :class: copyable
+      
+         set MINIO_NOTIFY_NATS_ENABLE_PRIMARY="on"
+         set MINIO_NOTIFY_NATS_ADDRESS_PRIMARY="https://nats-endpoint.example.net:4222"
+      
+         set MINIO_NOTIFY_NATS_ENABLE_SECONDARY="on"
+         set MINIO_NOTIFY_NATS_ADDRESS_SECONDARY="https://nats-endpoint.example.net:4222"
 
-For example, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE>` indicates the environment variable is associated to an NATS service endpoint with ID of ``PRIMARY``.
+      With these settings, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE>` indicates the environment variable is associated to an NATS service endpoint with ID of ``PRIMARY``.
 
-.. envvar:: MINIO_NOTIFY_NATS_ENABLE
+   .. tab-item:: Configuration Settings
+      :sync: config
 
-   *Required*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-enable
-      :end-before: end-minio-notify-nats-enable
-
-   This environment variable corresponds with the :mc-conf:`notify_nats <notify_nats>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_ADDRESS
-
-   *Required*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-address
-      :end-before: end-minio-notify-nats-address
-
-   This environment variable corresponds with the :mc-conf:`notify_nats address <notify_nats.address>` configuration setting.
-
-   .. include:: /includes/linux/minio-server.rst
-      :start-after: start-notify-target-online-desc
-      :end-before: end-notify-target-online-desc
-
-.. envvar:: MINIO_NOTIFY_NATS_SUBJECT
-
-   *Required*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-subject
-      :end-before: end-minio-notify-nats-subject
-
-   This environment variable corresponds with the :mc-conf:`notify_nats subject <notify_nats.subject>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_USERNAME
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-username
-      :end-before: end-minio-notify-nats-username
-
-   This environment variable corresponds with the :mc-conf:`notify_nats username <notify_nats.username>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_PASSWORD
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-password
-      :end-before: end-minio-notify-nats-password
-
-   This environment variable corresponds with the :mc-conf:`notify_nats password <notify_nats.password>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_TOKEN
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-token
-      :end-before: end-minio-notify-nats-token
-
-   This environment variable corresponds with the :mc-conf:`notify_nats token <notify_nats.token>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_TLS
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-tls
-      :end-before: end-minio-notify-nats-tls
-
-   This environment variable corresponds with the :mc-conf:`notify_nats tls <notify_nats.tls>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-tls-skip-verify
-      :end-before: end-minio-notify-nats-tls-skip-verify
-
-   This environment variable corresponds with the :mc-conf:`notify_nats tls_skip_verify <notify_nats.tls_skip_verify>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_PING_INTERVAL
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-ping-interval
-      :end-before: end-minio-notify-nats-ping-interval
-
-   This environment variable corresponds with the :mc-conf:`notify_nats ping_interval <notify_nats.ping_interval>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_JETSTREAM
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-jetstream
-      :end-before: end-minio-notify-nats-jetstream
-
-   This environment variable corresponds with the :mc-conf:`notify_nats jetstream <notify_nats.jetstream>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_STREAMING
-
-   *Deprecated*
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-streaming
-      :end-before: end-minio-notify-nats-streaming
-
-   This environment variable corresponds with the :mc-conf:`notify_nats streaming <notify_nats.streaming>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_STREAMING_ASYNC
-
-   *Deprecated*
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-streaming-async
-      :end-before: end-minio-notify-nats-streaming-async
-
-   This environment variable corresponds with the :mc-conf:`notify_nats streaming_async <notify_nats.streaming_async>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT
-
-   *Deprecated*
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-streaming-max-pub-acks-in-flight
-      :end-before: end-minio-notify-nats-streaming-max-pub-acks-in-flight
-
-   This environment variable corresponds with the :mc-conf:`notify_nats streaming_max_pub_acks_in_flight <notify_nats.streaming_max_pub_acks_in_flight>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID
-
-   *Deprecated*
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-streaming-cluster-id
-      :end-before: end-minio-notify-nats-streaming-cluster-id
-
-   This environment variable corresponds with the :mc-conf:`notify_nats streaming_cluster_id <notify_nats.streaming_cluster_id>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_CERT_AUTHORITY
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-cert-authority
-      :end-before: end-minio-notify-nats-cert-authority
-
-   This environment variable corresponds with the :mc-conf:`notify_nats cert_authority <notify_nats.cert_authority>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_CLIENT_CERT
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-client-cert
-      :end-before: end-minio-notify-nats-client-cert
-
-   This environment variable corresponds with the :mc-conf:`notify_nats client_cert <notify_nats.client_cert>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_CLIENT_KEY
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-client-key
-      :end-before: end-minio-notify-nats-client-key
-
-   This environment variable corresponds with the :mc-conf:`notify_nats client_key <notify_nats.client_key>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_QUEUE_DIR
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-queue-dir
-      :end-before: end-minio-notify-nats-queue-dir
-
-   This environment variable corresponds with the :mc-conf:`notify_nats queue_dir <notify_nats.queue_dir>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_QUEUE_LIMIT
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-queue-limit
-      :end-before: end-minio-notify-nats-queue-limit
-
-   This environment variable corresponds with the :mc-conf:`notify_nats queue_limit <notify_nats.queue_limit>` configuration setting.
-
-.. envvar:: MINIO_NOTIFY_NATS_COMMENT
-
-   *Optional*
-
-   .. include:: /includes/common-mc-admin-config.rst
-      :start-after: start-minio-notify-nats-comment
-      :end-before: end-minio-notify-nats-comment
-
-   This environment variable corresponds with the :mc-conf:`notify_nats comment <notify_nats.comment>` configuration setting.
-
-.. _minio-server-config-bucket-notification-nats:
-
-Configuration Values
---------------------
-
-The following section documents settings for configuring an NATS
-service as a target for :ref:`Bucket Nofitications <minio-bucket-notifications>`. See
-:ref:`minio-bucket-notifications-publish-nats` for a tutorial on 
-using these environment variables.
-
-.. admonition:: NATS Streaming Deprecated
-   :class: important
-
-   NATS Streaming is deprecated.
-   Migrate to `JetStream <https://docs.nats.io/nats-concepts/jetstream>`__ instead. 
-
-   The related MinIO configuration options and environment variables are deprecated. 
-
-.. mc-conf:: notify_nats
-
-   The top-level configuration key for defining an NATS service endpoint for use
-   with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
-
-   Use :mc-cmd:`mc admin config set` to set or update an NATS service endpoint. 
-   The :mc-conf:`~notify_nats.address` and 
-   :mc-conf:`~notify_nats.subject` arguments are *required* for each target.
-   Specify additional optional arguments as a whitespace (``" "``)-delimited 
-   list.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin config set notify_nats \ 
-        address="htpps://nats-endpoint.example.com:4222" \
-        subject="minioevents" \
-        [ARGUMENT="VALUE"] ... \
-
-   You can specify multiple NATS service endpoints by appending ``[:name]`` to
-   the top level key. For example, the following commands set two distinct NATS
-   service endpoints as ``primary`` and ``secondary`` respectively:
-
-   .. code-block:: shell
-
-      mc admin config set notify_nats:primary \ 
-         address="htpps://nats-endpoint.example.com:4222" \
-         subject="minioevents" \ 
-         [ARGUMENT=VALUE ...]
-
-      mc admin config set notify_nats:secondary \
-         address="htpps://nats-endpoint.example.com:4222" \
-         subject="minioevents" \ 
-         [ARGUMENT=VALUE ...]
-
-   The :mc-conf:`notify_nats` configuration key supports the following 
-   arguments:
+      .. code-block:: shell
    
-   .. mc-conf:: address
-      :delimiter: " "
-
-      *Required*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-address
-         :end-before: end-minio-notify-nats-address
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_ADDRESS` environment variable.
-
-      .. include:: /includes/linux/minio-server.rst
-         :start-after: start-notify-target-online-desc
-         :end-before: end-notify-target-online-desc
-
-   .. mc-conf:: subject
-      :delimiter: " "
-
-      *Required*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-subject
-         :end-before: end-minio-notify-nats-subject
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_SUBJECT` environment variable.
-
-   .. mc-conf:: username
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-username
-         :end-before: end-minio-notify-nats-username
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_USERNAME` environment variable.
-
-   .. mc-conf:: password
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-password
-         :end-before: end-minio-notify-nats-password
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_PASSWORD` environment variable.
-
-   .. mc-conf:: token
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-token
-         :end-before: end-minio-notify-nats-token
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_TOKEN` environment variable.
-
-   .. mc-conf:: tls
-      :delimiter: "
-      
-      *Optional*"
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-tls
-         :end-before: end-minio-notify-nats-tls
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_TLS` environment variable.
-
-   .. mc-conf:: tls_skip_verify
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-tls-skip-verify
-         :end-before: end-minio-notify-nats-tls-skip-verify
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY` environment variable.
-
-   .. mc-conf:: ping_interval
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-ping-interval
-         :end-before: end-minio-notify-nats-ping-interval
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_PING_INTERVAL` environment variable.
-
-   .. mc-conf:: jetstream
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-jetstream
-         :end-before: end-minio-notify-nats-jetstream
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_JETSTREAM` environment variable.
-
-   .. mc-conf:: streaming
-      :delimiter: " "
-
-      *Deprecated*
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-streaming
-         :end-before: end-minio-notify-nats-streaming
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_STREAMING` environment variable.
-
-   .. mc-conf:: streaming_async
-      :delimiter: " "
-
-      *Deprecated*
- 
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-streaming-async
-         :end-before: end-minio-notify-nats-streaming-async
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_STREAMING_ASYNC` environment variable.
-
-   .. mc-conf:: streaming_max_pub_acks_in_flight
-      :delimiter: " "
-
-      *Deprecated*
- 
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-streaming-max-pub-acks-in-flight
-         :end-before: end-minio-notify-nats-streaming-max-pub-acks-in-flight
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT` environment variable.
-
-   .. mc-conf:: streaming_cluster_id
-      :delimiter: " "
-
-      *Deprecated*
- 
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-streaming-cluster-id
-         :end-before: end-minio-notify-nats-streaming-cluster-id
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID` environment variable.
-
-   .. mc-conf:: cert_authority
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-cert-authority
-         :end-before: end-minio-notify-nats-cert-authority
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_CERT_AUTHORITY` environment variable.
-
-   .. mc-conf:: client_cert
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-client-cert
-         :end-before: end-minio-notify-nats-client-cert
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_CLIENT_CERT` environment variable.
-
-   .. mc-conf:: client_key
-      :delimiter: " "
-
-      *Optional*
-
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-client-key
-         :end-before: end-minio-notify-nats-client-key
-
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_CLIENT_KEY` environment variable.
-
+         mc admin config set notify_nats:primary \ 
+            address="https://nats-endpoint.example.com:4222" \
+            subject="minioevents" \ 
+            [ARGUMENT=VALUE ...]
    
-   .. mc-conf:: queue_dir
-      :delimiter: " "
+         mc admin config set notify_nats:secondary \
+            address="https://nats-endpoint.example.com:4222" \
+            subject="minioevents" \ 
+            [ARGUMENT=VALUE ...]
 
-      *Optional*
+Settings
+--------
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-queue-dir
-         :end-before: end-minio-notify-nats-queue-dir
+Enable
+~~~~~~
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_QUEUE_DIR` environment variable.
+*Required*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_ENABLE
+
+      Specify ``on`` to enable publishing bucket notifications to an NATS service endpoint.
       
-   .. mc-conf:: queue_limit
-      :delimiter: " "
+      Defaults to ``off``.
 
-      *Optional*
+   .. tab-item:: Configuration Setting
+      :sync: config
 
+      .. mc-conf:: notify_nats
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-queue-limit
-         :end-before: end-minio-notify-nats-queue-limit
+      The top-level configuration key for defining an NATS service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_QUEUE_LIMIT` environment variable.
+      Use :mc-cmd:`mc admin config set` to set or update an NATS service endpoint. 
+      The :mc-conf:`~notify_nats.address` and :mc-conf:`~notify_nats.subject` arguments are *required* for each target.
+      Specify additional optional arguments as a whitespace (``" "``)-delimited list.
+   
+      .. code-block:: shell
+         :class: copyable
+   
+         mc admin config set notify_nats \ 
+           address="https://nats-endpoint.example.com:4222" \
+           subject="minioevents" \
+           [ARGUMENT="VALUE"] ... \
+   
+Address
+~~~~~~~
 
+*Required*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_ADDRESS
+
+   .. tab-item:: Configuration Setting
+      :sync: config
       
-   .. mc-conf:: comment
-      :delimiter: " "
+      .. mc-conf:: notify_nats address
+         :delimiter: " "
 
-      *Optional*
+Specify the NATS service endpoint to which MinIO publishes bucket events. 
+For example, ``https://nats-endpoint.example.com:4222``.
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-notify-nats-comment
-         :end-before: end-minio-notify-nats-comment
+.. include:: /includes/linux/minio-server.rst
+   :start-after: start-notify-target-online-desc
+   :end-before: end-notify-target-online-desc
 
-      This configuration setting corresponds with the :envvar:`MINIO_NOTIFY_NATS_COMMENT` environment variable.
+Subject
+~~~~~~~
+
+*Required*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_SUBJECT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats subject
+         :delimiter: " "
+
+Specify the subscription to which MinIO associates events published to the NATS endpoint.
+
+Username
+~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_USERNAME
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats username
+         :delimiter: " "
+
+Specify the username for connecting to the NATS service endpoint.
+
+Password
+~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_PASSWORD
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats password
+         :delimiter: " "
+
+Specify the passport for connecting to the NATS service endpoint.
+
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
+Token
+~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_TOKEN
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats token
+         :delimiter: " "
+
+Specify the token for connecting to the NATS service endpoint.
+
+.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
+
+   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+
+TLS
+~~~
+
+*Optional*
+
+.. tab-set::
+   
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_TLS
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats tls
+         :delimiter: "
+
+Specify ``on`` to enable TLS connectivity to the NATS service endpoint.
+
+TLS Skip Verify
+~~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats tls_skip_verify
+         :delimiter: " "
+
+Enables or disables TLS verification of the NATS service endpoint TLS certificates.
+
+- Specify ``on`` to disable TLS verification (Default).
+- Specify ``off`` to enable TLS verification.
+
+Ping Interval
+~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_PING_INTERVAL
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats ping_interval
+         :delimiter: " "
+
+Specify the duration interval for client pings to the NATS server. 
+MinIO supports the following time units:
+
+- ``s`` - seconds, ``"60s"``
+- ``m`` - minutes, ``"5m"``
+- ``h`` - hours, ``"1h"``
+- ``d`` - days, ``"1d"``
+
+Jetstream
+~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_JETSTREAM
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats jetstream
+         :delimiter: " "
+
+Specify ``on`` to enable JetStream support for streaming events to a NATS JetStream service endpoint.
+
+Streaming
+~~~~~~~~~
+
+*Deprecated*   
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_STREAMING
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats streaming
+         :delimiter: " "
+
+Specify ``on`` to enable asynchronous publishing of events to the NATS service endpoint.
+
+Streaming Async
+~~~~~~~~~~~~~~~
+
+*Deprecated*   
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_STREAMING_ASYNC
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats streaming_async
+         :delimiter: " "
+
+Specify ``on`` to enable asynchronous publishing of events to the NATS service endpoint.
+
+Max ACK Responses In Flight
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Deprecated*
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_STREAMING_MAX_PUB_ACKS_IN_FLIGHT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats streaming_max_pub_acks_in_flight
+         :delimiter: " "
+
+Specify the number of messages to publish without waiting for an ACK response from the NATS service endpoint.
+
+Streaming Cluster ID
+~~~~~~~~~~~~~~~~~~~~
+
+*Deprecated*
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_STREAMING_CLUSTER_ID
+   
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats streaming_cluster_id
+         :delimiter: " "
+
+Specify the unique ID for the NATS streaming cluster.
+
+Cert Authority
+~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_CERT_AUTHORITY
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats cert_authority
+         :delimiter: " "
+
+Specify the path to the Certificate Authority chain used to sign the NATS service endpoint TLS certificates.
+
+Client Cert
+~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_CLIENT_CERT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats client_cert
+         :delimiter: " "
+
+Specify the path to the client certificate to use for performing mTLS authentication to the NATS service endpoint.
+
+Client Key
+~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_CLIENT_KEY
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats client_key
+         :delimiter: " "
+
+Specify the path to the client private key to use for performing mTLS authentication to the NATS service endpoint.
+
+Queue Directory
+~~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_QUEUE_DIR
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats queue_dir
+         :delimiter: " "
+
+Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+
+MinIO stores undelivered events in the specified store while the NATS server/broker is offline and replays the stored events when connectivity resumes.
+
+Queue Limit
+~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_QUEUE_LIMIT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats queue_limit
+         :delimiter: " "
+
+Specify the maximum limit for undelivered messages. 
+Defaults to ``100000``.
+
+Comment
+~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_COMMENT
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats comment
+         :delimiter: " "
+
+Specify a comment to associate with the NATS configuration.
