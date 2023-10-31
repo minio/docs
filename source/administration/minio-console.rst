@@ -117,6 +117,8 @@ routing rules may require setting a static MinIO Console port. For example,
 load balancers, reverse proxies, or Kubernetes ingress may by default block
 or exhibit unexpected behavior with the the dynamic redirection behavior.
 
+.. _minio-console-play-login:
+
 Logging In
 ----------
 

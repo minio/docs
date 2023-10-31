@@ -67,9 +67,10 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
    MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
    Deploying MinIO through the :minio-web:`AKS Marketplace <product/multicloud-azure-kubernetes-service>` includes the commercial license and access to 24/7 MinIO support through  |SUBNET|.
 
-You can get started exploring MinIO features using our ``play`` server at https://play.min.io. 
+You can get started exploring MinIO features using the :ref:`minio-console` and our ``play`` server at https://play.min.io. 
 ``play`` is a *public* MinIO cluster running the latest stable MinIO server. 
 Any file uploaded to ``play`` should be considered public and non-protected.
+For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio-console-play-login>`.
 
 .. cond:: linux
 
