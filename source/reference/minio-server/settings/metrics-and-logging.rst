@@ -44,11 +44,11 @@ Specifies the authentication mode for the Prometheus :ref:`scraping endpoints <m
 
 - ``public`` MinIO does not require that scraping clients authenticate their requests.
 
-Server Logs
------------
-
 .. _minio-server-envvar-logging-regular:
 .. _minio-server-config-logging-regular:
+
+Server Logs
+-----------
 
 The following section documents settings for configuring MinIO to publish :mc:`minio server` logs to an HTTP webhook endpoint. 
 See :ref:`minio-logging-publish-server-logs` for more complete documentation and tutorials on using these settings.
@@ -398,7 +398,6 @@ Enable
          Requires specifying :envvar:`MINIO_AUDIT_WEBHOOK_ENDPOINT`.
       
    .. tab-item:: Configuration Setting
-      :config:
 
       Configure an audit webhook to enable it.
       There is *not* a separate ``enable`` configuration setting.
@@ -505,7 +504,7 @@ Client Certificate
 
       Requires also specifying :envvar:`MINIO_AUDIT_WEBHOOK_CLIENT_KEY`.
    
-   .. tab-item::
+   .. tab-item:: Configuration Setting
       :sync: config
 
       .. mc-conf:: audit_webhook client_cert
@@ -524,7 +523,7 @@ Client Key
 .. tab-set::
 
    .. tab-item:: Environment Variable
-      :envvar:
+      :sync: envvar
 
       .. envvar:: MINIO_AUDIT_WEBHOOK_CLIENT_KEY
 
@@ -928,7 +927,7 @@ Comment
 .. tab-set::
 
    .. tab-item:: Environment Variable
-      :sync:
+      :sync: envvar
 
       .. envvar:: MINIO_AUDIT_KAFKA_COMMENT
 
@@ -975,7 +974,7 @@ Queue Size
       .. envvar:: MINIO_AUDIT_KAFKA_QUEUE_SIZE
 
    .. tab-item:: Configuration Setting
-      :sync:
+      :sync: config
 
       .. mc-conf:: audit_kafka queue_size
          :delimiter: " "

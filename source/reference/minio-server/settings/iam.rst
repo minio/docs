@@ -62,7 +62,7 @@ Examples
    .. tab-item:: Configuration Setting
       :sync: config
 
-      The following settings are required when defining LDAP using :mc:`mc config set`:
+      The following settings are required when defining LDAP using :mc:`mc admin config set`:
 
       - ``enabled``
       - ``server_addr``
@@ -810,7 +810,7 @@ Examples
       :sync: config
 
       Use :mc:`mc admin config set` to create or update the OpenID configuration. 
-      The :mc-conf:`identity_plugin config_url` argument is required. 
+      The :mc-conf:`identity_plugin url` argument is required. 
       Specify additional optional arguments as a whitespace (" ")-delimited list.
 
       .. code-block:: shell

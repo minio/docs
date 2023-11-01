@@ -272,7 +272,7 @@ Comment
 .. tab-set::
 
    .. tab-item:: Environment Variable
-      :sync:
+      :sync: envvar
 
       .. envvar:: MINIO_NOTIFY_WEBHOOK_COMMENT
 

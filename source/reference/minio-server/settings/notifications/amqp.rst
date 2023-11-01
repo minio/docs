@@ -15,7 +15,7 @@ This page documents settings for configuring an AMQP service as a target for :re
 See :ref:`minio-bucket-notifications-publish-amqp` for a tutorial on using these settings.
 
 Multiple AMQP Targets
---------------------
+---------------------
 
 You can specify multiple AMQP service endpoints by appending a unique identifier ``_ID`` for each set of related AMQP settings to the top level key. 
 
@@ -197,7 +197,7 @@ Durable
       .. envvar:: MINIO_NOTIFY_AMQP_DURABLE
 
    .. tab-item:: Configuration Setting
-      :sync:
+      :sync: config
 
       .. mc-conf:: notify_amqp durable 
          :delimiter: " "

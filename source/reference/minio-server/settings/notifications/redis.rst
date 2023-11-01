@@ -67,7 +67,7 @@ Enable
 .. tab-set::
 
    .. tab-item:: Environment Variable
-      :sync:: envvar
+      :sync: envvar
 
       .. envvar:: MINIO_NOTIFY_REDIS_ENABLE
 
