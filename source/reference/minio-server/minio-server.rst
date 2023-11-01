@@ -231,6 +231,7 @@ If you set both a configuration value and the matching environment variable, Min
    :titlesonly:
    :hidden:
    
+   /reference/minio-server/settings
    /reference/minio-server/settings/core
    /reference/minio-server/settings/root-credentials 
    /reference/minio-server/settings/storage-class

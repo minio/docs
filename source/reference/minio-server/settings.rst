@@ -2,9 +2,9 @@
 .. _minio-server-environment-variables:
 .. _minio-server-configuration-settings:
 
-========
-Settings
-========
+=================
+Settings Overview
+=================
 
 .. default-domain:: minio
 
