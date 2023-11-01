@@ -21,7 +21,7 @@ Sync Events
 
 .. tab-set::
 
-   .. tab-item::Environment Variable
+   .. tab-item:: Environment Variable
       :sync: envvar
 
       .. envvar:: MINIO_API_SYNC_EVENTS
