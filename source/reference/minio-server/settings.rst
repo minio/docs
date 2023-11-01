@@ -30,26 +30,14 @@ You can define many MinIO Server settings in one of two ways:
 
    Settings defined by an environment variable override similar settings defined as configurations with :mc:`mc admin config` or the MinIO Console.
 
-Additional environment variables include those to configure:
+Additional settings include those to customize:
 
+- :ref:`Core settings <minio-server-envvar-core>`
+- :ref:`Root credentials <minio-server-envvar-root>`
+- :ref:`Storage class <minio-server-envvar-storage-class>`
 - :ref:`MinIO Console <minio-server-envvar-console>`
+- :ref:`Metrics and logging <minio-server-envvar-metrics-logging>`
 - :ref:`Notification targets <minio-server-envvar-notifications>` for use with :ref:`MinIO Bucket Notifications <minio-bucket-notifications>`
 - :ref:`Identity and access management solutions <minio-server-envvar-iam>`
-- :ref:`Metrics and logs <minio-server-envvar-metrics-logging>`
 - :ref:`Key Encryption Service (KES) <minio-server-envvar-kes>`
-- :ref:`Object Lamba functions <minio-server-envvar-object-lambda-webhook>`
-
-.. toctree::
-   :titlesonly:
-   :hidden:
-   
-   /reference/minio-server/settings/core
-   /reference/minio-server/settings/root-credentials 
-   /reference/minio-server/settings/storage-class
-   /reference/minio-server/settings/console 
-   /reference/minio-server/settings/metrics-and-logging 
-   /reference/minio-server/settings/notifications 
-   /reference/minio-server/settings/iam 
-   /reference/minio-server/settings/kes 
-   /reference/minio-server/settings/object-lambda
-   /reference/minio-server/settings/deprecated
+- :ref:`Object Lambda functions <minio-server-envvar-object-lambda-webhook>`

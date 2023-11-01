@@ -83,4 +83,4 @@ Syntax
 Configuration Settings
 ----------------------
 
-For the list of possible settings, descriptions, and options to use when configuring them, see :ref:`minio-server-configuration-settings`.
+For a list of available configuration settings, see :ref:`minio-server-configuration-settings`.
