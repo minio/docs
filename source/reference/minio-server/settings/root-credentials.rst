@@ -1,8 +1,8 @@
 .. _minio-server-envvar-root:
 
-===============
-`root` Settings
-===============
+====================
+Root Access Settings
+====================
 
 .. default-domain:: minio
 
@@ -10,17 +10,12 @@
    :local:
    :depth: 2
 
-This page covers settings that control root access for the MinIO process. 
+This page covers settings that control root (superuser) access for the MinIO process. 
+The root user has complete access and permissions to perform operations on the MinIO deployment.
 
-You can define settings by defining 
-
-- an *environment variable* prior to starting or restarting the MinIO Server.
-- a *configuration setting* using :mc:`mc admin config set`.
-- a *configuration setting* using the :ref:`MinIO Console's <minio-console-settings>` :guilabel:`Administrator > Settings` pages.
-  
-If you define both an environment variable and the similar configuration setting, MinIO uses the environment variable value.
-
-Some settings can only be defined by either an environment variable or by a configuration setting.
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
 
 Root User
 ---------

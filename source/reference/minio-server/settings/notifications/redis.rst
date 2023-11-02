@@ -14,6 +14,10 @@ Redis Notification Settings
 This page documents settings for configuring a Redis service as a target for :ref:`Bucket Notifications <minio-bucket-notifications>`. 
 See :ref:`minio-bucket-notifications-publish-redis` for a tutorial on using these settings.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
+
 Multiple Redis Targets
 ----------------------
 
@@ -180,7 +184,7 @@ MinIO supports the following values:
    
 ``access``
    For each bucket event, MinIO creates a JSON document with the event details and appends it to the key with a Redis-generated random ID. 
-   Additional updates to an object result in new index entries,    and existing entries remain unmodified.
+   Additional updates to an object result in new index entries, and existing entries remain unmodified.
 
 Password
 ~~~~~~~~

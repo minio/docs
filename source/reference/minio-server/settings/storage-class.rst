@@ -1,9 +1,9 @@
 .. _minio-server-envvar-storage-class:
 .. _minio-ec-storage-class:
 
-======================
-Storage Class Settings
-======================
+=====================
+Erasure Code Settings
+=====================
 
 .. default-domain:: minio
 
@@ -11,12 +11,27 @@ Storage Class Settings
    :local:
    :depth: 2
 
-This page covers settings that configure the :ref:`parity <minio-ec-parity>` to use for objects written to the MinIO cluster.
+This page covers settings that configure the :ref:`Erasure Code <minio-erasure-coding>` :ref:`parity <minio-ec-parity>` to use for objects written to the MinIO cluster.
+This impacts how MinIO uses the space on the drive(s) and how MinIO can recover objects stored on lost drives or similar issues.
 
-MinIO Storage Classes are distinct from AWS Storage Classes, where the latter refers to the specific storage tier on which to store a given object.
+.. note::
+
+   *MinIO Storage Classes* are distinct from *AWS Storage Classes*.
+
+   AWS Storage Classes refer to the specific storage tier on which to store a given object, such as ``hot`` or ``glacier`` storage.
+   MinIO Storage Classes affect the erasure code parity setting used and relate to :ref:`minio-availability-resiliency` of objects.
+
+   For tiering from one type of storage to another, such as for cost management purposes, see :ref:`minio-lifecycle-management-tiering`.
+
+Define any of these environment variables in the host system prior to starting or restarting the MinIO process.
+Refer to your operating system's documentation for how to define an environment variable.
 
 Environment Variables
 ---------------------
+
+.. note::
+
+   These settings do not have configuration setting options for use with :mc:`mc admin config set`.
 
 .. envvar:: MINIO_STORAGE_CLASS_STANDARD
 

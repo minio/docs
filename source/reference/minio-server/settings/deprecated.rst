@@ -10,12 +10,14 @@ Deprecated Settings
    :local:
    :depth: 2
 
-This page covers settings that control core behavior of the MinIO process. 
+This page covers deprecated settings that control core behavior of the MinIO process. 
+
+Settings on this page may be removed at any time.
+Users should migrate to the recommended replacement at the earliest opportunity.
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
    :end-before: end-minio-settings-defined
-
 
 Environment Variables
 ---------------------

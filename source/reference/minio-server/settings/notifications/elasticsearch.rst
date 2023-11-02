@@ -14,6 +14,10 @@ Elasticsearch Notification Settings
 This page documents settings for configuring an Elasticsearch service as a target for :ref:`Bucket Notifications <minio-bucket-notifications>`. 
 See :ref:`minio-bucket-notifications-publish-elasticsearch` for a tutorial on using these settings.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
+
 Multiple Elasticsearch Targets
 ------------------------------
 

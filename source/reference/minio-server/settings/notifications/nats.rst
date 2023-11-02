@@ -22,6 +22,10 @@ NATS Notification Settings
 This page documents settings for configuring an NATS service as a target for :ref:`Bucket Notifications <minio-bucket-notifications>`. 
 See :ref:`minio-bucket-notifications-publish-nats` for a tutorial on using these settings.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
+
 Multiple NATS Targets
 ---------------------
 

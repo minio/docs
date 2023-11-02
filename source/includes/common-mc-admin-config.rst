@@ -87,3 +87,24 @@ Specify ``on`` to direct MinIO to wait until the remote target returns success o
 Defaults to ``off``, or asynchronous bucket notifications where MinIO does not wait for the remote target to return success on receipt of an event.
 
 .. end-minio-api-sync-events
+
+.. start-minio-settings-no-config-option
+
+This setting does not have a configuration setting option.
+
+.. end-minio-settings-no-config-option
+
+.. start-minio-settings-defined
+
+You can establish or modify settings by defining:
+
+- an *environment variable* on the host system prior to starting or restarting the MinIO Server.
+  Refer to your operating system's documentation for how to define an environment variable.
+- a *configuration setting* using :mc:`mc admin config set`.
+- a *configuration setting* using the :ref:`MinIO Console's <minio-console-settings>` :guilabel:`Administrator > Settings` pages.
+  
+If you define both an environment variable and the similar configuration setting, MinIO uses the environment variable value.
+
+Some settings have only an environment variable or a configuration setting, but not both.
+
+.. end-minio-settings-defined

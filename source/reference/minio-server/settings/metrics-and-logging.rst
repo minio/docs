@@ -16,6 +16,10 @@ See :ref:`minio-metrics-and-alerts` for more information.
 These settings configure publishing regular :mc:`minio server` logs and audit logs to an HTTP webhook. 
 See :ref:`minio-logging` for more complete documentation.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
+
 - :ref:`minio-server-envvar-logging-regular`
 - :ref:`minio-server-envvar-logging-audit`
 - :ref:`minio-server-envvar-logging-audit-kafka`
@@ -34,8 +38,9 @@ This setting controls how MinIO authenticates to Prometheus.
 
    .. tab-item:: Configuration Setting
 
-      There is not a configuration setting option.
-      Use the environment variable instead.
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
 
 Specifies the authentication mode for the Prometheus :ref:`scraping endpoints <minio-metrics-and-alerts>`.
 
@@ -325,7 +330,7 @@ Multiple Targets
 
 You can specify multiple webhook endpoints as audit log targets by appending a unique identifier ``_ID`` for each set of related logging settings. 
 
-For example, the following command set two distinct audit log webhook endpoints:
+For example, the following commands set two distinct audit log webhook endpoints:
 
 .. tab-set::
 

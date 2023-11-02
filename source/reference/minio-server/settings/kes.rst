@@ -10,11 +10,14 @@ Key Encryption Service Settings
    :local:
    :depth: 2
 
-The following environment variables control behavior for the Key Encryption Service (KES) for managing encryption and keys.
+The following environment variables control how the MinIO Server interacts with the Key Encryption Service (KES) when managing encryption and keys.
 
 .. note::
 
    These settings do not have configuration setting options for use with :mc:`mc admin config set`.
+
+Define any of these environment variables in the host system prior to starting or restarting the MinIO process.
+Refer to your operating system's documentation for how to define an environment variable.
 
 .. envvar:: MINIO_KMS_KES_ENDPOINT
 

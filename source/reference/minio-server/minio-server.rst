@@ -145,13 +145,13 @@ The command accepts the following arguments:
 
    - ``address``, which takes a single port to use for the server, typically ``8021``
    
-   - _(Optional)_ ``passive-port-range``, which restricts the range of potential ports the server can use to transfer data, such as when tight firewall rules limit the port the FTP server can request for the connection
+   - *(Optional)* ``passive-port-range``, which restricts the range of potential ports the server can use to transfer data, such as when tight firewall rules limit the port the FTP server can request for the connection
    
-   - _(Optional)_ ``tls-private-key``, which takes the path to the user's private key for accessing the MinIO deployment by TLS
+   - *(Optional)* ``tls-private-key``, which takes the path to the user's private key for accessing the MinIO deployment by TLS
      
      Use with ``tls-public-cert``.
    
-   - _(Optional)_ ``tls-public-cert``, which takes the path to the certificate for accessing the MinIO deployment by TLS
+   - *(Optional)* ``tls-public-cert``, which takes the path to the certificate for accessing the MinIO deployment by TLS
      
      Use with ``tls-private-key``.
 
@@ -235,6 +235,7 @@ If you set both a configuration value and the matching environment variable, Min
    /reference/minio-server/settings/core
    /reference/minio-server/settings/root-credentials 
    /reference/minio-server/settings/storage-class
+   /reference/minio-server/settings/minio-client
    /reference/minio-server/settings/console 
    /reference/minio-server/settings/metrics-and-logging 
    /reference/minio-server/settings/notifications 

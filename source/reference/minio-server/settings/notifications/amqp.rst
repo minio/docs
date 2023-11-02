@@ -14,6 +14,10 @@ AMQP Notification Settings
 This page documents settings for configuring an AMQP service as a target for :ref:`Bucket Notifications <minio-bucket-notifications>`. 
 See :ref:`minio-bucket-notifications-publish-amqp` for a tutorial on using these settings.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
+
 Multiple AMQP Targets
 ---------------------
 
@@ -71,7 +75,10 @@ Enable
 
    .. tab-item:: Configuration Setting
 
-      This setting does not have a configuration setting option.
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
+
       Configure an AMQP target with desired options to enable a setting.
 
 Specify ``on`` to enable publishing bucket notifications to an AMQP endpoint.

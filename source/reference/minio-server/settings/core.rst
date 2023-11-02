@@ -35,8 +35,9 @@ Volumes
 
    .. tab-item:: Configuration Setting
 
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
 
 Environment Variable File Path
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,8 +54,9 @@ Environment Variable File Path
 
    .. tab-item:: Configuration Setting
 
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
       
 Workers for Expiration
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -72,8 +74,9 @@ Workers for Expiration
    .. tab-item:: Configuration Setting
       :sync: config
 
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
 
 Domain
 ~~~~~~
@@ -86,14 +89,15 @@ Domain
 
          Set to the Fully Qualified Domain Name (FQDN) MinIO accepts Bucket DNS (Virtual Host)-style requests on.
 
-         For example, setting ``MINIO_DOMAIN=minio.example.net`` directs MinIO to accept an incoming connection request the ``data`` bucket at ``data.minio.example.net``.
+         For example, setting ``MINIO_DOMAIN=minio.example.net`` directs MinIO to accept an incoming connection request to the ``data`` bucket at ``data.minio.example.net``.
 
          If this setting is omitted, the default is to only accept path-style requests. For example, ``minio.example.net/data``.
 
    .. tab-item:: Configuration Setting
 
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
 
 .. _minio-scanner-speed-options:
 
@@ -119,66 +123,6 @@ Manage the maximum wait period for the scanner when balancing MinIO read/write p
    :start-after: start-scanner-speed-values
    :end-before: end-scanner-speed-values
 
-Host Credentials
-~~~~~~~~~~~~~~~~
-
-.. tab-set::
-
-   .. tab-item:: Environment Variable
-      :selected:
-
-      .. envvar:: MC_HOST_<ALIAS>
-
-         Replace ``<ALIAS>`` at the end of the environment variable with the ``alias`` to set the host for.
-
-   .. tab-item:: Configuration Setting
-
-      There is not a configuration setting option.
-      Use :mc:`mc alias set` to configure an ALIAS.
-
-Add temporary credentials to use with :mc:`mc alias` commands.
-For example, to use for scripting.
-
-Examples
-++++++++
-
-**Static Credentials**
-
-.. tab-set::
-
-   .. tab-item:: Syntax
-
-      .. code-block:: shell
-         :class: copyable
-      
-         export MC_HOST_<alias>=https://<Access Key>:<Secret Key>@<YOUR-S3-ENDPOINT>
-
-   .. tab-item:: Example
-
-      .. code-block:: shell
-         :class: copyable
-
-         export MC_HOST_myalias=https://Q3AM3UQ867SPQQA43P2F:zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG@play.min.io
-
-
-**Rotating Credentials**
-
-.. tab-set::
-
-   .. tab-item:: Syntax
-
-      .. code-block:: shell
-         :class: copyable
-         
-         export MC_HOST_<alias>=https://<Access Key>:<Secret Key>:<Session Token>@<YOUR-S3-ENDPOINT>
-
-   .. tab-item:: Example
-
-      .. code-block:: shell
-         :class: copyable
-
-         export MC_HOST_myalias=https://Q3AM3UQ867SPQQA43P2F:zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG:eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NLZXkiOiJOVUlCT1JaWVRWMkhHMkJNUlNYUiIsImF1ZCI6IlBvRWdYUDZ1Vk80NUlzRU5SbmdEWGo1QXU1WWEiLCJhenAiOiJQb0VnWFA2dVZPNDVJc0VOUm5nRFhqNUF1NVlhIiwiZXhwIjoxNTM0ODk2NjI5LCJpYXQiOjE1MzQ4OTMwMjksImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0Ojk0NDMvb2F1dGgyL3Rva2VuIiwianRpIjoiNjY2OTZjZTctN2U1Ny00ZjU5LWI0MWQtM2E1YTMzZGZiNjA4In0.eJONnVaSVHypiXKEARSMnSKgr-2mlC2Sr4fEGJitLcJF_at3LeNdTHv0_oHsv6ZZA3zueVGgFlVXMlREgr9LXA@play.min.io
-
 Batch Replication
 -----------------
 
@@ -190,12 +134,14 @@ Batch Replication
 
          *Optional*
 
-         Enable parallel workers by specifying the maximum number of processes to use when performing the batch application job.
+         Specifying the maximum number of parallel processes to use when performing the batch application job.
 
    .. tab-item:: Configuration Setting
 
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
+
 
 Data Compression
 ----------------

@@ -1,4 +1,5 @@
 .. _minio-server-envvar-notifications:
+.. _minio-server-config-logging-logs:
 
 =============================
 Bucket Notifications Settings
@@ -12,7 +13,9 @@ Bucket Notifications Settings
 
 This page covers settings that control behavior related to :ref:`MinIO bucket notifications <minio-bucket-notifications>`. 
 
-.. _minio-server-config-logging-logs:
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
 
 Sync Events
 -----------
