@@ -235,7 +235,6 @@ If you set both a configuration value and the matching environment variable, Min
    /reference/minio-server/settings/core
    /reference/minio-server/settings/root-credentials 
    /reference/minio-server/settings/storage-class
-   /reference/minio-server/settings/minio-client
    /reference/minio-server/settings/console 
    /reference/minio-server/settings/metrics-and-logging 
    /reference/minio-server/settings/notifications 

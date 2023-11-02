@@ -549,6 +549,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    :titlesonly:
    :hidden:
    
+   /reference/minio-mc/minio-client-settings
    /reference/minio-mc/mc-alias
    /reference/minio-mc/mc-anonymous
    /reference/minio-mc/mc-batch
