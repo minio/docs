@@ -34,10 +34,11 @@ Quickstart Guide: :doc:`/developers/go/minio-go`
 Reference: :doc:`/developers/go/API`
 
 Download from GitHub
+
   .. code-block:: shell
      :class: copyable
 
-     go install github.com/minio/minio-go/v7@latest
+     go get github.com/minio/minio-go/v7
 
 
 .. _python-sdk:
