@@ -10,7 +10,7 @@ MinIO Client Settings
    :local:
    :depth: 2
 
-This page covers settings that manage how the MinIO Server interacts with the :ref:`MinIO Client <minio-client>`. 
+This page covers settings for the :ref:`MinIO Client <minio-client>`. 
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
