@@ -64,7 +64,7 @@ Examples
          export MC_HOST_myalias=https://Q3AM3UQ867SPQQA43P2F:zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG@play.min.io
 
 
-**Rotating Credentials**
+**Security Token Service (STS) Credentials**
 
 .. tab-set::
 

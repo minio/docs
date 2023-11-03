@@ -50,7 +50,7 @@ Environment Variable File Path
       
          Specifies the full path to the file the MinIO server process uses for loading environment variables.
          
-         For ``systemd``-managed files, setting this value to the environment file allows MinIO to reload changes to that file on using :mc-cmd:`mc admin service restart` to restart the deployment.
+         For ``systemd``-managed files, set this value to the path of the environment file (``/etc/default/minio``) to direct MinIO to reload changes to that file when using :mc-cmd:`mc admin service restart` to restart the deployment.
 
    .. tab-item:: Configuration Setting
 
