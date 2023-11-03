@@ -149,6 +149,10 @@ Data Compression
 The following section documents settings for enabling data compression for objects.
 See :ref:`minio-data-compression` for tutorials on using these configuration settings.
 
+All of the settings in this section fall under the following top-level key:
+
+.. mc-conf:: compression
+
 Allow Encryption
 ~~~~~~~~~~~~~~~~
 

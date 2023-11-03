@@ -49,6 +49,8 @@ Examples
    .. tab-item:: Configuration Setting
       :sync: config
 
+      .. mc-conf:: identity_ldap
+         
       The following settings are required when defining LDAP using :mc:`mc admin config set`:
 
       - ``enabled``
@@ -92,7 +94,7 @@ Server Address
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: server_addr
+      .. mc-conf:: identity_ldap server_addr
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -114,7 +116,7 @@ Lookup Bind DN
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: lookup_bind_dn
+      .. mc-conf:: identity_ldap lookup_bind_dn
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -136,7 +138,7 @@ Lookup Bind Password
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: lookup_bind_password
+      .. mc-conf:: identity_ldap lookup_bind_password
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -158,7 +160,7 @@ User DN Search Base DN
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: user_dn_search_base_dn
+      .. mc-conf:: identity_ldap user_dn_search_base_dn
          :delimiter: " "
 
 
@@ -181,7 +183,7 @@ User DN Search Filter
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: user_dn_search_filter
+      .. mc-conf:: identity_ldap user_dn_search_filter
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -203,7 +205,7 @@ Enabled
    .. tab-item:: Configuration Setting
       :selected:
 
-      .. mc-conf:: enabled
+      .. mc-conf:: identity_ldap enabled
          :delimiter: " "
 
 Set to ``false`` to disable the AD/LDAP configuration.
@@ -227,7 +229,7 @@ Group Search Filter
    .. tab-item:: Configuration Setting
       :sync: config
    
-      .. mc-conf:: group_search_filter
+      .. mc-conf:: identity_ldap group_search_filter
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -249,7 +251,7 @@ Group Search Base DN
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: group_search_base_dn
+      .. mc-conf:: identity_ldap group_search_base_dn
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -271,7 +273,7 @@ TLS Skip Verify
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: tls_skip_verify
+      .. mc-conf:: identity_ldap tls_skip_verify
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -293,7 +295,7 @@ Server Insecure
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: server_insecure
+      .. mc-conf:: identity_ldap server_insecure
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -315,7 +317,7 @@ Server Start TLS
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: server_starttls
+      .. mc-conf:: identity_ldap server_starttls
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -339,7 +341,7 @@ SRV Record Name
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: srv_record_name
+      .. mc-conf:: identity_ldap srv_record_name
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst
@@ -361,7 +363,7 @@ Comment
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: identity_ldap comment
+      .. mc-conf:: identity_ldap identity_ldap comment
          :delimiter: " "
 
 .. include:: /includes/common-minio-external-auth.rst

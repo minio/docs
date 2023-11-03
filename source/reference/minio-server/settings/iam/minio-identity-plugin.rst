@@ -32,8 +32,10 @@ The examples here represent the minimum required settings.
    .. tab-item:: Configuration Settings
       :sync: config
 
+      .. mc-conf:: identity_plugin
+
       Use :mc:`mc admin config set` to create or update the OpenID configuration. 
-      The :mc-conf:`identity_plugin url` argument is required. 
+      The ``identity_plugin url`` argument is required. 
       Specify additional optional arguments as a whitespace (" ")-delimited list.
 
       .. code-block:: shell
