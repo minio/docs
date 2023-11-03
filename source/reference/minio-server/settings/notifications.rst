@@ -32,7 +32,7 @@ Sync Events
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. mc-conf:: sync_events         
+      .. mc-conf:: api sync_events         
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-api-sync-events

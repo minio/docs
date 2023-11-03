@@ -30,6 +30,8 @@ Examples
    .. tab-item:: Configuration Settings
       :sync: config
 
+      .. mc-conf:: identity_openid
+
       Use :mc-cmd:`mc admin config set` to set or update the OpenID configuration.
       The :mc-conf:`~identity_openid.config_url` argument is *required*. 
       Specify additional optional arguments as a whitespace (``" "``)-delimited list.

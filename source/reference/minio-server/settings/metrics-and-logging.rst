@@ -111,8 +111,9 @@ Enable
    
    .. tab-item:: Configuration Setting
 
-      There is no configuration setting for this value.
-      Use the environment variable instead.
+      .. mc-conf:: logger_webhook
+      
+      The top level key for the configuration settings to configure logging to an HTTP webhook endpoint.
 
 
 Endpoint

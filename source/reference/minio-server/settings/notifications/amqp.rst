@@ -73,17 +73,26 @@ Enable
 
       Requires specifying :envvar:`MINIO_NOTIFY_AMQP_URL` if set to ``on``.
 
+      Specify ``on`` to enable publishing bucket notifications to an AMQP endpoint.
+
+      Defaults to ``off``.
+
    .. tab-item:: Configuration Setting
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-settings-no-config-option
-         :end-before: end-minio-settings-no-config-option
+      .. mc-conf:: notify_amqp
 
-      Configure an AMQP target with desired options to enable a setting.
+      The top-level configuration key for defining an AMQP service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
 
-Specify ``on`` to enable publishing bucket notifications to an AMQP endpoint.
+      Use :mc-cmd:`mc admin config set` to set or update an AMQP service endpoint. 
+      The :mc-conf:`~notify_amqp.url` argument is *required* for each target.
+      Specify additional optional arguments as a whitespace (``" "``)-delimited list.
 
-Defaults to ``off``.
+      .. code-block:: shell
+         :class: copyable
+   
+         mc admin config set notify_amqp \ 
+           url="amqp://user:password@endpoint:port" \
+           [ARGUMENT="VALUE"] ... 
 
 URL
 ~~~
