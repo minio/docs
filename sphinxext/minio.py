@@ -292,7 +292,7 @@ class MinioObject(ObjectDescription):
         # If construct is nested, prefix the current prefix
         prefix = self.env.ref_context.get('minio:object', None)
 
-        fullname = member
+        fullname = member.replace(' ','.')
 
         if prefix:
           fullname = '.'.join([prefix, member])
