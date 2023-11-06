@@ -203,7 +203,8 @@ This procedure requires the following:
 Procedure
 ~~~~~~~~~
 
-This procedure upgrades the MinIO Operator from any 4.2.3 or later release to |operator-version-stable|.
+This procedure upgrades MinIO Operator release 4.2.3 through 4.5.7 to release 4.5.8.
+You can then upgrade from release 4.5.8 to |operator-version-stable|.
 
 1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
 
