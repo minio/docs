@@ -252,7 +252,7 @@ Multiple Domain-Based TLS Certificates
    While MinIO has no requirements for folder names, consider creating subfolders whose name matches the domain to improve human readability. 
    Place the TLS private and public key for that domain in the subfolder.
  
-   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs-dir` or ``--S``).
+   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs-dir` or ``-S``).
 
    .. tab-set::
 
@@ -272,7 +272,7 @@ Multiple Domain-Based TLS Certificates
 
       .. tab-item:: Custom Certificate Path
 
-         The following example assumes the MinIO Server was started with ``--certs dir | --c /opt/minio/certs``:
+         The following example assumes the MinIO Server was started with ``--certs dir | -S /opt/minio/certs``:
 
          .. code-block:: shell
 
@@ -464,7 +464,7 @@ Third-Party Certificate Authorities
 
       .. tab-item:: Custom Certificate Path
 
-         The following example assumes the MinIO Server was started with ``--certs dir | --c /opt/minio/certs``:
+         The following example assumes the MinIO Server was started with ``--certs dir | --S/opt/minio/certs``:
 
          .. code-block:: shell
 
@@ -552,7 +552,7 @@ Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Ce
 
       .. tab-item:: Custom Certificate Path
 
-         The following example assumes the MinIO Server was started with ``--certs dir | --c /opt/minio/certs``:
+         The following example assumes the MinIO Server was started with ``--certs dir | --S/opt/minio/certs``:
 
          .. code-block:: shell
 
