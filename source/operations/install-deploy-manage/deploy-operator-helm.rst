@@ -142,7 +142,7 @@ You can modify the Operator deployment after installation.
 
 #. Retrieve the Console Access Token
 
-   The MinIO Operator uses a Java Web Token (JWT) saved as a Kuberentes Secret for controlling access to the Operator Console.
+   The MinIO Operator uses a JSON Web Token (JWT) saved as a Kubernetes Secret for controlling access to the Operator Console.
 
    Use the following command to retrieve the JWT for login.
    You must have permission within the Kubernetes cluster to read secrets:

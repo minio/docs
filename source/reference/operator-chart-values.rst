@@ -1,7 +1,7 @@
 .. _minio-operator-chart-values:
 
 ===================
-Operator Helm Chart
+Operator and Tenant Helm Charts
 ===================
 
 .. default-domain:: minio

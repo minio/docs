@@ -140,7 +140,7 @@ Upgrade Operator to |operator-version-stable|
 
       The following procedure upgrades the MinIO Operator using the :mc:`kubectl minio <kubectl minio init>` plugin.
 
-      If you installed the Operator using :ref:`helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
+      If you installed the Operator using :ref:`Helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
 
       1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
       

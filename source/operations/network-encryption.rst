@@ -515,7 +515,7 @@ Third-Party Certificate Authorities
 
 .. cond:: windows
 
-   The MinIO Server validates t]he TLS certificate presented by each connecting client against the host system's trusted root certificate store.
+   The MinIO Server validates the TLS certificate presented by each connecting client against the host system's trusted root certificate store.
 
    You can place additional trusted Certificate Authority files in the following directory:
 
