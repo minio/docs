@@ -185,6 +185,33 @@ li pre {
     }
 }
 
+.content__main {
+    figure {
+        box-shadow: none;
+    }
+
+    img {
+        background-color: $white;
+        border-radius: $border-radius;
+        padding: 1rem;
+    }
+
+    figcaption {
+        border: 0;
+        font-weight: normal;
+        font-style: italic;
+        
+        p {
+            margin-top: 0;
+        }
+
+        .caption-text {
+            font-weight: normal;
+            color: var(--text-muted-color);
+        }
+    }
+}
+
 // ----------------------
 // Table
 // ----------------------
@@ -340,7 +367,6 @@ span.highlighted {
 // ----------------------
 // Container - Procedure
 // ----------------------
-
 .container.procedure {
    padding: 0px;
 
