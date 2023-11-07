@@ -147,7 +147,7 @@ tenant:
       #
       # You may need to modify these values to meet your cluster's security and access settings.
       #
-      # We recommend disabling recursive permission changes by setting``fsGroupChangePolicy`` to ``OnRootMismatch`` as those operations can be expensive for certain workloads (e.g. large volumes with many small files).
+      # We recommend disabling recursive permission changes by setting ``fsGroupChangePolicy`` to ``OnRootMismatch`` as those operations can be expensive for certain workloads (e.g. large volumes with many small files).
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
