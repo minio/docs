@@ -88,7 +88,7 @@ Enabling TLS
 
       .. tab-item:: Custom Path
 
-         You can specify a path for the MinIO server to search for certificates using the :mc-cmd:`minio server --certs-dir` or ``-c`` parameter.
+         You can specify a path for the MinIO server to search for certificates using the :mc-cmd:`minio server --certs-dir` or ``-S`` parameter.
 
          For example, the following command fragment directs the MinIO process to use the ``/opt/minio/certs`` directory for TLS certificates.
 
@@ -452,7 +452,7 @@ Third-Party Certificate Authorities
    The MinIO Server validates the TLS certificate presented by each connecting client against the host system's trusted root certificate store.
 
    Place the CA certificates in the ``/certs/CAs`` folder.
-   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs dir` or ``--S``)
+   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs-dir` or ``-S``)
 
    .. tab-set::
 
@@ -464,7 +464,7 @@ Third-Party Certificate Authorities
 
       .. tab-item:: Custom Certificate Path
 
-         The following example assumes the MinIO Server was started with ``--certs dir | --S/opt/minio/certs``:
+         The following example assumes the MinIO Server was started with ``--certs dir /opt/minio/certs``:
 
          .. code-block:: shell
 
@@ -540,7 +540,7 @@ Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Ce
    If the MinIO server does not have the necessary CAs, it may return warnings or errors related to TLS validation when connecting to other services.
 
    Place the CA certificates in the ``/certs/CAs`` folder.
-   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs dir` or ``--c``)
+   The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (:mc-cmd:`minio server --certs-dir` or ``-S``)
 
    .. tab-set::
 
@@ -552,7 +552,7 @@ Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Ce
 
       .. tab-item:: Custom Certificate Path
 
-         The following example assumes the MinIO Server was started with ``--certs dir | --S/opt/minio/certs``:
+         The following example assumes the MinIO Server was started with ``--certs dir /opt/minio/certs``:
 
          .. code-block:: shell
 
