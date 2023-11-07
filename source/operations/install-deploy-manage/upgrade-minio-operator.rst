@@ -195,6 +195,7 @@ Upgrade Operator to |operator-version-stable|
       5. Validate the Operator upgrade
 
          You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
+
          .. include:: /includes/common/common-k8s-connect-operator-console.rst
 
    .. tab-item:: Upgrade using Helm
@@ -275,6 +276,7 @@ Upgrade Operator to |operator-version-stable|
       #. Validate the Operator upgrade
 
          You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
+
          .. include:: /includes/common/common-k8s-connect-operator-console.rst
 
 

@@ -150,7 +150,7 @@ You can modify the Operator deployment after installation.
    .. code-block:: shell
       :class: copyable
 
-      kubectl get secret/console-sa-secret -n minio-operator -o json | jq -r ".data.token" | base64 -d -
+      kubectl get secret/console-sa-secret -n minio-operator -o json | jq -r ".data.token" | base64 -d
 
    The output should resemble the following:
 

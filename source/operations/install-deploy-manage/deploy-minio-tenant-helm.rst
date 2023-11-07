@@ -23,7 +23,7 @@ You cannot use the MinIO Operator Tenant chart to deploy a Tenant independent of
 .. important::
 
 
-   The MinIO Operator Tenant Chart is *distinct* from the community-managed :github:`MinIO Chart <minio/tree/master/helm/minio>`.
+   The MinIO Operator Tenant Chart is *distinct* from the community-managed :minio-git:`MinIO Chart <minio/tree/master/helm/minio>`.
 
    The Community Helm Chart is community built, maintained, and supported.
    MinIO does not guarantee support for any given bug, feature request, or update referencing that chart.
@@ -98,7 +98,7 @@ You can modify the Operator deployment after installation.
 
       helm install \
         --namespace MINIO_TENANT_NAMESPACE \
-        --name MINIO_TENANT_NAME \
+        --create-namespace \ 
         MINIO_TENANT_NAME minio-operator/tenant
 
 #. Validate the Tenant installation
@@ -141,7 +141,7 @@ You can modify the Operator deployment after installation.
      .. code-block:: shell
         :class: copyable
 
-        kubectl port-forward svc/minio 9000 -n tenant-ns
+        kubectl port-forward svc/minio 9000 -n MINIO_TENANT_NAMESPACE
 
    * Create an alias for the Tenant service:
 
@@ -188,9 +188,9 @@ This method may support easier pre-configuration of the Tenant compared to the :
       :substitutions:
 
       helm install \
-      --namespace tenant-ns \
+      --namespace MINIO_TENANT_NAMESPACE \
       --create-namespace \
-      tenant-ns tenant-|operator-version-stable|.tgz
+      MINIO_TENANT_NAME tenant-|operator-version-stable|.tgz
 
    To deploy more than one Tenant, create a Helm chart with the details of the new Tenant and repeat the deployment steps.
    Redeploying the same chart updates the previously deployed Tenant.
@@ -202,7 +202,7 @@ This method may support easier pre-configuration of the Tenant compared to the :
    .. code-block:: shell
       :class: copyable
 
-      kubectl --namespace tenant-ns port-forward svc/myminio-console 9443:9443
+      kubectl --namespace MINIO_TENANT_NAMESPACE port-forward svc/myminio-console 9443:9443
    
    .. note::
       
@@ -223,7 +223,7 @@ This method may support easier pre-configuration of the Tenant compared to the :
      .. code-block:: shell
         :class: copyable
 
-        kubectl port-forward svc/myminio-hl 9000 -n tenant-ns
+        kubectl port-forward svc/myminio-hl 9000 -n MINIO_TENANT_NAMESPACE
 
    * Create an alias for the Tenant service:
 

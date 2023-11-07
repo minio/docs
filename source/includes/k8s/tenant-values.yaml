@@ -176,6 +176,7 @@ tenant:
   mountPath: /export
   ###
   # The Sub path inside Mount path where MinIO stores data.
+
   # .. warning::
   #
   #    Treat the ``mountPath`` and ``subPath`` values as immutable once you deploy the Tenant.
