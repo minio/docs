@@ -233,6 +233,11 @@ Syntax
 
    Returns calls of the specified HTTP status code.
 
+.. mc-cmd:: --stats
+
+   Accumulate stats, such as name, count, duration, or errors.
+   Accumulates up to 15 stat entries.
+
 .. mc-cmd:: --verbose
    
    Returns verbose output.

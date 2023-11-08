@@ -562,6 +562,17 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
 
        MinIO also supports uploading Certificate Authority certificates for validating client certificates minted by that CA.
 
+      .. admonition:: Supported Secret Types
+         :class: note
+   
+         MinIO supports three types of :kube-docs:`secrets in Kubernetes <concepts/configuration/secret/#secret-types>`.
+      
+         #. **Opaque**, with ``private.key`` and ``public.crt`` files.
+         #. **tls**, using ``tls.key`` and ``tls.crt`` files.
+         #. `cert-manager <https://cert-manager.io/>`__` 1.7.x or later running on Kubernetes 1.21 or later.
+
+         For the best support of *tls* or *cert-manager* secrets, upgrade to Operator version 5.0.10 or later.
+
 .. versionadded:: Console 0.23.1
 
    A message displays under the certificate with the date of expiration and length of time until expiration.
