@@ -567,10 +567,10 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
     
    MinIO supports three types of :kube-docs:`secrets in Kubernetes <concepts/configuration/secret/#secret-types>`.
        
-   #. opaque
+   #. ``opaque``
     
       Using ``private.key`` and ``public.crt`` files.
-   #. tls
+   #. ``tls``
      
       Using ``tls.key`` and ``tls.crt`` files.
    #. `cert-manager <https://cert-manager.io/>`__ 1.7.x or later 
