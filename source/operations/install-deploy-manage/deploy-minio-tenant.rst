@@ -562,16 +562,22 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
 
        MinIO also supports uploading Certificate Authority certificates for validating client certificates minted by that CA.
 
-      .. admonition:: Supported Secret Types
-         :class: note
-   
-         MinIO supports three types of :kube-docs:`secrets in Kubernetes <concepts/configuration/secret/#secret-types>`.
-      
-         #. **Opaque**, with ``private.key`` and ``public.crt`` files.
-         #. **tls**, using ``tls.key`` and ``tls.crt`` files.
-         #. `cert-manager <https://cert-manager.io/>`__` 1.7.x or later running on Kubernetes 1.21 or later.
+.. admonition:: Supported Secret Types
+   :class: note
+    
+   MinIO supports three types of :kube-docs:`secrets in Kubernetes <concepts/configuration/secret/#secret-types>`.
+       
+   #. opaque
+    
+      Using ``private.key`` and ``public.crt`` files.
+   #. tls
+     
+      Using ``tls.key`` and ``tls.crt`` files.
+   #. `cert-manager <https://cert-manager.io/>`__ 1.7.x or later 
+    
+      Running on Kubernetes 1.21 or later.
 
-         For the best support of *tls* or *cert-manager* secrets, upgrade to Operator version 5.0.10 or later.
+   For the best support of *tls* or *cert-manager* secrets, upgrade to Operator version 5.0.10 or later.
 
 .. versionadded:: Console 0.23.1
 
@@ -587,7 +593,7 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
 
 .. _create-tenant-encryption-section:
 
-8) The :guilabel:`Encryption` Section
+1) The :guilabel:`Encryption` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption (SSE) <minio-sse>` settings for the MinIO Tenant. 

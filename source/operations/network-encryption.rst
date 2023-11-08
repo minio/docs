@@ -214,9 +214,15 @@ Enabling TLS
 
    MinIO supports three types of :kube-docs:`secrets in Kubernetes <concepts/configuration/secret/#secret-types>`.
 
-   #. **Opaque**, with ``private.key`` and ``public.crt`` files.
-   #. **tls**, using ``tls.key`` and ``tls.crt`` files.
-   #. `cert-manager <https://cert-manager.io/>`__` 1.7.x or later running on Kubernetes 1.21 or later.
+   #. opaque
+    
+      Using ``private.key`` and ``public.crt`` files.
+   #. tls
+     
+      Using ``tls.key`` and ``tls.crt`` files.
+   #. `cert-manager <https://cert-manager.io/>`__ 1.7.x or later 
+    
+      Running on Kubernetes 1.21 or later.
 
    .. note::
 
