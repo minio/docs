@@ -11,8 +11,8 @@
    :depth: 2
 
 
-.. mc:: mc idp ldap accesskey ls
 .. mc:: mc idp ldap accesskey list
+.. mc:: mc idp ldap accesskey ls
 
 
 Description
@@ -20,7 +20,7 @@ Description
 
 .. start-mc-idp-ldap-accesskey-ls-desc
 
-The :mc:`mc idp ldap accesskey-ls` displays a list of LDAP access key pairs.
+The :mc:`mc idp ldap accesskey ls` displays a list of LDAP access key pairs.
 
 .. end-mc-idp-ldap-accesskey-ls-desc
 
@@ -82,14 +82,14 @@ Parameters
 
    Output only permanent access keys.
 
-   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey --temp-only`.
+   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey ls --temp-only`.
 
 .. mc-cmd:: --temp-only
    :optional:
 
    Output only temporary access keys.
 
-   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey --permanent-only`.
+   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey ls --permanent-only`.
 
 .. mc-cmd:: --users-only
    :optional:

@@ -20,7 +20,7 @@ Description
 
 .. start-mc-idp-ldap-accesskey-rm-desc
 
-The :mc:`mc idp ldap accesskey-rm` deletes the specified access key from the local server.
+The :mc:`mc idp ldap accesskey rm` deletes the specified access key from the local server.
 
 .. end-mc-idp-ldap-accesskey-rm-desc
 

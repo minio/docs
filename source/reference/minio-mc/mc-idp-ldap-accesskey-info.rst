@@ -19,7 +19,7 @@ Description
 
 .. start-mc-idp-ldap-accesskey-info-desc
 
-The :mc:`mc idp ldap accesskey-info` outputs information about the specified access key(s).
+The :mc:`mc idp ldap accesskey info` outputs information about the specified access key(s).
 
 .. end-mc-idp-ldap-accesskey-info-desc
 
