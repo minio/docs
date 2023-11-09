@@ -19,9 +19,19 @@ Syntax
 
 .. start-mc-support-top-locks-desc
 
-The :mc:`mc support top locks` command lists the ten oldest locks on a MinIO deployment.
+The :mc:`mc support top locks` command lists the ten oldest :ref:`locks <minio-object-locking>` on a MinIO deployment.
 
 .. end-mc-support-top-locks-desc
+
+The command outputs the age of the lock, type of lock, owner, and resource.
+The output resembles the following:
+
+.. code-block:: shell
+
+   Since                 Type    Owner                 Resource
+   13 hours ago          WRITE   10.68.100.18:9000     .minio.sys/leader.lock
+   13 hours ago          WRITE   10.68.100.18:9000     .minio.sys/callhome/runCallhome.lock
+   13 hours ago          WRITE   10.68.100.23:9000     .minio.sys/new-drive-healing/0/0
 
 .. tab-set::
 

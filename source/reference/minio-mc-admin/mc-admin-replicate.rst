@@ -168,6 +168,29 @@ Syntax
 
       The :ref:`alias <alias>` of the MinIO deployment.
 
+   .. mc-cmd:: --bucket-bandwidth
+
+      Set default bandwidth limit for bucket in bits per second.
+
+      Valid units include: 
+   
+      - ``B`` for bytes
+      - ``K`` for kilobytes
+      - ``M`` for megabytes
+      - ``G`` for gigabytes
+      - ``T`` for terabytes
+      - ``Ki`` for kibibytes
+      - ``Mi`` for mibibytes
+      - ``Gi`` for gibibytes
+      - ``Ti`` for tebibytes
+
+      For example, the following command limits the replication on the ``myminio`` deployment to no more than 2 Gigabytes per second.
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc admin replicate update myminio --deployment-id c1758167-4426-454f-9aae-5c3dfdf6df64 --bucket-bandwidth "2G"
+
    .. mc-cmd:: --deployment-id
       :required:
 

@@ -341,7 +341,7 @@ the storage class on the destination S3-compatible host.
 
 
 Behavior
-~~~~~~~~
+--------
 
 Object Names on Move
 ~~~~~~~~~~~~~~~~~~~~
