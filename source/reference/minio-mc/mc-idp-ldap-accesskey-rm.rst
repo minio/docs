@@ -26,6 +26,10 @@ The :mc:`mc idp ldap accesskey rm` deletes the specified access key from the loc
 
 :mc:`mc idp ldap accesskey rm` is also known as :mc:`mc idp ldap accesskey remove`.
 
+.. include:: /includes/common-minio-ad-ldap-params.rst
+   :start-after: start-minio-ad-ldap-accesskey-creation
+   :end-before: end-minio-ad-ldap-accesskey-creation
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE

@@ -23,6 +23,10 @@ The :mc:`mc idp ldap accesskey info` outputs information about the specified acc
 
 .. end-mc-idp-ldap-accesskey-info-desc
 
+.. include:: /includes/common-minio-ad-ldap-params.rst
+   :start-after: start-minio-ad-ldap-accesskey-creation
+   :end-before: end-minio-ad-ldap-accesskey-creation
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE

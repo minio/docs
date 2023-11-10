@@ -26,6 +26,10 @@ The :mc:`mc idp ldap accesskey ls` displays a list of LDAP access key pairs.
 
 :mc:`mc idp ldap accesskey ls` is also known as :mc:`mc idp ldap accesskey list`.
 
+.. include:: /includes/common-minio-ad-ldap-params.rst
+   :start-after: start-minio-ad-ldap-accesskey-creation
+   :end-before: end-minio-ad-ldap-accesskey-creation
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE

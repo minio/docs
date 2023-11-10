@@ -127,3 +127,19 @@
    This parameter corresponds with the :envvar:`MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY` environment variable.
 
 .. end-minio-ad-ldap-params
+
+.. Descriptions for adding LDAP access keys
+   Used in the following files:                                                                
+   - /source/reference/minio-mc/mc-idp-ldap-accesskey.rst
+   - /source/reference/minio-mc/mc-idp-ldap-accesskey-info.rst
+   - /source/reference/minio-mc/mc-idp-ldap-accesskey-rm.rst
+   - /source/reference/minio-mc/mc-idp-ldap-accesskey-ls.rst
+
+.. start-minio-ad-ldap-accesskey-creation
+
+This command works against :ref:`access keys <minio-id-access-keys>` created by an AD/LDAP user after authenticating to MinIO.
+
+Authenticated users can manage their own long-term Access Keys using the :ref:`MinIO Console <minio-console-user-access-key>`.
+MinIO supports using :ref:`AssumeRoleWithLDAPIdentity <minio-sts-assumerolewithldapidentity>` to generate temporary access keys using the :ref:`Security Token Service <minio-security-token-service>`.
+
+.. end-minio-ad-ldap-accesskey-creation

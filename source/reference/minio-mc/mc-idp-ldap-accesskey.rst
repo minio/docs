@@ -25,6 +25,10 @@ The :mc-cmd:`mc idp ldap accesskey` commands allow you to list, delete, or displ
 
 The :mc-cmd:`mc idp ldap accesskey` commands are only supported against MinIO deployments.
 
+.. include:: /includes/common-minio-ad-ldap-params.rst
+   :start-after: start-minio-ad-ldap-accesskey-creation
+   :end-before: end-minio-ad-ldap-accesskey-creation
+
 The :mc-cmd:`mc idp ldap accesskey` command has the following subcommands:
 
 .. list-table::
