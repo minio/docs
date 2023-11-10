@@ -41,7 +41,7 @@ The :mc:`mc idp ldap accesskey ls` displays a list of LDAP access key pairs.
 
          mc idp ldap accesskey ls minio/
 
-      If the authenticated user is the ``admin``, the example command returns a list of all users and their associated access keys.
+      If the authenticated user has the ``admin:ListUsers`` permission, the example command returns a list of all users and their associated access keys.
 
    .. tab-item:: SYNTAX
 
@@ -116,12 +116,12 @@ Once authenticated, the following command returns all AD/LDAP access keys on the
 
 .. note::
 
-   If not authenticated as an admin, the command returns a list of access keys for the authenticated user only.
+   If the user does not have the ``admin:ListUsers`` permission, the command returns a list of access keys for the authenticated user only.
 
 List User Distinguished Names
 +++++++++++++++++++++++++++++
 
-To return a list of DNs for a deployment, you must first authenticate as the ``admin`` user.
+To return a list of DNs for a deployment, you must first authenticate as a user with the ``admin:ListUsers`` permission.
 Once authenticated, the following command outputs the AD/LDAP distinguished names on the ``minio`` deployment.
 
 .. code-block:: shell
@@ -132,7 +132,7 @@ Once authenticated, the following command outputs the AD/LDAP distinguished name
 List Temporary Access Keys
 ++++++++++++++++++++++++++
 
-To return a list of all temporary access keys for a deployment, you must first authenticate as the ``admin`` user.
+To return a list of all temporary access keys for a deployment, you must first authenticate as a user with the ``admin:ListUsers`` permission.
 Once authenticated, the following command outputs a list of distinguished names with their associated temporary access keys.
 
 .. code-block:: shell
@@ -172,7 +172,7 @@ The following command returns the AD/LDAP access keys for the currently authenti
 
 .. note:: 
 
-   If the authenticated user is the ``admin``, the command returns a list of all users and access keys on the deployment.
+   If the authenticated user has the ``admin:ListUsers`` permission, the command returns a list of all users and access keys on the deployment.
 
 Global Flags
 ~~~~~~~~~~~~
