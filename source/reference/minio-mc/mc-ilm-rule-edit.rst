@@ -67,7 +67,6 @@ rule on a MinIO bucket.
                           [--noncurrent-expire-days "string"]                 \
                           [--noncurrent-expire-newer "string"]                \
                           [--noncurrent-transition-days "string"]             \
-                          [--noncurrent-transition-newer value]               \
                           [--noncurrent-transition-tier "string"]             \
                           [--tags]                                            \
                           ALIAS
@@ -209,46 +208,6 @@ Parameters
    lifecycle management rules. Slow scanning due to high IO workloads or
    limited system resources may delay application of lifecycle management
    rules. See :ref:`minio-lifecycle-management-scanner` for more information.
-
-.. mc-cmd:: --noncurrent-transition-newer
-   :optional:
-
-   The maximum number of non-current object versions to retain on the current tier.
-   Older object versions beyond the number to retain transition to a different, specified tier.
-
-   Use this flag to keep a certain number of non-current versions of an object accessible on the tier in a first in, first out order.
-
-   If not specified, all non-current object versions transition to the different tier.
-
-   The following table lists a number of object versions and their transition eligibility based on ``--noncurrent-transition-newer 3``:
-
-   .. list-table::
-      :widths: 50 50
-      :width: 100% 
-
-      * - v5 (current version)
-        - Current version not affected by ILM rules.
-      * - v4
-        - kept on current tier
-      * - v3
-        - kept on current tier
-      * - v2
-        - kept on current tier
-      * - v1
-        - marked for transition to other tier
-
-   MinIO retains the current version, v5, on the tier.
-   MinIO also retains the next ``3`` non-current versions on the tier, starting with the newest.
-   This means MinIO leaves ``v4``, ``v3``, and ``v2`` for the three non-current version to keep on the current tier.
-
-   ``v1`` would be a fourth non-current version, which falls outside the limit of non-current versions to retain, so MinIO marks ``v1`` for transition.
-
-   Updating the number for this flag only impacts the unmarked versions of objects.
-   Any versions already marked for transition do not change if you increase the number, and any object versions already transitioned do not transition back to the tier.
-
-   MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
-   Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
-   See :ref:`minio-lifecycle-management-scanner` for more information.
 
 
 .. mc-cmd:: --noncurrent-transition-tier

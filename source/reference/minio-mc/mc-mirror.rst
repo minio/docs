@@ -240,6 +240,10 @@ Parameters
 
       In prior versions, specifying ``/path/to/directory`` would result in the removal of the ``/path/to`` folder if ``directory`` did not exist.
 
+.. mc-cmd:: --retry
+
+   In case of errors during mirror process, retry on each errored object.
+
 .. mc-cmd:: storage-class, sc
    
 

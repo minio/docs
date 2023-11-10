@@ -232,7 +232,8 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-head-desc
           :end-before: end-mc-head-desc
      
-   * - | :mc:`mc idp ldap add`
+   * - | :mc:`mc idp ldap accesskey`
+       | :mc:`mc idp ldap add`
        | :mc:`mc idp ldap disable`
        | :mc:`mc idp ldap enable`
        | :mc:`mc idp ldap info`
@@ -488,7 +489,8 @@ Global Options
 
 .. program:: mc
 
-All :ref:`commands <minio-mc-commands>` support the following global options:
+All :ref:`commands <minio-mc-commands>` support the following global options.
+You can also define some of these options using :ref:`Environment Variables <minio-server-envvar-mc>`.
 
 .. option:: --debug
 
@@ -502,11 +504,15 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
 
       mc --debug ls play
 
+   Alternatively, set the environment variable :envvar:`MC_DEBUG`.
+
 .. option:: --config-dir
 
    The path to a ``JSON`` formatted configuration file that
    :program:`mc` uses for storing data. See :ref:`mc-configuration` for
    more information on how :program:`mc` uses the configuration file.
+
+   Alternatively, set the environment variable :envvar:`MC_CONFIG_DIR`.
 
 .. option:: --JSON
 
@@ -521,20 +527,28 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
 
       mc --JSON ls play 
 
+   Alternatively, set the environment variable :envvar:`MC_JSON`.
+
 .. option:: --no-color
 
    Disables the built-in color theme for console output. Useful for dumb
    terminals.
 
+   Alternatively, set the environment variable :envvar:`MC_NO_COLOR`.
+
 .. option:: --quiet
 
    Suppresses console output. 
+
+   Alternatively, set the environment variable :envvar:`MC_QUIET`.
 
 .. option:: --insecure
 
    Disables TLS/SSL certificate verification. Allows TLS connectivity to 
    servers with invalid certificates. Exercise caution when using this
    option against untrusted S3 hosts.
+
+   Alternatively, set the environment variable :envvar:`MC_INSECURE`.
 
 .. option:: --version
 
@@ -562,6 +576,7 @@ All :ref:`commands <minio-mc-commands>` support the following global options:
    /reference/minio-mc/mc-find
    /reference/minio-mc/mc-head
    /reference/minio-mc/mc-idp-ldap
+   /reference/minio-mc/mc-idp-ldap-accesskey
    /reference/minio-mc/mc-idp-ldap-policy
    /reference/minio-mc/mc-idp-openid
    /reference/minio-mc/mc-ilm
