@@ -63,7 +63,6 @@ Examples
 
          export MC_HOST_myalias=https://Q3AM3UQ867SPQQA43P2F:zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG@play.min.io
 
-
 **Security Token Service (STS) Credentials**
 
 .. tab-set::
@@ -82,6 +81,59 @@ Examples
 
          export MC_HOST_myalias=https://Q3AM3UQ867SPQQA43P2F:zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG:eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NLZXkiOiJOVUlCT1JaWVRWMkhHMkJNUlNYUiIsImF1ZCI6IlBvRWdYUDZ1Vk80NUlzRU5SbmdEWGo1QXU1WWEiLCJhenAiOiJQb0VnWFA2dVZPNDVJc0VOUm5nRFhqNUF1NVlhIiwiZXhwIjoxNTM0ODk2NjI5LCJpYXQiOjE1MzQ4OTMwMjksImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0Ojk0NDMvb2F1dGgyL3Rva2VuIiwianRpIjoiNjY2OTZjZTctN2U1Ny00ZjU5LWI0MWQtM2E1YTMzZGZiNjA4In0.eJONnVaSVHypiXKEARSMnSKgr-2mlC2Sr4fEGJitLcJF_at3LeNdTHv0_oHsv6ZZA3zueVGgFlVXMlREgr9LXA@play.min.io
 
+STS Service
+~~~~~~~~~~~
+
+.. versionadded:: mc RELEASE.2023-11-06T04-19-23Z
+
+Use this setting to add an STS endpoint to use for `mc` commands.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :selected:
+
+      .. envvar:: MC_STS_ENDPOINT
+
+      .. code-block:: shell
+
+         export MC_STS_ENDPOINT=https://sts.minio-operator.svc.cluster.local:4223/sts/ns-1 
+         export MC_WEB_IDENTITY_TOKEN_FILE=/var/run/secrets/kubernetes.io/serviceaccount/token mc ls demomc/
+
+   .. tab-item:: Configuration Setting
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
+
+      Use :mc:`mc alias set` to configure an ALIAS.
+
+Web Token Identity
+~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: mc RELEASE.2023-11-06T04-19-23Z
+
+Use this setting to add a web token identity to use for `mc` commands.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :selected:
+
+      .. envvar:: MC_WEB_IDENITY_TOKEN
+
+      .. code-block:: shell
+
+         export MC_WEB_IDENTITY_TOKEN_FILE=/var/run/secrets/kubernetes.io/serviceaccount/token
+
+   .. tab-item:: Configuration Setting
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
+
+      Use :mc:`mc alias set` to configure an ALIAS.
+
 Configuration Directory
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -93,8 +145,6 @@ Specify the path to the configuration folder the MinIO Client should use.
       :selected:
 
       .. envvar:: MC_CONFIG_DIR
-
-         Replace ``<ALIAS>`` at the end of the environment variable with the ``alias`` to set the host for.
 
    .. tab-item:: Configuration Setting
 
@@ -114,8 +164,6 @@ Disable the MinIO Client progress bar.
 
       .. envvar:: MC_QUIET
 
-         Replace ``<ALIAS>`` at the end of the environment variable with the ``alias`` to set the host for.
-
    .. tab-item:: Configuration Setting
 
       .. include:: /includes/common-mc-admin-config.rst
@@ -133,8 +181,6 @@ Disable the color theme used for MinIO Client output.
       :selected:
 
       .. envvar:: MC_NO_COLOR
-
-         Replace ``<ALIAS>`` at the end of the environment variable with the ``alias`` to set the host for.
 
    .. tab-item:: Configuration Setting
 
@@ -154,8 +200,6 @@ Enable formatting the output as JSON lines.
       :selected:
 
       .. envvar:: MC_JSON
-
-         Replace ``<ALIAS>`` at the end of the environment variable with the ``alias`` to set the host for.
 
    .. tab-item:: Configuration Setting
 
@@ -249,8 +293,6 @@ Limit the upload bandwidth the MinIO Client uses for certain commands.
       :selected:
 
       .. envvar:: MC_LIMIT_UPLOAD
-
-         Replace ``<ALIAS>`` at the end of the environment variable with the ``alias`` to set the host for.
 
    .. tab-item:: Configuration Setting
 

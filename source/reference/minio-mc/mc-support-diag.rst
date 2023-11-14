@@ -70,21 +70,23 @@ Sample Output
 
 .. code-block:: shell
 
-   ● Admin Info ... ✔ 
-   ● CPU ... ✔ 
-   ● Disk Hardware ... ✔ 
+   ● CPU Info ... ✔ 
+   ● Disk Info ... ✔ 
+   ● Net Info ... ✔ 
    ● Os Info ... ✔ 
    ● Mem Info ... ✔ 
    ● Process Info ... ✔ 
-   ● Config ... ✔ 
-   ● Drive ... ✔ 
-   ● Net ... ✔ 
+   ● Server Config ... ✔ 
+   ● System Errors ... ✔ 
+   ● System Services ... ✔ 
+   ● System Config ... ✔ 
+   ● Admin Info ... ✔ 
    *********************************************************************************
                                    WARNING!!
         ** THIS FILE MAY CONTAIN SENSITIVE INFORMATION ABOUT YOUR ENVIRONMENT ** 
         ** PLEASE INSPECT CONTENTS BEFORE SHARING IT ON ANY PUBLIC FORUM **
    *********************************************************************************
-   mc: Health data saved to dc-11-health_20220511053323.json.gz
+   mc: MinIO diagnostics report saved to myminio-health_20231111053323.json.gz
 
 The gzipped output contains the requested health information.
 
