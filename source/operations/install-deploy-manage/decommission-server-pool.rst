@@ -120,14 +120,6 @@ However, if Pool 1 were full (e.g. 200TB of used space), decommissioning would
 completely fill the remaining pools and potentially prevent any further write
 operations.
 
-Decommissioning Does Not Support Tiering
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO does not support decommissioning pools in deployments with
-:ref:`tiering <minio-lifecycle-management-tiering>` configured. The MinIO
-server rejects decommissioning attempts if any bucket in the deployment
-has a tiering configuration.
-
 Considerations
 --------------
 
