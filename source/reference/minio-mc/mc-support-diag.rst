@@ -143,7 +143,7 @@ The command has the following syntax:
    mc [GLOBALFLAGS] support diag                   \
                             ALIAS                  \
                             [--airgap]             \
-                            [--anonymize="string"] \
+                            [--anonymize=<string>] \
                             [--api-key string]
 
 
