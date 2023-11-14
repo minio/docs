@@ -40,7 +40,7 @@ For example, for use with scripting.
          :start-after: start-minio-settings-no-config-option
          :end-before: end-minio-settings-no-config-option
 
-      Use :mc:`mc alias set` to configure an ALIAS.
+      Use :mc:`mc alias set` to configure an :ref:`alias <alias>`.
 
 Examples
 ++++++++
@@ -98,15 +98,12 @@ Use this setting to add an STS endpoint to use for `mc` commands.
       .. code-block:: shell
 
          export MC_STS_ENDPOINT=https://sts.minio-operator.svc.cluster.local:4223/sts/ns-1 
-         export MC_WEB_IDENTITY_TOKEN_FILE=/var/run/secrets/kubernetes.io/serviceaccount/token mc ls demomc/
 
    .. tab-item:: Configuration Setting
 
       .. include:: /includes/common-mc-admin-config.rst
          :start-after: start-minio-settings-no-config-option
          :end-before: end-minio-settings-no-config-option
-
-      Use :mc:`mc alias set` to configure an ALIAS.
 
 Web Token Identity
 ~~~~~~~~~~~~~~~~~~
@@ -131,8 +128,6 @@ Use this setting to add a web token identity to use for `mc` commands.
       .. include:: /includes/common-mc-admin-config.rst
          :start-after: start-minio-settings-no-config-option
          :end-before: end-minio-settings-no-config-option
-
-      Use :mc:`mc alias set` to configure an ALIAS.
 
 Configuration Directory
 ~~~~~~~~~~~~~~~~~~~~~~~
