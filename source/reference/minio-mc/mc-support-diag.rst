@@ -122,6 +122,16 @@ Generate a diagnostic report for a MinIO deployment at alias ``minio2`` and save
 #. Select the :guilabel:`Upload` button
 #. Drag and drop the file or browse to the ``.gzip`` file location to upload it
 
+Upload Data to SUBNET with Strict Anonymization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Generates health data for a MinIO cluster at alias ``myminio`` and anonymizes all sensitive data, including host names.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc support diag myminio --anonymize=strict
+
 
 Syntax
 ------
@@ -130,9 +140,10 @@ The command has the following syntax:
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] support diag                \
-                            ALIAS               \
-                            [--airgap]          \
+   mc [GLOBALFLAGS] support diag                   \
+                            ALIAS                  \
+                            [--airgap]             \
+                            [--anonymize="string"] \
                             [--api-key string]
 
 
@@ -156,6 +167,22 @@ Parameters
 
    If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
 
+.. mc-cmd:: --anonymize
+
+   .. versionadded:: mc RELEASE.2023-11-10T21-37-17Z
+
+   MinIO anonymizes data loaded to SUBNET.
+   Beginning with mc ``RELEASE.2023-11-10T21-37-17Z``, MinIO does *not* anonymize host names.
+   This is the default ``standard`` anonymization mode.
+
+   Valid values are ``=strict`` or ``=standard``.
+
+   To anonymize all data, including host names, pass this parameter with the ``strict`` mode.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc support diag minio --anonymize=strict
 
 .. mc-cmd:: --api-key
    :optional:
