@@ -576,8 +576,10 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
    #. `cert-manager <https://cert-manager.io/>`__ 1.7.x or later 
     
       Running on Kubernetes 1.21 or later.
+   
+   .. versionadded:: 5.0.10
 
-   For the best support of *tls* or *cert-manager* secrets, upgrade to Operator version 5.0.10 or later.
+      Support for *tls* or *cert-manager* secrets was added in version 5.0.10.
 
 .. versionadded:: Console 0.23.1
 
