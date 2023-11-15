@@ -233,6 +233,24 @@ Syntax
 
    Returns calls of the specified HTTP status code.
 
+.. mc-cmd:: --stats
+
+   Accumulate stats, such as name, count, duration, min time, max time, time to first byte, or errors.
+   Accumulates up to 15 stat entries.
+
+   The output resembles the following:
+
+   .. code-block:: shell
+
+      Duration: 1m18s ∙●∙
+      Call                	Count      	RPM  	Avg Time	TTFB Time	Min Time  	Max Time   	Errors	RX Avg	TX Avg 	
+      s3.HeadBucket       	169 (79.3%)	130.8	1.395ms 	0s       	369.392µs 	10.486821ms	0     	135 B 	0 B    	
+      s3.GetObject        	34 (16.0%) 	26.3 	1.39ms  	1.278ms  	558.722µs 	2.688192ms 	0     	90 B  	759 B  	
+      s3.ListBuckets      	4 (1.9%)   	3.1  	6.617ms 	5.573ms  	4.602269ms	7.708086ms 	0     	93 B  	7.5 KiB	
+      s3.ListObjectsV2    	3 (1.4%)   	2.3  	34.621ms	34.393ms 	2.015213ms	99.601832ms	0     	93 B  	2.6 KiB	
+      s3.GetBucketLocation	2 (0.9%)   	1.5  	991µs   	796µs    	920.966µs 	1.061579ms 	0     	122 B 	245 B  	
+      s3.ListObjectsV1    	1 (0.5%)   	0.8  	998µs   	837µs    	998.367µs 	998.367µs  	0     	124 B 	364 B  		 
+
 .. mc-cmd:: --verbose
    
    Returns verbose output.

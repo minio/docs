@@ -207,6 +207,27 @@ Enabling TLS
    You may also need to update URLs used by applications or clients.
 
 
+.. cond:: k8s
+
+   Supported Secret Types
+   ~~~~~~~~~~~~~~~~~~~~~~
+
+   MinIO supports three types of :kube-docs:`secrets in Kubernetes <concepts/configuration/secret/#secret-types>`.
+
+   #. ``opaque``
+    
+      Using ``private.key`` and ``public.crt`` files.
+   #. ``tls``
+     
+      Using ``tls.key`` and ``tls.crt`` files.
+   #. `cert-manager <https://cert-manager.io/>`__ 1.7.x or later 
+    
+      Running on Kubernetes 1.21 or later.
+
+   .. note::
+
+      For the best support of *tls* or *cert-manager* secrets, upgrade to Operator version 5.0.10 or later.
+
 Multiple Domain-Based TLS Certificates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
