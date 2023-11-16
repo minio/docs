@@ -1,0 +1,104 @@
+# Default values for minio-operator.
+
+operator:
+  ## Setup environment variables for the Operator
+#  env:
+#    - name: MINIO_OPERATOR_DEPLOYMENT_NAME
+#      valueFrom:
+#        fieldRef:
+#          fieldPath: metadata.labels['app.kubernetes.io/name']
+#    - name: MINIO_CONSOLE_TLS_ENABLE
+#      value: "off"
+#    - name: CLUSTER_DOMAIN
+#      value: "cluster.domain"
+#    - name: WATCHED_NAMESPACE
+#      value: ""
+#    - name: MINIO_OPERATOR_RUNTIME
+#      value: "OpenShift"
+  env: [ ]
+  #
+  ### Image field:
+  ## Image from tag (original behaviour), for example:
+  # image:
+  #   repository: quay.io/minio/operator
+  #   tag: v5.0.10
+  #   pullPolicy: IfNotPresent
+  ## Image from digest (added after original behaviour), for example:
+  # image:
+  #   repository: quay.io/minio/operator@sha256
+  #   digest: 28c80b379c75242c6fe793dfbf212f43c602140a0de5ebe3d9c2a3a7b9f9f983
+  #   pullPolicy: IfNotPresent
+  image:
+    repository: quay.io/minio/operator
+    tag: v5.0.10
+    pullPolicy: IfNotPresent
+  imagePullSecrets: [ ]
+  runtimeClassName: ~
+  initContainers: [ ]
+  replicaCount: 2
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
+    fsGroup: 1000
+  containerSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
+  volumes: [ ]
+  volumeMounts: [ ]
+  nodeSelector: { }
+  priorityClassName: ""
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: name
+                operator: In
+                values:
+                  - minio-operator
+          topologyKey: kubernetes.io/hostname
+  tolerations: [ ]
+  topologySpreadConstraints: [ ]
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+      ephemeral-storage: 500Mi
+
+console:
+  image:
+    repository: quay.io/minio/operator
+    tag: v5.0.10
+    pullPolicy: IfNotPresent
+  env: [ ]
+  imagePullSecrets: [ ]
+  runtimeClassName: ~
+  initContainers: [ ]
+  replicaCount: 1
+  nodeSelector: { }
+  affinity: { }
+  tolerations: [ ]
+  topologySpreadConstraints: [ ]
+  resources:
+    requests:
+      cpu: 0.25
+      memory: 512Mi
+  securityContext:
+    runAsUser: 1000
+    runAsNonRoot: true
+  containerSecurityContext:
+    runAsUser: 1000
+    runAsNonRoot: true
+  ingress:
+    enabled: false
+    ingressClassName: ""
+    labels: { }
+    annotations: { }
+    tls: [ ]
+    host: console.local
+    path: /
+    pathType: Prefix
+  volumes: [ ]
+  volumeMounts: [ ]

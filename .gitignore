@@ -21,5 +21,4 @@ source/developers/javascript/*.md
 source/developers/python/*.md
 source/operations/monitoring/*.md
 source/includes/common-metrics-*.md
-source/includes/external/*
 *.inv
