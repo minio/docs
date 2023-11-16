@@ -44,6 +44,7 @@ extensions = [
     'sphinx_design',
     'sphinx.ext.intersphinx',
     'sphinx_reredirects',
+    'sphinxcontrib.autoyaml',
 ]
 
 # -- External Links
@@ -203,6 +204,10 @@ redirects = {
     "reference/minio-mc-admin/mc-admin-top": "../deprecated/mc-admin-top.html"
 }
 
+
+# sphinxcontrib-autoyaml customization
+
+autoyaml_level = 5
 
 # -- Options for HTML output -------------------------------------------------
 

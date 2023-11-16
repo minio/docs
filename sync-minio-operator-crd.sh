@@ -7,6 +7,9 @@ function main() {
 
    curl --retry 10 -Ls https://raw.githubusercontent.com/minio/operator/v${OPERATOR}/docs/tenant_crd.adoc | asciidoc -b docbook - | pandoc -f docbook -t markdown_strict - -o source/includes/k8s/ext-tenant-crd.md
 
+   curl --retry 10 -Ls https://raw.githubusercontent.com/minio/operator/v${OPERATOR}/helm/operator/values.yaml -o source/includes/k8s/operator-values.yaml
+   curl --retry 10 -Ls https://raw.githubusercontent.com/minio/operator/v${OPERATOR}/helm/tenant/values.yaml -o source/includes/k8s/tenant-values.yaml
+
    # To make the include nicer, this strips out the top H1 and reorders all headers thereafter
 
    KNAME=$(uname -s)

@@ -84,11 +84,17 @@ Run
 make sync-operator-crd
 ```
 
-This downloads and converts the `tenant-crd.adoc` from the MinIO Operator github repository.
-It converts it to XML, then to markdown.
+This script does three things:
+
+- Downloads and converts the `tenant-crd.adoc` from the MinIO Operator Github repository
+- Downloads the Operator Helm `values.yaml` from the Operator Github repository
+- Downloads the Tenant Helm `values.yaml` from the Operator Github repository
+
+For the the `tenant-crd.adoc` , it converts the asciidoc to XML, then to markdown.
 Finally, it does some `sed` find/replace to tidy up the file for Sphinx ingest.
 
 You can run this when we have a new Operator release being documented, assuming there are changes to the CRD as part of that release.
+It should make it somewhat easier to periodically sync these docs instead of pulling them down every single build, when we do not expect or need to doc changes in latest stable.
 
 # License
 

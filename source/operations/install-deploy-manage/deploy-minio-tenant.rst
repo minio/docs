@@ -789,3 +789,9 @@ Kubernetes provides multiple options for configuring external access to services
 .. cond:: k8s and not (openshift or eks)
 
    .. include:: /includes/k8s/steps-deploy-tenant-cli.rst
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+
+   /operations/install-deploy-manage/deploy-minio-tenant-helm

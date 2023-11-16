@@ -67,6 +67,10 @@ Prerequisites
 Kubernetes Version 1.19.0
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. important::
+
+   MinIO **strongly recommends** upgrading Production clusters running `End-Of-Life <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__ Kubernetes APIs.
+
 Starting with v4.0.0, the MinIO Operator and MinIO Kubernetes Plugin **require** Kubernetes 1.19.0 and later. 
 The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must have the same version of 1.19.0+.
 
@@ -154,52 +158,6 @@ The output of the example command above may differ from the output in your termi
 
    Alternatively, you can generate x.509 TLS certificates signed by a known and trusted CA and pass those certificates to MinIO Tenants. 
    See :ref:`minio-tls` for more complete documentation.
-
-Configure MinIO Operator to Trust Custom Certificates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you use custom certificates for your deployment, add the certificate so that MinIO Operator trusts it.
-
-This procedure assumes you have an existing custom certificate.
-
-1. Use the following command to generate a secret from the certificate:
-
-   .. code-block:: shell
-      :class: copyable
-   
-      kubectl create secret generic MY-CUSTOM-TLS -n MY-CLUSTER-NAMESPACE --from-file=<path/to/public.crt>
-   
-   Replace the following placeholders in the above command:
-   - ``MY-CUSTOM-TLS`` with the name of your secrets file
-   - ``MY-CLUSTER-NAMESPACE`` with your cluster's namespace
-   - ``<path/to/public.crt>`` with the relative path to the public certificate to use to create the secret
-
-2. Add a volume to the yaml for your cluster under ``.spec.template.spec``
-
-   .. code-block:: yaml
-      :class: copyable
-
-      volumes:
-        - name: tls-certificates
-          projected:
-            defaultMode: 420
-            sources:
-              - secret:
-                  items:
-                    - key: public.crt
-                      path: CAs/custom-public.crt
-                  name: MY-CUSTOM-TLS
-
-   - replace ``MY-CUSTOM-TLS`` with the name of your secrets file.
-
-3. Add a ``volumeMount`` to the yaml for your cluster under ``.spec.template.spec.container[0]``
-
-   .. code-block:: yaml
-      :class: copyable
-
-      volumeMounts:
-        - mountPath: /tmp/certs
-          name: tls-certificates
 
 Procedure
 ---------

@@ -211,6 +211,7 @@ For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio
       Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
       /reference/kubectl-minio-plugin
       /reference/operator-crd
+      /reference/operator-chart-values
 
 .. toctree::
    :titlesonly:
