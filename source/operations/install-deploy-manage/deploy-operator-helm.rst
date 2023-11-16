@@ -135,10 +135,10 @@ You can modify the Operator deployment after installation.
           port: 9090
           protocol: TCP
           targetPort: 9090
-          nodePort: 39090
+          nodePort: 30090
       type: NodePort
    
-   You can attempt to connect to the MinIO Operator Console by specifying port ``39090`` on any of the worker nodes in the deployment.
+   You can attempt to connect to the MinIO Operator Console by specifying port ``30090`` on any of the worker nodes in the deployment.
 
 #. Retrieve the Console Access Token
 
