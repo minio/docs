@@ -94,6 +94,7 @@ For the the `tenant-crd.adoc` , it converts the asciidoc to XML, then to markdow
 Finally, it does some `sed` find/replace to tidy up the file for Sphinx ingest.
 
 You can run this when we have a new Operator release being documented, assuming there are changes to the CRD as part of that release.
+It should make it somewhat easier to periodically sync these docs instead of pulling them down every single build, when we do not expect or need to doc changes in latest stable.
 
 # License
 
