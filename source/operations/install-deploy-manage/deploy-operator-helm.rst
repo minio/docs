@@ -31,7 +31,7 @@ To install the Operator with Helm you will need the following:
 
 For more about Operator installation requirements, including supported Kubernetes versions and TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
 
-This procedure assumes familiarity the with referenced Kubernetes concepts and utilities.
+This procedure assumes familiarity with the referenced Kubernetes concepts and utilities.
 While this documentation may provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
 .. _minio-k8s-deploy-operator-helm-repo:
@@ -84,7 +84,7 @@ You can modify the Operator deployment after installation.
    .. code-block:: shell
       :class: copyable
 
-      helm install 
+      helm install \
         --namespace minio-operator \
         --create-namespace \
         operator minio-operator/operator
@@ -213,7 +213,7 @@ This method may support easier pre-configuration of the Operator compared to the
       helm install \
       --namespace minio-operator \
       --create-namespace \
-      minio-operator operator-|operator-version-stable|.tgz
+      operator operator-|operator-version-stable|.tgz
 
 #. Configure Operator
 
