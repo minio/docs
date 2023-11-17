@@ -28,6 +28,28 @@ You can use the MinIO Console for administration tasks like Identity and Access 
 The MinIO Console is embedded as part of the MinIO Server. 
 You can also deploy a standalone MinIO Console using the instructions in the :minio-git:`github repository <console>`.
 
+Supported Browsers
+~~~~~~~~~~~~~~~~~~
+
+MinIO Console runs on a variety of current, stable release browsers.
+
+For the best experience in the MinIO Console, use the latest stable release of your preferred browser.
+Some browsers that are supported include:
+
+- Chrome
+- Edge
+- Safari
+- Firefox
+- Opera
+
+This list is *not* exhaustive and is subject to change.
+
+For a full list of browsers and versions for running MinIO Console, see the `Browserslist <https://browsersl.ist/#q=%3E0.2%25%2Cnot+dead+and+not+op_mini+all>`__ website.
+
+.. tip:: 
+   
+   MinIO Console does *not* support Opera Mini.
+
 Configuration
 -------------
 
