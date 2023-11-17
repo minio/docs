@@ -33,7 +33,7 @@ Supported Browsers
 
 MinIO Console runs on a variety of current, stable release browsers.
 
-MinIO recommends use the latest stable release of your preferred browser for the best experience in the MinIO Console.
+For the best experience in the MinIO Console, use the latest stable release of your preferred browser.
 Some browsers that are supported include:
 
 - Chrome
@@ -44,7 +44,7 @@ Some browsers that are supported include:
 
 This list is *not* exhaustive and is subject to change.
 
-For a full list of browsers and versions for running MinIO Console, see `Browserslist <https://browsersl.ist/#q=%3E0.2%25%2Cnot+dead+and+not+op_mini+all>`__.
+For a full list of browsers and versions for running MinIO Console, see the `Browserslist <https://browsersl.ist/#q=%3E0.2%25%2Cnot+dead+and+not+op_mini+all>`__ website.
 
 .. tip:: 
    
