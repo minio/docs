@@ -44,9 +44,10 @@ user's authorized actions and resources *or* assign the user to :ref:`groups
    - :ref:`minio-external-identity-management-openid`
    - :ref:`minio-external-identity-management-ad-ldap`
 
-   Enabling external identity management disables the MinIO internal IDP, with
-   the exception of creating :ref:`access keys
+   AD/LDAP and OIDC configurations are mutually exclusive.
+   Furthermore, enabling AD/LDAP external identity management disables the MinIO internal IDP, with the exception of creating :ref:`access keys
    <minio-idp-service-account>`.
+   You can configure multiple OIDC providers while maintaining MinIO-managed users.
 
 .. toctree::
    :titlesonly:
