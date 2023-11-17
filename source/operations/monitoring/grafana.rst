@@ -41,7 +41,8 @@ Visualize MinIO metrics with the official MinIO Grafana dashboard for the MinIO 
 MinIO provides a Grafana Dashboard for MinIO Server metrics.
 For specifics on the dashboard's configuration, see the `JSON file on GitHub <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/minio-dashboard.json>`__.
 
-If :ref:`KES <minio-sse-data-encryption>` is setup and the MinIO server process has access to the KES metrics, the dashboard includes metrics for the KMS, including status, request error rates, and request success rates.
+For MinIO Deployments running with :ref:`Server-Side Encryption <minio-sse-data-encryption>` (SSE-KMS or SSE-S3), the dashboard includes metrics for the KMS.
+These metrics include status, request error rates, and request success rates.
 
 .. image:: /images/grafana-minio.png
    :width: 600px
