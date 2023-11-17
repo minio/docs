@@ -141,7 +141,7 @@ You can modify the Operator deployment after installation.
      .. code-block:: shell
         :class: copyable
 
-        kubectl port-forward svc/minio 9000 -n MINIO_TENANT_NAMESPACE
+        kubectl port-forward svc/MINIO_TENANT_NAME-hl 9000 -n MINIO_TENANT_NAMESPACE
 
    * Create an alias for the Tenant service:
 
@@ -165,7 +165,7 @@ Deploy a Tenant using a Local Helm Chart
 ----------------------------------------
 
 The following procedure deploys a Tenant using a local copy of the Helm Charts.
-This method may support easier pre-configuration of the Tenant compared to the :ref:`repo-based installation  <deploy-tenant-helm-repo>`
+This method may support easier pre-configuration of the Tenant compared to the :ref:`repo-based installation  <deploy-tenant-helm-repo>`.
 
 #. Download the Helm charts
 
@@ -223,7 +223,7 @@ This method may support easier pre-configuration of the Tenant compared to the :
      .. code-block:: shell
         :class: copyable
 
-        kubectl port-forward svc/myminio-hl 9000 -n MINIO_TENANT_NAMESPACE
+        kubectl port-forward svc/MINIO_TENANT_NAME-hl 9000 -n MINIO_TENANT_NAMESPACE
 
    * Create an alias for the Tenant service:
 
