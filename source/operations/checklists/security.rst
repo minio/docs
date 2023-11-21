@@ -28,6 +28,12 @@ Required Steps
    * - :octicon:`circle`
      - (For Kubernetes deployments only) Configure the tenant(s) to use the selected 3rd party Identity Provider
 
+   * - :octicon:`circle`
+     - Grant firewall access for TCP traffic to the MinIO Server S3 API Listen Port (Default: ``9000``).
+
+   * - :octicon:`circle`
+     - Grant firewall access for TCP traffic to the :ref:`MinIO Server Console Listen Port <minio-console-port-assignment>` (Recommended Default: ``9090``).
+
 
 :ref:`Encryption-at-Rest <minio-sse>`
 -------------------------------------
