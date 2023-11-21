@@ -44,9 +44,9 @@ The :mc-cmd:`mc idp ldap accesskey` command has the following subcommands:
           :end-before: end-mc-idp-ldap-accesskey-ls-desc
 
    * - :mc-cmd:`mc idp ldap accesskey rm`
-     - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-remove.rst
-          :start-after: start-mc-idp-ldap-accesskey-remove-desc
-          :end-before: end-mc-idp-ldap-accesskey-remove-desc
+     - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-rm.rst
+          :start-after: start-mc-idp-ldap-accesskey-rm-desc
+          :end-before: end-mc-idp-ldap-accesskey-rm-desc
 
    * - :mc-cmd:`mc idp ldap accesskey info`
      - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-info.rst

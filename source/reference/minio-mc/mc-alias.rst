@@ -52,6 +52,16 @@ Subcommands
           :start-after: start-mc-alias-set-desc
           :end-before: end-mc-alias-set-desc
 
+   * - :mc:`~mc alias import`
+     - .. include:: /reference/minio-mc/mc-alias-import.rst
+          :start-after: start-mc-alias-import-desc
+          :end-before: end-mc-alias-import-desc
+
+   * - :mc:`~mc alias export`
+     - .. include:: /reference/minio-mc/mc-alias-export.rst
+          :start-after: start-mc-alias-export-desc
+          :end-before: end-mc-alias-export-desc
+
 .. toctree::
    :titlesonly:
    :hidden:
@@ -59,3 +69,5 @@ Subcommands
    /reference/minio-mc/mc-alias-list
    /reference/minio-mc/mc-alias-remove
    /reference/minio-mc/mc-alias-set
+   /reference/minio-mc/mc-alias-import
+   /reference/minio-mc/mc-alias-export
