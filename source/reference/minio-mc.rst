@@ -165,6 +165,8 @@ The following table lists :mc-cmd:`mc` commands:
    * - | :mc:`mc alias list`
        | :mc:`mc alias remove`
        | :mc:`mc alias set`
+       | :mc:`mc alias import`
+       | :mc:`mc alias export`
      - .. include:: /reference/minio-mc/mc-alias.rst
           :start-after: start-mc-alias-desc
           :end-before: end-mc-alias-desc
