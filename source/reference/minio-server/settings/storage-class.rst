@@ -53,6 +53,12 @@ Environment Variables
       * - Erasure Set Size
         - Default Parity (EC:N)
 
+      * - 1
+        - EC:0
+
+      * - 2-3
+        - EC:1
+
       * - 4-5
         - EC:2
 
@@ -83,8 +89,9 @@ Environment Variables
 
    This value **must be** less than or equal to :envvar:`MINIO_STORAGE_CLASS_STANDARD`.
 
-   You cannot set this value for deployments with an erasure set size less than 5.
-   Defaults to ``EC:2``.
+   You cannot set this value for deployments with an erasure set size less than 2.
+   Defaults to ``EC:1`` for deployments with erasure set size greater than 1.
+   Defaults to ``EC:0`` for deployments of erasure set size of 1.
 
 .. envvar:: MINIO_STORAGE_CLASS_COMMENT
 
