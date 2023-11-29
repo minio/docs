@@ -33,7 +33,7 @@
      - 16+ CPU/socket or vCPU per host
 
    * - :octicon:`circle`
-     - :ref:`Available memory to meet and exceed per-server usage <minio-hardware-checklist-memory>` by a reasonable buffer.
+     - :ref:`Available memory to meet or exceed per-server usage <minio-hardware-checklist-memory>` by a reasonable buffer.
      - 32GB of available memory per host
      - 128GB+ of available memory per host
 
@@ -75,7 +75,7 @@
      - 8+ vCPU per MinIO Pod
 
    * - :octicon:`circle`
-     - :ref:`Available memory to meet and exceed per-server usage <minio-hardware-checklist-memory>` by a reasonable buffer.
+     - :ref:`Available memory to meet or exceed per-server usage <minio-hardware-checklist-memory>` by a reasonable buffer.
      - 32GB of available memory per worker node
      - 128GB+ of available memory per worker node
 

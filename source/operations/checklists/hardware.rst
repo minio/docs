@@ -233,7 +233,8 @@ Storage
    Format drives as XFS and present them to MinIO as a :abbr:`JBOD (Just a Bunch of Disks)` array with no RAID or other pooling configurations.
 
    Ensure a consistent drive type (NVMe, SSD, HDD) for the underyling storage. 
-   MinIO does not distinguish nor benefit from mixed storage types.
+   MinIO does not distinguish between storage types.
+   Mixing storage types provides no benefit to MinIO.
 
    Use the same capacity of drive across all nodes in each MinIO :ref:`server pool <minio-intro-server-pool>`. 
    MinIO limits the maximum usable size per drive to the smallest size in the deployment.
