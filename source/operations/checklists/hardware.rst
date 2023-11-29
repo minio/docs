@@ -37,51 +37,17 @@ The provided guidance is intended as a baseline and cannot replace |subnet| Perf
 
    See our `Reference Hardware <https://min.io/product/reference-hardware#hardware?ref-docs>`__ page for a curated selection of servers and storage components from our hardware partners.
 
-.. list-table::
-   :widths: auto
-   :width: 100%
+.. cond:: k8s
 
-   * - :octicon:`circle`
-     - Sufficient CPU cores to achieve performance goals for hashing (for example, for healing) and encryption
-       
-       MinIO recommends Single Socket Intel® Xeon® Scalable Gold CPUs (minimum 16 cores per socket).
+   .. include:: /includes/common/common-checklist.rst
+      :start-after: start-k8s-hardware-checklist
+      :end-before: end-k8s-hardware-checklist
 
-   * - :octicon:`circle`
-     - Sufficient RAM to achieve performance goals based on the number of drives and anticipated concurrent requests (see the :ref:`formula and reference table <minio-hardware-checklist-memory>`).
+.. cond:: not k8s
 
-       MinIO recommends a minimum of 128GB of memory per node for best performance.
-
-   * - :octicon:`circle`
-     - .. cond:: k8s
-
-          MinIO requires a *minimum* of 4 worker nodes per MinIO Tenant.
-
-          MinIO strongly recommends allocating worker nodes dedicated to servicing the MinIO Tenant.
-          Colocating multiple high-performance services on the same nodes can result in resource contention and reduced overall performance.
-
-       .. cond:: linux or container or macos or windows
-
-          MinIO recommends a *minimum* of 4 host servers per distributed deployment.
-
-          MinIO strongly recommends hardware dedicated to servicing the MinIO Tenant.
-          Colocating multiple high-performance services on the same servers can result in resource contention and reduced overall performance.
-
-   * - :octicon:`circle`
-     - .. cond:: k8s
-
-          MinIO recommends a minimum of 4 Persistent Volumes per MinIO Server pod.
-          For better performance and storage efficiency, use 8 or more PV per server.
-
-       .. cond:: linux or container or macos or windows
-
-          MinIO recommends a minimum of 4 locally attached drives per MinIO Server.
-          For better performance and storage efficiency, use 8 or more drives per server.
-
-       Use the same type of drive (NVMe, SSD, or HDD) with the same capacity across all nodes in the deployment.
-
-   * - :octicon:`circle`
-     - | 25GbE Network as a baseline 
-       | 100GbE Network for high performance
+   .. include:: /includes/common/common-checklist.rst
+      :start-after: start-linux-hardware-checklist
+      :end-before: end-linux-hardware-checklist
 
 .. important:: 
 
@@ -105,6 +71,8 @@ The provided guidance is intended as a baseline and cannot replace |subnet| Perf
 
 The minimum recommendations above reflect MinIO's experience with assisting enterprise customers in deploying on a variety of IT infrastructures while maintaining the desired SLA/SLO. 
 While MinIO may run on less than the minimum recommended topology, any potential cost savings come at the risk of decreased reliability, performance, or overall functionality.
+
+.. _minio-hardware-checklist-network:
 
 Networking
 ~~~~~~~~~~
@@ -215,46 +183,61 @@ The following table provides general guidelines for allocating memory for use by
    * - More than 1 Pebibyte (Pi)
      - 128GiB
 
+.. _minio-hardware-checklist-storage:
+
 Storage
 ~~~~~~~
 
-MinIO recommends selecting the type of drive based on your performance objectives.
-The following table highlights the general use case for each drive type based on cost and performance:
+.. cond:: k8s
 
-NVMe/SSD - Hot Tier
-HDD - Warm
+   MinIO recommends provisioning a storage class for each MinIO Tenant that meets the performance objectives for that tenant.
 
-.. list-table::
-   :header-rows: 1
-   :widths: auto
-   :width: 100%
+   Where possible, configure the Storage Class, CSI, or other provisioner underlying the PV to format volumes as XFS to ensure best performance.
 
-   * - Type
-     - Cost
-     - Performance
-     - Tier
+   Ensure a consistent underlying storage type (NVMe, SSD, HDD) for all PVs provisioned in a Tenant.
+   
+   Ensure the same presented capacity of each PV across all nodes in each Tenant :ref:`server pool <minio-intro-server-pool>`.
+   MinIO limits the maximum usable size per PV to the smallest PV in the pool.
+   For example, if a pool has 15 10TB PVs and 1 1TB PV, MinIO limits the per-PV capacity to 1TB.
 
-   * - NVMe
-     - High
-     - High
-     - Hot
+.. cond:: not k8s
 
-   * - SSD
-     - Balanced
-     - Balanced
-     - Hot/Warm
+   MinIO recommends selecting the type of drive based on your performance objectives.
+   The following table highlights the general use case for each drive type based on cost and performance:
 
-   * - HDD
-     - Low
-     - Low
-     - Cold/Archival
+   .. list-table::
+      :header-rows: 1
+      :widths: auto
+      :width: 100%
 
-Use the same type of drive (NVME, SSD, HDD) with the same capacity across all nodes in a MinIO deployment.
-MinIO does not distinguish drive types when using the underlying storage and does not benefit from mixed storage types.
+      * - Type
+        - Cost
+        - Performance
+        - Tier
 
-Use the same capacity of drive across all nodes in the MinIO :ref:`server pool <minio-intro-server-pool>`. 
-MinIO limits the maximum usable size per drive to the smallest size in the deployment.
-For example, if a deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
+      * - NVMe
+        - High
+        - High
+        - Hot
+
+      * - SSD
+        - Balanced
+        - Balanced
+        - Hot/Warm
+
+      * - HDD
+        - Low
+        - Low
+        - Cold/Archival
+
+   Format drives as XFS and present them to MinIO as a :abbr:`JBOD (Just a Bunch of Disks)` array with no RAID or other pooling configurations.
+
+   Ensure a consistent drive type (NVMe, SSD, HDD) for the underyling storage. 
+   MinIO does not distinguish nor benefit from mixed storage types.
+
+   Use the same capacity of drive across all nodes in each MinIO :ref:`server pool <minio-intro-server-pool>`. 
+   MinIO limits the maximum usable size per drive to the smallest size in the deployment.
+   For example, if a deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
 
 Recommended Hardware Tests
 --------------------------
