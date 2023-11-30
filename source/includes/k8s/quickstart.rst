@@ -128,7 +128,7 @@ Procedure
 
 #. **Connect your Browser to the MinIO Server**
 
-   Access the :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9090``.
+   Access the :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9001``.
 
    Log in to the Console with the credentials ``minioadmin | minioadmin``.
    These are the default :ref:`root user <minio-users-root>` credentials.

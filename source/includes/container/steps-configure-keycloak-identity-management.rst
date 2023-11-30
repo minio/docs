@@ -1,6 +1,6 @@
 .. |KEYCLOAK_URL| replace:: localhost:8080
 .. |MINIO_S3_URL| replace:: localhost:9000
-.. |MINIO_CONSOLE_URL| replace:: localhost:9090
+.. |MINIO_CONSOLE_URL| replace:: localhost:9001
 
 1) Create the Podman Pod
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -12,7 +12,7 @@ This ensures both containers can communicate normally.
    :class: copyable
 
    podman pod create \ 
-        -p 9000:9000 -p 9090:9090 -p 8080:8080 \
+        -p 9000:9000 -p 9001:9001 -p 8080:8080 \
         -v ~/minio-keycloak/minio:/mnt/minio \
         -n minio-keycloak
 
@@ -81,9 +81,9 @@ The following command starts the MinIO Container and attaches it to the ``minio-
    podman run -dt \
           --name minio-server \
           --pod minio-keycloak \
-          quay.io/minio/minio:RELEASE.2023-02-22T18-23-45Z server /mnt/data --console-address :9090
+          quay.io/minio/minio:RELEASE.2023-02-22T18-23-45Z server /mnt/data --console-address :9001
 
-Go to ``localhost:9090`` to access the MinIO Console.
+Go to ``localhost:9001`` to access the MinIO Console.
 Log in using the default credentials ``minioadmin:minioadmin``.
 
 7) Configure MinIO for Keycloak Authentication

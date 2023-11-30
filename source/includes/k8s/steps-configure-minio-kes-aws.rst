@@ -17,7 +17,7 @@ The command returns output similar to the following:
 
    Starting port forward of the Console UI.
 
-   To connect open a browser and go to http://localhost:9090
+   To connect open a browser and go to http://localhost:9001
 
    Current JWT to login: TOKEN
 

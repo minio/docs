@@ -1,6 +1,6 @@
 .. |KEYCLOAK_URL| replace:: keycloak-url.example.net:8080
 .. |MINIO_S3_URL| replace:: minio-url.example.net:9000
-.. |MINIO_CONSOLE_URL| replace:: minio-url.example.net:9090
+.. |MINIO_CONSOLE_URL| replace:: minio-url.example.net:9001
 
 1) Configure or Create a Client for Accessing Keycloak
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

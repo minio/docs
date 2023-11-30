@@ -45,7 +45,7 @@ Procedure
       :class: copyable
 
       mkdir ~/minio
-      minio server ~/minio --console-address :9090
+      minio server ~/minio --console-address :9001
 
    The ``mkdir`` command creates the folder explicitly at the specified path.
 
@@ -60,7 +60,7 @@ Procedure
       RootUser: minioadmin
       RootPass: minioadmin
 
-      Console: http://192.0.2.10:9090 http://127.0.0.1:9090
+      Console: http://192.0.2.10:9001 http://127.0.0.1:9001
       RootUser: minioadmin
       RootPass: minioadmin
 
@@ -75,7 +75,7 @@ Procedure
 
    Open http://127.0.0.1:9000 in a web browser to access the :ref:`MinIO Console <minio-console>`. 
    You can alternatively enter any of the network addresses specified as part of the server command output.
-   For example, :guilabel:`Console: http://192.0.2.10:9090 http://127.0.0.1:9090` in the example output indicates two possible addresses to use for connecting to the Console.
+   For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While the port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 

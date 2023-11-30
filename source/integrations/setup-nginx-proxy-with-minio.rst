@@ -35,7 +35,7 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
       
       - Proxy requests to the root ``https://minio.example.net`` to the MinIO Server listening on ``https://minio.local:9000``.
 
-      - Proxy requests to the subpath ``https://minio.example.net/minio/ui`` to the MinIO Console listening on ``https://minio.local:9090``.
+      - Proxy requests to the subpath ``https://minio.example.net/minio/ui`` to the MinIO Console listening on ``https://minio.local:9001``.
 
       The following location blocks provide a template for further customization in your unique environment:
 
@@ -52,10 +52,10 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
          upstream minio_console {
             least_conn;
-            server minio-01.internal-domain.com:9090;
-            server minio-02.internal-domain.com:9090;
-            server minio-03.internal-domain.com:9090;
-            server minio-04.internal-domain.com:9090;
+            server minio-01.internal-domain.com:9001;
+            server minio-02.internal-domain.com:9001;
+            server minio-03.internal-domain.com:9001;
+            server minio-04.internal-domain.com:9001;
          }
 
          server {
@@ -129,7 +129,7 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
       - Proxy request to the subdomain ``minio.example.net`` to the MinIO Server listening on ``https://minio.local:9000``
 
-      - Proxy requests to the subdomain ``console.example.net`` to the MinIO Console listening on ``https://minio.local:9090``
+      - Proxy requests to the subdomain ``console.example.net`` to the MinIO Console listening on ``https://minio.local:9001``
 
       The following location blocks provide a template for further customization in your unique environment:
 
@@ -146,10 +146,10 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
          upstream minio_console {
             least_conn;
-            server minio-01.internal-domain.com:9090;
-            server minio-02.internal-domain.com:9090;
-            server minio-03.internal-domain.com:9090;
-            server minio-04.internal-domain.com:9090;
+            server minio-01.internal-domain.com:9001;
+            server minio-02.internal-domain.com:9001;
+            server minio-03.internal-domain.com:9001;
+            server minio-04.internal-domain.com:9001;
          }
 
          server {

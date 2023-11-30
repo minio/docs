@@ -11,7 +11,7 @@ The commands in this section create the following resources:
    :substitutions:
 
    sudo podman pod create  \
-     -p 9000:9000 -p 9090:9090 -p 7373:7373  \
+     -p 9000:9000 -p 9001:9001 -p 7373:7373  \
      -v |kescertpath|:/certs  \
      -v |miniodatapath|:/mnt/minio  \
      -v |kesconfigpath|:/etc/default/  \
@@ -33,7 +33,7 @@ The commands in this section create the following resources:
      --pod "|namespace|"  \
      -e "MINIO_CONFIG_ENV_FILE=/etc/default/minio"  \
      quay.io/minio/minio:|minio-latest| server  \
-       --console-address ":9090"
+       --console-address ":9001"
 
 You can verify the status of the containers using the following commands:
 

@@ -75,7 +75,7 @@ Run the following command in a terminal or shell to start the MinIO server as a 
    :substitutions:
 
    export MINIO_CONFIG_ENV_FILE=|minioconfigpath|/minio
-   minio server --console-address :9090
+   minio server --console-address :9001
 
 .. end-kes-minio-start-server-desc
 
@@ -177,7 +177,7 @@ You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-
 
    .. tab-item:: MinIO Console
 
-      Open the MinIO Console by navigating to http://127.0.0.1:9090 in your preferred browser and logging in with the root credentials specified to the MinIO container.
+      Open the MinIO Console by navigating to http://127.0.0.1:9001 in your preferred browser and logging in with the root credentials specified to the MinIO container.
       If you deployed MinIO using a different Console listen port, substitute ``9090`` with that port value.
 
       Once logged in, create a new Bucket and name it to your preference.

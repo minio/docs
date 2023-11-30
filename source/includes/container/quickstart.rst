@@ -50,11 +50,11 @@ Procedure
 
                podman run \
                   -p 9000:9000 \
-                  -p 9090:9090 \
+                  -p 9001:9001 \
                   -v ~/minio/data:/data \
                   -e "MINIO_ROOT_USER=ROOTNAME" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
-                  quay.io/minio/minio server /data --console-address ":9090"
+                  quay.io/minio/minio server /data --console-address ":9001"
    
             The example above works this way:
    
@@ -75,11 +75,11 @@ Procedure
    
                podman run \
                   -p 9000:9000 \
-                  -p 9090:9090 \
+                  -p 9001:9001 \
                   -v D:\minio\data:/data \
                   -e "MINIO_ROOT_USER=ROOTNAME" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
-                  quay.io/minio/minio server /data --console-address ":9090"
+                  quay.io/minio/minio server /data --console-address ":9001"
    
             The example above works this way:
    
@@ -106,12 +106,12 @@ Procedure
    
                docker run \
                   -p 9000:9000 \
-                  -p 9090:9090 \
+                  -p 9001:9001 \
                   --name minio \
                   -v ~/minio/data:/data \
                   -e "MINIO_ROOT_USER=ROOTNAME" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
-                  quay.io/minio/minio server /data --console-address ":9090"
+                  quay.io/minio/minio server /data --console-address ":9001"
          
             The example above works this way:
    
@@ -133,12 +133,12 @@ Procedure
    
                docker run \
                   -p 9000:9000 \
-                  -p 9090:9090 \
+                  -p 9001:9001 \
                   --name minio1 \
                   -v D:\minio\data:/data \
                   -e "MINIO_ROOT_USER=ROOTUSER" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
-                  quay.io/minio/minio server /data --console-address ":9090"
+                  quay.io/minio/minio server /data --console-address ":9001"
                
             The example above works this way:
    
@@ -165,13 +165,13 @@ Procedure
    
                docker run \
                   -p 9000:9000 \
-                  -p 9090:9090 \
+                  -p 9001:9001 \
                   --user $(id -u):$(id -g) \
                   --name minio1 \
                   -e "MINIO_ROOT_USER=ROOTUSER" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
                   -v ${HOME}/minio/data:/data \
-                  quay.io/minio/minio server /data --console-address ":9090"
+                  quay.io/minio/minio server /data --console-address ":9001"
          
             The example above works this way:
    
@@ -198,13 +198,13 @@ Procedure
    
                docker run \
                   -p 9000:9000 \
-                  -p 9090:9090 \
+                  -p 9001:9001 \
                   --name minio1 \
                   --security-opt "credentialspec=file://path/to/file.json"
                   -e "MINIO_ROOT_USER=ROOTUSER" \
                   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
                   -v D:\data:/data \
-                  quay.io/minio/minio server /data --console-address ":9090"
+                  quay.io/minio/minio server /data --console-address ":9001"
    
             The example above works this way:
    
@@ -222,7 +222,7 @@ Procedure
 #. Connect your Browser to the MinIO Server
 
    Access the :ref:`minio-console` by going to a browser and going to ``http://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
-   For example, :guilabel:`Console: http://192.0.2.10:9090 http://127.0.0.1:9090` in the example output indicates two possible addresses to use for connecting to the Console.
+   For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 

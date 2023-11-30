@@ -128,13 +128,13 @@ each MinIO Server in the deployment.
 For example, the following command starts a distributed MinIO deployment using
 a static port assignment of ``9090`` for the MinIO Console. This deployment
 would respond to S3 API operations on the default MinIO server port ``:9000``
-and browser access on the MinIO Console port ``:9090``.
+and browser access on the MinIO Console port ``:9001``.
 
 .. code-block:: shell
    :class: copyable
 
    minio server https://minio-{1...4}.example.net/mnt/drive-{1...4} \
-         --console-address ":9090"
+         --console-address ":9001"
 
 Deployments behind network routing components which require static ports for 
 routing rules may require setting a static MinIO Console port. For example,
