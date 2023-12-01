@@ -196,8 +196,8 @@ The following query examples return metrics collected by Prometheus:
 .. code-block:: shell
    :class: copyable
 
-   minio_cluster_disk_online_total{job="minio-job"}[5m]
-   minio_cluster_disk_offline_total{job="minio-job"}[5m]
+   minio_cluster_drive_online_total{job="minio-job"}[5m]
+   minio_cluster_drive_offline_total{job="minio-job"}[5m]
    
    minio_bucket_usage_object_total{job="minio-job"}[5m]
 
@@ -228,14 +228,14 @@ You can modify or otherwise use these examples as guidance in building your own 
          summary: "Node down in MinIO deployment"
          description: "Node(s) in cluster {{ $labels.instance }} offline for more than 5 minutes"
 
-     - alert: DisksOffline
-       expr: avg_over_time(minio_cluster_disk_offline_total{job="minio-job"}[5m]) > 0
+     - alert: DrivesOffline
+       expr: avg_over_time(minio_cluster_drive_offline_total{job="minio-job"}[5m]) > 0
        for: 10m
        labels:
          severity: warn
        annotations:
-         summary: "Disks down in MinIO deployment"
-         description: "Disks(s) in cluster {{ $labels.instance }} offline for more than 5 minutes"
+         summary: "Drives down in MinIO deployment"
+         description: "Drives(s) in cluster {{ $labels.instance }} offline for more than 5 minutes"
 
 Specify the path to the alert file to the Prometheus configuration as part of the ``rule_files`` key:
 
