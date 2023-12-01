@@ -69,7 +69,7 @@ metrics to detect potential issues or errors on the MinIO cluster:
 - ``minio_cluster_nodes_offline_total`` to alert if one or more
   MinIO nodes are offline.
 
-- ``minio_node_disk_free_bytes`` to alert if the cluster is running
+- ``minio_node_drive_free_bytes`` to alert if the cluster is running
   low on free drive space.
 
 Cluster Read Quorum

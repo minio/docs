@@ -111,7 +111,7 @@ Configure InfluxDB to Collect and Alert using MinIO Metrics
 
       - Create a :guilabel:`Threshold Check` named ``MINIO_QUORUM_WARNING``.
 
-        Set the filter for the ``minio_cluster_disk_offline_total`` key.
+        Set the filter for the ``minio_cluster_drive_offline_total`` key.
 
         Set the :guilabel:`Thresholds` to :guilabel:`CRITICAL` when the value is one less than your configured :ref:`Erasure Code Parity <minio-erasure-coding>` setting.
 
