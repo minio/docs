@@ -169,6 +169,8 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 
    For more complete information on Azure Virtual Machine types and Storage resources, see :azure-docs:`Sizes for virtual machines in Azure <virtual-machines/sizes>` and :azure-docs:`Azure managed disk types <virtual-machines/disks-types>`
 
+.. _deploy-minio-tenant-pv:
+
 Persistent Volumes
 ~~~~~~~~~~~~~~~~~~
 
@@ -177,6 +179,7 @@ Persistent Volumes
    MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
    MinIO's consistency guarantees require the exclusive storage access that ``ReadWriteOnce`` provides.
    Additionally, MinIO recommends setting a reclaim policy of ``Retain`` for the PVC :kube-docs:`StorageClass <concepts/storage/storage-classes>`.
+   Where possible, configure the Storage Class, CSI, or other provisioner underlying the PV to format volumes as XFS to ensure best performance.
 
    For Kubernetes clusters where nodes have Direct Attached Storage, MinIO strongly recommends using the `DirectPV CSI driver <https://min.io/directpv?ref=docs>`__. 
    DirectPV provides a distributed persistent volume manager that can discover, format, mount, schedule, and monitor drives across Kubernetes nodes.
