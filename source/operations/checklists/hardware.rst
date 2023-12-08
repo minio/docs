@@ -87,16 +87,16 @@ This table assumes all network infrastructure components, such as routers, switc
    * - NIC Bandwidth (Gbps)
      - Estimated Aggregated Storage Throughput (GBps)
 
-   * - 10GbE
+   * - 10Gbps
      - 1.25GBps
 
-   * - 25GbE
+   * - 25Gbps
      - 3.125GBps
 
-   * - 50GbE
+   * - 50Gbps
      - 6.25GBps
 
-   * - 100GbE
+   * - 100Gbps
      - 12.5GBps
 
 Networking has the greatest impact on MinIO performance, where low per-host bandwidth artificially constrains the potential performance of the storage.
