@@ -16,7 +16,7 @@ Syntax
 .. start-mc-share-upload-desc
 
 The :mc:`mc share upload` command generates a temporary presigned URL with
-integrated access credentials for downloading objects from a MinIO bucket. The
+integrated access credentials for uploading objects to a MinIO bucket. The
 temporary URL expires after a configurable time limit.
 
 .. end-mc-share-upload-desc
