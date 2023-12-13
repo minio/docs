@@ -21,7 +21,7 @@ temporary URL expires after a configurable time limit.
 
 .. end-mc-share-upload-desc
 
-Applications can perform a ``PUT`` to retrieve the object from the URL. 
+Applications can perform a ``PUT`` to upload an object using the URL. 
 
 For more information on shareable object URLs, see the Amazon S3 
 documentation on :aws-docs:`Pre-Signed URLs 
@@ -104,11 +104,11 @@ Parameters
 
    .. code-block:: shell
 
-      curl ... -F key=ALIAS/<NAME> -F file=@<FILE>
+      curl ... -F key=<NAME> -F file=@<FILE>
 
    Replace ``<FILE>`` with the path to the file to upload.
 
-   Replace ``<NAME>`` with the file once uploaded.
+   Replace ``<NAME>`` with the object name once uploaded.  This may include prefixes.
       
 Global Flags
 ~~~~~~~~~~~~
@@ -176,7 +176,7 @@ Generate a URL to Upload Object(s)
         to the file to upload. 
       
       - Replace the ``<NAME>`` string in the returned CURL command with the name
-        of the file in the bucket.
+        of the object in the bucket.  This may include prefixes.
 
       You can use a shell script loop to recursively upload the contents of a
       filesystem directory to the S3-compatible service:
@@ -192,12 +192,14 @@ Generate a URL to Upload Object(s)
             -F x-amz-credential=AAAA/us-east-1/s3/aws4_request \
             -F x-amz-date=20200812T202556Z \
             -F x-amz-signature=AAAA \
-            -F bucket=mydata -F key=mydata/${file} -F file=@${file}
+            -F bucket=mybucket -F key=photos/${file} -F file=@${file}
 
          done
 
-      Defer to the documented best practices for your preferred scripting
-      language for iterating through files in a directory.
+      This example will upload each file in the directory ``~/Documents/photos/`` to
+      the ``mybucket`` bucket under the prefix ``photos``.  Defer to the documented 
+      best practices for your preferred scripting language for iterating through 
+      files in a directory.
 
 Behavior
 --------
