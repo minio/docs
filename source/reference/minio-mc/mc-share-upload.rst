@@ -108,7 +108,8 @@ Parameters
 
    Replace ``<FILE>`` with the path to the file to upload.
 
-   Replace ``<NAME>`` with the object name once uploaded.  This may include prefixes.
+   Replace ``<NAME>`` with the object name once uploaded.  
+   This may include :term:`prefixes <prefix>`.
       
 Global Flags
 ~~~~~~~~~~~~
@@ -176,7 +177,8 @@ Generate a URL to Upload Object(s)
         to the file to upload. 
       
       - Replace the ``<NAME>`` string in the returned CURL command with the name
-        of the object in the bucket.  This may include prefixes.
+        of the object in the bucket.  
+        This may include :term:`prefixes <prefix>`.
 
       You can use a shell script loop to recursively upload the contents of a
       filesystem directory to the S3-compatible service:
