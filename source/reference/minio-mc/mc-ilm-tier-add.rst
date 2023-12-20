@@ -89,6 +89,8 @@ Syntax
                          [--access-key value^]        \
                          [--secret-key value^]        \
                          [--use-aws-role^]            \
+                         [--aws-role-arn^]            \
+                         [--aws-web-identity-file^]   \
                          [--account-name value^]      \
                          [--account-key value^]       \
                          [--credentials-file value^]  \
@@ -295,6 +297,20 @@ The command accepts the following arguments:
 
    This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``s3`` or ``minio``.
    This option has no effect for any other value of ``TIER_TYPE``.
+
+.. mc-cmd:: --aws-role-arn
+   :optional:
+
+   The AWS S3 role name to use when transitioning objects.
+
+   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``s3`` **and** the source is a MinIO pod on Amazon EKS.
+
+.. mc-cmd:: --aws-web-identity-file
+   :optional:
+
+   Specify the web identity token file to use when transitioning objects.
+
+   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``s3`` **and** the source is a MinIO pod on Amazon EKS.
 
 Global Flags
 ~~~~~~~~~~~~
