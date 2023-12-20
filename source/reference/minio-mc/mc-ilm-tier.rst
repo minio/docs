@@ -81,7 +81,7 @@ To create tiers for object transition, MinIO requires the following administrati
 - :policy-action:`admin:SetTier`
 - :policy-action:`admin:ListTier`
 
-For example, the following policy provides permission for configuring object transition lifecycle management rules on any bucket in the cluster:
+For example, the following policy provides sufficient permissions for configuring object transition lifecycle management rules on any bucket in the cluster:
 
 .. literalinclude:: /extra/examples/LifecycleManagementAdmin.json
    :language: json
