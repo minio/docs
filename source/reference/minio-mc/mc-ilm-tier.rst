@@ -92,7 +92,7 @@ Transition Permissions
 
 Object transition lifecycle management rules require additional permissions on the remote storage tier. 
 Specifically, MinIO requires the remote tier credentials provide read, write, list, and delete permissions.
-If the remote bucket is versioned, delete version permission is also required.
+If the remote bucket is versioned, the ``s3:DeleteObjectVersion`` permission is also required.
 
 For example, if the remote storage tier implements AWS IAM policy-based access control, the following policy provides the necessary permissions for transitioning versioned objects into and out of the remote tier:
 
