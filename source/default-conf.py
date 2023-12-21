@@ -78,6 +78,7 @@ extlinks = {
     'aks-docs'        : ('https://learn.microsoft.com/en-us/azure/aks/%s', None),
     'azure-docs'      : ('https://learn.microsoft.com/en-us/azure/%s', None),
     'kes-docs'        : ('https://min.io/docs/kes/%s', None),
+    'directpv-docs'   : ('https://min.io/docs/directpv/%s', None),
 }
 
 suppress_warnings = [
@@ -282,19 +283,19 @@ html_context = {
    'docs': [
       # The first item has to be the current docs site #
       {
-         'name': 'MinIO Documentation',
+         'name': 'MinIO Server Documentation',
          'current': True
+      },
+      {
+         'name': 'DirectPV Documentation',
+         'url': 'https://min.io/docs/directpv',
+         'external': True
       },
       {
          'name': 'KES Documentation',
          'url': 'https://min.io/docs/kes',
          'external': True
-      },
-      #{
-         #'name': 'DirectPV Documentation',
-         #'url': '',
-         #'external': True
-      #}
+      }
    ]
 }
 
