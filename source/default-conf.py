@@ -290,12 +290,12 @@ html_context = {
          'name': 'DirectPV Documentation',
          'url': 'https://min.io/docs/directpv',
          'external': True
-      }
+      },
       {
          'name': 'KES Documentation',
          'url': 'https://min.io/docs/kes',
          'external': True
-      },
+      }
    ]
 }
 
