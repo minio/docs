@@ -119,7 +119,7 @@ This endpoint supports the following query parameters:
        See :ref:`minio-access-management` for more information on MinIO
        authentication and authorization.
 
-   * - ``RoleARN``
+   * - ``RoleArn``
      - string
      - *Optional*   
 

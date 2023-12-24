@@ -18,7 +18,7 @@ identities.
 For identities managed by the external OpenID Connect (OIDC) compatible provider, MinIO can use either of two methods to assign policies to the authenticated user.
 
 1. Use the `JSON Web Token claim <https://datatracker.ietf.org/doc/html/rfc7519#section-4>`__ returned as part of the OIDC authentication flow to identify the :ref:`policies <minio-policy>` to assign to the authenticated user.
-2. Use the ``RoleARN`` specified in the authorization request to assign the policies attached to the provider's RolePolicy.
+2. Use the ``RoleArn`` specified in the authorization request to assign the policies attached to the provider's RolePolicy.
    
 MinIO by default denies access to all actions or resources not explicitly allowed by a user's assigned or inherited :ref:`policies <minio-policy>`. 
 Users managed by an OIDC provider must specify the necessary policies as part of the JWT claim. If the user JWT claim has no matching MinIO policies, that user has no permissions to access any action or resource on the MinIO deployment.
@@ -60,7 +60,7 @@ The login flow for an application using :abbr:`OIDC (OpenID Connect)` credential
    MinIO only supports the `OpenID Authorization Code Flow <https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth>`__. 
    Authentication using Implicit Flow is not supported.
 
-6. MinIO verifies the ``RoleARN`` in the API call and checks for the :ref:`RolePolicy <minio-external-identity-management-openid-access-control>` to use. 
+6. MinIO verifies the ``RoleArn`` in the API call and checks for the :ref:`RolePolicy <minio-external-identity-management-openid-access-control>` to use.
    Any authentication request with the RoleARN receives the same policy access permissions.
 7. MinIO returns temporary credentials in the STS API response in the form of an access key, secret key, and session token. 
    The credentials have permissions matching those policies specified in the RolePolicy.
