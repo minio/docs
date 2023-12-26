@@ -49,6 +49,74 @@ The :mc-cmd:`mc license register` command connects your deployment with your |SU
 
 After registration, you can upload deployment health reports directly to SUBNET using the :mc-cmd:`mc support diag` command.
 
+.. tab-set::
+
+   .. tab-item:: EXAMPLE
+
+         The following example registers the ``minio`` :ref:`alias <alias>` with |SUBNET|:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc license register minio
+
+   .. tab-item:: SYNTAX
+
+      The command has the following syntax:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc [GLOBALFLAGS] license register ALIAS                      \
+                                  [--airgap]                          \
+                                  [--api-key <string>]                \
+                                  [--license <path to license file>]  \
+                                  [--name <value>]
+
+Parameters
+~~~~~~~~~~
+
+.. mc-cmd:: ALIAS
+   :required:
+
+   The :ref:`alias <alias>` of the MinIO deployment.
+
+  
+.. mc-cmd:: --airgap
+   :optional:
+
+   Use in environments without network access to SUBNET (for example, airgapped, firewalled, or similar configuration).
+
+   For instructions, see the :ref:`airgap example <minio-license-register-airgap>`.
+
+   If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
+
+.. mc-cmd:: --api-key
+
+   API of the account on SUBNET.
+
+   Corresponds with the ``MC_SUBNET_API_KEY`` environment variable.
+
+   To find the API key:
+
+   #. Log in to |SUBNET|
+   #. Go to the :guilabel:`Deployments` tab
+   #. Select the :guilabel:`API Key` button near the top of the page on the right side of the account statistics information box
+   #. Select copy button to the right of the key field to copy the key value to your clipboard
+
+.. mc-cmd:: --license
+   :optional:
+
+   Path to the license file to use for registering the deployment.
+   
+   You must first :ref:`download the license file <minio-subnet-license-file-download>` for the account.
+
+.. mc-cmd:: --name
+   :optional:
+
+   Specify a name other than the alias to associate to the MinIO deployment in SUBNET.
+
+   Use ``--name <value>`` replacing ``<value>`` with the name you want to use for the deployment on SUBNET.
 
 Examples
 --------
@@ -64,6 +132,18 @@ Register the MinIO deployment at alias ``minio1`` on SUBNET, using ``minio1`` as
    mc license register minio1
 
 If not already registered, a prompt asks for SUBNET credentials for the deployment.
+
+Register a Deployment Using the Account's License File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Register a new MinIO deployment at alias ``minio5`` on SUBNET, using the license file downloaded for the account:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc license register minio5 /path/to/minio.license
+
+If not already downloaded, you can :ref:`download the license file <minio-subnet-license-file-download>` from SUBNET.
 
 Register a Deployment with a Different Deployment Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -117,29 +197,7 @@ The command has the following syntax:
                             [--name value] \
                             [--airgap]
 
-Parameters
-~~~~~~~~~~
 
-.. mc-cmd:: ALIAS
-   :required:
-
-   The :ref:`alias <alias>` of the MinIO deployment.
-
-.. mc-cmd:: --name
-   :optional:
-
-   Specify a name other than the alias to associate to the MinIO deployment in SUBNET.
-
-   Use ``--name <value>`` replacing ``<value>`` with the name you want to use for the deployment on SUBNET.
-   
-.. mc-cmd:: --airgap
-   :optional:
-
-   Use in environments without network access to SUBNET (for example, airgapped, firewalled, or similar configuration).
-
-   For instructions, see the :ref:`airgap example <minio-license-register-airgap>`.
-
-   If the deployment is airgapped, but the local device where you are using the :ref:`minio client <minio-client>` has network access, you do not need to use the ``--airgap`` flag.
 
 
 Global Flags

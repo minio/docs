@@ -95,8 +95,7 @@ Download the license file from SUBNET on a machine with access to the Internet.
    
 #. Log in to |SUBNET|
 #. Go to the :guilabel:`Deployments` tab
-#. Select the deployment from the list
-#. Select the :guilabel:`License` number near the top of the page to display the :guilabel:`Cluster License Key`
+#. Select the :guilabel:`License` button near the top of the page on the right side of the account statistics information box to display the :guilabel:`Account License`
 #. Select :guilabel:`Download`
 
 SUBNET Issues

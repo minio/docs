@@ -38,6 +38,11 @@ The :mc-cmd:`mc idp ldap accesskey` command has the following subcommands:
    * - Subcommand
      - Description
 
+   * - :mc-cmd:`mc idp ldap accesskey create`
+     - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-create.rst
+          :start-after: start-mc-idp-ldap-accesskey-create-desc
+          :end-before: end-mc-idp-ldap-accesskey-create-desc
+
    * - :mc-cmd:`mc idp ldap accesskey ls`
      - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-ls.rst
           :start-after: start-mc-idp-ldap-accesskey-ls-desc
