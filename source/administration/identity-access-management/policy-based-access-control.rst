@@ -664,6 +664,7 @@ MinIO supports the following condition keys for all supported
 - ``aws:userid``
 - ``aws:username``
 - ``x-amz-content-sha256``
+- ``s3:signatureAge``
 
 .. warning:: 
 
