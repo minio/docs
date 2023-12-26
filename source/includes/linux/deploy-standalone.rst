@@ -60,7 +60,7 @@ The following example uses the ``~/minio-data`` folder:
    :class: copyable
 
    mkdir ~/minio-data
-   minio server ~/minio-data --console-address ":9090"
+   minio server ~/minio-data --console-address ":9001"
 
 
 The :mc:`minio server` process prints its output to the system console, similar
@@ -72,7 +72,7 @@ to the following:
    RootUser: minioadmin 
    RootPass: minioadmin 
 
-   Console: http://192.0.2.10:9090 http://127.0.0.1:9090     
+   Console: http://192.0.2.10:9001 http://127.0.0.1:9001     
    RootUser: minioadmin 
    RootPass: minioadmin 
 

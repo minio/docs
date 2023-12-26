@@ -43,7 +43,7 @@ Procedure
 #. **Connect your Browser to the MinIO Server**
 
    Access the :ref:`minio-console` by going to a browser (such as Safari) and going to ``https://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
-   For example, :guilabel:`Console: http://192.0.2.10:9090 http://127.0.0.1:9090` in the example output indicates two possible addresses to use for connecting to the Console.
+   For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 

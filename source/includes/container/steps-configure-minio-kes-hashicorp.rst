@@ -94,7 +94,7 @@ You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-
 
    .. tab-item:: MinIO Console
 
-      Open the MinIO Console by navigating to http://127.0.0.1:9090 in your preferred browser and logging in with the root credentials specified to the MinIO container.
+      Open the MinIO Console by navigating to http://127.0.0.1:9001 in your preferred browser and logging in with the root credentials specified to the MinIO container.
 
       Once logged in, create a new Bucket and name it to your preference.
       Select the Gear :octicon:`gear` icon to open the management view.

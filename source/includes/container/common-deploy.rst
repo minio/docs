@@ -71,7 +71,7 @@ The instructions include examples for both quay.io and DockerHub:
 
    .. tab-item:: MinIO Web Console
 
-      You can access the MinIO Web Console by entering http://localhost:9090 in your preferred browser.
+      You can access the MinIO Web Console by entering http://localhost:9001 in your preferred browser.
       Any traffic to the MinIO Console port on the local host redirects to the container.
 
       Log in with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` configured in the environment file specified to the container.

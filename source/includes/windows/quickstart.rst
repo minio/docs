@@ -61,7 +61,7 @@ Procedure
    .. code-block::
       :class: copyable
 
-      .\minio.exe server C:\minio --console-address :9090
+      .\minio.exe server C:\minio --console-address :9001
 
    The :mc:`minio server` process prints its output to the system console, similar to the following:
 
@@ -71,7 +71,7 @@ Procedure
       RootUser: minioadmin
       RootPass: minioadmin
 
-      Console: http://192.0.2.10:9090 http://127.0.0.1:9090
+      Console: http://192.0.2.10:9001 http://127.0.0.1:9001
       RootUser: minioadmin
       RootPass: minioadmin
 
@@ -87,8 +87,8 @@ Procedure
 
 #. Connect your Browser to the MinIO Server
 
-   Access the :ref:`minio-console` by going to a browser (such as Microsoft Edge) and going to ``http://127.0.0.1:9090`` or one of the Console addresses specified in the :mc:`minio server` command's output.
-   For example, ``Console: http://192.0.2.10:9090 http://127.0.0.1:9090`` in the example output indicates two possible addresses to use for connecting to the Console.
+   Access the :ref:`minio-console` by going to a browser (such as Microsoft Edge) and going to ``http://127.0.0.1:9001`` or one of the Console addresses specified in the :mc:`minio server` command's output.
+   For example, ``Console: http://192.0.2.10:9001 http://127.0.0.1:9001`` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 

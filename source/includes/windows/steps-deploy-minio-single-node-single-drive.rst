@@ -43,7 +43,7 @@ The ``journalctl`` output should resemble the following:
    API: http://192.168.2.100:9000  http://127.0.0.1:9000       
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
-   Console: http://192.168.2.100:9090 http://127.0.0.1:9090    
+   Console: http://192.168.2.100:9001 http://127.0.0.1:9001    
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
 

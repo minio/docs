@@ -73,7 +73,7 @@ Include any other environment variables as required for your local deployment.
 
    .. tab-item:: MinIO Console
 
-      You can access the MinIO Console by entering any of the hostnames or IP addresses from the MinIO server ``Console`` block in your preferred browser, such as http://localhost:9090.
+      You can access the MinIO Console by entering any of the hostnames or IP addresses from the MinIO server ``Console`` block in your preferred browser, such as http://localhost:9001.
 
       Log in with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` configured in the environment file specified to the container.
 

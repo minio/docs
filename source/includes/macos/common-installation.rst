@@ -54,7 +54,7 @@ If desired, you can replace ``~/data`` with another location to which the user h
    :class: copyable
 
    export MINIO_CONFIG_ENV_FILE=/etc/default/minio
-   minio server --console-address :9090
+   minio server --console-address :9001
 
 .. code-block:: shell
 
@@ -62,7 +62,7 @@ If desired, you can replace ``~/data`` with another location to which the user h
    API: http://192.168.2.100:9000  http://127.0.0.1:9000       
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
-   Console: http://192.168.2.100:9090 http://127.0.0.1:9090    
+   Console: http://192.168.2.100:9001 http://127.0.0.1:9001    
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
 

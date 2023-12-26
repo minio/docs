@@ -27,12 +27,12 @@ Select the container management interface of your choice for the relevant comman
          :class: copyable
 
          podman run -dt                                  \
-           -p 9000:9000 -p 9090:9090                     \
+           -p 9000:9000 -p 9001:9001                     \
            -v PATH:/mnt/data                             \
            -v /etc/default/minio:/etc/config.env         \
            -e "MINIO_CONFIG_ENV_FILE=/etc/config.env"    \
            --name "minio_local"                          \
-           minio server --console-address ":9090"
+           minio server --console-address ":9001"
 
       Specify any other :podman-docs:`options <markdown/podman-run.1.html>` to ``podman run`` as necessary for your local environment.
 
@@ -44,12 +44,12 @@ Select the container management interface of your choice for the relevant comman
          :class: copyable
 
          docker run -dt                                  \
-           -p 9000:9000 -p 9090:9090                     \
+           -p 9000:9000 -p 9001:9001                     \
            -v PATH:/mnt/data                             \
            -v /etc/default/minio:/etc/config.env         \
            -e "MINIO_CONFIG_ENV_FILE=/etc/config.env"    \
            --name "minio_local"                          \
-           minio server --console-address ":9090"
+           minio server --console-address ":9001"
 
       Specify any other `options <https://docs.docker.com/engine/reference/commandline/run/>`__ to ``docker run`` as necessary for your local environment.
 
@@ -76,7 +76,7 @@ The following table describes each line of the command and provides additional c
      - Directs Podman/Docker to create and start the container as a detached (``-d``) background process with a pseudo-TTY (``-t``).
        This allows the container to run in the background with an open TTY for bash-like access.
 
-   * - ``-p 9000:9000 -p 9090:9090``
+   * - ``-p 9000:9000 -p 9001:9001``
      - Binds the ports ``9000`` and ``9090`` on the local machine to the same ports on the container.
        This allows access to the container through the local machine.
 
@@ -105,9 +105,9 @@ The following table describes each line of the command and provides additional c
        Omit this value to allow Podman/Docker to automatically generate a container name.
        You can replace this value to best reflect your requirements.
 
-   * - ``minio server --console-address ":9090"``
+   * - ``minio server --console-address ":9001"``
      - Starts the MinIO server using the ``minio:minio`` image pulled from an earlier step.
-       The :mc-cmd:`minio server --console-address ":9090" <minio server --console-address>` option directs the server to set a static port for the MinIO Console Web Interface.
+       The :mc-cmd:`minio server --console-address ":9001" <minio server --console-address>` option directs the server to set a static port for the MinIO Console Web Interface.
        This option is *required* for containerized environments.
 
        If you modify this value, ensure you set the proper port mapping using the ``-p`` flag to Podman/Docker to ensure traffic forwarding between the local host and the container.
@@ -128,7 +128,7 @@ The command should return a unique ID for the created container.
    API: http://10.0.2.100:9000  http://127.0.0.1:9000       
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
-   Console: http://10.0.2.100:9090 http://127.0.0.1:9090    
+   Console: http://10.0.2.100:9001 http://127.0.0.1:9001    
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
 

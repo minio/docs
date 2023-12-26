@@ -48,7 +48,7 @@ You can optionally configure synchronization of existing objects, delete operati
          :class: copyable
 
          mc replicate add                                                     \
-            --remote-bucket https://user:secret@minio.mysite.tld:9090/bucket  \
+            --remote-bucket https://user:secret@minio.mysite.tld:9001/bucket  \
             --replicate "delete,delete-marker,existing-objects"               \
             myminio/mydata
 
@@ -94,7 +94,7 @@ Parameters
 
    .. code-block:: none
 
-      mc replicate add --remote-bucket https://user:secret@myminio.cloudprovider.tld:9090/bucket play/mybucket
+      mc replicate add --remote-bucket https://user:secret@myminio.cloudprovider.tld:9001/bucket play/mybucket
 
 .. mc-cmd:: --remote-bucket
    :required:
@@ -105,7 +105,7 @@ Parameters
 
    .. code-block::
 
-      https://user:secret@myminio.cloudprovider.tld:9090/bucket
+      https://user:secret@myminio.cloudprovider.tld:9001/bucket
 
 .. mc-cmd:: --bandwidth
    :optional:

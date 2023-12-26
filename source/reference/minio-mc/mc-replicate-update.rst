@@ -219,7 +219,7 @@ Parameters
 
    .. code-block::
 
-      https://user:secret@myminio.cloudprovider.tld:9090/bucket
+      https://user:secret@myminio.cloudprovider.tld:9001/bucket
 
 .. mc-cmd:: --replicate
    :optional:
@@ -323,7 +323,7 @@ Use :mc:`mc replicate update` to modify an existing replication rule.
 
    mc replicate update ALIAS/PATH \
       --id ID                     \
-      --remote-bucket https://user:secret@minio.mycloud.tld:9090/mybucket
+      --remote-bucket https://user:secret@minio.mycloud.tld:9001/mybucket
 
 - Replace :mc-cmd:`ALIAS <mc replicate update ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 

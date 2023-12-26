@@ -127,7 +127,7 @@ The following steps back up the existing yaml files, perform some clean up, and 
       - name: MINIO_PROMETHEUS_JOB_ID
         value: minio-job
       - name: MINIO_PROMETHEUS_URL
-        value: http://<TENANT_NAME>-prometheus-hl-svc:9090
+        value: http://<TENANT_NAME>-prometheus-hl-svc:9001
 
    - Replace ``<TENANT_NAME>`` in the ``name`` or ``value`` lines with the name of your tenant.
 

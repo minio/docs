@@ -81,7 +81,7 @@ Run the following command in a terminal or shell to start the MinIO server as a 
    :substitutions:
 
    export MINIO_CONFIG_ENV_FILE=|minioconfigpath|\config\minio
-   C:\minio.exe server --console-address :9090
+   C:\minio.exe server --console-address :9001
 
 .. end-kes-minio-start-server-desc
 

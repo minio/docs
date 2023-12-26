@@ -171,9 +171,9 @@ You can modify the Operator deployment after installation.
    .. code-block:: shell
       :class: copyable
 
-      kubectl port-forward svc/console -n minio-operator 9090:9090
+      kubectl port-forward svc/console -n minio-operator 9001:9001
 
-   You can then use ``http://localhost:9090`` to access the MinIO Operator Console.
+   You can then use ``http://localhost:9001`` to access the MinIO Operator Console.
 
    Once you access the Console, use the Console JWT to log in.
 
@@ -469,13 +469,13 @@ This method may support easier pre-configuration of the Operator compared to the
       .. code-block:: shell
          :class: copyable
 
-         kubectl --namespace minio-operator port-forward svc/console 9090:9090
+         kubectl --namespace minio-operator port-forward svc/console 9001:9001
 
       This command forwards the pod port ``9090`` to the matching port on the local machine while active in the shell.
       The ``kubectl port-forward`` command only functions while active in the shell session.
       Terminating the session closes the ports on the local machine.
 
-   C. Access the Console by navigating to ``http://localhost:9090`` in a browser and login with the JWT.
+   C. Access the Console by navigating to ``http://localhost:9001`` in a browser and login with the JWT.
       
    .. note::
       
