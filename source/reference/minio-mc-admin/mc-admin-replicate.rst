@@ -107,7 +107,7 @@ Syntax
 
          The following command creates a new site replication that includes the peer sites ``minio1``, ``minio2``, and ``minio3``, and enables the replication of ILM expiration rules across sites.
 
-         .. copy-block:: shell
+         .. code-block:: shell
             :class: copyable
 
             mc admin replicate add minio1 minio2 minio3 --replicate-ilm-expiry

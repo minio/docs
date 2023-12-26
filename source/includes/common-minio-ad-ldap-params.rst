@@ -139,7 +139,7 @@
 
 This command works against :ref:`access keys <minio-id-access-keys>` created by an AD/LDAP user after authenticating to MinIO.
 
-Create AD/LDAP service accounts with the :mc-cmd:`mc idp accesskey create` command.
+Create AD/LDAP service accounts with the :mc-cmd:`mc idp ldap accesskey create` command.
 
 Authenticated users can manage their own long-term Access Keys using the :ref:`MinIO Console <minio-console-user-access-keys>`.
 MinIO supports using :ref:`AssumeRoleWithLDAPIdentity <minio-sts-assumerolewithldapidentity>` to generate temporary access keys using the :ref:`Security Token Service <minio-security-token-service>`.
