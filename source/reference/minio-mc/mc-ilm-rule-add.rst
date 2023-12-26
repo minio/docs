@@ -71,6 +71,8 @@ The command supports adding both :ref:`Transition (Tiering) <minio-lifecycle-man
                           [--noncurrent-expire-newer "integer"]      \
                           [--noncurrent-transition-days "integer"]   \
                           [--noncurrent-transition-tier "string"]    \
+                          [--site-gt "string"]                       \
+                          [--size-lt "string"]                       \
                           ALIAS
 
       .. include:: /includes/common-minio-mc.rst
@@ -114,7 +116,7 @@ Parameters
    - :mc-cmd:`~mc ilm rule add --expire-delete-marker`
 
 .. mc-cmd:: --expire-days
-   :required:   
+   :optional:   
 
    The number of days to retain an object after being created. 
    MinIO marks the object for deletion after the specified number of days pass. 
@@ -248,6 +250,89 @@ Parameters
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
    
+.. mc-cmd:: --size-gt
+   :optional:
+
+   .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z 
+
+   Select objects larger than the specified value.
+   Enter the value as a number and a unit, such as ``5GiB`` for 5 gibibytes.
+
+   Valid units include:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 20 80
+      :width: 100%
+   
+      * - Suffix
+        - Unit Size
+   
+      * - ``k``
+        - KB (Kilobyte, 1000 Bytes)
+   
+      * - ``m``
+        - MB (Megabyte, 1000 Kilobytes)
+   
+      * - ``g``
+        - GB (Gigabyte, 1000 Megabytes)
+   
+      * - ``t``
+        - TB (Terrabyte, 1000 Gigabytes)
+   
+      * - ``ki``
+        - KiB (Kibibyte, 1024 Bites)
+   
+      * - ``mi``
+        - MiB (Mebibyte, 1024 Kibibytes)
+   
+      * - ``gi``
+        - GiB (Gibibyte, 1024 Mebibytes)
+   
+      * - ``ti``
+        - TiB (Tebibyte, 1024 Gibibytes)
+
+.. mc-cmd:: --size-lt
+   :optional:
+  
+   .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
+
+   Select objects smaller than the specified value.
+   Enter the value as a number and a unit, such as ``1M`` for 1 megabyte.
+
+   Valid units include:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 20 80
+      :width: 100%
+   
+      * - Suffix
+        - Unit Size
+   
+      * - ``k``
+        - KB (Kilobyte, 1000 Bytes)
+   
+      * - ``m``
+        - MB (Megabyte, 1000 Kilobytes)
+   
+      * - ``g``
+        - GB (Gigabyte, 1000 Megabytes)
+   
+      * - ``t``
+        - TB (Terrabyte, 1000 Gigabytes)
+   
+      * - ``ki``
+        - KiB (Kibibyte, 1024 Bites)
+   
+      * - ``mi``
+        - MiB (Mebibyte, 1024 Kibibytes)
+   
+      * - ``gi``
+        - GiB (Gibibyte, 1024 Mebibytes)
+   
+      * - ``ti``
+        - TiB (Tebibyte, 1024 Gibibytes)
 
 Global Flags
 ~~~~~~~~~~~~
@@ -308,6 +393,27 @@ This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` 
 
 - Current objects expire after 300 days.
 - Non-current objects expire after 100 days.
+
+Transition noncurrent versions in the prefix ``/doc`` with a size greater the 1MiB
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the :mc:`mc ilm rule add` command with :mc-cmd:`~mc ilm rule add --prefix`, :mc-cmd:`~mc ilm rule add --size-gt`, and :mc-cmd:`~mc ilm rule add --noncurrent-expire-days` to expire current and non-current versions of an object at different times.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ilm rule add --prefix "doc/" --size-gt 1MiB --transition-days "90" --transition-tier "MINIOTIER-1" \
+         --noncurrent-transition-days "45" --noncurrent-transition-tier "MINIOTIER-1" \
+         myminio/mybucket/
+
+This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``myminio`` deployment.
+
+The command selects the following objects:
+
+- Current objects older than 90 days larger than 1MiB.
+- Non-current objects older than 45 days larger than 1MiB.
+  
+Selected objects transition to ``MINIOTIER-1``.
 
 Required Permissions
 --------------------

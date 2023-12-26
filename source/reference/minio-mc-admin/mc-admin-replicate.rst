@@ -105,6 +105,13 @@ Syntax
 
             mc admin replicate add minio1 minio5
 
+         The following command creates a new site replication that includes the peer sites ``minio1``, ``minio2``, and ``minio3``, and enables the replication of ILM expiration rules across sites.
+
+         .. copy-block:: shell
+            :class: copyable
+
+            mc admin replicate add minio1 minio2 minio3 --replicate-ilm-expiry
+
       .. tab-item:: SYNTAX
 
          The command has the following syntax:
@@ -115,7 +122,8 @@ Syntax
             mc [GLOBALFLAGS] admin replicate add      \
                                         ALIAS1        \
                                         ALIAS2        \
-                                        [ALIAS3 ...]
+                                        [ALIAS3 ...]  \
+                                        [--replicate-ilm-expiry]
 
    .. mc-cmd:: ALIAS
       :required:
@@ -129,6 +137,13 @@ Syntax
       To expand an existing site replication to one more new replication sites, the first :ref:`alias <alias>` must be a peer site in the site replication set to expand.
       Then include one or more additional :ref:`aliases <alias>` to add to the existing site replication.
       The deployments to add must be empty.
+
+   .. mc-cmd:: --replicate-ilm-expiry
+      :optional:
+
+      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
+
+      Replicate :ref:`ILM expiration <minio-lifecycle-management-expiration>` rules across peers.
 
 .. mc-cmd:: update
    :fullpath:
@@ -161,7 +176,9 @@ Syntax
                                         ALIAS                           \
                                         --deployment-id [deploymentID]  \
                                         --endpoint [newEndpoint]        \
-                                        --mode ["sync" | "async"]
+                                        --mode ["sync" | "async"]       \
+                                        --enable-ilm-expiry-replication \
+                                        --disable-ilm-expiry-replication
     
    .. mc-cmd:: ALIAS
       :required:
@@ -197,6 +214,20 @@ Syntax
       The unique id of the deployment to change.
 
       The deployment ID can be found by running :mc-cmd:`mc admin replicate info ALIAS`
+
+   .. mc-cmd:: --disable-ilm-expiry-replication
+      :optional:
+
+      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
+
+      Stops the replication of ILM expiration rules between peer sites.
+
+   .. mc-cmd:: --enable-ilm-expiry-replication
+      :optional:
+
+      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
+
+      Start replication of ILM expiration rules between peer sites.
 
    .. mc-cmd:: --endpoint
       :required:
@@ -361,21 +392,30 @@ Syntax
                                minio1         \
                                --user janedoe
 
-         The output of any of the above examples resembles the following:
+         Display the site replication status across sites for the ILM expiration rule with rule ID of ``ckok9v5b4dtgofkbi6tg`` for a site replication configuration that contains the site ``minio1``.
+
+         .. code-block:: shell
+
+            mc admin replicate status minio1 --ilm-expiry-rule ckok9v5b4dtgofkbi6tg 
+
+         The output of the above examples resembles the following:
 
          .. code-block:: shell
 
             Bucket replication status:
-            -  30/30 Buckets in sync
+            ●  30/30 Buckets in sync
             
             Policy replication status:
-            -  5/5 Policies in sync
+            ●  5/5 Policies in sync
             
             User replication status:
-            -  3/3 Users in sync
+            ●  3/3 Users in sync
             
             Group replication status:
             No Groups present
+
+            ILM Expiry Rules replication status:
+            ●  5/5 ILM Expiry Rules in sync
             
             Object replication status:
             Replication status since 1 day 
@@ -388,16 +428,18 @@ Syntax
          
          .. code-block:: shell
             
-            mc [GLOBALFLAGS] admin replicate status     \
-                               TARGET                   \
-                               [--all]                  \
-                               [--buckets]              \
-                               [--bucket nameOfBucket]  \
-                               [--groups]               \
-                               [--group nameOfGroup]    \
-                               [--policies]             \
-                               [--policy nameOfPolicy]  \
-                               [--users]                \
+            mc [GLOBALFLAGS] admin replicate status          \
+                               TARGET                        \
+                               [--all]                       \
+                               [--buckets]                   \
+                               [--bucket nameOfBucket]       \
+                               [--groups]                    \
+                               [--group nameOfGroup]         \
+                               [--ilm-expiry-rules]          \
+                               [--ilm-expiry-rule <rule ID>] \
+                               [--policies]                  \
+                               [--policy nameOfPolicy]       \
+                               [--users]                     \
                                [--user accessKey]
 
    .. mc-cmd:: TARGET
@@ -429,6 +471,20 @@ Syntax
       :optional:
 
       Display the replication status of a specific group by including the group name after the flag.
+
+   .. mc-cmd:: --ilm-expiry-rules
+      :optional:
+
+      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
+
+      Display sync information about ILM expiration rules.
+
+   .. mc-cmd:: --ilm expiry rule
+      :optional:
+
+      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
+
+      Display replication status information about the specified ILM expiration rule.
 
    .. mc-cmd:: --policies
       :optional:
