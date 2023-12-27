@@ -105,8 +105,8 @@ Syntax
 
             mc admin replicate add minio1 minio5
 
-         The following command creates a new site replication that includes the peer sites ``minio1``, ``minio2``, and ``minio3``, and enables the replication of ILM expiration rules across sites.
-
+         The following command creates a new site replication configuration with ILM expiration rule synchronization between peer sites ``minio1``, ``minio2``, and ``minio3``.
+         
          .. code-block:: shell
             :class: copyable
 
@@ -221,6 +221,7 @@ Syntax
       .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
 
       Stops the replication of ILM expiration rules between peer sites.
+      Existing rules already synchronized across peers are not removed from any peer site.
 
    .. mc-cmd:: --enable-ilm-expiry-replication
       :optional:
@@ -392,12 +393,6 @@ Syntax
                                minio1         \
                                --user janedoe
 
-         Display the site replication status across sites for the ILM expiration rule with rule ID of ``ckok9v5b4dtgofkbi6tg`` for a site replication configuration that contains the site ``minio1``.
-
-         .. code-block:: shell
-
-            mc admin replicate status minio1 --ilm-expiry-rule ckok9v5b4dtgofkbi6tg 
-
          The output of the above examples resembles the following:
 
          .. code-block:: shell
@@ -423,6 +418,21 @@ Syntax
             Replicated:    0 objects (0 B)
             Queued:        - 0 objects, (0 B) (avg: 0 objects, 0 B; max: 0 objects, 0 B)
             Received:      0 objects (0 B)
+
+         Display the site replication status across sites for the ILM expiration rule with rule ID of ``ckok9v5b4dtgofkbi6tg`` for a site replication configuration that contains the site ``minio1``.
+
+         .. code-block:: shell
+
+            mc admin replicate status minio1 --ilm-expiry-rule ckok9v5b4dtgofkbi6tg
+
+         The output resembles the following:
+
+         .. code-block:: shell
+
+            ●  ILM Expiry Rule replication summary for: ckok9v5b4dtgofkbi6tg
+            
+            ILMExpiryRule   | MINIO1          | MINIO2   
+            ILM Expiry Rule | ✔               | ✔  
 
       .. tab-item:: SYNTAX
          
@@ -479,12 +489,16 @@ Syntax
 
       Display sync information about ILM expiration rules.
 
-   .. mc-cmd:: --ilm expiry rule
+      Mutually exclusive with :mc-cmd:`~mc admin replicate update --ilm-expiry-rule`
+
+   .. mc-cmd:: --ilm-expiry-rule
       :optional:
 
       .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
 
       Display replication status information about the specified ILM expiration rule.
+
+      Mutually exclusive with :mc-cmd:`~mc admin replicate update --ilm-expiry-rules`
 
    .. mc-cmd:: --policies
       :optional:

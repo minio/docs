@@ -132,68 +132,6 @@ Parameters
 
    Requires an interactive terminal.
 
-Examples
-~~~~~~~~
-
-Create a new access-key pair for the authenticated user
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
-The command outputs a randomly generated access key and secret key.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc idp ldap accesskey create minio
-
-Create a new access-key pair with a custom access key and secret key
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-The following command creates a new access key pair with both an access key and secret key that you specify for the user currently authenticated on the ``minio`` alias.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc idp ldap accesskey create minio/ --access-key my-access-key-change-me --secret-key my-secret-key-change-me
-
-Create a new access-key pair that expires after 24 hours
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
-The credentials expire after 24 hours.
-
-The command outputs a randomly generated access key and secret key.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc idp ldap accesskey create minio --expiry-duration 24h
-
-Create a new access-key and prompt to login as the user
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-The following command creates a new access key pair.
-The MinIO Client will first ask you to log in as the user the access key is for on the MinIO site configured for LDAP at ``minio.example.com``.
-
-The command outputs a randomly generated access key and secret key.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc idp ldap accesskey create minio --login minio.example.com
-
-Create a new access-key pair that expires after a date
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
-The credentials expire after February 29, 2024.
-
-The command outputs a randomly generated access key and secret key.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc idp ldap accesskey create minio --expiry 2024-02-29
 
 Global Flags
 ~~~~~~~~~~~~
@@ -212,3 +150,66 @@ S3 Compatibility
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-s3-compatibility
    :end-before: end-minio-mc-s3-compatibility
+
+Examples
+--------
+
+Create a new access-key pair for the authenticated user
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
+The command outputs a randomly generated access key and secret key.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc idp ldap accesskey create minio
+
+Create a new access-key pair with a custom access key and secret key
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command creates a new access key pair with both an access key and secret key that you specify for the user currently authenticated on the ``minio`` alias.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc idp ldap accesskey create minio/ --access-key my-access-key-change-me --secret-key my-secret-key-change-me
+
+Create a new access-key pair that expires after 24 hours
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
+The credentials expire after 24 hours.
+
+The command outputs a randomly generated access key and secret key.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc idp ldap accesskey create minio --expiry-duration 24h
+
+Create a new access-key and prompt to login as the user
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command creates a new access key pair.
+The MinIO Client will first ask you to log in as the user the access key is for on the MinIO site configured for LDAP at ``minio.example.com``.
+
+The command outputs a randomly generated access key and secret key.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc idp ldap accesskey create minio --login minio.example.com
+
+Create a new access-key pair that expires after a date
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
+The credentials expire after February 29, 2024.
+
+The command outputs a randomly generated access key and secret key.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc idp ldap accesskey create minio --expiry 2024-02-29
