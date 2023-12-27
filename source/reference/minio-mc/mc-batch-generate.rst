@@ -121,22 +121,24 @@ Job Types
 
 :mc:`mc batch` currently supports the following job task types:
 
-- ``replicate``
+- :ref:`mc-batch-generate-replicate-job`
   
   Replicate objects between two MinIO deployments.
   Provides similar functionality to :ref:`bucket replication <minio-bucket-replication>` as a batch job rather than continual scanning function.
 
-- ``keyrotate``
+- :ref:`mc-batch-generate-keyrotate-job`
 
   .. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z 
   
   Rotate the sse-s3 or sse-kms keys for objects at rest on a MinIO deployment.
 
-- ``expire``
+- :ref:`mc-batch-generate-expire-job`
 
   .. versionadded:: MinIO RELEASE.2023-12-02T10-51-33Z
 
   Expire objects based using similar semantics as :ref:`minio-lifecycle-management-create-expiry-rule`.
+
+.. _minio-mc-batch-generate-replicate-job:
 
 ``replicate``
 ~~~~~~~~~~~~~
@@ -148,6 +150,8 @@ You can use the following example configuration as the starting point for buildi
 
 See :ref:`minio-batch-framework-replicate-job-ref` for more complete documentation on each key.
 
+.. _minio-mc-batch-generate-keyrotate-job:
+
 ``keyrotate``
 ~~~~~~~~~~~~~
 
@@ -157,6 +161,8 @@ You can use the following example configuration as the starting point for buildi
    :language: yaml
 
 See :ref:`minio-batch-framework-keyrotate-job-ref` for more complete documentation on each key.
+
+.. _minio-mc-batch-generate-expire-job:
 
 ``expire``
 ~~~~~~~~~~
