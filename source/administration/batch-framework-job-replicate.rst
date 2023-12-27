@@ -74,12 +74,13 @@ The access to objects and buckets for the replication process may be restricted 
 For example, you can use a batch job to perform a one-time replication sync to push objects from a bucket on a local deployment at ``minio-local/invoices/`` to a bucket on a remote deployment at ``minio-remote/invoices``.
 You can also pull objects from the remote deployment at ``minio-remote/invoices`` to the local deployment at ``minio-local/invoices``.
 
-Batch Compression
-~~~~~~~~~~~~~~~~~
+Small File Optimization
+~~~~~~~~~~~~~~~~~~~~~~~
 
-Starting with :minio-release:`RELEASE.2023-12-09T18-17-51Z`, batch replication by default uses a compress-and-send methodology similar in function to S3 Snowball Edge batch migration.
-MinIO automatically batches and compresses objects smaller than 5MiB to efficiently transfer data between the source and remote.
+Starting with :minio-release:`RELEASE.2023-12-09T18-17-51Z`, batch replication by default automatically batches and compresses objects smaller than 5MiB to efficiently transfer data between the source and remote.
 The remote MinIO deployment can check and immediately apply lifecycle management tiering rules to batched objects.
+The functionality resembles that offered by S3 Snowball Edge small file batching.
+
 You can modify the compression settings in the :ref:`replicate <minio-batch-job-types>` job configuration.
 
 .. _minio-batch-framework-replicate-job-ref:
@@ -156,7 +157,7 @@ For the **source deployment**
          | Defaults to ``true``.
 
      * - ``snowball.compress``
-       - | Specify ``true`` to generate archives using the `S2/Snappy compression algorithm <https://en.wikipedia.org/wiki/Snappy_(compression)>`__.
+       - | Specify ``true`` to generate compress batched objects over the wire using the `S2/Snappy compression algorithm <https://en.wikipedia.org/wiki/Snappy_(compression)>`__.
          | Defaults to ``false`` or no compression.
 
      * - ``snowball.smallerThan``

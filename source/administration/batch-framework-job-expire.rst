@@ -36,6 +36,12 @@ The job determines expiration eligibility at the time the job runs, and does *no
 
 To capture any new objects eligible for expiration, re-run the batch job.
 
+Expiry Rules Check Latest Object Only
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The batch expiration job only checks the latest or "current" version of each object against each batch expiration rule.
+
+
 .. _minio-batch-framework-expire-job-ref:
 
 Expire Batch Job Reference
@@ -78,8 +84,8 @@ Expire Batch Job Reference
 
        Supports one of the following two values:
 
-       - ``object`` - apply the expiration to objects and their versions
-       - ``deleted`` - apply the expiration to object Delete Markers
+       - ``object`` - apply the expiration to an object and it's versions, *ignoring* deleted objects (``DeleteMarker`` is current version).
+       - ``deleted`` - apply the expiration to an object and it's versions, including deleted objects (``DeleteMarker`` is current version).
 
    * - ``rules.[n].name``
      - *Optional*
