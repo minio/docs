@@ -91,6 +91,9 @@ Syntax
                          [--use-aws-role^]            \
                          [--aws-role-arn^]            \
                          [--aws-web-identity-file^]   \
+                         [--azure-sp-tenant-id^]      \
+                         [--azure-sp-client-id^]      \
+                         [--azure-sp-client-secret^]  \
                          [--account-name value^]      \
                          [--account-key value^]       \
                          [--credentials-file value^]  \
@@ -311,6 +314,30 @@ The command accepts the following arguments:
    Specify the web identity token file to use when transitioning objects.
 
    This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``s3`` **and** the source is a MinIO pod on Amazon EKS.
+
+.. mc-cmd:: --azure-sp-tenant-id
+   :optional:
+
+   Tenant ID for the `service principal account <https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1>`__ to use to log in to Azure storage.
+
+   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using an service principal identity.
+   This option has no effect for any other value of ``TIER_TYPE``.
+
+.. mc-cmd:: --azure-sp-client-id
+   :optional:
+
+   Client ID for the `service principal account <https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1>`__ to use to log in to Azure storage.
+
+   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using an service principal identity.
+   This option has no effect for any other value of ``TIER_TYPE``.
+
+.. mc-cmd:: --azure-sp-client-secret
+   :optional:
+
+   The client secret for the `service principal account <https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1>`__ to use to log in to Azure storage.
+
+   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using an service principal identity.
+   This option has no effect for any other value of ``TIER_TYPE``.
 
 Global Flags
 ~~~~~~~~~~~~

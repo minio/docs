@@ -141,6 +141,12 @@ Each MinIO deployment ("peer site") synchronizes the following changes across th
 
 Site replication enables :ref:`bucket versioning <minio-bucket-versioning>` for all new and existing buckets on all replicated sites.
 
+.. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
+
+You can choose to replicate ILM expiration rules across peer sites.
+For new site replication configurations, use the :mc-cmd:`mc admin replicate add`  with the :mc-cmd:`~mc admin replicate add --replicate-ilm-expiry` flag. 
+For existing site replication configurations, you can enable or disable the behavior using :mc-cmd:`mc admin replicate update` with either the :mc-cmd:`~mc admin replicate update --enable-ilm-expiry-replication` or :mc-cmd:`~mc admin replicate update --disable-ilm-expiry-replication` flag, as appropriate.
+
 .. end-mc-admin-replicate-what-replicates
 
 .. start-mc-admin-replicate-what-does-not-replicate

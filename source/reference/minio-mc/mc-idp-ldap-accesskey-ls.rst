@@ -52,7 +52,7 @@ The :mc:`mc idp ldap accesskey ls` displays a list of LDAP access key pairs.
 
          mc [GLOBALFLAGS] idp ldap accesskey ls              \
                                           ALIAS              \
-                                          [--permanent-only] \
+                                          [--svcacc-only] \
                                           [--temp-only]      \
                                           [--users-only]     \
                                           [DN] ...
@@ -81,10 +81,10 @@ Parameters
 
          mc idp ldap accesskey ls minio
 
-.. mc-cmd:: --permanent-only
+.. mc-cmd:: --svcacc-only
    :optional:
 
-   Output only permanent access keys.
+   Output only service account access keys.
 
    Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey ls --temp-only`.
 

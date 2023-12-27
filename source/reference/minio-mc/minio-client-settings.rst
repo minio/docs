@@ -88,16 +88,20 @@ STS Service
 
 Use this setting to add an STS endpoint to use for `mc` commands.
 
+.. versionchanged:: mc RELEASE.2023-12-02T02-03-28Z 
+
+Supports adding multiple environment variables by alias.
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
       :selected:
 
-      .. envvar:: MC_STS_ENDPOINT
+      .. envvar:: MC_STS_ENDPOINT_<alias>
 
       .. code-block:: shell
 
-         export MC_STS_ENDPOINT=https://sts.minio-operator.svc.cluster.local:4223/sts/ns-1 
+         export MC_STS_ENDPOINT_myalias=https://sts.minio-operator.svc.cluster.local:4223/sts/ns-1 
 
    .. tab-item:: Configuration Setting
 
@@ -112,16 +116,20 @@ Web Token Identity
 
 Use this setting to add a web token identity to use for `mc` commands.
 
+.. versionchanged:: mc RELEASE.2023-12-02T02-03-28Z 
+
+Supports adding multiple environment variables by alias.
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
       :selected:
 
-      .. envvar:: MC_WEB_IDENITY_TOKEN
+      .. envvar:: MC_WEB_IDENITY_TOKEN_<alias>
 
       .. code-block:: shell
 
-         export MC_WEB_IDENTITY_TOKEN_FILE=/var/run/secrets/kubernetes.io/serviceaccount/token
+         export MC_WEB_IDENTITY_TOKEN_FILE_myalias=/var/run/secrets/kubernetes.io/serviceaccount/token
 
    .. tab-item:: Configuration Setting
 
