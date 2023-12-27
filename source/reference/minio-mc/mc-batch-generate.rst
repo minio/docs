@@ -76,9 +76,9 @@ Parameters
    
    Supports the following values:
    
-   -  ``replicate``
-   - ``keyrotate``
-   -  ``expire`` (Added ``mc.RELEASE.2023-12-02T11-24-10Z``)
+   - :ref:`minio-mc-batch-generate-replicate-job`
+   - :ref:`minio-mc-batch-generate-keyrotate-job`
+   - :ref:`minio-mc-batch-generate-expire-job` (Added ``mc.RELEASE.2023-12-02T11-24-10Z``)
 
 Global Flags
 ~~~~~~~~~~~~
