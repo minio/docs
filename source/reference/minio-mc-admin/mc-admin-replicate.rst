@@ -489,7 +489,7 @@ Syntax
 
       Display sync information about ILM expiration rules.
 
-      Mutually exclusive with :mc-cmd:`~mc admin replicate update --ilm-expiry-rule`
+      Mutually exclusive with :mc-cmd:`~mc admin replicate status --ilm-expiry-rule`
 
    .. mc-cmd:: --ilm-expiry-rule
       :optional:
@@ -498,7 +498,7 @@ Syntax
 
       Display replication status information about the specified ILM expiration rule.
 
-      Mutually exclusive with :mc-cmd:`~mc admin replicate update --ilm-expiry-rules`
+      Mutually exclusive with :mc-cmd:`~mc admin replicate status --ilm-expiry-rules`
 
    .. mc-cmd:: --policies
       :optional:
