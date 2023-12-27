@@ -84,8 +84,8 @@ Expire Batch Job Reference
 
        Supports one of the following two values:
 
-       - ``object`` - apply the expiration to an object and it's versions, *ignoring* deleted objects (``DeleteMarker`` is current version).
-       - ``deleted`` - apply the expiration to an object and it's versions, including deleted objects (``DeleteMarker`` is current version).
+       - ``object`` - apply the expiration to an object and its versions, *ignoring* deleted objects (``DeleteMarker`` is current version).
+       - ``deleted`` - apply the expiration to an object and its versions, including deleted objects (``DeleteMarker`` is current version).
 
    * - ``rules.[n].name``
      - *Optional*
