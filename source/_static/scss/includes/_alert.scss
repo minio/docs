@@ -5,13 +5,12 @@ div.admonition {
     border: 0;
     border: 1px solid transparent;
     padding: 1.25rem;
-    font-size: $font-size-md;
     background-color: var(--theme-light-bg);
     color: var(--headings-color);
 
     p.admonition-title {
         font-family: inherit;
-        font-size: $font-size-md;
+        font-size: 1rem;
         font-weight: $font-weight-bold;
         line-height: 1.4;
         display: block;
