@@ -519,5 +519,5 @@ Compression Level
 
 Controls the level of compression applied based on the configured compression codec.
 
-Specify an integer value greater than or equal to 0.
+Specify an integer value greater than or equal to ``0``.
 The effect of the value depends on the selected codec.

@@ -18,7 +18,7 @@ The batch jobs run directly on the MinIO deployment to take advantage of the ser
 
 The ``keyrotate`` batch job type cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects on a MinIO deployment.
 
-The YAML configuration supports filters to restrict key rotation to  a specific set of objects by creation date, tags, metadata, or kms key.
+The YAML configuration supports filters to restrict key rotation to a specific set of objects by creation date, tags, metadata, or kms key.
 You can also define retry attempts or set a notification endpoint and token.
 
 .. _minio-batch-framework-keyrotate-job-ref:
@@ -90,7 +90,7 @@ For **notifications**
    * - ``endpoint:`` 
      - The predefined endpoint to send events for notifications.
    * - ``token:`` 
-     - An optional :abbr:`JWT <JSON Web Token>` to access the ``endpoint``.
+     - An optional JSON Web Token (JWT) to access the ``endpoint``.
 
 For **retry attempts**
 

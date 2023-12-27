@@ -83,7 +83,7 @@ Access to ``mc batch``
 ----------------------
 
 Each batch job executes using the credentials specified in the batch definition.
-The success of a given batch job depends on those credentials having the appropraite :ref:`permissions <minio-policy>` to perform all requested actions.
+The success of a given batch job depends on those credentials having the appropriate :ref:`permissions <minio-policy>` to perform all requested actions.
 
 The user executing the batch job must have the following permissions. 
 You can alternatively restrict users from accessing these functions by blocking or limiting access to these actions:

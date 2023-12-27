@@ -34,7 +34,7 @@ Expiration Eligibility Determined at Batch-Run
 The batch expiration works per-bucket and runs once to completion.
 The job determines expiration eligibility at the time the job runs, and does *not* rescan or recheck for new objects periodically.
 
-You can instead re-run the batch job later to capture any new objects eligible for expiration under the job configuration.
+To capture any new objects eligible for expiration, re-run the batch job.
 
 .. _minio-batch-framework-expire-job-ref:
 
@@ -61,7 +61,7 @@ Expire Batch Job Reference
    * - ``bucket``
      - *Required*
        
-       Specify the name of the object in which the job runs.
+       Specify the name of the bucket in which the job runs.
 
    * - ``prefix``
      - *Optional*
@@ -94,7 +94,7 @@ Expire Batch Job Reference
        Specify the age of objects for filtering objects.
        The rule applies to only those objects older than the specified unit of time.
 
-       Supports values such as ``72h`` or ``3d`` for objects three days old.
+       For example, ``72h`` or ``3d`` selects objects older than three days.
 
    * - ``rules.[n].createdBefore``
      - *Optional*
@@ -107,7 +107,7 @@ Expire Batch Job Reference
      - *Optional*
 
        Specify an array of key-value pairs describing object tags to use for filtering objects.
-       The ``value`` key supports glob-style wildcards (``*``, ``?``).
+       The ``value`` entry supports glob-style wildcards (``*``, ``?``).
 
        For example, the following filters the rule to only objects with matching tags:
 
@@ -158,7 +158,7 @@ Expire Batch Job Reference
    * - ``notify.token``
      - *Optional*
 
-       An optional :abbr:`JWT <JSON Web Token>` to access the ``notify.endpoint``.
+       An optional JSON Web Token (JWT) to access the ``notify.endpoint``.
 
    * - ``retry.attempts``
      - *Optional*

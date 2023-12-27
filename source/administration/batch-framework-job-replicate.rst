@@ -88,7 +88,7 @@ Replicate Batch Job Reference
 -----------------------------
 
 The YAML **must** define the source and target deployments.
-If the _source_ deployment is remote, then the _target_ deployment **must** be ``local``.
+If the *source* deployment is remote, then the *target* deployment **must** be ``local``.
 Optionally, the YAML can also define flags to filter which objects replicate, send notifications for the job, or define retry attempts for the job.
 
 .. versionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
@@ -139,7 +139,7 @@ For the **source deployment**
          | Only specify for the deployment that is not the :ref:`local <minio-batch-local>` deployment. 
 
      * - ``snowball``
-       - | .. versionadded:: RELEASE.2023-12-09T18-17-51Z
+       - | *version added*: RELEASE.2023-12-09T18-17-51Z
          |    
          | Configuration options for controlling the batch-and-compress functionality.
 
@@ -156,7 +156,7 @@ For the **source deployment**
          | Defaults to ``true``.
 
      * - ``snowball.compress``
-       - | Specify ``true`` to generate archives using the S2/Snappy compression algorithm.
+       - | Specify ``true`` to generate archives using the `S2/Snappy compression algorithm <https://en.wikipedia.org/wiki/Snappy_(compression)>`__.
          | Defaults to ``false`` or no compression.
 
      * - ``snowball.smallerThan``
@@ -164,7 +164,7 @@ For the **source deployment**
          | Defaults to ``5MiB``.
 
      * - ``snowball.skipErrs``
-       - | Specify ``false`` to direct MinIO to halt on any object which produce errors on read.
+       - | Specify ``false`` to direct MinIO to halt on any object which produces errors on read.
          | Defaults to ``true``.
 
 For the **target deployment**
