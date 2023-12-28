@@ -18,7 +18,6 @@ The batch jobs run directly on the MinIO deployment to take advantage of the ser
 The ``expire`` batch job applies :ref:`minio-lifecycle-management-create-expiry-rule` behavior to a single bucket.
 The job determines expiration eligibility based on the provided configuration, independent of any configured expiration rules.
 
-
 Behavior
 --------
 
@@ -84,8 +83,10 @@ Expire Batch Job Reference
 
        Supports one of the following two values:
 
-       - ``object`` - apply the expiration to an object and its versions, *ignoring* deleted objects (``DeleteMarker`` is current version).
-       - ``deleted`` - apply the expiration to an object and its versions, including deleted objects (``DeleteMarker`` is current version).
+       - ``object`` - Applies only to objects which do **not** have a ``DeleteMarker`` as the current version.
+       - ``deleted`` - Applies only to objects which **do** Have a ``DeleteMarker`` as the current version.
+
+       See :ref:`minio-bucket-versioning-delete` for more complete documentation on ``DeleteMarker`` or delete operations in versioned buckets.
 
    * - ``rules.[n].name``
      - *Optional*
