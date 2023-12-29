@@ -195,6 +195,20 @@ The command accepts the following arguments:
    :optional:
 
    Specifies the path to the folder containing certificates the :mc:`minio` process uses for configuring TLS/SSL connectivity.
+   
+   The contents of the specified folder must follow that of the :ref:`default path structure <minio-tls-user-generated>`.
+   For example, the path contents of ``--certs-dir /etc/minio`` should resemble the following:
+
+   .. code-block:: shell
+
+      /etc/minio
+        private.key
+        public.crt
+        domain.tld/
+          private.key
+          public.crt
+        CAs/
+          full-chain-ca.crt
 
    Omit to use the default directory paths:
 
@@ -202,6 +216,12 @@ The command accepts the following arguments:
    - Windows: ``%%USERPROFILE%%\.minio\certs``.
 
    See :ref:`minio-TLS` for more information on TLS/SSL connectivity.
+
+   .. important::
+
+      :minio-release:`MinIO Server RELEASE.2023-12-09T18-17-51Z <RELEASE.2023-12-09T18-17-51Z>` removes the deprecated ``--config-dir | -C`` parameter.
+      Deployments using this flag may start without TLS enabled.
+      Replace those parameters with ``--certs-dir | -S`` and restart to re-enable TLS.
 
 .. mc-cmd:: --quiet
    :optional:
