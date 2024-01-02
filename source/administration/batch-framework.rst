@@ -10,9 +10,7 @@ Batch Framework
    :local:
    :depth: 2
 
-.. versionadded:: MinIO RELEASE.2022-10-08T20-11-00Z
 
-   The Batch Framework was introduced with the ``replicate`` job type in the :mc:`mc` RELEASES.2022-10-08T20-11-00Z.
 
 Overview
 --------
@@ -37,11 +35,14 @@ The MinIO Batch Framework supports the following job types:
    * - Job Type
      - Description
 
-   * - ``replicate``
+   * - :ref:`replicate <minio-batch-framework-replicate-job>`
      - Perform a one-time replication procedure from one MinIO location to another MinIO location.
 
-   * - ``keyrotate``
+   * - :ref:`keyrotate <minio-batch-framework-keyrotate-job>`
      - Perform a one-time process to cycle the :ref:`sse-s3 or sse-kms <minio-sse-data-encryption>` cryptographic keys on objects.
+
+   * - :ref:`expire <minio-batch-framework-expire-job>`
+     - Perform a one-time immediate expiration of objects in a bucket.
 
 MinIO Batch CLI
 ---------------
@@ -76,16 +77,16 @@ The :mc:`mc batch` commands include
           :start-after: start-mc-batch-describe-desc
           :end-before: end-mc-batch-describe-desc
 
+.. _minio-batch-framework-access:
+
 Access to ``mc batch``
 ----------------------
 
-A user's access keys and policies do not restrict the the buckets, prefixes, or objects the batch function can access or the types of actions the process can perform on any objects.
+Each batch job executes using the credentials specified in the batch definition.
+The success of a given batch job depends on those credentials having the appropriate :ref:`permissions <minio-policy>` to perform all requested actions.
 
-For some job types, the credentials passed to the batch job through the YAML file do restrict the objects that the job can access.
-However, any restrictions to the job are from the credentials in the YAML, not policies attached to the user who starts the job.
-
-Use MinIO's :ref:`Policy Based Access Control <minio-policy>` and the :ref:`administrative policy actions <minio-policy-mc-admin-actions>` to restrict who can perform various batch job functions.
-MinIO provides the following admin policy actions for Batch Jobs:
+The user executing the batch job must have the following permissions. 
+You can alternatively restrict users from accessing these functions by blocking or limiting access to these actions:
 
 ``admin:ListBatchJobs``
   Grants the user the ability to see batch jobs currently in process.
@@ -104,77 +105,18 @@ You can assign any of these actions to users independently or in any combination
 
 The built-in ``ConsoleAdmin`` policy includes sufficient access to perform all of these types of batch job actions.
 
-Job Types
----------
-
-.. note:: 
-
-   Depending on the job type, the success or failure of any batch job may be impacted by the credentials given in the batch job's YAML for the source or target deployments.
-
 .. _minio-batch-local:
 
 ``Local`` Deployment
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 You run a batch job against a particular deployment by passing an ``alias`` to the :mc:`mc batch` command.
 The deployment you specify in the command becomes the ``local`` deployment within the context of that batch job.
 
-Replicate
-~~~~~~~~~
-
-Use the ``replicate`` job type to create a batch job that replicates objects from one MinIO deployment (the ``source`` deployment) to another MinIO deployment (the ``target`` deployment).
-Either the ``source`` or the ``target`` **must** be the :ref:`local <minio-batch-local>` deployment.
-
-Starting with the MinIO Server ``RELEASE.2023-05-04T21-44-30Z``, the other deployment can be either another MinIO deployment or any S3-compatible location using a realtime storage class.
-Use filtering options in the replication ``YAML`` file to exclude objects stored in locations that require rehydration or other restoration methods before serving the requested object.
-
-The batch job definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
-The access to objects and buckets for the replication process may be restricted by the credentials you provide in the YAML for either the source or target destinations. 
-
-.. versionchanged:: MinIO Server RELEASE.2023-04-07T05-28-58Z
-
-   You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
-
-For example, you can use a batch job to perform a one-time replication sync to push objects from a bucket on a local deployment at ``minio-local/invoices/`` to a bucket on a remote deployment at ``minio-remote/invoices``.
-You can also pull objects from the remote deployment at ``minio-remote/invoices`` to the local deployment at ``minio-local/invoices``.
-
-The advantages of Batch Replication over :mc:`mc mirror` include:
-
-- Removes the client to cluster network as a potential bottleneck
-- A user only needs access to starting a batch job with no other permissions, as the job runs entirely server side on the cluster
-- The job provides for retry attempts in event that objects do not replicate
-- Batch jobs are one-time, curated processes allowing for fine control replication
-- (MinIO to MinIO only) The replication process copies object versions from source to target
-
-.. versionchanged:: MinIO Server RELEASE.2023-02-17T17-52-43Z
-
-   Run batch replication with multiple workers in parallel by specifying the :envvar:`MINIO_BATCH_REPLICATION_WORKERS` environment variable.
-
-Sample YAML Description File for a ``replicate`` Job Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Create a basic ``replicate`` job definition file you can edit with :mc:`mc batch generate`.
-
-For the :ref:`local <minio-batch-local>` deployment, do not specify the endpoint or credentials.
-Either delete or comment out those lines for the source or the target section, depending on which is the ``local``.
-
-.. literalinclude:: /includes/code/replicate.yaml
-   :language: yaml
-
-Key Rotate
-~~~~~~~~~~
-
-.. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z
-
-Use the ``keyrotate`` job type to create a batch job that cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects.
-
-The YAML configuration supports filters to restrict key rotation to  a specific set of objects by creation date, tags, metadata, or kms key.
-You can also define retry attempts or set a notification endpoint and token.
-
-Sample YAML Description File for a ``keyrotate`` Job Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Create a basic ``keyrotate`` job definition file you can edit with :mc:`mc batch generate`.
-
-.. literalinclude:: /includes/code/keyrotate.yaml
-   :language: yaml
+.. toctree::
+   :titlesonly:
+   :hidden:
+   
+   /administration/batch-framework-job-replicate
+   /administration/batch-framework-job-keyrotate
+   /administration/batch-framework-job-expire

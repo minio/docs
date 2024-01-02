@@ -74,8 +74,11 @@ Parameters
    
    The type of job to generate a YAML document for.
    
-   Currently, :mc:`mc batch` supports the ``replicate`` and ``keyrotate`` job types.
-
+   Supports the following values:
+   
+   - :ref:`minio-mc-batch-generate-replicate-job`
+   - :ref:`minio-mc-batch-generate-keyrotate-job`
+   - :ref:`minio-mc-batch-generate-expire-job` (Added ``mc.RELEASE.2023-12-02T11-24-10Z``)
 
 Global Flags
 ~~~~~~~~~~~~
@@ -118,247 +121,55 @@ Job Types
 
 :mc:`mc batch` currently supports the following job task types:
 
-- ``replicate``
+- :ref:`minio-mc-batch-generate-replicate-job`
   
   Replicate objects between two MinIO deployments.
   Provides similar functionality to :ref:`bucket replication <minio-bucket-replication>` as a batch job rather than continual scanning function.
 
-- ``keyrotate``
+- :ref:`minio-mc-batch-generate-keyrotate-job`
 
   .. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z 
   
   Rotate the sse-s3 or sse-kms keys for objects at rest on a MinIO deployment.
 
+- :ref:`minio-mc-batch-generate-expire-job`
+
+  .. versionadded:: MinIO RELEASE.2023-12-02T10-51-33Z
+
+  Expire objects based using similar semantics as :ref:`minio-lifecycle-management-create-expiry-rule`.
+
+.. _minio-mc-batch-generate-replicate-job:
+
 ``replicate``
 ~~~~~~~~~~~~~
 
-Use the ``replicate`` job type to create a batch job that replicates objects from the local MinIO deployment to another MinIO location.
-
-The YAML **must** define the source and target deployments.
-If the _source_ deployment is remote, then the _target_ deployment **must** be ``local``.
-Optionally, the YAML can also define flags to filter which objects replicate, send notifications for the job, or define retry attempts for the job.
-
-.. versionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
-
-   You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
-
-For the **source deployment**
-
-- Required information
-
-  .. list-table::
-     :widths: 25 75
-     :width: 100%
-
-     * - ``type:``
-       - Must be ``minio``.
-     * - ``bucket:`` 
-       - The bucket on the deployment.
-
-- Optional information
-
-  .. list-table::
-     :widths: 25 75
-     :width: 100%
-
-     * - ``prefix:`` 
-       - The prefix on the object(s) that should replicate.
-
-     * - ``endpoint:`` 
-       - | Location of the deployment to use for either the source or the target of a replication batch job. 
-         | For example, ``https://minio.example.net``. 
-         |
-         | If the deployment is the :ref:`alias` specified to the command, omit this field to direct MinIO to use that alias for the endpoint and credentials values. 
-         | Either the source deployment *or* the remote deployment *must* be the :ref:`"local" <minio-batch-local>` alias.
-         | The non-"local" deployment must specify the ``endpoint`` and ``credentials``.
-
-     * - ``path:``
-       - | Directs MinIO to use Path or Virtual Style (DNS) lookup of the bucket.
-         | 
-         | - Specify ``on`` for Path style
-         | - Specify ``off`` for Virtual style
-         | - Specify ``auto`` to let MinIO determine the correct lookup style.
-         |
-         | Defaults to ``auto``.
-
-     * - ``credentials:`` 
-       - | The ``accesskey:`` and ``secretKey:`` or the ``sessionToken:`` that grants access to the object(s).
-         | Only specify for the deployment that is not the :ref:`local <minio-batch-local>` deployment. 
-
-For the **target deployment**
-
-- Required information
-
-  .. list-table::
-     :widths: 25 75
-     :width: 100%
-
-     * - ``type:`` 
-       - Must be ``minio``.
-     * - ``bucket:`` 
-       - The bucket on the deployment.
-
-- Optional information
-
-  .. list-table::
-     :widths: 25 75
-     :width: 100%
-  
-     * - ``prefix:`` 
-       - The prefix on the object(s) to replicate.
-
-     * - ``endpoint:`` 
-       - | The location of the target deployment.
-         |
-         | If the target is the :ref:`alias <alias>` specified to the command, you can omit this and the ``credentials`` fields.
-         | If the target is "local", the source *must* specify the remote deployment with ``endpoint`` and ``credentials``.
-
-
-     * - ``credentials:`` 
-       - The ``accesskey`` and ``secretKey`` or the ``sessionToken`` that grants access to the object(s).
-    
-For **filters**
-
-.. list-table::
-   :widths: 25 75
-   :width: 100%
-
-   * - ``newerThan:`` 
-     - A string representing a length of time in ``#d#h#s`` format.
-       
-       Only objects newer than the specified length of time replicate.
-       For example, ``7d``, ``24h``, ``5d12h30s`` are valid strings.
-   * - ``olderThan:`` 
-     - A string representing a length of time in ``#d#h#s`` format.
-       
-       Only objects older than the specified length of time replicate.
-   * - ``createdAfter:`` 
-     - A date in ``YYYY-MM-DD`` format.
-  
-       Only objects created after the date replicate.
-   * - ``createdBefore:`` 
-     - A date in ``YYYY-MM-DD`` format.
-       
-       Only objects created prior to the date replicate.
-
-For **notifications**
-
-.. list-table::
-   :widths: 25 75
-   :width: 100%
-
-   * - ``endpoint:`` 
-     - The predefined endpoint to send events for notifications.
-   * - ``token:`` 
-     - An optional :abbr:`JWT <JSON Web Token>` to access the ``endpoint``.
-
-For **retry attempts**
-
-If something interrupts the job, you can define how many attempts to retry the job batch.
-For each retry, you can also define how long to wait between attempts.
-
-.. list-table::
-   :widths: 25 75
-   :width: 100%
-
-   * - ``attempts:`` 
-     - Number of tries to complete the batch job before giving up.
-   * - ``delay:`` 
-     - The least amount of time to wait between each attempt.
-
-
-Sample YAML
-+++++++++++
+You can use the following example configuration as the starting point for building your own custom replication batch job:
 
 .. literalinclude:: /includes/code/replicate.yaml
    :language: yaml
 
+See :ref:`minio-batch-framework-replicate-job-ref` for more complete documentation on each key.
+
+.. _minio-mc-batch-generate-keyrotate-job:
+
 ``keyrotate``
 ~~~~~~~~~~~~~
 
-.. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z 
-
-Use the ``keyrotate`` job type to create a batch job that cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects.
-
-Required information
-++++++++++++++++++++
-
-  .. list-table::
-     :widths: 25 75
-     :width: 100%
-
-     * - ``type:`` 
-       - Either ``sse-s3`` or ``sse-kms``.
-     * - ``key:`` 
-       - Only for use with the ``sse-kms`` type. 
-         The key to use to unseal the key vault.
-     * - ``context:``
-       - Only for use with the ``sse-kms`` type.
-         The context within which to perform actions. 
-
-   
-Optional information
-++++++++++++++++++++
-
-For **flag based filters**
-
-.. list-table::
-   :widths: 25 75
-   :width: 100%
-
-   * - ``newerThan:`` 
-     - A string representing a length of time in ``#d#h#s`` format.
-       
-       Keys rotate only for objects newer than the specified length of time.
-       For example, ``7d``, ``24h``, ``5d12h30s`` are valid strings.
-   * - ``olderThan:`` 
-     - A string representing a length of time in ``#d#h#s`` format.
-       
-       Keys rotate only for objects older than the specified length of time.
-   * - ``createdAfter:`` 
-     - A date in ``YYYY-MM-DD`` format.
-  
-       Keys rotate only for objects created after the date.
-   * - ``createdBefore:`` 
-     - A date in ``YYYY-MM-DD`` format.
-       
-       Keys rotate only for objects created prior to the date.
-   * - ``tags:``
-     - Rotate keys only for objects with tags that match the specified ``key:`` and ``value:``.  
-   * - ``metadata:``
-     - Rotate keys only for objects with metadata that match the specified ``key:`` and ``value:``.  
-   * - ``kmskey:``
-     - Rotate keys only for objects with a KMS key-id that match the specified value.  
-       This is only applicable for the ``sse-kms`` type. 
-
-For **notifications**
-
-.. list-table::
-   :widths: 25 75
-   :width: 100%
-
-   * - ``endpoint:`` 
-     - The predefined endpoint to send events for notifications.
-   * - ``token:`` 
-     - An optional :abbr:`JWT <JSON Web Token>` to access the ``endpoint``.
-
-For **retry attempts**
-
-If something interrupts the job, you can define a maximum number of retry attempts.
-For each retry, you can also define how long to wait between attempts.
-
-.. list-table::
-   :widths: 25 75
-   :width: 100%
-
-   * - ``attempts:`` 
-     - Number of tries to complete the batch job before giving up.
-   * - ``delay:`` 
-     - The amount of time to wait between each attempt.
-
-
-Sample YAML
-+++++++++++
+You can use the following example configuration as the starting point for building your own custom key rotation batch job:
 
 .. literalinclude:: /includes/code/keyrotate.yaml
    :language: yaml
+
+See :ref:`minio-batch-framework-keyrotate-job-ref` for more complete documentation on each key.
+
+.. _minio-mc-batch-generate-expire-job:
+
+``expire``
+~~~~~~~~~~
+
+You can use the following example configuration as a starting point for building your own custom expiration batch job:
+
+.. literalinclude:: /includes/code/keyrotate.yaml
+   :language: yaml
+
+See :ref:`minio-batch-framework-expire-job-ref` for more complete documentation on each key.

@@ -380,6 +380,30 @@ Version
 Specify the version of the Kafka cluster to assume when performing operations against that cluster. 
 See the `sarama reference documentation <https://github.com/shopify/sarama/blob/v1.20.1/config.go#L327>`__ for more information on this field's behavior.
 
+Batch Size
+~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_KAFKA_BATCH_SIZE
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_kafka batch_size
+         :delimiter: " "
+
+Specify the integer value to use as the `batch size <https://kafka.apache.org/documentation/#producerconfigs_batch.size>`__ for sending records to Kafka.
+
+.. versionchanged:: RELEASE.2023-12-02T10-51-33Z
+
+   MinIO previously limited this value to ``100``.
+
 Queue Directory
 ~~~~~~~~~~~~~~~
 
@@ -442,3 +466,58 @@ Comment
          :delimiter: " "
 
 Specify a comment to associate with the Kafka configuration.
+
+Compression Codec
+~~~~~~~~~~~~~~~~~
+
+.. versionadded:: MinIO Server RELEASE.2023-12-09T18-17-51Z
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_KAFKA_PRODUCER_COMPRESSION_CODEC
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_kafka compression_codec
+         :delimiter: " "
+
+Specify the compression codec to use when sending records to Kafka.
+
+Supports the following values:
+
+- ``none``
+- ``snappy``
+- ``gzip``
+- ``lz4``
+- ``zstd``
+
+Compression Level
+~~~~~~~~~~~~~~~~~
+
+.. versionadded:: MinIO Server RELEASE.2023-12-09T18-17-51Z
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_KAFKA_PRODUCER_COMPRESSION_LEVEL
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_kafka compression_level
+         :delimiter: " "
+
+Controls the level of compression applied based on the configured compression codec.
+
+Specify an integer value greater than or equal to ``0``.
+The effect of the value depends on the selected codec.

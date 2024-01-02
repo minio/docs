@@ -12,7 +12,13 @@ replicate:
     #   accessKey: ACCESS-KEY
     #   secretKey: SECRET-KEY
     #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
-
+    # snowball:
+    #   disable: true|false
+    #   batch: 100
+    #   inmemory: true|false
+    #   compress: true|false
+    #   smallerThan: 5MiB
+    #   skipErrs: true|false
   # target where the objects must be replicated
   # if target is not the local deployment for the command, provide the endpoint and credentials
   target:
