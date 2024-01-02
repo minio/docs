@@ -120,7 +120,7 @@ as that user:
        | :userpolicy:`readonly` on ``audit`` bucket
      
      - | ``PUT`` and ``GET`` on ``finance`` bucket.
-       | ``PUT`` on ``audit`` bucket
+       | ``GET`` on ``audit`` bucket
 
    * - ``Auditing``
      - | :userpolicy:`readonly` on ``audit`` bucket

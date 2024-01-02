@@ -93,7 +93,7 @@ Parameters
 
    Output only temporary access keys.
 
-   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey ls --permanent-only`.
+   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey ls --svcacc-only`.
 
 .. mc-cmd:: --users-only
    :optional:
