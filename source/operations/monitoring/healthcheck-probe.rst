@@ -16,21 +16,6 @@ endpoints return an HTTP status code indicating whether the underlying
 resource is healthy or satisfies read/write quorum. MinIO exposes no other data
 through these endpoints.
 
-.. cond:: windows
-
-   .. admonition:: Checks Using PowerShell
-      :class: note
-
-      When using PowerShell to run the following the commands, you must explicitly set ``-UserAgent ""``.
-      Otherwise, the healthcheck redirects to the Admin Console instead of the desired Healthcheck API.
-
-      For PowerShell commands, you could replace each of the ``curl`` examples below with something like the following:
-
-      .. code-block:: powershell
-         :class: copyable
-
-         Invoke-WebRequest -Uri https://minio.example.net:9000/minio/health/cluster?maintenance=true -UserAgent ""
-
 Node Liveness
 -------------
 
