@@ -101,10 +101,10 @@ For example, if the remote storage tier implements AWS IAM policy-based access c
 
 Modify the ``Resource`` for the bucket into which MinIO tiers objects.
 
-.. admonition:: Avoid remote tier object versioning
+.. admonition:: Avoid enabling versioning in the remote tier
    :class: important
 
-   MinIO strongly recommends against object versioning for remote tiers.
+   MinIO strongly recommends against enabling bucket versioning for remote tiers.
    If the remote tier bucket is versioned, each source object version is transitioned to a *unique object* in the remote tier.
    
    If your environment requires versioning for the remote tier, you must also allow the ``s3:DeleteObjectVersion`` permission.
