@@ -59,7 +59,7 @@ See :mc:`mc retention` for more information on configuring object locking.
 Bucket Versioning with Existing Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Enabling bucket versioning on a bucket with existing data immediately applies a versioning ID to any unversioned object.
+Enabling bucket versioning on a bucket with existing data immediately creates a null value version ID for each unversioned object.
 
 Disabling bucket versioning on a bucket with existing versioned data does *not* remove any versioned objects.
 Applications can continue to access versioned data after disabling bucket versioning.
