@@ -113,7 +113,7 @@ Behavior
 Bucket Versioning with Existing Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Enabling bucket versioning on a bucket with existing data immediately creates a null value version ID for each unversioned object.
+Enabling bucket versioning on a bucket with existing data immediately creates a ``NULL`` value version ID for each unversioned object.
 
 
 S3 Compatibility
