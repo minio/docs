@@ -23,7 +23,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
 .. note::
    
    :mc:`mc mirror` only synchronizes the current object without any version information or metadata.
-   To synchronize an object's version history and metadata, consider using :mc:`mc replicate` or :mc:`mc admin replicate`.
+   To synchronize an object's version history and metadata, consider using :mc:`mc replicate` for :ref:`bucket replication <minio-bucket-replication-serverside>` or :mc:`mc admin replicate` for :ref:`site replication <minio-site-replication-overview>`.
 
 
 .. tab-set::
