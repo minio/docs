@@ -279,9 +279,9 @@ behavior.
 
 .. start-nondisruptive-upgrade-desc
 
-MinIO strongly recommends restarting all nodes simultaneously. MinIO operations
-are atomic and strictly consistent. As such the restart procedure is
-non-disruptive to applications and ongoing operations.
+MinIO strongly recommends restarting all MinIO Server processes in a deployment simultaneously. 
+MinIO operations are atomic and strictly consistent. 
+As such the restart procedure is non-disruptive to applications and ongoing operations.
 
 Do **not** perform "rolling" (e.g. one node at a time) restarts.
 

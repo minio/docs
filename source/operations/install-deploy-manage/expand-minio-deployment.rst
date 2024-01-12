@@ -183,7 +183,7 @@ selecting hardware for MinIO deployments.
 Expansion is Non-Disruptive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Adding a new server pool requires restarting *all* MinIO nodes in the
+Adding a new server pool requires restarting *all* MinIO server processes in the
 deployment at around same time. 
 
 .. include:: /includes/common-installation.rst
