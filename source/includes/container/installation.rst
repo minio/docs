@@ -41,8 +41,35 @@ Multi-Node Multi-Drive (MNMD or "Distributed")
   Multiple MinIO servers with at least four drives across all servers. 
   The distributed |MNMD| topology supports production-grade object storage with drive and node-level availability and resiliency.
 
-This documentation provides instructions for |SNSD| and |SNMD| for supporting local development and evaluation of MinIO on a single host machine **only**. 
-For |MNMD| deployments, use the MinIO Kubernetes Operator to deploy and manage MinIO tenants in a containerized and orchestrated environment.
+.. note::
+
+   This documentation provides instructions for |SNSD| and |SNMD| for supporting local development and evaluation of MinIO on a single host machine **only**. 
+   For |MNMD| deployments, use the MinIO Kubernetes Operator to deploy and manage MinIO tenants in a containerized and orchestrated environment.
+
+Site Replication
+----------------
+
+Site replication expands the features of bucket replication to include IAM, security tokens, access keys, and bucket features the same across all sites.
+
+:ref:`Site replication <minio-site-replication-overview>` links multiple MinIO deployments together and keeps the buckets, objects, and Identity and Access Management (IAM) settings in sync across all connected sites.
+
+.. include:: /includes/common-replication.rst
+   :start-after: start-mc-admin-replicate-what-replicates
+   :end-before: end-mc-admin-replicate-what-replicates
+
+.. important::
+
+   MinIO does not recommend using |platform| hosts for site replication outside of early development, evaluation, or general experimentation.
+   For production, :minio-docs:`Kubernetes <minio/kubernetes/upstream/operations/install-deploy-manage/multi-site-replication.html>`.
+
+What Does Not Replicate?
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Not everything replicates across sites.
+
+.. include:: /includes/common-replication.rst
+   :start-after: start-mc-admin-replicate-what-does-not-replicate
+   :end-before: end-mc-admin-replicate-what-does-not-replicate
 
 .. _minio-installation-platform-support:
 

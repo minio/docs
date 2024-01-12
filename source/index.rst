@@ -124,6 +124,7 @@ For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio
       :titlesonly:
       :hidden:
 
+      /operations/installation
       /operations/concepts
       /operations/monitoring
       /operations/external-iam

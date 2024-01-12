@@ -12,51 +12,41 @@
    You cannot run the executable from the Explorer or by double clicking the file.
    Instead, you call the executable to launch the server.
 
-2) Create the ``systemd`` Service File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2) Prepare the Data Path for MinIO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/linux/common-installation.rst
-   :start-after: start-install-minio-systemd-desc
-   :end-before: end-install-minio-systemd-desc
+Ensure the data path is empty and contains no existing files, including any hidden or Windows system files.
 
-3) Create the Environment Variable File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If specifying a drive not dedicated for use by MinIO, consider creating a dedicated folder for storing MinIO data such as ``D:/Minio``.
 
-.. include:: /includes/common/common-deploy.rst
-   :start-after: start-common-deploy-create-environment-file-single-drive
-   :end-before: end-common-deploy-create-environment-file-single-drive
-
-4) Start the MinIO Service
+3) Start the MinIO Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Issue the following command on the local host to start the MinIO |SNSD| deployment as a service:
+Open the Command Prompt or Powershell and issue the following command to start the MinIO |SNSD| deployment in that session:
 
-.. include:: /includes/linux/common-installation.rst
-   :start-after: start-install-minio-start-service-desc
-   :end-before: end-install-minio-start-service-desc
+.. code-block:: shell
+   :class: copyable
 
-The ``journalctl`` output should resemble the following:
+   minio.exe server D:/minio --console-address ":9001"
+
+The output should resemble the following:
 
 .. code-block:: shell
 
    Status:         1 Online, 0 Offline. 
    API: http://192.168.2.100:9000  http://127.0.0.1:9000       
-   RootUser: myminioadmin 
-   RootPass: minio-secret-key-change-me 
-   Console: http://192.168.2.100:9001 http://127.0.0.1:9001    
-   RootUser: myminioadmin 
-   RootPass: minio-secret-key-change-me 
+   Console: http://192.168.2.100:9001 http://127.0.0.1:9001
 
    Command-line: https://min.io/docs/minio/linux/reference/minio-mc.html
-      $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
+      $ mc alias set myminio http://10.0.2.100:9000 minioadmin minioadmin
 
    Documentation: https://min.io/docs/minio/linux/index.html
 
 The ``API`` block lists the network interfaces and port on which clients can access the MinIO S3 API.
 The ``Console`` block lists the network interfaces and port on which clients can access the MinIO Web Console.
 
-5) Connect to the MinIO Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4) Connect to the MinIO Server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-deploy.rst
    :start-after: start-common-deploy-connect-to-minio-deployment

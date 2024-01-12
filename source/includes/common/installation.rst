@@ -50,10 +50,14 @@ You can deploy MinIO using one of the following topologies:
        
   Scalable for Petabyte+ workloads - both storage capacity and performance
 
-.. cond:: macos
+.. cond:: macos or windows
 
-   Use MacOS-based MinIO deployments for early development and evaluation.
-   MinIO strongly recommends Linux (RHEL, Ubuntu) for long-term development and production environments.
+   .. note::
+
+      Use |platform|-based MinIO deployments for early development and evaluation.
+      MinIO provides no guarantee of support for :abbr:`SNMD (Single-Node Multi-Drive)` or :abbr:`MNMD (Multi-Node Multi-Drive)` topologies on |platform|.
+
+      MinIO strongly recommends :minio-docs:`Linux (RHEL, Ubuntu) <minio/linux/index.html>` or :minio-docs:`Kubernetes (Upstream, OpenShift) <minio/kubernetes/upstream/index.html>` for long-term development and production environments.
 
 Site Replication
 ----------------
@@ -66,6 +70,10 @@ Site replication expands the features of bucket replication to include IAM, secu
    :start-after: start-mc-admin-replicate-what-replicates
    :end-before: end-mc-admin-replicate-what-replicates
 
+.. cond:: macos or windows
+
+   MinIO does not recommend using |platform| hosts for site replication outside of early development, evaluation, or general experimentation.
+   For production, use :minio-docs:`Linux <minio/linux/operations/install-deploy-manage/multi-site-replication.html>` or :minio-docs:`Kubernetes <minio/kubernetes/upstream/operations/install-deploy-manage/multi-site-replication.html>`.
 
 What Does Not Replicate?
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,7 +117,7 @@ hello@min.io for additional support and guidance. You can build MinIO from
 for your platform and architecture combo. MinIO generally does not recommend
 source-based installations in production environments.
 
-.. cond:: linux or macos
+.. cond:: linux
 
    .. toctree::
       :titlesonly:
@@ -118,4 +126,22 @@ source-based installations in production environments.
       /operations/install-deploy-manage/deploy-minio-single-node-single-drive
       /operations/install-deploy-manage/deploy-minio-single-node-multi-drive
       /operations/install-deploy-manage/deploy-minio-multi-node-multi-drive
+      /operations/install-deploy-manage/multi-site-replication
+
+.. cond:: windows
+
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      /operations/install-deploy-manage/deploy-minio-single-node-single-drive
+
+.. cond:: macos
+
+   .. toctree::
+      :titlesonly:
+      :hidden:
+
+      /operations/install-deploy-manage/deploy-minio-single-node-single-drive
+      /operations/install-deploy-manage/deploy-minio-single-node-multi-drive
       /operations/install-deploy-manage/multi-site-replication

@@ -202,37 +202,54 @@ Storage
 
 .. cond:: not k8s
 
-   MinIO recommends selecting the type of drive based on your performance objectives.
-   The following table highlights the general use case for each drive type based on cost and performance:
+   MinIO recommends using flash-based storage (NVMe or SSD) for all workload types and scales.
+   Workloads that require high performance should prefer NVMe over SSD.
 
-   .. list-table::
-      :header-rows: 1
-      :widths: auto
-      :width: 100%
+   MinIO deployments using HDD-based storage are best suited as cold-tier targets for :ref:`Object Transition ("Tiering") <minio-lifecycle-management-tiering>` of aged data.
+   HDD storage typically does not provide the necessary performance to meet the expectations of modern workloads, and any cost efficiencies at scale are offset by the performance constraints of the medium. 
 
-      * - Type
-        - Cost
-        - Performance
-        - Tier
-
-      * - NVMe
-        - High
-        - High
-        - Hot
-
-      * - SSD
-        - Balanced
-        - Balanced
-        - Hot/Warm
-
-      * - HDD
-        - Low
-        - Low
-        - Cold/Archival
+   Format Drives as XFS
+   ++++++++++++++++++++
 
    Format drives as XFS and present them to MinIO as a :abbr:`JBOD (Just a Bunch of Disks)` array with no RAID or other pooling configurations.
 
-   Ensure a consistent drive type (NVMe, SSD, HDD) for the underyling storage. 
+   MinIO **strongly recommends** disabling retry-on-error (``EIO``, ``ENOSPC``, and ``default``) behavior in XFS.
+   The default settings typically allow infinite retry-on-error and can produce unnecessary performance loss.
+
+   The following script iterates through all drives at the specified mount path and sets recommended values for ``max_retries`` and ``retry_timeout_seconds``. 
+   Use this script on each node on which the MinIO Server runs.
+   Modify the ``/mnt/drive`` line to match the pattern used for your MinIO drives.
+
+   .. code-block:: bash
+      :class: copyable
+
+      #!/bin/bash
+
+      for i in $(df -h | grep /mnt/drive | awk '{ print $1 }'); do
+            mountPath="$(df -h | grep $i | awk '{ print $6 }')"
+            deviceName="$(basename $i)"
+            echo "Modifying xfs max_retries and retry_timeout_seconds for drive $i mounted at $mountPath"
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/EIO/max_retries
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/EIO/retry_timeout_seconds
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/max_retries
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/retry_timeout_seconds
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/default/max_retries
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/default/retry_timeout_seconds
+      done
+      exit 0
+
+   Since these settings do not persist on restart, you can use a ``cron`` job on ``@reboot`` to check each mounted drive at the designated path and set the necessary config.
+   Use ``crontab -e`` to create the following job, modifying the script path to match that on each node:
+
+   .. code-block:: shell
+      :class: copyable
+
+      @reboot /opt/minio/xfs-retry-settings.sh
+
+   Use Consistent Drive Type and Capacity
+   ++++++++++++++++++++++++++++++++++++++
+
+   Ensure a consistent drive type (NVMe, SSD, HDD) for the underlying storage. 
    MinIO does not distinguish between storage types.
    Mixing storage types provides no benefit to MinIO.
 
