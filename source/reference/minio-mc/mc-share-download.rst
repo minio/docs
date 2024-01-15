@@ -51,7 +51,7 @@ documentation on :aws-docs:`Pre-Signed URLs
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] share upload             \
+         mc [GLOBALFLAGS] share download           \
                           [--expire "string"]      \
                           [--recursive]            \
                           [--version-id "string"]  \
