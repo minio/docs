@@ -76,7 +76,7 @@ Parameters
 
    .. versionchanged:: RELEASE.2024-01-11T05-49-32Z
 
-      An alias may also be a single letter (``[a-zA-Z]``).
+      An alias may also be a single letter (``a-z`` or ``A-Z``).
 
    Examples of some valid alias values include:
 
