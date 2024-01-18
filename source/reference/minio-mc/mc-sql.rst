@@ -145,7 +145,7 @@ Parameters
 .. mc-cmd:: --json-input
    
 
-   *Optional* The data format for ``.json`` input objects. Specify the type of 
+   *Optional* The data format for ``.json`` or ``.ndjson`` input objects. Specify the type of 
    the JSON contents as ``type=<VALUE>``. The value can be either:
 
    - ``DOCUMENT`` - JSON `document <https://www.json.org/json-en.html>`__.
