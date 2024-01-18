@@ -78,7 +78,7 @@ Parameters
 
       An alias may also be a single letter (``[a-zA-Z]``).
 
-   Examples include:
+   Examples of some valid alias values include:
 
    - ``myminio``
    - ``Test-1``
