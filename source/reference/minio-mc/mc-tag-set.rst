@@ -99,7 +99,7 @@ Parameters
 
    .. code-block:: shell
 
-      mc tag set myminio/mybucket/prefix1 "key1=value1" --exclude-folders --recursive
+      mc tag set myminio/vacation-photos/cancun "destination=international" --exclude-folders --recursive
    
 .. mc-cmd:: --recursive, r
    :optional:
