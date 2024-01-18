@@ -13,7 +13,7 @@
 
 .. important:: 
 
-   ``mc license register`` requires :ref:`MinIO Client <minio-client> version ``RELEASE.2023-11-20T16-30-59Z`` or newer.
+   ``mc license register`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or newer.
 
 Command History
 ---------------

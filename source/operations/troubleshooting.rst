@@ -81,7 +81,7 @@ You can restart through the Console by selecting :guilabel:`Restart` in the top 
 
       .. important:: 
 
-         Registering your deployment with SUBNET or updating the license for a deployment requires :ref:`MinIO Client <minio-client> version ``RELEASE.2023-11-20T16-30-59Z`` or newer.
+         Registering your deployment with SUBNET or updating the license for a deployment requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or newer.
 
       Refer to :mc:`mc license register` for instructions.
 
