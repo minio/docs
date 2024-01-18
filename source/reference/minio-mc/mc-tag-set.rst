@@ -86,6 +86,23 @@ Parameters
 
       mc tag set myminio/mybucket/object.txt "key1=value1&key2=value2"
 
+.. mc-cmd:: --exclude-folders
+   :optional:
+
+   .. versionadded:: RELEASE.2024-01-11T05-49-32Z
+
+   When used with :mc-cmd:`~mc tag set --recursive`, causes :mc:`mc tag set` to **not** traverse child prefixes.
+   Tags are only applied to objects at the specified path.
+   Requires :mc-cmd:`~mc tag set --recursive`.
+
+   The following example applies the tag ``destination=international`` to objects at ``vacation-photos/cancun/`` but not ``vacation-photos/cancun/ocean/`` or other prefixes.
+   
+   For example, the above would add the tags to the object at``vacation-photos/cancun/pretty-beach.jpg`` but not to the object at``vacation-photos/cancun/ocean/tropical-fish.jpg``.
+
+   .. code-block:: shell
+
+      mc tag set myminio/vacation-photos/cancun "destination=international" --exclude-folders --recursive
+   
 .. mc-cmd:: --recursive, r
    :optional:
 

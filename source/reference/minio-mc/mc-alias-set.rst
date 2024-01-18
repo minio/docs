@@ -68,6 +68,22 @@ Parameters
 .. mc-cmd:: ALIAS
 
    *Required* The name to associate to the S3-compatible service.
+   Aliases are case-sensitive and must meet the following requirements:
+
+   - Contain only `ASCII <https://en.wikipedia.org/wiki/ASCII>`__ lower case letters (``a-z``), upper case letters (``A-Z``), numbers (``[0-9]``), hyphen (``-``), or underscore (``_``).
+   - 2 or more characters in length.
+   - The first character must be a letter.
+
+   .. versionchanged:: RELEASE.2024-01-11T05-49-32Z
+
+      An alias may also be a single letter (``a-z`` or ``A-Z``).
+
+   Examples of some valid alias values include:
+
+   - ``myminio``
+   - ``Test-1``
+   - ``A``
+   - ``a``
 
 .. mc-cmd:: URL
 
