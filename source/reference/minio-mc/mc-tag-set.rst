@@ -95,7 +95,9 @@ Parameters
    Tags are only applied to objects at the specified path.
    Requires :mc-cmd:`~mc tag set --recursive`.
 
-   The following example applies the tag ``key1=value1`` to objects at ``mybucket/prefix1`` but not ``mybucket/prefix1/prefix2``:
+   The following example applies the tag ``destination=international`` to objects at ``vacation-photos/cancun/`` but not ``vacation-photos/cancun/ocean/`` or other prefixes.
+   
+   For example, the above would add the tags to the object at``vacation-photos/cancun/pretty-beach.jpg`` but not to the object at``vacation-photos/cancun/ocean/tropical-fish.jpg``.
 
    .. code-block:: shell
 
