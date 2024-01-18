@@ -254,6 +254,11 @@ Parameters
          
    See the Amazon documentation on :aws-docs:`Storage Classes <AmazonS3/latest/dev/storage-class-intro.html>` for more information on S3 storage classses.
 
+.. mc-cmd:: --summary
+   :optional:
+
+   On completion, output a summary of the data that was synchronized.
+
 .. mc-cmd:: --watch, w
    :optional:
 
