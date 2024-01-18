@@ -91,7 +91,7 @@ Parameters
 
    .. versionadded:: RELEASE.2024-01-11T05-49-32Z
 
-   When used with :mc-cmd:`~mc tag set --recursive`, causes :mc:`mc tag set` to *not* traverse child prefixes.
+   When used with :mc-cmd:`~mc tag set --recursive`, causes :mc:`mc tag set` to **not** traverse child prefixes.
    Tags are only applied to objects at the specified path.
    Requires :mc-cmd:`~mc tag set --recursive`.
 
