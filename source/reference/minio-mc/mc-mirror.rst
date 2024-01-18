@@ -78,8 +78,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: SOURCE
+   :required:
 
-   *REQUIRED* The file(s) or object(s) to synchronize to the :mc-cmd:`~mc mirror TARGET` S3 host.
+   The file(s) or object(s) to synchronize to the :mc-cmd:`~mc mirror TARGET` S3 host.
 
    For objects on S3-compatible hosts, specify the path to the object as ``ALIAS/PATH``, where:
 
@@ -100,8 +101,9 @@ Parameters
    If specifying a directory, :mc:`mc mirror` synchronizes all files in the directory.
 
 .. mc-cmd:: TARGET
+   :required:
 
-   *REQUIRED* The full path to bucket to which :mc:`mc mirror` synchronizes SOURCE objects. Specify the ``TARGET`` as ``ALIAS/PATH``, where:
+   The full path to bucket to which :mc:`mc mirror` synchronizes SOURCE objects. Specify the ``TARGET`` as ``ALIAS/PATH``, where:
 
    - ``ALIAS`` is the :mc:`alias <mc alias>` of a configured S3-compatible host, *and*
 
@@ -114,18 +116,24 @@ Parameters
    :mc:`mc mirror` uses the object or file names from the :mc-cmd:`~mc mirror SOURCE` when synchronizing to the ``TARGET`` bucket.
 
 .. mc-cmd:: --attr
-   
+   :optional:
 
    Add custom metadata for mirrored objects. Specify key-value pairs as ``KEY=VALUE\;``. 
    For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
 
 .. mc-cmd:: --disable-multipart
-   
+   :optional:
 
    Disables multipart upload for the synchronization session.
 
+.. mc-cmd:: --dry-run
+   :optional:
+
+   Perform a mock mirror operation.
+   Use this operation to test that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
+
 .. mc-cmd:: --encrypt-key
-   
+   :optional:
 
    Encrypt or decrypt objects using server-side encryption with client-specified keys. 
    Specify key-value pairs as ``KEY=VALUE``.
@@ -140,23 +148,17 @@ Parameters
    You can only delete encrypted objects if you specify the correct :mc-cmd:`~mc mirror --encrypt-key` secret key.
 
 .. mc-cmd:: --exclude
-   
+   :optional:
 
    Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified object name pattern.
 
 .. mc-cmd:: --exclude-storageclass
-   
+   :optional:
 
    Exclude object(s) on the :mc-cmd:`~mc mirror SOURCE` that have the specified storage class.
    You can use this flag multiple times in a command to exclude objects from more than one storage class.
 
    Use this to exclude objects with storage classes that require rehydration or restoration of objects, such as migrating from an AWS S3 bucket where some objects have the ``GLACIER`` or ``DEEP_ARCHIVE`` storage classes.
-
-.. mc-cmd:: --dry-run
-   
-
-   Perform a mock mirror operation. 
-   Use this operation to test that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
 
 .. --limit-download and --limit-upload included here
 
@@ -165,26 +167,26 @@ Parameters
    :end-before: end-mc-limit-flags-desc
 
 .. mc-cmd:: --md5
-   
+   :optional:
 
    Forces all uploads to calculate MD5 checksums. 
 
 .. mc-cmd:: --monitoring-address
-   
+   :optional:
 
    Creates a `Prometheus <https://prometheus.io/>`__ endpoint for monitoring mirroring activity. 
    Specify the local network adapter and port address on which to create the scraping endpoint. 
    Defaults to ``localhost:8081``).
 
 .. mc-cmd:: --newer-than
-   
+   :optional:
 
    Mirror object(s) newer than the specified number of days.  
    Specify a string in ``#d#hh#mm#ss`` format. 
    For example: ``--newer-than 1d2hh3mm4ss``.
 
 .. mc-cmd:: --older-than
-   
+   :optional:
 
    Mirror object(s) older than the specified time limit. 
    Specify a string in ``#d#hh#mm#ss`` format. 
@@ -193,7 +195,7 @@ Parameters
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --overwrite
-   
+   :optional:
    
    Overwrites object(s) on the :mc-cmd:`~mc mirror TARGET`.
 
@@ -205,19 +207,19 @@ Parameters
    ``mc mirror`` logs an error and continues to synchronize other objects.
 
 .. mc-cmd:: --preserve, a
-   
+   :optional:
 
    Preserve file system attributes and bucket policy rules of the :mc-cmd:`~mc mirror SOURCE` on the :mc-cmd:`~mc mirror TARGET`.
 
 .. mc-cmd:: --region
-   
+   :optional:
 
    Specify the ``string`` region when creating new bucket(s) on the target. 
 
    Defaults to ``"us-east-1"``.
 
 .. mc-cmd:: --remove
-   
+   :optional:
 
    Removes object(s) on the Target that do not exist on the Source. 
 
@@ -241,18 +243,19 @@ Parameters
       In prior versions, specifying ``/path/to/directory`` would result in the removal of the ``/path/to`` folder if ``directory`` did not exist.
 
 .. mc-cmd:: --retry
+   :optional:
 
    In case of errors during mirror process, retry on each errored object.
 
-.. mc-cmd:: storage-class, sc
-   
+.. mc-cmd:: --storage-class, sc
+   :optional:
 
    Set the storage class for the new object(s) on the :mc-cmd:`~mc mirror TARGET`. 
          
    See the Amazon documentation on :aws-docs:`Storage Classes <AmazonS3/latest/dev/storage-class-intro.html>` for more information on S3 storage classses.
 
 .. mc-cmd:: --watch, w
-   
+   :optional:
 
    Use ``--watch`` flag to mirror objects from Source to Target, where the Target may also have additional objects not present on the Source.
 
