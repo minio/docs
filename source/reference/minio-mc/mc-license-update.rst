@@ -10,6 +10,10 @@
 
 .. mc:: mc license update
 
+.. important:: 
+
+   ``mc license update`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or newer.
+
 Description
 -----------
 

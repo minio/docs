@@ -79,6 +79,10 @@ You can restart through the Console by selecting :guilabel:`Restart` in the top 
 
       You can register for SUBNET from the command line.
 
+      .. important:: 
+
+         Registering your deployment with SUBNET or updating the license for a deployment requires :ref:`MinIO Client <minio-client> version ``RELEASE.2023-11-20T16-30-59Z`` or newer.
+
       Refer to :mc:`mc license register` for instructions.
 
       For clusters without direct Internet access, refer to the instructions in the :ref:`airgap example <minio-license-register-airgap>` of the :mc:`mc license register` documentation.
