@@ -219,7 +219,7 @@ Storage
    - ``ENOSPC`` Error no space left on device
    - ``default`` All other errors
 
-   The default ``max_retries`` setting typically direct the filesystem to retry-on-error indefinitely instead of propagating the error.
+   The default ``max_retries`` setting typically directs the filesystem to retry-on-error indefinitely instead of propagating the error.
    MinIO can handle XFS errors appropriately, such that the retry-on-error behavior introduces at most unnecessary latency or performance degradation. 
 
    The following script iterates through all drives at the specified mount path and sets the XFS ``max_retries`` setting to ``0`` or "fail immediately on error" for the recommended error classes.
