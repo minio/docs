@@ -12,7 +12,8 @@
 
 .. important:: 
 
-   ``mc license update`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or newer.
+   ``mc license register`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or later and MinIO Server ``RELEASE.2023-11-20T22-40-07Z`` or later.
+   MinIO strongly recommends always using the MinIO Client and MinIO Server versions released together.
 
 Description
 -----------
