@@ -22,7 +22,7 @@ If specifying a drive not dedicated for use by MinIO, consider creating a dedica
 3) Start the MinIO Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Open the Command Prompt or Powershell and issue the following command to start the MinIO |SNSD| deployment in that session:
+Open the Command Prompt or PowerShell and issue the following command to start the MinIO |SNSD| deployment in that session:
 
 .. code-block:: shell
    :class: copyable

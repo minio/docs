@@ -60,7 +60,7 @@ Site replication expands the features of bucket replication to include IAM, secu
 .. important::
 
    MinIO does not recommend using |platform| hosts for site replication outside of early development, evaluation, or general experimentation.
-   For production, :minio-docs:`Kubernetes <minio/kubernetes/upstream/operations/install-deploy-manage/multi-site-replication.html>`.
+   For production, use :minio-docs:`Kubernetes <minio/kubernetes/upstream/operations/install-deploy-manage/multi-site-replication.html>` for an orchestrated container environment.
 
 What Does Not Replicate?
 ~~~~~~~~~~~~~~~~~~~~~~~~
