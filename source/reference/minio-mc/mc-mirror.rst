@@ -21,7 +21,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
 .. end-mc-mirror-desc
 
 .. note::
-   
+
    :mc:`mc mirror` only synchronizes the current object without any version information or metadata.
    To synchronize an object's version history and metadata, consider using :mc:`mc replicate` for :ref:`bucket replication <minio-bucket-replication-serverside>` or :mc:`mc admin replicate` for :ref:`site replication <minio-site-replication-overview>`.
 
@@ -38,7 +38,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
          mc mirror --watch ~/mydata myminio/mydata
 
       The command "watches" for files added or removed on the local filesystem and synchronizes those operations to MinIO until explicitly terminated. 
-      
+
       :mc-cmd:`mc mirror --watch` updates files changed on the local filesystem to MinIO (see :mc-cmd:`~mc mirror --overwrite`).
       ``--watch`` does not remove other files from MinIO not present on the local filesystem (see :mc-cmd:`~mc mirror --remove`).
 
@@ -67,7 +67,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
                           [--remove]                        \
                           [--storage-class "string"]        \
                           [--watch]                         \
-                          SOURCE                            \ 
+                          SOURCE                            \
                           TARGET
 
       .. include:: /includes/common-minio-mc.rst
@@ -137,8 +137,8 @@ Parameters
 
    Encrypt or decrypt objects using server-side encryption with client-specified keys. 
    Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
+
+   - Each ``KEY`` represents a bucket or object.
    - Each ``VALUE`` represents the data key to use for encrypting object(s).
 
    Enclose the entire list of key-value pairs passed to :mc-cmd:``~mc mirror --encrypt-key`` in double quotes ``"``.
@@ -169,7 +169,7 @@ Parameters
 .. mc-cmd:: --md5
    :optional:
 
-   Forces all uploads to calculate MD5 checksums. 
+   Forces all uploads to calculate MD5 checksums.
 
 .. mc-cmd:: --monitoring-address
    :optional:
@@ -181,22 +181,22 @@ Parameters
 .. mc-cmd:: --newer-than
    :optional:
 
-   Mirror object(s) newer than the specified number of days.  
-   Specify a string in ``#d#hh#mm#ss`` format. 
+   Mirror object(s) newer than the specified number of days.
+   Specify a string in ``#d#hh#mm#ss`` format
    For example: ``--newer-than 1d2hh3mm4ss``.
 
 .. mc-cmd:: --older-than
    :optional:
 
-   Mirror object(s) older than the specified time limit. 
-   Specify a string in ``#d#hh#mm#ss`` format. 
+   Mirror object(s) older than the specified time limit.
+   Specify a string in ``#d#hh#mm#ss`` format.
    For example: ``--older-than 1d2hh3mm4ss``.
-      
+
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --overwrite
    :optional:
-   
+
    Overwrites object(s) on the :mc-cmd:`~mc mirror TARGET`.
 
    For example, consider an active ``mc mirror --overwrite`` synchronizing content from Source to Destination.
@@ -214,14 +214,14 @@ Parameters
 .. mc-cmd:: --region
    :optional:
 
-   Specify the ``string`` region when creating new bucket(s) on the target. 
+   Specify the ``string`` region when creating new bucket(s) on the target.
 
    Defaults to ``"us-east-1"``.
 
 .. mc-cmd:: --remove
    :optional:
 
-   Removes object(s) on the Target that do not exist on the Source. 
+   Removes object(s) on the Target that do not exist on the Source.
 
    Use the ``--remove`` flag to have the same list of objects on both Source and Target.
 
@@ -251,7 +251,7 @@ Parameters
    :optional:
 
    Set the storage class for the new object(s) on the :mc-cmd:`~mc mirror TARGET`. 
-         
+
    See the Amazon documentation on :aws-docs:`Storage Classes <AmazonS3/latest/dev/storage-class-intro.html>` for more information on S3 storage classses.
 
 .. mc-cmd:: --summary
@@ -272,13 +272,13 @@ Parameters
 
    For example, object A and B exist on the watched Source.
    Objects A, B, and C exist on the watched Target.
-   
+
    A client writes object D to Source and removes object B.
 
    After the operation, objects A and D exist on the Source.
    Objects A, C, and D exist on the Target.
- 
-   
+
+
 Global Flags
 ~~~~~~~~~~~~
 
@@ -346,7 +346,7 @@ Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --exclude-storageclass` to mirror o
 
 .. code-block::
    :class: copyable
-   
+
    mc mirror --exclude-storageclass GLACIER  \
       --exclude-storageclass DEEP_ARCHIVE SRCALIAS/SRCPATH TGALIAS/TGPATH
 
