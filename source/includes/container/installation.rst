@@ -44,12 +44,10 @@ Multi-Node Multi-Drive (MNMD or "Distributed")
 .. note::
 
    This documentation provides instructions for |SNSD| and |SNMD| for supporting local development and evaluation of MinIO on a single host machine **only**. 
-   For |MNMD| deployments, use the MinIO Kubernetes Operator to deploy and manage MinIO tenants in a containerized and orchestrated environment.
+   For |MNMD| deployments, use the MinIO Kubernetes Operator to :minio-docs:`deploy and manage MinIO tenants in a containerized and orchestrated environment <minio/kubernetes/upstream/operations/installation.html>`.
 
 Site Replication
 ----------------
-
-Site replication expands the features of bucket replication to include IAM, security tokens, access keys, and bucket features the same across all sites.
 
 :ref:`Site replication <minio-site-replication-overview>` links multiple MinIO deployments together and keeps the buckets, objects, and Identity and Access Management (IAM) settings in sync across all connected sites.
 
