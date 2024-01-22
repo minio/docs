@@ -204,9 +204,20 @@ Input Formats
 
 :mc:`mc sql` supports the following input formats:
 
-- ``.csv``
-- ``.json``
-- ``.parquet``
+.. list-table:: Input Format Types
+   :header-rows: 1
+		 
+   * - Type
+     - ``content-type`` Value
+
+   * - ``.csv``
+     - ``text/csv``
+
+   * - ``.json``
+     - ``application/json``
+
+   * - ``.parquet``
+     - none
 
 For ``.csv`` file types, use :mc-cmd:`mc sql --csv-input` to specify the CSV data format.
 See :ref:`mc-sql-csv-format` for more information on CSV formatting fields.

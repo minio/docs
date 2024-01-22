@@ -453,6 +453,7 @@ Add a ``content-type`` Value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc-cmd:`mc cp --attr` to add a ``content-type`` value.
+This command only applies to S3-to-S3 copy.
 
 .. code-block:: shell
    :class: copyable
@@ -461,18 +462,14 @@ Use :mc-cmd:`mc cp --attr` to add a ``content-type`` value.
 
 - Replace ``CONTENT-TYPE`` with the desired content type (also called a `media type <https://www.iana.org/assignments/media-types/media-types.xhtml>`__).
 
-- Replace :mc-cmd:`SRCALIAS <mc cp SOURCE>` with the
-  :mc:`alias <mc alias>` of a source S3-compatible host.
+- Replace :mc-cmd:`SRCALIAS <mc cp SOURCE>` with the :mc:`alias <mc alias>` of a source S3-compatible host.
 
-- Replace :mc-cmd:`SRCPATH <mc cp SOURCE>` with the path to the
-  object on the source S3-compatible host.
+- Replace :mc-cmd:`SRCPATH <mc cp SOURCE>` with the path to the object on the source S3-compatible host.
 
-- Replace :mc-cmd:`TGTALIAS <mc cp TARGET>` with the
-  :mc:`alias <mc alias>` of a target S3-compatible host.
+- Replace :mc-cmd:`TGTALIAS <mc cp TARGET>` with the :mc:`alias <mc alias>` of a target S3-compatible host.
 
-- Replace :mc-cmd:`TGTPATH <mc cp TARGET>` with the path to the
-  object on the target S3-compatible host. Omit the object name to use
-  the ``SRCPATH`` object name.
+- Replace :mc-cmd:`TGTPATH <mc cp TARGET>` with the path to the object on the target S3-compatible host.
+  Omit the object name to use the ``SRCPATH`` object name.
 
 The following example sets a ``content-type`` of ``application/json``:
 
