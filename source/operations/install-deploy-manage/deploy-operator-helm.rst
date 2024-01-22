@@ -171,9 +171,9 @@ You can modify the Operator deployment after installation.
    .. code-block:: shell
       :class: copyable
 
-      kubectl port-forward svc/console -n minio-operator 9001:9001
+      kubectl port-forward svc/console -n minio-operator 9090:9090
 
-   You can then use ``http://localhost:9001`` to access the MinIO Operator Console.
+   You can then use ``http://localhost:9090`` to access the MinIO Operator Console.
 
    Once you access the Console, use the Console JWT to log in.
 
