@@ -215,6 +215,12 @@ For ``.json`` file types, use :mc-cmd:`mc sql --json-input` to specify the JSON 
 
 For ``.parquet`` file types, :mc:`mc sql` automatically interprets the data format.
 
+:mc:`mc sql` determines the type by the file extension of the target object.
+For example, an object named ``data.json`` is interpreted as a JSON file.
+
+You can query data of a supported type but a different extension if the object has the appropriate ``content-type``.
+For more information, see :mc-cmd:`mc cp --attr`.
+
 .. _mc-sql-csv-format:
 
 CSV Formatting Fields
