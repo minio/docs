@@ -163,7 +163,7 @@ Parameters
 
    Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc cp --encrypt` in double-quotes ``"``.
 
-   :mc-cmd:`~mc cp --encrypt` can use the ``MC_ENCRYPT`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
+   :mc-cmd:`~mc cp --encrypt` can use the :envvar:`MC_ENCRYPT` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --encrypt-key
    :optional:
@@ -178,7 +178,7 @@ Parameters
    Enclose the entire list of key-value pairs passed to 
    :mc-cmd:`~mc cp --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd:`~mc cp --encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc cp --encrypt-key` can use the :envvar:`MC_ENCRYPT_KEY`
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
@@ -448,6 +448,35 @@ command only applies to S3-to-S3 copy.
 .. include:: /includes/facts-versioning.rst
    :start-after: start-versioning-admonition
    :end-before: end-versioning-admonition
+
+Add a ``content-type`` Value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc cp --attr` to add a ``content-type`` value.
+This command only applies to S3-to-S3 copy.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc cp --attr="content-type=CONTENT-TYPE" SRCALIAS/SRCPATH TGTALIAS/TGTPATH
+
+- Replace ``CONTENT-TYPE`` with the desired content type (also called a `media type <https://www.iana.org/assignments/media-types/media-types.xhtml>`__).
+
+- Replace :mc-cmd:`SRCALIAS <mc cp SOURCE>` with the :mc:`alias <mc alias>` of a source S3-compatible host.
+
+- Replace :mc-cmd:`SRCPATH <mc cp SOURCE>` with the path to the object on the source S3-compatible host.
+
+- Replace :mc-cmd:`TGTALIAS <mc cp TARGET>` with the :mc:`alias <mc alias>` of a target S3-compatible host.
+
+- Replace :mc-cmd:`TGTPATH <mc cp TARGET>` with the path to the object on the target S3-compatible host.
+  Omit the object name to use the ``SRCPATH`` object name.
+
+The following example sets a ``content-type`` of ``application/json``:
+
+.. code-block::
+   :class: copyable
+
+    mc cp data.ndjson --attr="content-type=application/json" myminio/mybucket                              
 
 
 Behavior

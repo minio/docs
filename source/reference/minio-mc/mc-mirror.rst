@@ -21,7 +21,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
 .. end-mc-mirror-desc
 
 .. note::
-   
+
    :mc:`mc mirror` only synchronizes the current object without any version information or metadata.
    To synchronize an object's version history and metadata, consider using :mc:`mc replicate` for :ref:`bucket replication <minio-bucket-replication-serverside>` or :mc:`mc admin replicate` for :ref:`site replication <minio-site-replication-overview>`.
 
@@ -38,7 +38,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
          mc mirror --watch ~/mydata myminio/mydata
 
       The command "watches" for files added or removed on the local filesystem and synchronizes those operations to MinIO until explicitly terminated. 
-      
+
       :mc-cmd:`mc mirror --watch` updates files changed on the local filesystem to MinIO (see :mc-cmd:`~mc mirror --overwrite`).
       ``--watch`` does not remove other files from MinIO not present on the local filesystem (see :mc-cmd:`~mc mirror --remove`).
 
@@ -67,7 +67,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
                           [--remove]                        \
                           [--storage-class "string"]        \
                           [--watch]                         \
-                          SOURCE                            \ 
+                          SOURCE                            \
                           TARGET
 
       .. include:: /includes/common-minio-mc.rst
@@ -78,8 +78,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: SOURCE
+   :required:
 
-   *REQUIRED* The file(s) or object(s) to synchronize to the :mc-cmd:`~mc mirror TARGET` S3 host.
+   The file(s) or object(s) to synchronize to the :mc-cmd:`~mc mirror TARGET` S3 host.
 
    For objects on S3-compatible hosts, specify the path to the object as ``ALIAS/PATH``, where:
 
@@ -100,8 +101,9 @@ Parameters
    If specifying a directory, :mc:`mc mirror` synchronizes all files in the directory.
 
 .. mc-cmd:: TARGET
+   :required:
 
-   *REQUIRED* The full path to bucket to which :mc:`mc mirror` synchronizes SOURCE objects. Specify the ``TARGET`` as ``ALIAS/PATH``, where:
+   The full path to bucket to which :mc:`mc mirror` synchronizes SOURCE objects. Specify the ``TARGET`` as ``ALIAS/PATH``, where:
 
    - ``ALIAS`` is the :mc:`alias <mc alias>` of a configured S3-compatible host, *and*
 
@@ -114,23 +116,29 @@ Parameters
    :mc:`mc mirror` uses the object or file names from the :mc-cmd:`~mc mirror SOURCE` when synchronizing to the ``TARGET`` bucket.
 
 .. mc-cmd:: --attr
-   
+   :optional:
 
    Add custom metadata for mirrored objects. Specify key-value pairs as ``KEY=VALUE\;``. 
    For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
 
 .. mc-cmd:: --disable-multipart
-   
+   :optional:
 
    Disables multipart upload for the synchronization session.
 
+.. mc-cmd:: --dry-run
+   :optional:
+
+   Perform a mock mirror operation.
+   Use this operation to test that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
+
 .. mc-cmd:: --encrypt-key
-   
+   :optional:
 
    Encrypt or decrypt objects using server-side encryption with client-specified keys. 
    Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
+
+   - Each ``KEY`` represents a bucket or object.
    - Each ``VALUE`` represents the data key to use for encrypting object(s).
 
    Enclose the entire list of key-value pairs passed to :mc-cmd:``~mc mirror --encrypt-key`` in double quotes ``"``.
@@ -140,23 +148,17 @@ Parameters
    You can only delete encrypted objects if you specify the correct :mc-cmd:`~mc mirror --encrypt-key` secret key.
 
 .. mc-cmd:: --exclude
-   
+   :optional:
 
    Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified object name pattern.
 
 .. mc-cmd:: --exclude-storageclass
-   
+   :optional:
 
    Exclude object(s) on the :mc-cmd:`~mc mirror SOURCE` that have the specified storage class.
    You can use this flag multiple times in a command to exclude objects from more than one storage class.
 
    Use this to exclude objects with storage classes that require rehydration or restoration of objects, such as migrating from an AWS S3 bucket where some objects have the ``GLACIER`` or ``DEEP_ARCHIVE`` storage classes.
-
-.. mc-cmd:: --dry-run
-   
-
-   Perform a mock mirror operation. 
-   Use this operation to test that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
 
 .. --limit-download and --limit-upload included here
 
@@ -165,36 +167,36 @@ Parameters
    :end-before: end-mc-limit-flags-desc
 
 .. mc-cmd:: --md5
-   
+   :optional:
 
-   Forces all uploads to calculate MD5 checksums. 
+   Forces all uploads to calculate MD5 checksums.
 
 .. mc-cmd:: --monitoring-address
-   
+   :optional:
 
    Creates a `Prometheus <https://prometheus.io/>`__ endpoint for monitoring mirroring activity. 
    Specify the local network adapter and port address on which to create the scraping endpoint. 
    Defaults to ``localhost:8081``).
 
 .. mc-cmd:: --newer-than
-   
+   :optional:
 
-   Mirror object(s) newer than the specified number of days.  
-   Specify a string in ``#d#hh#mm#ss`` format. 
+   Mirror object(s) newer than the specified number of days.
+   Specify a string in ``#d#hh#mm#ss`` format
    For example: ``--newer-than 1d2hh3mm4ss``.
 
 .. mc-cmd:: --older-than
-   
+   :optional:
 
-   Mirror object(s) older than the specified time limit. 
-   Specify a string in ``#d#hh#mm#ss`` format. 
+   Mirror object(s) older than the specified time limit.
+   Specify a string in ``#d#hh#mm#ss`` format.
    For example: ``--older-than 1d2hh3mm4ss``.
-      
+
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --overwrite
-   
-   
+   :optional:
+
    Overwrites object(s) on the :mc-cmd:`~mc mirror TARGET`.
 
    For example, consider an active ``mc mirror --overwrite`` synchronizing content from Source to Destination.
@@ -205,21 +207,21 @@ Parameters
    ``mc mirror`` logs an error and continues to synchronize other objects.
 
 .. mc-cmd:: --preserve, a
-   
+   :optional:
 
    Preserve file system attributes and bucket policy rules of the :mc-cmd:`~mc mirror SOURCE` on the :mc-cmd:`~mc mirror TARGET`.
 
 .. mc-cmd:: --region
-   
+   :optional:
 
-   Specify the ``string`` region when creating new bucket(s) on the target. 
+   Specify the ``string`` region when creating new bucket(s) on the target.
 
    Defaults to ``"us-east-1"``.
 
 .. mc-cmd:: --remove
-   
+   :optional:
 
-   Removes object(s) on the Target that do not exist on the Source. 
+   Removes object(s) on the Target that do not exist on the Source.
 
    Use the ``--remove`` flag to have the same list of objects on both Source and Target.
 
@@ -241,18 +243,24 @@ Parameters
       In prior versions, specifying ``/path/to/directory`` would result in the removal of the ``/path/to`` folder if ``directory`` did not exist.
 
 .. mc-cmd:: --retry
+   :optional:
 
    In case of errors during mirror process, retry on each errored object.
 
-.. mc-cmd:: storage-class, sc
-   
+.. mc-cmd:: --storage-class, sc
+   :optional:
 
    Set the storage class for the new object(s) on the :mc-cmd:`~mc mirror TARGET`. 
-         
+
    See the Amazon documentation on :aws-docs:`Storage Classes <AmazonS3/latest/dev/storage-class-intro.html>` for more information on S3 storage classses.
 
+.. mc-cmd:: --summary
+   :optional:
+
+   On completion, output a summary of the data that was synchronized.
+
 .. mc-cmd:: --watch, w
-   
+   :optional:
 
    Use ``--watch`` flag to mirror objects from Source to Target, where the Target may also have additional objects not present on the Source.
 
@@ -264,13 +272,13 @@ Parameters
 
    For example, object A and B exist on the watched Source.
    Objects A, B, and C exist on the watched Target.
-   
+
    A client writes object D to Source and removes object B.
 
    After the operation, objects A and D exist on the Source.
    Objects A, C, and D exist on the Target.
- 
-   
+
+
 Global Flags
 ~~~~~~~~~~~~
 
@@ -338,7 +346,7 @@ Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --exclude-storageclass` to mirror o
 
 .. code-block::
    :class: copyable
-   
+
    mc mirror --exclude-storageclass GLACIER  \
       --exclude-storageclass DEEP_ARCHIVE SRCALIAS/SRCPATH TGALIAS/TGPATH
 
