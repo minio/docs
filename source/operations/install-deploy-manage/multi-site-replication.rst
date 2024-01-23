@@ -26,6 +26,10 @@ Deployments using an external IDP must use the same configuration across sites.
 
 For more information on site replication architecture and deployment concepts, see :ref:`Deployment Architecture: Replicated MinIO Deployments <minio-deployment-architecture-replicated>`.
 
+.. cond:: macos or windows or container
+
+   MinIO does not recommend using |platform| hosts for site replication outside of early development, evaluation, or general experimentation.
+   For production, use :minio-docs:`Linux <minio/linux/operations/install-deploy-manage/multi-site-replication.html>` or :minio-docs:`Kubernetes <minio/kubernetes/upstream/operations/install-deploy-manage/multi-site-replication.html>`
 
 Overview
 --------

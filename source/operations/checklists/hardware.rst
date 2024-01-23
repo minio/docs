@@ -202,41 +202,62 @@ Storage
 
 .. cond:: not k8s
 
-   MinIO recommends selecting the type of drive based on your performance objectives.
-   The following table highlights the general use case for each drive type based on cost and performance:
+   MinIO recommends using flash-based storage (NVMe or SSD) for all workload types and scales.
+   Workloads that require high performance should prefer NVMe over SSD.
 
-   .. list-table::
-      :header-rows: 1
-      :widths: auto
-      :width: 100%
+   MinIO deployments using HDD-based storage are best suited as cold-tier targets for :ref:`Object Transition ("Tiering") <minio-lifecycle-management-tiering>` of aged data.
+   HDD storage typically does not provide the necessary performance to meet the expectations of modern workloads, and any cost efficiencies at scale are offset by the performance constraints of the medium. 
 
-      * - Type
-        - Cost
-        - Performance
-        - Tier
-
-      * - NVMe
-        - High
-        - High
-        - Hot
-
-      * - SSD
-        - Balanced
-        - Balanced
-        - Hot/Warm
-
-      * - HDD
-        - Low
-        - Low
-        - Cold/Archival
+   Format Drives as XFS
+   ++++++++++++++++++++
 
    Format drives as XFS and present them to MinIO as a :abbr:`JBOD (Just a Bunch of Disks)` array with no RAID or other pooling configurations.
 
-   Ensure a consistent drive type (NVMe, SSD, HDD) for the underyling storage. 
-   MinIO does not distinguish between storage types.
-   Mixing storage types provides no benefit to MinIO.
+   MinIO **strongly recommends** disabling `retry-on-error <https://docs.kernel.org/admin-guide/xfs.html?highlight=xfs#error-handling>`__ behavior using the ``max_retries`` configuration for the following error classes:
+   
+   - ``EIO`` Error when reading or writing
+   - ``ENOSPC`` Error no space left on device
+   - ``default`` All other errors
 
-   Use the same capacity of drive across all nodes in each MinIO :ref:`server pool <minio-intro-server-pool>`. 
+   The default ``max_retries`` setting typically directs the filesystem to retry-on-error indefinitely instead of propagating the error.
+   MinIO can handle XFS errors appropriately, such that the retry-on-error behavior introduces at most unnecessary latency or performance degradation. 
+
+   The following script iterates through all drives at the specified mount path and sets the XFS ``max_retries`` setting to ``0`` or "fail immediately on error" for the recommended error classes.
+   The script ignores any drives not mounted, either manually or through ``/etc/fstab``.
+   Modify the ``/mnt/drive`` line to match the pattern used for your MinIO drives.
+
+   .. code-block:: bash
+      :class: copyable
+
+      #!/bin/bash
+
+      for i in $(df -h | grep /mnt/drive | awk '{ print $1 }'); do
+            mountPath="$(df -h | grep $i | awk '{ print $6 }')"
+            deviceName="$(basename $i)"
+            echo "Modifying xfs max_retries and retry_timeout_seconds for drive $i mounted at $mountPath"
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/EIO/max_retries
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/max_retries
+            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/default/max_retries
+      done
+      exit 0
+
+   You must run this script on all MinIO nodes and configure the script to re-run on reboot, as Linux Operating Systems do not typically persist these changes.
+   You can use a ``cron`` job with the ``@reboot`` timing to run the above script whenever the node restarts and ensure all drives have retry-on-error disabled.
+   Use ``crontab -e`` to create the following job, modifying the script path to match that on each node:
+
+   .. code-block:: shell
+      :class: copyable
+
+      @reboot /opt/minio/xfs-retry-settings.sh
+
+   Use Consistent Drive Type and Capacity
+   ++++++++++++++++++++++++++++++++++++++
+
+   Ensure a consistent drive type (NVMe, SSD, HDD) for the underlying storage in a MinIO deployment.
+   MinIO does not distinguish between storage types and does not support configuring "hot" or "warm" drives within a single deployment.
+   Mixing drive types typically results in performance degradation, as the slowest drives in the deployment become a bottleneck regardless of the capabilities of the faster drives.
+
+   Use the same capacity and type of drive across all nodes in each MinIO :ref:`server pool <minio-intro-server-pool>`. 
    MinIO limits the maximum usable size per drive to the smallest size in the deployment.
    For example, if a deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
 
