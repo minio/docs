@@ -58,7 +58,7 @@ similar results to the ``cp`` commandline tool.
                           [--attr "string"]                                         \
                           [--continue]                                              \
                           [--disable-multipart]                                     \
-                          [--encrytp "string"]                                      \
+                          [--encrypt "string"]                                      \
                           [--encrypt-key]                                           \
                           [--legal-hold "on"]                                       \
                           [--limit-download string]                                 \
