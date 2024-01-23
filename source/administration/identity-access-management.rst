@@ -50,6 +50,9 @@ MinIO supports both internal and external identity management:
        <minio-external-identity-management-ad-ldap>` 
      - Supports managing identities through an Active Directory or LDAP service.
 
+   * - :ref:`Access Management Plugin <minio-external-access-management-plugin>`
+     - Supports a custom external access manager using the MinIO Access Management Plugin extension.
+
 Once authenticated, MinIO either allows or rejects the client request depending
 on whether or not the authenticated identity is *authorized* to perform the
 operation on the specified resource.
@@ -143,3 +146,4 @@ JSON syntax.
    /administration/identity-access-management/ad-ldap-access-management
    /administration/identity-access-management/pluggable-authentication.rst
    /administration/identity-access-management/policy-based-access-control
+   /administration/identity-access-management/pluggable-authorization.rst
