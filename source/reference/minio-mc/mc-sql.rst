@@ -130,7 +130,7 @@ Parameters
 
    - For ``VALUE``, specify the data key to use for encryption object(s) in the bucket or bucket prefix specified to ``KEY``.
 
-   :mc-cmd:`~mc sql --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for populating the list of encryption key-value pairs as an alternative to specifying them on the command line.
+   :mc-cmd:`~mc sql --encrypt-key` can use the :envvar:`MC_ENCRYPT_KEY` environment variable for populating the list of encryption key-value pairs as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --json-input
    :optional:

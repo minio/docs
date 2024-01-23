@@ -58,7 +58,7 @@ similar results to the ``cp`` commandline tool.
                           [--attr "string"]                                         \
                           [--continue]                                              \
                           [--disable-multipart]                                     \
-                          [--encrypt "string"]                                      \
+                          [--encrytp "string"]                                      \
                           [--encrypt-key]                                           \
                           [--legal-hold "on"]                                       \
                           [--limit-download string]                                 \
@@ -163,7 +163,7 @@ Parameters
 
    Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc cp --encrypt` in double-quotes ``"``.
 
-   :mc-cmd:`~mc cp --encrypt` can use the ``MC_ENCRYPT`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
+   :mc-cmd:`~mc cp --encrypt` can use the :envvar:`MC_ENCRYPT` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --encrypt-key
    :optional:
@@ -178,7 +178,7 @@ Parameters
    Enclose the entire list of key-value pairs passed to 
    :mc-cmd:`~mc cp --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd:`~mc cp --encrypt-key` can use the ``MC_ENCRYPT_KEY``
+   :mc-cmd:`~mc cp --encrypt-key` can use the :envvar:`MC_ENCRYPT_KEY`
    environment variable for retrieving a list of encryption key-value pairs
    as an alternative to specifying them on the command line.
 
