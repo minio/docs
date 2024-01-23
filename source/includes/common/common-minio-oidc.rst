@@ -81,7 +81,7 @@ Each variable corresponds to a claim returned as part of the authenticated user'
 See the `OpenID Connect Core 1.0 <https://openid.net/specs/openid-connect-core-1_0.html>`__ document for more information on these scopes.
 Your OIDC provider of choice may have more specific documentation.
 
-For example, the following policy uses variables to substitute the authenticated user's ``PreferredUsername`` as part of the ``Resource`` field such that the user can only access those prefixes which match their username:
+For example, the following policy uses variables to substitute the authenticated user's ``preferred_username`` as part of the ``Resource`` field such that the user can only access those prefixes which match their username:
 
 .. code-block:: json
 
@@ -92,7 +92,7 @@ For example, the following policy uses variables to substitute the authenticated
             "Action": ["s3:ListBucket"],
             "Effect": "Allow",
             "Resource": ["arn:aws:s3:::mybucket"],
-            "Condition": {"StringLike": {"s3:prefix": ["${jwt:PreferredUsername}/*"]}}
+            "Condition": {"StringLike": {"s3:prefix": ["${jwt:preferred_username}/*"]}}
          },
          {
             "Action": [
@@ -100,12 +100,12 @@ For example, the following policy uses variables to substitute the authenticated
             "s3:PutObject"
             ],
             "Effect": "Allow",
-            "Resource": ["arn:aws:s3:::mybucket/${jwt:PreferredUsername}/*"]
+            "Resource": ["arn:aws:s3:::mybucket/${jwt:preferred_username}/*"]
          }
       ]
    }
 
-MinIO replaces the ``${jwt:PreferredUsername}`` variable in the ``Resource`` field with the value of the ``PreferredUsername`` in the JWT token.
+MinIO replaces the ``${jwt:preferred_username}`` variable in the ``Resource`` field with the value of the ``preferred_username`` in the JWT token.
 MinIO then evaluates the policy and grants or revokes access to the requested API and resource.
 
 .. end-minio-oidc-policy-variables
