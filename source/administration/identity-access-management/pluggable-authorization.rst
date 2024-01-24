@@ -66,20 +66,15 @@ The login flow for an application is as follows:
 
 3. MinIO makes a POST call to the configured access management plugin URL which includes the context of the API call and authentication data
 
-4. On successful authorization, the access manager returns a ``200 OK`` response with a JSON body that matches either  of the following:
+4. On successful authorization, the access manager returns a ``200 OK`` response with a JSON body of either ``result true`` or ``"result" : { "allow" : true }``:
 
-   .. code-block:: json
-
-      { "result" : true }
-
-      { "result" : { "allow" : true } }
 
 If the access manager rejects the authorization request, MinIO automatically blocks and denies the API call.
 
 Request Body Example
 --------------------
 
-The following JSON resembles the request body sent as part of the POST to the configured access manager webook.
+The following JSON resembles the request body sent as part of the POST to the configured access manager webhook.
 
 .. code-block:: json
 

@@ -432,6 +432,6 @@ Defaults to off
 
 .. start-minio-access-management-plugin-comment
 
-Specify a comment to associate to the externalaccess management configuration.
+Specify a comment to associate to the external access management configuration.
 
 .. end-minio-access-management-plugin-comment

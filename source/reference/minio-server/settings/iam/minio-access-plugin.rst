@@ -35,7 +35,7 @@ The examples here represent the minimum required setting.
 
       Use the :mc:`mc admin config set` command to create or update the access management plugin configuration.
       The ``policy_plugin url`` argument is required.
-      Specify additional optional arguments as a whitespace (" " )-delimited list.
+      Specify additional optional arguments as a whitespace (" ")-delimited list.
       
 
       .. code-block:: shell
