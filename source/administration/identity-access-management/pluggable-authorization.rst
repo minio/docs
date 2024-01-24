@@ -14,9 +14,9 @@ MinIO External Access Management Plugin
 Overview
 --------
 
-The MinIO Access Management Plugin provides a REST interface for offloading authorization through a webhook service.
+The MinIO Access Management Plugin provides a ``REST`` interface for offloading authorization through a webhook service.
 
-Once enabled, MinIO sends the request and credential details for every API call to the configured external HTTP(S) endpoint and looks for a response of ALLOW or DENY.
+Once enabled, MinIO sends the request and credential details for every API call to the configured external HTTP(S) endpoint and looks for a response of ``ALLOW`` or ``DENY``.
 MinIO can therefore delegate the access management to the external system instead of relying on S3 :ref:`policy based access control <minio-policy>`.
 
 Configuration Settings
@@ -64,10 +64,9 @@ The login flow for an application is as follows:
 
 2. The configured Identity Manager authenticates the client
 
-3. MinIO makes a POST call to the configured access management plugin URL which includes the context of the API call and authentication data
+3. MinIO makes a ``POST`` call to the configured access management plugin URL which includes the context of the API call and authentication data
 
 4. On successful authorization, the access manager returns a ``200 OK`` response with a JSON body of either ``result true`` or ``"result" : { "allow" : true }``:
-
 
 If the access manager rejects the authorization request, MinIO automatically blocks and denies the API call.
 
