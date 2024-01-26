@@ -74,7 +74,7 @@ the MinIO Console:
        configuring Prometheus to collect metrics from MinIO.
 
    * - :envvar:`MINIO_SERVER_URL`
-     - The `fully qualified domain name <https://en.wikipedia.org/wiki/Fully_qualified_domain_name/>`__ (FQDN) the MinIO Console uses for connecting to the MinIO Server. 
+     - The `fully qualified domain name <https://en.wikipedia.org/wiki/Fully_qualified_domain_name>`__ (FQDN) the MinIO Console uses for connecting to the MinIO Server. 
        For the Console to function correctly, the MinIO server URL *must* be the FQDN of the host, resolveable, and reachable.
 
        The MinIO Console connects to the MinIO Server using an IP 
