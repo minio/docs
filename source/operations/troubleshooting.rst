@@ -88,7 +88,7 @@ You can restart through the Console by selecting :guilabel:`Restart` in the top 
 
          You can install a version of the MinIO Client that is more recent than the MinIO Server version. 
          However, if the MinIO Client version skews too far from the MinIO Server version, you may see increased warnings or errors as a result of the differences.
-         For example, while core S3 APIs around copying (:mc`mc cp`) may remain unchanged, some features or flags may only be available or stable if the client and server versions are aligned.
+         For example, while core S3 APIs around copying (:mc:`mc cp`) may remain unchanged, some features or flags may only be available or stable if the client and server versions are aligned.
 
          If you are unable to upgrade the MinIO Client to the required or later version, register using the Console instead.
 
