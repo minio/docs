@@ -44,6 +44,20 @@ See :ref:`minio-mc-commands` for a list of supported commands.
    is the best option for applications which trigger AGPLv3 obligations where
    open-sourcing the application is not an option.   
 
+.. _mc-client-versioning:
+
+Version Alignment with MinIO Server
+-----------------------------------
+
+The MinIO Client releases separately from the MinIO Server.
+
+For best functionality and compatibility, use a MinIO Client version released closely to your MinIO Server version. 
+For example, a MinIO Client released the same day or later than your MinIO Server version.
+
+You can install a version of the MinIO Client that is more recent than the MinIO Server version. 
+However, if the MinIO Client version skews too far from the MinIO Server version, you may see increased warnings or errors as a result of the differences.
+For example, while core S3 APIs around copying (:mc:`mc cp`) may remain unchanged, some features or flags may only be available or stable if the client and server versions are aligned.
+
 .. _mc-install:
 
 Quickstart

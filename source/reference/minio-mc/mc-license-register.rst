@@ -11,32 +11,12 @@
 .. mc:: mc support register
 .. mc:: mc license register
 
-Command History
----------------
+.. important:: 
 
-The command used to register a deployment with SUBNET has changed over time.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 40 30 30
-   :width: 100%
-
-   * - MinIO Client Release
-     - Command
-     - Notes
-
-   * - RELEASE.2021-11-05T10-05-06Z
-     - ``mc admin subnet register``
-     - First available
-
-   * - RELEASE.2022-02-13T23-26-13Z 
-     - ``mc support register``
-     - Command moved to an ``mc support`` function
-
-   * - RELEASE.2022-07-15T09-20-55Z
-     - ``mc license register``
-     - Command moved to an ``mc license`` function
-
+   ``mc license register`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or later.
+   While not strictly required, best practice keeps the :ref:`MinIO Client version <mc-client-versioning>` in alignment with the MinIO Server version.
+   
+   If for any reason you cannot upgrade your MinIO Client to the required version or later for the purpose of registering to SUBNET, register using the :ref:`MinIO Console <minio-docs-subnet>` instead.
 
 Description
 -----------
