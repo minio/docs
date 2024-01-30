@@ -82,7 +82,7 @@ You can restart through the Console by selecting :guilabel:`Restart` in the top 
       .. important:: 
       
          ``mc license register`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or later and MinIO Server ``RELEASE.2023-11-20T22-40-07Z`` or later.
-         Use the MinIO Client released at the close to the same time (for example, released on the same day) or after the version of MinIO Server you are using.
+         Use a MinIO Client version no older than your MinIO Server. For example, a MinIO Client released the same day or later than your MinIO Server version.
 
          If you are unable to upgrade the MinIO Client to the required or later version, register using the Console instead.
 
