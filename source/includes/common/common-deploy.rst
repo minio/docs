@@ -21,6 +21,10 @@ The following example provides a starting environment file:
 
    MINIO_VOLUMES="/mnt/data"
 
+   # MINIO_OPTS sets any additional commandline options to pass to the MinIO server.
+   # For example, `--console-address :9001` sets the MinIO Console listen port
+   MINIO_OPTS="--console-address :9001"
+
    # MINIO_SERVER_URL sets the hostname of the local machine for use with the MinIO Server
    # MinIO assumes your network control plane can correctly resolve this hostname to the local machine
 
@@ -56,6 +60,10 @@ The following example provides a starting environment file:
    # All drives or paths included in the expanded drive list must exist *and* be empty or freshly formatted for MinIO to start successfully.
 
    MINIO_VOLUMES="/data-{1...4}"
+
+   # MINIO_OPTS sets any additional commandline options to pass to the MinIO server.
+   # For example, `--console-address :9001` sets the MinIO Console listen port
+   MINIO_OPTS="--console-address :9001"
 
    # MINIO_SERVER_URL sets the hostname of the local machine for use with the MinIO Server.
    # MinIO assumes your network control plane can correctly resolve this hostname to the local machine.
