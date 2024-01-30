@@ -46,8 +46,8 @@ See :ref:`minio-mc-commands` for a list of supported commands.
 
 .. _mc-client-versioning:
 
-Version
--------
+Version Alignment with MinIO Server
+-----------------------------------
 
 The MinIO Client releases separately from the MinIO Server.
 
