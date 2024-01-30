@@ -44,6 +44,8 @@ See :ref:`minio-mc-commands` for a list of supported commands.
    is the best option for applications which trigger AGPLv3 obligations where
    open-sourcing the application is not an option.   
 
+.. _mc-client-versioning:
+
 Version
 -------
 
