@@ -407,3 +407,31 @@ Specify a comment to associate to the identity configuration.
 
 .. end-minio-identity-management-comment
 
+.. start-minio-access-management-plugin-url
+
+The webhook endpoint for the external access management service (``https://authzservice.example.net:8080/authz``).
+
+.. end-minio-access-management-plugin-url
+
+.. start-minio-access-management-plugin-auth-token
+
+An authentication token to present to the configured webhook endpoint.
+
+Specify a supported HTTP `Authentication scheme <https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes>`__ as a string value, such as ``"Bearer TOKEN"``.
+MinIO sends the token using the HTTP `Authorization <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization>`__ header.
+
+.. end-minio-access-management-plugin-auth-token
+
+.. start-minio-access-management-plugin-enable-http2
+
+Enable experimental HTTP2 support for connecting to the configure webhook service. 
+
+Defaults to off
+
+.. end-minio-access-management-plugin-enable-http2
+
+.. start-minio-access-management-plugin-comment
+
+Specify a comment to associate to the external access management configuration.
+
+.. end-minio-access-management-plugin-comment

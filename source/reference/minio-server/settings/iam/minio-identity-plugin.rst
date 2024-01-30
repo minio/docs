@@ -34,7 +34,7 @@ The examples here represent the minimum required settings.
 
       .. mc-conf:: identity_plugin
 
-      Use :mc:`mc admin config set` to create or update the OpenID configuration. 
+      Use :mc:`mc admin config set` to create or update the identity plugin configuration. 
       The ``identity_plugin url`` argument is required. 
       Specify additional optional arguments as a whitespace (" ")-delimited list.
 
