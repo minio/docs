@@ -12,10 +12,16 @@
 
 .. important:: 
 
-   ``mc license register`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or later and MinIO Server ``RELEASE.2023-11-20T22-40-07Z`` or later.
-   Use a MinIO Client version no older than your MinIO Server. For example, a MinIO Client released the same day or later than your MinIO Server version.
+   ``mc license register`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z``.
 
-   If for any reason you cannot upgrade your MinIO Client to the required version or later, register using the :ref:`MinIO Console <minio-docs-subnet>` instead.
+   For best functionality and compatibility, use a MinIO Client version released closely to your MinIO Server version. 
+   For example, a MinIO Client released the same day or later than your MinIO Server version.
+
+   You can install a version of the MinIO Client that is more recent than the MinIO Server version. 
+   However, if the MinIO Client version skews too far from the MinIO Server version, you may see increased warnings or errors as a result of the differences.
+   For example, while core S3 APIs around copying (:mc`mc cp`) may remain unchanged, some features or flags may only be available or stable if the client and server versions are aligned.
+
+   If for any reason you cannot upgrade your MinIO Client to the required version or later for the purpose of registering to SUBNET, register using the :ref:`MinIO Console <minio-docs-subnet>` instead.
 
 Description
 -----------
