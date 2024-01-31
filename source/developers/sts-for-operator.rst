@@ -29,7 +29,9 @@ Benefits of STS for MinIO Operator include:
 
 .. important:: 
 
-   MinIO Operator launches with STS *disabled* by default.
+   Starting with Operator v5.0.11, STS is *enabled* by default.
+
+   Previous versions of the Operator start with STS *disabled* by default.
    To use STS with the Operator, you must first explicitly enable it.
 
    The procedure on this page includes instructions to enable the STS API in the MinIO Operator.
@@ -68,12 +70,16 @@ STS for the MinIO Operator requires the following:
 
 - MinIO Operator v5.0.0 or later.
 - The deployment **must** have :ref:`TLS configured <minio-tls>`.
-- :envvar:`OPERATOR_STS_ENABLED` environment variable set to ``on``.
+- (Required for Operator v5.0.0 - 5.0.10) :envvar:`OPERATOR_STS_ENABLED` environment variable set to ``on``.
 
 Procedure
 ---------
 
 1. Enable STS functionality for the deployment
+
+   .. note::
+
+      This step is optional starting with Operator 5.0.11 and later.
    
    .. code-block:: shell
       :class: copyable

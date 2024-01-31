@@ -594,7 +594,7 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
 
 .. _create-tenant-encryption-section:
 
-1) The :guilabel:`Encryption` Section
+8) The :guilabel:`Encryption` Section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption (SSE) <minio-sse>` settings for the MinIO Tenant. 

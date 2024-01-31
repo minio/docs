@@ -43,14 +43,16 @@ Syntax
                                     
    .. tab-item:: EXAMPLE
 
-      The following example creates a MinIO Tenant in the namespace ``minio-tenant-1`` consisting of 4 MinIO servers with 8 drives each and a total capacity of 32Ti.
+      The following example deletes a MinIO Tenant in the namespace ``minio-tenant-1``.
+      It keeps the namespace intact after deleting the tenant.
 
       .. code-block:: shell
          :class: copyable
 
-         kubectl minio tenant delete                       \
+         kubectl minio tenant delete                        \
                                 minio-tenant-1              \
-                                --namespace minio-tenant-1
+                                --namespace minio-tenant-1  \
+                                --retain-namespace
 
    .. tab-item:: SYNTAX
 
@@ -58,10 +60,11 @@ Syntax
 
       .. code-block:: shell
 
-         kubectl minio tenant delete        \
-                                TENANT_NAME \
-                                --force     \
-                                --namespace
+         kubectl minio tenant delete                 \
+                                TENANT_NAME          \
+                                --force              \
+                                --namespace          \
+                                [--retain-namespace] \
 
 
 Flags
@@ -83,3 +86,14 @@ The command supports the following flags:
    :required:
 
    The namespace scope to access.
+
+.. mc-cmd:: --retain-namespace
+   :optional:
+
+   Keeps the namespace after deleting the tenant.
+
+   Omit to delete the namespace after deleting the tenant.
+
+   .. warning::
+
+      Deleting a namespace deletes all resources associated to that namespace.

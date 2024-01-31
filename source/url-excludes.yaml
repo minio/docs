@@ -26,6 +26,7 @@ excludes:
 - 'reference/kubectl-minio-plugin/kubectl-minio-version.rst'
 - 'reference/operator-crd.rst'
 - 'reference/operator-chart-values.rst'
+- 'reference/operator-environment-variables.rst'
 ---
 tag: macos
 excludes:
@@ -48,6 +49,7 @@ excludes:
 - 'reference/deprecated/*'
 - 'reference/operator-crd.rst'
 - 'reference/operator-chart-values.rst'
+- 'reference/operator-environment-variables.rst'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -77,6 +79,7 @@ excludes:
 - 'reference/deprecated/*'
 - 'reference/operator-crd.rst'
 - 'reference/operator-chart-values.rst'
+- 'reference/operator-environment-variables.rst'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -102,6 +105,7 @@ excludes:
 - 'reference/deprecated/*'
 - 'reference/operator-crd.rst'
 - 'reference/operator-chart-values.rst'
+- 'reference/operator-environment-variables.rst'
 - 'developers/*'
 - 'integrations/*'
 ---
