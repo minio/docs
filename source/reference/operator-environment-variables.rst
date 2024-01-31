@@ -77,7 +77,7 @@ Available MinIO Operator Environment Variables
 
       When not specified, the default value is ``on``.
 
-   Prior to Operator 5.0.11, the default value is ``off``.
+   For versions prior to Operator 5.0.11, the default value was ``off``.
 
 .. envvar:: MINIO_CONSOLE_DEPLOYMENT_NAME
 

@@ -32,7 +32,7 @@ Benefits of STS for MinIO Operator include:
    Starting with Operator v5.0.11, STS is *enabled* by default.
 
    Previous versions of the Operator start with STS *disabled* by default.
-   To use STS with the Operator, you must first explicitly enable it.
+   To use STS with v5.0.10 or older versions of the Operator, you must first explicitly enable it.
 
    The procedure on this page includes instructions to enable the STS API in the MinIO Operator.
 
@@ -79,7 +79,7 @@ Procedure
 
    .. note::
 
-      This step is optional starting with Operator 5.0.11 and later.
+      This step is optional for Operator version 5.0.11 or later.
    
    .. code-block:: shell
       :class: copyable
