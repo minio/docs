@@ -25,7 +25,7 @@ Replace:
 
 - ``minio-operator`` with the namespace for your Operator, if not using the default value.
 - ``deployment/minio-operator`` with the deployment for your Operator, if not the default value.
-  (This is not common.)
+  (Most deployments use the default value.)
 - ``<ENV_VARIABLE>`` with the environment variable to set or modify.
 - ``<value>`` with the value to use for the environment variable.
 
