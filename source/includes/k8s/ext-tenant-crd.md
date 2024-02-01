@@ -140,15 +140,6 @@ certificates manually added to the Operator.</p></td>
 </tbody>
 </table>
 
-## CustomCertificateConfig
-
-CustomCertificateConfig (`customCertificateConfig`) provides attributes
-associated of the TLS certificates manually added to the Operator as
-part of tenant creation. These fields contain no data if there are no
-custom TLS certificates.
-
--   [CustomCertificates](#customcertificates)
-
 ## CustomCertificates
 
 CustomCertificates (`customCertificates`) provides groupings of the TLS
@@ -774,6 +765,13 @@ style="text-align: left;"><p><strong><code>runtimeClassName</code></strong>
 If provided, each pod on the Statefulset will run with the specified
 RuntimeClassName, for more info <a
 href="https://kubernetes.io/docs/concepts/containers/runtime-class/">https://kubernetes.io/docs/concepts/containers/runtime-class/</a></p></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><p><strong><code>reclaimStorage</code></strong>
+<em>boolean</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+If true. Will delete the storage when tenant has been deleted.</p></td>
 </tr>
 </tbody>
 </table>

@@ -81,6 +81,7 @@ Syntax
                               [--image]                   \
                               [--image-pull-secret]       \
                               [--kes-config]              \
+                              [--kes-image]               \
                               [--namespace]               \
                               [--output]                  \
                               [--pool]                    \
@@ -258,6 +259,17 @@ The command supports the following flags:
    Required for enabling Server Side Encryption of objects (SSE-S3).
 
    For more, see the `Github documentation <https://github.com/minio/operator/blob/master/examples/kes-secret.yaml>`__. 
+
+.. mc-cmd:: --kes-image
+   :optional:
+
+   .. versionadded:: v5.0.11
+
+   The KES image to use when deploying KES pods in the tenant.
+
+   .. important::
+
+      You cannot downgrade KES images after deployment.
 
 .. mc-cmd:: --namespace
    :optional:
