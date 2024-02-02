@@ -95,26 +95,14 @@ You can specify the entire range of hostnames using the expansion notation ``min
 
 .. _deploy-minio-distributed-prereqs-storage:
 
-Local JBOD Storage with Sequential Mounts
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Storage Requirements
+~~~~~~~~~~~~~~~~~~~~
 
 .. |deployment| replace:: deployment
 
 .. include:: /includes/common-installation.rst
-   :start-after: start-local-jbod-desc
-   :end-before: end-local-jbod-desc
-
-.. admonition:: Network File System Volumes Break Consistency Guarantees
-   :class: note
-
-   MinIO's strict **read-after-write** and **list-after-write** consistency
-   model requires local drive filesystems.
-
-   MinIO cannot provide consistency guarantees if the underlying storage
-   volumes are NFS or a similar network-attached storage volume. 
-
-   For deployments that *require* using network-attached storage, use
-   NFSv4 for best results.
+   :start-after: start-storage-requirements-desc
+   :end-before: end-storage-requirements-desc
 
 Time Synchronization
 ~~~~~~~~~~~~~~~~~~~~
@@ -128,67 +116,30 @@ Check the documentation for your operating system for how to set up and maintain
 Considerations
 --------------
 
-Homogeneous Node Configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO strongly recommends selecting substantially similar hardware
-configurations for all nodes in the deployment. Ensure the hardware (CPU,
-memory, motherboard, storage adapters) and software (operating system, kernel
-settings, system services) is consistent across all nodes. 
-
-Deployment may exhibit unpredictable performance if nodes have heterogeneous
-hardware or software configurations. Workloads that benefit from storing aged
-data on lower-cost hardware should instead deploy a dedicated "warm" or "cold"
-MinIO deployment and :ref:`transition <minio-lifecycle-management-tiering>`
-data to that tier.
-
 Erasure Coding Parity
 ~~~~~~~~~~~~~~~~~~~~~
 
-MinIO :ref:`erasure coding <minio-erasure-coding>` is a data redundancy and
-availability feature that allows MinIO deployments to automatically reconstruct
-objects on-the-fly despite the loss of multiple drives or nodes in the cluster.
-Erasure Coding provides object-level healing with less overhead than adjacent
-technologies such as RAID or replication. Distributed deployments implicitly
-enable and rely on erasure coding for core functionality.
+MinIO :ref:`erasure coding <minio-erasure-coding>` is a data redundancy and availability feature that allows MinIO deployments to automatically reconstruct objects on-the-fly despite the loss of multiple drives or nodes in the cluster.
 
-Erasure Coding splits objects into data and parity blocks, where parity blocks
-support reconstruction of missing or corrupted data blocks. The number of parity
-blocks in a deployment controls the deployment's relative data redundancy.
-Higher levels of parity allow for higher tolerance of drive loss at the cost of
-total available storage.
+MinIO defaults to ``EC:4`` , or 4 parity blocks per :ref:`erasure set <minio-ec-erasure-set>`. 
+You can set a custom parity level by setting the appropriate :ref:`MinIO Storage Class environment variable <minio-server-envvar-storage-class>`. 
+Consider using the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for guidance in selecting the appropriate erasure code parity level for your cluster.
 
-MinIO defaults to ``EC:4`` , or 4 parity blocks per 
-:ref:`erasure set <minio-ec-erasure-set>`. You can set a custom parity
-level by setting the appropriate 
-:ref:`MinIO Storage Class environment variable 
-<minio-server-envvar-storage-class>`. Consider using the MinIO
-`Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for
-guidance in selecting the appropriate erasure code parity level for your
-cluster.
+.. important::
+
+   While you can change erasure parity settings at any time, objects written with a given parity do **not** automatically update to the new parity settings.
 
 Capacity-Based Planning
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO generally recommends planning capacity such that
-:ref:`server pool expansion <expand-minio-distributed>` is only required after
-2+ years of deployment uptime. 
+MinIO recommends planning storage capacity sufficient to store **at least** 2 years of data before reaching 70% usage.
+Performing :ref:`server pool expansion <expand-minio-distributed>` more frequently or on a "just-in-time" basis generally indicates an architecture or planning issue.
 
-For example, consider an application suite that is estimated to produce 10TB of
-data per year. The MinIO deployment should provide *at minimum*:
+For example, consider an application suite expected to produce at least 100 TiB of data per year and a 3 year target before expansion.
+By ensuring the deployment has ~500TiB of usable storage up front, the cluster can safely meet the 70% threshold with additional buffer for growth in data storage output per year.
 
-``10TB + 10TB + 10TB  = 30TB`` 
-
-MinIO recommends adding buffer storage to account for potential growth in 
-stored data (e.g. 40TB of total usable storage). As a rule-of-thumb, more
-capacity initially is preferred over frequent just-in-time expansion to meet
-capacity requirements.
-
-Since MinIO :ref:`erasure coding <minio-erasure-coding>` requires some
-storage for parity, the total **raw** storage must exceed the planned **usable**
-capacity. Consider using the MinIO `Erasure Code Calculator
-<https://min.io/product/erasure-code-calculator>`__ for guidance in planning
-capacity around specific erasure code settings.
+Since MinIO :ref:`erasure coding <minio-erasure-coding>` requires some storage for parity, the total **raw** storage must exceed the planned **usable** capacity. 
+Consider using the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for guidance in planning capacity around specific erasure code settings.
 
 Recommended Operating Systems
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

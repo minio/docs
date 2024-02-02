@@ -211,7 +211,36 @@ MinIO **does not** support arbitrary migration of a drive with existing MinIO da
 
 .. end-local-jbod-single-node-desc
 
+.. start-storage-requirements-desc
+
+The following requirements summarize the :ref:`minio-hardware-checklist-storage` section of MinIO's hardware recommendations:
+
+Use Local Storage
+   Direct-Attached Storage (DAS) has significant performance and consistency advantages over networked storage (NAS, SAN, NFS).
+   MinIO strongly recommends flash storage (NVMe, SSD) for primary or "hot" data.
+
+Use XFS-Formatting for Drives
+   Deployments using non-XFS filesystems (EXT4, BTRFS, ZFS) tend to have lower performance and may also exhibit unexpected or undesired behavior at scale or under load.
+
+Use Consistent Type of Drive
+   Each :term:`pool` must use the same type (NVMe, SSD)  of drive with identical capacity (e.g. ``N`` TB) . 
+   MinIO does not distinguish drive types and does not benefit from mixed storage types. 
+
+Use Consistent Size of Drive
+   MinIO limits the size used per drive to the smallest drive in the deployment. 
+   For example, if the deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
+
+Configure Sequential Drive Mounting
+   MinIO uses expansion notation ``{x...y}`` to denote a sequential series of drives when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 
+   Configure drive mounting paths as a sequential series to best support this notation.
+
+Persist Drive Mounting and Mapping Across Reboots
+   Use ``/etc/fstab`` or a similar file-based mount configuration to ensure consistent drive-to-mount mapping across node reboots.
+
+.. end-storage-requirements-desc
+
 .. start-local-jbod-desc
+.. May be able to delete this entire section
 
 MinIO strongly recommends direct-attached :abbr:`JBOD (Just a Bunch of Disks)`
 arrays with XFS-formatted disks for best performance.  
@@ -226,20 +255,24 @@ arrays with XFS-formatted disks for best performance.
   availability benefits when used with distributed MinIO deployments, and
   typically reduce system performance.
 
-Ensure all nodes in the |deployment| use the same type (NVMe, SSD, or HDD)  of
-drive with identical capacity (e.g. ``N`` TB) . MinIO does not distinguish drive
-types and does not benefit from mixed storage types. Additionally. MinIO limits
-the size used per drive to the smallest drive in the deployment. For example, if
-the deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive
-capacity to 1TB.
+Use Consistent Type of Drive
+   Ensure all nodes in the |deployment| use the same type (NVMe, SSD, or HDD)  of drive with identical capacity (e.g. ``N`` TB) . 
+   MinIO does not distinguish drive types and does not benefit from mixed storage types. 
 
-MinIO *requires* using expansion notation ``{x...y}`` to denote a sequential
-series of drives when creating the new |deployment|, where all nodes in the
-|deployment| have an identical set of mounted drives. MinIO also
-requires that the ordering of physical drives remain constant across restarts,
-such that a given mount point always points to the same formatted drive. MinIO
-therefore **strongly recommends** using ``/etc/fstab`` or a similar file-based
-mount configuration to ensure that drive ordering cannot change after a reboot.
+Use Consistent Size of Drive
+   MinIO limits the size used per drive to the smallest drive in the deployment. 
+   For example, if the deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
+
+Configure Sequential Drive Mounting
+   MinIO uses expansion notation ``{x...y}`` to denote a sequential series of drives when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 
+
+Persist Drive Mounting and Mapping Across Reboots
+   Use ``/etc/fstab`` or a similar file-based mount configuration to ensure consistent drive-to-mount mapping across node reboots.
+   Use UUID or Label-based 
+
+The following example commands prepare a set of drives for use by MinIO according to the prerequisites.
+- Formats all drives as XFS and applies a label
+
 For example:
 
 .. code-block:: shell

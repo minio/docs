@@ -24,28 +24,16 @@ The procedures on this page cover deploying MinIO in a Single-Node Multi-Drive (
 Prerequisites
 -------------
 
-.. _deploy-minio-standalone-multidrive:
-
-Local JBOD Storage with Sequential Mounts
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Storage Requirements
+~~~~~~~~~~~~~~~~~~~~
 
 .. |deployment| replace:: deployment
 
 .. include:: /includes/common-installation.rst
-   :start-after: start-local-jbod-single-node-desc
-   :end-before: end-local-jbod-single-node-desc
+   :start-after: start-storage-requirements-desc
+   :end-before: end-storage-requirements-desc
 
-.. admonition:: Network File System Volumes Break Consistency Guarantees
-   :class: note
-
-   MinIO's strict **read-after-write** and **list-after-write** consistency
-   model requires local drive filesystems.
-
-   MinIO cannot provide consistency guarantees if the underlying storage
-   volumes are NFS or a similar network-attached storage volume. 
-
-   For deployments that *require* using network-attached storage, use
-   NFSv4 for best results.
+.. _deploy-minio-standalone-multidrive:
 
 Deploy Single-Node Multi-Drive MinIO
 ------------------------------------
