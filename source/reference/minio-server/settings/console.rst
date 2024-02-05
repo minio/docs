@@ -24,13 +24,13 @@ The following settings control behavior for the embedded MinIO Console.
 MinIO Console
 ~~~~~~~~~~~~~
 
+:optional:
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_BROWSER
-
-         *Optional*
 
          Specify ``off`` to disable the embedded MinIO Console.
 
@@ -42,13 +42,13 @@ MinIO Console
 Animation
 ~~~~~~~~~
 
+:optional:
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_BROWSER_LOGIN_ANIMATION
-
-         *Optional*
 
          .. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
 
@@ -61,6 +61,8 @@ Animation
 
 Browser Redirect
 ~~~~~~~~~~~~~~~~
+
+:optional:
 
 .. tab-set::
 
@@ -81,13 +83,13 @@ Browser Redirect
 Browser Redirect URL
 ~~~~~~~~~~~~~~~~~~~~
 
+:optional:
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_BROWSER_REDIRECT_URL
-
-         *Optional*
 
          Specify the Fully Qualified Domain Name (FQDN) the MinIO Console listens for incoming connections on.
    
@@ -106,13 +108,13 @@ Browser Redirect URL
 Session Duration
 ~~~~~~~~~~~~~~~~
 
+:optional:
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_BROWSER_SESSION_DURATION
-
-         *Optional*
 
          .. versionadded:: MinIO Server RELEASE.2023-08-23T10-07-06Z
 
@@ -135,13 +137,13 @@ Session Duration
 Server URL
 ~~~~~~~~~~
 
+:optional:
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_SERVER_URL
-
-         *Optional*
 
          Specify the Fully Qualified Domain Name (FQDN) the MinIO Console must use for connecting to the MinIO Server.
          The Console also uses this value for setting the root hostname when generating presigned URLs.
@@ -160,13 +162,13 @@ Server URL
 Log Query URL
 ~~~~~~~~~~~~~
 
+:optional:
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_LOG_QUERY_URL
-
-         *Optional*
 
          Specify the URL of a PostgreSQL service to which MinIO writes :ref:`Audit logs <minio-logging-publish-audit-logs>`. 
          The embedded MinIO Console provides a Log Search tool that allows querying the PostgreSQL service for collected logs.
@@ -175,6 +177,74 @@ Log Query URL
 
       This setting does not have a configuration variable setting.
       Use the Environment Variable instead.
+
+Content Security Policy
+~~~~~~~~~~~~~~~~~~~~~~~
+
+:optional:
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+
+      .. envvar:: MINIO_BROWSER_CONTENT_SECURITY_POLICY
+
+
+   .. tab-item:: Configuration Setting
+
+      .. mc-conf:: csp_policy
+         :delimiter: " "
+
+
+
+Strict Transport Security
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:optional:
+
+.. tab-set::
+
+   .. tab-item:: Environment Variables
+
+      .. envvar:: MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS
+
+
+      .. envvar:: MINIO_BROWSER_HSTS_PRELOAD
+
+
+      .. envvar:: MINIO_BROWSER_HSTS_SECONDS
+
+
+   .. tab-item:: Configuration Settings
+
+      .. mc-conf:: hsts_include_subdomains
+         :delimiter: " "
+		     
+      .. mc-conf:: hsts_preload
+         :delimiter: " "
+		     
+      .. mc-conf:: hsts_seconds
+         :delimiter: " "
+
+
+Referrer Policy
+~~~~~~~~~~~~~~~
+
+:optional:
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+
+      .. envvar:: MINIO_BROWSER_REFERRER_POLICY
+
+
+   .. tab-item:: Configuration Setting
+
+      .. mc-conf:: referrer_policy
+         :delimiter: " "
+
+
 
 Prometheus Settings
 -------------------
