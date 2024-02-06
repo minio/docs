@@ -51,6 +51,13 @@
 
          mc --help
 
+      .. admonition:: Install from the MinIO Download Page
+         :class: note
+
+         To ensure you install the correct binary, download ``mc`` from the `MinIO Download Page <https://dl.min.io/client/mc/release/>`__.
+         Other repositories, including those used by common Linux package managers, may have other software with a similar name.
+	 
+
    .. tab-item:: macOS
 
       .. code-block:: shell
