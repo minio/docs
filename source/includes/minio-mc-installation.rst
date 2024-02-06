@@ -51,6 +51,16 @@
 
          mc --help
 
+      .. admonition:: Install from the MinIO Download Page
+         :class: note
+
+         MinIO does not officially publish its binaries to common Linux repositories or package managers (Ubuntu, RHEL, Archlinux/AUR).
+         The only official source of MinIO binaries is the `MinIO Download Page <https://dl.min.io/client/mc/release/>`__.
+
+         MinIO does not recommend installation through a package manager, as upstream repositories may install the incorrect package or a renamed package.
+
+         All documentation assumes the installation of the *official* ``mc`` client binary through the download page *only*, with no changes to binary naming.
+
    .. tab-item:: macOS
 
       .. code-block:: shell
