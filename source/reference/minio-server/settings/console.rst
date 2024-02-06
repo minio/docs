@@ -24,7 +24,7 @@ The following settings control behavior for the embedded MinIO Console.
 MinIO Console
 ~~~~~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -42,7 +42,7 @@ MinIO Console
 Animation
 ~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -62,7 +62,7 @@ Animation
 Browser Redirect
 ~~~~~~~~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -83,7 +83,7 @@ Browser Redirect
 Browser Redirect URL
 ~~~~~~~~~~~~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -108,7 +108,7 @@ Browser Redirect URL
 Session Duration
 ~~~~~~~~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -137,7 +137,7 @@ Session Duration
 Server URL
 ~~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -162,7 +162,7 @@ Server URL
 Log Query URL
 ~~~~~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -181,7 +181,10 @@ Log Query URL
 Content Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-:optional:
+*Optional*
+
+Set the ``Content-Security-Policy`` header in MinIO Console responses.
+Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
 
 .. tab-set::
 
@@ -189,18 +192,27 @@ Content Security Policy
 
       .. envvar:: MINIO_BROWSER_CONTENT_SECURITY_POLICY
 
+      .. code-block:: shell
+         :class: copyable
+
+         set MINIO_BROWSER_CONTENT_SECURITY_POLICY="default-src 'self' 'unsafe-eval' 'unsafe-inline';"
 
    .. tab-item:: Configuration Setting
 
       .. mc-conf:: csp_policy
          :delimiter: " "
 
+      .. code-block:: shell
+
+         mc admin config set browser \
+            csp_policy="default-src 'self' 'unsafe-eval' 'unsafe-inline';" \
+            [ARGUMENT=VALUE ...]
 
 
 Strict Transport Security
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -230,7 +242,7 @@ Strict Transport Security
 Referrer Policy
 ~~~~~~~~~~~~~~~
 
-:optional:
+*Optional*
 
 .. tab-set::
 
@@ -254,13 +266,13 @@ The following settings manage how MinIO interacts with your Prometheus service.
 Prometheus URL
 ~~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_PROMETHEUS_URL
-
-         *Optional*
 
          Specify the URL for a Prometheus service configured to :ref:`scrape MinIO metrics <minio-metrics-collect-using-prometheus>`.
 
@@ -276,13 +288,13 @@ Prometheus URL
 Prometheus Job ID
 ~~~~~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_PROMETHEUS_JOB_ID
-
-         *Optional*
 
          Specify the custom Prometheus job ID used for :ref:`scraping MinIO metrics <minio-metrics-collect-using-prometheus>`. 
 
@@ -298,13 +310,13 @@ Prometheus Job ID
 Prometheus Auth Token
 ~~~~~~~~~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_PROMETHEUS_AUTH_TOKEN
-
-         *Optional*
 
          Specify the :prometheus-docs:`basic auth token <guides/basic-auth/>` the Console should use to connect to a Prometheus service.
 
