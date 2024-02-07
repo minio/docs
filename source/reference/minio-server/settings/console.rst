@@ -183,12 +183,13 @@ Content Security Policy
 
 *Optional*
 
-Set the ``Content-Security-Policy`` header in MinIO Console responses.
+Set the `Content-Security-Policy <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ header in MinIO Console responses.
 Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
 
 .. tab-set::
 
    .. tab-item:: Environment Variable
+      :sync: envvar
 
       .. envvar:: MINIO_BROWSER_CONTENT_SECURITY_POLICY
 
@@ -198,8 +199,9 @@ Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
          set MINIO_BROWSER_CONTENT_SECURITY_POLICY="default-src 'self' 'unsafe-eval' 'unsafe-inline';"
 
    .. tab-item:: Configuration Setting
+      :sync: config
 
-      .. mc-conf:: csp_policy
+      .. mc-conf:: browser csp_policy
          :delimiter: " "
 
       .. code-block:: shell
@@ -214,29 +216,75 @@ Strict Transport Security
 
 *Optional*
 
+Set the `Strict-Transport-Security <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>`__ header in MinIO Console responses.
+Set the appropriate environment variable or configuration settings according to the HSTS requirements for your environment.
+
 .. tab-set::
 
    .. tab-item:: Environment Variables
+      :sync: envvar
 
       .. envvar:: MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS
+
+         Set to ``on`` to append ``includeSubDomains`` to the ``Strict-Transport-Security`` header.
+	 Defaults to ``off``.
+
+      .. code-block:: shell
+         :class: copyable
+
+         set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
 
 
       .. envvar:: MINIO_BROWSER_HSTS_PRELOAD
 
+	 Set to ``on`` to include this header in the HSTS preloading list.
+	 Defaults to ``off``.
+
+      .. code-block:: shell
+         :class: copyable
+
+         set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
 
       .. envvar:: MINIO_BROWSER_HSTS_SECONDS
 
+	 The ``max_age`` the configured policy remains in effect, in seconds. 
+	 Defaults to ``0``.
+
+      .. code-block:: shell
+         :class: copyable
+
+         set MINIO_BROWSER_HSTS_SECONDS=31536000
 
    .. tab-item:: Configuration Settings
+      :sync: config
 
-      .. mc-conf:: hsts_include_subdomains
+      .. mc-conf:: browser hsts_include_subdomains
          :delimiter: " "
 		     
-      .. mc-conf:: hsts_preload
+      .. code-block:: shell
+
+         mc admin config set browser \
+            hsts_include_subdomains="on" \
+            [ARGUMENT=VALUE ...]
+	    
+      .. mc-conf:: browser hsts_preload
          :delimiter: " "
-		     
-      .. mc-conf:: hsts_seconds
+     
+      .. code-block:: shell
+
+         mc admin config set browser \
+            hsts_preload="on" \
+            [ARGUMENT=VALUE ...]
+	    
+      .. mc-conf:: browser hsts_seconds
          :delimiter: " "
+        	
+      .. code-block:: shell
+
+         mc admin config set browser \
+            hsts_seconds="0" \
+            [ARGUMENT=VALUE ...]
+
 
 
 Referrer Policy
@@ -244,18 +292,32 @@ Referrer Policy
 
 *Optional*
 
+Set the `Referrer-Policy <https://www.w3.org/TR/referrer-policy/>`__ header in MinIO Console responses.
+Defaults to ``strict-origin-when-cross-origin``.
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
+      :sync: envvar
 
       .. envvar:: MINIO_BROWSER_REFERRER_POLICY
 
+      .. code-block:: shell
+         :class: copyable
+
+         set MINIO_BROWSER_REFERRER_POLICY="strict-origin-when-cross-origin"
 
    .. tab-item:: Configuration Setting
+      :sync: config
 
-      .. mc-conf:: referrer_policy
+      .. mc-conf:: browser referrer_policy
          :delimiter: " "
 
+      .. code-block:: shell
+
+         mc admin config set browser \
+            referrer_policy="strict-origin-when-cross-origin" \
+            [ARGUMENT=VALUE ...]
 
 
 Prometheus Settings
