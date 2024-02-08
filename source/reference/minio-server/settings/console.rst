@@ -193,10 +193,10 @@ Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
 
       .. envvar:: MINIO_BROWSER_CONTENT_SECURITY_POLICY
 
-      .. code-block:: shell
-         :class: copyable
+         .. code-block:: shell
+            :class: copyable
 
-         set MINIO_BROWSER_CONTENT_SECURITY_POLICY="default-src 'self' 'unsafe-eval' 'unsafe-inline';"
+            set MINIO_BROWSER_CONTENT_SECURITY_POLICY="default-src 'self' 'unsafe-eval' 'unsafe-inline';"
 
    .. tab-item:: Configuration Setting
       :sync: config
@@ -204,11 +204,12 @@ Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
       .. mc-conf:: browser csp_policy
          :delimiter: " "
 
-      .. code-block:: shell
-
-         mc admin config set browser \
-            csp_policy="default-src 'self' 'unsafe-eval' 'unsafe-inline';" \
-            [ARGUMENT=VALUE ...]
+         .. code-block:: shell
+            :class: copyable
+		 
+            mc admin config set browser \
+               csp_policy="default-src 'self' 'unsafe-eval' 'unsafe-inline';" \
+               [ARGUMENT=VALUE ...]
 
 
 Strict Transport Security
@@ -216,8 +217,9 @@ Strict Transport Security
 
 *Optional*
 
-Set the `Strict-Transport-Security <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>`__ header in MinIO Console responses.
-Set the appropriate environment variable or configuration settings according to the HSTS requirements for your environment.
+Configure MinIO console to generate a `Strict-Transport-Security <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>`__ header in its responses.
+
+To generate the header, you **must** set a duration using either :envvar:`MINIO_BROWSER_HSTS_SECONDS` or :mc-conf:`~browser.hsts_seconds`.
 
 .. tab-set::
 
@@ -226,65 +228,125 @@ Set the appropriate environment variable or configuration settings according to 
 
       .. envvar:: MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS
 
-         Set to ``on`` to append ``includeSubDomains`` to the ``Strict-Transport-Security`` header.
-	 Defaults to ``off``.
+         Set to ``on`` to also apply the configured HSTS policy to all MinIO Console subdomains.
+         Defaults to ``off``.
 
-      .. code-block:: shell
-         :class: copyable
+         .. code-block:: shell
+            :class: copyable
 
-         set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
-
+            set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
 
       .. envvar:: MINIO_BROWSER_HSTS_PRELOAD
 
-	 Set to ``on`` to include this header in the HSTS preloading list.
-	 Defaults to ``off``.
+         Set to ``on`` to direct the client browser to add the MinIO Console domain to its HSTS preload list.
+         Defaults to ``off``.
 
-      .. code-block:: shell
-         :class: copyable
+         .. code-block:: shell
+            :class: copyable
 
-         set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
+            set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
 
       .. envvar:: MINIO_BROWSER_HSTS_SECONDS
 
-	 The ``max_age`` the configured policy remains in effect, in seconds. 
-	 Defaults to ``0``.
+         The ``max_age`` the configured policy remains in effect, in seconds.
+         Defaults to ``0``, disabled.
+         You **must** configure a *non-zero* duration to enable the ``Strict-Transport-Security`` header.
 
-      .. code-block:: shell
-         :class: copyable
+         .. code-block:: shell
+            :class: copyable
 
-         set MINIO_BROWSER_HSTS_SECONDS=31536000
+            set MINIO_BROWSER_HSTS_SECONDS=31536000
 
    .. tab-item:: Configuration Settings
       :sync: config
 
+      The following configuration settings require a service restart to take effect.
+      You can do this with :mc-cmd:`mc admin service restart`.
+
       .. mc-conf:: browser hsts_include_subdomains
          :delimiter: " "
-		     
-      .. code-block:: shell
 
-         mc admin config set browser \
-            hsts_include_subdomains="on" \
-            [ARGUMENT=VALUE ...]
-	    
+         Set to ``on`` to also apply the configured HSTS policy to all MinIO Console subdomains.
+         Defaults to ``off``.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin config set browser \
+               hsts_include_subdomains="on" \
+               hsts_seconds="31536000" \
+               [ARGUMENT=VALUE ...]
+
       .. mc-conf:: browser hsts_preload
          :delimiter: " "
-     
-      .. code-block:: shell
 
-         mc admin config set browser \
-            hsts_preload="on" \
-            [ARGUMENT=VALUE ...]
-	    
+         Set to ``on`` to direct the client browser to add the MinIO Console domain to its HSTS preload list.
+         Defaults to ``off``.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin config set browser \
+               hsts_preload="on" \
+               hsts_seconds="31536000" \
+               [ARGUMENT=VALUE ...]
+
       .. mc-conf:: browser hsts_seconds
          :delimiter: " "
-        	
-      .. code-block:: shell
 
-         mc admin config set browser \
-            hsts_seconds="0" \
-            [ARGUMENT=VALUE ...]
+         The ``max_age`` the configured policy remains in effect, in seconds.
+         Defaults to ``0``, disabled.
+         You **must** configure a *non-zero* duration to enable the ``Strict-Transport-Security`` header.
 
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin config set browser \
+               hsts_seconds="31536000" \
+               [ARGUMENT=VALUE ...]
+
+
+Examples
+++++++++
+
+The following examples show the rendered header for the given configuration settings.
+The equivalent environment variables generate the same result.
+
+``hsts_seconds``
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc admin config set play browser hsts_seconds=500
+
+  .. code-block:: shell
+     :class: copyable
+
+     Strict-Transport-Security: max-age=500
+
+``hsts_include_subdomains``
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc admin config set play browser hsts_seconds=500 hsts_include_subdomains=on
+
+  .. code-block:: shell
+     :class: copyable
+
+     Strict-Transport-Security: max-age=500; includeSubDomains
+
+``hsts_preload``
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc admin config set play browser hsts_seconds=500 hsts_include_subdomains=on hsts_preload=on
+
+  .. code-block:: shell
+     :class: copyable
+
+     Strict-Transport-Security: max-age=500; includeSubDomains; preload
 
 
 Referrer Policy
@@ -302,10 +364,10 @@ Defaults to ``strict-origin-when-cross-origin``.
 
       .. envvar:: MINIO_BROWSER_REFERRER_POLICY
 
-      .. code-block:: shell
-         :class: copyable
+         .. code-block:: shell
+            :class: copyable
 
-         set MINIO_BROWSER_REFERRER_POLICY="strict-origin-when-cross-origin"
+            set MINIO_BROWSER_REFERRER_POLICY="strict-origin-when-cross-origin"
 
    .. tab-item:: Configuration Setting
       :sync: config
@@ -313,11 +375,11 @@ Defaults to ``strict-origin-when-cross-origin``.
       .. mc-conf:: browser referrer_policy
          :delimiter: " "
 
-      .. code-block:: shell
+         .. code-block:: shell
 
-         mc admin config set browser \
-            referrer_policy="strict-origin-when-cross-origin" \
-            [ARGUMENT=VALUE ...]
+            mc admin config set browser \
+               referrer_policy="strict-origin-when-cross-origin" \
+               [ARGUMENT=VALUE ...]
 
 
 Prometheus Settings
