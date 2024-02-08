@@ -183,7 +183,7 @@ Content Security Policy
 
 *Optional*
 
-Set the `Content-Security-Policy <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ header in MinIO Console responses.
+Configure MinIO Console to generate a `Content-Security-Policy <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ header in HTTP responses.
 Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
 
 .. tab-set::
@@ -217,9 +217,10 @@ Strict Transport Security
 
 *Optional*
 
-Configure MinIO console to generate a `Strict-Transport-Security <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>`__ header in its responses.
+Configure MinIO console to generate a `Strict-Transport-Security <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>`__ header in HTTP responses.
 
 To generate the header, you **must** set a duration using either :envvar:`MINIO_BROWSER_HSTS_SECONDS` or :mc-conf:`~browser.hsts_seconds`.
+Other HSTS settings are optional.
 
 .. tab-set::
 
@@ -317,7 +318,7 @@ The equivalent environment variables generate the same result.
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set play browser hsts_seconds=500
+     mc admin config set ALIAS browser hsts_seconds=500
 
   .. code-block:: shell
      :class: copyable
@@ -329,7 +330,7 @@ The equivalent environment variables generate the same result.
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set play browser hsts_seconds=500 hsts_include_subdomains=on
+     mc admin config set ALIAS browser hsts_seconds=500 hsts_include_subdomains=on
 
   .. code-block:: shell
      :class: copyable
@@ -341,7 +342,7 @@ The equivalent environment variables generate the same result.
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set play browser hsts_seconds=500 hsts_include_subdomains=on hsts_preload=on
+     mc admin config set ALIAS browser hsts_seconds=500 hsts_include_subdomains=on hsts_preload=on
 
   .. code-block:: shell
      :class: copyable
@@ -354,7 +355,7 @@ Referrer Policy
 
 *Optional*
 
-Set the `Referrer-Policy <https://www.w3.org/TR/referrer-policy/>`__ header in MinIO Console responses.
+Configure MinIO Console to generate a `Referrer-Policy <https://www.w3.org/TR/referrer-policy/>`__ header in HTTP responses.
 Defaults to ``strict-origin-when-cross-origin``.
 
 .. tab-set::
