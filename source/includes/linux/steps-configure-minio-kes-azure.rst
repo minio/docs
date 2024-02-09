@@ -1,5 +1,5 @@
-Deploy MinIO and KES with Server-Side Encryption using Azure KeyVault for Local Development
---------------------------------------------------------------------------------------------
+Deploy MinIO and KES with Server-Side Encryption using Azure KeyVault for Production
+------------------------------------------------------------------------------------
 
 Prior to starting these steps, create the following folders if they do not already exist:
 
