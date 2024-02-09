@@ -202,7 +202,11 @@ images_config = {
 # `.rst` for source assumed in the rules
 # `.html` for target must be included
 redirects = {
-    "reference/minio-mc-admin/mc-admin-top": "../deprecated/mc-admin-top.html"
+    "reference/minio-mc-admin/mc-admin-top": "../deprecated/mc-admin-top.html",
+    "operations/server-side-encryption/configure-minio-kes-aws": "https://min.io/docs/kes/integrations/aws-secrets-manager/",
+    "operations/server-side-encryption/configure-minio-kes-azure": "https://min.io/docs/kes/integrations/azure-keyvault/",
+    "operations/server-side-encryption/configure-minio-kes-gcp": "https://min.io/docs/kes/integrations/google-cloud-secret-manager/",
+    "operations/server-side-encryption/configure-minio-kes-hashicorp": "https://min.io/docs/kes/integrations/hashicorp-vault-keystore/"
 }
 
 

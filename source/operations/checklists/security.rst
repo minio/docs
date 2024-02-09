@@ -38,12 +38,14 @@ Required Steps
 :ref:`Encryption-at-Rest <minio-sse>`
 -------------------------------------
 
-MinIO supports the following external KMS providers through Key Encryption Service (KES):
+MinIO supports the following external KMS providers through :kes-docs:`Key Encryption Service (KES) <>`:
 
-- :ref:`Hashicorp Vault Root KMS <minio-sse-vault>`
-- :ref:`AWS Root KMS <minio-sse-aws>`
-- :ref:`Google Cloud Platform Secret Manager Root KMS <minio-sse-gcp>`
-- :ref:`Azure Key Vault Root KMS <minio-sse-azure>`
+- :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
+- :kes-docs:`AWS SecretsManager <integrations/aws-secrets-manager/>`
+- :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+- :kes-docs:`Google Cloud SecretManager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`Hashicorp KeyVault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Thales Digital Identity and Security (formerly Gemalto) <integrations/thales-ciphertrust/>`
 
 .. list-table::
    :widths: auto

@@ -1,4 +1,8 @@
 .. _minio-sse-data-encryption:
+.. _minio-sse-aws:
+.. _minio-sse-azure:
+.. _minio-sse-gcp:
+.. _minio-sse-vault:
 
 =====================
 Data Encryption (SSE)
@@ -13,6 +17,7 @@ Data Encryption (SSE)
 .. |EK| replace:: :abbr:`EK (External Key)`
 .. |SSE| replace:: :abbr:`SSE (Server-Side Encryption)`
 .. |KMS| replace:: :abbr:`KMS (Key Management System)`
+.. |KES| replace:: :abbr:`KES (Key Encryption System)`
 
 MinIO Server-Side Encryption (SSE) protects objects as part of write operations,
 allowing clients to take advantage of server processing power to secure objects
@@ -72,7 +77,7 @@ supports the following encryption strategies:
       For buckets without automatic SSE-S3 encryption, clients can request
       SSE encryption as part of the write operation instead.
 
-      For a tutorial on enabling SSE-s3 in a local (non-production) MinIO Deployment, see :ref:`minio-encryption-sse-s3-quickstart`.
+      For a tutorial on enabling SSE-S3 in a local (non-production) MinIO Deployment, see :ref:`minio-encryption-sse-s3-quickstart`.
 
    .. tab-item:: SSE-C
       :sync: sse-c
@@ -100,7 +105,7 @@ Configuring a KMS for MinIO
    #. Create or modify a MinIO deployment with support for |SSE| using |KES|.
       Defer to the :ref:`Deploy Distributed MinIO <minio-mnmd>` tutorial for guidance on production-ready MinIO deployments.
 
-   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`
+   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
 
 .. cond:: macos or windows
 
@@ -117,7 +122,7 @@ Configuring a KMS for MinIO
 
    For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with the KMS.
 
-   For production baremetal environments, see the :kes-docs:`KES documentation <>` for tutorials on configuring MinIO with KES and Hashicorp Vault.
+   For production baremetal environments, see the :kes-docs:`KES documentation <>` for tutorials on configuring MinIO with with your choice of Key Management System.
 
 .. cond:: container
 
@@ -134,7 +139,7 @@ Configuring a KMS for MinIO
 
    For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with Hashicorp Vault.
 
-   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and Hashicorp Vault.
+   For production baremetal environments, see the :kes-docs:`KES documentation <>` for tutorials on configuring MinIO with with your choice of Key Management System.
 
 .. cond:: k8s
 
@@ -146,19 +151,10 @@ Configuring a KMS for MinIO
    #. Create a new |EK| on Vault for use with |SSE|.
    #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
 
-   For production baremetal environments, see the MinIO on Linux documentation for tutorials on configuring MinIO with KES and Hashicorp Vault.
+   For production baremetal environments, see the :kes-docs:`KES documentation <>` for tutorials on configuring MinIO with with your choice of Key Management System.
 
 .. important::
 
    .. include:: /includes/common/common-minio-kes.rst
       :start-after: start-kes-encrypted-backend-desc
       :end-before: end-kes-encrypted-backend-desc
-
-.. toctree::
-   :titlesonly:
-   :hidden:
-
-   /operations/server-side-encryption/configure-minio-kes-hashicorp
-   /operations/server-side-encryption/configure-minio-kes-aws
-   /operations/server-side-encryption/configure-minio-kes-gcp
-   /operations/server-side-encryption/configure-minio-kes-azure
