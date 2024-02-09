@@ -24,13 +24,13 @@ The following settings control behavior for the embedded MinIO Console.
 MinIO Console
 ~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_BROWSER
-
-         *Optional*
 
          Specify ``off`` to disable the embedded MinIO Console.
 
@@ -42,13 +42,13 @@ MinIO Console
 Animation
 ~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_BROWSER_LOGIN_ANIMATION
-
-         *Optional*
 
          .. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
 
@@ -61,6 +61,8 @@ Animation
 
 Browser Redirect
 ~~~~~~~~~~~~~~~~
+
+*Optional*
 
 .. tab-set::
 
@@ -81,13 +83,13 @@ Browser Redirect
 Browser Redirect URL
 ~~~~~~~~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_BROWSER_REDIRECT_URL
-
-         *Optional*
 
          Specify the Fully Qualified Domain Name (FQDN) the MinIO Console listens for incoming connections on.
    
@@ -106,13 +108,13 @@ Browser Redirect URL
 Session Duration
 ~~~~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_BROWSER_SESSION_DURATION
-
-         *Optional*
 
          .. versionadded:: MinIO Server RELEASE.2023-08-23T10-07-06Z
 
@@ -135,13 +137,13 @@ Session Duration
 Server URL
 ~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_SERVER_URL
-
-         *Optional*
 
          Specify the Fully Qualified Domain Name (FQDN) the MinIO Console must use for connecting to the MinIO Server.
          The Console also uses this value for setting the root hostname when generating presigned URLs.
@@ -160,13 +162,13 @@ Server URL
 Log Query URL
 ~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_LOG_QUERY_URL
-
-         *Optional*
 
          Specify the URL of a PostgreSQL service to which MinIO writes :ref:`Audit logs <minio-logging-publish-audit-logs>`. 
          The embedded MinIO Console provides a Log Search tool that allows querying the PostgreSQL service for collected logs.
@@ -176,6 +178,212 @@ Log Query URL
       This setting does not have a configuration variable setting.
       Use the Environment Variable instead.
 
+Content Security Policy
+~~~~~~~~~~~~~~~~~~~~~~~
+
+*Optional*
+
+Configure MinIO Console to generate a `Content-Security-Policy <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ header in HTTP responses.
+Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_BROWSER_CONTENT_SECURITY_POLICY
+
+         .. code-block:: shell
+            :class: copyable
+
+            set MINIO_BROWSER_CONTENT_SECURITY_POLICY="default-src 'self' 'unsafe-eval' 'unsafe-inline';"
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: browser csp_policy
+         :delimiter: " "
+
+         .. code-block:: shell
+            :class: copyable
+		 
+            mc admin config set browser \
+               csp_policy="default-src 'self' 'unsafe-eval' 'unsafe-inline';" \
+               [ARGUMENT=VALUE ...]
+
+
+Strict Transport Security
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Optional*
+
+Configure MinIO console to generate a `Strict-Transport-Security <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>`__ header in HTTP responses.
+
+To generate the header, you **must** set a duration using either :envvar:`MINIO_BROWSER_HSTS_SECONDS` or :mc-conf:`~browser.hsts_seconds`.
+Other HSTS settings are optional.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variables
+      :sync: envvar
+
+      .. envvar:: MINIO_BROWSER_HSTS_SECONDS
+
+         The ``max_age`` the configured policy remains in effect, in seconds.
+         Defaults to ``0``, disabled.
+         You **must** configure a *non-zero* duration to enable the ``Strict-Transport-Security`` header.
+
+         .. code-block:: shell
+            :class: copyable
+
+            set MINIO_BROWSER_HSTS_SECONDS=31536000
+
+      .. envvar:: MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS
+
+         Set to ``on`` to also apply the configured HSTS policy to all MinIO Console subdomains.
+         Defaults to ``off``.
+
+         .. code-block:: shell
+            :class: copyable
+
+            set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
+
+      .. envvar:: MINIO_BROWSER_HSTS_PRELOAD
+
+         Set to ``on`` to direct the client browser to add the MinIO Console domain to its HSTS preload list.
+         Defaults to ``off``.
+
+         .. code-block:: shell
+            :class: copyable
+
+            set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
+
+   .. tab-item:: Configuration Settings
+      :sync: config
+
+      The following configuration settings require a service restart to take effect.
+      To restart the service, use :mc-cmd:`mc admin service restart`.
+
+      .. mc-conf:: browser hsts_seconds
+         :delimiter: " "
+
+         The ``max_age`` the configured policy remains in effect, in seconds.
+         Defaults to ``0``, disabled.
+         You **must** configure a *non-zero* duration to enable the ``Strict-Transport-Security`` header.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin config set browser \
+               hsts_seconds="31536000" \
+               [ARGUMENT=VALUE ...]
+
+      .. mc-conf:: browser hsts_include_subdomains
+         :delimiter: " "
+
+         Set to ``on`` to also apply the configured HSTS policy to all MinIO Console subdomains.
+         Defaults to ``off``.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin config set browser \
+               hsts_include_subdomains="on" \
+               hsts_seconds="31536000" \
+               [ARGUMENT=VALUE ...]
+
+      .. mc-conf:: browser hsts_preload
+         :delimiter: " "
+
+         Set to ``on`` to direct the client browser to add the MinIO Console domain to its HSTS preload list.
+         Defaults to ``off``.
+
+         .. code-block:: shell
+            :class: copyable
+
+            mc admin config set browser \
+               hsts_preload="on" \
+               hsts_seconds="31536000" \
+               [ARGUMENT=VALUE ...]
+
+
+Examples
+++++++++
+
+The following examples show the rendered header for the given configuration settings.
+The equivalent environment variables generate the same result.
+All examples use a value of ``31536000``, which is the number of seconds in a calendar year (365 days).
+
+``hsts_seconds``
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc admin config set ALIAS browser hsts_seconds=31536000
+
+  .. code-block:: shell
+     :class: copyable
+
+     Strict-Transport-Security: max-age=31536000
+
+``hsts_include_subdomains``
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc admin config set ALIAS browser hsts_seconds=31536000 hsts_include_subdomains=on
+
+  .. code-block:: shell
+     :class: copyable
+
+     Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+``hsts_preload``
+
+  .. code-block:: shell
+     :class: copyable
+
+     mc admin config set ALIAS browser hsts_seconds=31536000 hsts_include_subdomains=on hsts_preload=on
+
+  .. code-block:: shell
+     :class: copyable
+
+     Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+
+Referrer Policy
+~~~~~~~~~~~~~~~
+
+*Optional*
+
+Configure MinIO Console to generate a `Referrer-Policy <https://www.w3.org/TR/referrer-policy/>`__ header in HTTP responses.
+Defaults to ``strict-origin-when-cross-origin``.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_BROWSER_REFERRER_POLICY
+
+         .. code-block:: shell
+            :class: copyable
+
+            set MINIO_BROWSER_REFERRER_POLICY="strict-origin-when-cross-origin"
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: browser referrer_policy
+         :delimiter: " "
+
+         .. code-block:: shell
+
+            mc admin config set browser \
+               referrer_policy="strict-origin-when-cross-origin" \
+               [ARGUMENT=VALUE ...]
+
+
 Prometheus Settings
 -------------------
 
@@ -184,13 +392,13 @@ The following settings manage how MinIO interacts with your Prometheus service.
 Prometheus URL
 ~~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_PROMETHEUS_URL
-
-         *Optional*
 
          Specify the URL for a Prometheus service configured to :ref:`scrape MinIO metrics <minio-metrics-collect-using-prometheus>`.
 
@@ -206,13 +414,13 @@ Prometheus URL
 Prometheus Job ID
 ~~~~~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_PROMETHEUS_JOB_ID
-
-         *Optional*
 
          Specify the custom Prometheus job ID used for :ref:`scraping MinIO metrics <minio-metrics-collect-using-prometheus>`. 
 
@@ -228,13 +436,13 @@ Prometheus Job ID
 Prometheus Auth Token
 ~~~~~~~~~~~~~~~~~~~~~
 
+*Optional*
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_PROMETHEUS_AUTH_TOKEN
-
-         *Optional*
 
          Specify the :prometheus-docs:`basic auth token <guides/basic-auth/>` the Console should use to connect to a Prometheus service.
 
