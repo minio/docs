@@ -227,6 +227,17 @@ Other HSTS settings are optional.
    .. tab-item:: Environment Variables
       :sync: envvar
 
+      .. envvar:: MINIO_BROWSER_HSTS_SECONDS
+
+         The ``max_age`` the configured policy remains in effect, in seconds.
+         Defaults to ``0``, disabled.
+         You **must** configure a *non-zero* duration to enable the ``Strict-Transport-Security`` header.
+
+         .. code-block:: shell
+            :class: copyable
+
+            set MINIO_BROWSER_HSTS_SECONDS=31536000
+
       .. envvar:: MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS
 
          Set to ``on`` to also apply the configured HSTS policy to all MinIO Console subdomains.
@@ -247,7 +258,14 @@ Other HSTS settings are optional.
 
             set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
 
-      .. envvar:: MINIO_BROWSER_HSTS_SECONDS
+   .. tab-item:: Configuration Settings
+      :sync: config
+
+      The following configuration settings require a service restart to take effect.
+      To restart the service, use :mc-cmd:`mc admin service restart`.
+
+      .. mc-conf:: browser hsts_seconds
+         :delimiter: " "
 
          The ``max_age`` the configured policy remains in effect, in seconds.
          Defaults to ``0``, disabled.
@@ -256,13 +274,9 @@ Other HSTS settings are optional.
          .. code-block:: shell
             :class: copyable
 
-            set MINIO_BROWSER_HSTS_SECONDS=31536000
-
-   .. tab-item:: Configuration Settings
-      :sync: config
-
-      The following configuration settings require a service restart to take effect.
-      You can do this with :mc-cmd:`mc admin service restart`.
+            mc admin config set browser \
+               hsts_seconds="31536000" \
+               [ARGUMENT=VALUE ...]
 
       .. mc-conf:: browser hsts_include_subdomains
          :delimiter: " "
@@ -289,20 +303,6 @@ Other HSTS settings are optional.
 
             mc admin config set browser \
                hsts_preload="on" \
-               hsts_seconds="31536000" \
-               [ARGUMENT=VALUE ...]
-
-      .. mc-conf:: browser hsts_seconds
-         :delimiter: " "
-
-         The ``max_age`` the configured policy remains in effect, in seconds.
-         Defaults to ``0``, disabled.
-         You **must** configure a *non-zero* duration to enable the ``Strict-Transport-Security`` header.
-
-         .. code-block:: shell
-            :class: copyable
-
-            mc admin config set browser \
                hsts_seconds="31536000" \
                [ARGUMENT=VALUE ...]
 
