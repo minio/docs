@@ -231,7 +231,7 @@ Use Consistent Size of Drive
    For example, if the deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
 
 Configure Sequential Drive Mounting
-   MinIO uses expansion notation ``{x...y}`` to denote a sequential series of drives when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 
+   MinIO uses Go expansion notation ``{x...y}`` to denote a sequential series of drives when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 
    Configure drive mounting paths as a sequential series to best support this notation.
 
 Persist Drive Mounting and Mapping Across Reboots

@@ -279,11 +279,11 @@ Storage
    .. note:: 
 
       Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
-      For example, an AWS ECS instances with mounted persistent EBS volumes may fail to boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
+      For example, an AWS ECS instances with mounted persistent EBS volumes may not boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
 
       You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
       
-      You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
+      You should not use this option on systems with locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
 
    Disable XFS Retry On Error
    ++++++++++++++++++++++++++

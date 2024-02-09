@@ -17,7 +17,8 @@ Expansion does not provide Business Continuity/Disaster Recovery (BC/DR)-grade p
 While each pool is an independent set of servers with distinct :ref:`erasure sets <minio-ec-erasure-set>` for availability, the complete loss of one pool results in MinIO stopping I/O for all pools in the deployment.
 Similarly, an erasure set which loses quorum in one pool represents data loss of objects stored in that set, regardless of the number of other erasure sets or pools.
 
-The new server pool does **not** need to be substantially similar in hardware and software configuration to any existing server pool, though this may allow for simplified cluster management and more predictable performance across pools.
+The new server pool does **not** need to use the same type or size of  hardware and software configuration as any existing server pool, though doing so may allow for simplified cluster management and more predictable performance across pools.
+All drives in the new pool **should** be of the same type and size within the new pool.
 Review MinIO's :ref:`hardware recommendations <minio-hardware-checklist>` for more complete guidance on selecting an appropriate configuration.
 
 To provide BC-DR grade failover and recovery support for your single or multi-pool MinIO deployments, use :ref:`site replication <minio-site-replication-overview>`.
