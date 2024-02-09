@@ -312,6 +312,7 @@ Examples
 
 The following examples show the rendered header for the given configuration settings.
 The equivalent environment variables generate the same result.
+All examples use a value of ``31536000``, which is the number of seconds in a calendar year (365 days).
 
 ``hsts_seconds``
 
