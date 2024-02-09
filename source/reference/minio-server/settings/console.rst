@@ -318,36 +318,36 @@ The equivalent environment variables generate the same result.
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set ALIAS browser hsts_seconds=500
+     mc admin config set ALIAS browser hsts_seconds=31536000
 
   .. code-block:: shell
      :class: copyable
 
-     Strict-Transport-Security: max-age=500
+     Strict-Transport-Security: max-age=31536000
 
 ``hsts_include_subdomains``
 
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set ALIAS browser hsts_seconds=500 hsts_include_subdomains=on
+     mc admin config set ALIAS browser hsts_seconds=31536000 hsts_include_subdomains=on
 
   .. code-block:: shell
      :class: copyable
 
-     Strict-Transport-Security: max-age=500; includeSubDomains
+     Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 ``hsts_preload``
 
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set ALIAS browser hsts_seconds=500 hsts_include_subdomains=on hsts_preload=on
+     mc admin config set ALIAS browser hsts_seconds=31536000 hsts_include_subdomains=on hsts_preload=on
 
   .. code-block:: shell
      :class: copyable
 
-     Strict-Transport-Security: max-age=500; includeSubDomains; preload
+     Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
 
 Referrer Policy
