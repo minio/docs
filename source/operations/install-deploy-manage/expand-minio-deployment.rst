@@ -124,6 +124,12 @@ Operating systems vary for methods used to synchronize time and date, such as wi
 
 Check the documentation for your operating system for how to set up and maintain accurate and identical system clock times across nodes.
 
+Back Up Cluster Settings First
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the :mc:`mc admin cluster bucket export` and :mc:`mc admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to starting decommissioning.
+You can use these snapshots to restore bucket/IAM settings to recover from user or process errors as necessary.
+
 Considerations
 --------------
 

@@ -216,99 +216,40 @@ MinIO **does not** support arbitrary migration of a drive with existing MinIO da
 The following requirements summarize the :ref:`minio-hardware-checklist-storage` section of MinIO's hardware recommendations:
 
 Use Local Storage
-   Direct-Attached Storage (DAS) has significant performance and consistency advantages over networked storage (NAS, SAN, NFS).
+   Direct-Attached Storage (DAS) has significant performance and consistency advantages over networked storage (:abbr:`NAS (Network Attached Storage)`, :abbr:`SAN (Storage Area Network)`, :abbr:`NFS (Network File Storage)`).
    MinIO strongly recommends flash storage (NVMe, SSD) for primary or "hot" data.
 
 Use XFS-Formatting for Drives
-   Deployments using non-XFS filesystems (EXT4, BTRFS, ZFS) tend to have lower performance and may also exhibit unexpected or undesired behavior at scale or under load.
+   MinIO strongly recommends provisioning XFS formatted drives for storage.
+   MinIO uses XFS as part of internal testing and validation suites, providing additional confidence in performance and behavior at all scales.
+
+   MinIO does **not** test nor recommend any other filesystem, such as EXT4, BTRFS, or ZFS.
 
 Use Consistent Type of Drive
-   Each :term:`pool` must use the same type (NVMe, SSD)  of drive with identical capacity (e.g. ``N`` TB) . 
    MinIO does not distinguish drive types and does not benefit from mixed storage types. 
+   Each :term:`pool` must use the same type (NVMe, SSD)
+
+   For example, deploy a pool consisting of only NVMe drives.
+   If you deploy some drives as SSD or HDD, MinIO treats those drives identically to the NVMe drives.
+   This can result in performance issues, as some drives have differing or worse read/write characteristics and cannot respond at the same rate as the NVMe drives.
 
 Use Consistent Size of Drive
-   MinIO limits the size used per drive to the smallest drive in the deployment. 
-   For example, if the deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
+   MinIO limits the size used per drive to the smallest drive in the deployment.
+
+   For example, deploy a pool consisting of the same number of NVMe drives with identical capacity of ``7.68TiB``.
+   If you deploy one drive with ``3.84TiB``, MinIO treats all drives in the pool as having that capacity.
 
 Configure Sequential Drive Mounting
    MinIO uses Go expansion notation ``{x...y}`` to denote a sequential series of drives when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 
    Configure drive mounting paths as a sequential series to best support this notation.
+   For example, mount your drives using a pattern of ``/mnt/drive-n``, where ``n`` starts at ``1`` and increments by ``1`` per drive.
 
 Persist Drive Mounting and Mapping Across Reboots
-   Use ``/etc/fstab`` or a similar file-based mount configuration to ensure consistent drive-to-mount mapping across node reboots.
+   Use ``/etc/fstab`` to ensure consistent drive-to-mount mapping across node reboots.
+
+   Non-Linux Operating Systems should use the equivalent drive mount management tool.
 
 .. end-storage-requirements-desc
-
-.. start-local-jbod-desc
-.. May be able to delete this entire section
-
-MinIO strongly recommends direct-attached :abbr:`JBOD (Just a Bunch of Disks)`
-arrays with XFS-formatted disks for best performance.  
-
-- Direct-Attached Storage (DAS) has significant performance and consistency
-  advantages over networked storage (NAS, SAN, NFS). 
-
-- Deployments using non-XFS filesystems (ext4, btrfs, zfs) tend to have
-  lower performance while exhibiting unexpected or undesired behavior.  
-
-- RAID or similar technologies do not provide additional resilience or
-  availability benefits when used with distributed MinIO deployments, and
-  typically reduce system performance.
-
-Use Consistent Type of Drive
-   Ensure all nodes in the |deployment| use the same type (NVMe, SSD, or HDD)  of drive with identical capacity (e.g. ``N`` TB) . 
-   MinIO does not distinguish drive types and does not benefit from mixed storage types. 
-
-Use Consistent Size of Drive
-   MinIO limits the size used per drive to the smallest drive in the deployment. 
-   For example, if the deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
-
-Configure Sequential Drive Mounting
-   MinIO uses expansion notation ``{x...y}`` to denote a sequential series of drives when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 
-
-Persist Drive Mounting and Mapping Across Reboots
-   Use ``/etc/fstab`` or a similar file-based mount configuration to ensure consistent drive-to-mount mapping across node reboots.
-   Use UUID or Label-based 
-
-The following example commands prepare a set of drives for use by MinIO according to the prerequisites.
-- Formats all drives as XFS and applies a label
-
-For example:
-
-.. code-block:: shell
-
-   $ mkfs.xfs /dev/sdb -L DISK1
-   $ mkfs.xfs /dev/sdc -L DISK2
-   $ mkfs.xfs /dev/sdd -L DISK3
-   $ mkfs.xfs /dev/sde -L DISK4
-
-   $ nano /etc/fstab
-
-     # <file system>  <mount point>  <type>  <options>         <dump>  <pass>
-     LABEL=DISK1      /mnt/disk1     xfs     defaults,noatime  0       2
-     LABEL=DISK2      /mnt/disk2     xfs     defaults,noatime  0       2
-     LABEL=DISK3      /mnt/disk3     xfs     defaults,noatime  0       2
-     LABEL=DISK4      /mnt/disk4     xfs     defaults,noatime  0       2
-
-You can then specify the entire range of drives using the expansion notation
-``/mnt/disk{1...4}``. If you want to use a specific subfolder on each drive,
-specify it as ``/mnt/disk{1...4}/minio``.
-
-MinIO **does not** support arbitrary migration of a drive with existing MinIO
-data to a new mount position, whether intentional or as the result of OS-level
-behavior.
-
-.. note:: 
-
-   Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
-   For example, an AWS ECS instances with mounted persistent EBS volumes may fail to boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
-
-   You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
-   
-   You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
-
-
-.. end-local-jbod-desc
 
 .. start-nondisruptive-upgrade-desc
 

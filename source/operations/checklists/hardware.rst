@@ -32,10 +32,10 @@ Production Hardware Recommendations
 The following checklist follows MinIO's `Recommended Configuration <https://min.io/product/reference-hardware?ref-docs>`__ for production deployments.
 The provided guidance is intended as a baseline and cannot replace |subnet| Performance Diagnostics, Architecture Reviews, and direct-to-engineering support.
 
-MinIO strongly recommends selecting substantially similar hardware configurations for all nodes in a given :term:`server pool`. 
-Ensure the hardware (CPU, memory, motherboard, storage adapters) and software (operating system, kernel settings, system services) is consistent across pool nodes. 
+MinIO, like any distributed system, benefits from selecting identical configurations for all nodes in a given :term:`server pool`. 
+Ensure a consistent selection hardware (CPU, memory, motherboard, storage adapters) and software (operating system, kernel settings, system services) across pool nodes. 
 
-Deployment may exhibit unpredictable performance if nodes have heterogeneous hardware or software configurations. 
+Deployment may exhibit unpredictable performance if nodes have varying hardware or software configurations. 
 Workloads that benefit from storing aged data on lower-cost hardware should instead deploy a dedicated "warm" or "cold" MinIO deployment and :ref:`transition <minio-lifecycle-management-tiering>` data to that tier.
 
 .. admonition:: MinIO does not provide hosted services or hardware sales
@@ -220,19 +220,13 @@ Storage
    Use Direct-Attached "Local" Storage (DAS)
    +++++++++++++++++++++++++++++++++++++++++
 
-   DAS-storage, such as locally-attached JBOD (Just a Bunch of Disk) arrays, provide significant performance and consistency advantages over networked (NAS, SAN, NFS) storage.
+   :abbr:`DAS (Direct-Attached Storage)`, such as locally-attached JBOD (Just a Bunch of Disk) arrays, provide significant performance and consistency advantages over networked (NAS, SAN, NFS) storage.
 
    .. dropdown:: Network File System Volumes Break Consistency Guarantees
       :class-title: note
 
-      MinIO's strict **read-after-write** and **list-after-write** consistency
-      model requires local drive filesystems.
-
-      MinIO cannot provide consistency guarantees if the underlying storage
-      volumes are NFS or a similar network-attached storage volume. 
-
-      For deployments that *require* using network-attached storage, use
-      NFSv4 for best results.
+      MinIO's strict **read-after-write** and **list-after-write** consistency model requires local drive filesystems.
+      MinIO cannot provide consistency guarantees if the underlying storage volumes are NFS or a similar network-attached storage volume. 
 
    Use XFS-Formatted Drives with Labels
    ++++++++++++++++++++++++++++++++++++
@@ -270,7 +264,8 @@ Storage
       LABEL=MINIODRIVE3      /mnt/drive-3     xfs     defaults,noatime  0       2
       LABEL=MINIODRIVE4      /mnt/drive-4     xfs     defaults,noatime  0       2
 
-   You can then use ``mount -a`` or similar automounting configurations to ensure all MinIO drives mount at node startup.
+   You can use ``mount -a`` to mount those drives at those paths during initial setup.
+   The Operating System should otherwise mount these drives as part of the node startup process.
 
    MinIO **strongly recommends** using label-based mounting rules over UUID-based rules.
    Label-based rules allow swapping an unhealthy or non-working drive with a replacement that has matching format and label.
@@ -279,7 +274,7 @@ Storage
    .. note:: 
 
       Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
-      For example, an AWS ECS instances with mounted persistent EBS volumes may not boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
+      For example, an AWS ECS instance with mounted persistent EBS volumes may not boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
 
       You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
       
