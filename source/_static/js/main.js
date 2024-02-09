@@ -504,6 +504,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     }
   })();
+// ------------------------------------------------
+// Tab switching for hidden anchors
+// ------------------------------------------------
+
+    document.getElementById((document.getElementById(window.location.hash.substring(1)))
+        .closest("div")
+        .previousSibling.getAttributes("for"))
+    .click();
+
 });
 
 
