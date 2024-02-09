@@ -505,3 +505,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   })();
 });
+
+
+window.addEventListener("hashchange", function() {
+  document.getElementById((document.getElementById(window.location.hash.substring(1)))
+          .closest("div")
+	  .previousSibling.getAttribute("for"))
+        .click();
+});
