@@ -33,10 +33,10 @@ keys for use with MinIO SSE.
 MinIO supports the following |KMS| providers as the central key store:
 
 - :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
-- :kes-docs:`AWS SecretsManager <integrations/aws-secrets-manager/>`
+- :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
 - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
-- :kes-docs:`Google Cloud SecretManager <integrations/google-cloud-secret-manager/>`
-- :kes-docs:`Hashicorp KeyVault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`Hashicorp Vault <integrations/hashicorp-vault-keystore/>`
 - :kes-docs:`Thales Digital Identity and Security (formerly Gemalto) <integrations/thales-ciphertrust/>`
 
 MinIO SSE requires enabling :ref:`minio-tls`. 

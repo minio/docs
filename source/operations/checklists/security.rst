@@ -43,8 +43,8 @@ MinIO supports the following external KMS providers through :kes-docs:`Key Encry
 - :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
 - :kes-docs:`AWS SecretsManager <integrations/aws-secrets-manager/>`
 - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
-- :kes-docs:`Google Cloud SecretManager <integrations/google-cloud-secret-manager/>`
-- :kes-docs:`Hashicorp KeyVault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`Hashicorp Vault <integrations/hashicorp-vault-keystore/>`
 - :kes-docs:`Thales Digital Identity and Security (formerly Gemalto) <integrations/thales-ciphertrust/>`
 
 .. list-table::

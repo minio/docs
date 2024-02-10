@@ -50,7 +50,7 @@ a. Create the KES Configuration File
             -v |kescertpath|/certs:/certs                                \
             kes:|kes-stable| tool identity of /certs/minio-kes.cert
 
-   - Replace the ``endpoint`` with the URL for the Keyvault instance.
+   - Replace the ``endpoint`` with the URL for the Key Vault instance.
 
    - Set ``TENANTID``, ``CLIENTID``, and ``CLIENTSECRET`` to match the credentials for a project user with the :ref:`required permissions <minio-sse-azure-prereq-azure>`.
 

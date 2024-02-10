@@ -51,10 +51,10 @@ MinIO SSE-S3 is functionally compatible with AWS S3
 following KMS providers:
 
 - :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
-- :kes-docs:`AWS SecretsManager <integrations/aws-secrets-manager/>`
+- :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
 - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
-- :kes-docs:`Google Cloud SecretManager <integrations/google-cloud-secret-manager/>`
-- :kes-docs:`Hashicorp KeyVault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`Hashicorp Vault <integrations/hashicorp-vault-keystore/>`
 - :kes-docs:`Thales Digital Identity and Security (formerly Gemalto) <integrations/thales-ciphertrust/>`
 
 .. _minio-encryption-sse-s3-quickstart:
@@ -69,10 +69,10 @@ For extended development or production environments, use one of the following
 supported external Key Management Services (KMS):
 
 - :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
-- :kes-docs:`AWS SecretsManager <integrations/aws-secrets-manager/>`
+- :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
 - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
-- :kes-docs:`Google Cloud SecretManager <integrations/google-cloud-secret-manager/>`
-- :kes-docs:`Hashicorp KeyVault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`Hashicorp Vault <integrations/hashicorp-vault-keystore/>`
 - :kes-docs:`Thales Digital Identity and Security (formerly Gemalto) <integrations/thales-ciphertrust/>`
 
 .. include:: /includes/common/common-minio-kes.rst

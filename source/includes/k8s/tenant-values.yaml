@@ -388,14 +388,14 @@ tenant:
   #        status:     # Vault status configuration. The server will periodically reach out to Vault to check its status.
   #          ping: 10s   # Duration until the server checks Vault's status again.
   #      # aws:
-  #      #   # The AWS SecretsManager key store. The server will store
-  #      #   # secret keys at the AWS SecretsManager encrypted with
+  #      #   # The AWS Secrets Manager key store. The server will store
+  #      #   # secret keys at the AWS Secrets Manager encrypted with
   #      #   # AWS-KMS. See: https://aws.amazon.com/secrets-manager
   #      #   secretsmanager:
-  #      #     endpoint: ""   # The AWS SecretsManager endpoint      - e.g.: secretsmanager.us-east-2.amazonaws.com
-  #      #     region: ""     # The AWS region of the SecretsManager - e.g.: us-east-2
-  #      #     kmskey: ""     # The AWS-KMS key ID used to en/decrypt secrets at the SecretsManager. By default (if not set) the default AWS-KMS key will be used.
-  #      #     credentials:   # The AWS credentials for accessing secrets at the AWS SecretsManager.
+  #      #     endpoint: ""   # The AWS Secrets Manager endpoint      - e.g.: secretsmanager.us-east-2.amazonaws.com
+  #      #     region: ""     # The AWS region of the Secrets Manager - e.g.: us-east-2
+  #      #     kmskey: ""     # The AWS-KMS key ID used to en/decrypt secrets at the Secrets Manager. By default (if not set) the default AWS-KMS key will be used.
+  #      #     credentials:   # The AWS credentials for accessing secrets at the AWS Secrets Manager.
   #      #       accesskey: ""  # Your AWS Access Key
   #      #       secretkey: ""  # Your AWS Secret Key
   #      #       token: ""      # Your AWS session token (usually optional)

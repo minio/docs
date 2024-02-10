@@ -1,5 +1,5 @@
-Deploy MinIO Tenant with Server-Side Encryption using AWS SecretsManager
-------------------------------------------------------------------------
+Deploy MinIO Tenant with Server-Side Encryption using AWS Secrets Manager
+-------------------------------------------------------------------------
 
 1) Access the Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
