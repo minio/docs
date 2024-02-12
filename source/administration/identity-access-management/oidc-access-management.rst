@@ -40,19 +40,19 @@ MinIO supports multiple OIDC provider configurations.
 However, you can configure only **one** JWT claim-based OIDC provider per deployment. 
 All other providers must use RolePolicy.
 
-RolePolicy and RoleARN
+RolePolicy and RoleArn
 ~~~~~~~~~~~~~~~~~~~~~~
 
-With a RolePolicy, all clients which generate an STS credential using a given RoleARN receive the :ref:`policy or policies <minio-policy>` associated to the RolePolicy configuration for that RoleARN.
+With a RolePolicy, all clients which generate an STS credential using a given RoleArn receive the :ref:`policy or policies <minio-policy>` associated to the RolePolicy configuration for that RoleArn.
 
 You can use  :ref:`OpenID Policy Variables <minio-policy-variables-oidc>` to create policies that programmatically manage what each individual user has access to.
 
 The login flow for an application using :abbr:`OIDC (OpenID Connect)` credentials with a RolePolicy claim flow is as follows:
 
 1. Create an OIDC Configuration.
-2. Record the RoleARN assigned to the configuration either at time of creation or at MinIO start.
-   Use this RoleARN with the :ref:`AssumeRoleWithWebIdentity <minio-sts-assumerolewithwebidentity>` STS API.
-3. Create a RolePolicy to use with the RoleARN.
+2. Record the RoleArn assigned to the configuration either at time of creation or at MinIO start.
+   Use this RoleArn with the :ref:`AssumeRoleWithWebIdentity <minio-sts-assumerolewithwebidentity>` STS API.
+3. Create a RolePolicy to use with the RoleArn.
    Use either the :envvar:`MINIO_IDENTITY_OPENID_ROLE_POLICY` environment variable or the :mc-conf:`identity_openid role_policy <identity_openid.role_policy>` configuration setting to define the list of policies to use for the provider
 4. Users select the configured OIDC provider when logging in to MinIO.
 5. Users complete authentication to the configured :abbr:`OIDC (OpenID Connect)` provider and redirect back to MinIO. 
@@ -61,7 +61,7 @@ The login flow for an application using :abbr:`OIDC (OpenID Connect)` credential
    Authentication using Implicit Flow is not supported.
 
 6. MinIO verifies the ``RoleArn`` in the API call and checks for the :ref:`RolePolicy <minio-external-identity-management-openid-access-control>` to use.
-   Any authentication request with the RoleARN receives the same policy access permissions.
+   Any authentication request with the RoleArn receives the same policy access permissions.
 7. MinIO returns temporary credentials in the STS API response in the form of an access key, secret key, and session token. 
    The credentials have permissions matching those policies specified in the RolePolicy.
    
