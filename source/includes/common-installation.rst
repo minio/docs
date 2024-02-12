@@ -237,7 +237,7 @@ Use Consistent Size of Drive
    MinIO limits the size used per drive to the smallest drive in the deployment.
 
    For example, deploy a pool consisting of the same number of NVMe drives with identical capacity of ``7.68TiB``.
-   If you deploy one drive with ``3.84TiB``, MinIO treats all drives in the pool as having that capacity.
+   If you deploy one drive with ``3.84TiB``, MinIO treats all drives in the pool as having that smaller capacity.
 
 Configure Sequential Drive Mounting
    MinIO uses Go expansion notation ``{x...y}`` to denote a sequential series of drives when creating the new |deployment|, where all nodes in the |deployment| have an identical set of mounted drives. 

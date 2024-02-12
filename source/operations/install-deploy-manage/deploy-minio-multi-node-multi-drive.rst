@@ -121,7 +121,7 @@ Erasure Coding Parity
 
 MinIO :ref:`erasure coding <minio-erasure-coding>` is a data redundancy and availability feature that allows MinIO deployments to automatically reconstruct objects on-the-fly despite the loss of multiple drives or nodes in the cluster.
 
-MinIO defaults to ``EC:4`` , or 4 parity blocks per :ref:`erasure set <minio-ec-erasure-set>`. 
+MinIO defaults to ``EC:4``, or 4 parity blocks per :ref:`erasure set <minio-ec-erasure-set>`. 
 You can set a custom parity level by setting the appropriate :ref:`MinIO Storage Class environment variable <minio-server-envvar-storage-class>`. 
 Consider using the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for guidance in selecting the appropriate erasure code parity level for your cluster.
 

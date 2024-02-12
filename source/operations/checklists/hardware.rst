@@ -33,9 +33,9 @@ The following checklist follows MinIO's `Recommended Configuration <https://min.
 The provided guidance is intended as a baseline and cannot replace |subnet| Performance Diagnostics, Architecture Reviews, and direct-to-engineering support.
 
 MinIO, like any distributed system, benefits from selecting identical configurations for all nodes in a given :term:`server pool`. 
-Ensure a consistent selection hardware (CPU, memory, motherboard, storage adapters) and software (operating system, kernel settings, system services) across pool nodes. 
+Ensure a consistent selection of hardware (CPU, memory, motherboard, storage adapters) and software (operating system, kernel settings, system services) across pool nodes. 
 
-Deployment may exhibit unpredictable performance if nodes have varying hardware or software configurations. 
+Deployments may exhibit unpredictable performance if nodes have varying hardware or software configurations. 
 Workloads that benefit from storing aged data on lower-cost hardware should instead deploy a dedicated "warm" or "cold" MinIO deployment and :ref:`transition <minio-lifecycle-management-tiering>` data to that tier.
 
 .. admonition:: MinIO does not provide hosted services or hardware sales
@@ -220,7 +220,7 @@ Storage
    Use Direct-Attached "Local" Storage (DAS)
    +++++++++++++++++++++++++++++++++++++++++
 
-   :abbr:`DAS (Direct-Attached Storage)`, such as locally-attached JBOD (Just a Bunch of Disk) arrays, provide significant performance and consistency advantages over networked (NAS, SAN, NFS) storage.
+   :abbr:`DAS (Direct-Attached Storage)`, such as locally-attached JBOD (Just a Bunch of Disks) arrays, provide significant performance and consistency advantages over networked (NAS, SAN, NFS) storage.
 
    .. dropdown:: Network File System Volumes Break Consistency Guarantees
       :class-title: note
