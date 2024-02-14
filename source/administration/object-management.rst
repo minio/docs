@@ -60,9 +60,9 @@ Neither clients nor administrators would manually create the intermediate prefix
 Path vs Virtual Host Bucket Access
 ----------------------------------
 
-MinIO supports both path-style (default) or virtual-host bucket lookups.
+MinIO supports both :s3-docs:`path-style (default) or virtual-host bucket lookups <VirtualHosting.html>`.
 
-For example, consider a MinIO deployment with an assigned FQDN of ``minio.example.net``.
+For example, consider a MinIO deployment with an assigned FQDN of ``minio.example.net``:
 
 - With path-style lookups, applications specify the full path to a bucket, such as ``minio.example.net/mybucket``.
 - With virtual-host lookups, application specify the bucket as a subdomain, such as ``mybucket.minio.example.net/``.
@@ -76,6 +76,14 @@ Any MinIO services which conflict with those domains, such as replication target
 For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``*.minio.example.net`` to any MinIO service or target. 
 This includes hostnames for use with bucket, batch, or site replication.
 
+.. important::
+
+   For deployments with :ref:`TLS enabled <minio-tls>`, you **must** ensure your TLS certificate SANs cover all subdomains of the leftmost domain specified to ``MINIO_DOMAIN``.
+
+   For example, the example of ``MINIO_DOMAIN=minio.example.net`` requires a TLS SAN that covers the subdomains of ``minio.example.net``.
+   You can set an additional TLS SAN of ``*.minio.example.net`` to appropriately cover the subdomain namespace.
+
+   TLS Wildcard rules prevent chaining to additional subdomain levels, such that a TLS certificate with a wildcard SAN of ``*.example.net`` would **not** cover the virtual host lookups at ``*.minio.example.net``.
 
 
 Object Organization and Planning
