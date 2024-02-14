@@ -19,12 +19,7 @@ The :mc:`minio server` process stores its configuration in the storage backend :
 MinIO Settings
 --------------
 
-MinIO settings define runtime behavior of the MinIO :mc:`server <minio server>` process:
-
-You can define many MinIO Server settings in one of two ways:
-
-1. Set :ref:`environment variables <minio-environment-variables>` in the host system prior to launching or restarting the server process.
-2. Modify configuration options using the :mc:`mc admin config` command or the :guilabel:`Administrator > Settings` page of the :ref:`MinIO Console <minio-console>`.
+MinIO settings define runtime behavior of the MinIO :mc:`server <minio server>` process.
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined

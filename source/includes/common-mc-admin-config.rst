@@ -113,7 +113,7 @@ Some settings have only an environment variable or a configuration setting, but 
 
 .. important::
 
-   The configuration settings on this page control fundamental MinIO behaviors and functionality.
+   Each configuration setting controls fundamental MinIO behavior and functionality.
    MinIO **strongly recommends** testing configuration changes in a lower environment, such as DEV or QA, before applying to production.
 
 .. end-minio-settings-test-before-prod
