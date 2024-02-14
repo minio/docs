@@ -17,6 +17,10 @@ The root user has complete access and permissions to perform operations on the M
    :start-after: start-minio-settings-defined
    :end-before: end-minio-settings-defined
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Root User
 ---------
 

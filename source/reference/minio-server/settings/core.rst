@@ -16,6 +16,10 @@ This page covers settings that control core behavior of the MinIO process.
    :start-after: start-minio-settings-defined
    :end-before: end-minio-settings-defined
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Common Settings
 ---------------
 
@@ -87,11 +91,23 @@ Domain
 
       .. envvar:: MINIO_DOMAIN
 
-         Set to the Fully Qualified Domain Name (FQDN) MinIO accepts Bucket DNS (Virtual Host)-style requests on.
+         Enables Virtual Host-style requests to the MinIO deployment.
+         Set the value to the Fully Qualified Domain Name (FQDN) for MinIO to accept incoming virtual host requests.
 
-         For example, setting ``MINIO_DOMAIN=minio.example.net`` directs MinIO to accept an incoming connection request to the ``data`` bucket at ``data.minio.example.net``.
+         Omitting this setting directs MinIO to only accept the default path-style requests.
 
-         If this setting is omitted, the default is to only accept path-style requests. For example, ``minio.example.net/data``.
+         For example, consider a MinIO deployment with an assigned FQDN of ``minio.example.net``.
+
+         - With path-style lookups, applications can access the bucket using it's full path as ``minio.example.net/mybucket``.
+         - With virtual-host lookups, application can access the bucket as a virtual host as ``mybucket.minio.example.net/``.
+
+         .. important::
+
+            If you configure ``MINIO_DOMAIN``, you **must** consider all subdomains of the specified FQDN as exclusively assigned for use as bucket names.
+            Any MinIO services which conflict with those domains, such as replication targets, may exhibit unexpected or undesired behavior as a result of the collision. 
+
+            For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``*.minio.example.net`` to any MinIO service or target. 
+            This includes hostnames for use with bucket, batch, or site replication.
 
    .. tab-item:: Configuration Setting
 

@@ -26,6 +26,10 @@ This impacts how MinIO uses the space on the drive(s) and how MinIO can recover 
 Define any of these environment variables in the host system prior to starting or restarting the MinIO process.
 Refer to your operating system's documentation for how to define an environment variable.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Environment Variables
 ---------------------
 

@@ -18,6 +18,10 @@ See :ref:`minio-bucket-notifications-publish-kafka` for a tutorial on using thes
    :start-after: start-minio-settings-defined
    :end-before: end-minio-settings-defined
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Multiple Kafka Targets
 ----------------------
 

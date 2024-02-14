@@ -55,6 +55,29 @@ Clients and administrators should not create these prefixes manually.
 
 Neither clients nor administrators would manually create the intermediate prefixes, as MinIO automatically infers them from the object name.
 
+.. _minio-object-management-path-virtual-access:
+
+Path vs Virtual Host Bucket Access
+----------------------------------
+
+MinIO supports both path-style (default) or virtual-host bucket lookups.
+
+For example, consider a MinIO deployment with an assigned FQDN of ``minio.example.net``.
+
+- With path-style lookups, applications specify the full path to a bucket, such as ``minio.example.net/mybucket``.
+- With virtual-host lookups, application specify the bucket as a subdomain, such as ``mybucket.minio.example.net/``.
+
+Some applications may require or expect virtual-host lookup support when performing S3 operations against MinIO.
+To enable virtual-host bucket lookup, you must set the :envvar:`MINIO_DOMAIN` environment variable to a Fully Qualified Domain Name (FQDN) that resolves to the MinIO Deployment.
+
+If you configure ``MINIO_DOMAIN``, you **must** consider all subdomains of the specified FQDN as exclusively assigned for use as bucket names.
+Any MinIO services which conflict with those domains, such as replication targets, may exhibit unexpected or undesired behavior as a result of the collision. 
+
+For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``*.minio.example.net`` to any MinIO service or target. 
+This includes hostnames for use with bucket, batch, or site replication.
+
+
+
 Object Organization and Planning
 --------------------------------
 

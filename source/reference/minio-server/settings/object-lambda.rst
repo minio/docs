@@ -24,6 +24,10 @@ For example, the following command sets two distinct Object Lambda webhook endpo
    export MINIO_LAMBDA_WEBHOOK_ENABLE_yourfunction="on"
    export MINIO_LAMBDA_WEBHOOK_ENDPOINT_yourfunction="http://webhook-2.example.net"
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Environment Variables
 ---------------------
 

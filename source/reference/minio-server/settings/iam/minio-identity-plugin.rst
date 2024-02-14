@@ -13,6 +13,14 @@ MinIO Identity Management Plugin Settings
 This page documents settings for enabling external identity management using the MinIO Identity Management Plugin. 
 See :ref:`minio-external-identity-management-plugin` for a tutorial on using these settings.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Examples
 --------
 
