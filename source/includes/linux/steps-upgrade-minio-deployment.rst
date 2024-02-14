@@ -8,6 +8,35 @@ This procedure does not require taking downtime and is non-disruptive to ongoing
 This page documents methods for upgrading using the update-then-restart method for both ``systemctl`` and user-managed MinIO deployments.
 Deployments using Ansible, Terraform, or other management tools can use the procedures here as guidance for implementation within the existing automation framework.
 
+Prerequisites
+-------------
+
+Back Up Cluster Settings First
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the :mc:`mc admin cluster bucket export` and :mc:`mc admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations prior to starting decommissioning.
+You can use these snapshots to restore :ref:`bucket <minio-mc-admin-cluster-bucket-import>` and :ref:`IAM <minio-mc-admin-cluster-iam-import>` settings to recover from user or process errors as necessary.
+
+Check Release Notes
+~~~~~~~~~~~~~~~~~~~
+
+MinIO publishes :minio-git:`Release Notes <minio/releases>` for your reference as part of identifying the changes applied in each release.
+Review the associated release notes between your current MinIO version and the newer release so you have a complete view of any changes.
+
+Pay particular attention to any releases that are *not* backwards compatible.
+You cannot trivially downgrade from any such release.
+
+Test Upgrades Before Applying To Production
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MinIO uses a testing and validation suite as part of all releases.
+However, no testing suite can account for unique combinations and permutations of hardware, software, and workloads of your production environment.
+
+You should always validate any MinIO upgrades in a lower environment (Dev/QA/Staging) *before* applying those upgrades to Production deployments, or any other environment containing critical data.
+Performing updates to production environments without first validating in lower environments is done at your own risk.
+
+For MinIO deployments that are significantly behind latest stable (6+ months), consider using |SUBNET| for additional support and guidance during the upgrade procedure.
+
 Considerations
 --------------
 
@@ -26,15 +55,6 @@ For virtualized environments which *require* rolling updates, you should modify 
 2. Restart the MinIO deployment using :mc-cmd:`mc admin service restart`.
 3. Update the virtual machine/container configuration to use the matching newer MinIO image.
 4. Perform the rolling restart of each machine/container with the updated image.
-
-Check Release Notes
-~~~~~~~~~~~~~~~~~~~
-
-MinIO publishes :minio-git:`Release Notes <minio/releases>` for your reference as part of identifying the changes applied in each release.
-Review the associated release notes between your current MinIO version and the newer release so you have a complete view of any changes.
-
-Pay particular attention to any releases that are *not* backwards compatible.
-You cannot trivially downgrade from any such release.
 
 .. _minio-upgrade-systemctl:
 

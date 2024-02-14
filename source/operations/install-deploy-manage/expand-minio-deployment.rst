@@ -17,6 +17,10 @@ Expansion does not provide Business Continuity/Disaster Recovery (BC/DR)-grade p
 While each pool is an independent set of servers with distinct :ref:`erasure sets <minio-ec-erasure-set>` for availability, the complete loss of one pool results in MinIO stopping I/O for all pools in the deployment.
 Similarly, an erasure set which loses quorum in one pool represents data loss of objects stored in that set, regardless of the number of other erasure sets or pools.
 
+The new server pool does **not** need to use the same type or size of hardware and software configuration as any existing server pool, though doing so may allow for simplified cluster management and more predictable performance across pools.
+All drives in the new pool **should** be of the same type and size within the new pool.
+Review MinIO's :ref:`hardware recommendations <minio-hardware-checklist>` for more complete guidance on selecting an appropriate configuration.
+
 To provide BC-DR grade failover and recovery support for your single or multi-pool MinIO deployments, use :ref:`site replication <minio-site-replication-overview>`.
 
 The procedure on this page expands an existing :ref:`distributed <deploy-minio-distributed>` MinIO deployment with an additional server pool. 
@@ -84,26 +88,14 @@ You can specify the entire range of hostnames using the expansion notation
 
 Configuring DNS to support MinIO is out of scope for this procedure.
 
-Local JBOD Storage with Sequential Mounts
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Storage Requirements
+~~~~~~~~~~~~~~~~~~~~
 
 .. |deployment| replace:: server pool
 
 .. include:: /includes/common-installation.rst
-   :start-after: start-local-jbod-desc
-   :end-before: end-local-jbod-desc
-
-.. admonition:: Network File System Volumes Break Consistency Guarantees
-   :class: note
-
-   MinIO's strict **read-after-write** and **list-after-write** consistency
-   model requires local drive filesystems (``xfs``, ``ext4``, etc.).
-
-   MinIO cannot provide consistency guarantees if the underlying storage
-   volumes are NFS or a similar network-attached storage volume. 
-
-   For deployments that *require* using network-attached storage, use
-   NFSv4 for best results.
+   :start-after: start-storage-requirements-desc
+   :end-before: end-storage-requirements-desc
 
 Minimum Drives for Erasure Code Parity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -122,6 +114,21 @@ You can use the
 :guilabel:`Erasure Code Stripe Size (K+M)` of your new pool. If the highest
 listed value is at least ``2 x EC:N``, the pool supports the deployment's
 erasure parity settings.
+
+Time Synchronization
+~~~~~~~~~~~~~~~~~~~~
+
+Multi-node systems must maintain synchronized time and date to maintain stable internode operations and interactions.
+Make sure all nodes sync to the same time server regularly.
+Operating systems vary for methods used to synchronize time and date, such as with ``ntp``, ``timedatectl``, or ``timesyncd``.
+
+Check the documentation for your operating system for how to set up and maintain accurate and identical system clock times across nodes.
+
+Back Up Cluster Settings First
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the :mc:`mc admin cluster bucket export` and :mc:`mc admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to starting decommissioning.
+You can use these snapshots to restore :ref:`bucket <minio-mc-admin-cluster-bucket-import>` and :ref:`IAM <minio-mc-admin-cluster-iam-import>` settings to recover from user or process errors as necessary.
 
 Considerations
 --------------
@@ -159,27 +166,6 @@ For more about how rebalancing works, see :ref:`managing objects across a deploy
 
 Likewise, MinIO does not write to pools in a decommissioning process.
 
-Homogeneous Node Configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO strongly recommends selecting substantially similar hardware
-configurations for all nodes in the new server pool. Ensure the hardware (CPU,
-memory, motherboard, storage adapters) and software (operating system, kernel
-settings, system services) is consistent across all nodes in the pool. 
-
-The new pool may exhibit unpredictable performance if nodes have heterogeneous
-hardware or software configurations. Workloads that benefit from storing aged
-data on lower-cost hardware should instead deploy a dedicated "warm" or "cold"
-MinIO deployment and :ref:`transition <minio-lifecycle-management-tiering>`
-data to that tier.
-
-The new server pool does **not** need to be substantially similar in hardware
-and software configuration to any existing server pool, though this may allow
-for simplified cluster management and more predictable performance across pools.
-
-See :ref:`deploy-minio-distributed-recommendations` for more guidance on
-selecting hardware for MinIO deployments.
-
 Expansion is Non-Disruptive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -193,45 +179,22 @@ deployment at around same time.
 Capacity-Based Planning
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO generally recommends planning capacity such that
-:ref:`server pool expansion <expand-minio-distributed>` is only required after
-2+ years of deployment uptime. 
+MinIO recommends planning storage capacity sufficient to store **at least** 2 years of data before reaching 70% usage.
+Performing :ref:`server pool expansion <expand-minio-distributed>` more frequently or on a "just-in-time" basis generally indicates an architecture or planning issue.
 
-For example, consider an application suite that is estimated to produce 10TB of
-data per year. The current deployment is running low on free storage and
-therefore requires expansion to meet the ongoing storage demands of the
-application. The new server pool should provide *at minimum*
+For example, consider an application suite expected to produce at least 100 TiB of data per year and a 3 year target before expansion.
+The deployment has ~500TiB of usable storage in the initial server pool, such that the cluster safely met the 70% threshold with some buffer for data growth.
+The new server pool should **ideally** meet at minimum 500TiB of additional storage to allow for a similar lifespan before further expansion.
 
-``10TB + 10TB + 10TB  = 30TB`` 
-
-MinIO recommends adding buffer storage to account for potential growth in stored
-data (e.g. 40TB of total usable storage). The total planned *usable* storage in
-the deployment would therefore be ~80TB. As a rule-of-thumb, more capacity
-initially is preferred over frequent just-in-time expansion to meet capacity
-requirements.
-
-Since MinIO :ref:`erasure coding <minio-erasure-coding>` requires some
-storage for parity, the total **raw** storage must exceed the planned **usable**
-capacity. Consider using the MinIO `Erasure Code Calculator
-<https://min.io/product/erasure-code-calculator>`__ for guidance in planning
-capacity around specific erasure code settings.
+Since MinIO :ref:`erasure coding <minio-erasure-coding>` requires some storage for parity, the total **raw** storage must exceed the planned **usable** capacity. 
+Consider using the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for guidance in planning capacity around specific erasure code settings.
 
 Recommended Operating Systems
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This tutorial assumes all hosts running MinIO use a 
-:ref:`recommended Linux operating system <minio-installation-platform-support>`
-such as RHEL8+ or Ubuntu 18.04+. 
+This tutorial assumes all hosts running MinIO use a :ref:`recommended Linux operating system <minio-installation-platform-support>`. 
 
-For other operating systems such as Windows or OSX, visit
-`https://min.io/download <https://min.io/download?ref=docs>`__ and select the
-tab associated to your operating system. Follow the displayed instructions to
-install the MinIO server binary on each node. Defer to the OS best practices for
-starting MinIO as a service (e.g. not attached to the terminal/shell session).
-
-Support for running MinIO in distributed mode on Windows hosts is
-**experimental**. Contact MinIO at hello@min.io if your infrastructure requires
-deployment onto Windows hosts.
+All hosts in the deployment should run with matching :ref:`software configurations <minio-software-checklists>`.
 
 .. _expand-minio-distributed-baremetal:
 

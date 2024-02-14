@@ -10,13 +10,6 @@ Upgrade a MinIO Deployment
    :local:
    :depth: 2
 
-.. admonition:: Test Upgrades In a Lower Environment
-   :class: important
-
-   Your unique deployment topology, workload patterns, or overall environment requires testing of any MinIO upgrades in a lower environment (Dev/QA/Staging) *before* applying those upgrades to Production deployments, or any other environment containing critical data.
-   Performing "blind" updates to production environments is done at your own risk.
-
-   For MinIO deployments that are significantly behind latest stable (6+ months), consider using |SUBNET| for additional support and guidance during the upgrade procedure.
 
 .. cond:: linux
 
