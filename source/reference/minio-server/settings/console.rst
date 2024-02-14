@@ -16,6 +16,10 @@ This page covers settings that manage access and behavior for the MinIO Console.
    :start-after: start-minio-settings-defined
    :end-before: end-minio-settings-defined
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Browser Settings
 ----------------
 

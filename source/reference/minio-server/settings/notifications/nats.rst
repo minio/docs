@@ -26,6 +26,10 @@ See :ref:`minio-bucket-notifications-publish-nats` for a tutorial on using these
    :start-after: start-minio-settings-defined
    :end-before: end-minio-settings-defined
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Multiple NATS Targets
 ---------------------
 

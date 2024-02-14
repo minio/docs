@@ -14,6 +14,14 @@ OpenID Identity Management Settings
 This page documents settings for enabling external identity management using an OpenID Connect (OIDC)-compatible provider. 
 See :ref:`minio-external-identity-management-openid` for a tutorial on using these settings.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
+
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Examples
 --------
 

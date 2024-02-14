@@ -108,3 +108,12 @@ If you define both an environment variable and the similar configuration setting
 Some settings have only an environment variable or a configuration setting, but not both.
 
 .. end-minio-settings-defined
+
+.. start-minio-settings-test-before-prod
+
+.. important::
+
+   Each configuration setting controls fundamental MinIO behavior and functionality.
+   MinIO **strongly recommends** testing configuration changes in a lower environment, such as DEV or QA, before applying to production.
+
+.. end-minio-settings-test-before-prod

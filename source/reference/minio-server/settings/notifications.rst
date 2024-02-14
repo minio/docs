@@ -17,6 +17,10 @@ This page covers settings that control behavior related to :ref:`MinIO bucket no
    :start-after: start-minio-settings-defined
    :end-before: end-minio-settings-defined
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 Sync Events
 -----------
 

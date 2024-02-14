@@ -19,6 +19,10 @@ The following environment variables control how the MinIO Server interacts with 
 Define any of these environment variables in the host system prior to starting or restarting the MinIO process.
 Refer to your operating system's documentation for how to define an environment variable.
 
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
+
 .. envvar:: MINIO_KMS_KES_ENDPOINT
 
    The endpoint for the MinIO Key Encryption Service (KES) process to use for supporting SSE-S3 and MinIO backend encryption operations.
