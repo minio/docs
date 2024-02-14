@@ -26,9 +26,13 @@ You can define many MinIO Server settings in one of two ways:
 1. Set :ref:`environment variables <minio-environment-variables>` in the host system prior to launching or restarting the server process.
 2. Modify configuration options using the :mc:`mc admin config` command or the :guilabel:`Administrator > Settings` page of the :ref:`MinIO Console <minio-console>`.
 
-.. important::
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-defined
+   :end-before: end-minio-settings-defined
 
-   Settings defined by an environment variable override similar settings defined as configurations with :mc:`mc admin config` or the MinIO Console.
+.. include:: /includes/common-mc-admin-config.rst
+   :start-after: start-minio-settings-test-before-prod
+   :end-before: end-minio-settings-test-before-prod
 
 Additional settings include those to customize:
 
