@@ -98,7 +98,7 @@ Domain
 
          For example, consider a MinIO deployment with an assigned FQDN of ``minio.example.net``.
 
-         - With path-style lookups, applications can access the bucket using it's full path as ``minio.example.net/mybucket``.
+         - With path-style lookups, applications can access the bucket using its full path as ``minio.example.net/mybucket``.
          - With virtual-host lookups, application can access the bucket as a virtual host as ``mybucket.minio.example.net/``.
 
          .. important::
