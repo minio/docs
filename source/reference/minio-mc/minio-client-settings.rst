@@ -125,7 +125,7 @@ Supports adding multiple environment variables by alias.
    .. tab-item:: Environment Variable
       :selected:
 
-      .. envvar:: MC_WEB_IDENITY_TOKEN_<alias>
+      .. envvar:: MC_WEB_IDENTITY_TOKEN_<alias>
 
       .. code-block:: shell
 
