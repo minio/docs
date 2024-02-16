@@ -39,11 +39,12 @@ The :mc:`mc undo` command reverses changes due to either a ``PUT`` or ``DELETE``
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] undo               \
-                          TARGET             \
-                          [--last "integer"] \
-                          [--recursive, r]   \
-                          [--force]          \
+         mc [GLOBALFLAGS] undo                \
+                          TARGET              \
+                          [--action "type"]*  \
+                          [--force]           \
+                          [--last "integer"]* \
+                          [--recursive, r]*   \
                           [--dry-run]
 
       .. include:: /includes/common-minio-mc.rst
@@ -59,29 +60,40 @@ Parameters
    The full path to the object or prefix where the command should run.
    The path must include the :ref:`ALIAS <minio-mc-alias>`, bucket, and prefix or object name.
 
-.. mc-cmd:: --last
+.. mc-cmd:: --action
    :optional:
 
-   Accepts an integer value specifying the number of ``PUT`` and/or ``DELETE`` changes to undo.
+   For recursive undo of the most recent change, specify the type of operation to undo.
+   Accepted values are ``DELETE`` or ``PUT``.
+   Requires :mc-cmd:`~mc undo --recursive` and is mutually exclusive with :mc-cmd:`~mc undo --last`.
    
-   If not specified, the command undoes one (``1``) operation.
-
-.. mc-cmd:: --recursive, r
-   :optional:
-
-   Performs the command in a recursive fashion.
-   Use this flag to undo changes on a prefix, for example.
-
-.. mc-cmd:: --force
-   :optional:
-
-   Force a recursive operation.
+   By default, :mc:`mc undo` reverses both ``DELETE`` and ``PUT``.
+   Use :mc-cmd:`~mc undo --action` to choose one or the other, but only for recursive undo of the most recent change.
 
 .. mc-cmd:: --dry-run
    :optional:
 
    Output the results of the command without actually performing the operations.
    Use this flag to test the outcome of running the command in a particular way.
+
+.. mc-cmd:: --force
+   :optional:
+
+   Force a recursive operation.
+
+.. mc-cmd:: --last
+   :optional:
+
+   Accepts an integer value specifying the number of ``PUT`` and/or ``DELETE`` changes to undo.
+   
+   If not specified, the command undoes one (``1``) operation.
+   Mutually exclusive with :mc-cmd:`~mc undo --action`.
+
+.. mc-cmd:: --recursive, r
+   :optional:
+
+   Performs the command in a recursive fashion.
+   Use this flag to undo changes on a prefix, for example.
 
 
 Global Flags
