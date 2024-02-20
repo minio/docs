@@ -1,5 +1,5 @@
-Deploy MinIO and KES with Server-Side Encryption using Hashicorp Vault
-----------------------------------------------------------------------
+Deploy MinIO and KES with Server-Side Encryption
+------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
@@ -25,15 +25,15 @@ Prior to starting these steps, create the following folders:
    :start-after: start-kes-generate-kes-certs-desc
    :end-before: end-kes-generate-kes-certs-desc
 
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. See the `Hashicorp Vault Configuration Docs <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
+Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets> configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority.
 Defer to the client documentation for instructions on trusting a third-party CA.
 
-3) Create the KES and MinIO Configurations
+1) Create the KES and MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 a. Create the KES Configuration File
 
-   Create the configuration file using your preferred text editor.
+   Create the :kes-docs:`configuration file <tutorials/configuration/#config-file>` using your preferred text editor.
    The following example uses ``nano``:
 
    .. code-block:: shell
@@ -41,13 +41,14 @@ a. Create the KES Configuration File
 
       nano |kesconfigpath|/kes-config.yaml
 
-   .. include:: /includes/common/common-minio-kes-hashicorp.rst
-      :start-after: start-kes-configuration-hashicorp-vault-desc
-      :end-before: end-kes-configuration-hashicorp-vault-desc
-
    - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
 
       The following command computes the necessary hash:
+
+      .. note::
+               
+         Depending on your selected KMS solution, you may need to unseal the key instance to allow normal cryptographic operations, including key creation or retrieval.
+         KES requires an unsealed key target to perform its operations.
 
       .. code-block:: shell
          :class: copyable
@@ -55,9 +56,7 @@ a. Create the KES Configuration File
 
          kes identity of |miniocertpath|/minio-kes.cert
 
-   - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
-
-   - Replace the ``VAULTAPPID`` and ``VAULTAPPSECRET`` with the appropriate :ref:`Vault AppRole credentials <minio-sse-vault-prereq-vault>`.
+   Refer to the documentation for your selected :kes-docs:`supported KMS solution <#supported-kms-targets>` for details on config items specific to your provider.
 
 b. Create the MinIO Environment File
 
@@ -73,7 +72,7 @@ b. Create the MinIO Environment File
       :start-after: start-kes-configuration-minio-desc
       :end-before: end-kes-configuration-minio-desc
 
-4) Start KES and MinIO
+1) Start KES and MinIO
 ~~~~~~~~~~~~~~~~~~~~~~
 
 You must start KES *before* starting MinIO. 

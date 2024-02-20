@@ -1,5 +1,5 @@
-Deploy MinIO and KES with Server-Side Encryption using Hashicorp Vault
-----------------------------------------------------------------------
+Deploy MinIO and KES with Server-Side Encryption
+------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 

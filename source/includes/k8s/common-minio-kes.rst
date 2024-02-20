@@ -1,13 +1,13 @@
 .. start-kes-prereq-hashicorp-vault-desc
 
-This procedure assumes an existing `Hashicorp Vault <https://www.vaultproject.io/>`__ installation accessible from the Kubernetes cluster.
+This procedure assumes an existing :kes-docs:`supported KMS installation <#supported-kms-targets>` accessible from the Kubernetes cluster.
 
-- For Vault deployments within the same Kubernetes cluster as the MinIO Tenant, you can use Kubernetes service names to allow the MinIO Tenant to establish connectivity to the Vault service.
+- For deployments within the same Kubernetes cluster as the MinIO Tenant, you can use Kubernetes service names to allow the MinIO Tenant to establish connectivity to the target KMS service.
 
-- For Vault deployments external to the Kubernetes cluster, you must ensure the cluster supports routing communications between Kubernetes services and pods and the external network.
+- For deployments external to the Kubernetes cluster, you must ensure the cluster supports routing communications between Kubernetes services and pods and the external network.
   This may require configuration or deployment of additional Kubernetes network components and/or enabling access to the public internet.
 
-Defer to the `Vault Documentation <https://learn.hashicorp.com/vault>`__ for guidance on deployment and configuration.
+Defer to the documentation for your chosen KMS solution for guidance on deployment and configuration.
 
 .. end-kes-prereq-hashicorp-vault-desc
 
@@ -59,8 +59,8 @@ You can use either the MinIO Tenant Console or the MinIO :mc:`mc` CLI to enable 
 .. admonition:: Unseal Vault Before Creating Key
    :class: important
 
-   You must unseal the backing Vault instance before creating new encryption keys.
-   See the Vault documentation on `Seal/Unseal <https://www.vaultproject.io/docs/concepts/seal>`__ for more information.
+   If required by your chosen provider, you must unseal the backing vault instance before creating new encryption keys.
+   See the documentation for your chosen KMS solution for more information.
 
 MinIO requires that the |EK| for a given bucket or object exist on the root KMS *before* performing |SSE| operations using that key.
 You can use the :mc-cmd:`mc admin kms key create` command against the MinIO Tenant.

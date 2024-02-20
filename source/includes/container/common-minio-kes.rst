@@ -3,7 +3,7 @@
 The commands in this section create the following resources:
 
 - A Podman :podman-docs:`Pod <markdown/podman-pod.1.html>` to facilitate container communications
-- A Container for the KES Server configured to use |rootkms| as the Root |KMS|.
+- A Container for the KES Server configured to use the chosen supported |KMS| solution.
 - A Container for a MinIO Server running in :ref:`Single-Node Single-Drive Mode <minio-snsd>`.
 
 .. code-block:: shell
@@ -51,19 +51,16 @@ If all pods are operational, you can connect to the MinIO deployment by opening 
 
 The following commands create two TLS certificates that expire within 30 days of creation:
 
-- A TLS certificate for KES to secure communications between it and the |rootkms| service.
+- A TLS certificate to secure communications between KES and the |KMS| service.
 - A TLS certificate for MinIO to perform mTLS authentication to KES.
 
 .. admonition:: Use Caution in Production Environments
    :class: important
 
-   **DO NOT** use the TLS certificates generated as part of this procedure for
-   any long-term development or production environments. 
+   **DO NOT** use the TLS certificates generated as part of this procedure for any long-term development or production environments. 
 
-   Defer to organization/industry best practices around TLS certificate
-   generation and management. A complete guide to creating valid certificates
-   (e.g. well-formed, current, and trusted) is beyond the scope of this
-   procedure.
+   Defer to organization/industry best practices around TLS certificate generation and management. 
+   A complete guide to creating valid certificates (e.g. well-formed, current, and trusted) is beyond the scope of this procedure.
 
 .. code-block:: shell
     :class: copyable
@@ -111,8 +108,7 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 
 - Encrypting the MinIO backend (IAM, configuration, etc.)
-- Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not 
-  include a specific |EK|.
+- Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not include a specific |EK|.
 - Encrypting objects using :ref:`SSE-S3 <minio-encryption-sse-s3>`.
 
 MinIO uses the :envvar:`MINIO_KMS_KES_ENCLAVE` key to define the name of the KES enclave to use.
@@ -135,16 +131,13 @@ KES automatically creates this key if it does not already exist on the root KMS.
 .. admonition:: Unseal Vault Before Creating Key
    :class: important
 
-   You must unseal the backing Vault instance before creating new encryption keys.
-   See the Vault documentation on `Seal/Unseal <https://www.vaultproject.io/docs/concepts/seal>`__ for more information.
+   If required for your chosen provider, you must unseal the backing |KMS| instance before creating new encryption keys.
+   Refer to the documentation for your chosen KMS solution for more information.
 
-MinIO requires that the |EK| exist on the root KMS *before* performing
-|SSE| operations using that key. Use ``kes key create`` *or*
-:mc-cmd:`mc admin kms key create` to create a new |EK| for use with |SSE|.
+MinIO requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
+Use :kes-docs:`kes key create <cli/kes-key/create/>` *or* :mc-cmd:`mc admin kms key create` to create a new |EK| for use with |SSE|.
 
-The following command uses the ``kes key create`` command to add a new
-External Key (EK) stored on the root KMS server for use with encrypting
-the MinIO backend.
+The following command uses the :kes-docs:`kes key create <cli/kes-key/create/>` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the MinIO backend.
 
 .. code-block:: shell
    :class: copyable

@@ -87,7 +87,4 @@ supports the following encryption strategies:
    :titlesonly:
    :hidden:
 
-   /operations/server-side-encryption/configure-minio-kes-hashicorp
-   /operations/server-side-encryption/configure-minio-kes-aws
-   /operations/server-side-encryption/configure-minio-kes-gcp
-   /operations/server-side-encryption/configure-minio-kes-azure
+   /operations/server-side-encryption/configure-minio-kes

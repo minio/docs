@@ -91,7 +91,7 @@ For existing MinIO deployments, run the following command on each MinIO host to 
 KES requires TLS connectivity for all client connections, including those originating from MinIO.
 See :ref:`minio-tls` for more information on enabling TLS for the MinIO deployment.
 
-Depending on your Vault configuration, you may also need to create a dedicated set of TLS certificates for KES to connect and authenticate to Vault.
+Depending on your selected KMS target's configuration, you may also need to create a dedicated set of TLS certificates for KES to connect and authenticate to the KMS.
 
 Defer to your organization's best practices around generating production-ready TLS certificates.
 
