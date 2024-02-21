@@ -504,15 +504,36 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     }
   })();
+
 // ------------------------------------------------
 // Tab switching for hidden anchors
 // ------------------------------------------------
 
-    document.getElementById((document.getElementById(window.location.hash.substring(1)))
-        .closest("div")
-        .previousSibling.getAttributes("for"))
-    .click();
+  // Target ID - where the browser should scroll to
+  const hashElem = document.getElementById(window.location.hash.substring(1));
 
+  // If the element is hidden, neither scrollIntoView nor hashScroll will work.
+  // This function checks whether the element is visible or not.
+  function isHashElemeVisible(elem) {
+    var style = window.getComputedStyle(elem);
+    return (elem.offsetWidth > 0 || elem.offsetHeight > 0) && style.display !== 'none' && style.visibility !== 'hidden';
+  }
+
+  // Check if the hash is valid
+  // If it is, but not visible, the corresponding tab is also not visible.
+  // Make the tab active and scroll to it
+  if(hashElem) {
+    if(!isHashElemeVisible(hashElem)) {
+      hashElem.closest(".sd-tab-content").previousElementSibling.click();
+
+      setTimeout(() => {
+        hashElem.scrollIntoView();
+      }, 100);
+    }
+    else {
+      hashElem.scrollIntoView();
+    }
+  }
 });
 
 
