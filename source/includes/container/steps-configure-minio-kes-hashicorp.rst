@@ -1,5 +1,5 @@
-(Podman) Deploy MinIO and KES with Server-Side Encryption using Hashicorp Key Vault
------------------------------------------------------------------------------------
+Deploy MinIO and KES with Server-Side Encryption
+------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
@@ -53,7 +53,7 @@ a. Create the KES Configuration File
             -v |kescertpath|/certs:/certs                                \
             kes:|kes-stable| tool identity of /certs/minio-kes.cert
 
-   - Refer to the instructions for setting up KES for your :kes-docs:`supported KMS solution <#kes-supported-targets>` for other variables to define.
+   - Refer to the instructions for setting up KES for your :kes-docs:`supported KMS solution <#kes-supported-targets>` for additional variables to define specific to your chosen KMS target.
 
 b. Create the MinIO Environment File
 

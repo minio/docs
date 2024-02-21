@@ -35,7 +35,7 @@ Specifically, this procedure assumes the following:
 Depending on your target KMS configuration, you may also need to specify the CA used to sign the KES certificates to the Vault server.
 Refer to the documentation for your selected KMS solution for more information on trusting a third-party CA.
 
-1) Generate a KES API Key for use by MinIO
+3) Generate a KES API Key for use by MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting with KES version :minio-git:`2023-02-15T14-54-37Z <kes/releases/tag/2023-02-15T14-54-37Z>`, you can generate an API key to use for authenticating to the KES server.
@@ -82,7 +82,7 @@ The output includes both the API Key for use with MinIO and the Identity hash fo
       MinIO defaults to expecting this file at ``/etc/default/minio``.
       If you modified your deployment to use a different location for the environment file, modify the file at that location.
 
-1) Start KES and MinIO
+5) Start KES and MinIO
 ~~~~~~~~~~~~~~~~~~~~~~
 
 .. admonition:: KES Operations Requires Unsealed Vault
@@ -110,14 +110,14 @@ b. Start the MinIO Server
       :start-after: start-kes-minio-start-service-desc
       :end-before: end-kes-minio-start-service-desc
 
-5) Generate a New Encryption Key
+6) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
-1) Enable SSE-KMS for a Bucket
+7) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst

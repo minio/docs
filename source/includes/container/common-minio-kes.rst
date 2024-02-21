@@ -60,7 +60,7 @@ The following commands create two TLS certificates that expire within 30 days of
    **DO NOT** use the TLS certificates generated as part of this procedure for any long-term development or production environments. 
 
    Defer to organization/industry best practices around TLS certificate generation and management. 
-   A complete guide to creating valid certificates (e.g. well-formed, current, and trusted) is beyond the scope of this procedure.
+   A complete guide to creating valid certificates (for example, well-formed, current, and trusted) is beyond the scope of this procedure.
 
 .. code-block:: shell
     :class: copyable

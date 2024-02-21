@@ -42,6 +42,13 @@ Server-Side Object Encryption with KES
 .. cond:: macos or windows
 
    This procedure assumes a single local host machine running the MinIO and KES processes.
+   
+   .. note::
+
+      For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with your |KMS|.
+
+      For production baremetal environments, see the `MinIO on Linux documentation <https://min.io/docs/minio/linux/operations/server-side-encryption.html>`__ for tutorials on configuring MinIO with KES and your |KMS|.
+
    As part of this procedure, you will:
 
    #. Deploy a |KES| server configured to use a :kes-docs:`supported Key Management System (KMS) target <#supported-kms-targets>`.
@@ -52,9 +59,6 @@ Server-Side Object Encryption with KES
 
    #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
 
-   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with your |KMS|.
-
-   For production baremetal environments, see the `MinIO on Linux documentation <https://min.io/docs/minio/linux/operations/server-side-encryption.html>`__ for tutorials on configuring MinIO with KES and your |KMS|.
 
 .. cond:: container
 

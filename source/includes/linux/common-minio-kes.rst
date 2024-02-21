@@ -32,7 +32,7 @@ Create the ``/lib/systemd/system/kes.service`` file on all KES hosts:
 
 You may need to run ``systemctl daemon-reload`` to load the new service file into ``systemctl``.
 
-The ``kes.service`` file runs as the ``kes`` User and Group by default.
+The ``kes.service`` file runs as the ``kes`` user and group by default.
 You can create the user and group using the ``useradd`` and ``groupadd`` commands.
 The following example creates the user and group.
 These commands typically require root (``sudo``) permissions.

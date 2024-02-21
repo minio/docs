@@ -25,7 +25,7 @@ Prior to starting these steps, create the following folders:
    :start-after: start-kes-generate-kes-certs-desc
    :end-before: end-kes-generate-kes-certs-desc
 
-Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets> configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority.
+Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority.
 Defer to the client documentation for instructions on trusting a third-party CA.
 
 1) Create the KES and MinIO Configurations
