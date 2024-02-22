@@ -37,7 +37,7 @@ documentation on creating buckets with object locking enabled.
 
    .. tab-item:: EXAMPLE
 
-      The following command enables legalhold WORM locking on all objects
+      The following command enables legalhold WORM locking on all existing objects
       in the ``mydata`` bucket on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
@@ -66,8 +66,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The MinIO :ref:`alias <alias>` and path to the object or
+   The MinIO :ref:`alias <alias>` and path to the object or
    objects on which to enable the legal hold. For example:
 
    .. code-block:: shell
@@ -75,10 +76,15 @@ Parameters
       mc legalhold set play/mybucket/myobjects/objects.txt
 
 .. mc-cmd:: --recursive, r
-   
+   :optional:
 
-   *Optional* Applies the legal hold to all objects in the 
+   Applies the legal hold to all existing objects in the 
    :mc-cmd:`~mc legalhold set ALIAS` bucket or bucket prefix.
+
+   .. admonition:: ``--recursive`` only applies to existing objects
+      :class: note
+
+      To enable legal hold for future objects, periodically repeat the :mc:`mc legalhold` command as new objects are created.
 
 .. mc-cmd:: --rewind
    :optional:
@@ -125,9 +131,9 @@ Behavior
 Legal Holds Require Explicit Removal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Legal Holds are indefinite and enforce complete immutability for locked objects.
+Legal holds are indefinite and enforce complete immutability for locked objects.
 Only privileged users with the :policy-action:`s3:PutObjectLegalHold` can set or
-lift the Legal Hold.
+lift the legal hold.
 
 Legal Holds Complement Other Retention Modes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
