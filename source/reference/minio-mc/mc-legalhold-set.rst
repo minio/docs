@@ -94,7 +94,7 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

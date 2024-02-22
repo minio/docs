@@ -75,9 +75,8 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* 
-   
    The full path to the object for which to retrieve
    the object lock configuration. Specify the :ref:`alias <alias>` of a
    configured S3-compatible service as the prefix to the ``ALIAS`` bucket
@@ -99,18 +98,18 @@ Parameters
 
 
 .. mc-cmd:: --default
-   
+   :optional:
 
-   *Optional* Returns the default object lock settings for the bucket specified
+   Returns the default object lock settings for the bucket specified
    to :mc-cmd:`~mc retention info ALIAS`.
 
    If specifying :mc-cmd:`~mc retention info --default`, 
    :mc:`mc retention info` ignores all other flags.
 
 .. mc-cmd:: --recursive, r
-   
+   :optional:
 
-   *Optional* Recursively returns the object lock settings for all objects in the
+   Recursively returns the object lock settings for all objects in the
    specified :mc-cmd:`~mc retention info ALIAS` path.
 
    Mutually exclusive with :mc-cmd:`~mc retention info --version-id`.
@@ -123,7 +122,7 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

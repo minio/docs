@@ -65,8 +65,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The MinIO :ref:`alias <alias>` and path to the object or
+   The MinIO :ref:`alias <alias>` and path to the object or
    objects on which to enable the legal hold. For example:
 
    .. code-block:: shell
@@ -74,7 +75,7 @@ Parameters
       mc legalhold info play/mybucket/myobjects/objects.txt
 
 .. mc-cmd:: --recursive, r
-   
+   :optional:
 
    Returns the legal hold status of all objects in the 
    :mc-cmd:`~mc legalhold info ALIAS` bucket or bucket prefix.
@@ -87,7 +88,7 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

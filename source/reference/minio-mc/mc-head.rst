@@ -67,8 +67,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The object or objects to print. 
+   The object or objects to print. 
    
    For an object on MinIO, specify the :ref:`alias <alias>` and the full path to
    that object (e.g. bucket and path to object). For example:
@@ -92,16 +93,16 @@ Parameters
       mc head ~/mydata/object.txt
 
 .. mc-cmd:: --lines, n
-   
+   :optional:
 
-   *Optional* The number of lines to print.
+   The number of lines to print.
 
    Defaults to ``10``.
 
 .. mc-cmd:: --encrypt-key
-   
+   :optional:
 
-   *Optional*  Encrypt or decrypt objects using server-side encryption with
+   Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
    
    - Each ``KEY`` represents a bucket or object. 
@@ -123,7 +124,7 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

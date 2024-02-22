@@ -62,8 +62,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The :ref:`alias <alias>` for a MinIO deployment and the
+   The :ref:`alias <alias>` for a MinIO deployment and the
    full path to the object on which to remove all tags (e.g. bucket and path to
    object). For example:
 
@@ -97,7 +98,7 @@ Parameters
    object versions which existed at a specific point in time.
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

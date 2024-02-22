@@ -28,7 +28,7 @@ that supports :ref:`minio-bucket-versioning`. For MinIO deployments, use
 
 .. start-version-id-desc
 
-*Optional* Directs |command| to operate only on the specified object version.
+Directs |command| to operate only on the specified object version.
 
 |versionid| requires that the specified |alias| be an S3-compatible service
 that supports :ref:`minio-bucket-versioning`. For MinIO deployments, use

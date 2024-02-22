@@ -71,8 +71,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The full path to the object or objects for which to clear
+   The full path to the object or objects for which to clear
    the object lock configuration. Specify the :mc-cmd:`alias <mc alias>` of a
    configured S3-compatible service as the prefix to the ``ALIAS`` bucket
    path. For example:
@@ -92,18 +93,18 @@ Parameters
       settings for a specific version or for all versions of the object.
 
 .. mc-cmd:: --default
-   
+   :optional:
 
-   *Optional* Clears the default object lock settings for the bucket specified
+   Clears the default object lock settings for the bucket specified
    to :mc-cmd:`~mc retention clear ALIAS`.
    
    If specifying :mc-cmd:`~mc retention clear --default`, 
    :mc:`mc retention clear` ignores all other flags.
 
 .. mc-cmd:: --recursive, r
-   
+   :optional:
 
-   *Optional* Recursively clears the object lock settings for all objects in the
+   Recursively clears the object lock settings for all objects in the
    specified :mc-cmd:`~mc retention clear ALIAS` path.
 
    Mutually exclusive with :mc-cmd:`~mc retention clear --version-id`.
@@ -116,7 +117,7 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

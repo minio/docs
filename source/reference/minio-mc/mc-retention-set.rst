@@ -84,6 +84,7 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: MODE
+   :required:
 
    Sets the locking mode for the :mc-cmd:`~mc retention set ALIAS`. 
    Specify one of the following supported values:
@@ -98,6 +99,7 @@ Parameters
    Requires specifying :mc-cmd:`~mc retention set VALIDITY`.
 
 .. mc-cmd:: VALIDITY
+   :required:
 
    The duration which objects remain in the specified
    :mc-cmd:`~mc retention set MODE` after creation.
@@ -109,8 +111,7 @@ Parameters
       ``1y`` for 1 year after object creation.
 
 .. mc-cmd:: ALIAS
-
-   *Required* 
+   :required:
    
    The full path to the object or objects for which to set object lock
    configuration. Specify the :ref:`alias <alias>` for the MinIO or
@@ -132,16 +133,16 @@ Parameters
      respectively.
 
 .. mc-cmd:: --bypass
-   
+   :optional:
 
-   *Optional* Allows a user with the ``s3:BypassGovernanceRetention`` permission
+   Allows a user with the ``s3:BypassGovernanceRetention`` permission
    to modify the object. Requires the ``governance`` retention 
    :mc-cmd:`~mc retention set MODE`
 
 .. mc-cmd:: --default
-   
+   :optional:
 
-   *Optional* Sets the default object lock settings for the bucket specified to
+   Sets the default object lock settings for the bucket specified to
    :mc-cmd:`~mc retention set ALIAS` using the
    :mc-cmd:`~mc retention set MODE` and :mc-cmd:`~mc retention set VALIDITY`. 
    Any objects created in the bucket inherit the default object lock settings

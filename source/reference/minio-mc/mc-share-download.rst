@@ -66,8 +66,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The :ref:`alias <alias>` of a MinIO deplyment and the full path to
+   The :ref:`alias <alias>` of a MinIO deplyment and the full path to
    the object for which to generate a download URL. For example:
 
    .. code-block:: shell
@@ -92,9 +93,9 @@ Parameters
       mc share download --recursive play/mybucket/myprefix/
 
 .. mc-cmd:: --expire, E
-   
+   :optional:
 
-   *Optional* Set the expiration time limit for all generated URLs.
+   Set the expiration time limit for all generated URLs.
    
    Specify a string with format ``##h##m##s`` format. For example:
    ``12h34m56s`` for an expiry of 12 hours, 34 minutes, and 56 seconds
@@ -103,15 +104,15 @@ Parameters
    Defaults to ``168h`` or 168 hours (7 days).
 
 .. mc-cmd:: --recursive, r
+   :optional:
    
-   
-   *Optional* Recursively generate URLs for all objects in a 
+   Recursively generate URLs for all objects in a 
    :mc-cmd:`mc share download ALIAS` bucket or bucket prefix. 
       
    Required if any ``ALIAS`` specifies a path to a bucket or bucket prefix.
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
