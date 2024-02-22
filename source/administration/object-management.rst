@@ -166,7 +166,7 @@ Object Retention
 ----------------
 
 MinIO Object Locking ("Object Retention") enforces Write-Once Read-Many (WORM) immutability to protect :ref:`versioned objects <minio-bucket-versioning>` from deletion. 
-MinIO supports both :ref:`duration based object retention <minio-object-locking-retention-modes>` and :ref:`indefinite Legal Hold retention <minio-object-locking-legalhold>`.
+MinIO supports both :ref:`duration based object retention <minio-object-locking-retention-modes>` and :ref:`indefinite legal hold retention <minio-object-locking-legalhold>`.
 
 .. image:: /images/retention/minio-object-locking.svg
    :alt: 30 Day Locked Objects

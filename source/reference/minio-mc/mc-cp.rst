@@ -185,7 +185,7 @@ Parameters
 .. mc-cmd:: --legal-hold
    :optional:
 
-   Enables indefinite :ref:`Legal Hold <minio-object-locking-legalhold>` object locking on the copied objects.
+   Enables indefinite :ref:`legal hold <minio-object-locking-legalhold>` object locking on the copied objects.
 
    Specify ``on``.
 
