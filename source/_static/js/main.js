@@ -505,12 +505,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   })();
 
-// ------------------------------------------------
-// Tab switching for hidden anchors
-// ------------------------------------------------
-
-  // Target ID - where the browser should scroll to
-  const hashElem = document.getElementById(window.location.hash.substring(1));
+  // ------------------------------------------------
+  // Tab switching for hidden anchors
+  // ------------------------------------------------
 
   // If the element is hidden, neither scrollIntoView nor hashScroll will work.
   // This function checks whether the element is visible or not.
@@ -518,22 +515,43 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var style = window.getComputedStyle(elem);
     return (elem.offsetWidth > 0 || elem.offsetHeight > 0) && style.display !== 'none' && style.visibility !== 'hidden';
   }
-
-  // Check if the hash is valid
-  // If it is, but not visible, the corresponding tab is also not visible.
-  // Make the tab active and scroll to it
-  if(hashElem) {
-    if(!isHashElemeVisible(hashElem)) {
-      hashElem.closest(".sd-tab-content").previousElementSibling.click();
-
-      setTimeout(() => {
-        hashElem.scrollIntoView();
-      }, 100);
-    }
-    else {
-      hashElem.scrollIntoView();
+  
+  function hashScroll() {
+    // Target ID - where the browser should scroll to
+    const hashElem = document.getElementById(window.location.hash.substring(1));
+  
+    // Check if the hash is valid
+    // If it is, but not visible, the corresponding tab is also not visible.
+    // Make the tab active and scroll to it
+    if(hashElem) {
+      if(!isHashElemeVisible(hashElem)) {
+        hashElem.closest(".sd-tab-content").previousElementSibling.click();
+  
+        setTimeout(() => {
+          hashElem.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+      else {
+        hashElem.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }
+  
+  // Listen for hash changes
+  window.addEventListener("hashchange", () => {
+    hashScroll();
+  });
+
+  // Listen for click events on internal references
+  const references = document.querySelectorAll("a.reference.internal");
+
+  if(references.length > 0) {
+    references.forEach((item) => {
+      item.addEventListener("click", () => {
+        hashScroll();
+      });
+    });
+  }
+  
+  hashScroll()
 });
-
-
