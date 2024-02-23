@@ -11,7 +11,6 @@
 
 html {
     font-size: $root-font-size;
-    scroll-behavior: smooth;
     scroll-padding: 1rem;
 
     @include breakpoint-min(breakpoints(lg)) { 
