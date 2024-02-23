@@ -68,8 +68,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The :ref:`alias <alias>` of a MinIO deployment and the full
+   The :ref:`alias <alias>` of a MinIO deployment and the full
    path to the object. For example:
 
    .. code-block:: shell
@@ -98,14 +99,14 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
       :end-before: end-version-id-desc
 
 .. mc-cmd:: --encrypt-key
-   
+   :optional:
 
    Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.

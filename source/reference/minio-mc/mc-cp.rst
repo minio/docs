@@ -185,7 +185,7 @@ Parameters
 .. mc-cmd:: --legal-hold
    :optional:
 
-   Enables indefinite :ref:`Legal Hold <minio-object-locking-legalhold>` object locking on the copied objects.
+   Enables indefinite :ref:`legal hold <minio-object-locking-legalhold>` object locking on the copied objects.
 
    Specify ``on``.
 
@@ -255,7 +255,7 @@ Parameters
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
 
-.. mc-cmd:: storage-class, sc
+.. mc-cmd:: --storage-class, sc
    :optional:
 
    Set the storage class for the new object(s) on the :mc-cmd:`~mc cp TARGET`. 
@@ -273,7 +273,7 @@ Parameters
    assign to the objects.
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

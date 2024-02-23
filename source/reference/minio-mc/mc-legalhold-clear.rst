@@ -66,8 +66,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The MinIO :ref:`alias <alias>` and path to the object or
+   The MinIO :ref:`alias <alias>` and path to the object or
    objects on which to remove the legal hold. For example:
 
    .. code-block:: shell
@@ -75,7 +76,7 @@ Parameters
       mc legalhold clear play/mybucket/myobjects/objects.txt
 
 .. mc-cmd:: --recursive, r
-   
+   :optional:
 
    Removes the legal hold on all objects in the 
    :mc-cmd:`~mc legalhold clear ALIAS` bucket or bucket prefix.
@@ -88,7 +89,7 @@ Parameters
       :end-before: end-rewind-desc
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

@@ -16,7 +16,7 @@ Description
 
 .. start-mc-legalhold-desc
 
-The :mc:`mc legalhold` command sets, removes, or retrieves the :ref:`Object Legal Hold (WORM) <minio-object-locking-legalhold>` settings for object(s).
+The :mc:`mc legalhold` command sets, removes, or retrieves the :ref:`object legal hold (WORM) <minio-object-locking-legalhold>` settings for object(s).
 
 .. end-mc-legalhold-desc
 

@@ -13,7 +13,7 @@ Site Failure Recovery
 MinIO can make the loss of an entire site, while significant, a relatively minor incident.
 Site recovery depends on the replication option you use for the site.
 
-.. list-table:: 
+.. list-table::
    :widths: 25 75
    :width: 100%
 
@@ -28,7 +28,7 @@ Site replication healing automatically adds IAM settings, buckets, bucket config
 
 You cannot configure site replication if any bucket replication rules remain in place on other healthy sites.
 Bucket replication is mutually exclusive with site replication.
-  
+
 If you are switching from using bucket replication to using site replication, you must first remove all bucket replication rules from the healthy site prior to setting up site replication.
 
 Restore an Unhealthy Peer to Site Replication
@@ -47,8 +47,8 @@ If a peer site fails, such as due to a major disaster or long power outage, you 
 The following procedure can restore data in scenarios where :ref:`site replication <minio-site-replication-overview>` was active prior to the site loss.
 This procedure assumes a *total loss* of one or more peer sites versus replication lag or delays due to latency or transient deployment downtime.
 
-1. Remove the failed site from the MinIO site replication configuration using the :mc-cmd:`mc admin replicate rm` command with the ``--force`` option. 
-   
+#. Remove the failed site from the MinIO site replication configuration using the :mc-cmd:`mc admin replicate rm` command with the ``--force`` option. 
+
    The following command force-removes an unhealthy peer site from the replication configuration:
 
    .. code-block:: shell
@@ -63,7 +63,7 @@ This procedure assumes a *total loss* of one or more peer sites versus replicati
    All healthy peers in the site replication configuration update to remove the unhealthy peer automatically.
    You can use the :mc-cmd:`mc admin replicate info` command to verify the new site replication configuration.
 
-2. Deploy a new MinIO site following the :ref:`site replication requirements <minio-expand-site-replication>`.
+#. Deploy a new MinIO site following the :ref:`site replication requirements <minio-expand-site-replication>`.
 
    - Do not upload any data or otherwise configure the deployment beyond the stated requirements.
    - Validate that the new MinIO deployment functions normally and has bidirectional connectivity to the other peer sites.
@@ -76,7 +76,7 @@ This procedure assumes a *total loss* of one or more peer sites versus replicati
 
       If you plan to re-use the hardware for the site replication configuration, you **must** completely wipe the drives for the deployment before re-initializing MinIO and adding the site back to the replication configuration.
 
-3. :ref:`Add the replacement peer site <minio-expand-site-replication>` to the replication configuration.
+#. :ref:`Add the replacement peer site <minio-expand-site-replication>` to the replication configuration.
 
    Use the :mc-cmd:`mc admin replicate add` command to update the replication configuration with the new site:
 
@@ -92,7 +92,19 @@ This procedure assumes a *total loss* of one or more peer sites versus replicati
    All healthy peers in the site replication configuration update for the new peer automatically.
    You can use the :mc-cmd:`mc admin replicate info` command to verify the new site replication configuration.
 
-4. Validate the replication status.
+#. Resynchronize the new peer with :mc:`mc admin replicate resync`.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc admin replicate resync start HEALTHY_PEER NEW_PEER
+
+   - Replace ``HEALTHY_PEER`` with the :ref:`alias <alias>` of any healthy peer in the replication configuration
+
+   - Replace ``NEW_PEER`` with the alias of the new peer
+
+
+#. Validate the replication status.
 
    Use the following commands to track the replication status:
 
@@ -105,13 +117,13 @@ Active Bucket Replication Resynchronization
 For scenarios where :ref:`bucket replication <minio-bucket-replication>` was in place prior to the failure, you can use :mc:`mc replicate resync` to restore data to a new site.
 Create a new site to replace the failed deployment, then synchronize the data from an existing, healthy, bucket replication-enabled deployment to the new site.
 
-1. Deploy a new MinIO site
-2. Set up IAM and users as needed
-3. On the site with data, create a new ``remote target`` using the :mc-cmd:`mc admin bucket remote add` command and record the ARN from the output
-4. From the site with the data, use the :mc-cmd:`mc replicate resync start` command with the ARN from the previous command to rebuild the bucket on the new site
-5. Wait for re-synchronization to complete (us :mc-cmd:`mc replicate resync status` to check)
-6. Set up bucket replication rule(s) from the new MinIO site to the existing target bucket(s)
-7. `(Optional)` Delete the bucket replication rules from the target deployment(s) to restore an active-passive replication scenario
+#. Deploy a new MinIO site.
+#. Set up IAM and users as needed.
+#. On the site with data, create a new ``remote target`` using the :mc-cmd:`mc admin bucket remote add` command and record the ARN from the output.
+#. From the site with the data, use the :mc-cmd:`mc replicate resync start` command with the ARN from the previous command to rebuild the bucket on the new site.
+#. Wait for re-synchronization to complete (use :mc-cmd:`mc replicate resync status` to check).
+#. Set up bucket replication rule(s) from the new MinIO site to the existing target bucket(s).
+#. `(Optional)` Delete the bucket replication rules from the target deployment(s) to restore an active-passive replication scenario.
 
 Passive Bucket Replication Resynchronization
 --------------------------------------------
@@ -126,12 +138,12 @@ For recovery procedures with stricter SLA/SLO, use the active bucket replication
 Bucket replication rules copy the object, its version ID, versions, and other metadata to the target bucket.
 MinIO can restore the object with all of these attributes to a new MinIO site if bucket replication had already been in use prior to the site loss.
 
-1. Deploy a new MinIO site
-2. Set up IAM and users as needed
-3. On the remaining target bucket deployment(s), create bucket replication rule(s) for each bucket to the new MinIO site
-4. Wait for replication to complete
-5. Set up bucket replication rule(s) from the new MinIO site to the existing target bucket(s)
-6. `(Optional)` Delete the bucket replication rules from the target deployment(s) to restore an active-passive replication scenario
+#. Deploy a new MinIO site.
+#. Set up IAM and users as needed.
+#. On the remaining target bucket deployment(s), create bucket replication rule(s) for each bucket to the new MinIO site.
+#. Wait for replication to complete.
+#. Set up bucket replication rule(s) from the new MinIO site to the existing target bucket(s).
+#. `(Optional)` Delete the bucket replication rules from the target deployment(s) to restore an active-passive replication scenario.
 
    Do not delete the bucket replication rules from the deployments used to recover data if you prefer to keep an active-active replication between the buckets.
    In active-active replication, changes to the objects at either location affect the objects at the other location.
@@ -147,7 +159,7 @@ You cannot restore those attributes with this method.
 Use :mc:`mc mirror` in situations where you need to restore only the latest version of an object. 
 Use bucket replication or site replication where those methods were already in use if you are copying from another MinIO deployment and wish to restore the object's version history and version metadata.
 
-1. Deploy a new MinIO site
-2. Set up IAM and users as needed
-3. Create buckets on the new site
-4. Use the :mc:`mc cp` CLI command to copy the contents from the mirror location to the new MinIO site
+#. Deploy a new MinIO site.
+#. Set up IAM and users as needed.
+#. Create buckets on the new site.
+#. Use the :mc:`mc cp` CLI command to copy the contents from the mirror location to the new MinIO site.

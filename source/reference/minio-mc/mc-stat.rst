@@ -68,6 +68,7 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
    The :ref:`alias <alias>` of a MinIO deployment and the full path to the
    object for which to retrieve detailed information. For example:
@@ -97,9 +98,9 @@ Parameters
       mc stat ~/data/myobject.txt
 
 .. mc-cmd:: --encrypt-key
-   
+   :optional:
 
-   *Optional* Encrypt or decrypt objects using server-side encryption with
+   Encrypt or decrypt objects using server-side encryption with
    client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
    
    - Each ``KEY`` represents a bucket or object. 
@@ -114,9 +115,9 @@ Parameters
    as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --recursive, r
-   
+   :optional:
 
-   *Optional* Recursively :mc:`mc stat` the contents of the MinIO bucket
+   Recursively :mc:`mc stat` the contents of the MinIO bucket
    specified to :mc-cmd:`~mc stat ALIAS`.
 
 .. mc-cmd:: --rewind
@@ -138,7 +139,7 @@ Parameters
    versions which existed at a specific point in time.
 
 .. mc-cmd:: --version-id, vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc

@@ -24,7 +24,7 @@ immutability to protect :ref:`versioned objects <minio-bucket-versioning>` from
 deletion. MinIO supports both 
 :ref:`duration based object retention <minio-object-locking-retention-modes>` 
 and 
-:ref:`indefinite Legal Hold retention <minio-object-locking-legalhold>`.
+:ref:`indefinite legal hold retention <minio-object-locking-legalhold>`.
 
 MinIO Object Locking provides key data retention compliance and meets
 SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per 
@@ -155,7 +155,7 @@ the expiration rule.
 
 - For expiration rules operating on *non-current object versions*, 
   MinIO can only expire the non-current versions *after* the retention period
-  has passed *or* has been explicitly lifted (e.g. Legal Holds).
+  has passed *or* has been explicitly lifted (e.g. legal holds).
 
 For example, consider the following bucket with 
 :ref:`minio-object-locking-governance` locking enabled by default for 45 days:
@@ -306,7 +306,7 @@ preferred SDK.
 Enable Legal Hold Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can enable or disable indefinite Legal Hold retention for an object using the MinIO Console, the MinIO :mc:`mc` CLI, or using an S3-compatible SDK. 
+You can enable or disable indefinite legal hold retention for an object using the MinIO Console, the MinIO :mc:`mc` CLI, or using an S3-compatible SDK. 
 
 You can place a legal hold on an object already held under a :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>` lock. 
 The object remains WORM locked under the legal hold even when the retention lock expires. 
@@ -333,7 +333,7 @@ You or another user with the necessary permissions must explicitly lift the lega
          :align: center
 
       Browse to the object and select it to open the object details view. 
-      Select the :guilabel:`Legal Hold` button to toggle the Legal Hold status of the object.
+      Select the :guilabel:`Legal Hold` button to toggle the legal hold status of the object.
 
    .. tab-item:: MinIO CLI
       :sync: cli
@@ -426,11 +426,14 @@ The MinIO ``COMPLIANCE`` lock is functionally identical to the
 Legal Hold
 ----------
 
-An object under Legal Hold is protected from write operations by *all* 
+An object under legal hold is protected from write operations by *all* 
 users, including the :ref:`MinIO root <minio-users-root>` user. 
 
-Legal Holds are indefinite and enforce complete immutability for locked objects.
-Only privileged users with the :policy-action:`s3:PutObjectLegalHold` permission can set or lift the Legal Hold.
+Legal holds are indefinite and enforce complete immutability for locked objects.
+Only privileged users with the :policy-action:`s3:PutObjectLegalHold` permission can set or lift the legal hold.
+
+Legal holds apply at the object level.
+If you enable legal hold for a group of objects, such as the contents of a bucket, subsequently created objects in that bucket are not affected.
 
 Legal holds are complementary to both :ref:`minio-object-locking-governance` and :ref:`minio-object-locking-compliance` retention settings. 
 An object held under both legal hold *and* a ``GOVERNANCE/COMPLIANCE`` retention rule remains WORM locked until the legal hold is lifted *and* the rule expires.

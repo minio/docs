@@ -129,7 +129,7 @@ Parameters
    versions which existed at a specific point in time.
 
 .. mc-cmd:: --version-id, --vid
-   
+   :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-version-id-desc
