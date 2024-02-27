@@ -5,37 +5,20 @@ This procedure provides instructions for configuring and enabling Server-Side En
 Specifically, this procedure assumes the following:
 
 - An existing production-grade KMS target
-- One or more hosts for deploying KES
+- One or more KES servers connected to the KMS target
 - One or more hosts for a new or existing MinIO deployment
 
-1) Download KES and Create the Service File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. container:: procedure
-
-   a. Download KES
-
-      .. include:: /includes/linux/common-minio-kes.rst
-         :start-after: start-kes-download-desc
-         :end-before: end-kes-download-desc
-
-   b. Create the Service File
-
-      .. include:: /includes/linux/common-minio-kes.rst
-         :start-after: start-kes-service-file-desc
-         :end-before: end-kes-service-file-desc
-
-2) Generate TLS Certificates for KES
+1) Generate TLS Certificates for KES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/linux/common-minio-kes.rst
    :start-after: start-kes-generate-kes-certs-prod-desc
    :end-before: end-kes-generate-kes-certs-prod-desc
 
-Depending on your target KMS configuration, you may also need to specify the CA used to sign the KES certificates to the Vault server.
+Depending on your target KMS configuration, you may also need to specify the CA used to sign the KES certificates to the |KMS|.
 Refer to the documentation for your selected KMS solution for more information on trusting a third-party CA.
 
-3) Generate a KES API Key for use by MinIO
+2) Generate a KES API Key for use by MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting with KES version :minio-git:`2023-02-15T14-54-37Z <kes/releases/tag/2023-02-15T14-54-37Z>`, you can generate an API key to use for authenticating to the KES server.
@@ -49,75 +32,52 @@ Use the :kes-docs:`kes identity new <cli/kes-identity/new>` command to generate 
 
 The output includes both the API Key for use with MinIO and the Identity hash for use with the :kes-docs:`KES Policy configuration <tutorials/configuration/#policy-configuration>`.
 
-4) Create the KES and MinIO Configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. important::
-
-   Starting with :minio-release:`RELEASE.2023-02-17T17-52-43Z`, MinIO requires expanded KES permissions for functionality.
-   The example configuration in this section contains all required permissions.
+3) Create the MinIO Configurations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. container:: procedure
 
-   a. Create the KES Configuration File
+   Configure the MinIO Environment File
 
-      Create the :kes-docs:`configuration file <tutorials/configuration/#config-file>` using your preferred text editor.
-      The following example uses ``nano``:
+   Create or modify the MinIO Server environment file for all hosts in the target deployment to include the following environment variables:
 
-      .. code-block:: shell
-         :substitutions:
+   .. include:: /includes/common/common-minio-kes.rst
+      :start-after: start-kes-configuration-minio-desc
+      :end-before: end-kes-configuration-minio-desc
 
-         nano /opt/kes/config.yaml
+   MinIO defaults to expecting this file at ``/etc/default/minio``.
+   If you modified your deployment to use a different location for the environment file, modify the file at that location.
 
-      Refer to the :kes-docs:`KES documentation for your chosen supported KES target <#supported-kms-targets>` for details on modifying the configuration file.
-
-   b. Configure the MinIO Environment File
-
-      Create or modify the MinIO Server environment file for all hosts in the target deployment to include the following environment variables:
-
-      .. include:: /includes/common/common-minio-kes.rst
-         :start-after: start-kes-configuration-minio-desc
-         :end-before: end-kes-configuration-minio-desc
-
-      MinIO defaults to expecting this file at ``/etc/default/minio``.
-      If you modified your deployment to use a different location for the environment file, modify the file at that location.
-
-5) Start KES and MinIO
-~~~~~~~~~~~~~~~~~~~~~~
+4) Start MinIO
+~~~~~~~~~~~~~~
 
 .. admonition:: KES Operations Requires Unsealed Vault
    :class: important
 
    Depending on your selected KMS solution, you may need to unseal the key instance to allow normal cryptographic operations, including key creation or retrieval.
    KES requires an unsealed key target to perform its operations.
-
+   
    Refer to the :kes-docs:`documentation for your chosen KMS solution <#supported-kms-targets>` for information regarding whether sealing and unsealing the instance is required for operations.
 
-You must start KES *before* starting MinIO. 
-The MinIO deployment requires access to KES as part of its startup.
+   You must start KES *before* starting MinIO. 
+   The MinIO deployment requires access to KES as part of its startup.
 
-This step uses ``systemd`` for starting and managing both the KES and MinIO server processes:
+This step uses ``systemd`` for starting and managing the MinIO server processes:
 
-a. Start the KES Service on All Hosts
+Start the MinIO Server
 
-   .. include:: /includes/linux/common-minio-kes.rst
-      :start-after: start-kes-start-service-desc
-      :end-before: end-kes-start-service-desc
+.. include:: /includes/linux/common-minio-kes.rst
+   :start-after: start-kes-minio-start-service-desc
+   :end-before: end-kes-minio-start-service-desc
 
-b. Start the MinIO Server
-
-   .. include:: /includes/linux/common-minio-kes.rst
-      :start-after: start-kes-minio-start-service-desc
-      :end-before: end-kes-minio-start-service-desc
-
-6) Generate a New Encryption Key
+5) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
-7) Enable SSE-KMS for a Bucket
+6) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst

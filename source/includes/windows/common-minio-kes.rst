@@ -41,35 +41,6 @@ Defer to the client documentation for your chosen :kes-docs:`supported KMS targe
 
 .. end-kes-generate-kes-certs-desc
 
-.. start-kes-download-desc
-
-Download the latest stable release (|kes-stable|) of KES from :minio-git:`github.com/minio/kes <kes/releases/latest>`.
-The following PowerShell command downloads the latest Windows-compatible binary and moves it to the system ``PATH``:
-
-.. code-block:: powershell
-   :class: copyable
-   :substitutions:
-
-   Invoke-WebRequest -Uri "https://github.com/minio/kes/releases/download/|kes-stable|/kes-linux-windows-amd64.exe" -OutFile "C:\kes.exe"
-
-   C:\kes.exe --version
-
-.. end-kes-download-desc
-
-.. start-kes-start-server-desc
-
-Run the following command in a terminal or shell to start the KES server as a foreground process.
-
-.. code-block:: powershell
-   :class: copyable
-   :substitutions:
-
-   C:\kes.exe server --auth --config=|kesconfigpath|\config\kes-config.yaml
-
-Defer to the documentation for your Windows Operating System version for instructions on running a process in the background.
-
-.. end-kes-start-server-desc
-
 .. start-kes-minio-start-server-desc
 
 Run the following command in a terminal or shell to start the MinIO server as a foreground process.

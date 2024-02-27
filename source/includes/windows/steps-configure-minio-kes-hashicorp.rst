@@ -11,93 +11,52 @@ Prior to starting these steps, create the following folders:
    New-Item -Path "|kesconfigpath|" -ItemType "directory"
    New-Item -Path "|miniodatapath|" -ItemType "directory"
 
-1) Download KES for Windows
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/windows/common-minio-kes.rst
-   :start-after: start-kes-download-desc
-   :end-before: end-kes-download-desc
-
-2) Generate TLS Certificates for KES and MinIO
+1) Generate TLS Certificates for KES and MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-generate-kes-certs-desc
    :end-before: end-kes-generate-kes-certs-desc
 
-1) Create the KES and MinIO Configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2) Create the MinIO Configurations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-a. Create the KES Configuration File
+Create the MinIO Environment File
 
-   Create the configuration file using your preferred text editor.
-   The following example uses the Windows Notepad program:
+Create the environment file using your preferred text editor.
+The following example uses the Windows Notepad program:
 
-   .. code-block:: powershell
-      :substitutions:
+.. code-block:: powershell
+   :substitutions:
 
-      notepad |kesconfigpath|\kes-config.yaml
+   notepad |minioconfigpath|\minio
 
-   .. include:: /includes/common/common-minio-kes-hashicorp.rst
-      :start-after: start-kes-configuration-hashicorp-vault-desc
-      :end-before: end-kes-configuration-hashicorp-vault-desc
+.. include:: /includes/windows/common-minio-kes.rst
+   :start-after: start-kes-configuration-minio-desc
+   :end-before: end-kes-configuration-minio-desc
 
-   - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
+3) Start the MinIO Server
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      The following command computes the necessary hash:
+.. note::
 
-      .. code-block:: shell
-         :class: copyable
-         :substitutions:
+   You **must** start KES *before* starting MinIO. 
+   The MinIO deployment requires access to KES as part of its startup.
 
-         kes.exe tool identity of |miniocertpath|/minio-kes.cert
+Start the MinIO Server
 
-   - Replace the ``REGION`` with the appropriate region for AWS Secrets Manager.
-     The value **must** match for both ``endpoint`` and ``region``.
+.. include:: /includes/windows/common-minio-kes.rst
+   :start-after: start-kes-minio-start-server-desc
+   :end-before: end-kes-minio-start-server-desc
 
-   - Set ``AWSACCESSKEY`` and ``AWSSECRETKEY`` to the appropriate :ref:`AWS Credentials <minio-sse-aws-prereq-aws>`.
-
-
-b. Create the MinIO Environment File
-
-   Create the environment file using your preferred text editor.
-   The following example uses the Windows Notepad program:
-
-   .. code-block:: powershell
-      :substitutions:
-
-      notepad |minioconfigpath|\minio
-
-   .. include:: /includes/windows/common-minio-kes.rst
-      :start-after: start-kes-configuration-minio-desc
-      :end-before: end-kes-configuration-minio-desc
-
-4) Start KES and MinIO
-~~~~~~~~~~~~~~~~~~~~~~
-
-You must start KES *before* starting MinIO. 
-The MinIO deployment requires access to KES as part of its startup.
-
-a. Start the KES Server
-
-   .. include:: /includes/windows/common-minio-kes.rst
-      :start-after: start-kes-start-server-desc
-      :end-before: end-kes-start-server-desc
-
-b. Start the MinIO Server
-
-   .. include:: /includes/windows/common-minio-kes.rst
-      :start-after: start-kes-minio-start-server-desc
-      :end-before: end-kes-minio-start-server-desc
-
-5) Generate a New Encryption Key
+4) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
-6) Enable SSE-KMS for a Bucket
+5) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst

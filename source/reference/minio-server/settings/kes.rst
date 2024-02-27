@@ -32,7 +32,12 @@ Refer to your operating system's documentation for how to define an environment 
    The private key associated to the the :envvar:`MINIO_KMS_KES_CERT_FILE` x.509 certificate to use when authenticating to the KES server. 
    The KES server requires clients to present their certificate for performing mutual TLS (mTLS).
 
-   See the :minio-git:`KES wiki <kes/wiki/Configuration#policy-configuration>` for more complete documentation on KES access control.
+   See the :minio-git:`KES wiki <kes/wiki/Configuration#policy-configuration>` for more complete documentation on KES access control.'
+
+.. envvar:: MINIO_KMS_KES_CAPATH
+
+   Allows validation of the KES Server Certificate for a Self-Signed or Third-Party :abbr:`CA <Certificate Authority>`.
+   Specify the path to the location of the :abbr:`CA <Certificate Authority>` certificate for your KES deployment.
 
 .. envvar:: MINIO_KMS_KES_CERT_FILE
 

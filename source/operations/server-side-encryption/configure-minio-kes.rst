@@ -26,11 +26,9 @@ Server-Side Object Encryption with KES
 .. cond:: linux
 
    This procedure provides guidance for deploying MinIO configured to use KES and enable :ref:`Server Side Encryption <minio-sse-data-encryption>`.
+   For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
 
    As part of this procedure, you will:
-
-   #. Deploy one or more |KES| servers configured to use a :kes-docs:`supported Key Management System (KMS) target <#supported-kms-targets>`.
-      You may optionally deploy a load balancer for managing connections to those KES servers.
 
    #. Create a new |EK| for use with |SSE|.
 
@@ -42,6 +40,7 @@ Server-Side Object Encryption with KES
 .. cond:: macos or windows
 
    This procedure assumes a single local host machine running the MinIO and KES processes.
+   For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
    
    .. note::
 
@@ -50,8 +49,6 @@ Server-Side Object Encryption with KES
       For production baremetal environments, see the `MinIO on Linux documentation <https://min.io/docs/minio/linux/operations/server-side-encryption.html>`__ for tutorials on configuring MinIO with KES and your |KMS|.
 
    As part of this procedure, you will:
-
-   #. Deploy a |KES| server configured to use a :kes-docs:`supported Key Management System (KMS) target <#supported-kms-targets>`.
 
    #. Create a new |EK| for use with |SSE|.
 
@@ -62,10 +59,10 @@ Server-Side Object Encryption with KES
 
 .. cond:: container
 
-   This procedure assumes a single host machine running the MinIO and KES containers.
-   As part of this procedure, you will:
+   This procedure assumes that you use a single host machine to run both the MinIO and KES containers.
+   For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
 
-   #. Deploy a |KES| container configured to use a :kes-docs:`supported Key Management System (KMS) target <#supported-kms-targets>`.
+   As part of this procedure, you will:
 
    #. Create a new |EK| for use with |SSE|.
 
@@ -80,6 +77,8 @@ Server-Side Object Encryption with KES
 .. cond:: k8s
 
    This procedure assumes you have access to a Kubernetes cluster with an active MinIO Operator installation.
+   For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
+
    As part of this procedure, you will:
 
    #. Use the MinIO Operator Console to create or manage a MinIO Tenant.
@@ -111,13 +110,13 @@ Prerequisites
 
 .. _minio-sse-vault-prereq-vault:
 
-Deploy or Ensure Access to a Supported KMS Target
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ensure KES Access to a Supported KMS Target
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. cond:: linux or macos or windows or container
 
-   This procedure assumes an existing |KMS| installation accessible from the local host.
-   Refer to the installation instructions for your :kes-docs:`supported KMS target <#supported-kms-targets>` to deploy a KMS solution.
+   This procedure assumes an existing KES installation connected to a supported |KMS| installation accessible, both accessible from the local host.
+   Refer to the installation instructions for your :kes-docs:`supported KMS target <#supported-kms-targets>` to deploy KES and connect it to a KMS solution.
    
    .. admonition:: KES Operations Require Unsealed Target
       :class: important

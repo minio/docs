@@ -11,14 +11,7 @@ Prior to starting these steps, create the following folders:
    mkdir -P |kesconfigpath|
    mkdir -P |miniodatapath|
 
-1) Download the KES Binary
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/macos/common-minio-kes.rst
-   :start-after: start-kes-download-desc
-   :end-before: end-kes-download-desc
-
-2) Generate TLS Certificates for KES and MinIO
+1) Generate TLS Certificates for KES and MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst
@@ -28,80 +21,47 @@ Prior to starting these steps, create the following folders:
 Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority.
 Defer to the client documentation for instructions on trusting a third-party CA.
 
-1) Create the KES and MinIO Configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2) Create the MinIO Configurations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-a. Create the KES Configuration File
+Create the MinIO Environment File
 
-   Create the :kes-docs:`configuration file <tutorials/configuration/#config-file>` using your preferred text editor.
-   The following example uses ``nano``:
+Create the environment file using your preferred text editor.
+The following example uses ``nano``:
 
-   .. code-block:: shell
-      :substitutions:
+.. code-block:: shell
+   :substitutions:
 
-      nano |kesconfigpath|/kes-config.yaml
+   nano |minioconfigpath|/minio
 
-   - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
+.. include:: /includes/common/common-minio-kes.rst
+   :start-after: start-kes-configuration-minio-desc
+   :end-before: end-kes-configuration-minio-desc
 
-      The following command computes the necessary hash:
+3) Start the MinIO Server
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      .. note::
-               
-         Depending on your selected KMS solution, you may need to unseal the key instance to allow normal cryptographic operations, including key creation or retrieval.
-         KES requires an unsealed key target to perform its operations.
+.. note::
 
-      .. code-block:: shell
-         :class: copyable
-         :substitutions:
+   You **must** start KES *before* starting MinIO. 
+   The MinIO deployment requires access to KES as part of its startup.
 
-         kes identity of |miniocertpath|/minio-kes.cert
-
-   Refer to the documentation for your selected :kes-docs:`supported KMS solution <#supported-kms-targets>` for details on config items specific to your provider.
-
-b. Create the MinIO Environment File
-
-   Create the environment file using your preferred text editor.
-   The following example uses ``nano``:
-
-   .. code-block:: shell
-      :substitutions:
-
-      nano |minioconfigpath|/minio
-
-   .. include:: /includes/common/common-minio-kes.rst
-      :start-after: start-kes-configuration-minio-desc
-      :end-before: end-kes-configuration-minio-desc
-
-1) Start KES and MinIO
-~~~~~~~~~~~~~~~~~~~~~~
-
-You must start KES *before* starting MinIO. 
-The MinIO deployment requires access to KES as part of its startup.
-
-a. Start the KES Server
-
-   .. include:: /includes/common/common-minio-kes.rst
-      :start-after: start-kes-start-server-desc
-      :end-before: end-kes-start-server-desc
-
-b. Start the MinIO Server
-
-   .. include:: /includes/common/common-minio-kes.rst
-      :start-after: start-kes-minio-start-server-desc
-      :end-before: end-kes-minio-start-server-desc
+.. include:: /includes/common/common-minio-kes.rst
+   :start-after: start-kes-minio-start-server-desc
+   :end-before: end-kes-minio-start-server-desc
 
 Foreground processes depend on the shell or terminal in which they run.
 Exiting or terminating the shell/terminal instance also kills the attached process.
 Defer to your operating system best practices for running processes in the background.
 
-5) Generate a New Encryption Key
+4) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
-6) Enable SSE-KMS for a Bucket
+5) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst

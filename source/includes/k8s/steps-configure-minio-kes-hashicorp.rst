@@ -52,7 +52,7 @@ Refer to the Configuration References section of the tutorial for your chosen :k
 
 Once you have completed the configuration, you can finish any remaining sections of :ref:`Tenant Deployment <minio-k8s-deploy-minio-tenant>`.
 
-1) Generate a New Encryption Key
+3) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/k8s/common-minio-kes.rst
