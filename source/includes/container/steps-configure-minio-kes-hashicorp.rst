@@ -14,17 +14,13 @@ Prior to starting these steps, create the following folders:
 For Windows hosts, substitute the paths with Windows-style paths, e.g. ``C:\minio-kes-vault\``.
 
 
-1) Generate TLS Certificates for KES and MinIO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Prerequisite
+~~~~~~~~~~~~
 
-.. include:: /includes/container/common-minio-kes.rst
-   :start-after: start-kes-generate-kes-certs-desc
-   :end-before: end-kes-generate-kes-certs-desc
-
-Depending on your KMS configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. 
+Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority (CA).
 Defer to the client documentation for instructions on trusting a third-party CA.
 
-2) Create the KES and MinIO Configurations
+1) Create the KES and MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 a. Create the KES Configuration File
@@ -69,21 +65,21 @@ b. Create the MinIO Environment File
       :start-after: start-kes-configuration-minio-desc
       :end-before: end-kes-configuration-minio-desc
 
-3) Create Pod and Containers
+2) Create Pod and Containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-minio-kes.rst
    :start-after: start-common-deploy-create-pod-and-containers
    :end-before: end-common-deploy-create-pod-and-containers
 
-4) Generate a New Encryption Key
+3) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
-5) Enable SSE-KMS for a Bucket
+4) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:

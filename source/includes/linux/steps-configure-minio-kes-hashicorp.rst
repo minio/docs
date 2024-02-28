@@ -8,17 +8,13 @@ Specifically, this procedure assumes the following:
 - One or more KES servers connected to the KMS target
 - One or more hosts for a new or existing MinIO deployment
 
-1) Generate TLS Certificates for KES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Prerequisite
+~~~~~~~~~~~~
 
-.. include:: /includes/linux/common-minio-kes.rst
-   :start-after: start-kes-generate-kes-certs-prod-desc
-   :end-before: end-kes-generate-kes-certs-prod-desc
+Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority (CA).
+Defer to the client documentation for instructions on trusting a third-party CA.
 
-Depending on your target KMS configuration, you may also need to specify the CA used to sign the KES certificates to the |KMS|.
-Refer to the documentation for your selected KMS solution for more information on trusting a third-party CA.
-
-2) Generate a KES API Key for use by MinIO
+1) Generate a KES API Key for use by MinIO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting with KES version :minio-git:`2023-02-15T14-54-37Z <kes/releases/tag/2023-02-15T14-54-37Z>`, you can generate an API key to use for authenticating to the KES server.
@@ -32,23 +28,21 @@ Use the :kes-docs:`kes identity new <cli/kes-identity/new>` command to generate 
 
 The output includes both the API Key for use with MinIO and the Identity hash for use with the :kes-docs:`KES Policy configuration <tutorials/configuration/#policy-configuration>`.
 
-3) Create the MinIO Configurations
+2) Create the MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. container:: procedure
+Configure the MinIO Environment File
 
-   Configure the MinIO Environment File
+Create or modify the MinIO Server environment file for all hosts in the target deployment to include the following environment variables:
 
-   Create or modify the MinIO Server environment file for all hosts in the target deployment to include the following environment variables:
+.. include:: /includes/common/common-minio-kes.rst
+   :start-after: start-kes-configuration-minio-desc
+   :end-before: end-kes-configuration-minio-desc
 
-   .. include:: /includes/common/common-minio-kes.rst
-      :start-after: start-kes-configuration-minio-desc
-      :end-before: end-kes-configuration-minio-desc
+MinIO defaults to expecting this file at ``/etc/default/minio``.
+If you modified your deployment to use a different location for the environment file, modify the file at that location.
 
-   MinIO defaults to expecting this file at ``/etc/default/minio``.
-   If you modified your deployment to use a different location for the environment file, modify the file at that location.
-
-4) Start MinIO
+3) Start MinIO
 ~~~~~~~~~~~~~~
 
 .. admonition:: KES Operations Requires Unsealed Vault
@@ -70,14 +64,14 @@ Start the MinIO Server
    :start-after: start-kes-minio-start-service-desc
    :end-before: end-kes-minio-start-service-desc
 
-5) Generate a New Encryption Key
+4) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
-6) Enable SSE-KMS for a Bucket
+5) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst

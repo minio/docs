@@ -135,7 +135,15 @@ Ensure KES Access to a Supported KMS Target
       :start-after: start-kes-prereq-hashicorp-vault-desc
       :end-before: end-kes-prereq-hashicorp-vault-desc
 
-Refer to the :kes-docs:`KES documentation <#supported-kms-targets>` for detailed instructions on setting up and deploying KES for your chosen supported |KMS|.
+Refer to the configuration instruction in the :kes-docs:`KES documentation <>` for your chosen supported |KMS|:
+
+- :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+- :kes-docs:`Azure KeyVault <integrations/azure-keyvault/>`
+- :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+- :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+- :kes-docs:`Google Cloud Secret Manager <ntegrations/google-cloud-secret-manager/>`
+- :kes-docs:`Hashicorp Vault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
 
 .. cond:: linux or macos or windows

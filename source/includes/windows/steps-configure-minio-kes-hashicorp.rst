@@ -11,14 +11,13 @@ Prior to starting these steps, create the following folders:
    New-Item -Path "|kesconfigpath|" -ItemType "directory"
    New-Item -Path "|miniodatapath|" -ItemType "directory"
 
-1) Generate TLS Certificates for KES and MinIO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Prerequisite
+~~~~~~~~~~~~
 
-.. include:: /includes/windows/common-minio-kes.rst
-   :start-after: start-kes-generate-kes-certs-desc
-   :end-before: end-kes-generate-kes-certs-desc
+Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority (CA).
+Defer to the client documentation for instructions on trusting a third-party CA.
 
-2) Create the MinIO Configurations
+1) Create the MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create the MinIO Environment File
@@ -35,7 +34,7 @@ The following example uses the Windows Notepad program:
    :start-after: start-kes-configuration-minio-desc
    :end-before: end-kes-configuration-minio-desc
 
-3) Start the MinIO Server
+2) Start the MinIO Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
@@ -49,14 +48,14 @@ Start the MinIO Server
    :start-after: start-kes-minio-start-server-desc
    :end-before: end-kes-minio-start-server-desc
 
-4) Generate a New Encryption Key
+3) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/windows/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
-5) Enable SSE-KMS for a Bucket
+4) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-minio-kes.rst
