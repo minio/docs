@@ -21,6 +21,10 @@ Server-Side Object Encryption with KES
 .. |rootkms|       replace:: `Hashicorp Vault <https://vaultproject.io/>`__
 .. |rootkms-short| replace:: Vault
 
+.. meta::
+   :description: Deploy MinIO with Server-Side Object Encryption
+   :keywords: encryption, security, hashicorp, keyvault, azure
+
 .. Conditionals to handle the slight divergences in procedures between platforms.
 
 .. cond:: linux
