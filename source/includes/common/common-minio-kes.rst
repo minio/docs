@@ -12,7 +12,7 @@ You cannot disable KES later or "undo" the |SSE| configuration at a later point.
 
 .. start-kes-new-existing-minio-deployment-desc
 
-This procedure provides instructions for modifying the startup environment variables of a MinIO deployment to enable |SSE| via KES and the root KMS.
+This procedure provides instructions for modifying the startup environment variables of a MinIO deployment to enable |SSE| via KES and the KMS target.
 
 For instructions on new production deployments, see the :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` tutorial.
 For instructions on new local or evaluation deployments, see the :ref:`Single-Node Single-Drive <minio-snsd>` tutorial.
@@ -27,19 +27,16 @@ For existing MinIO Deployments, you can modify the existing environment file and
 
 The following commands create two TLS certificates that expire within 30 days of creation:
 
-- A TLS certificate for KES to secure communications between it and the Vault deployment
+- A TLS certificate to secure communications between KES and the KMS.
 - A TLS certificate for MinIO to perform mTLS authentication to KES.
 
 .. admonition:: Use Caution in Production Environments
    :class: important
 
-   **DO NOT** use the TLS certificates generated as part of this procedure for
-   any long-term development or production environments. 
+   **DO NOT** use the TLS certificates generated as part of this procedure for any long-term development or production environments. 
 
-   Defer to organization/industry best practices around TLS certificate
-   generation and management. A complete guide to creating valid certificates
-   (e.g. well-formed, current, and trusted) is beyond the scope of this
-   procedure.
+   Defer to organization/industry best practices around TLS certificate generation and management. 
+   A complete guide to creating valid certificates (e.g. well-formed, current, and trusted) is beyond the scope of this procedure.
 
 .. code-block:: shell
    :class: copyable
@@ -61,7 +58,7 @@ The following commands create two TLS certificates that expire within 30 days of
      --dns  localhost
 
 The ``--ip`` and ``--dns`` parameters set the IP and DNS ``SubjectAlternativeName`` for the certificate.
-The above example assumes that all components (Vault, MinIO, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
+The above example assumes that all components (KMS, MinIO, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
 You can specify additional IP or Hostnames based on the network configuration of your local host.
 
 .. end-kes-generate-kes-certs-desc
@@ -94,7 +91,7 @@ Run the following commands in a terminal or shell to start the KES server as a f
 
 The first command allows |KES| to use the `mlock <http://man7.org/linux/man-pages/man2/mlock.2.html>`__ system call without running as root. 
 ``mlock`` ensures the OS does not write in-memory data to a drive (swap memory) and mitigates the risk of cryptographic operations being written to unsecured drive at any time.
-KES 0.21.0 and later automatically detect and enable ``mlock`` if supported by the host OS. 
+KES 0.21.0 and later automatically detects and enables ``mlock`` if supported by the host OS. 
 Versions 0.20.0 and earlier required specifying the ``--mlock`` argument to KES.
 
 The second command starts the KES server in the foreground using the configuration file created in the last step. 
@@ -103,17 +100,16 @@ Using self-signed certificates for either the MinIO client or the root KMS serve
 
 |KES| listens on port ``7373`` by default. 
 You can monitor the server logs from the terminal session. 
-If you run |KES| without tying it to the current shell session (e.g. with ``nohup``), use that method's associated logging system (e.g. ``nohup.txt``).
-
+If you run |KES| without tying it to the current shell session (for example, with ``nohup``), use that method's associated logging system (for example, ``nohup.txt``).
 
 .. end-kes-start-server-desc
 
 .. start-kes-generate-key-desc
 
-MinIO requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
+MinIO requires that the |EK| exist on the KMS *before* performing |SSE| operations using that key. 
 Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
 
-The following command uses the :mc-cmd:`mc admin kms key create` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the MinIO backend.
+The following command uses the :mc-cmd:`mc admin kms key create` command to add a new External Key (EK) stored on the KMS server for use with encrypting the MinIO backend.
 
 .. code-block:: shell
    :class: copyable
@@ -155,8 +151,7 @@ If the MinIO server host machines cannot resolve or reach the specified ``HOSTNA
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 
 - Encrypting the MinIO backend (IAM, configuration, etc.)
-- Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not 
-  include a specific |EK|.
+- Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not include a specific |EK|.
 - Encrypting objects using :ref:`SSE-S3 <minio-encryption-sse-s3>`.
 
 MinIO uses the :envvar:`MINIO_KMS_KES_ENCLAVE` key to define the name of the KES enclave to use.
@@ -177,8 +172,8 @@ You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-
 
    .. tab-item:: MinIO Console
 
-      Open the MinIO Console by navigating to http://127.0.0.1:9001 in your preferred browser and logging in with the root credentials specified to the MinIO container.
-      If you deployed MinIO using a different Console listen port, substitute ``9090`` with that port value.
+      Open the MinIO Console by navigating to http://127.0.0.1:9001 in your preferred browser and logging in with the root credentials specified to the MinIO Server.
+      If you deployed MinIO using a different Console listen port, substitute ``9001`` with that port value.
 
       Once logged in, create a new Bucket and name it to your preference.
       Select the Gear :octicon:`gear` icon to open the management view.
@@ -188,7 +183,7 @@ You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-
       Select :guilabel:`SSE-KMS`, then enter the name of the key created in the previous step.
 
       Once you save your changes, try to upload a file to the bucket. 
-      When viewing that file in the object browser, note that in the sidebar the metadata includes the SSE encryption scheme and information on the key used to encrypt that object.
+      When viewing that file in the object browser, note that the sidebar metadata includes the SSE encryption scheme and information on the key used to encrypt that object.
       This indicates the successful encrypted state of the object.
 
    .. tab-item:: MinIO CLI
@@ -254,25 +249,19 @@ MinIO |SSE| requires access to the following KES cryptographic APIs:
 
 Specifying additional keys does not expand MinIO |SSE| functionality and may violate security best practices around providing unnecessary client access to cryptographic key operations.
 
-You can restrict the range of key names MinIO can create as part of performing
-|SSE| by specifying a prefix before the ``*``. For example, 
-``minio-sse-*`` only grants access to create, generate, or decrypt keys using
-the ``minio-sse-`` prefix.
+You can restrict the range of key names MinIO can create as part of performing |SSE| by specifying a prefix before the ``*``. 
+For example, ``minio-sse-*`` only grants access to create, generate, or decrypt keys using the ``minio-sse-`` prefix.
 
-|KES| uses mTLS to authorize connecting clients by comparing the 
-hash of the TLS certificate against the ``identities`` of each configured
-policy. Use the ``kes identity of`` command to compute the identity of the
-MinIO mTLS certificate and add it to the ``policy.<NAME>.identities`` array
-to associate MinIO to the ``<NAME>`` policy. 
+|KES| uses mTLS to authorize connecting clients by comparing the hash of the TLS certificate against the ``identities`` of each configured policy. 
+Use the ``kes identity of`` command to compute the identity of the MinIO mTLS certificate and add it to the ``policy.<NAME>.identities`` array to associate MinIO to the ``<NAME>`` policy. 
 
 .. end-kes-conf-policy-desc
 
 .. start-kes-conf-keys-desc
 
-Specify an array of keys which *must* exist on the root KMS for |KES| to 
-successfully start. KES attempts to create the keys if they do not exist and
-exits with an error if it fails to create any key. KES does not accept any
-client requests until it completes validation of all specified keys.
+Specify an array of keys which *must* exist on the root KMS for |KES| to successfully start. 
+KES attempts to create the keys if they do not exist and exits with an error if it fails to create any key. 
+KES does not accept any client requests until it completes validation of all specified keys.
 
 .. end-kes-conf-keys-desc
 
@@ -289,16 +278,12 @@ client requests until it completes validation of all specified keys.
 
 .. important::
 
-   The MinIO KES ``Play`` sandbox is public and grants root access to all
-   created External Keys (EK). Any |EK| stored on the ``Play`` sandbox may be
-   accessed or destroyed at any time, rendering protected data vulnerable or
-   permanently unreadable. 
+   The MinIO KES ``Play`` sandbox is public and grants root access to all created External Keys (EK). 
+   Any |EK| stored on the ``Play`` sandbox may be accessed or destroyed at any time, rendering protected data vulnerable or permanently unreadable. 
    
-   - **Never** use the ``Play`` sandbox to protect data you cannot afford to
-     lose or reveal.
+   - **Never** use the ``Play`` sandbox to protect data you cannot afford to lose or reveal.
 
-   - **Never** generate |EK| using names that reveal private, confidential, or
-     internal naming conventions for your organization.
+   - **Never** generate |EK| using names that reveal private, confidential, or internal naming conventions for your organization.
 
    - **Never** use the ``Play`` sandbox for production environments.
 

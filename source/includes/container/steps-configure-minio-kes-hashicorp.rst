@@ -1,5 +1,5 @@
-(Podman) Deploy MinIO and KES with Server-Side Encryption using Hashicorp Key Vault
------------------------------------------------------------------------------------
+Deploy MinIO and KES with Server-Side Encryption
+------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
@@ -14,17 +14,13 @@ Prior to starting these steps, create the following folders:
 For Windows hosts, substitute the paths with Windows-style paths, e.g. ``C:\minio-kes-vault\``.
 
 
-1) Generate TLS Certificates for KES and MinIO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Prerequisite
+~~~~~~~~~~~~
 
-.. include:: /includes/container/common-minio-kes.rst
-   :start-after: start-kes-generate-kes-certs-desc
-   :end-before: end-kes-generate-kes-certs-desc
-
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. See the `Hashicorp Vault Configuration Docs <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
+Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority (CA).
 Defer to the client documentation for instructions on trusting a third-party CA.
 
-2) Create the KES and MinIO Configurations
+1) Create the KES and MinIO Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 a. Create the KES Configuration File
@@ -53,9 +49,7 @@ a. Create the KES Configuration File
             -v |kescertpath|/certs:/certs                                \
             kes:|kes-stable| tool identity of /certs/minio-kes.cert
 
-   - Replace the ``vault.endpoint`` with the hostname of the Vault server(s).
-
-   - Replace the ``VAULTAPPID`` and ``VAULTAPPSECRET`` with the appropriate :ref:`Vault AppRole credentials <minio-sse-vault-prereq-vault>`.
+   - Refer to the instructions for setting up KES for your :kes-docs:`supported KMS solution <#kes-supported-targets>` for additional variables to define specific to your chosen KMS target.
 
 b. Create the MinIO Environment File
 
@@ -71,21 +65,21 @@ b. Create the MinIO Environment File
       :start-after: start-kes-configuration-minio-desc
       :end-before: end-kes-configuration-minio-desc
 
-3) Create Pod and Containers
+2) Create Pod and Containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-minio-kes.rst
    :start-after: start-common-deploy-create-pod-and-containers
    :end-before: end-common-deploy-create-pod-and-containers
 
-4) Generate a New Encryption Key
+3) Generate a New Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-minio-kes.rst
    :start-after: start-kes-generate-key-desc
    :end-before: end-kes-generate-key-desc
 
-5) Enable SSE-KMS for a Bucket
+4) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:

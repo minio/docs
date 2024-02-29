@@ -2,7 +2,7 @@
 
 The following commands creates two TLS certificates that expire within 30 days of creation:
 
-- A TLS certificate for KES to secure communications between it and the Vault deployment
+- A TLS certificate for KES to secure communications between it and the KMS deployment
 - A TLS certificate for MinIO to perform mTLS authentication to KES.
 
 .. admonition:: Use Caution in Production Environments
@@ -11,10 +11,8 @@ The following commands creates two TLS certificates that expire within 30 days o
    **DO NOT** use the TLS certificates generated as part of this procedure for
    any long-term development or production environments. 
 
-   Defer to organization/industry best practices around TLS certificate
-   generation and management. A complete guide to creating valid certificates
-   (e.g. well-formed, current, and trusted) is beyond the scope of this
-   procedure.
+   Defer to organization/industry best practices around TLS certificate generation and management. 
+   A complete guide to creating valid certificates (for example, well-formed, current, and trusted) is beyond the scope of this procedure.
 
 .. code-block:: powershell
    :class: copyable
@@ -35,42 +33,13 @@ The following commands creates two TLS certificates that expire within 30 days o
      --dns  localhost
 
 The ``--ip`` and ``--dns`` parameters set the IP and DNS ``SubjectAlternativeName`` for the certificate.
-The above example assumes that all components (Vault, MinIO, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
+The above example assumes that all components (KMS, MinIO, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
 You can specify additional IP or Hostnames based on the network configuration of your local host.
 
-Depending on your Vault configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority. See the `Hashicorp Server Configuration Documentation <https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file>`__ for more information.
-Defer to the client documentation for instructions on trusting a third-party CA.
+Depending on your KMS configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority.
+Defer to the client documentation for your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` for instructions on trusting a third-party CA.
 
 .. end-kes-generate-kes-certs-desc
-
-.. start-kes-download-desc
-
-Download the latest stable release (|kes-stable|) of KES from :minio-git:`github.com/minio/kes <kes/releases/latest>`.
-The following PowerShell command downloads the latest Windows-compatible binary and moves it to the system ``PATH``:
-
-.. code-block:: powershell
-   :class: copyable
-   :substitutions:
-
-   Invoke-WebRequest -Uri "https://github.com/minio/kes/releases/download/|kes-stable|/kes-linux-windows-amd64.exe" -OutFile "C:\kes.exe"
-
-   C:\kes.exe --version
-
-.. end-kes-download-desc
-
-.. start-kes-start-server-desc
-
-Run the following command in a terminal or shell to start the KES server as a foreground process.
-
-.. code-block:: powershell
-   :class: copyable
-   :substitutions:
-
-   C:\kes.exe server --auth --config=|kesconfigpath|\config\kes-config.yaml
-
-Defer to the documentation for your MacOS Operating System version for instructions on running a process in the background.
-
-.. end-kes-start-server-desc
 
 .. start-kes-minio-start-server-desc
 
@@ -138,8 +107,7 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 
 - Encrypting the MinIO backend (IAM, configuration, etc.)
-- Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not 
-  include a specific |EK|.
+- Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not include a specific |EK|.
 - Encrypting objects using :ref:`SSE-S3 <minio-encryption-sse-s3>`.
 
 MinIO uses the :envvar:`MINIO_KMS_KES_ENCLAVE` key to define the name of the KES enclave to use for stateful KES servers.
