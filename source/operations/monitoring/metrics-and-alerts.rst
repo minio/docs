@@ -46,6 +46,20 @@ MinIO provides scraping endpoints for the following metric groups:
       Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
       For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
 
+   .. tab-item:: Resource Metrics
+
+      .. versionadded:: RELEASE.2023-10-07T15-07-38Z 
+
+      You can scrape :ref:`resource metrics <minio-available-resource-metrics>` using the following URL endpoint:
+
+      .. code-block:: shell
+         :class: copyable
+
+         http://HOSTNAME:PORT/minio/v2/metrics/resource
+
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+
 
 MinIO by default requires authentication for scraping the metrics endpoints.
 Use the :mc-cmd:`mc admin prometheus generate` command to generate the necessary bearer tokens. 
@@ -110,6 +124,7 @@ Each metric includes a label for the MinIO server which generated that metric.
 
 - :ref:`Cluster Metrics <minio-available-cluster-metrics>`
 - :ref:`Bucket Metrics <minio-available-bucket-metrics>`
+- :ref:`Resource Metrics <minio-available-resource-metrics>`
 
 .. _minio-available-cluster-metrics:
 
@@ -119,6 +134,11 @@ Each metric includes a label for the MinIO server which generated that metric.
 .. _minio-available-bucket-metrics:
 
 .. include:: /includes/common-metrics-bucket.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-resource-metrics:
+
+.. include:: /includes/common-metrics-resource.md
    :parser: myst_parser.sphinx_
 
 .. toctree::

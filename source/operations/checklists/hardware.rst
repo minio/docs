@@ -189,6 +189,10 @@ The following table provides general guidelines for allocating memory for use by
    * - More than 1 Pebibyte (Pi)
      - 128GiB
 
+.. important::
+
+   Starting with :minio-release:`RELEASE.2024-01-28T22-35-53Z`, MinIO preallocates 2GiB of memory per node in distributed setups and 1GiB of memory in single node topologies.
+
 .. _minio-hardware-checklist-storage:
 
 Storage

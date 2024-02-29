@@ -33,6 +33,13 @@ Storage Requirements
    :start-after: start-storage-requirements-desc
    :end-before: end-storage-requirements-desc
 
+Memory Requirements
+~~~~~~~~~~~~~~~~~~~
+
+Starting with :minio-release:`RELEASE.2024-01-28T22-35-53Z`, MinIO pre-allocates 1GiB of system memory at startup.
+
+For development environments, you can specify the ``CI_CD=TRUE`` environment variable to reduce the allocation to 256MiB.
+
 .. _deploy-minio-standalone-multidrive:
 
 Deploy Single-Node Multi-Drive MinIO

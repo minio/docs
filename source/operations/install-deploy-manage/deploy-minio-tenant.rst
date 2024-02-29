@@ -362,6 +362,7 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
    * - :guilabel:`Memory per Node [Gi]`
      - Specify the total amount of memory (RAM) to allocate per MinIO server pod. 
        See :ref:`minio-hardware-checklist-memory` for guidance on setting this value.
+       MinIO **requires** a minimum of 2GiB of memory per worker.
 
        The Kubernetes cluster *must* have worker nodes with sufficient free RAM to match the pod request.
 

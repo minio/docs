@@ -92,7 +92,7 @@ This procedure assumes a *total loss* of one or more peer sites versus replicati
    All healthy peers in the site replication configuration update for the new peer automatically.
    You can use the :mc-cmd:`mc admin replicate info` command to verify the new site replication configuration.
 
-#. Resynchronize the new peer with :mc:`mc admin replicate resync`.
+#. Resynchronize the new peer with :mc-cmd:`mc admin replicate resync`.
 
    .. code-block:: shell
       :class: copyable
