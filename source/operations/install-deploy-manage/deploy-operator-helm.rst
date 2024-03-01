@@ -200,6 +200,8 @@ This method may support easier pre-configuration of the Operator compared to the
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/operator-|operator-version-stable|.tgz
 
    The chart contains a ``values.yaml`` file you can customize to suit your needs.
+   For details on the options available in the MinIO Operator ``values.yaml``, see :ref:`minio-operator-chart-values`.
+
    For more about customizations, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
   
 #. Deploy Operator
