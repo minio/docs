@@ -332,6 +332,9 @@ rst_prolog = """
 .. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`
 .. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`
 .. |operator-version-stable| replace:: OPERATOR
+.. |helm-charts| replace:: `Helm Charts <https://github.com/minio/operator/tree/vOPERATOR/helm>`__
+.. |helm-operator-chart| replace:: `Helm Operator Charts <https://github.com/minio/operator/blob/vOPERATOR/helm/operator>`__
+.. |helm-tenant-chart| replace:: `Helm Tenant Charts <https://github.com/minio/operator/tree/vOPERATOR/helm/tenant>`__
 
 .. |cpp-sdk-version| replace:: CPPVERSION
 .. |dotnet-sdk-version| replace:: DOTNETVERSION
