@@ -25,7 +25,7 @@ You cannot use the MinIO Operator Tenant chart to deploy a Tenant independent of
 
    The MinIO Operator Tenant Chart is *distinct* from the community-managed :minio-git:`MinIO Chart <minio/tree/master/helm/minio>`.
 
-   The Community Helm Chart built, maintained, and supported by the community.
+   The Community Helm Chart is built, maintained, and supported by the community.
    MinIO does not guarantee support for any given bug, feature request, or update referencing that chart.
 
    The :ref:`Operator Tenant Chart <minio-tenant-chart-values>` is officially maintained and supported by MinIO.
