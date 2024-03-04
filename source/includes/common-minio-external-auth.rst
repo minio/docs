@@ -128,11 +128,9 @@ Defaults to ``off``.
 
 .. start-minio-openid-claim-userinfo
 
-Specify the OpenID User info API endpoint for the OIDC service.
-For example, ``https://oidc-endpoint:port/realms/REALM/protocol/openid-connect/userinfo``
+Allow MinIO to fetch claims from the `UserInfo Endpoint <https://openid.net/specs/openid-connect-core-1_0.html#UserInfo>`__ for the authenticated user.
 
-Some OIDC providers do not provide group information as part of the JWT response after authentication.
-Specify this URL to direct MinIO to make an additional API call to construct the complete JWT token.
+Valid values are ``on`` or ``off``.
 
 .. end-minio-openid-claim-userinfo
 
