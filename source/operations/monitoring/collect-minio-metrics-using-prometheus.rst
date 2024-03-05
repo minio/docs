@@ -218,9 +218,11 @@ You can execute queries here to analyze the collected metrics.
 
          minio_node_drive_io_waiting{job-"minio-job"}[5m]
 
-   .. tab-item:: Recommended Alerts
+   .. tab-item:: Recommended Metrics
 
-      MinIO recommends the following the following metrics:
+      MinIO recommends the following as a basic set of metrics to monitor.
+
+      See :ref:`minio-metrics-and-alerts` for information about all available metrics.
 
       .. list-table::
          :header-rows: 1
@@ -262,8 +264,6 @@ You can execute queries here to analyze the collected metrics.
 
          * - ``minio_node_drive_io_waiting``
            - Total number of I/O operations waiting on drive.
-
-See :ref:`minio-metrics-and-alerts` for information about available metrics.
 
 4) Configure an Alert Rule using MinIO Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
