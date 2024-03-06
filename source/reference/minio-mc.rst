@@ -530,7 +530,7 @@ You can also define some of these options using :ref:`Environment Variables <min
 
    Alternatively, set the environment variable :envvar:`MC_CONFIG_DIR`.
 
-.. option:: --JSON
+.. option:: --json
 
    Enables `JSON lines <http://jsonlines.org/>`_ formatted output to the
    console.
@@ -541,7 +541,7 @@ You can also define some of these options using :ref:`Environment Variables <min
    .. code-block:: shell
       :class: copyable
 
-      mc --JSON ls play 
+      mc --json ls play 
 
    Alternatively, set the environment variable :envvar:`MC_JSON`.
 
