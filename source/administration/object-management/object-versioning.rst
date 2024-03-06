@@ -330,7 +330,7 @@ You can exclude up to 10 prefixes for each bucket.
 To add or remove prefixes, repeat the :mc:`mc version enable` command with an updated list.
 The new list of prefixes replaces the previous one.
 
-To view the currently excluded prefixes, use :mc:`mc version info` with the ``--JSON`` option:
+To view the currently excluded prefixes, use :mc:`mc version info` with the ``--json`` option:
 
   .. code-block:: shell
      :class: copyable
