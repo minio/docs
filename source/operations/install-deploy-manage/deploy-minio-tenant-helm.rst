@@ -25,11 +25,11 @@ You cannot use the MinIO Operator Tenant chart to deploy a Tenant independent of
 
    The MinIO Operator Tenant Chart is *distinct* from the community-managed :minio-git:`MinIO Chart <minio/tree/master/helm/minio>`.
 
-   The Community Helm Chart is community built, maintained, and supported.
+   The Community Helm Chart is built, maintained, and supported by the community.
    MinIO does not guarantee support for any given bug, feature request, or update referencing that chart.
 
-   The Operator Tenant Chart is officially maintained and supported by MinIO.
-   MinIO strongly recommends the official Helm Chart for Operator and Tenants for production environments.
+   The :ref:`Operator Tenant Chart <minio-tenant-chart-values>` is officially maintained and supported by MinIO.
+   MinIO strongly recommends the official Helm Chart for :ref:`Operator <minio-operator-chart-values>` and :ref:`Tenants <minio-tenant-chart-values>` for production environments.
 
 Prerequisites
 -------------
@@ -100,6 +100,9 @@ You can modify the Operator deployment after installation.
         --namespace MINIO_TENANT_NAMESPACE \
         --create-namespace \ 
         MINIO_TENANT_NAME minio-operator/tenant
+
+   For details on the options available in the MinIO Tenant ``values.yaml``, see :ref:`minio-tenant-chart-values`.
+
 
 #. Validate the Tenant installation
 
@@ -178,6 +181,7 @@ This method may support easier pre-configuration of the Tenant compared to the :
       curl -O https://raw.githubusercontent.com/minio/operator/master/helm-releases/tenant-|operator-version-stable|.tgz
 
    Each chart contains a ``values.yaml`` file you can customize to suit your needs.
+   For details on the options available in the MinIO Tenant ``values.yaml``, see :ref:`minio-tenant-chart-values`.
    For example, you may wish to change the MinIO root user credentials or the Tenant name.
    For more about customizations, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
 

@@ -1,8 +1,8 @@
 .. _minio-operator-chart-values:
 
-===============================
-Operator and Tenant Helm Charts
-===============================
+====================
+Operator Helm Charts
+====================
 
 .. default-domain:: minio
 
@@ -10,10 +10,11 @@ Operator and Tenant Helm Charts
    :local:
    :depth: 1
 
-MinIO publishes `Helm Charts <https://github.com/minio/operator/tree/v5.0.10/helm>`__ for the MinIO Operator and Tenants.
+MinIO publishes |helm-charts| for the |helm-operator-chart| and |helm-tenant-chart|.
 You can use these charts to deploy the MinIO Operator and managed Tenants through Helm.
 
-The following page documents the ``values.yaml`` for each chart.
+The following page documents the ``values.yaml`` chart for the MinIO Operator.
+For documentation on the chart for a MinIO Tenant, see :ref:`minio-tenant-chart-values`
 
 .. _minio-operator-chart-operator-values:
 
@@ -29,18 +30,3 @@ MinIO Operator Chart
    .. tab-item:: YAML
 
       .. literalinclude:: /includes/k8s/operator-values.yaml
-
-.. _minio-operator-chart-tenant-values:
-
-MinIO Tenant Chart
-------------------
-
-.. tab-set::
-
-   .. tab-item:: Reference
-
-      .. autoyaml:: /source/includes/k8s/tenant-values.yaml
-
-   .. tab-item:: YAML
-
-      .. literalinclude:: /includes/k8s/tenant-values.yaml

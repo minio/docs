@@ -213,6 +213,7 @@ For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio
       /reference/kubectl-minio-plugin
       /reference/operator-crd
       /reference/operator-chart-values
+      /reference/tenant-chart-values
       /reference/operator-environment-variables
 
 .. toctree::
