@@ -72,7 +72,7 @@ Global Flags
 
 .. versionchanged:: RELEASE.2023-05-26T23-31-54Z
 
-   ``mc admin user info --JSON`` output includes policies inherited from a user's group memberships in ``memberOf``.
+   ``mc admin user info --json`` output includes policies inherited from a user's group memberships in ``memberOf``.
 
 Examples
 --------
@@ -114,12 +114,12 @@ For a :ref:`third-party <minio-external-identity-management>` identity service s
 View Policies from Group Membership
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user info` with :std:option:`--JSON <mc.--JSON>` to view the policies inherited from a user's :ref:`group memberships <minio-groups>`:
+Use :mc-cmd:`mc admin user info` with :std:option:`--json <mc.--json>` to view the policies inherited from a user's :ref:`group memberships <minio-groups>`:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin user info ALIAS USERNAME --JSON
+   mc admin user info ALIAS USERNAME --json
 
 - Replace :mc-cmd:`ALIAS <mc admin user info ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 

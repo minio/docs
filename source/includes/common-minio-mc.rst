@@ -6,7 +6,7 @@ This command supports any of the :ref:`global flags <minio-mc-global-options>`.
 
 .. start-minio-mc-json-globals
 
-.. mc-cmd:: --JSON
+.. mc-cmd:: --json
    :optional:
 
    Enables `JSON lines <http://jsonlines.org/>`_ formatted output to the
@@ -17,7 +17,7 @@ This command supports any of the :ref:`global flags <minio-mc-global-options>`.
    .. code-block:: shell
       :class: copyable
 
-      mc --JSON COMMAND
+      mc --json COMMAND
 
 .. end-minio-mc-json-globals
 

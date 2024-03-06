@@ -19,7 +19,7 @@
 
 .. versionchanged:: RELEASE.2023-05-26T23-31-54Z
 
-   ``mc ilm rule ls --JSON`` output includes the policy modification time in ``updateAt``.
+   ``mc ilm rule ls --json`` output includes the policy modification time in ``updateAt``.
    
 Syntax
 ------
@@ -148,12 +148,12 @@ Use :mc:`mc ilm rule ls` to list a bucket's lifecycle management rules:
 Show Policy Modification Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc ilm rule ls` with :std:option:`--JSON <mc.--JSON>` to show the time the policy for a bucket was last updated.
+Use :mc:`mc ilm rule ls` with :std:option:`--json <mc.--json>` to show the time the policy for a bucket was last updated.
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule ls ALIAS/PATH --JSON
+   mc ilm rule ls ALIAS/PATH --json
 
 - Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
 
