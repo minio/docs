@@ -569,7 +569,7 @@ Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Ce
 
          .. code-block:: shell
 
-            mv myCA.crt ${HOME}/certs/CAs
+            mv myCA.crt ${HOME}/.minio/certs/CAs
 
       .. tab-item:: Custom Certificate Path
 
