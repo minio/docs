@@ -102,7 +102,7 @@ Syntax
       .. code-block:: shell
          :class: copyable
 
-          mc ilm tier update myminio S3TIER --access-key ACCESS-KEY --secret-key SECRET-KEY  
+          mc ilm tier update myminio S3TIER --access-key ACCESS_KEY --secret-key SECRET_KEY  
 
       After running this command, lifecycle management rules on the ``myminio`` deployment use the tier's new credentials to transition objects into the remote location.
       Options not modified in the command maintain their existing configurations.
@@ -208,11 +208,11 @@ The following example updates the credentials for an S3 remote tier called ``S3T
 .. code-block:: shell
    :class: copyable
 
-   mc ilm tier update myminio S3TIER --access-key ACCESS-KEY --secret-key SECRET-KEY   
+   mc ilm tier update myminio S3TIER --access-key ACCESS_KEY --secret-key SECRET_KEY   
 
 - Replace ``S3TIER`` with the name for your Amazon Simple Storage Solution tier.
-- Replace ``ACCESS-KEY`` with the updated access key for your S3 storage.
-- Replace ``SECRET-KEY`` with the updated secret key for the access key provided.
+- Replace ``ACCESS_KEY`` with the updated access key for your S3 storage.
+- Replace ``SECRET_KEY`` with the updated secret key for the access key provided.
 
 Rotate Credentials for an Azure Blob Storage Remote Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

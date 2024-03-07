@@ -9,9 +9,9 @@ replicate:
     # endpoint: ENDPOINT
     # path: "on|off|auto"
     # credentials:
-    #   accessKey: ACCESS-KEY
-    #   secretKey: SECRET-KEY
-    #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
+    #   accessKey: ACCESS_KEY
+    #   secretKey: SECRET_KEY
+    #   sessionToken: SESSION_TOKEN # Available when rotating credentials are used
     # snowball:
     #   disable: true|false
     #   batch: 100
@@ -28,9 +28,9 @@ replicate:
     # endpoint: ENDPOINT
     # path: "on|off|auto"
     # credentials:
-    #   accessKey: ACCESS-KEY
-    #   secretKey: SECRET-KEY
-    #   sessionToken: SESSION-TOKEN # Available when rotating credentials are used
+    #   accessKey: ACCESS_KEY
+    #   secretKey: SECRET_KEY
+    #   sessionToken: SESSION_TOKEN # Available when rotating credentials are used
 
   # optional flags based filtering criteria
   # for all source objects
