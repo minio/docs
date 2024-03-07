@@ -113,21 +113,21 @@ Each of the following tabs contains a provider-specific example:
       .. code-block:: shell
          :class: copyable
 
-         mc alias set myminio https://minioserver.example.net ACCESS_KEY SECRET KEY
+         mc alias set myminio https://minioserver.example.net ACCESS_KEY SECRET_KEY
 
    .. tab-item:: AWS S3 Storage
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set myS3 https://s3.amazon.com/endpoint ACCESS_KEY SECRET KEY
+         mc alias set myS3 https://s3.amazon.com/endpoint ACCESS_KEY SECRET_KEY
 
    .. tab-item:: Google Cloud Storage
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set myGCS https://storage.googleapis.com/endpoint ACCESS_KEY SECRET KEY
+         mc alias set myGCS https://storage.googleapis.com/endpoint ACCESS_KEY SECRET_KEY
 
 3) Test the Connection
 ~~~~~~~~~~~~~~~~~~~~~~
