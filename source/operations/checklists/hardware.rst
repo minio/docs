@@ -191,7 +191,7 @@ The following table provides general guidelines for allocating memory for use by
 
 .. important::
 
-   Starting with :minio-release:`RELEASE.2024-01-28T22-35-53Z`, MinIO preallocates 2GiB of memory per node in distributed setups and 1GiB of memory in single node topologies.
+   Starting with :minio-release:`RELEASE.2024-01-28T22-35-53Z`, MinIO preallocates 2GiB of memory per node in distributed setups and 1GiB of memory for a single-node setup.
 
 .. _minio-hardware-checklist-storage:
 

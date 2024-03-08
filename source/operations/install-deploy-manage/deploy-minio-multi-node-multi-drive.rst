@@ -107,7 +107,7 @@ Storage Requirements
 Memory Requirements
 ~~~~~~~~~~~~~~~~~~~
 
-Starting with :minio-release:`RELEASE.2024-01-28T22-35-53Z`, MinIO pre-allocates 2GiB of system memory at startup.
+Starting with :minio-release:`RELEASE.2024-01-28T22-35-53Z`, MinIO pre-allocates 2GiB of system memory per node at startup.
 
 MinIO recommends a *minimum* of 32GiB of memory per host.
 See :ref:`minio-hardware-checklist-memory` for more guidance on memory allocation in MinIO.
