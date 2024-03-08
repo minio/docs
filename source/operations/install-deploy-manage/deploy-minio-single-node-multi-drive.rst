@@ -36,9 +36,12 @@ Storage Requirements
 Memory Requirements
 ~~~~~~~~~~~~~~~~~~~
 
-Starting with :minio-release:`RELEASE.2024-01-28T22-35-53Z`, MinIO pre-allocates 1GiB of system memory at startup.
+.. versionchanged:: RELEASE.2024-01-28T22-35-53Z
 
-For development environments, you can specify the ``CI_CD=TRUE`` environment variable to reduce the allocation to 256MiB.
+   MinIO pre-allocates 2GiB of system memory at startup.
+
+MinIO recommends a *minimum* of 32GiB of memory per host.
+See :ref:`minio-hardware-checklist-memory` for more guidance on memory allocation in MinIO.
 
 .. _deploy-minio-standalone-multidrive:
 
