@@ -138,6 +138,7 @@ Use the :mc:`mc ilm tier add` command to add a new remote storage tier:
       --account-name ACCOUNT \
       --account-key KEY \
       --bucket CONTAINER \
+      --endpoint ENDPOINT \
       --prefix PREFIX \
       --storage-class STORAGE_CLASS
 
@@ -177,6 +178,10 @@ The example above uses the following arguments:
    * - :mc-cmd:`CONTAINER <mc ilm tier add --bucket>`
      - The name of the container on the :abbr:`Azure (Microsoft Azure)` storage
        backend to which MinIO transitions objects.
+
+   * - :mc-cmd:`ENDPOINT <mc ilm tier add --endpoint>`
+     - (Optional) The full URL of the Azure blob storage backend to which MinIO transitions objects.  Defaults
+       to ``https://ACCOUNT.blob.core.windows.net`` if not specified.
 
    * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
      - The optional container prefix within which MinIO transitions objects.

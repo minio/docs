@@ -176,7 +176,7 @@ The command accepts the following arguments:
    The URL endpoint for the S3 or MinIO storage. 
    The URL endpoint **must** resolve to the provider specified to :mc-cmd:`~mc ilm tier add TIER_TYPE`. 
 
-   Required for ``s3`` or ``minio`` tier types.
+   Required for ``s3`` or ``minio`` tier types, optional for ``azure``.
    This option has no effect for any other value of ``TIER_TYPE``.
 
 .. mc-cmd:: --access-key
