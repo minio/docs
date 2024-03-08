@@ -188,24 +188,84 @@ Start the Prometheus cluster using the configuration file:
 3) Analyze Collected Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Prometheus includes a :prometheus-docs:`expression browser <prometheus/latest/getting_started/#using-the-expression-browser>`. 
+Prometheus includes an :prometheus-docs:`expression browser <prometheus/latest/getting_started/#using-the-expression-browser>`. 
 You can execute queries here to analyze the collected metrics.
 
-The following query examples return metrics collected by Prometheus:
+.. tab-set::
 
-.. code-block:: shell
-   :class: copyable
+   .. tab-item:: Examples
 
-   minio_cluster_drive_online_total{job="minio-job"}[5m]
-   minio_cluster_drive_offline_total{job="minio-job"}[5m]
-   
-   minio_bucket_usage_object_total{job="minio-job"}[5m]
+      The following query examples return metrics collected by Prometheus every five minutes for a scrape job named ``minio-job``:
 
-   minio_cluster_capacity_usable_free_bytes{job="minio-job"}[5m]
+      .. code-block:: shell
+         :class: copyable
 
-See :ref:`minio-metrics-and-alerts` for information about metrics.
+         minio_node_drive_free_bytes{job-"minio-job"}[5m]
+         minio_node_drive_free_inodes{job-"minio-job"}[5m]
 
-1) Configure an Alert Rule using MinIO Metrics
+         minio_node_drive_latency_us{job-"minio-job"}[5m]
+
+         minio_node_drive_offline_total{job-"minio-job"}[5m]
+         minio_node_drive_online_total{job-"minio-job"}[5m]
+
+         minio_node_drive_total{job-"minio-job"}[5m]
+
+         minio_node_drive_total_bytes{job-"minio-job"}[5m]
+         minio_node_drive_used_bytes{job-"minio-job"}[5m]
+
+         minio_node_drive_errors_timeout{job-"minio-job"}[5m]
+         minio_node_drive_errors_availability{job-"minio-job"}[5m]
+
+         minio_node_drive_io_waiting{job-"minio-job"}[5m]
+
+   .. tab-item:: Recommended Metrics
+
+      MinIO recommends the following as a basic set of metrics to monitor.
+
+      See :ref:`minio-metrics-and-alerts` for information about all available metrics.
+
+      .. list-table::
+         :header-rows: 1
+         :widths: 40 60
+         :width: 100%
+
+         * - Metric
+           - Description
+     
+         * - ``minio_node_drive_free_bytes``
+           - Total storage available on a drive.
+
+         * - ``minio_node_drive_free_inodes``
+           - Total free inodes.
+
+         * - ``minio_node_drive_latency_us``
+           - Average last minute latency in µs for drive API storage operations.
+
+         * - ``minio_node_drive_offline_total``
+           - Total drives offline in this node.
+
+         * - ``minio_node_drive_online_total``
+           - Total drives online in this node.
+
+         * - ``minio_node_drive_total``
+           - Total drives in this node.
+
+         * - ``minio_node_drive_total_bytes``
+           - Total storage on a drive.
+
+         * - ``minio_node_drive_used_bytes``
+           - Total storage used on a drive.
+
+         * - ``minio_node_drive_errors_timeout``
+           - Total number of drive timeout errors since server start.
+
+         * - ``minio_node_drive_errors_availability``
+           - Total number of drive I/O errors, permission denied and timeouts since server start.
+
+         * - ``minio_node_drive_io_waiting``
+           - Total number of I/O operations waiting on drive.
+
+4) Configure an Alert Rule using MinIO Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must configure :prometheus-docs:`Alert Rules <prometheus/latest/configuration/alerting_rules/>` on the Prometheus deployment to trigger alerts based on collected MinIO metrics.
