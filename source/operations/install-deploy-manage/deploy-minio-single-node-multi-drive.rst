@@ -33,6 +33,16 @@ Storage Requirements
    :start-after: start-storage-requirements-desc
    :end-before: end-storage-requirements-desc
 
+Memory Requirements
+~~~~~~~~~~~~~~~~~~~
+
+.. versionchanged:: RELEASE.2024-01-28T22-35-53Z
+
+   MinIO pre-allocates 2GiB of system memory at startup.
+
+MinIO recommends a *minimum* of 32GiB of memory per host.
+See :ref:`minio-hardware-checklist-memory` for more guidance on memory allocation in MinIO.
+
 .. _deploy-minio-standalone-multidrive:
 
 Deploy Single-Node Multi-Drive MinIO

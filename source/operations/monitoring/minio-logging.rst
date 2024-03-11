@@ -320,51 +320,66 @@ MinIO audit logs resemble the following JSON document:
 
    {
       "version": "1",
-      "deploymentid": "bc0e4d1e-bacc-42eb-91ad-2d7f3eacfa8d",
-      "time": "2019-08-12T21:34:37.187817748Z",
+      "deploymentid": "8ca2b7ad-20cf-4d07-9efb-28b2f519f4a5",
+      "time": "2024-02-29T19:39:25.744431903Z",
+      "event": "",
+      "trigger": "incoming",
       "api": {
-         "name": "PutObject",
-         "bucket": "testbucket",
-         "object": "hosts",
+         "name": "CompleteMultipartUpload",
+         "bucket": "data",
+         "object": "test-data.csv",
          "status": "OK",
          "statusCode": 200,
-         "timeToFirstByte": "366333ns",
-         "timeToResponse": "16438202ns"
+         "rx": 267,
+         "tx": 358,
+         "txHeaders": 387,
+         "timeToFirstByte": "2096989ns",
+         "timeToFirstByteInNS": "2096989",
+         "timeToResponse": "2111986ns",
+         "timeToResponseInNS": "2111986"
       },
       "remotehost": "127.0.0.1",
-      "requestID": "15BA4A72C0C70AFC",
-      "userAgent": "MinIO (linux; amd64) minio-go/v6.0.32 mc/2019-08-12T18:27:13Z",
+      "requestID": "17B86CB0ED88EBE9",
+      "userAgent": "MinIO (linux; amd64) minio-go/v7.0.67 mc/RELEASE.2024-02-24T01-33-20Z",
+      "requestPath": "/data/test-data.csv",
+      "requestHost": "minio.example.net:9000",
+      "requestQuery": {
+         "uploadId": "OGNhMmI3YWQtMjBjZi00ZDA3LTllZmItMjhiMmY1MTlmNGE1LmU3MjNlNWI4LTNiYWYtNDYyNy1hNzI3LWMyNDE3NTVjMmMzNw"
+      },
       "requestHeader": {
-         "Authorization": "AWS4-HMAC-SHA256 Credential=minio/20190812/us-east-1/s3/aws4_request,SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-decoded-content-length,Signature=d3f02a6aeddeb29b06e1773b6a8422112890981269f2463a26f307b60423177c",
-         "Content-Length": "686",
+         "Accept-Encoding": "zstd,gzip",
+         "Authorization": "AWS4-HMAC-SHA256 Credential=minioadmin/20240229/us-east-1/s3/aws4_request, SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ccb3acdc1763509a88a7e4a3d7fe431ef0ee5ca3f66ccb430d5a09326e87e893",
+         "Content-Length": "267",
          "Content-Type": "application/octet-stream",
-         "User-Agent": "MinIO (linux; amd64) minio-go/v6.0.32 mc/2019-08-12T18:27:13Z",
-         "X-Amz-Content-Sha256": "STREAMING-AWS4-HMAC-SHA256-PAYLOAD",
-         "X-Amz-Date": "20190812T213437Z",
-         "X-Amz-Decoded-Content-Length": "512"
+         "User-Agent": "MinIO (linux; amd64) minio-go/v7.0.67 mc/RELEASE.2024-02-24T01-33-20Z",
+         "X-Amz-Content-Sha256": "d61969719ee94f43c4e87044229b7a13b54cab320131e9a77259ad0c9344f6d3",
+         "X-Amz-Date": "20240229T193925Z"
       },
       "responseHeader": {
          "Accept-Ranges": "bytes",
-         "Content-Length": "0",
-         "Content-Security-Policy": "block-all-mixed-content",
-         "ETag": "a414c889dc276457bd7175f974332cb0-1",
-         "Server": "MinIO/DEVELOPMENT.2019-08-12T21-28-07Z",
-         "Vary": "Origin",
-         "X-Amz-Request-Id": "15BA4A72C0C70AFC",
+         "Content-Length": "358",
+         "Content-Type": "application/xml",
+         "ETag": "1d9fdc88af5e74f5eac0a3dd750ce58e-2",
+         "Server": "MinIO",
+         "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+         "Vary": "Origin,Accept-Encoding",
+         "X-Amz-Id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+         "X-Amz-Request-Id": "17B86CB0ED88EBE9",
+         "X-Content-Type-Options": "nosniff",
          "X-Xss-Protection": "1; mode=block"
       },
       "tags": {
-         "objectErasureMap": {
-            "object": {
+         "objectLocation": {
+               "name": "Mousepad Template-v03final.jpg",
                "poolId": 1,
-               "setId": 10,
+               "setId": 1,
                "disks": [
-                  "http://server01/mnt/pool1/disk01",
-                  "http://server02/mnt/pool1/disk02",
-                  "http://server03/mnt/pool1/disk03",
-                  "http://server04/mnt/pool1/disk04"
+                  "/mnt/drive-1",
+                  "/mnt/drive-2",
+                  "/mnt/drive-3",
+                  "/mnt/drive-4"
                ]
-            }
          }
-      }
+      },
+      "accessKey": "minioadmin"
    }

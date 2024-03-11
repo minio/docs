@@ -88,3 +88,15 @@ Syntax
    :optional:
 
    Pass this flag to confirm the update and bypass the confirmation prompt.
+
+Behavior
+--------
+
+Binary Compression 
+~~~~~~~~~~~~~~~~~~
+
+.. versionchanged:: RELEASE.2024-01-28T22-35-53Z
+
+   :mc-cmd:`mc admin update` compresses the binary before sending to all nodes in the deployment.
+
+This feature does not apply to :ref:`systemctl managed deployments <minio-upgrade-systemctl>`.
