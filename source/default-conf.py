@@ -287,6 +287,11 @@ html_context = {
          'current': True
       },
       {
+         'name': 'MinIO Enterprise Object Store Documentation',
+         'url': 'https://min.io/docs/enterprise',
+         'external': True
+      },
+      {
          'name': 'DirectPV Documentation',
          'url': 'https://min.io/docs/directpv',
          'external': True
