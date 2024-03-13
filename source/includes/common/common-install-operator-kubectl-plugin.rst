@@ -27,6 +27,14 @@ The command initializes the MinIO Operator with the following default settings:
   different :kube-docs:`cluster domain 
   <tasks/administer-cluster/dns-custom-nameservers/>` value.
 
+
+The Operator deploys with certain default settings and resource requests.
+To modify these settings, do the following:
+
+1. Append the ``kubectl minio init -o > operator.yaml`` to save the YAML configuration to file
+2. Modify settings as-needed to fit your deployment
+3. Run ``kubectl apply -f operator.yaml`` to apply the customized Operator deployment.
+
 .. important::
 
    Document all arguments used when initializing the MinIO Operator.
