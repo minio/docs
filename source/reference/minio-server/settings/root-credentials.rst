@@ -70,6 +70,8 @@ Root Password
       This setting does not have a configuration variable setting.
       Use the Environment Variable instead.
 
+.. _minio-disable-root-access:
+
 Root Access
 -----------
 

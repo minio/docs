@@ -32,7 +32,25 @@ The following example provides a starting environment file:
 
    #MINIO_SERVER_URL="http://minio.example.net:9000"
 
-Include any other environment variables as required for your local deployment.
+Include any other environment variables as required for your deployment.
+
+.. versionadded:: Server RELEASE.2024-03-03T17-50-39Z
+
+   You can have MinIO automatically generate root credentials if all of the following are true:
+
+   - :kes-docs:`KES <tutorials/getting-started/>` Release 2024-03-01T18-06-46Z or later running
+   - **Have not** defined:
+     - ``MINIO_ROOT_USER`` variable 
+     - ``MINIO_ROOT_PASSWORD`` variable 
+  
+   - **Have**:
+     - set up KES with a :kes-docs:`supported KMS target <#supported-kms-targets>`
+     - disabled root access with the :ref:`MinIO environment variable <minio-disable-root-access>`
+
+   When those conditions are met at startup, MinIO uses the KMS to generate unique root credentials for the deployment using a `hash-based message authentication code (HMAC) <https://en.wikipedia.org/wiki/HMAC>`__.
+
+   If MinIO generates such credentials, the key used to generate the credentials **must** remain the same *and* continue to exist.
+   All data on the deployment is encrypted with this key!
 
 .. end-common-deploy-create-environment-file-single-drive
 

@@ -222,6 +222,26 @@ Specify the token for connecting to the NATS service endpoint.
 
    MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
+User Credentials File
+~~~~~~~~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_NATS_USER_CREDENTIALS
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_nats user_credentials
+         :delimiter: " "
+
+Specify the to the `user credentials file <https://docs.nats.io/using-nats/developer/connecting/creds>` to use to connect to the NATS service endpoint.
+
 TLS
 ~~~
 
