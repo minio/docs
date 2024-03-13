@@ -12,149 +12,164 @@
 
     <div class="nav__item">
         <div class="nav__link nav__link--dropdown">
-            <span>Product</span>
+          	<span>Product</span>
         </div>
+        <div class="nav__dropdown nav__dropdown--cols">
+			<div class="nav__dropdown__inner">
+				<div class="nav__column nav__column--enterprise">
+					<div class="nav__title">MinIO Enterprise Object Store</div>
+  
+              			<a href="https://min.io/product/enterpriseoverview" class="nav__sub">Overview</a>
+  
+              			<div class="nav__sub">Features</div>
+  
+              			<div class="nav__features">
+						<div>
+							<a href="https://min.io/product/active-data-replication-for-object-storage" class="nav__sub">Replication</a>
+							<a href="https://min.io/product/enterprise-object-storage-encryption" class="nav__sub">Encryption</a>
+							<a href="https://min.io/product/data-immutability-for-object-storage" class="nav__sub">Object
+								Immutability</a>
+							<a href="https://min.io/product/identity-and-access-management" class="nav__sub">Identity + Access Mgt</a>
+							<a href="https://min.io/product/automated-data-tiering-lifecycle-management" class="nav__sub">Information Lifecycle</a>
+							<a href="https://min.io/product/object-versioning-bucket-versioning" class="nav__sub">Versioning</a>
+							<a href="https://min.io/product/enterprise/key-management-server" class="nav__sub">Key Management Server</a>
+						</div>
+						<div>
+							<a href="https://min.io/product/enterprise/object-storage-global-console" class="nav__sub">Console</a>
+							<a href="https://min.io/product/enterprise/object-store-catalog" class="nav__sub">Catalog</a>
+							<a href="https://min.io/product/enterprise/object-storage-data-firewall" class="nav__sub">Firewall</a>
+							<a href="https://min.io/product/enterprise/object-store-cache" class="nav__sub">Cache</a>
+							<a href="https://min.io/product/enterprise/object-storage-observability" class="nav__sub">Observability</a>
+							<a href="https://min.io/product/s3-compatibility" class="nav__sub">S3 Compatibility</a>
+						</div>
+              		</div>
+            	</div>
+  
+            	<div class="nav__column">
+              		<div class="nav__title">MinIO for Public Cloud</div>
+					<a href="https://min.io/product/multicloud-elastic-kubernetes-service" class="nav__sub">AWS</a>
+              		<a href="https://min.io/product/multicloud-google-kubernetes-service" class="nav__sub">GCS</a>
+              		<a href="https://min.io/product/multicloud-azure-kubernetes-service" class="nav__sub">Azure</a>
+  
+              		<div class="nav__title">MinIO for Private Cloud</div>
+					<a href="https://min.io/product/private-cloud-red-hat-openshift" class="nav__sub">OpenShift</a>
+					<a href="https://min.io/product/multicloud-suse-rancher" class="nav__sub">SUSE Rancher</a>
+					<a href="https://min.io/product/private-cloud-vmware-tanzu" class="nav__sub">Tanzu</a>
 
-        <div class="nav__dropdown nav__dropdown--product">
-            <div class="nav__dropdown__inner">
-                <div class="nav__column">
-                    <div class="nav__column__title">Multi-Cloud</div>
+					<div class="nav__title">MinIO for Baremetal</div>
+					<a href="https://min.io/product/overview" class="nav__sub">Linux and Windows</a>
+				</div>
 
-                    <a href="https://min.io/product/private-cloud-vmware-tanzu" class="nav__sub">MinIO for VMware
-                        Tanzu</a>
-                    <a href="https://min.io/product/private-cloud-red-hat-openshift" class="nav__sub">MinIO for
-                        OpenShift</a>
-                    <a href="https://min.io/product/multicloud-suse-rancher" class="nav__sub">MinIO for SUSE
-                        Rancher</a>
-                    <a href="https://min.io/product/multicloud-elastic-kubernetes-service" class="nav__sub">MinIO
-                        for Amazon Elastic Kubernetes Service</a>
-                    <a href="https://min.io/product/multicloud-azure-kubernetes-service" class="nav__sub">MinIO for
-                        Azure Kubernetes Service</a>
-                    <a href="https://min.io/product/multicloud-google-kubernetes-service" class="nav__sub">MinIO for
-                        Google Kubernetes Engine</a>
-                </div>
-
-                <div class="nav__column">
-                    <div class="nav__column__title">Features</div>
-
-                    <a href="https://min.io/product/active-data-replication-for-object-storage"
-                        class="nav__sub">Active Active Replication</a>
-                    <a href="https://min.io/product/identity-and-access-management" class="nav__sub">Identity &
-                        Access Management</a>
-                    <a href="https://min.io/product/enterprise-object-storage-encryption"
-                        class="nav__sub">Encryption</a>
-                    <a href="https://min.io/product/data-immutability-for-object-storage" class="nav__sub">Bucket &
-                        Object Immutability</a>
-                    <a href="https://min.io/product/object-versioning-bucket-versioning" class="nav__sub">Bucket &
-                        Object Versioning</a>
-                    <a href="https://min.io/product/automated-data-tiering-lifecycle-management"
-                        class="nav__sub">Data Life Cycle Management & Tiering</a>
-                    <a href="https://min.io/product/automated-cloud-data-management-interface"
-                        class="nav__sub">Automated Data Management Interfaces</a>
-                    <a href="https://min.io/product/object-storage-performance-monitoring"
-                        class="nav__sub">Monitoring</a>
-                    <a href="https://min.io/product/scalable-object-storage" class="nav__sub">Scalability</a>
-                    <a href="https://min.io/product/s3-compatibility" class="nav__sub">AWS S3 Compatibility</a>
-                </div>
-
-                <div class="nav__column">
-                    <div class="nav__sub">
-                        <a href="https://min.io/product/overview" class="nav__lead">
-                            <img src="{{ pathto('_static/img/icons/baremetal.svg',1) }}" alt="Baremetal" />
-                            Baremetal
-                        </a>
-                        <div class="nav__jump">
-                            <a href="https://min.io/product/overview#features">Overview</a>
-                            <a href="https://min.io/product/overview#architecture">Architecture</a>
-                        </div>
-                    </div>
-                    <a href="https://min.io/product/erasure-code-calculator" class="nav__sub nav__lead">
-                        <img class="h-6" src="{{ pathto('_static/img/icons/erasure-code-calculator.svg',1) }}"
-                            alt="Erasure Code Calculator" />
-                        Erasure Code Calculator
-                    </a>
-                    <a href="https://min.io/product/reference-hardware" class="nav__sub nav__lead">
-                        <img src="{{ pathto('_static/img/icons/ref-hardware.svg',1) }}" alt="Reference Hardware" />
-                        Reference Hardware
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div class="nav__column nav__column--plain">
+					<a href="https://min.io/product/erasure-code-calculator" class="nav__sub nav__sub--alt"
+					  data-nav="erasure-code-calculator">
+					  <img width="30" height="24" class="h-6" src="{{ pathto('_static/img/icons/erasure-code-calculator.svg',1) }}"
+						alt="Determine your raw and usable capacity" />
+					  Erasure Code Calculator
+					</a>
+					<a href="https://min.io/product/reference-hardware" class="nav__sub nav__sub--alt" data-nav="reference-hardware">
+					  <img width="30" height="18" src="{{ pathto('_static/img/icons/ref-hardware.svg',1) }}"
+						alt="MinIO's Recommended Hardware Configuration" />
+					  Reference Hardware
+					</a>
+		
+					<i class="nav__seperator"></i>
+				</div>
+			</div>
+		</div>
+	</div>
 
     <div class="nav__item">
-        <div class="nav__link nav__link--dropdown">
-            <span>Solutions</span>
-        </div>
+		<div class="nav__link nav__link--dropdown">
+		  	<span>Solutions</span>
+		</div>
+		<div class="nav__dropdown nav__dropdown--cols">
+		  	<div class="nav__dropdown__inner">
+				<a href="/solutions/object-storage-for-ai" class="nav__sub" data-nav="ai-ml">
+				<span>AI Storage</span>
+				<small>Object storage is powering the AI revolution. Learn how MinIO
+					is leading the AI storage market through performance at
+					scale.</small>
+				</a>
+				<a href="/solutions/modern-data-lakes-lakehouses" class="nav__sub" data-nav="datalakes">
+				<span>Modern Datalakes</span>
+				<small>Modern, multi-engine datalakes depend on object stores that
+					deliver performance at scale. Learn more about this core MinIO
+					use case.</small>
+				</a>
+				<a href="/hybrid-multi-cloud-storage" class="nav__sub" data-nav="hybrid-cloud">
+				<span>Hybrid Cloud</span>
+				<small>Effective multi-cloud storage strategies rely on utilizing
+					architecture and tools that can function seamlessly across
+					diverse environments.</small>
+				</a>
+				<a href="/solutions/optimize-splunk-smartstore-performance" class="nav__sub" data-nav="splunk">
+				<span>Splunk</span>
+				<small>Find out how MinIO is delivering performance at scale for
+					Splunk SmartStores.</small>
+				</a>
+  
+				<a href="/solutions/snowflake" class="nav__sub" data-nav="snowflake">
+				<span>Snowflake</span>
+				<small>Query and analyze multiple data sources, including streaming
+					data, residing on MinIO with the Snowflake Data Cloud. No need
+					to move the data, just query using SnowSQL.</small>
+				</a>
+				<a href="/solutions/sqlserver" class="nav__sub" data-nav="sql-server">
+				<span>SQL Server</span>
+				<small>Discover how to pair SQL Server 2022 with MinIO to run queries
+					on your data on any cloud - without having to move it.</small>
+				</a>
+				<a href="/solutions/hdfs-migration" class="nav__sub" data-nav="hdfs-migration">
+				<span>HDFS Migration</span>
+				<small>Modernize and simplify your big data storage infrastructure
+					with high-performance, Kubernetes-native object storage from
+					MinIO.</small>
+				</a>
+				<a href="/solutions/vmware" class="nav__sub" data-nav="vmware">
+				<span>VMware</span>
+				<small>Discover how MinIO integrates with VMware across the portfolio
+					from the Persistent Data platform to TKG and how we support
+					their Kubernetes ambitions.</small>
+				</a>
+				<a href="/solutions/veeam" class="nav__sub" data-nav="veeam">
+				<span>Veeam</span>
+				<small>Learn how MinIO and Veeam have partnered to drive performance
+					and scalability for a variety of backup use cases.</small>
+				</a>
+				<a href="/solutions/commvault" class="nav__sub" data-nav="commvault">
+				<span>Commvault</span>
+				<small>Learn how Commvault and MinIO are partnered to deliver
+					performance at scale for mission critical backup and restore
+					workloads.</small>
+				</a>
+				<a href="https://min.io/product/integrations" class="nav__sub" data-nav="integrations">
+				<span>Integrations</span>
+				<small>Browse our vast portfolio of integrations.</small>
+				</a>
+		  	</div>
+		</div>
+	</div>
 
-        <div class="nav__dropdown nav__dropdown--solutions">
-            <div class="nav__dropdown__inner">
-                <a href="https://min.io/solutions/object-storage-for-ai" class="nav__sub" data-nav="ai-ml">
-                    <span>AI Storage</span>
-                    <small>Object storage is powering the AI revolution. Learn how
-                        MinIO is leading the AI storage market through
-                        performance at scale.</small>
-                </a>
-                <a href="https://min.io/solutions/modern-data-lakes-lakehouses" class="nav__sub" data-nav="datalakes">
-                    <span>Modern Datalakes</span>
-                    <small>Modern, multi-engine datalakes depend on object stores that
-                        deliver performance at scale. Learn more about this core MinIO
-                        use case.</small>
-                </a>
-                <a href="https://min.io/hybrid-multi-cloud-storage" class="nav__sub" data-nav="hybrid-cloud">
-                    <span>Hybrid Cloud</span>
-                    <small>Effective multi-cloud storage strategies rely on utilizing
-                        architecture and tools that can function seamlessly across
-                        diverse environments.</small>
-                </a>
-                <a href="https://min.io/solutions/optimize-splunk-smartstore-performance" class="nav__sub" data-nav="splunk">
-                    <span>Splunk</span>
-                    <small>Find out how MinIO is delivering performance at scale for
-                        Splunk SmartStores.</small>
-                </a>
-                <a href="https://min.io/solutions/snowflake" class="nav__sub" data-nav="snowflake">
-                    <span>Snowflake</span>
-                    <small>Query and analyze multiple data sources, including streaming
-                        data, residing on MinIO with the Snowflake Data Cloud. No need
-                        to move the data, just query using SnowSQL.</small>
-                </a>
-                <a href="https://min.io/solutions/sqlserver" class="nav__sub" data-nav="sql-server">
-                    <span>SQL Server</span>
-                    <small>Discover how to pair SQL Server 2022 with MinIO to run queries
-                        on your data on any cloud - without having to move it.</small>
-                </a>
-                <a href="https://min.io/solutions/hdfs-migration" class="nav__sub" data-nav="hdfs-migration">
-                    <span>HDFS Migration</span>
-                    <small>Modernize and simplify your big data storage infrastructure
-                        with high-performance, Kubernetes-native object storage from
-                        MinIO.</small>
-                </a>
-                <a href="https://min.io/solutions/vmware" class="nav__sub" data-nav="vmware">
-                    <span>VMware</span>
-                    <small>Discover how MinIO integrates with VMware across the portfolio
-                        from the Persistent Data platform to TKG and how we support
-                        their Kubernetes ambitions.</small>
-                </a>
-                <a href="https://min.io/solutions/veeam" class="nav__sub" data-nav="veeam">
-                    <span>Veeam</span>
-                    <small>Learn how MinIO and Veeam have partnered to drive performance
-                        and scalability for a variety of backup use cases.</small>
-                </a>
-                <a href="https://min.io/solutions/commvault" class="nav__sub" data-nav="commvault">
-                    <span>Commvault</span>
-                    <small>Learn how Commvault and MinIO are partnered to deliver
-                        performance at scale for mission critical backup and restore
-                        workloads.</small>
-                </a>
-                <a href="https://min.io/product/integrations" class="nav__sub" data-nav="integrations">
-                    <span>Integrations</span>
-                    <small>Browse our vast portfolio of integrations.</small>
-                </a>
-            </div>
-        </div>
-    </div>
+	<div class="nav__item">
+		<div class="nav__link nav__link--dropdown">
+		  	<span>Community</span>
+		</div>
+		<div class="nav__dropdown nav__dropdown--cols nav__dropdown--cols-3">
+			<div class="nav__dropdown__inner">
+				<a target="_blank" rel="noreferrer noopener" href="https://github.com/minio/" class="nav__sub">
+					<span>GitHub</span>
+					<small>Join our GitHub open source community: explore, experiment, ask questions, and contribute.</small>
+				</a>
+				<a target="_blank" rel="noreferrer noopener" href="https://slack.min.io" class="nav__sub">
+					<span>Slack Channel</span>
+					<small>The MinIO Community Slack provides an open forum for discussing topics related to MinIO. All support is provided on a best-effort basis.</small>
+				</a>
+			</div>
+		</div>
+	</div>
 
-    <a href="https://min.io/docs/minio/kubernetes/upstream" class="nav__link nav__link--active">
+    <a href="https://min.io/docs/minio/kubernetes/upstream" class="nav__link active">
         <span>Docs</span>
     </a>
 
