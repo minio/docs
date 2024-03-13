@@ -27,6 +27,8 @@ The command initializes the MinIO Operator with the following default settings:
   different :kube-docs:`cluster domain 
   <tasks/administer-cluster/dns-custom-nameservers/>` value.
 
+- Note that custom deployments are required to edit YAML manually to fulfill certain requirements or limitations such as those on resource requests.
+
 .. important::
 
    Document all arguments used when initializing the MinIO Operator.
