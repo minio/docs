@@ -26,7 +26,7 @@ $theme-properties: (
     --header-actions-icon-hover-bg: $light-500 $dark-200,
     --header-actions-icon-alt-hover-bg: rgba($white, 0.1) $dark-200,
     --header-headings-color: $white $headings-dark-color,
-    --header-link-border-color: $light-300 $dark-200,
+    --header-link-border-color: $light-200 $dark-200,
     --header-link-bg: $white $dark-0,
     --header-link-icon: url("../img/icons/anchor.svg") url("../img/icons/anchor-dark.svg"),
     --header-text-color: $white $text-dark-color,
@@ -81,8 +81,8 @@ $theme-properties: (
     // Mainmenu
     --nav-bg: $white $dark-100,
     --nav-text-color: $white $text-dark-color,
-    --nav-text-muted-color: #1C1C1C darken($text-dark-color, 10%),
     --nav-item-border-color: $white $dark-500,
+    --nav-sub-hover-bg: $light-100 $dark-200,
     --nav-item-arrow: url(../img/icons/nav-arrow.svg) url(../img/icons/nav-arrow-dark.svg),
     --nav-toggle-hover-border-color: $white $dark-500,
     --nav-top-border-color: rgba(255, 255, 255, 0.2) $dark-200,
