@@ -173,7 +173,6 @@ li pre {
 // ----------------------
 [data-lightbox] {
     img {
-        padding: 0.25rem;
         border: 1px solid var(--theme-light-bg);
         border-radius: $border-radius;
     }
@@ -185,7 +184,7 @@ li pre {
     }
 }
 
-.content__main {
+.content__body {
     figure {
         box-shadow: none;
     }
@@ -193,7 +192,7 @@ li pre {
     img {
         background-color: $white;
         border-radius: $border-radius;
-        padding: 1rem;
+        padding: 0;
     }
 
     figcaption {

@@ -81,7 +81,9 @@
          {%- include "toc.html" %}
 
          <div class="content__main">
-            {% block body %} {% endblock %}
+            <div class="content__body">
+               {% block body %} {% endblock %}
+            </div>
 
             {%- if pagename != "search-results" %}
                {%- include "footer.html" %}
