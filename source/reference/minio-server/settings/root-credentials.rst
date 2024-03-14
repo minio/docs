@@ -101,3 +101,10 @@ You can use this variable to temporarily override the configuration setting and 
 
 To reset after an unintentional lock, set :envvar:`MINIO_API_ROOT_ACCESS` ``on`` to override this setting and temporarily re-enable the root account.
 You can then change this setting to ``on`` *or* make the necessary user/policy changes to ensure normal administrative access through other non-root accounts.
+
+Unique Root Credentials
+-----------------------
+
+.. include:: /includes/common/common-deploy.rst
+   :start-after: start-common-deploy-create-unique-root-credentials 
+   :end-before: end-common-deploy-create-unique-root-credentials

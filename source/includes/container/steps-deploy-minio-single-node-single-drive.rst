@@ -12,6 +12,10 @@
    :start-after: start-common-deploy-create-environment-file-single-drive 
    :end-before: end-common-deploy-create-environment-file-single-drive
 
+.. include:: /includes/common/common-deploy.rst
+   :start-after: start-common-deploy-create-unique-root-credentials 
+   :end-before: end-common-deploy-create-unique-root-credentials
+
 3) Create and Run the Container
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

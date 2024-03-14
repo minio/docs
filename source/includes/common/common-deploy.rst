@@ -34,9 +34,13 @@ The following example provides a starting environment file:
 
 Include any other environment variables as required for your deployment.
 
+.. end-common-deploy-create-environment-file-single-drive
+
+.. start-common-deploy-create-unique-root-credentials
+
 .. versionadded:: Server RELEASE.2024-03-03T17-50-39Z
 
-   You can have MinIO automatically generate root credentials if all of the following are true:
+   MinIO automatically generates unique root credentials if all of the following conditions are true:
 
    - :kes-docs:`KES <tutorials/getting-started/>` Release 2024-03-01T18-06-46Z or later running
    - **Have not** defined:
@@ -52,7 +56,9 @@ Include any other environment variables as required for your deployment.
    If MinIO generates such credentials, the key used to generate the credentials **must** remain the same *and* continue to exist.
    All data on the deployment is encrypted with this key!
 
-.. end-common-deploy-create-environment-file-single-drive
+   To rotate the generated root credentials, generate a new key in the KMS, then update the value of the :envvar:`MINIO_KMS_KES_KEY_NAME` with the new key.
+
+.. end-common-deploy-create-unique-root-credentials
 
 .. start-common-deploy-create-environment-file-multi-drive
 
