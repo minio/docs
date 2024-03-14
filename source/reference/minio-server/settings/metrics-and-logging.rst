@@ -210,6 +210,29 @@ Auth Token
    
          Consult the documentation for the desired service for more details.
 
+Batch Size
+++++++++++
+
+.. versionadded:: MinIO Server RELEASE.2024-03-10T02-53-48Z
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_LOGGER_WEBHOOK_BATCH_SIZE
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: logger_webhook batch_size
+         :delimiter: " "
+
+Collect and send the specified number of events to the webhook as a batch.
+If not set, MinIO sends one event per request.
+
 Client Certificate
 ++++++++++++++++++
 
@@ -499,6 +522,30 @@ Depending on the endpoint, you may need to include additional information.
                   auth_token="ServiceXYZ 1a2b3c4f5e"
 
 Consult the documentation for the desired service for more details.
+
+Batch Size
+++++++++++
+
+.. versionadded:: MinIO Server RELEASE.2024-03-10T02-53-48Z
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_AUDIT_WEBHOOK_BATCH_SIZE
+
+  
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: audit_webhook batch_size
+         :delimiter: " "
+
+Collect and send the specified number of events to the webhook as a batch.
+If not set, MinIO sends one event per request.
 
 Client Certificate
 ++++++++++++++++++
