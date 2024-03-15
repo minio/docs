@@ -61,7 +61,7 @@ Parameters
    :required:
 
    The full path to the :ref:`alias <minio-mc-alias>` or prefix where the command should run.
-   The TARGET *must* contain an :mc-ref:`alias <alias>` and ``bucket`` name.
+   The TARGET *must* contain an :ref:`alias <alias>` and ``bucket`` name.
 
    The TARGET may also contain the following optional components:
    - PREFIX where the object should upload to
