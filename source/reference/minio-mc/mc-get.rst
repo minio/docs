@@ -17,12 +17,12 @@ Syntax
 
 .. start-mc-get-desc
 
-The :mc:`mc get` downloads an object from a target S3 deployment to the local file system.
+The :mc:`mc get` command downloads an object from a target S3 deployment to the local file system.
 
 .. end-mc-get-desc
 
-Unlike other commands that can download files, such as :mc:`mc cp` or :mc:`mc mirror`, ``mc get`` is a simpler call.
-``mc get`` only does the one-way function of downloading the file so that it avoids the potential performance costs of other commands.
+``mc get`` provides a simplified interface for downloading files compared to :mc:`mc cp` or :mc:`mc mirror`.
+``mc get`` uses a one-way download function that trades efficiency for the power and complexity of the other commands.
 
 .. tab-set::
 
@@ -59,12 +59,12 @@ Parameters
 .. mc-cmd:: SOURCE
    :required:
 
-   The full path to the :ref:`alias <minio-mc-alias>`, bucket, prefix (if used), and object of the path to download.
+   The full path to the :ref:`alias <minio-mc-alias>`, bucket, prefix (if used), and object to download.
 
 .. mc-cmd:: TARGET
    :required:
 
-   The path on the local file system where the object should download to.
+   The destination path on the local file system where the command should place the downloaded file.
 
 .. mc-cmd:: --encrypt
    :optional:

@@ -124,7 +124,7 @@ Parameters
    Expire all current **and** noncurrent versions of an object.
    Use with the :mc-cmd:`~mc ilm rule add --expire-days` option to specify the number of days after which all versions of an object should be deleted by the scanner process.
 
-   After the scanner processes this command, no versions of the object remain on the deployment.
+   After the :ref:`scanner <minio-lifecycle-management-scanner>` processes this command, no versions of the object remain on the deployment.
 
 .. mc-cmd:: --expire-days
    :optional:   

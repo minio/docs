@@ -72,8 +72,7 @@ Syntax
 .. mc-cmd:: restart
 
    Restarts MinIO servers.
-   If needed, the command provides some guidance based on status about potential next steps you may need to take on each node.
-   For example, if hard drives are hung, the command may suggest restarting the node's operating system.
+   If needed, the command may suggest restarting the node based on the status.
 
    :mc-cmd:`mc admin service restart` has the following syntax:
 

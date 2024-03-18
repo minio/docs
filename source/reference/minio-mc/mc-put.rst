@@ -21,8 +21,9 @@ The :mc:`mc put` uploads an object from the local file system to a bucket on a t
 
 .. end-mc-put-desc
 
-Unlike other commands that can upload files, such as :mc:`mc cp` or :mc:`mc mirror`, ``mc put`` is a simpler call.
-``mc put`` only does the one-way function of uploading the file so that it avoids the potential performance costs of other commands.
+``mc put`` provides a simplified interface for uploading files compared to :mc:`mc cp` or :mc:`mc mirror`.
+``mc put`` uses a one-way upload function that trades efficiency for the power and complexity of the other commands.
+
 
 .. tab-set::
 
@@ -119,17 +120,18 @@ Examples
 Upload a File and Specify the Object Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command uploads the file ``logo.png`` from the local file system to the ``business`` bucket on the ``minio`` deployment with the object name of ``company-logo.png``.
+The following command uploads the file ``logo.png`` from the local file system to the ``business`` bucket on the ``minio`` deployment, uploading it on the destination as ``company-logo.png``.
 
 .. code-block:: shell
    :class: copyable
 
    mc put images/collateral/logo.png minio/business/company-logo.png
 
-Upload a File 8 Parts in Parallel with a Specified Part Size
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upload a Multipart Object in Parallel with a Specified Part Size
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command uploads 8 parts of a file in parallel with parts of 20MiB each.
+The following command uploads a file in chunks of 20MiB each and uploads 8 parts of the file in parallel.
+8 parts are uploaded in succession until all parts of the object have uploaded.
 
 .. code-block:: shell
    :class: copyable
