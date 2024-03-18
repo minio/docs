@@ -213,13 +213,19 @@ Parameters
    :optional:
 
    Specify the credentials, destination deployment, and bucket of the remote location.
-   Value may be either location based (IP or URL) or path based.
+   Value may be an alias/bucket, location based (IP or URL), or path based.
 
    For example, a URL based target might look like the following:
 
    .. code-block::
 
       https://user:secret@myminio.cloudprovider.tld:9001/bucket
+
+   An alias based target might look like the following:
+
+   .. code-block::
+
+      minio-target/my-bucket
 
 .. mc-cmd:: --replicate
    :optional:

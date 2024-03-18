@@ -55,6 +55,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
                           [--dry-run]                       \
                           [--encrypt-key "string"]          \
                           [--exclude "string"]              \
+                          [--exclude-bucket "string"]       \
                           [--exclude-storageclass "string"] \
                           [--limit-download string]         \
                           [--limit-upload string]           \
@@ -151,6 +152,14 @@ Parameters
    :optional:
 
    Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified object name pattern.
+
+.. mc-cmd:: --exclude-bucket
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-03-03T00-13-08Z
+
+   Exclude bucket(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified bucket name pattern.
+
 
 .. mc-cmd:: --exclude-storageclass
    :optional:

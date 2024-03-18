@@ -54,6 +54,10 @@ You can optionally configure synchronization of existing objects, delete operati
 
       The replication rule synchronizes versioned delete operations, delete markers, and existing objects to the remote MinIO deployment.
 
+      .. versionchanged:: mc RELEASE.2024-03-03T00-13-08Z
+
+         You can use a configured ALIAS for the ``--remote-bucket`` flag instaed of URL or IP.
+
    .. tab-item:: SYNTAX
 
       The command has the following syntax:
@@ -100,12 +104,23 @@ Parameters
    :required:
 
    Specify the credentials, destination deployment, and bucket of the remote location. 
+   Value may be an alias/bucket, location based (IP or URL), or path based.
 
    For example, a URL based target might look like the following:
 
    .. code-block::
 
       https://user:secret@myminio.cloudprovider.tld:9001/bucket
+
+   .. versionchanged:: mc RELEASE.2024-03-03T00-13-08Z
+
+      The ``--remote-bucket`` value may be an :ref:`alias`.
+
+   An alias based target might look like the following:
+
+   .. code-block::
+
+      minio-target/my-bucket
 
 .. mc-cmd:: --bandwidth
    :optional:
