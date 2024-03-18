@@ -24,13 +24,6 @@ For examples of deploying :mc:`minio server` on a bare metal environment, see :r
 
 For examples of deploying :mc:`minio server` on a Kubernetes environment, see :ref:`Deploying a MinIO Tenant <minio-k8s-deploy-minio-tenant>`.
 
-.. admonition:: AGPLv3
-   :class: note
-
-   :program:`minio server` is :minio-git:`AGPLv3 <minio/blob/master/LICENSE>` licensed Free and Open Source (FOSS) software. 
-
-   Applications integrating :program:`mc` may trigger AGPLv3 compliance requirements. 
-   `MinIO Commercial Licensing <https://min.io/pricing>`__ is the best option for applications which trigger AGPLv3 obligations where open-sourcing the application is not an option.
 
 Syntax
 ~~~~~~

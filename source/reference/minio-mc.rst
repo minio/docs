@@ -33,17 +33,6 @@ support for both filesystems and Amazon S3-compatible cloud storage services.
 
 See :ref:`minio-mc-commands` for a list of supported commands.
 
-.. admonition:: AGPLv3
-   :class: note
-
-   :program:`mc` is :minio-git:`AGPLv3 <mc/blob/master/LICENSE>` 
-   licensed Free and Open Source (FOSS) software. 
-
-   Applications integrating :program:`mc` may trigger AGPLv3 compliance
-   requirements. `MinIO Commercial Licensing <https://min.io/pricing>`__
-   is the best option for applications which trigger AGPLv3 obligations where
-   open-sourcing the application is not an option.   
-
 .. _mc-client-versioning:
 
 Version Alignment with MinIO Server

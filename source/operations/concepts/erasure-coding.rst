@@ -19,11 +19,6 @@ This page provides an introduction to MinIO Erasure Coding.
 
 See :ref:`minio-availability-resiliency` and :ref:`minio-architecture` for more information on how MinIO uses erasure coding in production deployments.
 
-.. admonition:: MinIO SUBNET Support for Planning and Configuration of Erasure Coding
-   :class: note
-
-   |subnet| provides 24/7 direct-to-engineering consultation during planning, implementation, and active stages of your production deployments.
-   SUBNET customers should open an issue to have MinIO engineering review the architecture and deployment strategies against your goals to ensure long-term success of your workloads.
 
 .. _minio-ec-basics:
 .. _minio-ec-erasure-set:
