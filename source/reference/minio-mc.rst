@@ -242,7 +242,12 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /reference/minio-mc/mc-find.rst
           :start-after: start-mc-find-desc
           :end-before: end-mc-find-desc
-     
+
+   * - :mc:`mc get`
+     - .. include:: /reference/minio-mc/mc-get.rst
+          :start-after: start-mc-get-desc
+          :end-before: end-mc-get-desc  
+
    * - :mc:`mc head`
      - .. include:: /reference/minio-mc/mc-head.rst
           :start-after: start-mc-head-desc
@@ -344,6 +349,11 @@ The following table lists :mc-cmd:`mc` commands:
      - .. include:: /reference/minio-mc/mc-pipe.rst
           :start-after: start-mc-pipe-desc
           :end-before: end-mc-pipe-desc  
+
+   * - :mc:`mc put`
+     - .. include:: /reference/minio-mc/mc-put.rst
+          :start-after: start-mc-put-desc
+          :end-before: end-mc-put-desc  
 
    * - | :mc:`mc quota clear`
        | :mc:`mc quota info`
@@ -590,6 +600,7 @@ You can also define some of these options using :ref:`Environment Variables <min
    /reference/minio-mc/mc-encrypt
    /reference/minio-mc/mc-event
    /reference/minio-mc/mc-find
+   /reference/minio-mc/mc-get
    /reference/minio-mc/mc-head
    /reference/minio-mc/mc-idp-ldap
    /reference/minio-mc/mc-idp-ldap-accesskey
@@ -605,6 +616,7 @@ You can also define some of these options using :ref:`Environment Variables <min
    /reference/minio-mc/mc-od
    /reference/minio-mc/mc-ping
    /reference/minio-mc/mc-pipe
+   /reference/minio-mc/mc-put
    /reference/minio-mc/mc-quota
    /reference/minio-mc/mc-rb
    /reference/minio-mc/mc-replicate

@@ -254,6 +254,13 @@ Parameters
 
    See the Amazon documentation on :aws-docs:`Storage Classes <AmazonS3/latest/dev/storage-class-intro.html>` for more information on S3 storage classses.
 
+.. mc-cmd:: --skip-errors
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-01-28T16-23-14Z
+
+   Skip any objects that produce errors while mirroring.
+
 .. mc-cmd:: --summary
    :optional:
 

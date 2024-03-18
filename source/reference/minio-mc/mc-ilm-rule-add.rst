@@ -64,6 +64,7 @@ The command supports adding both :ref:`Transition (Tiering) <minio-lifecycle-man
                           [--prefix string]                          \
                           [--tags string]                            \
                           [--expire-days "integer"]                  \
+                          [--expire-all-object-versions]             \
                           [--expire-delete-marker]                   \
                           [--transition-days "string"]               \
                           [--transition-tier "string"]               \
@@ -114,6 +115,16 @@ Parameters
    This option is mutually exclusive with the following option:
 
    - :mc-cmd:`~mc ilm rule add --expire-delete-marker`
+
+.. mc-cmd:: --expire-all-object-versions
+   :optional:   
+
+   .. versionadded:: mc RELEASE.2024-02-24T01-33-20Z
+
+   Expire all current **and** noncurrent versions of an object.
+   Use with the :mc-cmd:`~mc ilm rule add --expire-days` option to specify the number of days after which all versions of an object should be deleted by the scanner process.
+
+   After the :ref:`scanner <minio-lifecycle-management-scanner>` processes this command, no versions of the object remain on the deployment.
 
 .. mc-cmd:: --expire-days
    :optional:   

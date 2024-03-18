@@ -119,6 +119,9 @@ MinIO has two specific default behaviors for versioned buckets:
 
   To expire delete markers when there are no remaining versions for that object, specify the :mc-cmd:`~mc ilm rule add --expire-delete-marker` option when creating the expiration rule.
 
+- To expire *all* versions of an object after a specified period of days, use the :mc-cmd:`~mc ilm rule add --expire-all-object-versions` flag with the :mc-cmd:`~mc ilm rule add --expire-days` flag. 
+  This permits the permanent deletion of the object after the specified number of days pass.
+
 .. _minio-lifecycle-management-scanner:
 
 Lifecycle Management Object Scanner

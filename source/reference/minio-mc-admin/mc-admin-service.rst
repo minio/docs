@@ -15,15 +15,13 @@ Description
 
 .. start-mc-admin-service-desc
 
-The :mc-cmd:`mc admin service` command can restart or stop MinIO servers.
+The :mc-cmd:`mc admin service` command can restart or unfreeze MinIO servers.
 
 .. end-mc-admin-service-desc
 
 :mc-cmd:`mc admin service` affects *all* MinIO servers in the target deployment
 at the same time. The command interrupts in-progress API operations on
-the MinIO deployment. Exercise caution before issuing an update command on
-production environments.
-
+the MinIO deployment. Use caution when issuing this command to a deployment.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -47,8 +45,8 @@ Restart MinIO Servers in Target Deployment
 
    mc admin service restart myminio
 
-Stop MinIO Servers in Target Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Resume S3 Calls on a Target Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/play-alias-available.rst
    :start-after: myminio-alias
@@ -57,7 +55,7 @@ Stop MinIO Servers in Target Deployment
 .. code-block:: shell
    :class: copyable
 
-   mc admin service stop myminio
+   mc admin service unfreeze myminio
 
 Syntax
 ------
@@ -74,30 +72,29 @@ Syntax
 .. mc-cmd:: restart
 
    Restarts MinIO servers.
+   If needed, the command may suggest restarting the node based on the status.
 
    :mc-cmd:`mc admin service restart` has the following syntax:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin service restart TARGET
+      mc admin service restart ALIAS
 
    Specify the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment.
    :mc-cmd:`~mc admin service restart` restarts *all* MinIO servers in the
    deployment.
 
-.. mc-cmd:: stop
+.. mc-cmd:: unfreeze
 
-   Stops MinIO servers.
+   Restart S3 API calls on a MinIO cluster.
 
-   :mc-cmd:`mc admin service stop` has the following syntax:
+   :mc-cmd:`mc admin service unfreeze` has the following syntax:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin service stop TARGET
+      mc admin service unfreeze ALIAS
 
    Specify the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment.
-   :mc-cmd:`~mc admin service stop` stops *all* MinIO servers in the
-   deployment.
 
