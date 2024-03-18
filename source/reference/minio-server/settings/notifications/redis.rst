@@ -37,13 +37,13 @@ For example, the following commands set two distinct Redis service endpoints as 
          :class: copyable
       
          set MINIO_NOTIFY_REDIS_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_REDIS_REDIS_ADDRESS_PRIMARY="https://redis-endpoint.example.net:9200"
+         set MINIO_NOTIFY_REDIS_REDIS_ADDRESS_PRIMARY="redis-endpoint.example.net:9200"
          set MINIO_NOTIFY_REDIS_KEY_PRIMARY="bucketevents"
          set MINIO_NOTIFY_REDIS_FORMAT_PRIMARY="namespace"
       
       
          set MINIO_NOTIFY_REDIS_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_REDIS_REDIS_ADDRESS_SECONDARY="https://redis-endpoint2.example.net:9200"
+         set MINIO_NOTIFY_REDIS_REDIS_ADDRESS_SECONDARY="redis-endpoint2.example.net:9200"
          set MINIO_NOTIFY_REDIS_KEY_SECONDARY="bucketevents"
          set MINIO_NOTIFY_REDIS_FORMAT_SECONDARY="namespace"
 
@@ -53,13 +53,13 @@ For example, the following commands set two distinct Redis service endpoints as 
       .. code-block:: shell
 
          mc admin config set notify_redis:primary              \ 
-            address="https://redis-endpoint.example.net:9200"  \
+            address="redis-endpoint.example.net:9200"  \
             key="bucketevents"                                 \
             format="namespace"                                 \
             [ARGUMENT="VALUE"] ...                             \
    
          mc admin config set notify_redis:secondary            \
-            address="https://redis-endpoint2.example.net:9200" \
+            address="redis-endpoint2.example.net:9200" \
             key="bucketevents"                                 \
             format="namespace"                                 \
             [ARGUMENT="VALUE"] ... 
@@ -133,7 +133,7 @@ Address
          :delimiter: " "
 
 Specify the Redis service endpoint to which MinIO publishes bucket events.
-For example, ``https://redis.example.com:6369``.
+For example, ``redis.example.com:6369``.
 
 .. include:: /includes/linux/minio-server.rst
    :start-after: start-notify-target-online-desc
