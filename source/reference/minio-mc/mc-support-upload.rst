@@ -23,10 +23,6 @@ Description
 
 .. end-mc-support-upload-desc
 
-.. include:: /includes/common-mc-support.rst
-   :start-after: start-minio-only
-   :end-before: end-minio-only
-
 Syntax
 ------
       
@@ -82,7 +78,7 @@ This command uploads the file ``./trace.log`` from the local file system to the 
 .. code-block:: shell
    :class: copyable
 
-   mc support upload --issue 10 myminio ./trace.log 
+   mc support upload --issue 10001 minio1 ./trace.log 
 
 
 Upload a file to an issue with a comment for MinIO Engineers
@@ -94,4 +90,4 @@ The command also includes a comment available to MinIO Engineers about the file.
 .. code-block:: shell
    :class: copyable
 
-   mc support upload --issue 10 --comment "here is the requested trace log" myminio ./trace.log
+   mc support upload --issue 10001 --comment "here is the requested trace log" minio1 ./trace.log
