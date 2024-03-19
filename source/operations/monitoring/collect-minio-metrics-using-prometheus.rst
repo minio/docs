@@ -52,7 +52,23 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
          mc admin prometheus generate ALIAS
 
       Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+	 
+      The command returns output similar to the following:
 
+      .. code-block:: yaml
+         :class: copyable
+      
+         global:
+            scrape_interval: 15s
+         
+         scrape_configs:
+            - job_name: minio-job
+              bearer_token: TOKEN
+              metrics_path: /minio/v2/metrics/cluster
+              scheme: https
+              static_configs:
+              - targets: [minio.example.net]
+		      
    .. tab-item:: Nodes
 
       The following command scrapes metrics for a node on the MinIO Server.
@@ -64,6 +80,20 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
       Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
+      .. code-block:: yaml
+         :class: copyable
+      
+         global:
+            scrape_interval: 15s
+         
+         scrape_configs:
+            - job_name: minio-job-node
+              bearer_token: TOKEN
+              metrics_path: /minio/v2/metrics/node
+              scheme: https
+              static_configs:
+              - targets: [minio-1.example.net, minio-2.example.net, minio-N.example.net]
+		      
    .. tab-item:: Buckets
 
       The following command scrapes metrics for buckets on the MinIO Server.
@@ -75,7 +105,20 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
       Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
-
+      .. code-block:: yaml
+         :class: copyable
+      
+         global:
+            scrape_interval: 15s
+         
+         scrape_configs:
+            - job_name: minio-job-bucket
+              bearer_token: TOKEN
+              metrics_path: /minio/v2/metrics/bucket
+              scheme: https
+              static_configs:
+              - targets: [minio.example.net]
+      
    .. tab-item:: Resources
 
       .. versionadded:: RELEASE.2023-10-07T15-07-38Z
@@ -89,19 +132,20 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
       Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
-The command returns output similar to the following:
+      .. code-block:: yaml
+         :class: copyable
 
-.. code-block:: yaml
-   :class: copyable
+         global:
+            scrape_interval: 15s
 
-   scrape_configs:
-   - job_name: minio-job 
-     bearer_token: TOKEN
-     metrics_path: /minio/v2/metrics/cluster
-     scheme: https
-     static_configs:
-     - targets: [minio.example.net]
-
+         scrape_configs:
+            - job_name: minio-job-resource
+              bearer_token: TOKEN
+              metrics_path: /minio/v2/metrics/resource
+              scheme: https
+              static_configs:
+              - targets: [minio.example.net]
+      
 - Set the ``job_name`` to a value associated to the MinIO deployment.
 
   Use a unique value to ensure isolation of the deployment metrics from any others collected by that Prometheus service.
@@ -130,7 +174,6 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
    .. tab-item:: Cluster
 
       Cluster metrics aggregate node-level metrics and, where appropriate, attach labels to metrics for the originating node.
-      If you are already collecting ``cluster`` metrics, you do not need to add an additional ``scrape_configs`` job for ``node``.
 
       .. code-block:: yaml
          :class: copyable
@@ -146,6 +189,26 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               static_configs:
               - targets: [minio.example.net]
 
+
+   .. tab-item:: Nodes
+
+      Node metrics are specific for node-level monitoring. You need to list all MinIO nodes for this configuration.
+
+      .. code-block:: yaml
+         :class: copyable
+      
+         global:
+            scrape_interval: 15s
+         
+         scrape_configs:
+            - job_name: minio-job-node
+              bearer_token: TOKEN
+              metrics_path: /minio/v2/metrics/node
+              scheme: https
+              static_configs:
+              - targets: [minio-1.example.net, minio-2.example.net, minio-N.example.net]
+
+	      
    .. tab-item:: Bucket
 
       .. code-block:: yaml
