@@ -392,41 +392,41 @@ For example, refer to the following examples for wildcard uses and their results
 .. list-table::
    :header-rows: 1
    :widths: 40 30 30
-   :width: 100%
+   :width: 70%
 
    * - Pattern
      - Text
      - Match Result
 
-   * - abc*
+   * - ``abc*``
      - ab
      - Match
 
-   * - abc*
+   * - ``abc*``
      - abd
      - Not a match
   
-   * - abc*c
+   * - ``abc*c``
      - abcd
      - Match
 
-   * - ab*??d
+   * - ``ab*??d``
      - abxxc
      - Match
 
-   * - ab*??d
+   * - ``ab*??d``
      - abxc
      - Match
 
-   * - ab??d
+   * - ``ab??d``
      - abxc
      - Match
 
-   * - ab??d
+   * - ``ab??d``
      - abc
      - Match
 
-   * - ab??d
+   * - ``ab??d``
      - abcxdd
      - Not a match
 
