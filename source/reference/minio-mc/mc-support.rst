@@ -87,3 +87,4 @@ Subcommands
    /reference/minio-mc/mc-support-profile
    /reference/minio-mc/mc-support-proxy
    /reference/minio-mc/mc-support-top
+   /reference/minio-mc/mc-support-upload

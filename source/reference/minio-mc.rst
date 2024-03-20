@@ -407,6 +407,7 @@ The following table lists :mc-cmd:`mc` commands:
        | :mc:`mc support top api`
        | :mc:`mc support top disk`
        | :mc:`mc support top locks`
+       | :mc:`mc support upload`
      - .. include:: /reference/minio-mc/mc-support.rst
           :start-after: start-mc-support-desc
           :end-before: end-mc-support-desc
