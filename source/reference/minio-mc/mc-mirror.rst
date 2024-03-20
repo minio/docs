@@ -392,7 +392,7 @@ For example, refer to the following examples for wildcard uses and their results
 .. list-table::
    :header-rows: 1
    :widths: 40 30 30
-   :width: 70%
+   :width: 100%
 
    * - Pattern
      - Text
