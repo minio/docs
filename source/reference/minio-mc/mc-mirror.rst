@@ -376,7 +376,7 @@ Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --exclude-storageclass` to mirror o
 Behavior
 --------
 
-.. _minio-wildcard-matching::
+.. _minio-wildcard-matching:
 
 Wildcard Matching
 ~~~~~~~~~~~~~~~~~
