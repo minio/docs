@@ -151,15 +151,14 @@ Parameters
 .. mc-cmd:: --exclude
    :optional:
 
-   Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified object name pattern.
+   Exclude object(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified object :ref:`name pattern <minio-wildcard-matching>`.
 
 .. mc-cmd:: --exclude-bucket
    :optional:
 
    .. versionadded:: mc RELEASE.2024-03-03T00-13-08Z
 
-   Exclude bucket(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified bucket name pattern.
-
+   Exclude bucket(s) in the :mc-cmd:`~mc mirror SOURCE` path that match the specified bucket :ref:`name pattern <minio-wildcard-matching>`.
 
 .. mc-cmd:: --exclude-storageclass
    :optional:
@@ -376,6 +375,61 @@ Use :mc:`mc mirror` with :mc-cmd:`~mc mirror --exclude-storageclass` to mirror o
 
 Behavior
 --------
+
+.. _minio-wildcard-matching::
+
+Wildcard Matching
+~~~~~~~~~~~~~~~~~
+
+Some flags allow for name pattern matching.
+When enabled, a pattern can include include either of two wildcards for character replacement.
+   
+- ``*`` to represent a string of characters to match, either in the middle or end.
+- ``?`` to represent a single character.
+
+For example, refer to the following examples for wildcard uses and their results.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30 30
+   :width: 100%
+
+   * - Pattern
+     - Text
+     - Match Result
+
+   * - abc*
+     - ab
+     - Match
+
+   * - abc*
+     - abd
+     - Not a match
+  
+   * - abc*c
+     - abcd
+     - Match
+
+   * - ab*??d
+     - abxxc
+     - Match
+
+   * - ab*??d
+     - abxc
+     - Match
+
+   * - ab??d
+     - abxc
+     - Match
+
+   * - ab??d
+     - abc
+     - Match
+
+   * - ab??d
+     - abcxdd
+     - Not a match
+
 
 Mirror Continues on Failed Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

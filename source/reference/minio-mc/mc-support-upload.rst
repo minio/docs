@@ -10,9 +10,6 @@
 
 .. mc:: mc support upload
 
-.. include:: /includes/common-mc-support.rst
-   :start-after: start-minio-only
-   :end-before: end-minio-only
 
 Description
 -----------
@@ -22,6 +19,10 @@ Description
 :mc:`mc support upload` copies a file from the local file system to a SUBNET ticket.
 
 .. end-mc-support-upload-desc
+
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
 
 Syntax
 ------

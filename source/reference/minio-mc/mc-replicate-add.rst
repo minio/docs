@@ -56,7 +56,7 @@ You can optionally configure synchronization of existing objects, delete operati
 
       .. versionchanged:: mc RELEASE.2024-03-03T00-13-08Z
 
-         You can use a configured ALIAS for the ``--remote-bucket`` flag instaed of URL or IP.
+         You can use a configured ALIAS to the ``--remote-bucket`` flag.
 
    .. tab-item:: SYNTAX
 
@@ -103,8 +103,12 @@ Parameters
 .. mc-cmd:: --remote-bucket
    :required:
 
+   .. versionchanged:: mc RELEASE.2024-03-03T00-13-08Z
+
+      The ``--remote-bucket`` supports specifying an existing :ref:`alias <alias>`.
+
    Specify the credentials, destination deployment, and bucket of the remote location. 
-   Value may be an alias/bucket, location based (IP or URL), or path based.
+   Value may be an IP address, URL, or :ref:`alias <alias>`/bucket.
 
    For example, a URL based target might look like the following:
 
@@ -112,15 +116,11 @@ Parameters
 
       https://user:secret@myminio.cloudprovider.tld:9001/bucket
 
-   .. versionchanged:: mc RELEASE.2024-03-03T00-13-08Z
-
-      The ``--remote-bucket`` value may be an :ref:`alias`.
-
    An alias based target might look like the following:
 
    .. code-block::
 
-      minio-target/my-bucket
+      --remote-bucket minio-target/my-bucket
 
 .. mc-cmd:: --bandwidth
    :optional:
