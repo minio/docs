@@ -46,7 +46,7 @@ Exercise caution before sending a report to a third party or posting the report 
 Wildcards
 ---------
 
-The command supports wildcard ``*`` pattern matching for prefixes or objects. 
+The command supports wildcard ``*`` pattern matching for prefixes or objects when using the Bash shell. 
 
 .. code-block:: shell
    :class: copyable

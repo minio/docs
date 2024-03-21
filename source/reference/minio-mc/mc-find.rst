@@ -96,7 +96,7 @@ Parameters
 .. mc-cmd:: --ignore
    :optional:
 
-   Exclude objects whose names match the specified wildcard pattern.
+   Exclude objects whose names match the specified :ref:`wildcard pattern <minio-wildcard-matching>`.
 
 .. mc-cmd:: --larger
    :optional:
@@ -127,7 +127,7 @@ Parameters
 .. mc-cmd:: --name
    :optional:
 
-   Return objects whose names match the specified wildcard pattern.
+   Return objects whose names match the specified :ref:`wildcard pattern <minio-wildcard-matching>`.
 
 .. mc-cmd:: --newer-than
    :optional:
@@ -148,7 +148,7 @@ Parameters
 .. mc-cmd:: --path
    :optional:
 
-   Return the contents of directories whose names match the specified wildcard pattern.
+   Return the contents of directories whose names match the specified :ref:`wildcard pattern <minio-wildcard-matching>`.
 
 .. mc-cmd:: --print
    :optional:

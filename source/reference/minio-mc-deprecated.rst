@@ -164,6 +164,10 @@ Table of Deprecated Admin Commands
      - :mc-cmd:`mc admin policy attach` or :mc-cmd:`mc admin policy detach`
      - mc RELEASE.2023-03-20T17-17-53Z 
 
+   * - ``mc admin profile``
+     - :mc:`mc support profile`
+     - mc RELEASE.2023-04-06T16-51-10Z
+
    * - ``mc admin replicate edit``
      - :mc:`mc admin replicate update`
      - mc RELEASE.2023-01-11T03-14-16Z

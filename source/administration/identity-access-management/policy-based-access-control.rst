@@ -188,7 +188,7 @@ The maximum size for a policy document is 2048 characters.
 - For the ``Statement.Resource`` key, specify the bucket or bucket prefix to which to restrict the policy.
   You can use ``*`` and ``?`` wildcard characters as per the :s3-docs:`S3 Resource Spec <s3-arn-format.html>`.
 
-  The ``*`` wildcard may result in unintended application of a policy to multiple buckets or prefixes based on the pattern match.
+  The ``*`` wildcard may result in unintended application of a policy to multiple buckets or prefixes based on the :ref:`pattern match <minio-wildcard-matching>`.
   For example, ``arn:aws:s3:::data*`` would match the buckets ``data``, ``data_private``, and ``data_internal``.
   Specifying only ``*`` as the resource key applies the policy to all buckets and prefixes on the deployment.
 
