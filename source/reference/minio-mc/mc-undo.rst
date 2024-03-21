@@ -63,12 +63,28 @@ Parameters
 .. mc-cmd:: --action
    :optional:
 
-   For recursive undo of the most recent change, specify the type of operation to undo.
+   Undo the most recent change of the specified type.
    Accepted values are ``DELETE`` or ``PUT``.
-   Requires :mc-cmd:`~mc undo --recursive` and is mutually exclusive with :mc-cmd:`~mc undo --last`.
-   
-   By default, :mc:`mc undo` reverses both ``DELETE`` and ``PUT``.
-   Use :mc-cmd:`~mc undo --action` to choose one or the other, but only for recursive undo of the most recent change.
+
+   By default, :mc:`mc undo` reverses both ``DELETE`` and ``PUT`` operations.
+   Use :mc-cmd:`~mc undo --action` to choose one or the other, but only for the most recent operation of the specified type.
+
+   The following command undoes the most recent ``PUT`` for the file ``today.zip`` in bucket ``data``:
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc undo myminio/data/today.zip --action "PUT"
+
+   This example undoes the most recent ``DELETE`` for the prefix ``archive`` and any child objects:
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc undo myminio/data/today.zip --action "PUT"
+      mc undo myminio/data/archive --recursive --action "DELETE"
+
+   Mutually exclusive with :mc-cmd:`~mc undo --last`.
 
 .. mc-cmd:: --dry-run
    :optional:
