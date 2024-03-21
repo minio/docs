@@ -210,6 +210,7 @@ Table of Deprecated Admin Commands
    /reference/deprecated/mc-admin-idp-ldap
    /reference/deprecated/mc-admin-idp-ldap-policy
    /reference/deprecated/mc-admin-idp-openid
+   /reference/deprecated/mc-admin-profile
    /reference/deprecated/mc-admin-speedtest
    /reference/deprecated/mc-admin-tier
    /reference/deprecated/mc-admin-top
