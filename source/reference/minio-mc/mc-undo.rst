@@ -41,15 +41,16 @@ The :mc:`mc undo` command reverses changes due to either a ``PUT`` or ``DELETE``
 
          mc [GLOBALFLAGS] undo                \
                           TARGET              \
-                          [--action "type"]*  \
+                          [--action "type"]   \
                           [--force]           \
-                          [--last "integer"]* \
-                          [--recursive, r]*   \
+                          [--last "integer"]  \
+                          [--recursive, r]    \
                           [--dry-run]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
+
 
 Parameters
 ~~~~~~~~~~
