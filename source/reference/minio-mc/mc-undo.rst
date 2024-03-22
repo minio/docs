@@ -25,7 +25,7 @@ The :mc:`mc undo` command reverses changes due to either a ``PUT`` or ``DELETE``
 
    .. tab-item:: EXAMPLE
 
-      The following command undoes the last three uploads and/or removals of the ``file.zip`` object on the ``myminio`` deployment in the ``data`` bucket:
+      The following command reverts the last three uploads and/or deletions of the ``file.zip`` object on the ``myminio`` deployment in the ``data`` bucket:
 
       .. code-block:: shell
          :class: copyable
@@ -69,19 +69,18 @@ Parameters
    By default, :mc:`mc undo` reverses both ``DELETE`` and ``PUT`` operations.
    Use :mc-cmd:`~mc undo --action` to choose one or the other, but only for the most recent operation of the specified type.
 
-   The following command undoes the most recent ``PUT`` for the file ``today.zip`` in bucket ``data``:
+   The following command reverts the most recent ``PUT`` for the object ``today.zip`` in bucket ``data``, reverting to the previous object version:
 
    .. code-block:: shell
       :class: copyable
 
       mc undo myminio/data/today.zip --action "PUT"
 
-   This example undoes the most recent ``DELETE`` for the prefix ``archive`` and any child objects:
+   This example reverts the most recent ``DELETE`` for the prefix ``archive``, recursively restoring it and any child objects:
 
    .. code-block:: shell
       :class: copyable
 
-      mc undo myminio/data/today.zip --action "PUT"
       mc undo myminio/data/archive --recursive --action "DELETE"
 
    Mutually exclusive with :mc-cmd:`~mc undo --last`.
@@ -102,7 +101,7 @@ Parameters
 
    Accepts an integer value specifying the number of ``PUT`` and/or ``DELETE`` changes to undo.
    
-   If not specified, the command undoes one (``1``) operation.
+   If not specified, the command reverses one (``1``) operation.
    Mutually exclusive with :mc-cmd:`~mc undo --action`.
 
 .. mc-cmd:: --recursive, r
@@ -125,7 +124,7 @@ Examples
 Undo the Last Three Uploads or Deletions on an Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command undoes the last three uploads and/or removals of the ``file.zip`` object on the ``myminio`` deployment in the ``data`` bucket:
+The following command reverts the last three uploads and/or deletions of the ``file.zip`` object on the ``myminio`` deployment in the ``data`` bucket:
 
 .. code-block:: shell
    :class: copyable
