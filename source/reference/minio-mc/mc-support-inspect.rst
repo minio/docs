@@ -24,8 +24,11 @@ The :mc:`mc support inspect` command collects the data and metadata associated t
 .. end-mc-support-inspect-desc
 
 MinIO assembles this data from each backend drive storing an :ref:`erasure shard <minio-erasure-coding>` for each specified object.
-
 The command produces an encrypted zip file that includes all matching files with their respective *host+drive+path*.
+
+If this information is required to diagnose a |SUBNET| issue, MinIO Engineering will provide the appropriate command.
+The resulting report is intended for use by MinIO Engineering via SUBNET and may contain internal or private data points associated to the object.
+Exercise caution before sending a report to a third party or posting the report in a public forum.
 
 .. versionchanged:: RELEASE.2023-01-11T03-14-16Z
 
@@ -35,9 +38,6 @@ The command produces an encrypted zip file that includes all matching files with
 .. versionchanged:: RELEASE.2022-12-12T19-27-27Z
    
    When writing the zip archive, MinIO also encrypts the zip index of file names included in the archive.
-
-The resulting report is intended for use by MinIO Engineering via |SUBNET| and may contain internal or private data points associated to the object.
-Exercise caution before sending a report to a third party or posting the report in a public forum.
 
 .. important::
    
