@@ -498,6 +498,60 @@ If you decide to trust the certificate, the MinIO Client adds the certificate to
 
    In testing environments, you can bypass the certificate check for selected MinIO Client commands by passing the ``--insecure`` flag.
 
+.. _minio-wildcard-matching:
+
+Pattern Matching
+----------------
+
+Some commands and flags allow for pattern matching.
+When enabled, a pattern can include either of these wildcards for character replacement:
+   
+- ``*`` to represent a string of characters to match, either in the middle or end.
+- ``?`` to represent a single character.
+
+For example, refer to the following examples for wildcard uses and their results.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30 30
+   :width: 100%
+
+   * - Pattern
+     - Text
+     - Match Result
+
+   * - ``abc*``
+     - ab
+     - Match
+
+   * - ``abc*``
+     - abd
+     - Not a match
+  
+   * - ``abc*c``
+     - abcd
+     - Match
+
+   * - ``ab*??d``
+     - abxxc
+     - Match
+
+   * - ``ab*??d``
+     - abxc
+     - Match
+
+   * - ``ab??d``
+     - abxc
+     - Match
+
+   * - ``ab??d``
+     - abc
+     - Match
+
+   * - ``ab??d``
+     - abcxdd
+     - Not a match
+
 .. _minio-mc-global-options:
 
 Global Options

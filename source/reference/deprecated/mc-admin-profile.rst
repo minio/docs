@@ -10,6 +10,10 @@
 
 .. mc:: mc admin profile
 
+.. note:: 
+
+   This command has been replaced by :mc:`mc support profile` as of `mc` RELEASE.2023-04-06T16-51-10Z.
+
 Description
 -----------
 

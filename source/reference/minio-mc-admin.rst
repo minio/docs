@@ -85,20 +85,10 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-logs-desc
           :end-before: end-mc-admin-logs-desc
 
-   * - :mc-cmd:`mc admin obd`
-     - .. include:: /reference/minio-mc-admin/mc-admin-obd.rst
-          :start-after: start-mc-admin-obd-desc
-          :end-before: end-mc-admin-obd-desc
-
    * - :mc:`mc admin policy`
      - .. include:: /reference/minio-mc-admin/mc-admin-policy.rst
           :start-after: start-mc-admin-policy-desc
           :end-before: end-mc-admin-policy-desc
-
-   * - :mc-cmd:`mc admin profile`
-     - .. include:: /reference/minio-mc-admin/mc-admin-profile.rst
-          :start-after: start-mc-admin-profile-desc
-          :end-before: end-mc-admin-profile-desc
 
    * - :mc-cmd:`mc admin prometheus`
      - .. include:: /reference/minio-mc-admin/mc-admin-prometheus.rst
@@ -200,9 +190,7 @@ See :ref:`minio-mc-global-options`.
    /reference/minio-mc-admin/mc-admin-info
    /reference/minio-mc-admin/mc-admin-kms-key
    /reference/minio-mc-admin/mc-admin-logs
-   /reference/minio-mc-admin/mc-admin-obd
    /reference/minio-mc-admin/mc-admin-policy
-   /reference/minio-mc-admin/mc-admin-profile
    /reference/minio-mc-admin/mc-admin-prometheus
    /reference/minio-mc-admin/mc-admin-rebalance
    /reference/minio-mc-admin/mc-admin-replicate
