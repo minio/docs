@@ -38,10 +38,13 @@ MinIO SSE is feature and API compatible with :s3-docs:`AWS Server-Side Encryptio
       For a tutorial on enabling SSE-KMS in a local (non-production) MinIO Deployment, see :ref:`minio-encryption-sse-kms-quickstart`. 
       For production MinIO deployments, use one of the following guides:
 
-      - :ref:`AWS SecretsManager <minio-sse-aws>`
-      - :ref:`Google Cloud SecretManager <minio-sse-gcp>`
-      - :ref:`Azure Key Vault <minio-sse-azure>`
-      - :ref:`Hashicorp KeyVault <minio-sse-vault>`
+      - :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+      - :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
+      - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+      - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+      - :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+      - :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+      - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
    .. tab-item:: SSE-S3
       :sync: sse-s3
@@ -57,10 +60,13 @@ MinIO SSE is feature and API compatible with :s3-docs:`AWS Server-Side Encryptio
       Deployment, see :ref:`minio-encryption-sse-s3-quickstart`. For
       production MinIO deployments, use one of the following guides:
 
-      - :ref:`AWS SecretsManager <minio-sse-aws>`
-      - :ref:`Google Cloud SecretManager <minio-sse-gcp>`
-      - :ref:`Azure Key Vault <minio-sse-azure>`
-      - :ref:`Hashicorp KeyVault <minio-sse-vault>`
+      - :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+      - :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
+      - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+      - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+      - :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+      - :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+      - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
    .. tab-item:: SSE-C
       :sync: sse-c

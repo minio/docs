@@ -49,18 +49,15 @@ You can enable bucket-default SSE-KMS encryption using the
 - Replace ``play/mybucket`` with the :mc:`alias <mc alias>` and bucket 
   on which you want to enable automatic SSE-KMS encryption.
 
-MinIO SSE-KMS is functionally compatible with AWS S3 
-:s3-docs:`Server-Side Encryption with KMS keys stored in AWS
-<UsingKMSEncryption.html>` while expanding support to include the
-following KMS providers:
+MinIO SSE-KMS is functionally compatible with AWS S3 :s3-docs:`Server-Side Encryption with KMS keys stored in AWS <UsingKMSEncryption.html>` while expanding support to include the following KMS providers:
 
-- :ref:`AWS Secrets Manager <minio-sse-aws>`
-- :ref:`Azure KeyVault <minio-sse-azure>`
-- Entrust KeyControl
-- Fortanix SDKMS
-- :ref:`Google Cloud Secret Manager <minio-sse-gcp>`
-- :ref:`Hashicorp Vault <minio-sse-vault>`
-- Thales CipherTrust Manager (formerly Gemalto KeySecure)
+- :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+- :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
+- :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+- :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
 .. _minio-encryption-sse-kms-quickstart:
 
@@ -73,13 +70,13 @@ supporting |SSE| with SSE-KMS in evaluation and early development environments.
 For extended development or production environments, use one of the following
 supported external Key Management Services (KMS):
 
-- :ref:`AWS Secrets Manager <minio-sse-aws>`
-- :ref:`Azure KeyVault <minio-sse-azure>`
-- Entrust KeyControl
-- Fortanix SDKMS
-- :ref:`Google Cloud Secret Manager <minio-sse-gcp>`
-- :ref:`Hashicorp Vault <minio-sse-vault>`
-- Thales CipherTrust Manager (formerly Gemalto KeySecure)
+- :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+- :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
+- :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+- :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
 .. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-play-sandbox-warning
