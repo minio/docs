@@ -162,6 +162,17 @@ The specific client behavior on write, list, get, or delete operations on a buck
 
 See :ref:`minio-bucket-versioning` for more complete documentation.
 
+Object Tagging
+--------------
+
+MinIO supports adding custom tags to an object.
+A tag is a key-value pair included in the metadata of an object.
+Tags can be used to control access with policies or locate an object with :mc-cmd:`mc find --tags`.
+
+MinIO supports adding up to 10 custom tags to an object.
+
+For more on setting tags, refer to :mc:`mc tag set`.
+
 Object Retention
 ----------------
 
