@@ -28,7 +28,7 @@ Tag-Based Policy Conditions
 
 .. versionchanged:: RELEASE.2022-10-02T19-29-29Z
 
-   Policies can use conditions to limit a user's access only to objects with a :ref:`specific tag <minio-object-tagging>`.
+   Policies can use conditions to limit a user's access only to objects with a specific tag.
 
    MinIO supports :s3-docs:`tag-based conditionals <tagging-and-policies.html>` for policies for :ref:`selected actions <minio-selected-conditional-actions>`.
    Use the ``s3:ExistingObjectTag/<key>`` in the ``Condition`` statement of the policy.
@@ -156,11 +156,11 @@ Policy Document Structure
 MinIO policy documents use the same schema as 
 :aws-docs:`AWS IAM Policy <IAM/latest/UserGuide/access.html>` documents.
 
-The following sample document provides a template for creating custom policies for use with a MinIO deployment. 
-For more complete documentation on IAM policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference <IAM/latest/UserGuide/reference_policies_elements.html>`.
-
-The maximum size for any single policy document is 20KiB.
-There is no limit to the number of policy documents that can be attached to a user or group.
+The following sample document provides a template for creating custom
+policies for use with a MinIO deployment. For more complete documentation on IAM
+policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
+<IAM/latest/UserGuide/reference_policies_elements.html>`.
+The maximum size for a policy document is 2048 characters.
 
 .. code-block:: javascript
    :class: copyable

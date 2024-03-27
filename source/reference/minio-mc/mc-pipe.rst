@@ -174,7 +174,6 @@ Set Tags on Uploaded Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following command creates an object on a MinIO deployment with an ALIAS of ``myminio`` in bucket ``mybucket`` with two tags.
-You can set up to 10 tags on an object.
 
 .. code-block:: shell
    :class: copyable
