@@ -156,11 +156,11 @@ Policy Document Structure
 MinIO policy documents use the same schema as 
 :aws-docs:`AWS IAM Policy <IAM/latest/UserGuide/access.html>` documents.
 
-The following sample document provides a template for creating custom
-policies for use with a MinIO deployment. For more complete documentation on IAM
-policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference
-<IAM/latest/UserGuide/reference_policies_elements.html>`.
-The maximum size for a policy document is 2048 characters.
+The following sample document provides a template for creating custom policies for use with a MinIO deployment. 
+For more complete documentation on IAM policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference <IAM/latest/UserGuide/reference_policies_elements.html>`.
+
+The maximum size for any single policy document is 20KiB.
+There is no limit to the number of policy documents that can be attached to a user or group.
 
 .. code-block:: javascript
    :class: copyable
