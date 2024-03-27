@@ -504,7 +504,7 @@ Pattern Matching
 ----------------
 
 Some commands and flags allow for pattern matching.
-When enabled, a pattern can include include either of two wildcards for character replacement.
+When enabled, a pattern can include either of these wildcards for character replacement:
    
 - ``*`` to represent a string of characters to match, either in the middle or end.
 - ``?`` to represent a single character.

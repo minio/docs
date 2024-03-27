@@ -28,21 +28,21 @@ The command used to create the diagnostic report has changed over time.
      - Command
      - Notes
 
-   * - Original Command
-     - ``mc admin obd``
-     - Command renamed ``mc admin health``
-
-   * - RELEASE.2020-10-03T02-54-56Z
-     - ``mc admin health``
-     - Command renamed to health
+   * - RELEASE.2022-02-13T23-26-13Z
+     - ``mc support diag``
+     - Command moved to ``mc support``
 
    * - RELEASE.2020-11-17T00-39-14Z 
      - ``mc admin subnet health``
      - Command made a SUBNET subcommand
 
-   * - RELEASE.2022-02-13T23-26-13Z
-     - ``mc support diag``
-     - Command moved to ``mc support``
+   * - RELEASE.2020-10-03T02-54-56Z
+     - ``mc admin health``
+     - Command renamed to health
+
+   * - Original Command
+     - ``mc admin obd``
+     - Command renamed ``mc admin health``
 
 
 Description
