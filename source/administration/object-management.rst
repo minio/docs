@@ -162,6 +162,8 @@ The specific client behavior on write, list, get, or delete operations on a buck
 
 See :ref:`minio-bucket-versioning` for more complete documentation.
 
+.. _minio-object-tagging:
+
 Object Tagging
 --------------
 

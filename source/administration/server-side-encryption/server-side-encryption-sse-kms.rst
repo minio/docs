@@ -54,11 +54,13 @@ MinIO SSE-KMS is functionally compatible with AWS S3
 <UsingKMSEncryption.html>` while expanding support to include the
 following KMS providers:
 
-- :ref:`AWS SecretsManager <minio-sse-aws>`
-- :ref:`Google Cloud SecretManager <minio-sse-gcp>`
-- :ref:`Azure Key Vault <minio-sse-azure>`
-- :ref:`Hashicorp KeyVault <minio-sse-vault>`
-- Thales CipherTrust (formerly Gemalto KeySecure)
+- :ref:`AWS Secrets Manager <minio-sse-aws>`
+- :ref:`Azure KeyVault <minio-sse-azure>`
+- Entrust KeyControl
+- Fortanix SDKMS
+- :ref:`Google Cloud Secret Manager <minio-sse-gcp>`
+- :ref:`Hashicorp Vault <minio-sse-vault>`
+- Thales CipherTrust Manager (formerly Gemalto KeySecure)
 
 .. _minio-encryption-sse-kms-quickstart:
 
@@ -71,10 +73,13 @@ supporting |SSE| with SSE-KMS in evaluation and early development environments.
 For extended development or production environments, use one of the following
 supported external Key Management Services (KMS):
 
-- :ref:`AWS SecretsManager <minio-sse-aws>`
-- :ref:`Google Cloud SecretManager <minio-sse-gcp>`
-- :ref:`Azure Key Vault <minio-sse-azure>`
-- :ref:`Hashicorp KeyVault <minio-sse-vault>`
+- :ref:`AWS Secrets Manager <minio-sse-aws>`
+- :ref:`Azure KeyVault <minio-sse-azure>`
+- Entrust KeyControl
+- Fortanix SDKMS
+- :ref:`Google Cloud Secret Manager <minio-sse-gcp>`
+- :ref:`Hashicorp Vault <minio-sse-vault>`
+- Thales CipherTrust Manager (formerly Gemalto KeySecure)
 
 .. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-play-sandbox-warning

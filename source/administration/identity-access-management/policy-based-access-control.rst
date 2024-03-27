@@ -28,7 +28,7 @@ Tag-Based Policy Conditions
 
 .. versionchanged:: RELEASE.2022-10-02T19-29-29Z
 
-   Policies can use conditions to limit a user's access only to objects with a specific tag.
+   Policies can use conditions to limit a user's access only to objects with a :ref:`specific tag <minio-object-tagging>`.
 
    MinIO supports :s3-docs:`tag-based conditionals <tagging-and-policies.html>` for policies for :ref:`selected actions <minio-selected-conditional-actions>`.
    Use the ``s3:ExistingObjectTag/<key>`` in the ``Condition`` statement of the policy.
