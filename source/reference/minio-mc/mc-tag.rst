@@ -20,6 +20,8 @@ The :mc:`mc tag` command adds, removes, and lists tags associated to a bucket or
 
 .. end-mc-tag-desc
 
+An object can have up to 10 custom tags.
+
 Subcommands
 -----------
 

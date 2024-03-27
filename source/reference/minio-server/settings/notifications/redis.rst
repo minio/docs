@@ -214,6 +214,29 @@ Specify the password for the Redis server.
 
    MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
+User
+~~~~
+
+*Optional*
+
+.. versionadded:: RELEASE.2024-03-21T23-13-43Z
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_REDIS_USER
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_redis user
+         :delimiter: " "
+
+
+Specify the user for the Redis server.
+
 Queue Directory
 ~~~~~~~~~~~~~~~
 
