@@ -15,46 +15,36 @@ Server-Side Encryption of Objects
 .. |SSE| replace:: :abbr:`SSE (Server-Side Encryption)`
 .. |KMS| replace:: :abbr:`KMS (Key Management System)`
 
-MinIO Server-Side Encryption (SSE) protects objects as part of write operations,
-allowing clients to take advantage of server processing power to secure objects
-at the storage layer (encryption-at-rest). SSE also provides key functionality
-to regulatory and compliance requirements around secure locking and erasure.
+MinIO Server-Side Encryption (SSE) protects objects as part of write operations, allowing clients to take advantage of server processing power to secure objects at the storage layer (encryption-at-rest). 
+SSE also provides key functionality to regulatory and compliance requirements around secure locking and erasure.
 
-MinIO SSE uses the :minio-git:`MinIO Key Encryption Service (KES) <kes>` and an
-external Key Management Service (KMS) for performing secured cryptographic
-operations at scale. MinIO also supports client-managed key management, where
-the application takes full responsibility for creating and managing encryption
-keys for use with MinIO SSE. 
+MinIO SSE uses the :minio-git:`MinIO Key Encryption Service (KES) <kes>` and an external Key Management Service (KMS) for performing secured cryptographic operations at scale. 
+MinIO also supports client-managed key management, where the application takes full responsibility for creating and managing encryption keys for use with MinIO SSE. 
 
-MinIO SSE is feature and API compatible with 
-:s3-docs:`AWS Server-Side Encryption <server-side-encryption.html>` and
-supports the following encryption strategies:
+MinIO SSE is feature and API compatible with :s3-docs:`AWS Server-Side Encryption <server-side-encryption.html>` and supports the following encryption strategies:
 
 .. tab-set::
 
    .. tab-item:: SSE-KMS *Recommended*
       :sync: sse-kms
 
-      MinIO supports enabling automatic SSE-KMS encryption of all objects
-      written to a bucket using a specific External Key (EK) stored on the
-      external |KMS|. Clients can override the bucket-default |EK| by specifying
-      an explicit key as part of the write operation.
+      MinIO supports enabling automatic SSE-KMS encryption of all objects written to a bucket using a specific External Key (EK) stored on the external |KMS|. 
+      Clients can override the bucket-default |EK| by specifying an explicit key as part of the write operation.
 
-      For buckets without automatic SSE-KMS encryption, clients can specify
-      an |EK| as part of the write operation instead.
+      For buckets without automatic SSE-KMS encryption, clients can specify an |EK| as part of the write operation instead.
 
-      SSE-KMS provides more granular and customizable encryption compared to
-      SSE-S3 and SSE-C and is recommended over the other supported encryption
-      methods.
+      SSE-KMS provides more granular and customizable encryption compared to SSE-S3 and SSE-C and is recommended over the other supported encryption methods.
 
-      For a tutorial on enabling SSE-KMS in a local (non-production) MinIO
-      Deployment, see :ref:`minio-encryption-sse-kms-quickstart`. For
-      production MinIO deployments, use one of the following guides:
+      For a tutorial on enabling SSE-KMS in a local (non-production) MinIO Deployment, see :ref:`minio-encryption-sse-kms-quickstart`. 
+      For production MinIO deployments, use one of the following guides:
 
-      - :ref:`AWS SecretsManager <minio-sse-aws>`
-      - :ref:`Google Cloud SecretManager <minio-sse-gcp>`
-      - :ref:`Azure Key Vault <minio-sse-azure>`
-      - :ref:`Hashicorp KeyVault <minio-sse-vault>`
+      - :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+      - :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
+      - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+      - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+      - :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+      - :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+      - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
    .. tab-item:: SSE-S3
       :sync: sse-s3
@@ -70,10 +60,13 @@ supports the following encryption strategies:
       Deployment, see :ref:`minio-encryption-sse-s3-quickstart`. For
       production MinIO deployments, use one of the following guides:
 
-      - :ref:`AWS SecretsManager <minio-sse-aws>`
-      - :ref:`Google Cloud SecretManager <minio-sse-gcp>`
-      - :ref:`Azure Key Vault <minio-sse-azure>`
-      - :ref:`Hashicorp KeyVault <minio-sse-vault>`
+      - :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+      - :kes-docs:`Azure Key Vault <integrations/azure-keyvault/>`
+      - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+      - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+      - :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+      - :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+      - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
    .. tab-item:: SSE-C
       :sync: sse-c
@@ -125,66 +118,6 @@ For more information, see:
 
 - :ref:`SSE-C Secure Erasure and Locking
   <minio-encryption-sse-c-erasure-locking>`
-
-Encryption Internals
---------------------
-
-.. note:: 
-
-   The following section describes MinIO internal logic and functionality.
-   This information is purely educational and is not necessary for 
-   configuring or implementing any MinIO feature.
-
-.. _minio-encryption-sse-content-encryption:
-
-Content Encryption
-~~~~~~~~~~~~~~~~~~
-
-The MinIO server uses an authenticated encryption scheme 
-(:ref:`AEAD <minio-encryption-sse-primitives>`) to en/decrypt and authenticate
-the object content. The AEAD is combined with some state to build a 
-**Secure Channel**. A Secure Channel is a cryptographic construction that
-ensures confidentiality and integrity of the processed data. In particular, the
-Secure Channel splits the plaintext content into fixed size chunks and
-en/decrypts each chunk separately using an unique key-nonce combination.
-
-The following text diagram illustrates Secure Channel Construction of an
-encrypted object:
-
-The Secure Channel splits the object content into chunks of a fixed size of
-``65536`` bytes. The last chunk may be smaller to avoid adding additional
-overhead and is treated specially to prevent truncation attacks. The nonce
-value is ``96`` bits long and generated randomly per object / multi-part part.
-The Secure Channel supports plaintexts up to ``65536 * 2^32 = 256 TiB``.
-
-For S3 multi-part operations, each object part is en/decrypted with the Secure
-Channel Construction scheme shown above. For each part, MinIO generates a secret
-key derived from the Object Encryption Key (OEK) and the part number using a
-pseudo-random function (:ref:`PRF <minio-encryption-sse-primitives>`), such that
-``key = PRF(OEK, part_id)``.
-
-.. _minio-encryption-sse-primitives:
-
-Cryptographic Primitives
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-The MinIO server uses the following cryptographic primitive implementations:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 40 60
-   :width: 100%
-
-   * - 
-     - Primitives
-
-   * - Pseudo-Random Functions (PRF) 
-     - HMAC-SHA-256 
-
-   * - :ref:`AEAD <minio-encryption-sse-content-encryption>` 
-     - ``ChaCha20-Poly1305`` by default. 
-     
-       ``AES-256-GCM`` for x86-64 CPUs with the AES-NI extension.
 
 .. toctree::
    :titlesonly:
