@@ -27,7 +27,7 @@ The :mc:`mc tag set` command sets one or more tags to a bucket or object.
 
 .. end-mc-tag-set-desc
 
-An object can have up to 10 tags.
+MinIO supports adding up to 10 custom tags to an object.
 
 .. tab-set::
 
