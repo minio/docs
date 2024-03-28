@@ -14,35 +14,35 @@
    :start-after: start-minio-only
    :end-before: end-minio-only
 
-Command History
----------------
 
-The command used to create the diagnostic report has changed over time.
+.. dropdown:: Command History
 
-.. list-table::
-   :header-rows: 1
-   :widths: 40 30 30
-   :width: 100%
+   The command used to create the diagnostic report has changed over time.
 
-   * - MinIO Client Release
-     - Command
-     - Notes
-
-   * - RELEASE.2022-02-13T23-26-13Z
-     - ``mc support diag``
-     - Command moved to ``mc support``
-
-   * - RELEASE.2020-11-17T00-39-14Z 
-     - ``mc admin subnet health``
-     - Command made a SUBNET subcommand
-
-   * - RELEASE.2020-10-03T02-54-56Z
-     - ``mc admin health``
-     - Command renamed to health
-
-   * - Original Command
-     - ``mc admin obd``
-     - Command renamed ``mc admin health``
+   .. list-table::
+      :header-rows: 1
+      :widths: 40 30 30
+      :width: 100%
+   
+      * - MinIO Client Release
+        - Command
+        - Notes
+   
+      * - RELEASE.2022-02-13T23-26-13Z
+        - ``mc support diag``
+        - Command moved to ``mc support``
+   
+      * - RELEASE.2020-11-17T00-39-14Z 
+        - ``mc admin subnet health``
+        - Command made a SUBNET subcommand
+   
+      * - RELEASE.2020-10-03T02-54-56Z
+        - ``mc admin health``
+        - Command renamed to health
+   
+      * - Original Command
+        - ``mc admin obd``
+        - Command renamed ``mc admin health``
 
 
 Description
