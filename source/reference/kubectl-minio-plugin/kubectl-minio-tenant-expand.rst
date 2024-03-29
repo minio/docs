@@ -54,15 +54,19 @@ Syntax
 
       .. code-block:: shell
 
-         kubectl minio tenant expand            \
-                              TENANT_NAME       \
-                              --capacity        \
-                              --servers         \
-                              --volumes         \
-                              --namespace       \
-                              [--output]        \
-                              [--pool]          \
+         kubectl minio tenant expand                            \
+                              TENANT_NAME                       \
+                              [--output]                        \
+                              [--pool]                          \
                               [--storage-class]
+                              --capacity                        \
+                              --servers                         \
+                              --volumes | --volumes-per-server  \
+                              --namespace
+
+      .. include:: /includes/common-minio-mc.rst
+         :start-after: start-minio-syntax
+         :end-before: end-minio-syntax
 
 Flags
 -----
