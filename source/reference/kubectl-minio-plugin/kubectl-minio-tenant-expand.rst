@@ -54,15 +54,19 @@ Syntax
 
       .. code-block:: shell
 
-         kubectl minio tenant expand            \
-                              TENANT_NAME       \
-                              --capacity        \
-                              --servers         \
-                              --volumes         \
-                              --namespace       \
-                              [--output]        \
-                              [--pool]          \
+         kubectl minio tenant expand                            \
+                              TENANT_NAME                       \
+                              [--output]                        \
+                              [--pool]                          \
                               [--storage-class]
+                              --capacity                        \
+                              --servers                         \
+                              --volumes | --volumes-per-server  \
+                              --namespace
+
+      .. include:: /includes/common-minio-mc.rst
+         :start-after: start-minio-syntax
+         :end-before: end-minio-syntax
 
 Flags
 -----
@@ -92,18 +96,33 @@ The command supports the following flags:
 .. mc-cmd:: --volumes
    :required:
 
-   The number of volumes in the new MinIO Tenant Pool. 
+   Mutually exclusive with :mc-cmd:`~kubectl minio tenant expand --volumes-per-server`.
+   Use either :mc-cmd:`~kubectl minio tenant expand --volumes` or :mc-cmd:`~kubectl minio tenant expand --volumes-per-server`.
+
+The number of volumes in the new MinIO Tenant Pool. 
    :mc:`kubectl minio` generates one Persistent Volume Claim (``PVC``) for each volume. 
 
-   The number of volumes affects both the requested storage of each ``PVC`` *and* the number of ``PVC`` to associate to each MinIO Pod in the new Pool:
+   The number of volumes affects both the requested storage of each ``PVC`` *and* the number of ``PVCs`` to associate to each MinIO Pod in the new Pool:
 
    - The command :mc:`kubectl minio` divides the :mc-cmd:`~kubectl minio tenant expand --capacity` by the number of volumes to determine the amount of ``resources.requests.storage`` to set for each ``PVC``.
 
-   - :mc:`kubectl minio` determines the number of ``PVC`` to associate to each ``minio`` server by dividing :mc-cmd:`~kubectl minio tenant expand --volumes` by :mc-cmd:`~kubectl minio tenant expand --servers`.
+   - :mc:`kubectl minio` determines the number of ``PVCs`` to associate to each ``minio`` server by dividing :mc-cmd:`~kubectl minio tenant expand --volumes` by :mc-cmd:`~kubectl minio tenant expand --servers`.
 
-   The command generates each ``PVC`` with Pod-specific selectors, such that each Pod only uses ``PV`` that are locally-attached to the node running that Pod.
+   The command generates each ``PVC`` with Pod-specific selectors, such that each Pod only uses ``PVs`` that are locally-attached to the node running that Pod.
 
-   If the specified number of volumes exceeds the number of unbound ``PV`` available in the cluster, :mc:`kubectl minio tenant expand` hangs and waits until the required ``PV`` exist.
+   If the specified number of volumes exceeds the number of unbound ``PVs`` available in the cluster, :mc:`kubectl minio tenant expand` hangs and waits until the required ``PVs`` exist.
+
+.. mc-cmd:: --volumes-per-server
+   :required:
+
+   Mutually exclusive with :mc-cmd:`~kubectl minio tenant expand --volumes`.
+   Use either :mc-cmd:`~kubectl minio tenant expand --volumes-per-server` or :mc-cmd:`~kubectl minio tenant expand --volumes`.
+
+   Number of volumes to use for each server in the pool.
+
+   Similar to :mc-cmd:`~kubectl minio tenant expand --volumes`, but instead of specifying the total number of volumes for all MinIO servers, associate ``--volumes-per-server`` volumes to each server.
+
+   If the total number of volumes (:mc-cmd:`~kubectl minio tenant expand --volumes-per-server` multiplied by :mc-cmd:`~kubectl minio tenant expand --servers`) exceeds the number of unbound ``PVs`` available on the cluster, :mc:`kubectl minio tenant expand` hangs and waits until the required ``PVs`` exist.
 
 .. mc-cmd:: --namespace
    :optional:

@@ -70,25 +70,29 @@ Syntax
 
       .. code-block:: shell
 
-         kubectl minio tenant create                      \
-                              TENANT_NAME                 \                          
-                              [--interactive]             \
-                              [--disable-tls]             \
-                              [--enable-audit-logs]       \
-                              [--enable-prometheus]       \
-                              [--expose-console-service]  \
-                              [--expose-minio-service]    \
-                              [--image]                   \
-                              [--image-pull-secret]       \
-                              [--kes-config]              \
-                              [--kes-image]               \
-                              [--namespace]               \
-                              [--output]                  \
-                              [--pool]                    \
-                              [--storage-class]           \
-                              --capacity                  \
-                              --servers                   \
-                              --volumes                   \
+         kubectl minio tenant create                            \
+                              TENANT_NAME                       \
+                              [--interactive]                   \
+                              [--disable-tls]                   \
+                              [--enable-audit-logs]             \
+                              [--enable-prometheus]             \
+                              [--expose-console-service]        \
+                              [--expose-minio-service]          \
+                              [--image]                         \
+                              [--image-pull-secret]             \
+                              [--kes-config]                    \
+                              [--kes-image]                     \
+                              [--namespace]                     \
+                              [--output]                        \
+                              [--pool]                          \
+                              [--storage-class]                 \
+                              --capacity                        \
+                              --servers                         \
+                              --volumes | --volumes-per-server  \
+
+      .. include:: /includes/common-minio-mc.rst
+         :start-after: start-minio-syntax
+         :end-before: end-minio-syntax
 
 
 Flags
@@ -139,19 +143,33 @@ The command supports the following flags:
 .. mc-cmd:: --volumes
    :required:
 
-   Total number of volumes to use in the MinIO tenant.
-   
-   :mc-cmd:`kubectl minio tenant create` generates one :kube-docs:`Persistent Volume Claim (PVC)  <concepts/storage/persistent-volumes/#persistentvolumeclaims>` for each volume. 
+   Mutually exclusive with :mc-cmd:`~kubectl minio tenant create --volumes-per-server`.
+   Use either :mc-cmd:`~kubectl minio tenant create --volumes` or :mc-cmd:`~kubectl minio tenant create --volumes-per-server`.
 
-   The number of volumes affects both the requested storage of each ``PVC`` *and* the number of ``PVC`` to associate to each MinIO Pod in the cluster:
+   The total number of volumes in the new MinIO Tenant Pool.
+   :mc-cmd:`kubectl minio tenant create` generates one :kube-docs:`Persistent Volume Claim (PVC) <concepts/storage/persistent-volumes/#persistentvolumeclaims>` for each volume. 
+
+   The number of volumes affects both the requested storage of each ``PVC`` *and* the number of ``PVCs`` to associate to each MinIO Pod in the cluster:
 
    - The command :mc:`kubectl minio` divides the :mc-cmd:`~kubectl minio tenant create --capacity` by the number of volumes to determine the amount of ``resources.requests.storage`` to set for each ``PVC``.
 
-   - :mc:`kubectl minio` determines the number of ``PVC`` to associate to each ``minio`` server by dividing :mc-cmd:`~kubectl minio tenant create --volumes` by :mc-cmd:`~kubectl minio tenant create --servers`.
+   - :mc:`kubectl minio` determines the number of ``PVCs`` to associate to each ``minio`` server by dividing :mc-cmd:`~kubectl minio tenant create --volumes` by :mc-cmd:`~kubectl minio tenant create --servers`.
 
-   The command generates each ``PVC`` with Pod-specific selectors, such that each Pod only uses ``PV`` that are locally-attached to the node running that Pod.
+   The command generates each ``PVC`` with Pod-specific selectors, such that each Pod only uses ``PVs`` that are locally-attached to the node running that Pod.
 
-   If the specified number of volumes exceeds the number of unbound ``PV`` available on the cluster, :mc:`kubectl minio tenant create` hangs and waits until the required ``PV`` exist.
+   If the specified number of volumes exceeds the number of unbound ``PVs`` available on the cluster, :mc:`kubectl minio tenant create` hangs and waits until the required ``PVs`` exist.
+
+.. mc-cmd:: --volumes-per-server
+   :required:
+
+   Mutually exclusive with :mc-cmd:`~kubectl minio tenant create --volumes`.
+   Use either :mc-cmd:`~kubectl minio tenant create --volumes-per-server` or :mc-cmd:`~kubectl minio tenant create --volumes`.
+
+   Number of volumes to use for each server in the pool.
+
+   Similar to :mc-cmd:`~kubectl minio tenant create --volumes`, but instead of specifying the total number of volumes for all MinIO servers, associate ``--volumes-per-server`` volumes to each server.
+
+   If the total number of volumes (:mc-cmd:`~kubectl minio tenant create --volumes-per-server` multiplied by :mc-cmd:`~kubectl minio tenant create --servers`) exceeds the number of unbound ``PVs`` available on the cluster, :mc:`kubectl minio tenant create` hangs and waits until the required ``PVs`` exist.
 
 .. mc-cmd:: --disable-tls
    :optional:
