@@ -72,6 +72,9 @@ Syntax
 
          kubectl minio tenant create                            \
                               TENANT_NAME                       \
+                              --capacity                        \
+                              --servers                         \
+                              --volumes | --volumes-per-server  \
                               [--interactive]                   \
                               [--disable-tls]                   \
                               [--enable-audit-logs]             \
@@ -85,10 +88,7 @@ Syntax
                               [--namespace]                     \
                               [--output]                        \
                               [--pool]                          \
-                              [--storage-class]                 \
-                              --capacity                        \
-                              --servers                         \
-                              --volumes | --volumes-per-server  \
+                              [--storage-class]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -169,7 +169,7 @@ The command supports the following flags:
 
    Similar to :mc-cmd:`~kubectl minio tenant create --volumes`, but instead of specifying the total number of volumes for all MinIO servers, associate ``--volumes-per-server`` volumes to each server.
 
-   If the total number of volumes (:mc-cmd:`~kubectl minio tenant create --volumes-per-server` multiplied by :mc-cmd:`~kubectl minio tenant create --servers`) exceeds the number of unbound ``PVs`` available on the cluster, :mc:`kubectl minio tenant create` hangs and waits until the required ``PVs`` exist.
+   If the combined total number of volumes exceeds the number of unbound ``PVs`` available on the cluster, :mc:`kubectl minio tenant create` hangs and waits until the required ``PVs`` exist.
 
 .. mc-cmd:: --disable-tls
    :optional:
