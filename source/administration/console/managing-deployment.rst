@@ -81,16 +81,10 @@ Watch
 The :guilabel:`Watch` section displays S3 events as they occur on the selected bucket. 
 This section provides similar functionality to :mc:`mc watch`.
 
-Drives
-~~~~~~
+Encryption
+~~~~~~~~~~
 
-The :guilabel:`Drives` section displays the healing status for a bucket. 
-MinIO automatically heals objects and drives when it detects problems, such as drive-level corruption or a replacement drive.
-
-.. important::
-
-   MinIO does not recommend performing manual healing unless explicitly directed by support. 
-
+The :guilabel:`Encryption` section allows you to view the status and metrics for configured :kes-docs:`Key Encryption Service <>` providers.
 
 .. _minio-console-notifications:
 
@@ -135,8 +129,8 @@ You can use keys created or listed in this view for object encryption operations
 
 .. _minio-console-settings:
 
-Settings
---------
+Configuration
+-------------
 
 The :guilabel:`Settings` section provides an interface for viewing and retrieving :ref:`configuration settings <minio-server-configuration-settings>` for all MinIO Servers in the deployment. 
 Use the buttons to :guilabel:`Export` and :guilabel:`Import` the settings between deployments.
