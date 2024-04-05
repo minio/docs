@@ -8,7 +8,7 @@ S3 API Compatibility
    :local:
    :depth: 2
 
-This page documents all S3 APIs supported by MinIO Object Storage.
+This page documents S3 APIs supported by MinIO Object Storage.
 For reference documentation on any given API, see the corresponding documentation for Amazon S3.
 
 .. important::
@@ -55,10 +55,10 @@ Multipart Uploads
 :s3-api:`UploadPart <API_UploadPart.html>`
 :s3-api:`UploadPartCopy <API_UploadPartCopy.html>`
 
-Unsupported API Endpoints
+Unsupported API Object Endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: none
+.. code-block:: text
 
    GetObjectTorrent
    GetObjectAcl
@@ -116,7 +116,7 @@ Bucket Policies
 - :s3-api:`PutBucketPolicy <API_PutBucketPolicy.html>`
 - :s3-api:`DeleteBucketPolicy <API_DeleteBucketPolicy.html>`
 
-Unsupported API Endpoints
+Unsupported API Bucket Endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: none
