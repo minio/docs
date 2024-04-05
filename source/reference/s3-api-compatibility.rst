@@ -47,13 +47,13 @@ Object Locking
 Multipart Uploads
 ~~~~~~~~~~~~~~~~~
 
-:s3-api:`AbortMultipartUpload <API_AbortMultipartUpload.html>`
-:s3-api:`CompleteMultipartUpload <API_CompleteMultipartUpload.html>`
-:s3-api:`CreateMultipartUpload <API_CreateMultipartUpload.html>`
-:s3-api:`ListMultipartUploads <API_ListMultipartUploads.html>`
-:s3-api:`ListParts <API_ListParts.html>`
-:s3-api:`UploadPart <API_UploadPart.html>`
-:s3-api:`UploadPartCopy <API_UploadPartCopy.html>`
+- :s3-api:`AbortMultipartUpload <API_AbortMultipartUpload.html>`
+- :s3-api:`CompleteMultipartUpload <API_CompleteMultipartUpload.html>`
+- :s3-api:`CreateMultipartUpload <API_CreateMultipartUpload.html>`
+- :s3-api:`ListMultipartUploads <API_ListMultipartUploads.html>`
+- :s3-api:`ListParts <API_ListParts.html>`
+- :s3-api:`UploadPart <API_UploadPart.html>`
+- :s3-api:`UploadPartCopy <API_UploadPartCopy.html>`
 
 Unsupported API Object Endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,7 +119,7 @@ Bucket Policies
 Unsupported API Bucket Endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: none
+.. code-block:: text
 
    GetBucketInventoryConfiguration
    PutBucketInventoryConfiguration
