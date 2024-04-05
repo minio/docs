@@ -94,14 +94,14 @@ On that date, Operator automatically renews the tenant's certificate.
 Operator 4.3.3 to 4.5.3
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Operator version 4.3.3 through 4.5.3 automatically renew tenant certificates after they reach 48 hours before expiration.
+Operator versions 4.3.3 through 4.5.3 automatically renew tenant certificates after they reach 48 hours before expiration.
 
 For a certificate that expires on December 31, 2023, Operator renews the certificate on December 29 or December 30, within 48 of the expiration.
 
 Operator 4.3.2 or earlier
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Older versions of Operator 4.3.2 or before do not automatically renew certificates.
+Operator versions 4.3.2 and earlier do not automatically renew certificates.
 You must renew the tenant certificates on these releases separately.
 
 Review Your MinIO License

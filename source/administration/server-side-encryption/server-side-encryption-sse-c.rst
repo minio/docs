@@ -60,7 +60,7 @@ SSE-C with Replication
 
 .. versionchanged:: Server RELEASE.2024-03-30T09-41-56Z
 
-   Objects encrypted with SSE-C can generally now replicate under both site replication or bucket replication.
+   Objects encrypted with SSE-C can replicate through both site replication or bucket replication.
    Previous versions of MinIO Object Store did not replicate SSE-C encrypted objects.
 
 SSE-C encrypted objects that are compressed are not compatible with MinIO :ref:`bucket replication <minio-bucket-replication>` or :ref:`site replication <minio-site-replication-overview>`. 
