@@ -56,7 +56,7 @@ Multipart Uploads
 - :s3-api:`UploadPartCopy <API_UploadPartCopy.html>`
 
 Unsupported API Object Endpoints
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: text
 
@@ -117,7 +117,7 @@ Bucket Policies
 - :s3-api:`DeleteBucketPolicy <API_DeleteBucketPolicy.html>`
 
 Unsupported API Bucket Endpoints
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: text
 
