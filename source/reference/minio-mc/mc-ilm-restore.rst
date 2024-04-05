@@ -29,7 +29,7 @@ tier, while the temporary copy becomes ``HEAD`` for that object.
 .. versionadded:: mc RELEASE.2023-04-12T02-21-51Z
 
    Use :mc:`mc stat` to display whether a restored object reads from the local temporary copy or the remote tier.
-   Restored objects read from the local copy show a status of ``Ongoing : true``.
+   Objects currently in the process of restoration from the remote tier show a status of ``Ongoing : true``.
 
 .. tab-set::
 

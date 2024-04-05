@@ -36,21 +36,8 @@ You should instead rely on your own legal counsel or licensing specialists to au
 MinIO Commercial Licensing is the best option for applications which trigger AGPLv3 obligations (for example, open sourcing your application). 
 Applications using MinIO — or any other OSS-licensed code — without validating their usage do so at their own risk.
 
-Support
--------
-
-Proprietary application stacks that register for a commercial license choose engineering support under either the :guilabel:`Standard` or :guilabel:`Enterprise` License and Support plans.
-Both support plans share the same commercial license to MinIO.
-
-The :guilabel:`Support` section provides an interface for generating health and performance reports.
-Support functionality requires registering your deployment with |subnet|. 
-Unregistered deployments display a :guilabel:`Register Your Cluster` button to register with your |subnet| account.
-See the :guilabel:`License` section in the Console or visit the `MinIO SUBNET <https://min.io/pricing?jmp=docs>` website for more information on registration.
-
-This section contains several subsections.
-
 Health
-~~~~~~
+------
 
 The :guilabel:`Health` section provides an interface for running a health diagnostic for the MinIO Deployment.
 For clusters connected to the Internet, the report uploads automatically to SUBNET.
@@ -61,7 +48,7 @@ Exercise caution before sending a health report to a third party or posting the 
 If desired, you can download the latest report from the page.
 
 Performance
-~~~~~~~~~~~
+-----------
 
 The :guilabel:`Performance` section provides an interface for running a performance test of the deployment.
 The resulting test can provide a general guideline of deployment performance under S3 ``GET`` and ``PUT`` requests.
@@ -69,7 +56,7 @@ The resulting test can provide a general guideline of deployment performance und
 For more complete performance testing, consider using a combination of load-testing using your staging application environments and the MinIO :minio-git:`WARP <warp>` tool.
 
 Profile
-~~~~~~~
+-------
 
 The :guilabel:`Profile` section provides an interface for running system profiling of the deployment.
 The results can provide insight into the MinIO server process running on a given node.
@@ -78,7 +65,7 @@ The resulting report is intended for use by MinIO Engineering via |subnet|.
 Independent or third-party use of these profiles for diagnostics and remediation is done at your own risk.
 
 Inspect
-~~~~~~~
+-------
 
 The :guilabel:`Inspect` section provides an interface for capturing the erasure-coded metadata associated to an object or objects.
 MinIO Engineering may request this output as part of diagnostics in |subnet|.

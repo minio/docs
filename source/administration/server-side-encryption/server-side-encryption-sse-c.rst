@@ -55,14 +55,16 @@ which specified that |EK| when requesting SSE-C encryption.
 Considerations
 --------------
 
-SSE-C is Incompatible with Bucket Replication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SSE-C with Replication
+~~~~~~~~~~~~~~~~~~~~~~
 
-SSE-C encrypted objects are not compatible with MinIO 
-:ref:`bucket replication <minio-bucket-replication>`. Use
-:ref:`SSE-KMS <minio-encryption-sse-kms>` or
-:ref:`SSE-S3 <minio-encryption-sse-s3>` to ensure encrypted
-objects are compatible with bucket replication.
+.. versionchanged:: Server RELEASE.2024-03-30T09-41-56Z
+
+   Objects encrypted with SSE-C can replicate through both site replication or bucket replication.
+   Previous versions of MinIO Object Store did not replicate SSE-C encrypted objects.
+
+SSE-C encrypted objects that are compressed are not compatible with MinIO :ref:`bucket replication <minio-bucket-replication>` or :ref:`site replication <minio-site-replication-overview>`. 
+Use :ref:`SSE-KMS <minio-encryption-sse-kms>` or :ref:`SSE-S3 <minio-encryption-sse-s3>` to ensure encrypted objects are compatible with replication.
 
 SSE-C Overrides SSE-S3 and SSE-KMS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

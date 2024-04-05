@@ -79,6 +79,31 @@ Tenant Registration
    
    You can obtain the key from |SUBNET| through the Console by selecting :guilabel:`Get from SUBNET`.
 
+TLS Certificate Renewal
+-----------------------
+
+Operator 4.5.4 or later
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Operator versions 4.5.4 and later automatically renew a tenant's certificates when the duration of the certificate has reached 80% of its life.
+
+For example, a tenant certificate was issued on January 1, 2023, and set to expire on December 31, 2023.
+80% of the 1 year life of the certificate comes on day 292, or October 19, 2023.
+On that date, Operator automatically renews the tenant's certificate.
+
+Operator 4.3.3 to 4.5.3
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Operator versions 4.3.3 through 4.5.3 automatically renew tenant certificates after they reach 48 hours before expiration.
+
+For a certificate that expires on December 31, 2023, Operator renews the certificate on December 29 or December 30, within 48 of the expiration.
+
+Operator 4.3.2 or earlier
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Operator versions 4.3.2 and earlier do not automatically renew certificates.
+You must renew the tenant certificates on these releases separately.
+
 Review Your MinIO License
 -------------------------
 

@@ -120,7 +120,7 @@ When managing a bucket, your access settings may allow you to view or change any
 Tiers
 -----
 
-The :guilabel:`Tiers` section provides an interface for adding and managing :ref:`remote tiers <minio-lifecycle-management-tiering>` to support lifecycle management transition rules.
+The :guilabel:`Tiering` section provides an interface for adding and managing :ref:`remote tiers <minio-lifecycle-management-tiering>` to support lifecycle management transition rules.
 MinIO tiering supports moving objects from the deployment to the remote storage, but does not support automatically restoring them to the deployment.
 
 The tiering tab allows users with the appropriate permissions to:
