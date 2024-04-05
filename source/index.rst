@@ -179,6 +179,7 @@ For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio
       File Transfer Protocol <https://min.io/docs/minio/linux/developers/file-transfer-protocol.html?ref=docs>
       MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
       MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
+      S3 API Compatibility <https://min.io/docs/minio/linux/reference/s3-api-compatibility.html?ref=docs>
       Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
 
 .. cond:: linux
@@ -195,6 +196,7 @@ For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio
       /reference/minio-mc-admin
       /reference/minio-mc-deprecated
       /reference/minio-server/minio-server
+      /reference/s3-api-compatibility
       /integrations/integrations
 
 .. cond:: k8s
@@ -209,6 +211,7 @@ For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio
       /developers/file-transfer-protocol
       MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
       MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
+      S3 API Compatibility <https://min.io/docs/minio/linux/reference/s3-api-compatibility.html?ref=docs>
       Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
       /reference/kubectl-minio-plugin
       /reference/operator-crd
