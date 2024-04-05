@@ -52,6 +52,7 @@ excludes:
 - 'reference/operator-chart-values.rst'
 - 'reference/operator-environment-variables.rst'
 - 'reference/tenant-chart-values.rst'
+- 'reference/s3-api-compatibility.rst'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -83,6 +84,7 @@ excludes:
 - 'reference/operator-chart-values.rst'
 - 'reference/operator-environment-variables.rst'
 - 'reference/tenant-chart-values.rst'
+- 'reference/s3-api-compatibility.rst'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -106,6 +108,7 @@ excludes:
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
 - 'reference/deprecated/*'
+- 'reference/s3-api-compatibility.rst'
 - 'reference/operator-crd.rst'
 - 'reference/operator-chart-values.rst'
 - 'reference/operator-environment-variables.rst'
@@ -126,7 +129,7 @@ excludes:
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
 - 'reference/deprecated/*'
-- 'reference/deprecated/*'
+- 'reference/s3-api-compatibility.rst'
 - 'developers/dotnet/*'
 - 'developers/go/*'
 - 'developers/haskell/*'
@@ -152,6 +155,7 @@ excludes:
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
 - 'reference/deprecated/*'
+- 'reference/s3-api-compatibility.rst'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -168,6 +172,7 @@ excludes:
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
 - 'reference/deprecated/*'
+- 'reference/s3-api-compatibility.rst'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -184,6 +189,7 @@ excludes:
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
 - 'reference/deprecated/*'
+- 'reference/s3-api-compatibility.rst'
 - 'developers/*'
 - 'integrations/*'
 ---
@@ -200,5 +206,6 @@ excludes:
 - 'reference/minio-server*'
 - 'reference/minio-mc*'
 - 'reference/deprecated/*'
+- 'reference/s3-api-compatibility.rst'
 - 'developers/*'
 - 'integrations/*'

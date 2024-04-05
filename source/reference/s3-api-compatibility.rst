@@ -58,13 +58,12 @@ Multipart Uploads
 Unsupported API Endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``GetObjectTorrent``
+.. code-block:: none
 
-- ``GetObjectAcl``
-
-- ``PutObjectAcl``
-
-- ``WriteGetObjectResponse``
+   GetObjectTorrent
+   GetObjectAcl
+   PutObjectAcl
+   WriteGetObjectResponse
 
 Bucket APIs
 -----------
@@ -120,49 +119,37 @@ Bucket Policies
 Unsupported API Endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- | ``GetBucketInventoryConfiguration``
-  | ``PutBucketInventoryConfiguration``
-  | ``DeleteBucketInventoryConfiguration``
+.. code-block:: none
 
-- | ``PutBucketCors``
-  | ``DeleteBucketCors``
-
-
-- | ``GetBucketMetricsConfiguration``
-  | ``PutBucketMetricsConfiguration``
-  | ``DeleteBucketMetricsConfiguration``
-
-- | ``PutBucketWebsite``
-
-- | ``GetBucketLogging``
-  | ``PutBucketLogging``
-
-- | ``PutBucketAccelerateConfiguration``
-  | ``DeleteBucketAccelerateConfiguration``
-
-- | ``PutBucketRequestPayment``
-  | ``DeleteBucketRequestPayment``
-
-- | ``PutBucketAcl``
-  | ``HeadBucketAcl``
-
-- | ``GetPublicAccessBlock``
-  | ``PutPublicAccessBlock``
-  | ``DeletePublicAccessBlock``
-
-- | ``GetBucketOwnershipControls``
-  | ``PutBucketOwnershipControls``
-  | ``DeleteBucketOwnershipControls``
-
-- | ``GetBucketIntelligentTieringConfiguration``
-  | ``PutBucketIntelligentTieringConfiguration``
-  | ``ListBucketIntelligentTieringConfigurations``
-  | ``DeleteBucketIntelligentTieringConfiguration``
-
-
-- | ``GetBucketAnalyticsConfiguration``
-  | ``PutBucketAnalyticsConfiguration``
-  | ``ListBucketAnalyticsConfigurations``
-  | ``DeleteBucketAnalyticsConfiguration``
-
-- | ``CreateSession``
+   GetBucketInventoryConfiguration
+   PutBucketInventoryConfiguration
+   DeleteBucketInventoryConfiguration
+   PutBucketCors
+   DeleteBucketCors
+   GetBucketMetricsConfiguration
+   PutBucketMetricsConfiguration
+   DeleteBucketMetricsConfiguration
+   PutBucketWebsite
+   GetBucketLogging
+   PutBucketLogging
+   PutBucketAccelerateConfiguration
+   DeleteBucketAccelerateConfiguration
+   PutBucketRequestPayment
+   DeleteBucketRequestPayment
+   PutBucketAcl
+   HeadBucketAcl
+   GetPublicAccessBlock
+   PutPublicAccessBlock
+   DeletePublicAccessBlock
+   GetBucketOwnershipControls
+   PutBucketOwnershipControls
+   DeleteBucketOwnershipControls
+   GetBucketIntelligentTieringConfiguration
+   PutBucketIntelligentTieringConfiguration
+   ListBucketIntelligentTieringConfigurations
+   DeleteBucketIntelligentTieringConfiguration
+   GetBucketAnalyticsConfiguration
+   PutBucketAnalyticsConfiguration
+   ListBucketAnalyticsConfigurations
+   DeleteBucketAnalyticsConfiguration
+   CreateSession
