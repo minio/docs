@@ -333,7 +333,10 @@ You **cannot** change the erasure set stripe size after the cluster has been ini
    - Parity Configuration
    - Workload Efficiency
 
-   MinIO provides the `Erasure Code Calculator <https://min.io/product/erasure-code-calculator?jmp=docs>`__ to provide a baseline of potential configurations for your deployments.
+   MinIO's default stripe selection algorithms are typically sufficient for the majority of workloads.
+
+   **Do not** change the stripe size setting unless directed to by MinIO engineering.
+   Changes to stripe size have significant impact to deployment functionality, availability, performance, and behavior and **cannot be reversed**.
    |subnet| users should log in and open an issue to discuss stripe size settings prior to implementing them in testing or production workloads.
 
-   MinIO's default stripe selection algorithms are typically sufficient for the majority of workloads.
+   
