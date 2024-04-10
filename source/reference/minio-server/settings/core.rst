@@ -295,3 +295,45 @@ Defaults to ``"text/*, application/json, application/xml, binary/octet-stream"``
    Some	types of files cannot be significantly reduced in size.
    MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.mime_types` argument.
    See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
+
+Erasure Stripe Size
+~~~~~~~~~~~~~~~~~~~
+
+.. tab-set:: 
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_ERASURE_SET_DRIVE_COUNT
+
+   .. tab-item:: Configuration Variable
+      :sync: config
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
+
+*Optional*
+
+The :ref:`erasure set size <minio-ec-basics>` to apply for all drives in a given :term:`server pool`.
+
+You **must** set this value before you first start the server pool nodes.
+The stripe size selected for the first server pool becomes a baseline minimum for any additional server pools.
+
+You **cannot** change the erasure set stripe size once the deployment starts.
+
+**Do not** deploy custom stripe sizes into production without first validating in lower environments using a mix of performance, stress, and real-workload tests.
+
+.. important::
+
+   Stripe size impacts multiple areas of functionality, including:
+
+   - Storage Capacity
+   - Failure Tolerance
+   - Parity Configuration
+   - Workload Efficiency
+
+   MinIO provides the `Erasure Code Calculator <https://min.io/product/erasure-code-calculator?jmp=docs>`__ to provide a baseline of potential configurations for your deployments.
+   |subnet| users should log in and open an issue to discuss stripe size settings prior to implementing them in testing or production workloads.
+
+   MinIO's default stripe selection algorithms are typically sufficient for the majority of workloads.
