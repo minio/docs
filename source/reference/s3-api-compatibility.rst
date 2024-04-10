@@ -60,10 +60,8 @@ Unsupported API Object Endpoints
 
 .. code-block:: text
 
-   GetObjectTorrent
    GetObjectAcl
    PutObjectAcl
-   WriteGetObjectResponse
 
 Bucket APIs
 -----------
