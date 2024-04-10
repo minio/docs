@@ -320,7 +320,7 @@ The :ref:`erasure set size <minio-ec-basics>` to apply for all drives in a given
 You **must** set this value before you first start the server pool nodes.
 The stripe size selected for the first server pool becomes a baseline minimum for any additional server pools.
 
-You **cannot** change the erasure set stripe size once the deployment starts.
+You **cannot** change the erasure set stripe size after the cluster has been initialized.
 
 **Do not** deploy custom stripe sizes into production without first validating in lower environments using a mix of performance, stress, and real-workload tests.
 
