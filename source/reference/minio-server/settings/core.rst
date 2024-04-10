@@ -317,26 +317,17 @@ Erasure Stripe Size
 
 The :ref:`erasure set size <minio-ec-basics>` to apply for all drives in a given :term:`server pool`.
 
-You **must** set this value before you first start the server pool nodes.
-The stripe size selected for the first server pool becomes a baseline minimum for any additional server pools.
+You **must** set this value before you initialize the cluster.
+The selected stripe size is **immutable** after the cluster has been initialized and affects any future server pools added to the cluster.
 
-You **cannot** change the erasure set stripe size after the cluster has been initialized.
-
-**Do not** deploy custom stripe sizes into production without first validating in lower environments using a mix of performance, stress, and real-workload tests.
+|subnet| users should log in and open an issue to discuss stripe size settings prior to implementing them in any environment.
 
 .. important::
 
-   Stripe size impacts multiple areas of functionality, including:
-
-   - Storage Capacity
-   - Failure Tolerance
-   - Parity Configuration
-   - Workload Efficiency
-
+   **Do not** change the stripe size setting unless directed to by MinIO engineering.
+   
+   Changes to stripe size have significant impact to deployment functionality, availability, performance, and behavior.
    MinIO's default stripe selection algorithms are typically sufficient for the majority of workloads.
 
-   **Do not** change the stripe size setting unless directed to by MinIO engineering.
-   Changes to stripe size have significant impact to deployment functionality, availability, performance, and behavior and **cannot be reversed**.
-   |subnet| users should log in and open an issue to discuss stripe size settings prior to implementing them in testing or production workloads.
 
    
