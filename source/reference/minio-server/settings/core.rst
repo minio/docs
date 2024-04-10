@@ -295,3 +295,40 @@ Defaults to ``"text/*, application/json, application/xml, binary/octet-stream"``
    Some	types of files cannot be significantly reduced in size.
    MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.mime_types` argument.
    See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
+
+Erasure Stripe Size
+~~~~~~~~~~~~~~~~~~~
+
+.. tab-set:: 
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_ERASURE_SET_DRIVE_COUNT
+
+   .. tab-item:: Configuration Variable
+      :sync: config
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
+
+*Optional*
+
+The :ref:`erasure set size <minio-ec-basics>` to apply for all drives in a given :term:`server pool`.
+
+If you set this value, you **must** do so *before* you initialize the cluster
+The selected stripe size is **immutable** after the cluster has been initialized and affects any future server pools added to the cluster.
+
+|subnet| users should log in and open an issue to discuss stripe size settings prior to implementing them in any environment.
+
+.. important::
+
+   **Do not** change the stripe size setting unless directed to by MinIO engineering.
+   
+   Changes to stripe size have significant impact to deployment functionality, availability, performance, and behavior.
+   MinIO's stripe selection algorithms set appropriate defaults for the majority of workloads.
+   Changing the stripe size from this default is unusual and generally not necessary or advised.
+
+
+   
