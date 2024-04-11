@@ -322,7 +322,7 @@ The selected stripe size is **immutable** after the cluster has been initialized
 
 |subnet| users should log in and open an issue to discuss stripe size settings prior to implementing them in any environment.
 
-.. important::
+.. warning::
 
    **Do not** change the stripe size setting unless directed to by MinIO engineering.
    
