@@ -20,6 +20,33 @@ This page covers settings that control core behavior of the MinIO process.
    :start-after: start-minio-settings-test-before-prod
    :end-before: end-minio-settings-test-before-prod
 
+MinIO Options
+~~~~~~~~~~~~~
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_OPTS
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+  
+      There is no configuration setting for this variable, as these settings apply at server startup.
+
+*Optional*
+
+Set a string of :ref:`parameters <minio-server-parameters>` to use when starting the MinIO Server.
+For example, to set up ftp access, you could set the variable to something like the following:
+
+.. code-block:: shell
+   :class: copyable
+
+   export MINIO_OPTS=' "--console-address="9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
+
+On Unix-like systems, you can save a file with the environment variable to ``/etc/defaults/minio`` instead of setting the variable manually.
+
 Common Settings
 ---------------
 
