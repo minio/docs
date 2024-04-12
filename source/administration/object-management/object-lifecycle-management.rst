@@ -127,21 +127,10 @@ MinIO has two specific default behaviors for versioned buckets:
 Lifecycle Management Object Scanner
 -----------------------------------
 
-MinIO uses a built-in scanner to actively check objects against all configured lifecycle management rules. 
+MinIO uses a built-in :ref:`scanner <minio-concepts-scanner>` to actively check objects against all configured lifecycle management rules. 
+
 The scanner is a low-priority process that yields to high :abbr:`I/O (Input / Output)` workloads to prevent performance spikes triggered by rule timing. 
 The scanner may therefore not detect an object as eligible for a configured transition or expiration lifecycle rule until *after* the lifecycle rule period has passed.
-
-Scanner performance typically depends on the available node resources, the size of the cluster, and the complexity of bucket hierarchy (objects and prefixes).
-For example, a cluster that starts with 100TB of data that then grows to 200TB of data may require more time to scan the entire namespace of buckets and objects given the same hardware and workload.
-As the cluster or workload increases, scanner performance decreases as it yields more frequently to ensure priority of normal S3 operations.
-
-.. include:: /includes/common/scanner.rst
-   :start-after: start-scanner-speed-config
-   :end-before: end-scanner-speed-config
-
-Consider regularly checking cluster metrics, capacity, and resource usage to ensure the cluster hardware is scaling alongside cluster and workload growth:
-
-- :ref:`minio-metrics-and-alerts`
 
 .. toctree::
    :hidden:

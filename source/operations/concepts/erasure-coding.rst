@@ -165,6 +165,8 @@ The following table lists the outcome of varying erasure code parity levels on a
      - 8
      - 9
 
+.. _minio-ec-bitrot:
+
 Bitrot Protection
 -----------------
 
