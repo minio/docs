@@ -299,10 +299,11 @@ Defaults to ``off``.
 
 .. start-minio-ad-ldap-server-starttls
 
-Specify ``on`` to enable 
-`StartTLS <https://ldapwiki.com/wiki/StartTLS>`__ connections to AD/LDAP server.
+Specify ``on`` to enable ``StartTLS`` connections to an AD/LDAP server.
 
 Defaults to ``off``
+
+For more about ``StartTLS``, refer to section 4.14 of the `LDAP RFC 4511 specification <https://docs.ldap.com/specs/rfc4511.txt>`__.
 
 .. end-minio-ad-ldap-server-starttls
 
