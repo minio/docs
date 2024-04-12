@@ -25,6 +25,8 @@ For examples of deploying :mc:`minio server` on a bare metal environment, see :r
 For examples of deploying :mc:`minio server` on a Kubernetes environment, see :ref:`Deploying a MinIO Tenant <minio-k8s-deploy-minio-tenant>`.
 
 
+.. _minio-server-parameters:
+
 Syntax
 ~~~~~~
 
@@ -231,10 +233,15 @@ The command accepts the following arguments:
 
    Outputs server logs and startup information in ``JSON`` format.
 
+.. note::
+
+   You can define any of the ``minio`` parameters above by setting them in the :envvar:`MINIO_OPTS` environment variable.
+   This variable takes as its value a single string that contains any of the above parameters and their values that you want to set when starting the MinIO Server.
+
 Settings
 --------
 
-You can perform additional customizations to the MinIO Server process by defining :ref:`Configuration Values <minio-server-configuration-options>` or :ref:`Environment Variables <minio-server-environment-variables>`.
+You can perform other customizations to the MinIO Server process by defining additional :ref:`Configuration Values <minio-server-configuration-options>` or :ref:`Environment Variables <minio-server-environment-variables>`.
 
 Many configuration values and environment variables define the same value.
 If you set both a configuration value and the matching environment variable, MinIO uses the value from the environment variable.
