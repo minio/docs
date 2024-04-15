@@ -5,7 +5,8 @@
 
 Enabling |SSE| on a MinIO deployment automatically encrypts the backend data for that deployment using the default encryption key.
 
-MinIO *requires* access to KES *and* the root KMS to decrypt the backend and start normally.
+MinIO *requires* access to KES and the external KMS to decrypt the backend and start normally.
+The KMS **must** maintain and provide access to the :envvar:`MINIO_KMS_KES_KEY_NAME`.
 You cannot disable KES later or "undo" the |SSE| configuration at a later point.
 
 .. end-kes-encrypted-backend-desc

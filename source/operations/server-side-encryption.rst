@@ -56,6 +56,9 @@ supports the following encryption strategies:
       For buckets without automatic SSE-KMS encryption, clients can specify
       an |EK| as part of the write operation instead.
 
+      MinIO encrypts backend data as part of enabling server-side encryption.
+      You cannot disable SSE-KMS encryption once enabled.
+
       SSE-KMS provides more granular and customizable encryption compared to
       SSE-S3 and SSE-C and is recommended over the other supported encryption
       methods.
@@ -71,6 +74,9 @@ supports the following encryption strategies:
 
       For buckets without automatic SSE-S3 encryption, clients can request
       SSE encryption as part of the write operation instead.
+
+      MinIO encrypts backend data as part of enabling server-side encryption.
+      You cannot disable SSE-KMS encryption once enabled.
 
       For a tutorial on enabling SSE-s3 in a local (non-production) MinIO Deployment, see :ref:`minio-encryption-sse-s3-quickstart`.
 

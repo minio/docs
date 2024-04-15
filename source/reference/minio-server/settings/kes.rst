@@ -60,6 +60,12 @@ Refer to your operating system's documentation for how to define an environment 
 
    - The encryption key for Server-Side Encryption with :ref:`SSE-S3 <minio-encryption-sse-s3>`.
 
+   .. important::
+
+      .. include:: /includes/common/common-minio-kes.rst
+         :start-after: start-kes-encrypted-backend-desc
+         :end-before: end-kes-encrypted-backend-desc
+
 .. envvar:: MINIO_KMS_KES_ENCLAVE
 
    Use this optional environment variable to define the name of a KES enclave.
