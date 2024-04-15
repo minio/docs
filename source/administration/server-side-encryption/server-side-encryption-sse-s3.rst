@@ -61,6 +61,12 @@ following KMS providers:
 Quickstart
 ----------
 
+.. important::
+
+   .. include:: /includes/common/common-minio-kes.rst
+      :start-after: start-kes-encrypted-backend-desc
+      :end-before: end-kes-encrypted-backend-desc
+
 The following procedure uses the ``play`` MinIO |KES| sandbox for 
 supporting |SSE| with SSE-S3 in evaluation and early development environments.
 
