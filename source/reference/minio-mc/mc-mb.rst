@@ -187,7 +187,7 @@ Enable Object Locking at Bucket Creation
 MinIO follows 
 :s3-docs:`AWS S3 behavior <object-lock-overview.html#object-lock-bucket-config>` 
 where you *must* enable :ref:`object locking <minio-object-locking>` at
-bucket creation. Buckets created without object can *never* enable object
+bucket creation. Buckets created without object locking can *never* enable object
 retention or locking.
 
 Enabling bucket locking does *not* set any object locking or retention settings.
