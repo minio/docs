@@ -66,7 +66,7 @@ Parameters
 
    .. code-block:: shell
 
-      mc tree myminio/mybucket
+      mc watch myminio/mybucket
 
 .. mc-cmd:: --event
    
