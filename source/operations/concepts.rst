@@ -166,7 +166,7 @@ MinIO Uses :ref:`Erasure Coding <minio-erasure-coding>` for Data Redundancy and 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 MinIO Erasure Coding is a data redundancy and availability feature that allows MinIO deployments with multiple drives to automatically reconstruct objects on-the-fly despite the loss of multiple drives or nodes in the cluster. 
-Erasure Coding provides object-level healing with significantly less overhead than adjacent technologies such as RAID or replication.
+Erasure Coding provides object-level :ref:`healing <minio-concepts-healing>` with significantly less overhead than adjacent technologies such as RAID or replication.
 
 
 MinIO Implements Bit Rot Healing to Protect Data At Rest
@@ -187,7 +187,7 @@ Some common reasons for bit rot include:
 
 MinIO uses a hashing algorithm to confirm the integrity of an object.
 This algorithm automatically applies at the time of any ``GET`` request that calls an object.
-If an object becomes corrupted by bit rot, MinIO can automatically heal the object depending on the availability of parity shards for the object.
+If an object becomes corrupted by bit rot, MinIO can automatically :ref:`heal <minio-concepts-healing>` the object depending on the availability of parity shards for the object.
 
 While bit rot healing can be done during the routine checks of the :ref:`MinIO Scanner <minio-concepts-scanner>`, this function is off by default.
 Bit rot is a low risk, especially if an object has multiple shards spread across multiple disks.

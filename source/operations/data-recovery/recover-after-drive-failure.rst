@@ -12,7 +12,7 @@ Drive Failure Recovery
 
 MinIO supports hot-swapping failed drives with new healthy drives. MinIO detects
 and heals those drives without requiring any node or deployment-level restart.
-MinIO healing occurs only on the replaced drive(s) and does not typically impact
+:ref:`MinIO healing <minio-concepts-healing>` occurs only on the replaced drive(s) and does not typically impact
 deployment performance.
 
 MinIO healing ensures consistency and correctness of all data restored onto the
@@ -117,7 +117,7 @@ Use :mc:`mc admin console` command *or* ``journalctl -u minio`` for
 remounting drives. The output should include messages identifying each formatted
 and empty drive.
 
-Use :mc:`mc admin heal` to monitor the overall healing status on the
+Use :mc:`mc admin heal` to monitor the overall :ref:`healing <minio-concepts-healing>` status on the
 deployment. MinIO aggressively heals replaced drive(s) to ensure rapid recovery
 from the degraded state.
 

@@ -124,7 +124,7 @@ Parameters
    Expire all current **and** noncurrent versions of an object.
    Use with the :mc-cmd:`~mc ilm rule add --expire-days` option to specify the number of days after which all versions of an object should be deleted by the scanner process.
 
-   After the :ref:`scanner <minio-lifecycle-management-scanner>` processes this command, no versions of the object remain on the deployment.
+   After the :ref:`scanner <minio-concepts-scanner>` processes this command, no versions of the object remain on the deployment.
 
 .. mc-cmd:: --expire-days
    :optional:   
@@ -136,7 +136,7 @@ Parameters
    For versioned buckets, the expiry rule applies only to the *current* object version. 
    Use the :mc-cmd:`~mc ilm rule add --noncurrent-expire-days` option to apply expiration behavior to noncurrent object versions.
 
-   MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
+   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -157,7 +157,7 @@ Parameters
    - :mc-cmd:`~mc ilm rule add --tags`
    - :mc-cmd:`~mc ilm rule add --expire-days`
 
-   MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
+   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -176,7 +176,7 @@ Parameters
 
    Requires specifying :mc-cmd:`~mc ilm rule add --transition-tier`.
 
-   MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
+   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -198,7 +198,7 @@ Parameters
 
    This option has the same behavior as the S3 ``NoncurrentVersionExpiration`` action.
 
-   MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
+   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -213,7 +213,7 @@ Parameters
 
    This option has the same behavior as the S3 ``NoncurrentVersionTransition`` action.
 
-   MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
+   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -257,7 +257,7 @@ Parameters
    Updating the number for this flag only impacts the unmarked versions of objects.
    Any versions already marked for expiration do not change if you increase the number to retain.
 
-   MinIO uses a scanner process to check objects against all configured lifecycle management rules. 
+   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
    
@@ -438,7 +438,7 @@ Behavior
 Lifecycle Management Object Scanner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO uses a scanner process to check objects against all configured
+MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
 lifecycle management rules. Slow scanning due to high IO workloads or
 limited system resources may delay application of lifecycle management
 rules. See :ref:`minio-lifecycle-management-scanner` for more information.

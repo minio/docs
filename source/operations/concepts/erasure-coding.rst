@@ -113,7 +113,7 @@ If Parity ``EC:M`` is exactly 1/2 the erasure set size, **write quorum** is ``K+
 
    The ``K+1`` logic ensures that a client could not potentially write the same object twice - once to each "half" of the erasure set.
 
-For an object maintaining **read quorum**, MinIO can use any data or parity shard to heal damaged shards.
+For an object maintaining **read quorum**, MinIO can use any data or parity shard to :ref:`heal <minio-concepts-healing>` damaged shards.
    .. figure:: /images/erasure/erasure-coding-shard-healing.svg
       :figwidth: 100%
       :align: center

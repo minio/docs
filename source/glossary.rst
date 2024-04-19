@@ -223,7 +223,10 @@ Glossary
      
      - lifecycle management rules requiring object transition
      - bucket or site replication status
-     - object :term:`bit rot` and healing
+     - object :term:`bit rot` and :term:`healing`
+     - usage data
+
+     For more, see :ref:`minio-concepts-scanner`.
 
    self signed certificates
      A self-signed certificate is one created by, issued by, and signed by the company or developer responsible for the content the certificate secures.

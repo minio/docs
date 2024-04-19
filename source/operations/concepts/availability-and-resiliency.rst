@@ -172,7 +172,7 @@ MinIO implements :ref:`site replication <minio-site-replication-overview>` as th
       Each peer site is deployed to an independent datacenter to provide protection from large-scale failure or disaster.
       If one datacenter goes completely offline, clients can fail over to the other site.
 
-MinIO replication can automatically heal a site that has partial or total data loss due to transient or sustained downtime. 
+MinIO replication can automatically :ref:`heal <minio-concepts-healing>` a site that has partial or total data loss due to transient or sustained downtime. 
    .. figure:: /images/availability/availability-multi-site-healing.svg
       :figwidth: 100%
       :alt: Diagram of a multi-site deployment while healing

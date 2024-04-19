@@ -160,7 +160,7 @@ Scanner Speed
       .. mc-conf:: scanner speed
          :delimiter: " "
 
-Manage the maximum wait period for the scanner when balancing MinIO read/write performance to scanner processes.
+Manage the maximum wait period for the :ref:`scanner <minio-concepts-scanner>` when balancing MinIO read/write performance to scanner processes.
    
 .. include:: /includes/common/scanner.rst
    :start-after: start-scanner-speed-values

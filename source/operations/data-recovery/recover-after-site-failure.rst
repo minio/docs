@@ -132,7 +132,7 @@ Passive Bucket Replication Resynchronization
 
 As a passive process, bucket replication may not perform as quickly as desired for a site recovery scenario.
 
-Using bucket replication relies on the standard replication scanner queue, which does not take priority over other processes.
+Using bucket replication relies on the standard replication :ref:`scanner <minio-concepts-scanner>` queue, which does not take priority over other processes.
 For recovery procedures with stricter SLA/SLO, use the active bucket replication process with :mc:`mc replicate resync` command as described above.
 
 Bucket replication rules copy the object, its version ID, versions, and other metadata to the target bucket.

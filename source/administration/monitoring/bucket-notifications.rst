@@ -186,15 +186,15 @@ Specify the wildcard ``*`` character to select all events related to a prefix:
 Scanner Events
 ~~~~~~~~~~~~~~
 
-MinIO supports triggering notifications on the following S3 scanner transition events:
+MinIO supports triggering notifications on the following S3 :ref:`scanner <minio-concepts-scanner>` transition events:
 
 .. data:: s3:Scanner:ManyVersions
 
-   Scanner finds objects with more than 1,000 versions.
+   :ref:`Scanner <minio-concepts-scanner>` finds objects with more than 1,000 versions.
 
 .. data:: s3:Scanner:BigPrefix
 
-   Scanner finds prefixes with more than 50,000 sub-folders.
+   :ref:`Scanner <minio-concepts-scanner>` finds prefixes with more than 50,000 sub-folders.
 
 Global Events
 ~~~~~~~~~~~~~

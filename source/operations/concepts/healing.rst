@@ -58,7 +58,7 @@ There **must** be a parity shard available for each lost or damaged data shard.
 Healing with the object scanner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO utilizes an object scanner to perform a number of tasks related to objects.
+MinIO utilizes an :ref:`object scanner <minio-concepts-scanner>` to perform a number of tasks related to objects.
 One of these tasks checks the integrity of objects and, if found damaged or corrupted, heals them.
 
 On each scanning pass, MinIO selects one out of every 1,024 objects to check.
