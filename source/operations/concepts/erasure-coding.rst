@@ -167,8 +167,8 @@ The following table lists the outcome of varying erasure code parity levels on a
 
 .. _minio-ec-bitrot:
 
-Bitrot Protection
------------------
+Bit Rot Protection
+------------------
 
 `Bit rot <https://en.wikipedia.org/wiki/Data_degradation>`__ is silent data corruption from random changes at the storage media level.
 For data drives, it is typically the result of decay of the electrical charge or magnetic orientation that represents the data.

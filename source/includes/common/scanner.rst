@@ -7,7 +7,7 @@ You can adjust how MinIO balances the scanner performance with read/write operat
 
 .. start-scanner-speed-values
 
-MinIO utilizes the scanner for :ref:`bucket replication <minio-bucket-replication>`, :ref:`site replication <minio-site-replication-overview>`, and :ref:`lifecycle management <minio-lifecycle-management>` tasks.
+MinIO utilizes the :ref:`scanner <minio-concepts-scanner>` for :ref:`bucket replication <minio-bucket-replication>`, :ref:`site replication <minio-site-replication-overview>`, :ref:`lifecycle management <minio-lifecycle-management>`, and :ref:`healing <minio-concepts-healing>` tasks.
 
 Valid values include:
 

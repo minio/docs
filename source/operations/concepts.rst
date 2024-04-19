@@ -186,7 +186,12 @@ Some common reasons for bit rot include:
 - accidental overwrites
 
 MinIO uses a hashing algorithm to confirm the integrity of an object.
-If an object becomes corrupted by bit rot, MinIO can automatically heals the object depending on the system topology and availability.
+This algorithm automatically applies at the time of any ``GET`` request that calls an object.
+If an object becomes corrupted by bit rot, MinIO can automatically heal the object depending on the availability of parity shards for the object.
+
+While bit rot healing can be done during the routine checks of the :ref:`MinIO Scanner <minio-concepts-scanner>`, this function is off by default.
+Bit rot is a low risk, especially if an object has multiple shards spread across multiple disks.
+Due to the relatively high performance cost compared to a relatively low benefit, MinIO generally recommends not activating bit rot checks during scanning.
 
 MinIO Distributes Data Across :ref:`Erasure Sets <minio-ec-erasure-set>` for High Availability and Resiliency
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -203,7 +208,7 @@ MinIO calculates the size and number of Erasure Sets in a Server Pool based on t
 MinIO Automatically Heals Corrupt or Missing Data On-the-fly
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Healing is MinIO's ability to restore data after some event causes data loss.
+:ref:`Healing <minio-concepts-healing>` is MinIO's ability to restore data after some event causes data loss.
 Data loss can come from bit rot, drive loss, or node loss.
 
 :ref:`Erasure coding <minio-erasure-coding>` provides continued read and write access if an object has been partially lost.
