@@ -17,18 +17,18 @@ MinIO uses the built-in scanner to check objects for healing and to take any sch
 Such actions may include:
 
 - calculate data usage on drives
-- apply configured :ref:`lifecycle management <minio-lifecycle-management>` or :ref:`object retention <minio-object-retention>` rules
-- :ref:`bucket <minio-bucket-replication>` or :ref:`site <minio-site-replication-overview>` replication
+- evaluate and apply configured :ref:`lifecycle management <minio-lifecycle-management>` or :ref:`object retention <minio-object-retention>` rules
+- perform :ref:`bucket <minio-bucket-replication>` or :ref:`site <minio-site-replication-overview>` replication
 - check objects for missing or corrupted data or parity shards and perform :ref:`healing <minio-concepts-healing>`
 
 The scanner performs these functions at two levels: cluster and bucket.
-At the cluster level, the scanner splits all buckets into sets and scans one set at a time.
+At the cluster level, the scanner splits all buckets into groups and scans one group of buckets at a time.
 The scanner starts with new buckets, then randomizes the scanning of other buckets.
-The scanner completes checks on all bucket sets before starting over with a new set of scans.
+The scanner completes checks on all bucket groups before starting over with a new set of scans.
 
 At the bucket level, the scanner groups items in buckets and scans selected items from that bucket.
 The scanner selects objects for a scan based on a hash of the object name.
-Over a span of 16 scans, MinIO checks every object it knows about.
+Over a span of 16 scans, MinIO checks every object in the namespace.
 
 Scan Length
 -----------
@@ -36,13 +36,13 @@ Scan Length
 Multiple factors impact the time it takes for a scan to complete.
 
 Some of these factors include:
-- Type of hard drives provided to MinIO
-- Throughput available
+- Type of drives provided to MinIO
+- Throughput and :abbr:`iops <input/output operations per second>` available
 - Number and size of objects
 - Other activity on the MinIO Server
 
-For example, MinIO may pause the scanner to make I/O operations available for read and write requests.
-This lengthens the time it takes for a scan to complete.
+For example, by default, MinIO pauses the scanner to make I/O operations available for read and write requests.
+This can lengthen the time it takes for a scan to complete.
 
 MinIO waits between each scan by a factor multiplication of the time it takes each scan operation to complete.
 By default, the value of this factor is ``10.0``, meaning MinIO waits 10x the length of an operation after one scan completes before starting the next scan.
@@ -51,8 +51,14 @@ MinIO also applies a maximum wait time between operations, set to ``15s`` by def
 Scanner Performance
 -------------------
 
-Scanner performance typically depends on the available node resources, the size of the cluster, the number of erasure sets compared to the number of drives, and the complexity of bucket hierarchy (objects and prefixes).
-For example, a cluster that starts with 100TB of data that then grows to 200TB of data may require more time to scan the entire namespace of buckets and objects given the same hardware and workload.
+Many factors impact the scanner performance.
+Some of these factors include:
+- available node resources
+- size of the cluster
+- number of erasure sets compared to the number of drives
+- complexity of bucket hierarchy (objects and prefixes).
+
+For example, a cluster that starts with 100TB of data and then grows to 200TB of data may require more time to scan the entire namespace of buckets and objects given the same hardware and workload.
 Likewise, a single erasure set of 16 drives takes longer to scan than the same number of drives split into two erasure sets of 8 drives each.
 
 MinIO treats the scanner as a background task and pauses it in favor of completing read and write requests on the cluster.
@@ -67,11 +73,12 @@ Scanner Metrics
 
 MinIO provides a number of `metrics related to the scanner <https://min.io/docs/minio/linux/operations/monitoring/metrics-and-alerts.html#scanner-metrics>`__.
 
-The metrics updated by the scanner, including usage metrics, reflect the last completed scan. 
-``PUT`` or ``DELETE`` operations since the last scan do not update in the usage until the next scan of the affected bucket(s).
-
 Use ``mc admin scanner info`` to see the current status of the scanner and the time since the last full scan.
 This can help in understanding the metrics provided by the scanner operation.
+
+Scanner metrics, including usage metrics, reflect the last completed scan. 
+``PUT`` or ``DELETE`` operations since the last scan do not update in the usage until the next scan of the affected bucket(s).
+
 
 The output resembles the following:
 

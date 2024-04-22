@@ -97,7 +97,7 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
    Site replication operations retry up to three (3) times.
    
    MinIO dequeues replication operations that fail to replicate after three attempts.
-   The :ref:`scanner <minio-concepts-scanner>` can pick up those affected objects at a later time and requeue them for replication.
+   The :ref:`scanner <minio-concepts-scanner>` picks up those affected objects at a later time and requeues them for replication.
 
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
 

@@ -10,19 +10,15 @@ Drive Failure Recovery
    :local:
    :depth: 1
 
-MinIO supports hot-swapping failed drives with new healthy drives. MinIO detects
-and heals those drives without requiring any node or deployment-level restart.
-:ref:`MinIO healing <minio-concepts-healing>` occurs only on the replaced drive(s) and does not typically impact
-deployment performance.
+MinIO supports hot-swapping failed drives with new healthy drives. 
+MinIO detects and heals those drives without requiring any node or deployment-level restart.
+:ref:`MinIO healing <minio-concepts-healing>` occurs only on the replaced drive(s) and in most cases has minimal or negligible impact on deployment performance.
 
-MinIO healing ensures consistency and correctness of all data restored onto the
-drive. **Do not** attempt to manually recover or migrate data from the failed
-drive onto the new healthy drive.
+MinIO healing ensures consistency and correctness of all data restored onto the drive. 
+**Do not** attempt to manually recover or migrate data from the failed drive onto the new healthy drive.
 
 The following steps provide a more detailed walkthrough of drive replacement.
-These steps assume a MinIO deployment where each node manages drives using
-``/etc/fstab`` with per-drive labels as per the
-:ref:`documented prerequisites <minio-installation>`.
+These steps assume a MinIO deployment where each node manages drives using ``/etc/fstab`` with per-drive labels as per the :ref:`documented prerequisites <minio-installation>`.
 
 1) Unmount the failed drive(s)
 ------------------------------

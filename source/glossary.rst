@@ -40,7 +40,7 @@ Glossary
      MinIO combats bit rot with :term:`hashing` and :term:`erasure coding`.
 
    bit rot healing
-     Objects corrupted due to bit rot automatically restore to a healed state at time of read during any ``GET`` operation.
+     Objects corrupted due to bit rot are automatically :term:`healed <healing>` during any ``GET`` or ``HEAD`` operation.
      MinIO captures and heals corrupted objects on the fly with its :term:`hashing` implementation.
 
    bucket

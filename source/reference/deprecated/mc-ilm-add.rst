@@ -313,10 +313,9 @@ Behavior
 Lifecycle Management Object Scanner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
-lifecycle management rules. Slow scanning due to high IO workloads or
-limited system resources may delay application of lifecycle management
-rules. See :ref:`minio-lifecycle-management-scanner` for more information.
+MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against the configured lifecycle management rules. 
+Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
+See :ref:`minio-lifecycle-management-scanner` for more information.
 
 Expiry vs Transition
 ~~~~~~~~~~~~~~~~~~~~

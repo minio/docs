@@ -10,6 +10,8 @@ Key Encryption Service Settings
    :local:
    :depth: 2
 
+.. |SSE|           replace:: :abbr:`SSE (Server-Side Encryption)`
+
 The following environment variables control how the MinIO Server interacts with the Key Encryption Service (KES) when managing encryption and keys.
 
 .. note::
