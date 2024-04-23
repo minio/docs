@@ -23,12 +23,13 @@ Such actions may include:
 
 The scanner performs these functions at two levels: cluster and bucket.
 At the cluster level, the scanner splits all buckets into groups and scans one group of buckets at a time.
-The scanner starts with new buckets, then randomizes the scanning of other buckets.
+The scanner starts with any new buckets added since the last scan, then randomizes the scanning of other buckets.
 The scanner completes checks on all bucket groups before starting over with a new set of scans.
 
 At the bucket level, the scanner groups items in buckets and scans selected items from that bucket.
 The scanner selects objects for a scan based on a hash of the object name.
 Over a span of 16 scans, MinIO checks every object in the namespace.
+MinIO fully scans any prefixes known to be new since the last scan.
 
 Scan Length
 -----------
@@ -46,7 +47,7 @@ This can lengthen the time it takes for a scan to complete.
 
 MinIO waits between each scan by a factor multiplication of the time it takes each scan operation to complete.
 By default, the value of this factor is ``10.0``, meaning MinIO waits 10x the length of an operation after one scan completes before starting the next scan.
-MinIO also applies a maximum wait time between operations, set to ``15s`` by default.
+The value of this factor changes depending on the configured :ref:`scanner speed setting <minio-scanner-speed-options>`. 
 
 Scanner Performance
 -------------------

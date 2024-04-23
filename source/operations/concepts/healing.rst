@@ -32,7 +32,8 @@ The ability of MinIO to restore a damaged object relates directly to the followi
   For example, an erasure set may have eight total drives and use three drives during a write for parity.
   In this scenario, MinIO splits an object into 5 data shards and create 3 parity shards.
   MinIO distributes these eight shards across the drives in the erasure set.
-  No one drive contains only parity shards or only data shards as a protection.
+  No one drive contains only parity shards or only data shards.
+  Instead, MinIO writes shards for each object in a randomized way to distribute reads evenly across drives.
 
   When MinIO needs to provide the object, it looks for the data shards for the object.
   If any of the data shards are missing or damaged, MinIO uses one or more of the parity shards to restore the object.
@@ -67,7 +68,7 @@ One of these tasks checks the integrity of objects and, if found damaged or corr
 
 On each scanning pass, MinIO uses a hash of the object name to select one out of every 1,024 objects to check.
 
-If any object is found to have lost data shards, MinIO heals the object from available parity shards.
+If any object is found to have lost shards, MinIO heals the object from available shards.
 By default, MinIO does *not* check for :term:`bit rot` corruption using the scanner.
 This can be an expensive operation to perform and the risk of bit rot across multiple disks is low.
 
