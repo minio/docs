@@ -2,7 +2,6 @@
    - /monitoring/bucket-notifications/publish-events-to-amqp.rst
 
 .. Used in the following pages:
-
    /reference/minio-cli/minio-mc/mc-rm.rst
    /reference/minio-cli/minio-mc/mc-mv.rst
    /reference/minio-cli/minio-mc/mc-mirror.rst
@@ -47,3 +46,35 @@ object at a filesystem path, :mc:`mc` recursively deletes all empty directories
 within that path up to the root as part of the removal operation.
 
 .. end-remove-api-trims-prefixes-fs
+
+.. The following exclusive access admonition is used on a number of pages:
+   - administration/object-management.rst
+   - administration/concepts.rst
+   - operations/concepts.rst
+   - operations/data-recovery.rst
+   - operations/checklists/hardware.rst
+   - operations/checklists/software.rst
+   - operations/concepts/availability-and-resiliency.rst
+   - operations/concepts/erasure-coding.rst
+   - operations/data-recover/recover-after-drive-failure.rst
+   - operations/data-recover/recover-after-node-failure.rst
+   - operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.rst
+   - operations/install-deploy-manage/deploy-minio-single-node-multi-drive.rst
+   - operations/install-deploy-manage/deploy-minio-single-node-single-drive.rst
+   - operations/install-deploy-manage/deploy-minio-tenant.rst
+   - operations/install-deploy-manage/expand-minio-deployment.rst
+   - operations/install-deploy-manage/expand-minio-tenant.rst
+   - glossary.rst
+
+.. start-exclusive-drive-access
+
+.. admonition:: Exclusive access to drives
+   :class: warning
+
+   MinIO **requires** *exclusive* access to the drives or volumes provided for object storage.
+   No other processes, software, scripts, or human interactions should perform any actions directly on the drives or volumes provided to MinIO or the objects or files MinIO places on them.
+   
+   Unless directed by MinIO Engineering, do not use scripts or non-S3 tools to modify, delete, or move any of the data shards, parity shards, or metadata files on the provided drives, including from one drive or node to another.
+   Such operations can easily result in widespread corruption and loss of data beyond MinIO's ability to heal.
+
+.. end-exclusive-drive-access

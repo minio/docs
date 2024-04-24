@@ -82,6 +82,10 @@ Persist Drive Mounting and Mapping Across Reboots
 
    Non-Linux Operating Systems should use the equivalent drive mount management tool.
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 Memory Requirements
 ~~~~~~~~~~~~~~~~~~~
 

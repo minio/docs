@@ -163,3 +163,7 @@ MinIO provides a configuration option to create buckets with versioning enabled.
 When enabled, MinIO writes mutated objects to a different version than the original, allowing access to both the original object and the newer, changed object.
 
 Additional configurations on the MinIO bucket determine how long to retain older versions of each object in the bucket.
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access

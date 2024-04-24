@@ -103,3 +103,7 @@ Post Install Tasks
    * - :octicon:`circle`
      - | Authenticate to MinIO with :ref:`Security Token Service (STS) <minio-security-token-service>`
        | Enabling this requires MinIO support.
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
