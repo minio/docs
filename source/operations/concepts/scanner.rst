@@ -37,8 +37,9 @@ Scan Length
 Multiple factors impact the time it takes for a scan to complete.
 
 Some of these factors include:
+
 - Type of drives provided to MinIO
-- Throughput and :abbr:`iops <input/output operations per second>` available
+- Throughput and :abbr:`iops (input/output operations per second)` available
 - Number and size of objects
 - Other activity on the MinIO Server
 
@@ -54,6 +55,7 @@ Scanner Performance
 
 Many factors impact the scanner performance.
 Some of these factors include:
+
 - available node resources
 - size of the cluster
 - number of erasure sets compared to the number of drives

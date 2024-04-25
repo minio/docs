@@ -15,6 +15,7 @@ What is healing?
 
 Healing is MinIO's ability to restore an object that has been damaged, corrupted, or partially lost.
 The loss can come from multiple types of corruptions or loss, such as but not limited to:
+
 - drive-level errors or failure
 - OS or filesystem errors or failure
 - :ref:`bit rot <minio-ec-bitrot>`
