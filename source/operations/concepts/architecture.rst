@@ -52,7 +52,7 @@ MinIO automatically groups drives in the pool into :ref:`erasure sets <minio-ec-
    MinIO stripes erasure sets symmetrically across the nodes in the pool to maintain even distribution of erasure set drives.
    MinIO then partitions objects into data and parity shards based on the deployment :ref:`parity <minio-ec-parity>` and distributes them across an erasure set.
 
-   For a more complete discussion of MinIO redundancy and healing, see :ref:`minio-erasure-coding`.
+   For a more complete discussion of MinIO redundancy and healing, see :ref:`minio-erasure-coding` and :ref:`minio-concepts-healing`.
 
    .. figure:: /images/architecture/architecture-erasure-set-shard.svg
       :figwidth: 100%

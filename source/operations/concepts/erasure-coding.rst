@@ -113,7 +113,7 @@ If Parity ``EC:M`` is exactly 1/2 the erasure set size, **write quorum** is ``K+
 
    The ``K+1`` logic ensures that a client could not potentially write the same object twice - once to each "half" of the erasure set.
 
-For an object maintaining **read quorum**, MinIO can use any data or parity shard to heal damaged shards.
+For an object maintaining **read quorum**, MinIO can use any data or parity shard to :ref:`heal <minio-concepts-healing>` damaged shards.
    .. figure:: /images/erasure/erasure-coding-shard-healing.svg
       :figwidth: 100%
       :align: center
@@ -169,8 +169,10 @@ The following table lists the outcome of varying erasure code parity levels on a
      - 8
      - 9
 
-Bitrot Protection
------------------
+.. _minio-ec-bitrot:
+
+Bit Rot Protection
+------------------
 
 `Bit rot <https://en.wikipedia.org/wiki/Data_degradation>`__ is silent data corruption from random changes at the storage media level.
 For data drives, it is typically the result of decay of the electrical charge or magnetic orientation that represents the data.

@@ -31,7 +31,7 @@ and links to procedures for recovering from each:
      - MinIO supports hot-swapping failed drives with new healthy drives. 
 
    * - :ref:`Node Failure <minio-restore-hardware-failure-node>`
-     - MinIO detects when a node rejoins the deployment and begins proactively healing the node shortly after it is joined back to the cluster healing data previously stored on that node.
+     - MinIO detects when a node rejoins the deployment and begins proactively :ref:`healing <minio-concepts-healing>` the node shortly after it is joined back to the cluster healing data previously stored on that node.
 
    * - :ref:`Site Failure <minio-restore-hardware-failure-site>`
      - MinIO Site Replication supports complete resynchronization of buckets, objects, and replication-eligible configuration settings after total site loss.

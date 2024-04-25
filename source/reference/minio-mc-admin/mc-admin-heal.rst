@@ -23,7 +23,9 @@ corrupted and heals those objects.
 :mc-cmd:`mc admin heal` is resource intensive and typically not required even
 after drive failures or corruption events. Instead, MinIO automatically heals
 objects damaged by silent bit rot corruption, drive failure, or other issues on
-POST/GET. MinIO also performs periodic background object healing.
+``POST`` or ``GET``. MinIO also performs periodic background object healing using the :ref:`scanner <minio-concepts-scanner>`.
+
+Refer to :ref:`minio-concepts-healing` for more details on how MinIO heals objects.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -95,26 +97,8 @@ Syntax
      
      Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
 
-Healing Output Color Key
-------------------------
+Healing Colors
+--------------
 
-Originally, the healing mechanism output a table that used a Green-Yellow-Red-Gray color key to attempt to differentiate the status of objects in healing.
-These colors have been deprecated in favor of more detailed :ref:`healing metrics available at the cluster level <minio-metrics-and-alerts-available-metrics>`.
-
-The following table describes the intent of each of the deprecated color keys.
-
-.. list-table::
-   :widths: 25 75
-   :width: 100%
-
-   * - **Green**
-     - *Healthy*, the object has all data and parity shards available as required to serve the object
- 
-   * - **Yellow** 
-     - *Healing*, the object is still in the process of healing, and there are sufficient data or parity shards available to complete the healing
-
-   * - **Red** 
-     - *Unhealthy*, the object has lost one or more shards and requires healing
-
-   * - **Grey** 
-     -  *Unrecoverable*, the object has lost too many data and/or parity shards and cannot be healed or recovered
+Some versions of MinIO used a color key as a way to differentiate objects with different healing statuses.
+For details of this key, see the :ref:`Healing <minio-concepts-healing-colors>` concept page.

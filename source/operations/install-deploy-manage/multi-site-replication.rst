@@ -97,7 +97,7 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
    Site replication operations retry up to three (3) times.
    
    MinIO dequeues replication operations that fail to replicate after three attempts.
-   The scanner can pick up those affected objects at a later time and requeue them for replication.
+   The :ref:`scanner <minio-concepts-scanner>` picks up those affected objects at a later time and requeues them for replication.
 
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
 
@@ -107,7 +107,7 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
 .. versionchanged:: RELEASE.2022-12-02T23-48-47Z
 
    If one site loses data for any reason, resynchronize the data from another healthy site with :mc-cmd:`mc admin replicate resync`.
-   This launches an active process that resynchronizes the data without waiting for the passive MinIO scanner to recognize the missing data.
+   This launches an active process that resynchronizes the data without waiting for the passive :ref:`MinIO scanner <minio-concepts-scanner>` to recognize the missing data.
 
 .. include:: /includes/common/scanner.rst
    :start-after: start-scanner-speed-config

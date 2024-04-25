@@ -11,7 +11,7 @@ Node Failure Recovery
    :depth: 1
 
 If a MinIO node suffers complete hardware failure (e.g. loss of all drives,
-data, etc.), the node begins healing operations once it rejoins the deployment.
+data, etc.), the node begins :ref:`healing operations <minio-concepts-healing>` once it rejoins the deployment.
 MinIO healing occurs only on the replaced hardware and does not typically impact
 deployment performance.
 
@@ -77,7 +77,7 @@ using :mc:`mc admin console` or by monitoring the MinIO service logs
 using ``journalctl -u minio`` for ``systemd`` managed installations.
 
 The server output should indicate that it has detected the other nodes
-in the deployment and begun healing operations.
+in the deployment and begun :ref:`healing operations <minio-concepts-healing>`.
 
 Use :mc:`mc admin heal` to monitor overall healing status on the
 deployment. MinIO aggressively heals the node to ensure rapid recovery

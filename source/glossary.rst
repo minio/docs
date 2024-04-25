@@ -40,7 +40,7 @@ Glossary
      MinIO combats bit rot with :term:`hashing` and :term:`erasure coding`.
 
    bit rot healing
-     Objects corrupted due to bit rot automatically restore to a healed state at time of read.
+     Objects corrupted due to bit rot are automatically :term:`healed <healing>` during any ``GET`` or ``HEAD`` operation.
      MinIO captures and heals corrupted objects on the fly with its :term:`hashing` implementation.
 
    bucket
@@ -223,7 +223,10 @@ Glossary
      
      - lifecycle management rules requiring object transition
      - bucket or site replication status
-     - object :term:`bit rot` and healing
+     - object :term:`bit rot` and :term:`healing`
+     - usage data
+
+     For more, see :ref:`minio-concepts-scanner`.
 
    self signed certificates
      A self-signed certificate is one created by, issued by, and signed by the company or developer responsible for the content the certificate secures.

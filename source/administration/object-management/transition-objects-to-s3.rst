@@ -95,7 +95,7 @@ Considerations
 Lifecycle Management Object Scanner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO uses a scanner process to check objects against all configured
+MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
 lifecycle management rules. Slow scanning due to high IO workloads or
 limited system resources may delay application of lifecycle management
 rules. See :ref:`minio-lifecycle-management-scanner` for more information.

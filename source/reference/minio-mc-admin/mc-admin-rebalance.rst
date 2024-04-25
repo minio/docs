@@ -178,5 +178,5 @@ Starting with :minio-release:`RELEASE.2023-06-23T20-26-00Z`, rebalancing ignores
 Rebalancing also ignores objects where the only remaining version is a :ref:`delete marker <minio-bucket-versioning-delete>`.
 This avoids inter-pool :abbr:`I/O (Input/Output)` for objects already considered fully deleted.
 
-MinIO relies on the :ref:`scanner <minio-lifecycle-management-scanner>` to capture and remove those expired objects or trailing ``DeleteMarker`` objects.
+MinIO relies on the :ref:`scanner <minio-concepts-scanner>` to capture and remove those expired objects or trailing ``DeleteMarker`` objects.
 
