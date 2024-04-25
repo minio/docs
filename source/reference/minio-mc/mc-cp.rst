@@ -201,7 +201,7 @@ Parameters
 .. mc-cmd:: --newer-than
    :optional:
 
-   Remove object(s) newer than the specified number of days.  
+   Copy object(s) newer than the specified number of days.  
    Specify a string in ``#d#hh#mm#ss`` format. 
    For example: ``--older-than 1d2hh3mm4ss``
 
@@ -210,7 +210,7 @@ Parameters
 .. mc-cmd:: --older-than
    :optional:
 
-   Remove object(s) older than the specified time limit. 
+   Copy object(s) older than the specified time limit. 
    Specify a string in ``#d#hh#mm#ss`` format. 
    For example: ``--older-than 1d2hh3mm4ss``
       

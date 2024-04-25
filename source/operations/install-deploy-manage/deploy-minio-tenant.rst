@@ -174,6 +174,10 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 Persistent Volumes
 ~~~~~~~~~~~~~~~~~~
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 .. cond:: not eks
 
    MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.

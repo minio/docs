@@ -97,6 +97,10 @@ Storage Requirements
    :start-after: start-storage-requirements-desc
    :end-before: end-storage-requirements-desc
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 Minimum Drives for Erasure Code Parity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

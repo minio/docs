@@ -47,8 +47,12 @@ in a degraded state (increasing drive errors, SMART warnings, timeouts in MinIO
 logs, etc.), you can safely unmount the drive *if* the cluster has sufficient
 remaining healthy drives to maintain
 :ref:`read and write quorum <minio-ec-parity>`. Missing drives are less
-disruptive to the deployment than drives that are reliably producing read and
+disruptive to the deployment than drives that are consistently producing read and
 write errors.
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
 
 .. admonition:: MinIO Professional Support
    :class: note

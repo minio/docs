@@ -21,6 +21,10 @@ An :ref:`object <objects>` is binary data, such as images, audio files, spreadsh
 The term "Binary Large Object" or "blob" is sometimes associated to object storage, although blobs can be anywhere from a few bytes to several terabytes in size.
 Object Storage platforms like MinIO provide dedicated tools and capabilities for storing, listing, and retrieving objects using a standard S3-compatible API. 
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 .. _buckets:
 
 MinIO Object Storage uses :ref:`buckets <buckets>` to organize objects. 

@@ -215,6 +215,10 @@ Data loss can come from bit rot, drive loss, or node loss.
 
 :ref:`Erasure coding <minio-erasure-coding>` provides continued read and write access if an object has been partially lost.
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 MinIO Writes Data Protection at the Object Level with Parity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
