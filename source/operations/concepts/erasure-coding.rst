@@ -125,6 +125,10 @@ For an object maintaining **read quorum**, MinIO can use any data or parity shar
 Use the MinIO `Erasure Coding Calculator <https://min.io/product/erasure-code-calculator>`__ to explore the possible erasure set size and distributions for your planned topology.
 Where possible, use an even number of nodes and drives per node to simplify topology planning and conceptualization of drive/erasure-set distribution.
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 .. _minio-ec-parity:
 
 Erasure Parity and Storage Efficiency

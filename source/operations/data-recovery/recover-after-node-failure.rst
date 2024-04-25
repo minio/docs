@@ -16,8 +16,11 @@ MinIO healing occurs only on the replaced hardware and does not typically impact
 deployment performance.
 
 MinIO healing ensures consistency and correctness of all data restored onto the
-drive. **Do not** attempt to manually recover or migrate data from the failed
-node onto the new healthy node.
+drive.
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
 
 The replacement node hardware should be substantially similar to the failed
 node. There are no negative performance implications to using improved hardware.

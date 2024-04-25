@@ -198,6 +198,10 @@ The following table provides general guidelines for allocating memory for use by
 Storage
 ~~~~~~~
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 .. cond:: k8s
 
    MinIO recommends provisioning a storage class for each MinIO Tenant that meets the performance objectives for that tenant.

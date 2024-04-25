@@ -251,6 +251,10 @@ Glossary
      A portion of an object after being :term:`erasure coded <erasure coding>` by MinIO.
      Each "shard" represents either data or parity for MinIO to use for reconstructing objects on read requests.
 
+     .. include:: /includes/common-admonitions.rst
+        :start-after: start-exclusive-drive-access
+        :end-before: end-exclusive-drive-access
+     
      For more detailed information, see :ref:`minio-erasure-coding`.
 
    single-node multi-drive

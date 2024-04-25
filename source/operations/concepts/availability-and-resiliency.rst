@@ -161,6 +161,10 @@ For multi-pool MinIO deployments, each pool requires at least one erasure set ma
    Use replicated remotes to restore the lost data to the deployment.
    All data stored on the healthy pools remain safe on disk.
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 Replicated MinIO Deployments
 ----------------------------
 
