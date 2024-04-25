@@ -50,6 +50,10 @@ remaining healthy drives to maintain
 disruptive to the deployment than drives that are consistently producing read and
 write errors.
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 .. admonition:: MinIO Professional Support
    :class: note
 
@@ -59,10 +63,6 @@ write errors.
 
    Community users can seek support on the `MinIO Community Slack <https://slack.min.io>`__. 
    Community Support is best-effort only and has no SLAs around responsiveness.
-
-.. include:: /includes/common-admonitions.rst
-   :start-after: start-exclusive-drive-access
-   :end-before: end-exclusive-drive-access
 
 .. toctree::
    :titlesonly:

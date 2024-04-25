@@ -72,9 +72,9 @@ within that path up to the root as part of the removal operation.
    :class: warning
 
    MinIO **requires** *exclusive* access to the drives or volumes provided for object storage.
-   No other processes, software, scripts, or human interactions should perform any actions directly on the drives or volumes provided to MinIO or the objects or files MinIO places on them.
+   No other processes, software, scripts, or persons should perform *any* actions directly on the drives or volumes provided to MinIO or the objects or files MinIO places on them.
    
-   Unless directed by MinIO Engineering, do not use scripts or non-S3 tools to modify, delete, or move any of the data shards, parity shards, or metadata files on the provided drives, including from one drive or node to another.
-   Such operations can easily result in widespread corruption and loss of data beyond MinIO's ability to heal.
+   Unless directed by MinIO Engineering, do not use scripts or tools to directly modify, delete, or move any of the data shards, parity shards, or metadata files on the provided drives, including from one drive or node to another.
+   Such operations are very like to result in widespread corruption and data loss beyond MinIO's ability to heal.
 
 .. end-exclusive-drive-access

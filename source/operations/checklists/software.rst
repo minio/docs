@@ -93,6 +93,10 @@ Post Install Tasks
    * - :octicon:`circle`
      - Configure :ref:`Object storage level rules with tiering <minio-lifecycle-management-tiering>` to move objects between hot, warm, and cold storage and maximize storage cost efficiencies
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
+
 3rd Party Identity Provider Tasks
 ---------------------------------
 
@@ -103,7 +107,3 @@ Post Install Tasks
    * - :octicon:`circle`
      - | Authenticate to MinIO with :ref:`Security Token Service (STS) <minio-security-token-service>`
        | Enabling this requires MinIO support.
-
-.. include:: /includes/common-admonitions.rst
-   :start-after: start-exclusive-drive-access
-   :end-before: end-exclusive-drive-access

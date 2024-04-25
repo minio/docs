@@ -129,6 +129,9 @@ Besides replication, MinIO provides a mirroring service.
 :mc:`mc mirror` copies only the actual object to any other S3 compatible data store, including other MinIO stores.
 However, versions and metadata do not back up with the :mc:`mc mirror` command.
 
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-exclusive-drive-access
+   :end-before: end-exclusive-drive-access
 
 What tools does MinIO provide to manage objects based on speed and frequency of access?
 ---------------------------------------------------------------------------------------
@@ -163,7 +166,3 @@ MinIO provides a configuration option to create buckets with versioning enabled.
 When enabled, MinIO writes mutated objects to a different version than the original, allowing access to both the original object and the newer, changed object.
 
 Additional configurations on the MinIO bucket determine how long to retain older versions of each object in the bucket.
-
-.. include:: /includes/common-admonitions.rst
-   :start-after: start-exclusive-drive-access
-   :end-before: end-exclusive-drive-access
