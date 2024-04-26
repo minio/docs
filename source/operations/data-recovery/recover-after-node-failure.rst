@@ -73,8 +73,8 @@ in the deployment.
 ------------------------------------
 
 Start the MinIO server process on the node and monitor the process output
-using :mc:`mc admin console` or by monitoring the MinIO service logs
-using ``journalctl -u minio`` for ``systemd`` managed installations.
+using :mc:`mc admin logs` or by monitoring the MinIO service logs using 
+``journalctl -u minio`` for ``systemd`` managed installations.
 
 The server output should indicate that it has detected the other nodes
 in the deployment and begun :ref:`healing operations <minio-concepts-healing>`.

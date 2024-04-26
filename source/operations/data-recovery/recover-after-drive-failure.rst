@@ -111,7 +111,7 @@ The command should result in remounting of all of the replaced drives.
 5) Monitor MinIO for Drive Detection and Healing Status
 -------------------------------------------------------
 
-Use :mc:`mc admin console` command *or* ``journalctl -u minio`` for
+Use :mc:`mc admin logs` command *or* ``journalctl -u minio`` for
 ``systemd``-managed installations to monitor the server log output after
 remounting drives. The output should include messages identifying each formatted
 and empty drive.
