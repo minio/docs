@@ -28,8 +28,16 @@ Use the :mc:`mc support perf` command to review the performance of the S3 API (r
 .. end-mc-support-perf-desc
 
 The resulting tests can provide general guidance of deployment performance under S3 ``GET`` and ``PUT`` requests and identify any potential bottlenecks.
+
+.. admonition:: Other S3 API calls suspended during testing
+   :class: note
+
+   For S3 testing, :mc:`mc support perf` temporarily suspends S3 API calls during a test.
+   They are automatically restarted after the test is complete or if the command is cancelled.
+
 For more complete performance testing, consider using a combination of load-testing using your staging application environments and the MinIO `WARP <https://github.com/minio/warp>`_ S3 benchmarking tool.
-   
+
+
 :mc:`mc support perf` has the following subcommands
 
 #. :mc-cmd:`~mc support perf drive`
