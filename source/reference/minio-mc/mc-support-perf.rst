@@ -37,7 +37,8 @@ For more complete performance testing, consider using a combination of load-test
    Measure the speed of drives in a MinIO deployment.
 
    :mc-cmd:`mc support perf drive` temporarily suspends S3 API calls during the test.
-   Incoming requests are queued until the test is complete or the command is cancelled.
+   Incoming requests are held in a queue while the command runs.
+   When the command completes or ends, MinIO processes the queued requests and resumes normal operations.
 
 #. :mc-cmd:`~mc support perf object`
       
@@ -48,7 +49,8 @@ For more complete performance testing, consider using a combination of load-test
    Measure the network throughput of all nodes.
 
    :mc-cmd:`mc support perf net` temporarily suspends S3 API calls during the test.
-   Incoming requests are queued until the test is complete or the command is cancelled.
+   Incoming requests are held in a queue while the command runs.
+   When the command completes or ends, MinIO processes the queued requests and resumes normal operations.
 
 #. :mc-cmd:`~mc support perf client`
 
