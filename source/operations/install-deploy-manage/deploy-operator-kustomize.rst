@@ -14,7 +14,11 @@ Deploy Operator With Kustomize
 Overview
 --------
 
-`Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is part of kubectl
+`Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is a YAML-based templating tool that allows you to define Operator and Tenant templates using plain Kubernetes YAML reference language.
+Kustomize is included with the `Kubectl <https://kubernetes.io/docs/reference/kubectl/>`__ command line tool.
+
+The `default MinIO Operator template <https://github.com/minio/operator/blob/master/kustomization.yaml>`__ provides a starting point for customizing configurations for your local environment.
+You can modify a Kustomize Operator deployment after installation with patches, which are additional YAML configurations applied over the existing base.
 
 
 Prerequisites
@@ -24,10 +28,10 @@ To install the Operator with Kustomize you will need the following:
 
 * An existing Kubernetes cluster, v1.21 or later.
 * The ``kubectl`` CLI tool on your local host, the same version as the cluster.
-* `Docker <https://docker.com>`__ version something or greater.
+* `Docker <https://docker.com>`__ for your platform.
 * Access to run ``kubectl`` commands on the cluster from your local host.
 
-For more about Operator installation requirements, including supported Kubernetes versions and TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
+For more about Operator installation requirements, including TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
 
 This procedure assumes familiarity with the referenced Kubernetes concepts and utilities.
 While this documentation may provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
@@ -37,20 +41,20 @@ While this documentation may provide guidance for configuring or deploying Kuber
 Install the MinIO Operator using Kustomize
 ------------------------------------------
 
-The following procedure installs the Operator from the MinIO Operator GitHub repository using `kubectl kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>__.
-You can modify the Operator deployment after installation.
+The following procedure uses ``kubectl --kustomize`` to install the Operator from the MinIO Operator GitHub repository:
 
 .. important::
 
    Do not use ``kubectl krew`` or similar methods to update or manage the MinIO Operator installation.
-   If you use ``kustomize`` to install the Operator, you must use ``kustomize`` to manage that installation.
+   If you use Kustomize to install the Operator, you must use Kustomize to manage that installation.
 
 #. Install the latest version of Operator
 
    .. code-block:: shell
       :class: copyable
+      :substitutions:
 
-      kubectl apply -k github.com/minio/operator\?ref=|OPERATOR|
+      kubectl apply -k github.com/minio/operator\?ref=|operator-version-stable|
 
    The output resembles the following:
 
@@ -89,14 +93,17 @@ You can modify the Operator deployment after installation.
       console-6b6cf8946c-9cj25          1/1     Running   0          99s
       minio-operator-69fd675557-lsrqg   1/1     Running   0          99s
 
-      The ``minio-operator`` pod is MinIO Operator and the ``console` pod is the Operator Console.
+   In this example, the ``minio-operator`` pod is MinIO Operator and the ``console`` pod is the Operator Console.
+
+   You can modify your Operator deplyoment by applying Kustomize patches.
+   You can find examples for common configurations in the `Operator GitHub repository <https://github.com/minio/operator/tree/master/examples/kustomization>`__.
 
 #. (Optional) Configure access to the Operator Console port
 
    If needed, configure access to the Operator Console port.
    Depending on your local policies, this could be a Kubernetes load balancer, ingress, or similar control plane component that enables external access.
 
-   For testing purposes, you can access Operator Console by configuring a NodePort with the following Kustomize patch:
+   For testing purposes, you can access Operator Console by configuring a NodePort using the following Kustomize patch:
 
    .. code-block:: shell
       :class: copyable
@@ -123,26 +130,6 @@ You can modify the Operator deployment after installation.
               "type": "NodePort"
           }
       }'
-
-
-
-#. Retrieve the Operator Console JWT for login
-
-   .. code-block:: shell
-      :class: copyable
-
-      kubectl apply -f - <<EOF
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: console-sa-secret
-        namespace: minio-operator
-        annotations:
-          kubernetes.io/service-account.name: console-sa
-      type: kubernetes.io/service-account-token
-      EOF
-      SA_TOKEN=$(kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode)
-      echo $SA_TOKEN
 
 
 #. Verify the Operator installation
@@ -176,6 +163,25 @@ You can modify the Operator deployment after installation.
       replicaset.apps/console-68d955874d          1         1         1       25h
       replicaset.apps/minio-operator-699f797b8b   2         2         2       25h
 
+
+#. Retrieve the Operator Console JWT for login
+
+   .. code-block:: shell
+      :class: copyable
+
+      kubectl apply -f - <<EOF
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: console-sa-secret
+        namespace: minio-operator
+        annotations:
+          kubernetes.io/service-account.name: console-sa
+      type: kubernetes.io/service-account-token
+      EOF
+      SA_TOKEN=$(kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode)
+      echo $SA_TOKEN
+
    
 #. Log into the MinIO Operator Console
 
@@ -183,20 +189,18 @@ You can modify the Operator deployment after installation.
 
    If you configured the service for access through NodePorts, specify the hostname of any worker node in the cluster with that port as ``HOSTNAME:NODEPORT`` to access the Console.
 
+   For example, a deployment configured with a NodePort of 30090 and the following ``INTERNAL-IP`` IP addresses can be accessed at ``http://172.18.0.2:30090``.
+   
+   .. code-block:: shell
+      :class: copyable
 
-$ kubectl get nodes -o wide
-NAME                 STATUS   ROLES                  AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE           KERNEL-VERSION       CONTAINER-RUNTIME
-k3d-minio-agent-0    Ready    <none>                 15m   v1.28.8+k3s1   172.18.0.3    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
-k3d-minio-agent-3    Ready    <none>                 15m   v1.28.8+k3s1   172.18.0.5    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
-k3d-minio-agent-2    Ready    <none>                 15m   v1.28.8+k3s1   172.18.0.6    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
-k3d-minio-agent-1    Ready    <none>                 15m   v1.28.8+k3s1   172.18.0.4    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
-k3d-minio-server-0   Ready    control-plane,master   15m   v1.28.8+k3s1   172.18.0.2    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
-
-
-http://172.18.0.2:30090
-
-
-
+      $ kubectl get nodes -o wide
+      NAME                 STATUS   ROLES                  AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE           KERNEL-VERSION       CONTAINER-RUNTIME
+      k3d-minio-agent-0    Ready    <none>                 15m   v1.28.8+k3s1   172.18.0.3    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
+      k3d-minio-agent-3    Ready    <none>                 15m   v1.28.8+k3s1   172.18.0.5    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
+      k3d-minio-agent-2    Ready    <none>                 15m   v1.28.8+k3s1   172.18.0.6    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
+      k3d-minio-agent-1    Ready    <none>                 15m   v1.28.8+k3s1   172.18.0.4    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
+      k3d-minio-server-0   Ready    control-plane,master   15m   v1.28.8+k3s1   172.18.0.2    <none>        K3s v1.28.8+k3s1   5.15.0-102-generic   containerd://1.7.11-k3s2
 
 
    
