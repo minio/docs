@@ -29,12 +29,16 @@ Use the :mc:`mc support perf` command to review the performance of the S3 API (r
 
 The resulting tests can provide general guidance of deployment performance under S3 ``GET`` and ``PUT`` requests and identify any potential bottlenecks.
 For more complete performance testing, consider using a combination of load-testing using your staging application environments and the MinIO `WARP <https://github.com/minio/warp>`_ S3 benchmarking tool.
-   
+
 :mc:`mc support perf` has the following subcommands
 
 #. :mc-cmd:`~mc support perf drive`
 
    Measure the speed of drives in a MinIO deployment.
+
+   :mc-cmd:`mc support perf drive` temporarily suspends S3 API calls during the test.
+   Incoming requests are held in a queue while the command runs.
+   When the command completes or ends, MinIO processes the queued requests and resumes normal operations.
 
 #. :mc-cmd:`~mc support perf object`
       
@@ -43,6 +47,10 @@ For more complete performance testing, consider using a combination of load-test
 #. :mc-cmd:`~mc support perf net`
 
    Measure the network throughput of all nodes.
+
+   :mc-cmd:`mc support perf net` temporarily suspends S3 API calls during the test.
+   Incoming requests are held in a queue while the command runs.
+   When the command completes or ends, MinIO processes the queued requests and resumes normal operations.
 
 #. :mc-cmd:`~mc support perf client`
 
