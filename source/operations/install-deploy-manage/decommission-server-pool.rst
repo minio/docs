@@ -310,7 +310,7 @@ the next step once decommissioning is completed.
 
 If :guilabel:`Status` reads as failed, you can re-run the
 :mc-cmd:`mc admin decommission start` command to resume the process. 
-For persistent failures, use :mc:`mc admin console` or review
+For persistent failures, use :mc:`mc admin logs` or review
 the ``systemd`` logs (e.g. ``journalctl -u minio``) to identify more specific
 errors.
 
@@ -505,7 +505,7 @@ The command returns output similar to the following:
 You can move on to the next step once MinIO completes decommissioning for all pools.
 
 If :guilabel:`Status` reads as failed, you can re-run the :mc-cmd:`mc admin decommission start` command to resume the process. 
-For persistent failures, use :mc:`mc admin console` or review the ``systemd`` logs (e.g. ``journalctl -u minio``) to identify more specific errors.
+For persistent failures, use :mc:`mc admin logs` or review the ``systemd`` logs (e.g. ``journalctl -u minio``) to identify more specific errors.
 
 4) Remove the Decommissioned Pools from the Deployment Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
