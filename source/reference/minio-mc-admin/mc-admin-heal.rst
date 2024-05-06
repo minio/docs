@@ -63,40 +63,6 @@ Syntax
    the command returns the status of that scan.
 
 
-++++++++++++++++++++
-
-
-.. dropdown:: Deprecated Arguments
-
-   The following command flags have been deprecated and should only be used under guidance from MinIO Engineers in association with a SUBNET ticket.
-
-   - ``--scan`` 
-     
-     The type of scan to perform. Specify one of the following supported scan modes:
-
-       - ``normal`` (default)
-       - ``deep``
-
-   - ``--recursive, r`` 
-     
-     Recursively scans for objects in the specified bucket or bucket prefix.
-
-   - ``--dry-run`` 
-     
-     Inspects the :mc-cmd:`~mc admin heal TARGET` bucket or bucket prefix, but does *not* perform any object healing.
-
-   - ``--force-start, f`` 
-     
-     Force starts the healing process.
-
-   - ``--force-stop, s`` 
-     
-     Force stops the healing sequence.
-
-   - ``--remove`` 
-     
-     Removes dangling objects and data directories in the healing process not referenced by the metadata on a per-drive basis.
-
 Healing Colors
 --------------
 

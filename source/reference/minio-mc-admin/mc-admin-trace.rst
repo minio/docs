@@ -122,11 +122,13 @@ Syntax
 
    Valid call types include:
 
+   - ``batch-keyrotation``
    - ``batch-replication``
    - ``bootstrap``
    - ``decommission``
    - ``ftp``
    - ``healing``
+   - ``ilm``
    - ``internal``
    - ``os``
    - ``rebalance``
