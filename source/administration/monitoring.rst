@@ -44,7 +44,7 @@ Server Logs
 
 MinIO provides the following interfaces for remotely reading server logs:
 
-- The :mc:`mc admin console` command returns the specified server's console output.
+- The :mc:`mc admin logs` command returns the specified server's console output.
 - MinIO supports pushing server logs to an HTTP webhook for further ingestion. 
   See :ref:`minio-logging-publish-server-logs` for more information.
 
