@@ -50,11 +50,6 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-cluster-iam-desc
           :end-before: end-mc-admin-cluster-iam-desc
 
-   * - :mc-cmd:`mc admin console`
-     - .. include:: /reference/minio-mc-admin/mc-admin-console.rst
-          :start-after: start-mc-admin-console-desc
-          :end-before: end-mc-admin-console-desc
-
    * - :mc-cmd:`mc admin decommission`
      - .. include:: /reference/minio-mc-admin/mc-admin-decommission.rst
           :start-after: start-mc-admin-decommission-desc
@@ -183,7 +178,6 @@ See :ref:`minio-mc-global-options`.
    /reference/minio-mc-admin/mc-admin-cluster-bucket
    /reference/minio-mc-admin/mc-admin-cluster-iam
    /reference/minio-mc-admin/mc-admin-config
-   /reference/minio-mc-admin/mc-admin-console
    /reference/minio-mc-admin/mc-admin-decommission
    /reference/minio-mc-admin/mc-admin-group
    /reference/minio-mc-admin/mc-admin-heal

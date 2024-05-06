@@ -88,6 +88,10 @@ Table of Deprecated Admin Commands
      - :mc-cmd:`mc quota clear`, :mc-cmd:`mc quota info`, :mc-cmd:`mc quota set`
      - mc RELEASE.2022-12-13T00-23-28Z
 
+   * - ``mc admin console``
+     - :mc-cmd:`mc admin logs`
+     - mc RELEASE.2022-06-26T18-51-48Z
+
    * - ``mc admin idp ldap add``
      - :mc-cmd:`mc idp ldap add`
      - mc RELEASE.2023-05-26T23-31-54Z
@@ -207,6 +211,7 @@ Table of Deprecated Admin Commands
    /reference/deprecated/mc-ilm-ls
    /reference/deprecated/mc-ilm-rm
    /reference/deprecated/mc-admin-bucket-quota
+   /reference/deprecated/mc-admin-console
    /reference/deprecated/mc-admin-idp-ldap
    /reference/deprecated/mc-admin-idp-ldap-policy
    /reference/deprecated/mc-admin-idp-openid
