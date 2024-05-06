@@ -19,12 +19,8 @@
 Description
 -----------
 
-.. start-mc-admin-console-desc
-
 The :mc:`mc admin console` command returns server log entries for each
 MinIO server in the deployment.
-
-.. end-mc-admin-console-desc
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
