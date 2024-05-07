@@ -45,8 +45,8 @@ You can modify the Operator deployment after installation.
 
 .. important::
 
-   Do not use ``kubectl krew`` or similar methods to update or manage the MinIO Operator installation.
    If you use Helm charts to install the Operator, you must use Helm to manage that installation.
+   Do not use ``kubectl krew``, Kustomize, or similar methods to update or manage the MinIO Operator installation.
 
 #. Add the MinIO Operator Repo to Helm
 
@@ -120,7 +120,7 @@ You can modify the Operator deployment after installation.
       replicaset.apps/console-68d955874d          1         1         1       25h
       replicaset.apps/minio-operator-699f797b8b   2         2         2       25h
 
-#. (Optional) Enable NodePort Access to the Console
+#. *(Optional)* Enable NodePort Access to the Console
 
    You can enable :kube-docs:`Node Port <concepts/services-networking/service/#type-nodeport>` access to the ``service/console`` service to allow simplified access to the MinIO Operator.
    You can skip this step if you intend to configure the Operator Console service to use a Kubernetes Load Balancer, ingress, or similar control plane component that enables external access.

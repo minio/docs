@@ -90,7 +90,7 @@ You can modify the Operator deployment after installation.
 
    Use the ``helm install`` command to deploy the Tenant Chart.
 
-   If you need to override values in the default :ref:`values <minio-operator-chart-tenant-values>` file, you can use the ``--set`` operation for any single key-value.
+   If you need to override values in the default :ref:`values <minio-tenant-chart-values>` file, you can use the ``--set`` operation for any single key-value.
    Alternatively, specify your own ``values.yaml`` using the ``--f`` parameter to override multiple values at once:
 
    .. code-block:: shell
