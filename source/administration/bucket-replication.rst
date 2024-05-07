@@ -176,29 +176,21 @@ application of object expiration.
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO by default replicates existing objects in the source bucket to the configured remote. 
-Existing object replication marks all objects or object prefixes that satisfy the replication rules as eligible for synchronization to the source cluster, *even if* those objects were created prior to configuring or enabling replication. 
+MinIO by default replicates existing objects in the source bucket to the configured remote, similar to `AWS: Replicating existing objects between S3 buckets <https://aws.amazon.com/blogs/storage/replicating-existing-objects-between-s3-buckets/>`__ without the overhead of contacting technical support.
 
-You can disable existing object replication while configuring or modifying a replication rule.
+MinIO marks all objects or object prefixes that satisfy the replication rules as eligible for synchronization to the remote cluster and bucket.
+MinIO only excludes those objects without a version ID, such as those objects written before enabling versioning on the bucket.
+
+You can disable existing object replication while configuring or modifying the bucket replication rule.
 You must specify *all* desired replication features during creation or modification:
 
 - For new replication rules, exclude ``"existing-objects"`` from the list of replication features specified to :mc-cmd:`mc replicate add --replicate`.
 
 - For existing replication rules, remove ``"existing-objects"`` from the list of existing replication features using :mc-cmd:`mc replicate update --replicate`. 
-  This does not result in removal of any objects previously replicated.
+  The new rule **replaces** the previous rule.
 
-Enabling existing object replication does not increase the priority of objects pending replication. 
-MinIO uses the same core :ref:`replication scanner and queue system <minio-replication-process>` for detecting and synchronizing objects regardless of the enabled replication feature. 
-The time required to fully synchronize a bucket depends on a number of factors, including but not limited to the current cluster replication load, overall cluster load, and the size of the namespace (all objects in the bucket).
+Disabling existing object replication does not remove any objects already replicated to the remote bucket.
 
-.. include:: /includes/common/scanner.rst
-   :start-after: start-scanner-speed-config
-   :end-before: end-scanner-speed-config
-
-If versioning was not previously enabled when configuring bucket replication, existing objects have a ``versionid = null``. 
-These objects do replicate.
-
-MinIO existing object replication implements functionality similar to `AWS: Replicating existing objects between S3 buckets <https://aws.amazon.com/blogs/storage/replicating-existing-objects-between-s3-buckets/>`__ without the overhead of contacting technical support. 
 
 Synchronous vs Asynchronous Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
