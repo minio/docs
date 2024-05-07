@@ -167,6 +167,12 @@ li pre {
     padding-left: 1.5rem;
 }
 
+table {
+    span.pre {
+        white-space: wrap;
+    }
+}
+
 
 // ----------------------
 // Image
