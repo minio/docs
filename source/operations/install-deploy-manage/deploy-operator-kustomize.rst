@@ -15,10 +15,10 @@ Overview
 --------
 
 `Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is a YAML-based templating tool that allows you to define Operator and Tenant templates using plain Kubernetes YAML reference language.
-Kustomize is included with the `kubectl <https://kubernetes.io/docs/reference/kubectl/>`__ command line tool.
+Kustomize is included with the :kube-docs:`kubectl <reference/kubectl>` command line tool.
 
 The `default MinIO Operator Kustomize template <https://github.com/minio/operator/blob/master/kustomization.yaml>`__ provides a starting point for customizing configurations for your local environment.
-You can modify a Kustomize Operator deployment after installation with kubectl patches, which are additional YAML configurations applied over the existing base.
+You can modify a Kustomize Operator deployment after installation with :kube-docs:`kubectl patches <reference/kubectl/generated/kubectl_patch>`, which are additional YAML configurations applied over the existing base.
 
 
 Prerequisites
