@@ -96,7 +96,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
 
    In this example, the ``minio-operator`` pod is MinIO Operator and the ``console`` pod is the Operator Console.
 
-   You can modify your Operator deplyoment by applying Kustomize patches.
+   You can modify your Operator deplyoment by applying kubectl patches.
    You can find examples for common configurations in the `Operator GitHub repository <https://github.com/minio/operator/tree/master/examples/kustomization>`__.
 
 #. *(Optional)* Configure access to the Operator Console port
@@ -104,7 +104,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
    If needed, configure access to the Operator Console port.
    Depending on your local policies, this could be a Kubernetes load balancer, ingress, or similar control plane component that enables external access.
 
-   For testing purposes, you can access Operator Console by configuring a NodePort using the following Kustomize patch:
+   For testing purposes, you can access Operator Console by configuring a NodePort using the following patch:
 
    .. code-block:: shell
       :class: copyable
@@ -190,8 +190,9 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
    .. tab-set::
 
       .. tab-item:: NodePort
+         :selected:
 
-         If you configured the service for access through NodePorts, specify the hostname of any worker node in the cluster with that port as ``HOSTNAME:NODEPORT`` to access the Console.
+         If you configured the service for access through a NodePort, specify the hostname of any worker node in the cluster with that port as ``HOSTNAME:NODEPORT`` to access the Console.
 
          For example, a deployment configured with a NodePort of 30090 and the following ``InternalIP`` addresses can be accessed at ``http://172.18.0.5:30090``.
 
@@ -212,7 +213,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
 
       .. tab-item:: Port Forwarding
 
-         Alternatively, you can use ``kubectl port forward`` to temporary forward ports for the Console:
+         You can use ``kubectl port forward`` to temporary forward ports for the Console:
 
          .. code-block:: shell
             :class: copyable
