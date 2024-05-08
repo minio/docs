@@ -20,8 +20,8 @@ This page covers settings that control core behavior of the MinIO process.
    :start-after: start-minio-settings-test-before-prod
    :end-before: end-minio-settings-test-before-prod
 
-MinIO Options
-~~~~~~~~~~~~~
+MinIO Server CLI Options
+------------------------
 
 .. tab-set::
 
@@ -47,11 +47,8 @@ For example, to set up ftp access, you could set the variable to something like 
 
 On Unix-like systems, you can save a file with the environment variable to ``/etc/defaults/minio`` instead of setting the variable manually.
 
-Common Settings
+Storage Volumes
 ---------------
-
-Volumes
-~~~~~~~
 
 .. tab-set::
 
@@ -71,7 +68,7 @@ Volumes
          :end-before: end-minio-settings-no-config-option
 
 Environment Variable File Path
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
 .. tab-set::
 
@@ -90,7 +87,7 @@ Environment Variable File Path
          :end-before: end-minio-settings-no-config-option
       
 Workers for Expiration
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 .. tab-set::
 
@@ -110,7 +107,7 @@ Workers for Expiration
          :end-before: end-minio-settings-no-config-option
 
 Domain
-~~~~~~
+------
 
 .. tab-set::
 
@@ -145,7 +142,7 @@ Domain
 .. _minio-scanner-speed-options:
 
 Scanner Speed
-~~~~~~~~~~~~~
+-------------
 
 .. tab-set::
 
@@ -196,6 +193,29 @@ All of the settings in this section fall under the following top-level key:
 
 .. mc-conf:: compression
 
+Enable Compression
+~~~~~~~~~~~~~~~~~~
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_COMPRESSION_ENABLE
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+  
+      .. mc-conf:: compression enable
+         :delimiter: " "
+
+*Optional*
+
+Set to ``on`` to enable data compression for new objects.
+Defaults to ``off``.
+
+Enabling or disabling data compression does not change existing objects.
+
 Allow Encryption
 ~~~~~~~~~~~~~~~~
 
@@ -223,48 +243,6 @@ Defaults to ``off``.
    MinIO strongly recommends against encrypting compressed objects.
    If you require encryption, carefully evaluate the risk of potentially leaking information about the contents of encrypted objects.
 
-Enable Compression
-~~~~~~~~~~~~~~~~~~
-
-.. tab-set::
-
-   .. tab-item:: Environment Variable
-      :sync: envvar
-
-      .. envvar:: MINIO_COMPRESSION_ENABLE
-
-   .. tab-item:: Configuration Setting
-      :sync: config
-  
-      .. mc-conf:: compression enable
-         :delimiter: " "
-
-*Optional*
-
-Set to ``on`` to enable data compression for new objects.
-Defaults to ``off``.
-
-Enabling or disabling data compression does not change existing objects.
-
-Comments
-~~~~~~~~
-
-.. tab-set::
-
-   .. tab-item:: Environment Variable
-
-      This setting does not have an environment variable option.
-      Use the configuration variable instead.
-
-   .. tab-item:: Configuration Setting
-      :selected:
-
-      .. envvar:: compression comment
-
-*Optional*
-
-Specify a comment to associate with the data compression configuration.
-
 Compression Extensions
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -287,12 +265,11 @@ Comma-separated list of the file extensions to compress.
 Setting a new list of file extensions replaces the previously configured list.
 Defaults to ``".txt, .log, .csv, .json, .tar, .xml, .bin"``.
 
-.. admonition:: Default excluded files
-   :class: note
+.. versionchanged:: RELEASE.2024-03-15T01-07-19Z
 
-   Some types of files cannot be significantly reduced in size.
-   MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.extensions` argument.
-   See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
+   Specify ``"*"`` to direct MinIO to compress all supported file types.
+   
+MinIO does not support compressing file types on the :ref:`Excluded File Types <minio-data-compression-excluded-types>` list, even if explicitly specified in this argument.
 
 Compression MIME Types
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -323,8 +300,27 @@ Defaults to ``"text/*, application/json, application/xml, binary/octet-stream"``
    MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.mime_types` argument.
    See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
 
+Comments
+~~~~~~~~
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+
+      This setting does not have an environment variable option.
+      Use the configuration variable instead.
+
+   .. tab-item:: Configuration Setting
+      :selected:
+
+      .. envvar:: compression comment
+
+*Optional*
+
+Specify a comment to associate with the data compression configuration.
+
 Erasure Stripe Size
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 .. tab-set:: 
 
@@ -356,6 +352,31 @@ The selected stripe size is **immutable** after the cluster has been initialized
    Changes to stripe size have significant impact to deployment functionality, availability, performance, and behavior.
    MinIO's stripe selection algorithms set appropriate defaults for the majority of workloads.
    Changing the stripe size from this default is unusual and generally not necessary or advised.
+
+Maximum Object Versions
+-----------------------
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_API_OBJECT_MAX_VERSIONS
+
+   .. tab-item:: Configuration Variable
+      :sync: config
+
+      .. mc-conf:: api object_max_versions
+         :delimiter: " "
+
+*Optional*
+
+Overrides the default maximum version per object limit of ``10000`` with the user specified value.
+
+.. important::
+
+   The default limit of 10,000 provides a safety valve against incorrect or inefficient application behavior in versioned buckets.
+   Lifting this limit without first ensuring application's are designed for versioned operations may result in a negative performance impact over time.
 
 
    
