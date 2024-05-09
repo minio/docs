@@ -172,4 +172,5 @@ To install Operator using a Helm chart, see :ref:`Deploy Operator with Helm <min
    :hidden:
 
    /operations/install-deploy-manage/deploy-operator-helm
+   /operations/install-deploy-manage/deploy-operator-kustomize
    
