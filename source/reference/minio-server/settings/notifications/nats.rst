@@ -49,10 +49,10 @@ For example, the following commands set two distinct NATS service endpoints as `
          :class: copyable
       
          set MINIO_NOTIFY_NATS_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_NATS_ADDRESS_PRIMARY="https://nats-endpoint.example.net:4222"
-      
+         set MINIO_NOTIFY_NATS_ADDRESS_PRIMARY="nats-endpoint.example.net:4222"
+
          set MINIO_NOTIFY_NATS_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_NATS_ADDRESS_SECONDARY="https://nats-endpoint.example.net:4222"
+         set MINIO_NOTIFY_NATS_ADDRESS_SECONDARY="nats-endpoint.example.net:4222"
 
       With these settings, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE>` indicates the environment variable is associated to an NATS service endpoint with ID of ``PRIMARY``.
 
@@ -62,12 +62,12 @@ For example, the following commands set two distinct NATS service endpoints as `
       .. code-block:: shell
    
          mc admin config set notify_nats:primary \ 
-            address="https://nats-endpoint.example.com:4222" \
+            address="nats-endpoint.example.com:4222" \
             subject="minioevents" \ 
             [ARGUMENT=VALUE ...]
    
          mc admin config set notify_nats:secondary \
-            address="https://nats-endpoint.example.com:4222" \
+            address="nats-endpoint.example.com:4222" \
             subject="minioevents" \ 
             [ARGUMENT=VALUE ...]
 
@@ -105,10 +105,10 @@ Enable
          :class: copyable
    
          mc admin config set notify_nats \ 
-           address="https://nats-endpoint.example.com:4222" \
+           address="nats-endpoint.example.com:4222" \
            subject="minioevents" \
            [ARGUMENT="VALUE"] ... \
-   
+
 Address
 ~~~~~~~
 
@@ -128,7 +128,7 @@ Address
          :delimiter: " "
 
 Specify the NATS service endpoint to which MinIO publishes bucket events. 
-For example, ``https://nats-endpoint.example.com:4222``.
+For example, ``nats-endpoint.example.com:4222``.
 
 .. include:: /includes/linux/minio-server.rst
    :start-after: start-notify-target-online-desc
