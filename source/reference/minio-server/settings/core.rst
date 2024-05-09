@@ -308,7 +308,7 @@ Comments
    .. tab-item:: Environment Variable
 
       This setting does not have an environment variable option.
-      Use the configuration variable instead.
+      Use the configuration setting instead.
 
    .. tab-item:: Configuration Setting
       :selected:
@@ -363,7 +363,7 @@ Maximum Object Versions
 
       .. envvar:: MINIO_API_OBJECT_MAX_VERSIONS
 
-   .. tab-item:: Configuration Variable
+   .. tab-item:: Configuration Setting
       :sync: config
 
       .. mc-conf:: api object_max_versions
@@ -376,7 +376,7 @@ Overrides the default maximum version per object limit of ``10000`` with the use
 .. important::
 
    The default limit of 10,000 provides a safety valve against incorrect or inefficient application behavior in versioned buckets.
-   Lifting this limit without first ensuring application's are designed for versioned operations may result in a negative performance impact over time.
+   Lifting this limit without first ensuring your applications are designed for versioned operations may result in a negative performance impact over time.
 
 
    
