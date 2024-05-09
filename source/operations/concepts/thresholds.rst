@@ -59,7 +59,7 @@ S3 API Limits
    * - Maximum length for each ``/`` separated object name segment
      - 255
 
-   * - Maximum number of object verions for a unique object
+   * - Maximum number of object versions for a unique object
      - 10000 (Configurable)
 
 Erasure Code Limits
