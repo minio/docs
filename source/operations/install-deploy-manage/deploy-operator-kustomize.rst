@@ -14,21 +14,20 @@ Deploy Operator With Kustomize
 Overview
 --------
 
-`Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is a YAML-based templating tool that allows you to define Operator and Tenant templates using plain Kubernetes YAML reference language.
+`Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is a YAML-based templating tool that allows you to define Kubernetes resources in a declarative and repeatable fashion.
 Kustomize is included with the :kube-docs:`kubectl <reference/kubectl>` command line tool.
 
 The `default MinIO Operator Kustomize template <https://github.com/minio/operator/blob/master/kustomization.yaml>`__ provides a starting point for customizing configurations for your local environment.
-You can modify a Kustomize Operator deployment after installation with :kube-docs:`kubectl patches <reference/kubectl/generated/kubectl_patch>`, which are additional YAML configurations applied over the existing base.
+You can modify the default Kustomization file or apply your own `patches <https://datatracker.ietf.org/doc/html/rfc6902>`__ to customize the Operator deployment for your Kubernetes cluster.
 
 
 Prerequisites
 -------------
 
-To install the Operator with Kustomize you will need the following:
+Installing Operator with Kustomize requires the following prerequisites:
 
 * An existing Kubernetes cluster, v1.21 or later.
-* The ``kubectl`` CLI tool on your local host, the same version as the cluster.
-* `Docker <https://docker.com>`__ for your platform.
+* A local ``kubectl`` installation with the same version as the cluster.
 * Access to run ``kubectl`` commands on the cluster from your local host.
 
 For more about Operator installation requirements, including TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
@@ -46,8 +45,8 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
 
 .. important::
 
-   If you use Kustomize to install the Operator, you must use Kustomize to manage that installation.
-   Do not use ``kubectl krew``, a Helm chart, or similar methods to update or manage the MinIO Operator installation.
+   If you use Kustomize to install the Operator, you must use Kustomize to manage or update that installation.
+   Do not use ``kubectl krew``, a Helm chart, or similar methods to manage or update the MinIO Operator installation.
 
 #. Install the latest version of Operator
 
@@ -99,12 +98,12 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
    You can modify your Operator deplyoment by applying kubectl patches.
    You can find examples for common configurations in the `Operator GitHub repository <https://github.com/minio/operator/tree/master/examples/kustomization>`__.
 
-#. *(Optional)* Configure access to the Operator Console port
+#. *(Optional)* Configure access to the Operator Console service
 
-   If needed, configure access to the Operator Console port.
-   Depending on your local policies, this could be a Kubernetes load balancer, ingress, or similar control plane component that enables external access.
+   The Operator Console service does not automatically bind or expose itself for external access on the Kubernetes cluster.
+   You must instead configure a network control plane component, such as a load balancer or ingress, to grant that external access.
 
-   For testing purposes, you can access Operator Console by configuring a NodePort using the following patch:
+   For testing purposes or short-term access, expose the Operator Console service through a NodePort using the following patch:
 
    .. code-block:: shell
       :class: copyable
@@ -132,6 +131,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
           }
       }'
 
+   You can now access the service through port ``30433`` on any of your Kubernetes worker nodes.
 
 #. Verify the Operator installation
 

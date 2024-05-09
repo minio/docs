@@ -122,8 +122,11 @@ You can modify the Operator deployment after installation.
 
 #. *(Optional)* Enable NodePort Access to the Console
 
+   The Operator Console service does not automatically bind or expose itself for external access on the Kubernetes cluster.
+   You must instead configure a network control plane component, such as a load balancer or ingress, to grant that external access.
+
    You can enable :kube-docs:`Node Port <concepts/services-networking/service/#type-nodeport>` access to the ``service/console`` service to allow simplified access to the MinIO Operator.
-   You can skip this step if you intend to configure the Operator Console service to use a Kubernetes Load Balancer, ingress, or similar control plane component that enables external access.
+   You should skip this step if you intend to configure the Operator Console service to use a Kubernetes Load Balancer, ingress, or similar control plane component that enables external access.
 
    Edit the ``service/console`` and set the ``spec.ports[0].nodePort`` and ``spec.type`` fields as follows:
 
