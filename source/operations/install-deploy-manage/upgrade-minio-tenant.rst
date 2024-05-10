@@ -10,6 +10,11 @@ Upgrade a MinIO Tenant
    :local:
    :depth: 1
 
+.. important::
+
+   For Tenants using :ref:`AD/LDAP <minio-ldap-config-settings>` for external authentication upgrading from a version older than :minio-release:`RELEASE.2024-03-30T09-41-56Z` **must** read through the release notes for :minio-release:`RELEASE.2024-04-18T19-09-19Z` before upgrading.
+   You must take the extra steps documented in the linked release as part of the upgrade procedure.
+
 .. _minio-upgrade-tenant-plugin:
 
 Upgrade the Tenant using the MinIO Kubernetes Plugin

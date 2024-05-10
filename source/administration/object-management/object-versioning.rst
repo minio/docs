@@ -132,6 +132,10 @@ following commands:
 - :mc-cmd:`mc rm --versions --older-than <mc rm --older-than>` -
    Removes all versions of an object older than the specified calendar date.
 
+.. versionadded:: RELEASE.2024-04-18T19-09-19Z
+
+   MinIO emits a warning if the cumulative size of versions for any single object exceeds 1TiB.
+
 .. _minio-bucket-versioning-id:
 
 Version ID Generation
