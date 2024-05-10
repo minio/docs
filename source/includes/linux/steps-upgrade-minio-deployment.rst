@@ -63,17 +63,20 @@ Update ``systemctl``-Managed MinIO Deployments
 
 Use these steps to upgrade a MinIO deployment where the MinIO server process is managed by ``systemctl``, such as those created using the MinIO :ref:`DEB/RPM packages <deploy-minio-distributed-baremetal>`.
 
+This procedure assumes you have the :envvar:`MINIO_CONFIG_ENV_FILE` variable set on all MinIO nodes.
+
 1. Update the MinIO Binary on Each Node
 
    .. include:: /includes/linux/common-installation.rst
       :start-after: start-upgrade-minio-binary-desc
       :end-before: end-upgrade-minio-binary-desc
 
+   Run ``minio --version`` on each node to validate that you successfully upgraded all binaries to the same version.
+   Do **not** proceed unless all nodes use the same MinIO binary version.
+
 2. Restart the Deployment
 
    Run the :mc-cmd:`mc admin service restart` command to restart all MinIO server processes in the deployment simultaneously.
-   
-   The restart process typically completes within a few seconds and is *non-disruptive* to ongoing operations.
 
    .. code-block:: shell
       :class: copyable
@@ -81,6 +84,8 @@ Use these steps to upgrade a MinIO deployment where the MinIO server process is 
       mc admin service restart ALIAS
 
    Replace :ref:`alias <alias>` of the MinIO deployment to restart.
+
+   S3-compatible SDKs and applications should retry operations automatically, such that the restart process is typically *non-disruptive* to ongoing operations.
 
 3. Validate the Upgrade
 
@@ -150,7 +155,7 @@ The command overwrites the existing ``minio`` binary at that path.
 
    wget https://dl.min.io/server/minio/release/linux-amd64/minio
    chmod +x ./minio
-   sudo mv -f ./minio /usr/local/bin/
+   sudo mv -f ./minio /usr/local/bin/minio
 
 Once you have replaced the binary on all MinIO hosts in the deployment, you must restart all nodes simultaneously.
 
