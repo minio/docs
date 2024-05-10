@@ -79,8 +79,8 @@ You can configure a new NATS service endpoint using either environment variables
         If the specified ``<IDENTIFIER>`` matches an existing NATS service endpoint on the MinIO deployment, the new settings *override* any existing settings for that endpoint. 
         Use :mc-cmd:`mc admin config get notify_nats <mc admin config get>` to review the currently configured NATS endpoints on the MinIO deployment.
 
-      - Replace ``<ENDPOINT>`` with the URL of the NATS service endpoint.
-        For example: ``htpps://nats-endpoint.example.com:4222``
+      - Replace ``<ENDPOINT>`` with the hostname and port of the NATS service endpoint.
+        For example: ``nats-endpoint.example.com:4222``
 
       See :ref:`NATS Service for Bucket Notifications <minio-server-envvar-bucket-notification-nats>` for complete documentation on each environment variable.
 
@@ -124,8 +124,8 @@ You can configure a new NATS service endpoint using either environment variables
         If the specified ``IDENTIFIER`` matches an existing NATS service endpoint on the MinIO deployment, the new settings *override* any existing settings for that endpoint. 
         Use :mc-cmd:`mc admin config get notify_nats <mc admin config get>` to review the currently configured NATS endpoints on the MinIO deployment.
 
-      - Replace ``ENDPOINT`` with the URL of the NATS service endpoint.
-        For example: ``htpps://nats-endpoint.example.com:4222``.
+      - Replace ``ENDPOINT`` with the hostname and port of the NATS service endpoint.
+        For example: ``nats-endpoint.example.com:4222``.
 
       See :ref:`NATS Bucket Notification Configuration Settings <minio-server-config-bucket-notification-nats>` for complete       documentation on each setting.
 
