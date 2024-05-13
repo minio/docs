@@ -24,4 +24,4 @@
 
 .. cond:: k8s and not (openshift or eks or gke or aks)
 
-   .. include:: /includes/k8s/deploy-operator.rst
+   .. include:: /includes/k8s/deploy-operator-kustomize.rst
