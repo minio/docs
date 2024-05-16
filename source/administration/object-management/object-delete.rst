@@ -36,7 +36,7 @@ Unversioned Objects
 When performing a ``DELETE`` operation on an object in a bucket that does not have versioning enabled, the operation is straightforward.
 After verifying the user or service account has permission to perform the ``DELETE`` operation, MinIO permanently removes the object.
 
-The user or service account requesting the delete action the action must have the :policy-action:`s3:deleteObject` action permission for the bucket and object.
+The user or service account requesting the delete action the action must have the :policy-action:`s3:DeleteObject` action permission for the bucket and object.
 
 Versioned Objects
 -----------------

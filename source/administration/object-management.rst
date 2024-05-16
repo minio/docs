@@ -226,5 +226,6 @@ See :ref:`minio-lifecycle-management` for more complete documentation.
 
    /administration/object-management/object-versioning
    /administration/object-management/object-retention
+   /administration/object-management/object-delete
    /administration/object-management/object-lifecycle-management
    /administration/object-management/data-compression
