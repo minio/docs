@@ -52,31 +52,22 @@ While this documentation *may* provide guidance for configuring or deploying Kub
 Prerequisites
 -------------
 
-MinIO Kubernetes Operator and Plugin
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MinIO Kubernetes Operator
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The procedures on this page *requires* a valid installation of the MinIO
 Kubernetes Operator and assumes the local host has a matching installation of
-the MinIO Kubernetes Operator. This procedure assumes the latest stable Operator
-and Plugin version |operator-version-stable|.
+the MinIO Kubernetes Operator. This procedure assumes the latest stable Operator version |operator-version-stable|.
 
 See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 
-.. cond:: k8s and not openshift
-
-   .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
-
-.. cond:: openshift
-
-   .. include:: /includes/openshift/install-minio-kubectl-plugin.rst
-
 .. cond:: k8s and not (openshift or eks or gke or aks)
 
-   Kubernetes Version 1.19.0
+   Kubernetes Version 1.21.0
    ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   Starting with v4.0.0, the MinIO Operator requires Kubernetes 1.19.0 and later.
-   The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must have the same version of 1.19.0+.
+   MinIO Operator requires Kubernetes 1.21.0 and later.
+   The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must have the same version of 1.21.0+.
 
    This procedure assumes the host machine has ``kubectl`` installed and configured with access to the target Kubernetes cluster. 
    The host machine *must* have access to a web browser application.
@@ -209,6 +200,12 @@ Persistent Volumes
    MinIO Tenants on AKS should use the :azure-docs:`Azure Disks CSI driver <azure-disk-csi>` to provision the necessary underlying persistent volumes.
    MinIO strongly recommends SSD-backed disk types for best performance.
    For more information on AKS disk types, see :azure-docs:`Azure disk types <virtual-machines/disk-types>`.
+
+Deploy a Tenant using Kustomize
+-------------------------------
+
+To deploy a tenant using Kustomize...
+
 
 Deploy a Tenant using the MinIO Operator Console
 ------------------------------------------------

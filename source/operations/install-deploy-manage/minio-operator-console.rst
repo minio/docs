@@ -46,7 +46,6 @@ You can :ref:`deploy a MinIO Tenant <minio-k8s-deploy-minio-tenant>` through the
 The Operator Console automatically detects MinIO Tenants deployed on the cluster when provisioned through:
 
 - Operator Console
-- :ref:`MinIO Kubernetes Plugin <minio-k8s-deploy-minio-tenant-commandline>`
 - Helm
 - Kustomize
 

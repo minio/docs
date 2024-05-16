@@ -12,7 +12,7 @@ Deploy and Manage MinIO Tenants
 
 The MinIO Kubernetes Operator supports deploying and managing MinIO Tenants onto your Kubernetes cluster through either the Operator Console web interface or the MinIO Kubernetes Plugin.
 
-The following tutorials provide steps for tenant management via the Operator Console and MinIO Kubernetes Plugin:
+The following tutorials provide steps for tenant management via the Operator Console and Kustomize:
 
 .. list-table::
    :stub-columns: 1
@@ -44,7 +44,5 @@ The following tutorials provide steps for tenant management via the Operator Con
    /operations/install-deploy-manage/deploy-minio-tenant
    /operations/install-deploy-manage/modify-minio-tenant
    /operations/install-deploy-manage/upgrade-minio-tenant
-   /operations/install-deploy-manage/expand-minio-tenant
-   /operations/install-deploy-manage/delete-minio-tenant
    /operations/install-deploy-manage/multi-site-replication
    /operations/install-deploy-manage/minio-operator-console

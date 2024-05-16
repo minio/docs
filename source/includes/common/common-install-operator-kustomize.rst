@@ -85,6 +85,8 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
    You can modify your Operator deplyoment by applying kubectl patches.
    You can find examples for common configurations in the `Operator GitHub repository <https://github.com/minio/operator/tree/master/examples/kustomization>`__.
 
+.. _minio-k8s-deploy-operator-access-console:
+
 #. *(Optional)* Configure access to the Operator Console service
 
    The Operator Console service does not automatically bind or expose itself for external access on the Kubernetes cluster.
