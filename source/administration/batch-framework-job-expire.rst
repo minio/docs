@@ -86,7 +86,7 @@ Expire Batch Job Reference
        - ``object`` - Applies only to objects which do **not** have a ``DeleteMarker`` as the current version.
        - ``deleted`` - Applies only to objects which **do** Have a ``DeleteMarker`` as the current version.
 
-       See :ref:`minio-bucket-versioning-delete` for more complete documentation on ``DeleteMarker`` or delete operations in versioned buckets.
+       See :ref:`minio-object-delete` for more complete documentation on ``DeleteMarker`` or delete operations in versioned buckets.
 
    * - ``rules.[n].name``
      - *Optional*

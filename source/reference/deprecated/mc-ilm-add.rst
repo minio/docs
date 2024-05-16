@@ -130,7 +130,7 @@ Parameters
 
    - :mc-cmd:`~mc ilm add --expire-delete-marker`
 
-   For more complete documentation on object expiration, see :ref:`minio-lifecycle-management-expiration`.
+   For more complete documentation on object expiration, see :ref:`minio-lifecycle-management-expiration` and :ref:`minio-object-delete`.
 
 .. mc-cmd:: --expire-delete-marker
    :optional:
@@ -147,8 +147,7 @@ Parameters
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
-   For more complete documentation on object expiration, see
-   :ref:`minio-lifecycle-management-expiration`.
+   For more complete documentation on object expiration, see :ref:`minio-lifecycle-management-expiration` and :ref:`minio-object-delete`.
 
 .. mc-cmd:: --transition-days
    :optional:

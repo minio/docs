@@ -66,7 +66,7 @@ Considerations
 
    MinIO supports customizing the replication configuration to enable or disable the following replication behaviors:
 
-   - Replication of delete operations
+   - Replication of :ref:`delete operations <minio-object-delete>`
    - Replication of delete markers
    - Replication of existing objects
    - Replication of metadata-only changes
@@ -97,7 +97,7 @@ Considerations
    MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
    Configure matching expiration rules on both the source and destination bucket to ensure consistent application of object expiration.
 
-   See :ref:`minio-replication-behavior-delete` for more complete documentation.
+   See :ref:`minio-replication-behavior-delete` and :ref:`minio-object-delete` for more complete documentation.
 
 .. dropdown:: Multi-Site Replication
    :icon: fold-down

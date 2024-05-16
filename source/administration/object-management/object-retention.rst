@@ -59,7 +59,7 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
          :align: center
          :width: 600px
 
-      Delete operations follow normal behavior in 
+      :ref:`Delete operations <minio-object-delete>` follow normal behavior in 
       :ref:`versioned buckets <minio-bucket-versioning-delete>`, where MinIO
       creates a ``DeleteMarker`` for the object. However, non-Delete Marker 
       versions of the object remain under the retention rules and are protected 
@@ -72,7 +72,7 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
          :align: center
          :width: 600px
 
-      MinIO blocks any attempt to delete a specific object version held under
+      MinIO blocks any attempt to :ref:`delete <minio-object-delete>` a specific object version held under
       WORM lock. The earliest possible time after which a client may delete
       the version is when the lock expires.
 

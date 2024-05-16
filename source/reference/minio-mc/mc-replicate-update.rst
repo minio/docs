@@ -232,7 +232,7 @@ Parameters
 
    Specify a comma-separated list of the following values to enable extended replication features:
 
-   - ``delete`` - Directs MinIO to replicate DELETE operations to the destination bucket.
+   - ``delete`` - Directs MinIO to replicate :ref:`DELETE operations <minio-object-delete>` to the destination bucket.
 
    - ``delete-marker`` - Directs MinIO to replicate delete markers to the destination bucket. 
 
