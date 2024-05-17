@@ -94,7 +94,7 @@ Object Organization and Planning
 --------------------------------
 
 Administrators typically control the creation and configuration of buckets.
-Client applications can then use :ref:`S3-compatible SDKs <minio-drivers>` to create, list, retrieve, and delete objects on the MinIO deployment.
+Client applications can then use :ref:`S3-compatible SDKs <minio-drivers>` to create, list, retrieve, and :ref:`delete <minio-object-delete>` objects on the MinIO deployment.
 Clients therefore drive the overall hierarchy of data within a given bucket or prefix, where Administrators can exercise control using :ref:`policies <minio-policy>` to grant or deny access to an action or resource.
 
 .. cond:: windows
@@ -129,7 +129,7 @@ Object Versioning
    :alt: Object with Multiple Versions
    :align: center
 
-The specific client behavior on write, list, get, or delete operations on a bucket depends on the versioning state of that bucket:
+The specific client behavior on write, list, get, or :ref:`delete <minio-object-delete>` operations on a bucket depends on the versioning state of that bucket:
 
 .. list-table::
    :stub-columns: 1
@@ -162,6 +162,8 @@ The specific client behavior on write, list, get, or delete operations on a buck
 
        Supports deleting any object version by version ID (hard delete).
        You cannot undo hard-delete operations.
+
+       Refer to :ref:`minio-object-delete` for more information.
      - Deletes the object
 
 See :ref:`minio-bucket-versioning` for more complete documentation.
@@ -200,7 +202,7 @@ Enabling bucket locking also enables :ref:`versioning <minio-bucket-versioning>`
 
 MinIO Object Locking provides key data retention compliance and meets SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per `Cohasset Associates <https://min.io/cohasset?ref=docs>`__.
 
-See :ref:`minio-object-locking` for more complete documentation.
+See :ref:`minio-object-locking` and :ref:`minio-object-delete` for more complete documentation.
 
 Object Lifecycle Management
 ---------------------------
@@ -224,5 +226,6 @@ See :ref:`minio-lifecycle-management` for more complete documentation.
 
    /administration/object-management/object-versioning
    /administration/object-management/object-retention
+   /administration/object-management/object-delete
    /administration/object-management/object-lifecycle-management
    /administration/object-management/data-compression

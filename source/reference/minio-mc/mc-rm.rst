@@ -21,13 +21,15 @@ Syntax
 
 .. start-mc-rm-desc
 
-The :mc:`mc rm` command removes objects from a bucket on a MinIO deployment. 
+The :mc:`mc rm` command :ref:`removes objects <minio-object-delete>` from a bucket on a MinIO deployment. 
 To completely remove a bucket, use :mc:`mc rb` instead.
 
 .. end-mc-rm-desc
 
 You can also use :mc:`mc rm` against the local filesystem to produce similar
 results to the ``rm`` commandline tool.
+
+For more information on how MinIO performs ``DELETE`` actions on objects, see :ref:`minio-object-delete`.
 
 .. important::
 

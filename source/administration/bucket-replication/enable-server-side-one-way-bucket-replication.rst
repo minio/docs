@@ -66,7 +66,7 @@ Click to expand any of the following:
 
    MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`.
 
-   See :ref:`minio-replication-behavior-delete` for more complete documentation.
+   See :ref:`minio-replication-behavior-delete` and :ref:`minio-object-delete` for more complete documentation.
 
 .. dropdown:: Multi-Site Replication
    :icon: fold-down

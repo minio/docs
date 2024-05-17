@@ -74,7 +74,7 @@ Click to expand any of the following:
 
    MinIO supports customizing the replication configuration to enable or disable the following replication behaviors:
 
-   - Replication of delete operations
+   - Replication of :ref:`delete operations <minio-object-delete>`
    - Replication of delete markers
    - Replication of existing objects
    - Replication of metadata-only changes
@@ -92,7 +92,7 @@ Click to expand any of the following:
 .. dropdown:: Replication of Delete Operations
    :icon: fold-down
 
-   MinIO supports replicating delete operations onto the target bucket. 
+   MinIO supports replicating :ref:`delete operations <minio-object-delete>` onto the target bucket. 
    Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
 
    - For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
