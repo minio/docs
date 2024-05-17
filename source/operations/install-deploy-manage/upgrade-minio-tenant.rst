@@ -15,8 +15,8 @@ Upgrade a MinIO Tenant
 Upgrade the Tenant using Kustomize
 ----------------------------------
 
-This procedure upgrades an existing MinIO Tenant using Kustomize.
-
+The following procedure upgrades the MinIO Operator using Kustomize.
+If you deployed the Tenant using :ref:`Helm <deploy-tenant-helm>`, use the :ref:`minio-upgrade-tenant-helm` procedure instead.
 
 .. _minio-upgrade-tenant-helm:
 
@@ -25,7 +25,7 @@ Upgrade the Tenant using the MinIO Helm Chart
 
 This procedure upgrades an existing MinIO Tenant using Helm Charts.
 
-If you deployed the Tenant using the :ref:`MinIO Kubernetes Plugin <minio-k8s-deploy-minio-tenant>`, use the :ref:`minio-upgrade-tenant-plugin` procedure instead.
+If you deployed the Tenant using Kustomize, use the :ref:`minio-upgrade-tenant-kustomize` procedure instead.
 
 1. Verify the existing MinIO Tenant installation.
 
