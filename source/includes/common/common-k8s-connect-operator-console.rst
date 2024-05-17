@@ -8,7 +8,7 @@
       You can alternatively configure your preferred Ingress to grant access to the Operator Console service.
       See https://github.com/kubernetes/kubectl/issues/1368 for more information.
 
-   Run the :mc:`kubectl minio proxy` command to temporarily forward traffic from the :ref:`MinIO Operator Console <minio-operator-console>` service to your local machine:
+   Run something to temporarily forward traffic from the :ref:`MinIO Operator Console <minio-operator-console>` service to your local machine:
 
    .. cond:: k8s and not openshift
 

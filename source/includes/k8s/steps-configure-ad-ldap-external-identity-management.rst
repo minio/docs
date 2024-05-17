@@ -4,8 +4,7 @@ Deploy MinIO Tenant with Active Directory / LDAP Identity Management
 1) Access the Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Temporarily forward traffic between the local host machine and the MinIO Operator Console and retrieve the Operator Console JWT login credential.
-See :ref:`Configure access to the Operator Console service <minio-k8s-deploy-operator-access-console>` in the Operator deployment documentation for more information.
+Use something to temporarily forward traffic between the local host machine and the MinIO Operator Console:
 
 Open your browser to the temporary URL and enter the JWT Token into the login page. 
 You should see the :guilabel:`Tenants` page:
