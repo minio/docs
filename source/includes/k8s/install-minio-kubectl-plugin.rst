@@ -23,27 +23,18 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
 
          kubectl krew upgrade minio
 
-      You can validate the installation of the MinIO plugin using the following command:
-
-      .. code-block:: shell
-         :class: copyable
-
-         kubectl minio version
-      
-      The output should match |operator-version-stable|.
-
    .. tab-item:: Manual (Linux, MacOS)
 
       You can download the MinIO ``kubectl`` plugin to your local system path.
       The ``kubectl`` CLI automatically discovers and runs compatible plugins.
 
-      The following code downloads the latest stable version |operator-version-stable| of the MinIO Kubernetes plugin and installs it to the system path:
+      The following code downloads the most recent version of the MinIO Kubernetes plugin and installs it to the system path:
 
       .. code-block:: shell
          :substitutions:
          :class: copyable
 
-         curl https://github.com/minio/operator/releases/download/v|operator-version-stable|/kubectl-minio_|operator-version-stable|_linux_amd64 -o kubectl-minio
+         curl https://github.com/minio/operator/releases/download/v5.0.14/kubectl-minio_5.0.14_linux_amd64 -o kubectl-minio
          chmod +x kubectl-minio
          mv kubectl-minio /usr/local/bin/
 
@@ -56,20 +47,20 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
 
          kubectl minio version
 
-      The output should display the Operator version as |operator-version-stable|.
+      The output should display the Operator version as 5.0.14.
 
    .. tab-item:: Manual (Windows)
 
       You can download the MinIO ``kubectl`` plugin to your local system path.
       The ``kubectl`` CLI automatically discovers and runs compatible plugins.
 
-      The following PowerShell command downloads the latest stable version |operator-version-stable| of the MinIO Kubernetes plugin and installs it to the system path:
+      The following PowerShell command downloads the most recent version of the MinIO Kubernetes plugin and installs it to the system path:
 
       .. code-block:: powershell
          :substitutions:
          :class: copyable
 
-         Invoke-WebRequest -Uri "https://github.com/minio/operator/releases/download/v|operator-version-stable|/kubectl-minio_|operator-version-stable|_windows_amd64.exe" -OutFile "C:\kubectl-plugins\kubectl-minio.exe"
+         Invoke-WebRequest -Uri "https://github.com/minio/operator/releases/download/v5.0.14/kubectl-minio_5.0.14_windows_amd64.exe" -OutFile "C:\kubectl-plugins\kubectl-minio.exe"
 
       Ensure the path to the plugin folder is included in the Windows PATH.
 
@@ -80,4 +71,4 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
 
          kubectl minio version
 
-      The output should display the Operator version as |operator-version-stable|.
+      The output should display the Operator version as 5.0.14.
