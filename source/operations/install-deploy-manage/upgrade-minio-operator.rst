@@ -119,9 +119,6 @@ Upgrade Operator to |operator-version-stable|
 
    .. tab-item:: Upgrade using Kustomize
 
-<<<<<<< HEAD
-      The following procedure upgrades an existing MinIO Operator Installation using Kustomize.
-=======
       The following procedure upgrades the MinIO Operator using Kustomize.
 
       If you installed the Operator using :ref:`Helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
@@ -172,7 +169,7 @@ Upgrade Operator to |operator-version-stable|
          You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
 
          .. include:: /includes/common/common-k8s-connect-operator-console.rst
->>>>>>> 669e818 (update upgrade operator - needs kustomize instructions)
+
 
    .. tab-item:: Upgrade using Helm
 
