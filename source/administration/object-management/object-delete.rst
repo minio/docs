@@ -48,11 +48,11 @@ The user or service account must have the :policy-action:`s3:DeleteObjectVersion
 Delete operations on the current version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A ``DELETE`` operation on a versioned object that does not specify a version UUID results in a ``DeleteMarker`` placed as the ``head`` of the object.
+A ``DELETE`` operation on a versioned object that does not specify a version UUID results in the creation of a ``DeleteMarker`` placed as the ``head`` of the object.
 
 In this scenario, MinIO does not actually remove the object or any of its versions from the disk.
 All existing versions of the object remain available to access by specifying the version's UUID.
-When a ``DeleteMarker`` is the head for the object, MinIO does not serve the object for ``GET`` requests that do not specify a version number.
+When a ``DeleteMarker`` is the head for the object, MinIO does not serve the object for ``GET`` requests that do not specify a version ID.
 Instead, MinIO returns a ``404``-like response. 
 
 You can find the UUID of object versions with :mc-cmd:`mc ls --versions`.
@@ -121,7 +121,7 @@ Delete operations may or may not replicate, depending on the type of replication
 Site Replication
 ~~~~~~~~~~~~~~~~
 
-For clusters with :ref:`multi-site replication <minio-site-replication-overview>` set up, MinIO replicates all ``delete`` operations performed on any cluster to each of the other clusters in the peer group.
+For clusters with :ref:`multi-site replication <minio-site-replication-overview>` enabled, MinIO replicates all ``delete`` operations performed on any cluster to each of the other clusters in the peer group.
 
 Delete behavior on any single peer follows the same processes as any MinIO deployment.
 
@@ -134,43 +134,44 @@ Delete operation replication uses the same :ref:`replication process <minio-repl
 
 MinIO requires *explicitly enabling* versioned deletes and delete marker replication. 
 Use the :mc-cmd:`mc replicate add --replicate` field to specify either ``delete`` and ``delete-marker`` or both to enable versioned deletes and delete marker replication, respectively. 
-To enable both, specify both strings using a comma separator ``delete,delete-marker``.
+To enable both, specify both strings using a comma separator: ``delete,delete-marker``.
 
 For delete marker replication, MinIO begins the replication process after a delete operation creates the delete marker. 
 MinIO uses the ``X-Minio-Replication-DeleteMarker-Status`` metadata field for tracking  delete marker replication status. 
 In :ref:`active-active <minio-bucket-replication-serverside-twoway>` replication configurations, MinIO may produce duplicate delete markers if both clusters concurrently create a delete marker for an object *or* if one or both clusters were down before the replication event synchronized.
 
 For replicating the deletion of a specific object version, MinIO marks the object version as ``PENDING`` until replication completes. 
-Once the remote target deletes that object version, MinIO deletes the object on the source.
+Once the remote target deletes that object version, MinIO deletes the object version on the source.
 While this process ensures near-synchronized version deletion, it may result in listing operations returning the object version after the initial delete operation. 
 MinIO uses the ``X-Minio-Replication-Delete-Status`` for tracking delete version replication status.
 
 MinIO only replicates explicit client-driven delete operations. 
-MinIO does *not* replicate objects deleted from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
+MinIO does *not* replicate objects deleted by :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
 For :ref:`active-active <minio-bucket-replication-serverside-twoway>` configurations, set the same expiration rules on *all* of of the replication buckets to ensure consistent application of object expiration.
 
 .. admonition:: MinIO Trims Empty Object Prefixes on Source and Remote Bucket
    :class: note, dropdown
 
    If a delete operation removes the last object in a bucket prefix, MinIO recursively removes each empty part of the prefix up to the bucket root.
-   MinIO only applies the recursive removal to prefixes created *implicitly* as part of object write operations - that is, the prefix was not created using an explicit directory creation command such as :mc:`mc mb`.
+   MinIO only applies the recursive removal to prefixes created *implicitly* as part of object write operations.
+   MinIO does not recursively remove prefixes created using an explicit directory creation command, such as :mc:`mc mb`.
 
    If a replication rule enables replication delete operations, the replication process *also* applies the implicit prefix trimming behavior on the destination MinIO cluster.
 
    For example, consider a bucket ``photos`` with the following object prefixes:
    
-   - ``photos/2021/january/myphoto.jpg``
-   - ``photos/2021/february/myotherphoto.jpg``
-   - ``photos/NYE21/NewYears.jpg``
+   - ``photos/2021/january/myphoto.jpg`` // ``2021/january/`` created implicitly based on the object name
+   - ``photos/2021/february/myotherphoto.jpg``  // ``2021/february/`` created implicitly based on the object name
+   - ``photos/NYE21/NewYears.jpg``  // ``NYE21/`` explicitly created in the bucket
 
    ``photos/NYE21`` is the *only* prefix explicitly created using :mc:`mc mb`.
    All other prefixes were *implicitly* created as part of writing the object located at that prefix. 
    
    - A command removes ``myphoto.jpg``. 
-     MinIO automatically trims the empty ``/january`` prefix. 
+     MinIO automatically trims the empty ``/january/`` prefix. 
    
    - A command then removes the ``myotherphoto.jpg``. 
-     MinIO automatically trims the ``/february`` prefix *and* the now-empty ``/2021`` prefix. 
+     MinIO automatically trims the ``/february/`` prefix *and* the now-empty ``/2021`` prefix. 
    
    - A command removes the ``NewYears.jpg`` object. 
-     MinIO leaves the ``/NYE21`` prefix remains in place since it was *explicitly* created.
+     MinIO leaves the ``/NYE21/`` prefix remains in place since it was *explicitly* created.
