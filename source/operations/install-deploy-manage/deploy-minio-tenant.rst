@@ -47,7 +47,10 @@ Installing the MinIO :ref:`Kubernetes Operator <deploy-operator-kubernetes>` aut
 This documentation assumes familiarity with all referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
-.. _deploy-minio-distributed-prereqs-storage:
+
+
+
+
 
 Prerequisites
 -------------
@@ -57,7 +60,7 @@ MinIO Kubernetes Operator
 
 The procedures on this page *requires* a valid installation of the MinIO
 Kubernetes Operator and assumes the local host has a matching installation of
-the MinIO Kubernetes Operator. This procedure assumes the latest stable Operator version |operator-version-stable|.
+the MinIO Kubernetes Operator. This procedure assumes the latest stable Operator, version |operator-version-stable|.
 
 See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 
@@ -790,10 +793,6 @@ Kubernetes provides multiple options for configuring external access to services
 .. cond:: openshift
 
    .. include:: /includes/openshift/steps-deploy-minio-tenant.rst
-
-.. cond:: k8s and not (openshift or eks)
-
-   .. include:: /includes/k8s/steps-deploy-tenant-cli.rst
 
 .. toctree::
    :titlesonly:
