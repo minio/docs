@@ -20,11 +20,7 @@ The MinIO Kubernetes Operator supports deploying MinIO Tenants onto AKS infrastr
    MinIO maintains an `AKS Marketplace listing <https://azuremarketplace.microsoft.com/en-us/marketplace/apps/minio.minio-object-storage_v1dot1>`__ through which you can register your AKS cluster with |subnet|.
    Any MinIO tenant you deploy through Marketplace-connected clusters can take advantage of SUBNET registration, including 24/7 access to MinIO engineers.
 
-Using the MinIO ``kubectl`` Plugin
-   MinIO provides a ``kubectl`` plugin for installing and managing the MinIO Operator and Tenants through a terminal or shell (CLI) environment.
-   You can manually register these tenants with |subnet| at any time.
-
-This page documents deploying the MinIO Operator through the CLI using the ``kubectl minio`` plugin.
+This page documents deploying the MinIO Operator through the CLI using Kustomize.
 For instructions on deploying the MinIO Operator through the AKS Marketplace, see :minio-web:`Deploy MinIO through AKS <multicloud-azure-kubernetes-service/deploy>`
 
 This documentation assumes familiarity with all referenced Kubernetes and Azure Kubernetes Service concepts, utilities, and procedures. 
@@ -51,5 +47,5 @@ For guidance on connecting ``kubectl`` to AKS, see :aks-docs:`Install kubectl an
 Procedure
 ---------
 
-.. include:: /includes/common/common-install-operator-kubectl-plugin.rst
+Something Kustomize
 
