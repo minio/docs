@@ -36,8 +36,8 @@ Prerequisites
 
 .. cond:: k8s
 
-   MinIO Kubernetes Operator and Plugin
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   MinIO Kubernetes Operator
+   ~~~~~~~~~~~~~~~~~~~~~~~~~
 
    .. include:: /includes/k8s/common-operator.rst
       :start-after: start-requires-operator-plugin
