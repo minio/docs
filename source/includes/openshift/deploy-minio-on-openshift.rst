@@ -53,13 +53,6 @@ OpenShift ``oc`` CLI
 
 :openshift-docs:`Download and Install <cli_reference/openshift_cli/getting-started-cli.html>` the OpenShift :abbr:`CLI (command-line interface)` ``oc`` for use in this procedure.
 
-MinIO ``kubectl`` Plugin
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-The MinIO Kubernetes Plugin provides a command line interface for the MinIO Operator.
-This procedure uses the ``oc minio`` plugin as part of the installation.
-
-.. include:: /includes/openshift/install-minio-kubectl-plugin.rst
 
 Procedure
 ---------
