@@ -220,13 +220,18 @@ Conversion to or from XML may be required for importing rules created on S3 or s
 
 See :ref:`minio-lifecycle-management` for more complete documentation.
 
-Target Bucket Configuration for Tiering
----------------------------------------
+Target Bucket Considerations
+----------------------------
 
 Keep in mind the following considerations when configuring the target bucket for tiering:
 
-- The target bucket *can* have its own set of object management rules different from the source.
+- The target bucket *can* have its own set of object management rules.
+  Tiering does *not* require the source and target buckets have the same rules.
+
   For example, the source bucket may have object locking defined while the target bucket does not.
+  
+  Target buckets should *not* have their own rules for expiration or additional tiering.
+  MinIO supports only one level of tiering.
 - While enabling tiering requires :ref:`versioning <minio-bucket-versioning>` on the source bucket, the target bucket does *not* require versioning.
   Enabling versioning on both the source and target buckets may lead to unexpected results.
 
