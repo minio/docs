@@ -220,6 +220,33 @@ Conversion to or from XML may be required for importing rules created on S3 or s
 
 See :ref:`minio-lifecycle-management` for more complete documentation.
 
+Target Bucket Configuration for Tiering
+---------------------------------------
+
+Keep in mind the following considerations when configuring the target bucket for tiering:
+
+- The target bucket *can* have its own set of object management rules different from the source.
+  For example, the source bucket may have object locking defined while the target bucket does not.
+- While enabling tiering requires :ref:`versioning <minio-bucket-versioning>` on the source bucket, the target bucket does *not* require versioning.
+  Enabling versioning on both the source and target buckets may lead to unexpected results.
+
+Exclusive Access to Remote Data
+-------------------------------
+
+MinIO **must** have *exclusive* access to the target bucket.
+No other user, process, application, or resource should have any access to or perform any actions against the target bucket.
+
+All access to the transitioned objects *must* occur through MinIO via S3 API operations only. 
+Manually modifying a transitioned object - whether the metadata on the “hot” MinIO tier or the object data on the remote “warm/cold” tier - may result in loss of that object data.
+
+MinIO ignores any objects in the remote bucket or bucket prefix not explicitly managed by the MinIO deployment. Automatic transition and transparent object retrieval depend on the following assumptions:
+
+- No external mutation, migration, or deletion of objects on the remote storage.
+- No lifecycle management rules (such as transition or expiration) on the remote storage bucket.
+
+To facilitate this exclusive access, grant the lifecycle management user ``read``, ``write``, and ``delete`` access to the target bucket in its :ref:`policy <minio-policy>`.
+All other policies should ``deny`` access to the target bucket.
+
 .. toctree::
    :titlesonly:
    :hidden:
