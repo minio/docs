@@ -30,15 +30,19 @@ The :mc:`mc ready` command checks the status of a cluster.
 
          mc ready play
 
-      The command pings the deployment at the :mc:`~mc alias` ``play``.'
+      The command sends a ``get`` request to the deployment at the :mc:`~mc alias` ``play``.'
       The command repeats the request until it is successful.
-      Once the request succeeds, the command outputs the message, ``The cluster is ready``.
 
-      The output resembles the following:
+      The output before a cluster is ready resembles the following:
 
       .. code-block:: shell
 
          The cluster is unreachable: Get "http://play.min.io:9000/minio/health/cluster": dial tcp 127.0.0.1:9000: connect: connection refused
+
+      Once the request succeeds, the output resembles the following:
+     
+      .. code-block:: shell
+
          The cluster is ready
 
    .. tab-item:: SYNTAX
@@ -68,12 +72,12 @@ Parameters
 .. mc-cmd:: --cluster-read
    :optional:
 
-   Checks if the cluster has enough quorum to serve ``READ`` requests.
+   Checks if the cluster has enough :term:`quorum <read quorum>` to serve ``READ`` requests.
 
 .. mc-cmd:: --maintenance
    :optional:
    
-   Checks if the cluster is ready to be taken down for maintenance.
+   Checks if the cluster can maintain read and write quorum if taken down for maintenance.
 
 Global Flags
 ~~~~~~~~~~~~

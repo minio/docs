@@ -211,7 +211,7 @@ Glossary
 
    read quorum
      The minimum number of object shards necessary to reconstruct the full object for read operations.
-     See :ref `minio-ec-basics` for more information.
+     See :ref:`minio-ec-basics` for more information.
 
    replication
    mirror
