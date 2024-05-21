@@ -223,17 +223,22 @@ See :ref:`minio-lifecycle-management` for more complete documentation.
 Target Bucket Considerations
 ----------------------------
 
-Keep in mind the following considerations when configuring the target bucket for tiering:
+- MinIO does *not* require that the target bucket match object management or versioning configurations with the source bucket.
+- Object locking set on the target bucket may prevent desired ``delete`` operations from the source bucket from completing.
+- If the target bucket has expiration rules configured, these may result in data loss.
+- MinIO tiers objects with their own ``UUID``, so versioning on the target bucket is not required.
+
+  Versioning on the target bucket may have the following unexpected or undesired results:
+  
+  - Excess data usage on the target remote after a delete operation on the source
+  - Reduced storage efficiency on the target, as ``delete`` operations result in ``DeleteMarker``
+  - Duplicate delete markers on source and target buckets
 
 - The target bucket *can* have its own set of object management rules.
-  Tiering does *not* require the source and target buckets have the same rules.
 
-  For example, the source bucket may have object locking defined while the target bucket does not.
-  
   Target buckets should *not* have their own rules for expiration or additional tiering.
   MinIO supports only one level of tiering.
-- While enabling tiering requires :ref:`versioning <minio-bucket-versioning>` on the source bucket, the target bucket does *not* require versioning.
-  Enabling versioning on both the source and target buckets may lead to unexpected results.
+  Mismatched rules between the source and the target buckets run a risk of data corruption and loss.
 
 Exclusive Access to Remote Data
 -------------------------------
