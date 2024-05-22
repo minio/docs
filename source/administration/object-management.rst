@@ -223,22 +223,27 @@ See :ref:`minio-lifecycle-management` for more complete documentation.
 Target Bucket Considerations
 ----------------------------
 
-- MinIO does *not* require that the target bucket match object management or versioning configurations with the source bucket.
+MinIO does *not* require that the target bucket match object management or versioning configurations with the source bucket.
+The target bucket *may* have its own set of object management rules, if defined with care.
+
+Target buckets should *not* have their own rules for expiration or additional tiering.
+Expiration rules can result in removal of tiered data still in use by the source bucket.
+Tiering to an additional remote creates an additional network hop between the hot tier and it's data while also increasing operational complexity.
+
+You *may* configure object locking or versioning on the remote bucket.
+Use caution, as mismatched rules between the source and the target buckets run a risk of data corruption and loss.
+
+Creating separate rules on the target bucket may have effects such as the following:
+
 - Object locking set on the target bucket may prevent desired ``delete`` operations from the source bucket from completing.
-- If the target bucket has expiration rules configured, these may result in data loss.
+
 - MinIO tiers objects with their own ``UUID``, so versioning on the target bucket is not required.
 
-  Versioning on the target bucket may have the following unexpected or undesired results:
+  If you enable versioning on the target bucket, you may experience the following unexpected or undesired results:
   
   - Excess data usage on the target remote after a delete operation on the source
-  - Reduced storage efficiency on the target, as ``delete`` operations result in ``DeleteMarker``
+  - Reduced storage efficiency on the target, as ``delete`` operations result in ``DeleteMarker`` rather than freeing space
   - Duplicate delete markers on source and target buckets
-
-- The target bucket *can* have its own set of object management rules.
-
-  Target buckets should *not* have their own rules for expiration or additional tiering.
-  MinIO supports only one level of tiering.
-  Mismatched rules between the source and the target buckets run a risk of data corruption and loss.
 
 Exclusive Access to Remote Data
 -------------------------------
