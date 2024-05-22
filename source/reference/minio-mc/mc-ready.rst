@@ -94,7 +94,7 @@ Examples
 Check if the cluster has read quorum
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command sends checks that a deployment has sufficient drives available for read operations.
+The following command checks that a deployment has sufficient drives available for read operations.
 
 .. code-block:: shell
    :class: copyable
