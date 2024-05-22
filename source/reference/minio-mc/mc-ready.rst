@@ -15,7 +15,7 @@ Syntax
 
 .. start-mc-ready-desc
 
-The :mc:`mc ready` command checks the status of a cluster.
+The :mc:`mc ready` command checks the status of a cluster and whether the cluster has ``read`` and ``write`` quorum.
 
 .. end-mc-ready-desc
 
@@ -30,7 +30,7 @@ The :mc:`mc ready` command checks the status of a cluster.
 
          mc ready play
 
-      The command sends a ``get`` request to the deployment at the :mc:`~mc alias` ``play``.'
+      The command sends a ``GET`` request to the deployment at the :mc:`~mc alias` ``play``.'
       The command repeats the request until it is successful.
 
       The output before a cluster is ready resembles the following:
@@ -79,6 +79,8 @@ Parameters
    
    Checks if the cluster can maintain read and write quorum if taken down for maintenance.
 
+   Use an alias for the specific node you expect to take down for maintenance.
+
 Global Flags
 ~~~~~~~~~~~~
 
@@ -102,7 +104,7 @@ The following command sends checks that a deployment has sufficient drives avail
 Check if a cluster is down for maintenance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command checks if the cluster can maintain read and write quorum during maintenance.
+The following command checks whether the cluster can maintain read and write quorum during maintenance when the node at alias ``myminio`` is taken down.
 
 .. code-block:: shell
    :class: copyable
