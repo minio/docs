@@ -220,6 +220,42 @@ Conversion to or from XML may be required for importing rules created on S3 or s
 
 See :ref:`minio-lifecycle-management` for more complete documentation.
 
+Target Bucket Considerations
+----------------------------
+
+MinIO does *not* require that the target bucket match object management or versioning configurations with the source bucket.
+The target bucket *may* have its own set of object management rules, if defined with care.
+
+Target buckets should *not* have their own rules for expiration or additional tiering.
+Expiration rules can result in removal of tiered data still in use by the source bucket.
+Tiering to an additional remote creates an additional network hop between the hot tier and it's data while also increasing operational complexity.
+
+You *may* configure object locking or versioning on the remote bucket.
+
+Enabling versioning or object locking on the target bucket may have effects such as the following:
+
+- Object locking set on the target bucket may prevent desired ``delete`` operations from the source bucket from completing.
+- MinIO tiers objects with their own ``UUID``, so versioning on the target bucket is redundant at best.
+- Reduced storage efficiency on the target, as ``delete`` operations result in creation of a ``DeleteMarker`` rather than freeing space.
+- Duplicate delete markers on source and target buckets.
+
+Exclusive Access to Remote Data
+-------------------------------
+
+MinIO **must** have *exclusive* access to the target bucket.
+No other user, process, application, or resource should have any access to or perform any actions against the target bucket.
+
+All access to the transitioned objects *must* occur through MinIO via S3 API operations only. 
+Manually modifying a transitioned object - whether the metadata on the “hot” MinIO tier or the object data on the remote “warm/cold” tier - may result in loss of that object data.
+
+MinIO ignores any objects in the remote bucket or bucket prefix not explicitly managed by the MinIO deployment. Automatic transition and transparent object retrieval depend on the following assumptions:
+
+- No external mutation, migration, or deletion of objects on the remote storage.
+- No lifecycle management rules (such as transition or expiration) on the remote storage bucket.
+
+To facilitate this exclusive access, grant the lifecycle management user ``read``, ``write``, and ``delete`` access to the target bucket in its :ref:`policy <minio-policy>`.
+All other policies should ``deny`` access to the target bucket.
+
 .. toctree::
    :titlesonly:
    :hidden:
