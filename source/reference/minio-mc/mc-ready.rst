@@ -77,9 +77,9 @@ Parameters
 .. mc-cmd:: --maintenance
    :optional:
    
-   Checks if the cluster can maintain read and write quorum if taken down for maintenance.
+   Checks if the cluster can maintain read and write quorum if the node for the alias is taken down for maintenance.
 
-   Use an alias for the specific node you expect to take down for maintenance.
+   Use an alias for the specific node you expect to take down for maintenance and not an alias set to a load balancer.
 
 Global Flags
 ~~~~~~~~~~~~
