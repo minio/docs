@@ -589,6 +589,13 @@ You can also define some of these options using :ref:`Environment Variables <min
 
    Alternatively, set the environment variable :envvar:`MC_CONFIG_DIR`.
 
+.. option:: --disable-pager, --dp
+
+   .. versionadded:: mc RELEASE.2024-04-29T09-56-05Z
+
+   Disable the pager functionality of the MinIO Client in the CLI.
+   When used, output prints to raw ``STDOUT`` instead.
+
 .. option:: --json
 
    Enables `JSON lines <http://jsonlines.org/>`_ formatted output to the
