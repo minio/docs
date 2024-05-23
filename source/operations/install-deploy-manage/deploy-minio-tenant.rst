@@ -246,7 +246,7 @@ To deploy a tenant from the MinIO Operator Console, complete the following steps
 
 .. include:: /includes/common/common-k8s-connect-operator-console.rst
 
-Open your browser to the specified URL and enter the JWT Token into the login page. 
+Open your browser to the appropriate URL and enter the JWT Token into the login page. 
 You should see the :guilabel:`Tenants` page:
 
 .. image:: /images/k8s/operator-dashboard.png
@@ -331,7 +331,7 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
        The Operator by default uses pod anti-affinity, such that the Kubernetes cluster *must* have at least one worker node per MinIO server pod. 
        Use the :guilabel:`Pod Placement` pane to modify the pod scheduling settings for the Tenant.
 
-   * - :guilabel:`Number of Drives per Server`
+   * - :guilabel:`Drives per Server`
      - The number of storage volumes (Persistent Volume Claims) the Operator requests per Server. 
 
        The Operator displays the :guilabel:`Total Volumes` under the :guilabel:`Resource Allocation` section. 
@@ -363,21 +363,27 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
 
        The specified :guilabel:`Storage Class` *must* correspond to a set of Persistent Volumes sufficient in capacity to match each generated PVC.
 
-   * - :guilabel:`Memory per Node [Gi]`
-     - Specify the total amount of memory (RAM) to allocate per MinIO server pod. 
+   * - :guilabel:`Erasure Code Parity`
+     - The Erasure Code Parity to set for the deployment.
+
+       The Operator displays the selected parity and its effect on the deployment under the :guilabel:`Erasure Code Configuration` section.
+       Erasure Code parity defines the overall resiliency and availability of data on the cluster.
+       Higher parity values increase tolerance to drive or node failure at the cost of total storage.
+       See :ref:`minio-erasure-coding` for more complete documentation.
+
+   * - :guilabel:`CPU Request`
+     - Specify the desired number of CPUs to allocate per MinIO server pod.
+
+   * - :guilabel:`Memory Request [Gi]`
+     - Specify the desired amount of memory (RAM) to allocate per MinIO server pod. 
        See :ref:`minio-hardware-checklist-memory` for guidance on setting this value.
        MinIO **requires** a minimum of 2GiB of memory per worker.
 
        The Kubernetes cluster *must* have worker nodes with sufficient free RAM to match the pod request.
 
-   * - :guilabel:`Erasure Code Parity`
-     - The Erasure Code Parity to set for the deployment.
+   * - :guilabel:`Specify Limit`
+     - Toggle to :guilabel:`ON` to specify maximum CPU and memory limits.
 
-       The Operator displays the selected parity and its effect on the deployment under the :guilabel:`Erasure Code Configuration` section.
-       Erasure Code parity defines the overall resiliency and availability of data on the cluster. 
-       Higher parity values increase tolerance to drive or node failure at the cost of total storage. 
-       See :ref:`minio-erasure-coding` for more complete documentation.
-       
 Select :guilabel:`Create` to create the Tenant using the current configuration.
 While all subsequent sections are *optional*, MinIO recommends reviewing them prior to deploying the Tenant.
 
@@ -463,25 +469,15 @@ The :guilabel:`Images` section displays container image settings used by the Min
    * - Field
      - Description
 
-   * - :guilabel:`MinIO's Image`
+   * - :guilabel:`MinIO`
      - The container image to use for the MinIO Server. 
        See the `MinIO Quay <https://quay.io/repository/minio/minio>`__ or the `MinIO DockerHub <https://hub.docker.com/r/minio/minio/tags>`__ repositories for a list of valid tags.
-
-   * - :guilabel:`Log Search API's Image`
-     - The container image to use for MinIO Log Search API.
 
    * - :guilabel:`KES Image`
      - The container image to use for MinIO :minio-git:`KES <kes>`.
 
-   * - | :guilabel:`Log Search Postgres Image`
-       | :guilabel:`Log Search Postgres Init Image`
-     - The container images to use for starting the PostgreSQL service supporting the Log Search API
-
-   * - | :guilabel:`Prometheus Image`
-       | :guilabel:`Prometheus Sidecar Image`
-       | :guilabel:`Prometheus Init Image`
-
-     - The container images to use for starting the Prometheus service supporting the Log Search API.
+   * - :guilabel:`Use a private container registry`
+     - If the tenant requires a private container registry, toggle to :guilabel:`ON` and specify the location and credentials for the registry.
 
 .. _create-tenant-pod-placement-section:
 
@@ -512,6 +508,9 @@ The :guilabel:`Pod Placement` section displays pod scheduler settings for the Mi
 
    * - :guilabel:`Node Selector`
      - Directs the operator to set a Node Selector such that pods only deploy onto Kubernetes workers whose labels match the selector.
+
+   * - :guilabel:`Tolerations`
+     - Specify any required tolerations for this tenant's pods.
 
 .. _create-tenant-identity-provider-section:
 
@@ -555,10 +554,10 @@ The :guilabel:`Security` section displays TLS certificate settings for the MinIO
    * - Field
      - Description
 
-   * - :guilabel:`Enable TLS`
+   * - :guilabel:`TLS`
      - Enable or disable TLS for the MinIO Tenant. 
 
-   * - :guilabel:`Enable AutoCert`
+   * - :guilabel:`AutoCert`
      - Directs the Operator to generate Certificate Signing Requests for submission to the Kubernetes TLS API.
 
        The MinIO Tenant uses the generated certificates for enabling and establishing TLS connections.
@@ -622,6 +621,10 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
      - Configure `AWS Secrets Manager <https://aws.amazon.com/secrets-manager/>`__ as the external KMS for storing root encryption keys. 
        See :ref:`minio-sse-aws` for guidance on the displayed fields.
 
+   * - :guilabel:`Gemalto`
+     - Configure `Gemalto (Thales Digital Identity and Security) <https://github.com/minio/kes/wiki/Gemalto-KeySecure/>`__ as the external KMS for storing root encryption keys.
+       See :ref:`minio-sse-gemalto` for guidance on the displayed fields.
+
    * - :guilabel:`GCP`
      - Configure `Google Cloud Platform Secret Manager <https://cloud.google.com/secret-manager/>`__ as the external KMS for storing root encryption keys. 
        See :ref:`minio-sse-gcp` for guidance on the displayed fields.
@@ -631,78 +634,6 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
        See :ref:`minio-sse-azure` for guidance on the displayed fields.       
 
 .. _minio-tenant-audit-logging-settings:
-
-9) Audit Log Settings
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common/common-k8s-deprecation-audit-prometheus.rst
-   :start-after: start-deprecate-audit-logs
-   :end-before: end-deprecate-audit-logs
-
-.. versionchanged:: Console 0.23.1 and Operator 5.0.0
-
-   New tenants have Audit Logs :guilabel:`Disabled` by default.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Field
-     - Description
-
-   * - Log Search Storage Class
-     - Select the storage class and requested capacity associated to the PVC generated to support audit logging.
-
-   * - Storage Size
-     - Specify the size of storage to make available for audit logging.
-
-   * - :guilabel:`SecurityContext for LogSearch`
-     - The MinIO Operator deploys a Log Search service (SQL Database and Log Search API) to support Audit Log search in the MinIO Tenant Console.
-
-       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
-       You can also direct the pod to not run commands as the ``Root`` user.
-
-   * - :guilabel:`SecurityContext for PostgreSQL`
-     - The MinIO Operator deploys a PostgreSQL database to support logging services.
-
-       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
-       You can also direct the pod to not run commands as the ``Root`` user.
-
-       You can also modify the storage class and requested capacity associated to the PVC generated to support the Prometheus service.
-
-.. _minio-tenant-monitoring-settings:
-
-10) Monitoring Settings
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common/common-k8s-deprecation-audit-prometheus.rst
-   :start-after: start-deprecate-prometheus
-   :end-before: end-deprecate-prometheus
-
-.. versionchanged:: Console 0.23.1 and Operator 5.0.0
-
-   New tenants have monitoring :guilabel:`Disabled` by default.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Field
-     - Description
-
-   * - Storage Class
-     - Select the storage class and requested capacity associated to the PVC generated to support Prometheus.
-
-   * - Storage Size
-     - Specify the size of storage to make available for Prometheus.
-
-   * - :guilabel:`SecurityContext`
-     - The MinIO Operator assigns this Security Context for the Prometheus pod.
-
-       You can modify the Security Context to run the associated pod commands using a different ``User``, ``Group``, ``FsGroup``, or ``FSGroupChangePolicy``. 
-       You can also direct the pod to not run commands as the ``Root`` user.
 
 .. _create-tenant-deploy-view-tenant:
 

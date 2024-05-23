@@ -120,7 +120,8 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
           }
       }'
 
-   You can now access the service through port ``30433`` on any of your Kubernetes worker nodes.
+   The patch command should output ``service/console patched``.
+   You can now access the service through ports ``30433`` (HTTPS) or ``30090`` (HTTP) on any of your Kubernetes worker nodes.
 
 #. Verify the Operator installation
 
@@ -172,6 +173,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
       SA_TOKEN=$(kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode)
       echo $SA_TOKEN
 
+   The output of this command is the JSON Web Token (JWT) login credential for Operator Console.
 
 #. Log into the MinIO Operator Console
 
@@ -188,7 +190,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
          .. code-block:: shell
             :class: copyable
 
-            $ kubectl get nodes -o custom-columns=IP:.status.addresses[:]
+            kubectl get nodes -o custom-columns=IP:.status.addresses[:]
             IP
             map[address:172.18.0.5 type:InternalIP],map[address:k3d-MINIO-agent-3 type:Hostname]
             map[address:172.18.0.6 type:InternalIP],map[address:k3d-MINIO-agent-2 type:Hostname]

@@ -43,7 +43,7 @@ The following changes apply for Operator v5.0.0 or later:
 - The ``.spec.credsSecret`` field is replaced by the ``.spec.configuration`` field.
 
   The ``.spec.credsSecret`` should hold all the environment variables for the MinIO deployment that contain sensitive information and should not show in ``.spec.env``.
-  This change impacts the Tenant :abbr:`CRD <CustomResourceDefinition>` and only impacts users editing a tenant YAML directly, such as through Helm or Kustomize.
+  This change impacts the Tenant :abbr:`CRD (CustomResourceDefinition)` and only impacts users editing a tenant YAML directly, such as through Helm or Kustomize.
 - Both the **Log Search API** (``.spec.log``) and **Prometheus** (``.spec.prometheus``) deployments have been removed.
   However, existing deployments are left running as standalone deployments / statefulsets with no connection to the Tenant CR.
   Deleting the Tenant :abbr:`CRD (Custom Resource Definition)` does **not** cascade to the log or Prometheus deployments.
@@ -58,7 +58,7 @@ Log Search and Prometheus
 The latest releases of Operator remove Log Search and Prometheus from included Operator tools.
 The following steps back up the existing yaml files, perform some clean up, and provide steps to continue using either or both of these functions.
 
-1. Back up Prometheus and Log Search yaml files.
+#. Back up Prometheus and Log Search yaml files.
 
    .. code-block:: shell
       :class: copyable
@@ -79,9 +79,9 @@ The following steps back up the existing yaml files, perform some clean up, and 
 
    Repeat for each tenant.
 
-2. Remove ``.metadata.ownerReferences`` for all backed up files for all tenants.
+#. Remove ``.metadata.ownerReferences`` for all backed up files for all tenants.
 
-3. *(Optional)* To continue using Log Search API and Prometheus, add the following variables to the tenant's yaml specification file under ``.spec.env``
+#. *(Optional)* To continue using Log Search API and Prometheus, add the following variables to the tenant's yaml specification file under ``.spec.env``
 
    Use the following command to edit a tenant:
 
@@ -121,17 +121,18 @@ Upgrade Operator to |operator-version-stable|
 
       The following procedure upgrades the MinIO Operator using Kustomize.
 
+      For Operator versions 4.5.8 to 5.0.14 installed with the MinIO Kubernetes Plugin, follow the Kustomize instructions to upgrade to 5.0.15 or later.
       If you installed the Operator using :ref:`Helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
 
-      1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
-      
+      #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+
          Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
          Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
          See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
 
-      2. Verify the existing Operator installation.
+      #. Verify the existing Operator installation.
          Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
-         
+
          If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
 
          You can verify the currently installed Operator version by retrieving the object specification for an operator pod in the namespace.
@@ -141,9 +142,9 @@ Upgrade Operator to |operator-version-stable|
             :class: copyable
 
             kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
-         
+
          The output resembles the following:
-         
+
          .. code-block:: json
             :emphasize-lines: 8-10
             :substitutions:
@@ -160,15 +161,39 @@ Upgrade Operator to |operator-version-stable|
                "name": "minio-operator"
             }
 
+         If your local host does not have the ``jq`` utility installed, you can run the first part of the command and locate the ``spec.ports`` section of the output.
 
-      3. Do Kustomize thing
+      #. Upgrade Operator with Kustomize
 
+         The following command upgrades Operator to version |operator-version-stable|:
 
-      5. Validate the Operator upgrade
+         .. code-block:: shell
+            :class: copyable
 
-         You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
+            kubectl apply -k github.com/minio/operator
 
-         .. include:: /includes/common/common-k8s-connect-operator-console.rst
+         The output resembles the following:
+
+         .. code-block:: shell
+
+            something something
+
+      #. Validate the Operator upgrade
+
+         You can check the Operator version with the same ``kubectl`` command you used to verify the existing Operator version before upgrading:
+
+         .. code-block:: shell
+            :class: copyable
+
+            kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
+
+      #. Connect to the Operator Console
+
+         .. include:: /includes/common/common-k8s-connect-operator-console-no-plugin.rst
+
+      #. Retrieve the Operator Console JWT for login
+
+	 .. include:: /includes/common/common-k8s-operator-console-jwt.rst
 
 
    .. tab-item:: Upgrade using Helm
@@ -177,16 +202,16 @@ Upgrade Operator to |operator-version-stable|
 
       If you installed the Operator using Kustomize, use the :guilabel:`Upgrade using Kustomize` instructions instead.
 
-      1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
-      
+      #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+
          Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
          Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
          See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
 
-      #. Verify the existing Operator installation. 
+      #. Verify the existing Operator installation.
 
          Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
-         
+
          If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
 
          Use the ``helm list`` command to view the installed charts in the namespace:
@@ -207,7 +232,7 @@ Upgrade Operator to |operator-version-stable|
       #. Update the Operator Repository
 
          Use ``helm repo update minio-operator`` to update the MinIO Operator repo.
-         If you set a different alias for the MinIO Operator repository, specify that to the command.
+         If you set a different alias for the MinIO Operator repository, specify that in the command instead of ``minio-operator``.
          You can use ``helm repo list`` to review your installed repositories.
 
          Use ``helm search`` to check the latest available chart version after updating the Operator Repo:
@@ -223,7 +248,7 @@ Upgrade Operator to |operator-version-stable|
             :class: copyable
             :substitutions:
 
-            NAME                            CHART VERSION   APP VERSION     DESCRIPTION                    
+            NAME                            CHART VERSION   APP VERSION     DESCRIPTION
             minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
             minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
             minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
@@ -240,7 +265,7 @@ Upgrade Operator to |operator-version-stable|
             helm upgrade -n minio-operator \
               operator minio-operator/operator
 
-         If you installed the MinIO Operator to a different namespace, specify that to the ``-n`` argument.
+         If you installed the MinIO Operator to a different namespace, specify that in the ``-n`` argument.
 
          If you used a different installation name from ``operator``, replace the value above with the installation name.
 
@@ -248,7 +273,8 @@ Upgrade Operator to |operator-version-stable|
 
       #. Validate the Operator upgrade
 
-         You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
+         .. include:: /includes/common/common-k8s-connect-operator-console-no-plugin.rst
 
-         .. include:: /includes/common/common-k8s-connect-operator-console.rst
+      #. Retrieve the Operator Console JWT for login
 
+         .. include:: /includes/common/common-k8s-operator-console-jwt.rst
