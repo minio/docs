@@ -170,60 +170,76 @@ The command accepts the following arguments:
    :optional:
 
    Enable and configure a SSH File Transfer Protocol (``SFTP``) server.
-   Use multiple times to specify an address port and the path to the ssh private key to use as key-value pairs.
+   Use multiple times to specify each desired key-value pair.
 
-   Valid keys:
+   The following table lists valid keys.
 
-   - ``address``, which takes a single port to use for the server, typically ``8022``
-   - ``ssh-private-key``, which takes the path to the user's private key file
-   - ``pub-key-algos``, specify the supported public key algorithms as a comma-separated list
-      
-      Valid algorithms are:
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 30 40
+      :width: 100%
+   
+      * - Key
+        - Description
+        - Valid values
+   
+      * - ``address``
+        - Port to use for connecting to SFTP.
+        - Any valid port number, typically ``8022``.
+   
+      * - ``ssh-private-key``
+        - Path to the user's private key file.
+        - Absolute path or relative path from current location to the key file to use.
+ 
+      * - ``pub-key-algos``
+        - Comma-separated list of the public key algorithms to support.
+        - ``ssh-ed25519``
+          ``sk-ssh-ed25519@openssh.com``
+          ``sk-ecdsa-sha2-nistp256@openssh.com``
+          ``ecdsa-sha2-nistp256``
+          ``ecdsa-sha2-nistp384``
+          ``ecdsa-sha2-nistp521``
+          ``rsa-sha2-256``
+          ``rsa-sha2-512``
+          ``ssh-rsa``
+          ``ssh-dss``
 
-      .. code-block:: text
+      * - ``kex-algos``
+        - Comma-separated list in priority order of the key-exchange algorithms to support.
+        - ``curve25519-sha256``
+          ``curve25519-sha256@libssh.org``
+          ``ecdh-sha2-nistp256``
+          ``ecdh-sha2-nistp384``
+          ``ecdh-sha2-nistp521``
+          ``diffie-hellman-group14-sha256``
+          ``diffie-hellman-group16-sha512``
+          ``diffie-hellman-group14-sha1``
+          ``diffie-hellman-group1-sha1``
 
-         ssh-ed25519
-         sk-ssh-ed25519@openssh.com
-         sk-ecdsa-sha2-nistp256@openssh.com
-         ecdsa-sha2-nistp256
-         ecdsa-sha2-nistp384
-         ecdsa-sha2-nistp521
-         rsa-sha2-256
-         rsa-sha2-512
-         ssh-rsa
-         ssh-dss
-   - ``kex-algos``, specify the supported key-exchange algorithms as a comma-separated list in order of preference
+      * - ``cipher-algos``
+        - Comma-separated list of cipher algorithms to support
+        - ``aes128-ctr``
+          ``aes192-ctr``
+          ``aes256-ctr``
+          ``aes128-gcm@openssh.com``
+          ``aes256-gcm@openssh.com``
+          ``chacha20-poly1305@openssh.com``
+          ``arcfour256``
+          ``arcfour128``
+          ``arcfour``
+          ``aes128-cbc``
+          ``3des-cbc``
 
-      Valid algorithms are:
+      * - ``mac-algos``
+        - Comma-separated list in preference order of MAC algorithms to support. 
+          Based on `RFC 4253 section 6.4 <https://www.rfc-editor.org/rfc/rfc4253>`__ with the exception of ``hmac-md5`` variants, which are end of life.
+        - ``hmac-sha2-256-etm@openssh.com``
+          ``hmac-sha2-512-etm@openssh.com``
+          ``hmac-sha2-256``
+          ``hmac-sha2-512``
+          ``hmac-sha1``
+          ``hmac-sha1-96``
 
-      .. code-block:: text
-
-         curve25519-sha256
-         curve25519-sha256@libssh.org
-         ecdh-sha2-nistp256
-         ecdh-sha2-nistp384
-         ecdh-sha2-nistp521
-         diffie-hellman-group14-sha256
-         diffie-hellman-group16-sha512
-         diffie-hellman-group14-sha1
-         diffie-hellman-group1-sha1
-   - ``cipher-algos``, specify allowed cipher algorithms as a comma-separated list
-      
-      Valid algorithms are:
-
-      .. code-block:: text
-
-         aes128-ctr
-         aes192-ctr
-         aes256-ctr
-         aes128-gcm@openssh.com
-         aes256-gcm@openssh.com
-         chacha20-poly1305@openssh.com
-         arcfour256
-         arcfour128
-         arcfour
-         aes128-cbc
-         3des-cbc
 
    For example:
 
