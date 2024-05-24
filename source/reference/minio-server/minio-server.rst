@@ -193,52 +193,64 @@ The command accepts the following arguments:
  
       * - ``pub-key-algos``
         - Comma-separated list of the public key algorithms to support.
-        - ``ssh-ed25519``
-          ``sk-ssh-ed25519@openssh.com``
-          ``sk-ecdsa-sha2-nistp256@openssh.com``
-          ``ecdsa-sha2-nistp256``
-          ``ecdsa-sha2-nistp384``
-          ``ecdsa-sha2-nistp521``
-          ``rsa-sha2-256``
-          ``rsa-sha2-512``
-          ``ssh-rsa``
-          ``ssh-dss``
+        - 
+          .. code-block:: text
+
+             ssh-ed25519
+             sk-ssh-ed25519@openssh.com
+             sk-ecdsa-sha2-nistp256@openssh.com
+             ecdsa-sha2-nistp256
+             ecdsa-sha2-nistp384
+             ecdsa-sha2-nistp521
+             rsa-sha2-256
+             rsa-sha2-512
+             ssh-rsa
+             ssh-dss
 
       * - ``kex-algos``
         - Comma-separated list in priority order of the key-exchange algorithms to support.
-        - ``curve25519-sha256``
-          ``curve25519-sha256@libssh.org``
-          ``ecdh-sha2-nistp256``
-          ``ecdh-sha2-nistp384``
-          ``ecdh-sha2-nistp521``
-          ``diffie-hellman-group14-sha256``
-          ``diffie-hellman-group16-sha512``
-          ``diffie-hellman-group14-sha1``
-          ``diffie-hellman-group1-sha1``
+        - 
+          .. code-block:: text
+          
+             curve25519-sha256
+             curve25519-sha256@libssh.org
+             ecdh-sha2-nistp256
+             ecdh-sha2-nistp384
+             ecdh-sha2-nistp521
+             diffie-hellman-group14-sha256
+             diffie-hellman-group16-sha512
+             diffie-hellman-group14-sha1
+             diffie-hellman-group1-sha1
 
       * - ``cipher-algos``
         - Comma-separated list of cipher algorithms to support
-        - ``aes128-ctr``
-          ``aes192-ctr``
-          ``aes256-ctr``
-          ``aes128-gcm@openssh.com``
-          ``aes256-gcm@openssh.com``
-          ``chacha20-poly1305@openssh.com``
-          ``arcfour256``
-          ``arcfour128``
-          ``arcfour``
-          ``aes128-cbc``
-          ``3des-cbc``
+        - 
+          .. code-block:: text
+
+            aes128-ctr
+            aes192-ctr
+            aes256-ctr
+            aes128-gcm@openssh.com
+            aes256-gcm@openssh.com
+            chacha20-poly1305@openssh.com
+            arcfour256
+            arcfour128
+            arcfour
+            aes128-cbc
+            3des-cbc
 
       * - ``mac-algos``
         - Comma-separated list in preference order of MAC algorithms to support. 
           Based on `RFC 4253 section 6.4 <https://www.rfc-editor.org/rfc/rfc4253>`__ with the exception of ``hmac-md5`` variants, which are end of life.
-        - ``hmac-sha2-256-etm@openssh.com``
-          ``hmac-sha2-512-etm@openssh.com``
-          ``hmac-sha2-256``
-          ``hmac-sha2-512``
-          ``hmac-sha1``
-          ``hmac-sha1-96``
+        - 
+          .. code-block:: text
+
+             hmac-sha2-256-etm@openssh.com
+             hmac-sha2-512-etm@openssh.com
+             hmac-sha2-256
+             hmac-sha2-512
+             hmac-sha1
+             hmac-sha1-96
 
 
    For example:
