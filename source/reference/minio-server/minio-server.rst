@@ -176,14 +176,63 @@ The command accepts the following arguments:
 
    - ``address``, which takes a single port to use for the server, typically ``8022``
    - ``ssh-private-key``, which takes the path to the user's private key file
+   - ``pub-key-algos``, specify the supported public key algorithms as a comma-separated list
+      
+      Valid algorithms are:
+
+      .. code-block:: text
+
+         ssh-ed25519
+         sk-ssh-ed25519@openssh.com
+         sk-ecdsa-sha2-nistp256@openssh.com
+         ecdsa-sha2-nistp256
+         ecdsa-sha2-nistp384
+         ecdsa-sha2-nistp521
+         rsa-sha2-256
+         rsa-sha2-512
+         ssh-rsa
+         ssh-dss
+   - ``kex-algos``, specify the supported key-exchange algorithms as a comma-separated list in order of preference
+
+      Valid algorithms are:
+
+      .. code-block:: text
+
+         curve25519-sha256
+         curve25519-sha256@libssh.org
+         ecdh-sha2-nistp256
+         ecdh-sha2-nistp384
+         ecdh-sha2-nistp521
+         diffie-hellman-group14-sha256
+         diffie-hellman-group16-sha512
+         diffie-hellman-group14-sha1
+         diffie-hellman-group1-sha1
+   - ``cipher-algos``, specify allowed cipher algorithms as a comma-separated list
+      
+      Valid algorithms are:
+
+      .. code-block:: text
+
+         aes128-ctr
+         aes192-ctr
+         aes256-ctr
+         aes128-gcm@openssh.com
+         aes256-gcm@openssh.com
+         chacha20-poly1305@openssh.com
+         arcfour256
+         arcfour128
+         arcfour
+         aes128-cbc
+         3des-cbc
 
    For example:
 
    .. code-block:: shell
       :class: copyable
 
-      minio server http://server{1...4}/disk{1...4}                               \
-      --sftp="address=:8022" --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa" \
+      minio server http://server{1...4}/disk{1...4}                                 \
+      --sftp="address=:8022" --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa"   \
+      --sftp="kex-algos=diffie-hellman-group14-sha256,curve25519-sha256@libssh.org" \
       ...
 
 .. mc-cmd:: --certs-dir, -S
