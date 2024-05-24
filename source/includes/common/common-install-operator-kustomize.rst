@@ -76,16 +76,17 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
 
    .. code-block:: shell
 
-      NAME                              READY   STATUS    RESTARTS   AGE
-      console-6b6cf8946c-9cj25          1/1     Running   0          99s
-      minio-operator-69fd675557-lsrqg   1/1     Running   0          99s
+      NAME                              READY   STATUS              RESTARTS   AGE
+      console-56c7d8bd89-485qh          1/1     Running   0          2m42s
+      minio-operator-6c758b8c45-nkhlx   1/1     Running   0          2m42s
+      minio-operator-6c758b8c45-dgd8n   1/1     Running   0          2m42s
 
    In this example, the ``minio-operator`` pod is MinIO Operator and the ``console`` pod is the Operator Console.
 
    You can modify your Operator deplyoment by applying kubectl patches.
    You can find examples for common configurations in the `Operator GitHub repository <https://github.com/minio/operator/tree/master/examples/kustomization>`__.
 
-.. _minio-k8s-deploy-operator-access-console:
+   .. _minio-k8s-deploy-operator-access-console:
 
 #. *(Optional)* Configure access to the Operator Console service
 
@@ -137,23 +138,22 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
    .. code-block:: shell
 
       NAME                                  READY   STATUS    RESTARTS   AGE
-      pod/console-68d955874d-vxlzm          1/1     Running   0          25h
-      pod/minio-operator-699f797b8b-th5bk   1/1     Running   0          25h
-      pod/minio-operator-699f797b8b-nkrn9   1/1     Running   0          25h
+      pod/console-56c7d8bd89-485qh          1/1     Running   0          5m20s
+      pod/minio-operator-6c758b8c45-nkhlx   1/1     Running   0          5m20s
+      pod/minio-operator-6c758b8c45-dgd8n   1/1     Running   0          5m20s
 
-      NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
-      service/console    ClusterIP   10.43.195.224   <none>        9090/TCP,9443/TCP   25h
-      service/operator   ClusterIP   10.43.44.204    <none>        4221/TCP            25h
-      service/sts        ClusterIP   10.43.70.4      <none>        4223/TCP            25h
+      NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
+      service/operator   ClusterIP   10.43.135.241   <none>        4221/TCP                        5m20s
+      service/sts        ClusterIP   10.43.117.251   <none>        4223/TCP                        5m20s
+      service/console    NodePort    10.43.235.38    <none>        9090:30090/TCP,9443:30433/TCP   5m20s
 
       NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
-      deployment.apps/console          1/1     1            1           25h
-      deployment.apps/minio-operator   2/2     2            2           25h
+      deployment.apps/console          1/1     1            1           5m20s
+      deployment.apps/minio-operator   2/2     2            2           5m20s
 
       NAME                                        DESIRED   CURRENT   READY   AGE
-      replicaset.apps/console-68d955874d          1         1         1       25h
-      replicaset.apps/minio-operator-699f797b8b   2         2         2       25h
-
+      replicaset.apps/console-56c7d8bd89          1         1         1       5m20s
+      replicaset.apps/minio-operator-6c758b8c45   2         2         2       5m20s
 
 #. Retrieve the Operator Console JWT for login
 

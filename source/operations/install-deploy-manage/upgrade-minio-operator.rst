@@ -16,7 +16,7 @@ As part of the upgrade process, the Operator may update and restart Tenants to s
 These changes require no action on the part of any operator or administrator, and do not impact Tenant operations.
 
 This page describes how to upgrade from Operator 4.5.8 or later to |operator-version-stable|.
-To upgrade from Operator 4.5.7 or earlier, see :ref:`Upgrade MinIO Operator to a Previous Version <minio-k8s-upgrade-minio-operator-4.5.7-earlier>`.
+To upgrade from Operator 4.5.7 or earlier, see :ref:`Upgrade MinIO Operator to v4.5.8 <minio-k8s-upgrade-minio-operator-to-4.5.8>`.
 
 .. _minio-k8s-upgrade-minio-operator-procedure:
 
@@ -161,7 +161,7 @@ Upgrade Operator to |operator-version-stable|
                "name": "minio-operator"
             }
 
-         If your local host does not have the ``jq`` utility installed, you can run the first part of the command and locate the ``spec.ports`` section of the output.
+         If your local host does not have the ``jq`` utility installed, you can run the first part of the command and locate the ``spec.containers`` section of the output.
 
       #. Upgrade Operator with Kustomize
 
@@ -172,22 +172,39 @@ Upgrade Operator to |operator-version-stable|
 
             kubectl apply -k github.com/minio/operator
 
-         The output resembles the following:
+         In the sample output below, ``configured`` indicates where a new change was applied from the updated CRD:
 
          .. code-block:: shell
 
-            something something
+            namespace/minio-operator configured
+            customresourcedefinition.apiextensions.k8s.io/miniojobs.job.min.io configured
+            customresourcedefinition.apiextensions.k8s.io/policybindings.sts.min.io configured
+            customresourcedefinition.apiextensions.k8s.io/tenants.minio.min.io configured
+            serviceaccount/console-sa unchanged
+            serviceaccount/minio-operator unchanged
+            clusterrole.rbac.authorization.k8s.io/console-sa-role unchanged
+            clusterrole.rbac.authorization.k8s.io/minio-operator-role unchanged
+            clusterrolebinding.rbac.authorization.k8s.io/console-sa-binding unchanged
+            clusterrolebinding.rbac.authorization.k8s.io/minio-operator-binding unchanged
+            configmap/console-env unchanged
+            secret/console-sa-secret configured
+            service/console unchanged
+            service/operator unchanged
+            service/sts unchanged
+            deployment.apps/console configured
+            deployment.apps/minio-operator configured
+
 
       #. Validate the Operator upgrade
 
-         You can check the Operator version with the same ``kubectl`` command you used to verify the existing Operator version before upgrading:
+         You can check the new Operator version with the same ``kubectl`` command used previously:
 
          .. code-block:: shell
             :class: copyable
 
             kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
 
-      #. Connect to the Operator Console
+      #. *(Optional)* Connect to the Operator Console
 
          .. include:: /includes/common/common-k8s-connect-operator-console-no-plugin.rst
 

@@ -1,10 +1,10 @@
 :orphan:
 
-.. _minio-k8s-upgrade-minio-operator-4.5.7-earlier:
+.. _minio-k8s-upgrade-minio-operator-to-4.5.8:
 
-============================================
-Upgrade MinIO Operator to a Previous Version
-============================================
+================================
+Upgrade MinIO Operator to v4.5.8
+================================
 
 .. default-domain:: minio
 
@@ -13,10 +13,10 @@ Upgrade MinIO Operator to a Previous Version
    :depth: 1
 
 
-To upgrade from Operator 4.5.7 or earlier to |operator-version-stable| you must first upgrade to version 4.5.8.
+To upgrade from Operator to |operator-version-stable| from version 4.5.7 or earlier, you must first upgrade to version 4.5.8.
 Depending on your current version, you may need to do one or more intermediate upgrades to reach v4.5.8.
 
-The following table lists the upgrade paths from versions 4.5.7 and earlier of the MinIO Operator:
+The following table lists the upgrade paths for older versions of MinIO Operator:
 
 .. list-table::
    :header-rows: 1

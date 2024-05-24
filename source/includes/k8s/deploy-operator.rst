@@ -31,6 +31,7 @@ MinIO Operator Components
 The MinIO Operator exists in its own namespace.
 
 Within the Operator's namespace, the MinIO Operator utilizes two pods:
+
 - The Operator pod for the base Operator functions to deploy, manage, modify, and maintain tenants.
 - Console pod for the Operator's Graphical User Interface, the Operator Console.
 

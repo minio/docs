@@ -204,11 +204,6 @@ Persistent Volumes
    MinIO strongly recommends SSD-backed disk types for best performance.
    For more information on AKS disk types, see :azure-docs:`Azure disk types <virtual-machines/disk-types>`.
 
-Deploy a Tenant using Kustomize
--------------------------------
-
-To deploy a tenant using Kustomize...
-
 
 Deploy a Tenant using the MinIO Operator Console
 ------------------------------------------------
@@ -623,7 +618,7 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
 
    * - :guilabel:`Gemalto`
      - Configure `Gemalto (Thales Digital Identity and Security) <https://github.com/minio/kes/wiki/Gemalto-KeySecure/>`__ as the external KMS for storing root encryption keys.
-       See :ref:`minio-sse-gemalto` for guidance on the displayed fields.
+       See `Thales CipherTrust Manager <https://min.io/docs/kes/integrations/thales-ciphertrust/>`__ for guidance on the displayed fields.
 
    * - :guilabel:`GCP`
      - Configure `Google Cloud Platform Secret Manager <https://cloud.google.com/secret-manager/>`__ as the external KMS for storing root encryption keys. 
