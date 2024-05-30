@@ -380,4 +380,4 @@ Next Steps
 - :ref:`Connect your applications to MinIO <minio-drivers>`
 - :ref:`Configure Object Retention <minio-object-retention>`
 - :ref:`Configure Security <minio-authentication-and-identity-management>`
-- :ref:`Deploy MinIO in a Distrbuted Environment <deploy-minio-distributed>`
+- :ref:`Deploy MinIO in a Distributed Environment <deploy-minio-distributed>`
