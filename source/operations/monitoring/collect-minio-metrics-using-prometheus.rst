@@ -59,7 +59,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
          :class: copyable
       
          global:
-            scrape_interval: 15s
+            scrape_interval: 60s
          
          scrape_configs:
             - job_name: minio-job
@@ -84,7 +84,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
          :class: copyable
       
          global:
-            scrape_interval: 15s
+            scrape_interval: 60s
          
          scrape_configs:
             - job_name: minio-job-node
@@ -109,7 +109,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
          :class: copyable
       
          global:
-            scrape_interval: 15s
+            scrape_interval: 60s
          
          scrape_configs:
             - job_name: minio-job-bucket
@@ -146,6 +146,9 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
               static_configs:
               - targets: [minio.example.net]
       
+- Set the ``scrape_interval`` to an appropriate duration for your environment.
+  If you are scraping a large number of metrics, you may need to increase the ``scrape_interval`` to ensure the scraping operation completes before the next time period.
+
 - Set the ``job_name`` to a value associated to the MinIO deployment.
 
   Use a unique value to ensure isolation of the deployment metrics from any others collected by that Prometheus service.
@@ -179,7 +182,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
          :class: copyable
       
          global:
-            scrape_interval: 15s
+            scrape_interval: 60s
          
          scrape_configs:
             - job_name: minio-job
@@ -198,7 +201,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
          :class: copyable
       
          global:
-            scrape_interval: 15s
+            scrape_interval: 60s
          
          scrape_configs:
             - job_name: minio-job-node
@@ -215,7 +218,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
          :class: copyable
       
          global:
-            scrape_interval: 15s
+            scrape_interval: 60s
          
          scrape_configs:
             - job_name: minio-job-bucket
@@ -231,7 +234,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
          :class: copyable
 
          global:
-            scrape_interval: 15s
+            scrape_interval: 60s
 
          scrape_configs:
             - job_name: minio-job-resource
