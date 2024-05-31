@@ -55,13 +55,44 @@ Persistent Volumes
    MinIO strongly recommends using SSD-backed EBS volumes for best performance.
    For more information on EBS resources, see `EBS Volume Types <https://aws.amazon.com/ebs/volume-types/>`__.
 
-Procedure (CLI)
----------------
+Procedure (Operator Console)
+----------------------------
+
+The MinIO Operator Console supports expanding a MinIO Tenant by adding additional pools.
+
 
 1) Expand the MinIO Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. From the Operator Console view, select the Tenant to open the summary view, then select :guilabel:`Pools`.
+   Click :guilabel:`Expand Tenant`.
+
+#. Specify the following information for the new pool:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 70
+      :width: 100%
+
+      * - Field
+        - Description
+
+      * - Number of Servers
+        - The number of servers to deploy in the new Tenant Pool across the Kubernetes cluster.
+     
+      * - Volume Size
+        - The capacity of each volume in the new Tenant Pool.
+     
+      * - Volumes per Server
+        - The number of volumes for each server in the new Tenant Pool.
+
+      * - Storage Class
+        - Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
+     
+#. Click :guilabel:`Create`.
 
 
 2) Validate the Expanded MinIO Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+In the :guilabel:`Pools` tab, click on the new Pool to confirm its details.
