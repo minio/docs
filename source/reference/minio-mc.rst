@@ -455,7 +455,7 @@ Configuration File
 certain kinds of information, such as the :mc-cmd:`aliases <mc alias>` for 
 each configured S3-compatible service.
 
-For Linux and OSX, the default configuration file location is 
+For Linux and macOS, the default configuration file location is 
 ``~/.mc/config.json``.
 
 For Windows, :mc-cmd:`mc` attempts to construct a default file path by trying
@@ -477,7 +477,7 @@ Certificates
 
 The MinIO Client stores certificates and CAs for deployments to the following paths:
 
-Linux, MacOS, and other Unix-like systems:
+Linux, macOS, and other Unix-like systems:
 
 .. code-block:: shell
 

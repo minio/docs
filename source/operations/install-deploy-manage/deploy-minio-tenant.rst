@@ -609,7 +609,7 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
      - Description
    
    * - :guilabel:`Vault`
-     - Configure `Hashicorp Vault <https://www.vaultproject.io/>`__ as the external KMS for storing root encryption keys. 
+     - Configure `HashiCorp Vault <https://www.vaultproject.io/>`__ as the external KMS for storing root encryption keys. 
        See :ref:`minio-sse-vault` for guidance on the displayed fields.
 
    * - :guilabel:`AWS`

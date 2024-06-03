@@ -6,7 +6,7 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
 
       Krew is a ``kubectl`` plugin manager developed by the `Kubernetes SIG CLI group <https://github.com/kubernetes-sigs>`__.
       See the ``krew`` `installation documentation <https://krew.sigs.k8s.io/docs/user-guide/setup/install/>`__ for specific instructions.
-      You can use the Krew plugin for Linux, MacOS, and Windows operating systems.
+      You can use the Krew plugin for Linux, macOS, and Windows operating systems.
 
       You can use Krew to install the MinIO ``kubectl`` plugin using the following commands:
 

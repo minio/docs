@@ -27,7 +27,7 @@ keys for use with MinIO SSE.
 
 MinIO supports the following |KMS| as the central key store:
 
-- :ref:`Hashicorp KeyVault <minio-sse-vault>`
+- :ref:`HashiCorp KeyVault <minio-sse-vault>`
 - :ref:`AWS SecretsManager <minio-sse-aws>`
 - :ref:`Google Cloud SecretManager <minio-sse-gcp>`
 - :ref:`Azure Key Vault <minio-sse-azure>`

@@ -18,7 +18,7 @@ Server-Side Object Encryption with KES
 .. |KMS|           replace:: :abbr:`KMS (Key Management System)`
 .. |KES-git|       replace:: :minio-git:`Key Encryption Service (KES) <kes>`
 .. |KES|           replace:: :abbr:`KES (Key Encryption Service)`
-.. |rootkms|       replace:: `Hashicorp Vault <https://vaultproject.io/>`__
+.. |rootkms|       replace:: `HashiCorp Vault <https://vaultproject.io/>`__
 .. |rootkms-short| replace:: Vault
 
 .. meta::
@@ -145,8 +145,8 @@ Refer to the configuration instruction in the :kes-docs:`KES documentation <>` f
 - :kes-docs:`Azure KeyVault <integrations/azure-keyvault/>`
 - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
 - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
-- :kes-docs:`Google Cloud Secret Manager <ntegrations/google-cloud-secret-manager/>`
-- :kes-docs:`Hashicorp Vault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`HashiCorp Vault <integrations/hashicorp-vault-keystore/>`
 - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
 

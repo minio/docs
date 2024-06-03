@@ -40,7 +40,7 @@ Required Steps
 
 MinIO supports the following external KMS providers through Key Encryption Service (KES):
 
-- :ref:`Hashicorp Vault Root KMS <minio-sse-vault>`
+- :ref:`HashiCorp Vault Root KMS <minio-sse-vault>`
 - :ref:`AWS Root KMS <minio-sse-aws>`
 - :ref:`Google Cloud Platform Secret Manager Root KMS <minio-sse-gcp>`
 - :ref:`Azure Key Vault Root KMS <minio-sse-azure>`

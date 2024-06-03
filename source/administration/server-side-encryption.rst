@@ -46,7 +46,7 @@ MinIO SSE is feature and API compatible with :s3-docs:`AWS Server-Side Encryptio
       - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
       - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
       - :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
-      - :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+      - :kes-docs:`HashiCorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
       - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
    .. tab-item:: SSE-S3
@@ -71,7 +71,7 @@ MinIO SSE is feature and API compatible with :s3-docs:`AWS Server-Side Encryptio
       - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
       - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
       - :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
-      - :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+      - :kes-docs:`HashiCorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
       - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
    .. tab-item:: SSE-C

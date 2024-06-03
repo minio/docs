@@ -1,7 +1,7 @@
 .. start-kes-configuration-hashicorp-vault-desc
 
 |KES| uses a YAML-formatted configuration file. 
-The following YAML provides the minimum required fields for using Hashicorp Vault as the root |KMS|. 
+The following YAML provides the minimum required fields for using HashiCorp Vault as the root |KMS|. 
 You must modify this YAML to reflect your deployment environment.
 
 .. code-block:: shell
@@ -54,8 +54,8 @@ You must modify this YAML to reflect your deployment environment.
        engine: "/path/to/engine" # Replace with the path to the K/V Engine
        version: "v1|v2" # Specify v1 or v2 depending on the version of the K/V Engine
        approle:
-         id: "VAULTAPPID"     # Hashicorp Vault AppRole ID
-         secret: "VAULTAPPSECRET" # Hashicorp Vault AppRole Secret ID
+         id: "VAULTAPPID"     # HashiCorp Vault AppRole ID
+         secret: "VAULTAPPSECRET" # HashiCorp Vault AppRole Secret ID
          retry: 15s
        status:
          ping: 10s
@@ -70,7 +70,7 @@ You must modify this YAML to reflect your deployment environment.
 
 .. start-kes-prereq-hashicorp-vault-desc
 
-This procedure assumes an existing `Hashicorp Vault <https://www.vaultproject.io/>`__ installation accessible from the local host.
+This procedure assumes an existing `HashiCorp Vault <https://www.vaultproject.io/>`__ installation accessible from the local host.
 The Vault `Quick Start <https://learn.hashicorp.com/tutorials/vault/getting-started-install>`__ provides a sufficient foundation for the purposes of this procedure.
 Defer to the `Vault Documentation <https://learn.hashicorp.com/vault>`__ for guidance on deployment and configuration.
 

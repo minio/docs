@@ -21,7 +21,7 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
 
 .. cond:: macos
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Mac OSX platforms for the latest stable version of MinIO: |minio-tag|.
+   This site documents Operations, Administration, and Development of MinIO deployments on macOS platforms for the latest stable version of MinIO: |minio-tag|.
 
 .. cond:: container
 

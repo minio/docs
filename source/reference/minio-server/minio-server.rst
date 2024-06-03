@@ -207,7 +207,7 @@ The command accepts the following arguments:
 
    Omit to use the default directory paths:
 
-   - Linux/OSX: ``${HOME}/.minio/certs``
+   - Linux/macOS: ``${HOME}/.minio/certs``
    - Windows: ``%%USERPROFILE%%\.minio\certs``.
 
    See :ref:`minio-TLS` for more information on TLS/SSL connectivity.
