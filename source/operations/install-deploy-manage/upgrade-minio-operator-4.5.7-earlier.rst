@@ -99,7 +99,7 @@ You can then upgrade from release 4.5.8 to |operator-version-stable|.
 
 #. Run the initialization command to upgrade the Operator
 
-   Use the :mc-cmd:`kubectl minio init` command to upgrade the existing MinIO Operator installation
+   Use the ``kubectl minio init`` command to upgrade the existing MinIO Operator installation
 
    .. code-block:: shell
       :class: copyable
