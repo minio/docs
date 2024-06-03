@@ -356,6 +356,11 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-rb-desc
           :end-before: end-mc-rb-desc
      
+   * - :mc:`mc ready`
+     - .. include:: /reference/minio-mc/mc-ready.rst
+          :start-after: start-mc-ready-desc
+          :end-before: end-mc-ready-desc
+
    * - | :mc:`mc replicate add`
        | :mc:`mc replicate backlog`
        | :mc:`mc replicate export`
@@ -584,6 +589,13 @@ You can also define some of these options using :ref:`Environment Variables <min
 
    Alternatively, set the environment variable :envvar:`MC_CONFIG_DIR`.
 
+.. option:: --disable-pager, --dp
+
+   .. versionadded:: mc RELEASE.2024-04-29T09-56-05Z
+
+   Disable the pager functionality of the MinIO Client in the CLI.
+   When used, output prints to raw ``STDOUT`` instead.
+
 .. option:: --json
 
    Enables `JSON lines <http://jsonlines.org/>`_ formatted output to the
@@ -663,6 +675,7 @@ You can also define some of these options using :ref:`Environment Variables <min
    /reference/minio-mc/mc-put
    /reference/minio-mc/mc-quota
    /reference/minio-mc/mc-rb
+   /reference/minio-mc/mc-ready
    /reference/minio-mc/mc-replicate
    /reference/minio-mc/mc-retention
    /reference/minio-mc/mc-rm

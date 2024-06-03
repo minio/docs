@@ -21,23 +21,28 @@ for each MinIO server in the deployment.
 
 .. end-mc-admin-info-desc
 
-  
+.. versionadded:: mc RELEASE.2024-05-03T11-21-07Z
+
+   The command output includes information about the :ref:`erasure code <minio-ec-erasure-set>` setting for the cluster.
+   This displays in the output in the format ``EC:#``.
+
 The output of the command resembles the following:
 
 .. code-block::
 
    ●  play.min.io
-      Uptime: 14 hours 
-      Version: 2023-08-17T16:37:55Z
+      Uptime: 2 hours 
+      Version: 2024-05-10T08:24:14Z
       Network: 1/1 OK 
       Drives: 4/4 OK 
       Pool: 1
-
+   
    Pools:
       1st, Erasure sets: 1, Drives per erasure set: 4
-
-   4.3 GiB Used, 499 Buckets, 3,547 Objects, 554 Versions, 67 Delete Markers
-   4 drives online, 0 drives offline
+   
+   0 B Used, 3 Buckets, 0 Objects
+   4 drives online, 0 drives offline, EC:1
+   
 
 Examples
 --------

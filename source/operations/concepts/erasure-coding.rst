@@ -6,6 +6,10 @@ Erasure Coding
 
 .. default-domain:: minio
 
+.. container:: extlinks-video
+
+   - `Overview of MinIO Erasure Coding <https://www.youtube.com/watch?v=QniHMNNmbfI>`__   
+
 .. contents:: Table of Contents
    :local:
    :depth: 2

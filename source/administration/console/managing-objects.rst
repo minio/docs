@@ -46,7 +46,7 @@ Example actions the user may be able to perform include:
 - Manage tags
 - Inspect
 - Display versions
-- Delete
+- :ref:`Delete <minio-object-delete>`
 
 .. versionadded:: Console v0.24.0
 

@@ -198,7 +198,7 @@ operating systems using RPM, DEB, or binary:
 
          wget https://dl.min.io/server/minio/release/linux-amd64/minio
          chmod +x minio
-         sudo mv minio /usr/local/bin/
+         sudo mv -f ./minio /usr/local/bin/minio
 
       Replace ``/usr/local/bin`` with the location of the existing MinIO
       binary. Run ``which minio`` to identify the path if not already known.

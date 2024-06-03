@@ -173,6 +173,27 @@ Disable the MinIO Client progress bar.
          :start-after: start-minio-settings-no-config-option
          :end-before: end-minio-settings-no-config-option
 
+Pager
+~~~~~
+
+.. versionadded:: mc RELEASE.2024-04-29T09-56-05Z
+
+Disable the pager functionality of the MinIO Client in the CLI.
+When used, output prints to raw ``STDOUT`` instead.
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :selected:
+
+      .. envvar:: DISABLE_PAGER
+
+   .. tab-item:: Configuration Setting
+
+      .. include:: /includes/common-mc-admin-config.rst
+         :start-after: start-minio-settings-no-config-option
+         :end-before: end-minio-settings-no-config-option
+
 Color Theme
 ~~~~~~~~~~~
 

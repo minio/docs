@@ -102,7 +102,7 @@ to avoid costs associated to the "lost" data.
 Replication of Delete Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports replicating delete operations, where MinIO synchronizes
+MinIO supports replicating :ref:`delete <minio-object-delete>` operations, where MinIO synchronizes
 deleting specific object versions *and* new 
 :s3-docs:`delete markers <delete-marker-replication.html>`. Delete operation
 replication uses the same :ref:`replication process <minio-replication-process>`

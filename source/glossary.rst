@@ -211,7 +211,7 @@ Glossary
 
    read quorum
      The minimum number of object shards necessary to reconstruct the full object for read operations.
-     See :ref `minio-ec-basics` for more information.
+     See :ref:`minio-ec-basics` for more information.
 
    replication
    mirror
@@ -243,7 +243,7 @@ Glossary
    pool
      A set of ``minio server`` nodes which combine their drives and resources to support object storage and retrieval requests.
     
-    For more information, see :ref:`minio-intro-server-pool`.
+     For more information, see :ref:`minio-intro-server-pool`.
 
    service account
      Renamed to :term:`access keys`.

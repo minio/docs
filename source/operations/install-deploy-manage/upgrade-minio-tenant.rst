@@ -10,9 +10,16 @@ Upgrade a MinIO Tenant
    :local:
    :depth: 1
 
+
 The following procedures upgrade a single MinIO Tenant, using either ``kubectl`` or Helm.
 MinIO recommends you test upgrades in a lower environment such as a Dev or QA Tenant, before upgrading production Tenants.
 
+.. important::
+
+   For Tenants using a MinIO Image older than :minio-release:`RELEASE.2024-03-30T09-41-56Z` running with :ref:`AD/LDAP <minio-ldap-config-settings>` enabled, you **must** read through the release notes for :minio-release:`RELEASE.2024-04-18T19-09-19Z` before starting this procedure.
+   You must take the extra steps documented in the linked release as part of the upgrade procedure.
+
+.. _minio-upgrade-tenant-plugin:
 .. _minio-upgrade-tenant-kubectl:
 
 Upgrade a Tenant using ``kubectl``

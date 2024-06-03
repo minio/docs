@@ -41,7 +41,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
       :class: copyable
       :substitutions:
 
-      kubectl apply -k github.com/minio/operator\?ref=v|operator-version-stable|
+      kubectl apply -k "github.com/minio/operator?ref=v|operator-version-stable|"
 
    The output resembles the following:
 

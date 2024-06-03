@@ -605,7 +605,7 @@ Bucket Replication
 
    MinIO Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
 
-   Required for synchronizing delete operations as part of MinIO server-side replication.
+   Required for synchronizing :ref:`delete operations <minio-object-delete>` as part of MinIO server-side replication.
    
    Supports the following additional :ref:`condition keys <minio-policy-conditions>`:
 

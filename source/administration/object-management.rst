@@ -94,7 +94,7 @@ Object Organization and Planning
 --------------------------------
 
 Administrators typically control the creation and configuration of buckets.
-Client applications can then use :ref:`S3-compatible SDKs <minio-drivers>` to create, list, retrieve, and delete objects on the MinIO deployment.
+Client applications can then use :ref:`S3-compatible SDKs <minio-drivers>` to create, list, retrieve, and :ref:`delete <minio-object-delete>` objects on the MinIO deployment.
 Clients therefore drive the overall hierarchy of data within a given bucket or prefix, where Administrators can exercise control using :ref:`policies <minio-policy>` to grant or deny access to an action or resource.
 
 .. cond:: windows
@@ -129,7 +129,7 @@ Object Versioning
    :alt: Object with Multiple Versions
    :align: center
 
-The specific client behavior on write, list, get, or delete operations on a bucket depends on the versioning state of that bucket:
+The specific client behavior on write, list, get, or :ref:`delete <minio-object-delete>` operations on a bucket depends on the versioning state of that bucket:
 
 .. list-table::
    :stub-columns: 1
@@ -162,6 +162,8 @@ The specific client behavior on write, list, get, or delete operations on a buck
 
        Supports deleting any object version by version ID (hard delete).
        You cannot undo hard-delete operations.
+
+       Refer to :ref:`minio-object-delete` for more information.
      - Deletes the object
 
 See :ref:`minio-bucket-versioning` for more complete documentation.
@@ -200,7 +202,7 @@ Enabling bucket locking also enables :ref:`versioning <minio-bucket-versioning>`
 
 MinIO Object Locking provides key data retention compliance and meets SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per `Cohasset Associates <https://min.io/cohasset?ref=docs>`__.
 
-See :ref:`minio-object-locking` for more complete documentation.
+See :ref:`minio-object-locking` and :ref:`minio-object-delete` for more complete documentation.
 
 Object Lifecycle Management
 ---------------------------
@@ -218,11 +220,48 @@ Conversion to or from XML may be required for importing rules created on S3 or s
 
 See :ref:`minio-lifecycle-management` for more complete documentation.
 
+Target Bucket Considerations
+----------------------------
+
+MinIO does *not* require that the target bucket match object management or versioning configurations with the source bucket.
+The target bucket *may* have its own set of object management rules, if defined with care.
+
+Target buckets should *not* have their own rules for expiration or additional tiering.
+Expiration rules can result in removal of tiered data still in use by the source bucket.
+Tiering to an additional remote creates an additional network hop between the hot tier and it's data while also increasing operational complexity.
+
+You *may* configure object locking or versioning on the remote bucket.
+
+Enabling versioning or object locking on the target bucket may have effects such as the following:
+
+- Object locking set on the target bucket may prevent desired ``delete`` operations from the source bucket from completing.
+- MinIO tiers objects with their own ``UUID``, so versioning on the target bucket is redundant at best.
+- Reduced storage efficiency on the target, as ``delete`` operations result in creation of a ``DeleteMarker`` rather than freeing space.
+- Duplicate delete markers on source and target buckets.
+
+Exclusive Access to Remote Data
+-------------------------------
+
+MinIO **must** have *exclusive* access to the target bucket.
+No other user, process, application, or resource should have any access to or perform any actions against the target bucket.
+
+All access to the transitioned objects *must* occur through MinIO via S3 API operations only. 
+Manually modifying a transitioned object - whether the metadata on the “hot” MinIO tier or the object data on the remote “warm/cold” tier - may result in loss of that object data.
+
+MinIO ignores any objects in the remote bucket or bucket prefix not explicitly managed by the MinIO deployment. Automatic transition and transparent object retrieval depend on the following assumptions:
+
+- No external mutation, migration, or deletion of objects on the remote storage.
+- No lifecycle management rules (such as transition or expiration) on the remote storage bucket.
+
+To facilitate this exclusive access, grant the lifecycle management user ``read``, ``write``, and ``delete`` access to the target bucket in its :ref:`policy <minio-policy>`.
+All other policies should ``deny`` access to the target bucket.
+
 .. toctree::
    :titlesonly:
    :hidden:
 
    /administration/object-management/object-versioning
    /administration/object-management/object-retention
+   /administration/object-management/object-delete
    /administration/object-management/object-lifecycle-management
    /administration/object-management/data-compression

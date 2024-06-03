@@ -162,7 +162,7 @@ Parameters
    MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
    lifecycle management rules. Slow scanning due to high IO workloads or
    limited system resources may delay application of lifecycle management
-   rules. See :ref:`minio-lifecycle-management-scanner` for more information.
+   rules. See :ref:`minio-lifecycle-management-scanner` and :ref:`minio-object-delete` for more information.
 
 .. mc-cmd:: --noncurrent-expire-days
    :optional:
