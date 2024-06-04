@@ -1,39 +1,17 @@
-Overview
---------
-
-`Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is a YAML-based templating tool that allows you to define Kubernetes resources in a declarative and repeatable fashion.
-Kustomize is included with the :kube-docs:`kubectl <reference/kubectl>` command line tool.
-
-The `default MinIO Operator Kustomize template <https://github.com/minio/operator/blob/master/kustomization.yaml>`__ provides a starting point for customizing configurations for your local environment.
-You can modify the default Kustomization file or apply your own `patches <https://datatracker.ietf.org/doc/html/rfc6902>`__ to customize the Operator deployment for your Kubernetes cluster.
-
-
-Prerequisites
--------------
-
-Installing Operator with Kustomize requires the following prerequisites:
-
-* An existing Kubernetes cluster, v1.21 or later.
-* A local ``kubectl`` installation with the same version as the cluster.
-* Access to run ``kubectl`` commands on the cluster from your local host.
-
-For more about Operator installation requirements, including TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
-
-This procedure assumes familiarity with the referenced Kubernetes concepts and utilities.
-While this documentation may provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
-
 .. _minio-k8s-deploy-operator-kustomize-repo-2:
 
 Install the MinIO Operator using Kustomize
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following procedure uses ``kubectl -k`` to install the Operator from the MinIO Operator GitHub repository.
 ``kubectl -k`` and ``kubectl --kustomize`` are aliases that perform the same command.
 
 .. important::
 
-   If you use Kustomize to install the Operator, you must use Kustomize to manage or update that installation.
-   Do not use ``kubectl krew``, a Helm chart, or similar methods to manage or update the MinIO Operator installation.
+   If you use Kustomize to install the Operator, you must use Kustomize to manage or upgrade that installation.
+   Do not use ``kubectl krew``, a Helm chart, or similar methods to manage or upgrade a MinIO Operator installation deployed with Kustomize.
+
+   You can, however, use Kustomize to upgrade a previous version of Operator (5.0.14 or earlier) installed with the MinIO Kubernetes Plugin.
 
 #. Install the latest version of Operator
 

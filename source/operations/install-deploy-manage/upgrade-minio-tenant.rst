@@ -11,7 +11,7 @@ Upgrade a MinIO Tenant
    :depth: 1
 
 
-The following procedures upgrade a single MinIO Tenant, using either ``kubectl`` or Helm.
+The following procedures upgrade a single MinIO Tenant, using either Kustomize or Helm.
 MinIO recommends you test upgrades in a lower environment such as a Dev or QA Tenant, before upgrading production Tenants.
 
 .. important::
@@ -20,15 +20,15 @@ MinIO recommends you test upgrades in a lower environment such as a Dev or QA Te
    You must take the extra steps documented in the linked release as part of the upgrade procedure.
 
 .. _minio-upgrade-tenant-plugin:
-.. _minio-upgrade-tenant-kubectl:
+.. _minio-upgrade-tenant-kustomize:
 
-Upgrade a Tenant using ``kubectl``
-----------------------------------
+Upgrade a Tenant using Kustomize
+--------------------------------
 
-The following procedure upgrades a MinIO Tenant using ``kubectl``.
+The following procedure upgrades a MinIO Tenant using Kustomize and the ``kubectl`` CLI.
 If you deployed the Tenant using :ref:`Helm <deploy-tenant-helm>`, use the :ref:`minio-upgrade-tenant-helm` procedure instead.
 
-To upgrade a Tenant with ``kubectl``:
+To upgrade a Tenant with Kustomize:
 
 #. In a convenient directory, save the current Tenant configuration to a file using ``kubectl get``:
 
@@ -119,7 +119,7 @@ Upgrade the Tenant using the MinIO Helm Chart
 
 This procedure upgrades an existing MinIO Tenant using Helm Charts.
 
-If you deployed the Tenant using Kustomize, use the :ref:`minio-upgrade-tenant-kubectl` procedure instead.
+If you deployed the Tenant using Kustomize, use the :ref:`minio-upgrade-tenant-kustomize` procedure instead.
 
 1. Verify the existing MinIO Tenant installation.
 

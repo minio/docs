@@ -34,4 +34,4 @@ For testing purposes or short-term access, expose the Operator Console service t
 You can now access the service through port ``30433`` on any of your Kubernetes worker nodes.
 
 Append the ``nodePort`` value to the externally-accessible IP address of a worker node in your Kubernetes cluster.
-Use the ``http`` or ``https`` port depending on whether you deployed the Operator with Console TLS enabled via :mc-cmd:`kubectl minio init --console-tls`.
+Use the appropriate ``http`` or ``https`` port depending on whether you deployed Operator Console with TLS.

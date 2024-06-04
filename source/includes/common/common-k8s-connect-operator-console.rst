@@ -37,7 +37,7 @@
    The patch command should output ``service/console patched``.
    You can now access the service through ports ``30433`` (HTTPS) or ``30090`` (HTTP) on any of your Kubernetes worker nodes.
 
-   For example, a Kubernetes cluster with the following Operator nodes might be accessed at ``HTTPS://172.18.0.2:30443``:
+   For example, a Kubernetes cluster with the following Operator nodes might be accessed at ``https://172.18.0.2:30443``:
 
       .. code-block:: shell
 
@@ -48,16 +48,6 @@
          map[address:172.18.0.2 type:InternalIP],map[address:k3d-MINIO-server-0 type:Hostname]
          map[address:172.18.0.4 type:InternalIP],map[address:k3d-MINIO-agent-1 type:Hostname]
          map[address:172.18.0.3 type:InternalIP],map[address:k3d-MINIO-agent-0 type:Hostname]
-
-   .. cond:: openshift
-
-      Use ``oc`` to temporarily forward the Operator Console port:
-
-      .. code-block:: shell
-         :class: copyable
-
-         oc minio proxy
-
 
    Use the following command to retrieve the JWT token necessary for logging into the Operator Console:
 

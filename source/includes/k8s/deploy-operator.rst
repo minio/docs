@@ -25,11 +25,11 @@ The MinIO Operator installs a :kube-docs:`Custom Resource Definition (CRD) <conc
 This documentation assumes familiarity with referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
+
 MinIO Operator Components
 -------------------------
 
 The MinIO Operator exists in its own namespace.
-
 Within the Operator's namespace, the MinIO Operator utilizes two pods:
 
 - The Operator pod for the base Operator functions to deploy, manage, modify, and maintain tenants.
@@ -77,10 +77,16 @@ Starting with v5.0.0, MinIO **requires** Kubernetes 1.21.0 or later for both the
 For Kubernetes 1.25.0 and later, MinIO supports deploying in environments with the :kube-docs:`Pod Security admission (PSA) <concepts/security/pod-security-admission>` ``restricted`` policy enabled.
 
 
-``kubectl`` Configuration
+Kustomize and ``kubectl``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure assumes that your local host machine has both the correct version of ``kubectl`` for your Kubernetes cluster *and* the necessary access to that cluster to create new resources.
+`Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is a YAML-based templating tool that allows you to define Kubernetes resources in a declarative and repeatable fashion.
+Kustomize is included with the :kube-docs:`kubectl <reference/kubectl>` command line tool.
+
+This procedure assumes that your local host machine has both the matching version of ``kubectl`` for your Kubernetes cluster *and* the necessary access to that cluster to create new resources.
+
+The `default MinIO Operator Kustomize template <https://github.com/minio/operator/blob/master/kustomization.yaml>`__ provides a starting point for customizing configurations for your local environment.
+You can modify the default Kustomization file or apply your own `patches <https://datatracker.ietf.org/doc/html/rfc6902>`__ to customize the Operator deployment for your Kubernetes cluster.
 
 .. _minio-k8s-deploy-operator-tls:
 

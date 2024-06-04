@@ -226,10 +226,6 @@ To deploy a tenant from the MinIO Operator Console, complete the following steps
 
 :ref:`create-tenant-encryption-section`
 
-:ref:`minio-tenant-audit-logging-settings`
-
-:ref:`minio-tenant-monitoring-settings`
-
 :ref:`create-tenant-deploy-view-tenant`
 
 :ref:`create-tenant-connect-tenant`
@@ -632,8 +628,8 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
 
 .. _create-tenant-deploy-view-tenant:
 
-11) Deploy and View the Tenant
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+9) Deploy and View the Tenant
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Select :guilabel:`Create` at any time to begin the deployment process. 
 The MinIO Operator displays the root user credentials *once* as part of deploying the Tenant. 
@@ -660,7 +656,7 @@ Each tab provides additional details or configuration options for the MinIO Tena
 
 .. _create-tenant-connect-tenant:
 
-12) Connect to the Tenant
+10) Connect to the Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The MinIO Operator creates services for the MinIO Tenant. 
