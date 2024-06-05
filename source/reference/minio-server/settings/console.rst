@@ -138,31 +138,6 @@ Session Duration
       This setting does not have a configuration variable setting.
       Use the Environment Variable instead.
 
-Server URL
-~~~~~~~~~~
-
-*Optional*
-
-.. tab-set::
-
-   .. tab-item:: Environment Variable
-
-      .. envvar:: MINIO_SERVER_URL
-
-         Specify the Fully Qualified Domain Name (FQDN) the MinIO Console must use for connecting to the MinIO Server.
-         The Console also uses this value for setting the root hostname when generating presigned URLs.
-
-         This setting may be required if:
-
-         - The MinIO Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN) *or*
-
-         - The Console must use a specific hostname to connect or reference the MinIO Server, e.g. due to a reverse proxy or similar configuration.
-
-   .. tab-item:: Configuration Setting
-
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
-
 Log Query URL
 ~~~~~~~~~~~~~
 
