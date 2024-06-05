@@ -48,10 +48,6 @@ This documentation assumes familiarity with all referenced Kubernetes concepts, 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
 
-
-
-
-
 Prerequisites
 -------------
 
@@ -69,8 +65,9 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
    Kubernetes Version 1.21.0
    ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   MinIO Operator requires Kubernetes 1.21.0 and later.
-   The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must have the same version of 1.21.0+.
+   MinIO Operator requires Kubernetes 1.21.0 or later.
+   The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must be the same version.
+   Upgrade ``kubectl`` to the same version as the Kubernetes version used on the cluster.
 
    This procedure assumes the host machine has ``kubectl`` installed and configured with access to the target Kubernetes cluster. 
    The host machine *must* have access to a web browser application.
@@ -246,7 +243,7 @@ You should see the :guilabel:`Tenants` page:
    :class: no-scaled-link
    :alt: MinIO Operator Console
 
-Click the :guilabel:`+ Create Tenant` to start creating a MinIO Tenant.
+Select :guilabel:`+ Create Tenant` to start creating a MinIO Tenant.
 
 .. _create-tenant-complete-tenant-setup:
 
@@ -468,7 +465,7 @@ The :guilabel:`Images` section displays container image settings used by the Min
      - The container image to use for MinIO :minio-git:`KES <kes>`.
 
    * - :guilabel:`Use a private container registry`
-     - If the tenant requires a private container registry, toggle to :guilabel:`ON` and specify the location and credentials for the registry.
+     - If the tenant requires a private container registry, toggle to :guilabel:`ON`, then specify the location and credentials for the private registry.
 
 .. _create-tenant-pod-placement-section:
 
@@ -614,7 +611,7 @@ Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods i
 
    * - :guilabel:`Gemalto`
      - Configure `Gemalto (Thales Digital Identity and Security) <https://github.com/minio/kes/wiki/Gemalto-KeySecure/>`__ as the external KMS for storing root encryption keys.
-       See `Thales CipherTrust Manager <https://min.io/docs/kes/integrations/thales-ciphertrust/>`__ for guidance on the displayed fields.
+       See :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>` for guidance on the displayed fields.
 
    * - :guilabel:`GCP`
      - Configure `Google Cloud Platform Secret Manager <https://cloud.google.com/secret-manager/>`__ as the external KMS for storing root encryption keys. 
@@ -639,7 +636,7 @@ You can monitor the Tenant creation process from the :guilabel:`Tenants` view.
 The :guilabel:`State` column updates throughout the deployment process.
 
 Tenant deployment can take several minutes to complete. 
-Once the :guilabel:`State` reads as :guilabel:`Initialized`, click the Tenant to view its details.
+Once the :guilabel:`State` reads as :guilabel:`Initialized`, select the Tenant to view its details.
 
 .. image:: /images/k8s/operator-tenant-view.png
    :align: center

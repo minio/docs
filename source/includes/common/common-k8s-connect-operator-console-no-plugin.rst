@@ -1,5 +1,5 @@
 The Operator Console service does not automatically bind or expose itself for external access on the Kubernetes cluster.
-You must instead configure a network control plane component, such as a load balancer or ingress, to grant that external access.
+Instead, you must configure a network control plane component, such as a load balancer or ingress, to grant external access.
 
 .. cond:: k8s
 
@@ -31,7 +31,7 @@ For testing purposes or short-term access, expose the Operator Console service t
        }
    }'
 
-You can now access the service through port ``30433`` on any of your Kubernetes worker nodes.
+After applying the path, you can access the service through port ``30433`` on any of the Kubernetes worker nodes.
 
 Append the ``nodePort`` value to the externally-accessible IP address of a worker node in your Kubernetes cluster.
 Use the appropriate ``http`` or ``https`` port depending on whether you deployed Operator Console with TLS.

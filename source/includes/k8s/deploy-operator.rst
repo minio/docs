@@ -20,7 +20,7 @@ The MinIO Kubernetes Operator supports deploying MinIO Tenants onto private and 
 The following procedure installs the latest stable version (|operator-version-stable|) of the MinIO Operator on Kubernetes infrastructure.
 
 The MinIO Operator installs a :kube-docs:`Custom Resource Definition (CRD) <concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions>` to support describing MinIO tenants as a Kubernetes :kube-docs:`object <concepts/overview/working-with-objects/kubernetes-objects/>`. 
-  See the MinIO Operator :minio-git:`CRD Reference <operator/blob/master/docs/tenant_crd.adoc>` for complete documentation on the MinIO CRD.
+See the MinIO Operator :minio-git:`CRD Reference <operator/blob/master/docs/tenant_crd.adoc>` for complete documentation on the MinIO CRD.
 
 This documentation assumes familiarity with referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.

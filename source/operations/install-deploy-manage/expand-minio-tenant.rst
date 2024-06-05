@@ -65,7 +65,7 @@ The MinIO Operator Console supports expanding a MinIO Tenant by adding additiona
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. From the Operator Console view, select the Tenant to open the summary view, then select :guilabel:`Pools`.
-   Click :guilabel:`Expand Tenant`.
+   Select :guilabel:`Expand Tenant`.
 
 #. Specify the following information for the new pool:
 
@@ -89,10 +89,10 @@ The MinIO Operator Console supports expanding a MinIO Tenant by adding additiona
       * - Storage Class
         - Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
      
-#. Click :guilabel:`Create`.
+#. Select :guilabel:`Create`.
 
 
 2) Validate the Expanded MinIO Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the :guilabel:`Pools` tab, click on the new Pool to confirm its details.
+In the :guilabel:`Pools` tab, select the new Pool to confirm its details.

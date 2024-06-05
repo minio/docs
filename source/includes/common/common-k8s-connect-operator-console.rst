@@ -2,7 +2,7 @@
    :open:
 
    The :ref:`Operator Console service <minio-operator-console>` does not automatically bind or expose itself for external access on the Kubernetes cluster.
-   You must instead configure a network control plane component, such as a load balancer or ingress, to grant that external access.
+   Instead, configure a network control plane component, such as a load balancer or ingress, to grant external access.
 
    .. cond:: k8s and not openshift
 
@@ -56,4 +56,5 @@
 
       kubectl get secret/console-sa-secret -n minio-operator -o json | jq -r '.data.token' | base64 -d
 
-   If your local host does not have the ``jq`` utility installed, you can run the first command and locate the ``data.token`` section of the output.
+   If your local host does not have the ``jq`` utility installed, you can run the ``kubectl`` part of this command (before ``| jq``) and locate the ``data.token`` section of the output.
+

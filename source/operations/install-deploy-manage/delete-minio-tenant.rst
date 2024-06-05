@@ -41,9 +41,9 @@ Procedure (Operator Console)
 ----------------------------
    
 #. From the Operator Console view, select the Tenant to open the summary view, then select :guilabel:`Pools`.
-   Click :guilabel:`Delete`.
+   Select :guilabel:`Delete`.
 
 #. Enter the Tenant name in the confirmation dialog to confirm you want to delete this Tenant.
    To delete the Tenant's associated volumes, toggle :guilabel:`Delete Volumes` to :guilabel:`ON`.
 
-#. Click :guilabel:`Delete`.
+#. Select :guilabel:`Delete`.

@@ -80,6 +80,7 @@ To upgrade a Tenant with Kustomize:
 
    .. code-block:: shell
       :class: copyable
+      :substitutions:
 
       apiVersion: minio.min.io/v2
       kind: Tenant
@@ -89,7 +90,7 @@ To upgrade a Tenant with Kustomize:
         namespace: my-tenant-ns
 
       spec:
-        image: minio/minio:RELEASE.2024-05-28T17-19-04Z
+	image: minio/minio:|minio-tag|
 
    The name of this file must match the ``patches.path`` filename specified in your ``kustomization.yaml`` file.
    If you create this file with a different name, ensure you update the corresponding filename in  ``kustomize.yaml``.
