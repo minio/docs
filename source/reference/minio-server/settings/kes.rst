@@ -99,7 +99,7 @@ Define the following variables to use the Key Encryption Service (KES) to connec
 MinIO Key Management Server (KMS)
 ---------------------------------
 
-Define the following variables to use `MinIO KMS <https://min.io/product/enterprise/key-management-server?ref=docs`__ to manage keys.
+Define the following variables to use `MinIO KMS <https://min.io/product/enterprise/key-management-server?ref=docs>`__ to manage keys.
 
 .. envvar:: MINIO_KMS_SERVER
 
