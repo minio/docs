@@ -146,7 +146,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
               static_configs:
               - targets: [minio.example.net]
       
-- Select an appropriate ``scrape_interval`` value to ensure each scraping operation completes before the next one begins.
+- Set an appropriate ``scrape_interval`` value to ensure each scraping operation completes before the next one begins.
   The recommended value is 60 seconds.
 
   Some deployments require a longer scrape interval due to the number of metrics being scraped.
