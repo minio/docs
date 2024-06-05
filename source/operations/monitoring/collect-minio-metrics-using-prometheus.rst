@@ -136,7 +136,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
          :class: copyable
 
          global:
-            scrape_interval: 15s
+            scrape_interval: 60s
 
          scrape_configs:
             - job_name: minio-job-resource
@@ -146,8 +146,11 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
               static_configs:
               - targets: [minio.example.net]
       
-- Set the ``scrape_interval`` to an appropriate duration for your environment.
-  If you are scraping a large number of metrics, you may need to increase the ``scrape_interval`` to ensure the scraping operation completes before the next time period.
+- Select an appropriate ``scrape_interval`` value to ensure each scraping operation completes before the next one begins.
+  The recommended value is 60 seconds.
+
+  Some deployments require a longer scrape interval due to the number of metrics being scraped.
+  To reduce the load on your MinIO and Prometheus servers, choose the longest interval that meets your monitoring requirements.
 
 - Set the ``job_name`` to a value associated to the MinIO deployment.
 
@@ -363,12 +366,9 @@ You can modify or otherwise use these examples as guidance in building your own 
          summary: "Disks down in MinIO deployment"
          description: "Disks(s) in cluster {{ $labels.instance }} offline for more than 5 minutes"
 
-Specify the path to the alert file to the Prometheus configuration as part of the ``rule_files`` key:
+In the Prometheus configuration, specify the path to the alert file in the ``rule_files`` key:
 
 .. code-block:: yaml
-
-   global:
-     scrape_interval: 5s
 
    rule_files:
    - minio-alerting.yml
