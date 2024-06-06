@@ -4,7 +4,8 @@ Deploy MinIO Tenant with OpenID Connect Identity Management
 1) Access the Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use something to temporarily forward traffic between the local host machine and the MinIO Operator Console:
+Temporarily forward traffic between the local host machine and the MinIO Operator Console and retrieve the JWT token for your Operator deployment.
+For instructions, see :ref:`Configure access to the Operator Console service <minio-k8s-deploy-operator-access-console>`.
 
 Open your browser to the temporary URL and enter the JWT Token into the login page.
 You should see the :guilabel:`Tenants` page:
