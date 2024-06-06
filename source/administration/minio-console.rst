@@ -73,31 +73,6 @@ the MinIO Console:
        See :ref:`minio-metrics-collect-using-prometheus` for a tutorial on 
        configuring Prometheus to collect metrics from MinIO.
 
-   * - :envvar:`MINIO_SERVER_URL`
-     - The `fully qualified domain name <https://en.wikipedia.org/wiki/Fully_qualified_domain_name>`__ (FQDN) the MinIO Console uses for connecting to the MinIO Server. 
-       For the Console to function correctly, the MinIO server URL *must* be the FQDN of the host, resolveable, and reachable.
-
-       The MinIO Console connects to the MinIO Server using an IP 
-       address by default. For example, when the MinIO Server starts up, 
-       the server logs include a line 
-       ``API: https://<IP ADDRESS 1> https://<IP ADDRESS 2>``.
-       The MinIO Console defaults to connecting using ``<IP ADDRESS 1>``.
-
-       The MinIO Console may require setting this variable in the following scenarios:
-       
-       - The MinIO server TLS certificates do not include the local IP address
-         as a :rfc:`Subject Alternative Name <5280#section-4.2.1.6>` (SAN). 
-         Specify a hostname contained in the TLS certificate to allow the MinIO 
-         Console to validate the TLS connection.
-
-       - The MinIO server's local IP address is not reachable by the MinIO
-         Console. Specify a resolveable hostname for the MinIO Server.
-
-       - A load balancer or reverse proxy controls traffic to the MinIO server,
-         such that the MinIO Console cannot reach the server without going
-         through the load balancer/proxy. Specify the load balancer/proxy 
-         URL for the MinIO server.
-
    * - :envvar:`MINIO_BROWSER_REDIRECT_URL`
      - The externally resolvable hostname for the MinIO Console used by the 
        configured :ref:`external identity manager 
