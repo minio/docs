@@ -30,76 +30,95 @@ If you deployed the Tenant using :ref:`Helm <deploy-tenant-helm>`, use the :ref:
 
 To upgrade a Tenant with Kustomize:
 
-#. In a convenient directory, save the current Tenant configuration to a file using ``kubectl get``:
+If the tenant was deployed with Operator Console, there are additional steps to create a base configuration file before upgrading.
 
-    .. code-block:: shell
-       :class: copyable
+If the tenant was deployed with Kustomize, the base configuration is your existing ``kustomization`` files from the original tenant deployment.
 
-       kubectl get tenant/my-tenant -n my-tenant-ns -o yaml > my-tenant-base.yaml
+Choose a tab below depending on how the tenant was deployed:
 
-    Replace ``my-tenant`` and ``my-tenant-ns`` with the name and namespace of the Tenant to upgrade.
-    
-    Edit the file to remove the following lines:
+.. tab-set::
 
-    - ``creationTimestamp:``
-    - ``resourceVersion:``
-    - ``uid:``
-    - ``selfLink:`` (if present)
+   .. tab-item:: Operator Console-Deployed Tenant
+      :selected:
 
-    For example, remove the highlighted lines:
+      1. Create the base configuration file:
 
-    .. code-block:: shell
-       :emphasize-lines: 2, 6, 7
+         a. In a convenient directory, save the current Tenant configuration to a file using ``kubectl get``:
 
-       metadata:
-         creationTimestamp: "2024-05-29T21:22:20Z"
-         generation: 1
-         name: my-tenant
-         namespace: my-tenant-ns
-         resourceVersion: "4699"
-         uid: d5b8e468-3bed-4aa3-8ddb-dfe1ee0362da
+             .. code-block:: shell
+                :class: copyable
 
-#. In the same directory, create a ``kustomization.yaml`` file with contents resembling the following:
+                kubectl get tenant/my-tenant -n my-tenant-ns -o yaml > my-tenant-base.yaml
 
-   .. code-block:: shell
-      :class: copyable
+             Replace ``my-tenant`` and ``my-tenant-ns`` with the name and namespace of the Tenant to upgrade.
 
-      apiVersion: kustomize.config.k8s.io/v1beta1
-      kind: Kustomization
+             Edit the file to remove the following lines:
 
-      resources:
-      - my-tenant-base.yaml
+             - ``creationTimestamp:``
+             - ``resourceVersion:``
+             - ``uid:``
+             - ``selfLink:`` (if present)
 
-      patches:
-      - path: upgrade-minio-tenant.yaml
+             For example, remove the highlighted lines:
 
-   Replace ``my-tenant-base.yaml`` with the name of the file containing the ``kubectl get`` output from the previous step.
+             .. code-block:: shell
+                :emphasize-lines: 2, 6, 7
 
+                metadata:
+                  creationTimestamp: "2024-05-29T21:22:20Z"
+                  generation: 1
+                  name: my-tenant
+                  namespace: my-tenant-ns
+                  resourceVersion: "4699"
+                  uid: d5b8e468-3bed-4aa3-8ddb-dfe1ee0362da
 
-#. Also in the same directory, create a ``upgrade-minio-tenant.yaml`` file with contents resembling the following:
+         b. In the same directory, create a ``kustomization.yaml`` file with contents resembling the following:
 
-   .. code-block:: shell
-      :class: copyable
-      :substitutions:
+            .. code-block:: shell
+               :class: copyable
 
-      apiVersion: minio.min.io/v2
-      kind: Tenant
+               apiVersion: kustomize.config.k8s.io/v1beta1
+               kind: Kustomization
 
-      metadata:
-        name: my-tenant
-        namespace: my-tenant-ns
+               resources:
+               - my-tenant-base.yaml
 
-      spec:
-	image: minio/minio:|minio-tag|
+               patches:
+               - path: upgrade-minio-tenant.yaml
 
-   The name of this file must match the ``patches.path`` filename specified in your ``kustomization.yaml`` file.
-   If you create this file with a different name, ensure you update the corresponding filename in  ``kustomize.yaml``.
-   
-   Replace ``my-tenant`` and ``my-tenant-ns`` with the name and namespace of the Tenant to upgrade.
-   Specify the MinIO version to upgrade to in ``image:``.
+            If you used a different filename for the ``kubectl get`` output in the previous step, replace ``my-tenant-base.yaml`` with the name of that file.
 
- 
-- Apply the updated configuration to the Tenant with ``kubectl apply``:
+   .. tab-item:: Existing Kustomized-deployed Tenant
+
+      1. You can upgrade the tenant using the ``kustomization`` files from the original deployment as the base configuration.
+         If you no longer have these files, follow the instructions in the Operator Console-Deployed Tenant tab.
+
+2. Create a ``upgrade-minio-tenant.yaml`` file with contents resembling the following:
+
+.. code-block:: shell
+   :class: copyable
+   :substitutions:
+
+   apiVersion: minio.min.io/v2
+   kind: Tenant
+
+   metadata:
+     name: my-tenant
+     namespace: my-tenant-ns
+
+   spec:
+     image: minio/minio:|minio-tag|
+
+This file instructs Kustomize to upgrade the tenant using the specified image.
+The name of this file, ``upgrade-minio-tenant.yaml``, must match the ``patches.path`` filename specified in the ``kustomization.yaml`` file created in the previous step.
+
+Replace ``my-tenant`` and ``my-tenant-ns`` with the name and namespace of the Tenant to upgrade.
+Specify the MinIO version to upgrade to in ``image:``.
+
+Alternatively, you can update the base configuration directly, according to your local procedures.
+Refer to the :kube-docs:`Kustomize Documentation <tasks/manage-kubernetes-objects/kustomization>` for more information.
+
+3. From the same directory as the above files, apply the updated configuration to the Tenant with ``kubectl apply``:
 
   .. code-block:: shell
      :class: copyable
