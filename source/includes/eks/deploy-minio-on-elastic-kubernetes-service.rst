@@ -53,4 +53,6 @@ You can use this policy as a baseline for manual Operator installations.
 Procedure
 ---------
 
-Something Kustomize
+The following steps deploy Operator using Kustomize and a ``kustomization.yaml`` file from the MinIO Operator GitHub repository.
+
+.. include:: /includes/common/common-install-operator-kustomize.rst

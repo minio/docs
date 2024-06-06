@@ -48,5 +48,6 @@ For guidance on connecting ``kubectl`` to AKS, see :aks-docs:`Install kubectl an
 Procedure
 ---------
 
-Something Kustomize
+The following steps deploy Operator using Kustomize and a ``kustomization.yaml`` file from the MinIO Operator GitHub repository.
 
+.. include:: /includes/common/common-install-operator-kustomize.rst
