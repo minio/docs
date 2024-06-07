@@ -289,12 +289,6 @@ Modify the example to reflect your deployment topology:
 
    MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
 
-   # Set to the URL of the load balancer for the MinIO deployment
-   # This value *must* match across all MinIO servers. If you do
-   # not have a load balancer, set this value to to any *one* of the
-   # MinIO hosts in the deployment as a temporary measure.
-   MINIO_SERVER_URL="https://minio.example.net:9000"
-
 You may specify other :ref:`environment variables
 <minio-server-environment-variables>` or server commandline options as required
 by your deployment. All MinIO nodes in the deployment should include the same

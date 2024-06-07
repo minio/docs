@@ -45,7 +45,7 @@ For example, to set up ftp access, you could set the variable to something like 
 
    export MINIO_OPTS=' "--console-address="9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
 
-On Unix-like systems, you can save a file with the environment variable to ``/etc/defaults/minio`` instead of setting the variable manually.
+On Unix-like systems, you can save a file with the environment variable to ``/etc/default/minio`` instead of setting the variable manually.
 
 Storage Volumes
 ---------------

@@ -118,7 +118,6 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
       You must also set the following environment variables for the MinIO deployment:
 
-      - Set :envvar:`MINIO_SERVER_URL` to the proxy host FQDN of the MinIO Server (``https://minio.example.net``)
       - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the MinIO Console (``https://example.net/minio/ui``)
 
    .. tab-item:: Subdomain
@@ -224,5 +223,4 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
       You must also set the following environment variables for the MinIO deployment:
 
-      - Set :envvar:`MINIO_SERVER_URL` to the proxy host FQDN of the MinIO Server (``https://minio.example.net``)
       - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the MinIO Console (``https://console.example.net/``)
