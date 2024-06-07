@@ -15,7 +15,7 @@ Overview
 --------
 
 `Azure Kubernetes Engine <https://azure.microsoft.com/en-us/products/kubernetes-service/#overview>`__ (AKS) is a highly available, secure, and fully managed Kubernetes service from Microsoft Azure.
-The MinIO Kubernetes Operator supports deploying MinIO Tenants onto AKS infrastructure using the MinIO Operator Console, the :mc:`kubectl minio` CLI tool, or `kustomize <https://kustomize.io/>`__ for :minio-git:`YAML-defined deployments <operator/tree/master/examples/kustomization>`.
+The MinIO Kubernetes Operator supports deploying MinIO Tenants onto AKS infrastructure using the MinIO Operator Console or `kustomize <https://kustomize.io/>`__ for :minio-git:`YAML-defined deployments <operator/tree/master/examples/kustomization>`.
 
 :minio-web:`Through the AKS Marketplace <product/multicloud-azure-kubernetes-service>`
    MinIO maintains an `AKS Marketplace listing <https://azuremarketplace.microsoft.com/en-us/marketplace/apps/minio.minio-object-storage_v1dot1>`__ through which you can register your AKS cluster with |subnet|.

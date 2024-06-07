@@ -1,4 +1,6 @@
+.. _minio-operator-installation:
 .. _minio-operator-installation-kustomize:
+.. _deploy-operator-kubernetes:
 .. _deploy-operator-kubernetes-kustomize:
 
 =========================
