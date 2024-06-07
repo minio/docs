@@ -36,7 +36,7 @@ Deploy a MinIO Tenant
    :alt: MinIO Operator Console
 
 
-The MinIO Operator Console is designed with deploying multi-node distributed MinIO Deployments.
+The MinIO Operator Console is designed for deploying multi-node distributed MinIO Deployments.
 
 Deploying Single-Node topologies requires additional configurations not covered in this documentation.
 You can alternatively use a simple Kubernetes YAML object to describe a Single-Node topology for local testing and evaluation as necessary.

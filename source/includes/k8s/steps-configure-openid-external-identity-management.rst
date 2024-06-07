@@ -102,7 +102,7 @@ See :ref:`minio-external-identity-management-openid-access-control` for more inf
 
 The MinIO Console supports the full workflow of authenticating to the OIDC provider, generating temporary credentials using the MinIO :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) endpoint, and logging the user into the MinIO deployment.
 
-See the :ref:`Deploy MinIO Tenant: Access the Tenant's MinIO Console <create-tenant-cli-access-tenant-console>` for instructions on accessing the Tenant Console.
+See :ref:`Deploy MinIO Tenant: Connect to the Tenant <create-tenant-connect-tenant>` for additonal information about accessing the Tenant Console.
 
 If the OIDC configuration succeeded, the Console displays a button to login with OIDC credentials.
 
