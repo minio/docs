@@ -103,21 +103,12 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
    MINIO_KMS_KES_KEY_FILE=/certs/minio-kes.key
    MINIO_KMS_KES_CAPATH=/certs/server.cert
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
-   MINIO_KMS_KES_ENCLAVE=<name>
 
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 
 - Encrypting the MinIO backend (IAM, configuration, etc.)
 - Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not include a specific |EK|.
 - Encrypting objects using :ref:`SSE-S3 <minio-encryption-sse-s3>`.
-
-MinIO uses the :envvar:`MINIO_KMS_KES_ENCLAVE` key to define the name of the KES enclave to use.
-
-- Replace ``<name>`` with the name of the :term:`enclave` to use.
-- If not defined, MinIO does not send any enclave information.
-  This may result in using the default enclave for stateful KES servers.
-
-  A KES :term:`enclave` isolates its associated keys from other enclaves on a stateful KES server.
 
 The ``minio-kes`` certificates enable for mTLS between the MinIO deployment and the KES server *only*.
 They do not otherwise enable TLS for other client connections to MinIO.

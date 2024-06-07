@@ -14,7 +14,7 @@ Overview
 --------
 
 :eks-docs:`Amazon® Elastic Kubernetes Service®  <what-is-eks.html>` (EKS) is an enterprise-ready Kubernetes container platform with full-stack automated operations to manage hybrid cloud, multi-cloud, and edge deployments. 
-The MinIO Kubernetes Operator supports deploying MinIO Tenants onto EKS infrastructure using the MinIO Operator Console, using the :mc:`kubectl minio` CLI tool, or by using `kustomize <https://kustomize.io/>`__ for :minio-git:`YAML-defined deployments <operator/tree/master/examples/kustomization>`.
+The MinIO Kubernetes Operator supports deploying MinIO Tenants onto EKS infrastructure using the MinIO Operator Console or by using `kustomize <https://kustomize.io/>`__ for :minio-git:`YAML-defined deployments <operator/tree/master/examples/kustomization>`.
 
 MinIO supports the following methods for installing the MinIO Operator onto your :abbr:`EKS (Elastic Kubernetes Service)` clusters:
 

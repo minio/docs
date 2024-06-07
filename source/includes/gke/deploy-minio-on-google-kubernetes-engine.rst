@@ -14,7 +14,7 @@ Overview
 --------
 
 `Google  Kubernetes Engine <https://cloud.google.com/kubernetes-engine?ref=minio-docs>`__ (GKE) offers a highly automated secure and fully managed Kubernetes platform.
-The MinIO Kubernetes Operator supports deploying MinIO Tenants onto GKE infrastructure using the MinIO Operator Console, the :mc:`kubectl minio` CLI tool, or `kustomize <https://kustomize.io/>`__ for :minio-git:`YAML-defined deployments <operator/tree/master/examples/kustomization>`.
+The MinIO Kubernetes Operator supports deploying MinIO Tenants onto GKE infrastructure using the MinIO Operator Console or `kustomize <https://kustomize.io/>`__ for :minio-git:`YAML-defined deployments <operator/tree/master/examples/kustomization>`.
 
 :minio-web:`Through the GKE Marketplace <product/multicloud-google-kubernetes-service>`
    MinIO maintains an `GKE Marketplace listing <https://console.cloud.google.com/marketplace/product/minio-inc-public/minio-enterprise?pli=1&project=peak-essence-171622>`__ through which you can register your GKE cluster with |subnet|.
