@@ -10,71 +10,127 @@ Upgrade a MinIO Tenant
    :local:
    :depth: 1
 
+
+The following procedures upgrade a single MinIO Tenant, using either Kustomize or Helm.
+MinIO recommends you test upgrades in a lower environment such as a Dev or QA Tenant, before upgrading production Tenants.
+
 .. important::
 
    For Tenants using a MinIO Image older than :minio-release:`RELEASE.2024-03-30T09-41-56Z` running with :ref:`AD/LDAP <minio-ldap-config-settings>` enabled, you **must** read through the release notes for :minio-release:`RELEASE.2024-04-18T19-09-19Z` before starting this procedure.
    You must take the extra steps documented in the linked release as part of the upgrade procedure.
 
 .. _minio-upgrade-tenant-plugin:
+.. _minio-upgrade-tenant-kustomize:
 
-Upgrade the Tenant using the MinIO Kubernetes Plugin
-----------------------------------------------------
+Upgrade a Tenant using Kustomize
+--------------------------------
 
-The following procedure upgrades the MinIO Operator using the :mc:`kubectl minio tenant upgrade` command.
-
+The following procedure upgrades a MinIO Tenant using Kustomize and the ``kubectl`` CLI.
 If you deployed the Tenant using :ref:`Helm <deploy-tenant-helm>`, use the :ref:`minio-upgrade-tenant-helm` procedure instead.
 
-This procedure *requires* a valid installation of the MinIO Kubernetes Operator and assumes the local host has a matching installation of the MinIO Kubernetes Operator and plugin.
-This procedure assumes the latest stable Operator version |operator-version-stable|.
+To upgrade a Tenant with Kustomize:
 
-.. include:: /includes/k8s/install-minio-kubectl-plugin.rst
+If the tenant was deployed with Operator Console, there are additional steps to create a base configuration file before upgrading.
 
-See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
+If the tenant was deployed with Kustomize, the base configuration is your existing ``kustomization`` files from the original tenant deployment.
 
-.. important::
+Choose a tab below depending on how the tenant was deployed:
 
-   If you are upgrading the MinIO Operator, there may be additional changes to the tenant specs required.
-   Refer to the :ref:`MinIO Operator Upgrade <minio-k8s-upgrade-minio-operator>` for specifics on any changes necessary to the tenant spec.
-   The required changes vary based on the Operator version you are upgrading from and to.
-   
-   If required changes are not made to the tenant before upgrading the Operator, your tenant may not be accessible after the upgrade.
+.. tab-set::
 
-1) Validate the Active MinIO Version
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. tab-item:: Operator Console-Deployed Tenant
+      :selected:
 
-Use the :mc-cmd:`kubectl minio tenant info` command to return a summary of the MinIO Tenant, including the new Pool:
+      1. Create the base configuration file:
+
+         a. In a convenient directory, save the current Tenant configuration to a file using ``kubectl get``:
+
+             .. code-block:: shell
+                :class: copyable
+
+                kubectl get tenant/my-tenant -n my-tenant-ns -o yaml > my-tenant-base.yaml
+
+             Replace ``my-tenant`` and ``my-tenant-ns`` with the name and namespace of the Tenant to upgrade.
+
+             Edit the file to remove the following lines:
+
+             - ``creationTimestamp:``
+             - ``resourceVersion:``
+             - ``uid:``
+             - ``selfLink:`` (if present)
+
+             For example, remove the highlighted lines:
+
+             .. code-block:: shell
+                :emphasize-lines: 2, 6, 7
+
+                metadata:
+                  creationTimestamp: "2024-05-29T21:22:20Z"
+                  generation: 1
+                  name: my-tenant
+                  namespace: my-tenant-ns
+                  resourceVersion: "4699"
+                  uid: d5b8e468-3bed-4aa3-8ddb-dfe1ee0362da
+
+         b. In the same directory, create a ``kustomization.yaml`` file with contents resembling the following:
+
+            .. code-block:: shell
+               :class: copyable
+
+               apiVersion: kustomize.config.k8s.io/v1beta1
+               kind: Kustomization
+
+               resources:
+               - my-tenant-base.yaml
+
+               patches:
+               - path: upgrade-minio-tenant.yaml
+
+            If you used a different filename for the ``kubectl get`` output in the previous step, replace ``my-tenant-base.yaml`` with the name of that file.
+
+   .. tab-item:: Existing Kustomized-deployed Tenant
+
+      1. You can upgrade the tenant using the ``kustomization`` files from the original deployment as the base configuration.
+         If you no longer have these files, follow the instructions in the Operator Console-Deployed Tenant tab.
+
+2. Create a ``upgrade-minio-tenant.yaml`` file with contents resembling the following:
 
 .. code-block:: shell
    :class: copyable
+   :substitutions:
 
-   kubectl minio tenant info TENANT_NAME \
-     --namespace TENANT_NAMESPACE  
+   apiVersion: minio.min.io/v2
+   kind: Tenant
 
-- Replace ``TENANT_NAME`` with the name of the Tenant.
-- Replace ``TENANT_NAMESPACE`` with the namespace of the Tenant.
+   metadata:
+     name: my-tenant
+     namespace: my-tenant-ns
 
-The output includes the version of the MinIO Server used by all Pods in the Tenant.
+   spec:
+     image: minio/minio:|minio-tag|
 
-2) Upgrade the MinIO Tenant
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This file instructs Kustomize to upgrade the tenant using the specified image.
+The name of this file, ``upgrade-minio-tenant.yaml``, must match the ``patches.path`` filename specified in the ``kustomization.yaml`` file created in the previous step.
 
-Use the :mc-cmd:`kubectl minio tenant upgrade` command to upgrade the container image used by *all* MinIO Pods in the Tenant. 
-MinIO upgrades *all* ``minio`` server processes at once. 
-This may result in downtime until the upgrade process completes.
+Replace ``my-tenant`` and ``my-tenant-ns`` with the name and namespace of the Tenant to upgrade.
+Specify the MinIO version to upgrade to in ``image:``.
 
-.. code-block:: shell
-   :class: copyable
+Alternatively, you can update the base configuration directly, according to your local procedures.
+Refer to the :kube-docs:`Kustomize Documentation <tasks/manage-kubernetes-objects/kustomization>` for more information.
 
-   kubectl minio tenant upgrade TENANT_NAME                      \
-           --image     minio:minio:RELEASE:YYYY-MM-DDTHH-MM-SSZ  \
-           --namespace TENANT_NAMESPACE
+3. From the same directory as the above files, apply the updated configuration to the Tenant with ``kubectl apply``:
 
-- Replace ``TENANT_NAME`` with the name of the Tenant.
-- Replace ``RELEASE:YYYY-MM-DDTHH-MM-SSZ`` with the specific release to use. 
-  Specify ``minio/minio`` to use the latest stable version of MinIO.
-- Replace ``TENANT_NAMESPACE`` with the namespace of the Tenant.
+  .. code-block:: shell
+     :class: copyable
 
-See MinIO's `DockerHub Repository <https://hub.docker.com/r/minio/minio>`__ for a list of available release tags.
+     kubectl apply -f ./
+
+  The output resembles the following:
+
+  .. code-block:: shell
+
+     tenant.minio.min.io/my-tenant configured
+
 
 .. _minio-upgrade-tenant-helm:
 
@@ -83,7 +139,7 @@ Upgrade the Tenant using the MinIO Helm Chart
 
 This procedure upgrades an existing MinIO Tenant using Helm Charts.
 
-If you deployed the Tenant using the :ref:`MinIO Kubernetes Plugin <minio-k8s-deploy-minio-tenant>`, use the :ref:`minio-upgrade-tenant-plugin` procedure instead.
+If you deployed the Tenant using Kustomize, use the :ref:`minio-upgrade-tenant-kustomize` procedure instead.
 
 1. Verify the existing MinIO Tenant installation.
 

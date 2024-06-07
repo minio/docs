@@ -24,7 +24,7 @@ Using the MinIO ``kubectl`` Plugin
    MinIO provides a ``kubectl`` plugin for installing and managing the MinIO Operator and Tenants through a terminal or shell (CLI) environment.
    You can manually register these tenants with |subnet| at any time.
 
-This page documents deploying the MinIO Operator through the CLI using the ``kubectl minio`` plugin.
+This page documents deploying the MinIO Operator through the CLI using Kustomize.
 For instructions on deploying the MinIO Operator through the GKE Marketplace, see :minio-web:`Deploy MinIO through GKE <product/multicloud-google-kubernetes-service/deploy>`
 
 This documentation assumes familiarity with all referenced Kubernetes and Google Kubernetes Engine concepts, utilities, and procedures. 
@@ -51,4 +51,6 @@ For guidance on connecting ``kubectl`` to GKE, see :gke-docs:`Install kubectl an
 Procedure
 ---------
 
-.. include:: /includes/common/common-install-operator-kubectl-plugin.rst
+The following steps deploy Operator using Kustomize and a ``kustomization.yaml`` file from the MinIO Operator GitHub repository.
+
+.. include:: /includes/common/common-install-operator-kustomize.rst

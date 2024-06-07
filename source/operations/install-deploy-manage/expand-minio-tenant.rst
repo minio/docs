@@ -16,15 +16,14 @@ This procedure documents expanding the available storage capacity of an existing
 Prerequisites
 -------------
 
-MinIO Kubernetes Operator and Plugin
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MinIO Kubernetes Operator
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure on this page *requires* a valid installation of the MinIO Kubernetes Operator and assumes the local host has a matching installation of the MinIO Kubernetes Operator.
-This procedure assumes the latest stable Operator and Plugin version, |operator-version-stable|.
+This procedure assumes the latest stable Operator, version |operator-version-stable|.
 
 See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
 
-.. include:: /includes/k8s/install-minio-kubectl-plugin.rst
 
 Available Worker Nodes
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -56,85 +55,44 @@ Persistent Volumes
    MinIO strongly recommends using SSD-backed EBS volumes for best performance.
    For more information on EBS resources, see `EBS Volume Types <https://aws.amazon.com/ebs/volume-types/>`__.
 
-Procedure (CLI)
----------------
+Procedure (Operator Console)
+----------------------------
+
+The MinIO Operator Console supports expanding a MinIO Tenant by adding additional pools.
+
 
 1) Expand the MinIO Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`kubectl minio tenant expand` command to create the MinIO
-Tenant.
+#. From the Operator Console view, select the Tenant to open the summary view, then select :guilabel:`Pools`.
+   Select :guilabel:`Expand Tenant`.
 
-The following example expands a MinIO Tenant with a Pool consisting of
-4 Nodes with 4 locally-attached drives of 1Ti each:
+#. Specify the following information for the new pool:
 
-.. code-block:: shell
-   :class: copyable
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 70
+      :width: 100%
 
-   kubectl minio tenant expand minio-tenant-1   \
-     --servers                 4                \
-     --volumes                 16               \
-     --capacity                16Ti             \
-     --storage-class           local-storage    \
-     --namespace               minio-tenant-1
+      * - Field
+        - Description
 
-The following table explains each argument specified to the command:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Argument
-     - Description
-
-   * - :mc-cmd:`minio-tenant-1 <kubectl minio tenant expand TENANT_NAME>`
-     - The name of the MinIO Tenant which the command expands with the new pool.
-
-   * - :mc-cmd:`~kubectl minio tenant expand --servers`
-     - The number of ``minio`` servers to deploy in the new Tenant Pool across
-       the Kubernetes cluster.
-
-   * - :mc-cmd:`~kubectl minio tenant expand --volumes`
-     - The number of volumes in the new Tenant Pool. :mc:`kubectl minio`
-       determines the number of volumes per server by dividing ``volumes`` by
-       ``servers``.
-
-   * - :mc-cmd:`~kubectl minio tenant expand --capacity`
-     - The total capacity of the Tenant Pool. :mc:`kubectl minio` determines the
-       capacity of each volume by dividing ``capacity`` by ``volumes``.
-
-   * - :mc-cmd:`~kubectl minio tenant expand --storage-class`
-     - .. cond:: not eks
+      * - Number of Servers
+        - The number of servers to deploy in the new Tenant Pool across the Kubernetes cluster.
      
-          Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
+      * - Volume Size
+        - The capacity of each volume in the new Tenant Pool.
+     
+      * - Volumes per Server
+        - The number of volumes for each server in the new Tenant Pool.
 
-          Ensure the specified storage class has sufficient available Persistent Volume resources to match each generated Persistent Volume Claim.
+      * - Storage Class
+        - Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
+     
+#. Select :guilabel:`Create`.
 
-       .. cond:: eks
-
-          Specify the EBS volume type to use for this tenant.
-          The following list is populated based on the AWS EBS CSI driver list of supported :github:`EBS volume types <kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/parameters.md>`:
-
-          - ``gp3`` (General Purpose SSD)
-          - ``gp2`` (General Purpose SSD)
-          - ``io2`` (Provisioned IOPS SSD)
-          - ``io1`` (Provisioned IOPS SSD)
-          - ``st1`` (Throughput Optimized HDD)
-          - ``sc1`` (Cold Storage HDD)
-
-   * - :mc-cmd:`~kubectl minio tenant expand --namespace`
-     - The Kubernetes namespace of the existing MinIO Tenant to which to add
-       the new Tenant pool.
 
 2) Validate the Expanded MinIO Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`kubectl minio tenant info` command to return a summary of 
-the MinIO Tenant, including the new Pool:
-
-.. code-block:: shell
-   :class: copyable
-
-   kubectl minio tenant info minio-tenant-1 \
-     --namespace minio-tenant-1
+In the :guilabel:`Pools` tab, select the new Pool to confirm its details.

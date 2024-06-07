@@ -1,3 +1,4 @@
+:orphan:
 
 .. _kubectl-minio-init:
 

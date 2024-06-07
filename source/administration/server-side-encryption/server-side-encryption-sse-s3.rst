@@ -53,7 +53,7 @@ following KMS providers:
 - :ref:`AWS SecretsManager <minio-sse-aws>`
 - :ref:`Google Cloud SecretManager <minio-sse-gcp>`
 - :ref:`Azure Key Vault <minio-sse-azure>`
-- :ref:`Hashicorp KeyVault <minio-sse-vault>`
+- :ref:`HashiCorp KeyVault <minio-sse-vault>`
 - Thales CipherTrust (formerly Gemalto KeySecure)
 
 .. _minio-encryption-sse-s3-quickstart:
@@ -76,7 +76,7 @@ supported external Key Management Services (KMS):
 - :ref:`AWS SecretsManager <minio-sse-aws>`
 - :ref:`Google Cloud SecretManager <minio-sse-gcp>`
 - :ref:`Azure Key Vault <minio-sse-azure>`
-- :ref:`Hashicorp KeyVault <minio-sse-vault>`
+- :ref:`HashiCorp KeyVault <minio-sse-vault>`
 - Thales CipherTrust (formerly Gemalto KeySecure)
 
 .. include:: /includes/common/common-minio-kes.rst

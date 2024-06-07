@@ -1,5 +1,5 @@
-.. _minio-operator-installation:
-.. _deploy-operator-kubernetes:
+.. _minio-operator-installation-kustomize:
+.. _deploy-operator-kubernetes-kustomize:
 
 =========================
 Deploy the MinIO Operator
@@ -17,22 +17,21 @@ Overview
 MinIO is a Kubernetes-native high performance object store with an S3-compatible API. 
 The MinIO Kubernetes Operator supports deploying MinIO Tenants onto private and public cloud infrastructures ("Hybrid" Cloud).
 
-The following procedure installs the latest stable version (|operator-version-stable|) of the MinIO Operator and MinIO Plugin on Kubernetes infrastructure:
+The following procedure installs the latest stable version (|operator-version-stable|) of the MinIO Operator on Kubernetes infrastructure.
 
-- The MinIO Operator installs a :kube-docs:`Custom Resource Definition (CRD) <concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions>` to support describing MinIO tenants as a Kubernetes :kube-docs:`object <concepts/overview/working-with-objects/kubernetes-objects/>`. 
-  See the MinIO Operator :minio-git:`CRD Reference <operator/blob/master/docs/tenant_crd.adoc>` for complete documentation on the MinIO CRD.
-
-- The MinIO Kubernetes Plugin brings native support for deploying and managing MinIO tenants on a Kubernetes cluster using the :mc:`kubectl minio` command. 
+The MinIO Operator installs a :kube-docs:`Custom Resource Definition (CRD) <concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions>` to support describing MinIO tenants as a Kubernetes :kube-docs:`object <concepts/overview/working-with-objects/kubernetes-objects/>`. 
+See the MinIO Operator :minio-git:`CRD Reference <operator/blob/master/docs/tenant_crd.adoc>` for complete documentation on the MinIO CRD.
 
 This documentation assumes familiarity with referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
+
 
 MinIO Operator Components
 -------------------------
 
 The MinIO Operator exists in its own namespace.
-
 Within the Operator's namespace, the MinIO Operator utilizes two pods:
+
 - The Operator pod for the base Operator functions to deploy, manage, modify, and maintain tenants.
 - Console pod for the Operator's Graphical User Interface, the Operator Console.
 
@@ -64,30 +63,30 @@ The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes t
 Prerequisites
 -------------
 
-Kubernetes Version 1.19.0
+Kubernetes Version 1.21.0
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. important::
 
    MinIO **strongly recommends** upgrading Production clusters running `End-Of-Life <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__ Kubernetes APIs.
 
-Starting with v4.0.0, the MinIO Operator and MinIO Kubernetes Plugin **require** Kubernetes 1.19.0 and later. 
-The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must have the same version of 1.19.0+.
-
-Prior to v4.0.0, the MinIO Operator and Plugin required Kubernetes 1.17.0. 
-You *must* upgrade your Kubernetes infrastructure to 1.19.0 or later to use the MinIO Operator or Plugin v4.0.0 or later.
-
-Starting with v5.0.0, MinIO *recommends* Kubernetes 1.21.0 or later for both the infrastructure and the ``kubectl`` CLI tool.
+Starting with v5.0.0, MinIO **requires** Kubernetes 1.21.0 or later for both the infrastructure and the ``kubectl`` CLI tool.
 
 .. versionadded:: Operator 5.0.6
 
 For Kubernetes 1.25.0 and later, MinIO supports deploying in environments with the :kube-docs:`Pod Security admission (PSA) <concepts/security/pod-security-admission>` ``restricted`` policy enabled.
 
 
-``kubectl`` Configuration
+Kustomize and ``kubectl``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure assumes that your local host machine has both the correct version of ``kubectl`` for your Kubernetes cluster *and* the necessary access to that cluster to create new resources.
+`Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is a YAML-based templating tool that allows you to define Kubernetes resources in a declarative and repeatable fashion.
+Kustomize is included with the :kube-docs:`kubectl <reference/kubectl>` command line tool.
+
+This procedure assumes that your local host machine has both the matching version of ``kubectl`` for your Kubernetes cluster *and* the necessary access to that cluster to create new resources.
+
+The `default MinIO Operator Kustomize template <https://github.com/minio/operator/blob/master/kustomization.yaml>`__ provides a starting point for customizing configurations for your local environment.
+You can modify the default Kustomization file or apply your own `patches <https://datatracker.ietf.org/doc/html/rfc6902>`__ to customize the Operator deployment for your Kubernetes cluster.
 
 .. _minio-k8s-deploy-operator-tls:
 
@@ -162,15 +161,14 @@ The output of the example command above may differ from the output in your termi
 Procedure
 ---------
 
-The following steps deploy Operator using the MinIO Kubernetes Plugin.
+The following steps deploy Operator using Kustomize and a ``kustomization.yaml`` file from the MinIO Operator GitHub repository.
 To install Operator using a Helm chart, see :ref:`Deploy Operator with Helm <minio-k8s-deploy-operator-helm>`.
 
-.. include:: /includes/common/common-install-operator-kubectl-plugin.rst
+.. include:: /includes/common/common-install-operator-kustomize.rst
 
 .. toctree::
    :titlesonly:
    :hidden:
 
    /operations/install-deploy-manage/deploy-operator-helm
-   /operations/install-deploy-manage/deploy-operator-kustomize
    

@@ -1,52 +1,17 @@
-.. _minio-k8s-deploy-operator-kustomize:
-
-==============================
-Deploy Operator With Kustomize
-==============================
-
-.. default-domain:: minio
-
-.. contents:: Table of Contents
-   :local:
-   :depth: 2
-
-
-Overview
---------
-
-`Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization>`__ is a YAML-based templating tool that allows you to define Kubernetes resources in a declarative and repeatable fashion.
-Kustomize is included with the :kube-docs:`kubectl <reference/kubectl>` command line tool.
-
-The `default MinIO Operator Kustomize template <https://github.com/minio/operator/blob/master/kustomization.yaml>`__ provides a starting point for customizing configurations for your local environment.
-You can modify the default Kustomization file or apply your own `patches <https://datatracker.ietf.org/doc/html/rfc6902>`__ to customize the Operator deployment for your Kubernetes cluster.
-
-
-Prerequisites
--------------
-
-Installing Operator with Kustomize requires the following prerequisites:
-
-* An existing Kubernetes cluster, v1.21 or later.
-* A local ``kubectl`` installation with the same version as the cluster.
-* Access to run ``kubectl`` commands on the cluster from your local host.
-
-For more about Operator installation requirements, including TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
-
-This procedure assumes familiarity with the referenced Kubernetes concepts and utilities.
-While this documentation may provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
-
-.. _minio-k8s-deploy-operator-kustomize-repo:
+.. _minio-k8s-deploy-operator-kustomize-repo-2:
 
 Install the MinIO Operator using Kustomize
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following procedure uses ``kubectl -k`` to install the Operator from the MinIO Operator GitHub repository.
 ``kubectl -k`` and ``kubectl --kustomize`` are aliases that perform the same command.
 
 .. important::
 
-   If you use Kustomize to install the Operator, you must use Kustomize to manage or update that installation.
-   Do not use ``kubectl krew``, a Helm chart, or similar methods to manage or update the MinIO Operator installation.
+   If you use Kustomize to install the Operator, you must use Kustomize to manage or upgrade that installation.
+   Do not use ``kubectl krew``, a Helm chart, or similar methods to manage or upgrade a MinIO Operator installation deployed with Kustomize.
+
+   You can, however, use Kustomize to upgrade a previous version of Operator (5.0.14 or earlier) installed with the MinIO Kubernetes Plugin.
 
 #. Install the latest version of Operator
 
@@ -89,14 +54,17 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
 
    .. code-block:: shell
 
-      NAME                              READY   STATUS    RESTARTS   AGE
-      console-6b6cf8946c-9cj25          1/1     Running   0          99s
-      minio-operator-69fd675557-lsrqg   1/1     Running   0          99s
+      NAME                              READY   STATUS              RESTARTS   AGE
+      console-56c7d8bd89-485qh          1/1     Running   0          2m42s
+      minio-operator-6c758b8c45-nkhlx   1/1     Running   0          2m42s
+      minio-operator-6c758b8c45-dgd8n   1/1     Running   0          2m42s
 
    In this example, the ``minio-operator`` pod is MinIO Operator and the ``console`` pod is the Operator Console.
 
-   You can modify your Operator deplyoment by applying kubectl patches.
+   You can modify your Operator deployment by applying kubectl patches.
    You can find examples for common configurations in the `Operator GitHub repository <https://github.com/minio/operator/tree/master/examples/kustomization>`__.
+
+   .. _minio-k8s-deploy-operator-access-console:
 
 #. *(Optional)* Configure access to the Operator Console service
 
@@ -131,7 +99,8 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
           }
       }'
 
-   You can now access the service through port ``30433`` on any of your Kubernetes worker nodes.
+   The patch command should output ``service/console patched``.
+   You can now access the service through ports ``30433`` (HTTPS) or ``30090`` (HTTP) on any of your Kubernetes worker nodes.
 
 #. Verify the Operator installation
 
@@ -147,23 +116,22 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
    .. code-block:: shell
 
       NAME                                  READY   STATUS    RESTARTS   AGE
-      pod/console-68d955874d-vxlzm          1/1     Running   0          25h
-      pod/minio-operator-699f797b8b-th5bk   1/1     Running   0          25h
-      pod/minio-operator-699f797b8b-nkrn9   1/1     Running   0          25h
+      pod/console-56c7d8bd89-485qh          1/1     Running   0          5m20s
+      pod/minio-operator-6c758b8c45-nkhlx   1/1     Running   0          5m20s
+      pod/minio-operator-6c758b8c45-dgd8n   1/1     Running   0          5m20s
 
-      NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
-      service/console    ClusterIP   10.43.195.224   <none>        9090/TCP,9443/TCP   25h
-      service/operator   ClusterIP   10.43.44.204    <none>        4221/TCP            25h
-      service/sts        ClusterIP   10.43.70.4      <none>        4223/TCP            25h
+      NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
+      service/operator   ClusterIP   10.43.135.241   <none>        4221/TCP                        5m20s
+      service/sts        ClusterIP   10.43.117.251   <none>        4223/TCP                        5m20s
+      service/console    NodePort    10.43.235.38    <none>        9090:30090/TCP,9443:30433/TCP   5m20s
 
       NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
-      deployment.apps/console          1/1     1            1           25h
-      deployment.apps/minio-operator   2/2     2            2           25h
+      deployment.apps/console          1/1     1            1           5m20s
+      deployment.apps/minio-operator   2/2     2            2           5m20s
 
       NAME                                        DESIRED   CURRENT   READY   AGE
-      replicaset.apps/console-68d955874d          1         1         1       25h
-      replicaset.apps/minio-operator-699f797b8b   2         2         2       25h
-
+      replicaset.apps/console-56c7d8bd89          1         1         1       5m20s
+      replicaset.apps/minio-operator-6c758b8c45   2         2         2       5m20s
 
 #. Retrieve the Operator Console JWT for login
 
@@ -183,6 +151,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
       SA_TOKEN=$(kubectl -n minio-operator  get secret console-sa-secret -o jsonpath="{.data.token}" | base64 --decode)
       echo $SA_TOKEN
 
+   The output of this command is the JSON Web Token (JWT) login credential for Operator Console.
 
 #. Log into the MinIO Operator Console
 
@@ -199,7 +168,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
          .. code-block:: shell
             :class: copyable
 
-            $ kubectl get nodes -o custom-columns=IP:.status.addresses[:]
+            kubectl get nodes -o custom-columns=IP:.status.addresses[:]
             IP
             map[address:172.18.0.5 type:InternalIP],map[address:k3d-MINIO-agent-3 type:Hostname]
             map[address:172.18.0.6 type:InternalIP],map[address:k3d-MINIO-agent-2 type:Hostname]

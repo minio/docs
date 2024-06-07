@@ -56,7 +56,7 @@ MinIO SSE-KMS is functionally compatible with AWS S3 :s3-docs:`Server-Side Encry
 - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
 - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
 - :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
-- :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`HashiCorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
 - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
 .. _minio-encryption-sse-kms-quickstart:
@@ -81,7 +81,7 @@ supported external Key Management Services (KMS):
 - :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
 - :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
 - :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
-- :kes-docs:`Hashicorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`HashiCorp Vault Keystore <integrations/hashicorp-vault-keystore/>`
 - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
 .. include:: /includes/common/common-minio-kes.rst

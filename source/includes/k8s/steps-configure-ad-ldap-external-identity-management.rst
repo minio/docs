@@ -4,24 +4,10 @@ Deploy MinIO Tenant with Active Directory / LDAP Identity Management
 1) Access the Operator Console
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`kubectl minio proxy` command to temporarily forward traffic between the local host machine and the MinIO Operator Console:
+Temporarily forward traffic between the local host machine and the MinIO Operator Console and retrieve the JWT token for your Operator deployment.
+For instructions, see :ref:`Configure access to the Operator Console service <minio-k8s-deploy-operator-access-console>`.
 
-.. code-block:: shell
-   :class: copyable
-
-   kubectl minio proxy
-
-The command returns output similar to the following:
-
-.. code-block:: shell
-
-   Starting port forward of the Console UI.
-
-   To connect open a browser and go to http://localhost:9001
-
-   Current JWT to login: TOKEN
-
-Open your browser to the specified URL and enter the JWT Token into the login page. 
+Open your browser to the temporary URL and enter the JWT Token into the login page. 
 You should see the :guilabel:`Tenants` page:
 
 .. image:: /images/k8s/operator-dashboard.png

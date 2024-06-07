@@ -22,11 +22,7 @@ MinIO supports the following methods for installing the MinIO Operator onto your
    MinIO maintains an `AWS Marketplace listing <https://aws.amazon.com/marketplace/pp/prodview-smchi7bcs4nn4>`__ through which you can register your EKS cluster with |subnet|.
    Any tenant you deploy through Marketplace-connected clusters can take advantage of SUBNET registration, including 24/7 direct access to MinIO engineers.
 
-Using the MinIO ``kubectl`` Plugin
-   MinIO provides a ``kubectl`` plugin for installing and managing the MinIO Operator and Tenants through a terminal or shell (CLI) environment.
-   You can manually register these tenants with |subnet| at any time.
-
-This page documents deploying the MinIO Operator through the CLI using the ``kubectl minio`` plugin.
+This page documents deploying the MinIO Operator through the CLI using Kustomize.
 For instructions on deploying the MinIO Operator through the AWS Marketplace, see :minio-web:`Deploy MinIO through EKS <product/multicloud-elastic-kubernetes-service/deploy>`
 
 This documentation assumes familiarity with all referenced Kubernetes and Elastic Kubernetes Service concepts, utilities, and procedures. 
@@ -57,4 +53,6 @@ You can use this policy as a baseline for manual Operator installations.
 Procedure
 ---------
 
-.. include:: /includes/common/common-install-operator-kubectl-plugin.rst
+The following steps deploy Operator using Kustomize and a ``kustomization.yaml`` file from the MinIO Operator GitHub repository.
+
+.. include:: /includes/common/common-install-operator-kustomize.rst

@@ -12,7 +12,8 @@ Modify a MinIO Tenant
 
 The procedures on this page use the :ref:`MinIO Operator Console <minio-operator-console>` for modifying an existing tenant.
 
-.. image:: /images/k8s/operator-manage-tenant.png
+.. screenshot temporarily removed
+   .. image:: /images/k8s/operator-manage-tenant.png
    :align: center
    :width: 70%
    :class: no-scaled-link

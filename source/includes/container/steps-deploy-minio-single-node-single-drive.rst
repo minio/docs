@@ -89,7 +89,7 @@ The following table describes each line of the command and provides additional c
        Replace this value with the full path to a storage volume or folder on the local machine.
        For example:
 
-       Linux or MacOS
+       Linux or macOS
          ``~/minio/data/``
        
        Windows

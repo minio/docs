@@ -21,7 +21,7 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
 
 .. cond:: macos
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Mac OSX platforms for the latest stable version of MinIO: |minio-tag|.
+   This site documents Operations, Administration, and Development of MinIO deployments on macOS platforms for the latest stable version of MinIO: |minio-tag|.
 
 .. cond:: container
 
@@ -213,7 +213,6 @@ For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio
       MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
       S3 API Compatibility <https://min.io/docs/minio/linux/reference/s3-api-compatibility.html?ref=docs>
       Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
-      /reference/kubectl-minio-plugin
       /reference/operator-crd
       /reference/operator-chart-values
       /reference/tenant-chart-values
