@@ -234,14 +234,16 @@ Configure Site Replication
 
       #. Select **Settings**, then **Site Replication**
 
-         .. image:: /images/minio-console/console-settings-site-replication.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-settings-site-replication.png
             :width: 400px
             :alt: MinIO Console menu with the Settings heading expanded to show Site Replication
             :align: center
       
       #. Select :guilabel:`Add Sites +`
 
-         .. image:: /images/minio-console/console-settings-site-replication-add.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-settings-site-replication-add.png
             :width: 600px
             :alt: MinIO Console's Add Sites for Replication screen
             :align: center
@@ -390,14 +392,16 @@ The new site must meet the following requirements:
 
       #. Select **Settings**, then **Site Replication**
 
-         .. image:: /images/minio-console/console-site-replication-list-of-sites.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-site-replication-list-of-sites.png
             :width: 600px
             :alt: MinIO Console Site Replication with three sites listed
             :align: center
       
       #. Select :guilabel:`Add Sites +`
 
-         .. image:: /images/minio-console/console-settings-site-replication-add.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-settings-site-replication-add.png
             :width: 600px
             :alt: MinIO Console's Add Sites for Replication screen
             :align: center
@@ -481,7 +485,8 @@ If a peer site changes its hostname, you can modify the replication configuratio
       
       #. Select the pencil **Edit** icon to the side of the site to update
 
-         .. image:: /images/minio-console/console-site-replication-edit-button.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-site-replication-edit-button.png
             :width: 600px
             :alt: MinIO Console's List of Replicated Sites screen with the edit buttons highlighted
             :align: center
@@ -494,7 +499,8 @@ If a peer site changes its hostname, you can modify the replication configuratio
             :start-after: start-mc-admin-replicate-load-balancing
             :end-before: end-mc-admin-replicate-load-balancing
 
-         .. image:: /images/minio-console/console-settings-site-replication-edit-endpoint.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-settings-site-replication-edit-endpoint.png
             :width: 600px
             :alt: Example of the MinIO Console's Edit Replication Endpoint screen
             :align: center
@@ -544,14 +550,16 @@ You can re-add the site at a later date, but you must first completely wipe buck
       
       #. Select the trash can Delete icon to the side of the site to update
 
-         .. image:: /images/minio-console/console-site-replication-delete-button.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-site-replication-delete-button.png
             :width: 600px
             :alt: MinIO Console's List of Replicated Sites screen with the delete buttons highlighted
             :align: center
 
       #. Confirm the site deletion at the prompt by selecting **Delete**
 
-         .. image:: /images/minio-console/console-settings-site-replication-confirm-delete.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-settings-site-replication-confirm-delete.png
             :width: 600px
             :alt: Example of the MinIO Console's Edit Replication Endpoint screen
             :align: center
@@ -595,7 +603,8 @@ The summary information includes the number of **Synced** and **Failed** items f
       
       #. Select :guilabel:`Replication Status`
 
-         .. image:: /images/minio-console/console-settings-site-replication-status-summary.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-settings-site-replication-status-summary.png
             :width: 600px
             :alt: MinIO Console's Replication status from all Sites screen
             :align: center
@@ -606,7 +615,8 @@ The summary information includes the number of **Synced** and **Failed** items f
 
          Specify the name of the specific Bucket, Group, Policy, or User to view
 
-         .. image:: /images/minio-console/console-settings-site-replication-status-item.png
+         .. screenshot temporarily removed
+	    .. image:: /images/minio-console/console-settings-site-replication-status-item.png
             :width: 600px
             :alt: Example of replication status for a particular bucket item
             :align: center

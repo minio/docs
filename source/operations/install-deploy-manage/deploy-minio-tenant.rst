@@ -27,7 +27,9 @@ Deploy a MinIO Tenant
 
    This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using the MinIO Operator Console.
 
-.. image:: /images/k8s/operator-dashboard.png
+.. screenshot temporarily removed
+
+   .. image:: /images/k8s/operator-dashboard.png
    :align: center
    :width: 70%
    :class: no-scaled-link
@@ -235,9 +237,11 @@ To deploy a tenant from the MinIO Operator Console, complete the following steps
 .. include:: /includes/common/common-k8s-connect-operator-console.rst
 
 Open your browser to the appropriate URL and enter the JWT Token into the login page. 
-You should see the :guilabel:`Tenants` page:
+You should see the :guilabel:`Tenants` page.
 
-.. image:: /images/k8s/operator-dashboard.png
+.. screenshot temporarily removed
+
+   .. image:: /images/k8s/operator-dashboard.png
    :align: center
    :width: 70%
    :class: no-scaled-link
@@ -638,7 +642,9 @@ The :guilabel:`State` column updates throughout the deployment process.
 Tenant deployment can take several minutes to complete. 
 Once the :guilabel:`State` reads as :guilabel:`Initialized`, select the Tenant to view its details.
 
-.. image:: /images/k8s/operator-tenant-view.png
+.. screenshot temporarily removed
+
+   .. image:: /images/k8s/operator-tenant-view.png
    :align: center
    :width: 70%
    :class: no-scaled-link

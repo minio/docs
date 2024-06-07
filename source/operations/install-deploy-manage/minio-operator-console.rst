@@ -15,7 +15,8 @@ managing MinIO Tenants on Kubernetes infrastructure. Installing the
 MinIO :ref:`Kubernetes Operator <deploy-operator-kubernetes>` automatically
 installs and configures the Operator Console.
 
-.. image:: /images/k8s/operator-dashboard.png
+.. screenshot temporarily removed
+   .. image:: /images/k8s/operator-dashboard.png
    :align: center
    :width: 70%
    :class: no-scaled-link
@@ -35,7 +36,8 @@ Tenant Management
 
 The MinIO Operator Console supports deploying, managing, and monitoring MinIO Tenants on the Kubernetes cluster.
 
-.. image:: /images/k8s/operator-dashboard.png
+.. screenshot temporarily removed
+   .. image:: /images/k8s/operator-dashboard.png
    :align: center
    :width: 70%
    :class: no-scaled-link
@@ -67,7 +69,8 @@ Tenant Registration
 
 |subnet| users relying on the commercial license should register the MinIO tenants to their SUBNET account, which can be done through the Operator Console.
 
-.. image:: /images/k8s/operator-console-register.png
+.. screenshot temporarily removed
+   .. image:: /images/k8s/operator-console-register.png
    :align: center
    :width: 70%
    :class: no-scaled-link
