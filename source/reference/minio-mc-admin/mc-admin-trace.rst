@@ -249,42 +249,42 @@ Syntax
         - The name of the captured function.
 
       * - Count
-        - The number of times the Call occurred.
+        - The number of times the call occurred.
 
       * - RPM
-        - The Rate Per Minute (RPM) of that Call.
+        - The Rate Per Minute (RPM) of that call.
 
       * - Avg Time
-        - The average time required for the Call to complete.
+        - The average time required for the call to complete.
 
       * - Min Time
-        - The minimum time spent for the Call to complete.
+        - The minimum time spent for the call to complete.
 
       * - Max Time
-        - The maximum time spent for the Call to complete.
+        - The maximum time spent for the call to complete.
 
       * - Avg TTFB
         - .. versionadded:: RELEASE.2023-11-15T22-45-58Z
 
-          The average Time To First Byte (TTFB) for the Call.
+          The average Time To First Byte (TTFB) for the call.
 
       * - Max TTFB
         - .. versionadded:: RELEASE.2023-11-15T22-45-58Z
         
-          The maximum Time To First Byte for the Call.
+          The maximum Time To First Byte for the call.
 
       * - Avg Size
         - Average size of calls.
 
       * - Errors
-        - The number of Calls that failed with an error.
+        - The number of calls that failed with an error.
 
       * - RX Avg
-        - The average number of Bytes Received (RX) for the Call.
+        - The average number of Bytes Received (RX) for the call.
           This stat only displays if not zero (0). 
 
       * - TX AVG
-        - The average number of Bytes Sent (TX) for the Call.
+        - The average number of Bytes Sent (TX) for the call.
           This stat only displays if not zero (0). 
 
    Accumulate stats, such as name, count, duration, min time, max time, time to first byte, or errors.
