@@ -260,6 +260,9 @@ Syntax
       * - Min Time
         - The minimum time spent for the Call to complete.
 
+      * - Max Time
+        - The maximum time spent for the Call to complete.
+
       * - Avg TTFB
         - .. versionadded:: RELEASE.2023-11-15T22-45-58Z
 
@@ -270,14 +273,19 @@ Syntax
         
           The maximum Time To First Byte for the Call.
 
+      * - Avg Size
+        - Average size of calls.
+
       * - Errors
         - The number of Calls that failed with an error.
 
       * - RX Avg
         - The average number of Bytes Received (RX) for the Call.
+          This stat only displays if not zero (0). 
 
       * - TX AVG
         - The average number of Bytes Sent (TX) for the Call.
+          This stat only displays if not zero (0). 
 
    Accumulate stats, such as name, count, duration, min time, max time, time to first byte, or errors.
    Accumulates up to 15 stat entries.
