@@ -113,8 +113,8 @@ Syntax
 
 .. mc-cmd:: --call
 
-   Traces only matching call types.
-   For example, the following command only traces calls of the type ``scanner``.
+   Traces only matching client operation or call types.
+   For example, the following command only traces operations of the type ``scanner``.
 
    .. code-block:: shell
 
@@ -145,19 +145,19 @@ Syntax
 
 .. mc-cmd:: --filter-request
 
-   Trace calls with request size greater than the specified :mc-cmd:`~mc admin trace --filter-size` value.
+   Trace client operations or calls with request size greater than the specified :mc-cmd:`~mc admin trace --filter-size` value.
 
    Must be used with :mc-cmd:`~mc admin trace --filter-size` flag.
 
 .. mc-cmd:: --filter-response
 
-   Trace calls with response size greater than the specified :mc-cmd:`~mc admin trace --filter-size` value.
+   Trace client operations or calls with response size greater than the specified :mc-cmd:`~mc admin trace --filter-size` value.
 
    Must be used with :mc-cmd:`~mc admin trace --filter-size` flag.
 
 .. mc-cmd:: --filter-size
 
-   Size limit of a filtered call.
+   Size limit of a filtered client operation or call.
 
    Must be used with either :mc-cmd:`~mc admin trace --filter-request` or :mc-cmd:`~mc admin trace --filter-response` flag.
 
@@ -246,45 +246,45 @@ Syntax
       :widths: 30 70
 
       * - Call
-        - The name of the captured function.
+        - The name of the captured client operation or function.
 
       * - Count
-        - The number of times the call occurred.
+        - The number of times the client operation or call occurred.
 
       * - RPM
-        - The Rate Per Minute (RPM) of that call.
+        - The Rate Per Minute (RPM) of the client operation or call.
 
       * - Avg Time
-        - The average time required for the call to complete.
+        - The average time required for the client operation or call to complete.
 
       * - Min Time
-        - The minimum time spent for the call to complete.
+        - The minimum time spent for the client operation or call to complete.
 
       * - Max Time
-        - The maximum time spent for the call to complete.
+        - The maximum time spent for the client operation or call to complete.
 
       * - Avg TTFB
         - .. versionadded:: RELEASE.2023-11-15T22-45-58Z
 
-          The average Time To First Byte (TTFB) for the call.
+          The average Time To First Byte (TTFB) for the client operation or call response.
 
       * - Max TTFB
         - .. versionadded:: RELEASE.2023-11-15T22-45-58Z
         
-          The maximum Time To First Byte for the call.
+          The maximum Time To First Byte for the client operation or call response.
 
       * - Avg Size
-        - Average size of calls.
+        - Average size of client operation or call responses.
 
       * - Errors
-        - The number of calls that failed with an error.
+        - The number of client operations or calls that failed with an error.
 
       * - RX Avg
-        - The average number of Bytes Received (RX) for the call.
+        - The average number of Bytes Received (RX) for the client operation or call.
           This stat only displays if not zero (0). 
 
       * - TX AVG
-        - The average number of Bytes Sent (TX) for the call.
+        - The average number of Bytes Sent (TX) for the client operation or call.
           This stat only displays if not zero (0). 
 
    Accumulate stats, such as name, count, duration, min time, max time, time to first byte, or errors.
