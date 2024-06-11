@@ -64,6 +64,20 @@ Syntax
 .. code-block:: shell
    :class: copyable
 
-   mc admin info TARGET
+   mc admin info TARGET      \
+                 [--offline]
 
 Specify the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment as the ``TARGET``.
+
+Parameters
+~~~~~~~~~~
+
+.. mc-cmd:: TARGET
+   :required:
+   
+   The :ref:`alias <alias>` about which you want to display information.
+
+.. mc-cmd:: --offline
+   :optional:
+
+   Show only offline drives or nodes.
