@@ -371,12 +371,7 @@ Maximum Object Versions
 
 *Optional*
 
-Overrides the default maximum version per object limit of ``10000`` with the user specified value.
-
-.. important::
-
-   The default limit of 10,000 provides a safety valve against incorrect or inefficient application behavior in versioned buckets.
-   Lifting this limit without first ensuring your applications are designed for versioned operations may result in a negative performance impact over time.
-
-
-   
+Defines the default maximum versions to allow per object.
+If not defined, MinIO allows a practically unlimited number of object versions.
+ 
+The real maximum is up to highest value of ``MaxInt64``, which is over 9.2 quintillion versions per object.

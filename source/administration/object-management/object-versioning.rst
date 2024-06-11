@@ -29,12 +29,7 @@ For versioned buckets, a write operation that mutates an object results in a new
 MinIO marks the "latest" version of the object that clients retrieve by default. 
 Clients can then explicitly choose to list, retrieve, or remove a specific object version. 
 
-.. versionchanged:: 2023-08-04T17-40-21Z
-
-   MinIO restricts object versioning to no more than 10,000 versions of each object.
-
-   If a write operation would exceed the 10,000 object version limit, MinIO blocks the operation and returns an error.
-   :ref:`Delete one or more <minio-bucket-versioning-delete>` versions to create a new version of the object.
+Define :ref:`object expiration <minio-lifecycle-management-create-expiry-rule>` rules to remove versions of objects no longer needed, such as by the number of versions or the date of versions.
 
 Read Operations on Versioned Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
