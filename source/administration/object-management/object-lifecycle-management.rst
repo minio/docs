@@ -39,7 +39,7 @@ MinIO supports any of the following remote tier targets:
   <minio-lifecycle-management-transition-to-azure>`
 
 MinIO object transition supports use cases like moving aged data from MinIO clusters in private or public cloud infrastructure to low-cost private or public cloud storage solutions.
-Directory objects, which are 0-byte objects with a name that ends in a ``/``, do **not** tier.
+Directory objects, which are 0-byte objects with a name ending in ``/``, do **not** tier.
 MinIO manages retrieving tiered objects on-the-fly without any additional application-side logic. 
 
 Use the :mc:`mc ilm tier add` command to create a remote target for tiering data to that target. 
