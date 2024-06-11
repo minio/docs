@@ -44,7 +44,7 @@ To find the job ID, use :mc-cmd:`mc batch list`.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] batch cancel TARGET JOBID
+         mc [GLOBALFLAGS] batch cancel ALIAS JOBID
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -53,7 +53,7 @@ To find the job ID, use :mc-cmd:`mc batch list`.
 Parameters
 ~~~~~~~~~~
 
-.. mc-cmd:: TARGET
+.. mc-cmd:: ALIAS
    :required:
    
    The :ref:`alias <alias>` for the MinIO deployment on which the job is currently running. 

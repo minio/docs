@@ -37,7 +37,7 @@ See :ref:`job types <minio-batch-job-types>` for the supported jobs you can gene
       .. code-block:: shell
          :class: copyable
 
-         mc batch generate myminio/mybucket replicate
+         mc batch generate myminio replicate
 
    .. tab-item:: SYNTAX
 
@@ -47,7 +47,7 @@ See :ref:`job types <minio-batch-job-types>` for the supported jobs you can gene
          :class: copyable
 
          mc [GLOBALFLAGS] batch generate \
-                                TARGET   \
+                                ALIAS   \
                                 JOBTYPE
 
       .. include:: /includes/common-minio-mc.rst
@@ -57,7 +57,7 @@ See :ref:`job types <minio-batch-job-types>` for the supported jobs you can gene
 Parameters
 ~~~~~~~~~~
 
-.. mc-cmd:: TARGET
+.. mc-cmd:: ALIAS
    :required:
    
    The :ref:`alias <alias>` used to generate the YAML template file.

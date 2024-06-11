@@ -35,7 +35,7 @@ To run the batch job again after completion, you must start it again.
       .. code-block:: shell
          :class: copyable
 
-         mc batch start myminio/mybucket jobfile.yaml
+         mc batch start myminio jobfile.yaml
 
       The output of the above command is something similar to:
 
@@ -51,7 +51,7 @@ To run the batch job again after completion, you must start it again.
          :class: copyable
 
          mc [GLOBALFLAGS] batch start    \
-                                TARGET   \
+                                ALIAS   \
                                 JOBFILE
 
       .. include:: /includes/common-minio-mc.rst
@@ -61,7 +61,7 @@ To run the batch job again after completion, you must start it again.
 Parameters
 ~~~~~~~~~~
 
-.. mc-cmd:: TARGET
+.. mc-cmd:: ALIAS
    :required:
    
    The :ref:`alias <alias>` on which to start the batch job.
