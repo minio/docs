@@ -372,6 +372,6 @@ Maximum Object Versions
 *Optional*
 
 Defines the default maximum versions to allow per object.
-If not defined, MinIO allows a practically unlimited number of object versions.
+If not defined, MinIO keeps a nearly unlimited number of object versions.
  
 The real maximum is up to highest value of ``MaxInt64``, which is over 9.2 quintillion versions per object.

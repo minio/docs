@@ -107,8 +107,8 @@ Parameters
    :optional:
 
    Enables :ref:`object versioning <minio-bucket-versioning>` on the new bucket.
-   When enabled, MinIO keeps a virtually unlimited number of objects.
-   Define :ref:`object expiration <minio-lifecycle-management-create-expiry-rule>` rules to manage noncurrent versions you no longer need to keep by either number of versions or version date.
+   When enabled, MinIO keeps a nearly unlimited number of objects.
+   Define :ref:`object expiration <minio-lifecycle-management-create-expiry-rule>` rules to remove versions of objects no longer needed, such as by the number of versions or the date of versions.
 
    Versioning is required for :ref:`bucket replication <minio-bucket-replication>` or :ref:`site replication <minio-site-replication-overview>`.
    Versioning does not imply or require object locking.
