@@ -383,3 +383,5 @@ By default, MinIO allows up to the maximum value of an Int64 versions per object
 Arbitrarily high versions per objects may cause performance degradation on some operations, such as ``LIST``.
 This is especially true on systems running budget hardware or spinning drives (HDD).
 Applications or workloads which produce thousands or more versions per object may require design or architecture review to mitigate potential performance degradations.
+
+Setting a limit of no more than ``100`` should provide enough versions for most typical use cases.
