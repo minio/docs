@@ -107,7 +107,7 @@ MinIO :ref:`distributed deployments <minio-mnmd>` support expansion and decommis
 
 Expansion consists of adding one or more :ref:`server pools <minio-intro-server-pool>` to an existing deployment.
 Each server pool consists of dedicated nodes and storage that contribute to the overall capacity of the deployment.
-The size of an individual server pool is fixed at the time it is created.
+Once you create a server pool you cannot change its size, but you can add or remove capacity at any time by adding or decommissioning pools.
 
 .. cond:: linux
 
