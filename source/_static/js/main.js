@@ -322,7 +322,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       else if (page_title === "Software Development Kits (SDK)") {
         list[i].insertAdjacentElement('beforebegin',developerPersona);
       }
-      else if (page_title === "MinIO Client") {
+      else if (page_title === "Kubernetes Reference") {
         list[i].insertAdjacentElement('beforebegin',referencePersona);
       }
     }

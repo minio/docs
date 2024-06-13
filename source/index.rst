@@ -1,6 +1,6 @@
-================================================================================
-MinIO Object Storage for |platform|
-================================================================================
+=====================================
+MinIO High Performance Object Storage
+=====================================
 
 .. default-domain:: minio
 
@@ -52,31 +52,37 @@ MinIO Object Storage for |platform|
    :local:
    :depth: 2
 
-MinIO is an object storage solution that provides an Amazon Web Services S3-compatible API and supports all core S3 features. 
-MinIO is built to deploy anywhere - public or private cloud, baremetal infrastructure, orchestrated environments, and edge infrastructure.
+MinIO is a Kubernetes-native S3-compatible object storage solution designed to deploy wherever your applications are - on premises, in the private cloud, in the public cloud, and edge infrastructure.
+MinIO is designed to support modern application workload patterns where high performance distributed computing meets petabyte-scale storage requirements.
 
-.. cond:: linux
+MinIO is available under two server editions, each with their own distinct license:
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Linux platforms for the latest stable version of MinIO: |minio-tag|.
+.. grid:: 2
 
-.. cond:: windows
+   .. grid-item-card:: MinIO Object Store (MinIO)
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Windows platforms for the latest stable version of MinIO: |minio-tag|.
+      MinIO Object Store (MinIO) is licensed under `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__.
+      
+      MinIO features are available to the community as a stream of active development.
 
-.. cond:: macos
+      MinIO is community-focused, with best-effort support through the MinIO Community Slack Channel and the MinIO Github repository.
 
-   This site documents Operations, Administration, and Development of MinIO deployments on macOS platforms for the latest stable version of MinIO: |minio-tag|.
+   .. grid-item-card:: MinIO Enterprise Object Store (MinEOS)
 
-.. cond:: container
+      MinIO Enterprise Object Store (MinEOS) is licensed under the `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
+      
+      MinEOS is available to |SUBNET| Enterprise-Lite and Enterprise-Plus customers and includes exclusive support for the :minio-blog:`Enterprise Object Store feature suite <enterprise-object-store-overview/>`.
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Containers for the latest stable version of MinIO: |minio-tag|.
+      MinEOS include |SUBNET| access for 24/7 L1 support from MinIO Engineering, with 4 or 1 hour SLAs available based on deployment size.
 
-.. cond:: k8s and not (openshift or eks or gke or aks)
+This site documents Operations, Administration, and Development of MinIO deployments on supported platforms for |minio-tag|. 
+MinIO Enterprise Object Storage (MinEOS) deployments can use this documentation as a baseline of features available in a current or upcoming release.
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Kubernetes platform for the latest stable version of the MinIO Operator: |operator-version-stable|.
+.. todo: More marketing/SEO below?
 
-.. cond:: openshift
+MinIO officially supports the following platforms:
 
+<<<<<<< HEAD
    This site documents Operations, Administration, and Development of MinIO deployments on Red Hat Kubernetes distributions for the latest stable version of the MinIO Operator: |operator-version-stable|.
 
    .. important::
@@ -84,193 +90,116 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
       Support for deploying the MinIO Operator via the RedHat Marketplace or OperatorHub was removed in 2024. 
       MinIO AIStor fully supports installation via the Marketplace and OperatorHub onto enterprise RedHat Kubernetes distributions like OpenShift Container Platform (OCP).
       |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
+=======
+- :ref:`Kubernetes (Upstream) <deploy-minio-kubernetes>`
+- :ref:`RedHat Openshift <deploy-operator-openshift>`
+- :ref:`SUSE Rancher <deploy-operator-rancher>`
+- :ref:`Elastic Kubernetes Service <deploy-operator-eks>`
+- :ref:`Google Kubernetes Engine <deploy-operator-gke>`
+- :ref:`Azure Kubernetes Service <deploy-operator-aks>`
+- :ref:`Red Hat Enterprise Linux <deploy-minio-rhel>`
+- :ref:`Ubuntu Linux <deploy-minio-ubuntu>`
+- :ref:`MacOS <deploy-minio-macos>`
+- :ref:`Container <deploy-minio-container>`
+- :ref:`Windows <deploy-minio-windows>`
+>>>>>>> 8da23e1 (Attempting to reduce docs to single platform)
 
-.. cond:: eks
+Quickstart
+----------
 
-   This site documents Operations, Administration, and Development of MinIO deployments on `Amazon Elastic Kubernetes Service <https://aws.amazon.com/eks/>`__ for the latest stable version of the MinIO Operator: |operator-version-stable|.
+.. tab-set::
 
-.. cond:: gke
+   .. tab-item:: Sandbox
 
-   This site documents Operations, Administration, and Development of MinIO deployments on `Google Kubernetes Engine <https://cloud.google.com/kubernetes-engine>`__ for the latest stable version of the MinIO Operator: |operator-version-stable|.
+      MinIO maintains a sandbox instance of the community server at https://play.min.io. 
+      You can use this instance for experimenting or evaluating the MinIO product on your local system.
 
-.. cond:: aks
+      Follow the :mc:`mc` CLI :ref:`installation guide <mc-install>` to install the utility on your local host.
 
-   This site documents Operations, Administration, and Development of MinIO deployments on `Azure Kubernetes Engine <https://azure.microsoft.com/en-us/products/kubernetes-service/#overview>`__ for the latest stable version of the MinIO Operator: |operator-version-stable|.
+      :mc:`mc` includes a pre-configured ``play`` alias for connecting to the sandbox.
+      For example, you can use the following commands to create a bucket and copy objects to ``play``:
 
-.. cond:: not (eks or aks or gke)
+      .. code-block:: shell
+         :class: copyable
 
-   MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
-   Deployments registered through |SUBNET| use the commercial license and include access to 24/7 MinIO support.
+         mc mb play/mynewbucket
 
-.. cond:: eks
+         mc cp /path/to/file play/mynewbucket/prefix/filename.extension
 
-   MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
-   Deploying MinIO through the :minio-web:`AWS Marketplace <product/multicloud-elastic-kubernetes-service>` includes the commercial license and access to 24/7 MinIO support through |SUBNET|.
+         mc stat play/mynewbucket/prefix/filename.extension
 
-.. cond:: gke
+      .. important::
 
-   MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
-   Deploying MinIO through the :minio-web:`GKE Marketplace <product/multicloud-google-kubernetes-service>` includes the commercial license and access to 24/7 MinIO support through |SUBNET|.
+         MinIO's Play sandbox is an ephemeral public-facing deployment with well-known access credentials.
+         Any private, confidential, internal, secured, or other important data uploaded to Play is effectively made public.
+         Exercise caution and discretion in any data you upload to Play.
 
-.. cond:: aks
+   .. tab-item:: Baremetal
 
-   MinIO is released under dual license `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__ and `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
-   Deploying MinIO through the :minio-web:`AKS Marketplace <product/multicloud-azure-kubernetes-service>` includes the commercial license and access to 24/7 MinIO support through  |SUBNET|.
+      1. Download the MinIO Server Process for your Operating System
 
-You can get started exploring MinIO features using the :ref:`minio-console` and our ``play`` server at https://play.min.io. 
-``play`` is a *public* MinIO cluster running the latest stable MinIO server. 
-Any file uploaded to ``play`` should be considered public and non-protected.
-For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio-console-play-login>`.
+         Follow the instructions on the `MinIO Download Page <https://min.io/downloads?ref=docs>` for your operating system to download and install the :mc:`minio server` process.
 
-.. cond:: linux
+      2. Create a folder for use with MinIO
 
-   .. include:: /includes/linux/quickstart.rst
+         For example, create a folder ``~/minio`` in Linux/MacOS or ``C:\minio`` in Windows.
 
-.. cond:: macos
+      3. Start the MinIO Server
 
-   .. include:: /includes/macos/quickstart.rst
+         Run the :mc:`minio server` specifying the path to the directory and the :mc:`~minio server --console-address` parameter to set a static console listen path:
 
-.. cond:: windows
+         .. code-block:: shell
+            :class: copyable
 
-   .. include:: /includes/windows/quickstart.rst
+            minio server ~/minio --console-address :9001
+            # For windows, use minio.exe server ~/minio --console-address :9001`
 
-.. cond:: k8s
+         The output includes connection instructions for both :mc:`mc` and connecting to the Console using your browser.
 
-   .. include:: /includes/k8s/quickstart.rst
+   .. tab-item:: Kubernetes
 
-.. cond:: container
+      Download `minio-dev.yaml <https://raw.githubusercontent.com/minio/docs/master/source/extra/examples/minio-dev.yaml>`__ to your host machine:
 
-   .. include:: /includes/container/quickstart.rst
+      .. code-block:: shell
+         :class: copyable
 
-.. cond:: k8s
+         curl https://raw.githubusercontent.com/minio/docs/master/source/extra/examples/minio-dev.yaml -O
 
-   .. toctree::
-      :titlesonly:
-      :hidden:
+      The file describes two Kubernetes resources:
 
-      /operations/installation
-      /operations/install-deploy-manage/upgrade-minio-operator
-      /operations/deploy-manage-tenants
-      /operations/concepts
-      /operations/monitoring
-      /operations/external-iam
-      /operations/server-side-encryption
-      /operations/network-encryption
-      /operations/cert-manager
-      /operations/checklists
-      /operations/data-recovery
-      /operations/troubleshooting
-      /administration/minio-console
-      /administration/object-management
-      /administration/monitoring
-      /administration/identity-access-management
-      /administration/server-side-encryption
-      /administration/bucket-replication
-      /administration/batch-framework
-      /administration/concepts
+      - A new namespace ``minio-dev``, and
+      - A MinIO pod using a drive or volume on the Worker Node for serving data
 
-.. cond:: windows
-
-   .. toctree::
-      :titlesonly:
-      :hidden:
-
-      /operations/installation
-      /operations/concepts
-      /operations/monitoring
-      /operations/external-iam
-      /operations/server-side-encryption
-      /operations/network-encryption
-      /operations/checklists
-      /operations/data-recovery
-      /operations/troubleshooting
-      /administration/minio-console
-      /administration/object-management
-      /administration/monitoring
-      /administration/identity-access-management
-      /administration/server-side-encryption
-      /administration/bucket-replication
-      /administration/batch-framework
-      /administration/concepts
-
-.. cond:: linux or macos or container
-
-   .. toctree::
-      :titlesonly:
-      :hidden:
-
-      /operations/installation
-      /operations/manage-existing-deployments
-      /operations/concepts
-      /operations/monitoring
-      /operations/external-iam
-      /operations/server-side-encryption
-      /operations/network-encryption
-      /operations/checklists
-      /operations/data-recovery
-      /operations/troubleshooting
-      /administration/minio-console
-      /administration/object-management
-      /administration/monitoring
-      /administration/identity-access-management
-      /administration/server-side-encryption
-      /administration/bucket-replication
-      /administration/batch-framework
-      /administration/concepts
-
-.. cond:: not (linux or k8s)
-
-   .. toctree::
-      :titlesonly:
-      :hidden:
-
-      Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs>
-      Security Token Service (STS) <https://min.io/docs/minio/linux/developers/security-token-service.html?ref=docs>
-      Object Lambda <https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html?ref=docs>
-      File Transfer Protocol <https://min.io/docs/minio/linux/developers/file-transfer-protocol.html?ref=docs>
-      MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
-      MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
-      S3 API Compatibility <https://min.io/docs/minio/linux/reference/s3-api-compatibility.html?ref=docs>
-      Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
-
-.. cond:: linux
-
-   .. toctree::
-      :titlesonly:
-      :hidden:
-
-      /developers/minio-drivers
-      /developers/security-token-service
-      /developers/transforms-with-object-lambda
-      /developers/file-transfer-protocol
-      /reference/minio-mc
-      /reference/minio-mc-admin
-      /reference/minio-mc-deprecated
-      /reference/minio-server/minio-server
-      /reference/s3-api-compatibility
-      /integrations/integrations
-
-.. cond:: k8s
-
-   .. toctree::
-      :titlesonly:
-      :hidden:
-
-      Software Development Kits (SDK) <https://min.io/docs/minio/linux/developers/minio-drivers.html?ref=docs>
-      /developers/sts-for-operator
-      Object Lambda <https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html?ref=docs>
-      /developers/file-transfer-protocol
-      MinIO Client <https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs>
-      MinIO Admin Client <https://min.io/docs/minio/linux/reference/minio-mc-admin.html?ref=docs>
-      S3 API Compatibility <https://min.io/docs/minio/linux/reference/s3-api-compatibility.html?ref=docs>
-      Integrations <https://min.io/docs/minio/linux/integrations/integrations.html?ref=docs>
-      /reference/operator-crd
-      /reference/operator-chart-values
-      /reference/tenant-chart-values
-      /reference/operator-environment-variables
+      Use ``kubectl port-forward`` to access the Pod, or create a service for the pod for which you can configure Ingress, Load Balancing, or similar Kubernetes-level networking.
 
 .. toctree::
    :titlesonly:
    :hidden:
 
+   /operations/deployments/installation
+   /operations/replication/multi-site-replication
+   /operations/concepts
+   /operations/monitoring
+   /operations/external-iam
+   /operations/server-side-encryption
+   /operations/network-encryption
+   /operations/checklists
+   /operations/data-recovery
+   /operations/troubleshooting
+   /administration/minio-console
+   /administration/object-management
+   /administration/monitoring
+   /administration/identity-access-management
+   /administration/server-side-encryption
+   /administration/bucket-replication
+   /administration/batch-framework
+   /administration/concepts
+   /developers/minio-drivers
+   /developers/security-token-service
+   /developers/transforms-with-object-lambda
+   /developers/file-transfer-protocol
+   /reference/kubernetes
+   /reference/baremetal
+   /reference/s3-api-compatibility
    /glossary
+   /integrations/integrations

@@ -109,16 +109,8 @@ MinIO provides the following scraping endpoints, relative to the base URL:
 
 For a complete list of metrics for each endpoint, see :ref:`Available version 3 metrics <minio-metrics-and-alerts-available-metrics>`.
 
-.. cond:: k8s
-
-   The MinIO Operator supports deploying a per-tenant Prometheus instance configured to support metrics and visualization.
    
-   If you deploy the Tenant with this feature disabled *but* still want the historical metric views, you can instead configure an external Prometheus service to scrape the Tenant metrics.
-   Once configured, you can update the Tenant to query that Prometheus service to retrieve metric data:
-
-.. cond:: linux or container or macos or windows
-   
-   To enable historical data visualization in MinIO Console, set the following environment variables on each node in the MinIO deployment:
+To enable historical data visualization in MinIO Console, set the following environment variables on each node in the MinIO deployment:
 
 - Set :envvar:`MINIO_PROMETHEUS_URL` to the URL of the Prometheus service
 - Set :envvar:`MINIO_PROMETHEUS_JOB_ID` to the unique job ID assigned to the collected metrics

@@ -1,5 +1,6 @@
 <div class="platform-nav">
     <div class="platform-nav__main">
+<<<<<<< HEAD
         <nav>
             <a rel="noreferrer" href="/docs/minio/kubernetes/upstream/index.html" class="{{ 'active' if doc_platform == 'k8s' }}">
                 Kubernetes
@@ -22,6 +23,10 @@
             </a>
         </nav>
     
+=======
+        <div class="container">
+        </div>
+>>>>>>> 8da23e1 (Attempting to reduce docs to single platform)
         {%- if pagename != "search" %}
         <button type="button" class="icon search-toggle search-toggle--keyboard visible-rm">
             {%- include "icons/search.html" %}
@@ -29,18 +34,4 @@
         </button>
     {%- endif %}
     </div>
-
-    {%- if doc_platform == 'k8s' or doc_platform == 'openshift' or doc_platform == 'eks' or doc_platform == 'gke' or doc_platform == 'aks' -%}
-        <div class="platform-nav__sub">
-            <div class="container">
-                <nav>
-                    <a rel="noreferrer" href="/docs/minio/kubernetes/upstream/index.html" class="{{ 'active' if doc_platform == 'k8s' }}">Upstream</a>
-                    <a rel="noreferrer" href="/docs/minio/kubernetes/openshift/index.html" class="{{ 'active' if doc_platform == 'openshift' }}">Redhat Openshift</a>
-                    <a rel="noreferrer" href="/docs/minio/kubernetes/eks/index.html" class="{{ 'active' if doc_platform == 'eks' }}">Amazon Elastic Kubernetes Service</a>
-                    <a rel="noreferrer" href="/docs/minio/kubernetes/gke/index.html" class="{{ 'active' if doc_platform == 'gke' }}">Google Kubernetes Engine</a>
-                    <a rel="noreferrer" href="/docs/minio/kubernetes/aks/index.html" class="{{ 'active' if doc_platform == 'aks' }}">Azure Kubernetes Service</a>
-                </nav>
-            </div>
-        </div>
-    {%- endif -%}
 </div>
