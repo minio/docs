@@ -1,12 +1,3 @@
-.. The following label handles links from content to distributed MinIO in K8s context
-.. _deploy-minio-distributed:
-
-.. Redirect all references to tenant topologies here
-
-.. _minio-snsd:
-.. _minio-snmd:
-.. _minio-mnmd:
-
 .. _minio-k8s-deploy-minio-tenant:
 
 =====================
@@ -19,13 +10,7 @@ Deploy a MinIO Tenant
    :local:
    :depth: 1
 
-.. cond:: openshift
-
-   This procedure documents deploying a MinIO Tenant through OpenShift 4.7+ using the OpenShift Web Console and the MinIO Kubernetes Operator.
-
-.. cond:: k8s and not openshift
-
-   This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using the MinIO Operator Console.
+This procedure documents deploying a MinIO Tenant using the MinIO Operator.
 
 .. screenshot temporarily removed
 
@@ -48,161 +33,6 @@ Installing the MinIO :ref:`Kubernetes Operator <deploy-operator-kubernetes>` aut
 
 This documentation assumes familiarity with all referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
-
-
-Prerequisites
--------------
-
-MinIO Kubernetes Operator
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The procedures on this page *requires* a valid installation of the MinIO
-Kubernetes Operator and assumes the local host has a matching installation of
-the MinIO Kubernetes Operator. This procedure assumes the latest stable Operator, version |operator-version-stable|.
-
-See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
-
-.. cond:: k8s and not (openshift or eks or gke or aks)
-
-   Kubernetes Version 1.21.0
-   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   MinIO Operator requires Kubernetes 1.21.0 or later.
-   The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must be the same version.
-   Upgrade ``kubectl`` to the same version as the Kubernetes version used on the cluster.
-
-   This procedure assumes the host machine has ``kubectl`` installed and configured with access to the target Kubernetes cluster. 
-   The host machine *must* have access to a web browser application.
-
-.. cond:: openshift
-
-   OpenShift 4.7+ and ``oc`` CLI Tool
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   This procedure assumes installation of the MinIO Operator using the OpenShift 4.7+ and the OpenShift OperatorHub.
-
-   This procedure assumes your local machine has the OpenShift ``oc`` CLI tool installed and configured for access to the OpenShift Cluster.
-   :openshift-docs:`Download and Install <cli_reference/openshift_cli/getting-started-cli.html>` the OpenShift :abbr:`CLI (command-line interface)` ``oc`` for use in this procedure.
-
-   See :ref:`deploy-operator-openshift` for more complete instructions.
-
-.. cond:: openshift
-
-   Check Security Context Constraints
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   The MinIO Operator deploys pods using the following default :kube-docs:`Security Context <tasks/configure-pod-container/security-context/>` per pod:
-
-   .. code-block:: yaml
-      :class: copyable
-
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        runAsNonRoot: true
-        fsGroup: 1000
-
-   Certain OpenShift :openshift-docs:`Security Context Constraints </authentication/managing-security-context-constraints.html>` limit the allowed UID or GID for a pod such that MinIO cannot deploy the Tenant successfully. 
-   Ensure that the Project in which the Operator deploys the Tenant has sufficient SCC settings that allow the default pod security context. 
-   You can alternatively modify the tenant security context settings during deployment.
-
-   The following command returns the optimal value for the securityContext: 
-
-   .. code-block:: shell
-      :class: copyable
-
-      oc get namespace <namespace> \
-      -o=jsonpath='{.metadata.annotations.openshift\.io/sa\.scc\.supplemental-groups}{"\n"}'
-
-   The command returns output similar to the following:
-   
-   .. code-block:: shell
-
-      1056560000/10000
-
-   Take note of this value before the slash for use in this procedure.
-
-.. cond:: gke
-
-   GKE Cluster with Compute Engine Nodes
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   This procedure assumes an existing :abbr:`GKE (Google Kubernetes Engine)` cluster with a MinIO Operator installation and *at least* four Compute Engine nodes.
-   The Compute Engine nodes should have matching machine types and configurations to ensure predictable performance with MinIO.
-
-   MinIO provides :ref:`hardware guidelines <deploy-minio-distributed-recommendations>` for selecting the appropriate Compute Engine instance class and size.
-   MinIO strongly recommends selecting instances with support for local SSDs and *at least* 25Gbps egress bandwidth as a baseline for performance.
-
-   For more complete information on the available Compute Engine and Persistent Storage resources, see :gcp-docs:`Machine families resources and comparison guide <general-purpose-machines>` and :gcp-docs:`Persistent disks <disks>`.
-
-.. cond:: eks
-
-   EKS Cluster with EBS-Optimized EC2 Nodes
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   This procedure assumes an existing :abbr:`EKS (Elastic Kubernetes Service)` cluster with *at least* four EC2 nodes.
-   The EC2 nodes should have matching machine types and configurations to ensure predictable performance with MinIO.
-
-   MinIO provides :ref:`hardware guidelines <deploy-minio-distributed-recommendations>` for selecting the appropriate EC2 instance class and size.
-   MinIO strongly recommends selecting EBS-optimized instances with *at least* 25Gbps Network bandwidth as a baseline for performance.
-
-   For more complete information on the available EC2 and EBS resources, see `EC2 Instance Types <https://aws.amazon.com/ec2/instance-types/>`__ and `EBS Volume Types <https://aws.amazon.com/ebs/volume-types/>`__.
-   |subnet| customers should reach out to MinIO engineering as part of architecture planning for assistance in selecting the optimal instance and volume types for the target workload and performance goals.
-
-.. cond:: aks
-
-   AKS Cluster with Azure Virtual Machines
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   This procedure assumes an existing :abbr:`AKS (Azure Kubernetes Service)` cluster with *at least* four Azure virtual machines (VM).
-   The Azure VMs should have matching machine types and configurations to ensure predictable performance with MinIO.
-
-   MinIO provides :ref:`hardware guidelines <deploy-minio-distributed-recommendations>` for selecting the appropriate EC2 instance class and size.
-   MinIO strongly recommends selecting VM instances with support for Premium SSDs and *at least* 25Gbps Network bandwidth as a baseline for performance.
-
-   For more complete information on Azure Virtual Machine types and Storage resources, see :azure-docs:`Sizes for virtual machines in Azure <virtual-machines/sizes>` and :azure-docs:`Azure managed disk types <virtual-machines/disks-types>`
-
-.. _deploy-minio-tenant-pv:
-
-Persistent Volumes
-~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/common-admonitions.rst
-   :start-after: start-exclusive-drive-access
-   :end-before: end-exclusive-drive-access
-
-.. cond:: not eks
-
-   MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
-   MinIO's consistency guarantees require the exclusive storage access that ``ReadWriteOnce`` provides.
-   Additionally, MinIO recommends setting a reclaim policy of ``Retain`` for the PVC :kube-docs:`StorageClass <concepts/storage/storage-classes>`.
-   Where possible, configure the Storage Class, CSI, or other provisioner underlying the PV to format volumes as XFS to ensure best performance.
-
-   For Kubernetes clusters where nodes have Direct Attached Storage, MinIO strongly recommends using the `DirectPV CSI driver <https://min.io/directpv?ref=docs>`__. 
-   DirectPV provides a distributed persistent volume manager that can discover, format, mount, schedule, and monitor drives across Kubernetes nodes.
-   DirectPV addresses the limitations of manually provisioning and monitoring :kube-docs:`local persistent volumes <concepts/storage/volumes/#local>`.
-
-.. cond:: eks
-
-   MinIO Tenants on EKS must use the :github:`EBS CSI Driver <kubernetes-sigs/aws-ebs-csi-driver>` to provision the necessary underlying persistent volumes.
-   MinIO strongly recommends using SSD-backed EBS volumes for best performance.
-   MinIO strongly recommends deploying EBS-based PVs with the XFS filesystem.
-   Create a StorageClass for the MinIO EBS PVs and set the ``csi.storage.k8s.io/fstype`` `parameter <https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/parameters.md>`__ to ``xfs``  .
-   For more information on EBS resources, see `EBS Volume Types <https://aws.amazon.com/ebs/volume-types/>`__.
-   For more information on StorageClass Parameters, see `StorageClass Parameters <https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/parameters.md>`__.
-
-.. cond:: gke
-
-   MinIO Tenants on GKE should use the :gke-docs:`Compute Engine Persistent Disk CSI Driver <how-to/persistent-volumes/gce-pd-csi-driver>` to provision the necessary underlying persistent volumes.
-   MinIO strongly recommends SSD-backed disk types for best performance.
-   For more information on GKE disk types, see :gcp-docs:`Persistent Disks <disks>`.
-
-.. cond:: aks
-
-   MinIO Tenants on AKS should use the :azure-docs:`Azure Disks CSI driver <azure-disk-csi>` to provision the necessary underlying persistent volumes.
-   MinIO strongly recommends SSD-backed disk types for best performance.
-   For more information on AKS disk types, see :azure-docs:`Azure disk types <virtual-machines/disk-types>`.
-
 
 Deploy a Tenant using the MinIO Operator Console
 ------------------------------------------------
@@ -276,45 +106,9 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
        The Operator supports at most *one* MinIO Tenant per namespace.
 
    * - :guilabel:`Storage Class`
-     - .. cond:: not eks
-     
-          Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
+     - Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
 
-          Ensure the specified storage class has sufficient available Persistent Volume resources to match each generated Persistent Volume Claim.
-
-       .. cond:: eks
-
-          Specify the EBS volume type to use for this tenant.
-          The following list is populated based on the AWS EBS CSI driver list of supported :github:`EBS volume types <kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/parameters.md>`:
-
-          - ``gp3`` (General Purpose SSD)
-          - ``gp2`` (General Purpose SSD)
-          - ``io2`` (Provisioned IOPS SSD)
-          - ``io1`` (Provisioned IOPS SSD)
-          - ``st1`` (Throughput Optimized HDD)
-          - ``sc1`` (Cold Storage HDD)
-
-       .. cond:: gke
-
-          Specify the GKE persistent disk type to use for this tenant.
-          The :gke-docs:`GKE CSI Driver <how-to/persistent-volumes/gce-pd-csi-driver>` provides the following storage classes by default:
-
-          - ``standard-rwo`` (Balanced Persistent SSD)
-          - ``premium-rwo`` (Performance Persistent SSD)
-
-          You can create additional StorageClasses to represent other supported persistent disk types.
-          See :gke-docs:`Create a Storage Class <how-to/persistent-volumes/gce-pd-csi-driver#create_a_storageclass>` for more information.
-
-       .. cond:: aks
-
-          Specify the AKS persistent disk type to use for this tenant.
-          The :aks-docs:`AKS CSI Driver <azure-disk-csi>` provides the following storage classes by default:
-
-          - ``managed-csi`` (Standard SSD)
-          - ``managed-csi-premium`` (Premium SSD)
-
-          You can create additional Storage Classes to represent other supported persistent disk types.
-          See :aks-docs:`Create a custom storage class <https://learn.microsoft.com/en-us/azure/aks/azure-disk-csi#create-a-custom-storage-class>` for more information.
+       Ensure the specified storage class has sufficient available Persistent Volume resources to match each generated Persistent Volume Claim.
 
    * - :guilabel:`Number of Servers`
      - The total number of MinIO server pods to deploy in the Tenant.
@@ -329,21 +123,9 @@ Settings marked with an asterisk :guilabel:`*` are *required*:
        The Operator displays the :guilabel:`Total Volumes` under the :guilabel:`Resource Allocation` section. 
        The Operator generates an equal number of PVC *plus two* for supporting Tenant services (Metrics and Log Search).
 
-       .. cond:: not eks
+       The specified :guilabel:`Storage Class` *must* correspond to a set of Persistent Volumes sufficient in number to match each generated PVC.
        
-          The specified :guilabel:`Storage Class` *must* correspond to a set of Persistent Volumes sufficient in number to match each generated PVC.
-
-       .. cond:: eks
-
-          For deployments using the EBS CSI driver, the Operator provisions Persistent Volume Claims which result in the creation of EBS volumes of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
-
-       .. cond:: gke
-
-          For deployments using the GKE CSI driver, the Operator provisions Persistent Volume Claims which result in the creation of GCP Disks of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
-
-       .. cond:: aks
-
-          For deployments using the AKS CSI Driver, the Operator provisions Persistent Volume Claims which result in the creation of Azure Disks of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
+       For deployments using a CSI driver, this setting results in the creation of volumes equal to ``Number of Drives per Server X Number of Servers`` using the specified :guilabel:`Storage Class`.
 
    * - :guilabel:`Total Size`
      - The total raw storage size for the Tenant. 
@@ -397,27 +179,11 @@ The :guilabel:`Configure` section displays optional configuration settings for t
    * - :guilabel:`Expose MinIO Service`
      - The MinIO Operator by default directs the MinIO Tenant services to request an externally accessible IP address from the Kubernetes cluster Load Balancer if one is available to access the tenant.
 
-       .. cond:: eks
-
-          If your EKS cluster includes the :aws-docs:`AWS Load Balancer Controller add-on <eks/latest/userguide/aws-load-balancer-controller.html>`, enabling this setting directs the load balancer to assign an address to the Tenant services.
-
-          Other load balancers *may* function similarly depending on their configuration.
-
-       .. cond:: not eks
-
        Your Kubernetes distributions *may* include a load balancer that can respond to these requests.
        Installation and configuration of load balancers is out of the scope of this documentation.
 
    * - :guilabel:`Expose Console Service`
      - Select whether the Tenant should request an IP address from the Load Balancer to access the Tenant's Console. 
-
-       .. cond:: eks
-
-          If your EKS cluster includes the :aws-docs:`AWS Load Balancer Controller add-on <eks/latest/userguide/aws-load-balancer-controller.html>`, enabling this setting directs the load balancer to assign an address to the Tenant services.
-
-          Other load balancers *may* function similarly depending on their configuration.
-
-       .. cond:: not eks
 
        Your Kubernetes distributions *may* include a load balancer that can respond to these requests.
        Installation and configuration of load balancers is out of the scope of this documentation.
@@ -433,11 +199,7 @@ The :guilabel:`Configure` section displays optional configuration settings for t
        You can modify the Security Context to direct MinIO to run using a different User, Group,FsGroup ID, and FSGroupChangePolicy. 
        You can also direct MinIO to run as the Root user.
 
-       .. cond:: openshift
-
-          .. important::
-
-             If your OpenShift cluster enforces :openshift-docs:`Security Context Constraints </authentication/managing-security-context-constraints.html>` , ensure you set the Tenant constraints appropriately such that pods can start and run normally.
+       For Kubernetes clusters which enforce security context constraints, such as  :openshift-docs:`OpenShift </authentication/managing-security-context-constraints.html>`, ensure you set the Tenant constraints appropriately such that pods can start and run normally.
 
    * - :guilabel:`Custom Runtime Configurations`
      - Toggle on to customize the :kube-docs:`Runtime Class <concepts/containers/runtime-class/>` for the tenant to use. 
@@ -664,23 +426,14 @@ Each tab provides additional details or configuration options for the MinIO Tena
 
 The MinIO Operator creates services for the MinIO Tenant. 
 
-.. cond:: openshift
 
-   Use the ``oc get svc -n TENANT-PROJECT`` command to review the deployed services:
+Use the ``kubectl get svc -n NAMESPACE`` command to review the deployed services.
+For Kubernetes services which use a custom ``kubectl`` analog, you can substitute the name of that program.
 
-   .. code-block:: shell
-      :class: copyable
+.. code-block:: shell
+   :class: copyable
 
-      oc get svc -n minio-tenant-1
-
-.. cond:: k8s and not openshift 
-
-   Use the ``kubectl get svc -n NAMESPACE`` command to review the deployed services:
-
-   .. code-block:: shell
-      :class: copyable
-
-      kubectl get svc -n minio-tenant-1
+   kubectl get svc -n minio-tenant-1
 
 .. code-block:: shell
 
@@ -707,20 +460,16 @@ Applications external to the Kubernetes cluster can access the services using th
 This value is only populated for Kubernetes clusters configured for Ingress or a similar network access service. 
 Kubernetes provides multiple options for configuring external access to services. 
 
-.. cond:: k8s and not openshift
+See the Kubernetes documentation on :kube-docs:`Publishing Services (ServiceTypes) <concepts/services-networking/service/#publishing-services-service-types>` and :kube-docs:`Ingress <concepts/services-networking/ingress/>` for more complete information on configuring external access to services.
 
-   See the Kubernetes documentation on :kube-docs:`Publishing Services (ServiceTypes) <concepts/services-networking/service/#publishing-services-service-types>` and :kube-docs:`Ingress <concepts/services-networking/ingress/>` for more complete information on configuring external access to services.
-
-.. cond:: openshift
-
-   See the OpenShift documentation on :openshift-docs:`Route or Ingress <networking/understanding-networking.html#nw-ne-comparing-ingress-route_understanding-networking>` for more complete information on configuring external access to services.
-
-.. cond:: openshift
-
-   .. include:: /includes/openshift/steps-deploy-minio-tenant.rst
+For specific flavors of Kubernetes, such as OpenShift or Rancher, defer to the service documentation on the preferred or available methods of exposing Services to internal or external access.
 
 .. toctree::
    :titlesonly:
    :hidden:
 
-   /operations/install-deploy-manage/deploy-minio-tenant-helm
+   /operations/deployments/k8s-deploy-minio-tenant-helm-on-kubernetes
+   /operations/deployments/k8s-upgrade-minio-tenant-on-kubernetes
+   /operations/deployments/k8s-expand-minio-tenant-on-kubernetes
+   /operations/deployments/k8s-modify-minio-tenant-on-kubernetes
+   /operations/deployments/k8s-delete-minio-tenant-on-kubernetes
