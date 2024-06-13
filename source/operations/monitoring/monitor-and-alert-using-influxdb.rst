@@ -27,9 +27,7 @@ The procedure on this page documents the following:
    - An existing MinIO deployment with network access to the InfluxDB deployment
    - An :mc:`mc` installation on your local host configured to :ref:`access <alias>` the MinIO deployment
 
-.. cond:: k8s
-
-   This procedure assumes all necessary network control components, such as Ingress or Load Balancers, to facilitate access between the MinIO Tenant and the InfluxDB service.
+For MinIO Deployments on Kubernetes, this procedure assumes all necessary network control components, such as Ingress or Load Balancers, to facilitate access between the MinIO Tenant and the InfluxDB service.
 
 Configure InfluxDB to Collect and Alert using MinIO Metrics
 -----------------------------------------------------------
@@ -44,9 +42,7 @@ Configure InfluxDB to Collect and Alert using MinIO Metrics
    - You cannot enable authenticated access to the MinIO metrics endpoint via the InfluxDB UI
    - You cannot set a tag for collected metrics (e.g. ``url_tag``) for uniquely identifying the metrics for a given MinIO deployment
 
-   .. cond:: k8s
-
-      The Telegraf Prometheus plugin also supports Kubernetes-specific features, such as scraping the ``minio`` service for a given MinIO Tenant.
+   The Telegraf Prometheus plugin also supports Kubernetes-specific features, such as scraping the ``minio`` service for a given MinIO Tenant.
 
    Configuring Telegraf is out of scope for this procedure. 
    You can use this procedure as general guidance for configuring Telegraf to scrape MinIO metrics.

@@ -4,8 +4,6 @@
    The :ref:`Operator Console service <minio-operator-console>` does not automatically bind or expose itself for external access on the Kubernetes cluster.
    Instead, configure a network control plane component, such as a load balancer or ingress, to grant external access.
 
-   .. cond:: k8s and not openshift
-
    For testing purposes or short-term access, expose the Operator Console service through a NodePort using the following patch:
 
    .. code-block:: shell
