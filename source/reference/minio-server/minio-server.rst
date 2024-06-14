@@ -101,8 +101,9 @@ The command accepts the following arguments:
 
    Binds the :mc:`minio <minio server>` server process to a specific network address and port number. 
    Specify the address and port as ``ADDRESS:PORT``, where ``ADDRESS`` is an IP address or hostname and ``PORT`` is a valid and open port on the host system.
+   MinIO supports both IPv4 and IPv6 addressing, provided that the specified addresses are routable and resolveable. 
 
-   To change the port number for all IP addresses or hostnames configured on the host machine, specify ``:PORT`` where ``PORT`` is a valid and open port on the host.
+   To change the port number for all IP addresses or hostnames configured on the host machine, specify only ``:PORT`` where ``PORT`` is a valid and open port on the host.
 
    .. versionchanged:: RELEASE.2023-01-02T09-40-09Z
    
@@ -120,7 +121,7 @@ The command accepts the following arguments:
 
          minio server --address "minioip:9000" ~/miniodirectory
 
-   If omitted, :mc:`minio <minio server>` binds to port ``9000`` on all configured IP addresses or hostnames on the host machine.
+   If omitted, :mc:`minio <minio server>` binds to port ``9000`` on all configured IPv4 addresses, IPv6 addresses, and hostnames on the host machine.
 
 .. mc-cmd:: --console-address
    :optional:
