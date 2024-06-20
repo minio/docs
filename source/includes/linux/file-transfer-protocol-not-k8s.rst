@@ -3,7 +3,7 @@
 Overview
 --------
 
-Starting with :minio-release:`MinIO Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the File Transfer Protocol (FTP) to interact with the objects on a MinIO deployment.
+Starting with :minio-release:`MinIO Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the File Transfer Protocol (FTP) or SSH File Transfer Protocol (SFTP) to interact with the objects on a MinIO deployment.
 
 You must specifically enable FTP or SFTP when starting the server.
 Enabling either server type does not affect other MinIO features.
@@ -67,7 +67,7 @@ Specifically:
 
 - For read operations, MinIO only returns the latest version of the requested object(s) to the FTP client.
 - For write operations, MinIO applies normal versioning behavior and creates a new object version at the specified namespace.
-  ``rm`` and ``rmdir`` operations create ``DeleteMarker`` objects.
+  ``delete`` and ``rmdir`` operations create ``DeleteMarker`` objects.
 
 
 Authentication and Access
@@ -223,3 +223,21 @@ The following example connects to an SFTP server, lists the contents of a bucket
    Fetching /runner/chunkdocs/metadata to metadata
    metadata                               100%  226    16.6KB/s   00:00
 
+Force use of service account or ldap for authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To force authentication to SFTP using LDAP or service account credentials, append a suffix to the username.
+Valid suffixes are either ``=ldap`` or ``=svc``.
+
+.. code-block:: console
+
+   > sftp -P 8022 my-ldap-user=ldap@[minio@localhost]:/bucket
+
+
+.. code-block:: console
+
+   > sftp -P 8022 my-ldap-user=svc@[minio@localhost]:/bucket
+
+
+- Replace ``my-ldap-user`` with the username to use.
+- Replace ``[minio@localhost]`` with the address of the MinIO server.
