@@ -81,6 +81,8 @@ They are listed here for historical reference only.
 
    This setting may be required if:
 
-   - The MinIO Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN) *or*
+   - The MinIO Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN).
+   
+   or
 
-   - The Console must use a specific hostname to connect or reference the MinIO Server, e.g. due to a reverse proxy or similar configuration.
+   - The Console must use a specific hostname to connect or reference the MinIO Server, such as due to a reverse proxy or similar configuration.
