@@ -224,6 +224,8 @@ Syntax
       already exist. Use :mc-cmd:`mc admin group ls` to review the existing
       groups on a deployment.
 
+      A group name cannot contain the characters ``=`` (equal sign) or ``,`` (comma).
+
    .. mc-cmd:: MEMBERS
 
       The name of the user to add to the group.

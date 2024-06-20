@@ -165,3 +165,21 @@ If SFTP is enabled, the output resembles the following:
 
    enableSFTP: true
 
+Force use of service account or ldap for authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To force authentication to SFTP using LDAP or service account credentials, append a suffix to the username.
+Valid suffixes are either ``=ldap`` or ``=svc``.
+
+.. code-block:: console
+
+   > sftp -P 8022 my-ldap-user=ldap@[minio@localhost]:/bucket
+
+
+.. code-block:: console
+
+   > sftp -P 8022 my-ldap-user=svc@[minio@localhost]:/bucket
+
+
+- Replace ``my-ldap-user`` with the username to use.
+- Replace ``[minio@localhost]`` with the address of the MinIO server.

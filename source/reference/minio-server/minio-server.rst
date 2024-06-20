@@ -253,6 +253,9 @@ The command accepts the following arguments:
              hmac-sha1
              hmac-sha1-96
 
+      * - ``disable-password-auth``
+        - Disable password authentication.
+        - ``true``
 
    For example:
 
