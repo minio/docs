@@ -165,6 +165,51 @@ If SFTP is enabled, the output resembles the following:
 
    enableSFTP: true
 
+Connect to MinIO Using SFTP with a Certificate Key File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: RELEASE.2024-05-07T06-41-25Z
+
+MinIO supports user certificate based authentication on SFTP.
+
+This example adds a certificate signature for the MinIO user ``sftp-ca-user1``.
+The signature remains valid for one week after creation.
+
+Before beginning, the following prerequisites must be met:
+
+- Create a trusted user Certificate Authority, such as with ``ssh-keygen -f user_ca``
+- Start or restart the MinIO server to support this CA by including the following flag in the command string:
+
+  .. code-block:: bash
+     :class: copyable 
+
+     --sftp=trusted-user-ca-key=/path/to/.ssh/user_ca.pub
+
+Repeat the following steps for each user who accesses the MinIO Server by SFTP with a user CA key file:
+
+1. Create user public key in client PC (testuser1 in this example) ssh-keygen
+2. Provide copy of /home/testuser1/.ssh/id_rsa.pub to CA server.
+3. Create a signature for the identity ``sftp-ca-user1``.
+   (The name must match the username in MinIO).
+   In this example, the signature is valid for one week.
+   
+   .. code-block:: bash
+      :class: copyable
+
+      ssh-keygen -s /home/miniouser/.ssh/user_ca -I sftp=ca-user1-2024-05-03 -n sftp-ca-user1 -V +1w id_rsa.pub
+
+4. Copy ``id_rsa-cert.pub`` to ``/home/sftp-ca-user1/.ssh/id_rsa-cert.pub`` on the client PC.
+
+After the certificate expires, repeat steps 3 and 4.
+Alternatively, leave out the -V +1w argument when creating the signature to to add a certificate that doesn't expire.
+
+Once completed the trusted user can connect to the MinIO server over SFTP:
+
+.. code-block:: bash
+   :class: copyable:
+   
+   sftp -P <SFTP port> <server IP>
+
 Force use of service account or ldap for authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
