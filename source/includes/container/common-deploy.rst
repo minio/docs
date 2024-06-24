@@ -97,9 +97,11 @@ The instructions include examples for both quay.io and DockerHub:
       .. code-block:: shell
          :class: copyable
 
-         mc alias set http://localhost:9000 myminioadmin minio-secret-key-change-me
+         mc alias set minio-alias http://localhost:9000 myminioadmin minio-secret-key-change-me
 
-      Replace ``myminioadmin`` and ``minio-secret-key-change-me`` with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` values in the environment file specified to the container.
+      - Replace ``minio-alias`` with the alias name to create for this deployment.
+
+      - Replace ``myminioadmin`` and ``minio-secret-key-change-me`` with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` values in the environment file specified to the container.
 
       The command should return success if the container is running and accessible at the specified port.
 
