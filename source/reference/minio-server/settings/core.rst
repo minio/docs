@@ -10,7 +10,7 @@ Core Settings
    :local:
    :depth: 2
 
-This page covers settings that control core behavior of the MinIO process. 
+This page covers settings that control core behavior of the MinIO process.
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
@@ -32,20 +32,41 @@ MinIO Server CLI Options
 
    .. tab-item:: Configuration Setting
       :sync: config
-  
+
       There is no configuration setting for this variable, as these settings apply at server startup.
 
 *Optional*
 
 Set a string of :ref:`parameters <minio-server-parameters>` to use when starting the MinIO Server.
-For example, to set up ftp access, you could set the variable to something like the following:
+
+For Unix-like systems using the recommended MinIO ``systemd`` service, use the ``/etc/default/minio`` file and create an environment variable ``MINIO_OPTS`` for specifying parameters to append to the ``minio`` systemd process:
+
+.. code-block:: shell
+   :class: copyable
+   
+   # Editing /etc/default/minio
+
+   MINIO_OPTS=' --console-address=":9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
+
+For systems running ``minio`` on the command line, ``MINIO_OPTS`` is optional.
+To use it, declare the environment variable using standard shell semantics, then reference the environment variable when starting up the MinIO Server:
 
 .. code-block:: shell
    :class: copyable
 
-   export MINIO_OPTS=' "--console-address="9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
+   export MINIO_OPTS=' --console-address=":9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
 
-On Unix-like systems, you can save a file with the environment variable to ``/etc/default/minio`` instead of setting the variable manually.
+   minio server $MINIO_OPTS ...
+
+   # The above is equivalent to running the following:
+   # minio server --console-address=":9001" \
+   #              --ftp="address=:8021"     \
+   #              --ftp="passive-port-range=30000-40000"
+
+.. important::
+
+   The ``minio server`` command does not read ``$MINIO_OPTS`` directly.
+   The variable only functions if used as described above.
 
 Storage Volumes
 ---------------
@@ -75,9 +96,9 @@ Environment Variable File Path
    .. tab-item:: Environment Variable
 
       .. envvar:: MINIO_CONFIG_ENV_FILE
-      
+
          Specifies the full path to the file the MinIO server process uses for loading environment variables.
-         
+
          For ``systemd``-managed files, set this value to the path of the environment file (``/etc/default/minio``) to direct MinIO to reload changes to that file when using :mc-cmd:`mc admin service restart` to restart the deployment.
 
    .. tab-item:: Configuration Setting
@@ -85,7 +106,7 @@ Environment Variable File Path
       .. include:: /includes/common-mc-admin-config.rst
          :start-after: start-minio-settings-no-config-option
          :end-before: end-minio-settings-no-config-option
-      
+
 Workers for Expiration
 ----------------------
 
@@ -128,9 +149,9 @@ Domain
          .. important::
 
             If you configure ``MINIO_DOMAIN``, you **must** consider all subdomains of the specified FQDN as exclusively assigned for use as bucket names.
-            Any MinIO services which conflict with those domains, such as replication targets, may exhibit unexpected or undesired behavior as a result of the collision. 
+            Any MinIO services which conflict with those domains, such as replication targets, may exhibit unexpected or undesired behavior as a result of the collision.
 
-            For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``minio.example.net`` (in the form of ``*.minio.example.net``) to any MinIO service or target. 
+            For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``minio.example.net`` (in the form of ``*.minio.example.net``) to any MinIO service or target.
             This includes hostnames for use with :ref:`bucket <minio-bucket-replication>`, :ref:`batch <minio-batch-framework-replicate-job>`, or :ref:`site replication <minio-site-replication-overview>`.
 
    .. tab-item:: Configuration Setting
@@ -153,12 +174,12 @@ Scanner Speed
 
    .. tab-item:: Configuration Setting
       :sync: config
-  
+
       .. mc-conf:: scanner speed
          :delimiter: " "
 
 Manage the maximum wait period for the :ref:`scanner <minio-concepts-scanner>` when balancing MinIO read/write performance to scanner processes.
-   
+
 .. include:: /includes/common/scanner.rst
    :start-after: start-scanner-speed-values
    :end-before: end-scanner-speed-values
@@ -205,7 +226,7 @@ Enable Compression
 
    .. tab-item:: Configuration Setting
       :sync: config
-  
+
       .. mc-conf:: compression enable
          :delimiter: " "
 
@@ -228,7 +249,7 @@ Allow Encryption
 
    .. tab-item:: Configuration Setting
       :sync: config
-  
+
       .. mc-conf:: compression allow_encryption
          :delimiter: " "
 
@@ -255,7 +276,7 @@ Compression Extensions
 
    .. tab-item:: Configuration Setting
       :sync: config
-  
+
       .. mc-conf:: compression extensions
          :delimiter: " "
 
@@ -268,7 +289,7 @@ Defaults to ``".txt, .log, .csv, .json, .tar, .xml, .bin"``.
 .. versionchanged:: RELEASE.2024-03-15T01-07-19Z
 
    Specify ``"*"`` to direct MinIO to compress all supported file types.
-   
+
 MinIO does not support compressing file types on the :ref:`Excluded File Types <minio-data-compression-excluded-types>` list, even if explicitly specified in this argument.
 
 Compression MIME Types
@@ -283,7 +304,7 @@ Compression MIME Types
 
    .. tab-item:: Configuration Variable
       :sync: config
-  
+
       .. mc-conf:: compression mime_types
          :delimiter: " "
 
@@ -322,7 +343,7 @@ Specify a comment to associate with the data compression configuration.
 Erasure Stripe Size
 -------------------
 
-.. tab-set:: 
+.. tab-set::
 
    .. tab-item:: Environment Variable
       :sync: envvar
@@ -348,7 +369,7 @@ The selected stripe size is **immutable** after the cluster has been initialized
 .. warning::
 
    **Do not** change the stripe size setting unless directed to by MinIO engineering.
-   
+
    Changes to stripe size have significant impact to deployment functionality, availability, performance, and behavior.
    MinIO's stripe selection algorithms set appropriate defaults for the majority of workloads.
    Changing the stripe size from this default is unusual and generally not necessary or advised.
