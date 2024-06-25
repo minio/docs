@@ -38,26 +38,34 @@ MinIO Server CLI Options
 *Optional*
 
 Set a string of :ref:`parameters <minio-server-parameters>` to use when starting the MinIO Server.
-For example, to set up ftp access, you could set the variable to something like the following:
+
+For Unix-like systems using the recommended MinIO ``systemd`` service, use the ``/etc/default/minio`` file and create an environment variable ``MINIO_OPTS`` for specifying parameters to append to the ``minio`` systemd process:
+
+.. code-block:: shell
+   :class: copyable
+   
+   # Editing /etc/default/minio
+
+   MINIO_OPTS=' --console-address=":9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
+
+For systems running ``minio`` on the command line, ``MINIO_OPTS`` is optional and must be specified using standard shell semantics around environment variable declaration/reference:
 
 .. code-block:: shell
    :class: copyable
 
    export MINIO_OPTS=' --console-address=":9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
 
-On Unix-like systems using the recommended MinIO ``systemd`` service, you can save a file with the environment variable to ``/etc/default/minio`` instead of setting the variable manually. 
+   minio server $MINIO_OPTS ...
 
-.. note::
+   # The above is equivalent to running the following
+   # minio server --console-address=":9001" \
+   #              --ftp="address=:8021"     \
+   #              --ftp="passive-port-range=30000-40000"
 
-   The MinIO server does not read ``MINIO_OPTS`` directly.
-   Instead, use the environment variable to pass options with variable expansion when starting the MinIO server.
-   
-   For example:
-   
-   .. code-block::
-      :class: copyable
+.. important::
 
-      minio server $MINIO_OPTS ...
+   The ``minio server`` server command does not read ``$MINIO_OPTS`` directly.
+   The variable only functions if used as described above.
 
 Storage Volumes
 ---------------
