@@ -48,7 +48,8 @@ For Unix-like systems using the recommended MinIO ``systemd`` service, use the `
 
    MINIO_OPTS=' --console-address=":9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
 
-For systems running ``minio`` on the command line, ``MINIO_OPTS`` is optional and must be specified using standard shell semantics around environment variable declaration/reference:
+For systems running ``minio`` on the command line, ``MINIO_OPTS`` is optional.
+To use it, declare the environment variable using standard shell semantics, then reference the environment variable when starting up the MinIO Server:
 
 .. code-block:: shell
    :class: copyable
@@ -57,14 +58,14 @@ For systems running ``minio`` on the command line, ``MINIO_OPTS`` is optional an
 
    minio server $MINIO_OPTS ...
 
-   # The above is equivalent to running the following
+   # The above is equivalent to running the following:
    # minio server --console-address=":9001" \
    #              --ftp="address=:8021"     \
    #              --ftp="passive-port-range=30000-40000"
 
 .. important::
 
-   The ``minio server`` server command does not read ``$MINIO_OPTS`` directly.
+   The ``minio server`` command does not read ``$MINIO_OPTS`` directly.
    The variable only functions if used as described above.
 
 Storage Volumes
