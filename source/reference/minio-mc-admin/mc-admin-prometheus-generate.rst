@@ -96,7 +96,7 @@ Example
 Generate a scrape config for bucket metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin prometheus generate` to print bucket metrics for a MinIO deployment:
+Use :mc-cmd:`mc admin prometheus generate` to generate a scrape configuration that collects bucket metrics for a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
