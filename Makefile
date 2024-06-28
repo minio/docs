@@ -65,102 +65,19 @@ stage-%:
 #   - Compile SCSS
 #   - Build docs via Sphinx
 
-linux:
+mindocs:
 	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
+	@echo "         Building for MinIO           "
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
+	@make sync-deps
+	@make sync-operator-version
 	@make sync-deps
 ifeq ($(SYNC_SDK),TRUE)
 	@make sync-sdks
 else
 	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
 endif
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-windows:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-macos:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-k8s:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-openshift:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-eks:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-gke:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-aks:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-container:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -210,11 +127,34 @@ sync-minio-server-docs:
 	@(./sync-minio-server-docs.sh)
 
 sync-minio-version:
-	@echo "Retrieving current MinIO version"
-	$(eval DEB = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
-	$(eval RPM = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
-	$(eval DEBARM64 = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".arm64.DEB.download' | sed "s|linux-arm64|linux-arm64/archive|g"))
-	$(eval RPMARM64 = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".arm64.RPM.download' | sed "s|linux-arm64|linux-arm64/archive|g"))
+	@echo "Pulling downloads-minio.json to /tmp/"
+	@curl -s https://min.io/assets/downloads-minio.json -o /tmp/downloads-minio.json
+	@echo "Populating MinIO Server download URLs"
+
+#  AMD64 arch
+
+	$(eval MINIOAMD64 = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.Binary.download'))
+	$(eval DEB = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download'))
+	$(eval RPM = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download'))
+
+#  ARM64 arch
+
+	$(eval MINIOARM64 = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".arm64.Binary.download'))
+	$(eval DEBARM64 = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".arm64.DEB.download'))
+	$(eval RPMARM64 = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".arm64.RPM.download'))
+	
+#  ppc64le arch
+
+	$(eval MINIOPPC64LE = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".ppc64le.Binary.download'))
+	$(eval DEBPPC64LE = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".ppc64le.DEB.download'))
+	$(eval RPMPPC64LE = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".ppc64le.RPM.download'))
+
+#  s390x arch
+
+	$(eval MINIOS390X = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".s390x.Binary.download'))
+	$(eval DEBS390X = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".s390x.DEB.download'))
+	$(eval RPMS390X = $(shell cat /tmp/downloads-minio.json | jq '.Linux."MinIO Server".s390x.RPM.download'))
+
 	$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
 
 	@$(eval kname = $(shell uname -s))
@@ -224,15 +164,31 @@ sync-minio-version:
 		sed -i "" "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
 		sed -i "" "s|DEBURL|${DEB}|g" source/conf.py; \
 		sed -i "" "s|RPMURL|${RPM}|g" source/conf.py; \
+		sed -i "" "s|MINIOURL|${MINIOAMD64}|g" source/conf.py; \
 		sed -i "" "s|DEBARM64URL|${DEBARM64}|g" source/conf.py; \
 		sed -i "" "s|RPMARM64URL|${RPMARM64}|g" source/conf.py; \
+		sed -i "" "s|MINIOARM64URL|${MINIOARM64}|g" source/conf.py; \
+		sed -i "" "s|DEBPPC64LEURL|${DEBPPC64LE}|g" source/conf.py; \
+		sed -i "" "s|RPMPPC64LEURL|${RPMPPC64LE}|g" source/conf.py; \
+		sed -i "" "s|MINIOPPC64LEURL|${MINIOPPC64LE}|g" source/conf.py; \
+		sed -i "" "s|DEBS390XURL|${DEBS390X}|g" source/conf.py; \
+		sed -i "" "s|RPMS390XURL|${RPMS390X}|g" source/conf.py; \
+		sed -i "" "s|MINIOS390XURL|${MINIOS390X}|g" source/conf.py; \
 		;; \
 	*) \
 		sed -i "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
 		sed -i "s|DEBURL|${DEB}|g" source/conf.py; \
 		sed -i "s|RPMURL|${RPM}|g" source/conf.py; \
+		sed -i "s|MINIOURL|${MINIOAMD64}|g" source/conf.py; \
 		sed -i "s|DEBARM64URL|${DEBARM64}|g" source/conf.py; \
 		sed -i "s|RPMARM64URL|${RPMARM64}|g" source/conf.py; \
+		sed -i "s|MINIOARM64URL|${MINIOARM64}|g" source/conf.py; \
+		sed -i "s|DEBPPC64LEURL|${DEBPPC64LE}|g" source/conf.py; \
+		sed -i "s|RPMPPC64LEURL|${RPMPPC64LE}|g" source/conf.py; \
+		sed -i "s|MINIOPPC64LEURL|${MINIOPPC64LE}|g" source/conf.py; \
+		sed -i "s|DEBS390XURL|${DEBS390X}|g" source/conf.py; \
+		sed -i "s|RPMS390XURL|${RPMS390X}|g" source/conf.py; \
+		sed -i "s|MINIOS390XURL|${MINIOS390X}|g" source/conf.py; \
 		;; \
 	esac
 
