@@ -51,7 +51,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
       
          mc admin prometheus generate ALIAS
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 	 
       The command returns output similar to the following:
 
@@ -78,7 +78,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
       
          mc admin prometheus generate ALIAS node
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
       .. code-block:: yaml
          :class: copyable
@@ -103,7 +103,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
       
          mc admin prometheus generate ALIAS bucket
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
       .. code-block:: yaml
          :class: copyable
@@ -130,7 +130,7 @@ Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape co
 
          mc admin prometheus generate ALIAS resource
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate TARGET>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
 
       .. code-block:: yaml
          :class: copyable
