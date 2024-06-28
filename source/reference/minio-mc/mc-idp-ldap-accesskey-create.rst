@@ -77,6 +77,7 @@ Parameters
    :optional:
 
    An access key to use for the account.
+   The access key cannot contain the characters ``=`` (equal sign) or ``,`` (comma).
 
    Requires :mc-cmd:`~mc idp ldap accesskey create --secret-key`
 

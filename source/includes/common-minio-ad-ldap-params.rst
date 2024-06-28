@@ -34,6 +34,13 @@
 
    This parameter corresponds with the :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD` environment variable.
 
+.. mc-cmd:: user_dn_attributes
+   :optional:
+
+   .. include:: /includes/common-minio-external-auth.rst
+      :start-after: start-minio-ad-ldap-user-dn-attributes
+      :end-before: end-minio-ad-ldap-user-dn-attributes
+
 .. mc-cmd:: user_dn_search_base_dn
    :required:
 

@@ -3,7 +3,7 @@
 Overview
 --------
 
-Starting with :minio-release:`MinIO Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the File Transfer Protocol (FTP) to interact with the objects on a MinIO deployment.
+Starting with :minio-release:`MinIO Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the File Transfer Protocol (FTP) or SSH File Transfer Protocol (SFTP) to interact with the objects on a MinIO deployment.
 
 You must specifically enable FTP or SFTP when starting the server.
 Enabling either server type does not affect other MinIO features.
@@ -67,7 +67,7 @@ Specifically:
 
 - For read operations, MinIO only returns the latest version of the requested object(s) to the FTP client.
 - For write operations, MinIO applies normal versioning behavior and creates a new object version at the specified namespace.
-  ``rm`` and ``rmdir`` operations create ``DeleteMarker`` objects.
+  ``delete`` and ``rmdir`` operations create ``DeleteMarker`` objects.
 
 
 Authentication and Access
@@ -223,3 +223,67 @@ The following example connects to an SFTP server, lists the contents of a bucket
    Fetching /runner/chunkdocs/metadata to metadata
    metadata                               100%  226    16.6KB/s   00:00
 
+Connect to MinIO Using SFTP with a Certificate Key File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: RELEASE.2024-05-07T06-41-25Z
+
+MinIO supports user certificate based authentication on SFTP.
+
+This example adds a certificate signature for the MinIO user ``sftp-ca-user1``.
+The signature remains valid for one week after creation.
+
+Before beginning, the following prerequisites must be met:
+
+- Create a trusted user Certificate Authority, such as with ``ssh-keygen -f user_ca``
+- Start or restart the MinIO server to support this CA by including the following flag in the command string:
+
+  .. code-block:: bash
+     :class: copyable 
+
+     --sftp=trusted-user-ca-key=/path/to/.ssh/user_ca.pub
+
+Repeat the following steps for each user who accesses the MinIO Server by SFTP with a user CA key file:
+
+1. Create user public key in client PC (testuser1 in this example) ssh-keygen
+2. Provide copy of /home/testuser1/.ssh/id_rsa.pub to CA server.
+3. Create a signature for the identity ``sftp-ca-user1``.
+   (The name must match the username in MinIO).
+   In this example, the signature is valid for one week.
+   
+   .. code-block:: bash
+      :class: copyable
+
+      ssh-keygen -s /home/miniouser/.ssh/user_ca -I sftp=ca-user1-2024-05-03 -n sftp-ca-user1 -V +1w id_rsa.pub
+
+4. Copy ``id_rsa-cert.pub`` to ``/home/sftp-ca-user1/.ssh/id_rsa-cert.pub`` on the client PC.
+
+After the certificate expires, repeat steps 3 and 4.
+Alternatively, leave out the -V +1w argument when creating the signature to to add a certificate that doesn't expire.
+
+Once completed the trusted user can connect to the MinIO server over SFTP:
+
+.. code-block:: bash
+   :class: copyable:
+   
+   sftp -P <SFTP port> <server IP>
+
+
+Force use of service account or ldap for authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To force authentication to SFTP using LDAP or service account credentials, append a suffix to the username.
+Valid suffixes are either ``=ldap`` or ``=svc``.
+
+.. code-block:: console
+
+   > sftp -P 8022 my-ldap-user=ldap@[minio@localhost]:/bucket
+
+
+.. code-block:: console
+
+   > sftp -P 8022 my-ldap-user=svc@[minio@localhost]:/bucket
+
+
+- Replace ``my-ldap-user`` with the username to use.
+- Replace ``[minio@localhost]`` with the address of the MinIO server.
