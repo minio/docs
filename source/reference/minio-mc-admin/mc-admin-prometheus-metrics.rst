@@ -80,7 +80,7 @@ Parameters
       - ``resource``
 
       If not specified, the command returns cluster metrics.
-      Cluster metrics included rollups of certain node metrics.
+      Cluster metrics include rollups of certain node metrics.
       The output includes additional information about each metric, such as if its value is a ``counter`` or ``gauge``.
 
 Global Flags
