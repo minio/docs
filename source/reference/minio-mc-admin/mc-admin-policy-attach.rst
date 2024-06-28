@@ -30,7 +30,7 @@ Exactly one :mc-cmd:`~mc admin policy attach --user` or one :mc-cmd:`~mc admin p
 
    .. tab-item:: EXAMPLE
 
-      The following command displays the current in-progress S3 API calls on the :term:`alias` ``myminio``.
+      The following command attaches the ``readonly`` policy to the user ``james`` on the deployment at :term:`alias` ``myminio``.
 
       .. code-block:: shell
          :class: copyable

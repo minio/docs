@@ -15,57 +15,36 @@ Description
 
 .. start-mc-admin-prometheus-desc
 
-The :mc-cmd:`mc admin prometheus` command generates a configuration file for
-use with `Prometheus <https://prometheus.io/>`__.
+The :mc:`mc admin prometheus` command and its subcommands provide access to MinIO Prometheus metrics.
 
 .. end-mc-admin-prometheus-desc
 
-For more complete documentation on using MinIO with Prometheus, see :ref:`How to monitor MinIO server with Prometheus 
-<minio-metrics-collect-using-prometheus>`
+Subcommands
+-----------
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
-   :class: note
+:mc:`mc admin prometheus` includes the following subcommands:
 
-   .. include:: /includes/facts-mc-admin.rst
-      :start-after: start-minio-only
-      :end-before: end-minio-only
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%
 
-Syntax
-------
+   * - Subcommand
+     - Description
 
-.. mc-cmd:: generate
-   :fullpath:
+   * - :mc:`~mc admin prometheus generate`
+     - .. include:: /reference/minio-mc-admin/mc-admin-prometheus-generate.rst
+          :start-after: start-mc-admin-prometheus-generate-desc
+          :end-before: end-mc-admin-prometheus-generate-desc
 
-   Generates a JWT bearer token for use with configuring 
-   :ref:`Prometheus metrics collection <minio-metrics-and-alerts>`. The command
-   has the following syntax:
+   * - :mc:`~mc admin prometheus metrics`
+     - .. include:: /reference/minio-mc-admin/mc-admin-prometheus-metrics.rst
+          :start-after: start-mc-admin-prometheus-metrics-desc
+          :end-before: end-mc-admin-prometheus-metrics-desc
 
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin prometheus generate TARGET TYPE
-
-   The command accepts the following arguments:
-
-   .. mc-cmd:: TARGET
-
-      The :mc:`alias <mc alias>` of a configured MinIO deployment for which
-      the command generates a Prometheus-compatible configuration file.
-
-   .. mc-cmd:: TYPE
-
-      The type of metrics to scrape.
-
-      .. versionchanged:: RELEASE.2023-10-07T15-07-38Z
-
-         ``resource`` metrics added
-
-      Valid values are:
-
-      - ``bucket``
-      - ``cluster``
-      - ``node``
-      - ``resource``
-
-      If not specified, the command returns cluster metrics.
-      Cluster metrics also include node metrics.
+.. toctree::
+   :titlesonly:
+   :hidden:
+   
+   /reference/minio-mc-admin/mc-admin-prometheus-generate
+   /reference/minio-mc-admin/mc-admin-prometheus-metrics
