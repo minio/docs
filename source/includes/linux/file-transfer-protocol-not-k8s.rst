@@ -228,49 +228,53 @@ Connect to MinIO Using SFTP with a Certificate Key File
 
 .. versionadded:: RELEASE.2024-05-07T06-41-25Z
 
-MinIO supports user certificate based authentication on SFTP.
 
-This example adds a certificate signature for the MinIO user ``sftp-ca-user1``.
-The signature remains valid for one week after creation.
+MinIO supports mutual TLS (mTLS) certificate-based authentication on SFTP, where both the server and the client verify the authenticity of each other.
 
-Before beginning, the following prerequisites must be met:
+This type of authentication requires the following public key files:
 
-- Create a trusted user Certificate Authority, such as with ``ssh-keygen -f user_ca``
-- Start or restart the MinIO server to support this CA by including the following flag in the command string:
+1. Trusted certificate authority
+2. MinIO Server signed by the certificate authority
+3. User signed by the certificate authority for the client connecting by SFTP and located in the user's ``.ssh`` folder or equivalent for the operating system
 
-  .. code-block:: bash
+The keys must include a `principals list <https://man.openbsd.org/ssh-keygen#CERTIFICATES>`__ of the user(s) that can authenticate with the key:
+
+.. code-block:: console
+   :class: copyable
+
+   ssh-keygen -s ~/.ssh/ca_user_key -I miniouser -n miniouser -V +1h -z 1 miniouser1.pub
+
+-  ``-s`` specifies the path to the certificate authority public key to use for generating this key.
+   The specified public key must have a ``principals`` list that includes this user.
+- ``-I`` specifies the key identity for the public key.
+- ``-n`` creates the ``user principals`` list for which this key is valid. 
+  You must include the user for which this key is valid, and the user must match the username in MinIO.
+- ``-V`` limits the duration for which the generated key is valid. 
+  In this example, the key is valid for one hour.
+  Adjust the duration for your requirements.
+- ``-z`` adds a serial number to the key to distinguish this generated public key from other keys signed by the same certificate authority public key.
+
+MinIO requires specifying the Certificate Authority used to sign the certificates for SFTP access.
+Start or restart the MinIO Server and specify the path to the trusted certificate authority's public key using an ``--sftp="trusted-user-ca-key=PATH"`` flag:
+
+  .. code-block:: console
      :class: copyable 
 
-     --sftp=trusted-user-ca-key=/path/to/.ssh/user_ca.pub
+     minio server {path-to-server} --sftp="trusted-user-ca-key=/path/to/.ssh/ca_user_key.pub" {...other flags}
 
-Repeat the following steps for each user who accesses the MinIO Server by SFTP with a user CA key file:
+When connecting to the MinIO Server with SFTP, the client verifies the MinIO Server's certificate.
+The client then passes its own certificate to the MinIO Server.
+The MinIO Server verifies the key created above by comparing its value to the the known public key from the certificate authority provided at server startup.
 
-1. Create user public key in client PC (testuser1 in this example) ssh-keygen
-2. Provide copy of /home/testuser1/.ssh/id_rsa.pub to CA server.
-3. Create a signature for the identity ``sftp-ca-user1``.
-   (The name must match the username in MinIO).
-   In this example, the signature is valid for one week.
-   
-   .. code-block:: bash
-      :class: copyable
-
-      ssh-keygen -s /home/miniouser/.ssh/user_ca -I sftp=ca-user1-2024-05-03 -n sftp-ca-user1 -V +1w id_rsa.pub
-
-4. Copy ``id_rsa-cert.pub`` to ``/home/sftp-ca-user1/.ssh/id_rsa-cert.pub`` on the client PC.
-
-After the certificate expires, repeat steps 3 and 4.
-Alternatively, leave out the -V +1w argument when creating the signature to to add a certificate that doesn't expire.
-
-Once completed the trusted user can connect to the MinIO server over SFTP:
+Once the MinIO Server verifies the client's certificate, the user can connect to the MinIO server over SFTP:
 
 .. code-block:: bash
    :class: copyable:
    
    sftp -P <SFTP port> <server IP>
 
-
-Force use of service account or ldap for authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Require service account or LDAP for authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To force authentication to SFTP using LDAP or service account credentials, append a suffix to the username.
 Valid suffixes are either ``=ldap`` or ``=svc``.

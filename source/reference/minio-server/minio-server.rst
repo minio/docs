@@ -194,7 +194,7 @@ The command accepts the following arguments:
  
       * - ``trusted-user-ca-key``
         - Specifies a file containing public key of a certificate authority that is trusted to sign user certificates for authentication.
-          The file must contain a user principals list, and the list must include the user that is authenticating. 
+          The file must contain a `user principals list <https://man.openbsd.org/ssh-keygen#CERTIFICATES>`__, and the list must include the user(s) that can authenticate with the key. 
         - Absolute path or relative path from current location to the user's trusted certificate authority public key file.
 
       * - ``pub-key-algos``
