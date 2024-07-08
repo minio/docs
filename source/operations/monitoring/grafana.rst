@@ -23,7 +23,7 @@ Prerequisites
 MinIO Grafana Dashboard
 -----------------------
 
-MinIO provides two official Grafana Dashboards you can download from the Grafana Dashboard portal.
+MinIO provides several official Grafana Dashboards you can download from the Grafana Dashboard portal.
 
 1. :ref:`MinIO Server metrics <minio-server-grafana-metrics>`
 2. :ref:`MinIO Bucket metrics <minio-buckets-grafana-metrics>`
