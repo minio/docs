@@ -38,7 +38,7 @@ Configure Prometheus to Collect and Alert using MinIO Metrics
 1) Generate the Scrape Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin prometheus generate` command to generate the scrape configuration for use by Prometheus in making scraping requests:
+Use the :mc:`mc admin prometheus generate` command to generate the scrape configuration for use by Prometheus in making scraping requests:
 
 .. tab-set::
 
