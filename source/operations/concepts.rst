@@ -121,6 +121,10 @@ For deployments which have multiple server pools, you can :ref:`decommission <mi
 Once started, decommissioning cannot be stopped.
 MinIO intends decommissioning for use with removing older pools with aged hardware, and not as an operation performed regularly within any deployment.
 
+.. include:: /includes/common-installation.rst
+   :start-after: start-pool-order-must-not-change
+   :end-before: end-pool-order-must-not-change
+
 How do I manage one or more MinIO instances or clusters?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

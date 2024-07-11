@@ -260,3 +260,28 @@ As such the restart procedure is non-disruptive to applications and ongoing oper
 Do **not** perform "rolling" (e.g. one node at a time) restarts.
 
 .. end-nondisruptive-upgrade-desc
+
+.. start-pool-order-must-not-change
+
+.. admonition:: Maintain pool order when decommissioning and then adding
+   :class: note
+
+   If you decommission one pool in a multiple pool deployment, you cannot use the same node sequence for a new pool.
+   For example, consider a deployment with the following pools:
+
+   .. code-block::
+
+      https://minio-{1...4}.example.net/mnt/drive-{1...4}
+      https://minio-{5...8}.example.net/mnt/drive-{1...4}
+      https://minio-{9...12}.example.net/mnt/drive-{1...4}
+
+   If you decommission the ``minio-{5...8}`` pool, you cannot add a new pool with the same node numbering.
+   You must add the new pool *after* ``minio-{9...12}``:
+
+   .. code-block::
+
+      https://minio-{1...4}.example.net/mnt/drive-{1...4}
+      https://minio-{9...12}.example.net/mnt/drive-{1...4}
+      https://minio-{13...16}.example.net/mnt/drive-{1...4}
+
+.. end-pool-order-must-not-change
