@@ -90,3 +90,7 @@ Decommission a Tenant Server Pool
 MinIO Operator 4.4.13 and later support decommissioning a server pool in a Tenant.
 Specifically, you can follow the :minio-docs:`Decommission a Server pool <minio/linux/operations/install-deploy-manage/decommission-server-pool.html>` procedure to remove the pool from the tenant, then edit the tenant YAML to drop the pool from the StatefulSet.
 When removing the Tenant pool, ensure the ``spec.pools.[n].name`` fields have values for all remaining pools.
+
+.. include:: /includes/common-installation.rst
+   :start-after: start-pool-order-must-not-change
+   :end-before: end-pool-order-must-not-change
