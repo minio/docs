@@ -62,7 +62,7 @@ MinIO provides scraping endpoints for the following metric groups:
 
 
 MinIO by default requires authentication for scraping the metrics endpoints.
-Use the :mc-cmd:`mc admin prometheus generate` command to generate the necessary bearer tokens. 
+Use the :mc:`mc admin prometheus generate` command to generate the necessary bearer tokens. 
 You can alternatively disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
 
 .. _minio-console-metrics:
