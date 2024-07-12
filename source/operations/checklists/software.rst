@@ -28,10 +28,19 @@ MinIO Pre-requisites
        Check with your operating system's documentation for how to synchronize time with a time server.
 
    * - :octicon:`circle`
-     - Disable system services that index, scan, or audit the filesystem, system-level calls, or kernel-level calls (``mlocate``, ``auditd``). 
+     - Disable system services that index, scan, or audit the filesystem, system-level calls, or kernel-level calls
        These services can reduce performance due to resource contention or interception of MinIO operations.
 
-       You can alternatively configure these services to ignore or exclude MinIO directories and processes.
+       The following is a non-exhaustive list of services or softwares which should be disabled on hosts running MinIO:
+
+       - ``mlocate`` or ``plocate``
+       - ``updatedb``
+       - ``auditd``
+       - ``fstrim``
+       - Crowdstrike Falcon
+       - Antivirus (``clamav``)
+
+       You can alternatively configure these services to ignore or exclude the MinIO Server process and *all* drives or drive paths accessed by MinIO.
 
    * - :octicon:`circle` 
      - System administrator access to the remote servers
