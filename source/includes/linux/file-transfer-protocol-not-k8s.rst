@@ -231,12 +231,12 @@ Connect to MinIO Using SFTP with a Certificate Key File
 
 MinIO supports mutual TLS (mTLS) certificate-based authentication on SFTP, where both the server and the client verify the authenticity of each other.
 
-This type of authentication requires the following public key files:
+This type of authentication requires the following:
 
-1. Trusted certificate authority
-2. MinIO Server signed by the certificate authority
-3. User signed by the certificate authority for the client connecting by SFTP and located in the user's ``.ssh`` folder or equivalent for the operating system
-
+1. Public key file for the trusted certificate authority
+2. Public key file for the MinIO Server minted and signed by the trusted certificate authority
+3. Public key file for the user minted and signed by the trusted certificate authority for the client connecting by SFTP and located in the user's ``.ssh`` folder (or equivalent for the operating system)
+   
 The keys must include a `principals list <https://man.openbsd.org/ssh-keygen#CERTIFICATES>`__ of the user(s) that can authenticate with the key:
 
 .. code-block:: console
