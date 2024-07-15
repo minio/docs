@@ -198,6 +198,28 @@ User DN Search Filter
    :start-after: start-minio-ad-ldap-user-dn-search-filter
    :end-before: end-minio-ad-ldap-user-dn-search-filter
          
+User DN Attributes
+~~~~~~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_IDENTITY_LDAP_USER_DN_ATTRIBUTES
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: identity_ldap user_dn_attributes
+         :delimiter: " "
+
+.. include:: /includes/common-minio-external-auth.rst
+   :start-after: start-minio-ad-ldap-user-dn-attributes
+   :end-before: end-minio-ad-ldap-user-dn-attributes
+
 Enabled
 ~~~~~~~
 

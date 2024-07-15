@@ -3,7 +3,7 @@
 Overview
 --------
 
-Starting with :minio-release:`MinIO Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the File Transfer Protocol (FTP) to interact with the objects on a MinIO deployment.
+Starting with :minio-release:`MinIO Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the File Transfer Protocol (FTP) or SSH File Transfer Protocol (SFTP) to interact with the objects on a MinIO deployment.
 
 You must specifically enable FTP or SFTP when starting the server.
 Enabling either server type does not affect other MinIO features.
@@ -67,7 +67,7 @@ Specifically:
 
 - For read operations, MinIO only returns the latest version of the requested object(s) to the FTP client.
 - For write operations, MinIO applies normal versioning behavior and creates a new object version at the specified namespace.
-  ``rm`` and ``rmdir`` operations create ``DeleteMarker`` objects.
+  ``delete`` and ``rmdir`` operations create ``DeleteMarker`` objects.
 
 
 Authentication and Access
@@ -223,3 +223,71 @@ The following example connects to an SFTP server, lists the contents of a bucket
    Fetching /runner/chunkdocs/metadata to metadata
    metadata                               100%  226    16.6KB/s   00:00
 
+Connect to MinIO Using SFTP with a Certificate Key File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: RELEASE.2024-05-07T06-41-25Z
+
+
+MinIO supports mutual TLS (mTLS) certificate-based authentication on SFTP, where both the server and the client verify the authenticity of each other.
+
+This type of authentication requires the following:
+
+1. Public key file for the trusted certificate authority
+2. Public key file for the MinIO Server minted and signed by the trusted certificate authority
+3. Public key file for the user minted and signed by the trusted certificate authority for the client connecting by SFTP and located in the user's ``.ssh`` folder (or equivalent for the operating system)
+   
+The keys must include a `principals list <https://man.openbsd.org/ssh-keygen#CERTIFICATES>`__ of the user(s) that can authenticate with the key:
+
+.. code-block:: console
+   :class: copyable
+
+   ssh-keygen -s ~/.ssh/ca_user_key -I miniouser -n miniouser -V +1h -z 1 miniouser1.pub
+
+-  ``-s`` specifies the path to the certificate authority public key to use for generating this key.
+   The specified public key must have a ``principals`` list that includes this user.
+- ``-I`` specifies the key identity for the public key.
+- ``-n`` creates the ``user principals`` list for which this key is valid. 
+  You must include the user for which this key is valid, and the user must match the username in MinIO.
+- ``-V`` limits the duration for which the generated key is valid. 
+  In this example, the key is valid for one hour.
+  Adjust the duration for your requirements.
+- ``-z`` adds a serial number to the key to distinguish this generated public key from other keys signed by the same certificate authority public key.
+
+MinIO requires specifying the Certificate Authority used to sign the certificates for SFTP access.
+Start or restart the MinIO Server and specify the path to the trusted certificate authority's public key using an ``--sftp="trusted-user-ca-key=PATH"`` flag:
+
+  .. code-block:: console
+     :class: copyable 
+
+     minio server {path-to-server} --sftp="trusted-user-ca-key=/path/to/.ssh/ca_user_key.pub" {...other flags}
+
+When connecting to the MinIO Server with SFTP, the client verifies the MinIO Server's certificate.
+The client then passes its own certificate to the MinIO Server.
+The MinIO Server verifies the key created above by comparing its value to the the known public key from the certificate authority provided at server startup.
+
+Once the MinIO Server verifies the client's certificate, the user can connect to the MinIO server over SFTP:
+
+.. code-block:: bash
+   :class: copyable:
+   
+   sftp -P <SFTP port> <server IP>
+
+Require service account or LDAP for authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To force authentication to SFTP using LDAP or service account credentials, append a suffix to the username.
+Valid suffixes are either ``=ldap`` or ``=svc``.
+
+.. code-block:: console
+
+   > sftp -P 8022 my-ldap-user=ldap@[minio@localhost]:/bucket
+
+
+.. code-block:: console
+
+   > sftp -P 8022 my-ldap-user=svc@[minio@localhost]:/bucket
+
+
+- Replace ``my-ldap-user`` with the username to use.
+- Replace ``[minio@localhost]`` with the address of the MinIO server.

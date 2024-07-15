@@ -192,6 +192,11 @@ The command accepts the following arguments:
         - Path to the user's private key file.
         - Absolute path or relative path from current location to the key file to use.
  
+      * - ``trusted-user-ca-key``
+        - Specifies a file containing public key of a certificate authority that is trusted to sign user certificates for authentication.
+          The file must contain a `user principals list <https://man.openbsd.org/ssh-keygen#CERTIFICATES>`__, and the list must include the user(s) that can authenticate with the key. 
+        - Absolute path or relative path from current location to the user's trusted certificate authority public key file.
+
       * - ``pub-key-algos``
         - Comma-separated list of the public key algorithms to support.
         - 
@@ -253,6 +258,9 @@ The command accepts the following arguments:
              hmac-sha1
              hmac-sha1-96
 
+      * - ``disable-password-auth``
+        - Disable password authentication.
+        - ``true``
 
    For example:
 

@@ -211,6 +211,24 @@ Specify the password for the :ref:`Lookup-Bind
 
 .. end-minio-ad-ldap-lookup-bind-password
 
+.. start-minio-ad-ldap-user-dn-attributes
+
+.. versionadded:: RELEASE.2024-06-06T09-36-42Z
+
+Comma-separated list of user DN attributes.
+
+Some valid values include, ``uid,cn,mail,sshPublicKey``.
+
+To enable public authentication for LDAP users, pass ``sshPublicKey`` as a DN attribute.
+The user can then use the passed SSH Public Key to log in to SFTP servers.
+
+.. code-block:: text
+   :class: copyable
+
+   mc idp ldap update ALIAS user_dn_attributes=sshPublicKey
+
+.. end-minio-ad-ldap-user-dn-attributes
+
 .. start-minio-ad-ldap-user-dn-search-base-dn
 
 Specify the base Distinguished Name (DN) MinIO uses when querying for 
