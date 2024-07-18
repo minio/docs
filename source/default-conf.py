@@ -331,7 +331,7 @@ rst_prolog = """
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
 .. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`
 .. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`
-.. |operator-version-stable| replace:: OPERATOR
+.. |operator-version-stable| replace:: 5.0.15
 .. |helm-charts| replace:: `Helm Charts <https://github.com/minio/operator/tree/vOPERATOR/helm>`__
 .. |helm-operator-chart| replace:: `Helm Operator Charts <https://github.com/minio/operator/blob/vOPERATOR/helm/operator>`__
 .. |helm-tenant-chart| replace:: `Helm Tenant Charts <https://github.com/minio/operator/tree/vOPERATOR/helm/tenant>`__
