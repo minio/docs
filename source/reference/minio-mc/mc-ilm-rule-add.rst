@@ -131,10 +131,10 @@ Parameters
 
    The number of days to retain an object after being created. 
    MinIO marks the object for deletion after the specified number of days pass. 
-   Specify the number of days as an integer, e.g. ``30`` for 30 days.
+   Specify the number of days as an integer, for example ``30`` for 30 days.
 
    For versioned buckets, the expiry rule applies only to the *current* object version. 
-   Use the :mc-cmd:`~mc ilm rule add --noncurrent-expire-days` option to apply expiration behavior to noncurrent object versions.
+   Use either the :mc-cmd:`~mc ilm rule add --noncurrent-expire-days` flag or the :mc-cmd:`~mc ilm rule add --expire-all-object-versions` flag to apply expiration behavior to noncurrent object versions.
 
    MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
@@ -357,19 +357,19 @@ Examples
 Expire All Bucket Contents After Number of Days
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc ilm rule add` with :mc-cmd:`~mc ilm rule add --expire-days` to mark bucket contents for expiration after a number of days pass from the object's creation:
+Use :mc:`mc ilm rule add` with the :mc-cmd:`~mc ilm rule add --expire-all-object-versions` and :mc-cmd:`~mc ilm rule add --expire-days` flags to mark all current and non-current bucket contents for expiration after a number of days pass from the object's creation:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule add ALIAS/PATH --expire-days "DAYS" 
+   mc ilm rule add ALIAS/PATH --expire-all-object-versions --expire-days "DAYS" 
 
 - Replace :mc-cmd:`ALIAS <mc ilm rule add ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
 
 - Replace :mc-cmd:`PATH <mc ilm rule add ALIAS>` with the path to the bucket on the S3-compatible host.
 
-- Replace :mc-cmd:`DATE <mc ilm rule add --expire-days>` with the number of days after which to expire the object. 
-  For example, specify ``30`` to expire the object 30 days after creation.
+- Replace :mc-cmd:`DAYS <mc ilm rule add --expire-days>` with the number of days after which to expire each object. 
+  For example, specify ``30`` to expire objects 30 days after creation.
 
 Transition Non-Current Object Versions at a Prefix to a Different Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -379,7 +379,7 @@ Use the :mc:`mc ilm rule add` with :mc-cmd:`~mc ilm rule add --prefix` and :mc-c
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule add --prefix "doc/" --transition-days "90" --trasition-tier "MINIOTIER-1"  \
+   mc ilm rule add --prefix "doc/" --transition-days "90" --transition-tier "MINIOTIER-1"  \
           --noncurrent-transition-days "45" --noncurrent-transition-tier "MINIOTIER-2"    \
           myminio/mybucket
 
@@ -424,6 +424,20 @@ The command selects the following objects:
 - Non-current objects older than 45 days larger than 1MiB.
   
 Selected objects transition to ``MINIOTIER-1``.
+
+Remove Delete Markers
+~~~~~~~~~~~~~~~~~~~~~
+
+The following command removes delete markers for objects where the delete marker is the only version of the object that remains.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc ilm rule add ALIAS/PATH --expire-delete-marker 
+
+- Replace :mc-cmd:`ALIAS <mc ilm rule add ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc ilm rule add ALIAS>` with the path to the bucket on the S3-compatible host.
 
 Required Permissions
 --------------------
