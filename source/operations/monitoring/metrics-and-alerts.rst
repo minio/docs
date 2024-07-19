@@ -118,6 +118,76 @@ Available Metrics
 MinIO publishes a number of metrics at the cluster, node, or bucket levels.
 Each metric includes a label for the MinIO server which generated that metric.
 
+
+
+Metrics v3
+~~~~~~~~~~
+
+- :ref:`API Metrics <minio-available-v3-api-metrics>`
+- :ref:`Audit Metrics <minio-available-v3-audit-metrics>`
+- :ref:`Cluster Metrics <minio-available-v3-cluster-metrics>`
+- :ref:`Debug Metrics <minio-available-v3-debug-metrics>`
+- :ref:`ILM Metrics <minio-available-v3-ilm-metrics>`
+- :ref:`Logger webhook Metrics <minio-available-v3-logger-webhook-metrics>`
+- :ref:`Notification Metrics <minio-available-v3-notification-metrics>`
+- :ref:`Replication Metrics <minio-available-v3-replication-metrics>`
+- :ref:`Scanner Metrics <minio-available-v3-scanner-metrics>`
+- :ref:`System Metrics <minio-available-v3-system-metrics>`
+
+
+.. _minio-available-v3-api-metrics:
+
+.. include:: /includes/common-metrics-v3-api.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-audit-metrics:
+
+.. include:: /includes/common-metrics-v3-audit.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-cluster-metrics:
+
+.. include:: /includes/common-metrics-v3-cluster.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-debug-metrics:
+
+.. include:: /includes/common-metrics-v3-debug.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-ilm-metrics:
+
+.. include:: /includes/common-metrics-v3-ilm.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-logger-webhook-metrics:
+
+.. include:: /includes/common-metrics-v3-logger-webhook.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-notification-metrics:
+
+.. include:: /includes/common-metrics-v3-notification.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-replication-metrics:
+
+.. include:: /includes/common-metrics-v3-replication.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-scanner-metrics:
+
+.. include:: /includes/common-metrics-v3-scanner.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-system-metrics:
+
+.. include:: /includes/common-metrics-v3-system.md
+   :parser: myst_parser.sphinx_
+
+
+Metrics v2
+~~~~~~~~~~
 .. versionchanged:: MinIO RELEASE.2023-07-21T21-12-44Z
 
    Bucket metrics have moved to use their own, separate endpoint.
