@@ -190,7 +190,7 @@ The example above uses the following arguments:
        MinIO recommends specifying this optional prefix for remote storage tiers
        which contain other data, including transitioned objects from other MinIO
        deployments. This prefix should provide a clear reference back to the
-       source MinIO deployment to faciliate ease of operations related to
+       source MinIO deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
    * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
@@ -202,8 +202,8 @@ The example above uses the following arguments:
        The following S3 storage classes meet MinIO's requirements as a remote tier:
 
        - ``STANDARD``
-       - ``STANDARD_IA``
-       - ``STANDARD_ONEZONE``
+       - ``STANDARD-IA``
+       - ``STANDARD-ONEZONE``
 
        Omit this value to use the default storage class for the bucket.
        Specifying this value overrides the bucket storage class.
