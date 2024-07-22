@@ -263,8 +263,8 @@ The command accepts the following arguments:
       .. tab-item:: s3
 
          - ``STANDARD``
-         - ``STANDARD_IA``
-         - ``ONEZONE_IA``
+         - ``STANDARD-IA``
+         - ``ONEZONE-IA``
 
          For more information, see :s3-docs:`Using Amazon S3 storage classes <storage-class-intro.html>`.
 
