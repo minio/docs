@@ -12,8 +12,8 @@ $theme-properties: (
     --headings-color: $black #E3EEEF,
 
     // Theme
-    --theme-light-bg: $light-200 $dark-200,
-    --theme-light-hover-bg: $light-300 $dark-300,
+    --theme-light-bg: $light-100 $dark-200,
+    --theme-light-hover-bg: $light-200 $dark-300,
 
     // Header
     --header-bg: $header-light-bg $dark-0,
@@ -62,8 +62,8 @@ $theme-properties: (
     --table-border-color: $light-300 $dark-200,
 
     // Code
-    --code-bg: $light-300 lighten($dark-500, 17.5%),
-    --code-hover-bg: $light-400 #9fa8b9,
+    --code-bg: $light-200 lighten($dark-500, 17.5%),
+    --code-hover-bg: $light-300 #9fa8b9,
     --code-color: $black $dark-0,
     --code-link-color: #006DA0 #12243c,
     --code-link-bg: #cde4ff #71a7ed,
@@ -124,7 +124,7 @@ $theme-properties: (
     --is-hit-icon-color: $black $light-500,
     --is-search-bg: $white $dark-100,
     --is-search-icon: url(../img/icons/search-light.svg) url(../img/icons/search-dark.svg),
-    --is-refine-list-border-color: $light-400 $dark-300,
+    --is-refine-list-border-color: $light-200 $dark-300,
     --is-hit-platform-border-color: #c5cad0 $dark-300,
     --is-loader-circle-stroke: #c2c8d1 $dark-300,
     --is-meta-key-border-color: #c5cad0 $dark-400,

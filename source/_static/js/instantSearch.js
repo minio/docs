@@ -104,6 +104,7 @@ window.addEventListener("DOMContentLoaded", () => {
       minio: {
         refinementList: {
           platform: [activePlatform],
+          site: "docs"
         },
       },
     },
@@ -286,6 +287,9 @@ window.addEventListener("DOMContentLoaded", () => {
         },
       },
     }),
+    instantsearch.widgets.configure({
+      filters: `site:docs`, 
+    })
   ]);
 
   // Function to clear search field and filters
