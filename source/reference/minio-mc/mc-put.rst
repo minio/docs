@@ -46,8 +46,10 @@ The :mc:`mc put` uploads an object from the local file system to a bucket on a t
 
          mc [GLOBALFLAGS] put                      \
                           TARGET                   \
-                          [--encrypt-key value]    \
-                          [--encrypt value]        \
+                          [--enc-c value]          \
+                          [--enc-kms value]        \
+                          [--enc-s3 value]         \
+                          [--if-not-exists]        \
                           [--parallel, -P integer] \
                           [--part-size, -s string]
 
@@ -74,23 +76,29 @@ Parameters
    - ``ALIAS/BUCKET/OBJECT-NAME``
    - ``ALIAS/BUCKET/PREFIX/OBJECT-NAME``
 
-.. mc-cmd:: --encrypt
+.. mc-cmd:: --enc-c
    :optional:
 
-   Specify the key to use for decrypting and encrypting the uploaded object.
+   Encrypt or decrypt objects using client provided keys.
+   Repeat the flag to pass multiple keys.
 
-   Requires that you also specify the key to use with the :mc-cmd:`~mc put --encrypt-key` flag.
+   Keys must be in either Raw Base64 or Hex format.
 
-   Alternatively, set the :envvar:`MC_ENCRYPT` environment variable.
-
-.. mc-cmd:: --encrypt-key
+.. mc-cmd:: --enc-kms
    :optional:
-   
-   Specify the key to use for decrypting and encrypting the uploaded object.
 
-   Requires that you also pass the :mc-cmd:`~mc put --encrypt` flag set to ``TRUE``.
+   Encrypt or decrypt objects using specific server-side keys.
+   Repeat the flag to pass multiple keys.
 
-   Alternatively, set the :envvar:`MC_ENCRYPT_KEY` environment variable.
+   Defaults to the value in the :envvar:`MC_ENC_KMS` environment variable.
+
+.. mc-cmd:: --enc-s3
+   :optional:
+
+   Encrypt or decrypt objects using default server-side keys and configurations.
+   Repeat the flag to pass multiple keys.
+
+   Defaults to the value in the :envvar:`MC_ENC_S3` environment variable.
 
 .. mc-cmd:: --parallel, --P
    :optional:

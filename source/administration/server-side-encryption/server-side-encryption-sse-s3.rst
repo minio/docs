@@ -23,7 +23,7 @@ allowing clients to take advantage of server processing power to secure objects
 at the storage layer (encryption-at-rest). SSE also provides key functionality
 to regulatory and compliance requirements around secure locking and erasure.
 
-MinIO SSE uses the :minio-git:`MinIO Key Encryption Service (KES) <kes>` and an
+MinIO SSE uses the :kes-docs:`MinIO Key Encryption Service (KES) <>` and an
 external Key Management Service (KMS) for performing secured cryptographic
 operations at scale. MinIO also supports client-managed key management, where
 the application takes full responsibility for creating and managing encryption
@@ -34,8 +34,7 @@ Key Management System (KMS). You must specify the |EK| using the
 :envvar:`MINIO_KMS_KES_KEY_NAME` environment variable when starting up the
 MinIO server. MinIO uses the same EK for *all* SSE-S3 cryptographic operations.
 
-You can enable bucket-default SSE-S3 encryption using the 
-:mc:`mc encrypt set` command:
+You can enable bucket-default SSE-S3 encryption using the :mc:`mc encrypt set` command:
 
 .. code-block:: shell
    :class: copyable
@@ -45,16 +44,15 @@ You can enable bucket-default SSE-S3 encryption using the
 - Replace ``play/mybucket`` with the :mc:`alias <mc alias>` and bucket 
   on which you want to enable automatic SSE-KMS encryption.
 
-MinIO SSE-S3 is functionally compatible with AWS S3 
-:s3-docs:`Server-Side Encryption with Amazon S3-Managed Keys
-<UsingServerSideEncryption.html>` while expanding support to include the
-following KMS providers:
+MinIO SSE-S3 is functionally compatible with AWS S3 :s3-docs:`Server-Side Encryption with Amazon S3-Managed Keys <UsingServerSideEncryption.html>` while expanding support to include the following KMS providers:
 
-- :ref:`AWS SecretsManager <minio-sse-aws>`
-- :ref:`Google Cloud SecretManager <minio-sse-gcp>`
-- :ref:`Azure Key Vault <minio-sse-azure>`
-- :ref:`HashiCorp KeyVault <minio-sse-vault>`
-- Thales CipherTrust (formerly Gemalto KeySecure)
+- :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+- :kes-docs:`Azure KeyVault <integrations/azure-keyvault/>`
+- :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+- :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`HashiCorp Vault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
 .. _minio-encryption-sse-s3-quickstart:
 
@@ -73,11 +71,13 @@ supporting |SSE| with SSE-S3 in evaluation and early development environments.
 For extended development or production environments, use one of the following
 supported external Key Management Services (KMS):
 
-- :ref:`AWS SecretsManager <minio-sse-aws>`
-- :ref:`Google Cloud SecretManager <minio-sse-gcp>`
-- :ref:`Azure Key Vault <minio-sse-azure>`
-- :ref:`HashiCorp KeyVault <minio-sse-vault>`
-- Thales CipherTrust (formerly Gemalto KeySecure)
+- :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
+- :kes-docs:`Azure KeyVault <integrations/azure-keyvault/>`
+- :kes-docs:`Entrust KeyControl <integrations/entrust-keycontrol/>`
+- :kes-docs:`Fortanix SDKMS <integrations/fortanix-sdkms/>`
+- :kes-docs:`Google Cloud Secret Manager <integrations/google-cloud-secret-manager/>`
+- :kes-docs:`HashiCorp Vault <integrations/hashicorp-vault-keystore/>`
+- :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
 .. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-play-sandbox-warning
@@ -85,26 +85,20 @@ supported external Key Management Services (KMS):
 
 This procedure requires the following components:
 
-- Install :mc:`mc` on a machine with network access to the source
-  deployment. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
-  instructions on downloading and installing ``mc``.
+- Install :mc:`mc` on a machine with network access to the source deployment. 
+  See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
 
-
-- Install :minio-git:`MinIO Key Encryption Service (KES) <kes>` on a machine
-  with internet access. See the ``kes``
-  :minio-git:`Getting Started <kes/wiki/Getting-Started>` guide for 
-  instructions on downloading, installing, and configuring KES.
+- Install :kes-docs:`MinIO Key Encryption Service (KES) <>` on a machine with internet access. 
+  See the KES :kes-docs:`Getting Started <tutorials/getting-started/>` guide for instructions on downloading, installing, and configuring KES.
 
 
 1) Create an Encryption Key for SSE-S3 Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :minio-git:`kes <kes>` commandline tool to create a new External Key
-(EK) for use with SSE-S3 Encryption.
+Use the :kes-docs:`kes <cli>` command line tool to create a new External Key (EK) for use with SSE-S3 Encryption.
 
 Issue the following command to retrieve the root 
-:minio-git:`identity <kes/wiki/Configuration#policy-configuration>` for the KES
-server:
+:minio-git:`identity <kes/wiki/Configuration#policy-configuration>` for the KES server connected to the KES ``play`` sandbox:
 
 .. code-block:: shell
    :class: copyable
@@ -127,30 +121,23 @@ Set the following environment variables in the terminal or shell:
    :width: 100%
 
    * - ``KES_CLIENT_KEY``
-     - The private key for an :minio-git:`identity
-       <kes/wiki/Configuration#policy-configuration>` on the KES server.
-       The identity must grant access to at minimum the ``/v1/create``,
-       ``/v1/generate``, and ``/v1/list`` :minio-git:`API endpoints 
-       <kes/wiki/Server-API#api-overview>`. This step uses the root
-       identity for the MinIO ``play`` KES sandbox, which provides access
-       to all operations on the KES server.
+     - The private key for an :kes-docs:`identity <concepts/#authorization>` on the KES server.
+       The identity must grant access to at minimum the ``/v1/create``, ``/v1/generate``, and ``/v1/list`` :kes-docs:`API endpoints <concepts/server-api/>`. 
+       This step uses the ``root`` identity for the MinIO ``play`` KES sandbox, which provides access to all operations on the KES server.
 
    * - ``KES_CLIENT_CERT``
-     - The corresponding certificate for the :minio-git:`identity
-       <kes/wiki/Configuration#policy-configuration>` on the KES server.
-       This step uses the root identity for the MinIO ``play`` KES
-       sandbox, which provides access to all operations on the KES server.
+     - The corresponding certificate for the :kes-docs:`identity <concepts/#authorization>` on the KES server.
+       This step uses the ``root`` identity for the MinIO ``play`` KES sandbox, which provides access to all operations on the KES server.
 
-Issue the following command to create a new |EK| through
-KES:
+Issue the following command to create a new |EK| through the :kes-docs:`KES CLI <cli/kes-key/create/>`:
 
 .. code-block:: shell
    :class: copyable
 
    kes key create my-minio-sse-s3-key
 
-This tutorial uses the example ``my-minio-sse-s3-key`` name for ease of
-reference. Specify a unique key name to prevent collision with existing keys.
+This tutorial uses the example ``my-minio-sse-s3-key`` name for ease of reference. 
+Specify a unique key name to prevent collision with existing keys.
 
 2) Configure MinIO for SSE-S3 Object Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,8 +193,7 @@ Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
    mc admin service restart ALIAS
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
-restart.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
 4) Configure Automatic Bucket Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

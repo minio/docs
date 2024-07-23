@@ -18,7 +18,7 @@ Server-Side Encryption of Objects
 MinIO Server-Side Encryption (SSE) protects objects as part of write operations, allowing clients to take advantage of server processing power to secure objects at the storage layer (encryption-at-rest). 
 SSE also provides key functionality to regulatory and compliance requirements around secure locking and erasure.
 
-MinIO SSE uses the :minio-git:`MinIO Key Encryption Service (KES) <kes>` and an external Key Management Service (KMS) for performing secured cryptographic operations at scale. 
+MinIO SSE uses the :kes-docs:`MinIO Key Encryption Service (KES) <>` and an external Key Management Service (KMS) for performing secured cryptographic operations at scale. 
 MinIO also supports client-managed key management, where the application takes full responsibility for creating and managing encryption keys for use with MinIO SSE. 
 
 MinIO SSE is feature and API compatible with :s3-docs:`AWS Server-Side Encryption <server-side-encryption.html>` and supports the following encryption strategies:

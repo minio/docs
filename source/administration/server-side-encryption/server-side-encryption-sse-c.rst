@@ -76,35 +76,34 @@ Encrypting an object using SSE-C prevents MinIO from applying
 Quickstart
 ----------
 
-MinIO SSE-C requires the client to perform all key creation and storage
-operations.
+MinIO SSE-C requires the client to perform all key creation and storage operations.
 
-This procedure uses :mc:`mc` for performing operations on the source MinIO
-deployment. Install :mc:`mc` on a machine with network access to the source
-deployment. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
-instructions on downloading and installing ``mc``.
+This procedure uses :mc:`mc` for performing operations on the source MinIO deployment. 
+Install :mc:`mc` on a machine with network access to the source deployment. 
+See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
 
-The SSE-C key *must* be a 256-bit base64-encoded string. The client
-application is responsible for generation and storage of the encryption key.
-MinIO does *not* store SSE-C encryption keys and cannot decrypt SSE-C
-encrypted objects without the client-managed key.
+The SSE-C key *must* be a 256-bit raw encoded string or a hex encoded string. 
+The client application is responsible for generation and storage of the encryption key.
+MinIO does *not* store SSE-C encryption keys and cannot decrypt SSE-C encrypted objects without the client-managed key.
+
+.. note::
+
+   Support for hex encoded keys was added in MinIO Client ``RELEASE.2024-06-20T14-50-54Z``.
 
 1) Generate the Encryption Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Generate the 256-bit base64-encoded string for use as the encryption key.
+Generate the 256-bit base64 raw encoded string or a hex encoded string for use as the encryption key.
 
-The following example generates a string that meets the encryption key
-requirements. The resulting string is appropriate for non-production
-environments:
+The following example generates a string that meets the encryption key requirements. 
+The resulting string is appropriate for non-production environments:
 
 .. code-block:: shell
    :class: copyable
 
    cat /dev/urandom | head -c 32 | base64 -
 
-Defer to your organizations requirements for generating cryptographically
-secure encryption keys.
+Defer to your organizations requirements for generating cryptographically secure encryption keys.
 
 Copy the encryption key for use in the next step.
 
@@ -117,8 +116,7 @@ MinIO supports the following AWS S3 headers for specifying SSE-C encryption:
 
 - ``X-Amz-Server-Side-Encryption-Customer-Key`` set to the encryption key value.
 
-- ``X-Amz-Server-Side-Encryption-Customer-Key-MD5`` to the 128-bit MD5 digest of 
-  the encryption key.
+- ``X-Amz-Server-Side-Encryption-Customer-Key-MD5`` to the 128-bit MD5 digest of the encryption key.
 
 The MinIO :mc:`mc` commandline tool S3-compatible SDKs include specific syntax
 for setting headers. Certain :mc:`mc` commands like :mc:`mc cp` include specific
