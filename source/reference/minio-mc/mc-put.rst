@@ -90,7 +90,7 @@ Parameters
    Encrypt or decrypt objects using specific server-side keys.
    Repeat the flag to pass multiple keys.
 
-   Defaults to the value in the :envvar:`MC_ENC_KMS` environment variable.
+   Defaults to the value in the ``MC_ENC_KMS`` environment variable.
 
 .. mc-cmd:: --enc-s3
    :optional:
@@ -98,7 +98,7 @@ Parameters
    Encrypt or decrypt objects using default server-side keys and configurations.
    Repeat the flag to pass multiple keys.
 
-   Defaults to the value in the :envvar:`MC_ENC_S3` environment variable.
+   Defaults to the value in the ``MC_ENC_S3`` environment variable.
 
 .. mc-cmd:: --parallel, --P
    :optional:
