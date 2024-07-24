@@ -42,7 +42,7 @@ input the contents from a ``.json`` file, such as one produced by
       .. code-block:: shell
          :class: copyable
 
-         mc ilm import myminio/mydata <> mydata-lifecycle-config.json
+         mc ilm import myminio/mydata < mydata-lifecycle-config.json
 
    .. tab-item:: SYNTAX
 
