@@ -24,7 +24,7 @@ SSE also provides key functionality to regulatory and compliance requirements ar
 MinIO SSE uses the :kes-docs:`MinIO Key Encryption Service (KES) <>` and a :kes-docs:`supported external Key Management Service (KMS) <#supported-kms-targets>` for performing secured cryptographic operations at scale. 
 MinIO also supports client-managed key management, where the application takes full responsibility for creating and managing encryption keys for use with MinIO SSE. 
 
-MinIO SSE-KMS en/decrypts objects using an External Key (EK) managed by a Key Management System (KMS). 
+MinIO SSE-KMS encrypts or decrypts objects using an External Key (EK) managed by a Key Management System (KMS). 
 Each bucket and object can have a separate |EK|, supporting more granular cryptographic operations in the deployment. 
 MinIO can only decrypt an object if it can access both the KMS *and* the |EK| used to encrypt that object.
 
@@ -95,7 +95,7 @@ This procedure requires the following components:
 
 Use the :kes-docs:`kes <cli/>` command line tool to create a new External Key (EK) for use with SSE-KMS Encryption.
 
-Issue the following command to retrieve the root :kes-docs:`identity <concepts/#authorization>` for the ``play`` KES server:
+The following command retrieves the root :kes-docs:`identity <concepts/#authorization>` for the ``play`` KES server:
 
 .. code-block:: shell
    :class: copyable
@@ -126,7 +126,7 @@ Set the following environment variables in the terminal or shell:
      - The corresponding certificate for the :kes-docs:`identity <concepts/#authorization>` on the KES server.
        This step uses the ``root`` identity for the MinIO ``play`` KES sandbox, which provides access to all operations on the KES server.
 
-Issue the following command to create a new |EK| through KES.
+The following command creates a new |EK| through KES.
 
 .. code-block:: shell
    :class: copyable

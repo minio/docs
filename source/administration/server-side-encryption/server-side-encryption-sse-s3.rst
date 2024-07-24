@@ -97,8 +97,7 @@ This procedure requires the following components:
 
 Use the :kes-docs:`kes <cli>` command line tool to create a new External Key (EK) for use with SSE-S3 Encryption.
 
-Issue the following command to retrieve the root 
-:minio-git:`identity <kes/wiki/Configuration#policy-configuration>` for the KES server connected to the KES ``play`` sandbox:
+The following command retrieves the root :minio-git:`identity <kes/wiki/Configuration#policy-configuration>` for the KES server connected to the KES ``play`` sandbox:
 
 .. code-block:: shell
    :class: copyable
@@ -129,7 +128,7 @@ Set the following environment variables in the terminal or shell:
      - The corresponding certificate for the :kes-docs:`identity <concepts/#authorization>` on the KES server.
        This step uses the ``root`` identity for the MinIO ``play`` KES sandbox, which provides access to all operations on the KES server.
 
-Issue the following command to create a new |EK| through the :kes-docs:`KES CLI <cli/kes-key/create/>`:
+The following command creates a new |EK| through the :kes-docs:`KES CLI <cli/kes-key/create/>`:
 
 .. code-block:: shell
    :class: copyable
