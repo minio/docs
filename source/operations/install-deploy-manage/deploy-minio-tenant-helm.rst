@@ -95,7 +95,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
       minio-operator/operator         |operator-version-stable|           v|operator-version-stable|          A Helm chart for MinIO Operator
       minio-operator/tenant           |operator-version-stable|           v|operator-version-stable|          A Helm chart for MinIO Operator
 
-#. Create a local copy of the Helm ``values.yaml``
+#. Download a local copy of the Helm repo's ``values.yaml`` to modify
 
    Download the base ``values.yaml`` object for modification:
 
@@ -172,7 +172,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
    The field must specify a Kubernetes opaque secret whose data payload ``config.env`` contains each MinIO environment variable you want to set.
 
-   The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that sets the root username, password, erasure parity settings, and enables Tenant Console.
+   The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that enables the Tenant Console and sets the root username, root password, and erasure parity settings.
 
    Modify this as needed to reflect your Tenant requirements.
 
@@ -316,7 +316,7 @@ This method may support easier pre-configuration of the Tenant compared to the :
 
    The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that sets the root username, password, erasure parity settings, and enables Tenant Console.
 
-   Modify this as-needed to reflect your Tenant requirements.
+   Modify this as needed to reflect your Tenant requirements.
 
 #. The following Helm command creates a MinIO Tenant using the standard chart:
 

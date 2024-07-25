@@ -187,7 +187,7 @@ Procedure
 
             kubectl apply -k github.com/minio/operator
 
-         In the sample output below, ``configured`` indicates where a new change was applied from the updated CRD:
+         In the sample output below, ``configured``at the end of the line indicates where a new change was applied from the updated CRD:
 
          .. code-block:: shell
 
