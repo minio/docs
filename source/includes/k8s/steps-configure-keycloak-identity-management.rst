@@ -37,58 +37,10 @@ Set the value to any :ref:`policy <minio-policy>` on the MinIO deployment.
 
 MinIO supports multiple methods for configuring Keycloak authentication:
 
-- Using the MinIO Operator Console
 - Using the MinIO Tenant Console
 - Using a terminal/shell and the :mc:`mc idp openid` command
 
 .. tab-set::
-
-   .. tab-item:: MinIO Operator Console
-
-      You can use the MinIO Operator Console to configure Keycloak as the External Identity Provider for the MinIO Tenant.
-      See :ref:`minio-operator-console-connect` for specific instructions.
-
-      Select :guilabel:`Identity Provider` from the left-hand navigation bar, then select :guilabel:`OpenID`.
-      Select :guilabel:`Create Configuration` to create a new configuration.
-
-      Enter the following information into the modal:
-
-      .. list-table::
-         :stub-columns: 1
-         :widths: 30 70
-         :width: 100%
-
-         * - :guilabel:`Name` 
-           - Enter a unique name for the Keycloak instance 
-         
-         * - :guilabel:`Config URL`
-           - Specify the address of the Keycloak OpenID configuration document (|KEYCLOAK_URL|)
-
-             Ensure the ``REALM`` matches the Keycloak realm you want to use for authenticating users to MinIO
-
-         * - :guilabel:`Client ID`
-           - Specify the name of the Keycloak client created in Step 1
-         
-         * - :guilabel:`Client Secret`
-           - Specify the secret credential value for the Keycloak client created in Step 1
-
-         * - :guilabel:`Display Name`
-           - Specify the user-facing name the MinIO Console should display as part of the Single-Sign On (SSO) workflow for the configured Keycloak service
-
-         * - :guilabel:`Scopes` 
-           - Specify the OpenID scopes to include in the JWT, such as ``preferred_username`` or ``email``
-         
-             You can reference these scopes using supported OpenID policy variables for the purpose of programmatic policy configurations
-
-         * - :guilabel:`Redirect URI Dynamic`
-           - Toggle to ``on``
-         
-             Substitutes the MinIO Console address used by the client as part of the Keycloak redirect URI.
-             Keycloak returns authenticated users to the Console using the provided URI.
-             
-             For MinIO Console deployments behind a reverse proxy, load balancer, or similar network control plane, you can instead use the :envvar:`MINIO_BROWSER_REDIRECT_URL` variable to set the redirect address for Keycloak to use.
-
-      Select :guilabel:`Save` to apply the configuration.
 
    .. tab-item:: MinIO Tenant Console
 

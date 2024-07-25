@@ -181,7 +181,6 @@ This method may support easier pre-configuration of the Operator compared to the
       pod/minio-operator-7976b4df5b-x622g   1/1     Running   0          81m
 
       NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)             AGE
-      service/console    ClusterIP   10.105.218.94    <none>        9090/TCP,9443/TCP   81m
       service/operator   ClusterIP   10.110.113.146   <none>        4222/TCP,4233/TCP   81m
 
       NAME                             READY   UP-TO-DATE   AVAILABLE   AGE

@@ -1,3 +1,5 @@
+:orphan:
+
 .. _minio-operator-console:
 
 ======================
@@ -9,6 +11,14 @@ MinIO Operator Console
 .. contents:: Table of Contents
    :local:
    :depth: 2
+
+.. warning::
+
+   MinIO Operator 6.0.0 deprecates and removes the Operator Console.
+
+   You can use either Kustomization or Helm to manage and deploy MinIO Tenants.
+
+   This page provides a historical view at the Operator Console, and will recieve no further updates or corrections.
 
 The Operator Console provides a rich user interface for deploying and 
 managing MinIO Tenants on Kubernetes infrastructure. Installing the 

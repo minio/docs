@@ -133,7 +133,7 @@ Once installation completes, click :guilabel:`View Operator` to view the MinIO O
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you have installed the MinIO Operator from Red Hat OperatorHub, the installation process also configures the :openshift-docs:`OpenShift Service CA Operator <security/certificate_types_descriptions/service-ca-certificates.html>`.
-This Operator manages the TLS certificates required to access the MinIO Operator Console and Tenants.
+This Operator manages the TLS certificates required to access MinIO Tenants.
 It automatically renews and rotates the certificates 13 months before expiration.
 No additional action is required.
 
@@ -287,29 +287,8 @@ You can find the MinIO Operator Interface from the :guilabel:`Operators` left-ha
 3. Select :guilabel:`MinIO Operators` from the list of installed operators.
    The :guilabel:`Status` column must read :guilabel:`Success` to access the Operator interface.
 
-5) Access the Operator Console
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The MinIO Operator includes the Operator Console, a browser-based management interface for managed MinIO tenants.
-
-.. include:: /includes/common/common-k8s-connect-operator-console.rst
-
-You can create a permanent routing rule by creating a :openshift-docs:`Route or Ingress <networking/understanding-networking.html#nw-ne-comparing-ingress-route_understanding-networking>` to allow access from external clients, such as your local computer browser. 
-
-The following steps provides a summary of actions necessary to create a Route.
-
-#. From :guilabel:`Networking`, go to :guilabel:`Routes`
-#. Create a new Route in the MinIO Operator project.
-   Select a recognizable route name, such as ``operator-console-route``.
-#. Set the :guilabel:`Hostname` as per your organizations networking and hostname topology.
-   Omit the hostname to allow OpenShift to generate it automatically
-#. Set the :guilabel:`Service` to :guilabel:`console`
-#. Set the :Guilabel:`Target Port` to  ``9090``
-
-You can then access the Operator Console using the configured Route.
-The Operator Console still requires using the generated JWT token for access, which you can generate at any time using ``oc minio port-forward``.
-
-6) Next Steps
+7) Next Steps
 ~~~~~~~~~~~~~
 
 After deploying the MinIO Operator, you can create a new MinIO Tenant.

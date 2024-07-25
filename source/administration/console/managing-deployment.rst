@@ -18,6 +18,12 @@ You can use the MinIO Console to perform many of the deployment monitoring and m
 - Set up :ref:`site replication <minio-console-site-replication>` to synchronize datacenters for timely access across geographically dispersed workforces or for disaster preparedness.
 - Configure deployment :ref:`settings <minio-console-settings>`.
 
+.. important::
+
+   The MinIO Console is a web-based interface for the MinIO Server.
+
+   It is distinct and independent from the MinIO Kubernetes Operator Console which is deprecated as of Operator 6.0.0.
+
 .. _minio-console-monitoring:
 
 Monitoring
@@ -61,8 +67,6 @@ Audit
    As an alternative, use any webhook-capable database or logging service to capture :ref:`audit logs <minio-logging-publish-audit-logs>` from the Tenant.
 
 The Audit Log section provides an interface for viewing :ref:`audit logs <minio-logging>` collected by a configured PostgreSQL service.
-
-The Audit Logging feature is configured and enabled automatically for MinIO deployments created using the :ref:`MinIO Operator Console <minio-operator-console>`.
 
 Trace
 ~~~~~

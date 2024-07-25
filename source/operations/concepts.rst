@@ -132,7 +132,8 @@ There are several options to manage your MinIO deployments and clusters:
 
 - Use the command line with :mc:`mc` and :mc:`mc admin`
 - The :ref:`MinIO Console <minio-console>` graphical user interface for individual instances
-- In Kubernetes, with the :ref:`MinIO Operator Console <minio-operator-console>`
+
+.. Reference Enterprise Operator Console eventually
 
 .. _minio-rebalance:
 

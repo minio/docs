@@ -47,7 +47,7 @@ Upgrade MinIO Operator 4.5.8 and Later to 5.0.15
    - Your Kubernetes cluster runs 1.21.0 or later
    - Your local host has ``kubectl`` installed and configured with access to the Kubernetes cluster
 
-This procedure upgrades the MinIO Operator from any 4.5.8 or later release to |operator-version-stable|.
+This procedure upgrades the MinIO Operator from any 4.5.8 or later release to 5.0.15
 
 Tenant Custom Resource Definition Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

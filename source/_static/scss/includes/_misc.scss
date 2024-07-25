@@ -380,3 +380,15 @@ table thead tr.header {
    background-color: lightgray;
    box-shadow: none;
 }
+
+// --------------------------------------
+// Improving readability of ordered lists
+// --------------------------------------
+
+div.procedure ol.arabic li > p:first-child {
+   font-weight: bold;
+}
+
+div.procedure ol.arabic li ul.simple li p {
+   font-weight: normal; // stupid hack, not sure how else to fix this
+}

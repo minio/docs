@@ -98,8 +98,8 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
 
 #. Next Steps
 
-   You can deploy MinIO tenants using the MinIO CRD and Kustomize.
+   You can deploy MinIO tenants using the :ref:`MinIO CRD and Kustomize. <minio-k8s-deploy-minio-tenant>`
+   MinIO also provides a :ref:`Helm chart for deploying Tenants <deploy-tenant-helm>`. 
 
-   MinIO also provides a Helm chart for deploying Tenants. 
-   However, MinIO recommends using the same method to install the Operator and deploy Tenants.
+   MinIO recommends using the same method of Tenant deployment and management used to install the Operator.
    Mixing Kustomize and Helm for Operator or Tenant management may increase operational complexity.

@@ -29,8 +29,14 @@ To upgrade from Operator 4.5.8 or earlier, see :ref:`Upgrade MinIO Operator to v
 Upgrade MinIO Operator 5.0.15 to |operator-version-stable|
 ----------------------------------------------------------
 
-Upgrade Operator to |operator-version-stable|
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. important::
+
+   Operator 6.0.0 deprecates the MinIO Operator Console and removes the related resources from the MinIO Operator CRD.
+
+   MinIO does not remove existing Operator Console services, pods, or deployments as per Kubernetes standard procedure.
+   You can remove these resources at your own discretion.
+
+   Use either Kustomization or Helm for managing Tenants moving forward.
 
 .. tab-set::
 
@@ -41,87 +47,79 @@ Upgrade Operator to |operator-version-stable|
 
       If you installed the Operator using :ref:`Helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
 
-      #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+      .. container:: procedure
 
-         Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
-         Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+         #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
 
-      #. Verify the existing Operator installation.
-         Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
+            Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+            Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
+            See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
 
-         If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
+         #. Verify the existing Operator installation.
+            Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
 
-         You can verify the currently installed Operator version by retrieving the object specification for an operator pod in the namespace.
-         The following example uses the ``jq`` tool to filter the necessary information from ``kubectl``:
+            If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
 
-         .. code-block:: shell
-            :class: copyable
+            You can verify the currently installed Operator version by retrieving the object specification for an operator pod in the namespace.
+            The following example uses the ``jq`` tool to filter the necessary information from ``kubectl``:
 
-            kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
+            .. code-block:: shell
+               :class: copyable
 
-         The output resembles the following:
+               kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
 
-         .. code-block:: json
-            :emphasize-lines: 8-10
-            :substitutions:
+            The output resembles the following:
 
-            {
-               "env": [
-                  {
-                     "name": "CLUSTER_DOMAIN",
-                     "value": "cluster.local"
-                  }
-               ],
-               "image": "minio/operator:v5.0.15",
-               "imagePullPolicy": "IfNotPresent",
-               "name": "minio-operator"
-            }
+            .. code-block:: json
+               :emphasize-lines: 8-10
+               :substitutions:
 
-         If your local host does not have the ``jq`` utility installed, you can run the first part of the command and locate the ``spec.containers`` section of the output.
+               {
+                  "env": [
+                     {
+                        "name": "CLUSTER_DOMAIN",
+                        "value": "cluster.local"
+                     }
+                  ],
+                  "image": "minio/operator:v5.0.15",
+                  "imagePullPolicy": "IfNotPresent",
+                  "name": "minio-operator"
+               }
 
-      #. Upgrade Operator with Kustomize
+            If your local host does not have the ``jq`` utility installed, you can run the first part of the command and locate the ``spec.containers`` section of the output.
 
-         The following command upgrades Operator to version |operator-version-stable|:
+         #. Upgrade Operator with Kustomize
 
-         .. code-block:: shell
-            :class: copyable
+            The following command upgrades Operator to version |operator-version-stable|:
 
-            kubectl apply -k github.com/minio/operator
+            .. code-block:: shell
+               :class: copyable
 
-         In the sample output below, ``configured`` indicates where a new change was applied from the updated CRD:
+               kubectl apply -k github.com/minio/operator
 
-         .. code-block:: shell
+            In the sample output below, ``configured`` indicates where a new change was applied from the updated CRD:
 
-            namespace/minio-operator unchanged
-            customresourcedefinition.apiextensions.k8s.io/miniojobs.job.min.io configured
-            customresourcedefinition.apiextensions.k8s.io/policybindings.sts.min.io configured
-            customresourcedefinition.apiextensions.k8s.io/tenants.minio.min.io configured
-            serviceaccount/minio-operator unchanged
-            clusterrole.rbac.authorization.k8s.io/minio-operator-role configured
-            clusterrolebinding.rbac.authorization.k8s.io/minio-operator-binding unchanged
-            service/operator unchanged
-            service/sts unchanged
-            deployment.apps/minio-operator configured
+            .. code-block:: shell
 
-      #. Validate the Operator upgrade
+               namespace/minio-operator unchanged
+               customresourcedefinition.apiextensions.k8s.io/miniojobs.job.min.io configured
+               customresourcedefinition.apiextensions.k8s.io/policybindings.sts.min.io configured
+               customresourcedefinition.apiextensions.k8s.io/tenants.minio.min.io configured
+               serviceaccount/minio-operator unchanged
+               clusterrole.rbac.authorization.k8s.io/minio-operator-role configured
+               clusterrolebinding.rbac.authorization.k8s.io/minio-operator-binding unchanged
+               service/operator unchanged
+               service/sts unchanged
+               deployment.apps/minio-operator configured
 
-         You can check the new Operator version with the same ``kubectl`` command used previously:
+         #. Validate the Operator upgrade
 
-         .. code-block:: shell
-            :class: copyable
+            You can check the new Operator version with the same ``kubectl`` command used previously:
 
-            kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
+            .. code-block:: shell
+               :class: copyable
 
-      .. important::
-
-         Operator 6.0.0 deprecates the MinIO Operator Console and removes the related resources from the MinIO Operator CRD.
-
-         MinIO does not remove the old Console services, pods, or deployments as per Kubernetes standard procedure.
-         You can remove these resources at your own discretion.
-         MinIO is no longer developing nor supporting the Operator Console and advises against long-term reliance on this Operator Console for Tenant management.
-
-         You can continue to use Kustomize to deploy and manage MinIO Tenants.
+               kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
 
    .. tab-item:: Upgrade using Helm
 
@@ -129,89 +127,82 @@ Upgrade Operator to |operator-version-stable|
 
       If you installed the Operator using Kustomize, use the :guilabel:`Upgrade using Kustomize` instructions instead.
 
-      #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+      .. container:: procedure
 
-         Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
-         Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+         #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
 
-      #. Verify the existing Operator installation.
+            Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+            Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
+            See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
 
-         Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
+         #. Verify the existing Operator installation.
 
-         If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
+            Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
 
-         Use the ``helm list`` command to view the installed charts in the namespace:
+            If you installed the Operator to a custom namespace, specify that namespace as ``-n <NAMESPACE>``.
 
-         .. code-block:: shell
-            :class: copyable
+            Use the ``helm list`` command to view the installed charts in the namespace:
 
-            helm list -n minio-operator
+            .. code-block:: shell
+               :class: copyable
 
-         The result should resemble the following:
+               helm list -n minio-operator
 
-         .. code-block:: shell
-            :class: copyable
+            The result should resemble the following:
 
-            NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-            operator        minio-operator  1               2023-11-01 15:49:54.539724775 -0400 EDT deployed        operator-5.0.x v5.0.x   
+            .. code-block:: shell
+               :class: copyable
 
-      #. Update the Operator Repository
+               NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+               operator        minio-operator  1               2023-11-01 15:49:54.539724775 -0400 EDT deployed        operator-5.0.x v5.0.x   
 
-         Use ``helm repo update minio-operator`` to update the MinIO Operator repo.
-         If you set a different alias for the MinIO Operator repository, specify that in the command instead of ``minio-operator``.
-         You can use ``helm repo list`` to review your installed repositories.
+         #. Update the Operator Repository
 
-         Use ``helm search`` to check the latest available chart version after updating the Operator Repo:
+            Use ``helm repo update minio-operator`` to update the MinIO Operator repo.
+            If you set a different alias for the MinIO Operator repository, specify that in the command instead of ``minio-operator``.
+            You can use ``helm repo list`` to review your installed repositories.
 
-         .. code-block:: shell
-            :class: copyable
+            Use ``helm search`` to check the latest available chart version after updating the Operator Repo:
 
-            helm search repo minio-operator
+            .. code-block:: shell
+               :class: copyable
 
-         The response should resemble the following:
+               helm search repo minio-operator
 
-         .. code-block:: shell
-            :class: copyable
-            :substitutions:
+            The response should resemble the following:
 
-            NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-            minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
-            minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
-            minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
+            .. code-block:: shell
+               :class: copyable
+               :substitutions:
 
-         The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
+               NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+               minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
+               minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
+               minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
 
-      #. Run ``helm upgrade``
+            The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
 
-         Helm uses the latest chart to upgrade the MinIO Operator:
+         #. Run ``helm upgrade``
 
-         .. code-block:: shell
-            :class: copyable
+            Helm uses the latest chart to upgrade the MinIO Operator:
 
-            helm upgrade -n minio-operator \
-              operator minio-operator/operator
+            .. code-block:: shell
+               :class: copyable
 
-         If you installed the MinIO Operator to a different namespace, specify that in the ``-n`` argument.
+               helm upgrade -n minio-operator \
+               operator minio-operator/operator
 
-         If you used a different installation name from ``operator``, replace the value above with the installation name.
+            If you installed the MinIO Operator to a different namespace, specify that in the ``-n`` argument.
 
-         The command results should return success with a bump in the ``REVISION`` value.
+            If you used a different installation name from ``operator``, replace the value above with the installation name.
 
-      #. Validate the Operator upgrade
+            The command results should return success with a bump in the ``REVISION`` value.
 
-         You can check the new Operator version with the same ``kubectl`` command used previously:
+         #. Validate the Operator upgrade
 
-         .. code-block:: shell
-            :class: copyable
+            You can check the new Operator version with the same ``kubectl`` command used previously:
 
-            kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
+            .. code-block:: shell
+               :class: copyable
 
-
-      .. important::
-
-         Operator 6.0.0 deprecates the MinIO Operator Console and removes the related resources from the MinIO Operator CRD.
-
-         MinIO does not remove the old Console services, pods, or deployments as per Kubernetes standard procedure.
-         You can remove these resources at your own discretion.
-         MinIO is no longer developing nor supporting the Operator Console and advises against long-term reliance on the Operator Console for Tenant management.
+               kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'

@@ -25,7 +25,7 @@ Deploy a MinIO Tenant
 
 .. cond:: k8s and not openshift
 
-   This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using the MinIO Operator Console.
+   This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using either Kustomize or MinIO's Helm Charts.
 
 .. screenshot temporarily removed
 
@@ -36,15 +36,9 @@ Deploy a MinIO Tenant
    :alt: MinIO Operator Console
 
 
-The MinIO Operator Console is designed for deploying multi-node distributed MinIO Deployments.
-
 Deploying Single-Node topologies requires additional configurations not covered in this documentation.
 You can alternatively use a simple Kubernetes YAML object to describe a Single-Node topology for local testing and evaluation as necessary.
-
 MinIO does not recommend nor support single-node deployment topologies for production environments.
-
-The Operator Console provides a rich user interface for deploying and managing MinIO Tenants on Kubernetes infrastructure. 
-Installing the MinIO :ref:`Kubernetes Operator <deploy-operator-kubernetes>` automatically installs and configures the Operator Console.
 
 This documentation assumes familiarity with all referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
@@ -175,6 +169,9 @@ Persistent Volumes
 
    MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
    MinIO's consistency guarantees require the exclusive storage access that ``ReadWriteOnce`` provides.
+   The Persistent Volume **must** exist prior to deploying the Tenant.
+
+
    Additionally, MinIO recommends setting a reclaim policy of ``Retain`` for the PVC :kube-docs:`StorageClass <concepts/storage/storage-classes>`.
    Where possible, configure the Storage Class, CSI, or other provisioner underlying the PV to format volumes as XFS to ensure best performance.
 
@@ -207,9 +204,9 @@ Persistent Volumes
 Deploy a MinIO Tenant using Kustomize
 -------------------------------------
 
-The following procedure uses ``kubectl -k`` to deploy a MinIO Tenant using the ``base`` Kustomization template in the MinIO Operator Github repository.
+The following procedure uses ``kubectl -k`` to deploy a MinIO Tenant using the ``base`` Kustomization template in the :minio-git:`MinIO Operator Github repository <operator/tree/master/examples/kustomization/base>`.
 
-You can select a different base or pre-built template from the repository as your starting point, or build your own Kustomization resources using the MinIO Custom Resource Documentation.
+You can select a different base or pre-built template from the :minio-git:`repository <operator/tree/master/examples/kustomization/>` as your starting point, or build your own Kustomization resources using the MinIO Custom Resource Documentation.
 
 .. important::
 
@@ -219,146 +216,165 @@ You can select a different base or pre-built template from the repository as you
 This procedure is not exhaustive of all possible configuration options available in the :ref:`Tenant CRD <minio-operator-crd>`.
 It provides a baseline from which you can modify and tailor the Tenant to your requirements.
 
-#. Create a YAML object for the Tenant
+.. container:: procedure
 
-   Use the ``kubectl kustomize`` command to produce a YAML file containing all Kubernetes resources necessary to deploy the ``base`` Tenant:
+   #. Create a YAML object for the Tenant
 
-   .. code-block:: shell
-      :class: copyable
+      Use the ``kubectl kustomize`` command to produce a YAML file containing all Kubernetes resources necessary to deploy the ``base`` Tenant:
 
-      kubectl kustomize https://github.com/minio/operator/examples/kustomization/base/ > tenant-base.yaml
+      .. code-block:: shell
+         :class: copyable
 
-   The command creates a single YAML file with multiple objects separated by the ``---``` line.
-   Open the file in your preferred editor.
+         kubectl kustomize https://github.com/minio/operator/examples/kustomization/base/ > tenant-base.yaml
 
-   The following steps reference each object based on it's ``kind`` and ``metadata.name`` fields:
+      The command creates a single YAML file with multiple objects separated by the ``---``` line.
+      Open the file in your preferred editor.
 
-#. Configure the Tenant topology
+      The following steps reference each object based on it's ``kind`` and ``metadata.name`` fields:
 
-   The ``kind: Tenant`` object describes the MinIO Tenant.
+   #. Configure the Tenant topology
 
-   The following fields share the ``spec.pools[0]`` prefix and control the number of servers, volumes per server, and storage class of all pods deployed in the Tenant:
-   
-   .. list-table::
-      :header-rows: 1
-      :widths: 30 70
+      The ``kind: Tenant`` object describes the MinIO Tenant.
 
-      * - Field
-        - Description
+      The following fields share the ``spec.pools[0]`` prefix and control the number of servers, volumes per server, and storage class of all pods deployed in the Tenant:
+      
+      .. list-table::
+         :header-rows: 1
+         :widths: 30 70
 
-      * - ``servers`` 
-        - The number of MinIO pods to deploy in the Server Pool.
-      * - ``volumesPerServer`` 
-        - The number of persistent volumes to attach to each MinIO pod (``servers``).
-          The Operator generates ``volumesPerServer x servers`` Persistant Volume Claims for the Tenant.
-      * - ``volumeClaimTemplate.spec.storageClassName`` 
-        - The Kubernetes storage class to associate with the generated Persistent Volume Claims.
+         * - Field
+           - Description
 
-          If no storage class exists matching the specified value *or* if the specified storage class cannot meet the requested number of PVCs or storage capacity, the Tenant may fail to start.
+         * - ``servers`` 
+           - The number of MinIO pods to deploy in the Server Pool.
 
-      * - ``volumeClaimTemplate.spec.resources.requests.storage``
-        - The amount of storage to request for each generated PVC.
+         * - ``volumesPerServer`` 
+           - The number of persistent volumes to attach to each MinIO pod (``servers``).
+             The Operator generates ``volumesPerServer x servers`` Persistant Volume Claims for the Tenant.
 
-#. Configure Tenant Affinity or Anti-Affinity
+         * - ``volumeClaimTemplate.spec.storageClassName`` 
+           - The Kubernetes storage class to associate with the generated Persistent Volume Claims.
 
-   The MinIO Operator supports the following Kubernetes Affinity and Anti-Affinity configurations:
+             If no storage class exists matching the specified value *or* if the specified storage class cannot meet the requested number of PVCs or storage capacity, the Tenant may fail to start.
 
-   - Node Affinity (``spec.pools[n].nodeAffinity``)
-   - Pod Affinity (``spec.pools[n].podAffinity``)
-   - Pod Anti-Affinity (``spec.pools[n].podAntiAffinity``)
+         * - ``volumeClaimTemplate.spec.resources.requests.storage``
+           - The amount of storage to request for each generated PVC.
 
-   MinIO recommends configuring Tenants with Pod Anti-Affinity to ensure that the Kubernetes schedule does not schedule multiple pods on the same worker node.
+   #. Configure Tenant Affinity or Anti-Affinity
 
-   If you have specific worker nodes on which you want to deploy the tenant, pass those node labels or filters to the ``nodeAffinity`` field to constrain the scheduler to place pods on those nodes.
+      The MinIO Operator supports the following Kubernetes Affinity and Anti-Affinity configurations:
 
-#. Configure Network Encryption
+      - Node Affinity (``spec.pools[n].nodeAffinity``)
+      - Pod Affinity (``spec.pools[n].podAffinity``)
+      - Pod Anti-Affinity (``spec.pools[n].podAntiAffinity``)
 
-   The MinIO Tenant CRD provides the following fields from which you can configure tenant TLS network encryption:
+      MinIO recommends configuring Tenants with Pod Anti-Affinity to ensure that the Kubernetes schedule does not schedule multiple pods on the same worker node.
 
-   .. list-table::
-      :header-rows: 1
-      :widths: 30 70
+      If you have specific worker nodes on which you want to deploy the tenant, pass those node labels or filters to the ``nodeAffinity`` field to constrain the scheduler to place pods on those nodes.
 
-      * - Field
-        - Description
+   #. Configure Network Encryption
 
-      * - ``spec.requestAutoCert``
-        - Enables or disables MinIO :ref:`automatic TLS certificate generation <minio-tls>`
+      The MinIO Tenant CRD provides the following fields from which you can configure tenant TLS network encryption:
 
-      * - ``spec.certConfig``
-        - Controls the settings for :ref:`automatic TLS <minio-tls>`.
-          Requires ``spec.requestAutoCert: true``
+      .. list-table::
+         :header-rows: 1
+         :widths: 30 70
 
-      * - ``spec.externalCertSecret``
-        - Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` or ``cert-manager``.
-          MinIO uses these certificates for performing TLS handshakes based on hostname (Server Name Indication).
+         * - Field
+           - Description
 
-      * - ``spec.externalCACertSecret``
-        - Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` with the Certificate Authority (CA) chains which the Tenant must trust for allowing client TLS connections.
+         * - ``tenant.certificate.requestAutoCert``
+           - Enable or disable MinIO :ref:`automatic TLS certificate generation <minio-tls>`
 
-#. Configure MinIO Environment Variables
+             Defaults to ``true`` or enabled if omitted.
 
-   You can set MinIO Server environment variables using the ``spec.configuration`` field.
+         * - ``tenant.certificate.certConfig``
+           - Customize the behavior of :ref:`automatic TLS <minio-tls>`, if enabled.
 
-   The field must specify a Kubernetes opaque secret whose data payload ``config.env`` contains each MinIO environment variable you want to set.
+         * - ``tenant.certificate.externalCertSecret``
+           - Enable TLS for multiple hostnames via Server Name Indication (SNI)
+         
+             Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` or ``cert-manager``.
 
-   The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that sets the root username, password, erasure parity settings, and enables Tenant Console.
+         * - ``tenant.certificate.externalCACertSecret``
+           - Enable validation of client TLS certificates signed by unknown, third-party, or internal Certificate Authorities (CA).
+         
+             Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` containing the full chain of CA certificates for a given authority.
 
-   Modify this as-needed to reflect your Tenant requirements.
+   #. Configure MinIO Environment Variables
 
-#. Review the Namespace
+      You can set MinIO Server environment variables using the ``tenant.configuration`` field.
 
-   The YAML object ``kind: Namespace`` sets the default namespace for the Tenant to ``minio-tenant``.
+      .. list-table::
+         :header-rows: 1
+         :widths: 30 70
 
-   You can change this value to create a different namespace for the Tenant.
-   You must change **all** ``metadata.namespace`` values in the YAML file to match the Namespace
+         * - Field
+           - Description
 
-#. Deploy the Tenant
+         * - ``tenant.configuration``
+           - Specify a Kubernetes opaque secret whose data payload ``config.env`` contains each MinIO environment variable you want to set.
 
-   Use the ``kubectl apply -f`` command to deploy the Tenant.
+             The ``config.env`` data payload **must** be a base64-encoded string.
+             You can create a local file, set your environment variables, and then use ``cat LOCALFILE | base64`` to create the payload.
 
-   .. code-block:: shell
-      :class: copyable
+      The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that sets the root username, password, erasure parity settings, and enables Tenant Console.
 
-      kubectl apply -f tenant.yaml
+      Modify this as needed to reflect your Tenant requirements.
 
-   The command creates each of the resources specified in the YAML object at the configured namespace.
+   #. Review the Namespace
 
-   You can monitor the progress using the following command:
+      The YAML object ``kind: Namespace`` sets the default namespace for the Tenant to ``minio-tenant``.
 
-   .. code-block:: shell
-      :class: copyable
+      You can change this value to create a different namespace for the Tenant.
+      You must change **all** ``metadata.namespace`` values in the YAML file to match the Namespace
 
-      watch kubectl get all -n minio-tenant
+   #. Deploy the Tenant
 
-#. Expose the Tenant MinIO S3 API port
+      Use the ``kubectl apply -f`` command to deploy the Tenant.
 
-   To test the MinIO Client :mc:`mc` from your local machine, forward the MinIO port and create an alias.
+      .. code-block:: shell
+         :class: copyable
 
-   * Forward the Tenant's MinIO port:
+         kubectl apply -f tenant-base.yaml
 
-     .. code-block:: shell
-        :class: copyable
+      The command creates each of the resources specified in the YAML object at the configured namespace.
 
-        kubectl port-forward svc/MINIO_TENANT_NAME-hl 9000 -n MINIO_TENANT_NAMESPACE
+      You can monitor the progress using the following command:
 
-   * Create an alias for the Tenant service:
+      .. code-block:: shell
+         :class: copyable
 
-     .. code-block:: shell
-        :class: copyable
+         watch kubectl get all -n minio-tenant
 
-        mc alias set myminio https://localhost:9000 minio minio123 --insecure
+   #. Expose the Tenant MinIO S3 API port
 
-   You can use :mc:`mc mb` to create a bucket on the Tenant:
-   
-   .. code-block:: shell
-      :class: copyable
+      To test the MinIO Client :mc:`mc` from your local machine, forward the MinIO port and create an alias.
 
-      mc mb myminio/mybucket --insecure
+      * Forward the Tenant's MinIO port:
 
-   If you deployed your MinIO Tenant using TLS certificates minted by a trusted Certificate Authority (CA) you can omit the ``--insecure`` flag.
-   
-   See :ref:`create-tenant-connect-tenant` for specific instructions.
+      .. code-block:: shell
+         :class: copyable
+
+         kubectl port-forward svc/MINIO_TENANT_NAME-hl 9000 -n MINIO_TENANT_NAMESPACE
+
+      * Create an alias for the Tenant service:
+
+      .. code-block:: shell
+         :class: copyable
+
+         mc alias set myminio https://localhost:9000 minio minio123 --insecure
+
+      You can use :mc:`mc mb` to create a bucket on the Tenant:
+      
+      .. code-block:: shell
+         :class: copyable
+
+         mc mb myminio/mybucket --insecure
+
+      If you deployed your MinIO Tenant using TLS certificates minted by a trusted Certificate Authority (CA) you can omit the ``--insecure`` flag.
+      
+      See :ref:`create-tenant-connect-tenant` for specific instructions.
 
 .. _create-tenant-connect-tenant:
 
@@ -374,7 +390,7 @@ The MinIO Operator creates services for the MinIO Tenant.
    .. code-block:: shell
       :class: copyable
 
-      oc get svc -n minio-tenant-1
+      oc get svc -n TENANT-NAMESPACE
 
 .. cond:: k8s and not openshift 
 
@@ -383,14 +399,14 @@ The MinIO Operator creates services for the MinIO Tenant.
    .. code-block:: shell
       :class: copyable
 
-      kubectl get svc -n minio-tenant-1
+      kubectl get svc -n TENANT-NAMESPACE
 
 .. code-block:: shell
 
    NAME                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
    minio                              LoadBalancer   10.97.114.60     <pending>     443:30979/TCP    2d3h
-   minio-tenant-1-console             LoadBalancer   10.106.103.247   <pending>     9443:32095/TCP   2d3h
-   minio-tenant-1-hl                  ClusterIP      None             <none>        9000/TCP         2d3h
+   TENANT-NAMESPACE-console             LoadBalancer   10.106.103.247   <pending>     9443:32095/TCP   2d3h
+   TENANT-NAMESPACE-hl                  ClusterIP      None             <none>        9000/TCP         2d3h
 
 - The ``minio`` service corresponds to the MinIO Tenant service. 
   Applications should use this service for performing operations against the MinIO Tenant.

@@ -10,87 +10,59 @@ Modify a MinIO Tenant
    :local:
    :depth: 1
 
-The procedures on this page use the :ref:`MinIO Operator Console <minio-operator-console>` for modifying an existing tenant.
+You can modify tenants after deployment to change mutable configuration settings.
+See :ref:`minio-operator-crd` for a complete description of available settings in the MinIO Custom Resource Definition.
 
-.. screenshot temporarily removed
-   .. image:: /images/k8s/operator-manage-tenant.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: MinIO Operator Tenant Console
+The method for modifying the Tenant depends on how you deployed the tenant:
 
-Certificate Management
-----------------------
+.. tab-set::
 
-The Security section provides tools for adding and managing certificates for the tenant.
+   .. tab-item:: Kustomize
+      :sync: kustomize
 
-Review Certificate expiration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      For Kustomize-deployed Tenants, you can modify the base Kustomization resources and apply them using ``kubectl apply -k`` against the directory containing the ``kustomization.yaml`` object.
 
-.. versionadded:: Console 0.23.1
+      .. code-block:: shell
 
-A message displays under the certificate with the date of expiration and length of time until expiration.
+         kubectl apply -k ~/kustomization/TENANT-NAME/
 
-The message adjusts depending on the length of time to expiration:
-   
-- More than 30 days, the message text displays in gray.
-- Within 30 days, the message text changes to orange.
-- Within 10 days, the message text changes to red.
-- Within 24 hours, the message displays as an hour and minute countdown in red text.
-- After expiration, the message displays as ``EXPIRED``.
+      Modify the path to the Kustomization directory to match your local configuration.
 
-.. _minio-k8s-modify-minio-tenant-security:
+   .. tab-item:: Helm
+      :sync: helm
 
-Modify Tenant TLS Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      For Helm-deployed Tenants, you can modify the base ``values.yaml`` and upgrade the Tenant using the chart:
 
-The MinIO Operator Console supports adding and removing TLS certificates from a MinIO Tenant.
+      .. code-block:: shell
 
-From the Operator Console view, select the Tenant to open the summary view, then select :guilabel:`Security`.
-You can make the following modifications:
+         helm upgrade  TENANT-NAME minio-operator/tenant -f values.yaml -n TENANT-NAMESPACE
 
-Enable or Disable TLS
-   Toggle the :guilabel:`TLS` switch to direct the Operator to either enable or disable TLS for the deployment.
-   The MinIO Operator automatically generates the necessary TLS certificates using the Kubernetes TLS API.
-   See :ref:`minio-tls-user-generated` for more information.
+      The command above assumes use of the MinIO Operator Chart repository.
+      If you installed the Chart manually or by using a different repository name, specify that chart or name in the command.
 
-Add Custom TLS Certificates
-   MinIO Tenants support `Server Name Indication (SNI) <https://en.wikipedia.org/wiki/Server_Name_Indication>`__, where the MinIO server identifies which certificate to use based on the hostname specified by the connecting client.
-   The MinIO Operator can attach additional TLS certificates to the Tenant to enable SNI-based TLS connectivity.
+      Replace ``TENANT-NAME`` and ``TENANT-NAMESPACE`` with the name and namespace of the Tenant respectively.
+      You can use ``helm list -n TENANT-NAMESPACE`` to validate the Tenant name.
 
-   To customize the TLS certificates mounted on the MinIO Tenant, enable the :guilabel:`Custom Certificates` switch.
-   Select the :guilabel:`Add Certificate +` button to add custom TLS certificates.
+      See :ref:`minio-tenant-chart-values` for more complete documentation on the available Chart fields.
 
-Add Trusted Certificate Authorities
-   The MinIO Tenant validates the TLS certificate presented by each connecting client against the host system's trusted root certificate store.
-   The MinIO Operator can attach additional third-party Certificate Authorities (CA) to the Tenant to allow validation of client TLS certificates signed by those CAs.
+   .. tab-item:: Operator Console
 
-   To customize the trusted CAs mounted to each Tenant MinIO pod, enable the :guilabel:`Custom Certificates` switch.
-   Select the :guilabel:`Add CA Certificate +` button to add third party CA certificates.
+      .. versionchanged:: 6.0.0
 
-   If the MinIO Tenant cannot match an incoming client's TLS certificate issuer against either the container OS's trust store *or* an explicitly attached CA, MinIO rejects the connection as invalid.
+         The MinIO Operator Console has been deprecated and removed.
 
+      To modify the Tenant, use ``kubectl apply -k`` or ``kubectl edit`` against the Tenant object in the namespace.
 
-Manage Tenant Pools
--------------------
+      The following command exports the Tenant YAML:
 
-Specify Runtime Class
-~~~~~~~~~~~~~~~~~~~~~
+      .. code-block:: shell
 
-.. versionadded:: Console 0.23.1
+         kubectl get tenant TENANT-NAME -n TENANT-NAMESPACE -o yaml > TENANT-NAME.yaml
 
-When adding a new pool or modifying an existing pool for a tenant, you can specify the :kube-docs:`Runtime Class Name <concepts/containers/runtime-class/>` for pools to use.
+      You can edit the YAML object using your preferred text editor and apply to to update the Tenant:
 
-.. Following link is intended for K8s only
-.. _minio-decommissioning:
+      .. code-block:: shell
+         
+         kubectl apply -f TENANT-NAME.yaml
 
-Decommission a Tenant Server Pool
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MinIO Operator 4.4.13 and later support decommissioning a server pool in a Tenant.
-Specifically, you can follow the :minio-docs:`Decommission a Server pool <minio/linux/operations/install-deploy-manage/decommission-server-pool.html>` procedure to remove the pool from the tenant, then edit the tenant YAML to drop the pool from the StatefulSet.
-When removing the Tenant pool, ensure the ``spec.pools.[n].name`` fields have values for all remaining pools.
-
-.. include:: /includes/common-installation.rst
-   :start-after: start-pool-order-must-not-change
-   :end-before: end-pool-order-must-not-change
+      You can also use ``kubectl edit`` to 'live edit' Kubernetes objects.
