@@ -105,7 +105,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
       curl -sLo values.yaml https://raw.githubusercontent.com/minio/operator/master/helm/tenant/values.yaml
 
-   Open the ``values.yaml`` object in your preferred text edit.
+   Open the ``values.yaml`` object in your preferred text editor.
 
 #. Configure the Tenant topology
    
@@ -144,7 +144,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
 #. Configure Network Encryption
 
-   The MinIO Tenant CRD provides the following fields from which you can configure tenant TLS network encryption:
+   The MinIO Tenant CRD provides the following fields with which you can configure tenant TLS network encryption:
 
    .. list-table::
       :header-rows: 1
@@ -175,7 +175,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
    The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that sets the root username, password, erasure parity settings, and enables Tenant Console.
 
-   Modify this as-needed to reflect your Tenant requirements.
+   Modify this as needed to reflect your Tenant requirements.
 
 #. Deploy the Tenant
 
@@ -188,7 +188,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
         --namespace minio-tenant-1 \
         --create-namespace \
         --values values.yaml \
-        tenant minio/tenant
+        tenant minio-operator/tenant
 
    You can monitor the progress using the following command:
 
@@ -247,7 +247,7 @@ This method may support easier pre-configuration of the Tenant compared to the :
    Each chart contains a ``values.yaml`` file you can customize to suit your needs.
    For details on the options available in the MinIO Tenant ``values.yaml``, see :ref:`minio-tenant-chart-values`.
    
-   Open the ``values.yaml`` object in your preferred text edit.
+   Open the ``values.yaml`` object in your preferred text editor.
 
 #. Configure the Tenant topology
    

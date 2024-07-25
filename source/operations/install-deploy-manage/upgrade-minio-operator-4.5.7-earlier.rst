@@ -11,7 +11,7 @@ Upgrade Legacy MinIO Operators
    :depth: 1
 
 
-MinIO spuports the following upgrade paths for older versions of the MinIO Operator:
+MinIO supports the following upgrade paths for older versions of the MinIO Operator:
 
 .. list-table::
    :header-rows: 1

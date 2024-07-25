@@ -119,7 +119,7 @@ Upgrade Operator to |operator-version-stable|
 
          MinIO does not remove the old Console services, pods, or deployments as per Kubernetes standard procedure.
          You can remove these resources at your own discretion.
-         MinIO is no longer developing nor supporting the Console, and as of such advises against long-term reliance on the Console for Tenant management.
+         MinIO is no longer developing nor supporting the Operator Console, and as of such advises against long-term reliance on this Console for Tenant management.
 
          You can continue to use Kustomize to deploy and manage MinIO Tenants.
 
