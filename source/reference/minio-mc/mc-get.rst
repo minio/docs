@@ -46,8 +46,8 @@ The :mc:`mc get` command downloads an object from a target S3 deployment to the 
          mc [GLOBALFLAGS] get                      \
                           SOURCE                   \
                           TARGET                   \
-                          [--encrypt-key value]    \
-                          [--encrypt value] 
+                          [--enc-c value] 
+                          [--version-id, --vid value]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -66,23 +66,19 @@ Parameters
 
    The destination path on the local file system where the command should place the downloaded file.
 
-.. mc-cmd:: --encrypt
+.. mc-cmd:: --enc-c
    :optional:
 
-   Specify the key to use for decrypting and encrypting the downloaded object.
+   Encrypt or decrypt objects using client provided keys.
+   Repeat the flag to pass multiple keys.
 
-   Requires that you also specify the key to use with the :mc-cmd:`~mc put --encrypt-key` flag.
+   Keys must be in either Raw Base64 or Hex format.
 
-   Alternatively, set the :envvar:`MC_ENCRYPT` environment variable.
-
-.. mc-cmd:: --encrypt-key
+.. mc-cmd:: --version-id, --vid
    :optional:
    
-   Specify the key to use for decrypting and encrypting the downloaded object.
-
-   Requires that you also pass the :mc-cmd:`~mc put --encrypt` flag set to ``TRUE``.
-
-   Alternatively, set the :envvar:`MC_ENCRYPT_KEY` environment variable.
+   Retrieve a specific version of the object.
+   Pass the version ID of the object to retrieve.
 
 Global Flags
 ~~~~~~~~~~~~
@@ -90,3 +86,26 @@ Global Flags
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-globals
    :end-before: end-minio-mc-globals
+
+Examples
+--------
+
+Retrieve an object from MinIO to the local file system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command retrieves the file ``myobject.csv`` from the bucket ``mybucket`` at the alias ``myminio`` and places it on the local file system at the path ``/my/local/folder``.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc get myminio/mybucket/myobject.csv /my/local/folder 
+
+Retrieve an encrypted object from MinIO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command retrieves an encrypted file and places it at a local folder path.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc get --enc-c "play/mybucket/object=MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDA" play/mybucket/object path-to/object 

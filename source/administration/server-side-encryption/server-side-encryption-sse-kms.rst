@@ -18,25 +18,17 @@ Server-Side Encryption with Per-Bucket Keys (SSE-KMS)
 .. |KMS| replace:: :abbr:`KMS (Key Management Service)`
 .. |KES| replace:: :abbr:`KES (Key Encryption Service)`
 
-MinIO Server-Side Encryption (SSE) protects objects as part of write operations,
-allowing clients to take advantage of server processing power to secure objects
-at the storage layer (encryption-at-rest). SSE also provides key functionality
-to regulatory and compliance requirements around secure locking and erasure.
+MinIO Server-Side Encryption (SSE) protects objects as part of write operations, allowing clients to take advantage of server processing power to secure objects at the storage layer (encryption-at-rest). 
+SSE also provides key functionality to regulatory and compliance requirements around secure locking and erasure.
 
-MinIO SSE uses the :minio-git:`MinIO Key Encryption Service (KES) <kes>` and an
-external Key Management Service (KMS) for performing secured cryptographic
-operations at scale. MinIO also supports client-managed key management, where
-the application takes full responsibility for creating and managing encryption
-keys for use with MinIO SSE. 
+MinIO SSE uses the :kes-docs:`MinIO Key Encryption Service (KES) <>` and a :kes-docs:`supported external Key Management Service (KMS) <#supported-kms-targets>` for performing secured cryptographic operations at scale. 
+MinIO also supports client-managed key management, where the application takes full responsibility for creating and managing encryption keys for use with MinIO SSE. 
 
-MinIO SSE-KMS en/decrypts objects using an External Key (EK) managed by a Key
-Management System (KMS). Each bucket and object can have a separate |EK|,
-supporting more granular cryptographic operations in the deployment. MinIO can
-only decrypt an object if it can access both the KMS *and* the |EK| used to
-encrypt that object.
+MinIO SSE-KMS encrypts or decrypts objects using an External Key (EK) managed by a Key Management System (KMS). 
+Each bucket and object can have a separate |EK|, supporting more granular cryptographic operations in the deployment. 
+MinIO can only decrypt an object if it can access both the KMS *and* the |EK| used to encrypt that object.
 
-You can enable bucket-default SSE-KMS encryption using the 
-:mc:`mc encrypt set` command:
+You can enable bucket-default SSE-KMS encryption using the :mc:`mc encrypt set` command:
 
 .. code-block:: shell
    :class: copyable
@@ -95,20 +87,15 @@ This procedure requires the following components:
   instructions on downloading and installing ``mc``.
 
 
-- Install :minio-git:`MinIO Key Encryption Service (KES) <kes>` on a machine
-  with internet access. See the ``kes``
-  :minio-git:`Getting Started <kes/wiki/Getting-Started>` guide for 
-  instructions on downloading, installing, and configuring KES.
+- Install :kes-docs:`MinIO Key Encryption Service (KES) <>` on a machine with internet access. 
+  See the ``kes`` :kes-docs:`Getting Started <tutorials/getting-started/>` guide for instructions on downloading, installing, and configuring KES.
 
 1) Create an Encryption Key for SSE-KMS Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :minio-git:`kes <kes>` commandline tool to create a new External Key
-(EK) for use with SSE-KMS Encryption.
+Use the :kes-docs:`kes <cli/>` command line tool to create a new External Key (EK) for use with SSE-KMS Encryption.
 
-Issue the following command to retrieve the root 
-:minio-git:`identity <kes/wiki/Configuration#policy-configuration>` for the KES
-server:
+The following command retrieves the root :kes-docs:`identity <concepts/#authorization>` for the ``play`` KES server:
 
 .. code-block:: shell
    :class: copyable
@@ -131,31 +118,23 @@ Set the following environment variables in the terminal or shell:
    :width: 100%
 
    * - ``KES_CLIENT_KEY``
-     - The private key for an :minio-git:`identity
-       <kes/wiki/Configuration#policy-configuration>` on the KES server.
-       The identity must grant access to at minimum the ``/v1/create``,
-       ``/v1/generate``, and ``/v1/list`` :minio-git:`API endpoints 
-       <kes/wiki/Server-API#api-overview>`. This step uses the root
-       identity for the MinIO ``play`` KES sandbox, which provides access
-       to all operations on the KES server.
+     - The private key for an :kes-docs:`identity <concepts/#authorization>` on the KES server.
+       The identity must grant access to at minimum the ``/v1/create``, ``/v1/generate``, and ``/v1/list`` :kes-docs:`API endpoints <concepts/server-api/>`. 
+       This step uses the ``root`` identity for the MinIO ``play`` KES sandbox, which provides access to all operations on the KES server.
 
    * - ``KES_CLIENT_CERT``
-     - The corresponding certificate for the :minio-git:`identity
-       <kes/wiki/Configuration#policy-configuration>` on the KES server.
-       This step uses the root identity for the MinIO ``play`` KES
-       sandbox, which provides access to all operations on the KES server.
+     - The corresponding certificate for the :kes-docs:`identity <concepts/#authorization>` on the KES server.
+       This step uses the ``root`` identity for the MinIO ``play`` KES sandbox, which provides access to all operations on the KES server.
 
-Issue the following command to create a new |EK| through
-KES.
+The following command creates a new |EK| through KES.
 
 .. code-block:: shell
    :class: copyable
 
    kes key create my-minio-sse-kms-key
 
-This tutorial uses the example ``my-minio-sse-kms-key`` name for ease of
-reference. Specify a unique key name to prevent collision
-with existing keys.
+This tutorial uses the example ``my-minio-sse-kms-key`` name for ease of reference. 
+Specify a unique key name to prevent collision with existing keys.
 
 2) Configure MinIO for SSE-KMS Object Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -179,26 +158,19 @@ MinIO server host in the deployment:
      - The endpoint for the MinIO ``Play`` KES service.
 
    * - :envvar:`MINIO_KMS_KES_KEY_FILE`
-     - The private key file corresponding to an 
-       :minio-git:`identity <kes/wiki/Configuration#policy-configuration>`
-       on the KES service. The identity must grant permission to 
-       create, generate, and decrypt keys. Specify the same
-       identity key file as the ``KES_KEY_FILE`` environment variable
-       in the previous step.
+     - The private key file corresponding to an :kes-docs:`identity <concepts/#authorization>` on the KES service. 
+       The identity must grant permission to create, generate, and decrypt keys. 
+       Specify the same identity key file as the ``KES_KEY_FILE`` environment variable in the previous step.
 
    * - :envvar:`MINIO_KMS_KES_CERT_FILE`
-     - The public certificate file corresponding to an 
-       :minio-git:`identity <kes/wiki/Configuration#policy-configuration>`
-       on the KES service. The identity must grant permission to 
-       create, generate, and decrypt keys. Specify the same
-       identity certificate as the ``KES_CERT_FILE`` environment
-       variable in the previous step.
+     - The public certificate file corresponding to an :kes-docs:`identity <concepts/#authorization>` on the KES service. 
+       The identity must grant permission to create, generate, and decrypt keys. 
+       Specify the same identity certificate as the ``KES_CERT_FILE`` environment variable in the previous step.
 
    * - :envvar:`MINIO_KMS_KES_KEY_NAME`
-     - The name of the External Key (EK) to use for
-       performing SSE encryption operations. KES retrieves the |EK| from
-       the configured Key Management Service (KMS). Specify the name of the
-       key created in the previous step. 
+     - The name of the External Key (EK) to use for performing SSE encryption operations. 
+       KES retrieves the |EK| from the configured Key Management Service (KMS). 
+       Specify the name of the key created in the previous step. 
 
 
 3) Restart the MinIO Deployment to Enable SSE-KMS
@@ -212,14 +184,12 @@ Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
    mc admin service restart ALIAS
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
-restart.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
 4) Configure Automatic Bucket Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc encrypt set` command to enable automatic SSE-KMS protection
-of all objects written to a specific bucket.
+Use the :mc:`mc encrypt set` command to enable automatic SSE-KMS protection of all objects written to a specific bucket.
 
 .. code-block:: shell
    :class: copyable
@@ -232,12 +202,10 @@ of all objects written to a specific bucket.
 - Replace :mc-cmd:`BUCKET <mc encrypt set ALIAS>`  with the full path to the
   bucket or bucket prefix on which you want to enable automatic SSE-KMS.
 
-Objects written to the specified bucket are automatically encrypted using
-the specified |EK|
+Objects written to the specified bucket are automatically encrypted using the specified |EK|.
 
-Repeat this step for each bucket on which you want to enable automatic
-SSE-KMS encryption. You can generate additional keys per bucket or bucket
-prefix, such that the scope of each |EK| is limited to a subset of objects.
+Repeat this step for each bucket on which you want to enable automatic SSE-KMS encryption. 
+You can generate additional keys per bucket or bucket prefix, such that the scope of each |EK| is limited to a subset of objects.
 
 
 .. _minio-encryption-sse-kms-erasure-locking:
@@ -261,8 +229,7 @@ The scope of a single |EK| depends on:
 
 - Which buckets specified that |EK| for automatic SSE-KMS encryption, 
   *and*
-- Which write operations specified that |EK| when requesting SSE-KMS 
-  encryption.
+- Which write operations specified that |EK| when requesting SSE-KMS encryption.
 
 For example, consider a MinIO deployment using one |EK| per bucket.
 Disabling a single |EK| renders all objects in the associated bucket
