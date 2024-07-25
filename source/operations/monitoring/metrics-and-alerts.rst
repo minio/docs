@@ -15,55 +15,87 @@ Metrics and Alerts
 MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
-MinIO provides scraping endpoints for the following metric groups:
+Starting with :minio-release:`RELEASE.2024-07-15T19-02-30Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
 
-.. tab-set::
+For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint by appending an additional path for each category.
 
-   .. tab-item:: Cluster Metrics
+For example, the following endpoint returns audit metrics:
 
-      You can scrape :ref:`cluster-level metrics <minio-available-cluster-metrics>` using the following URL endpoint:
+.. code-block:: shell
+   :class: copyable
 
-      .. code-block:: shell
-         :class: copyable
+   http://HOSTNAME:PORT/minio/metrics/v3/audit
 
-         http://HOSTNAME:PORT/minio/v2/metrics/cluster
+Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+By default, MinIO requires authentication to scrape the metrics endpoints.
+To generate the needed bearer tokens, use :mc:`mc admin prometheus generate`.
+You can also disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
 
+MinIO provides the following scraping endpoints, relative to the base URL:
 
-   .. tab-item:: Bucket Metrics
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%
 
-      .. versionchanged:: RELEASE.2023-08-31T15-31-16Z
+   * - Category
+     - Path
 
-      You can scrape :ref:`bucket-level metrics <minio-available-bucket-metrics>` using the following URL endpoint:
+   * - API
+     - ``/api/requests``
+       
+       ``/bucket/api``
 
-      .. code-block:: shell
-         :class: copyable
+   * - Audit
+     - ``/audit``
 
-         http://HOSTNAME:PORT/minio/v2/metrics/bucket
+   * - Cluster
+     - ``/cluster/config``
+       
+       ``/cluster/erasure-set``
+       
+       ``/cluster/health``
+       
+       ``/cluster/iam``
+       
+       ``/cluster/usage/buckets``
+       
+       ``/cluster/usage/objects``
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+   * - Debug
+     - ``/debug/go``
 
-   .. tab-item:: Resource Metrics
+   * - ILM
+     - ``/ilm``
 
-      .. versionadded:: RELEASE.2023-10-07T15-07-38Z 
+   * - Logger webhook
+     - ``/logger/webhook``
 
-      You can scrape :ref:`resource metrics <minio-available-resource-metrics>` using the following URL endpoint:
+   * - Notification
+     - ``/notification``
 
-      .. code-block:: shell
-         :class: copyable
+   * - Replication
+     - ``/replication``
+       
+       ``/bucket/replication``
 
-         http://HOSTNAME:PORT/minio/v2/metrics/resource
+   * - Scanner
+     - ``/scanner``
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+   * - System
+     - ``/system/drive``
+       
+       ``/system/memory``
+       
+       ``/system/cpu``
+       
+       ``/system/network/internode``
+       
+       ``/system/process``
 
-
-MinIO by default requires authentication for scraping the metrics endpoints.
-Use the :mc:`mc admin prometheus generate` command to generate the necessary bearer tokens. 
-You can alternatively disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
+For a complete list of metrics for each endpoint, see :ref:`Available Metrics <minio-metrics-and-alerts-available-metrics>`.
 
 .. _minio-console-metrics:
 
@@ -117,7 +149,6 @@ Available Metrics
 
 MinIO publishes a number of metrics at the cluster, node, or bucket levels.
 Each metric includes a label for the MinIO server which generated that metric.
-
 
 
 Metrics v3
@@ -185,12 +216,63 @@ Metrics v3
 .. include:: /includes/common-metrics-v3-system.md
    :parser: myst_parser.sphinx_
 
+.. _minio-metrics-v2:
 
 Metrics v2
 ~~~~~~~~~~
-.. versionchanged:: MinIO RELEASE.2023-07-21T21-12-44Z
 
-   Bucket metrics have moved to use their own, separate endpoint.
+.. versionchanged:: `RELEASE.2024-07-15T19-02-30Z`
+
+   Metrics v2 is deprecated.
+
+.. tab-set::
+
+   .. tab-item:: Cluster Metrics
+
+      You can scrape :ref:`cluster-level metrics <minio-available-cluster-metrics>` using the following URL endpoint:
+
+      .. code-block:: shell
+         :class: copyable
+
+         http://HOSTNAME:PORT/minio/v2/metrics/cluster
+
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+
+
+   .. tab-item:: Bucket Metrics
+
+      .. versionchanged:: MinIO RELEASE.2023-07-21T21-12-44Z
+
+         Bucket metrics have moved to use their own, separate endpoint.
+
+      .. versionchanged:: RELEASE.2023-08-31T15-31-16Z
+
+      You can scrape :ref:`bucket-level metrics <minio-available-bucket-metrics>` using the following URL endpoint:
+
+      .. code-block:: shell
+         :class: copyable
+
+         http://HOSTNAME:PORT/minio/v2/metrics/bucket
+
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+
+
+   .. tab-item:: Resource Metrics
+
+      .. versionadded:: RELEASE.2023-10-07T15-07-38Z 
+
+      You can scrape :ref:`resource metrics <minio-available-resource-metrics>` using the following URL endpoint:
+
+      .. code-block:: shell
+         :class: copyable
+
+         http://HOSTNAME:PORT/minio/v2/metrics/resource
+
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+
 
 - :ref:`Cluster Metrics <minio-available-cluster-metrics>`
 - :ref:`Bucket Metrics <minio-available-bucket-metrics>`
