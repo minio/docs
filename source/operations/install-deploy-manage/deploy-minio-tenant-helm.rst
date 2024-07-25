@@ -56,16 +56,29 @@ Deploy a MinIO Tenant using Helm Charts
 
 The following procedure deploys a MinIO Tenant using the MinIO Operator Chart Repository.
 This method supports a simplified installation path compared to the :ref:`local chart installation <deploy-tenant-helm-local>`.
-You can modify the Operator deployment after installation.
+
+
+The following procedure uses Helm to deploy a MinIO Tenant using the official MinIO Tenant Chart.
 
 .. important::
 
-   Do not use the ``kubectl krew`` or similar methods to update or manage the MinIO Tenant installation.
-   If you use Helm charts to deploy the Tenant, you must use Helm to manage that deployment.
+   If you use Helm to deploy a MinIO Tenant, you must use Helm to manage or upgrade that deployment.
+   Do not use ``kubectl krew``, Kustomize, or similar methods to manage or upgrade the MinIO Tenant.
 
-#. Validate the Operator Repository Contents
+This procedure is not exhaustive of all possible configuration options available in the :ref:`Tenant Chart <minio-tenant-chart-values>`.
+It provides a baseline from which you can modify and tailor the Tenant to your requirements.
 
-   Use ``helm search`` to check the latest available chart version in the Operator Repo:
+#. Verify your MinIO Operator Repo Configuration
+
+   MinIO maintains a Helm-compatible repository at https://operator.min.io.
+   If the repository does not already exist in your local Helm configuration, add it before continuing:
+
+   .. code-block:: shell
+      :class: copyable
+
+      helm repo add minio-operator https://operator.min.io
+
+   You can validate the repo contents using ``helm search``:
 
    .. code-block:: shell
       :class: copyable
@@ -76,64 +89,113 @@ You can modify the Operator deployment after installation.
 
    .. code-block:: shell
       :class: copyable
+      :substitutions:
 
       NAME                            CHART VERSION   APP VERSION     DESCRIPTION                    
       minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
-      minio-operator/operator         5.0.10          v5.0.10         A Helm chart for MinIO Operator
-      minio-operator/tenant           5.0.10          v5.0.10         A Helm chart for MinIO Operator
+      minio-operator/operator         |operator-version-stable|           v|operator-version-stable|          A Helm chart for MinIO Operator
+      minio-operator/tenant           |operator-version-stable|           v|operator-version-stable|          A Helm chart for MinIO Operator
 
-   The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
+#. Create a local copy of the Helm ``values.yaml``
 
-   If your ``minio-operator/operator`` version is behind the latest available chart, upgrade the operator *first*.
+   Download the base ``values.yaml`` object for modification:
 
-#. Deploy the Helm Chart
+   .. code-block:: shell
+      :class: copyable
 
-   Use the ``helm install`` command to deploy the Tenant Chart.
+      curl -sLo values.yaml https://raw.githubusercontent.com/minio/operator/master/helm/tenant/values.yaml
 
-   If you need to override values in the default :ref:`values <minio-tenant-chart-values>` file, you can use the ``--set`` operation for any single key-value.
-   Alternatively, specify your own ``values.yaml`` using the ``--f`` parameter to override multiple values at once:
+   Open the ``values.yaml`` object in your preferred text edit.
+
+#. Configure the Tenant topology
+   
+   The following fields share the ``tenant.pools[0]`` prefix and control the number of servers, volumes per server, and storage class of all pods deployed in the Tenant:
+   
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 70
+
+      * - Field
+        - Description
+
+      * - ``servers`` 
+        - The number of MinIO pods to deploy in the Server Pool.
+      * - ``volumesPerServer`` 
+        - The number of persistent volumes to attach to each MinIO pod (``servers``).
+          The Operator generates ``volumesPerServer x servers`` Persistant Volume Claims for the Tenant.
+      * - ``storageClassName`` 
+        - The Kubernetes storage class to associate with the generated Persistent Volume Claims.
+
+          If no storage class exists matching the specified value *or* if the specified storage class cannot meet the requested number of PVCs or storage capacity, the Tenant may fail to start.
+
+      * - ``size``
+        - The amount of storage to request for each generated PVC.
+
+#. Configure Tenant Affinity or Anti-Affinity
+
+   The Tenant Chart supports the following Kubernetes Selector, Affinity and Anti-Affinity configurations:
+
+   - Node Selector (``tenant.nodeSelector``)
+   - Node/Pod Affinity or Anti-Affinity (``spec.pools[n].affinity``)
+
+   MinIO recommends configuring Tenants with Pod Anti-Affinity to ensure that the Kubernetes schedule does not schedule multiple pods on the same worker node.
+
+   If you have specific worker nodes on which you want to deploy the tenant, pass those node labels or filters to the ``nodeSelector`` or ``affinity`` field to constrain the scheduler to place pods on those nodes.
+
+#. Configure Network Encryption
+
+   The MinIO Tenant CRD provides the following fields from which you can configure tenant TLS network encryption:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 70
+
+      * - Field
+        - Description
+
+      * - ``tenant.certificate.requestAutoCert``
+        - Enables or disables MinIO :ref:`automatic TLS certificate generation <minio-tls>`
+
+      * - ``tenant.certificate.certConfig``
+        - Controls the settings for :ref:`automatic TLS <minio-tls>`.
+          Requires ``spec.requestAutoCert: true``
+
+      * - ``tenant.certificate.externalCertSecret``
+        - Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` or ``cert-manager``.
+          MinIO uses these certificates for performing TLS handshakes based on hostname (Server Name Indication).
+
+      * - ``tenant.certificate.externalCACertSecret``
+        - Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` with the Certificate Authority (CA) chains which the Tenant must trust for allowing client TLS connections.
+
+#. Configure MinIO Environment Variables
+
+   You can set MinIO Server environment variables using the ``tenant.configuration`` field.
+
+   The field must specify a Kubernetes opaque secret whose data payload ``config.env`` contains each MinIO environment variable you want to set.
+
+   The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that sets the root username, password, erasure parity settings, and enables Tenant Console.
+
+   Modify this as-needed to reflect your Tenant requirements.
+
+#. Deploy the Tenant
+
+   Use ``helm`` to install the Tenant Chart using your ``values.yaml`` as an override:
 
    .. code-block:: shell
       :class: copyable
 
       helm install \
-        --namespace MINIO_TENANT_NAMESPACE \
-        --create-namespace \ 
-        MINIO_TENANT_NAME minio-operator/tenant
+        --namespace minio-tenant-1 \
+        --create-namespace \
+        --values values.yaml \
+        tenant minio/tenant
 
-   For details on the options available in the MinIO Tenant ``values.yaml``, see :ref:`minio-tenant-chart-values`.
-
-
-#. Validate the Tenant installation
-
-   Check the contents of the specified namespace to ensure all pods and services have started successfully.
+   You can monitor the progress using the following command:
 
    .. code-block:: shell
       :class: copyable
 
-      kubectl get all -n MINIO_TENANT_NAMESPACE
-
-   All pods and services should have a READY state before proceeding.
-
-#. Expose the Tenant Console port
-
-   Use ``kubectl port-forward`` to temporarily forward traffic from the MinIO pod to your local machine:
-
-   .. code-block:: shell
-      :class: copyable
-
-      kubectl --namespace MINIO_TENANT_NAMESPACE port-forward svc/MINIO_TENANT_NAME-console 9443:9443
-   
-   .. note::
-      
-      To configure long term access to the pod, configure :kube-docs:`Ingress <concepts/services-networking/ingress/>` or similar network control components within Kubernetes to route traffic to and from the pod.
-      Configuring Ingress is out of the scope for this documentation.
-
-#. Login to the MinIO Console
-
-   Access the Tenant's :ref:`minio-console` by navigating to ``http://localhost:9443`` in a browser.
-   Log in to the Console with the default credentials ``myminio | minio123``.
-   If you modified these credentials in the ``values.yaml`` specify those values instead.
+      watch kubectl get all -n minio-tenant
 
 #. Expose the Tenant MinIO S3 API port
 
@@ -162,6 +224,8 @@ You can modify the Operator deployment after installation.
 
    If you deployed your MinIO Tenant using TLS certificates minted by a trusted Certificate Authority (CA) you can omit the ``--insecure`` flag.
 
+   See :ref:`create-tenant-connect-tenant` for additional documentation on external connectivity to the Tenant.
+
 .. _deploy-tenant-helm-local:
 
 Deploy a Tenant using a Local Helm Chart
@@ -182,8 +246,78 @@ This method may support easier pre-configuration of the Tenant compared to the :
 
    Each chart contains a ``values.yaml`` file you can customize to suit your needs.
    For details on the options available in the MinIO Tenant ``values.yaml``, see :ref:`minio-tenant-chart-values`.
-   For example, you may wish to change the MinIO root user credentials or the Tenant name.
-   For more about customizations, see `Helm Charts <https://helm.sh/docs/topics/charts/>`__.
+   
+   Open the ``values.yaml`` object in your preferred text edit.
+
+#. Configure the Tenant topology
+   
+   The following fields share the ``tenant.pools[0]`` prefix and control the number of servers, volumes per server, and storage class of all pods deployed in the Tenant:
+   
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 70
+
+      * - Field
+        - Description
+
+      * - ``servers`` 
+        - The number of MinIO pods to deploy in the Server Pool.
+      * - ``volumesPerServer`` 
+        - The number of persistent volumes to attach to each MinIO pod (``servers``).
+          The Operator generates ``volumesPerServer x servers`` Persistant Volume Claims for the Tenant.
+      * - ``storageClassName`` 
+        - The Kubernetes storage class to associate with the generated Persistent Volume Claims.
+
+          If no storage class exists matching the specified value *or* if the specified storage class cannot meet the requested number of PVCs or storage capacity, the Tenant may fail to start.
+
+      * - ``size``
+        - The amount of storage to request for each generated PVC.
+
+#. Configure Tenant Affinity or Anti-Affinity
+
+   The Tenant Chart supports the following Kubernetes Selector, Affinity and Anti-Affinity configurations:
+
+   - Node Selector (``tenant.nodeSelector``)
+   - Node/Pod Affinity or Anti-Affinity (``spec.pools[n].affinity``)
+
+   MinIO recommends configuring Tenants with Pod Anti-Affinity to ensure that the Kubernetes schedule does not schedule multiple pods on the same worker node.
+
+   If you have specific worker nodes on which you want to deploy the tenant, pass those node labels or filters to the ``nodeSelector`` or ``affinity`` field to constrain the scheduler to place pods on those nodes.
+
+#. Configure Network Encryption
+
+   The MinIO Tenant CRD provides the following fields from which you can configure tenant TLS network encryption:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 30 70
+
+      * - Field
+        - Description
+
+      * - ``tenant.certificate.requestAutoCert``
+        - Enables or disables MinIO :ref:`automatic TLS certificate generation <minio-tls>`
+
+      * - ``tenant.certificate.certConfig``
+        - Controls the settings for :ref:`automatic TLS <minio-tls>`.
+          Requires ``spec.requestAutoCert: true``
+
+      * - ``tenant.certificate.externalCertSecret``
+        - Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` or ``cert-manager``.
+          MinIO uses these certificates for performing TLS handshakes based on hostname (Server Name Indication).
+
+      * - ``tenant.certificate.externalCACertSecret``
+        - Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` with the Certificate Authority (CA) chains which the Tenant must trust for allowing client TLS connections.
+
+#. Configure MinIO Environment Variables
+
+   You can set MinIO Server environment variables using the ``tenant.configuration`` field.
+
+   The field must specify a Kubernetes opaque secret whose data payload ``config.env`` contains each MinIO environment variable you want to set.
+
+   The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that sets the root username, password, erasure parity settings, and enables Tenant Console.
+
+   Modify this as-needed to reflect your Tenant requirements.
 
 #. The following Helm command creates a MinIO Tenant using the standard chart:
 
@@ -198,25 +332,6 @@ This method may support easier pre-configuration of the Tenant compared to the :
 
    To deploy more than one Tenant, create a Helm chart with the details of the new Tenant and repeat the deployment steps.
    Redeploying the same chart updates the previously deployed Tenant.
-
-#. Expose the Tenant Console port
-
-   Use ``kubectl port-forward`` to temporarily forward traffic from the MinIO pod to your local machine:
-
-   .. code-block:: shell
-      :class: copyable
-
-      kubectl --namespace MINIO_TENANT_NAMESPACE port-forward svc/myminio-console 9443:9443
-   
-   .. note::
-      
-      To configure long term access to the pod, configure :kube-docs:`Ingress <concepts/services-networking/ingress/>` or similar network control components within Kubernetes to route traffic to and from the pod.
-      Configuring Ingress is out of the scope for this documentation.
-
-#. Login to the MinIO Console
-
-   Access the Tenant's :ref:`minio-console` by navigating to ``http://localhost:9443`` in a browser.
-   Log in to the Console with the default credentials ``myminio | minio123``.
 
 #. Expose the Tenant MinIO port
 
@@ -246,3 +361,5 @@ This method may support easier pre-configuration of the Tenant compared to the :
         :class: copyable
 
 	mc mb myminio/mybucket --insecure
+
+See :ref:`create-tenant-connect-tenant` for additional documentation on external connectivity to the Tenant.

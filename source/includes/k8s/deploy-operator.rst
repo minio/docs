@@ -65,19 +65,14 @@ The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes t
 Prerequisites
 -------------
 
-Kubernetes Version 1.21.0
+Kubernetes Version 1.28.0
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. important::
 
    MinIO **strongly recommends** upgrading Production clusters running `End-Of-Life <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__ Kubernetes APIs.
 
-Starting with v5.0.0, MinIO **requires** Kubernetes 1.21.0 or later for both the infrastructure and the ``kubectl`` CLI tool.
-
-.. versionadded:: Operator 5.0.6
-
-For Kubernetes 1.25.0 and later, MinIO supports deploying in environments with the :kube-docs:`Pod Security admission (PSA) <concepts/security/pod-security-admission>` ``restricted`` policy enabled.
-
+Starting with v5.0.0, MinIO **requires** Kubernetes 1.28.0 or later for both the infrastructure and the ``kubectl`` CLI tool.
 
 Kustomize and ``kubectl``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
