@@ -243,7 +243,7 @@ The output resembles the following:
 Count of Objects in a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To show the number of objects in a bucket, use :mc:`mc stat --json` and extract the value of ``objectsCount`` with a JSON parser:
+To show the number of objects in a bucket, use :std:option:`--json <mc.--json>` and extract the value of ``objectsCount`` with a JSON parser:
 
 The following example uses the `jq <https://jqlang.github.io/jq/>`__ utility:
 
