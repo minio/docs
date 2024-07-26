@@ -22,6 +22,7 @@ Syntax
 .. start-mc-stat-desc
 
 The :mc:`mc stat` command displays information on objects in a MinIO bucket, including object metadata.
+You can also use it to retrieve bucket metadata.
 
 .. end-mc-stat-desc
 
