@@ -162,14 +162,15 @@ The output resembles the following:
    Metadata  :
      Content-Type: text/plain 
 
-You can also specify more than one object:
+You can specify more than one object by adding multiple paths:
 
 .. code-block:: shell
    :class: copyable
 
-   mc stat myminio/mybucket/file1.txt play/yourbucket/file2.txt
+   mc stat myminio/mybucket/file1.txt myminio/yourbucket/file2.txt
 
-To display detail for all objects in a bucket, use :mc-cmd:`~mc stat --recursive`:
+To display detail for all objects in a bucket, use :mc-cmd:`~mc stat --recursive`.
+The following example displays details for all objects in bucket ``mybucket``:
 
 .. code-block:: shell
    :class: copyable
