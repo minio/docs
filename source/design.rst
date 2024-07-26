@@ -506,6 +506,7 @@ definitions. The initial table links to each definition.
 - :mc-cmd:`foo bar baz`
 - :data:`foo`
 - :data:`foo.bar`
+- :std:option:`--foo`
 
 
 .. mc:: foo
@@ -534,6 +535,17 @@ for display. This is intentional (For now).
    .. data:: bar
 
       These are nested and linked.
+
+.. std:option:: --foo
+
+   Used for defining global arguments for CLI commands.
+
+   Example:
+
+   .. code-block::
+
+      :std:option:`--json <mc.--json>`
+
 
 Images
 ------

@@ -21,20 +21,18 @@ Syntax
 
 .. start-mc-stat-desc
 
-The :mc:`mc stat` command displays information on objects in a MinIO bucket,
-including object metadata. 
+The :mc:`mc stat` command displays information on objects in a MinIO bucket, including object metadata.
+You can also use it to retrieve bucket metadata.
 
 .. end-mc-stat-desc
 
-You can also use :mc:`mc stat` against the local filesystem to produce similar
-results to the ``stat`` commandline tool.
+You can also use :mc:`mc stat` against the local filesystem to produce similar results to the ``stat`` commandline tool.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command displays information on all objects in the
-      ``mydata`` bucket on the ``myminio`` MinIO deployment:
+      The following command displays information on all objects in the ``mydata`` bucket on the ``myminio`` MinIO deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -61,8 +59,7 @@ results to the ``stat`` commandline tool.
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-      :mc-cmd:`mc stat --version-id` is mutually exclusive with multiple
-      parameters. See the reference documentation for more information.
+      :mc-cmd:`mc stat --version-id` is mutually exclusive with multiple parameters. See the reference documentation for more information.
 
 Parameters
 ~~~~~~~~~~
@@ -70,8 +67,7 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The :ref:`alias <alias>` of a MinIO deployment and the full path to the
-   object for which to retrieve detailed information. For example:
+   The :ref:`alias <alias>` of a MinIO deployment and the full path to the object for which to retrieve detailed information. For example:
 
    .. code-block:: shell
 
@@ -81,17 +77,15 @@ Parameters
 
    .. code-block:: shell
 
-      mc stat play/mybucket/myobject.txt myminio/mybucket/myobject.txt
+      mc stat myminio/mybucket/myobject.txt myminio/mybucket/myobject.txt
 
-   If specifying the path to a bucket or bucket prefixy, you **must**
-   include the :mc-cmd:`mc stat --recursive` flag:
+   If specifying the path to a bucket or bucket prefixy, you **must** include the :mc-cmd:`mc stat --recursive` flag:
 
    .. code-block:: shell
 
       mc stat --recursive myminio/mybucket/
 
-   For retrieving information on a file from a local filesystem, specify the
-   full path to that file:
+   For retrieving information on a file from a local filesystem, specify the full path to that file:
 
    .. code-block:: shell
 
@@ -100,25 +94,19 @@ Parameters
 .. mc-cmd:: --encrypt-key
    :optional:
 
-   Encrypt or decrypt objects using server-side encryption with
-   client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
+   Encrypt or decrypt objects using server-side encryption with client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
    
    - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
+   - Each ``VALUE`` represents the data key to use for encrypting object(s).
 
-   Enclose the entire list of key-value pairs passed to 
-   :mc-cmd:`~mc stat --encrypt-key` in double quotes ``"``.
+   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc stat --encrypt-key` in double quotes ``"``.
 
-   :mc-cmd:`~mc stat --encrypt-key` can use the ``MC_ENCRYPT_KEY``
-   environment variable for retrieving a list of encryption key-value pairs
-   as an alternative to specifying them on the command line.
+   :mc-cmd:`~mc stat --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --recursive, r
    :optional:
 
-   Recursively :mc:`mc stat` the contents of the MinIO bucket
-   specified to :mc-cmd:`~mc stat ALIAS`.
+   Recursively :mc:`mc stat` the contents of the MinIO bucket specified to :mc-cmd:`~mc stat ALIAS`.
 
 .. mc-cmd:: --rewind
    :optional:
@@ -134,9 +122,7 @@ Parameters
       :start-after: start-versions-desc
       :end-before: end-versions-desc
 
-   Use :mc-cmd:`~mc stat --versions` and 
-   :mc-cmd:`~mc stat --rewind` together to remove all object
-   versions which existed at a specific point in time.
+   Use :mc-cmd:`~mc stat --versions` and  :mc-cmd:`~mc stat --rewind` together to remove all object versions which existed at a specific point in time.
 
 .. mc-cmd:: --version-id, vid
    :optional:
@@ -154,36 +140,119 @@ Parameters
 Examples
 --------
 
-.. tab-set::
+Display Object Details
+~~~~~~~~~~~~~~~~~~~~~~
 
-   .. tab-item:: Single Object
+The following example displays details of the object ``myfile.txt`` in the bucket ``mybucket``:
 
-      .. code-block:: shell
-         :class: copyable
+.. code-block:: shell
+   :class: copyable
 
-         mc stat ALIAS/PATH
+   mc stat myminio/mybucket/myfile.txt
 
-      - Replace :mc-cmd:`ALIAS <mc stat ALIAS>` with the 
-        :mc:`alias <mc alias>` of the S3-compatible host.
+The output resembles the following:
 
-      - Replace :mc-cmd:`PATH <mc stat ALIAS>` with the path to the bucket
-        or object on the S3-compatible host.
+.. code-block:: shell
 
-   .. tab-item:: Object(s) in Bucket
+   Name      : myfile.txt
+   Date      : 2024-07-16 15:40:02 MDT 
+   Size      : 6.0 KiB 
+   ETag      : 3b38f7b05a0c42acdc377e60b2a74ddf 
+   Type      : file 
+   Metadata  :
+     Content-Type: text/plain 
 
-      Use :mc:`mc stat` with the :mc-cmd:`~mc stat --recursive` option
-      to apply the operation to all objects in the bucket:
+You can also specify more than one object:
 
-      .. code-block:: shell
-         :class: copyable
+.. code-block:: shell
+   :class: copyable
 
-         mc stat --recursive ALIAS/PATH
+   mc stat myminio/mybucket/file1.txt play/yourbucket/file2.txt
 
-      - Replace :mc-cmd:`ALIAS <mc stat ALIAS>` with the 
-        :mc:`alias <mc alias>` of the S3-compatible host.
+To display detail for all objects in a bucket, use :mc-cmd:`~mc stat --recursive`:
 
-      - Replace :mc-cmd:`PATH <mc stat ALIAS>` with the path to the bucket
-        or object on the S3-compatible host.
+.. code-block:: shell
+   :class: copyable
+
+   mc stat --recursive myminio/mybucket
+
+The output resembles the following:
+
+.. code-block:: shell
+
+   Name      : file1.txt
+   Date      : 2024-07-16 15:40:02 MDT
+   Size      : 6.0 KiB
+   ETag      : 3b38f7b05a0c42acdc377e60b2a74ddf
+   Type      : file
+   Metadata  :
+     Content-Type: text/plain
+
+   Name      : file2.txt
+   Date      : 2024-07-26 10:45:19 MDT
+   Size      : 6.0 KiB
+   ETag      : 3b38f7b05a0c42acdc377e60b2a74ddf
+   Type      : file
+   Metadata  :
+     Content-Type: text/plain
+
+
+Display Bucket Details
+~~~~~~~~~~~~~~~~~~~~~~
+
+The following example displays information about the bucket ``mybucket`` on the ``myminio`` MinIO deployment:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc stat myminio/mybucket
+
+The output resembles the following:
+
+.. code-block:: shell
+
+   Name      : mybucket
+   Date      : 2024-07-26 10:56:43 MDT 
+   Size      : N/A    
+   Type      : folder 
+
+   Properties:
+     Versioning: Un-versioned
+     Location: us-east-1
+     Anonymous: Disabled
+     ILM: Disabled
+
+   Usage:
+         Total size: 6.0 KiB
+      Objects count: 1
+     Versions count: 0
+
+   Object sizes histogram:
+      1 object(s) BETWEEN_1024B_AND_1_MB
+      1 object(s) BETWEEN_1024_B_AND_64_KB
+      0 object(s) BETWEEN_10_MB_AND_64_MB
+      0 object(s) BETWEEN_128_MB_AND_512_MB
+      0 object(s) BETWEEN_1_MB_AND_10_MB
+      0 object(s) BETWEEN_256_KB_AND_512_KB
+      0 object(s) BETWEEN_512_KB_AND_1_MB
+      0 object(s) BETWEEN_64_KB_AND_256_KB
+      0 object(s) BETWEEN_64_MB_AND_128_MB
+      0 object(s) GREATER_THAN_512_MB
+      0 object(s) LESS_THAN_1024_B
+
+
+Count of Objects in a Bucket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To show the number of objects in a bucket, use :std:option:`--json <mc.--json>` and extract the value of ``objectsCount`` with a JSON parser:
+
+The following example uses the `jq <https://jqlang.github.io/jq/>`__ utility:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc stat myminio/mybucket --json | jq '.Usage.objectsCount'
+
 
 Behavior
 --------
