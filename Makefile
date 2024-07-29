@@ -174,6 +174,7 @@ sync-operator-version:
 	@echo "Retrieving latest Operator version"
 	@$(eval OPERATOR = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/operator/releases/latest | sed "s/https:\/\/github.com\/minio\/operator\/releases\/tag\///" | sed "s/v//"))
 	@$(eval kname = $(shell uname -s))
+	@$(eval K8SFLOOR = $(shell curl -sL https://raw.githubusercontent.com/minio/operator/master/testing/kind-config-floor.yaml | grep -F -m 1 'node:v' | awk 'BEGIN { FS = ":" } ; {print $$3}'))
 
 	@echo "Updating Operator to ${OPERATOR}"
 
@@ -182,9 +183,11 @@ sync-operator-version:
 	@case "${kname}" in \
 	"Darwin") \
 		sed -i "" "s|OPERATOR|${OPERATOR}|g" source/conf.py;\
+		sed -i "" "s|K8SFLOOR|${K8SFLOOR}|g" source/conf.py; \
 		;; \
 	*) \
 		sed -i "s|OPERATOR|${OPERATOR}|g" source/conf.py; \
+		sed -i "s|K8SFLOOR|${K8SFLOOR}|g" source/conf.py; \
 		;; \
 	esac
 

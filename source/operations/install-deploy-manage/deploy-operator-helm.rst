@@ -21,13 +21,11 @@ The following procedure uses a Helm Chart to install the :ref:`MinIO Kubernetes 
 Prerequisites
 -------------
 
-To install the Operator with Helm you will need the following:
+See the :ref:`Operator Prerequisites <minio-operator-prerequisites>` for a baseline of requirements.
+Helm installations have the following additional requirements:
 
-* An existing Kubernetes cluster.
-* The ``kubectl`` CLI tool on your local host, the same version as the cluster.
-* `Helm <https://helm.sh/docs/intro/install/>`__ version 3.8 or greater.
-* `yq <https://github.com/mikefarah/yq/#install>`__ version 4.18.1 or greater.
-* Access to run ``kubectl`` commands on the cluster from your local host.
+* `Helm <https://helm.sh/docs/intro/install/>`__ (Use the Version appropriate for your Kubernetes API version)
+* `yq <https://github.com/mikefarah/yq/#install>`__ 
 
 For more about Operator installation requirements, including supported Kubernetes versions and TLS certificates, see the :ref:`Operator deployment prerequisites <minio-operator-prerequisites>`.
 

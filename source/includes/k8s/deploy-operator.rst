@@ -64,14 +64,15 @@ The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes t
 Prerequisites
 -------------
 
-Kubernetes Version 1.28.0
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Kubernetes Version |k8s-floor|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. important::
+MinIO tests |operator-version-stable| against a floor of Kubernetes API of |k8s-floor|.
+MinIO **strongly recommends** maintaining Kubernetes infrastructure using `actively maintained Kubernetes API versions <https://kubernetes.io/releases/>`__.
 
-   MinIO **strongly recommends** upgrading Production clusters running `End-Of-Life <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__ Kubernetes APIs.
 
-Starting with v5.0.0, MinIO **requires** Kubernetes 1.28.0 or later for both the infrastructure and the ``kubectl`` CLI tool.
+MinIO **strongly recommends** upgrading Kubernetes clusters running with `End-Of-Life API versions <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__
+
 
 Kustomize and ``kubectl``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
