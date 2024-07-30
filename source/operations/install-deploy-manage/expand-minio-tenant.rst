@@ -128,9 +128,9 @@ Decommissioning a server pool involves three steps:
 
 1) Run the :mc-cmd:`mc admin decommission start` command against the Tenant
 
-2) Wait until decomissioning completes
+2) Wait until decommissioning completes
 
-3) Modify the Tenant YAML to remove the decomissioned pool
+3) Modify the Tenant YAML to remove the decommissioned pool
 
 When removing the Tenant pool, ensure the ``spec.pools.[n].name`` fields have values for all remaining pools.
 
@@ -140,4 +140,4 @@ When removing the Tenant pool, ensure the ``spec.pools.[n].name`` fields have va
 
 .. important::
 
-   You cannot reuse the same pool name or hostname sequence for a decomissioned pool.
+   You cannot reuse the same pool name or hostname sequence for a decommissioned pool.
