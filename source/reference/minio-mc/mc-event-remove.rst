@@ -77,16 +77,16 @@ Parameters
 .. mc-cmd:: ARN
 
    *Required* The :aws-docs:`Amazon Resource Name (ARN)
-   <general/latest/gr/aws-arns-and-namespaces>` of the notification target.
+   <IAM/latest/UserGuide/reference-arns>` of the notification target.
 
-   The MinIO server outputs an ARN for each configured 
-   notification target at server startup. See 
+   The MinIO server outputs an ARN for each configured
+   notification target at server startup. See
    :ref:`minio-bucket-notifications` for more
    information.
 
 .. mc-cmd:: --event
-   
-   
+
+
    *Optional* The event(s) to remove. Specify multiple events using a comma
    ``,`` delimiter. See :ref:`mc-event-supported-events` for supported events.
 
@@ -94,13 +94,13 @@ Parameters
    bucket with the :mc-cmd:`~mc event rm ARN` notification target.
 
 .. mc-cmd:: --force
-   
-   
+
+
    *Optional* Removes all events on the :mc-cmd:`~mc event rm ALIAS` bucket
    with the :mc-cmd:`~mc event rm ARN` notification target.
 
 .. mc-cmd:: --prefix
-   
+
 
    *Optional* The bucket prefix in which the command removes bucket
    notifications.
@@ -111,10 +111,10 @@ Parameters
    ``play/mybucket/photos``.
 
 .. mc-cmd:: --suffix
-   
+
 
    *Optional* The bucket suffix in which the command removes bucket
-   notifications. 
+   notifications.
 
    For example, given a :mc-cmd:`~mc event rm ALIAS` of
    ``play/mybucket`` and a :mc-cmd:`~mc event rm --suffix` of
@@ -154,12 +154,12 @@ Remove Event Notifications from a Bucket
 
          mc event rm ALIAS ARN
 
-      - Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO 
+      - Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO
         deployment on which to add the bucket notification event. For example:
 
         ``myminio/mydata``
 
-      - Replace ``ARN`` with the notification target 
+      - Replace ``ARN`` with the notification target
         :mc-cmd:`ARN <mc event add ARN>`.
 
 Behavior
