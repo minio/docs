@@ -22,7 +22,7 @@ You can use the MinIO Console to perform many of the deployment monitoring and m
 
    The MinIO Console is a web-based interface for the MinIO Server.
 
-   It is distinct and independent from the MinIO Kubernetes Operator Console which is deprecated as of Operator 6.0.0.
+   It is distinct and independent from the MinIO Kubernetes Operator Console which was deprecated and removed as of Operator 6.0.0.
 
 .. _minio-console-monitoring:
 

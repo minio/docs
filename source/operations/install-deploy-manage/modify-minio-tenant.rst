@@ -40,7 +40,7 @@ The method for modifying the Tenant depends on how you deployed the tenant:
       The command above assumes use of the MinIO Operator Chart repository.
       If you installed the Chart manually or by using a different repository name, specify that chart or name in the command.
 
-      Replace ``TENANT-NAME`` and ``TENANT-NAMESPACE`` with the name and namespace of the Tenant respectively.
+      Replace ``TENANT-NAME`` and ``TENANT-NAMESPACE`` with the name and namespace of the Tenant, respectively.
       You can use ``helm list -n TENANT-NAMESPACE`` to validate the Tenant name.
 
       See :ref:`minio-tenant-chart-values` for more complete documentation on the available Chart fields.

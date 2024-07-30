@@ -227,7 +227,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
          kubectl kustomize https://github.com/minio/operator/examples/kustomization/base/ > tenant-base.yaml
 
-      The command creates a single YAML file with multiple objects separated by the ``---``` line.
+      The command creates a single YAML file with multiple objects separated by the ``---`` line.
       Open the file in your preferred editor.
 
       The following steps reference each object based on it's ``kind`` and ``metadata.name`` fields:
@@ -327,7 +327,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
       The YAML object ``kind: Namespace`` sets the default namespace for the Tenant to ``minio-tenant``.
 
       You can change this value to create a different namespace for the Tenant.
-      You must change **all** ``metadata.namespace`` values in the YAML file to match the Namespace
+      You must change **all** ``metadata.namespace`` values in the YAML file to match the Namespace.
 
    #. Deploy the Tenant
 

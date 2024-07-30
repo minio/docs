@@ -155,7 +155,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
            - Description
 
          * - ``tenant.certificate.requestAutoCert``
-           - Enable or disable MinIO :ref:`automatic TLS certificate generation <minio-tls>`
+           - Enable or disable MinIO :ref:`automatic TLS certificate generation <minio-tls>`.
 
              Defaults to ``true`` or enabled if omitted.
 
@@ -163,7 +163,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
            - Customize the behavior of :ref:`automatic TLS <minio-tls>`, if enabled.
 
          * - ``tenant.certificate.externalCertSecret``
-           - Enable TLS for multiple hostnames via Server Name Indication (SNI)
+           - Enable TLS for multiple hostnames via Server Name Indication (SNI).
          
              Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` or ``cert-manager``.
 

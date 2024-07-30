@@ -288,7 +288,7 @@ You can find the MinIO Operator Interface from the :guilabel:`Operators` left-ha
    The :guilabel:`Status` column must read :guilabel:`Success` to access the Operator interface.
 
 
-7) Next Steps
+5) Next Steps
 ~~~~~~~~~~~~~
 
 After deploying the MinIO Operator, you can create a new MinIO Tenant.
