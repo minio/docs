@@ -58,15 +58,15 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 
 .. cond:: k8s and not (openshift or eks or gke or aks)
 
-   Kubernetes Version 1.28.0
-   ~~~~~~~~~~~~~~~~~~~~~~~~~
+   Kubernetes Version |k8s-floor|
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   MinIO Operator requires Kubernetes 1.28.0 or later.
-   The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must be the same version.
-   Upgrade ``kubectl`` to the same version as the Kubernetes version used on the cluster.
+   MinIO tests |operator-version-stable| against a floor of Kubernetes API of |k8s-floor|.
+   MinIO **strongly recommends** maintaining Kubernetes infrastructure using `actively maintained Kubernetes API versions <https://kubernetes.io/releases/>`__.
 
-   This procedure assumes the host machine has ``kubectl`` installed and configured with access to the target Kubernetes cluster. 
-   The host machine *must* have access to a web browser application.
+
+   MinIO **strongly recommends** upgrading Kubernetes clusters running with `End-Of-Life API versions <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__.
+
 
 .. cond:: openshift
 
@@ -206,7 +206,7 @@ Deploy a MinIO Tenant using Kustomize
 
 The following procedure uses ``kubectl -k`` to deploy a MinIO Tenant using the ``base`` Kustomization template in the :minio-git:`MinIO Operator Github repository <operator/tree/master/examples/kustomization/base>`.
 
-You can select a different base or pre-built template from the :minio-git:`repository <operator/tree/master/examples/kustomization/>` as your starting point, or build your own Kustomization resources using the MinIO Custom Resource Documentation.
+You can select a different base or pre-built template from the :minio-git:`repository <operator/tree/master/examples/kustomization/>` as your starting point, or build your own Kustomization resources using the :ref:`MinIO Custom Resource Documentation <minio-operator-crd>`.
 
 .. important::
 

@@ -74,6 +74,7 @@ MinIO **strongly recommends** maintaining Kubernetes infrastructure using `activ
 MinIO **strongly recommends** upgrading Kubernetes clusters running with `End-Of-Life API versions <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__
 
 
+
 Kustomize and ``kubectl``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

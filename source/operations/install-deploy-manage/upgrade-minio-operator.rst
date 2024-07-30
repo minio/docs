@@ -15,8 +15,9 @@ You can upgrade the MinIO Operator at any time without impacting your managed Mi
 As part of the upgrade process, the Operator may update and restart Tenants to support changes to the MinIO Custom Resource Definition (CRD). 
 These changes require no action on the part of any operator or administrator, and do not impact Tenant operations.
 
-This page describes how to upgrade from Operator 5.0.x or later to |operator-version-stable|.
-To upgrade from Operator 4.5.8 or earlier, see :ref:`Upgrade MinIO Operator to v4.5.8 <minio-k8s-upgrade-minio-operator-to-4.5.8>`.
+This page describes how to upgrade from Operator 5.0.15 to |operator-version-stable|.
+See :ref:`minio-k8s-upgrade-minio-operator-to-5.0.15` for instructions on upgrading to Operator 5.0.15 before starting this procedure.
+
 
 .. admonition:: Operator 6.0.0 Deprecates the Operator Console
 
