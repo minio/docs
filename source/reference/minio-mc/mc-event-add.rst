@@ -21,7 +21,7 @@ The :mc:`mc event add` command adds event notification triggers to a bucket.
 
 .. end-mc-event-add-desc
 
-MinIO automatically sends triggered events to the configured 
+MinIO automatically sends triggered events to the configured
 :ref:`notification target <minio-bucket-notifications>`.
 
 .. tab-set::
@@ -37,7 +37,7 @@ MinIO automatically sends triggered events to the configured
 
          mc event add --event "put,delete" myminio/mydata arn:aws:sqs::primary:target
 
-      The specified ARN corresponds to a configured 
+      The specified ARN corresponds to a configured
       :ref:`bucket notification target <minio-bucket-notifications>` on the
       ``myminio`` deployment.
 
@@ -66,7 +66,7 @@ Parameters
 
 .. mc-cmd:: ALIAS
 
-   *Required* The MinIO :ref:`alias <alias>` and bucket to 
+   *Required* The MinIO :ref:`alias <alias>` and bucket to
    which the command adds the new event notification. For example:
 
    .. code-block:: shell
@@ -76,25 +76,25 @@ Parameters
 .. mc-cmd:: ARN
 
    *Required* The :aws-docs:`Amazon Resource Name (ARN)
-   <general/latest/gr/aws-arns-and-namespaces>` of the notification target.
+   <IAM/latest/UserGuide/reference-arns>` of the notification target.
 
-   The MinIO server outputs an ARN for each configured 
-   notification target at server startup. See 
+   The MinIO server outputs an ARN for each configured
+   notification target at server startup. See
    :ref:`Bucket Notifications <minio-bucket-notifications>` for more
    information.
 
 .. mc-cmd:: --event
-   
 
-   *Optional* The event(s) for which MinIO generates bucket notifications. 
+
+   *Optional* The event(s) for which MinIO generates bucket notifications.
 
    Supports the following values:
 
    - ``put``
    - ``get``
    - ``delete``
- 
-   Specify multiple value using a comma ``,`` delimiter. 
+
+   Specify multiple value using a comma ``,`` delimiter.
 
    Defaults to ``put,delete,get``.
 
@@ -102,15 +102,15 @@ Parameters
    associated to each of the supported values.
 
 .. mc-cmd:: ignore-existing, p
-   
+
 
    *Optional* Directs MinIO to ignore applying the specified event
    triggers if an existing matching trigger exists.
 
 .. mc-cmd:: --prefix
-   
 
-   *Optional* The bucket prefix in which the specified 
+
+   *Optional* The bucket prefix in which the specified
    :mc-cmd:`~mc event add --event` can trigger a bucket notification.
 
    For example, given a :mc-cmd:`~mc event add ALIAS` of ``play/mybucket``
@@ -120,10 +120,10 @@ Parameters
    Omit to trigger the event for all prefixes and objects in the bucket.
 
 .. mc-cmd:: --suffix
-   
 
-   *Optional* The bucket suffix in which the specified 
-   :mc-cmd:`~mc event add --event` can trigger a bucket notification. 
+
+   *Optional* The bucket suffix in which the specified
+   :mc-cmd:`~mc event add --event` can trigger a bucket notification.
 
    For example, given a :mc-cmd:`~mc event add ALIAS` of ``play/mybucket``
    and a :mc-cmd:`~mc event add --suffix` of ``.jpg``, only events in
@@ -150,7 +150,7 @@ Add an Event Notification to a Bucket
 
       The following command adds a new event notification trigger for all
       S3 ``PUT``, ``GET``, and ``DELETE`` operations on a bucket. The command
-      assumes the MinIO deployment has at least one configured 
+      assumes the MinIO deployment has at least one configured
       :ref:`bucket notification target <minio-bucket-notifications>`:
 
       .. code-block:: shell
@@ -165,13 +165,13 @@ Add an Event Notification to a Bucket
 
          mc event add ALIAS ARN
 
-      - Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO 
+      - Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO
         deployment and the bucket on which to add the bucket notification event.
         For example:
 
         ``myminio/mydata``
 
-      - Replace ``ARN`` with the notification target 
+      - Replace ``ARN`` with the notification target
         :mc-cmd:`ARN <mc event add ARN>`.
 
 
