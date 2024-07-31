@@ -22,9 +22,9 @@ function main() {
 
    # Get the full list
 
-   cat /Users/andrealongo/repos/minio-fork/docs/metrics/v3.md | csplit - /"## Metric Categories"/
+   #cat /Users/andrealongo/repos/minio-fork/docs/metrics/v3.md | csplit - /"## Metric Categories"/
 
-   # curl --retry 10 -Ls https://raw.githubusercontent.com/minio/minio/dd14a986473bb2c44ea8eeb73deb18e98f5b35d3/docs/metrics/v3.md | csplit - /"## Metrics Listing"/
+   curl --retry 10 -Ls https://raw.githubusercontent.com/minio/minio/master/docs/metrics/v3.md | csplit - /"## Metric Categories"/
 
    # Ignore xx00, contains intro text
    # Overwritten in second csplit anyway
