@@ -22,8 +22,6 @@ function main() {
 
    # Get the full list
 
-   #cat /Users/andrealongo/repos/minio-fork/docs/metrics/v3.md | csplit - /"## Metric Categories"/
-
    curl --retry 10 -Ls https://raw.githubusercontent.com/minio/minio/master/docs/metrics/v3.md | csplit - /"## Metric Categories"/
 
    # Ignore xx00, contains intro text
