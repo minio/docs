@@ -74,7 +74,7 @@ The MinIO Operator supports expanding a MinIO Tenant by adding additional pools.
 
          The ``spec.pools`` array describes the current pool topology.
 
-      #. Add a new document to the ``spec.pools`` array.
+      #. Add a new entry to the ``spec.pools`` array.
 
          The new pool must reflect your intended combination of Worker nodes, volumes per server, storage class, and affinity/scheduler settings.
          See :ref:`minio-operator-crd` for more complete documentation on Pool-related configuration settings.
@@ -91,11 +91,11 @@ The MinIO Operator supports expanding a MinIO Tenant by adding additional pools.
 
    .. tab-item:: Helm
 
-      #. Review the Helm ``values.yaml`` object.
+      #. Review the Helm ``values.yaml`` file.
 
          The ``tenant.pools`` array describes the current pool topology.
 
-      #. Add a new document to the ``tenant.pools`` array.
+      #. Add a new entry to the ``tenant.pools`` array.
 
          The new pool must reflect your intended combination of Worker nodes, volumes per server, storage class, and affinity/scheduler settings.
          See :ref:`minio-tenant-chart-values` for more complete documentation on Pool-related configuration settings.
@@ -114,7 +114,7 @@ The MinIO Operator supports expanding a MinIO Tenant by adding additional pools.
          Replace ``TENANT-NAME`` and ``TENANT-NAMESPACE`` with the name and namespace of the Tenant respectively.
          You can use ``helm list -n TENANT-NAMESPACE`` to validate the Tenant name.
 
-You can use the ``watch kubectl get all -n TENANT-NAMESPACE`` to monitor the progress of expansion.
+You can use the ``kubectl get events -n TENANT-NAMESPACE --watch`` to monitor the progress of expansion.
 The MinIO Operator updates services to route connections appropriately across the new nodes.
 If you use customized services, routes, ingress, or similar Kubernetes network components, you may need to update those components for the new pod hostname ranges.
 

@@ -35,7 +35,7 @@ The method for modifying the Tenant depends on how you deployed the tenant:
 
       .. code-block:: shell
 
-         helm upgrade  TENANT-NAME minio-operator/tenant -f values.yaml -n TENANT-NAMESPACE
+         helm upgrade TENANT-NAME minio-operator/tenant -f values.yaml -n TENANT-NAMESPACE
 
       The command above assumes use of the MinIO Operator Chart repository.
       If you installed the Chart manually or by using a different repository name, specify that chart or name in the command.
