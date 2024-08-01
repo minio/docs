@@ -62,7 +62,7 @@ extlinks = {
     's3-api'          : ('https://docs.aws.amazon.com/AmazonS3/latest/API/%s', None),
     'iam-docs'        : ('https://docs.aws.amazon.com/IAM/latest/UserGuide/%s', None),
     'minio-release'   : ('https://github.com/minio/minio/releases/tag/%s', '%s'),
-    'mc-release'      : ('https://github.com/minio/mc/releases/tag/%s', None),
+    'mc-release'      : ('https://github.com/minio/mc/releases/tag/%s', '%s'),
     'prometheus-docs' : ('https://prometheus.io/docs/%s', None),
     'podman-docs'     : ('https://docs.podman.io/en/latest/%s', None),
     'podman-git'      : ('https://github.com/containers/podman/%s', None),
