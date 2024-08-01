@@ -25,7 +25,7 @@ Deploy a MinIO Tenant
 
 .. cond:: k8s and not openshift
 
-   This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using the MinIO Operator Console.
+   This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using either Kustomize or MinIO's Helm Charts.
 
 .. screenshot temporarily removed
 
@@ -36,15 +36,9 @@ Deploy a MinIO Tenant
    :alt: MinIO Operator Console
 
 
-The MinIO Operator Console is designed for deploying multi-node distributed MinIO Deployments.
-
 Deploying Single-Node topologies requires additional configurations not covered in this documentation.
 You can alternatively use a simple Kubernetes YAML object to describe a Single-Node topology for local testing and evaluation as necessary.
-
 MinIO does not recommend nor support single-node deployment topologies for production environments.
-
-The Operator Console provides a rich user interface for deploying and managing MinIO Tenants on Kubernetes infrastructure. 
-Installing the MinIO :ref:`Kubernetes Operator <deploy-operator-kubernetes>` automatically installs and configures the Operator Console.
 
 This documentation assumes familiarity with all referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
@@ -64,15 +58,15 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 
 .. cond:: k8s and not (openshift or eks or gke or aks)
 
-   Kubernetes Version 1.21.0
-   ~~~~~~~~~~~~~~~~~~~~~~~~~
+   Kubernetes Version |k8s-floor|
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   MinIO Operator requires Kubernetes 1.21.0 or later.
-   The Kubernetes infrastructure *and* the ``kubectl`` CLI tool must be the same version.
-   Upgrade ``kubectl`` to the same version as the Kubernetes version used on the cluster.
+   MinIO tests |operator-version-stable| against a floor of Kubernetes API of |k8s-floor|.
+   MinIO **strongly recommends** maintaining Kubernetes infrastructure using `actively maintained Kubernetes API versions <https://kubernetes.io/releases/>`__.
 
-   This procedure assumes the host machine has ``kubectl`` installed and configured with access to the target Kubernetes cluster. 
-   The host machine *must* have access to a web browser application.
+
+   MinIO **strongly recommends** upgrading Kubernetes clusters running with `End-Of-Life API versions <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__.
+
 
 .. cond:: openshift
 
@@ -175,6 +169,9 @@ Persistent Volumes
 
    MinIO can use any Kubernetes :kube-docs:`Persistent Volume (PV) <concepts/storage/persistent-volumes>` that supports the :kube-docs:`ReadWriteOnce <concepts/storage/persistent-volumes/#access-modes>` access mode.
    MinIO's consistency guarantees require the exclusive storage access that ``ReadWriteOnce`` provides.
+   The Persistent Volume **must** exist prior to deploying the Tenant.
+
+
    Additionally, MinIO recommends setting a reclaim policy of ``Retain`` for the PVC :kube-docs:`StorageClass <concepts/storage/storage-classes>`.
    Where possible, configure the Storage Class, CSI, or other provisioner underlying the PV to format volumes as XFS to ensure best performance.
 
@@ -204,463 +201,185 @@ Persistent Volumes
    For more information on AKS disk types, see :azure-docs:`Azure disk types <virtual-machines/disk-types>`.
 
 
-Deploy a Tenant using the MinIO Operator Console
-------------------------------------------------
+Deploy a MinIO Tenant using Kustomize
+-------------------------------------
 
-To deploy a tenant from the MinIO Operator Console, complete the following steps in order:
+The following procedure uses ``kubectl -k`` to deploy a MinIO Tenant using the ``base`` Kustomization template in the :minio-git:`MinIO Operator Github repository <operator/tree/master/examples/kustomization/base>`.
 
-:ref:`create-tenant-access-minio-operator-console`
+You can select a different base or pre-built template from the :minio-git:`repository <operator/tree/master/examples/kustomization/>` as your starting point, or build your own Kustomization resources using the :ref:`MinIO Custom Resource Documentation <minio-operator-crd>`.
 
-:ref:`create-tenant-complete-tenant-setup`
+.. important::
 
-:ref:`create-tenant-configure-section`
+   If you use Kustomize to deploy a MinIO Tenant, you must use Kustomize to manage or upgrade that deployment.
+   Do not use ``kubectl krew``, a Helm Chart, or similar methods to manage or upgrade the MinIO Tenant.
 
-:ref:`create-tenant-images-section`
+This procedure is not exhaustive of all possible configuration options available in the :ref:`Tenant CRD <minio-operator-crd>`.
+It provides a baseline from which you can modify and tailor the Tenant to your requirements.
 
-:ref:`create-tenant-pod-placement-section`
+.. container:: procedure
 
-:ref:`create-tenant-identity-provider-section`
+   #. Create a YAML object for the Tenant
 
-:ref:`create-tenant-security-section`
+      Use the ``kubectl kustomize`` command to produce a YAML file containing all Kubernetes resources necessary to deploy the ``base`` Tenant:
 
-:ref:`create-tenant-encryption-section`
+      .. code-block:: shell
+         :class: copyable
 
-:ref:`create-tenant-deploy-view-tenant`
+         kubectl kustomize https://github.com/minio/operator/examples/kustomization/base/ > tenant-base.yaml
 
-:ref:`create-tenant-connect-tenant`
+      The command creates a single YAML file with multiple objects separated by the ``---`` line.
+      Open the file in your preferred editor.
 
-.. _create-tenant-access-minio-operator-console:
+      The following steps reference each object based on it's ``kind`` and ``metadata.name`` fields:
 
-1) Access the MinIO Operator Console
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   #. Configure the Tenant topology
 
-.. include:: /includes/common/common-k8s-connect-operator-console.rst
+      The ``kind: Tenant`` object describes the MinIO Tenant.
 
-Open your browser to the appropriate URL and enter the JWT Token into the login page. 
-You should see the :guilabel:`Tenants` page.
+      The following fields share the ``spec.pools[0]`` prefix and control the number of servers, volumes per server, and storage class of all pods deployed in the Tenant:
+      
+      .. list-table::
+         :header-rows: 1
+         :widths: 30 70
 
-.. screenshot temporarily removed
+         * - Field
+           - Description
 
-   .. image:: /images/k8s/operator-dashboard.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: MinIO Operator Console
+         * - ``servers`` 
+           - The number of MinIO pods to deploy in the Server Pool.
 
-Select :guilabel:`+ Create Tenant` to start creating a MinIO Tenant.
+         * - ``volumesPerServer`` 
+           - The number of persistent volumes to attach to each MinIO pod (``servers``).
+             The Operator generates ``volumesPerServer x servers`` Persistant Volume Claims for the Tenant.
 
-.. _create-tenant-complete-tenant-setup:
+         * - ``volumeClaimTemplate.spec.storageClassName`` 
+           - The Kubernetes storage class to associate with the generated Persistent Volume Claims.
 
-2) Complete the Tenant :guilabel:`Setup`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+             If no storage class exists matching the specified value *or* if the specified storage class cannot meet the requested number of PVCs or storage capacity, the Tenant may fail to start.
 
-The :guilabel:`Setup` pane displays core configuration settings for the MinIO Tenant. 
+         * - ``volumeClaimTemplate.spec.resources.requests.storage``
+           - The amount of storage to request for each generated PVC.
 
-Settings marked with an asterisk :guilabel:`*` are *required*:
+   #. Configure Tenant Affinity or Anti-Affinity
 
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
+      The MinIO Operator supports the following Kubernetes Affinity and Anti-Affinity configurations:
 
-   * - Field
-     - Description
+      - Node Affinity (``spec.pools[n].nodeAffinity``)
+      - Pod Affinity (``spec.pools[n].podAffinity``)
+      - Pod Anti-Affinity (``spec.pools[n].podAntiAffinity``)
 
-   * - :guilabel:`Name`
-     - The name of the MinIO Tenant
+      MinIO recommends configuring Tenants with Pod Anti-Affinity to ensure that the Kubernetes schedule does not schedule multiple pods on the same worker node.
 
-   * - :guilabel:`Namespace`
-     - The Kubernetes Namespace in which to deploy the tenant. 
-       You can create the namespace by selecting the plus :guilabel:`+` icon if it does not exist.
+      If you have specific worker nodes on which you want to deploy the tenant, pass those node labels or filters to the ``nodeAffinity`` field to constrain the scheduler to place pods on those nodes.
 
-       The Operator supports at most *one* MinIO Tenant per namespace.
+   #. Configure Network Encryption
 
-   * - :guilabel:`Storage Class`
-     - .. cond:: not eks
-     
-          Specify the Kubernetes Storage Class the Operator uses when generating Persistent Volume Claims for the Tenant.
+      The MinIO Tenant CRD provides the following fields from which you can configure tenant TLS network encryption:
 
-          Ensure the specified storage class has sufficient available Persistent Volume resources to match each generated Persistent Volume Claim.
+      .. list-table::
+         :header-rows: 1
+         :widths: 30 70
 
-       .. cond:: eks
+         * - Field
+           - Description
 
-          Specify the EBS volume type to use for this tenant.
-          The following list is populated based on the AWS EBS CSI driver list of supported :github:`EBS volume types <kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/parameters.md>`:
+         * - ``tenant.certificate.requestAutoCert``
+           - Enable or disable MinIO :ref:`automatic TLS certificate generation <minio-tls>`
 
-          - ``gp3`` (General Purpose SSD)
-          - ``gp2`` (General Purpose SSD)
-          - ``io2`` (Provisioned IOPS SSD)
-          - ``io1`` (Provisioned IOPS SSD)
-          - ``st1`` (Throughput Optimized HDD)
-          - ``sc1`` (Cold Storage HDD)
+             Defaults to ``true`` or enabled if omitted.
 
-       .. cond:: gke
+         * - ``tenant.certificate.certConfig``
+           - Customize the behavior of :ref:`automatic TLS <minio-tls>`, if enabled.
 
-          Specify the GKE persistent disk type to use for this tenant.
-          The :gke-docs:`GKE CSI Driver <how-to/persistent-volumes/gce-pd-csi-driver>` provides the following storage classes by default:
+         * - ``tenant.certificate.externalCertSecret``
+           - Enable TLS for multiple hostnames via Server Name Indication (SNI)
+         
+             Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` or ``cert-manager``.
 
-          - ``standard-rwo`` (Balanced Persistent SSD)
-          - ``premium-rwo`` (Performance Persistent SSD)
+         * - ``tenant.certificate.externalCACertSecret``
+           - Enable validation of client TLS certificates signed by unknown, third-party, or internal Certificate Authorities (CA).
+         
+             Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` containing the full chain of CA certificates for a given authority.
 
-          You can create additional StorageClasses to represent other supported persistent disk types.
-          See :gke-docs:`Create a Storage Class <how-to/persistent-volumes/gce-pd-csi-driver#create_a_storageclass>` for more information.
+   #. Configure MinIO Environment Variables
 
-       .. cond:: aks
+      You can set MinIO Server environment variables using the ``tenant.configuration`` field.
 
-          Specify the AKS persistent disk type to use for this tenant.
-          The :aks-docs:`AKS CSI Driver <azure-disk-csi>` provides the following storage classes by default:
+      .. list-table::
+         :header-rows: 1
+         :widths: 30 70
 
-          - ``managed-csi`` (Standard SSD)
-          - ``managed-csi-premium`` (Premium SSD)
+         * - Field
+           - Description
 
-          You can create additional Storage Classes to represent other supported persistent disk types.
-          See :aks-docs:`Create a custom storage class <https://learn.microsoft.com/en-us/azure/aks/azure-disk-csi#create-a-custom-storage-class>` for more information.
+         * - ``tenant.configuration``
+           - Specify a Kubernetes opaque secret whose data payload ``config.env`` contains each MinIO environment variable you want to set.
 
-   * - :guilabel:`Number of Servers`
-     - The total number of MinIO server pods to deploy in the Tenant.
-       The Operator enforces a minimum of four server pods per tenant.
-       
-       The Operator by default uses pod anti-affinity, such that the Kubernetes cluster *must* have at least one worker node per MinIO server pod. 
-       Use the :guilabel:`Pod Placement` pane to modify the pod scheduling settings for the Tenant.
+             The ``config.env`` data payload **must** be a base64-encoded string.
+             You can create a local file, set your environment variables, and then use ``cat LOCALFILE | base64`` to create the payload.
 
-   * - :guilabel:`Drives per Server`
-     - The number of storage volumes (Persistent Volume Claims) the Operator requests per Server. 
+      The YAML includes an object ``kind: Secret`` with ``metadata.name: storage-configuration`` that sets the root username, password, erasure parity settings, and enables Tenant Console.
 
-       The Operator displays the :guilabel:`Total Volumes` under the :guilabel:`Resource Allocation` section. 
-       The Operator generates an equal number of PVC *plus two* for supporting Tenant services (Metrics and Log Search).
+      Modify this as needed to reflect your Tenant requirements.
 
-       .. cond:: not eks
-       
-          The specified :guilabel:`Storage Class` *must* correspond to a set of Persistent Volumes sufficient in number to match each generated PVC.
+   #. Review the Namespace
 
-       .. cond:: eks
+      The YAML object ``kind: Namespace`` sets the default namespace for the Tenant to ``minio-tenant``.
 
-          For deployments using the EBS CSI driver, the Operator provisions Persistent Volume Claims which result in the creation of EBS volumes of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
+      You can change this value to create a different namespace for the Tenant.
+      You must change **all** ``metadata.namespace`` values in the YAML file to match the Namespace.
 
-       .. cond:: gke
+   #. Deploy the Tenant
 
-          For deployments using the GKE CSI driver, the Operator provisions Persistent Volume Claims which result in the creation of GCP Disks of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
+      Use the ``kubectl apply -f`` command to deploy the Tenant.
 
-       .. cond:: aks
+      .. code-block:: shell
+         :class: copyable
 
-          For deployments using the AKS CSI Driver, the Operator provisions Persistent Volume Claims which result in the creation of Azure Disks of the specified :guilabel:`Storage Class` equal to ``Number of Drives per Server X Number of Servers``.
+         kubectl apply -f tenant-base.yaml
 
-   * - :guilabel:`Total Size`
-     - The total raw storage size for the Tenant. 
-       Specify both the total storage size *and* the :guilabel:`Unit` of that storage. 
-       All storage units are in SI values, e.g. :math:`Gi = GiB = 1024^3` bytes.
+      The command creates each of the resources specified in the YAML object at the configured namespace.
 
-       The Operator displays the :guilabel:`Drive Capacity` under the:guilabel:`Resource Allocation` section. 
-       The Operator sets this value as the requested storage capacity in each generated PVC.
+      You can monitor the progress using the following command:
 
-       The specified :guilabel:`Storage Class` *must* correspond to a set of Persistent Volumes sufficient in capacity to match each generated PVC.
+      .. code-block:: shell
+         :class: copyable
 
-   * - :guilabel:`Erasure Code Parity`
-     - The Erasure Code Parity to set for the deployment.
+         watch kubectl get all -n minio-tenant
 
-       The Operator displays the selected parity and its effect on the deployment under the :guilabel:`Erasure Code Configuration` section.
-       Erasure Code parity defines the overall resiliency and availability of data on the cluster.
-       Higher parity values increase tolerance to drive or node failure at the cost of total storage.
-       See :ref:`minio-erasure-coding` for more complete documentation.
+   #. Expose the Tenant MinIO S3 API port
 
-   * - :guilabel:`CPU Request`
-     - Specify the desired number of CPUs to allocate per MinIO server pod.
+      To test the MinIO Client :mc:`mc` from your local machine, forward the MinIO port and create an alias.
 
-   * - :guilabel:`Memory Request [Gi]`
-     - Specify the desired amount of memory (RAM) to allocate per MinIO server pod. 
-       See :ref:`minio-hardware-checklist-memory` for guidance on setting this value.
-       MinIO **requires** a minimum of 2GiB of memory per worker.
+      * Forward the Tenant's MinIO port:
 
-       The Kubernetes cluster *must* have worker nodes with sufficient free RAM to match the pod request.
+      .. code-block:: shell
+         :class: copyable
 
-   * - :guilabel:`Specify Limit`
-     - Toggle to :guilabel:`ON` to specify maximum CPU and memory limits.
+         kubectl port-forward svc/MINIO_TENANT_NAME-hl 9000 -n MINIO_TENANT_NAMESPACE
 
-Select :guilabel:`Create` to create the Tenant using the current configuration.
-While all subsequent sections are *optional*, MinIO recommends reviewing them prior to deploying the Tenant.
+      * Create an alias for the Tenant service:
 
-.. _create-tenant-configure-section:
+      .. code-block:: shell
+         :class: copyable
 
-3) The :guilabel:`Configure` Section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         mc alias set myminio https://localhost:9000 minio minio123 --insecure
 
-The :guilabel:`Configure` section displays optional configuration settings for the MinIO Tenant and its supporting services.
+      You can use :mc:`mc mb` to create a bucket on the Tenant:
+      
+      .. code-block:: shell
+         :class: copyable
 
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
+         mc mb myminio/mybucket --insecure
 
-   * - Field
-     - Description
-
-   * - :guilabel:`Expose MinIO Service`
-     - The MinIO Operator by default directs the MinIO Tenant services to request an externally accessible IP address from the Kubernetes cluster Load Balancer if one is available to access the tenant.
-
-       .. cond:: eks
-
-          If your EKS cluster includes the :aws-docs:`AWS Load Balancer Controller add-on <eks/latest/userguide/aws-load-balancer-controller.html>`, enabling this setting directs the load balancer to assign an address to the Tenant services.
-
-          Other load balancers *may* function similarly depending on their configuration.
-
-       .. cond:: not eks
-
-       Your Kubernetes distributions *may* include a load balancer that can respond to these requests.
-       Installation and configuration of load balancers is out of the scope of this documentation.
-
-   * - :guilabel:`Expose Console Service`
-     - Select whether the Tenant should request an IP address from the Load Balancer to access the Tenant's Console. 
-
-       .. cond:: eks
-
-          If your EKS cluster includes the :aws-docs:`AWS Load Balancer Controller add-on <eks/latest/userguide/aws-load-balancer-controller.html>`, enabling this setting directs the load balancer to assign an address to the Tenant services.
-
-          Other load balancers *may* function similarly depending on their configuration.
-
-       .. cond:: not eks
-
-       Your Kubernetes distributions *may* include a load balancer that can respond to these requests.
-       Installation and configuration of load balancers is out of the scope of this documentation.
-
-   * - :guilabel:`Set Custom Domains`
-     - Toggle on to customize the domains allowed to access the tenant's console and other tenant services.
-
-   * - :guilabel:`Security Context`
-     - The MinIO Operator sets the Kubernetes Security Context for pods to a default of ``1000`` for User, Group, and FsGroup. 
-       The FSGroupChangePolicy defaults to ``Always``. 
-       MinIO does not run the pod using the ``root`` user.
-
-       You can modify the Security Context to direct MinIO to run using a different User, Group,FsGroup ID, and FSGroupChangePolicy. 
-       You can also direct MinIO to run as the Root user.
-
-       .. cond:: openshift
-
-          .. important::
-
-             If your OpenShift cluster enforces :openshift-docs:`Security Context Constraints </authentication/managing-security-context-constraints.html>` , ensure you set the Tenant constraints appropriately such that pods can start and run normally.
-
-   * - :guilabel:`Custom Runtime Configurations`
-     - Toggle on to customize the :kube-docs:`Runtime Class <concepts/containers/runtime-class/>` for the tenant to use. 
-
-   * - :guilabel:`Additional Environment Variables`
-     - Enter any additional the key:value pairs to use as environment variables for the tenant.
-
-
-.. _create-tenant-images-section:
-
-4) The :guilabel:`Images` Section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The :guilabel:`Images` section displays container image settings used by the MinIO Tenant.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Field
-     - Description
-
-   * - :guilabel:`MinIO`
-     - The container image to use for the MinIO Server. 
-       See the `MinIO Quay <https://quay.io/repository/minio/minio>`__ or the `MinIO DockerHub <https://hub.docker.com/r/minio/minio/tags>`__ repositories for a list of valid tags.
-
-   * - :guilabel:`KES Image`
-     - The container image to use for MinIO :minio-git:`KES <kes>`.
-
-   * - :guilabel:`Use a private container registry`
-     - If the tenant requires a private container registry, toggle to :guilabel:`ON`, then specify the location and credentials for the private registry.
-
-.. _create-tenant-pod-placement-section:
-
-5) The :guilabel:`Pod Placement` Section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The :guilabel:`Pod Placement` section displays pod scheduler settings for the MinIO Tenant.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Field
-     - Description
-
-   * - :guilabel:`None`
-     - Disables pod scheduling constraints for the tenant. 
-       This allows Kubernetes to schedule multiple Tenant pods onto the same node.
-
-       This may decrease resiliency, as a single Kubernetes worker can host multiple MinIO pods. 
-       If that worker is down or lost, objects may also be unavailable or lost.
-
-       Consider using this setting only in early development or sandbox environments with a limited number of worker nodes.
-
-   * - :guilabel:`Default (Pod Anti-Affinity)`
-     - Directs the Operator to set anti-affinity settings such that no Kubernetes worker can host more than one MinIO server pod for this Tenant.
-
-   * - :guilabel:`Node Selector`
-     - Directs the operator to set a Node Selector such that pods only deploy onto Kubernetes workers whose labels match the selector.
-
-   * - :guilabel:`Tolerations`
-     - Specify any required tolerations for this tenant's pods.
-
-.. _create-tenant-identity-provider-section:
-
-6) The :guilabel:`Identity Provider` Section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The :guilabel:`Identity Provider` section displays the :ref:`Identity Provider <minio-authentication-and-identity-management>` settings for the MinIO Tenant. 
-This includes configuring an external IDP such as :ref:`OpenID <minio-external-identity-management-openid>` or :ref:`Active Directory / LDAP <minio-external-identity-management-ad-ldap>`.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Field
-     - Description
-
-   * - :guilabel:`Built-In`
-     - Configure additional internal MinIO users for the Operator to create as part of deploying the Tenant.
-
-   * - :guilabel:`OpenID`
-     - Configure an OpenID Connect-compatible service as an external Identity Provider (e.g. Keycloak, Okta, Google, Facebook, Dex) to manage MinIO users. 
-
-   * - :guilabel:`Active Directory`
-     - Configure an Active Directory or OpenLDAP service as the external Identity Provider to manage MinIO users.
-
-.. _create-tenant-security-section:
-
-.. _minio-k8s-deploy-minio-tenant-security:
-
-7) The :guilabel:`Security` Section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The :guilabel:`Security` section displays TLS certificate settings for the MinIO Tenant.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Field
-     - Description
-
-   * - :guilabel:`TLS`
-     - Enable or disable TLS for the MinIO Tenant. 
-
-   * - :guilabel:`AutoCert`
-     - Directs the Operator to generate Certificate Signing Requests for submission to the Kubernetes TLS API.
-
-       The MinIO Tenant uses the generated certificates for enabling and establishing TLS connections.
-
-   * - :guilabel:`Custom Certificates`
-     - When enabled, you can upload custom TLS certificates for MinIO to use for server and client credentials.
-       
-       MinIO supports Server Name Indication (SNI) such that the Tenant can select the appropriate TLS certificate based on the request hostname and the certificate Subject Alternative Name.
-
-       MinIO also supports uploading Certificate Authority certificates for validating client certificates minted by that CA.
-
-.. admonition:: Supported Secret Types
-   :class: note
-    
-   MinIO supports three types of :kube-docs:`secrets in Kubernetes <concepts/configuration/secret/#secret-types>`.
-       
-   #. ``opaque``
-    
-      Using ``private.key`` and ``public.crt`` files.
-   #. ``tls``
-     
-      Using ``tls.key`` and ``tls.crt`` files.
-   #. `cert-manager <https://cert-manager.io/>`__ 1.7.x or later 
-    
-      Running on Kubernetes 1.21 or later.
-
-.. versionadded:: Console 0.23.1
-
-   A message displays under the certificate with the date of expiration and length of time until expiration.
-
-   The message adjusts depending on the length of time to expiration:
-   
-   - More than 30 days, the message text displays in gray.
-   - Within 30 days, the message text changes to orange.
-   - Within 10 days, the message text changes to red.
-   - Within 24 hours, the message displays as an hour and minute countdown in red text.
-   - After expiration, the message displays as ``EXPIRED``.
-
-.. _create-tenant-encryption-section:
-
-8) The :guilabel:`Encryption` Section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The :guilabel:`Encryption` section displays the :ref:`Server-Side Encryption (SSE) <minio-sse>` settings for the MinIO Tenant. 
-
-Enabling SSE also creates :minio-git:`MinIO Key Encryption Service <kes>` pods in the Tenant to facilitate SSE operations.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-   :width: 100%
-
-   * - Field
-     - Description
-   
-   * - :guilabel:`Vault`
-     - Configure `HashiCorp Vault <https://www.vaultproject.io/>`__ as the external KMS for storing root encryption keys. 
-       See :ref:`minio-sse-vault` for guidance on the displayed fields.
-
-   * - :guilabel:`AWS`
-     - Configure `AWS Secrets Manager <https://aws.amazon.com/secrets-manager/>`__ as the external KMS for storing root encryption keys. 
-       See :ref:`minio-sse-aws` for guidance on the displayed fields.
-
-   * - :guilabel:`Gemalto`
-     - Configure `Gemalto (Thales Digital Identity and Security) <https://github.com/minio/kes/wiki/Gemalto-KeySecure/>`__ as the external KMS for storing root encryption keys.
-       See :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>` for guidance on the displayed fields.
-
-   * - :guilabel:`GCP`
-     - Configure `Google Cloud Platform Secret Manager <https://cloud.google.com/secret-manager/>`__ as the external KMS for storing root encryption keys. 
-       See :ref:`minio-sse-gcp` for guidance on the displayed fields.
-
-   * - :guilabel:`Azure`
-     - Configure `Azure Key Vault <https://azure.microsoft.com/en-us/services/key-vault/#product-overview>`__  as the external KMS for storing root encryption keys. 
-       See :ref:`minio-sse-azure` for guidance on the displayed fields.       
-
-.. _minio-tenant-audit-logging-settings:
-
-.. _create-tenant-deploy-view-tenant:
-
-9) Deploy and View the Tenant
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Select :guilabel:`Create` at any time to begin the deployment process. 
-The MinIO Operator displays the root user credentials *once* as part of deploying the Tenant. 
-Copy these credentials to a secure location.
-
-You can monitor the Tenant creation process from the :guilabel:`Tenants` view. 
-The :guilabel:`State` column updates throughout the deployment process.
-
-Tenant deployment can take several minutes to complete. 
-Once the :guilabel:`State` reads as :guilabel:`Initialized`, select the Tenant to view its details.
-
-.. screenshot temporarily removed
-
-   .. image:: /images/k8s/operator-tenant-view.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: Tenant View
-
-Each tab provides additional details or configuration options for the MinIO Tenant. 
-
-- :guilabel:`METRICS` - Displays metrics collected from the MinIO Tenant.
-- :guilabel:`SECURITY` - Provides TLS-related configuration options.
-- :guilabel:`POOLS` - Supports expanding the tenant by adding more Server Pools.
-- :guilabel:`LICENSE` - Enter your `SUBNET <https://min.io/pricing?ref=docs>`__ license.
+      If you deployed your MinIO Tenant using TLS certificates minted by a trusted Certificate Authority (CA) you can omit the ``--insecure`` flag.
+      
+      See :ref:`create-tenant-connect-tenant` for specific instructions.
 
 .. _create-tenant-connect-tenant:
 
-10) Connect to the Tenant
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Connect to the Tenant
+---------------------
 
 The MinIO Operator creates services for the MinIO Tenant. 
 
@@ -671,7 +390,7 @@ The MinIO Operator creates services for the MinIO Tenant.
    .. code-block:: shell
       :class: copyable
 
-      oc get svc -n minio-tenant-1
+      oc get svc -n TENANT-NAMESPACE
 
 .. cond:: k8s and not openshift 
 
@@ -680,17 +399,14 @@ The MinIO Operator creates services for the MinIO Tenant.
    .. code-block:: shell
       :class: copyable
 
-      kubectl get svc -n minio-tenant-1
+      kubectl get svc -n TENANT-NAMESPACE
 
 .. code-block:: shell
 
    NAME                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
    minio                              LoadBalancer   10.97.114.60     <pending>     443:30979/TCP    2d3h
-   minio-tenant-1-console             LoadBalancer   10.106.103.247   <pending>     9443:32095/TCP   2d3h
-   minio-tenant-1-hl                  ClusterIP      None             <none>        9000/TCP         2d3h
-   minio-tenant-1-log-hl-svc          ClusterIP      None             <none>        5432/TCP         2d3h
-   minio-tenant-1-log-search-api      ClusterIP      10.103.5.235     <none>        8080/TCP         2d3h
-   minio-tenant-1-prometheus-hl-svc   ClusterIP      None             <none>        9090/TCP         7h39m
+   TENANT-NAMESPACE-console             LoadBalancer   10.106.103.247   <pending>     9443:32095/TCP   2d3h
+   TENANT-NAMESPACE-hl                  ClusterIP      None             <none>        9000/TCP         2d3h
 
 - The ``minio`` service corresponds to the MinIO Tenant service. 
   Applications should use this service for performing operations against the MinIO Tenant.

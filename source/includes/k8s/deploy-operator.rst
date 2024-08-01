@@ -31,16 +31,15 @@ While this documentation *may* provide guidance for configuring or deploying Kub
 MinIO Operator Components
 -------------------------
 
-The MinIO Operator exists in its own namespace.
-Within the Operator's namespace, the MinIO Operator utilizes two pods:
+The MinIO Operator exists in its own namespace in which it creates Kubernetes resources.
+Those resources includes pods, services, replicasets, and deployments.
 
-- The Operator pod for the base Operator functions to deploy, manage, modify, and maintain tenants.
-- Console pod for the Operator's Graphical User Interface, the Operator Console.
+The Operator pods monitor all namespaces by default for objects using the MinIO CRD and manages those resources automatically.
 
 When you use the Operator to create a tenant, the tenant *must* have its own namespace.
 Within that namespace, the Operator generates the pods required by the tenant configuration.
 
-Each pod runs three containers:
+Each Tenant pod runs three containers:
 
 - MinIO Container that runs all of the standard MinIO functions, equivalent to basic MinIO installation on baremetal.
   This container stores and retrieves objects in the provided mount points (persistent volumes). 
@@ -51,32 +50,29 @@ Each pod runs three containers:
 - SideCar container that monitors configuration secrets for the tenant and updates them as they change.
   This container also monitors for root credentials and creates an error if it does not find root credentials. 
 
-Starting with v5.0.6, the MinIO Operator supports custom :kube-docs:`init containers <concepts/workloads/pods/init-containers>` for additional pod initialization that may be required for your environment.
-
 The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes that store the objects.
 
-.. image:: /images/k8s/OperatorsComponent-Diagram.png
-   :width: 600px
-   :alt: A diagram of the namespaces and pods used by or maintained by the MinIO Operator.
-   :align: center
+.. Image references Console pods, need to fix this up
+
+.. .. image:: /images/k8s/OperatorsComponent-Diagram.png
+..    :width: 600px
+..    :alt: A diagram of the namespaces and pods used by or maintained by the MinIO Operator.
+..    :align: center
 
 .. _minio-operator-prerequisites:
 
 Prerequisites
 -------------
 
-Kubernetes Version 1.21.0
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Kubernetes Version |k8s-floor|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. important::
+MinIO tests |operator-version-stable| against a floor of Kubernetes API of |k8s-floor|.
+MinIO **strongly recommends** maintaining Kubernetes infrastructure using `actively maintained Kubernetes API versions <https://kubernetes.io/releases/>`__.
 
-   MinIO **strongly recommends** upgrading Production clusters running `End-Of-Life <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__ Kubernetes APIs.
 
-Starting with v5.0.0, MinIO **requires** Kubernetes 1.21.0 or later for both the infrastructure and the ``kubectl`` CLI tool.
+MinIO **strongly recommends** upgrading Kubernetes clusters running with `End-Of-Life API versions <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__
 
-.. versionadded:: Operator 5.0.6
-
-For Kubernetes 1.25.0 and later, MinIO supports deploying in environments with the :kube-docs:`Pod Security admission (PSA) <concepts/security/pod-security-admission>` ``restricted`` policy enabled.
 
 
 Kustomize and ``kubectl``
@@ -100,7 +96,7 @@ Kubernetes TLS Certificate API
    The MinIO Operator manages TLS Certificate Signing Requests (CSR) using the Kubernetes ``certificates.k8s.io`` :kube-docs:`TLS certificate management API <tasks/tls/managing-tls-in-a-cluster/>` to create signed TLS certificates in the following circumstances:
    
    - When ``autoCert`` is enabled.
-   - For the MinIO Console when the :envvar:`MINIO_CONSOLE_TLS_ENABLE` environment variable is set to ``on``.
+   - For the MinIO Tenant Console when the :envvar:`MINIO_CONSOLE_TLS_ENABLE` environment variable is set to ``on``.
    - For :ref:`STS service <minio-security-token-service>` when :envvar:`OPERATOR_STS_ENABLED` environment variable is set to ``on``.
    - For retrieving the health of the cluster.
    
