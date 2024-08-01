@@ -15,7 +15,7 @@ Metrics and Alerts
 MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
-Starting with :minio-release:`RELEASE.2024-07-15T19-02-30Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
+Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
 
 For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint by appending an additional path for each category.
 
@@ -96,31 +96,6 @@ MinIO provides the following scraping endpoints, relative to the base URL:
        ``/system/process``
 
 For a complete list of metrics for each endpoint, see :ref:`Available Metrics <minio-metrics-and-alerts-available-metrics>`.
-
-.. _minio-console-metrics:
-
-MinIO Console Metrics Dashboard
--------------------------------
-
-The :ref:`MinIO Console <minio-console-monitoring>` provides a point-in-time metrics dashboard by default:
-
-.. image:: /images/minio-console/console-metrics-simple.png
-   :width: 600px
-   :alt: MinIO Console with Point-In-Time Metrics
-   :align: center
-
-The Console also supports displaying time-series and historical data by querying a :prometheus-docs:`Prometheus <prometheus/latest/getting_started/>` service configured to scrape data from the MinIO deployment. 
-Specifically, the MinIO Console uses :prometheus-docs:`Prometheus query API <prometheus/latest/querying/api/>` to retrieve stored metrics data and display the following visualizations:
-
-- :guilabel:`Usage` - provides historical and on-demand visualization of overall usage and status
-- :guilabel:`Traffic` - provides historical and on-demand visualization of network traffic
-- :guilabel:`Resources` - provides historical and on-demand visualization of  resources (compute and storage)
-- :guilabel:`Info` - provides point-in-time status of the deployment
-
-.. image:: /images/minio-console/console-metrics.png
-   :width: 600px
-   :alt: MinIO Console displaying Prometheus-backed Monitoring Data
-   :align: center
 
 .. cond:: k8s
 
