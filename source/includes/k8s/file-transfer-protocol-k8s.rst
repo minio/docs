@@ -102,8 +102,6 @@ Procedure
             spec:
               configuration:
                 name: my-tenant-env-configuration
-              credsSecret:
-                name: my-tenant-secret
               exposeServices:
                 console: true
                 minio: true
