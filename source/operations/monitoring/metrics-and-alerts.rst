@@ -10,85 +10,95 @@ Metrics and Alerts
 
 .. contents:: Table of Contents
    :local:
-   :depth: 3
+   :depth: 2
+
+.. admonition:: Metrics Version 2 Deprecated
+   :class: note
+
+   Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
 
 MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
-MinIO provides scraping endpoints for the following metric groups:
+For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint by appending an additional path for each category.
 
-.. tab-set::
+For example, the following endpoint returns audit metrics:
 
-   .. tab-item:: Cluster Metrics
+.. code-block:: shell
+   :class: copyable
 
-      You can scrape :ref:`cluster-level metrics <minio-available-cluster-metrics>` using the following URL endpoint:
+   http://HOSTNAME:PORT/minio/metrics/v3/audit
 
-      .. code-block:: shell
-         :class: copyable
+Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
 
-         http://HOSTNAME:PORT/minio/v2/metrics/cluster
+By default, MinIO requires authentication to scrape the metrics endpoints.
+To generate the needed bearer tokens, use :mc:`mc admin prometheus generate`.
+You can also disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+MinIO provides the following scraping endpoints, relative to the base URL:
 
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%
 
-   .. tab-item:: Bucket Metrics
+   * - Category
+     - Path
 
-      .. versionchanged:: RELEASE.2023-08-31T15-31-16Z
+   * - API
+     - ``/api/requests``
+       
+       ``/bucket/api``
 
-      You can scrape :ref:`bucket-level metrics <minio-available-bucket-metrics>` using the following URL endpoint:
+   * - Audit
+     - ``/audit``
 
-      .. code-block:: shell
-         :class: copyable
+   * - Cluster
+     - ``/cluster/config``
+       
+       ``/cluster/erasure-set``
+       
+       ``/cluster/health``
+       
+       ``/cluster/iam``
+       
+       ``/cluster/usage/buckets``
+       
+       ``/cluster/usage/objects``
 
-         http://HOSTNAME:PORT/minio/v2/metrics/bucket
+   * - Debug
+     - ``/debug/go``
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+   * - ILM
+     - ``/ilm``
 
-   .. tab-item:: Resource Metrics
+   * - Logger webhook
+     - ``/logger/webhook``
 
-      .. versionadded:: RELEASE.2023-10-07T15-07-38Z 
+   * - Notification
+     - ``/notification``
 
-      You can scrape :ref:`resource metrics <minio-available-resource-metrics>` using the following URL endpoint:
+   * - Replication
+     - ``/replication``
+       
+       ``/bucket/replication``
 
-      .. code-block:: shell
-         :class: copyable
+   * - Scanner
+     - ``/scanner``
 
-         http://HOSTNAME:PORT/minio/v2/metrics/resource
+   * - System
+     - ``/system/drive``
+       
+       ``/system/memory``
+       
+       ``/system/cpu``
+       
+       ``/system/network/internode``
+       
+       ``/system/process``
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
-
-
-MinIO by default requires authentication for scraping the metrics endpoints.
-Use the :mc:`mc admin prometheus generate` command to generate the necessary bearer tokens. 
-You can alternatively disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
-
-.. _minio-console-metrics:
-
-MinIO Console Metrics Dashboard
--------------------------------
-
-The :ref:`MinIO Console <minio-console-monitoring>` provides a point-in-time metrics dashboard by default:
-
-.. image:: /images/minio-console/console-metrics-simple.png
-   :width: 600px
-   :alt: MinIO Console with Point-In-Time Metrics
-   :align: center
-
-The Console also supports displaying time-series and historical data by querying a :prometheus-docs:`Prometheus <prometheus/latest/getting_started/>` service configured to scrape data from the MinIO deployment. 
-Specifically, the MinIO Console uses :prometheus-docs:`Prometheus query API <prometheus/latest/querying/api/>` to retrieve stored metrics data and display the following visualizations:
-
-- :guilabel:`Usage` - provides historical and on-demand visualization of overall usage and status
-- :guilabel:`Traffic` - provides historical and on-demand visualization of network traffic
-- :guilabel:`Resources` - provides historical and on-demand visualization of  resources (compute and storage)
-- :guilabel:`Info` - provides point-in-time status of the deployment
-
-.. image:: /images/minio-console/console-metrics.png
-   :width: 600px
-   :alt: MinIO Console displaying Prometheus-backed Monitoring Data
-   :align: center
+For a complete list of metrics for each endpoint, see :ref:`Available Metrics <minio-metrics-and-alerts-available-metrics>`.
 
 .. cond:: k8s
 
@@ -118,28 +128,68 @@ Available Metrics
 MinIO publishes a number of metrics at the cluster, node, or bucket levels.
 Each metric includes a label for the MinIO server which generated that metric.
 
-.. versionchanged:: MinIO RELEASE.2023-07-21T21-12-44Z
+- :ref:`API Metrics <minio-available-v3-api-metrics>`
+- :ref:`Audit Metrics <minio-available-v3-audit-metrics>`
+- :ref:`Cluster Metrics <minio-available-v3-cluster-metrics>`
+- :ref:`Debug Metrics <minio-available-v3-debug-metrics>`
+- :ref:`ILM Metrics <minio-available-v3-ilm-metrics>`
+- :ref:`Logger webhook Metrics <minio-available-v3-logger-webhook-metrics>`
+- :ref:`Notification Metrics <minio-available-v3-notification-metrics>`
+- :ref:`Replication Metrics <minio-available-v3-replication-metrics>`
+- :ref:`Scanner Metrics <minio-available-v3-scanner-metrics>`
+- :ref:`System Metrics <minio-available-v3-system-metrics>`
 
-   Bucket metrics have moved to use their own, separate endpoint.
 
-- :ref:`Cluster Metrics <minio-available-cluster-metrics>`
-- :ref:`Bucket Metrics <minio-available-bucket-metrics>`
-- :ref:`Resource Metrics <minio-available-resource-metrics>`
+.. _minio-available-v3-api-metrics:
 
-.. _minio-available-cluster-metrics:
-
-.. include:: /includes/common-metrics-cluster.md
+.. include:: /includes/common-metrics-v3-api.md
    :parser: myst_parser.sphinx_
 
-.. _minio-available-bucket-metrics:
+.. _minio-available-v3-audit-metrics:
 
-.. include:: /includes/common-metrics-bucket.md
+.. include:: /includes/common-metrics-v3-audit.md
    :parser: myst_parser.sphinx_
 
-.. _minio-available-resource-metrics:
+.. _minio-available-v3-cluster-metrics:
 
-.. include:: /includes/common-metrics-resource.md
+.. include:: /includes/common-metrics-v3-cluster.md
    :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-debug-metrics:
+
+.. include:: /includes/common-metrics-v3-debug.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-ilm-metrics:
+
+.. include:: /includes/common-metrics-v3-ilm.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-logger-webhook-metrics:
+
+.. include:: /includes/common-metrics-v3-logger-webhook.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-notification-metrics:
+
+.. include:: /includes/common-metrics-v3-notification.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-replication-metrics:
+
+.. include:: /includes/common-metrics-v3-replication.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-scanner-metrics:
+
+.. include:: /includes/common-metrics-v3-scanner.md
+   :parser: myst_parser.sphinx_
+
+.. _minio-available-v3-system-metrics:
+
+.. include:: /includes/common-metrics-v3-system.md
+   :parser: myst_parser.sphinx_
+
 
 .. toctree::
    :titlesonly:

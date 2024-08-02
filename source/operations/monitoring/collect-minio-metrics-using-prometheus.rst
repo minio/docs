@@ -375,23 +375,6 @@ In the Prometheus configuration, specify the path to the alert file in the ``rul
 
 Once triggered, Prometheus sends the alert to the configured AlertManager service.
 
-5) (Optional) Configure MinIO Console to Query Prometheus
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The Console also supports displaying time-series and historical data by querying a :prometheus-docs:`Prometheus <prometheus/latest/getting_started/>` service configured to scrape data from the MinIO deployment. 
-
-.. image:: /images/minio-console/console-metrics.png
-   :width: 600px
-   :alt: MinIO Console displaying Prometheus-backed Monitoring Data
-   :align: center
-
-To enable historical data visualization in MinIO Console, set the following environment variables on each node in the MinIO deployment:
-
-- Set :envvar:`MINIO_PROMETHEUS_URL` to the URL of the Prometheus service
-- Set :envvar:`MINIO_PROMETHEUS_JOB_ID` to the unique job ID assigned to the collected metrics
-
-Restart the MinIO deployment and visit the :ref:`Monitoring <minio-console-monitoring>` pane to see the historical data views.
-
 Dashboards
 ----------
 
