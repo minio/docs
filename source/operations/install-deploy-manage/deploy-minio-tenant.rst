@@ -200,6 +200,7 @@ Persistent Volumes
    MinIO strongly recommends SSD-backed disk types for best performance.
    For more information on AKS disk types, see :azure-docs:`Azure disk types <virtual-machines/disk-types>`.
 
+.. _minio-k8s-deploy-minio-tenant-security:
 
 Deploy a MinIO Tenant using Kustomize
 -------------------------------------

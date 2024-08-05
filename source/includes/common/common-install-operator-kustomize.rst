@@ -15,33 +15,15 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
 
 #. Install the latest version of Operator
 
+   The following command installs the Operator to the ``minio-operator`` namespace:
+
    .. code-block:: shell
       :class: copyable
       :substitutions:
 
       kubectl apply -k "github.com/minio/operator?ref=v|operator-version-stable|"
 
-   The output resembles the following:
-
-   .. code-block:: shell
-
-      namespace/minio-operator created
-      customresourcedefinition.apiextensions.k8s.io/miniojobs.job.min.io created
-      customresourcedefinition.apiextensions.k8s.io/policybindings.sts.min.io created
-      customresourcedefinition.apiextensions.k8s.io/tenants.minio.min.io created
-      serviceaccount/console-sa created
-      serviceaccount/minio-operator created
-      clusterrole.rbac.authorization.k8s.io/console-sa-role created
-      clusterrole.rbac.authorization.k8s.io/minio-operator-role created
-      clusterrolebinding.rbac.authorization.k8s.io/console-sa-binding created
-      clusterrolebinding.rbac.authorization.k8s.io/minio-operator-binding created
-      configmap/console-env created
-      secret/console-sa-secret created
-      service/console created
-      service/operator created
-      service/sts created
-      deployment.apps/console created
-      deployment.apps/minio-operator created
+   The command outputs a list of installed resources.
 
 #. Verify the Operator pods are running:
 
@@ -55,7 +37,6 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
    .. code-block:: shell
 
       NAME                              READY   STATUS              RESTARTS   AGE
-      console-56c7d8bd89-485qh          1/1     Running   0          2m42s
       minio-operator-6c758b8c45-nkhlx   1/1     Running   0          2m42s
       minio-operator-6c758b8c45-dgd8n   1/1     Running   0          2m42s
 
@@ -80,7 +61,6 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
    .. code-block:: shell
 
       NAME                                  READY   STATUS    RESTARTS   AGE
-      pod/console-56c7d8bd89-485qh          1/1     Running   0          5m20s
       pod/minio-operator-6c758b8c45-nkhlx   1/1     Running   0          5m20s
       pod/minio-operator-6c758b8c45-dgd8n   1/1     Running   0          5m20s
 
@@ -89,11 +69,9 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
       service/sts        ClusterIP   10.43.117.251   <none>        4223/TCP                        5m20s
 
       NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
-      deployment.apps/console          1/1     1            1           5m20s
       deployment.apps/minio-operator   2/2     2            2           5m20s
 
       NAME                                        DESIRED   CURRENT   READY   AGE
-      replicaset.apps/console-56c7d8bd89          1         1         1       5m20s
       replicaset.apps/minio-operator-6c758b8c45   2         2         2       5m20s
 
 #. Next Steps
