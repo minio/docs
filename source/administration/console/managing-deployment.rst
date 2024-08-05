@@ -41,9 +41,8 @@ The Console :guilabel:`Dashboard` section displays metrics for the MinIO deploym
 The default view provides a high-level overview of the deployment status, including the uptime and availability of individual servers and drives.
 
 The Console also supports displaying time-series and historical data by querying a :prometheus-docs:`Prometheus <prometheus/latest/getting_started/>` service configured to scrape data from the MinIO deployment. 
-Specifically, the MinIO Console uses :prometheus-docs:`Prometheus query API <prometheus/latest/querying/api/>` to retrieve stored metrics data and display historical metrics:
-
-See :ref:`minio-console-metrics` for more information on the historical metric visualization.
+Specifically, the MinIO Console uses the :prometheus-docs:`Prometheus query API <prometheus/latest/querying/api/>` to retrieve stored metrics data and display historical metrics
+See :ref:`minio-metrics-collect-using-prometheus` for more information on scraping MinIO metrics into Prometheus.
 
 Logs
 ~~~~

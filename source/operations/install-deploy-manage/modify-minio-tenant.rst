@@ -1,4 +1,5 @@
 .. _minio-k8s-modify-minio-tenant:
+.. _minio-k8s-modify-minio-tenant-security:
 
 =====================
 Modify a MinIO Tenant
