@@ -344,13 +344,6 @@ The following table lists :mc-cmd:`mc` commands:
           :start-after: start-mc-put-desc
           :end-before: end-mc-put-desc  
 
-   * - | :mc:`mc quota clear`
-       | :mc:`mc quota info`
-       | :mc:`mc quota set`
-     - .. include:: /reference/minio-mc/mc-quota.rst
-          :start-after: start-mc-quota-desc
-          :end-before: end-mc-quota-desc  
-     
    * - :mc:`mc rb`
      - .. include:: /reference/minio-mc/mc-rb.rst
           :start-after: start-mc-rb-desc
@@ -673,7 +666,6 @@ You can also define some of these options using :ref:`Environment Variables <min
    /reference/minio-mc/mc-ping
    /reference/minio-mc/mc-pipe
    /reference/minio-mc/mc-put
-   /reference/minio-mc/mc-quota
    /reference/minio-mc/mc-rb
    /reference/minio-mc/mc-ready
    /reference/minio-mc/mc-replicate

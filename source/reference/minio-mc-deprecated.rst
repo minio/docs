@@ -51,6 +51,22 @@ Table of Deprecated Commands
      - :mc-cmd:`mc ilm rule rm`
      - mc RELEASE.2022-12-24T15-21-38Z
 
+   * - ``mc quota``
+     - None
+     - mc RELEASE.2024-07-31T15-58-33Z
+
+   * - ``mc quota clear``
+     - None
+     - mc RELEASE.2024-07-31T15-58-33Z
+
+   * - ``mc quota info``
+     - None
+     - mc RELEASE.2024-07-31T15-58-33Z
+
+   * - ``mc quota set``
+     - None
+     - mc RELEASE.2024-07-31T15-58-33Z
+
    * - ``mc replicate diff``
      - :mc-cmd:`mc replicate backlog`
      - mc RELEASE.2023-07-18T21-05-38Z
@@ -210,6 +226,10 @@ Table of Deprecated Admin Commands
    /reference/deprecated/mc-ilm-import
    /reference/deprecated/mc-ilm-ls
    /reference/deprecated/mc-ilm-rm
+   /reference/deprecated/mc-quota
+   /reference/deprecated/mc-quota-clear
+   /reference/deprecated/mc-quota-info
+   /reference/deprecated/mc-quota-set
    /reference/deprecated/mc-admin-bucket-quota
    /reference/deprecated/mc-admin-console
    /reference/deprecated/mc-admin-idp-ldap
