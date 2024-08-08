@@ -14,6 +14,10 @@
 
    ``mc quota info`` replaced ``mc admin bucket quota``.
 
+.. versionchanged:: RELEASE.2024-07-31T15-58-33Z
+
+   ``mc quota info`` is deprecated.
+
 Description
 -----------
 

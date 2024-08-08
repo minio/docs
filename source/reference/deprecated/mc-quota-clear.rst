@@ -14,6 +14,10 @@
 
    ``mc quota clear`` replaced ``mc admin bucket quota --clear``.
 
+.. versionchanged:: RELEASE.2024-07-31T15-58-33Z
+
+   ``mc quota clear`` is deprecated.
+
 Description
 -----------
 

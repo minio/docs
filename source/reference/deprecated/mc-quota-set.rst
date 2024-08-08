@@ -14,6 +14,10 @@
 
    ``mc quota set`` replaced ``mc admin bucket quota --hard``.
 
+.. versionchanged:: RELEASE.2024-07-31T15-58-33Z
+
+   ``mc quota set`` is deprecated.
+
 Description
 -----------
 
