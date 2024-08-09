@@ -96,7 +96,7 @@ Parameters
    :optional:
 
    File path to the JSON-formatted :ref:`policy <minio-policy>` to use for the account.
-   This policy can only further limit those privileges associated with the authenticated AD/LDAP user.
+   This policy _cannot_ grant additional privileges beyond the privileges associated with the authenticated AD/LDAP user.
 
    Omit to use the AD/LDAP user policies.
 
