@@ -50,10 +50,13 @@ display the contents of the specified file or object to ``STDOUT``.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] cat             \
-                          [--rewind]      \
-                          [--version-id]  \
-                          [--encrypt-key] \
+         mc [GLOBALFLAGS] cat                       \
+                          [--enc-c "value"]         \
+                          [--tail "int"]            \
+                          [--rewind]                \
+                          [--offset "int"]          \
+                          [--version-id "string"]   \
+                          [--zip]                   \
                           ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
@@ -91,12 +94,28 @@ Parameters
 
       mc cat ~/data/object.txt
 
+.. block include of enc-c
+
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-c-only
+   :end-before: end-minio-mc-sse-options
+
+.. mc-cmd:: --offset
+   :optional:
+
+   Specify the number of bytes as an integer from which the command offsets the output.
+
 .. mc-cmd:: --rewind
    :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
+
+.. mc-cmd:: --tail
+   :optional:
+
+   Specify the number of bytes as an integer from which the command trims the output.
 
 .. mc-cmd:: --version-id, vid
    :optional:
@@ -105,84 +124,11 @@ Parameters
       :start-after: start-version-id-desc
       :end-before: end-version-id-desc
 
-.. mc-cmd:: --enc-kms
-
-   Encrypt or decrypt objects using server-side :ref:`SSE-KMS encryption <minio-sse>` with client-managed keys.
-   
-   The parameter accepts a key-value pair formatted as ``KEY=VALUE``
-
-   - ``KEY`` must contain the full path to the object as ``alias/bucket/path/object``.
-   - ``VALUE`` must contain the 32-byte Base64-encoded data key to use for encrypting object(s).
-
-   The ``VALUE`` must correspond to an existing data key on the external KMS.
-   See the :mc-cmd:`mc admin kms key create` reference for creating data keys.
-
-   For example:
-
-   .. code-block:: shell
-
-      --enc-kms "myminio/mybucket/prefix/object.obj=bXktc3NlLWMta2V5Cg=="
-
-   You can specify multiple encryption keys by repeating the parameter.
-
-   Specify the path to a prefix to apply encryption to all matching objects at that path:
-
-   .. code-block:: shell
-
-      --enc-kms "myminio/mybucket/prefix/=bXktc3NlLWMta2V5Cg=="
-
-.. mc-cmd:: --enc-s3
+.. mc-cmd:: --zip
    :optional:
 
-   Encrypt or decrypt objects using server-side :ref:`SSE-S3 encryption <minio-sse>` with KMS-managed keys.
-   Specify the full path to the object as ``alias/bucket/prefix/object``.
-
-   For example:
-
-   .. code-block:: shell
-
-      --enc-s3 "myminio/mybucket/prefix/object.obj"
-
-   You can specify the parameter multiple times to denote different object(s) to encrypt:
-
-   .. code-block:: shell
-
-      --enc-s3 "myminio/mybucket/foo/fooobject.obj" --enc-s3 "myminio/mybucket/bar/barobject.obj"
-
-   Specify the path to a prefix to apply encryption to all matching objects at that path:
-
-   .. code-block:: shell
-
-      --enc-s3 "myminio/mybucket/foo"
-
-.. mc-cmd:: --enc-c
-   :optional:
-
-   Encrypt or decrypt objects using server-side :ref:`SSE-C encryption <minio-sse>` with client-managed keys.
-   
-   The parameter accepts a key-value pair formatted as ``KEY=VALUE``
-
-   - ``KEY`` must contain the full path to the object as ``alias/bucket/path/object``.
-   - ``VALUE`` must contain the 32-byte Base64-encoded data key to use for encrypting object(s).
-
-   For example:
-
-   .. code-block:: shell
-
-      --enc-c "myminio/mybucket/prefix/object.obj=bXktc3NlLWMta2V5Cg=="
-
-   You can specify multiple encryption keys by repeating the parameter.
-
-   Specify the path to a prefix to apply encryption to all matching objects at that path:
-
-   .. code-block:: shell
-
-      --enc-c "myminio/mybucket/prefix/=bXktc3NlLWMta2V5Cg=="
-
-   .. note::
-
-      MinIO strongly recommends against using SSE-C encryption in production workloads.
-      Use SSE-KMS via the :mc-cmd:`mc cat --enc-kms` or SSE-S3 via the:mc-cmd:`mc cat --enc-s3` parameters instead.
+   Extracts from a remote zip file.
+   Requires a MinIO deployment as the source ``ALIAS``.
 
 Global Flags
 ~~~~~~~~~~~~

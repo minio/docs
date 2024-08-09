@@ -46,7 +46,7 @@ The :mc:`mc get` command downloads an object from a target S3 deployment to the 
          mc [GLOBALFLAGS] get                      \
                           SOURCE                   \
                           TARGET                   \
-                          [--enc-c value] 
+                          [--enc-c string]         \
                           [--version-id, --vid value]
 
       .. include:: /includes/common-minio-mc.rst
@@ -66,13 +66,11 @@ Parameters
 
    The destination path on the local file system where the command should place the downloaded file.
 
-.. mc-cmd:: --enc-c
-   :optional:
+.. block include of enc-c
 
-   Encrypt or decrypt objects using client provided keys.
-   Repeat the flag to pass multiple keys.
-
-   Keys must be in either Raw Base64 or Hex format.
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-c-only
+   :end-before: end-minio-mc-sse-options
 
 .. mc-cmd:: --version-id, --vid
    :optional:
