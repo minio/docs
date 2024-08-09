@@ -88,6 +88,10 @@ Table of Deprecated Admin Commands
      - Replacement Command
      - Version of Change
 
+   * - ``mc admin bucket remote``
+     - :mc-cmd:`mc replicate`
+     - mc RELEASE.2022-12-24T15-21-38Z
+
    * - ``mc admin bucket remote add``
      - :mc-cmd:`mc replicate add`
      - mc RELEASE.2022-12-24T15-21-38Z
@@ -236,6 +240,7 @@ Table of Deprecated Admin Commands
    /reference/deprecated/mc-quota-info
    /reference/deprecated/mc-quota-set
    /reference/deprecated/mc-admin-bucket-quota
+   /reference/deprecated/mc-admin-bucket-remote
    /reference/deprecated/mc-admin-console
    /reference/deprecated/mc-admin-idp-ldap
    /reference/deprecated/mc-admin-idp-ldap-policy

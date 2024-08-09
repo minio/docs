@@ -153,24 +153,84 @@ Parameters
    Outputs the results of a command without actually removing any files.
    Use this flag to test that your command configuration removes only the objects you wish to remove.
 
-.. mc-cmd:: --encrypt-key
+.. mc-cmd:: --enc-kms
+
+   Encrypt or decrypt objects using server-side :ref:`SSE-KMS encryption <minio-sse>` with client-managed keys.
+   
+   The parameter accepts a key-value pair formatted as ``KEY=VALUE``
+
+   - ``KEY`` must contain the full path to the object as ``alias/bucket/path/object``.
+   - ``VALUE`` must contain the 32-byte Base64-encoded data key to use for encrypting object(s).
+
+   The ``VALUE`` must correspond to an existing data key on the external KMS.
+   See the :mc-cmd:`mc admin kms key create` reference for creating data keys.
+
+   For example:
+
+   .. code-block:: shell
+
+      --enc-kms "myminio/mybucket/prefix/object.obj=bXktc3NlLWMta2V5Cg=="
+
+   You can specify multiple encryption keys by repeating the parameter.
+
+   Specify the path to a prefix to apply encryption to all matching objects at that path:
+
+   .. code-block:: shell
+
+      --enc-kms "myminio/mybucket/prefix/=bXktc3NlLWMta2V5Cg=="
+
+.. mc-cmd:: --enc-s3
    :optional:
 
-   The encryption key to use for performing Server-Side Encryption
-   with Client Keys (SSE-C). Specify comma separated key-value pairs as
-   ``KEY=VALUE,...``.
+   Encrypt or decrypt objects using server-side :ref:`SSE-S3 encryption <minio-sse>` with KMS-managed keys.
+   Specify the full path to the object as ``alias/bucket/prefix/object``.
+
+   For example:
+
+   .. code-block:: shell
+
+      --enc-s3 "myminio/mybucket/prefix/object.obj"
+
+   You can specify the parameter multiple times to denote different object(s) to encrypt:
+
+   .. code-block:: shell
+
+      --enc-s3 "myminio/mybucket/foo/fooobject.obj" --enc-s3 "myminio/mybucket/bar/barobject.obj"
+
+   Specify the path to a prefix to apply encryption to all matching objects at that path:
+
+   .. code-block:: shell
+
+      --enc-s3 "myminio/mybucket/foo"
+
+.. mc-cmd:: --enc-c
+   :optional:
+
+   Encrypt or decrypt objects using server-side :ref:`SSE-C encryption <minio-sse>` with client-managed keys.
    
-   - For ``KEY``, specify the S3-compatible service 
-     :mc-cmd:`alias <mc alias>` and full path to the bucket, including any
-     bucket prefixes. Separate the alias and bucket path with a forward slash 
-     ``\``. For example, ``play/mybucket``
+   The parameter accepts a key-value pair formatted as ``KEY=VALUE``
 
-   - For ``VALUE``, specify the data key to use for encryption object(s) in
-     the bucket or bucket prefix specified to ``KEY``.
+   - ``KEY`` must contain the full path to the object as ``alias/bucket/path/object``.
+   - ``VALUE`` must contain the 32-byte Base64-encoded data key to use for encrypting object(s).
 
-   :mc-cmd:`~mc rm --encrypt-key` can use the ``MC_ENCRYPT_KEY``
-   environment variable for populating the list of encryption key-value
-   pairs as an alternative to specifying them on the command line.
+   For example:
+
+   .. code-block:: shell
+
+      --enc-c "myminio/mybucket/prefix/object.obj=bXktc3NlLWMta2V5Cg=="
+
+   You can specify multiple encryption keys by repeating the parameter.
+
+   Specify the path to a prefix to apply encryption to all matching objects at that path:
+
+   .. code-block:: shell
+
+      --enc-c "myminio/mybucket/prefix/=bXktc3NlLWMta2V5Cg=="
+
+   .. note::
+
+      MinIO strongly recommends against using SSE-C encryption in production workloads.
+      Use SSE-KMS via the :mc-cmd:`mc rm --enc-kms` or SSE-S3 via the:mc-cmd:`mc rm --enc-s3` parameters instead.
 
 .. mc-cmd:: --force
    :optional:
@@ -331,8 +391,6 @@ incomplete upload files for an object.
 
 - Replace :mc-cmd:`PATH <mc rm ALIAS>` with the path to the object.
 
-Removing incomplete upload files prevents resuming the upload using the
-:mc-cmd:`mc mv --continue` or :mc-cmd:`mc cp --continue` commands.
 
 Roll Object Back To Previous Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

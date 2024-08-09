@@ -345,19 +345,19 @@ For example, to limit upload rates to no more than 1 GiB/s, use the following on
 
 Refer to your operating system instructions for equivalent commands on non-Linux systems.
 
-Encrypt
-~~~~~~~
+SSE-KMS Encryption
+~~~~~~~~~~~~~~~~~~
 
-Encrypt and decrypt options using :ref:`server-side encryption <minio-sse-data-encryption>` with server managed keys.
+Encrypt and decrypt options using :ref:`SSE-KMS <minio-sse-data-encryption>` with server managed keys.
 
 .. tab-set::
 
    .. tab-item:: Environment Variable
       :selected:
 
-      .. envvar:: MC_ENCRYPT
+      .. envvar:: MC_ENC_KMS
 
-      Specify the key with the :envvar:`MC_ENCRYPT_KEY` environment variable.
+         Specify the key with the :envvar:`MC_ENC_KMS` environment variable.
 
    .. tab-item:: Configuration Setting
 
@@ -365,18 +365,20 @@ Encrypt and decrypt options using :ref:`server-side encryption <minio-sse-data-e
          :start-after: start-minio-settings-no-config-option
          :end-before: end-minio-settings-no-config-option
 
-Encrypt Key
-~~~~~~~~~~~
+SSE-S3 Encryption
+~~~~~~~~~~~~~~~~~
 
-Specify the key to use for encrypting and decrypting objects.
-Must also enable the :envvar:`MC_ENCRYPT` environment variable.
+Encrypt and decrypt options using :ref:`SSE-KMS <minio-sse-data-encryption>` with server managed keys.
 
 .. tab-set::
 
    .. tab-item:: Environment Variable
       :selected:
 
-      .. envvar:: MC_ENCRYPT_KEY
+      .. envvar:: MC_ENC_S3
+
+         Specify the key to use for performing SSE-S3 encryption.
+         The specified value must match the encryption key set in :envvar:`MINIO_KMS_KES_KEY_NAME`.
 
    .. tab-item:: Configuration Setting
 

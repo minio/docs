@@ -1,8 +1,8 @@
-.. _minio-mc-idp-ldap-accesskey-create:
+.. _minio-mc-idp-ldap-accesskey-create-with-login:
 
-================================
-``mc idp ldap accesskey create``
-================================
+===========================================
+``mc idp ldap accesskey create-with-login``
+===========================================
 
 .. default-domain:: minio
 
@@ -11,16 +11,16 @@
    :depth: 2
 
 
-.. mc:: mc idp ldap accesskey create
+.. mc:: mc idp ldap accesskey create-with-login
 
-.. versionadded:: mc RELEASE.2023-12-23T08-47-21Z 
+.. versionadded:: mc RELEASE.2024-04-18T16-45-29Z
 
 Description
 -----------
 
 .. start-mc-idp-ldap-accesskey-create-desc
 
-The :mc:`mc idp ldap accesskey create` allows you to add LDAP access key pairs.
+The :mc:`mc idp ldap accesskey create-with-login` uses interactive terminal-based login in prompt to authenticate with the external AD/LDAP server and generate access keys for use with MinIO.
 
 .. end-mc-idp-ldap-accesskey-create-desc
 
@@ -28,12 +28,13 @@ The :mc:`mc idp ldap accesskey create` allows you to add LDAP access key pairs.
 
    .. tab-item:: EXAMPLE
 
-         The following example creates a new access key pair with the same policy as the authenticated user on the ``minio`` :ref:`alias <alias>`:
+         The following example prompts the user to provide their AD/LDAP credentials.
+         It then generates a new access key pair using the policy or policies associated with that AD/LDAP user.
 
       .. code-block:: shell
          :class: copyable
 
-         mc idp ldap accesskey create minio/
+         mc idp ldap accesskey create-with-login https://minio.example.net/
 
    .. tab-item:: SYNTAX
 
@@ -42,16 +43,17 @@ The :mc:`mc idp ldap accesskey create` allows you to add LDAP access key pairs.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] idp ldap accesskey create                   \
-                                          ALIAS                       \
+         mc [GLOBALFLAGS] idp ldap accesskey create-with-login        \
+                                          URL                         \
                                           [--access-key <value>]      \
                                           [--secret-key <value>]      \
                                           [--policy <value>]          \
                                           [--name <value>]            \
                                           [--description <value>]     \
-                                          [--expiry <value>]          \                                         [--expiry-duration <value>]
+                                          [--expiry <value>]          \
+                                          [--expiry-duration <value>]
 
-      - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment configured for AD/LDAP integration.
+      - Replace ``URL`` with the :abbr:`FQDN (Fully Qualified Domain Name)` of a MinIO deployment configured for AD/LDAP integration.
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -61,43 +63,47 @@ The :mc:`mc idp ldap accesskey create` allows you to add LDAP access key pairs.
 Parameters
 ~~~~~~~~~~
 
-.. mc-cmd:: ALIAS
+.. mc-cmd:: URL
    :required:
 
-   The :ref:`alias <alias>` of the MinIO deployment configured for AD/LDAP.
+   the :abbr:`FQDN (Fully Qualified Domain Name)` of a MinIO deployment configured for AD/LDAP integration.
 
    For example:
 
    .. code-block:: none
 
-         mc idp ldap accesskey create minio
+         mc idp ldap accesskey create-with-login https://minio.example.net
 
 .. mc-cmd:: --access-key
    :optional:
 
-   An access key to use for the account.
+   The access key to use once successfully authenticated.
+   Omit to let MinIO randomly generate a value.
+   
    The access key cannot contain the characters ``=`` (equal sign) or ``,`` (comma).
 
-   Requires :mc-cmd:`~mc idp ldap accesskey create --secret-key`
+   Requires :mc-cmd:`~mc idp ldap accesskey create-with-login --secret-key`
 
 .. mc-cmd:: --secret-key
    :optional:
 
-   A secret to use for the account.
+   A secret key to use once successfully authenticated.
+   Omit to let MinIO randomly generate a value.
 
-   Requires :mc-cmd:`~mc idp ldap accesskey create --access-key`
+   Requires :mc-cmd:`~mc idp ldap accesskey create-with-login --access-key`
 
 .. mc-cmd:: --policy
    :optional:
 
-   File path to the JSON-formatted policy to use for the account.
+   File path to the JSON-formatted :ref:`policy <minio-policy>` to use for the account.
+   This policy can only further limit those privileges associated with the authenticated AD/LDAP user.
 
-   If not specified, the account uses the same policy as the authenticated user.
+   Omit to use the AD/LDAP user policies.
 
 .. mc-cmd:: --name
    :optional:
 
-   A human-readable name to use for the account.
+   A human-readable name to use for the created access key.
 
 .. mc-cmd:: --description
    :optional:
@@ -112,7 +118,7 @@ Parameters
        
    For example, ``7d``, ``24h``, ``5d12h30s`` are valid strings.
 
-   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey create --expiry`.
+   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey create-with-login --expiry`.
 
 .. mc-cmd:: --expiry
    :optional:
@@ -122,19 +128,7 @@ Parameters
 
    For example, to expire the credentials after December 31, 2024, enter ``2024-12-31``.
 
-   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey create --expiry-duration`.
-
-.. mc-cmd:: --login
-   :optional:
-
-   .. deprecated:: RELEASE.2024-04-18T16-45-29Z
-
-      Use :mc-cmd:`mc idp ldap accesskey create-with-login` to access the functionality previously provided by this parameter.
-
-   Prompts the user to log in using the LDAP credentials to use to generate the access key.
-   Specify the URL of the LDAP-configured MinIO Server to use for the login prompt.
-
-   Requires an interactive terminal.
+   Mutually exclusive with :mc-cmd:`~mc idp ldap accesskey create-with-login --expiry-duration`.
 
 
 Global Flags
@@ -167,7 +161,7 @@ The command outputs a randomly generated access key and secret key.
 .. code-block:: shell
    :class: copyable
 
-   mc idp ldap accesskey create minio
+   mc idp ldap accesskey create-with-login https://minio.example.net
 
 Create a new access-key pair with a custom access key and secret key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -177,7 +171,7 @@ The following command creates a new access key pair with both an access key and 
 .. code-block:: shell
    :class: copyable
 
-   mc idp ldap accesskey create minio/ --access-key my-access-key-change-me --secret-key my-secret-key-change-me
+   mc idp ldap accesskey create-with-login https://minio.example.net/ --access-key my-access-key-change-me --secret-key my-secret-key-change-me
 
 Create a new access-key pair that expires after 24 hours
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,20 +184,7 @@ The command outputs a randomly generated access key and secret key.
 .. code-block:: shell
    :class: copyable
 
-   mc idp ldap accesskey create minio --expiry-duration 24h
-
-Create a new access-key and prompt to login as the user
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The following command creates a new access key pair.
-The MinIO Client will first ask you to log in as the user the access key is for on the MinIO site configured for LDAP at ``minio.example.com``.
-
-The command outputs a randomly generated access key and secret key.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc idp ldap accesskey create minio --login minio.example.com
+   mc idp ldap accesskey create-with-login https://minio.example.net --expiry-duration 24h
 
 Create a new access-key pair that expires after a date
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -216,4 +197,4 @@ The command outputs a randomly generated access key and secret key.
 .. code-block:: shell
    :class: copyable
 
-   mc idp ldap accesskey create minio --expiry 2024-02-29
+   mc idp ldap accesskey create-with-login https://minio.example.net --expiry 2024-02-29

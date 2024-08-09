@@ -99,22 +99,84 @@ Parameters
 
    Defaults to ``10``.
 
-.. mc-cmd:: --encrypt-key
+.. mc-cmd:: --enc-kms
+
+   Encrypt or decrypt objects using server-side :ref:`SSE-KMS encryption <minio-sse>` with client-managed keys.
+   
+   The parameter accepts a key-value pair formatted as ``KEY=VALUE``
+
+   - ``KEY`` must contain the full path to the object as ``alias/bucket/path/object``.
+   - ``VALUE`` must contain the 32-byte Base64-encoded data key to use for encrypting object(s).
+
+   The ``VALUE`` must correspond to an existing data key on the external KMS.
+   See the :mc-cmd:`mc admin kms key create` reference for creating data keys.
+
+   For example:
+
+   .. code-block:: shell
+
+      --enc-kms "myminio/mybucket/prefix/object.obj=bXktc3NlLWMta2V5Cg=="
+
+   You can specify multiple encryption keys by repeating the parameter.
+
+   Specify the path to a prefix to apply encryption to all matching objects at that path:
+
+   .. code-block:: shell
+
+      --enc-kms "myminio/mybucket/prefix/=bXktc3NlLWMta2V5Cg=="
+
+.. mc-cmd:: --enc-s3
    :optional:
 
-   Encrypt or decrypt objects using server-side encryption with
-   client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
+   Encrypt or decrypt objects using server-side :ref:`SSE-S3 encryption <minio-sse>` with KMS-managed keys.
+   Specify the full path to the object as ``alias/bucket/prefix/object``.
+
+   For example:
+
+   .. code-block:: shell
+
+      --enc-s3 "myminio/mybucket/prefix/object.obj"
+
+   You can specify the parameter multiple times to denote different object(s) to encrypt:
+
+   .. code-block:: shell
+
+      --enc-s3 "myminio/mybucket/foo/fooobject.obj" --enc-s3 "myminio/mybucket/bar/barobject.obj"
+
+   Specify the path to a prefix to apply encryption to all matching objects at that path:
+
+   .. code-block:: shell
+
+      --enc-s3 "myminio/mybucket/foo"
+
+.. mc-cmd:: --enc-c
+   :optional:
+
+   Encrypt or decrypt objects using server-side :ref:`SSE-C encryption <minio-sse>` with client-managed keys.
    
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
+   The parameter accepts a key-value pair formatted as ``KEY=VALUE``
 
-   Enclose the entire list of key-value pairs passed to 
-   :mc-cmd:`~mc head --encrypt-key` in double quotes ``"``.
+   - ``KEY`` must contain the full path to the object as ``alias/bucket/path/object``.
+   - ``VALUE`` must contain the 32-byte Base64-encoded data key to use for encrypting object(s).
 
-   :mc-cmd:`~mc head --encrypt-key` can use the ``MC_ENCRYPT_KEY``
-   environment variable for retrieving a list of encryption key-value pairs
-   as an alternative to specifying them on the command line.
+   For example:
+
+   .. code-block:: shell
+
+      --enc-c "myminio/mybucket/prefix/object.obj=bXktc3NlLWMta2V5Cg=="
+
+   You can specify multiple encryption keys by repeating the parameter.
+
+   Specify the path to a prefix to apply encryption to all matching objects at that path:
+
+   .. code-block:: shell
+
+      --enc-c "myminio/mybucket/prefix/=bXktc3NlLWMta2V5Cg=="
+
+   .. note::
+
+      MinIO strongly recommends against using SSE-C encryption in production workloads.
+      Use SSE-KMS via the :mc-cmd:`mc head --enc-kms` or SSE-S3 via the:mc-cmd:`mc head --enc-s3` parameters instead.
 
 .. mc-cmd:: --rewind
    :optional:
