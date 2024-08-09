@@ -18,11 +18,11 @@
 Description
 -----------
 
-.. start-mc-idp-ldap-accesskey-create-desc
+.. start-mc-idp-ldap-accesskey-create-with-login-desc
 
-The :mc:`mc idp ldap accesskey create-with-login` uses interactive terminal-based login in prompt to authenticate with the external AD/LDAP server and generate access keys for use with MinIO.
+The :mc:`mc idp ldap accesskey create-with-login` uses interactive terminal-based prompt to authenticate with the external AD/LDAP server and generate access keys for use with MinIO.
 
-.. end-mc-idp-ldap-accesskey-create-desc
+.. end-mc-idp-ldap-accesskey-create-with-login-desc
 
 .. tab-set::
 
