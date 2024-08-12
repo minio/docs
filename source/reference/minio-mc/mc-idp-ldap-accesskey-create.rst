@@ -49,7 +49,8 @@ The :mc:`mc idp ldap accesskey create` allows you to add LDAP access key pairs.
                                           [--policy <value>]          \
                                           [--name <value>]            \
                                           [--description <value>]     \
-                                          [--expiry <value>]          \                                         [--expiry-duration <value>]
+                                          [--expiry <value>]          \         
+                                          [--expiry-duration <value>]
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment configured for AD/LDAP integration.
 

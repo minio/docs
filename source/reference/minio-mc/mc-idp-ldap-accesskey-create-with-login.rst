@@ -66,7 +66,7 @@ Parameters
 .. mc-cmd:: URL
    :required:
 
-   the :abbr:`FQDN (Fully Qualified Domain Name)` of a MinIO deployment configured for AD/LDAP integration.
+   The :abbr:`FQDN (Fully Qualified Domain Name)` of a MinIO deployment configured for AD/LDAP integration.
 
    For example:
 
@@ -108,7 +108,7 @@ Parameters
 .. mc-cmd:: --description
    :optional:
 
-   Add a description for the service account.
+   Create a description for the service account.
    For example, you might specify the reason the access key exists.
 
 .. mc-cmd:: --expiry-duration
@@ -124,7 +124,7 @@ Parameters
    :optional:
 
    The date after which the access key expires.
-   Enter the date in YYYY-MM-DD format.
+   Enter the date in ``YYYY-MM-DD`` format.
 
    For example, to expire the credentials after December 31, 2024, enter ``2024-12-31``.
 
@@ -190,11 +190,11 @@ Create a new access-key pair that expires after a date
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
-The credentials expire after February 29, 2024.
+The credentials expire after February 28, 2025.
 
 The command outputs a randomly generated access key and secret key.
 
 .. code-block:: shell
    :class: copyable
 
-   mc idp ldap accesskey create-with-login https://minio.example.net --expiry 2024-02-29
+   mc idp ldap accesskey create-with-login https://minio.example.net --expiry 2025-02-28

@@ -103,7 +103,7 @@ Parameters
 .. mc-cmd:: --offset
    :optional:
 
-   Specify the number of bytes as an integer from which the command offsets the output.
+   Specify an integer that is the number of bytes from which the command offsets the output.
 
 .. mc-cmd:: --rewind
    :optional:
@@ -115,7 +115,7 @@ Parameters
 .. mc-cmd:: --tail
    :optional:
 
-   Specify the number of bytes as an integer from which the command trims the output.
+   Specify an integer that is the number of bytes from which the command trims the output.
 
 .. mc-cmd:: --version-id, vid
    :optional:
@@ -127,7 +127,7 @@ Parameters
 .. mc-cmd:: --zip
    :optional:
 
-   Extracts from a remote zip file.
+   Extracts the contents from a zip file on the source to the remote.
    Requires a MinIO deployment as the source ``ALIAS``.
 
 Global Flags

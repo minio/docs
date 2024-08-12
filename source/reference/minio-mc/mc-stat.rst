@@ -101,8 +101,7 @@ Parameters
 .. mc-cmd:: --no-list
    :optional:
 
-   Disable all ``LIST`` operations if the target does not exist.
-   
+   Disable all ``LIST`` operations if the target does not exist.   
 
 .. mc-cmd:: --recursive, r
    :optional:

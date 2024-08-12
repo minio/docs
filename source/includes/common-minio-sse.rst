@@ -60,7 +60,7 @@ The plaintext OEK resides in RAM during cryptographic operations.
 
    .. code-block:: shell
 
-      --enc-kms "myminio/mybucket/prefix/mybucketencryptionkey"
+      --enc-kms "myminio/mybucket/prefix/=mybucketencryptionkey"
 
 .. mc-cmd:: --enc-s3
    :optional:
@@ -118,7 +118,7 @@ The plaintext OEK resides in RAM during cryptographic operations.
 
    .. code-block:: shell
 
-      # RawBase64-Encoded string "mybucket32byteecryptionkeyssec"
+      # RawBase64-Encoded string "mybucket32byteencryptionkeyssec"
       --enc-c "myminio/mybucket/prefix/object.obj=bXlidWNrZXQzMmJ5dGVlbmNyeXB0aW9ua2V5c3NlYwo"
 
    You can specify multiple encryption keys by repeating the parameter.
