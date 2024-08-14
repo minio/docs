@@ -165,7 +165,10 @@ MinIO calculates the probability of a write operation to each of the pools as:
 In addition to the free space calculation, if a write option (with parity) would bring a drive
 usage above 99% or a known free inode count below 1000, MinIO does not write to the pool.
 
-If desired, you can manually initiate a rebalance procedure with :mc:`mc admin rebalance`.
+MinIO does not recommend manual rebalancing.
+If required, you can manually initiate a rebalance procedure with :mc:`mc admin rebalance`.
+MinIO recommends `SUBNET <https://min.io/pricing?jmp=docs>`__ users `log in <https://subnet.min.io/>`__ and create a new issue to discuss appropriate rebalancing strategies for deployments.
+
 For more about how rebalancing works, see :ref:`managing objects across a deployment <minio-rebalance>`.
 
 Likewise, MinIO does not write to pools in a decommissioning process.

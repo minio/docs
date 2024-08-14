@@ -149,12 +149,14 @@ For more information on write preference calculation logic, see :ref:`Writing Fi
 Rebalancing data across all pools after an expansion is an expensive operation that requires scanning the entire deployment and moving objects between pools.
 This may take a long time to complete depending on the amount of data to move.
 
-Starting with MinIO Client version RELEASE.2022-11-07T23-47-39Z, you can manually initiate a rebalancing operation across all server pools using :mc:`mc admin rebalance`. 
+MinIO does not recommend manual rebalancing.
+If required, you can manually initiate a rebalancing operation across all server pools using :mc:`mc admin rebalance`. 
+MinIO recommends `SUBNET <https://min.io/pricing?jmp=docs>`__ users `log in <https://subnet.min.io/>`__ and create a new issue to discuss appropriate rebalancing strategies for deployments.
 
 Rebalancing does not block ongoing operations and runs in parallel to all other I/O. 
 This can result in reduced performance of regular operations. 
 Consider scheduling rebalancing operations during non-peak periods to avoid impacting production workloads. 
-You can start and stop rebalancing at any time
+
 
 How do I upload objects to MinIO?
 ---------------------------------
