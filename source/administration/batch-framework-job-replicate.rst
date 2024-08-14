@@ -98,7 +98,22 @@ Optionally, the YAML can also define flags to filter which objects replicate, se
 
 .. versionchanged:: MinIO RELEASE.2024-08-03T04-33-23Z
 
-   v2 of the Batch Job Replicate API allows you to list multiple prefixes on the source to replicate from.
+   This release introduces a new version of the Batch Job Replicate API, ``v2``.
+   The updated API allows you to list multiple prefixes on the source to replicate from.
+   To replicate multiple prefixes from a source, specify ``replicate.apiVersion`` as ``v2``.
+
+   .. code-block::
+      :class: copyable
+
+      replicate:
+        apiVersion: v2
+        source:
+          type: minio
+          bucket: mybucket
+          prefix:
+            - prefix1
+            - prefix2
+      ...
 
 For the **source deployment**
 
@@ -122,6 +137,7 @@ For the **source deployment**
      * - ``prefix:`` 
        - | The prefix on the object(s) that should replicate.
          | Beginning with MinIO Server ``RELEASE.2024-08-03T04-33-23Z``, v2 of the Batch Job Replicate API allows you to list multiple prefixes.
+         | Specify ``replicate.apiVersion`` as ``v2`` to replicate from multiple prefixes.
 
      * - ``endpoint:`` 
        - | Location of the deployment to use for either the source or the target of a replication batch job. 
