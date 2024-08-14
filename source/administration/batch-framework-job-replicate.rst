@@ -96,6 +96,10 @@ Optionally, the YAML can also define flags to filter which objects replicate, se
 
    You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
 
+.. vershionchanged:: MinIO RELEASE.2024-08-03T04-33-23Z
+
+   v2 of the Batch Job Replicate API allows you to list multiple prefixes on the source to replicate from.
+
 For the **source deployment**
 
 - Required information
@@ -116,7 +120,8 @@ For the **source deployment**
      :width: 100%
 
      * - ``prefix:`` 
-       - The prefix on the object(s) that should replicate.
+       - | The prefix on the object(s) that should replicate.
+         | Beginning with MinIO Server ``RELEASE.2024-08-03T04-33-23Z``, v2 of the Batch Job Replicate API allows you to list multiple prefixes.
 
      * - ``endpoint:`` 
        - | Location of the deployment to use for either the source or the target of a replication batch job. 
