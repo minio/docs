@@ -47,8 +47,13 @@ Each Tenant pod runs three containers:
 - InitContainer that only exists during the launch of the pod to manage configuration secrets during startup.
   Once startup completes, this container terminates. 
 
-- SideCar container that monitors configuration secrets for the tenant and updates them as they change.
-  This container also monitors for root credentials and creates an error if it does not find root credentials. 
+- Sidecar container used to initialize the MinIO tenant.
+  The sidecar retrieves and validates the configuration for each tenant and creates the necessary local resources in the pod. 
+
+  .. versionchanged:: Operator 6.0.0
+     
+     The Sidecar has its own image and release cycle separate from the rest of the MinIO Operator.
+     The MinIO Operator stores the tenant's environment variables in the sidecar, allowing the Operator to update the variables without requiring a rolling restart.
 
 The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes that store the objects.
 
@@ -100,7 +105,8 @@ Kubernetes TLS Certificate API
    - For :ref:`STS service <minio-security-token-service>` when :envvar:`OPERATOR_STS_ENABLED` environment variable is set to ``on``.
    - For retrieving the health of the cluster.
    
-   The MinIO Operator reads certificates inside the ``operator-ca-tls`` secret and syncs this secret within the tenant namespace to trust private certificate authorities, such as when using cert-manager.
+   Beginning with Operator 6.0.0, the MinIO Operator reads certificates inside the ``operator-ca-tls`` secret to trust private certificate authorities throughout the Kubernetes cluster, such as when using cert-manager.
+   Previous versions of the Operator sync the ``operator-ca-tls`` certificates to each tenant.
 
 For any of these circumstances, the MinIO Operator *requires* that the Kubernetes ``kube-controller-manager`` configuration include the following :kube-docs:`configuration settings <reference/command-line-tools-reference/kube-controller-manager/#options>`:
 
