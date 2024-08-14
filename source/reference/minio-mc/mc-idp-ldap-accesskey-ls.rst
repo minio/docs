@@ -50,11 +50,13 @@ The :mc:`mc idp ldap accesskey ls` displays a list of LDAP access key pairs.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] idp ldap accesskey ls              \
-                                          ALIAS              \
+         mc [GLOBALFLAGS] idp ldap accesskey ls           \
+                                          ALIAS           \
+                                          [--all]         \
+                                          [--self]        \
                                           [--svcacc-only] \
-                                          [--temp-only]      \
-                                          [--users-only]     \
+                                          [--temp-only]   \
+                                          [--users-only]  \
                                           [DN] ...
 
 
@@ -80,6 +82,20 @@ Parameters
    .. code-block:: none
 
          mc idp ldap accesskey ls minio
+
+.. mc-cmd:: --all
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-07-31T15-58-33Z
+
+   List all access keys for all LDAP users.
+
+.. mc-cmd:: --self
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-07-31T15-58-33Z
+      
+   List access keys for the currently authenticated user.
 
 .. mc-cmd:: --svcacc-only
    :optional:
