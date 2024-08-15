@@ -114,12 +114,15 @@ Syntax
       .. code-block:: shell
          :class: copyable
 
-         mc ilm tier update TARGET                       \
-                            TIER_NAME                    \
-                            [--access-key value]         \
-                            [--secret-key value]         \
-                            [--use-aws-role]             \
-                            [--account-key value]        \
+         mc ilm tier update TARGET                         \
+                            TIER_NAME                      \
+                            [--account-key value]          \
+                            [--access-key value]           \
+                            [--az-sp-tenant-id value]      \
+                            [--az-sp-client-id value]      \
+                            [--az-sp-client-secret value]  \
+                            [--secret-key value]           \
+                            [--use-aws-role]               \
                             [--credentials-file value] 
 
       .. include:: /includes/common-minio-mc.rst
@@ -177,7 +180,41 @@ The command accepts the following arguments:
    Use this option to rotate the credentials for the :mc-cmd:`~mc ilm tier add --account-name` associated to the remote tier.
 
    This option only applies to remote storage tiers with :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure``. 
-   This option has no effect for any other ``TIER_TYPE``.
+   This option has no effect for any other type of login.
+
+.. mc-cmd:: --az-sp-tenant-id
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-07-03T20-17-25Z 
+
+   Directory ID for the Azure service principal account.
+
+   This option only applies to remote storage tiers with :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure``. 
+   This option has no effect for any other type of login.
+
+.. mc-cmd:: --az-sp-client-id
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-07-03T20-17-25Z 
+
+   Client ID of the Azure service principal account.
+
+   Requires :mc-cmd:`~mc ilm tier update --az-sp-client-secret`.
+
+   This option only applies to remote storage tiers with :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure``. 
+   This option has no effect for any other type of login.
+
+.. mc-cmd:: --az-sp-client-secret
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-07-03T20-17-25Z 
+
+   The secret for the Azure service principal account.
+
+   Requires :mc-cmd:`~mc ilm tier update --az-sp-client-id`.
+
+   This option only applies to remote storage tiers with :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure``. 
+   This option has no effect for any other type of login.
 
 .. mc-cmd:: --credentials-file
    :optional:
@@ -188,7 +225,7 @@ The command accepts the following arguments:
    The user must have permission to perform read/write/list/delete operations on the remote bucket or bucket prefix.
       
    This option only applies to remote storage tiers with :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``gcs``. 
-   This option has no effect for any other ``TIER_TYPE``.
+   This option has no effect for any other type of login.
    
 Global Flags
 ~~~~~~~~~~~~

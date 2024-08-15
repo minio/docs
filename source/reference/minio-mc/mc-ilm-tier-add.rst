@@ -320,7 +320,7 @@ The command accepts the following arguments:
 
    Tenant ID for the `service principal account <https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1>`__ to use to log in to Azure storage.
 
-   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using an service principal identity.
+   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using a service principal identity.
    This option has no effect for any other value of ``TIER_TYPE``.
 
 .. mc-cmd:: --azure-sp-client-id
@@ -328,7 +328,7 @@ The command accepts the following arguments:
 
    Client ID for the `service principal account <https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1>`__ to use to log in to Azure storage.
 
-   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using an service principal identity.
+   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using a service principal identity.
    This option has no effect for any other value of ``TIER_TYPE``.
 
 .. mc-cmd:: --azure-sp-client-secret
@@ -336,7 +336,7 @@ The command accepts the following arguments:
 
    The client secret for the `service principal account <https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1>`__ to use to log in to Azure storage.
 
-   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using an service principal identity.
+   This option only applies if :mc-cmd:`~mc ilm tier add TIER_TYPE` is ``azure`` and you log in using a service principal identity.
    This option has no effect for any other value of ``TIER_TYPE``.
 
 Global Flags
