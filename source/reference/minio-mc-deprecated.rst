@@ -71,6 +71,10 @@ Table of Deprecated Commands
      - :mc-cmd:`mc replicate backlog`
      - mc RELEASE.2023-07-18T21-05-38Z
 
+   * - ``mc license update``
+     - No replacement
+     - mc RELEASE.2024-07-03T20-17-25Z 
+
 
 Table of Deprecated Admin Commands
 ----------------------------------
@@ -226,6 +230,7 @@ Table of Deprecated Admin Commands
    /reference/deprecated/mc-ilm-import
    /reference/deprecated/mc-ilm-ls
    /reference/deprecated/mc-ilm-rm
+   /reference/deprecated/mc-license-update
    /reference/deprecated/mc-quota
    /reference/deprecated/mc-quota-clear
    /reference/deprecated/mc-quota-info
