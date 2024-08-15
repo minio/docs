@@ -560,6 +560,14 @@ Global Options
 All :ref:`commands <minio-mc-commands>` support the following global options.
 You can also define some of these options using :ref:`Environment Variables <minio-server-envvar-mc>`.
 
+.. option:: --config-dir
+
+   The path to a ``JSON`` formatted configuration file that
+   :program:`mc` uses for storing data. See :ref:`mc-configuration` for
+   more information on how :program:`mc` uses the configuration file.
+
+   Alternatively, set the environment variable :envvar:`MC_CONFIG_DIR`.
+
 .. option:: --debug
 
    Enables verbose output to the console.
@@ -574,20 +582,20 @@ You can also define some of these options using :ref:`Environment Variables <min
 
    Alternatively, set the environment variable :envvar:`MC_DEBUG`.
 
-.. option:: --config-dir
-
-   The path to a ``JSON`` formatted configuration file that
-   :program:`mc` uses for storing data. See :ref:`mc-configuration` for
-   more information on how :program:`mc` uses the configuration file.
-
-   Alternatively, set the environment variable :envvar:`MC_CONFIG_DIR`.
-
 .. option:: --disable-pager, --dp
 
    .. versionadded:: mc RELEASE.2024-04-29T09-56-05Z
 
    Disable the pager functionality of the MinIO Client in the CLI.
    When used, output prints to raw ``STDOUT`` instead.
+
+.. option:: --insecure
+
+   Disables TLS/SSL certificate verification. Allows TLS connectivity to 
+   servers with invalid certificates. Exercise caution when using this
+   option against untrusted S3 hosts.
+
+   Alternatively, set the environment variable :envvar:`MC_INSECURE`.
 
 .. option:: --json
 
@@ -617,13 +625,26 @@ You can also define some of these options using :ref:`Environment Variables <min
 
    Alternatively, set the environment variable :envvar:`MC_QUIET`.
 
-.. option:: --insecure
+.. option:: --resolve
 
-   Disables TLS/SSL certificate verification. Allows TLS connectivity to 
-   servers with invalid certificates. Exercise caution when using this
-   option against untrusted S3 hosts.
+   .. versionadded:: mc RELEASE.2024-08-13T05-33-17Z
 
-   Alternatively, set the environment variable :envvar:`MC_INSECURE`.
+   Creates a custom DNS mapping to resolve a HOST to a specified IP address.
+
+   Use the following syntax:
+
+   .. code-block:: text
+
+      --resolve HOST[:PORT]=IP 
+
+   For example:
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc alias set --resolve myminio.example.com:9000=192.168.188.118 'myminio' 'https://myminio.example.com:9000' 'miniouser' 'miniosecret'
+
+   Repeat the flag multiple times to add additional custom DNS mappings.
 
 .. option:: --version
 

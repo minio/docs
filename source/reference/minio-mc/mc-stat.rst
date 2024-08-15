@@ -47,7 +47,8 @@ You can also use :mc:`mc stat` against the local filesystem to produce similar r
          :class: copyable
 
          mc [GLOBALFLAGS] stat                      \
-                          [--encrypt-key "value"]   \
+                          [--enc-c "value"]         \
+                          [--no-list]               \
                           [--recursive]             \
                           [--rewind "string"]       \
                           [--versions]              \
@@ -79,7 +80,7 @@ Parameters
 
       mc stat myminio/mybucket/myobject.txt myminio/mybucket/myobject.txt
 
-   If specifying the path to a bucket or bucket prefixy, you **must** include the :mc-cmd:`mc stat --recursive` flag:
+   If specifying the path to a bucket or bucket prefix, you **must** include the :mc-cmd:`mc stat --recursive` flag:
 
    .. code-block:: shell
 
@@ -91,17 +92,18 @@ Parameters
 
       mc stat ~/data/myobject.txt
 
-.. mc-cmd:: --encrypt-key
+.. mc-cmd:: --enc-c
    :optional:
 
-   Encrypt or decrypt objects using server-side encryption with client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting object(s).
+   Encrypt or decrypt objects using client provided keys.
+   Repeat the flag to pass multiple keys.
 
-   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc stat --encrypt-key` in double quotes ``"``.
+   Keys must be in either Raw Base64 or Hex format.
 
-   :mc-cmd:`~mc stat --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
+.. mc-cmd:: --no-list
+   :optional:
+
+   Disable all ``LIST`` operations if the target does not exist.
 
 .. mc-cmd:: --recursive, r
    :optional:
