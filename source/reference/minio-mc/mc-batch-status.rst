@@ -23,7 +23,7 @@ The :mc:`mc batch status` command outputs summaries of job events on a MinIO ser
 
 .. versionchanged:: mc RELEASE.2024-07-03T20-17-25Z
 
-   Batch status can display for active, in-progress jobs or any batch job completed in the previous three (3) days.
+   Batch status displays summaries for active, in-progress jobs or any batch job completed in the previous three (3) days.
 
 .. end-mc-batch-status-desc
 
@@ -47,7 +47,7 @@ The :mc:`mc batch status` command outputs summaries of job events on a MinIO ser
          :class: copyable
 
          mc [GLOBALFLAGS] batch list TARGET           \
-                                     "JOBID"
+                                     ["JOBID"]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -67,6 +67,8 @@ Parameters
    The unique identifier of a job to summarize.
    To find the ID of a job, use :mc:`mc batch list`.
    
+   If not specified, the command returns a summary for the current active batch job.
+
 Global Flags
 ~~~~~~~~~~~~
 
