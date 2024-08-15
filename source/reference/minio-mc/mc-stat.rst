@@ -80,7 +80,7 @@ Parameters
 
       mc stat myminio/mybucket/myobject.txt myminio/mybucket/myobject.txt
 
-   If specifying the path to a bucket or bucket prefixy, you **must** include the :mc-cmd:`mc stat --recursive` flag:
+   If specifying the path to a bucket or bucket prefix, you **must** include the :mc-cmd:`mc stat --recursive` flag:
 
    .. code-block:: shell
 
@@ -103,7 +103,7 @@ Parameters
 .. mc-cmd:: --no-list
    :optional:
 
-   Disable all ``LIST`` operations if an object does not exist.
+   Disable all ``LIST`` operations if the target does not exist.
 
 .. mc-cmd:: --recursive, r
    :optional:

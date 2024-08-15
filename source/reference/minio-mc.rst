@@ -627,6 +627,8 @@ You can also define some of these options using :ref:`Environment Variables <min
 
 .. option:: --resolve
 
+   .. versionadded:: mc RELEASE.2024-08-13T05-33-17Z
+
    Creates a custom DNS mapping to resolve a HOST to a specified IP address.
 
    Use the following syntax:
