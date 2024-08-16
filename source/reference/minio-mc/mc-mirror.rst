@@ -50,6 +50,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
          :class: copyable
 
          mc [GLOBALFLAGS] mirror                            \
+                          [--active-active]                 \
                           [--attr "string"]                 \
                           [--disable-multipart]             \
                           [--dry-run]                       \
@@ -63,10 +64,14 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
                           [--monitoring-address "string"]   \
                           [--newer-than "string"]           \
                           [--older-than "string"]           \
+                          [--overwrite]                     \
                           [--preserve]                      \
                           [--region "string"]               \
                           [--remove]                        \
+                          [--retry]                         \
+                          [--skip-errors]                   \
                           [--storage-class "string"]        \
+                          [--summary]                       \
                           [--watch]                         \
                           SOURCE                            \
                           TARGET
@@ -115,6 +120,28 @@ Parameters
       mc mirror SOURCE play/mybucket
 
    :mc:`mc mirror` uses the object or file names from the :mc-cmd:`~mc mirror SOURCE` when synchronizing to the ``TARGET`` bucket.
+
+.. mc-cmd:: --active-active
+   :optional:
+
+   Establish active-active mirror activities between two sites.
+   The command must be repeated on each site.
+
+   For example:
+
+   On site A, to mirror from A to B
+   
+   .. code-block::
+      :class: copyable
+
+      mc mirror --active-active siteA siteB
+
+   On site B, to mirror from B to A
+
+   .. code-block::
+      :class: copyable
+
+      mc mirror --active-active siteB siteA
 
 .. mc-cmd:: --attr
    :optional:
