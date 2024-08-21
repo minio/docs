@@ -28,7 +28,7 @@ MinIO offers three licensing options:
 #. Enterprise Lite, a `commercial license <https://min.io/pricing?ref=docs>`__ with included support direct from MinIO Engineers
 #. Enterprise Plus, a `commercial license <https://min.io/pricing?ref=docs>`__ with included support direct from MinIO Engineers, longer release cycle, shorter SLA, and other benefits
 
-This page shows the current license status of the deployment.
+The :guilabel:`License` page shows the current license status of the deployment.
 You can also begin the registration process to sign up for a paid subscription or add the deployment to an existing subscription.
 
 Deployments licensed under AGPLv3 must comply to the terms of the license.
