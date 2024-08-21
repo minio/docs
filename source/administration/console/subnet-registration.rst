@@ -1,8 +1,8 @@
 .. _minio-console-subscription:
 
-===============================
-SUBNET Registration and Support
-===============================
+======
+SUBNET
+======
 
 .. default-domain:: minio
 
@@ -14,19 +14,21 @@ SUBNET Registration and Support
 You can use the MinIO Console to perform several of the license and subscription related functions available in MinIO, such as:
 
 - View the license you are currently using for your MinIO deployment.
-- Subscribe to |SUBNET|.
-- Manage the deployment's SUBNET license.
+- Subscribe to a commercial license, which includes access to |SUBNET|.
+- Manage the deployment's Enterprise license.
 - Access Support tools for sharing with MinIO Engineering.
+- Review differences between license options.
 
 License
 -------
 
-MinIO offers two licensing options: 
+MinIO offers three licensing options: 
 
 #. Open source with the :minio-git:`GNU AGPLv3 license <mc/blob/master/LICENSE>`
-#. Paid commercial license with included support direct from MinIO Engineers
+#. Enterprise Lite, a `commercial license <https://min.io/pricing?ref=docs>`__ with included support direct from MinIO Engineers
+#. Enterprise Plus, a `commercial license <https://min.io/pricing?ref=docs>`__ with included support direct from MinIO Engineers, longer release cycle, shorter SLA, and other benefits
 
-This page shows the current license status of the deployment.
+The :guilabel:`License` page shows the current license status of the deployment.
 You can also begin the registration process to sign up for a paid subscription or add the deployment to an existing subscription.
 
 Deployments licensed under AGPLv3 must comply to the terms of the license.
@@ -34,7 +36,7 @@ MinIO cannot make the determination as to whether your application's usage of Mi
 You should instead rely on your own legal counsel or licensing specialists to audit and ensure your application is in compliance with the licenses of MinIO and all other open-source projects with which your application integrates or interacts.
 
 MinIO Commercial Licensing is the best option for applications which trigger AGPLv3 obligations (for example, open sourcing your application). 
-Applications using MinIO — or any other OSS-licensed code — without validating their usage do so at their own risk.
+Applications using MinIO—or any other OSS-licensed code—without validating their usage do so at their own risk.
 
 Health
 ------
@@ -86,7 +88,7 @@ MinIO installs with Call Home options disabled by default.
 
 .. important:: 
 
-   Call Home requires an active SUBNET subscription.
+   Call Home requires an active Enterprise license.
 
 Use the :guilabel:`Call Home` section to enable or disable uploading either once-per-day health diagnostic reports or real-time error logs to SUBNET.
 The health reports and real-time logs are separate functions you can enable or disable separately.

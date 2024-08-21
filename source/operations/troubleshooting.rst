@@ -287,10 +287,10 @@ Version support varies by the `license <https://min.io/pricing?ref=docs>`_ used 
    * - AGPLv3
      - Most recent release
 
-   * - MinIO Standard
+   * - MinIO Enterprise Lite
      - 1 year long term support of any release
 
-   * - MinIO Enterprise
+   * - MinIO Enterprise Plus
      - 5 year long term support of any release, SUBNET support for upgrade guidance and recommendations
 
 Recommended Upgrade Schedule
