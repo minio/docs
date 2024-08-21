@@ -197,6 +197,9 @@ Claim Prefix
 
 *Optional*
 
+This setting is deprecated and has been removed as of :minio-release:`RELEASE.2024-07-13T01-46-15Z`.
+Use :envvar:`MINIO_IDENTITY_OPENID_CLAIM_NAME` instead.
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
@@ -262,6 +265,9 @@ Redirect URI
 ~~~~~~~~~~~~
 
 *Optional*
+
+This setting is deprecated and has been removed as of :minio-release:`RELEASE.2024-07-13T01-46-15Z`.
+Use :envvar:`MINIO_BROWSER_REDIRECT_URL` instead.
 
 .. tab-set:: 
 

@@ -51,9 +51,9 @@ The :mc:`mc idp ldap policy entities` command displays a list of mappings for a 
 
          mc [GLOBALFLAGS] idp ldap policy entities                       \
                                           ALIAS                          \
-                                          [--user `value`, -u `value`]   \
                                           [--group `value`, -g `value`]  \
-                                          [--policy value]
+                                          [--policy value]               \
+                                          [--user `value`, -u `value`]
 
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
       - You may use each of the ``--user``, ``--group``, and/or ``--policy`` flags as many times as desired in the command.
@@ -79,6 +79,25 @@ Parameters
 
       mc idp ldap policy entities myminio
 
+.. mc-cmd:: --group
+   :optional:
+
+   Returns a list of users and policies associated with the specified group.
+   Repeat the flag to return a list for multiple groups.
+
+.. mc-cmd:: --policies
+   :optional:
+
+   Returns a list of users and groups associated with the specified policy.
+   Repeat the flag to return a list for multiple policies.
+
+.. mc-cmd:: --user
+   :optional:
+
+   Returns a list of groups to which the user belongs and the policies associated with each group.
+   The output includes only groups assigned to policies.
+
+   Repeat the flag to return a list for multiple users.
 
 Example
 ~~~~~~~

@@ -156,7 +156,7 @@ Once logged in to the MinIO Console, users can perform many kinds of tasks.
 - :ref:`Manage objects <minio-console-managing-objects>` by browsing or uploading objects, managing bucket settings, or creating tiers.
 - :ref:`Review or modify identity and security <minio-console-security-access>` with access keys, policies, and Identity Provider settings.
 - :ref:`Monitor the health and activities <minio-console-managing-deployment>` with metrics, notifications, or site replication
-- :ref:`Manage your deployment's license and SUBNET Subscription <minio-console-subscription>`
+- :ref:`Manage your deployment's license <minio-console-subscription>`
 
 .. toctree::
    :titlesonly:

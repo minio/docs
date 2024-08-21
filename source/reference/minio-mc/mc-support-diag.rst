@@ -108,7 +108,7 @@ Generate health data for a MinIO cluster and automatically for a MinIO cluster a
 
    mc support diag minio1
 
-The automatic upload of data only occurs for deployments registered with SUBNET using :mc-cmd:`mc license register`.
+The automatic upload of data only occurs for deployments under a Commerical License.
 
 .. _minio-support-diagnostics-airgap:
 
