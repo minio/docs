@@ -22,7 +22,7 @@ Description
 
 .. start-mc-admin-rebalance-desc
 
-The :mc-cmd:`mc admin rebalance` command allows starts or monitors a rebalancing operation on a MinIO deployment.
+The :mc-cmd:`mc admin rebalance` command starts, stops, or monitors a rebalancing operation on a MinIO deployment.
 Rebalancing redistributes objects across all pools in the deployment.
 
 .. end-mc-admin-rebalance-desc
@@ -66,6 +66,9 @@ The :mc-cmd:`mc admin rebalance` command has the following subcommands:
 
    * - :mc-cmd:`mc admin rebalance status`
      - Outputs the current status of an in-progress rebalance operation.
+
+   * - :mc-cmd:`mc admin rebalance stop`
+     - Stops an in-progress rebalance operation.
 
 
 Syntax
@@ -133,12 +136,12 @@ Syntax
 
    Ends an in-progress rebalance job on the specified deployment.
 
-   .. admonition:: Stop may cause data loss
+   .. admonition:: Stopping a rebalance job on previous versions of MinIO may cause data loss
       :class: warning
 
-      At this time, MinIO does not recommend stopping an in-progress rebalance job.
-      Interrupting rebalance may result in data loss.
-      
+      A bug in MinIO prior to :minio-release:`RELEASE.2024-08-17T01-24-54Z` can overwrite objects while stopping a in-progress rebalance operation. 
+      Interrupting rebalance on these older versions may result in data loss.
+
    .. tab-set::
       
       .. tab-item:: EXAMPLES
