@@ -101,7 +101,7 @@ You can select an explicit static port by passing the
 each MinIO Server in the deployment. 
 
 For example, the following command starts a distributed MinIO deployment using
-a static port assignment of ``9090`` for the MinIO Console. This deployment
+a static port assignment of ``9001`` for the MinIO Console. This deployment
 would respond to S3 API operations on the default MinIO server port ``:9000``
 and browser access on the MinIO Console port ``:9001``.
 
