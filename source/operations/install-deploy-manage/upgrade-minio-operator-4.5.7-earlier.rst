@@ -21,6 +21,12 @@ MinIO supports the following upgrade paths for older versions of the MinIO Opera
    * - Current Version
      - Supported Upgrade Target
 
+   * - 5.0.15 or later
+     - |operator-version-stable|
+
+   * - 5.0.0 to 5.0.14
+     - 5.0.15
+
    * - 4.2.3 to 4.5.7
      - 4.5.8
    
@@ -30,8 +36,10 @@ MinIO supports the following upgrade paths for older versions of the MinIO Opera
    * - 3.X.X
      - 4.2.2
 
-To upgrade from Operator to |operator-version-stable| from version 4.5.7 or earlier, you must first upgrade to version 4.5.8.
+To upgrade from Operator to |operator-version-stable| from version 4.5.7 or earlier, you must first upgrade to version 4.5.8, then upgrade to 5.0.15.
 Depending on your current version, you may need to do one or more intermediate upgrades to reach v4.5.8.
+
+After upgrading to 5.0.15, see :ref:`minio-k8s-upgrade-minio-operator` to upgrade to the latest version.
 
 .. _minio-k8s-upgrade-minio-operator-to-5.0.15:
 
@@ -136,7 +144,7 @@ Procedure
 
       The following procedure upgrades the MinIO Operator using Kustomize.
 
-      For Operator versions 5.0.1 to 5.0.14 installed with the MinIO Kubernetes Plugin, follow the Kustomize instructions to upgrade to 5.0.15 or later.
+      For Operator versions 5.0.1 to 5.0.14 installed with the MinIO Kubernetes Plugin, follow the Kustomize instructions below to upgrade to 5.0.15 or later.
       If you installed the Operator using :ref:`Helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
 
       #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
@@ -180,12 +188,12 @@ Procedure
 
       #. Upgrade Operator with Kustomize
 
-         The following command upgrades Operator to version |operator-version-stable|:
+         The following command upgrades Operator to version 5.0.15:
 
          .. code-block:: shell
             :class: copyable
 
-            kubectl apply -k github.com/minio/operator
+            kubectl apply -k github.com/minio/operator/?ref=v5.0.15
 
          In the sample output below, ``configured`` at the end of the line indicates where a new change was applied from the updated CRD:
 
@@ -224,6 +232,8 @@ Procedure
          .. include:: /includes/common/common-k8s-connect-operator-console-no-plugin.rst
 
       #. Retrieve the Operator Console JWT for login
+
+      To continue upgrading to |operator-version-stable|, see :ref:`minio-k8s-upgrade-minio-operator`.
 
 	 .. include:: /includes/common/common-k8s-operator-console-jwt.rst
 
@@ -329,7 +339,7 @@ Procedure
 ~~~~~~~~~
 
 This procedure upgrades MinIO Operator release 4.2.3 through 4.5.7 to release 4.5.8.
-You can then upgrade from release 4.5.8 to |operator-version-stable|.
+You can then upgrade from release 4.5.8 to 5.0.15.
 
 1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
 
