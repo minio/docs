@@ -16,9 +16,8 @@ Monitoring and Alerts
 Metrics and Alerts
 ------------------
 
-MinIO publishes metrics endpoints for scraping data on cluster status and operations.
-For historical metrics and analytics, MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
-You can use any scraping tool which supports that data model to pull metrics data from MinIO for further analysis and alerting.
+MinIO publishes point-in-time metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
+You can use any scraping tool which supports that data model to pull those metrics into a database for populating historical views, performing query/analysis of metrics data, or creating alerts on preferred data points.
 
 The following table lists tutorials for integrating MinIO metrics with select third-party monitoring software.
 

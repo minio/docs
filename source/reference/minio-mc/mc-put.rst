@@ -46,9 +46,9 @@ The :mc:`mc put` uploads an object from the local file system to a bucket on a t
 
          mc [GLOBALFLAGS] put                      \
                           TARGET                   \
-                          [--enc-c value]          \
                           [--enc-kms value]        \
                           [--enc-s3 value]         \
+                          [--enc-c value]          \
                           [--if-not-exists]        \
                           [--parallel, -P integer] \
                           [--part-size, -s string]
@@ -76,29 +76,12 @@ Parameters
    - ``ALIAS/BUCKET/OBJECT-NAME``
    - ``ALIAS/BUCKET/PREFIX/OBJECT-NAME``
 
-.. mc-cmd:: --enc-c
-   :optional:
+.. block include of enc-c , enc-s3, and enc-kms
 
-   Encrypt or decrypt objects using client provided keys.
-   Repeat the flag to pass multiple keys.
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-options
+   :end-before: end-minio-mc-sse-options
 
-   Keys must be in either Raw Base64 or Hex format.
-
-.. mc-cmd:: --enc-kms
-   :optional:
-
-   Encrypt or decrypt objects using specific server-side keys.
-   Repeat the flag to pass multiple keys.
-
-   Defaults to the value in the ``MC_ENC_KMS`` environment variable.
-
-.. mc-cmd:: --enc-s3
-   :optional:
-
-   Encrypt or decrypt objects using default server-side keys and configurations.
-   Repeat the flag to pass multiple keys.
-
-   Defaults to the value in the ``MC_ENC_S3`` environment variable.
 
 .. mc-cmd:: --parallel, --P
    :optional:

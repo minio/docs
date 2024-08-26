@@ -50,10 +50,13 @@ display the contents of the specified file or object to ``STDOUT``.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] cat             \
-                          [--rewind]      \
-                          [--version-id]  \
-                          [--encrypt-key] \
+         mc [GLOBALFLAGS] cat                       \
+                          [--enc-c "value"]         \
+                          [--tail "int"]            \
+                          [--rewind]                \
+                          [--offset "int"]          \
+                          [--version-id "string"]   \
+                          [--zip]                   \
                           ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
@@ -91,12 +94,28 @@ Parameters
 
       mc cat ~/data/object.txt
 
+.. block include of enc-c
+
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-c-only
+   :end-before: end-minio-mc-sse-options
+
+.. mc-cmd:: --offset
+   :optional:
+
+   Specify an integer that is the number of bytes from which the command offsets the output.
+
 .. mc-cmd:: --rewind
    :optional:
 
    .. include:: /includes/facts-versioning.rst
       :start-after: start-rewind-desc
       :end-before: end-rewind-desc
+
+.. mc-cmd:: --tail
+   :optional:
+
+   Specify an integer that is the number of bytes from which the command trims the output.
 
 .. mc-cmd:: --version-id, vid
    :optional:
@@ -105,22 +124,11 @@ Parameters
       :start-after: start-version-id-desc
       :end-before: end-version-id-desc
 
-.. mc-cmd:: --encrypt-key
+.. mc-cmd:: --zip
    :optional:
 
-   Encrypt or decrypt objects using server-side encryption with
-   client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
-
-   Enclose the entire list of key-value pairs passed to 
-   :mc-cmd:`~mc cat --encrypt-key` in double quotes ``"``.
-
-   :mc-cmd:`~mc cat --encrypt-key` can use the ``MC_ENCRYPT_KEY``
-   environment variable for retrieving a list of encryption key-value pairs
-   as an alternative to specifying them on the command line.
+   Extracts the contents from a zip file on the source to the remote.
+   Requires a MinIO deployment as the source ``ALIAS``.
 
 Global Flags
 ~~~~~~~~~~~~

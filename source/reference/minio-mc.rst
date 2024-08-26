@@ -243,6 +243,7 @@ The following table lists :mc-cmd:`mc` commands:
           :end-before: end-mc-head-desc
      
    * - | :mc:`mc idp ldap accesskey`
+       | :mc:`mc idp ldap accesskey create-with-login`
        | :mc:`mc idp ldap add`
        | :mc:`mc idp ldap disable`
        | :mc:`mc idp ldap enable`
@@ -674,6 +675,7 @@ You can also define some of these options using :ref:`Environment Variables <min
    /reference/minio-mc/mc-head
    /reference/minio-mc/mc-idp-ldap
    /reference/minio-mc/mc-idp-ldap-accesskey
+   /reference/minio-mc/mc-idp-ldap-accesskey-create-with-login
    /reference/minio-mc/mc-idp-ldap-policy
    /reference/minio-mc/mc-idp-openid
    /reference/minio-mc/mc-ilm

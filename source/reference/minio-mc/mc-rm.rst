@@ -153,25 +153,6 @@ Parameters
    Outputs the results of a command without actually removing any files.
    Use this flag to test that your command configuration removes only the objects you wish to remove.
 
-.. mc-cmd:: --encrypt-key
-   :optional:
-
-   The encryption key to use for performing Server-Side Encryption
-   with Client Keys (SSE-C). Specify comma separated key-value pairs as
-   ``KEY=VALUE,...``.
-   
-   - For ``KEY``, specify the S3-compatible service 
-     :mc-cmd:`alias <mc alias>` and full path to the bucket, including any
-     bucket prefixes. Separate the alias and bucket path with a forward slash 
-     ``\``. For example, ``play/mybucket``
-
-   - For ``VALUE``, specify the data key to use for encryption object(s) in
-     the bucket or bucket prefix specified to ``KEY``.
-
-   :mc-cmd:`~mc rm --encrypt-key` can use the ``MC_ENCRYPT_KEY``
-   environment variable for populating the list of encryption key-value
-   pairs as an alternative to specifying them on the command line.
-
 .. mc-cmd:: --force
    :optional:
 
@@ -331,8 +312,6 @@ incomplete upload files for an object.
 
 - Replace :mc-cmd:`PATH <mc rm ALIAS>` with the path to the object.
 
-Removing incomplete upload files prevents resuming the upload using the
-:mc-cmd:`mc mv --continue` or :mc-cmd:`mc cp --continue` commands.
 
 Roll Object Back To Previous Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -56,10 +56,10 @@ similar results to the ``cp`` commandline tool.
 
          mc [GLOBALFLAGS] cp                                                        \
                           [--attr "string"]                                         \
-                          [--continue]                                              \
                           [--disable-multipart]                                     \
-                          [--encrypt "string"]                                      \
-                          [--encrypt-key]                                           \
+                          [--enc-kms "string"]                                      \
+                          [--enc-s3 "string"]                                       \
+                          [--enc-c "string"]                                        \
                           [--legal-hold "on"]                                       \
                           [--limit-download string]                                 \
                           [--limit-upload string]                                   \
@@ -142,45 +142,16 @@ Parameters
    Specify key-value pairs as ``KEY=VALUE\;``. 
    For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
 
-.. mc-cmd:: --continue, c
-   :optional:
-
-   Create or resume a copy session. 
-
 .. mc-cmd:: --disable-multipart
    :optional:
 
    Disables multipart upload for the copy session.
 
-.. mc-cmd:: --encrypt
-   :optional:
+.. block include of enc-c , enc-s3, and enc-kms
 
-   Encrypt or decrypt objects using :ref:`server-side encryption <minio-sse>` with server-managed keys. 
-   Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting object(s).
-
-   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc cp --encrypt` in double-quotes ``"``.
-
-   :mc-cmd:`~mc cp --encrypt` can use the :envvar:`MC_ENCRYPT` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
-
-.. mc-cmd:: --encrypt-key
-   :optional:
-
-   Encrypt or decrypt objects using server-side encryption with client-specified keys. 
-   Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
-
-   Enclose the entire list of key-value pairs passed to 
-   :mc-cmd:`~mc cp --encrypt-key` in double quotes ``"``.
-
-   :mc-cmd:`~mc cp --encrypt-key` can use the :envvar:`MC_ENCRYPT_KEY`
-   environment variable for retrieving a list of encryption key-value pairs
-   as an alternative to specifying them on the command line.
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-options
+   :end-before: end-minio-mc-sse-options
 
 .. mc-cmd:: --legal-hold
    :optional:
@@ -484,10 +455,6 @@ Behavior
 
 :mc:`mc cp` verifies all copy operations to object storage using MD5SUM
 checksums. 
-
-Interrupted or failed copy operations can resume from the point of failure
-by issuing the :mc:`mc cp` operation again with the 
-:mc-cmd:`~mc cp --continue` argument.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

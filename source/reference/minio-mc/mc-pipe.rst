@@ -39,11 +39,12 @@ The :mc:`mc pipe` command streams content from `STDIN <https://www.gnu.org/softw
 
          mc [GLOBALFLAGS] pipe                              \
                           TARGET                            \
-                          [--encrypt "string"]              \
+                          [--enc-kms "string"]              \
+                          [--enc-s3 "string"]               \
+                          [--enc-c "string"]                \
                           [--storage-class, --sc "string"]  \
                           [--attr "string"]                 \
                           [--tags "string"]                 \
-                          [--encrypt-key "string"] 
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -69,31 +70,12 @@ Parameters
    Specify key-value pairs as ``KEY=VALUE\;``, separating each pair with a back slash and semicolon (``\;``). 
    For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
 
-.. mc-cmd:: --encrypt
-   :optional:
-   
-   Encrypt or decrypt objects using :ref:`server-side encryption <minio-sse>` with server-managed keys. 
-   Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting object(s).
+.. block include of enc-c , enc-s3, and enc-kms
 
-   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc pipe --encrypt` in double-quotes ``"``.
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-options
+   :end-before: end-minio-mc-sse-options
 
-   :mc-cmd:`~mc pipe --encrypt` can use the ``MC_ENCRYPT`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
-
-.. mc-cmd:: --encrypt-key
-   :optional:
-
-   Encrypt or decrypt objects using server-side encryption with client-specified keys. 
-   Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting object(s).
-
-   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc pipe --encrypt-key` in double quotes ``"``.
-
-   :mc-cmd:`~mc pipe --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --storage-class, --sc
    :optional:

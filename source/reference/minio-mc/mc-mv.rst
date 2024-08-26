@@ -45,10 +45,10 @@ similar results to the ``mv`` commandline tool.
 
          mc [GLOBALFLAGS] mv         \
          [--attr "string"]           \
-         [--continue]                \
          [--disable-multipart]       \
-         [--encrypt "string"]        \
-         [--encrypt-key "string"]    \
+         [--enc-kms "string"]        \
+         [--enc-s3 "string"]         \
+         [--enc-c "string"]          \
          [--limit-download string]   \
          [--limit-upload string]     \
          [--newer-than "string"]     \
@@ -136,11 +136,6 @@ Parameters
    Add custom metadata for the object. Specify key-value pairs as ``KEY=VALUE\;``. 
    For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
 
-.. mc-cmd:: --continue, c
-   :optional:
-
-   Create or resume a move session. 
-
 .. mc-cmd:: --disable-multipart
    :optional:
 
@@ -154,39 +149,12 @@ Parameters
    MinIO recommends using multipart upload for any object larger than 100 MB.
    For more information on multipart upload, refer to the :s3-docs:`Amazon S3 documentation <mpuoverview.html>`
 
-.. mc-cmd:: --encrypt
-   :optional:
+.. block include of enc-c , enc-s3, and enc-kms
 
-   Encrypt or decrypt objects using server-side encryption with
-   server-managed keys. Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-options
+   :end-before: end-minio-mc-sse-options
 
-   Enclose the entire list of key-value pairs passed to
-   :mc-cmd:`~mc mv --encrypt` in double-quotes ``"``.
-
-   :mc-cmd:`~mc mv --encrypt` can use the ``MC_ENCRYPT`` environment
-   variable for retrieving a list of encryption key-value pairs as an
-   alternative to specifying them on the command line.
-
-.. mc-cmd:: --encrypt-key
-   :optional:
-
-   Encrypt or decrypt objects using server-side encryption with
-   client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
-
-   Enclose the entire list of key-value pairs passed to 
-   :mc-cmd:`~mc mv --encrypt-key` in double quotes ``"``.
-
-   :mc-cmd:`~mc mv --encrypt-key` can use the ``MC_ENCRYPT_KEY``
-   environment variable for retrieving a list of encryption key-value pairs
-   as an alternative to specifying them on the command line.
 
 .. include:: /includes/linux/minio-client.rst
    :start-after: start-mc-limit-flags-desc
@@ -366,12 +334,6 @@ Checksum Verification
 
 :mc:`mc mv` verifies all move operations to object storage using MD5SUM
 checksums. 
-
-Resume Move Operations
-~~~~~~~~~~~~~~~~~~~~~~
-
-Use :mc-cmd:`mc mv --continue` to resume an interrupted or failed
-move operation from the point of failure. 
 
 MinIO Trims Empty Prefixes on Object Removal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

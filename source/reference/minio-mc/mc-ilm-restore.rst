@@ -50,12 +50,12 @@ tier, while the temporary copy becomes ``HEAD`` for that object.
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] ilm restore      \
-                          [--days "int" ]  \
-                          [--recursive]    \
-                          [--vid "string"] \
-                          [--versions]     \
-                          [--encrypt-key]  \
+         mc [GLOBALFLAGS] ilm restore         \
+                          [--days "int" ]     \
+                          [--recursive]       \
+                          [--vid "string"]    \
+                          [--versions]        \
+                          [--enc-c "string"]  \
                           ALIAS
 
       .. include:: /includes/common-minio-mc.rst
@@ -80,6 +80,12 @@ Parameters
 
    The number of days after which MinIO expires the restored copy of the archived object.
 
+.. block include of enc-c
+
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-c-only
+   :end-before: end-minio-mc-sse-options
+
 .. mc-cmd:: --recursive, r                  
    :optional:
 
@@ -94,19 +100,6 @@ Parameters
    :optional:
 
    Restores the specified version of the object on the remote tier.
-
-.. mc-cmd:: --encrypt-key
-   :optional:
-
-   .. versionadded:: RELEASE.2023-01-28T20-29-38Z
-
-   Encrypt or decrypt objects using server-side encryption with client-specified keys. 
-   Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting object(s).
-
-   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc ilm restore --encrypt-key` in double quotes ``"``.
 
 Global Flags
 ~~~~~~~~~~~~

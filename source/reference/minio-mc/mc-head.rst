@@ -56,7 +56,7 @@ tool.
                           [--lines int]            \
                           [--rewind "string"]      \
                           [--version-id "string"]  \
-                          [--encrypt-key "string"] \
+                          [--enc-c "string"]       \
                           ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
@@ -99,22 +99,11 @@ Parameters
 
    Defaults to ``10``.
 
-.. mc-cmd:: --encrypt-key
-   :optional:
+.. block include of enc-c
 
-   Encrypt or decrypt objects using server-side encryption with
-   client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
-   
-   - Each ``KEY`` represents a bucket or object. 
-   - Each ``VALUE`` represents the data key to use for encrypting 
-      object(s).
-
-   Enclose the entire list of key-value pairs passed to 
-   :mc-cmd:`~mc head --encrypt-key` in double quotes ``"``.
-
-   :mc-cmd:`~mc head --encrypt-key` can use the ``MC_ENCRYPT_KEY``
-   environment variable for retrieving a list of encryption key-value pairs
-   as an alternative to specifying them on the command line.
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-c-only
+   :end-before: end-minio-mc-sse-options
 
 .. mc-cmd:: --rewind
    :optional:

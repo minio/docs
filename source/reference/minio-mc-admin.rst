@@ -35,11 +35,6 @@ The following table lists :mc:`mc admin` commands:
    * - Command
      - Description
 
-   * - :mc-cmd:`mc admin bucket remote`
-     - .. include:: /reference/minio-mc-admin/mc-admin-bucket-remote.rst
-          :start-after: start-mc-admin-bucket-remote-desc
-          :end-before: end-mc-admin-bucket-remote-desc
-
    * - :mc:`mc admin cluster bucket`
      - .. include:: /reference/minio-mc-admin/mc-admin-cluster-bucket.rst
           :start-after: start-mc-admin-cluster-bucket-desc
@@ -174,7 +169,6 @@ See :ref:`minio-mc-global-options`.
    :hidden:
    :glob:
 
-   /reference/minio-mc-admin/mc-admin-bucket-remote
    /reference/minio-mc-admin/mc-admin-cluster-bucket
    /reference/minio-mc-admin/mc-admin-cluster-iam
    /reference/minio-mc-admin/mc-admin-config

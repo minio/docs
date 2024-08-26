@@ -53,12 +53,11 @@ You can also use :mc:`~mc du` against the local filesystem to produce similar re
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] du              \
-                          [--depth]       \
-                          [--encrypt-key] \
-                          [--recursive]   \
-                          [--rewind]      \
-                          [--versions]    \
+         mc [GLOBALFLAGS] du                    \
+                          [--depth]             \
+                          [--recursive]         \
+                          [--rewind]            \
+                          [--versions]          \
                           ALIAS [ALIAS ...]
 
       .. include:: /includes/common-minio-mc.rst
@@ -96,18 +95,6 @@ Parameters
    :optional:
 
    Print the total for all folders N or fewer levels below the path specified in the command. Default is 0, for the specified path only.
-
-.. mc-cmd:: --encrypt-key
-   :optional:
-
-   Encrypt or decrypt objects using server-side encryption with client-specified keys. Specify key-value pairs as ``KEY=VALUE``.
-
-   - Each ``KEY`` represents a bucket or object.
-   - Each ``VALUE`` represents the data key to use for encrypting object(s).
-
-   Enclose the entire list of key-value pairs passed to :mc-cmd:`~mc du --encrypt-key` in double quotes ``"``.
-
-   :mc-cmd:`~mc du --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
 
 .. mc-cmd:: --recursive, r
    :optional:

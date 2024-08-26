@@ -54,7 +54,9 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
                           [--attr "string"]                 \
                           [--disable-multipart]             \
                           [--dry-run]                       \
-                          [--encrypt-key "string"]          \
+                          [--enc-kms "string"]              \
+                          [--enc-s3 "string"]               \
+                          [--enc-c "string"]                \
                           [--exclude "string"]              \
                           [--exclude-bucket "string"]       \
                           [--exclude-storageclass "string"] \
@@ -160,20 +162,11 @@ Parameters
    Perform a mock mirror operation.
    Use this operation to test that the :mc:`mc mirror` operation will only mirror the desired objects or buckets.
 
-.. mc-cmd:: --encrypt-key
-   :optional:
+.. block include of enc-c , enc-s3, and enc-kms
 
-   Encrypt or decrypt objects using server-side encryption with client-specified keys. 
-   Specify key-value pairs as ``KEY=VALUE``.
-
-   - Each ``KEY`` represents a bucket or object.
-   - Each ``VALUE`` represents the data key to use for encrypting object(s).
-
-   Enclose the entire list of key-value pairs passed to :mc-cmd:``~mc mirror --encrypt-key`` in double quotes ``"``.
-
-   :mc-cmd:`~mc mirror --encrypt-key` can use the ``MC_ENCRYPT_KEY`` environment variable for retrieving a list of encryption key-value pairs as an alternative to specifying them on the command line.
-
-   You can only delete encrypted objects if you specify the correct :mc-cmd:`~mc mirror --encrypt-key` secret key.
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-options
+   :end-before: end-minio-mc-sse-options
 
 .. mc-cmd:: --exclude
    :optional:

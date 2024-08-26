@@ -92,18 +92,16 @@ Parameters
 
       mc stat ~/data/myobject.txt
 
-.. mc-cmd:: --enc-c
-   :optional:
+.. block include of enc-c
 
-   Encrypt or decrypt objects using client provided keys.
-   Repeat the flag to pass multiple keys.
-
-   Keys must be in either Raw Base64 or Hex format.
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-c-only
+   :end-before: end-minio-mc-sse-options
 
 .. mc-cmd:: --no-list
    :optional:
 
-   Disable all ``LIST`` operations if the target does not exist.
+   Disable all ``LIST`` operations if the target does not exist.   
 
 .. mc-cmd:: --recursive, r
    :optional:
