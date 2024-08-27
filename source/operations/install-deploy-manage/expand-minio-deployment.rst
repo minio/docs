@@ -150,7 +150,7 @@ The formula to determine the probability of a write operation on a particular po
 
 :math:`FreeSpaceOnPoolA / FreeSpaceOnAllPools`
 
-Consider a situation where a group of two pools has a total of 10 TiB of free space distributed as:
+Consider a situation where a group of three pools has a total of 10 TiB of free space distributed as:
 
 - Pool A has 3 TiB of free space
 - Pool B has 2 TiB of free space
