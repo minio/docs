@@ -403,7 +403,7 @@ entirely. Bypassing ``GOVERNANCE`` retention also requires setting the
 
 The MinIO ``GOVERNANCE`` lock is functionally identical to the 
 :s3-docs:`S3 GOVERNANCE mode 
-<object-lock-overview.html#object-lock-retention-modes>`.
+<object-lock.html#object-lock-retention-modes>`.
 
 .. _minio-object-locking-compliance:
 
@@ -418,8 +418,8 @@ You cannot change or remove the lock before the configured retention
 duration has passed.
 
 The MinIO ``COMPLIANCE`` lock is functionally identical to the 
-:s3-docs:`S3 GOVERNANCE mode 
-<object-lock-overview.html#object-lock-retention-modes>`.
+:s3-docs:`S3 COMPLIANCE mode 
+<object-lock.html#object-lock-retention-modes>`.
 
 .. _minio-object-locking-legalhold:
 
