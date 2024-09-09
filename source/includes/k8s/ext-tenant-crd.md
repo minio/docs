@@ -76,8 +76,9 @@ Operator as part of tenant creation. These fields have no effect if
 style="text-align: left;"><p><strong><code>commonName</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-The <code>CommonName</code> or <code>CN</code> attribute to associate to
-automatically generated TLS certificates.<br />
+</p>
+<p>The <code>CommonName</code> or <code>CN</code> attribute to associate
+to automatically generated TLS certificates.<br />
 </p></td>
 </tr>
 <tr class="even">
@@ -85,7 +86,8 @@ automatically generated TLS certificates.<br />
 style="text-align: left;"><p><strong><code>organizationName</code></strong>
 <em>string array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify one or more <code>OrganizationName</code> or <code>O</code>
+</p>
+<p>Specify one or more <code>OrganizationName</code> or <code>O</code>
 attributes to associate to automatically generated TLS
 certificates.<br />
 </p></td>
@@ -94,10 +96,11 @@ certificates.<br />
 <td style="text-align: left;"><p><strong><code>dnsNames</code></strong>
 <em>string array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify one or more x.509 Subject Alternative Names (SAN) to associate
-to automatically generated TLS certificates. MinIO Server pods use SNI
-to determine which certificate to respond with based on the requested
-hostname.</p></td>
+</p>
+<p>Specify one or more x.509 Subject Alternative Names (SAN) to
+associate to automatically generated TLS certificates. MinIO Server pods
+use SNI to determine which certificate to respond with based on the
+requested hostname.</p></td>
 </tr>
 </tbody>
 </table>
@@ -140,6 +143,75 @@ certificates manually added to the Operator.</p></td>
 </tbody>
 </table>
 
+## CustomCertificateConfig
+
+CustomCertificateConfig (`customCertificateConfig`) provides attributes
+associated of the TLS certificates manually added to the Operator as
+part of tenant creation. These fields contain no data if there are no
+custom TLS certificates.
+
+-   [CustomCertificates](#customcertificates)
+
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p><strong><code>certName</code></strong>
+<em>string</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>Output one or more <code>CertName</code> attributes associated with
+the manually provided TLS certificates.<br />
+</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><strong><code>domains</code></strong>
+<em>string array</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>Output one or more <code>Domains</code> attributes associated with
+the manually provided TLS certificates.<br />
+</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><strong><code>expiry</code></strong>
+<em>string</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>Output one or more <code>Expiry</code> attributes associated with the
+manually provided TLS certificates.<br />
+</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><strong><code>expiresIn</code></strong>
+<em>string</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>Output one or more <code>ExpiresIn</code> attributes associated with
+the manually provided TLS certificates.<br />
+</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><strong><code>serialNo</code></strong>
+<em>string</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>Output one or more <code>SerialNo</code> attributes associated with
+the manually provided TLS certificates.<br />
+</p></td>
+</tr>
+</tbody>
+</table>
+
 ## CustomCertificates
 
 CustomCertificates (`customCertificates`) provides groupings of the TLS
@@ -166,7 +238,8 @@ These fields contain no data if there are no custom TLS certificates.
 href="#customcertificateconfig">CustomCertificateConfig</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Client</p></td>
+</p>
+<p>Client</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>minio</code></strong>
@@ -174,7 +247,8 @@ Client</p></td>
 href="#customcertificateconfig">CustomCertificateConfig</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Minio</p></td>
+</p>
+<p>Minio</p></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><p><strong><code>minioCAs</code></strong>
@@ -182,7 +256,8 @@ Minio</p></td>
 href="#customcertificateconfig">CustomCertificateConfig</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Certificate Authorities</p></td>
+</p>
+<p>Certificate Authorities</p></td>
 </tr>
 </tbody>
 </table>
@@ -210,16 +285,18 @@ object storage and Console services.
 <td style="text-align: left;"><p><strong><code>minio</code></strong>
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Directs the Operator to expose the MinIO service. Defaults to
-<code>true</code>.<br />
+</p>
+<p>Directs the Operator to expose the MinIO service. Defaults to
+<code>false</code>.<br />
 </p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>console</code></strong>
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Directs the Operator to expose the MinIO Console service. Defaults to
-<code>true</code>.<br />
+</p>
+<p>Directs the Operator to expose the MinIO Console service. Defaults to
+<code>false</code>.<br />
 </p></td>
 </tr>
 </tbody>
@@ -248,23 +325,27 @@ enable/disable in the MinIO Tenant.
 <td style="text-align: left;"><p><strong><code>bucketDNS</code></strong>
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify <code>true</code> to allow clients to access buckets using the
-DNS path <code>&lt;bucket&gt;.minio.default.svc.cluster.local</code>.
-Defaults to <code>false</code>.</p></td>
+</p>
+<p>Specify <code>true</code> to allow clients to access buckets using
+the DNS path
+<code>&lt;bucket&gt;.minio.default.svc.cluster.local</code>. Defaults to
+<code>false</code>.</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>domains</code></strong>
 <em><a
 href="#tenantdomains">TenantDomains</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify a list of domains used to access MinIO and Console.</p></td>
+</p>
+<p>Specify a list of domains used to access MinIO and Console.</p></td>
 </tr>
 <tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>enableSFTP</code></strong>
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Starts minio server with SFTP support</p></td>
+</p>
+<p>Starts minio server with SFTP support</p></td>
 </tr>
 </tbody>
 </table>
@@ -301,8 +382,9 @@ using an external Key Management Service (KMS).
 <td style="text-align: left;"><p><strong><code>replicas</code></strong>
 <em>integer</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify the number of replica KES pods to deploy in the tenant. Defaults
-to <code>2</code>.</p></td>
+</p>
+<p>Specify the number of replica KES pods to deploy in the tenant.
+Defaults to <code>2</code>.</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>image</code></strong>
@@ -316,12 +398,19 @@ style="text-align: left;"><p><strong><code>imagePullPolicy</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#pullpolicy-v1-core">PullPolicy</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-The pull policy for the MinIO Docker image. Specify one of the
+</p>
+<p>The pull policy for the MinIO Docker image. Specify one of the
 following:<br />
-* <code>Always</code><br />
-* <code>Never</code><br />
-* <code>IfNotPresent</code> (Default)<br />
-Refer to the Kubernetes documentation for details <a
+</p>
+<ul>
+<li><p><code>Always</code><br />
+</p></li>
+<li><p><code>Never</code><br />
+</p></li>
+<li><p><code>IfNotPresent</code> (Default)<br />
+</p></li>
+</ul>
+<p>Refer to the Kubernetes documentation for details <a
 href="https://kubernetes.io/docs/concepts/containers/images#updating-images">https://kubernetes.io/docs/concepts/containers/images#updating-images</a></p></td>
 </tr>
 <tr class="even">
@@ -329,7 +418,8 @@ href="https://kubernetes.io/docs/concepts/containers/images#updating-images">htt
 style="text-align: left;"><p><strong><code>serviceAccountName</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-The <a
+</p>
+<p>The <a
 href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/">Kubernetes
 Service Account</a> to use for running MinIO KES pods created as part of
 the Tenant.<br />
@@ -340,11 +430,13 @@ the Tenant.<br />
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#localobjectreference-v1-core">LocalObjectReference</a></em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
-Specify a <a
+</p>
+<p>Specify a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 opaque secret</a> which contains environment variables to use for
 setting up the MinIO KES service.<br />
-See the <a
+</p>
+<p>See the <a
 href="https://github.com/minio/operator/blob/master/examples/kes-secret.yaml">MinIO
 Operator <code>console-secret.yaml</code></a> for an example.</p></td>
 </tr>
@@ -354,21 +446,30 @@ style="text-align: left;"><p><strong><code>externalCertSecret</code></strong>
 <em><a
 href="#localcertificatereference">LocalCertificateReference</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Enables TLS with SNI support on each MinIO KES pod in the tenant. If
+</p>
+<p>Enables TLS with SNI support on each MinIO KES pod in the tenant. If
 <code>externalCertSecret</code> is omitted <strong>and</strong>
 <code>spec.requestAutoCert</code> is set to <code>false</code>, MinIO
 KES pods deploy <strong>without</strong> TLS enabled.<br />
-Specify a <a
+</p>
+<p>Specify a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 TLS secret</a>. The MinIO Operator copies the specified certificate to
 every MinIO pod in the tenant. When the MinIO pod/service responds to a
 TLS connection request, it uses SNI to select the certificate with
 matching <code>subjectAlternativeName</code>.<br />
-Specify an object containing the following fields:<br />
-* - <code>name</code> - The name of the Kubernetes secret containing the
-TLS certificate.<br />
-* - <code>type</code> - Specify <code>kubernetes.io/tls</code><br />
-See the <a
+</p>
+<p>Specify an object containing the following fields:<br />
+</p>
+<ul>
+<li><p>- <code>name</code> - The name of the Kubernetes secret
+containing the TLS certificate.<br />
+</p></li>
+<li><p>- <code>type</code> - Specify
+<code>kubernetes.io/tls</code><br />
+</p></li>
+</ul>
+<p>See the <a
 href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#procedure-command-line">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
@@ -379,53 +480,63 @@ style="text-align: left;"><p><strong><code>clientCertSecret</code></strong>
 <em><a
 href="#localcertificatereference">LocalCertificateReference</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify a a <a
+</p>
+<p>Specify a a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 TLS secret</a> containing a custom root Certificate Authority and x.509
 certificate to use for performing mTLS authentication with an external
 Key Management Service, such as Hashicorp Vault.<br />
-Specify an object containing the following fields:<br />
-* - <code>name</code> - The name of the Kubernetes secret containing the
-Certificate Authority and x.509 Certificate.<br />
-* - <code>type</code> - Specify <code>kubernetes.io/tls</code><br />
-</p></td>
+</p>
+<p>Specify an object containing the following fields:<br />
+</p>
+<ul>
+<li><p>- <code>name</code> - The name of the Kubernetes secret
+containing the Certificate Authority and x.509 Certificate.<br />
+</p></li>
+<li><p>- <code>type</code> - Specify
+<code>kubernetes.io/tls</code><br />
+</p></li>
+</ul></td>
 </tr>
 <tr class="even">
 <td
 style="text-align: left;"><p><strong><code>gcpCredentialSecretName</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify the GCP default credentials to be used for KES to authenticate
-to GCP key store</p></td>
+</p>
+<pre><code>Specify the GCP default credentials to be used for KES to authenticate to GCP key store</code></pre></td>
 </tr>
 <tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>gcpWorkloadIdentityPool</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify the name of the workload identity pool (This is required for
-generating service account token)</p></td>
+</p>
+<pre><code>Specify the name of the workload identity pool (This is required for generating service account token)</code></pre></td>
 </tr>
 <tr class="even">
 <td
 style="text-align: left;"><p><strong><code>annotations</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, use these annotations for KES Object Meta
+</p>
+<p>If provided, use these annotations for KES Object Meta
 annotations</p></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><p><strong><code>labels</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, use these labels for KES Object Meta labels</p></td>
+</p>
+<p>If provided, use these labels for KES Object Meta labels</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>resources</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#resourcerequirements-v1-core">ResourceRequirements</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Object specification for specifying CPU and memory <a
+</p>
+<p>Object specification for specifying CPU and memory <a
 href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">resource
 allocations</a> or limits in the MinIO tenant.<br />
 </p></td>
@@ -435,10 +546,12 @@ allocations</a> or limits in the MinIO tenant.<br />
 style="text-align: left;"><p><strong><code>nodeSelector</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-The filter for the Operator to apply when selecting which nodes on which
-to deploy MinIO KES pods. The Operator only selects those nodes whose
-labels match the specified selector.<br />
-See the Kubernetes documentation on <a
+</p>
+<p>The filter for the Operator to apply when selecting which nodes on
+which to deploy MinIO KES pods. The Operator only selects those nodes
+whose labels match the specified selector.<br />
+</p>
+<p>See the Kubernetes documentation on <a
 href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/">Assigning
 Pods to Nodes</a> for more information.</p></td>
 </tr>
@@ -449,7 +562,8 @@ style="text-align: left;"><p><strong><code>tolerations</code></strong>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#toleration-v1-core">Toleration</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify one or more <a
+</p>
+<p>Specify one or more <a
 href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">Kubernetes
 tolerations</a> to apply to MinIO KES pods.</p></td>
 </tr>
@@ -458,8 +572,9 @@ tolerations</a> to apply to MinIO KES pods.</p></td>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#affinity-v1-core">Affinity</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify node affinity, pod affinity, and pod anti-affinity for the KES
-pods.<br />
+</p>
+<p>Specify node affinity, pod affinity, and pod anti-affinity for the
+KES pods.<br />
 </p></td>
 </tr>
 <tr class="even">
@@ -469,7 +584,8 @@ style="text-align: left;"><p><strong><code>topologySpreadConstraints</code></str
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#topologyspreadconstraint-v1-core">TopologySpreadConstraint</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify one or more <a
+</p>
+<p>Specify one or more <a
 href="https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/">Kubernetes
 Topology Spread Constraints</a> to apply to pods deployed in the MinIO
 pool.</p></td>
@@ -478,8 +594,9 @@ pool.</p></td>
 <td style="text-align: left;"><p><strong><code>keyName</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, use this as the name of the key that KES creates on the KMS
-backend</p></td>
+</p>
+<p>If provided, use this as the name of the key that KES creates on the
+KMS backend</p></td>
 </tr>
 <tr class="even">
 <td
@@ -490,22 +607,40 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#podse
 href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">Security
 Context</a> of MinIO KES pods. The Operator supports only the following
 pod security fields:<br />
-* <code>fsGroup</code><br />
-* <code>fsGroupChangePolicy</code><br />
-* <code>runAsGroup</code><br />
-* <code>runAsNonRoot</code><br />
-* <code>runAsUser</code><br />
-* <code>seLinuxOptions</code><br />
-</p></td>
+</p>
+<ul>
+<li><p><code>fsGroup</code><br />
+</p></li>
+<li><p><code>fsGroupChangePolicy</code><br />
+</p></li>
+<li><p><code>runAsGroup</code><br />
+</p></li>
+<li><p><code>runAsNonRoot</code><br />
+</p></li>
+<li><p><code>runAsUser</code><br />
+</p></li>
+<li><p><code>seLinuxOptions</code><br />
+</p></li>
+</ul></td>
 </tr>
 <tr class="odd">
+<td
+style="text-align: left;"><p><strong><code>containerSecurityContext</code></strong>
+<em><a
+href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#securitycontext-v1-core">SecurityContext</a></em></p></td>
+<td style="text-align: left;"><p>Specify the <a
+href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">Security
+Context</a> of MinIO KES pods.</p></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><p><strong><code>env</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#envvar-v1-core">EnvVar</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, the MinIO Operator adds the specified environment variables
-when deploying the KES resource.</p></td>
+</p>
+<p>If provided, the MinIO Operator adds the specified environment
+variables when deploying the KES resource.</p></td>
 </tr>
 </tbody>
 </table>
@@ -537,7 +672,8 @@ enabling TLS in the MinIO Tenant.
 <td style="text-align: left;"><p><strong><code>name</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
-The name of the Kubernetes secret containing the TLS certificate or
+</p>
+<p>The name of the Kubernetes secret containing the TLS certificate or
 Certificate Authority file.<br />
 </p></td>
 </tr>
@@ -545,7 +681,8 @@ Certificate Authority file.<br />
 <td style="text-align: left;"><p><strong><code>type</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
-The type of Kubernetes secret. Specify
+</p>
+<p>The type of Kubernetes secret. Specify
 <code>kubernetes.io/tls</code><br />
 </p></td>
 </tr>
@@ -595,6 +732,7 @@ consists of a set of MinIO server pods which "pool" their storage
 resources for supporting object storage and retrieval requests. Each
 server pool is independent of all others and supports horizontal scaling
 of available storage resources in the MinIO Tenant.  
+
 See the [MinIO Operator
 CRD](https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#procedure-command-line)
 reference for the `pools` object for examples and more complete
@@ -617,17 +755,18 @@ documentation.
 <tr class="odd">
 <td style="text-align: left;"><p><strong><code>name</code></strong>
 <em>string</em></p></td>
-<td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify the name of the pool. The Operator automatically generates the
-pool name if this field is omitted.</p></td>
+<td style="text-align: left;"><p><strong>Required</strong> Specify the
+name of the pool. The Operator automatically generates the pool name if
+this field is omitted.</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>servers</code></strong>
 <em>integer</em></p></td>
-<td style="text-align: left;"><p><strong>Required</strong> The number of
-MinIO server pods to deploy in the pool. The minimum value is
-<code>2</code>. The MinIO Operator requires a minimum of <code>4</code>
-volumes per pool. Specifically, the result of
+<td style="text-align: left;"><p><strong>Required</strong></p>
+<p>The number of MinIO server pods to deploy in the pool. The minimum
+value is <code>2</code>.</p>
+<p>The MinIO Operator requires a minimum of <code>4</code> volumes per
+pool. Specifically, the result of
 <code>pools.servers X pools.volumesPerServer</code> must be greater than
 <code>4</code>.<br />
 </p></td>
@@ -637,9 +776,11 @@ volumes per pool. Specifically, the result of
 style="text-align: left;"><p><strong><code>volumesPerServer</code></strong>
 <em>integer</em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
-The number of Persistent Volume Claims to generate for each MinIO server
-pod in the pool.<br />
-The MinIO Operator requires a minimum of <code>4</code> volumes per
+</p>
+<p>The number of Persistent Volume Claims to generate for each MinIO
+server pod in the pool.<br />
+</p>
+<p>The MinIO Operator requires a minimum of <code>4</code> volumes per
 pool. Specifically, the result of
 <code>pools.servers X pools.volumesPerServer</code> must be greater than
 <code>4</code>.<br />
@@ -651,7 +792,8 @@ style="text-align: left;"><p><strong><code>volumeClaimTemplate</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#persistentvolumeclaim-v1-core">PersistentVolumeClaim</a></em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
-Specify the configuration options for the MinIO Operator to use when
+</p>
+<p>Specify the configuration options for the MinIO Operator to use when
 generating Persistent Volume Claims for the MinIO tenant.<br />
 </p></td>
 </tr>
@@ -660,7 +802,8 @@ generating Persistent Volume Claims for the MinIO tenant.<br />
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#resourcerequirements-v1-core">ResourceRequirements</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Object specification for specifying CPU and memory <a
+</p>
+<p>Object specification for specifying CPU and memory <a
 href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">resource
 allocations</a> or limits in the MinIO tenant.<br />
 </p></td>
@@ -670,10 +813,12 @@ allocations</a> or limits in the MinIO tenant.<br />
 style="text-align: left;"><p><strong><code>nodeSelector</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-The filter for the Operator to apply when selecting which nodes on which
-to deploy pods in the pool. The Operator only selects those nodes whose
-labels match the specified selector.<br />
-See the Kubernetes documentation on <a
+</p>
+<p>The filter for the Operator to apply when selecting which nodes on
+which to deploy pods in the pool. The Operator only selects those nodes
+whose labels match the specified selector.<br />
+</p>
+<p>See the Kubernetes documentation on <a
 href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/">Assigning
 Pods to Nodes</a> for more information.</p></td>
 </tr>
@@ -682,8 +827,9 @@ Pods to Nodes</a> for more information.</p></td>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#affinity-v1-core">Affinity</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify node affinity, pod affinity, and pod anti-affinity for pods in
-the MinIO pool.<br />
+</p>
+<p>Specify node affinity, pod affinity, and pod anti-affinity for pods
+in the MinIO pool.<br />
 </p></td>
 </tr>
 <tr class="even">
@@ -693,7 +839,8 @@ style="text-align: left;"><p><strong><code>tolerations</code></strong>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#toleration-v1-core">Toleration</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify one or more <a
+</p>
+<p>Specify one or more <a
 href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">Kubernetes
 tolerations</a> to apply to pods deployed in the MinIO pool.</p></td>
 </tr>
@@ -704,7 +851,8 @@ style="text-align: left;"><p><strong><code>topologySpreadConstraints</code></str
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#topologyspreadconstraint-v1-core">TopologySpreadConstraint</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify one or more <a
+</p>
+<p>Specify one or more <a
 href="https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/">Kubernetes
 Topology Spread Constraints</a> to apply to pods deployed in the MinIO
 pool.</p></td>
@@ -715,16 +863,24 @@ style="text-align: left;"><p><strong><code>securityContext</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#podsecuritycontext-v1-core">PodSecurityContext</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify the <a
+</p>
+<p>Specify the <a
 href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">Security
 Context</a> of pods in the pool. The Operator supports only the
 following pod security fields:<br />
-* <code>fsGroup</code><br />
-* <code>fsGroupChangePolicy</code><br />
-* <code>runAsGroup</code><br />
-* <code>runAsNonRoot</code><br />
-* <code>runAsUser</code><br />
-</p></td>
+</p>
+<ul>
+<li><p><code>fsGroup</code><br />
+</p></li>
+<li><p><code>fsGroupChangePolicy</code><br />
+</p></li>
+<li><p><code>runAsGroup</code><br />
+</p></li>
+<li><p><code>runAsNonRoot</code><br />
+</p></li>
+<li><p><code>runAsUser</code><br />
+</p></li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td
@@ -735,26 +891,34 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#secur
 href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">Security
 Context</a> of containers in the pool. The Operator supports only the
 following container security fields:<br />
-* <code>runAsGroup</code><br />
-* <code>runAsNonRoot</code><br />
-* <code>runAsUser</code><br />
-</p></td>
+</p>
+<ul>
+<li><p><code>runAsGroup</code><br />
+</p></li>
+<li><p><code>runAsNonRoot</code><br />
+</p></li>
+<li><p><code>runAsUser</code><br />
+</p></li>
+</ul></td>
 </tr>
 <tr class="even">
 <td
 style="text-align: left;"><p><strong><code>annotations</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify custom labels and annotations to append to the Pool.
+</p>
+<p>Specify custom labels and annotations to append to the Pool.
 <strong>Optional</strong><br />
-If provided, use these annotations for the Pool Objects Meta annotations
-(Statefulset and Pod template)</p></td>
+</p>
+<p>If provided, use these annotations for the Pool Objects Meta
+annotations (Statefulset and Pod template)</p></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><p><strong><code>labels</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, use these labels for the Pool Objects Meta annotations
+</p>
+<p>If provided, use these labels for the Pool Objects Meta annotations
 (Statefulset and Pod template)</p></td>
 </tr>
 <tr class="even">
@@ -762,16 +926,10 @@ If provided, use these labels for the Pool Objects Meta annotations
 style="text-align: left;"><p><strong><code>runtimeClassName</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, each pod on the Statefulset will run with the specified
+</p>
+<p>If provided, each pod on the Statefulset will run with the specified
 RuntimeClassName, for more info <a
 href="https://kubernetes.io/docs/concepts/containers/runtime-class/">https://kubernetes.io/docs/concepts/containers/runtime-class/</a></p></td>
-</tr>
-<tr class="odd">
-<td
-style="text-align: left;"><p><strong><code>reclaimStorage</code></strong>
-<em>boolean</em></p></td>
-<td style="text-align: left;"><p><strong>Optional</strong><br />
-If true. Will delete the storage when tenant has been deleted.</p></td>
 </tr>
 </tbody>
 </table>
@@ -848,28 +1006,32 @@ service.
 style="text-align: left;"><p><strong><code>minioServiceLabels</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, append these labels to the MinIO service</p></td>
+</p>
+<p>If provided, append these labels to the MinIO service</p></td>
 </tr>
 <tr class="even">
 <td
 style="text-align: left;"><p><strong><code>minioServiceAnnotations</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, append these annotations to the MinIO service</p></td>
+</p>
+<p>If provided, append these annotations to the MinIO service</p></td>
 </tr>
 <tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>consoleServiceLabels</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, append these labels to the Console service</p></td>
+</p>
+<p>If provided, append these labels to the Console service</p></td>
 </tr>
 <tr class="even">
 <td
 style="text-align: left;"><p><strong><code>consoleServiceAnnotations</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, append these annotations to the Console service</p></td>
+</p>
+<p>If provided, append these annotations to the Console service</p></td>
 </tr>
 </tbody>
 </table>
@@ -900,7 +1062,8 @@ style="text-align: left;"><p><strong><code>containers</code></strong>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core">Container</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-List of containers to run inside the Pod</p></td>
+</p>
+<p>List of containers to run inside the Pod</p></td>
 </tr>
 <tr class="even">
 <td
@@ -909,7 +1072,8 @@ style="text-align: left;"><p><strong><code>volumeClaimTemplates</code></strong>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#persistentvolumeclaim-v1-core">PersistentVolumeClaim</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-volumeClaimTemplates is a list of claims that pods are allowed to
+</p>
+<p>volumeClaimTemplates is a list of claims that pods are allowed to
 reference. The StatefulSet controller is responsible for mapping network
 identities to claims in a way that maintains the identity of a pod.
 Every claim in this list must have at least one matching (by name)
@@ -923,8 +1087,9 @@ name.</p></td>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volume-v1-core">Volume</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-List of volumes that can be mounted by containers belonging to the pod.
-More info: <a
+</p>
+<p>List of volumes that can be mounted by containers belonging to the
+pod. More info: <a
 href="https://kubernetes.io/docs/concepts/storage/volumes">https://kubernetes.io/docs/concepts/storage/volumes</a></p></td>
 </tr>
 <tr class="even">
@@ -932,7 +1097,8 @@ href="https://kubernetes.io/docs/concepts/storage/volumes">https://kubernetes.io
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#resourcerequirements-v1-core">ResourceRequirements</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-sidecar’s Resource, initcontainer will use that if set.</p></td>
+</p>
+<p>sidecar’s Resource, initcontainer will use that if set.</p></td>
 </tr>
 </tbody>
 </table>
@@ -986,7 +1152,8 @@ href="#tenantscheduler">TenantScheduler</a></em></p></td>
 <em><a
 href="#tenantspec">TenantSpec</a></em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
-The root field for the MinIO Tenant object.</p></td>
+</p>
+<p>The root field for the MinIO Tenant object.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1055,7 +1222,8 @@ to use for deploying the MinIO Tenant.
 <td style="text-align: left;"><p><strong><code>name</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify the name of the <a
+</p>
+<p>Specify the name of the <a
 href="https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/">Kubernetes
 scheduler</a> to be used to schedule Tenant pods</p></td>
 </tr>
@@ -1066,8 +1234,10 @@ scheduler</a> to be used to schedule Tenant pods</p></td>
 
 TenantSpec (`spec`) defines the configuration of a MinIO Tenant
 object.  
+
 The following parameters are specific to the `Operator CRD v2 Reference` MinIO CRD
 API `spec` definition added as part of the MinIO Operator v4.0.0.  
+
 For more complete documentation on this object, see the [MinIO
 Kubernetes
 Documentation](https://min.io/docs/minio/kubernetes/upstream/operations/installation.html).  
@@ -1092,15 +1262,19 @@ Documentation](https://min.io/docs/minio/kubernetes/upstream/operations/installa
 href="#pool">Pool</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
-An array of objects describing each MinIO server pool deployed in the
+</p>
+<p>An array of objects describing each MinIO server pool deployed in the
 MinIO Tenant. Each pool consists of a set of MinIO server pods which
 "pool" their storage resources for supporting object storage and
 retrieval requests. Each server pool is independent of all others and
 supports horizontal scaling of available storage resources in the MinIO
 Tenant.<br />
-The MinIO Tenant <code>spec</code> <strong>must have</strong> at least
-<strong>one</strong> element in the <code>pools</code> array.<br />
-See the <a
+</p>
+<p>The MinIO Tenant <code>spec</code> <strong>must have</strong> at
+least <strong>one</strong> element in the <code>pools</code>
+array.<br />
+</p>
+<p>See the <a
 href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html">MinIO
 Operator CRD</a> reference for the <code>pools</code> object for
 examples and more complete documentation.</p></td>
@@ -1117,8 +1291,9 @@ style="text-align: left;"><p><strong><code>imagePullSecret</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#localobjectreference-v1-core">LocalObjectReference</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify the secret key to use for pulling images from a private Docker
-repository.<br />
+</p>
+<p>Specify the secret key to use for pulling images from a private
+Docker repository.<br />
 </p></td>
 </tr>
 <tr class="even">
@@ -1127,179 +1302,226 @@ style="text-align: left;"><p><strong><code>podManagementPolicy</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#podmanagementpolicytype-v1-apps">PodManagementPolicyType</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Pod Management Policy for pod created by StatefulSet</p></td>
+</p>
+<p>Pod Management Policy for pod created by StatefulSet</p></td>
 </tr>
 <tr class="odd">
-<td
-style="text-align: left;"><p><strong><code>credsSecret</code></strong>
-<em><a
-href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#localobjectreference-v1-core">LocalObjectReference</a></em></p></td>
-<td style="text-align: left;"><p><strong>optional</strong><br />
-Specify a <a
-href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
-opaque secret</a> to use for setting the MinIO root access key and
-secret key. Specify the secret as <code>name: &lt;secret&gt;</code>. The
-Kubernetes secret must contain the following fields:<br />
-* <code>data.accesskey</code> - The access key for the root
-credentials<br />
-* <code>data.secretkey</code> - The secret key for the root
-credentials<br />
-</p></td>
-</tr>
-<tr class="even">
 <td style="text-align: left;"><p><strong><code>env</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#envvar-v1-core">EnvVar</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, the MinIO Operator adds the specified environment variables
-when deploying the Tenant resource.</p></td>
+</p>
+<p>If provided, the MinIO Operator adds the specified environment
+variables when deploying the Tenant resource.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>externalCertSecret</code></strong>
 <em><a
 href="#localcertificatereference">LocalCertificateReference</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Enables TLS with SNI support on each MinIO pod in the tenant. If
+</p>
+<p>Enables TLS with SNI support on each MinIO pod in the tenant. If
 <code>externalCertSecret</code> is omitted <strong>and</strong>
 <code>requestAutoCert</code> is set to <code>false</code>, the MinIO
 Tenant deploys <strong>without</strong> TLS enabled.<br />
-Specify an array of <a
+</p>
+<p>Specify an array of <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 TLS secrets</a>. The MinIO Operator copies the specified certificates to
 every MinIO server pod in the tenant. When the MinIO pod/service
 responds to a TLS connection request, it uses SNI to select the
 certificate with matching <code>subjectAlternativeName</code>.<br />
-Each element in the <code>externalCertSecret</code> array is an object
-containing the following fields:<br />
-* - <code>name</code> - The name of the Kubernetes secret containing the
-TLS certificate.<br />
-* - <code>type</code> - Specify <code>kubernetes.io/tls</code><br />
-See the <a
+</p>
+<p>Each element in the <code>externalCertSecret</code> array is an
+object containing the following fields:<br />
+</p>
+<ul>
+<li><p>- <code>name</code> - The name of the Kubernetes secret
+containing the TLS certificate.<br />
+</p></li>
+<li><p>- <code>type</code> - Specify
+<code>kubernetes.io/tls</code><br />
+</p></li>
+</ul>
+<p>See the <a
 href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>externalCaCertSecret</code></strong>
 <em><a
 href="#localcertificatereference">LocalCertificateReference</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Allows MinIO server pods to verify client TLS certificates signed by a
-Certificate Authority not in the pod’s trust store.<br />
-Specify an array of <a
+</p>
+<p>Allows MinIO server pods to verify client TLS certificates signed by
+a Certificate Authority not in the pod’s trust store.<br />
+</p>
+<p>Specify an array of <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 TLS secrets</a>. The MinIO Operator copies the specified certificates to
 every MinIO server pod in the tenant.<br />
-Each element in the <code>externalCertSecret</code> array is an object
-containing the following fields:<br />
-* - <code>name</code> - The name of the Kubernetes secret containing the
-Certificate Authority.<br />
-* - <code>type</code> - Specify <code>kubernetes.io/tls</code>.<br />
-See the <a
-href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
-Operator CRD</a> reference for examples and more complete documentation
-on configuring TLS for MinIO Tenants.</p></td>
-</tr>
-<tr class="odd">
-<td
-style="text-align: left;"><p><strong><code>externalClientCertSecret</code></strong>
-<em><a
-href="#localcertificatereference">LocalCertificateReference</a></em></p></td>
-<td style="text-align: left;"><p><strong>Optional</strong><br />
-Enables mTLS authentication between the MinIO Tenant pods and <a
-href="https://github.com/minio/kes">MinIO KES</a>.
-<strong>Required</strong> for enabling connectivity between the MinIO
-Tenant and MinIO KES.<br />
-Specify a <a
-href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
-TLS secrets</a>. The MinIO Operator copies the specified certificate to
-every MinIO server pod in the tenant. The secret <strong>must</strong>
-contain the following fields:<br />
-* <code>name</code> - The name of the Kubernetes secret containing the
-TLS certificate.<br />
-* <code>type</code> - Specify <code>kubernetes.io/tls</code><br />
-The specified certificate <strong>must</strong> correspond to an
-identity on the KES server. See the <a
-href="https://github.com/minio/kes/wiki/Configuration#policy-configuration">KES
-Wiki</a> for more information on KES identities.<br />
-If deploying KES with the MinIO Operator, include the hash of the
-certificate as part of the <a
-href="#kesconfig"><code>kes</code></a>
-object specification.<br />
-See the <a
+</p>
+<p>Each element in the <code>externalCertSecret</code> array is an
+object containing the following fields:<br />
+</p>
+<ul>
+<li><p>- <code>name</code> - The name of the Kubernetes secret
+containing the Certificate Authority.<br />
+</p></li>
+<li><p>- <code>type</code> - Specify
+<code>kubernetes.io/tls</code>.<br />
+</p></li>
+</ul>
+<p>See the <a
 href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
 </tr>
 <tr class="even">
+<td
+style="text-align: left;"><p><strong><code>externalClientCertSecret</code></strong>
+<em><a
+href="#localcertificatereference">LocalCertificateReference</a></em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>Enables mTLS authentication between the MinIO Tenant pods and <a
+href="https://github.com/minio/kes">MinIO KES</a>.
+<strong>Required</strong> for enabling connectivity between the MinIO
+Tenant and MinIO KES.<br />
+</p>
+<p>Specify a <a
+href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
+TLS secrets</a>. The MinIO Operator copies the specified certificate to
+every MinIO server pod in the tenant. The secret <strong>must</strong>
+contain the following fields:<br />
+</p>
+<ul>
+<li><p><code>name</code> - The name of the Kubernetes secret containing
+the TLS certificate.<br />
+</p></li>
+<li><p><code>type</code> - Specify <code>kubernetes.io/tls</code><br />
+</p></li>
+</ul>
+<p>The specified certificate <strong>must</strong> correspond to an
+identity on the KES server. See the <a
+href="https://github.com/minio/kes/wiki/Configuration#policy-configuration">KES
+Wiki</a> for more information on KES identities.<br />
+</p>
+<p>If deploying KES with the MinIO Operator, include the hash of the
+certificate as part of the <a
+href="#kesconfig"><code>kes</code></a>
+object specification.<br />
+</p>
+<p>See the <a
+href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
+Operator CRD</a> reference for examples and more complete documentation
+on configuring TLS for MinIO Tenants.</p></td>
+</tr>
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>externalClientCertSecrets</code></strong>
 <em><a
 href="#localcertificatereference">LocalCertificateReference</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Provide support for mounting additional client certificate into MinIO
+</p>
+<p>Provide support for mounting additional client certificate into MinIO
 Tenant pods Multiple client certificates will be mounted using the
 following folder structure:<br />
-* certs<br />
-* * client-0<br />
-* * * client.crt<br />
-* * * client.key<br />
-* * client-1<br />
-* * * client.crt<br />
-* * * client.key<br />
-* * * client-2<br />
-* * client.crt<br />
-* * * client.key<br />
-Specify a <a
+</p>
+<ul>
+<li><p>certs<br />
+</p></li>
+<li><p>* client-0<br />
+</p></li>
+<li><p>* * client.crt<br />
+</p></li>
+<li><p>* * client.key<br />
+</p></li>
+<li><p>* client-1<br />
+</p></li>
+<li><p>* * client.crt<br />
+</p></li>
+<li><p>* * client.key<br />
+</p></li>
+<li><p>* * client-2<br />
+</p></li>
+<li><p>* client.crt<br />
+</p></li>
+<li><p>* * client.key<br />
+</p></li>
+</ul>
+<p>Specify a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 TLS secrets</a>. The MinIO Operator copies the specified certificate to
 every MinIO server pod in the tenant that later can be referenced using
 environment variables. The secret <strong>must</strong> contain the
 following fields:<br />
-* <code>name</code> - The name of the Kubernetes secret containing the
-TLS certificate.<br />
-* <code>type</code> - Specify <code>kubernetes.io/tls</code><br />
-</p></td>
+</p>
+<ul>
+<li><p><code>name</code> - The name of the Kubernetes secret containing
+the TLS certificate.<br />
+</p></li>
+<li><p><code>type</code> - Specify <code>kubernetes.io/tls</code><br />
+</p></li>
+</ul></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p><strong><code>mountPath</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Mount path for MinIO volume (PV). Defaults to
+</p>
+<p>Mount path for MinIO volume (PV). Defaults to
 <code>/export</code></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p><strong><code>subPath</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Subpath inside mount path. This is the directory where MinIO stores
+</p>
+<p>Subpath inside mount path. This is the directory where MinIO stores
 data. Default to <code>""`</code> (empty)</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>requestAutoCert</code></strong>
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Enables using <a
+</p>
+<p>Enables using <a
 href="https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/">Kubernetes-based
 TLS certificate generation</a> and signing for pods and services in the
 MinIO Tenant.<br />
-* Specify <code>true</code> to explicitly enable automatic certificate
-generate (Default).<br />
-* Specify <code>false</code> to disable automatic certificate
+</p>
+<ul>
+<li><p>Specify <code>true</code> to explicitly enable automatic
+certificate generate (Default).<br />
+</p></li>
+<li><p>Specify <code>false</code> to disable automatic certificate
 generation.<br />
-If <code>requestAutoCert</code> is set to <code>false</code>
+</p></li>
+</ul>
+<p>If <code>requestAutoCert</code> is set to <code>false</code>
 <strong>and</strong> <code>externalCertSecret</code> is omitted, the
-MinIO Tenant deploys <strong>without</strong> TLS enabled. See the <a
+MinIO Tenant deploys <strong>without</strong> TLS enabled.</p>
+<p>See the <a
 href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><p><strong><code>certExpiryAlertThreshold</code></strong>
+<em>integer</em></p></td>
+<td style="text-align: left;"><p>CertExpiryAlertThreshold is the minimum
+number of days to expiry before an alert for an expiring certificate is
+fired.</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>liveness</code></strong>
@@ -1325,185 +1547,224 @@ grace period for a pod to start before getting traffic routed to
 it.</p></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><p><strong><code>lifecycle</code></strong>
+<em><a
+href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#lifecycle-v1-core">Lifecycle</a></em></p></td>
+<td style="text-align: left;"><p>Lifecycle hooks for container.</p></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><p><strong><code>features</code></strong>
 <em><a
 href="#features">Features</a></em></p></td>
 <td style="text-align: left;"><p>S3 related features can be disabled or
 enabled such as <code>bucketDNS</code> etc.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>certConfig</code></strong>
 <em><a
 href="#certificateconfig">CertificateConfig</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Enables setting the <code>CommonName</code>, <code>Organization</code>,
-and <code>dnsName</code> attributes for all TLS certificates
-automatically generated by the Operator. Configuring this object has no
-effect if <code>requestAutoCert</code> is <code>false</code>.<br />
+</p>
+<p>Enables setting the <code>CommonName</code>,
+<code>Organization</code>, and <code>dnsName</code> attributes for all
+TLS certificates automatically generated by the Operator. Configuring
+this object has no effect if <code>requestAutoCert</code> is
+<code>false</code>.<br />
 </p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p><strong><code>kes</code></strong>
 <em><a
 href="#kesconfig">KESConfig</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Directs the MinIO Operator to deploy the <a
+</p>
+<p>Directs the MinIO Operator to deploy the <a
 href="https://github.com/minio/kes">MinIO Key Encryption Service</a>
 (KES) using the specified configuration. The MinIO KES supports
 performing server-side encryption of objects on the MiNIO Tenant.<br />
 </p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>prometheusOperator</code></strong>
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Directs the MinIO Operator to use prometheus operator.<br />
-Tenant scrape configuration will be added to prometheus managed by the
-prometheus-operator.</p></td>
+</p>
+<p>Directs the MinIO Operator to use prometheus operator.<br />
+</p>
+<p>Tenant scrape configuration will be added to prometheus managed by
+the prometheus-operator.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>serviceAccountName</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-The <a
+</p>
+<p>The <a
 href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/">Kubernetes
 Service Account</a> to use for running MinIO pods created as part of the
 Tenant.<br />
 </p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>priorityClassName</code></strong>
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Indicates the Pod priority and therefore importance of a Pod relative to
-other Pods in the cluster. This is applied to MinIO pods only.<br />
-Refer Kubernetes <a
+</p>
+<p>Indicates the Pod priority and therefore importance of a Pod relative
+to other Pods in the cluster. This is applied to MinIO pods only.<br />
+</p>
+<p>Refer Kubernetes <a
 href="https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass">Priority
 Class documentation</a> for more complete documentation.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>imagePullPolicy</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#pullpolicy-v1-core">PullPolicy</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-The pull policy for the MinIO Docker image. Specify one of the
+</p>
+<p>The pull policy for the MinIO Docker image. Specify one of the
 following:<br />
-* <code>Always</code><br />
-* <code>Never</code><br />
-* <code>IfNotPresent</code> (Default)<br />
-Refer Kubernetes documentation for details <a
+</p>
+<ul>
+<li><p><code>Always</code><br />
+</p></li>
+<li><p><code>Never</code><br />
+</p></li>
+<li><p><code>IfNotPresent</code> (Default)<br />
+</p></li>
+</ul>
+<p>Refer Kubernetes documentation for details <a
 href="https://kubernetes.io/docs/concepts/containers/images#updating-images">https://kubernetes.io/docs/concepts/containers/images#updating-images</a></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p><strong><code>sideCars</code></strong>
 <em><a
 href="#sidecars">SideCars</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-A list of containers to run as sidecars along every MinIO Pod deployed
-in the tenant.</p></td>
+</p>
+<p>A list of containers to run as sidecars along every MinIO Pod
+deployed in the tenant.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>exposeServices</code></strong>
 <em><a
 href="#exposeservices">ExposeServices</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Directs the Operator to expose the MinIO and/or Console services.<br />
+</p>
+<p>Directs the Operator to expose the MinIO and/or Console
+services.<br />
 </p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>serviceMetadata</code></strong>
 <em><a
 href="#servicemetadata">ServiceMetadata</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify custom labels and annotations to append to the MinIO service
+</p>
+<p>Specify custom labels and annotations to append to the MinIO service
 and/or Console service.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p><strong><code>users</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#localobjectreference-v1-core">LocalObjectReference</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-An array of <a
+</p>
+<p>An array of <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 opaque secrets</a> to use for generating MinIO users during tenant
 provisioning.<br />
-Each element in the array is an object consisting of a key-value pair
+</p>
+<p>Each element in the array is an object consisting of a key-value pair
 <code>name: &lt;string&gt;</code>, where the <code>&lt;string&gt;</code>
 references an opaque Kubernetes secret.<br />
-Each referenced Kubernetes secret must include the following
+</p>
+<p>Each referenced Kubernetes secret must include the following
 fields:<br />
-* <code>CONSOLE_ACCESS_KEY</code> - The "Username" for the MinIO
+</p>
+<ul>
+<li><p><code>CONSOLE_ACCESS_KEY</code> - The "Username" for the MinIO
 user<br />
-* <code>CONSOLE_SECRET_KEY</code> - The "Password" for the MinIO
+</p></li>
+<li><p><code>CONSOLE_SECRET_KEY</code> - The "Password" for the MinIO
 user<br />
-The Operator creates each user with the <code>consoleAdmin</code> policy
-by default. You can change the assigned policy after the Tenant
+</p></li>
+</ul>
+<p>The Operator creates each user with the <code>consoleAdmin</code>
+policy by default. You can change the assigned policy after the Tenant
 starts.<br />
 </p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p><strong><code>buckets</code></strong>
 <em><a
 href="#bucket">Bucket</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Create buckets when creating a new tenant. Skip if bucket with given
+</p>
+<p>Create buckets when creating a new tenant. Skip if bucket with given
 name already exists</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p><strong><code>logging</code></strong>
 <em><a
 href="#logging">Logging</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Enable JSON, Anonymous logging for MinIO tenants.</p></td>
+</p>
+<p>Enable JSON, Anonymous logging for MinIO tenants.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>configuration</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#localobjectreference-v1-core">LocalObjectReference</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Specify a secret that contains additional environment variable
+</p>
+<p>Specify a secret that contains additional environment variable
 configurations to be used for the MinIO pools. The secret is expected to
 have a key named config.env containing all exported environment
 variables for MinIO+</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>initContainers</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core">Container</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-Add custom initContainers to StatefulSet</p></td>
+</p>
+<p>Add custom initContainers to StatefulSet</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>additionalVolumes</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volume-v1-core">Volume</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, statefulset will add these volumes. You should set the
+</p>
+<p>If provided, statefulset will add these volumes. You should set the
 rules for the corresponding volumes and volume mounts. We will not test
 this rule, k8s will show the result.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>additionalVolumeMounts</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volumemount-v1-core">VolumeMount</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
-If provided, statefulset will add these volumes. You should set the
+</p>
+<p>If provided, statefulset will add these volumes. You should set the
 rules for the corresponding volumes and volume mounts. We will not test
 this rule, k8s will show the result.</p></td>
 </tr>
