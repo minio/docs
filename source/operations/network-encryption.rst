@@ -64,6 +64,12 @@ Enabling TLS
       If you have a custom Subject Alternative Name (SAN) certificate that is *not* also a wildcard cert, the TLS certificate SAN **must** apply to the hostname for its parent node.
       Without a wildcard, the SAN must match exactly to be able to connect to the tenant.
 
+   Certificate Management with cert-manager
+   ----------------------------------------
+
+   Rather than then MinIO Operator managing certificates, you can configure the deployment to use `cert-manager <https://cert-manager.io/>`__.
+   For instructions for deploying the MinIO Operator and tenants using cert-manager, refer to the :ref:`cert-manager page <minio-certmanager>`.
+
 
 .. cond:: linux
 
