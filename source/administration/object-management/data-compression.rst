@@ -93,7 +93,7 @@ To view the current compression settings:
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression
+   mc admin config get ALIAS compression
 
 
 Disable Data Compression
