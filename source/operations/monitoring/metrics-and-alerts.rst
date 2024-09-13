@@ -17,10 +17,10 @@ Metrics and Alerts
 
    Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
 
-MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
+MinIO publishes metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
-For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint by appending an additional path for each category.
+For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint, optionally by appending an additional path for each category.
 
 For example, the following endpoint returns audit metrics:
 
@@ -36,66 +36,80 @@ By default, MinIO requires authentication to scrape the metrics endpoints.
 To generate the needed bearer tokens, use :mc:`mc admin prometheus generate`.
 You can also disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
 
-MinIO provides the following scraping endpoints, relative to the base URL:
+You can also access metrics using :mc-cmd:`mc admin prometheus metrics` and the metric type for the desired category.
+For more information, see the :mc-cmd:`MinIO Admin Client reference <mc admin prometheus metrics>`.
+
+MinIO provides the following types and scraping endpoints, relative to the base URL:
 
 .. list-table::
    :header-rows: 1
-   :widths: 30 70
+   :widths: 25 25 50
    :width: 100%
 
    * - Category
+     - Metric type
      - Path
 
    * - API
+     - ``api``
      - ``/api/requests``
-       
+
        ``/bucket/api``
 
    * - Audit
+     - ``audit``
      - ``/audit``
 
    * - Cluster
+     - ``cluster``
      - ``/cluster/config``
-       
+
        ``/cluster/erasure-set``
-       
+
        ``/cluster/health``
-       
+
        ``/cluster/iam``
-       
+
        ``/cluster/usage/buckets``
-       
+
        ``/cluster/usage/objects``
 
    * - Debug
+     - ``debug``
      - ``/debug/go``
 
    * - ILM
+     - ``ilm``
      - ``/ilm``
 
    * - Logger webhook
+     - ``logger``
      - ``/logger/webhook``
 
    * - Notification
+     - ``notification``
      - ``/notification``
 
    * - Replication
+     - ``replication``
      - ``/replication``
-       
+
        ``/bucket/replication``
 
    * - Scanner
+     - ``scanner``
      - ``/scanner``
 
    * - System
+     - ``system``
      - ``/system/drive``
-       
+
        ``/system/memory``
-       
+
        ``/system/cpu``
-       
+
        ``/system/network/internode``
-       
+
        ``/system/process``
 
 For a complete list of metrics for each endpoint, see :ref:`Available Metrics <minio-metrics-and-alerts-available-metrics>`.
@@ -103,22 +117,16 @@ For a complete list of metrics for each endpoint, see :ref:`Available Metrics <m
 .. cond:: k8s
 
    The MinIO Operator supports deploying a per-tenant Prometheus instance configured to support metrics and visualization.
-   
+
    If you deploy the Tenant with this feature disabled *but* still want the historical metric views, you can instead configure an external Prometheus service to scrape the Tenant metrics.
    Once configured, you can update the Tenant to query that Prometheus service to retrieve metric data:
 
 .. cond:: linux or container or macos or windows
-   
+
    To enable historical data visualization in MinIO Console, set the following environment variables on each node in the MinIO deployment:
 
 - Set :envvar:`MINIO_PROMETHEUS_URL` to the URL of the Prometheus service
 - Set :envvar:`MINIO_PROMETHEUS_JOB_ID` to the unique job ID assigned to the collected metrics
-
-MinIO Grafana Dashboard
------------------------
-
-MinIO also publishes two :ref:`Grafana Dashboards <minio-grafana>` for visualizing collected metrics. 
-For more complete documentation on configuring a Prometheus-compatible data source for Grafana, see the :prometheus-docs:`Prometheus documentation on Grafana Support <visualization/grafana/>`.
 
 .. _minio-metrics-and-alerts-available-metrics:
 
