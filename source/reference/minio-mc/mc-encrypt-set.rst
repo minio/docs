@@ -143,9 +143,7 @@ encryption state. Specifying default encryption settings which the
 server cannot support may result in undesired behavior.
 
 Setting or modifying the default server-side encryption settings does *not*
-automatically encrypt or decrypt the existing bucket contents. If the bucket
-contents *must* have consistent encryption, use the
-:mc:`mc mv` mc with the :mc-cmd:`~mc mv --encrypt` or
-:mc-cmd:`~mc mv --encrypt-key` arguments to manually modify the
-encryption settings or encrypted state of the bucket contents *before*
-changing the bucket default. 
+automatically encrypt or decrypt the existing bucket contents. 
+If the bucket contents *must* have consistent encryption, use the
+:mc:`mc mv` command with :mc-cmd:`~mc mv --enc-kms`, :mc-cmd:`~mc mv --enc-s3`, or :mc-cmd:`~mc mv --enc-c` to specify the type of encryption to use for the moved contents.
+This manually modifies the encryption settings or encrypted state of the bucket contents *before* changing the bucket default. 
