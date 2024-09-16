@@ -39,7 +39,8 @@ The command saves the output as ``ALIAS-iam-metadata.zip``, where ``ALIAS`` is t
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin cluster iam export ALIAS
+         mc [GLOBALFLAGS] admin cluster iam export ALIAS  \
+                          [--output, -o <string>]
                                              
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -56,9 +57,41 @@ Parameters
 
    The :ref:`alias <alias>` of the MinIO deployment to export IAM metadata for.
 
+
+.. mc-cmd:: --output, --o
+   :optional:
+
+   Specify a custom file and path to use when exporting the IAM data.
+
 Global Flags
 ~~~~~~~~~~~~
 
 .. include:: /includes/common-minio-mc.rst
    :start-after: start-minio-mc-globals
    :end-before: end-minio-mc-globals
+
+Examples
+--------
+
+Download all IAM metadata for a cluster to a ZIP file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command downloads all IAM metadata for the cluster at alias ``myminio``, then stores the metadata to a ZIP file.
+
+.. code-block:: shell
+
+   mc admin cluster iam export myminio
+
+The ZIP file is named ``<alias>-iam-info.zip`` where ``<alias>`` is the alias of the cluster.
+For the above example, the file is named ``myminio-iam-info.zip``.
+
+The file is placed in the current active directory path.
+
+Download all IAM metadata for a cluster and specify the name and path of the ZIP file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command downloads all IAM metadata for the cluster at alias ``myminio``, then stores the metadata to a ZIP file at ``/tmp/myminio-iam.zip``.
+
+.. code-block:: shell
+
+   mc admin cluster iam export myminio --output /tmp/myminio-iam.zip
