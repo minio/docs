@@ -13,10 +13,12 @@ cert-manager
 TLS certificate management with cert-manager
 --------------------------------------------
 
-`cert-manager <https://cert-manager.io/>`__ manages certificates within Kubernetes clusters.
+This guide shows you how to install `cert-manager <https://cert-manager.io>`__ and set up the global ``Cluster Issuer``.
+
+cert-manager manages certificates within Kubernetes clusters.
 The MinIO Operator supports using cert-manager for certificates as an alternative to the MinIO Operator managing certificates for itself and its tenants.
 
-cert-manager obtains valid certificates from an ``Issuer`` or ``ClusterIssuer`` and can renew certificates prior to expiration.
+cert-manager obtains valid certificates from an ``Issuer`` or ``ClusterIssuer`` and can automatically renew certificates prior to expiration.
 
 A ``ClusterIssuer`` issues certificates for multiple namespaces.
 An ``Issuer`` only mints certificates for its own namespace.
@@ -33,7 +35,6 @@ The following graphic depicts how various namespaces make use of either an ``Iss
    :alt: A graphic depiction of a kubernetes cluster with five separate namespaces represented by different boxes. One is labeled minio-operator with a text box that says "minio-operator: issuer". A second is labeled tenant-1 with text box that says "tenant-1: issuer". A third is labeled default with a text box that says "root:ClusterIssuer". A fourth is labeled tenant-2 with a text box that says "tenant-2: issuer". The fifth is labeled cert-manager with a text box that says "minio-operator: issuer".
    :align: center
 
-This guide shows you how to install cert-manager and set up the global ``Cluster Issuer``.
 
 .. note::
 
