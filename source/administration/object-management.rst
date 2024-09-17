@@ -10,8 +10,8 @@ Object Management
 
 .. container:: extlinks-video
 
-   - `Versioning overview <https//youtu.be/XGOiwV6Cbuk?ref=docs>`__
-   - `Object locking and retention overview <https//youtu.be/Hk9Z-sltUu8?ref=docs>`__
+   - `Versioning overview <https://youtu.be/XGOiwV6Cbuk?ref=docs>`__
+   - `Object locking and retention overview <https://youtu.be/Hk9Z-sltUu8?ref=docs>`__
    - `MinIO Object Lifecycle Management Part I <https://youtu.be/Exg2KsfzHzI?ref=docs>`__
    - `MinIO Object Lifecycle Management Part II <https://youtu.be/5fz3rE3wjGg?ref=docs>`__
 

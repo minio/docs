@@ -12,8 +12,8 @@ Bucket Versioning
 
 .. container:: extlinks-video
 
-   - `Versioning overview <https//youtu.be/XGOiwV6Cbuk?ref=docs>`__
-   - `Versioning lab <https//youtu.be/nFUI2N5zH34?ref=docs>`__
+   - `Versioning overview <https://youtu.be/XGOiwV6Cbuk?ref=docs>`__
+   - `Versioning lab <https://youtu.be/nFUI2N5zH34?ref=docs>`__
 
 Overview
 --------
