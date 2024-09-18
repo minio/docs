@@ -165,7 +165,7 @@ The output of the example command above may differ from the output in your termi
 Certificate Management with cert-manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Rather than then MinIO Operator managing certificates, you can configure the deployment to use `cert-manager <https://cert-manager.io/>`__.
+Rather than the MinIO Operator managing certificates, you can configure the deployment to use `cert-manager <https://cert-manager.io/>`__.
 For instructions for deploying the MinIO Operator and tenants using cert-manager, refer to the :ref:`cert-manager page <minio-certmanager>`.
 
 Procedure

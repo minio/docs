@@ -32,7 +32,7 @@ The following graphic depicts how various namespaces make use of either an ``Iss
 
 .. image:: /images/k8s/cert-manager-cluster.svg
    :width: 600px
-   :alt: A graphic depiction of a kubernetes cluster with five separate namespaces represented by different boxes. One is labeled minio-operator with a text box that says "minio-operator: issuer". A second is labeled tenant-1 with text box that says "tenant-1: issuer". A third is labeled default with a text box that says "root:ClusterIssuer". A fourth is labeled tenant-2 with a text box that says "tenant-2: issuer". The fifth is labeled cert-manager with a text box that says "minio-operator: issuer".
+   :alt: A Kubernetes cluster with five namespaces, shown as a box for each namespace in the cluster. The minio-operator namespace contains a "minio-operator: issuer" local issuer. The default namespace contains a "root: ClusterIssuer" cluster issuer. The cert-manager namespace contains a "minio-operator: issuer" local issuer. The remaining two namespaces are individual tenants, "tenant-1" and "tenant-2", each with its own local issuer.
    :align: center
 
 

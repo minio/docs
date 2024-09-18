@@ -38,6 +38,8 @@ Before deploying a new tenant, create a Certificate Authority and Issuer for the
 
       kubectl create ns tenant-1
 
+   This much match the value of the ``metadata.namespace`` field in the tenant's YAML.
+
 2. Request a Certificate for a new Certificate Authority with ``spec.isCA`` set to ``true``.
 
    Create a file called ``tenant-1-ca-certificate.yaml`` with the following contents:
@@ -116,10 +118,10 @@ The certificate must be valid for the following DNS domains:
 
 .. important::
 
-   Replace the filler strings with values for your tenant: 
+   Replace the the placeholder text (marked with the ``<`` and ``>`` characters) with values for your tenant: 
 
    - ``<cluster domain>`` is the internal root DNS domain assigned in your Kubernetes cluster. 
-     Typically, this is ``cluster.local``, but confirm the value by checking your coredns configuration for the correct value for your Kubernetes cluster. 
+     Typically, this is ``cluster.local``, but confirm the value by checking your CoreDNS configuration for the correct value for your Kubernetes cluster. 
       
      For example:
 
@@ -134,7 +136,8 @@ The certificate must be valid for the following DNS domains:
    - ``tenant-name`` is the name provided to your tenant in the ``metadata.name`` of the Tenant YAML. 
      For this example it is ``myminio``.
 
-   - ``namespace`` is the namespace where the tenant is created, the ``metadata.namespace`` notes that in the Tenant YAML. 
+   - ``namespace`` is the value created earlier where the tenant will be installed.
+     In the tenant YAML, it is defined in the the ``metadata.namespace`` field. 
      For this example it is ``tenant-1``.
 
 1. Request a ``Certificate`` for the domains mentioned above

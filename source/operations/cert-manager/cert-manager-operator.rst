@@ -11,7 +11,7 @@ cert-manager for Operator
    :depth: 1
 
 
-MinIO Operator manages the TLS certificate issuing for the services hosted in the ``minio-operator`` namespace. 
+MinIO Operator manages TLS certificate issuing for the services hosted in the ``minio-operator`` namespace. 
 
 This page describes how to manage the Operator's TLS certificates with :ref:`cert-manager <minio-certmanager>`.
 
@@ -30,12 +30,12 @@ Prerequisites
 
 This guide **disables** the automatic generation of certificates in MinIO Operator and issues certificates using cert-manager instead.
 
-The ``minio-operator`` namespace needs to have its own certificate authority (CA), derived from the cluster's ``ClusterIssuer`` certificate created during :ref:`cert-manager setup <minio-certmanager>`.
+The ``minio-operator`` namespace must have its own certificate authority (CA), derived from the cluster's ``ClusterIssuer`` certificate created during :ref:`cert-manager setup <minio-certmanager>`.
 Create this CA certificate using cert-manager.
 
 .. important::
 
-   This CA certificate should exist *before* installing MinIO Operator.
+   This CA certificate **must** exist *before* installing MinIO Operator.
 
 1. If it does not exist, create the ``minio-operator`` namespace
 
@@ -128,7 +128,7 @@ The certificate from cert-manager must be valid for the following DNS domains:
 
       Replace ``<cluster domain>`` with the actual value for your MinIO tenant.
       ``cluster domain`` is the internal root DNS domain assigned in your Kubernetes cluster. 
-      Typically, this is ``cluster.local``, but confirm the value by checking your coredns configuration for the correct value for your Kubernetes cluster. 
+      Typically, this is ``cluster.local``, but confirm the value by checking your CoreDNS configuration for the correct value for your Kubernetes cluster. 
       
       For example:
 
@@ -181,7 +181,7 @@ This creates a secret called ``sts-tls`` in the ``minio-operator`` namespace.
 
 .. warning::
   
-   Failing to provide the ``sts-tls`` secret containing the TLS certificate or providing an invalid ``key-value`` pair in the secret will prevent the STS service from starting.
+   The STS service will not start if the ``sts-tls`` secret, containing the TLS certificate, is missing or contains an invalid ``key-value`` pair.
 
 4) Install Operator with Auto TLS disabled
 ------------------------------------------
@@ -191,9 +191,9 @@ You can now :ref:`install the MinIO Operator <minio-operator-installation>`.
 When installing the Operator deployment, set the ``OPERATOR_STS_AUTO_TLS_ENABLED`` environment variable to ``off`` in the ``minio-operator`` container. 
 
 Disabling this environment variable prevents the MinIO Operator from issuing the certificates.
-Instead, Operator waits for the TLS certificate issued by cert-manager.
+Instead, Operator waits for cert-manager to issue the TLS certificate.
 
-There are several for defining an environment variable depending on how you install the Operator.
+There are various methods to define an environment variable depending on how you install the Operator.
 The steps below define the variable with kustomize.
 
 1. Create a kustomization patch file called ``kustomization.yaml`` with the below contents:
