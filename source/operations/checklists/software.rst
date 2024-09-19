@@ -59,7 +59,7 @@ MinIO Pre-requisites
      - :ref:`Prometheus <minio-metrics-collect-using-prometheus>` or a Prometheus-compatible setup for monitoring and metrics
 
    * - :octicon:`circle`
-     - :ref:`Grafana configured <minio-grafana>` for dashboards 
+     - (optional) `Grafana <https://grafana.com/>`__ for custom dashboards 
 
    * - :octicon:`circle` 
      - (optional) :mc:`mc` installed on the local host system

@@ -195,9 +195,3 @@ In the Prometheus configuration, specify the path to the alert file in the ``rul
    - minio-alerting.yml
 
 Once triggered, Prometheus sends the alert to the configured AlertManager service.
-
-Dashboards
-----------
-
-For v2 metrics, MinIO provides Grafana Dashboards to display metrics collected by Prometheus.
-For more information, see :ref:`minio-grafana`

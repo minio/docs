@@ -70,8 +70,8 @@ Parameters
 .. mc-cmd:: --api-version v3
    :optional:
 
-   Generate a scrape configuration for metrics version 3.
-   Omit to generate a metrics version 2 configuration.
+   Generate a scrape configuration for :ref:`metrics version 3 <minio-metrics-and-alerts>`.
+   Omit to generate a :ref:`metrics version 2 <minio-metrics-v2>` configuration.
 
 .. mc-cmd:: --bucket
    :optional:
@@ -140,7 +140,7 @@ Use :mc-cmd:`mc admin prometheus generate --api-version v3` to generate a scrape
 .. code-block:: shell
    :class: copyable
 
-      mc admin prometheus generate ALIAS --api-version v3
+   mc admin prometheus generate ALIAS --api-version v3
 
 - Replace ``ALIAS`` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
@@ -155,6 +155,33 @@ The output resembles the following:
      scheme: http
      static_configs:
      - targets: ['localhost:9000']
+
+
+Generate a v3 cluster metrics config
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc admin prometheus generate --api-version v3` to generate a scrape configuration that collects v3 cluster metrics for a MinIO deployment:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin prometheus generate ALIAS cluster --api-version v3
+
+- Replace ``ALIAS`` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
+The output resembles the following:
+
+.. code-block:: shell
+
+   scrape_configs:
+   - job_name: minio-job-cluster
+     bearer_token: [auth token]
+     metrics_path: /minio/metrics/v3/cluster
+     scheme: http
+     static_configs:
+     - targets: ['localhost:9000']
+
+To generate a configuration for a :mc-cmd:`different metric type <mc admin prometheus generate type>`, replace ``cluster`` with the desired type.
 
 
 Generate a v3 bucket replication metrics config
@@ -181,6 +208,8 @@ The output resembles the following:
      static_configs:
      - targets: [`localhost:9000`]
 
+To generate a configuration for API metrics for a bucket, replace ``replication`` with ``api``.
+
        
 Generate a default metrics v2 config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,7 +219,7 @@ By default, :mc-cmd:`mc admin prometheus generate` generates a scrape configurat
 .. code-block:: shell
    :class: copyable
 
-      mc admin prometheus generate ALIAS
+   mc admin prometheus generate ALIAS
 
 - Replace ``ALIAS`` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
 
@@ -212,4 +241,4 @@ The following generates a scrape configuration for v2 bucket metrics:
 .. code-block:: shell
    :class: copyable
 
-      mc admin prometheus generate ALIAS bucket
+   mc admin prometheus generate ALIAS bucket
