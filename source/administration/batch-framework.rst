@@ -76,6 +76,10 @@ The :mc:`mc batch` commands include
      - .. include:: /reference/minio-mc/mc-batch-describe.rst
           :start-after: start-mc-batch-describe-desc
           :end-before: end-mc-batch-describe-desc
+   * - :mc:`mc batch cancel`
+     - .. include:: /reference/minio-mc/mc-batch-cancel.rst
+          :start-after: start-mc-batch-cancel-desc
+          :end-before: end-mc-batch-cancel-desc
 
 .. _minio-batch-framework-access:
 
