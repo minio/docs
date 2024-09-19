@@ -109,7 +109,7 @@ Each of the following tabs contains a provider-specific example:
       .. code-block:: shell
          :class: copyable
 
-         mc alias set myS3 https://s3.amazon.com/endpoint ACCESS_KEY SECRET_KEY
+         mc alias set myS3 https://s3.{your-region-code}.amazonaws.com/endpoint ACCESS_KEY SECRET_KEY
 
    .. tab-item:: Google Cloud Storage
 
