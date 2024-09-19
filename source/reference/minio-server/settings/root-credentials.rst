@@ -13,6 +13,8 @@ Root Access Settings
 This page covers settings that control root (superuser) access for the MinIO process. 
 The root user has complete access and permissions to perform operations on the MinIO deployment.
 
+Root User and Root Password are required even if you use the :kes-docs:`MinIO Key Encryption Service <>` or other key management utility.
+
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
    :end-before: end-minio-settings-defined
@@ -93,6 +95,10 @@ Root Access
 Specify ``on`` to enable and ``off`` to disable the :ref:`root <minio-users-root>` user account.
 Disabling the root service account also disables all service accounts associated with root, excluding those used by site replication.
 Defaults to ``on``.
+
+.. important::
+
+   If you disable root API access with this setting, you **must** still set a root user and a root password for internal use.
 
 Ensure you have at least one other admin user, such as one with the :userpolicy:`consoleAdmin` policy, before disabling the root account.
 If you do not have another admin user, disabling the root account locks administrative access to the deployment.
