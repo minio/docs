@@ -115,7 +115,7 @@ Include any other environment variables as required for your local deployment.
       .. code-block:: shell
          :class: copyable
 
-         mc alias set http://localhost:9000 myminioadmin minio-secret-key-change-me
+         mc alias set myminio http://localhost:9000 myminioadmin minio-secret-key-change-me
 
       Replace ``myminioadmin`` and ``minio-secret-key-change-me`` with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` values in the environment file specified to the container.
 
