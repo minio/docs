@@ -169,7 +169,7 @@ See :ref:`minio-batch-framework-keyrotate-job-ref` for more complete documentati
 
 You can use the following example configuration as a starting point for building your own custom expiration batch job:
 
-.. literalinclude:: /includes/code/keyrotate.yaml
+.. literalinclude:: /includes/code/expire.yaml
    :language: yaml
 
 See :ref:`minio-batch-framework-expire-job-ref` for more complete documentation on each key.

@@ -17,7 +17,7 @@ Description
 .. start-mc-license-desc
 
 The :mc:`mc license` commands work with cluster registration for |SUBNET|. 
-Use the commands to register a deployment, unregister a deployment, display information about the cluster's current license, or update the license key for a cluster.
+Use the commands to register a deployment, display information about the cluster's current license, or update the license key for a cluster.
 
 .. end-mc-license-desc
 
