@@ -73,7 +73,12 @@ Create this CA certificate using cert-manager.
           kind: ClusterIssuer
           group: cert-manager.io
 
-3. Apply the resource to the cluster
+   .. important::
+
+      The ``spec.issueRef.name`` must match the name of the ``ClusterIssuer`` created when :ref:`setting up cert-manager <minio-cert-manager-create-cluster-issuer>`.
+      If you specified a different ``ClusterIssuer`` name or are using a different ``Issuer`` from the guide, modify the ``issuerRef`` to match your environment.
+
+3. Apply the resource:
    
    .. code-block:: shell
       :class: copyable
@@ -107,7 +112,7 @@ Use the secret created above to add an ``Issuer`` resource for the ``minio-opera
           secretName: operator-ca-tls
 
 
-2. Apply the resource to the cluster
+2. Apply the resource:
    
    .. code-block:: shell
 
@@ -170,7 +175,7 @@ The certificate from cert-manager must be valid for the following DNS domains:
       The secret name **must** be ``sts-tls``.
       Confirm this by setting ``spec.secretName: sts-tls`` as highlighted above.
 
-2. Apply the resource to the cluster:
+2. Apply the resource:
 
    .. code-block:: shell
       :class: copyable
@@ -191,7 +196,7 @@ You can now :ref:`install the MinIO Operator <minio-operator-installation>`.
 When installing the Operator deployment, set the ``OPERATOR_STS_AUTO_TLS_ENABLED`` environment variable to ``off`` in the ``minio-operator`` container. 
 
 Disabling this environment variable prevents the MinIO Operator from issuing the certificates.
-Instead, Operator waits for cert-manager to issue the TLS certificate.
+Instead, Operator relies on cert-manager to issue the TLS certificate.
 
 There are various methods to define an environment variable depending on how you install the Operator.
 The steps below define the variable with kustomize.

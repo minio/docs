@@ -67,7 +67,7 @@ Enabling TLS
    Certificate Management with cert-manager
    ----------------------------------------
 
-   Rather than the MinIO Operator managing certificates, you can configure the deployment to use `cert-manager <https://cert-manager.io/>`__.
+   The MinIO Operator supports using `cert-manager <https://cert-manager.io/>`__ as a full replacement for its built-in automatic certificate management *or* user-driven manual certificate management.
    For instructions for deploying the MinIO Operator and tenants using cert-manager, refer to the :ref:`cert-manager page <minio-certmanager>`.
 
 

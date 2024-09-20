@@ -67,14 +67,20 @@ Before deploying a new tenant, create a Certificate Authority and Issuer for the
           kind: ClusterIssuer
           group: cert-manager.io
 
-3. Apply the file to the cluster.
+   .. important::
+
+      The ``spec.issueRef.name`` must match the name of the ``ClusterIssuer`` created when :ref:`setting up cert-manager <minio-cert-manager-create-cluster-issuer>`.
+      If you specified a different ``ClusterIssuer`` name or are using a different ``Issuer`` from the guide, modify the ``issuerRef`` to match your environment.
+
+
+3. Apply the resource:
 
    .. code-block:: shell
       :class: copyable
 
       kubectl apply -f tenant-1-ca-certificate.yaml
 
-2) Create the ``Issuer``
+4) Create the ``Issuer``
 ------------------------
 
 The ``Issuer`` issues the certificates within the tenant namespace.
@@ -96,7 +102,7 @@ The ``Issuer`` issues the certificates within the tenant namespace.
         ca:
           secretName: tenant-1-ca-tls
 
-2. Apply the ``Issuer`` resource definition to the cluster.
+2. Apply the ``Issuer`` resource definition:
 
    .. code-block:: shell
       :class: copyable
@@ -142,7 +148,8 @@ The certificate must be valid for the following DNS domains:
 
 1. Request a ``Certificate`` for the domains mentioned above
 
-   Create a file called ``tenant-1-minio-certificate.yaml`` with the following contents: 
+   Create a file called ``tenant-1-minio-certificate.yaml``.
+   The contents of the file should resemble the following, modified to reflect your cluster and tenant configurations: 
 
    .. code-block:: yaml
       :class: copyable
@@ -168,27 +175,39 @@ The certificate must be valid for the following DNS domains:
    .. tip::
 
       For this example, the Tenant name is ``myminio``. 
-      We recommend naming the secret in the field ``spec.secretName`` as ``<tenant-name>-tls``, following the naming convention the MinIO Operator uses when creating certificates without cert-manager.
+      We recommend naming the secret in the field ``spec.secretName`` as ``<tenant-name>-tls`` as a naming convention.
 
-2. Apply the certificate resource to the cluster.
+2. Apply the certificate resource:
 
    .. code-block:: shell
       :class: copyable
 
       kubectl apply -f tenant-1-minio-certificate.yaml
 
-4) Configure the tenant to use the certificate
-----------------------------------------------
+3. Validate the changes took effect:
 
-To use cert-manager, the tenant spec must:
+   .. code-block:: shell
+      :class: copyable
 
-- Disable AutoCert by setting the ``spec.requestAutoCert`` field to ``false``. 
+      kubectl describe secret/myminio-tls -n tenant-1
 
-  This instructs the MinIO Operator to not attempt to issue certificates and instead rely on cert-manager to provide them in a secret.
-- Reference the Secret containing the TLS certificate from the previous procedure in `spec.externalCertSecret`.
+   .. note::
 
-Modify the tenant YAML ``spec`` section to reflect the above requirements.
-   
+      - Replace ``tenant-1`` with the namespace for your tenant.
+      - Replace ``myminio-tls`` with the name of your secret, if different.
+
+4) Deploy the tenant using cert-manager for TLS certificate management
+----------------------------------------------------------------------
+
+When deploying a Tenant, you must set the TLS configuration such that:
+
+- The Tenant does not automatically generate its own certificates (``spec.requestAutoCert: false``) *and*
+- The Tenant has a valid cert-manager reference (``spec.externalCertSecret``)
+
+This directs the Operator to deploy the Tenant using the cert-manager certificates exclusively.
+
+The following YAML ``spec`` provides a baseline configuration meeting these requirements:
+
 .. code-block:: yaml
    :emphasize-lines: 6,9,11
 
@@ -210,7 +229,8 @@ Modify the tenant YAML ``spec`` section to reflect the above requirements.
 5) Trust the tenant's CA in MinIO Operator
 ------------------------------------------
 
-MinIO Operator can trust as many CA certificates as provided. 
+The MinIO Operator does not trust the tenant's CA by default.
+To trust the tenant's CA, you must pass the certificate to the Operator as a secret.
 
 To do this, create a secret with the prefix ``operator-ca-tls-`` followed by a unique identifier in the `minio-operator` namespace.
 
