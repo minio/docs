@@ -238,6 +238,17 @@ The steps below define the variable with kustomize.
    
       kubectl apply -k minio-operator
 
+Migrate an existing MinIO Operator deployment to cert-manager
+-------------------------------------------------------------
+
+To transition an existing MinIO Operator deployment from using AutoCert to cert-manager, complete the following steps:
+
+1. Complete the steps for :ref:`installing cert-manager <minio-certmanager>`, including disabling auto-cert.
+2. Complete steps 1-3 on this page to generate the certificate authority for the Operator.
+3. When you get to the install step on this page, instead replace the existing Operator TLS certificate with the cert-manager issued certificate.
+4. Create new cert-manager certificates for each tenant, similar to the steps described on the :ref:`cert-manager for Tenants <minio-certmanager-tenants>` page.
+5. Replace the secrets in the MinIO Operator namespace for the tenants with secrets related to each tenant's cert-manager issued certificate.
+
 Next steps
 ----------
 
