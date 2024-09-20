@@ -37,7 +37,6 @@ The procedure on this page documents the following:
 
    Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
 
-   MinIO recommends new monitoring configurations use :ref:`version 3 metrics <minio-metrics-and-alerts>`.
 
 Collect and alert on metrics
 ----------------------------

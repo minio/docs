@@ -14,7 +14,7 @@ Metrics Version 2
 .. admonition:: Metrics Version 2 Deprecated
    :class: note
 
-   Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, :ref:`metrics version 3 <minio-metrics-and-alerts>` replaces the deprecated metrics version 2.
+   Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics :ref:`version 3 (v3) <minio-metrics-and-alerts>` replaces the deprecated metrics version 2 (v2).
 
 The following sections describe the deprecated version 2 endpoints and metrics.
 

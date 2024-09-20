@@ -15,12 +15,12 @@ Metrics and Alerts
 .. admonition:: Metrics Version 2 Deprecated
    :class: note
 
-   Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
+   Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 (v3) replaces the deprecated :ref:`metrics version 2 (v2) <minio-metrics-v2>`.
 
 MinIO publishes metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
-For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint, optionally by appending an additional path for each category.
+For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint, optionally appending an additional path for each category.
 
 For example, the following endpoint returns audit metrics:
 
@@ -35,9 +35,6 @@ For deployments with a load balancer managing connections between MinIO nodes, s
 By default, MinIO requires authentication to scrape the metrics endpoints.
 To generate the needed bearer tokens, use :mc:`mc admin prometheus generate`.
 You can also disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
-
-You can also access metrics using :mc-cmd:`mc admin prometheus metrics` and the metric type for the desired category.
-For more information, see the :mc-cmd:`MinIO Admin Client reference <mc admin prometheus metrics>`.
 
 MinIO provides the following types and scraping endpoints, relative to the base URL:
 
@@ -113,6 +110,9 @@ MinIO provides the following types and scraping endpoints, relative to the base 
        ``/system/process``
 
 For a complete list of metrics for each endpoint, see :ref:`Available Metrics <minio-metrics-and-alerts-available-metrics>`.
+
+You can also access metrics using :mc-cmd:`mc admin prometheus metrics` and the metric type for the desired category.
+For more information, see the :mc-cmd:`MinIO Admin Client reference <mc admin prometheus metrics>`.
 
 .. cond:: k8s
 

@@ -10,7 +10,7 @@
 
 .. mc:: mc admin prometheus generate
 
-Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
+Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics :ref:`version 3 (v3) <minio-metrics-and-alerts>` replaces the deprecated :ref:`version 2 (v2) <minio-metrics-v2>`.
 
 Description
 -----------
@@ -51,8 +51,8 @@ For more complete documentation on using MinIO with Prometheus, see :ref:`How to
          mc [GLOBALFLAGS] admin prometheus generate                                        \
                                            ALIAS                                           \
                                            [TYPE]                                          \
-					   [--api_version v3]                              \
-					   [TYPE --bucket <bucket name> --api_version v3]
+                                           [--api_version v3]                              \
+                                           [TYPE --bucket <bucket name> --api_version v3]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -67,30 +67,32 @@ Parameters
 
    The :mc:`alias <mc alias>` of a configured MinIO deployment for which the command generates a Prometheus-compatible configuration file.
 
-.. mc-cmd:: --api-version v3
+.. mc-cmd:: --api-version
    :optional:
 
-   Generate a scrape configuration for :ref:`metrics version 3 <minio-metrics-and-alerts>`.
-   Omit to generate a :ref:`metrics version 2 <minio-metrics-v2>` configuration.
+   To generate a scrape configuration for :ref:`v3 metrics <minio-metrics-and-alerts>`, include  an ``--api-version v3`` parameter.
+   ``v3`` is the only accepted value.
+   
+   Omit ``--api-version`` to generate a :ref:`v2 metrics <minio-metrics-v2>` configuration.
 
 .. mc-cmd:: --bucket
    :optional:
 
    For v3 metric types that return bucket-level metrics, specify a bucket name.
    Use with :mc-cmd:`~mc admin prometheus generate --api-version`.
-   
+
    ``--bucket`` works for the following v3 metric types:
 
    - ``api``
    - ``replication``
 
    The following example generates a configuration for API metrics from the bucket ``mybucket``:
-   
+
    .. code-block:: shell
       :class: copyable
 
-      mc admin prometheus generate play api --bucket mybucket --api-version v3
-	    
+      mc admin prometheus generate ALIAS api --bucket mybucket --api-version v3
+
 .. mc-cmd:: TYPE
    :optional:
 
@@ -119,7 +121,7 @@ Parameters
       - ``resource``
 
       If not specified, a ``v2`` command returns cluster metrics.
-      Cluster metrics also include node metrics.
+      Cluster metrics also include rollups of certain node metrics.
 
 Global Flags
 ~~~~~~~~~~~~
@@ -135,7 +137,7 @@ Examples
 Generate a default metrics v3 config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin prometheus generate --api-version v3` to generate a scrape configuration that collects all v3 metrics for a MinIO deployment:
+Use :mc-cmd:`mc admin prometheus generate --api-version v3 <mc admin prometheus generate --api-version>` to generate a scrape configuration that collects all v3 metrics for a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
@@ -160,7 +162,7 @@ The output resembles the following:
 Generate a v3 cluster metrics config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin prometheus generate --api-version v3` to generate a scrape configuration that collects v3 cluster metrics for a MinIO deployment:
+Use :mc-cmd:`mc admin prometheus generate --api-version v3 <mc admin prometheus generate --api-version>` to generate a scrape configuration that collects v3 cluster metrics for a MinIO deployment:
 
 .. code-block:: shell
    :class: copyable
@@ -181,7 +183,7 @@ The output resembles the following:
      static_configs:
      - targets: ['localhost:9000']
 
-To generate a configuration for a :mc-cmd:`different metric type <mc admin prometheus generate type>`, replace ``cluster`` with the desired type.
+To generate a configuration for a :mc-cmd:`different metric type <mc admin prometheus generate TYPE>`, replace ``cluster`` with the desired type.
 
 
 Generate a v3 bucket replication metrics config
@@ -208,9 +210,32 @@ The output resembles the following:
      static_configs:
      - targets: [`localhost:9000`]
 
-To generate a configuration for API metrics for a bucket, replace ``replication`` with ``api``.
 
-       
+Generate a v3 config for bucket API metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following example generates a scrape configuration for v3 API metrics for bucket ``mybucket``:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc admin prometheus generate ALIAS api --bucket mybucket --api-version v3
+
+- Replace ``ALIAS`` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment.
+
+The output resembles the following:
+
+.. code-block:: shell
+
+   scrape_configs:
+   - job_name: minio-job-api
+     bearer_token: [auth token]
+     metrics_path: /minio/metrics/v3/bucket/api/mybucket
+     scheme: https
+     static_configs:
+     - targets: [`localhost:9000`]
+
+
 Generate a default metrics v2 config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
