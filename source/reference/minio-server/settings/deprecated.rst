@@ -79,10 +79,9 @@ They are listed here for historical reference only.
 
    For the Console to function correctly, the MinIO server URL *must* be the FQDN of the host, resolveable, and reachable.
 
-   If the :envvar:`MINIO_SERVER_URL` can't be accessed, the MinIO Console won't be able to perform logins, it will hang for about 10 seconds and will return ``Invalid Login``.
-   There won't be any explicit mention about the lack of connectivity between the MinIO Console and the the MinIO server. If you are having trouble login to
-   the MinIO try removing this.
-
+   If the specified value does not resolve to the MinIO server, logins via the MinIO Console fail and returns a network error after a wait period.
+   Older versions of the Console may return a generic 'Invalid Login' error instead.
+   Unset the value *or* address the FQDN resolution issue to allow Console logins to proceed.
    This setting may be required if:
 
    - The MinIO Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN).
