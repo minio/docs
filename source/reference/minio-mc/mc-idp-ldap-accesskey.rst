@@ -43,6 +43,26 @@ The :mc-cmd:`mc idp ldap accesskey` command has the following subcommands:
           :start-after: start-mc-idp-ldap-accesskey-create-desc
           :end-before: end-mc-idp-ldap-accesskey-create-desc
 
+   * - :mc-cmd:`mc idp ldap accesskey disable`
+     - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-disable.rst
+          :start-after: start-mc-idp-ldap-accesskey-disable-desc
+          :end-before: end-mc-idp-ldap-accesskey-disable-desc
+
+   * - :mc-cmd:`mc idp ldap accesskey edit`
+     - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-edit.rst
+          :start-after: start-mc-idp-ldap-accesskey-edit-desc
+          :end-before: end-mc-idp-ldap-accesskey-edit-desc
+
+   * - :mc-cmd:`mc idp ldap accesskey enable`
+     - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-enable.rst
+          :start-after: start-mc-idp-ldap-accesskey-enable-desc
+          :end-before: end-mc-idp-ldap-accesskey-enable-desc
+
+   * - :mc-cmd:`mc idp ldap accesskey info`
+     - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-info.rst
+          :start-after: start-mc-idp-ldap-accesskey-info-desc
+          :end-before: end-mc-idp-ldap-accesskey-info-desc
+
    * - :mc-cmd:`mc idp ldap accesskey ls`
      - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-ls.rst
           :start-after: start-mc-idp-ldap-accesskey-ls-desc
@@ -53,15 +73,13 @@ The :mc-cmd:`mc idp ldap accesskey` command has the following subcommands:
           :start-after: start-mc-idp-ldap-accesskey-rm-desc
           :end-before: end-mc-idp-ldap-accesskey-rm-desc
 
-   * - :mc-cmd:`mc idp ldap accesskey info`
-     - .. include:: /reference/minio-mc/mc-idp-ldap-accesskey-info.rst
-          :start-after: start-mc-idp-ldap-accesskey-info-desc
-          :end-before: end-mc-idp-ldap-accesskey-info-desc
-
 .. toctree::
    :titlesonly:
    :hidden:
 
+   /reference/minio-mc/mc-idp-ldap-accesskey-disable
+   /reference/minio-mc/mc-idp-ldap-accesskey-edit
+   /reference/minio-mc/mc-idp-ldap-accesskey-enable
+   /reference/minio-mc/mc-idp-ldap-accesskey-info
    /reference/minio-mc/mc-idp-ldap-accesskey-ls
    /reference/minio-mc/mc-idp-ldap-accesskey-rm
-   /reference/minio-mc/mc-idp-ldap-accesskey-info

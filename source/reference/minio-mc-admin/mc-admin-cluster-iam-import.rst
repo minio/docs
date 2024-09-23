@@ -21,6 +21,16 @@ The :mc:`mc admin cluster iam import` command imports :ref:`IAM <minio-authentic
 
 You can use this command to manually restore IAM metadata settings for a MinIO deployment.
 
+.. versionadded:: mc RELEASE.2024-09-09T07-53-10Z
+
+   The command outputs the results of the import, including the following:
+
+   - count of individual entities imported by entity type
+
+   - list of policies imported by entity type they imported to
+
+   - list of entities that failed to import
+
 .. tab-set::
 
    .. tab-item:: EXAMPLE

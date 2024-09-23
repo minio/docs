@@ -272,6 +272,48 @@ Client Key
 
 Specify the path to the client private key to use for performing mTLS authentication to the webhook service.
 
+MaxRetry
+~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_WEBHOOK_MAX_RETRY
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_webhook max_retry
+         :delimiter: " "
+
+Maximum number of attempts to retry an event send.
+By default, the max number of retries is set to ``0``.
+
+RetryInterval
+~~~~~~~~~~~~~
+
+*Optional*
+
+.. tab-set::
+
+   .. tab-item:: Environment Variable
+      :sync: envvar
+
+      .. envvar:: MINIO_NOTIFY_WEBHOOK_RETRY_INTERVAL
+
+   .. tab-item:: Configuration Setting
+      :sync: config
+
+      .. mc-conf:: notify_webhook retry_interval
+         :delimiter: " "
+
+Length of time to wait between retry attempts.
+The default value is ``3s``.
+
 Comment
 ~~~~~~~
 
