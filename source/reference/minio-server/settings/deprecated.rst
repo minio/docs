@@ -75,14 +75,17 @@ They are listed here for historical reference only.
 
    .. deprecated:: RELEASE.2024-05-10T01-41-38Z
 
-   The `fully qualified domain name <https://en.wikipedia.org/wiki/Fully_qualified_domain_name>`__ (FQDN) the MinIO Console uses for connecting to the MinIO Server. 
-  
+   The `fully qualified domain name <https://en.wikipedia.org/wiki/Fully_qualified_domain_name>`__ (FQDN) the MinIO Console uses for connecting to the MinIO Server.
+
    For the Console to function correctly, the MinIO server URL *must* be the FQDN of the host, resolveable, and reachable.
 
+   If the specified value does not resolve to the MinIO server, logins via the MinIO Console fail and return a network error after a wait period.
+   Older versions of the Console may return a generic 'Invalid Login' error instead.
+   Unset the value *or* address the FQDN resolution issue to allow Console logins to proceed.
    This setting may be required if:
 
    - The MinIO Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN).
-   
+
    or
 
    - The Console must use a specific hostname to connect or reference the MinIO Server, such as due to a reverse proxy or similar configuration.
