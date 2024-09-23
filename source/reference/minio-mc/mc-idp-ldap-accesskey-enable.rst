@@ -19,7 +19,7 @@ Description
 
 .. start-mc-idp-ldap-accesskey-enable-desc
 
-The :mc:`mc idp ldap accesskey enable` enables the specified access key on the local server.
+The :mc:`mc idp ldap accesskey enable` enables the specified :ref:`access key <minio-id-access-keys>` on the local server.
 
 .. end-mc-idp-ldap-accesskey-enable-desc
 

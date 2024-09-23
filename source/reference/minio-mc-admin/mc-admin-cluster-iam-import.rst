@@ -25,28 +25,11 @@ You can use this command to manually restore IAM metadata settings for a MinIO d
 
    The command outputs the results of the import, including the following:
 
-   - number of indidividual entities imported:
-    
-     - policies
-     - users
-     - groups
-     - service accounts
+   - count of individual entities imported by entity type
 
-   - policies imported to a:
+   - list of policies imported by entity type they imported to
 
-     - user
-     - group
-     - service account
-
-   - entities that failed to import:
-
-     - policies
-     - users
-     - groups
-     - service accounts
-     - policies to a user
-     - policies to a group
-     - policies to a service account
+   - list of entities that failed to import
 
 .. tab-set::
 

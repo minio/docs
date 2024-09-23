@@ -19,7 +19,7 @@ Description
 
 .. start-mc-idp-ldap-accesskey-disable-desc
 
-:mc:`mc idp ldap accesskey disable` disables the specified access key on the local server.
+:mc:`mc idp ldap accesskey disable` disables the specified :ref:`access key <minio-id-access-keys>` on the MinIO deployment.
 
 .. end-mc-idp-ldap-accesskey-disable-desc
 
@@ -27,7 +27,7 @@ Description
 
    .. tab-item:: EXAMPLE
 
-         The following example disables the access key ``mykey`` from the ``minio`` deployment:
+         The following example disables the access key ``mykey`` on the ``minio`` deployment:
 
       .. code-block:: shell
          :class: copyable

@@ -291,6 +291,7 @@ MaxRetry
          :delimiter: " "
 
 Maximum number of attempts to retry an event send.
+By default, the max number of retries is set to ``0``.
 
 RetryInterval
 ~~~~~~~~~~~~~
