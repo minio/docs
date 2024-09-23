@@ -79,7 +79,7 @@ They are listed here for historical reference only.
 
    For the Console to function correctly, the MinIO server URL *must* be the FQDN of the host, resolveable, and reachable.
 
-   If the specified value does not resolve to the MinIO server, logins via the MinIO Console fail and returns a network error after a wait period.
+   If the specified value does not resolve to the MinIO server, logins via the MinIO Console fail and return a network error after a wait period.
    Older versions of the Console may return a generic 'Invalid Login' error instead.
    Unset the value *or* address the FQDN resolution issue to allow Console logins to proceed.
    This setting may be required if:
