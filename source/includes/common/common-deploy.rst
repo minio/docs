@@ -117,7 +117,11 @@ Include any other environment variables as required for your local deployment.
 
          mc alias set myminio http://localhost:9000 myminioadmin minio-secret-key-change-me
 
-      Replace ``myminioadmin`` and ``minio-secret-key-change-me`` with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` values in the environment file specified to the container.
+      - Replace ``myminio`` with the desired name to use for the alias.
+
+      - Replace ``myminioadmin`` with the :envvar:`MINIO_ROOT_USER` value in the environment file specified to the container.
+
+      - Replace ``minio-secret-key-change-me`` with the :envvar:`MINIO_ROOT_PASSWORD` value in the environment file specified to the container.
 
       You can then interact with the container using any :mc:`mc` command.
       If your local host firewall permits external access to the MinIO S3 API port, other hosts on the same network can access the MinIO deployment using the IP or hostname for your local host.
