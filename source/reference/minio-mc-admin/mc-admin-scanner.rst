@@ -23,7 +23,7 @@ The :mc:`mc admin scanner` commands provide information about the :ref:`scanner 
 Subcommands
 -----------
 
-:mc:`mc admin policy` includes the following subcommands:
+:mc:`mc admin scanner` includes the following subcommands:
 
 .. list-table::
    :header-rows: 1
