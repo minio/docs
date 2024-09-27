@@ -69,14 +69,14 @@ Parameters
 .. mc-cmd:: --filter-request
    :optional:
 
-   Trace client operations or calls with request size greater than the specified :mc-cmd:`~mc admin scanner trace --filter-size` value.
+   Trace scanner operations or calls with request size greater than the specified :mc-cmd:`~mc admin scanner trace --filter-size` value.
 
    **Must** be used with :mc-cmd:`~mc admin scanner trace --filter-size` flag.
 
 .. mc-cmd:: --filter-response
    :optional:
 
-   Trace client operations or calls with response size greater than the specified :mc-cmd:`~mc admin scanner trace --filter-size` value.
+   Trace scanner operations or calls with response size greater than the specified :mc-cmd:`~mc admin scanner trace --filter-size` value.
 
    **Must** be used with :mc-cmd:`~mc admin scanner trace --filter-size` flag.
 

@@ -20,7 +20,7 @@ The :mc-cmd:`mc admin scanner status` command displays a real-time summary of :r
 
 .. end-mc-admin-scanner-status-desc
 
-This command has also be run by using ``mc admin scanner info``.
+This command has an alias of ``mc admin scanner info``.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -90,7 +90,7 @@ Parameters
 .. mc-cmd:: --bucket
    :optional:
 
-   Show information about the scanning of a specified bucket.
+   Filter scanner statistics to the specified bucket.
 
 .. mc-cmd:: --interval
    :optional:
