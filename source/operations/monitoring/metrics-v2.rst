@@ -1,4 +1,3 @@
-:orphan:
 .. _minio-metrics-v2:
 
 =================
@@ -11,15 +10,22 @@ Metrics Version 2
    :local:
    :depth: 1
 
-.. admonition:: Metrics Version 2 Deprecated
-   :class: note
 
-   Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics :ref:`version 3 (v3) <minio-metrics-and-alerts>` replaces the deprecated metrics version 2 (v2).
+Metrics version 2
+-----------------
 
-The following sections describe the deprecated version 2 endpoints and metrics.
+For metrics version 2, all metrics are available under the base ``/minio/v2/metrics`` endpoint, optionally appending an additional path for each category.
 
-Metrics version 2 endpoints
----------------------------
+For example, the following endpoint returns bucket metrics:
+
+.. code-block:: shell
+   :class: copyable
+
+   http://HOSTNAME:PORT/minio/v2/metrics/bucket
+
+Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
+For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+
 
 .. tab-set::
 
@@ -70,11 +76,11 @@ Metrics version 2 endpoints
       For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
 
 
-Configure Prometheus to Collect and Alert using MinIO Metrics
+Configure Prometheus to collect and alert using MinIO Metrics
 -------------------------------------------------------------
 
-1) Generate the Scrape Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Generate a v2 scrape configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the :mc:`mc admin prometheus generate` command to generate the scrape configuration for use by Prometheus in making scraping requests:
 
@@ -208,7 +214,7 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
 
      For Prometheus deployments external to the cluster, you must specify an ingress or load balancer endpoint configured to route connections to and from the MinIO Tenant.
 
-2) Restart Prometheus with the Updated Configuration
+2) Restart Prometheus with the updated configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Append the desired ``scrape_configs`` job generated in the previous step to the configuration file:
@@ -292,7 +298,7 @@ Start the Prometheus cluster using the configuration file:
 
    prometheus --config.file=prometheus.yaml
 
-3) Analyze Collected Metrics
+3) Analyze collected metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Prometheus includes an :prometheus-docs:`expression browser <prometheus/latest/getting_started/#using-the-expression-browser>`. 
@@ -323,7 +329,7 @@ The following query examples return metrics collected by Prometheus every five m
    minio_node_drive_io_waiting{job-"minio-job"}[5m]
 
 
-4) Configure an Alert Rule using MinIO Metrics
+4) Configure an alert rule using MinIO Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must configure :prometheus-docs:`Alert Rules <prometheus/latest/configuration/alerting_rules/>` on the Prometheus deployment to trigger alerts based on collected MinIO metrics.
@@ -370,9 +376,10 @@ Dashboards
 For v2 metrics, MinIO provides Grafana Dashboards to display the metrics collected by Prometheus.
 For more information, see :ref:`minio-grafana`
 
+.. _minio-metrics-and-alerts-available-v2-metrics:
 
-Available metrics
------------------
+Available v2 metrics
+--------------------
 
 - :ref:`Cluster Metrics <minio-available-cluster-metrics>`
 - :ref:`Bucket Metrics <minio-available-bucket-metrics>`

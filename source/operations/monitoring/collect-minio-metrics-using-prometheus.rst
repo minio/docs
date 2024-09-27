@@ -102,7 +102,7 @@ Common changes include:
   Some deployments require a longer scrape interval due to the number of metrics being scraped.
   To reduce the load on your MinIO and Prometheus servers, choose the longest interval that meets your monitoring requirements.
 
-  You can specify a ``scrape_interval`` for each job in its ``job_name`` section, or all jobs in a separate ``global`` section.
+  You can specify a global ``scrape_interval`` for all jobs or override a global value by setting a ``scrape_interval`` in an individual ``job_name`` section.
 
 - Set the ``job_name`` to a value associated to the MinIO deployment.
 
