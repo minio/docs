@@ -23,7 +23,7 @@ The guide assumes a new or fresh MinIO Operator installation.
 
    The main difference is that you must provide that ``Issuer`` CA certificate to MinIO, instead of the CA's mentioned in this guide.
 
-Defer to the `cert-manager documentation <https://cert-manager.io>`__ and your own organization's certificate requirements for more advanced configurations.
+Refer to the `cert-manager documentation <https://cert-manager.io>`__ and your own organization's certificate requirements for more advanced configurations.
 
 cert-manager manages certificates within Kubernetes clusters.
 The MinIO Operator supports using cert-manager for managing and provisioning certificates as an alternative to the MinIO Operator managing certificates for itself and its tenants.
@@ -42,7 +42,7 @@ The following graphic depicts how cert-manager provides certificates in namespac
 
 .. image:: /images/k8s/cert-manager-graph.png
    :width: 600px
-   :alt: A graph of the namespaces in a Kubernetes cluster. At the root level is a ClusterIssuer that issues certificates to each of the other namespaces. Three other namespaces exist under root. The Operator namespace has its own Issuer, as do namespaces for Tenant-1 and Tenant-2. A dotted line going from each Tenant namespace back ot the Operator has text that the Operator must trust the Tenant certificates.
+   :alt: A graph of the namespaces in a Kubernetes cluster showing the relationship between the root level ClusterIssuer and three other namespaces with their own Issuer.
    :align: center
 
 

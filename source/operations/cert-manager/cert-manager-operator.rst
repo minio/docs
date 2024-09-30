@@ -95,7 +95,7 @@ Kubernetes creates a new secret with the name ``operator-ca-tls`` in the ``minio
 2) Use the secret to create the ``Issuer``
 ------------------------------------------
 
-Use the secret created above to add an ``Issuer`` resource for the ``minio-operator`` namespace.
+Use the ``operator-ca-tls`` secret to add an ``Issuer`` resource for the ``minio-operator`` namespace.
 
 1. Create a file called ``operator-ca-issuer.yaml`` with the following contents: 
 
@@ -145,7 +145,7 @@ The certificate from cert-manager must be valid for the following DNS domains:
       Different Kubernetes providers manage the root domain differently.
       Check with your Kubernetes provider for more information.
 
-1. Create a ``Certificate`` for the domains mentioned above:
+1. Create a ``Certificate`` for the specified domains:
 
    Create a file named ``sts-tls-certificate.yaml`` with the following contents:
 
@@ -173,7 +173,7 @@ The certificate from cert-manager must be valid for the following DNS domains:
       The ``spec.secretName`` is not optional.
    
       The secret name **must** be ``sts-tls``.
-      Confirm this by setting ``spec.secretName: sts-tls`` as highlighted above.
+      Confirm this by setting ``spec.secretName: sts-tls`` as highlighted in the certificate YAML.
 
 2. Apply the resource:
 
@@ -199,9 +199,9 @@ Disabling this environment variable prevents the MinIO Operator from issuing the
 Instead, Operator relies on cert-manager to issue the TLS certificate.
 
 There are various methods to define an environment variable depending on how you install the Operator.
-The steps below define the variable with kustomize.
+The following steps define the variable with kustomize.
 
-1. Create a kustomization patch file called ``kustomization.yaml`` with the below contents:
+1. Create a kustomization patch file called ``kustomization.yaml`` with the following contents:
 
    .. code-block:: yaml
       :class: copyable

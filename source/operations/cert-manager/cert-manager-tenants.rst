@@ -146,7 +146,7 @@ The certificate must be valid for the following DNS domains:
      In the tenant YAML, it is defined in the the ``metadata.namespace`` field. 
      For this example it is ``tenant-1``.
 
-1. Request a ``Certificate`` for the domains mentioned above
+1. Request a ``Certificate`` for the specified domains
 
    Create a file called ``tenant-1-minio-certificate.yaml``.
    The contents of the file should resemble the following, modified to reflect your cluster and tenant configurations: 
@@ -268,5 +268,5 @@ This allows Operator to trust the cert-manager issued CA and all certificates de
 
 With the Certificate Authority and ``Issuer`` in place for the tenant's namespace, you can now :ref:`deploy the object store tenant <minio-k8s-deploy-minio-tenant>`.
 
-Use the tenant YAML modified above to disable AutoCert and reference the secret you generated.
+Use the modified baseline tenant YAML to disable AutoCert and reference the secret you generated.
 
