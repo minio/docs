@@ -33,16 +33,16 @@ cert-manager obtains valid certificates from an ``Issuer`` or ``ClusterIssuer`` 
 A ``ClusterIssuer`` issues certificates for multiple namespaces.
 An ``Issuer`` only mints certificates for its own namespace.
 
-The following graphic depicts how various namespaces make use of either an ``Issuer`` or ``ClusterIssuer`` type.
+The following graphic depicts how cert-manager provides certificates in namespaces across a Kubernetes cluster.
 
-- cert-manager is installed in the ``cert-manager`` namespace, which does not have either an ``issuer`` or a ``ClusterIssuer``.
-- The ``default`` namespace receives the global ``Cluster Issuer``.
-- Each tenant's namespace receives a local ``Issuer``.
-- The ``minio-operator`` namespace receives a local ``Issuer``. 
+- A ``ClusterIssuer`` exists at the root level of the Kubernetes cluster, typically the ``default`` namespace, to provide certificates to all other namespaces.
+- The ``minio-operator`` namespace receives its own, local ``Issuer``. 
+- Each tenant's namespace receives its own, local ``Issuer``.
+- The certificates issued by each tenant namespace must be made known to and trusted by the MinIO Operator.
 
-.. image:: /images/k8s/cert-manager-cluster.svg
+.. image:: /images/k8s/cert-manager-graph.png
    :width: 600px
-   :alt: A Kubernetes cluster with five namespaces, shown as a box for each namespace in the cluster. The minio-operator namespace contains a "minio-operator: issuer" local issuer. The default namespace contains a "root: ClusterIssuer" cluster issuer. The cert-manager namespace contains a "minio-operator: issuer" local issuer. The remaining two namespaces are individual tenants, "tenant-1" and "tenant-2", each with its own local issuer.
+   :alt: A graph of the namespaces in a Kubernetes cluster. At the root level is a ClusterIssuer that issues certificates to each of the other namespaces. Three other namespaces exist under root. The Operator namespace has its own Issuer, as do namespaces for Tenant-1 and Tenant-2. A dotted line going from each Tenant namespace back ot the Operator has text that the Operator must trust the Tenant certificates.
    :align: center
 
 
