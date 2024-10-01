@@ -33,9 +33,7 @@ Upgrade MinIO Operator 5.0.15 to |operator-version-stable|
 .. important::
 
    Operator 6.0.0 deprecates the MinIO Operator Console and removes the related resources from the MinIO Operator CRD.
-
-   MinIO does not remove existing Operator Console services, pods, or deployments as per Kubernetes standard procedure.
-   You can remove these resources at your own discretion.
+   This includes removal of Operator Console resources such as services and pods.
 
    Use either Kustomization or Helm for managing Tenants moving forward.
 
