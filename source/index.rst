@@ -106,6 +106,7 @@ For more about connecting to ``play``, see :ref:`MinIO Console play Login <minio
       /operations/external-iam
       /operations/server-side-encryption
       /operations/network-encryption
+      /operations/cert-manager
       /operations/checklists
       /operations/data-recovery
       /operations/troubleshooting
