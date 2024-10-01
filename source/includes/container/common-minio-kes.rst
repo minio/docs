@@ -99,10 +99,16 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
    # KES Configurations
 
    MINIO_KMS_KES_ENDPOINT=https://127.0.0.1:7373
-   MINIO_KMS_KES_CERT_FILE=/certs/minio-kes.cert
-   MINIO_KMS_KES_KEY_FILE=/certs/minio-kes.key
+   MINIO_KMS_KES_API_KEY=<API-key-identity-string-from-KES> # Replace with the key string for your credentials
    MINIO_KMS_KES_CAPATH=/certs/server.cert
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
+
+.. note::
+   
+   The API key is the preferred way to authenticate with the KES server.
+   If circumstances require it, specify the :envvar:`MINIO_KMS_KES_KEY_FILE` and :envvar:`MINIO_KMS_KES_CERT_FILE` instead of :envvar:`MINIO_KMS_KES_API_KEY`.
+   Specify *either* the API key *or* the Key File and Cert File.
+   Do *not* populate all three environment variables.
 
 MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 
