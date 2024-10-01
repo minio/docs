@@ -172,7 +172,7 @@ MinIO server host in the deployment:
        Specify the name of the key created in the previous step. 
 
 
-1) Restart the MinIO Deployment to Enable SSE-KMS
+3) Restart the MinIO Deployment to Enable SSE-KMS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 
