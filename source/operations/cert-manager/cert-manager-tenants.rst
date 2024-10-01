@@ -80,7 +80,7 @@ Before deploying a new tenant, create a Certificate Authority and Issuer for the
 
       kubectl apply -f tenant-1-ca-certificate.yaml
 
-4) Create the ``Issuer``
+2) Create the ``Issuer``
 ------------------------
 
 The ``Issuer`` issues the certificates within the tenant namespace.
