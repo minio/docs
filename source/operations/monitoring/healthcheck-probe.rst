@@ -39,6 +39,8 @@ a Prometheus :ref:`alert <minio-metrics-and-alerts>` using the
 ``minio_cluster_nodes_offline_total`` metric to detect whether one or
 more MinIO nodes are offline.
 
+.. _minio-cluster-write-quorum:
+
 Cluster Write Quorum
 --------------------
 

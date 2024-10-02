@@ -148,9 +148,19 @@ MinIO server host in the deployment:
    :class: copyable
 
    export MINIO_KMS_KES_ENDPOINT=https://play.min.io:7373
-   export MINIO_KMS_KES_KEY_FILE=root.key
-   export MINIO_KMS_KES_CERT_FILE=root.cert
+   export MINIO_KMS_KES_API_KEY=<API-key-identity-string-from-KES> # Replace with the key string for your credentials
    export MINIO_KMS_KES_KEY_NAME=my-minio-sse-s3-key
+
+.. note::
+   
+   - An API key is the preferred way to authenticate with the KES server, as it provides a streamlined and secure authentication process to the KES server.
+
+   - Alternatively, specify the :envvar:`MINIO_KMS_KES_KEY_FILE` and :envvar:`MINIO_KMS_KES_CERT_FILE` instead of :envvar:`MINIO_KMS_KES_API_KEY`.
+     
+     API keys are mutually exclusive with certificate-based authentication. 
+     Specify *either* the API key variable *or* the Key File and Cert File variables.
+   
+   - The documentation on this site uses API keys.
 
 .. list-table::
    :stub-columns: 1

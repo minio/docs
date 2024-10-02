@@ -164,7 +164,7 @@ If SFTP is enabled, the output resembles the following:
 
    enableSFTP: true
 
-.. _minio-certificate-key-file-sftp-k8s
+.. _minio-certificate-key-file-sftp-k8s:
 
 Connect to MinIO Using SFTP with a Certificate Key File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
