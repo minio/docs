@@ -100,11 +100,15 @@ To enable synchronous bucket notifications for *all configured remote targets*, 
 
 .. note::
 
-   MinIO maintains a per-remote queue of events (``10000`` by default) where it stores unsent and pending events.
+   For synchronous and asynchronous events, MinIO maintains a per-remote queue where it stores unsent and pending events.
+   The queue limit defaults to ``100000``.
 
-   For asynchronous or synchronous bucket notifications, MinIO discards new events if the queue fills.
+   MinIO discards new events if the queue fills with unsent messages.
+
    You can increase the queue size as necessary to better accommodate the rate of event send and processing of the MinIO deployment and remote target.
+   Use the ``QUEUE_LIMIT`` environment variable or configuration setting for your notification method to modify this limit.
 
+   For asynchronous events, MinIO allows a maximum of ``50000`` concurrent ``send`` calls.
 
 .. _minio-bucket-notifications-event-types:
 
