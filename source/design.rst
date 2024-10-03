@@ -219,7 +219,7 @@ Grids
 Header 1
 --------
 
-.. cond:: linux
+.. cond:: mindocs
 
    .. include:: /includes/common/common-design.rst
 

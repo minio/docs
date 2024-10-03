@@ -99,4 +99,4 @@ Binary Compression
 
    :mc-cmd:`mc admin update` compresses the binary before sending to all nodes in the deployment.
 
-This feature does not apply to :ref:`systemctl managed deployments <minio-upgrade-systemctl>`.
+This feature does not apply to :ref:`systemctl managed deployments <minio-baremetal>`.
