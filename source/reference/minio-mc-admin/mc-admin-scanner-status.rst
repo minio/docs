@@ -103,6 +103,9 @@ Parameters
 
    The maximum number of active paths to show.
    Use ``-1`` for an unlimited number of paths.
+
+   Limiting the number of paths shown can reduce the scrolling of the console window when there are a large number of drives being scanned.
+   
    If not specified, the results return for an unlimited number of active paths.
 
 .. mc-cmd:: -n
