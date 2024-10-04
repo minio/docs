@@ -36,11 +36,14 @@ Include any other environment variables as required for your deployment.
    MinIO automatically generates unique root credentials if all of the following conditions are true:
 
    - :kes-docs:`KES <tutorials/getting-started/>` Release 2024-03-01T18-06-46Z or later running
+  
    - **Have not** defined:
+  
      - ``MINIO_ROOT_USER`` variable 
      - ``MINIO_ROOT_PASSWORD`` variable 
   
    - **Have**:
+  
      - set up KES with a :kes-docs:`supported KMS target <#supported-kms-targets>`
      - disabled root access with the :ref:`MinIO environment variable <minio-disable-root-access>`
 
