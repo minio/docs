@@ -52,6 +52,7 @@ The :mc:`mc mirror` command synchronizes content to MinIO deployment, similar to
          mc [GLOBALFLAGS] mirror                            \
                           [--active-active]                 \
                           [--attr "string"]                 \
+                          [--checksum "value"]              \
                           [--disable-multipart]             \
                           [--dry-run]                       \
                           [--enc-kms "string"]              \
@@ -150,6 +151,22 @@ Parameters
 
    Add custom metadata for mirrored objects. Specify key-value pairs as ``KEY=VALUE\;``. 
    For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
+
+.. mc-cmd:: --checksum
+   :optional:
+
+   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
+
+   Add a checksum to an uploaded object. 
+   
+   Valid values are: 
+   - ``MD5``
+   - ``CRC32``
+   - ``CRC32C``
+   - ``SHA1``
+   - ``SHA256``
+
+   The flag requires server trailing headers and works with AWS or MinIO targets.
 
 .. mc-cmd:: --disable-multipart
    :optional:

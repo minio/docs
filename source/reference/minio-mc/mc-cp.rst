@@ -142,6 +142,22 @@ Parameters
    Specify key-value pairs as ``KEY=VALUE\;``. 
    For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
 
+.. mc-cmd:: --checksum
+   :optional:
+
+   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
+
+   Add a checksum to an uploaded object. 
+   
+   Valid values are: 
+   - ``MD5``
+   - ``CRC32``
+   - ``CRC32C``
+   - ``SHA1``
+   - ``SHA256``
+
+   The flag requires server trailing headers and works with AWS or MinIO targets.
+
 .. mc-cmd:: --disable-multipart
    :optional:
 
@@ -166,6 +182,10 @@ Parameters
 
 .. mc-cmd:: --md5
    :optional:
+
+   .. versionchanged:: RELEASE.2024-10-02T08-27-28Z
+
+      Replaced by the :mc-cmd:`~mc cp --checksum` flag.
 
    Forces all uploads to calculate MD5 checksums. 
 

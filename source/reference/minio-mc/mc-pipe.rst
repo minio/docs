@@ -39,12 +39,13 @@ The :mc:`mc pipe` command streams content from `STDIN <https://www.gnu.org/softw
 
          mc [GLOBALFLAGS] pipe                              \
                           TARGET                            \
+                          [--attr "string"]                 \
+                          [--checksum "string"]             \
                           [--enc-kms "string"]              \
                           [--enc-s3 "string"]               \
                           [--enc-c "string"]                \
                           [--storage-class, --sc "string"]  \
-                          [--attr "string"]                 \
-                          [--tags "string"]                 \
+                          [--tags "string"] 
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -69,6 +70,22 @@ Parameters
 
    Specify key-value pairs as ``KEY=VALUE\;``, separating each pair with a back slash and semicolon (``\;``). 
    For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
+
+.. mc-cmd:: --checksum
+   :optional:
+
+   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
+
+   Add a checksum to an uploaded object. 
+   
+   Valid values are: 
+   - ``MD5``
+   - ``CRC32``
+   - ``CRC32C``
+   - ``SHA1``
+   - ``SHA256``
+
+   The flag requires server trailing headers and works with AWS or MinIO targets.
 
 .. block include of enc-c , enc-s3, and enc-kms
 

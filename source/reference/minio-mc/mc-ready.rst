@@ -23,27 +23,27 @@ The :mc:`mc ready` command checks the status of a cluster and whether the cluste
 
    .. tab-item:: EXAMPLE
 
-      The following sends a ``GET`` request to the cluster and returns its status.
+      The following sends a ``GET`` request to the cluster at alias ``myminio`` and returns its status.
 
       .. code-block:: shell
          :class: copyable
 
-         mc ready play
+         mc ready myminio
 
-      The command sends a ``GET`` request to the deployment at the :mc:`~mc alias` ``play``.'
+      The command sends a ``GET`` request to the deployment at the :mc:`~mc alias` ``myminio``.'
       The command repeats the request until it is successful.
 
-      The output before a cluster is ready resembles the following:
+      The output before the cluster at alias ``myminio`` is ready resembles the following:
 
-      .. code-block:: shell
+      .. code-block:: text
 
-         The cluster is unreachable: Get "http://play.min.io:9000/minio/health/cluster": dial tcp 127.0.0.1:9000: connect: connection refused
+         The cluster `myminio` is unreachable: Get "http://myminio.example.com:9000/minio/health/cluster": dial tcp 198.51.100.0:9000: connect: connection refused
 
-      Once the request succeeds, the output resembles the following:
+      Once the request succeeds in connecting to the ``myminio`` deployment, the output resembles the following:
      
-      .. code-block:: shell
+      .. code-block:: text
 
-         The cluster is ready
+         The cluster `myminio` is ready
 
    .. tab-item:: SYNTAX
 

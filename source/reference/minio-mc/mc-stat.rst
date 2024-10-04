@@ -26,7 +26,7 @@ You can also use it to retrieve bucket metadata.
 
 .. end-mc-stat-desc
 
-You can also use :mc:`mc stat` against the local filesystem to produce similar results to the ``stat`` commandline tool.
+You can use :mc:`mc stat` against the local filesystem to produce similar results to the ``stat`` commandline tool.
 
 .. tab-set::
 
