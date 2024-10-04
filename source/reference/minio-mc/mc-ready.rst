@@ -37,7 +37,7 @@ The :mc:`mc ready` command checks the status of a cluster and whether the cluste
 
       .. code-block:: text
 
-         The cluster is `myminio` is unreachable: Get "http://myminio.example.com:9000/minio/health/cluster": dial tcp 198.51.100.0:9000: connect: connection refused
+         The cluster `myminio` is unreachable: Get "http://myminio.example.com:9000/minio/health/cluster": dial tcp 198.51.100.0:9000: connect: connection refused
 
       Once the request succeeds in connecting to the ``myminio`` deployment, the output resembles the following:
      

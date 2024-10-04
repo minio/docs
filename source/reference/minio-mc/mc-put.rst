@@ -99,7 +99,7 @@ Parameters
 
    .. versionadded:: RELEASE.2024-10-02T08-27-28Z
    
-   Disables uploading using the multipart feature, instead putting the object in a single operation.
+   Disables multipart uploads and directs ``mc`` to send the object in a single ``PUT`` operation.
 
 .. block include of enc-c , enc-s3, and enc-kms
 
