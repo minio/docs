@@ -46,6 +46,8 @@ The :mc:`mc put` uploads an object from the local file system to a bucket on a t
 
          mc [GLOBALFLAGS] put                      \
                           TARGET                   \
+                          [--checksum value]       \
+                          [--disable-multipart]    \
                           [--enc-kms value]        \
                           [--enc-s3 value]         \
                           [--enc-c value]          \
@@ -75,6 +77,29 @@ Parameters
    - ``ALIAS/BUCKET/PREFIX``
    - ``ALIAS/BUCKET/OBJECT-NAME``
    - ``ALIAS/BUCKET/PREFIX/OBJECT-NAME``
+
+.. mc-cmd:: --checksum
+   :optional:
+
+   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
+
+   Add a checksum to an uploaded object. 
+   
+   Valid values are: 
+   - ``MD5``
+   - ``CRC32``
+   - ``CRC32C``
+   - ``SHA1``
+   - ``SHA256``
+
+   The flag requires server trailing headers and works with AWS or MinIO targets.
+
+.. mc-cmd:: --disable-multipart
+   :optional:
+
+   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
+   
+   Disables uploading using the multipart feature, instead putting the object in a single operation.
 
 .. block include of enc-c , enc-s3, and enc-kms
 
