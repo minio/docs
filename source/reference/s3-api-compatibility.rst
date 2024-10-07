@@ -44,6 +44,14 @@ Object Locking
 - :s3-api:`GetObjectLockConfiguration <API_GetObjectLockConfiguration.html>`
 - :s3-api:`PutObjectLockConfiguration <API_PutObjectLockConfiguration.html>`
 
+Unsupported API Object Endpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: text
+
+   GetObjectAcl
+   PutObjectAcl
+
 Multipart Uploads
 ~~~~~~~~~~~~~~~~~
 
@@ -55,13 +63,11 @@ Multipart Uploads
 - :s3-api:`UploadPart <API_UploadPart.html>`
 - :s3-api:`UploadPartCopy <API_UploadPartCopy.html>`
 
-Unsupported API Object Endpoints
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Differences from S3 APIs for Multipart Uploads
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: text
-
-   GetObjectAcl
-   PutObjectAcl
+- `ListMultipartUploads` requires exact object name as prefix
+- `AbortMultipartUpload` is not supported with `PutBucketLifecycle`
 
 Bucket APIs
 -----------
@@ -114,8 +120,8 @@ Bucket Policies
 - :s3-api:`PutBucketPolicy <API_PutBucketPolicy.html>`
 - :s3-api:`DeleteBucketPolicy <API_DeleteBucketPolicy.html>`
 
-Unsupported API Bucket Endpoints
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Unsupported API Bucket Operations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: text
 
@@ -151,3 +157,11 @@ Unsupported API Bucket Endpoints
    ListBucketAnalyticsConfigurations
    DeleteBucketAnalyticsConfiguration
    CreateSession
+
+MinIO alternatives for unsupported Bucket resources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- For calls to ``BucketACL`` or ``ObjectACL`` operations, use :ref:`Policies <minio-policy>`.
+- Calls to ``BucketCORS`` operations are not needed because CORS is enabled by default on all buckets for all HTTP verbs.
+- For calls to ``BucketWebsite`` operations, use ``caddy`` or ``nginx``.
+- For calls to ``BucketAnalytics``, ``BucketMetrics``, or ``BucketLogging`` operations, use :ref:`Bucket Notifications <minio-bucket-notifications>`.
