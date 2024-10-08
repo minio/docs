@@ -64,10 +64,10 @@ Multipart Uploads
 - :s3-api:`UploadPartCopy <API_UploadPartCopy.html>`
 
 Differences from S3 APIs for Multipart Uploads
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++
 
-- ``ListMultipartUploads`` requires the exact object name as a prefix
-- The ``AbortIncompleteMultipartUpload`` lifecycle action is not supported with ``PutBucketLifecycle``
+- ``ListMultipartUploads`` requires the exact object name as a prefix.
+- The ``AbortIncompleteMultipartUpload`` lifecycle action is not supported with ``PutBucketLifecycle``.
 
 Bucket APIs
 -----------
