@@ -60,25 +60,22 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The S3 service :ref:`alias <alias>` and bucket to
-   which the command lists event notification. For example:
+   The S3 service :ref:`alias <alias>` and bucket to which the command lists event notification. 
+   For example:
 
    .. code-block:: shell
 
-      mc event add play/mybucket
+      mc event ls play/mybucket ARN...
 
 .. mc-cmd:: ARN
+   :required:
 
-   *Required* The :aws-docs:`Amazon Resource Name (ARN)
-   <IAM/latest/UserGuide/reference-arns>` of the bucket resource.
+   The :aws-docs:`Amazon Resource Name (ARN) <IAM/latest/UserGuide/reference-arns>` of the bucket resource.
 
-   The MinIO server outputs an ARN for each configured notification target at
-   server startup. See
-   :ref:`Bucket Notifications <minio-bucket-notifications>` for more
-   information.
-
-
+   The MinIO server outputs an ARN at startup for each configured notification target. 
+   See :ref:`Bucket Notifications <minio-bucket-notifications>` for more information.
 
 
 Global Flags
