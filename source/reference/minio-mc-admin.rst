@@ -95,6 +95,11 @@ The following table lists :mc:`mc admin` commands:
           :start-after: start-mc-admin-replicate-desc
           :end-before: end-mc-admin-replicate-desc
 
+   * - :mc-cmd:`mc admin scanner`
+     - .. include:: /reference/minio-mc-admin/mc-admin-scanner.rst
+          :start-after: start-mc-admin-scanner-desc
+          :end-before: end-mc-admin-scanner-desc
+
    * - :mc-cmd:`mc admin service`
      - .. include:: /reference/minio-mc-admin/mc-admin-service.rst
           :start-after: start-mc-admin-service-desc
@@ -182,6 +187,7 @@ See :ref:`minio-mc-global-options`.
    /reference/minio-mc-admin/mc-admin-prometheus
    /reference/minio-mc-admin/mc-admin-rebalance
    /reference/minio-mc-admin/mc-admin-replicate
+   /reference/minio-mc-admin/mc-admin-scanner
    /reference/minio-mc-admin/mc-admin-service
    /reference/minio-mc-admin/mc-admin-trace
    /reference/minio-mc-admin/mc-admin-update
