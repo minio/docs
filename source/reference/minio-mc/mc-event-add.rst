@@ -67,8 +67,8 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
 
-   The MinIO :ref:`alias <alias>` and bucket to
-   which the command adds the new event notification. For example:
+   The MinIO :ref:`alias <alias>` and bucket to which the command adds the new event notification. 
+   For example:
 
    .. code-block:: shell
 
@@ -94,15 +94,16 @@ Parameters
    - ``delete``
 
    Specify multiple value using a comma ``,`` delimiter.
+   Do not add any whitespace between values.
 
-   If note specified, defaults to ``put,delete,get``.
+   If not specified, defaults to ``put,delete,get``.
 
    See :ref:`mc-event-supported-events` for a detailed list of S3 events associated to each of the supported values.
 
 .. mc-cmd:: ignore-existing, p
    :optional:
 
-   Directs MinIO to ignore applying the specified event triggers if an existing matching trigger exists.
+   Directs MinIO to ignore the specified event triggers if a matching trigger already exists.
 
 .. mc-cmd:: --prefix
    :optional:

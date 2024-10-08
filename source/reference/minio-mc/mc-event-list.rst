@@ -67,14 +67,14 @@ Parameters
 
    .. code-block:: shell
 
-      mc event add play/mybucket
+      mc event ls play/mybucket ARN...
 
 .. mc-cmd:: ARN
    :required:
 
    The :aws-docs:`Amazon Resource Name (ARN) <IAM/latest/UserGuide/reference-arns>` of the bucket resource.
 
-   The MinIO server outputs an ARN for each configured notification target at server startup. 
+   The MinIO server outputs an ARN at startup for each configured notification target. 
    See :ref:`Bucket Notifications <minio-bucket-notifications>` for more information.
 
 

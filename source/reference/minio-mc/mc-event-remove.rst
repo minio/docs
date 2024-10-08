@@ -79,7 +79,7 @@ Parameters
 
    The :aws-docs:`Amazon Resource Name (ARN) <IAM/latest/UserGuide/reference-arns>` of the notification target.
 
-   The MinIO server outputs an ARN for each configured notification target at server startup. 
+   The MinIO server outputs an ARN at startup for each configured notification target. 
    See :ref:`minio-bucket-notifications` for more information.
 
    Retrieve the ARN by running :mc:`mc event ls` on the bucket.
@@ -87,7 +87,7 @@ Parameters
 .. mc-cmd:: --event
    :optional:
 
-   The event type(s) specified when adding the event. 
+   The event type(s) specified when the event was added. 
    The entries **must** match the values used when adding the event.
    If no event matches the list of event types, the command returns a ``no notification configuration matched`` error.
 
