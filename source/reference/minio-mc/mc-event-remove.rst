@@ -89,9 +89,10 @@ Parameters
 
    The event type(s) specified when adding the event. 
    The entries **must** match the values used when adding the event.
+   If no event matches the list of event types, the command returns a ``no notification configuration matched`` error.
 
    Specify multiple events using a comma ``,`` delimiter. 
-   See :ref:`mc-event-supported-events` for supported events.
+   See :ref:`mc-event-supported-events` for supported event types.
 
    Defaults to removing an event that triggers for all event types on the :mc-cmd:`~mc event rm ALIAS` bucket with the :mc-cmd:`~mc event rm ARN` notification target.
 
