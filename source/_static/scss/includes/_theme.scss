@@ -60,6 +60,7 @@ $theme-properties: (
 
     // Table
     --table-border-color: $light-300 $dark-200,
+    --table-th-bg: $light-100 darken($dark-200, 5%),
 
     // Code
     --code-bg: $light-200 lighten($dark-500, 17.5%),

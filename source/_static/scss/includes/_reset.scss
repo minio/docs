@@ -221,24 +221,36 @@ table {
 // ----------------------
 // Table
 // ----------------------
+table,
 table.docutils {
+    all: revert;
     box-shadow: none;
     margin: 1rem 0 2rem;
     width: 100%;
+    border-collapse: collapse;
+
+    & > thead {
+        tr.header {
+            background: transparent;
+            box-shadow: none;
+        }
+    }
 
     td,
     th {
-        border-color: var(--table-border-color);
+        border: 1px solid var(--table-border-color);
         padding: 0.75rem 1rem;
         line-height: 1.5;
         vertical-align: top;
         text-align: left;
+        background: transparent;
     }
 
     th {
         font-weight: $font-weight-medium;
         color: var(--headings-color);
         font-size: $font-size-sm;
+        background-color: var(--table-th-bg);
     }
 
     caption {
@@ -266,24 +278,26 @@ table.docutils {
 
         tr {
             &:first-child {
-                th {
-                    border-top-color: transparent;
+                th,
+                th.stub ~ td {
+                    border-top-width: 0;
                 }
             }
 
             &:last-child {
+                th,
                 td {
-                    border-bottom-color: transparent;
+                    border-bottom-width: 0;
                 }
             }
 
             td, th {
                 &:first-child {
-                    border-left-color: transparent;
+                    border-left-width: 0;
                 }
 
                 &:last-child {
-                    border-right-color: transparent;
+                    border-right-width: 0;
                 }
             }
         }
