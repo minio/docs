@@ -66,8 +66,8 @@ Multipart Uploads
 Differences from S3 APIs for Multipart Uploads
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- `ListMultipartUploads` requires exact object name as prefix
-- `AbortMultipartUpload` is not supported with `PutBucketLifecycle`
+- ``ListMultipartUploads`` requires exact object name as prefix
+- ``AbortMultipartUpload`` is not supported with ``PutBucketLifecycle``
 
 Bucket APIs
 -----------
