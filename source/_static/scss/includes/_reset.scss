@@ -221,10 +221,18 @@ table {
 // ----------------------
 // Table
 // ----------------------
+table,
 table.docutils {
     box-shadow: none;
     margin: 1rem 0 2rem;
     width: 100%;
+
+    & > thead {
+        tr.header {
+            background: transparent;
+            box-shadow: none;
+        }
+    }
 
     td,
     th {
@@ -233,6 +241,7 @@ table.docutils {
         line-height: 1.5;
         vertical-align: top;
         text-align: left;
+        background: transparent;
     }
 
     th {
