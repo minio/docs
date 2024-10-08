@@ -94,19 +94,6 @@ Erasure Code Limits
    * - Write quorum
      - :math:`(N/2)+1`
 
-
-Unsupported S3 Bucket APIs
---------------------------
-
-MinIO does not support the following API calls available in S3.
-These APIs are either redundant or only provide functionality within AWS S3.
-
-- ``BucketACL``, ``ObjectACL`` (use :ref:`Policies <minio-policy>`)
-- ``BucketCORS`` (CORS enabled by default on all buckets for all HTTP verbs)
-- ``BucketWebsite`` (use ``caddy`` or ``nginx``)
-- ``BucketAnalytics``, ``BucketMetrics``, ``BucketLogging`` (use :ref:`Bucket Notifications <minio-bucket-notifications>`)
-- ``BucketRequestPayment``
-
 Object Name Limitations
 -----------------------
 
@@ -116,7 +103,7 @@ Filesystem and Operating System Restrictions
 Object Names in MinIO are restricted primarily by the local operating system and filesystem.
 Windows and some other operating systems restrict file systems with certain special characters, such as ``^``, ``*``, ``|``, ``\``, ``/``, ``&``, ``"``, or ``;``.
 
-The above list is not exhaustive and may not apply to your operating system and filesystem combination.
+This list is not exhaustive and may not apply to your operating system and filesystem combination.
 
 Consult your operating system vendor or filesystem documentation for a comprehensive list for your situation.
 
