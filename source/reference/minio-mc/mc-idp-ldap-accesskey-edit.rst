@@ -21,7 +21,7 @@ Description
 
 :mc:`mc idp ldap accesskey edit` modifies the specified :ref:`access key <minio-id-access-keys>` on the local server.
 
-.. end-mc-idp-ldap-accesskey-rm-desc
+.. end-mc-idp-ldap-accesskey-edit-desc
 
 .. tab-set::
 

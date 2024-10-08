@@ -65,8 +65,9 @@ Parameters
 ~~~~~~~~~~
 
 .. mc-cmd:: ALIAS
+   :required:
 
-   *Required* The MinIO :ref:`alias <alias>` and bucket to
+   The MinIO :ref:`alias <alias>` and bucket to
    which the command adds the new event notification. For example:
 
    .. code-block:: shell
@@ -74,19 +75,17 @@ Parameters
       mc event add play/mybucket
 
 .. mc-cmd:: ARN
+   :required:
 
-   *Required* The :aws-docs:`Amazon Resource Name (ARN)
-   <IAM/latest/UserGuide/reference-arns>` of the notification target.
+   The :aws-docs:`Amazon Resource Name (ARN) <IAM/latest/UserGuide/reference-arns>` of the notification target.
 
-   The MinIO server outputs an ARN for each configured
-   notification target at server startup. See
-   :ref:`Bucket Notifications <minio-bucket-notifications>` for more
-   information.
+   The MinIO server outputs an ARN for each configured notification target at server startup. 
+   See :ref:`Bucket Notifications <minio-bucket-notifications>` for more information.
 
 .. mc-cmd:: --event
+   :optional:
 
-
-   *Optional* The event(s) for which MinIO generates bucket notifications.
+   The event(s) for which MinIO generates bucket notifications.
 
    Supports the following values:
 
@@ -96,38 +95,30 @@ Parameters
 
    Specify multiple value using a comma ``,`` delimiter.
 
-   Defaults to ``put,delete,get``.
+   If note specified, defaults to ``put,delete,get``.
 
-   See :ref:`mc-event-supported-events` for a detailed list of S3 events
-   associated to each of the supported values.
+   See :ref:`mc-event-supported-events` for a detailed list of S3 events associated to each of the supported values.
 
 .. mc-cmd:: ignore-existing, p
+   :optional:
 
-
-   *Optional* Directs MinIO to ignore applying the specified event
-   triggers if an existing matching trigger exists.
+   Directs MinIO to ignore applying the specified event triggers if an existing matching trigger exists.
 
 .. mc-cmd:: --prefix
+   :optional:
 
+   The bucket prefix in which the specified :mc-cmd:`~mc event add --event` can trigger a bucket notification.
 
-   *Optional* The bucket prefix in which the specified
-   :mc-cmd:`~mc event add --event` can trigger a bucket notification.
-
-   For example, given a :mc-cmd:`~mc event add ALIAS` of ``play/mybucket``
-   and a :mc-cmd:`~mc event add --prefix` of ``photos``, only events in
-   ``play/mybucket/photos`` trigger bucket notifications.
+   For example, given a :mc-cmd:`~mc event add ALIAS` of ``play/mybucket`` and a :mc-cmd:`~mc event add --prefix` of ``photos``, only events in ``play/mybucket/photos`` trigger bucket notifications.
 
    Omit to trigger the event for all prefixes and objects in the bucket.
 
 .. mc-cmd:: --suffix
+   :optional:
 
+   The bucket suffix in which the specified :mc-cmd:`~mc event add --event` can trigger a bucket notification.
 
-   *Optional* The bucket suffix in which the specified
-   :mc-cmd:`~mc event add --event` can trigger a bucket notification.
-
-   For example, given a :mc-cmd:`~mc event add ALIAS` of ``play/mybucket``
-   and a :mc-cmd:`~mc event add --suffix` of ``.jpg``, only events in
-   ``play/mybucket/*.jpg`` trigger bucket notifications.
+   For example, given a :mc-cmd:`~mc event add ALIAS` of ``play/mybucket`` and a :mc-cmd:`~mc event add --suffix` of ``.jpg``, only events in ``play/mybucket/*.jpg`` trigger bucket notifications.
 
    Omit to trigger the event for all objects regardless of suffix.
 
