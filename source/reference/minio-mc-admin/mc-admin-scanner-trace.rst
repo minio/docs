@@ -83,7 +83,7 @@ Parameters
 .. mc-cmd:: --filter-size
    :optional:
 
-   Size limit of a filtered client operation or call.
+   Filter output to request sizes or response sizes greater than the specified size.
 
    Must be used with either :mc-cmd:`~mc admin scanner trace --filter-request` or :mc-cmd:`~mc admin scanner trace --filter-response` flag.
 
