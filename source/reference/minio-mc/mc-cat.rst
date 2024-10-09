@@ -65,7 +65,7 @@ display the contents of the specified file or object to ``STDOUT``.
          :end-before: end-minio-syntax
 
 
-You can also use :mc:`mc cat` against a local filesystem to produce similar results to the ``cat`` commandline tool:
+You can also use :mc:`mc cat` against a local filesystem to produce similar results to the ``cat`` commandline tool.
 
 Parameters
 ~~~~~~~~~~
