@@ -48,7 +48,7 @@ Do not perform "rolling" (that is, one node at a time) upgrade procedures.
 Permissions
 ~~~~~~~~~~~
 
-The user running the command **must** have ``write`` permissions to the target path where MinIO Server binary installs.
+The user running the command **must** have ``write`` permissions to the target path where the MinIO Server binary installs.
 
 Examples
 --------
