@@ -51,21 +51,21 @@ display the contents of the specified file or object to ``STDOUT``.
          :class: copyable
 
          mc [GLOBALFLAGS] cat                       \
+                          ALIAS [ALIAS ...]         \
                           [--enc-c "value"]         \
-                          [--tail "int"]            \
-                          [--rewind]                \
                           [--offset "int"]          \
+                          [--part-number "int"]     \
+                          [--rewind]                \
+                          [--tail "int"]            \
                           [--version-id "string"]   \
-                          [--zip]                   \
-                          ALIAS [ALIAS ...]
+                          [--zip] 
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
 
-You can also use :mc:`mc cat` against a local filesystem to produce similar
-results to the ``cat`` commandline tool:
+You can also use :mc:`mc cat` against a local filesystem to produce similar results to the ``cat`` commandline tool:
 
 Parameters
 ~~~~~~~~~~
@@ -105,6 +105,16 @@ Parameters
 
    Specify an integer that is the number of bytes from which the command offsets the output.
 
+   Mutually exclusive with the :mc-cmd:`~mc cat --part-number` flag.
+
+.. mc-cmd:: --part-number
+   :optional:
+
+   Download a specific part number of a multi-part upload.
+   Specify the integer of the part number to download.
+
+   Mutually exclusive with the :mc-cmd:`~mc cat --offset` and :mc-cmd:`~mc cat --tail` flags.
+
 .. mc-cmd:: --rewind
    :optional:
 
@@ -116,6 +126,8 @@ Parameters
    :optional:
 
    Specify an integer that is the number of bytes from which the command trims the output.
+
+   Mutually exclusive with the :mc-cmd:`~mc cat --part-number` flag.
 
 .. mc-cmd:: --version-id, vid
    :optional:
@@ -203,6 +215,25 @@ object:
 .. include:: /includes/facts-versioning.rst
    :start-after: start-versioning-admonition
    :end-before: end-versioning-admonition
+
+Download a particular part
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc-cmd:`mc cat --part-number` to download a particular part of a multi-part upload:
+
+.. code-block:: shell
+   :class: copyable
+
+   mc cat ALIAS/PATH --part-number=#
+
+- Replace :mc-cmd:`ALIAS <mc cat ALIAS>` with the :mc:`alias <mc alias>` of the S3-compatible host.
+
+- Replace :mc-cmd:`PATH <mc cat ALIAS>` with the path to the object on the S3-compatible host.
+
+- Replace ``#`` with the integer of the part number to download.
+  For example, to download part 3 of at 16-part multi-part file, use ``--part-number=3``.
+
+You cannot use the ``--part-number`` flag if you are using either the ``--offset`` or the ``--tail`` flags.
 
 Behavior
 --------
