@@ -22,7 +22,8 @@ The command also supports using a private mirror server for environments where t
 
 After running the command, a prompt displays to confirm the update.
 Type ``y`` and ``[ENTER]`` to confirm and proceed with the update.
-You may need to use ``sudo`` if your user does not have write permissions for the path where ``mc`` is installed.
+
+The user **must** have ``write`` permissions for the target location where the binary installs.
 
 .. admonition:: Use ``mc admin`` on MinIO Deployments Only
    :class: note
@@ -43,6 +44,11 @@ MinIO operations are atomic and strictly consistent and as such the restart proc
 
 MinIO strongly recommends only performing simultaneous upgrade-and-restart procedures. 
 Do not perform "rolling" (that is, one node at a time) upgrade procedures.
+
+Permissions
+~~~~~~~~~~~
+
+The user running the command **must** have ``write`` permissions to the target path where the MinIO Server binary installs.
 
 Examples
 --------

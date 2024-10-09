@@ -123,7 +123,7 @@ The following command updates a MinIO deployment with the specified :ref:`alias 
 
    mc admin update ALIAS
 
-The command may fail if the user which a ``minio`` server process runs as does not have read/write permissions to the path of the binary itself.
+The user running the ``mc admin update`` command **must** have ``write`` permissions to the location where the binary installs.
 
 You can specify a URL resolving to a specific MinIO server binary version.
 Airgapped or internet-isolated deployments may utilize this feature for updating from an internally-accessible server:
