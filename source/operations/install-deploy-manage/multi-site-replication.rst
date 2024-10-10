@@ -427,7 +427,7 @@ The new site must meet the following requirements:
    .. tab-item:: Command Line
       :sync: cli
 
-      #. Deploy the new MinIO peer site(s) following the stated requirements.
+      #. Deploy the new MinIO peer site(s) following the stated requirements
 
 
       #. Configure an alias for the new site
@@ -453,13 +453,17 @@ The new site must meet the following requirements:
       #. Add site replication configuration
 
          Use the :mc-cmd:`mc admin replicate add` command to expand the site replication configuration with the new peer site.
-         Specify the alias of any existing healthy peer site as the first parameter and the alias of the new site as the second parameter.
+         Specify the alias of *all* existing peer sites, then the alias of the new site to add.
 
-         For example, the following command adds the new peer site ``minio4`` to an existing site replication configuration on ``minio1``.
+         For example, the following command adds the new peer site ``minio4`` to an existing site replication configuration that includes the existing sites ``minio1``, ``minio2``, and ``minio3``.
       
          .. code-block:: shell
          
-            mc admin replicate add minio1 minio4
+            mc admin replicate add minio1 minio2 minio3 minio4
+
+         .. note::
+
+            If any of the sites are unreachable or permanently lost, you **must** first remove the unreachable site(s) with :mc-cmd:`mc admin replicate rm` before expanding with the new site.
       
       #. Query the site replication configuration to verify
       

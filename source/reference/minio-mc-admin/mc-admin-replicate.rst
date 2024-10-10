@@ -97,13 +97,17 @@ Syntax
 
             mc admin replicate add minio1 minio2 minio3
 
-         The following command expands an existing site replication that includes peer site ``minio1`` to an additional peer site, ``minio5``.
+         The following command expands an existing site replication that includes peer sites ``minio1``, ``minio2``, ``minio3``, and ``minio4`` to an additional peer site, ``minio5``.
          ``minio5`` contains no data.
+         List *all* existing peer sites first.
+         List the site to expand to last.
+
+         If any existing sites are unreachable, first remove the unreachable sites with :mc-cmd:`mc admin replicate rm`, then proceed with the site replication expansion.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin replicate add minio1 minio5
+            mc admin replicate add minio1 minio2 minio3 minio4 minio5
 
          The following command creates a new site replication configuration with ILM expiration rule synchronization between peer sites ``minio1``, ``minio2``, and ``minio3``.
          
@@ -134,9 +138,9 @@ Syntax
       Only the first alias can have buckets or objects.
       The first site can also be empty.
 
-      To expand an existing site replication to one more new replication sites, the first :ref:`alias <alias>` must be a peer site in the site replication set to expand.
+      To expand an existing site replication to one more new replication sites, list all existing peer site :ref:`aliases <alias>` in the site replication set to expand.
       Then include one or more additional :ref:`aliases <alias>` to add to the existing site replication.
-      The deployments to add must be empty.
+      The peers being added must be empty.
 
    .. mc-cmd:: --replicate-ilm-expiry
       :optional:
