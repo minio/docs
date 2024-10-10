@@ -138,9 +138,9 @@ Syntax
       Only the first alias can have buckets or objects.
       The first site can also be empty.
 
-      To expand an existing site replication to one more new replication sites, the first :ref:`alias <alias>` must be a peer site in the site replication set to expand.
+      To expand an existing site replication to one more new replication sites, list all existing peer site :ref:`aliases <alias>` in the site replication set to expand.
       Then include one or more additional :ref:`aliases <alias>` to add to the existing site replication.
-      The deployments to add must be empty.
+      The peers being added must be empty.
 
    .. mc-cmd:: --replicate-ilm-expiry
       :optional:

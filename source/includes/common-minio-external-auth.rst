@@ -241,7 +241,7 @@ For example:
 .. code-block:: shell
    :class: copyable
 
-   cn=miniousers;dc=myldapserver;dc=net
+   cn=miniousers,dc=myldapserver,dc=net;ou=swengg,dc=min,dc=io
 
 Supports :ref:`Lookup-Bind  <minio-external-identity-management-ad-ldap-lookup-bind>` mode.
 
