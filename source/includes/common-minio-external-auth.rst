@@ -233,12 +233,15 @@ The user can then use the passed SSH Public Key to log in to SFTP servers.
 
 Specify the base Distinguished Name (DN) MinIO uses when querying for 
 user credentials matching those provided by an authenticating client.
+
+Separate multiple DNs with a semicolon (``;``).
+
 For example:
 
 .. code-block:: shell
    :class: copyable
 
-   cn=miniousers,dc=myldapserver,dc=net
+   cn=miniousers;dc=myldapserver;dc=net
 
 Supports :ref:`Lookup-Bind  <minio-external-identity-management-ad-ldap-lookup-bind>` mode.
 
@@ -279,7 +282,7 @@ For example:
 
 .. start-minio-ad-ldap-group-search-base-dn
 
-Specify a comma-separated list of group search base Distinguished Names 
+Specify a semicolon-separated (``;``) list of group search base `Distinguished Names <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ldap/distinguished-names>`__
 MinIO uses when performing group lookups.
  
 For example:
@@ -287,7 +290,7 @@ For example:
 .. code-block:: shell
    :class: copyable
    
-   cn=miniogroups,dc=myldapserver,dc=net"
+   cn=miniogroups,dc=myldapserver,dc=net;ou=swengg,dc=min,dc=io
 
 .. end-minio-ad-ldap-group-search-base-dn
 
@@ -406,7 +409,7 @@ MinIO sends the token using the HTTP `Authorization <https://developer.mozilla.o
 
 .. start-minio-identity-management-role-policy
 
-Specify a comma separated list of MinIO :ref:`policies <minio-policy>` to assign to authenticated users.
+Specify a comma-separated list of MinIO :ref:`policies <minio-policy>` to assign to authenticated users.
 
 .. end-minio-identity-management-role-policy
 
