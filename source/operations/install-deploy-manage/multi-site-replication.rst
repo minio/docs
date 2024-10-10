@@ -427,7 +427,7 @@ The new site must meet the following requirements:
    .. tab-item:: Command Line
       :sync: cli
 
-      #. Deploy the new MinIO peer site(s) following the stated requirements.
+      #. Deploy the new MinIO peer site(s) following the stated requirements
 
 
       #. Configure an alias for the new site
