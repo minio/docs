@@ -1,8 +1,8 @@
-.. _minio-mc-admin-svcacct-disable:
+.. _minio-mc-admin-accesskey-disable:
 
-=================================
-``mc admin user svcacct disable``
-=================================
+==============================
+``mc admin accesskey disable``
+==============================
 
 .. default-domain:: minio
 
@@ -10,25 +10,17 @@
    :local:
    :depth: 2
 
-.. mc:: mc admin user svcacct disable
+.. mc:: mc admin accesskey disable
 
-
-.. important::
-
-   This command has been replaced and will be deprecated in a future MinIO Client release.
-
-   As of MinIO Client RELEASE.2024-10-08T09-37-26Z, use the :mc:`mc admin accesskey disable` command to disable an access key for a built-in MinIO IDP user.
-
-   To disable access keys for AD/LDAP users, use the :mc:`mc idp ldap accesskey disable` command.
 
 Syntax
 ------
 
-.. start-mc-admin-svcacct-disable-desc
+.. start-mc-admin-accesskey-disable-desc
 
-The :mc-cmd:`mc admin user svcacct disable` command disables an existing access key.
+The :mc-cmd:`mc admin accesskey disable` command disables an existing access key for a MinIO IDP user.
 
-.. end-mc-admin-svcacct-disable-desc
+.. end-mc-admin-accesskey-disable-desc
 
 .. tab-set::
 
@@ -39,7 +31,7 @@ The :mc-cmd:`mc admin user svcacct disable` command disables an existing access 
       .. code-block:: shell  
          :class: copyable 
   
-         mc admin user svcacct disable myminio myuserserviceaccount  
+         mc admin accesskey disable myminio myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 
@@ -48,9 +40,9 @@ The :mc-cmd:`mc admin user svcacct disable` command disables an existing access 
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin user svcacct disable         \  
-                                             ALIAS           \  
-                                             SERVICEACCOUNT 
+         mc [GLOBALFLAGS] admin accesskey disable         \  
+                                          ALIAS           \  
+                                          SERVICEACCOUNT 
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -68,7 +60,7 @@ Parameters
 .. mc-cmd:: SERVICEACCOUNT
    :required:
 
-   The service account access key to disable.
+   The access key to disable.
 
 
 Global Flags

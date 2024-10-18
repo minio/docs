@@ -65,6 +65,14 @@ They are listed here for historical reference only.
 
    To perform root credential rotation, modify the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` environment variables.
 
+.. envvar:: MINIO_OPERATOR_DEPLOYMENT_NAME
+
+   .. deprecated:: Operator 6.0.4
+
+   Specifies the namespace to create and use for Operator.
+
+   When not specified, the default value is ``minio-operator``.
+
 .. envvar:: MINIO_SECRET_KEY_OLD
 
    .. deprecated:: RELEASE.2021-04-22T15-44-28Z

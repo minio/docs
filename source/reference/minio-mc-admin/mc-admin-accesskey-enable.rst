@@ -1,8 +1,8 @@
-.. _minio-mc-admin-svcacct-enable:
+.. _minio-mc-admin-accesskey-enable:
 
-================================
-``mc admin user svcacct enable``
-================================
+=============================
+``mc admin accesskey enable``
+=============================
 
 .. default-domain:: minio
 
@@ -10,25 +10,17 @@
    :local:
    :depth: 2
 
-.. mc:: mc admin user svcacct enable
-
-.. important::
-
-   This command has been replaced and will be deprecated in a future MinIO Client release.
-
-   As of MinIO Client RELEASE.2024-10-08T09-37-26Z, use the :mc:`mc admin accesskey enable` command to enable an access key for a built-in MinIO IDP user.
-
-   To enable access keys for AD/LDAP users, use the :mc:`mc idp ldap accesskey enable` command.
+.. mc:: mc admin accesskey enable
 
 
 Syntax
 ------
 
-.. start-mc-admin-svcacct-enable-desc
+.. start-mc-admin-accesskey-enable-desc
 
-The :mc-cmd:`mc admin user svcacct enable` command enables an existing access key.
+The :mc-cmd:`mc admin accesskey enable` command enables an existing access key.
 
-.. end-mc-admin-svcacct-enable-desc
+.. end-mc-admin-accesskey-enable-desc
 
 .. tab-set::
 
@@ -39,7 +31,7 @@ The :mc-cmd:`mc admin user svcacct enable` command enables an existing access ke
       .. code-block:: shell  
          :class: copyable 
   
-         mc admin user svcacct enable myminio myuserserviceaccount  
+         mc admin accesskey enable myminio myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 
@@ -48,9 +40,9 @@ The :mc-cmd:`mc admin user svcacct enable` command enables an existing access ke
       .. code-block:: shell  
          :class: copyable 
   
-         mc [GLOBALFLAGS] admin user svcacct enable          \  
-                                             ALIAS           \  
-                                             SERVICEACCOUNT 
+         mc [GLOBALFLAGS] admin accesskey enable          \  
+                                          ALIAS           \  
+                                          SERVICEACCOUNT 
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -68,7 +60,7 @@ Parameters
 .. mc-cmd:: SERVICEACCOUNT
    :required:
 
-   The service account access key to enable.
+   The access key to enable.
 
 
 Global Flags
