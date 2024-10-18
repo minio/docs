@@ -12,6 +12,14 @@
 
 .. mc:: mc admin user svcacct
 
+.. important::
+
+   These commands have been replaced and will be deprecated in a future MinIO Client release.
+
+   As of MinIO Client RELEASE.2024-10-08T09-37-26Z, use the :mc:`mc admin accesskey` command and its subcommands for functions related to built-in MinIO IDP users and their access keys or STS tokens.
+
+   For access keys for AD/LDAP users, use the :mc:`mc idp ldap accesskey` command and its subcommands.
+
 Description
 -----------
 
@@ -19,9 +27,12 @@ Description
 
 The :mc:`mc admin user svcacct` command and its subcommands create and manage :ref:`Access Keys <minio-idp-service-account>` on a MinIO deployment.
 
+As of MinIO Client RELEASE.2024-10-08T09-37-26Z, these commands have been replaced by :mc:`mc admin accesskey` and :mc:`mc idp ldap accesskey`.
+This command and its subcommands will be deprecated in a future MinIO Client release.
+
 .. end-mc-admin-user-svcacct-desc
 
-Each access key is linked to a :ref:`user identity <minio-authentication-and-identity-management>` and inherits the :ref:`policies <minio-policy>` attached to it's parent user *or* those groups in which the parent user has membership.
+Each access key is linked to a :ref:`user identity <minio-authentication-and-identity-management>` and inherits the :ref:`policies <minio-policy>` attached to its parent user *or* those groups in which the parent user has membership.
 Each access key also supports an optional inline policy which further restricts access to a subset of actions and resources available to the parent user.
 
 :mc:`mc admin user svcacct` only supports creating access keys for :ref:`MinIO-managed <minio-users>` and :ref:`Active Directory/LDAP-managed <minio-external-identity-management-ad-ldap>` accounts. 

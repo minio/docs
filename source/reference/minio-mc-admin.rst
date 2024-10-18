@@ -35,6 +35,11 @@ The following table lists :mc:`mc admin` commands:
    * - Command
      - Description
 
+   * - :mc:`mc admin accesskey`
+     - .. include:: /reference/minio-mc-admin/mc-admin-accesskey.rst
+          :start-after: start-mc-admin-accesskey-desc
+          :end-before: end-mc-admin-accesskey-desc
+
    * - :mc:`mc admin cluster bucket`
      - .. include:: /reference/minio-mc-admin/mc-admin-cluster-bucket.rst
           :start-after: start-mc-admin-cluster-bucket-desc
@@ -174,6 +179,7 @@ See :ref:`minio-mc-global-options`.
    :hidden:
    :glob:
 
+   /reference/minio-mc-admin/mc-admin-accesskey
    /reference/minio-mc-admin/mc-admin-cluster-bucket
    /reference/minio-mc-admin/mc-admin-cluster-iam
    /reference/minio-mc-admin/mc-admin-config

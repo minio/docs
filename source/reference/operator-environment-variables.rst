@@ -63,12 +63,6 @@ Available MinIO Operator Environment Variables
 
    The password Operator should use to decrypt the private key in the TLS certificate for Operator.
 
-.. envvar:: MINIO_OPERATOR_DEPLOYMENT_NAME
-
-   Specifies the namespace to create and use for Operator.
-
-   When not specified, the default value is ``minio-operator``.
-
 .. envvar:: OPERATOR_STS_ENABLED
 
    Toggle STS Service ``on`` or ``off``.
