@@ -12,6 +12,14 @@
 
 .. mc:: mc admin user svcacct info
 
+.. important::
+
+   This command has been replaced and will be deprecated in a future MinIO Client release.
+
+   As of MinIO Client RELEASE.2024-10-08T09-37-26Z, use the :mc:`mc admin accesskey info` command to display information about access keys for built-in MinIO IDP users.
+
+   For access keys for AD/LDAP users, use the :mc:`mc idp ldap accesskey info` command.
+
 
 Syntax
 ------
