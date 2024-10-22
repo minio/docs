@@ -69,7 +69,7 @@ Parameters
 .. mc-cmd:: ACCESSKEY
    :required:
 
-   The service account access key to display.
+   The access key to display.
 
    Return information for multiple access keys by separating each access key with a space.
 

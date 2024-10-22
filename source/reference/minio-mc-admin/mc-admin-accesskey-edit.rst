@@ -77,13 +77,13 @@ Parameters
 .. mc-cmd:: --description
    :optional:
 
-   Add or modify a description for the service account.
-   For example, you might specify the reason the service account exists.
+   Add or modify a description for the access key.
+   For example, you might specify the reason the access key exists.
 
 .. mc-cmd:: --expiry
    :optional:
 
-   Set or modify an expiration date for the service account.
+   Set or modify an expiration date for the access key.
    The date must be in the future, you may not set an expiration date that has already passed.
 
    Allowed date and time formats:
@@ -113,7 +113,7 @@ Parameters
 .. mc-cmd:: --name
    :optional:
 
-   Add or modify a human-readable name for the service account.
+   Add or modify a human-readable name for the access key.
 
 .. mc-cmd:: --policy
    :optional:

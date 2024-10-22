@@ -96,13 +96,13 @@ Parameters
 .. mc-cmd:: --description
    :optional:
 
-   Add a description for the service account.
-   For example, you might specify the reason the service account exists.
+   Add a description for the access key.
+   For example, you might specify the reason the access key exists.
 
 .. mc-cmd:: --expiry
    :optional:
 
-   Set an expiration date for the service account.
+   Set an expiration date for the access key.
    The date must be in the future.
    You may not set an expiration date that has already passed.
 
@@ -121,8 +121,8 @@ Parameters
 
    Length of time for which the accesskey remains valid.
 
-   For example, ``30d``, ``24h``, or similar.
-   To expire the credentials after 30 days, use:
+   For example, ``30m, ``24h``, ``30d``, or similar.
+   The following expires the credentials after 30 days:
 
    .. code-block::
 
@@ -133,7 +133,7 @@ Parameters
 .. mc-cmd:: --name
    :optional:
 
-   Add a human-readable name for the service account.
+   Add a human-readable name for the access key.
 
 .. mc-cmd:: --policy
    :optional:
@@ -162,7 +162,7 @@ Examples
 Create access key / secret key pair for the authenticated user
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command generates a new and random access key and random secret key pair for the user currently logged in to MinIO deployment at the alias ``myminio``.
+The following command generates a new, random access key and secret key pair for the user currently logged in to MinIO deployment at the alias ``myminio``.
 The access key and secret key have the same access policies as the authenticated user.
 
 .. code-block:: shell
@@ -207,6 +207,7 @@ The credentials expire on the fifteenth day of January, 2025.
    mc admin accesskey create myminio/ --expiry 2025-01-15
 
 The date specified **must** be a future date.
+For valid datetime formats, see the :mc-cmd:`~mc admin accesskey create --expiry` flag.
 
 Create access key / secret key pair for a different user with custom access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
