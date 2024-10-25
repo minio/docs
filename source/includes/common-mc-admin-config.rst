@@ -54,6 +54,10 @@
      - | ``application/zip``
        | ``application-x-zip-compressed``
 
+   * - Smaller than 4 KiB
+     -
+     -
+
 .. end-minio-data-compression-default-excluded-desc
 
 .. start-minio-data-compression-default-desc
