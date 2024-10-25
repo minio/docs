@@ -48,14 +48,6 @@ MinIO restarts are fast, such that restarting all server processes in parallel t
 MinIO operations are atomic and strictly consistent, such that applications using MinIO or S3 SDKs can rely on the built-in :aws-docs:`transparent retry <general/latest/gr/api-retries.html>` without further client-side logic.
 This ensures upgrades are non-disruptive to ongoing operations.
 
-"Rolling" or serial "one-at-a-time" upgrade methods do not provide any advantage over the recommended "parallel" procedure, and can introduce unnecessary complexity to the upgrade procedure.
-For virtualized environments which *require* rolling updates, you should modify the recommended procedure as follows:
-
-1. Update the MinIO Binary in the virtual machine or container one at a time.
-2. Restart the MinIO deployment using :mc-cmd:`mc admin service restart`.
-3. Update the virtual machine/container configuration to use the matching newer MinIO image.
-4. Perform the rolling restart of each machine/container with the updated image.
-
 .. _minio-upgrade-systemctl:
 
 Update ``systemctl``-Managed MinIO Deployments
