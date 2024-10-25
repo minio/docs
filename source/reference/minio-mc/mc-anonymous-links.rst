@@ -67,7 +67,7 @@ Parameters
 
    .. code-block:: shell
             
-      mc links public [FLAGS] play/mybucket
+      mc anonymous links public [FLAGS] play/mybucket
 
 .. mc-cmd:: --recursive
    

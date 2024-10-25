@@ -69,7 +69,7 @@ Parameters
 
    .. code-block:: shell
             
-      mc get public play/mybucket
+      mc anonymous get public play/mybucket
 
 Global Flags
 ~~~~~~~~~~~~

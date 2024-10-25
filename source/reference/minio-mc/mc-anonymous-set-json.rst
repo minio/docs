@@ -72,7 +72,7 @@ Parameters
 
    .. code-block:: shell
             
-      mc set-json public play/mybucket
+      mc anonymous set-json public play/mybucket
 
 Global Flags
 ~~~~~~~~~~~~

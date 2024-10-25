@@ -65,7 +65,7 @@ Parameters
 
    .. code-block:: shell
             
-      mc get-json public play/mybucket
+      mc anonymous get-json public play/mybucket
 
 Global Flags
 ~~~~~~~~~~~~
