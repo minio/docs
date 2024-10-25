@@ -66,7 +66,7 @@ Parameters
 
    .. code-block:: shell
             
-      mc list public play/mybucket
+      mc anonymous list public play/mybucket
 
 Global Flags
 ~~~~~~~~~~~~

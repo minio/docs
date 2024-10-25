@@ -87,8 +87,8 @@ Parameters
    prefix. For example:
 
    .. code-block:: shell
-            
-      mc set public play/mybucket
+
+      mc anonymous set public play/mybucket
 
    Specify a bucket prefix to set the policy on only that prefix. For example,
    this command sets distinct anonymous bucket policies on the 
@@ -96,8 +96,8 @@ Parameters
 
    .. code-block:: shell
 
-      mc set download play/mybucket/downloads
-      mc set upload play/mybucket/uploads
+      mc anonymous set download play/mybucket/downloads
+      mc anonymous set upload play/mybucket/uploads
 
 Global Flags
 ~~~~~~~~~~~~
