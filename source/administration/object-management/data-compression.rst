@@ -48,7 +48,8 @@ You can control which objects are compressed by specifying the desired file exte
 Excluded File Types
 ~~~~~~~~~~~~~~~~~~~
 
-Some data cannot be effectively compressed, such as video, already compressed data, or very small files.
+Some data cannot be effectively compressed.
+For example: video, already compressed data, or very small files.
 MinIO does not compress common incompressible file types, even if they are specified in the compression configuration.
 
 Objects of these types are never compressed:
