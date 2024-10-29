@@ -98,6 +98,10 @@ See the :ref:`scanner <minio-concepts-scanner>` page for more details on how the
 ``DeleteMarkers`` are their own objects.
 Lifecycle rules can remove ``DeleteMarkers`` that are the only remaining versions of their objects.
 
+.. versionchanged:: MinIO RELEASE.2024-05-01T01-11-10Z
+
+With ``JSON``, lifecycle rules can remove all versions of a deleted object after a specified number of days.
+
 Retained Objects
 ----------------
 
