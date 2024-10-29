@@ -99,7 +99,8 @@ delete markers:
       --noncurrent-expire-days NONCURRENT_DAYS \
       --expire-delete-marker
 
-- To expire all versions of an object with no delete marker, include :mc-cmd:`~mc ilm rule add --expire-all-object-versions`.
+- To expire all versions of an object, include :mc-cmd:`~mc ilm rule add --expire-all-object-versions`.
+  This expiration only applies to objects without a ``DeleteMarker`` as the latest or current version.
 
   .. code-block:: shell
      :class: copyable
@@ -122,9 +123,9 @@ Expire All Versions of a Deleted Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting with :mc-release:`MinIO Server RELEASE.2024-05-01T01-11-10Z`, MinIO supports deleting all versions of an object that has a delete marker as its latest version.
-MinIO only supports this function with JSON.
+MinIO supports such deletes with ``JSON``, not through the command line.
 
-To add this function, first export the rule to modify with :mc:`mc ilm rule export`.
+To add this capability to a rule, first export the rule to modify with :mc:`mc ilm rule export`.
 Modify the exported rule with additional ``JSON`` that resembles the following:
 
 .. code-block:: text
@@ -135,4 +136,4 @@ Modify the exported rule with additional ``JSON`` that resembles the following:
    </DelMarkerObjectExpiration>   
 
 This example ``JSON`` expires all versions of the deleted object after 10 days.
-Modify the value in the ``<Days>`` element to the number of days you want to wait after deleting or expiring the object.
+Modify the value in the ``<Days>`` element to the number of days you want to wait after deleting the object before expiring it and removing it from MinIO.
