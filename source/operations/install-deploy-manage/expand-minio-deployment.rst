@@ -347,7 +347,7 @@ You may specify other :ref:`environment variables
 by your deployment. All MinIO nodes in the deployment should include the same
 environment variables with the matching values.
 
-1) Restart the MinIO Deployment with Expanded Configuration
+5) Restart the MinIO Deployment with Expanded Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Issue the following commands on each node **simultaneously** in the deployment
