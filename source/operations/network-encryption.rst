@@ -67,7 +67,9 @@ cert-manager Certificate Management
    For instructions for deploying the MinIO Operator and tenants using cert-manager, refer to the :ref:`cert-manager page <minio-certmanager>`.
 
 Manual Certificate Management
-   The Tenant CRD spec ``spec.externalCertsSecret`` supports specifying either ``opaque`` or ``kubernetes.io/tls`` type :kube-docs:`secrets <concepts/configuration/secret/#secret-types>` containing the ``private.key`` and ``public.crt`` to use for TLS.
+   The Tenant CRD spec ``spec.externalCertsSecret`` supp      .. include:: /includes/common/common-configure-keycloak-identity-management.rst
+               :start-after: start-configure-keycloak-minio-cli
+      orts specifying either ``opaque`` or ``kubernetes.io/tls`` type :kube-docs:`secrets <concepts/configuration/secret/#secret-types>` containing the ``private.key`` and ``public.crt`` to use for TLS.
 
    You can specify multiple certificates to support Tenants which have multiple assigned hostnames.
 
