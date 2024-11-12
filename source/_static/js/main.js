@@ -77,7 +77,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     
     // Toggle read mode on icon click
     if(readModeEl) {
-      readModeEl.addEventListener("click", (event) => {
+      /*readModeEl.addEventListener("click", (event) => {
         document.documentElement.classList.toggle("read-mode");
   
         // Re-calculate sidebar height
@@ -88,7 +88,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         } else {
           localStorage.setItem("read-mode", "false");
         }
-      });
+      });*/
     }
 
     // Turn on read mode on smaller screen size.
