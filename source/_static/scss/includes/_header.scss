@@ -1,12 +1,13 @@
 .header {
-	background-color: var(--header-bg);
-	box-shadow: 0 0 0.75rem rgba($black, 0.1);
 	width: 100%;
 	position: relative;
 	z-index: $z-index-header;
 	
-	& > .container {
+	.header__inner {
 		position: relative;
+		display: flex;
+		align-items: center;
+		min-height: 4.25rem;
 	}
 }
 
@@ -162,7 +163,8 @@
 	.icon {
 		&:not(.icon--switch) {
 			& > svg {
-				fill: var(--header-text-color);
+				//fill: var(--header-text-color);
+				fill: $black;
 			}
 
 			&:hover {
@@ -183,11 +185,13 @@
 }
 
 .header__title {
-	font-size: 2.5rem;
-	text-align: center;
-	color: $white;
-	margin: 3rem 1rem 0;
-	padding-bottom: 3rem;
+	font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.2;
+	color: $black;
+	padding-bottom: 5rem;
+	margin-left: -0.25rem;
+	font-family: $font-family-heading;
+	margin-top: 5rem;
 }
 
 #read-mode-toggle {

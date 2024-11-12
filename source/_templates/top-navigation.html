@@ -6,76 +6,110 @@
         </button>
     </div>
 
-    <a target="_blank" rel="noreferrer" href="https://subnet.min.io/" class="nav__link visible-rm">
-        <span>Customer Login</span>
-    </a>
-
     <div class="nav__item">
         <div class="nav__link nav__link--dropdown">
           	<span>Product</span>
         </div>
         <div class="nav__dropdown nav__dropdown--cols">
 			<div class="nav__dropdown__inner">
-				<div class="nav__column nav__column--enterprise">
-					<div class="nav__title">MinIO Enterprise Object Store</div>
-  
-						<a href="https://min.io/product/enterpriseoverview" class="nav__sub">Overview</a>
+				<div class="xl:grid grid-cols-4 gap-5 max-xl:pl-3">
+					<div class="col-span-3 xl:py-8">
+						<div class="mb-5">		  
+							<div class="mb-2 text-xs font-medium font-heading uppercase tracking-widest text-black border-b pb-2">Overview</div>
+						  
+							<a href="https://min.io/product/aistor-overview" class="text-sm py-2 px-3 rounded font-medium flex items-center gap-3 hover:bg-gray-100">
+								What is AIStor?
+					
+								<svg width="16" height="17" viewBox="0 0 16 17" fill="none">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M7.50505 3.02998C7.77842 2.75661 8.22164 2.75661 8.495 3.02998L13.1617 7.69664C13.435 7.97001 13.435 8.41323 13.1617 8.68659L8.495 13.3533C8.22164 13.6266 7.77842 13.6266 7.50505 13.3533C7.23169 13.0799 7.23169 12.6367 7.50505 12.3633L10.9767 8.89162H3.33336C2.94676 8.89162 2.63336 8.57822 2.63336 8.19162C2.63336 7.80502 2.94676 7.49162 3.33336 7.49162H10.9767L7.50505 4.01993C7.23169 3.74656 7.23169 3.30334 7.50505 3.02998Z" fill="#CF163E"/>
+								</svg>
+							</a>
+						</div>
 						
-						<a href="https://min.io/product/enterprisearchitecture" class="nav__sub">Architecture</a>
-  
-              			<div class="nav__sub">Features</div>
-  
-              			<div class="nav__features">
-						<div>
-							<a href="https://min.io/product/active-data-replication-for-object-storage" class="nav__sub">Replication</a>
-							<a href="https://min.io/product/enterprise-object-storage-encryption" class="nav__sub">Encryption</a>
-							<a href="https://min.io/product/data-immutability-for-object-storage" class="nav__sub">Object
-								Immutability</a>
-							<a href="https://min.io/product/identity-and-access-management" class="nav__sub">Identity + Access Mgt</a>
-							<a href="https://min.io/product/automated-data-tiering-lifecycle-management" class="nav__sub">Information Lifecycle</a>
-							<a href="https://min.io/product/object-versioning-bucket-versioning" class="nav__sub">Versioning</a>
-							<a href="https://min.io/product/enterprise/key-management-server" class="nav__sub">Key Management Server</a>
+						<div class="mb-2 text-xs font-medium font-heading uppercase tracking-widest text-black border-b pb-2">Features</div>
+	
+						<div class="text-sm xl:grid grid-cols-3 gap-2 *:py-2 *:px-3 *:rounded *:font-medium *:flex *:items-center *:gap-3">
+							<a href="https://min.io/product/active-data-replication-for-object-storage" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/replication.svg',1) }}" alt="Replication" />
+								Replication
+							</a>
+							<a href="https://min.io/product/aistor/object-storage-global-console" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/console.svg',1) }}" alt="Console" />
+								Console
+							</a>
+							<a href="https://min.io/product/aistor/object-store-cache" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/cache.svg',1) }}" alt="Cache" />
+								Cache
+							</a>
+							<a href="https://min.io/product/enterprise-object-storage-encryption" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/encryption.svg',1) }}" alt="Encryption" />
+								Encryption
+							</a>
+							<a href="https://min.io/product/object-versioning-bucket-versioning" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/versioning.svg',1) }}" alt="Versioning" />
+								Versioning
+							</a>
+							<a href="https://min.io/product/aistor/object-storage-observability" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/observability.svg',1) }}" alt="Observability" />
+								Observability
+							</a>
+							<a href="https://min.io/product/data-immutability-for-object-storage" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/immutability.svg',1) }}" alt="Object Immutability" />
+								Object Immutability
+							</a>
+							<a href="https://min.io/product/aistor/key-management-server" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/kms.svg',1) }}" alt="Key Management Server" />
+								Key Management Server
+							</a>
+							<a href="https://min.io/product/s3-compatibility" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/s3.svg',1) }}" alt="S3 Compatibility" />
+								S3 Compatibility
+							</a>
+							<a href="https://min.io/product/identity-and-access-management" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/identity.svg',1) }}" alt="Identity + Access Mgt" />
+								Identity + Access Mgt
+							</a>
+							<a href="https://min.io/product/aistor/object-store-catalog" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/catalog.svg',1) }}" alt="Catalog" />
+								Catalog
+							</a>
+							<a href="https://min.io/product/aistor/prompt-ai" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/object-prompt.svg',1) }}" alt="Object Prompt" />
+								Object Prompt
+							</a>
+							<a href="https://min.io/product/automated-data-tiering-lifecycle-management" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/lifecycle.svg',1) }}" alt="Lifecycle" />
+								Lifecycle
+							</a>
+							<a href="https://min.io/product/aistor/object-storage-data-firewall" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/firewall.svg',1) }}" alt="Firewall" />
+								Firewall
+							</a>
+							<a href="https://min.io/product/aistor/ai-hub" class="hover:bg-gray-100">
+								<img src="{{ pathto('_static/img/icons/nav/aihub.svg',1) }}" alt="AIHub" />
+								AIHub
+							</a>
 						</div>
-						<div>
-							<a href="https://min.io/product/enterprise/object-storage-global-console" class="nav__sub">Console</a>
-							<a href="https://min.io/product/enterprise/object-store-catalog" class="nav__sub">Catalog</a>
-							<a href="https://min.io/product/enterprise/object-storage-data-firewall" class="nav__sub">Firewall</a>
-							<a href="https://min.io/product/enterprise/object-store-cache" class="nav__sub">Cache</a>
-							<a href="https://min.io/product/enterprise/object-storage-observability" class="nav__sub">Observability</a>
-							<a href="https://min.io/product/s3-compatibility" class="nav__sub">S3 Compatibility</a>
-						</div>
-              		</div>
-            	</div>
-  
-            	<div class="nav__column">
-              		<div class="nav__title">MinIO for Public Cloud</div>
-					<a href="https://min.io/product/multicloud-elastic-kubernetes-service" class="nav__sub">AWS</a>
-              		<a href="https://min.io/product/multicloud-google-kubernetes-service" class="nav__sub">GCS</a>
-              		<a href="https://min.io/product/multicloud-azure-kubernetes-service" class="nav__sub">Azure</a>
-  
-              		<div class="nav__title">MinIO for Private Cloud</div>
-					<a href="https://min.io/product/private-cloud-red-hat-openshift" class="nav__sub">OpenShift</a>
-					<a href="https://min.io/product/multicloud-suse-rancher" class="nav__sub">SUSE Rancher</a>
-					<a href="https://min.io/product/private-cloud-vmware-tanzu" class="nav__sub">Tanzu</a>
-
-					<div class="nav__title">MinIO for Baremetal</div>
-					<a href="https://min.io/product/overview" class="nav__sub">Linux and Windows</a>
-				</div>
-
-				<div class="nav__column nav__column--plain">
-					<a href="https://min.io/product/erasure-code-calculator" class="nav__sub nav__sub--alt"
-					  data-nav="erasure-code-calculator">
-					  <img width="30" height="24" class="h-6" src="{{ pathto('_static/img/icons/erasure-code-calculator.svg',1) }}"
-						alt="Determine your raw and usable capacity" />
-					  Erasure Code Calculator
-					</a>
-					<a href="https://min.io/product/reference-hardware" class="nav__sub nav__sub--alt" data-nav="reference-hardware">
-					  <img width="30" height="18" src="{{ pathto('_static/img/icons/ref-hardware.svg',1) }}"
-						alt="MinIO's Recommended Hardware Configuration" />
-					  Reference Hardware
-					</a>
-		
-					<i class="nav__seperator"></i>
+					</div>
+					<div class="text-sm xl:border-l xl:px-6 xl:py-7">
+						<div class="mb-2 mt-5 text-xs font-medium font-heading uppercase tracking-widest text-black border-b pb-2 xl:hidden">Tools</div>
+						<a href="https://min.io/product/erasure-code-calculator" class="py-2 px-3 rounded block hover:bg-gray-100 xl:mb-5">
+							<span class="flex items-center gap-3 font-medium font-heading xl:text-md">
+								<img class="max-xl:w-4" src="{{ pathto('_static/img/icons/nav/erasure-code-calculator.svg',1) }}" alt="Erasure Code Calculator" />
+								Erasure Code Calculator
+							</span>
+				
+						  <span class="text-muted block mt-4 px-1 max-xl:hidden">Determine your raw and usable capacity across a range of erasure coding settings.</span>
+						</a>
+						<a href="https://min.io/product/reference-hardware" class="py-2 px-3 rounded block hover:bg-gray-100">
+							<span class="flex items-center gap-3 font-medium font-heading xl:text-md">
+								<img class="max-xl:w-4" src="{{ pathto('_static/img/icons/nav/ref-hardware.svg',1) }}" alt="Reference Hardware" />
+								Reference Hardware
+							</span>
+				
+						  <span class="text-muted block mt-4 px-1 max-xl:hidden">MinIO’s recommended Configuration and reference hardware for building large scale data infrastructure.</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -85,112 +119,135 @@
 		<div class="nav__link nav__link--dropdown">
 		  	<span>Solutions</span>
 		</div>
-		<div class="nav__dropdown nav__dropdown--cols">
-		  	<div class="nav__dropdown__inner">
-				<a href="/solutions/object-storage-for-ai" class="nav__sub" data-nav="ai-ml">
-				<span>AI Storage</span>
-				<small>Object storage is powering the AI revolution. Learn how MinIO
-					is leading the AI storage market through performance at
-					scale.</small>
+		<div class="nav__dropdown">
+			<div class="nav__dropdown__inner grid xl:py-8 xl:grid-cols-4 xl:gap-3 text-sm xl:-mx-3">
+				<a href="https://min.io/solutions/object-storage-for-ai" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="ai-ml">
+					<span class="text-black font-medium">
+					AI Storage
+					</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Learn how MinIO is leading the AI 
+					storage market from its exclusive features to performance at scale.</span>
 				</a>
-				<a href="/solutions/modern-data-lakes-lakehouses" class="nav__sub" data-nav="datalakes">
-				<span>Modern Datalakes</span>
-				<small>Modern, multi-engine datalakes depend on object stores that
-					deliver performance at scale. Learn more about this core MinIO
-					use case.</small>
+				<a href="https://min.io/solutions/hdfs-migration" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="hdfs-migration">
+					<span class="text-black block font-medium">HDFS Migration</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Modernize and simplify your big data
+					storage infrastructure with cloud native storage with AIStor.</span>
 				</a>
-				<a href="/hybrid-multi-cloud-storage" class="nav__sub" data-nav="hybrid-cloud">
-				<span>Hybrid Cloud</span>
-				<small>Effective multi-cloud storage strategies rely on utilizing
-					architecture and tools that can function seamlessly across
-					diverse environments.</small>
+				<a href="https://min.io/solutions/snowflake" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="snowflake">
+					<span class="text-black block font-medium">Snowflake</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Learn how to leverage Snowflake 
+					external tables to query data without having to move it.</span>
 				</a>
-				<a href="https://min.io/solutions/equinix" class="nav__sub" data-nav="equinix">
-					<span>Equinix</span>
-					<small>Repatriate your data onto the cloud you control with MinIO on Equinix to lower costs
-					while maintaining public cloud adjacency.</small>
+				<div class="xl:row-span-4 xl:border-l xl:-my-8 xl:py-8 xl:pl-4 max-xl:order-1">
+					<a href="https://min.io/product/integrations" class="block rounded px-3 py-2 hover:bg-gray-100" data-nav="integrations">
+					<span class="text-black font-medium flex items-center gap-3">
+						<img class="max-xl:hidden" src="{{ pathto('_static/img/icons/nav/integrations.svg',1) }}" alt="Integrations" />
+						Integrations with MinIO
+					</span>
+					<span class="text-muted block mt-2 max-xl:hidden px-1">Browse our expansive list of <br class="max-xl:hidden" />
+						integrations with links to the relevant <br class="max-xl:hidden" />documentation.</span>
+					</a>
+				</div>
+				<a href="https://min.io/solutions/veeam" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="veeam">
+					<span class="text-black block font-medium">Veeam</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Learn how MinIO and Veeam have partnered deliver superior RTO and RPO.</span>
 				</a>
-				<a href="/solutions/optimize-splunk-smartstore-performance" class="nav__sub" data-nav="splunk">
-				<span>Splunk</span>
-				<small>Find out how MinIO is delivering performance at scale for
-					Splunk SmartStores.</small>
+				<a href="https://min.io/solutions/modern-data-lakes-lakehouses" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="datalakes">
+					<span class="text-black block font-medium">Modern Datalakes</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Learn how modern, multi-engine data lakeshouses depend on MinIO's AIStor.</span>
 				</a>
-  
-				<a href="/solutions/snowflake" class="nav__sub" data-nav="snowflake">
-				<span>Snowflake</span>
-				<small>Query and analyze multiple data sources, including streaming
-					data, residing on MinIO with the Snowflake Data Cloud. No need
-					to move the data, just query using SnowSQL.</small>
+				<a href="https://min.io/solutions/equinix" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="equinix">
+					<span class="text-black block font-medium">Equinix</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Repatriate your data onto the cloud you control with MinIO and Equinix.</span>
 				</a>
-				<a href="/solutions/sqlserver" class="nav__sub" data-nav="sql-server">
-				<span>SQL Server</span>
-				<small>Discover how to pair SQL Server 2022 with MinIO to run queries
-					on your data on any cloud - without having to move it.</small>
+				<a href="https://min.io/solutions/sqlserver" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="sql-server">
+					<span class="text-black block font-medium">SQL Server</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Learn how to leverage SQL Server 2022 
+					with MinIO to run queries on your data without having to move it.</span>
 				</a>
-				<a href="/solutions/hdfs-migration" class="nav__sub" data-nav="hdfs-migration">
-				<span>HDFS Migration</span>
-				<small>Modernize and simplify your big data storage infrastructure
-					with high-performance, Kubernetes-native object storage from
-					MinIO.</small>
+				<a href="https://min.io/solutions/commvault" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="commvault">
+					<span class="text-black block font-medium">Commvault</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Learn how Commvault and MinIO are partnered to deliver performance at scale for mission critical backup and restore workloads.</span>
 				</a>
-				<a href="/solutions/vmware" class="nav__sub" data-nav="vmware">
-				<span>VMware</span>
-				<small>Discover how MinIO integrates with VMware across the portfolio
+				<a href="https://min.io/hybrid-multi-cloud-storage" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="hybrid-cloud-storage">
+					<span class="text-black block font-medium">Hybrid Cloud</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Learn how enterprises use MinIO to build AI data infrastructure that runs on any cloud - public, private or colo.</span>
+				</a>
+				<a href="https://min.io/solutions/optimize-splunk-smartstore-performance" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="splunk">
+					<span class="text-black block font-medium">Splunk</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Find out how MinIO is delivering performance at scale for Splunk SmartStores.</span>
+				</a>
+				<a href="https://min.io/solutions/vmware" class="rounded px-3 py-2 hover:bg-gray-100" data-nav="vmware">
+					<span class="text-black block font-medium">VMware</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Discover how MinIO integrates with VMware across the portfolio
 					from the Persistent Data platform to TKG and how we support
-					their Kubernetes ambitions.</small>
-				</a>
-				<a href="/solutions/veeam" class="nav__sub" data-nav="veeam">
-				<span>Veeam</span>
-				<small>Learn how MinIO and Veeam have partnered to drive performance
-					and scalability for a variety of backup use cases.</small>
-				</a>
-				<a href="/solutions/commvault" class="nav__sub" data-nav="commvault">
-				<span>Commvault</span>
-				<small>Learn how Commvault and MinIO are partnered to deliver
-					performance at scale for mission critical backup and restore
-					workloads.</small>
-				</a>
-				<a href="https://min.io/product/integrations" class="nav__sub" data-nav="integrations">
-				<span>Integrations</span>
-				<small>Browse our vast portfolio of integrations.</small>
-				</a>
-		  	</div>
-		</div>
-	</div>
-
-	<div class="nav__item">
-		<div class="nav__link nav__link--dropdown">
-		  	<span>Community</span>
-		</div>
-		<div class="nav__dropdown nav__dropdown--cols nav__dropdown--cols-3">
-			<div class="nav__dropdown__inner">
-				<a target="_blank" rel="noreferrer noopener" href="https://github.com/minio/" class="nav__sub">
-					<span>GitHub</span>
-					<small>Join our GitHub open source community: explore, experiment, ask questions, and contribute.</small>
-				</a>
-				<a target="_blank" rel="noreferrer noopener" href="https://slack.min.io" class="nav__sub">
-					<span>Slack Channel</span>
-					<small>The MinIO Community Slack provides an open forum for discussing topics related to MinIO. All support is provided on a best-effort basis.</small>
+					their Kubernetes ambitions.</span>
 				</a>
 			</div>
 		</div>
 	</div>
 
-    <a href="https://min.io/docs/minio/kubernetes/upstream" class="nav__link active">
-        <span>Docs</span>
-    </a>
+	<div class="nav__item">
+		<div class="nav__link nav__link--dropdown active">
+		  	<span>Open Source</span>
+		</div>
+		<div class="nav__dropdown grid xl:py-8 xl:grid-cols-4 xl:gap-3 text-sm xl:-mx-3">
+			<a target="_blank" rel="noreferrer noopener" href="https://github.com/minio/" class="rounded px-3 py-2 hover:bg-gray-100">
+			  	<span class="text-black block font-medium">Github Community</span>
+			  	<span class="text-muted block mt-2 max-xl:hidden">Explore, experiment, ask questions and contribute.</span>
+			</a>
+			<a rel="noreferrer noopener" href="https://min.io/docs" class="rounded px-3 py-2 hover:bg-gray-100">
+			  	<span class="text-black block font-medium">Docs</span>
+			  	<span class="text-muted block mt-2 max-xl:hidden">Development guides.</span>
+			</a>
+			<a target="_blank" rel="noreferrer noopener" href="https://slack.min.io" class="rounded px-3 py-2 hover:bg-gray-100">
+			  	<span class="text-black block font-medium">Slack Channel</span>
+			  	<span class="text-muted block mt-2 max-xl:hidden">Open Forum for discussing topics related to MinIO.</span>
+			</a>
+			
+			<div class="xl:border-l xl:-my-8 xl:py-8 xl:pl-6 max-xl:order-1">
+				<a href="https://min.io/open-source/download?platform=kubernetes" class="block rounded px-3 py-2 hover:bg-gray-100" data-nav="download-agpl">
+					<span class="text-black font-medium flex items-center gap-3">
+						<img class="max-xl:w-4 max-xl:hidden" src="{{ pathto('_static/img/icons/nav/download.svg',1) }}" alt="" />
+						Download MinIO Object Store
+					</span>
+					<span class="text-muted block mt-2 max-xl:hidden">Get MinIO's open source server, client, and SDK.</span>
+				</a>
+			</div>
+		</div>
+	</div>
 
-    <a href="https://blog.min.io/" class="nav__link">
-        <span>Blog</span>
-    </a>
-
-    <a href="https://min.io/resources" class="nav__link">
-        <span>Resources</span>
-    </a>
-
-    <a href="https://min.io/training" class="nav__link" data-href="training">
-        <span>Training</span>
-    </a>
+	<div class="nav__item">
+		<div class="nav__link nav__link--dropdown">
+		  	<span>Resources</span>
+		</div>
+		<div class="nav__dropdown grid xl:py-8 xl:grid-cols-4 xl:gap-3 text-sm xl:-mx-3">
+			<a rel="noreferrer noopener" href="https://resources.min.io/l/library" class="rounded px-3 py-2 hover:bg-gray-100">
+				<span class="text-black block font-medium">Resources Home</span>
+				<span class="text-muted block mt-2 max-xl:hidden">Browse our library of white papers, 
+					solution briefs, benchmarks and videos.</span>
+			</a>
+			<a rel="noreferrer noopener" href="https://blog.min.io/" class="rounded px-3 py-2 hover:bg-gray-100">
+				<span class="text-black block font-medium">Blog</span>
+				<span class="text-muted block mt-2 max-xl:hidden">Product updates, company news, and educational content.</span>
+			</a>
+			<a rel="noreferrer noopener" href="/training" class="rounded px-3 py-2 hover:bg-gray-100">
+				<span class="text-black block font-medium">Training </span>
+				<span class="text-muted block mt-2 max-xl:hidden">Learn the MinIO Way and Become a
+					Data Infrastructure Expert.</span>
+			</a>
+			
+			<div class="xl:border-l xl:-my-8 xl:py-8 xl:pl-6 max-xl:order-1">
+			<a href="https://min.io/events" class="block rounded px-3 py-2 hover:bg-gray-100">
+				<span class="text-black font-medium flex items-center gap-3">
+					<img class="max-xl:w-4 max-xl:hidden" src="{{ pathto('_static/img/icons/nav/events.svg',1) }}" alt="" />
+					Events
+				</span>
+				<span class="text-muted block mt-2 max-xl:hidden">Join us to take advantage to meet with MinIO partners, employees, and subject-matter experts.</span>
+			</a>
+			</div>
+		</div>
+	</div>
 
     <a href="https://min.io/partner" class="nav__link">
         <span>Partner</span>
@@ -199,6 +256,10 @@
     <a href="https://min.io/pricing" class="nav__link">
         <span>Pricing</span>
     </a>
+
+	<a href="https://subnet.min.io" class="nav__link nav__link--alt">
+		<span>Login</span>
+	</a>
 
     <a class="nav__link nav__link--download" href="https://min.io/download">Download</a>
 </div>

@@ -1,38 +1,27 @@
 <div class="platform-nav">
     <div class="platform-nav__main">
-        <div class="container">
-            <nav>
-                <a rel="noreferrer" href="/docs/minio/kubernetes/upstream/index.html" class="{{ 'active' if doc_platform == 'k8s' }}">
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/kubernetes.svg',1) }}" alt="Kubernetes" />
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/kubernetes-inactive.svg',1) }}" alt="Kubernetes" />
-                    Kubernetes
-                </a>
-                
-                <a rel="noreferrer" href="/docs/minio/container/index.html" class="{{ 'active' if doc_platform == 'container' }}">
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/docker.svg',1) }}" alt="Docker" />
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/docker-inactive.svg',1) }}" alt="Docker" />
-                    Docker
-                </a>
+        <nav>
+            <a rel="noreferrer" href="/docs/minio/kubernetes/upstream/index.html" class="{{ 'active' if doc_platform == 'k8s' }}">
+                Kubernetes
+            </a>
             
-                <a rel="noreferrer" href="/docs/minio/linux/index.html" class="{{ 'active' if doc_platform == 'linux' }}">
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/linux.svg',1) }}" alt="Linux" />
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/linux-inactive.svg',1) }}" alt="Linux" />
-                    Linux
-                </a>
-            
-                <a rel="noreferrer" href="/docs/minio/macos/index.html" class="{{ 'active' if doc_platform == 'macos' }}">
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/macos.svg',1) }}" alt="macOS" />
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/macos-inactive.svg',1) }}" alt="macOS" />
-                    macOS
-                </a>
-            
-                <a rel="noreferrer" href="/docs/minio/windows/index.html" class="{{ 'active' if doc_platform == 'windows' }}">
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows.svg',1) }}" alt="Windows" />
-                    <img class="hidden-rm" src="{{ pathto('_static/img/icons/windows-inactive.svg',1) }}" alt="Windows" />
-                    Windows
-                </a>
-            </nav>
-        </div>
+            <a rel="noreferrer" href="/docs/minio/container/index.html" class="{{ 'active' if doc_platform == 'container' }}">
+                Docker
+            </a>
+        
+            <a rel="noreferrer" href="/docs/minio/linux/index.html" class="{{ 'active' if doc_platform == 'linux' }}">
+                Linux
+            </a>
+        
+            <a rel="noreferrer" href="/docs/minio/macos/index.html" class="{{ 'active' if doc_platform == 'macos' }}">
+                macOS
+            </a>
+        
+            <a rel="noreferrer" href="/docs/minio/windows/index.html" class="{{ 'active' if doc_platform == 'windows' }}">
+                Windows
+            </a>
+        </nav>
+    
         {%- if pagename != "search" %}
         <button type="button" class="icon search-toggle search-toggle--keyboard visible-rm">
             {%- include "icons/search.html" %}
