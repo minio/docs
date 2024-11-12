@@ -8,14 +8,19 @@ div.sidebar {
     width: $sidebar-width;
     position: sticky;
     top: 0;
-    background-color: var(--sidebar-bg);
+    background-color: $white;
     transition: opacity 400ms, transform 300ms;
-    padding: var(--content-padding);
+    //padding: var(--content-padding);
+    padding: 0;
     overflow-y: auto;
     height: 100vh;
     z-index: $z-index-header - 2;
     margin: 0;
     border: none;
+
+    @include breakpoint-max(breakpoints(xl)) {
+        padding: var(--content-padding);
+    }
     
     // Sidebar is set to hidden by default and later shown with JS.
     // This prevents the scrollbar-flicker due to

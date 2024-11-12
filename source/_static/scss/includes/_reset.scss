@@ -45,7 +45,6 @@ h1, h2, h3, h4, h5, h6 {
     & > a,
     code {
         color: var(--headings-color);
-        font-size: inherit;
         padding: 0;
     }
 }
@@ -108,7 +107,7 @@ div.highlight {
     background-color: var(--code-bg);
     color: var(--code-color);
     border-radius: $border-radius;
-    font-size: $font-size-md;
+    font-size: $font-size-xs;
 }
 
 tt.xref, code.xref,

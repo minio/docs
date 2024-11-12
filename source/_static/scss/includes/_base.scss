@@ -34,4 +34,10 @@ body {
     display: flex;
     flex-direction: column;
     word-break: break-word;
+    overflow-x: hidden;
+
+    @include breakpoint-min(breakpoints(xl)) {
+        background: url(../img/bg.png) no-repeat top 5rem right;
+        background-size: 120px;
+    }
 }

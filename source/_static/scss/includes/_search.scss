@@ -18,7 +18,7 @@
 					top: 0;
 					width: 100%;
 					height: 100%;
-					background-color: var(--is-container-background);
+					//background-color: var(--is-container-background);
 					z-index: -1;
 				}
 			}
@@ -63,6 +63,7 @@
 
 	isolation: isolate;
 	position: relative;
+	margin-bottom: 2rem;
 }
 
 .search--active,
@@ -79,15 +80,15 @@
 }
 
 .search__input {
-	background: transparent var(--is-search-icon) no-repeat center left 1rem;
+	background: $white var(--is-search-icon) no-repeat center left 1rem;
 	background-size: 0.85rem;
 	appearance: none;
 	height: 2.75rem;
 	width: 100%;
 	padding: 0 1.5rem 0.05rem 2.5rem;
 	color: var(--text-color);
-	border-radius: $border-radius;
-	border: 0;
+	border-radius: 5rem;
+	border: 1px solid $neutral-subtle;
 
 	&::placeholder {
 		color: var(--text-muted-color);
@@ -101,7 +102,7 @@
 	appearance: none;
 	border: 0;
 	background: none;
-	border-radius: $border-radius-sm;
+	border-radius: $border-radius;
 	cursor: pointer;
 	display: none;
 	margin-right: 0.75rem;
@@ -302,7 +303,7 @@
 	color: var(--text-muted-color);
 	line-height: 1;
 	border: 1px solid var(--is-hit-platform-border-color);
-	border-radius: $border-radius-sm;
+	border-radius: $border-radius;
 	padding: 0.1rem 0.2rem;
 	width: fit-content;
 	margin: 0.4rem 0.35rem 0 0;
@@ -324,7 +325,7 @@
 	span {
 		background: var(--is-highlight-color);
 		padding: 0.2rem 0.4rem;
-		border-radius: $border-radius-sm;
+		border-radius: $border-radius;
 		color: var(--text-color);
 	}
 }
@@ -350,7 +351,6 @@
 
 .header {
 	#search {
-		padding: 0 1rem 2.5rem;
 		display: flex;
 
 		.search-meta-key {
@@ -382,28 +382,32 @@
 	}
 
 	.search__form {
-		background-color: var(--is-search-bg);
+		//background-color: var(--is-search-bg);
 	}
 
 	.search__inner {
 		max-width: 35rem;
 		width: 100%;
-		margin: 0 auto;
 		border-radius: $border-radius-lg;
 		position: relative;
+
+		@include breakpoint-max(breakpoints(xl)) {
+			margin: 0 auto;
+		}
 	}
 
 	.search__dropdown {
-		background-color: var(--is-dropdown-bg);
+		background-color: $white;
 		z-index: 10;
 		flex-direction: column;
-		border-radius: 0 0 $border-radius-lg $border-radius-lg;
+		border-radius: $border-radius-lg;
 		display: none;
 		max-height: 24.5rem;
+		box-shadow: 0px 7px 10px #00000036;
 	}
 
 	.search__filters {
-		background-color: var(--is-search-bg);
+		//background-color: var(--is-search-bg);
 
 		&:not(.search__filters--empty) {
 			.search__filters__list {

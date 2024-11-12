@@ -76,18 +76,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
     const readModeEl = document.getElementById("read-mode-toggle");
     
     // Toggle read mode on icon click
-    readModeEl.addEventListener("click", (event) => {
-      document.documentElement.classList.toggle("read-mode");
-
-			// Re-calculate sidebar height
-      setSidebarHeight();
-
-      if (document.documentElement.classList.contains("read-mode")) {
-        localStorage.setItem("read-mode", "true");
-      } else {
-        localStorage.setItem("read-mode", "false");
-      }
-    });
+    if(readModeEl) {
+      readModeEl.addEventListener("click", (event) => {
+        document.documentElement.classList.toggle("read-mode");
+  
+        // Re-calculate sidebar height
+        setSidebarHeight();
+  
+        if (document.documentElement.classList.contains("read-mode")) {
+          localStorage.setItem("read-mode", "true");
+        } else {
+          localStorage.setItem("read-mode", "false");
+        }
+      });
+    }
 
     // Turn on read mode on smaller screen size.
     // Kinda like the responsive design.
@@ -123,7 +125,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // --------------------------------------------------
   // Dark mode
   // --------------------------------------------------
-  (function () {
+  /* (function () {
     const darkModeEl = document.getElementById("dark-mode-toggle");
 
     darkModeEl.addEventListener("click", (event) => {
@@ -136,7 +138,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       }
     });
   })();
-
+ */
 
   // --------------------------------------------------
   // TOC, External Links

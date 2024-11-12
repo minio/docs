@@ -283,16 +283,16 @@ html_context = {
    'docs': [
       # The first item has to be the current docs site #
       {
-         'name': 'MinIO Server Documentation',
+         'name': 'MinIO Server',
          'current': True
       },
       {
-         'name': 'DirectPV Documentation',
+         'name': 'DirectPV',
          'url': 'https://min.io/docs/directpv',
          'external': True
       },
       {
-         'name': 'KES Documentation',
+         'name': 'KES',
          'url': 'https://min.io/docs/kes',
          'external': True
       }
