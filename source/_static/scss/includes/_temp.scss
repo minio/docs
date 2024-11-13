@@ -435,10 +435,13 @@
   margin-bottom: 5rem;
 }
 
+.docs-menu-wrapper {
+  text-align: center;
+}
+
 .docs-menu {
-  max-width: 650px;
+  display: inline-flex;
   margin: 0 auto;
-  width: 100%;
 
    & > a {
     display: flex;
@@ -446,7 +449,8 @@
     justify-content: center;
     color: $black;
     white-space: nowrap;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
+    min-width: 7rem;
 
     &:hover {
       color: $theme-red;
