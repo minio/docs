@@ -390,6 +390,7 @@
 		width: 100%;
 		border-radius: $border-radius-lg;
 		position: relative;
+		margin: 0 auto;
 
 		@include breakpoint-max(breakpoints(xl)) {
 			margin: 0 auto;

@@ -28,14 +28,16 @@
   
       <h2 class="header__title hidden-rm">Documentation</h2>
 
-      <nav class="docs-menu hide-scrollbar bg-white/75 overflow-x-auto flex items-center rounded-lg font-heading border p-0.5 border-theme-neutral-subtle">
-         {% for doc in docs %}
-         {% set current_name = doc.name if doc.current == True %}
-            <a target="{% if doc.external == True %}_blank{% endif %}" class="{% if doc.current == True %}active{% endif %} flex-1 rounded-md shrink-0 h-14 border border-transparent font-bold transition-all duration-300 hover:text-theme-red [&.active]:text-theme-red [&.active]:border-theme-red" href="{{ doc.url }}">                  
-               {{ doc.name }}
-            </a>
-         {% endfor %}
-     </nav>
+      <div class="overflow-x-auto hide-scrollbar mb-20">
+         <nav class="docs-menu bg-white/75 flex items-center rounded-lg font-heading border p-0.5 border-theme-neutral-subtle">
+            {% for doc in docs %}
+            {% set current_name = doc.name if doc.current == True %}
+               <a target="{% if doc.external == True %}_blank{% endif %}" class="{% if doc.current == True %}active{% endif %} flex-1 rounded-md shrink-0 h-14 border border-transparent font-bold transition-all duration-300 hover:text-theme-red [&.active]:text-theme-red [&.active]:border-theme-red" href="{{ doc.url }}">                  
+                  {{ doc.name }}
+               </a>
+            {% endfor %}
+        </nav>
+      </div>
 
       {%- include "platform-navigation.html" %}
 
