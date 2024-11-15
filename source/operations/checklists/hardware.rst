@@ -314,8 +314,11 @@ Storage
             deviceName="$(basename $i)"
             echo "Modifying xfs max_retries and retry_timeout_seconds for drive $i mounted at $mountPath"
             echo 0 > /sys/fs/xfs/$deviceName/error/metadata/EIO/max_retries
+            echo 5 > /sys/fs/xfs/$deviceName/error/metadata/EIO/retry_timeout_seconds
             echo 0 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/max_retries
+            echo 5 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/retry_timeout_seconds
             echo 0 > /sys/fs/xfs/$deviceName/error/metadata/default/max_retries
+            echo 5 > /sys/fs/xfs/$deviceName/error/metadata/default/retry_timeout_seconds
       done
       exit 0
 
