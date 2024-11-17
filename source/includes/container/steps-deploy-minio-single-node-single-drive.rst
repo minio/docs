@@ -81,7 +81,7 @@ The following table describes each line of the command and provides additional c
        This allows the container to run in the background with an open TTY for bash-like access.
 
    * - ``-p 9000:9000 -p 9001:9001``
-     - Binds the ports ``9000`` and ``9090`` on the local machine to the same ports on the container.
+     - Binds the ports ``9000`` and ``9001`` on the local machine to the same ports on the container.
        This allows access to the container through the local machine.
 
    * - ``-v PATH:/data/minio``
@@ -146,7 +146,7 @@ The command should return a unique ID for the created container.
    The ``API`` and ``CONSOLE`` blocks may include the network interfaces for the container.
    Clients outside of the container network cannot access the MinIO API or Console using these addresses.
 
-   External access requires using a network address for the container host machine and assumes the host firewall allows access to the related ports (``9000`` and ``9090`` in the examples).
+   External access requires using a network address for the container host machine and assumes the host firewall allows access to the related ports (``9000`` and ``9001`` in the examples).
 
 5) Connect to the MinIO Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
