@@ -165,4 +165,3 @@ Once logged in to the MinIO Console, users can perform many kinds of tasks.
    /administration/console/managing-deployment
    /administration/console/managing-objects
    /administration/console/security-and-access
-   /administration/console/subnet-registration
