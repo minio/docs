@@ -83,7 +83,7 @@ While creating a bucket, you can enable :ref:`versioning <minio-bucket-versionin
 
    If you enable versioning, you can specify prefixes to exclude from versioning.
 
-You **must** configure locking and versioning options at the time of bucket creation.
+You can configure locking and versioning options only when you create the bucket.
 You cannot change these settings for the bucket later.
 
 Managing Buckets
