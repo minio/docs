@@ -3,7 +3,7 @@
 set -ex
 
 export PATH=${PATH}:${HOME}/.local/bin
-export GITDIR=$(shell git rev-parse --abbrev-ref HEAD)
+export GITDIR=main
 
 
 make SYNC_SDK=TRUE linux

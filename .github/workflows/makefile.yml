@@ -34,9 +34,6 @@ jobs:
     - name: build-docs
       run: ./build-docs-ci.sh
 
-    - name: wrap-artifact
-      run: ./wrap-artifact.sh
-
     - name: upload-artifact
       uses: actions/upload-artifact@v4
       with:
