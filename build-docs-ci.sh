@@ -3,35 +3,36 @@
 set -ex
 
 export PATH=${PATH}:${HOME}/.local/bin
+export GITDIR=$(shell git rev-parse --abbrev-ref HEAD)
 
 
 make SYNC_SDK=TRUE linux
 make windows macos container k8s openshift eks aks gke
 
 mkdir -p minio/kubernetes/upstream
-cp -vr build/HEAD/k8s/html/* ./minio/kubernetes/upstream/
+cp -vr build/${GITDIR}/k8s/html/* ./minio/kubernetes/upstream/
 
 mkdir -p minio/kubernetes/eks
-cp -vr build/HEAD/eks/html/* ./minio/kubernetes/eks/
+cp -vr build/${GITDIR}/eks/html/* ./minio/kubernetes/eks/
 
 
 mkdir -p minio/kubernetes/gke
-cp -vr build/HEAD/gke/html/* ./minio/kubernetes/gke/
+cp -vr build/${GITDIR}/gke/html/* ./minio/kubernetes/gke/
 
 mkdir -p minio/kubernetes/aks
-cp -vr build/HEAD/aks/html/* ./minio/kubernetes/aks/
+cp -vr build/${GITDIR}/aks/html/* ./minio/kubernetes/aks/
 
 mkdir -p minio/kubernetes/openshift
-cp -vr build/HEAD/openshift/html/* ./minio/kubernetes/openshift/
+cp -vr build/${GITDIR}/openshift/html/* ./minio/kubernetes/openshift/
 
 mkdir -p minio/container
-cp -vr build/HEAD/container/html/* ./minio/container/
+cp -vr build/${GITDIR}/container/html/* ./minio/container/
 
 mkdir -p minio/linux
-cp -vr build/HEAD/linux/html/* ./minio/linux/
+cp -vr build/${GITDIR}/linux/html/* ./minio/linux/
 
 mkdir -p minio/macos
-cp -vr build/HEAD/macos/html/* ./minio/macos/
+cp -vr build/${GITDIR}/macos/html/* ./minio/macos/
 
 mkdir -p minio/windows
-cp -vr build/HEAD/windows/html/* ./minio/windows/
+cp -vr build/${GITDIR}/windows/html/* ./minio/windows/
