@@ -83,7 +83,7 @@ While creating a bucket, you can enable :ref:`versioning <minio-bucket-versionin
 
    If you enable versioning, you can specify prefixes to exclude from versioning.
 
-You **must** configure replication, locking, and versioning options at the time of bucket creation.
+You **must** configure locking and versioning options at the time of bucket creation.
 You cannot change these settings for the bucket later.
 
 Managing Buckets
@@ -105,10 +105,6 @@ When managing a bucket, your access settings may allow you to view or change any
   Use this section to view and modify the bucket's access policy, encryption, quota, and tags.
 
 - Configure alerts in the :guilabel:`Events` section to trigger :ref:`notification events <minio-bucket-notifications>` when a user uploads, accesses, or deletes matching objects.
-
-- Copy objects to remote locations in the :guilabel:`Replication` section with :ref:`Server Side Bucket Replication Rules <minio-bucket-replication-serverside>`.
-
-- Expire or transition objects in the bucket from the :guilabel:`Lifecycle` section by setting up :ref:`Object Lifecycle Management Rules <minio-lifecycle-management>`.
 
 - Review security in the :guilabel:`Access` section by listing the :ref:`policies <minio-policy>` and :ref:`users <minio-users>` with access to that bucket.
 

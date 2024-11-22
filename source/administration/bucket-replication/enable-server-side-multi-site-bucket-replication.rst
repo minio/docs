@@ -48,9 +48,9 @@ Access to All Clusters
 
 You must have network access and log in credentials with correct permissions to all deployments to set up multi-site active-active bucket replication.
 
-You can access the deployments by logging in to the :ref:`MinIO Console <minio-console>` for each deployment or by installing :mc:`mc` and using the command line.
+You can access the deployments by installing :mc:`mc` and using the command line.
+Use the :mc:`mc alias set` command to create an alias for each MinIO deployment.
 
-If using the command line, use the :mc:`mc alias set` command to create an alias for each MinIO deployment. 
 Alias creation requires specifying an access key for a user on the deployment. 
 This user **must** have permission to create and manage users and policies on the deployment. 
 
@@ -110,44 +110,11 @@ Procedure
 
 This procedure requires repeating steps for each MinIO deployment participating in the multi-site replication configuration. Depending on the number of deployments, this procedure may require significant time and care in implementation. MinIO recommends reading through the procedure *before* attempting to implement the documented steps.
 
-- :ref:`Configure Multi-Site Bucket Replication Using the MinIO Console <minio-bucket-replication-multi-site-minio-console-procedure>`
-   - :ref:`Create the Replication Rules <minio-bucket-replication-multi-site-minio-console-create-replication-rules>` 
-   - :ref:`Validate the Replication Configuration <minio-bucket-replication-multi-site-minio-console-validate-replication-config>`
 - :ref:`Configure Multi-Site Bucket Replication Using the Command Line <minio-bucket-replication-multi-site-minio-cli-procedure>`
    - :ref:`Create Replication Remote Targets <minio-bucket-replication-multi-site-minio-cli-create-remote-targets>`
    - :ref:`Create New Bucket Replication Rules <minio-bucket-replication-multi-site-minio-cli-create-replication-rules>`
    - :ref:`Validate the Replication Configuration <minio-bucket-replication-multi-site-minio-cli-verify-replication-config>` 
 
-.. _minio-bucket-replication-multi-site-minio-console-procedure:
-
-Configure Multi-Site Bucket Replication Using the MinIO Console
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. _minio-bucket-replication-multi-site-minio-console-create-replication-rules:
-
-1) Create the Replication Rules
-+++++++++++++++++++++++++++++++
-
-.. include:: /includes/common/bucket-replication.rst
-   :start-after: start-create-bucket-replication-rule-console-desc
-   :end-before: end-create-bucket-replication-rule-console-desc
-
-Repeat the above steps to create a rule from this deployment to each of the other target deployments.
-
-Then, repeat the above steps on each of the other deployments in the multi-site setup so that each deployment has a separate replication rule for all of the other deployments.
-
-.. _minio-bucket-replication-multi-site-minio-console-validate-replication-config:
-
-2) Validate the Replication Configuration
-+++++++++++++++++++++++++++++++++++++++++
-
-.. include:: /includes/common/bucket-replication.rst
-   :start-after: start-validate-bucket-replication-console-desc
-   :end-before: end-validate-bucket-replication-console-desc
-
-Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
-
-.. _minio-bucket-replication-multi-site-minio-cli-procedure:
 
 Configure Multi-Site Bucket Replication Using the Command Line ``mc``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

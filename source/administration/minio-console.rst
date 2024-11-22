@@ -13,11 +13,6 @@ MinIO Console
 
 The MinIO Console is a rich graphical user interface that provides similar functionality to the :mc:`mc` command line tool.
 
-.. image:: /images/minio-console/minio-console.png
-   :width: 600px
-   :alt: MinIO Console Landing Page provides a view of the Object Browser for the authenticated user
-   :align: center
-
 This page provides an overview of the MinIO Console and describes configuration options and instructions for logging in.
 
 Overview
@@ -153,7 +148,7 @@ Available Tasks
 
 Once logged in to the MinIO Console, users can perform many kinds of tasks.
 
-- :ref:`Manage objects <minio-console-managing-objects>` by browsing or uploading objects and managing bucket settings.
+- :ref:`Manage objects <minio-console-managing-objects>` by browsing existing objects, uploading objects, or modifying bucket settings.
 - :ref:`Review or modify identity and security <minio-console-security-access>` with access keys, policies, and Identity Provider settings.
 - :ref:`Monitor the health and activities <minio-console-managing-deployment>` with metrics and notifications.
 - :ref:`Manage your deployment's license <minio-console-subscription>`
