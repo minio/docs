@@ -7,6 +7,8 @@ export PATH=${PATH}:${HOME}/.local/bin
 
 make SYNC_SDK=TRUE linux
 make windows macos container k8s openshift eks aks gke
+ls -lR build/
+
 
 mkdir -p minio/kubernetes/upstream
 cp -vr build/HEAD/k8s/html/* ./minio/kubernetes/upstream/
