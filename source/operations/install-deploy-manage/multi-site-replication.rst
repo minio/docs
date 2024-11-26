@@ -203,7 +203,7 @@ Switch to Site Replication from Bucket Replication
 You cannot use both replication methods on the same deployments.
 
 If you previously set up bucket replication and wish to now use site replication, you must first delete all of the bucket replication rules on the deployment that has data when initializing site replication.
-Use :mc:`mc replicate rm` on the command line or the MinIO Console to remove bucket replication rules.
+Use :mc:`mc replicate rm` on the command line to remove bucket replication rules.
 
 Only one site can have data when setting up site replication.
 All other sites must be empty.
@@ -216,153 +216,84 @@ Tutorials
 Configure Site Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tab-set::
+The following steps create a new site replication configuration for three :ref:`distributed deployments <deploy-minio-distributed>`.
+One of the sites contains :ref:`replicable data <minio-site-replication-what-replicates>`.
 
-   .. tab-item:: Console
-      :sync: gui
+The three sites use aliases, ``minio1``, ``minio2``, and ``minio3``, and only ``minio1`` contains any data.
 
-      #. :ref:`Deploy <deploy-minio-distributed>` two or more separate MinIO sites, using the same Identity Provider for each site
+#. :ref:`Deploy <deploy-minio-distributed>` three or more separate MinIO sites, using the same :ref:`IDP <minio-authentication-and-identity-management>`
 
-         Only one site can have any buckets or objects on it.
-         The other site(s) must be empty.
+   Start with empty sites *or* have no more than one site with any :ref:`replicable data <minio-site-replication-what-replicates>`.
 
-      #. In a browser, access the Console for the site with data (if any)
+#. Configure an alias for each site
 
-         For example, ``https://<addressforsite>:9000``
-         
-         Replace ``<addressforsite>`` with the hostname or IP address of the load balancer, reverse proxy, or similar control plane that manages connections to the MinIO deployment.
+   .. include:: /includes/common-replication.rst
+      :start-after: start-mc-admin-replicate-load-balancing
+      :end-before: end-mc-admin-replicate-load-balancing
 
-      #. Select **Settings**, then **Site Replication**
-
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-settings-site-replication.png
-            :width: 400px
-            :alt: MinIO Console menu with the Settings heading expanded to show Site Replication
-            :align: center
-      
-      #. Select :guilabel:`Add Sites +`
-
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-settings-site-replication-add.png
-            :width: 600px
-            :alt: MinIO Console's Add Sites for Replication screen
-            :align: center
-
-      #. Complete the requested information:
-
-         This Site:
-
-           - :Site Name: A name or other identifying text to associate to the site.
-           - :Endpoint: `(required)` The hostname or IP of the load balancer managing connections to the site.
-           - :Access Key: `(required)` The user name for ``root`` to use for signing in to the site.
-           - :Secret Key: `(required)` The password for ``root`` to use for signing in to the site.
-
-         Peer Sites:
-
-           - :Site Name: A name or other identifying text to associate to the site.
-           - :Endpoint: `(required)` The hostname or IP of the load balancer managing connections to the site.
-           - :Access Key: `(required)` The user name for ``root`` for the peer site to use for signing in to the site.
-           - :Secret Key: `(required)` The password for ``root`` for the peer site to use for signing in to the site.
-
-         .. include:: /includes/common-replication.rst
-            :start-after: start-mc-admin-replicate-load-balancing
-            :end-before: end-mc-admin-replicate-load-balancing
-
-         To add additional sites beyond two, select the ``+`` button to the side of one of the Site entries.
-         To remove a site previously added, select the ``-`` button to the side of the site.
-
-         Site replication adds a :mc:`~mc admin user svcacct` under the ``root`` user of each site to perform replication activities.
-
-      #. Select **Save**
+   For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
    
-      #. Select :guilabel:`Replication Status` button to verify replication has completed across peer sites.
+   Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the site.
 
-         Any :ref:`replicable data <minio-site-replication-what-replicates>` that exists should show as successfully synced.
+   .. code-block:: shell
 
-         For more on reviewing site replication, see the :ref:`Site Replication Status tutorial <minio-site-replication-status-tutorial>`.
-
-
-   .. tab-item:: Command Line
-      :sync: cli
-
-      The following steps create a new site replication configuration for three :ref:`distributed deployments <deploy-minio-distributed>`.
-      One of the sites contains :ref:`replicable data <minio-site-replication-what-replicates>`.
-
-      The three sites use aliases, ``minio1``, ``minio2``, and ``minio3``, and only ``minio1`` contains any data.
-
-      #. :ref:`Deploy <deploy-minio-distributed>` three or more separate MinIO sites, using the same :ref:`IDP <minio-authentication-and-identity-management>`
-
-         Start with empty sites *or* have no more than one site with any :ref:`replicable data <minio-site-replication-what-replicates>`.
-
-      #. Configure an alias for each site
-
-         .. include:: /includes/common-replication.rst
-            :start-after: start-mc-admin-replicate-load-balancing
-            :end-before: end-mc-admin-replicate-load-balancing
+      mc alias set minio1 https://minio1.example.com:9000 adminuser adminpassword
+      mc alias set minio2 https://minio2.example.com:9000 adminuser adminpassword
+      mc alias set minio3 https://minio3.example.com:9000 adminuser adminpassword
       
-         For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
-         
-         Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the site.
-      
-         .. code-block:: shell
-      
-            mc alias set minio1 https://minio1.example.com:9000 adminuser adminpassword
-            mc alias set minio2 https://minio2.example.com:9000 adminuser adminpassword
-            mc alias set minio3 https://minio3.example.com:9000 adminuser adminpassword
-      
-         or define environment variables
-      
-         .. code-block:: shell
-         
-            export MC_HOST_minio1=https://adminuser:adminpassword@minio1.example.com
-            export MC_HOST_minio2=https://adminuser:adminpassword@minio2.example.com
-            export MC_HOST_minio3=https://adminuser:adminpassword@minio3.example.com
-      
-      #. Add site replication configuration
-      
-         .. code-block:: shell
-         
-            mc admin replicate add minio1 minio2 minio3
+   or define environment variables
 
-         If all sites are empty, the order of the aliases does not matter.
-         If one of the sites contains any :ref:`replicable data <minio-site-replication-what-replicates>`, you must list it first.
+   .. code-block:: shell
+   
+      export MC_HOST_minio1=https://adminuser:adminpassword@minio1.example.com
+      export MC_HOST_minio2=https://adminuser:adminpassword@minio2.example.com
+      export MC_HOST_minio3=https://adminuser:adminpassword@minio3.example.com
 
-         No more than one site can contain any replicable data.
-      
-      #. Query the site replication configuration to verify
-      
-         .. code-block:: shell
-         
-            mc admin replicate info minio1
+#. Add site replication configuration
 
-         You can use the alias for any peer site in the site replication configuration.
+   .. code-block:: shell
+   
+      mc admin replicate add minio1 minio2 minio3
 
-      #. Query the site replication status to confirm any initial data has replicated to all peer sites.
-      
-         .. code-block:: shell
+   If all sites are empty, the order of the aliases does not matter.
+   If one of the sites contains any :ref:`replicable data <minio-site-replication-what-replicates>`, you must list it first.
 
-            mc admin replicate status minio1
+   No more than one site can contain any replicable data.
 
-         You can use the alias for any of the peer sites in the site replication configuration.
-         The output should say that all :ref:`replicable data <minio-site-replication-what-replicates>` is in sync.
+#. Query the site replication configuration to verify
 
-         The output could resemble the following:
+   .. code-block:: shell
+   
+      mc admin replicate info minio1
 
-         .. code-block:: shell
+   You can use the alias for any peer site in the site replication configuration.
 
-            Bucket replication status:
-            ●  1/1 Buckets in sync
+#. Query the site replication status to confirm any initial data has replicated to all peer sites.
 
-            Policy replication status:
-            ●  5/5 Policies in sync
+   .. code-block:: shell
 
-            User replication status:
-            No Users present
+      mc admin replicate status minio1
 
-            Group replication status:
-            No Groups present
+   You can use the alias for any of the peer sites in the site replication configuration.
+   The output should say that all :ref:`replicable data <minio-site-replication-what-replicates>` is in sync.
 
-         For more on reviewing site replication, see the :ref:`Site Replication Status tutorial <minio-site-replication-status-tutorial>`.
+   The output could resemble the following:
+
+   .. code-block:: shell
+
+      Bucket replication status:
+      ●  1/1 Buckets in sync
+
+      Policy replication status:
+      ●  5/5 Policies in sync
+
+      User replication status:
+      No Users present
+
+      Group replication status:
+      No Groups present
+
+   For more on reviewing site replication, see the :ref:`Site Replication Status tutorial <minio-site-replication-status-tutorial>`.
 
 
 .. _minio-expand-site-replication:
@@ -379,161 +310,74 @@ The new site must meet the following requirements:
 - Uses the same root user credentials as other configured sites
 - Contains no bucket or object data
 
-.. tab-set::
+#. Deploy the new MinIO peer site(s) following the stated requirements
 
-   .. tab-item:: Console
-      :sync: gui
+#. Configure an alias for the new site
 
-      #. Deploy a new, empty MinIO site
+   .. include:: /includes/common-replication.rst
+      :start-after: start-mc-admin-replicate-load-balancing
+      :end-before: end-mc-admin-replicate-load-balancing
 
-      #. In a browser, access the Console for one of the existing replicated sites
+   To check the existing aliases, use :mc:`mc alias list`.
 
-         For example, ``https://<addressforsite>:9000``
+   Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the new site(s).
 
-      #. Select **Settings**, then **Site Replication**
+   .. code-block:: shell
 
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-site-replication-list-of-sites.png
-            :width: 600px
-            :alt: MinIO Console Site Replication with three sites listed
-            :align: center
-      
-      #. Select :guilabel:`Add Sites +`
+      mc alias set minio4 https://minio4.example.com:9000 adminuser adminpassword
 
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-settings-site-replication-add.png
-            :width: 600px
-            :alt: MinIO Console's Add Sites for Replication screen
-            :align: center
+   or define environment variables
 
-      #. Make the following entries:
+   .. code-block:: shell
+   
+      export MC_HOST_minio4=https://adminuser:adminpassword@minio4.example.com
 
-         :Access Key: `(required)` The user name to use for signing in to each site. Should be the same across all sites.
+#. Add site replication configuration
 
-         :Secret Key: `(required)` The password for the user name to use for signing in to each site. Should be the same across all sites.
+   Use the :mc-cmd:`mc admin replicate add` command to expand the site replication configuration with the new peer site.
+   Specify the alias of *all* existing peer sites, then the alias of the new site to add.
 
-         :Site Name: An alias to use for the site name.
+   For example, the following command adds the new peer site ``minio4`` to an existing site replication configuration that includes the existing sites ``minio1``, ``minio2``, and ``minio3``.
 
-         :Endpoint: `(required)` The hostname or IP of the load balancer managing connections to the site.
-         
-         .. include:: /includes/common-replication.rst
-            :start-after: start-mc-admin-replicate-load-balancing
-            :end-before: end-mc-admin-replicate-load-balancing
+   .. code-block:: shell
+   
+      mc admin replicate add minio1 minio2 minio3 minio4
 
-         To add additional sites beyond two, select the ``+`` button to the side of the last Site entry.
+   .. note::
 
-      #. Select :guilabel:`Save`
+      If any of the sites are unreachable or permanently lost, you **must** first remove the unreachable site(s) with :mc-cmd:`mc admin replicate rm` before expanding with the new site.
 
-   .. tab-item:: Command Line
-      :sync: cli
+#. Query the site replication configuration to verify
 
-      #. Deploy the new MinIO peer site(s) following the stated requirements
-
-
-      #. Configure an alias for the new site
-
-         .. include:: /includes/common-replication.rst
-            :start-after: start-mc-admin-replicate-load-balancing
-            :end-before: end-mc-admin-replicate-load-balancing
-
-         To check the existing aliases, use :mc:`mc alias list`.
-      
-         Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the new site(s).
-      
-         .. code-block:: shell
-      
-            mc alias set minio4 https://minio4.example.com:9000 adminuser adminpassword
-      
-         or define environment variables
-      
-         .. code-block:: shell
-         
-            export MC_HOST_minio4=https://adminuser:adminpassword@minio4.example.com
-      
-      #. Add site replication configuration
-
-         Use the :mc-cmd:`mc admin replicate add` command to expand the site replication configuration with the new peer site.
-         Specify the alias of *all* existing peer sites, then the alias of the new site to add.
-
-         For example, the following command adds the new peer site ``minio4`` to an existing site replication configuration that includes the existing sites ``minio1``, ``minio2``, and ``minio3``.
-      
-         .. code-block:: shell
-         
-            mc admin replicate add minio1 minio2 minio3 minio4
-
-         .. note::
-
-            If any of the sites are unreachable or permanently lost, you **must** first remove the unreachable site(s) with :mc-cmd:`mc admin replicate rm` before expanding with the new site.
-      
-      #. Query the site replication configuration to verify
-      
-         .. code-block:: shell
-         
-            mc admin replicate info minio1
+   .. code-block:: shell
+   
+      mc admin replicate info minio1
 
 Modify a Site's Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 If a peer site changes its hostname, you can modify the replication configuration to reflect the new hostname.
 
-.. tab-set::
+#. Obtain the site's Deployment ID with :mc-cmd:`mc admin replicate info`
 
-   .. tab-item:: Console
-      :sync: gui
+   .. code-block:: shell
 
-      #. In a browser, access the Console for one of the replicated sites
+      mc admin replicate info <ALIAS>
+   
 
-         For example, ``https://<addressforsite>:9000``
+#. Update the site's endpoint with :mc-cmd:`mc admin replicate update`
 
-      #. Select **Settings**, then **Site Replication**
-      
-      #. Select the pencil **Edit** icon to the side of the site to update
+   .. code-block:: shell
 
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-site-replication-edit-button.png
-            :width: 600px
-            :alt: MinIO Console's List of Replicated Sites screen with the edit buttons highlighted
-            :align: center
+      mc admin replicate update ALIAS --deployment-id [DEPLOYMENT-ID] --endpoint [NEW-ENDPOINT]
 
-      #. Make the following entries:
+   Replace [DEPLOYMENT-ID] with the deployment ID of the site to update.
+   
+   Replace [NEW-ENDPOINT] with the new endpoint for the site.
 
-         :New Endpoint: `(required)` The new endpoint address and port to use.
-
-         .. include:: /includes/common-replication.rst
-            :start-after: start-mc-admin-replicate-load-balancing
-            :end-before: end-mc-admin-replicate-load-balancing
-
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-settings-site-replication-edit-endpoint.png
-            :width: 600px
-            :alt: Example of the MinIO Console's Edit Replication Endpoint screen
-            :align: center
-
-      #. Select **Update**
-
-   .. tab-item:: Command Line
-      :sync: cli
-
-      #. Obtain the site's Deployment ID with :mc-cmd:`mc admin replicate info`
-
-         .. code-block:: shell
-
-            mc admin replicate info <ALIAS>
-         
-      
-      #. Update the site's endpoint with :mc-cmd:`mc admin replicate update`
-      
-         .. code-block:: shell
-
-            mc admin replicate update ALIAS --deployment-id [DEPLOYMENT-ID] --endpoint [NEW-ENDPOINT]
-
-         Replace [DEPLOYMENT-ID] with the deployment ID of the site to update.
-         
-         Replace [NEW-ENDPOINT] with the new endpoint for the site.
-
-         .. include:: /includes/common-replication.rst
-            :start-after: start-mc-admin-replicate-load-balancing
-            :end-before: end-mc-admin-replicate-load-balancing
+   .. include:: /includes/common-replication.rst
+      :start-after: start-mc-admin-replicate-load-balancing
+      :end-before: end-mc-admin-replicate-load-balancing
 
 Remove a Site from Replication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -541,49 +385,19 @@ Remove a Site from Replication
 You can remove a site from replication at any time.
 You can re-add the site at a later date, but you must first completely wipe bucket and object data from the site.
 
-.. tab-set::
+Use :mc-cmd:`mc admin replicate rm`:
 
-   .. tab-item:: Console
-      :sync: gui
+.. code-block:: shell
 
-      #. In a browser, access the Console for one of the replicated sites
+   mc admin replicate rm ALIAS PEER_TO_REMOVE --force
 
-         For example, ``https://<addressforsite>:9000``
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of any peer site in the replication configuration.
 
-      #. Select **Settings**, then **Site Replication**
-      
-      #. Select the trash can Delete icon to the side of the site to update
+- Replace ``PEER_TO_REMOVE`` with the alias of the peer site to remove.
 
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-site-replication-delete-button.png
-            :width: 600px
-            :alt: MinIO Console's List of Replicated Sites screen with the delete buttons highlighted
-            :align: center
+All healthy peers in the site replication configuration update to remove the specified peer automatically.
 
-      #. Confirm the site deletion at the prompt by selecting **Delete**
-
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-settings-site-replication-confirm-delete.png
-            :width: 600px
-            :alt: Example of the MinIO Console's Edit Replication Endpoint screen
-            :align: center
-
-   .. tab-item:: Command Line
-      :sync: cli
-
-      Use :mc-cmd:`mc admin replicate rm`
-
-      .. code-block:: shell
-
-         mc admin replicate rm ALIAS PEER_TO_REMOVE --force
-
-      - Replace ``ALIAS`` with the :ref:`alias <alias>` of any peer site in the replication configuration.
-
-      - Replace ``PEER_TO_REMOVE`` with the alias of the peer site to remove.
-
-      All healthy peers in the site replication configuration update to remove the specified peer automatically.
-
-      MinIO requires the ``--force`` flag to remove the peer from the site replication configuration.
+MinIO requires the ``--force`` flag to remove the peer from the site replication configuration.
 
 .. _minio-site-replication-status-tutorial:
 
@@ -594,89 +408,53 @@ MinIO provides information on replication across the sites for users, groups, po
 
 The summary information includes the number of **Synced** and **Failed** items for each category.
 
-.. tab-set::
+Use :mc-cmd:`mc admin replicate status`:
 
-   .. tab-item:: Console
-      :sync: gui
+.. code-block:: shell
 
-      #. In a browser, access the Console for one of the replicated sites
+   mc admin replicate status <ALIAS> --<flag> <value>
 
-         For example, ``https://<addressforsite>:9000``
+For example:
 
-      #. Select **Settings**, then **Site Replication**
-      
-      #. Select :guilabel:`Replication Status`
+- ``mc admin replicate status minio3 --bucket images``
 
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-settings-site-replication-status-summary.png
-            :width: 600px
-            :alt: MinIO Console's Replication status from all Sites screen
-            :align: center
+  Displays the replication status for the ``images`` bucket on the ``minio3`` site.
+  
+  The output resembles the following:
 
-      #. `(Optional)` View the replication status for a specific item
-         
-         Select the type of item to view in the :guilabel:`View Replication Status for a:` dropdown
-
-         Specify the name of the specific Bucket, Group, Policy, or User to view
-
-         .. screenshot temporarily removed
-	    .. image:: /images/minio-console/console-settings-site-replication-status-item.png
-            :width: 600px
-            :alt: Example of replication status for a particular bucket item
-            :align: center
-      
-      #. `(Optional)` Update the information by selecting :guilabel:`Refresh`
-
-   .. tab-item:: Command Line
-      :sync: cli
-
-      Use :mc-cmd:`mc admin replicate status`
-
-      .. code-block:: shell
-
-         mc admin replicate status <ALIAS> --<flag> <value>
-
-      For example:
-
-      - ``mc admin replicate status minio3 --bucket images``
-
-        Displays the replication status for the ``images`` bucket on the ``minio3`` site.
-        
-        The output resembles the following:
-
-        .. code-block::
+  .. code-block::
  
-           ●  Bucket config replication summary for: images
+     ●  Bucket config replication summary for: images
  
-           Bucket          | MINIO2          | MINIO3          | MINIO4         
-           Tags            |                 |                 |                
-           Policy          |                 |                 |                
-           Quota           |                 |                 |                
-           Retention       |                 |                 |                
-           Encryption      |                 |                 |                
-           Replication     | ✔               | ✔               | ✔        
+     Bucket          | MINIO2          | MINIO3          | MINIO4         
+     Tags            |                 |                 |                
+     Policy          |                 |                 |                
+     Quota           |                 |                 |                
+     Retention       |                 |                 |                
+     Encryption      |                 |                 |                
+     Replication     | ✔               | ✔               | ✔        
 
-      - ``mc admin replicate status minio3 --all``
+- ``mc admin replicate status minio3 --all``
 
-        Displays the replication status summary for all replication sites of which ``minio3`` is part. 
+  Displays the replication status summary for all replication sites of which ``minio3`` is part. 
 
-        The output resembles the following:
+  The output resembles the following:
 
-        .. code-block::
+  .. code-block::
 
-           Bucket replication status:
-           ●  1/1 Buckets in sync
-          
-           Policy replication status:
-           ●  5/5 Policies in sync
-          
-           User replication status:
-           ●  1/1 Users in sync
-          
-           Group replication status:
-           ●  0/2 Groups in sync
-          
-           Group           | MINIO2          | MINIO3          | MINIO4         
-           ittechs         | ✗  in-sync      |                 | ✗  in-sync    
-           managers        | ✗  in-sync      |                 | ✗  in-sync    
-       
+     Bucket replication status:
+     ●  1/1 Buckets in sync
+    
+     Policy replication status:
+     ●  5/5 Policies in sync
+    
+     User replication status:
+     ●  1/1 Users in sync
+    
+     Group replication status:
+     ●  0/2 Groups in sync
+    
+     Group           | MINIO2          | MINIO3          | MINIO4         
+     ittechs         | ✗  in-sync      |                 | ✗  in-sync    
+     managers        | ✗  in-sync      |                 | ✗  in-sync    
+ 

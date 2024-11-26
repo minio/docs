@@ -15,8 +15,7 @@
 
    ``mc license register`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z`` or later.
    While not strictly required, best practice keeps the :ref:`MinIO Client version <mc-client-versioning>` in alignment with the MinIO Server version.
-   
-   If for any reason you cannot upgrade your MinIO Client to the required version or later for the purpose of registering to SUBNET, register using the :ref:`MinIO Console <minio-docs-subnet>` instead.
+
 
 Description
 -----------
