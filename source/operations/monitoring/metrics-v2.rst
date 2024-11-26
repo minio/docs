@@ -1,8 +1,7 @@
-:orphan:
 .. _minio-metrics-v2:
 
 =================
-Metrics Version 2
+Metrics version 2
 =================
 
 .. default-domain:: minio
@@ -11,12 +10,41 @@ Metrics Version 2
    :local:
    :depth: 3
 
-.. admonition:: Metrics Version 2 Deprecated
-   :class: note
 
-   Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, :ref:`metrics version 3 <minio-metrics-and-alerts>` replaces the deprecated metrics version 2.
+MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
+You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
-The following sections describe the deprecated endpoints and metrics.
+Metrics version 2 provides metrics organized into three categories:
+
+- :ref:`Cluster Metrics <minio-available-cluster-metrics>`
+- :ref:`Bucket Metrics <minio-available-bucket-metrics>`
+- :ref:`Resource Metrics <minio-available-resource-metrics>`
+
+Each v2 endpoint returns all metrics for its category.
+For example, scraping the following endpoint returns all cluster metrics:
+
+.. code-block:: shell
+   :class: copyable
+
+   http://HOSTNAME:PORT/minio/v2/metrics/cluster
+
+The base endpoint alone, ``/minio/v2/metrics/``, returns cluster metrics.
+
+For more flexible scraping and a wider range of metrics, use :ref:`metrics version 3. <minio-metrics-and-alerts>`
+Existing deployments can continue to use :ref:`metrics version 2 <minio-metrics-v2>` and :ref:`the v2 Grafana dashboards <minio-grafana>`.
+
+
+MinIO Grafana dashboard
+-----------------------
+
+MinIO publishes two :ref:`Grafana Dashboards <minio-grafana>` for visualizing v2 metrics.
+For more complete documentation on configuring a Prometheus-compatible data source for Grafana, see the :prometheus-docs:`Prometheus documentation on Grafana Support <visualization/grafana/>`.
+
+
+Available version 2 metrics
+---------------------------
+
+The following sections describe the version 2 endpoints and metrics.
 
 .. tab-set::
 
