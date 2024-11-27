@@ -32,6 +32,9 @@ The procedure on this page documents the following:
 
    - An :mc:`mc` installation on your local host configured to :ref:`access <alias>` the MinIO deployment
 
+   These instructions use :ref:`version 2 metrics. <minio-metrics-v2>`
+   For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metrics-and-alerts>`
+
 Configure Prometheus to Collect and Alert using MinIO Metrics
 -------------------------------------------------------------
 

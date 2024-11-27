@@ -35,8 +35,9 @@ the server, such as a transient network issue or potential downtime.
 
 The healthcheck probe alone cannot determine if a MinIO server is offline - only
 that the current host machine cannot reach the server. Consider configuring
-a Prometheus :ref:`alert <minio-metrics-and-alerts>` using the 
-``minio_cluster_nodes_offline_total`` metric to detect whether one or
+a Prometheus :ref:`alert <minio-metrics-and-alerts>` using the
+metrics v3 ``minio_cluster_health_nodes_offline_count`` or v2
+``minio_cluster_nodes_offline_total`` metrics to detect whether one or
 more MinIO nodes are offline.
 
 .. _minio-cluster-write-quorum:
