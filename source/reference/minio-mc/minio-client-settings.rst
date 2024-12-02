@@ -186,7 +186,7 @@ When used, output prints to raw ``STDOUT`` instead.
    .. tab-item:: Environment Variable
       :selected:
 
-      .. envvar:: DISABLE_PAGER
+      .. envvar:: MC_DISABLE_PAGER
 
    .. tab-item:: Configuration Setting
 
