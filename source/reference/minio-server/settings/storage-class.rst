@@ -44,9 +44,8 @@ Standard Storage Class
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-settings-no-config-option
-         :end-before: end-minio-settings-no-config-option
+      .. mc-conf:: storage_class standard
+         :delimiter: " "
 
 The :ref:`parity level <minio-ec-parity>` for the deployment.
 MinIO shards objects written with the default ``STANDARD`` storage class using this parity value.
@@ -113,9 +112,8 @@ Reduced Redundancy Storage Class
    .. tab-item:: Configuration Setting
       :sync: config
 
-      .. include:: /includes/common-mc-admin-config.rst
-         :start-after: start-minio-settings-no-config-option
-         :end-before: end-minio-settings-no-config-option
+      .. mc-conf:: storage_class rrs
+         :delimiter: " "
 
 The :ref:`parity level <minio-ec-parity>` for objects written with the ``REDUCED`` storage class.
 
@@ -132,7 +130,6 @@ Defaults to ``EC:0`` for deployments of erasure set size of 1.
 
 Parity Retention Optimization
 -----------------------------
-
 
 .. tab-set::
 
