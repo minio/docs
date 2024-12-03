@@ -110,8 +110,8 @@ Procedure
 
 This procedure requires repeating steps for each MinIO deployment participating in the multi-site replication configuration. Depending on the number of deployments, this procedure may require significant time and care in implementation. MinIO recommends reading through the procedure *before* attempting to implement the documented steps.
 
-- :ref:`Configure Multi-Site Bucket Replication Using the Command Line <minio-bucket-replication-multi-site-minio-cli-procedure>`
-   - :ref:`Create Replication Remote Targets <minio-bucket-replication-multi-site-minio-cli-create-remote-targets>`
+- Configure Multi-Site Bucket Replication Using the Command Line
+   
    - :ref:`Create New Bucket Replication Rules <minio-bucket-replication-multi-site-minio-cli-create-replication-rules>`
    - :ref:`Validate the Replication Configuration <minio-bucket-replication-multi-site-minio-cli-verify-replication-config>` 
 
@@ -128,8 +128,6 @@ This procedure assumes each alias corresponds to a user with the :ref:`necessary
 
    :mc:`mc replicate add` automatically creates the necessary replication targets, removing the need for using the deprecated ``mc admin remote bucket add`` command.
    This procedure only documents the procedure as of that release.
-
-.. _minio-bucket-replication-multi-site-minio-cli-create-remote-targets:
 
 .. _minio-bucket-replication-multi-site-minio-cli-create-replication-rules:
 
