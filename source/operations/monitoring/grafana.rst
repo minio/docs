@@ -22,10 +22,12 @@ Prerequisites
 .. admonition:: Grafana dashboards use metrics version 2
    :class: note
 
-   The MinIO Grafana dashboards are designed for use with :ref:`metrics version 2 <minio-metrics-v2>`.
+   The MinIO Grafana dashboards use :ref:`metrics version 2 <minio-metrics-v2>`.
    For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metrics-and-alerts>`
 
-  
+   Version 3 metrics require creating your own dashboard.
+   For more information about dashboards, see `the Grafana documentation. <https://grafana.com/docs/grafana/latest/dashboards/>`__
+
 MinIO Grafana Dashboard
 -----------------------
 

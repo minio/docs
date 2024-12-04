@@ -14,6 +14,9 @@ Metrics version 2
 MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
+Version 3 Endpoints
+-------------------
+
 Metrics version 2 provides metrics organized into three categories:
 
 - :ref:`Cluster Metrics <minio-available-cluster-metrics>`
@@ -31,7 +34,7 @@ For example, scraping the following endpoint returns all cluster metrics:
 The base endpoint alone, ``/minio/v2/metrics/``, returns cluster metrics.
 
 For more flexible scraping and a wider range of metrics, use :ref:`metrics version 3. <minio-metrics-and-alerts>`
-Existing deployments can continue to use :ref:`metrics version 2 <minio-metrics-v2>` and :ref:`the v2 Grafana dashboards <minio-grafana>`.
+   Existing deployments can continue to use version 2 :ref:`metrics <minio-metrics-v2>` and :ref:`Grafana dashboards <minio-grafana>`.
 
 
 MinIO Grafana dashboard

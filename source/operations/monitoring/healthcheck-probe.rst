@@ -33,8 +33,9 @@ A response code of ``200 OK`` indicates the MinIO server is
 online and functional. Any other HTTP codes indicate an issue with reaching
 the server, such as a transient network issue or potential downtime.
 
-The healthcheck probe alone cannot determine if a MinIO server is offline - only that the current host machine cannot reach the server.
-Consider configuring a Prometheus :ref:`alert <minio-metrics-and-alerts>` using the :ref:`metrics v3 <minio-metrics-and-alerts>` ``minio_cluster_health_nodes_offline_count`` or :ref:`v2 <minio-metrics-v2>` ``minio_cluster_nodes_offline_total`` metrics to detect whether one or more MinIO nodes are offline.
+The healthcheck probe alone cannot determine if a MinIO server is offline.
+Instead, the probe determines whether the current host machine can reach the server.
+Consider configuring a Prometheus :ref:`alert <minio-metrics-and-alerts>` using ``minio_cluster_health_nodes_offline_count`` for :ref:`metrics v3 <minio-available-v3-cluster-metrics>` or ``minio_cluster_nodes_offline_total`` for :ref:`metrics v2 <minio-available-cluster-metrics>` to detect whether one or more MinIO nodes are offline.
 
 .. _minio-cluster-write-quorum:
 

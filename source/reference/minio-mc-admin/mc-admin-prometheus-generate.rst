@@ -21,7 +21,7 @@ The :mc:`mc admin prometheus generate` command generates a metrics scraping conf
 
 For more complete documentation on using MinIO with Prometheus, see :ref:`How to monitor MinIO server with Prometheus <minio-metrics-collect-using-prometheus>`
 
-Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, :ref:`metrics version 3 (v3) <minio-metrics-and-alerts>` provides additional metrics.
+Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, :ref:`metrics version 3 (v3) <minio-metrics-and-alerts>` provides additional endpoints and metrics.
 To generate a v3 scrape configuration use the ``--api_version v3`` option.
 
 MinIO recommends new deployments use :ref:`version 3 (v3) <minio-metrics-and-alerts>`.
@@ -56,7 +56,7 @@ Existing deployments can continue to use :ref:`metrics version 2 <minio-metrics-
                                            ALIAS                                           \
                                            [TYPE]                                          \
                                            [--api_version v3]                              \
-                                           [TYPE --bucket <bucket name> --api_version v3]
+                                           [--bucket <bucket name>]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -76,14 +76,16 @@ Parameters
 
    To generate a scrape configuration for :ref:`v3 metrics <minio-metrics-and-alerts>`, include  an ``--api-version v3`` parameter.
    ``v3`` is the only accepted value.
-   
+
    Omit ``--api-version`` to generate a :ref:`v2 metrics <minio-metrics-v2>` configuration.
 
 .. mc-cmd:: --bucket
    :optional:
 
+   Only valid for v3 metrics.
+
    For v3 metric types that return bucket-level metrics, specify a bucket name.
-   Use with :mc-cmd:`~mc admin prometheus generate --api-version`.
+   Requires :mc-cmd:`~mc admin prometheus generate --api-version`.
 
    ``--bucket`` works for the following v3 metric types:
 
@@ -125,7 +127,7 @@ Parameters
       - ``resource``
 
       If not specified, a ``v2`` command returns cluster metrics.
-      Cluster metrics also include rollups of certain node metrics.
+      Cluster metrics include rollups of certain node metrics.
 
 
 Global flags
@@ -163,10 +165,12 @@ The output resembles the following:
      static_configs:
      - targets: ['localhost:9000']
 
-Generate a v3 cluster metrics config
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin prometheus generate --api-version v3 <mc admin prometheus generate --api-version>` to generate a scrape configuration that collects v3 cluster metrics for a MinIO deployment:
+Generate a v3 metrics config for another type
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To generate a configuration for another metric type, specify the type.
+The following generates a scrape configuration for v3 cluster metrics:
 
 .. code-block:: shell
    :class: copyable
@@ -188,6 +192,7 @@ The output resembles the following:
      - targets: ['localhost:9000']
 
 To generate a configuration for a :mc-cmd:`different metric type <mc admin prometheus generate TYPE>`, replace ``cluster`` with the desired type.
+
 
 Generate a v3 bucket replication metrics config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -237,6 +242,7 @@ The output resembles the following:
      static_configs:
      - targets: [`localhost:9000`]
 
+
 Generate a default metrics v2 config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -261,6 +267,10 @@ The output resembles the following:
      static_configs:
      - targets: ['localhost:9000']
 
+
+Generate a v2 config for other metric types
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 To generate a configuration for another metric type, specify the type.
 The following generates a scrape configuration for v2 bucket metrics:
 
@@ -268,3 +278,4 @@ The following generates a scrape configuration for v2 bucket metrics:
    :class: copyable
 
    mc admin prometheus generate ALIAS bucket
+
