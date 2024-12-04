@@ -273,6 +273,52 @@ Once the MinIO Server verifies the client's certificate, the user can connect to
    
    sftp -P <SFTP port> <server IP>
 
+
+Procedure
++++++++++
+
+The following procedure generates two key-value pairs, signs one with the other, then uses the resulting signed key to log in to the SFTP server.
+
+1. Generate a key-value pair for the MinIO Server
+   
+   .. code-block:: bash
+      :class: copyable
+
+      ssh-keygen -f ./ca_user_key
+
+2. Generate a key-value pair for the user
+
+   .. code-block:: bash
+      :class: copyable
+
+      ssh-keygen -f ./minioadmin
+
+   Replace ``minioadmin`` with the user accessing the MinIO Server by SFTP.
+
+3. Sign the user key-value pair key with the MinIO Server key-value pair key
+
+   .. code-block:: bash
+      :class: copyable
+
+      ssh-keygen -s ca_user_key -I minioadmin -n minioadmin -V +30d -z 1 minioadmin.pub
+
+   Move the ``minioadmin.pub`` key to the same directory as ``minioadmin`` key-value pair, such as ``~/.ssh/meaningful-directory``.
+
+4. Start or restart the MinIO Server passing the generated public keys
+
+   .. code-block:: bash
+      :class: copyable
+
+      minio server --sftp="address=:8022" --sftp="ssh-private-key=/path/to/ca_user_key" --sftp="trusted-user-ca-key=/path/to/ca_user_key.pub"
+
+5. Connect to the MinIO Server by sftp
+
+   .. code-block:: bash
+      :class: copyable
+
+      sftp -i ./minioadmin -oPort=8022 minioadmin@localhost
+
+
 Require service account or LDAP for authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

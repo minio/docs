@@ -42,10 +42,6 @@ Required Fields
      * - ``key:`` 
        - Only for use with the ``sse-kms`` type. 
          The key to use to unseal the key vault.
-     * - ``context:``
-       - Only for use with the ``sse-kms`` type.
-         The context within which to perform actions. 
-
    
 Optional Fields
 ~~~~~~~~~~~~~~~
@@ -73,6 +69,9 @@ For **flag based filters**
      - A date in ``YYYY-MM-DD`` format.
        
        Keys rotate only for objects created prior to the date.
+   * - ``context:``
+     - Only for use with the ``sse-kms`` type.
+       The context within which to perform actions. 
    * - ``tags:``
      - Rotate keys only for objects with tags that match the specified ``key:`` and ``value:``.  
    * - ``metadata:``

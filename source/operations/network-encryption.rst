@@ -585,7 +585,13 @@ Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Ce
 
             mv myCA.crt /opt/minio/certs/CAs/
 
-   For a self-signed certificate, the Certificate Authority is typically the private key used to sign the cert.
+   .. important::
+   
+      Do not use or share the private key of the self-signed certificate. 
+      Only the public certificate should be shared or distributed for trust purposes.
+   
+   For certificates signed by an internal, private, or other non-global Certificate Authority, use the same CA that signed the cert.
+   A non-global CA must include the full chain of trust from the intermediate certificate to the root.
 
    For certificates signed by an internal, private, or other non-global Certificate Authority, use the same CA that signed the cert.
    A non-global CA must include the full chain of trust from the intermediate certificate to the root.
@@ -621,7 +627,3 @@ Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Ce
          :class: copyable
 
          kubectl rollout restart deployments.apps/minio-operator -n minio-operator
-
-
-
-   
