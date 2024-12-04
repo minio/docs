@@ -16,7 +16,6 @@ Depending on the permissions and IAM policies for the authenticated user, you ca
 
 - :ref:`Browse, upload, revert, manage, and interact with objects <minio-console-object-browser>`.
 - :ref:`Browse, create, and manage buckets <minio-console-buckets>`.
-- :ref:`Create or monitor remote tiers <minio-console-tiers>` for object transition rules.
 
 .. _minio-console-object-browser:
 
@@ -84,7 +83,7 @@ While creating a bucket, you can enable :ref:`versioning <minio-bucket-versionin
 
    If you enable versioning, you can specify prefixes to exclude from versioning.
 
-You **must** configure replication, locking, and versioning options at the time of bucket creation.
+You can configure locking and versioning options only when you create the bucket.
 You cannot change these settings for the bucket later.
 
 Managing Buckets
@@ -107,24 +106,6 @@ When managing a bucket, your access settings may allow you to view or change any
 
 - Configure alerts in the :guilabel:`Events` section to trigger :ref:`notification events <minio-bucket-notifications>` when a user uploads, accesses, or deletes matching objects.
 
-- Copy objects to remote locations in the :guilabel:`Replication` section with :ref:`Server Side Bucket Replication Rules <minio-bucket-replication-serverside>`.
-
-- Expire or transition objects in the bucket from the :guilabel:`Lifecycle` section by setting up :ref:`Object Lifecycle Management Rules <minio-lifecycle-management>`.
-
 - Review security in the :guilabel:`Access` section by listing the :ref:`policies <minio-policy>` and :ref:`users <minio-users>` with access to that bucket.
 
 - Properly secure unauthenticated access with the :guilabel:`Anonymous` section by managing rules for prefixes that unauthenticated users can use to read or write objects.
-
-.. _minio-console-tiers:
-
-Tiers
------
-
-The :guilabel:`Tiering` section provides an interface for adding and managing :ref:`remote tiers <minio-lifecycle-management-tiering>` to support lifecycle management transition rules.
-MinIO tiering supports moving objects from the deployment to the remote storage, but does not support automatically restoring them to the deployment.
-
-The tiering tab allows users with the appropriate permissions to:
-
-- Review the status and summary information for all configured remote tiers.
-- Create a tier for a new remote target to storage on another MinIO deployment, Google Cloud Storage, Amazon's AWS S3, or Azure.
-- Cycle the access credentials for any of the configured tiers with the tier's :octicon:`pencil` icon.

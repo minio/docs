@@ -15,7 +15,6 @@ You can use the MinIO Console to perform many of the deployment monitoring and m
 
 - :ref:`Monitor <minio-console-monitoring>` the deployment activity and health by viewing a dashboard of metrics, server or audit logs, trace history, S3 events, or drive health.
 - Configure alerts by adding or managing a :ref:`notification target <minio-console-notifications>`.
-- Set up :ref:`site replication <minio-console-site-replication>` to synchronize datacenters for timely access across geographically dispersed workforces or for disaster preparedness.
 - Configure deployment :ref:`settings <minio-console-settings>`.
 
 .. important::
@@ -105,15 +104,6 @@ You can use this screen configure MinIO to push notification events to the one o
 Select the :guilabel:`Add Event Destination +` button to add a new event target to the deployment.
 
 You can select an existing notification target from the list to view its details or delete the target.
-
-.. _minio-console-site-replication:
-
-Site Replication
-----------------
-
-The :guilabel:`Site Replication` section provides an interface for adding and managing the :ref:`site replication <minio-site-replication-overview>` configuration for the deployment.
-
-Configuring site replication requires that only a single site have existing buckets or objects (if any).
 
 .. _minio-console-encryption:
 

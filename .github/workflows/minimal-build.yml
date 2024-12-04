@@ -1,8 +1,8 @@
 name: Makefile CI
 
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
   build:
@@ -32,11 +32,11 @@ jobs:
         working-directory: ./
 
     - name: build-docs
-      run: ./build-docs-ci.sh
+      run: ./build-docs-ci-minimal.sh
 
     - name: upload-artifact
       uses: actions/upload-artifact@v4
       with:
-        name: assets
+        name: linux-k8s-builds
         compression-level: 9
         path: ./minio
