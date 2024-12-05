@@ -38,7 +38,12 @@ Exercise caution before sending a report to a third party or posting the report 
 .. versionchanged:: RELEASE.2022-12-12T19-27-27Z
    
    When writing the zip archive, MinIO also encrypts the zip index of file names included in the archive.
+   
+.. versionchanged:: RELEASE.2024-10-29T15-34-59Z
 
+   Inspect now generates unique file names to help distinguish one inspect file from another.
+   The file name reflects the inspected path.
+   
 .. important::
    
    :mc:`mc support inspect` requires a MinIO deployment server from October 2021 or later. 
