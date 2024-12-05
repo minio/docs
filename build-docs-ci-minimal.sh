@@ -3,13 +3,11 @@
 set -ex
 
 export PATH=${PATH}:${HOME}/.local/bin
-export GITDIR=main
+export GITDIR=HEAD
 
 
 make SYNC_SDK=TRUE linux
 make k8s
-
-echo $(ls build)
 
 mkdir -p minio/kubernetes/upstream
 cp -vr build/${GITDIR}/k8s/html/* ./minio/kubernetes/upstream/
