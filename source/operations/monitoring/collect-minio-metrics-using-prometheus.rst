@@ -21,6 +21,9 @@ The procedure on this page documents the following:
 - Configuring a Prometheus service to scrape and display metrics from a MinIO deployment
 - Configuring an Alert Rule on a MinIO Metric to trigger an AlertManager action
 
+These instructions use :ref:`version 2 metrics. <minio-metrics-v2>`
+For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metrics-and-alerts>`
+
 .. admonition:: Prerequisites
    :class: note
 
@@ -31,6 +34,7 @@ The procedure on this page documents the following:
    - An existing MinIO deployment with network access to the Prometheus deployment
 
    - An :mc:`mc` installation on your local host configured to :ref:`access <alias>` the MinIO deployment
+
 
 Configure Prometheus to Collect and Alert using MinIO Metrics
 -------------------------------------------------------------

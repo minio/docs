@@ -3,7 +3,7 @@
 .. _minio-metrics-and-alerts:
 
 ==================
-Metrics and Alerts
+Metrics and alerts
 ==================
 
 .. default-domain:: minio
@@ -12,15 +12,24 @@ Metrics and Alerts
    :local:
    :depth: 2
 
-.. admonition:: Metrics Version 2 Deprecated
-   :class: note
 
-   Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 replaces the deprecated :ref:`metrics version 2 <minio-metrics-v2>`.
-
-MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
+MinIO publishes metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
-For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint by appending an additional path for each category.
+Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 provides additional endpoints.
+MinIO recommends version 3 for new deployments.
+
+.. admonition:: Metrics version 2
+   :class: note
+
+   Existing deployments can continue to use version 2 :ref:`metrics <minio-metrics-v2>` and :ref:`Grafana dashboards <minio-grafana>`.
+
+
+Version 3 Endpoints
+-------------------
+
+For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint.
+You can scrape the base endpoint to collect all metrics in a single operation, or append an optional path to return a specific category.
 
 For example, the following endpoint returns audit metrics:
 
@@ -98,7 +107,7 @@ MinIO provides the following scraping endpoints, relative to the base URL:
        
        ``/system/process``
 
-For a complete list of metrics for each endpoint, see :ref:`Available Metrics <minio-metrics-and-alerts-available-metrics>`.
+For a complete list of metrics for each endpoint, see :ref:`Available version 3 etrics <minio-metrics-and-alerts-available-metrics>`.
 
 .. cond:: k8s
 
@@ -114,19 +123,12 @@ For a complete list of metrics for each endpoint, see :ref:`Available Metrics <m
 - Set :envvar:`MINIO_PROMETHEUS_URL` to the URL of the Prometheus service
 - Set :envvar:`MINIO_PROMETHEUS_JOB_ID` to the unique job ID assigned to the collected metrics
 
-MinIO Grafana Dashboard
------------------------
-
-MinIO also publishes two :ref:`Grafana Dashboards <minio-grafana>` for visualizing collected metrics. 
-For more complete documentation on configuring a Prometheus-compatible data source for Grafana, see the :prometheus-docs:`Prometheus documentation on Grafana Support <visualization/grafana/>`.
-
 .. _minio-metrics-and-alerts-available-metrics:
 
-Available Metrics
------------------
+Available version 3 metrics
+---------------------------
 
-MinIO publishes a number of metrics at the cluster, node, or bucket levels.
-Each metric includes a label for the MinIO server which generated that metric.
+MinIO publishes a number of metrics for clusters, API requests, buckets, and other aspects of the MinIO service:
 
 - :ref:`API Metrics <minio-available-v3-api-metrics>`
 - :ref:`Audit Metrics <minio-available-v3-audit-metrics>`
@@ -139,6 +141,7 @@ Each metric includes a label for the MinIO server which generated that metric.
 - :ref:`Scanner Metrics <minio-available-v3-scanner-metrics>`
 - :ref:`System Metrics <minio-available-v3-system-metrics>`
 
+Many metrics include labels identifying the resource which generated that metric and other relevant details.
 
 .. _minio-available-v3-api-metrics:
 
@@ -197,3 +200,4 @@ Each metric includes a label for the MinIO server which generated that metric.
 
    /operations/monitoring/collect-minio-metrics-using-prometheus
    /operations/monitoring/monitor-and-alert-using-influxdb
+   /operations/monitoring/metrics-v2

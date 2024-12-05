@@ -11,7 +11,6 @@ Monitor a MinIO Server with Grafana
    :depth: 2
    
 `Grafana <https://grafana.com/>`__ allows you to query, visualize, alert on and understand your metrics no matter where they are stored. 
-Create, explore, and share dashboards with your team and foster a data driven culture.
 
 Prerequisites
 -------------
@@ -19,6 +18,15 @@ Prerequisites
 - An existing :prometheus-docs:`Prometheus deployment <prometheus/latest/installation/>` with backing :prometheus-docs:`Alert Manager <alerting/latest/overview/>`
 - An existing MinIO deployment with network access to the Prometheus deployment
 - `Grafana installed <https://grafana.com/grafana/download>`__
+
+.. admonition:: Grafana dashboards use metrics version 2
+   :class: note
+
+   The MinIO Grafana dashboards use :ref:`metrics version 2 <minio-metrics-v2>`.
+   For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metrics-and-alerts>`
+
+   Version 3 metrics require creating your own dashboard.
+   For more information about dashboards, see `the Grafana documentation. <https://grafana.com/docs/grafana/latest/dashboards/>`__
 
 MinIO Grafana Dashboard
 -----------------------
