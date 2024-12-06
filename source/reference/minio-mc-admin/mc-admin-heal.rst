@@ -81,6 +81,8 @@ Syntax
    Show information about offline and faulty healing drives.
 
 
+.. _minio-concepts-healing-colors:
+
 Healing Colors
 --------------
 
@@ -90,7 +92,7 @@ Some versions of MinIO used a color key as a way to differentiate objects with d
 
 The color meaning has been updated.
 
-- Green indicates that all is okay with the bucket healing.
-- Yellow indicates the bucket is missing from an expected drive.
-- Red indicates a drive is in an unreadable state (for example, unformatted or offline).
-- Grey indicates that MinIO cannot determine the healing status.
+- Green indicates the bucket is healthy.
+- Yellow indicates the bucket requires healing on one or more drives.
+- Red indicates one or more drives are unhealthy.
+- Grey indicates an indeterminate healing state.

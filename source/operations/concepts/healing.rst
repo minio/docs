@@ -87,30 +87,3 @@ Healing metrics
 MinIO provides several `healing metrics <https://min.io/docs/minio/linux/operations/monitoring/metrics-and-alerts.html#healing-metrics>`__ to monitor the status of healing processes on a deployment.
 
 Refer to the :ref:`minio-metrics-and-alerts` for more information on available endpoints and configuration.
-
-.. _minio-concepts-healing-colors:
-
-Healing Output Color Key
-------------------------
-
-Earlier MinIO versions generated a table with green, yellow, red, and gray colors to indicate the healing status of individual objects.
-These colors have been deprecated in favor of more detailed :ref:`healing metrics available at the cluster level <minio-metrics-and-alerts-available-metrics>`.
-
-The following table describes the meaning of the now-deprecated status colors.
-
-.. list-table::
-   :widths: 25 75
-   :width: 100%
-
-   * - **Green**
-     - *Healthy*, the object has all data and parity shards available as required to serve the object
- 
-   * - **Yellow** 
-     - *Healing*, the object is still in the process of healing, and there are sufficient data or parity shards available to complete the healing
-
-   * - **Red** 
-     - *Unhealthy*, the object has lost one or more shards and requires healing
-
-   * - **Grey** 
-     -  *Unrecoverable*, the object has lost too many data and/or parity shards and cannot be healed or recovered
-
