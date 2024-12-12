@@ -72,7 +72,7 @@ Parameters
 
    .. code-block:: shell
 
-      mc event add play/mybucket
+      mc event rm play/mybucket
 
 .. mc-cmd:: ARN
    :required:
