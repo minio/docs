@@ -87,7 +87,7 @@ Parameters
 
    The event(s) for which MinIO generates bucket notifications.
 
-   Supports the following values:
+   Supports the values from the Supported Bucket Events section. For example:
 
    - ``put``
    - ``get``
