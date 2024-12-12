@@ -54,7 +54,7 @@ The alias :mc:`mc event list` has equivalent functionality to :mc:`mc event ls`.
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] event remove [FLAGS] ALIAS ARN
+   mc [GLOBALFLAGS] event ls [FLAGS] ALIAS ARN
 
 Parameters
 ~~~~~~~~~~
