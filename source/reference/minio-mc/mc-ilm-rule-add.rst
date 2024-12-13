@@ -443,6 +443,10 @@ The following command removes delete markers for objects where the delete marker
 
 - Replace :mc-cmd:`PATH <mc ilm rule add ALIAS>` with the path to the bucket on the S3-compatible host.
 
+.. note::
+
+   To delete all versions of an object with a delete marker as its latest version, *including the delete marker*, consider using :ref:`batch expiration <minio-mc-batch-generate-expire-job>`.
+
 Required Permissions
 --------------------
 
@@ -469,25 +473,6 @@ regardless of its transition status. Use
 :mc:`mc ilm rule ls` to review the currently configured object lifecycle
 management rules for any potential interactions between expiry and transition
 rules.
-
-Expire All Versions of a Deleted Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Starting with :mc-release:`MinIO Server RELEASE.2024-05-01T01-11-10Z`, MinIO supports deleting all versions of an object that has a delete marker as its latest version.
-MinIO only supports this function with JSON.
-
-To add this function, first export the rule to modify with :mc:`mc ilm rule export`.
-Modify the file you exported the rule to with additional JSON that resembles the following:
-
-.. code-block:: text
-   :class: copyable
-
-   <DelMarkerObjectExpiration>
-       <Days> 10 </Days>
-   </DelMarkerObjectExpiration>   
-
-This example ``JSON`` expires all versions of the deleted object after 10 days.
-Modify the value in the ``<Days>`` element to the number of days you want to wait after deleting or expiring the object.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~
