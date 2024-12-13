@@ -44,6 +44,10 @@ Subcommands
           :start-after: start-mc-license-register-desc
           :end-before: end-mc-license-register-desc
 
+   * - :mc:`~mc license update`
+     - .. include:: /reference/minio-mc/mc-license-update.rst
+          :start-after: start-mc-license-update-desc
+          :end-before: end-mc-license-update-desc
 
 .. toctree::
    :titlesonly:
@@ -51,3 +55,4 @@ Subcommands
    
    /reference/minio-mc/mc-license-info
    /reference/minio-mc/mc-license-register
+   /reference/minio-mc/mc-license-update

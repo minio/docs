@@ -10,19 +10,6 @@
 
 .. mc:: mc license update
 
-.. important:: 
-
-   This command is no longer maintained in the Open Source MinIO Server or MinIO Client product and has been removed completely as of MinIO Client ``RELEASE.2024-07-03T20-17-25Z``.
-
-   For questions about licensing the MinIO Server, contact sales@min.io.
-
-.. note::
-
-   ``mc license update`` requires :ref:`MinIO Client <minio-client>` version ``RELEASE.2023-11-20T16-30-59Z``.
-   While not strictly required, best practice keeps the :ref:`MinIO Client version <mc-client-versioning>` in alignment with the MinIO Server version.
-   
-   If for any reason you cannot upgrade your MinIO Client to the required version or later for the purpose of registering to SUBNET, register using the :ref:`MinIO Console <minio-docs-subnet>` instead.
-
 Description
 -----------
 
@@ -32,11 +19,7 @@ Use the :mc-cmd:`mc license update` command to replace a license key for a deplo
 
 .. end-mc-license-update-desc
 
-.. versionchanged:: RELEASE.2023-01-18T04-36-38Z
-
-   For deployments registered for |SUBNET|, MinIO automatically checks for and updates the license every month.
-
-If not passed with the command, MinIO checks the license file on SUBNET and automatically updates it.
+For deployments registered for |SUBNET|, MinIO automatically checks for and updates the license every month.
 
 Examples
 --------
