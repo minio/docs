@@ -234,7 +234,7 @@ Use Consistent Type of Drive
    This can result in performance issues, as some drives have differing or worse read/write characteristics and cannot respond at the same rate as the NVMe drives.
 
 Use Consistent Size of Drive
-   MinIO limits the size used per drive to the smallest drive in the deployment.
+   MinIO limits the size used per drive to the smallest drive in the pool.
 
    For example, deploy a pool consisting of the same number of NVMe drives with identical capacity of ``7.68TiB``.
    If you deploy one drive with ``3.84TiB``, MinIO treats all drives in the pool as having that smaller capacity.
