@@ -37,7 +37,7 @@ For example, the following commands set two distinct Redis service endpoints as 
          :class: copyable
       
          set MINIO_NOTIFY_REDIS_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_REDIS_REDIS_ADDRESS_PRIMARY="redis-endpoint.example.net:9200"
+         set MINIO_NOTIFY_REDIS_ADDRESS_PRIMARY="redis-endpoint.example.net:9200"
          set MINIO_NOTIFY_REDIS_KEY_PRIMARY="bucketevents"
          set MINIO_NOTIFY_REDIS_FORMAT_PRIMARY="namespace"
       
