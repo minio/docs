@@ -120,13 +120,13 @@ Parameters
    :optional:
 
    Length of time for which the accesskey remains valid.
+   Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
 
-   For example, ``30m, ``24h``, ``30d``, or similar.
    The following expires the credentials after 30 days:
 
    .. code-block::
 
-      --expiry-duration 30d
+      --expiry-duration 720h
 
    Mutually exclusive with :mc-cmd:`~mc admin accesskey create --expiry`.
 
