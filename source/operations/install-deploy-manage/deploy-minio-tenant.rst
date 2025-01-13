@@ -203,8 +203,8 @@ Persistent Volumes
 Namespace
 ~~~~~~~~~
 
-The tenant must use its own namespace with no other tenant.
-MinIO strongly recommends using a dedicated namespace for the tenant with no other applications running in the namespace.
+The tenant must use its own namespace and cannot share a namespace with another tenant.
+In addition, MinIO strongly recommends using a dedicated namespace for the tenant with no other applications running in the namespace.
 
 .. _minio-k8s-deploy-minio-tenant-security:
 
