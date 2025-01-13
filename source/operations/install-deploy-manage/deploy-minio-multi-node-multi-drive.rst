@@ -141,7 +141,9 @@ Consider using the MinIO `Erasure Code Calculator <https://min.io/product/erasur
 
 .. important::
 
-   While you can change erasure parity settings at any time, objects written with a given parity do **not** automatically update to the new parity settings.
+   While you can change erasure parity settings at any time, objects written with a given parity do **not** update to the new parity settings.
+   MinIO only applies the changed parity to newly written objects.
+   Existing objects retain the parity value in place at the time of their creation.
 
 Capacity-Based Planning
 ~~~~~~~~~~~~~~~~~~~~~~~
