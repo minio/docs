@@ -200,6 +200,12 @@ Persistent Volumes
    MinIO strongly recommends SSD-backed disk types for best performance.
    For more information on AKS disk types, see :azure-docs:`Azure disk types <virtual-machines/disk-types>`.
 
+Namespace
+~~~~~~~~~
+
+The tenant must use its own namespace and cannot share a namespace with another tenant.
+In addition, MinIO strongly recommends using a dedicated namespace for the tenant with no other applications running in the namespace.
+
 .. _minio-k8s-deploy-minio-tenant-security:
 
 Deploy a MinIO Tenant using Kustomize
