@@ -25,6 +25,8 @@ Host Credentials
 Use this setting to add a temporary alias to use for `mc` commands.
 For example, for use with scripting.
 
+The temporary alias uses the ``s3v4`` API.
+
 .. tab-set::
 
    .. tab-item:: Environment Variable
