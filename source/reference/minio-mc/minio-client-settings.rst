@@ -25,7 +25,7 @@ Host Credentials
 Use this setting to add a temporary alias to use for `mc` commands.
 For example, for use with scripting.
 
-The temporary alias uses the ``s3v4`` API.
+The temporary alias uses the :aws-docs:`AWS s3v4 API <AmazonS3/latest/API/sig-v4-authenticating-requests.html>`.
 
 .. tab-set::
 
