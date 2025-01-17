@@ -36,7 +36,6 @@ MinIO Pre-requisites
        - ``mlocate`` or ``plocate``
        - ``updatedb``
        - ``auditd``
-       - ``fstrim``
        - Crowdstrike Falcon
        - Antivirus software (``clamav``)
       
