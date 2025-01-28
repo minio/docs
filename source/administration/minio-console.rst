@@ -19,6 +19,7 @@ Overview
 --------
 
 You can use the MinIO Console for administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration.
+It provides access to many common options and complements the more comprehensive command line configurations available using :mc:`mc`.
 
 The MinIO Console is embedded as part of the MinIO Server. 
 You can also deploy a standalone MinIO Console using the instructions in the :minio-git:`github repository <console>`.
