@@ -123,7 +123,7 @@ Airgapped or internet-isolated deployments may utilize this feature for updating
 .. code-block:: shell
    :class: copyable
 
-   mc admin update ALIAS https://minio-mirror.example.com/minio
+   mc admin update ALIAS https://minio-mirror.example.com/minio.sha256sum
 
 You should upgrade your :mc:`mc` binary to match or closely follow the MinIO server release. 
 You can use the :mc:`mc update` command to update the binary to the latest stable release:
