@@ -39,15 +39,15 @@ Examples
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_ELASTICSEARCH_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_ELASTICSEARCH_URL_PRIMARY="https://user:password@elasticsearch-endpoint.example.net:9200"
-         set MINIO_NOTIFY_ELASTICSEARCH_INDEX_PRIMARY="bucketevents"
-         set MINIO_NOTIFY_ELASTICSEARCH_FORMAT_PRIMARY="namespace"
+         export MINIO_NOTIFY_ELASTICSEARCH_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_ELASTICSEARCH_URL_PRIMARY="https://user:password@elasticsearch-endpoint.example.net:9200"
+         export MINIO_NOTIFY_ELASTICSEARCH_INDEX_PRIMARY="bucketevents"
+         export MINIO_NOTIFY_ELASTICSEARCH_FORMAT_PRIMARY="namespace"
       
-         set MINIO_NOTIFY_ELASTICSEARCH_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_ELASTICSEARCH_URL_SECONDARY="https://user:password@elasticsearch-endpoint.example.net:9200"
-         set MINIO_NOTIFY_ELASTICSEARCH_INDEX_SECONDARY="bucketevents"
-         set MINIO_NOTIFY_ELASTICSEARCH_FORMAT_SECONDARY="namespace"
+         export MINIO_NOTIFY_ELASTICSEARCH_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_ELASTICSEARCH_URL_SECONDARY="https://user:password@elasticsearch-endpoint.example.net:9200"
+         export MINIO_NOTIFY_ELASTICSEARCH_INDEX_SECONDARY="bucketevents"
+         export MINIO_NOTIFY_ELASTICSEARCH_FORMAT_SECONDARY="namespace"
 
    .. tab-item:: Configuration Settings
       :sync: config

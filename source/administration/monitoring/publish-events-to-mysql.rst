@@ -62,18 +62,34 @@ You can configure a new MySQL service endpoint using either environment variable
       - :envvar:`MINIO_NOTIFY_MYSQL_DSN_STRING` 
       - :envvar:`MINIO_NOTIFY_MYSQL_TABLE`
       - :envvar:`MINIO_NOTIFY_MYSQL_FORMAT`
-      
-      .. code-block:: shell
-         :class: copyable
 
-         set MINIO_NOTIFY_MYSQL_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_MYSQL_DSN_STRING_<IDENTIFIER>="user:password@tcp(hostname:port)/database"
-         set MINIO_NOTIFY_MYSQL_TABLE_<IDENTIFIER>="minio-events"
-         set MINIO_NOTIFY_MYSQL_FORMAT_<IDENTIFIER>="namespace|access"
-         set MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
-         set MINIO_NOTIFY_MYSQL_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
-         set MINIO_NOTIFY_MYSQL_QUEUE_LIMIT_<IDENTIFIER>="100000"
-         set MINIO_NOTIFY_MYSQL_COMMENT_<IDENTIFIER>="MySQL Event Notification Logging for MinIO"
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_MYSQL_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_MYSQL_DSN_STRING_<IDENTIFIER>="user:password@tcp(hostname:port)/database"
+               set MINIO_NOTIFY_MYSQL_TABLE_<IDENTIFIER>="minio-events"
+               set MINIO_NOTIFY_MYSQL_FORMAT_<IDENTIFIER>="namespace|access"
+               set MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
+               set MINIO_NOTIFY_MYSQL_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
+               set MINIO_NOTIFY_MYSQL_QUEUE_LIMIT_<IDENTIFIER>="100000"
+               set MINIO_NOTIFY_MYSQL_COMMENT_<IDENTIFIER>="MySQL Event Notification Logging for MinIO"
+
+      .. cond:: not windows
+
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_MYSQL_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_MYSQL_DSN_STRING_<IDENTIFIER>="user:password@tcp(hostname:port)/database"
+               export MINIO_NOTIFY_MYSQL_TABLE_<IDENTIFIER>="minio-events"
+               export MINIO_NOTIFY_MYSQL_FORMAT_<IDENTIFIER>="namespace|access"
+               export MINIO_NOTIFY_MYSQL_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
+               export MINIO_NOTIFY_MYSQL_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
+               export MINIO_NOTIFY_MYSQL_QUEUE_LIMIT_<IDENTIFIER>="100000"
+               export MINIO_NOTIFY_MYSQL_COMMENT_<IDENTIFIER>="MySQL Event Notification Logging for MinIO"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         MySQL service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -151,7 +167,7 @@ You can configure a new MySQL service endpoint using either environment variable
       <minio-server-config-bucket-notification-mysql>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

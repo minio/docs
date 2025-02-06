@@ -36,16 +36,16 @@ For example, the following commands set two distinct Redis service endpoints as 
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_REDIS_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_REDIS_ADDRESS_PRIMARY="redis-endpoint.example.net:9200"
-         set MINIO_NOTIFY_REDIS_KEY_PRIMARY="bucketevents"
-         set MINIO_NOTIFY_REDIS_FORMAT_PRIMARY="namespace"
+         export MINIO_NOTIFY_REDIS_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_REDIS_ADDRESS_PRIMARY="redis-endpoint.example.net:9200"
+         export MINIO_NOTIFY_REDIS_KEY_PRIMARY="bucketevents"
+         export MINIO_NOTIFY_REDIS_FORMAT_PRIMARY="namespace"
       
       
-         set MINIO_NOTIFY_REDIS_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_REDIS_REDIS_ADDRESS_SECONDARY="redis-endpoint2.example.net:9200"
-         set MINIO_NOTIFY_REDIS_KEY_SECONDARY="bucketevents"
-         set MINIO_NOTIFY_REDIS_FORMAT_SECONDARY="namespace"
+         export MINIO_NOTIFY_REDIS_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_REDIS_REDIS_ADDRESS_SECONDARY="redis-endpoint2.example.net:9200"
+         export MINIO_NOTIFY_REDIS_KEY_SECONDARY="bucketevents"
+         export MINIO_NOTIFY_REDIS_FORMAT_SECONDARY="namespace"
 
    .. tab-item:: Configuration Settings
       :sync: config

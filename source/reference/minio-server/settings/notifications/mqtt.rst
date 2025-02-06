@@ -36,11 +36,11 @@ For example, the following commands set two distinct MQTT service endpoints as `
       .. code-block:: shell
          :class: copyable
    
-         set MINIO_NOTIFY_MQTT_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_MQTT_BROKER_PRIMARY="tcp://user:password@mqtt-endpoint.example.net:1883"
+         export MINIO_NOTIFY_MQTT_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_MQTT_BROKER_PRIMARY="tcp://user:password@mqtt-endpoint.example.net:1883"
    
-         set MINIO_NOTIFY_MQTT_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_MQTT_BROKER_SECONDARY="tcp://user:password@mqtt-endpoint.example.net:1883"
+         export MINIO_NOTIFY_MQTT_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_MQTT_BROKER_SECONDARY="tcp://user:password@mqtt-endpoint.example.net:1883"
 
    .. tab-item:: Configuration Setting
       :sync: config

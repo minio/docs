@@ -58,17 +58,33 @@ You can configure a new Redis service endpoint using either environment variable
       - :envvar:`MINIO_NOTIFY_REDIS_KEY` 
       - :envvar:`MINIO_NOTIFY_REDIS_FORMAT`
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_REDIS_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_REDIS_ADDRESS_<IDENTIFIER>="<ENDPOINT>"
+               set MINIO_NOTIFY_REDIS_KEY_<IDENTIFIER>="<STRING>"
+               set MINIO_NOTIFY_REDIS_FORMAT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_REDIS_PASSWORD_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_REDIS_QUEUE_DIR_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_REDIS_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_REDIS_COMMENT_<IDENTIFIER>="<string>"
 
-         set MINIO_NOTIFY_REDIS_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_REDIS_ADDRESS_<IDENTIFIER>="<ENDPOINT>"
-         set MINIO_NOTIFY_REDIS_KEY_<IDENTIFIER>="<STRING>"
-         set MINIO_NOTIFY_REDIS_FORMAT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_REDIS_PASSWORD_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_REDIS_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_REDIS_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_REDIS_COMMENT_<IDENTIFIER>="<string>"
+      .. cond:: not windows
+
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_REDIS_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_REDIS_ADDRESS_<IDENTIFIER>="<ENDPOINT>"
+               export MINIO_NOTIFY_REDIS_KEY_<IDENTIFIER>="<STRING>"
+               export MINIO_NOTIFY_REDIS_FORMAT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_REDIS_PASSWORD_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_REDIS_QUEUE_DIR_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_REDIS_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_REDIS_COMMENT_<IDENTIFIER>="<string>"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         TARGET service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -133,7 +149,7 @@ You can configure a new Redis service endpoint using either environment variable
       <minio-server-config-bucket-notification-redis>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

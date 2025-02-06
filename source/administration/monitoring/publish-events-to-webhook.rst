@@ -55,18 +55,33 @@ variables *or* by setting runtime configuration settings.
       :envvar:`MINIO_NOTIFY_WEBHOOK_ENABLE` and 
       :envvar:`MINIO_NOTIFY_WEBHOOK_ENDPOINT`:
 
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_WEBHOOK_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_WEBHOOK_ENDPOINT_<IDENTIFIER>="ENDPOINT"
+               set MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_WEBHOOK_QUEUE_DIR_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_WEBHOOK_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_WEBHOOK_CLIENT_CERT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_WEBHOOK_CLIENT_KEY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_WEBHOOK_COMMENT_<IDENTIFIER>="<string>"
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: not windows
 
-         set MINIO_NOTIFY_WEBHOOK_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_WEBHOOK_ENDPOINT_<IDENTIFIER>="ENDPOINT"
-         set MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_WEBHOOK_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_WEBHOOK_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_WEBHOOK_CLIENT_CERT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_WEBHOOK_CLIENT_KEY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_WEBHOOK_COMMENT_<IDENTIFIER>="<string>"
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_WEBHOOK_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_WEBHOOK_ENDPOINT_<IDENTIFIER>="ENDPOINT"
+               export MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_WEBHOOK_QUEUE_DIR_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_WEBHOOK_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_WEBHOOK_CLIENT_CERT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_WEBHOOK_CLIENT_KEY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_WEBHOOK_COMMENT_<IDENTIFIER>="<string>"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         Webhook service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -131,7 +146,7 @@ variables *or* by setting runtime configuration settings.
       <minio-server-config-bucket-notification-webhook>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

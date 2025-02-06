@@ -163,7 +163,7 @@ Auth Token
       .. code-block:: shell
          :class: copyable
    
-         set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+         export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
    
       Modify the value according to the endpoint requirements.
       A custom authentication format could resemble the following:
@@ -171,7 +171,7 @@ Auth Token
       .. code-block:: shell
          :class: copyable
    
-         set MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+         export MINIO_LOGGER_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
    
       Consult the documentation for the desired service for more details.
    
@@ -489,7 +489,7 @@ Depending on the endpoint, you may need to include additional information.
       .. code-block:: shell
          :class: copyable
 
-         set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+         export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
 
       Modify the value according to the endpoint requirements.
       
@@ -498,7 +498,7 @@ Depending on the endpoint, you may need to include additional information.
       .. code-block:: shell
          :class: copyable
 
-         set MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+         export MINIO_AUDIT_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
 
    .. tab-item:: Configuration Setting
       :sync: config

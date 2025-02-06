@@ -175,8 +175,9 @@ Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
          .. code-block:: shell
             :class: copyable
 
-            set MINIO_BROWSER_CONTENT_SECURITY_POLICY="default-src 'self' 'unsafe-eval' 'unsafe-inline';"
+            export MINIO_BROWSER_CONTENT_SECURITY_POLICY="default-src 'self' 'unsafe-eval' 'unsafe-inline';"
 
+            
    .. tab-item:: Configuration Setting
       :sync: config
 
@@ -215,7 +216,7 @@ Other HSTS settings are optional.
          .. code-block:: shell
             :class: copyable
 
-            set MINIO_BROWSER_HSTS_SECONDS=31536000
+            export MINIO_BROWSER_HSTS_SECONDS=31536000            
 
       .. envvar:: MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS
 
@@ -225,7 +226,7 @@ Other HSTS settings are optional.
          .. code-block:: shell
             :class: copyable
 
-            set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
+            export MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
 
       .. envvar:: MINIO_BROWSER_HSTS_PRELOAD
 
@@ -235,7 +236,7 @@ Other HSTS settings are optional.
          .. code-block:: shell
             :class: copyable
 
-            set MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS="on"
+            export MINIO_BROWSER_HSTS_PRELOAD="on"
 
    .. tab-item:: Configuration Settings
       :sync: config
@@ -348,7 +349,7 @@ Defaults to ``strict-origin-when-cross-origin``.
          .. code-block:: shell
             :class: copyable
 
-            set MINIO_BROWSER_REFERRER_POLICY="strict-origin-when-cross-origin"
+            export MINIO_BROWSER_REFERRER_POLICY="strict-origin-when-cross-origin"
 
    .. tab-item:: Configuration Setting
       :sync: config
