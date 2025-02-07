@@ -65,18 +65,33 @@ variables *or* by setting runtime configuration settings.
       - :envvar:`MINIO_NOTIFY_POSTGRES_TABLE`
       - :envvar:`MINIO_NOTIFY_POSTGRES_FORMAT`
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_POSTGRES_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_<IDENTIFIER>="host=postgresql-endpoint.example.net port=4222"
+               set MINIO_NOTIFY_POSTGRES_TABLE_<IDENTIFIER>="minioevents"
+               set MINIO_NOTIFY_POSTGRES_FORMAT_<IDENTIFIER>="namespace|access"
+               set MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
+               set MINIO_NOTIFY_POSTGRES_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
+               set MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT_<IDENTIFIER>="100000"
+               set MINIO_NOTIFY_POSTGRES_COMMENT_<IDENTIFIER>="PostgreSQL Notification Event Logging for MinIO"
 
-         set MINIO_NOTIFY_POSTGRES_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_<IDENTIFIER>="host=postgresql-endpoint.example.net port=4222"
-         set MINIO_NOTIFY_POSTGRES_TABLE_<IDENTIFIER>="minioevents"
-         set MINIO_NOTIFY_POSTGRES_FORMAT_<IDENTIFIER>="namespace|access"
-         set MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
-         set MINIO_NOTIFY_POSTGRES_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
-         set MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT_<IDENTIFIER>="100000"
-         set MINIO_NOTIFY_POSTGRES_COMMENT_<IDENTIFIER>="PostgreSQL Notification Event Logging for MinIO"
+      .. cond:: not windows
 
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_POSTGRES_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_<IDENTIFIER>="host=postgresql-endpoint.example.net port=4222"
+               export MINIO_NOTIFY_POSTGRES_TABLE_<IDENTIFIER>="minioevents"
+               export MINIO_NOTIFY_POSTGRES_FORMAT_<IDENTIFIER>="namespace|access"
+               export MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
+               export MINIO_NOTIFY_POSTGRES_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
+               export MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT_<IDENTIFIER>="100000"
+               export MINIO_NOTIFY_POSTGRES_COMMENT_<IDENTIFIER>="PostgreSQL Notification Event Logging for MinIO"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         PostgreSQL service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -154,7 +169,7 @@ variables *or* by setting runtime configuration settings.
       <minio-server-config-bucket-notification-postgresql>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

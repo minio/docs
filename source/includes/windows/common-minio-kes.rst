@@ -115,7 +115,7 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
    - The documentation on this site uses API keys.
 
    .. code-block:: shell
-      :substitions:
+      :substitutions:
 
       MINIO_KMS_KES_CERT_FILE=|miniocertpath|\minio-kes.cert
       MINIO_KMS_KES_KEY_FILE=|miniocertpath|\minio-kes.key

@@ -40,11 +40,11 @@ For example, the following commands set two distinct AMQP service endpoints as `
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_AMQP_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_AMQP_URL_PRIMARY="amqp://user:password@amqp-endpoint.example.net:5672"
+         export MINIO_NOTIFY_AMQP_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_AMQP_URL_PRIMARY="amqp://user:password@amqp-endpoint.example.net:5672"
       
-         set MINIO_NOTIFY_AMQP_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_AMQP_URL_SECONDARY="amqp://user:password@amqp-endpoint.example.net:5672"
+         export MINIO_NOTIFY_AMQP_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_AMQP_URL_SECONDARY="amqp://user:password@amqp-endpoint.example.net:5672"
    
       For example, :envvar:`MINIO_NOTIFY_AMQP_ENABLE_PRIMARY <MINIO_NOTIFY_AMQP_ENABLE>` indicates the environment variable is associated to an AMQP service endpoint with ID of ``PRIMARY``.
    

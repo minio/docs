@@ -123,7 +123,7 @@ Refer to the :kube-docs:`Kustomize Documentation <tasks/manage-kubernetes-object
   .. code-block:: shell
      :class: copyable
 
-     kubectl apply -f ./
+     kubectl apply -k ./
 
   The output resembles the following:
 

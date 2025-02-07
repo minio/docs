@@ -40,11 +40,11 @@ For example, the following commands set two distinct Kafka service endpoints as 
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_KAFKA_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_KAFKA_BROKERS_PRIMARY="https://kafka1.example.net:9200, https://kafka2.example.net:9200"
+         export MINIO_NOTIFY_KAFKA_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_KAFKA_BROKERS_PRIMARY="https://kafka1.example.net:9200, https://kafka2.example.net:9200"
       
-         set MINIO_NOTIFY_KAFKA_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_KAFKA_BROKERS_SECONDARY="https://kafka1.example.net:9200, https://kafka2.example.net:9200"
+         export MINIO_NOTIFY_KAFKA_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_KAFKA_BROKERS_SECONDARY="https://kafka1.example.net:9200, https://kafka2.example.net:9200"
 
    .. tab-item:: Configuration Setting
       :sync: config

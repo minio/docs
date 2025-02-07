@@ -37,11 +37,11 @@ For example, the following commands set two distinct Webhook service endpoints a
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_WEBHOOK_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_WEBHOOK_ENDPOINT_PRIMARY="https://webhook1.example.net"
+         export MINIO_NOTIFY_WEBHOOK_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_WEBHOOK_ENDPOINT_PRIMARY="https://webhook1.example.net"
       
-         set MINIO_NOTIFY_WEBHOOK_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_WEBHOOK_ENDPOINT_SECONDARY="https://webhook1.example.net"
+         export MINIO_NOTIFY_WEBHOOK_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_WEBHOOK_ENDPOINT_SECONDARY="https://webhook1.example.net"
 
    .. tab-item:: Configuration Settings
       :sync: config
@@ -140,7 +140,7 @@ Auth Token
       .. code-block:: shell
          :class: copyable
    
-         set MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
+         export MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_myendpoint="Bearer 1a2b3c4f5e"
    
       Modify the value according to the endpoint requirements.
       A custom authentication format could resemble the following:
@@ -148,7 +148,7 @@ Auth Token
       .. code-block:: shell
          :class: copyable
    
-         set MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
+         export MINIO_NOTIFY_WEBHOOK_AUTH_TOKEN_xyz="ServiceXYZ 1a2b3c4f5e"
    
       Consult the documentation for the desired service for more details.
 

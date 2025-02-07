@@ -48,11 +48,11 @@ For example, the following commands set two distinct NATS service endpoints as `
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_NATS_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_NATS_ADDRESS_PRIMARY="nats-endpoint.example.net:4222"
+         export MINIO_NOTIFY_NATS_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_NATS_ADDRESS_PRIMARY="nats-endpoint.example.net:4222"
 
-         set MINIO_NOTIFY_NATS_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_NATS_ADDRESS_SECONDARY="nats-endpoint.example.net:4222"
+         export MINIO_NOTIFY_NATS_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_NATS_ADDRESS_SECONDARY="nats-endpoint.example.net:4222"
 
       With these settings, :envvar:`MINIO_NOTIFY_NATS_ENABLE_PRIMARY <MINIO_NOTIFY_NATS_ENABLE>` indicates the environment variable is associated to an NATS service endpoint with ID of ``PRIMARY``.
 

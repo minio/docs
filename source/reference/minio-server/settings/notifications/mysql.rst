@@ -40,15 +40,15 @@ The following commands set two distinct MySQL service endpoints as ``PRIMARY`` a
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_MYSQL_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_MYSQL_DSN_STRING_PRIMARY="username:password@tcp(mysql.example.com:3306)/miniodb"
-         set MINIO_NOTIFY_MYSQL_TABLE_PRIMARY="minioevents"
-         set MINIO_NOTIFY_MYSQL_FORMAT_PRIMARY="namespace"
+         export MINIO_NOTIFY_MYSQL_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_MYSQL_DSN_STRING_PRIMARY="username:password@tcp(mysql.example.com:3306)/miniodb"
+         export MINIO_NOTIFY_MYSQL_TABLE_PRIMARY="minioevents"
+         export MINIO_NOTIFY_MYSQL_FORMAT_PRIMARY="namespace"
       
-         set MINIO_NOTIFY_MYSQL_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_MYSQL_DSN_STRING_SECONDARY="username:password@tcp(mysql.example.com:3306)/miniodb"
-         set MINIO_NOTIFY_MYSQL_TABLE_SECONDARY="minioevents"
-         set MINIO_NOTIFY_MYSQL_FORMAT_SECONDARY="namespace"
+         export MINIO_NOTIFY_MYSQL_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_MYSQL_DSN_STRING_SECONDARY="username:password@tcp(mysql.example.com:3306)/miniodb"
+         export MINIO_NOTIFY_MYSQL_TABLE_SECONDARY="minioevents"
+         export MINIO_NOTIFY_MYSQL_FORMAT_SECONDARY="namespace"
 
       With these settings, :envvar:`MINIO_NOTIFY_MYSQL_ENABLE_PRIMARY <MINIO_NOTIFY_MYSQL_ENABLE>` indicates the environment variable is associated to a MySQL service endpoint with ID of ``PRIMARY``.
 

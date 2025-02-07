@@ -68,19 +68,35 @@ You can configure a new Elasticsearch service endpoint using either environment 
       - :envvar:`MINIO_NOTIFY_ELASTICSEARCH_INDEX`
       - :envvar:`MINIO_NOTIFY_ELASTICSEARCH_FORMAT`
 
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_ELASTICSEARCH_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_ELASTICSEARCH_URL_<IDENTIFIER>="<ENDPOINT>"
+               set MINIO_NOTIFY_ELASTICSEARCH_INDEX_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_ELASTICSEARCH_FORMAT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_ELASTICSEARCH_USERNAME_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_ELASTICSEARCH_PASSWORD_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_ELASTICSEARCH_QUEUE_DIR_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_ELASTICSEARCH_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_ELASTICSEARCH_COMMENT_<IDENTIFIER>="<string>"
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: not windows
 
-         set MINIO_NOTIFY_ELASTICSEARCH_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_ELASTICSEARCH_URL_<IDENTIFIER>="<ENDPOINT>"
-         set MINIO_NOTIFY_ELASTICSEARCH_INDEX_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_ELASTICSEARCH_FORMAT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_ELASTICSEARCH_USERNAME_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_ELASTICSEARCH_PASSWORD_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_ELASTICSEARCH_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_ELASTICSEARCH_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_ELASTICSEARCH_COMMENT_<IDENTIFIER>="<string>"
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_ELASTICSEARCH_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_ELASTICSEARCH_URL_<IDENTIFIER>="<ENDPOINT>"
+               export MINIO_NOTIFY_ELASTICSEARCH_INDEX_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_ELASTICSEARCH_FORMAT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_ELASTICSEARCH_USERNAME_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_ELASTICSEARCH_PASSWORD_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_ELASTICSEARCH_QUEUE_DIR_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_ELASTICSEARCH_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_ELASTICSEARCH_COMMENT_<IDENTIFIER>="<string>"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         TARGET service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -150,7 +166,7 @@ You can configure a new Elasticsearch service endpoint using either environment 
       <minio-server-config-bucket-notification-elasticsearch>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

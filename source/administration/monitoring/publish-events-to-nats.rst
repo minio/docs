@@ -52,25 +52,49 @@ You can configure a new NATS service endpoint using either environment variables
       The following example code sets *all*  environment variables related to configuring an NATS service endpoint. 
       The minimum *required* variables are :envvar:`MINIO_NOTIFY_NATS_ADDRESS` and :envvar:`MINIO_NOTIFY_NATS_SUBJECT`:
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_NATS_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_NATS_ADDRESS_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_SUBJECT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_USERNAME_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_PASSWORD_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_TOKEN_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_TLS_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_PING_INTERVAL_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_QUEUE_DIR_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_CERT_AUTHORITY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_CLIENT_CERT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_CLIENT_KEY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_COMMENT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NATS_JETSTREAM_<IDENTIFIER>="<string>"
 
-         set MINIO_NOTIFY_NATS_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_NATS_ADDRESS_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_SUBJECT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_USERNAME_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_PASSWORD_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_TOKEN_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_TLS_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_PING_INTERVAL_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_CERT_AUTHORITY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_CLIENT_CERT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_CLIENT_KEY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_COMMENT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NATS_JETSTREAM_<IDENTIFIER>="<string>"
+      .. cond:: not windows
+
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_NATS_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_NATS_ADDRESS_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_SUBJECT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_USERNAME_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_PASSWORD_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_TOKEN_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_TLS_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_PING_INTERVAL_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_QUEUE_DIR_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_CERT_AUTHORITY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_CLIENT_CERT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_CLIENT_KEY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_COMMENT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NATS_JETSTREAM_<IDENTIFIER>="<string>"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the NATS service endpoint. 
         Use the same ``<IDENTIFIER>`` value for all environment variables related to the new target service endpoint.

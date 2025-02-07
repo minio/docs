@@ -73,23 +73,46 @@ You can configure a new AMQP service endpoint using either environment variables
       *required* variables are
       :envvar:`MINIO_NOTIFY_AMQP_ENABLE` and :envvar:`MINIO_NOTIFY_AMQP_URL`:
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_AMQP_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_AMQP_URL_<IDENTIFIER>="<ENDPOINT>"
+               set MINIO_NOTIFY_AMQP_EXCHANGE_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_EXCHANGE_TYPE_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_ROUTING_KEY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_MANDATORY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_DURABLE_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_NO_WAIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_INTERNAL_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_AUTO_DELETED_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_DELIVERY_MODE_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_QUEUE_DIR_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_AMQP_COMMENT_<IDENTIFIER>="<string>"
 
-         set MINIO_NOTIFY_AMQP_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_AMQP_URL_<IDENTIFIER>="<ENDPOINT>"
-         set MINIO_NOTIFY_AMQP_EXCHANGE_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_EXCHANGE_TYPE_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_ROUTING_KEY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_MANDATORY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_DURABLE_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_NO_WAIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_INTERNAL_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_AUTO_DELETED_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_DELIVERY_MODE_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_AMQP_COMMENT_<IDENTIFIER>="<string>"
+      .. cond:: not windows
+
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_AMQP_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_AMQP_URL_<IDENTIFIER>="<ENDPOINT>"
+               export MINIO_NOTIFY_AMQP_EXCHANGE_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_EXCHANGE_TYPE_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_ROUTING_KEY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_MANDATORY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_DURABLE_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_NO_WAIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_INTERNAL_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_AUTO_DELETED_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_DELIVERY_MODE_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_QUEUE_DIR_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_AMQP_COMMENT_<IDENTIFIER>="<string>"
+         
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         AMQP service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -160,7 +183,7 @@ You can configure a new AMQP service endpoint using either environment variables
       <minio-server-config-bucket-notification-amqp>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

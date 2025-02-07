@@ -36,15 +36,15 @@ For example, the following commands set two distinct PostgreSQL service endpoint
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_POSTGRES_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_PRIMARY="host=postgresql-endpoint.example.net port=4222..."
-         set MINIO_NOTIFY_POSTGRES_TABLE_PRIMARY="minioevents"
-         set MINIO_NOTIFY_POSTGRES_FORMAT_PRIMARY="namespace"
+         export MINIO_NOTIFY_POSTGRES_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_PRIMARY="host=postgresql-endpoint.example.net port=4222..."
+         export MINIO_NOTIFY_POSTGRES_TABLE_PRIMARY="minioevents"
+         export MINIO_NOTIFY_POSTGRES_FORMAT_PRIMARY="namespace"
       
-         set MINIO_NOTIFY_POSTGRES_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_SECONDARY="host=postgresql-endpoint.example.net port=4222..."
-         set MINIO_NOTIFY_POSTGRES_TABLE_SECONDARY="minioevents"
-         set MINIO_NOTIFY_POSTGRES_FORMAT_SECONDARY="namespace"
+         export MINIO_NOTIFY_POSTGRES_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_SECONDARY="host=postgresql-endpoint.example.net port=4222..."
+         export MINIO_NOTIFY_POSTGRES_TABLE_SECONDARY="minioevents"
+         export MINIO_NOTIFY_POSTGRES_FORMAT_SECONDARY="namespace"
 
    .. tab-item:: Configuration Settings
       :sync: config
