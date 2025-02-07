@@ -107,7 +107,7 @@ MinIO provides the following scraping endpoints, relative to the base URL:
        
        ``/system/process``
 
-For a complete list of metrics for each endpoint, see :ref:`Available version 3 etrics <minio-metrics-and-alerts-available-metrics>`.
+For a complete list of metrics for each endpoint, see :ref:`Available version 3 metrics <minio-metrics-and-alerts-available-metrics>`.
 
 .. cond:: k8s
 
