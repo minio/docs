@@ -1,19 +1,5 @@
 .. _quickstart-linux:
 
-===========================
-Quickstart: MinIO for Linux
-===========================
-
-.. default-domain:: minio
-
-.. container:: extlinks-video
-
-   - `Installing and Running MinIO on Linux <https://www.youtube.com/watch?v=74usXkZpNt8&list=PLFOIsHSSYIK1BnzVY66pCL-iJ30Ht9t1o>`__
-
-   - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
-   
-   - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
-
 .. |OS| replace:: Linux
 
 This procedure deploys a :ref:`Standalone <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 
