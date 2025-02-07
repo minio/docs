@@ -14,7 +14,7 @@ Metrics version 2
 MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
 
-Version 3 Endpoints
+Version 2 Endpoints
 -------------------
 
 Metrics version 2 provides metrics organized into three categories:
