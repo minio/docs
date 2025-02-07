@@ -55,18 +55,33 @@ You can configure a new NSQ service endpoint using either environment variables
       :envvar:`MINIO_NOTIFY_NSQ_NSQD_ADDRESS` and 
       :envvar:`MINIO_NOTIFY_NSQ_TOPIC`:
 
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_NSQ_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_NSQ_NSQD_ADDRESS_<IDENTIFIER>="<ENDPOINT>"
+               set MINIO_NOTIFY_NSQ_TOPIC_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NSQ_TLS_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NSQ_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NSQ_QUEUE_DIR_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NSQ_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_NSQ_COMMENT_<IDENTIFIER>="<string>"
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: not windows
 
-         set MINIO_NOTIFY_NSQ_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_NSQ_NSQD_ADDRESS_<IDENTIFIER>="<ENDPOINT>"
-         set MINIO_NOTIFY_NSQ_TOPIC_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NSQ_TLS_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NSQ_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NSQ_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NSQ_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_NSQ_COMMENT_<IDENTIFIER>="<string>"
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_NSQ_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_NSQ_NSQD_ADDRESS_<IDENTIFIER>="<ENDPOINT>"
+               export MINIO_NOTIFY_NSQ_TOPIC_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NSQ_TLS_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NSQ_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NSQ_QUEUE_DIR_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NSQ_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_NSQ_COMMENT_<IDENTIFIER>="<string>"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         TARGET service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -131,7 +146,7 @@ You can configure a new NSQ service endpoint using either environment variables
       <minio-server-config-bucket-notification-nsq>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

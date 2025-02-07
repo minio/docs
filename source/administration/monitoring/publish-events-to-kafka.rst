@@ -68,25 +68,49 @@ You can configure a new Kafka service endpoint using either environment variable
       :envvar:`MINIO_NOTIFY_KAFKA_ENABLE` and 
       :envvar:`MINIO_NOTIFY_KAFKA_BROKERS`:
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_KAFKA_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_KAFKA_BROKERS_<IDENTIFIER>="<ENDPOINT>"
+               set MINIO_NOTIFY_KAFKA_TOPIC_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_SASL_USERNAME_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_SASL_PASSWORD_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_SASL_MECHANISM_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_SASL_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_TLS_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_CLIENT_TLS_CERT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_CLIENT_TLS_KEY_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_QUEUE_DIR_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_VERSION_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_KAFKA_COMMENT_<IDENTIFIER>="<string>"
 
-         set MINIO_NOTIFY_KAFKA_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_KAFKA_BROKERS_<IDENTIFIER>="<ENDPOINT>"
-         set MINIO_NOTIFY_KAFKA_TOPIC_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_SASL_USERNAME_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_SASL_PASSWORD_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_SASL_MECHANISM_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_SASL_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_TLS_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_CLIENT_TLS_CERT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_CLIENT_TLS_KEY_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_VERSION_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_KAFKA_COMMENT_<IDENTIFIER>="<string>"
+      .. cond:: not windows
+
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_KAFKA_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_KAFKA_BROKERS_<IDENTIFIER>="<ENDPOINT>"
+               export MINIO_NOTIFY_KAFKA_TOPIC_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_SASL_USERNAME_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_SASL_PASSWORD_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_SASL_MECHANISM_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_TLS_CLIENT_AUTH_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_SASL_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_TLS_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_TLS_SKIP_VERIFY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_CLIENT_TLS_CERT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_CLIENT_TLS_KEY_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_QUEUE_DIR_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_VERSION_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_KAFKA_COMMENT_<IDENTIFIER>="<string>"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         Kafka service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -158,7 +182,7 @@ You can configure a new Kafka service endpoint using either environment variable
       <minio-server-config-bucket-notification-kafka>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

@@ -71,20 +71,39 @@ You can configure a new MQTT service endpoint using either environment variables
       - :envvar:`MINIO_NOTIFY_MQTT_USERNAME` *Required if the MQTT server/broker enforces authentication/authorization*
       - :envvar:`MINIO_NOTIFY_MQTT_PASSWORD` *Required if the MQTT server/broker enforces authentication/authorization*
 
-      .. code-block:: shell
-         :class: copyable
+      .. cond:: windows
+      
+         .. code-block:: shell
+            :class: copyable
+         
+               set MINIO_NOTIFY_MQTT_ENABLE_<IDENTIFIER>="on"
+               set MINIO_NOTIFY_MQTT_BROKER_<IDENTIFIER>="ENDPOINT"
+               set MINIO_NOTIFY_MQTT_TOPIC_<IDENTIFIER>="TOPIC"
+               set MINIO_NOTIFY_MQTT_USERNAME_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_MQTT_PASSWORD_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_MQTT_QOS_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_MQTT_QUEUE_DIR_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_MQTT_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               set MINIO_NOTIFY_MQTT_COMMENT_<IDENTIFIER>="<string>"
 
-         set MINIO_NOTIFY_MQTT_ENABLE_<IDENTIFIER>="on"
-         set MINIO_NOTIFY_MQTT_BROKER_<IDENTIFIER>="ENDPOINT"
-         set MINIO_NOTIFY_MQTT_TOPIC_<IDENTIFIER>="TOPIC"
-         set MINIO_NOTIFY_MQTT_USERNAME_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MQTT_PASSWORD_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MQTT_QOS_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MQTT_QUEUE_DIR_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MQTT_QUEUE_LIMIT_<IDENTIFIER>="<string>"
-         set MINIO_NOTIFY_MQTT_COMMENT_<IDENTIFIER>="<string>"
+      .. cond:: not windows
+
+         .. code-block:: shell
+            :class: copyable
+
+               export MINIO_NOTIFY_MQTT_ENABLE_<IDENTIFIER>="on"
+               export MINIO_NOTIFY_MQTT_BROKER_<IDENTIFIER>="ENDPOINT"
+               export MINIO_NOTIFY_MQTT_TOPIC_<IDENTIFIER>="TOPIC"
+               export MINIO_NOTIFY_MQTT_USERNAME_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_MQTT_PASSWORD_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_MQTT_QOS_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_MQTT_KEEP_ALIVE_INTERVAL_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_MQTT_RECONNECT_INTERVAL_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_MQTT_QUEUE_DIR_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_MQTT_QUEUE_LIMIT_<IDENTIFIER>="<string>"
+               export MINIO_NOTIFY_MQTT_COMMENT_<IDENTIFIER>="<string>"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         MQTT service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -163,7 +182,7 @@ You can configure a new MQTT service endpoint using either environment variables
       <minio-server-config-bucket-notification-mqtt>` for complete 
       documentation on each setting.
 
-2) Restart the MinIO Deployment
+1) Restart the MinIO Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the MinIO deployment to apply the configuration changes. 

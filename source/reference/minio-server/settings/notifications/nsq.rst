@@ -36,13 +36,13 @@ For example, the following commands set two distinct NSQ service endpoints as ``
       .. code-block:: shell
          :class: copyable
       
-         set MINIO_NOTIFY_NSQ_ENABLE_PRIMARY="on"
-         set MINIO_NOTIFY_NSQ_NSQD_ADDRESS_PRIMARY="https://user:password@nsq-endpoint.example.net:9200"
-         set MINIO_NOTIFY_NSQ_TOPIC_PRIMARY="bucketevents"
+         export MINIO_NOTIFY_NSQ_ENABLE_PRIMARY="on"
+         export MINIO_NOTIFY_NSQ_NSQD_ADDRESS_PRIMARY="https://user:password@nsq-endpoint.example.net:9200"
+         export MINIO_NOTIFY_NSQ_TOPIC_PRIMARY="bucketevents"
       
-         set MINIO_NOTIFY_NSQ_ENABLE_SECONDARY="on"
-         set MINIO_NOTIFY_NSQ_NSQD_ADDRESS_SECONDARY="https://user:password@nsq-endpoint.example.net:9200"
-         set MINIO_NOTIFY_NSQ_TOPIC_SECONDARY="bucketevents"
+         export MINIO_NOTIFY_NSQ_ENABLE_SECONDARY="on"
+         export MINIO_NOTIFY_NSQ_NSQD_ADDRESS_SECONDARY="https://user:password@nsq-endpoint.example.net:9200"
+         export MINIO_NOTIFY_NSQ_TOPIC_SECONDARY="bucketevents"
 
    .. tab-item:: Configuration Settings
       :sync: config
