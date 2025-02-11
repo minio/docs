@@ -8,14 +8,14 @@ tenant:
   ###
   # Specify the Operator container image to use for the deployment.
   # ``image.tag`` 
-  # For example, the following sets the image to the ``quay.io/minio/operator`` repo and the v6.0.3 tag.
+  # For example, the following sets the image to the ``quay.io/minio/operator`` repo and the v7.0.0 tag.
   # The container pulls the image if not already present:
   #
   # .. code-block:: yaml
   # 
   #    image:
   #       repository: quay.io/minio/minio
-  #       tag: RELEASE.2024-08-17T01-24-54Z
+  #       tag: RELEASE.2024-11-07T00-52-20Z
   #       pullPolicy: IfNotPresent
   #
   # The chart also supports specifying an image based on digest value:
@@ -30,13 +30,37 @@ tenant:
   #
   image:
     repository: quay.io/minio/minio
-    tag: RELEASE.2024-08-17T01-24-54Z
+    tag: RELEASE.2024-11-07T00-52-20Z
     pullPolicy: IfNotPresent
   ###
   #
   # An array of Kubernetes secrets to use for pulling images from a private ``image.repository``.
   # Only one array element is supported at this time.
   imagePullSecret: { }
+  ###
+  #
+  # Specify `initContainers <https://kubernetes.io/docs/concepts/workloads/pods/init-containers/>`__ to perform setup or configuration tasks before the main Tenant pods starts.
+  #
+  # Example of init container which waits for idenity provider to be reachable before starting MinIO Tenant:
+  # 
+  # .. code-block:: yaml
+  #
+  #    initContainers:
+  #     - name: wait-for-idp
+  #       image: busybox
+  #       command:
+  #         - sh
+  #         - -c
+  #         - |
+  #           URL="https://idp-url"
+  #           echo "Checking IdP reachability (${URL})"
+  #           until $(wget -q -O "/dev/null" ${URL}) ; do
+  #             echo "IdP (${URL}) not reachable. Waiting to be reachable..."
+  #             sleep 5
+  #           done
+  #           echo "IdP (${URL}) reachable. Starting MinIO..."
+  #
+  initContainers: [ ]
   ###
   # The Kubernetes `Scheduler <https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/>`__ to use for dispatching Tenant pods.
   #
@@ -62,12 +86,24 @@ tenant:
   #
   #    name: myminio-env-configuration
   #    accessKey: minio
-  #    secretKey: minio123
+  #      secretKey: minio123
   #
   configSecret:
     name: myminio-env-configuration
     accessKey: minio
     secretKey: minio123
+    #existingSecret: true
+
+  ###
+  # Metadata that will be added to the statefulset and pods of all pools
+  poolsMetadata:
+    ###
+    # Specify `annotations <https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/>`__ to associate to Tenant pods.
+    annotations: { }
+    ###
+    # Specify `labels <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>`__ to associate to Tenant pods.
+    labels: { }
+
   ###
   # If this variable is set to true, then enable the usage of an existing Kubernetes secret to set environment variables for the Tenant.
   # The existing Kubernetes secret name must be placed under .tenant.configuration.name e.g. existing-minio-env-configuration
@@ -112,6 +148,9 @@ tenant:
       ###
       # Specify `storageAnnotations <https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/>`__ to associate to PVCs.
       storageAnnotations: { }
+      ###
+      # Specify `storageLabels <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>`__ to associate to PVCs.
+      storageLabels: { }
       ###
       # Specify `annotations <https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/>`__ to associate to Tenant pods.
       annotations: { }
@@ -253,8 +292,8 @@ tenant:
   # .. code-block:: yaml
   #
   #    - name: my-minio-bucket
-  #         objectLock: false        # optional
-  #         region: us-east-1        # optional
+  #            objectLock: false        # optional
+  #            region: us-east-1        # optional
   buckets: [ ]
   ###
   # Array of Kubernetes secrets from which the Operator generates MinIO users during tenant provisioning.
@@ -347,14 +386,14 @@ tenant:
   #  # Image from tag (original behavior), for example:
   #  # image:
   #  #   repository: quay.io/minio/kes
-  #  #   tag: 2024-08-16T14-39-28Z
+  #  #   tag: 2024-11-25T13-44-31Z
   #  # Image from digest (added after original behavior), for example:
   #  # image:
   #  #   repository: quay.io/minio/kes@sha256
   #  #   digest: fb15af611149892f357a8a99d1bcd8bf5dae713bd64c15e6eb27fbdb88fc208b
   #  image:
   #    repository: quay.io/minio/kes
-  #    tag: 2024-08-16T14-39-28Z
+  #    tag: 2024-11-25T13-44-31Z
   #    pullPolicy: IfNotPresent
   #  env: [ ]
   #  replicas: 2

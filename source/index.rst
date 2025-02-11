@@ -77,7 +77,12 @@ MinIO is built to deploy anywhere - public or private cloud, baremetal infrastru
 
 .. cond:: openshift
 
-   This site documents Operations, Administration, and Development of MinIO deployments on OpenShift 4.7+ through the :openshift-docs:`Red Hat® OpenShift® Container Platform 4.7+ <welcome/index.html>` for the latest stable version of the MinIO Operator: |operator-version-stable|.
+   This site documents Operations, Administration, and Development of MinIO deployments on Red Hat Kubernetes distributions for the latest stable version of the MinIO Operator: |operator-version-stable|.
+
+   .. important::
+
+      Support for deploying the MinIO Operator via the RedHat Marketplace or OperatorHub was removed in 2024. 
+      |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
 
 .. cond:: eks
 

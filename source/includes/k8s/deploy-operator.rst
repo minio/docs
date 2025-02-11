@@ -27,6 +27,14 @@ See the MinIO Operator :minio-git:`CRD Reference <operator/blob/master/docs/tena
 This documentation assumes familiarity with referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
+.. cond:: openshift
+
+   .. important::
+
+      Support for deploying the MinIO Operator via the RedHat Marketplace or OperatorHub was removed in 2024. 
+      |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
+
+      This documentation provides guidance through the general method of operator installation onto Kubernetes infrastructure.
 
 MinIO Operator Components
 -------------------------

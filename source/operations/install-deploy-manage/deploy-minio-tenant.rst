@@ -19,13 +19,7 @@ Deploy a MinIO Tenant
    :local:
    :depth: 1
 
-.. cond:: openshift
-
-   This procedure documents deploying a MinIO Tenant through OpenShift 4.7+ using the OpenShift Web Console and the MinIO Kubernetes Operator.
-
-.. cond:: k8s and not openshift
-
-   This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using either Kustomize or MinIO's Helm Charts.
+This procedure documents deploying a MinIO Tenant onto a stock Kubernetes cluster using either Kustomize or MinIO's Helm Charts.
 
 .. screenshot temporarily removed
 
@@ -67,18 +61,6 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 
    MinIO **strongly recommends** upgrading Kubernetes clusters running with `End-Of-Life API versions <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__.
 
-
-.. cond:: openshift
-
-   OpenShift 4.7+ and ``oc`` CLI Tool
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   This procedure assumes installation of the MinIO Operator using the OpenShift 4.7+ and the OpenShift OperatorHub.
-
-   This procedure assumes your local machine has the OpenShift ``oc`` CLI tool installed and configured for access to the OpenShift Cluster.
-   :openshift-docs:`Download and Install <cli_reference/openshift_cli/getting-started-cli.html>` the OpenShift :abbr:`CLI (command-line interface)` ``oc`` for use in this procedure.
-
-   See :ref:`deploy-operator-openshift` for more complete instructions.
 
 .. cond:: openshift
 
