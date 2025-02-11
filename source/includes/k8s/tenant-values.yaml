@@ -292,8 +292,8 @@ tenant:
   # .. code-block:: yaml
   #
   #    - name: my-minio-bucket
-  #            objectLock: false        # optional
-  #            region: us-east-1        # optional
+  #      objectLock: false        # optional
+  #      region: us-east-1        # optional
   buckets: [ ]
   ###
   # Array of Kubernetes secrets from which the Operator generates MinIO users during tenant provisioning.
