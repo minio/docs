@@ -1,7 +1,7 @@
 .. _minio-bucket-notifications:
 
 ====================
-Bucket Notifications
+Bucket notifications
 ====================
 
 .. default-domain:: minio
@@ -14,7 +14,7 @@ MinIO bucket notifications allow administrators to send notifications to support
 MinIO supports bucket and object-level S3 events similar to the 
 :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`.
 
-Supported Notification Targets
+Supported notification targets
 ------------------------------
 
 MinIO supports publishing event notifications to the following targets:
@@ -79,7 +79,7 @@ MinIO supports publishing event notifications to the following targets:
 
        See :ref:`minio-bucket-notifications-publish-webhook` for a tutorial.
 
-Asynchronous vs Synchronous Bucket Notifications
+Asynchronous vs synchronous bucket notifications
 ------------------------------------------------
 
 .. versionadded:: RELEASE.2023-06-23T20-26-00Z
@@ -112,13 +112,13 @@ To enable synchronous bucket notifications for *all configured remote targets*, 
 
 .. _minio-bucket-notifications-event-types:
 
-Supported S3 Event Types
+Supported S3 event types
 ------------------------
 
 MinIO bucket notifications are compatible with :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`. 
 This section lists all supported events.
 
-Object Events
+Object events
 ~~~~~~~~~~~~~
 
 MinIO supports triggering notifications on the following S3 object events:
@@ -152,7 +152,7 @@ Specify the wildcard ``*`` character to select all events related to a prefix:
 
    Selects all ``s3:ObjectRemoved``\ -prefixed events.
 
-Replication Events
+Replication events
 ~~~~~~~~~~~~~~~~~~
 
 MinIO supports triggering notifications on the following S3 replication events:
@@ -167,7 +167,7 @@ Specify the wildcard ``*`` character to select all ``s3:Replication`` events:
 
 .. data:: s3:Replication:*
 
-ILM Transition Events
+ILM transition events
 ~~~~~~~~~~~~~~~~~~~~~
 
 MinIO supports triggering notifications on the following S3 ILM transition events:
@@ -187,7 +187,7 @@ Specify the wildcard ``*`` character to select all events related to a prefix:
 
    Selects all ``s3:ObjectRestore``\ -prefixed events.
 
-Scanner Events
+Scanner events
 ~~~~~~~~~~~~~~
 
 MinIO supports triggering notifications on the following S3 :ref:`scanner <minio-concepts-scanner>` transition events:
@@ -200,7 +200,7 @@ MinIO supports triggering notifications on the following S3 :ref:`scanner <minio
 
    :ref:`Scanner <minio-concepts-scanner>` finds prefixes with more than 50,000 sub-folders.
 
-Global Events
+Global events
 ~~~~~~~~~~~~~
 
 MinIO supports triggering notifications on the following global events. 
@@ -210,6 +210,122 @@ You can only listen to these events through the `ListenNotification <https://min
 .. data:: s3:BucketRemoved
 
 .. todo
+
+
+Payload schema
+--------------
+
+All notification payloads use the same overall schema.
+Depending on the type of notification, some fields may be omitted or have null values.
+
+.. code-block:: json
+
+   {
+       "eventVersion": "string",
+       "eventSource": "string",
+       "awsRegion": "string",
+       "eventTime": "string",
+       "eventName": "string",
+       "userIdentity": {
+           "principalId": "string"
+       },
+       "requestParameters": {
+           "key": "value"
+       },
+       "responseElements": {
+           "key": "value"
+       },
+       "s3": {
+           "s3SchemaVersion": "string",
+           "configurationId": "string",
+           "bucket": {
+               "name": "string",
+               "ownerIdentity": {
+                   "principalId": "string"
+               },
+               "arn": "string"
+           },
+           "object": {
+               "key": "string",
+               "size": 10000,
+               "eTag": "string",
+               "contentType": "string",
+               "userMetadata": {
+                   "key": "string"
+               },
+               "versionId": "string",
+               "sequencer": "string"
+           }
+       },
+       "source": {
+           "host": "string",
+           "port": "string",
+           "userAgent": "string"
+       }
+   }
+
+
+Example
+~~~~~~~
+
+The following example is a notification for an ``s3:ObjectCreated:Put`` event:
+
+.. code-block:: json
+
+   {
+     "EventName": "s3:ObjectCreated:Put",
+     "Key": "test-bucket/image.jpg",
+     "Records": [
+       {
+         "eventVersion": "2.0",
+         "eventSource": "minio:s3",
+         "awsRegion": "",
+         "eventTime": "2025-02-06T01:04:31.998Z",
+         "eventName": "s3:ObjectCreated:Put",
+         "userIdentity": {
+           "principalId": "access_key"
+         },
+         "requestParameters": {
+           "principalId": "access_key",
+           "region": "",
+           "sourceIPAddress": "192.168.1.10"
+         },
+         "responseElements": {
+           "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+           "x-amz-request-id": "182178E8B36AC9DF",
+           "x-minio-deployment-id": "2369dcb4-348b-4d30-8fc9-61ab089ba4bc",
+           "x-minio-origin-endpoint": "https://minio.test.svc.cluster.local"
+         },
+         "s3": {
+           "s3SchemaVersion": "1.0",
+           "configurationId": "Config",
+           "bucket": {
+             "name": "test-bucket",
+             "ownerIdentity": {
+               "principalId": "access_key"
+             },
+             "arn": "arn:aws:s3:::test-bucket"
+           },
+           "object": {
+             "key": "image.jpg",
+             "size": 84452,
+             "eTag": "eb52f8e46f60a27a8a1a704e25757f30",
+             "contentType": "image/jpeg",
+             "userMetadata": {
+               "content-type": "image/jpeg"
+             },
+             "sequencer": "182178E8B3728CAC"
+           }
+         },
+         "source": {
+           "host": "192.168.1.10",
+           "port": "",
+           "userAgent": "MinIO (linux; amd64) minio-go/v7.0.83"
+         }
+       }
+     ]
+   }
+
 
 .. toctree::
    :titlesonly:
