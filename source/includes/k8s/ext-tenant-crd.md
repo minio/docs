@@ -981,6 +981,45 @@ should keep running this Pool without a Security Context</p></td>
 </tbody>
 </table>
 
+## PoolsMetadata
+
+PoolsMetadata (`poolsMetadata`) defines custom labels and annotations
+for the MinIO pool stateful sets / pods.  
+
+-   [TenantSpec](#tenantspec)
+
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p><strong><code>labels</code></strong>
+<em>object (keys:string, values:string)</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>If provided, append these labels to the MinIO statefulset /
+pods</p></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><p><strong><code>annotations</code></strong>
+<em>object (keys:string, values:string)</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>If provided, append these annotations to the MinIO statefulset /
+pods</p></td>
+</tr>
+</tbody>
+</table>
+
 ## ServiceMetadata
 
 ServiceMetadata (`serviceMetadata`) defines custom labels and
@@ -1032,6 +1071,22 @@ style="text-align: left;"><p><strong><code>consoleServiceAnnotations</code></str
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
 <p>If provided, append these annotations to the Console service</p></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><p><strong><code>kesServiceLabels</code></strong>
+<em>object (keys:string, values:string)</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>If provided, append these labels to the KES service</p></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><p><strong><code>kesServiceAnnotations</code></strong>
+<em>object (keys:string, values:string)</em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>If provided, append these annotations to the KES service</p></td>
 </tr>
 </tbody>
 </table>
@@ -1673,6 +1728,16 @@ href="#servicemetadata">ServiceMetadata</a></em></p></td>
 and/or Console service.</p></td>
 </tr>
 <tr class="even">
+<td
+style="text-align: left;"><p><strong><code>poolsMetadata</code></strong>
+<em><a
+href="#poolsmetadata">PoolsMetadata</a></em></p></td>
+<td style="text-align: left;"><p><strong>Optional</strong><br />
+</p>
+<p>Specify custom labels and annotations to append to all pool
+statefulsets and pods.</p></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><p><strong><code>users</code></strong>
 <em><a
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#localobjectreference-v1-core">LocalObjectReference</a>
@@ -1704,7 +1769,7 @@ policy by default. You can change the assigned policy after the Tenant
 starts.<br />
 </p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p><strong><code>buckets</code></strong>
 <em><a
 href="#bucket">Bucket</a>
@@ -1714,7 +1779,7 @@ array</em></p></td>
 <p>Create buckets when creating a new tenant. Skip if bucket with given
 name already exists</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p><strong><code>logging</code></strong>
 <em><a
 href="#logging">Logging</a></em></p></td>
@@ -1722,7 +1787,7 @@ href="#logging">Logging</a></em></p></td>
 </p>
 <p>Enable JSON, Anonymous logging for MinIO tenants.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>configuration</code></strong>
 <em><a
@@ -1734,7 +1799,7 @@ configurations to be used for the MinIO pools. The secret is expected to
 have a key named config.env containing all exported environment
 variables for MinIO+</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>initContainers</code></strong>
 <em><a
@@ -1744,7 +1809,7 @@ array</em></p></td>
 </p>
 <p>Add custom initContainers to StatefulSet</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td
 style="text-align: left;"><p><strong><code>additionalVolumes</code></strong>
 <em><a
@@ -1756,7 +1821,7 @@ array</em></p></td>
 rules for the corresponding volumes and volume mounts. We will not test
 this rule, k8s will show the result.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td
 style="text-align: left;"><p><strong><code>additionalVolumeMounts</code></strong>
 <em><a
