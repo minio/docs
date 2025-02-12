@@ -4,7 +4,11 @@
         {
             "Action": [
                 "admin:SetBucketTarget",
-                "admin:GetBucketTarget"
+                "admin:GetBucketTarget",
+                "admin:ListBatchJobs",
+                "admin:DescribeBatchJob",
+                "admin:StartBatchJob",
+                "admin:CancelBatchJob"
             ],
             "Effect": "Allow",
             "Sid": "EnableRemoteBucketConfiguration"
