@@ -7,9 +7,9 @@ Prior to starting these steps, create the following folders:
    :class: copyable
    :substitutions:
 
-   mkdir -P |kescertpath|
-   mkdir -P |kesconfigpath|
-   mkdir -P |miniodatapath|
+   mkdir -p |kescertpath|
+   mkdir -p |kesconfigpath|
+   mkdir -p |miniodatapath|
 
 For Windows hosts, substitute the paths with Windows-style paths, e.g. ``C:\minio-kes-vault\``.
 
