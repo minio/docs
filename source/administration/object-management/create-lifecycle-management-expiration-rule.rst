@@ -118,22 +118,3 @@ delete markers:
   <mc ilm rule add --noncurrent-expire-days>` with the number of days after
   which to expire noncurrent object versions. For example, specify ``30d`` to
   expire a version after it has been noncurrent for at least 30 days.
-
-Expire All Versions of a Deleted Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Starting with :mc-release:`MinIO Server RELEASE.2024-05-01T01-11-10Z`, MinIO supports deleting all versions of an object that has a delete marker as its latest version.
-MinIO supports such deletes with ``JSON``, not through the command line.
-
-To add this capability to a rule, first export the rule to modify with :mc:`mc ilm rule export`.
-Modify the exported rule with additional ``JSON`` that resembles the following:
-
-.. code-block:: text
-   :class: copyable
-
-   <DelMarkerObjectExpiration>
-       <Days> 10 </Days>
-   </DelMarkerObjectExpiration>   
-
-This example ``JSON`` expires all versions of the deleted object after 10 days.
-Modify the value in the ``<Days>`` element to the number of days you want to wait after deleting the object before expiring it and removing it from MinIO.
