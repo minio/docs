@@ -237,7 +237,7 @@ For **filters**
        
        Only objects older than the specified length of time replicate.
    * - ``createdAfter:`` 
-     - A date in ``YYYY-MM-DDTHH:MM:SSZ`` RFC3339 date and time format.
+     - A date in ``YYYY-MM-DDTHH:MM:SSZ`` :rfc:`RFC3339 <3339>`  date and time format.
   
        Only objects created after the date replicate.
    * - ``createdBefore:`` 
