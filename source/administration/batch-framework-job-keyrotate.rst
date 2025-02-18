@@ -66,7 +66,7 @@ For **flag based filters**
   
        Keys rotate only for objects created after the date.
    * - ``createdBefore:`` 
-     - A date in ``YYYY-MM-DDTHH:MM:SSZ`` RFC3339 date and time format.
+     - A date in ``YYYY-MM-DDTHH:MM:SSZ`` :rfc:`RFC3339 <3339>`  date and time format.
        
        Keys rotate only for objects created prior to the date.
    * - ``context:``
