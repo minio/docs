@@ -84,7 +84,7 @@ MinIO returns an ``AssumeRoleWithCustomTokenResult`` object, where the ``Assumed
 
 - ``AccessKeyId`` - The access key applications use for authentication.
 - ``SecretKeyId`` - The secret key applications use for authentication.
-- ``Expiration`` - The ISO-8601 date-time after which the credentials expire.
+- ``Expiration`` - The :rfc:`RFC3339 <3339>`  date and time after which the credentials expire.
 - ``SessionToken`` - The session token applications use for authentication. Some
   SDKs may require this field when using temporary credentials.
 

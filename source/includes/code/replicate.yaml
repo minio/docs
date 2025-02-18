@@ -44,8 +44,8 @@ replicate:
     filter:
       newerThan: "7d" # match objects newer than this value (e.g. 7d10h31s)
       olderThan: "7d" # match objects older than this value (e.g. 7d10h31s)
-      createdAfter: "date" # match objects created after "date"
-      createdBefore: "date" # match objects created before "date"
+      createdAfter: "datetime" # match objects created after this date and time in RFC3339 format
+      createdBefore: "datetime" # match objects created before this date and time in RFC3339 format
 
       ## NOTE: tags are not supported when "source" is remote.
       # tags:

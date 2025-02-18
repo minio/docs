@@ -13,8 +13,8 @@ keyrotate:
     filter:
       newerThan: "7d" # match objects newer than this value (e.g. 7d10h31s)
       olderThan: "7d" # match objects older than this value (e.g. 7d10h31s)
-      createdAfter: "date" # match objects created after "date"
-      createdBefore: "date" # match objects created before "date"
+      createdAfter: "date" # match objects created after this date and time in RFC3339 format
+      createdBefore: "date" # match objects created before this date and time in RFC3339 format
       tags:
         - key: "name"
           value: "pick*" # match objects with tag 'name', with all values starting with 'pick'
