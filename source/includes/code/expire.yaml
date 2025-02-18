@@ -6,7 +6,7 @@ expire:
     - type: object  # objects with zero ore more older versions
       name: NAME # match object names that satisfy the wildcard expression.
       olderThan: 70h # match objects older than this value
-      createdBefore: "2006-01-02T15:04:05.00Z" # match objects created before "date"
+      createdBefore: "2006-01-02T15:04:05.00Z" # match objects created before this date and time in RFC3339 format
       tags:
         - key: name
           value: pick* # match objects with tag 'name', all values starting with 'pick'
@@ -23,7 +23,7 @@ expire:
     - type: deleted # objects with delete marker as their latest version
       name: NAME # match object names that satisfy the wildcard expression.
       olderThan: 10h # match objects older than this value (e.g. 7d10h31s)
-      createdBefore: "2006-01-02T15:04:05.00Z" # match objects created before "date"
+      createdBefore: "2006-01-02T15:04:05.00Z" # match objects created before this date and time in RFC3339 format
       purge:
           # retainVersions: 0 # (default) delete all versions of the object. This option is the fastest.
           # retainVersions: 5 # keep the latest 5 versions of the object including delete markers.
