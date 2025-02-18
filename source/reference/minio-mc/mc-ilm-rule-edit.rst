@@ -256,7 +256,7 @@ Parameters
    the configured remote storage tier specified to the 
    :mc-cmd:`~mc ilm rule edit --transition-tier`. 
    Specify the number of days as an integer, e.g. ``30`` for 30 days.
-   If the remote tier is another MinIO deployment, transition days can be set to ``0`` to mark new objects for the quickest move to the remote tier.
+   If the remote tier is another MinIO deployment, you can set the value to ``0`` to mark new objects as immediately eligible for transition to the remote tier.
 
    For versioned buckets, the transition rule applies only to the *current*
    object version. Use the 
