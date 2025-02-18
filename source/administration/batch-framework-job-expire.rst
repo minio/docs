@@ -106,7 +106,7 @@ Expire Batch Job Reference
    * - ``rules.[n].createdBefore``
      - *Optional*
 
-       Specify an RFC3339 date and time for filtering objects.
+       Specify an :rfc:`RFC3339 <3339>` date and time for filtering objects.
 
        The rule applies to only those objects created *before* the specified timestamp.
 
