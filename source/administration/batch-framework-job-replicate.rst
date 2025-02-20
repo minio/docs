@@ -30,7 +30,7 @@ Batch Replication between MinIO deployments have the following advantages over u
 
 .. versionchanged:: MinIO Server RELEASE.2023-02-17T17-52-43Z
 
-   Run batch replication with multiple workers in parallel by specifying the :envvar:`MINIO_BATCH_REPLICATION_WORKERS` environment variable.
+   Run batch replication with multiple workers in parallel by specifying the :envvar:`_MINIO_BATCH_REPLICATION_WORKERS` environment variable.
 
 Starting with the MinIO Server ``RELEASE.2023-05-04T21-44-30Z``, the other deployment can be either another MinIO deployment or any S3-compatible location using a realtime storage class.
 Use filtering options in the replication ``YAML`` file to exclude objects stored in locations that require rehydration or other restoration methods before serving the requested object.

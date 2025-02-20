@@ -191,7 +191,7 @@ Batch Replication
 
    .. tab-item:: Environment Variable
 
-      .. envvar:: MINIO_BATCH_REPLICATION_WORKERS
+      .. envvar:: _MINIO_BATCH_REPLICATION_WORKERS
 
          *Optional*
 
