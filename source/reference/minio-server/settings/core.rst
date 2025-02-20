@@ -189,14 +189,6 @@ Batch Replication
 
 .. tab-set::
 
-   .. tab-item:: Environment Variable
-
-      .. envvar:: _MINIO_BATCH_REPLICATION_WORKERS
-
-         *Optional*
-
-         Specifying the maximum number of parallel processes to use when performing the batch application job.
-
    .. tab-item:: Configuration Setting
 
       .. include:: /includes/common-mc-admin-config.rst
