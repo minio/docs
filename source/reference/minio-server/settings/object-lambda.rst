@@ -10,7 +10,7 @@ Object Lambda function settings
    :local:
    :depth: 2
 
-This page documents settings for configuring MinIO to publish data to an HTTP webhook endpoint and trigger an Object Lambda function.
+This page describes the settings available to configure MinIO to publish data to an HTTP webhook endpoint and trigger an Object Lambda function.
 See :ref:`developers-object-lambda` for more complete documentation and tutorials on using these settings.
 
 You can establish or modify settings by defining:
@@ -42,7 +42,7 @@ Enable
 
          Requires specifying :envvar:`MINIO_LAMBDA_WEBHOOK_ENDPOINT`.
 
-	 You can specify multiple webhooks as Lambda targets by appending a unique identifier ``_FUNCTIONNAME`` for each Object Lambda function.
+	 You can specify multiple webhooks as Lambda targets by appending a unique identifier for each Object Lambda function.
          For example, the following command enables two distinct Object Lambda webhook endpoints:
 
          .. code-block:: shell
@@ -81,7 +81,7 @@ Endpoint
 
          The HTTP endpoint of the lambda webhook for the handler function.
 
-         You can specify multiple webhook endpoints as Lambda targets by appending a unique identifier ``_FUNCTIONNAME`` for each Object Lambda function.
+         You can specify multiple webhook endpoints as Lambda targets by appending a unique identifier for each Object Lambda function.
          For example, the following command sets two distinct Object Lambda webhook endpoints:
 
          .. code-block:: shell
@@ -112,7 +112,7 @@ Auth token
 
          Specify the opaque string or JWT authorization token to use for authenticating to the lambda webhook service.
 
-         You can specify the token for multiple Lambda target by appending a unique identifier ``_FUNCTIONNAME`` for each Object Lambda function.
+         You can specify the token for multiple Lambda targets by appending a unique identifier for each Object Lambda function.
          For example, the following command configures a token for two distinct Object Lambda webhook endpoints:
 
          .. code-block:: shell
@@ -151,7 +151,7 @@ Client cert
 
          Specify the path to the client certificate to use for performing mTLS authentication to the lambda webhook service.
 
-         You can specify the client cert for multiple Lambda target by appending a unique identifier ``_FUNCTIONNAME`` for each Object Lambda function.
+         You can specify the client cert for multiple Lambda targets by appending a unique identifier for each Object Lambda function.
          For example, the following command configures a cert for two distinct Object Lambda webhook endpoints:
 
          .. code-block:: shell
@@ -182,7 +182,7 @@ Client key
 
          Specify the path to the private key to use for performing mTLS authentication to the lambda webhook service.
 
-         You can specify the client key for multiple Lambda target by appending a unique identifier ``_FUNCTIONNAME`` for each Object Lambda function.
+         You can specify the client key for multiple Lambda targets by appending a unique identifier for each Object Lambda function.
          For example, the following command configures a key for two distinct Object Lambda webhook endpoints:
 
          .. code-block:: shell

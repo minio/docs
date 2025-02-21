@@ -121,7 +121,7 @@ MinIO also supports the following environment variables for authenticated webhoo
 
 Restart MinIO to apply the changes.
 
-You can also configure Object Lambda with the MinIO Client :mc-cmd:`mc` command line tool.
+Alternatively, configure Object Lambda with the :ref:`MinIO Client <minio-client>` command line tool.
 For more information, see :ref:`minio-server-envvar-object-lambda-webhook`.
 
 Trigger From an Application
