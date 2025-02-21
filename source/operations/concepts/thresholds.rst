@@ -56,7 +56,7 @@ S3 API Limits
    * - Maximum length for object names
      - 1024
 
-   * - Maximum length for each ``/`` separated object name segment
+   * - Maximum length for each ``/`` separated segment of an object name
      - 255
 
    * - Maximum number of object versions for a unique object
@@ -105,9 +105,11 @@ Windows and some other operating systems restrict file systems with certain spec
 
 This list is not exhaustive and may not apply to your operating system and filesystem combination.
 
+On Unix-like operating systems, objects with a path name of ``.``, ``..``, or ``/`` return an error of ``file access denied``.
+
 Consult your operating system vendor or filesystem documentation for a comprehensive list for your situation.
 
-MinIO recommends using LInux operating system with an XFS based filesystem for production workloads.
+MinIO recommends using a Linux operating system with an XFS based filesystem for production workloads.
 
 Conflicting Objects
 ~~~~~~~~~~~~~~~~~~~

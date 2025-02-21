@@ -136,13 +136,21 @@ Parameters
    Specify a string in ``#d#hh#mm#ss`` format. 
    For example: ``--older-than 1d2hh3mm4ss``
 
+   .. versionchanged:: RELEASE.2025-02-04T04-57-50Z
+      The datetime may also be specified in absolute time of ``YYYY-MM-DD HH:MM:SS TMZ`` format.
+      For example, ``mc find --newer-than="2025-01-22 09:57:00 CET" minioalias/mybucket``.
+
 .. mc-cmd:: --older-than
    :optional:
 
    Mirror object(s) older than the specified time limit. Specify a
    string in ``#d#hh#mm#ss`` format. 
    For example: ``--older-than 1d2hh3mm4ss``
-      
+
+   .. versionchanged:: RELEASE.2025-02-04T04-57-50Z
+      The datetime may also be specified in absolute time of ``YYYY-MM-DD HH:MM:SS TMZ`` format.
+      For example, ``mc find --newer-than="2025-01-22 09:57:00 CET" minioalias/mybucket``.
+
    Defaults to ``0`` (all objects).
 
 .. mc-cmd:: --path
