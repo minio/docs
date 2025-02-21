@@ -87,8 +87,8 @@ Endpoint
          .. code-block:: shell
             :class: copyable
 
-            export MINIO_LAMBDA_WEBHOOK_ENDPOINT_myfunction="http://webhook-1.example.net"
-            export MINIO_LAMBDA_WEBHOOK_ENDPOINT_yourfunction="http://webhook-2.example.net"
+            export MINIO_LAMBDA_WEBHOOK_ENDPOINT_myfunction="http://webhook-1.example.com"
+            export MINIO_LAMBDA_WEBHOOK_ENDPOINT_yourfunction="http://webhook-2.example.com"
 
    .. tab-item:: Configuration Setting
       :sync: config
