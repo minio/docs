@@ -102,7 +102,7 @@ Optionally, the YAML can also define flags to filter which objects replicate, se
       :class: copyable
 
       replicate:
-        apiVersion: v2
+        apiVersion: v1
         source:
           type: minio
           bucket: mybucket

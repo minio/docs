@@ -31,11 +31,12 @@ The :mc:`mc support profile` command has the following syntax:
 
 .. code-block:: shell
 
-   mc [GLOBALFLAGS] support profile     \
-                            ALIAS       \
-                            FILE        \
-                            [--comment] \
-                            [--issue]
+   mc [GLOBALFLAGS] support profile              \
+                            ALIAS                \
+                            FILE                 \
+                            [--comment "string"] \
+                            [--enc]              \
+                            [--issue integer]
 
 Parameters
 ~~~~~~~~~~
@@ -54,6 +55,12 @@ Parameters
    :optional:
 
    Include a message to the issue when uploading the file.
+
+.. mc-cmd:: --enc 
+   :optional:
+
+   Encrypt contents of the upload.
+   The key used for the encryption is only accessible to MinIO.
 
 .. mc-cmd:: --issue
    :optional:

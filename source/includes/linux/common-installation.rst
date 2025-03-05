@@ -51,9 +51,9 @@ To update deployments managed using ``systemctl``, see :ref:`minio-upgrade-syste
             chmod +x minio
             sudo mv minio /usr/local/bin/
 
-.. dropdown:: arm64 (Apple M1/M2 or other ARM 64-bit processors)
+.. dropdown:: arm64 (ARM 64-bit processors)
    
-   Use one of the following options to download the MinIO server installation file for a machine running Linux on an ARM 64-bit processor, such as the Apple M1 or M2.
+   Use one of the following options to download the MinIO server installation file for a machine running Linux on an ARM 64-bit processor.
 
    .. tab-set::
    
