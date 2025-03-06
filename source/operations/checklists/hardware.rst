@@ -468,30 +468,20 @@ Recommended tools for MinIO subscriptions
 .. important::
 
    The tools noted in this section **require** a MinIO subscription.
-   For more information, see the `MinIO pricing page <https://min.io/pricing?jmp=docs>`
+   MinIO strongly recommends all production deployments use `AIStor Object Store <https://min.io/docs/aistor-custom/object-store/>`__  with their SUBNET license.
+   For more information, see the `MinIO AIStor pricing page <https://min.io/pricing?jmp=docs>`__.
 
-MinIO Diagnostics
-~~~~~~~~~~~~~~~~~
+#. Health diagnostic tool
 
-Run the built in health diagnostic tool.
-If you have access to :ref:`SUBNET <minio-docs-subnet>`, you can upload the results there.
+   Generate a summary of the health status of your deployment.
+   If you have access to :ref:`SUBNET <minio-docs-subnet>`, you can upload the results there.
 
-.. code-block:: shell
-   :class: copyable
-
-   mc support diag ALIAS --airgap
-
-Replace ALIAS with the :mc:`~mc alias` defined for the deployment.
-
-MinIO Support Diagnostic Tools
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For deployments registered with MinIO |subnet-short|, you can run the built-in support diagnostic tools.
-
-Run the three :mc:`mc support perf` tests.
+   .. code-block:: shell
+      :class: copyable
    
-These server-side tests validate network, drive, and object throughput.
-Run all three tests with default options.
+      mc support diag ALIAS --airgap
+   
+   Replace ALIAS with the :mc:`~mc alias` defined for the deployment.
 
 #. Network test
 

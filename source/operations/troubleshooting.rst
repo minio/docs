@@ -16,7 +16,7 @@ MinIO users have two options for support.
 #. Community support from the `public Slack channel <https://slack.min.io>`_.
    
    Community support is best-effort only and has no :abbr:`SLA (Service Level Agreement)` or :abbr:`SLO (Service Level Objective)`.
-#. Paid subscribers have access to the MinIO Subscription Network, |subnet-short|, which provides a :abbr:`SLA (Service Level Agreement)` based on subscription, typically 48 hours.
+#. Paid subscribers have access to the MinIO Subscription Network, |subnet-short|, which provides access to health checks, direct-to-engineering support, and license management.
    
    For current licensing levels and pricing, refer to the |SUBNET| page.
 
