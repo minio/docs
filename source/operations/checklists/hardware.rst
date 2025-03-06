@@ -342,58 +342,6 @@ Storage
 Recommended Hardware Tests
 --------------------------
 
-MinIO Diagnostics
-~~~~~~~~~~~~~~~~~
-
-Run the built in health diagnostic tool.
-If you have access to :ref:`SUBNET <minio-docs-subnet>`, you can upload the results there.
-
-.. code-block:: shell
-   :class: copyable
-
-   mc support diag ALIAS --airgap
-
-Replace ALIAS with the :mc:`~mc alias` defined for the deployment.
-
-MinIO Support Diagnostic Tools
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For deployments registered with MinIO |subnet-short|, you can run the built-in support diagnostic tools.
-
-Run the three :mc:`mc support perf` tests.
-   
-These server-side tests validate network, drive, and object throughput.
-Run all three tests with default options.
-
-#. Network test
-
-   Run a network throughput test on a cluster with alias ``minio1``.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc support perf net minio1
-
-#. Drive test
-
-   Run drive read/write performance measurements on all drive on all nodes for a cluster with alias ``minio1``.
-   The command uses the default blocksize of 4MiB.
-
-   .. code-block:: shell
-      :class: copyable
- 
-      mc support perf drive minio1
-
-#. Object test
-
-   Measure the performance of S3 read/write of an object on the alias ``minio1``.
-   MinIO autotunes concurrency to obtain maximum throughput and IOPS (Input/Output Per Second).
-
-   .. code-block:: shell
-      :class: copyable
- 
-      mc support perf object minio1
-
 Operating System Diagnostic Tools
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -513,3 +461,63 @@ Document the performance numbers for each server in your deployment.
      - Number of threads (:math:`numberOfDrives * 16`)
    * - ``-F <>``  
      - list of files (the above command tests with 16 files per drive)  
+
+Recommended tools for MinIO subscriptions
+-----------------------------------------
+
+.. important::
+
+   The tools noted in this section **require** a MinIO subscription.
+   For more information, see the `MinIO pricing page <https://min.io/pricing?jmp=docs>`
+
+MinIO Diagnostics
+~~~~~~~~~~~~~~~~~
+
+Run the built in health diagnostic tool.
+If you have access to :ref:`SUBNET <minio-docs-subnet>`, you can upload the results there.
+
+.. code-block:: shell
+   :class: copyable
+
+   mc support diag ALIAS --airgap
+
+Replace ALIAS with the :mc:`~mc alias` defined for the deployment.
+
+MinIO Support Diagnostic Tools
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For deployments registered with MinIO |subnet-short|, you can run the built-in support diagnostic tools.
+
+Run the three :mc:`mc support perf` tests.
+   
+These server-side tests validate network, drive, and object throughput.
+Run all three tests with default options.
+
+#. Network test
+
+   Run a network throughput test on a cluster with alias ``minio1``.
+
+   .. code-block:: shell
+      :class: copyable
+
+      mc support perf net minio1
+
+#. Drive test
+
+   Run drive read/write performance measurements on all drive on all nodes for a cluster with alias ``minio1``.
+   The command uses the default blocksize of 4MiB.
+
+   .. code-block:: shell
+      :class: copyable
+ 
+      mc support perf drive minio1
+
+#. Object test
+
+   Measure the performance of S3 read/write of an object on the alias ``minio1``.
+   MinIO autotunes concurrency to obtain maximum throughput and IOPS (Input/Output Per Second).
+
+   .. code-block:: shell
+      :class: copyable
+ 
+      mc support perf object minio1

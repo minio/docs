@@ -53,7 +53,7 @@ Glossary
      See also: :term:`tenant`.
 
    cluster registration
-     Cluster registration links a MinIO deployment to a :term:`SUBNET` :ref:`subscription <minio-docs-subnet>`.
+     Cluster registration links a MinIO deployment to a :term:`SUBNET` `subscription <https://min.io/pricing?jmp=docs>`__.
      An organization may have more than one MinIO clusters registered to the same SUBNET subscription.
 
    Console

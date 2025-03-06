@@ -30,8 +30,6 @@ Use the :mc-cmd:`mc admin logs` command to show MinIO server logs.
 
 .. end-mc-admin-logs-desc
 
-To enable or disable the sending of logs to SUBNET for support, use :mc:`mc support callhome`.
-
 .. include:: /includes/common-mc-support.rst
    :start-after: start-support-logs-opt-in
    :end-before: end-support-logs-opt-in

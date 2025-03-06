@@ -57,7 +57,13 @@ Parameters
 
    The path (relative to the current working directory) and file name of the key to use to update the deployment's license.
 
-   See the :ref:`troubleshooting page <minio-subnet-license-file-download>` for instructions on downloading the license file.
+   To download the API key from SUBNET:
+
+   #. Log in to |SUBNET|
+   #. Go to the :guilabel:`Deployments` tab
+   #. Select the :guilabel:`API Key` button near the top of the page on the right side of the account statistics information box
+   #. Select copy button to the right of the key field to copy the key value to your clipboard
+
    
 .. mc-cmd:: --airgap
    :optional:
