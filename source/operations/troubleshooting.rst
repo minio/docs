@@ -43,7 +43,7 @@ Always test software releases in a development environment before upgrading on a
 Recommended upgrade schedule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO recommends always installing the most recent release to obtain the security enhancements and improvements.
+MinIO recommends always installing the most recent release to obtain security enhancements and improvements.
 We recognize that such a frequent release schedule may make this impractical for some organizations.
 In such cases, we recommend using MinIO and our related product releases that are no older than six months.
 
