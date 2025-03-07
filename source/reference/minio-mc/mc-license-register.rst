@@ -72,7 +72,7 @@ Parameters
 
 .. mc-cmd:: --api-key
 
-   API of the account on SUBNET.
+   API key of the account on SUBNET.
 
    Corresponds with the ``MC_SUBNET_API_KEY`` environment variable.
 
@@ -88,7 +88,13 @@ Parameters
 
    Path to the license file to use for registering the deployment.
    
-   You must first :ref:`download the license file <minio-subnet-license-file-download>` for the account.
+   You must first download the license file for the account from |SUBNET|.
+
+   #. Log in to |SUBNET|
+   #. Go to the :guilabel:`Deployments` tab
+   #. Select the :guilabel:`License` button near the top of the page on the right side of the account statistics information box
+   #. Select the copy button to the right of the license field to copy the key value to your clipboard or
+      select the :guilabel:`Download` button to save a txt file of the license locally
 
 .. mc-cmd:: --name
    :optional:
@@ -122,7 +128,13 @@ Register a new MinIO deployment at alias ``minio5`` on SUBNET, using the license
 
    mc license register minio5 /path/to/minio.license
 
-If not already downloaded, you can :ref:`download the license file <minio-subnet-license-file-download>` from SUBNET.
+If not already downloaded, you can download the license file from SUBNET.
+
+#. Log in to |SUBNET|
+#. Go to the :guilabel:`Deployments` tab
+#. Select the :guilabel:`License` button near the top of the page on the right side of the account statistics information box
+#. Select the :guilabel:`Download` button to save a txt file of the license locally
+
 
 Register a Deployment with a Different Deployment Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
