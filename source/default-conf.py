@@ -229,12 +229,6 @@ rst_prolog = """
 .. |minio-latest| replace:: MINIOLATEST
 .. |minio-rpm| replace:: RPMURL
 .. |minio-deb| replace:: DEBURL
-<<<<<<< HEAD
-.. |minio-rpmarm64| replace:: RPMARM64URL
-.. |minio-debarm64| replace:: DEBARM64URL
-.. |subnet| replace:: `MinIO pricing <https://min.io/pricing?jmp=docs>`__
-.. |subnet-short| replace:: `pricing <https://min.io/pricing?jmp=docs>`__
-=======
 .. |minio-binary| replace:: MINIOURL
 .. |minio-rpm-arm64| replace:: RPMARM64URL
 .. |minio-deb-arm64| replace:: DEBARM64URL
@@ -247,7 +241,6 @@ rst_prolog = """
 .. |minio-binarys-390x| replace:: MINIOS390XURL
 .. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
->>>>>>> 8da23e1 (Attempting to reduce docs to single platform)
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
 .. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`
 .. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`

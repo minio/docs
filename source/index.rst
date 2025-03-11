@@ -55,28 +55,7 @@ MinIO High Performance Object Storage
 MinIO is a Kubernetes-native S3-compatible object storage solution designed to deploy wherever your applications are - on premises, in the private cloud, in the public cloud, and edge infrastructure.
 MinIO is designed to support modern application workload patterns where high performance distributed computing meets petabyte-scale storage requirements.
 
-MinIO is available under two server editions, each with their own distinct license:
-
-.. grid:: 2
-
-   .. grid-item-card:: MinIO Object Store (MinIO)
-
-      MinIO Object Store (MinIO) is licensed under `GNU Affero General Public License v3.0  <https://www.gnu.org/licenses/agpl-3.0.en.html?ref=docs>`__.
-      
-      MinIO features are available to the community as a stream of active development.
-
-      MinIO is community-focused, with best-effort support through the MinIO Community Slack Channel and the MinIO Github repository.
-
-   .. grid-item-card:: MinIO Enterprise Object Store (MinEOS)
-
-      MinIO Enterprise Object Store (MinEOS) is licensed under the `MinIO Commercial License <https://min.io/pricing?jmp=docs>`__.
-      
-      MinEOS is available to |SUBNET| Enterprise-Lite and Enterprise-Plus customers and includes exclusive support for the :minio-blog:`Enterprise Object Store feature suite <enterprise-object-store-overview/>`.
-
-      MinEOS include |SUBNET| access for 24/7 L1 support from MinIO Engineering, with 4 or 1 hour SLAs available based on deployment size.
-
-This site documents Operations, Administration, and Development of MinIO deployments on supported platforms for |minio-tag|. 
-MinIO Enterprise Object Storage (MinEOS) deployments can use this documentation as a baseline of features available in a current or upcoming release.
+This site documents Operations, Administration, and Development of MinIO Community Object Storage deployments on supported platforms for |minio-tag|. 
 
 .. todo: More marketing/SEO below?
 
@@ -92,11 +71,6 @@ MinIO officially supports the following platforms:
       |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
 =======
 - :ref:`Kubernetes (Upstream) <deploy-minio-kubernetes>`
-- :ref:`RedHat Openshift <deploy-operator-openshift>`
-- :ref:`SUSE Rancher <deploy-operator-rancher>`
-- :ref:`Elastic Kubernetes Service <deploy-operator-eks>`
-- :ref:`Google Kubernetes Engine <deploy-operator-gke>`
-- :ref:`Azure Kubernetes Service <deploy-operator-aks>`
 - :ref:`Red Hat Enterprise Linux <deploy-minio-rhel>`
 - :ref:`Ubuntu Linux <deploy-minio-ubuntu>`
 - :ref:`MacOS <deploy-minio-macos>`
