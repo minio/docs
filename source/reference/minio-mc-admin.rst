@@ -10,7 +10,7 @@ MinIO Admin Client
 
 .. mc:: mc admin
 
-The MinIO Client :mc-cmd:`mc` command line tool provides The command
+The MinIO Client :mc-cmd:`mc` command line tool provides :mc:`mc admin`
 command for performing administrative tasks on your MinIO deployments.
 
 While :mc-cmd:`mc` supports any S3-compatible service, 
