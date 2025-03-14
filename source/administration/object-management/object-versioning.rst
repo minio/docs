@@ -277,7 +277,7 @@ using an S3-compatible SDK.
       .. code-block:: shell
          :class: copyable
 
-         mc version ALIAS/BUCKET
+         mc version enable ALIAS/BUCKET
 
       - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
         MinIO deployment.
