@@ -192,7 +192,7 @@ Parameters
    :optional:
 
    Remove object(s) older than the specified time limit. Specify a
-   string in ``#d#hh#mm#ss`` format. For example: ``--older-than 1d2hh3mm4ss``.
+   string in ``#d#h#m#s`` format. For example: ``--older-than 1d2h3m4s``.
       
    Defaults to ``0`` (all objects).
 
