@@ -78,12 +78,11 @@ Syntax
                
       mc support callhome status   \
                           ALIAS    \
-                          [--logs] \
                           [--diag]
 
    .. note::
 
-      The ``--logs`` and ``--diag`` flags are no longer supported in SUBNET and will be removed in a future release.
+      The ``--diag`` flag is no longer supported in SUBNET and will be removed in a future release.
             
 Parameters
 ~~~~~~~~~~
@@ -93,15 +92,6 @@ Parameters
 
    The :ref:`alias <alias>` of the MinIO deployment.
 
-.. mc-cmd:: --logs
-   :optional:
-
-   .. note::
-
-      This option is no longer supported in SUBNET and will be removed in a future release.
-
-   Send or stop sending log information to SUBNET in real time.
-
 .. mc-cmd:: --diag
    :optional:
 
@@ -110,8 +100,6 @@ Parameters
       This option is no longer supported in SUBNET and will be removed in a future release.
 
    Send or stop sending deployment diagnostic information to SUBNET every 24 hours.
-
-If you do not pass either ``--logs`` or ``--diag``, the command applies to both logs and diagnostics.
 
 Examples
 --------
