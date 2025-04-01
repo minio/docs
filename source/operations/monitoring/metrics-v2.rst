@@ -72,8 +72,13 @@ The following sections describe the version 2 endpoints and metrics.
 
       .. versionchanged:: RELEASE.2023-08-31T15-31-16Z
 
-      You can scrape :ref:`bucket-level metrics <minio-available-bucket-metrics>` using the following URL endpoint:
+         You can scrape :ref:`bucket-level metrics <minio-available-bucket-metrics>` using the following URL endpoint:
 
+      .. versionchanged:: RELEASE.2025-03-12T17-29-24Z
+
+         v2 metrics have a limit of 100 buckets for performance reasons.
+         For metrics across a higher number of buckets, use :ref:`v3 metrics <minio-metrics-and-alerts-available-metrics>` instead.
+     
       .. code-block:: shell
          :class: copyable
 
@@ -108,6 +113,12 @@ The following sections describe the version 2 endpoints and metrics.
    :parser: myst_parser.sphinx_
 
 .. _minio-available-bucket-metrics:
+
+   .. versionchanged:: RELEASE.2025-03-12T17-29-24Z
+
+      v2 metrics have a limit of 100 buckets for performance reasons.
+      For metrics across a higher number of buckets, use :ref:`v3 metrics <minio-metrics-and-alerts-available-metrics>` instead.
+
 
 .. include:: /includes/common-metrics-bucket.md
    :parser: myst_parser.sphinx_

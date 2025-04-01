@@ -202,8 +202,6 @@ Parameters
 
    This option has the same behavior as the S3 ``NoncurrentVersionExpiration`` action.
 
-   If the remote tier is another MinIO deployment, you can set the value to ``0`` to mark new objects as immediately eligible for transition to the remote tier.
-
    MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
