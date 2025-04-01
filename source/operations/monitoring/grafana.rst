@@ -91,7 +91,7 @@ MinIO Replication Metrics Dashboard
 
 Visualize MinIO bucket metrics with the official MinIO Grafana dashboard for replication available on the `Grafana dashboard portal <https://grafana.com/grafana/dashboards/15305-minio-replication-dashboard/>`__.
 
-Cluster replication metrics can be viewed in the Grafana dashboard using the `cluster replication JSON file on GitHub <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/replication/minio-replication.json>`__.
+Cluster replication metrics can be viewed in the Grafana dashboard using the `cluster replication JSON file on GitHub <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/replication/minio-replication-cluster.json>`__.
 
 .. image:: /images/grafana-replication.png
    :width: 600px
