@@ -67,7 +67,6 @@ variables *or* by setting runtime configuration settings.
                set MINIO_NOTIFY_WEBHOOK_QUEUE_LIMIT_<IDENTIFIER>="<string>"
                set MINIO_NOTIFY_WEBHOOK_CLIENT_CERT_<IDENTIFIER>="<string>"
                set MINIO_NOTIFY_WEBHOOK_CLIENT_KEY_<IDENTIFIER>="<string>"
-               set MINIO_NOTIFY_WEBHOOK_COMMENT_<IDENTIFIER>="<string>"
 
       .. cond:: not windows
 
@@ -81,7 +80,6 @@ variables *or* by setting runtime configuration settings.
                export MINIO_NOTIFY_WEBHOOK_QUEUE_LIMIT_<IDENTIFIER>="<string>"
                export MINIO_NOTIFY_WEBHOOK_CLIENT_CERT_<IDENTIFIER>="<string>"
                export MINIO_NOTIFY_WEBHOOK_CLIENT_KEY_<IDENTIFIER>="<string>"
-               export MINIO_NOTIFY_WEBHOOK_COMMENT_<IDENTIFIER>="<string>"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         Webhook service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -124,8 +122,7 @@ variables *or* by setting runtime configuration settings.
             queue_dir="<string>" \
             queue_limit="<string>" \
             client_cert="<string>" \
-            client_key="<string>" \
-            comment="<string>"
+            client_key="<string>"
 
       - Replace ``IDENTIFIER`` with a unique descriptive string for the
         Webhook service endpoint. The following examples in this procedure
@@ -279,8 +276,7 @@ for the Webhook service endpoint:
       queue_dir="<string>" \
       queue_limit="<string>" \
       client_cert="<string>" \
-      client_key="<string>" \
-      comment="<string>"
+      client_key="<string>"
 
 The :mc-conf:`notify_webhook endpoint <notify_webhook.endpoint>` configuration
 setting is the *minimum* required for an Webhook service endpoint. All other
