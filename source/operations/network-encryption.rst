@@ -593,9 +593,6 @@ Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Ce
    For certificates signed by an internal, private, or other non-global Certificate Authority, use the same CA that signed the cert.
    A non-global CA must include the full chain of trust from the intermediate certificate to the root.
 
-   For certificates signed by an internal, private, or other non-global Certificate Authority, use the same CA that signed the cert.
-   A non-global CA must include the full chain of trust from the intermediate certificate to the root.
-
    If the provided file is not an X.509 certificate, MinIO ignores it and may return errors for validating certificates signed by that CA.
 
 .. cond:: k8s
