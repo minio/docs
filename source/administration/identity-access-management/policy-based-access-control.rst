@@ -709,6 +709,69 @@ MinIO extends the S3 standard condition keys with the following extended key:
          ]
       }
 
+Support kms action keys
+-----------------------
+
+MinIO supports restricting key management service (KMS) actions by policy.
+
+You can restrict KMS activities in a policy with any of the following KMS actions:
+
+.. policy-action:: kms:Status
+
+   Check the status of KMS.
+
+.. policy-action:: kms:Metrics
+
+   Obtain Prometheus-formatted metrics.
+
+.. policy-action:: kms:API
+
+   List supported API endpoints.
+
+.. policy-action:: kms:Version
+
+   Retrieve the KMS version.
+
+.. policy-action:: kms:CreateKey
+
+   Create a new KMS key.
+
+.. policy-action:: kms:ListKeys
+
+   Retrieve a list of existing KMS keys.
+
+.. policy-action:: kms:KeyStatus
+
+   Retrieve the status of a specified KMS key.
+
+.. versionchanged:: RELEASE.2024-07-16T23-46-41Z
+
+   KMS actions can be restricted by resource or a resource prefix.
+   The wildcard character ``*`` can be used to apply the KMS action policy to all resources that match the prefix.
+
+   For example, the following policy document allows a user to list keys, create new keys, and check the status of keys for any resource that begins with ``keys-abc-`` or ``myuser-``.
+
+   .. codeblock:: shell
+      :class: copyable
+   
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "kms:CreateKey",
+                      "kms:KeyStatus",
+                      "kms:ListKeys"
+                  ],
+                  "Resource": [
+                      "arn:minio:kms:::keys-abc-*",
+                      "arn:minio:kms:::myuser-*"
+                  ]
+              }
+          ]
+      }
+
 .. _minio-policy-mc-admin-actions:
 
 ``mc admin`` Policy Action Keys
