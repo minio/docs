@@ -289,15 +289,19 @@ table.docutils {
                     border-bottom-width: 0;
                 }
             }
+        }
 
-            td, th {
-                &:first-child {
-                    border-left-width: 0;
-                }
+        td, th {
+            &:first-child {
+                border-left-width: 0;
+            }
 
-                &:last-child {
-                    border-right-width: 0;
-                }
+            &:last-child {
+                border-right-width: 0;
+            }
+
+            * {
+                white-space: normal;
             }
         }
     }
