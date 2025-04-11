@@ -38,7 +38,7 @@ The ability of MinIO to restore a damaged object relates directly to the followi
 
   When MinIO needs to provide the object, it looks for the data shards for the object.
   If any of the data shards are missing or damaged, MinIO uses one or more of the parity shards to restore the object.
-  WHen looking for the parity shards, if any of the parity shards are missing or damaged, MinIO restores those as well, provided there are sufficient other shards to serve the object.
+  When looking for the parity shards, if any of the parity shards are missing or damaged, MinIO restores those as well, provided there are sufficient other shards to serve the object.
   For this scenario, up to three of data shard parts can be lost or damaged and MinIO can still successfully restore and serve the object. 
 
   The number of drives available with intact data or parity shards of the object must meet or exceed the number of drives used for data shards in the erasure set.
