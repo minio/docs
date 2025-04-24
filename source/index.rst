@@ -61,7 +61,6 @@ This site documents Operations, Administration, and Development of MinIO Communi
 
 MinIO officially supports the following platforms:
 
-<<<<<<< HEAD
    This site documents Operations, Administration, and Development of MinIO deployments on Red Hat Kubernetes distributions for the latest stable version of the MinIO Operator: |operator-version-stable|.
 
    .. important::
@@ -69,14 +68,6 @@ MinIO officially supports the following platforms:
       Support for deploying the MinIO Operator via the RedHat Marketplace or OperatorHub was removed in 2024. 
       MinIO AIStor fully supports installation via the Marketplace and OperatorHub onto enterprise RedHat Kubernetes distributions like OpenShift Container Platform (OCP).
       |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
-=======
-- :ref:`Kubernetes (Upstream) <deploy-minio-kubernetes>`
-- :ref:`Red Hat Enterprise Linux <deploy-minio-rhel>`
-- :ref:`Ubuntu Linux <deploy-minio-ubuntu>`
-- :ref:`MacOS <deploy-minio-macos>`
-- :ref:`Container <deploy-minio-container>`
-- :ref:`Windows <deploy-minio-windows>`
->>>>>>> 8da23e1 (Attempting to reduce docs to single platform)
 
 Quickstart
 ----------
