@@ -121,6 +121,12 @@ Define the following variables to use `MinIO KMS <https://min.io/product/enterpr
 Static Key Files
 ----------------
 
+.. warning::
+
+   These settings support early development and evaluation of Server-Side Encryption of Objects without depending on an external KMS.
+   Do not use these settings in any extended development, QA, or production environments.
+   See :ref:`minio-sse-vault` for guidance on deploying SSE using MinIO Key Encryption Service (KES) and an external KMS.
+
 Provide a static KMS key or key file to use for encryption.
 
 .. envvar:: MINIO_KMS_SECRET_KEY
@@ -131,3 +137,4 @@ Provide a static KMS key or key file to use for encryption.
 .. envvar:: MINIO_KMS_SECRET_KEY_FILE
 
    Path to the file to read the static KMS key from.
+
