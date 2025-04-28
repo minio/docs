@@ -57,7 +57,7 @@ variables *or* by setting runtime configuration settings.
       :mc:`minio server` process applies the specified settings on its 
       next startup.
       
-      The following example code sets *all*  environment variables
+      The following example code sets *all* environment variables
       related to configuring a PostgreSQL service endpoint. The minimum
       *required* variables are:
       
@@ -71,7 +71,7 @@ variables *or* by setting runtime configuration settings.
             :class: copyable
          
                set MINIO_NOTIFY_POSTGRES_ENABLE_<IDENTIFIER>="on"
-               set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_<IDENTIFIER>="host=postgresql-endpoint.example.net port=4222"
+               set MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_<IDENTIFIER>="options='-c search_path=minio' host=postgresql-endpoint.example.net port=4222"
                set MINIO_NOTIFY_POSTGRES_TABLE_<IDENTIFIER>="minioevents"
                set MINIO_NOTIFY_POSTGRES_FORMAT_<IDENTIFIER>="namespace|access"
                set MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
@@ -85,7 +85,7 @@ variables *or* by setting runtime configuration settings.
             :class: copyable
 
                export MINIO_NOTIFY_POSTGRES_ENABLE_<IDENTIFIER>="on"
-               export MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_<IDENTIFIER>="host=postgresql-endpoint.example.net port=4222"
+               export MINIO_NOTIFY_POSTGRES_CONNECTION_STRING_<IDENTIFIER>="options='-c search_path=minio' host=postgresql-endpoint.example.net port=4222"
                export MINIO_NOTIFY_POSTGRES_TABLE_<IDENTIFIER>="minioevents"
                export MINIO_NOTIFY_POSTGRES_FORMAT_<IDENTIFIER>="namespace|access"
                export MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
