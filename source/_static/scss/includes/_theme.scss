@@ -55,8 +55,8 @@ $theme-properties: (
     --docs-nav-group-border-color: $light-300 $dark-300,
 
     // Scrollbar
-    --scrollbar-bg: $light-500 $dark-200,
-    --scrollbar-hover-bg: darken($light-500, 5%) $dark-300,
+    --scrollbar-bg: $light-300 $dark-200,
+    --scrollbar-hover-bg: $light-400 $dark-300,
 
     // Table
     --table-border-color: $light-300 $dark-200,
@@ -120,7 +120,7 @@ $theme-properties: (
     // Search
     --is-dropdown-bg: #edf1f3 #1c232d,
     --is-container-background: rgba($black, 0.25) rgba(16, 21, 28, 0.851),
-    --is-highlight-color: rgba(120, 133, 152, 0.125) rgba(16, 21, 28, 0.3),
+    --is-highlight-color: $light-100 rgba(16, 21, 28, 0.3),
     --is-search-focus-shadow: rgba($white, 0.15) #1b232f,
     --is-hit-icon-color: $black $light-500,
     --is-search-bg: $white $dark-100,
