@@ -213,21 +213,7 @@ Procedure
    While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
 
    Log in to the Console with the credentials you defined in the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` environment variables.
-
-   .. image:: /images/minio-console/console-login.png
-      :width: 600px
-      :alt: MinIO Console displaying login screen
-      :align: center
-
-   You can use the MinIO Console for general administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration. 
    Each MinIO server includes its own embedded MinIO Console.
-
-   .. image:: /images/minio-console/minio-console.png
-      :width: 600px
-      :alt: MinIO Console displaying bucket start screen
-      :align: center
-
-   For more information, see the :ref:`minio-console` documentation.
 
 #. `(Optional)` Install the MinIO Client
 

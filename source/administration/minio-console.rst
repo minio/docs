@@ -11,15 +11,17 @@ MinIO Console
    :depth: 2
 
 
-The MinIO Console is a rich graphical user interface that provides similar functionality to the :mc:`mc` command line tool.
+The MinIO Console is a rich graphical user interface that supports browsing buckets and objects on your deployment.
 
 This page provides an overview of the MinIO Console and describes configuration options and instructions for logging in.
 
 Overview
 --------
 
-You can use the MinIO Console for administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration.
-For more comprehensive or advanced configuration of MinIO, use the :mc:`mc` command line tool.
+.. versionchanged:: RELEASE.2025-05-24T17-08-30Z
+
+   The Console now presents only object browser capabilities similar to those available through the :mc:`mc` tool.
+   For administrative interactions, such as user management, use the :mc:`mc admin` command.
 
 The MinIO Console is embedded as part of the MinIO Server. 
 You can also deploy a standalone MinIO Console using the instructions in the :minio-git:`github repository <console>`.
@@ -119,13 +121,10 @@ You must also ensure that the host system firewall grants access to the configur
 Logging In
 ----------
 
-.. versionchanged:: RELEASE.2023-03-09T23-16-13Z
-
 The MinIO Console displays a login screen for unauthenticated users.
 The Console defaults to providing a username and password prompt for a :ref:`MinIO-managed user <minio-internal-idp>`.
 
-For deployments configured with multiple :ref:`identity managers <minio-authentication-and-identity-management>`, select the :guilabel:`Other Authentication Methods` dropdown to select one of the other configured identity providers.
-You can also log in using credentials generated using a :ref:`Security Token Service (STS) <minio-security-token-service>` API.
+For deployments configured with multiple :ref:`identity managers <minio-authentication-and-identity-management>`, you can also log in using credentials generated using a :ref:`Security Token Service (STS) <minio-security-token-service>` API.
 
 .. admonition:: Try out the Console using MinIO's Play testing environment
    :class: note
@@ -144,19 +143,8 @@ Documentation
 
 The :guilabel:`Documentation` tab opens this documentation site in a separate browser window or tab.
 
-Available Tasks
----------------
-
-Once logged in to the MinIO Console, users can perform many kinds of tasks.
-
-- :ref:`Manage objects <minio-console-managing-objects>` by browsing existing objects, uploading objects, or modifying bucket settings.
-- :ref:`Review or modify identity and security <minio-console-security-access>` with access keys, policies, and Identity Provider settings.
-- :ref:`Monitor the health and activities <minio-console-managing-deployment>` with metrics and notifications.
-
 .. toctree::
    :titlesonly:
    :hidden:
 
-   /administration/console/managing-deployment
    /administration/console/managing-objects
-   /administration/console/security-and-access
