@@ -25,7 +25,7 @@ Write operations which would normally overwrite an existing object instead resul
 MinIO versioning protects from unintended overwrites and deletions while providing support for "undoing" a write operation. 
 Bucket versioning is a prerequisite for configuring :ref:`object locking and retention rules <minio-object-locking>`.
 
-For versioned buckets, a write operation that mutates an object results in a new version of that object with a unique version ID. 
+For versioned buckets, a write operation results in a new version of that object with a unique version ID.
 MinIO marks the "latest" version of the object that clients retrieve by default. 
 Clients can then explicitly choose to list, retrieve, or remove a specific object version. 
 
