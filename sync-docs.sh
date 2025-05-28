@@ -16,7 +16,7 @@ function replace() {
 
 function main() {
     if [ "$#" -eq 0 ]; then
-	SDKS="dotnet go java js py hs"
+	SDKS="dotnet go java js py hs rs"
     fi
 
     for sdk in ${SDKS}; do
@@ -36,6 +36,9 @@ function main() {
 		;;
 	    "hs")
 		source_dir="haskell"
+		;;
+            "rs")
+                source_dir="rust" # no API.md yet
 		;;
 	esac
 	curl --retry 10 -Ls -o source/developers/${source_dir}/API.md https://raw.githubusercontent.com/minio/minio-${sdk}/${sdk_version}/${sdk_dir}/API.md
@@ -61,6 +64,9 @@ function main() {
 	    "hs")
 		replace HASKELLVERSION ${sdk_version}
 		;;
+            "rs")
+                replace RUSTVERSION ${sdk_version}
+                ;;
 	esac
     done
 }
