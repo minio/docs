@@ -165,13 +165,6 @@ Install
        npm install
        npm install -g
 
-  - TypeScript
-
-    .. code-block:: shell
-       :class: copyable
-
-       npm install --save-dev @types/minio
-
 
 .. _haskell-sdk:
 
