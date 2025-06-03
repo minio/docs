@@ -20,8 +20,8 @@ MinIO Pre-requisites
    :width: 100%
 
    * - :octicon:`circle`
-     - Servers running a Linux operating system with a 5.x+ kernel, such as Red Hat Enterprise Linux (RHEL) 9 or Ubuntu LTS 20.04+.
-       Ensure the chosen OS uses LTS and in-support releases of the Linux Kernel 5.x or 6.x series.
+     - Servers running a Linux operating system with a 6.6+ kernel. Red Hat Enterprise Linux (RHEL) 10 or Ubuntu LTS 22.04.01+ ship with these Kernel's by default.
+       Ensure the chosen OS uses LTS and in-support releases of a 6.6+ Linux kernel.
 
    * - :octicon:`circle`
      - A method to synchronize time servers across nodes, such as with ``ntp``, ``timedatectl`` or ``timesyncd``.
