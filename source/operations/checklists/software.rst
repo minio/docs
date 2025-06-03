@@ -20,7 +20,7 @@ MinIO Pre-requisites
    :width: 100%
 
    * - :octicon:`circle`
-     - Servers running a Linux operating system with a 6.6+ kernel, such as Red Hat Enterprise Linux (RHEL) 9 or Ubuntu LTS 24.04+.
+     - Servers running a Linux operating system with a 6.6+ kernel. Red Hat Enterprise Linux (RHEL) 10 or Ubuntu LTS 22.04.01+ ship with these Kernel's by default.
        Ensure the chosen OS uses LTS and in-support releases of a 6.6+ Linux kernel.
 
    * - :octicon:`circle`
