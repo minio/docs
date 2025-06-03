@@ -251,6 +251,29 @@ MinIO ignores any objects in the remote bucket or bucket prefix not explicitly m
 To facilitate this exclusive access, grant the lifecycle management user ``read``, ``write``, and ``delete`` access to the target bucket in its :ref:`policy <minio-policy>`.
 All other policies should ``deny`` access to the target bucket.
 
+
+Conflicting Objects
+-------------------
+
+Applications must assign non-conflicting, unique keys for all objects.
+This includes avoiding creating objects where the name can collide with that of a parent or sibling object.
+MinIO returns an empty set for LIST operations at the location of the collision.
+
+For example, the following operations create a namespace conflicts
+
+.. code-block::
+   
+   PUT data/invoices/2024/january/vendors.csv
+   PUT data/invoices/2024/january <- collides with existing object prefix
+
+.. code-block::
+
+   PUT data/invoices/2024/january
+   PUT data/invoices/2024/january/vendors.csv <- collides with existing object
+
+While you can perform GET or HEAD operations against these objects, the name collision causes LIST operations to return an empty result set at the ``/invoices/2024/january`` path.
+
+
 .. toctree::
    :titlesonly:
    :hidden:
