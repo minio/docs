@@ -19,6 +19,7 @@ MinIO publishes the following Software Development Kits (SDK):
 - :ref:`JavaScript <javascript-sdk>`
 - :ref:`Haskell <haskell-sdk>`
 - :ref:`C++ <cpp-sdk>`
+- :ref:`Rust <rust-sdk>`
 
 .. _go-sdk:
 
@@ -217,26 +218,19 @@ Install
        cmake --build ./build --config Debug
 
 
-..
-  Rust SDK repo does not have any releases yet. Once released, unblock this section and add to toctree.
-
   .. _rust-sdk:
 
-  Rust (``minio-rs``)
-  -------------------
+Rust
+----
 
-  Latest Version
-    |rust-sdk-version|
+GitHub: `minio/minio-rs <https://github.com/minio/minio-rs>`__
 
-  Reference
-    :doc:`MinIO Rust SDK Reference </developers/rust/minio-rust>`
+Latest Version
+  |rust-sdk-version|
 
-  Install
-    To Do
+Reference: `MinIO Rust SDK Reference <https://docs.rs/minio/latest/minio/>`__
 
-
-..
-  Will need to add C++ and Rust to the toctree once released.
+Quickstart Guide: :doc:`/developers/rust/minio-rust`
 
 .. toctree::
    :titlesonly:
@@ -249,3 +243,4 @@ Install
    /developers/java/minio-java
    /developers/javascript/minio-javascript
    /developers/haskell/minio-haskell
+   /developers/rust/minio-rust
