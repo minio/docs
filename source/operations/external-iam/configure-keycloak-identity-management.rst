@@ -172,15 +172,15 @@ You can validate the functionality by using the Admin REST API with the MinIO cl
 
       curl -d "client_id=minio" \
            -d "client_secret=secretvalue" \
-           -d "grant_type=password" \
-           http://keycloak-url:port/admin/realms/REALM/protocol/openid-connect/token
+           -d "grant_type=client_credentials" \
+           http://keycloak-url:port/realms/REALM/protocol/openid-connect/token
 
 2. Use the value returned as the ``access_token`` to access the Admin API:
 
    .. code-block:: shell
       :class: copyable
 
-      curl -H "Authentication: Bearer ACCESS_TOKEN_VALUE" \
+      curl -H "Authorization: Bearer ACCESS_TOKEN_VALUE" \
            http://keycloak-url:port/admin/realms/REALM/users/UUID
 
    Replace ``UUID`` with the unique ID for the user which you want to retrieve.
