@@ -21,13 +21,11 @@ The procedure on this page provides instructions for:
 .. cond:: k8s
 
    - Configuring a MinIO Tenant to use an external AD/LDAP provider
-   - Accessing the Tenant Console using AD/LDAP Credentials.
    - Using the MinIO ``AssumeRoleWithLDAPIdentity`` Security Token Service (STS) API to generate temporary credentials for use by applications.
 
 .. cond:: linux or macos or container or windows
 
    - Configuring a MinIO cluster for an external AD/LDAP provider.
-   - Accessing the MinIO Console using AD/LDAP credentials.
    - Using the MinIO ``AssumeRoleWithLDAPIdentity`` Security Token Service (STS) API to generate temporary credentials for use by applications.
 
 This procedure is generic for AD/LDAP services.
@@ -118,7 +116,6 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 
    * MinIO Client
    * Environment variables
-   * MinIO Console
 
    All methods require starting/restarting the MinIO deployment to apply changes.
 
@@ -133,7 +130,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
          For distributed deployments, the :mc:`mc idp ldap` command applies the configuration to all nodes in the deployment. 
 
          The following example code sets *all* configuration settings related to configuring an AD/LDAP provider for external identity management.
-	 The minimum *required* settings are:
+	      The minimum *required* settings are:
 
          - :mc-conf:`server_addr <identity_ldap.server_addr>`
          - :mc-conf:`lookup_bind_dn <identity_ldap.lookup_bind_dn>`
@@ -141,40 +138,32 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
          - :mc-conf:`user_dn_search_base_dn <identity_ldap.user_dn_search_base_dn>`
          - :mc-conf:`user_dn_search_filter <identity_ldap.user_dn_search_filter>`
 
-        .. code-block:: shell
-           :class: copyable
+         .. code-block:: shell
+            :class: copyable
 
-	   mc idp ldap add ALIAS                                                   \
-	      server_addr="ldaps.example.net:636"                                  \
-              lookup_bind_dn="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net"        \
-	      lookup_bind_password="xxxxxxxx"                                      \
-	      user_dn_search_base_dn="DC=example,DC=net"                           \
-	      user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"  \
-	      group_search_filter= "(&(objectClass=group)(member=%d))"             \
-	      group_search_base_dn="ou=MinIO Users,dc=example,dc=net"              \
-              enabled="true"                                                       \
-              tls_skip_verify="off"                                                \
-              server_insecure=off                                                  \
-              server_starttls="off"                                                \
-              srv_record_name=""                                                   \
-              comment="Test LDAP server"
+            mc idp ldap add ALIAS                                                   \
+               server_addr="ldaps.example.net:636"                                  \
+               lookup_bind_dn="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net"        \
+               lookup_bind_password="xxxxxxxx"                                      \
+               user_dn_search_base_dn="DC=example,DC=net"                           \
+               user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"  \
+               group_search_filter= "(&(objectClass=group)(member=%d))"             \
+               group_search_base_dn="ou=MinIO Users,dc=example,dc=net"              \
+               enabled="true"                                                       \
+               tls_skip_verify="off"                                                \
+               server_insecure=off                                                  \
+               server_starttls="off"                                                \
+               srv_record_name=""                                                   \
+               comment="Test LDAP server"
 
-        For more complete documentation on these settings, see :mc:`mc idp ldap`.
-
-	.. admonition:: :mc:`mc idp ldap` recommended
-           :class: note
-
-           :mc:`mc idp ldap` offers additional features and improved validation over :mc-cmd:`mc admin config set` runtime configuration settings.
-           :mc:`mc idp ldap` supports the same settings as :mc:`mc admin config` and the :mc-conf:`identity_ldap` configuration key.
-
-           The :mc-conf:`identity_ldap` configuration key remains available for existing scripts and tools.
+         For more complete documentation on these settings, see :mc:`mc idp ldap`.
 
       .. tab-item:: Environment Variables
 
          MinIO supports specifying the AD/LDAP provider settings using :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
-	 The :mc:`minio server` process applies the specified settings on its next startup.
-	 For distributed deployments, specify these settings across all nodes in the deployment using the *same* values.
-	 Any differences in server configurations between nodes will result in startup or configuration failures.
+         The :mc:`minio server` process applies the specified settings on its next startup.
+         For distributed deployments, specify these settings across all nodes in the deployment using the *same* values.
+         Any differences in server configurations between nodes will result in startup or configuration failures.
 
          The following example code sets *all* environment variables related to configuring an AD/LDAP provider for external identity management. The minimum *required* variable are:
 
@@ -202,22 +191,10 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 
          For complete documentation on these variables, see :ref:`minio-server-envvar-external-identity-management-ad-ldap`
 
-      .. tab-item:: MinIO Console
-
-         MinIO supports specifying the AD/LDAP provider settings using the :ref:`MinIO Console <minio-console>`.
-         For distributed deployments, configuring AD/LDAP from the Console applies the configuration to all nodes in the deployment.
-
-	 .. include:: /includes/common-minio-external-auth.rst
-            :start-after: start-minio-ad-ldap-console-enable
-            :end-before: end-minio-ad-ldap-console-enable
-
    2) Restart the MinIO Deployment
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    You must restart the MinIO deployment to apply the configuration changes.
-
-   If you configured AD/LDAP from the MinIO Console, no additional action is required.
-   The MinIO Console automatically restarts the deployment after saving the new AD/LDAP configuration.
 
    For MinIO Client and environment variable configuration, use the :mc-cmd:`mc admin service restart` command to restart the deployment:
 
@@ -228,20 +205,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 
    Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
-   3) Use the MinIO Console to Log In with AD/LDAP Credentials
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   The MinIO Console supports the full workflow of authenticating to the AD/LDAP provider, generating temporary credentials using the MinIO :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) endpoint, and logging the user into the MinIO deployment.
-
-   You can access the Console by opening the root URL for the MinIO cluster. For example, ``https://minio.example.net:9000``.
-
-   Once logged in, you can perform any action for which the authenticated user is :ref:`authorized <minio-external-identity-management-ad-ldap-access-control>`.
-
-   You can also create :ref:`access keys <minio-idp-service-account>` for supporting applications which must perform operations on MinIO.
-   Access Keys are long-lived credentials which inherit their privileges from the parent user.
-   The parent user can further restrict those privileges while creating the service account.
-
-   4) Generate S3-Compatible Temporary Credentials using AD/LDAP Credentials
+   3) Generate S3-Compatible Temporary Credentials using AD/LDAP Credentials
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    MinIO requires clients to authenticate using :s3-api:`AWS Signature Version 4 protocol <sig-v4-authenticating-requests.html>` with support for the deprecated Signature Version 2 protocol.
@@ -281,5 +245,3 @@ You can enable and disable the configured AD/LDAP connection as needed.
 
 Use :mc:`mc idp ldap disable` to deactivate a configured connection.
 Use :mc:`mc idp ldap enable` to activate a previously configured connection.
-
-You may also enable or disable AD/LDAP from the :ref:`MinIO Console <minio-console>`.

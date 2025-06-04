@@ -56,7 +56,7 @@ A MinIO user can generate any number of access keys.
 This allows application owners to generate arbitrary access keys for their applications without requiring action from the MinIO administrators. 
 Since the generated access keys have the same or fewer permissions as the parents, administrators can focus on managing the top-level parent users without micro-managing generated access keys.
 
-You can create access keys using either the :ref:`MinIO Console <minio-console-user-access-keys>` *or* by using the :mc:`mc admin user svcacct add` command.
+You can create access keys by using the :mc:`mc admin user svcacct add` command.
 Identities created by these methods do not expire until you remove the access key or the parent account.
 
 You can also create :ref:`security token service <minio-security-token-service>` accounts programmatically with the ``AssumeRole`` STS API endpoint.

@@ -79,24 +79,7 @@ Replace ``POLICY`` with the name of the MinIO policy to assign to the user or gr
 
 See :ref:`minio-external-identity-management-ad-ldap-access-control` for more information on access control with AD/LDAP users and groups.
 
-4) Use the MinIO Tenant Console to Log In with AD/LDAP Credentials
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The MinIO Console supports the full workflow of authenticating to the AD/LDAP provider, generating temporary credentials using the MinIO :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) endpoint, and logging the user into the MinIO deployment.
-
-See :ref:`Deploy MinIO Tenant: Connect to the Tenant <create-tenant-connect-tenant>` for additonal information about accessing the Tenant Console.
-
-If the AD/LDAP configuration succeeded, the Console displays a button to login with AD/LDAP credentials.
-
-Enter the user's AD/LDAP credentials and log in to access the Console.
-
-Once logged in, you can perform any action for which the authenticated user is :ref:`authorized <minio-external-identity-management-ad-ldap-access-control>`. 
-
-You can also create :ref:`access keys <minio-idp-service-account>` for supporting applications which must perform operations on MinIO. 
-Access Keys are long-lived credentials which inherit their privileges from the parent user.
-The parent user can further restrict those privileges while creating the access keys. 
-
-5) Generate S3-Compatible Temporary Credentials using AD/LDAP Credentials
+4) Generate S3-Compatible Temporary Credentials using AD/LDAP Credentials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Applications can use an AD/LDAP user credential to generate temporary S3-compatible credentials as-needed using the :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) API endpoint. 

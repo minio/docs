@@ -157,9 +157,7 @@ from the previous step.
    :alt: MinIO Console Login Page
    :align: center
 
-You can use the MinIO Console for general administration tasks like
-Identity and Access Management, Metrics and Log Monitoring, or 
-Server Configuration. Each MinIO server includes its own embedded MinIO
+Each MinIO server includes its own embedded MinIO
 Console.
 
 .. end-install-minio-console-desc

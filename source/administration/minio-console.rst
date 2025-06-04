@@ -124,8 +124,6 @@ Logging In
 The MinIO Console displays a login screen for unauthenticated users.
 The Console defaults to providing a username and password prompt for a :ref:`MinIO-managed user <minio-internal-idp>`.
 
-For deployments configured with multiple :ref:`identity managers <minio-authentication-and-identity-management>`, you can also log in using credentials generated using a :ref:`Security Token Service (STS) <minio-security-token-service>` API.
-
 .. admonition:: Try out the Console using MinIO's Play testing environment
    :class: note
 

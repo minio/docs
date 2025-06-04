@@ -192,164 +192,70 @@ Create Bucket with Object Locking Enabled
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must enable object locking during bucket creation as per S3 behavior.
-You can create a bucket with object locking enabled using the MinIO Console,
-the MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
+You can create a bucket with object locking enabled using the MinIO :mc:`mc` CLI or using an S3-compatible SDK.
 
-.. tab-set::
+Use the :mc:`mc mb` command with the :mc-cmd:`~mc mb --with-lock`
+option to create a bucket with object locking enabled:
 
-   .. tab-item:: MinIO Console
-      :sync: console
+.. code-block:: shell
+   :class: copyable
 
-      Select the :guilabel:`Buckets` section of the MinIO Console to access
-      bucket creation and management functions. Select the bucket row from the
-      list of buckets. You can use the :octicon:`search` :guilabel:`Search` bar
-      to filter the list. 
-      
-      .. image:: /images/minio-console/console-bucket.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
+   mc mb --with-lock ALIAS/BUCKET
 
-      Click the :guilabel:`Create Bucket` button to open the bucket creation
-      modal. Toggle the :guilabel:`Object Locking` selector to enable object
-      locking on the bucket.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
+  MinIO deployment.
 
-      .. image:: /images/minio-console/console-bucket-create-bucket-with-locking.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
-
-   .. tab-item:: MinIO CLI
-      :sync: cli
-
-      Use the :mc:`mc mb` command with the :mc-cmd:`~mc mb --with-lock`
-      option to create a bucket with object locking enabled:
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc mb --with-lock ALIAS/BUCKET
-
-      - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
-        MinIO deployment.
-
-      - Replace ``BUCKET`` with the 
-        :mc-cmd:`name <mc mb ALIAS>` of the bucket to create.
+- Replace ``BUCKET`` with the 
+  :mc-cmd:`name <mc mb ALIAS>` of the bucket to create.
 
 Configure Bucket-Default Object Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can configure object locking rules ("object retention") using the 
-MinIO Console, the MinIO :mc:`mc` CLI, or using an S3-compatible SDK. 
+You can configure object locking rules ("object retention") using the MinIO :mc:`mc` CLI, or using an S3-compatible SDK. 
 
 MinIO supports setting both bucket-default *and* per-object retention rules. 
 The following examples set bucket-default retention. For per-object retention
 settings, defer to the documentation for the ``PUT`` operation used by your
 preferred SDK.
 
-.. tab-set::
 
-   .. tab-item:: MinIO Console
-      :sync: console
+Use the :mc:`mc retention set` command with the
+:mc-cmd:`--recursive <mc retention set --recursive>` and
+:mc-cmd:`--default <mc retention set --default>` options to set the
+default retention mode for a bucket:
 
-      Select the :guilabel:`Buckets` section of the MinIO Console to access bucket creation and management functions. You can use the :octicon:`search` :guilabel:`Search` bar to filter the list. 
-      
-      .. image:: /images/minio-console/console-bucket.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
+.. code-block:: shell
+   :class: copyable
 
-      Each bucket row has a :guilabel:`Manage` button that opens the management view for that bucket.
+   mc retention set --recursive --default MODE DURATION ALIAS/BUCKET
 
-      .. image:: /images/minio-console/console-bucket-manage.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
+- Replace :mc-cmd:`MODE <mc retention set MODE>` with either either :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>`.
 
-      From the :guilabel:`Retention` section, select :guilabel:`Enabled`.
-      This section is only visible for buckets created with object locking enabled.
+- Replace :mc-cmd:`DURATION <mc retention set VALIDITY>` with the duration for which the object lock remains in effect.
 
-      From the :guilabel:`Set Retention Configuration` modal, set the desired bucket default retention settings.
+- Replace :mc-cmd:`ALIAS <mc retention set ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-      - For :guilabel:`Retention Mode`, select either :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>`.
-
-      - For :guilabel:`Duration`, select the retention duration units of :guilabel:`Days` or :guilabel:`Years`.
-
-      - For :guilabel:`Retention Validity`, set the duration of time for which MinIO holds objects under the specified retention mode for the bucket.
-
-   .. tab-item:: MinIO CLI
-      :sync: cli
-
-      Use the :mc:`mc retention set` command with the
-      :mc-cmd:`--recursive <mc retention set --recursive>` and
-      :mc-cmd:`--default <mc retention set --default>` options to set the
-      default retention mode for a bucket:
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc retention set --recursive --default MODE DURATION ALIAS/BUCKET
-
-      - Replace :mc-cmd:`MODE <mc retention set MODE>` with either either 
-        :ref:`COMPLIANCE <minio-object-locking-compliance>` or 
-        :ref:`GOVERNANCE <minio-object-locking-governance>`.
-
-      - Replace :mc-cmd:`DURATION <mc retention set VALIDITY>` with the 
-        duration for which the object lock remains in effect.
-
-      - Replace :mc-cmd:`ALIAS <mc retention set ALIAS>` with the 
-        :mc:`alias <mc alias>` of a configured MinIO deployment.
-
-      - Replace :mc-cmd:`BUCKET <mc retention set ALIAS>` with the 
-        name of the bucket on which to set the default retention rule.
+- Replace :mc-cmd:`BUCKET <mc retention set ALIAS>` with the name of the bucket on which to set the default retention rule.
 
 Enable Legal Hold Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can enable or disable indefinite legal hold retention for an object using the MinIO Console, the MinIO :mc:`mc` CLI, or using an S3-compatible SDK. 
+You can enable or disable indefinite legal hold retention for an object using the MinIO :mc:`mc` CLI or using an S3-compatible SDK. 
 
 You can place a legal hold on an object already held under a :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>` lock. 
 The object remains WORM locked under the legal hold even when the retention lock expires. 
 You or another user with the necessary permissions must explicitly lift the legal hold to remove the WORM lock.
 
-.. tab-set::
+Use the :guilabel:`mc legalhold set` command to toggle the legal hold status on an object.
 
-   .. tab-item:: MinIO Console
-      :sync: console
+.. code-block:: shell
+   :class: copyable
 
-      Select the :guilabel:`Buckets` section of the MinIO Console to access bucket creation and management functions. 
-      You can use the :octicon:`search` :guilabel:`Search` bar to filter the list. 
+   mc legalhold set ALIAS/PATH
 
-      .. image:: /images/minio-console/console-bucket.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
+- Replace :mc-cmd:`ALIAS <mc legalhold set ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
 
-      Each bucket row has a :guilabel:`Manage` button that opens the management view for that bucket.
-
-      .. image:: /images/minio-console/console-object-browser.png
-         :width: 600px
-         :alt: MinIO Console Bucket Object Browser
-         :align: center
-
-      Browse to the object and select it to open the object details view. 
-      Select the :guilabel:`Legal Hold` button to toggle the legal hold status of the object.
-
-   .. tab-item:: MinIO CLI
-      :sync: cli
-
-      Use the :guilabel:`mc legalhold set` command to toggle the legal hold status on an object.
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc legalhold set ALIAS/PATH
-
-      - Replace :mc-cmd:`ALIAS <mc legalhold set ALIAS>` with the 
-        :mc:`alias <mc alias>` of a configured MinIO deployment.
-
-      - Replace :mc-cmd:`PATH <mc legalhold set ALIAS>` with the 
-        path to the object for which to enable the legal hold. 
+- Replace :mc-cmd:`PATH <mc legalhold set ALIAS>` with the path to the object for which to enable the legal hold. 
 
 .. _minio-object-locking-retention-modes:
 

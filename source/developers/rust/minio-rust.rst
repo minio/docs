@@ -13,8 +13,8 @@ Rust Quickstart Guide
 .. include:: /developers/rust/quickstart.md
    :parser: myst_parser.sphinx_
 
-.. toctree::
-   :titlesonly:
-   :hidden:
+.. .. toctree::
+..    :titlesonly:
+..    :hidden:
 
-   .. /developers/go/API.md
+..    /developers/rust/API.md

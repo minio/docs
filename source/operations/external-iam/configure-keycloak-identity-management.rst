@@ -23,7 +23,6 @@ This procedure specifically covers the following steps:
    - Configure Keycloak for use with MinIO authentication and authorization
    - Configure a new or existing MinIO Tenant to use Keycloak as the OIDC provider
    - Create policies to control access of Keycloak-authenticated users
-   - Log into the MinIO Tenant Console using SSO and a Keycloak-managed identity
    - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
 
 .. cond:: linux or macos or windows
@@ -31,7 +30,6 @@ This procedure specifically covers the following steps:
    - Configure Keycloak for use with MinIO authentication and authorization
    - Configure a new or existing MinIO cluster to use Keycloak as the OIDC provider
    - Create policies to control access of Keycloak-authenticated users
-   - Log into the MinIO Console using SSO and a Keycloak-managed identity
    - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
 
 .. cond:: container
@@ -40,7 +38,6 @@ This procedure specifically covers the following steps:
    - Configure Keycloak for use with MinIO authentication and authorization
    - Configure MinIO to use Keycloak as the OIDC provider
    - Create policies to control access of Keycloak-authenticated users
-   - Log into the MinIO Console using SSO and a Keycloak-managed identity
    - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
 
 This procedure was written and tested against Keycloak ``21.0.0``. 

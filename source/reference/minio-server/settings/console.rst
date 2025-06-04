@@ -10,6 +10,13 @@ MinIO Console Settings
    :local:
    :depth: 2
 
+.. versionchanged:: RELEASE.2025-05-24T17-08-30Z
+
+   The Console now presents only object browser capabilities similar to those available through the :mc:`mc` tool.
+   For administrative interactions, such as user management, use the :mc:`mc admin` command.
+
+   Some of the settings on this page may no longer be relevant for newer deployments.
+
 This page covers settings that manage access and behavior for the MinIO Console. 
 
 .. include:: /includes/common-mc-admin-config.rst

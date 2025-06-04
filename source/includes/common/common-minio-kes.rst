@@ -156,44 +156,24 @@ MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptograp
 
 .. start-kes-enable-sse-kms-desc
 
-You can use either the MinIO Console or the MinIO :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
+Use the MinIO :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
 
-.. tab-set::
+The following commands:
 
-   .. tab-item:: MinIO Console
+- Create a new :ref:`alias <alias>` for the MinIO deployment
+- Create a new bucket for storing encrypted data
+- Enable SSE-KMS encryption on that bucket
 
-      Open the MinIO Console by navigating to http://127.0.0.1:9001 in your preferred browser and logging in with the root credentials specified to the MinIO Server.
-      If you deployed MinIO using a different Console listen port, substitute ``9001`` with that port value.
+.. code-block:: shell
+   :class: copyable
 
-      Once logged in, create a new Bucket and name it to your preference.
-      Select the Gear :octicon:`gear` icon to open the management view.
+   mc alias set local http://127.0.0.1:9000 ROOTUSER ROOTPASSWORD
 
-      Select the pencil :octicon:`pencil` icon next to the :guilabel:`Encryption` field to open the modal for configuring a bucket default SSE scheme.
+   mc mb local/encryptedbucket
+   mc encrypt set SSE-KMS encrypted-bucket-key ALIAS/encryptedbucket
 
-      Select :guilabel:`SSE-KMS`, then enter the name of the key created in the previous step.
-
-      Once you save your changes, try to upload a file to the bucket. 
-      When viewing that file in the object browser, note that the sidebar metadata includes the SSE encryption scheme and information on the key used to encrypt that object.
-      This indicates the successful encrypted state of the object.
-
-   .. tab-item:: MinIO CLI
-
-      The following commands:
-      
-      - Create a new :ref:`alias <alias>` for the MinIO deployment
-      - Create a new bucket for storing encrypted data
-      - Enable SSE-KMS encryption on that bucket
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc alias set local http://127.0.0.1:9000 ROOTUSER ROOTPASSWORD
-
-         mc mb local/encryptedbucket
-         mc encrypt set SSE-KMS encrypted-bucket-key ALIAS/encryptedbucket
-
-      Write a file to the bucket using :mc:`mc cp` or any S3-compatible SDK with a ``PutObject`` function. 
-      You can then run :mc:`mc stat` on the file to confirm the associated encryption metadata.
+Write a file to the bucket using :mc:`mc cp` or any S3-compatible SDK with a ``PutObject`` function. 
+You can then run :mc:`mc stat` on the file to confirm the associated encryption metadata.
 
 .. end-kes-enable-sse-kms-desc
 

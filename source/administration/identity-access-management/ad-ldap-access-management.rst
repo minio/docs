@@ -58,10 +58,8 @@ Access Keys are long-lived credentials which inherit their privileges from the p
 The parent user can further restrict those privileges while creating the access keys. 
 Use either of the following methods to create a new access key:
 
-- Log into the :ref:`MinIO Console <minio-console>` using the AD/LDAP-managed user credentials. 
-   In the :guilabel:`User` section, select :guilabel:`Access Keys` followed by :guilabel:`Create access keys +`.
-
-- Use the :mc:`mc admin user svcacct add` command to create the access keys. Specify the user Distinguished Name as the username to which to associate the access keys.
+Use the :mc:`mc admin user svcacct add` command to create the access keys. 
+Specify the user Distinguished Name as the username to which to associate the access keys.
 
 
 Mapping Policies to User DN

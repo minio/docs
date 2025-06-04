@@ -245,50 +245,22 @@ Enable Bucket Versioning
 You can enable versioning using the MinIO Console, the MinIO :mc:`mc` CLI, or
 using an S3-compatible SDK.
 
-.. tab-set::
+Use the :mc:`mc version enable` command to enable versioning on an 
+existing bucket:
 
-   .. tab-item:: MinIO Console
+.. code-block:: shell
+   :class: copyable
 
-      Select the :guilabel:`Buckets` section of the MinIO Console to access bucket creation and management functions. You can use the :octicon:`search` :guilabel:`Search` bar to filter the list. 
-      
-      .. image:: /images/minio-console/console-bucket.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
+   mc version enable ALIAS/BUCKET
 
-      Each bucket row has a :guilabel:`Manage` button that opens the management view for that bucket. 
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
+  MinIO deployment.
 
-      .. image:: /images/minio-console/console-bucket-manage.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
+- Replace ``BUCKET`` with the 
+  :mc-cmd:`target bucket <mc version enable ALIAS>` on which to enable
+  versioning.
 
-      Toggle the :guilabel:`Versioning` field to enable versioning on the bucket.
-
-      The MinIO Console also supports enabling versioning as part of bucket
-      creation. See :ref:`minio-console-buckets` for more information on
-      bucket management using the MinIO Console.
-
-   .. tab-item:: MinIO CLI
-
-      Use the :mc:`mc version enable` command to enable versioning on an 
-      existing bucket:
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc version enable ALIAS/BUCKET
-
-      - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
-        MinIO deployment.
-
-      - Replace ``BUCKET`` with the 
-        :mc-cmd:`target bucket <mc version enable ALIAS>` on which to enable
-        versioning.
-
-Objects created prior to enabling versioning have a 
-``null`` :ref:`version ID <minio-bucket-versioning-id>`.
-
+Objects created prior to enabling versioning have a ``null`` :ref:`version ID <minio-bucket-versioning-id>`.
 
 Exclude a Prefix From Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -426,48 +398,21 @@ To disable folder exclusion and resume versioning all folders, repeat the :mc:`m
 Suspend Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can suspend bucket versioning at any time using the MinIO Console, the
-MinIO :mc:`mc` CLI, or using an S3-compatible SDK.
+You can suspend bucket versioning at any time using he MinIO :mc:`mc` CLI or using an S3-compatible SDK.
 
-.. tab-set::
+Use the :mc:`mc version suspend` command to enable versioning on an existing bucket:
 
-   .. tab-item:: MinIO Console
+.. code-block:: shell
+   :class: copyable
 
-      Select the :guilabel:`Buckets` section of the MinIO Console to access bucket creation and management functions. You can use the :octicon:`search` :guilabel:`Search` bar to filter the list. 
-      
-      .. image:: /images/minio-console/console-bucket.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
+   mc version suspend ALIAS/BUCKET
 
-      Each bucket row has a :guilabel:`Manage` button that opens the management view for that bucket.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
+  MinIO deployment.
 
-      .. image:: /images/minio-console/console-bucket-manage.png
-         :width: 600px
-         :alt: MinIO Console Bucket Management
-         :align: center
-
-      Select the :guilabel:`Versioning` field and follow the instructions to suspend versioning in the bucket.
-
-      See :ref:`minio-console-buckets` for more information on bucket
-      management using the MinIO Console.
-
-   .. tab-item:: MinIO CLI
-
-      Use the :mc:`mc version suspend` command to enable versioning on an 
-      existing bucket:
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc version suspend ALIAS/BUCKET
-
-      - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
-        MinIO deployment.
-
-      - Replace ``BUCKET`` with the 
-        :mc-cmd:`target bucket <mc mb ALIAS>` on which to disable
-        versioning.
+- Replace ``BUCKET`` with the 
+  :mc-cmd:`target bucket <mc mb ALIAS>` on which to disable
+  versioning.
 
 Objects created while versioning is suspended are assigned a ``null`` :ref:`version ID <minio-bucket-versioning-id>`. 
 Any mutations to an object while versioning is suspended result in overwriting that ``null`` versioned object. 

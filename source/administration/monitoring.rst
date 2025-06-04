@@ -37,8 +37,6 @@ Deployment Metrics
 
 MinIO provides a Prometheus-compatible endpoint for supporting time-series querying of metrics.
 
-MinIO deployments :ref:`configured to enable Prometheus scraping <minio-metrics-and-alerts>` provide a detailed metrics view through the MinIO Console.
-
 Server Logs
 -----------
 

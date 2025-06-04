@@ -143,8 +143,7 @@ to the following:
 
 Open your browser to any of the listed :guilabel:`Console` addresses to open the
 :ref:`MinIO Console <minio-console>` and log in with the :guilabel:`RootUser`
-and :guilabel:`RootPass`. You can use the MinIO Console for performing
-administration on the MinIO server.
+and :guilabel:`RootPass`.
 
 For applications, use the :guilabel:`API` addresses to access the MinIO
 server and perform S3 operations.

@@ -20,8 +20,7 @@ a valid access key (username) and the corresponding secret key (password) of
 an existing MinIO user.
 
 Administrators use the :mc:`mc admin user` command to create and manage
-MinIO users. The :minio-git:`MinIO Console <console>` provides a graphical
-interface for creating users.
+MinIO users.
 
 MinIO also supports creating :ref:`access keys
 <minio-idp-service-account>`. Access Keys are child identities of an

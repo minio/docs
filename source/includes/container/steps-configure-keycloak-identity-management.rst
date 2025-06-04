@@ -91,17 +91,10 @@ Log in using the default credentials ``minioadmin:minioadmin``.
 
 MinIO supports multiple methods for configuring Keycloak authentication:
 
-- Using the MinIO Console
 - Using a terminal/shell and the :mc:`mc idp openid` command
 - Using environment variables set prior to starting MinIO
 
 .. tab-set::
-
-   .. tab-item:: MinIO Console
-
-      .. include:: /includes/common/common-configure-keycloak-identity-management.rst
-         :start-after: start-configure-keycloak-minio-console
-         :end-before: end-configure-keycloak-minio-console
 
    .. tab-item:: CLI
 
@@ -120,11 +113,6 @@ You must restart the MinIO deployment for the changes to apply.
 
 Check the :ref:`MinIO server logs <minio-logging>` and verify that startup succeeded with no errors related to the Keycloak configuration.
 
-If you attempt to log in with the Console, you should now see an (SSO) button using the configured :guilabel:`Display Name`.
-
-Specify a configured user and attempt to log in.
-MinIO should automatically redirect you to the Keycloak login entry.
-Upon successful authentication, Keycloak should redirect you back to the MinIO Console.
 
 8) Generate Application Credentials using the Security Token Service (STS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -138,5 +126,3 @@ Next Steps
 
 Applications should implement the :ref:`STS <minio-security-token-service>` flow using their :ref:`SDK <minio-drivers>` of choice.
 When STS credentials expire, applications should have logic in place to regenerate the JWT token, STS token, and MinIO credentials before retrying and continuing operations.
-
-Alternatively, users can generate :ref:`access keys <minio-id-access-keys>` through the MinIO Console for the purpose of creating long-lived API-key like access using their Keycloak credentials.

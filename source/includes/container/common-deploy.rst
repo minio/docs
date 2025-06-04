@@ -81,7 +81,7 @@ The instructions include examples for both quay.io and DockerHub:
          :alt: MinIO Console displaying Buckets view in a fresh installation.
          :align: center
 
-      You can use the MinIO Console for general administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration. Each MinIO server includes its own embedded MinIO Console.
+      Each MinIO server includes its own embedded MinIO Console.
 
       If your local host firewall permits external access to the Console port, other hosts on the same network can access the Console using the IP or hostname for your local host.
 

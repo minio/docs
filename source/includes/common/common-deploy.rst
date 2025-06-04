@@ -98,12 +98,7 @@ Include any other environment variables as required for your local deployment.
 
       Log in with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` configured in the environment file specified to the container.
 
-      .. image:: /images/minio-console/console-bucket-none.png
-         :width: 600px
-         :alt: MinIO Console displaying Buckets view in a fresh installation
-         :align: center
-
-      You can use the MinIO Console for general administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration. Each MinIO server includes its own embedded MinIO Console.
+      Each MinIO server includes its own embedded MinIO Console.
 
       If your local host firewall permits external access to the Console port, other hosts on the same network can access the Console using the IP or hostname for your local host.
 

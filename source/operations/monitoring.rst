@@ -29,8 +29,6 @@ The following table lists tutorials for integrating MinIO metrics with select th
    * - :ref:`minio-metrics-collect-using-prometheus`
      - Configure Prometheus to Monitor and Alert for a MinIO deployment
 
-       Configure MinIO to query the Prometheus deployment to enable historical metrics via the MinIO Console
-
    * - :ref:`minio-metrics-influxdb`
      - Configure InfluxDB to Monitor and Alert for a MinIO deployment.
 

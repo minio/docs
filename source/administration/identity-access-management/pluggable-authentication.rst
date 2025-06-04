@@ -108,4 +108,4 @@ The ``"reason"`` field should include the reason for the 403.
 Creating Policies to Match Claims
 ---------------------------------
 
-Use either the :ref:`MinIO Console <minio-console-admin-policies>` *or* the :mc:`mc admin policy` command to create policies that match one or more claim values.
+Use the :mc:`mc admin policy` command to create policies that match one or more claim values.

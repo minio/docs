@@ -97,24 +97,7 @@ MinIO attaches the ``datareadonly`` policy to any authenticated OIDC user with `
 
 See :ref:`minio-external-identity-management-openid-access-control` for more information on access control with OIDC users and groups.
 
-4) Use the MinIO Tenant Console to Log In with OIDC Credentials
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The MinIO Console supports the full workflow of authenticating to the OIDC provider, generating temporary credentials using the MinIO :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) endpoint, and logging the user into the MinIO deployment.
-
-See :ref:`Deploy MinIO Tenant: Connect to the Tenant <create-tenant-connect-tenant>` for additonal information about accessing the Tenant Console.
-
-If the OIDC configuration succeeded, the Console displays a button to login with OIDC credentials.
-
-Enter the user's OIDC credentials and log in to access the Console.
-
-Once logged in, you can perform any action for which the authenticated user is :ref:`authorized <minio-external-identity-management-openid-access-control>`. 
-
-You can also create :ref:`access keys <minio-idp-service-account>` for supporting applications which must perform operations on MinIO. 
-Access Keys are long-lived credentials which inherit their privileges from the parent user.
-The parent user can further restrict those privileges while creating the access keys. 
-
-5) Generate S3-Compatible Temporary Credentials using OIDC Credentials
+4) Generate S3-Compatible Temporary Credentials using OIDC Credentials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Applications can generate temporary access credentials as-needed using the :ref:`minio-sts-assumerolewithwebidentity` Security Token Service (STS) API endpoint and the JSON Web Token (JWT) returned by the :abbr:`OIDC (OpenID Connect)` provider.

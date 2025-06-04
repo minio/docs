@@ -27,9 +27,7 @@ The :mc-cmd:`mc admin accesskey create` command adds a new access key and secret
 
    This command is for access keys for users created directly on the MinIO deployment and not managed by a third party solution.
 
-   - To generate access keys for :ref:`OpenID Connect users <minio-external-identity-management-openid>`, use the :ref:`MinIO Console <minio-console>`.
-
-   - To generate access keys for :ref:`Active Directory/LDAP users <minio-external-identity-management-ad-ldap>`, use :mc:`mc idp ldap accesskey create`.
+   To generate access keys for :ref:`Active Directory/LDAP users <minio-external-identity-management-ad-ldap>`, use :mc:`mc idp ldap accesskey create`.
 
 .. tab-set::
 
