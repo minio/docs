@@ -235,6 +235,8 @@ GitHub: `minio/minio-rs <https://github.com/minio/minio-rs>`__
 Latest Version
   |rust-sdk-version|
 
+Reference: `MinIO Rust SDK Reference <https://docs.rs/minio/latest/minio/>`__
+
 Quickstart Guide: :doc:`/developers/rust/minio-rust`
 
 .. toctree::
