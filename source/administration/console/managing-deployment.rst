@@ -1,6 +1,8 @@
 
 .. _minio-console-managing-deployment:
 
+:orphan:
+
 ========================
 Managing Your Deployment
 ========================
