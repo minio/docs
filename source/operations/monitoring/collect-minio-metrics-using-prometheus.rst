@@ -273,23 +273,23 @@ You can execute queries here to analyze the collected metrics.
       .. code-block:: shell
          :class: copyable
 
-         minio_node_drive_free_bytes{job-"minio-job"}[5m]
-         minio_node_drive_free_inodes{job-"minio-job"}[5m]
+         minio_node_drive_free_bytes{job="minio-job"}[5m]
+         minio_node_drive_free_inodes{job="minio-job"}[5m]
 
-         minio_node_drive_latency_us{job-"minio-job"}[5m]
+         minio_node_drive_latency_us{job="minio-job"}[5m]
 
-         minio_node_drive_offline_total{job-"minio-job"}[5m]
-         minio_node_drive_online_total{job-"minio-job"}[5m]
+         minio_node_drive_offline_total{job="minio-job"}[5m]
+         minio_node_drive_online_total{job="minio-job"}[5m]
 
-         minio_node_drive_total{job-"minio-job"}[5m]
+         minio_node_drive_total{job="minio-job"}[5m]
 
-         minio_node_drive_total_bytes{job-"minio-job"}[5m]
-         minio_node_drive_used_bytes{job-"minio-job"}[5m]
+         minio_node_drive_total_bytes{job="minio-job"}[5m]
+         minio_node_drive_used_bytes{job="minio-job"}[5m]
 
-         minio_node_drive_errors_timeout{job-"minio-job"}[5m]
-         minio_node_drive_errors_availability{job-"minio-job"}[5m]
+         minio_node_drive_errors_timeout{job="minio-job"}[5m]
+         minio_node_drive_errors_availability{job="minio-job"}[5m]
 
-         minio_node_drive_io_waiting{job-"minio-job"}[5m]
+         minio_node_drive_io_waiting{job="minio-job"}[5m]
 
    .. tab-item:: Recommended Metrics
 
