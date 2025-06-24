@@ -35,7 +35,6 @@ extensions = [
     'minio',
     'cond',
     'sphinx_copybutton',
-    'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinx_togglebutton',
     'sphinx_sitemap',
