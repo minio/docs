@@ -13,3 +13,4 @@ myst-parser === 1.0.0
 linkify === 1.4
 linkify-it-py === 2.0.0
 pyyaml === 6.0.1
+sphinx-prompt === 1.10.0
