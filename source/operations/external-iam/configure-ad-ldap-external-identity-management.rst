@@ -191,6 +191,10 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 
          For complete documentation on these variables, see :ref:`minio-server-envvar-external-identity-management-ad-ldap`
 
+   When providing an AD/LDAP group search filter, configure a filter that returns the minimum number of relevant groups for the purpose of supporting authentication.
+   Filters that return large group assignments increase the size of associated calls and resources.
+   Functions sensitive to large request or response bodies may exhibit unexpected behaviors as a result.
+
    2) Restart the MinIO Deployment
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

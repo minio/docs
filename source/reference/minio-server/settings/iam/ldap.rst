@@ -265,6 +265,11 @@ Group Search Filter
 .. include:: /includes/common-minio-external-auth.rst
    :start-after: start-minio-ad-ldap-group-search-filter
    :end-before: end-minio-ad-ldap-group-search-filter
+
+When providing an AD/LDAP group search filter, configure a filter that returns the minimum number of relevant groups for the purpose of supporting authentication.
+Filters that return large group assignments increase the size of associated calls and resources.
+Functions sensitive to large request or response bodies may exhibit unexpected behaviors as a result.
+
          
 Group Search Base DN
 ~~~~~~~~~~~~~~~~~~~~

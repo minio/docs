@@ -278,6 +278,12 @@ For example:
    
    (&(objectclass=groupOfNames)(memberUid=%s))
 
+
+When providing an AD/LDAP group search filter, configure a filter that returns the minimum number of relevant groups for the purpose of supporting authentication.
+Filters that return large group assignments increase the size of associated calls and resources.
+Functions sensitive to large request or response bodies may exhibit unexpected behaviors as a result.
+
+
 .. end-minio-ad-ldap-group-search-filter
 
 .. start-minio-ad-ldap-group-search-base-dn
