@@ -42,7 +42,7 @@ jobs:
         remote_path: ${{ secrets.DEPLOY_PATH }}/${{ github.event.pull_request.head.ref }}
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
-        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_user: ${{ secrets.DEPLOY_USER_STAGING }}
         remote_key: ${{ secrets.DEPLOY_KEY_STAGING }}
         remote_key_pass: ${{ secrets.DEPLOY_KEY_STAGING_PASS }}
 
