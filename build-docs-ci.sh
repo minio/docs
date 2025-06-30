@@ -3,7 +3,7 @@
 set -ex
 
 export PATH=${PATH}:${HOME}/.local/bin
-export GITDIR=main
+export GITDIR=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
 
 
 make SYNC_SDK=TRUE mindocs
