@@ -25,6 +25,10 @@ To provide BC-DR grade failover and recovery support for your single or multi-po
 
 The procedure on this page expands an existing :ref:`distributed <deploy-minio-distributed>` MinIO deployment with an additional server pool. 
 
+.. important::
+
+   MinIO does not support expanding Single-Node Single-Drive topologies.
+
 .. _expand-minio-distributed-prereqs:
 
 Prerequisites

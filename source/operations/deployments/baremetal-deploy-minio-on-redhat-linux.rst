@@ -314,6 +314,10 @@ Modify the example to reflect your deployment topology.
       Use Single-Node Single-Drive ("Standalone") deployments in early development and evaluation environments.
       MinIO does not recommend Standalone deployments in production, as the loss of the node or its storage medium results in data loss.
 
+      .. important::
+
+         SNSD deployments do not support storage expansion through adding new server pools.
+
       .. code-block:: shell
          :class: copyable
 
