@@ -1,11 +1,11 @@
-name: Makefile CI
+name: Staging
 
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    type: ["opened","synchronize"]
 
 jobs:
-  build:
+  build-and-stage:
 
     runs-on: ubuntu-latest
 
@@ -34,14 +34,7 @@ jobs:
     - name: build-docs
       run: ./build-docs-ci.sh
 
-    - name: upload-artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: assets
-        compression-level: 9
-        path: ./minio
-
-    - name: Publishing
+    - name: Staging
       uses: burnett01/rsync-deployments@7.0.2
       with:
         path: ./minio/
@@ -50,5 +43,19 @@ jobs:
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
         remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_KEY }}
-        remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
+        remote_key: ${{ secrets.DEPLOY_KEY_STAGING }}
+        remote_key_pass: ${{ secrets.DEPLOY_KEY_STAGING_PASS }}
+
+    - name: comment
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: "Staged at ${{ secrets.STAGING_URL }}/${{ github.event.pull_request.head.ref }}"
+          })
+
+      
