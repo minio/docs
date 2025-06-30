@@ -49,7 +49,7 @@ Access to MinIO Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -73,7 +73,7 @@ This procedure assumes an existing Active Directory or LDAP service.
 Instructions on configuring AD/LDAP are out of scope for this procedure.
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -97,21 +97,7 @@ An AD/LDAP user with no assigned policy *and* with membership in groups with no 
 Configure MinIO with Active Directory or LDAP External Identity Management
 --------------------------------------------------------------------------
 
-.. tab-set::
-   :class: hidden
-
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      .. include:: /includes/k8s/steps-configure-ad-ldap-external-identity-management.rst
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      .. include:: /includes/baremetal/steps-configure-ad-ldap-external-identity-management.rst
-
-
-
+.. include:: /includes/baremetal/steps-configure-ad-ldap-external-identity-management.rst
 
 Disable a Configured Active Directory / LDAP Connection
 -------------------------------------------------------

@@ -59,7 +59,6 @@ This procedure assumes an existing Keycloak deployment to which you have adminis
 Specifically, you must have permission to create and configure Realms, Clients, Client Scopes, Realm Roles, Users, and Groups on the Keycloak deployment.
 
 .. tab-set::
-   :class: hidden
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -81,7 +80,6 @@ Access to MinIO Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tab-set::
-   :class: hidden
 
    .. tab-item:: Kubernetes
       :sync: k8s

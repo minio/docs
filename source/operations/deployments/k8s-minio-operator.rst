@@ -29,19 +29,12 @@ See the MinIO Operator :minio-git:`CRD Reference <operator/blob/master/docs/tena
 Operator Prerequisites
 ----------------------
 
-Kubernetes Version 1.21.0
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Kubernetes Version
+~~~~~~~~~~~~~~~~~~
 
-.. important::
+MinIO supports `maintained Kubernetes APIs <https://kubernetes.io/releases/>`__ for deploying the Operator.
 
-   MinIO **strongly recommends** upgrading Production clusters running `End-Of-Life <https://kubernetes.io/releases/patch-releases/#non-active-branch-history>`__ Kubernetes APIs.
-
-Starting with v5.0.0, MinIO **requires** Kubernetes 1.21.0 or later for both the infrastructure and the ``kubectl`` CLI tool.
-
-.. versionadded:: Operator 5.0.6
-
-For Kubernetes 1.25.0 and later, MinIO supports deploying in environments with the :kube-docs:`Pod Security admission (PSA) <concepts/security/pod-security-admission>` ``restricted`` policy enabled.
-
+Kubernetes infrastructure running end-of-life API versions may exhibit unexpected or undesired behavior if used for deploying the Operator.
 
 Kustomize and ``kubectl``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -59,16 +52,14 @@ You can modify the default Kustomization file or apply your own `patches <https:
 Kubernetes TLS Certificate API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. versionchanged:: Operator v.5.0.0
+The MinIO Operator manages TLS Certificate Signing Requests (CSR) using the Kubernetes ``certificates.k8s.io`` :kube-docs:`TLS certificate management API <tasks/tls/managing-tls-in-a-cluster/>` to create signed TLS certificates in the following circumstances:
 
-   The MinIO Operator manages TLS Certificate Signing Requests (CSR) using the Kubernetes ``certificates.k8s.io`` :kube-docs:`TLS certificate management API <tasks/tls/managing-tls-in-a-cluster/>` to create signed TLS certificates in the following circumstances:
-   
-   - When ``autoCert`` is enabled.
-   - For the MinIO Console when the :envvar:`MINIO_CONSOLE_TLS_ENABLE` environment variable is set to ``on``.
-   - For :ref:`STS service <minio-security-token-service>` when :envvar:`OPERATOR_STS_ENABLED` environment variable is set to ``on``.
-   - For retrieving the health of the cluster.
-   
-   The MinIO Operator reads certificates inside the ``operator-ca-tls`` secret and syncs this secret within the tenant namespace to trust private certificate authorities, such as when using cert-manager.
+- When ``autoCert`` is enabled.
+- For the MinIO Console when the :envvar:`MINIO_CONSOLE_TLS_ENABLE` environment variable is set to ``on``.
+- For :ref:`STS service <minio-security-token-service>` when :envvar:`OPERATOR_STS_ENABLED` environment variable is set to ``on``.
+- For retrieving the health of the cluster.
+
+The MinIO Operator reads certificates inside the ``operator-ca-tls`` secret and syncs this secret within the tenant namespace to trust private certificate authorities, such as when using cert-manager.
 
 For any of these circumstances, the MinIO Operator *requires* that the Kubernetes ``kube-controller-manager`` configuration include the following :kube-docs:`configuration settings <reference/command-line-tools-reference/kube-controller-manager/#options>`:
 
@@ -124,48 +115,10 @@ The output of the example command above may differ from the output in your termi
    Alternatively, you can generate x.509 TLS certificates signed by a known and trusted CA and pass those certificates to MinIO Tenants. 
    See :ref:`minio-tls` for more complete documentation.
 
-Operator Internals
-------------------
-
-Operator Namespace
-~~~~~~~~~~~~~~~~~~
-
-ToDO
-
-Tenant Namespace
-~~~~~~~~~~~~~~~~
-
-When you use the Operator to create a tenant, the tenant *must* have its own namespace.
-Within that namespace, the Operator generates the pods required by the tenant configuration.
-
-Each Tenant pod runs three containers:
-
-- MinIO Container that runs all of the standard MinIO functions, equivalent to basic MinIO installation on baremetal.
-  This container stores and retrieves objects in the provided mount points (persistent volumes). 
-
-- InitContainer that only exists during the launch of the pod to manage configuration secrets during startup.
-  Once startup completes, this container terminates. 
-
-- SideCar container that monitors configuration secrets for the tenant and updates them as they change.
-  This container also monitors for root credentials and creates an error if it does not find root credentials. 
-
-Starting with v5.0.6, the MinIO Operator supports custom :kube-docs:`init containers <concepts/workloads/pods/init-containers>` for additional pod initialization that may be required for your environment.
-
-The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes that store the objects.
-
-.. image:: /images/k8s/OperatorsComponent-Diagram.png
-   :width: 600px
-   :alt: A diagram of the namespaces and pods used by or maintained by the MinIO Operator.
-   :align: center
-
 .. toctree::
    :titlesonly:
    :hidden:
 
-   /operations/deployments/k8s-deploy-minio-on-kubernetes-upstream
-   /operations/deployments/k8s-deploy-minio-on-red-hat-open-shift-kubernetes
-   /operations/deployments/k8s-deploy-minio-on-suse-rancher-kubernetes
-   /operations/deployments/k8s-deploy-minio-on-elastic-kubernetes-service
-   /operations/deployments/k8s-deploy-minio-on-google-kubernetes-engine
-   /operations/deployments/k8s-deploy-minio-on-azure-kubernetes-service
+   /operations/deployments/k8s-deploy-minio-on-kubernetes
+   /operations/deployments/k8s-deploy-operator-helm-on-kubernetes
    /operations/deployments/k8s-upgrade-minio-operator-kubernetes

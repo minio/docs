@@ -4,46 +4,12 @@ MinIO High Performance Object Storage
 
 .. default-domain:: minio
 
-.. cond:: container
+.. cond:: mindocs
 
    .. container:: extlinks-video
 
       - `Installing and Running MinIO on Docker: Overview <https://youtu.be/mg9NRR6Js1s?ref=docs>`__
       - `Installing and Running MinIO on Docker: Installation Lab <https://youtu.be/Z0FtabDUPtU?ref=docs>`__
-      - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
-      
-      - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
-
-.. cond:: k8s
-
-   .. container:: extlinks-video
-
-      - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
-
-      - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
-
-.. cond:: linux
-
-   .. container:: extlinks-video
-   
-      - `Installing and Running MinIO on Linux <https://www.youtube.com/watch?v=74usXkZpNt8&list=PLFOIsHSSYIK1BnzVY66pCL-iJ30Ht9t1o>`__
-   
-      - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
-      
-      - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
-
-.. cond:: macos
-
-   .. container:: extlinks-video
-   
-      - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
-      
-      - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
-
-.. cond:: windows
-
-   .. container:: extlinks-video
-
       - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
       
       - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
@@ -59,15 +25,11 @@ This site documents Operations, Administration, and Development of MinIO Communi
 
 .. todo: More marketing/SEO below?
 
-MinIO officially supports the following platforms:
+.. important::
 
-   This site documents Operations, Administration, and Development of MinIO deployments on Red Hat Kubernetes distributions for the latest stable version of the MinIO Operator: |operator-version-stable|.
-
-   .. important::
-
-      Support for deploying the MinIO Operator via the RedHat Marketplace or OperatorHub was removed in 2024. 
-      MinIO AIStor fully supports installation via the Marketplace and OperatorHub onto enterprise RedHat Kubernetes distributions like OpenShift Container Platform (OCP).
-      |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
+   Support for deploying the MinIO Operator via the RedHat Marketplace or OperatorHub was removed in 2024. 
+   MinIO AIStor fully supports installation via the Marketplace and OperatorHub onto enterprise RedHat Kubernetes distributions like OpenShift Container Platform (OCP).
+   |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
 
 Quickstart
 ----------
@@ -103,7 +65,7 @@ Quickstart
 
       1. Download the MinIO Server Process for your Operating System
 
-         Follow the instructions on the `MinIO Download Page <https://min.io/downloads?ref=docs>` for your operating system to download and install the :mc:`minio server` process.
+         Follow the instructions on the `MinIO Download Page <https://min.io/downloads?ref=docs>`__ for your operating system to download and install the :mc:`minio server` process.
 
       2. Create a folder for use with MinIO
 

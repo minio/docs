@@ -33,17 +33,10 @@
 
    MinIO supports multiple methods for configuring Keycloak authentication:
 
-   - Using the MinIO Console
    - Using a terminal/shell and the :mc:`mc idp openid` command
    - Using environment variables set prior to starting MinIO
 
    .. tab-set::
-
-      .. tab-item:: MinIO Console
-
-         .. include:: /includes/common/common-configure-keycloak-identity-management.rst
-            :start-after: start-configure-keycloak-minio-console
-            :end-before: end-configure-keycloak-minio-console
 
       .. tab-item:: CLI
 

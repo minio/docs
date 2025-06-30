@@ -1,4 +1,12 @@
 .. _minio-kubernetes:
+.. _deploy-operator-kubernetes:
+.. _deploy-operator-openshift:
+.. _deploy-operator-rancher:
+.. _deploy-operator-eks:
+.. _deploy-operator-gke:
+.. _deploy-operator-aks:
+.. _minio-operator-installation:
+
 
 ==========================
 Deploy MinIO on Kubernetes
@@ -15,14 +23,6 @@ The MinIO Kubernetes Operator supports deploying MinIO Tenants onto private and 
 
 All documentation assumes familiarity with referenced Kubernetes concepts, utilities, and procedures. 
 While MinIO documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
-
-MinIO Operator Architecture
----------------------------
-
-.. todo: image of architecture
-
-MinIO Operator
---------------
 
 The MinIO Operator is a first-party Kubernetes-native operator that manages the deployment of MinIO Tenants onto Kubernetes infrastructure.
 

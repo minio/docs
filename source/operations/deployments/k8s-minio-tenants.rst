@@ -97,6 +97,32 @@ For Tenants deploying onto Amazon Elastic, Azure, or Google Kubernetes, select t
       MinIO strongly recommends SSD-backed disk types for best performance.
       For more information on AKS disk types, see :azure-docs:`Azure disk types <virtual-machines/disk-types>`.
 
+Tenant Namespace
+~~~~~~~~~~~~~~~~
+
+When you use the Operator to create a tenant, the tenant *must* have its own namespace.
+Within that namespace, the Operator generates the pods required by the tenant configuration.
+
+Each Tenant pod runs three containers:
+
+- MinIO Container that runs all of the standard MinIO functions, equivalent to basic MinIO installation on baremetal.
+  This container stores and retrieves objects in the provided mount points (persistent volumes). 
+
+- InitContainer that only exists during the launch of the pod to manage configuration secrets during startup.
+  Once startup completes, this container terminates. 
+
+- SideCar container that monitors configuration secrets for the tenant and updates them as they change.
+  This container also monitors for root credentials and creates an error if it does not find root credentials. 
+
+Starting with v5.0.6, the MinIO Operator supports custom :kube-docs:`init containers <concepts/workloads/pods/init-containers>` for additional pod initialization that may be required for your environment.
+
+The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes that store the objects.
+
+.. image:: /images/k8s/OperatorsComponent-Diagram.png
+   :width: 600px
+   :alt: A diagram of the namespaces and pods used by or maintained by the MinIO Operator.
+   :align: center
+
 .. toctree::
    :titlesonly:
    :hidden:

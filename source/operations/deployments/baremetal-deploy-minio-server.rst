@@ -12,8 +12,6 @@ Install the MinIO Server
 
 MinIO supports deploying onto baremetal infrastructure - physical machines or virtualized hosts - running Linux, MacOS, and Windows.
 
-TODO conceptual information here
-
 .. toctree::
    :titlesonly:
    :hidden:

@@ -4,7 +4,6 @@
 
    * MinIO Client
    * Environment variables
-   * MinIO Console
 
    All methods require starting/restarting the MinIO deployment to apply changes.
 
@@ -19,7 +18,7 @@
          For distributed deployments, the :mc:`mc idp ldap` command applies the configuration to all nodes in the deployment. 
 
          The following example code sets *all* configuration settings related to configuring an AD/LDAP provider for external identity management.
-	 The minimum *required* settings are:
+	      The minimum *required* settings are:
 
          - :mc-conf:`server_addr <identity_ldap.server_addr>`
          - :mc-conf:`lookup_bind_dn <identity_ldap.lookup_bind_dn>`
@@ -27,23 +26,24 @@
          - :mc-conf:`user_dn_search_base_dn <identity_ldap.user_dn_search_base_dn>`
          - :mc-conf:`user_dn_search_filter <identity_ldap.user_dn_search_filter>`
 
-        .. code-block:: shell
-           :class: copyable
+         .. code-block:: shell
+            :class: copyable
 
-	   mc idp ldap add ALIAS                                                   \
-	      server_addr="ldaps.example.net:636"                                  \
+            mc idp ldap add ALIAS                                                  \
+              server_addr="ldaps.example.net:636"                                  \
               lookup_bind_dn="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net"        \
-	      lookup_bind_password="xxxxxxxx"                                      \
-	      user_dn_search_base_dn="DC=example,DC=net"                           \
-	      user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"  \
-	      group_search_filter= "(&(objectClass=group)(member=%d))"             \
-	      group_search_base_dn="ou=MinIO Users,dc=example,dc=net"              \
-              enabled="true"                                                       \
+              lookup_bind_password="xxxxxxxx"                                      \
+              user_dn_search_base_dn="DC=example,DC=net"                           \
+              user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"  \
+              group_search_filter= "(&(objectClass=group)(member=%d))"             \
+              group_search_base_dn="ou=MinIO Users,dc=example,dc=net"              \
               tls_skip_verify="off"                                                \
               server_insecure=off                                                  \
               server_starttls="off"                                                \
               srv_record_name=""                                                   \
               comment="Test LDAP server"
+
+        For Kubernetes deployments, ensure the `ALIAS` corresponds to the externally accessible hostname for the MinIO Tenant.
 
         For more complete documentation on these settings, see :mc:`mc idp ldap`.
 
@@ -58,9 +58,9 @@
       .. tab-item:: Environment Variables
 
          MinIO supports specifying the AD/LDAP provider settings using :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
-	 The :mc:`minio server` process applies the specified settings on its next startup.
-	 For distributed deployments, specify these settings across all nodes in the deployment using the *same* values.
-	 Any differences in server configurations between nodes will result in startup or configuration failures.
+	      The :mc:`minio server` process applies the specified settings on its next startup.
+	      For distributed deployments, specify these settings across all nodes in the deployment using the *same* values.
+	      Any differences in server configurations between nodes will result in startup or configuration failures.
 
          The following example code sets *all* environment variables related to configuring an AD/LDAP provider for external identity management. The minimum *required* variable are:
 
@@ -86,16 +86,7 @@
             export MINIO_IDENTITY_LDAP_SRV_RECORD_NAME=""
             export MINIO_IDENTITY_LDAP_COMMENT="LDAP test server"
 
-         For complete documentation on these variables, see :ref:`minio-server-envvar-external-identity-management-ad-ldap`
-
-      .. tab-item:: MinIO Console
-
-         MinIO supports specifying the AD/LDAP provider settings using the :ref:`MinIO Console <minio-console>`.
-         For distributed deployments, configuring AD/LDAP from the Console applies the configuration to all nodes in the deployment.
-
-	 .. include:: /includes/common-minio-external-auth.rst
-            :start-after: start-minio-ad-ldap-console-enable
-            :end-before: end-minio-ad-ldap-console-enable
+         For complete documentation on these variables, see :ref:`minio-server-envvar-external-identity-management-ad-ldap`.
 
 #. Restart the MinIO Deployment
 

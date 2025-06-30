@@ -15,7 +15,6 @@ File Transfer Protocol (FTP/SFTP)
    :depth: 2
 
 .. tab-set::
-   :class: parent
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -41,7 +40,6 @@ Supported Protocols
 -------------------
 
 .. tab-set::
-   :class: hidden
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -121,7 +119,6 @@ Prerequisites
 -------------
 
 .. tab-set::
-   :class: hidden
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -141,7 +138,6 @@ Procedure
 ---------
 
 .. tab-set::
-   :class: hidden
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -171,7 +167,7 @@ This type of authentication requires the following:
 
 The keys must include a `principals list <https://man.openbsd.org/ssh-keygen#CERTIFICATES>`__ of the user(s) that can authenticate with the key:
 
-.. code-block:: console
+.. code-block:: shell
    :class: copyable
 
    ssh-keygen -s ~/.ssh/ca_user_key -I miniouser -n miniouser -V +1h -z 1 miniouser1.pub
@@ -189,10 +185,10 @@ The keys must include a `principals list <https://man.openbsd.org/ssh-keygen#CER
 MinIO requires specifying the Certificate Authority used to sign the certificates for SFTP access.
 Start or restart the MinIO Server and specify the path to the trusted certificate authority's public key using an ``--sftp="trusted-user-ca-key=PATH"`` flag:
 
-  .. code-block:: console
-     :class: copyable 
+.. code-block:: shell
+   :class: copyable 
 
-     minio server {path-to-server} --sftp="trusted-user-ca-key=/path/to/.ssh/ca_user_key.pub" {...other flags}
+   minio server {path-to-server} --sftp="trusted-user-ca-key=/path/to/.ssh/ca_user_key.pub" {...other flags}
 
 When connecting to the MinIO Server with SFTP, the client verifies the MinIO Server's certificate.
 The client then passes its own certificate to the MinIO Server.
