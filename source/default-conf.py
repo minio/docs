@@ -175,7 +175,7 @@ html_js_files = [
 # Add https://www.min.io/robots.txt to html_extra_path list once available.
 html_extra_path = [ 'extra']
 
-html_baseurl = 'https://min.io/docs/minio/'
+html_baseurl = 'https://docs.min.io/community/minio-object-store'
 
 # -- Project information -----------------------------------------------------
 
@@ -189,24 +189,6 @@ html_short_title = 'MinIO Object Storage'
 html_permalinks_icon = ''
 
 html_context = {
-   'doc_platform': 'k8s',
-   'docs': [
-      # The first item has to be the current docs site #
-      {
-         'name': 'MinIO Server',
-         'current': True
-      },
-      {
-         'name': 'DirectPV',
-         'url': 'https://min.io/docs/directpv',
-         'external': True
-      },
-      {
-         'name': 'KES',
-         'url': 'https://min.io/docs/kes',
-         'external': True
-      }
-   ]
 }
 
 # -- Options for Sphinx Tabs -------------------------------------------------

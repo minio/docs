@@ -128,6 +128,7 @@ The tenant utilizes Persistent Volume Claims to talk to the Persistent Volumes t
    :hidden:
 
    /operations/deployments/k8s-deploy-minio-tenant-on-kubernetes
+   /operations/deployments/k8s-deploy-minio-tenant-helm-on-kubernetes
    /operations/deployments/k8s-modify-minio-tenant-on-kubernetes
    /operations/deployments/k8s-upgrade-minio-tenant-on-kubernetes
    /operations/deployments/k8s-expand-minio-tenant-on-kubernetes

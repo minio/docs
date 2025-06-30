@@ -247,13 +247,3 @@ Kubernetes provides multiple options for configuring external access to services
 See the Kubernetes documentation on :kube-docs:`Publishing Services (ServiceTypes) <concepts/services-networking/service/#publishing-services-service-types>` and :kube-docs:`Ingress <concepts/services-networking/ingress/>` for more complete information on configuring external access to services.
 
 For specific flavors of Kubernetes, such as OpenShift or Rancher, defer to the service documentation on the preferred or available methods of exposing Services to internal or external access.
-
-.. toctree::
-   :titlesonly:
-   :hidden:
-
-   /operations/deployments/k8s-deploy-minio-tenant-helm-on-kubernetes
-   /operations/deployments/k8s-upgrade-minio-tenant-on-kubernetes
-   /operations/deployments/k8s-expand-minio-tenant-on-kubernetes
-   /operations/deployments/k8s-modify-minio-tenant-on-kubernetes
-   /operations/deployments/k8s-delete-minio-tenant-on-kubernetes
