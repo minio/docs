@@ -168,11 +168,8 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
 
   This can be any single node, or a load balancer/proxy which handles connections to the MinIO nodes.
 
-  .. cond:: k8s
-
-     For Prometheus deployments in the same cluster as the MinIO Tenant, you can specify the service DNS name for the ``minio`` service.
-
-     For Prometheus deployments external to the cluster, you must specify an ingress or load balancer endpoint configured to route connections to and from the MinIO Tenant.
+  For MinIO Tenants on Kubernetes infrastructure, when using a Prometheus cluster in that same cluster you can specify the service DNS name for the ``minio`` service.
+  You can otherwise specify the ingress or load balancer endpoint configured to route connections to and from the MinIO Tenant.
 
 2) Restart Prometheus with the Updated Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

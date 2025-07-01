@@ -137,6 +137,13 @@ Parameters
    - :mc-cmd:`~mc stat --rewind`
    - :mc-cmd:`~mc stat --recursive`
 
+Global Flags
+~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-globals
+   :end-before: end-minio-mc-globals
+
 Examples
 --------
 

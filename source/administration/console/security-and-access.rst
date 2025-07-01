@@ -1,7 +1,7 @@
-
-
 .. _minio-console-security-access:
+
 :orphan:
+
 ===================
 Security and Access
 ===================
