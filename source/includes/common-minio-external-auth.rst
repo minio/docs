@@ -422,6 +422,7 @@ Specify a comma-separated list of MinIO :ref:`policies <minio-policy>` to assign
 .. start-minio-identity-management-role-id
 
 Specify a unique ID MinIO uses to generate an ARN for this identity manager.
+MinIO automatically adds an ``idmp-`` prefix to the specified ID when generating the ARN.
 
 If omitted, MinIO automatically generates the ID and prints the full ARN to the server log.
 

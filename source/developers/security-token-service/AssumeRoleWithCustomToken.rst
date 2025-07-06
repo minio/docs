@@ -67,6 +67,9 @@ This endpoint supports the following query parameters:
 
        See :envvar:`MINIO_IDENTITY_PLUGIN_ROLE_ID` or :mc-conf:`identity_plugin role_id <identity_plugin.role_id>` for more information.
 
+       Note that MinIO automatically prepends ``idmp-`` to a configured ``ROLE_ID`` when generating the RoleArn.
+       Include that string with the ``ROLE_ID`` if required.
+
    * - ``DurationSeconds``
      - integer
      - *Optional*
