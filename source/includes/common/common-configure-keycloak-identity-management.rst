@@ -322,7 +322,7 @@ The following example code sets the minimum required environment variables relat
    :class: copyable
    :substitutions:
 
-   MINIO_IDENTITY_OPENID_CONFIG_URL_PRIMARY_IAM="https://|KEYCLOAK_URL|/.well-known/openid-configuration"
+   MINIO_IDENTITY_OPENID_CONFIG_URL_PRIMARY_IAM="https://|KEYCLOAK_URL|/realms/REALM/.well-known/openid-configuration"
    MINIO_IDENTITY_OPENID_CLIENT_ID_PRIMARY_IAM="MINIO_CLIENT"
    MINIO_IDENTITY_OPENID_CLIENT_SECRET_PRIMARY_IAM="MINIO_CLIENT_SECRET"
    MINIO_IDENTITY_OPENID_DISPLAY_NAME_PRIMARY_IAM="SSO_IDENTIFIER"

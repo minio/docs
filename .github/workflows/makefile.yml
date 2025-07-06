@@ -40,3 +40,15 @@ jobs:
         name: assets
         compression-level: 9
         path: ./minio
+
+    - name: Publishing
+      uses: burnett01/rsync-deployments@7.0.2
+      with:
+        path: ./minio/
+        switches:  --mkpath -rv --delete
+        remote_path: ${{ secrets.DEPLOY_PATH }}/${{ github.event.pull_request.head.ref }}
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+        remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}

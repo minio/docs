@@ -1,0 +1,61 @@
+name: Staging
+
+on:
+  pull_request:
+    type: ["opened","synchronize"]
+
+jobs:
+  build-and-stage:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: install-python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: pip-requirements
+      run: pip install -r requirements.txt
+
+    - name: npm-setup
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: npm-install-setup
+      uses: bahmutov/npm-install@v1
+      with:
+        working-directory: ./
+
+    - name: build-docs
+      run: ./build-docs-ci.sh
+
+    - name: Staging
+      uses: burnett01/rsync-deployments@7.0.2
+      with:
+        path: ./minio/
+        switches:  --mkpath -rv --delete
+        remote_path: ${{ secrets.DEPLOY_PATH }}/${{ github.event.pull_request.head.ref }}
+        remote_host: ${{ secrets.DEPLOY_HOST_STAGING }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER_STAGING }}
+        remote_key: ${{ secrets.DEPLOY_KEY_STAGING }}
+        remote_key_pass: ${{ secrets.DEPLOY_KEY_STAGING_PASS }}
+
+    - name: comment
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: "Staged at ${{ secrets.STAGING_URL }}/${{ github.event.pull_request.head.ref }}"
+          })
+
+      
