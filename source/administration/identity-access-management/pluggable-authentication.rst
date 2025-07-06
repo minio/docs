@@ -75,7 +75,7 @@ The login flow for an application is as follows:
       {
          "user": "<string>",
          "maxValiditySeconds": 3600,
-         "claims": "KEY=VALUE,[KEY=VALUE,...]"
+         "claims": {"KEY": "VALUE", ...}
       }
 
    .. list-table::
@@ -90,7 +90,7 @@ The login flow for an application is as follows:
         - The maximum allowed expiry duration for the returned credentials
 
       * - ``claims``
-        - A list of key-value pair claims associated with the requested credentials.
+        - A JSON string of ``"key": "value"`` pair claims associated with the requested credentials.
           MinIO reserves and ignores the ``exp``, ``parent``, and ``sub`` claims objects if present.
 
 4. MinIO returns a response to the STS API request that includes temporary credentials for use with making authenticated requests.
