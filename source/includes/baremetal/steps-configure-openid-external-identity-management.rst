@@ -63,8 +63,7 @@
                claim_name="<string>" \
                claim_prefix="<string>" \
                scopes="<string>" \
-               redirect_uri="<string>" \
-               comment="<string>"
+               redirect_uri="<string>" 
 
          Replace the ``config_url`` with the URL endpoint of the 
          :abbr:`OIDC (OpenID Connect)` provider discovery document. 
@@ -84,30 +83,6 @@
 
    Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
    restart.
-
-#. Use the MinIO Console to Log In with OIDC Credentials
-
-   The MinIO Console supports the full workflow of authenticating to the
-   :abbr:`OIDC (OpenID Connect)` provider, generating temporary credentials using
-   the MinIO :ref:`minio-sts-assumerolewithwebidentity` Security Token Service
-   (STS) endpoint, and logging the user into the MinIO deployment.
-
-   Starting in :minio-release:`RELEASE.2021-07-08T01-15-01Z`, the MinIO Console is
-   embedded in the MinIO server. You can access the Console by opening the root URL
-   for the MinIO cluster. For example, ``https://minio.example.net:9000``.
-
-   From the Console, click :guilabel:`BUTTON` to begin the OpenID authentication
-   flow.
-
-   Once logged in, you can perform any action for which the authenticated
-   user is :ref:`authorized 
-   <minio-external-identity-management-openid-access-control>`. 
-
-   You can also create :ref:`access keys <minio-idp-service-account>` for
-   supporting applications which must perform operations on MinIO. Access Keys
-   are long-lived credentials which inherit their privileges from the parent user.
-   The parent user can further restrict those privileges while creating the service
-   account. 
 
 #. Generate S3-Compatible Temporary Credentials using OIDC Credentials
 

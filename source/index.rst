@@ -21,7 +21,7 @@ MinIO High Performance Object Storage
 MinIO is a Kubernetes-native S3-compatible object storage solution designed to deploy wherever your applications are - on premises, in the private cloud, in the public cloud, and edge infrastructure.
 MinIO is designed to support modern application workload patterns where high performance distributed computing meets petabyte-scale storage requirements.
 
-This site documents Operations, Administration, and Development of MinIO Community Object Storage deployments on supported platforms for |minio-tag|. 
+This site documents Operations, Administration, and Development of MinIO Community Object Storage deployments on supported platforms. 
 
 .. todo: More marketing/SEO below?
 
