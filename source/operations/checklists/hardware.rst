@@ -211,7 +211,7 @@ Recommended Storage Mediums
 +++++++++++++++++++++++++++
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -241,7 +241,7 @@ Prefer Direct-Attached "Local" Storage (DAS)
 :abbr:`DAS (Direct-Attached Storage)`, such as locally-attached JBOD (Just a Bunch of Disks) arrays, provide significant performance and consistency advantages over networked (NAS, SAN, NFS) storage.
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -346,7 +346,7 @@ MinIO can handle XFS errors appropriately, such that the retry-on-error behavior
 
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s

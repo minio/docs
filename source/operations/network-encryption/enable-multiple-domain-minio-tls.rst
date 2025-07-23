@@ -46,7 +46,7 @@ Access to MinIO Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -72,7 +72,7 @@ TLS Certificates
 Provision the necessary TLS certificates with a :ref:`supported cipher suite <minio-TLS-supported-cipher-suites>` for use by MinIO.
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -98,7 +98,7 @@ Procedure
 ---------
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s

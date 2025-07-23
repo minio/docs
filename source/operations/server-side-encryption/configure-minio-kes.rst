@@ -74,7 +74,7 @@ Access to MinIO Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -98,7 +98,7 @@ Ensure KES Access to a Supported KMS Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
@@ -150,7 +150,7 @@ Specifically, this procedure assumes the following:
 - One or more hosts for a new or existing MinIO deployment
 
 .. tab-set::
-   :class: hidden
+   
 
    .. tab-item:: Kubernetes
       :sync: k8s
