@@ -25,12 +25,6 @@ This site documents Operations, Administration, and Development of MinIO Communi
 
 .. todo: More marketing/SEO below?
 
-.. important::
-
-   Support for deploying the MinIO Operator via the RedHat Marketplace or OperatorHub was removed in 2024. 
-   MinIO AIStor fully supports installation via the Marketplace and OperatorHub onto enterprise RedHat Kubernetes distributions like OpenShift Container Platform (OCP).
-   |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
-
 Quickstart
 ----------
 
