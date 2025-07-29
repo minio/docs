@@ -383,7 +383,10 @@ a.nav__sub {
 .platform-nav {
 	font-size: $font-size-md;
     position: relative;
-	margin-bottom: 2rem;
+
+	@include breakpoint-min(breakpoints(lg)) {
+		margin-bottom: 2rem;
+	}
 
 	.search-toggle {
         margin-left: auto;

@@ -28,7 +28,7 @@
 .content__main {
     flex: 1;
     min-width: 0;
-    padding: 0 var(--content-padding) var(--content-padding);
+    padding: var(--content-padding);
 }
 
 .container { 

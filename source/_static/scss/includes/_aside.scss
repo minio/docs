@@ -10,8 +10,7 @@ div.sidebar {
     top: 0;
     background-color: $white;
     transition: opacity 400ms, transform 300ms;
-    //padding: var(--content-padding);
-    padding: 0;
+    padding-top: var(--content-padding);
     overflow-y: auto;
     height: 100vh;
     z-index: $z-index-header - 2;
