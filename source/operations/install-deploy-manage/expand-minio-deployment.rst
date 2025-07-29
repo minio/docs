@@ -143,8 +143,7 @@ Writing Files
 ~~~~~~~~~~~~~
 
 MinIO does not automatically rebalance objects across the new server pools. 
-Instead, MinIO performs new write operations to the pool with the most free
-storage weighted by the amount of free space on the pool divided by the free space across all available pools.
+Instead, MinIO performs new write operations to the pool with the most free storage weighted by the amount of free space on the pool divided by the free space across all available pools.
 
 The formula to determine the probability of a write operation on a particular pool is
 
@@ -162,11 +161,14 @@ MinIO calculates the probability of a write operation to each of the pools as:
 - Pool B: 20% chance (:math:`2TiB / 10TiB`)
 - Pool C: 50% chance (:math:`5TiB / 10TiB`)
 
-In addition to the free space calculation, if a write option (with parity) would bring a drive
-usage above 99% or a known free inode count below 1000, MinIO does not write to the pool.
+In addition to the free space calculation, if a write option (with parity) would bring a drive usage above 99% or a known free inode count below 1000, MinIO does not write to the pool.
 
-If desired, you can manually initiate a rebalance procedure with :mc:`mc admin rebalance`.
-For more about how rebalancing works, see :ref:`managing objects across a deployment <minio-rebalance>`.
+Since a pool with more free space has a higher probability of being written to, the nodes of that pool may experience higher loads as free space equalizes.
+
+If required, you can manually initiate a rebalance procedure with :mc:`mc admin rebalance`.
+MinIO recommends `SUBNET <https://min.io/pricing?jmp=docs>`__ users `log in <https://subnet.min.io/>`__ and create a new issue to discuss capacity planning or rebalancing considerations for their deployments.
+
+For more about how rebalancing works see :ref:`managing objects across a deployment <minio-rebalance>`.
 
 Likewise, MinIO does not write to pools in a decommissioning process.
 

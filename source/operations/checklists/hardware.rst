@@ -339,6 +339,9 @@ Storage
    MinIO limits the maximum usable size per drive to the smallest size in the deployment.
    For example, if a deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
 
+For deployments with multiple server pools, each individual pool may have its own hardware configuration.
+However, significant capacity differences between pools may temporarily result in high loads on a new pool's nodes during :ref:`expansion <expand-minio-distributed>`. For more information, see :ref:`How do I manage object distribution across a MinIO deployment? <minio-rebalance>`
+
 Recommended Hardware Tests
 --------------------------
 
