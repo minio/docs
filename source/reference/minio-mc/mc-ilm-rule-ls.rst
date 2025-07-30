@@ -148,7 +148,7 @@ Use :mc:`mc ilm rule ls` to list a bucket's lifecycle management rules:
 Show Policy Modification Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc ilm rule ls` with :std:option:`--json <mc.--json>` to show the time the policy for a bucket was last updated.
+Use :mc:`mc ilm rule ls` with :option::`--json <mc.--json>` to show the time the policy for a bucket was last updated.
 
 .. code-block:: shell
    :class: copyable

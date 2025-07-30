@@ -71,6 +71,7 @@ extlinks = {
     'eks-docs'        : ('https://docs.aws.amazon.com/eks/latest/userguide/%s', None),
     'minio-web'       : ('https://min.io/%s?ref=docs', None),
     'minio-docs'      : ('https://min.io/docs/%s?ref=docs-internal', None),
+    'minio-blog'      : ('https://blog.min.io/%s?ref=docs', None),
     'gke-docs'        : ('https://cloud.google.com/kubernetes-engine/docs/%s', None),
     'gcp-docs'        : ('https://cloud.google.com/compute/docs/%s', None),
     'gcs-docs'        : ('https://cloud.google.com/storage/docs/%s', None),
@@ -106,78 +107,6 @@ sitemap_url_scheme = "{link}"
 
 excludes = []
 
-if tags.has("linux"):
-    html_baseurl = 'https://min.io/docs/minio/linux/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'linux':
-            excludes = i['excludes']
-            break
-
-elif tags.has("macos"):
-    html_baseurl = 'https://min.io/docs/minio/macos/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'macos':
-            excludes = i['excludes']
-            break
-
-elif tags.has("windows"):
-    # html_baseurl is used for generating the sitemap.xml for each platform. These are combined in a sitemapindex.xml.
-    html_baseurl = 'https://min.io/docs/minio/windows/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'windows':
-            excludes = i['excludes']
-            break
-
-elif tags.has("container"):
-    html_baseurl = 'https://min.io/docs/minio/container/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'container':
-            excludes = i['excludes']
-            break
-
-elif tags.has("k8s") and not (tags.has("openshift") or tags.has("eks") or tags.has("gke") or tags.has("aks")):
-    html_baseurl = 'https://min.io/docs/minio/kubernetes/upstream/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'k8s':
-            excludes = i['excludes']
-            break
-
-elif tags.has("openshift"):
-    html_baseurl = 'https://min.io/docs/minio/kubernetes/openshift/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'openshift':
-            excludes = i['excludes']
-            break
-
-elif tags.has("eks"):
-    html_baseurl = 'https://min.io/docs/minio/kubernetes/eks/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'eks':
-            excludes = i['excludes']
-            break
-
-elif tags.has("gke"):
-    html_baseurl = 'https://min.io/docs/minio/kubernetes/gke/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'gke':
-            excludes = i['excludes']
-            break
-
-elif tags.has("aks"):
-    html_baseurl = 'https://min.io/docs/minio/kubernetes/aks/'
-    with open('url-excludes.yaml','r') as f:
-      for i in (yaml.safe_load_all(f)):
-         if i['tag'] == 'aks':
-            excludes = i['excludes']
-            break
 
 exclude_patterns.extend(excludes)
 
@@ -246,56 +175,20 @@ html_js_files = [
 # Add https://www.min.io/robots.txt to html_extra_path list once available.
 html_extra_path = [ 'extra']
 
+html_baseurl = 'https://docs.min.io/community/minio-object-store'
+
 # -- Project information -----------------------------------------------------
 
-# We assume a single tag, since we control the builder
 
-platform = list(tags.tags.keys())[0]
-
-platform_fmt = ""
-
-if platform == "k8s":
-   platform_fmt = "Kubernetes"
-elif platform == "macos":
-   platform_fmt = "MacOS"
-elif platform == "openshift":
-   platform_fmt = "OpenShift"
-elif platform == "eks":
-   platform_fmt = "Elastic Kubernetes Service"
-elif platform == "gke":
-   platform_fmt = "Google Kubernetes Engine"
-elif platform == "aks":
-   platform_fmt = "Azure Kubernetes Service"
-else:
-   platform_fmt = platform.capitalize()
-
-project = 'MinIO Documentation for ' + platform_fmt
+project = 'Documentation for MinIO Object Storage' 
 copyright = '2020-Present, MinIO, Inc. '
 author = 'MinIO Documentation Team'
-html_title = 'MinIO Object Storage for ' + platform_fmt
-html_short_title = 'MinIO Object Storage for ' + platform_fmt
+html_title = 'MinIO Object Storage (AGPLv3)'
+html_short_title = 'MinIO Object Storage'
 
 html_permalinks_icon = ''
 
 html_context = {
-   'doc_platform': platform.lower(),
-   'docs': [
-      # The first item has to be the current docs site #
-      {
-         'name': 'MinIO Server',
-         'current': True
-      },
-      {
-         'name': 'DirectPV',
-         'url': 'https://min.io/docs/directpv',
-         'external': True
-      },
-      {
-         'name': 'KES',
-         'url': 'https://min.io/docs/kes',
-         'external': True
-      }
-   ]
 }
 
 # -- Options for Sphinx Tabs -------------------------------------------------
@@ -306,14 +199,9 @@ sphinx_tabs_disable_css_loading = True
 
 # k8s is temporary until integrating the references here
 
-intersphinx_mapping = {
-    'linux'      : ('https://min.io/docs/minio/linux/', None),
-    'kubernetes' : ('https://min.io/docs/minio/kubernetes/upstream/',None) 
-}
-
 rst_prolog = """
 
-.. |platform| replace:: %s
+.. |platform| replace:: 'foo'
 
 .. |podman| replace:: `Podman <https://podman.io/>`__
 
@@ -323,10 +211,18 @@ rst_prolog = """
 .. |minio-latest| replace:: MINIOLATEST
 .. |minio-rpm| replace:: RPMURL
 .. |minio-deb| replace:: DEBURL
-.. |minio-rpmarm64| replace:: RPMARM64URL
-.. |minio-debarm64| replace:: DEBARM64URL
-.. |subnet| replace:: `MinIO pricing <https://min.io/pricing?jmp=docs>`__
-.. |subnet-short| replace:: `pricing <https://min.io/pricing?jmp=docs>`__
+.. |minio-binary| replace:: MINIOURL
+.. |minio-rpm-arm64| replace:: RPMARM64URL
+.. |minio-deb-arm64| replace:: DEBARM64URL
+.. |minio-binary-arm64| replace:: MINIOARM64URL
+.. |minio-rpm-ppc64le| replace:: RPMPPC64LEURL
+.. |minio-deb-ppc64le| replace:: DEBPPC64LEURL
+.. |minio-binary-ppc64le| replace:: MINIOPPC64LEURL
+.. |minio-rpms-390x| replace:: RPMS390XURL
+.. |minio-debs-390x| replace:: DEBS390XURL
+.. |minio-binarys-390x| replace:: MINIOS390XURL
+.. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__
+.. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
 .. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`
 .. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`
@@ -348,4 +244,4 @@ rst_prolog = """
 .. |rust-sdk-version| replace:: RUSTVERSION
 
 
-""" % platform_fmt
+"""

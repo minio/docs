@@ -970,7 +970,7 @@ To select all of the available kms policy actions, use ``kms:*``.
 
    For example, the following policy document allows a user to list keys, create new keys, and check the status of keys for any resource that begins with ``keys-abc-`` or ``myuser-``.
 
-   .. codeblock:: shell
+   .. code-block:: shell
       :class: copyable
    
       {

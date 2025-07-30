@@ -46,3 +46,4 @@ MinIO supports the following STS API endpoints:
    :glob:
 
    /developers/security-token-service/*
+   /developers/sts-for-operator

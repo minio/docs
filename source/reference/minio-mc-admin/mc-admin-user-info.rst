@@ -114,7 +114,7 @@ For a :ref:`third-party <minio-external-identity-management>` identity service s
 View Policies from Group Membership
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin user info` with :std:option:`--json <mc.--json>` to view the policies inherited from a user's :ref:`group memberships <minio-groups>`:
+Use :mc-cmd:`mc admin user info` with :option::`--json <mc.--json>` to view the policies inherited from a user's :ref:`group memberships <minio-groups>`:
 
 .. code-block:: shell
    :class: copyable
