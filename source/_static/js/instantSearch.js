@@ -98,8 +98,8 @@ window.addEventListener("DOMContentLoaded", () => {
     initialUiState: {
       minio: {
         refinementList: {
-          site: "docs",
-          edition: "community",
+          site: ["docs"],
+          edition: ["community"],
         },
       },
     },
@@ -268,7 +268,7 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     }),
     instantsearch.widgets.configure({
-      filters: `site:docs`, 
+      filters: `site:docs AND edition:community`,
     })
   ]);
 
