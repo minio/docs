@@ -98,7 +98,8 @@ window.addEventListener("DOMContentLoaded", () => {
     initialUiState: {
       minio: {
         refinementList: {
-          site: "docs"
+          site: "docs",
+          edition: "community",
         },
       },
     },
@@ -184,7 +185,6 @@ window.addEventListener("DOMContentLoaded", () => {
                   </i>
                   <div class="search__hits__text">
                     <div class="search__hits__title">${data._highlightResult.hierarchy.lvl1.value}</div>
-                    <div class="search__hits__platform">${data.platform}</div>
                   </div>
                 `;
           }
@@ -202,7 +202,6 @@ window.addEventListener("DOMContentLoaded", () => {
                   <div class="search__hits__text">
                     <div class="search__hits__title">${data._highlightResult.hierarchy.lvl2.value}</div>
                     <div class="search__hits__label">
-                      <div class="search__hits__platform">${data.platform}</div>
                       ${data.hierarchy.lvl1}
                     </div>
                   </div>
@@ -222,7 +221,6 @@ window.addEventListener("DOMContentLoaded", () => {
                   <div class="search__hits__text">
                     <div class="search__hits__title">${data._highlightResult.hierarchy.lvl3.value}</div>
                     <div class="search__hits__label">
-                      <div class="search__hits__platform">${data.platform}</div>
                       ${data.hierarchy.lvl1}
                     </div>
                   </div>
@@ -245,7 +243,6 @@ window.addEventListener("DOMContentLoaded", () => {
                       data._snippetResult.content.value
                     }</div>
                     <div class="search__hits__label">
-                      <div class="search__hits__platform">${data.platform}</div>
                       ${data.hierarchy.lvl1}
                       ${
                         data.hierarchy.lvl2

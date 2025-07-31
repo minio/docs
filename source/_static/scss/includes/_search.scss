@@ -280,16 +280,9 @@
 	vertical-align: middle;
 	color: var(--text-muted-color);
 	font-size: 0.65rem;
-	/* display: flex;
-	align-items: center; */
 	line-height: 1;
-	//margin-top: 0.35rem;
 	min-height: 1rem;
 	padding-bottom: 0.1rem;
-
-	.search__hits__platform {
-		margin-top: 0.2rem;
-	}
 
 	& > svg {
 		height: 0.8rem;
@@ -313,19 +306,6 @@
 	fill: var(--text-muted-color);
 	place-content: center;
 }
-
-.search__hits__platform {
-	font-size: 0.65rem;
-	color: var(--text-muted-color);
-	line-height: 1;
-	border: 1px solid var(--is-hit-platform-border-color);
-	border-radius: $border-radius;
-	padding: 0.1rem 0.2rem;
-	width: fit-content;
-	margin: 0.4rem 0.35rem 0 0;
-	display: inline-block;
-}
-
 
 .search__hits--empty {
 	margin: 0;
