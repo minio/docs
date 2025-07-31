@@ -136,8 +136,7 @@ sync-deps:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@echo -e "----------------------------------------"
-	@echo -e "Specify one of the following supported build outputs"
-	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s\n- make openshift\n- make eks\n- make gke\n- make aks\n- make container"
+	@echo -e "make mindocs"
 	@echo -e "Clean targets with 'make clean-<target>'"
 	@echo -e "Clean all targets with 'make clean'"
 	@echo -e "----------------------------------------"
