@@ -253,15 +253,15 @@ The remaining subsections document actions for more advanced S3 operations:
 
 .. policy-action:: s3:GetObjectAttributes
 
-Controls access to the :s3-api:`GetObjectAttributes <API_GetObjectAttributes.html>` S3 API operation.
+   Controls access to the :s3-api:`GetObjectAttributes <API_GetObjectAttributes.html>` S3 API operation.
 
 .. policy-action:: s3:GetObjectVersionAttributes
 
-Controls access to the :s3-api:`GetObjectAttributes <API_GetObjectAttributes.html>` S3 API operations on versioned objects.
+   Controls access to the :s3-api:`GetObjectAttributes <API_GetObjectAttributes.html>` S3 API operations on versioned objects.
 
 .. policy-action:: s3:RestoreObject
 
-Controls access to the :s3-api:`RestoreObject <API_RestoreObject.html>` S3 API operation.
+   Controls access to the :s3-api:`RestoreObject <API_RestoreObject.html>` S3 API operation.
 
 .. policy-action:: s3:ListBucket
    
