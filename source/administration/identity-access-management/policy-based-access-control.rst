@@ -251,6 +251,18 @@ The remaining subsections document actions for more advanced S3 operations:
       s3:ExistingObjectTag/<key>   
       s3:versionid   
 
+.. policy-action:: s3:GetObjectAttributes
+
+   Controls access to the :s3-api:`GetObjectAttributes <API_GetObjectAttributes.html>` S3 API operation.
+
+.. policy-action:: s3:GetObjectVersionAttributes
+
+   Controls access to the :s3-api:`GetObjectAttributes <API_GetObjectAttributes.html>` S3 API operations on versioned objects.
+
+.. policy-action:: s3:RestoreObject
+
+   Controls access to the :s3-api:`RestoreObject <API_RestoreObject.html>` S3 API operation.
+
 .. policy-action:: s3:ListBucket
    
    Controls access to the :s3-api:`ListObjectsV2 <API_ListObjectsV2.html>` S3 API operation.
@@ -336,20 +348,22 @@ Bucket Configuration
 
 .. policy-action:: s3:GetBucketTagging
    
-   Controls access to the :s3-api:`GetBucketTagging <API_GetBucketTagging.html>`
-   S3 API operation.
+   Controls access to the :s3-api:`GetBucketTagging <API_GetBucketTagging.html>` S3 API operation.
 
 .. policy-action:: s3:PutBucketTagging
    
-   Controls access to the :s3-api:`PutBucketTagging <API_PutBucketTagging.html>`
-   S3 API operation.
+   Controls access to the :s3-api:`PutBucketTagging <API_PutBucketTagging.html>` S3 API operation.
 
    Supports the following additional :ref:`condition keys <minio-policy-conditions>`:
 
    .. code-block:: shell
 
       s3:RequestObjectTagKeys   
-      s3:RequestObjectTag/<key>   
+      s3:RequestObjectTag/<key>
+
+.. policy-action:: s3:GetBucketPolicyStatus
+   
+   Controls access to the :s3-api:`GetBucketPolicyStatus <API_GetBucketPolicyStatus.html>` S3 API operation.  
 
 Multipart Upload
 ~~~~~~~~~~~~~~~~
