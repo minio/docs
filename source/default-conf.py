@@ -175,7 +175,7 @@ html_js_files = [
 # Add https://www.min.io/robots.txt to html_extra_path list once available.
 html_extra_path = [ 'extra']
 
-html_baseurl = 'https://docs.min.io/community/minio-object-store'
+html_baseurl = 'https://docs.min.io/community/minio-object-store/'
 
 # -- Project information -----------------------------------------------------
 
