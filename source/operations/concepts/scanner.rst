@@ -74,7 +74,7 @@ As the cluster or workload increases, scanner performance decreases as it yields
 Scanner Metrics
 ---------------
 
-MinIO provides a number of `metrics related to the scanner <https://min.io/docs/minio/linux/operations/monitoring/metrics-and-alerts.html#scanner-metrics>`__.
+MinIO provides a number of `metrics related to the scanner <https://docs.min.io/community/minio-object-store/operations/monitoring/metrics-v2.html#scanner-metrics>`__.
 
 Use ``mc admin scanner info`` to see the current status of the scanner and the time since the last full scan.
 This can help in understanding the metrics provided by the scanner operation.

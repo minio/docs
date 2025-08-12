@@ -5,7 +5,7 @@
 Package v2 - This page provides a quick automatically generated
 reference for the MinIO Operator `Operator CRD v2 Reference` CRD. For more
 complete documentation on the MinIO Operator CRD, see [MinIO Kubernetes
-Documentation](https://min.io/docs/minio/kubernetes/upstream/index.html).  
+Documentation](https://docs.min.io/community/minio-object-store/operations/deployments/kubernetes.html).  
 
 The `Operator CRD v2 Reference` API was released with the v4.0.0 MinIO Operator.
 The MinIO Operator automatically converts existing tenants using the
@@ -470,7 +470,7 @@ containing the TLS certificate.<br />
 </p></li>
 </ul>
 <p>See the <a
-href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#procedure-command-line">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
 </tr>
@@ -733,10 +733,8 @@ resources for supporting object storage and retrieval requests. Each
 server pool is independent of all others and supports horizontal scaling
 of available storage resources in the MinIO Tenant.  
 
-See the [MinIO Operator
-CRD](https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#procedure-command-line)
-reference for the `pools` object for examples and more complete
-documentation.  
+See the [MinIO Operator CRD](https://docs.min.io/community/minio-object-store/reference/operator-crd.html)
+reference for the `pools` object for examples and more complete documentation.  
 
 -   [TenantSpec](#tenantspec)
 
@@ -1295,7 +1293,7 @@ API `spec` definition added as part of the MinIO Operator v4.0.0.
 
 For more complete documentation on this object, see the [MinIO
 Kubernetes
-Documentation](https://min.io/docs/minio/kubernetes/upstream/operations/installation.html).  
+Documentation](https://docs.min.io/community/minio-object-store/operations/deployments/kubernetes.html).  
 
 -   [Tenant](#tenant)
 
@@ -1330,7 +1328,7 @@ least <strong>one</strong> element in the <code>pools</code>
 array.<br />
 </p>
 <p>See the <a
-href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenant">MinIO
 Operator CRD</a> reference for the <code>pools</code> object for
 examples and more complete documentation.</p></td>
 </tr>
@@ -1402,7 +1400,7 @@ containing the TLS certificate.<br />
 </p></li>
 </ul>
 <p>See the <a
-href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
 </tr>
@@ -1434,7 +1432,7 @@ containing the Certificate Authority.<br />
 </p></li>
 </ul>
 <p>See the <a
-href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
 </tr>
@@ -1474,7 +1472,7 @@ href="#kesconfig"><code>kes</code></a>
 object specification.<br />
 </p>
 <p>See the <a
-href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
 </tr>
@@ -1566,7 +1564,7 @@ generation.<br />
 <strong>and</strong> <code>externalCertSecret</code> is omitted, the
 MinIO Tenant deploys <strong>without</strong> TLS enabled.</p>
 <p>See the <a
-href="https://min.io/docs/minio/kubernetes/upstream/operations/install-deploy-manage/deploy-minio-tenant.html#create-tenant-security-section">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">MinIO
 Operator CRD</a> reference for examples and more complete documentation
 on configuring TLS for MinIO Tenants.</p></td>
 </tr>

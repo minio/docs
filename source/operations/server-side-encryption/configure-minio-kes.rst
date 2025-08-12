@@ -142,7 +142,7 @@ Refer to the configuration instruction in the :kes-docs:`KES documentation <>` f
 Procedure
 ---------
 
-This procedure provides instructions for configuring and enabling Server-Side Encryption using your selected `supported KMS solution <https://min.io/docs/kes/#supported-kms-targets>`__ in production environments. 
+This procedure provides instructions for configuring and enabling Server-Side Encryption using your selected `supported KMS solution <https://docs.min.io/community/minio-kes/#supported-kms-targets>`__ in production environments. 
 Specifically, this procedure assumes the following:
 
 - An existing production-grade KMS target
