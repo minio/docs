@@ -285,7 +285,7 @@ location /minio/baremetal/monitoring/bucket-notifications/publish-events-to-webh
 
 
 location /minio/baremetal/reference/minio-mc.html {
-     return 301 https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs-redirect;
+     return 301 https://docs.min.io/community/minio-object-store/reference/minio-mc.html?ref=docs-redirect;
 }
 
 location /minio/baremetal/reference/minio-mc/ {
@@ -293,7 +293,7 @@ location /minio/baremetal/reference/minio-mc/ {
 }
 
 location /minio/baremetal/reference/minio-mc-admin.html {
-     return 301 https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs-redirect;
+     return 301 https://docs.min.io/community/minio-object-store/reference/minio-mc.html?ref=docs-redirect;
 }
 
 location /minio/baremetal/reference/minio-mc-admin/ {
@@ -340,5 +340,5 @@ location /minio/baremetal/support/encrypting-files.html {
 }
 
 location /minio/baremetal {
-     return 301 https://min.io/docs/minio/linux/index.html?ref=docs-redirect;
+     return 301 https://docs.min.io/community/minio-object-store/index.html?ref=docs-redirect;
 }

@@ -11,7 +11,7 @@ location /docs/minio-vault-legacy.html {
 }
 
 location /docs/minio-quickstart-guide.html {
-     return 301 https://min.io/docs/minio/linux/index.html?ref=docs-redirect;
+     return 301 https://docs.min.io/community/minio-object-store/index.html?ref=docs-redirect;
 }
 
 location /docs/minio-docker-quickstart-guide.html {
@@ -103,11 +103,11 @@ location /docs/deploy-minio-on-docker-compose.html {
 }
 
 location /docs/minio-client-quickstart-guide.html {
-     return 301 https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs-redirect;
+     return 301 https://docs.min.io/community/minio-object-store/reference/minio-mc.html?ref=docs-redirect;
 }
 
 location /docs/minio-client-complete-guide.html {
-     return 301 https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs-redirect;
+     return 301 https://docs.min.io/community/minio-object-store/reference/minio-mc.html?ref=docs-redirect;
 }
 
 location /docs/minio-admin-complete-guide.html {

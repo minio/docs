@@ -142,10 +142,10 @@ The following table describes each line of the command and provides additional c
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
 
-   Command-line: https://min.io/docs/minio/linux/reference/minio-mc.html
+   Command-line: https://docs.min.io/community/minio-object-store/reference/minio-mc.html
       $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
 
-   Documentation: https://min.io/docs/minio/container/index.html
+   Documentation: https://docs.min.io/community/minio-object-store/operations/deployments/baremetal-deploy-minio-as-a-container.html
 
 .. admonition:: Container Networks May Not Be Accessible Outside of the Host
 
