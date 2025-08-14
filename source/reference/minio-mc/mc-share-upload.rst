@@ -90,7 +90,7 @@ Parameters
    *Optional* Restrict uploads to only requests with a specific `Content-Type <https://www.w3.org/Protocols/rfc1341/4_Content-Type.html>`__ header.
    
    Specify a string with the desired ``Content-Type`` value to accept.
-   For example, `video/mp4`.
+   For example, ``video/mp4``.
 
    If configured, clients using the generated URL must include a ``Content-Type`` header for the specified type.
    MinIO rejects requests that do not have the correct ``Content-Type`` header.
