@@ -46,9 +46,10 @@ documentation on :aws-docs:`Pre-Signed URLs
       .. code-block:: shell
          :class: copyable
 
-         mc [GLOBALFLAGS] share upload         \
-                          [--expire "string"]  \
-                          [--recursive]        \
+         mc [GLOBALFLAGS] share upload               \
+                          [--content-type "string"]  \
+                          [--expire "string"]        \
+                          [--recursive]              \
                           ALIAS
 
       .. include:: /includes/common-minio-mc.rst
@@ -83,6 +84,18 @@ Parameters
       mc share upload --recursive play/mybucket/
 
       mc share upload --recursive play/mybucket/myprefix/
+
+.. mc-cmd:: --content-type, T
+
+   *Optional* Restrict uploads to only requests with a specific `Content-Type <https://www.w3.org/Protocols/rfc1341/4_Content-Type.html>`__ header.
+   
+   Specify a string with the desired ``Content-Type`` value to accept.
+   For example, ``video/mp4``.
+
+   If configured, clients using the generated URL must include a ``Content-Type`` header for the specified type.
+   MinIO rejects requests that do not have the correct ``Content-Type`` header.
+
+   Content types are also known as `media types <https://www.iana.org/assignments/media-types/media-types.xhtml>`__.
 
 .. mc-cmd:: --expire, E
    
