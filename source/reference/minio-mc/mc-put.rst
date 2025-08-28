@@ -54,7 +54,7 @@ The :mc:`mc put` uploads an object from the local file system to a bucket on a t
                           [--if-not-exists]              \
                           [--parallel, -P integer]       \
                           [--part-size, -s string]       \
-                          [--storage-class, -sc string]  \
+                          [--storage-class, -sc string]
 
       .. include:: /includes/common-minio-mc.rst
          :start-after: start-minio-syntax
@@ -126,10 +126,10 @@ Parameters
 .. mc-cmd:: --storage-class, -sc
    :optional:
 
-   Set the storage class for the new object on the :mc-cmd:`~mc put TARGET`. 
-         
-   See :aws-docs:`AmazonS3/latest/dev/storage-class-intro.html` for
-   more information on S3 storage classes.
+   Set the storage class for the uploaded object.
+
+   See :ref:`Standard Storage Class <minio-ec-storage-class-standard>` for more about storage classes.
+
 
 Global Flags
 ~~~~~~~~~~~~

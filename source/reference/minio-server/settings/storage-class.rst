@@ -22,6 +22,8 @@ This impacts how MinIO uses the space on the drive(s) and how MinIO can recover 
    :start-after: start-minio-settings-test-before-prod
    :end-before: end-minio-settings-test-before-prod
 
+.. _minio-ec-storage-class-standard:
+
 Standard Storage Class
 ----------------------
 
