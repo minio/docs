@@ -16,29 +16,34 @@ Overview
 
 This procedure configures MinIO to use `Keycloak <https://www.keycloak.org/>`__ as an external IDentity Provider (IDP) for authentication of users via the OpenID Connect (OIDC) protocol.
 
-This procedure specifically covers the following steps:
+This page has procedures for configuring OIDC for MinIO deployments in Kubernetes and Baremetal infrastructures.
 
-.. cond:: k8s
+Select the tab corresponding to your infrastructure to switch between instruction sets.
 
-   - Configure Keycloak for use with MinIO authentication and authorization
-   - Configure a new or existing MinIO Tenant to use Keycloak as the OIDC provider
-   - Create policies to control access of Keycloak-authenticated users
-   - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
+.. tab-set::
+   :class: parent-tab
 
-.. cond:: linux or macos or windows
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-   - Configure Keycloak for use with MinIO authentication and authorization
-   - Configure a new or existing MinIO cluster to use Keycloak as the OIDC provider
-   - Create policies to control access of Keycloak-authenticated users
-   - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
+      For MinIO Tenants deployed using the :ref:`MinIO Kubernetes Operator <minio-kubernetes>`, this procedure covers:
 
-.. cond:: container
+      - Configure Keycloak for use with MinIO authentication and authorization
+      - Configure a new or existing MinIO Tenant to use Keycloak as the OIDC provider
+      - Create policies to control access of Keycloak-authenticated users
+      - Log into the MinIO Tenant Console using SSO and a Keycloak-managed identity
+      - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
 
-   - Deploy a Keycloak and MinIO Container
-   - Configure Keycloak for use with MinIO authentication and authorization
-   - Configure MinIO to use Keycloak as the OIDC provider
-   - Create policies to control access of Keycloak-authenticated users
-   - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      For MinIO deployments on baremetal infrastructure, this procedure covers:
+
+      - Configure Keycloak for use with MinIO authentication and authorization
+      - Configure a new or existing MinIO cluster to use Keycloak as the OIDC provider
+      - Create policies to control access of Keycloak-authenticated users
+      - Log into the MinIO Console using SSO and a Keycloak-managed identity
+      - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
 
 This procedure was written and tested against Keycloak ``21.0.0``. 
 The provided instructions may work against other Keycloak versions.
@@ -47,80 +52,66 @@ This procedure assumes you have prior experience with Keycloak and have reviewed
 Prerequisites
 -------------
 
-.. cond:: k8s
+Keycloak Deployment and Realm Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   MinIO Kubernetes Operator
-   ~~~~~~~~~~~~~~~~~~~~~~~~~
+This procedure assumes an existing Keycloak deployment to which you have administrative access.
+Specifically, you must have permission to create and configure Realms, Clients, Client Scopes, Realm Roles, Users, and Groups on the Keycloak deployment.
 
-   .. include:: /includes/k8s/common-operator.rst
-      :start-after: start-requires-operator-plugin
-      :end-before: end-requires-operator-plugin
+.. tab-set::
 
-   MinIO Tenant
-   ~~~~~~~~~~~~
-
-   This procedure assumes your Kubernetes cluster has sufficient resources to  :ref:`deploy a new MinIO Tenant <minio-k8s-deploy-minio-tenant>`.
-
-   You can also use this procedure as guidance for modifying an existing MinIO Tenant to enable Keycloak Identity Management.
-
-.. cond:: linux or container or macos or windows
-
-   MinIO Deployment
-   ~~~~~~~~~~~~~~~~
-
-   This procedure assumes an existing MinIO cluster running the :minio-git:`latest stable MinIO version <minio/releases/latest>`. 
-   Refer to the :ref:`minio-installation` for more complete documentation on new MinIO deployments.
-
-   This procedure *may* work as expected for older versions of MinIO.
-
-.. cond:: not container
-
-   Keycloak Deployment and Realm Configuration
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   This procedure assumes an existing Keycloak deployment to which you have administrative access.
-   Specifically, you must have permission to create and configure Realms, Clients, Client Scopes, Realm Roles, Users, and Groups on the Keycloak deployment.
-
-   .. cond:: k8s
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
       For Keycloak deployments within the same Kubernetes cluster as the MinIO Tenant, this procedure assumes bidirectional access between the Keycloak and MinIO pods/services.
-
       For Keycloak deployments external to the Kubernetes cluster, this procedure assumes an existing Ingress, Load Balancer, or similar Kubernetes network control component that manages network access to and from the MinIO Tenant.
 
-   .. cond:: not k8s
 
-      This procedure assumes bidirectional access between the Keycloak and MinIO deployments.
+   .. tab-item:: Baremetal
+      :sync: baremetal
 
-Install and Configure ``mc`` with Access to the MinIO Cluster
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      The MinIO deployment must have bidirectional access to the target OIDC service.
 
-This procedure uses :mc:`mc` for performing operations on the MinIO cluster. 
-Install ``mc`` on a machine with network access to the cluster.
+Ensure each user identity intended for use with MinIO has the appropriate :ref:`claim <minio-external-identity-management-openid-access-control>` configured such that MinIO can associate a :ref:`policy <minio-policy>` to the authenticated user.
+An OpenID user with no assigned policy has no permission to access any action or resource on the MinIO cluster.
 
-.. cond:: k8s
 
-   Your local host must have access to the MinIO Tenant, such as through Ingress, a Load Balancer, or a similar Kubernetes network control component.
+Access to MinIO Cluster
+~~~~~~~~~~~~~~~~~~~~~~~
 
-See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+.. tab-set::
 
-This procedure assumes a configured :mc:`alias <mc alias>` for the MinIO cluster. 
+   .. tab-item:: Kubernetes
+      :sync: k8s
+
+      You must have access to the MinIO Operator Console web UI.
+      You can either expose the MinIO Operator Console service using your preferred Kubernetes routing component, or use temporary port forwarding to expose the Console service port on your local machine.
+
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      This procedure uses :mc:`mc` for performing operations on the MinIO cluster. 
+      Install ``mc`` on a machine with network access to the cluster.
+      See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+
+      This procedure assumes a configured :mc:`alias <mc alias>` for the MinIO cluster. 
 
 .. _minio-external-identity-management-keycloak-configure:
 
 Configure MinIO for Keycloak Identity Management
 ------------------------------------------------
 
-.. cond:: linux or macos or windows
+.. tab-set::
 
-   .. include:: /includes/linux/steps-configure-keycloak-identity-management.rst
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-.. cond:: k8s
+      .. include:: /includes/k8s/steps-configure-keycloak-identity-management.rst
 
-   .. include:: /includes/k8s/steps-configure-keycloak-identity-management.rst
+   .. tab-item:: Baremetal
+      :sync: baremetal
 
-.. cond:: container
-
-   .. include:: /includes/container/steps-configure-keycloak-identity-management.rst
+      .. include:: /includes/baremetal/steps-configure-keycloak-identity-management.rst
 
 Enable the Keycloak Admin REST API
 ----------------------------------

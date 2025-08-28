@@ -18,31 +18,53 @@ MinIO supports configuring a single Active Directory / LDAP Connect for external
 
 The procedure on this page provides instructions for:
 
-.. cond:: k8s
+.. tab-set::
+   :class: parent-tab
 
-   - Configuring a MinIO Tenant to use an external AD/LDAP provider
-   - Using the MinIO ``AssumeRoleWithLDAPIdentity`` Security Token Service (STS) API to generate temporary credentials for use by applications.
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-.. cond:: linux or macos or container or windows
+      For MinIO Tenants deployed using the :ref:`MinIO Kubernetes Operator <minio-kubernetes>`, this procedure covers:
 
-   - Configuring a MinIO cluster for an external AD/LDAP provider.
-   - Using the MinIO ``AssumeRoleWithLDAPIdentity`` Security Token Service (STS) API to generate temporary credentials for use by applications.
+      - Configuring a MinIO Tenant to use an external AD/LDAP provider
+      - Accessing the Tenant Console using AD/LDAP Credentials.
+      - Using the MinIO ``AssumeRoleWithLDAPIdentity`` Security Token Service (STS) API to generate temporary credentials for use by applications.
+
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      For MinIO deployments on baremetal infrastructure, this procedure covers:
+
+      - Configuring a MinIO cluster for an external AD/LDAP provider.
+      - Accessing the MinIO Console using AD/LDAP credentials.
+      - Using the MinIO ``AssumeRoleWithLDAPIdentity`` Security Token Service (STS) API to generate temporary credentials for use by applications.
 
 This procedure is generic for AD/LDAP services.
 See the documentation for the AD/LDAP provider of your choice for specific instructions or procedures on configuration of user identities.
 
-
 Prerequisites
 -------------
 
-.. cond:: k8s
+Access to MinIO Cluster
+~~~~~~~~~~~~~~~~~~~~~~~
 
-   MinIO Kubernetes Operator
-   ~~~~~~~~~~~~~~~~~~~~~~~~~
+.. tab-set::
+   
 
-   .. include:: /includes/k8s/common-operator.rst
-      :start-after: start-requires-operator-plugin
-      :end-before: end-requires-operator-plugin
+   .. tab-item:: Kubernetes
+      :sync: k8s
+
+      You must have access to the MinIO Operator Console web UI.
+      You can either expose the MinIO Operator Console service using your preferred Kubernetes routing component, or use temporary port forwarding to expose the Console service port on your local machine.
+
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      This procedure uses :mc:`mc` for performing operations on the MinIO cluster. 
+      Install ``mc`` on a machine with network access to the cluster.
+      See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+
+      This procedure assumes a configured :mc:`alias <mc alias>` for the MinIO cluster. 
 
 Active Directory / LDAP Compatible IDentity Provider
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -50,195 +72,32 @@ Active Directory / LDAP Compatible IDentity Provider
 This procedure assumes an existing Active Directory or LDAP service.
 Instructions on configuring AD/LDAP are out of scope for this procedure.
 
-.. cond:: k8s
+.. tab-set::
+   
 
-   - For AD/LDAP deployments within the same Kubernetes cluster as the MinIO Tenant, you can use Kubernetes service names to allow the MinIO Tenant to establish connectivity to the AD/LDAP service.
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-   - For AD/LDAP deployments external to the Kubernetes cluster, you must ensure the cluster supports routing communications between Kubernetes services and pods and the external network.
-     This may require configuration or deployment of additional Kubernetes network components and/or enabling access to the public internet.
+      - For AD/LDAP deployments within the same Kubernetes cluster as the MinIO Tenant, you can use Kubernetes service names to allow the MinIO Tenant to establish connectivity to the AD/LDAP service.
+
+      - For AD/LDAP deployments external to the Kubernetes cluster, you must ensure the cluster supports routing communications between Kubernetes services and pods and the external network.
+        This may require configuration or deployment of additional Kubernetes network components and/or enabling access to the public internet.
+
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      The MinIO deployment must have bidirectional network connectivity to the target AD / LDAP service.
 
 MinIO requires a read-only access keys with which it :ref:`binds <minio-external-identity-management-ad-ldap-lookup-bind>` to perform authenticated user and group queries.
 Ensure each AD/LDAP user and group intended for use with MinIO has a corresponding :ref:`policy <minio-external-identity-management-ad-ldap-access-control>` on the MinIO deployment. 
 An AD/LDAP user with no assigned policy *and* with membership in groups with no assigned policy has no permission to access any action or resource on the MinIO cluster.
 
-.. cond:: k8s
+.. _minio-external-identity-management-ad-ldap-configure:
 
-   MinIO Tenant
-   ~~~~~~~~~~~~
+Configure MinIO with Active Directory or LDAP External Identity Management
+--------------------------------------------------------------------------
 
-   This procedure assumes your Kubernetes cluster has sufficient resources to  :ref:`deploy a new MinIO Tenant <minio-k8s-deploy-minio-tenant>`.
-
-   You can also use this procedure as guidance for modifying an existing MinIO Tenant to enable AD/LDAP Identity Management.
-
-.. cond:: linux or container or macos or windows
-
-   MinIO Deployment
-   ~~~~~~~~~~~~~~~~
-
-   This procedure assumes an existing MinIO cluster running the :minio-git:`latest stable MinIO version <minio/releases/latest>`. 
-   Defer to the :ref:`minio-installation` for more complete documentation on new MinIO deployments.
-
-   This procedure *may* work as expected for older versions of MinIO.
-
-.. cond:: linux or container or macos or windows
-
-   Install and Configure ``mc`` with Access to the MinIO Cluster
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   This procedure uses :mc:`mc` for performing operations on the MinIO cluster.
-   Install ``mc`` on a machine with network access to the cluster.
-   See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
-
-   This procedure assumes a configured :mc:`alias <mc alias>` for the MinIO cluster. 
-
-.. Lightly modeled after the SSE tutorials
-
-.. cond:: k8s
-
-   .. _minio-external-identity-management-ad-ldap-configure:
-
-   .. include:: /includes/k8s/steps-configure-ad-ldap-external-identity-management.rst
-
-.. Doing this the quick and dirty way. Need to revise later to be proper full includes via stepfiles
-
-.. cond:: linux or container or macos or windows
-
-   .. _minio-external-identity-management-ad-ldap-configure:
-
-
-   Procedure
-   ---------
-
-   1) Set the Active Directory / LDAP Configuration Settings
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   Configure the AD/LDAP provider using one of the following:
-
-   * MinIO Client
-   * Environment variables
-
-   All methods require starting/restarting the MinIO deployment to apply changes.
-
-   The following tabs provide a quick reference for the available configuration methods:
-
-   .. tab-set::
-
-      .. tab-item:: MinIO Client
-
-         MinIO supports specifying the AD/LDAP provider settings using :mc:`mc idp ldap` commands.
-
-         For distributed deployments, the :mc:`mc idp ldap` command applies the configuration to all nodes in the deployment. 
-
-         The following example code sets *all* configuration settings related to configuring an AD/LDAP provider for external identity management.
-	      The minimum *required* settings are:
-
-         - :mc-conf:`server_addr <identity_ldap.server_addr>`
-         - :mc-conf:`lookup_bind_dn <identity_ldap.lookup_bind_dn>`
-         - :mc-conf:`lookup_bind_password <identity_ldap.lookup_bind_password>`
-         - :mc-conf:`user_dn_search_base_dn <identity_ldap.user_dn_search_base_dn>`
-         - :mc-conf:`user_dn_search_filter <identity_ldap.user_dn_search_filter>`
-
-         .. code-block:: shell
-            :class: copyable
-
-            mc idp ldap add ALIAS                                                   \
-               server_addr="ldaps.example.net:636"                                  \
-               lookup_bind_dn="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net"        \
-               lookup_bind_password="xxxxxxxx"                                      \
-               user_dn_search_base_dn="DC=example,DC=net"                           \
-               user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"  \
-               group_search_filter= "(&(objectClass=group)(member=%d))"             \
-               group_search_base_dn="ou=MinIO Users,dc=example,dc=net"              \
-               enabled="true"                                                       \
-               tls_skip_verify="off"                                                \
-               server_insecure=off                                                  \
-               server_starttls="off"                                                \
-               srv_record_name=""                                                   \
-               comment="Test LDAP server"
-
-         For more complete documentation on these settings, see :mc:`mc idp ldap`.
-
-      .. tab-item:: Environment Variables
-
-         MinIO supports specifying the AD/LDAP provider settings using :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
-         The :mc:`minio server` process applies the specified settings on its next startup.
-         For distributed deployments, specify these settings across all nodes in the deployment using the *same* values.
-         Any differences in server configurations between nodes will result in startup or configuration failures.
-
-         The following example code sets *all* environment variables related to configuring an AD/LDAP provider for external identity management. The minimum *required* variable are:
-
-         - :envvar:`MINIO_IDENTITY_LDAP_SERVER_ADDR`
-         - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN`
-         - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD`
-         - :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN`
-         - :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER`
-
-         .. code-block:: shell
-            :class: copyable
-
-            export MINIO_IDENTITY_LDAP_SERVER_ADDR="ldaps.example.net:636"
-            export MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net"
-            export MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN="dc=example,dc=net"
-            export MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER="(&(objectCategory=user)(sAMAccountName=%s))"
-            export MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD="xxxxxxxxx"
-            export MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER="(&(objectClass=group)(member=%d))"
-            export MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN="ou=MinIO Users,dc=example,dc=net"
-            export MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY="off"
-            export MINIO_IDENTITY_LDAP_SERVER_INSECURE="off"
-            export MINIO_IDENTITY_LDAP_SERVER_STARTTLS="off"
-            export MINIO_IDENTITY_LDAP_SRV_RECORD_NAME=""
-            export MINIO_IDENTITY_LDAP_COMMENT="LDAP test server"
-
-         For complete documentation on these variables, see :ref:`minio-server-envvar-external-identity-management-ad-ldap`
-
-   When providing an AD/LDAP group search filter, configure a filter that returns the minimum number of relevant groups for the purpose of supporting authentication.
-   Filters that return large group assignments increase the size of associated calls and resources.
-   Functions sensitive to large request or response bodies may exhibit unexpected behaviors as a result.
-
-   2) Restart the MinIO Deployment
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   You must restart the MinIO deployment to apply the configuration changes.
-
-   For MinIO Client and environment variable configuration, use the :mc-cmd:`mc admin service restart` command to restart the deployment:
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc admin service restart ALIAS
-
-   Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
-
-   3) Generate S3-Compatible Temporary Credentials using AD/LDAP Credentials
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   MinIO requires clients to authenticate using :s3-api:`AWS Signature Version 4 protocol <sig-v4-authenticating-requests.html>` with support for the deprecated Signature Version 2 protocol.
-   Specifically, clients must present a valid access key and secret key to access any S3 or MinIO administrative API, such as ``PUT``, ``GET``, and ``DELETE`` operations.
-
-   Applications can generate temporary access credentials as-needed using the :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) API endpoint and AD/LDAP user credentials. 
-   MinIO provides an example Go application :minio-git:`ldap.go <minio/blob/master/docs/sts/ldap.go>` that manages this workflow.
-
-   .. code-block:: shell
-
-      POST https://minio.example.net?Action=AssumeRoleWithLDAPIdentity
-      &LDAPUsername=USERNAME
-      &LDAPPassword=PASSWORD
-      &Version=2011-06-15
-      &Policy={}
-
-   - Replace the ``LDAPUsername`` with the username of the AD/LDAP user.
-
-   - Replace the ``LDAPPassword`` with the password of the AD/LDAP user.
-
-   - Replace the ``Policy`` with an inline URL-encoded JSON :ref:`policy <minio-policy>` that further restricts the permissions associated to the temporary credentials. 
-
-     Omit to use the  :ref:`policy whose name matches <minio-external-identity-management-ad-ldap-access-control>` the Distinguished Name (DN) of the AD/LDAP user. 
-
-   The API response consists of an XML document containing the access key, secret key, session token, and expiration date.
-   Applications can use the access key and secret key to access and perform operations on MinIO.
-
-   See the :ref:`minio-sts-assumerolewithldapidentity` for reference documentation.
-
+.. include:: /includes/baremetal/steps-configure-ad-ldap-external-identity-management.rst
 
 Disable a Configured Active Directory / LDAP Connection
 -------------------------------------------------------

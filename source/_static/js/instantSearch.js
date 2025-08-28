@@ -3,11 +3,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const searchModalEl = document.getElementById("search");
   const root = document.documentElement;
 
-  // Get the current doc platform
-  const activePlatform = document
-    .getElementsByTagName("meta")
-    ["docsearch:platform"].getAttribute("content");
-
   // Set search page title
   // TODO: Do the right way
   const pageName = document
@@ -103,8 +98,8 @@ window.addEventListener("DOMContentLoaded", () => {
     initialUiState: {
       minio: {
         refinementList: {
-          platform: [activePlatform],
-          site: "docs"
+          site: ["docs"],
+          edition: ["community"],
         },
       },
     },
@@ -128,17 +123,6 @@ window.addEventListener("DOMContentLoaded", () => {
         if (query !== "") {
           // Make search modal active
           searchModalEl.classList.add("search--focused");
-
-          // Clear the filters and select the active platform
-          setTimeout(() => {
-            const activeFilterEl = document.querySelector(
-              ".search__filters__checkbox[value='" + activePlatform + "']"
-            );
-
-            if (activeFilterEl && !activeFilterEl.checked) {
-              activeFilterEl.click();
-            }
-          }, 50);
         } else {
           // Clear the filters
           clearRefinements();
@@ -201,7 +185,6 @@ window.addEventListener("DOMContentLoaded", () => {
                   </i>
                   <div class="search__hits__text">
                     <div class="search__hits__title">${data._highlightResult.hierarchy.lvl1.value}</div>
-                    <div class="search__hits__platform">${data.platform}</div>
                   </div>
                 `;
           }
@@ -219,7 +202,6 @@ window.addEventListener("DOMContentLoaded", () => {
                   <div class="search__hits__text">
                     <div class="search__hits__title">${data._highlightResult.hierarchy.lvl2.value}</div>
                     <div class="search__hits__label">
-                      <div class="search__hits__platform">${data.platform}</div>
                       ${data.hierarchy.lvl1}
                     </div>
                   </div>
@@ -239,7 +221,6 @@ window.addEventListener("DOMContentLoaded", () => {
                   <div class="search__hits__text">
                     <div class="search__hits__title">${data._highlightResult.hierarchy.lvl3.value}</div>
                     <div class="search__hits__label">
-                      <div class="search__hits__platform">${data.platform}</div>
                       ${data.hierarchy.lvl1}
                     </div>
                   </div>
@@ -262,7 +243,6 @@ window.addEventListener("DOMContentLoaded", () => {
                       data._snippetResult.content.value
                     }</div>
                     <div class="search__hits__label">
-                      <div class="search__hits__platform">${data.platform}</div>
                       ${data.hierarchy.lvl1}
                       ${
                         data.hierarchy.lvl2
@@ -288,7 +268,7 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     }),
     instantsearch.widgets.configure({
-      filters: `site:docs`, 
+      filters: `site:docs AND edition:community`,
     })
   ]);
 
@@ -374,24 +354,9 @@ window.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Enter") {
         const searchInputEl = document.querySelector(".search__input");
         if (searchInputEl.value && document.activeElement === searchInputEl) {
-          var platform = "";
           var environment = location.hostname === "localhost" || location.hostname === "127.0.0.1" ? "dev" : "prod";
 
-          if (activePlatform === "k8s") {
-            platform = "kubernetes/upstream";
-          } else if (activePlatform === "openshift") {
-            platform = "kubernetes/openshift";
-          } else if (activePlatform === "eks") {
-            platform = "kubernetes/eks";
-          } else if (activePlatform === "gke") {
-            platform = "kubernetes/gke";
-          } else if (activePlatform === "aks") {
-            platform = "kubernetes/aks";
-          } else {
-            platform = activePlatform;
-          }
-
-          var pathname = environment === "dev" ? "/search.html" : `/docs/minio/${platform}/search.html`;
+          var pathname = environment === "dev" ? "/search.html" : `/docs/minio/search.html`;
 
           setTimeout(() => {
             window.location.pathname = pathname;

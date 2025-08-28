@@ -34,24 +34,9 @@ stage-%:
 		exit 1; \
 	fi
 
-	@if [ ! $(shell command -v mc) ]; then \
-	   echo "mc not found on this host, exiting" ; \
-		exit 1; \
-	fi
 
-	@if [ $(shell mc alias list --json docs-staging | jq '.status') = "error" ]; then \
-		echo "doc-staging alias not found on for host mc configuration, exiting" ; \
-		exit 1; \
-	fi
+	@(./stage.sh)
 
-	@if [ $(shell mc stat --json docs-staging/staging | jq '.status') = "error" ]; then \
-		echo "docs-staging/staging bucket not found, exiting" ; \
-		exit 1; \
-	fi
-
-	@echo "Copying contents of $(BUILDDIR)/$(GITDIR)/$*/html/* to docs-staging/staging/$(GITDIR)/$*/"
-	@mc cp -r $(BUILDDIR)/$(GITDIR)/$*/html/* docs-staging/staging/$(GITDIR)/$*/
-	@echo "Copy complete, visit $(STAGINGURL)/$(GITDIR)/$*/index.html"
 
 # Commenting out the older method
 # python -m http.server --directory $(BUILDDIR)/$(GITDIR)/$*/html/
@@ -65,102 +50,19 @@ stage-%:
 #   - Compile SCSS
 #   - Build docs via Sphinx
 
-linux:
+mindocs:
 	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
+	@echo "         Building for MinIO           "
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
+	@make sync-deps
+	@make sync-operator-version
 	@make sync-deps
 ifeq ($(SYNC_SDK),TRUE)
 	@make sync-sdks
 else
 	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
 endif
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-windows:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-macos:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-k8s:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-openshift:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-eks:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-gke:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-aks:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-operator-version
-	@make sync-deps
-	@npm run build
-	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@ -t k8s
-	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-container:
-	@echo "--------------------------------------"
-	@echo "Building for $@ Platform"
-	@echo "--------------------------------------"
-	@cp source/default-conf.py source/conf.py
-	@make sync-deps
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
@@ -213,31 +115,8 @@ sync-minio-server-docs:
 	@(./sync-minio-server-docs.sh)
 
 sync-minio-version:
-	@echo "Retrieving current MinIO version"
-	$(eval DEB = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.DEB.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
-	$(eval RPM = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".amd64.RPM.download' | sed "s|linux-amd64|linux-amd64/archive|g"))
-	$(eval DEBARM64 = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".arm64.DEB.download' | sed "s|linux-arm64|linux-arm64/archive|g"))
-	$(eval RPMARM64 = $(shell curl -s https://min.io/assets/downloads-minio.json | jq '.Linux."MinIO Server".arm64.RPM.download' | sed "s|linux-arm64|linux-arm64/archive|g"))
-	$(eval MINIO = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/minio/releases/latest | sed "s/https:\/\/github.com\/minio\/minio\/releases\/tag\///"))
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
-		sed -i "" "s|DEBURL|${DEB}|g" source/conf.py; \
-		sed -i "" "s|RPMURL|${RPM}|g" source/conf.py; \
-		sed -i "" "s|DEBARM64URL|${DEBARM64}|g" source/conf.py; \
-		sed -i "" "s|RPMARM64URL|${RPMARM64}|g" source/conf.py; \
-		;; \
-	*) \
-		sed -i "s|MINIOLATEST|${MINIO}|g" source/conf.py; \
-		sed -i "s|DEBURL|${DEB}|g" source/conf.py; \
-		sed -i "s|RPMURL|${RPM}|g" source/conf.py; \
-		sed -i "s|DEBARM64URL|${DEBARM64}|g" source/conf.py; \
-		sed -i "s|RPMARM64URL|${RPMARM64}|g" source/conf.py; \
-		;; \
-	esac
+	@echo "Retrieving MinIO latest version and download URLs"
+	@(./sync-minio-version.sh)
 
 sync-sdks:
 	@(./sync-docs.sh)
@@ -249,7 +128,7 @@ sync-operator-crd:
 sync-deps:
 # C++ and Rust repos do not have any releases yet.
 	@echo "Synchronizing all external dependencies"
-	@make sync-minio-version
+#	@make sync-minio-version
 	@make sync-kes-version
 	@make sync-minio-server-docs
 
@@ -257,8 +136,7 @@ sync-deps:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@echo -e "----------------------------------------"
-	@echo -e "Specify one of the following supported build outputs"
-	@echo -e "- make linux\n- make macos\n- make windows\n- make k8s\n- make openshift\n- make eks\n- make gke\n- make aks\n- make container"
+	@echo -e "make mindocs"
 	@echo -e "Clean targets with 'make clean-<target>'"
 	@echo -e "Clean all targets with 'make clean'"
 	@echo -e "----------------------------------------"

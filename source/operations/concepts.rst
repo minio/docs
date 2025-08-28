@@ -37,13 +37,9 @@ MinIO can deploy to three types of topologies:
 
 #. :ref:`Multi Node Multi Drive <minio-mnmd>`, multiple MinIO servers with multiple mounted drives or volumes for data
 
-   .. cond:: linux
+   For Baremetal infrastructure, you can install and manage distributed MinIO deployments using Ansible, Terraform, or manual processes  
 
-      For example, a production deployment using Ansible, Terraform, or manual processes  
-
-   .. cond:: k8s
-
-      For example, a production deployment using Kubernetes to manage and deploy pods and their associated persistent volume claims.
+   For Kubernetes infrastructure, use the MinIO Operator to manage and deploy distributed MinIO Tenants.
 
 How does a distributed MinIO deployment work?
 ---------------------------------------------
@@ -109,13 +105,7 @@ Expansion consists of adding one or more :ref:`server pools <minio-intro-server-
 Each server pool consists of dedicated nodes and storage that contribute to the overall capacity of the deployment.
 Once you create a server pool you cannot change its size, but you can add or remove capacity at any time by adding or decommissioning pools.
 
-.. cond:: linux
-
-   See :ref:`Expand a MinIO deployment <expand-minio-distributed>` for more information
-
-.. cond:: k8s
-
-   See :ref:`Expand a MinIO Tenant <minio-k8s-expand-minio-tenant>` for more information.
+See :ref:`Baremetal: Expand a MinIO deployment <expand-minio-distributed>` and :ref:`Kubernetes: Expand a MinIO Tenant <minio-k8s-expand-minio-tenant>` for more information on expansion in Baremetal and Kubernetes infrastructures respectively.
 
 For deployments which have multiple server pools, you can :ref:`decommission <minio-decommissioning>` the older pools and migrate that data to the newer pools in the deployment.
 Once started, decommissioning cannot be stopped.

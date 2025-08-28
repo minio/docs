@@ -97,11 +97,6 @@ Administrators typically control the creation and configuration of buckets.
 Client applications can then use :ref:`S3-compatible SDKs <minio-drivers>` to create, list, retrieve, and :ref:`delete <minio-object-delete>` objects on the MinIO deployment.
 Clients therefore drive the overall hierarchy of data within a given bucket or prefix, where Administrators can exercise control using :ref:`policies <minio-policy>` to grant or deny access to an action or resource.
 
-.. cond:: windows
-
-   MinIO does not support the ``\`` or ``:`` characters in object names, regardless of support for those characters in Windows filesystems.
-   Use ``/`` as a delimiter in object names to have MinIO automatically create a folder structure using :term:`prefixes <prefix>`.
-
 MinIO has no hard :ref:`thresholds <minio-server-limits>` on the number of buckets, objects, or prefixes on a given deployment.
 The relative performance of the hardware and networking underlying the MinIO deployment may create a practical limit to the number of objects in a given prefix or bucket.
 Specifically, hardware using slower drives or network infrastructures tend to exhibit poor performance in buckets or prefixes with a flat hierarchy of objects.
@@ -117,8 +112,13 @@ Consider the following points as general guidance for client applications worklo
 
 For a deeper discussion on the benefits of limiting prefix contents, see the article on :s3-docs:`optimizing S3 performance <optimizing-performance.html>`.
 
+.. note::
+
+   MinIO does not support the ``\`` or ``:`` characters in object names, regardless of support for those characters in Windows filesystems.
+   Use ``/`` as a delimiter in object names to have MinIO automatically create a folder structure using :term:`prefixes <prefix>`.
+
 Object Versioning
------------------ 
+-----------------
 
 .. image:: /images/retention/minio-versioning-multiple-versions.svg
    :alt: Object with Multiple Versions

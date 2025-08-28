@@ -97,13 +97,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
       readModeLs = localStorage.getItem("read-mode");
 
       if (window.innerWidth < 1280) {
-        if (readModeLs == null || readModeLs == "false") {
-          document.documentElement.classList.add("read-mode");
-        }
+        document.documentElement.classList.add("read-mode");
       } else {
-        if (readModeLs == "false") {
-          document.documentElement.classList.remove("read-mode");
-        }
+        document.documentElement.classList.remove("read-mode");
       }
 
 			// Re-calculate sidebar height
@@ -322,7 +318,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       else if (page_title === "Software Development Kits (SDK)") {
         list[i].insertAdjacentElement('beforebegin',developerPersona);
       }
-      else if (page_title === "MinIO Client") {
+      else if (page_title === "Kubernetes Reference") {
         list[i].insertAdjacentElement('beforebegin',referencePersona);
       }
     }

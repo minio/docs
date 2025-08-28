@@ -46,12 +46,11 @@ For example, consider a claim with the following key-value assignment:
 
 The specified policy claim directs MinIO to attach the policies with names matching ``readwrite_data``, ``read_analytics``, and ``read_logs`` to the authenticated user.
 
-.. cond:: linux or container or macos or windows
 
-   You can set a custom policy claim using the 
-   :envvar:`MINIO_IDENTITY_OPENID_CLAIM_NAME` environment variable
-   *or* by using :mc-cmd:`mc admin config set` to set the 
-   :mc-conf:`identity_openid claim_name <identity_openid.claim_name>` setting.
+You can set a custom policy claim using the 
+:envvar:`MINIO_IDENTITY_OPENID_CLAIM_NAME` environment variable
+*or* by using :mc-cmd:`mc admin config set` to set the 
+:mc-conf:`identity_openid claim_name <identity_openid.claim_name>` setting.
 
 See :ref:`minio-external-identity-management-openid-access-control` for more information on mapping MinIO policies to an OIDC-managed identity.
 
@@ -77,36 +76,35 @@ Querying the Active Directory / LDAP Service
 MinIO queries the configured Active Directory / LDAP server to verify the credentials specified by the application and optionally return a list of groups in which the user has membership.
 This process, called Lookup-Bind mode, uses an AD/LDAP user with minimal permissions, only sufficient to authenticate with the AD/LDAP server for user and group lookups.
 
-.. cond:: linux or container or macos or windows
 
-   The following tabs provide a reference of the environment variables and
-   configuration settings required for enabling Lookup-Bind mode. 
+The following tabs provide a reference of the environment variables and
+configuration settings required for enabling Lookup-Bind mode. 
 
-   .. tab-set::
+.. tab-set::
 
-      .. tab-item:: Environment Variable
+   .. tab-item:: Environment Variable
 
-         - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN`
-         - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD`
-         - :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN`
-         - :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER`
+      - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN`
+      - :envvar:`MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD`
+      - :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN`
+      - :envvar:`MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER`
 
-         See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
-         reference documentation for more information on these variables. The
-         :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
-         instructions on setting these values.
+      See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
+      reference documentation for more information on these variables. The
+      :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
+      instructions on setting these values.
 
-      .. tab-item:: Configuration Setting
+   .. tab-item:: Configuration Setting
 
-         - :mc-conf:`identity_ldap lookup_bind_dn <identity_ldap.lookup_bind_dn>`
-         - :mc-conf:`identity_ldap lookup_bind_password <identity_ldap.lookup_bind_password>`
-         - :mc-conf:`identity_ldap user_dn_search_base_dn <identity_ldap.user_dn_search_base_dn>`
-         - :mc-conf:`identity_ldap user_dn_search_filter <identity_ldap.user_dn_search_filter>`
+      - :mc-conf:`identity_ldap lookup_bind_dn <identity_ldap.lookup_bind_dn>`
+      - :mc-conf:`identity_ldap lookup_bind_password <identity_ldap.lookup_bind_password>`
+      - :mc-conf:`identity_ldap user_dn_search_base_dn <identity_ldap.user_dn_search_base_dn>`
+      - :mc-conf:`identity_ldap user_dn_search_filter <identity_ldap.user_dn_search_filter>`
 
-         See the :mc-conf:`identity_ldap` reference documentation for more
-         information on these settings. The
-         :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
-         instructions on setting these variables.
+      See the :mc-conf:`identity_ldap` reference documentation for more
+      information on these settings. The
+      :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
+      instructions on setting these variables.
 
 .. _minio-external-identity-management-ad-ldap-access-control:
 
@@ -137,36 +135,30 @@ Group Lookup
 MinIO supports querying the Active Directory / LDAP server for a list of groups in which the authenticated user has membership. 
 MinIO attempts to match existing :ref:`policies <minio-policy>` to each group DN and assigns each matching policy to the authenticated user.
 
-.. cond:: k8s
+The following tabs provide a reference of the environment variables and configuration settings required for enabling group lookups:
 
-   The MinIO Operator Console provides the necessary fields for configuring Group Lookup as part of configuring AD/LDAP identity management for new or existing MinIO Tenants.
+.. tab-set::
 
-.. cond:: linux or container or macos or windows
+   .. tab-item:: Environment Variable
 
-   The following tabs provide a reference of the environment variables and configuration settings required for enabling group lookups:
+      - :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN`
+      - :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER`
 
-   .. tab-set::
+      See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
+      reference documentation for more information on these variables. The
+      :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
+      instructions on setting these values.
 
-      .. tab-item:: Environment Variable
-
-         - :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN`
-         - :envvar:`MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER`
-
-         See the :ref:`minio-server-envvar-external-identity-management-ad-ldap`
-         reference documentation for more information on these variables. The
-         :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
-         instructions on setting these values.
-
-      .. tab-item:: Configuration Setting
+   .. tab-item:: Configuration Setting
 
 
-         - :mc-conf:`identity_ldap group_search_base_dn <identity_ldap.group_search_base_dn>`
-         - :mc-conf:`identity_ldap group_search_filter <identity_ldap.group_search_filter>`
+      - :mc-conf:`identity_ldap group_search_base_dn <identity_ldap.group_search_base_dn>`
+      - :mc-conf:`identity_ldap group_search_filter <identity_ldap.group_search_filter>`
 
-         See the :mc-conf:`identity_ldap` reference documentation for more
-         information on these settings. The
-         :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
-         instructions on setting these variables.
+      See the :mc-conf:`identity_ldap` reference documentation for more
+      information on these settings. The
+      :ref:`minio-authenticate-using-ad-ldap-generic` tutorial includes complete
+      instructions on setting these variables.
 
 .. toctree::
    :glob:

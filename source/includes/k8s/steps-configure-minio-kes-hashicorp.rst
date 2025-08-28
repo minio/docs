@@ -1,53 +1,41 @@
-Deploy MinIO Tenant with Server-Side Encryption
------------------------------------------------
+#. Review the Tenant CRD
 
-1) Access the Operator Console
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Review the :ref:`Tenant CRD <minio-operator-crd>` ``TenantSpec.kes`` object, the ``TenantSpec.configuration`` object, and the :minio-docs:`KES Configuration reference</kes/tutorials/configuration>`.
 
-Temporarily forward traffic between the local host machine and the MinIO Operator Console and retrieve the JWT token for your Operator deployment.
-For instructions, see :ref:`Configure access to the Operator Console service <minio-k8s-deploy-operator-access-console>`.
+   You must prepare all necessary configurations associated to your external Key Management Service of choice before proceeding.
 
-Open your browser to the temporary URL and enter the JWT Token into the login page.
-You should see the :guilabel:`Tenants` page:
+#. Create or Modify your Tenant YAML to set the values of ``KesConfig`` as necessary:
 
-.. image:: /images/k8s/operator-dashboard.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: MinIO Operator Console
+   You must modify your Tenant YAML or ``Kustomize`` templates to reflect the necessary KES configuration.
+   The following example is taken from the :minio-git:`MinIO Operator Kustomize examples </operator/blob/master/examples/kustomization/tenant-kes-encryption/tenant.yaml>`
 
-Click the :guilabel:`+ Create Tenant` to start creating a MinIO Tenant.
+   .. code-block:: yaml
 
-2) Complete the :guilabel:`Encryption` Section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      kes:
+         image: "" # minio/kes:2024-06-17T15-47-05Z
+         env: [ ]
+         replicas: 2
+         kesSecret:
+            name: kes-configuration
+         imagePullPolicy: "IfNotPresent"
 
-Reference the :ref:`Deploy a MinIO Tenant <minio-k8s-deploy-minio-tenant>` procedure for complete documentation of other Tenant settings.
+   The ``kes-configuration`` secret must reference a Kubernetes Opaque Secret which contains a ``stringData`` object with the full KES configuration as ``server-config.yaml``.
+   The ``keystore`` field must contain the full configuration associated with your preferred Key Management System.
 
-To enable |SSE| with a :kes-docs:`supported KMS target <#supported-kms-targets>` during Tenant deployment, select the :guilabel:`Encryption` section and toggle the switch to :guilabel:`Enabled`. 
-You can then select the Radio button for the chosen KMS provider to display configuration settings for that provider.
+   Reference :minio-git:`the Kustomize example <operator/blob/master/examples/kustomization/tenant-kes-encryption/kes-configuration-secret.yaml>` for additional guidance.
 
-.. image:: /images/k8s/operator-create-tenant-encryption.png
-   :align: center
-   :width: 70%
-   :class: no-scaled-link
-   :alt: MinIO Operator Console - Create a Tenant - Encryption Section
+#. Create or Modify your Tenant YAML to set the values of ``TenantSpec.configuration`` as necessary.
 
-An asterisk ``*`` marks required fields.
+   TODO
 
-Refer to the Configuration References section of the tutorial for your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` for more information on the configuration options for your KMS.
+#. Generate a New Encryption Key
 
-Once you have completed the configuration, you can finish any remaining sections of :ref:`Tenant Deployment <minio-k8s-deploy-minio-tenant>`.
+   .. include:: /includes/k8s/common-minio-kes.rst
+      :start-after: start-kes-generate-key-desc
+      :end-before: end-kes-generate-key-desc
 
-3) Generate a New Encryption Key
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#. Enable SSE-KMS for a Bucket
 
-.. include:: /includes/k8s/common-minio-kes.rst
-   :start-after: start-kes-generate-key-desc
-   :end-before: end-kes-generate-key-desc
-
-4) Enable SSE-KMS for a Bucket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: /includes/k8s/common-minio-kes.rst
-   :start-after: start-kes-enable-sse-kms-desc
-   :end-before: end-kes-enable-sse-kms-desc
+   .. include:: /includes/k8s/common-minio-kes.rst
+      :start-after: start-kes-enable-sse-kms-desc
+      :end-before: end-kes-enable-sse-kms-desc

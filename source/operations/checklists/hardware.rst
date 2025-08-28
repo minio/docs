@@ -43,17 +43,22 @@ Workloads that benefit from storing aged data on lower-cost hardware should inst
 
    See our `Reference Hardware <https://min.io/product/reference-hardware#hardware?ref-docs>`__ page for a curated selection of servers and storage components from our hardware partners.
 
-.. cond:: k8s
+.. tab-set::
+   :class: parent
 
-   .. include:: /includes/common/common-checklist.rst
-      :start-after: start-k8s-hardware-checklist
-      :end-before: end-k8s-hardware-checklist
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-.. cond:: not k8s
+      .. include:: /includes/common/common-checklist.rst
+         :start-after: start-k8s-hardware-checklist
+         :end-before: end-k8s-hardware-checklist
 
-   .. include:: /includes/common/common-checklist.rst
-      :start-after: start-linux-hardware-checklist
-      :end-before: end-linux-hardware-checklist
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      .. include:: /includes/common/common-checklist.rst
+         :start-after: start-linux-hardware-checklist
+         :end-before: end-linux-hardware-checklist
 
 .. important:: 
 
@@ -202,142 +207,193 @@ Storage
    :start-after: start-exclusive-drive-access
    :end-before: end-exclusive-drive-access
 
-.. cond:: k8s
+Recommended Storage Mediums
++++++++++++++++++++++++++++
 
-   MinIO recommends provisioning a storage class for each MinIO Tenant that meets the performance objectives for that tenant.
-
-   Where possible, configure the Storage Class, CSI, or other provisioner underlying the PV to format volumes as XFS to ensure best performance.
-
-   Ensure a consistent underlying storage type (NVMe, SSD, HDD) for all PVs provisioned in a Tenant.
+.. tab-set::
    
-   Ensure the same presented capacity of each PV across all nodes in each Tenant :ref:`server pool <minio-intro-server-pool>`.
-   MinIO limits the maximum usable size per PV to the smallest PV in the pool.
-   For example, if a pool has 15 10TB PVs and 1 1TB PV, MinIO limits the per-PV capacity to 1TB.
 
-.. cond:: not k8s
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-   Recommended Storage Mediums
-   +++++++++++++++++++++++++++
+      MinIO recommends provisioning a storage class for each MinIO Tenant that meets the performance objectives for that tenant.
 
-   MinIO recommends using flash-based storage (NVMe or SSD) for all workload types and scales.
-   Workloads that require high performance should prefer NVMe over SSD.
+      Where possible, configure the Storage Class, CSI, or other provisioner underlying the PV to format volumes as XFS to ensure best performance.
 
-   MinIO deployments using HDD-based storage are best suited as cold-tier targets for :ref:`Object Transition ("Tiering") <minio-lifecycle-management-tiering>` of aged data.
-   HDD storage typically does not provide the necessary performance to meet the expectations of modern workloads, and any cost efficiencies at scale are offset by the performance constraints of the medium. 
-
-   Use Direct-Attached "Local" Storage (DAS)
-   +++++++++++++++++++++++++++++++++++++++++
-
-   :abbr:`DAS (Direct-Attached Storage)`, such as locally-attached JBOD (Just a Bunch of Disks) arrays, provide significant performance and consistency advantages over networked (NAS, SAN, NFS) storage.
-
-   .. dropdown:: Network File System Volumes Break Consistency Guarantees
-      :class-title: note
-
-      MinIO's strict **read-after-write** and **list-after-write** consistency model requires local drive filesystems.
-      MinIO cannot provide consistency guarantees if the underlying storage volumes are NFS or a similar network-attached storage volume. 
-
-   Use XFS-Formatted Drives with Labels
-   ++++++++++++++++++++++++++++++++++++
-
-   Format drives as XFS and present them to MinIO as a :abbr:`JBOD (Just a Bunch of Disks)` array with no RAID or other pooling configurations.
-   Using any other type of backing storage (SAN/NAS, ext4, RAID, LVM) typically results in a reduction in performance, reliability, predictability, and consistency.
-
-   When formatting XFS drives, apply a unique label per drive.
-   For example, the following command formats four drives as XFS and applies a corresponding drive label.
-
-   .. code-block:: shell
-
-      mkfs.xfs /dev/sdb -L MINIODRIVE1
-      mkfs.xfs /dev/sdc -L MINIODRIVE2
-      mkfs.xfs /dev/sdd -L MINIODRIVE3
-      mkfs.xfs /dev/sde -L MINIODRIVE4
-
-   Mount Drives using ``/etc/fstab``
-   +++++++++++++++++++++++++++++++++
-
-   MinIO **requires** that drives maintain their ordering at the mounted position across restarts.
-   MinIO **does not** support arbitrary migration of a drive with existing MinIO data to a new mount position, whether intentional or as the result of OS-level behavior.
-
-   You **must** use ``/etc/fstab`` or a similar mount control system to mount drives at a consistent path.
-   For example:
-
-   .. code-block:: shell
-      :class: copyable
-
-      $ nano /etc/fstab
-
-      # <file system>        <mount point>    <type>  <options>         <dump>  <pass>
-      LABEL=MINIODRIVE1      /mnt/drive-1     xfs     defaults,noatime  0       2
-      LABEL=MINIODRIVE2      /mnt/drive-2     xfs     defaults,noatime  0       2
-      LABEL=MINIODRIVE3      /mnt/drive-3     xfs     defaults,noatime  0       2
-      LABEL=MINIODRIVE4      /mnt/drive-4     xfs     defaults,noatime  0       2
-
-   You can use ``mount -a`` to mount those drives at those paths during initial setup.
-   The Operating System should otherwise mount these drives as part of the node startup process.
-
-   MinIO **strongly recommends** using label-based mounting rules over UUID-based rules.
-   Label-based rules allow swapping an unhealthy or non-working drive with a replacement that has matching format and label.
-   UUID-based rules require editing the ``/etc/fstab`` file to replace mappings with the new drive UUID.
-
-   .. note:: 
-
-      Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
-      For example, an AWS ECS instance with mounted persistent EBS volumes may not boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
-
-      You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
+      Ensure a consistent underlying storage type (NVMe, SSD, HDD) for all PVs provisioned in a Tenant.
       
-      You should not use this option on systems with locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
+      Ensure the same presented capacity of each PV across all nodes in each Tenant :ref:`server pool <minio-intro-server-pool>`.
+      MinIO limits the maximum usable size per PV to the smallest PV in the pool.
+      For example, if a pool has 15 10TB PVs and 1 1TB PV, MinIO limits the per-PV capacity to 1TB.
 
-   Disable XFS Retry On Error
-   ++++++++++++++++++++++++++
+   .. tab-item:: Baremetal
+      :sync: baremetal
 
-   MinIO **strongly recommends** disabling `retry-on-error <https://docs.kernel.org/admin-guide/xfs.html?highlight=xfs#error-handling>`__ behavior using the ``max_retries`` configuration for the following error classes:
+      MinIO recommends using flash-based storage (NVMe or SSD) for all workload types and scales.
+      Workloads that require high performance should prefer NVMe over SSD.
+
+      MinIO does not recommends HDD storage for production environments.
+      HDD storage typically does not provide the necessary performance to meet the expectations of modern workloads, and any cost efficiencies at scale are offset by the performance constraints of the medium. 
+
+Prefer Direct-Attached "Local" Storage (DAS)
+++++++++++++++++++++++++++++++++++++++++++++
+
+:abbr:`DAS (Direct-Attached Storage)`, such as locally-attached JBOD (Just a Bunch of Disks) arrays, provide significant performance and consistency advantages over networked (NAS, SAN, NFS) storage.
+
+.. tab-set::
    
-   - ``EIO`` Error when reading or writing
-   - ``ENOSPC`` Error no space left on device
-   - ``default`` All other errors
 
-   The default ``max_retries`` setting typically directs the filesystem to retry-on-error indefinitely instead of propagating the error.
-   MinIO can handle XFS errors appropriately, such that the retry-on-error behavior introduces at most unnecessary latency or performance degradation. 
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-   The following script iterates through all drives at the specified mount path and sets the XFS ``max_retries`` setting to ``0`` or "fail immediately on error" for the recommended error classes.
-   The script ignores any drives not mounted, either manually or through ``/etc/fstab``.
-   Modify the ``/mnt/drive`` line to match the pattern used for your MinIO drives.
+      While MinIO Tenants can make use of remote Persistent Volume (PV) resources, the cost of performing I/O over the network typically constrains overall performance.
 
-   .. code-block:: bash
-      :class: copyable
+      MinIO strongly recommends using CSIs which can provision storage attached to the worker node on which Kubernetes schedules your MinIO pods, such as :minio-docs:`MinIO DirectPV <directpv>`.
 
-      #!/bin/bash
+      For all other cases, make every effort possible to select a CSI which presents the storage to MinIO as if it were a locally-attached filesystem.
+      CSIs which add layers of software or translations between MinIO and the OS-level storage access APIs necessarily increase the complexity of the syste and can contribute to unexpected or undesired behavior.
 
-      for i in $(df -h | grep /mnt/drive | awk '{ print $1 }'); do
-            mountPath="$(df -h | grep $i | awk '{ print $6 }')"
-            deviceName="$(basename $i)"
-            echo "Modifying xfs max_retries and retry_timeout_seconds for drive $i mounted at $mountPath"
-            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/EIO/max_retries
-            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/max_retries
-            echo 0 > /sys/fs/xfs/$deviceName/error/metadata/default/max_retries
-      done
-      exit 0
+   .. tab-item:: Baremetal
+      :sync: baremetal
 
-   You must run this script on all MinIO nodes and configure the script to re-run on reboot, as Linux Operating Systems do not typically persist these changes.
-   You can use a ``cron`` job with the ``@reboot`` timing to run the above script whenever the node restarts and ensure all drives have retry-on-error disabled.
-   Use ``crontab -e`` to create the following job, modifying the script path to match that on each node:
+      Configure the JBOD arrays without any RAID, pooling, or similar software-level layers, such that the storage is presented directly to MinIO.
 
-   .. code-block:: shell
-      :class: copyable
+      For virtual machines or systems that require provising storage as a virtual volume, MinIO recommends using thick LUNs only.
 
-      @reboot /opt/minio/xfs-retry-settings.sh
+.. dropdown:: Network File System Volumes Break Consistency Guarantees
+   :class-title: note
 
-   Use Consistent Drive Type and Capacity
-   ++++++++++++++++++++++++++++++++++++++
+   MinIO's strict **read-after-write** and **list-after-write** consistency model requires local drive filesystems.
+   MinIO cannot provide consistency guarantees if the underlying storage volumes are NFS or a similar network-attached storage volume. 
 
-   Ensure a consistent drive type (NVMe, SSD, HDD) for the underlying storage in a MinIO deployment.
-   MinIO does not distinguish between storage types and does not support configuring "hot" or "warm" drives within a single deployment.
-   Mixing drive types typically results in performance degradation, as the slowest drives in the deployment become a bottleneck regardless of the capabilities of the faster drives.
 
-   Use the same capacity and type of drive across all nodes in each MinIO :ref:`server pool <minio-intro-server-pool>`. 
-   MinIO limits the maximum usable size per drive to the smallest size in the deployment.
-   For example, if a deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
+Use XFS-Formatted Drives with Consistent Mounting
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. tab-set::
+
+   .. tab-item:: Kubernetes
+      :sync: k8s
+
+      MinIO recommends formatting the drives underlying MinIO Persistent Volumes as ``xfs``.
+
+      If using a CSI, review the documentation for that CSI and ensure it supports specifying the ``xfs`` filesystem.
+      MinIO strongly recommends avoiding any CSI which formats drives as ``ext4``, ``btrfs`` or other filesystems.
+
+      MinIO expects all provisioned Persistent Volumes (PV) to be intended for its exclusive use, where the underlying storage medium guarantees access to the stored data at the assigned mount path.
+      Modifications to the underlying storage medium, including but not limited to external or third-party applications or the arbitrary re-mounting of locally-attached storage, may result in unexpected behavior or data loss.
+
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      Format drives as XFS and present them to MinIO as a :abbr:`JBOD (Just a Bunch of Disks)` array with no RAID or other pooling configurations.
+      Using any other type of backing storage (SAN/NAS, ext4, RAID, LVM) typically results in a reduction in performance, reliability, predictability, and consistency.
+
+      When formatting XFS drives, apply a unique label per drive.
+      For example, the following command formats four drives as XFS and applies a corresponding drive label.
+
+      .. code-block:: shell
+
+         mkfs.xfs /dev/sdb -L MINIODRIVE1
+         mkfs.xfs /dev/sdc -L MINIODRIVE2
+         mkfs.xfs /dev/sdd -L MINIODRIVE3
+         mkfs.xfs /dev/sde -L MINIODRIVE4
+
+      MinIO **requires** that drives maintain their ordering at the mounted position across restarts.
+      MinIO **does not** support arbitrary migration of a drive with existing MinIO data to a new mount position, whether intentional or as the result of OS-level behavior.
+
+      You **must** use ``/etc/fstab`` or a similar mount control system to mount drives at a consistent path.
+      For example:
+
+      .. code-block:: shell
+         :class: copyable
+
+         $ nano /etc/fstab
+
+         # <file system>        <mount point>    <type>  <options>         <dump>  <pass>
+         LABEL=MINIODRIVE1      /mnt/drive-1     xfs     defaults,noatime  0       2
+         LABEL=MINIODRIVE2      /mnt/drive-2     xfs     defaults,noatime  0       2
+         LABEL=MINIODRIVE3      /mnt/drive-3     xfs     defaults,noatime  0       2
+         LABEL=MINIODRIVE4      /mnt/drive-4     xfs     defaults,noatime  0       2
+
+      You can use ``mount -a`` to mount those drives at those paths during initial setup.
+      The Operating System should otherwise mount these drives as part of the node startup process.
+
+      MinIO **strongly recommends** using label-based mounting rules over UUID-based rules.
+      Label-based rules allow swapping an unhealthy or non-working drive with a replacement that has matching format and label.
+      UUID-based rules require editing the ``/etc/fstab`` file to replace mappings with the new drive UUID.
+
+      .. note:: 
+
+         Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
+         For example, an AWS ECS instance with mounted persistent EBS volumes may not boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
+
+         You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
+         
+         You should not use this option on systems with locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
+
+Disable XFS Retry On Error
+++++++++++++++++++++++++++
+
+MinIO **strongly recommends** disabling `retry-on-error <https://docs.kernel.org/admin-guide/xfs.html?highlight=xfs#error-handling>`__ behavior using the ``max_retries`` configuration for the following error classes:
+
+- ``EIO`` Error when reading or writing
+- ``ENOSPC`` Error no space left on device
+- ``default`` All other errors
+
+The default ``max_retries`` setting typically directs the filesystem to retry-on-error indefinitely instead of propagating the error.
+MinIO can handle XFS errors appropriately, such that the retry-on-error behavior introduces at most unnecessary latency or performance degradation. 
+
+
+.. tab-set::
+   
+
+   .. tab-item:: Kubernetes
+      :sync: k8s
+
+      Defer to the documentation for your preferred CSI or StorageClass on options for configuring filesystem-level settings.
+
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      The following script iterates through all drives at the specified mount path and sets the XFS ``max_retries`` setting to ``0`` or "fail immediately on error" for the recommended error classes.
+      The script ignores any drives not mounted, either manually or through ``/etc/fstab``.
+      Modify the ``/mnt/drive`` line to match the pattern used for your MinIO drives.
+
+      .. code-block:: bash
+         :class: copyable
+
+         #!/bin/bash
+
+         for i in $(df -h | grep /mnt/drive | awk '{ print $1 }'); do
+               mountPath="$(df -h | grep $i | awk '{ print $6 }')"
+               deviceName="$(basename $i)"
+               echo "Modifying xfs max_retries and retry_timeout_seconds for drive $i mounted at $mountPath"
+               echo 0 > /sys/fs/xfs/$deviceName/error/metadata/EIO/max_retries
+               echo 0 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/max_retries
+               echo 0 > /sys/fs/xfs/$deviceName/error/metadata/default/max_retries
+         done
+         exit 0
+
+      You must run this script on all MinIO nodes and configure the script to re-run on reboot, as Linux Operating Systems do not typically persist these changes.
+      You can use a ``cron`` job with the ``@reboot`` timing to run the above script whenever the node restarts and ensure all drives have retry-on-error disabled.
+      Use ``crontab -e`` to create the following job, modifying the script path to match that on each node:
+
+      .. code-block:: shell
+         :class: copyable
+
+         @reboot /opt/minio/xfs-retry-settings.sh
+
+Use Consistent Drive Type and Capacity
+++++++++++++++++++++++++++++++++++++++
+
+Ensure a consistent drive type (NVMe, SSD, HDD) for the underlying storage in a MinIO deployment.
+MinIO does not distinguish between storage types and does not support configuring "hot" or "warm" drives within a single deployment.
+Mixing drive types typically results in performance degradation, as the slowest drives in the deployment become a bottleneck regardless of the capabilities of the faster drives.
+
+Use the same capacity and type of drive across all nodes in each MinIO :ref:`server pool <minio-intro-server-pool>`. 
+MinIO limits the maximum usable size per drive to the smallest size in the deployment.
+For example, if a deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
 
 Recommended Hardware Tests
 --------------------------
@@ -468,7 +524,7 @@ Recommended tools for MinIO subscriptions
 .. important::
 
    The tools noted in this section **require** a MinIO subscription.
-   MinIO strongly recommends all production deployments use `AIStor Object Store <https://min.io/docs/aistor-custom/object-store/>`__  with their SUBNET license.
+   MinIO strongly recommends all production deployments use `AIStor Object Store <https://docs.min.io/community/minio-object-store/index.html>`__  with their SUBNET license.
    For more information, see the `MinIO AIStor pricing page <https://min.io/pricing?jmp=docs>`__.
 
 #. Health diagnostic tool

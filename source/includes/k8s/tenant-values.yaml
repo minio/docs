@@ -122,7 +122,7 @@ tenant:
   ###
   # Top level key for configuring MinIO Pool(s) in this Tenant.
   #
-  # See `Operator CRD: Pools <https://min.io/docs/minio/kubernetes/upstream/reference/operator-crd.html#pool>`__ for more information on all subfields.
+  # See `Operator CRD: Pools <https://docs.min.io/community/minio-object-store/reference/operator-crd.html#pool>`__ for more information on all subfields.
   pools:
     ###
     # The number of MinIO Tenant Pods / Servers in this pool.
@@ -244,7 +244,7 @@ tenant:
     #
     # This is used by MinIO to verify TLS connections from clients using those CAs
     # If you omit this and have clients using TLS certificates minted by an external CA, those connections may fail with warnings around certificate verification.
-    # See `Operator CRD: TenantSpec <https://min.io/docs/minio/kubernetes/upstream/reference/operator-crd.html#tenantspec>`__.
+    # See `Operator CRD: TenantSpec <https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec>`__.
     externalCaCertSecret: [ ]
     ###
     # Specify an array of Kubernetes secrets, where each entry corresponds to a secret contains the TLS private key and public certificate pair.
@@ -253,14 +253,14 @@ tenant:
     # 
     # If you omit this field *and* set ``requestAutoCert`` to false, the Tenant starts without TLS.
     #
-    # See `Operator CRD: TenantSpec <https://min.io/docs/minio/kubernetes/upstream/reference/operator-crd.html#tenantspec>`__.
+    # See `Operator CRD: TenantSpec <https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec>`__.
     #
     # .. important::
     #
     #    The MinIO Operator may output TLS connectivity errors if it cannot trust the Certificate Authority (CA) which minted the custom certificates.
     #
     #    You can pass the CA to the Operator to allow it to trust that cert.
-    #    See `Self-Signed, Internal, and Private Certificates <https://min.io/docs/minio/kubernetes/upstream/operations/network-encryption.html#self-signed-internal-and-private-certificates>`__ for more information.
+    #    See `Self-Signed, Internal, and Private Certificates <https://docs.min.io/community/minio-object-store/operations/network-encryption.html#self-signed-internal-private-certificates-and-public-cas-with-intermediate-certificates>`__ for more information.
     #    This step may also be necessary for globally trusted CAs where you must provide intermediate certificates to the Operator to help build the full chain of trust.
     externalCertSecret: [ ]
     ###
@@ -276,11 +276,11 @@ tenant:
     # MinIO defaults to using the internal Kubernetes DNS name for the pod
     # The default DNS name format is typically ``*.minio.default.svc.cluster.local``.
     #
-    # See `Operator CRD: CertificateConfig <https://min.io/docs/minio/kubernetes/upstream/reference/operator-crd.html#certificateconfig>`__
+    # See `Operator CRD: CertificateConfig <https://docs.min.io/community/minio-object-store/reference/operator-crd.html#certificateconfig>`__
     certConfig: { }
   ###
   # MinIO features to enable or disable in the MinIO Tenant
-  # See `Operator CRD: Features <https://min.io/docs/minio/kubernetes/upstream/reference/operator-crd.html#features>`__.
+  # See `Operator CRD: Features <https://docs.min.io/community/minio-object-store/reference/operator-crd.html#features>`__.
   features:
     bucketDNS: false
     domains: { }

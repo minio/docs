@@ -27,70 +27,39 @@ Server-Side Object Encryption with KES
 
 .. Conditionals to handle the slight divergences in procedures between platforms.
 
-.. cond:: linux
+.. tab-set::
+   :class: parent
 
-   This procedure provides guidance for deploying MinIO configured to use KES and enable :ref:`Server Side Encryption <minio-sse-data-encryption>`.
-   For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-   As part of this procedure, you will:
+      This procedure assumes you have access to a Kubernetes cluster with an active MinIO Operator installation.
+      For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
 
-   #. Create a new |EK| for use with |SSE|.
+      As part of this procedure, you will:
 
-   #. Create or modify a MinIO deployment with support for |SSE| using |KES|.
-      Defer to the :ref:`Deploy Distributed MinIO <minio-mnmd>` tutorial for guidance on production-ready MinIO deployments.
+      #. Create or modify a MinIO deployment with support for |SSE| using |KES|.
+         Defer to the :ref:`Deploy Distributed MinIO <minio-mnmd>` tutorial for guidance on production-ready MinIO deployments.
 
-   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`
+      #. Use the MinIO Operator Console to create or manage a MinIO Tenant.
+      #. Access the :guilabel:`Encryption` settings for that tenant and configure |SSE| using a :kes-docs:`supported Key Management System <#supported-kms-targets>`.
+      #. Create a new |EK| for use with |SSE|.
+      #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
 
-.. cond:: macos or windows
+   .. tab-item:: Baremetal
+      :sync: baremetal
 
-   This procedure assumes a single local host machine running the MinIO and KES processes.
-   For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
-   
-   .. note::
+      This procedure provides guidance for deploying MinIO configured to use KES and enable :ref:`Server Side Encryption <minio-sse-data-encryption>`.
+      For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
 
-      For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with your |KMS|.
+      As part of this procedure, you will:
 
-      For production baremetal environments, see the `MinIO on Linux documentation <https://min.io/docs/minio/linux/operations/server-side-encryption.html>`__ for tutorials on configuring MinIO with KES and your |KMS|.
+      #. Create a new |EK| for use with |SSE|.
 
-   As part of this procedure, you will:
+      #. Create or modify a MinIO deployment with support for |SSE| using |KES|.
+         Defer to the :ref:`Deploy Distributed MinIO <minio-mnmd>` tutorial for guidance on production-ready MinIO deployments.
 
-   #. Create a new |EK| for use with |SSE|.
-
-   #. Deploy a MinIO server in :ref:`Single-Node Single-Drive mode <minio-snsd>` configured to use the |KES| container for supporting |SSE|.
-
-   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
-
-
-.. cond:: container
-
-   This procedure assumes that you use a single host machine to run both the MinIO and KES containers.
-   For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
-
-   As part of this procedure, you will:
-
-   #. Create a new |EK| for use with |SSE|.
-
-   #. Deploy a MinIO Server container in :ref:`Single-Node Single-Drive mode <minio-snsd>` configured to use the |KES| container for supporting |SSE|.
-
-   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
-
-   For production orchestrated environments, use the MinIO Kubernetes Operator to deploy a tenant with |SSE| enabled and configured for use with your |KMS|.
-
-   For production baremetal environments, see the `MinIO on Linux documentation <https://min.io/docs/minio/linux/operations/server-side-encryption.html>`__ for tutorials on configuring MinIO with KES and your |KMS|.
-
-.. cond:: k8s
-
-   This procedure assumes you have access to a Kubernetes cluster with an active MinIO Operator installation.
-   For instructions on running KES, see the :kes-docs:`KES docs <tutorials/getting-started/>`.
-
-   As part of this procedure, you will:
-
-   #. Use the MinIO Operator Console to create or manage a MinIO Tenant.
-   #. Access the :guilabel:`Encryption` settings for that tenant and configure |SSE| using a :kes-docs:`supported Key Management System <#supported-kms-targets>`.
-   #. Create a new |EK| for use with |SSE|.
-   #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`.
-
-   For production baremetal environments, see the `MinIO on Linux documentation <https://min.io/docs/minio/linux/operations/server-side-encryption.html>`__  for tutorials on configuring MinIO with KES and your |KMS|.
+      #. Configure automatic bucket-default :ref:`SSE-KMS <minio-encryption-sse-kms>`
 
 .. important::
 
@@ -101,43 +70,64 @@ Server-Side Object Encryption with KES
 Prerequisites
 -------------
 
-.. cond:: k8s
+Access to MinIO Cluster
+~~~~~~~~~~~~~~~~~~~~~~~
 
-   MinIO Kubernetes Operator
-   ~~~~~~~~~~~~~~~~~~~~~~~~~
+.. tab-set::
+   
 
-   .. include:: /includes/k8s/common-operator.rst
-      :start-after: start-requires-operator-plugin
-      :end-before: end-requires-operator-plugin
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-   See :ref:`deploy-operator-kubernetes` for complete documentation on deploying the MinIO Operator.
+      You must have access to the Kubernetes cluster, with administrative permissions associated to your ``kubectl`` configuration.
+      
+      This procedure assumes your permission sets extends sufficiently to support deployment or modification of MinIO-associated resources on the Kubernetes cluster, including but not limited to pods, statefulsets, replicasets, deployments, and secrets.
+
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      This procedure uses :mc:`mc` for performing operations on the MinIO cluster. 
+      Install ``mc`` on a machine with network access to the cluster.
+      See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+
+      This procedure assumes a configured :mc:`alias <mc alias>` for the MinIO cluster. 
 
 .. _minio-sse-vault-prereq-vault:
 
 Ensure KES Access to a Supported KMS Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. cond:: linux or macos or windows or container
+.. tab-set::
+   
 
-   This procedure assumes an existing KES installation connected to a supported |KMS| installation accessible, both accessible from the local host.
-   Refer to the installation instructions for your :kes-docs:`supported KMS target <#supported-kms-targets>` to deploy KES and connect it to a KMS solution.
-   
-   .. admonition:: KES Operations Require Unsealed Target
-      :class: important
-   
-      Some supported |KMS| targets allow you to seal or unseal the vault instance.
-      KES returns an error if the configured |KMS| service is sealed.
-   
-      If you restart or otherwise seal your vault instance, KES cannot perform any cryptographic operations against the vault.
-      You must unseal the Vault to ensure normal operations.
-   
-      See the documentation for your chosen |KMS| solution for more information on whether unsealing may be required.
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-.. cond:: k8s
+      This procedure assumes an existing :kes-docs:`supported KMS installation <#supported-kms-targets>` accessible from the Kubernetes cluster.
 
-   .. include:: /includes/k8s/common-minio-kes.rst
-      :start-after: start-kes-prereq-hashicorp-vault-desc
-      :end-before: end-kes-prereq-hashicorp-vault-desc
+      - For deployments within the same Kubernetes cluster as the MinIO Tenant, you can use Kubernetes service names to allow the MinIO Tenant to establish connectivity to the target KMS service.
+
+      - For deployments external to the Kubernetes cluster, you must ensure the cluster supports routing communications between Kubernetes services and pods and the external network.
+        This may require configuration or deployment of additional Kubernetes network components and/or enabling access to the public internet.
+
+      Defer to the documentation for your chosen KMS solution for guidance on deployment and configuration.
+
+   .. tab-item:: Baremetal
+      :sync: baremetal
+
+      This procedure assumes an existing KES installation connected to a supported |KMS| installation accessible, both accessible from the local host.
+      Refer to the installation instructions for your :kes-docs:`supported KMS target <#supported-kms-targets>` to deploy KES and connect it to a KMS solution.
+   
+.. admonition:: KES Operations Require Unsealed Target
+   :class: important
+
+   Some supported |KMS| targets allow you to seal or unseal the vault instance.
+   KES returns an error if the configured |KMS| service is sealed.
+
+   If you restart or otherwise seal your vault instance, KES cannot perform any cryptographic operations against the vault.
+   You must unseal the Vault to ensure normal operations.
+
+   See the documentation for your chosen |KMS| solution for more information on whether unsealing may be required.
 
 Refer to the configuration instruction in the :kes-docs:`KES documentation <>` for your chosen supported |KMS|:
 
@@ -149,76 +139,25 @@ Refer to the configuration instruction in the :kes-docs:`KES documentation <>` f
 - :kes-docs:`HashiCorp Vault <integrations/hashicorp-vault-keystore/>`
 - :kes-docs:`Thales CipherTrust Manager (formerly Gemalto KeySecure) <integrations/thales-ciphertrust/>`
 
+Procedure
+---------
 
-.. cond:: linux or macos or windows
+This procedure provides instructions for configuring and enabling Server-Side Encryption using your selected `supported KMS solution <https://docs.min.io/community/minio-kes/#supported-kms-targets>`__ in production environments. 
+Specifically, this procedure assumes the following:
 
-   Deploy or Ensure Access to a MinIO Deployment
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- An existing production-grade KMS target
+- One or more KES servers connected to the KMS target
+- One or more hosts for a new or existing MinIO deployment
 
-   .. include:: /includes/common/common-minio-kes.rst
-      :start-after: start-kes-new-existing-minio-deployment-desc
-      :end-before: end-kes-new-existing-minio-deployment-desc
+.. tab-set::
+   
 
-.. cond:: container
+   .. tab-item:: Kubernetes
+      :sync: k8s
 
-   Install Podman or a Similar Container Management Interface
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      .. include:: /includes/k8s/steps-configure-minio-kes-hashicorp.rst
 
-   .. include:: /includes/container/common-deploy.rst
-      :start-after: start-common-prereq-container-management-interface
-      :end-before: end-common-prereq-container-management-interface
+   .. tab-item:: Baremetal
+      :sync: baremetal
 
-.. The included file has the correct header structure.
-   There are slight divergences between platforms so this ends up being easier compared to cascading conditionals to handle little nitty-gritty differences.
-
-.. |namespace| replace:: minio-kes-vault
-
-.. cond:: container
-
-   .. |kescertpath|        replace:: ~/minio-kes-vault/certs
-   .. |kesconfigpath|      replace:: ~/minio-kes-vault/config
-   .. |kesconfigcertpath|  replace:: /certs/
-   .. |miniocertpath|      replace:: ~/minio-kes-vault/certs
-   .. |minioconfigpath|    replace:: ~/minio-kes-vault/config
-   .. |miniodatapath|      replace:: ~/minio-kes-vault/minio
-
-   .. include:: /includes/container/steps-configure-minio-kes-hashicorp.rst
-
-.. cond:: linux
-
-   .. |kescertpath|        replace:: /opt/kes/certs
-   .. |kesconfigpath|      replace:: /opt/kes/config
-   .. |kesconfigcertpath|  replace:: /opt/kes/certs/
-   .. |miniocertpath|      replace:: /opt/minio/certs
-   .. |minioconfigpath|    replace:: /opt/minio/config
-   .. |miniodatapath|      replace:: ~/minio
-
-   .. include:: /includes/linux/steps-configure-minio-kes-hashicorp.rst
-
-.. cond:: macos
-
-   .. |kescertpath|        replace:: ~/minio-kes-vault/certs
-   .. |kesconfigpath|      replace:: ~/minio-kes-vault/config
-   .. |kesconfigcertpath|  replace:: ~/minio-kes-vault/certs
-   .. |miniocertpath|      replace:: ~/minio-kes-vault/certs
-   .. |minioconfigpath|    replace:: ~/minio-kes-vault/config
-   .. |miniodatapath|      replace:: ~/minio-kes-vault/minio
-
-   .. include:: /includes/macos/steps-configure-minio-kes-hashicorp.rst
-
-.. cond:: k8s
-
-   .. include:: /includes/k8s/steps-configure-minio-kes-hashicorp.rst
-
-.. cond:: windows
-
-   .. |kescertpath|        replace:: C:\\minio-kes-vault\\certs
-   .. |kesconfigpath|      replace:: C:\\minio-kes-vault\\config
-   .. |kesconfigcertpath|  replace:: C:\\minio-kes-vault\\certs\\
-   .. |miniocertpath|      replace:: C:\\minio-kes-vault\\certs
-   .. |minioconfigpath|    replace:: C:\\minio-kes-vault\\config
-   .. |miniodatapath|      replace:: C:\\minio-kes-vault\\minio
-
-   .. include:: /includes/windows/steps-configure-minio-kes-hashicorp.rst
-
-.. Procedure for K8s only, for adding KES to an existing Tenant
+      .. include:: /includes/linux/steps-configure-minio-kes-hashicorp.rst

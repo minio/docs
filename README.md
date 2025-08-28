@@ -36,13 +36,10 @@ python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt && npm install && npm run build
 ```
 
-4. Build your desired platform targets.
+4. Build 
 
 ```
-make linux
-```
-```
-make linux k8s container
+make mindocs
 ```
 
 5. View the generated documentation at http://localhost:8000.
@@ -50,24 +47,6 @@ make linux k8s container
 ```
 python -m http.server --directory build/YOUR_BRANCH/<PLATFORM>/html
 ```
-
-### Stage
-
-The `make stage-PLATFORM` command uses the `mc` utility to copy the contents of the current git branch build output for the specified `PLATFORM` to a configured MinIO or S3-compatible bucket.
-
-For the command to work, you must have a configured `mc` alias `docs-staging` with general read/write (`s3:*`) permissions on the `staging` bucket.
-The `staging` bucket should have public or anonymous access enabled.
-
-For example:
-
-```
-make stage-linux
-```
-
-Does the following:
-
-1. Check that the `build/GITDIR/linux` folder exists
-2. Copies the contents of `build/GITDIR/linux/html/*` to `docs-staging/staging/GITDIR/linux`
 
 # Syncing Operator CRD Docs
 

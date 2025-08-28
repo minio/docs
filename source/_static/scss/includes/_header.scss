@@ -185,13 +185,13 @@
 }
 
 .header__title {
-	font-size: clamp(40px, 6vw, 72px);
+	font-size: clamp(40px, 6vw, 60px);
     line-height: 1.2;
 	color: $black;
-	padding-bottom: 5rem;
+	padding-bottom: 2rem;
 	margin-left: -0.25rem;
 	font-family: $font-family-heading;
-	margin-top: 5rem;
+	margin-top: 2rem;
 	text-align: center;
 }
 

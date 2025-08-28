@@ -39,7 +39,7 @@ command unmounts the drive at ``/dev/sdb``:
 Remove the failed drive(s) from the node hardware and replace it with known
 healthy drive(s). Replacement drives *must* meet the following requirements:
 
-- :ref:`XFS formatted <deploy-minio-distributed-prereqs-storage>` and empty.
+- :ref:`XFS formatted <minio-hardware-checklist-storage>` and empty.
 - Same drive type (e.g. HDD, SSD, NVMe).
 - Equal or greater performance.
 - Equal or greater capacity.
