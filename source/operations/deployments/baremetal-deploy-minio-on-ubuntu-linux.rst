@@ -171,7 +171,7 @@ Place the certificates in a directory accessible by the ``minio-user`` user/grou
 .. code-block:: shell
    :class: copyable
 
-   mkdir -P /opt/minio/certs
+   mkdir -p /opt/minio/certs
    chown -R minio-user:minio-user /opt/minio/certs
 
    cp private.key /opt/minio/certs

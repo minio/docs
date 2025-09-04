@@ -112,7 +112,7 @@ Place the certificates in a dedicated directory:
 .. code-block:: shell
    :class: copyable
 
-   mkdir -P /opt/minio/certs
+   mkdir -p /opt/minio/certs
 
    cp private.key /opt/minio/certs
    cp public.crt /opt/minio/certs
