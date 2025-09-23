@@ -524,7 +524,7 @@ Recommended tools for MinIO subscriptions
 .. important::
 
    The tools noted in this section **require** a MinIO subscription.
-   MinIO strongly recommends all production deployments use `AIStor Object Store <https://min.io/docs/aistor-custom/object-store/>`__  with their SUBNET license.
+   MinIO strongly recommends all production deployments use `AIStor Object Store <https://docs.min.io/community/minio-object-store/index.html>`__  with their SUBNET license.
    For more information, see the `MinIO AIStor pricing page <https://min.io/pricing?jmp=docs>`__.
 
 #. Health diagnostic tool

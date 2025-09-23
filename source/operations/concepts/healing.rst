@@ -84,6 +84,6 @@ Consult with MinIO Engineers before manually starting a healing process on a dep
 Healing metrics
 ---------------
 
-MinIO provides several `healing metrics <https://min.io/docs/minio/linux/operations/monitoring/metrics-and-alerts.html#healing-metrics>`__ to monitor the status of healing processes on a deployment.
+MinIO provides several `healing metrics <https://docs.min.io/community/minio-object-store/operations/monitoring/metrics-v2.html#healing-metrics>`__ to monitor the status of healing processes on a deployment.
 
 Refer to the :ref:`minio-metrics-and-alerts` for more information on available endpoints and configuration.

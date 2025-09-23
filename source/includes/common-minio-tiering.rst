@@ -73,7 +73,7 @@ secret key as per your organizations best practices for password generation.
 .. code-block:: shell
    :class: copyable
 
-   wget -O - https://min.io/docs/minio/linux/examples/LifecycleManagementAdmin.json | \
+   wget -O - https://docs.min.io/community/minio-object-store/examples/LifecycleManagementAdmin.json | \
    mc admin policy create Alpha LifecycleAdminPolicy /dev/stdin
    mc admin user add Alpha alphaLifecycleAdmin LongRandomSecretKey
    mc admin policy attach Alpha LifecycleAdminPolicy --user=alphaLifecycleAdmin

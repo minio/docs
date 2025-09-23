@@ -115,7 +115,7 @@ The ``.rpm`` package install the following `systemd <https://www.freedesktop.org
 
    [Unit]
    Description=MinIO
-   Documentation=https://min.io/docs/minio/linux/index.html
+   Documentation=https://docs.min.io/community/minio-object-store/index.html
    Wants=network-online.target
    After=network-online.target
    AssertFileIsExecutable=/usr/local/bin/minio
@@ -190,7 +190,7 @@ Place the certificates in a directory accessible by the ``minio-user`` user/grou
 .. code-block:: shell
    :class: copyable
 
-   mkdir -P /opt/minio/certs
+   mkdir -p /opt/minio/certs
    chown -R minio-user:minio-user /opt/minio/certs
 
    cp private.key /opt/minio/certs
@@ -379,10 +379,10 @@ On successful startup, the MinIO process emits a summary of the deployment that 
       RootUser: minioadmin 
       RootPass: minioadmin 
 
-   CLI: https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart
+   CLI: https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart
       $ mc alias set 'myminio' 'https://minio-1.example.net:9000' 'minioadmin' 'minioadmin'
 
-   Docs: https://min.io/docs/minio/linux/index.html
+   Docs: https://docs.min.io/community/minio-object-store/index.html
    Status:         16 Online, 0 Offline. 
 
 You may see increased log churn as the cluster starts up and synchronizes. 

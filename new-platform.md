@@ -2,7 +2,8 @@
 
 ## Overview
 
-The documentation URLs take the path min.io/docs/$program/$platform/
+The documentation URLs take the path docs.min.io/community|enterprise/$program/
+Note: we no longer use `$platform`.
 
 Where:
 - `$program` is `minio`, `kes`, or similar
