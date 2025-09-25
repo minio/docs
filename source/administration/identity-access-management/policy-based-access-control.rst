@@ -924,7 +924,7 @@ services:
 
    Allows access to list the active batch jobs.
 
-.. policy-action:: admin:DescribeBatchJobs
+.. policy-action:: admin:DescribeBatchJob
 
    Allows access to the see the definition details of a running batch job.
 
