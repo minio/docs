@@ -1,5 +1,11 @@
 # MinIO Documentation
 
+As of October 10, 2025, the MinIO object store documentation was pulled from web hosting.
+
+Moving forward, community users can build and host the documentation themselves using the instructions below.
+
+No further development of the documentation is planned at this time. The project maintainers will make best efforts to review and merge PRs from the community.
+
 ## Build Instructions
 
 MinIO uses [Sphinx](https://www.sphinx-doc.org/en/master/index.html) to generate static HTML pages using ReSTructured Text (rST).
