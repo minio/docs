@@ -1,0 +1,23 @@
+services:
+  minio-docs:
+    build: .
+    image: minio-docs:latest
+    container_name: minio-docs
+    ports:
+      - "8000:8000"
+    volumes:
+      # Optional: Mount the build directory to persist builds
+      - ./build:/app/build
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  default:
+    name: minio-docs-network
