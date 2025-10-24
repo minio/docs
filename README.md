@@ -42,11 +42,14 @@ python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt && npm install && npm run build
 ```
 
-4. Build 
+4. Build
 
 ```
-make mindocs
+make SYNC_SDK=true mindocs
 ```
+
+`SYNC_SDK=true` pulls down SDK-related dependencies from MinIO's community S3 libraries.
+You can omit `SYNC_SDK` on subsequent builds.
 
 5. View the generated documentation at http://localhost:8000.
 
@@ -63,7 +66,7 @@ For importing the Operator CRD Docs specifically, you must have:
 
 In addition to all other prerequisites.
 
-Run 
+Run
 
 ```
 make sync-operator-crd
