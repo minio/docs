@@ -10,6 +10,19 @@ BUILDDIR      = build
 GITDIR        = $(shell git rev-parse --abbrev-ref HEAD)
 STAGINGURL    = http://192.241.195.202:9000/staging
 
+# Platform and sed detection for cross-platform compatibility
+UNAME_S := $(shell uname -s)
+SED_IS_GNU := $(shell sed --version 2>/dev/null | grep -q "GNU sed" && echo "yes" || echo "no")
+
+# Define the correct sed in-place command based on the system
+ifeq ($(SED_IS_GNU),yes)
+    SED_INPLACE := sed -i
+else ifeq ($(UNAME_S),Darwin)
+    SED_INPLACE := sed -i''
+else
+    SED_INPLACE := sed -i
+endif
+
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
@@ -68,30 +81,16 @@ endif
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
 
 # Synchronization targets
-# Note that the @case statements are required to account for differences between Linux and MacOS binaries
-# Specifically, MacOS does not use GNU utils, so syntax is slightly different for things like sed
-# Annoying but necessary
+# Cross-platform compatibility is handled by the SED_INPLACE variable defined at the top
 
 sync-operator-version:
 	@echo "Retrieving latest Operator version"
 	@$(eval OPERATOR = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/operator/releases/latest | sed "s/https:\/\/github.com\/minio\/operator\/releases\/tag\///" | sed "s/v//"))
-	@$(eval kname = $(shell uname -s))
 	@$(eval K8SFLOOR = $(shell curl -sL https://raw.githubusercontent.com/minio/operator/master/testing/kind-config-floor.yaml | grep -F -m 1 'node:v' | awk 'BEGIN { FS = ":" } ; {print $$3}'))
 
 	@echo "Updating Operator to ${OPERATOR}"
-
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|OPERATOR|${OPERATOR}|g" source/conf.py;\
-		sed -i "" "s|K8SFLOOR|${K8SFLOOR}|g" source/conf.py; \
-		;; \
-	*) \
-		sed -i "s|OPERATOR|${OPERATOR}|g" source/conf.py; \
-		sed -i "s|K8SFLOOR|${K8SFLOOR}|g" source/conf.py; \
-		;; \
-	esac
+	@$(SED_INPLACE) "s|OPERATOR|${OPERATOR}|g" source/conf.py
+	@$(SED_INPLACE) "s|K8SFLOOR|${K8SFLOOR}|g" source/conf.py
 
 	@echo "Updating Helm Charts"
 #	@$(shell curl --retry 10 -Ls -o source/includes/k8s/operator-values.yaml https://raw.githubusercontent.com/minio/operator/v${OPERATOR}/helm/operator/values.yaml)
@@ -99,16 +98,7 @@ sync-operator-version:
 sync-kes-version:
 	@echo "Retrieving latest stable KES version"
 	@$(eval KES = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/kes/releases/latest | sed "s/https:\/\/github.com\/minio\/kes\/releases\/tag\///"))
-	@$(eval kname = $(shell uname -s))
-
-	@case "${kname}" in \
-	"Darwin") \
-		sed -i "" "s|KESLATEST|${KES}|g" source/conf.py;\
-		;; \
-	*) \
-		sed -i "s|KESLATEST|${KES}|g" source/conf.py; \
-		;; \
-	esac
+	@$(SED_INPLACE) "s|KESLATEST|${KES}|g" source/conf.py
 
 sync-minio-server-docs:
 	@echo "Retrieving select docs from github.com/minio/minio/docs"
