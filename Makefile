@@ -18,7 +18,7 @@ SED_IS_GNU := $(shell sed --version 2>/dev/null | grep -q "GNU sed" && echo "yes
 ifeq ($(SED_IS_GNU),yes)
     SED_INPLACE := sed -i
 else ifeq ($(UNAME_S),Darwin)
-    SED_INPLACE := sed -i''
+    SED_INPLACE := sed -i ''
 else
     SED_INPLACE := sed -i
 endif
