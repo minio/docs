@@ -31,6 +31,11 @@ Version 3 Endpoints
 For metrics version 3, all metrics are available under the base ``/minio/metrics/v3`` endpoint.
 You can scrape the base endpoint to collect all metrics in a single operation, or append an optional path to return a specific category.
 
+.. important:: 
+
+   The V3 metrics on this page may have gaps, inaccuracies, or incorrect information.
+   Reference the `minio/minio <https://github.com/minio/minio>`_ repository and review the source code for the most accurate representation of metrics as available.
+
 For example, the following endpoint returns audit metrics:
 
 .. code-block:: shell
