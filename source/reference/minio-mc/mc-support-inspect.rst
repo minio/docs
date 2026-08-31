@@ -33,7 +33,7 @@ Exercise caution before sending a report to a third party or posting the report 
 .. versionchanged:: RELEASE.2023-01-11T03-14-16Z
 
    The file uploads to MinIO for use by the engineering team in support efforts.
-   The file saves the the current working directory in the event the file does not successfully upload (such as in an airgapped environment).
+   The file saves the current working directory in the event the file does not successfully upload (such as in an airgapped environment).
 
 .. versionchanged:: RELEASE.2022-12-12T19-27-27Z
    
