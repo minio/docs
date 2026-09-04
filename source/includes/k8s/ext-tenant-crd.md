@@ -481,7 +481,7 @@ style="text-align: left;"><p><strong><code>clientCertSecret</code></strong>
 href="#localcertificatereference">LocalCertificateReference</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Specify a a <a
+<p>Specify a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 TLS secret</a> containing a custom root Certificate Authority and x.509
 certificate to use for performing mTLS authentication with an external

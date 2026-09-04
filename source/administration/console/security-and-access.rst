@@ -143,7 +143,7 @@ Examples of OpenID providers include:
 
 Configuring an external IDP enables Single-Sign On workflows, where applications authenticate against the external IDP before accessing MinIO.
 
-Use the the screens in this section to view, add, or edit OIDC configurations for the deployment.
+Use the screens in this section to view, add, or edit OIDC configurations for the deployment.
 MinIO supports any number of active OIDC configurations.
 
 .. _minio-console-admin-identity-ldap:
@@ -154,7 +154,7 @@ LDAP
 MinIO supports using an :ref:`Active Directory or LDAP (AD/LDAP) <minio-external-identity-management-ad-ldap>` service for external management of user identities. 
 Configuring an external IDentity Provider (IDP) enables Single-Sign On (SSO) workflows, where applications authenticate against the external IDP before accessing MinIO.
 
-Use the the screens in this section to view, add, or edit an LDAP configuration for the deployment.
+Use the screens in this section to view, add, or edit an LDAP configuration for the deployment.
 MinIO only supports one active LDAP configuration.
 
 MinIO queries the Active Directory / LDAP server to verify the client-specified credentials. 

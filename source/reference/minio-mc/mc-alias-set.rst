@@ -178,7 +178,7 @@ Use :mc:`mc alias set` to add an S3-compatible service for use with
 
          mc alias set ALIAS HOSTNAME ACCESSKEY SECRETKEY
 
-      - Replace ``ALIAS`` with the the name to associate to the 
+      - Replace ``ALIAS`` with the name to associate to the 
         MinIO service.
 
       - Replace ``HOSTNAME`` with the URL for any node in the MinIO

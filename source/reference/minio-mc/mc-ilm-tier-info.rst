@@ -24,7 +24,7 @@ The :mc:`mc ilm tier info` command outputs statistics about a tier or all tiers 
 Required Permissions
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO requires the following permissions scoped to to the bucket or buckets 
+MinIO requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.
 
 - :policy-action:`s3:PutLifecycleConfiguration`

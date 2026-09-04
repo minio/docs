@@ -78,7 +78,7 @@ This script does three things:
 - Downloads the Operator Helm `values.yaml` from the Operator Github repository
 - Downloads the Tenant Helm `values.yaml` from the Operator Github repository
 
-For the the `tenant-crd.adoc` , it converts the asciidoc to XML, then to markdown.
+For the `tenant-crd.adoc` , it converts the asciidoc to XML, then to markdown.
 Finally, it does some `sed` find/replace to tidy up the file for Sphinx ingest.
 
 You can run this when we have a new Operator release being documented, assuming there are changes to the CRD as part of that release.
