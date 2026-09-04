@@ -39,7 +39,7 @@ When launching docs for a new `$program` or `$platform`, the following steps mus
 
 5. Update the `sitemap_index.xml` file
 
-   - Contact a member of the website design to add the new `$program` or `$platform` sitemap.xml path to the sitemap_index.xml on the min.io root website server.
+   - Contact a member of the website design team to add the new `$program` or `$platform` sitemap.xml path to the sitemap_index.xml on the min.io root website server.
 
 6. Update the Algolia crawler
    

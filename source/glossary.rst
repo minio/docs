@@ -91,7 +91,7 @@ Glossary
      A method of encryption that stores an object in an encrypted state.
      The object remains encrypted while not moving from one location to another.
 
-     Objects can be encrypted by the server using one of key management methods:
+     Objects can be encrypted by the server using one of the key management methods:
      :term:`SSE-KMS`, :term:`SSE-S3`, or :term:`SSE-C`.
 
    encryption in transit
