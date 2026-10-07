@@ -143,7 +143,7 @@ The specific client behavior on write, list, get, or :ref:`delete <minio-object-
    * - ``GET`` (Read)
      - Retrieve the latest version of the object by default
 
-       Supports retrieving retrieving any object version by version ID.
+       Supports retrieving any object version by version ID.
      - Retrieve the object
 
    * - ``LIST`` (Read)
