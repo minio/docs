@@ -84,7 +84,7 @@ Subcommands
 Permissions
 -----------
 
-MinIO requires the following permissions scoped to to the bucket or buckets for which you create lifecycle management rules.
+MinIO requires the following permissions scoped to the bucket or buckets for which you create lifecycle management rules.
 
 - :policy-action:`s3:PutLifecycleConfiguration`
 - :policy-action:`s3:GetLifecycleConfiguration`

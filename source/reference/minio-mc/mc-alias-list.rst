@@ -110,7 +110,7 @@ List a Specific Alias
 
          mc alias list ALIAS 
 
-      - Replace ``ALIAS`` with the the name of the alias to return.
+      - Replace ``ALIAS`` with the name of the alias to return.
 
 Behavior
 --------

@@ -88,7 +88,7 @@ Use :mc:`mc alias remove` to remove an existing alias from the
 
          mc alias remove ALIAS
 
-      Replace ``ALIAS`` with the the name of the alias to remove.
+      Replace ``ALIAS`` with the name of the alias to remove.
 
 Behavior
 ~~~~~~~~

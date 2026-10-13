@@ -112,7 +112,7 @@ and browser access on the MinIO Console port ``:9001``.
 Deployments behind network routing components which require static ports for 
 routing rules may require setting a static MinIO Console port. For example,
 load balancers, reverse proxies, or Kubernetes ingress may by default block
-or exhibit unexpected behavior with the the dynamic redirection behavior.
+or exhibit unexpected behavior with the dynamic redirection behavior.
 
 You must also ensure that the host system firewall grants access to the configured Console port.
 

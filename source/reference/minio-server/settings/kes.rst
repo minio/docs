@@ -62,7 +62,7 @@ Define the following variables to use the Key Encryption Service (KES) to connec
 
 .. envvar:: MINIO_KMS_KES_KEY_FILE
 
-   The private key associated to the the :envvar:`MINIO_KMS_KES_CERT_FILE` x.509 certificate to use when authenticating to the KES server. 
+   The private key associated to the :envvar:`MINIO_KMS_KES_CERT_FILE` x.509 certificate to use when authenticating to the KES server. 
    The KES server requires clients to present their certificate for performing mutual TLS (mTLS).
 
    See the :minio-git:`KES wiki <kes/wiki/Configuration#policy-configuration>` for more complete documentation on KES access control.

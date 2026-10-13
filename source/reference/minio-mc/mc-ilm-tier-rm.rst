@@ -31,7 +31,7 @@ The :mc:`mc ilm tier remove` command has equivalent functionality to :mc:`mc ilm
 Required Permissions
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO requires the following permissions scoped to to the bucket or buckets 
+MinIO requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.
 
 - :policy-action:`s3:PutLifecycleConfiguration`
