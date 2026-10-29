@@ -101,9 +101,11 @@ The resulting string is appropriate for non-production environments:
 .. code-block:: shell
    :class: copyable
 
-   cat /dev/urandom | head -c 32 | base64 -
+   cat /dev/urandom | head -c 32 | base64 - | tr -d '='
 
 Defer to your organizations requirements for generating cryptographically secure encryption keys.
+
+Raw Base64 encoding rejects ``=``-padded keys, so the example above removes any trailing padding from the generated string.
 
 Copy the encryption key for use in the next step.
 
@@ -126,7 +128,7 @@ arguments for enabling SSE-S3 encryption:
    :class: copyable
 
    mc cp ~/data/mydata.json ALIAS/BUCKET/mydata.json \
-      --encrypt-key "ALIAS/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo="
+      --enc-c "ALIAS/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo"
 
 - Replace :mc-cmd:`ALIAS <mc encrypt set ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment on which you want to write
@@ -158,7 +160,8 @@ arguments for enabling SSE-S3 encryption:
    :class: copyable
 
    mc cp SOURCE/BUCKET/mydata.json TARGET/BUCKET/mydata.json  \
-   --encrypt-key "SOURCE/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo=,TARGET/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo="
+      --enc-c "SOURCE/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo" \
+      --enc-c "TARGET/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo"
 
 - Replace :mc-cmd:`SOURCE/BUCKET <mc encrypt set ALIAS>` with the 
   :mc:`alias <mc alias>` of the MinIO deployment from which you are reading the
